@@ -47,6 +47,22 @@
           }
         }
       }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{bg-disabled}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-bg-input)"
+          }
+        }
+      }
     }
   },
   "Border": {
@@ -65,12 +81,44 @@
           }
         }
       }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{border-disabled}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-border-focus)"
+          }
+        }
+      }
     }
   },
   "Text": {
     "Link": {
       "$type": "color",
       "$value": "{text-link}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-text-link)"
+          }
+        }
+      }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{text-disabled}",
       "$description": "",
       "$extensions": {
         "com.figma": {

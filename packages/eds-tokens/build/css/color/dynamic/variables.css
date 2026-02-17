@@ -12,16 +12,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-neutral-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-neutral-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-neutral-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-neutral-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-neutral-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-neutral-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-neutral-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-neutral-3);
   --eds-color-bg-canvas: var(--eds-color-neutral-1);
   --eds-color-bg-surface: var(--eds-color-neutral-2);
   --eds-color-border-subtle: var(--eds-color-neutral-6);
   --eds-color-border-medium: var(--eds-color-neutral-7);
   --eds-color-border-strong: var(--eds-color-neutral-8);
+  --eds-color-border-disabled: var(--eds-color-neutral-7);
   --eds-color-text-subtle: var(--eds-color-neutral-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-neutral-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-neutral-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-neutral-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-neutral-15); /** Text or icons against colored backgrounds */
 }
@@ -34,16 +38,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-accent-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-accent-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-accent-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-accent-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-accent-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-accent-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-accent-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-accent-3);
   --eds-color-bg-canvas: var(--eds-color-accent-1);
   --eds-color-bg-surface: var(--eds-color-accent-2);
   --eds-color-border-subtle: var(--eds-color-accent-6);
   --eds-color-border-medium: var(--eds-color-accent-7);
   --eds-color-border-strong: var(--eds-color-accent-8);
+  --eds-color-border-disabled: var(--eds-color-accent-7);
   --eds-color-text-subtle: var(--eds-color-accent-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-accent-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-accent-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-accent-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-accent-15); /** Text or icons against colored backgrounds */
 }
@@ -56,16 +64,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-danger-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-danger-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-danger-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-danger-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-danger-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-danger-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-danger-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-danger-3);
   --eds-color-bg-canvas: var(--eds-color-danger-1);
   --eds-color-bg-surface: var(--eds-color-danger-2);
   --eds-color-border-subtle: var(--eds-color-danger-6);
   --eds-color-border-medium: var(--eds-color-danger-7);
   --eds-color-border-strong: var(--eds-color-danger-8);
+  --eds-color-border-disabled: var(--eds-color-danger-7);
   --eds-color-text-subtle: var(--eds-color-danger-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-danger-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-danger-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-danger-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-danger-15); /** Text or icons against colored backgrounds */
 }
@@ -78,16 +90,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-info-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-info-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-info-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-info-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-info-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-info-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-info-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-info-3);
   --eds-color-bg-canvas: var(--eds-color-info-1);
   --eds-color-bg-surface: var(--eds-color-info-2);
   --eds-color-border-subtle: var(--eds-color-info-6);
   --eds-color-border-medium: var(--eds-color-info-7);
   --eds-color-border-strong: var(--eds-color-info-8);
+  --eds-color-border-disabled: var(--eds-color-info-7);
   --eds-color-text-subtle: var(--eds-color-info-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-info-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-info-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-info-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-info-15); /** Text or icons against colored backgrounds */
 }
@@ -100,16 +116,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-success-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-success-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-success-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-success-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-success-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-success-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-success-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-success-3);
   --eds-color-bg-canvas: var(--eds-color-success-1);
   --eds-color-bg-surface: var(--eds-color-success-2);
   --eds-color-border-subtle: var(--eds-color-success-6);
   --eds-color-border-medium: var(--eds-color-success-7);
   --eds-color-border-strong: var(--eds-color-success-8);
+  --eds-color-border-disabled: var(--eds-color-success-7);
   --eds-color-text-subtle: var(--eds-color-success-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-success-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-success-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-success-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-success-15); /** Text or icons against colored backgrounds */
 }
@@ -122,16 +142,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-warning-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-warning-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-warning-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-warning-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-warning-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-warning-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-warning-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-warning-3);
   --eds-color-bg-canvas: var(--eds-color-warning-1);
   --eds-color-bg-surface: var(--eds-color-warning-2);
   --eds-color-border-subtle: var(--eds-color-warning-6);
   --eds-color-border-medium: var(--eds-color-warning-7);
   --eds-color-border-strong: var(--eds-color-warning-8);
+  --eds-color-border-disabled: var(--eds-color-warning-7);
   --eds-color-text-subtle: var(--eds-color-warning-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-warning-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-warning-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-warning-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-warning-15); /** Text or icons against colored backgrounds */
 }

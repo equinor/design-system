@@ -49,6 +49,22 @@
               }
             }
           }
+        },
+        "Disabled": {
+          "$type": "color",
+          "$value": "{Info.3}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-muted-default)"
+              }
+            }
+          }
         }
       },
       "Emphasis": {
@@ -96,6 +112,22 @@
               ],
               "codeSyntax": {
                 "WEB": "var(--eds-color-bg-fill-emphasis-active)"
+              }
+            }
+          }
+        },
+        "Disabled": {
+          "$type": "color",
+          "$value": "{Info.3}",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "ALL_SCOPES"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-color-bg-fill-muted-default)"
               }
             }
           }
@@ -183,6 +215,22 @@
           }
         }
       }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{Info.7}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-border-medium)"
+          }
+        }
+      }
     }
   },
   "Text": {
@@ -214,6 +262,22 @@
           ],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-strong)"
+          }
+        }
+      }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{Info.7}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-border-medium)"
           }
         }
       }
