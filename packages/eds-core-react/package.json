@@ -73,7 +73,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "babel-plugin-styled-components": "^2.1.4",
-    "eslint-plugin-storybook": "10.2.8",
+    "eslint-plugin-storybook": "10.2.9",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
     "jest-styled-components": "^7.2.0",
@@ -104,14 +104,14 @@
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
-    "@floating-ui/react": "^0.27.17",
+    "@floating-ui/react": "^0.27.18",
     "@internationalized/date": "^3.11.0",
     "@react-aria/utils": "^3.33.0",
     "@react-stately/calendar": "^3.9.2",
     "@react-stately/datepicker": "^3.16.0",
     "@react-types/shared": "^3.33.0",
     "@tanstack/react-virtual": "3.13.18",
-    "downshift": "9.3.0",
+    "downshift": "9.3.1",
     "react-aria": "^3.46.0"
   }
 }
