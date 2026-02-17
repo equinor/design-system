@@ -13,7 +13,10 @@
       "Bash(*.env*)",
       "Read(./id_rsa*)",
       "Read(./**/*.pem)",
-      "Read(./**/*.key)"
+      "Read(./**/*.key)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
+      "Read(./build)"
     ]
   },
   "hooks": {
