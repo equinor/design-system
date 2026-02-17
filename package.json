@@ -9,6 +9,7 @@
     "lint:data-grid-react": "pnpm run lint ./packages/eds-data-grid-react",
     "lint:lab": "pnpm run lint ./packages/eds-lab-react",
     "lint:utils": "pnpm run lint ./packages/eds-utils",
+    "lint:css": "stylelint ./packages/eds-core-react/src/components/next/**/*.css",
     "init": "pnpm install --force && pnpm run build",
     "extract-prerequisites": "node scripts/extract-prerequisites.js",
     "prebuild": "pnpm run extract-prerequisites",
@@ -88,6 +89,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-testing-library": "^7.15.4",
     "jest-axe": "^10.0.0",
+    "stylelint": "^17.3.0",
+    "stylelint-config-clean-order": "^8.0.1",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^7.0.1",
     "prettier": "3.8.1",
     "typescript": "^5.9.3"
   },
