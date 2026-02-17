@@ -1,9 +1,17 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  vi,
+  type MockInstance,
+} from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { useDeprecationWarning } from './useDeprecationWarning'
 
 describe('useDeprecationWarning', () => {
-  let consoleWarnSpy: ReturnType<typeof vi.spyOn>
+  let consoleWarnSpy: MockInstance
   const originalEnv = process.env.NODE_ENV
 
   beforeEach(() => {

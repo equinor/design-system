@@ -31,7 +31,7 @@ export function SelectAllOption({ item, index, ref }: AutocompleteOptionProps) {
       ref: rowVirtualizer.measureElement,
     }),
     item,
-    index: index,
+    index,
   })
 
   return (

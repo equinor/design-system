@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: Use "setup" cache
         id: setup-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ./*
@@ -47,7 +47,7 @@ jobs:
           key: ${{ github.sha }}
       - name: Use "dist" cache
         id: dist-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ./*
@@ -81,7 +81,7 @@ jobs:
     steps:
       - name: Use "dist" cache
         id: dist-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ./*
@@ -114,7 +114,7 @@ jobs:
     steps:
       - name: Use "dist" cache
         id: dist-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ./*
@@ -147,7 +147,7 @@ jobs:
     steps:
       - name: Use cache with storybook files
         id: use-cache-storybook
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ./*
@@ -155,7 +155,7 @@ jobs:
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
       - name: Deploy the website
         id: deploy-website
-        uses: tibor19/static-website-deploy@v2
+        uses: tibor19/static-website-deploy@v4
         with:
           enabled-static-website: 'true'
           folder: 'packages/eds-lab-react/storybook-build'

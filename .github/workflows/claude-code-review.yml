@@ -2,7 +2,7 @@ name: Claude Code Review
 
 on:
   pull_request:
-    types: [opened, synchronize, ready_for_review, reopened]
+    types: [ready_for_review]
     # Optional: Only run on specific file changes
     # paths:
     #   - "src/**/*.ts"
@@ -21,15 +21,32 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
       issues: read
       id-token: write
+      actions: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --force
+
+      - name: Build packages
+        run: pnpm run build
 
       - name: Run Claude Code Review
         id: claude-review
@@ -43,3 +60,12 @@ jobs:
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
+          claude_args: >-
+            --append-system-prompt
+            "The project is already set up with all dependencies installed and all packages built.
+            When reviewing, focus on: WCAG 2.1 AA accessibility, EDS design tokens (--eds-* CSS variables),
+            named exports only, forwardRef pattern, vanilla CSS with BEM (eds-* prefix),
+            test coverage with jest-axe, and conventional commits.
+            Refer to CLAUDE.md and .github/copilot-instructions.md for detailed conventions."
+            --allowed-tools
+            "Bash(git:*),Bash(gh pr:*),Bash(gh issue:*),Bash(ls:*),Bash(cat:*),Bash(grep:*),Bash(head:*),Bash(tail:*)"

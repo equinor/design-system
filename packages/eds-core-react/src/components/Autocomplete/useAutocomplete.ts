@@ -14,6 +14,7 @@ import {
   useImperativeHandle,
   useEffect,
 } from 'react'
+import type { DOMAttributes } from 'react'
 import { useEds } from '../EdsProvider'
 import {
   defaultOptionDisabled,
@@ -172,9 +173,17 @@ export const useAutocomplete = <T>({
       ...multipleSelectionProps,
       onSelectedItemsChange: (changes) => {
         if (onOptionsChange) {
-          let selectedItems = changes.selectedItems.filter(
-            (item) => item !== AllSymbol || item !== AddSymbol,
-          )
+          // AddSymbol/AllSymbol are handled manually in onStateChange,
+          // so skip propagating when they appear in selectedItems
+          // (downshift 9.x propagates selectedItem to useMultipleSelection)
+          if (
+            changes.selectedItems.some(
+              (item) => item === AllSymbol || item === AddSymbol,
+            )
+          ) {
+            return
+          }
+          let selectedItems = changes.selectedItems
           if (itemCompare) {
             selectedItems = inputOptions.filter((item) =>
               selectedItems.some((compare) => itemCompare(item, compare)),
@@ -353,6 +362,9 @@ export const useAutocomplete = <T>({
               toggleAllSelected()
             } else if (selectedItem === AddSymbol && typedInputValue.trim()) {
               onAddNewOption?.(typedInputValue)
+              if (clearSearchOnChange) {
+                setTypedInputValue('')
+              }
             } else if (multiple) {
               const shouldRemove = itemCompare
                 ? selectedItems.some((i) => itemCompare(selectedItem, i))
@@ -583,7 +595,9 @@ export const useAutocomplete = <T>({
             }
           case useCombobox.stateChangeTypes.InputKeyDownEnter:
           case useCombobox.stateChangeTypes.ItemClick:
-            if (clearSearchOnChange) {
+            // Don't clear typedInputValue for AddSymbol — onStateChange needs
+            // it to call onAddNewOption (downshift 9.x runs onStateChange after re-render)
+            if (clearSearchOnChange && changes.selectedItem !== AddSymbol) {
               setTypedInputValue('')
             }
             return {
@@ -635,7 +649,10 @@ export const useAutocomplete = <T>({
     }),
   )
 
-  const consolidatedEvents = mergeEventsFromRight(other, inputProps)
+  const consolidatedEvents = mergeEventsFromRight(
+    other,
+    inputProps as unknown as DOMAttributes<unknown>,
+  )
 
   const selectedItemsLabels = useMemo(
     () => selectedItems.map(getLabel),

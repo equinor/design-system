@@ -44,7 +44,7 @@ export function AddNewOption({ index, item }: AutocompleteOptionProps) {
       ref: rowVirtualizer.measureElement,
     }),
     item,
-    index: index,
+    index,
   })
   return (
     <StyledListItem
