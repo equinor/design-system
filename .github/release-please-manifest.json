@@ -4,6 +4,6 @@
   "packages/eds-data-grid-react": "1.2.3",
   "packages/eds-icons": "1.2.2",
   "packages/eds-lab-react": "0.10.2",
-  "packages/eds-tokens": "2.1.1",
+  "packages/eds-tokens": "2.2.0",
   "packages/eds-utils": "2.0.0"
 }
