@@ -23,9 +23,7 @@
   /* ===== SIZE VARIANTS ===== */
   /*
    * Button height is controlled by min-height.
-   * padding-block provides vertical padding in fallback browsers;
-   * in modern browsers (@supports) it's removed so min-height alone
-   * controls height, and the span is centered by flexbox.
+   * The span keeps its natural line-height and is centered by flexbox.
    *
    * Spacious (default): sm=24px, md=36px, lg=44px
    * Comfortable:        sm=20px, md=24px, lg=36px
@@ -34,21 +32,18 @@
   .eds-button[data-selectable-space='lg'] {
     min-height: 2.75rem; /* 44px */
     padding-inline: var(--eds-selectable-space-horizontal);
-    padding-block: var(--eds-selectable-space-vertical);
     gap: var(--eds-typography-gap-horizontal);
   }
 
   .eds-button[data-selectable-space='md'] {
     min-height: 2.25rem; /* 36px */
     padding-inline: var(--eds-selectable-space-horizontal);
-    padding-block: var(--eds-selectable-space-vertical);
     gap: var(--eds-typography-gap-horizontal);
   }
 
   .eds-button[data-selectable-space='sm'] {
     min-height: 1.5rem; /* 24px */
     padding-inline: var(--eds-selectable-space-horizontal);
-    padding-block: var(--eds-selectable-space-vertical);
     gap: var(--eds-typography-gap-horizontal);
   }
 
@@ -64,17 +59,6 @@
 
   [data-density='comfortable'] .eds-button[data-selectable-space='sm'] {
     min-height: 1.25rem; /* 20px */
-  }
-
-  /* In modern browsers, remove padding-block so min-height alone controls
-   * button height. The span keeps its natural line-height and is centered
-   * by flexbox within the min-height box. This avoids half-leading inflation
-   * (padding + line-height > min-height) while keeping icon+text layout. */
-
-  @supports (text-box: trim-both cap alphabetic) {
-    .eds-button[data-selectable-space]:not([data-icon-only]) {
-      padding-block: 0;
-    }
   }
 
   /* ===== ICON-ONLY BUTTON ===== */
