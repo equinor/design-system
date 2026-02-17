@@ -1,0 +1,17 @@
+extends:
+  - 'stylelint-config-standard'
+  - 'stylelint-config-clean-order'
+rules:
+  custom-property-pattern:
+    - '^_?([a-z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$'
+    - message: "Expected '%s' to be kebab-case or camelCase, optionally prefixed with _ for pseudo-private properties (custom-property-pattern)"
+  property-no-vendor-prefix:
+    - true
+    - ignoreProperties: ['/^(column[s-]?)([a-z]*)$/']
+  comment-empty-line-before:
+    - always
+    - except: [first-nested]
+      ignore: [after-comment, stylelint-commands]
+  selector-class-pattern:
+    - '^eds-[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z][a-z0-9]*(-[a-z0-9]+)*)?(--[a-z][a-z0-9]*(-[a-z0-9]+)*)?$'
+    - message: "Expected class '%s' to follow BEM syntax: eds-block__element--modifier (selector-class-pattern)"
