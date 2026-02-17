@@ -6,16 +6,20 @@
   --eds-color-bg-fill-muted-default: var(--eds-color-danger-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-danger-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-danger-5);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-danger-3);
   --eds-color-bg-fill-emphasis-default: var(--eds-color-danger-9);
   --eds-color-bg-fill-emphasis-hover: var(--eds-color-danger-10);
   --eds-color-bg-fill-emphasis-active: var(--eds-color-danger-11);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-danger-3);
   --eds-color-bg-canvas: var(--eds-color-danger-1);
   --eds-color-bg-surface: var(--eds-color-danger-2);
   --eds-color-border-subtle: var(--eds-color-danger-6);
   --eds-color-border-medium: var(--eds-color-danger-7);
   --eds-color-border-strong: var(--eds-color-danger-8);
+  --eds-color-border-disabled: var(--eds-color-danger-7);
   --eds-color-text-subtle: var(--eds-color-danger-12); /** Used for text and icons */
   --eds-color-text-strong: var(--eds-color-danger-13); /** Used for text and icons */
+  --eds-color-text-disabled: var(--eds-color-danger-7);
   --eds-color-text-subtle-on-emphasis: var(--eds-color-danger-14); /** Text or icons against colored backgrounds */
   --eds-color-text-strong-on-emphasis: var(--eds-color-danger-15); /** Text or icons against colored backgrounds */
 }

@@ -8,6 +8,9 @@
   --eds-color-bg-input: #0b0b0b;
   --eds-color-border-focus: #2d8bc5;
   --eds-color-text-link: #5abbfb;
+  --eds-color-bg-disabled: #525c65;
+  --eds-color-border-disabled: #738696;
+  --eds-color-text-disabled: #738696;
   --eds-color-accent-1: #0a0b0b;
   --eds-color-accent-2: #1e2323;
   --eds-color-accent-3: #3c6266;

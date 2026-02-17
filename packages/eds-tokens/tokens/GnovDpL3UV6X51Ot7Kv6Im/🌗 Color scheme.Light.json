@@ -79,6 +79,54 @@
       }
     }
   },
+  "bg-disabled": {
+    "$type": "color",
+    "$value": "{Neutral.3}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--eds-color-bg-disabled)"
+        }
+      }
+    }
+  },
+  "border-disabled": {
+    "$type": "color",
+    "$value": "{Neutral.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--eds-color-border-disabled)"
+        }
+      }
+    }
+  },
+  "text-disabled": {
+    "$type": "color",
+    "$value": "{Neutral.7}",
+    "$description": "",
+    "$extensions": {
+      "com.figma": {
+        "hiddenFromPublishing": false,
+        "scopes": [
+          "ALL_SCOPES"
+        ],
+        "codeSyntax": {
+          "WEB": "var(--eds-color-text-disabled)"
+        }
+      }
+    }
+  },
   "Accent": {
     "1": {
       "$type": "color",

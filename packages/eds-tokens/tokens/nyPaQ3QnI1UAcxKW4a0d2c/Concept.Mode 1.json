@@ -47,6 +47,22 @@
           }
         }
       }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{bg-disabled}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-bg-disabled)"
+          }
+        }
+      }
     }
   },
   "Border": {
@@ -65,6 +81,22 @@
           }
         }
       }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{border-disabled}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-border-disabled)"
+          }
+        }
+      }
     }
   },
   "Text": {
@@ -80,6 +112,22 @@
           ],
           "codeSyntax": {
             "WEB": "var(--eds-color-text-link)"
+          }
+        }
+      }
+    },
+    "Disabled": {
+      "$type": "color",
+      "$value": "{text-disabled}",
+      "$description": "",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-color-text-disabled)"
           }
         }
       }

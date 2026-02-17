@@ -4,12 +4,14 @@
       "Muted": {
         "Default": "#cfeacc",
         "Hover": "#bbe0b8",
-        "Active": "#a2d49e"
+        "Active": "#a2d49e",
+        "Disabled": "#cfeacc"
       },
       "Emphasis": {
         "Default": "#207720",
         "Hover": "#20621f",
-        "Active": "#215c1f"
+        "Active": "#215c1f",
+        "Disabled": "#cfeacc"
       }
     },
     "Canvas": "#eafbe8",
@@ -18,11 +20,13 @@
   "Border": {
     "Subtle": "#bbe0b8",
     "Medium": "#7cc278",
-    "Strong": "#227e22"
+    "Strong": "#227e22",
+    "Disabled": "#7cc278"
   },
   "Text": {
     "Subtle": "#20691f",
     "Strong": "#142114",
+    "Disabled": "#7cc278",
     "Subtle on emphasis": "#cae8c7",
     "Strong on emphasis": "#ffffff"
   }

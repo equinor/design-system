@@ -45,13 +45,25 @@ function generateAppearanceForSemantic(
     'bg',
     'fill-emphasis-active',
   )
+  const bgFillMutedDisabled = varName(
+    variablePrefix,
+    'bg',
+    'fill-muted-disabled',
+  )
+  const bgFillEmphasisDisabled = varName(
+    variablePrefix,
+    'bg',
+    'fill-emphasis-disabled',
+  )
 
   const borderSubtle = varName(variablePrefix, 'border', 'subtle')
   const borderMedium = varName(variablePrefix, 'border', 'medium')
   const borderStrong = varName(variablePrefix, 'border', 'strong')
+  const borderDisabled = varName(variablePrefix, 'border', 'disabled')
 
   const textSubtle = varName(variablePrefix, 'text', 'subtle')
   const textStrong = varName(variablePrefix, 'text', 'strong')
+  const textDisabled = varName(variablePrefix, 'text', 'disabled')
   const textSubtleOnEmphasis = varName(
     variablePrefix,
     'text',
@@ -70,11 +82,13 @@ function generateAppearanceForSemantic(
           Default: make(`{${semantic}.3}`, '', bgFillMutedDefault),
           Hover: make(`{${semantic}.4}`, '', bgFillMutedHover),
           Active: make(`{${semantic}.5}`, '', bgFillMutedActive),
+          Disabled: make(`{${semantic}.3}`, '', bgFillMutedDisabled),
         },
         Emphasis: {
           Default: make(`{${semantic}.9}`, '', bgFillEmphasisDefault),
           Hover: make(`{${semantic}.10}`, '', bgFillEmphasisHover),
           Active: make(`{${semantic}.11}`, '', bgFillEmphasisActive),
+          Disabled: make(`{${semantic}.3}`, '', bgFillEmphasisDisabled),
         },
       },
       Canvas: make(`{${semantic}.1}`, '', bgCanvas),
@@ -84,10 +98,12 @@ function generateAppearanceForSemantic(
       Subtle: make(`{${semantic}.6}`, '', borderSubtle),
       Medium: make(`{${semantic}.7}`, '', borderMedium),
       Strong: make(`{${semantic}.8}`, '', borderStrong),
+      Disabled: make(`{${semantic}.7}`, '', borderDisabled),
     },
     Text: {
       Subtle: make(`{${semantic}.12}`, textDescriptions.Subtle, textSubtle),
       Strong: make(`{${semantic}.13}`, textDescriptions.Strong, textStrong),
+      Disabled: make(`{${semantic}.7}`, '', textDisabled),
       'Subtle on emphasis': make(
         `{${semantic}.14}`,
         textDescriptions['Subtle on emphasis'],

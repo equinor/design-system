@@ -4,6 +4,9 @@
   "bg-input": "#0b0b0b",
   "border-focus": "#2d8bc5",
   "text-link": "#5abbfb",
+  "bg-disabled": "#525c65",
+  "border-disabled": "#738696",
+  "text-disabled": "#738696",
   "Accent": {
     "1": "#0a0b0b",
     "2": "#1e2323",

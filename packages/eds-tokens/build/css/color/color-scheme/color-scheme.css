@@ -17,6 +17,9 @@
   --eds-color-bg-input: light-dark(#f5f5f5, #0b0b0b);
   --eds-color-border-focus: light-dark(#6fb6e9, #2d8bc5);
   --eds-color-text-link: light-dark(#0070a9, #5abbfb);
+  --eds-color-bg-disabled: light-dark(#e1e1e1, #525c65);
+  --eds-color-border-disabled: light-dark(#aeaeae, #738696);
+  --eds-color-text-disabled: light-dark(#aeaeae, #738696);
   --eds-color-accent-1: light-dark(#eaf8fa, #0a0b0b);
   --eds-color-accent-2: light-dark(#f6ffff, #1e2323);
   --eds-color-accent-3: light-dark(#cfe7e9, #3c6266);
