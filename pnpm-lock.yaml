@@ -578,8 +578,6 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
 
-  packages/eds-data-grid-react/dist/esm: {}
-
   packages/eds-icons:
     devDependencies:
       '@rollup/plugin-babel':
@@ -600,8 +598,6 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
-
-  packages/eds-icons/dist/esm: {}
 
   packages/eds-lab-react:
     dependencies:
@@ -741,8 +737,6 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
-
-  packages/eds-lab-react/dist/esm: {}
 
   packages/eds-tailwind:
     dependencies:
