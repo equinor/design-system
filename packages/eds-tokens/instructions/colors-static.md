@@ -72,6 +72,84 @@ Background fill-muted and fill-emphasis include state variants for hover and act
 }
 ```
 
+## TypeScript Tokens
+
+The static color tokens are also available as a nested TypeScript object with full type safety and autocomplete. The object mirrors the CSS variable hierarchy using camelCase keys and `as const` for literal type inference.
+
+### Import
+
+```typescript
+import { color } from '@equinor/eds-tokens/ts/color/static/semantic'
+```
+
+### Usage
+
+Access tokens through dot notation with full autocomplete:
+
+```typescript
+// Background tokens
+color.bg.accent.canvas          // resolved color value
+color.bg.neutral.surface
+color.bg.accent.fillMuted.default
+color.bg.accent.fillMuted.hover
+
+// Text tokens
+color.text.accent.strong
+color.text.neutral.subtleOnEmphasis
+
+// Border tokens
+color.border.danger.medium
+color.border.accent.strong
+```
+
+### Example: Styled components / CSS-in-JS
+
+```typescript
+import { color } from '@equinor/eds-tokens/ts/color/static/semantic'
+
+const styles = {
+  backgroundColor: color.bg.accent.fillEmphasis.default,
+  color: color.text.accent.strongOnEmphasis,
+  borderColor: color.border.accent.strong,
+}
+```
+
+### Example: Runtime token lookup
+
+```typescript
+import { color } from '@equinor/eds-tokens/ts/color/static/semantic'
+
+// Type-safe access to semantic categories
+const categories = ['accent', 'neutral', 'danger'] as const
+
+for (const cat of categories) {
+  console.log(color.bg[cat].canvas)
+}
+```
+
+### Naming Conversion
+
+CSS variable segments are converted to camelCase:
+
+| CSS variable | TypeScript path |
+|---|---|
+| `--eds-color-bg-accent-canvas` | `color.bg.accent.canvas` |
+| `--eds-color-bg-neutral-fill-muted-default` | `color.bg.neutral.fillMuted.default` |
+| `--eds-color-text-success-strong-on-emphasis` | `color.text.success.strongOnEmphasis` |
+| `--eds-color-border-danger-medium` | `color.border.danger.medium` |
+
+## JavaScript Tokens (Flat)
+
+A flat ES6 export with `SCREAMING_SNAKE_CASE` constants is also available:
+
+```typescript
+import {
+  BG_ACCENT_CANVAS,
+  TEXT_NEUTRAL_STRONG,
+  BORDER_DANGER_MEDIUM,
+} from '@equinor/eds-tokens/js/color/static/semantic'
+```
+
 ## Best Practices
 
 - **Be explicit** -- Choose the specific semantic category your element needs

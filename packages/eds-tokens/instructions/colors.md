@@ -115,6 +115,19 @@ Both the static and dynamic libraries support light and dark modes automatically
 pnpm add @equinor/eds-tokens
 ```
 
+## Output Formats
+
+The color tokens are available in multiple formats:
+
+| Format | Import path | Use case |
+|--------|-------------|----------|
+| **CSS variables** | `@equinor/eds-tokens/css/variables` | Standard web styling |
+| **TypeScript (nested)** | `@equinor/eds-tokens/ts/color/static/*` | Type-safe access with autocomplete |
+| **JavaScript (flat)** | `@equinor/eds-tokens/js/color/static/*` | CSS-in-JS, utilities |
+| **JSON** | `@equinor/eds-tokens/json/color/*` | Tooling, custom transforms |
+
+See the static and dynamic guides for format-specific usage examples.
+
 ## Next Steps
 
 Choose your approach and refer to the specific guide:
