@@ -8,6 +8,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
   forwardRef<HTMLInputElement, InputProps>(function Input(
     {
       invalid = false,
+      hideErrorIcon = false,
       disabled,
       readOnly,
       type = 'text',
@@ -22,9 +23,9 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     },
     ref,
   ) {
-    const tone = invalid && !disabled ? 'danger' : 'neutral'
+    const tone = invalid && !disabled && !readOnly ? 'danger' : 'neutral'
 
-    const showErrorIcon = invalid && !disabled
+    const displayErrorIcon = !hideErrorIcon && invalid && !disabled && !readOnly
     const hasStartAdornment = startText || startAdornment
     const hasEndAdornment = endText || endAdornment
 
@@ -43,7 +44,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
         data-readonly={readOnly || undefined}
         data-invalid={invalid || undefined}
       >
-        {showErrorIcon && (
+        {displayErrorIcon && (
           <span
             className="eds-error-icon"
             data-font-size="xs"
@@ -54,11 +55,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           </span>
         )}
         {hasStartAdornment && (
-          <div className="eds-adornment" data-font-size="xs">
+          <div className="eds-adornment" data-color-appearance="neutral">
             {startText && (
               <span
                 className="eds-adornment__text"
-                data-color-appearance="neutral"
                 data-font-family="ui"
                 data-font-size="xs"
                 data-baseline="center"
@@ -67,12 +67,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
               </span>
             )}
             {startAdornment && (
-              <span
-                className="eds-adornment__adornment"
-                data-font-size="xs"
-                data-font-family="ui"
-                data-baseline="center"
-              >
+              <span className="eds-adornment__adornment" data-font-size="xs">
                 {startAdornment}
               </span>
             )}
@@ -94,11 +89,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           aria-invalid={invalid || undefined}
         />
         {hasEndAdornment && (
-          <div className="eds-adornment" data-font-size="xs">
+          <div className="eds-adornment" data-color-appearance="neutral">
             {endText && (
               <span
                 className="eds-adornment__text"
-                data-color-appearance="neutral"
                 data-font-family="ui"
                 data-font-size="xs"
                 data-baseline="center"
@@ -107,12 +101,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
               </span>
             )}
             {endAdornment && (
-              <span
-                className="eds-adornment__adornment"
-                data-font-size="xs"
-                data-font-family="ui"
-                data-baseline="center"
-              >
+              <span className="eds-adornment__adornment" data-font-size="xs">
                 {endAdornment}
               </span>
             )}

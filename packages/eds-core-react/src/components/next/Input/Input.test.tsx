@@ -102,10 +102,37 @@ describe('Input (Next EDS 2.0)', () => {
     })
   })
 
+  describe('Error icon', () => {
+    it('Shows error icon when invalid by default', () => {
+      const { container } = render(<Input invalid aria-label="Invalid input" />)
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const errorIcon = container.querySelector('.eds-error-icon')
+      expect(errorIcon).toBeInTheDocument()
+    })
+
+    it('Hides error icon when hideErrorIcon is true', () => {
+      const { container } = render(
+        <Input invalid hideErrorIcon aria-label="Invalid input" />,
+      )
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const errorIcon = container.querySelector('.eds-error-icon')
+      expect(errorIcon).not.toBeInTheDocument()
+    })
+
+    it('Does not show error icon when disabled even if invalid', () => {
+      const { container } = render(
+        <Input invalid disabled aria-label="Disabled invalid input" />,
+      )
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const errorIcon = container.querySelector('.eds-error-icon')
+      expect(errorIcon).not.toBeInTheDocument()
+    })
+  })
+
   describe('Adornments', () => {
     it('Renders left text', () => {
-      render(<Input startText="$" value="100" readOnly />)
-      expect(screen.getByText('$')).toBeInTheDocument()
+      render(<Input startText="NOK" value="100" readOnly />)
+      expect(screen.getByText('NOK')).toBeInTheDocument()
     })
 
     it('Renders right text', () => {
@@ -132,7 +159,7 @@ describe('Input (Next EDS 2.0)', () => {
     })
 
     it('Text has text class', () => {
-      const { container } = render(<Input startText="$" endText="kg" />)
+      const { container } = render(<Input startText="NOK" endText="kg" />)
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
       const startText = container.querySelector('.eds-adornment__text')
       const endText = container.querySelectorAll('.eds-adornment__text')[1]

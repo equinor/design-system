@@ -3,13 +3,15 @@ import { InputHTMLAttributes, ReactNode } from 'react'
 export type InputProps = {
   /** Invalid state - shows error styling */
   invalid?: boolean
-  /** Text at the start (e.g., "$", "USD") - always neutral color */
+  /** Hide error icon when invalid - defaults to false (icon shows by default) */
+  hideErrorIcon?: boolean
+  /** Text at the start (e.g., "https://", "NOK") */
   startText?: string
-  /** Adornment at the start (icons, buttons, etc.) - inherits state color (red when invalid) */
+  /** Adornment at the start (icons, buttons, etc.) */
   startAdornment?: ReactNode
-  /** Text at the end (e.g., "km", "%") - always neutral color */
+  /** Text at the end (e.g., "km", "%") */
   endText?: string
-  /** Adornment at the end (icons, buttons, etc.) - inherits state color (red when invalid) */
+  /** Adornment at the end (icons, buttons, etc.) */
   endAdornment?: ReactNode
   /** Render as input or textarea */
   as?: 'input' | 'textarea'

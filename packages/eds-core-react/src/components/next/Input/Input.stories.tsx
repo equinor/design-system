@@ -1,11 +1,11 @@
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { anchor, search } from '@equinor/eds-icons'
+import { anchor, search, close } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Field } from '../Field'
 import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../Icon'
-import { Button } from '../../Button'
+import { Button } from '../Button'
 import page from './Input.docs.mdx'
 
 const meta: Meta<typeof Input> = {
@@ -17,6 +17,7 @@ const meta: Meta<typeof Input> = {
     invalid: false,
     readOnly: false,
     required: false,
+    hideErrorIcon: false,
   },
   parameters: {
     docs: {
@@ -57,7 +58,16 @@ const meta: Meta<typeof Input> = {
     // States
     invalid: {
       control: 'boolean',
-      description: 'Shows error styling with red border and adornment colors',
+      description: 'Shows error styling with red border',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hideErrorIcon: {
+      control: 'boolean',
+      description:
+        'Hide error icon when invalid. Only set to true when composing custom components like Search where the error icon is not applicable. For standard form inputs and TextField, keep this false (default).',
       table: {
         category: 'States',
         defaultValue: { summary: 'false' },
@@ -92,24 +102,21 @@ const meta: Meta<typeof Input> = {
     // Adornments
     startText: {
       control: 'text',
-      description:
-        'Text at the start (e.g., "$", "https://"). Always neutral color.',
+      description: 'Text at the start (e.g., "https://", "NOK")',
       table: {
         category: 'Adornments',
       },
     },
     endText: {
       control: 'text',
-      description:
-        'Text at the end (e.g., "kg", "%", "USD"). Always neutral color.',
+      description: 'Text at the end (e.g., "kg", "%", "NOK")',
       table: {
         category: 'Adornments',
       },
     },
     startAdornment: {
       control: false,
-      description:
-        'ReactNode at the start (icons, buttons). Inherits state color (red when invalid).',
+      description: 'ReactNode at the start (icons, buttons, etc.)',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
@@ -117,8 +124,7 @@ const meta: Meta<typeof Input> = {
     },
     endAdornment: {
       control: false,
-      description:
-        'ReactNode at the end (icons, buttons). Inherits state color (red when invalid).',
+      description: 'ReactNode at the end (icons, buttons, etc.)',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
@@ -163,6 +169,7 @@ Introduction.args = {
   invalid: false,
   disabled: false,
   readOnly: false,
+  hideErrorIcon: false,
 }
 
 export const Types: StoryFn<InputProps> = () => (
@@ -289,8 +296,8 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         aria-label="With text prefix and suffix"
         type="number"
         placeholder="Amount"
-        startText="$"
-        endText="USD"
+        startText="€"
+        endText="EUR"
       />
       <Input
         aria-label="With icon"
@@ -299,15 +306,13 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         endAdornment={<Icon data={anchor} />}
       />
       <Input
-        aria-label="With button"
+        aria-label="Search"
         type="text"
         placeholder="Search"
+        startAdornment={<Icon data={search} />}
         endAdornment={
-          <Button
-            variant="ghost_icon"
-            style={{ height: '24px', width: '24px' }}
-          >
-            <Icon data={search} />
+          <Button variant="ghost" icon size="small" aria-label="Clear">
+            <Icon data={close} />
           </Button>
         }
       />
@@ -328,26 +333,30 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         endText=".com"
       />
       <Input
-        aria-label="Invalid with button"
+        aria-label="Search with error"
         type="text"
-        defaultValue="Invalid with button"
+        defaultValue="Invalid search"
         invalid
+        hideErrorIcon
+        startAdornment={<Icon data={search} />}
         endAdornment={
           <Button
-            variant="ghost_icon"
-            color="danger"
-            style={{ height: '24px', width: '24px' }}
+            variant="ghost"
+            icon
+            size="small"
+            tone="neutral"
+            aria-label="Clear"
           >
-            <Icon data={search} />
+            <Icon data={close} />
           </Button>
         }
       />
       <Input
         aria-label="Disabled with adornments"
-        type="text"
+        type="number"
         disabled
-        value="Disabled"
-        startText="$"
+        value="100"
+        endText="kg"
         endAdornment={<Icon data={anchor} />}
       />
     </>
