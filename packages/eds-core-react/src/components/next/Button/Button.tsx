@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import { TypographyNext } from '../../Typography'
 import type { ButtonProps } from './Button.types'
+import { TypographyNext } from '../../Typography'
 
 const SIZE_MAPPING = {
   small: 'sm',
@@ -40,22 +40,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         data-variant={variant}
         data-selectable-space={selectableSpace}
         data-space-proportions="squished"
-        data-font-family="ui"
-        data-font-size={typographySize}
-        data-line-height="squished"
         data-color-appearance={disabled ? 'neutral' : tone}
         data-icon-only={icon || undefined}
         data-round={icon && round ? true : undefined}
         {...rest}
       >
-        <TypographyNext
-          family="ui"
-          size={typographySize}
-          baseline="center"
-          lineHeight="squished"
-        >
-          {children}
-        </TypographyNext>
+        {icon ? (
+          children
+        ) : (
+          <TypographyNext
+            as="span"
+            family="ui"
+            size={typographySize}
+            lineHeight="squished"
+            baseline="center"
+          >
+            {children}
+          </TypographyNext>
+        )}
       </button>
     )
   },
