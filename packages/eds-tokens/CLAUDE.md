@@ -41,7 +41,7 @@ Both write to the same `tokens/` directory. They must stay in sync.
 pnpm run build:variables:color  # Compiles all color tokens
 ```
 
-Outputs go to `build/css/color/`, `build/js/color/`, `build/json/color/`.
+Outputs go to `build/css/color/`, `build/js/color/`, `build/json/color/`, `build/ts/color/`.
 
 ### Step 3: Bundle into final output
 
@@ -77,7 +77,21 @@ cd ../eds-tokens-build && pnpm run build
 
 ## Token Structure
 
+### Color
+
 - **Color scheme** (`🌗 Color Scheme.*.json`) — Foundation palette → semantic mapping (Accent→Moss Green, Neutral→Gray) + concept tokens (bg-disabled, bg-floating, etc.)
 - **Semantic** (`Semantic.Mode 1.json`) — Per-intent tokens: Bg/Border/Text × Canvas/Surface/Fill/Subtle/Medium/Strong
 - **Appearance** (`🎨 Appearance.*.json`) — Generic slot tokens per semantic intent, used with `[data-color-appearance]`
 - **Concept** (`Concept.Mode 1.json`) — Cross-cutting tokens that reference color scheme (bg-floating, border-focus, bg-disabled, etc.)
+
+### Typography
+
+Five independent axes, each controlled by a `data-*` attribute:
+
+- **Font family** (`🅰️ Font family.*.json`) — `data-font-family`: `header`, `ui`
+- **Font size** (`🅰️ Font size.*.json`) — `data-font-size`: `xs`–`6xl` (also sets icon-size and gap)
+- **Font weight** (`🅰️ Font weight.*.json`) — `data-font-weight`: `lighter`, `normal`, `bolder`
+- **Line height** (`🅰️ Line height.*.json`) — `data-line-height`: `default`, `squished`
+- **Tracking** (`🅰️ Tracking.*.json`) — `data-tracking`: `tight`, `normal`, `wide`, `loose`
+
+Output: `build/css/typography/` (CSS) and `build/ts/typography/` (TypeScript nested objects)
