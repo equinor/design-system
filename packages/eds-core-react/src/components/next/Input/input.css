@@ -98,12 +98,6 @@
         color: var(--_readonly-text-color);
         /* Safari autofill override */
         -webkit-text-fill-color: var(--_readonly-text-color);
-
-        &::placeholder {
-          color: var(--_placeholder-text-color);
-          /* Safari autofill override */
-          -webkit-text-fill-color: var(--_placeholder-text-color);
-        }
       }
 
       & .eds-adornment__text,

@@ -127,6 +127,15 @@ describe('Input (Next EDS 2.0)', () => {
       const errorIcon = container.querySelector('.eds-error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
+
+    it('Does not show error icon when readOnly even if invalid', () => {
+      const { container } = render(
+        <Input invalid readOnly aria-label="ReadOnly invalid input" />,
+      )
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const errorIcon = container.querySelector('.eds-error-icon')
+      expect(errorIcon).not.toBeInTheDocument()
+    })
   })
 
   describe('Adornments', () => {
@@ -204,6 +213,12 @@ describe('Input (Next EDS 2.0)', () => {
 
       it('Sets neutral appearance when disabled regardless of invalid state', () => {
         render(<Input invalid disabled />)
+        const wrapper = getInputWrapper()
+        expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
+      })
+
+      it('Sets neutral appearance when readOnly regardless of invalid state', () => {
+        render(<Input invalid readOnly />)
         const wrapper = getInputWrapper()
         expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
       })
