@@ -1,5 +1,5 @@
 import { StyleDictionary } from 'style-dictionary-utils'
-import type { TransformedToken } from 'style-dictionary/types'
+import type { TransformedToken, PlatformConfig } from 'style-dictionary/types'
 import path from 'path'
 import { typescriptNestedFormat } from '../format/typescriptNested'
 
@@ -79,6 +79,72 @@ export const _extend = ({
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
 
+  const platforms: Record<string, PlatformConfig> = {
+    css: {
+      transformGroup: 'css',
+      prefix,
+      buildPath: `${cssBuildPath}/${buildPath}`,
+      transforms,
+      files: [
+        {
+          filter,
+          destination: cssDestinationFileName,
+          format: 'css/variables',
+          options: {
+            selector,
+            outputReferences,
+          },
+        },
+      ],
+    },
+    ts: {
+      transforms: ['name/constant'],
+      buildPath: `${jsBuildPath}/${buildPath}`,
+      files: [
+        {
+          filter,
+          destination: `${fileName}.js`,
+          format: 'javascript/es6',
+        },
+        {
+          filter,
+          format: 'typescript/es6-declarations',
+          destination: `${fileName}.d.ts`,
+        },
+      ],
+    },
+    json: {
+      buildPath: `${jsonBuildPath}/${buildPath}`,
+      transforms: ['name/kebab'],
+      files: [
+        {
+          filter,
+          destination: `flat/${fileName}.json`,
+          format: 'json/flat',
+        },
+        {
+          filter,
+          destination: `nested/${fileName}.json`,
+          format: 'json/nested',
+        },
+      ],
+    },
+  }
+
+  if (rootName) {
+    platforms.tsNested = {
+      buildPath: `${tsBuildPath}/${buildPath}`,
+      files: [
+        {
+          filter,
+          destination: `${fileName}.ts`,
+          format: 'typescript/nested',
+          options: { rootName },
+        },
+      ],
+    }
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
   return new StyleDictionary({
     include,
@@ -92,69 +158,6 @@ export const _extend = ({
         'typescript/nested': typescriptNestedFormat,
       },
     },
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: `${cssBuildPath}/${buildPath}`,
-        transforms,
-        files: [
-          {
-            filter,
-            destination: cssDestinationFileName,
-            format: 'css/variables',
-            options: {
-              selector,
-              outputReferences,
-            },
-          },
-        ],
-      },
-      ts: {
-        transforms: ['name/constant'],
-        buildPath: `${jsBuildPath}/${buildPath}`,
-        files: [
-          {
-            filter,
-            destination: `${fileName}.js`,
-            format: 'javascript/es6',
-          },
-          {
-            filter,
-            format: 'typescript/es6-declarations',
-            destination: `${fileName}.d.ts`,
-          },
-        ],
-      },
-      tsNested: {
-        buildPath: `${tsBuildPath}/${buildPath}`,
-        files: [
-          {
-            filter,
-            destination: `${fileName}.ts`,
-            format: 'typescript/nested',
-            options: {
-              rootName: rootName ?? 'tokens',
-            },
-          },
-        ],
-      },
-      json: {
-        buildPath: `${jsonBuildPath}/${buildPath}`,
-        transforms: ['name/kebab'],
-        files: [
-          {
-            filter,
-            destination: `flat/${fileName}.json`,
-            format: 'json/flat',
-          },
-          {
-            filter,
-            destination: `nested/${fileName}.json`,
-            format: 'json/nested',
-          },
-        ],
-      },
-    },
+    platforms,
   })
 }

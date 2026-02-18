@@ -89,7 +89,6 @@ async function buildDynamicAppearances(cfg: TokenConfig) {
       selector,
       prefix: COLOR_PREFIX,
       outputReferences: true,
-      rootName: 'color',
     })
 
     await dict.buildAllPlatforms()
