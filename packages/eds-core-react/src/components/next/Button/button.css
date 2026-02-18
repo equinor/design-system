@@ -161,8 +161,8 @@
   }
 
   .eds-button[data-variant='primary']:disabled {
-    background-color: var(--eds-color-bg-fill-muted-default);
-    color: var(--eds-color-border-medium);
+    background-color: var(--eds-color-bg-fill-emphasis-disabled);
+    color: var(--eds-color-text-disabled);
     cursor: not-allowed;
   }
 
@@ -186,9 +186,9 @@
 
   .eds-button[data-variant='secondary']:disabled {
     outline: var(--eds-border-width-default, 1px) solid
-      var(--eds-color-border-medium);
+      var(--eds-color-border-disabled);
     outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
-    color: var(--eds-color-border-medium);
+    color: var(--eds-color-text-disabled);
     cursor: not-allowed;
   }
 
@@ -208,7 +208,7 @@
   }
 
   .eds-button[data-variant='ghost']:disabled {
-    color: var(--eds-color-border-medium);
+    color: var(--eds-color-text-disabled);
     cursor: not-allowed;
   }
 

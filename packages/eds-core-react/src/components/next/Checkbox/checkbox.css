@@ -146,7 +146,7 @@
   }
 
   .eds-checkbox[data-disabled='true'] .eds-checkbox__icon {
-    fill: var(--eds-color-border-medium);
+    fill: var(--eds-color-text-disabled);
   }
 
   /* Icon visibility */
@@ -185,7 +185,7 @@
   }
 
   .eds-field.eds-checkbox[data-disabled='true'] .eds-field__label {
-    color: var(--eds-color-border-medium);
+    color: var(--eds-color-text-disabled);
     cursor: not-allowed;
   }
 
