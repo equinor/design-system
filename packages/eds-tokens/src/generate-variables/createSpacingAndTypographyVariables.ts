@@ -1,7 +1,10 @@
 import path from 'path'
 import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
-import { includeTokenFilter } from '@equinor/eds-tokens-build'
+import {
+  includeTokenFilter,
+  typescriptNestedFormat,
+} from '@equinor/eds-tokens-build'
 
 export const FILE_KEY_SPACING = 'cpNchKjiIM19dPqTxE0fqg'
 export const FILE_KEY_TYPOGRAPHY_AND_SPACING_MODES = 'FQQqyumcpPQoiFRCjdS9GM'
@@ -23,6 +26,8 @@ interface BuildCssOptions extends BaseOptions {
   selector?: string
   filter: (token: TransformedToken) => boolean
   outputReferences?: boolean
+  rootName?: string
+  tsBuildPath?: string
 }
 
 async function buildCssDictionary({
@@ -35,29 +40,55 @@ async function buildCssDictionary({
   transforms,
   filter,
   outputReferences = true,
+  rootName,
+  tsBuildPath,
 }: BuildCssOptions) {
+  const platforms: Record<string, unknown> = {
+    css: {
+      transformGroup: 'css',
+      prefix,
+      buildPath,
+      transforms,
+      files: [
+        {
+          filter,
+          destination,
+          format: 'css/variables',
+          options: {
+            selector,
+            outputReferences,
+          },
+        },
+      ],
+    },
+  }
+
+  if (rootName && tsBuildPath) {
+    const tsDestination = destination.replace(/\.css$/, '.ts')
+    platforms.tsNested = {
+      buildPath: tsBuildPath,
+      files: [
+        {
+          filter,
+          destination: tsDestination,
+          format: 'typescript/nested',
+          options: { rootName },
+        },
+      ],
+    }
+  }
+
   const sd = new StyleDictionary({
     include,
     source,
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath,
-        transforms,
-        files: [
-          {
-            filter,
-            destination,
-            format: 'css/variables',
-            options: {
-              selector,
-              outputReferences,
-            },
-          },
-        ],
+    platforms,
+    ...(rootName && {
+      hooks: {
+        formats: {
+          'typescript/nested': typescriptNestedFormat,
+        },
       },
-    },
+    }),
   })
   await sd.buildAllPlatforms()
 }
@@ -174,6 +205,7 @@ export async function createSpacingAndTypographyVariables({
   const outputDirectory = path.resolve(process.cwd(), 'build')
   const jsBuildPath = path.join(outputDirectory, 'js')
   const jsonBuildPath = path.join(outputDirectory, 'json')
+  const tsBuildPath = path.join(outputDirectory, 'ts', TYPOGRAPHY_BUILD_PATH)
 
   const densitySpaciousFilter = (token: TransformedToken) =>
     includeTokenFilter(token, ['Density', 'Spacious'])
@@ -597,6 +629,8 @@ export async function createSpacingAndTypographyVariables({
       destination: `font-family-${slug}.css`,
       selector: `[data-font-family="${slug}"]`,
       filter: (token: TransformedToken) => includeTokenFilter(token, [mode]),
+      rootName: 'typography',
+      tsBuildPath,
     }),
   )
 
@@ -614,6 +648,8 @@ export async function createSpacingAndTypographyVariables({
       destination: `font-size-${size.toLowerCase()}.css`,
       selector: `[data-font-size="${size.toLowerCase()}"]`,
       filter: (token) => includeTokenFilter(token, ['Font size', size]),
+      rootName: 'typography',
+      tsBuildPath,
     }),
   )
 
@@ -633,6 +669,8 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-font-weight="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'font-weight'),
+      rootName: 'typography',
+      tsBuildPath,
     }),
   )
 
@@ -652,6 +690,8 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-line-height="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'line-height'),
+      rootName: 'typography',
+      tsBuildPath,
     }),
   )
 
@@ -671,6 +711,8 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-tracking="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'tracking'),
+      rootName: 'typography',
+      tsBuildPath,
     }),
   )
 

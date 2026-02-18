@@ -17,7 +17,8 @@
     "./json/*/*": "./build/json/*/*.json",
     "./js/color/*": "./build/js/color/*.js",
     "./js/spacing/*": "./build/js/spacing/*.js",
-    "./ts/color/*": "./build/ts/color/*.ts"
+    "./ts/color/*": "./build/ts/color/*.ts",
+    "./ts/typography/*": "./build/ts/typography/*.ts"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/tokens.cjs",
