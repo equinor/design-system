@@ -26,17 +26,15 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   },
   ref,
 ) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (!onClick && !onDelete) {
-      console.warn(
-        'Chip: A chip must have at least one of `onClick` or `onDelete`.',
-      )
-    }
-    if (dropdown && onDelete) {
-      console.warn(
-        'Chip: `dropdown` and `onDelete` cannot be used together. `onDelete` takes precedence.',
-      )
-    }
+  if (!onClick && !onDelete) {
+    console.warn(
+      'Chip: A chip must have at least one of `onClick` or `onDelete`.',
+    )
+  }
+  if (dropdown && onDelete) {
+    console.warn(
+      'Chip: `dropdown` and `onDelete` cannot be used together. `onDelete` takes precedence.',
+    )
   }
 
   const handleDelete = disabled ? undefined : onDelete
@@ -45,6 +43,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   const deletable = onDelete !== undefined
   const clickable = onClick !== undefined
   const showDropdown = dropdown && !deletable
+  const animateCheck = showCheckIcon && !icon
   const leadingIcon = selected && showCheckIcon ? check : icon
   const hasIcon = leadingIcon !== undefined
 
@@ -75,6 +74,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       data-deletable={deletable || undefined}
       data-dropdown={showDropdown || undefined}
       data-has-icon={hasIcon || undefined}
+      data-color-appearance={selected ? 'accent' : 'neutral'}
       aria-disabled={disabled || undefined}
       aria-pressed={clickable ? selected : undefined}
       aria-haspopup={showDropdown ? 'menu' : undefined}
@@ -84,7 +84,17 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       onKeyDown={clickable || deletable ? handleKeyDown : undefined}
       {...rest}
     >
-      {hasIcon && <Icon data={leadingIcon} size="xs" />}
+      {animateCheck ? (
+        <span className="eds-chip__check" data-active={selected || undefined}>
+          <Icon data={check} size="xs" />
+        </span>
+      ) : (
+        leadingIcon && (
+          <span className="eds-chip__icon">
+            <Icon data={leadingIcon} size="xs" />
+          </span>
+        )
+      )}
       {children}
       {onDelete && (
         <button

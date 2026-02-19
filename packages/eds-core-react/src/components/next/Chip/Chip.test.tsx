@@ -169,6 +169,26 @@ describe('Chip (next)', () => {
       expect(screen.getByText('Keep icon')).toHaveAttribute('data-has-icon')
       expect(screen.getByText('Keep icon')).toHaveAttribute('data-selected')
     })
+
+    it('sets data-color-appearance to accent when selected', () => {
+      render(
+        <Chip onClick={jest.fn()} selected>
+          Accent
+        </Chip>,
+      )
+      expect(screen.getByText('Accent')).toHaveAttribute(
+        'data-color-appearance',
+        'accent',
+      )
+    })
+
+    it('sets data-color-appearance to neutral when not selected', () => {
+      render(<Chip onClick={jest.fn()}>Neutral</Chip>)
+      expect(screen.getByText('Neutral')).toHaveAttribute(
+        'data-color-appearance',
+        'neutral',
+      )
+    })
   })
 
   describe('Dropdown', () => {

@@ -19,6 +19,9 @@ const meta: Meta<StoryArgs> = {
       control: 'boolean',
       description: 'Disabled state',
     },
+    variant: {
+      table: { disable: true },
+    },
   },
   args: {
     selected: false,
@@ -242,61 +245,139 @@ export const Dropdown: Story = {
   },
 }
 
-export const WithAvatar: Story = {
-  render: () => (
+const people = [
+  { id: 1, name: 'John Doe', img: 'https://i.pravatar.cc/48?img=1' },
+  { id: 2, name: 'Jane Smith', img: 'https://i.pravatar.cc/48?img=2' },
+  { id: 3, name: 'Alex Johnson', img: 'https://i.pravatar.cc/48?img=3' },
+  { id: 4, name: 'Sam Wilson', img: 'https://i.pravatar.cc/48?img=4' },
+  { id: 5, name: 'Casey Brown', img: 'https://i.pravatar.cc/48?img=5' },
+]
+
+const MultiSelectChips = () => {
+  const [selected, setSelected] = useState<Set<number>>(new Set())
+
+  const toggle = (id: number) => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      return next
+    })
+  }
+
+  return (
     <Wrapper>
-      <Chip onClick={() => {}}>
-        <Avatar src="https://i.pravatar.cc/48?img=1" alt="John Doe" size={16} />
-        John Doe
-      </Chip>
-      <Chip onDelete={() => {}}>
-        <Avatar
-          src="https://i.pravatar.cc/48?img=2"
-          alt="Jane Smith"
-          size={16}
-        />
-        Jane Smith
-      </Chip>
-      <Chip onClick={() => {}} onDelete={() => {}}>
-        <Avatar
-          src="https://i.pravatar.cc/48?img=3"
-          alt="Alex Johnson"
-          size={16}
-        />
-        Alex Johnson
-      </Chip>
-      <Chip onClick={() => {}} onDelete={() => {}} selected>
-        <Avatar src="https://i.pravatar.cc/48?img=4" alt="Selected" size={16} />
-        Selected
-      </Chip>
-      <Chip onDelete={() => {}} disabled>
-        <Avatar
-          src="https://i.pravatar.cc/48?img=5"
-          alt="Disabled"
-          size={16}
-          disabled
-        />
-        Disabled
-      </Chip>
+      {people.map((person) => (
+        <Chip
+          key={person.id}
+          onClick={() => toggle(person.id)}
+          onDelete={() =>
+            setSelected((prev) => {
+              const next = new Set(prev)
+              next.delete(person.id)
+              return next
+            })
+          }
+          selected={selected.has(person.id)}
+          showCheckIcon={false}
+        >
+          <Avatar src={person.img} alt={person.name} size={16} />
+          {person.name}
+        </Chip>
+      ))}
     </Wrapper>
-  ),
+  )
+}
+
+export const MultiSelect: Story = {
+  name: 'Multi-select (with avatars)',
+  render: () => <MultiSelectChips />,
   parameters: {
     docs: {
       source: {
         code: `import { Avatar } from '@equinor/eds-core-react'
 
-<Chip onClick={handleClick}>
-  <Avatar src="avatar.jpg" alt="John Doe" size={16} />
-  John Doe
-</Chip>
-<Chip onDelete={handleDelete}>
-  <Avatar src="avatar.jpg" alt="Jane Smith" size={16} />
-  Jane Smith
-</Chip>
-<Chip onClick={handleClick} onDelete={handleDelete} selected>
-  <Avatar src="avatar.jpg" alt="Selected" size={16} />
-  Selected
-</Chip>`,
+const [selected, setSelected] = useState<Set<number>>(new Set())
+
+const toggle = (id: number) => {
+  setSelected(prev => {
+    const next = new Set(prev)
+    next.has(id) ? next.delete(id) : next.add(id)
+    return next
+  })
+}
+
+{people.map(person => (
+  <Chip
+    key={person.id}
+    onClick={() => toggle(person.id)}
+    onDelete={() => setSelected(prev => { const next = new Set(prev); next.delete(person.id); return next })}
+    selected={selected.has(person.id)}
+    showCheckIcon={false}
+  >
+    <Avatar src={person.img} alt={person.name} size={16} />
+    {person.name}
+  </Chip>
+))}`,
+      },
+    },
+  },
+}
+
+const SingleSelectChips = () => {
+  const [selected, setSelected] = useState<string | null>(null)
+
+  const options = ['Technology', 'Design', 'Engineering', 'Science', 'Business']
+
+  return (
+    <fieldset
+      style={{ border: 'none', padding: 0, margin: 0 }}
+      role="radiogroup"
+      aria-label="Select a category"
+    >
+      <Wrapper>
+        {options.map((option) => (
+          <Chip
+            key={option}
+            role="radio"
+            aria-checked={selected === option}
+            onClick={() => setSelected(option)}
+            selected={selected === option}
+          >
+            {option}
+          </Chip>
+        ))}
+      </Wrapper>
+    </fieldset>
+  )
+}
+
+export const SingleSelect: Story = {
+  name: 'Single-select',
+  render: () => <SingleSelectChips />,
+  parameters: {
+    docs: {
+      source: {
+        code: `const [selected, setSelected] = useState<string | null>(null)
+
+const options = ['Technology', 'Design', 'Engineering', 'Science', 'Business']
+
+<fieldset role="radiogroup" aria-label="Select a category">
+  {options.map(option => (
+    <Chip
+      key={option}
+      role="radio"
+      aria-checked={selected === option}
+      onClick={() => setSelected(option)}
+      selected={selected === option}
+    >
+      {option}
+    </Chip>
+  ))}
+</fieldset>`,
       },
     },
   },
