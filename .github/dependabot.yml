@@ -41,6 +41,19 @@ updates:
           - 'rollup-plugin-*'
         update-types:
           - major
+      tanstack:
+        patterns:
+          - '@tanstack/*'
+        update-types:
+          - major
+      eslint:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@typescript-eslint/*'
+          - '@eslint/*'
+        update-types:
+          - major
       testing:
         patterns:
           - 'jest'
