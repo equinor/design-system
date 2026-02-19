@@ -20,9 +20,14 @@
 
     background: var(--eds-color-bg-fill-muted-default);
 
-    cursor: pointer;
+    cursor: default;
     color: var(--eds-color-text-subtle);
     user-select: none;
+  }
+
+  .eds-chip[role='button'],
+  .eds-chip[data-dropdown] {
+    cursor: pointer;
   }
 
   .eds-chip svg {

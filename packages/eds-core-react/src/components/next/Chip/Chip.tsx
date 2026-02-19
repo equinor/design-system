@@ -17,6 +17,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     onDelete,
     disabled = false,
     selected = false,
+    showCheckIcon = true,
     icon,
     dropdown = false,
     onClick,
@@ -44,7 +45,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   const deletable = onDelete !== undefined
   const clickable = onClick !== undefined
   const showDropdown = dropdown && !deletable
-  const leadingIcon = selected ? check : icon
+  const leadingIcon = selected && showCheckIcon ? check : icon
   const hasIcon = leadingIcon !== undefined
 
   const classes = ['eds-chip', className].filter(Boolean).join(' ')

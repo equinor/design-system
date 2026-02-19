@@ -148,6 +148,27 @@ describe('Chip (next)', () => {
       )
       expect(screen.getByText('Selected')).toHaveAttribute('data-has-icon')
     })
+
+    it('does not show checkmark when showCheckIcon is false', () => {
+      render(
+        <Chip onClick={jest.fn()} selected showCheckIcon={false}>
+          No check
+        </Chip>,
+      )
+      expect(screen.getByText('No check')).not.toHaveAttribute('data-has-icon')
+      // Still has selected styling
+      expect(screen.getByText('No check')).toHaveAttribute('data-selected')
+    })
+
+    it('preserves custom icon when showCheckIcon is false and selected', () => {
+      render(
+        <Chip onClick={jest.fn()} selected showCheckIcon={false} icon={save}>
+          Keep icon
+        </Chip>,
+      )
+      expect(screen.getByText('Keep icon')).toHaveAttribute('data-has-icon')
+      expect(screen.getByText('Keep icon')).toHaveAttribute('data-selected')
+    })
   })
 
   describe('Dropdown', () => {

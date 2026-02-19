@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { save } from '@equinor/eds-icons'
 import { Chip } from './Chip'
+import { Avatar } from '../../Avatar'
 import type { ChipProps } from './Chip.types'
 
 type StoryArgs = ChipProps
@@ -236,6 +237,66 @@ export const Dropdown: Story = {
 <Chip onClick={openMenu} dropdown selected>Category (selected)</Chip>
 <Chip onClick={openMenu} dropdown icon={save}>With icon</Chip>
 <Chip onClick={openMenu} dropdown disabled>Disabled</Chip>`,
+      },
+    },
+  },
+}
+
+export const WithAvatar: Story = {
+  render: () => (
+    <Wrapper>
+      <Chip onClick={() => {}}>
+        <Avatar src="https://i.pravatar.cc/48?img=1" alt="John Doe" size={16} />
+        John Doe
+      </Chip>
+      <Chip onDelete={() => {}}>
+        <Avatar
+          src="https://i.pravatar.cc/48?img=2"
+          alt="Jane Smith"
+          size={16}
+        />
+        Jane Smith
+      </Chip>
+      <Chip onClick={() => {}} onDelete={() => {}}>
+        <Avatar
+          src="https://i.pravatar.cc/48?img=3"
+          alt="Alex Johnson"
+          size={16}
+        />
+        Alex Johnson
+      </Chip>
+      <Chip onClick={() => {}} onDelete={() => {}} selected>
+        <Avatar src="https://i.pravatar.cc/48?img=4" alt="Selected" size={16} />
+        Selected
+      </Chip>
+      <Chip onDelete={() => {}} disabled>
+        <Avatar
+          src="https://i.pravatar.cc/48?img=5"
+          alt="Disabled"
+          size={16}
+          disabled
+        />
+        Disabled
+      </Chip>
+    </Wrapper>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Avatar } from '@equinor/eds-core-react'
+
+<Chip onClick={handleClick}>
+  <Avatar src="avatar.jpg" alt="John Doe" size={16} />
+  John Doe
+</Chip>
+<Chip onDelete={handleDelete}>
+  <Avatar src="avatar.jpg" alt="Jane Smith" size={16} />
+  Jane Smith
+</Chip>
+<Chip onClick={handleClick} onDelete={handleDelete} selected>
+  <Avatar src="avatar.jpg" alt="Selected" size={16} />
+  Selected
+</Chip>`,
       },
     },
   },

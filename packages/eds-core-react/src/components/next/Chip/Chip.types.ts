@@ -6,9 +6,16 @@ export type ChipProps = {
   disabled?: boolean
   /**
    * Whether the chip is selected (controlled).
-   * When true, the chip uses accent styling and shows a checkmark icon.
+   * When true, the chip uses accent styling and shows a checkmark icon
+   * (unless `showCheckIcon` is false).
    */
   selected?: boolean
+  /**
+   * Whether to show the checkmark icon when selected.
+   * Set to false to keep accent styling without the leading checkmark.
+   * @default true
+   */
+  showCheckIcon?: boolean
   /**
    * Icon data from @equinor/eds-icons to display as a leading icon.
    * When `selected` is true, this icon is replaced by a checkmark.
