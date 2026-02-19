@@ -189,6 +189,18 @@ describe('Chip (next)', () => {
         'neutral',
       )
     })
+
+    it('sets data-color-appearance to neutral when disabled and selected', () => {
+      render(
+        <Chip onClick={jest.fn()} selected disabled>
+          Disabled accent
+        </Chip>,
+      )
+      expect(screen.getByText('Disabled accent')).toHaveAttribute(
+        'data-color-appearance',
+        'neutral',
+      )
+    })
   })
 
   describe('Dropdown', () => {

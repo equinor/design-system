@@ -1,8 +1,18 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { save } from '@equinor/eds-icons'
+import {
+  save,
+  calendar_event,
+  share,
+  directions,
+  settings,
+  home,
+} from '@equinor/eds-icons'
 import { Chip } from './Chip'
 import { Avatar } from '../../Avatar'
+import { Card } from '../../Card'
+import { Divider } from '../../Divider'
+import { Typography } from '../../Typography'
 import type { ChipProps } from './Chip.types'
 
 type StoryArgs = ChipProps
@@ -51,217 +61,94 @@ const Wrapper = ({
   </div>
 )
 
+/* ------------------------------------------------------------------ */
+/*  Default (interactive controls)                                    */
+/* ------------------------------------------------------------------ */
+
 export const Introduction: Story = {
   args: {
-    children: 'Play with me',
+    children: 'Chip label',
     onClick: () => {},
   },
 }
 
-export const Clickable: Story = {
+/* ------------------------------------------------------------------ */
+/*  Assist chips                                                      */
+/* ------------------------------------------------------------------ */
+
+export const Assist: Story = {
   render: () => (
-    <Wrapper>
-      <Chip onClick={() => {}}>Default</Chip>
-      <Chip onClick={() => {}} selected>
-        Selected
-      </Chip>
-      <Chip onClick={() => {}} disabled>
-        Disabled
-      </Chip>
-      <Chip onClick={() => {}} selected disabled>
-        Disabled selected
-      </Chip>
-    </Wrapper>
+    <Card elevation="raised" style={{ maxWidth: 340 }}>
+      <Card.Media fullWidth>
+        <img
+          src="https://i.imgur.com/UM3mrju.jpg"
+          alt="Conference hall with stage lighting"
+          style={{ width: '100%', display: 'block' }}
+        />
+      </Card.Media>
+      <Card.Header>
+        <Card.HeaderTitle>
+          <Typography variant="h5">EDS Design Summit 2026</Typography>
+          <Typography variant="body_short">
+            March 12 · 09:00–16:00 · Stavanger
+          </Typography>
+        </Card.HeaderTitle>
+      </Card.Header>
+      <Divider />
+      <Card.Content>
+        <Wrapper>
+          <Chip onClick={() => {}} icon={calendar_event}>
+            Add to calendar
+          </Chip>
+          <Chip onClick={() => {}} icon={directions}>
+            Get directions
+          </Chip>
+          <Chip onClick={() => {}} icon={share}>
+            Share event
+          </Chip>
+        </Wrapper>
+      </Card.Content>
+    </Card>
   ),
   parameters: {
     docs: {
+      description: {
+        story:
+          'Assist chips represent smart actions a product can surface for the user. They appear dynamically and contextually, predicting what the user might need.',
+      },
       source: {
-        code: `<Chip onClick={handleClick}>Default</Chip>
-<Chip onClick={handleClick} selected>Selected</Chip>
-<Chip onClick={handleClick} disabled>Disabled</Chip>
-<Chip onClick={handleClick} selected disabled>Disabled selected</Chip>`,
+        code: `import { calendar_event, directions, share } from '@equinor/eds-icons'
+
+<Chip onClick={handleAction} icon={calendar_event}>Add to calendar</Chip>
+<Chip onClick={handleAction} icon={directions}>Get directions</Chip>
+<Chip onClick={handleAction} icon={share}>Share event</Chip>`,
       },
     },
   },
 }
 
-export const Deletable: Story = {
-  render: () => (
-    <Wrapper>
-      <Chip onDelete={() => {}}>Default</Chip>
-      <Chip onDelete={() => {}} selected>
-        Selected
-      </Chip>
-      <Chip onDelete={() => {}} disabled>
-        Disabled
-      </Chip>
-    </Wrapper>
-  ),
-  parameters: {
-    docs: {
-      source: {
-        code: `<Chip onDelete={handleDelete}>Default</Chip>
-<Chip onDelete={handleDelete} selected>Selected</Chip>
-<Chip onDelete={handleDelete} disabled>Disabled</Chip>`,
-      },
-    },
-  },
-}
+/* ------------------------------------------------------------------ */
+/*  Filter chips                                                      */
+/* ------------------------------------------------------------------ */
 
-export const ClickableAndDeletable: Story = {
-  name: 'Clickable + Deletable',
-  render: () => (
-    <Wrapper>
-      <Chip onClick={() => {}} onDelete={() => {}}>
-        Default
-      </Chip>
-      <Chip onClick={() => {}} onDelete={() => {}} selected>
-        Selected
-      </Chip>
-    </Wrapper>
-  ),
-  parameters: {
-    docs: {
-      source: {
-        code: `<Chip onClick={handleClick} onDelete={handleDelete}>Default</Chip>
-<Chip onClick={handleClick} onDelete={handleDelete} selected>Selected</Chip>`,
-      },
-    },
-  },
-}
-
-export const WithIcon: Story = {
-  render: () => (
-    <Wrapper>
-      <Chip onClick={() => {}} icon={save}>
-        Default
-      </Chip>
-      <Chip onClick={() => {}} icon={save} selected>
-        Selected (checkmark)
-      </Chip>
-      <Chip onClick={() => {}} icon={save} disabled>
-        Disabled
-      </Chip>
-    </Wrapper>
-  ),
-  parameters: {
-    docs: {
-      source: {
-        code: `import { save } from '@equinor/eds-icons'
-
-<Chip onClick={handleClick} icon={save}>Default</Chip>
-<Chip onClick={handleClick} icon={save} selected>Selected (checkmark)</Chip>
-<Chip onClick={handleClick} icon={save} disabled>Disabled</Chip>`,
-      },
-    },
-  },
-}
-
-const SelectableChip = () => {
-  const [selected, setSelected] = useState(false)
-  return (
-    <Chip onClick={() => setSelected(!selected)} selected={selected}>
-      Toggle me
-    </Chip>
-  )
-}
-
-export const Selectable: Story = {
-  render: () => <SelectableChip />,
-  parameters: {
-    docs: {
-      source: {
-        code: `const [selected, setSelected] = useState(false)
-
-<Chip onClick={() => setSelected(!selected)} selected={selected}>
-  Toggle me
-</Chip>`,
-      },
-    },
-  },
-}
-
-const SelectableWithDeleteChip = () => {
-  const [selected, setSelected] = useState(false)
-  return (
-    <Chip
-      onClick={() => setSelected(!selected)}
-      onDelete={() => alert('Deleted!')}
-      selected={selected}
-    >
-      Toggle + delete
-    </Chip>
-  )
-}
-
-export const SelectableWithDelete: Story = {
-  name: 'Selectable + Deletable',
-  render: () => <SelectableWithDeleteChip />,
-  parameters: {
-    docs: {
-      source: {
-        code: `const [selected, setSelected] = useState(false)
-
-<Chip
-  onClick={() => setSelected(!selected)}
-  onDelete={() => alert('Deleted!')}
-  selected={selected}
->
-  Toggle + delete
-</Chip>`,
-      },
-    },
-  },
-}
-
-export const Dropdown: Story = {
-  render: () => (
-    <Wrapper>
-      <Chip onClick={() => {}} dropdown>
-        Category
-      </Chip>
-      <Chip onClick={() => {}} dropdown selected>
-        Category (selected)
-      </Chip>
-      <Chip onClick={() => {}} dropdown icon={save}>
-        With icon
-      </Chip>
-      <Chip onClick={() => {}} dropdown disabled>
-        Disabled
-      </Chip>
-    </Wrapper>
-  ),
-  parameters: {
-    docs: {
-      source: {
-        code: `{/* Dropdown renders a trailing arrow. Menu popover is handled by the consumer. */}
-<Chip onClick={openMenu} dropdown>Category</Chip>
-<Chip onClick={openMenu} dropdown selected>Category (selected)</Chip>
-<Chip onClick={openMenu} dropdown icon={save}>With icon</Chip>
-<Chip onClick={openMenu} dropdown disabled>Disabled</Chip>`,
-      },
-    },
-  },
-}
-
-const people = [
-  { id: 1, name: 'John Doe', img: 'https://i.pravatar.cc/48?img=1' },
-  { id: 2, name: 'Jane Smith', img: 'https://i.pravatar.cc/48?img=2' },
-  { id: 3, name: 'Alex Johnson', img: 'https://i.pravatar.cc/48?img=3' },
-  { id: 4, name: 'Sam Wilson', img: 'https://i.pravatar.cc/48?img=4' },
-  { id: 5, name: 'Casey Brown', img: 'https://i.pravatar.cc/48?img=5' },
+const filterOptions = [
+  'Technology',
+  'Design',
+  'Engineering',
+  'Science',
+  'Business',
 ]
 
-const MultiSelectChips = () => {
-  const [selected, setSelected] = useState<Set<number>>(new Set())
+const MultiSelectFilter = () => {
+  const [selected, setSelected] = useState<Set<string>>(new Set())
 
-  const toggle = (id: number) => {
+  const toggle = (option: string) => {
     setSelected((prev) => {
       const next = new Set(prev)
-      if (next.has(id)) {
-        next.delete(id)
+      if (next.has(option)) {
+        next.delete(option)
       } else {
-        next.add(id)
+        next.add(option)
       }
       return next
     })
@@ -269,67 +156,21 @@ const MultiSelectChips = () => {
 
   return (
     <Wrapper>
-      {people.map((person) => (
+      {filterOptions.map((option) => (
         <Chip
-          key={person.id}
-          onClick={() => toggle(person.id)}
-          onDelete={() =>
-            setSelected((prev) => {
-              const next = new Set(prev)
-              next.delete(person.id)
-              return next
-            })
-          }
-          selected={selected.has(person.id)}
-          showCheckIcon={false}
+          key={option}
+          onClick={() => toggle(option)}
+          selected={selected.has(option)}
         >
-          <Avatar src={person.img} alt={person.name} size={16} />
-          {person.name}
+          {option}
         </Chip>
       ))}
     </Wrapper>
   )
 }
 
-export const MultiSelect: Story = {
-  name: 'Multi-select (with avatars)',
-  render: () => <MultiSelectChips />,
-  parameters: {
-    docs: {
-      source: {
-        code: `import { Avatar } from '@equinor/eds-core-react'
-
-const [selected, setSelected] = useState<Set<number>>(new Set())
-
-const toggle = (id: number) => {
-  setSelected(prev => {
-    const next = new Set(prev)
-    next.has(id) ? next.delete(id) : next.add(id)
-    return next
-  })
-}
-
-{people.map(person => (
-  <Chip
-    key={person.id}
-    onClick={() => toggle(person.id)}
-    onDelete={() => setSelected(prev => { const next = new Set(prev); next.delete(person.id); return next })}
-    selected={selected.has(person.id)}
-    showCheckIcon={false}
-  >
-    <Avatar src={person.img} alt={person.name} size={16} />
-    {person.name}
-  </Chip>
-))}`,
-      },
-    },
-  },
-}
-
-const SingleSelectChips = () => {
+const SingleSelectFilter = () => {
   const [selected, setSelected] = useState<string | null>(null)
-
-  const options = ['Technology', 'Design', 'Engineering', 'Science', 'Business']
 
   return (
     <fieldset
@@ -338,7 +179,7 @@ const SingleSelectChips = () => {
       aria-label="Select a category"
     >
       <Wrapper>
-        {options.map((option) => (
+        {filterOptions.map((option) => (
           <Chip
             key={option}
             role="radio"
@@ -354,39 +195,214 @@ const SingleSelectChips = () => {
   )
 }
 
-export const SingleSelect: Story = {
-  name: 'Single-select',
-  render: () => <SingleSelectChips />,
+const DropdownFilter = () => (
+  <Wrapper>
+    <Chip onClick={() => {}} dropdown>
+      Category
+    </Chip>
+    <Chip onClick={() => {}} dropdown selected>
+      Category (active)
+    </Chip>
+    <Chip onClick={() => {}} dropdown icon={save}>
+      With icon
+    </Chip>
+    <Chip onClick={() => {}} dropdown disabled>
+      Disabled
+    </Chip>
+  </Wrapper>
+)
+
+export const Filter: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Multi-select
+        </Typography>
+        <MultiSelectFilter />
+      </div>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Single-select (radio group)
+        </Typography>
+        <SingleSelectFilter />
+      </div>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Dropdown
+        </Typography>
+        <DropdownFilter />
+      </div>
+    </div>
+  ),
   parameters: {
     docs: {
+      description: {
+        story:
+          'Filter chips let users refine content. They can be multi-select (checkboxes), single-select (radio group), or dropdown triggers.',
+      },
       source: {
-        code: `const [selected, setSelected] = useState<string | null>(null)
+        code: `{/* Multi-select */}
+const [selected, setSelected] = useState<Set<string>>(new Set())
 
-const options = ['Technology', 'Design', 'Engineering', 'Science', 'Business']
+<Chip onClick={() => toggle(option)} selected={selected.has(option)}>
+  {option}
+</Chip>
 
+{/* Single-select radio group */}
 <fieldset role="radiogroup" aria-label="Select a category">
-  {options.map(option => (
-    <Chip
-      key={option}
-      role="radio"
-      aria-checked={selected === option}
-      onClick={() => setSelected(option)}
-      selected={selected === option}
-    >
-      {option}
-    </Chip>
-  ))}
-</fieldset>`,
+  <Chip role="radio" aria-checked={selected === option}
+        onClick={() => setSelected(option)} selected={selected === option}>
+    {option}
+  </Chip>
+</fieldset>
+
+{/* Dropdown filter */}
+<Chip onClick={openMenu} dropdown>Category</Chip>`,
       },
     },
   },
 }
 
+/* ------------------------------------------------------------------ */
+/*  Input chips                                                       */
+/* ------------------------------------------------------------------ */
+
+const people = [
+  { id: 1, name: 'John Doe', img: 'https://i.pravatar.cc/48?img=1' },
+  { id: 2, name: 'Jane Smith', img: 'https://i.pravatar.cc/48?img=2' },
+  { id: 3, name: 'Alex Johnson', img: 'https://i.pravatar.cc/48?img=3' },
+  { id: 4, name: 'Sam Wilson', img: 'https://i.pravatar.cc/48?img=4' },
+  { id: 5, name: 'Casey Brown', img: 'https://i.pravatar.cc/48?img=5' },
+]
+
+const InputChips = () => {
+  const [visible, setVisible] = useState(people.map((p) => p.id))
+
+  const remove = (id: number) => {
+    setVisible((prev) => prev.filter((v) => v !== id))
+  }
+
+  return (
+    <Wrapper>
+      {people
+        .filter((p) => visible.includes(p.id))
+        .map((person) => (
+          <Chip key={person.id} onDelete={() => remove(person.id)}>
+            <Avatar src={person.img} alt={person.name} size={16} />
+            {person.name}
+          </Chip>
+        ))}
+    </Wrapper>
+  )
+}
+
+export const Input: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          People (deletable with avatar)
+        </Typography>
+        <InputChips />
+      </div>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Tags (deletable with icon)
+        </Typography>
+        <Wrapper>
+          <Chip onDelete={() => {}} icon={home}>
+            Home
+          </Chip>
+          <Chip onDelete={() => {}} icon={settings}>
+            Settings
+          </Chip>
+          <Chip onDelete={() => {}}>Plain tag</Chip>
+        </Wrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Input chips represent discrete pieces of information entered by the user, such as people in a "To" field or tags. They are always deletable.',
+      },
+      source: {
+        code: `import { Avatar } from '@equinor/eds-core-react'
+import { home, settings } from '@equinor/eds-icons'
+
+{/* People chips with avatars */}
+<Chip onDelete={() => remove(person.id)}>
+  <Avatar src={person.img} alt={person.name} size={16} />
+  {person.name}
+</Chip>
+
+{/* Tag chips with icons */}
+<Chip onDelete={handleDelete} icon={home}>Home</Chip>
+<Chip onDelete={handleDelete} icon={settings}>Settings</Chip>
+<Chip onDelete={handleDelete}>Plain tag</Chip>`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Suggestion chips                                                  */
+/* ------------------------------------------------------------------ */
+
+export const Suggestion: Story = {
+  render: () => {
+    const suggestions = [
+      'Quarterly report',
+      'Budget overview',
+      'Safety review',
+      'Project timeline',
+    ]
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <Typography variant="body_short" style={{ color: '#6F6F6F' }}>
+          Suggested searches
+        </Typography>
+        <Wrapper>
+          {suggestions.map((s) => (
+            <Chip key={s} onClick={() => {}}>
+              {s}
+            </Chip>
+          ))}
+        </Wrapper>
+      </div>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Suggestion chips surface dynamic recommendations. They appear below a text field or in a conversational UI to help users move forward.',
+      },
+      source: {
+        code: `const suggestions = ['Quarterly report', 'Budget overview', 'Safety review']
+
+{suggestions.map(s => (
+  <Chip key={s} onClick={handleClick}>{s}</Chip>
+))}`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Density                                                           */
+/* ------------------------------------------------------------------ */
+
 export const Density: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <div>
-        <h4 style={{ margin: '0 0 8px' }}>Spacious (default — 32px)</h4>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Spacious (default — 32 px)
+        </Typography>
         <Wrapper>
           <Chip onClick={() => {}}>Default</Chip>
           <Chip onClick={() => {}} selected>
@@ -399,7 +415,9 @@ export const Density: Story = {
         </Wrapper>
       </div>
       <div data-density="comfortable">
-        <h4 style={{ margin: '0 0 8px' }}>Comfortable (24px)</h4>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Comfortable (24 px)
+        </Typography>
         <Wrapper>
           <Chip onClick={() => {}}>Default</Chip>
           <Chip onClick={() => {}} selected>
@@ -415,8 +433,12 @@ export const Density: Story = {
   ),
   parameters: {
     docs: {
+      description: {
+        story:
+          'Wrap a parent element with `data-density="comfortable"` to render a compact 24 px variant.',
+      },
       source: {
-        code: `{/* Spacious (default) — 32px */}
+        code: `{/* Spacious (default) — 32 px */}
 <Chip onClick={handleClick}>Default</Chip>
 
 {/* Comfortable — wrap a parent with data-density="comfortable" */}

@@ -74,7 +74,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       data-deletable={deletable || undefined}
       data-dropdown={showDropdown || undefined}
       data-has-icon={hasIcon || undefined}
-      data-color-appearance={selected ? 'accent' : 'neutral'}
+      data-color-appearance={selected && !disabled ? 'accent' : 'neutral'}
       aria-disabled={disabled || undefined}
       aria-pressed={clickable ? selected : undefined}
       aria-haspopup={showDropdown ? 'menu' : undefined}
@@ -100,6 +100,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
         <button
           type="button"
           className="eds-chip__delete"
+          round="true"
           onClick={handleDeleteClick}
           disabled={disabled}
           aria-label="Remove"
