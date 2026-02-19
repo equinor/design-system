@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { close, check } from '@equinor/eds-icons'
+import { close, check, arrow_drop_down } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
 import type { ChipProps } from './Chip.types'
 import './chip.css'
@@ -18,6 +18,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     disabled = false,
     selected = false,
     icon,
+    dropdown = false,
     onClick,
     className,
     ...rest
@@ -30,6 +31,11 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
         'Chip: A chip must have at least one of `onClick` or `onDelete`.',
       )
     }
+    if (dropdown && onDelete) {
+      console.warn(
+        'Chip: `dropdown` and `onDelete` cannot be used together. `onDelete` takes precedence.',
+      )
+    }
   }
 
   const handleDelete = disabled ? undefined : onDelete
@@ -37,6 +43,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
 
   const deletable = onDelete !== undefined
   const clickable = onClick !== undefined
+  const showDropdown = dropdown && !deletable
   const leadingIcon = selected ? check : icon
   const hasIcon = leadingIcon !== undefined
 
@@ -65,9 +72,11 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       className={classes}
       data-selected={selected || undefined}
       data-deletable={deletable || undefined}
+      data-dropdown={showDropdown || undefined}
       data-has-icon={hasIcon || undefined}
       aria-disabled={disabled || undefined}
       aria-pressed={clickable ? selected : undefined}
+      aria-haspopup={showDropdown ? 'menu' : undefined}
       tabIndex={0}
       role={clickable ? 'button' : undefined}
       onClick={handleClick}
@@ -87,6 +96,14 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
         >
           <Icon data={close} size="xs" />
         </button>
+      )}
+      {showDropdown && (
+        <Icon
+          data={arrow_drop_down}
+          size="xs"
+          className="eds-chip__dropdown"
+          aria-hidden
+        />
       )}
     </div>
   )

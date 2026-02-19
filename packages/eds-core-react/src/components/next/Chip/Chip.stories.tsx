@@ -210,3 +210,33 @@ export const SelectableWithDelete: Story = {
     },
   },
 }
+
+export const Dropdown: Story = {
+  render: () => (
+    <Wrapper>
+      <Chip onClick={() => {}} dropdown>
+        Category
+      </Chip>
+      <Chip onClick={() => {}} dropdown selected>
+        Category (selected)
+      </Chip>
+      <Chip onClick={() => {}} dropdown icon={save}>
+        With icon
+      </Chip>
+      <Chip onClick={() => {}} dropdown disabled>
+        Disabled
+      </Chip>
+    </Wrapper>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `{/* Dropdown renders a trailing arrow. Menu popover is handled by the consumer. */}
+<Chip onClick={openMenu} dropdown>Category</Chip>
+<Chip onClick={openMenu} dropdown selected>Category (selected)</Chip>
+<Chip onClick={openMenu} dropdown icon={save}>With icon</Chip>
+<Chip onClick={openMenu} dropdown disabled>Disabled</Chip>`,
+      },
+    },
+  },
+}

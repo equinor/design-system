@@ -17,10 +17,18 @@ export type ChipProps = {
   /**
    * Callback fired when the delete icon is clicked.
    * When provided, a close button is rendered inside the chip.
+   * Cannot be used together with `dropdown`.
    */
   onDelete?: (
     event:
       | React.MouseEvent<HTMLButtonElement>
       | React.KeyboardEvent<HTMLDivElement>,
   ) => void
+  /**
+   * Whether the chip acts as a dropdown trigger.
+   * Renders a trailing dropdown arrow and sets `aria-haspopup="menu"`.
+   * The menu popover is not built in — consumers compose their own menu.
+   * Cannot be used together with `onDelete`.
+   */
+  dropdown?: boolean
 } & HTMLAttributes<HTMLDivElement>

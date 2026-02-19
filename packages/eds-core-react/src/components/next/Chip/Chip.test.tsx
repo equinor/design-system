@@ -150,6 +150,82 @@ describe('Chip (next)', () => {
     })
   })
 
+  describe('Dropdown', () => {
+    it('sets data-dropdown when dropdown is true', () => {
+      render(
+        <Chip onClick={jest.fn()} dropdown>
+          Dropdown
+        </Chip>,
+      )
+      expect(screen.getByText('Dropdown')).toHaveAttribute('data-dropdown')
+    })
+
+    it('does not set data-dropdown when dropdown is false', () => {
+      render(<Chip onClick={jest.fn()}>Plain</Chip>)
+      expect(screen.getByText('Plain')).not.toHaveAttribute('data-dropdown')
+    })
+
+    it('sets aria-haspopup="menu" when dropdown is true', () => {
+      render(
+        <Chip onClick={jest.fn()} dropdown>
+          Dropdown
+        </Chip>,
+      )
+      expect(screen.getByText('Dropdown')).toHaveAttribute(
+        'aria-haspopup',
+        'menu',
+      )
+    })
+
+    it('does not set aria-haspopup when dropdown is false', () => {
+      render(<Chip onClick={jest.fn()}>No dropdown</Chip>)
+      expect(screen.getByText('No dropdown')).not.toHaveAttribute(
+        'aria-haspopup',
+      )
+    })
+
+    it('onDelete takes precedence over dropdown', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation()
+      render(
+        <Chip onDelete={jest.fn()} dropdown>
+          Both
+        </Chip>,
+      )
+      const chip = screen.getByText('Both')
+      // onDelete wins: deletable shown, dropdown suppressed
+      expect(chip).toHaveAttribute('data-deletable')
+      expect(chip).not.toHaveAttribute('data-dropdown')
+      expect(chip).not.toHaveAttribute('aria-haspopup')
+      expect(
+        screen.getByRole('button', { name: /remove/i }),
+      ).toBeInTheDocument()
+      warnSpy.mockRestore()
+    })
+
+    it('renders dropdown arrow icon (not present without dropdown)', () => {
+      const { rerender } = render(<Chip onClick={jest.fn()}>No dropdown</Chip>)
+      const chipWithout = screen.getByText('No dropdown')
+      expect(chipWithout).not.toHaveAttribute('data-dropdown')
+
+      rerender(
+        <Chip onClick={jest.fn()} dropdown>
+          Has dropdown
+        </Chip>,
+      )
+      const chipWith = screen.getByText('Has dropdown')
+      expect(chipWith).toHaveAttribute('data-dropdown')
+    })
+
+    it('passes axe when dropdown', async () => {
+      const { container } = render(
+        <Chip onClick={jest.fn()} dropdown>
+          Dropdown
+        </Chip>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+  })
+
   describe('States', () => {
     it('sets aria-disabled when disabled', () => {
       render(
@@ -316,6 +392,19 @@ describe('Chip (next)', () => {
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation()
       render(<Chip onDelete={jest.fn()}>Has delete</Chip>)
       expect(warnSpy).not.toHaveBeenCalled()
+      warnSpy.mockRestore()
+    })
+
+    it('warns when both dropdown and onDelete are provided', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation()
+      render(
+        <Chip onDelete={jest.fn()} dropdown>
+          Both
+        </Chip>,
+      )
+      expect(warnSpy).toHaveBeenCalledWith(
+        'Chip: `dropdown` and `onDelete` cannot be used together. `onDelete` takes precedence.',
+      )
       warnSpy.mockRestore()
     })
   })

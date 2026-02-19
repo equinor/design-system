@@ -41,6 +41,17 @@
     padding-inline-end: 4px;
   }
 
+  /* ===== DROPDOWN (tighter end padding) ===== */
+
+  .eds-chip[data-dropdown] {
+    padding-inline-end: 4px;
+  }
+
+  .eds-chip__dropdown {
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
   /* ===== SELECTED (accent) ===== */
 
   .eds-chip[data-selected] {
