@@ -5,3 +5,10 @@ fieldset,
 legend {
   font-family: var(--eds-typography-ui-body-font-family), sans-serif;
 }
+
+/* Storybook color scheme wrapper */
+.eds-storybook-wrapper {
+  background-color: var(--eds-color-bg-neutral-surface);
+  padding: 1rem;
+  min-height: 100%;
+}
