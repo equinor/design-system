@@ -133,12 +133,17 @@ Spacing tokens define layout dimensions, gaps, and padding.
 
 ### Typography
 
-Typography tokens are currently handled separately and not synced from Figma:
+Typography tokens are synced from Figma (file key `FQQqyumcpPQoiFRCjdS9GM`) and built with the `build:variables:typography-and-spacing` script. Five independent axes, each controlled by a `data-*` attribute:
 
-- Font families (UI: Inter, Header: Equinor)
-- Font sizes (xs through 6xl)
-- Font weights, line heights, letter spacing (tracking)
-- Build with `build:variables:typography-and-spacing` script
+- **Font family** (`🅰️ Font family.*.json`) — `data-font-family`: `header`, `ui`
+- **Font size** (`🅰️ Font size.*.json`) — `data-font-size`: `xs`–`6xl` (also sets icon-size and gap)
+- **Font weight** (`🅰️ Font weight.*.json`) — `data-font-weight`: `lighter`, `normal`, `bolder`
+- **Line height** (`🅰️ Line height.*.json`) — `data-line-height`: `default`, `squished`
+- **Tracking** (`🅰️ Tracking.*.json`) — `data-tracking`: `tight`, `normal`, `wide`, `loose`
+
+Output: `build/css/typography/` (CSS) and `build/ts/typography/` (TypeScript nested objects)
+
+See [typography.md](../../packages/eds-tokens/instructions/typography.md) for details.
 
 ## Variable Collections and Modes
 
@@ -457,7 +462,7 @@ Script: `src/scripts/build-semantic-dynamic-variables.ts`
 pnpm run build:variables:typography-and-spacing
 ```
 
-Generates spacing and typography variables from spacing primitive/mode tokens and hardcoded typography values.
+Generates spacing and typography variables from spacing primitive/mode tokens and typography mode tokens synced from Figma. Produces CSS variables and nested TypeScript objects for typography.
 
 **Implementation:**  
 Package: `@equinor/eds-tokens`  
@@ -479,8 +484,9 @@ Runs the complete build pipeline:
 
 Output locations:
 
-- `build/css/` -- CSS variables
-- `build/js/` -- JavaScript/TypeScript exports
+- `build/css/` -- CSS variables (color, spacing, typography)
+- `build/js/` -- JavaScript exports (flat ES6)
+- `build/ts/` -- TypeScript exports (nested objects with `as const`)
 - `build/json/` -- JSON exports (flat and nested)
 
 ### Using Style Dictionary
@@ -489,14 +495,14 @@ The build system uses **Style Dictionary** to transform tokens into multiple for
 
 **Configuration:**
 
-Package: `@equinor/eds-tokens-build`  
-Utility: `src/utils/index.ts` (`createStyleDictionary()`)
+Package: `@equinor/eds-tokens-build`
+Utility: `src/utils/index.ts` (`_extend()`)
 
 **Custom Transforms:**
 
 | Transform     | Purpose                             | Example                  |
 | ------------- | ----------------------------------- | ------------------------ |
-| `lightDark`   | Creates `light-dark()` CSS function | `light-dark(#fff, #000)` |
+| `createLightDarkTransform` | Creates `light-dark()` CSS function | `light-dark(#fff, #000)` |
 | `pxToRem`     | Converts px to rem                  | `16px` → `1rem`          |
 | `pxTransform` | Formats as px                       | `16` → `16px`            |
 | `pxFormatted` | Formats specific tokens as px       | Font size in px          |
@@ -524,6 +530,7 @@ Style Dictionary generates multiple formats from the same token source:
     css: { /* CSS custom properties */ },
     js: { /* ES6 modules */ },
     ts: { /* TypeScript declarations */ },
+    tsNested: { /* Nested TypeScript objects with `as const` */ },
     json: { /* Flat and nested JSON */ }
   }
 }
@@ -533,31 +540,29 @@ Style Dictionary generates multiple formats from the same token source:
 
 The build system centralizes common logic in reusable utilities:
 
-**`createStyleDictionary()`**
+**`_extend()`**
 
 Creates a configured Style Dictionary instance with:
 
 - Custom transforms registered
 - Filters applied
-- Multiple output platforms
+- Multiple output platforms (css, ts, tsNested, json)
 - Consistent formatting
 
 **Implementation:**
 
 ```typescript
-import { createStyleDictionary } from '@equinor/eds-tokens-build'
+import { _extend } from '@equinor/eds-tokens-build'
 
-const sd = createStyleDictionary({
+const sd = _extend({
   source: ['tokens/**/*.json'],
-  platforms: {
-    css: {
-      transformGroup: 'css',
-      buildPath: 'build/css/',
-      files: [
-        /* ... */
-      ],
-    },
-  },
+  include: ['tokens/foundations/**/*.json'],
+  filter: (token) => includeTokenFilter(token, ['Light']),
+  buildPath: 'color/scheme/',
+  fileName: 'light-color-scheme',
+  selector: '[data-color-scheme="light"]',
+  prefix: 'eds-color',
+  rootName: 'color', // enables tsNested platform
 })
 
 await sd.buildAllPlatforms()
@@ -1004,9 +1009,11 @@ git diff build/
 | `data-space-proportions`      | `squished`, `square`, `stretched`                                       | Padding ratio           | `<div data-space-proportions="squished">`     |
 | `data-space-gap-horizontal`   | `none`, `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | Horizontal gap          | `<div data-space-gap-horizontal="md">`        |
 | `data-space-gap-vertical`     | `none`, `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | Vertical gap            | `<div data-space-gap-vertical="lg">`          |
-| `data-typography-font-family` | `ui`, `header`                                                          | Font family             | `<div data-typography-font-family="ui">`      |
-| `data-typography-font-size`   | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`         | Font size               | `<h1 data-typography-font-size="4xl">`        |
-| `data-typography-font-weight` | `regular`, `medium`, `bold`                                             | Font weight             | `<strong data-typography-font-weight="bold">` |
+| `data-font-family`            | `ui`, `header`                                                          | Font family             | `<div data-font-family="ui">`                 |
+| `data-font-size`              | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`         | Font size               | `<h1 data-font-size="4xl">`                   |
+| `data-font-weight`            | `lighter`, `normal`, `bolder`                                           | Font weight             | `<strong data-font-weight="bolder">`          |
+| `data-line-height`            | `default`, `squished`                                                   | Line height             | `<p data-line-height="squished">`             |
+| `data-tracking`               | `tight`, `normal`, `wide`, `loose`                                      | Letter spacing          | `<small data-tracking="wide">`                |
 
 ### Package Structure
 
@@ -1052,7 +1059,10 @@ packages/
 - `packages/eds-tokens/build/css/variables.min.css` -- All CSS variables (minified)
 - `packages/eds-tokens/build/css/color/` -- Color CSS variables
 - `packages/eds-tokens/build/css/spacing/` -- Spacing CSS variables
-- `packages/eds-tokens/build/js/color/` -- JavaScript exports
+- `packages/eds-tokens/build/css/typography/` -- Typography CSS variables
+- `packages/eds-tokens/build/js/color/` -- JavaScript exports (flat ES6)
+- `packages/eds-tokens/build/ts/color/` -- TypeScript color tokens (nested)
+- `packages/eds-tokens/build/ts/typography/` -- TypeScript typography tokens (nested)
 - `packages/eds-tokens/build/json/` -- JSON exports
 
 ### Related Documentation
@@ -1062,6 +1072,10 @@ packages/
 - [Color System Introduction](../../packages/eds-tokens/instructions/colors.md)
 - [Static Color Approach](../../packages/eds-tokens/instructions/colors-static.md)
 - [Dynamic Color Approach](../../packages/eds-tokens/instructions/colors-dynamic.md)
+
+**Typography System:**
+
+- [Typography System](../../packages/eds-tokens/instructions/typography.md)
 
 **Build System:**
 
@@ -1077,6 +1091,6 @@ packages/
 
 ---
 
-**Last Updated:** November 2025  
+**Last Updated:** February 2026  
 **Maintained By:** EDS Core Team  
 **Questions?** Contact: fg_eds@equinor.com
