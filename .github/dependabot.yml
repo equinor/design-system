@@ -10,6 +10,46 @@ updates:
       time: '05:00'
       timezone: Europe/Oslo
     groups:
+      storybook:
+        patterns:
+          - 'storybook'
+          - '@storybook/*'
+          - 'eslint-plugin-storybook'
+        update-types:
+          - major
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+        update-types:
+          - major
+      react-aria:
+        patterns:
+          - 'react-aria'
+          - '@react-aria/*'
+          - '@react-stately/*'
+          - '@react-types/*'
+          - '@internationalized/*'
+        update-types:
+          - major
+      rollup:
+        patterns:
+          - 'rollup'
+          - '@rollup/*'
+          - 'rollup-plugin-*'
+        update-types:
+          - major
+      testing:
+        patterns:
+          - 'jest'
+          - 'jest-*'
+          - '@testing-library/*'
+          - '@types/jest'
+          - '@playwright/test'
+        update-types:
+          - major
       all-dependencies:
         patterns:
           - '*'
