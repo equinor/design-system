@@ -1,5 +1,5 @@
 {
-  "packages/eds-core-react": "2.4.0",
+  "packages/eds-core-react": "2.3.5",
   "packages/eds-core-react/src/components/next": "2.3.2-beta.0",
   "packages/eds-data-grid-react": "1.2.3",
   "packages/eds-icons": "1.2.2",

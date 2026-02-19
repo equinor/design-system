@@ -5,13 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.4.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.5...eds-core-react@v2.4.0) (2026-02-19)
-
-
-### ✨ Added
-
-* **eds-core-react:** add dark mode toggle to Storybook ([#4535](https://github.com/equinor/design-system/issues/4535)) ([64798c0](https://github.com/equinor/design-system/commit/64798c0ceae2da4c5e9bd7bcbc78503070cf1565))
-
 ## [2.3.5](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.4...eds-core-react@v2.3.5) (2026-02-11)
 
 
