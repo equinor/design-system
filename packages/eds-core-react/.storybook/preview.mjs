@@ -5,6 +5,21 @@ import '../src/components/next/index.css'
 const preview = {
   viewMode: 'docs',
 
+  globalTypes: {
+    colorScheme: {
+      description: 'Color scheme for components',
+      toolbar: {
+        title: 'Color Scheme',
+        icon: 'mirror',
+        items: [
+          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: 'Dark', icon: 'moon' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+
   initialGlobals: {
     colorScheme: 'light',
   },
