@@ -100,7 +100,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
         <button
           type="button"
           className="eds-chip__delete"
-          round="true"
+          data-round
           onClick={handleDeleteClick}
           disabled={disabled}
           aria-label="Remove"
