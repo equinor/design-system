@@ -1,18 +1,19 @@
-import { useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   save,
+  search,
   calendar_event,
   share,
   directions,
-  settings,
-  home,
 } from '@equinor/eds-icons'
 import { Chip } from './Chip'
 import { Avatar } from '../../Avatar'
 import { Card } from '../../Card'
 import { Divider } from '../../Divider'
 import { Typography } from '../../Typography'
+import { TextField } from '../TextField'
+import { Icon as EdsIcon } from '../Icon'
 import type { ChipProps } from './Chip.types'
 
 type StoryArgs = ChipProps
@@ -131,16 +132,38 @@ export const Assist: Story = {
 /*  Filter chips                                                      */
 /* ------------------------------------------------------------------ */
 
-const filterOptions = [
-  'Technology',
-  'Design',
-  'Engineering',
-  'Science',
-  'Business',
+const products = [
+  'Johan Sverdrup',
+  'Åsgard Blend',
+  'Troll Blend',
+  'Grane Blend',
+  'Oseberg Blend',
 ]
 
-const MultiSelectFilter = () => {
+const dischargePorts = [
+  'Rotterdam',
+  'Mongstad',
+  'Wilhelmshaven',
+  'Teesside',
+  'Gothenburg',
+]
+
+const loadPorts = ['Mongstad', 'Sture', 'Kårstø', 'Stureterminalen', 'Kollsnes']
+
+/**
+ * Reusable popover-based multiselect dropdown chip.
+ * Uses the native Popover API for the menu.
+ */
+const DropdownChip = ({
+  label,
+  options,
+}: {
+  label: string
+  options: string[]
+}) => {
   const [selected, setSelected] = useState<Set<string>>(new Set())
+  const popoverId = useId()
+  const chipRef = useRef<HTMLDivElement>(null)
 
   const toggle = (option: string) => {
     setSelected((prev) => {
@@ -154,111 +177,129 @@ const MultiSelectFilter = () => {
     })
   }
 
-  return (
-    <Wrapper>
-      {filterOptions.map((option) => (
-        <Chip
-          key={option}
-          onClick={() => toggle(option)}
-          selected={selected.has(option)}
-        >
-          {option}
-        </Chip>
-      ))}
-    </Wrapper>
-  )
-}
+  const hasSelection = selected.size > 0
+  const chipLabel =
+    hasSelection && selected.size <= 2
+      ? [...selected].join(' and ')
+      : hasSelection
+        ? `${[...selected][0]} +${selected.size - 1}`
+        : label
 
-const SingleSelectFilter = () => {
-  const [selected, setSelected] = useState<string | null>(null)
+  const handleChipClick = () => {
+    const el = document.getElementById(popoverId)
+    if (el) el.togglePopover()
+  }
 
   return (
-    <fieldset
-      style={{ border: 'none', padding: 0, margin: 0 }}
-      role="radiogroup"
-      aria-label="Select a category"
-    >
-      <Wrapper>
-        {filterOptions.map((option) => (
-          <Chip
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <Chip
+        ref={chipRef}
+        onClick={handleChipClick}
+        dropdown
+        selected={hasSelection}
+        showCheckIcon={false}
+      >
+        {chipLabel}
+      </Chip>
+      <div
+        id={popoverId}
+        popover="auto"
+        style={{
+          position: 'absolute',
+          inset: 'unset',
+          top: '100%',
+          left: 0,
+          marginTop: 4,
+          minWidth: 200,
+          background: 'var(--eds-color-bg-default, #fff)',
+          border: '1px solid var(--eds-color-border-medium, #ddd)',
+          borderRadius: 4,
+          boxShadow: '0 2px 8px rgba(0,0,0,.12)',
+          padding: '4px 0',
+          zIndex: 10,
+        }}
+      >
+        {options.map((option) => (
+          <label
             key={option}
-            role="radio"
-            aria-checked={selected === option}
-            onClick={() => setSelected(option)}
-            selected={selected === option}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '8px 12px',
+              cursor: 'pointer',
+              fontSize: '0.875rem',
+            }}
           >
+            <input
+              type="checkbox"
+              checked={selected.has(option)}
+              onChange={() => toggle(option)}
+            />
             {option}
-          </Chip>
+          </label>
         ))}
-      </Wrapper>
-    </fieldset>
-  )
-}
-
-const DropdownFilter = () => (
-  <Wrapper>
-    <Chip onClick={() => {}} dropdown>
-      Category
-    </Chip>
-    <Chip onClick={() => {}} dropdown selected>
-      Category (active)
-    </Chip>
-    <Chip onClick={() => {}} dropdown icon={save}>
-      With icon
-    </Chip>
-    <Chip onClick={() => {}} dropdown disabled>
-      Disabled
-    </Chip>
-  </Wrapper>
-)
-
-export const Filter: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      <div>
-        <Typography variant="h6" style={{ marginBottom: 8 }}>
-          Multi-select
-        </Typography>
-        <MultiSelectFilter />
-      </div>
-      <div>
-        <Typography variant="h6" style={{ marginBottom: 8 }}>
-          Single-select (radio group)
-        </Typography>
-        <SingleSelectFilter />
-      </div>
-      <div>
-        <Typography variant="h6" style={{ marginBottom: 8 }}>
-          Dropdown
-        </Typography>
-        <DropdownFilter />
       </div>
     </div>
-  ),
+  )
+}
+
+const CargoFilterBar = () => {
+  const [isCompleted, setIsCompleted] = useState(false)
+  const [isEquinorChartered, setIsEquinorChartered] = useState(false)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <TextField
+        label="Search"
+        placeholder="Search for cargos"
+        startAdornment={<EdsIcon data={search} size="sm" />}
+      />
+      <Wrapper>
+        <DropdownChip label="Product" options={products} />
+        <Chip
+          onClick={() => setIsCompleted(!isCompleted)}
+          selected={isCompleted}
+        >
+          Is completed
+        </Chip>
+        <DropdownChip label="Discharge port" options={dischargePorts} />
+        <DropdownChip label="Load port" options={loadPorts} />
+        <Chip
+          onClick={() => setIsEquinorChartered(!isEquinorChartered)}
+          selected={isEquinorChartered}
+        >
+          Is Equinor chartered
+        </Chip>
+      </Wrapper>
+    </div>
+  )
+}
+
+export const Filter: Story = {
+  render: () => <CargoFilterBar />,
   parameters: {
     docs: {
       description: {
         story:
-          'Filter chips let users refine content. They can be multi-select (checkboxes), single-select (radio group), or dropdown triggers.',
+          'Filter chips let users refine content. Dropdown chips open a multiselect popover and update their label with the selection. Boolean chips toggle a selected state with a checkmark.',
       },
       source: {
-        code: `{/* Multi-select */}
-const [selected, setSelected] = useState<Set<string>>(new Set())
+        code: `import { search } from '@equinor/eds-icons'
+import { TextField } from '@equinor/eds-core-react/next'
 
-<Chip onClick={() => toggle(option)} selected={selected.has(option)}>
-  {option}
+<TextField label="Search" placeholder="Search for cargos"
+  startAdornment={<Icon data={search} size="sm" />} />
+
+{/* Dropdown multiselect chip */}
+<Chip onClick={togglePopover} dropdown selected={hasSelection} showCheckIcon={false}>
+  {hasSelection ? selectedItems.join(' and ') : 'Product'}
 </Chip>
 
-{/* Single-select radio group */}
-<fieldset role="radiogroup" aria-label="Select a category">
-  <Chip role="radio" aria-checked={selected === option}
-        onClick={() => setSelected(option)} selected={selected === option}>
-    {option}
-  </Chip>
-</fieldset>
-
-{/* Dropdown filter */}
-<Chip onClick={openMenu} dropdown>Category</Chip>`,
+{/* Boolean filter chip */}
+<Chip onClick={() => setCompleted(!completed)} selected={completed}>
+  Is completed
+</Chip>`,
       },
     },
   },
@@ -298,50 +339,20 @@ const InputChips = () => {
 }
 
 export const Input: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      <div>
-        <Typography variant="h6" style={{ marginBottom: 8 }}>
-          People (deletable with avatar)
-        </Typography>
-        <InputChips />
-      </div>
-      <div>
-        <Typography variant="h6" style={{ marginBottom: 8 }}>
-          Tags (deletable with icon)
-        </Typography>
-        <Wrapper>
-          <Chip onDelete={() => {}} icon={home}>
-            Home
-          </Chip>
-          <Chip onDelete={() => {}} icon={settings}>
-            Settings
-          </Chip>
-          <Chip onDelete={() => {}}>Plain tag</Chip>
-        </Wrapper>
-      </div>
-    </div>
-  ),
+  render: () => <InputChips />,
   parameters: {
     docs: {
       description: {
         story:
-          'Input chips represent discrete pieces of information entered by the user, such as people in a "To" field or tags. They are always deletable.',
+          'Input chips represent discrete pieces of information entered by the user, such as people in a "To" field. They are always deletable.',
       },
       source: {
         code: `import { Avatar } from '@equinor/eds-core-react'
-import { home, settings } from '@equinor/eds-icons'
 
-{/* People chips with avatars */}
 <Chip onDelete={() => remove(person.id)}>
   <Avatar src={person.img} alt={person.name} size={16} />
   {person.name}
-</Chip>
-
-{/* Tag chips with icons */}
-<Chip onDelete={handleDelete} icon={home}>Home</Chip>
-<Chip onDelete={handleDelete} icon={settings}>Settings</Chip>
-<Chip onDelete={handleDelete}>Plain tag</Chip>`,
+</Chip>`,
       },
     },
   },
