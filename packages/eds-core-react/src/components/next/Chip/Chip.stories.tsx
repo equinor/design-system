@@ -19,9 +19,8 @@ const meta: Meta<StoryArgs> = {
       control: 'boolean',
       description: 'Disabled state',
     },
-    variant: {
-      table: { disable: true },
-    },
+    // Hide auto-detected 'variant' from HTML attributes
+    ...({ variant: { table: { disable: true } } } as Record<string, unknown>),
   },
   args: {
     selected: false,
@@ -378,6 +377,52 @@ const options = ['Technology', 'Design', 'Engineering', 'Science', 'Business']
     </Chip>
   ))}
 </fieldset>`,
+      },
+    },
+  },
+}
+
+export const Density: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>Spacious (default — 32px)</h4>
+        <Wrapper>
+          <Chip onClick={() => {}}>Default</Chip>
+          <Chip onClick={() => {}} selected>
+            Selected
+          </Chip>
+          <Chip onClick={() => {}} icon={save}>
+            With icon
+          </Chip>
+          <Chip onDelete={() => {}}>Deletable</Chip>
+        </Wrapper>
+      </div>
+      <div data-density="comfortable">
+        <h4 style={{ margin: '0 0 8px' }}>Comfortable (24px)</h4>
+        <Wrapper>
+          <Chip onClick={() => {}}>Default</Chip>
+          <Chip onClick={() => {}} selected>
+            Selected
+          </Chip>
+          <Chip onClick={() => {}} icon={save}>
+            With icon
+          </Chip>
+          <Chip onDelete={() => {}}>Deletable</Chip>
+        </Wrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `{/* Spacious (default) — 32px */}
+<Chip onClick={handleClick}>Default</Chip>
+
+{/* Comfortable — wrap a parent with data-density="comfortable" */}
+<div data-density="comfortable">
+  <Chip onClick={handleClick}>Default</Chip>
+</div>`,
       },
     },
   },

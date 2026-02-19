@@ -8,21 +8,30 @@
 
     box-sizing: border-box;
     width: fit-content;
-    height: 22px;
-    padding-inline: 8px;
+    height: 2rem; /* 32px */
+    padding-inline: 12px;
     border: 1px solid var(--eds-color-border-medium);
     border-radius: var(--eds-spacing-border-radius-pill, 100px);
 
     font-family: var(--eds-typography-ui-sm-font-family, 'Equinor', sans-serif);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    line-height: 1.333em;
+    line-height: 1.25em;
 
     background: transparent;
 
     cursor: default;
     color: var(--eds-color-text-subtle);
     user-select: none;
+  }
+
+  /* ===== COMFORTABLE DENSITY ===== */
+
+  [data-density='comfortable'] .eds-chip {
+    height: 1.5rem; /* 24px */
+    padding-inline: 8px;
+    font-size: 0.75rem;
+    line-height: 1.333em;
   }
 
   .eds-chip[role='button'],
