@@ -23,6 +23,7 @@
     cursor: default;
     color: var(--eds-color-text-subtle);
     user-select: none;
+    transition: padding-inline-start 150ms linear;
   }
 
   /* ===== COMFORTABLE DENSITY ===== */
@@ -48,7 +49,6 @@
 
   .eds-chip[data-has-icon] {
     padding-inline-start: 4px;
-    transition: padding-inline-start 150ms ease-out;
   }
 
   /* ===== DELETABLE (tighter end padding) ===== */

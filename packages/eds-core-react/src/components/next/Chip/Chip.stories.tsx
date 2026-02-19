@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react'
+import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   save,
@@ -11,8 +11,10 @@ import { Chip } from './Chip'
 import { Avatar } from '../../Avatar'
 import { Card } from '../../Card'
 import { Divider } from '../../Divider'
+import { Menu } from '../../Menu'
 import { Typography } from '../../Typography'
 import { TextField } from '../TextField'
+import { Checkbox } from '../Checkbox'
 import { Icon as EdsIcon } from '../Icon'
 import type { ChipProps } from './Chip.types'
 
@@ -82,7 +84,7 @@ export const Assist: Story = {
     <Card elevation="raised" style={{ maxWidth: 340 }}>
       <Card.Media fullWidth>
         <img
-          src="https://i.imgur.com/UM3mrju.jpg"
+          src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2312&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Conference hall with stage lighting"
           style={{ width: '100%', display: 'block' }}
         />
@@ -151,8 +153,8 @@ const dischargePorts = [
 const loadPorts = ['Mongstad', 'Sture', 'Kårstø', 'Stureterminalen', 'Kollsnes']
 
 /**
- * Reusable popover-based multiselect dropdown chip.
- * Uses the native Popover API for the menu.
+ * Reusable multiselect dropdown chip.
+ * Uses the EDS Menu component for the dropdown.
  */
 const DropdownChip = ({
   label,
@@ -162,8 +164,8 @@ const DropdownChip = ({
   options: string[]
 }) => {
   const [selected, setSelected] = useState<Set<string>>(new Set())
-  const popoverId = useId()
-  const chipRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null)
 
   const toggle = (option: string) => {
     setSelected((prev) => {
@@ -178,69 +180,49 @@ const DropdownChip = ({
   }
 
   const hasSelection = selected.size > 0
-  const chipLabel =
-    hasSelection && selected.size <= 2
-      ? [...selected].join(' and ')
-      : hasSelection
-        ? `${[...selected][0]} +${selected.size - 1}`
-        : label
-
-  const handleChipClick = () => {
-    const el = document.getElementById(popoverId)
-    if (el) el.togglePopover()
-  }
+  const chipLabel = hasSelection
+    ? selected.size <= 2
+      ? `${label} is ${[...selected].join(' and ')}`
+      : `${label} is ${[...selected][0]} +${selected.size - 1}`
+    : label
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <>
       <Chip
-        ref={chipRef}
-        onClick={handleChipClick}
+        ref={setAnchorEl}
+        onClick={() => setOpen((prev) => !prev)}
         dropdown
         selected={hasSelection}
-        showCheckIcon={false}
       >
         {chipLabel}
       </Chip>
-      <div
-        id={popoverId}
-        popover="auto"
-        style={{
-          position: 'absolute',
-          inset: 'unset',
-          top: '100%',
-          left: 0,
-          marginTop: 4,
-          minWidth: 200,
-          background: 'var(--eds-color-bg-default, #fff)',
-          border: '1px solid var(--eds-color-border-medium, #ddd)',
-          borderRadius: 4,
-          boxShadow: '0 2px 8px rgba(0,0,0,.12)',
-          padding: '4px 0',
-          zIndex: 10,
-        }}
+      <Menu
+        open={open}
+        anchorEl={anchorEl}
+        onClose={() => setOpen(false)}
+        placement="bottom-start"
       >
         {options.map((option) => (
-          <label
+          <Menu.Item
             key={option}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '8px 12px',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-            }}
+            active={selected.has(option)}
+            onClick={() => toggle(option)}
+            closeMenuOnClick={false}
           >
-            <input
-              type="checkbox"
+            <Checkbox
               checked={selected.has(option)}
-              onChange={() => toggle(option)}
+              readOnly
+              style={
+                {
+                  '--_checkbox-touch-target': 'var(--_checkbox-icon-size)',
+                } as React.CSSProperties
+              }
             />
             {option}
-          </label>
+          </Menu.Item>
         ))}
-      </div>
-    </div>
+      </Menu>
+    </>
   )
 }
 
@@ -286,15 +268,23 @@ export const Filter: Story = {
       },
       source: {
         code: `import { search } from '@equinor/eds-icons'
-import { TextField } from '@equinor/eds-core-react/next'
+import { Menu } from '@equinor/eds-core-react'
+import { TextField, Icon } from '@equinor/eds-core-react/next'
 
 <TextField label="Search" placeholder="Search for cargos"
   startAdornment={<Icon data={search} size="sm" />} />
 
-{/* Dropdown multiselect chip */}
-<Chip onClick={togglePopover} dropdown selected={hasSelection} showCheckIcon={false}>
-  {hasSelection ? selectedItems.join(' and ') : 'Product'}
+{/* Dropdown multiselect chip with EDS Menu */}
+<Chip ref={setAnchorEl} onClick={() => setOpen(!open)} dropdown selected={hasSelection}>
+  {chipLabel}
 </Chip>
+<Menu open={open} anchorEl={anchorEl} onClose={() => setOpen(false)} placement="bottom-start">
+  {options.map(option => (
+    <Menu.Item key={option} active={selected.has(option)} onClick={() => toggle(option)}>
+      {option}
+    </Menu.Item>
+  ))}
+</Menu>
 
 {/* Boolean filter chip */}
 <Chip onClick={() => setCompleted(!completed)} selected={completed}>
@@ -362,41 +352,249 @@ export const Input: Story = {
 /*  Suggestion chips                                                  */
 /* ------------------------------------------------------------------ */
 
-export const Suggestion: Story = {
-  render: () => {
-    const suggestions = [
-      'Quarterly report',
-      'Budget overview',
-      'Safety review',
-      'Project timeline',
-    ]
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <Typography variant="body_short" style={{ color: '#6F6F6F' }}>
-          Suggested searches
+const ChatMessage = ({
+  name,
+  src,
+  time,
+  children,
+  align = 'left',
+}: {
+  name: string
+  src: string
+  time: string
+  children: React.ReactNode
+  align?: 'left' | 'right'
+}) => (
+  <div
+    style={{
+      display: 'flex',
+      gap: 8,
+      flexDirection: align === 'right' ? 'row-reverse' : 'row',
+      alignItems: 'flex-start',
+    }}
+  >
+    <Avatar alt={name} src={src} size={32} />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        alignItems: align === 'right' ? 'flex-end' : 'flex-start',
+      }}
+    >
+      <div style={{ display: 'flex', gap: 8, alignItems: 'baseline' }}>
+        <Typography
+          variant="label"
+          group="navigation"
+          style={{ fontWeight: 600, fontSize: '0.8125rem' }}
+        >
+          {name}
         </Typography>
-        <Wrapper>
-          {suggestions.map((s) => (
-            <Chip key={s} onClick={() => {}}>
-              {s}
-            </Chip>
-          ))}
-        </Wrapper>
+        <Typography
+          variant="meta"
+          style={{ color: 'var(--eds-color-text-subtle)', fontSize: '0.75rem' }}
+        >
+          {time}
+        </Typography>
       </div>
-    )
-  },
+      <div
+        style={{
+          background: 'var(--eds-color-bg-subtle, #f5f5f5)',
+          borderRadius: 8,
+          padding: '8px 12px',
+          maxWidth: 280,
+        }}
+      >
+        <Typography variant="body_short">{children}</Typography>
+      </div>
+    </div>
+  </div>
+)
+
+const SuggestionChat = () => {
+  const [messages, setMessages] = useState<
+    {
+      id: number
+      name: string
+      src: string
+      time: string
+      text: string
+      align: 'left' | 'right'
+    }[]
+  >([
+    {
+      id: 1,
+      name: 'Ola Nordmann',
+      src: 'https://plus.unsplash.com/premium_photo-1739786996060-2769f1ded135?q=80&w=80&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      time: '15:00',
+      text: 'Fine and you?',
+      align: 'left',
+    },
+    {
+      id: 2,
+      name: 'James Doe',
+      src: 'https://plus.unsplash.com/premium_photo-1739786995646-480d5cfd83dc?q=80&w=80&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      time: '16:27',
+      text: 'Did you get that report?',
+      align: 'left',
+    },
+  ])
+  const [suggestions, setSuggestions] = useState([
+    'Not yet',
+    'Let me check',
+    'Yes, I did',
+  ])
+
+  const handleSuggestion = (text: string) => {
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        name: 'You',
+        src: 'https://plus.unsplash.com/premium_photo-1739786996040-32bde1db0610?q=80&w=80&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        time: '16:28',
+        text,
+        align: 'right',
+      },
+    ])
+    setSuggestions([])
+  }
+
+  return (
+    <Card
+      elevation="raised"
+      style={{
+        maxWidth: 420,
+        height: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
+      <Card.Content style={{ flex: 1, overflow: 'auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {messages.map((msg) => (
+            <ChatMessage
+              key={msg.id}
+              name={msg.name}
+              src={msg.src}
+              time={msg.time}
+              align={msg.align}
+            >
+              {msg.text}
+            </ChatMessage>
+          ))}
+        </div>
+      </Card.Content>
+      <Divider />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+          padding: '8px 16px 12px',
+        }}
+      >
+        {suggestions.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: 8,
+            }}
+          >
+            {suggestions.map((s) => (
+              <Chip key={s} onClick={() => handleSuggestion(s)}>
+                {s}
+              </Chip>
+            ))}
+          </div>
+        )}
+        <TextField placeholder="Type a new message" />
+      </div>
+    </Card>
+  )
+}
+
+export const Suggestion: Story = {
+  render: () => <SuggestionChat />,
   parameters: {
     docs: {
       description: {
         story:
-          'Suggestion chips surface dynamic recommendations. They appear below a text field or in a conversational UI to help users move forward.',
+          'Suggestion chips surface dynamic reply options in a conversational UI. Clicking a chip sends that reply. They disappear once used.',
       },
       source: {
-        code: `const suggestions = ['Quarterly report', 'Budget overview', 'Safety review']
+        code: `const replies = ['Not yet', 'Let me check', 'Yes, I did']
 
-{suggestions.map(s => (
-  <Chip key={s} onClick={handleClick}>{s}</Chip>
+{replies.map(reply => (
+  <Chip key={reply} onClick={() => sendReply(reply)}>
+    {reply}
+  </Chip>
+))}`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Suggestion (single select)                                        */
+/* ------------------------------------------------------------------ */
+
+const suggestedProducts = [
+  'Johan Sverdrup',
+  'Åsgard Blend',
+  'Troll Blend',
+  'Grane Blend',
+  'Oseberg Blend',
+]
+
+const ProductSelector = () => {
+  const [selected, setSelected] = useState<string | null>(null)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Typography variant="h6">Select a product</Typography>
+      <Wrapper>
+        {suggestedProducts.map((product) => (
+          <Chip
+            key={product}
+            onClick={() => setSelected(product)}
+            selected={selected === product}
+          >
+            {product}
+          </Chip>
+        ))}
+      </Wrapper>
+      {selected && (
+        <Typography variant="body_short">
+          You selected <strong>{selected}</strong>
+        </Typography>
+      )}
+    </div>
+  )
+}
+
+export const SuggestionSingleSelect: Story = {
+  name: 'Suggestion (single select)',
+  render: () => <ProductSelector />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Suggestion chips can also be used for single-select scenarios. Only one chip can be selected at a time, indicated by the checkmark and accent styling.',
+      },
+      source: {
+        code: `const [selected, setSelected] = useState(null)
+
+{products.map(product => (
+  <Chip
+    key={product}
+    onClick={() => setSelected(product)}
+    selected={selected === product}
+  >
+    {product}
+  </Chip>
 ))}`,
       },
     },
