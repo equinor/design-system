@@ -148,12 +148,18 @@
     align-items: center;
     justify-content: center;
 
-    padding: 1px;
-    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 
     cursor: pointer;
 
     color: inherit;
+  }
+
+  [data-density='comfortable'] .eds-chip__delete {
+    width: 16px;
+    height: 16px;
   }
 
   .eds-chip__delete:disabled {
