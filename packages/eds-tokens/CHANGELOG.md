@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.2.0...eds-tokens@v2.2.1) (2026-02-19)
+
+
+### 📝 Changed
+
+* **eds-tokens:** add CLAUDE.md to token packages ([#4527](https://github.com/equinor/design-system/issues/4527)) ([83ee0f0](https://github.com/equinor/design-system/commit/83ee0f0d4541b63ace2d57aeb105c58703a3581f))
+
 ## [2.2.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.1.1...eds-tokens@v2.2.0) (2026-02-17)
 
 
