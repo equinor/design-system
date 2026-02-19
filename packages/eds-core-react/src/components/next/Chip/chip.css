@@ -87,9 +87,9 @@
     opacity: 0;
     margin-inline-end: -8px; /* cancel flex gap when collapsed */
     transition:
-      width 150ms ease-out,
-      opacity 150ms ease-out,
-      margin 150ms ease-out;
+      width 150ms linear,
+      opacity 150ms linear,
+      margin 150ms linear;
   }
 
   .eds-chip__check[data-active] {
