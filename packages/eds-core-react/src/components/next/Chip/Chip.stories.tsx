@@ -780,3 +780,60 @@ export const Density: Story = {
     },
   },
 }
+
+/* ------------------------------------------------------------------ */
+/*  Tags                                                              */
+/* ------------------------------------------------------------------ */
+
+const ShippingTags = () => {
+  const [tags, setTags] = useState([
+    { label: 'Delayed', color: 'warning' as const },
+    { label: 'Cancelled', color: 'danger' as const },
+    { label: 'In transit', color: 'info' as const },
+    { label: 'Delivered', color: 'success' as const },
+    { label: 'Awaiting pickup', color: 'spruce-wood' as const },
+    { label: 'Customs hold', color: 'purple-berry' as const },
+    { label: 'Rerouted', color: 'blue-overcast' as const },
+    { label: 'Confirmed', color: 'moss-green' as const },
+  ])
+
+  const remove = (label: string) => {
+    setTags((prev) => prev.filter((t) => t.label !== label))
+  }
+
+  return (
+    <Wrapper>
+      {tags.map((tag) => (
+        <Chip key={tag.label} color={tag.color} onDelete={() => remove(tag.label)}>
+          {tag.label}
+        </Chip>
+      ))}
+    </Wrapper>
+  )
+}
+
+export const Tags: Story = {
+  render: () => <ShippingTags />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Colored deletable chips work well as status tags. Each tag uses a different color to visually distinguish shipping statuses at a glance.',
+      },
+      source: {
+        code: `const tags = [
+  { label: 'Delayed', color: 'warning' },
+  { label: 'Cancelled', color: 'danger' },
+  { label: 'In transit', color: 'info' },
+  { label: 'Delivered', color: 'success' },
+]
+
+{tags.map(tag => (
+  <Chip key={tag.label} color={tag.color} onDelete={() => remove(tag.label)}>
+    {tag.label}
+  </Chip>
+))}`,
+      },
+    },
+  },
+}
