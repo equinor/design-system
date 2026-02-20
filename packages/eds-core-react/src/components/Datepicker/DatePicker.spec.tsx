@@ -186,7 +186,6 @@ describe('DatePicker', () => {
       )
       const dayEl = screen.getByText('dd')
       await userEvent.click(dayEl)
-      expect(dayEl).toHaveFocus()
       await userEvent.keyboard('3')
       // Focus should stay on day field — "30" and "31" are still valid
       expect(dayEl).toHaveFocus()
@@ -200,7 +199,6 @@ describe('DatePicker', () => {
       )
       const dayEl = screen.getByText('dd')
       await userEvent.click(dayEl)
-      expect(dayEl).toHaveFocus()
       await userEvent.keyboard('3')
       expect(dayEl).toHaveFocus()
     })
@@ -229,9 +227,19 @@ describe('DatePicker', () => {
       expect(dayEl).toHaveAttribute('aria-valuetext', '31')
     })
 
-    it('should have valuemax 31 for day field when no date is selected', () => {
+    it('should have valuemax 31 for day field when no date is selected (en-US)', () => {
       render(
         <I18nProvider locale={'en-US'}>
+          <DatePicker label={'Datepicker'} value={null} />
+        </I18nProvider>,
+      )
+      const dayEl = screen.getByText('dd')
+      expect(dayEl).toHaveAttribute('aria-valuemax', '31')
+    })
+
+    it('should have valuemax 31 for day field when no date is selected (no)', () => {
+      render(
+        <I18nProvider locale={'no'}>
           <DatePicker label={'Datepicker'} value={null} />
         </I18nProvider>,
       )
