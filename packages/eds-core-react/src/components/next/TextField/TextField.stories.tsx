@@ -16,6 +16,7 @@ const meta: Meta<typeof TextField> = {
     // States
     disabled: false,
     invalid: false,
+    hideErrorIcon: false,
     readOnly: false,
     required: false,
   },
@@ -96,6 +97,15 @@ const meta: Meta<typeof TextField> = {
         defaultValue: { summary: 'false' },
       },
     },
+    hideErrorIcon: {
+      control: 'boolean',
+      description:
+        'Hide error icon when invalid. Keep false (default) for standard form fields. Only set to true when composing custom components where the error icon is not applicable.',
+      table: {
+        category: 'States',
+        defaultValue: { summary: 'false' },
+      },
+    },
     disabled: {
       control: 'boolean',
       description: 'Disables input interaction',
@@ -124,24 +134,21 @@ const meta: Meta<typeof TextField> = {
     // Adornments
     startText: {
       control: 'text',
-      description:
-        'Text at the start (e.g., "$", "https://"). Always neutral color.',
+      description: 'Text at the start (e.g., "$", "https://").',
       table: {
         category: 'Adornments',
       },
     },
     endText: {
       control: 'text',
-      description:
-        'Text at the end (e.g., "kg", "%", "USD"). Always neutral color.',
+      description: 'Text at the end (e.g., "kg", "%", "USD").',
       table: {
         category: 'Adornments',
       },
     },
     startAdornment: {
       control: false,
-      description:
-        'ReactNode at the start (icons, buttons). Inherits state color (red when invalid).',
+      description: 'ReactNode at the start (icons, buttons, etc.).',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
@@ -149,22 +156,30 @@ const meta: Meta<typeof TextField> = {
     },
     endAdornment: {
       control: false,
-      description:
-        'ReactNode at the end (icons, buttons). Inherits state color (red when invalid).',
+      description: 'ReactNode at the end (icons, buttons, etc.).',
       table: {
         category: 'Adornments',
         type: { summary: 'ReactNode' },
       },
     },
 
-    // Other
+    // Styling
     className: {
       control: 'text',
-      description: 'Additional CSS class names for the container',
+      description: 'CSS class names applied to the input element',
       table: {
-        category: 'Other',
+        category: 'Styling',
       },
     },
+    containerClassName: {
+      control: 'text',
+      description: 'CSS class names applied to the input container wrapper',
+      table: {
+        category: 'Styling',
+      },
+    },
+
+    // Other
     id: {
       control: 'text',
       description:

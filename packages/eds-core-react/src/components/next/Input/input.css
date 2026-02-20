@@ -1,6 +1,11 @@
 @layer eds-components {
   /* Container */
   .eds-input-container {
+    /* Temporary alias until proper input background token is available */
+    --_bg-input: var(--eds-color-bg-canvas);
+    /* Temporary alias until proper readonly text token is available */
+    --_readonly-text-color: var(--eds-color-border-strong);
+
     isolation: isolate;
     display: flex;
     flex-direction: row;
@@ -8,8 +13,8 @@
     gap: var(--eds-typography-gap-horizontal);
     box-sizing: border-box;
     inline-size: 100%;
-    background: var(--eds-color-bg-canvas);
-    /* Use outline instead of border to not affect height (36px target) */
+    background: var(--_bg-input);
+    /* Outline instead of border to not affect height calculation */
     outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     border-radius: var(--eds-spacing-border-radius-none);
@@ -19,37 +24,27 @@
       background-color 150ms,
       outline-color 150ms;
 
-    /* Hover - only for enabled inputs */
     &:hover:not([data-disabled]):not([data-readonly]) {
       outline-color: var(--eds-color-border-strong);
 
       & .eds-input {
         color: var(--eds-color-text-strong);
-        /* -webkit-text-fill-color overrides Safari autofill background styling */
+        /* Safari autofill override */
         -webkit-text-fill-color: var(--eds-color-text-strong);
 
         &::placeholder {
           color: var(--eds-color-text-strong);
+          /* Safari autofill override */
           -webkit-text-fill-color: var(--eds-color-text-strong);
-        }
-      }
-
-      /* Hover for adornments - only when not invalid */
-      &:not([data-invalid]) {
-        & .eds-adornment__text,
-        & .eds-adornment__adornment {
-          color: var(--eds-color-text-strong);
         }
       }
     }
 
-    /* Focus state - border stays in place, focus ring appears outside with gap
-       Matches Switch pattern: stroke-thin ring with stroke-thick gap */
+    /* Focus ring with gap (box-shadow since outline is used for border) */
     &:focus-within {
       outline-color: var(--eds-color-border-strong);
-      /* Use box-shadow since outline is used for the border */
       box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thick) var(--eds-color-bg-canvas),
+        0 0 0 var(--eds-sizing-stroke-thick) var(--_bg-input),
         0 0 0
           calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
           var(--eds-color-border-focus);
@@ -62,15 +57,10 @@
       &:focus-within {
         outline-color: var(--eds-color-border-strong);
         box-shadow:
-          0 0 0 var(--eds-sizing-stroke-thick) var(--eds-color-bg-canvas),
+          0 0 0 var(--eds-sizing-stroke-thick) var(--_bg-input),
           0 0 0
             calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
             var(--eds-color-border-focus);
-      }
-
-      & .eds-input::placeholder {
-        color: var(--eds-color-border-strong);
-        -webkit-text-fill-color: var(--eds-color-border-strong);
       }
     }
 
@@ -83,12 +73,12 @@
         color: var(--eds-color-text-disabled);
         cursor: not-allowed;
         opacity: 1;
-        -webkit-text-fill-color: var(
-          --eds-color-text-disabled
-        ); /* Safari autofill override */
+        /* Safari autofill override */
+        -webkit-text-fill-color: var(--eds-color-text-disabled);
 
         &::placeholder {
           color: var(--eds-color-text-disabled);
+          /* Safari autofill override */
           -webkit-text-fill-color: var(--eds-color-text-disabled);
         }
       }
@@ -105,26 +95,28 @@
       outline-color: transparent;
 
       & .eds-input {
-        color: var(--eds-color-border-strong);
-        -webkit-text-fill-color: var(
-          --eds-color-border-strong
-        ); /* Safari autofill override */
-
-        &::placeholder {
-          color: var(--eds-color-border-strong);
-          -webkit-text-fill-color: var(--eds-color-border-strong);
-        }
+        color: var(--_readonly-text-color);
+        /* Safari autofill override */
+        -webkit-text-fill-color: var(--_readonly-text-color);
       }
 
       & .eds-adornment__text,
       & .eds-adornment__adornment {
-        color: var(--eds-color-border-strong);
+        color: var(--_readonly-text-color);
       }
     }
   }
 
+  /* Comfortable density: uses XS vertical spacing for 24px height */
+  [data-density='comfortable'] .eds-input-container {
+    padding-block: var(--eds-spacing-proportions-xs-vertical);
+  }
+
   /* Input/Textarea element */
   .eds-input {
+    /* Temporary alias until proper placeholder text token is available */
+    --_placeholder-text-color: var(--eds-color-border-strong);
+
     flex: 1;
     min-inline-size: 0;
     border: var(--eds-sizing-stroke-none);
@@ -138,7 +130,9 @@
     resize: none;
 
     &::placeholder {
-      color: var(--eds-color-border-strong);
+      color: var(--_placeholder-text-color);
+      /* Safari autofill override */
+      -webkit-text-fill-color: var(--_placeholder-text-color);
     }
   }
 
@@ -154,15 +148,41 @@
     align-items: center;
     gap: var(--eds-typography-gap-horizontal);
     flex-shrink: 0;
-  }
-
-  /* Adornment text (prefix/suffix) */
-  .eds-adornment__text {
     color: var(--eds-color-text-subtle);
   }
 
-  /* Adornment icons */
+  /* Adornment icons and buttons */
   .eds-adornment__adornment {
-    color: var(--eds-color-text-subtle);
+    display: flex;
+    align-items: center;
+  }
+
+  /* Prevent button from expanding Input (Button size="small" is 24px, Input needs 20px) */
+  .eds-adornment__adornment:has(button) {
+    block-size: var(--eds-typography-ui-body-md-line-height-default);
+  }
+
+  /* Make button fit the 20px space to match Input content height */
+  .eds-adornment__adornment button {
+    inline-size: var(--eds-typography-ui-body-md-line-height-default);
+    block-size: var(--eds-typography-ui-body-md-line-height-default);
+    padding: 0;
+  }
+
+  /* Negative margin aligns buttons with icon adornments
+     Applied to wrapper to avoid [data-font-family] margin override */
+
+  /* End adornment */
+  .eds-input ~ .eds-adornment .eds-adornment__adornment:has(button) {
+    margin-inline-end: calc(
+      (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
+    );
+  }
+
+  /* Start adornment */
+  .eds-adornment:has(~ .eds-input) .eds-adornment__adornment:has(button) {
+    margin-inline-start: calc(
+      (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
+    );
   }
 }
