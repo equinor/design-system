@@ -7,6 +7,16 @@ import * as ComponentStories from './Chip.stories'
 
 **⚠️ Beta Component** - This component is under active development and may have breaking changes.
 
+## What's different from the current Chip?
+
+> **ℹ️ Design rationale** — The next Chip has intentional differences from the current (`eds-core-react`) Chip:
+>
+> 1. **Outlined by default.** The current chip uses a subtle gray fill that provides very little contrast — nearly invisible for users with low vision. The new outlined style gives a clear, accessible boundary while keeping chips visually lightweight.
+>
+> 2. **More color variations.** Consuming projects need a wider palette. The next Chip supports 5 semantic colors (`accent`, `danger`, `warning`, `info`, `success`) and 16 data-visualization colors via the `color` prop.
+>
+> 3. **All chips are interactive.** The non-interactive variant has been removed. Chips look and are now sized as interactive elements (min 32 px), so mixing interactive and non-interactive variants created confusion — users could not tell them apart. Non-interactive use-cases will be covered by a dedicated **Label** component (coming soon).
+
 ```bash
 npm install @equinor/eds-core-react@beta
 ```
@@ -19,16 +29,6 @@ Chips are compact, interactive elements used for filtering, selecting options, o
 
 <Primary />
 <Controls />
-
-## What's different from the current Chip?
-
-> **ℹ️ Design rationale** — The next Chip has intentional differences from the current (`eds-core-react`) Chip:
->
-> 1. **Outlined by default.** The current chip uses a subtle gray fill that provides very little contrast — nearly invisible for users with low vision. The new outlined style gives a clear, accessible boundary while keeping chips visually lightweight.
->
-> 2. **More color variations.** Consuming projects need a wider palette. The next Chip supports 5 semantic colors (`accent`, `danger`, `warning`, `info`, `success`) and 16 data-visualization colors via the `color` prop.
->
-> 3. **All chips are interactive.** The non-interactive variant has been removed. Chips look and are now sized as interactive elements (min 32 px), so mixing interactive and non-interactive variants created confusion — users could not tell them apart. Non-interactive use-cases will be covered by a dedicated **Label** component (coming soon).
 
 ## Usage
 
@@ -65,12 +65,6 @@ Chips come in four types — **Assist**, **Filter**, **Input**, and **Suggestion
 <Canvas of={ComponentStories.Filter} />
 <Canvas of={ComponentStories.Input} />
 <Canvas of={ComponentStories.Suggestion} />
-
-### Colors
-
-Use the `color` prop to apply semantic or data-visualization colors.
-
-<Canvas of={ComponentStories.Colors} />
 
 ### Density
 
