@@ -6,6 +6,7 @@ import {
   calendar_event,
   share,
   directions,
+  filter_alt,
 } from '@equinor/eds-icons'
 import { Chip } from './Chip'
 import { Avatar } from '../../Avatar'
@@ -16,6 +17,7 @@ import { Typography } from '../../Typography'
 import { TextField } from '../TextField'
 import { Checkbox } from '../Checkbox'
 import { Icon as EdsIcon } from '../Icon'
+import { Button } from '../Button'
 import type { ChipProps, ChipColor } from './Chip.types'
 
 type StoryArgs = ChipProps & { color?: ChipColor }
@@ -776,6 +778,90 @@ export const Density: Story = {
 <div data-density="comfortable">
   <Chip onClick={handleClick}>Default</Chip>
 </div>`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Active filters                                                    */
+/* ------------------------------------------------------------------ */
+
+const ActiveFilters = () => {
+  const [filters, setFilters] = useState([
+    { id: 'loadport', label: 'Loadport: Mongstad' },
+    { id: 'movement', label: 'Movement Range: Thu Nov 20 2025 \u2013' },
+    { id: 'responsible', label: 'Operations Responsible: Ola Nordmann' },
+    { id: 'status', label: 'Status: COMPLETED' },
+  ])
+
+  const remove = (id: string) => {
+    setFilters((prev) => prev.filter((f) => f.id !== id))
+  }
+
+  return (
+    <Wrapper>
+      <Button
+        variant="ghost"
+        tone="neutral"
+        onClick={() => {}}
+      >
+        <EdsIcon data={filter_alt} size="sm" />
+        Filters
+        {filters.length > 0 && (
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: 20,
+              height: 20,
+              padding: '0 6px',
+              borderRadius: 10,
+              background: 'var(--eds-color-bg-fill-emphasis-default, #007079)',
+              color: 'var(--eds-color-text-strong-on-emphasis, #fff)',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              lineHeight: 1,
+            }}
+          >
+            {filters.length}
+          </span>
+        )}
+      </Button>
+      {filters.map((filter) => (
+        <Chip key={filter.id} onDelete={() => remove(filter.id)}>
+          {filter.label}
+        </Chip>
+      ))}
+    </Wrapper>
+  )
+}
+
+export const ActiveFilterBar: Story = {
+  name: 'Filter (active)',
+  render: () => <ActiveFilters />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A filter bar showing a filter button with an active count badge alongside deletable chips representing each applied filter. Removing a chip clears that filter.',
+      },
+      source: {
+        code: `import { filter_alt } from '@equinor/eds-icons'
+import { Button, Icon } from '@equinor/eds-core-react/next'
+
+<Button variant="ghost" tone="neutral">
+  <Icon data={filter_alt} size="sm" />
+  Filters
+  <span className="badge">{activeCount}</span>
+</Button>
+
+{filters.map(filter => (
+  <Chip key={filter.id} onDelete={() => remove(filter.id)}>
+    {filter.label}
+  </Chip>
+))}`,
       },
     },
   },
