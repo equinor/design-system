@@ -8,6 +8,7 @@ import {
   directions,
   filter_alt,
 } from '@equinor/eds-icons'
+import page from './Chip.docs.mdx'
 import { Chip } from './Chip'
 import { Avatar } from '../../Avatar'
 import { Card } from '../../Card'
@@ -25,6 +26,11 @@ type StoryArgs = ChipProps & { color?: ChipColor }
 const meta: Meta<StoryArgs> = {
   title: 'EDS 2.0 (beta)/Data Display/Chip',
   component: Chip,
+  parameters: {
+    docs: {
+      page,
+    },
+  },
   argTypes: {
     selected: {
       control: 'boolean',

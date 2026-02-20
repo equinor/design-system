@@ -1,0 +1,91 @@
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Chip.stories'
+
+<Meta of={ComponentStories} />
+
+# Chip
+
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+```tsx
+import { Chip } from '@equinor/eds-core-react/next'
+```
+
+Chips are compact, interactive elements used for filtering, selecting options, or triggering actions.
+
+<Primary />
+<Controls />
+
+## What's different from the current Chip?
+
+> **ℹ️ Design rationale** — The next Chip has intentional differences from the current (`eds-core-react`) Chip:
+>
+> 1. **Outlined by default.** The current chip uses a subtle gray fill that provides very little contrast — nearly invisible for users with low vision. The new outlined style gives a clear, accessible boundary while keeping chips visually lightweight.
+>
+> 2. **More color variations.** Consuming projects need a wider palette. The next Chip supports 5 semantic colors (`accent`, `danger`, `warning`, `info`, `success`) and 16 data-visualization colors via the `color` prop.
+>
+> 3. **All chips are interactive.** The non-interactive variant has been removed. Chips look and are now sized as interactive elements (min 32 px), so mixing interactive and non-interactive variants created confusion — users could not tell them apart. Non-interactive use-cases will be covered by a dedicated **Label** component (coming soon).
+
+## Usage
+
+```tsx
+import { Chip } from '@equinor/eds-core-react/next'
+import { save } from '@equinor/eds-icons'
+
+// Basic chip
+<Chip>Label</Chip>
+
+// Selected chip
+<Chip selected>Selected</Chip>
+
+// With icon
+<Chip icon={save}>Save</Chip>
+
+// Deletable chip
+<Chip onDelete={() => console.log('deleted')}>Removable</Chip>
+
+// Colored chip
+<Chip color="danger">Error</Chip>
+<Chip color="magenta">Custom</Chip>
+```
+
+&nbsp;
+
+## Examples
+
+### Chip types
+
+Chips come in four types — **Assist**, **Filter**, **Input**, and **Suggestion** — distinguished by their behaviour rather than a `type` prop.
+
+<Canvas of={ComponentStories.Assist} />
+<Canvas of={ComponentStories.Filter} />
+<Canvas of={ComponentStories.Input} />
+<Canvas of={ComponentStories.Suggestion} />
+
+### Colors
+
+Use the `color` prop to apply semantic or data-visualization colors.
+
+<Canvas of={ComponentStories.Colors} />
+
+### Density
+
+Use `data-density="comfortable"` on a parent element for a more compact size.
+
+<Canvas of={ComponentStories.Density} />
+
+### Active filter bar
+
+Chips combined with a filter button to show active filters.
+
+<Canvas of={ComponentStories.ActiveFilterBar} />
+
+### Tags
+
+Colored, deletable chips used as status tags.
+
+<Canvas of={ComponentStories.Tags} />
