@@ -5,21 +5,31 @@ import {
   useDateFieldState,
 } from '@react-stately/datepicker'
 import { useDateField } from 'react-aria'
-import { createCalendar } from '@internationalized/date'
+import { CalendarDate, createCalendar } from '@internationalized/date'
 import { DateSegment } from './DateSegment'
 import { forwardRef, RefObject } from 'react'
 
 type Props = Partial<DateFieldStateOptions>
+
+// Use January 1st as placeholder when no value is set.
+// This ensures the day segment allows values up to 31,
+// preventing eager auto-advance when typing "3" (which
+// would otherwise auto-complete to "03" in months with
+// fewer than 30 days, like February).
+const DEFAULT_PLACEHOLDER = new CalendarDate(new Date().getFullYear(), 1, 1)
 
 /**
  * A field that wraps segments for inputting a date / date-time
  */
 export const DateFieldSegments = forwardRef(
   (props: Props, ref: RefObject<HTMLDivElement | null>) => {
+    const placeholderValue = props.placeholderValue ?? DEFAULT_PLACEHOLDER
+
     const state = useDateFieldState({
       ...props,
       locale: props.locale,
       createCalendar,
+      placeholderValue,
     })
 
     const { fieldProps } = useDateField(
