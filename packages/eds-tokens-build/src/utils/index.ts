@@ -1,11 +1,13 @@
 import { StyleDictionary } from 'style-dictionary-utils'
-import type { TransformedToken } from 'style-dictionary/types'
+import type { TransformedToken, PlatformConfig } from 'style-dictionary/types'
 import path from 'path'
+import { typescriptNestedFormat } from '../format/typescriptNested'
 
 const outputDirectory = path.resolve(process.cwd(), 'build')
 export const cssBuildPath = path.join(outputDirectory, 'css')
 export const jsBuildPath = path.join(outputDirectory, 'js')
 export const jsonBuildPath = path.join(outputDirectory, 'json')
+export const tsBuildPath = path.join(outputDirectory, 'ts')
 
 export function toFixedWithoutTrailingZeroes(
   value: number,
@@ -61,6 +63,7 @@ export const _extend = ({
   include,
   outputReferences,
   transforms,
+  rootName,
 }: {
   include?: string[]
   source: string[]
@@ -71,9 +74,76 @@ export const _extend = ({
   filter?: (token: TransformedToken) => boolean
   outputReferences?: boolean
   transforms?: string[]
+  rootName?: string
 }) => {
   const cssFileNameOutputVersion = outputReferences ? 'verbose' : 'trimmed'
   const cssDestinationFileName = `${fileName}-${cssFileNameOutputVersion}.css`
+
+  const platforms: Record<string, PlatformConfig> = {
+    css: {
+      transformGroup: 'css',
+      prefix,
+      buildPath: `${cssBuildPath}/${buildPath}`,
+      transforms,
+      files: [
+        {
+          filter,
+          destination: cssDestinationFileName,
+          format: 'css/variables',
+          options: {
+            selector,
+            outputReferences,
+          },
+        },
+      ],
+    },
+    ts: {
+      transforms: ['name/constant'],
+      buildPath: `${jsBuildPath}/${buildPath}`,
+      files: [
+        {
+          filter,
+          destination: `${fileName}.js`,
+          format: 'javascript/es6',
+        },
+        {
+          filter,
+          format: 'typescript/es6-declarations',
+          destination: `${fileName}.d.ts`,
+        },
+      ],
+    },
+    json: {
+      buildPath: `${jsonBuildPath}/${buildPath}`,
+      transforms: ['name/kebab'],
+      files: [
+        {
+          filter,
+          destination: `flat/${fileName}.json`,
+          format: 'json/flat',
+        },
+        {
+          filter,
+          destination: `nested/${fileName}.json`,
+          format: 'json/nested',
+        },
+      ],
+    },
+  }
+
+  if (rootName) {
+    platforms.tsNested = {
+      buildPath: `${tsBuildPath}/${buildPath}`,
+      files: [
+        {
+          filter,
+          destination: `${fileName}.ts`,
+          format: 'typescript/nested',
+          options: { rootName },
+        },
+      ],
+    }
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
   return new StyleDictionary({
@@ -83,56 +153,11 @@ export const _extend = ({
       warnings: 'warn',
       verbosity: 'verbose',
     },
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix,
-        buildPath: `${cssBuildPath}/${buildPath}`,
-        transforms,
-        files: [
-          {
-            filter,
-            destination: cssDestinationFileName,
-            format: 'css/variables',
-            options: {
-              selector,
-              outputReferences,
-            },
-          },
-        ],
-      },
-      ts: {
-        transforms: ['name/constant'],
-        buildPath: `${jsBuildPath}/${buildPath}`,
-        files: [
-          {
-            filter,
-            destination: `${fileName}.js`,
-            format: 'javascript/es6',
-          },
-          {
-            filter,
-            format: 'typescript/es6-declarations',
-            destination: `${fileName}.d.ts`,
-          },
-        ],
-      },
-      json: {
-        buildPath: `${jsonBuildPath}/${buildPath}`,
-        transforms: ['name/kebab'],
-        files: [
-          {
-            filter,
-            destination: `flat/${fileName}.json`,
-            format: 'json/flat',
-          },
-          {
-            filter,
-            destination: `nested/${fileName}.json`,
-            format: 'json/nested',
-          },
-        ],
+    hooks: {
+      formats: {
+        'typescript/nested': typescriptNestedFormat,
       },
     },
+    platforms,
   })
 }

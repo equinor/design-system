@@ -104,6 +104,35 @@ Use one of these values for the `data-color-appearance` attribute:
 - `warning` -- Cautionary states
 - `danger` -- Destructive or error states
 
+## JavaScript Tokens (Flat)
+
+The dynamic color tokens are available as flat ES6 exports with `SCREAMING_SNAKE_CASE` constants. These resolve to the concrete color values for each appearance.
+
+### Import
+
+```typescript
+import {
+  BG_FILL_EMPHASIS_DEFAULT,
+  TEXT_STRONG_ON_EMPHASIS,
+  BORDER_STRONG,
+} from '@equinor/eds-tokens/js/color/dynamic/accent'
+```
+
+Each appearance has its own file:
+
+- `@equinor/eds-tokens/js/color/dynamic/accent`
+- `@equinor/eds-tokens/js/color/dynamic/neutral`
+- `@equinor/eds-tokens/js/color/dynamic/success`
+- `@equinor/eds-tokens/js/color/dynamic/info`
+- `@equinor/eds-tokens/js/color/dynamic/warning`
+- `@equinor/eds-tokens/js/color/dynamic/danger`
+
+:::note
+
+The dynamic approach does **not** include a nested TypeScript format. Dynamic tokens are designed to be resolved at runtime via CSS variables and the `data-color-appearance` attribute. Use the CSS variables for dynamic usage and the JS constants when you need resolved values for a specific appearance.
+
+:::
+
 ## Best Practices
 
 - **Use abstraction** -- Write CSS once, reuse with different appearances

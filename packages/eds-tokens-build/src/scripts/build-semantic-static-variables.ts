@@ -67,6 +67,7 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
     fileName: 'semantic',
     selector: ':root',
     outputReferences: true,
+    rootName: 'color',
   })
 
   await semanticColors.buildAllPlatforms()
@@ -89,6 +90,7 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
     selector: '[data-color-scheme="light"]',
     prefix: COLOR_PREFIX,
     outputReferences: false,
+    rootName: 'color',
   })
 
   const darkSemanticColors = _extend({
@@ -101,6 +103,7 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
     selector: '[data-color-scheme="dark"]',
     prefix: COLOR_PREFIX,
     outputReferences: false,
+    rootName: 'color',
   })
 
   await lightSemanticColors.buildAllPlatforms()

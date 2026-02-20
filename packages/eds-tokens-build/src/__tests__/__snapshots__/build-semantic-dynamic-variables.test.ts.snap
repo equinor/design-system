@@ -15,16 +15,20 @@ exports[`Semantic Dynamic Variables Build > should build CSS dynamic variables f
   --x-color-bg-fill-muted-default: var(--x-color-neutral-3);
   --x-color-bg-fill-muted-hover: var(--x-color-neutral-4);
   --x-color-bg-fill-muted-active: var(--x-color-neutral-5);
+  --x-color-bg-fill-muted-disabled: var(--x-color-neutral-3);
   --x-color-bg-fill-emphasis-default: var(--x-color-neutral-9);
   --x-color-bg-fill-emphasis-hover: var(--x-color-neutral-10);
   --x-color-bg-fill-emphasis-active: var(--x-color-neutral-11);
+  --x-color-bg-fill-emphasis-disabled: var(--x-color-neutral-3);
   --x-color-bg-canvas: var(--x-color-neutral-1);
   --x-color-bg-surface: var(--x-color-neutral-2);
   --x-color-border-subtle: var(--x-color-neutral-6);
   --x-color-border-medium: var(--x-color-neutral-7);
   --x-color-border-strong: var(--x-color-neutral-8);
+  --x-color-border-disabled: var(--x-color-neutral-7);
   --x-color-text-subtle: var(--x-color-neutral-12); /** Used for text and icons */
   --x-color-text-strong: var(--x-color-neutral-13); /** Used for text and icons */
+  --x-color-text-disabled: var(--x-color-neutral-7);
   --x-color-text-subtle-on-emphasis: var(--x-color-neutral-14); /** Text or icons against colored backgrounds */
   --x-color-text-strong-on-emphasis: var(--x-color-neutral-15); /** Text or icons against colored backgrounds */
 }
@@ -37,16 +41,20 @@ exports[`Semantic Dynamic Variables Build > should build CSS dynamic variables f
   --x-color-bg-fill-muted-default: var(--x-color-accent-3);
   --x-color-bg-fill-muted-hover: var(--x-color-accent-4);
   --x-color-bg-fill-muted-active: var(--x-color-accent-5);
+  --x-color-bg-fill-muted-disabled: var(--x-color-accent-3);
   --x-color-bg-fill-emphasis-default: var(--x-color-accent-9);
   --x-color-bg-fill-emphasis-hover: var(--x-color-accent-10);
   --x-color-bg-fill-emphasis-active: var(--x-color-accent-11);
+  --x-color-bg-fill-emphasis-disabled: var(--x-color-accent-3);
   --x-color-bg-canvas: var(--x-color-accent-1);
   --x-color-bg-surface: var(--x-color-accent-2);
   --x-color-border-subtle: var(--x-color-accent-6);
   --x-color-border-medium: var(--x-color-accent-7);
   --x-color-border-strong: var(--x-color-accent-8);
+  --x-color-border-disabled: var(--x-color-accent-7);
   --x-color-text-subtle: var(--x-color-accent-12); /** Used for text and icons */
   --x-color-text-strong: var(--x-color-accent-13); /** Used for text and icons */
+  --x-color-text-disabled: var(--x-color-accent-7);
   --x-color-text-subtle-on-emphasis: var(--x-color-accent-14); /** Text or icons against colored backgrounds */
   --x-color-text-strong-on-emphasis: var(--x-color-accent-15); /** Text or icons against colored backgrounds */
 }
@@ -59,16 +67,20 @@ exports[`Semantic Dynamic Variables Build > should build CSS dynamic variables f
   --x-color-bg-fill-muted-default: var(--x-color-danger-3);
   --x-color-bg-fill-muted-hover: var(--x-color-danger-4);
   --x-color-bg-fill-muted-active: var(--x-color-danger-5);
+  --x-color-bg-fill-muted-disabled: var(--x-color-danger-3);
   --x-color-bg-fill-emphasis-default: var(--x-color-danger-9);
   --x-color-bg-fill-emphasis-hover: var(--x-color-danger-10);
   --x-color-bg-fill-emphasis-active: var(--x-color-danger-11);
+  --x-color-bg-fill-emphasis-disabled: var(--x-color-danger-3);
   --x-color-bg-canvas: var(--x-color-danger-1);
   --x-color-bg-surface: var(--x-color-danger-2);
   --x-color-border-subtle: var(--x-color-danger-6);
   --x-color-border-medium: var(--x-color-danger-7);
   --x-color-border-strong: var(--x-color-danger-8);
+  --x-color-border-disabled: var(--x-color-danger-7);
   --x-color-text-subtle: var(--x-color-danger-12); /** Used for text and icons */
   --x-color-text-strong: var(--x-color-danger-13); /** Used for text and icons */
+  --x-color-text-disabled: var(--x-color-danger-7);
   --x-color-text-subtle-on-emphasis: var(--x-color-danger-14); /** Text or icons against colored backgrounds */
   --x-color-text-strong-on-emphasis: var(--x-color-danger-15); /** Text or icons against colored backgrounds */
 }
@@ -81,16 +93,20 @@ exports[`Semantic Dynamic Variables Build > should build CSS dynamic variables f
   --x-color-bg-fill-muted-default: var(--x-color-info-3);
   --x-color-bg-fill-muted-hover: var(--x-color-info-4);
   --x-color-bg-fill-muted-active: var(--x-color-info-5);
+  --x-color-bg-fill-muted-disabled: var(--x-color-info-3);
   --x-color-bg-fill-emphasis-default: var(--x-color-info-9);
   --x-color-bg-fill-emphasis-hover: var(--x-color-info-10);
   --x-color-bg-fill-emphasis-active: var(--x-color-info-11);
+  --x-color-bg-fill-emphasis-disabled: var(--x-color-info-3);
   --x-color-bg-canvas: var(--x-color-info-1);
   --x-color-bg-surface: var(--x-color-info-2);
   --x-color-border-subtle: var(--x-color-info-6);
   --x-color-border-medium: var(--x-color-info-7);
   --x-color-border-strong: var(--x-color-info-8);
+  --x-color-border-disabled: var(--x-color-info-7);
   --x-color-text-subtle: var(--x-color-info-12); /** Used for text and icons */
   --x-color-text-strong: var(--x-color-info-13); /** Used for text and icons */
+  --x-color-text-disabled: var(--x-color-info-7);
   --x-color-text-subtle-on-emphasis: var(--x-color-info-14); /** Text or icons against colored backgrounds */
   --x-color-text-strong-on-emphasis: var(--x-color-info-15); /** Text or icons against colored backgrounds */
 }
@@ -103,16 +119,20 @@ exports[`Semantic Dynamic Variables Build > should build CSS dynamic variables f
   --x-color-bg-fill-muted-default: var(--x-color-success-3);
   --x-color-bg-fill-muted-hover: var(--x-color-success-4);
   --x-color-bg-fill-muted-active: var(--x-color-success-5);
+  --x-color-bg-fill-muted-disabled: var(--x-color-success-3);
   --x-color-bg-fill-emphasis-default: var(--x-color-success-9);
   --x-color-bg-fill-emphasis-hover: var(--x-color-success-10);
   --x-color-bg-fill-emphasis-active: var(--x-color-success-11);
+  --x-color-bg-fill-emphasis-disabled: var(--x-color-success-3);
   --x-color-bg-canvas: var(--x-color-success-1);
   --x-color-bg-surface: var(--x-color-success-2);
   --x-color-border-subtle: var(--x-color-success-6);
   --x-color-border-medium: var(--x-color-success-7);
   --x-color-border-strong: var(--x-color-success-8);
+  --x-color-border-disabled: var(--x-color-success-7);
   --x-color-text-subtle: var(--x-color-success-12); /** Used for text and icons */
   --x-color-text-strong: var(--x-color-success-13); /** Used for text and icons */
+  --x-color-text-disabled: var(--x-color-success-7);
   --x-color-text-subtle-on-emphasis: var(--x-color-success-14); /** Text or icons against colored backgrounds */
   --x-color-text-strong-on-emphasis: var(--x-color-success-15); /** Text or icons against colored backgrounds */
 }
@@ -125,16 +145,20 @@ exports[`Semantic Dynamic Variables Build > should build CSS dynamic variables f
   --x-color-bg-fill-muted-default: var(--x-color-warning-3);
   --x-color-bg-fill-muted-hover: var(--x-color-warning-4);
   --x-color-bg-fill-muted-active: var(--x-color-warning-5);
+  --x-color-bg-fill-muted-disabled: var(--x-color-warning-3);
   --x-color-bg-fill-emphasis-default: var(--x-color-warning-9);
   --x-color-bg-fill-emphasis-hover: var(--x-color-warning-10);
   --x-color-bg-fill-emphasis-active: var(--x-color-warning-11);
+  --x-color-bg-fill-emphasis-disabled: var(--x-color-warning-3);
   --x-color-bg-canvas: var(--x-color-warning-1);
   --x-color-bg-surface: var(--x-color-warning-2);
   --x-color-border-subtle: var(--x-color-warning-6);
   --x-color-border-medium: var(--x-color-warning-7);
   --x-color-border-strong: var(--x-color-warning-8);
+  --x-color-border-disabled: var(--x-color-warning-7);
   --x-color-text-subtle: var(--x-color-warning-12); /** Used for text and icons */
   --x-color-text-strong: var(--x-color-warning-13); /** Used for text and icons */
+  --x-color-text-disabled: var(--x-color-warning-7);
   --x-color-text-subtle-on-emphasis: var(--x-color-warning-14); /** Text or icons against colored backgrounds */
   --x-color-text-strong-on-emphasis: var(--x-color-warning-15); /** Text or icons against colored backgrounds */
 }
