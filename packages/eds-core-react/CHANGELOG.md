@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.6](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.5...eds-core-react@v2.3.6) (2026-02-20)
+
+
+### 🐛 Fixed
+
+* prevent Datepicker day field from eagerly auto-advancing on "3" ([#4553](https://github.com/equinor/design-system/issues/4553)) ([b5c98d3](https://github.com/equinor/design-system/commit/b5c98d373443b7c2ba5ff9e78dbd88fc30b25df2))
+
 ## [2.3.5](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.4...eds-core-react@v2.3.5) (2026-02-11)
 
 
