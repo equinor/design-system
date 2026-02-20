@@ -249,9 +249,9 @@
     border-color: transparent;
   }
 
-  /* Dataviz disabled: use generic disabled bg, not the colorful one */
+  /* Dataviz disabled: same muted gray as semantic colored disabled */
   .eds-chip[aria-disabled='true'][data-chip-color] {
-    background: var(--eds-color-bg-disabled, rgba(0, 0, 0, 0.06));
+    background: var(--eds-color-bg-fill-muted-disabled);
     color: var(--eds-color-text-disabled);
     border-color: transparent;
   }
