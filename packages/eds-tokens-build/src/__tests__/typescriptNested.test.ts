@@ -24,6 +24,16 @@ describe('typescriptNested format', () => {
       expect(toCamelCase('Subtle on emphasis')).toBe('subtleOnEmphasis')
     })
 
+    it('converts hyphenated words to camelCase', () => {
+      expect(toCamelCase('font-size')).toBe('fontSize')
+      expect(toCamelCase('line-height')).toBe('lineHeight')
+      expect(toCamelCase('font-family')).toBe('fontFamily')
+    })
+
+    it('handles mixed hyphens and spaces', () => {
+      expect(toCamelCase('Semi Bold Italic')).toBe('semiBoldItalic')
+    })
+
     it('preserves already lowercase single words', () => {
       expect(toCamelCase('default')).toBe('default')
     })
@@ -127,6 +137,25 @@ describe('typescriptNested format', () => {
       } as unknown as FormatFnArguments)
 
       expect(result).toContain('export const tokens =')
+    })
+
+    it('outputs numeric values unquoted', () => {
+      const tokens = [
+        mockToken(['line-height', 'default', 'Regular'], '1.5'),
+        mockToken(['font-weight', 'normal', 'Regular'], '400'),
+        mockToken(['font-size', 'md', 'Regular'], '1rem'),
+      ] as TransformedToken[]
+
+      const result = typescriptNestedFormat({
+        dictionary: { allTokens: tokens, tokens: {}, unfilteredTokens: {} },
+        options: { rootName: 'typography' },
+        file: { destination: 'test.ts' },
+        platform: {},
+      } as unknown as FormatFnArguments)
+
+      expect(result).toContain('regular: 1.5,')
+      expect(result).toContain('regular: 400,')
+      expect(result).toContain("regular: '1rem',")
     })
 
     it('quotes numeric keys in the output', () => {

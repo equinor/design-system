@@ -4,6 +4,6 @@
 
 export const typography = {
   typography: {
-    'font-weight': '500',
+    fontWeight: 500,
   },
 } as const

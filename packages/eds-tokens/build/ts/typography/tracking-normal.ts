@@ -4,6 +4,6 @@
 
 export const typography = {
   typography: {
-    tracking: '0',
+    tracking: 0,
   },
 } as const

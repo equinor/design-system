@@ -3,14 +3,14 @@
  */
 
 export const color = {
-  'bg-floating': '#ffffff',
-  'bg-backdrop': '#aeaeae',
-  'bg-input': '#f5f5f5',
-  'border-focus': '#6fb6e9',
-  'text-link': '#0070a9',
-  'bg-disabled': '#e1e1e1',
-  'border-disabled': '#aeaeae',
-  'text-disabled': '#aeaeae',
+  bgFloating: '#ffffff',
+  bgBackdrop: '#aeaeae',
+  bgInput: '#f5f5f5',
+  borderFocus: '#6fb6e9',
+  textLink: '#0070a9',
+  bgDisabled: '#e1e1e1',
+  borderDisabled: '#aeaeae',
+  textDisabled: '#aeaeae',
   accent: {
     '1': '#eaf8fa',
     '2': '#f6ffff',

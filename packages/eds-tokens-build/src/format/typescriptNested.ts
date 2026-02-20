@@ -2,11 +2,11 @@ import type { TransformedToken, FormatFnArguments } from 'style-dictionary/types
 
 /**
  * Convert a path segment to camelCase.
- * Handles space-separated words like "Fill Muted" → "fillMuted"
- * and single words like "Bg" → "bg".
+ * Handles space-separated and hyphenated words like "Fill Muted" → "fillMuted",
+ * "font-size" → "fontSize", and single words like "Bg" → "bg".
  */
 export function toCamelCase(str: string): string {
-  const words = str.split(/\s+/)
+  const words = str.split(/[\s-]+/)
   return words
     .map((word, i) =>
       i === 0
@@ -72,7 +72,9 @@ function serializeObject(obj: NestedObject, indent = 2): string {
   for (const [key, value] of entries) {
     const formattedKey = formatKey(key)
     if (typeof value === 'string') {
-      lines.push(`${pad}${formattedKey}: '${value}',`)
+      const isNumeric = value !== '' && isFinite(Number(value))
+      const formattedValue = isNumeric ? value : `'${value}'`
+      lines.push(`${pad}${formattedKey}: ${formattedValue},`)
     } else {
       lines.push(
         `${pad}${formattedKey}: ${serializeObject(value, indent + 2)},`,

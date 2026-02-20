@@ -4,6 +4,6 @@
 
 export const typography = {
   typography: {
-    'line-height': '16',
+    lineHeight: 16,
   },
 } as const
