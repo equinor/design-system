@@ -222,12 +222,12 @@
   }
 
   /* Apply dataviz custom properties */
-  .eds-chip[data-chip-color]:not([data-color-appearance='accent']):not([data-color-appearance='danger']):not([data-color-appearance='warning']):not([data-color-appearance='info']):not([data-color-appearance='success']) {
+  .eds-chip[data-chip-color]:not([aria-disabled='true']):not([data-color-appearance='accent']):not([data-color-appearance='danger']):not([data-color-appearance='warning']):not([data-color-appearance='info']):not([data-color-appearance='success']) {
     background: var(--_chip-bg);
     color: var(--_chip-text);
   }
 
-  .eds-chip[data-chip-color]:not([data-color-appearance='accent']):not([data-color-appearance='danger']):not([data-color-appearance='warning']):not([data-color-appearance='info']):not([data-color-appearance='success']) svg {
+  .eds-chip[data-chip-color]:not([aria-disabled='true']):not([data-color-appearance='accent']):not([data-color-appearance='danger']):not([data-color-appearance='warning']):not([data-color-appearance='info']):not([data-color-appearance='success']) svg {
     fill: var(--_chip-text);
   }
 

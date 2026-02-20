@@ -59,18 +59,13 @@ import { save } from '@equinor/eds-icons'
 
 ### Chip types
 
-Chips come in four types — **Assist**, **Filter**, **Input**, and **Suggestion** — distinguished by their behaviour rather than a `type` prop.
+Chips come in four types — **Assist**, **Filter**, **Input**, and **Suggestion** — distinguished by their behaviour rather than a `type` prop. Chips can also be used as colored **tags** to visually categorise or label items.
 
+Assist chip example:
 <Canvas of={ComponentStories.Assist} />
+
+Filter chip example:
 <Canvas of={ComponentStories.Filter} />
-<Canvas of={ComponentStories.Input} />
-<Canvas of={ComponentStories.Suggestion} />
-
-### Density
-
-Use `data-density="comfortable"` on a parent element for a more compact size.
-
-<Canvas of={ComponentStories.Density} />
 
 ### Active filter bar
 
@@ -78,8 +73,17 @@ Chips combined with a filter button to show active filters.
 
 <Canvas of={ComponentStories.ActiveFilterBar} />
 
-### Tags
+Input chip example:
+<Canvas of={ComponentStories.Input} />
 
-Colored, deletable chips used as status tags.
+Suggestion chip example:
+<Canvas of={ComponentStories.Suggestion} />
 
+Tag chip example:
 <Canvas of={ComponentStories.Tags} />
+
+### Density
+
+Use `data-density="comfortable"` on a parent element for a more compact size.
+
+<Canvas of={ComponentStories.Density} />

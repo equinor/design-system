@@ -33,11 +33,8 @@
   .eds-badge[data-size='xs'] {
     height: 12px;
     padding-inline: 4px;
+    padding-block-start: 1px;
     border-radius: 2px;
-    font-size: 0.75rem; /* 12px */
-  }
-
-  .eds-badge[data-size='xs'][data-emphasis='secondary'] {
     font-size: 0.625rem; /* 10px */
     font-weight: 700;
     text-transform: uppercase;

@@ -19,6 +19,7 @@ import { TextField } from '../TextField'
 import { Checkbox } from '../Checkbox'
 import { Icon as EdsIcon } from '../Icon'
 import { Button } from '../Button'
+import { Badge } from '../Badge'
 import type { ChipProps, ChipColor } from './Chip.types'
 
 type StoryArgs = ChipProps & { color?: ChipColor }
@@ -332,6 +333,73 @@ import { TextField, Icon } from '@equinor/eds-core-react/next'
 }
 
 /* ------------------------------------------------------------------ */
+/*  Active filters                                                    */
+/* ------------------------------------------------------------------ */
+
+const ActiveFilters = () => {
+  const [filters, setFilters] = useState([
+    { id: 'loadport', label: 'Loadport: Mongstad' },
+    { id: 'movement', label: 'Movement Range: Thu Nov 20 2025 \u2013' },
+    { id: 'responsible', label: 'Operations Responsible: Ola Nordmann' },
+    { id: 'status', label: 'Status: COMPLETED' },
+  ])
+
+  const remove = (id: string) => {
+    setFilters((prev) => prev.filter((f) => f.id !== id))
+  }
+
+  return (
+    <Wrapper>
+      <Button
+        variant="secondary"
+        tone="accent"
+        onClick={() => {}}
+      >
+        <EdsIcon data={filter_alt} size="sm" />
+        Filters
+        {filters.length > 0 && (
+          <Badge color="accent">{filters.length}</Badge>
+        )}
+      </Button>
+      {filters.map((filter) => (
+        <Chip key={filter.id} onDelete={() => remove(filter.id)}>
+          {filter.label}
+        </Chip>
+      ))}
+    </Wrapper>
+  )
+}
+
+export const ActiveFilterBar: Story = {
+  name: 'Filter (active)',
+  render: () => <ActiveFilters />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A filter bar showing a filter button with an active count badge alongside deletable chips representing each applied filter. Removing a chip clears that filter.',
+      },
+      source: {
+        code: `import { filter_alt } from '@equinor/eds-icons'
+import { Button, Icon, Badge } from '@equinor/eds-core-react/next'
+
+<Button variant="secondary" tone="accent">
+  <Icon data={filter_alt} size="sm" />
+  Filters
+  <Badge color="accent">{activeCount}</Badge>
+</Button>
+
+{filters.map(filter => (
+  <Chip key={filter.id} onDelete={() => remove(filter.id)}>
+    {filter.label}
+  </Chip>
+))}`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
 /*  Input chips                                                       */
 /* ------------------------------------------------------------------ */
 
@@ -638,6 +706,63 @@ export const SuggestionSingleSelect: Story = {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Tags                                                              */
+/* ------------------------------------------------------------------ */
+
+const ShippingTags = () => {
+  const [tags, setTags] = useState([
+    { label: 'Delayed', color: 'warning' as const },
+    { label: 'Cancelled', color: 'danger' as const },
+    { label: 'In transit', color: 'info' as const },
+    { label: 'Delivered', color: 'success' as const },
+    { label: 'Awaiting pickup', color: 'spruce-wood' as const },
+    { label: 'Customs hold', color: 'purple-berry' as const },
+    { label: 'Rerouted', color: 'blue-overcast' as const },
+    { label: 'Confirmed', color: 'moss-green' as const },
+  ])
+
+  const remove = (label: string) => {
+    setTags((prev) => prev.filter((t) => t.label !== label))
+  }
+
+  return (
+    <Wrapper>
+      {tags.map((tag) => (
+        <Chip key={tag.label} color={tag.color} onDelete={() => remove(tag.label)}>
+          {tag.label}
+        </Chip>
+      ))}
+    </Wrapper>
+  )
+}
+
+export const Tags: Story = {
+  render: () => <ShippingTags />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Colored deletable chips work well as status tags. Each tag uses a different color to visually distinguish shipping statuses at a glance.',
+      },
+      source: {
+        code: `const tags = [
+  { label: 'Delayed', color: 'warning' },
+  { label: 'Cancelled', color: 'danger' },
+  { label: 'In transit', color: 'info' },
+  { label: 'Delivered', color: 'success' },
+]
+
+{tags.map(tag => (
+  <Chip key={tag.label} color={tag.color} onDelete={() => remove(tag.label)}>
+    {tag.label}
+  </Chip>
+))}`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
 /*  Density                                                           */
 /* ------------------------------------------------------------------ */
 
@@ -690,147 +815,6 @@ export const Density: Story = {
 <div data-density="comfortable">
   <Chip onClick={handleClick}>Default</Chip>
 </div>`,
-      },
-    },
-  },
-}
-
-/* ------------------------------------------------------------------ */
-/*  Active filters                                                    */
-/* ------------------------------------------------------------------ */
-
-const ActiveFilters = () => {
-  const [filters, setFilters] = useState([
-    { id: 'loadport', label: 'Loadport: Mongstad' },
-    { id: 'movement', label: 'Movement Range: Thu Nov 20 2025 \u2013' },
-    { id: 'responsible', label: 'Operations Responsible: Ola Nordmann' },
-    { id: 'status', label: 'Status: COMPLETED' },
-  ])
-
-  const remove = (id: string) => {
-    setFilters((prev) => prev.filter((f) => f.id !== id))
-  }
-
-  return (
-    <Wrapper>
-      <Button
-        variant="outlined"
-        tone="accent"
-        onClick={() => {}}
-      >
-        <EdsIcon data={filter_alt} size="sm" />
-        Filters
-        {filters.length > 0 && (
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minWidth: 20,
-              height: 20,
-              padding: '0 6px',
-              borderRadius: 10,
-              background: 'var(--eds-color-bg-fill-emphasis-default, #007079)',
-              color: 'var(--eds-color-text-strong-on-emphasis, #fff)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              lineHeight: 1,
-            }}
-          >
-            {filters.length}
-          </span>
-        )}
-      </Button>
-      {filters.map((filter) => (
-        <Chip key={filter.id} onDelete={() => remove(filter.id)}>
-          {filter.label}
-        </Chip>
-      ))}
-    </Wrapper>
-  )
-}
-
-export const ActiveFilterBar: Story = {
-  name: 'Filter (active)',
-  render: () => <ActiveFilters />,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'A filter bar showing a filter button with an active count badge alongside deletable chips representing each applied filter. Removing a chip clears that filter.',
-      },
-      source: {
-        code: `import { filter_alt } from '@equinor/eds-icons'
-import { Button, Icon } from '@equinor/eds-core-react/next'
-
-<Button variant="outlined" tone="accent">
-  <Icon data={filter_alt} size="sm" />
-  Filters
-  <span className="badge">{activeCount}</span>
-</Button>
-
-{filters.map(filter => (
-  <Chip key={filter.id} onDelete={() => remove(filter.id)}>
-    {filter.label}
-  </Chip>
-))}`,
-      },
-    },
-  },
-}
-
-/* ------------------------------------------------------------------ */
-/*  Tags                                                              */
-/* ------------------------------------------------------------------ */
-
-const ShippingTags = () => {
-  const [tags, setTags] = useState([
-    { label: 'Delayed', color: 'warning' as const },
-    { label: 'Cancelled', color: 'danger' as const },
-    { label: 'In transit', color: 'info' as const },
-    { label: 'Delivered', color: 'success' as const },
-    { label: 'Awaiting pickup', color: 'spruce-wood' as const },
-    { label: 'Customs hold', color: 'purple-berry' as const },
-    { label: 'Rerouted', color: 'blue-overcast' as const },
-    { label: 'Confirmed', color: 'moss-green' as const },
-  ])
-
-  const remove = (label: string) => {
-    setTags((prev) => prev.filter((t) => t.label !== label))
-  }
-
-  return (
-    <Wrapper>
-      {tags.map((tag) => (
-        <Chip key={tag.label} color={tag.color} onDelete={() => remove(tag.label)}>
-          {tag.label}
-        </Chip>
-      ))}
-    </Wrapper>
-  )
-}
-
-export const Tags: Story = {
-  render: () => <ShippingTags />,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Colored deletable chips work well as status tags. Each tag uses a different color to visually distinguish shipping statuses at a glance.',
-      },
-      source: {
-        code: `const tags = [
-  { label: 'Delayed', color: 'warning' },
-  { label: 'Cancelled', color: 'danger' },
-  { label: 'In transit', color: 'info' },
-  { label: 'Delivered', color: 'success' },
-]
-
-{tags.map(tag => (
-  <Chip key={tag.label} color={tag.color} onDelete={() => remove(tag.label)}>
-    {tag.label}
-  </Chip>
-))}`,
       },
     },
   },
