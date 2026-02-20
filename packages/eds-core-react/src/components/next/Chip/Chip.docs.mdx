@@ -11,11 +11,11 @@ import * as ComponentStories from './Chip.stories'
 
 > **ℹ️ Design rationale** — The next Chip has intentional differences from the current (`eds-core-react`) Chip:
 >
-> 1. **Outlined by default.** The current chip uses a subtle gray fill that provides very little contrast — nearly invisible for users with low vision. The new outlined style gives a clear, accessible boundary while keeping chips visually lightweight.
+> 1. **Outlined by default.** The current chip uses a subtle gray fill that provides very little contrast — nearly invisible for users with low vision. The conundrum is that increasing the gray background's opacity, has two negative sideeffects: 1. decreases the readability (less contrast between background and text) 2. makes it look disabled. The solution: Outline styling. The new outlined style gives a clear, accessible boundary while keeping chips visually lightweight.
 >
 > 2. **More color variations.** Consuming projects need a wider palette. The next Chip supports 5 semantic colors (`accent`, `danger`, `warning`, `info`, `success`) and 16 data-visualization colors via the `color` prop.
 >
-> 3. **All chips are interactive.** The non-interactive variant has been removed. Chips look and are now sized as interactive elements (min 32 px), so mixing interactive and non-interactive variants created confusion — users could not tell them apart. Non-interactive use-cases will be covered by a dedicated **Label** component (coming soon).
+> 3. **All chips are interactive.** The non-interactive variant has been removed. Chips look and are now sized as interactive elements (min 32 px), so mixing interactive and non-interactive variants created confusion — users could not tell them apart. Non-interactive use-cases is covered by the new **Badge** component.
 
 ```bash
 npm install @equinor/eds-core-react@beta
@@ -52,6 +52,12 @@ import { save } from '@equinor/eds-icons'
 <Chip color="danger">Error</Chip>
 <Chip color="magenta">Custom</Chip>
 ```
+
+### Chip vs Badge
+
+A Chip is interactive — it can be clicked, selected, deleted, or used as a dropdown trigger. When a status is purely informational and does not need user action, use a [Badge](?path=/docs/eds-2-0-beta-data-display-badge--docs) instead.
+
+<Canvas of={ComponentStories.ChipVsBadge} />
 
 &nbsp;
 

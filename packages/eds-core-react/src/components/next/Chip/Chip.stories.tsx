@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   save,
@@ -7,6 +7,8 @@ import {
   share,
   directions,
   filter_alt,
+  boat,
+  arrow_forward,
 } from '@equinor/eds-icons'
 import page from './Chip.docs.mdx'
 import { Chip } from './Chip'
@@ -21,6 +23,7 @@ import { Icon as EdsIcon } from '../Icon'
 import { Button } from '../Button'
 import { Badge } from '../Badge'
 import type { ChipProps, ChipColor } from './Chip.types'
+import type { BadgeColor } from '../Badge/Badge.types'
 
 type StoryArgs = ChipProps & { color?: ChipColor }
 
@@ -109,6 +112,179 @@ export const Introduction: Story = {
   args: {
     children: 'Chip label',
     onClick: () => {},
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Chip vs Badge                                                     */
+/* ------------------------------------------------------------------ */
+
+type StatusOption = {
+  label: string
+  chipColor?: ChipColor
+  badgeColor: BadgeColor
+}
+
+const STATUS_OPTIONS: StatusOption[] = [
+  { label: 'Tentative', chipColor: 'warning', badgeColor: 'warning' },
+  { label: 'Official', badgeColor: 'neutral' },
+  { label: 'In-transit', chipColor: 'info', badgeColor: 'info' },
+  { label: 'Completed', chipColor: 'success', badgeColor: 'success' },
+]
+
+const CargoCard = ({
+  statusElement,
+  label,
+}: {
+  statusElement: React.ReactNode
+  label: string
+}) => (
+  <Card
+    elevation="raised"
+    style={{
+      width: 280,
+      padding: 16,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8,
+    }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <EdsIcon data={boat} size="sm" />
+        <Typography
+          variant="body_short"
+          bold
+          style={{ margin: 0 }}
+        >
+          Sola TS
+        </Typography>
+      </div>
+      {statusElement}
+    </div>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        color: 'var(--eds-color-text-subtle)',
+      }}
+    >
+      <Typography
+        variant="body_short"
+        style={{ margin: 0, fontSize: '0.875rem' }}
+      >
+        Mongstad
+      </Typography>
+      <EdsIcon data={arrow_forward} size="xs" />
+      <Typography
+        variant="body_short"
+        style={{ margin: 0, fontSize: '0.875rem' }}
+      >
+        Rotterdam
+      </Typography>
+    </div>
+    <Typography
+      variant="body_short"
+      style={{
+        margin: 0,
+        fontSize: '0.8125rem',
+        color: 'var(--eds-color-text-subtle)',
+      }}
+    >
+      750 000 bbl &middot; Johan Sverdrup
+    </Typography>
+    <div
+      style={{
+        borderTop: '1px solid var(--eds-color-border-subtle, #e0e0e0)',
+        marginTop: 4,
+        paddingTop: 8,
+        fontSize: '0.75rem',
+        color: 'var(--eds-color-text-subtle)',
+      }}
+    >
+      {label}
+    </div>
+  </Card>
+)
+
+export const ChipVsBadge: Story = {
+  name: 'Chip vs Badge',
+  render: () => {
+    const [selected, setSelected] = useState<StatusOption>(STATUS_OPTIONS[2])
+    const [menuOpen, setMenuOpen] = useState(false)
+    const chipRef = useRef<HTMLDivElement>(null)
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+          <CargoCard
+            label="Chip — interactive, opens a dropdown"
+            statusElement={
+              <>
+                <Chip
+                  ref={chipRef}
+                  color={selected.chipColor}
+                  dropdown
+                  onClick={() => setMenuOpen((o) => !o)}
+                >
+                  {selected.label}
+                </Chip>
+                <Menu
+                  open={menuOpen}
+                  anchorEl={chipRef.current}
+                  onClose={() => setMenuOpen(false)}
+                  placement="bottom-end"
+                >
+                  {STATUS_OPTIONS.map((opt) => (
+                    <Menu.Item
+                      key={opt.label}
+                      onClick={() => {
+                        setSelected(opt)
+                        setMenuOpen(false)
+                      }}
+                    >
+                      <Badge color={opt.badgeColor} size="xs">
+                        {opt.label}
+                      </Badge>
+                    </Menu.Item>
+                  ))}
+                </Menu>
+              </>
+            }
+          />
+          <CargoCard
+            label="Badge — non-interactive status indicator"
+            statusElement={
+              <Badge color={selected.badgeColor}>{selected.label}</Badge>
+            }
+          />
+        </div>
+      </div>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A **Chip** is interactive: it can be clicked, selected, deleted, or used as a dropdown trigger. A **Badge** is a non-interactive label — it communicates status at a glance without inviting user action. When a status is purely informational and does not need user action, a badge keeps the interface compact and focused. When the user needs to change or act on that status, reach for a chip instead.',
+      },
+      source: {
+        code: `{/* Interactive — use Chip + Menu */}
+<Chip ref={chipRef} color={selected.chipColor} dropdown onClick={() => setMenuOpen(o => !o)}>
+  {selected.label}
+</Chip>
+
+{/* Non-interactive — use Badge */}
+<Badge color={selected.badgeColor}>{selected.label}</Badge>`,
+      },
+    },
   },
 }
 

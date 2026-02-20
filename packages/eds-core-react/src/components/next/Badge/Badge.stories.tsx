@@ -102,6 +102,16 @@ const Wrapper = ({
 /*  Introduction                                                      */
 /* ------------------------------------------------------------------ */
 
+export const Introduction: Story = {
+  args: {
+    children: 'Label',
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Badge vs Chip                                                     */
+/* ------------------------------------------------------------------ */
+
 type StatusOption = {
   label: string
   chipColor?: ChipColor
@@ -197,7 +207,8 @@ const CargoCard = ({
   </Card>
 )
 
-export const Introduction: Story = {
+export const BadgeVsChip: Story = {
+  name: 'Badge vs Chip',
   render: () => {
     const [selected, setSelected] = useState<StatusOption>(STATUS_OPTIONS[2])
     const [menuOpen, setMenuOpen] = useState(false)
