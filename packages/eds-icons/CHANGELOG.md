@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0](https://github.com/equinor/design-system/compare/eds-icons@v1.2.2...eds-icons@v1.3.0) (2026-02-20)
+
+
+### ✨ Added
+
+* **eds-icons:** add manage_accounts icon ([#4556](https://github.com/equinor/design-system/issues/4556)) ([9835dd2](https://github.com/equinor/design-system/commit/9835dd28e0efc4821fda798cc6356e5de6a603b7))
+
 ## [1.2.2](https://github.com/equinor/design-system/compare/eds-icons@v1.2.1...eds-icons@v1.2.2) (2026-02-11)
 
 
