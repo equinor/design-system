@@ -714,8 +714,8 @@ const ActiveFilters = () => {
   return (
     <Wrapper>
       <Button
-        variant="ghost"
-        tone="neutral"
+        variant="outlined"
+        tone="accent"
         onClick={() => {}}
       >
         <EdsIcon data={filter_alt} size="sm" />
@@ -763,7 +763,7 @@ export const ActiveFilterBar: Story = {
         code: `import { filter_alt } from '@equinor/eds-icons'
 import { Button, Icon } from '@equinor/eds-core-react/next'
 
-<Button variant="ghost" tone="neutral">
+<Button variant="outlined" tone="accent">
   <Icon data={filter_alt} size="sm" />
   Filters
   <span className="badge">{activeCount}</span>
