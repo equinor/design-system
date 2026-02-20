@@ -1,0 +1,79 @@
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Badge.stories'
+
+<Meta of={ComponentStories} />
+
+# Badge
+
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+```tsx
+import { Badge } from '@equinor/eds-core-react/next'
+```
+
+A non-interactive label for displaying short pieces of information that require
+stronger visual emphasis than plain text — such as statuses, categories, or
+counts.
+
+If you need **interactivity** (click, select, delete), use the
+[Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) component instead.
+Before reaching for a Badge, consider whether the extra emphasis is truly needed
+or if plain text would communicate the information just as well.
+
+<Primary />
+<Controls />
+
+## Usage
+
+```tsx
+import { Badge } from '@equinor/eds-core-react/next'
+import { check_circle_outlined } from '@equinor/eds-icons'
+
+// Basic badge
+<Badge>Label</Badge>
+
+// Coloured badge
+<Badge color="success">Active</Badge>
+
+// Secondary emphasis
+<Badge color="danger" emphasis="secondary">Error</Badge>
+
+// With icon
+<Badge icon={check_circle_outlined} color="success">Approved</Badge>
+
+// Small and extra-small
+<Badge size="sm">Small</Badge>
+<Badge size="xs">XS</Badge>
+```
+
+&nbsp;
+
+## Examples
+
+### All variants
+
+Complete matrix of all sizes, emphasis levels, and semantic colours.
+
+<Canvas of={ComponentStories.AllVariants} />
+
+### With icons
+
+Leading icons provide additional visual context.
+
+<Canvas of={ComponentStories.WithIcons} />
+
+### Data-visualisation colors
+
+The full infographic palette in both emphasis levels.
+
+<Canvas of={ComponentStories.DatavizColors} />
+
+### Sizes
+
+Three sizes: `md` (20 px), `sm` (16 px), and `xs` (12 px).
+
+<Canvas of={ComponentStories.Sizes} />
