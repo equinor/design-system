@@ -1,11 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import type { TransformedToken } from 'style-dictionary/types'
+import type { TransformedToken, FormatFnArguments } from 'style-dictionary/types'
 import {
   toCamelCase,
   buildNestedObject,
   typescriptNestedFormat,
 } from '../format/typescriptNested'
-import type { FormatFnArguments } from 'style-dictionary/types'
 
 describe('typescriptNested format', () => {
   describe('toCamelCase', () => {
@@ -156,6 +155,65 @@ describe('typescriptNested format', () => {
       expect(result).toContain('regular: 1.5,')
       expect(result).toContain('regular: 400,')
       expect(result).toContain("regular: '1rem',")
+    })
+
+    it('outputs spacing tokens with rootName "spacing" and correct structure', () => {
+      const tokens = [
+        mockToken(['Selectable space', 'Horizontal'], '8'),
+        mockToken(['Selectable space', 'Vertical'], '12'),
+        mockToken(['Container space', 'Horizontal'], '16'),
+      ] as TransformedToken[]
+
+      const result = typescriptNestedFormat({
+        dictionary: { allTokens: tokens, tokens: {}, unfilteredTokens: {} },
+        options: { rootName: 'spacing' },
+        file: { destination: 'selectable-space-xs.ts' },
+        platform: {},
+      } as unknown as FormatFnArguments)
+
+      // Uses rootName 'spacing', not color or typography
+      expect(result).toContain('export const spacing =')
+      expect(result).toContain('} as const')
+      expect(result).not.toContain('export const color')
+      expect(result).not.toContain('export const typography')
+      // Paths should be camelCased
+      expect(result).toContain('selectableSpace:')
+      expect(result).toContain('containerSpace:')
+      expect(result).not.toContain('Selectable space')
+      expect(result).not.toContain('Container space')
+      // Numeric values must not be quoted as strings
+      expect(result).not.toMatch(/horizontal: '[\d.]+'/)
+      expect(result).not.toMatch(/vertical: '[\d.]+'/)
+      // Numeric values must appear as bare numbers
+      expect(result).toMatch(/horizontal: \d+,/)
+      expect(result).toMatch(/vertical: \d+,/)
+    })
+
+    it('outputs spacing density tokens with nested structure and unquoted numerics', () => {
+      const tokens = [
+        mockToken(['Spacing', 'Icon', 'XS', 'Gap horizontal'], '6.5'),
+        mockToken(['Spacing', 'Icon', 'MD', 'Gap horizontal'], '8.5'),
+        mockToken(['Spacing', 'Border radius', 'SM'], '4'),
+        mockToken(['Spacing', 'Inset', 'Label'], '2px'),
+      ] as TransformedToken[]
+
+      const result = typescriptNestedFormat({
+        dictionary: { allTokens: tokens, tokens: {}, unfilteredTokens: {} },
+        options: { rootName: 'spacing' },
+        file: { destination: 'spacious.ts' },
+        platform: {},
+      } as unknown as FormatFnArguments)
+
+      expect(result).toContain('export const spacing =')
+      // Nested structure should exist
+      expect(result).toContain('spacing:')
+      expect(result).toContain('icon:')
+      expect(result).toContain('borderRadius:')
+      // Numeric values (int and decimal) must not be quoted
+      expect(result).not.toMatch(/gapHorizontal: '[\d.]+'/)
+      expect(result).toMatch(/gapHorizontal: \d+\.?\d*,/)
+      // Non-numeric values (like '2px') must be quoted
+      expect(result).toMatch(/label: '2px'/)
     })
 
     it('quotes numeric keys in the output', () => {

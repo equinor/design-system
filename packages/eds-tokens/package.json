@@ -18,6 +18,7 @@
     "./js/color/*": "./build/js/color/*.js",
     "./js/spacing/*": "./build/js/spacing/*.js",
     "./ts/color/*": "./build/ts/color/*.ts",
+    "./ts/spacing/*": "./build/ts/spacing/*.ts",
     "./ts/typography/*": "./build/ts/typography/*.ts"
   },
   "types": "./dist/types/index.d.ts",
