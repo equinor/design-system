@@ -1,8 +1,19 @@
 import { forwardRef } from 'react'
 import { close, check, arrow_drop_down } from '@equinor/eds-icons'
 import { Icon } from '../Icon'
-import type { ChipProps } from './Chip.types'
+import type { ChipProps, ChipSemanticColor } from './Chip.types'
 import './chip.css'
+
+const SEMANTIC_COLORS = new Set<string>([
+  'accent',
+  'danger',
+  'warning',
+  'info',
+  'success',
+])
+
+const isSemanticColor = (color: string): color is ChipSemanticColor =>
+  SEMANTIC_COLORS.has(color)
 
 /**
  * Chips are compact interactive elements representing an input, attribute,
@@ -20,6 +31,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     showCheckIcon = true,
     icon,
     dropdown = false,
+    color,
     onClick,
     className,
     ...rest
@@ -46,6 +58,21 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   const animateCheck = showCheckIcon && !icon
   const leadingIcon = selected && showCheckIcon ? check : icon
   const hasIcon = leadingIcon !== undefined
+
+  const hasColor = color !== undefined
+  const semanticColor = color && isSemanticColor(color)
+
+  // Determine data-color-appearance:
+  // - If a semantic color is set, use it (unless disabled → neutral)
+  // - If selected without explicit color, use accent
+  // - Otherwise neutral
+  const colorAppearance = disabled
+    ? 'neutral'
+    : semanticColor
+      ? color
+      : selected
+        ? 'accent'
+        : 'neutral'
 
   const classes = ['eds-chip', className].filter(Boolean).join(' ')
 
@@ -74,7 +101,9 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       data-deletable={deletable || undefined}
       data-dropdown={showDropdown || undefined}
       data-has-icon={hasIcon || undefined}
-      data-color-appearance={selected && !disabled ? 'accent' : 'neutral'}
+      data-color-appearance={colorAppearance}
+      data-chip-color={hasColor ? color : undefined}
+      data-colored={hasColor || undefined}
       aria-disabled={disabled || undefined}
       aria-pressed={clickable ? selected : undefined}
       aria-haspopup={showDropdown ? 'menu' : undefined}

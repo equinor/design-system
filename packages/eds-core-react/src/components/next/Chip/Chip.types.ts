@@ -1,6 +1,36 @@
 import type { HTMLAttributes } from 'react'
 import type { IconData } from '../Icon'
 
+/** Semantic color tones resolved via the dynamic token system */
+export type ChipSemanticColor =
+  | 'accent'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'success'
+
+/** Data visualization colors from the EDS infographic palette */
+export type ChipDatavizColor =
+  | 'moss-green'
+  | 'energy-red'
+  | 'weathered-red'
+  | 'slate-blue'
+  | 'spruce-wood'
+  | 'mist-blue'
+  | 'lichen-green'
+  | 'purple-berry'
+  | 'pink-rose'
+  | 'pink-salmon'
+  | 'green-cucumber'
+  | 'green-succulent'
+  | 'green-mint'
+  | 'blue-ocean'
+  | 'blue-overcast'
+  | 'blue-sky'
+
+/** All available chip colors */
+export type ChipColor = ChipSemanticColor | ChipDatavizColor
+
 export type ChipProps = {
   /** Whether the chip is disabled */
   disabled?: boolean
@@ -21,6 +51,12 @@ export type ChipProps = {
    * When `selected` is true, this icon is replaced by a checkmark.
    */
   icon?: IconData
+  /**
+   * Background color of the chip. Renders with a subtle filled background
+   * and no border. Supports semantic tones (accent, danger, warning, info,
+   * success) and data visualization colors from the EDS infographic palette.
+   */
+  color?: ChipColor
   /**
    * Callback fired when the delete icon is clicked.
    * When provided, a close button is rendered inside the chip.

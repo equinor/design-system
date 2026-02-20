@@ -16,9 +16,9 @@ import { Typography } from '../../Typography'
 import { TextField } from '../TextField'
 import { Checkbox } from '../Checkbox'
 import { Icon as EdsIcon } from '../Icon'
-import type { ChipProps } from './Chip.types'
+import type { ChipProps, ChipColor } from './Chip.types'
 
-type StoryArgs = ChipProps
+type StoryArgs = ChipProps & { color?: ChipColor }
 
 const meta: Meta<StoryArgs> = {
   title: 'EDS 2.0 (beta)/Data Display/Chip',
@@ -596,6 +596,128 @@ export const SuggestionSingleSelect: Story = {
     {product}
   </Chip>
 ))}`,
+      },
+    },
+  },
+}
+
+/* ------------------------------------------------------------------ */
+/*  Colors                                                            */
+/* ------------------------------------------------------------------ */
+
+const semanticColors: ChipColor[] = [
+  'accent',
+  'danger',
+  'warning',
+  'info',
+  'success',
+]
+
+const datavizColors: ChipColor[] = [
+  'moss-green',
+  'energy-red',
+  'weathered-red',
+  'slate-blue',
+  'spruce-wood',
+  'mist-blue',
+  'lichen-green',
+  'purple-berry',
+  'pink-rose',
+  'pink-salmon',
+  'green-cucumber',
+  'green-succulent',
+  'green-mint',
+  'blue-ocean',
+  'blue-overcast',
+  'blue-sky',
+]
+
+export const Colors: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Semantic colors
+        </Typography>
+        <Wrapper>
+          {semanticColors.map((color) => (
+            <Chip key={color} color={color} onClick={() => {}}>
+              {color}
+            </Chip>
+          ))}
+        </Wrapper>
+      </div>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Data visualization colors
+        </Typography>
+        <Wrapper>
+          {datavizColors.map((color) => (
+            <Chip key={color} color={color} onClick={() => {}}>
+              {color}
+            </Chip>
+          ))}
+        </Wrapper>
+      </div>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Colored + deletable
+        </Typography>
+        <Wrapper>
+          <Chip color="danger" onDelete={() => {}}>
+            Error
+          </Chip>
+          <Chip color="warning" onDelete={() => {}}>
+            Warning
+          </Chip>
+          <Chip color="info" onDelete={() => {}}>
+            Information
+          </Chip>
+          <Chip color="purple-berry" onDelete={() => {}}>
+            Category A
+          </Chip>
+          <Chip color="blue-ocean" onDelete={() => {}}>
+            Category B
+          </Chip>
+        </Wrapper>
+      </div>
+      <div>
+        <Typography variant="h6" style={{ marginBottom: 8 }}>
+          Disabled colored
+        </Typography>
+        <Wrapper>
+          <Chip color="accent" onClick={() => {}} disabled>
+            Accent
+          </Chip>
+          <Chip color="danger" onClick={() => {}} disabled>
+            Danger
+          </Chip>
+          <Chip color="moss-green" onClick={() => {}} disabled>
+            Moss green
+          </Chip>
+        </Wrapper>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The `color` prop applies a subtle filled background with no border. Semantic colors (accent, danger, warning, info, success) use the EDS dynamic token system. Data visualization colors use the EDS infographic palette for charts and categorization.',
+      },
+      source: {
+        code: `{/* Semantic colors */}
+<Chip color="accent" onClick={handleClick}>Accent</Chip>
+<Chip color="danger" onClick={handleClick}>Danger</Chip>
+<Chip color="warning" onClick={handleClick}>Warning</Chip>
+
+{/* Data visualization colors */}
+<Chip color="moss-green" onClick={handleClick}>Moss green</Chip>
+<Chip color="purple-berry" onClick={handleClick}>Purple berry</Chip>
+<Chip color="blue-ocean" onClick={handleClick}>Blue ocean</Chip>
+
+{/* Colored + deletable */}
+<Chip color="danger" onDelete={handleDelete}>Error</Chip>`,
       },
     },
   },
