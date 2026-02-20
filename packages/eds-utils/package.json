@@ -70,7 +70,7 @@
     "react-is": "^19.2.4",
     "rollup": "^4.57.1",
     "rollup-plugin-delete": "^3.0.2",
-    "styled-components": "6.3.9",
+    "styled-components": "6.3.10",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^4.0.18",
