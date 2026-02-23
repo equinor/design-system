@@ -56,9 +56,9 @@
     color: var(--_eds-field-helper-color);
   }
 
-  /* Reduce gap between input and helper message to 3xs spacing.
-     Applied to input-container (not helper message) to avoid [data-font-family] margin: 0 override. */
-  .eds-field:has(.eds-field__helper-message) .eds-input-container {
+  /* Reduce gap before helper message to 3xs spacing.
+     Applied to the preceding sibling (not helper message) to avoid [data-font-family] margin: 0 override. */
+  .eds-field > :has(+ .eds-field__helper-message) {
     margin-block-end: calc(var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical));
   }
 
