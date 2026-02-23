@@ -44,10 +44,8 @@
     &:focus-within {
       outline-color: var(--eds-color-border-strong);
       box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thick) var(--_bg-input),
-        0 0 0
-          calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
-          var(--eds-color-border-focus);
+        0 0 0 var(--eds-sizing-stroke-thin) var(--_bg-input),
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
     }
 
     /* Invalid state */
@@ -57,10 +55,8 @@
       &:focus-within {
         outline-color: var(--eds-color-border-strong);
         box-shadow:
-          0 0 0 var(--eds-sizing-stroke-thick) var(--_bg-input),
-          0 0 0
-            calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
-            var(--eds-color-border-focus);
+          0 0 0 var(--eds-sizing-stroke-thin) var(--_bg-input),
+          0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
       }
     }
 
