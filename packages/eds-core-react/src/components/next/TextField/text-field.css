@@ -14,13 +14,13 @@
     padding: 0;
     border: none;
     background: transparent;
-    color: var(--eds-color-icon-subtle);
+    color: var(--eds-color-text-strong);
     cursor: pointer;
     margin-block: calc(var(--eds-sizing-icon-xs) / -2);
 
     &:hover,
     &:focus-visible {
-      color: var(--eds-color-icon-info);
+      color: var(--eds-color-text-strong);
 
       & svg {
         background: var(--eds-color-bg-fill-muted-hover);
