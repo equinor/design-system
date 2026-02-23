@@ -3,6 +3,7 @@ import { info_circle } from '@equinor/eds-icons'
 import type { TextFieldProps } from './TextField.types'
 import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
+import { Button } from '../Button'
 import { Tooltip } from '../../Tooltip'
 import { Icon } from '../Icon'
 import './text-field.css'
@@ -36,13 +37,18 @@ export const TextField = forwardRef<
           </Field.Label>
           {labelInfo && (
             <Tooltip title={labelInfo} placement="top">
-              <button
-                type="button"
+              <Button
+                variant="ghost"
+                icon
+                round
+                size="small"
+                tone="neutral"
                 className="eds-text-field__info"
                 aria-label="More information"
+
               >
                 <Icon data={info_circle} size="xs" />
-              </button>
+              </Button>
             </Tooltip>
           )}
         </div>

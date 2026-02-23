@@ -8,30 +8,9 @@
   }
 
   .eds-text-field__info {
-    display: inline-flex;
-    align-items: center;
     flex-shrink: 0;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: var(--eds-color-icon-subtle);
-    cursor: pointer;
+    /* Negative margin collapses the button's 24px layout contribution to ~8px,
+       matching Figma's 8px icon container. Label text-box height determines row height. */
     margin-block: calc(var(--eds-sizing-icon-xs) / -2);
-
-    &:hover,
-    &:focus-visible {
-      color: var(--eds-color-icon-info);
-
-      & svg {
-        background: var(--eds-color-bg-fill-muted-hover);
-        border-radius: var(--eds-spacing-border-radius-pill);
-      }
-    }
-
-    &:focus-visible {
-      outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-focus);
-      outline-offset: var(--eds-sizing-stroke-thick);
-      border-radius: var(--eds-spacing-border-radius-pill);
-    }
   }
 }
