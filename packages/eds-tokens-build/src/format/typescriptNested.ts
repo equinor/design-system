@@ -1,4 +1,7 @@
-import type { TransformedToken, FormatFnArguments } from 'style-dictionary/types'
+import type {
+  TransformedToken,
+  FormatFnArguments,
+} from 'style-dictionary/types'
 
 /**
  * Convert a path segment to camelCase.
@@ -49,7 +52,7 @@ export function buildNestedObject(tokens: TransformedToken[]): NestedObject {
       if (!(segment in current) || typeof current[segment] === 'string') {
         current[segment] = {}
       }
-      current = current[segment] as NestedObject
+      current = current[segment]
     }
 
     const lastSegment = segments[segments.length - 1]

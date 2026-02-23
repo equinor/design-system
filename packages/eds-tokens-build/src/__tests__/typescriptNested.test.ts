@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import type { TransformedToken, FormatFnArguments } from 'style-dictionary/types'
+import type {
+  TransformedToken,
+  FormatFnArguments,
+} from 'style-dictionary/types'
 import {
   toCamelCase,
   buildNestedObject,
