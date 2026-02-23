@@ -45,7 +45,6 @@ export const TextField = forwardRef<
                 tone="neutral"
                 className="eds-text-field__info"
                 aria-label="More information"
-
               >
                 <Icon data={info_circle} size="xs" />
               </Button>
