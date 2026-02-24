@@ -47,20 +47,38 @@ Each component has:
 To actually use these components in your application, install the beta version:
 
 ```bash
-npm install @equinor/eds-core-react@beta
+npm install @equinor/eds-core-react@beta @equinor/eds-tokens
 ```
 
-### 3. Import from `/next` Entry Point
+### 3. Load Fonts
+
+EDS 2.0 components use two font families: **Inter** for UI text (buttons, inputs, labels) and **Equinor** for headings. Load both via the EDS variable font stylesheet in your HTML `<head>`:
+
+```html
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
+```
+
+> **Important:** The older `equinor-font.css` only includes the Equinor font. If you only load that, UI components (Button, TextField, etc.) will fall back to a generic sans-serif because Inter is missing.
+
+### 4. Import CSS
+
+Import component styles in your application entry point:
+
+```tsx
+import '@equinor/eds-core-react/next/index.css'
+```
+
+### 5. Import from `/next` Entry Point
 
 ```typescript
-import { Button, Typography } from '@equinor/eds-core-react/next'
+import { Button, TextField } from '@equinor/eds-core-react/next'
 
 function MyApp() {
   return (
-    <div>
-      <Typography>Welcome to EDS 2.0!</Typography>
-      <Button>Click me</Button>
-    </div>
+    <form>
+      <TextField label="Project name" />
+      <Button>Submit</Button>
+    </form>
   )
 }
 ```

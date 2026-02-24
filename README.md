@@ -393,23 +393,21 @@ See the [package documentation](https://github.com/equinor/design-system/tree/ma
 
 ## Fonts
 
-The Equinor typeface is available from the EDS CDN.
+EDS uses two font families: **Equinor** for headings and **Inter** for UI/body text. Both are available from the EDS CDN as variable fonts:
 
-### Usage
-
-#### All the fonts
+### Recommended (includes both Equinor and Inter)
 
 ```html
-<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-font.css" />
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
 ```
 
-#### Individual fonts
+> **Note:** If you use EDS 2.0 (`next`) components, this stylesheet is required. The older `equinor-font.css` only includes Equinor, so UI components will fall back to a generic sans-serif.
+
+### Individual fonts
 
 ```html
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/equinor-regular.css" />
 ```
-
-We currently don’t support the font-display property, so if that’s something you need then please let us know.
 
 
 ## Logo
