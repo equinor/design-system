@@ -185,6 +185,8 @@ type(scope): description
 
 **Breaking**: `feat(eds-core-react)!: remove deprecated prop`
 
+**Scope and release-please interaction**: Release-please detects packages from file paths — you don't always need a package scope. Using a package scope with a visible type forces a bump regardless of which files changed. For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
+
 See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 ## Git Workflow

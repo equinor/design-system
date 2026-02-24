@@ -97,6 +97,12 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 - `prerelease-type: "beta"`: Adds `-beta.X` suffix to versions
 - `changelog-path`: Uses separate changelog for beta releases
 
+### Exclude Paths
+
+All packages use `exclude-paths` to prevent non-publishable files from triggering version bumps. This includes config files, test files, Storybook, documentation, and build tooling.
+
+**Important limitation:** `exclude-paths` only filters file-path-based detection. If a commit has a **scope that matches a package's `component` name** (e.g. `feat(eds-core-react): ...`), it will trigger a release for that package regardless of `exclude-paths`. To avoid this, use non-release-triggering types (`chore`, `build`, `ci`, `test`) for commits that only touch excluded files. See `documentation/how-to/CONVENTIONAL_COMMITS.md` for guidance.
+
 ## Pull Request Configuration
 
 ### Combined Releases
