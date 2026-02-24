@@ -248,6 +248,37 @@ describe('DatePicker', () => {
     })
   })
 
+  it('should display validation errors in the configured locale', () => {
+    const maxDate = new Date(2024, 0, 1)
+    const outOfRangeDate = new Date(2024, 5, 15)
+
+    const { container, rerender } = render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={outOfRangeDate}
+          maxValue={maxDate}
+        />
+      </I18nProvider>,
+    )
+
+    // English: "Value must be ... or earlier."
+    expect(container.textContent).toMatch(/Value must be/)
+
+    rerender(
+      <I18nProvider locale={'nb-NO'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={outOfRangeDate}
+          maxValue={maxDate}
+        />
+      </I18nProvider>,
+    )
+
+    // Norwegian: "Verdien må være ... eller tidligere."
+    expect(container.textContent).toMatch(/Verdien/)
+  })
+
   it('should be localized', () => {
     const date = new Date(2024, 4, 4)
 

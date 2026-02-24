@@ -28,6 +28,7 @@ import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
 import { getCalendarDate } from './utils/get-calendar-date'
 import { useGetLocale } from './utils/useGetLocale'
+import { getLocalizedValidationErrors } from './utils/getLocalizedValidationErrors'
 
 /**
  * DatePicker component encapsulates the logic for selecting a single date.
@@ -144,9 +145,21 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const { groupProps, buttonProps, fieldProps, calendarProps } =
       useDatePicker(dateCreateProps, pickerState, ref)
 
+    const localizedErrors = pickerState.displayValidation.isInvalid
+      ? getLocalizedValidationErrors(
+          pickerState.displayValidation.validationDetails,
+          locale,
+          _minValue,
+          _maxValue,
+        )
+      : []
+
     const helperPropsInvalid = pickerState.displayValidation.isInvalid
       ? {
-          text: pickerState.displayValidation.validationErrors.join('\n'),
+          text: (localizedErrors.length > 0
+            ? localizedErrors
+            : pickerState.displayValidation.validationErrors
+          ).join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
           icon: <Icon size={16} data={warning_outlined} />,
         }

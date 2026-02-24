@@ -150,6 +150,40 @@ describe('DateRangePicker', () => {
     expect(disabledMaxElement).toHaveAttribute('aria-disabled', 'true')
   })
 
+  it('should display validation errors in the configured locale', () => {
+    const maxDate = new Date(2024, 0, 1)
+    const outOfRangeDate = {
+      from: new Date(2024, 5, 10),
+      to: new Date(2024, 5, 15),
+    }
+
+    const { container, rerender } = render(
+      <I18nProvider locale={'en-US'}>
+        <DateRangePicker
+          label={'DateRangePicker'}
+          value={outOfRangeDate}
+          maxValue={maxDate}
+        />
+      </I18nProvider>,
+    )
+
+    // English: "Value must be ... or earlier."
+    expect(container.textContent).toMatch(/Value must be/)
+
+    rerender(
+      <I18nProvider locale={'nb-NO'}>
+        <DateRangePicker
+          label={'DateRangePicker'}
+          value={outOfRangeDate}
+          maxValue={maxDate}
+        />
+      </I18nProvider>,
+    )
+
+    // Norwegian: "Verdien må være ... eller tidligere."
+    expect(container.textContent).toMatch(/Verdien/)
+  })
+
   it('should be possible to limit specific days', async () => {
     const date = {
       from: new Date(2024, 4, 4),
