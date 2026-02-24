@@ -56,6 +56,12 @@
     color: var(--_eds-field-helper-color);
   }
 
+  /* Reduce gap before helper message to 3xs spacing.
+     Applied to the preceding sibling (not helper message) to avoid [data-font-family] margin: 0 override. */
+  .eds-field > :has(+ .eds-field__helper-message) {
+    margin-block-end: calc(var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical));
+  }
+
   /* Only helper message changes color when disabled */
   .eds-field[data-disabled='true'] {
     --_eds-field-helper-color: var(--eds-color-text-disabled);
