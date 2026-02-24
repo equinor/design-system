@@ -19,6 +19,20 @@ npm install @equinor/eds-core-react
 yarn add @equinor/eds-core-react
 ```
 
+### Load fonts
+
+EDS components require the **Equinor** and **Inter** font families. Add the EDS variable font stylesheet to your HTML `<head>`:
+
+```html
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
+```
+
+:::tip
+If you are using EDS 2.0 (`next`) components, this stylesheet is **required**. The older `equinor-font.css` only includes Equinor and will cause UI components (Button, TextField, etc.) to fall back to a generic sans-serif. See [Typography](../../../foundation/design-tokens/typography.md) for details.
+:::
+
+### Use components
+
 Import and use components in your React application:
 
 ```tsx
