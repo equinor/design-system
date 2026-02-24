@@ -151,14 +151,15 @@ export const $ARGUMENTS = forwardRef<HTMLDivElement, $ARGUMENTSProps>(
       <div
         ref={ref}
         className={classes}
-        // Foundation data-attributes for dynamic token styling:
-        data-color-appearance={disabled ? 'neutral' : 'accent'}  // Sets color context
-        data-selectable-space="md"                               // Sets spacing scale
-        data-space-proportions="squished"                        // Padding proportions
-        data-font-family="ui"                                    // Font family
-        data-font-size="md"                                      // Font size + icon size
-        data-line-height="default"                               // Line height
-        data-disabled={disabled || undefined}                    // Disabled state
+        // ⚠️ ALWAYS verify in Figma, NEVER copy from other components
+        data-color-appearance={/* from Figma — ⚠️ check BOTH default AND disabled state, often changes to 'neutral' */}
+        data-selectable-space={/* from Figma */}
+        data-space-proportions={/* from Figma */}
+        data-baseline={/* from Figma */}
+        data-font-family={/* from Figma */}
+        data-font-size={/* from Figma */}
+        data-line-height={/* from Figma */}
+        data-disabled={disabled || undefined}
         {...rest}
       />
     )
@@ -279,8 +280,9 @@ Components use data attributes to enable dynamic token-based styling:
 | Attribute                | Purpose             | Values                                         |
 | ------------------------ | ------------------- | ---------------------------------------------- |
 | `data-variant`           | Visual variant      | component-specific (primary, secondary, ghost) |
-| `data-selectable-space`  | Spacing mode        | `sm`, `md`, `lg`                               |
-| `data-space-proportions` | Padding proportions | `squished`, `default`, `spacious`              |
+| `data-selectable-space`  | Spacing mode        | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`            |
+| `data-space-proportions` | Padding proportions | `squished`, `squared`, `stretched`             |
+| `data-baseline`          | Text baseline trim  | `center`, `grid`                               |
 | `data-font-family`       | Typography family   | `ui`, `body`                                   |
 | `data-font-size`         | Font size           | `xs`, `sm`, `md`, `lg`, `xl`                   |
 | `data-line-height`       | Line height mode    | `squished`, `default`, `spacious`              |
@@ -290,15 +292,7 @@ Components use data attributes to enable dynamic token-based styling:
 Keep minimal. Only comment: complex calculations, layout tricks, deviations from expected behavior, or TODO notes. Skip obvious headers and self-explanatory properties.
 
 **Hiding Browser Default UI:**
-**Prefer native browser functionality** for better accessibility. Only hide when Figma design conflicts with browser defaults or they can't be styled to match. Always comment why:
-
-```css
-/* Hide native search clear button since we provide custom clear button matching design */
-input[type='search']::-webkit-search-cancel-button {
-  display: none;
-  appearance: none;
-}
-```
+Before finalizing, check if the component uses any native HTML elements that have built-in browser UI (e.g. buttons, arrows, indicators). Then check Figma — if the design provides a custom replacement, hide the native one and comment why. If Figma doesn't address it, prefer keeping native functionality for accessibility.
 
 **Example CSS Template:**
 
@@ -312,7 +306,8 @@ input[type='search']::-webkit-search-cancel-button {
 
     background-color: var(--eds-color-bg-fill-emphasis-default);
     color: var(--eds-color-text-strong-on-emphasis);
-    border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-strong);
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-strong);
+    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     border-radius: var(--eds-spacing-border-radius-rounded);
 
     padding-block: var(--eds-selectable-space-vertical);
@@ -323,9 +318,12 @@ input[type='search']::-webkit-search-cancel-button {
     background-color: var(--eds-color-bg-fill-emphasis-hover);
   }
 
+  /* Focus ring example — always verify stroke width, color, and gap background in Figma.
+     outline is used for border above, so box-shadow is used for the focus ring instead. */
   .eds-$ARGUMENTS:focus-visible {
-    outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
-    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin)); /* Use calc() for offset */
+    box-shadow:
+      0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+      0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
   }
 
   .eds-$ARGUMENTS[data-disabled] {
@@ -807,7 +805,7 @@ These patterns are for specific edge cases. Most components won't need them - re
   /* Border using outline (doesn't affect height calculation) */
   outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
   outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
-  border-radius: var(--eds-spacing-border-rounded);
+  border-radius: var(--eds-spacing-border-radius-rounded);
 }
 
 .my-component:hover {
@@ -818,10 +816,8 @@ These patterns are for specific edge cases. Most components won't need them - re
   outline-color: var(--eds-color-border-strong);
   /* Use box-shadow for focus ring since outline is used for border */
   box-shadow:
-    0 0 0 var(--eds-sizing-stroke-thick) var(--eds-color-bg-canvas),
-    0 0 0
-      calc(var(--eds-sizing-stroke-thick) + var(--eds-sizing-stroke-thin))
-      var(--eds-color-border-focus);
+    0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+    0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
 }
 ```
 
