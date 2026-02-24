@@ -11,11 +11,11 @@ export const spacing = {
       md: 20,
       lg: 24,
       xl: 28,
-      '2xl': 32,
-      '3xl': 37,
-      '4xl': 42,
-      '5xl': 48,
-      '6xl': 56,
+      twoXl: 32,
+      threeXl: 37,
+      fourXl: 42,
+      fiveXl: 48,
+      sixXl: 56,
     },
     selectable: {
       xs: 20,
@@ -23,7 +23,7 @@ export const spacing = {
       md: 36,
       lg: 44,
       xl: 52,
-      '2xl': 60,
+      twoXl: 60,
     },
     stroke: {
       thin: 1,
@@ -53,23 +53,23 @@ export const spacing = {
         gapHorizontal: 11.5,
         gapVertical: 11.5,
       },
-      '2xl': {
+      twoXl: {
         gapHorizontal: 13,
         gapVertical: 13,
       },
-      '3xl': {
+      threeXl: {
         gapHorizontal: 15,
         gapVertical: 15,
       },
-      '4xl': {
+      fourXl: {
         gapHorizontal: 17.5,
         gapVertical: 17.5,
       },
-      '5xl': {
+      fiveXl: {
         gapHorizontal: 20,
         gapVertical: 20,
       },
-      '6xl': {
+      sixXl: {
         gapHorizontal: 23,
         gapVertical: 23,
       },
@@ -112,28 +112,28 @@ export const spacing = {
       },
     },
     horizontal: {
-      '4xs': 2,
-      '3xs': 4,
-      '2xs': 6,
+      fourXs: 2,
+      threeXs: 4,
+      twoXs: 6,
       xs: 8,
       sm: 12,
       md: 16,
       lg: 20,
       xl: 24,
-      '2xl': 28,
-      '3xl': 32,
+      twoXl: 28,
+      threeXl: 32,
     },
     vertical: {
-      '4xs': 2,
-      '3xs': 4,
-      '2xs': 6,
+      fourXs: 2,
+      threeXs: 4,
+      twoXs: 6,
       xs: 8,
       sm: 12,
       md: 16,
       lg: 20,
       xl: 24,
-      '2xl': 28,
-      '3xl': 32,
+      twoXl: 28,
+      threeXl: 32,
     },
   },
   typography: {
@@ -194,7 +194,7 @@ export const spacing = {
         lineHeightDefault: 24,
         lineHeightSquished: 20,
       },
-      '2xl': {
+      twoXl: {
         fontSize: 21,
         trackingTight: -2.309999942779541,
         trackingNormal: 0,
@@ -205,7 +205,7 @@ export const spacing = {
         lineHeightDefault: 28,
         lineHeightSquished: 24,
       },
-      '3xl': {
+      threeXl: {
         fontSize: 24.5,
         trackingTight: -2.694999933242798,
         trackingNormal: 0,
@@ -216,7 +216,7 @@ export const spacing = {
         lineHeightDefault: 32,
         lineHeightSquished: 28,
       },
-      '4xl': {
+      fourXl: {
         fontSize: 28,
         trackingTight: -3.0799999237060547,
         trackingNormal: 0,
@@ -227,7 +227,7 @@ export const spacing = {
         lineHeightDefault: 32,
         lineHeightSquished: 28,
       },
-      '5xl': {
+      fiveXl: {
         fontSize: 32,
         trackingTight: -3.5199999809265137,
         trackingNormal: 0,
@@ -238,7 +238,7 @@ export const spacing = {
         lineHeightDefault: 36,
         lineHeightSquished: 32,
       },
-      '6xl': {
+      sixXl: {
         fontSize: 37,
         trackingTight: -4.070000171661377,
         trackingNormal: 0,
@@ -307,7 +307,7 @@ export const spacing = {
         lineHeightDefault: 24,
         lineHeightSquished: 20,
       },
-      '2xl': {
+      twoXl: {
         fontSize: 24,
         trackingTight: -2.309999942779541,
         trackingNormal: 0,
@@ -318,7 +318,7 @@ export const spacing = {
         lineHeightDefault: 28,
         lineHeightSquished: 24,
       },
-      '3xl': {
+      threeXl: {
         fontSize: 27.5,
         trackingTight: -2.694999933242798,
         trackingNormal: 0,
@@ -329,7 +329,7 @@ export const spacing = {
         lineHeightDefault: 32,
         lineHeightSquished: 28,
       },
-      '4xl': {
+      fourXl: {
         fontSize: 31.5,
         trackingTight: -3.0799999237060547,
         trackingNormal: 0,
@@ -340,7 +340,7 @@ export const spacing = {
         lineHeightDefault: 32,
         lineHeightSquished: 28,
       },
-      '5xl': {
+      fiveXl: {
         fontSize: 36.5,
         trackingTight: -3.5199999809265137,
         trackingNormal: 0,
@@ -351,7 +351,7 @@ export const spacing = {
         lineHeightDefault: 36,
         lineHeightSquished: 32,
       },
-      '6xl': {
+      sixXl: {
         fontSize: 42,
         trackingTight: -4.070000171661377,
         trackingNormal: 0,

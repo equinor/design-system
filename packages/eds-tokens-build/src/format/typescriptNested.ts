@@ -3,13 +3,31 @@ import type {
   FormatFnArguments,
 } from 'style-dictionary/types'
 
+const numberWords: Record<string, string> = {
+  '2': 'two',
+  '3': 'three',
+  '4': 'four',
+  '5': 'five',
+  '6': 'six',
+}
+
 /**
  * Convert a path segment to camelCase.
  * Handles space-separated and hyphenated words like "Fill Muted" → "fillMuted",
  * "font-size" → "fontSize", and single words like "Bg" → "bg".
+ * Converts numeric-prefixed size keys like "2XL" → "twoXl", "3XS" → "threeXs".
  */
 export function toCamelCase(str: string): string {
-  const words = str.split(/[\s-]+/)
+  // Convert numeric prefix followed by letters (e.g. "2XL" → "two xl")
+  const converted = str.replace(
+    /^(\d+)([a-zA-Z]+)/,
+    (_, digits, letters) => {
+      const word = numberWords[digits]
+      return word ? `${word} ${letters.toLowerCase()}` : `${digits}${letters}`
+    },
+  )
+
+  const words = converted.split(/[\s-]+/)
   return words
     .map((word, i) =>
       i === 0

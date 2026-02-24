@@ -63,7 +63,7 @@ export const typography = {
       lineHeightDefault: 24,
       lineHeightSquished: 20,
     },
-    '2xl': {
+    twoXl: {
       fontSize: 21,
       trackingTight: -2.309999942779541,
       trackingNormal: 0,
@@ -74,7 +74,7 @@ export const typography = {
       lineHeightDefault: 28,
       lineHeightSquished: 24,
     },
-    '3xl': {
+    threeXl: {
       fontSize: 24.5,
       trackingTight: -2.694999933242798,
       trackingNormal: 0,
@@ -85,7 +85,7 @@ export const typography = {
       lineHeightDefault: 32,
       lineHeightSquished: 28,
     },
-    '4xl': {
+    fourXl: {
       fontSize: 28,
       trackingTight: -3.0799999237060547,
       trackingNormal: 0,
@@ -96,7 +96,7 @@ export const typography = {
       lineHeightDefault: 32,
       lineHeightSquished: 28,
     },
-    '5xl': {
+    fiveXl: {
       fontSize: 32,
       trackingTight: -3.5199999809265137,
       trackingNormal: 0,
@@ -107,7 +107,7 @@ export const typography = {
       lineHeightDefault: 36,
       lineHeightSquished: 32,
     },
-    '6xl': {
+    sixXl: {
       fontSize: 37,
       trackingTight: -4.070000171661377,
       trackingNormal: 0,

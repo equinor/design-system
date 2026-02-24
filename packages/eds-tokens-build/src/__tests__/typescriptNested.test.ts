@@ -43,6 +43,20 @@ describe('typescriptNested format', () => {
     it('handles single character segments', () => {
       expect(toCamelCase('A')).toBe('a')
     })
+
+    it('converts numeric-prefixed size keys to word-form', () => {
+      expect(toCamelCase('2XL')).toBe('twoXl')
+      expect(toCamelCase('3XS')).toBe('threeXs')
+      expect(toCamelCase('4xs')).toBe('fourXs')
+      expect(toCamelCase('6xl')).toBe('sixXl')
+      expect(toCamelCase('5MD')).toBe('fiveMd')
+    })
+
+    it('leaves pure numeric strings unchanged', () => {
+      expect(toCamelCase('1')).toBe('1')
+      expect(toCamelCase('2')).toBe('2')
+      expect(toCamelCase('10')).toBe('10')
+    })
   })
 
   describe('buildNestedObject', () => {
@@ -88,6 +102,24 @@ describe('typescriptNested format', () => {
         neutral: {
           '1': '#111111',
           '2': '#222222',
+        },
+      })
+    })
+
+    it('converts numeric-prefixed size keys to word-form', () => {
+      const tokens = [
+        mockToken(['Sizing', 'Icon', '2XL'], '28'),
+        mockToken(['Sizing', 'Icon', '3XS'], '4'),
+      ] as TransformedToken[]
+
+      const result = buildNestedObject(tokens)
+
+      expect(result).toEqual({
+        sizing: {
+          icon: {
+            twoXl: '28',
+            threeXs: '4',
+          },
         },
       })
     })
@@ -231,6 +263,27 @@ describe('typescriptNested format', () => {
         platform: {},
       } as unknown as FormatFnArguments)
 
+      expect(result).toContain("'1': '#111111'")
+    })
+
+    it('outputs numeric-prefixed size keys as unquoted word-form', () => {
+      const tokens = [
+        mockToken(['Sizing', 'Icon', '2XL'], '28'),
+        mockToken(['Sizing', 'Icon', '3XS'], '4'),
+        mockToken(['Neutral', '1'], '#111111'),
+      ] as TransformedToken[]
+
+      const result = typescriptNestedFormat({
+        dictionary: { allTokens: tokens, tokens: {}, unfilteredTokens: {} },
+        options: { rootName: 'spacing' },
+        file: { destination: 'test.ts' },
+        platform: {},
+      } as unknown as FormatFnArguments)
+
+      // Size keys should be word-form and unquoted
+      expect(result).toContain('twoXl: 28,')
+      expect(result).toContain('threeXs: 4,')
+      // Pure numeric keys should still be quoted
       expect(result).toContain("'1': '#111111'")
     })
   })
