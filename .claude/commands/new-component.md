@@ -893,3 +893,13 @@ These patterns are for specific edge cases. Most components won't need them - re
 - **Dynamic color system**: `/packages/eds-tokens/instructions/colors-dynamic.md`
 - **Static color system**: `/packages/eds-tokens/instructions/colors-static.md`
 - **Component examples**: `packages/eds-core-react/src/components/next/Button/`, `Input/`, `Icon/`
+
+## Implementation Status Report
+
+After creating all files, output a brief `## Implementation notes` section. Only include categories that apply:
+
+- **✅ From Figma** — key things verified and implemented from the Figma design
+- **⚠️ Inherited, not in Figma** — behavior or UI that comes from a base component (e.g. `Input`, `Field`) but isn't shown in the Figma design for this component. Flag so reviewer can decide whether it should stay or be suppressed
+- **🔍 Assumptions** — decisions made without Figma confirmation (guessed tokens, icons, behavior from old component)
+- **❓ Not implemented** — Figma states or features that were skipped or only partially handled
+- **🚧 TODOs** — known gaps needing follow-up
