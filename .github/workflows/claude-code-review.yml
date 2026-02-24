@@ -68,4 +68,4 @@ jobs:
             test coverage with jest-axe, and conventional commits.
             Refer to CLAUDE.md and .github/copilot-instructions.md for detailed conventions."
             --allowed-tools
-            "Bash(git:*),Bash(gh pr:*),Bash(gh issue:*),Bash(ls:*),Bash(cat:*),Bash(grep:*),Bash(head:*),Bash(tail:*)"
+            "Bash(git:*),Bash(gh pr:*),Bash(gh issue:*),Bash(gh api:*),Bash(ls:*),Bash(cat:*),Bash(grep:*),Bash(head:*),Bash(tail:*)"
