@@ -115,6 +115,33 @@ refactor(eds-tokens, eds-icons): standardize naming conventions
 ❌ `FEAT(eds-core-react): add button` (uppercase type)
 ❌ `feat(eds-core-react) add button` (missing colon)
 
+## Scope and Release-Please Interaction
+
+**Important:** The commit scope directly affects which packages get version bumps via release-please. If a commit scope matches a package's `component` name (e.g. `eds-core-react`), it will trigger a release for that package **regardless of which files were changed** — even if the files are in `exclude-paths`.
+
+### When to avoid package scopes
+
+Release-please detects which packages are affected based on **file paths** — you don't always need a package scope. For example, a commit touching `packages/eds-tokens/src/color.ts` will automatically be associated with `eds-tokens`. Omitting the scope avoids accidentally forcing a bump via scope-matching.
+
+### When to use a scope
+
+- **Package scope** (`eds-core-react`, `eds-tokens`, etc.): Only when the commit message alone doesn't make the package clear, or for changelog readability. Be aware this forces a bump regardless of `exclude-paths`.
+- **Infrastructure scope** (`config`, `github`, `build`, `deps`): For changes that don't belong to a specific package.
+- **No scope**: Perfectly fine for most commits — release-please will figure it out from the file paths.
+
+### Avoiding unnecessary version bumps
+
+For commits that only touch **non-publishable files** (config, docs, Storybook, tests), use a hidden type:
+
+| Scenario | Recommended | Avoid |
+| --- | --- | --- |
+| Storybook-only changes | `chore: ...` or `build(config): ...` | `feat(eds-core-react): ...` |
+| Config file updates | `chore(config): ...` or `build: ...` | `feat(eds-core-react): ...` |
+| Test-only changes | `test: ...` | `feat(eds-core-react): ...` |
+| README/docs in packages | `docs: ...` or `chore: ...` | `feat(eds-core-react): ...` |
+
+The types `chore`, `ci`, `build`, `docs`, and `test` are hidden in release-please and will not trigger version bumps.
+
 ## Emojis (Optional)
 
 Emojis are supported and can be placed after the colon:

@@ -36,27 +36,82 @@
     "packages/eds-data-grid-react": {
       "release-type": "node",
       "package-name": "@equinor/eds-data-grid-react",
-      "component": "eds-data-grid-react"
+      "component": "eds-data-grid-react",
+      "exclude-paths": [
+        ".storybook",
+        "src/tests",
+        "src/stories",
+        "src/EdsDataGrid.stories.tsx",
+        "jest.config.ts",
+        "jest.setup.ts",
+        "rollup.config.js",
+        "tsconfig.json",
+        "tsconfig.build.json",
+        "tsconfig.test.json",
+        "README.md"
+      ]
     },
     "packages/eds-icons": {
       "release-type": "node",
       "package-name": "@equinor/eds-icons",
-      "component": "eds-icons"
+      "component": "eds-icons",
+      "exclude-paths": [
+        "rollup.config.js",
+        "tsconfig.json",
+        "README.md"
+      ]
     },
     "packages/eds-lab-react": {
       "release-type": "node",
       "package-name": "@equinor/eds-lab-react",
-      "component": "eds-lab-react"
+      "component": "eds-lab-react",
+      "exclude-paths": [
+        ".storybook",
+        "stories",
+        "src/stories",
+        "babel.config.cjs",
+        "jest.config.cjs",
+        "jest.setup.ts",
+        "rollup.config.js",
+        "tsconfig.json",
+        "tsconfig.build.json",
+        "tsconfig.test.json",
+        "Dockerfile.storybook",
+        "nginx.conf",
+        "README.md"
+      ]
     },
     "packages/eds-tokens": {
       "release-type": "node",
       "package-name": "@equinor/eds-tokens",
-      "component": "eds-tokens"
+      "component": "eds-tokens",
+      "exclude-paths": [
+        "tokens",
+        "build-generate-variables",
+        ".vscode",
+        ".gitignore",
+        "rollup.config.js",
+        "tsconfig.json",
+        "vite.generate-variables.config.ts",
+        "palette-config.json",
+        "token-config.json",
+        "tokens.json",
+        "README.md",
+        "CLAUDE.md"
+      ]
     },
     "packages/eds-utils": {
       "release-type": "node",
       "package-name": "@equinor/eds-utils",
-      "component": "eds-utils"
+      "component": "eds-utils",
+      "exclude-paths": [
+        "rollup.config.js",
+        "tsconfig.json",
+        "tsconfig.build.json",
+        "vitest.config.ts",
+        "vitest.setup.ts",
+        "README.md"
+      ]
     }
   },
   "separate-pull-requests": false,
@@ -71,7 +126,8 @@
     },
     {
       "type": "docs",
-      "section": "📝 Changed"
+      "section": "📝 Changed",
+      "hidden": true
     },
     {
       "type": "perf",
