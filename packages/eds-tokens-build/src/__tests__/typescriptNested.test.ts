@@ -33,7 +33,7 @@ describe('typescriptNested format', () => {
     })
 
     it('handles mixed hyphens and spaces', () => {
-      expect(toCamelCase('Semi Bold Italic')).toBe('semiBoldItalic')
+      expect(toCamelCase('font-weight Semi Bold')).toBe('fontWeightSemiBold')
     })
 
     it('preserves already lowercase single words', () => {

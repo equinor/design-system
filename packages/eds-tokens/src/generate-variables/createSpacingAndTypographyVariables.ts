@@ -20,7 +20,7 @@ interface BaseOptions {
   prefix?: string
 }
 
-interface BuildCssOptions extends BaseOptions {
+interface BuildTokenOptions extends BaseOptions {
   buildPath: string
   destination: string
   selector?: string
@@ -30,7 +30,10 @@ interface BuildCssOptions extends BaseOptions {
   tsBuildPath?: string
 }
 
-async function buildCssDictionary({
+// TODO: To generate JS and JSON output for all spacing/typography tokens (not just density),
+// add js and json platforms here, matching the pattern in buildDensityDictionary.
+// Currently only buildDensityDictionary produces JS/JSON (for spacious/comfortable).
+async function buildTokenDictionary({
   source,
   include = [],
   buildPath,
@@ -42,7 +45,7 @@ async function buildCssDictionary({
   outputReferences = true,
   rootName,
   tsBuildPath,
-}: BuildCssOptions) {
+}: BuildTokenOptions) {
   const platforms: Record<string, unknown> = {
     css: {
       transformGroup: 'css',
@@ -379,7 +382,7 @@ export async function createSpacingAndTypographyVariables({
           ? ':root, [data-space-proportions="squared"]'
           : `[data-space-proportions="${proportionLower}"]`
 
-      return buildCssDictionary({
+      return buildTokenDictionary({
         include: [
           PRIMITIVES_SOURCE,
           FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -432,7 +435,7 @@ export async function createSpacingAndTypographyVariables({
           ? ':root, [data-selectable-space="xs"]'
           : `[data-selectable-space="${sizeLower}"]`
 
-      return buildCssDictionary({
+      return buildTokenDictionary({
         include: [
           PRIMITIVES_SOURCE,
           FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -498,7 +501,7 @@ export async function createSpacingAndTypographyVariables({
       DENSITY_SPACIOUS_SOURCE,
     ]
 
-    await buildCssDictionary({
+    await buildTokenDictionary({
       include,
       source: [horizontalPath],
       buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
@@ -511,7 +514,7 @@ export async function createSpacingAndTypographyVariables({
       tsBuildPath: spacingTsBuildPath,
     })
 
-    await buildCssDictionary({
+    await buildTokenDictionary({
       include,
       source: [verticalPath],
       buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
@@ -545,7 +548,7 @@ export async function createSpacingAndTypographyVariables({
   // are reset when a new proportion context is created. This overrides any specific
   // values inherited from parent elements, forcing the container/page space to
   // re-bind to the new proportion logic.
-  await buildCssDictionary({
+  await buildTokenDictionary({
     include: commonInclude,
     source: [CONTAINER_SPACE_SOURCE],
     buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
@@ -558,7 +561,7 @@ export async function createSpacingAndTypographyVariables({
     tsBuildPath: spacingTsBuildPath,
   })
 
-  await buildCssDictionary({
+  await buildTokenDictionary({
     include: commonInclude,
     source: [PAGE_SPACE_SOURCE],
     buildPath: path.join(cssBuildPath, SPACING_BUILD_PATH),
@@ -578,7 +581,7 @@ export async function createSpacingAndTypographyVariables({
   // All dependency tokens are included in the include array to allow StyleDictionary to resolve references
   // Note: BOX_FILES are NOT included here because they define tokens at the root level (e.g., "Stroke")
   // which conflict with the semantic tokens file structure
-  await buildCssDictionary({
+  await buildTokenDictionary({
     include: [
       PRIMITIVES_SOURCE,
       FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -667,7 +670,7 @@ export async function createSpacingAndTypographyVariables({
   ] as const
 
   const fontFamilyPromises = fontFamilyConfig.map(({ mode, slug }) =>
-    buildCssDictionary({
+    buildTokenDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -685,7 +688,7 @@ export async function createSpacingAndTypographyVariables({
   )
 
   const fontSizePromises = fontSizeConfig.map((size) =>
-    buildCssDictionary({
+    buildTokenDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -704,7 +707,7 @@ export async function createSpacingAndTypographyVariables({
   )
 
   const fontWeightPromises = fontWeightConfig.map(({ mode, slug }) =>
-    buildCssDictionary({
+    buildTokenDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -725,7 +728,7 @@ export async function createSpacingAndTypographyVariables({
   )
 
   const lineHeightPromises = lineHeightConfig.map(({ mode, slug }) =>
-    buildCssDictionary({
+    buildTokenDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
@@ -746,7 +749,7 @@ export async function createSpacingAndTypographyVariables({
   )
 
   const trackingPromises = trackingConfig.map(({ mode, slug }) =>
-    buildCssDictionary({
+    buildTokenDictionary({
       include: [
         PRIMITIVES_SOURCE,
         FIGMA_SPECIFIC_TOKENS_SOURCE,
