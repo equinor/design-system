@@ -25,6 +25,7 @@ import { tokens } from '@equinor/eds-tokens'
 import { Icon } from '../Icon'
 import { getCalendarDate } from './utils/get-calendar-date'
 import { useGetLocale } from './utils/useGetLocale'
+import { getLocalizedValidationErrors } from './utils/getLocalizedValidationErrors'
 
 /**
  * DateRangePicker component encapsulates the logic for selecting a range of dates
@@ -133,9 +134,24 @@ export const DateRangePicker = forwardRef(
       calendarProps,
     } = useDateRangePicker(dateRangePickerStateProps, state, ref)
 
+    const localizedErrors = state.displayValidation.isInvalid
+      ? getLocalizedValidationErrors(
+          state.displayValidation.validationDetails,
+          locale,
+          _minValue,
+          _maxValue,
+          timezone,
+        )
+      : []
+
+    const errorMessages =
+      localizedErrors.length > 0
+        ? localizedErrors
+        : state.displayValidation.validationErrors
+
     const helperProps = state.displayValidation.isInvalid
       ? {
-          text: state.displayValidation.validationErrors.join('\n'),
+          text: errorMessages.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
           icon: <Icon size={16} data={warning_outlined} />,
         }

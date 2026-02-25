@@ -248,6 +248,72 @@ describe('DatePicker', () => {
     })
   })
 
+  it('should display validation errors in the configured locale', () => {
+    const maxDate = new Date(2024, 0, 1)
+    const outOfRangeDate = new Date(2024, 5, 15)
+
+    const { container, rerender } = render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={outOfRangeDate}
+          maxValue={maxDate}
+        />
+      </I18nProvider>,
+    )
+
+    // English: "Value must be ... or earlier."
+    expect(container.textContent).toMatch(/Value must be/)
+
+    rerender(
+      <I18nProvider locale={'nb-NO'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={outOfRangeDate}
+          maxValue={maxDate}
+        />
+      </I18nProvider>,
+    )
+
+    // Norwegian: "Verdien må være ... eller tidligere."
+    expect(container.textContent).toMatch(/Verdien/)
+  })
+
+  it('should display localized rangeUnderflow message', () => {
+    const minDate = new Date(2024, 11, 31)
+    const tooEarlyDate = new Date(2024, 0, 1)
+
+    const { container } = render(
+      <I18nProvider locale={'nb-NO'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={tooEarlyDate}
+          minValue={minDate}
+        />
+      </I18nProvider>,
+    )
+
+    // Norwegian: "Verdien må være ... eller senere."
+    expect(container.textContent).toMatch(/Verdien/)
+  })
+
+  it('should display localized message for unavailable dates', () => {
+    const unavailableDate = new Date(2024, 4, 30)
+
+    const { container } = render(
+      <I18nProvider locale={'nb-NO'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={unavailableDate}
+          isDateUnavailable={(d) => d.getDate() === 30}
+        />
+      </I18nProvider>,
+    )
+
+    // Norwegian: "Valgt dato utilgjengelig."
+    expect(container.textContent).toMatch(/utilgjengelig/)
+  })
+
   it('should be localized', () => {
     const date = new Date(2024, 4, 4)
 
