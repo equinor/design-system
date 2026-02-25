@@ -1,4 +1,4 @@
-const { execSync } = require('child_process')
+const { spawnSync } = require('child_process')
 const path = require('path')
 
 async function main() {
@@ -23,23 +23,27 @@ async function main() {
   const ext = path.extname(filePath)
   const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd()
 
-  const run = (cmd) => {
+  const run = (cmd, args) => {
     try {
-      execSync(cmd, { cwd: projectDir, stdio: 'pipe' })
+      spawnSync(cmd, args, { cwd: projectDir, stdio: 'pipe' })
     } catch {
       // Best-effort — never block the edit
     }
   }
 
   if (['.ts', '.tsx'].includes(ext)) {
-    run(
-      `npx eslint --fix --cache --cache-location node_modules/.cache/.eslintcache "${filePath}"`,
-    )
+    run('./node_modules/.bin/eslint', [
+      '--fix',
+      '--cache',
+      '--cache-location',
+      'node_modules/.cache/.eslintcache',
+      filePath,
+    ])
   }
 
   // stylelint only applies to vanilla CSS (next/ components)
-  if (ext === '.css' && filePath.includes('/next/')) {
-    run(`npx stylelint --fix "${filePath}"`)
+  if (ext === '.css' && filePath.includes('/components/next/')) {
+    run('./node_modules/.bin/stylelint', ['--fix', '--cache', filePath])
   }
 }
 
