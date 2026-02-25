@@ -151,15 +151,18 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           locale,
           _minValue,
           _maxValue,
+          timezone,
         )
       : []
 
+    const errorMessages =
+      localizedErrors.length > 0
+        ? localizedErrors
+        : pickerState.displayValidation.validationErrors
+
     const helperPropsInvalid = pickerState.displayValidation.isInvalid
       ? {
-          text: (localizedErrors.length > 0
-            ? localizedErrors
-            : pickerState.displayValidation.validationErrors
-          ).join('\n'),
+          text: errorMessages.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
           icon: <Icon size={16} data={warning_outlined} />,
         }

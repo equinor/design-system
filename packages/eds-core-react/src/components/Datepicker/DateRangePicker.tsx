@@ -140,15 +140,18 @@ export const DateRangePicker = forwardRef(
           locale,
           _minValue,
           _maxValue,
+          timezone,
         )
       : []
 
+    const errorMessages =
+      localizedErrors.length > 0
+        ? localizedErrors
+        : state.displayValidation.validationErrors
+
     const helperProps = state.displayValidation.isInvalid
       ? {
-          text: (localizedErrors.length > 0
-            ? localizedErrors
-            : state.displayValidation.validationErrors
-          ).join('\n'),
+          text: errorMessages.join('\n'),
           color: tokens.colors.interactive.warning__text.rgba,
           icon: <Icon size={16} data={warning_outlined} />,
         }

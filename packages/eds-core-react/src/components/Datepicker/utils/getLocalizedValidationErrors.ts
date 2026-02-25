@@ -160,6 +160,7 @@ function findLocaleMessages(locale: string): LocaleMessages {
     ? new Intl.Locale(locale).language
     : locale.split('-')[0]
 
+  // First match wins: e.g. "pt" → "pt-BR", "zh" → "zh-CN"
   for (const key of Object.keys(allTranslations)) {
     const keyLang = key.split('-')[0]
     if (keyLang === language) return allTranslations[key]
@@ -187,6 +188,7 @@ export function getLocalizedValidationErrors(
   locale: string,
   minValue?: DateValue | null,
   maxValue?: DateValue | null,
+  timezone?: string,
 ): string[] {
   const msgs = findLocaleMessages(locale)
   const dateFormatter = new DateFormatter(locale, {
@@ -194,7 +196,7 @@ export function getLocalizedValidationErrors(
     month: 'numeric',
     day: 'numeric',
   })
-  const timeZone = dateFormatter.resolvedOptions().timeZone
+  const timeZone = timezone ?? dateFormatter.resolvedOptions().timeZone
 
   const errors: string[] = []
 
