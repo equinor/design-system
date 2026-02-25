@@ -26,6 +26,11 @@ exports[`Table Matches snapshot 1`] = `
   border-bottom: 2px solid var(--eds_ui_background__medium, rgba(220, 220, 220, 1));
 }
 
+.c3 a {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 .c4 {
   display: flex;
   align-items: center;

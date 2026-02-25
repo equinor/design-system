@@ -277,6 +277,46 @@ CompactTable.decorators = [
   },
 ]
 
+export const WithLinks: StoryFn<TableProps> = () => {
+  return (
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Cell>Name</Table.Cell>
+          <Table.Cell>Description</Table.Cell>
+          <Table.Cell>Link</Table.Cell>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Plain text</Table.Cell>
+          <Table.Cell>No link, font-weight 500</Table.Cell>
+          <Table.Cell></Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Typography link</Table.Cell>
+          <Table.Cell>Uses Typography with link prop</Table.Cell>
+          <Table.Cell>
+            <Typography link href="https://equinor.com" target="_blank">
+              Equinor.com
+            </Typography>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Native anchor</Table.Cell>
+          <Table.Cell>Uses a plain {'<a>'} element</Table.Cell>
+          <Table.Cell>
+            <a href="https://equinor.com" target="_blank">
+              Equinor.com
+            </a>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+}
+WithLinks.storyName = 'With links'
+
 const SortCell = styled(Cell)<{ isSorted: boolean } & CellProps>`
   svg {
     visibility: ${({ isSorted }) => (isSorted ? 'visible' : 'hidden')};
