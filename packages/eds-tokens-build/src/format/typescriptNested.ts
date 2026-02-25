@@ -19,10 +19,13 @@ const numberWords: Record<string, string> = {
  */
 export function toCamelCase(str: string): string {
   // Convert numeric prefix followed by letters (e.g. "2XL" → "two xl")
-  const converted = str.replace(/^(\d+)([a-zA-Z]+)/, (_, digits, letters) => {
-    const word = numberWords[digits]
-    return word ? `${word} ${letters.toLowerCase()}` : `${digits}${letters}`
-  })
+  const converted = str.replace(
+    /^(\d+)([a-zA-Z]+)/,
+    (_: string, digits: string, letters: string) => {
+      const word = numberWords[digits]
+      return word ? `${word} ${letters.toLowerCase()}` : `${digits}${letters}`
+    },
+  )
 
   const words = converted.split(/[\s-]+/)
   return words
