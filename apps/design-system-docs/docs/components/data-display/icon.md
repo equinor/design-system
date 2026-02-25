@@ -29,9 +29,9 @@ Use Icon to reinforce meaning alongside text - in buttons, form fields, status m
 
 The Icon component renders an SVG element with a single `data` prop from `@equinor/eds-icons`. It supports three sizing layers:
 
-- **Explicit `size` prop** - highest priority, uses `--eds-sizing-icon-{size}` design tokens
-- **Parent Typography** - inherits `--eds-typography-icon-size` from the Typography component
-- **Dynamic fallback** - scales at 1.5em relative to the surrounding font size
+- **Explicit `size` prop** - highest priority, for precise control
+- **Parent Typography** - automatically inherits the right size when placed inside Typography
+- **Dynamic fallback** - scales at 1.5× relative to the surrounding font size
 
 ## Guidelines
 
@@ -93,9 +93,9 @@ Icons respect the `data-density` attribute for density-aware sizing. The same `s
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--density-modes)
 
-### Dynamic fallback
+### Default sizing
 
-When no `size` prop or `data-font-size` is set, icons use `1.5em` for dynamic scaling. This means icons are always 1.5x the surrounding font size - a reliable fallback that works in any context.
+When no `size` prop is set and the icon is outside a Typography component, it scales to 1.5× the surrounding font size. This provides a sensible default in any context.
 
 <iframe
   class="sb-iframe"
@@ -107,9 +107,9 @@ When no `size` prop or `data-font-size` is set, icons use `1.5em` for dynamic sc
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--dynamic-fallback)
 
-### Colour
+### Color
 
-Icons inherit `currentColor` by default, making them adapt to text colour automatically. You can also set a custom colour using the `color` prop.
+Icons inherit `currentColor` by default, making them adapt to text color automatically. You can also set a custom color using the `color` prop.
 
 <iframe
   class="sb-iframe"
@@ -141,6 +141,27 @@ The `size` prop removes negative margins, giving full control to your layout sys
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--inline-with-text)
+
+## Usage in Figma
+
+There is no dedicated Icon component in Figma. Instead, icons are imported directly from the **Assets** panel.
+
+**Standalone icons** — Import the icon from Assets and place it directly in your design. The icon size is controlled by the asset itself.
+
+**Inline with Typography** — When placing an icon inline with text, wrap it in a container like "Leading Icon Item". This container applies negative padding to optically align the icon with the text baseline — matching how the code component behaves with negative margins for inline icons.
+
+The container exposes variables for controlling size and negative padding:
+
+| Variable                                 | Purpose                                      |
+| ---------------------------------------- | -------------------------------------------- |
+| `Selectable/Icon size`                   | Controls the icon dimensions                 |
+| `Selectable/Icon container padding ↕︎`  | Negative vertical padding for optical alignment |
+| `Selectable/Icon container padding ↔︎`  | Negative horizontal padding (square containers only) |
+
+**Which padding variables to use depends on the container shape:**
+
+- **Rectangular containers** (e.g., a button with text) — Only vertical padding (`↕︎`) is needed. Horizontal spacing is handled by the parent layout's gap.
+- **Square containers** (e.g., an icon-only button) — Both vertical (`↕︎`) and horizontal (`↔︎`) padding are needed, set to the same value, since the icon fills the container in both directions.
 
 ## Accessibility
 
@@ -175,12 +196,12 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Use `title` prop when an icon is the only element conveying meaning (e.g., icon-only buttons)
 - Let icons inherit size from Typography when used inline with text
 - Use the `size` prop in flex layouts where you control spacing with gap
-- Rely on `currentColor` for icons that should match surrounding text colour
+- Rely on `currentColor` for icons that should match surrounding text color
 :::
 
 :::danger **Don't**
 
 - Don't use icons without a `title` when there is no accompanying text to convey the meaning
-- Don't set both a `size` prop and rely on Typography auto-sizing - pick one approach per icon
+- Don't combine the `size` prop with Typography auto-sizing. The `size` prop takes priority and overrides the inherited size, so the Typography context has no effect
 - Don't use custom pixel values for sizing - use the `size` prop or let tokens handle it
 :::
