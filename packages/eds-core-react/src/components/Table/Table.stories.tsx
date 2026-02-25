@@ -297,7 +297,12 @@ export const WithLinks: StoryFn<TableProps> = () => {
           <Table.Cell>Typography link</Table.Cell>
           <Table.Cell>Uses Typography with link prop</Table.Cell>
           <Table.Cell>
-            <Typography link href="https://equinor.com" target="_blank">
+            <Typography
+              link
+              href="https://equinor.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               Equinor.com
             </Typography>
           </Table.Cell>
@@ -306,7 +311,7 @@ export const WithLinks: StoryFn<TableProps> = () => {
           <Table.Cell>Native anchor</Table.Cell>
           <Table.Cell>Uses a plain {'<a>'} element</Table.Cell>
           <Table.Cell>
-            <a href="https://equinor.com" target="_blank">
+            <a href="https://equinor.com" target="_blank" rel="noreferrer">
               Equinor.com
             </a>
           </Table.Cell>
