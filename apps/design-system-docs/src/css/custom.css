@@ -204,6 +204,16 @@ nav.menu li a {
   box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
 }
 
+/* Version dropdown: remove border line and fix caret wrapping */
+.navbar__item.dropdown {
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.navbar__item.dropdown:hover {
+  box-shadow: none;
+}
+
 /* ======================================
  * MAIN CONTENT AREA
  * ====================================== */
