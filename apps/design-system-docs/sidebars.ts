@@ -65,6 +65,15 @@ const sidebars: SidebarsConfig = {
         'components/inputs/textfield',
       ],
     },
+    {
+      type: 'category',
+      label: 'Data Display',
+      link: {
+        type: 'doc',
+        id: 'components/data-display/data-display',
+      },
+      items: ['components/data-display/icon'],
+    },
   ],
   //Foundation Section
   foundationSidebar: [
