@@ -21,7 +21,7 @@ yarn add @equinor/eds-core-react
 
 ### Load fonts
 
-EDS components require the **Equinor** and **Inter** font families. Add the EDS variable font stylesheet to your HTML `<head>`:
+EDS components use the **Equinor** font family. EDS 2.0 (`next`) components additionally require **Inter**. Add the EDS variable font stylesheet to your HTML `<head>` to load both:
 
 ```html
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />

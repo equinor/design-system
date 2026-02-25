@@ -17,7 +17,7 @@ To use EDS components correctly, you must load both font families. The recommend
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
 ```
 
-:::warning Use eds-uprights-vf.css for next components
+:::warning eds-uprights-vf.css required for EDS 2.0 components
 The older `equinor-font.css` stylesheet only includes the Equinor font. If you use EDS 2.0 (`next`) components with only `equinor-font.css`, UI components like Button and TextField will fall back to a generic sans-serif because the Inter font is missing.
 :::
 

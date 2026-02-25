@@ -62,7 +62,7 @@ EDS 2.0 components use two font families: **Inter** for UI text (buttons, inputs
 
 ### 4. Import CSS
 
-Import component styles in your application entry point:
+Import component styles separately in your application entry point (this is important for SSR compatibility):
 
 ```tsx
 import '@equinor/eds-core-react/next/index.css'
@@ -110,15 +110,6 @@ import { Button } from '@equinor/eds-core-react'
 ```
 
 That's it! No component name changes, just update the import path.
-
-<br />
-## CSS
-
-Import the CSS separately for SSR compatibility:
-
-```tsx
-import '@equinor/eds-core-react/next/index.css'
-```
 
 <br />
 ## Provide Feedback
