@@ -2,6 +2,19 @@
 /* Define layer order - eds-components has lowest priority for easy user overrides */
 @layer eds-components;
 
+/*
+ * Font loading:
+ * Next components use two font families:
+ *   - "Inter" for UI text (buttons, inputs, labels, etc.)
+ *   - "Equinor" for headings
+ *
+ * Load both fonts via the EDS variable font stylesheet:
+ *   <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
+ *
+ * Note: The older "equinor-font.css" only includes the Equinor font.
+ * If you only load that, UI components will fall back to a generic sans-serif.
+ */
+
 @import '@equinor/eds-tokens/css/variables';
 @import './Icon/icon.css';
 @import './Button/button.css';

@@ -133,7 +133,17 @@ const darkSurface = darkSemanticNested.bg.neutral.surface // "#262626"
 
 * **Colors** -- Semantic color tokens for backgrounds, text, borders, and states
 * **Spacing** -- Layout spacing including inline, stack, inset, and border radius
-* **Typography** -- Font sizes, line heights, and font families (requires font files)
+* **Typography** -- Font sizes, line heights, and font families (requires font files, see below)
+
+### Font loading
+
+The typography system requires two font families: **Equinor** (headings) and **Inter** (UI/body text). Load both via the EDS variable font stylesheet:
+
+```html
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
+```
+
+> **Note:** The older `equinor-font.css` only includes the Equinor font. Components using `data-font-family="ui"` (Button, TextField, Input, etc.) will fall back to a generic sans-serif if Inter is not loaded.
 
 ### Typography variables that adapt to data-attributes
   * Font family setup (UI and Header fonts)
