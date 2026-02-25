@@ -106,11 +106,12 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS.types'
 **Foundation Data-Attribute Values** (from `/documentation/how-to/TOKEN_SYSTEM_GUIDE.md`):
 
 - `data-color-appearance`: `'accent' | 'neutral' | 'info' | 'success' | 'warning' | 'danger'`
-- `data-selectable-space`: `'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`
+- `data-selectable-space`: `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
 - `data-space-proportions`: `'squished' | 'squared' | 'stretched'`
 - `data-font-size`: `'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'`
 - `data-font-family`: `'ui' | 'header'`
-- `data-line-height`: `'squished' | 'default' | 'spacious'`
+- `data-baseline`: `'center' | 'grid'`
+- `data-line-height`: `'squished' | 'default'`
 
 Use foundation values directly unless the component needs custom variants (like Button's 'primary' | 'secondary' | 'ghost').
 
@@ -186,7 +187,7 @@ $ARGUMENTS.displayName = '$ARGUMENTS'
 >   color: var(--eds-color-bg-fill-emphasis-default);
 > }
 > .my-component[data-disabled] .my-component__icon {
->   color: var(--eds-color-border-medium); /* From Figma disabled state */
+>   color: var(--eds-color-text-disabled); /* From Figma disabled state */
 > }
 > ```
 
@@ -280,13 +281,13 @@ Components use data attributes to enable dynamic token-based styling:
 | Attribute                | Purpose             | Values                                         |
 | ------------------------ | ------------------- | ---------------------------------------------- |
 | `data-variant`           | Visual variant      | component-specific (primary, secondary, ghost) |
-| `data-selectable-space`  | Spacing mode        | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`            |
+| `data-selectable-space`  | Spacing mode        | `xs`, `sm`, `md`, `lg`, `xl`                   |
 | `data-space-proportions` | Padding proportions | `squished`, `squared`, `stretched`             |
 | `data-baseline`          | Text baseline trim  | `center`, `grid`                               |
-| `data-font-family`       | Typography family   | `ui`, `body`                                   |
-| `data-font-size`         | Font size           | `xs`, `sm`, `md`, `lg`, `xl`                   |
-| `data-line-height`       | Line height mode    | `squished`, `default`, `spacious`              |
-| `data-color-appearance`  | Color theming       | `neutral`, `accent`, `warning`, `danger`       |
+| `data-font-family`       | Typography family   | `ui`, `header`                                 |
+| `data-font-size`         | Font size           | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl` |
+| `data-line-height`       | Line height mode    | `squished`, `default`                          |
+| `data-color-appearance`  | Color theming       | `neutral`, `accent`, `info`, `success`, `warning`, `danger` |
 
 **CSS Comments:**
 Keep minimal. Only comment: complex calculations, layout tricks, deviations from expected behavior, or TODO notes. Skip obvious headers and self-explanatory properties.
@@ -709,20 +710,17 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
 }
 
 .my-component[data-disabled] .my-component__text {
-  /* TODO: Replace with dedicated disabled token when available */
-  color: var(--eds-color-border-medium); /* ✅ From Figma disabled state */
+  color: var(--eds-color-text-disabled); /* ✅ From Figma disabled state */
 }
 
 .my-component[data-disabled] .my-component__icon {
-  /* Change data-color-appearance to neutral, then set specific disabled color */
-  /* TODO: Replace with dedicated disabled token when available */
-  color: var(--eds-color-border-medium); /* ✅ Same disabled color for icons */
+  color: var(--eds-color-text-disabled); /* ✅ Same disabled color for icons */
 }
 ```
 
-**How to find:** Check `figma_get_variable_defs` for the disabled state, or inspect disabled variant in `get_design_context`. Look for text/icon colors in disabled state.
+**How to find:** Check `figma_get_variable_defs` for the disabled state, or inspect the disabled variant in `get_design_context`. Look for `bg-disabled`, `border-disabled`, and `text-disabled` tokens.
 
-**Pattern for accent icons:** If icons are accent when enabled, change `data-color-appearance` from `"accent"` to `"neutral"` when disabled, then set specific `--eds-color-border-medium` in CSS.
+**Pattern for accent icons:** If icons are accent when enabled, change `data-color-appearance` from `"accent"` to `"neutral"` when disabled, then set `--eds-color-text-disabled` in CSS.
 
 ### Typography & Height
 
@@ -876,7 +874,7 @@ These patterns are for specific edge cases. Most components won't need them - re
 ## Anti-patterns
 
 - Using `figma_get_design_context` alone without `figma_get_variable_defs` for each state
-- **Using `opacity` for disabled states** - Use exact color tokens from Figma (e.g., `--eds-color-border-medium`)
+- **Using `opacity` for disabled states** - Use dedicated disabled tokens: `--eds-color-text-disabled`, `--eds-color-border-disabled`, `--eds-color-bg-fill-emphasis-disabled`
 - **Missing `data-baseline`** on text spans - Height won't match Figma (no text-box-trim)
 - **Missing `data-color-appearance`** when Figma shows accent/danger colors - Dynamic tokens won't resolve correctly
 - **Missing data-attributes in TSX** - CSS tokens need context to apply correct values
