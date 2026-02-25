@@ -67,7 +67,6 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
     fileName: 'semantic',
     selector: ':root',
     outputReferences: true,
-    rootName: 'color',
   })
 
   await semanticColors.buildAllPlatforms()
