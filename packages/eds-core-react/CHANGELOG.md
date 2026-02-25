@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.7](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.6...eds-core-react@v2.3.7) (2026-02-25)
+
+
+### 🐛 Fixed
+
+* localise DatePicker validation messages based on configured locale ([#4576](https://github.com/equinor/design-system/issues/4576)) ([410bbc2](https://github.com/equinor/design-system/commit/410bbc24054efe61d971d4ac4f797954279fc183))
+* normalize link font-size and font-weight in Table cells ([#4578](https://github.com/equinor/design-system/issues/4578)) ([1739bd6](https://github.com/equinor/design-system/commit/1739bd66f585b8b4aac730307456c0d692d83e51))
+
 ## [2.3.6](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.5...eds-core-react@v2.3.6) (2026-02-20)
 
 

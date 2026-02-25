@@ -4,6 +4,13 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.3.4-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.3-beta.0...eds-core-react-next@v2.3.4-beta.0) (2026-02-25)
+
+
+### 🐛 Fixed
+
+* use EDS Button for TextField info icon and fix helper message gap ([#4569](https://github.com/equinor/design-system/issues/4569)) ([28b0035](https://github.com/equinor/design-system/commit/28b0035fb8a699098f5fc9ae6356ff1f3b3781a6))
+
 ## [2.3.3-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.2-beta.0...eds-core-react-next@v2.3.3-beta.0) (2026-02-20)
 
 
