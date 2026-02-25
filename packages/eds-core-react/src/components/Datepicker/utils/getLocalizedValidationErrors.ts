@@ -214,6 +214,7 @@ export function getLocalizedValidationErrors(
       }),
     )
   }
+  // react-stately maps isDateUnavailable to badInput (not customError)
   if (validationDetails.badInput && msgs.unavailableDate) {
     errors.push(formatMessage(msgs.unavailableDate, {}))
   }
