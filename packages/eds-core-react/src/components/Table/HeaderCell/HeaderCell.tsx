@@ -72,8 +72,12 @@ const StyledTableCell = styled.th((props: BaseProps) => {
   ${sortStylingHover}
   ${sortStylingActive}
   ${firefoxFix}
+    a {
+      font-size: inherit;
+      font-weight: inherit;
+    }
 
-  ${$sticky
+    ${$sticky
       ? css`
           position: sticky;
           top: 0;

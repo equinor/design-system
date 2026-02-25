@@ -30,6 +30,10 @@ const StyledTableCell = styled.td(({ theme, color }: BaseProps) => {
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
     ${bordersTemplate(border)}
+    a {
+      font-size: inherit;
+      font-weight: inherit;
+    }
   `
   return base
 })

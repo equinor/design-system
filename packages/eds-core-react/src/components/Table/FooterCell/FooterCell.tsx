@@ -29,7 +29,11 @@ const StyledTableCell = styled.th((props: BaseProps) => {
     ${spacingsTemplate(spacings)}
     ${typographyTemplate(typography)}
   ${bordersTemplate(theme.border)}
-  ${$sticky
+    a {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+    ${$sticky
       ? css`
           position: sticky;
           bottom: 0;
