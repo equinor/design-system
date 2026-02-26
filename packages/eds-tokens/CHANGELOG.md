@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.2.0...eds-tokens@v2.3.0) (2026-02-26)
+
+
+### ✨ Added
+
+* **eds-tokens:** add nested TypeScript token output ([#4538](https://github.com/equinor/design-system/issues/4538)) ([6100738](https://github.com/equinor/design-system/commit/6100738f24a677a3adeebbbae0b079e3c3e7d644))
+* **eds-tokens:** add spacing tokens to all build outputs ([#4587](https://github.com/equinor/design-system/issues/4587)) ([5a5b1f0](https://github.com/equinor/design-system/commit/5a5b1f049b899095034b9fe66fde040d6e2d4ee7))
+
 ## [2.2.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.1.1...eds-tokens@v2.2.0) (2026-02-17)
 
 
