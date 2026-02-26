@@ -68,8 +68,10 @@ export function gaussian(
 export function formatColorAsString(color: Color, format: ColorFormat): string {
   if (format === 'OKLCH') {
     const oklch = color.to('oklch')
-    const hue = isNaN(oklch.h) ? 0 : oklch.h
-    return `oklch(${oklch.l.toFixed(3)} ${oklch.c.toFixed(3)} ${hue.toFixed(1)})`
+    const l = oklch.l ?? 0
+    const c = oklch.c ?? 0
+    const hue = oklch.h == null || isNaN(oklch.h) ? 0 : oklch.h
+    return `oklch(${l.toFixed(3)} ${c.toFixed(3)} ${hue.toFixed(1)})`
   } else {
     // Default to HEX format
     const srgbColor = color.to('srgb')
@@ -210,8 +212,8 @@ export function generateColorScaleWithInterpolation(
       const oklchColor = interpolatedColor.to('oklch')
 
       // Get the interpolated hue and base chroma
-      const interpolatedHue = isNaN(oklchColor.h) ? 0 : oklchColor.h
-      const baseChroma = oklchColor.c
+      const interpolatedHue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
+      const baseChroma = oklchColor.c ?? 0
 
       // Create the final color with Gaussian-adjusted chroma
       const finalColor = createColorWithGaussianChroma(
@@ -268,8 +270,8 @@ export function generateColorScale(
         const color = new Color(base.toString({ format: 'hex' }))
         // Convert to OKLCH to get the chroma and hue values
         const oklchColor = color.to('oklch')
-        const baseChroma = oklchColor.c
-        const hue = isNaN(oklchColor.h) ? 0 : oklchColor.h
+        const baseChroma = oklchColor.c ?? 0
+        const hue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
 
         // Create the final color with Gaussian-adjusted chroma
         const finalColor = createColorWithGaussianChroma(

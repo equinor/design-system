@@ -60,9 +60,9 @@ function getOklchInfo(colorValue: string, index: number): OklchInfo {
     const oklch = color.to('oklch')
 
     return {
-      l: parseFloat(oklch.l.toFixed(3)),
-      c: parseFloat(oklch.c.toFixed(3)),
-      h: parseFloat((isNaN(oklch.h) ? 0 : oklch.h).toFixed(1)),
+      l: parseFloat((oklch.l ?? 0).toFixed(3)),
+      c: parseFloat((oklch.c ?? 0).toFixed(3)),
+      h: parseFloat((oklch.h == null || isNaN(oklch.h) ? 0 : oklch.h).toFixed(1)),
       value: colorValue,
       index: index,
     }

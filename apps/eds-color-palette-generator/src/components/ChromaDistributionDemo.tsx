@@ -35,7 +35,7 @@ export const ChromaDistributionDemo = ({
     try {
       const base = new Color(baseColor)
       const oklchBase = base.to('oklch')
-      const baseChroma = oklchBase.c
+      const baseChroma = oklchBase.c ?? 0
 
       return lightnessValues.map((lightness) => {
         const multiplier = gaussian(lightness, mean, stdDev)
