@@ -36,6 +36,7 @@ import {
   expandColumns,
   groupedColumns,
   helper,
+  rowDetailPanelColumns,
 } from './stories/columns'
 import { data, summaryData } from './stories/data'
 import { Virtualizer } from './types'
@@ -1162,6 +1163,54 @@ export const ExpandRows: StoryFn<EdsDataGridProps<PostComment>> = (args) => {
 }
 
 ExpandRows.args = {
+  stickyHeader: true,
+  enableVirtual: true,
+  height: 500,
+}
+
+export const RowDetailPanel: StoryFn<EdsDataGridProps<PostComment>> = (
+  args,
+) => {
+  const [data, setData] = useState<Array<PostComment>>([])
+  const [expansionState, setExpansionState] = useState<ExpandedState>({})
+
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    fetch(`https://jsonplaceholder.typicode.com/posts`, { signal })
+      .then((r) => r.json() as Promise<Array<PostComment>>)
+      .then((posts) => setData(posts))
+      .catch(console.error)
+
+    return () => {
+      abortController.abort()
+    }
+  }, [])
+
+  return (
+    <EdsDataGrid
+      {...args}
+      columns={rowDetailPanelColumns}
+      rows={data}
+      expansionState={expansionState}
+      setExpansionState={setExpansionState}
+      getSubRows={(r) => r.comments}
+      renderDetailPanel={(row) => {
+        return (
+          <div>
+            Custom content for row{' '}
+            <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+              {JSON.stringify(row.original, null, 2)}
+            </pre>
+          </div>
+        )
+      }}
+    />
+  )
+}
+
+RowDetailPanel.args = {
   stickyHeader: true,
   enableVirtual: true,
   height: 500,
