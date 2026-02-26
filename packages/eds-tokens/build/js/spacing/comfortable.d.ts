@@ -2,7 +2,6 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const DOCUMENTATION: string;
 export const SIZING_ICON_XS: number;
 export const SIZING_ICON_XS_CONTAINER: number;
 export const SIZING_ICON_SM: number;

@@ -2,7 +2,6 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const DOCUMENTATION = "Spacious";
 export const SIZING_ICON_XS = 16;
 export const SIZING_ICON_XS_CONTAINER = 8;
 export const SIZING_ICON_SM = 18;
