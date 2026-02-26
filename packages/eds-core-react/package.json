@@ -85,7 +85,7 @@
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.2",
     "react-router-dom": "^7.13.0",
-    "rollup": "^4.57.1",
+    "rollup": "^4.59.0",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-preserve-directives": "^1.1.3",
