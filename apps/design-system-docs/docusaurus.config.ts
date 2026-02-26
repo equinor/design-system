@@ -46,6 +46,7 @@ const config: Config = {
             current: {
               label: '2.0.0-beta', // Current version label
               path: 'Next', // URL path for the current version
+              banner: 'none',
             },
           },
         },
