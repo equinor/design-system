@@ -39,15 +39,22 @@ These compile token JSON into CSS/JS/JSON output:
 
 | Script | Input | Output |
 |---|---|---|
-| `build-color-scheme-variables` | Color scheme JSON | `build/css/color/color-scheme/`, JS, JSON |
-| `build-semantic-static-variables` | Semantic + color scheme JSON | `build/css/color/static/`, JS, JSON |
+| `build-color-scheme-variables` | Color scheme JSON | `build/css/color/color-scheme/`, JS, JSON, TS |
+| `build-semantic-static-variables` | Semantic + color scheme JSON | `build/css/color/static/`, JS, JSON, TS |
 | `build-semantic-dynamic-variables` | Appearance JSON | `build/css/color/dynamic/`, JS, JSON |
+
+Typography and spacing builds are handled in `eds-tokens` via `createSpacingAndTypographyVariables.ts`, which also uses the `typescriptNestedFormat` from this package to produce `build/ts/typography/` output.
+
+## Shared Formats
+
+- `typescriptNestedFormat` (`src/format/typescriptNested.ts`) — Custom Style Dictionary format that outputs `export const <rootName> = { ... } as const` with camelCase keys. Used by color build scripts (via the `_extend` utility) and typography builds (via `buildCssDictionary` in `eds-tokens`).
 
 ## Key Source Files
 
 - `src/scripts/generate-*.ts` — Token generation scripts
 - `src/scripts/build-*.ts` — CSS/JS compilation scripts
 - `src/scripts/utils.ts` — Shared utilities (`buildToken`, `varName`, `loadTokenConfig`, etc.)
+- `src/format/typescriptNested.ts` — Nested TypeScript output format
 
 ## Testing
 

@@ -53,6 +53,7 @@ async function buildColorScheme(cfg: TokenConfig) {
     selector: '[data-color-scheme="light"]',
     prefix: COLOR_PREFIX,
     outputReferences: false,
+    rootName: 'color',
   })
 
   const darkColorScheme = _extend({
@@ -65,6 +66,7 @@ async function buildColorScheme(cfg: TokenConfig) {
     selector: '[data-color-scheme="dark"]',
     prefix: COLOR_PREFIX,
     outputReferences: false,
+    rootName: 'color',
   })
 
   await lightColorScheme.buildAllPlatforms()
