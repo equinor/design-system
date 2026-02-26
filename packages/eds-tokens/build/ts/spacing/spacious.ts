@@ -3,7 +3,6 @@
  */
 
 export const spacing = {
-  documentation: 'Spacious',
   sizing: {
     icon: {
       xs: 16,
@@ -363,5 +362,197 @@ export const spacing = {
         lineHeightSquished: 36,
       },
     },
+  },
+  generic: {
+    gap: {
+      none: {
+        horizontal: 0,
+        vertical: 0,
+      },
+      fourXs: {
+        horizontal: 2,
+        vertical: 2,
+      },
+      threeXs: {
+        horizontal: 4,
+        vertical: 4,
+      },
+      twoXs: {
+        horizontal: 6,
+        vertical: 6,
+      },
+      xs: {
+        horizontal: 8,
+        vertical: 8,
+      },
+      sm: {
+        horizontal: 12,
+        vertical: 12,
+      },
+      md: {
+        horizontal: 16,
+        vertical: 16,
+      },
+      lg: {
+        horizontal: 20,
+        vertical: 20,
+      },
+      xl: {
+        horizontal: 24,
+        vertical: 24,
+      },
+      twoXl: {
+        horizontal: 28,
+        vertical: 28,
+      },
+      threeXl: {
+        horizontal: 32,
+        vertical: 32,
+      },
+    },
+    space: {
+      none: {
+        horizontal: 0,
+        vertical: 0,
+      },
+      fourXs: {
+        horizontal: 2,
+        vertical: 2,
+      },
+      threeXs: {
+        horizontal: 4,
+        vertical: 4,
+      },
+      twoXs: {
+        horizontal: 6,
+        vertical: 6,
+      },
+      xs: {
+        horizontal: 8,
+        vertical: 8,
+      },
+      sm: {
+        horizontal: 12,
+        vertical: 12,
+      },
+      md: {
+        horizontal: 16,
+        vertical: 16,
+      },
+      lg: {
+        horizontal: 20,
+        vertical: 20,
+      },
+      xl: {
+        horizontal: 24,
+        vertical: 24,
+      },
+      twoXl: {
+        horizontal: 28,
+        vertical: 28,
+      },
+      threeXl: {
+        horizontal: 32,
+        vertical: 32,
+      },
+    },
+  },
+  spacingProportions: {
+    squished: {
+      xs: {
+        horizontal: 8,
+        vertical: 6,
+      },
+      sm: {
+        horizontal: 12,
+        vertical: 8,
+      },
+      md: {
+        horizontal: 16,
+        vertical: 12,
+      },
+      lg: {
+        horizontal: 20,
+        vertical: 16,
+      },
+      xl: {
+        horizontal: 24,
+        vertical: 20,
+      },
+    },
+    squared: {
+      xs: {
+        horizontal: 8,
+        vertical: 8,
+      },
+      sm: {
+        horizontal: 12,
+        vertical: 12,
+      },
+      md: {
+        horizontal: 16,
+        vertical: 16,
+      },
+      lg: {
+        horizontal: 20,
+        vertical: 20,
+      },
+      xl: {
+        horizontal: 24,
+        vertical: 24,
+      },
+    },
+    stretched: {
+      xs: {
+        horizontal: 8,
+        vertical: 12,
+      },
+      sm: {
+        horizontal: 12,
+        vertical: 16,
+      },
+      md: {
+        horizontal: 16,
+        vertical: 20,
+      },
+      lg: {
+        horizontal: 20,
+        vertical: 24,
+      },
+      xl: {
+        horizontal: 24,
+        vertical: 28,
+      },
+    },
+  },
+  selectableSpace: {
+    xs: {
+      horizontal: 8,
+      vertical: 8,
+    },
+    sm: {
+      horizontal: 12,
+      vertical: 12,
+    },
+    md: {
+      horizontal: 16,
+      vertical: 16,
+    },
+    lg: {
+      horizontal: 20,
+      vertical: 20,
+    },
+    xl: {
+      horizontal: 24,
+      vertical: 24,
+    },
+  },
+  containerSpace: {
+    horizontal: 16,
+    vertical: 16,
+  },
+  pageSpace: {
+    horizontal: 24,
+    vertical: 24,
   },
 } as const
