@@ -81,25 +81,6 @@
         "README.md"
       ]
     },
-    "packages/eds-tokens": {
-      "release-type": "node",
-      "package-name": "@equinor/eds-tokens",
-      "component": "eds-tokens",
-      "exclude-paths": [
-        "tokens",
-        "build-generate-variables",
-        ".vscode",
-        ".gitignore",
-        "rollup.config.js",
-        "tsconfig.json",
-        "vite.generate-variables.config.ts",
-        "palette-config.json",
-        "token-config.json",
-        "tokens.json",
-        "README.md",
-        "CLAUDE.md"
-      ]
-    },
     "packages/eds-utils": {
       "release-type": "node",
       "package-name": "@equinor/eds-utils",
