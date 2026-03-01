@@ -216,7 +216,7 @@ const tokenStyles = EDSStyleSheet.create(
             gap: token.newSpacing.spacing.horizontal.lg,
             paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
             paddingVertical:
-                token.newSpacing.spacing.inset.xl["vertical-squished"],
+                token.newSpacing.spacing.inset.xl.verticalSquished,
         },
         adornment: {
             flexDirection: "row",
@@ -240,7 +240,7 @@ const tokenStyles = EDSStyleSheet.create(
             borderRightWidth: token.geometry.border.borderWidth,
             borderColor: token.colors.border.medium,
             marginVertical:
-                token.newSpacing.spacing.inset.xl["vertical-squished"],
+                token.newSpacing.spacing.inset.xl.verticalSquished,
         },
         children: {
             flex: 1,

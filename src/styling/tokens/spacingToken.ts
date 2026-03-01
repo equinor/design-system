@@ -1,8 +1,7 @@
-import comfortableSpacingTokenJson from "@equinor/eds-tokens/build/json/spacing/nested/comfortable.json";
-import spaciousSpacingTokenJson from "@equinor/eds-tokens/build/json/spacing/nested/spacious.json";
+import { spacing as comfortableSpacingToken } from "@equinor/eds-tokens/build/ts/spacing/comfortable";
+import { spacing as spaciousSpacingToken } from "@equinor/eds-tokens/build/ts/spacing/spacious";
 
-export const comfortableSpacingToken = comfortableSpacingTokenJson;
-export const spaciousSpacingToken = spaciousSpacingTokenJson;
+export { comfortableSpacingToken, spaciousSpacingToken };
 
 export type SpacingToken =
     | typeof comfortableSpacingToken

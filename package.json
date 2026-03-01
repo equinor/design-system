@@ -7,7 +7,7 @@
     },
     "bugs": "https://github.com/equinor/design-system-mobile/issues",
     "dependencies": {
-        "@equinor/eds-tokens": "^2.1.1",
+        "@equinor/eds-tokens": "2.3.0-beta.0",
         "@floating-ui/react-native": "^0.10.7",
         "react-error-boundary": "^6.0.0"
     },
