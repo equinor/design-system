@@ -16,6 +16,7 @@
 
   .eds-link:focus-visible {
     border-radius: var(--eds-spacing-border-radius-rounded);
+    color: var(--eds-color-text-strong);
     outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
     outline-offset: 4px;
   }
@@ -25,7 +26,7 @@
     position: relative;
 
     display: inline-flex;
-    gap: calc(var(--eds-typography-gap-horizontal, 6.5) * 1px);
+    gap: calc(var(--eds-typography-gap-horizontal) * 1px);
     align-items: center;
 
     border-bottom: 1px solid currentcolor;
@@ -53,10 +54,6 @@
 
   .eds-link__icon {
     display: flex;
-    color: var(--eds-color-text-strong);
-  }
-
-  .eds-link:hover .eds-link__icon {
     color: var(--eds-color-text-strong);
   }
 }
