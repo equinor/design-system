@@ -12,6 +12,7 @@ rules:
     - always
     - except: [first-nested]
       ignore: [after-comment, stylelint-commands]
+  import-notation: string
   selector-class-pattern:
     - '^eds-[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z][a-z0-9]*(-[a-z0-9]+)*)?(--[a-z][a-z0-9]*(-[a-z0-9]+)*)?$'
     - message: "Expected class '%s' to follow BEM syntax: eds-block__element--modifier (selector-class-pattern)"
