@@ -81,6 +81,20 @@ describe('Link (next)', () => {
         'https://example.com',
       )
     })
+
+    it('sets data-font-size for standalone variant', () => {
+      render(
+        <Link href="#" variant="standalone">
+          Link
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('data-font-size', 'md')
+    })
+
+    it('does not set data-font-size for inline variant', () => {
+      render(<Link href="#">Link</Link>)
+      expect(screen.getByRole('link')).not.toHaveAttribute('data-font-size')
+    })
   })
 
   describe('Accessibility', () => {
