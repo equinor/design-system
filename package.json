@@ -89,7 +89,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-testing-library": "^7.15.4",
     "jest-axe": "^10.0.0",
-    "stylelint": "^17.3.0",
+    "stylelint": "^17.4.0",
     "stylelint-config-clean-order": "^8.0.1",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^7.0.1",
