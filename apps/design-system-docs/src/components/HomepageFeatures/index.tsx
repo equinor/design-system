@@ -4,17 +4,16 @@ import Heading from '@theme/Heading'
 import styles from './styles.module.css'
 import Link from '@docusaurus/Link'
 
-type FeatureItem = {
-  title: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Svg: React.ComponentType<any>
-  description: ReactNode
-  link: string
-}
-
 import Designer from '../../../static/img/illustrations/designer_illu.svg'
 import Devices from '../../../static/img/illustrations/devices_illu.svg'
 import Puzzle from '../../../static/img/illustrations/puzzle_illu.svg'
+
+type FeatureItem = {
+  title: string
+  Svg: typeof Designer
+  description: ReactNode
+  link: string
+}
 
 const FeatureList: FeatureItem[] = [
   {
