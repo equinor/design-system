@@ -20,7 +20,7 @@ exports[`Radio (next) matches snapshot 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="icon eds-radio__icon eds-radio__icon--checked"
+        class="eds-icon eds-radio__icon eds-radio__icon--checked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -35,7 +35,7 @@ exports[`Radio (next) matches snapshot 1`] = `
       </svg>
       <svg
         aria-hidden="true"
-        class="icon eds-radio__icon eds-radio__icon--unchecked"
+        class="eds-icon eds-radio__icon eds-radio__icon--unchecked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"

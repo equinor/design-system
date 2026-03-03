@@ -20,7 +20,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="icon eds-checkbox__icon eds-checkbox__icon--checked"
+        class="eds-icon eds-checkbox__icon eds-checkbox__icon--checked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -35,7 +35,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
       </svg>
       <svg
         aria-hidden="true"
-        class="icon eds-checkbox__icon eds-checkbox__icon--unchecked"
+        class="eds-icon eds-checkbox__icon eds-checkbox__icon--unchecked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -50,7 +50,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
       </svg>
       <svg
         aria-hidden="true"
-        class="icon eds-checkbox__icon eds-checkbox__icon--indeterminate"
+        class="eds-icon eds-checkbox__icon eds-checkbox__icon--indeterminate"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
