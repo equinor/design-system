@@ -52,8 +52,7 @@
     border-radius: var(--eds-spacing-border-radius-rounded);
   }
 
-  .eds-link__icon {
-    display: flex;
+  .eds-link[data-variant='standalone'] > svg {
     color: var(--eds-color-text-strong);
   }
 }

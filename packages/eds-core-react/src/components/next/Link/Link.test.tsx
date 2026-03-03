@@ -35,6 +35,17 @@ describe('Link (next)', () => {
       )
     })
 
+    it('renders children as composition', () => {
+      render(
+        <Link href="#" variant="standalone">
+          <span data-testid="icon">icon</span>
+          Link text
+        </Link>,
+      )
+      expect(screen.getByTestId('icon')).toBeInTheDocument()
+      expect(screen.getByRole('link')).toHaveTextContent('Link text')
+    })
+
     it('applies custom className', () => {
       render(
         <Link href="#" data-testid="eds-link" className="custom">
@@ -69,49 +80,6 @@ describe('Link (next)', () => {
         'href',
         'https://example.com',
       )
-    })
-  })
-
-  describe('Icons', () => {
-    it('renders startIcon', () => {
-      render(
-        <Link
-          href="#"
-          variant="standalone"
-          startIcon={<span data-testid="start-icon">icon</span>}
-        >
-          Link
-        </Link>,
-      )
-      expect(screen.getByTestId('start-icon')).toBeInTheDocument()
-    })
-
-    it('renders endIcon', () => {
-      render(
-        <Link
-          href="#"
-          variant="standalone"
-          endIcon={<span data-testid="end-icon">icon</span>}
-        >
-          Link
-        </Link>,
-      )
-      expect(screen.getByTestId('end-icon')).toBeInTheDocument()
-    })
-
-    it('renders both startIcon and endIcon', () => {
-      render(
-        <Link
-          href="#"
-          variant="standalone"
-          startIcon={<span data-testid="start-icon">s</span>}
-          endIcon={<span data-testid="end-icon">e</span>}
-        >
-          Link
-        </Link>,
-      )
-      expect(screen.getByTestId('start-icon')).toBeInTheDocument()
-      expect(screen.getByTestId('end-icon')).toBeInTheDocument()
     })
   })
 
