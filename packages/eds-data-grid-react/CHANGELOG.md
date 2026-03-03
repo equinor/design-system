@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.2.3...eds-data-grid-react@v1.2.4) (2026-03-03)
+
+
+### 🐛 Fixed
+
+* **eds-data-grid-react:** reexport RowModel type ([e48496e](https://github.com/equinor/design-system/commit/e48496e407c0d8ac096a790688a8c8a4b444497e))
+
 ## [1.2.3](https://github.com/equinor/design-system/compare/eds-data-grid-react@v1.2.2...eds-data-grid-react@v1.2.3) (2026-02-11)
 
 
