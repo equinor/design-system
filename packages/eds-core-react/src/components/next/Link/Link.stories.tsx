@@ -11,7 +11,7 @@ const meta: Meta<typeof Link> = {
     docs: {
       description: {
         component: `
-\u26a0\ufe0f **Beta Component** - This component is under active development.
+⚠️ **Beta Component** - This component is under active development.
 
 \`\`\`tsx
 import { Link } from '@equinor/eds-core-react/next'
@@ -59,27 +59,18 @@ export const WithIcons: StoryFn<LinkProps> = () => {
         gap: '16px',
       }}
     >
-      <Link
-        href="#"
-        variant="standalone"
-        startIcon={<Icon data={arrow_forward} />}
-      >
+      <Link href="#" variant="standalone">
+        <Icon data={arrow_forward} />
         Link with start icon
       </Link>
-      <Link
-        href="#"
-        variant="standalone"
-        endIcon={<Icon data={external_link} />}
-      >
+      <Link href="#" variant="standalone">
         Link with end icon
+        <Icon data={external_link} />
       </Link>
-      <Link
-        href="#"
-        variant="standalone"
-        startIcon={<Icon data={arrow_forward} />}
-        endIcon={<Icon data={external_link} />}
-      >
+      <Link href="#" variant="standalone">
+        <Icon data={arrow_forward} />
         Link with both icons
+        <Icon data={external_link} />
       </Link>
     </div>
   )
