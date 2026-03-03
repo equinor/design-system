@@ -599,7 +599,7 @@ describe('Helper Functions', () => {
         mean,
         stdDev,
       )
-      const chromaAtMean = colorAtMean.to('oklch').c
+      const chromaAtMean = colorAtMean.to('oklch').c ?? 0
 
       // Away from mean, chroma should be lower
       const colorAway = createColorWithGaussianChroma(
@@ -609,7 +609,7 @@ describe('Helper Functions', () => {
         mean,
         stdDev,
       )
-      const chromaAway = colorAway.to('oklch').c
+      const chromaAway = colorAway.to('oklch').c ?? 0
 
       expect(chromaAtMean).toBeGreaterThan(chromaAway)
     })

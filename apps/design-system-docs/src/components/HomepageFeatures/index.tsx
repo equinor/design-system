@@ -6,7 +6,8 @@ import Link from '@docusaurus/Link'
 
 type FeatureItem = {
   title: string
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Svg: React.ComponentType<any>
   description: ReactNode
   link: string
 }
