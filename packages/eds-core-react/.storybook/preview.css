@@ -9,6 +9,7 @@ legend {
 /* Storybook color scheme wrapper */
 .eds-storybook-wrapper {
   background-color: var(--eds-color-bg-neutral-surface);
+  color: var(--eds-color-text-strong);
   padding: 1rem;
   min-height: 100%;
 }
