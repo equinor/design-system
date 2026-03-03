@@ -64,7 +64,7 @@
     "storybook:lab": "pnpm --filter @equinor/eds-lab-react run storybook",
     "storybook:data-grid": "pnpm --filter @equinor/eds-data-grid-react run storybook",
     "icons": "node scripts/figma-broker/icons.js",
-    "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types"
+    "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types && pnpm --filter @equinor/eds-color-palette-generator types && pnpm --filter design-system-docs typecheck"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

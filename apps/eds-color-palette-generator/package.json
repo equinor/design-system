@@ -21,7 +21,8 @@
     "test:e2e:debug": "playwright test --debug",
     "test:codegen": "playwright codegen",
     "generate:palette-config-in-markdown": "tsx ./scripts/generate-palette-overview.ts",
-    "generate:palette-contrast-report": "tsx ./scripts/generate-palette-contrast-report.ts"
+    "generate:palette-contrast-report": "tsx ./scripts/generate-palette-contrast-report.ts",
+    "types": "tsc"
   },
   "dependencies": {
     "@equinor/eds-tailwind": "workspace:^",
