@@ -26,7 +26,7 @@
     position: relative;
 
     display: inline-flex;
-    gap: calc(var(--eds-typography-gap-horizontal) * 1px);
+    gap: var(--eds-typography-gap-horizontal);
     align-items: center;
 
     border-bottom: 1px solid currentcolor;

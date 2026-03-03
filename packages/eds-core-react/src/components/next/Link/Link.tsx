@@ -13,6 +13,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       className={classes}
       data-variant={variant}
       data-font-family="ui"
+      data-font-size={variant === 'standalone' ? 'md' : undefined}
       {...rest}
     >
       {children}
