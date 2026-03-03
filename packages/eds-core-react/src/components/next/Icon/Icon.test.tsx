@@ -46,7 +46,7 @@ describe('Icon (next)', () => {
   describe('Sizing', () => {
     it('has icon class for CSS styling', () => {
       render(<Icon data={save} />)
-      expect(screen.getByTestId('eds-icon')).toHaveClass('icon')
+      expect(screen.getByTestId('eds-icon')).toHaveClass('eds-icon')
     })
 
     it('sets data-icon-size attribute when size prop is provided', () => {
@@ -141,7 +141,7 @@ describe('Icon (next)', () => {
     it('accepts additional className', () => {
       render(<Icon data={save} className="custom-class" />)
       const svg = screen.getByTestId('eds-icon')
-      expect(svg).toHaveClass('icon', 'custom-class')
+      expect(svg).toHaveClass('eds-icon', 'custom-class')
     })
 
     it('spreads additional props to SVG element', () => {
