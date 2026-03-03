@@ -1,6 +1,5 @@
 import { forwardRef, useId } from 'react'
 import type { IconProps } from './Icon.types'
-import './icon.css'
 
 /**
  * Icon component for EDS 2.0
@@ -41,7 +40,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
 
   const { svgPathData, height = '24', width = '24' } = data
 
-  const classes = ['icon', className].filter(Boolean).join(' ')
+  const classes = ['eds-icon', className].filter(Boolean).join(' ')
 
   // Accessibility: decorative icons are hidden, semantic icons have role="img"
   const accessibilityProps = title
