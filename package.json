@@ -8,6 +8,7 @@
     "android": "expo run:android",
     "web": "expo start --web",
     "lint": "expo lint",
+    "check-types": "tsc --noEmit",
     "build": "expo prebuild --platform ios",
     "ios": "expo run:ios",
     "clean": "rm -rf .expo ios android .turbo node_modules"
