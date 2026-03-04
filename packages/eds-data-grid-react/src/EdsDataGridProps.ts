@@ -20,6 +20,7 @@ import {
   MouseEvent,
   MutableRefObject,
   ReactElement,
+  ReactNode,
 } from 'react'
 
 type BaseProps<T> = {
@@ -342,6 +343,28 @@ type ExpansionProps<T> = {
   expansionState?: ExpandedState
   setExpansionState?: React.Dispatch<React.SetStateAction<ExpandedState>>
   getSubRows?: (row: T, rowIndex: number) => Array<T>
+  /**
+   * Function returning JSX to render a detail panel for a row. The detail panel is rendered
+   * below the row when it is expanded.
+   *
+   * Expansion is toggled by calling `row.toggleExpanded()`.
+   *
+   * @example
+   * return (
+   *   <EdsDataGrid
+   *    renderDetailPanel={(context) => (
+   *      <div>
+   *        <h3>Detail Panel</h3>
+   *        <pre>{JSON.stringify(context.original, null, 2)}</pre>
+   *      </div>
+   *    )}
+   *   />
+   * )
+   *
+   * @param context The row context containing the row data and other information
+   * @returns ReactNode to render in the detail panel
+   */
+  renderDetailPanel?: (context: Row<T>) => ReactNode
 }
 
 export type EdsDataGridProps<T> = BaseProps<T> &
