@@ -4,7 +4,7 @@
 
     color: var(--eds-color-text-link);
     text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: var(--eds-sizing-stroke-thin);
     text-underline-offset: 3px;
 
     transition: color 150ms ease-in-out;
@@ -29,7 +29,7 @@
     gap: var(--eds-typography-gap-horizontal);
     align-items: center;
 
-    border-bottom: 1px solid currentcolor;
+    border-bottom: var(--eds-sizing-stroke-thin) solid currentcolor;
 
     text-decoration: none;
   }
