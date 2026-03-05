@@ -25,46 +25,48 @@ jobs:
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
-      - name: Check admin permission
+      - name: Check permission
         id: check-permission
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           PERMISSION=$(gh api repos/${{ github.repository }}/collaborators/${{ github.actor }}/permission --jq '.permission')
-          echo "permission=$PERMISSION" >> "$GITHUB_OUTPUT"
-          if [ "$PERMISSION" != "admin" ]; then
-            echo "::notice::User ${{ github.actor }} has '$PERMISSION' permission, 'admin' required. Skipping."
-            exit 0
+          if [ "$PERMISSION" = "admin" ] || [ "$PERMISSION" = "maintain" ] || [ "$PERMISSION" = "write" ]; then
+            echo "authorized=true" >> "$GITHUB_OUTPUT"
+            echo "User ${{ github.actor }} authorized with '$PERMISSION' permission."
+          else
+            echo "authorized=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::User ${{ github.actor }} has '$PERMISSION' permission, 'write' or higher required. Skipping."
           fi
 
       - name: Checkout repository
-        if: steps.check-permission.outputs.permission == 'admin'
+        if: steps.check-permission.outputs.authorized == 'true'
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
 
       - name: Install Node.js
-        if: steps.check-permission.outputs.permission == 'admin'
+        if: steps.check-permission.outputs.authorized == 'true'
         uses: actions/setup-node@v6
         with:
           node-version: '22.12.0'
 
       - name: Setup pnpm
-        if: steps.check-permission.outputs.permission == 'admin'
+        if: steps.check-permission.outputs.authorized == 'true'
         uses: pnpm/action-setup@v4
         with:
           run_install: false
 
       - name: Install dependencies
-        if: steps.check-permission.outputs.permission == 'admin'
+        if: steps.check-permission.outputs.authorized == 'true'
         run: pnpm install --force
 
       - name: Build packages
-        if: steps.check-permission.outputs.permission == 'admin'
+        if: steps.check-permission.outputs.authorized == 'true'
         run: pnpm run build
 
       - name: Run Claude Code
-        if: steps.check-permission.outputs.permission == 'admin'
+        if: steps.check-permission.outputs.authorized == 'true'
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
