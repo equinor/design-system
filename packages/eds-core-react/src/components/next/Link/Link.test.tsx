@@ -95,6 +95,37 @@ describe('Link (next)', () => {
       render(<Link href="#">Link</Link>)
       expect(screen.getByRole('link')).not.toHaveAttribute('data-font-size')
     })
+
+    it('sets data-font-family for standalone variant', () => {
+      render(
+        <Link href="#" variant="standalone">
+          Link
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('data-font-family', 'ui')
+    })
+
+    it('does not set data-font-family for inline variant', () => {
+      render(<Link href="#">Link</Link>)
+      expect(screen.getByRole('link')).not.toHaveAttribute('data-font-family')
+    })
+
+    it('sets data-line-height for standalone variant', () => {
+      render(
+        <Link href="#" variant="standalone">
+          Link
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute(
+        'data-line-height',
+        'squished',
+      )
+    })
+
+    it('does not set data-line-height for inline variant', () => {
+      render(<Link href="#">Link</Link>)
+      expect(screen.getByRole('link')).not.toHaveAttribute('data-line-height')
+    })
   })
 
   describe('Accessibility', () => {

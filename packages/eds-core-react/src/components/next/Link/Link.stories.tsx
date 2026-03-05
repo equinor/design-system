@@ -76,3 +76,17 @@ export const WithIcons: Story = {
     </div>
   ),
 }
+
+export const ExternalLink: Story = {
+  render: () => (
+    <Link
+      href="https://example.com"
+      variant="standalone"
+      target="_blank"
+      rel="noreferrer"
+    >
+      External link
+      <Icon data={external_link} />
+    </Link>
+  ),
+}
