@@ -60,7 +60,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     }: DatePickerProps,
     forwardedRef: RefObject<HTMLDivElement | null>,
   ) => {
-    timezone = timezone || defaultTimezone
+    timezone = timezone ?? defaultTimezone
     formatOptions = formatOptions ?? {
       year: 'numeric',
       month: '2-digit',
