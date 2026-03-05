@@ -51,10 +51,6 @@
     border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
     border-radius: var(--eds-spacing-border-radius-rounded);
   }
-
-  .eds-link[data-variant='standalone'] .eds-icon {
-    color: var(--eds-color-text-strong);
-  }
 }
 
 /* Outside @layer to override typography.css [data-font-family] { display: block } */
