@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { CalendarState, RangeCalendarState } from '@react-stately/calendar'
-import { AriaCalendarGridProps, useCalendarGrid, useLocale } from 'react-aria'
-import { getWeeksInMonth } from '@internationalized/date'
+import { AriaCalendarGridProps, useCalendarGrid } from 'react-aria'
 import { CalendarCell } from './CalendarCell'
 import { YearGrid } from './YearGrid'
 import { Dispatch, SetStateAction } from 'react'
@@ -23,15 +22,14 @@ export function CalendarGrid({
   yearPickerPage: number
   setYearPickerPage: Dispatch<SetStateAction<number>>
 } & AriaCalendarGridProps) {
-  const { locale } = useLocale()
   const { gridProps, headerProps, weekDays } = useCalendarGrid(
     { ...props, weekdayStyle: 'long' },
     state,
   )
 
-  // Get the number of weeks in the month so that we can render the proper number of rows.
-  const howManyWeeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
-  const weeksInMonthArray = [...new Array(howManyWeeksInMonth).keys()]
+  // Always render 6 rows (the maximum weeks in any month) so the calendar
+  // height stays consistent when navigating between months.
+  const weeksInMonthArray = [...new Array(6).keys()]
 
   return showYearPicker ? (
     <YearGrid
