@@ -1,11 +1,9 @@
 @layer eds-components {
   .eds-link {
-    cursor: pointer;
-
     color: var(--eds-color-text-link);
     text-decoration: underline;
     text-decoration-thickness: var(--eds-sizing-stroke-thin);
-    text-underline-offset: 3px;
+    text-underline-offset: var(--eds-sizing-stroke-thick);
 
     transition: color 150ms ease-in-out;
   }
@@ -18,14 +16,13 @@
     border-radius: var(--eds-spacing-border-radius-rounded);
     color: var(--eds-color-text-strong);
     outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-    outline-offset: 4px;
+    outline-offset: calc(var(--eds-sizing-stroke-thick) * 2);
   }
 
   /* Standalone variant: flex layout for icon + text */
   .eds-link[data-variant='standalone'] {
     position: relative;
 
-    display: inline-flex;
     gap: var(--eds-typography-gap-horizontal);
     align-items: center;
 
@@ -46,7 +43,7 @@
     content: '';
 
     position: absolute;
-    inset: -4px;
+    inset: calc(var(--eds-sizing-stroke-thick) * -2);
 
     border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
     border-radius: var(--eds-spacing-border-radius-rounded);
@@ -54,10 +51,6 @@
 }
 
 /* Outside @layer to override typography.css [data-font-family] { display: block } */
-.eds-link {
-  display: inline;
-}
-
 .eds-link[data-variant='standalone'] {
   display: inline-flex;
 }
