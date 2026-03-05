@@ -44,7 +44,7 @@ export function DateSegment({
   segment: IDateSegment
 }) {
   const { formatOptions, timezone } = useDatePickerContext()
-  const formatter = useDateFormatter(formatOptions)
+  const formatter = useDateFormatter({ ...formatOptions, timeZone: timezone })
   const parts = state.value
     ? formatter.formatToParts(state.value.toDate(timezone))
     : []
