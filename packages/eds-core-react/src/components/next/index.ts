@@ -41,3 +41,13 @@ export type { LinkProps, LinkVariant } from './Link'
 
 export { Tooltip } from './Tooltip'
 export type { TooltipPlacement, TooltipProps } from './Tooltip'
+
+export { Banner } from './Banner'
+export type {
+  BannerProps,
+  BannerTone,
+  BannerIconProps,
+  BannerMessageProps,
+  BannerActionsProps,
+  BannerActionsPlacement,
+} from './Banner'
