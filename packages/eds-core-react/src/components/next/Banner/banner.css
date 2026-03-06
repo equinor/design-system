@@ -1,0 +1,47 @@
+@layer eds-components {
+  .eds-banner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-container-space-horizontal);
+    align-items: flex-start;
+
+    padding: var(--eds-container-space-vertical)
+      var(--eds-container-space-horizontal);
+    border-radius: var(--eds-shape-border-radius, 0);
+
+    background: var(--eds-color-bg-surface);
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-medium);
+  }
+
+  .eds-banner__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+
+    height: var(--eds-typography-line-height, 1.5rem);
+
+    color: var(--eds-color-text-subtle);
+  }
+
+  .eds-banner__message {
+    flex: 1;
+
+    min-width: 0;
+    margin: 0;
+
+    font-family: var(--eds-typography-font-family, Inter), sans-serif;
+    font-size: var(--eds-typography-font-size, 1rem);
+    line-height: var(--eds-typography-line-height, 1.5rem);
+    color: var(--eds-color-text-strong);
+  }
+
+  .eds-banner__actions {
+    display: flex;
+    gap: var(--eds-selectable-gap-horizontal, 8px);
+    align-items: center;
+  }
+
+  .eds-banner__actions[data-placement='bottom'] {
+    flex-basis: 100%;
+  }
+}
