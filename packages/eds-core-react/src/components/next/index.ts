@@ -29,3 +29,13 @@ export type { InputProps } from './Input'
 
 export { TextField } from './TextField'
 export type { TextFieldProps } from './TextField'
+
+export { Banner } from './Banner'
+export type {
+  BannerProps,
+  BannerTone,
+  BannerIconProps,
+  BannerMessageProps,
+  BannerActionsProps,
+  BannerActionsPlacement,
+} from './Banner'
