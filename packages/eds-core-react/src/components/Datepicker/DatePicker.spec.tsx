@@ -297,6 +297,22 @@ describe('DatePicker', () => {
     expect(container.textContent).toMatch(/Verdien/)
   })
 
+  it('should display the date in the provided timezone, not the local timezone (bug #4390)', () => {
+    // 2025-01-21 11:00 UTC = 2025-01-22 00:00 in Pacific/Auckland (NZDT, UTC+13)
+    // Without the fix, the formatter uses browser/Node timezone (UTC) and displays Jan 21.
+    const date = new Date('2025-01-21T11:00:00Z')
+    render(
+      <I18nProvider locale={'en-US'}>
+        <DatePicker
+          label={'Datepicker'}
+          value={date}
+          timezone={'Pacific/Auckland'}
+        />
+      </I18nProvider>,
+    )
+    expect(screen.getByRole('presentation')).toHaveTextContent('01/22/2025')
+  })
+
   it('should display localized message for unavailable dates', () => {
     const unavailableDate = new Date(2024, 4, 30)
 
