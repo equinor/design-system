@@ -42,7 +42,7 @@ function TodayPicker({
         )
       }
       variant={'ghost'}
-      style={{ marginLeft: 16 }}
+      style={{ marginLeft: 4 }}
     >
       Today
     </Button>
@@ -53,6 +53,19 @@ const HeaderActions = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+`
+
+const TitleButton = styled(Button)`
+  min-width: 13.1rem;
+  white-space: nowrap;
+  font-size: ${tokens.typography.heading.h5.fontSize};
+  text-transform: capitalize;
+  & > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 `
 
 /**
@@ -104,19 +117,15 @@ export function CalendarHeader({
           <Icon data={chevron_left} />
         </Button>
         <span style={{ flex: '1 1 auto' }}></span>
-        <Button
+        <TitleButton
           onClick={() => setShowYearPicker(!showYearPicker)}
           data-testid={'heading'}
           aria-live={'polite'}
           variant={'ghost'}
-          style={{
-            fontSize: tokens.typography.heading.h5.fontSize,
-            textTransform: 'capitalize',
-          }}
         >
           {title}
           <Icon data={showYearPicker ? chevron_up : chevron_down} />
-        </Button>
+        </TitleButton>
         <TodayPicker
           disabled={showYearPicker}
           onClick={(v: CalendarDate) => state.setFocusedDate(v)}
