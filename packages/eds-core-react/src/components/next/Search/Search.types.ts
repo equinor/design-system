@@ -16,4 +16,4 @@ export type SearchProps = {
   id?: string
   /** Callback fired when the clear button is clicked */
   onClear?: () => void
-} & Omit<InputProps, 'startAdornment' | 'endAdornment' | 'as'>
+} & Omit<InputProps, 'startAdornment' | 'endAdornment' | 'as' | 'hideErrorIcon'>

@@ -70,11 +70,13 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   }
 
   const showClear = hasValue && !disabled && !readOnly
+  // Accent only in interactive states — grey in error, readonly, disabled
+  const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
 
   return (
     <Field disabled={disabled} className="eds-search">
       {label && (
-        <div className="eds-search__header">
+        <div className="eds-text-field__header">
           <Field.Label htmlFor={inputId} indicator={indicator}>
             {label}
           </Field.Label>
@@ -86,7 +88,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
                 round
                 size="small"
                 tone="neutral"
-                className="eds-search__info"
+                className="eds-text-field__info"
                 aria-label="More information"
               >
                 <Icon data={info_circle} size="xs" />
@@ -112,7 +114,12 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
           hasDescription: !!description,
           hasHelperMessage: !!helperMessage,
         })}
-        startAdornment={<Icon data={searchIcon} />}
+        hideErrorIcon
+        startAdornment={
+          <span className="eds-search__icon" data-color-appearance={iconTone}>
+            <Icon data={searchIcon} />
+          </span>
+        }
         endAdornment={
           showClear ? (
             <Button
@@ -120,7 +127,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
               icon
               round
               size="small"
-              tone="neutral"
+              tone={invalid ? 'neutral' : 'accent'}
               onClick={handleClear}
               aria-label="Clear search"
             >

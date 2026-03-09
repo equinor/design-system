@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Search } from '.'
 
@@ -14,6 +15,8 @@ const meta: Meta<typeof Search> = {
 \`\`\`tsx
 import { Search } from '@equinor/eds-core-react/next'
 \`\`\`
+
+A search input with a built-in clear button that appears when the field has a value.
         `,
       },
     },
@@ -29,6 +32,56 @@ export const Introduction: Story = {
     label: 'Search',
     placeholder: 'Search',
   },
+}
+
+export const WithClearButton: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Type in the field to see the clear button appear. Click it to reset.',
+      },
+    },
+  },
+  render: () => <Search label="Search" placeholder="Search" defaultValue="" />,
+}
+
+export const Controlled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'In controlled mode, use `value`, `onChange`, and `onClear` together. The clear button calls `onClear` — the parent is responsible for resetting the value.',
+      },
+    },
+  },
+  render: () => {
+    const [value, setValue] = useState('Equinor')
+    return (
+      <Search
+        label="Search"
+        placeholder="Search"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onClear={() => setValue('')}
+        helperMessage={value ? `Searching for "${value}"` : undefined}
+      />
+    )
+  },
+}
+
+export const WithoutLabel: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Search can be used without a label for compact contexts like headers or toolbars. Always provide an `aria-label` for accessibility.',
+      },
+    },
+  },
+  render: () => (
+    <Search placeholder="Search resources..." aria-label="Search resources" />
+  ),
 }
 
 export const WithDescription: Story = {
@@ -52,6 +105,14 @@ export const WithHelperMessage: Story = {
 }
 
 export const Invalid: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `helperMessage` to explain the error — there is no error icon in the search field by design.',
+      },
+    },
+  },
   render: () => (
     <Search
       label="Search"

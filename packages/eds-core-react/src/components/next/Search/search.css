@@ -1,17 +1,18 @@
 @layer eds-components {
-  .eds-search__header {
+  /* Icon color responds to data-color-appearance:
+     accent (default/hover/focus/filled) → teal, neutral (invalid) → grey
+     readonly uses --eds-color-border-strong to match Input's readonly text color */
+  .eds-search__icon {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--eds-typography-gap-horizontal);
-    inline-size: 100%;
+    color: var(--eds-color-text-subtle);
   }
 
-  .eds-search__info {
-    flex-shrink: 0;
-    /* Negative margin collapses the button's 24px layout contribution to ~8px,
-       matching Figma's 8px icon container. Label text-box height determines row height. */
-    margin-block: calc(var(--eds-sizing-icon-xs) / -2);
+  .eds-input-container[data-readonly] .eds-search__icon {
+    color: var(--eds-color-border-strong);
+  }
+
+  .eds-input-container[data-disabled] .eds-search__icon {
+    color: var(--eds-color-text-disabled);
   }
 }
 
