@@ -12,7 +12,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   {
     label,
     labelInfo,
-    indicator,
     description,
     helperMessage,
     id: providedId,
@@ -74,78 +73,80 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
 
   return (
-    <Field disabled={disabled} className="eds-search">
-      {label && (
-        <div className="eds-text-field__header">
-          <Field.Label htmlFor={inputId} indicator={indicator}>
-            {label}
-          </Field.Label>
-          {labelInfo && (
-            <Tooltip title={labelInfo} placement="top">
+    <search>
+      <Field disabled={disabled} className="eds-search">
+        {label && (
+          <div className="eds-text-field__header">
+            <Field.Label htmlFor={inputId}>{label}</Field.Label>
+            {labelInfo && (
+              <Tooltip title={labelInfo} placement="top">
+                <Button
+                  variant="ghost"
+                  icon
+                  round
+                  size="small"
+                  tone="neutral"
+                  className="eds-text-field__info"
+                  aria-label="More information"
+                >
+                  <Icon data={info_circle} size="xs" />
+                </Button>
+              </Tooltip>
+            )}
+          </div>
+        )}
+        {description && (
+          <Field.Description id={descriptionId}>
+            {description}
+          </Field.Description>
+        )}
+        <Input
+          ref={mergedRef}
+          id={inputId}
+          type="search"
+          disabled={disabled}
+          readOnly={readOnly}
+          invalid={invalid}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={handleChange}
+          aria-describedby={getDescribedBy({
+            hasDescription: !!description,
+            hasHelperMessage: !!helperMessage,
+          })}
+          hideErrorIcon
+          startAdornment={
+            <span className="eds-search__icon" data-color-appearance={iconTone}>
+              <Icon data={searchIcon} />
+            </span>
+          }
+          endAdornment={
+            showClear ? (
               <Button
                 variant="ghost"
                 icon
                 round
                 size="small"
-                tone="neutral"
-                className="eds-text-field__info"
-                aria-label="More information"
+                tone={invalid ? 'neutral' : 'accent'}
+                onClick={handleClear}
+                aria-label="Clear search"
               >
-                <Icon data={info_circle} size="xs" />
+                <Icon data={close} />
               </Button>
-            </Tooltip>
-          )}
-        </div>
-      )}
-      {description && (
-        <Field.Description id={descriptionId}>{description}</Field.Description>
-      )}
-      <Input
-        ref={mergedRef}
-        id={inputId}
-        type="search"
-        disabled={disabled}
-        readOnly={readOnly}
-        invalid={invalid}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={handleChange}
-        aria-describedby={getDescribedBy({
-          hasDescription: !!description,
-          hasHelperMessage: !!helperMessage,
-        })}
-        hideErrorIcon
-        startAdornment={
-          <span className="eds-search__icon" data-color-appearance={iconTone}>
-            <Icon data={searchIcon} />
-          </span>
-        }
-        endAdornment={
-          showClear ? (
-            <Button
-              variant="ghost"
-              icon
-              round
-              size="small"
-              tone={invalid ? 'neutral' : 'accent'}
-              onClick={handleClear}
-              aria-label="Clear search"
-            >
-              <Icon data={close} />
-            </Button>
-          ) : undefined
-        }
-        {...inputProps}
-      />
-      {helperMessage && (
-        <Field.HelperMessage
-          id={helperMessageId}
-          role={invalid ? 'alert' : undefined}
-        >
-          {helperMessage}
-        </Field.HelperMessage>
-      )}
-    </Field>
+            ) : undefined
+          }
+          {...inputProps}
+        />
+        {helperMessage && (
+          <Field.HelperMessage
+            id={helperMessageId}
+            role={invalid ? 'alert' : undefined}
+          >
+            {helperMessage}
+          </Field.HelperMessage>
+        )}
+      </Field>
+    </search>
   )
 })
 

@@ -6,8 +6,6 @@ export type SearchProps = {
   label?: ReactNode
   /** Info tooltip content shown next to the label */
   labelInfo?: ReactNode
-  /** Indicator text shown after label, e.g. "(Optional)" or "(Required)" */
-  indicator?: string
   /** Descriptive text that provides additional context for the field */
   description?: ReactNode
   /** Helper or validation message shown below the input */
@@ -16,4 +14,12 @@ export type SearchProps = {
   id?: string
   /** Callback fired when the clear button is clicked */
   onClear?: () => void
-} & Omit<InputProps, 'startAdornment' | 'endAdornment' | 'as' | 'hideErrorIcon'>
+} & Omit<
+  InputProps,
+  | 'startAdornment'
+  | 'endAdornment'
+  | 'startText'
+  | 'endText'
+  | 'as'
+  | 'hideErrorIcon'
+>
