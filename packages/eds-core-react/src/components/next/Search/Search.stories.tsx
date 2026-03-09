@@ -6,7 +6,73 @@ const meta: Meta<typeof Search> = {
   title: 'EDS 2.0 (beta)/Search',
   component: Search,
   tags: ['beta'],
+  args: {
+    disabled: false,
+    invalid: false,
+    readOnly: false,
+  },
   argTypes: {
+    // Label
+    label: {
+      control: 'text',
+      description: 'Label text for the field',
+      table: { category: 'Label' },
+    },
+
+    // Content
+    description: {
+      control: 'text',
+      description: 'Descriptive text displayed below the label',
+      table: { category: 'Content' },
+    },
+    helperMessage: {
+      control: 'text',
+      description: 'Helper or validation message shown below the input',
+      table: { category: 'Content' },
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text displayed when input is empty',
+      table: { category: 'Content' },
+    },
+
+    // States
+    invalid: {
+      control: 'boolean',
+      description:
+        'Shows error styling. Use helperMessage to explain the error.',
+      table: { category: 'States', defaultValue: { summary: 'false' } },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables input interaction',
+      table: { category: 'States', defaultValue: { summary: 'false' } },
+    },
+    readOnly: {
+      control: 'boolean',
+      description: 'Makes input read-only (visible but not editable)',
+      table: { category: 'States', defaultValue: { summary: 'false' } },
+    },
+    // Callbacks
+    onClear: {
+      control: false,
+      description:
+        'Callback fired when the clear button is clicked. Required in controlled mode to reset the value.',
+      table: { category: 'Callbacks' },
+    },
+    onChange: {
+      control: false,
+      description: 'Callback fired on input change',
+      table: { category: 'Callbacks' },
+    },
+
+    // Other
+    id: {
+      control: 'text',
+      description:
+        'Unique identifier for the field (auto-generated if not provided)',
+      table: { category: 'Other' },
+    },
     containerClassName: { table: { disable: true } },
   },
   parameters: {
