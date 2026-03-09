@@ -1,5 +1,10 @@
 import type { Meta, StoryFn } from '@storybook/react-vite'
-import { info_circle, warning_filled, error_filled } from '@equinor/eds-icons'
+import {
+  info_circle,
+  warning_filled,
+  error_filled,
+  check_circle_outlined,
+} from '@equinor/eds-icons'
 import { Banner } from '.'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
@@ -75,6 +80,15 @@ export const Danger: StoryFn<typeof Banner> = () => (
   </Banner>
 )
 
+export const Success: StoryFn<typeof Banner> = () => (
+  <Banner tone="success">
+    <Banner.Icon>
+      <Icon data={check_circle_outlined} />
+    </Banner.Icon>
+    <Banner.Message>{exampleMessage}</Banner.Message>
+  </Banner>
+)
+
 export const AllVariants: StoryFn<typeof Banner> = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
     <Banner tone="info">
@@ -107,6 +121,16 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
       <Banner.Actions placement="bottom">
         <Button>Ok</Button>
         <Button variant="secondary">Cancel</Button>
+      </Banner.Actions>
+    </Banner>
+
+    <Banner tone="success">
+      <Banner.Icon>
+        <Icon data={check_circle_outlined} />
+      </Banner.Icon>
+      <Banner.Message>{exampleMessage}</Banner.Message>
+      <Banner.Actions>
+        <Button>Ok</Button>
       </Banner.Actions>
     </Banner>
   </div>

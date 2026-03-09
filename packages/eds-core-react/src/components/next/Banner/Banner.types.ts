@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 
-export type BannerTone = 'info' | 'warning' | 'danger'
+export type BannerTone = 'info' | 'warning' | 'danger' | 'success'
 
 export type BannerActionsPlacement = 'left' | 'bottom'
 
