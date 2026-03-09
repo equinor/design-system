@@ -93,6 +93,18 @@ describe('Banner (next)', () => {
         'danger',
       )
     })
+
+    it('supports success tone', () => {
+      render(
+        <Banner tone="success">
+          <Banner.Message>Success</Banner.Message>
+        </Banner>,
+      )
+      expect(screen.getByRole('status')).toHaveAttribute(
+        'data-color-appearance',
+        'success',
+      )
+    })
   })
 
   describe('Actions placement', () => {

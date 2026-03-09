@@ -10,6 +10,7 @@ figma.connect(
         info: 'info',
         warning: 'warning',
         danger: 'danger',
+        success: 'success',
       }),
       hasIcon: figma.boolean('Icon'),
       hasActions: figma.boolean('Actions'),
