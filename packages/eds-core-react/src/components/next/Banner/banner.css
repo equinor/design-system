@@ -25,13 +25,8 @@
 
   .eds-banner__message {
     flex: 1;
-
     min-width: 0;
     margin: 0;
-
-    font-family: var(--eds-typography-font-family, Inter), sans-serif;
-    font-size: var(--eds-typography-font-size, 1rem);
-    line-height: var(--eds-typography-line-height, 1.5rem);
     color: var(--eds-color-text-strong);
   }
 
