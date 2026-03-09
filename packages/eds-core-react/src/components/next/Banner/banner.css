@@ -39,4 +39,11 @@
   .eds-banner__actions[data-placement='bottom'] {
     flex-basis: 100%;
   }
+
+  .eds-banner__dismiss {
+    flex-shrink: 0;
+    align-self: flex-start;
+    order: 99;
+    margin-inline-start: auto;
+  }
 }

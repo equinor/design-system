@@ -1,5 +1,6 @@
 import { createRef } from 'react'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { Banner } from '.'
 
@@ -177,6 +178,50 @@ describe('Banner (next)', () => {
           <Banner.Actions>
             <button>Ok</button>
           </Banner.Actions>
+        </Banner>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+  })
+
+  describe('Dismiss', () => {
+    it('renders dismiss button when onDismiss is provided', () => {
+      render(
+        <Banner onDismiss={() => {}}>
+          <Banner.Message>Dismissible</Banner.Message>
+        </Banner>,
+      )
+      expect(
+        screen.getByRole('button', { name: 'Dismiss' }),
+      ).toBeInTheDocument()
+    })
+
+    it('does not render dismiss button without onDismiss', () => {
+      render(
+        <Banner>
+          <Banner.Message>Not dismissible</Banner.Message>
+        </Banner>,
+      )
+      expect(
+        screen.queryByRole('button', { name: 'Dismiss' }),
+      ).not.toBeInTheDocument()
+    })
+
+    it('calls onDismiss when dismiss button is clicked', async () => {
+      const handleDismiss = jest.fn()
+      render(
+        <Banner onDismiss={handleDismiss}>
+          <Banner.Message>Click dismiss</Banner.Message>
+        </Banner>,
+      )
+      await userEvent.click(screen.getByRole('button', { name: 'Dismiss' }))
+      expect(handleDismiss).toHaveBeenCalledTimes(1)
+    })
+
+    it('passes axe with dismiss button', async () => {
+      const { container } = render(
+        <Banner onDismiss={() => {}}>
+          <Banner.Message>Accessible dismiss</Banner.Message>
         </Banner>,
       )
       expect(await axe(container)).toHaveNoViolations()

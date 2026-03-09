@@ -14,6 +14,8 @@ export type BannerProps = {
    * @default 'status'
    */
   role?: HTMLAttributes<HTMLDivElement>['role']
+  /** Callback when the dismiss button is clicked. When provided, a close button is rendered. */
+  onDismiss?: () => void
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
