@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { TypographyNext } from '../../Typography'
 import type {
   BannerProps,
   BannerIconProps,
@@ -24,13 +25,19 @@ const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
 const BannerMessage = forwardRef<HTMLParagraphElement, BannerMessageProps>(
   function BannerMessage({ className, children, ...rest }, ref) {
     return (
-      <p
+      <TypographyNext
         ref={ref}
+        as="p"
+        family="ui"
+        size="md"
+        baseline="center"
+        lineHeight="default"
+        tracking="normal"
         className={['eds-banner__message', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
-      </p>
+      </TypographyNext>
     )
   },
 )
