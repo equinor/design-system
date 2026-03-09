@@ -6,6 +6,9 @@ const meta: Meta<typeof Search> = {
   title: 'EDS 2.0 (beta)/Search',
   component: Search,
   tags: ['beta'],
+  argTypes: {
+    containerClassName: { table: { disable: true } },
+  },
   parameters: {
     docs: {
       description: {
@@ -43,7 +46,9 @@ export const WithClearButton: Story = {
       },
     },
   },
-  render: () => <Search label="Search" placeholder="Search" defaultValue="" />,
+  render: () => (
+    <Search label="Search" placeholder="Search" defaultValue="Equinor" />
+  ),
 }
 
 export const Controlled: Story = {
