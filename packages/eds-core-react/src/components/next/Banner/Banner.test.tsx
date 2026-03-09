@@ -228,6 +228,50 @@ describe('Banner (next)', () => {
       expect(banner).toHaveClass('eds-banner', 'custom')
     })
 
+    it('merges className on Banner.Icon', () => {
+      render(
+        <Banner>
+          <Banner.Icon className="custom-icon" data-testid="icon">
+            <svg />
+          </Banner.Icon>
+          <Banner.Message>Test</Banner.Message>
+        </Banner>,
+      )
+      expect(screen.getByTestId('icon')).toHaveClass(
+        'eds-banner__icon',
+        'custom-icon',
+      )
+    })
+
+    it('merges className on Banner.Message', () => {
+      render(
+        <Banner>
+          <Banner.Message className="custom-msg" data-testid="msg">
+            Test
+          </Banner.Message>
+        </Banner>,
+      )
+      expect(screen.getByTestId('msg')).toHaveClass(
+        'eds-banner__message',
+        'custom-msg',
+      )
+    })
+
+    it('merges className on Banner.Actions', () => {
+      render(
+        <Banner>
+          <Banner.Message>Test</Banner.Message>
+          <Banner.Actions className="custom-actions" data-testid="actions">
+            <button>Ok</button>
+          </Banner.Actions>
+        </Banner>,
+      )
+      expect(screen.getByTestId('actions')).toHaveClass(
+        'eds-banner__actions',
+        'custom-actions',
+      )
+    })
+
     it('spreads additional props', () => {
       render(
         <Banner data-testid="my-banner">
