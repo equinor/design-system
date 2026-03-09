@@ -1,17 +1,15 @@
 import { forwardRef, useRef, useState, useCallback } from 'react'
-import { search as searchIcon, close, info_circle } from '@equinor/eds-icons'
+import { search as searchIcon, close } from '@equinor/eds-icons'
 import type { SearchProps } from './Search.types'
 import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
 import { Button } from '../Button'
-import { Tooltip } from '../../Tooltip'
 import { Icon } from '../Icon'
 import './search.css'
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   {
     label,
-    labelInfo,
     description,
     helperMessage,
     id: providedId,
@@ -75,26 +73,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   return (
     <search>
       <Field disabled={disabled} className="eds-search">
-        {label && (
-          <div className="eds-text-field__header">
-            <Field.Label htmlFor={inputId}>{label}</Field.Label>
-            {labelInfo && (
-              <Tooltip title={labelInfo} placement="top">
-                <Button
-                  variant="ghost"
-                  icon
-                  round
-                  size="small"
-                  tone="neutral"
-                  className="eds-text-field__info"
-                  aria-label="More information"
-                >
-                  <Icon data={info_circle} size="xs" />
-                </Button>
-              </Tooltip>
-            )}
-          </div>
-        )}
+        {label && <Field.Label htmlFor={inputId}>{label}</Field.Label>}
         {description && (
           <Field.Description id={descriptionId}>
             {description}
