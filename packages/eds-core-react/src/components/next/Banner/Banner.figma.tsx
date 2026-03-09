@@ -1,7 +1,5 @@
 import figma from '@figma/code-connect'
 import { Banner } from '.'
-import { Button } from '../Button'
-import { Icon } from '../Icon'
 
 figma.connect(
   Banner,
@@ -24,13 +22,13 @@ figma.connect(
       <Banner tone={tone}>
         {hasIcon && (
           <Banner.Icon>
-            <Icon />
+            <svg />
           </Banner.Icon>
         )}
         <Banner.Message>Banner message</Banner.Message>
         {hasActions && (
           <Banner.Actions placement={actionsPlacement}>
-            <Button>Action</Button>
+            <button>Action</button>
           </Banner.Actions>
         )}
       </Banner>
