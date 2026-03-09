@@ -9,6 +9,11 @@ export type BannerProps = {
    * @default 'info'
    */
   tone?: BannerTone
+  /**
+   * ARIA role. Use `'alert'` for urgent messages that require immediate attention.
+   * @default 'status'
+   */
+  role?: HTMLAttributes<HTMLDivElement>['role']
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 

@@ -77,6 +77,9 @@ const BannerComponent = forwardRef<HTMLDivElement, BannerProps>(function Banner(
   )
 })
 
+BannerIcon.displayName = 'Banner.Icon'
+BannerMessage.displayName = 'Banner.Message'
+BannerActions.displayName = 'Banner.Actions'
 BannerComponent.displayName = 'Banner'
 
 type CompoundBanner = typeof BannerComponent & {
