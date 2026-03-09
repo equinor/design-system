@@ -1,0 +1,21 @@
+@layer eds-components {
+  .eds-search__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--eds-typography-gap-horizontal);
+    inline-size: 100%;
+  }
+
+  .eds-search__info {
+    flex-shrink: 0;
+    /* Negative margin collapses the button's 24px layout contribution to ~8px,
+       matching Figma's 8px icon container. Label text-box height determines row height. */
+    margin-block: calc(var(--eds-sizing-icon-xs) / -2);
+  }
+}
+
+/* Hide native browser search clear button — replaced by our custom clear button */
+.eds-search .eds-input[type='search']::-webkit-search-cancel-button {
+  appearance: none;
+}
