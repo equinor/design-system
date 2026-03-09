@@ -18,9 +18,10 @@ figma.connect(
         left: 'left',
         bottom: 'bottom',
       }),
+      hasDismiss: figma.boolean('Dismiss'),
     },
-    example: ({ tone, hasIcon, hasActions, actionsPlacement }) => (
-      <Banner tone={tone}>
+    example: ({ tone, hasIcon, hasActions, actionsPlacement, hasDismiss }) => (
+      <Banner tone={tone} onDismiss={hasDismiss ? () => {} : undefined}>
         {hasIcon && (
           <Banner.Icon>
             <svg />

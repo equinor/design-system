@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import {
   info_circle,
@@ -89,6 +90,23 @@ export const Success: StoryFn<typeof Banner> = () => (
   </Banner>
 )
 
+export const Dismissible: StoryFn<typeof Banner> = () => {
+  const [visible, setVisible] = useState(true)
+
+  if (!visible) {
+    return <Button onClick={() => setVisible(true)}>Show banner</Button>
+  }
+
+  return (
+    <Banner onDismiss={() => setVisible(false)}>
+      <Banner.Icon>
+        <Icon data={info_circle} />
+      </Banner.Icon>
+      <Banner.Message>{exampleMessage}</Banner.Message>
+    </Banner>
+  )
+}
+
 export const AllVariants: StoryFn<typeof Banner> = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
     <Banner tone="info">
@@ -132,6 +150,13 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
       <Banner.Actions>
         <Button>Ok</Button>
       </Banner.Actions>
+    </Banner>
+
+    <Banner onDismiss={() => {}}>
+      <Banner.Icon>
+        <Icon data={info_circle} />
+      </Banner.Icon>
+      <Banner.Message>{exampleMessage}</Banner.Message>
     </Banner>
   </div>
 )

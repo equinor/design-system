@@ -1,5 +1,8 @@
 import { forwardRef } from 'react'
+import { close } from '@equinor/eds-icons'
 import { TypographyNext } from '../../Typography'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
 import type {
   BannerProps,
   BannerIconProps,
@@ -61,7 +64,7 @@ const BannerActions = forwardRef<HTMLDivElement, BannerActionsProps>(
 )
 
 const BannerComponent = forwardRef<HTMLDivElement, BannerProps>(function Banner(
-  { tone = 'info', role = 'status', className, children, ...rest },
+  { tone = 'info', role = 'status', onDismiss, className, children, ...rest },
   ref,
 ) {
   return (
@@ -73,6 +76,17 @@ const BannerComponent = forwardRef<HTMLDivElement, BannerProps>(function Banner(
       {...rest}
     >
       {children}
+      {onDismiss && (
+        <Button
+          variant="ghost"
+          icon
+          className="eds-banner__dismiss"
+          aria-label="Dismiss"
+          onClick={onDismiss}
+        >
+          <Icon data={close} />
+        </Button>
+      )}
     </div>
   )
 })
