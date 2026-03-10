@@ -88,6 +88,10 @@ export const color = {
         active: '#ffd9d7',
       },
     },
+    floating: '#202223',
+    backdrop: '#738696',
+    input: '#0b0b0b',
+    disabled: '#525c65',
   },
   border: {
     neutral: {
@@ -120,6 +124,8 @@ export const color = {
       medium: '#e53748',
       strong: '#ff8082',
     },
+    focus: '#2d8bc5',
+    disabled: '#738696',
   },
   text: {
     neutral: {
@@ -158,5 +164,7 @@ export const color = {
       subtleOnEmphasis: '#492d2c',
       strongOnEmphasis: '#040303',
     },
+    link: '#5abbfb',
+    disabled: '#738696',
   },
 } as const

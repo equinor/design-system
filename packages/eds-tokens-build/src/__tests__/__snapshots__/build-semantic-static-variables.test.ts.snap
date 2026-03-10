@@ -55,6 +55,9 @@ exports[`Semantic Static Variables Build > should build CSS static variables fro
   --x-color-bg-danger-fill-emphasis-default: var(--x-color-danger-9);
   --x-color-bg-danger-fill-emphasis-hover: var(--x-color-danger-10);
   --x-color-bg-danger-fill-emphasis-active: var(--x-color-danger-11);
+  --x-color-bg-floating: var(--x-color-bg-floating);
+  --x-color-bg-backdrop: var(--x-color-bg-backdrop);
+  --x-color-bg-input: var(--x-color-bg-input);
   --x-color-border-accent-subtle: var(--x-color-accent-6);
   --x-color-border-accent-medium: var(--x-color-accent-7);
   --x-color-border-accent-strong: var(--x-color-accent-8);
@@ -73,6 +76,7 @@ exports[`Semantic Static Variables Build > should build CSS static variables fro
   --x-color-border-danger-subtle: var(--x-color-danger-6);
   --x-color-border-danger-medium: var(--x-color-danger-7);
   --x-color-border-danger-strong: var(--x-color-danger-8);
+  --x-color-border-focus: var(--x-color-border-focus);
   --x-color-text-accent-subtle: var(--x-color-accent-12); /** Used for text and icons */
   --x-color-text-accent-strong: var(--x-color-accent-13); /** Used for text and icons */
   --x-color-text-accent-subtle-on-emphasis: var(--x-color-accent-14); /** Text or icons against colored backgrounds */
@@ -97,6 +101,7 @@ exports[`Semantic Static Variables Build > should build CSS static variables fro
   --x-color-text-danger-strong: var(--x-color-danger-13); /** Used for text and icons */
   --x-color-text-danger-subtle-on-emphasis: var(--x-color-danger-14); /** Text or icons against colored backgrounds */
   --x-color-text-danger-strong-on-emphasis: var(--x-color-danger-15); /** Text or icons against colored backgrounds */
+  --x-color-text-link: var(--x-color-text-link);
 }
 "
 `;

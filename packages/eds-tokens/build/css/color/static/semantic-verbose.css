@@ -51,6 +51,9 @@
   --eds-color-bg-danger-fill-emphasis-default: var(--eds-color-danger-9);
   --eds-color-bg-danger-fill-emphasis-hover: var(--eds-color-danger-10);
   --eds-color-bg-danger-fill-emphasis-active: var(--eds-color-danger-11);
+  --eds-color-bg-floating: var(--eds-color-bg-floating);
+  --eds-color-bg-backdrop: var(--eds-color-bg-backdrop);
+  --eds-color-bg-input: var(--eds-color-bg-input);
   --eds-color-border-neutral-subtle: var(--eds-color-neutral-6);
   --eds-color-border-neutral-medium: var(--eds-color-neutral-7);
   --eds-color-border-neutral-strong: var(--eds-color-neutral-8);
@@ -69,6 +72,7 @@
   --eds-color-border-danger-subtle: var(--eds-color-danger-6);
   --eds-color-border-danger-medium: var(--eds-color-danger-7);
   --eds-color-border-danger-strong: var(--eds-color-danger-8);
+  --eds-color-border-focus: var(--eds-color-border-focus);
   --eds-color-text-neutral-subtle: var(--eds-color-neutral-12); /** Used for text and icons */
   --eds-color-text-neutral-strong: var(--eds-color-neutral-13); /** Used for text and icons */
   --eds-color-text-neutral-subtle-on-emphasis: var(--eds-color-neutral-14); /** Text or icons against colored backgrounds */
@@ -93,4 +97,8 @@
   --eds-color-text-danger-strong: var(--eds-color-danger-13); /** Used for text and icons */
   --eds-color-text-danger-subtle-on-emphasis: var(--eds-color-danger-14); /** Text or icons against colored backgrounds */
   --eds-color-text-danger-strong-on-emphasis: var(--eds-color-danger-15); /** Text or icons against colored backgrounds */
+  --eds-color-text-link: var(--eds-color-text-link);
+  --eds-color-bg-disabled: var(--eds-color-bg-disabled);
+  --eds-color-border-disabled: var(--eds-color-border-disabled);
+  --eds-color-text-disabled: var(--eds-color-text-disabled);
 }

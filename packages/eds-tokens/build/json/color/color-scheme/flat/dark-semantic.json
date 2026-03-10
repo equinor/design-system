@@ -47,6 +47,10 @@
   "bg-danger-fill-emphasis-default": "#ffa3a1",
   "bg-danger-fill-emphasis-hover": "#ffc1bf",
   "bg-danger-fill-emphasis-active": "#ffd9d7",
+  "bg-floating": "#202223",
+  "bg-backdrop": "#738696",
+  "bg-input": "#0b0b0b",
+  "bg-disabled": "#525c65",
   "border-neutral-subtle": "#525c65",
   "border-neutral-medium": "#738696",
   "border-neutral-strong": "#9fb4c6",
@@ -65,6 +69,8 @@
   "border-danger-subtle": "#923a3c",
   "border-danger-medium": "#e53748",
   "border-danger-strong": "#ff8082",
+  "border-focus": "#2d8bc5",
+  "border-disabled": "#738696",
   "text-neutral-subtle": "#d6e3ee",
   "text-neutral-strong": "#f5fdff",
   "text-neutral-subtle-on-emphasis": "#333639",
@@ -88,5 +94,7 @@
   "text-danger-subtle": "#ffd0ce",
   "text-danger-strong": "#fff5f4",
   "text-danger-subtle-on-emphasis": "#492d2c",
-  "text-danger-strong-on-emphasis": "#040303"
+  "text-danger-strong-on-emphasis": "#040303",
+  "text-link": "#5abbfb",
+  "text-disabled": "#738696"
 }

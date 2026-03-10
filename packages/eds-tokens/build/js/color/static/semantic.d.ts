@@ -50,6 +50,10 @@ export const BG_DANGER_FILL_MUTED_ACTIVE: string;
 export const BG_DANGER_FILL_EMPHASIS_DEFAULT: string;
 export const BG_DANGER_FILL_EMPHASIS_HOVER: string;
 export const BG_DANGER_FILL_EMPHASIS_ACTIVE: string;
+export const BG_FLOATING: string;
+export const BG_BACKDROP: string;
+export const BG_INPUT: string;
+export const BG_DISABLED: string;
 export const BORDER_NEUTRAL_SUBTLE: string;
 export const BORDER_NEUTRAL_MEDIUM: string;
 export const BORDER_NEUTRAL_STRONG: string;
@@ -68,6 +72,8 @@ export const BORDER_WARNING_STRONG: string;
 export const BORDER_DANGER_SUBTLE: string;
 export const BORDER_DANGER_MEDIUM: string;
 export const BORDER_DANGER_STRONG: string;
+export const BORDER_FOCUS: string;
+export const BORDER_DISABLED: string;
 /** Used for text and icons */
 export const TEXT_NEUTRAL_SUBTLE: string;
 /** Used for text and icons */
@@ -116,3 +122,5 @@ export const TEXT_DANGER_STRONG: string;
 export const TEXT_DANGER_SUBTLE_ON_EMPHASIS: string;
 /** Text or icons against colored backgrounds */
 export const TEXT_DANGER_STRONG_ON_EMPHASIS: string;
+export const TEXT_LINK: string;
+export const TEXT_DISABLED: string;
