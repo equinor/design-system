@@ -19,6 +19,11 @@
     align-items: center;
 
     height: var(--eds-typography-line-height, 1.5rem);
+    margin-block: var(--eds-selectable-icon-container-padding-block, -6px);
+    margin-inline-start: var(
+      --eds-selectable-icon-container-padding-inline,
+      -4.8px
+    );
 
     color: var(--eds-color-text-subtle);
   }
@@ -44,6 +49,9 @@
     flex-shrink: 0;
     align-self: flex-start;
     order: 99;
-    margin-inline-start: auto;
+
+    margin-block: var(--eds-selectable-icon-container-padding-block, -6px);
+    margin-inline: auto
+      var(--eds-selectable-icon-container-padding-inline, -4.8px);
   }
 }
