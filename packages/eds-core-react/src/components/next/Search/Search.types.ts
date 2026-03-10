@@ -12,6 +12,8 @@ export type SearchProps = {
   id?: string
   /** Callback fired when the clear button is clicked */
   onClear?: () => void
+  /** Accessible label for the clear button. Defaults to "Clear search". Override for localisation. */
+  clearLabel?: string
 } & Omit<
   InputProps,
   | 'startAdornment'

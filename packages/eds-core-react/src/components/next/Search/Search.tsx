@@ -13,18 +13,19 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     description,
     helperMessage,
     id: providedId,
-    invalid = false,
-    disabled = false,
+    invalid,
+    disabled,
     readOnly,
     value,
     defaultValue,
     onChange,
     onClear,
+    clearLabel = 'Clear search',
     ...inputProps
   },
   forwardedRef,
 ) {
-  const { inputId, descriptionId, helperMessageId, getDescribedBy } =
+  const { inputId, labelId, descriptionId, helperMessageId, getDescribedBy } =
     useFieldIds(providedId)
 
   const isControlled = value !== undefined
@@ -70,9 +71,13 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
 
   return (
-    <search>
+    <search aria-labelledby={label ? labelId : undefined}>
       <Field disabled={disabled} className="eds-search">
-        {label && <Field.Label htmlFor={inputId}>{label}</Field.Label>}
+        {label && (
+          <Field.Label id={labelId} htmlFor={inputId}>
+            {label}
+          </Field.Label>
+        )}
         {description && (
           <Field.Description id={descriptionId}>
             {description}
@@ -107,7 +112,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
                 size="small"
                 tone={invalid ? 'neutral' : 'accent'}
                 onClick={handleClear}
-                aria-label="Clear search"
+                aria-label={clearLabel}
               >
                 <Icon data={close} />
               </Button>

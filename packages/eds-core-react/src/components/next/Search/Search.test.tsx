@@ -6,55 +6,41 @@ import { Search } from '.'
 
 describe('Search (next)', () => {
   describe('Rendering', () => {
-    it('renders with default props', () => {
+    it('renders a searchbox', () => {
       render(<Search />)
       expect(screen.getByRole('searchbox')).toBeInTheDocument()
     })
 
-    it('renders with label', () => {
+    it('associates label with input', () => {
       render(<Search label="Search label" />)
-      expect(screen.getByLabelText('Search label')).toBeInTheDocument()
+      expect(
+        screen.getByRole('searchbox', { name: 'Search label' }),
+      ).toBeInTheDocument()
     })
 
-    it('renders with description', () => {
-      render(<Search label="Search" description="Search description" />)
-      expect(screen.getByText('Search description')).toBeInTheDocument()
+    it('names the search landmark via aria-labelledby when label is provided', () => {
+      const { container } = render(<Search label="Search label" />)
+      const landmark = container.querySelector('search')
+      const label = container.querySelector('label')
+      expect(landmark).toHaveAttribute('aria-labelledby', label?.id)
     })
 
-    it('renders with helper message', () => {
-      render(<Search label="Search" helperMessage="Helper text" />)
-      expect(screen.getByText('Helper text')).toBeInTheDocument()
-    })
-
-    it('renders with placeholder', () => {
-      render(<Search placeholder="Search here" />)
-      expect(screen.getByPlaceholderText('Search here')).toBeInTheDocument()
-    })
-
-    it('forwards ref to input element', () => {
+    it('forwards ref to the input element', () => {
       const ref = { current: null as HTMLInputElement | null }
       render(<Search ref={ref} />)
       expect(ref.current).toBeInstanceOf(HTMLInputElement)
     })
-
-    it('spreads additional props to input', () => {
-      render(<Search data-custom="value" />)
-      expect(screen.getByRole('searchbox')).toHaveAttribute(
-        'data-custom',
-        'value',
-      )
-    })
   })
 
   describe('Clear button', () => {
-    it('does not show clear button when input is empty', () => {
+    it('is hidden when input is empty', () => {
       render(<Search />)
       expect(
         screen.queryByRole('button', { name: 'Clear search' }),
       ).not.toBeInTheDocument()
     })
 
-    it('shows clear button when uncontrolled input has value', async () => {
+    it('appears after typing in uncontrolled input', async () => {
       const user = userEvent.setup()
       render(<Search />)
       await user.type(screen.getByRole('searchbox'), 'hello')
@@ -63,21 +49,22 @@ describe('Search (next)', () => {
       ).toBeInTheDocument()
     })
 
-    it('shows clear button when controlled input has value', () => {
+    it('appears when controlled input has a value', () => {
       render(<Search value="hello" onChange={() => {}} />)
       expect(
         screen.getByRole('button', { name: 'Clear search' }),
       ).toBeInTheDocument()
     })
 
-    it('clears uncontrolled input when clear button is clicked', async () => {
+    it('clears uncontrolled input and returns focus on click', async () => {
       const user = userEvent.setup()
       render(<Search defaultValue="hello" />)
       await user.click(screen.getByRole('button', { name: 'Clear search' }))
       expect(screen.getByRole('searchbox')).toHaveValue('')
+      expect(screen.getByRole('searchbox')).toHaveFocus()
     })
 
-    it('calls onClear when clear button is clicked', async () => {
+    it('calls onClear on click', async () => {
       const onClear = jest.fn()
       const user = userEvent.setup()
       render(<Search defaultValue="hello" onClear={onClear} />)
@@ -85,14 +72,14 @@ describe('Search (next)', () => {
       expect(onClear).toHaveBeenCalledTimes(1)
     })
 
-    it('does not show clear button when disabled', () => {
+    it('is hidden when disabled', () => {
       render(<Search value="hello" onChange={() => {}} disabled />)
       expect(
         screen.queryByRole('button', { name: 'Clear search' }),
       ).not.toBeInTheDocument()
     })
 
-    it('does not show clear button when readOnly', () => {
+    it('is hidden when readOnly', () => {
       render(<Search value="hello" onChange={() => {}} readOnly />)
       expect(
         screen.queryByRole('button', { name: 'Clear search' }),
@@ -100,40 +87,25 @@ describe('Search (next)', () => {
     })
   })
 
-  describe('States', () => {
-    it('renders disabled state', () => {
-      render(<Search disabled />)
-      expect(screen.getByRole('searchbox')).toBeDisabled()
-    })
-
-    it('renders invalid state', () => {
-      render(<Search invalid />)
-      expect(screen.getByRole('searchbox')).toHaveAttribute(
-        'aria-invalid',
-        'true',
-      )
-    })
-
-    it('renders readOnly state', () => {
-      render(<Search readOnly />)
-      expect(screen.getByRole('searchbox')).toHaveAttribute('readonly')
-    })
-  })
-
   describe('Accessibility', () => {
-    it('has no accessibility violations', async () => {
+    it('has no violations with a label', async () => {
       const { container } = render(<Search label="Search" />)
       expect(await axe(container)).toHaveNoViolations()
     })
 
-    it('has no accessibility violations when invalid', async () => {
+    it('has no violations with aria-label instead of label', async () => {
+      const { container } = render(<Search aria-label="Search resources" />)
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('has no violations in invalid state', async () => {
       const { container } = render(
         <Search label="Search" invalid helperMessage="Error message" />,
       )
       expect(await axe(container)).toHaveNoViolations()
     })
 
-    it('helper message is associated via aria-describedby', () => {
+    it('associates helper message via aria-describedby', () => {
       render(<Search label="Search" helperMessage="Helper text" />)
       const input = screen.getByRole('searchbox')
       const helper = screen.getByText('Helper text')

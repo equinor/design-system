@@ -67,6 +67,12 @@ const meta: Meta<typeof Search> = {
     },
 
     // Other
+    clearLabel: {
+      control: 'text',
+      description:
+        'Accessible label for the clear button. Override for localisation.',
+      table: { category: 'Other', defaultValue: { summary: 'Clear search' } },
+    },
     id: {
       control: 'text',
       description:
