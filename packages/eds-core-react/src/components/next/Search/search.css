@@ -1,7 +1,7 @@
 @layer eds-components {
-  /* Icon color responds to data-color-appearance:
-     accent (default/hover/focus/filled) → teal, neutral (invalid) → grey
-     readonly uses --eds-color-border-strong to match Input's readonly text color */
+  /* Icon base color via --eds-color-text-subtle, which resolves to the accent
+     (teal) or neutral (grey) value based on data-color-appearance on the span.
+     readonly and disabled override to specific tokens via parent container selectors. */
   .eds-search__icon {
     display: flex;
     color: var(--eds-color-text-subtle);

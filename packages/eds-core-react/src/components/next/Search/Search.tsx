@@ -33,18 +33,15 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   )
   const hasValue = isControlled ? Boolean(value) : internalHasValue
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const mergedRef = useCallback(
     (node: HTMLInputElement | null) => {
-      ;(inputRef as React.MutableRefObject<HTMLInputElement | null>).current =
-        node
+      inputRef.current = node
       if (typeof forwardedRef === 'function') {
         forwardedRef(node)
       } else if (forwardedRef) {
-        ;(
-          forwardedRef as React.MutableRefObject<HTMLInputElement | null>
-        ).current = node
+        forwardedRef.current = node
       }
     },
     [forwardedRef],
@@ -59,6 +56,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   const handleClear = () => {
     if (!isControlled && inputRef.current) {
+      // Direct DOM mutation: bypasses React's synthetic onChange, which is
+      // intentional — onClear is the designated callback for clear actions.
       inputRef.current.value = ''
       setInternalHasValue(false)
     }

@@ -20,4 +20,5 @@ export type SearchProps = {
   | 'endText'
   | 'as'
   | 'hideErrorIcon'
+  | 'type'
 >
