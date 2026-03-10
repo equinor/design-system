@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.8](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.7...eds-core-react@v2.3.8) (2026-03-10)
+
+
+### 🐛 Fixed
+
+* DatePicker displays correct day for configured timezone ([#4622](https://github.com/equinor/design-system/issues/4622)) ([de33a5e](https://github.com/equinor/design-system/commit/de33a5e2f685bd32341e3cd28fda282b44d53d66))
+* **eds-core-react:** stabilise DatePicker popover size when navigating months ([#4620](https://github.com/equinor/design-system/issues/4620)) ([04ae29a](https://github.com/equinor/design-system/commit/04ae29aa1961d78e2a1d0c8140138f09b5376c48)), closes [#4376](https://github.com/equinor/design-system/issues/4376)
+
 ## [2.3.7](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.6...eds-core-react@v2.3.7) (2026-02-25)
 
 
