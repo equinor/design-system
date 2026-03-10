@@ -71,8 +71,11 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
 
   return (
-    <search aria-labelledby={label ? labelId : undefined}>
-      <Field disabled={disabled} className="eds-search">
+    <search
+      className="eds-search"
+      aria-labelledby={label ? labelId : undefined}
+    >
+      <Field disabled={disabled}>
         {label && (
           <Field.Label id={labelId} htmlFor={inputId}>
             {label}
