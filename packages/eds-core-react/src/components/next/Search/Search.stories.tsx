@@ -132,7 +132,7 @@ export const Controlled: Story = {
       },
     },
   },
-  render: () => {
+  render: function ControlledSearch() {
     const [value, setValue] = useState('Equinor')
     return (
       <Search

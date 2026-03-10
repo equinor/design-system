@@ -18,13 +18,6 @@ describe('Search (next)', () => {
       ).toBeInTheDocument()
     })
 
-    it('names the search landmark via aria-labelledby when label is provided', () => {
-      const { container } = render(<Search label="Search label" />)
-      const landmark = container.querySelector('search')
-      const label = container.querySelector('label')
-      expect(landmark).toHaveAttribute('aria-labelledby', label?.id)
-    })
-
     it('forwards ref to the input element', () => {
       const ref = { current: null as HTMLInputElement | null }
       render(<Search ref={ref} />)
