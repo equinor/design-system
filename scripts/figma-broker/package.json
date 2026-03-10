@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.3.1",
-    "svgo": "^4.0.0"
+    "svgo": "^4.0.1"
   },
   "nodemonConfig": {
     "ignore": [
