@@ -80,6 +80,7 @@ const BannerComponent = forwardRef<HTMLDivElement, BannerProps>(function Banner(
         <Button
           variant="ghost"
           icon
+          size="small"
           className="eds-banner__dismiss"
           aria-label="Dismiss"
           onClick={onDismiss}

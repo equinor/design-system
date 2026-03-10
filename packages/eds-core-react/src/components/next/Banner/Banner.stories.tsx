@@ -90,6 +90,30 @@ export const Success: StoryFn<typeof Banner> = () => (
   </Banner>
 )
 
+export const WithLink: StoryFn<typeof Banner> = () => (
+  <Banner>
+    <Banner.Icon>
+      <Icon data={info_circle} />
+    </Banner.Icon>
+    <Banner.Message>{exampleMessage}</Banner.Message>
+    <Banner.Actions>
+      <a href="https://eds.equinor.com">Link</a>
+    </Banner.Actions>
+  </Banner>
+)
+
+export const WithLinkBottom: StoryFn<typeof Banner> = () => (
+  <Banner>
+    <Banner.Icon>
+      <Icon data={info_circle} />
+    </Banner.Icon>
+    <Banner.Message>{exampleMessage}</Banner.Message>
+    <Banner.Actions placement="bottom">
+      <a href="https://eds.equinor.com">Link</a>
+    </Banner.Actions>
+  </Banner>
+)
+
 export const Dismissible: StoryFn<typeof Banner> = () => {
   const [visible, setVisible] = useState(true)
 
@@ -149,6 +173,16 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
       <Banner.Message>{exampleMessage}</Banner.Message>
       <Banner.Actions>
         <Button>Ok</Button>
+      </Banner.Actions>
+    </Banner>
+
+    <Banner>
+      <Banner.Icon>
+        <Icon data={info_circle} />
+      </Banner.Icon>
+      <Banner.Message>{exampleMessage}</Banner.Message>
+      <Banner.Actions>
+        <a href="https://eds.equinor.com">Link</a>
       </Banner.Actions>
     </Banner>
 
