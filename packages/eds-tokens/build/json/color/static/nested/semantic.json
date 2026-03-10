@@ -83,7 +83,11 @@
         "Hover": "#9a1026",
         "Active": "#8e1525"
       }
-    }
+    },
+    "Floating": "#ffffff",
+    "Backdrop": "#aeaeae",
+    "Input": "#f5f5f5",
+    "Disabled": "#e1e1e1"
   },
   "Border": {
     "Neutral": {
@@ -115,7 +119,9 @@
       "Subtle": "#ffbcba",
       "Medium": "#ff7a7d",
       "Strong": "#c6002d"
-    }
+    },
+    "Focus": "#6fb6e9",
+    "Disabled": "#aeaeae"
   },
   "Text": {
     "Neutral": {
@@ -153,6 +159,8 @@
       "Strong": "#2e1414",
       "Subtle on emphasis": "#ffcbc9",
       "Strong on emphasis": "#ffffff"
-    }
+    },
+    "Link": "#0070a9",
+    "Disabled": "#aeaeae"
   }
 }

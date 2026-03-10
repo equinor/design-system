@@ -49,6 +49,11 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
     FIGMA_STATIC_PROJECT_ID,
     'Semantic.Mode 1.json',
   )
+  const CONCEPT_COLORS = path.join(
+    'tokens',
+    FIGMA_STATIC_PROJECT_ID,
+    'Concept.Mode 1.json',
+  )
   const BUILD_PATH = path.posix.join(
     tokenConfig.buildPath ?? 'color/',
     'static/',
@@ -56,17 +61,18 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
   const PREFIX = tokenConfig.variablePrefix ?? 'x'
   const COLOR_PREFIX = PREFIX + '-color' // e.g. "x-color"
 
-  // Build static semantic tokens with light theme values and CSS variable references
+  // Build static semantic + concept tokens with light theme values and CSS variable references
   const semanticColors = _extend({
-    source: [SEMANTIC_COLORS],
+    source: [SEMANTIC_COLORS, CONCEPT_COLORS],
     include: [LIGHT_COLORS, LIGHT_SCHEME], // use one scheme to resolve references
     filter: (token: TransformedToken) =>
-      includeTokenFilter(token, ['Semantic']),
+      includeTokenFilter(token, ['Semantic', 'Concept']),
     buildPath: BUILD_PATH,
     prefix: COLOR_PREFIX,
     fileName: 'semantic',
     selector: ':root',
     outputReferences: true,
+    rootName: 'color',
   })
 
   await semanticColors.buildAllPlatforms()
@@ -80,10 +86,10 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
   )
 
   const lightSemanticColors = _extend({
-    source: [SEMANTIC_COLORS],
+    source: [SEMANTIC_COLORS, CONCEPT_COLORS],
     include: [LIGHT_COLORS, LIGHT_SCHEME],
     filter: (token: TransformedToken) =>
-      includeTokenFilter(token, ['Semantic']),
+      includeTokenFilter(token, ['Semantic', 'Concept']),
     buildPath: SCHEME_BUILD_PATH,
     fileName: 'light-semantic',
     selector: '[data-color-scheme="light"]',
@@ -93,10 +99,10 @@ async function buildColorsFromConfig(cfg: TokenConfig) {
   })
 
   const darkSemanticColors = _extend({
-    source: [SEMANTIC_COLORS],
+    source: [SEMANTIC_COLORS, CONCEPT_COLORS],
     include: [DARK_COLORS, DARK_SCHEME],
     filter: (token: TransformedToken) =>
-      includeTokenFilter(token, ['Semantic']),
+      includeTokenFilter(token, ['Semantic', 'Concept']),
     buildPath: SCHEME_BUILD_PATH,
     fileName: 'dark-semantic',
     selector: '[data-color-scheme="dark"]',

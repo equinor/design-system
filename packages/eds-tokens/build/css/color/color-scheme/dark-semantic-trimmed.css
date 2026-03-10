@@ -51,6 +51,10 @@
   --eds-color-bg-danger-fill-emphasis-default: #ffa3a1;
   --eds-color-bg-danger-fill-emphasis-hover: #ffc1bf;
   --eds-color-bg-danger-fill-emphasis-active: #ffd9d7;
+  --eds-color-bg-floating: #202223;
+  --eds-color-bg-backdrop: #738696;
+  --eds-color-bg-input: #0b0b0b;
+  --eds-color-bg-disabled: #525c65;
   --eds-color-border-neutral-subtle: #525c65;
   --eds-color-border-neutral-medium: #738696;
   --eds-color-border-neutral-strong: #9fb4c6;
@@ -69,6 +73,8 @@
   --eds-color-border-danger-subtle: #923a3c;
   --eds-color-border-danger-medium: #e53748;
   --eds-color-border-danger-strong: #ff8082;
+  --eds-color-border-focus: #2d8bc5;
+  --eds-color-border-disabled: #738696;
   --eds-color-text-neutral-subtle: #d6e3ee; /** Used for text and icons */
   --eds-color-text-neutral-strong: #f5fdff; /** Used for text and icons */
   --eds-color-text-neutral-subtle-on-emphasis: #333639; /** Text or icons against colored backgrounds */
@@ -93,4 +99,6 @@
   --eds-color-text-danger-strong: #fff5f4; /** Used for text and icons */
   --eds-color-text-danger-subtle-on-emphasis: #492d2c; /** Text or icons against colored backgrounds */
   --eds-color-text-danger-strong-on-emphasis: #040303; /** Text or icons against colored backgrounds */
+  --eds-color-text-link: #5abbfb;
+  --eds-color-text-disabled: #738696;
 }
