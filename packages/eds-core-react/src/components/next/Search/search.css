@@ -1,22 +1,23 @@
 @layer eds-components {
-  /* Icon base color via --eds-color-text-subtle, which resolves to the accent
-     (teal) or neutral (grey) value based on data-color-appearance on the span.
-     readonly and disabled override to specific tokens via parent container selectors. */
-  .eds-search__icon {
-    display: flex;
-    color: var(--eds-color-text-subtle);
-  }
+  .eds-search {
+    /* Icon color: accent (teal) or neutral (grey) via data-color-appearance on the span.
+       readonly and disabled override via ancestor attribute selectors. */
+    & .eds-search__icon {
+      display: flex;
+      color: var(--eds-color-text-subtle);
 
-  .eds-input-container[data-readonly] .eds-search__icon {
-    color: var(--eds-color-border-strong);
-  }
+      [data-readonly] & {
+        color: var(--eds-color-border-strong);
+      }
 
-  .eds-input-container[data-disabled] .eds-search__icon {
-    color: var(--eds-color-text-disabled);
-  }
-}
+      [data-disabled] & {
+        color: var(--eds-color-text-disabled);
+      }
+    }
 
-/* Hide native browser search clear button — replaced by our custom clear button */
-.eds-search .eds-input[type='search']::-webkit-search-cancel-button {
-  appearance: none;
+    /* Hide native clear button — replaced by our custom one */
+    & [type='search']::-webkit-search-cancel-button {
+      appearance: none;
+    }
+  }
 }
