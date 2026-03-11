@@ -102,9 +102,11 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
           })}
           hideErrorIcon
           startAdornment={
-            <span className="eds-search__icon" data-color-appearance={iconTone}>
-              <Icon data={searchIcon} />
-            </span>
+            <Icon
+              data={searchIcon}
+              data-icon="search"
+              data-color-appearance={iconTone}
+            />
           }
           endAdornment={
             showClear ? (

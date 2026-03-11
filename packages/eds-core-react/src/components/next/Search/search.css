@@ -1,9 +1,8 @@
 @layer eds-components {
   .eds-search {
-    /* Icon color: accent (teal) or neutral (grey) via data-color-appearance on the span.
+    /* Icon color: accent (teal) or neutral (grey) via data-color-appearance.
        readonly and disabled override via ancestor attribute selectors. */
-    & .eds-search__icon {
-      display: flex;
+    & [data-icon='search'] {
       color: var(--eds-color-text-subtle);
 
       [data-readonly] & {
