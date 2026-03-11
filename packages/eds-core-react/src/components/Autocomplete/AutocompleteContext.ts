@@ -1,4 +1,4 @@
-import { createContext, use } from 'react'
+import { createContext, useContext } from 'react'
 import { useAutocomplete } from './useAutocomplete'
 
 export const AutocompleteContext = createContext<ReturnType<
@@ -6,7 +6,7 @@ export const AutocompleteContext = createContext<ReturnType<
 > | null>(null)
 
 export const useAutocompleteContext = () => {
-  const context = use(AutocompleteContext)
+  const context = useContext(AutocompleteContext)
   if (!context) {
     throw new Error(
       'Autocomplete compound components must be used within an Autocomplete component',
