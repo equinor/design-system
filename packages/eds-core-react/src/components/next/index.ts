@@ -29,3 +29,6 @@ export type { InputProps } from './Input'
 
 export { TextField } from './TextField'
 export type { TextFieldProps } from './TextField'
+
+export { Link } from './Link'
+export type { LinkProps, LinkVariant } from './Link'

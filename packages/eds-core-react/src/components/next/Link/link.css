@@ -1,0 +1,56 @@
+@layer eds-components {
+  .eds-link {
+    color: var(--eds-color-text-link);
+    text-decoration: underline;
+    text-decoration-thickness: var(--eds-sizing-stroke-thin);
+    text-underline-offset: var(--eds-sizing-stroke-thick);
+
+    transition: color 150ms ease-in-out;
+  }
+
+  .eds-link:hover {
+    color: var(--eds-color-text-strong);
+  }
+
+  .eds-link:focus-visible {
+    border-radius: var(--eds-spacing-border-radius-rounded);
+    color: var(--eds-color-text-strong);
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+    outline-offset: calc(var(--eds-sizing-stroke-thick) * 2);
+  }
+
+  /* Standalone variant: flex layout for icon + text */
+  .eds-link[data-variant='standalone'] {
+    position: relative;
+
+    gap: var(--eds-typography-gap-horizontal);
+    align-items: center;
+
+    border-bottom: var(--eds-sizing-stroke-thin) solid currentcolor;
+
+    text-decoration: none;
+  }
+
+  /* Use pseudo-element for focus ring so it can have border-radius
+     while border-bottom stays straight */
+  .eds-link[data-variant='standalone']:focus-visible {
+    border-radius: 0;
+    outline: none;
+  }
+
+  .eds-link[data-variant='standalone']:focus-visible::after {
+    pointer-events: none;
+    content: '';
+
+    position: absolute;
+    inset: calc(var(--eds-sizing-stroke-thick) * -2);
+
+    border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+    border-radius: var(--eds-spacing-border-radius-rounded);
+  }
+}
+
+/* Outside @layer to override typography.css [data-font-family] { display: block } */
+.eds-link[data-variant='standalone'] {
+  display: inline-flex;
+}
