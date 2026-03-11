@@ -31,7 +31,7 @@ We need a lightweight way to document significant architecture decisions that is
 
 ### Option 1: ADRs in the repository
 
-Store Markdown-based Architecture Decision Records in `docs/adr/`.
+Store Markdown-based Architecture Decision Records in `documentation/adr/`.
 
 **Pros:**
 
@@ -94,7 +94,7 @@ We will use Architecture Decision Records (ADRs) to document significant archite
 
 Each ADR will:
 
-- Be stored in `docs/adr/` as a Markdown file
+- Be stored in `documentation/adr/` as a Markdown file
 - Follow the MADR (Markdown Any Decision Records) format
 - Be numbered sequentially (0001, 0002, etc.)
 - Be immutable once accepted (new decisions supersede old ones rather than editing)
@@ -124,7 +124,7 @@ ADRs are public by default. Decisions about components, tokens, APIs, tooling, a
 ### Confirmation
 
 - PR reviews will check that significant architecture decisions have an accompanying ADR
-- The `docs/adr/` folder is referenced in onboarding documentation
+- The `documentation/adr/` folder is referenced in onboarding documentation
 
 ## Related
 
