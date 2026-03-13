@@ -20,12 +20,29 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       invalid = false,
       disabled = false,
       maxRows,
+      showCharacterCount = false,
       ...textareaProps
     },
     ref,
   ) {
     const { inputId, descriptionId, helperMessageId, getDescribedBy } =
       useFieldIds(providedId)
+
+    const [charCount, setCharCount] = useState(
+      () =>
+        String(textareaProps.value ?? textareaProps.defaultValue ?? '').length,
+    )
+
+    const {
+      maxLength,
+      onChange: onChangeProp,
+      ...restTextareaProps
+    } = textareaProps
+
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setCharCount(e.target.value.length)
+      onChangeProp?.(e)
+    }
 
     const internalRef = useRef<HTMLTextAreaElement | null>(null)
     const [maxPixelHeight, setMaxPixelHeight] = useState<number | undefined>(
@@ -64,6 +81,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       [ref, autoResizeRef],
     )
 
+    const showHelperRow = helperMessage || showCharacterCount
+
     return (
       <Field className="eds-text-area" disabled={disabled}>
         {label && (
@@ -98,19 +117,38 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           id={inputId}
           disabled={disabled}
           invalid={invalid}
+          maxLength={maxLength}
+          onChange={
+            handleChange as unknown as React.ChangeEventHandler<HTMLInputElement>
+          }
           aria-describedby={getDescribedBy({
             hasDescription: !!description,
             hasHelperMessage: !!helperMessage,
           })}
-          {...(textareaProps as unknown as React.InputHTMLAttributes<HTMLInputElement>)}
+          {...(restTextareaProps as unknown as React.InputHTMLAttributes<HTMLInputElement>)}
         />
-        {helperMessage && (
-          <Field.HelperMessage
-            id={helperMessageId}
-            role={invalid ? 'alert' : undefined}
-          >
-            {helperMessage}
-          </Field.HelperMessage>
+        {showHelperRow && (
+          <div className="helper-row">
+            {helperMessage && (
+              <Field.HelperMessage
+                id={helperMessageId}
+                role={invalid ? 'alert' : undefined}
+              >
+                {helperMessage}
+              </Field.HelperMessage>
+            )}
+            {showCharacterCount && (
+              <span
+                className="char-count"
+                data-font-family="ui"
+                data-font-size="xs"
+                aria-live="polite"
+              >
+                {charCount}
+                {maxLength !== undefined ? ` / ${maxLength}` : ''}
+              </span>
+            )}
+          </div>
         )}
       </Field>
     )

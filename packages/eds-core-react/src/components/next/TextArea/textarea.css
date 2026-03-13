@@ -27,12 +27,37 @@
         padding-block-end: var(--eds-container-space-vertical);
         padding-inline-end: var(--eds-selectable-space-horizontal);
       }
+
+      &:has(+ .helper-row) {
+        margin-block-end: calc(
+          var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical)
+        );
+      }
+    }
+
+    & .helper-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--eds-typography-gap-horizontal);
+      inline-size: 100%;
+    }
+
+    & .char-count {
+      flex-shrink: 0;
+      margin-inline-start: auto;
+      color: var(--eds-color-text-subtle);
     }
   }
 }
 
 .eds-text-area .eds-error-icon {
   margin-block-start: var(--eds-spacing-vertical-2xs);
+}
+
+/* Must be outside @layer: [data-font-family] { margin: 0 } is unlayered
+   and would override margin-inline-start: auto set inside the layer. */
+.eds-text-area .char-count {
+  margin-inline-start: auto;
 }
 
 /* Extend textarea to bottom-right corner so the resize handle sits flush.

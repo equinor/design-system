@@ -61,6 +61,18 @@ const meta: Meta<typeof TextArea> = {
       description: 'Helper or validation message shown below the textarea',
       table: { category: 'Content' },
     },
+    showCharacterCount: {
+      control: 'boolean',
+      description:
+        'Show a live character count below the textarea. Displays "n / max" when `maxLength` is set, otherwise just "n"',
+      table: { category: 'Content', defaultValue: { summary: 'false' } },
+    },
+    maxLength: {
+      control: 'number',
+      description:
+        'Maximum number of characters allowed. Pair with `showCharacterCount` to display the limit.',
+      table: { category: 'Content', type: { summary: 'number' } },
+    },
     invalid: {
       control: 'boolean',
       description: 'Shows error styling with red border and error icon',
@@ -244,6 +256,40 @@ export const States: StoryFn<TextAreaProps> = () => (
     />
   </>
 )
+
+export const WithCharacterCount: StoryFn<TextAreaProps> = () => (
+  <>
+    <TextArea
+      label="Notes"
+      placeholder="Start typing…"
+      rows={3}
+      showCharacterCount
+    />
+    <TextArea
+      label="Limited notes"
+      placeholder="Max 200 characters"
+      rows={3}
+      maxLength={200}
+      showCharacterCount
+    />
+    <TextArea
+      label="With helper message"
+      placeholder="Both shown below"
+      rows={3}
+      maxLength={100}
+      showCharacterCount
+      helperMessage="Helper Message"
+    />
+  </>
+)
+WithCharacterCount.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `showCharacterCount` to display a live character count below the textarea. When `maxLength` is also set, it renders as "n / max".',
+    },
+  },
+}
 
 export const DensityModes: StoryFn<TextAreaProps> = () => (
   <div style={{ display: 'flex', gap: '2rem' }}>

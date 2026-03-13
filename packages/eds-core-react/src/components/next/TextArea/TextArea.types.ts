@@ -17,4 +17,6 @@ export type TextAreaProps = {
   invalid?: boolean
   /** Maximum number of rows before the textarea stops growing and becomes scrollable */
   maxRows?: number
+  /** Show a character count below the textarea. Displays "n / max" when `maxLength` is set, otherwise just "n" */
+  showCharacterCount?: boolean
 } & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id'>

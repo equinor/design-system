@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import { TextArea } from '.'
@@ -51,6 +51,33 @@ describe('TextArea (next)', () => {
     it('renders indicator text', () => {
       render(<TextArea label="Label" indicator="(Required)" />)
       expect(screen.getByText('(Required)')).toBeInTheDocument()
+    })
+  })
+
+  describe('Character count', () => {
+    it('shows character count when showCharacterCount is true', () => {
+      render(<TextArea showCharacterCount defaultValue="hello" />)
+      expect(screen.getByText('5')).toBeInTheDocument()
+    })
+
+    it('shows character count with max when maxLength is set', () => {
+      render(
+        <TextArea showCharacterCount maxLength={100} defaultValue="hello" />,
+      )
+      expect(screen.getByText('5 / 100')).toBeInTheDocument()
+    })
+
+    it('updates count on change', () => {
+      render(<TextArea showCharacterCount />)
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: { value: 'abc' },
+      })
+      expect(screen.getByText('3')).toBeInTheDocument()
+    })
+
+    it('does not show char count when showCharacterCount is false', () => {
+      render(<TextArea label="Label" />)
+      expect(screen.queryByRole('status')).not.toBeInTheDocument()
     })
   })
 
