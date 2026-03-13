@@ -48,4 +48,10 @@ jobs:
       - name: Test packages
         run: pnpm run test
       - name: Type check packages
-        run: pnpm run types
+        run: |
+          pnpm --filter @equinor/eds-tokens types
+          pnpm --filter @equinor/eds-utils types
+          pnpm --filter @equinor/eds-icons types
+          pnpm --filter @equinor/eds-core-react types
+          pnpm --filter @equinor/eds-lab-react types
+          pnpm --filter @equinor/eds-data-grid-react types
