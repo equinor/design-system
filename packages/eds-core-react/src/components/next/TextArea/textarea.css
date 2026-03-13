@@ -1,0 +1,43 @@
+@layer eds-components {
+  .eds-text-area {
+    & .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--eds-typography-gap-horizontal);
+      inline-size: 100%;
+
+      & > button {
+        flex-shrink: 0;
+        margin-block: calc(var(--eds-sizing-icon-xs) / -2);
+      }
+    }
+
+    & .eds-input-container {
+      align-items: flex-start;
+      padding-block: var(--eds-container-space-vertical);
+      overflow: hidden;
+
+      & textarea.eds-input {
+        box-sizing: border-box;
+        overflow: auto;
+        white-space: pre-wrap;
+        text-overflow: clip;
+        resize: vertical;
+        padding-block-end: var(--eds-container-space-vertical);
+        padding-inline-end: var(--eds-selectable-space-horizontal);
+      }
+    }
+  }
+}
+
+.eds-text-area .eds-error-icon {
+  margin-block-start: var(--eds-spacing-vertical-2xs);
+}
+
+/* Extend textarea to bottom-right corner so the resize handle sits flush.
+   Must be outside @layer to override [data-font-family] { margin: 0 }. */
+.eds-text-area textarea.eds-input {
+  margin-block-end: calc(-1 * var(--eds-container-space-vertical));
+  margin-inline-end: calc(-1 * var(--eds-selectable-space-horizontal));
+}

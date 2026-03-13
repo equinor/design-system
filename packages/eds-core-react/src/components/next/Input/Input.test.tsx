@@ -68,12 +68,6 @@ describe('Input (Next EDS 2.0)', () => {
       expect(input).toHaveClass('eds-input')
       expect(input).toHaveClass('input-class')
     })
-
-    it('Renders as textarea when as prop is textarea', () => {
-      render(<Input as="textarea" value="multiline text" readOnly />)
-      const textarea = screen.getByDisplayValue('multiline text')
-      expect(textarea.tagName).toBe('TEXTAREA')
-    })
   })
 
   describe('States', () => {

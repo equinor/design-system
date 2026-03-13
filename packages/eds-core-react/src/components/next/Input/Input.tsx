@@ -110,3 +110,5 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       </div>
     )
   })
+
+Input.displayName = 'Input'
