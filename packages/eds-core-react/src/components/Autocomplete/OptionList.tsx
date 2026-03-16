@@ -43,14 +43,12 @@ export const OptionList = ({
 
   // MARK: popover toggle
   useIsomorphicLayoutEffect(() => {
-    try {
+    if (refs.floating.current?.hasAttribute('popover')) {
       if (isOpen) {
-        refs.floating.current?.showPopover()
+        refs.floating.current.showPopover()
       } else {
-        refs.floating.current?.hidePopover()
+        refs.floating.current.hidePopover()
       }
-    } catch {
-      // Element may not have popover attribute applied yet
     }
   }, [isOpen, refs.floating])
 
