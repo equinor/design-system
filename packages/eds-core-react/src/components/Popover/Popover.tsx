@@ -167,12 +167,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useEffect(() => {
       if (!elements.floating) return
-      if (open) {
-        if (elements.floating.isConnected) {
+      if (elements.floating.hasAttribute('popover')) {
+        if (open) {
           elements.floating.showPopover()
+        } else {
+          elements.floating.hidePopover()
         }
-      } else {
-        elements.floating.hidePopover()
       }
     }, [open, elements.floating])
 
