@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { LayoutRectangle, ScrollView, TextInput, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
-import { IconButton } from "../Button/IconButton";
+import { Button } from "../Button";
 import { Menu } from "../Menu";
 import { TextField, TextFieldProps } from "../TextField";
 import { GenericAutocompleteProps } from "./types";
@@ -119,18 +119,16 @@ export const Autocomplete = <T,>({
                 rightAdornments={
                     <View style={styles.adornmentContainer}>
                         {selectedOption && (
-                            <IconButton
+                            <Button.Icon
                                 name="close"
                                 variant="ghost"
-                                iconSize={18}
                                 onPress={handleClearText}
                                 style={styles.closeIcon}
                             />
                         )}
-                        <IconButton
+                        <Button.Icon
                             name={isOptionsVisible ? "menu-up" : "menu-down"}
                             variant="ghost"
-                            iconSize={18}
                             onPress={handleMenuOpen}
                             style={styles.menuIcon}
                         />

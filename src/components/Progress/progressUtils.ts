@@ -1,4 +1,4 @@
-import { MasterToken } from "src/styling/tokens";
+import { MasterToken } from "../../styling/tokens";
 import { IconName } from "../Icon";
 import { ProgressStatus } from "./types";
 

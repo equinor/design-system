@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "../../Button";
 import { Typography } from "../../Typography";
 import { Dialog } from "../Dialog";
-import { DialogHeader } from "../DialogHeader";
 import { DialogActions } from "../DialogActions";
 import { DialogCustomContent } from "../DialogCustomContent";
+import { DialogHeader } from "../DialogHeader";
 import { _useDialogService } from "./dialogServiceStore";
 
 /**
@@ -25,21 +25,21 @@ export const DialogServiceProvider = () => {
                 {dialogContent?.buttons.map((button, index) => (
                     <Button
                         key={index}
-                        title={button.text}
-                        variant={button.isPreferred ? undefined : "outlined"}
+                        label={button.text}
+                        size="default"
+                        variant={button.isPreferred ? undefined : "secondary"}
                         onPress={() => {
                             button.onPress();
                             finishDialog();
                         }}
-                        color={
+                        tone={
                             button.style === "cancel"
-                                ? "secondary"
+                                ? "neutral"
                                 : button.style === "destructive"
                                   ? "danger"
-                                  : "primary"
+                                  : "accent"
                         }
-                        iconPosition="leading"
-                        iconName={button.icon}
+                        leadingIcon={button.icon}
                     />
                 ))}
             </DialogActions>

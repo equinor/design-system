@@ -3,7 +3,7 @@ import { Button } from "../../Button";
 import { useProgressItemContext } from "./ProgressItemContext";
 
 type ExpandButtonProps = {
-    variant: "outlined" | "ghost";
+    variant: "secondary" | "ghost";
 };
 
 export const ExpandButton = ({ variant }: ExpandButtonProps) => {
@@ -13,9 +13,9 @@ export const ExpandButton = ({ variant }: ExpandButtonProps) => {
         status !== "notStarted" &&
         numTotalTasks > 0 && (
             <Button
-                iconName={isExpanded ? "chevron-up" : "chevron-down"}
-                title={isExpanded ? "Show less" : "Show more"}
-                iconPosition="trailing"
+                trailingIcon={isExpanded ? "chevron-up" : "chevron-down"}
+                label={isExpanded ? "Show less" : "Show more"}
+                size="default"
                 onPress={() => setIsExpanded(!isExpanded)}
                 variant={variant}
             />

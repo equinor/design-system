@@ -1,141 +1,108 @@
-import React, { forwardRef } from "react";
-import { View, ViewProps } from "react-native";
+import React, { FC } from "react";
+import { Pressable, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
-import { getBackgroundColorForButton } from "../../utils/getBackgroundColorForButton";
-import { Icon, IconName } from "../Icon";
-import { PressableHighlight } from "../PressableHighlight";
-import { CircularProgress } from "../ProgressIndicator";
+import { IconName } from "../Icon";
+import { ButtonBackground } from "./ButtonBackground";
+import { ButtonIcon } from "./ButtonIcon";
+import {
+    BaseButtonProps,
+    ButtonSize,
+    ButtonTone,
+    ButtonVariant,
+} from "./types";
 
-export type IconButtonProps = {
+export type IconButtonProps = BaseButtonProps & {
     /**
      * Name of the icon.
      */
     name: IconName;
     /**
-     * Size of the icon.
+     * Boolean value indicating whether the button should be fully circular.
+     * When false (default), the button is square with rounded corners.
      */
-    iconSize?: number;
-    /**
-     * Color theme of the icon button.
-     */
-    color?: "primary" | "secondary" | "danger";
-    /**
-     * Button variant. This value works with the `color` prop to set the theming of the button.
-     */
-    variant?: "contained" | "outlined" | "ghost";
-    /**
-     * Boolean value indicating whether or not the button should be in its busy state.
-     */
-    busy?: boolean;
-    /**
-     * Boolean value indicating whether or not the button should be in its disabled state.
-     */
-    disabled?: boolean;
-    /**
-     * Callback method invoked when the user presses outside the child content.
-     */
-    onPress?: () => void;
+    round?: boolean;
 };
 
-export const IconButton = forwardRef<View, IconButtonProps & ViewProps>(
-    (
-        {
-            name,
-            iconSize = 22,
-            color = "primary",
-            variant = "contained",
-            busy = false,
-            disabled = false,
-            onPress = () => null,
-            ...rest
-        },
-        ref
-    ) => {
-        const styles = useStyles(themeStyles, {
-            color,
-            variant,
-            disabled,
-            iconSize,
-        });
+export const IconButton: FC<IconButtonProps> = ({
+    name,
+    tone = "accent",
+    size = "default",
+    variant = "primary",
+    round = false,
+    disabled,
+    ref,
+    ...pressableProps
+}) => {
+    const styles = useStyles(tokenStyles, { variant, tone, size, round });
 
-        return (
-            <View ref={ref} style={[styles.colorContainer, rest.style]}>
-                <PressableHighlight
-                    id={rest.id}
-                    disabled={disabled}
-                    onPress={onPress}
-                    style={styles.pressableContainer}
+    return (
+        <Pressable
+            ref={ref}
+            style={styles.container}
+            accessibilityRole={"button"}
+            accessibilityState={{ disabled: disabled ?? false, ...pressableProps.accessibilityState }}
+            disabled={disabled}
+            {...pressableProps}
+        >
+            {(pressedEvent) => (
+                <ButtonBackground
+                    isPressed={pressedEvent.pressed}
+                    tone={tone}
+                    variant={variant}
+                    disabled={disabled ?? false}
                 >
-                    {busy ? (
-                        <CircularProgress
-                            color={
-                                disabled || variant !== "contained"
-                                    ? "primary"
-                                    : "neutral"
-                            }
-                            size={iconSize}
-                        />
-                    ) : (
-                        <Icon
+                    <View style={styles.iconContainer}>
+                        <ButtonIcon
                             name={name}
-                            size={iconSize}
-                            color={styles.textStyle.color}
+                            tone={tone}
+                            variant={variant}
+                            size={size}
+                            disabled={disabled ?? false}
                         />
-                    )}
-                </PressableHighlight>
-            </View>
-        );
-    }
-);
+                    </View>
+                </ButtonBackground>
+            )}
+        </Pressable>
+    );
+};
 
 IconButton.displayName = "Button.Icon";
 
-type IconButtonStyleSheetProps = {
-    color: "primary" | "secondary" | "danger";
-    variant: "contained" | "outlined" | "ghost";
-    disabled: boolean;
-    iconSize: number;
+type IconButtonStyleProps = {
+    variant: ButtonVariant;
+    tone: ButtonTone;
+    size: ButtonSize;
+    round: boolean;
 };
 
-const themeStyles = EDSStyleSheet.create(
-    (theme, props: IconButtonStyleSheetProps) => {
-        const { color, disabled, variant, iconSize } = props;
-        const pressableContainerSize = iconSize * 1.8;
+const tokenStyles = EDSStyleSheet.create(
+    (token, { variant, tone, size, round }: IconButtonStyleProps) => {
+        const inset = {
+            small: token.newSpacing.spacing.inset.xs,
+            default: token.newSpacing.spacing.inset.sm,
+            large: token.newSpacing.spacing.inset.md,
+        }[size];
 
-        const backgroundColor = getBackgroundColorForButton(
-            theme,
-            variant,
-            color,
-            disabled
-        );
-        let textColor =
-            variant === "contained"
-                ? theme.colors.text.primaryInverted
-                : theme.colors.interactive[color];
-        textColor = disabled ? theme.colors.text.disabled : textColor;
+        const borderRadius = round
+            ? token.newSpacing.spacing.borderRadius.pill
+            : token.newSpacing.spacing.borderRadius.rounded;
 
         return {
-            colorContainer: {
-                backgroundColor,
-                borderRadius: theme.geometry.dimension.button.minHeight / 2,
-                borderColor: disabled
-                    ? theme.colors.text.disabled
-                    : theme.colors.interactive[color],
-                borderWidth:
-                    variant === "outlined"
-                        ? theme.geometry.border.borderWidth
-                        : undefined,
+            container: {
+                borderRadius,
                 overflow: "hidden",
+                borderColor: token.newColors.border[tone].strong,
+                borderWidth:
+                    variant === "secondary"
+                        ? token.newSpacing.sizing.stroke.thin
+                        : 0,
             },
-            pressableContainer: {
+            iconContainer: {
+                paddingVertical: inset.verticalSquared,
+                paddingHorizontal: inset.horizontal,
                 justifyContent: "center",
                 alignItems: "center",
-                width: pressableContainerSize,
-                height: pressableContainerSize,
-            },
-            textStyle: {
-                color: textColor,
             },
         };
     }

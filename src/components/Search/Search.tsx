@@ -91,10 +91,6 @@ export const Search = ({
         }
     }, [value]);
 
-    const handleCancelPressOut = () => {
-        handleCancel();
-    };
-
     const handleCancel = () => {
         setText("");
         onCancelPress?.();
@@ -177,7 +173,6 @@ export const Search = ({
                                 <Button.Icon
                                     id="search-clear-text-button"
                                     name="close"
-                                    color="primary"
                                     variant="ghost"
                                     onPress={handleClearText}
                                 />
@@ -196,15 +191,9 @@ export const Search = ({
                 >
                     <Button
                         variant="ghost"
-                        title="Cancel"
-                        onPress={
-                            Platform.OS !== "web" ? handleCancel : undefined
-                        }
-                        onPressOut={
-                            Platform.OS === "web"
-                                ? handleCancelPressOut
-                                : undefined
-                        }
+                        label="Cancel"
+                        size="default"
+                        onPress={handleCancel}
                     />
                 </Animated.View>
             )}

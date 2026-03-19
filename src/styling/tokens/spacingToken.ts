@@ -1,5 +1,5 @@
-import { spacing as comfortableSpacingToken } from "@equinor/eds-tokens/build/ts/spacing/comfortable";
-import { spacing as spaciousSpacingToken } from "@equinor/eds-tokens/build/ts/spacing/spacious";
+import { spacing as comfortableSpacingToken } from "@equinor/eds-tokens/ts/spacing/comfortable";
+import { spacing as spaciousSpacingToken } from "@equinor/eds-tokens/ts/spacing/spacious";
 
 export { comfortableSpacingToken, spaciousSpacingToken };
 

@@ -27,9 +27,9 @@ export const Icon = ({ name, size, color, ...rest }: IconProps) => {
     const token = useToken();
     return (
         <MaterialCommunityIcons
-            {...rest}
             name={name}
             size={size ?? token.geometry.dimension.icon.size}
+            {...rest}
             color={resolveColor(color ?? "textPrimary", token)}
         />
     );

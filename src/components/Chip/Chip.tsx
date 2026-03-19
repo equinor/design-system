@@ -46,7 +46,6 @@ export const Chip = ({
 }: ChipProps) => {
     const styles = useStyles(themeStyles, { variant, disabled });
 
-    const iconColor = variant === "error" ? "danger" : "primary";
     return (
         <View style={styles.chipContainer}>
             <PressableHighlight
@@ -75,9 +74,13 @@ export const Chip = ({
                             <View style={styles.floatingCloseButton}>
                                 <Button.Icon
                                     name="close"
-                                    iconSize={ICON_SIZE}
+                                    size="small"
+                                    tone={
+                                        variant === "error"
+                                            ? "danger"
+                                            : "accent"
+                                    }
                                     variant="ghost"
-                                    color={iconColor}
                                     disabled={disabled}
                                     onPress={onDelete}
                                 />

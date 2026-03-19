@@ -25,16 +25,18 @@ export const ActionButtonsRow = ({
         <View {...viewProps} style={[styles.container, viewProps.style]}>
             {shouldShowCopyTextButton && status === "error" ? (
                 <Button
-                    title="Copy to clipboard"
-                    iconName="clipboard-outline"
-                    variant="outlined"
+                    label="Copy to clipboard"
+                    leadingIcon="clipboard-outline"
+                    variant="secondary"
+                    size="default"
                     onPress={handleCopyTextButtonPress}
                 />
             ) : null}
             {shouldShowRetryButton && status === "error" ? (
                 <Button
-                    iconName="restart"
-                    title="Retry"
+                    leadingIcon="restart"
+                    label="Retry"
+                    size="default"
                     onPress={handleRetryButtonPress}
                 />
             ) : null}

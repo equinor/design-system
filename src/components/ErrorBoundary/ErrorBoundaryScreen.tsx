@@ -25,7 +25,7 @@ export const ErrorBoundaryScreen = ({ resetErrorBoundary }: FallbackProps) => {
                     If this keeps happening, we recommend creating a Service-Now
                     ticket.
                 </Typography>
-                <Button title="Restart app" onPress={resetErrorBoundary} />
+                <Button label="Restart app" onPress={resetErrorBoundary} />
             </View>
         </SafeAreaView>
     );
