@@ -1,17 +1,19 @@
-import { radioButtons, switchControl } from "@/codeSnippets/selectioncontrols";
 import { Section } from "@/components/Section";
-import { useCodeSnippet } from "@/hooks/useCodeSnippet";
-import { Radio, Switch, Typography } from "@equinor/eds-mobile-components";
+import {
+    Radio,
+    Spacer,
+    Switch,
+    Typography,
+    useToken,
+} from "@equinor/eds-mobile-components";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 
 export default function SelectionControlsScreen() {
     const [selectedRadio, setSelectedRadio] = useState<number>(0);
     const [switchActive, setSwitchActive] = useState(false);
-    const [switchSecondaryActive, setSwitchSecondaryActive] = useState(true);
-    const [switchDangerActive, setSwitchDangerActive] = useState(true);
-    const [smallSwitchActive, setSmallSwitchActive] = useState(true);
-    const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
+    const [switchWithLabel, setSwitchWithLabel] = useState(true);
+    const { newSpacing } = useToken();
 
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -21,6 +23,7 @@ export default function SelectionControlsScreen() {
                     option from a group, or toggle a setting on and off.
                 </Typography>
             </Section>
+            <Spacer amount="medium" />
             <Section title="Radio Buttons">
                 <View
                     style={{
@@ -57,72 +60,42 @@ export default function SelectionControlsScreen() {
                     <Radio checked={true} disabled color="primary" />
                 </View>
 
-                <ViewCode title="Radio Buttons" code={radioButtons} />
             </Section>
 
             <Section title="Switch">
                 <Typography variant="p">
-                    Primary and Secondary colors
+                    Toggle switch in an active state and a switch in a disabled state
                 </Typography>
                 <View
                     style={{
                         flexDirection: "row",
-                        gap: 48,
+                        gap: newSpacing.spacing.horizontal.xl,
                         alignItems: "center",
                     }}
                 >
-                    <Switch
-                        active={switchActive}
-                        onChange={setSwitchActive}
-                        color="primary"
-                    />
-
-                    <Switch
-                        active={switchSecondaryActive}
-                        onChange={setSwitchSecondaryActive}
-                        color="secondary"
-                    />
-                </View>
-                <Typography>Danger and Disabled</Typography>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        gap: 48,
-                        alignItems: "center",
-                    }}
-                >
-                    <Switch
-                        active={switchDangerActive}
-                        onChange={setSwitchDangerActive}
-                        color="danger"
-                    />
-
-                    <Switch active={true} disabled color="primary" />
+                    <Switch active={switchActive} onChange={setSwitchActive} />
+                    <Switch active={false} disabled />
                 </View>
             </Section>
 
-            <Section title="Small Switch">
+            <Section title="Switch with Label">
                 <Typography variant="p">
-                    Primary and Secondary colors
+                    Switch with an inline label
                 </Typography>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        gap: 16,
-                        alignItems: "center",
-                    }}
-                >
-                    <Switch.Small
-                        active={smallSwitchActive}
-                        onChange={setSmallSwitchActive}
+                <View>
+                    <Switch
+                        active={switchWithLabel}
+                        onChange={setSwitchWithLabel}
+                        label="Enable notifications"
                     />
-
-                    <Switch.Small active={true} disabled />
+                    <Switch
+                        active={true}
+                        disabled
+                        label="Disabled option"
+                    />
                 </View>
-                <ViewCode title="Switch Control" code={switchControl} />
             </Section>
 
-            <CodeSnippetDialog />
         </ScrollView>
     );
 }
