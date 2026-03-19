@@ -39,11 +39,11 @@ export function CodeDialog({ isOpen, onClose, title, code }: CodeDialogProps) {
             </Dialog.CustomContent>
             <Dialog.Actions>
                 <Button
-                    title="Copy Code"
-                    variant="outlined"
+                    label="Copy Code"
+                    variant="secondary"
                     onPress={handleCopy}
                 />
-                <Button title="Close" onPress={onClose} />
+                <Button label="Close" onPress={onClose} />
             </Dialog.Actions>
         </Dialog>
     );

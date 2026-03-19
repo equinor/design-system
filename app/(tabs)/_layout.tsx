@@ -7,10 +7,8 @@ export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor:
-                    newColors.Bg.Accent["Fill Emphasis"].Active,
-                tabBarInactiveTintColor:
-                    newColors.Bg.Accent["Fill Muted"].Default,
+                tabBarActiveTintColor: newColors.bg.accent.fillEmphasis.active,
+                tabBarInactiveTintColor: newColors.bg.accent.fillMuted.default,
                 headerShown: false,
             }}
         >

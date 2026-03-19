@@ -15,9 +15,9 @@ export function useCodeSnippet() {
     const ViewCode = ({ title, code }: { title: string; code: string }) => (
         <View style={{ alignItems: "flex-end" }}>
             <Button
-                title="View Code"
+                label="View Code"
                 variant="ghost"
-                iconName="code-braces"
+                leadingIcon="code-braces"
                 onPress={() => showCode(title, code)}
             />
         </View>

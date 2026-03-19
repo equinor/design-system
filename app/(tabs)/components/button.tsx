@@ -1,157 +1,146 @@
-import {
-    iconButtons,
-    statesButtons,
-    toggleButtons,
-    variantButtons,
-} from "@/codeSnippets/buttons";
-import { useCodeSnippet } from "@/hooks/useCodeSnippet";
+import { Section } from "@/components/Section";
 import { Button, Spacer, Typography } from "@equinor/eds-mobile-components";
-import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 export default function ButtonsScreen() {
-    const [togglePressed, setTogglePressed] = useState(false);
-    const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
-
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <View style={styles.section}>
-                <Typography variant="p">
+            <Section>
+                <Typography>
                     Buttons let users take action with a single tap — submitting
                     forms, triggering events, or navigating through your app.
                 </Typography>
-            </View>
+            </Section>
 
-            <View style={styles.section}>
-                <Typography variant="h6">Colours & States</Typography>
-                <View style={styles.buttonGroup}>
-                    <Button
-                        title="Primary Button"
-                        color="primary"
-                        onPress={() => alert("Primary Button pressed")}
-                    />
-                    <Button
-                        title="Secondary Button"
-                        color="secondary"
-                        onPress={() => alert("Secondary Button pressed")}
-                    />
-                    <Button
-                        title="Danger Button"
-                        color="danger"
-                        onPress={() => alert("Danger Button pressed")}
-                    />
-                    <Button
-                        title="Disabled Button"
-                        variant="contained"
-                        disabled
-                        onPress={() => alert("Disabled Button pressed")}
-                    />
-                    <ViewCode title="Button Variations" code={statesButtons} />
-                </View>
-                <Spacer amount="small" />
-                <Typography variant="h6">Variants</Typography>
-                <View style={styles.buttonGroup}>
-                    <Button
-                        title="Contained Button"
-                        variant="contained"
-                        onPress={() => alert("Contained Button pressed")}
-                    />
+            <Spacer />
 
-                    <Button
-                        title="Outlined Button"
-                        color="secondary"
-                        variant="outlined"
-                        onPress={() => alert("Outlined Button pressed")}
-                    />
-
-                    <Button
-                        title="Ghost Button"
-                        variant="ghost"
-                        onPress={() => alert("Ghost Button pressed")}
-                    />
-                    <ViewCode title="Button Variants" code={variantButtons} />
-                </View>
-                <Typography variant="h6">Icon Buttons</Typography>
-                <Typography variant="p">
-                    Add icons to reinforce meaning or create compact, icon-only
-                    buttons.
+            <Section title="Tones">
+                <Typography>
+                    Buttons come in three tones. These can be used to indicate
+                    importance.
                 </Typography>
+                <View style={styles.buttonRow}>
+                    <Button label="Accent" tone="accent" />
+                    <Button label="Neutral" tone="neutral" />
+                    <Button label="Danger" tone="danger" />
+                </View>
+            </Section>
 
-                <Typography>Icon positions:</Typography>
-                <View style={styles.row}>
-                    <Button
-                        title="Leading"
-                        iconPosition="leading"
-                        variant="outlined"
-                        iconName="home-outline"
-                    />
-                    <Button
-                        title="Trailing"
-                        iconPosition="trailing"
-                        iconName="send-outline"
-                        variant="outlined"
-                    />
+            <Spacer />
+
+            <Section title="Variants">
+                <Typography>
+                    Buttons come in three different variants:
+                </Typography>
+                <View style={styles.buttonRow}>
+                    <Button label="Primary" variant="primary" />
+                    <Button label="Secondary" variant="secondary" />
+                    <Button label="Ghost" variant="ghost" />
+                </View>
+            </Section>
+
+            <Spacer />
+
+            <Section title="Sizes">
+                <Typography>Buttons are available in three sizes.</Typography>
+                <View style={styles.buttonRow}>
+                    <Button label="Small" size="small" />
+                    <Button label="Default" size="default" />
+                    <Button label="Large" size="large" />
+                </View>
+            </Section>
+
+            <Spacer />
+
+            <Section title="Variations">
+                <Typography>
+                    Combining tones and variants creates a range of button
+                    styles to choose from.
+                </Typography>
+                <View style={styles.buttonRow}>
+                    <Button label="Label" tone="accent" variant="primary" />
+                    <Button label="Label" tone="accent" variant="secondary" />
+                    <Button label="Label" tone="accent" variant="ghost" />
                 </View>
 
-                <Spacer amount="small" />
-                <Typography variant="p">Just Icons</Typography>
-                <View style={styles.row}>
-                    <Button.Icon
-                        name="heart"
-                        onPress={() => alert("Heart Button pressed")}
-                    />
+                <View style={styles.buttonRow}>
+                    <Button label="Label" tone="neutral" variant="primary" />
+                    <Button label="Label" tone="neutral" variant="secondary" />
+                    <Button label="Label" tone="neutral" variant="ghost" />
+                </View>
 
-                    <Button.Icon
-                        name="star"
-                        variant="outlined"
-                        onPress={() => alert("Star Button pressed")}
-                    />
+                <View style={styles.buttonRow}>
+                    <Button label="Label" tone="danger" variant="primary" />
+                    <Button label="Label" tone="danger" variant="secondary" />
+                    <Button label="Label" tone="danger" variant="ghost" />
+                </View>
+            </Section>
 
-                    <Button.Icon
-                        name="close"
-                        variant="ghost"
-                        onPress={() => alert("Close Button pressed")}
-                    />
+            <Spacer />
 
-                    <Button.Icon
-                        name="check"
-                        disabled
-                        onPress={() => alert("Disabled Check Button pressed")}
+            <Section title="With icons">
+                <Typography>
+                    You can add icons to buttons to provide additional context
+                    and visual interest.
+                </Typography>
+                <View style={styles.buttonRow}>
+                    <Button label="Leading" leadingIcon="home-outline" />
+                    <Button label="Trailing" trailingIcon="send-outline" />
+                    <Button
+                        label="Both"
+                        leadingIcon="pan-left"
+                        trailingIcon="pan-right"
                     />
                 </View>
-                <ViewCode title="Icon Buttons" code={iconButtons} />
-            </View>
-            <View style={styles.section}>
-                <Typography variant="h6">Toggle Button Group</Typography>
+            </Section>
 
-                <Button.Toggle activeIndex={togglePressed ? 1 : 0}>
-                    <Button
-                        title="Option 1"
-                        onPress={() => setTogglePressed(false)}
-                    />
-                    <Button
-                        title="Option 2"
-                        onPress={() => setTogglePressed(true)}
-                    />
-                </Button.Toggle>
-                <ViewCode title="Toggle Button Group" code={toggleButtons} />
-            </View>
-            <CodeSnippetDialog />
+            <Spacer />
+
+            <Section title="Icon buttons">
+                <Typography>
+                    Icon buttons are a compact variant of the button component,
+                    containing only an icon. They are used for actions where
+                    space is limited, or where the action can be easily
+                    represented by an icon.
+                </Typography>
+                <Typography>
+                    They come out the box with rounded corners...
+                </Typography>
+                <View style={styles.buttonRow}>
+                    <Button.Icon name="heart" />
+                    <Button.Icon name="star" variant="secondary" />
+                    <Button.Icon name="close" variant="ghost" />
+                </View>
+                <Typography>
+                    ...but can also be configured to be circular
+                </Typography>
+                <View style={styles.buttonRow}>
+                    <Button.Icon name="heart" round />
+                    <Button.Icon name="star" round variant="secondary" />
+                    <Button.Icon name="close" round variant="ghost" />
+                </View>
+            </Section>
+
+            <Spacer />
+
+            <Section title="States">
+                <Typography>Buttons can be disabled</Typography>
+                <View style={styles.buttonRow}>
+                    <Button label="Disabled" disabled />
+                    <Button.Icon name="cancel" disabled />
+                    <Button.Icon name="cancel" round disabled />
+                </View>
+            </Section>
+
+            <Spacer />
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    section: {
-        padding: 10,
-        gap: 16,
-    },
-    buttonGroup: {
-        gap: 12,
-    },
-    row: {
+    buttonRow: {
         flexDirection: "row",
-        gap: 12,
-        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+        alignItems: "center",
     },
 });

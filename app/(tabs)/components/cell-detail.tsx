@@ -31,7 +31,7 @@ export default function CellDetailScreen() {
                     cell.
                 </Typography>
                 <View style={{ height: 32 }} />
-                <Button title="Go Back" onPress={() => router.back()} />
+                <Button label="Go Back" onPress={() => router.back()} />
             </View>
         </View>
     );

@@ -12,6 +12,7 @@ export const ColorSchemeButton = () => {
     return (
         <Button.Icon
             variant="ghost"
+            round
             name={scheme === "light" ? "weather-sunny" : "moon-waning-crescent"}
             onPress={() => setScheme(scheme === "dark" ? "light" : "dark")}
         />

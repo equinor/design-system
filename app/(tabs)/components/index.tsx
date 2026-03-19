@@ -113,20 +113,20 @@ export default function ComponentsIndex() {
 
 const tokenStyles = EDSStyleSheet.create((token) => ({
     contentContainer: {
-        backgroundColor: token.newColors.Bg.Neutral.Surface,
+        backgroundColor: token.newColors.bg.neutral.surface,
     },
     cellDivider: {
         height: token.newSpacing.sizing.stroke.thin,
-        backgroundColor: token.newColors.Border.Neutral.Medium,
+        backgroundColor: token.newColors.border.neutral.medium,
         marginHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
     },
     sectionSeparator: {
         height: token.newSpacing.sizing.stroke.thin,
-        backgroundColor: token.newColors.Border.Neutral.Medium,
+        backgroundColor: token.newColors.border.neutral.medium,
     },
     sectionTitle: {
-        paddingVertical: token.newSpacing.spacing.inset.md["vertical-squished"],
+        paddingVertical: token.newSpacing.spacing.inset.md.verticalSquished,
         paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
-        backgroundColor: token.newColors.Bg.Neutral.Canvas,
+        backgroundColor: token.newColors.bg.neutral.canvas,
     },
 }));

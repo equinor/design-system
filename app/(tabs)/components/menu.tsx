@@ -31,7 +31,7 @@ export default function MenuScreen() {
 
                 <View ref={anchorRef1}>
                     <Button
-                        title="Open Menu"
+                        label="Open Menu"
                         onPress={() => setMenuOpen1(true)}
                     />
                 </View>
@@ -63,7 +63,7 @@ export default function MenuScreen() {
 
                 <View ref={anchorRef2}>
                     <Button
-                        title="Open Menu with Icons"
+                        label="Open Menu with Icons"
                         onPress={() => setMenuOpen2(true)}
                     />
                 </View>
@@ -97,7 +97,7 @@ export default function MenuScreen() {
                 <Typography variant="h6">Other Menus</Typography>
                 <View ref={secondButtonRef}>
                     <Button
-                        title="Other Menu Options"
+                        label="Other Menu Options"
                         onPress={() => setSecondMenuOpen(true)}
                     />
                 </View>

@@ -36,13 +36,12 @@ function AppContent() {
                 },
                 dark: false,
                 colors: {
-                    background: token.newColors.Bg.Neutral.Canvas,
-                    primary: token.newColors.Bg.Accent["Fill Emphasis"].Default,
-                    text: token.newColors.Text.Neutral.Strong,
-                    border: token.newColors.Border.Neutral.Medium,
-                    notification:
-                        token.newColors.Bg.Accent["Fill Emphasis"].Active,
-                    card: token.newColors.Bg.Neutral.Surface,
+                    background: token.newColors.bg.neutral.canvas,
+                    primary: token.newColors.bg.accent.fillEmphasis.default,
+                    text: token.newColors.text.neutral.strong,
+                    border: token.newColors.border.neutral.medium,
+                    notification: token.newColors.bg.accent.fillEmphasis.active,
+                    card: token.newColors.bg.neutral.surface,
                 },
             }}
         >
@@ -70,7 +69,7 @@ export default function RootLayout() {
 
     return (
         <EDSProvider
-            density="comfortable"
+            density="spacious"
             colorScheme={userScheme ?? systemScheme ?? "light"}
         >
             <AppContent />

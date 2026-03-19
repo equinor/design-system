@@ -27,7 +27,7 @@ export default function DialogsScreen() {
                 </Typography>
 
                 <Button
-                    title="Open Basic Dialog"
+                    label="Open Basic Dialog"
                     onPress={() => setBasicOpen(true)}
                 />
 
@@ -55,7 +55,7 @@ export default function DialogsScreen() {
                 </Typography>
 
                 <Button
-                    title="Open Dialog with Actions"
+                    label="Open Dialog with Actions"
                     onPress={() => setWithActionsOpen(true)}
                 />
 
@@ -70,12 +70,12 @@ export default function DialogsScreen() {
                         </Typography>
                         <View style={styles.dialogActions}>
                             <Button
-                                title="Cancel"
+                                label="Cancel"
                                 variant="ghost"
                                 onPress={() => setWithActionsOpen(false)}
                             />
                             <Button
-                                title="Confirm"
+                                label="Confirm"
                                 onPress={() => {
                                     console.log("Confirmed!");
                                     setWithActionsOpen(false);
@@ -99,7 +99,7 @@ export default function DialogsScreen() {
                 </Typography>
 
                 <Button
-                    title="Open Custom Dialog"
+                    label="Open Custom Dialog"
                     onPress={() => setCustomOpen(true)}
                 />
 
@@ -116,8 +116,8 @@ export default function DialogsScreen() {
                             You can add any custom React Native components here.
                         </Typography>
                         <Button
-                            title="Close"
-                            variant="outlined"
+                            label="Close"
+                            variant="secondary"
                             onPress={() => setCustomOpen(false)}
                         />
                     </View>

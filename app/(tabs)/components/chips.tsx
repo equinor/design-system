@@ -135,7 +135,7 @@ export default function ChipsScreen() {
                 </Dialog.CustomContent>
                 <Dialog.Actions>
                     <Button
-                        title="Close"
+                        label="Close"
                         onPress={() => setDialogVisible(false)}
                     />
                 </Dialog.Actions>

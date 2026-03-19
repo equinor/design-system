@@ -22,7 +22,7 @@ export default function ScrimScreen() {
 
                 <Section title="Scrim overlay">
                     <Button
-                        title="Show Scrim"
+                        label="Show Scrim"
                         onPress={() => setScrimOpen(true)}
                     />
                     <ViewCode title="Basic Scrim" code={basicScrim} />
@@ -43,9 +43,9 @@ export default function ScrimScreen() {
                         Tap the dark area to close.
                     </Typography>
                     <Button
-                        title="Close"
+                        label="Close"
                         onPress={() => setScrimOpen(false)}
-                        variant="outlined"
+                        variant="secondary"
                     />
                 </View>
             </Scrim>

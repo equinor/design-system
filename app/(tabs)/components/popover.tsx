@@ -26,7 +26,7 @@ export default function PopoverScreen() {
 
                 <View ref={anchorRef1}>
                     <Button
-                        title="Show Popover"
+                        label="Show Popover"
                         onPress={() => setPopoverOpen1(true)}
                     />
                 </View>
@@ -53,7 +53,7 @@ export default function PopoverScreen() {
 
                 <View ref={anchorRef2}>
                     <Button
-                        title="Show Popover with Actions"
+                        label="Show Popover with Actions"
                         onPress={() => setPopoverOpen2(true)}
                     />
                 </View>
@@ -72,9 +72,9 @@ export default function PopoverScreen() {
                             buttons and interactive elements.
                         </Typography>
                         <Button
-                            title="Close"
+                            label="Close"
                             onPress={() => setPopoverOpen2(false)}
-                            variant="outlined"
+                            variant="secondary"
                         />
                     </View>
                 </Popover>

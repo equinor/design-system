@@ -21,7 +21,7 @@ export const Section: FC<PropsWithChildren<{ title?: string }>> = ({
 
 const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
-        paddingVertical: token.newSpacing.spacing.inset.xl["vertical-squished"],
+        paddingVertical: token.newSpacing.spacing.inset.xl.verticalSquished,
         paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
         gap: token.newSpacing.spacing.vertical.lg,
     },
