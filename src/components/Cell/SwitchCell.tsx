@@ -12,7 +12,6 @@ export type SwitchColor = "textPrimary" | "danger" | "warning" | "textDisabled";
 export type SwitchCellProps = {
     isActive: boolean;
     onChange: (isActive: boolean) => void;
-    switchSize?: "small" | "normal";
     disabled?: boolean;
     title: string;
     description?: string;
@@ -25,7 +24,6 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
         {
             isActive,
             onChange,
-            switchSize = "small",
             disabled = false,
             title,
             description,
@@ -44,20 +42,13 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
                 </View>
             );
 
-        const SwitchAdornment =
-            switchSize === "small" ? (
-                <Switch.Small
-                    active={isActive}
-                    onChange={onChange}
-                    disabled={disabled}
-                />
-            ) : (
-                <Switch
-                    active={isActive}
-                    onChange={onChange}
-                    disabled={disabled}
-                />
-            );
+        const SwitchAdornment = (
+            <Switch
+                active={isActive}
+                onChange={onChange}
+                disabled={disabled}
+            />
+        );
 
         return (
             <Cell
@@ -97,7 +88,7 @@ const themeStyles = EDSStyleSheet.create((theme) => ({
     contentContainer: {
         flex: 1,
         justifyContent: "center",
-        gap: theme.spacing.cell.content.titleDescriptionGap,
+        gap: theme.newSpacing.spacing.vertical.sm,
     },
     iconContainer: {
         justifyContent: "center",
