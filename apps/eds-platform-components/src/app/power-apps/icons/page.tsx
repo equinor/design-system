@@ -1,28 +1,27 @@
 'use client'
 
 import { useState } from 'react'
-import { ComponentCard } from '@/components/ComponentCard'
-import { ButtonFilterControls } from '@/components/ButtonFilterControls'
+import { IconCard } from '@/components/IconCard'
+import { IconFilterControls } from '@/components/IconFilterControls'
 import { PropertyEditor } from '@/components/PropertyEditor'
-import { generateButtonYaml } from '@/lib/generateButtonYaml'
+import { generateIconYaml } from '@/lib/generateIconYaml'
 import { PlatformLayout } from '@/components/PlatformLayout'
 import { ComponentSidebar } from '@/components/ComponentSidebar'
 import {
-  buttonPropertySchema,
+  iconPropertySchema,
   getDefaultPropertyValues,
-  type ButtonProperties,
-} from '@/lib/buttonPropertySchema'
+  type IconProperties,
+} from '@/lib/iconPropertySchema'
 import { Accordion } from '@equinor/eds-core-react'
-import './layout.css'
-
-type ButtonVariant = 'contained' | 'outlined' | 'ghost'
-type ButtonColor = 'primary' | 'secondary' | 'danger'
+import type { IconData } from '@equinor/eds-icons'
+import { save } from '@equinor/eds-icons'
+import '../buttons/layout.css'
 
 const categories = [
   {
     title: 'Inputs',
     items: [
-      { label: 'Button', href: '/power-apps/buttons', active: true },
+      { label: 'Button', href: '/power-apps/buttons' },
       { label: 'Text Input' },
       { label: 'Checkbox' },
       { label: 'Radio' },
@@ -31,19 +30,19 @@ const categories = [
   {
     title: 'Display',
     items: [
-      { label: 'Icon', href: '/power-apps/icons' },
+      { label: 'Icon', href: '/power-apps/icons', active: true },
       { label: 'Card' },
       { label: 'Label' },
     ],
   },
 ]
 
-export default function PowerAppsButtonsPage() {
-  const [variant, setVariant] = useState<ButtonVariant>('contained')
-  const [color, setColor] = useState<ButtonColor>('primary')
+export default function PowerAppsIconsPage() {
+  const [iconData, setIconData] = useState<IconData | null>(save)
   const [disabled, setDisabled] = useState(false)
-  const [properties, setProperties] =
-    useState<Partial<ButtonProperties>>(getDefaultPropertyValues())
+  const [properties, setProperties] = useState<Omit<IconProperties, 'iconData'>>(
+    getDefaultPropertyValues(),
+  )
 
   const handlePropertyChange = (
     propertyId: string,
@@ -55,26 +54,52 @@ export default function PowerAppsButtonsPage() {
     }))
   }
 
-  const name = `EDSButton_${variant}_${color}${disabled ? '_disabled' : ''}`
-  const yaml = generateButtonYaml({
+  if (!iconData) {
+    return (
+      <PlatformLayout activePlatform="power-platform">
+        <div className="page-layout">
+          <ComponentSidebar
+            categories={categories}
+            onRequestComponent={() => {
+              window.open(
+                'https://github.com/equinor/design-system/issues/new',
+                '_blank',
+              )
+            }}
+          />
+          <main className="page-main">
+            <div className="button-configurator">
+              <h1 className="configurator-title">Icon</h1>
+              <p className="configurator-description">
+                Please select an icon to get started.
+              </p>
+              <IconFilterControls
+                iconData={iconData}
+                disabled={disabled}
+                onIconChange={setIconData}
+                onDisabledChange={setDisabled}
+              />
+            </div>
+          </main>
+        </div>
+      </PlatformLayout>
+    )
+  }
+
+  const name = `EDSIcon_${iconData.name}${disabled ? '_disabled' : ''}`
+  const yaml = generateIconYaml({
     name,
-    variant,
-    color,
-    text: properties.text || 'Button',
+    iconData,
+    color: properties.color as string,
+    width: properties.width as number,
+    height: properties.height as number,
+    x: properties.x as number,
+    y: properties.y as number,
+    tooltip: properties.tooltip as string,
+    onSelectAction: properties.onSelectAction as string,
+    borderColor: properties.borderColor as string,
+    borderThickness: properties.borderThickness as number,
     disabled,
-    width: properties.width,
-    height: properties.height,
-    x: properties.x,
-    y: properties.y,
-    paddingLeft: properties.paddingLeft,
-    paddingRight: properties.paddingRight,
-    paddingTop: properties.paddingTop,
-    paddingBottom: properties.paddingBottom,
-    borderRadius: properties.borderRadius,
-    borderThickness: properties.borderThickness,
-    fontSize: properties.fontSize,
-    tooltip: properties.tooltip,
-    onSelectAction: properties.onSelectAction,
   })
 
   return (
@@ -92,27 +117,25 @@ export default function PowerAppsButtonsPage() {
 
         <main className="page-main">
           <div className="button-configurator">
-            <h1 className="configurator-title">Button</h1>
+            <h1 className="configurator-title">Icon</h1>
             <p className="configurator-description">
-              Configure your button by selecting variant, color, and customizing
+              Configure your icon by selecting from 715+ EDS icons and customizing
               properties. The preview and YAML code update in real-time.
             </p>
 
-            <ButtonFilterControls
-              variant={variant}
-              color={color}
+            <IconFilterControls
+              iconData={iconData}
               disabled={disabled}
-              onVariantChange={setVariant}
-              onColorChange={setColor}
+              onIconChange={setIconData}
               onDisabledChange={setDisabled}
             />
 
             <div className="button-preview-section">
               <h2 className="preview-title">Preview</h2>
-              <ComponentCard
+              <IconCard
                 name={name}
-                variant={variant}
-                color={color}
+                iconData={iconData}
+                color={properties.color as string}
                 disabled={disabled}
                 yamlContent={yaml}
               />
@@ -121,7 +144,7 @@ export default function PowerAppsButtonsPage() {
             <div className="properties-section">
               <h2 className="properties-title">Customize Properties</h2>
               <p className="properties-description">
-                Fine-tune button properties. These map to EDS design tokens and
+                Fine-tune icon properties. These map to EDS design tokens and
                 are supported by Power Apps.
               </p>
 
@@ -130,7 +153,7 @@ export default function PowerAppsButtonsPage() {
                   <Accordion.Header>Content</Accordion.Header>
                   <Accordion.Panel>
                     <PropertyEditor
-                      schema={buttonPropertySchema}
+                      schema={iconPropertySchema}
                       values={properties}
                       onChange={handlePropertyChange}
                       category="content"
@@ -142,7 +165,7 @@ export default function PowerAppsButtonsPage() {
                   <Accordion.Header>Layout & Size</Accordion.Header>
                   <Accordion.Panel>
                     <PropertyEditor
-                      schema={buttonPropertySchema}
+                      schema={iconPropertySchema}
                       values={properties}
                       onChange={handlePropertyChange}
                       category="layout"
@@ -154,7 +177,7 @@ export default function PowerAppsButtonsPage() {
                   <Accordion.Header>Style</Accordion.Header>
                   <Accordion.Panel>
                     <PropertyEditor
-                      schema={buttonPropertySchema}
+                      schema={iconPropertySchema}
                       values={properties}
                       onChange={handlePropertyChange}
                       category="style"
@@ -166,7 +189,7 @@ export default function PowerAppsButtonsPage() {
                   <Accordion.Header>Interaction</Accordion.Header>
                   <Accordion.Panel>
                     <PropertyEditor
-                      schema={buttonPropertySchema}
+                      schema={iconPropertySchema}
                       values={properties}
                       onChange={handlePropertyChange}
                       category="interaction"

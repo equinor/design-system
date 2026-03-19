@@ -1,18 +1,14 @@
 'use client'
 
 import { TextField, Label } from '@equinor/eds-core-react'
-import type {
-  PropertyDefinition,
-  PropertyCategory,
-  ButtonProperties,
-} from '@/lib/buttonPropertySchema'
+import type { PropertyDefinition } from '@/lib/buttonPropertySchema'
 import './property-editor.css'
 
 type PropertyEditorProps = {
   schema: PropertyDefinition[]
-  values: Partial<ButtonProperties>
+  values: Record<string, string | number | boolean | undefined>
   onChange: (propertyId: string, value: string | number | boolean) => void
-  category?: PropertyCategory
+  category?: string
 }
 
 export const PropertyEditor = ({
@@ -26,9 +22,37 @@ export const PropertyEditor = ({
     : schema
 
   const renderPropertyControl = (property: PropertyDefinition) => {
-    const value = values[property.id as keyof ButtonProperties]
+    const value = values[property.id]
 
     switch (property.type) {
+      case 'color':
+        return (
+          <div key={property.id} className="property-control">
+            <Label htmlFor={property.id} label={property.label} />
+            {property.description && (
+              <p className="property-description">{property.description}</p>
+            )}
+            <div className="color-input-group">
+              <input
+                type="color"
+                id={property.id}
+                value={String(value ?? property.defaultValue)}
+                onChange={(e) => onChange(property.id, e.target.value)}
+                className="property-color-input"
+              />
+              <TextField
+                value={String(value ?? property.defaultValue)}
+                onChange={(e) => onChange(property.id, e.target.value)}
+                className="property-input property-input--color-text"
+                placeholder="#007079"
+              />
+            </div>
+            {property.edsToken && (
+              <p className="property-token">{property.edsToken}</p>
+            )}
+          </div>
+        )
+
       case 'text':
         return (
           <div key={property.id} className="property-control">

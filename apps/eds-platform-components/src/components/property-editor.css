@@ -86,3 +86,23 @@
   height: 1.25rem;
   cursor: pointer;
 }
+
+.color-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.property-color-input {
+  width: 3rem;
+  height: 2.5rem;
+  border: 1px solid var(--eds-color-border-medium, #dcdcdc);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.property-input--color-text {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+}

@@ -4,7 +4,7 @@
  * Maps EDS React Button properties to Power Apps constraints
  */
 
-export type PropertyType = 'text' | 'number' | 'select' | 'boolean'
+export type PropertyType = 'text' | 'number' | 'select' | 'boolean' | 'color'
 export type PropertyCategory = 'content' | 'layout' | 'style' | 'interaction'
 
 export type PropertyDefinition = {

@@ -1,0 +1,36 @@
+.icon-autocomplete {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.icon-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.icon-option__preview {
+  flex-shrink: 0;
+  color: var(--eds-color-text-primary, #243746);
+}
+
+.icon-option__name {
+  font-size: 0.875rem;
+  color: var(--eds-color-text-primary, #243746);
+  font-family: 'Courier New', monospace;
+}
+
+.icon-autocomplete__no-results {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+  font-style: italic;
+}
+
+.icon-autocomplete__count {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--eds-color-text-secondary, #6f6f6f);
+}

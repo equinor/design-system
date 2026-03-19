@@ -1,0 +1,65 @@
+.icon-card {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.icon-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.icon-card__header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.icon-card__title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #243746;
+  margin-bottom: 0.25rem;
+}
+
+.icon-card__id {
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+  color: #6f6f6f;
+  display: block;
+}
+
+.icon-card__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: #f7f7f7;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  min-height: 120px;
+}
+
+.icon-preview {
+  transition: all 0.2s ease;
+}
+
+.icon-card__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copy-button svg {
+  flex-shrink: 0;
+}
