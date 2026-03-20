@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0](https://github.com/equinor/design-system/compare/eds-lab-react@v0.10.2...eds-lab-react@v0.11.0) (2026-03-20)
+
+
+### ✨ Added
+
+* support React 18 and 19 ([#4648](https://github.com/equinor/design-system/issues/4648)) ([38ff591](https://github.com/equinor/design-system/commit/38ff5918f95a799e1d1ab44178b4647b6dd00887))
+
 ## [0.10.2](https://github.com/equinor/design-system/compare/eds-lab-react@v0.10.1...eds-lab-react@v0.10.2) (2026-02-11)
 
 
