@@ -112,7 +112,7 @@ const themeStyles = EDSStyleSheet.create(
 
         const pressedBackground =
             !disabled && pressed
-                ? theme.newColors.bg.accent.fillMuted.hover
+                ? theme.newColors.bg.accent.fillMuted.default
                 : "transparent";
 
         const paddingH =
@@ -120,8 +120,7 @@ const themeStyles = EDSStyleSheet.create(
         const paddingV =
             theme.newSpacing.spacingProportions.squished.lg.vertical;
 
-        // For labelless switch, use a perfect circle highlight
-        const hitAreaSize = trackWidth + paddingH * 2;
+        const touchTargetSize = theme.newSpacing.sizing.selectable.lg;
 
         return {
             container: {
@@ -137,9 +136,9 @@ const themeStyles = EDSStyleSheet.create(
                               theme.newSpacing.spacing.borderRadius.rounded,
                       }
                     : {
-                          width: hitAreaSize,
-                          height: hitAreaSize,
-                          borderRadius: hitAreaSize / 2,
+                          width: touchTargetSize,
+                          height: touchTargetSize,
+                          borderRadius: touchTargetSize / 2,
                       }),
                 backgroundColor: pressedBackground,
                 opacity: disabled ? 0.5 : 1,

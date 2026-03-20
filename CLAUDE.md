@@ -215,6 +215,18 @@ export default function App() {
 - Common easing curves and durations available via token
 - Prefer token-based animation values for consistency
 
+## Component Migration (Figma → Mobile)
+
+All components are being redesigned to match the EDS Figma design. Follow these principles:
+
+- **Match Figma as closely as possible** — use the Figma MCP tools to extract design context, variables, and screenshots
+- **Scale for mobile** — Figma designs are web-first; determine an appropriate scale factor per component for mobile touch targets (minimum 44×44pt recommended by Apple)
+- **Use semantic tokens** — never hardcode spacing or colors; map Figma CSS variables to `theme.newSpacing.*` and `theme.newColors.*` token paths
+- **Typography is the exception** — hardcode fontSize, fontWeight, lineHeight until typography tokens are available
+- **Pressed = Figma hover** — mobile has no hover state; use the Figma hover background as the pressed state
+- **Use `Pressable` not `PressableHighlight`** — Figma doesn't show a gray overlay on press
+- **Run `/migrate-component`** to follow the full step-by-step migration workflow
+
 ## Migration Notes
 
 The library is transitioning from old to new token system:
