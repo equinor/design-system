@@ -59,6 +59,7 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'components/inputs/button',
+        'components/inputs/search',
         'components/inputs/selection_controls',
         'components/inputs/input',
         'components/inputs/field',
