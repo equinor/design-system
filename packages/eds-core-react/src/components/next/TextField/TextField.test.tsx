@@ -55,6 +55,14 @@ describe('TextField (Next EDS 2.0)', () => {
     })
   })
 
+  describe('CSS classes', () => {
+    it('Has eds-text-field class on root element', () => {
+      const { container } = render(<TextField label="Label" />)
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      expect(container.querySelector('.eds-text-field')).toBeInTheDocument()
+    })
+  })
+
   describe('Basic functionality', () => {
     it('Renders label correctly', () => {
       render(<TextField label="Test Label" />)
