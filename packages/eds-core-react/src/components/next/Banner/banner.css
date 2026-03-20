@@ -19,6 +19,15 @@
     align-items: center;
 
     height: var(--eds-typography-line-height, 1.5rem);
+
+    /*
+     * Negative margin to match Figma's icon container padding.
+     *
+     * In Figma, the icon container has internal padding that positions the icon
+     * inward from the component edge. We replicate this with negative margin to
+     * align the icon with Figma's design while keeping the banner's own padding
+     * consistent. Fallback values match Checkbox and Radio (see checkbox.css).
+     */
     margin-block: var(--eds-selectable-icon-container-padding-block, -6px);
     margin-inline-start: var(
       --eds-selectable-icon-container-padding-inline,
@@ -50,6 +59,7 @@
     align-self: flex-start;
     order: 99;
 
+    /* Same Figma icon container padding compensation as .eds-banner__icon */
     margin-block: var(--eds-selectable-icon-container-padding-block, -6px);
     margin-inline: auto
       var(--eds-selectable-icon-container-padding-inline, -4.8px);
