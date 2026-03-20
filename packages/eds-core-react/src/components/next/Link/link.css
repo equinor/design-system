@@ -3,7 +3,7 @@
     color: var(--eds-color-text-link);
     text-decoration: underline;
     text-decoration-thickness: var(--eds-sizing-stroke-thin);
-    text-underline-offset: var(--eds-sizing-stroke-thick);
+    text-underline-offset: var(--eds-spacing-vertical-4xs);
 
     transition: color 150ms ease-in-out;
   }
@@ -16,7 +16,7 @@
     border-radius: var(--eds-spacing-border-radius-rounded);
     color: var(--eds-color-text-strong);
     outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-    outline-offset: calc(var(--eds-sizing-stroke-thick) * 2);
+    outline-offset: var(--eds-spacing-vertical-3xs);
   }
 
   /* Standalone variant: flex layout for icon + text */
@@ -43,7 +43,7 @@
     content: '';
 
     position: absolute;
-    inset: calc(var(--eds-sizing-stroke-thick) * -2);
+    inset: calc(var(--eds-spacing-vertical-3xs) * -1);
 
     border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
     border-radius: var(--eds-spacing-border-radius-rounded);
