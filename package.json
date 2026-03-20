@@ -97,5 +97,10 @@
     "typescript": "^5.9.3"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.15.0",
+  "pnpm": {
+    "overrides": {
+      "mdast-util-to-hast": ">=13.2.1"
+    }
+  }
 }
