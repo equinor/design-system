@@ -1,7 +1,7 @@
 import { Section } from "@/components/Section";
 import {
+    Checkbox,
     Radio,
-    Spacer,
     Switch,
     Typography,
     useToken,
@@ -11,6 +11,11 @@ import { ScrollView, View } from "react-native";
 
 export default function SelectionControlsScreen() {
     const token = useToken();
+    const [checkA, setCheckA] = useState(true);
+    const [checkB, setCheckB] = useState(false);
+    const [checkC, setCheckC] = useState(false);
+    const [checkNoLabelA, setCheckNoLabelA] = useState(true);
+    const [checkNoLabelB, setCheckNoLabelB] = useState(false);
     const [selectedRadio, setSelectedRadio] = useState<number>(0);
     const [selectedRadioNoLabel, setSelectedRadioNoLabel] = useState<number>(0);
     const [switchActive, setSwitchActive] = useState(false);
@@ -25,7 +30,6 @@ export default function SelectionControlsScreen() {
                 </Typography>
             </Section>
 
-            <Spacer amount="medium" />
             <Section>
                 <Typography variant="h4">Radio Buttons</Typography>
             </Section>
@@ -124,6 +128,82 @@ export default function SelectionControlsScreen() {
                     <Switch active={false} disabled />
                 </View>
             </Section>
+            <Section>
+                <Typography variant="h4">Checkboxes</Typography>
+            </Section>
+            <Section title="With labels">
+                <View
+                    accessibilityLabel="Select options"
+                >
+                    <Checkbox
+                        checked={checkA}
+                        onPress={setCheckA}
+                        label="Checked"
+                    />
+                    <Checkbox
+                        checked={checkB}
+                        onPress={setCheckB}
+                        label="Unchecked"
+                    />
+                    <Checkbox
+                        checked={checkC}
+                        onPress={setCheckC}
+                        indeterminate
+                        label="Indeterminate"
+                    />
+                </View>
+            </Section>
+            <Section title="Without visible label">
+                <View
+                    accessibilityLabel="Select options"
+                    style={{
+                        flexDirection: "row",
+                        gap: token.newSpacing.spacing.horizontal.md,
+                    }}
+                >
+                    <Checkbox
+                        checked={checkNoLabelA}
+                        onPress={setCheckNoLabelA}
+                        accessibilityLabel="Option A"
+                    />
+                    <Checkbox
+                        checked={checkNoLabelB}
+                        onPress={setCheckNoLabelB}
+                        accessibilityLabel="Option B"
+                    />
+                </View>
+            </Section>
+            <Section title="Disabled">
+                <View
+                    accessibilityLabel="Disabled options"
+                >
+                    <Checkbox
+                        checked={false}
+                        disabled
+                        label="Disabled unchecked"
+                    />
+                    <Checkbox
+                        checked={true}
+                        disabled
+                        label="Disabled checked"
+                    />
+                    <Checkbox
+                        indeterminate
+                        disabled
+                        label="Disabled indeterminate"
+                    />
+                </View>
+            </Section>
         </ScrollView>
     );
 }
+
+
+
+
+
+
+
+
+
+
