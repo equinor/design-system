@@ -1,7 +1,7 @@
 # Component conventions for EDS 2.0
 
-- **Status:** Proposed
-- **Date:** 2026-02-27
+- **Status:** Accepted
+- **Date:** 2026-03-20
 - **Decision makers:** EDS Core Team
 
 ## Context
