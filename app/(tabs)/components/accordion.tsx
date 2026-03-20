@@ -56,30 +56,21 @@ export default function AccordionScreen() {
                         accordion
                     </Typography>
                     <View style={styles.radioGroup}>
-                        <View style={styles.radioOption}>
-                            <Radio
-                                checked={selectedOption === 0}
-                                onPress={() => setSelectedOption(0)}
-                                color="primary"
-                            />
-                            <Typography>Option 1</Typography>
-                        </View>
-                        <View style={styles.radioOption}>
-                            <Radio
-                                checked={selectedOption === 1}
-                                onPress={() => setSelectedOption(1)}
-                                color="primary"
-                            />
-                            <Typography>Option 2</Typography>
-                        </View>
-                        <View style={styles.radioOption}>
-                            <Radio
-                                checked={selectedOption === 2}
-                                onPress={() => setSelectedOption(2)}
-                                color="primary"
-                            />
-                            <Typography>Option 3</Typography>
-                        </View>
+                        <Radio
+                            checked={selectedOption === 0}
+                            onPress={() => setSelectedOption(0)}
+                            label="Option 1"
+                        />
+                        <Radio
+                            checked={selectedOption === 1}
+                            onPress={() => setSelectedOption(1)}
+                            label="Option 2"
+                        />
+                        <Radio
+                            checked={selectedOption === 2}
+                            onPress={() => setSelectedOption(2)}
+                            label="Option 3"
+                        />
                     </View>
                 </Accordion.Item>
             </Accordion>
@@ -146,11 +137,5 @@ const styles = StyleSheet.create({
     },
     radioGroup: {
         marginTop: 12,
-        gap: 12,
-    },
-    radioOption: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 8,
     },
 });
