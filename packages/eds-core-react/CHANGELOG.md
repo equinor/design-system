@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.4.0...eds-core-react@v2.5.0) (2026-03-20)
+
+
+### ✨ Added
+
+* support React 18 and 19 ([#4648](https://github.com/equinor/design-system/issues/4648)) ([38ff591](https://github.com/equinor/design-system/commit/38ff5918f95a799e1d1ab44178b4647b6dd00887))
+
+
+### 🐛 Fixed
+
+* DatePicker displays correct day for configured timezone ([#4622](https://github.com/equinor/design-system/issues/4622)) ([de33a5e](https://github.com/equinor/design-system/commit/de33a5e2f685bd32341e3cd28fda282b44d53d66))
+* **eds-core-react:** stabilise DatePicker popover size when navigating months ([#4620](https://github.com/equinor/design-system/issues/4620)) ([04ae29a](https://github.com/equinor/design-system/commit/04ae29aa1961d78e2a1d0c8140138f09b5376c48)), closes [#4376](https://github.com/equinor/design-system/issues/4376)
+* localise DatePicker validation messages based on configured locale ([#4576](https://github.com/equinor/design-system/issues/4576)) ([410bbc2](https://github.com/equinor/design-system/commit/410bbc24054efe61d971d4ac4f797954279fc183))
+* normalize link font-size and font-weight in Table cells ([#4578](https://github.com/equinor/design-system/issues/4578)) ([1739bd6](https://github.com/equinor/design-system/commit/1739bd66f585b8b4aac730307456c0d692d83e51))
+* prevent Datepicker day field from eagerly auto-advancing on "3" ([#4553](https://github.com/equinor/design-system/issues/4553)) ([b5c98d3](https://github.com/equinor/design-system/commit/b5c98d373443b7c2ba5ff9e78dbd88fc30b25df2))
+* resolve runtime errors in Autocomplete and DatePicker ([#4646](https://github.com/equinor/design-system/issues/4646)) ([ad48343](https://github.com/equinor/design-system/commit/ad4834334923a02bb414038083489f3961583080))
+
 ## [2.4.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.7...eds-core-react@v2.4.0) (2026-03-20)
 
 
