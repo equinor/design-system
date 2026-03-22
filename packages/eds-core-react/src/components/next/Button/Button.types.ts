@@ -62,6 +62,12 @@ export type ButtonProps = {
    */
   round?: boolean
   /**
+   * Allows the button label to wrap across multiple lines.
+   * When enabled, the text is aligned to the baseline grid.
+   * @default false
+   */
+  multiline?: boolean
+  /**
    * Button content. Can include text, icons, or both.
    * Layout is handled automatically with CSS flexbox.
    *
