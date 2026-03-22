@@ -1,6 +1,5 @@
-import { forwardRef } from 'react'
+import { forwardRef, Children } from 'react'
 import type { ButtonProps } from './Button.types'
-import { TypographyNext } from '../../Typography'
 
 const SIZE_MAPPING = {
   small: 'sm',
@@ -8,7 +7,6 @@ const SIZE_MAPPING = {
   large: 'lg',
 } as const
 
-const sizeToTypography = SIZE_MAPPING
 const sizeToSelectableSpace = SIZE_MAPPING
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -19,6 +17,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       tone = 'accent',
       icon = false,
       round = false,
+      multiline = false,
       children,
       className,
       disabled,
@@ -28,7 +27,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) {
     const classes = ['eds-button', className].filter(Boolean).join(' ')
-    const typographySize = sizeToTypography[size]
     const selectableSpace = sizeToSelectableSpace[size]
 
     return (
@@ -43,21 +41,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         data-color-appearance={disabled ? 'neutral' : tone}
         data-icon-only={icon || undefined}
         data-round={icon && round ? true : undefined}
+        data-multiline={multiline || undefined}
         {...rest}
       >
-        {icon ? (
-          children
-        ) : (
-          <TypographyNext
-            as="span"
-            className="eds-button__label"
-            family="ui"
-            size={typographySize}
-            lineHeight="squished"
-            baseline="center"
-          >
-            {children}
-          </TypographyNext>
+        {Children.map(children, (child) =>
+          typeof child === 'string' || typeof child === 'number' ? (
+            <span className="eds-button__label">{child}</span>
+          ) : (
+            child
+          ),
         )}
       </button>
     )
