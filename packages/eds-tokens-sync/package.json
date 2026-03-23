@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@figma/rest-api-spec": "^0.36.0",
-    "@types/node": "^25.3.3",
+    "@types/node": "^25.5.0",
     "axios": "^1.13.6",
     "dotenv": "^17.3.1",
     "prettier": "^3.8.1",
