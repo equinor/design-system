@@ -151,6 +151,7 @@ describe('Autocomplete', () => {
     const input = screen.getAllByLabelText(labelText)[0]
     const label = container.querySelector('label')
     expect(label).toHaveAttribute('for', 'my-custom-id')
+    expect(input).toBeInTheDocument()
   })
 
   it('Has provided ReactNode label', async () => {
