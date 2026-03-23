@@ -102,7 +102,7 @@
     "rollup": "^4.59.1",
     "rollup-plugin-delete": "^3.0.2",
     "style-dictionary": "^5.4.0",
-    "style-dictionary-utils": "^4.1.0",
+    "style-dictionary-utils": "^6.0.1",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"
   }
