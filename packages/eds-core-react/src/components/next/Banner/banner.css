@@ -24,7 +24,6 @@
      * Negative margin compensates for Figma's icon container padding,
      * pulling the icon closer to the component edge. Same values as
      * Checkbox and Radio (see checkbox.css).
-     * -6px block, -4.8px inline = (container 33.6px - icon 24px) / 2
      */
     margin-block: -6px;
     margin-inline-start: -4.8px;
