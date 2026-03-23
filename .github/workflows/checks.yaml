@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: "22.12.0"
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
       - name: Fallback install (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install
