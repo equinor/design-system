@@ -29,3 +29,6 @@ export type { InputProps } from './Input'
 
 export { TextField } from './TextField'
 export type { TextFieldProps } from './TextField'
+
+export { Search } from './Search'
+export type { SearchProps } from './Search'
