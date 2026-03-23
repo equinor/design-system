@@ -33,7 +33,7 @@ jobs:
           key: ${{ github.sha }}-sync-figma-to-tokens
       - name: Setup pnpm
         id: setup-pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           run_install: false
       - name: Sync variables from Figma file to canonical tokens in GitHub
