@@ -69,6 +69,8 @@ updates:
         update-types:
           - minor
           - patch
+    cooldown:
+      default-days: 5
     versioning-strategy: increase
     open-pull-requests-limit: 5
 
