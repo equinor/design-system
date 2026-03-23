@@ -22,11 +22,11 @@
 
     /*
      * Negative margin compensates for Figma's icon container padding,
-     * pulling the icon closer to the component edge. Same values as
-     * Checkbox and Radio (see checkbox.css).
+     * pulling the icon closer to the component edge.
+     * Figma variable: selectable/icon-container-padding (↕︎ -4px, ↔︎ -3.2px)
      */
-    margin-block: -6px;
-    margin-inline-start: -4.8px;
+    margin-block: -4px;
+    margin-inline-start: -3.2px;
 
     color: var(--eds-color-text-subtle);
   }
@@ -54,7 +54,7 @@
     order: 99;
 
     /* Same Figma icon container padding compensation as .eds-banner__icon */
-    margin-block: -6px;
-    margin-inline: auto -4.8px;
+    margin-block: -4px;
+    margin-inline: auto -3.2px;
   }
 }
