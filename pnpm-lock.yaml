@@ -814,8 +814,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(tslib@2.8.1)
       style-dictionary-utils:
-        specifier: ^4.1.0
-        version: 4.1.0(style-dictionary@5.4.0(tslib@2.8.1))
+        specifier: ^6.0.1
+        version: 6.0.1(style-dictionary@5.4.0(tslib@2.8.1))
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -838,8 +838,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(tslib@2.8.1)
       style-dictionary-utils:
-        specifier: ^4.1.0
-        version: 4.1.0(style-dictionary@5.4.0(tslib@2.8.1))
+        specifier: ^6.0.1
+        version: 6.0.1(style-dictionary@5.4.0(tslib@2.8.1))
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -11134,10 +11134,10 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  style-dictionary-utils@4.1.0:
-    resolution: {integrity: sha512-UDdDlMtWBPmlHSuT7S7sqpXgZ4gKy5W7w+u4KTS7wlmHKv8oMfeNyIhPcE/3JQN0RYUlRej8IKzX/+4cXQ/nHQ==}
+  style-dictionary-utils@6.0.1:
+    resolution: {integrity: sha512-FvGdI94Fx9tuM3sbPBDOJw7poAQ3dAd+QuHYhe6Ab/KP5JjbdsNQe1DJ1CiOE8blkfdDGKCg+smteWyP2yMgnQ==}
     peerDependencies:
-      style-dictionary: ^4
+      style-dictionary: ^5
 
   style-dictionary@5.4.0:
     resolution: {integrity: sha512-6BzO0DV19t6KUEXYfvHJ73d3y8bBDcd0wNLfoZRX817obJ8YX5Vev8Xh3+k9601tHE8qRJ/586iLt0byuY2THw==}
@@ -25385,9 +25385,10 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-dictionary-utils@4.1.0(style-dictionary@5.4.0(tslib@2.8.1)):
+  style-dictionary-utils@6.0.1(style-dictionary@5.4.0(tslib@2.8.1)):
     dependencies:
       color2k: 2.0.3
+      colorjs.io: 0.5.2
       style-dictionary: 5.4.0(tslib@2.8.1)
 
   style-dictionary@5.4.0(tslib@2.8.1):
