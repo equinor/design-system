@@ -145,13 +145,12 @@ describe('Autocomplete', () => {
   })
 
   it('Maintains label-input association when custom id is provided', () => {
-    const { container } = render(
-      <Autocomplete id="my-custom-id" label={labelText} options={items} />,
+    render(<Autocomplete id="my-custom-id" label={labelText} options={items} />)
+    // getByRole finds the input via its associated label, confirming the for/id link works
+    expect(screen.getByRole('combobox', { name: labelText })).toHaveAttribute(
+      'id',
+      'my-custom-id',
     )
-    const input = screen.getAllByLabelText(labelText)[0]
-    const label = container.querySelector('label')
-    expect(label).toHaveAttribute('for', 'my-custom-id')
-    expect(input).toBeInTheDocument()
   })
 
   it('Has provided ReactNode label', async () => {
