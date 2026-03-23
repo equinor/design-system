@@ -138,6 +138,21 @@ describe('Autocomplete', () => {
     expect(optionsList.nodeName).toBe('UL')
   })
 
+  it('Preserves user-provided id on the input element', () => {
+    render(<Autocomplete id="my-custom-id" label={labelText} options={items} />)
+    const input = screen.getAllByLabelText(labelText)[0]
+    expect(input).toHaveAttribute('id', 'my-custom-id')
+  })
+
+  it('Maintains label-input association when custom id is provided', () => {
+    const { container } = render(
+      <Autocomplete id="my-custom-id" label={labelText} options={items} />,
+    )
+    const input = screen.getAllByLabelText(labelText)[0]
+    const label = container.querySelector('label')
+    expect(label).toHaveAttribute('for', 'my-custom-id')
+  })
+
   it('Has provided ReactNode label', async () => {
     render(<Autocomplete label={<div>{labelText}</div>} options={items} />)
 
