@@ -69,6 +69,19 @@ updates:
         update-types:
           - minor
           - patch
+    ignore:
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'eslint-*'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@typescript-eslint/*'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@eslint/*'
+        update-types:
+          - 'version-update:semver-major'
     cooldown:
       default-days: 5
     versioning-strategy: increase
