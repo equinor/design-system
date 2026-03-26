@@ -79,6 +79,21 @@ describe('TextArea (next)', () => {
       render(<TextArea label="Label" />)
       expect(screen.queryByRole('status')).not.toBeInTheDocument()
     })
+
+    it('syncs count when controlled value changes externally', () => {
+      const { rerender } = render(
+        <TextArea
+          showCharacterCount
+          value="hello"
+          onChange={() => undefined}
+        />,
+      )
+      expect(screen.getByText('5')).toBeInTheDocument()
+      rerender(
+        <TextArea showCharacterCount value="" onChange={() => undefined} />,
+      )
+      expect(screen.getByText('0')).toBeInTheDocument()
+    })
   })
 
   describe('States', () => {

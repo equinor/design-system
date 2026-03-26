@@ -110,8 +110,7 @@
 
   /* Input/Textarea element */
   .eds-input {
-    /* Temporary alias until proper placeholder text token is available */
-    --_placeholder-text-color: var(--eds-color-border-strong);
+    --_placeholder-text-color: var(--eds-color-text-subtle);
 
     flex: 1;
     min-inline-size: 0;

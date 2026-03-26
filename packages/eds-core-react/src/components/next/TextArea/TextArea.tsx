@@ -33,6 +33,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         String(textareaProps.value ?? textareaProps.defaultValue ?? '').length,
     )
 
+    useEffect(() => {
+      if (textareaProps.value !== undefined) {
+        setCharCount(String(textareaProps.value).length)
+      }
+    }, [textareaProps.value])
+
     const {
       maxLength,
       onChange: onChangeProp,
@@ -78,7 +84,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           autoResizeRef,
           internalRef as React.Ref<HTMLTextAreaElement>,
         ),
-      [ref, autoResizeRef],
+      [ref, autoResizeRef, internalRef],
     )
 
     const showHelperRow = helperMessage || showCharacterCount
