@@ -50,6 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           <TypographyNext
             as="span"
+            className="eds-button__label"
             family="ui"
             size={typographySize}
             lineHeight="squished"

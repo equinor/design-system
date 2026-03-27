@@ -99,6 +99,27 @@ describe('Button (next)', () => {
     })
   })
 
+  describe('Internal BEM classes', () => {
+    it('has eds-button__label on the text wrapper span', () => {
+      const { container } = render(<Button>Label</Button>)
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      expect(container.querySelector('.eds-button__label')).toBeInTheDocument()
+    })
+
+    it('does not render eds-button__label in icon-only mode', () => {
+      const { container } = render(
+        <Button icon aria-label="Add">
+          <MockIcon />
+        </Button>,
+      )
+      /* eslint-disable testing-library/no-container, testing-library/no-node-access */
+      expect(
+        container.querySelector('.eds-button__label'),
+      ).not.toBeInTheDocument()
+      /* eslint-enable testing-library/no-container, testing-library/no-node-access */
+    })
+  })
+
   describe('Children (Icons and Text)', () => {
     it('renders icon as child', () => {
       render(

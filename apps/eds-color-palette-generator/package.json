@@ -29,27 +29,27 @@
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "colorjs.io": "^0.6.1",
-    "lucide-react": "^0.575.0",
-    "next": "16.1.6",
+    "lucide-react": "^0.577.0",
+    "next": "16.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
-    "@next/eslint-plugin-next": "16.1.6",
+    "@next/eslint-plugin-next": "16.2.1",
     "@playwright/test": "^1.58.2",
-    "@tailwindcss/postcss": "^4.2.1",
-    "@types/node": "^25.3.3",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "dotenv": "^17.3.1",
     "eslint": "^9.38.0",
     "eslint-config-next": "16.1.6",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   }
 }

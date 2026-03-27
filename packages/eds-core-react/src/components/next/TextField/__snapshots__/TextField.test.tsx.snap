@@ -3,7 +3,7 @@
 exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
 <div>
   <div
-    class="eds-field"
+    class="eds-field eds-text-field"
   >
     <div
       class="eds-text-field__header"

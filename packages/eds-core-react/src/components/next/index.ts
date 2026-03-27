@@ -32,3 +32,6 @@ export type { TextFieldProps } from './TextField'
 
 export { TextArea } from './TextArea'
 export type { TextAreaProps } from './TextArea'
+
+export { Search } from './Search'
+export type { SearchProps } from './Search'

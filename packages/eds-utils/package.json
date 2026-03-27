@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-utils",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Utility functions and hooks for the Equinor Design System",
   "type": "module",
   "sideEffects": false,
@@ -47,7 +47,7 @@
     "hooks"
   ],
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@testing-library/dom": "^10.4.1",
@@ -58,7 +58,7 @@
     "@types/ramda": "^0.31.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "babel-jest": "^30.2.0",
+    "babel-jest": "^30.3.0",
     "babel-plugin-styled-components": "^2.1.4",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
@@ -68,21 +68,21 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-is": "^19.2.4",
-    "rollup": "^4.59.0",
+    "rollup": "^4.59.1",
     "rollup-plugin-delete": "^3.0.2",
-    "styled-components": "6.3.11",
+    "styled-components": "6.3.12",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
-    "vitest": "^4.0.18",
+    "vitest": "^4.1.0",
     "@vitejs/plugin-react": "^5.1.4"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
     "styled-components": "^6"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.6",
+    "@babel/runtime": "^7.29.2",
     "@equinor/eds-tokens": "workspace:^"
   }
 }

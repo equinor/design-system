@@ -49,7 +49,7 @@ jobs:
           node-version: '22.12.0'
       - name: Setup pnpm
         id: setup-pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           run_install: false
       - name: Build packages
@@ -95,7 +95,7 @@ jobs:
           grep -o '"foundation-spacing--[^"]*"' packages/eds-core-react/storybook-build/index.json || echo "No Foundation/Spacing entries found"
 
       - name: Az CLI login 🔑
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
           tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
