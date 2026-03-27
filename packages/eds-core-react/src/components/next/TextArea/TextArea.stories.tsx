@@ -114,7 +114,7 @@ npm install @equinor/eds-core-react@beta
 import { TextArea } from '@equinor/eds-core-react/next'
 \`\`\`
 
-TextArea is a pre-composed component combining Label, FieldDescription, a multiline textarea, and HelperMessage.
+TextArea is a complete form field with built-in label, description, and helper message support.
 
 It **auto-grows by default** as the user types. Use \`rows\` to set the initial height and \`maxRows\` to cap how tall it can grow before becoming scrollable.
         `,

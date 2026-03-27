@@ -6,8 +6,8 @@ import { TextArea } from '.'
 describe('TextArea (next)', () => {
   describe('Rendering', () => {
     it('renders a textarea element', () => {
-      render(<TextArea data-testid="eds-textarea" />)
-      expect(screen.getByTestId('eds-textarea').tagName).toBe('TEXTAREA')
+      render(<TextArea />)
+      expect(screen.getByRole('textbox').tagName).toBe('TEXTAREA')
     })
 
     it('renders with label', () => {
@@ -37,8 +37,8 @@ describe('TextArea (next)', () => {
     })
 
     it('spreads additional props onto textarea', () => {
-      render(<TextArea data-testid="ta" rows={5} />)
-      expect(screen.getByTestId('ta')).toHaveAttribute('rows', '5')
+      render(<TextArea rows={5} />)
+      expect(screen.getByRole('textbox')).toHaveAttribute('rows', '5')
     })
 
     it('renders label info tooltip button when labelInfo provided', () => {
@@ -75,9 +75,9 @@ describe('TextArea (next)', () => {
       expect(screen.getByText('3')).toBeInTheDocument()
     })
 
-    it('does not show char count when showCharacterCount is false', () => {
-      render(<TextArea label="Label" />)
-      expect(screen.queryByRole('status')).not.toBeInTheDocument()
+    it('does not show char count when showCharacterCount is not set', () => {
+      render(<TextArea label="Label" defaultValue="hello" />)
+      expect(screen.queryByText('5')).not.toBeInTheDocument()
     })
 
     it('syncs count when controlled value changes externally', () => {
@@ -98,13 +98,16 @@ describe('TextArea (next)', () => {
 
   describe('States', () => {
     it('applies disabled attribute', () => {
-      render(<TextArea data-testid="ta" disabled />)
-      expect(screen.getByTestId('ta')).toBeDisabled()
+      render(<TextArea disabled />)
+      expect(screen.getByRole('textbox')).toBeDisabled()
     })
 
     it('sets aria-invalid when invalid', () => {
-      render(<TextArea data-testid="ta" invalid />)
-      expect(screen.getByTestId('ta')).toHaveAttribute('aria-invalid', 'true')
+      render(<TextArea invalid />)
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-invalid',
+        'true',
+      )
     })
 
     it('sets alert role on helper message when invalid', () => {

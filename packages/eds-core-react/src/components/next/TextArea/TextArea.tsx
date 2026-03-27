@@ -17,10 +17,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       description,
       helperMessage,
       id: providedId,
-      invalid = false,
-      disabled = false,
+      invalid,
+      disabled,
       maxRows,
-      showCharacterCount = false,
+      showCharacterCount,
       ...textareaProps
     },
     ref,
@@ -68,13 +68,22 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     useEffect(() => {
       if (!maxRows || !internalRef.current) return
       const el = internalRef.current
-      const style = window.getComputedStyle(el)
-      const lineHeight = parseFloat(style.lineHeight)
-      const paddingBlockStart = parseFloat(style.paddingBlockStart)
-      const paddingBlockEnd = parseFloat(style.paddingBlockEnd)
-      setMaxPixelHeight(
-        lineHeight * maxRows + paddingBlockStart + paddingBlockEnd,
-      )
+
+      const updateMaxHeight = () => {
+        const style = window.getComputedStyle(el)
+        const lineHeight = parseFloat(style.lineHeight)
+        const paddingBlockStart = parseFloat(style.paddingBlockStart)
+        const paddingBlockEnd = parseFloat(style.paddingBlockEnd)
+        setMaxPixelHeight(
+          lineHeight * maxRows + paddingBlockStart + paddingBlockEnd,
+        )
+      }
+
+      const observer = new ResizeObserver(updateMaxHeight)
+      observer.observe(el)
+      updateMaxHeight()
+
+      return () => observer.disconnect()
     }, [maxRows])
 
     const combinedRef = useMemo(

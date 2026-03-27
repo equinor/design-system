@@ -50,19 +50,20 @@
   }
 }
 
-.eds-text-area .eds-error-icon {
-  margin-block-start: var(--eds-spacing-vertical-2xs);
-}
+/* Must be outside @layer: [data-font-family] { margin: 0 } in variables.css
+   is unlayered and overrides any margin inside @layer eds-components. */
+.eds-text-area {
+  & .eds-error-icon {
+    margin-block-start: var(--eds-spacing-vertical-2xs);
+  }
 
-/* Must be outside @layer: [data-font-family] { margin: 0 } is unlayered
-   and would override margin-inline-start: auto set inside the layer. */
-.eds-text-area .char-count {
-  margin-inline-start: auto;
-}
+  & .char-count {
+    margin-inline-start: auto;
+  }
 
-/* Extend textarea to bottom-right corner so the resize handle sits flush.
-   Must be outside @layer to override [data-font-family] { margin: 0 }. */
-.eds-text-area textarea.eds-input {
-  margin-block-end: calc(-1 * var(--eds-container-space-vertical));
-  margin-inline-end: calc(-1 * var(--eds-selectable-space-horizontal));
+  /* Extend textarea to bottom-right corner so the resize handle sits flush. */
+  & textarea.eds-input {
+    margin-block-end: calc(-1 * var(--eds-container-space-vertical));
+    margin-inline-end: calc(-1 * var(--eds-selectable-space-horizontal));
+  }
 }
