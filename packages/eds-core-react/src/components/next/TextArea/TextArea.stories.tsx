@@ -71,7 +71,7 @@ const meta: Meta<typeof TextArea> = {
       control: 'number',
       description:
         'Maximum number of characters allowed. Pair with `showCharacterCount` to display the limit.',
-      table: { category: 'Content', type: { summary: 'number' } },
+      table: { category: 'Content' },
     },
     invalid: {
       control: 'boolean',

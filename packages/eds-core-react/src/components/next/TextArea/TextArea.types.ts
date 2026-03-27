@@ -4,7 +4,7 @@ export type TextAreaProps = {
   /** Label for the field */
   label?: ReactNode
   /** Info tooltip content shown next to the label */
-  labelInfo?: ReactNode
+  labelInfo?: string
   /** Indicator text shown after label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
   /** Descriptive text that provides additional context for the field */

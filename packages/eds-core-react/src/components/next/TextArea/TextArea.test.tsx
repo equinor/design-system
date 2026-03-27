@@ -114,6 +114,11 @@ describe('TextArea (next)', () => {
       render(<TextArea invalid helperMessage="Error message" />)
       expect(screen.getByRole('alert')).toHaveTextContent('Error message')
     })
+
+    it('applies readOnly attribute', () => {
+      render(<TextArea readOnly />)
+      expect(screen.getByRole('textbox')).toHaveAttribute('readonly')
+    })
   })
 
   describe('Accessibility', () => {

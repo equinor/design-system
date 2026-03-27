@@ -126,6 +126,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             {description}
           </Field.Description>
         )}
+        {/* InputProps extends InputHTMLAttributes<HTMLInputElement>, so ref,
+            onChange, and rest props are typed for HTMLInputElement. Casts are
+            safe — the underlying element is always <textarea> when as="textarea". */}
         <Input
           ref={combinedRef as unknown as React.Ref<HTMLInputElement>}
           as="textarea"
