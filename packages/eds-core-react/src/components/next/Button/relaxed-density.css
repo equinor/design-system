@@ -1,3 +1,7 @@
+/* This is just a POC, the real values has to be defined in the design tokens */
+
+/* TODO: Add values */
+
 [data-density='relaxed'] {
   --eds-typography-ui-body-font-family: 0;
   --eds-selectable-space-vertical: 0;
