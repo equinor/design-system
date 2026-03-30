@@ -128,6 +128,84 @@ One `eds-`-prefixed root class per component. Internal elements use simple class
 }
 ```
 
+#### Pseudo-private custom properties
+
+Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**.
+
+```css
+/* CORRECT */
+.eds-button {
+  --_color: var(--eds-color-text-strong-on-emphasis);
+  --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+  color: var(--_color);
+  background-color: var(--_bg-color);
+}
+.eds-button[data-variant='ghost']:disabled {
+  --_color: var(--eds-color-text-disabled); /* override the variable */
+}
+
+/* WRONG */
+.eds-button[data-variant='ghost']:disabled {
+  color: var(--eds-color-text-disabled); /* never override the property directly */
+}
+```
+
+#### CSS layers
+
+Wrap all component styles in `@layer eds-components { }`. Rules outside the layer (e.g. display overrides) must be placed after the layer block with a comment explaining why they are outside.
+
+#### Data attributes for variants and states
+
+Use `data-*` attributes for all variants, sizes, and boolean states — not modifier classes.
+
+```css
+.eds-button[data-variant='primary'] { }
+.eds-button[data-selectable-space='lg'] { }
+.eds-button[data-icon-only] { }
+.eds-button[data-round] { }
+.eds-button[data-multiline] { }
+```
+
+#### Density via ancestor attribute
+
+Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor:
+
+```css
+[data-density='comfortable'] .eds-button[data-selectable-space='md'] {
+  --_min-height: 1.5rem;
+}
+```
+
+#### Modular type scale
+
+Font sizes follow a mathematical scale based on a `--_base` value:
+
+```css
+:root, [data-density='spacious'] {
+  --_base: 16px;
+  --font-size-md: round(calc(var(--_base) * pow(2, -1/5)), 0.5px);
+}
+[data-density='comfortable'] {
+  --_base: 14px; /* only the base changes; all derived values update automatically */
+}
+```
+
+#### Progressive enhancement with `@supports` and `@function`
+
+Use `@supports` to gate advanced CSS features. Provide a plain custom property fallback first, then a CSS `@function` enhancement for Chrome/Edge 128+:
+
+```css
+/* Fallback — all browsers */
+@supports (text-box: trim-both ex alphabetic) {
+  padding-top: var(--padding-top-centered);
+}
+
+/* Enhancement — Chrome/Edge 128+ (@function support) */
+@supports (text-box: trim-both ex alphabetic) {
+  padding-top: --padding-top(--mode: centered);
+}
+```
+
 ### Testing
 
 Jest + Testing Library. Organize tests by category with `describe` blocks:
