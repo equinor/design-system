@@ -97,6 +97,106 @@
   );
 }
 
+/* TODO: rename densities — relaxed → spacious, spacious → comfortable, comfortable → compact */
+
+[data-density='relaxed'] {
+  --_base: 18.5px;
+  --font-size-xs: round(calc(var(--_base) * pow(2, -3/5)), 0.5px);
+  --font-size-sm: round(calc(var(--_base) * pow(2, -2/5)), 0.5px);
+  --font-size-md: round(calc(var(--_base) * pow(2, -1/5)), 0.5px);
+  --font-size-lg: var(--_base);
+  --font-size-xl: round(calc(var(--_base) * pow(2, 1/5)), 0.5px);
+  --font-size-2xl: round(calc(var(--_base) * pow(2, 2/5)), 0.5px);
+  --font-size-3xl: round(calc(var(--_base) * pow(2, 3/5)), 0.5px);
+  --font-size-4xl: round(calc(var(--_base) * pow(2, 4/5)), 0.5px);
+  --font-size-5xl: round(calc(var(--_base) * pow(2, 5/5)), 0.5px);
+  --font-size-6xl: round(calc(var(--_base) * pow(2, 6/5)), 0.5px);
+
+  /* line-height normal */
+  --line-height-normal-xs: round(
+    calc(var(--font-size-xs) * (1.39 - pow(0 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-sm: round(
+    calc(var(--font-size-sm) * (1.39 - pow(1 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-md: round(
+    calc(var(--font-size-md) * (1.39 - pow(2 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-lg: round(
+    calc(var(--font-size-lg) * (1.39 - pow(3 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-xl: round(
+    calc(var(--font-size-xl) * (1.39 - pow(4 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-2xl: round(
+    calc(var(--font-size-2xl) * (1.39 - pow(5 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-3xl: round(
+    calc(var(--font-size-3xl) * (1.39 - pow(6 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-4xl: round(
+    calc(var(--font-size-4xl) * (1.39 - pow(7 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-5xl: round(
+    calc(var(--font-size-5xl) * (1.39 - pow(8 / 9, 3) * 0.29)),
+    4px
+  );
+  --line-height-normal-6xl: round(
+    calc(var(--font-size-6xl) * (1.39 - pow(9 / 9, 3) * 0.29)),
+    4px
+  );
+
+  /* line-height squished */
+  --line-height-squished-xs: round(
+    calc(var(--font-size-xs) * (1.13 - pow(0 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-sm: round(
+    calc(var(--font-size-sm) * (1.13 - pow(1 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-md: round(
+    calc(var(--font-size-md) * (1.13 - pow(2 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-lg: round(
+    calc(var(--font-size-lg) * (1.13 - pow(3 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-xl: round(
+    calc(var(--font-size-xl) * (1.13 - pow(4 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-2xl: round(
+    calc(var(--font-size-2xl) * (1.13 - pow(5 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-3xl: round(
+    calc(var(--font-size-3xl) * (1.13 - pow(6 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-4xl: round(
+    calc(var(--font-size-4xl) * (1.13 - pow(7 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-5xl: round(
+    calc(var(--font-size-5xl) * (1.13 - pow(8 / 9, 3) * 0.13)),
+    4px
+  );
+  --line-height-squished-6xl: round(
+    calc(var(--font-size-6xl) * (1.13 - pow(9 / 9, 3) * 0.13)),
+    4px
+  );
+}
+
 [data-density='comfortable'] {
   --_base: 14px;
   --font-size-xs: round(calc(var(--_base) * pow(2, -3/5)), 0.5px);

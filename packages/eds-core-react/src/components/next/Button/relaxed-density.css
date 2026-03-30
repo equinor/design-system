@@ -1,0 +1,9 @@
+[data-density='relaxed'] {
+  --eds-typography-ui-body-font-family: 0;
+  --eds-selectable-space-vertical: 0;
+  --eds-selectable-space-horizontal: 0;
+  --eds-spacing-border-radius-rounded: 0;
+  --eds-border-width-default: 0;
+  --eds-sizing-stroke-thin: 0;
+  --eds-sizing-stroke-thick: 0;
+}

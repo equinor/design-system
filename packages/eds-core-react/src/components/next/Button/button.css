@@ -1,5 +1,6 @@
 @import './registered-properties.css';
 @import './typography.css';
+@import './relaxed-density.css';
 
 @layer eds-components {
   .eds-button {
@@ -164,9 +165,9 @@
 
   .eds-button[data-variant='primary']:disabled {
     /* --_bg-color: var(--eds-color-bg-fill-emphasis-disabled); */
+    --_color: var(--eds-color-text-disabled);
 
     cursor: not-allowed;
-    color: var(--eds-color-text-disabled);
   }
 
   .eds-button[data-variant='primary']:hover:not(:disabled) {
@@ -227,7 +228,7 @@
   }
 
   .eds-button[data-variant='ghost']:active:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-muted-hover);
+    --_bg-color: var(--eds-color-bg-fill-muted-hover);
   }
 
   /* ===== FOCUS STATE ===== */

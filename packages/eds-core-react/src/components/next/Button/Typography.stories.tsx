@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import './typography.css'
 
 type Args = {
-  density: 'spacious' | 'comfortable'
+  density: 'relaxed' | 'spacious' | 'comfortable'
   lineHeight: 'squished' | 'normal'
 }
 
@@ -15,7 +15,7 @@ const meta: Meta<Args> = {
   argTypes: {
     density: {
       control: 'radio',
-      options: ['spacious', 'comfortable'],
+      options: ['relaxed', 'spacious', 'comfortable'],
       description: 'Density mode — sets `data-density` on the wrapper',
     },
     lineHeight: {
