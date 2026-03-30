@@ -15,6 +15,7 @@ packages/*/pnpm-lock.yaml
 scripts/*/pnpm-lock.yaml
 yarn.lock
 .env
+.stylelintcache
 # gatsby and docz
 .docz
 public
