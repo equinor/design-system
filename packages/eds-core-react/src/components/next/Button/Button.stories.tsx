@@ -400,6 +400,23 @@ export const CircularIconOnly: Story = {
 export const DensityComparison: Story = {
   render: () => (
     <Wrapper gap={32}>
+      <div data-density="relaxed">
+        <h3 style={{ marginBottom: '12px' }}>Relaxed</h3>
+        <Wrapper direction="row" align="center" gap={12}>
+          <Button size="small">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="large">Large</Button>
+          <Button size="small" icon aria-label="Add">
+            <Icon data={add} aria-hidden />
+          </Button>
+          <Button size="default" icon aria-label="Add">
+            <Icon data={add} aria-hidden />
+          </Button>
+          <Button size="large" icon aria-label="Add">
+            <Icon data={add} aria-hidden />
+          </Button>
+        </Wrapper>
+      </div>
       <div data-density="spacious">
         <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
         <Wrapper direction="row" align="center" gap={12}>
