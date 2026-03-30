@@ -307,16 +307,10 @@
   --text-box: trim-both ex alphabetic;
 
   /* Single-line: snap height to 4px grid, centered optically */
-  --padding-top-centered: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
+  /* --padding-top-centered: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
   --padding-bottom-centered: calc(
     (round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2
-  );
-
-  /* TODO: The centered values produce incorrect heights at certain steps (e.g. sm)
-   * because padding-bottom can come out negative, and negative padding is invalid.
-   * Negative margin works but causes problems with flex containers when combined
-   * with position: relative. Investigate centering via ::before and ::after
-   * pseudo-elements with isolation: isolate as an alternative approach. */
+  ); */
 
   /* Multi-line: align text to baseline grid */
   --padding-top-baseline: calc(round(1cap, 4px) - 1ex);
@@ -342,6 +336,17 @@
         (round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2
       )
       ; else: 0
+  );
+}
+
+@function --padding-block(
+    --padding-block <length>,
+    --line-height <length>,
+    --cap-rounded <length>
+  )
+  returns <length> {
+  result: calc(
+    var(--padding-block) - (var(--line-height) - var(--cap-rounded)) / 2
   );
 }
 

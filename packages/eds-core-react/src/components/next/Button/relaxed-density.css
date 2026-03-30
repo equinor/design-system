@@ -3,11 +3,18 @@
 /* TODO: Add values */
 
 [data-density='relaxed'] {
-  --eds-typography-ui-body-font-family: 0;
-  --eds-selectable-space-vertical: 0;
-  --eds-selectable-space-horizontal: 0;
-  --eds-spacing-border-radius-rounded: 0;
-  --eds-border-width-default: 0;
-  --eds-sizing-stroke-thin: 0;
-  --eds-sizing-stroke-thick: 0;
+  [data-selectable-space='sm'] {
+    --eds-selectable-space-horizontal: 16px;
+    --eds-selectable-space-vertical: 12px;
+  }
+
+  [data-selectable-space='md'] {
+    --eds-selectable-space-horizontal: 20px;
+    --eds-selectable-space-vertical: 16px;
+  }
+
+  [data-selectable-space='lg'] {
+    --eds-selectable-space-horizontal: 24px;
+    --eds-selectable-space-vertical: 20px;
+  }
 }

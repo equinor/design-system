@@ -462,3 +462,79 @@ export const DensityComparison: Story = {
     },
   },
 }
+
+// ===== Multiline (Anti-pattern) =====
+
+export const MultilineAntiPattern: Story = {
+  render: () => (
+    <Wrapper gap={32}>
+      <div data-density="relaxed">
+        <h3 style={{ marginBottom: '12px' }}>Relaxed</h3>
+        <Wrapper direction="row" align="flex-start" gap={12}>
+          <Button multiline size="small">
+            Short label
+            <br /> that wraps
+          </Button>
+          <Button multiline size="default">
+            Short label
+            <br />
+            that wraps
+          </Button>
+          <Button multiline size="large">
+            Short label
+            <br />
+            that wraps
+          </Button>
+        </Wrapper>
+      </div>
+      <div data-density="spacious">
+        <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
+        <Wrapper direction="row" align="flex-start" gap={12}>
+          <Button multiline size="small">
+            Short label
+            <br />
+            that wraps
+          </Button>
+          <Button multiline size="default">
+            Short label
+            <br />
+            that wraps
+          </Button>
+          <Button multiline size="large">
+            Short label
+            <br />
+            that wraps
+          </Button>
+        </Wrapper>
+      </div>
+      <div data-density="comfortable">
+        <h3 style={{ marginBottom: '12px' }}>Comfortable</h3>
+        <Wrapper direction="row" align="flex-start" gap={12}>
+          <Button multiline size="small">
+            Short label
+            <br />
+            that wraps
+          </Button>
+          <Button multiline size="default">
+            Short label
+            <br />
+            that wraps
+          </Button>
+          <Button multiline size="large">
+            Short label
+            <br />
+            that wraps
+          </Button>
+        </Wrapper>
+      </div>
+    </Wrapper>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '⚠️ **Anti-pattern.** Button labels should always fit on a single line. Use `multiline` only as a last resort — never as a design choice. The component will not break, but multi-line buttons are harder to scan and weaker as call-to-action elements. Shorten the label instead.',
+      },
+    },
+  },
+}

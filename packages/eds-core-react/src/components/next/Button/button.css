@@ -6,10 +6,13 @@
   .eds-button {
     --_label-font-size: var(--font-size-md);
     --_label-line-height: var(--line-height-squished-md);
+    --_label-height: round(1cap, 4px);
     --_font-family: var(--eds-typography-ui-body-font-family);
     --_color: var(--eds-color-text-strong-on-emphasis);
     --_bg-color: var(--eds-color-bg-fill-emphasis-default);
-    --_min-height: 2.25rem; /* 36px */
+
+    /* --_min-height: 2.25rem; */ /* 36px */
+    --_padding-block: var(--eds-selectable-space-vertical);
 
     /* Layout */
     display: inline-flex;
@@ -20,8 +23,18 @@
     justify-content: center;
 
     box-sizing: border-box;
-    min-height: var(--_min-height);
-    padding-block: var(--eds-selectable-space-vertical);
+    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
+
+    /* min-height: var(--_min-height); */
+    padding-block: calc(
+      var(--_padding-block) -
+        (var(--_label-line-height) - var(--_label-height)) / 2
+    );
+    padding-block: --padding-block(
+      var(--_padding-block),
+      var(--_label-line-height),
+      var(--_label-height)
+    );
     padding-inline: var(--eds-selectable-space-horizontal);
 
     /* Appearance */
@@ -50,33 +63,33 @@
       font-size: var(--_label-font-size);
       line-height: var(--_label-line-height);
       color: var(--_color);
-
-      @supports (text-box: trim-both ex alphabetic) {
-        padding-top: var(--padding-top-centered);
-        padding-bottom: var(--padding-bottom-centered);
-
-        text-box: var(--text-box);
-      }
-
-      /* enhancement: Chrome/Edge 128+ — invalid @function values are silently dropped in Safari */
-      @supports (text-box: trim-both ex alphabetic) {
-        padding-top: --padding-top(--mode: centered);
-        padding-bottom: --padding-bottom(--mode: centered);
-      }
     }
 
-    &[data-multiline] .eds-button__label {
-      white-space: normal;
+    &[data-multiline] {
+      padding-block: var(--eds-selectable-space-vertical);
 
-      @supports (text-box: trim-both ex alphabetic) {
-        padding-top: var(--padding-top-baseline);
-        padding-bottom: var(--padding-bottom-baseline);
-      }
+      .eds-button__label {
+        /* --_padding-top-baseline: calc(
+          (round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2
+        ); */
+        --_padding-top-baseline: calc(round(1cap, 4px) - 1ex);
 
-      /* enhancement: Chrome/Edge 128+ — invalid @function values are silently dropped in Safari */
-      @supports (text-box: trim-both ex alphabetic) {
-        padding-top: --padding-top(--mode: baseline);
-        padding-bottom: --padding-bottom(--mode: baseline);
+        white-space: normal;
+
+        @supports (text-box: trim-both ex alphabetic) {
+          padding-top: var(--padding-top-baseline);
+          padding-bottom: 0;
+
+          text-box: trim-both ex alphabetic;
+        }
+
+        /* enhancement: Chrome/Edge 128+ — invalid @function values are silently dropped in Safari */
+        @supports (text-box: trim-both ex alphabetic) {
+          padding-top: --padding-top(--mode: baseline);
+          padding-bottom: 0;
+
+          text-box: trim-both ex alphabetic;
+        }
       }
     }
 
@@ -103,6 +116,7 @@
 
   /* ===== SIZE VARIANTS ===== */
   /*
+   * TODO: Rephrase this comment!
    * Button height is controlled by min-height.
    * The span keeps its natural line-height and is centered by flexbox.
    *
@@ -113,33 +127,16 @@
   .eds-button[data-selectable-space='lg'] {
     --_label-font-size: var(--font-size-lg);
     --_label-line-height: var(--line-height-squished-lg);
-    --_min-height: 2.75rem; /* 44px */
   }
 
   .eds-button[data-selectable-space='md'] {
     --_label-font-size: var(--font-size-md);
     --_label-line-height: var(--line-height-squished-md);
-    --_min-height: 2.25rem; /* 36px */
   }
 
   .eds-button[data-selectable-space='sm'] {
     --_label-font-size: var(--font-size-sm);
     --_label-line-height: var(--line-height-squished-sm);
-    --_min-height: 1.5rem; /* 24px */
-  }
-
-  /* Comfortable density */
-
-  [data-density='comfortable'] .eds-button[data-selectable-space='lg'] {
-    --_min-height: 2.25rem; /* 36px */
-  }
-
-  [data-density='comfortable'] .eds-button[data-selectable-space='md'] {
-    --_min-height: 1.5rem; /* 24px */
-  }
-
-  [data-density='comfortable'] .eds-button[data-selectable-space='sm'] {
-    --_min-height: 1.25rem; /* 20px */
   }
 
   /* ===== ICON-ONLY BUTTON ===== */
@@ -164,7 +161,7 @@
   }
 
   .eds-button[data-variant='primary']:disabled {
-    /* --_bg-color: var(--eds-color-bg-fill-emphasis-disabled); */
+    --_bg-color: var(--eds-color-bg-fill-emphasis-disabled);
     --_color: var(--eds-color-text-disabled);
 
     cursor: not-allowed;
@@ -250,14 +247,4 @@
   .eds-button[data-icon-only] .eds-icon {
     margin: 0;
   }
-}
-
-.eds-button > span {
-  /* display: inline-flex;
-  gap: var(--eds-typography-gap-horizontal);
-  align-items: center;
-
-  padding-block: 0;
-
-  text-box: normal; */
 }

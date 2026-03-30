@@ -1,4 +1,5 @@
-import { forwardRef, Children } from 'react'
+import { forwardRef, Children, isValidElement } from 'react'
+import type { ReactNode } from 'react'
 import type { ButtonProps } from './Button.types'
 
 const SIZE_MAPPING = {
@@ -44,13 +45,37 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         data-multiline={multiline || undefined}
         {...rest}
       >
-        {Children.map(children, (child) =>
-          typeof child === 'string' || typeof child === 'number' ? (
-            <span className="eds-button__label">{child}</span>
-          ) : (
-            child
-          ),
-        )}
+        {(() => {
+          const out: ReactNode[] = []
+          let buf: ReactNode[] = []
+          Children.toArray(children).forEach((child, i) => {
+            const isLabelNode =
+              typeof child === 'string' ||
+              typeof child === 'number' ||
+              (isValidElement(child) && child.type === 'br')
+            if (isLabelNode) {
+              buf.push(child)
+            } else {
+              if (buf.length) {
+                out.push(
+                  <span key={`label-${i}`} className="eds-button__label">
+                    {buf}
+                  </span>,
+                )
+                buf = []
+              }
+              out.push(child)
+            }
+          })
+          if (buf.length) {
+            out.push(
+              <span key="label-end" className="eds-button__label">
+                {buf}
+              </span>,
+            )
+          }
+          return out
+        })()}
       </button>
     )
   },
