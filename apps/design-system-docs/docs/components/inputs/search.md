@@ -155,13 +155,16 @@ A read-only search field displays the current value but prevents editing. The cl
 
 ### Components
 
-- **Search [EDS]**: Search input field with built-in search icon and conditional clear button
+Search is available as a variant of the shared input component in Figma:
 
-### Using the Search in Figma
+- **Input [EDS]**: Shared input component used for all input types, including Search
 
-1. In Figma, go to the **Assets Panel** and search for **Search**
-2. Drag the component into your frame
-3. Select the component to see its properties in the **Design Panel**
+### Using Search in Figma
+
+1. In Figma, go to the **Assets Panel** and search for **Input**
+2. Drag the **Input [EDS]** component into your frame
+3. In the component, find the **↳ ⌘ Input Options** instance and swap it to the **Search** variant
+4. Select the component to see its properties in the **Design Panel**
 
 ## Do's and Don'ts
 
