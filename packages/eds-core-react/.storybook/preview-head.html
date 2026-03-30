@@ -10,10 +10,15 @@
   .sb-show-main {
     min-height: 100%;
   }
-  @scope (.sbdocs-content) to (.docs-story, .sb-unstyled) {
+  @scope (.sbdocs-content) to (.docs-story, .sb-unstyled), {
     * {
       font-family: Equinor, sans-serif !important;
     }
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: Equinor, sans-serif;
+    font-weight: 500;
   }
 
   .sbdocs.sbdocs-a {
