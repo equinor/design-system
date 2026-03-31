@@ -15,10 +15,8 @@
     position-anchor: var(--tooltip-anchor-name);
     width: max-content;
 
-    /* Arrow size + gap. Margin extends the margin-box; clip-path inset() margin-box
-       reveals only the arrow on the margin side. Technique: https://gist.github.com/alexreardon/2008517fcbebe03f1e41e10b4104174c */
+    /* Arrow height = gap between tooltip and anchor */
     --_arrow: var(--eds-spacing-vertical-3xs);
-    clip-path: inset(0 round var(--eds-spacing-border-radius-rounded, 4px)) margin-box;
 
     background-color: var(--eds-color-text-strong);
     color: var(--eds-color-text-strong-on-emphasis);
@@ -27,115 +25,90 @@
     padding-inline: var(--eds-container-space-horizontal);
     font-feature-settings: 'lnum', 'tnum';
 
-    filter:
-      drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.14))
-      drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.12))
-      drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.2));
+    /* Rectangle shadow — always downward, independent of arrow direction */
+    box-shadow:
+      0px 2px 4px rgba(0, 0, 0, 0.14),
+      0px 3px 4px rgba(0, 0, 0, 0.12),
+      0px 1px 5px rgba(0, 0, 0, 0.2);
 
-    /* Both pseudo-elements render arrows in all directions;
-       clip-path margin-box reveals only the one on the margin side */
-    &::before,
-    &::after {
+    /* Arrow: extends --_arrow beyond all 4 sides of the tooltip.
+       All 4 arrow shapes are drawn; margin: inherit shifts the element so
+       3 arrows hide behind the tooltip body (z-index:-1). The side with
+       margin:0 stays in the gap — that arrow is visible.
+       flip-block / flip-inline automatically mirror the margins on fallback. */
+    &::before {
       content: '';
       position: absolute;
       z-index: -1;
-      background: var(--eds-color-text-strong);
-    }
-
-    /* Vertical arrow (top/bottom) — base exactly at clip boundary to prevent bleed */
-    &::before {
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(var(--_arrow) * 2);
-      height: calc(100% + var(--_arrow) * 2);
-      top: calc(var(--_arrow) * -1);
+      background: inherit;
+      inset: calc(-1 * var(--_arrow));
+      margin: inherit;
       clip-path: polygon(
-        0 var(--_arrow),
+        /* top arrow — base at y=--_arrow, 2px flat tip at y=0 */
+        calc(50% - var(--_arrow)) var(--_arrow),
         calc(50% - 1px) 0,
         calc(50% + 1px) 0,
-        100% var(--_arrow),
-        100% calc(100% - var(--_arrow)),
-        calc(50% + 1px) 100%,
-        calc(50% - 1px) 100%,
-        0 calc(100% - var(--_arrow))
-      );
-    }
-
-    /* Horizontal arrow (left/right) */
-    &::after {
-      top: 50%;
-      transform: translateY(-50%);
-      height: calc(var(--_arrow) * 2);
-      width: calc(100% + var(--_arrow) * 2);
-      left: calc(var(--_arrow) * -1);
-      clip-path: polygon(
-        var(--_arrow) 0,
-        calc(100% - var(--_arrow)) 0,
+        calc(50% + var(--_arrow)) var(--_arrow),
+        /* right arrow — base at x=100%---_arrow, 2px flat tip at x=100% */
+        calc(100% - var(--_arrow)) calc(50% - var(--_arrow)),
         100% calc(50% - 1px),
         100% calc(50% + 1px),
-        calc(100% - var(--_arrow)) 100%,
-        var(--_arrow) 100%,
+        calc(100% - var(--_arrow)) calc(50% + var(--_arrow)),
+        /* bottom arrow — base at y=100%---_arrow, 2px flat tip at y=100% */
+        calc(50% + var(--_arrow)) calc(100% - var(--_arrow)),
+        calc(50% + 1px) 100%,
+        calc(50% - 1px) 100%,
+        calc(50% - var(--_arrow)) calc(100% - var(--_arrow)),
+        /* left arrow — base at x=--_arrow, 2px flat tip at x=0 */
+        var(--_arrow) calc(50% + var(--_arrow)),
         0 calc(50% + 1px),
-        0 calc(50% - 1px)
+        0 calc(50% - 1px),
+        var(--_arrow) calc(50% - var(--_arrow))
       );
     }
 
     &[data-placement='top'] {
       position-area: top center;
-      position-try-fallbacks: --tt-bottom, --tt-left, --tt-right;
+      bottom: var(--_arrow);
+      position-try-fallbacks: flip-block;
     }
 
     &[data-placement='bottom'] {
       position-area: bottom center;
-      position-try-fallbacks: --tt-top, --tt-left, --tt-right;
+      top: var(--_arrow);
+      position-try-fallbacks: flip-block;
     }
 
     &[data-placement='right'] {
       position-area: center right;
-      position-try-fallbacks: --tt-left, --tt-top, --tt-bottom;
+      left: var(--_arrow);
+      position-try-fallbacks: flip-inline;
     }
 
     &[data-placement='left'] {
       position-area: center left;
-      position-try-fallbacks: --tt-right, --tt-top, --tt-bottom;
+      right: var(--_arrow);
+      position-try-fallbacks: flip-inline;
     }
-  }
-
-  /* @position-try cannot be nested inside a selector */
-  @position-try --tt-top {
-    position-area: top center;
-    margin: 0 0 var(--_arrow);
-  }
-
-  @position-try --tt-bottom {
-    position-area: bottom center;
-    margin: var(--_arrow) 0 0;
-  }
-
-  @position-try --tt-left {
-    position-area: center left;
-    margin: 0 var(--_arrow) 0 0;
-  }
-
-  @position-try --tt-right {
-    position-area: center right;
-    margin: 0 0 0 var(--_arrow);
   }
 }
 
-/* Unlayered — beats [data-font-family] margin:0 and display:block */
+/* Unlayered — beats [data-font-family] margin:0 and display:block.
+   margin:0 on the active side keeps that arrow in the gap (visible);
+   margin:--_arrow on the other 3 sides shifts the ::before so those
+   arrows hide behind the tooltip body. */
 .eds-tooltip:not(:popover-open) {
   display: none;
 }
 .eds-tooltip[data-placement='top'] {
-  margin: 0 0 var(--_arrow);
+  margin: var(--_arrow) var(--_arrow) 0;
 }
 .eds-tooltip[data-placement='bottom'] {
-  margin: var(--_arrow) 0 0;
-}
-.eds-tooltip[data-placement='right'] {
-  margin: 0 0 0 var(--_arrow);
+  margin: 0 var(--_arrow) var(--_arrow);
 }
 .eds-tooltip[data-placement='left'] {
-  margin: 0 var(--_arrow) 0 0;
+  margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
+}
+.eds-tooltip[data-placement='right'] {
+  margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
 }
