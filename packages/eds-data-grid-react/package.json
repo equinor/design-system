@@ -47,7 +47,7 @@
     "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@storybook/addon-a11y": "^10.2.19",
+    "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.2.10",
     "@storybook/addon-links": "^10.2.10",
     "@storybook/react-vite": "^10.2.19",
