@@ -5,6 +5,16 @@
     --_code-font-family: 'CommitMono', monospace;
   }
 
+  /* ===== RESET ===== */
+
+  /* prettier-ignore */
+  :where(h1, h2, h3, h4, h5, h6,
+  p, blockquote, figcaption, address,
+  ul, ol, dl, li, dt, dd,
+  table, pre) {
+    margin: 0;
+  }
+
   /* ===== HEADINGS ===== */
   /* Equinor typeface, larger sizes from the scale */
 
@@ -32,6 +42,7 @@
   :where(h1), .eds-heading-1 {
     --_font-weight-lighter: var(--eds-typography-header-5xl-font-weight-lighter);
     --_font-weight-bolder: var(--eds-typography-header-5xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-3xl);
 
     font-size: var(--eds-typography-ui-body-5xl-font-size);
     font-weight: var(--eds-typography-header-5xl-font-weight-normal);
@@ -42,6 +53,7 @@
   :where(h2), .eds-heading-2 {
     --_font-weight-lighter: var(--eds-typography-header-4xl-font-weight-lighter);
     --_font-weight-bolder: var(--eds-typography-header-4xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-2xl);
 
     font-size: var(--eds-typography-ui-body-4xl-font-size);
     font-weight: var(--eds-typography-header-4xl-font-weight-normal);
@@ -52,6 +64,7 @@
   :where(h3), .eds-heading-3 {
     --_font-weight-lighter: var(--eds-typography-header-3xl-font-weight-lighter);
     --_font-weight-bolder: var(--eds-typography-header-3xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-xl);
 
     font-size: var(--eds-typography-ui-body-3xl-font-size);
     font-weight: var(--eds-typography-header-3xl-font-weight-normal);
@@ -62,6 +75,7 @@
   :where(h4), .eds-heading-4 {
     --_font-weight-lighter: var(--eds-typography-header-2xl-font-weight-lighter);
     --_font-weight-bolder: var(--eds-typography-header-2xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-xl);
 
     font-size: var(--eds-typography-ui-body-2xl-font-size);
     font-weight: var(--eds-typography-header-2xl-font-weight-normal);
@@ -72,6 +86,7 @@
   :where(h5), .eds-heading-5 {
     --_font-weight-lighter: var(--eds-typography-header-xl-font-weight-lighter);
     --_font-weight-bolder: var(--eds-typography-header-xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-xl);
 
     font-size: var(--eds-typography-ui-body-xl-font-size);
     font-weight: var(--eds-typography-header-xl-font-weight-normal);
@@ -82,6 +97,7 @@
   :where(h6), .eds-heading-6 {
     --_font-weight-lighter: var(--eds-typography-header-lg-font-weight-lighter);
     --_font-weight-bolder: var(--eds-typography-header-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
 
     font-size: var(--eds-typography-ui-body-lg-font-size);
     font-weight: var(--eds-typography-header-lg-font-weight-normal);
@@ -127,6 +143,7 @@
       --eds-typography-ui-body-lg-font-weight-lighter
     );
     --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
 
     font-size: var(--eds-typography-ui-body-lg-font-size);
     font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
@@ -134,15 +151,42 @@
   }
 
   :where(blockquote) {
-    /* TODO */
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    padding-left: var(--eds-spacing-horizontal-md);
+    border-left: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-medium);
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
   }
 
   :where(figcaption) {
-    /* TODO */
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-sm-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-sm-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    font-weight: var(--eds-typography-ui-body-sm-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
   }
 
   :where(address) {
-    /* TODO */
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
   }
 
   /* ===== INLINE TEXT ===== */
@@ -156,7 +200,7 @@
   }
 
   :where(small) {
-    /* TODO */
+    font-size: var(--eds-typography-ui-body-md-font-size);
   }
 
   :where(s) {
@@ -172,7 +216,8 @@
   }
 
   :where(mark) {
-    /* TODO */
+    /* The Brand Midnight sun colour, currently not in any token */
+    background-color: #fde88c;
   }
 
   :where(abbr) {
@@ -188,11 +233,11 @@
   }
 
   :where(sub) {
-    /* TODO */
+    font-size: var(--eds-typography-ui-body-sm-font-size);
   }
 
   :where(sup) {
-    /* TODO */
+    font-size: var(--eds-typography-ui-body-sm-font-size);
   }
 
   :where(time) {
@@ -211,7 +256,8 @@
   }
 
   :where(pre) {
-    /* TODO */
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
   }
 
   :where(kbd) {
@@ -231,7 +277,7 @@
   :where(caption) {
     caption-side: bottom;
 
-    margin-top: var(--eds-generic-space-vertical);
+    margin-top: var(--eds-spacing-vertical-md);
 
     font-size: var(--eds-typography-ui-body-sm-font-size);
     font-weight: var(--eds-typography-ui-body-sm-font-weight-normal);
@@ -240,27 +286,31 @@
   }
 
   :where(th) {
-    --_font-weight-lighter: var(--eds-typography-ui-body-md-font-weight-lighter);
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
     --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
 
-    padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-spacing-inset-md-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-md-horizontal);
 
     font-size: var(--eds-typography-ui-body-md-font-size);
     font-weight: var(--eds-typography-ui-body-md-font-weight-bolder);
     line-height: var(--eds-typography-ui-body-md-line-height-squished);
     text-align: left;
 
-    background-color: var(--eds-color-bg-fill-muted-default);
+    background-color: var(--eds-color-neutral-3);
     box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thick)) 0
-      var(--eds-color-border-medium);
+      var(--eds-color-neutral-7);
 
     @supports (text-box: trim-both ex alphabetic) {
       padding-top: calc(
-        var(--eds-selectable-space-vertical) + var(--padding-top-baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-top-baseline)
       );
       padding-bottom: calc(
-        var(--eds-selectable-space-vertical) + var(--padding-bottom-baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-bottom-baseline)
       );
 
       text-box: trim-both ex alphabetic;
@@ -269,10 +319,12 @@
     /* enhancement: Chrome/Edge 128+ */
     @supports (text-box: trim-both ex alphabetic) {
       padding-top: calc(
-        var(--eds-selectable-space-vertical) + --padding-top(--mode: baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          --padding-top(--mode: baseline)
       );
       padding-bottom: calc(
-        var(--eds-selectable-space-vertical) + --padding-bottom(--mode: baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          --padding-bottom(--mode: baseline)
       );
 
       text-box: trim-both ex alphabetic;
@@ -280,11 +332,13 @@
   }
 
   :where(td) {
-    --_font-weight-lighter: var(--eds-typography-ui-body-md-font-weight-lighter);
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
     --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
 
-    padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--eds-spacing-inset-md-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-md-horizontal);
 
     font-size: var(--eds-typography-ui-body-md-font-size);
     font-feature-settings:
@@ -294,14 +348,16 @@
     line-height: var(--eds-typography-ui-body-md-line-height-default);
 
     box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thin)) 0
-      var(--eds-color-border-subtle);
+      var(--eds-color-neutral-6);
 
     @supports (text-box: trim-both ex alphabetic) {
       padding-top: calc(
-        var(--eds-selectable-space-vertical) + var(--padding-top-baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-top-baseline)
       );
       padding-bottom: calc(
-        var(--eds-selectable-space-vertical) + var(--padding-bottom-baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-bottom-baseline)
       );
 
       text-box: trim-both ex alphabetic;
@@ -310,10 +366,12 @@
     /* enhancement: Chrome/Edge 128+ */
     @supports (text-box: trim-both ex alphabetic) {
       padding-top: calc(
-        var(--eds-selectable-space-vertical) + --padding-top(--mode: baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          --padding-top(--mode: baseline)
       );
       padding-bottom: calc(
-        var(--eds-selectable-space-vertical) + --padding-bottom(--mode: baseline)
+        var(--eds-spacing-inset-md-vertical-squared) +
+          --padding-bottom(--mode: baseline)
       );
 
       text-box: trim-both ex alphabetic;
@@ -322,16 +380,46 @@
 
   /* ===== LIST ITEMS ===== */
 
-  :where(li) {
-    /* TODO */
+  :where(li, dt, dd) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+
+    padding-top: var(--eds-spacing-vertical-sm);
+    padding-bottom: 0;
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
+
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: calc(
+        var(--eds-spacing-vertical-sm) + var(--padding-top-baseline)
+      );
+      padding-bottom: 0;
+
+      text-box: trim-both ex alphabetic;
+    }
+
+    /* enhancement: Chrome/Edge 128+ */
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: calc(
+        var(--eds-spacing-vertical-sm) + --padding-top(--mode: baseline)
+      );
+      padding-bottom: 0;
+
+      text-box: trim-both ex alphabetic;
+    }
   }
 
-  :where(dt) {
-    /* TODO */
-  }
+  /* ===== FLOW SPACING ===== */
+  /* Lobotomized owl: spacing between adjacent block-level elements */
 
-  :where(dd) {
-    /* TODO */
+  /* prettier-ignore */
+  :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, table, pre, blockquote, address)
+  + :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, table, pre, blockquote, address) {
+    margin-top: var(--_flow-space, var(--eds-spacing-vertical-lg));
   }
 
   /* ===== FORM LABELS ===== */
