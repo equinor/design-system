@@ -118,16 +118,12 @@
     }
   }
 
-  /* Inner text span — reset display:block from [data-font-family] */
-  .eds-tooltip > span {
-    display: inline;
-    font-feature-settings: 'lnum', 'tnum';
-  }
 }
 
 /* Unlayered — beats [data-font-family] display:block on the inner span */
 .eds-tooltip > span {
   display: inline;
+  font-feature-settings: 'lnum', 'tnum';
 }
 
 .eds-tooltip:not(:popover-open) {
