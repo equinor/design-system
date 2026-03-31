@@ -27,6 +27,24 @@ import { Tooltip } from '@equinor/eds-core-react/next'
       },
     },
   },
+  argTypes: {
+    title: {
+      description:
+        'Text displayed inside the tooltip bubble. Should be plain text.',
+      control: 'text',
+    },
+    placement: {
+      description:
+        'Preferred placement relative to the anchor. Auto-flips if the tooltip would overflow the viewport.',
+      control: 'select',
+      options: ['top', 'bottom', 'left', 'right'],
+    },
+    disabled: {
+      description:
+        'When true, the tooltip is not rendered and children are returned unwrapped.',
+      control: 'boolean',
+    },
+  },
 }
 
 export default meta
