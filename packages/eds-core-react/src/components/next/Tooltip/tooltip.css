@@ -1,0 +1,141 @@
+@layer eds-components {
+  .eds-tooltip-anchor {
+    display: inline-block;
+    anchor-name: var(--tooltip-anchor-name);
+  }
+
+  .eds-tooltip {
+    /* UA popover reset */
+    position: fixed;
+    margin: 0;
+    inset: auto;
+    border: none;
+    overflow: visible;
+
+    position-anchor: var(--tooltip-anchor-name);
+    width: max-content;
+
+    /* Arrow size + gap. Margin extends the margin-box; clip-path inset() margin-box
+       reveals only the arrow on the margin side. Technique: https://gist.github.com/alexreardon/2008517fcbebe03f1e41e10b4104174c */
+    --_arrow: var(--eds-spacing-vertical-3xs);
+    clip-path: inset(0 round var(--eds-spacing-border-radius-rounded, 4px)) margin-box;
+
+    background-color: var(--eds-color-text-strong);
+    color: var(--eds-color-text-strong-on-emphasis);
+    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+    padding-block: var(--eds-container-space-vertical);
+    padding-inline: var(--eds-container-space-horizontal);
+    font-feature-settings: 'lnum', 'tnum';
+
+    filter:
+      drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.14))
+      drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.12))
+      drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.2));
+
+    /* Both pseudo-elements render arrows in all directions;
+       clip-path margin-box reveals only the one on the margin side */
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      background: var(--eds-color-text-strong);
+    }
+
+    /* Vertical arrow (top/bottom) — base exactly at clip boundary to prevent bleed */
+    &::before {
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(var(--_arrow) * 2);
+      height: calc(100% + var(--_arrow) * 2);
+      top: calc(var(--_arrow) * -1);
+      clip-path: polygon(
+        0 var(--_arrow),
+        calc(50% - 1px) 0,
+        calc(50% + 1px) 0,
+        100% var(--_arrow),
+        100% calc(100% - var(--_arrow)),
+        calc(50% + 1px) 100%,
+        calc(50% - 1px) 100%,
+        0 calc(100% - var(--_arrow))
+      );
+    }
+
+    /* Horizontal arrow (left/right) */
+    &::after {
+      top: 50%;
+      transform: translateY(-50%);
+      height: calc(var(--_arrow) * 2);
+      width: calc(100% + var(--_arrow) * 2);
+      left: calc(var(--_arrow) * -1);
+      clip-path: polygon(
+        var(--_arrow) 0,
+        calc(100% - var(--_arrow)) 0,
+        100% calc(50% - 1px),
+        100% calc(50% + 1px),
+        calc(100% - var(--_arrow)) 100%,
+        var(--_arrow) 100%,
+        0 calc(50% + 1px),
+        0 calc(50% - 1px)
+      );
+    }
+
+    &[data-placement='top'] {
+      position-area: top center;
+      position-try-fallbacks: --tt-bottom, --tt-left, --tt-right;
+    }
+
+    &[data-placement='bottom'] {
+      position-area: bottom center;
+      position-try-fallbacks: --tt-top, --tt-left, --tt-right;
+    }
+
+    &[data-placement='right'] {
+      position-area: center right;
+      position-try-fallbacks: --tt-left, --tt-top, --tt-bottom;
+    }
+
+    &[data-placement='left'] {
+      position-area: center left;
+      position-try-fallbacks: --tt-right, --tt-top, --tt-bottom;
+    }
+  }
+
+  /* @position-try cannot be nested inside a selector */
+  @position-try --tt-top {
+    position-area: top center;
+    margin: 0 0 var(--_arrow);
+  }
+
+  @position-try --tt-bottom {
+    position-area: bottom center;
+    margin: var(--_arrow) 0 0;
+  }
+
+  @position-try --tt-left {
+    position-area: center left;
+    margin: 0 var(--_arrow) 0 0;
+  }
+
+  @position-try --tt-right {
+    position-area: center right;
+    margin: 0 0 0 var(--_arrow);
+  }
+}
+
+/* Unlayered — beats [data-font-family] margin:0 and display:block */
+.eds-tooltip:not(:popover-open) {
+  display: none;
+}
+.eds-tooltip[data-placement='top'] {
+  margin: 0 0 var(--_arrow);
+}
+.eds-tooltip[data-placement='bottom'] {
+  margin: var(--_arrow) 0 0;
+}
+.eds-tooltip[data-placement='right'] {
+  margin: 0 0 0 var(--_arrow);
+}
+.eds-tooltip[data-placement='left'] {
+  margin: 0 var(--_arrow) 0 0;
+}

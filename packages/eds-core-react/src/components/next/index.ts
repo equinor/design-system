@@ -32,3 +32,6 @@ export type { TextFieldProps } from './TextField'
 
 export { Search } from './Search'
 export type { SearchProps } from './Search'
+
+export { Tooltip } from './Tooltip'
+export type { TooltipPlacement, TooltipProps } from './Tooltip'
