@@ -68,8 +68,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           popover="hint"
           className={['eds-tooltip', className].filter(Boolean).join(' ')}
           data-placement={placement}
-          data-font-family="ui"
-          data-font-size="sm"
           data-space-proportions="squished"
           // Keep tooltip open when mouse travels from trigger to tooltip
           onMouseEnter={() => {
@@ -78,7 +76,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           onMouseLeave={hide}
           {...rest}
         >
-          {title}
+          <span data-font-family="ui" data-font-size="sm">
+            {title}
+          </span>
         </div>
       </span>
     )
