@@ -17,7 +17,7 @@ Uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/P
 and [CSS Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning)
 for zero-JS positioning with automatic viewport-edge flipping via \`@position-try\`.
 
-**Browser support:** CSS Anchor Positioning is [Baseline 2025](https://caniuse.com/css-anchor-positioning) (Chrome 125+, Firefox 135+, Safari 18.2+).
+**Browser support:** CSS Anchor Positioning is [Baseline 2026](https://caniuse.com/css-anchor-positioning) (Chrome 125+, Firefox 135+, Safari 18.2+).
 \`popover="hint"\` is supported in Chrome and Firefox; Safari falls back to \`popover="manual"\` — the tooltip still works, it just won't get free Escape-dismiss until Safari ships \`hint\` support.
 
 \`\`\`tsx
