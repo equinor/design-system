@@ -77,15 +77,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ref={setRef}
           id={tooltipId}
           role="tooltip"
-          // popover="hint": top-layer rendering, Escape + light-dismiss handled by browser.
-          // Does not close auto-mode popovers (menus/dropdowns).
-          // Safari falls back to popover="manual" — JS show/hide still works,
-          // Escape-dismiss unavailable until Safari ships "hint" support.
+          // hint: top-layer + Escape/light-dismiss. Safari falls back to manual (no Escape).
           popover="hint"
           className={['eds-tooltip', className].filter(Boolean).join(' ')}
           data-placement={placement}
           data-space-proportions="squished"
-          // Keep tooltip open when mouse travels from trigger to tooltip
           onMouseEnter={(e) => {
             if (hideTimer.current) clearTimeout(hideTimer.current)
             onMouseEnterProp?.(e)
