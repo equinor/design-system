@@ -13,9 +13,12 @@ const meta: Meta<typeof Tooltip> = {
         component: `
 ⚠️ **Beta Component** - This component is under active development.
 
-Uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+Uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) (\`popover="hint"\`)
 and [CSS Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning)
-for zero-JS positioning.
+for zero-JS positioning with automatic viewport-edge flipping via \`@position-try\`.
+
+**Browser support:** CSS Anchor Positioning is [Baseline 2025](https://caniuse.com/css-anchor-positioning) (Chrome 125+, Firefox 135+, Safari 18.2+).
+\`popover="hint"\` is supported in Chrome and Firefox; Safari falls back to \`popover="manual"\` — the tooltip still works, it just won't get free Escape-dismiss until Safari ships \`hint\` support.
 
 \`\`\`tsx
 import { Tooltip } from '@equinor/eds-core-react/next'

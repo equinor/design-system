@@ -131,12 +131,14 @@ describe('Tooltip (next)', () => {
     })
 
     it('schedules hidePopover on mouse leave', async () => {
-      const user = userEvent.setup()
+      jest.useFakeTimers()
+      const user = userEvent.setup({ delay: null })
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       await user.hover(screen.getByRole('button'))
       await user.unhover(screen.getByRole('button'))
-      await new Promise((r) => setTimeout(r, 150))
+      jest.runAllTimers()
       expect(hidePopoverMock).toHaveBeenCalled()
+      jest.useRealTimers()
     })
 
     it('calls showPopover on focus', async () => {
@@ -147,12 +149,26 @@ describe('Tooltip (next)', () => {
     })
 
     it('calls hidePopover on blur', async () => {
-      const user = userEvent.setup()
+      jest.useFakeTimers()
+      const user = userEvent.setup({ delay: null })
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       await user.tab()
       await user.tab()
-      await new Promise((r) => setTimeout(r, 150))
+      jest.runAllTimers()
       expect(hidePopoverMock).toHaveBeenCalled()
+      jest.useRealTimers()
+    })
+
+    it('cancels hide when mouse enters tooltip (WCAG 1.4.13 hoverable)', async () => {
+      jest.useFakeTimers()
+      const user = userEvent.setup({ delay: null })
+      render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
+      await user.hover(screen.getByRole('button'))
+      await user.unhover(screen.getByRole('button'))
+      await user.hover(screen.getByRole('tooltip', { hidden: true }))
+      jest.runAllTimers()
+      expect(hidePopoverMock).not.toHaveBeenCalled()
+      jest.useRealTimers()
     })
   })
 

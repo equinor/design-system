@@ -1,6 +1,7 @@
 import {
   cloneElement,
   forwardRef,
+  isValidElement,
   useId,
   useRef,
   type CSSProperties,
@@ -11,7 +12,16 @@ import type { TooltipProps } from './Tooltip.types'
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
-    { title, placement = 'top', disabled, children, className, ...rest },
+    {
+      title,
+      placement = 'top',
+      disabled,
+      children,
+      className,
+      onMouseEnter: onMouseEnterProp,
+      onMouseLeave: onMouseLeaveProp,
+      ...rest
+    },
     ref,
   ) {
     const uid = useId()
@@ -47,6 +57,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     if (!active) return children
 
+    if (process.env.NODE_ENV !== 'production' && !isValidElement(children)) {
+      console.error('Tooltip: children must be a single React element')
+    }
+
     return (
       <span
         className="eds-tooltip-anchor"
@@ -70,10 +84,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           data-placement={placement}
           data-space-proportions="squished"
           // Keep tooltip open when mouse travels from trigger to tooltip
-          onMouseEnter={() => {
+          onMouseEnter={(e) => {
             if (hideTimer.current) clearTimeout(hideTimer.current)
+            onMouseEnterProp?.(e)
           }}
-          onMouseLeave={hide}
+          onMouseLeave={(e) => {
+            hide()
+            onMouseLeaveProp?.(e)
+          }}
           {...rest}
         >
           <span data-font-family="ui" data-font-size="sm">

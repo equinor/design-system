@@ -3,7 +3,11 @@ import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
 
 export type TooltipProps = {
-  /** Content displayed inside the tooltip bubble */
+  /**
+   * Content displayed inside the tooltip bubble.
+   * Should be plain text — avoid interactive elements or complex markup
+   * to ensure screen reader compatibility (WCAG 1.4.13).
+   */
   title?: ReactNode
   /** Placement of the tooltip relative to the anchor element
    * @default 'top'
