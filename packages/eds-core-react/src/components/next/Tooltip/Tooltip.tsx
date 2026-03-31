@@ -1,7 +1,6 @@
 import {
   cloneElement,
   forwardRef,
-  isValidElement,
   useId,
   useRef,
   type CSSProperties,
@@ -56,10 +55,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     if (!active) return children
-
-    if (process.env.NODE_ENV !== 'production' && !isValidElement(children)) {
-      console.error('Tooltip: children must be a single React element')
-    }
 
     return (
       <span
