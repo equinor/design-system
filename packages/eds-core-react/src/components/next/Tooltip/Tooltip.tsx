@@ -87,7 +87,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           }}
           {...rest}
         >
-          <span data-font-family="ui" data-font-size="sm">
+          <span
+            className="label"
+            data-font-family="ui"
+            data-font-size="sm"
+            data-baseline="center"
+          >
             {title}
           </span>
         </div>
