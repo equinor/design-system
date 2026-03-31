@@ -77,6 +77,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           className={['eds-tooltip', className].filter(Boolean).join(' ')}
           data-placement={placement}
           data-space-proportions="squished"
+          {...rest}
           onMouseEnter={(e) => {
             if (hideTimer.current) clearTimeout(hideTimer.current)
             onMouseEnterProp?.(e)
@@ -85,7 +86,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             hide()
             onMouseLeaveProp?.(e)
           }}
-          {...rest}
         >
           <span
             className="label"
