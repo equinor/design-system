@@ -166,8 +166,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                     : 'off'
                 }
               >
-                {charCount}
-                {maxLength !== undefined ? ` / ${maxLength}` : ''}
+                {maxLength !== undefined
+                  ? `${charCount} / ${maxLength}`
+                  : charCount}
               </span>
             )}
           </div>
