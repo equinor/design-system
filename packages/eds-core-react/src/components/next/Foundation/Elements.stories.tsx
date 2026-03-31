@@ -158,43 +158,25 @@ export const Code: Story = {
 export const TableText: Story = {
   render: ({ density }) => (
     <div data-density={density}>
-      <table data-color-appearance="neutral">
-        <caption data-vertical-space="md">Table caption — {SPHINX}</caption>
+      <table>
+        <caption>Table caption – {SPHINX}</caption>
         <thead>
           <tr>
-            <th data-space-proportions="squared" data-selectable-space="md">
-              Header one
-            </th>
-            <th data-space-proportions="squared" data-selectable-space="md">
-              Header two
-            </th>
-            <th data-space-proportions="squared" data-selectable-space="md">
-              Header three
-            </th>
+            <th>Header one</th>
+            <th>Header two</th>
+            <th>Header three</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td data-space-proportions="squared" data-selectable-space="md">
-              Sphinx
-            </td>
-            <td data-space-proportions="squared" data-selectable-space="md">
-              of black quartz
-            </td>
-            <td data-space-proportions="squared" data-selectable-space="md">
-              judge my vow
-            </td>
+            <td>Sphinx</td>
+            <td>of black quartz</td>
+            <td>judge my vow</td>
           </tr>
           <tr>
-            <td data-space-proportions="squared" data-selectable-space="md">
-              Sphinx
-            </td>
-            <td data-space-proportions="squared" data-selectable-space="md">
-              of black quartz
-            </td>
-            <td data-space-proportions="squared" data-selectable-space="md">
-              judge my vow
-            </td>
+            <td>Sphinx</td>
+            <td>of black quartz</td>
+            <td>judge my vow</td>
           </tr>
         </tbody>
       </table>
