@@ -38,3 +38,6 @@ export type { SearchProps } from './Search'
 
 export { Link } from './Link'
 export type { LinkProps, LinkVariant } from './Link'
+
+export { Tooltip } from './Tooltip'
+export type { TooltipPlacement, TooltipProps } from './Tooltip'
