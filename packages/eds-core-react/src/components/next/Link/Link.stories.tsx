@@ -77,6 +77,22 @@ export const WithIcons: Story = {
   ),
 }
 
+export const AsChild: Story = {
+  render: () => {
+    const CustomLink = (
+      props: React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    ) => (
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      <a {...props} data-custom-router />
+    )
+    return (
+      <Link asChild>
+        <CustomLink href="/my-page">Router link</CustomLink>
+      </Link>
+    )
+  },
+}
+
 export const ExternalLink: Story = {
   render: () => (
     <Link

@@ -128,6 +128,55 @@ describe('Link (next)', () => {
     })
   })
 
+  describe('asChild', () => {
+    it('renders child element instead of <a>', () => {
+      render(
+        <Link asChild>
+          <button type="button">Link as button</button>
+        </Link>,
+      )
+      expect(screen.getByRole('button')).toBeInTheDocument()
+      expect(screen.getByRole('button')).toHaveTextContent('Link as button')
+      expect(screen.queryByRole('link')).not.toBeInTheDocument()
+    })
+
+    it('merges className onto child', () => {
+      render(
+        <Link asChild className="custom">
+          <button type="button" className="child-class">
+            Link
+          </button>
+        </Link>,
+      )
+      expect(screen.getByRole('button')).toHaveClass(
+        'eds-link',
+        'custom',
+        'child-class',
+      )
+    })
+
+    it('merges data attributes onto child', () => {
+      render(
+        <Link asChild variant="standalone">
+          <a href="/page">Link</a>
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute(
+        'data-variant',
+        'standalone',
+      )
+    })
+
+    it('preserves child href', () => {
+      render(
+        <Link asChild>
+          <a href="/my-route">Router link</a>
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('href', '/my-route')
+    })
+  })
+
   describe('Accessibility', () => {
     it('has no accessibility violations (inline)', async () => {
       const { container } = render(<Link href="#">Link</Link>)
