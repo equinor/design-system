@@ -1,34 +1,10 @@
-@position-try --tooltip-bottom {
-  position-area: bottom;
-  top: var(--_arrow);
-  margin: 0 var(--_arrow) var(--_arrow);
-}
-
-@position-try --tooltip-top {
-  position-area: top;
-  bottom: var(--_arrow);
-  margin: var(--_arrow) var(--_arrow) 0;
-}
-
-@position-try --tooltip-left {
-  position-area: left;
-  right: var(--_arrow);
-  margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
-}
-
-@position-try --tooltip-right {
-  position-area: right;
-  left: var(--_arrow);
-  margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
-}
-
 @layer eds-components {
-  .eds-tooltip-anchor {
-    display: inline-block;
-    anchor-name: var(--tooltip-anchor-name);
-  }
-
   .eds-tooltip {
+    /* Gap between tooltip and anchor; also used for the arrow height */
+    --_arrow: var(--eds-spacing-vertical-3xs);
+    /* Width of the arrow tip (1px = visually sharp, matches Figma) */
+    --_tip: 1px;
+
     /* UA popover reset */
     position: fixed;
     margin: 0;
@@ -38,26 +14,22 @@
 
     position-anchor: var(--tooltip-anchor-name);
     width: max-content;
-
-    /* Arrow height = gap between tooltip and anchor */
-    --_arrow: var(--eds-spacing-vertical-3xs);
-
     background-color: var(--eds-color-text-strong);
     color: var(--eds-color-text-strong-on-emphasis);
-    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+    border-radius: var(--eds-spacing-border-radius-rounded);
     padding-block: var(--eds-container-space-vertical);
     padding-inline: var(--eds-container-space-horizontal);
 
-    /* Rectangle shadow — always downward, independent of arrow direction */
+    /* Rectangle shadow — always downward regardless of arrow direction (no shadow tokens in EDS 2.0) */
     box-shadow:
       0px 2px 4px rgba(0, 0, 0, 0.14),
       0px 3px 4px rgba(0, 0, 0, 0.12),
       0px 1px 5px rgba(0, 0, 0, 0.2);
 
-    /* Arrow: extends --_arrow beyond all 4 sides of the tooltip.
-       All 4 arrow shapes are drawn; margin: inherit shifts the ::before so
-       3 arrows hide behind the tooltip body (z-index:-1). The side with
-       margin:0 stays in the gap — that arrow is visible. */
+    /* Arrow: ::before is expanded by --_arrow on all sides via `inset: calc(-1 * var(--_arrow))`.
+       A 16-point star clip-path pre-draws all 4 arrows. `margin: inherit` shifts the pseudo-element
+       to match the tooltip's own margin, so 3 arrows hide behind the tooltip body (z-index:-1)
+       and only the gap-side arrow remains visible. */
     &::before {
       content: '';
       position: absolute;
@@ -66,25 +38,25 @@
       inset: calc(-1 * var(--_arrow));
       margin: inherit;
       clip-path: polygon(
-        /* top arrow — ±1px collapses the tip to a sharp point */
+        /* top */
         calc(50% - var(--_arrow)) var(--_arrow),
-        calc(50% - 1px) 0,
-        calc(50% + 1px) 0,
+        calc(50% - var(--_tip)) 0,
+        calc(50% + var(--_tip)) 0,
         calc(50% + var(--_arrow)) var(--_arrow),
-        /* right arrow */
+        /* right */
         calc(100% - var(--_arrow)) calc(50% - var(--_arrow)),
-        100% calc(50% - 1px),
-        100% calc(50% + 1px),
+        100% calc(50% - var(--_tip)),
+        100% calc(50% + var(--_tip)),
         calc(100% - var(--_arrow)) calc(50% + var(--_arrow)),
-        /* bottom arrow */
+        /* bottom */
         calc(50% + var(--_arrow)) calc(100% - var(--_arrow)),
-        calc(50% + 1px) 100%,
-        calc(50% - 1px) 100%,
+        calc(50% + var(--_tip)) 100%,
+        calc(50% - var(--_tip)) 100%,
         calc(50% - var(--_arrow)) calc(100% - var(--_arrow)),
-        /* left arrow */
+        /* left */
         var(--_arrow) calc(50% + var(--_arrow)),
-        0 calc(50% + 1px),
-        0 calc(50% - 1px),
+        0 calc(50% + var(--_tip)),
+        0 calc(50% - var(--_tip)),
         var(--_arrow) calc(50% - var(--_arrow))
       );
     }
@@ -116,16 +88,40 @@
       margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
       position-try-fallbacks: flip-inline, --tooltip-right;
     }
+
+    & .label {
+      font-feature-settings: 'lnum', 'tnum';
+    }
   }
 
+  .eds-tooltip-anchor {
+    display: inline-block;
+    anchor-name: var(--tooltip-anchor-name);
+  }
 }
 
-/* Unlayered — beats [data-font-family] display:block on the inner span */
-.eds-tooltip > span {
-  display: inline;
-  font-feature-settings: 'lnum', 'tnum';
+/* @position-try must be outside @layer per spec. */
+
+@position-try --tooltip-bottom {
+  position-area: bottom;
+  top: var(--_arrow);
+  margin: 0 var(--_arrow) var(--_arrow);
 }
 
-.eds-tooltip:not(:popover-open) {
-  display: none;
+@position-try --tooltip-top {
+  position-area: top;
+  bottom: var(--_arrow);
+  margin: var(--_arrow) var(--_arrow) 0;
+}
+
+@position-try --tooltip-left {
+  position-area: left;
+  right: var(--_arrow);
+  margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
+}
+
+@position-try --tooltip-right {
+  position-area: right;
+  left: var(--_arrow);
+  margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
 }
