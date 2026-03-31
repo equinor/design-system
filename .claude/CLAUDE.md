@@ -168,6 +168,18 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 - **CSS classes**: `eds-` prefix on root class (`eds-button`, `eds-text-area`); simple nested names for internal elements (`.label-row`, `.icon`); variants via data attributes
 - **Files**: Match export (`Icon.tsx`, `Icon.types.ts`, `icon.css`)
 
+## Polymorphism (`asChild` + `Slot`)
+
+EDS 2.0 uses the `asChild` pattern for components that need polymorphic rendering (e.g. Link, Button). This lets consumers swap the underlying element for router links, custom components, etc.
+
+- **`Slot`** utility in `packages/eds-core-react/src/components/next/Slot/` merges parent props onto the child element
+- Add `asChild?: boolean` to the component's props type
+- When `asChild` is true, render `<Slot>` instead of the default element
+- Extract shared props into a `sharedProps` object to avoid duplication
+- See `Slot/README.md` for merge behavior details and usage examples
+
+Components that should support `asChild`: **Link**, **Button**, and any component rendering an interactive element that consumers may want to swap.
+
 ## Accessibility
 
 - WCAG 2.1 AA compliance required
