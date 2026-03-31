@@ -64,12 +64,12 @@ export const LongContent: StoryFn<TooltipProps> = () => (
 export const FlipTest: StoryFn<TooltipProps> = () => (
   <div
     style={{
-      position: 'fixed',
-      inset: 0,
+      minHeight: '100vh',
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
       gridTemplateRows: '1fr 1fr 1fr',
       padding: '0.5rem',
+      boxSizing: 'border-box',
     }}
   >
     {/* Corners */}
@@ -178,6 +178,69 @@ export const FlipTest: StoryFn<TooltipProps> = () => (
 )
 
 FlipTest.parameters = { layout: 'fullscreen' }
+
+export const TopBottomFlipTest: StoryFn<TooltipProps> = () => (
+  <div
+    style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      padding: '0.5rem',
+      boxSizing: 'border-box',
+    }}
+  >
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Tooltip title="placement=top, should flip to bottom" placement="top">
+        <Button>↑ top (near top edge)</Button>
+      </Tooltip>
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Tooltip title="placement=top, no flip needed" placement="top">
+        <Button>top (center)</Button>
+      </Tooltip>
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Tooltip title="placement=bottom, should flip to top" placement="bottom">
+        <Button>↓ bottom (near bottom edge)</Button>
+      </Tooltip>
+    </div>
+  </div>
+)
+
+TopBottomFlipTest.parameters = { layout: 'fullscreen' }
+
+export const LeftRightFlipTest: StoryFn<TooltipProps> = () => (
+  <div
+    style={{
+      minHeight: '100vh',
+      padding: '4rem 0.5rem',
+      boxSizing: 'border-box',
+    }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: '4rem',
+      }}
+    >
+      <Tooltip title="placement=left, should flip to right" placement="left">
+        <Button>← left (near left edge)</Button>
+      </Tooltip>
+      <Tooltip title="placement=right, should flip to left" placement="right">
+        <Button>right (near right edge) →</Button>
+      </Tooltip>
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Tooltip title="placement=right, no flip needed" placement="right">
+        <Button>right (center)</Button>
+      </Tooltip>
+    </div>
+  </div>
+)
+
+LeftRightFlipTest.parameters = { layout: 'fullscreen' }
 
 export const SquareTrigger: StoryFn<TooltipProps> = () => (
   <div style={{ display: 'flex', gap: '3rem', padding: '4rem' }}>
