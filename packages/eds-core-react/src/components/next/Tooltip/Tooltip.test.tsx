@@ -5,18 +5,23 @@ import { axe } from 'jest-axe'
 import { Tooltip } from '.'
 
 // jsdom does not implement the Popover API
+const showPopoverMock = jest.fn(function (this: HTMLElement) {
+  this.setAttribute('data-popover-open', '')
+})
+const hidePopoverMock = jest.fn(function (this: HTMLElement) {
+  this.removeAttribute('data-popover-open')
+})
+
 beforeAll(() => {
-  HTMLElement.prototype.showPopover = jest.fn(function (this: HTMLElement) {
-    this.setAttribute('data-popover-open', '')
-  })
-  HTMLElement.prototype.hidePopover = jest.fn(function (this: HTMLElement) {
-    this.removeAttribute('data-popover-open')
-  })
-  const originalMatches = HTMLElement.prototype.matches
-  HTMLElement.prototype.matches = function (selector: string) {
+  HTMLElement.prototype.showPopover = showPopoverMock
+  HTMLElement.prototype.hidePopover = hidePopoverMock
+  HTMLElement.prototype.matches = function (
+    this: HTMLElement,
+    selector: string,
+  ) {
     if (selector === ':popover-open')
       return this.hasAttribute('data-popover-open')
-    return originalMatches.call(this, selector)
+    return Element.prototype.matches.call(this, selector)
   }
 })
 
@@ -122,7 +127,7 @@ describe('Tooltip (next)', () => {
       const user = userEvent.setup()
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       await user.hover(screen.getByRole('button'))
-      expect(HTMLElement.prototype.showPopover).toHaveBeenCalled()
+      expect(showPopoverMock).toHaveBeenCalled()
     })
 
     it('schedules hidePopover on mouse leave', async () => {
@@ -131,14 +136,14 @@ describe('Tooltip (next)', () => {
       await user.hover(screen.getByRole('button'))
       await user.unhover(screen.getByRole('button'))
       await new Promise((r) => setTimeout(r, 150))
-      expect(HTMLElement.prototype.hidePopover).toHaveBeenCalled()
+      expect(hidePopoverMock).toHaveBeenCalled()
     })
 
     it('calls showPopover on focus', async () => {
       const user = userEvent.setup()
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       await user.tab()
-      expect(HTMLElement.prototype.showPopover).toHaveBeenCalled()
+      expect(showPopoverMock).toHaveBeenCalled()
     })
 
     it('calls hidePopover on blur', async () => {
@@ -147,7 +152,7 @@ describe('Tooltip (next)', () => {
       await user.tab()
       await user.tab()
       await new Promise((r) => setTimeout(r, 150))
-      expect(HTMLElement.prototype.hidePopover).toHaveBeenCalled()
+      expect(hidePopoverMock).toHaveBeenCalled()
     })
   })
 
