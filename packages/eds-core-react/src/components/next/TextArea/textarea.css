@@ -44,7 +44,6 @@
 
     & .char-count {
       flex-shrink: 0;
-      margin-inline-start: auto;
       color: var(--eds-color-text-subtle);
     }
   }

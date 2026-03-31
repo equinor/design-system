@@ -160,7 +160,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                 className="char-count"
                 data-font-family="ui"
                 data-font-size="xs"
-                aria-live="polite"
+                aria-live={
+                  maxLength !== undefined && charCount >= maxLength * 0.8
+                    ? 'polite'
+                    : 'off'
+                }
               >
                 {charCount}
                 {maxLength !== undefined ? ` / ${maxLength}` : ''}
