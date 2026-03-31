@@ -77,8 +77,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ref={setRef}
           id={tooltipId}
           role="tooltip"
-          // popover="hint": top-layer rendering, Escape + light dismiss handled
-          // by browser. Does not close auto-mode popovers (menus/dropdowns).
+          // popover="hint": top-layer rendering, Escape + light-dismiss handled by browser.
+          // Does not close auto-mode popovers (menus/dropdowns).
+          // Safari falls back to popover="manual" — JS show/hide still works,
+          // Escape-dismiss unavailable until Safari ships "hint" support.
           popover="hint"
           className={['eds-tooltip', className].filter(Boolean).join(' ')}
           data-placement={placement}
