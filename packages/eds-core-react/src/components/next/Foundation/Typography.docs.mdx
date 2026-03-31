@@ -1,0 +1,60 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as TypographyStories from './Typography.stories'
+import * as ButtonStories from '../Button/Button.stories'
+
+<Meta title="EDS 2.0 (beta)/Foundation/Typography" />
+
+# Typography
+
+EDS 2.0 uses a modular type scale — font sizes follow a geometric progression based on a `--_base` value that shifts per density mode. Only the base changes; all derived sizes and line-heights update automatically.
+
+## Typefaces
+
+| Context | Typeface |
+|---|---|
+| UI labels & body copy | **Inter** (variable) |
+| Headings | **Equinor** (brand typeface) |
+
+Inter is loaded from the EDS CDN and covers all UI text: button labels, form fields, captions, and prose. Equinor is reserved for display headings.
+
+## Line-height scales
+
+Two line-height scales are available for every size step:
+
+**`squished`** — tight leading designed for UI controls. Use this wherever text sits inside a component (buttons, inputs, badges, tabs). The reduced line-height keeps touch targets compact without sacrificing legibility on a single line.
+
+**`default`** — comfortable leading for reading. Use this for body copy, descriptions, tooltips, and any text that may wrap to multiple lines in a prose context.
+
+<Canvas of={TypographyStories.UIText} />
+
+<Canvas of={TypographyStories.LongFormText} />
+
+## Baseline grid alignment
+
+Single-line UI text is **not** snapped to the baseline grid. Instead, the component derives its height from cap-height (`1cap`) rounded to the nearest 4 px, and distributes the remaining line-height symmetrically as padding. This keeps the element height predictable and optically centred regardless of font.
+
+When text must wrap — as a last resort — the `multiline` prop switches to baseline trimming (`text-box: trim-both ex alphabetic`). The top of the text block is aligned to the baseline grid so that multi-line content sits consistently alongside other elements.
+
+<Canvas of={ButtonStories.MultilineAntiPattern} />
+
+> **Anti-pattern.** Multi-line button labels are harder to scan and weaker as call-to-action elements. Shorten the label instead. The `multiline` prop exists only as a safety valve, never as a design choice.
+
+## Size scale
+
+The scale uses equal-ratio steps of `pow(2, n/5)` — five steps per octave — anchored at `lg` (= `--_base`). Each density mode changes only the base:
+
+| Density | Base |
+|---|---|
+| Relaxed | 18.5 px |
+| Spacious (default) | 16 px |
+| Comfortable | 14 px |
+
+| Step | Multiplier | Spacious approx. |
+|---|---|---|
+| `xs` | ×2^(−3/5) ≈ 0.66 | ~10.5 px |
+| `sm` | ×2^(−2/5) ≈ 0.76 | ~12 px |
+| `md` | ×2^(−1/5) ≈ 0.87 | ~14 px |
+| `lg` | ×1 | 16 px |
+| `xl` | ×2^(1/5) ≈ 1.15 | ~18.5 px |
+| `2xl` | ×2^(2/5) ≈ 1.32 | ~21 px |
+| `3xl` | ×2^(3/5) ≈ 1.52 | ~24.5 px |

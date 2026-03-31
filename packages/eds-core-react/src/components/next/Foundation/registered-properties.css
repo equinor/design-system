@@ -4,3 +4,9 @@
   initial-value: 0;
   syntax: '<length>';
 }
+
+@property --captured-size-2 {
+  inherits: false;
+  initial-value: 0;
+  syntax: '<length>';
+}
