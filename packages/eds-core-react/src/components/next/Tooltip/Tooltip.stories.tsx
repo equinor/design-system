@@ -36,7 +36,7 @@ import { Tooltip } from '@equinor/eds-core-react/next'
     placement: {
       description:
         'Preferred placement relative to the anchor. Auto-flips if the tooltip would overflow the viewport.',
-      control: 'select',
+      control: 'radio',
       options: ['top', 'bottom', 'left', 'right'],
     },
     disabled: {
