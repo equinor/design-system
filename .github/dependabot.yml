@@ -15,16 +15,12 @@ updates:
           - 'storybook'
           - '@storybook/*'
           - 'eslint-plugin-storybook'
-        update-types:
-          - major
       react:
         patterns:
           - 'react'
           - 'react-dom'
           - '@types/react'
           - '@types/react-dom'
-        update-types:
-          - major
       react-aria:
         patterns:
           - 'react-aria'
@@ -32,28 +28,20 @@ updates:
           - '@react-stately/*'
           - '@react-types/*'
           - '@internationalized/*'
-        update-types:
-          - major
       rollup:
         patterns:
           - 'rollup'
           - '@rollup/*'
           - 'rollup-plugin-*'
-        update-types:
-          - major
       tanstack:
         patterns:
           - '@tanstack/*'
-        update-types:
-          - major
       eslint:
         patterns:
           - 'eslint'
           - 'eslint-*'
           - '@typescript-eslint/*'
           - '@eslint/*'
-        update-types:
-          - major
       testing:
         patterns:
           - 'jest'
@@ -61,8 +49,6 @@ updates:
           - '@testing-library/*'
           - '@types/jest'
           - '@playwright/test'
-        update-types:
-          - major
       all-dependencies:
         patterns:
           - '*'
