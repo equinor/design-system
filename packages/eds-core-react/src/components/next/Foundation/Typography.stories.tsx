@@ -1,15 +1,17 @@
 import { Fragment } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import './typography.css'
+import page from './Typography.docs.mdx'
 
 type Args = {
   density: 'relaxed' | 'spacious' | 'comfortable'
-  lineHeight: 'squished' | 'normal'
+  lineHeight: 'squished' | 'default'
 }
 
 const meta: Meta<Args> = {
   title: 'EDS 2.0 (beta)/Foundation/Typography',
   parameters: {
+    docs: { page },
     controls: { expanded: true },
   },
   argTypes: {
@@ -20,7 +22,7 @@ const meta: Meta<Args> = {
     },
     lineHeight: {
       control: 'radio',
-      options: ['squished', 'normal'],
+      options: ['squished', 'default'],
       description: 'Line-height scale',
     },
   },
@@ -82,8 +84,8 @@ export const UIText: Story = {
               className="typo-centered"
               style={{
                 margin: 0,
-                fontSize: `var(--font-size-${size})`,
-                lineHeight: `var(--line-height-${lineHeight}-${size})`,
+                fontSize: `var(--eds-typography-ui-body-${size}-font-size)`,
+                lineHeight: `var(--eds-typography-ui-body-${size}-line-height-${lineHeight})`,
               }}
             >
               Save changes
@@ -92,8 +94,8 @@ export const UIText: Story = {
               className="typo-baseline"
               style={{
                 margin: 0,
-                fontSize: `var(--font-size-${size})`,
-                lineHeight: `var(--line-height-${lineHeight}-${size})`,
+                fontSize: `var(--eds-typography-ui-body-${size}-font-size)`,
+                lineHeight: `var(--eds-typography-ui-body-${size}-line-height-${lineHeight})`,
               }}
             >
               Save changes
@@ -119,7 +121,7 @@ export const UIText: Story = {
 
 export const LongFormText: Story = {
   args: {
-    lineHeight: 'normal',
+    lineHeight: 'default',
   },
   render: ({ density, lineHeight }) => (
     <div
@@ -149,8 +151,8 @@ export const LongFormText: Story = {
             className="typo-baseline"
             style={{
               margin: 0,
-              fontSize: `var(--font-size-${size})`,
-              lineHeight: `var(--line-height-${lineHeight}-${size})`,
+              fontSize: `var(--eds-typography-ui-body-${size}-font-size)`,
+              lineHeight: `var(--eds-typography-ui-body-${size}-line-height-${lineHeight})`,
             }}
           >
             {SPHINX} {SPHINX} {SPHINX}

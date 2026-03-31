@@ -1,11 +1,9 @@
-@import './registered-properties.css';
-@import './typography.css';
-@import './relaxed-density.css';
+@import '../Foundation/registered-properties.css';
 
 @layer eds-components {
   .eds-button {
-    --_label-font-size: var(--font-size-md);
-    --_label-line-height: var(--line-height-squished-md);
+    --_label-font-size: var(--eds-typography-ui-body-md-font-size);
+    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
     --_label-height: round(1cap, 4px);
     --_font-family: var(--eds-typography-ui-body-font-family);
     --_color: var(--eds-color-text-strong-on-emphasis);
@@ -24,8 +22,6 @@
 
     box-sizing: border-box;
     min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
-
-    /* min-height: var(--_min-height); */
     padding-block: calc(
       var(--_padding-block) -
         (var(--_label-line-height) - var(--_label-height)) / 2
@@ -94,49 +90,30 @@
     }
 
     & > svg {
-      --_default-icon-size: 24px;
+      --captured-size-1: var(--_label-font-size);
+      --_icon-size: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16);
 
-      width: calc(
-        var(--_default-icon-size) * tan(atan2(var(--_label-font-size), 1px)) /
-          16
-      );
-      height: calc(
-        var(--_default-icon-size) * tan(atan2(var(--_label-font-size), 1px)) /
-          16
-      );
-      margin-block: calc(-0.5em + 6px);
+      width: var(--_icon-size);
+      height: var(--_icon-size);
+      margin-block: calc(-0.5em + 6px); /* TODO: Replace magic number */
       margin-inline: -0.2em;
 
-      font-size: calc(
-        var(--_default-icon-size) * tan(atan2(var(--_label-font-size), 1px)) /
-          16
-      );
+      font-size: var(--_icon-size);
     }
   }
 
   /* ===== SIZE VARIANTS ===== */
-  /*
-   * TODO: Rephrase this comment!
-   * Button height is controlled by min-height.
-   * The span keeps its natural line-height and is centered by flexbox.
-   *
-   * Spacious (default): sm=24px, md=36px, lg=44px
-   * Comfortable:        sm=20px, md=24px, lg=36px
-   */
+  /* Font size and line-height scale with data-selectable-space.
+   * Button height is derived from padding-block + line-height. */
 
   .eds-button[data-selectable-space='lg'] {
-    --_label-font-size: var(--font-size-lg);
-    --_label-line-height: var(--line-height-squished-lg);
-  }
-
-  .eds-button[data-selectable-space='md'] {
-    --_label-font-size: var(--font-size-md);
-    --_label-line-height: var(--line-height-squished-md);
+    --_label-font-size: var(--eds-typography-ui-body-lg-font-size);
+    --_label-line-height: var(--eds-typography-ui-body-lg-line-height-squished);
   }
 
   .eds-button[data-selectable-space='sm'] {
-    --_label-font-size: var(--font-size-sm);
-    --_label-line-height: var(--line-height-squished-sm);
+    --_label-font-size: var(--eds-typography-ui-body-sm-font-size);
+    --_label-line-height: var(--eds-typography-ui-body-sm-line-height-squished);
   }
 
   /* ===== ICON-ONLY BUTTON ===== */

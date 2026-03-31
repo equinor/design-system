@@ -8,8 +8,56 @@ legend {
 
 /* Storybook color scheme wrapper */
 .eds-storybook-wrapper {
-  background-color: var(--eds-color-bg-neutral-surface);
   color: var(--eds-color-text-strong);
-  padding: 1rem;
   min-height: 100%;
+  padding: 1rem;
+  background-color: var(--eds-color-bg-neutral-surface);
+}
+
+/* Debug grid */
+body.eds-debug-grid::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+      to left,
+      transparent var(--_padding-inline),
+      #f005 var(--_padding-inline),
+      #f005 calc(var(--_padding-inline) + 1px),
+      transparent calc(var(--_padding-inline) + 1px),
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent var(--_padding-inline),
+      #f005 var(--_padding-inline),
+      #f005 calc(var(--_padding-inline) + 1px),
+      transparent calc(var(--_padding-inline) + 1px),
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      to top,
+      transparent var(--_padding-stack),
+      #f005 var(--_padding-stack),
+      #f005 calc(var(--_padding-stack) + 1px),
+      transparent calc(var(--_padding-stack) + 1px),
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent var(--_padding-stack),
+      #f005 var(--_padding-stack),
+      #f005 calc(var(--_padding-stack) + 1px),
+      transparent calc(var(--_padding-stack) + 1px),
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      #f002 0,
+      #f002 4px,
+      transparent 4px,
+      transparent 8px
+    );
 }
