@@ -42,7 +42,7 @@ ComponentName/
   index.ts               # Named exports only
   ComponentName.tsx      # Main component with forwardRef
   ComponentName.types.ts # TypeScript types with JSDoc
-  componentname.css      # Vanilla CSS with BEM + design tokens
+  componentname.css      # Vanilla CSS with design tokens
   componentName.figma.tsx # Figma Code Connect file for mapping code to Figma props
   ComponentName.test.tsx # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
@@ -107,20 +107,24 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
 })
 ```
 
-### CSS (Vanilla + BEM + Tokens)
+### CSS (Vanilla + Tokens + Nesting)
+
+One `eds-`-prefixed root class per component. Internal elements use simple class names scoped by CSS nesting. Variants and state use data attributes.
 
 ```css
-.icon {
-  font-size: var(--eds-typography-icon-size, 1.5em);
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
-}
+@layer eds-components {
+  .eds-icon {
+    font-size: var(--eds-typography-icon-size, 1.5em);
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
 
-.icon[data-icon-size='lg'] {
-  --_explicit-size: var(--eds-sizing-icon-lg);
-  width: var(--_explicit-size);
-  height: var(--_explicit-size);
+    &[data-icon-size='lg'] {
+      --_explicit-size: var(--eds-sizing-icon-lg);
+      width: var(--_explicit-size);
+      height: var(--_explicit-size);
+    }
+  }
 }
 ```
 
@@ -161,7 +165,7 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 
 - **Components/Types**: PascalCase (`Button`, `ButtonProps`)
 - **Variables/Functions**: camelCase (`isDisabled`, `useToken`)
-- **CSS classes**: lowercase BEM (`icon`, `button__label--disabled`)
+- **CSS classes**: `eds-` prefix on root class (`eds-button`, `eds-text-area`); simple nested names for internal elements; variants via data attributes
 - **Files**: Match export (`Icon.tsx`, `Icon.types.ts`, `icon.css`)
 
 ## Accessibility

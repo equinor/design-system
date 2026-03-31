@@ -13,7 +13,7 @@ MyComponent/
   index.ts              # Export only
   MyComponent.tsx       # Component implementation
   MyComponent.types.ts  # Props and type definitions
-  my-component.css       # Styles (vanilla CSS, BEM)
+  my-component.css       # Styles (vanilla CSS, nesting, tokens)
   MyComponent.test.tsx  # Unit tests (Jest + Testing Library)
   MyComponent.stories.tsx # Storybook documentation
 ```

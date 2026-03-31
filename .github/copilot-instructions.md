@@ -17,7 +17,7 @@ Equinor Design System (EDS) is a monorepo with component libraries and design to
 - [Global standards](./instructions/global-coding.instructions.md) - Accessibility, naming, exports
 - [TypeScript](./instructions/ts.instructions.md) - Type patterns and testing
 - [React](./instructions/react.instructions.md) - Components, hooks, file structure
-- [Styling](./instructions/styling.instructions.md) - CSS, BEM, responsive design
+- [Styling](./instructions/styling.instructions.md) - CSS, nesting, tokens, responsive design
 - [Figma](./instructions/figma.instructions.md) - Design-to-code workflow
 - [Markdown](./instructions/markdown.instructions.md) - Documentation format
 

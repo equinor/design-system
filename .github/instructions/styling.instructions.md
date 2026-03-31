@@ -20,23 +20,25 @@ TextInput.tsx → text-input.css
 DataGrid.tsx → data-grid.css
 ```
 
-**Classes:** BEM format with block as component name
+**Classes:** One `eds-`-prefixed root class per component. Internal elements use simple names scoped by CSS nesting. Variants and state via data attributes.
 
 ```css
-.text-input {
-  /* block */
-}
-.text-input__label {
-  /* element */
-}
-.text-input__input {
-  /* element */
-}
-.text-input--disabled {
-  /* modifier */
-}
-.text-input--error {
-  /* modifier */
+@layer eds-components {
+  .eds-text-input {
+    /* Root — eds-prefixed */
+
+    & .label {
+      /* Internal element — simple name, scoped by nesting */
+    }
+
+    &[data-disabled] {
+      /* State via data attribute */
+    }
+
+    &[data-variant='error'] {
+      /* Variant via data attribute */
+    }
+  }
 }
 ```
 

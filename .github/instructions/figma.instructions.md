@@ -26,4 +26,4 @@ When creating a component from Figma design:
 - [ ] Component implements only what's designed
 - [ ] Storybook story includes all design variations
 - [ ] Tests cover interaction and edge cases
-- [ ] CSS follows BEM convention
+- [ ] CSS follows component conventions (eds-prefixed root class, nesting, data attributes)
