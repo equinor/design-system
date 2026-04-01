@@ -45,16 +45,6 @@ const meta: Meta<typeof Input> = {
         defaultValue: { summary: 'text' },
       },
     },
-    as: {
-      control: 'radio',
-      options: ['input', 'textarea'],
-      description: 'Render as single-line input or multi-line textarea',
-      table: {
-        category: 'Core',
-        defaultValue: { summary: 'input' },
-      },
-    },
-
     // States
     invalid: {
       control: 'boolean',
@@ -439,10 +429,6 @@ export const DensityWithAdornments: StoryFn<InputProps> = () => {
   )
 }
 DensityWithAdornments.storyName = 'Density with Adornments'
-
-export const Casted: StoryFn<InputProps> = (args) => {
-  return <Input as="textarea" {...args} />
-}
 
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (

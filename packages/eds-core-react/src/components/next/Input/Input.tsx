@@ -75,7 +75,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
         )}
         <Component
           ref={ref as React.Ref<HTMLInputElement & HTMLTextAreaElement>}
-          type={type}
+          type={Component === 'textarea' ? undefined : type}
           disabled={disabled}
           readOnly={readOnly}
           className={['eds-input', className].filter(Boolean).join(' ')}

@@ -38,16 +38,6 @@ const meta: Meta<typeof TextField> = {
         defaultValue: { summary: 'text' },
       },
     },
-    as: {
-      control: 'radio',
-      options: ['input', 'textarea'],
-      description: 'Render as single-line input or multi-line textarea',
-      table: {
-        category: 'Core',
-        defaultValue: { summary: 'input' },
-      },
-    },
-
     // Label
     label: {
       control: 'text',

@@ -13,7 +13,10 @@ export type InputProps = {
   endText?: string
   /** Adornment at the end (icons, buttons, etc.) */
   endAdornment?: ReactNode
-  /** Render as input or textarea */
+  /**
+   * Render as input or textarea.
+   * @internal Use the TextArea component instead of `as="textarea"`.
+   */
   as?: 'input' | 'textarea'
   /** Class name applied to the container element */
   containerClassName?: string
