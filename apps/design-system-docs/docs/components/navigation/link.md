@@ -9,13 +9,13 @@ Links are clickable text elements that take users to other pages, documents, or 
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-link--introduction"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--introduction"
   width="100%"
   height="83"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--introduction)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--introduction)
 
 ## When to Use
 
@@ -47,13 +47,13 @@ Inline links sit within body text and inherit the surrounding typography. Use th
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-link--inline"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--inline"
   width="100%"
   height="115"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--inline)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--inline)
 
 #### Standalone
 
@@ -61,13 +61,13 @@ Standalone links are used outside of body text, such as in navigation areas, car
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-link--standalone"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--standalone"
   width="100%"
   height="83"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--standalone)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--standalone)
 
 ### External Links
 
@@ -77,13 +77,13 @@ Use `target="_blank"` with `rel="noreferrer"` to open external links in a new ta
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-link--external-link"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--external-link"
   width="100%"
   height="83"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--external-link)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--external-link)
 
 ### Link Text
 
