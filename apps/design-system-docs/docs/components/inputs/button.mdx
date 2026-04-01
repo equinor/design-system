@@ -2,10 +2,16 @@
 title: Button
 sidebar_position: 2
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import MobileButton from '../../mobile/components/inputs/button.mdx';
 
 # Button
 
 Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
 
 <iframe
   class="sb-iframe"
@@ -16,6 +22,14 @@ Buttons are the primary action triggers in our design system. They help users pe
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--default)
+
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+![Button preview](https://raw.githubusercontent.com/equinor/design-system-mobile/main/docs/assets/button-preview.gif)
+
+</TabItem>
+</Tabs>
 
 ## When to Use
 
@@ -47,6 +61,9 @@ Use variants to guide users to the most important action:
 | Secondary | Medium   | Supporting actions (e.g., "Cancel")    |
 | Ghost     | Low      | Tertiary actions (e.g., toolbar icons) |
 
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
+
 <iframe
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--all-variants"
@@ -57,6 +74,14 @@ Use variants to guide users to the most important action:
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--all-variants)
 
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+![Button variants](https://raw.githubusercontent.com/equinor/design-system-mobile/main/docs/assets/button-variants.gif)
+
+</TabItem>
+</Tabs>
+
 ### Tones
 
 Tones communicate the intent or nature of an action:
@@ -64,6 +89,9 @@ Tones communicate the intent or nature of an action:
 - **Accent**: The default tone for standard actions. Uses the brand colour to draw attention.
 - **Neutral**: A subdued option for actions that shouldn't compete for attention.
 - **Danger**: Reserved for destructive actions (e.g., "Delete"). Danger buttons should be placed in opposite order to positive actions in button groups to prevent accidental activation.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
 
 <iframe
   class="sb-iframe"
@@ -74,6 +102,14 @@ Tones communicate the intent or nature of an action:
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--tones)
+
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+![Button tones](https://raw.githubusercontent.com/equinor/design-system-mobile/main/docs/assets/button-tones.gif)
+
+</TabItem>
+</Tabs>
 
 ### Sizes
 
@@ -115,6 +151,9 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 - Can be circular for a softer appearance
 - Must always have an accessible name for screen readers
 
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
+
 <iframe
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--icon-only-variants"
@@ -125,9 +164,20 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--icon-only-variants)
 
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+![Icon-only buttons](https://raw.githubusercontent.com/equinor/design-system-mobile/main/docs/assets/button-icon-only.gif)
+
+</TabItem>
+</Tabs>
+
 **Circular icon-only buttons**
 
 Use the `round` prop on icon-only buttons to create circular buttons for a softer appearance.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
 
 <iframe
   class="sb-iframe"
@@ -138,6 +188,14 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--circular-icon-only)
+
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+![Circular icon-only buttons](https://raw.githubusercontent.com/equinor/design-system-mobile/main/docs/assets/button-circular.gif)
+
+</TabItem>
+</Tabs>
 
 ## Accessibility
 
@@ -151,9 +209,26 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
 - Always provide an accessible name for screen readers
 - Avoid icon-only buttons unless space is severely constrained (e.g., toolbars)
 
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
+
 **Comfortable Density**
 
 Comfortable density should come with the option to switch to spacious mode for accessibility reasons.
+
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+The mobile button sets `accessibilityRole="button"` automatically. When disabled, `accessibilityState={{ disabled: true }}` is set.
+
+For icon-only buttons (`Button.Icon`), always provide an `accessibilityLabel`:
+
+```tsx
+<Button.Icon name="add" accessibilityLabel="Add item" />
+```
+
+</TabItem>
+</Tabs>
 
 ## Figma
 
@@ -187,6 +262,38 @@ For buttons with icons:
 - Toggle **Show Leading Icon** to add an icon before the label
 - Toggle **Show Trailing Icon** to add an icon after the label
 - Click the icon instance to swap to a different icon from the library
+
+## Development
+
+<Tabs groupId="platform" queryString>
+<TabItem value="web" label="Web" default>
+
+### Installation
+
+```bash
+npm install @equinor/eds-core-react
+```
+
+### Usage
+
+```tsx
+import { Button } from '@equinor/eds-core-react'
+
+<Button>Click me</Button>
+<Button variant="secondary">Cancel</Button>
+<Button variant="ghost" tone="danger">Delete</Button>
+```
+
+For full API documentation and interactive examples, see the [Button Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--default).
+
+</TabItem>
+<TabItem value="mobile" label="Mobile">
+
+{/* Content pulled from equinor/design-system-mobile via docusaurus-plugin-remote-content */}
+<MobileButton />
+
+</TabItem>
+</Tabs>
 
 ## Do's and Don'ts
 

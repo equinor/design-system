@@ -59,6 +59,18 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  plugins: [
+    [
+      'docusaurus-plugin-remote-content',
+      {
+        name: 'mobile-docs',
+        sourceBaseUrl:
+          'https://raw.githubusercontent.com/equinor/design-system-mobile/poc/docusaurus-mobile-docs/docs/components/inputs/',
+        outDir: 'docs/mobile/components/inputs',
+        documents: ['button.mdx'],
+      },
+    ],
+  ],
   themes: [
     [
       require.resolve('@easyops-cn/docusaurus-search-local'),
