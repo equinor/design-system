@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Search } from '.'
 
 const meta: Meta<typeof Search> = {
-  title: 'EDS 2.0 (beta)/Search',
+  title: 'EDS 2.0 (beta)/Inputs/Search',
   component: Search,
   tags: ['beta'],
   args: {
