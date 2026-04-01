@@ -1,7 +1,7 @@
 # Use `asChild` + `Slot` for polymorphic rendering in EDS 2.0
 
 - **Status:** Approved
-- **Date:** 2026-03-31
+- **Date:** 2026-04-01
 - **Decision makers:** EDS Core Team
 
 ## Context
