@@ -161,10 +161,11 @@ Search is available as a variant of the shared input component in Figma:
 
 ### Using Search in Figma
 
-1. In Figma, go to the **Assets Panel** and search for **Input**
-2. Drag the **Input [EDS]** component into your frame
-3. In the component, find the **↳ ⌘ Input Options** instance and swap it to the **Search** variant
-4. Select the component to see its properties in the **Design Panel**
+1. In the **Assets Panel**, search for **Input** and drag the **Input [EDS]** component into your frame
+2. Select the component and locate the **↳ ⌘ Input Options** nested instance in the layers panel
+3. With the instance selected, use the **Instance Swap** menu in the **Design Panel** to swap it to the **Search** variant — this adds the search icon as the left adornment
+4. Configure the outer **Input [EDS]** properties: set the **Title**, **Description**, and toggle **Label + Description** or **Optional/Required** as needed
+5. Configure the inner **Search** variant properties: set the **State** (e.g. `Default`, `Focus`, `Disabled`), **Validation** (`Default` or `Error`), **Placeholder** text, and toggle **Helper Message** or **Right Adornment** (clear button) on or off
 
 ## Do's and Don'ts
 
