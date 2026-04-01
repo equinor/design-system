@@ -7,7 +7,7 @@ export default defineConfig({
       fileName: 'generate-variables',
       entry: 'src/generate-variables/index.ts',
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         dir: 'build-generate-variables',
       },
