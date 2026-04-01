@@ -33,7 +33,7 @@ const SPHINX = 'Sphinx of black quartz, judge my vow.'
 
 export const Headings: Story = {
   render: ({ density }) => (
-    <div data-density={density}>
+    <div className="eds-elements" data-density={density}>
       <h1>{SPHINX}</h1>
       <h2>{SPHINX}</h2>
       <h3>{SPHINX}</h3>
@@ -48,7 +48,7 @@ export const Headings: Story = {
 
 export const HeadingStyleOverrides: Story = {
   render: ({ density }) => (
-    <div data-density={density}>
+    <div className="eds-elements" data-density={density}>
       <h2 className="eds-heading-1">{SPHINX}</h2>
       <h3 className="eds-heading-2">{SPHINX}</h3>
       <h4 className="eds-heading-3">{SPHINX}</h4>
@@ -71,7 +71,7 @@ export const HeadingStyleOverrides: Story = {
 
 export const BodyText: Story = {
   render: ({ density }) => (
-    <div data-density={density} style={{ maxWidth: 640 }}>
+    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
       <p>
         {SPHINX} {SPHINX} {SPHINX}
       </p>
@@ -96,7 +96,7 @@ export const BodyText: Story = {
 
 export const InlineText: Story = {
   render: ({ density }) => (
-    <div data-density={density} style={{ maxWidth: 640 }}>
+    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
       <p>
         <strong>Strong:</strong> {SPHINX}
       </p>
@@ -128,7 +128,7 @@ export const InlineText: Story = {
         Text with sub<sub>script</sub> and sup<sup>erscript</sup>
       </p>
       <p>
-        <time dateTime="2026-01-01">1 January 2026</time> — {SPHINX}
+        <time dateTime="2026-01-01">1 January 2026</time> – {SPHINX}
       </p>
     </div>
   ),
@@ -138,7 +138,7 @@ export const InlineText: Story = {
 
 export const Code: Story = {
   render: ({ density }) => (
-    <div data-density={density} style={{ maxWidth: 640 }}>
+    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
       <p>
         Inline <code>code</code> within a paragraph.
       </p>
@@ -157,7 +157,7 @@ export const Code: Story = {
 
 export const TableText: Story = {
   render: ({ density }) => (
-    <div data-density={density}>
+    <div className="eds-elements" data-density={density}>
       <table>
         <caption>Table caption – {SPHINX}</caption>
         <thead>
@@ -188,7 +188,7 @@ export const TableText: Story = {
 
 export const Lists: Story = {
   render: ({ density }) => (
-    <div data-density={density} style={{ maxWidth: 640 }}>
+    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
       <ul>
         <li>{SPHINX}</li>
         <li>{SPHINX}</li>
@@ -213,13 +213,13 @@ export const Lists: Story = {
 
 export const FormLabels: Story = {
   render: ({ density }) => (
-    <div data-density={density} style={{ maxWidth: 640 }}>
+    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
       <div>
-        <label htmlFor="input-example">Label — {SPHINX}</label>
+        <label htmlFor="input-example">Label – {SPHINX}</label>
         <input id="input-example" type="text" placeholder={SPHINX} />
       </div>
       <fieldset style={{ marginTop: 16 }}>
-        <legend>Legend — {SPHINX}</legend>
+        <legend>Legend – {SPHINX}</legend>
         <label>
           <input type="radio" name="example" /> {SPHINX}
         </label>
@@ -235,13 +235,13 @@ export const FormLabels: Story = {
 
 export const AllElements: Story = {
   render: ({ density }) => (
-    <div data-density={density} style={{ maxWidth: 640 }}>
-      <h1>h1 — {SPHINX}</h1>
-      <h2>h2 — {SPHINX}</h2>
-      <h3>h3 — {SPHINX}</h3>
-      <h4>h4 — {SPHINX}</h4>
-      <h5>h5 — {SPHINX}</h5>
-      <h6>h6 — {SPHINX}</h6>
+    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+      <h1>h1 – {SPHINX}</h1>
+      <h2>h2 – {SPHINX}</h2>
+      <h3>h3 – {SPHINX}</h3>
+      <h4>h4 – {SPHINX}</h4>
+      <h5>h5 – {SPHINX}</h5>
+      <h6>h6 – {SPHINX}</h6>
 
       <p>
         {SPHINX} {SPHINX} {SPHINX}

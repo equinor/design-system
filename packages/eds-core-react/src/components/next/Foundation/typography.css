@@ -1,42 +1,42 @@
 :root,
 [data-density='spacious'] {
-  --_base: 16px;
+  --_base: 1rem;
   --eds-typography-ui-body-xs-font-size: round(
     calc(var(--_base) * pow(2, -3/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-sm-font-size: round(
     calc(var(--_base) * pow(2, -2/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-md-font-size: round(
     calc(var(--_base) * pow(2, -1/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-lg-font-size: var(--_base);
   --eds-typography-ui-body-xl-font-size: round(
     calc(var(--_base) * pow(2, 1/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-2xl-font-size: round(
     calc(var(--_base) * pow(2, 2/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-3xl-font-size: round(
     calc(var(--_base) * pow(2, 3/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-4xl-font-size: round(
     calc(var(--_base) * pow(2, 4/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-5xl-font-size: round(
     calc(var(--_base) * pow(2, 5/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-6xl-font-size: round(
     calc(var(--_base) * pow(2, 6/5)),
-    0.5px
+    0.03125rem
   );
 
   /* line-height normal */
@@ -177,43 +177,43 @@
 /* TODO: rename densities — relaxed → spacious, spacious → comfortable, comfortable → compact */
 
 [data-density='relaxed'] {
-  --_base: 18.5px;
+  --_base: 1.15625rem;
   --eds-typography-ui-body-xs-font-size: round(
     calc(var(--_base) * pow(2, -3/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-sm-font-size: round(
     calc(var(--_base) * pow(2, -2/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-md-font-size: round(
     calc(var(--_base) * pow(2, -1/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-lg-font-size: var(--_base);
   --eds-typography-ui-body-xl-font-size: round(
     calc(var(--_base) * pow(2, 1/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-2xl-font-size: round(
     calc(var(--_base) * pow(2, 2/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-3xl-font-size: round(
     calc(var(--_base) * pow(2, 3/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-4xl-font-size: round(
     calc(var(--_base) * pow(2, 4/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-5xl-font-size: round(
     calc(var(--_base) * pow(2, 5/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-6xl-font-size: round(
     calc(var(--_base) * pow(2, 6/5)),
-    0.5px
+    0.03125rem
   );
 
   /* line-height normal */
@@ -352,43 +352,43 @@
 }
 
 [data-density='comfortable'] {
-  --_base: 14px;
+  --_base: 0.875rem;
   --eds-typography-ui-body-xs-font-size: round(
     calc(var(--_base) * pow(2, -3/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-sm-font-size: round(
     calc(var(--_base) * pow(2, -2/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-md-font-size: round(
     calc(var(--_base) * pow(2, -1/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-lg-font-size: var(--_base);
   --eds-typography-ui-body-xl-font-size: round(
     calc(var(--_base) * pow(2, 1/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-2xl-font-size: round(
     calc(var(--_base) * pow(2, 2/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-3xl-font-size: round(
     calc(var(--_base) * pow(2, 3/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-4xl-font-size: round(
     calc(var(--_base) * pow(2, 4/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-5xl-font-size: round(
     calc(var(--_base) * pow(2, 5/5)),
-    0.5px
+    0.03125rem
   );
   --eds-typography-ui-body-6xl-font-size: round(
     calc(var(--_base) * pow(2, 6/5)),
-    0.5px
+    0.03125rem
   );
 
   /* line-height normal */
@@ -538,13 +538,13 @@
   --text-box: trim-both ex alphabetic;
 
   /* Single-line: snap height to 4px grid, centered optically */
-  /* --padding-top-centered: calc((round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2);
+  /* --padding-top-centered: calc((round(1cap, 0.25rem) - 1ex) / 2 + (1cap - 1ex) / 2);
   --padding-bottom-centered: calc(
-    (round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2
+    (round(1cap, 0.25rem) - 1ex) / 2 - (1cap - 1ex) / 2
   ); */
 
   /* Multi-line: align text to baseline grid */
-  --padding-top-baseline: calc(round(1cap, 4px) - 1ex);
+  --padding-top-baseline: calc(round(1cap, 0.25rem) - 1ex);
   --padding-bottom-baseline: 0px;
 }
 
@@ -555,16 +555,16 @@
 @function --padding-top(--mode: centered) returns <length> {
   result: if(
     style(--mode: centered): calc(
-        (round(1cap, 4px) - 1ex) / 2 + (1cap - 1ex) / 2
+        (round(1cap, 0.25rem) - 1ex) / 2 + (1cap - 1ex) / 2
       )
-      ; else: calc(round(1cap, 4px) - 1ex)
+      ; else: calc(round(1cap, 0.25rem) - 1ex)
   );
 }
 
 @function --padding-bottom(--mode: centered) returns <length> {
   result: if(
     style(--mode: centered): calc(
-        (round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2
+        (round(1cap, 0.25rem) - 1ex) / 2 - (1cap - 1ex) / 2
       )
       ; else: 0
   );
@@ -594,12 +594,12 @@
  * they correctly read --_base from the local cascade:
  *
  *   @function --font-size-step(--step: 0) returns <length> {
- *     result: round(calc(var(--_base) * pow(2, calc(var(--step) / 5))), 0.5px);
+ *     result: round(calc(var(--_base) * pow(2, calc(var(--step) / 5))), 0.03125rem);
  *   }
  *
  *   :root,
  *   [data-density='spacious'] {
- *     --_base: 16px;
+ *     --_base: 1rem;
  *     --eds-typography-ui-body-xs-font-size: --font-size-step(-3);
  *     --eds-typography-ui-body-sm-font-size: --font-size-step(-2);
  *     --eds-typography-ui-body-md-font-size: --font-size-step(-1);
@@ -608,7 +608,7 @@
  *   }
  *
  *   [data-density='comfortable'] {
- *     --_base: 14px; (that's it — no more duplication)
+ *     --_base: 0.875rem; (that's it — no more duplication)
  *   }
  *
  * Track Safari @function support: https://caniuse.com/css-at-function
