@@ -19,6 +19,7 @@ rules:
   selector-class-pattern:
     - '^eds-[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z][a-z0-9]*(-[a-z0-9]+)*)?(--[a-z][a-z0-9]*(-[a-z0-9]+)*)?$'
     - message: "Expected class '%s' to follow BEM syntax: eds-block__element--modifier (selector-class-pattern)"
+  number-max-precision: 5
   declaration-property-value-no-unknown:
     - true
     - ignoreProperties:
