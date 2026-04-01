@@ -1,0 +1,453 @@
+@layer eds-elements {
+  .eds-elements {
+    --_body-font-family: var(--eds-typography-ui-body-font-family);
+    --_headings-font-family: var(--eds-typography-header-font-family);
+    --_code-font-family: 'CommitMono', monospace;
+  }
+
+  /* ===== RESET ===== */
+
+  /* prettier-ignore */
+  .eds-elements :where(h1, h2, h3, h4, h5, h6,
+  p, blockquote, figure, figcaption, address,
+  ul, ol, dl, li, dt, dd,
+  table, pre,
+  fieldset) {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ===== HEADINGS ===== */
+  /* Equinor typeface, larger sizes from the scale */
+
+  /* prettier-ignore */
+  .eds-elements :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--_headings-font-family);
+
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: var(--padding-top-baseline);
+      padding-bottom: var(--padding-bottom-baseline);
+
+      text-box: trim-both ex alphabetic;
+    }
+  }
+
+  /* prettier-ignore */
+  .eds-elements :where(h1), .eds-elements .eds-heading-1 {
+    --_font-weight-lighter: var(--eds-typography-header-5xl-font-weight-lighter);
+    --_font-weight-bolder: var(--eds-typography-header-5xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-3xl);
+
+    font-size: var(--eds-typography-ui-body-5xl-font-size);
+    font-weight: var(--eds-typography-header-5xl-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-5xl-line-height-default);
+  }
+
+  /* prettier-ignore */
+  .eds-elements :where(h2), .eds-elements .eds-heading-2 {
+    --_font-weight-lighter: var(--eds-typography-header-4xl-font-weight-lighter);
+    --_font-weight-bolder: var(--eds-typography-header-4xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-2xl);
+
+    font-size: var(--eds-typography-ui-body-4xl-font-size);
+    font-weight: var(--eds-typography-header-4xl-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-4xl-line-height-default);
+  }
+
+  /* prettier-ignore */
+  .eds-elements :where(h3), .eds-elements .eds-heading-3 {
+    --_font-weight-lighter: var(--eds-typography-header-3xl-font-weight-lighter);
+    --_font-weight-bolder: var(--eds-typography-header-3xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-xl);
+
+    font-size: var(--eds-typography-ui-body-3xl-font-size);
+    font-weight: var(--eds-typography-header-3xl-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-3xl-line-height-default);
+  }
+
+  /* prettier-ignore */
+  .eds-elements :where(h4), .eds-elements .eds-heading-4 {
+    --_font-weight-lighter: var(--eds-typography-header-2xl-font-weight-lighter);
+    --_font-weight-bolder: var(--eds-typography-header-2xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-xl);
+
+    font-size: var(--eds-typography-ui-body-2xl-font-size);
+    font-weight: var(--eds-typography-header-2xl-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-2xl-line-height-default);
+  }
+
+  /* prettier-ignore */
+  .eds-elements :where(h5), .eds-elements .eds-heading-5 {
+    --_font-weight-lighter: var(--eds-typography-header-xl-font-weight-lighter);
+    --_font-weight-bolder: var(--eds-typography-header-xl-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-xl);
+
+    font-size: var(--eds-typography-ui-body-xl-font-size);
+    font-weight: var(--eds-typography-header-xl-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-xl-line-height-default);
+  }
+
+  /* prettier-ignore */
+  .eds-elements :where(h6), .eds-elements .eds-heading-6 {
+    --_font-weight-lighter: var(--eds-typography-header-lg-font-weight-lighter);
+    --_font-weight-bolder: var(--eds-typography-header-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-header-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
+  }
+
+  .eds-elements .eds-heading-bold {
+    font-weight: var(--_font-weight-bolder, 500);
+  }
+
+  .eds-elements .eds-heading-light {
+    font-weight: var(--_font-weight-lighter, 300);
+  }
+
+  /* ===== BODY TEXT ===== */
+  /* Inter typeface, default line-height */
+
+  /* prettier-ignore */
+  .eds-elements :where(p, blockquote, figcaption, address,
+  caption, th, td,
+  li, dt, dd,
+  label, legend) {
+    font-family: var(--_body-font-family);
+
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: var(--padding-top-baseline);
+      padding-bottom: var(--padding-bottom-baseline);
+
+      text-box: trim-both ex alphabetic;
+    }
+  }
+
+  .eds-elements :where(p) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
+  }
+
+  .eds-elements :where(blockquote) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    padding-left: var(--eds-spacing-horizontal-md);
+    border-left: var(--eds-sizing-stroke-thick) solid
+      var(--eds-color-border-medium);
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
+  }
+
+  .eds-elements :where(figcaption) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-sm-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-sm-font-weight-bolder);
+
+    margin-top: var(--eds-spacing-vertical-xs);
+
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    font-weight: var(--eds-typography-ui-body-sm-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    text-align: left;
+  }
+
+  .eds-elements :where(address) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
+  }
+
+  /* ===== INLINE TEXT ===== */
+
+  .eds-elements :where(strong) {
+    font-weight: var(--_font-weight-bolder, 500);
+  }
+
+  .eds-elements :where(em) {
+    /* TODO */
+  }
+
+  .eds-elements :where(small) {
+    font-size: var(--eds-typography-ui-body-md-font-size);
+  }
+
+  .eds-elements :where(s) {
+    /* TODO */
+  }
+
+  .eds-elements :where(del) {
+    /* TODO */
+  }
+
+  .eds-elements :where(ins) {
+    /* TODO */
+  }
+
+  .eds-elements :where(mark) {
+    /* The Brand Midnight sun colour, currently not in any token */
+    background-color: #fde88c;
+  }
+
+  .eds-elements :where(abbr) {
+    /* TODO */
+  }
+
+  .eds-elements :where(cite) {
+    /* TODO */
+  }
+
+  .eds-elements :where(q) {
+    /* TODO */
+  }
+
+  .eds-elements :where(sub) {
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+  }
+
+  .eds-elements :where(sup) {
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+  }
+
+  .eds-elements :where(time) {
+    /* TODO */
+  }
+
+  /* ===== CODE / MONOSPACE ===== */
+
+  /* prettier-ignore */
+  .eds-elements :where(code, pre, kbd, samp) {
+    font-family: var(--_code-font-family);
+  }
+
+  .eds-elements :where(code) {
+    /* TODO */
+  }
+
+  .eds-elements :where(pre) {
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+  }
+
+  .eds-elements :where(kbd) {
+    /* TODO */
+  }
+
+  .eds-elements :where(samp) {
+    /* TODO */
+  }
+
+  /* ===== TABLE TEXT ===== */
+
+  .eds-elements :where(table) {
+    border-collapse: collapse;
+  }
+
+  .eds-elements :where(caption) {
+    caption-side: bottom;
+
+    margin-top: var(--eds-spacing-vertical-sm);
+
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    font-weight: var(--eds-typography-ui-body-sm-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    text-align: left;
+  }
+
+  .eds-elements :where(th) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+
+    padding-block: var(--eds-spacing-inset-md-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-md-horizontal);
+
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-bolder);
+    line-height: var(--eds-typography-ui-body-md-line-height-squished);
+    text-align: left;
+
+    background-color: var(--eds-color-neutral-3);
+    box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thick)) 0
+      var(--eds-color-neutral-7);
+
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: calc(
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-top-baseline)
+      );
+      padding-bottom: calc(
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-bottom-baseline)
+      );
+
+      text-box: trim-both ex alphabetic;
+    }
+
+  }
+
+  .eds-elements :where(td) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+
+    padding-block: var(--eds-spacing-inset-md-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-md-horizontal);
+
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-feature-settings:
+      'tnum' on,
+      'lnum' on;
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thin)) 0
+      var(--eds-color-neutral-6);
+
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: calc(
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-top-baseline)
+      );
+      padding-bottom: calc(
+        var(--eds-spacing-inset-md-vertical-squared) +
+          var(--padding-bottom-baseline)
+      );
+
+      text-box: trim-both ex alphabetic;
+    }
+
+  }
+
+  /* ===== LISTS ===== */
+
+  .eds-elements :where(ul, ol) {
+    padding-left: 1.5em;
+  }
+
+  /* ===== LIST ITEMS ===== */
+
+  .eds-elements :where(dd) {
+    margin-left: var(--eds-spacing-horizontal-md);
+  }
+
+  .eds-elements :where(li, dt, dd) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-lg-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-sm);
+
+    padding-bottom: 0;
+    font-size: var(--eds-typography-ui-body-lg-font-size);
+    font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-lg-line-height-default);
+
+  }
+
+  /* ===== FLOW SPACING ===== */
+  /* Lobotomized owl: spacing between adjacent block-level elements */
+
+  /* prettier-ignore */
+  .eds-elements :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, table, pre, blockquote, figure, address)
+  + :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, table, pre, blockquote, figure, address) {
+    margin-top: var(--_flow-space, var(--eds-spacing-vertical-lg));
+  }
+
+  /* ===== FORM ELEMENTS ===== */
+
+  /* prettier-ignore */
+  .eds-elements :where(input):not(
+    [type='checkbox'], [type='radio'],
+    [type='range'], [type='color'], [type='file'], [type='image'],
+    [type='submit'], [type='reset'], [type='button'], .eds-input
+  ) {
+    /* TODO: replace with dedicated input background token */
+    --_bg-color: var(--eds-color-bg-canvas);
+
+    display: block;
+
+    padding-block: var(--eds-spacing-inset-xs-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-xs-horizontal);
+    border: unset;
+
+    font-family: var(--_body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    background-color: var(--_bg-color);
+    box-shadow: inset 0 0 0 var(--eds-sizing-stroke-thin)
+      var(--eds-color-border-subtle);
+
+    label + & {
+      margin-top: var(--eds-spacing-vertical-xs);
+    }
+  }
+
+  .eds-elements :where(label) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+
+    display: block;
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    label + & {
+      margin-top: var(--eds-spacing-vertical-xs);
+    }
+
+    legend + & {
+      margin-top: var(--eds-spacing-vertical-xl);
+    }
+  }
+
+  .eds-elements :where(fieldset) {
+    padding-block: var(--eds-spacing-inset-lg-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-lg-horizontal);
+    border: unset;
+    box-shadow: inset 0 0 0 var(--eds-sizing-stroke-thin)
+      var(--eds-color-border-subtle);
+  }
+
+  .eds-elements :where(legend) {
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+
+    float: left;
+    display: block;
+
+    width: 100%;
+
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+  }
+}

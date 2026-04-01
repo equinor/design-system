@@ -1,6 +1,6 @@
-import { forwardRef } from 'react'
+import { forwardRef, Children, isValidElement } from 'react'
+import type { ReactNode } from 'react'
 import type { ButtonProps } from './Button.types'
-import { TypographyNext } from '../../Typography'
 
 const SIZE_MAPPING = {
   small: 'sm',
@@ -8,7 +8,6 @@ const SIZE_MAPPING = {
   large: 'lg',
 } as const
 
-const sizeToTypography = SIZE_MAPPING
 const sizeToSelectableSpace = SIZE_MAPPING
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -19,6 +18,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       tone = 'accent',
       icon = false,
       round = false,
+      multiline = false,
       children,
       className,
       disabled,
@@ -28,7 +28,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) {
     const classes = ['eds-button', className].filter(Boolean).join(' ')
-    const typographySize = sizeToTypography[size]
     const selectableSpace = sizeToSelectableSpace[size]
 
     return (
@@ -43,22 +42,44 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         data-color-appearance={disabled ? 'neutral' : tone}
         data-icon-only={icon || undefined}
         data-round={icon && round ? true : undefined}
+        data-multiline={multiline || undefined}
         {...rest}
       >
-        {icon ? (
-          children
-        ) : (
-          <TypographyNext
-            as="span"
-            className="eds-button__label"
-            family="ui"
-            size={typographySize}
-            lineHeight="squished"
-            baseline="center"
-          >
-            {children}
-          </TypographyNext>
-        )}
+        {(() => {
+          const out: ReactNode[] = []
+          let buf: ReactNode[] = []
+          let labelGroupIndex = 0
+          Children.toArray(children).forEach((child) => {
+            const isLabelNode =
+              typeof child === 'string' ||
+              typeof child === 'number' ||
+              (isValidElement(child) && child.type === 'br')
+            if (isLabelNode) {
+              buf.push(child)
+            } else {
+              if (buf.length) {
+                out.push(
+                  <span
+                    key={`label-${labelGroupIndex++}`}
+                    className="eds-button__label"
+                  >
+                    {buf}
+                  </span>,
+                )
+                buf = []
+              }
+              out.push(child)
+            }
+          })
+          if (buf.length) {
+            out.push(
+              <span key="label-end" className="eds-button__label">
+                {buf}
+              </span>,
+            )
+          }
+          return out
+        })()}
       </button>
     )
   },

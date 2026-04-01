@@ -1,0 +1,12 @@
+/* Reusable registered custom properties used to resolve values */
+@property --captured-size-1 {
+  inherits: false;
+  initial-value: 0;
+  syntax: '<length>';
+}
+
+@property --captured-size-2 {
+  inherits: false;
+  initial-value: 0;
+  syntax: '<length>';
+}

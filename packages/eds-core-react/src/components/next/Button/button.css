@@ -1,20 +1,44 @@
+@import '../Foundation/registered-properties.css';
+
 @layer eds-components {
   .eds-button {
+    --_label-font-size: var(--eds-typography-ui-body-md-font-size);
+    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
+    --_label-height: round(1cap, 4px);
+    --_font-family: var(--eds-typography-ui-body-font-family);
+    --_color: var(--eds-color-text-strong-on-emphasis);
+    --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+    --_padding-block: var(--eds-selectable-space-vertical);
+
     cursor: pointer;
 
     /* Layout */
     display: inline-flex;
+    gap: round(0.618em, 1px);
     align-items: center;
     justify-content: center;
 
     box-sizing: border-box;
+    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
+    padding-block: calc(
+      var(--_padding-block) -
+        (var(--_label-line-height) - var(--_label-height)) / 2
+    );
+    padding-inline: var(--eds-selectable-space-horizontal);
 
     /* Appearance */
     border: none;
     border-radius: var(--eds-spacing-border-radius-rounded, 4px);
 
+    font-size: var(--_label-font-size);
+    color: var(--_color);
+    text-align: start;
     text-decoration: none;
+    white-space: pre-line;
 
+    background-color: var(--_bg-color);
+
+    /* ===== LABEL ===== */
     outline: none;
 
     /* Transitions */
@@ -22,47 +46,54 @@
       background-color 150ms ease-in-out,
       border-color 150ms ease-in-out,
       color 150ms ease-in-out;
+
+    & .eds-button__label {
+      font-family: var(--_font-family);
+      font-size: var(--_label-font-size);
+      line-height: var(--_label-line-height);
+      color: var(--_color);
+    }
+
+    &[data-multiline] {
+      padding-block: var(--eds-selectable-space-vertical);
+
+      .eds-button__label {
+        white-space: normal;
+
+        @supports (text-box: trim-both ex alphabetic) {
+          padding-top: var(--padding-top-baseline);
+          padding-bottom: 0;
+
+          text-box: trim-both ex alphabetic;
+        }
+      }
+    }
+
+    & > svg {
+      --captured-size-1: var(--_label-font-size);
+      --_icon-size: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16);
+
+      width: var(--_icon-size);
+      height: var(--_icon-size);
+      margin-block: calc(-0.5em + 6px); /* TODO: Replace magic number */
+      margin-inline: -0.2em;
+
+      font-size: var(--_icon-size);
+    }
   }
 
   /* ===== SIZE VARIANTS ===== */
-  /*
-   * Button height is controlled by min-height.
-   * The span keeps its natural line-height and is centered by flexbox.
-   *
-   * Spacious (default): sm=24px, md=36px, lg=44px
-   * Comfortable:        sm=20px, md=24px, lg=36px
-   */
+  /* Font size and line-height scale with data-selectable-space.
+   * Button height is derived from padding-block + line-height. */
 
   .eds-button[data-selectable-space='lg'] {
-    gap: var(--eds-typography-gap-horizontal);
-    min-height: 2.75rem; /* 44px */
-    padding-inline: var(--eds-selectable-space-horizontal);
-  }
-
-  .eds-button[data-selectable-space='md'] {
-    gap: var(--eds-typography-gap-horizontal);
-    min-height: 2.25rem; /* 36px */
-    padding-inline: var(--eds-selectable-space-horizontal);
+    --_label-font-size: var(--eds-typography-ui-body-lg-font-size);
+    --_label-line-height: var(--eds-typography-ui-body-lg-line-height-squished);
   }
 
   .eds-button[data-selectable-space='sm'] {
-    gap: var(--eds-typography-gap-horizontal);
-    min-height: 1.5rem; /* 24px */
-    padding-inline: var(--eds-selectable-space-horizontal);
-  }
-
-  /* Comfortable density */
-
-  [data-density='comfortable'] .eds-button[data-selectable-space='lg'] {
-    min-height: 2.25rem; /* 36px */
-  }
-
-  [data-density='comfortable'] .eds-button[data-selectable-space='md'] {
-    min-height: 1.5rem; /* 24px */
-  }
-
-  [data-density='comfortable'] .eds-button[data-selectable-space='sm'] {
-    min-height: 1.25rem; /* 20px */
+    --_label-font-size: var(--eds-typography-ui-body-sm-font-size);
+    --_label-line-height: var(--eds-typography-ui-body-sm-line-height-squished);
   }
 
   /* ===== ICON-ONLY BUTTON ===== */
@@ -82,79 +113,82 @@
   /* ===== PRIMARY VARIANT ===== */
 
   .eds-button[data-variant='primary'] {
-    color: var(--eds-color-text-strong-on-emphasis);
-    background-color: var(--eds-color-bg-fill-emphasis-default);
-  }
-
-  .eds-button[data-variant='primary']:hover:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-emphasis-hover);
-  }
-
-  .eds-button[data-variant='primary']:active:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-emphasis-active);
+    --_color: var(--eds-color-text-strong-on-emphasis);
+    --_bg-color: var(--eds-color-bg-fill-emphasis-default);
   }
 
   .eds-button[data-variant='primary']:disabled {
+    --_bg-color: var(--eds-color-bg-fill-emphasis-disabled);
+    --_color: var(--eds-color-text-disabled);
+
     cursor: not-allowed;
-    color: var(--eds-color-text-disabled);
-    background-color: var(--eds-color-bg-fill-emphasis-disabled);
+  }
+
+  .eds-button[data-variant='primary']:hover:not(:disabled) {
+    --_bg-color: var(--eds-color-bg-fill-emphasis-hover);
+  }
+
+  .eds-button[data-variant='primary']:active:not(:disabled) {
+    --_bg-color: var(--eds-color-bg-fill-emphasis-active);
   }
 
   /* ===== SECONDARY VARIANT ===== */
 
   .eds-button[data-variant='secondary'] {
-    color: var(--eds-color-text-subtle);
-    background-color: transparent;
+    --_color: var(--eds-color-text-subtle);
+    --_bg-color: transparent;
+
     outline: var(--eds-border-width-default, 1px) solid
       var(--eds-color-border-strong);
     outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
   }
 
-  .eds-button[data-variant='secondary']:hover:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-muted-default);
-  }
-
-  .eds-button[data-variant='secondary']:active:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-muted-hover);
-  }
-
   .eds-button[data-variant='secondary']:disabled {
+    --_color: var(--eds-color-text-disabled);
+
     cursor: not-allowed;
-    color: var(--eds-color-text-disabled);
     outline: var(--eds-border-width-default, 1px) solid
       var(--eds-color-border-disabled);
     outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
   }
 
+  .eds-button[data-variant='secondary']:focus-visible {
+    outline-offset: var(--eds-sizing-stroke-thin);
+  }
+
+  .eds-button[data-variant='secondary']:hover:not(:disabled) {
+    --_bg-color: var(--eds-color-bg-fill-muted-default);
+  }
+
+  .eds-button[data-variant='secondary']:active:not(:disabled) {
+    --_bg-color: var(--eds-color-bg-fill-muted-hover);
+  }
+
   /* ===== GHOST VARIANT ===== */
 
   .eds-button[data-variant='ghost'] {
-    color: var(--eds-color-text-subtle);
-    background-color: transparent;
-  }
-
-  .eds-button[data-variant='ghost']:hover:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-muted-default);
-  }
-
-  .eds-button[data-variant='ghost']:active:not(:disabled) {
-    background-color: var(--eds-color-bg-fill-muted-hover);
+    --_color: var(--eds-color-text-subtle);
+    --_bg-color: transparent;
   }
 
   .eds-button[data-variant='ghost']:disabled {
+    --_color: var(--eds-color-text-disabled);
+
     cursor: not-allowed;
-    color: var(--eds-color-text-disabled);
+  }
+
+  .eds-button[data-variant='ghost']:hover:not(:disabled) {
+    --_bg-color: var(--eds-color-bg-fill-muted-default);
+  }
+
+  .eds-button[data-variant='ghost']:active:not(:disabled) {
+    --_bg-color: var(--eds-color-bg-fill-muted-hover);
   }
 
   /* ===== FOCUS STATE ===== */
 
   .eds-button:focus-visible {
-    outline: var(--eds-sizing-stroke-thick) solid
-      var(--eds-color-border-focus);
-    outline-offset: var(--eds-sizing-stroke-thin);
-  }
-
-  .eds-button[data-variant='secondary']:focus-visible {
+    outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
     outline-offset: var(--eds-sizing-stroke-thin);
   }
 
@@ -171,23 +205,3 @@
     margin: 0;
   }
 }
-
-/*
- * Outside @layer to override typography.css [data-font-family] { display: block }.
- * The span wraps text children via TypographyNext and needs inline-flex for
- * icon+text gap and vertical centering.
- *
- * text-box/padding-block reset disables typography.css baseline padding —
- * button handles its own sizing via min-height + flexbox centering.
- */
-
-.eds-button__label {
-  display: inline-flex;
-  gap: var(--eds-typography-gap-horizontal);
-  align-items: center;
-
-  padding-block: 0;
-
-  text-box: normal;
-}
-
