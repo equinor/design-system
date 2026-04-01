@@ -10,6 +10,8 @@
     --_bg-color: var(--eds-color-bg-fill-emphasis-default);
     --_padding-block: var(--eds-selectable-space-vertical);
 
+    cursor: pointer;
+
     /* Layout */
     display: inline-flex;
     gap: round(0.618em, 1px);
