@@ -48,7 +48,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {(() => {
           const out: ReactNode[] = []
           let buf: ReactNode[] = []
-          Children.toArray(children).forEach((child, i) => {
+          let labelGroupIndex = 0
+          Children.toArray(children).forEach((child) => {
             const isLabelNode =
               typeof child === 'string' ||
               typeof child === 'number' ||
@@ -58,7 +59,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             } else {
               if (buf.length) {
                 out.push(
-                  <span key={`label-${i}`} className="eds-button__label">
+                  <span
+                    key={`label-${labelGroupIndex++}`}
+                    className="eds-button__label"
+                  >
                     {buf}
                   </span>,
                 )
