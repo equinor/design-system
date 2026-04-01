@@ -35,3 +35,6 @@ export type { TextAreaProps } from './TextArea'
 
 export { Search } from './Search'
 export type { SearchProps } from './Search'
+
+export { Link } from './Link'
+export type { LinkProps, LinkVariant } from './Link'
