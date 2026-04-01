@@ -31,7 +31,7 @@ Key packages:
 ## Standards to Advise On
 
 - WCAG 2.1 AA accessibility compliance
-- Vanilla CSS with BEM + `--eds-*` design tokens
+- Vanilla CSS with `--eds-*` design tokens, CSS nesting, `@layer`
 - Named exports only (no default exports except stories)
 - `forwardRef` pattern for components
 - Jest + Testing Library + jest-axe for tests

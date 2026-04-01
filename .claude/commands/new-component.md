@@ -332,7 +332,7 @@ Before finalizing, check if the component uses any native HTML elements that hav
   }
 
   /* CRITICAL: Elements with data-color-appearance MUST have color property */
-  .eds-$ARGUMENTS__icon {
+  & .icon {
     display: flex;
     color: var(--eds-color-bg-fill-emphasis-default); /* Dynamic token responds to data-color-appearance */
   }

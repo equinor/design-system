@@ -16,7 +16,7 @@ ComponentName/
   index.ts               # Named exports only
   ComponentName.tsx      # forwardRef component
   ComponentName.types.ts # Types with JSDoc
-  componentname.css      # Vanilla CSS + BEM + tokens
+  componentname.css      # Vanilla CSS + tokens + nesting
   ComponentName.test.tsx # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
 ```
@@ -47,12 +47,22 @@ export type ComponentProps = {
 
 ## CSS Pattern
 
+One `eds-`-prefixed root class. Internal elements use simple names scoped by nesting. Variants via data attributes.
+
 ```css
-.component {
-  color: var(--eds-color-text-primary);
-}
-.component[data-variant='secondary'] {
-  color: var(--eds-color-text-secondary);
+@layer eds-components {
+  .eds-component {
+    color: var(--eds-color-text-primary);
+
+    & .label-row {
+      display: flex;
+      align-items: center;
+    }
+
+    &[data-variant='secondary'] {
+      color: var(--eds-color-text-secondary);
+    }
+  }
 }
 ```
 
