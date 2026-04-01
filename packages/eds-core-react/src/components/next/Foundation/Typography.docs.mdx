@@ -10,10 +10,28 @@ EDS 2.0 uses a modular type scale — font sizes follow a geometric progression 
 
 ## Typefaces
 
-| Context | Typeface |
-|---|---|
-| UI labels & body copy | **Inter** (variable) |
-| Headings | **Equinor** (brand typeface) |
+<table>
+  <thead>
+    <tr>
+      <th>Context</th>
+      <th>Typeface</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UI labels & body copy</td>
+      <td><strong>Inter</strong> (variable)</td>
+    </tr>
+    <tr>
+      <td>Headings</td>
+      <td><strong>Equinor</strong> (brand typeface)</td>
+    </tr>
+    <tr>
+      <td>Code & monospace</td>
+      <td><strong>Commit Mono</strong></td>
+    </tr>
+  </tbody>
+</table>
 
 Inter is loaded from the EDS CDN and covers all UI text: button labels, form fields, captions, and prose. Equinor is reserved for display headings.
 
@@ -24,6 +42,92 @@ Two line-height scales are available for every size step:
 **`squished`** — tight leading designed for UI controls. Use this wherever text sits inside a component (buttons, inputs, badges, tabs). The reduced line-height keeps touch targets compact without sacrificing legibility on a single line.
 
 **`default`** — comfortable leading for reading. Use this for body copy, descriptions, tooltips, and any text that may wrap to multiple lines in a prose context.
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Default multiplier</th>
+      <th>Default spacious</th>
+      <th>Squished multiplier</th>
+      <th>Squished spacious</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>xs</code></td>
+      <td>1.39 − pow(0/9, 3) × 0.29 ≈ 1.39</td>
+      <td>1rem (16px)</td>
+      <td>1.13 − pow(0/9, 3) × 0.13 ≈ 1.13</td>
+      <td>0.75rem (12px)</td>
+    </tr>
+    <tr>
+      <td><code>sm</code></td>
+      <td>1.39 − pow(1/9, 3) × 0.29 ≈ 1.39</td>
+      <td>1rem (16px)</td>
+      <td>1.13 − pow(1/9, 3) × 0.13 ≈ 1.13</td>
+      <td>0.75rem (12px)</td>
+    </tr>
+    <tr>
+      <td><code>md</code></td>
+      <td>1.39 − pow(2/9, 3) × 0.29 ≈ 1.39</td>
+      <td>1.25rem (20px)</td>
+      <td>1.13 − pow(2/9, 3) × 0.13 ≈ 1.13</td>
+      <td>1rem (16px)</td>
+    </tr>
+    <tr>
+      <td><code>lg</code></td>
+      <td>1.39 − pow(3/9, 3) × 0.29 ≈ 1.38</td>
+      <td>1.5rem (24px)</td>
+      <td>1.13 − pow(3/9, 3) × 0.13 ≈ 1.13</td>
+      <td>1.25rem (20px)</td>
+    </tr>
+    <tr>
+      <td><code>xl</code></td>
+      <td>1.39 − pow(4/9, 3) × 0.29 ≈ 1.36</td>
+      <td>1.5rem (24px)</td>
+      <td>1.13 − pow(4/9, 3) × 0.13 ≈ 1.12</td>
+      <td>1.25rem (20px)</td>
+    </tr>
+    <tr>
+      <td><code>2xl</code></td>
+      <td>1.39 − pow(5/9, 3) × 0.29 ≈ 1.34</td>
+      <td>1.75rem (28px)</td>
+      <td>1.13 − pow(5/9, 3) × 0.13 ≈ 1.11</td>
+      <td>1.5rem (24px)</td>
+    </tr>
+    <tr>
+      <td><code>3xl</code></td>
+      <td>1.39 − pow(6/9, 3) × 0.29 ≈ 1.30</td>
+      <td>2rem (32px)</td>
+      <td>1.13 − pow(6/9, 3) × 0.13 ≈ 1.09</td>
+      <td>1.75rem (28px)</td>
+    </tr>
+    <tr>
+      <td><code>4xl</code></td>
+      <td>1.39 − pow(7/9, 3) × 0.29 ≈ 1.25</td>
+      <td>2.25rem (36px)</td>
+      <td>1.13 − pow(7/9, 3) × 0.13 ≈ 1.07</td>
+      <td>1.75rem (28px)</td>
+    </tr>
+    <tr>
+      <td><code>5xl</code></td>
+      <td>1.39 − pow(8/9, 3) × 0.29 ≈ 1.19</td>
+      <td>2.25rem (36px)</td>
+      <td>1.13 − pow(8/9, 3) × 0.13 ≈ 1.04</td>
+      <td>2rem (32px)</td>
+    </tr>
+    <tr>
+      <td><code>6xl</code></td>
+      <td>1.39 − pow(9/9, 3) × 0.29 = 1.10</td>
+      <td>2.5rem (40px)</td>
+      <td>1.13 − pow(9/9, 3) × 0.13 = 1.00</td>
+      <td>2.25rem (36px)</td>
+    </tr>
+  </tbody>
+</table>
+
+The multiplier decreases as font size increases, using an ease-out cubic curve — `1.39 − pow(n/9, 3) × 0.29` for default and `1.13 − pow(n/9, 3) × 0.13` for squished, where `n` is the step index (0 = `xs`, 9 = `6xl`). The cubic ease-out shape means the reduction is barely perceptible at small sizes and accelerates toward the top of the scale, keeping large display text optically tight without compressing body copy.
 
 <Canvas of={TypographyStories.UIText} />
 
@@ -43,18 +147,87 @@ When text must wrap — as a last resort — the `multiline` prop switches to ba
 
 The scale uses equal-ratio steps of `pow(2, n/5)` — five steps per octave — anchored at `lg` (= `--_base`). Each density mode changes only the base:
 
-| Density | Base |
-|---|---|
-| Relaxed | 18.5 px |
-| Spacious (default) | 16 px |
-| Comfortable | 14 px |
+<table>
+  <thead>
+    <tr>
+      <th>Density</th>
+      <th>Base</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Relaxed</td>
+      <td>18.5 px</td>
+    </tr>
+    <tr>
+      <td>Spacious (default)</td>
+      <td>16 px</td>
+    </tr>
+    <tr>
+      <td>Comfortable</td>
+      <td>14 px</td>
+    </tr>
+  </tbody>
+</table>
 
-| Step | Multiplier | Spacious approx. |
-|---|---|---|
-| `xs` | ×2^(−3/5) ≈ 0.66 | ~10.5 px |
-| `sm` | ×2^(−2/5) ≈ 0.76 | ~12 px |
-| `md` | ×2^(−1/5) ≈ 0.87 | ~14 px |
-| `lg` | ×1 | 16 px |
-| `xl` | ×2^(1/5) ≈ 1.15 | ~18.5 px |
-| `2xl` | ×2^(2/5) ≈ 1.32 | ~21 px |
-| `3xl` | ×2^(3/5) ≈ 1.52 | ~24.5 px |
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Multiplier</th>
+      <th>Spacious</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>xs</code></td>
+      <td>×2^(−3/5) ≈ 0.66</td>
+      <td>10.5 px</td>
+    </tr>
+    <tr>
+      <td><code>sm</code></td>
+      <td>×2^(−2/5) ≈ 0.76</td>
+      <td>12 px</td>
+    </tr>
+    <tr>
+      <td><code>md</code></td>
+      <td>×2^(−1/5) ≈ 0.87</td>
+      <td>14 px</td>
+    </tr>
+    <tr>
+      <td><code>lg</code></td>
+      <td>×1</td>
+      <td>16 px</td>
+    </tr>
+    <tr>
+      <td><code>xl</code></td>
+      <td>×2^(1/5) ≈ 1.15</td>
+      <td>18.5 px</td>
+    </tr>
+    <tr>
+      <td><code>2xl</code></td>
+      <td>×2^(2/5) ≈ 1.32</td>
+      <td>21 px</td>
+    </tr>
+    <tr>
+      <td><code>3xl</code></td>
+      <td>×2^(3/5) ≈ 1.52</td>
+      <td>24.5 px</td>
+    </tr>
+    <tr>
+      <td><code>4xl</code></td>
+      <td>×2^(4/5) ≈ 1.74</td>
+      <td>28 px</td>
+    </tr>
+    <tr>
+      <td><code>5xl</code></td>
+      <td>×2^(5/5) = 2</td>
+      <td>32 px</td>
+    </tr>
+    <tr>
+      <td><code>6xl</code></td>
+      <td>×2^(6/5) ≈ 2.30</td>
+      <td>37 px</td>
+    </tr>
+  </tbody>
+</table>

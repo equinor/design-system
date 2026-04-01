@@ -9,10 +9,12 @@
 
   /* prettier-ignore */
   :where(h1, h2, h3, h4, h5, h6,
-  p, blockquote, figcaption, address,
+  p, blockquote, figure, figcaption, address,
   ul, ol, dl, li, dt, dd,
-  table, pre) {
+  table, pre,
+  fieldset) {
     margin: 0;
+    padding: 0;
   }
 
   /* ===== HEADINGS ===== */
@@ -158,7 +160,8 @@
     --_flow-space: var(--eds-spacing-vertical-lg);
 
     padding-left: var(--eds-spacing-horizontal-md);
-    border-left: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-medium);
+    border-left: var(--eds-sizing-stroke-thick) solid
+      var(--eds-color-border-medium);
 
     font-size: var(--eds-typography-ui-body-lg-font-size);
     font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
@@ -170,11 +173,13 @@
       --eds-typography-ui-body-sm-font-weight-lighter
     );
     --_font-weight-bolder: var(--eds-typography-ui-body-sm-font-weight-bolder);
-    --_flow-space: var(--eds-spacing-vertical-lg);
+
+    margin-top: var(--eds-spacing-vertical-xs);
 
     font-size: var(--eds-typography-ui-body-sm-font-size);
     font-weight: var(--eds-typography-ui-body-sm-font-weight-normal);
     line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    text-align: left;
   }
 
   :where(address) {
@@ -277,7 +282,7 @@
   :where(caption) {
     caption-side: bottom;
 
-    margin-top: var(--eds-spacing-vertical-md);
+    margin-top: var(--eds-spacing-vertical-sm);
 
     font-size: var(--eds-typography-ui-body-sm-font-size);
     font-weight: var(--eds-typography-ui-body-sm-font-weight-normal);
@@ -380,36 +385,29 @@
 
   /* ===== LIST ITEMS ===== */
 
+  :where(dd) {
+    margin-left: var(--eds-spacing-horizontal-md);
+  }
+
   :where(li, dt, dd) {
     --_font-weight-lighter: var(
       --eds-typography-ui-body-lg-font-weight-lighter
     );
     --_font-weight-bolder: var(--eds-typography-ui-body-lg-font-weight-bolder);
+    --_flow-space: var(--eds-spacing-vertical-sm);
 
-    padding-top: var(--eds-spacing-vertical-sm);
     padding-bottom: 0;
-
     font-size: var(--eds-typography-ui-body-lg-font-size);
     font-weight: var(--eds-typography-ui-body-lg-font-weight-normal);
     line-height: var(--eds-typography-ui-body-lg-line-height-default);
 
     @supports (text-box: trim-both ex alphabetic) {
-      padding-top: calc(
-        var(--eds-spacing-vertical-sm) + var(--padding-top-baseline)
-      );
       padding-bottom: 0;
-
-      text-box: trim-both ex alphabetic;
     }
 
     /* enhancement: Chrome/Edge 128+ */
     @supports (text-box: trim-both ex alphabetic) {
-      padding-top: calc(
-        var(--eds-spacing-vertical-sm) + --padding-top(--mode: baseline)
-      );
       padding-bottom: 0;
-
-      text-box: trim-both ex alphabetic;
     }
   }
 
@@ -417,18 +415,84 @@
   /* Lobotomized owl: spacing between adjacent block-level elements */
 
   /* prettier-ignore */
-  :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, table, pre, blockquote, address)
-  + :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, table, pre, blockquote, address) {
+  :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, table, pre, blockquote, figure, address)
+  + :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, table, pre, blockquote, figure, address) {
     margin-top: var(--_flow-space, var(--eds-spacing-vertical-lg));
   }
 
   /* ===== FORM LABELS ===== */
 
+  /* prettier-ignore */
+  :where(input):not(
+    [type='checkbox'], [type='radio'],
+    [type='range'], [type='color'], [type='file'], [type='image'],
+    [type='submit'], [type='reset'], [type='button'], .eds-input
+  ) {
+    /* TODO: replace with dedicated input background token */
+    --_bg-color: var(--eds-color-bg-canvas);
+
+    display: block;
+
+    padding-block: var(--eds-spacing-inset-xs-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-xs-horizontal);
+    border: unset;
+
+    font-family: var(--_body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    background-color: var(--_bg-color);
+    box-shadow: inset 0 0 0 var(--eds-sizing-stroke-thin)
+      var(--eds-color-border-subtle);
+
+    label + & {
+      margin-top: var(--eds-spacing-vertical-xs)
+    }
+
+  }
+
   :where(label) {
-    /* TODO */
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+
+    display: block;
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    label + & {
+      margin-top: var(--eds-spacing-vertical-xs);
+    }
+
+    legend + & {
+      margin-top: var(--eds-spacing-vertical-xl);
+    }
+  }
+
+  :where(fieldset) {
+    padding-block: var(--eds-spacing-inset-lg-vertical-squared);
+    padding-inline: var(--eds-spacing-inset-lg-horizontal);
+    border: unset;
+    box-shadow: inset 0 0 0 var(--eds-sizing-stroke-thin)
+      var(--eds-color-border-subtle);
   }
 
   :where(legend) {
-    /* TODO */
+    --_font-weight-lighter: var(
+      --eds-typography-ui-body-md-font-weight-lighter
+    );
+    --_font-weight-bolder: var(--eds-typography-ui-body-md-font-weight-bolder);
+
+    float: left;
+    display: block;
+
+    width: 100%;
+
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
   }
 }
