@@ -99,7 +99,7 @@
     "@types/react-datepicker": "^7.0.0",
     "date-fns": "^4.1.0",
     "downshift": "9.3.2",
-    "react-datepicker": "^8.8.0",
+    "react-datepicker": "^9.1.0",
     "react-fast-compare": "3.2.2"
   }
 }
