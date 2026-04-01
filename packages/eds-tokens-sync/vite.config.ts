@@ -18,7 +18,7 @@ export default defineConfig({
       },
       formats: ['es'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['fs', 'path'], // Keep only Node.js built-ins as external
     },
   },

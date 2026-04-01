@@ -10,7 +10,7 @@ export default defineConfig({
       },
       formats: ['es'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         'node:fs',
         'node:fs/promises',
