@@ -65,6 +65,7 @@ export const useAutocomplete = <T>({
   variant,
   onClear,
   ref,
+  id,
   ...other
 }: AutocompleteProps<T> & { ref?: React.Ref<HTMLInputElement> }) => {
   const [lastScrollOffset, setLastScrollOffset] = useState<number>(0)
@@ -295,6 +296,7 @@ export const useAutocomplete = <T>({
 
   // MARK: downshift state
   let comboBoxProps: UseComboboxProps<T> = {
+    ...(id !== undefined && { inputId: id }),
     items: availableItems as T[], //can not pass readonly type to downshift so we cast it to regular T[]
     initialSelectedItem: initialSelectedOptions[0],
     isItemDisabled(item) {
