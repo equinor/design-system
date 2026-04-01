@@ -71,7 +71,11 @@ export const HeadingStyleOverrides: Story = {
 
 export const BodyText: Story = {
   render: ({ density }) => (
-    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+    <div
+      className="eds-elements"
+      data-density={density}
+      style={{ maxWidth: 640 }}
+    >
       <p>
         {SPHINX} {SPHINX} {SPHINX}
       </p>
@@ -96,7 +100,11 @@ export const BodyText: Story = {
 
 export const InlineText: Story = {
   render: ({ density }) => (
-    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+    <div
+      className="eds-elements"
+      data-density={density}
+      style={{ maxWidth: 640 }}
+    >
       <p>
         <strong>Strong:</strong> {SPHINX}
       </p>
@@ -138,7 +146,11 @@ export const InlineText: Story = {
 
 export const Code: Story = {
   render: ({ density }) => (
-    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+    <div
+      className="eds-elements"
+      data-density={density}
+      style={{ maxWidth: 640 }}
+    >
       <p>
         Inline <code>code</code> within a paragraph.
       </p>
@@ -188,7 +200,11 @@ export const TableText: Story = {
 
 export const Lists: Story = {
   render: ({ density }) => (
-    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+    <div
+      className="eds-elements"
+      data-density={density}
+      style={{ maxWidth: 640 }}
+    >
       <ul>
         <li>{SPHINX}</li>
         <li>{SPHINX}</li>
@@ -213,7 +229,11 @@ export const Lists: Story = {
 
 export const FormLabels: Story = {
   render: ({ density }) => (
-    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+    <div
+      className="eds-elements"
+      data-density={density}
+      style={{ maxWidth: 640 }}
+    >
       <div>
         <label htmlFor="input-example">Label – {SPHINX}</label>
         <input id="input-example" type="text" placeholder={SPHINX} />
@@ -235,7 +255,11 @@ export const FormLabels: Story = {
 
 export const AllElements: Story = {
   render: ({ density }) => (
-    <div className="eds-elements" data-density={density} style={{ maxWidth: 640 }}>
+    <div
+      className="eds-elements"
+      data-density={density}
+      style={{ maxWidth: 640 }}
+    >
       <h1>h1 – {SPHINX}</h1>
       <h2>h2 – {SPHINX}</h2>
       <h3>h3 – {SPHINX}</h3>
