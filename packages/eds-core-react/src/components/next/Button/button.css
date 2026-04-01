@@ -65,23 +65,10 @@
       padding-block: var(--eds-selectable-space-vertical);
 
       .eds-button__label {
-        /* --_padding-top-baseline: calc(
-          (round(1cap, 4px) - 1ex) / 2 - (1cap - 1ex) / 2
-        ); */
-        --_padding-top-baseline: calc(round(1cap, 4px) - 1ex);
-
         white-space: normal;
 
         @supports (text-box: trim-both ex alphabetic) {
           padding-top: var(--padding-top-baseline);
-          padding-bottom: 0;
-
-          text-box: trim-both ex alphabetic;
-        }
-
-        /* enhancement: Chrome/Edge 128+ — invalid @function values are silently dropped in Safari */
-        @supports (text-box: trim-both ex alphabetic) {
-          padding-top: --padding-top(--mode: baseline);
           padding-bottom: 0;
 
           text-box: trim-both ex alphabetic;

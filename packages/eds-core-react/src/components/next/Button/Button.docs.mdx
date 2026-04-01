@@ -108,3 +108,9 @@ Comparison of all button sizes across density modes. Use `data-density` on a par
 Complete overview of all variants, sizes, and color appearances.
 
 <Canvas of={ComponentStories.AllVariants} />
+
+### Multiline labels
+
+Multi-line button labels are an anti-pattern — they are harder to scan and weaker as call-to-action elements. Shorten the label instead. The `multiline` prop exists only as a safety valve for edge cases where a long label cannot be avoided.
+
+<Canvas of={ComponentStories.MultilineAntiPattern} />
