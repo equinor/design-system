@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.4.0...eds-core-react@v2.5.0) (2026-04-01)
+
+
+### ✨ Added
+
+* add Link component  ([#4601](https://github.com/equinor/design-system/issues/4601)) ([05019e2](https://github.com/equinor/design-system/commit/05019e2a4686a7df7818c295048c3dd116b84326))
+
+
+### 🐛 Fixed
+
+* preserve user-provided id on Autocomplete input ([#4682](https://github.com/equinor/design-system/issues/4682)) ([85a4301](https://github.com/equinor/design-system/commit/85a4301d22220d1147551a3d778dd48d34493f0e))
+
 ## [2.4.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.3.7...eds-core-react@v2.4.0) (2026-03-20)
 
 
