@@ -5,14 +5,22 @@ sidebar_position: 8
 
 # Text area
 
-Text area lets users enter and edit multiline text content. It's built using the TextField component with `as="textarea"`, combining Label, Description, Input, and HelperMessage into a complete, accessible form field designed for longer text entries like descriptions, feedback, or notes.
+Text area lets users enter and edit multiline text content. It combines Label, Description, Textarea, and HelperMessage into a complete, accessible form field designed for longer text entries like descriptions, feedback, or notes. The textarea auto-grows as the user types by default.
 
-<!-- TODO: Replace with actual Storybook iframe when TextArea stories are available -->
+<iframe
+  class="sb-iframe"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--introduction"
+  width="100%"
+  height="200"
+  frameborder="1"
+></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--introduction)
 
 ```tsx
-import { TextField } from '@equinor/eds-core-react/next'
+import { TextArea } from '@equinor/eds-core-react/next'
 
-<TextField as="textarea" label="Description" placeholder="Enter text..." />
+<TextArea label="Description" placeholder="Enter text..." rows={3} />
 ```
 
 ## When to Use
@@ -38,9 +46,19 @@ For more flexibility, use the individual components via the [Field](./field) com
 
 ## Guidelines
 
-### Height Configuration
+### Height and Auto-grow
 
-Set the `rows` attribute to specify the initial visible height of the text area. This helps indicate the expected volume of text. Choose a height that matches the expected content length - provide more visual space for fields that expect longer responses.
+Text area auto-grows as the user types. Use `rows` to set the initial visible height (acts as the minimum), and `maxRows` to cap how tall it can grow before becoming scrollable. Set both to the same value for a fixed-height textarea.
+
+<iframe
+  class="sb-iframe"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--auto-grow"
+  width="100%"
+  height="380"
+  frameborder="1"
+></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--auto-grow)
 
 ### Field Width
 
@@ -55,49 +73,47 @@ Follow this rule to keep forms clear and reduce visual noise:
 - **If most fields are required** - only mark optional fields by adding "(Optional)" to the label
 - **If most fields are optional** - only mark required fields by adding "(Required)" to the label
 
-<!-- TODO: Replace with actual Storybook iframe
 <iframe
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--with-indicator"
   width="100%"
-  height="280"
+  height="380"
   frameborder="1"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--with-indicator)
--->
 
 ### Descriptions
 
 Use the `description` prop to provide additional context below the label.
 
-<!-- TODO: Replace with actual Storybook iframe
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--with-description"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--full-field"
   width="100%"
-  height="150"
+  height="220"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--with-description)
--->
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--full-field)
+
+### Character Count
+
+Use `showCharacterCount` to display a live character count below the textarea. When `maxLength` is also set, it renders as "n / max".
+
+<iframe
+  class="sb-iframe"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--with-character-count"
+  width="100%"
+  height="380"
+  frameborder="1"
+></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--with-character-count)
 
 ### Validation States
 
 Use the `invalid` prop to show error styling with a red border and error icon. Pair it with a `helperMessage` to explain what went wrong.
-
-<!-- TODO: Replace with actual Storybook iframe
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--invalid-state"
-  width="100%"
-  height="150"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--invalid-state)
--->
 
 ### Disabled and Read Only
 
@@ -105,23 +121,20 @@ Avoid using `disabled` where possible. Disabled states can confuse users about w
 
 Use `readOnly` sparingly and only when necessary, as it may confuse users expecting editable fields. Read-only fields remain in tab order and their content submits with forms, making them useful for form summaries. When using this state, make sure to explain to the user why the content cannot be edited.
 
-<!-- TODO: Replace with actual Storybook iframe
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--read-only-state"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--states"
   width="100%"
-  height="150"
+  height="500"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--read-only-state)
--->
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--states)
 
 ### Density
 
 Text area adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout for dense UIs.
 
-<!-- TODO: Replace with actual Storybook iframe
 <iframe
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--density-modes"
@@ -131,7 +144,6 @@ Text area adapts to density modes via `data-density` attribute. Spacious mode is
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--density-modes)
--->
 
 ## Accessibility
 
@@ -153,42 +165,17 @@ Text area handles accessibility automatically by connecting labels, descriptions
 
 ### Components
 
-The Text area is available as one component in Figma:
+Text area is available as a variant of the shared input component in Figma:
 
-- **_Text Area [EDS]**: Complete form field combining label, description, textarea, and helper message
-
-### Subcomponents
-
-Text area is built from two main subcomponents, each with their own toggleable parts:
-
-**.Label + Description** - The upper section containing the label and optional description text.
-
-- **.↳ Optional/Required**: Indicator text next to the label. Type: `(Optional)` or `(Required)`.
-- **.↳ Information Icon**: Info circle icon next to the label for tooltip content. State: `Default` or `Hover`.
-- **Description**: Toggleable descriptive text below the label.
-
-**.⌘ Text Area** - The textarea field with helper message.
-
-- **Helper Message**: Toggleable text below the textarea for validation or hints.
-- **Focus Frame**: Visual focus indicator around the textarea.
-- **State**: `Default`, `Hover`, `Focus`, `Active`, `Filled`, `Read-only`, or `Disabled`.
-- **Validation**: `Default` or `Error`.
+- **Input [EDS]**: Shared input component used for all input types, including Text Area
 
 ### Using Text Area in Figma
 
-1. In Figma, go to the **Assets Panel** and search for **Text Area**
-2. Drag the component into your frame
-3. Select the component to see its properties in the **Design Panel**
-
-### Property Structure
-
-The component uses a nested structure:
-
-**Top level** (Text Area) - Contains the label section and textarea section.
-
-**.Label + Description** - Set the **Label** text, and toggle visibility of **Description**, **Optional/Required** indicator, and **Information Icon**.
-
-**.⌘ Text Area** - Set the **State** (Default, Hover, Focus, Active, Filled, Read-only, Disabled), **Validation** (Default, Error), **Placeholder** text, and toggle **Helper Message**.
+1. In the **Assets Panel**, search for **Input** and drag the **Input [EDS]** component into your frame
+2. Select the component and locate the **↳ ⌘ Input Options** nested instance in the layers panel
+3. With the instance selected, use the **Instance Swap** menu in the **Design Panel** to swap it to the **Text Area** variant
+4. Configure the outer **Input [EDS]** properties: set the **Title**, **Description**, and toggle **Label + Description** or **Optional/Required** as needed
+5. Configure the inner **Text Area** variant properties: set the **State** (e.g. `Default`, `Focus`, `Filled`, `Read-only`, `Disabled`), **Validation** (`Default` or `Error`), **Placeholder** text, and toggle **Helper Message** on or off
 
 ## Do's and Don'ts
 

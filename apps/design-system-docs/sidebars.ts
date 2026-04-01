@@ -64,6 +64,7 @@ const sidebars: SidebarsConfig = {
         'components/inputs/input',
         'components/inputs/field',
         'components/inputs/textfield',
+        'components/inputs/textarea',
       ],
     },
     {
