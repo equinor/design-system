@@ -32,10 +32,10 @@ Use a link when the user needs to:
 
 ## Structure
 
-Link comes in two variants, each designed for a specific context:
+Link has two definitions:
 
-- **Inline**: Used within running text. Inherits the surrounding font size and flows naturally in a sentence.
-- **Standalone**: Used on its own, outside of paragraph text. Supports icon composition with a flex layout.
+- **Link**: A text-only link used for both inline and standalone contexts.
+- **External link**: A standalone link with a trailing external-link icon, signalling that the user will leave the current application context.
 
 ## Guidelines
 
@@ -57,7 +57,7 @@ Inline links sit within body text and inherit the surrounding typography. Use th
 
 #### Standalone
 
-Standalone links are used outside of body text, such as in navigation areas, card footers, or call-to-action sections. They use the UI font family and support icons as children.
+Standalone links are used outside of body text, such as in navigation areas, card footers, or call-to-action sections. They use the UI font family.
 
 <iframe
   class="sb-iframe"
@@ -69,36 +69,11 @@ Standalone links are used outside of body text, such as in navigation areas, car
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--standalone)
 
-### Icons
-
-Standalone links can include icons before or after the text to reinforce meaning. Icons are composed as children alongside the link text.
-
-- Place icons on the left as the standard position
-- Use a trailing icon to indicate external links or directional actions
-- Icons paired with text should be decorative and hidden from screen readers
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-link--with-icons"
-  width="100%"
-  height="147"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--with-icons)
-
-### Link Text
-
-Good link text is self-explanatory and meaningful when read independently - this is especially important for users relying on assistive technologies.
-
-- Place important trigger words early in the text
-- Include verbs to clarify the action (e.g., "Read the accessibility guidelines")
-- Ensure link text is unique within the page
-- Never use generic text like "Click here", "Read more", or "Link to"
-
 ### External Links
 
-When linking to external resources, use `target="_blank"` with `rel="noreferrer"` and consider adding a trailing icon to signal the link opens externally.
+When a link takes the user outside the current application context, use the external link variant. This includes a trailing external-link icon to clearly communicate that the destination is outside the app.
+
+Use `target="_blank"` with `rel="noreferrer"` to open external links in a new tab.
 
 <iframe
   class="sb-iframe"
@@ -109,6 +84,15 @@ When linking to external resources, use `target="_blank"` with `rel="noreferrer"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-link--external-link)
+
+### Link Text
+
+Good link text is self-explanatory and meaningful when read independently - this is especially important for users relying on assistive technologies.
+
+- Place important trigger words early in the text
+- Include verbs to clarify the action (e.g., "Read the accessibility guidelines")
+- Ensure link text is unique within the page
+- Never use generic text like "Click here", "Read more", or "Link to"
 
 ### Opening in New Tabs
 
@@ -149,7 +133,7 @@ In these cases, add "(opens in a new tab)" to the link text so users know what t
 - Use standalone links outside of body text for prominent navigation
 - Write descriptive link text that makes sense out of context
 - Indicate when a link opens in a new tab
-- Use icons to reinforce meaning in standalone links
+- Use the external link variant when navigating outside the application
   :::
 
 :::danger **Don't**
@@ -157,6 +141,6 @@ In these cases, add "(opens in a new tab)" to the link text so users know what t
 - Use links for actions that change application state - use **Button** instead
 - Use generic link text like "Click here", "Read more", or "Link"
 - Open links in new tabs without informing the user
-- Use more than one icon per link
+- Use the external-link icon for internal navigation
 - Rely on colour alone to distinguish links from surrounding text
   :::
