@@ -73,7 +73,10 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'components/data-display/data-display',
       },
-      items: ['components/data-display/icon'],
+      items: [
+        'components/data-display/icon',
+        'components/data-display/tooltip',
+      ],
     },
   ],
   //Foundation Section
