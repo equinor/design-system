@@ -38,3 +38,13 @@ export type { SearchProps } from './Search'
 
 export { Link } from './Link'
 export type { LinkProps, LinkVariant } from './Link'
+
+export { Banner } from './Banner'
+export type {
+  BannerProps,
+  BannerTone,
+  BannerIconProps,
+  BannerMessageProps,
+  BannerActionsProps,
+  BannerActionsPlacement,
+} from './Banner'
