@@ -65,28 +65,28 @@
       position-area: top;
       bottom: var(--_arrow);
       margin: var(--_arrow) var(--_arrow) 0;
-      position-try-fallbacks: flip-block, --tooltip-bottom;
+      position-try-fallbacks: flip-block, --eds-tooltip-bottom;
     }
 
     &[data-placement='bottom'] {
       position-area: bottom;
       top: var(--_arrow);
       margin: 0 var(--_arrow) var(--_arrow);
-      position-try-fallbacks: flip-block, --tooltip-top;
+      position-try-fallbacks: flip-block, --eds-tooltip-top;
     }
 
     &[data-placement='right'] {
       position-area: right;
       left: var(--_arrow);
       margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
-      position-try-fallbacks: flip-inline, --tooltip-left;
+      position-try-fallbacks: flip-inline, --eds-tooltip-left;
     }
 
     &[data-placement='left'] {
       position-area: left;
       right: var(--_arrow);
       margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
-      position-try-fallbacks: flip-inline, --tooltip-right;
+      position-try-fallbacks: flip-inline, --eds-tooltip-right;
     }
 
     & .label {
@@ -102,25 +102,25 @@
 
 /* @position-try must be outside @layer per spec. */
 
-@position-try --tooltip-bottom {
+@position-try --eds-tooltip-bottom {
   position-area: bottom;
   top: var(--_arrow);
   margin: 0 var(--_arrow) var(--_arrow);
 }
 
-@position-try --tooltip-top {
+@position-try --eds-tooltip-top {
   position-area: top;
   bottom: var(--_arrow);
   margin: var(--_arrow) var(--_arrow) 0;
 }
 
-@position-try --tooltip-left {
+@position-try --eds-tooltip-left {
   position-area: left;
   right: var(--_arrow);
   margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
 }
 
-@position-try --tooltip-right {
+@position-try --eds-tooltip-right {
   position-area: right;
   left: var(--_arrow);
   margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
