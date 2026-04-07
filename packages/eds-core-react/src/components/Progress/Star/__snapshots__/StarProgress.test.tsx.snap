@@ -7,27 +7,53 @@ exports[`StarProgress Matches snapshot 1`] = `
 }
 
 .c0 path:nth-child(1) {
-  animation: cSKOGU 1.3s linear infinite;
+  animation: k0 1.3s linear infinite;
 }
 
 .c0 path:nth-child(2) {
-  animation: cSKOGU 1.3s linear 0.3s infinite;
+  animation: k0 1.3s linear 0.3s infinite;
 }
 
 .c0 path:nth-child(3) {
-  animation: cSKOGU 1.3s linear 0.4s infinite;
+  animation: k0 1.3s linear 0.4s infinite;
 }
 
 .c0 path:nth-child(4) {
-  animation: cSKOGU 1.3s linear 0.6s infinite;
+  animation: k0 1.3s linear 0.6s infinite;
 }
 
 .c0 path:nth-child(5) {
-  animation: cSKOGU 1.3s linear 0.8s infinite;
+  animation: k0 1.3s linear 0.8s infinite;
 }
 
 .c0 path:nth-child(6) {
-  animation: cSKOGU 1.3s linear 1s infinite;
+  animation: k0 1.3s linear 1s infinite;
+}
+
+@keyframes k0 {
+  0% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  60% {
+    opacity: 0.4;
+  }
+
+  80% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.05;
+  }
 }
 
 <svg

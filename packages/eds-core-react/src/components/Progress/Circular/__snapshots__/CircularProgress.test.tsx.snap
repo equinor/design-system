@@ -4,11 +4,17 @@ exports[`CircularProgress Matches snapshot 1`] = `
 <DocumentFragment>
   .c0 {
   display: inline-block;
-  animation: GLFYz 1.4s linear infinite;
+  animation: k0 1.4s linear infinite;
 }
 
 .c1 {
   position: absolute;
+}
+
+@keyframes k0 {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 <svg
