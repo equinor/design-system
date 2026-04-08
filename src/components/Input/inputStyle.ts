@@ -1,67 +1,81 @@
-import { ViewStyle } from "react-native";
 import { EDSStyleSheet } from "../../styling";
 import { InputProps } from "./Input";
 
-type InputStyleProps = Pick<InputProps, "readOnly" | "variant"> & {
+type InputStyleProps = Pick<InputProps, "readOnly" | "invalid" | "disabled"> & {
     isSelected: boolean;
 };
 
 export const inputTokenStyles = EDSStyleSheet.create(
     (token, props: InputStyleProps) => {
-        const { isSelected, variant, readOnly } = props;
+        const { isSelected, invalid, readOnly, disabled } = props;
+        const isInactive = readOnly === true || disabled === true;
 
-        const backgroundColor = readOnly
-            ? undefined
-            : token.colors.container.background;
+        // Background color
+        const backgroundColor = invalid
+            ? token.newColors.bg.danger.canvas
+            : token.newColors.bg.input;
 
-        const variantBorderStyle: ViewStyle = {
-            borderWidth: isSelected
-                ? token.geometry.border.focusedBorderWidth
-                : token.geometry.border.borderWidth,
-            borderColor: token.colors.interactive[variant!],
-        };
+        // Border
+        const borderWidth = disabled ? 0 : 1;
+        const borderColor = (() => {
+            if (disabled) return "transparent";
+            if (readOnly) return token.newColors.bg.disabled;
+            if (invalid) {
+                return isSelected
+                    ? token.newColors.border.danger.strong
+                    : token.newColors.border.danger.subtle;
+            }
+            return isSelected
+                ? token.newColors.border.neutral.strong
+                : token.newColors.border.neutral.subtle;
+        })();
 
-        const normalBorderStyle: ViewStyle = {
-            borderColor: isSelected
-                ? token.colors.interactive.primary
-                : "transparent",
-            borderBottomWidth: token.geometry.border.focusedBorderWidth,
-            borderBottomColor: isSelected
-                ? token.colors.interactive.primary
-                : token.colors.text.tertiary,
-        };
+        // Text colors
+        const textColor = disabled
+            ? token.newColors.text.disabled
+            : token.newColors.text.neutral.strong;
 
-        const readOnlyBorderStyle: ViewStyle = {
-            borderColor: "transparent",
-        };
+        const placeholderColor = disabled
+            ? token.newColors.text.disabled
+            : token.newColors.text.neutral.subtle;
 
-        let borderStyle: ViewStyle;
-        if (readOnly) {
-            borderStyle = readOnlyBorderStyle;
-        } else if (variant) {
-            borderStyle = variantBorderStyle;
-        } else {
-            borderStyle = normalBorderStyle;
-        }
+        const adornmentTextColor = disabled
+            ? token.newColors.text.disabled
+            : token.newColors.text.neutral.subtle;
 
         return {
             contentContainer: {
                 backgroundColor,
                 flexDirection: "row",
-                margin: variant && !isSelected ? 1 : 0,
-                borderWidth: token.geometry.border.focusedBorderWidth,
-                ...borderStyle,
+                alignItems: "center",
+                borderWidth,
+                borderColor,
+                paddingHorizontal:
+                    token.newSpacing.spacing.inset.sm.horizontal,
+                paddingVertical:
+                    token.newSpacing.spacing.inset.lg.verticalSquished,
+                gap: token.newSpacing.spacing.icon.sm.gapHorizontal,
             },
+            // Typography tokens will replace hardcoded values
             textInput: {
                 flex: 1,
-                paddingTop: token.spacing.textField.paddingVertical,
-                paddingBottom: token.spacing.textField.paddingVertical,
-                paddingHorizontal: token.spacing.textField.paddingHorizontal,
-                color: token.colors.text.primary,
-                ...token.typography.basic.input,
+                color: textColor,
+                fontSize: 14,
+                fontWeight: "400",
+                padding: 0,
             },
             placeholder: {
-                color: token.colors.text.tertiary,
+                color: placeholderColor,
+            },
+            adornmentText: {
+                color: adornmentTextColor,
+                fontSize: 10.5,
+                fontWeight: "400",
+                lineHeight: 16,
+                textTransform: "uppercase",
+            },
+            errorIcon: {
+                color: token.newColors.text.danger.subtle,
             },
         };
     }

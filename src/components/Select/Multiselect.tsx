@@ -22,7 +22,7 @@ export const Multiselect = <T,>({
     disabled,
     onSelect,
     readOnly,
-    variant,
+    invalid,
 }: MultiselectProps<T>) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [menuLayout, setMenuLayout] = useState<LayoutRectangle | undefined>();
@@ -30,7 +30,7 @@ export const Multiselect = <T,>({
     const triggerRef = useRef<View | null>(null);
     const inputStyles = useStyles(inputTokenStyles, {
         readOnly,
-        variant,
+        invalid,
         isSelected: menuOpen,
     });
 

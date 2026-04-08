@@ -26,7 +26,7 @@ export const Select = <T,>({
     disabled = false,
     onSelect,
     readOnly = false,
-    variant,
+    invalid,
 }: SelectProps<T>) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [menuLayout, setMenuLayout] = useState<LayoutRectangle | undefined>();
@@ -34,7 +34,7 @@ export const Select = <T,>({
     const triggerRef = useRef<View | null>(null);
     const inputStyles = useStyles(inputTokenStyles, {
         readOnly,
-        variant,
+        invalid,
         isSelected: menuOpen,
     });
 

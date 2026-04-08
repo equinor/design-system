@@ -116,7 +116,7 @@ export const Autocomplete = <T,>({
                         setIsOptionsVisible(false);
                     }, 150);
                 }}
-                rightAdornments={
+                endAdornment={
                     <View style={styles.adornmentContainer}>
                         {selectedOption && (
                             <Button.Icon

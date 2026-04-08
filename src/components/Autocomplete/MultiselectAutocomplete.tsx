@@ -115,7 +115,7 @@ export const MultiselectAutocomplete = <T,>({
                     setIsOptionsVisible(Platform.OS === "web");
                     setInputValue("");
                 }}
-                rightAdornments={
+                endAdornment={
                     <View style={styles.adornmentContainer}>
                         {!!selectedOptions.length && (
                             <IconButton

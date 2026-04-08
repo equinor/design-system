@@ -2,17 +2,19 @@ import React, { ReactNode, forwardRef, useState } from "react";
 import {
     NativeSyntheticEvent,
     Platform,
+    Text,
     TextInput,
     TextInputFocusEventData,
     TextInputProps,
     View,
 } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { Icon } from "../Icon";
 import { inputTokenStyles } from "./inputStyle";
 
 export type InputProps = {
     /**
-     * A callback method invoked when the input component registeres a change of text content.
+     * A callback method invoked when the input component registers a change of text content.
      * @param contents A string representing the new text in the input field.
      */
     onChange?: (contents: string) => void;
@@ -25,33 +27,53 @@ export type InputProps = {
      */
     placeholder?: string;
     /**
-     * A component that will be added to the left of the input field.
+     * Prefix text displayed at the start of the input (e.g., "https://", "NOK", "€").
      */
-    leftAdornments?: ReactNode;
+    startText?: string;
     /**
-     * A component that will be added to the right of the input field.
+     * Suffix text displayed at the end of the input (e.g., "EUR", "kg", ".com").
      */
-    rightAdornments?: ReactNode;
+    endText?: string;
     /**
-     * A variant to use for the validation of the input field.
+     * An element displayed at the start of the input (e.g., an icon or button).
      */
-    variant?: "danger" | "warning" | "success";
+    startAdornment?: ReactNode;
+    /**
+     * An element displayed at the end of the input (e.g., an icon or button).
+     */
+    endAdornment?: ReactNode;
+    /**
+     * Whether the input is in an invalid/error state.
+     */
+    invalid?: boolean;
+    /**
+     * Whether to hide the built-in error icon shown when invalid is true.
+     */
+    hideErrorIcon?: boolean;
     /**
      * Whether or not the text should be editable.
      */
     readOnly?: boolean;
+    /**
+     * Whether or not the input is disabled.
+     */
+    disabled?: boolean;
 } & Omit<TextInputProps, "onChange" | "onChangeText" | "readOnly">;
 
 export const Input = forwardRef<TextInput, InputProps>(
     (
         {
-            leftAdornments,
-            rightAdornments,
+            startText,
+            endText,
+            startAdornment,
+            endAdornment,
             placeholder,
             onChange,
             multiline = false,
-            variant,
+            invalid = false,
+            hideErrorIcon = false,
             readOnly = false,
+            disabled = false,
             ...rest
         },
         ref
@@ -59,9 +81,11 @@ export const Input = forwardRef<TextInput, InputProps>(
         const [isSelected, setIsSelected] = useState<boolean>(false);
         const styles = useStyles(inputTokenStyles, {
             isSelected,
-            variant,
+            invalid,
             readOnly,
+            disabled,
         });
+        const showErrorIcon = invalid && !hideErrorIcon && !disabled;
 
         const onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
             setIsSelected(true);
@@ -75,18 +99,31 @@ export const Input = forwardRef<TextInput, InputProps>(
 
         return (
             <View style={styles.contentContainer}>
-                {leftAdornments}
+                {showErrorIcon && (
+                    <Icon
+                        name="alert-circle"
+                        size={16}
+                        style={styles.errorIcon}
+                    />
+                )}
+                {startText != null && (
+                    <Text style={styles.adornmentText}>{startText}</Text>
+                )}
+                {startAdornment}
                 <TextInput
                     {...rest}
                     ref={ref}
                     multiline={multiline}
-                    editable={!readOnly}
+                    editable={!readOnly && !disabled}
                     placeholder={placeholder}
                     onChangeText={onChange}
                     textAlignVertical="top"
                     placeholderTextColor={styles.placeholder.color}
                     onFocus={onFocus}
                     onBlur={onBlur}
+                    accessibilityState={{
+                        disabled: disabled || readOnly,
+                    }}
                     style={[
                         styles.textInput,
                         Platform.OS === "web"
@@ -95,7 +132,10 @@ export const Input = forwardRef<TextInput, InputProps>(
                         rest.style,
                     ]}
                 />
-                {rightAdornments}
+                {endText != null && (
+                    <Text style={styles.adornmentText}>{endText}</Text>
+                )}
+                {endAdornment}
             </View>
         );
     }

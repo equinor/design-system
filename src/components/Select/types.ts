@@ -35,7 +35,7 @@ export type SelectBaseProps<T> = {
      */
     readOnly?: boolean;
     /**
-     * A variant to use for the validation of the input field.
+     * Whether the select is in an invalid/error state.
      */
-    variant?: "danger" | "warning" | "success";
+    invalid?: boolean;
 };
