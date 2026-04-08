@@ -1,0 +1,30 @@
+name: Dependabot rotation reminder
+
+on:
+  schedule:
+    # Every Monday at 07:00 Oslo (CEST) / 06:00 Oslo (CET) — 05:00 UTC
+    - cron: '0 5 * * 1'
+  workflow_dispatch: # Allow manual trigger for testing
+
+permissions: {}
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post rotation reminder to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_EDS_CORE }}
+        run: |
+          MEMBERS=("Camilla" "Chibuzor" "Frida")
+          WEEK=$(date +%V)
+          INDEX=$((10#$WEEK % ${#MEMBERS[@]}))
+          CURRENT=${MEMBERS[$INDEX]}
+
+          curl -sSf "$SLACK_WEBHOOK_URL" \
+            -H 'Content-type: application/json' \
+            -d @- <<EOF
+          {
+            "text": ":robot_face: *$CURRENT, you're on Dependabot duty this week!* (week $WEEK)\n\n:broom: Time to sweep through those dependency PRs — most take under 5 min!\n\n:point_right: <https://github.com/equinor/design-system/pulls/app%2Fdependabot|Open Dependabot PRs> · <https://github.com/equinor/design-system/blob/main/documentation/how-to/DEPENDABOT_GUIDE.md|Dependabot guide>"
+          }
+          EOF
