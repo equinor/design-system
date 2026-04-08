@@ -2,9 +2,11 @@ name: Dependabot rotation reminder
 
 on:
   schedule:
-    # Every Monday at 07:00 Oslo time (05:00 UTC)
+    # Every Monday at 07:00 Oslo (CEST) / 06:00 Oslo (CET) — 05:00 UTC
     - cron: '0 5 * * 1'
   workflow_dispatch: # Allow manual trigger for testing
+
+permissions: {}
 
 jobs:
   remind:
@@ -19,7 +21,7 @@ jobs:
           INDEX=$((10#$WEEK % ${#MEMBERS[@]}))
           CURRENT=${MEMBERS[$INDEX]}
 
-          curl -sf "$SLACK_WEBHOOK_URL" \
+          curl -sSf "$SLACK_WEBHOOK_URL" \
             -H 'Content-type: application/json' \
             -d @- <<EOF
           {
