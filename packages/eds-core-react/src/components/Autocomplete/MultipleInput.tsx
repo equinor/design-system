@@ -100,7 +100,8 @@ export const MultipleInput = () => {
                 else chipRefs.current.delete(getLabel(item))
               }}
               style={{
-                outline: '1px solid var(--eds-color-accent-12)',
+                outline:
+                  '1px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))',
                 ...(density === 'compact' && {
                   height: '16px',
                   fontSize: '12px',
