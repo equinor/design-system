@@ -2,13 +2,14 @@ import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import {
   info_circle,
-  warning_filled,
-  error_filled,
+  warning_outlined,
+  error_outlined,
   check_circle_outlined,
 } from '@equinor/eds-icons'
 import { Banner } from '.'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
+import { Link } from '../Link'
 
 const meta: Meta<typeof Banner> = {
   title: 'EDS 2.0 (beta)/Feedback/Banner',
@@ -97,7 +98,7 @@ export const WithLink: StoryFn<typeof Banner> = () => (
     </Banner.Icon>
     <Banner.Message>{exampleMessage}</Banner.Message>
     <Banner.Actions>
-      <a href="https://eds.equinor.com">Link</a>
+      <Link href="https://eds.equinor.com">Link</Link>
     </Banner.Actions>
   </Banner>
 )
@@ -109,7 +110,7 @@ export const WithLinkBottom: StoryFn<typeof Banner> = () => (
     </Banner.Icon>
     <Banner.Message>{exampleMessage}</Banner.Message>
     <Banner.Actions placement="bottom">
-      <a href="https://eds.equinor.com">Link</a>
+      <Link href="https://eds.equinor.com">Link</Link>
     </Banner.Actions>
   </Banner>
 )
@@ -146,7 +147,7 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
 
     <Banner tone="warning">
       <Banner.Icon>
-        <Icon data={warning_filled} />
+        <Icon data={warning_outlined} />
       </Banner.Icon>
       <Banner.Message>{exampleMessage}</Banner.Message>
       <Banner.Actions>
@@ -157,7 +158,7 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
 
     <Banner tone="danger">
       <Banner.Icon>
-        <Icon data={error_filled} />
+        <Icon data={error_outlined} />
       </Banner.Icon>
       <Banner.Message>{exampleMessage}</Banner.Message>
       <Banner.Actions placement="bottom">
@@ -182,7 +183,7 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
       </Banner.Icon>
       <Banner.Message>{exampleMessage}</Banner.Message>
       <Banner.Actions>
-        <a href="https://eds.equinor.com">Link</a>
+        <Link href="https://eds.equinor.com">Link</Link>
       </Banner.Actions>
     </Banner>
 

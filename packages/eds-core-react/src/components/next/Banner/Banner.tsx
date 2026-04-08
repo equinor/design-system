@@ -9,7 +9,6 @@ import type {
   BannerMessageProps,
   BannerActionsProps,
 } from './Banner.types'
-import './banner.css'
 
 const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
   function BannerIcon({ className, children, ...rest }, ref) {
