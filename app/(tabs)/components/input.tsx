@@ -1,21 +1,23 @@
-import { basicInput, inputWithAdornments } from "@/codeSnippets/input";
-import { useCodeSnippet } from "@/hooks/useCodeSnippet";
+import { Icon, Input, Typography } from "@equinor/eds-mobile-components";
+import { useRef, useState } from "react";
 import {
-    Icon,
-    Input,
-    Spacer,
-    Typography,
-} from "@equinor/eds-mobile-components";
-import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    TextInput,
+    View,
+} from "react-native";
 
 export default function InputScreen() {
     const [value1, setValue1] = useState("");
+    const [clearableValue, setClearableValue] = useState("");
     const [value3, setValue3] = useState("");
-    const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
-
+    const clearableRef = useRef<TextInput>(null);
     return (
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={{ flex: 1 }}
+        >
             <View style={styles.section}>
                 <Typography variant="p">
                     Input fields let users enter and edit text — in forms,
@@ -34,55 +36,54 @@ export default function InputScreen() {
                     />
                 </View>
 
-                <ViewCode title="Basic Input" code={basicInput} />
             </View>
 
             <View style={styles.section}>
-                <Spacer amount="small" />
-                <Typography>
-                    You can add left adornments to the input field
+                <Typography variant="h6">With Adornments</Typography>
+                <Typography variant="p">
+                    Use startText and endText for prefix/suffix text.
+                    Use startAdornment and endAdornment for elements
+                    like icons or buttons.
                 </Typography>
+
+                <Typography>Amount with prefix and suffix text</Typography>
+                <Input startText="€" endText="EUR" placeholder="Amount" />
+
+                <Typography>With icon</Typography>
                 <Input
-                    leftAdornments={
-                        <View
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Icon name="face-agent" />
-                        </View>
-                    }
-                    placeholder="Anything goes here"
+                    startAdornment={<Icon name="magnify" size={16} />}
+                    endAdornment={<Icon name="download" size={16} />}
+                    placeholder="With icon"
                 />
 
-                <Spacer amount="small" />
-                <Typography>Right adornments</Typography>
+                <Typography>Search</Typography>
                 <Input
-                    rightAdornments={
-                        <View
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                width: 100,
-                                backgroundColor: "gray",
-                                gap: 8,
-                            }}
-                        >
-                            <Icon name="face-man" color="#FFFFFF" />
-                            <Icon name="face-woman" color="#FFFFFF" />
-                            <Icon name="face-mask" color="#FFFFFF" />
-                        </View>
+                    ref={clearableRef}
+                    value={clearableValue}
+                    onChange={setClearableValue}
+                    startAdornment={<Icon name="magnify" size={16} />}
+                    endAdornment={
+                        clearableValue ? (
+                            <Pressable
+                                onPress={() => {
+                                    setClearableValue("");
+                                    clearableRef.current?.focus();
+                                }}
+                            >
+                                <Icon name="close" size={16} />
+                            </Pressable>
+                        ) : undefined
                     }
-                    placeholder="Anything goes here"
-                ></Input>
-                <Spacer amount="small" />
-
-                <ViewCode
-                    title="Input with Adornments"
-                    code={inputWithAdornments}
+                    placeholder="Search"
                 />
+
+                <Typography>With unit and icon</Typography>
+                <Input
+                    endText="kg"
+                    endAdornment={<Icon name="download" size={16} />}
+                    placeholder="100"
+                />
+
             </View>
 
             <View style={styles.section}>
@@ -100,18 +101,17 @@ export default function InputScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Input with Variants</Typography>
+                <Typography variant="h6">Invalid State</Typography>
                 <View style={styles.inputContainer}>
-                    <Input placeholder="Placeholder danger" variant="danger" />
-                    <Spacer />
+                    <Input placeholder="Placeholder" invalid />
+                </View>
+                <View style={styles.inputContainer}>
                     <Input
-                        placeholder="Placeholder warning"
-                        variant="warning"
-                    />
-                    <Spacer />
-                    <Input
-                        placeholder="Placeholder success"
-                        variant="success"
+                        placeholder="Invalid search"
+                        invalid
+                        hideErrorIcon
+                        startAdornment={<Icon name="magnify" size={16} />}
+                        endAdornment={<Icon name="close" size={16} />}
                     />
                 </View>
             </View>
@@ -133,11 +133,10 @@ export default function InputScreen() {
                 <Input
                     placeholder="This input is disabled"
                     value="Cannot edit this"
-                    readOnly={true}
+                    disabled
                 />
             </View>
 
-            <CodeSnippetDialog />
         </ScrollView>
     );
 }

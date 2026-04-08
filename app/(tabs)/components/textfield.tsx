@@ -88,7 +88,7 @@ export default function TextFieldScreen() {
             <View style={styles.section}>
                 <Typography variant="h6">TextField with Validation</Typography>
                 <Typography style={styles.description}>
-                    TextField with success, warning, and danger variants
+                    TextField with invalid state
                 </Typography>
 
                 <View style={{ marginBottom: 16 }}>
@@ -97,28 +97,20 @@ export default function TextFieldScreen() {
                         helperText={
                             validationEmail === ""
                                 ? "Enter a valid email address"
-                                : validationEmail.includes("@")
+                                : validationEmail.includes("@") &&
+                                    validationEmail.includes(".")
                                   ? "Email format is valid"
                                   : "Please include @ in your email"
                         }
                         value={validationEmail}
                         onChange={setValidationEmail}
                         placeholder="user@example.com"
-                        variant={
-                            validationEmail === ""
-                                ? undefined
-                                : validationEmail.includes("@") &&
-                                    validationEmail.includes(".")
-                                  ? "success"
-                                  : "danger"
-                        }
-                        inputIcon={
-                            validationEmail === ""
-                                ? "email"
-                                : validationEmail.includes("@") &&
-                                    validationEmail.includes(".")
-                                  ? "check-circle"
-                                  : "alert-circle"
+                        invalid={
+                            validationEmail !== "" &&
+                            !(
+                                validationEmail.includes("@") &&
+                                validationEmail.includes(".")
+                            )
                         }
                     />
                 </View>
@@ -136,15 +128,7 @@ export default function TextFieldScreen() {
                         value={password}
                         onChange={setPassword}
                         placeholder="Enter password"
-                        variant={
-                            password === ""
-                                ? undefined
-                                : password.length >= 8
-                                  ? "success"
-                                  : password.length >= 4
-                                    ? "warning"
-                                    : "danger"
-                        }
+                        invalid={password !== "" && password.length < 8}
                         secureTextEntry
                     />
                 </View>
@@ -162,12 +146,9 @@ export default function TextFieldScreen() {
                         value={username}
                         onChange={setUsername}
                         placeholder="johndoe123"
-                        variant={
-                            username === ""
-                                ? undefined
-                                : /^[a-zA-Z0-9]{3,20}$/.test(username)
-                                  ? "success"
-                                  : "danger"
+                        invalid={
+                            username !== "" &&
+                            !/^[a-zA-Z0-9]{3,20}$/.test(username)
                         }
                     />
                 </View>
