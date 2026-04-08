@@ -213,7 +213,7 @@ This is the main implementation of the EDS, and will eventually contain accessib
 ```sh
 npm install @equinor/eds-core-react styled-components
 ```
-If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+If you use TypeScript, make sure you have typescript as a devDependency:
 ```sh
 npm install typescript --save-dev
 ```
@@ -275,7 +275,7 @@ The following example uses the `<Icon>` component from `@equinor/eds-core-react`
 ```sh
 npm install @equinor/eds-icons @equinor/eds-core-react
 ```
-If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+If you use TypeScript, make sure you have typescript as a devDependency:
 ```sh
 npm install typescript --save-dev
 ```
@@ -298,7 +298,7 @@ Design tokens are design decisions from Figma extracted into code, and form the 
 ```sh
 npm install @equinor/eds-tokens
 ```
-If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
+If you use TypeScript, make sure you have typescript as a devDependency:
 ```sh
 npm install typescript --save-dev
 ```
@@ -334,8 +334,7 @@ Experimental React components that are still in development. These components ma
 ```sh
 npm install @equinor/eds-lab-react styled-components
 ```
-
-If you use TypeScript, make sure you have typescript >= 3.8 as a devDependency:
+If you use TypeScript, make sure you have typescript as a devDependency:
 ```sh
 npm install typescript --save-dev
 ```
@@ -355,15 +354,14 @@ See our [Storybook](https://storybook.eds.equinor.com/) for more examples and av
 
 ## Data Grid
 
-A powerful data grid component built with AG Grid, providing sorting, filtering, and other advanced table features.
+A powerful data grid component built with [TanStack Table](https://tanstack.com/table), providing sorting, filtering, and other advanced table features.
 
 ### Installation
 
 ```sh
-npm install @equinor/eds-data-grid-react ag-grid-react
+npm install @equinor/eds-data-grid-react
 ```
-
-If you use TypeScript, make sure you have typescript >= 3.8 as a devDependency:
+If you use TypeScript, make sure you have typescript as a devDependency:
 ```sh
 npm install typescript --save-dev
 ```
@@ -371,20 +369,24 @@ npm install typescript --save-dev
 ### Usage
 
 ```jsx
-import { EdsProvider, DataGrid } from '@equinor/eds-data-grid-react'
+import { EdsProvider } from '@equinor/eds-core-react'
+import { EdsDataGrid } from '@equinor/eds-data-grid-react'
+import { createColumnHelper } from '@tanstack/react-table'
 
-const columnDefs = [
-  { field: 'name' },
-  { field: 'age' },
+const helper = createColumnHelper()
+
+const columns = [
+  helper.accessor('name', { header: 'Name' }),
+  helper.accessor('age', { header: 'Age' }),
 ]
 
-const rowData = [
+const rows = [
   { name: 'Alice', age: 30 },
   { name: 'Bob', age: 25 },
 ]
 
 <EdsProvider>
-  <DataGrid columnDefs={columnDefs} rowData={rowData} />
+  <EdsDataGrid columns={columns} rows={rows} />
 </EdsProvider>
 ```
 
