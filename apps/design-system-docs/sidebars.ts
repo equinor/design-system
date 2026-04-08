@@ -75,6 +75,11 @@ const sidebars: SidebarsConfig = {
       },
       items: ['components/data-display/icon'],
     },
+    {
+      type: 'category',
+      label: 'Navigation',
+      items: ['components/navigation/link'],
+    },
   ],
   //Foundation Section
   foundationSidebar: [

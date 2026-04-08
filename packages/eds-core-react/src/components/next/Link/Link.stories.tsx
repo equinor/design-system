@@ -4,7 +4,7 @@ import { Icon } from '../Icon'
 import { external_link, arrow_forward } from '@equinor/eds-icons'
 
 const meta: Meta<typeof Link> = {
-  title: 'EDS 2.0 (beta)/Link',
+  title: 'EDS 2.0 (beta)/Navigation/Link',
   component: Link,
   tags: ['beta'],
   parameters: {

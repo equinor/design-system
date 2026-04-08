@@ -270,6 +270,14 @@ All [component] variants support:
   :::
 ```
 
+## Sidebar Registration
+
+After creating the documentation file, update `apps/design-system-docs/sidebars.ts` to include the new component in the correct category.
+
+- The sidebar is manually configured in `componentsSidebar`
+- Add the component doc ID (e.g., `'components/navigation/link'`) to the appropriate category's `items` array
+- If the category doesn't exist yet, create a new category entry following the existing pattern
+
 ## Success Criteria
 
 - The documentation is clear, warm, and professional
@@ -279,3 +287,4 @@ All [component] variants support:
 - Duplicate content and artifacts are removed
 - Storybook iframes are included with correct heights (use Chrome MCP to measure)
 - "View in Storybook" links use `/story/` path format
+- The component is registered in `sidebars.ts` under the correct category
