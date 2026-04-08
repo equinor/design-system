@@ -4,6 +4,32 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.5.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.0-beta.0...eds-core-react-next@v2.5.0-beta.0) (2026-04-08)
+
+
+### ✨ Added
+
+* add Banner component to next/ ([#4626](https://github.com/equinor/design-system/issues/4626)) ([44893b5](https://github.com/equinor/design-system/commit/44893b552bff463ae26dfc20c2a57a46d3108995))
+* add Link component  ([#4601](https://github.com/equinor/design-system/issues/4601)) ([05019e2](https://github.com/equinor/design-system/commit/05019e2a4686a7df7818c295048c3dd116b84326))
+* add Search component to next ([#4637](https://github.com/equinor/design-system/issues/4637)) ([83a8446](https://github.com/equinor/design-system/commit/83a8446fe10aab3fadfca2685a5c98b211a72e97))
+* add TextArea component ([#4652](https://github.com/equinor/design-system/issues/4652)) ([cfd254c](https://github.com/equinor/design-system/commit/cfd254cc829322e62c8417e69b0cdc3ce035cf40))
+* add Tooltip component to next/ ([#4751](https://github.com/equinor/design-system/issues/4751)) ([dc96a24](https://github.com/equinor/design-system/commit/dc96a24122908404d6a4c26b1bec0cdc51813f98))
+
+
+### 🐛 Fixed
+
+* add missing BEM classes to next components ([#4638](https://github.com/equinor/design-system/issues/4638)) ([0cf8194](https://github.com/equinor/design-system/commit/0cf8194431b70bb56cb7da5af14e53c8be0dd7ac))
+* adjust release to patch version 2.3.1 ([8bf323e](https://github.com/equinor/design-system/commit/8bf323ee75c8477338c719e20a208f64835fb7c2))
+* improve Input component alignment and sizing ([#4531](https://github.com/equinor/design-system/issues/4531)) ([7564780](https://github.com/equinor/design-system/commit/756478081e2a549d9bd837bbc0f33dda825c80bf))
+* update Icon to follow next/ conventions ([#4612](https://github.com/equinor/design-system/issues/4612)) ([559d022](https://github.com/equinor/design-system/commit/559d0222718765aa41702b4151e38e81114924ed))
+* use EDS Button for TextField info icon and fix helper message gap ([#4569](https://github.com/equinor/design-system/issues/4569)) ([28b0035](https://github.com/equinor/design-system/commit/28b0035fb8a699098f5fc9ae6356ff1f3b3781a6))
+
+
+### ♻️ Refactoring
+
+* simplify Button CSS by removing TypographyNext and using explicit heights ([#4514](https://github.com/equinor/design-system/issues/4514)) ([79fa2d6](https://github.com/equinor/design-system/commit/79fa2d6e57997aca9f9d3bce9b8566f21eaa74df))
+* use semantic disabled tokens in next components ([#4529](https://github.com/equinor/design-system/issues/4529)) ([6d4bbd9](https://github.com/equinor/design-system/commit/6d4bbd9a292e85b8b5f8bf8fd018b78ae2501fad))
+
 ## [2.4.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.6-beta.0...eds-core-react-next@v2.4.0-beta.0) (2026-04-08)
 
 
