@@ -16,15 +16,17 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_EDS_CORE }}
         run: |
-          MEMBERS=("Camilla" "Chibuzor" "Frida")
+          NAMES=("Camilla" "Chibuzor" "Frida")
+          SLACK_IDS=("UFE7WAYKF" "U01FJ05SE67" "U063A589TEH")
           WEEK=$(date +%V)
-          INDEX=$((10#$WEEK % ${#MEMBERS[@]}))
-          CURRENT=${MEMBERS[$INDEX]}
+          INDEX=$((10#$WEEK % ${#NAMES[@]}))
+          NAME=${NAMES[$INDEX]}
+          MENTION=${SLACK_IDS[$INDEX]}
 
           curl -sSf "$SLACK_WEBHOOK_URL" \
             -H 'Content-type: application/json' \
             -d @- <<EOF
           {
-            "text": ":robot_face: *$CURRENT, you're on Dependabot duty this week!* (week $WEEK)\n\n:broom: Time to sweep through those dependency PRs — most take under 5 min!\n\n:point_right: <https://github.com/equinor/design-system/pulls/app%2Fdependabot|Open Dependabot PRs> · <https://github.com/equinor/design-system/blob/main/documentation/how-to/DEPENDABOT_GUIDE.md|Dependabot guide>"
+            "text": ":robot_face: *<@$MENTION>, you're on Dependabot duty this week!* (week $WEEK)\n\n:broom: Time to sweep through those dependency PRs — most take under 5 min!\n\n:point_right: <https://github.com/equinor/design-system/pulls/app%2Fdependabot|Open Dependabot PRs> · <https://github.com/equinor/design-system/blob/main/documentation/how-to/DEPENDABOT_GUIDE.md|Dependabot guide>"
           }
           EOF
