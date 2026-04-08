@@ -7,17 +7,15 @@ sidebar_position: 6
 
 Tooltips display brief, supplementary information when users hover over or focus on an element. They are ideal for clarifying the meaning of icons, explaining actions, or showing keyboard shortcuts - without cluttering the interface.
 
-<!-- TODO: Add hero iframe when Storybook story is available
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--default"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--introduction"
   width="100%"
   height="100"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--default)
--->
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--introduction)
 
 ## When to Use
 
@@ -34,8 +32,8 @@ Use a tooltip when a symbol or interactive element needs a brief explanation, or
 
 A tooltip consists of:
 
-- **Trigger** (required) - the focusable element that activates the tooltip on hover or focus
-- **Label** (required) - the brief text content displayed inside the tooltip
+- **Trigger** (required) - the focusable element that activates the tooltip on hover or focus. The trigger is wrapped in an inline-block span for anchor positioning.
+- **Label** (required) - the brief text content displayed inside the tooltip bubble
 - **Arrow** (automatic) - a directional indicator pointing toward the trigger
 
 ## Guidelines
@@ -44,26 +42,24 @@ A tooltip consists of:
 
 Tooltips support flexible positioning relative to their trigger element:
 
-| Placement | Use Case                                              |
-| --------- | ----------------------------------------------------- |
-| Top       | Default position, suitable for most contexts          |
-| Bottom    | When space above the trigger is limited               |
-| Left      | Useful beside right-aligned elements                  |
-| Right     | Useful beside left-aligned elements                   |
+| Placement | Use Case                                     |
+| --------- | -------------------------------------------- |
+| Top       | Default position, suitable for most contexts |
+| Bottom    | When space above the trigger is limited      |
+| Left      | Useful beside right-aligned elements         |
+| Right     | Useful beside left-aligned elements          |
 
-The tooltip will automatically reposition itself to stay within the viewport boundary.
+The tooltip will automatically reposition itself to stay within the viewport boundary using CSS Anchor Positioning fallbacks.
 
-<!-- TODO: Add placement iframe when Storybook story is available
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--placement"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--placements"
   width="100%"
   height="200"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--placement)
--->
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--placements)
 
 ### Text Content
 
@@ -72,17 +68,34 @@ The tooltip will automatically reposition itself to stay within the viewport bou
 - Provide additional help or clarification that is not immediately obvious
 - Tooltip text should never contain essential task information - use body text or help text for that
 
-### Delay
+### Disabled State
 
-Tooltips support a configurable enter delay to prevent accidental activation. The default delay is 100ms, but this can be increased for elements where accidental hover is common.
+The tooltip can be disabled via the `disabled` prop. When disabled, the tooltip is not rendered and the trigger element is returned unwrapped, with no additional DOM elements added.
+
+<iframe
+  class="sb-iframe"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--disabled"
+  width="100%"
+  height="100"
+  frameborder="1"
+></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--disabled)
+
+### Browser Support
+
+The tooltip uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) (`popover="hint"`) and [CSS Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning) for zero-JS positioning with automatic viewport-edge flipping.
+
+- **Chrome 125+, Firefox 135+, Safari 18.2+**: Full CSS Anchor Positioning support
+- **`popover="hint"`**: Supported in Chrome and Firefox. Safari falls back to `popover="manual"` - the tooltip still works, it just won't get free Escape-dismiss until Safari ships `hint` support.
 
 ## Accessibility
 
 Tooltips must be attached to focusable elements so they can be reached via keyboard navigation.
 
-- **Keyboard**: Tooltip appears on focus and dismisses on blur or Escape
-- **Hover**: Tooltip appears on mouse enter with a configurable delay
-- **ARIA**: The component uses `role="tooltip"` and links to its trigger via `aria-describedby` (for triggers with visible text) or `aria-labelledby` (for icon-only triggers without text labels)
+- **Keyboard**: Tooltip appears on focus and dismisses on blur. In browsers supporting `popover="hint"`, pressing Escape also dismisses the tooltip.
+- **Hover**: Tooltip appears on mouse enter and hides with a short delay on mouse leave. The delay allows the user to move their pointer over the tooltip itself without it disappearing.
+- **ARIA**: The component uses `role="tooltip"` and links to its trigger via `aria-describedby`, providing supplementary context to screen readers.
 
 **Disabled elements**
 
@@ -101,6 +114,7 @@ Tooltips must be attached to focusable elements so they can be reached via keybo
 2. Drag the component into your frame
 3. Select the component to see its properties in the **Design Panel**
 4. Set the **Tip Position** to control which direction the arrow points (Top, Bottom, Left, Right)
+5. Edit the **text** property to change the tooltip label
 
 ## Do's and Don'ts
 
@@ -111,7 +125,7 @@ Tooltips must be attached to focusable elements so they can be reached via keybo
 - Use tooltips to clarify icon meanings or actions
 - Ensure tooltips are reachable via keyboard focus
 - Use `aria-disabled` instead of `disabled` when a tooltip is needed on an inactive button
-:::
+  :::
 
 :::danger **Don't**
 
@@ -120,4 +134,4 @@ Tooltips must be attached to focusable elements so they can be reached via keybo
 - Add links, buttons, or other interactive content inside a tooltip - use **Popover** instead
 - Attach tooltips to natively disabled elements
 - Repeat text that is already visible on the page
-:::
+  :::
