@@ -359,7 +359,7 @@ A powerful data grid component built with [TanStack Table](https://tanstack.com/
 ### Installation
 
 ```sh
-npm install @equinor/eds-data-grid-react
+npm install @equinor/eds-data-grid-react @equinor/eds-core-react
 ```
 If you use TypeScript, make sure you have typescript as a devDependency:
 ```sh
