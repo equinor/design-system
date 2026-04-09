@@ -14,7 +14,7 @@ Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS
 3. CSS → Bundle       (pnpm run _build:css)
 ```
 
-**Or all at once:** `pnpm run build:variables` (clean + typography + spacing + color + bundle)
+**Or all at once:** `pnpm run build:variables` (clean + typography + spacing + color + elevation + bundle)
 
 ### Step 1: Get token JSON files
 
@@ -95,3 +95,20 @@ Five independent axes, each controlled by a `data-*` attribute:
 - **Tracking** (`🅰️ Tracking.*.json`) — `data-tracking`: `tight`, `normal`, `wide`, `loose`
 
 Output: `build/css/typography/` (CSS) and `build/ts/typography/` (TypeScript nested objects)
+
+### Elevation
+
+Two shadow levels for floating UI, synced from Figma Foundations (`Elevation` collection) and composed into `box-shadow` values during the build:
+
+- `--eds-elevation-low` — Tooltips, menus, popovers, autocomplete lists, snackbars
+- `--eds-elevation-high` — Dialogs, modals, drawers
+
+Each level is a two-layer shadow (key + ambient) stored as decomposed primitives in Figma (offset, blur, spread, color). The build script (`build-elevation-variables` from `eds-tokens-build`) reads `Elevation.Mode 1.json` and composes them into single `box-shadow` CSS custom properties. The individual primitives are **not** exposed as CSS variables.
+
+```bash
+pnpm run build:variables:elevation  # Compose elevation CSS
+```
+
+Output:
+- CSS: `build/css/elevation/elevation.css` (bare properties, appended into static `:root`)
+- TypeScript: `build/ts/elevation/elevation.ts` (structured object with `boxShadow` string + per-layer React Native shadow properties)
