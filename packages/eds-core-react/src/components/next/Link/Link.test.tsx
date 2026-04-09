@@ -128,6 +128,74 @@ describe('Link (next)', () => {
     })
   })
 
+  describe('asChild', () => {
+    it('renders child element instead of <a>', () => {
+      render(
+        <Link asChild>
+          <button type="button">Link as button</button>
+        </Link>,
+      )
+      expect(screen.getByRole('button')).toBeInTheDocument()
+      expect(screen.getByRole('button')).toHaveTextContent('Link as button')
+      expect(screen.queryByRole('link')).not.toBeInTheDocument()
+    })
+
+    it('merges className onto child', () => {
+      render(
+        <Link asChild className="custom">
+          <button type="button" className="child-class">
+            Link
+          </button>
+        </Link>,
+      )
+      expect(screen.getByRole('button')).toHaveClass(
+        'eds-link',
+        'custom',
+        'child-class',
+      )
+    })
+
+    it('merges data attributes onto child', () => {
+      render(
+        <Link asChild variant="standalone">
+          <a href="/page">Link</a>
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute(
+        'data-variant',
+        'standalone',
+      )
+    })
+
+    it('preserves child href', () => {
+      render(
+        <Link asChild>
+          <a href="/my-route">Router link</a>
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('href', '/my-route')
+    })
+
+    it('slot href wins over child href when both are set', () => {
+      render(
+        <Link asChild href="/from-link">
+          <a href="/from-child">Link</a>
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('href', '/from-link')
+    })
+
+    it('forwards ref to child element', () => {
+      const ref = { current: null as HTMLAnchorElement | null }
+      render(
+        <Link asChild ref={ref}>
+          <a href="/">Link</a>
+        </Link>,
+      )
+      expect(ref.current).toBeInstanceOf(HTMLAnchorElement)
+    })
+  })
+
   describe('Accessibility', () => {
     it('has no accessibility violations (inline)', async () => {
       const { container } = render(<Link href="#">Link</Link>)
