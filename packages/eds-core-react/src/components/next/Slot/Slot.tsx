@@ -48,11 +48,6 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(function Slot(
   ref,
 ) {
   if (!isValidElement(children)) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        'Slot: asChild requires a single valid React element as a child.',
-      )
-    }
     return null
   }
 

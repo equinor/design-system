@@ -54,5 +54,5 @@ Consumer usage:
 ## Constraints
 
 - Requires exactly one valid React element child when `asChild` is used
-- Logs a `console.warn` in development if the child is invalid
+- Returns `null` silently if the child is invalid
 - Does not support multiple children or text-only children

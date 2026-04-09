@@ -24,13 +24,8 @@ describe('Slot (next)', () => {
       expect(container.innerHTML).toBe('')
     })
 
-    it('warns in development for invalid children', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation()
-      render(<Slot>plain text</Slot>)
-      expect(spy).toHaveBeenCalledWith(
-        'Slot: asChild requires a single valid React element as a child.',
-      )
-      spy.mockRestore()
+    it('does not throw for invalid children', () => {
+      expect(() => render(<Slot>plain text</Slot>)).not.toThrow()
     })
   })
 
