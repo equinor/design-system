@@ -1,4 +1,5 @@
 import { Section } from "@/components/Section";
+import { Surface } from "@/components/Surface";
 import { Button, Spacer, Typography } from "@equinor/eds-mobile-components";
 import { ScrollView, StyleSheet, View } from "react-native";
 
@@ -12,51 +13,51 @@ export default function ButtonsScreen() {
                 </Typography>
             </Section>
 
-            <Spacer />
-
             <Section title="Tones">
                 <Typography>
                     Buttons come in three tones. These can be used to indicate
                     importance.
                 </Typography>
+            </Section>
+            <Surface>
                 <View style={styles.buttonRow}>
                     <Button label="Accent" tone="accent" />
                     <Button label="Neutral" tone="neutral" />
                     <Button label="Danger" tone="danger" />
                 </View>
-            </Section>
-
-            <Spacer />
+            </Surface>
 
             <Section title="Variants">
                 <Typography>
                     Buttons come in three different variants:
                 </Typography>
+            </Section>
+            <Surface>
                 <View style={styles.buttonRow}>
                     <Button label="Primary" variant="primary" />
                     <Button label="Secondary" variant="secondary" />
                     <Button label="Ghost" variant="ghost" />
                 </View>
-            </Section>
-
-            <Spacer />
+            </Surface>
 
             <Section title="Sizes">
                 <Typography>Buttons are available in three sizes.</Typography>
+            </Section>
+            <Surface>
                 <View style={styles.buttonRow}>
                     <Button label="Small" size="small" />
                     <Button label="Default" size="default" />
                     <Button label="Large" size="large" />
                 </View>
-            </Section>
-
-            <Spacer />
+            </Surface>
 
             <Section title="Variations">
                 <Typography>
                     Combining tones and variants creates a range of button
                     styles to choose from.
                 </Typography>
+            </Section>
+            <Surface>
                 <View style={styles.buttonRow}>
                     <Button label="Label" tone="accent" variant="primary" />
                     <Button label="Label" tone="accent" variant="secondary" />
@@ -74,15 +75,15 @@ export default function ButtonsScreen() {
                     <Button label="Label" tone="danger" variant="secondary" />
                     <Button label="Label" tone="danger" variant="ghost" />
                 </View>
-            </Section>
-
-            <Spacer />
+            </Surface>
 
             <Section title="With icons">
                 <Typography>
                     You can add icons to buttons to provide additional context
                     and visual interest.
                 </Typography>
+            </Section>
+            <Surface>
                 <View style={styles.buttonRow}>
                     <Button label="Leading" leadingIcon="home-outline" />
                     <Button label="Trailing" trailingIcon="send-outline" />
@@ -92,9 +93,7 @@ export default function ButtonsScreen() {
                         trailingIcon="pan-right"
                     />
                 </View>
-            </Section>
-
-            <Spacer />
+            </Surface>
 
             <Section title="Icon buttons">
                 <Typography>
@@ -103,34 +102,32 @@ export default function ButtonsScreen() {
                     space is limited, or where the action can be easily
                     represented by an icon.
                 </Typography>
-                <Typography>
-                    They come out the box with rounded corners...
-                </Typography>
+            </Section>
+            <Surface>
+                <Typography>Rounded corners</Typography>
                 <View style={styles.buttonRow}>
                     <Button.Icon name="heart" />
                     <Button.Icon name="star" variant="secondary" />
                     <Button.Icon name="close" variant="ghost" />
                 </View>
-                <Typography>
-                    ...but can also be configured to be circular
-                </Typography>
+                <Typography>Circular</Typography>
                 <View style={styles.buttonRow}>
                     <Button.Icon name="heart" round />
                     <Button.Icon name="star" round variant="secondary" />
                     <Button.Icon name="close" round variant="ghost" />
                 </View>
-            </Section>
-
-            <Spacer />
+            </Surface>
 
             <Section title="States">
                 <Typography>Buttons can be disabled</Typography>
+            </Section>
+            <Surface>
                 <View style={styles.buttonRow}>
                     <Button label="Disabled" disabled />
                     <Button.Icon name="cancel" disabled />
                     <Button.Icon name="cancel" round disabled />
                 </View>
-            </Section>
+            </Surface>
 
             <Spacer />
         </ScrollView>

@@ -161,42 +161,34 @@ export const advancedUsage = `// More complex example here`;
 
 2. **Create screen file** in `app/(tabs)/components/mycomponent.tsx`:
 ```tsx
-import { basicUsage } from "@/codeSnippets/mycomponent";
-import { useCodeSnippet } from "@/hooks/useCodeSnippet";
+import { Section } from "@/components/Section";
+import { Surface } from "@/components/Surface";
 import { MyComponent, Typography } from "@equinor/eds-mobile-components";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView } from "react-native";
 
 export default function MyComponentScreen() {
-    const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
-
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <View style={styles.section}>
+            <Section>
                 <Typography variant="p">
                     Description of the component and its use cases.
                 </Typography>
-            </View>
+            </Section>
 
-            <View style={styles.section}>
-                <Typography variant="h6">Basic Usage</Typography>
-
+            <Section title="Basic Usage" />
+            <Surface>
                 <MyComponent />
-
-                <ViewCode title="Basic Usage" code={basicUsage} />
-            </View>
-
-            <CodeSnippetDialog />
+            </Surface>
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    section: {
-        padding: 16,
-        gap: 16,
-    },
-});
 ```
+
+**Important layout rules:**
+- Use `<Section>` for all text, titles, and descriptions — never hardcoded `StyleSheet` padding
+- Use `<Surface>` to wrap component demos — this creates the canvas → surface → component layering
+- `<Section>` sits on canvas (app background), `<Surface>` provides a distinct elevated background
+- This pattern ensures consistent spacing and visual depth across all screens
 
 3. **Register the screen** in `app/(tabs)/components/_layout.tsx` (if needed for navigation configuration)
 
@@ -205,11 +197,11 @@ const styles = StyleSheet.create({
 ### Component Screen Best Practices
 
 - **Use `contentInsetAdjustmentBehavior="automatic"`** on ScrollView for proper safe area handling
+- **Use `<Section>` for text/titles** — never hardcoded `StyleSheet` padding for layout sections
+- **Use `<Surface>` for component demos** — creates visual depth (canvas → surface → component)
 - **Group related examples** in separate sections with headings
 - **Include descriptions** to explain when and why to use the component
-- **Show multiple variants** - demonstrate different props and configurations
-- **Use `ViewCode`** consistently for all code examples
-- **Place `CodeSnippetDialog`** at the end of the component (required for the hook to work)
+- **Show multiple variants** — demonstrate different props and configurations
 
 ### Testing Component Changes
 

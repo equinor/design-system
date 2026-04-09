@@ -1,4 +1,5 @@
 import { Section } from "@/components/Section";
+import { Surface } from "@/components/Surface";
 import {
     Checkbox,
     Radio,
@@ -33,33 +34,37 @@ export default function SelectionControlsScreen() {
             <Section>
                 <Typography variant="h4">Radio Buttons</Typography>
             </Section>
+
             <Section title="With labels">
                 <Typography variant="p">
                     Radio buttons with a visible label next to the control
                 </Typography>
-                <View>
-                    <Radio
-                        checked={selectedRadio === 0}
-                        onPress={() => setSelectedRadio(0)}
-                        label="Option A"
-                    />
-                    <Radio
-                        checked={selectedRadio === 1}
-                        onPress={() => setSelectedRadio(1)}
-                        label="Option B"
-                    />
-                    <Radio
-                        checked={selectedRadio === 2}
-                        onPress={() => setSelectedRadio(2)}
-                        label="Option C"
-                    />
-                </View>
             </Section>
+            <Surface>
+                <Radio
+                    checked={selectedRadio === 0}
+                    onPress={() => setSelectedRadio(0)}
+                    label="Option A"
+                />
+                <Radio
+                    checked={selectedRadio === 1}
+                    onPress={() => setSelectedRadio(1)}
+                    label="Option B"
+                />
+                <Radio
+                    checked={selectedRadio === 2}
+                    onPress={() => setSelectedRadio(2)}
+                    label="Option C"
+                />
+            </Surface>
+
             <Section title="Without visible label">
                 <Typography variant="p">
                     Radio buttons without a label, using accessibilityLabel for
                     screen readers
                 </Typography>
+            </Section>
+            <Surface>
                 <View
                     style={{
                         flexDirection: "row",
@@ -77,21 +82,22 @@ export default function SelectionControlsScreen() {
                         accessibilityLabel="Option E"
                     />
                 </View>
-            </Section>
+            </Surface>
+
             <Section title="Disabled">
                 <Typography variant="p">
                     Radio buttons in their disabled state, both checked and
                     unchecked
                 </Typography>
-                <View>
-                    <Radio
-                        checked={false}
-                        disabled
-                        label="Disabled unchecked"
-                    />
-                    <Radio checked={true} disabled label="Disabled checked" />
-                </View>
             </Section>
+            <Surface>
+                <Radio
+                    checked={false}
+                    disabled
+                    label="Disabled unchecked"
+                />
+                <Radio checked={true} disabled label="Disabled checked" />
+            </Surface>
 
             <Section>
                 <Typography variant="h4">Switch</Typography>
@@ -102,21 +108,23 @@ export default function SelectionControlsScreen() {
                     Switch with an inline label for toggling settings on and
                     off
                 </Typography>
-                <View>
-                    <Switch
-                        active={switchWithLabel}
-                        onChange={setSwitchWithLabel}
-                        label="Enable notifications"
-                    />
-                    <Switch active={true} disabled label="Disabled option" />
-                </View>
             </Section>
+            <Surface>
+                <Switch
+                    active={switchWithLabel}
+                    onChange={setSwitchWithLabel}
+                    label="Enable notifications"
+                />
+                <Switch active={true} disabled label="Disabled option" />
+            </Surface>
 
             <Section title="Switch without Labels">
                 <Typography variant="p">
                     Switch without a label, useful when the context is provided
                     by surrounding UI
                 </Typography>
+            </Section>
+            <Surface>
                 <View
                     style={{
                         flexDirection: "row",
@@ -127,14 +135,15 @@ export default function SelectionControlsScreen() {
                     <Switch active={switchActive} onChange={setSwitchActive} />
                     <Switch active={false} disabled />
                 </View>
-            </Section>
+            </Surface>
+
             <Section>
                 <Typography variant="h4">Checkboxes</Typography>
             </Section>
-            <Section title="With labels">
-                <View
-                    accessibilityLabel="Select options"
-                >
+
+            <Section title="With labels" />
+            <Surface>
+                <View accessibilityLabel="Select options">
                     <Checkbox
                         checked={checkA}
                         onPress={setCheckA}
@@ -152,8 +161,10 @@ export default function SelectionControlsScreen() {
                         label="Indeterminate"
                     />
                 </View>
-            </Section>
-            <Section title="Without visible label">
+            </Surface>
+
+            <Section title="Without visible label" />
+            <Surface>
                 <View
                     accessibilityLabel="Select options"
                     style={{
@@ -172,11 +183,11 @@ export default function SelectionControlsScreen() {
                         accessibilityLabel="Option B"
                     />
                 </View>
-            </Section>
-            <Section title="Disabled">
-                <View
-                    accessibilityLabel="Disabled options"
-                >
+            </Surface>
+
+            <Section title="Disabled" />
+            <Surface>
+                <View accessibilityLabel="Disabled options">
                     <Checkbox
                         checked={false}
                         disabled
@@ -193,17 +204,7 @@ export default function SelectionControlsScreen() {
                         label="Disabled indeterminate"
                     />
                 </View>
-            </Section>
+            </Surface>
         </ScrollView>
     );
 }
-
-
-
-
-
-
-
-
-
-
