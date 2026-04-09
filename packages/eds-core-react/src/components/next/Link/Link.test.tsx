@@ -175,6 +175,25 @@ describe('Link (next)', () => {
       )
       expect(screen.getByRole('link')).toHaveAttribute('href', '/my-route')
     })
+
+    it('slot href wins over child href when both are set', () => {
+      render(
+        <Link asChild href="/from-link">
+          <a href="/from-child">Link</a>
+        </Link>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('href', '/from-link')
+    })
+
+    it('forwards ref to child element', () => {
+      const ref = { current: null as HTMLAnchorElement | null }
+      render(
+        <Link asChild ref={ref}>
+          <a href="/">Link</a>
+        </Link>,
+      )
+      expect(ref.current).toBeInstanceOf(HTMLAnchorElement)
+    })
   })
 
   describe('Accessibility', () => {

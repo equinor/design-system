@@ -1,6 +1,6 @@
 # Slot
 
-Internal utility component that enables the `asChild` pattern for polymorphic rendering.
+Utility component that enables the `asChild` pattern for polymorphic rendering. Exported publicly from `@equinor/eds-core-react/next`.
 
 ## What it does
 
@@ -54,5 +54,5 @@ Consumer usage:
 ## Constraints
 
 - Requires exactly one valid React element child when `asChild` is used
-- Logs a warning in development if the child is invalid
+- Logs a `console.warn` in development if the child is invalid
 - Does not support multiple children or text-only children
