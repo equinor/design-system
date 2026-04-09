@@ -5,7 +5,6 @@ import { TypographyNext } from '../../Typography'
 const SIZE_MAPPING = {
   small: 'sm',
   default: 'md',
-  large: 'lg',
 } as const
 
 const sizeToTypography = SIZE_MAPPING

@@ -26,7 +26,7 @@ const meta: Meta<StoryArgs> = {
     },
     size: {
       control: 'select',
-      options: ['small', 'default', 'large'],
+      options: ['small', 'default'],
       description: 'Button size',
     },
     tone: {
@@ -106,7 +106,6 @@ export const Sizes: Story = {
     <Wrapper direction="row" align="center">
       <Button size="small">Small</Button>
       <Button size="default">Default</Button>
-      <Button size="large">Large</Button>
     </Wrapper>
   ),
 }
@@ -244,10 +243,6 @@ export const AllVariants: Story = {
                   <Icon data={add} aria-hidden />
                   Default
                 </Button>
-                <Button variant={variant} tone={color} size="large">
-                  <Icon data={add} aria-hidden />
-                  Large
-                </Button>
               </Wrapper>
             ))}
           </Wrapper>
@@ -297,9 +292,6 @@ export const IconOnly: Story = {
         <Icon data={add} aria-hidden />
       </Button>
       <Button icon aria-label="Add" size="default">
-        <Icon data={add} aria-hidden />
-      </Button>
-      <Button icon aria-label="Add" size="large">
         <Icon data={add} aria-hidden />
       </Button>
     </Wrapper>
@@ -362,9 +354,6 @@ export const CircularIconOnly: Story = {
         <Button icon round aria-label="Add" size="default">
           <Icon data={add} aria-hidden />
         </Button>
-        <Button icon round aria-label="Add" size="large">
-          <Icon data={add} aria-hidden />
-        </Button>
       </Wrapper>
       <Wrapper direction="row" align="center">
         <Button variant="primary" icon round aria-label="Add">
@@ -398,14 +387,10 @@ export const DensityComparison: Story = {
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
-          <Button size="large">Large</Button>
           <Button size="small" icon aria-label="Add">
             <Icon data={add} aria-hidden />
           </Button>
           <Button size="default" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-          <Button size="large" icon aria-label="Add">
             <Icon data={add} aria-hidden />
           </Button>
         </Wrapper>
@@ -415,14 +400,10 @@ export const DensityComparison: Story = {
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
-          <Button size="large">Large</Button>
           <Button size="small" icon aria-label="Add">
             <Icon data={add} aria-hidden />
           </Button>
           <Button size="default" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-          <Button size="large" icon aria-label="Add">
             <Icon data={add} aria-hidden />
           </Button>
         </Wrapper>
