@@ -94,6 +94,20 @@
   .eds-button[data-selectable-space='sm'] {
     --_label-font-size: var(--eds-typography-ui-body-sm-font-size);
     --_label-line-height: var(--eds-typography-ui-body-sm-line-height-squished);
+
+    /* sm cap-height rounds down on the 4px grid, which would require negative
+     * padding to centre the text — impossible in CSS. Use simple padding instead
+     * and trim the invisible space directly from the label span, same as multiline. */
+    padding-block: var(--eds-selectable-space-vertical);
+
+    & .eds-button__label {
+      @supports (text-box: trim-both ex alphabetic) {
+        padding-top: var(--padding-top-baseline);
+        padding-bottom: 0;
+
+        text-box: trim-both ex alphabetic;
+      }
+    }
   }
 
   /* ===== ICON-ONLY BUTTON ===== */
