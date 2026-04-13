@@ -45,7 +45,7 @@ These compile token JSON into CSS/JS/JSON output:
 | `build-elevation-variables` | Elevation JSON from Foundations | `build/css/elevation/elevation.css`, `build/ts/elevation/elevation.ts` |
 
 The elevation build is different from color builds — it does **not** use Style Dictionary. It reads decomposed shadow primitives (offset, blur, spread, color) from `Elevation.Mode 1.json` and composes them into:
-- Two `box-shadow` CSS custom properties (`--eds-elevation-low`, `--eds-elevation-high`) — appended into the static `:root` block, not a separate selector
+- Two `box-shadow` CSS custom properties (`--eds-elevation-low`, `--eds-elevation-high`) in its own `:root` block
 - A TypeScript export with `boxShadow` string + per-layer React Native shadow properties (`shadowColor`, `shadowOffset`, `shadowOpacity`, `shadowRadius`)
 
 The individual primitives are not exposed as CSS variables.

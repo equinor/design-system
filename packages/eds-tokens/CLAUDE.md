@@ -110,5 +110,5 @@ pnpm run build:variables:elevation  # Compose elevation CSS
 ```
 
 Output:
-- CSS: `build/css/elevation/elevation.css` (bare properties, appended into static `:root`)
+- CSS: `build/css/elevation/elevation.css`
 - TypeScript: `build/ts/elevation/elevation.ts` (structured object with `boxShadow` string + per-layer React Native shadow properties)

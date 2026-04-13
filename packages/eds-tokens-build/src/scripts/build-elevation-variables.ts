@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync } from 'node:fs'
-import { readFile, writeFile } from 'node:fs/promises'
+import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import { loadTokenConfig, readJson, isObject } from './utils'
@@ -170,9 +170,7 @@ async function buildElevation() {
   await writeFile(tsPath, tsLines.join('\n'), 'utf8')
   console.log(`Wrote ${tsPath}`)
 
-  // Write bare properties (no :root selector) — the bundling step
-  // injects these into the existing :root block in static/variables.css
-  const css = vars.join('\n') + '\n'
+  const css = `:root {\n${vars.join('\n')}\n}\n`
 
   const outDir = path.resolve('build', 'css', 'elevation')
   if (!existsSync(outDir)) {
@@ -182,34 +180,6 @@ async function buildElevation() {
   const outPath = path.join(outDir, 'elevation.css')
   await writeFile(outPath, css, 'utf8')
   console.log(`Wrote ${outPath}`)
-
-  // Append elevation properties into the static variables.css :root block
-  const staticVarsPath = path.resolve(
-    'build',
-    'css',
-    'color',
-    'static',
-    'variables.css',
-  )
-  if (existsSync(staticVarsPath)) {
-    const staticCss = await readFile(staticVarsPath, 'utf8')
-    // Insert before the closing } of the :root block
-    const lastBrace = staticCss.lastIndexOf('}')
-    if (lastBrace !== -1) {
-      const updated =
-        staticCss.slice(0, lastBrace) +
-        '\n  /* Elevation */\n' +
-        vars.join('\n') +
-        '\n' +
-        staticCss.slice(lastBrace)
-      await writeFile(staticVarsPath, updated, 'utf8')
-      console.log(`Appended elevation properties to ${staticVarsPath}`)
-    }
-  } else {
-    console.warn(
-      `Static variables.css not found at ${staticVarsPath} — elevation properties written to ${outPath} only`,
-    )
-  }
 }
 
 export async function run() {
