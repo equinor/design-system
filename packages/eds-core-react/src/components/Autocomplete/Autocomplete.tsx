@@ -92,6 +92,11 @@ export type AutocompleteProps<T = string> = {
    * @default 'summary'
    */
   selectionDisplay?: 'chips' | 'summary'
+  /** Amount of values to list in chips (only relevant if selectionDisplay = 'chips')
+   * When left blank, all values will be shown as chips
+   * @default undefined
+   */
+  chipCount?: number
   /** Callback for the selected item change
    * changes.selectedItems gives the selected items
    */

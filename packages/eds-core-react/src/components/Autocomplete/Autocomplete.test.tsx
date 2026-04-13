@@ -945,6 +945,25 @@ describe('Autocomplete: Scroll position and navigation memory', () => {
     expect(chip2).toBeInTheDocument()
   })
 
+  it('Shows + N more chips if chipCount is set', async () => {
+    render(
+      <Autocomplete
+        label={labelText}
+        options={items}
+        multiple
+        selectionDisplay="chips"
+        chipCount={1}
+        initialSelectedOptions={['One', 'Two']}
+      />,
+    )
+
+    const chip1 = await screen.findByText('One')
+    const chip2 = await screen.findByText('+1 more')
+
+    expect(chip1).toBeInTheDocument()
+    expect(chip2).toBeInTheDocument()
+  })
+
   it('Removes chip when clicking the chip remove button', async () => {
     const handleChange = jest.fn()
     render(
