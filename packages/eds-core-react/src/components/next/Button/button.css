@@ -13,6 +13,8 @@
     border: none;
     border-radius: var(--eds-spacing-border-radius-rounded, 4px);
 
+    /* Typography — ensures correct font for asChild elements */
+    font-family: var(--eds-typography-ui-body-font-family);
     text-decoration: none;
 
     outline: none;
@@ -37,12 +39,14 @@
     gap: var(--eds-typography-gap-horizontal);
     min-height: 2.25rem; /* 36px */
     padding-inline: var(--eds-selectable-space-horizontal);
+    font-size: var(--eds-typography-ui-body-md-font-size);
   }
 
   .eds-button[data-selectable-space='sm'] {
     gap: var(--eds-typography-gap-horizontal);
     min-height: 1.5rem; /* 24px */
     padding-inline: var(--eds-selectable-space-horizontal);
+    font-size: var(--eds-typography-ui-body-sm-font-size);
   }
 
   /* Comfortable density */
