@@ -49,6 +49,8 @@ export const inputTokenStyles = EDSStyleSheet.create(
                 alignItems: "center",
                 borderWidth,
                 borderColor,
+                borderRadius: token.newSpacing.spacing.borderRadius.rounded,
+                minHeight: token.newSpacing.sizing.selectable.lg,
                 paddingHorizontal: token.newSpacing.spacing.inset.sm.horizontal,
                 paddingVertical:
                     token.newSpacing.spacing.inset.lg.verticalSquished,
