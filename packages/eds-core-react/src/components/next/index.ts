@@ -60,3 +60,6 @@ export type { ChipProps, ChipTone, ChipVariant } from './Chip'
 
 export { Divider } from './Divider'
 export type { DividerProps } from './Divider'
+
+export { Autocomplete } from './Autocomplete'
+export type { AutocompleteProps, AutocompleteOption } from './Autocomplete'
