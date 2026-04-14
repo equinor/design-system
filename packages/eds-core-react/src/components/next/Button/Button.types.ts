@@ -24,6 +24,10 @@ export type ButtonSize = 'small' | 'default'
 export type ButtonTone = 'accent' | 'neutral' | 'danger'
 
 export type ButtonProps = {
+  /** Render as child element instead of `<button>`, merging Button styles onto the child.
+   * Useful for rendering links that look like buttons, or integrating with router links.
+   */
+  asChild?: boolean
   /**
    * Button variant - controls visual style
    * @default 'primary'
