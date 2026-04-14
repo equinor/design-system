@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync } from 'node:fs'
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import { loadTokenConfig, readJson, isObject } from './utils'
@@ -170,16 +170,44 @@ async function buildElevation() {
   await writeFile(tsPath, tsLines.join('\n'), 'utf8')
   console.log(`Wrote ${tsPath}`)
 
-  const css = `:root {\n${vars.join('\n')}\n}\n`
-
+  // Write bare properties (no :root) for reference
+  const bareProps = vars.join('\n') + '\n'
   const outDir = path.resolve('build', 'css', 'elevation')
   if (!existsSync(outDir)) {
     mkdirSync(outDir, { recursive: true })
   }
-
   const outPath = path.join(outDir, 'elevation.css')
-  await writeFile(outPath, css, 'utf8')
+  await writeFile(outPath, bareProps, 'utf8')
   console.log(`Wrote ${outPath}`)
+
+  // Inject elevation properties into the bundled variables.css :root block.
+  // This runs after lightningcss bundling but before minification,
+  // so elevation ends up in the same :root as all other variables.
+  const variablesCssPath = path.resolve('build', 'css', 'variables.css')
+  if (existsSync(variablesCssPath)) {
+    const content = await readFile(variablesCssPath, 'utf8')
+    // Find the :root block that contains --eds- custom properties
+    // (not the color-scheme block which only has `color-scheme: light`)
+    const rootWithVarsMatch = content.match(/:root\s*\{[^}]*--eds-/)
+    if (rootWithVarsMatch) {
+      const rootStart = content.indexOf(rootWithVarsMatch[0])
+      const rootEnd = content.indexOf('}', rootStart)
+      if (rootEnd !== -1) {
+        const injected =
+          content.slice(0, rootEnd) +
+          '\n' +
+          vars.join('\n') +
+          '\n' +
+          content.slice(rootEnd)
+        await writeFile(variablesCssPath, injected, 'utf8')
+        console.log(`Injected elevation into ${variablesCssPath}`)
+      }
+    }
+  } else {
+    console.warn(
+      `variables.css not found at ${variablesCssPath} — run _build:css:variables first`,
+    )
+  }
 }
 
 export async function run() {
