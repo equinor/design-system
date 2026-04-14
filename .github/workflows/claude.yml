@@ -59,7 +59,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.check-permission.outputs.authorized == 'true'
-        run: pnpm install --force
+        run: pnpm install --frozen-lockfile
 
       - name: Build packages
         if: steps.check-permission.outputs.authorized == 'true'
