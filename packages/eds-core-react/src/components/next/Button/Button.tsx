@@ -32,21 +32,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const typographySize = sizeToTypography[size]
     const selectableSpace = sizeToSelectableSpace[size]
 
-    const content = icon ? (
-      children
-    ) : (
-      <TypographyNext
-        as="span"
-        className="eds-button__label"
-        family="ui"
-        size={typographySize}
-        lineHeight="squished"
-        baseline="center"
-      >
-        {children}
-      </TypographyNext>
-    )
-
     const sharedProps = {
       ref,
       className: classes,
@@ -66,7 +51,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button type={type} {...sharedProps}>
-        {content}
+        {icon ? (
+          children
+        ) : (
+          <TypographyNext
+            as="span"
+            className="eds-button__label"
+            family="ui"
+            size={typographySize}
+            lineHeight="squished"
+            baseline="center"
+          >
+            {children}
+          </TypographyNext>
+        )}
       </button>
     )
   },
