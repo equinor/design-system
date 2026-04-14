@@ -24,6 +24,10 @@ export type AutocompleteProps = {
   onOptionSelect?: (option: string) => void
   /** Text shown when no options match the search value */
   noOptionsText?: string
+  /** Current value of the search input */
+  value?: string
+  /** Default value of the search input */
+  defaultValue?: string
 } & Omit<
   InputProps,
   | 'startAdornment'
@@ -33,4 +37,6 @@ export type AutocompleteProps = {
   | 'as'
   | 'hideErrorIcon'
   | 'type'
+  | 'value'
+  | 'defaultValue'
 >
