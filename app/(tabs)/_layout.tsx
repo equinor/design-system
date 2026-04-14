@@ -2,13 +2,16 @@ import { Icon, IconProps, useToken } from "@equinor/eds-mobile-components";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
-    const { newColors } = useToken();
+    const { newColors, newTypography } = useToken();
 
     return (
         <Tabs
             screenOptions={{
                 tabBarActiveTintColor: newColors.bg.accent.fillEmphasis.active,
-                tabBarInactiveTintColor: newColors.bg.accent.fillMuted.default,
+                tabBarInactiveTintColor: newColors.text.neutral.subtle,
+                tabBarLabelStyle: {
+                    fontSize: newTypography.label.sm.fontSize,
+                },
                 headerShown: false,
             }}
         >
@@ -18,7 +21,7 @@ export default function TabLayout() {
                     title: "Home",
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            name="home"
+                            name="home-variant"
                             size={size}
                             color={color as IconProps["color"]}
                         />
@@ -31,7 +34,7 @@ export default function TabLayout() {
                     title: "Components",
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            name="view-grid"
+                            name="puzzle"
                             size={size}
                             color={color as IconProps["color"]}
                         />

@@ -21,6 +21,7 @@ const sections = [
             { name: "Chip", route: "chips" },
             { name: "Icon", route: "icon" },
             { name: "Label", route: "label" },
+            { name: "Typography", route: "typography" },
         ],
     },
     {
@@ -89,7 +90,7 @@ export default function ComponentsIndex() {
     }: {
         section: { title: string };
     }) => (
-        <Typography variant="h6" style={styles.sectionTitle}>
+        <Typography variant="heading.md" style={styles.sectionTitle}>
             {section.title}
         </Typography>
     );

@@ -15,7 +15,7 @@ export default function InputScreen() {
             style={{ flex: 1 }}
         >
             <Section>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Input fields let users enter and edit text — in forms,
                     search bars, or anywhere you need to capture user input.
                 </Typography>
@@ -31,7 +31,7 @@ export default function InputScreen() {
             </Surface>
 
             <Section title="With Adornments">
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Use startText and endText for prefix/suffix text.
                     Use startAdornment and endAdornment for elements
                     like icons or buttons.

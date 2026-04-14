@@ -20,16 +20,16 @@ export default function TextFieldScreen() {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.section}>
-                <Typography variant="h5">TextField</Typography>
+                <Typography variant="heading.lg">TextField</Typography>
                 <Spacer amount="small" />
-                <Typography variant="p">
+                <Typography variant="body.md">
                     TextFields combine an input with a label, helper text, and
                     validation states — great when you need more context around
                     user input.
                 </Typography>
             </View>
             <View style={styles.section}>
-                <Typography variant="h6">Basic TextField</Typography>
+                <Typography variant="heading.md">Basic TextField</Typography>
 
                 <TextField
                     label="Full Name"
@@ -41,7 +41,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">TextField with Icon</Typography>
+                <Typography variant="heading.md">TextField with Icon</Typography>
 
                 <TextField
                     label="Email Address"
@@ -57,7 +57,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">TextField with Unit</Typography>
+                <Typography variant="heading.md">TextField with Unit</Typography>
 
                 <TextField
                     label="Amount"
@@ -71,7 +71,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Multiline TextField</Typography>
+                <Typography variant="heading.md">Multiline TextField</Typography>
 
                 <TextField
                     label="Message"
@@ -86,7 +86,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">TextField with Validation</Typography>
+                <Typography variant="heading.md">TextField with Validation</Typography>
                 <Typography style={styles.description}>
                     TextField with invalid state
                 </Typography>
@@ -159,7 +159,7 @@ export default function TextFieldScreen() {
                 />
                 <Spacer amount="small" />
                 <View style={styles.section}>
-                    <Typography variant="h6">Read-only TextField</Typography>
+                    <Typography variant="heading.md">Read-only TextField</Typography>
 
                     <TextField
                         label="Read-only Field"

@@ -61,6 +61,10 @@ export default function ComponentsLayout() {
             <Stack.Screen name="spacer" options={{ title: "Spacer" }} />
             <Stack.Screen name="tabs" options={{ title: "Tabs" }} />
             <Stack.Screen name="textfield" options={{ title: "TextField" }} />
+            <Stack.Screen
+                name="typography"
+                options={{ title: "Typography" }}
+            />
         </Stack>
     );
 }

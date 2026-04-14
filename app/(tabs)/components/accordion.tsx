@@ -97,7 +97,7 @@ export default function AccordionScreen() {
             />
 
             <Section title="Other options">
-                <Typography variant="p">
+                <Typography variant="body.md">
                     You can move the chevron to the right for a different
                     layout. If some content isn&apos;t ready yet, disable the
                     item to let users know.
@@ -105,7 +105,7 @@ export default function AccordionScreen() {
             </Section>
             <Accordion>
                 <Accordion.Item title="Item A" chevronPosition="right">
-                    <Typography variant="p">Content for Item A</Typography>
+                    <Typography variant="body.md">Content for Item A</Typography>
                 </Accordion.Item>
             </Accordion>
 

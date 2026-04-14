@@ -1,9 +1,11 @@
 import { Section } from "@/components/Section";
 import { Surface } from "@/components/Surface";
-import { Button, Spacer, Typography } from "@equinor/eds-mobile-components";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Button, EDSStyleSheet, Spacer, Typography, useStyles } from "@equinor/eds-mobile-components";
+import { ScrollView, View } from "react-native";
 
 export default function ButtonsScreen() {
+    const styles = useStyles(themeStyles);
+
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <Section>
@@ -134,10 +136,12 @@ export default function ButtonsScreen() {
     );
 }
 
-const styles = StyleSheet.create({
+const themeStyles = EDSStyleSheet.create((token) => ({
     buttonRow: {
         flexDirection: "row",
+        flexWrap: "wrap",
         justifyContent: "space-evenly",
         alignItems: "center",
+        rowGap: token.newSpacing.spacing.vertical.md,
     },
-});
+}));

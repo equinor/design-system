@@ -13,7 +13,7 @@ export default function OfflineBannerScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={{ padding: 16 }}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     The offline banner appears when the device loses
                     connectivity. It lets users know their changes might not
                     sync until they&apos;re back online. By default, it assumes
@@ -21,15 +21,15 @@ export default function OfflineBannerScreen() {
                 </Typography>
                 <Spacer amount="large" />
 
-                <Typography variant="h6">Offline State</Typography>
+                <Typography variant="heading.md">Offline State</Typography>
                 <Spacer amount="small" />
                 <OfflineBanner isConnected={false} />
                 <Spacer amount="large" />
 
-                <Typography variant="h6">Online State (Hidden)</Typography>
+                <Typography variant="heading.md">Online State (Hidden)</Typography>
                 <Spacer amount="small" />
                 <OfflineBanner isConnected={true} />
-                <Typography variant="p" style={{ fontStyle: "italic" }}>
+                <Typography variant="body.md" style={{ fontStyle: "italic" }}>
                     Banner is hidden when connected
                 </Typography>
 

@@ -13,7 +13,7 @@ export default function ScrimScreen() {
         <>
             <ScrollView contentInsetAdjustmentBehavior="automatic">
                 <Section>
-                    <Typography variant="p">
+                    <Typography variant="body.md">
                         A scrim is a semi-transparent overlay that dims the
                         background. It focuses attention on foreground content
                         like dialogs or menus, and can be tapped to dismiss.
@@ -33,7 +33,7 @@ export default function ScrimScreen() {
 
             <Scrim isOpen={scrimOpen} onPress={() => setScrimOpen(false)}>
                 <View style={styles.scrimContent}>
-                    <Typography variant="h5" style={styles.scrimText}>
+                    <Typography variant="heading.lg" style={styles.scrimText}>
                         Scrim Content
                     </Typography>
                     <Typography style={styles.scrimText}>

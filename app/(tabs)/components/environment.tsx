@@ -13,7 +13,7 @@ export default function EnvironmentScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Environment banners indicate which environment the app is
                     running in. They help prevent accidental changes in
                     production by making the current environment clearly
@@ -22,7 +22,7 @@ export default function EnvironmentScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Development Environment</Typography>
+                <Typography variant="heading.md">Development Environment</Typography>
                 <EnvironmentProvider currentEnvironment="dev">
                     <View style={styles.bannerContainer}>
                         <EnvironmentBanner />
@@ -31,7 +31,7 @@ export default function EnvironmentScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h5">Test Environment</Typography>
+                <Typography variant="heading.lg">Test Environment</Typography>
                 <EnvironmentProvider currentEnvironment="test">
                     <View style={styles.bannerContainer}>
                         <EnvironmentBanner />
@@ -40,7 +40,7 @@ export default function EnvironmentScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h5">Q&A Environment</Typography>
+                <Typography variant="heading.lg">Q&A Environment</Typography>
                 <EnvironmentProvider currentEnvironment="qa">
                     <View style={styles.bannerContainer}>
                         <EnvironmentBanner />

@@ -32,7 +32,7 @@ export default function AutocompleteScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Autocomplete helps users find and select from a list of
                     options as they type. Ideal for long lists like countries,
                     tags, or categories.
@@ -40,7 +40,7 @@ export default function AutocompleteScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Single Select</Typography>
+                <Typography variant="heading.md">Single Select</Typography>
 
                 <Autocomplete
                     label="Select a country"
@@ -52,7 +52,7 @@ export default function AutocompleteScreen() {
                 />
 
                 {selectedCountry && (
-                    <Typography variant="p">
+                    <Typography variant="body.md">
                         Selected: {selectedCountry.label}
                     </Typography>
                 )}
@@ -64,7 +64,7 @@ export default function AutocompleteScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Multi-select</Typography>
+                <Typography variant="heading.md">Multi-select</Typography>
 
                 <Autocomplete.Multiselect
                     label="Select countries"
@@ -76,7 +76,7 @@ export default function AutocompleteScreen() {
                 />
 
                 {selectedCountries.length > 0 && (
-                    <Typography variant="p">
+                    <Typography variant="body.md">
                         Selected:{" "}
                         {selectedCountries.map((c) => c.label).join(", ")}
                     </Typography>

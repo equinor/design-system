@@ -14,15 +14,15 @@ export default function SearchScreen() {
             style={styles.container}
             contentInsetAdjustmentBehavior="automatic"
         >
-            <Typography variant="h5">Search</Typography>
+            <Typography variant="heading.lg">Search</Typography>
             <Spacer amount="small" />
-            <Typography variant="p">
+            <Typography variant="body.md">
                 Search fields help users find content quickly. Add a cancel
                 button for easy clearing, or keep it simple for basic use cases.
             </Typography>
             <Spacer amount="large" />
 
-            <Typography variant="h6">Basic Search</Typography>
+            <Typography variant="heading.md">Basic Search</Typography>
             <Spacer amount="small" />
 
             <Search
@@ -32,7 +32,7 @@ export default function SearchScreen() {
             />
 
             {searchQuery.length > 0 && (
-                <Typography variant="p" style={styles.resultText}>
+                <Typography variant="body.md" style={styles.resultText}>
                     Searching for: {searchQuery}
                 </Typography>
             )}
@@ -40,7 +40,7 @@ export default function SearchScreen() {
             <ViewCode title="Basic Search" code={basicSearch} />
             <Spacer amount="large" />
 
-            <Typography variant="h6">Cancellable Search</Typography>
+            <Typography variant="heading.md">Cancellable Search</Typography>
             <Spacer amount="small" />
 
             <Search
@@ -52,7 +52,7 @@ export default function SearchScreen() {
             />
 
             {searchQuery2.length > 0 && (
-                <Typography variant="p" style={styles.resultText}>
+                <Typography variant="body.md" style={styles.resultText}>
                     Searching for: {searchQuery2}
                 </Typography>
             )}
@@ -60,7 +60,7 @@ export default function SearchScreen() {
             <ViewCode title="Cancellable Search" code={cancellableSearch} />
             <Spacer amount="large" />
 
-            <Typography variant="h6">Disabled Search</Typography>
+            <Typography variant="heading.md">Disabled Search</Typography>
 
             <Spacer amount="small" />
             <Search

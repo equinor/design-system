@@ -20,7 +20,7 @@ export default function ChipsScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Chips are compact elements for filtering, selecting, or
                     displaying small pieces of information like tags or
                     categories.
@@ -28,7 +28,7 @@ export default function ChipsScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Basic Chips</Typography>
+                <Typography variant="heading.md">Basic Chips</Typography>
 
                 <View style={styles.row}>
                     <Chip
@@ -53,7 +53,7 @@ export default function ChipsScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Chip Variants</Typography>
+                <Typography variant="heading.md">Chip Variants</Typography>
 
                 <View style={styles.row}>
                     <Chip
@@ -99,7 +99,7 @@ export default function ChipsScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Deletable Chips</Typography>
+                <Typography variant="heading.md">Deletable Chips</Typography>
 
                 <View style={styles.row}>
                     {deleteChipVisible ? (
@@ -128,7 +128,7 @@ export default function ChipsScreen() {
             >
                 <Dialog.Header>Active Chip Pressed</Dialog.Header>
                 <Dialog.CustomContent>
-                    <Typography variant="p">
+                    <Typography variant="body.md">
                         You clicked the Active Chip! This dialog demonstrates
                         how chips can trigger dialogs for user interactions.
                     </Typography>
@@ -148,7 +148,7 @@ export default function ChipsScreen() {
                 placement="top"
             >
                 <View style={styles.popoverContent}>
-                    <Typography variant="p">Chip Popover</Typography>
+                    <Typography variant="body.md">Chip Popover</Typography>
                 </View>
             </Popover>
 

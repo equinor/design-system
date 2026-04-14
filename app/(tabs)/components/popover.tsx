@@ -14,7 +14,7 @@ export default function PopoverScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Popovers display content in a floating container anchored to
                     a trigger element — helpful for additional context or quick
                     actions without navigating away.
@@ -22,7 +22,7 @@ export default function PopoverScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Basic Popover</Typography>
+                <Typography variant="heading.md">Basic Popover</Typography>
 
                 <View ref={anchorRef1}>
                     <Button
@@ -37,7 +37,7 @@ export default function PopoverScreen() {
                     onClose={() => setPopoverOpen1(false)}
                 >
                     <View style={styles.popoverContent}>
-                        <Typography variant="p">This is a popover!</Typography>
+                        <Typography variant="body.md">This is a popover!</Typography>
                         <Typography style={styles.popoverText}>
                             Popovers are great for displaying additional
                             information.
@@ -49,7 +49,7 @@ export default function PopoverScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Popover with Actions</Typography>
+                <Typography variant="heading.md">Popover with Actions</Typography>
 
                 <View ref={anchorRef2}>
                     <Button
@@ -64,7 +64,7 @@ export default function PopoverScreen() {
                     onClose={() => setPopoverOpen2(false)}
                 >
                     <View style={styles.popoverContent}>
-                        <Typography variant="p" bold>
+                        <Typography variant="body.md" bold>
                             Quick Actions
                         </Typography>
                         <Typography style={styles.popoverText}>
@@ -86,7 +86,7 @@ export default function PopoverScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Tap the buttons above to see popovers in action
                 </Typography>
             </View>

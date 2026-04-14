@@ -21,7 +21,7 @@ export default function PaperScreen() {
                 alignItems: "center",
             }}
         >
-            <Typography group="ui" variant="tooltip">
+            <Typography variant="caption">
                 {elevation}
             </Typography>
         </Paper>
@@ -29,7 +29,7 @@ export default function PaperScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Paper provides a surface for content with configurable
                     elevation. It&apos;s great for grouping related information
                     and creating visual hierarchy.
@@ -37,10 +37,10 @@ export default function PaperScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Basic Paper</Typography>
+                <Typography variant="heading.md">Basic Paper</Typography>
 
                 <Paper elevation="raised" style={styles.paper}>
-                    <Typography variant="p">
+                    <Typography variant="body.md">
                         This is a Paper component. It provides elevation and a
                         card-like appearance.
                     </Typography>
@@ -50,10 +50,10 @@ export default function PaperScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Paper with Content</Typography>
+                <Typography variant="heading.md">Paper with Content</Typography>
 
                 <Paper elevation="raised" style={styles.paper}>
-                    <Typography variant="p" bold>
+                    <Typography variant="body.md" bold>
                         Card Title
                     </Typography>
                     <Typography style={styles.cardText}>
@@ -64,7 +64,7 @@ export default function PaperScreen() {
                 </Paper>
 
                 <Spacer amount="small" />
-                <Typography variant="h6">
+                <Typography variant="heading.md">
                     {" "}
                     Paper with different elevations
                 </Typography>

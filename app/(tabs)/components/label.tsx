@@ -9,7 +9,7 @@ export default function LabelScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Labels identify form fields and other inputs. They can
                     include optional meta text to indicate whether a field is
                     required or optional.
@@ -17,7 +17,7 @@ export default function LabelScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Basic Labels</Typography>
+                <Typography variant="heading.md">Basic Labels</Typography>
 
                 <View style={styles.labelContainer}>
                     <Label label="Default Label" />
@@ -29,7 +29,7 @@ export default function LabelScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Labels with Meta Text</Typography>
+                <Typography variant="heading.md">Labels with Meta Text</Typography>
 
                 <View style={styles.labelContainer}>
                     <Label label="Email Address" meta="Required" />
@@ -41,20 +41,20 @@ export default function LabelScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Labels with Form Fields</Typography>
+                <Typography variant="heading.md">Labels with Form Fields</Typography>
 
                 <View style={styles.labelContainer}>
                     <View>
                         <Label label="First Name" meta="Required" />
-                        <Typography variant="p">John</Typography>
+                        <Typography variant="body.md">John</Typography>
                     </View>
                     <View>
                         <Label label="Last Name" meta="Required" />
-                        <Typography variant="p">Doe</Typography>
+                        <Typography variant="body.md">Doe</Typography>
                     </View>
                     <View>
                         <Label label="Email" meta="Optional" />
-                        <Typography variant="p">
+                        <Typography variant="body.md">
                             john.doe@example.com
                         </Typography>
                     </View>

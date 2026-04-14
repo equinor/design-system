@@ -19,7 +19,7 @@ export default function MenuScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     Menus display a list of choices on a temporary surface —
                     handy for actions that don&apos;t need to be visible all the
                     time.
@@ -27,7 +27,7 @@ export default function MenuScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Basic Menu</Typography>
+                <Typography variant="heading.md">Basic Menu</Typography>
 
                 <View ref={anchorRef1}>
                     <Button
@@ -59,7 +59,7 @@ export default function MenuScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Menu with Icons</Typography>
+                <Typography variant="heading.md">Menu with Icons</Typography>
 
                 <View ref={anchorRef2}>
                     <Button
@@ -94,7 +94,7 @@ export default function MenuScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="h6">Other Menus</Typography>
+                <Typography variant="heading.md">Other Menus</Typography>
                 <View ref={secondButtonRef}>
                     <Button
                         label="Other Menu Options"

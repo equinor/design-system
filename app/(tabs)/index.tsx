@@ -11,15 +11,15 @@ export default function HomeScreen() {
                 />
             </View>
             <View style={styles.welcome}>
-                <Typography variant="h2" style={styles.title}>
+                <Typography variant="display.md" style={styles.title}>
                     EDS Mobile
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant="heading.md">
                     Equinor Design System for React Native
                 </Typography>
             </View>
             <View style={styles.section}>
-                <Typography variant="p">
+                <Typography variant="body.md">
                     This is a component library showcase for the Equinor Design
                     System Mobile.
                 </Typography>
@@ -35,19 +35,19 @@ export default function HomeScreen() {
                 ]}
             >
                 <Paper elevation="raised" style={{ padding: 16 }}>
-                    <Typography variant="h6">What&apos;s New</Typography>
+                    <Typography variant="heading.md">What&apos;s New</Typography>
                     <Typography
-                        variant="p"
-                        style={{ flexWrap: "wrap", fontSize: 14 }}
+                        variant="body.md"
+                        style={{ flexWrap: "wrap" }}
                     >
                         We are happy to...
                     </Typography>
                 </Paper>
                 <Paper elevation="raised" style={{ padding: 16 }}>
-                    <Typography variant="h6">Getting Started</Typography>
+                    <Typography variant="heading.md">Getting Started</Typography>
                     <Typography
-                        variant="p"
-                        style={{ flexWrap: "wrap", fontSize: 14 }}
+                        variant="body.md"
+                        style={{ flexWrap: "wrap" }}
                     >
                         Welcome to the ...
                     </Typography>
