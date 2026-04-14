@@ -19,16 +19,14 @@
   }
 
   .eds-autocomplete__listbox {
-    /* UA popover reset */
+    /* Anchor positioning — flush below input, left-aligned */
     position: fixed;
-    inset: auto;
-
-    /* Anchor positioning — sits flush below the input */
+    top: anchor(bottom);
+    left: anchor(left);
     position-anchor: var(--autocomplete-anchor);
-    position-area: bottom;
 
     /* Flip above if not enough space below */
-    position-try-fallbacks: flip-block;
+    position-try-fallbacks: --eds-autocomplete-top;
 
     overflow: visible;
     overflow-y: auto;
@@ -84,5 +82,7 @@
 
 /* @position-try must be outside @layer per spec */
 @position-try --eds-autocomplete-top {
-  position-area: top;
+  top: auto;
+  bottom: anchor(top);
+  left: anchor(left);
 }

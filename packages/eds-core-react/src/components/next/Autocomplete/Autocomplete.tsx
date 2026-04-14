@@ -22,7 +22,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       options = [],
       selectedOption,
       onOptionSelect,
-      noOptionsText = 'No options',
+      noOptionsText: _noOptionsText = 'No options',
       disabled,
       readOnly,
       invalid,
@@ -156,7 +156,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               // auto: top-layer + light-dismiss (click outside closes)
               popover="auto"
               className="eds-autocomplete__listbox"
-              aria-label={label ? String(label) : undefined}
+              aria-label={typeof label === 'string' ? label : undefined}
               onToggle={handleToggle}
             >
               {filteredOptions.map((option) => (
