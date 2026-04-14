@@ -42,6 +42,7 @@ export const MultipleInput = () => {
     hideClearButton,
     restHtmlProps,
     consolidatedEvents,
+    chipCount,
     inputRef,
   } = useAutocompleteContext()
 
@@ -55,7 +56,10 @@ export const MultipleInput = () => {
     if (isKeyboardEvent && selectedItems.length > 1) {
       const isLastChip = index === selectedItems.length - 1
       const nextItem = selectedItems[isLastChip ? index - 1 : index + 1]
-      chipRefs.current.get(getLabel(nextItem))?.focus()
+      const nextRef = chipRefs.current.get(getLabel(nextItem))
+      // Fall back to input when next chip is hidden (beyond chipCount)
+      if (nextRef) nextRef.focus()
+      else inputRef.current?.focus()
     } else if (!isKeyboardEvent) {
       inputRef.current?.focus()
     }
@@ -92,13 +96,35 @@ export const MultipleInput = () => {
     >
       <ChipContainer $density={density}>
         {selectionDisplay === 'chips' &&
-          selectedItems.map((item, index) => (
+          selectedItems
+            .slice(0, chipCount > 0 ? chipCount : undefined)
+            .map((item, index) => (
+              <Chip
+                key={getLabel(item)}
+                ref={(el) => {
+                  if (el) chipRefs.current.set(getLabel(item), el)
+                  else chipRefs.current.delete(getLabel(item))
+                }}
+                style={{
+                  outline:
+                    '1px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))',
+                  ...(density === 'compact' && {
+                    height: '16px',
+                    fontSize: '12px',
+                    gridGap: '0px',
+                  }),
+                }}
+                onDelete={handleChipDelete(item, index)}
+                onClick={handleChipClick(item, index)}
+                disabled={readOnly}
+              >
+                {getLabel(item)}
+              </Chip>
+            ))}
+        {selectionDisplay === 'chips' &&
+          chipCount &&
+          selectedItems.length > chipCount && (
             <Chip
-              key={getLabel(item)}
-              ref={(el) => {
-                if (el) chipRefs.current.set(getLabel(item), el)
-                else chipRefs.current.delete(getLabel(item))
-              }}
               style={{
                 outline:
                   '1px solid var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1))',
@@ -108,13 +134,11 @@ export const MultipleInput = () => {
                   gridGap: '0px',
                 }),
               }}
-              onDelete={handleChipDelete(item, index)}
-              onClick={handleChipClick(item, index)}
               disabled={readOnly}
             >
-              {getLabel(item)}
+              +{selectedItems.length - chipCount} more
             </Chip>
-          ))}
+          )}
         <UnstyledInput
           {...restHtmlProps}
           {...inputProps}
