@@ -123,7 +123,7 @@ export const AccordionItem = ({
                 >
                     <View style={styles.headerContainer}>
                         <Typography
-                            variant="h6"
+                            variant="heading.md"
                             color={
                                 disabled
                                     ? "textTertiary"

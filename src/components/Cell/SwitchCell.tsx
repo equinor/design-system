@@ -59,8 +59,7 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
             >
                 <View style={styles.contentContainer}>
                     <Typography
-                        group="cell"
-                        variant="title"
+                        variant="body.md"
                         numberOfLines={1}
                         color={disabled ? "textDisabled" : color}
                     >
@@ -68,8 +67,7 @@ export const SwitchCell = forwardRef<View, SwitchCellProps>(
                     </Typography>
                     {description && (
                         <Typography
-                            group="cell"
-                            variant="description"
+                            variant="label.sm"
                             numberOfLines={2}
                             color={disabled ? "textDisabled" : "textTertiary"}
                         >

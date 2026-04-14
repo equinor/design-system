@@ -1,6 +1,8 @@
 import React from "react";
 import { Typography, TypographyProps } from "../Typography";
 import { View } from "react-native";
+import { EDSStyleSheet } from "../../styling";
+import { useStyles } from "../../hooks/useStyles";
 
 export type LabelProps = {
     /**
@@ -15,18 +17,13 @@ export type LabelProps = {
 
 export const Label = (props: LabelProps & TypographyProps) => {
     const { label, meta, ...other } = props;
+    const styles = useStyles(themeStyles);
     return (
-        <View
-            style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                paddingVertical: 4,
-            }}
-        >
-            <Typography variant="label" color="textTertiary" {...other}>
+        <View style={styles.container}>
+            <Typography variant="label.md" style={styles.text} {...other}>
                 {label}
             </Typography>
-            <Typography variant="label" color="textTertiary" {...other}>
+            <Typography variant="label.md" style={styles.text} {...other}>
                 {meta}
             </Typography>
         </View>
@@ -34,3 +31,14 @@ export const Label = (props: LabelProps & TypographyProps) => {
 };
 
 Label.displayName = "Label";
+
+const themeStyles = EDSStyleSheet.create((token) => ({
+    container: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingVertical: 4,
+    },
+    text: {
+        color: token.newColors.text.neutral.subtle,
+    },
+}));

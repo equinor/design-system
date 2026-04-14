@@ -8,7 +8,6 @@ type InputStyleProps = Pick<InputProps, "readOnly" | "invalid" | "disabled"> & {
 export const inputTokenStyles = EDSStyleSheet.create(
     (token, props: InputStyleProps) => {
         const { isSelected, invalid, readOnly, disabled } = props;
-        const isInactive = readOnly === true || disabled === true;
 
         // Background color
         const backgroundColor = invalid
@@ -50,8 +49,7 @@ export const inputTokenStyles = EDSStyleSheet.create(
                 alignItems: "center",
                 borderWidth,
                 borderColor,
-                paddingHorizontal:
-                    token.newSpacing.spacing.inset.sm.horizontal,
+                paddingHorizontal: token.newSpacing.spacing.inset.sm.horizontal,
                 paddingVertical:
                     token.newSpacing.spacing.inset.lg.verticalSquished,
                 gap: token.newSpacing.spacing.icon.sm.gapHorizontal,

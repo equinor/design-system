@@ -77,7 +77,6 @@ export const Button: FC<ButtonProps> = ({
                             />
                         )}
                         <Typography
-                            group="interactive"
                             variant="button"
                             style={styles.text}
                         >

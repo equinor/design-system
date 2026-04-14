@@ -36,8 +36,7 @@ export const ProgressItemTask = ({ task }: ProgressItemTaskProps) => {
                 <View style={styles.taskStatusAndTitle}>
                     <ProgressStatusIndicator size={24} status={task.status} />
                     <Typography
-                        group="paragraph"
-                        variant="body_short"
+                        variant="body.lg"
                         bold={
                             task.status === "error" ||
                             task.status === "inProgress"

@@ -8,6 +8,7 @@ import EquinorLight from "../assets/fonts/Equinor-Light.otf";
 import EquinorLightItalic from "../assets/fonts/Equinor-LightItalic.otf";
 import EquinorMedium from "../assets/fonts/Equinor-Medium.otf";
 import EquinorMediumItalic from "../assets/fonts/Equinor-MediumItalic.otf";
+import EquinorRegular from "../assets/fonts/Equinor-Regular.otf";
 import Inter from "../assets/fonts/Inter.otf";
 
 const fontMap = {
@@ -19,6 +20,7 @@ const fontMap = {
     "Equinor-LightItalic": EquinorLightItalic as FontSource,
     "Equinor-Medium": EquinorMedium as FontSource,
     "Equinor-MediumItalic": EquinorMediumItalic as FontSource,
+    "Equinor-Regular": EquinorRegular as FontSource,
     Inter: Inter as FontSource,
 };
 

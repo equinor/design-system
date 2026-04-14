@@ -13,12 +13,11 @@ export const ErrorBoundaryScreen = ({ resetErrorBoundary }: FallbackProps) => {
             <View style={styles.container}>
                 <Typography
                     color={styles.title_color.color}
-                    group="paragraph"
-                    variant="body_short"
+                    variant="body.lg"
                 >
                     Error
                 </Typography>
-                <Typography group="paragraph" variant="body_long">
+                <Typography variant="body.lg">
                     Something unexpected happened, and the app crashed. You can
                     restart the app by clicking the button below.
                     {"\n\n"}

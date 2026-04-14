@@ -14,8 +14,7 @@ export const Description = ({ description }: DescriptionProps) => {
     return (
         <Typography
             color={status === "notStarted" ? "textDisabled" : "textPrimary"}
-            variant="description"
-            group="cell"
+            variant="label.sm"
         >
             {typeof description === "function"
                 ? description(numCompletedTasks, numTotalTasks)

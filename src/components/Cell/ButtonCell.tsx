@@ -71,8 +71,7 @@ export const ButtonCell = forwardRef<View, ButtonCellProps>(
             >
                 <View style={styles.contentContainer}>
                     <Typography
-                        group="cell"
-                        variant="title"
+                        variant="body.md"
                         numberOfLines={1}
                         color={disabled ? "textDisabled" : color}
                     >
@@ -80,8 +79,7 @@ export const ButtonCell = forwardRef<View, ButtonCellProps>(
                     </Typography>
                     {description && (
                         <Typography
-                            group="cell"
-                            variant="description"
+                            variant="label.sm"
                             numberOfLines={2}
                             color={disabled ? "textDisabled" : "textTertiary"}
                         >

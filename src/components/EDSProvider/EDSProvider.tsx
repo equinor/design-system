@@ -8,6 +8,7 @@ import {
     WithoutThemeOptionValues,
     comfortableSpacingToken,
     spaciousSpacingToken,
+    typographyToken,
 } from "../../styling/tokens";
 import {
     ColorToken,
@@ -58,6 +59,7 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
             ...cleanProxyable,
             newSpacing: spacingToken,
             newColors: colorToken,
+            newTypography: typographyToken,
         } satisfies MasterToken;
     }, [props.colorScheme, props.density, spacingToken, colorToken]);
 

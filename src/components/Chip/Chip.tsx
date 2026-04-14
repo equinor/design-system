@@ -63,8 +63,7 @@ export const Chip = ({
                     )}
                     <Typography
                         style={styles.text}
-                        group="ui"
-                        variant="chipAndBadge"
+                        variant="label.sm"
                     >
                         {title}
                     </Typography>

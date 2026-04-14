@@ -8,7 +8,7 @@ export const DialogHeader = (props: TextChildren) => {
     const styles = useStyles(themeStyles);
     return (
         <View style={styles.header}>
-            <Typography variant="h6" numberOfLines={1} style={styles.title}>
+            <Typography variant="heading.md" numberOfLines={1} style={styles.title}>
                 {props.children}
             </Typography>
         </View>

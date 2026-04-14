@@ -29,7 +29,6 @@ export const CellSwipeItem = ({
             )}
             {title && (
                 <Typography
-                    group="interactive"
                     variant="button"
                     style={styles.textStyle}
                 >

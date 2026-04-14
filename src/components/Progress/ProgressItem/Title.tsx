@@ -12,7 +12,7 @@ export const Title = ({ title }: TitleProps) => {
             numberOfLines={1}
             bold={status !== "success"}
             color={status === "notStarted" ? "textDisabled" : "textPrimary"}
-            variant="h5"
+            variant="heading.lg"
         >
             {title}
         </Typography>

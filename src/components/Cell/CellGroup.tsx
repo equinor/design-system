@@ -48,9 +48,9 @@ export const CellGroup = ({
             <View style={styles.titleContainer}>
                 {title && (
                     <Typography
-                        group="cell"
-                        variant="groupTitle"
+                        variant="overline"
                         color="textTertiary"
+                        style={{ textTransform: "uppercase" }}
                     >
                         {title}
                     </Typography>

@@ -21,7 +21,7 @@ export const EnvironmentBanner = () => {
 
     return (
         <View style={styles.container}>
-            <Typography color={styles.text.color}>
+            <Typography style={{ color: styles.text.color }}>
                 {currentEnvironment} environment
             </Typography>
         </View>

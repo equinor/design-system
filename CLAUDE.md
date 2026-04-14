@@ -222,19 +222,22 @@ All components are being redesigned to match the EDS Figma design. Follow these 
 - **Match Figma as closely as possible** — use the Figma MCP tools to extract design context, variables, and screenshots
 - **Scale for mobile** — Figma designs are web-first; determine an appropriate scale factor per component for mobile touch targets (minimum 44×44pt recommended by Apple)
 - **Use semantic tokens** — never hardcode spacing or colors; map Figma CSS variables to `theme.newSpacing.*` and `theme.newColors.*` token paths
-- **Typography is the exception** — hardcode fontSize, fontWeight, lineHeight until typography tokens are available
+- **Use typography tokens** — map fontSize, fontWeight, lineHeight, letterSpacing to `theme.newTypography.*` token paths
 - **Pressed = Figma hover** — mobile has no hover state; use the Figma hover background as the pressed state
 - **Use `Pressable` not `PressableHighlight`** — Figma doesn't show a gray overlay on press
 - **Run `/migrate-component`** to follow the full step-by-step migration workflow
 
 ## Migration Notes
 
-The library is transitioning from old to new token system:
-- **Old:** `theme.colors.*`, `theme.spacing.*` (being phased out)
-- **New:** `theme.newColors.*`, `theme.newSpacing.*` (actively developed)
+A core goal of the component migration is integrating the new colour, spacing, and typography foundations into the React Native component library. Every migrated or newly created component **must** use the new token system exclusively.
 
-**When working on components:**
-- **Always prefer** `newColors` and `newSpacing` tokens for new work
+**Token systems:**
+- **Old (being phased out):** `theme.colors.*`, `theme.spacing.*`, `theme.typography.*`
+- **New (required):** `theme.newColors.*`, `theme.newSpacing.*`, `theme.newTypography.*`
+
+**When migrating or creating components:**
+- **Replace all old token references** with their `newColors`, `newSpacing`, or `newTypography` equivalents
+- **Replace hardcoded values** (hex colors, spacing numbers, font sizes) with semantic tokens where an equivalent exists
+- **Do not use old tokens** for any new work — this is not optional
 - Check recent commits for migration patterns
-- Both systems coexist during transition period
-- Do not use old tokens for new features or components
+- Both systems coexist during the transition period so consumers can adopt at their own pace, but component internals must use new tokens

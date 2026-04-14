@@ -14,16 +14,14 @@ export const Error = ({ error }: ErrorProps) => {
     return (
         <View style={styles.container}>
             <Typography
-                variant="description"
-                group="cell"
+                variant="label.sm"
                 color="textSecondary"
             >
                 {error.message}
             </Typography>
             {error.code && (
                 <Typography
-                    variant="description"
-                    group="cell"
+                    variant="label.sm"
                     color="textSecondary"
                 >
                     {error.code}
@@ -31,8 +29,7 @@ export const Error = ({ error }: ErrorProps) => {
             )}
             {error.suggestion && (
                 <Typography
-                    variant="description"
-                    group="cell"
+                    variant="label.sm"
                     color="textSecondary"
                 >
                     {error.suggestion}

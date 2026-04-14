@@ -9,6 +9,7 @@ import {
 } from "../types";
 import { ColorToken } from "./colorToken";
 import { SpacingToken } from "./spacingToken";
+import { TypographyToken } from "./typographyToken";
 
 export type ColorSchemeValues<T> = Record<ColorScheme, T>;
 export type DensityValues<T> = Record<Density, T>;
@@ -220,4 +221,5 @@ export type OldToken = WithoutThemeOptionValues<ProxyableMasterToken>;
 export type MasterToken = OldToken & {
     newSpacing: SpacingToken;
     newColors: ColorToken;
+    newTypography: TypographyToken;
 };

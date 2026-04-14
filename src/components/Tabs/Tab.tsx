@@ -34,8 +34,7 @@ export const Tab = ({ title, disabled = false, iconName }: TabProps) => {
                     <Typography
                         numberOfLines={1}
                         style={styles.text}
-                        group="navigation"
-                        variant="menuTab"
+                        variant="button"
                     >
                         {title}
                     </Typography>

@@ -74,8 +74,7 @@ export const NavigationCell = ({
         additionalTitlesRight?.map((text, index) => (
             <Typography
                 key={index}
-                group="cell"
-                variant="title"
+                variant="body.md"
                 numberOfLines={1}
                 color="textTertiary"
                 style={{ flex: 1 }}
@@ -88,8 +87,7 @@ export const NavigationCell = ({
         additionalTitlesUnder?.map((text, index) => (
             <Typography
                 key={index}
-                group="cell"
-                variant="title"
+                variant="body.md"
                 numberOfLines={1}
                 color="textTertiary"
             >
@@ -116,8 +114,7 @@ export const NavigationCell = ({
                     ]}
                 >
                     <Typography
-                        group="cell"
-                        variant="title"
+                        variant="body.md"
                         numberOfLines={1}
                         color={disabled ? "textDisabled" : undefined}
                         style={additionalTitlesRight && styles.title}
@@ -126,8 +123,7 @@ export const NavigationCell = ({
                     </Typography>
                     {description && (
                         <Typography
-                            group="cell"
-                            variant="description"
+                            variant="label.sm"
                             numberOfLines={2}
                             color={disabled ? "textDisabled" : "textTertiary"}
                         >
