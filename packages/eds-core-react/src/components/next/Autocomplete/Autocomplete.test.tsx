@@ -4,18 +4,35 @@ import '@testing-library/jest-dom'
 import { axe } from 'jest-axe'
 import { Autocomplete } from '.'
 
+// jsdom does not implement the Popover API
+const showPopoverMock = jest.fn(function (this: HTMLElement) {
+  this.setAttribute('data-popover-open', '')
+})
+const hidePopoverMock = jest.fn(function (this: HTMLElement) {
+  this.removeAttribute('data-popover-open')
+})
+
+beforeAll(() => {
+  HTMLElement.prototype.showPopover = showPopoverMock
+  HTMLElement.prototype.hidePopover = hidePopoverMock
+  HTMLElement.prototype.matches = function (
+    this: HTMLElement,
+    selector: string,
+  ) {
+    if (selector === ':popover-open')
+      return this.hasAttribute('data-popover-open')
+    return Element.prototype.matches.call(this, selector)
+  }
+})
+
+afterEach(() => jest.clearAllMocks())
+
 const options = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry']
 
 describe('Autocomplete (next)', () => {
   describe('Rendering', () => {
     it('renders with default props', () => {
-      render(
-        <Autocomplete
-          label="Fruit"
-          options={options}
-          data-testid="eds-autocomplete"
-        />,
-      )
+      render(<Autocomplete label="Fruit" options={options} />)
       expect(screen.getByRole('combobox')).toBeInTheDocument()
     })
 
@@ -46,6 +63,14 @@ describe('Autocomplete (next)', () => {
       expect(screen.getByText('Select a fruit')).toBeInTheDocument()
     })
 
+    it('listbox has popover="auto" attribute', () => {
+      render(<Autocomplete label="Fruit" options={options} />)
+      expect(screen.getByRole('listbox', { hidden: true })).toHaveAttribute(
+        'popover',
+        'auto',
+      )
+    })
+
     it('forwards ref to input element', () => {
       const ref = { current: null as HTMLInputElement | null }
       render(<Autocomplete ref={ref} label="Fruit" options={options} />)
@@ -54,32 +79,45 @@ describe('Autocomplete (next)', () => {
   })
 
   describe('Dropdown behavior', () => {
-    it('opens dropdown on focus', async () => {
-      const user = userEvent.setup()
-      render(<Autocomplete label="Fruit" options={options} />)
-      const input = screen.getByRole('combobox')
-      await user.click(input)
-      expect(input).toHaveAttribute('aria-expanded', 'true')
-    })
-
-    it('shows all options on focus with empty input', async () => {
+    it('calls showPopover on focus', async () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} />)
       await user.click(screen.getByRole('combobox'))
-      expect(screen.getAllByRole('option')).toHaveLength(options.length)
+      expect(showPopoverMock).toHaveBeenCalled()
+    })
+
+    it('shows all options when opened', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} />)
+      await user.click(screen.getByRole('combobox'))
+      expect(screen.getAllByRole('option', { hidden: true })).toHaveLength(
+        options.length,
+      )
     })
 
     it('filters options based on input value', async () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} />)
-      const input = screen.getByRole('combobox')
-      await user.type(input, 'an')
-      const visibleOptions = screen.getAllByRole('option')
-      expect(visibleOptions).toHaveLength(1)
-      expect(screen.getByRole('option', { name: 'Banana' })).toBeInTheDocument()
+      await user.type(screen.getByRole('combobox'), 'an')
+      expect(
+        screen.getByRole('option', { name: 'Banana', hidden: true }),
+      ).toBeInTheDocument()
+      expect(
+        screen.queryByRole('option', { name: 'Apple', hidden: true }),
+      ).not.toBeInTheDocument()
     })
 
-    it('selects an option on click', async () => {
+    it('calls hidePopover when option is selected', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} />)
+      await user.click(screen.getByRole('combobox'))
+      await user.click(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      )
+      expect(hidePopoverMock).toHaveBeenCalled()
+    })
+
+    it('calls onOptionSelect with selected option', async () => {
       const onOptionSelect = jest.fn()
       const user = userEvent.setup()
       render(
@@ -90,7 +128,9 @@ describe('Autocomplete (next)', () => {
         />,
       )
       await user.click(screen.getByRole('combobox'))
-      await user.click(screen.getByRole('option', { name: 'Apple' }))
+      await user.click(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      )
       expect(onOptionSelect).toHaveBeenCalledWith('Apple')
     })
 
@@ -98,7 +138,9 @@ describe('Autocomplete (next)', () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} />)
       await user.click(screen.getByRole('combobox'))
-      await user.click(screen.getByRole('option', { name: 'Apple' }))
+      await user.click(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      )
       expect(screen.getByRole('combobox')).toHaveValue('Apple')
     })
   })
@@ -109,11 +151,11 @@ describe('Autocomplete (next)', () => {
       expect(screen.getByRole('combobox')).toBeDisabled()
     })
 
-    it('does not open dropdown when disabled', async () => {
+    it('does not call showPopover when disabled', async () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} disabled />)
       await user.click(screen.getByRole('combobox'))
-      expect(screen.queryByRole('option')).not.toBeInTheDocument()
+      expect(showPopoverMock).not.toHaveBeenCalled()
     })
 
     it('is readonly when readOnly prop is true', () => {
@@ -178,10 +220,9 @@ describe('Autocomplete (next)', () => {
         <Autocomplete label="Fruit" options={options} selectedOption="Apple" />,
       )
       await user.click(screen.getByRole('combobox'))
-      expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
-        'aria-selected',
-        'true',
-      )
+      expect(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      ).toHaveAttribute('aria-selected', 'true')
     })
   })
 })

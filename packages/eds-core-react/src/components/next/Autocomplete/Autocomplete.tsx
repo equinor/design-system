@@ -1,4 +1,11 @@
-import { forwardRef, useId, useRef, useState, useCallback } from 'react'
+import {
+  forwardRef,
+  useId,
+  useRef,
+  useState,
+  useCallback,
+  type CSSProperties,
+} from 'react'
 import { search as searchIcon } from '@equinor/eds-icons'
 import type { AutocompleteProps } from './Autocomplete.types'
 import { Field, useFieldIds } from '../Field'
@@ -28,7 +35,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
   ) {
     const { inputId, descriptionId, helperMessageId, getDescribedBy } =
       useFieldIds(providedId)
-    const listboxId = useId()
+    const uid = useId()
+    const listboxId = `eds-autocomplete-listbox-${uid.replace(/:/g, '')}`
+    const anchorName = `--eds-autocomplete-${uid.replace(/:/g, '')}`
 
     const isControlled = value !== undefined
     const [internalValue, setInternalValue] = useState(
@@ -38,6 +47,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
 
     const [isOpen, setIsOpen] = useState(false)
     const inputRef = useRef<HTMLInputElement | null>(null)
+    const listboxRef = useRef<HTMLUListElement | null>(null)
 
     const mergedRef = useCallback(
       (node: HTMLInputElement | null) => {
@@ -54,28 +64,44 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     const filteredOptions = options.filter((option) =>
       option.toLowerCase().includes(inputValue.toLowerCase()),
     )
-    const showDropdown =
-      isOpen && !disabled && !readOnly && filteredOptions.length > 0
+    const canOpen = !disabled && !readOnly && filteredOptions.length > 0
+
+    const openListbox = () => {
+      if (canOpen && !listboxRef.current?.matches(':popover-open')) {
+        listboxRef.current?.showPopover()
+      }
+    }
+
+    const closeListbox = () => {
+      if (listboxRef.current?.matches(':popover-open')) {
+        listboxRef.current.hidePopover()
+      }
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!isControlled) setInternalValue(e.target.value)
       onChange?.(e)
-      setIsOpen(true)
+      // Re-evaluate canOpen after state update — open if there are matches
+      if (!disabled && !readOnly) {
+        listboxRef.current?.showPopover()
+      }
     }
 
-    const handleFocus = () => setIsOpen(true)
-
-    // Delay close so click on option fires first
-    const handleBlur = () => setTimeout(() => setIsOpen(false), 150)
+    const handleFocus = () => openListbox()
 
     const handleOptionSelect = (option: string) => {
       if (!isControlled) setInternalValue(option)
       onOptionSelect?.(option)
-      setIsOpen(false)
+      closeListbox()
       inputRef.current?.focus()
     }
 
-    // Accent only in interactive states
+    // Sync aria-expanded from the popover toggle event (covers light-dismiss too)
+    const handleToggle = (e: React.SyntheticEvent<HTMLUListElement>) => {
+      const toggleEvent = e.nativeEvent as ToggleEvent
+      setIsOpen(toggleEvent.newState === 'open')
+    }
+
     const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
 
     return (
@@ -92,53 +118,60 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               {description}
             </Field.Description>
           )}
-          <Input
-            ref={mergedRef}
-            id={inputId}
-            role="combobox"
-            aria-expanded={showDropdown}
-            aria-controls={listboxId}
-            aria-autocomplete="list"
-            aria-haspopup="listbox"
-            disabled={disabled}
-            readOnly={readOnly}
-            invalid={invalid}
-            value={inputValue}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            aria-describedby={getDescribedBy({
-              hasDescription: !!description,
-              hasHelperMessage: !!helperMessage,
-            })}
-            startAdornment={
-              <Icon
-                data={searchIcon}
-                className="autocomplete-search-icon"
-                data-color-appearance={iconTone}
-              />
-            }
-            {...inputProps}
-          />
-          <ul
-            id={listboxId}
-            role="listbox"
-            className="eds-autocomplete__listbox"
-            aria-label={label ? String(label) : undefined}
-            hidden={!showDropdown}
+          <div
+            className="eds-autocomplete__anchor"
+            style={{ '--autocomplete-anchor': anchorName } as CSSProperties}
           >
-            {filteredOptions.map((option) => (
-              <li
-                key={option}
-                role="option"
-                aria-selected={option === selectedOption}
-                className="eds-autocomplete__option"
-                onMouseDown={() => handleOptionSelect(option)}
-              >
-                {option}
-              </li>
-            ))}
-          </ul>
+            <Input
+              ref={mergedRef}
+              id={inputId}
+              role="combobox"
+              aria-expanded={isOpen}
+              aria-controls={listboxId}
+              aria-autocomplete="list"
+              aria-haspopup="listbox"
+              disabled={disabled}
+              readOnly={readOnly}
+              invalid={invalid}
+              value={inputValue}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              aria-describedby={getDescribedBy({
+                hasDescription: !!description,
+                hasHelperMessage: !!helperMessage,
+              })}
+              startAdornment={
+                <Icon
+                  data={searchIcon}
+                  className="autocomplete-search-icon"
+                  data-color-appearance={iconTone}
+                />
+              }
+              {...inputProps}
+            />
+            <ul
+              ref={listboxRef}
+              id={listboxId}
+              role="listbox"
+              // auto: top-layer + light-dismiss (click outside closes)
+              popover="auto"
+              className="eds-autocomplete__listbox"
+              aria-label={label ? String(label) : undefined}
+              onToggle={handleToggle}
+            >
+              {filteredOptions.map((option) => (
+                <li
+                  key={option}
+                  role="option"
+                  aria-selected={option === selectedOption}
+                  className="eds-autocomplete__option"
+                  onMouseDown={() => handleOptionSelect(option)}
+                >
+                  {option}
+                </li>
+              ))}
+            </ul>
+          </div>
           {helperMessage && (
             <Field.HelperMessage
               id={helperMessageId}

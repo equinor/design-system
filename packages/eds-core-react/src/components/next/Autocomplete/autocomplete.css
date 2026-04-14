@@ -1,7 +1,5 @@
 @layer eds-components {
   .eds-autocomplete {
-    position: relative;
-
     /* Search icon follows same color logic as Search component */
     & .autocomplete-search-icon {
       color: var(--eds-color-text-subtle);
@@ -16,19 +14,30 @@
     }
   }
 
+  .eds-autocomplete__anchor {
+    anchor-name: var(--autocomplete-anchor);
+  }
+
   .eds-autocomplete__listbox {
-    position: absolute;
-    z-index: 1;
+    /* UA popover reset */
+    position: fixed;
+    inset: auto;
 
-    /* Offset by 2px to visually separate from the input border */
-    inset-block-start: calc(100% + 2px);
-    inset-inline: 0;
+    /* Anchor positioning — sits flush below the input */
+    position-anchor: var(--autocomplete-anchor);
+    position-area: bottom;
 
+    /* Flip above if not enough space below */
+    position-try-fallbacks: flip-block;
+
+    overflow: visible;
     overflow-y: auto;
 
+    width: anchor-size(width);
     max-block-size: 300px;
     margin: 0;
     padding: 0;
+    border: none;
     border-radius: var(--eds-spacing-border-radius-rounded, 4px);
 
     list-style: none;
@@ -36,8 +45,6 @@
     background: var(--eds-color-bg-floating);
     outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
-
-    /* Matches Figma floating panel shadow */
     box-shadow:
       0 1px 5px 0 rgb(0 0 0 / 12%),
       0 2px 2px 0 rgb(0 0 0 / 14%),
@@ -50,7 +57,6 @@
     padding-block: var(--eds-container-space-vertical, 0.75rem);
     padding-inline: var(--eds-selectable-space-horizontal);
 
-    /* Use same font size as input */
     font-family: var(--eds-typography-font-family);
     font-size: var(--eds-typography-font-size);
     font-weight: var(--eds-typography-font-weight);
@@ -66,14 +72,17 @@
       background: var(--eds-color-bg-fill-muted-default);
     }
 
-    /* Error state: tint option list to match input canvas */
     .eds-autocomplete[data-invalid] & {
       background-color: var(--eds-color-bg-canvas);
 
       &:hover {
-        /* Slightly darker tint on hover in error state */
         filter: brightness(0.97);
       }
     }
   }
+}
+
+/* @position-try must be outside @layer per spec */
+@position-try --eds-autocomplete-top {
+  position-area: top;
 }
