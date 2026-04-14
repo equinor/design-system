@@ -377,6 +377,40 @@ export const CircularIconOnly: Story = {
   },
 }
 
+// ===== asChild =====
+
+export const AsChild: Story = {
+  render: () => {
+    const CustomLink = (
+      props: React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    ) => (
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      <a {...props} data-custom-router />
+    )
+    return (
+      <Wrapper direction="row">
+        <Button asChild>
+          <a href="/page">Link as button</a>
+        </Button>
+        <Button asChild variant="secondary">
+          <CustomLink href="/page">Router link</CustomLink>
+        </Button>
+        <Button asChild variant="ghost">
+          <a href="/page">Ghost link</a>
+        </Button>
+      </Wrapper>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `asChild` to render Button styles on a child element, such as an `<a>` or a router link component.',
+      },
+    },
+  },
+}
+
 // ===== Density Comparison =====
 
 export const DensityComparison: Story = {
