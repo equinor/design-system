@@ -3,37 +3,45 @@
   .eds-input-container {
     /* Temporary alias until proper input background token is available */
     --_bg-input: var(--eds-color-bg-canvas);
+
     /* Temporary alias until proper readonly text token is available */
     --_readonly-text-color: var(--eds-color-border-strong);
 
     isolation: isolate;
+
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: var(--eds-typography-gap-horizontal);
+    align-items: center;
+
     box-sizing: border-box;
     inline-size: 100%;
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+
     background: var(--_bg-input);
+
     /* Outline instead of border to not affect height calculation */
     outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
-    border-radius: var(--eds-spacing-border-radius-none);
-    padding-inline: var(--eds-selectable-space-horizontal);
-    padding-block: var(--eds-selectable-space-vertical);
+
     transition:
       background-color 150ms,
       outline-color 150ms;
 
-    &:hover:not([data-disabled]):not([data-readonly]) {
+    &:hover:not([data-disabled], [data-readonly]) {
       outline-color: var(--eds-color-border-strong);
 
       & .eds-input {
         color: var(--eds-color-text-strong);
+
         /* Safari autofill override */
         -webkit-text-fill-color: var(--eds-color-text-strong);
 
         &::placeholder {
           color: var(--eds-color-text-strong);
+
           /* Safari autofill override */
           -webkit-text-fill-color: var(--eds-color-text-strong);
         }
@@ -66,14 +74,16 @@
       outline-color: transparent;
 
       & .eds-input {
-        color: var(--eds-color-text-disabled);
         cursor: not-allowed;
+        color: var(--eds-color-text-disabled);
         opacity: 1;
+
         /* Safari autofill override */
         -webkit-text-fill-color: var(--eds-color-text-disabled);
 
         &::placeholder {
           color: var(--eds-color-text-disabled);
+
           /* Safari autofill override */
           -webkit-text-fill-color: var(--eds-color-text-disabled);
         }
@@ -92,6 +102,7 @@
 
       & .eds-input {
         color: var(--_readonly-text-color);
+
         /* Safari autofill override */
         -webkit-text-fill-color: var(--_readonly-text-color);
       }
@@ -112,20 +123,25 @@
   .eds-input {
     --_placeholder-text-color: var(--eds-color-text-subtle);
 
+    resize: none;
+
+    overflow: hidden;
     flex: 1;
+
     min-inline-size: 0;
+    padding: 0;
     border: var(--eds-sizing-stroke-none);
+
+    color: var(--eds-color-text-strong);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     background: transparent;
     outline: none;
-    color: var(--eds-color-text-strong);
-    padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    resize: none;
 
     &::placeholder {
       color: var(--_placeholder-text-color);
+
       /* Safari autofill override */
       -webkit-text-fill-color: var(--_placeholder-text-color);
     }
@@ -133,16 +149,17 @@
 
   /* Error icon */
   .eds-error-icon {
-    color: var(--eds-color-text-subtle);
     flex-shrink: 0;
+    color: var(--eds-color-text-subtle);
   }
 
   /* Adornments container */
   .eds-adornment {
     display: flex;
-    align-items: center;
-    gap: var(--eds-typography-gap-horizontal);
     flex-shrink: 0;
+    gap: var(--eds-typography-gap-horizontal);
+    align-items: center;
+
     color: var(--eds-color-text-subtle);
   }
 
