@@ -4,6 +4,13 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.5.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.0-beta.0...eds-core-react-next@v2.5.0-beta.0) (2026-04-14)
+
+
+### ✨ Added
+
+* add Slot utility and asChild prop to Link ([#4778](https://github.com/equinor/design-system/issues/4778)) ([fae4e42](https://github.com/equinor/design-system/commit/fae4e4248e6fb9a2f7466f9a6dbc2d4763fe30f0))
+
 ## [2.4.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.3.6-beta.0...eds-core-react-next@v2.4.0-beta.0) (2026-04-08)
 
 

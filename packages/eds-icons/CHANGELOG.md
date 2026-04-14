@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0](https://github.com/equinor/design-system/compare/eds-icons@v1.3.0...eds-icons@v1.4.0) (2026-04-14)
+
+
+### ✨ Added
+
+* **eds-icons:** add partial_completion icon ([#4803](https://github.com/equinor/design-system/issues/4803)) ([d2f086e](https://github.com/equinor/design-system/commit/d2f086e35f57d1b6c96362f72d4f52ef6da6c8c9))
+
 ## [1.3.0](https://github.com/equinor/design-system/compare/eds-icons@v1.2.2...eds-icons@v1.3.0) (2026-02-20)
 
 
