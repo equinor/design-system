@@ -9,7 +9,11 @@ const config = {
     '../stories/**/*.@(mdx|stories.@(ts|tsx))',
   ],
 
-  addons: ['@storybook/addon-a11y', '@storybook/addon-links', '@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-links',
+    '@storybook/addon-docs',
+  ],
   core: {},
 
   framework: {
@@ -37,8 +41,8 @@ const config = {
   },
 
   features: {
-    actions: false
-  }
+    actions: false,
+  },
 }
 
 export default config

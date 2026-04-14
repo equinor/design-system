@@ -5,7 +5,6 @@ import { StoryFn, StoryObj, Meta } from '@storybook/react-vite'
 import { action } from 'storybook/actions'
 import * as icons from '@equinor/eds-icons'
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 Icon.add(icons)
 
 const Wrapper = styled.div`

@@ -60,7 +60,6 @@ export function DebouncedInput({
               opt === 'NULL_OR_UNDEFINED' ? '<Blank>' : opt
             }
             data-testid={'autocomplete'}
-            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             label={`Select ${label ?? ''}`}
             placeholder={props.placeholder ?? 'Search'}
             selectedOptions={value as Array<string>}

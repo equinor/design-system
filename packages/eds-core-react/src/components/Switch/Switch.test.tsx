@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { render, fireEvent, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import userEvent from '@testing-library/user-event'

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { render, screen, within } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'

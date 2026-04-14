@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import resolve from '@rollup/plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from '@rollup/plugin-commonjs'

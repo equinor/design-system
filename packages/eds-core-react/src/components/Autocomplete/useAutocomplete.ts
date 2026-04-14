@@ -268,7 +268,6 @@ export const useAutocomplete = <T>({
         return item
       }
       try {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return item?.toString()
       } catch {
         throw new Error(

@@ -2,8 +2,8 @@
 import { forwardRef, InputHTMLAttributes, useMemo, type JSX } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import {
-  radio_button_selected, // eslint-disable-line camelcase
-  radio_button_unselected, // eslint-disable-line camelcase
+  radio_button_selected,
+  radio_button_unselected,
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { comfortable as tokens } from './Radio.tokens'
