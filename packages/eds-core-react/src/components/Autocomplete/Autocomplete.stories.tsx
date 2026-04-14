@@ -204,7 +204,7 @@ Multiple.args = {
 export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
-  const { options } = args
+  const { options, chipCount } = args
 
   return (
     <>
@@ -223,6 +223,7 @@ export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
         multiple
         placeholder="Select stocks"
         optionLabel={optionLabel}
+        chipCount={chipCount}
         selectionDisplay="chips"
         initialSelectedOptions={[options[0], options[1]]}
       />
@@ -232,6 +233,7 @@ export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
 SelectionDisplay.storyName = 'Selection display'
 SelectionDisplay.args = {
   options: stocks,
+  chipCount: 2,
 }
 
 export const ControlledSingleSelect: StoryFn<
