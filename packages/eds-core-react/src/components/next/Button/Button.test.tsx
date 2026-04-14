@@ -57,14 +57,6 @@ describe('Button (next)', () => {
       )
     })
 
-    it('renders with large size', () => {
-      render(<Button size="large">Large</Button>)
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-selectable-space',
-        'lg',
-      )
-    })
-
     it('renders with accent tone', () => {
       render(<Button tone="accent">Accent</Button>)
       expect(screen.getByRole('button')).toHaveAttribute(
@@ -313,7 +305,6 @@ describe('Button (next)', () => {
     it.each([
       ['small', 'sm'],
       ['default', 'md'],
-      ['large', 'lg'],
     ] as const)(
       'renders %s size with data-selectable-space=%s',
       (size, expected) => {
@@ -419,16 +410,6 @@ describe('Button (next)', () => {
       expect(button).toHaveAttribute('data-selectable-space', 'sm')
     })
 
-    it('uses selectable space tokens for icon-only (large size)', () => {
-      render(
-        <Button icon aria-label="Add" size="large">
-          <MockIcon />
-        </Button>,
-      )
-      const button = screen.getByRole('button')
-      expect(button).toHaveAttribute('data-selectable-space', 'lg')
-    })
-
     it('uses selectable space tokens for regular button', () => {
       render(
         <Button>
@@ -449,7 +430,7 @@ describe('Button (next)', () => {
       expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
     })
 
-    it.each(['small', 'default', 'large'] as const)(
+    it.each(['small', 'default'] as const)(
       'renders icon-only with %s size',
       (size) => {
         render(

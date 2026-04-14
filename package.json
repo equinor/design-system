@@ -92,7 +92,7 @@
     "stylelint": "^17.6.0",
     "stylelint-config-clean-order": "^8.0.1",
     "stylelint-config-standard": "^40.0.0",
-    "stylelint-order": "^7.0.1",
+    "stylelint-order": "^8.1.1",
     "prettier": "3.8.1",
     "typescript": "^5.9.3"
   },

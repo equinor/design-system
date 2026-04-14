@@ -29,7 +29,6 @@ figma.connect(
       }),
       geometry: figma.nestedProps('.Geometry Options', {
         size: figma.enum('Size', {
-          Large: 'large',
           Default: 'default',
           Small: 'small',
         }),
@@ -88,7 +87,6 @@ figma.connect(
       }),
       geometry: figma.nestedProps('.Geometry Options', {
         size: figma.enum('Size', {
-          Large: 'large',
           Default: 'default',
           Small: 'small',
         }),
