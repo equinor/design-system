@@ -11,7 +11,7 @@ Tooltips display brief, supplementary information when users hover over or focus
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--introduction"
   width="100%"
-  height="100"
+  height="150"
   frameborder="1"
 ></iframe>
 
@@ -55,7 +55,7 @@ The tooltip will automatically reposition itself to stay within the viewport bou
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--placements"
   width="100%"
-  height="200"
+  height="228"
   frameborder="1"
 ></iframe>
 
@@ -63,7 +63,7 @@ The tooltip will automatically reposition itself to stay within the viewport bou
 
 ### Text Content
 
-- Keep text to a maximum of one short sentence or four words
+- Keep text to a maximum of one short sentence
 - Do not repeat text that is already visible on the page
 - Provide additional help or clarification that is not immediately obvious
 - Tooltip text should never contain essential task information - use body text or help text for that
@@ -81,13 +81,6 @@ The tooltip can be disabled via the `disabled` prop. When disabled, the tooltip 
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--disabled)
-
-### Browser Support
-
-The tooltip uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) (`popover="hint"`) and [CSS Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning) for zero-JS positioning with automatic viewport-edge flipping.
-
-- **Chrome 125+, Firefox 135+, Safari 18.2+**: Full CSS Anchor Positioning support
-- **`popover="hint"`**: Supported in Chrome and Firefox. Safari falls back to `popover="manual"` - the tooltip still works, it just won't get free Escape-dismiss until Safari ships `hint` support.
 
 ## Accessibility
 
