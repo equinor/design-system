@@ -246,7 +246,6 @@ const Container = styled.div`
   }
 `
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StyledDatepicker = styled(ReactDatePicker as any)`
   ${({ theme }) => css`
     height: 24px;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { Chip as BaseChip } from "@/app/_components";
 import { ChipProps } from "@/app/_components/ChipProps";

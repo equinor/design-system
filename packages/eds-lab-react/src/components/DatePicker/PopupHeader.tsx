@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components'
 import { getMonth, getYear } from 'date-fns'

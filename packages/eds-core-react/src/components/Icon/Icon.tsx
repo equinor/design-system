@@ -49,7 +49,6 @@ const StyledPath = styled.path.attrs<PathProps>(({ $height, $size }) => ({
 }))``
 
 const findIcon = (name: string, data: IconData, size: number) => {
-  // eslint-disable-next-line prefer-const
   const icon = data ?? get(name)
 
   if (size < 24) {
@@ -100,7 +99,6 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   { size, color = 'currentColor', name, rotation, title, data, ...rest },
   ref,
 ) {
-  // eslint-disable-next-line prefer-const
   const icon = findIcon(name, data, size)
 
   if (typeof icon === 'undefined') {

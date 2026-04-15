@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Pagination, Table, Typography, useEds } from '@equinor/eds-core-react'
 import {
   ColumnDef,

@@ -5,7 +5,6 @@ import del from 'rollup-plugin-delete'
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts']
 
-// eslint-disable-next-line import/no-default-export
 export default [
   {
     input: './src/index.ts',

@@ -4,7 +4,11 @@ const config = {
   },
 
   stories: ['../src/**/*.@(mdx|stories.@(ts|tsx))'],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-links', '@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-links',
+    '@storybook/addon-docs',
+  ],
 
   /*   features: {
     interactionsDebugger: true,
@@ -43,8 +47,8 @@ const config = {
   },
 
   features: {
-    actions: false
-  }
+    actions: false,
+  },
 }
 
 export default config
