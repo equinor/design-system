@@ -112,6 +112,9 @@ export default tseslint.config(
       },
     },
     rules: {
+      // React recommended rules (display-name, jsx-key, no-deprecated, etc.)
+      ...react.configs.flat.recommended.rules,
+
       // Prettier
       'prettier/prettier': 'error',
 
