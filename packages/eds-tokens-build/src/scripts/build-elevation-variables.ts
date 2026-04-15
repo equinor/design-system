@@ -82,6 +82,8 @@ async function buildElevation() {
 
   const levels = ['Low', 'High'] as const
   const vars: string[] = []
+  const entries: { key: ShadowLayer; ambient: ShadowLayer; level: string }[] =
+    []
 
   for (const level of levels) {
     const group = shadow[level] as Record<string, unknown> | undefined
@@ -100,22 +102,7 @@ async function buildElevation() {
 
     const varName = `--${prefix}-elevation-${level.toLowerCase()}`
     vars.push(`  ${varName}: ${composeShadow(key, ambient)};`)
-  }
-
-  // Generate TypeScript output
-  type ElevationEntry = {
-    key: ShadowLayer
-    ambient: ShadowLayer
-    level: string
-  }
-  const entries: ElevationEntry[] = []
-
-  for (const level of levels) {
-    const group = shadow[level] as Record<string, unknown> | undefined
-    if (!group) continue
-    const key = extractLayer(group['Key'] as Record<string, unknown>)
-    const ambient = extractLayer(group['Ambient'] as Record<string, unknown>)
-    if (key && ambient) entries.push({ key, ambient, level })
+    entries.push({ key, ambient, level })
   }
 
   const tsDir = path.resolve('build', 'ts', 'elevation')
