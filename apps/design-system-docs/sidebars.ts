@@ -78,6 +78,11 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Feedback',
+      items: ['components/feedback/banner'],
+    },
+    {
+      type: 'category',
       label: 'Navigation',
       items: ['components/navigation/link'],
     },
