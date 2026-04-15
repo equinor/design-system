@@ -1,0 +1,112 @@
+@layer eds-components {
+  .eds-chip {
+    cursor: pointer;
+
+    display: inline-flex;
+    gap: var(--eds-typography-gap-horizontal);
+    align-items: center;
+
+    box-sizing: border-box;
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
+
+    transition:
+      background-color 150ms ease-in-out,
+      outline-color 150ms ease-in-out,
+      color 150ms ease-in-out;
+
+    /* ===== DEFAULT VARIANT (solid muted fill) ===== */
+
+    &[data-variant='default'] {
+      color: var(--eds-color-text-subtle);
+      background-color: var(--eds-color-bg-fill-muted-default);
+      outline: none;
+    }
+
+    &[data-variant='default']:hover {
+      background-color: var(--eds-color-bg-fill-muted-hover);
+    }
+
+    &[data-variant='default']:active {
+      background-color: var(--eds-color-bg-fill-muted-active);
+    }
+
+    /* ===== OUTLINED VARIANT (border + transparent bg) ===== */
+
+    &[data-variant='outlined'] {
+      color: var(--eds-color-text-subtle);
+      background-color: transparent;
+      outline: var(--eds-border-width-default, 1px) solid
+        var(--eds-color-border-strong);
+      outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+    }
+
+    &[data-variant='outlined']:hover {
+      background-color: var(--eds-color-bg-fill-muted-hover);
+    }
+
+    &[data-variant='outlined']:active {
+      background-color: var(--eds-color-bg-fill-muted-hover);
+    }
+
+    /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
+
+    &[data-variant='high-contrast'] {
+      color: var(--eds-color-text-strong-on-emphasis);
+      background-color: var(--eds-color-bg-fill-emphasis-default);
+      outline: none;
+    }
+
+    &[data-variant='high-contrast']:hover {
+      background-color: var(--eds-color-bg-fill-emphasis-hover);
+    }
+
+    &[data-variant='high-contrast']:active {
+      background-color: var(--eds-color-bg-fill-emphasis-active);
+    }
+
+    /* ===== FOCUS STATE ===== */
+
+    &:focus-visible {
+      box-shadow:
+        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
+          var(--eds-color-border-focus);
+    }
+
+    /* ===== ICONS ===== */
+
+    & .eds-icon {
+      flex-shrink: 0;
+      margin-block: calc(-1 * var(--eds-selectable-space-vertical));
+      margin-inline: calc(-1 * var(--eds-selectable-space-vertical) / 2);
+    }
+
+  }
+}
+
+/*
+ * Outside @layer to override typography.css [data-font-family] { display: block }.
+ * data-font-family/data-font-size on the chip container establishes the typography
+ * context for gap and icon sizing tokens.
+ */
+.eds-chip {
+  display: inline-flex;
+}
+
+/*
+ * Label needs inline-flex to center custom icons with text.
+ * text-box: normal disables baseline trimming — chip handles sizing via
+ * padding + flexbox centering.
+ */
+.eds-chip > .label {
+  display: inline-flex;
+  gap: var(--eds-typography-gap-horizontal);
+  align-items: center;
+
+  padding-block: 0;
+
+  text-box: normal;
+}
