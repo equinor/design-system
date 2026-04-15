@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { render, screen, fireEvent } from '@testing-library/react'
 import styled from 'styled-components'
 import { Icon } from '@equinor/eds-core-react'
@@ -6,7 +5,6 @@ import * as icons from '@equinor/eds-icons'
 import { CSSButton } from './Button'
 import React from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 Icon.add(icons)
 
 const StyledButton = styled(CSSButton)`

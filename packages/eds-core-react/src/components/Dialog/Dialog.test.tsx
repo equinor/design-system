@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { axe } from 'jest-axe'

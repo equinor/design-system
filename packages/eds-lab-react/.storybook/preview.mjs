@@ -13,4 +13,4 @@
 export const parameters = {
   viewMode: 'docs',
 }
-export const tags = ['autodocs'];
+export const tags = ['autodocs']

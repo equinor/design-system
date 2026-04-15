@@ -3,8 +3,8 @@ import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import {
   checkbox,
-  checkbox_outline, // eslint-disable-line camelcase
-  checkbox_indeterminate, // eslint-disable-line camelcase
+  checkbox_outline,
+  checkbox_indeterminate,
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
 import { checkbox as tokens } from './Checkbox.tokens'
