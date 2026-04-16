@@ -140,7 +140,7 @@ When the `onDismiss` callback is provided, a close button is rendered in the top
 
 ### Property Structure
 
-- **Tone** - set the tone (Info, Warning, Error, or Success) to control the colour scheme
+- **Tone** - set the tone (Info, Warning, Danger, or Success) to control the colour scheme
 - **Actions** - choose between None, Buttons, or Link
 - **Layout** - choose between Inline (actions beside text) or Stacked (actions below text)
 - **Dismiss** - toggle the dismiss close button on or off
