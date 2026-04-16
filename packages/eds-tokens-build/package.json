@@ -47,7 +47,7 @@
     "test:run": "vitest run",
     "prettier": "prettier . --write",
     "prettier:check": "prettier . --check",
-    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint": "eslint ./src",
     "lint:fix": "eslint --fix"
   },
   "engines": {

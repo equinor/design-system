@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 import type { ButtonProps } from './Button.types'
 import { TypographyNext } from '../../Typography'
+import { Slot } from '../Slot'
 
 const SIZE_MAPPING = {
   small: 'sm',
@@ -18,6 +19,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       tone = 'accent',
       icon = false,
       round = false,
+      asChild,
       children,
       className,
       disabled,
@@ -30,20 +32,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const typographySize = sizeToTypography[size]
     const selectableSpace = sizeToSelectableSpace[size]
 
+    const sharedProps = {
+      ref,
+      className: classes,
+      disabled,
+      'data-variant': variant,
+      'data-selectable-space': selectableSpace,
+      'data-space-proportions': 'squished' as const,
+      'data-color-appearance': disabled ? 'neutral' : tone,
+      'data-icon-only': icon || undefined,
+      'data-round': icon && round ? true : undefined,
+      ...rest,
+    }
+
+    if (asChild) {
+      return <Slot {...sharedProps}>{children}</Slot>
+    }
+
     return (
-      <button
-        ref={ref}
-        type={type}
-        className={classes}
-        disabled={disabled}
-        data-variant={variant}
-        data-selectable-space={selectableSpace}
-        data-space-proportions="squished"
-        data-color-appearance={disabled ? 'neutral' : tone}
-        data-icon-only={icon || undefined}
-        data-round={icon && round ? true : undefined}
-        {...rest}
-      >
+      <button type={type} {...sharedProps}>
         {icon ? (
           children
         ) : (

@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import { render, screen, fireEvent } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { attach_file, notifications } from '@equinor/eds-icons'

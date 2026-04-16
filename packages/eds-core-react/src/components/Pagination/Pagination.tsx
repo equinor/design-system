@@ -124,7 +124,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         setActivePage(1)
         onChange?.(null, 1)
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [itemsPerPage])
 
     const props = {

@@ -39,7 +39,7 @@ function extractPrerequisites() {
   try {
     const nvmrc = fs.readFileSync(path.join(rootDir, '.nvmrc'), 'utf8').trim()
     nodeVersion = nvmrc
-  } catch (error) {
+  } catch {
     console.warn('Could not read .nvmrc, using default Node.js version')
   }
 

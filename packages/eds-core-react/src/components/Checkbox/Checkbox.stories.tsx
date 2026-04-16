@@ -124,7 +124,7 @@ type FormData = {
 
 export const WithFormsControl: StoryFn<CheckboxProps> = () => {
   // Example with external forms library, react-hook-form
-  // eslint-disable-next-line @typescript-eslint/unbound-method
+
   const {
     register,
     handleSubmit,

@@ -449,6 +449,69 @@ describe('Button (next)', () => {
     })
   })
 
+  describe('asChild', () => {
+    it('renders child element instead of <button>', () => {
+      render(
+        <Button asChild>
+          <a href="/page">Link as button</a>
+        </Button>,
+      )
+      expect(screen.queryByRole('button')).not.toBeInTheDocument()
+      expect(screen.getByRole('link')).toHaveTextContent('Link as button')
+    })
+
+    it('merges className onto child', () => {
+      render(
+        <Button asChild className="custom">
+          <a href="/page" className="child-class">
+            Link
+          </a>
+        </Button>,
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveClass('eds-button', 'custom', 'child-class')
+    })
+
+    it('merges data attributes onto child', () => {
+      render(
+        <Button asChild variant="secondary" tone="danger">
+          <a href="/page">Link</a>
+        </Button>,
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('data-variant', 'secondary')
+      expect(link).toHaveAttribute('data-color-appearance', 'danger')
+    })
+
+    it('preserves child href', () => {
+      render(
+        <Button asChild>
+          <a href="/my-route">Router link</a>
+        </Button>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('href', '/my-route')
+    })
+
+    it('forwards ref to child element', () => {
+      const ref = { current: null as HTMLElement | null }
+      render(
+        <Button asChild ref={ref as React.Ref<HTMLButtonElement>}>
+          <a href="/">Link</a>
+        </Button>,
+      )
+      expect(ref.current).toBeInstanceOf(HTMLAnchorElement)
+    })
+
+    it('has no accessibility violations', async () => {
+      const { container } = render(
+        <Button asChild>
+          <a href="/page">Accessible link button</a>
+        </Button>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+  })
+
   describe('Round (icon-only buttons)', () => {
     it('does not set data-round on non-icon buttons', () => {
       render(<Button>Label Button</Button>)

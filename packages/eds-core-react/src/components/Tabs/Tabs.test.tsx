@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useRef, useEffect, useState, Fragment } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -34,7 +33,6 @@ const TabsWithRefs = () => {
 const TabsWithPanels = ({
   selectedTabIndex = 0,
 }: {
-  // eslint-disable-next-line react/require-default-props
   selectedTabIndex?: number | string
 }) => {
   const [activeTab, setActiveTab] = useState(selectedTabIndex)
