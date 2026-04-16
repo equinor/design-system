@@ -3,7 +3,7 @@ import { Button } from '../Button'
 import { Tooltip, type TooltipProps } from '.'
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'EDS 2.0 (beta)/Tooltip',
+  title: 'EDS 2.0 (beta)/Data Display/Tooltip',
   component: Tooltip,
   tags: ['beta'],
   parameters: {
