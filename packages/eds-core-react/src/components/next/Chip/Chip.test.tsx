@@ -139,6 +139,34 @@ describe('Chip (next)', () => {
         'data-selected',
       )
     })
+
+    it('sets aria-pressed for toggleable chips', () => {
+      const { rerender } = render(<Chip>Label</Chip>)
+      expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false')
+      rerender(<Chip selected>Label</Chip>)
+      expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true')
+    })
+
+    it('does not set aria-pressed for deletable or dropdown chips', () => {
+      const { rerender } = render(<Chip onDelete={jest.fn()}>Label</Chip>)
+      expect(screen.getByRole('button')).not.toHaveAttribute('aria-pressed')
+      rerender(<Chip dropdown>Label</Chip>)
+      expect(screen.getByRole('button')).not.toHaveAttribute('aria-pressed')
+    })
+
+    it('sets aria-expanded on dropdown chips based on selected', () => {
+      const { rerender } = render(<Chip dropdown>Label</Chip>)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false',
+      )
+      rerender(
+        <Chip dropdown selected>
+          Label
+        </Chip>,
+      )
+      expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true')
+    })
   })
 
   describe('Deletable', () => {
@@ -225,6 +253,15 @@ describe('Chip (next)', () => {
       await user.keyboard('{Enter}')
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
+
+    it('triggers onClick on Space key', async () => {
+      const user = userEvent.setup()
+      const handleClick = jest.fn()
+      render(<Chip onClick={handleClick}>Label</Chip>)
+      screen.getByRole('button').focus()
+      await user.keyboard(' ')
+      expect(handleClick).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('Accessibility', () => {
@@ -261,6 +298,29 @@ describe('Chip (next)', () => {
 
     it('has no accessibility violations (dropdown)', async () => {
       const { container } = render(<Chip dropdown>Options</Chip>)
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('has no accessibility violations (dropdown open)', async () => {
+      const { container } = render(
+        <Chip dropdown selected>
+          Options
+        </Chip>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('has no accessibility violations (all tones)', async () => {
+      const { container } = render(
+        <>
+          <Chip tone="neutral">Neutral</Chip>
+          <Chip tone="accent">Accent</Chip>
+          <Chip tone="success">Success</Chip>
+          <Chip tone="info">Info</Chip>
+          <Chip tone="warning">Warning</Chip>
+          <Chip tone="danger">Danger</Chip>
+        </>,
+      )
       expect(await axe(container)).toHaveNoViolations()
     })
   })

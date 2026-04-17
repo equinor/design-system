@@ -1,6 +1,7 @@
 @layer eds-components {
   .eds-chip {
     cursor: pointer;
+    user-select: none;
 
     display: inline-flex;
     gap: var(--eds-typography-gap-horizontal);

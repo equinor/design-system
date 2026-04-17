@@ -21,6 +21,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
 ) {
   const classes = ['eds-chip', className].filter(Boolean).join(' ')
   const deletable = typeof onDelete === 'function'
+  const toggleable = !deletable && !dropdown
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (deletable) {
@@ -31,7 +32,8 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
       if (deletable) {
         onDelete?.(event as unknown as React.MouseEvent<HTMLElement>)
       } else if (onClick) {
@@ -54,6 +56,8 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       data-selected={selected || undefined}
       role="button"
       tabIndex={0}
+      aria-pressed={toggleable ? selected : undefined}
+      aria-expanded={dropdown ? selected : undefined}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       {...rest}
