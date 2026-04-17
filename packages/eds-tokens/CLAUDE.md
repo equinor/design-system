@@ -5,16 +5,20 @@ Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS
 ## Build Pipeline (3 steps)
 
 ```
-1. Figma → JSON       (pnpm run update-tokens)
+1. Figma → JSON         (pnpm run update-tokens)
         OR
-   Config → JSON      (pnpm run generate:tokens:all-color)
+   Config → JSON        (pnpm run generate:tokens:all-color)
 
-2. JSON → CSS/JS      (pnpm run build:variables:color)
+2. JSON → CSS/JS        (pnpm run build:variables:color)
 
-3. CSS → Bundle       (pnpm run _build:css)
+3. CSS → Bundle+Inject  (pnpm run _build:css)
+   a. Copy index-variables.css to build/css/
+   b. lightningcss bundles @imports → variables.css
+   c. Elevation build injects --eds-elevation-* into variables.css :root
+   d. lightningcss minifies variables.css → variables.min.css
 ```
 
-**Or all at once:** `pnpm run build:variables` (clean + typography + spacing + color + bundle)
+**Or all at once:** `pnpm run build:variables` (clean + typography + spacing + color + elevation + bundle)
 
 ### Step 1: Get token JSON files
 
@@ -49,7 +53,9 @@ Outputs go to `build/css/color/`, `build/js/color/`, `build/json/color/`, `build
 pnpm run _build:css
 ```
 
-Bundles all `@import`s from `src/css/index-variables.css` into `build/css/variables.min.css` using lightningcss. **This is the file consumers import.**
+Bundles `@import`s from `src/css/index-variables.css` into `variables.css`, injects elevation tokens into the `:root` block, then minifies into `variables.min.css`. **The minified file is what consumers import.**
+
+Note: The minify step reads from the already-bundled `variables.css` (not from `index-variables.css`), so any post-bundle injections are preserved.
 
 ## Pitfalls
 
@@ -95,3 +101,23 @@ Five independent axes, each controlled by a `data-*` attribute:
 - **Tracking** (`🅰️ Tracking.*.json`) — `data-tracking`: `tight`, `normal`, `wide`, `loose`
 
 Output: `build/css/typography/` (CSS) and `build/ts/typography/` (TypeScript nested objects)
+
+### Elevation
+
+Two shadow levels for floating UI, synced from Figma Foundations (`Elevation` collection) and composed into `box-shadow` values during the build:
+
+- `--eds-elevation-low` — Tooltips, menus, popovers, autocomplete lists, snackbars
+- `--eds-elevation-high` — Dialogs, modals, drawers
+
+Each level is a two-layer shadow (key + ambient) stored as decomposed primitives in Figma (offset, blur, spread, color). The build script (`build-elevation-variables` from `eds-tokens-build`) reads `Elevation.Mode 1.json` and composes them into single `box-shadow` CSS custom properties. The individual primitives are **not** exposed as CSS variables.
+
+Elevation tokens are **not** imported via `index-variables.css` — they are injected directly into the bundled `variables.css` `:root` block during `_build:css` (step 3c). This avoids creating a duplicate `:root` selector. The minify step then reads from the injected `variables.css`.
+
+```bash
+pnpm run build:variables:elevation  # Compose elevation CSS + inject into variables.css
+```
+
+Output:
+- CSS: `build/css/elevation/elevation.css` (bare properties, for reference)
+- CSS: Injected into `build/css/variables.css` `:root` block
+- TypeScript: `build/ts/elevation/elevation.ts` (structured object with `boxShadow` string + per-layer React Native shadow properties)

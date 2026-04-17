@@ -35,6 +35,10 @@ export default defineConfig({
           __dirname,
           'src/scripts/generate-semantic-tokens.ts',
         ),
+        'scripts/build-elevation-variables': resolve(
+          __dirname,
+          'src/scripts/build-elevation-variables.ts',
+        ),
       },
       formats: ['es'],
     },

@@ -34,7 +34,8 @@
     "generate-color-scheme-tokens": "./dist/scripts/generate-color-scheme-tokens.js",
     "generate-semantic-tokens": "./dist/scripts/generate-semantic-tokens.js",
     "generate-concept-tokens": "./dist/scripts/generate-concept-tokens.js",
-    "generate-dynamic-appearance-tokens": "./dist/scripts/generate-dynamic-appearance-tokens.js"
+    "generate-dynamic-appearance-tokens": "./dist/scripts/generate-dynamic-appearance-tokens.js",
+    "build-elevation-variables": "./dist/scripts/build-elevation-variables.js"
   },
   "scripts": {
     "dev": "vite",

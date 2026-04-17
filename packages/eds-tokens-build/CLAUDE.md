@@ -42,6 +42,13 @@ These compile token JSON into CSS/JS/JSON output:
 | `build-color-scheme-variables` | Color scheme JSON | `build/css/color/color-scheme/`, JS, JSON, TS |
 | `build-semantic-static-variables` | Semantic + color scheme JSON | `build/css/color/static/`, JS, JSON, TS |
 | `build-semantic-dynamic-variables` | Appearance JSON | `build/css/color/dynamic/`, JS, JSON |
+| `build-elevation-variables` | Elevation JSON from Foundations | `build/css/elevation/elevation.css`, `build/ts/elevation/elevation.ts` |
+
+The elevation build is different from color builds — it does **not** use Style Dictionary. It reads decomposed shadow primitives (offset, blur, spread, color) from `Elevation.Mode 1.json` and composes them into:
+- Two `box-shadow` CSS custom properties (`--eds-elevation-low`, `--eds-elevation-high`) injected into the bundled `variables.css` `:root` block (not via `@import`, to avoid duplicate `:root` selectors)
+- A TypeScript export with `boxShadow` string + per-layer React Native shadow properties (`shadowColor`, `shadowOffset`, `shadowOpacity`, `shadowRadius`)
+
+The individual primitives are not exposed as CSS variables. The elevation build runs inside `_build:css` — after lightningcss bundles but before it minifies — so both `variables.css` and `variables.min.css` contain the elevation tokens.
 
 Typography and spacing builds are handled in `eds-tokens` via `createSpacingAndTypographyVariables.ts`, which also uses the `typescriptNestedFormat` from this package to produce `build/ts/typography/` output.
 
