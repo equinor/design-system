@@ -195,6 +195,9 @@
   --eds-color-text-danger-strong: var(--eds-color-danger-13);
   --eds-color-text-danger-subtle-on-emphasis: var(--eds-color-danger-14);
   --eds-color-text-danger-strong-on-emphasis: var(--eds-color-danger-15);
+
+  --eds-elevation-low: 0px 1px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 8px 3px rgba(0, 0, 0, 0.12);
+  --eds-elevation-high: 0px 4px 12px 0px rgba(0, 0, 0, 0.2), 0px 12px 16px 6px rgba(0, 0, 0, 0.12);
 }
 
 :root, [data-color-appearance="neutral"] {
