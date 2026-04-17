@@ -8,7 +8,7 @@ import { bookmark_filled, person } from '@equinor/eds-icons'
 type StoryArgs = ComponentProps<typeof Chip>
 
 const meta: Meta<StoryArgs> = {
-  title: 'EDS 2.0 (beta)/Chip',
+  title: 'EDS 2.0 (beta)/Data Display/Chip',
   component: Chip,
   parameters: {
     docs: {
