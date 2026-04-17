@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Chip } from './Chip'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
-import { bookmark_filled, close, person } from '@equinor/eds-icons'
+import { bookmark_filled, person } from '@equinor/eds-icons'
 
 type StoryArgs = ComponentProps<typeof Chip>
 
@@ -342,19 +342,13 @@ export const CustomIcons: Story = {
           <h3 style={{ marginBottom: '12px' }}>Recipients</h3>
           <Wrapper wrap>
             {recipients.map((name) => (
-              <Chip key={name} tone="accent">
+              <Chip
+                key={name}
+                tone="accent"
+                onDelete={() => remove(name)}
+              >
                 <Icon data={person} aria-hidden />
                 {name}
-                <Icon
-                  data={close}
-                  aria-label={`Remove ${name}`}
-                  role="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    remove(name)
-                  }}
-                  style={{ cursor: 'pointer' }}
-                />
               </Chip>
             ))}
             {recipients.length === 0 && (
@@ -376,7 +370,7 @@ export const CustomIcons: Story = {
     docs: {
       description: {
         story:
-          'Custom chips give consumers full control over leading and/or trailing icons and click behaviour. Two realistic patterns: a saved filter (leading icon + toggle) and recipient chips with a custom close icon that removes from a list.',
+          'Custom chips give consumers full control over leading and/or trailing icons and click behaviour. Two realistic patterns: a saved filter (leading bookmark icon + toggle) and recipient chips combining a custom leading person icon with built-in `onDelete` behaviour.',
       },
     },
   },

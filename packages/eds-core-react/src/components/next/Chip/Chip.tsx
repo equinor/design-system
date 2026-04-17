@@ -22,20 +22,23 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   const classes = ['eds-chip', className].filter(Boolean).join(' ')
   const deletable = typeof onDelete === 'function'
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter' && onClick) {
-      onClick(event as unknown as React.MouseEvent<HTMLDivElement>)
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (deletable) {
+      onDelete?.(event)
+    } else {
+      onClick?.(event)
     }
-    if (deletable && (event.key === 'Backspace' || event.key === 'Delete')) {
-      event.preventDefault()
-      onDelete?.(event as unknown as React.MouseEvent<HTMLElement>)
-    }
-    onKeyDown?.(event)
   }
 
-  const handleDelete = (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.stopPropagation()
-    onDelete?.(event)
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      if (deletable) {
+        onDelete?.(event as unknown as React.MouseEvent<HTMLElement>)
+      } else if (onClick) {
+        onClick(event as unknown as React.MouseEvent<HTMLDivElement>)
+      }
+    }
+    onKeyDown?.(event)
   }
 
   return (
@@ -51,7 +54,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       data-selected={selected || undefined}
       role="button"
       tabIndex={0}
-      onClick={onClick}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       {...rest}
     >
@@ -68,11 +71,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       >
         {children}
       </TypographyNext>
-      {deletable && (
-        <span className="delete" aria-hidden onClick={handleDelete}>
-          <Icon data={close} className="icon" />
-        </span>
-      )}
+      {deletable && <Icon data={close} title="Remove" className="icon" />}
       {!deletable && dropdown && (
         <Icon
           data={selected ? arrow_drop_up : arrow_drop_down}

@@ -84,15 +84,6 @@
       margin-inline: calc(-1 * var(--eds-selectable-space-vertical) / 2);
     }
 
-    /* ===== DELETE ===== */
-
-    & .delete {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: inherit;
-    }
-
   }
 }
 
