@@ -342,11 +342,7 @@ export const CustomIcons: Story = {
           <h3 style={{ marginBottom: '12px' }}>Recipients</h3>
           <Wrapper wrap>
             {recipients.map((name) => (
-              <Chip
-                key={name}
-                tone="accent"
-                onDelete={() => remove(name)}
-              >
+              <Chip key={name} tone="accent" onDelete={() => remove(name)}>
                 <Icon data={person} aria-hidden />
                 {name}
               </Chip>

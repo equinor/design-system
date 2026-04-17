@@ -142,7 +142,10 @@ describe('Chip (next)', () => {
 
     it('sets aria-pressed for toggleable chips', () => {
       const { rerender } = render(<Chip>Label</Chip>)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false')
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-pressed',
+        'false',
+      )
       rerender(<Chip selected>Label</Chip>)
       expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true')
     })
@@ -165,7 +168,10 @@ describe('Chip (next)', () => {
           Label
         </Chip>,
       )
-      expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true')
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'true',
+      )
     })
   })
 

@@ -84,7 +84,6 @@
       margin-block: calc(-1 * var(--eds-selectable-space-vertical));
       margin-inline: calc(-1 * var(--eds-selectable-space-vertical) / 2);
     }
-
   }
 }
 

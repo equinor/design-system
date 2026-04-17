@@ -1,5 +1,10 @@
 import { forwardRef } from 'react'
-import { close, check, arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
+import {
+  close,
+  check,
+  arrow_drop_down,
+  arrow_drop_up,
+} from '@equinor/eds-icons'
 import type { ChipProps } from './Chip.types'
 import { Icon } from '../Icon'
 import { TypographyNext } from '../../Typography'
