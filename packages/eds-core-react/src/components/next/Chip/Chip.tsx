@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { close, check, arrow_drop_down } from '@equinor/eds-icons'
+import { close, check, arrow_drop_down, arrow_drop_up } from '@equinor/eds-icons'
 import type { ChipProps } from './Chip.types'
 import { Icon } from '../Icon'
 import { TypographyNext } from '../../Typography'
@@ -9,7 +9,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     tone = 'neutral',
     variant = 'default',
     selected = false,
-    deletable = false,
+    onDelete,
     dropdown = false,
     onClick,
     children,
@@ -20,12 +20,22 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   ref,
 ) {
   const classes = ['eds-chip', className].filter(Boolean).join(' ')
+  const deletable = typeof onDelete === 'function'
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' && onClick) {
       onClick(event as unknown as React.MouseEvent<HTMLDivElement>)
     }
+    if (deletable && (event.key === 'Backspace' || event.key === 'Delete')) {
+      event.preventDefault()
+      onDelete?.(event as unknown as React.MouseEvent<HTMLElement>)
+    }
     onKeyDown?.(event)
+  }
+
+  const handleDelete = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.stopPropagation()
+    onDelete?.(event)
   }
 
   return (
@@ -45,7 +55,9 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       onKeyDown={handleKeyDown}
       {...rest}
     >
-      {selected && <Icon data={check} size="sm" aria-hidden className="icon" />}
+      {selected && !dropdown && !deletable && (
+        <Icon data={check} aria-hidden className="icon" />
+      )}
       <TypographyNext
         as="span"
         className="label"
@@ -57,10 +69,16 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
         {children}
       </TypographyNext>
       {deletable && (
-        <Icon data={close} size="sm" aria-hidden className="icon" />
+        <span className="delete" aria-hidden onClick={handleDelete}>
+          <Icon data={close} className="icon" />
+        </span>
       )}
       {!deletable && dropdown && (
-        <Icon data={arrow_drop_down} size="sm" aria-hidden className="icon" />
+        <Icon
+          data={selected ? arrow_drop_up : arrow_drop_down}
+          aria-hidden
+          className="icon"
+        />
       )}
     </div>
   )

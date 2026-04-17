@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, MouseEvent, ReactNode } from 'react'
 
 /**
  * Color tone for theming
@@ -37,8 +37,8 @@ export type ChipProps = {
    */
   variant?: ChipVariant
   /**
-   * Selected state. Shows a leading check icon when true.
-   * Use with `onClick` to toggle selection.
+   * Selected state. For default chips this shows a leading check icon.
+   * For dropdown chips this flips the trailing arrow up to indicate the menu is open.
    *
    * @default false
    *
@@ -52,14 +52,20 @@ export type ChipProps = {
    */
   selected?: boolean
   /**
-   * Shows a trailing close icon indicating the chip can be removed.
-   * Use with `onClick` to handle deletion.
-   * @default false
+   * Shows a trailing close icon that removes the chip. The callback fires
+   * when the close icon is clicked — click propagation is stopped so the
+   * chip's `onClick` does not also fire. Omit to render a non-deletable chip.
+   *
+   * @example
+   * ```tsx
+   * <Chip onDelete={() => removeFilter(id)}>Active</Chip>
+   * ```
    */
-  deletable?: boolean
+  onDelete?: (event: MouseEvent<HTMLElement>) => void
   /**
-   * Shows a trailing dropdown arrow icon.
-   * The actual dropdown/popover behavior is the consumer's responsibility.
+   * Shows a trailing dropdown arrow icon. Combine with `selected` to flip
+   * the arrow up while the menu is open. The actual dropdown/popover
+   * behavior is the consumer's responsibility.
    * @default false
    */
   dropdown?: boolean

@@ -142,14 +142,54 @@ describe('Chip (next)', () => {
   })
 
   describe('Deletable', () => {
-    it('renders close icon when deletable', () => {
-      render(<Chip deletable>Label</Chip>)
-      expect(screen.getByTestId('eds-icon')).toBeInTheDocument()
+    it('renders close icon when onDelete is provided', () => {
+      const { container } = render(<Chip onDelete={jest.fn()}>Label</Chip>)
+      expect(container.querySelector('.delete')).toBeInTheDocument()
     })
 
-    it('does not render close icon when not deletable', () => {
-      render(<Chip>Label</Chip>)
-      expect(screen.queryByTestId('eds-icon')).not.toBeInTheDocument()
+    it('does not render close icon when onDelete is omitted', () => {
+      const { container } = render(<Chip>Label</Chip>)
+      expect(container.querySelector('.delete')).not.toBeInTheDocument()
+    })
+
+    it('fires onDelete when close icon is clicked', async () => {
+      const user = userEvent.setup()
+      const onDelete = jest.fn()
+      const { container } = render(<Chip onDelete={onDelete}>Label</Chip>)
+      await user.click(container.querySelector('.delete')!)
+      expect(onDelete).toHaveBeenCalledTimes(1)
+    })
+
+    it('stops propagation — chip onClick does not fire when close is clicked', async () => {
+      const user = userEvent.setup()
+      const onClick = jest.fn()
+      const onDelete = jest.fn()
+      const { container } = render(
+        <Chip onClick={onClick} onDelete={onDelete}>
+          Label
+        </Chip>,
+      )
+      await user.click(container.querySelector('.delete')!)
+      expect(onDelete).toHaveBeenCalledTimes(1)
+      expect(onClick).not.toHaveBeenCalled()
+    })
+
+    it('fires onDelete on Backspace when focused', async () => {
+      const user = userEvent.setup()
+      const onDelete = jest.fn()
+      render(<Chip onDelete={onDelete}>Label</Chip>)
+      screen.getByRole('button').focus()
+      await user.keyboard('{Backspace}')
+      expect(onDelete).toHaveBeenCalledTimes(1)
+    })
+
+    it('fires onDelete on Delete key when focused', async () => {
+      const user = userEvent.setup()
+      const onDelete = jest.fn()
+      render(<Chip onDelete={onDelete}>Label</Chip>)
+      screen.getByRole('button').focus()
+      await user.keyboard('{Delete}')
+      expect(onDelete).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -159,14 +199,15 @@ describe('Chip (next)', () => {
       expect(screen.getByTestId('eds-icon')).toBeInTheDocument()
     })
 
-    it('deletable takes priority over dropdown', () => {
-      render(
-        <Chip deletable dropdown>
+    it('onDelete takes priority over dropdown', () => {
+      const { container } = render(
+        <Chip onDelete={jest.fn()} dropdown>
           Label
         </Chip>,
       )
-      const icons = screen.getAllByTestId('eds-icon')
-      expect(icons).toHaveLength(1)
+      expect(container.querySelector('.delete')).toBeInTheDocument()
+      expect(container.querySelector('[data-icon-name="arrow_drop_down"]'))
+        .not.toBeInTheDocument
     })
   })
 
@@ -201,7 +242,7 @@ describe('Chip (next)', () => {
     })
 
     it('has no accessibility violations (deletable)', async () => {
-      const { container } = render(<Chip deletable>Label</Chip>)
+      const { container } = render(<Chip onDelete={jest.fn()}>Label</Chip>)
       expect(await axe(container)).toHaveNoViolations()
     })
 

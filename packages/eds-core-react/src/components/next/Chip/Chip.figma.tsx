@@ -31,7 +31,7 @@ figma.connect(
         tone={tone}
         variant={style}
         selected={type === 'checked'}
-        deletable={type === 'deletable'}
+        onDelete={type === 'deletable' ? () => {} : undefined}
         dropdown={type === 'dropdown'}
       >
         Label

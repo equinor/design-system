@@ -2,7 +2,8 @@ import { useState, type ReactNode, type ComponentProps } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Chip } from './Chip'
 import { Icon } from '../Icon'
-import { save, settings } from '@equinor/eds-icons'
+import { Button } from '../Button'
+import { bookmark_filled, close, person } from '@equinor/eds-icons'
 
 type StoryArgs = ComponentProps<typeof Chip>
 
@@ -35,11 +36,8 @@ import { Chip } from '@equinor/eds-core-react/next'
     },
     selected: {
       control: 'boolean',
-      description: 'Selected state — shows leading check icon',
-    },
-    deletable: {
-      control: 'boolean',
-      description: 'Shows trailing close icon',
+      description:
+        'Selected state — leading check icon (default) or flipped dropdown arrow.',
     },
     dropdown: {
       control: 'boolean',
@@ -50,7 +48,6 @@ import { Chip } from '@equinor/eds-core-react/next'
     tone: 'neutral',
     variant: 'default',
     selected: false,
-    deletable: false,
     dropdown: false,
   },
 }
@@ -192,19 +189,29 @@ export const Variants: Story = {
 export const Types: Story = {
   render: () => {
     const [selected, setSelected] = useState(false)
+    const [deletableVisible, setDeletableVisible] = useState(true)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     return (
       <Wrapper>
         <Chip selected={selected} onClick={() => setSelected(!selected)}>
           Selectable
         </Chip>
-        <Chip deletable onClick={() => console.log('delete')}>
-          Deletable
-        </Chip>
-        <Chip dropdown onClick={() => console.log('dropdown')}>
+        {deletableVisible ? (
+          <Chip onDelete={() => setDeletableVisible(false)}>Deletable</Chip>
+        ) : (
+          <Button variant="ghost" onClick={() => setDeletableVisible(true)}>
+            Reset
+          </Button>
+        )}
+        <Chip
+          dropdown
+          selected={dropdownOpen}
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
           Dropdown
         </Chip>
         <Chip onClick={() => console.log('custom')}>
-          <Icon data={settings} size="sm" aria-hidden />
+          <Icon data={bookmark_filled} aria-hidden />
           Custom
         </Chip>
       </Wrapper>
@@ -221,71 +228,155 @@ export const Types: Story = {
 }
 
 export const Deletable: Story = {
-  render: () => (
-    <Wrapper>
-      <Chip deletable onClick={() => console.log('delete neutral')}>
-        Neutral
-      </Chip>
-      <Chip
-        deletable
-        tone="accent"
-        onClick={() => console.log('delete accent')}
-      >
-        Accent
-      </Chip>
-      <Chip
-        deletable
-        tone="danger"
-        onClick={() => console.log('delete danger')}
-      >
-        Danger
-      </Chip>
-    </Wrapper>
-  ),
-}
-
-export const Dropdown: Story = {
-  render: () => (
-    <Wrapper>
-      <Chip dropdown onClick={() => console.log('options')}>
-        Options
-      </Chip>
-      <Chip dropdown tone="accent" onClick={() => console.log('filter')}>
-        Filter
-      </Chip>
-      <Chip dropdown variant="outlined" onClick={() => console.log('sort')}>
-        Sort
-      </Chip>
-    </Wrapper>
-  ),
+  render: () => {
+    const [filters, setFilters] = useState([
+      'Status: Active',
+      'Type: Well',
+      'Year: 2024',
+      'Region: North Sea',
+    ])
+    const remove = (filter: string) =>
+      setFilters((f) => f.filter((item) => item !== filter))
+    return (
+      <Wrapper wrap>
+        {filters.map((filter) => (
+          <Chip key={filter} onDelete={() => remove(filter)}>
+            {filter}
+          </Chip>
+        ))}
+        {filters.length === 0 && (
+          <Button
+            variant="ghost"
+            onClick={() =>
+              setFilters([
+                'Status: Active',
+                'Type: Well',
+                'Year: 2024',
+                'Region: North Sea',
+              ])
+            }
+          >
+            Reset
+          </Button>
+        )}
+      </Wrapper>
+    )
+  },
   parameters: {
     docs: {
       description: {
         story:
-          'Dropdown chips show a trailing arrow icon. The consumer handles what happens on click.',
+          'Deletable chips are typically used as filter tags. The consumer handles removal — here the chip is filtered out of state on click.',
+      },
+    },
+  },
+}
+
+export const Dropdown: Story = {
+  render: () => {
+    const [openChip, setOpenChip] = useState<string | null>(null)
+    const toggle = (chip: string) =>
+      setOpenChip((current) => (current === chip ? null : chip))
+    return (
+      <Wrapper>
+        <Chip
+          dropdown
+          selected={openChip === 'options'}
+          onClick={() => toggle('options')}
+        >
+          Options
+        </Chip>
+        <Chip
+          dropdown
+          selected={openChip === 'filter'}
+          onClick={() => toggle('filter')}
+          tone="accent"
+        >
+          Filter
+        </Chip>
+        <Chip
+          dropdown
+          selected={openChip === 'sort'}
+          onClick={() => toggle('sort')}
+          variant="outlined"
+        >
+          Sort
+        </Chip>
+      </Wrapper>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dropdown chips trigger a menu. Pass `selected` while the menu is open — the arrow flips from down to up. The consumer owns the actual menu and open/close state.',
       },
     },
   },
 }
 
 export const CustomIcons: Story = {
-  render: () => (
-    <Wrapper>
-      <Chip onClick={() => console.log('save')}>
-        <Icon data={save} size="sm" aria-hidden />
-        Save
-      </Chip>
-      <Chip onClick={() => console.log('settings')}>
-        <Icon data={settings} size="sm" aria-hidden />
-        Settings
-      </Chip>
-    </Wrapper>
-  ),
+  render: () => {
+    const [filterApplied, setFilterApplied] = useState(false)
+    const [recipients, setRecipients] = useState([
+      'John Doe',
+      'Jane Smith',
+      'Alex Berg',
+    ])
+    const remove = (name: string) =>
+      setRecipients((r) => r.filter((n) => n !== name))
+
+    return (
+      <Wrapper direction="column" gap={24} align="flex-start">
+        <div>
+          <h3 style={{ marginBottom: '12px' }}>Saved filter</h3>
+          <Chip
+            selected={filterApplied}
+            onClick={() => setFilterApplied(!filterApplied)}
+          >
+            My filter
+            <Icon data={bookmark_filled} aria-hidden />
+          </Chip>
+        </div>
+        <div>
+          <h3 style={{ marginBottom: '12px' }}>Recipients</h3>
+          <Wrapper wrap>
+            {recipients.map((name) => (
+              <Chip key={name} tone="accent">
+                <Icon data={person} aria-hidden />
+                {name}
+                <Icon
+                  data={close}
+                  aria-label={`Remove ${name}`}
+                  role="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    remove(name)
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+              </Chip>
+            ))}
+            {recipients.length === 0 && (
+              <Button
+                variant="ghost"
+                onClick={() =>
+                  setRecipients(['John Doe', 'Jane Smith', 'Alex Berg'])
+                }
+              >
+                Reset
+              </Button>
+            )}
+          </Wrapper>
+        </div>
+      </Wrapper>
+    )
+  },
   parameters: {
     docs: {
       description: {
         story:
-          'Custom chips allow consumers to add their own leading and/or trailing icons as children.',
+          'Custom chips give consumers full control over leading and/or trailing icons and click behaviour. Two realistic patterns: a saved filter (leading icon + toggle) and recipient chips with a custom close icon that removes from a list.',
       },
     },
   },
@@ -295,6 +386,10 @@ export const Density: Story = {
   render: () => {
     const [s1, setS1] = useState(false)
     const [s2, setS2] = useState(false)
+    const [d1, setD1] = useState(true)
+    const [d2, setD2] = useState(true)
+    const [o1, setO1] = useState(false)
+    const [o2, setO2] = useState(false)
     return (
       <Wrapper direction="column" gap={24} align="flex-start">
         <div data-density="spacious">
@@ -303,10 +398,14 @@ export const Density: Story = {
             <Chip selected={s1} onClick={() => setS1(!s1)}>
               Selectable
             </Chip>
-            <Chip deletable onClick={() => {}}>
-              Deletable
-            </Chip>
-            <Chip dropdown onClick={() => {}}>
+            {d1 ? (
+              <Chip onDelete={() => setD1(false)}>Deletable</Chip>
+            ) : (
+              <Button variant="ghost" onClick={() => setD1(true)}>
+                Reset
+              </Button>
+            )}
+            <Chip dropdown selected={o1} onClick={() => setO1(!o1)}>
               Dropdown
             </Chip>
           </Wrapper>
@@ -317,10 +416,14 @@ export const Density: Story = {
             <Chip selected={s2} onClick={() => setS2(!s2)}>
               Selectable
             </Chip>
-            <Chip deletable onClick={() => {}}>
-              Deletable
-            </Chip>
-            <Chip dropdown onClick={() => {}}>
+            {d2 ? (
+              <Chip onDelete={() => setD2(false)}>Deletable</Chip>
+            ) : (
+              <Button variant="ghost" onClick={() => setD2(true)}>
+                Reset
+              </Button>
+            )}
+            <Chip dropdown selected={o2} onClick={() => setO2(!o2)}>
               Dropdown
             </Chip>
           </Wrapper>
