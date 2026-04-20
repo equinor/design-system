@@ -57,14 +57,6 @@ describe('Button (next)', () => {
       )
     })
 
-    it('renders with large size', () => {
-      render(<Button size="large">Large</Button>)
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-selectable-space',
-        'lg',
-      )
-    })
-
     it('renders with accent tone', () => {
       render(<Button tone="accent">Accent</Button>)
       expect(screen.getByRole('button')).toHaveAttribute(
@@ -311,7 +303,6 @@ describe('Button (next)', () => {
     it.each([
       ['small', 'sm'],
       ['default', 'md'],
-      ['large', 'lg'],
     ] as const)(
       'renders %s size with data-selectable-space=%s',
       (size, expected) => {
@@ -417,16 +408,6 @@ describe('Button (next)', () => {
       expect(button).toHaveAttribute('data-selectable-space', 'sm')
     })
 
-    it('uses selectable space tokens for icon-only (large size)', () => {
-      render(
-        <Button icon aria-label="Add" size="large">
-          <MockIcon />
-        </Button>,
-      )
-      const button = screen.getByRole('button')
-      expect(button).toHaveAttribute('data-selectable-space', 'lg')
-    })
-
     it('uses selectable space tokens for regular button', () => {
       render(
         <Button>
@@ -447,7 +428,7 @@ describe('Button (next)', () => {
       expect(screen.getByTestId('mock-icon')).toBeInTheDocument()
     })
 
-    it.each(['small', 'default', 'large'] as const)(
+    it.each(['small', 'default'] as const)(
       'renders icon-only with %s size',
       (size) => {
         render(
@@ -463,6 +444,69 @@ describe('Button (next)', () => {
       render(<Button>Regular Button</Button>)
       const button = screen.getByRole('button')
       expect(button).not.toHaveAttribute('data-icon-only')
+    })
+  })
+
+  describe('asChild', () => {
+    it('renders child element instead of <button>', () => {
+      render(
+        <Button asChild>
+          <a href="/page">Link as button</a>
+        </Button>,
+      )
+      expect(screen.queryByRole('button')).not.toBeInTheDocument()
+      expect(screen.getByRole('link')).toHaveTextContent('Link as button')
+    })
+
+    it('merges className onto child', () => {
+      render(
+        <Button asChild className="custom">
+          <a href="/page" className="child-class">
+            Link
+          </a>
+        </Button>,
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveClass('eds-button', 'custom', 'child-class')
+    })
+
+    it('merges data attributes onto child', () => {
+      render(
+        <Button asChild variant="secondary" tone="danger">
+          <a href="/page">Link</a>
+        </Button>,
+      )
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('data-variant', 'secondary')
+      expect(link).toHaveAttribute('data-color-appearance', 'danger')
+    })
+
+    it('preserves child href', () => {
+      render(
+        <Button asChild>
+          <a href="/my-route">Router link</a>
+        </Button>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('href', '/my-route')
+    })
+
+    it('forwards ref to child element', () => {
+      const ref = { current: null as HTMLElement | null }
+      render(
+        <Button asChild ref={ref as React.Ref<HTMLButtonElement>}>
+          <a href="/">Link</a>
+        </Button>,
+      )
+      expect(ref.current).toBeInstanceOf(HTMLAnchorElement)
+    })
+
+    it('has no accessibility violations', async () => {
+      const { container } = render(
+        <Button asChild>
+          <a href="/page">Accessible link button</a>
+        </Button>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
     })
   })
 

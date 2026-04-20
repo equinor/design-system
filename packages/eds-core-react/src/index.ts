@@ -1,5 +1,5 @@
 'use client'
-/* eslint-disable import/prefer-default-export */
+
 export * from './components/Button'
 export * from './components/Typography'
 export * from './components/Table'
@@ -40,4 +40,3 @@ export * from './components/Autocomplete'
 export * from './components/InputWrapper'
 export * from './components/SideBar'
 export * from './components/Datepicker'
-/* eslint-enable */

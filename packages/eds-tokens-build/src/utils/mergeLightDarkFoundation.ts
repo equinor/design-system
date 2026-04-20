@@ -90,12 +90,11 @@ ${mergedVariables.join('\n')}
 `
 
     await writeFile(mergedFoundationPath, mergedContent, 'utf-8')
-    // eslint-disable-next-line no-console
+
     console.log(
       `✓ Merged foundation colors with light-dark() function: ${mergedFoundationPath}`,
     )
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Error merging light/dark foundation files:', error)
     throw error
   }

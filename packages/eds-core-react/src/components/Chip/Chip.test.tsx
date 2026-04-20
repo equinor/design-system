@@ -148,7 +148,6 @@ describe('Chips', () => {
     const chipId = 'avatar-chip-test'
     let callbackId = ''
     const handleDelete = jest.fn((x: React.MouseEvent<HTMLElement>) => {
-      // eslint-disable-next-line testing-library/no-node-access
       callbackId = (x.target as HTMLElement).parentElement.id
     })
 

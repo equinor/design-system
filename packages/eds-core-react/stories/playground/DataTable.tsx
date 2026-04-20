@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import {

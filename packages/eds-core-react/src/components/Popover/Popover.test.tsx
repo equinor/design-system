@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { render, cleanup, screen, waitFor, act } from '../../test'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'

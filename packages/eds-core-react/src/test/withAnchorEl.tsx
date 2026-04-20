@@ -1,4 +1,3 @@
-/* eslint-disable import/export */
 import {
   ReactElement,
   ReactNode,

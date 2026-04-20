@@ -1,0 +1,296 @@
+{
+  "Shadow": {
+    "Low": {
+      "Key": {
+        "color": {
+          "$type": "color",
+          "$value": "#00000033",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_COLOR"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-x": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-y": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 8,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "spread": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "Ambient": {
+        "color": {
+          "$type": "color",
+          "$value": "#0000001f",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_COLOR"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-x": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-y": {
+          "$type": "number",
+          "$value": 4,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 8,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "spread": {
+          "$type": "number",
+          "$value": 3,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      }
+    },
+    "High": {
+      "Key": {
+        "color": {
+          "$type": "color",
+          "$value": "#00000033",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_COLOR"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-x": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-y": {
+          "$type": "number",
+          "$value": 4,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 12,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "spread": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      },
+      "Ambient": {
+        "color": {
+          "$type": "color",
+          "$value": "#0000001f",
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_COLOR"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-x": {
+          "$type": "number",
+          "$value": 0,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "offset-y": {
+          "$type": "number",
+          "$value": 12,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "blur": {
+          "$type": "number",
+          "$value": 16,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        },
+        "spread": {
+          "$type": "number",
+          "$value": 6,
+          "$description": "",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "EFFECT_FLOAT"
+              ],
+              "codeSyntax": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

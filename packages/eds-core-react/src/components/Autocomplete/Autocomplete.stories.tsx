@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Autocomplete, AutocompleteProps, AutocompleteChanges } from '.'
@@ -204,7 +202,7 @@ Multiple.args = {
 export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
   args,
 ) => {
-  const { options } = args
+  const { options, chipCount } = args
 
   return (
     <>
@@ -223,6 +221,7 @@ export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
         multiple
         placeholder="Select stocks"
         optionLabel={optionLabel}
+        chipCount={chipCount}
         selectionDisplay="chips"
         initialSelectedOptions={[options[0], options[1]]}
       />
@@ -232,6 +231,7 @@ export const SelectionDisplay: StoryFn<AutocompleteProps<MyOptionType>> = (
 SelectionDisplay.storyName = 'Selection display'
 SelectionDisplay.args = {
   options: stocks,
+  chipCount: 2,
 }
 
 export const ControlledSingleSelect: StoryFn<
@@ -1076,8 +1076,9 @@ export const LargeDatasets: StoryFn<AutocompleteProps<MyOptionType>> = (
     <>
       <Typography style={{ marginBottom: '1rem' }}>
         This example simulates an API that returns 13 stocks from a total of
-        1,500 available stocks. Notice how the selection counter shows "x/1,500
-        selected" instead of "x/13 selected".
+        1,500 available stocks. Notice how the selection counter shows
+        {' "x/1,500 selected" '}
+        instead of {'"x/13 selected"'}.
       </Typography>
       <Autocomplete
         label="Select from paginated stock results"
@@ -1129,8 +1130,8 @@ export const AddNewOption: StoryFn<AutocompleteProps<MyOptionType>> = () => {
   return (
     <>
       <Typography style={{ marginBottom: '1rem' }}>
-        Type a company name that's not in the list and press Enter or click the
-        "Add" option to add it as a new stock.
+        Type a company name that{"'"}s not in the list and press Enter or click
+        the {'"Add"'} option to add it as a new stock.
       </Typography>
 
       <Autocomplete

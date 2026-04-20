@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable testing-library/no-node-access */
 import { render, cleanup, screen, fireEvent, act, waitFor } from '../../test'
 import { axe } from 'jest-axe'
 import styled from 'styled-components'

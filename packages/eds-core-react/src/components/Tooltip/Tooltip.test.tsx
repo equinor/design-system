@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { fireEvent, render, screen, act } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import '@testing-library/jest-dom'

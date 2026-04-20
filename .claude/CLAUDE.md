@@ -281,6 +281,8 @@ type(scope): description
 
 **Scope and release-please interaction**: Release-please detects packages from file paths — you don't always need a package scope. Using a package scope with a visible type forces a bump regardless of which files changed. For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
 
+**PR titles** must also follow the conventional commits format — they appear in changelogs and merge history.
+
 See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 ## Git Workflow

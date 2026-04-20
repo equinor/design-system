@@ -12,9 +12,8 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost'
  * Button size options
  * - `small`: Compact size (24px height)
  * - `default`: Standard size (36px height)
- * - `large`: Generous size (44px height)
  */
-export type ButtonSize = 'small' | 'default' | 'large'
+export type ButtonSize = 'small' | 'default'
 
 /**
  * Color tone for theming
@@ -25,6 +24,10 @@ export type ButtonSize = 'small' | 'default' | 'large'
 export type ButtonTone = 'accent' | 'neutral' | 'danger'
 
 export type ButtonProps = {
+  /** Render as child element instead of `<button>`, merging Button styles onto the child.
+   * Useful for rendering links that look like buttons, or integrating with router links.
+   */
+  asChild?: boolean
   /**
    * Button variant - controls visual style
    * @default 'primary'

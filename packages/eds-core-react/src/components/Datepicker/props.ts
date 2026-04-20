@@ -26,7 +26,7 @@ export type DatePickerProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> &
      * @default false
      */
     disabled?: boolean
-    // eslint-disable-next-line react/no-unused-prop-types
+
     readOnly?: boolean
     /**
      * Props to set the helper text

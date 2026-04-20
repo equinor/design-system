@@ -45,6 +45,7 @@ export const useAutocomplete = <T>({
   onInputChange,
   selectedOptions: _selectedOptions,
   selectionDisplay = 'summary',
+  chipCount,
   multiple,
   itemToKey: _itemToKey,
   itemCompare: _itemCompare,
@@ -267,7 +268,6 @@ export const useAutocomplete = <T>({
         return item
       }
       try {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return item?.toString()
       } catch {
         throw new Error(
@@ -699,6 +699,7 @@ export const useAutocomplete = <T>({
     onInputChange,
     selectedOptions,
     selectionDisplay,
+    chipCount,
     itemToKey,
     itemCompare,
     allowSelectAll,

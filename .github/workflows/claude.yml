@@ -53,17 +53,9 @@ jobs:
 
       - name: Setup pnpm
         if: steps.check-permission.outputs.authorized == 'true'
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
         with:
           run_install: false
-
-      - name: Install dependencies
-        if: steps.check-permission.outputs.authorized == 'true'
-        run: pnpm install --force
-
-      - name: Build packages
-        if: steps.check-permission.outputs.authorized == 'true'
-        run: pnpm run build
 
       - name: Run Claude Code
         if: steps.check-permission.outputs.authorized == 'true'
@@ -80,7 +72,7 @@ jobs:
           # or https://code.claude.com/docs/en/cli-reference for available options
           claude_args: >-
             --append-system-prompt
-            "The project is already set up with all dependencies installed and all packages built.
+            "Before making any changes, run: pnpm install --frozen-lockfile && pnpm run build.
             Useful commands: pnpm run build:core-react, pnpm run test:core-react,
             pnpm run lint ./path/to/file.tsx,
             cd packages/eds-core-react && pnpm test -- --testPathPattern=ComponentName.

@@ -31,6 +31,8 @@
     border: none;
     border-radius: var(--eds-spacing-border-radius-rounded, 4px);
 
+    /* Typography — ensures correct font for asChild elements */
+    font-family: var(--eds-typography-ui-body-font-family);
     font-size: var(--_label-font-size);
     color: var(--_color);
     text-align: start;
@@ -85,12 +87,9 @@
 
   /* ===== SIZE VARIANTS ===== */
   /* Font size and line-height scale with data-selectable-space.
-   * Button height is derived from padding-block + line-height. */
-
-  .eds-button[data-selectable-space='lg'] {
-    --_label-font-size: var(--eds-typography-ui-body-lg-font-size);
-    --_label-line-height: var(--eds-typography-ui-body-lg-line-height-squished);
-  }
+   * Button height is derived from padding-block + line-height.
+   * min-height, gap, and padding-inline adapt automatically via the
+   * --eds-selectable-space-* tokens which are density-aware. */
 
   .eds-button[data-selectable-space='sm'] {
     --_label-font-size: var(--eds-typography-ui-body-sm-font-size);

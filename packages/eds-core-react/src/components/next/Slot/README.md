@@ -51,8 +51,10 @@ Consumer usage:
 </Button>
 ```
 
-## Constraints
+## Known limitations
 
 - Requires exactly one valid React element child when `asChild` is used
 - Returns `null` silently if the child is invalid
 - Does not support multiple children or text-only children
+- **`disabled` on non-form elements**: The `disabled` HTML attribute and `:disabled` CSS pseudo-class only apply to form elements (`<button>`, `<input>`, etc.). When using `asChild` with e.g. `<a>`, `disabled` will be forwarded as an attribute but `:disabled` styles won't trigger. Data-attribute styles (like `data-color-appearance="neutral"`) still apply.
+- **`ref` type mismatch**: Components are typed with a specific ref type (e.g. `forwardRef<HTMLButtonElement>`), but with `asChild` the ref actually points to the child element (e.g. `HTMLAnchorElement`). This is a known TypeScript limitation with the `asChild` pattern.

@@ -93,7 +93,6 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
     return () => {
       if (tabs) tabs.removeEventListener('keyup', checkIfTabWasPressed)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { density } = useEds()

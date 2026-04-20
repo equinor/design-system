@@ -55,7 +55,7 @@ import { add, chevron_right } from '@equinor/eds-icons'
 
 ### Sizes
 
-Three sizes are available: `small` (24px spacious / 20px comfortable), `default` (36px spacious / 24px comfortable), and `large` (44px spacious / 36px comfortable).
+Two sizes are available: `small` (24px spacious / 20px comfortable) and `default` (36px spacious / 24px comfortable).
 
 <Canvas of={ComponentStories.Sizes} />
 
@@ -96,6 +96,22 @@ Use the `icon` prop for icon-only buttons. They are square with uniform padding.
 Use `round` on icon-only buttons to create circular buttons.
 
 <Canvas of={ComponentStories.CircularIconOnly} />
+
+### As Child
+
+Use `asChild` to render Button styles on a child element, such as an `<a>` or a router link (React Router, Next.js, etc.).
+
+```tsx
+<Button asChild>
+  <a href="/page">Link as button</a>
+</Button>
+
+<Button asChild variant="secondary">
+  <NextLink href="/page">Router button</NextLink>
+</Button>
+```
+
+<Canvas of={ComponentStories.AsChild} />
 
 ### Density Modes
 
