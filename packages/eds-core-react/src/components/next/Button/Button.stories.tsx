@@ -48,15 +48,8 @@ const meta: Meta<StoryArgs> = {
       description: 'Disabled state',
     },
   },
-  // args: {
-  //   variant: 'primary',
-  //   size: 'default',
-  //   tone: 'accent',
-  //   icon: false,
-  //   disabled: false,
-  // },
   args: {
-    variant: 'secondary',
+    variant: 'primary',
     size: 'default',
     tone: 'accent',
     icon: false,

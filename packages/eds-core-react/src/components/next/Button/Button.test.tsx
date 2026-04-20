@@ -165,6 +165,32 @@ describe('Button (next)', () => {
     })
   })
 
+  describe('Multiline', () => {
+    it('sets data-multiline when multiline prop is true', () => {
+      render(<Button multiline>Label</Button>)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'data-multiline',
+        'true',
+      )
+    })
+
+    it('does not set data-multiline by default', () => {
+      render(<Button>Label</Button>)
+      expect(screen.getByRole('button')).not.toHaveAttribute('data-multiline')
+    })
+
+    it('has no accessibility violations (multiline)', async () => {
+      const { container } = render(
+        <Button multiline>
+          Short label
+          <br />
+          that wraps
+        </Button>,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+  })
+
   describe('States', () => {
     it('is disabled when disabled prop is true', () => {
       render(<Button disabled>Disabled</Button>)
