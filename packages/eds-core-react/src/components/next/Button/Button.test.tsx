@@ -189,6 +189,15 @@ describe('Button (next)', () => {
       )
       expect(await axe(container)).toHaveNoViolations()
     })
+
+    it('sets data-multiline on asChild element', () => {
+      render(
+        <Button asChild multiline>
+          <a href="/page">Link</a>
+        </Button>,
+      )
+      expect(screen.getByRole('link')).toHaveAttribute('data-multiline', 'true')
+    })
   })
 
   describe('States', () => {

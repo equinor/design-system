@@ -67,6 +67,8 @@ export type ButtonProps = {
   /**
    * Allows the button label to wrap across multiple lines.
    * When enabled, the text is aligned to the baseline grid.
+   * When used with `asChild`, padding adjusts correctly but baseline trimming
+   * does not apply — the child element's text is not wrapped in a `.label` span.
    * @default false
    */
   multiline?: boolean

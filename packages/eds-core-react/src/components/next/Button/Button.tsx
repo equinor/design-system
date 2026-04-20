@@ -41,6 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'data-color-appearance': disabled ? 'neutral' : tone,
       'data-icon-only': icon || undefined,
       'data-round': icon && round ? true : undefined,
+      'data-multiline': multiline || undefined,
       ...rest,
     }
 
@@ -49,11 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <button
-        type={type}
-        data-multiline={multiline || undefined}
-        {...sharedProps}
-      >
+      <button type={type} {...sharedProps}>
         {(() => {
           const out: ReactNode[] = []
           let buf: ReactNode[] = []
