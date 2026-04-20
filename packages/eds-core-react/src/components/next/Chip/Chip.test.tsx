@@ -217,6 +217,34 @@ describe('Chip (next)', () => {
       expect(onDelete).toHaveBeenCalledTimes(1)
     })
 
+    it('fires onDelete on Backspace when focused', async () => {
+      const user = userEvent.setup()
+      const onDelete = jest.fn()
+      render(<Chip onDelete={onDelete}>Label</Chip>)
+      screen.getByRole('button').focus()
+      await user.keyboard('{Backspace}')
+      expect(onDelete).toHaveBeenCalledTimes(1)
+    })
+
+    it('fires onDelete on Delete when focused', async () => {
+      const user = userEvent.setup()
+      const onDelete = jest.fn()
+      render(<Chip onDelete={onDelete}>Label</Chip>)
+      screen.getByRole('button').focus()
+      await user.keyboard('{Delete}')
+      expect(onDelete).toHaveBeenCalledTimes(1)
+    })
+
+    it('does not fire onClick on Backspace/Delete for non-deletable chips', async () => {
+      const user = userEvent.setup()
+      const onClick = jest.fn()
+      render(<Chip onClick={onClick}>Label</Chip>)
+      screen.getByRole('button').focus()
+      await user.keyboard('{Backspace}')
+      await user.keyboard('{Delete}')
+      expect(onClick).not.toHaveBeenCalled()
+    })
+
     it('accessible name includes the chip text and the remove hint', () => {
       render(<Chip onDelete={jest.fn()}>Status: Active</Chip>)
       const name = screen.getByRole('button').textContent ?? ''

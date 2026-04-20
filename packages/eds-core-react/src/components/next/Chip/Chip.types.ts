@@ -1,4 +1,9 @@
-import type { HTMLAttributes, MouseEvent, ReactNode } from 'react'
+import type {
+  HTMLAttributes,
+  KeyboardEvent,
+  MouseEvent,
+  ReactNode,
+} from 'react'
 
 /**
  * Color tone for theming
@@ -62,7 +67,9 @@ export type ChipProps = {
    * <Chip onDelete={() => removeFilter(id)}>Active</Chip>
    * ```
    */
-  onDelete?: (event: MouseEvent<HTMLElement>) => void
+  onDelete?: (
+    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
+  ) => void
   /**
    * Shows a trailing dropdown arrow icon. Combine with `selected` to flip
    * the arrow up while the menu is open. The actual dropdown/popover

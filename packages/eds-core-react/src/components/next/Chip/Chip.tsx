@@ -40,10 +40,16 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       if (deletable) {
-        onDelete?.(event as unknown as React.MouseEvent<HTMLElement>)
+        onDelete?.(event)
       } else if (onClick) {
         onClick(event as unknown as React.MouseEvent<HTMLDivElement>)
       }
+    } else if (
+      deletable &&
+      (event.key === 'Backspace' || event.key === 'Delete')
+    ) {
+      event.preventDefault()
+      onDelete?.(event)
     }
     onKeyDown?.(event)
   }

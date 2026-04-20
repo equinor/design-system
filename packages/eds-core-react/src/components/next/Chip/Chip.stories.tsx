@@ -210,7 +210,7 @@ export const Types: Story = {
         >
           Dropdown
         </Chip>
-        <Chip onClick={() => console.log('custom')}>
+        <Chip onClick={() => {}}>
           <Icon data={bookmark_filled} aria-hidden />
           Custom
         </Chip>

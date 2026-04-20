@@ -49,7 +49,7 @@
     }
 
     &[data-variant='outlined']:active {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+      background-color: var(--eds-color-bg-fill-muted-active);
     }
 
     /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
