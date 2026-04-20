@@ -428,14 +428,10 @@ export const DensityComparison: Story = {
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
-          <Button size="large">Large</Button>
           <Button size="small" icon aria-label="Add">
             <Icon data={add} aria-hidden />
           </Button>
           <Button size="default" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-          <Button size="large" icon aria-label="Add">
             <Icon data={add} aria-hidden />
           </Button>
         </Wrapper>
@@ -495,11 +491,6 @@ export const MultilineAntiPattern: Story = {
             <br />
             that wraps
           </Button>
-          <Button multiline size="large">
-            Short label
-            <br />
-            that wraps
-          </Button>
         </Wrapper>
       </div>
       <div data-density="spacious">
@@ -515,11 +506,6 @@ export const MultilineAntiPattern: Story = {
             <br />
             that wraps
           </Button>
-          <Button multiline size="large">
-            Short label
-            <br />
-            that wraps
-          </Button>
         </Wrapper>
       </div>
       <div data-density="comfortable">
@@ -531,11 +517,6 @@ export const MultilineAntiPattern: Story = {
             that wraps
           </Button>
           <Button multiline size="default">
-            Short label
-            <br />
-            that wraps
-          </Button>
-          <Button multiline size="large">
             Short label
             <br />
             that wraps
