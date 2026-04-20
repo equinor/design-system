@@ -13,6 +13,9 @@
     border: none;
     border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
 
+    font: inherit;
+    color: inherit;
+
     transition:
       background-color 150ms ease-in-out,
       outline-color 150ms ease-in-out,

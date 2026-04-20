@@ -28,9 +28,9 @@ describe('Chip (next)', () => {
     })
 
     it('forwards ref', () => {
-      const ref = { current: null as HTMLDivElement | null }
+      const ref = { current: null as HTMLButtonElement | null }
       render(<Chip ref={ref}>Label</Chip>)
-      expect(ref.current).toBeInstanceOf(HTMLDivElement)
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement)
     })
 
     it('spreads additional props', () => {
@@ -49,9 +49,11 @@ describe('Chip (next)', () => {
       expect(screen.getByRole('button')).toBeInTheDocument()
     })
 
-    it('is focusable', () => {
-      render(<Chip data-testid="eds-chip">Label</Chip>)
-      expect(screen.getByTestId('eds-chip')).toHaveAttribute('tabindex', '0')
+    it('is focusable', async () => {
+      const user = userEvent.setup()
+      render(<Chip>Label</Chip>)
+      await user.tab()
+      expect(screen.getByRole('button')).toHaveFocus()
     })
   })
 

@@ -1,5 +1,5 @@
 import type {
-  HTMLAttributes,
+  ButtonHTMLAttributes,
   KeyboardEvent,
   MouseEvent,
   ReactNode,
@@ -81,4 +81,4 @@ export type ChipProps = {
    * Chip content
    */
   children?: ReactNode
-} & Omit<HTMLAttributes<HTMLDivElement>, 'children'>
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'type'>

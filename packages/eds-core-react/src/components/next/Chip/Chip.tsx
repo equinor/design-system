@@ -9,7 +9,7 @@ import type { ChipProps } from './Chip.types'
 import { Icon } from '../Icon'
 import { TypographyNext } from '../../Typography'
 
-export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
+export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
   {
     tone = 'neutral',
     variant = 'default',
@@ -28,7 +28,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   const deletable = typeof onDelete === 'function'
   const toggleable = !deletable && !dropdown
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (deletable) {
       onDelete?.(event)
     } else {
@@ -36,18 +36,8 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
     }
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      if (deletable) {
-        onDelete?.(event)
-      } else if (onClick) {
-        onClick(event as unknown as React.MouseEvent<HTMLDivElement>)
-      }
-    } else if (
-      deletable &&
-      (event.key === 'Backspace' || event.key === 'Delete')
-    ) {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (deletable && (event.key === 'Backspace' || event.key === 'Delete')) {
       event.preventDefault()
       onDelete?.(event)
     }
@@ -55,8 +45,9 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
   }
 
   return (
-    <div
+    <button
       ref={ref}
+      type="button"
       className={classes}
       data-variant={variant}
       data-color-appearance={tone}
@@ -65,8 +56,6 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
       data-selectable-space="sm"
       data-space-proportions="squished"
       data-selected={selected || undefined}
-      role="button"
-      tabIndex={0}
       aria-pressed={toggleable ? selected : undefined}
       aria-expanded={dropdown ? selected : undefined}
       onClick={handleClick}
@@ -94,7 +83,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
           className="icon"
         />
       )}
-    </div>
+    </button>
   )
 })
 
