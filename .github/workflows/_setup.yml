@@ -63,11 +63,19 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
           run_install: false
+
+      - name: Debug environment
+        run: |
+          echo "pnpm version: $(pnpm --version)"
+          echo "node version: $(node --version)"
+          echo "lockfile head: $(head -1 pnpm-lock.yaml)"
+          echo "lockfile lines: $(wc -l < pnpm-lock.yaml)"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

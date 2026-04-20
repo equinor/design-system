@@ -72,6 +72,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Build packages
@@ -102,6 +103,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Test packages
@@ -125,6 +127,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Lint packages
@@ -148,6 +151,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Type check packages
@@ -171,6 +175,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Lint packages
