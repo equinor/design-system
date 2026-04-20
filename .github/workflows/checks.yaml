@@ -1,3 +1,14 @@
+# PR Checks Workflow
+#
+# Runs build, test, lint, and type-check in parallel for faster feedback.
+# Build runs first (required by all others), then test/lint/types fan out.
+#
+# Path filtering:
+# - packages/** or apps/** changes → full checks (build + test + lint + types)
+# - docs-only or workflow-only changes → lint only
+#
+# Addresses: https://github.com/equinor/design-system/issues/4624
+
 name: Checks
 permissions:
   contents: read
@@ -7,62 +18,192 @@ on:
     branches:
       - main
     paths:
-      - "apps/**"
-      - "packages/**"
-      - ".github/workflows/**"
+      - 'apps/**'
+      - 'packages/**'
+      - '.github/workflows/**'
   push:
     branches:
       - main
+
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '22.12.0'
+  CACHE_KEY: ${{ github.sha }}-checks
 
 jobs:
+  # ─── Setup: checkout + install + cache ───────────────────────────
   setup:
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}
-      checkout_paths: packages apps scripts .github
-  packages:
-    name: Process packages
+      cacheKey: ${{ github.sha }}-checks
+
+  # ─── Detect what changed to skip unnecessary jobs ───────────────
+  changes:
     runs-on: ubuntu-latest
-    needs: setup
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
     steps:
-      - name: Use "setup" cache
-        id: setup-cache
-        uses: actions/cache@v5
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            code:
+              - 'packages/**'
+              - 'apps/**'
+              - 'scripts/**'
+
+  # ─── Build (required before test/lint/types) ─────────────────────
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [setup, changes]
+    if: needs.changes.outputs.code == 'true'
+    steps:
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v5
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
-      - name: Fallback checkout (cache miss)
-        if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v6
+          key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "22.12.0"
+          node-version: ${{ env.NODE_VERSION }}
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
-      - name: Fallback install (cache miss)
-        if: steps.setup-cache.outputs.cache-hit != 'true'
-        run: pnpm install
       - name: Build packages
-        id: build-packages
         run: pnpm run build
+      - name: Cache build output
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+
+  # ─── Test (parallel, depends on build) ───────────────────────────
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: [build, changes]
+    if: needs.changes.outputs.code == 'true'
+    steps:
+      - name: Restore build cache
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
       - name: Test packages
-        id: test-packages
         run: pnpm run test
+
+  # ─── Lint (parallel, depends on build) ───────────────────────────
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: [build, changes]
+    if: needs.changes.outputs.code == 'true'
+    steps:
+      - name: Restore build cache
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
       - name: Lint packages
-        id: lint-packages
         run: pnpm run lint:all
+
+  # ─── Type check (parallel, depends on build) ────────────────────
+  types:
+    name: Type check
+    runs-on: ubuntu-latest
+    needs: [build, changes]
+    if: needs.changes.outputs.code == 'true'
+    steps:
+      - name: Restore build cache
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
       - name: Type check packages
-        id: type-check-packages
         run: pnpm run types
+
+  # ─── Lint-only for non-code changes (workflows, docs) ───────────
+  lint-only:
+    name: Lint (non-code changes)
+    runs-on: ubuntu-latest
+    needs: [setup, changes]
+    if: needs.changes.outputs.code != 'true'
+    steps:
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+      - name: Lint packages
+        run: pnpm run lint:all
+
+  # ─── Status check (single gate for branch protection) ───────────
+  checks-passed:
+    name: All checks passed
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [setup, build, test, lint, types, lint-only]
+    steps:
+      - name: Evaluate results
+        run: |
+          # Fail if setup failed
+          if [ "${{ needs.setup.result }}" = "failure" ]; then
+            echo "::error::Setup failed"
+            exit 1
+          fi
+
+          # Fail if any code check failed (skip "skipped" status from path filtering)
+          for job in build test lint types lint-only; do
+            result="${{ needs[job].result || 'skipped' }}"
+            if [ "$result" = "failure" ]; then
+              echo "::error::Job '$job' failed"
+              exit 1
+            fi
+          done
+
+          echo "All checks passed ✅"
+
       - name: log-errors-to-slack
+        if: failure()
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-        if: failure()

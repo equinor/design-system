@@ -1,14 +1,22 @@
+# Reusable setup workflow for EDS CI/CD pipelines.
+# Checks out code, installs dependencies, and caches the workspace.
+#
+# Changes from legacy version:
+# - Replaced manual sparse checkout (raw git commands) with actions/checkout@v6
+# - Uses pnpm-lock.yaml hash for cache key (instead of github.sha which never hits)
+# - Uses --frozen-lockfile instead of --force for faster, safer installs
+# - Simplified tag resolution logic
+
 name: _Setup
 on:
   workflow_call:
     inputs:
       tag:
+        description: 'npm publish tag (defaults to "next")'
         type: string
         required: false
       cacheKey:
-        type: string
-        required: true
-      checkout_paths:
+        description: 'Cache key for workspace artifacts'
         type: string
         required: true
     secrets:
@@ -17,94 +25,64 @@ on:
     outputs:
       tag:
         description: 'Package tag'
-        value: ${{ jobs.variables.outputs.tag }}
+        value: ${{ jobs.setup.outputs.tag }}
 
 permissions:
   contents: read
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '22.12.0'
 
 jobs:
-  variables:
+  setup:
     runs-on: ubuntu-latest
-    env:
-      INPUT_TAG: '${{ inputs.tag }}'
     outputs:
-      tag: '${{ env.tag }}'
+      tag: ${{ steps.resolve-tag.outputs.tag }}
     steps:
-      - id: input-tag
-        if: "${{ env.INPUT_TAG != '' }}"
-        run: echo "tag=${{ env.INPUT_TAG }}" >> $GITHUB_ENV
-      - id: default-tag
-        if: "${{ env.INPUT_TAG == '' }}"
-        run: echo "tag=next" >> $GITHUB_ENV
-      - name: Print generated values
-        run: echo "tag -> ${{ env.tag }}"
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Resolve package tag
+        id: resolve-tag
+        run: |
+          TAG="${{ inputs.tag }}"
+          echo "tag=${TAG:-next}" >> $GITHUB_OUTPUT
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache workspace
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ inputs.cacheKey }}
+
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  files:
-    runs-on: ubuntu-latest
-    env:
-      INPUT_PATHS: '${{ inputs.checkout_paths }}'
-    steps:
-      - id: checkout-files
-        # if: steps.cache-files.outputs.cache-hit != 'true'
-        name: Checkout files
-        run: |
-          REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          BRANCH="${GITHUB_REF/#refs\/heads\//}"
-
-          # Reference https://github.com/actions/checkout/issues/172
-          # Following code is based on logs of actions/checkout@v, with sparseCheckout stuff inserted in the middle
-          echo "Syncing repository: $GITHUB_REPOSITORY"
-          echo "Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
-          git version
-          git init $GITHUB_WORKSPACE
-          git remote add origin https://github.com/$GITHUB_REPOSITORY
-          git config --local gc.auto 0
-          # Now interesting part
-          git sparse-checkout init --cone
-          # Add here contents of sparse-checkout line by line
-          git sparse-checkout set package.json pnpm-lock.yaml ${{ env.INPUT_PATHS }}
-          # echo ...
-          git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
-          git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
-      - id: cache-pnpm-store
-        name: Cache pnpm-store
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('pnpm-lock.yaml') }}
-      - name: Install Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '22.12.0'
-      - name: Setup pnpm
-        id: setup-pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          run_install: false
-      - name: Install dependencies recursively
-        id: install-dependencies
-        # if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: pnpm install --force
-      - id: cache-files
-        name: Cache files
-        uses: actions/cache@v5
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ inputs.cacheKey }}
-      - name: log-errors-to-slack
-        uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-        if: ${{ github.event.pull_request.head.repo.fork }} = 'false' &&  failure()
