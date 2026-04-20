@@ -64,7 +64,7 @@
         white-space: normal;
 
         @supports (text-box: trim-both ex alphabetic) {
-          padding-top: var(--padding-top-baseline);
+          padding-top: var(--eds-padding-top-baseline);
           padding-bottom: 0;
 
           text-box: trim-both ex alphabetic;

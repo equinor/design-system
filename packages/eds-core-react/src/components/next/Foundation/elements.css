@@ -25,8 +25,8 @@
     font-family: var(--_headings-font-family);
 
     @supports (text-box: trim-both ex alphabetic) {
-      padding-top: var(--padding-top-baseline);
-      padding-bottom: var(--padding-bottom-baseline);
+      padding-top: var(--eds-padding-top-baseline);
+      padding-bottom: var(--eds-padding-bottom-baseline);
 
       text-box: trim-both ex alphabetic;
     }
@@ -117,8 +117,8 @@
     font-family: var(--_body-font-family);
 
     @supports (text-box: trim-both ex alphabetic) {
-      padding-top: var(--padding-top-baseline);
-      padding-bottom: var(--padding-bottom-baseline);
+      padding-top: var(--eds-padding-top-baseline);
+      padding-bottom: var(--eds-padding-bottom-baseline);
 
       text-box: trim-both ex alphabetic;
     }
@@ -283,11 +283,11 @@
     @supports (text-box: trim-both ex alphabetic) {
       padding-top: calc(
         var(--eds-spacing-inset-md-vertical-squared) +
-          var(--padding-top-baseline)
+          var(--eds-padding-top-baseline)
       );
       padding-bottom: calc(
         var(--eds-spacing-inset-md-vertical-squared) +
-          var(--padding-bottom-baseline)
+          var(--eds-padding-bottom-baseline)
       );
 
       text-box: trim-both ex alphabetic;
@@ -317,11 +317,11 @@
     @supports (text-box: trim-both ex alphabetic) {
       padding-top: calc(
         var(--eds-spacing-inset-md-vertical-squared) +
-          var(--padding-top-baseline)
+          var(--eds-padding-top-baseline)
       );
       padding-bottom: calc(
         var(--eds-spacing-inset-md-vertical-squared) +
-          var(--padding-bottom-baseline)
+          var(--eds-padding-bottom-baseline)
       );
 
       text-box: trim-both ex alphabetic;

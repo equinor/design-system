@@ -538,14 +538,14 @@
   --text-box: trim-both ex alphabetic;
 
   /* Single-line: snap height to 4px grid, centered optically */
-  /* --padding-top-centered: calc((round(1cap, 0.25rem) - 1ex) / 2 + (1cap - 1ex) / 2);
-  --padding-bottom-centered: calc(
+  /* --eds-padding-top-centered: calc((round(1cap, 0.25rem) - 1ex) / 2 + (1cap - 1ex) / 2);
+  --eds-padding-bottom-centered: calc(
     (round(1cap, 0.25rem) - 1ex) / 2 - (1cap - 1ex) / 2
   ); */
 
   /* Multi-line: align text to baseline grid */
-  --padding-top-baseline: calc(round(1cap, 0.25rem) - 1ex);
-  --padding-bottom-baseline: 0px;
+  --eds-padding-top-baseline: calc(round(1cap, 0.25rem) - 1ex);
+  --eds-padding-bottom-baseline: 0px;
 }
 
 /* @function progressive enhancement — Chrome/Edge 128+.

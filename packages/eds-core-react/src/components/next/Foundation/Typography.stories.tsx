@@ -44,13 +44,13 @@ const textBoxStyles = `
 
   @supports (text-box: trim-both ex alphabetic) {
     .typo-centered {
-      padding-top: var(--padding-top-centered);
-      padding-bottom: var(--padding-bottom-centered);
+      padding-top: var(--eds-padding-top-centered);
+      padding-bottom: var(--eds-padding-bottom-centered);
       text-box: var(--text-box);
     }
     .typo-baseline {
-      padding-top: var(--padding-top-baseline);
-      padding-bottom: var(--padding-bottom-baseline);
+      padding-top: var(--eds-padding-top-baseline);
+      padding-bottom: var(--eds-padding-bottom-baseline);
       text-box: var(--text-box);
     }
   }
