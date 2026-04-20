@@ -59,10 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             } else {
               if (buf.length) {
                 out.push(
-                  <span
-                    key={`label-${labelGroupIndex++}`}
-                    className="eds-button__label"
-                  >
+                  <span key={`label-${labelGroupIndex++}`} className="label">
                     {buf}
                   </span>,
                 )
@@ -73,7 +70,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           })
           if (buf.length) {
             out.push(
-              <span key="label-end" className="eds-button__label">
+              <span key="label-end" className="label">
                 {buf}
               </span>,
             )

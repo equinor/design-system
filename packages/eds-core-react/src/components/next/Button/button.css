@@ -5,6 +5,7 @@
     --_label-font-size: var(--eds-typography-ui-body-md-font-size);
     --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
     --_label-height: round(1cap, 4px);
+    --captured-size-2: var(--_label-height); /* capture cap-height before SVG overrides font-size */
     --_font-family: var(--eds-typography-ui-body-font-family);
     --_color: var(--eds-color-text-strong-on-emphasis);
     --_bg-color: var(--eds-color-bg-fill-emphasis-default);
@@ -47,7 +48,7 @@
       border-color 150ms ease-in-out,
       color 150ms ease-in-out;
 
-    & .eds-button__label {
+    & .label {
       font-family: var(--_font-family);
       font-size: var(--_label-font-size);
       line-height: var(--_label-line-height);
@@ -57,7 +58,7 @@
     &[data-multiline] {
       padding-block: var(--eds-selectable-space-vertical);
 
-      .eds-button__label {
+      .label {
         white-space: normal;
 
         @supports (text-box: trim-both ex alphabetic) {
@@ -75,7 +76,7 @@
 
       width: var(--_icon-size);
       height: var(--_icon-size);
-      margin-block: calc(-0.5em + 6px); /* TODO: Replace magic number */
+      margin-block: calc((var(--captured-size-2) - var(--_icon-size)) / 2);
       margin-inline: -0.2em;
 
       font-size: var(--_icon-size);
@@ -94,20 +95,6 @@
   .eds-button[data-selectable-space='sm'] {
     --_label-font-size: var(--eds-typography-ui-body-sm-font-size);
     --_label-line-height: var(--eds-typography-ui-body-sm-line-height-squished);
-
-    /* sm cap-height rounds down on the 4px grid, which would require negative
-     * padding to centre the text — impossible in CSS. Use simple padding instead
-     * and trim the invisible space directly from the label span, same as multiline. */
-    padding-block: var(--eds-selectable-space-vertical);
-
-    & .eds-button__label {
-      @supports (text-box: trim-both ex alphabetic) {
-        padding-top: var(--padding-top-baseline);
-        padding-bottom: 0;
-
-        text-box: trim-both ex alphabetic;
-      }
-    }
   }
 
   /* ===== ICON-ONLY BUTTON ===== */

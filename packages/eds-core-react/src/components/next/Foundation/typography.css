@@ -552,34 +552,21 @@
  * Browsers without @function support fall back to the :root custom properties above.
  * Remove the :root fallbacks once Safari supports @function. */
 
-@function --padding-top(--mode: centered) returns <length> {
-  result: if(
-    style(--mode: centered): calc(
-        (round(1cap, 0.25rem) - 1ex) / 2 + (1cap - 1ex) / 2
-      )
-      ; else: calc(round(1cap, 0.25rem) - 1ex)
-  );
-}
-
-@function --padding-bottom(--mode: centered) returns <length> {
-  result: if(
-    style(--mode: centered): calc(
-        (round(1cap, 0.25rem) - 1ex) / 2 - (1cap - 1ex) / 2
-      )
-      ; else: 0
-  );
-}
-
-@function --padding-block(
-    --padding-block <length>,
-    --line-height <length>,
-    --cap-rounded <length>
-  )
-  returns <length> {
-  result: calc(
-    var(--padding-block) - (var(--line-height) - var(--cap-rounded)) / 2
-  );
-}
+/* TODO: uncomment --padding-block() once Safari supports @function.
+ * It will replace the manual padding-block calc() in component CSS.
+ * Track Safari support: https://caniuse.com/css-at-function
+ *
+ * @function --padding-block(
+ *     --padding-block <length>,
+ *     --line-height <length>,
+ *     --cap-rounded <length>
+ *   )
+ *   returns <length> {
+ *   result: calc(
+ *     var(--padding-block) - (var(--line-height) - var(--cap-rounded)) / 2
+ *   );
+ * }
+ */
 
 /* ===== FUTURE: ELIMINATE DENSITY DUPLICATION WITH @function =====
  *

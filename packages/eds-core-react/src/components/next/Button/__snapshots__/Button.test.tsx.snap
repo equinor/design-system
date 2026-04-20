@@ -11,7 +11,7 @@ exports[`Button (next) Rendering matches snapshot 1`] = `
     type="button"
   >
     <span
-      class="eds-button__label"
+      class="label"
     >
       Click me
     </span>

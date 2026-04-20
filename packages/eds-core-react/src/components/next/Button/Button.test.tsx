@@ -99,23 +99,21 @@ describe('Button (next)', () => {
     })
   })
 
-  describe('Internal BEM classes', () => {
-    it('has eds-button__label on the text wrapper span', () => {
+  describe('Internal class structure', () => {
+    it('has label on the text wrapper span', () => {
       const { container } = render(<Button>Label</Button>)
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      expect(container.querySelector('.eds-button__label')).toBeInTheDocument()
+      expect(container.querySelector('.label')).toBeInTheDocument()
     })
 
-    it('does not render eds-button__label in icon-only mode', () => {
+    it('does not render label in icon-only mode', () => {
       const { container } = render(
         <Button icon aria-label="Add">
           <MockIcon />
         </Button>,
       )
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      expect(
-        container.querySelector('.eds-button__label'),
-      ).not.toBeInTheDocument()
+      expect(container.querySelector('.label')).not.toBeInTheDocument()
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
     })
   })

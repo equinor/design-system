@@ -205,8 +205,8 @@
   }
 
   .eds-elements :where(mark) {
-    /* The Brand Midnight sun colour, currently not in any token */
-    background-color: #fde88c;
+    /* TODO: add --eds-color-bg-highlight token once Brand Midnight Sun
+     * goes through the colour generator (needs light + dark variants) */
   }
 
   .eds-elements :where(abbr) {
@@ -240,21 +240,9 @@
     font-family: var(--_code-font-family);
   }
 
-  .eds-elements :where(code) {
-    /* TODO */
-  }
-
   .eds-elements :where(pre) {
     font-size: var(--eds-typography-ui-body-md-font-size);
     line-height: var(--eds-typography-ui-body-md-line-height-default);
-  }
-
-  .eds-elements :where(kbd) {
-    /* TODO */
-  }
-
-  .eds-elements :where(samp) {
-    /* TODO */
   }
 
   /* ===== TABLE TEXT ===== */
@@ -384,8 +372,7 @@
     [type='range'], [type='color'], [type='file'], [type='image'],
     [type='submit'], [type='reset'], [type='button'], .eds-input
   ) {
-    /* TODO: replace with dedicated input background token */
-    --_bg-color: var(--eds-color-bg-canvas);
+    --_bg-color: var(--eds-color-bg-input);
 
     display: block;
 

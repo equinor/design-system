@@ -6,7 +6,7 @@
 }
 
 @property --captured-size-2 {
-  inherits: false;
+  inherits: true;
   initial-value: 0;
   syntax: '<length>';
 }
