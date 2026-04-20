@@ -79,18 +79,18 @@ Utility classes `.eds-heading-bold` and `.eds-heading-light` work the same way, 
 For text-box trimming, the `@supports` progressive enhancement pattern is used:
 
 ```css
+/* Base — all browsers */
+padding-block: var(--eds-selectable-space-vertical);
+
+/* Enhancement — trims whitespace to cap-height/alphabetic baseline */
 @supports (text-box: trim-both ex alphabetic) {
   padding-top: var(--padding-top-baseline);
-  padding-bottom: var(--padding-bottom-baseline);
-  text-box: trim-both ex alphabetic;
-}
-/* enhancement: Chrome/Edge 128+ (@function support) */
-@supports (text-box: trim-both ex alphabetic) {
-  padding-top: --padding-top(--mode: baseline);
-  padding-bottom: --padding-bottom(--mode: baseline);
+  padding-bottom: 0;
   text-box: trim-both ex alphabetic;
 }
 ```
+
+CSS `@function` (Chrome/Edge 128+) can replace the custom property approach once Safari ships support — the logic is identical but computed at the CSS layer rather than pre-calculated.
 
 Two typefaces are used: **Equinor** for headings, **Inter** for body text and UI.
 

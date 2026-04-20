@@ -190,21 +190,23 @@ Font sizes follow a mathematical scale based on a `--_base` value:
 }
 ```
 
-#### Progressive enhancement with `@supports` and `@function`
+#### Progressive enhancement with `@supports`
 
-Use `@supports` to gate advanced CSS features. Provide a plain custom property fallback first, then a CSS `@function` enhancement for Chrome/Edge 128+:
+Use `@supports` to layer in advanced CSS features. The base styles work everywhere; the `@supports` block adds what only supported browsers can handle:
 
 ```css
-/* Fallback — all browsers */
-@supports (text-box: trim-both ex alphabetic) {
-  padding-top: var(--padding-top-centered);
-}
+/* Base — all browsers: symmetric padding keeps text vertically centred */
+padding-block: var(--eds-selectable-space-vertical);
 
-/* Enhancement — Chrome/Edge 128+ (@function support) */
+/* Enhancement — trims whitespace above/below the cap-height */
 @supports (text-box: trim-both ex alphabetic) {
-  padding-top: --padding-top(--mode: centered);
+  padding-top: var(--padding-top-baseline);
+  padding-bottom: 0;
+  text-box: trim-both ex alphabetic;
 }
 ```
+
+CSS `@function` (Chrome/Edge 128+) is a future enhancement — define it and comment it in once Safari ships support.
 
 ### Testing
 
