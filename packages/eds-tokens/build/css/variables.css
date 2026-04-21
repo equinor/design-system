@@ -1128,6 +1128,24 @@
   initial-value: 16px;
 }
 
+@property --eds-typography-icon-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 24px;
+}
+
+@property --eds-typography-gap-horizontal {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --eds-typography-gap-vertical {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0;
+}
+
 [data-font-family] {
   font-family: var(--eds-typography-font-family);
   font-size: var(--eds-typography-font-size);
