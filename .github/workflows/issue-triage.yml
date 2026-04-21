@@ -25,7 +25,7 @@ jobs:
       - name: Triage with Claude
         uses: anthropics/claude-code-action@v1
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
@@ -50,10 +50,8 @@ jobs:
               - The content is too vague or trivial to act on (e.g. only a title with no body, or body is "it doesn't work")
 
             If INCOMPLETE:
-              a. Add the needs-info label:
-                   gh issue edit ${{ github.event.issue.number || inputs.issue_number }} --add-label "needs-info"
-                 If the label does not exist yet, create it first:
-                   gh label create "needs-info" --description "Issue is missing required information" --color "fbca04" || true
+              a. Add the "issue needs work" label (note: the label name contains spaces, quote it):
+                   gh issue edit ${{ github.event.issue.number || inputs.issue_number }} --add-label "issue needs work"
               b. Post a single comment (gh issue comment) that:
                    - Politely thanks the author for opening the issue
                    - Lists specifically what information is missing
@@ -91,4 +89,4 @@ jobs:
 
           claude_args: >-
             --allowed-tools
-            "Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue edit:*),Bash(gh issue comment:*),Bash(gh search:*),Bash(gh label create:*),Bash(gh api:*)"
+            "Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue edit:*),Bash(gh issue comment:*),Bash(gh search:*),Bash(gh api:*)"
