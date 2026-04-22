@@ -20,13 +20,13 @@
 
 @property --eds-typography-gap-horizontal {
   inherits: true;
-  initial-value: 0px;
+  initial-value: 0;
   syntax: '<length>';
 }
 
 @property --eds-typography-gap-vertical {
   inherits: true;
-  initial-value: 0px;
+  initial-value: 0;
   syntax: '<length>';
 }
 
