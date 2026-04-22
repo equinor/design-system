@@ -68,7 +68,7 @@ export type ChipProps = {
    * ```
    */
   onDelete?: (
-    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
+    event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>,
   ) => void
   /**
    * Shows a trailing dropdown arrow icon. Combine with `selected` to flip
