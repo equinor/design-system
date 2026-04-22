@@ -15,10 +15,11 @@ jobs:
       - uses: actions/stale@v9
         with:
           only-labels: 'issue needs work'
-          stale-issue-label: 'issue needs work'
           days-before-issue-stale: 2
           days-before-issue-close: 0
           remove-issue-stale-when-updated: true
+          exempt-all-assignees: true
+          stale-issue-message: ''
           close-issue-message: |
             Closing this issue because the requested information was not provided within 48 hours.
 
