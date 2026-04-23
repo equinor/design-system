@@ -4,8 +4,7 @@ import { ButtonSize, ButtonTone, ButtonVariant } from "./types";
 export const SIZE_MAP = {
     small: "sm",
     default: "md",
-    large: "lg",
-} as const satisfies Record<ButtonSize, "sm" | "md" | "lg">;
+} as const satisfies Record<ButtonSize, "sm" | "md">;
 
 type TextEmphasis = keyof ColorToken["text"][ButtonTone];
 export const TEXT_VARIANT_MAP = {

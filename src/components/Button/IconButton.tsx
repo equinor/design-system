@@ -41,7 +41,10 @@ export const IconButton: FC<IconButtonProps> = ({
             ref={ref}
             style={styles.container}
             accessibilityRole={"button"}
-            accessibilityState={{ disabled: disabled ?? false, ...pressableProps.accessibilityState }}
+            accessibilityState={{
+                disabled: disabled ?? false,
+                ...pressableProps.accessibilityState,
+            }}
             disabled={disabled}
             {...pressableProps}
         >
@@ -78,11 +81,12 @@ type IconButtonStyleProps = {
 
 const tokenStyles = EDSStyleSheet.create(
     (token, { variant, tone, size, round }: IconButtonStyleProps) => {
-        const inset = {
-            small: token.newSpacing.spacing.inset.xs,
-            default: token.newSpacing.spacing.inset.sm,
-            large: token.newSpacing.spacing.inset.md,
-        }[size];
+        const inset = (
+            {
+                small: token.newSpacing.spacing.inset.xs,
+                default: token.newSpacing.spacing.inset.sm,
+            } satisfies Record<ButtonSize, unknown>
+        )[size];
 
         const borderRadius = round
             ? token.newSpacing.spacing.borderRadius.pill

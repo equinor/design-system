@@ -1,7 +1,7 @@
 import { Ref } from "react";
 import { PressableProps, View } from "react-native";
 
-export type ButtonSize = "small" | "default" | "large";
+export type ButtonSize = "small" | "default";
 export type ButtonTone = "accent" | "neutral" | "danger";
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 
