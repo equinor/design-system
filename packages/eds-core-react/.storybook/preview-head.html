@@ -10,9 +10,16 @@
   .sb-show-main {
     min-height: 100%;
   }
-  .sbdocs.sbdocs *:not(code):not(.token):not([data-font-family]) {
-    font-family: Equinor, sans-serif !important;
+  @scope (.sbdocs-content) to (.docs-story, .sb-unstyled), {
+    * {
+      font-family: Equinor, sans-serif !important;
+    }
   }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: Equinor, sans-serif;
+  }
+
   .sbdocs.sbdocs-a {
     font-size: inherit;
   }

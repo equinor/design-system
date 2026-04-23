@@ -11,10 +11,8 @@ const config = {
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
-    {
-      name: '@storybook/addon-docs',
-      options: {},
-    },
+    './remark-gfm-preset.mjs',
+    '@storybook/addon-docs',
   ],
 
   features: {
