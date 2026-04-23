@@ -4,6 +4,16 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.5.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.1-beta.0...eds-core-react-next@v2.5.0-beta.0) (2026-04-23)
+
+
+### ✨ Added
+
+* add asChild prop to Button (next) ([#4810](https://github.com/equinor/design-system/issues/4810)) ([06d961a](https://github.com/equinor/design-system/commit/06d961a49ad79a48e383a23265321d7c1babea16))
+* add Chip component to next/ ([#4802](https://github.com/equinor/design-system/issues/4802)) ([81c6111](https://github.com/equinor/design-system/commit/81c61117fff150bcdd15f141afc223488b545f69))
+* CSS-first typography system and Foundation element styles ([#4660](https://github.com/equinor/design-system/issues/4660)) ([284fbf6](https://github.com/equinor/design-system/commit/284fbf667d497ae24410ffbb9f7acff1e5e91c36)), closes [#4659](https://github.com/equinor/design-system/issues/4659)
+* **eds-core-react:** create button label typography css ([#4660](https://github.com/equinor/design-system/issues/4660)) ([04145ba](https://github.com/equinor/design-system/commit/04145ba736a474ddc2588b53a6a5f642dc74ad65))
+
 ## [2.4.1-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.0-beta.0...eds-core-react-next@v2.4.1-beta.0) (2026-04-14)
 
 
