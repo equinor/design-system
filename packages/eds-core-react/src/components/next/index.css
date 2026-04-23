@@ -1,9 +1,9 @@
 /* EDS 2.0 Next Components - CSS */
 /* Define layer order - eds-components has lowest priority for easy user overrides */
-@layer eds-elements, eds-components;
+@layer eds-components;
 
 /*
- * Font import:
+ * Font loading:
  * Next components use two font families:
  *   - "Inter" for UI text (buttons, inputs, labels, etc.)
  *   - "Equinor" for headings
@@ -16,9 +16,6 @@
  */
 
 @import '@equinor/eds-tokens/css/variables';
-@import './Foundation/registered-properties.css';
-@import './Foundation/typography.css';
-@import './Foundation/relaxed-density.css';
 @import './Icon/icon.css';
 @import './Button/button.css';
 @import './Field/field.css';

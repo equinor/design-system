@@ -91,21 +91,23 @@ describe('Button (next)', () => {
     })
   })
 
-  describe('Internal class structure', () => {
-    it('has label on the text wrapper span', () => {
+  describe('Internal BEM classes', () => {
+    it('has eds-button__label on the text wrapper span', () => {
       const { container } = render(<Button>Label</Button>)
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      expect(container.querySelector('.label')).toBeInTheDocument()
+      expect(container.querySelector('.eds-button__label')).toBeInTheDocument()
     })
 
-    it('does not render label in icon-only mode', () => {
+    it('does not render eds-button__label in icon-only mode', () => {
       const { container } = render(
         <Button icon aria-label="Add">
           <MockIcon />
         </Button>,
       )
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      expect(container.querySelector('.label')).not.toBeInTheDocument()
+      expect(
+        container.querySelector('.eds-button__label'),
+      ).not.toBeInTheDocument()
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
     })
   })
@@ -162,41 +164,6 @@ describe('Button (next)', () => {
 
       const icons = screen.getAllByTestId('mock-icon')
       expect(icons).toHaveLength(2)
-    })
-  })
-
-  describe('Multiline', () => {
-    it('sets data-multiline when multiline prop is true', () => {
-      render(<Button multiline>Label</Button>)
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-multiline',
-        'true',
-      )
-    })
-
-    it('does not set data-multiline by default', () => {
-      render(<Button>Label</Button>)
-      expect(screen.getByRole('button')).not.toHaveAttribute('data-multiline')
-    })
-
-    it('has no accessibility violations (multiline)', async () => {
-      const { container } = render(
-        <Button multiline>
-          Short label
-          <br />
-          that wraps
-        </Button>,
-      )
-      expect(await axe(container)).toHaveNoViolations()
-    })
-
-    it('sets data-multiline on asChild element', () => {
-      render(
-        <Button asChild multiline>
-          <a href="/page">Link</a>
-        </Button>,
-      )
-      expect(screen.getByRole('link')).toHaveAttribute('data-multiline', 'true')
     })
   })
 

@@ -450,9 +450,6 @@ importers:
       react-router-dom:
         specifier: ^7.13.2
         version: 7.14.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      remark-gfm:
-        specifier: ^4.0.1
-        version: 4.0.1
       rollup:
         specifier: ^4.60.1
         version: 4.60.1
