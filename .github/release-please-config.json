@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "last-release-sha": "0ef704b8671ea72a129e6d81aa0870511659aa38",
   "tag-separator": "@",
   "packages": {
     "packages/eds-core-react": {
