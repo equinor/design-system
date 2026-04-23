@@ -5,14 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.6.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.5.0...eds-core-react@v2.6.0) (2026-04-23)
-
-
-### ✨ Added
-
-* CSS-first typography system and Foundation element styles ([#4660](https://github.com/equinor/design-system/issues/4660)) ([284fbf6](https://github.com/equinor/design-system/commit/284fbf667d497ae24410ffbb9f7acff1e5e91c36)), closes [#4659](https://github.com/equinor/design-system/issues/4659)
-* **eds-core-react:** create button label typography css ([#4660](https://github.com/equinor/design-system/issues/4660)) ([04145ba](https://github.com/equinor/design-system/commit/04145ba736a474ddc2588b53a6a5f642dc74ad65))
-
 ## [2.5.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.4.1...eds-core-react@v2.5.0) (2026-04-14)
 
 
