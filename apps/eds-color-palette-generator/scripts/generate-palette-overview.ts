@@ -26,7 +26,7 @@ interface ContrastRow {
 const outPath = path.join(__dirname, '..', 'PALETTE_OVERVIEW.md')
 
 function mdEscape(text: string) {
-  return text.replace(/\|/g, '\\|')
+  return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
 }
 
 function formatNumber(n: number, digits = 2) {

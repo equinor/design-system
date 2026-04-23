@@ -1,4 +1,4 @@
-import { execSync } from 'child_process'
+import { execFileSync } from 'child_process'
 import { existsSync, mkdirSync, rmSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -28,7 +28,7 @@ export function setupTestWorkspace(): string {
 
   // Copy fixtures to workspace (use rsync for better handling of existing files)
   const fixturesPath = path.resolve(__dirname, 'fixtures')
-  execSync(`rsync -a "${fixturesPath}/" "${testWorkspace}/"`)
+  execFileSync('rsync', ['-a', `${fixturesPath}/`, `${testWorkspace}/`])
 
   return testWorkspace
 }
@@ -47,7 +47,7 @@ export function cleanupTestWorkspace(testWorkspace: string): void {
  */
 export function runScript(scriptName: string, testWorkspace: string): void {
   const scriptPath = path.resolve(__dirname, `../../dist/scripts/${scriptName}`)
-  execSync(`node "${scriptPath}"`, {
+  execFileSync('node', [scriptPath], {
     stdio: 'pipe',
     cwd: testWorkspace,
   })

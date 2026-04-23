@@ -95,7 +95,7 @@
     "stylelint-config-clean-order": "^8.0.1",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
-    "prettier": "3.8.1",
+    "prettier": "3.8.3",
     "typescript": "^5.9.3"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
