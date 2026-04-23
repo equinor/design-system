@@ -15,7 +15,8 @@ const meta: Meta<Args> = {
     density: {
       control: 'radio',
       options: ['relaxed', 'spacious', 'comfortable'],
-      description: 'Density mode — sets `data-density` on the wrapper',
+      description:
+        'Density mode — sets `data-density` on the wrapper. **`relaxed` is a POC** — values are hardcoded and will change when real tokens are defined.',
     },
   },
   args: {

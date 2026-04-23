@@ -34,14 +34,13 @@
     /* Typography — ensures correct font for asChild elements */
     font-family: var(--eds-typography-ui-body-font-family);
     font-size: var(--_label-font-size);
+    line-height: var(--_label-line-height);
     color: var(--_color);
     text-align: start;
     text-decoration: none;
     white-space: pre-line;
 
     background-color: var(--_bg-color);
-
-    /* ===== LABEL ===== */
     outline: none;
 
     /* Transitions */
@@ -50,6 +49,7 @@
       border-color 150ms ease-in-out,
       color 150ms ease-in-out;
 
+    /* ===== LABEL ===== */
     & .label {
       font-family: var(--_font-family);
       font-size: var(--_label-font-size);

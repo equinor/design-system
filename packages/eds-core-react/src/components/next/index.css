@@ -15,7 +15,6 @@
  * If you only load that, UI components will fall back to a generic sans-serif.
  */
 
-@import 'https://cdn.eds.equinor.com/font/eds-uprights-vf.css';
 @import '@equinor/eds-tokens/css/variables';
 @import './Foundation/registered-properties.css';
 @import './Foundation/typography.css';

@@ -1,7 +1,7 @@
 # Spacing approach for EDS 2.0
 
-- **Status:** Proposed
-- **Date:** 2026-03-31
+- **Status:** Accepted
+- **Date:** 2026-04-23
 - **Decision makers:** EDS core team
 
 ## Context
