@@ -1,11 +1,12 @@
 @layer eds-components {
   .eds-divider {
     display: block;
+
     width: 100%;
     height: 0;
     margin: 0;
     border: 0;
     border-top: var(--eds-sizing-stroke-thin) solid
-      var(--eds-color-border-medium);
+      var(--eds-color-border-subtle);
   }
 }
