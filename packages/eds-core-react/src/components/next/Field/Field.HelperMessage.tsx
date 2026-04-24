@@ -1,5 +1,4 @@
 import { forwardRef } from 'react'
-import { TypographyNext } from '../../Typography'
 import type { HelperMessageProps } from './Field.HelperMessage.types'
 
 /**
@@ -23,15 +22,9 @@ export const HelperMessage = forwardRef<
   HelperMessageProps
 >(function HelperMessage({ children, className, role, id, ...rest }, ref) {
   return (
-    <TypographyNext
+    <p
       ref={ref}
-      as="p"
       id={id}
-      family="ui"
-      size="sm"
-      baseline="grid"
-      lineHeight="default"
-      tracking="normal"
       role={role}
       className={['eds-field__helper-message', className]
         .filter(Boolean)
@@ -39,7 +32,7 @@ export const HelperMessage = forwardRef<
       {...rest}
     >
       {children}
-    </TypographyNext>
+    </p>
   )
 })
 

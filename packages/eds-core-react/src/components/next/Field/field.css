@@ -1,24 +1,28 @@
 @layer eds-components {
   .eds-field {
-    /* Layout - use CSS variable for configurable width */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--eds-generic-gap-vertical);
-    width: var(--eds-field-width, 100%);
     /* Private color variables */
     --_eds-field-label-color: var(--eds-color-text-strong);
     --_eds-field-description-color: var(--eds-color-text-subtle);
     --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
     --_eds-field-helper-color: var(--eds-color-text-subtle);
+
+    /* Layout - use CSS variable for configurable width */
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-generic-gap-vertical);
+    align-items: flex-start;
+
+    width: var(--eds-field-width, 100%);
+
+    /* Shared font-family — inherits to all text children */
+    font-family: var(--eds-typography-ui-body-font-family);
   }
 
   /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
   .eds-field:is([data-position='start'], [data-position='end']) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-flow: row wrap;
     gap: var(--eds-generic-gap-horizontal);
+    align-items: center;
   }
 
   .eds-field[data-position='end'] {
@@ -35,13 +39,18 @@
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
+
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
     color: var(--_eds-field-label-color);
   }
 
   .eds-field__indicator {
     margin-inline-start: var(--eds-selectable-space-horizontal);
+
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
     color: var(--_eds-field-indicator-color);
-    font-size: var(--eds-typography-font-size);
     vertical-align: middle;
   }
 
@@ -50,10 +59,22 @@
     color: var(--_eds-field-description-color);
   }
 
-  /* HelperMessage styling */
   .eds-field__helper-message {
     margin: 0;
     color: var(--_eds-field-helper-color);
+  }
+
+  .eds-field__description,
+  .eds-field__helper-message {
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
+
+    @supports (text-box: trim-both ex alphabetic) {
+      padding-top: var(--eds-padding-top-baseline);
+      padding-bottom: 0;
+
+      text-box: trim-both ex alphabetic;
+    }
   }
 
   /* Reduce gap before helper message to 3xs spacing.
