@@ -75,6 +75,7 @@ const sidebars: SidebarsConfig = {
         id: 'components/data-display/data-display',
       },
       items: [
+        'components/data-display/chip',
         'components/data-display/icon',
         'components/data-display/tooltip',
       ],
