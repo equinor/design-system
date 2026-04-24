@@ -88,9 +88,9 @@ Tones communicate the meaning or category behind a chip:
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--tones)
 
-### Selection
+### Selectable chips
 
-Every chip is a toggle by default. Clicking a selectable chip flips its `selected` state and shows a leading check icon. Selection is ideal for filter chips, tag pickers, or any group where one or more options can be active at the same time.
+Selectable chips are controlled components - manage `selected` in your own state and pass an `onClick` handler to flip it. When `selected` is true, the chip shows a leading check icon. Selection is ideal for filter chips, tag pickers, or any group where one or more options can be active at the same time.
 
 <iframe
   class="sb-iframe"
@@ -196,7 +196,7 @@ Every tone works with every variant. Here's the full matrix for picking the righ
 
 **Dropdown chips**
 
-- Use `aria-expanded` to reflect whether the paired menu is open
+- The component automatically sets `aria-expanded` based on the `selected` prop - keep `selected` in sync with the actual open/closed state of the paired menu
 - **Keyboard**: Tab to focus, Enter or Space to open or close the menu
 
 **Comfortable density**
@@ -224,7 +224,7 @@ Comfortable density should come with the option to switch to spacious mode for a
 
 The Chip component exposes these properties:
 
-- **Tone** - Neutral, Accent, Success, Info, Warning, Error
+- **Tone** - Neutral, Accent, Success, Info, Warning, Error (maps to the `danger` code prop)
 - **Type** - Default (selectable), Deletable, Checked (selected), Dropdown
 - **Style** - Default, Outlined, High contrast
 - **State** - Default, Hover, Focus, etc.
