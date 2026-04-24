@@ -97,9 +97,7 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           run_install: false
-      # eds-utils follows the stable release channel only. On beta runs we
-      # skip the publish step so the job still completes successfully and
-      # downstream publish-core-package can proceed.
+      # Skip on beta runs — eds-utils has no beta channel
       - name: Publish to npm
         id: publish-to-npm
         if: needs.setup.outputs.tag != 'beta'
