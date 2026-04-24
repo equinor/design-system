@@ -1,6 +1,7 @@
 name: Publish tokens
 permissions:
   contents: read
+  id-token: write
 on:
   workflow_dispatch:
     inputs:
@@ -80,6 +81,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '22.12.0'
+          registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -87,9 +89,8 @@ jobs:
           run_install: false
       - name: Publish to npm
         id: publish-to-npm
-        run: |
-          pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
-          pnpm --filter @equinor/eds-tokens publish --access public --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        working-directory: packages/eds-tokens
+        run: npm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
