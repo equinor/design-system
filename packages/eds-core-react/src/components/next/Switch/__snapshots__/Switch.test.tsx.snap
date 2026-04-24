@@ -30,12 +30,6 @@ exports[`Switch (next) matches snapshot 1`] = `
     </span>
     <label
       class="eds-field__label"
-      data-baseline="center"
-      data-font-family="ui"
-      data-font-size="md"
-      data-font-weight="normal"
-      data-line-height="default"
-      data-tracking="normal"
       for="test-id"
     >
       switch
