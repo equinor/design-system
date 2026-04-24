@@ -135,8 +135,10 @@ jobs:
           echo "### Package detection results:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
-          # Check eds-core-react
-          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-core-react":'; then
+          # Check eds-core-react (matches both the stable "packages/eds-core-react"
+          # key and the beta "packages/eds-core-react/src/components/next" key,
+          # so beta-only releases still trigger the publish workflow)
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-core-react(/src/components/next)?":'; then
             echo "core-react=true" >> $GITHUB_OUTPUT
             echo "✅ eds-core-react changed"
             echo "- ✅ **eds-core-react** changed" >> $GITHUB_STEP_SUMMARY
