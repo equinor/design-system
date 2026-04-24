@@ -224,7 +224,7 @@ Comfortable density should come with the option to switch to spacious mode for a
 
 The Chip component exposes these properties:
 
-- **Tone** - Neutral, Accent, Success, Info, Warning, Error (maps to the `danger` code prop)
+- **Tone** - Neutral, Accent, Success, Info, Warning, Danger
 - **Type** - Default (selectable), Deletable, Checked (selected), Dropdown
 - **Style** - Default, Outlined, High contrast
 - **State** - Default, Hover, Focus, etc.
