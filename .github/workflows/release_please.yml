@@ -52,7 +52,7 @@ jobs:
     steps:
       # Main step: Run the release-please action
       # This does the heavy lifting of analyzing commits and managing releases
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release # ID used to reference outputs in later steps
         with:
           # Configuration files that define release behavior
