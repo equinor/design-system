@@ -1,3 +1,4 @@
+import { createRef } from 'react'
 import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { Divider } from '.'
@@ -17,7 +18,7 @@ describe('Divider (next)', () => {
     })
 
     it('forwards ref', () => {
-      const ref = { current: null as HTMLHRElement | null }
+      const ref = createRef<HTMLHRElement>()
       render(<Divider ref={ref} />)
       expect(ref.current).toBeInstanceOf(HTMLHRElement)
     })
