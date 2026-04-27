@@ -89,7 +89,7 @@
     "eslint-plugin-storybook": "^10.3.3",
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.5.0",
-    "typescript-eslint": "^8.58.0",
+    "typescript-eslint": "^8.59.0",
     "jest-axe": "^10.0.0",
     "stylelint": "^17.6.0",
     "stylelint-config-clean-order": "^8.0.1",
