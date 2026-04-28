@@ -1,0 +1,87 @@
+import { Links, PlatformTabs } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Radio.stories'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Radio.mdx'
+
+<Meta of={ComponentStories} />
+
+# Radio
+
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/SelectionControls/Radio.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>} />
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+```tsx
+import { Radio } from '@equinor/eds-core-react/next'
+```
+
+Radio buttons allow users to select one option from a set. Always use within a group with the same `name` attribute.
+
+<Links
+  ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/radio/"
+  sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/next/Radio/Radio.tsx"
+  npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Primary />
+<Controls />
+
+## Usage
+
+```tsx
+import { Radio } from '@equinor/eds-core-react/next'
+
+<fieldset>
+  <legend>Select option</legend>
+  <Radio label="Option 1" name="group" value="1" />
+  <Radio label="Option 2" name="group" value="2" />
+</fieldset>
+```
+
+&nbsp;
+
+## Examples
+
+### States
+
+<Canvas of={ComponentStories.Spacious} />
+
+### Density
+
+Use `data-density="comfortable"` on a parent element for a more compact size.
+
+<Canvas of={ComponentStories.Comfortable} />
+
+### Light & Dark Mode
+
+<Canvas of={ComponentStories.ColorSchemes} />
+
+### Grouped
+
+Radio buttons with the same `name` form a group. Use arrow keys (↑↓ or ←→) to navigate and select within the group.
+
+<Canvas of={ComponentStories.GroupedRadio} />
+
+### Without visible label
+
+When no visible label is needed, use `aria-label` to provide an accessible name for screen readers.
+
+<Canvas of={ComponentStories.WithoutVisibleLabel} />
+
+### Controlled
+
+<Canvas of={ComponentStories.Controlled} />
+
+## Accessibility
+
+The Radio component requires either a visible `label` prop or an `aria-label` to provide an accessible name. Always group related radios under a `<fieldset>` with a `<legend>` describing the choice.

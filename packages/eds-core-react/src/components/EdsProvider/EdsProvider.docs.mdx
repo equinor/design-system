@@ -1,11 +1,20 @@
-import { Links } from './../../../.storybook/components'
+import { Links, PlatformTabs } from './../../../.storybook/components'
 import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './EdsProvider.stories'
+import MobileDocs from '@equinor/eds-mobile-components/docs/EDSProvider.mdx'
 
 <Meta of={ComponentStories} />
 
 # EdsProvider
 Provider used to set global values for EDS react components.
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/EDSProvider/EDSProvider.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>} />
 
 <Links 
     figmaUrl="https://www.figma.com/file/luNobpDIWTuQ9rhyovGLBI/Desktop?node-id=4950%3A0"

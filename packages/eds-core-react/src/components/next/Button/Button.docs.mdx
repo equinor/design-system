@@ -1,5 +1,7 @@
 import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './Button.stories'
+import { Links, PlatformTabs } from './../../../../.storybook/components'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Button.mdx'
 
 <Meta of={ComponentStories} />
 
@@ -8,6 +10,15 @@ import * as ComponentStories from './Button.stories'
 Button component for triggering actions.
 
 **⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/Button.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>} />
 
 ```bash
 npm install @equinor/eds-core-react@beta

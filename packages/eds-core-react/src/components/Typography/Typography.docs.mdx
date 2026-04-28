@@ -1,10 +1,20 @@
-import { Links } from './../../../.storybook/components'
+import { Links, PlatformTabs } from './../../../.storybook/components'
 import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './Typography.stories'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Typography.mdx'
 
 <Meta of={ComponentStories} />
 
 # Typography
+
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/Typography/Typography.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>} />
 
 Presents hierarchy and organises information as clearly and efficiently as possible,
 therefore text sizes and styles were developed to balance content density and reading comfort.

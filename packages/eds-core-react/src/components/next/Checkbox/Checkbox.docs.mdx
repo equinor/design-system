@@ -1,0 +1,97 @@
+import { Links, PlatformTabs } from './../../../../.storybook/components'
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as ComponentStories from './Checkbox.stories'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Checkbox.mdx'
+
+<Meta of={ComponentStories} />
+
+# Checkbox
+
+**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/SelectionControls/Checkbox.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>} />
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
+
+```tsx
+import { Checkbox } from '@equinor/eds-core-react/next'
+```
+
+Checkboxes allow users to select one or more options from a set, or toggle a single option on/off.
+
+<Links
+  ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/"
+  sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/next/Checkbox/Checkbox.tsx"
+  npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
+/>
+
+<Primary />
+<Controls />
+
+## Usage
+
+```tsx
+import { Checkbox } from '@equinor/eds-core-react/next'
+
+// Basic checkbox
+<Checkbox label="Accept terms" />
+
+// Checkbox group
+<fieldset>
+  <legend>Select options</legend>
+  <Checkbox label="Option 1" name="group" value="1" />
+  <Checkbox label="Option 2" name="group" value="2" />
+</fieldset>
+```
+
+&nbsp;
+
+## Examples
+
+### States
+
+<Canvas of={ComponentStories.Spacious} />
+
+### Density
+
+Use `data-density="comfortable"` on a parent element for a more compact size.
+
+<Canvas of={ComponentStories.Comfortable} />
+
+### Light & Dark Mode
+
+<Canvas of={ComponentStories.ColorSchemes} />
+
+### Grouped
+
+<Canvas of={ComponentStories.GroupedCheckbox} />
+
+### Without visible label
+
+When no visible label is needed, use `aria-label` to provide an accessible name for screen readers. This is common in tables or compact UIs.
+
+<Canvas of={ComponentStories.WithoutVisibleLabel} />
+
+### Controlled
+
+<Canvas of={ComponentStories.Controlled} />
+
+### In Table
+
+<Canvas of={ComponentStories.TableCheckbox} />
+
+### With React Hook Form
+
+<Canvas of={ComponentStories.WithReactHookForm} />
+
+## Accessibility
+
+The Checkbox component requires either a visible `label` prop or an `aria-label` to provide an accessible name. Use the `indeterminate` prop to represent a partially-checked state (e.g., "select all" when only some items are selected).
