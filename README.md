@@ -32,12 +32,115 @@ packages/                # Published npm packages
   eds-tailwind/          # Tailwind CSS plugin
 ```
   
+## Architecture
+
+### System Context
+
+EDS serves three personas and delivers through four channels: Figma assets for designers, npm packages for developers, a documentation hub for both, and a CDN that provides fonts and CSS to all Equinor web applications utlilizing EDS. The system is built as a monorepo with CI/CD pipelines that automate testing, building and publishing to npm and the CDN.
+
+```mermaid
+C4Context
+  title Equinor Design System – System Context
+
+  Person(designer, "Designer", "Creates and maintains UI designs following the Equinor design language")
+  Person(developer, "Developer", "Builds web applications using EDS components and tokens")
+  
+  System_Boundary(eds, "Equinor Design System") {
+    System_Ext(figma, "Figma", "Source of truth for design tokens, components and assets")
+    System_Ext(npm, "npm Registry", "Distributes EDS packages: eds-core-react, eds-tokens, eds-icons, etc.")
+    System(eds, "Equinor Design System", "Provides reusable UI components, design tokens, icons and typography for building consistent Equinor applications", "GitHub monorepo with CI/CD pipelines")
+  }
+  
+  System_Boundary(applications, "Equinor Web Applications", "All internal web applications built by and for Equinor") {
+    Person(enduser, "End User", "Uses Equinor web applications built with EDS")
+    System_Ext(cdn, "CDN", "Serves EDS fonts, icons and CSS to all Equinor web applications across the tenant")
+  }
+
+  Rel(designer, eds, "Uses design assets and documentation")
+  Rel(developer, eds, "Uses documentation and developer tools")
+
+  Rel(eds, figma, "Publishes design assets to")
+  Rel(eds, npm, "Publishes packages to")
+  Rel(eds, cdn, "Publishes fonts and static assets to")
+
+  Rel(developer, npm, "Installs EDS libraries from", "npm")
+  Rel(designer, figma, "Uses EDS components in", "Figma")
+  Rel(enduser, cdn, "Loads fonts and CSS via applications", "HTTPS")
+
+  UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="2")
+```
+
+<details>
+<summary>Container diagram</summary>
+
+The following diagram shows the internal structure of EDS — the applications, services and delivery pipelines that make up the system.
+
+```mermaid
+C4Container
+  title Equinor Design System – Containers
+
+  Person(developer, "Developer", "")
+  Person(designer, "Designer", "")
+  Person(enduser, "End User", "")
+
+
+  System_Boundary(eds, "Equinor Design System") {
+  System_Ext(npm, "npm Registry", "Package registry")
+  System_Ext(figma, "Figma", "Design tool")
+  System_Ext(cdn, "CDN", "Static asset hosting")
+
+    Boundary(design_ctx, "Design Assets") {
+      Container(figma_broker, "Figma Broker", "Node.js", "Syncs design tokens and icons between Figma and the monorepo")
+    }
+
+    Boundary(infra_ctx, "CI/CD & Delivery") {
+      Container(github, "GitHub Actions", "CI/CD", "Builds, tests, lints and publishes packages and applications")
+    }
+
+    Boundary(packages_ctx, "Packages") {
+      Container(monorepo, "EDS Monorepo", "TypeScript, React, CSS", "Source code for all EDS packages: core-react, tokens, icons, utils, lab, data-grid, tailwind")
+    }
+
+    Boundary(docs_ctx, "Documentation & Tools") {
+      Container(storefront, "eds.equinor.com", "Docusaurus", "Documentation hub with guidelines, component docs and getting-started guides")
+      Container(storybook, "Storybook", "React", "Interactive component explorer, living style guide and API documentation")
+      Container(palette_gen, "Color Palette Generator", "Next.js", "Tool for generating and validating accessible Equinor colour palettes")
+    }
+  }
+
+  Rel(designer, figma, "Designs in")
+  Rel(designer, storefront, "Reads documentation", "HTTPS")
+  Rel(designer, storybook, "Explores components", "HTTPS")
+
+  Rel(developer, npm, "Installs EDS packages", "npm")
+  Rel(developer, storefront, "Reads documentation", "HTTPS")
+  Rel(developer, storybook, "References API and examples", "HTTPS")
+  Rel(developer, palette_gen, "Generates colour palettes", "HTTPS")
+
+  Rel(enduser, cdn, "Loads fonts and CSS via applications", "HTTPS")
+
+  Rel(figma_broker, figma, "Fetches tokens and icons", "REST")
+  Rel(figma_broker, monorepo, "Commits processed tokens and icons")
+
+  Rel(monorepo, github, "Triggers CI/CD on push")
+  Rel(github, npm, "Publishes packages")
+  Rel(github, cdn, "Publishes font and icon assets")
+  Rel(github, storybook, "Deploys")
+  Rel(github, storefront, "Deploys")
+  Rel(github, palette_gen, "Deploys")
+
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="3")
+```
+
+</details>
+
 ## Table of contents
 
 - [Equinor Design System](#equinor-design-system)
   - [Quick links](#quick-links)
   - [Table of contents](#table-of-contents)
   - [Repository structure](#repository-structure)
+  - [Architecture](#architecture)
   - [Status](#status)
   - [Applications](#applications)
   - [Prerequisites](#prerequisites)
@@ -79,8 +182,6 @@ packages/                # Published npm packages
   - [Get in touch](#get-in-touch)
 
 ## Status
-
-
 
 | Package | Status | Version |
 |--|--|--|
