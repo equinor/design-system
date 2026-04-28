@@ -1,18 +1,33 @@
 /*
- * Registered custom property for font-size values
- * 
- * This @property declaration registers --eds-typography-font-size as a typed CSS custom property,
- * enabling proper unit handling in calc() expressions. This is essential for the
- * text-icon sizing calculations, which use tan(atan2(var(--eds-typography-font-size), 1px)) to
- * extract the numeric value from the font-size for proportional icon scaling.
- * 
- * Without this registration, the browser would treat --eds-typography-font-size as an untyped string,
- * preventing the mathematical operations needed for responsive icon sizing based on
- * the current text size.
+ * Registered custom properties for length-typed typography values.
+ *
+ * Typing these as <length> makes them safe to use directly in CSS length contexts
+ * (gap, font-size) and enables proper interpolation for transitions.
+ * --eds-typography-font-size in particular is used in tan(atan2(var(--eds-typography-font-size), 1px))
+ * for proportional icon sizing, which requires a registered length.
+ *
+ * Note: --eds-typography-icon-size is intentionally NOT registered. Icon.css uses
+ * `var(--eds-typography-icon-size, 1.5em)` where the 1.5em fallback provides
+ * proportional sizing relative to the parent's font-size when no [data-font-size]
+ * context is set. A registered @property always has a valid computed value
+ * (the initial-value), which would suppress the fallback — and 1.5em is not a
+ * valid initial-value (must be computationally independent).
  */
 @property --eds-typography-font-size {
   inherits: true;
   initial-value: 16px;
+  syntax: '<length>';
+}
+
+@property --eds-typography-gap-horizontal {
+  inherits: true;
+  initial-value: 0;
+  syntax: '<length>';
+}
+
+@property --eds-typography-gap-vertical {
+  inherits: true;
+  initial-value: 0;
   syntax: '<length>';
 }
 
