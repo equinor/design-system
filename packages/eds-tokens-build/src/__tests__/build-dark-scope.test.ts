@@ -27,7 +27,7 @@ describe('build-dark-scope', () => {
     cleanupTestWorkspace(testWorkspace)
   })
 
-  it('replaces light-dark() with light value and appends explicit scope blocks', () => {
+  it('widens the :root selector and replaces light-dark() with the light value', () => {
     writeVariables(
       testWorkspace,
       `:root {
@@ -42,27 +42,36 @@ describe('build-dark-scope', () => {
 
     const out = readVariables(testWorkspace)
 
-    // Original :root retains light values, no light-dark() literals anywhere
+    // No light-dark() literals remain anywhere
     expect(out).not.toContain('light-dark(')
+
+    // The :root selector is widened to also match [data-color-scheme="light"],
+    // so explicit-light-scope nesting (e.g. light-inside-dark) re-applies the
+    // light values rather than inheriting dark.
+    expect(out).toMatch(/:root,\s*\[data-color-scheme="light"\]\s*\{/)
+
+    // Light values stay in the original (now widened) block
     expect(out).toContain('--eds-color-bg-floating: #fff;')
     expect(out).toContain('--eds-color-bg-input: #f5f5f5;')
-    // Static (non-dual) tokens are untouched
+    // Static (non-dual) tokens in the same block are untouched
     expect(out).toContain('--eds-color-static-light-only: #abcdef;')
 
-    // Three appended scope blocks
-    expect(out).toContain('[data-color-scheme="light"] {')
+    // Two appended blocks: explicit dark + prefers-color-scheme media
     expect(out).toContain('[data-color-scheme="dark"] {')
     expect(out).toMatch(/@media\s*\(\s*prefers-color-scheme:\s*dark\s*\)/)
     expect(out).toContain(':root:not([data-color-scheme="light"])')
 
-    // Dark block contains the dark values
+    // No standalone [data-color-scheme="light"] block — light values are
+    // covered by the widened :root selector instead, avoiding duplication.
+    expect(out).not.toMatch(/^\s*\[data-color-scheme="light"\]\s*\{/m)
+
+    // Dark block contains the dark values; static-only token is NOT there
     const darkBlockMatch = out.match(
       /\[data-color-scheme="dark"\]\s*\{([\s\S]*?)\}/,
     )
     expect(darkBlockMatch).not.toBeNull()
     expect(darkBlockMatch![1]).toContain('--eds-color-bg-floating: #202223;')
     expect(darkBlockMatch![1]).toContain('--eds-color-bg-input: #0b0b0b;')
-    // Static-only token is NOT in the dark block
     expect(darkBlockMatch![1]).not.toContain('static-light-only')
   })
 
@@ -80,11 +89,11 @@ describe('build-dark-scope', () => {
     const out = readVariables(testWorkspace)
 
     expect(out).not.toContain('light-dark(')
-    // Light value preserved as-is in :root
+    // Light reference preserved as-is in the widened :root block
     expect(out).toContain(
       '--eds-color-bg-floating: var(--eds-color-neutral-1);',
     )
-    // Dark value placed in dark scope
+    // Dark reference placed in dark scope
     const darkBlockMatch = out.match(
       /\[data-color-scheme="dark"\]\s*\{([\s\S]*?)\}/,
     )
@@ -104,6 +113,34 @@ describe('build-dark-scope', () => {
     runScript('build-dark-scope.js', testWorkspace)
 
     expect(readVariables(testWorkspace)).toBe(input)
+  })
+
+  it('only widens :root blocks that contain light-dark() declarations', () => {
+    writeVariables(
+      testWorkspace,
+      `:root {
+  --eds-color-a: light-dark(#aaa, #111);
+}
+
+:root {
+  --eds-typography-font-size: 16px;
+}
+`,
+    )
+
+    runScript('build-dark-scope.js', testWorkspace)
+
+    const out = readVariables(testWorkspace)
+
+    // First :root (had light-dark) is widened
+    expect(out).toMatch(
+      /:root,\s*\[data-color-scheme="light"\]\s*\{[^}]*--eds-color-a/,
+    )
+    // Second :root (no dual tokens) is left as plain :root
+    expect(out).toMatch(/:root\s*\{[^}]*--eds-typography-font-size/)
+    expect(out).not.toMatch(
+      /:root,\s*\[data-color-scheme="light"\]\s*\{[^}]*--eds-typography/,
+    )
   })
 
   it('emits the same set of dark values in both the explicit-dark block and the prefers-color-scheme media block', () => {
@@ -130,7 +167,6 @@ describe('build-dark-scope', () => {
     expect(explicitDark).toBeDefined()
     expect(mediaDark).toBeDefined()
 
-    // Both blocks declare the same tokens with the same dark values
     for (const decl of ['--eds-color-a: #111;', '--eds-color-b: #222;']) {
       expect(explicitDark).toContain(decl)
       expect(mediaDark).toContain(decl)
