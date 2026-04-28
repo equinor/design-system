@@ -54,3 +54,9 @@ export type {
 
 export { Slot } from './Slot'
 export type { SlotProps } from './Slot'
+
+export { Chip } from './Chip'
+export type { ChipProps, ChipTone, ChipVariant } from './Chip'
+
+export { Divider } from './Divider'
+export type { DividerProps } from './Divider'

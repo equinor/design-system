@@ -18,6 +18,7 @@ import styled, {
   css,
   ThemeProvider,
   StyleSheetManager,
+  type DefaultTheme,
 } from 'styled-components'
 import { calendar } from '@equinor/eds-icons'
 import { PopupHeader } from './PopupHeader'
@@ -247,7 +248,7 @@ const Container = styled.div`
 `
 
 const StyledDatepicker = styled(ReactDatePicker as any)`
-  ${({ theme }) => css`
+  ${({ theme }: { theme: DefaultTheme }) => css`
     height: 24px;
     font-family: ${theme.entities.title.typography.fontFamily};
     font-size: ${theme.entities.title.typography.fontSize};

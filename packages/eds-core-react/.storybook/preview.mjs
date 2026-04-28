@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import { createElement, useEffect } from 'react'
 import './preview.css'
 import '../src/components/next/index.css'
 
@@ -18,15 +18,35 @@ const preview = {
         dynamicTitle: true,
       },
     },
+    debugGrid: {
+      description: 'Show layout debug grid',
+      toolbar: {
+        title: 'Debug Grid',
+        icon: 'ruler',
+        items: [
+          { value: 'off', title: 'Off' },
+          { value: 'on', title: 'On' },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
 
   initialGlobals: {
     colorScheme: 'light',
+    debugGrid: 'off',
   },
 
   decorators: [
     (Story, context) => {
       const isNext = context.title.startsWith('EDS 2.0')
+      const debugGrid = context.globals.debugGrid === 'on'
+
+      useEffect(() => {
+        document.body.classList.toggle('eds-debug-grid', debugGrid)
+        return () => document.body.classList.remove('eds-debug-grid')
+      }, [debugGrid])
+
       if (!isNext) return createElement(Story)
 
       const colorScheme = context.globals.colorScheme || 'light'

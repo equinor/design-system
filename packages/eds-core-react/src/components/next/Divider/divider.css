@@ -1,0 +1,14 @@
+@layer eds-components {
+  .eds-divider {
+    --_stroke: var(--eds-sizing-stroke-thin);
+    --_color: var(--eds-color-border-subtle);
+
+    display: block;
+
+    inline-size: 100%;
+    block-size: 0;
+    margin: 0;
+    border: 0;
+    border-block-start: var(--_stroke) solid var(--_color);
+  }
+}

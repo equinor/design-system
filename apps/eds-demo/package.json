@@ -19,22 +19,22 @@
     "@next/mdx": "^16.2.3",
     "@types/mdx": "^2.0.13",
     "github-markdown-css": "^5.9.0",
-    "next": "16.2.3",
+    "next": "16.2.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@tailwindcss/postcss": "^4.2.2",
+    "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.27",
     "eslint": "^9.38.0",
-    "eslint-config-next": "16.2.2",
-    "postcss": "^8.5.9",
-    "tailwindcss": "^4.2.2",
+    "eslint-config-next": "16.2.4",
+    "postcss": "^8.5.11",
+    "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3"
   },
   "prettier": {

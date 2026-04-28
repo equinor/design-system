@@ -161,6 +161,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-return': 'warn',
       '@typescript-eslint/no-unsafe-assignment': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
+      // TODO: re-enable and clean up existing violations — see issue #4827
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-misused-promises': [
         'error',
         { checksVoidReturn: false },

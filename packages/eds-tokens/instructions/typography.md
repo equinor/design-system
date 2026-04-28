@@ -51,10 +51,10 @@ Apply data attributes to set the typographic context, then use the CSS variables
 ```css
 .text {
   font-family: var(--eds-typography-font-family);
-  font-size: calc(var(--eds-typography-font-size) * 1px);
+  font-size: var(--eds-typography-font-size);
   font-weight: var(--eds-typography-font-weight);
-  line-height: calc(var(--eds-typography-line-height) * 1px);
-  letter-spacing: calc(var(--eds-typography-tracking) * 1px);
+  line-height: var(--eds-typography-line-height);
+  letter-spacing: var(--eds-typography-tracking);
 }
 ```
 
@@ -65,8 +65,8 @@ When `data-font-size` is set, additional variables are resolved automatically:
 ```css
 .icon-next-to-text {
   /* Icon size and gap scale with font size */
-  width: calc(var(--eds-typography-icon-size) * 1px);
-  gap: calc(var(--eds-typography-gap-horizontal) * 1px);
+  width: var(--eds-typography-icon-size);
+  gap: var(--eds-typography-gap-horizontal);
 }
 ```
 
