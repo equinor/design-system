@@ -1,0 +1,110 @@
+## Features
+
+- Text input primitive with controlled focus styling.
+- Single-line or multiline via the `multiline` prop.
+- Supports adornments (start/end elements) and prefix/suffix text.
+- Error, read-only, and disabled states with matching visuals.
+
+## Usage
+
+```tsx
+import { Input } from '@equinor/eds-mobile-components'
+
+const [value, setValue] = useState('')
+
+<Input placeholder="Enter text" value={value} onChange={setValue} />
+```
+
+Note: `onChange` receives the new string value, not a React Native event.
+
+## Examples
+
+### With prefix or suffix text
+
+Use `startText` and `endText` for short static labels like currency symbols, units, or protocol prefixes.
+
+```tsx
+<Input startText="https://" value={url} onChange={setUrl} />
+<Input endText="kg" value={weight} onChange={setWeight} keyboardType="numeric" />
+```
+
+### With adornments
+
+Use `startAdornment` and `endAdornment` for interactive or icon-based decoration.
+
+```tsx
+import { Icon, Input } from '@equinor/eds-mobile-components'
+
+<Input
+  startAdornment={<Icon name="magnify" size={16} />}
+  placeholder="Search"
+  value={query}
+  onChange={setQuery}
+/>
+```
+
+### Multiline
+
+```tsx
+<Input
+  multiline
+  placeholder="Describe the issue…"
+  value={description}
+  onChange={setDescription}
+/>
+```
+
+### Invalid state
+
+Pass `invalid` as any boolean — a literal `true`, or an expression computed from your validation logic.
+
+```tsx
+<Input
+  invalid={email.length > 0 && !isValidEmail(email)}
+  value={email}
+  onChange={setEmail}
+  placeholder="name@example.com"
+/>
+```
+
+When `invalid` is true, Input renders a built-in alert-circle icon at the start of the field. If you're already signalling the error elsewhere (for example inside `TextField` with helper text, or a custom layout), set `hideErrorIcon` to suppress the icon and avoid duplicate signals.
+
+### Read-only vs disabled
+
+Both prevent editing. Use `readOnly` when the value should remain copyable and focusable; use `disabled` when the field is fully inactive.
+
+```tsx
+<Input value="Fixed value" readOnly />
+<Input value="Unavailable" disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `onChange` | `(contents: string) => void` | — | Called with the new text content |
+| `placeholder` | `string` | — | Placeholder text shown when empty |
+| `multiline` | `boolean` | `false` | Wrap text across multiple lines |
+| `startText` | `string` | — | Prefix text (e.g. `https://`, `€`) |
+| `endText` | `string` | — | Suffix text (e.g. `kg`, `.com`) |
+| `startAdornment` | `ReactNode` | — | Element at the start of the input (e.g. icon) |
+| `endAdornment` | `ReactNode` | — | Element at the end of the input (e.g. icon) |
+| `invalid` | `boolean` | `false` | Renders the error state |
+| `hideErrorIcon` | `boolean` | `false` | Hide the built-in error icon when `invalid` is true |
+| `readOnly` | `boolean` | `false` | Prevents editing but remains focusable |
+| `disabled` | `boolean` | `false` | Disables the input entirely |
+
+Also accepts all React Native [`TextInputProps`](https://reactnative.dev/docs/textinput#props), except `onChange`, `onChangeText`, and `readOnly` which are overridden or handled above.
+
+## Accessibility
+
+- Inherits the native text-input role from React Native's `TextInput`
+- Reports `disabled` state to assistive tech when `disabled` or `readOnly` is true
+- Pair with a label by wrapping in `TextField`, or supply `accessibilityLabel` for standalone usage
+- The error state is visual only — expose validation messages programmatically (e.g. via `accessibilityHint`) when using `invalid`
+
+## Related components
+
+- `TextField` — higher-level wrapper around Input with label, helper text, and unit support. Use this for most forms.
+- `Search` — Input preconfigured for search UX.
+- `Select` — dropdown selector for choosing from a fixed list.

@@ -1,0 +1,102 @@
+## Features
+
+- Text component with presets for display, heading, body, label, caption, button, and overline.
+- Uses Equinor for display and heading variants; Inter for body, label, and standalone variants.
+- Optional `bold` and `italic` modifiers.
+- Default color is `text.neutral.strong`.
+
+## Usage
+
+```tsx
+import { Typography } from '@equinor/eds-mobile-components'
+
+<Typography>Hello world</Typography>
+```
+
+The default variant is `body.md`.
+
+## Examples
+
+### Choosing a variant
+
+```tsx
+<Typography variant="display.lg">Welcome</Typography>
+<Typography variant="heading.md">Section title</Typography>
+<Typography variant="body.sm">Supporting copy</Typography>
+<Typography variant="caption">Updated 5 minutes ago</Typography>
+```
+
+### Bold and italic
+
+```tsx
+<Typography bold>Important</Typography>
+<Typography italic>Aside</Typography>
+<Typography bold italic>Attention</Typography>
+```
+
+### Overriding color
+
+Use `style={{ color }}` with the new color tokens for semantic coloring.
+
+```tsx
+import { Typography, useToken } from '@equinor/eds-mobile-components'
+
+const token = useToken()
+
+<Typography style={{ color: token.newColors.text.danger.strong }}>
+  Something went wrong.
+</Typography>
+```
+
+### Inheriting Text props
+
+Because Typography extends React Native's `Text`, all native props pass through.
+
+```tsx
+<Typography numberOfLines={2} onPress={handlePress}>
+  A tappable, truncating paragraph that spans at most two lines.
+</Typography>
+```
+
+## Variants
+
+| Variant | Family | Size | Line height |
+|---|---|---|---|
+| `display.lg` | Equinor | 34 | 41 |
+| `display.md` | Equinor | 28 | 34 |
+| `display.sm` | Equinor | 22 | 28 |
+| `heading.lg` | Equinor | 20 | 25 |
+| `heading.md` | Equinor | 17 | 22 |
+| `heading.sm` | Equinor | 15 | 20 |
+| `body.lg` | Inter | 17 | 22 |
+| `body.md` | Inter | 15 | 20 |
+| `body.sm` | Inter | 13 | 18 |
+| `label.lg` | Inter | 15 | 20 |
+| `label.md` | Inter | 13 | 18 |
+| `label.sm` | Inter | 12 | 16 |
+| `caption` | Inter | 11 | 13 |
+| `button` | Inter | 17 | 22 |
+| `overline` | Inter | 12 | 16 |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `NewTypographyVariant` | `'body.md'` | Typography preset — see Variants table above |
+| `bold` | `boolean` | `false` | Enables bold weight |
+| `italic` | `boolean` | `false` | Enables italic style |
+| `color` | `string` | — | **Deprecated.** Use `style={{ color: ... }}` with the new color tokens instead — see *Overriding color* above |
+
+Also accepts all React Native [`TextProps`](https://reactnative.dev/docs/text#props).
+
+## Accessibility
+
+- Does not set an `accessibilityRole` — inherits React Native's `Text` defaults
+- For structural headings (e.g. screen titles), supply `accessibilityRole="header"` on the element
+- All native `Text` accessibility props (`accessibilityLabel`, `accessibilityHint`, etc.) pass through
+- Font scaling follows the OS text-size setting by default; override with `allowFontScaling={false}` if needed
+
+## Related components
+
+- `Label` — styled label text for form fields.
+- `TextField` — higher-level input that handles its own typography for label and helper text.

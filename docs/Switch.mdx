@@ -1,0 +1,72 @@
+## Features
+
+- Controlled on/off toggle with animated thumb.
+- Optional visible label; labelless variant renders as a circular touch target.
+- Disabled state with reduced opacity.
+
+## Usage
+
+```tsx
+import { Switch } from '@equinor/eds-mobile-components'
+
+const [active, setActive] = useState(false)
+
+<Switch
+  label="Notifications"
+  active={active}
+  onChange={setActive}
+/>
+```
+
+## Examples
+
+### With label
+
+```tsx
+<Switch
+  label="Dark mode"
+  active={isDarkMode}
+  onChange={setIsDarkMode}
+/>
+```
+
+### Without label
+
+When no visible label is needed, use `accessibilityLabel` for screen readers. The switch renders as a circular hit area sized for a comfortable touch target, so it can sit directly next to other controls without extra wrapping.
+
+```tsx
+<Switch
+  active={isEnabled}
+  onChange={setIsEnabled}
+  accessibilityLabel="Enable feature"
+/>
+```
+
+### Disabled
+
+```tsx
+<Switch label="Locked setting" active={true} disabled />
+<Switch label="Unavailable" active={false} disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `active` | `boolean` | `false` | Whether the switch is on or off |
+| `onChange` | `(isActive: boolean) => void` | — | Called when the switch is toggled |
+| `disabled` | `boolean` | `false` | Disables interaction |
+| `label` | `string` | — | Text label displayed next to the switch |
+
+Also accepts all React Native [`ViewProps`](https://reactnative.dev/docs/view#props), including `accessibilityLabel` (required when `label` is not provided).
+
+## Accessibility
+
+- Uses `accessibilityRole="switch"` automatically
+- Reports `checked` and `disabled` states to assistive technology
+- Always provide a `label` or `accessibilityLabel`
+
+## Related components
+
+- `Checkbox` — for selecting one or more items from a set.
+- `Radio` — for selecting a single option from a mutually exclusive set.

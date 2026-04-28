@@ -1,0 +1,99 @@
+## Features
+
+- Controlled checkbox with animated press feedback.
+- Supports checked, unchecked, and indeterminate (mixed) states.
+- Optional label; labelless variant renders as a circular touch target.
+- Disabled state with reduced-contrast icon and label.
+
+## Usage
+
+```tsx
+import { Checkbox } from '@equinor/eds-mobile-components'
+
+const [checked, setChecked] = useState(false)
+
+<Checkbox label="Accept terms" checked={checked} onPress={setChecked} />
+```
+
+## Examples
+
+### Selecting multiple from a list
+
+Checkbox does not ship with a group wrapper — manage multi-select state in the parent.
+
+```tsx
+const options = ['Email', 'SMS', 'Push']
+const [selected, setSelected] = useState<string[]>([])
+
+const toggle = (option: string) =>
+  setSelected((prev) =>
+    prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option],
+  )
+
+{options.map((option) => (
+  <Checkbox
+    key={option}
+    label={option}
+    checked={selected.includes(option)}
+    onPress={() => toggle(option)}
+  />
+))}
+```
+
+### Indeterminate state
+
+Use `indeterminate` on a parent checkbox when its children are partially selected. Indeterminate takes precedence over `checked` visually and reports as `"mixed"` to assistive tech.
+
+```tsx
+const allChecked = selected.length === options.length
+const someChecked = selected.length > 0 && !allChecked
+
+<Checkbox
+  label="All notifications"
+  checked={allChecked}
+  indeterminate={someChecked}
+  onPress={() => setSelected(allChecked ? [] : options)}
+/>
+```
+
+### Without label
+
+Common uses include multi-select lists (inbox, photo picker, contact selection) and bulk-selection headers, where the row content or column title already provides the label. When no visible label is needed, provide `accessibilityLabel` for screen readers. The checkbox renders as a circular hit area sized for a comfortable touch target.
+
+```tsx
+<Checkbox
+  checked={isSelected}
+  onPress={setIsSelected}
+  accessibilityLabel="Select row"
+/>
+```
+
+### Disabled
+
+```tsx
+<Checkbox label="Unavailable" checked={false} disabled />
+<Checkbox label="Locked in" checked={true} disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `checked` | `boolean` | `false` | Whether the checkbox is checked |
+| `indeterminate` | `boolean` | `false` | Renders the mixed/indeterminate state; takes precedence over `checked` |
+| `onPress` | `(checked: boolean) => void` | — | Called when pressed; receives the new checked state |
+| `disabled` | `boolean` | `false` | Disables interaction |
+| `label` | `string` | — | Text label displayed next to the checkbox |
+| `accessibilityLabel` | `string` | — | Accessible name for screen readers. Required when `label` is not provided |
+
+## Accessibility
+
+- Uses `accessibilityRole="checkbox"` automatically
+- Reports checked state as `true`, `false`, or `"mixed"` (when `indeterminate`), plus `disabled`
+- Falls back to `label` for the accessible name if `accessibilityLabel` is not set
+- Always provide a `label` or `accessibilityLabel`
+
+## Related components
+
+- `Radio` — for selecting a single option from a mutually exclusive set.
+- `Switch` — for toggling a single on/off setting.

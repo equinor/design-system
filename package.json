@@ -22,10 +22,10 @@
         "typescript-eslint": "^8.39.0"
     },
     "files": [
-        "CODE_OF_CONDUCT.md",
         "LICENSE",
         "CHANGELOG.md",
-        "dist"
+        "dist",
+        "docs"
     ],
     "homepage": "https://github.com/equinor/design-system-mobile/",
     "keywords": [

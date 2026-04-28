@@ -1,0 +1,80 @@
+## Features
+
+- Controlled radio button with animated press feedback.
+- Optional label; labelless variant renders as a circular touch target.
+- Disabled state with reduced-contrast icon and label.
+
+## Usage
+
+```tsx
+import { Radio } from '@equinor/eds-mobile-components'
+
+const [selected, setSelected] = useState('apples')
+
+<Radio
+  label="Apples"
+  checked={selected === 'apples'}
+  onPress={() => setSelected('apples')}
+/>
+```
+
+## Examples
+
+### Selecting from a group
+
+Radio does not ship with a group wrapper — manage mutual exclusion in the parent by mapping options against a single state value.
+
+```tsx
+const options = ['Apples', 'Oranges', 'Pears']
+const [selected, setSelected] = useState('Apples')
+
+{options.map((option) => (
+  <Radio
+    key={option}
+    label={option}
+    checked={selected === option}
+    onPress={() => setSelected(option)}
+  />
+))}
+```
+
+### Without label
+
+When no visible label is needed, provide `accessibilityLabel` for screen readers. The radio renders as a circular hit area sized for a comfortable touch target.
+
+```tsx
+<Radio
+  checked={isSelected}
+  onPress={() => setIsSelected(true)}
+  accessibilityLabel="Select option A"
+/>
+```
+
+### Disabled
+
+```tsx
+<Radio label="Unavailable" checked={false} disabled />
+<Radio label="Locked in" checked={true} disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `checked` | `boolean` | `false` | Whether the radio is selected |
+| `onPress` | `(checked: boolean) => void` | — | Called when the radio is pressed; receives the new checked state |
+| `disabled` | `boolean` | `false` | Disables interaction |
+| `label` | `string` | — | Text label displayed next to the radio |
+| `accessibilityLabel` | `string` | — | Accessible name for screen readers. Required when `label` is not provided |
+
+## Accessibility
+
+- Uses `accessibilityRole="radio"` automatically
+- Reports `checked` and `disabled` states to assistive technology
+- Falls back to `label` for the accessible name if `accessibilityLabel` is not set
+- Always provide a `label` or `accessibilityLabel`
+
+## Related components
+
+- `Checkbox` — for selecting one or more items from a set.
+- `Switch` — for toggling a single on/off setting.

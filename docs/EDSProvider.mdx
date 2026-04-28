@@ -1,0 +1,90 @@
+# EDSProvider
+
+`EDSProvider` sets up theme context (color scheme and density) and the internal providers EDS Mobile components need to render. Wrap your app once, at the root.
+
+## Setup
+
+Before rendering anything, load the EDS fonts with `useEDS`, then wrap your app in `SafeAreaProvider` and `EDSProvider`:
+
+```tsx
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { EDSProvider, useEDS } from '@equinor/eds-mobile-components'
+
+export default function App() {
+  const [hasLoadedEds] = useEDS()
+  if (!hasLoadedEds) return null
+
+  return (
+    <SafeAreaProvider>
+      <EDSProvider colorScheme="light" density="comfortable">
+        <YourApp />
+      </EDSProvider>
+    </SafeAreaProvider>
+  )
+}
+```
+
+`EDSProvider` internally wraps its children in `GestureHandlerRootView`, `PortalProvider`, `ScrimProvider`, and `DialogServiceProvider`, so components that need portals or dialogs (like `Dialog` and `Menu`) work without extra setup.
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `colorScheme` | `'light' \| 'dark'` | — | Current color scheme (required) |
+| `density` | `'comfortable' \| 'spacious'` | — | Current density mode (required) |
+
+## Tokens
+
+Every EDS component styles itself from the token system — you rarely need to reach for tokens directly. They're exposed as a callback argument in `EDSStyleSheet.create`:
+
+```tsx
+import { EDSStyleSheet, useStyles } from '@equinor/eds-mobile-components'
+
+const styles = EDSStyleSheet.create((token) => ({
+  container: {
+    backgroundColor: token.newColors.container.background,
+    padding: token.newSpacing.spacer.medium,
+  },
+}))
+```
+
+If you need a token value as a plain JS variable — for animations, SVG fills, or any other context outside `EDSStyleSheet.create` — use `useToken`:
+
+```tsx
+import { useToken } from '@equinor/eds-mobile-components'
+
+const token = useToken()
+const dangerColor = token.newColors.text.danger.strong
+```
+
+## Color scheme
+
+`colorScheme` controls whether EDS components render in light or dark mode.
+
+Sync it with the user's iOS-level setting so EDS follows the OS theme:
+
+```tsx
+import { useColorScheme } from 'react-native'
+
+const scheme = useColorScheme() // 'light' | 'dark' | null
+
+<EDSProvider colorScheme={scheme ?? 'light'} density="comfortable">
+  <YourApp />
+</EDSProvider>
+```
+
+Avoid forcing a single colour scheme — it ignores the user's OS-level preference and can conflict with accessibility settings.
+
+## Density
+
+`density` controls how tight or relaxed the layout feels. `comfortable` is denser; `spacious` has more whitespace and larger touch targets.
+
+Pass it as a prop on `EDSProvider`:
+
+```tsx
+<EDSProvider colorScheme="light" density="comfortable">
+  <YourApp />
+</EDSProvider>
+```
+
+Let users or the system drive density rather than forcing one mode. Forcing `comfortable` can conflict with users who need larger touch targets for motor accessibility — the Apple Human Interface Guidelines recommend a minimum of 44×44pt, and `spacious` provides more headroom.

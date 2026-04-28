@@ -1,0 +1,99 @@
+## Features
+
+- Pressable button with three variants (primary, secondary, ghost), three tones (accent, neutral, danger), and two sizes.
+- Optional leading and trailing icons alongside the label.
+- `Button.Icon` sub-component for icon-only actions — rounded square by default, or pill/circle via `round`.
+- Disabled state with reduced-contrast text and icons.
+
+## Usage
+
+```tsx
+import { Button } from '@equinor/eds-mobile-components'
+
+<Button label="Save" onPress={handleSave} />
+```
+
+## Examples
+
+### Variants
+
+```tsx
+<Button label="Primary" variant="primary" onPress={handlePress} />
+<Button label="Secondary" variant="secondary" onPress={handlePress} />
+<Button label="Ghost" variant="ghost" onPress={handlePress} />
+```
+
+### Tones
+
+Use `tone` to signal intent. Pair with any variant.
+
+```tsx
+<Button label="Save" tone="accent" onPress={handleSave} />
+<Button label="Cancel" tone="neutral" variant="secondary" onPress={handleCancel} />
+<Button label="Delete" tone="danger" onPress={handleDelete} />
+```
+
+### With icons
+
+```tsx
+<Button label="Download" leadingIcon="download" onPress={handleDownload} />
+<Button label="Next" trailingIcon="arrow-right" onPress={handleNext} />
+```
+
+### Icon-only
+
+Use `Button.Icon` when a visible label would be redundant. Always supply `accessibilityLabel`.
+
+```tsx
+<Button.Icon name="close" accessibilityLabel="Dismiss" onPress={handleClose} />
+<Button.Icon name="heart" round accessibilityLabel="Favorite" onPress={toggleFav} />
+```
+
+### Disabled
+
+```tsx
+<Button label="Unavailable" disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Button text (required) |
+| `leadingIcon` | `IconName` | — | Icon displayed before the label |
+| `trailingIcon` | `IconName` | — | Icon displayed after the label |
+| `tone` | `'accent' \| 'neutral' \| 'danger'` | `'accent'` | Color tone |
+| `size` | `'small' \| 'default'` | `'default'` | Button size |
+| `variant` | `'primary' \| 'secondary' \| 'ghost'` | `'primary'` | Visual variant |
+| `disabled` | `boolean` | `false` | Disables interaction |
+
+Also accepts all React Native [`PressableProps`](https://reactnative.dev/docs/pressable#props).
+
+## Button.Icon
+
+An icon-only variant of Button. Useful for compact actions and toolbar-style UIs.
+
+### Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `name` | `IconName` | — | Name of the icon (required) |
+| `round` | `boolean` | `false` | Renders as a pill/circle instead of a rounded square |
+| `tone` | `'accent' \| 'neutral' \| 'danger'` | `'accent'` | Color tone |
+| `size` | `'small' \| 'default'` | `'default'` | Button size |
+| `variant` | `'primary' \| 'secondary' \| 'ghost'` | `'primary'` | Visual variant |
+| `disabled` | `boolean` | `false` | Disables interaction |
+
+Also accepts all React Native [`PressableProps`](https://reactnative.dev/docs/pressable#props).
+
+## Accessibility
+
+- Uses `accessibilityRole="button"` automatically
+- Reports `disabled` state to assistive technology
+- The `label` prop doubles as the accessible name; for `Button.Icon`, always supply `accessibilityLabel`
+- Consumer-provided `accessibilityState` is merged with the built-in `disabled` state
+
+## Related components
+
+- `PressableHighlight` — lower-level tappable surface for custom button-like interactions.
+- `Cell` — row-style tappable layout for lists and settings.

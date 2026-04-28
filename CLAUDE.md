@@ -163,6 +163,18 @@ export default function App() {
 4. **Always use new tokens** (`theme.newColors`, `theme.newSpacing`) for new work
 5. All components must support both light/dark mode and comfortable/spacious density
 
+### Logging Migration Findings
+
+While working on a component (migration, docs, bug fix, or review), you may notice gaps that aren't in scope for the current PR — things the Figma design doesn't account for, patterns missing from the EDS web Storybook, accessibility gaps, or API inconsistencies across components. Do not silently drop these.
+
+Append them as a checklist item to the tracking issue: **[#152 — Tracking: Findings from component migration](https://github.com/equinor/design-system-mobile/issues/152)**. Each item should include:
+
+- **What** — one-line description of the gap
+- **Rationale** — why it matters (a11y, parity with web, dev ergonomics, etc.)
+- **Where it surfaced** — the component or task that revealed it
+
+If the finding needs real work, open a dedicated issue and link it next to the checkbox. The tracking issue is for *discovery*, not *completion*.
+
 ### When Adding New Components
 
 1. Create component in `src/components/YourComponent/`
@@ -171,8 +183,20 @@ export default function App() {
    - Styles using `EDSStyleSheet.create`
 2. Export from `src/index.ts`
 3. Add storybook story in `../../apps/storybook/app/(tabs)/YourComponent.tsx`
-4. Create documentation in `../../docs/YourComponent.md`
+4. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
 5. Follow existing patterns for prop naming and component structure
+
+**MDX handoff to EDS Storybook:** Files in `docs/` ship via npm and are consumed by the EDS Storybook repo, which wraps each one with source/npm `<Links>` inside `<PlatformTabs>`. Mobile MDX should not import `<Links>` or `<PlatformTabs>` itself — write component-focused content only. The consumer-side wrapping pattern (in EDS Storybook's `next/<Component>/<Component>.docs.mdx`) is:
+
+```tsx
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/SelectionControls/Switch.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>} />
+```
 
 ### Component Development Checklist
 
@@ -183,7 +207,7 @@ export default function App() {
 - [ ] Exports TypeScript types for all props
 - [ ] Follows existing component patterns (prop naming, structure)
 - [ ] Has corresponding storybook story for visual testing
-- [ ] Has documentation in `docs/`
+- [ ] Has developer MDX doc in `docs/` (Features → Usage → Examples → Props → Accessibility → Related components)
 
 ## Important Patterns
 
