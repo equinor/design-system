@@ -48,7 +48,7 @@ C4Context
   System_Boundary(eds, "Equinor Design System") {
     System_Ext(figma, "Figma", "Source of truth for design tokens, components and assets")
     System_Ext(npm, "npm Registry", "Distributes EDS packages: eds-core-react, eds-tokens, eds-icons, etc.")
-    System(eds, "Equinor Design System", "Provides reusable UI components, design tokens, icons and typography for building consistent Equinor applications", "GitHub monorepo with CI/CD pipelines")
+    System(eds, "Equinor Design System<br>equinor/design-system | eds.equinor.com", "Documentation hub, GitHub monorepo and CI/CD pipelines delivering reusable UI components, design tokens, icons and typography")
   }
   
   System_Boundary(applications, "Equinor Web Applications", "All internal web applications built by and for Equinor") {
