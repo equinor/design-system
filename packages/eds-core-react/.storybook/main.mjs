@@ -55,7 +55,7 @@ const config = {
     // Vite 8 uses Rolldown + lightningcss for CSS by default. Without explicit
     // targets, lightningcss assumes legacy browsers and downlevels modern
     // syntax — which broke EDS dark-mode tokens in prod Storybook by polyfilling
-    // light-dark() into a [data-color-scheme] -incompatible pattern.
+    // light-dark() into a [data-color-scheme]-incompatible pattern.
     // Resolve targets from the repo browserslist so modern syntax is preserved.
     const browserslist = (await import('browserslist')).default
     const { browserslistToTargets } = await import('lightningcss')
