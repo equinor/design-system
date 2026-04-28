@@ -43,6 +43,9 @@ These compile token JSON into CSS/JS/JSON output:
 | `build-semantic-static-variables` | Semantic + color scheme JSON | `build/css/color/static/`, JS, JSON, TS |
 | `build-semantic-dynamic-variables` | Appearance JSON | `build/css/color/dynamic/`, JS, JSON |
 | `build-elevation-variables` | Elevation JSON from Foundations | `build/css/elevation/elevation.css`, `build/ts/elevation/elevation.ts` |
+| `build-dark-scope` | Bundled `variables.css` | Rewrites in place |
+
+The `build-dark-scope` step runs as part of `_build:css` in `eds-tokens` between `build-elevation-variables` and the final `lightningcss --minify`. It scans the bundled `variables.css` for `--name: light-dark(L, D);` declarations, replaces each with `--name: L;` in place, and appends three new blocks: `[data-color-scheme="light"]` (with light values), `[data-color-scheme="dark"]` (with dark values), and `@media (prefers-color-scheme: dark) :root:not([data-color-scheme="light"])` (with dark values, for system dark mode opt-in). The published `variables.min.css` contains no `light-dark()` literals — this is asserted at build time. See `eds-tokens/CLAUDE.md` for the rationale.
 
 The elevation build is different from color builds — it does **not** use Style Dictionary. It reads decomposed shadow primitives (offset, blur, spread, color) from `Elevation.Mode 1.json` and composes them into:
 - Two `box-shadow` CSS custom properties (`--eds-elevation-low`, `--eds-elevation-high`) injected into the bundled `variables.css` `:root` block (not via `@import`, to avoid duplicate `:root` selectors)

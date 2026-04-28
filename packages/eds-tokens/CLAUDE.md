@@ -15,7 +15,13 @@ Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS
    a. Copy index-variables.css to build/css/
    b. lightningcss bundles @imports → variables.css
    c. Elevation build injects --eds-elevation-* into variables.css :root
-   d. lightningcss minifies variables.css → variables.min.css
+   d. build-dark-scope rewrites light-dark() into explicit
+      [data-color-scheme="light"|"dark"] scope rules + a
+      prefers-color-scheme media fallback (immune to downstream
+      lightningcss polyfilling — see Pitfalls)
+   e. lightningcss minifies variables.css → variables.min.css
+   f. assertion check: variables.min.css must NOT contain light-dark(
+      or --lightningcss-* polyfill markers
 ```
 
 **Or all at once:** `pnpm run build:variables` (clean + typography + spacing + color + elevation + bundle)
@@ -58,6 +64,9 @@ Bundles `@import`s from `src/css/index-variables.css` into `variables.css`, inje
 Note: The minify step reads from the already-bundled `variables.css` (not from `index-variables.css`), so any post-bundle injections are preserved.
 
 ## Pitfalls
+
+### Why `light-dark()` is removed from published CSS
+The transform in `eds-tokens-build` emits `light-dark(L, D)` in source CSS. After lightningcss bundles, the `build-dark-scope` step rewrites these into explicit `[data-color-scheme="light"|"dark"]` rules with a `prefers-color-scheme` media fallback. Reason: Vite 8 (Rolldown) and other downstream bundlers run their own lightningcss pass; without explicit `targets`, that pass polyfills `light-dark()` into a `var(--lightningcss-light, …)` pattern that resolves at the `:root` declaration site and breaks subtree-scoped dark mode. Emitting explicit scope rules instead means there is no `light-dark()` for downstream tools to polyfill incorrectly. The build asserts the final output contains no `light-dark(` literals.
 
 ### Missing step 3
 Running only `build:variables:color` compiles individual CSS files but does NOT update `variables.min.css`. Tokens will exist in `build/css/color/*/` but not reach the browser. Always run `_build:css` after.

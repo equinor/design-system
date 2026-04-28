@@ -22,7 +22,27 @@ The package provides two token systems:
 
 ## CSS Variables (Recommended)
 
-The new token system uses CSS custom properties that automatically adapt to light and dark color schemes using the modern `light-dark()` function. These tokens are directly synced from Figma variables.
+The new token system uses CSS custom properties that automatically adapt to light and dark color schemes via explicit `[data-color-scheme]` scope rules with a `prefers-color-scheme` media-query fallback. These tokens are directly synced from Figma variables.
+
+### Dark mode
+
+Dual-mode color tokens are emitted as explicit scope rules in the published `variables.min.css`:
+
+```css
+:root              { --eds-color-bg-floating: #fff; }
+[data-color-scheme="light"] { --eds-color-bg-floating: #fff; }
+[data-color-scheme="dark"]  { --eds-color-bg-floating: #202223; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme="light"]) {
+    --eds-color-bg-floating: #202223;
+  }
+}
+```
+
+The published CSS does **not** use the `light-dark()` CSS function. This is deliberate: `light-dark()` is correct in source CSS, but downstream bundlers (Vite 8 + Rolldown + lightningcss, esbuild with legacy targets, postcss with certain presets) may polyfill it into a `var()` pattern that does not work for subtree-scoped dark mode. Emitting explicit scope rules is robust against any downstream CSS pipeline regardless of how it is configured.
+
+To enable dark mode for a subtree, set `data-color-scheme="dark"` on a wrapper element. To opt out of system dark mode for a subtree, set `data-color-scheme="light"`.
 
 ### Using CSS Variables in CSS
 

@@ -35,7 +35,8 @@
     "generate-semantic-tokens": "./dist/scripts/generate-semantic-tokens.js",
     "generate-concept-tokens": "./dist/scripts/generate-concept-tokens.js",
     "generate-dynamic-appearance-tokens": "./dist/scripts/generate-dynamic-appearance-tokens.js",
-    "build-elevation-variables": "./dist/scripts/build-elevation-variables.js"
+    "build-elevation-variables": "./dist/scripts/build-elevation-variables.js",
+    "build-dark-scope": "./dist/scripts/build-dark-scope.js"
   },
   "scripts": {
     "dev": "vite",
