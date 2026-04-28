@@ -1,7 +1,7 @@
 {
   "name": "@equinor/mobile-storybook",
   "main": "expo-router/entry",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "scripts": {
     "start": "expo start",
     "dev": "expo run:ios",

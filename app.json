@@ -1,43 +1,43 @@
 {
-  "expo": {
-    "name": "EDS Mobile",
-    "slug": "mobile-storybook",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/eDS_Logo_Light.png",
-    "scheme": "mobile-storybook",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.equinor.eds.mobile-storybook"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/eDS_Logo_Light.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/eDS_Logo_Light.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/eDS_Logo_Light.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+    "expo": {
+        "name": "EDS Mobile",
+        "slug": "mobile-storybook",
+        "version": "0.1.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/eDS_Logo_Light.png",
+        "scheme": "mobile-storybook",
+        "userInterfaceStyle": "automatic",
+        "newArchEnabled": false,
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.equinor.eds.mobile"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/eDS_Logo_Light.png",
+                "backgroundColor": "#ffffff"
+            },
+            "edgeToEdgeEnabled": true
+        },
+        "web": {
+            "bundler": "metro",
+            "output": "static",
+            "favicon": "./assets/images/eDS_Logo_Light.png"
+        },
+        "plugins": [
+            "expo-router",
+            [
+                "expo-splash-screen",
+                {
+                    "image": "./assets/images/eDS_Logo_Light.png",
+                    "imageWidth": 200,
+                    "resizeMode": "contain",
+                    "backgroundColor": "#ffffff"
+                }
+            ]
+        ],
+        "experiments": {
+            "typedRoutes": true
         }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
     }
-  }
 }
