@@ -10,6 +10,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     >
       <label
         class="eds-field__label"
+        data-baseline="center"
         for="test-id-input"
       >
         Label

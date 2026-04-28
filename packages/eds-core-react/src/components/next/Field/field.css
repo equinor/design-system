@@ -35,10 +35,10 @@
     flex-basis: 100%;
   }
 
+  /* Label uses data-baseline="center" for text-box trim + grid-snap padding —
+     see [data-baseline='center'] rule in eds-tokens/src/css/typography.css */
   .eds-field__label {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
+    display: block;
 
     font-size: var(--eds-typography-ui-body-md-font-size);
     line-height: var(--eds-typography-ui-body-md-line-height-default);

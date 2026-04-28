@@ -66,6 +66,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
     </span>
     <label
       class="eds-field__label"
+      data-baseline="center"
       for="test-id"
     >
       checkbox

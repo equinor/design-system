@@ -6,6 +6,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
     return (
       <label
         ref={ref}
+        data-baseline="center"
         className={['eds-field__label', className].filter(Boolean).join(' ')}
         {...rest}
       >
