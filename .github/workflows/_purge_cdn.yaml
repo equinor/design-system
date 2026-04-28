@@ -19,7 +19,6 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       AZURE_CDN_PROFILE_NAME: ${{ vars.AZURE_CDN_PROFILE_NAME }}
       AZURE_CDN_ENDPOINT_NAME: ${{ vars.AZURE_CDN_ENDPOINT_NAME }}
-      AZURE_STORYBOOK_ENDPOINT_NAME: ${{ vars.AZURE_STORYBOOK_ENDPOINT_NAME }}
       AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
     steps:
       - name: Az CLI login 🔑 # Using federated credential
@@ -37,12 +36,6 @@ jobs:
         with:
           inlineScript: |
             az afd endpoint purge --content-paths "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --endpoint-name ${{ env.AZURE_CDN_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
-      - name: Purge Storybook endpoint 🚮
-        if: inputs.endpoint == 'storybook'
-        uses: azure/cli@v3
-        with:
-          inlineScript: |
-            az afd endpoint purge --content-paths "/*" --profile-name ${{ env.AZURE_CDN_PROFILE_NAME }} --endpoint-name ${{ env.AZURE_STORYBOOK_ENDPOINT_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
       - name: logout 🔓
         run: |
           az logout

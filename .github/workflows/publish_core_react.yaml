@@ -11,14 +11,6 @@ on:
           - latest
           - beta
         default: 'next'
-      environment:
-        description: 'Environment for Storybook (development | production)'
-        required: false
-        type: choice
-        options:
-          - development
-          - production
-        default: 'development'
 permissions:
   contents: read
   id-token: write
@@ -53,7 +45,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ github.sha }}-dist-core-react
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -66,9 +58,6 @@ jobs:
       - name: Build packages
         id: build-packages
         run: pnpm run build
-      - name: Build Storybook
-        id: build-storybook
-        run: pnpm build:storybook
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
@@ -87,7 +76,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ github.sha }}-dist-core-react
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -122,7 +111,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ github.sha }}-dist-core-react
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -173,42 +162,3 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  publish-storybook:
-    needs: [setup, packages]
-    name: Build & Deploy Website
-    runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.event.inputs.environment || 'development' }}
-    steps:
-      - name: Use cache with storybook files
-        id: use-cache-storybook
-        uses: actions/cache@v5
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
-      - name: Deploy the website
-        id: deploy-website
-        uses: tibor19/static-website-deploy@v4
-        with:
-          enabled-static-website: 'true'
-          folder: 'packages/eds-core-react/storybook-build'
-          public-access-policy: 'container'
-          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
-      - name: log-errors-to-slack
-        uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-        if: failure()
-  purge-cdn:
-    # Only purge CDN for production releases (latest tag)
-    if: github.event.inputs.npm-tag == 'latest'
-    needs: [publish-storybook]
-    name: Purge cdn
-    uses: ./.github/workflows/_purge_cdn.yaml
-    secrets: inherit
-    with:
-      environment: production
-      endpoint: storybook

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment for Storybook (development | production)'
+        description: 'Environment for CDN (development | production)'
         required: false
         type: choice
         options:
