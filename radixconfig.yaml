@@ -28,10 +28,6 @@ spec:
       environment: prod
       component: docs
       useCertificateAutomation: true
-    - alias: storybook.eds.equinor.com
-      environment: prod
-      component: storybook
-      useCertificateAutomation: true
   components:
     - name: color-palette-generator
       dockerfileName: DockerfileColorPaletteGenerator
