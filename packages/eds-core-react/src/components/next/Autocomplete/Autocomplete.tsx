@@ -4,7 +4,9 @@ import {
   useRef,
   useState,
   useCallback,
+  useEffect,
   type CSSProperties,
+  type KeyboardEvent,
 } from 'react'
 import { search as searchIcon } from '@equinor/eds-icons'
 import type { AutocompleteProps } from './Autocomplete.types'
@@ -22,7 +24,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       options = [],
       selectedOption,
       onOptionSelect,
-      noOptionsText: _noOptionsText = 'No options',
+      noOptionsText = 'No options',
       disabled,
       readOnly,
       invalid,
@@ -46,6 +48,14 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     const inputValue = isControlled ? String(value) : internalValue
 
     const [isOpen, setIsOpen] = useState(false)
+    const [activeIndex, setActiveIndex] = useState(-1)
+    const [isFiltering, setIsFiltering] = useState(false)
+    const isMouseInteraction = useRef(false)
+    const [internalSelectedOption, setInternalSelectedOption] = useState(
+      () => selectedOption,
+    )
+    const effectiveSelected = selectedOption ?? internalSelectedOption
+    const [announcement, setAnnouncement] = useState('')
     const inputRef = useRef<HTMLInputElement | null>(null)
     const listboxRef = useRef<HTMLUListElement | null>(null)
 
@@ -61,10 +71,15 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       [forwardedRef],
     )
 
-    const filteredOptions = options.filter((option) =>
-      option.toLowerCase().includes(inputValue.toLowerCase()),
-    )
-    const canOpen = !disabled && !readOnly && filteredOptions.length > 0
+    const filteredOptions = isFiltering
+      ? options.filter((option) =>
+          option.toLowerCase().includes(inputValue.toLowerCase()),
+        )
+      : options
+
+    const canOpen = !disabled && !readOnly
+
+    const getOptionId = (index: number) => `${listboxId}-option-${index}`
 
     const openListbox = () => {
       if (canOpen && !listboxRef.current?.matches(':popover-open')) {
@@ -81,26 +96,148 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!isControlled) setInternalValue(e.target.value)
       onChange?.(e)
-      // Re-evaluate canOpen after state update — open if there are matches
-      if (!disabled && !readOnly) {
-        listboxRef.current?.showPopover()
-      }
+      setIsFiltering(true)
+      setActiveIndex(-1)
+      if (canOpen) listboxRef.current?.showPopover()
     }
 
-    const handleFocus = () => openListbox()
+    // onFocus handles Tab-into-field; mouse clicks are handled by onClick
+    // to avoid the Popover API light-dismissing the popover in the same
+    // pointerdown tick that triggered focus
+    const handleFocus = () => {
+      const wasMouse = isMouseInteraction.current
+      isMouseInteraction.current = false
+      setIsFiltering(false)
+      if (!wasMouse) openListbox()
+    }
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      // Don't close if focus moved to an option (mousedown on option fires before blur)
+      if (listboxRef.current?.contains(e.relatedTarget as Node)) return
+      closeListbox()
+    }
+
+    const handleMouseDown = () => {
+      isMouseInteraction.current = true
+    }
+
+    const handleClick = () => {
+      isMouseInteraction.current = false
+      setIsFiltering(false)
+      openListbox()
+    }
 
     const handleOptionSelect = (option: string) => {
       if (!isControlled) setInternalValue(option)
+      setInternalSelectedOption(option)
       onOptionSelect?.(option)
+      setIsFiltering(false)
       closeListbox()
       inputRef.current?.focus()
     }
 
-    // Sync aria-expanded from the popover toggle event (covers light-dismiss too)
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (disabled || readOnly) return
+
+      switch (e.key) {
+        case 'ArrowDown': {
+          e.preventDefault()
+          if (filteredOptions.length === 0) return
+          const isAlreadyOpen = listboxRef.current?.matches(':popover-open')
+          if (!isAlreadyOpen) listboxRef.current?.showPopover()
+          const startIndex =
+            activeIndex === -1
+              ? Math.max(
+                  0,
+                  effectiveSelected
+                    ? filteredOptions.indexOf(effectiveSelected)
+                    : 0,
+                )
+              : Math.min(activeIndex + 1, filteredOptions.length - 1)
+          setActiveIndex(startIndex)
+          listboxRef.current
+            ?.querySelector(`#${getOptionId(startIndex)}`)
+            ?.scrollIntoView({ block: 'nearest' })
+          break
+        }
+        case 'ArrowUp': {
+          e.preventDefault()
+          if (!listboxRef.current?.matches(':popover-open')) {
+            listboxRef.current?.showPopover()
+            const last = filteredOptions.length - 1
+            if (last >= 0) setActiveIndex(last)
+            return
+          }
+          if (filteredOptions.length === 0) return
+          if (activeIndex === -1) {
+            // Nothing focused yet — go to last item
+            const last = filteredOptions.length - 1
+            setActiveIndex(last)
+            listboxRef.current
+              ?.querySelector(`#${getOptionId(last)}`)
+              ?.scrollIntoView({ block: 'nearest' })
+            return
+          }
+          if (activeIndex === 0) {
+            // At first item — return focus to input
+            setActiveIndex(-1)
+            closeListbox()
+            return
+          }
+          const prev = activeIndex - 1
+          setActiveIndex(prev)
+          listboxRef.current
+            ?.querySelector(`#${getOptionId(prev)}`)
+            ?.scrollIntoView({ block: 'nearest' })
+          break
+        }
+        case 'Enter': {
+          e.preventDefault()
+          if (
+            listboxRef.current?.matches(':popover-open') &&
+            activeIndex >= 0 &&
+            filteredOptions[activeIndex]
+          ) {
+            handleOptionSelect(filteredOptions[activeIndex])
+          }
+          break
+        }
+        case 'Escape': {
+          e.preventDefault()
+          closeListbox()
+          break
+        }
+      }
+    }
+
+    // Sync isOpen from popover toggle event (covers light-dismiss too)
     const handleToggle = (e: React.SyntheticEvent<HTMLUListElement>) => {
       const toggleEvent = e.nativeEvent as ToggleEvent
-      setIsOpen(toggleEvent.newState === 'open')
+      const open = toggleEvent.newState === 'open'
+      setIsOpen(open)
+      if (!open) setActiveIndex(-1)
     }
+
+    useEffect(() => {
+      if (!isOpen) return
+      const count = filteredOptions.length
+      setAnnouncement(
+        count === 0
+          ? 'No results'
+          : `${count} result${count === 1 ? '' : 's'} available`,
+      )
+    }, [filteredOptions.length, isOpen])
+
+    // Scroll selected option into view when listbox opens
+    useEffect(() => {
+      if (!isOpen || !effectiveSelected) return
+      const index = filteredOptions.indexOf(effectiveSelected)
+      if (index >= 0) {
+        listboxRef.current
+          ?.querySelector(`#${getOptionId(index)}`)
+          ?.scrollIntoView({ block: 'nearest' })
+      }
+    }, [isOpen]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
 
@@ -119,7 +256,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
             </Field.Description>
           )}
           <div
-            className="eds-autocomplete__anchor"
+            className="anchor"
             style={{ '--autocomplete-anchor': anchorName } as CSSProperties}
           >
             <Input
@@ -130,12 +267,20 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               aria-controls={listboxId}
               aria-autocomplete="list"
               aria-haspopup="listbox"
+              aria-activedescendant={
+                activeIndex >= 0 ? getOptionId(activeIndex) : undefined
+              }
+              autoComplete="off"
               disabled={disabled}
               readOnly={readOnly}
               invalid={invalid}
               value={inputValue}
               onChange={handleChange}
+              onMouseDown={handleMouseDown}
+              onClick={handleClick}
               onFocus={handleFocus}
+              onBlur={handleBlur}
+              onKeyDown={handleKeyDown}
               aria-describedby={getDescribedBy({
                 hasDescription: !!description,
                 hasHelperMessage: !!helperMessage,
@@ -143,7 +288,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               startAdornment={
                 <Icon
                   data={searchIcon}
-                  className="autocomplete-search-icon"
+                  className="search-icon"
                   data-color-appearance={iconTone}
                 />
               }
@@ -155,21 +300,29 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               role="listbox"
               // auto: top-layer + light-dismiss (click outside closes)
               popover="auto"
-              className="eds-autocomplete__listbox"
+              className="listbox"
               aria-label={typeof label === 'string' ? label : undefined}
               onToggle={handleToggle}
             >
-              {filteredOptions.map((option) => (
-                <li
-                  key={option}
-                  role="option"
-                  aria-selected={option === selectedOption}
-                  className="eds-autocomplete__option"
-                  onMouseDown={() => handleOptionSelect(option)}
-                >
-                  {option}
+              {filteredOptions.length === 0 ? (
+                <li className="option" aria-disabled="true">
+                  {noOptionsText}
                 </li>
-              ))}
+              ) : (
+                filteredOptions.map((option, index) => (
+                  <li
+                    key={`${option}-${index}`}
+                    id={getOptionId(index)}
+                    role="option"
+                    aria-selected={option === effectiveSelected}
+                    data-active={activeIndex === index || undefined}
+                    className="option"
+                    onMouseDown={() => handleOptionSelect(option)}
+                  >
+                    {option}
+                  </li>
+                ))
+              )}
             </ul>
           </div>
           {helperMessage && (
@@ -181,6 +334,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
             </Field.HelperMessage>
           )}
         </Field>
+        <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+          {announcement}
+        </div>
       </div>
     )
   },
