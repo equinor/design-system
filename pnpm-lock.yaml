@@ -416,6 +416,9 @@ importers:
       babel-plugin-styled-components:
         specifier: ^2.1.4
         version: 2.1.4(@babel/core@7.29.0)(styled-components@6.4.1(css-to-react-native@3.2.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))
+      browserslist:
+        specifier: ^4.28.2
+        version: 4.28.2
       eslint-plugin-storybook:
         specifier: 10.3.5
         version: 10.3.5(eslint@9.39.4(jiti@2.6.1))(storybook@10.3.5(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(typescript@5.9.3)
@@ -431,6 +434,9 @@ importers:
       js-file-download:
         specifier: ^0.4.12
         version: 0.4.12
+      lightningcss:
+        specifier: ^1.32.0
+        version: 1.32.0
       postcss:
         specifier: ^8.5.11
         version: 8.5.12
@@ -16035,7 +16041,7 @@ snapshots:
   browserslist@4.28.2:
     dependencies:
       baseline-browser-mapping: 2.10.23
-      caniuse-lite: 1.0.30001788
+      caniuse-lite: 1.0.30001791
       electron-to-chromium: 1.5.340
       node-releases: 2.0.37
       update-browserslist-db: 1.2.3(browserslist@4.28.2)
