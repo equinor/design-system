@@ -274,6 +274,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               disabled={disabled}
               readOnly={readOnly}
               invalid={invalid}
+              hideErrorIcon
               value={inputValue}
               onChange={handleChange}
               onMouseDown={handleMouseDown}
