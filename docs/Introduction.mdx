@@ -2,31 +2,72 @@
 
 EDS Mobile is the React Native component library for the Equinor Design System. It brings EDS to native iOS applications.
 
+## Finding components
+
+Mobile components are documented under **EDS 2.0 (beta)** in this Storybook, alongside their web counterparts. When a component is available on both platforms, its page includes **React** and **React Native** tabs — switch to **React Native** for the mobile docs. For a full list of mobile components, click the link at the bottom of the page.
+
 ## Who this is for
 
-EDS Mobile is for teams building genuinely native iOS applications — products where a progressive web app wouldn't meet the requirements.
+EDS Mobile is for teams building genuinely native iOS applications — products where a progressive web app would not meet the requirements.
 
 If your product could run as a web app, [`@equinor/eds-core-react`](https://storybook.eds.equinor.com) is usually the better choice. A single codebase covers desktop and mobile browsers, and it has broader adoption across Equinor. EDS Mobile is here for the cases where native really is the right choice.
 
 ## Status
 
-EDS Mobile is pre-1.0 and published to npm under the `beta` tag. The API may still change before the first stable release, so pin exact versions if you need API stability today.
+EDS Mobile is pre-1.0. Expect minor breaking changes between releases, and pin exact versions if you need API stability today.
 
-EDS Mobile currently supports iOS.
-
-## Install
-
-```bash
-pnpm add @equinor/eds-mobile-components@beta
-```
+Once we reach 1.0, the public API is stable and breaking changes follow semantic versioning. Until then, components may change as we work through the design migration — keep an eye on the [release notes](https://github.com/equinor/design-system-mobile/releases) for breaking-change details.
 
 ## Get started
 
-Once installed, load the EDS fonts with `useEDS` and wrap your app in `EDSProvider` before rendering any components. The EDSProvider page walks through the full setup.
+### 1. Install the package
+
+```bash
+pnpm add @equinor/eds-mobile-components
+```
+
+### 2. Load the EDS fonts
+
+`useEDS` loads the font families EDS components depend on. Call it at the root of your app and wait for the fonts to resolve before rendering EDS components — the next step shows the full setup.
+
+### 3. Wrap your app in `EDSProvider`
+
+`EDSProvider` sets the colour scheme and density, and registers the internal providers components rely on (gestures, portals, dialogs). Wrap your app once, at the root.
+
+```tsx
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { EDSProvider, useEDS } from '@equinor/eds-mobile-components'
+
+export default function App() {
+  const [hasLoadedEds] = useEDS()
+  if (!hasLoadedEds) return null
+
+  return (
+    <SafeAreaProvider>
+      <EDSProvider colorScheme="light" density="comfortable">
+        <YourApp />
+      </EDSProvider>
+    </SafeAreaProvider>
+  )
+}
+```
+
+The EDSProvider page covers the full reference, including how to follow the user's iOS-level appearance and density preferences.
+
+### 4. Render your first component
+
+```tsx
+import { Button } from '@equinor/eds-mobile-components'
+
+<Button label="Save" onPress={handleSave} />
+```
 
 ## Resources
 
-Design guidelines and shared documentation live at [eds.equinor.com](https://eds.equinor.com/), which covers both EDS and EDS Mobile. The source code and issue tracker for EDS Mobile are on [GitHub](https://github.com/equinor/design-system-mobile).
+- [Design guidelines](https://eds.equinor.com/)
+- [Figma library](https://www.figma.com/files/682286909510540417/workspace/1404734309303602976/directory/teams)
+- [GitHub repository](https://github.com/equinor/design-system-mobile)
+- [Release notes](https://github.com/equinor/design-system-mobile/releases)
 
 ## Get in touch
 
