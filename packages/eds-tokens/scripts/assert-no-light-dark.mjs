@@ -14,9 +14,18 @@ if (/--lightningcss-(light|dark)/.test(css)) {
   )
 }
 
-const darkScopeMatches = css.match(/\[data-color-scheme=.?dark.?\]/g) ?? []
-if (darkScopeMatches.length < 2) {
+const darkScopeMatches =
+  css.match(/\[data-color-scheme=["']?dark["']?\]/g) ?? []
+if (darkScopeMatches.length < 3) {
   throw new Error(
-    'variables.min.css is missing the [data-color-scheme=dark] custom-property scope rule (expected at least 2 occurrences: color-scheme rule + token override rule)',
+    'variables.min.css is missing expected [data-color-scheme=dark] occurrences (need at least 3: original color-scheme rule + appended primitive token override + semantic token re-declaration)',
+  )
+}
+
+const lightScopeMatches =
+  css.match(/\[data-color-scheme=["']?light["']?\]/g) ?? []
+if (lightScopeMatches.length < 3) {
+  throw new Error(
+    'variables.min.css is missing expected [data-color-scheme=light] occurrences (need at least 3: original color-scheme rule + widened primitive block + widened semantic block)',
   )
 }

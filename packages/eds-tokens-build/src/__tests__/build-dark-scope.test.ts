@@ -143,6 +143,92 @@ describe('build-dark-scope', () => {
     )
   })
 
+  it('widens compound :root selectors (e.g. :root, [data-color-appearance="neutral"])', () => {
+    writeVariables(
+      testWorkspace,
+      `:root {
+  --eds-color-neutral-13: light-dark(#1d1d1d, #f5fdff);
+}
+
+:root, [data-color-appearance="neutral"] {
+  --eds-color-text-strong: var(--eds-color-neutral-13);
+}
+`,
+    )
+
+    runScript('build-dark-scope.js', testWorkspace)
+
+    const out = readVariables(testWorkspace)
+
+    // The compound semantic selector is widened to include both light AND dark
+    // scopes, since var() references re-resolve at the matching element.
+    expect(out).toMatch(
+      /:root,\s*\[data-color-scheme="light"\],\s*\[data-color-scheme="dark"\],\s*\[data-color-appearance="neutral"\]\s*\{[^}]*--eds-color-text-strong/,
+    )
+
+    // The primitive block stays widened to light only (dark values come from
+    // the appended explicit-dark block).
+    expect(out).toMatch(
+      /:root,\s*\[data-color-scheme="light"\]\s*\{[^}]*--eds-color-neutral-13:\s*#1d1d1d/,
+    )
+    // Crucially: the primitive block is NOT widened with dark scope — that
+    // would declare light values on dark wrappers redundantly.
+    expect(out).not.toMatch(
+      /:root,\s*\[data-color-scheme="light"\],\s*\[data-color-scheme="dark"\]\s*\{[^}]*--eds-color-neutral-13:\s*#1d1d1d/,
+    )
+  })
+
+  it('widens semantic :root blocks (var(--eds-color-) references) with both light and dark scopes', () => {
+    writeVariables(
+      testWorkspace,
+      `:root {
+  --eds-color-neutral-13: light-dark(#1d1d1d, #f5fdff);
+}
+
+:root {
+  --eds-color-text-strong: var(--eds-color-neutral-13);
+}
+`,
+    )
+
+    runScript('build-dark-scope.js', testWorkspace)
+
+    const out = readVariables(testWorkspace)
+
+    // The semantic-only :root block is widened with BOTH scopes
+    expect(out).toMatch(
+      /:root,\s*\[data-color-scheme="light"\],\s*\[data-color-scheme="dark"\]\s*\{[^}]*--eds-color-text-strong/,
+    )
+  })
+
+  it('does not widen :root blocks that have neither light-dark() nor var(--eds-color-)', () => {
+    writeVariables(
+      testWorkspace,
+      `:root {
+  --eds-color-a: light-dark(#aaa, #111);
+}
+
+:root, [data-density="spacious"] {
+  --eds-spacing-md: 12px;
+  --eds-sizing-icon-md: var(--eds-spacing-md);
+}
+`,
+    )
+
+    runScript('build-dark-scope.js', testWorkspace)
+
+    const out = readVariables(testWorkspace)
+
+    // Density block (no color tokens) is left untouched
+    expect(out).toMatch(
+      /:root,\s*\[data-density="spacious"\]\s*\{[^}]*--eds-spacing-md/,
+    )
+    // It must NOT have been widened with [data-color-scheme]
+    expect(out).not.toMatch(
+      /:root,\s*\[data-color-scheme="light"\][^{]*\[data-density="spacious"\]/,
+    )
+  })
+
   it('emits the same set of dark values in both the explicit-dark block and the prefers-color-scheme media block', () => {
     writeVariables(
       testWorkspace,

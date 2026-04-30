@@ -200,7 +200,7 @@
   --eds-elevation-high: 0px 4px 12px 0px rgba(0, 0, 0, 0.2), 0px 12px 16px 6px rgba(0, 0, 0, 0.12);
 }
 
-:root, [data-color-appearance="neutral"] {
+:root, [data-color-scheme="light"], [data-color-scheme="dark"], [data-color-appearance="neutral"] {
   --eds-color-bg-fill-muted-default: var(--eds-color-neutral-3);
   --eds-color-bg-fill-muted-hover: var(--eds-color-neutral-4);
   --eds-color-bg-fill-muted-active: var(--eds-color-neutral-5);
