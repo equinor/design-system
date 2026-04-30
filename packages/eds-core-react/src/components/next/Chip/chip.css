@@ -1,5 +1,19 @@
 @layer eds-components {
   .eds-chip {
+    /* Typography metrics — same compensation pattern as Button */
+    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
+    --_label-height: round(1cap, 4px);
+    --_padding-block: var(--eds-selectable-space-vertical);
+    /*
+     * Reduce block padding by half the line-height overflow so the visual
+     * height equals (padding × 2 + cap-height) instead of (padding × 2 + line-height).
+     * e.g. 8px − (16px − 12px) / 2 = 6px → total 28px
+     */
+    --_padding-adjusted: calc(
+      var(--_padding-block) -
+        (var(--_label-line-height) - var(--_label-height)) / 2
+    );
+
     cursor: pointer;
     user-select: none;
 
@@ -8,7 +22,8 @@
     align-items: center;
 
     box-sizing: border-box;
-    padding-block: var(--eds-selectable-space-vertical);
+    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
+    padding-block: var(--_padding-adjusted);
     padding-inline: var(--eds-selectable-space-horizontal);
     border: none;
     border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
@@ -84,8 +99,8 @@
 
     & .eds-icon {
       flex-shrink: 0;
-      margin-block: calc(-1 * var(--eds-selectable-space-vertical));
-      margin-inline: calc(-1 * var(--eds-selectable-space-vertical) / 2);
+      margin-block: calc(-1 * var(--_padding-adjusted));
+      margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
     }
   }
 }
