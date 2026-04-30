@@ -174,14 +174,16 @@ Knowing the category up-front tells you which line-height variant to pick and wh
 
 ## Implementation in Figma
 
-1. Locate the _layer_ in the **Layers Panel** that needs typography style applied.
-2. Locate the **Design** tab in the **Inspector Panel**.
-3. Under the **Text** section, open the **Style library** menu to view the text styles in order of relevance.
-4. Choose a style by clicking on the style needed.
+EDS 2.0 doesn't ship a per-layer text-style library. Instead, all text is rendered through a single **Typography component** whose appearance is driven by variable modes set on the instance itself. The same `--eds-typography-*` variables that resolve in code (`font-family`, `font-size`, `font-weight`, `line-height`, `tracking`) resolve in Figma — switching a mode swaps the values they point to.
 
-:::info Note
-Typography is called text styles in Figma.
-:::
+To set typography in Figma:
+
+1. From the **Assets** panel, drag in an **EDS Typography** instance.
+2. Type the content into the `text` property.
+3. With the instance selected, open the **Variables** section in the **Design** panel and pick the mode for **size**, **weight**, **family**, **line-height** and **density**. The instance updates immediately.
+4. Nest the instance inside whatever container needs it — buttons, list items, page headings — without flattening or detaching.
+
+Because the component reads variables, density set on a parent frame cascades down: change the density mode once on a page-level frame and every Typography instance inside follows.
 
 ## Do's and Don'ts
 
