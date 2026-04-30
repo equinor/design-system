@@ -2,7 +2,7 @@
   .eds-chip {
     /* Typography metrics — same compensation pattern as Button */
     --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
-    --_label-height: round(1cap, 4px);
+    --_label-height: round(1cap, 4px); /* Figma has a cap-rounded value but it is not exposed as a CSS token; 1cap gives the same result (Inter metrics + 4px grid) */
     --_padding-block: var(--eds-selectable-space-vertical);
     /*
      * Reduce block padding by half the line-height overflow so the visual
