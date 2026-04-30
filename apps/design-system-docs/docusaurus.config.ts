@@ -23,6 +23,8 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
+  clientModules: ['./src/clientModules/syncColorScheme.ts'],
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
