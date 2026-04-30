@@ -38,49 +38,71 @@ Inter covers all UI text — button labels, form fields, captions, prose. Equino
 
 The same modular scale drives both typefaces. Spacious density (`lg` = 16 px) shown.
 
-<div style={{display: 'grid', gridTemplateColumns: '3rem 1fr 1fr', columnGap: '2rem', rowGap: '0.75rem', alignItems: 'baseline', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px', margin: '1rem 0', overflowX: 'auto'}}>
+<div style={{display: 'grid', gridTemplateColumns: '3rem auto 1fr auto 1fr', columnGap: '1rem', rowGap: '0.75rem', alignItems: 'baseline', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px', margin: '1rem 0', overflowX: 'auto'}}>
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>step</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}></code>
   <span style={{fontSize: '0.75rem', opacity: 0.6, fontFamily: 'Inter, sans-serif'}}>Inter — body / UI</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}></code>
   <span style={{fontSize: '0.75rem', opacity: 0.6, fontFamily: 'Inter, sans-serif'}}>Equinor — headings</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>6xl</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>37px</code>
   <span style={{fontSize: '2.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>42px</code>
   <span style={{fontSize: '2.625rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>5xl</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>32px</code>
   <span style={{fontSize: '2rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>36.5px</code>
   <span style={{fontSize: '2.28125rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>4xl</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>28px</code>
   <span style={{fontSize: '1.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>31.5px</code>
   <span style={{fontSize: '1.96875rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>3xl</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>24.5px</code>
   <span style={{fontSize: '1.53125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>27.5px</code>
   <span style={{fontSize: '1.71875rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>2xl</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>21px</code>
   <span style={{fontSize: '1.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>24px</code>
   <span style={{fontSize: '1.5rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>xl</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>18.5px</code>
   <span style={{fontSize: '1.15625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>21px</code>
   <span style={{fontSize: '1.3125rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>lg</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>16px</code>
   <span style={{fontSize: '1rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>18px</code>
   <span style={{fontSize: '1.125rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>md</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>14px</code>
   <span style={{fontSize: '0.875rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>16px</code>
   <span style={{fontSize: '1rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>sm</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>12px</code>
   <span style={{fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>14px</code>
   <span style={{fontSize: '0.875rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
   <code style={{fontSize: '0.75rem', opacity: 0.6}}>xs</code>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>10.5px</code>
   <span style={{fontSize: '0.65625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+  <code style={{fontSize: '0.75rem', opacity: 0.6}}>12px</code>
   <span style={{fontSize: '0.75rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 </div>
 
