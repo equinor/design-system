@@ -14,14 +14,15 @@ if (/--lightningcss-(light|dark)/.test(css)) {
   )
 }
 
-const darkScopeMatches = css.match(/\[data-color-scheme=.?dark.?\]/g) ?? []
+const darkScopeMatches = css.match(/\[data-color-scheme=["']?dark["']?\]/g) ?? []
 if (darkScopeMatches.length < 3) {
   throw new Error(
     'variables.min.css is missing expected [data-color-scheme=dark] occurrences (need at least 3: original color-scheme rule + appended primitive token override + semantic token re-declaration)',
   )
 }
 
-const lightScopeMatches = css.match(/\[data-color-scheme=.?light.?\]/g) ?? []
+const lightScopeMatches =
+  css.match(/\[data-color-scheme=["']?light["']?\]/g) ?? []
 if (lightScopeMatches.length < 3) {
   throw new Error(
     'variables.min.css is missing expected [data-color-scheme=light] occurrences (need at least 3: original color-scheme rule + widened primitive block + widened semantic block)',

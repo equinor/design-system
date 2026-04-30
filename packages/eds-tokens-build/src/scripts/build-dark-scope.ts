@@ -115,6 +115,12 @@ async function buildDarkScope() {
   const semanticBlocks: RootBlock[] = []
   for (const blk of allBlocks) {
     const body = original.slice(blk.openBraceEnd, blk.closeBracePos)
+    // Mixed blocks (containing both `light-dark()` and `var(--eds-color-)`)
+    // are classified as primitive — `var()` references in them won't receive
+    // dark-scope widening. The current EDS token output never produces such
+    // blocks (primitives and semantics are always separated), so this branch
+    // is effectively unreachable; if a future token change introduces a
+    // mixed block, those `var()` references would need a separate strategy.
     if (body.includes('light-dark(')) {
       primitiveBlocks.push(blk)
     } else if (body.includes('var(--eds-color-')) {
