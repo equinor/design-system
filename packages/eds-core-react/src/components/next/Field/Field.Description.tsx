@@ -1,5 +1,4 @@
 import { forwardRef } from 'react'
-import { TypographyNext } from '../../Typography'
 import type { FieldDescriptionProps } from './Field.types'
 
 export const FieldDescription = forwardRef<
@@ -7,21 +6,16 @@ export const FieldDescription = forwardRef<
   FieldDescriptionProps
 >(function FieldDescription({ children, className, ...rest }, ref) {
   return (
-    <TypographyNext
+    <p
       ref={ref}
-      as="p"
-      family="ui"
-      size="sm"
-      baseline="center"
-      lineHeight="default"
-      tracking="normal"
+      data-baseline="center"
       className={['eds-field__description', className]
         .filter(Boolean)
         .join(' ')}
       {...rest}
     >
       {children}
-    </TypographyNext>
+    </p>
   )
 })
 
