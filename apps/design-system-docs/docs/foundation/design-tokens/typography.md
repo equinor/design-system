@@ -183,7 +183,7 @@ To set typography in Figma:
 3. With the instance selected, open the **Variables** section in the **Design** panel and pick the mode for **size**, **weight**, **family**, **line-height** and **density**. The instance updates immediately.
 4. Nest the instance inside whatever container needs it — buttons, list items, page headings — without flattening or detaching.
 
-Because the component reads variables, density set on a parent frame cascades down: change the density mode once on a page-level frame and every Typography instance inside follows.
+A freshly dragged-in instance leaves every mode at its default, so it inherits whatever modes are set on its parents. Set the density mode once on a page-level frame and every default Typography instance inside follows. The cascade stops at any instance where you've explicitly set a mode — that override sticks regardless of the parent.
 
 ## Do's and Don'ts
 
