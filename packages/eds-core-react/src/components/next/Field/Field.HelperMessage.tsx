@@ -24,6 +24,7 @@ export const HelperMessage = forwardRef<
   return (
     <p
       ref={ref}
+      data-baseline="grid"
       id={id}
       role={role}
       className={['eds-field__helper-message', className]

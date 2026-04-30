@@ -8,6 +8,7 @@ export const FieldDescription = forwardRef<
   return (
     <p
       ref={ref}
+      data-baseline="grid"
       className={['eds-field__description', className]
         .filter(Boolean)
         .join(' ')}

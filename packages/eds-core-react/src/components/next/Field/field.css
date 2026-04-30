@@ -42,6 +42,7 @@
 
     font-size: var(--eds-typography-ui-body-md-font-size);
     line-height: var(--eds-typography-ui-body-md-line-height-default);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
     color: var(--_eds-field-label-color);
   }
 
@@ -61,26 +62,20 @@
 
   .eds-field__helper-message {
     margin: 0;
+    /* Tighten spacing above helper-message to 3xs (overrides parent gap).
+       Longhand follows shorthand to win the cascade. */
+    margin-block-start: calc(
+      var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical)
+    );
     color: var(--_eds-field-helper-color);
   }
 
+  /* data-baseline="grid" on these elements handles text-box trim via
+     [data-baseline='grid'] in eds-tokens/src/css/typography.css */
   .eds-field__description,
   .eds-field__helper-message {
     font-size: var(--eds-typography-ui-body-sm-font-size);
     line-height: var(--eds-typography-ui-body-sm-line-height-default);
-
-    @supports (text-box: trim-both ex alphabetic) {
-      padding-top: var(--eds-padding-top-baseline);
-      padding-bottom: 0;
-
-      text-box: trim-both ex alphabetic;
-    }
-  }
-
-  /* Reduce gap before helper message to 3xs spacing.
-     Applied to the preceding sibling (not helper message) to avoid [data-font-family] margin: 0 override. */
-  .eds-field > :has(+ .eds-field__helper-message) {
-    margin-block-end: calc(var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical));
   }
 
   /* Only helper message changes color when disabled */

@@ -18,6 +18,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     </div>
     <p
       class="eds-field__description"
+      data-baseline="grid"
       id="test-id-description"
     >
       Description text
@@ -43,6 +44,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     </div>
     <p
       class="eds-field__helper-message"
+      data-baseline="grid"
       id="test-id-helper-message"
     >
       Helper message
