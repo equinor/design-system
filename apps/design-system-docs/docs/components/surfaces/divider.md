@@ -31,16 +31,6 @@ Use a divider to group related content or separate sections of a layout when whi
 - Decorating layouts where white space already creates clear separation
 - Splitting every individual item in a list - reserve them for meaningful groupings
 
-## Structure
-
-The Divider renders as a native `<hr>` element with the subtle border colour token. It accepts any standard HTML attribute for `<hr>`, so width and placement are controlled by the surrounding layout rather than component props.
-
-```tsx
-import { Divider } from '@equinor/eds-core-react/next'
-
-<Divider />
-```
-
 ## Accessibility
 
 Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator) and render as a non-interactive `<hr>` element with `role="separator"`.
@@ -70,11 +60,11 @@ The divider uses the `--eds-color-border-subtle` token, so it adapts automatical
 - Use dividers to group related content into meaningful sections
 - Let the surrounding layout control the divider's width - the component fills its container by default
 - Keep dividers consistent across similar layouts to reinforce rhythm and hierarchy
-:::
+  :::
 
 :::danger **Don't**
 
 - Place a divider between every item in a list - white space is usually enough
 - Use dividers as decoration where they add visual noise without clarifying structure
 - Override the subtle border colour with a stronger tone - dividers should support content, not compete with it
-:::
+  :::
