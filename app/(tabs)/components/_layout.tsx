@@ -1,4 +1,4 @@
-import { ColorSchemeButton } from "@/components/ColorSchemeButton";
+import { SettingsControls } from "@/components/SettingsControls";
 import { Stack } from "expo-router";
 
 export default function ComponentsLayout() {
@@ -13,7 +13,7 @@ export default function ComponentsLayout() {
                 headerTitleStyle: {
                     fontFamily: "Equinor-Bold",
                 },
-                headerRight: () => <ColorSchemeButton />,
+                headerRight: () => <SettingsControls />,
             }}
         >
             <Stack.Screen
