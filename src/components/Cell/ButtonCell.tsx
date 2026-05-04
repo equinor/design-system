@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { useToken } from "../../hooks/useToken";
 import { EDSStyleSheet } from "../../styling";
 import { Icon, IconName } from "../Icon";
 import { Cell, CellProps } from "./Cell";
@@ -51,6 +52,17 @@ export const ButtonCell = forwardRef<View, ButtonCellProps>(
         ref
     ) => {
         const styles = useStyles(themeStyles);
+        const token = useToken();
+
+        const resolveButtonColor = (): string => {
+            if (disabled) return token.colors.text.disabled;
+            switch (color) {
+                case "danger": return token.colors.feedback.danger;
+                case "warning": return token.colors.feedback.warning;
+                case "textDisabled": return token.colors.text.disabled;
+                default: return token.colors.interactive.primary;
+            }
+        };
 
         const IconAdornment = () =>
             iconName && (
@@ -71,17 +83,20 @@ export const ButtonCell = forwardRef<View, ButtonCellProps>(
             >
                 <View style={styles.contentContainer}>
                     <Typography
-                        variant="body.md"
                         numberOfLines={1}
-                        color={disabled ? "textDisabled" : color}
+                        style={{ color: resolveButtonColor() }}
                     >
                         {title}
                     </Typography>
                     {description && (
                         <Typography
-                            variant="label.sm"
+                            size="md"
                             numberOfLines={2}
-                            color={disabled ? "textDisabled" : "textTertiary"}
+                            style={{
+                                color: disabled
+                                    ? token.colors.text.disabled
+                                    : token.colors.text.tertiary,
+                            }}
                         >
                             {description}
                         </Typography>

@@ -122,19 +122,19 @@ export const AccordionItem = ({
                     style={styles.cellContainer}
                 >
                     <View style={styles.headerContainer}>
-                        <Typography
-                            variant="heading.md"
-                            color={
-                                disabled
-                                    ? "textTertiary"
-                                    : expanded
-                                      ? "primary"
-                                      : "textPrimary"
-                            }
+                        <Typography.Header
+                            size="lg"
                             numberOfLines={1}
+                            style={{
+                                color: disabled
+                                    ? token.colors.text.tertiary
+                                    : expanded
+                                      ? token.colors.interactive.primary
+                                      : token.colors.text.primary,
+                            }}
                         >
                             {title}
-                        </Typography>
+                        </Typography.Header>
                         {adornment}
                     </View>
                 </Cell>

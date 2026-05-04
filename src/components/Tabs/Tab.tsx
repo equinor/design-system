@@ -32,9 +32,9 @@ export const Tab = ({ title, disabled = false, iconName }: TabProps) => {
                 <View style={styles.labelRow}>
                     {iconName && <Icon name={iconName} style={styles.text} />}
                     <Typography
+                        size="md"
                         numberOfLines={1}
                         style={styles.text}
-                        variant="button"
                     >
                         {title}
                     </Typography>

@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { useToken } from "../../hooks/useToken";
 import { EDSStyleSheet } from "../../styling";
 import { Icon, IconName } from "../Icon";
 import { Typography } from "../Typography";
@@ -60,6 +61,7 @@ export const NavigationCell = ({
     ...cellProps
 }: NavigationCellProps) => {
     const styles = useStyles(themeStyles);
+    const token = useToken();
 
     const renderAdornmentIcon = (iconName: IconName) => (
         <View style={styles.adornmentContainer}>
@@ -74,10 +76,8 @@ export const NavigationCell = ({
         additionalTitlesRight?.map((text, index) => (
             <Typography
                 key={index}
-                variant="body.md"
                 numberOfLines={1}
-                color="textTertiary"
-                style={{ flex: 1 }}
+                style={{ flex: 1, color: token.colors.text.tertiary }}
             >
                 {text}
             </Typography>
@@ -87,9 +87,8 @@ export const NavigationCell = ({
         additionalTitlesUnder?.map((text, index) => (
             <Typography
                 key={index}
-                variant="body.md"
                 numberOfLines={1}
-                color="textTertiary"
+                style={{ color: token.colors.text.tertiary }}
             >
                 {text}
             </Typography>
@@ -114,18 +113,25 @@ export const NavigationCell = ({
                     ]}
                 >
                     <Typography
-                        variant="body.md"
                         numberOfLines={1}
-                        color={disabled ? "textDisabled" : undefined}
-                        style={additionalTitlesRight && styles.title}
+                        style={[
+                            additionalTitlesRight ? styles.title : undefined,
+                            disabled
+                                ? { color: token.colors.text.disabled }
+                                : undefined,
+                        ]}
                     >
                         {title}
                     </Typography>
                     {description && (
                         <Typography
-                            variant="label.sm"
+                            size="md"
                             numberOfLines={2}
-                            color={disabled ? "textDisabled" : "textTertiary"}
+                            style={{
+                                color: disabled
+                                    ? token.colors.text.disabled
+                                    : token.colors.text.tertiary,
+                            }}
                         >
                             {description}
                         </Typography>

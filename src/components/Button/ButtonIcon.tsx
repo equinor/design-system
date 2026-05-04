@@ -3,7 +3,7 @@ import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
 import { Icon, IconName } from "../Icon";
 import { ButtonSize, ButtonTone, ButtonVariant } from "./types";
-import { SIZE_MAP, TEXT_VARIANT_MAP } from "./utils";
+import { ICON_NEGATIVE_MARGIN, SIZE_MAP, TEXT_VARIANT_MAP } from "./utility";
 
 type ButtonIconProps = {
     name: IconName;
@@ -41,8 +41,7 @@ const tokenStyles = EDSStyleSheet.create(
             icon: {
                 fontSize: token.newSpacing.sizing.icon[sizeKey],
                 color,
-                padding: 2, // TODO: compensates for icon glyph whitespace — revisit when Typography is fixed
-                margin: -4, // offsets the padding above to keep surrounding layout tight
+                margin: ICON_NEGATIVE_MARGIN,
             },
         };
     }

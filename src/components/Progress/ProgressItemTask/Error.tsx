@@ -13,25 +13,16 @@ export const Error = ({ error }: ErrorProps) => {
     const styles = useStyles(tokenStyles);
     return (
         <View style={styles.container}>
-            <Typography
-                variant="label.sm"
-                color="textSecondary"
-            >
+            <Typography size="md" style={styles.textSecondary}>
                 {error.message}
             </Typography>
             {error.code && (
-                <Typography
-                    variant="label.sm"
-                    color="textSecondary"
-                >
+                <Typography size="md" style={styles.textSecondary}>
                     {error.code}
                 </Typography>
             )}
             {error.suggestion && (
-                <Typography
-                    variant="label.sm"
-                    color="textSecondary"
-                >
+                <Typography size="md" style={styles.textSecondary}>
                     {error.suggestion}
                 </Typography>
             )}
@@ -43,5 +34,8 @@ const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
         flexDirection: "column",
         gap: token.spacing.spacer.small,
+    },
+    textSecondary: {
+        color: token.colors.text.secondary,
     },
 }));

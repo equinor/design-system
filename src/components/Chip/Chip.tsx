@@ -62,8 +62,8 @@ export const Chip = ({
                         />
                     )}
                     <Typography
+                        size="md"
                         style={styles.text}
-                        variant="label.sm"
                     >
                         {title}
                     </Typography>

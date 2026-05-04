@@ -19,3 +19,7 @@ export const VARIANT_MAP = {
     secondary: "fillMuted",
     primary: "fillEmphasis",
 } as const satisfies Record<ButtonVariant, FillEmphasis>;
+
+export const ICON_NEGATIVE_MARGIN = -4;
+export const BUTTON_TEXT_NEGATIVE_MARGIN = -5;
+export const BUTTON_TEXT_PADDING = 1;

@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { LayoutRectangle, Pressable, ScrollView, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { useToken } from "../../hooks/useToken";
 import { Icon } from "../Icon";
 import { inputTokenStyles } from "../Input/inputStyle";
 import { Menu } from "../Menu";
@@ -34,7 +35,11 @@ export const Multiselect = <T,>({
         isSelected: menuOpen,
     });
 
-    const textColor = selectedItems.length > 0 ? "textPrimary" : "textTertiary";
+    const token = useToken();
+    const textColor =
+        selectedItems.length > 0
+            ? token.colors.text.primary
+            : token.colors.text.tertiary;
     const selectedItemTitle =
         selectedItems
             .map(
@@ -72,9 +77,15 @@ export const Multiselect = <T,>({
                 }}
             >
                 <Typography
-                    style={inputStyles.textInput}
+                    style={[
+                        inputStyles.textInput,
+                        {
+                            color: disabled
+                                ? token.colors.text.disabled
+                                : textColor,
+                        },
+                    ]}
                     numberOfLines={1}
-                    color={disabled ? "textDisabled" : textColor}
                 >
                     {selectedItemTitle}
                 </Typography>

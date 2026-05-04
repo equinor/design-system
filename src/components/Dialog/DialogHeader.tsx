@@ -1,33 +1,34 @@
-import React from "react";
-import { EDSStyleSheet } from "../../styling";
-import { TextChildren, Typography } from "../Typography";
+import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet } from "../../styling";
+import { Typography } from "../Typography";
 
-export const DialogHeader = (props: TextChildren) => {
+export const DialogHeader: React.FC<PropsWithChildren> = (props) => {
     const styles = useStyles(themeStyles);
     return (
         <View style={styles.header}>
-            <Typography variant="heading.md" numberOfLines={1} style={styles.title}>
+            <Typography.Header size="lg"
+                numberOfLines={1}
+                style={styles.title}>
                 {props.children}
-            </Typography>
+            </Typography.Header>
         </View>
     );
 };
 
-const themeStyles = EDSStyleSheet.create((theme) => ({
+const themeStyles = EDSStyleSheet.create((token) => ({
     header: {
         minHeight:
-            theme.geometry.dimension.dialog.header.height -
-            theme.geometry.border.borderWidth,
+            token.geometry.dimension.dialog.header.height -
+            token.geometry.border.borderWidth,
         width: "100%",
-        borderBottomWidth: theme.geometry.border.borderWidth,
-        borderBottomColor: theme.colors.border.medium,
-        padding: theme.spacing.dialog.padding,
+        borderBottomWidth: token.geometry.border.borderWidth,
+        borderBottomColor: token.newColors.border.neutral.subtle,
+        padding: token.spacing.dialog.padding,
         paddingBottom: 0,
     },
     title: {
-        lineHeight: 26,
-        color: theme.colors.text.primary,
+        color: token.newColors.text.neutral.strong,
     },
 }));

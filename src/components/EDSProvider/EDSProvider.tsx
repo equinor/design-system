@@ -2,19 +2,17 @@ import React, { PropsWithChildren, useMemo } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createTokenProxy } from "../../styling/createTokenProxy";
 import {
+    ColorToken,
     MasterToken,
     ProxyableMasterToken,
     SpacingToken,
     WithoutThemeOptionValues,
     comfortableSpacingToken,
+    darkColorToken,
+    lightColorToken,
     spaciousSpacingToken,
     typographyToken,
 } from "../../styling/tokens";
-import {
-    ColorToken,
-    darkColorToken,
-    lightColorToken,
-} from "../../styling/tokens/colorToken";
 import { ColorScheme, Density } from "../../styling/types";
 import { ScrimProvider } from "../_internal/ScrimProvider";
 import { DialogServiceProvider } from "../Dialog/service/DialogServiceProvider";

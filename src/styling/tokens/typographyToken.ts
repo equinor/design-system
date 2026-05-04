@@ -1,95 +1,36 @@
-type FontFamily = "Inter" | "Equinor";
-export type TypographyVariantStyle = {
-    fontFamily: string;
-    fontSize: number;
-    lineHeight: number;
-    letterSpacing: number;
-};
+import { typography as header } from "@equinor/eds-tokens/ts/typography/font-family-header";
+import { typography as ui } from "@equinor/eds-tokens/ts/typography/font-family-ui";
 
-type FontWeight = 300 | 400 | 500 | 700;
+/**
+ * These tokens are one semantic level below the header and ui tokens, so we omit exposing them for now to avoid token api bloat.
+ */
 
-const fontNameMap: Record<FontFamily, Partial<Record<FontWeight, string>>> = {
-    Inter: {
-        400: "Inter",
-    },
-    Equinor: {
-        300: "Equinor-Light",
-        400: "Equinor-Regular",
-        500: "Equinor-Medium",
-        700: "Equinor-Bold",
-    },
-};
-
-function resolveFontFamily(family: FontFamily, weight: FontWeight): string {
-    return fontNameMap[family][weight] ?? fontNameMap[family][400] ?? family;
-}
-
-function preset(
-    family: FontFamily,
-    weight: FontWeight,
-    fontSize: number,
-    lineHeight: number,
-    letterSpacing = 0
-): TypographyVariantStyle {
-    return {
-        fontFamily: resolveFontFamily(family, weight),
-        fontSize,
-        lineHeight,
-        letterSpacing,
-    };
-}
+// import { typography as sizeTwoXl } from "@equinor/eds-tokens/ts/typography/font-size-2xl";
+// import { typography as sizeThreeXl } from "@equinor/eds-tokens/ts/typography/font-size-3xl";
+// import { typography as sizeFourXl } from "@equinor/eds-tokens/ts/typography/font-size-4xl";
+// import { typography as sizeFiveXl } from "@equinor/eds-tokens/ts/typography/font-size-5xl";
+// import { typography as sizeSixXl } from "@equinor/eds-tokens/ts/typography/font-size-6xl";
+// import { typography as sizeLg } from "@equinor/eds-tokens/ts/typography/font-size-lg";
+// import { typography as sizeMd } from "@equinor/eds-tokens/ts/typography/font-size-md";
+// import { typography as sizeSm } from "@equinor/eds-tokens/ts/typography/font-size-sm";
+// import { typography as sizeXl } from "@equinor/eds-tokens/ts/typography/font-size-xl";
+// import { typography as sizeXs } from "@equinor/eds-tokens/ts/typography/font-size-xs";
+// import { typography as bolder } from "@equinor/eds-tokens/ts/typography/font-weight-bolder";
+// import { typography as lighter } from "@equinor/eds-tokens/ts/typography/font-weight-lighter";
+// import { typography as weightNormal } from "@equinor/eds-tokens/ts/typography/font-weight-normal";
+// import { typography as lineHeightDefault } from "@equinor/eds-tokens/ts/typography/line-height-default";
+// import { typography as lineHeightSquished } from "@equinor/eds-tokens/ts/typography/line-height-squished";
+// import { typography as trackingLoose } from "@equinor/eds-tokens/ts/typography/tracking-loose";
+// import { typography as trackingNormal } from "@equinor/eds-tokens/ts/typography/tracking-normal";
+// import { typography as trackingTight } from "@equinor/eds-tokens/ts/typography/tracking-tight";
+// import { typography as trackingWide } from "@equinor/eds-tokens/ts/typography/tracking-wide";
 
 export const typographyToken = {
-    display: {
-        lg: preset("Equinor", 500, 34, 41),
-        md: preset("Equinor", 500, 28, 34),
-        sm: preset("Equinor", 500, 22, 28),
-    },
-    heading: {
-        lg: preset("Equinor", 500, 20, 25),
-        md: preset("Equinor", 500, 17, 22),
-        sm: preset("Equinor", 500, 15, 20),
-    },
-    body: {
-        lg: preset("Inter", 400, 17, 22),
-        md: preset("Inter", 400, 15, 20),
-        sm: preset("Inter", 400, 13, 18),
-    },
-    label: {
-        lg: preset("Inter", 400, 15, 20),
-        md: preset("Inter", 400, 13, 18),
-        sm: preset("Inter", 400, 12, 16),
-    },
-    caption: preset("Inter", 400, 11, 13),
-    button: preset("Inter", 400, 17, 22),
-    overline: preset("Inter", 400, 12, 16),
-};
+    header,
+    ui,
+} as const;
 
 export type TypographyToken = typeof typographyToken;
 
-type DisplayVariant = `display.${keyof TypographyToken["display"]}`;
-type HeadingVariant = `heading.${keyof TypographyToken["heading"]}`;
-type BodyVariant = `body.${keyof TypographyToken["body"]}`;
-type LabelVariant = `label.${keyof TypographyToken["label"]}`;
-type StandaloneVariant = "caption" | "button" | "overline";
-
-export type NewTypographyVariant =
-    | DisplayVariant
-    | HeadingVariant
-    | BodyVariant
-    | LabelVariant
-    | StandaloneVariant;
-
-export function resolveVariant(
-    token: TypographyToken,
-    variantKey: NewTypographyVariant
-): TypographyVariantStyle {
-    if (variantKey.includes(".")) {
-        const [group, variant] = variantKey.split(".") as [
-            "display" | "heading" | "body" | "label",
-            string,
-        ];
-        return (token[group] as Record<string, TypographyVariantStyle>)[variant];
-    }
-    return token[variantKey as StandaloneVariant];
-}
+export type TypographySizeToken =
+    TypographyToken[keyof TypographyToken]["fontFamilySize"][keyof TypographyToken[keyof TypographyToken]["fontFamilySize"]];

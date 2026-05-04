@@ -11,13 +11,10 @@ export const ErrorBoundaryScreen = ({ resetErrorBoundary }: FallbackProps) => {
     return (
         <SafeAreaView style={styles.safeAreaContainer}>
             <View style={styles.container}>
-                <Typography
-                    color={styles.title_color.color}
-                    variant="body.lg"
-                >
+                <Typography size="xl" style={styles.title_color}>
                     Error
                 </Typography>
-                <Typography variant="body.lg">
+                <Typography size="xl">
                     Something unexpected happened, and the app crashed. You can
                     restart the app by clicking the button below.
                     {"\n\n"}

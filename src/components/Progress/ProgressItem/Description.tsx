@@ -1,4 +1,5 @@
 import React from "react";
+import { useToken } from "../../../hooks/useToken";
 import { Typography } from "../../Typography";
 import { useProgressItemContext } from "./ProgressItemContext";
 
@@ -11,10 +12,16 @@ type DescriptionProps = {
 export const Description = ({ description }: DescriptionProps) => {
     const { numCompletedTasks, numTotalTasks, status } =
         useProgressItemContext();
+    const token = useToken();
     return (
         <Typography
-            color={status === "notStarted" ? "textDisabled" : "textPrimary"}
-            variant="label.sm"
+            size="md"
+            style={{
+                color:
+                    status === "notStarted"
+                        ? token.colors.text.disabled
+                        : token.colors.text.primary,
+            }}
         >
             {typeof description === "function"
                 ? description(numCompletedTasks, numTotalTasks)

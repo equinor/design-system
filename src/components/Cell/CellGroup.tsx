@@ -47,13 +47,13 @@ export const CellGroup = ({
         <>
             <View style={styles.titleContainer}>
                 {title && (
-                    <Typography
-                        variant="overline"
-                        color="textTertiary"
-                        style={{ textTransform: "uppercase" }}
+                    <Typography.Header
+                        size="xs"
+                        weight="bolder"
+                        style={[{ textTransform: "uppercase" }, styles.title]}
                     >
                         {title}
-                    </Typography>
+                    </Typography.Header>
                 )}
                 <View style={{ flex: 1 }}>{adornment}</View>
             </View>
@@ -81,6 +81,9 @@ const themeStyles = EDSStyleSheet.create(
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "flex-end",
+        },
+        title: {
+            color: theme.colors.text.tertiary,
         },
     })
 );

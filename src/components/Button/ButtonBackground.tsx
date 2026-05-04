@@ -8,7 +8,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { useToken } from "../../hooks/useToken";
 import { ButtonVariant } from "./types";
-import { VARIANT_MAP } from "./utils";
+import { VARIANT_MAP } from "./utility";
 
 type ButtonBackgroundProps = {
     isPressed: boolean;
