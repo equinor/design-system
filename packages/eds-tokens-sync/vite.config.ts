@@ -19,7 +19,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rolldownOptions: {
-      external: ['fs', 'path'], // Keep only Node.js built-ins as external
+      external: [/^node:/, 'fs', 'path', 'os', 'dotenv', 'dotenv/config'],
     },
   },
   plugins: [dts({ rollupTypes: true })],
