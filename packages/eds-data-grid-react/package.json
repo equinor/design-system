@@ -71,7 +71,7 @@
     "ramda": "^0.32.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-hook-form": "^7.73.1",
+    "react-hook-form": "^7.74.0",
     "rollup": "^4.60.2",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-postcss": "^4.0.2",
