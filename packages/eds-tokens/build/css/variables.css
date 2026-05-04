@@ -1319,7 +1319,7 @@
   --eds-font-family-size-5xl-font-size: var(--eds-typography-ui-body-5xl-font-size);
   --eds-font-family-size-5xl-tracking-tight: var(--eds-typography-ui-body-5xl-tracking-tight);
   --eds-font-family-size-5xl-tracking-normal: var(--eds-typography-ui-body-5xl-tracking-normal);
-  --eds-font-family-size-5xl-tracking-wide: var(--eds-typography-ui-body-5xl-font-weight-lighter);
+  --eds-font-family-size-5xl-tracking-wide: var(--eds-typography-ui-body-5xl-tracking-wide);
   --eds-font-family-size-5xl-font-weight-lighter: var(--eds-typography-ui-body-5xl-font-weight-lighter);
   --eds-font-family-size-5xl-font-weight-normal: var(--eds-typography-ui-body-5xl-font-weight-normal);
   --eds-font-family-size-5xl-font-weight-bolder: var(--eds-typography-ui-body-5xl-font-weight-bolder);
