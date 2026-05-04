@@ -27,13 +27,13 @@ export default function ProgressIndicatorScreen() {
                 </Typography>
             </Section>
             <Section title="Circular Progress">
-                <Typography variant="body.md">Indeterminate (no value)</Typography>
+                <Typography>Indeterminate (no value)</Typography>
                 <View style={{ flexDirection: "row", gap: 16 }}>
                     <CircularProgress size={48} color="primary" />
                     <CircularProgress size={48} color="neutral" />
                 </View>
                 <Spacer amount="medium" />
-                <Typography variant="body.md">Determinate (with value)</Typography>
+                <Typography>Determinate (with value)</Typography>
 
                 <View style={{ flexDirection: "row", gap: 16 }}>
                     <CircularProgress size={48} color="primary" value={0.25} />
@@ -49,11 +49,11 @@ export default function ProgressIndicatorScreen() {
             </Section>
 
             <Section title="Linear Progress">
-                <Typography variant="body.md">Indeterminate</Typography>
+                <Typography>Indeterminate</Typography>
                 <Spacer amount="small" />
                 <LinearProgress />
                 <Spacer amount="large" />
-                <Typography variant="body.md">Determinate</Typography>
+                <Typography>Determinate</Typography>
                 <Spacer amount="small" />
                 <LinearProgress value={0.3} />
                 <Spacer amount="small" />

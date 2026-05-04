@@ -14,7 +14,7 @@ export default function CellScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <Section>
-                <Typography variant="body.md">
+                <Typography>
                     Cells are versatile list items for displaying content,
                     navigation, or actions. Group them together for settings
                     screens, menus, or data lists.
@@ -51,7 +51,7 @@ export default function CellScreen() {
             <ViewCode title="Navigation Cell" code={navigationCell} />
 
             <Section title="Swipeable cells">
-                <Typography variant="body.md">
+                <Typography>
                     Reveal hidden actions by swiping left or right. Great for
                     quick actions like delete, archive, or share.
                 </Typography>

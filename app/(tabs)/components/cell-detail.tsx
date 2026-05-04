@@ -12,21 +12,21 @@ export default function CellDetailScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Typography variant="heading.lg" style={styles.title}>
+                <Typography.Header size="xl" style={styles.title}>
                     {params.title || "Detail Screen"}
-                </Typography>
+                </Typography.Header>
                 <View style={{ height: 16 }} />
 
                 {params.description && (
                     <>
-                        <Typography variant="body.md" style={styles.description}>
+                        <Typography style={styles.description}>
                             {params.description}
                         </Typography>
                         <View style={{ height: 24 }} />
                     </>
                 )}
 
-                <Typography variant="body.md">
+                <Typography>
                     This is a detail screen that shows when you tap a navigation
                     cell.
                 </Typography>

@@ -18,7 +18,7 @@ const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(unde
 />
 
 {selectedCountry && (
-  <Typography variant="p">
+  <Typography>
     Selected: {selectedCountry.label}
   </Typography>
 )}`;
@@ -43,7 +43,7 @@ const [selectedCountries, setSelectedCountries] = useState<Country[]>([]);
 />
 
 {selectedCountries.length > 0 && (
-  <Typography variant="p">
+  <Typography>
     Selected: {selectedCountries.map((c) => c.label).join(", ")}
   </Typography>
 )}`;

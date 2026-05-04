@@ -20,16 +20,16 @@ export default function TextFieldScreen() {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.section}>
-                <Typography variant="heading.lg">TextField</Typography>
+                <Typography.Header size="xl">TextField</Typography.Header>
                 <Spacer amount="small" />
-                <Typography variant="body.md">
+                <Typography>
                     TextFields combine an input with a label, helper text, and
                     validation states — great when you need more context around
                     user input.
                 </Typography>
             </View>
             <View style={styles.section}>
-                <Typography variant="heading.md">Basic TextField</Typography>
+                <Typography.Header size="lg">Basic TextField</Typography.Header>
 
                 <TextField
                     label="Full Name"
@@ -41,7 +41,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">TextField with Icon</Typography>
+                <Typography.Header size="lg">TextField with Icon</Typography.Header>
 
                 <TextField
                     label="Email Address"
@@ -57,7 +57,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">TextField with Unit</Typography>
+                <Typography.Header size="lg">TextField with Unit</Typography.Header>
 
                 <TextField
                     label="Amount"
@@ -71,7 +71,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Multiline TextField</Typography>
+                <Typography.Header size="lg">Multiline TextField</Typography.Header>
 
                 <TextField
                     label="Message"
@@ -86,7 +86,7 @@ export default function TextFieldScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">TextField with Validation</Typography>
+                <Typography.Header size="lg">TextField with Validation</Typography.Header>
                 <Typography style={styles.description}>
                     TextField with invalid state
                 </Typography>
@@ -159,7 +159,7 @@ export default function TextFieldScreen() {
                 />
                 <Spacer amount="small" />
                 <View style={styles.section}>
-                    <Typography variant="heading.md">Read-only TextField</Typography>
+                    <Typography.Header size="lg">Read-only TextField</Typography.Header>
 
                     <TextField
                         label="Read-only Field"

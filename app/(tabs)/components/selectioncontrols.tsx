@@ -32,11 +32,11 @@ export default function SelectionControlsScreen() {
             </Section>
 
             <Section>
-                <Typography variant="heading.lg">Radio Buttons</Typography>
+                <Typography.Header size="xl">Radio Buttons</Typography.Header>
             </Section>
 
             <Section title="With labels">
-                <Typography variant="body.md">
+                <Typography>
                     Radio buttons with a visible label next to the control
                 </Typography>
             </Section>
@@ -59,7 +59,7 @@ export default function SelectionControlsScreen() {
             </Surface>
 
             <Section title="Without visible label">
-                <Typography variant="body.md">
+                <Typography>
                     Radio buttons without a label, using accessibilityLabel for
                     screen readers
                 </Typography>
@@ -85,7 +85,7 @@ export default function SelectionControlsScreen() {
             </Surface>
 
             <Section title="Disabled">
-                <Typography variant="body.md">
+                <Typography>
                     Radio buttons in their disabled state, both checked and
                     unchecked
                 </Typography>
@@ -100,11 +100,11 @@ export default function SelectionControlsScreen() {
             </Surface>
 
             <Section>
-                <Typography variant="heading.lg">Switch</Typography>
+                <Typography.Header size="xl">Switch</Typography.Header>
             </Section>
 
             <Section title="Switch with Label">
-                <Typography variant="body.md">
+                <Typography>
                     Switch with an inline label for toggling settings on and
                     off
                 </Typography>
@@ -119,7 +119,7 @@ export default function SelectionControlsScreen() {
             </Surface>
 
             <Section title="Switch without Labels">
-                <Typography variant="body.md">
+                <Typography>
                     Switch without a label, useful when the context is provided
                     by surrounding UI
                 </Typography>
@@ -138,7 +138,7 @@ export default function SelectionControlsScreen() {
             </Surface>
 
             <Section>
-                <Typography variant="heading.lg">Checkboxes</Typography>
+                <Typography.Header size="xl">Checkboxes</Typography.Header>
             </Section>
 
             <Section title="With labels" />

@@ -14,15 +14,15 @@ export default function SearchScreen() {
             style={styles.container}
             contentInsetAdjustmentBehavior="automatic"
         >
-            <Typography variant="heading.lg">Search</Typography>
+            <Typography.Header size="xl">Search</Typography.Header>
             <Spacer amount="small" />
-            <Typography variant="body.md">
+            <Typography>
                 Search fields help users find content quickly. Add a cancel
                 button for easy clearing, or keep it simple for basic use cases.
             </Typography>
             <Spacer amount="large" />
 
-            <Typography variant="heading.md">Basic Search</Typography>
+            <Typography.Header size="lg">Basic Search</Typography.Header>
             <Spacer amount="small" />
 
             <Search
@@ -32,7 +32,7 @@ export default function SearchScreen() {
             />
 
             {searchQuery.length > 0 && (
-                <Typography variant="body.md" style={styles.resultText}>
+                <Typography style={styles.resultText}>
                     Searching for: {searchQuery}
                 </Typography>
             )}
@@ -40,7 +40,7 @@ export default function SearchScreen() {
             <ViewCode title="Basic Search" code={basicSearch} />
             <Spacer amount="large" />
 
-            <Typography variant="heading.md">Cancellable Search</Typography>
+            <Typography.Header size="lg">Cancellable Search</Typography.Header>
             <Spacer amount="small" />
 
             <Search
@@ -52,7 +52,7 @@ export default function SearchScreen() {
             />
 
             {searchQuery2.length > 0 && (
-                <Typography variant="body.md" style={styles.resultText}>
+                <Typography style={styles.resultText}>
                     Searching for: {searchQuery2}
                 </Typography>
             )}
@@ -60,7 +60,7 @@ export default function SearchScreen() {
             <ViewCode title="Cancellable Search" code={cancellableSearch} />
             <Spacer amount="large" />
 
-            <Typography variant="heading.md">Disabled Search</Typography>
+            <Typography.Header size="lg">Disabled Search</Typography.Header>
 
             <Spacer amount="small" />
             <Search

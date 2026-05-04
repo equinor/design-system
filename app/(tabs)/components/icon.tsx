@@ -9,7 +9,7 @@ export default function IconScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="body.md">
+                <Typography>
                     Icons provide visual cues that help users understand actions
                     and content. They use Material Design Community icons and
                     can be sized and coloured as needed.
@@ -17,27 +17,27 @@ export default function IconScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Icon Sizes</Typography>
+                <Typography.Header size="lg">Icon Sizes</Typography.Header>
 
                 <View style={styles.row}>
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={16} />
-                        <Typography variant="body.md">16px</Typography>
+                        <Typography>16px</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={24} />
-                        <Typography variant="body.md">24px (default)</Typography>
+                        <Typography>24px (default)</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={32} />
-                        <Typography variant="body.md">32px</Typography>
+                        <Typography>32px</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={48} />
-                        <Typography variant="body.md">48px</Typography>
+                        <Typography>48px</Typography>
                     </View>
                 </View>
 
@@ -45,93 +45,93 @@ export default function IconScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Common Icons</Typography>
+                <Typography.Header size="lg">Common Icons</Typography.Header>
 
                 <View style={styles.iconGrid}>
                     <View style={styles.iconItem}>
                         <Icon name="home" size={32} />
-                        <Typography variant="body.md">home</Typography>
+                        <Typography>home</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="cog" size={32} />
-                        <Typography variant="body.md">cog</Typography>
+                        <Typography>cog</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="account" size={32} />
-                        <Typography variant="body.md">account</Typography>
+                        <Typography>account</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="magnify" size={32} />
-                        <Typography variant="body.md">magnify</Typography>
+                        <Typography>magnify</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="bell" size={32} />
-                        <Typography variant="body.md">bell</Typography>
+                        <Typography>bell</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="email" size={32} />
-                        <Typography variant="body.md">email</Typography>
+                        <Typography>email</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={32} />
-                        <Typography variant="body.md">heart</Typography>
+                        <Typography>heart</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="star" size={32} />
-                        <Typography variant="body.md">star</Typography>
+                        <Typography>star</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="plus" size={32} />
-                        <Typography variant="body.md">plus</Typography>
+                        <Typography>plus</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="close" size={32} />
-                        <Typography variant="body.md">close</Typography>
+                        <Typography>close</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="delete" size={32} />
-                        <Typography variant="body.md">delete</Typography>
+                        <Typography>delete</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="pencil" size={32} />
-                        <Typography variant="body.md">pencil</Typography>
+                        <Typography>pencil</Typography>
                     </View>
                 </View>
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Icon with Colors</Typography>
+                <Typography.Header size="lg">Icon with Colors</Typography.Header>
 
                 <View style={styles.row}>
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={32} color="#FF0000" />
-                        <Typography variant="body.md">Red</Typography>
+                        <Typography>Red</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={32} color="#00FF00" />
-                        <Typography variant="body.md">Green</Typography>
+                        <Typography>Green</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={32} color="#0000FF" />
-                        <Typography variant="body.md">Blue</Typography>
+                        <Typography>Blue</Typography>
                     </View>
 
                     <View style={styles.iconItem}>
                         <Icon name="heart" size={32} color="#FFD700" />
-                        <Typography variant="body.md">Gold</Typography>
+                        <Typography>Gold</Typography>
                     </View>
                 </View>
 

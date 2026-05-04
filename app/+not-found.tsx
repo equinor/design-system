@@ -8,11 +8,11 @@ export default function NotFoundScreen() {
         <>
             <Stack.Screen options={{ title: "Oops!" }} />
             <View style={styles.container}>
-                <Typography variant="heading.md">
+                <Typography.Header size="lg">
                     This screen does not exist.
-                </Typography>
+                </Typography.Header>
                 <Link href="/" style={styles.link}>
-                    <Typography variant="body.md" style={{ textDecorationLine: "underline" }}>
+                    <Typography style={{ textDecorationLine: "underline" }}>
                         Go to home screen!
                     </Typography>
                 </Link>

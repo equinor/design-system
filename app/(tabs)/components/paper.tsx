@@ -21,7 +21,7 @@ export default function PaperScreen() {
                 alignItems: "center",
             }}
         >
-            <Typography variant="caption">
+            <Typography size="xs">
                 {elevation}
             </Typography>
         </Paper>
@@ -29,7 +29,7 @@ export default function PaperScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="body.md">
+                <Typography>
                     Paper provides a surface for content with configurable
                     elevation. It&apos;s great for grouping related information
                     and creating visual hierarchy.
@@ -37,10 +37,10 @@ export default function PaperScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Basic Paper</Typography>
+                <Typography.Header size="lg">Basic Paper</Typography.Header>
 
                 <Paper elevation="raised" style={styles.paper}>
-                    <Typography variant="body.md">
+                    <Typography>
                         This is a Paper component. It provides elevation and a
                         card-like appearance.
                     </Typography>
@@ -50,10 +50,10 @@ export default function PaperScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Paper with Content</Typography>
+                <Typography.Header size="lg">Paper with Content</Typography.Header>
 
                 <Paper elevation="raised" style={styles.paper}>
-                    <Typography variant="body.md" bold>
+                    <Typography weight="bolder">
                         Card Title
                     </Typography>
                     <Typography style={styles.cardText}>
@@ -64,10 +64,10 @@ export default function PaperScreen() {
                 </Paper>
 
                 <Spacer amount="small" />
-                <Typography variant="heading.md">
+                <Typography.Header size="lg">
                     {" "}
                     Paper with different elevations
-                </Typography>
+                </Typography.Header>
                 <View
                     style={{
                         gap: 25,

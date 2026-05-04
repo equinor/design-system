@@ -1,17 +1,17 @@
 export const basicDialog = `const [dialogOpen, setDialogOpen] = useState(false);
 
-<Button 
-  title="Open Dialog" 
-  onPress={() => setDialogOpen(true)} 
+<Button
+  label="Open Dialog"
+  onPress={() => setDialogOpen(true)}
 />
 
-<Dialog 
-  isOpen={dialogOpen} 
+<Dialog
+  isOpen={dialogOpen}
   onScrimPress={() => setDialogOpen(false)}
 >
   <Dialog.Header>Dialog Title</Dialog.Header>
   <Dialog.CustomContent>
-    <Typography variant="p">
+    <Typography>
       This is the dialog content. You can add any content here.
     </Typography>
   </Dialog.CustomContent>
@@ -19,29 +19,29 @@ export const basicDialog = `const [dialogOpen, setDialogOpen] = useState(false);
 
 export const dialogWithActions = `const [dialogOpen, setDialogOpen] = useState(false);
 
-<Button 
-  title="Open Dialog" 
-  onPress={() => setDialogOpen(true)} 
+<Button
+  label="Open Dialog"
+  onPress={() => setDialogOpen(true)}
 />
 
-<Dialog 
-  isOpen={dialogOpen} 
+<Dialog
+  isOpen={dialogOpen}
   onScrimPress={() => setDialogOpen(false)}
 >
   <Dialog.Header>Confirm Action</Dialog.Header>
   <Dialog.CustomContent>
-    <Typography variant="p">
+    <Typography>
       Are you sure you want to proceed with this action?
     </Typography>
   </Dialog.CustomContent>
   <Dialog.Actions>
     <Button
-      title="Cancel"
+      label="Cancel"
       variant="ghost"
       onPress={() => setDialogOpen(false)}
     />
     <Button
-      title="Confirm"
+      label="Confirm"
       onPress={() => {
         console.log("Confirmed!");
         setDialogOpen(false);

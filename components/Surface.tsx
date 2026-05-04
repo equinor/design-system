@@ -12,7 +12,7 @@ const tokenStyles = EDSStyleSheet.create((token) => ({
         backgroundColor: token.newColors.bg.neutral.surface,
         marginHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
         padding: token.newSpacing.spacing.inset.lg.horizontal,
-        gap: token.newSpacing.spacing.vertical.lg,
+        gap: token.newSpacing.spacing.vertical.md,
         borderRadius: token.newSpacing.spacing.borderRadius.rounded,
     },
 }));

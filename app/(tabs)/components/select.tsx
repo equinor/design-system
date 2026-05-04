@@ -61,9 +61,9 @@ export default function SelectScreen() {
             contentInsetAdjustmentBehavior="automatic"
         >
             <View style={styles.section}>
-                <Typography variant="heading.lg">Select</Typography>
+                <Typography.Header size="xl">Select</Typography.Header>
                 <Spacer amount="small" />
-                <Typography variant="body.md">
+                <Typography>
                     Select lets users pick from a predefined list of options.
                     It&apos;s ideal when the choices are fixed and don&apos;t
                     need filtering.
@@ -71,7 +71,7 @@ export default function SelectScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Basic Select</Typography>
+                <Typography.Header size="lg">Basic Select</Typography.Header>
                 <Spacer amount="small" />
                 <Select
                     items={fruits}
@@ -90,9 +90,9 @@ export default function SelectScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">
+                <Typography.Header size="lg">
                     Select with Custom Placeholder
-                </Typography>
+                </Typography.Header>
                 <Spacer amount="small" />
 
                 <Select
@@ -109,7 +109,7 @@ export default function SelectScreen() {
                 )}
             </View>
             <View style={styles.section}>
-                <Typography variant="heading.md">Multi Select</Typography>
+                <Typography.Header size="lg">Multi Select</Typography.Header>
                 <Spacer amount="small" />
                 <Select.Multi
                     placeholder="Select here..."
@@ -122,7 +122,7 @@ export default function SelectScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Disabled Select</Typography>
+                <Typography.Header size="lg">Disabled Select</Typography.Header>
                 <Spacer amount="small" />
 
                 <Select
@@ -135,7 +135,7 @@ export default function SelectScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Read-only Select</Typography>
+                <Typography.Header size="lg">Read-only Select</Typography.Header>
 
                 <Select
                     items={fruits}

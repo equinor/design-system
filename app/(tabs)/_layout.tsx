@@ -10,7 +10,7 @@ export default function TabLayout() {
                 tabBarActiveTintColor: newColors.bg.accent.fillEmphasis.active,
                 tabBarInactiveTintColor: newColors.text.neutral.subtle,
                 tabBarLabelStyle: {
-                    fontSize: newTypography.label.sm.fontSize,
+                    fontSize: newTypography.ui.fontFamilySize.sm.fontSize,
                 },
                 headerShown: false,
             }}

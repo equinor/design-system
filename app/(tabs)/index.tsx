@@ -11,15 +11,15 @@ export default function HomeScreen() {
                 />
             </View>
             <View style={styles.welcome}>
-                <Typography variant="display.md" style={styles.title}>
+                <Typography.Header size="twoXl" style={styles.title}>
                     EDS Mobile
-                </Typography>
-                <Typography variant="heading.md">
+                </Typography.Header>
+                <Typography.Header size="lg">
                     Equinor Design System for React Native
-                </Typography>
+                </Typography.Header>
             </View>
             <View style={styles.section}>
-                <Typography variant="body.md">
+                <Typography>
                     This is a component library showcase for the Equinor Design
                     System Mobile.
                 </Typography>
@@ -35,18 +35,18 @@ export default function HomeScreen() {
                 ]}
             >
                 <Paper elevation="raised" style={{ padding: 16 }}>
-                    <Typography variant="heading.md">What&apos;s New</Typography>
+                    <Typography.Header size="lg">What&apos;s New</Typography.Header>
                     <Typography
-                        variant="body.md"
+                       
                         style={{ flexWrap: "wrap" }}
                     >
                         We are happy to...
                     </Typography>
                 </Paper>
                 <Paper elevation="raised" style={{ padding: 16 }}>
-                    <Typography variant="heading.md">Getting Started</Typography>
+                    <Typography.Header size="lg">Getting Started</Typography.Header>
                     <Typography
-                        variant="body.md"
+                       
                         style={{ flexWrap: "wrap" }}
                     >
                         Welcome to the ...

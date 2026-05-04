@@ -90,9 +90,9 @@ export default function ComponentsIndex() {
     }: {
         section: { title: string };
     }) => (
-        <Typography variant="heading.md" style={styles.sectionTitle}>
+        <Typography.Header size="lg" style={styles.sectionTitle}>
             {section.title}
-        </Typography>
+        </Typography.Header>
     );
 
     return (

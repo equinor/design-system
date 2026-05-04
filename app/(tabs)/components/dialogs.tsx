@@ -13,15 +13,15 @@ export default function DialogsScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <View style={styles.section}>
-                <Typography variant="body.md">
+                <Typography>
                     Dialogs pop up when you really need someone&apos;s attention
                     — a confirmation, a warning, or an important message.
                 </Typography>
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Basic Dialog</Typography>
-                <Typography variant="body.md">
+                <Typography.Header size="lg">Basic Dialog</Typography.Header>
+                <Typography>
                     A straightforward dialog — show a message, let users tap
                     outside to close it. Nice and simple.
                 </Typography>
@@ -36,8 +36,8 @@ export default function DialogsScreen() {
                     onScrimPress={() => setBasicOpen(false)}
                 >
                     <View style={styles.section}>
-                        <Typography variant="heading.md">Basic Dialog</Typography>
-                        <Typography variant="body.md">
+                        <Typography.Header size="lg">Basic Dialog</Typography.Header>
+                        <Typography>
                             This is a simple dialog with just a title and
                             content.
                         </Typography>
@@ -48,8 +48,8 @@ export default function DialogsScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Dialog with Actions</Typography>
-                <Typography variant="body.md">
+                <Typography.Header size="lg">Dialog with Actions</Typography.Header>
+                <Typography>
                     When you need a yes or no, add some buttons. Great for
                     confirmations or giving users a clear way out.
                 </Typography>
@@ -64,8 +64,8 @@ export default function DialogsScreen() {
                     onScrimPress={() => setWithActionsOpen(false)}
                 >
                     <View style={styles.section}>
-                        <Typography variant="heading.md">Confirm Action</Typography>
-                        <Typography variant="body.md">
+                        <Typography.Header size="lg">Confirm Action</Typography.Header>
+                        <Typography>
                             Are you sure you want to proceed with this action?
                         </Typography>
                         <View style={styles.dialogActions}>
@@ -92,8 +92,8 @@ export default function DialogsScreen() {
             </View>
 
             <View style={styles.section}>
-                <Typography variant="heading.md">Custom Dialog</Typography>
-                <Typography variant="body.md">
+                <Typography.Header size="lg">Custom Dialog</Typography.Header>
+                <Typography>
                     Need something more creative? Drop in your own content —
                     forms, images, whatever works for your use case.
                 </Typography>
@@ -108,11 +108,11 @@ export default function DialogsScreen() {
                     onScrimPress={() => setCustomOpen(false)}
                 >
                     <View style={styles.customContent}>
-                        <Typography variant="heading.md">Custom Content</Typography>
-                        <Typography variant="heading.lg">
+                        <Typography.Header size="lg">Custom Content</Typography.Header>
+                        <Typography.Header size="xl">
                             Additional Information
-                        </Typography>
-                        <Typography variant="body.md">
+                        </Typography.Header>
+                        <Typography>
                             You can add any custom React Native components here.
                         </Typography>
                         <Button

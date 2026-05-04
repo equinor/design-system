@@ -1,7 +1,7 @@
 export const basicPaper = `import { Paper, Typography } from "@equinor/eds-mobile-components";
 
 <Paper elevation="raised" style={{ padding: 16 }}>
-  <Typography variant="p">
+  <Typography>
     This is a Paper component with raised elevation.
   </Typography>
 </Paper>`;
