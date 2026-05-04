@@ -12,6 +12,7 @@ on:
 
 jobs:
   triage:
+    if: github.event_name == 'workflow_dispatch' || github.event.sender.type != 'Bot'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -45,6 +46,10 @@ jobs:
               "A clear and concise description of what the bug is."
               "Steps to reproduce the bug: 1. 2. 3. 4."
               "Describe the solution you'd like"
+              "In order to <achieve some value>, as a <type of user>, I want <some functionality>." (default generic title)
+              "A clear and concise description of the main goal" (generic: General objective)
+              "(A list of) actionable goals that leads to fulfilling the general objective" (generic: Specific objectives)
+              "The definition of done" (generic: Outcome)
             Treat the issue as INCOMPLETE if any of the following are true:
               - Placeholder text is left unchanged
               - Required sections are empty
@@ -56,7 +61,7 @@ jobs:
               b. Post a single comment (gh issue comment) that:
                    - Politely thanks the author for opening the issue
                    - Lists specifically what information is missing
-                   - Notes that the issue will be closed automatically after 48 hours if not updated
+                   - Notes that the issue will be closed automatically after 2 days if not updated
                    - Invites the author to edit the issue or add a comment with the missing details
 
             If COMPLETE: skip this part entirely. Do nothing.
@@ -90,4 +95,4 @@ jobs:
 
           claude_args: >-
             --allowed-tools
-            "Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue edit:*),Bash(gh issue comment:*),Bash(gh search:*)"
+            "Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue edit:*),Bash(gh issue comment:*),Bash(gh search issues:*)"

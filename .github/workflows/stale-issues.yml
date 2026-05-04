@@ -19,9 +19,11 @@ jobs:
           days-before-issue-close: 0
           remove-issue-stale-when-updated: true
           exempt-all-assignees: true
+          # Same as only-labels — keeps the existing label in place rather than adding the default "Stale"
+          stale-issue-label: 'issue needs work'
           stale-issue-message: ''
           close-issue-message: |
-            Closing this issue because the requested information was not provided within 48 hours.
+            Closing this issue because the requested information was not provided within 2 days.
 
             If you'd like to continue, please reopen the issue and add the missing details (or comment here and a maintainer can reopen it for you).
           # PRs are not handled by this workflow
