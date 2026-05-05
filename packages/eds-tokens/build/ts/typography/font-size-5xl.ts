@@ -13,7 +13,7 @@ export const typography = {
     gapVertical: 20,
     trackingTight: -3.5199999809265137,
     trackingNormal: 0,
-    trackingWide: 300,
+    trackingWide: 3.5199999809265137,
     fontWeightLighter: 300,
     fontWeightNormal: 400,
     fontWeightBolder: 500,
