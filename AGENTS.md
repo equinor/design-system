@@ -1,6 +1,6 @@
-# AGENTS.md - Equinor Design System
+# AGENTS.md — Equinor Design System
 
-This file provides guidance for AI coding agents working in this repository.
+This is the **canonical conventions file** for AI coding agents working in this repository. Tool-specific configs (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, `.opencode/`, `.cursorrules`) reference this file rather than duplicating its content.
 
 ## Overview
 
@@ -8,10 +8,10 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 
 ### Key Packages
 
-- `@equinor/eds-core-react` - Main React component library
-- `@equinor/eds-core-react/next` - New EDS 2.0 components (active development)
-- `@equinor/eds-tokens` - Design tokens, CSS variables, and theming
-- `@equinor/eds-icons` - Icon library
+- `@equinor/eds-core-react` — Main React component library
+- `@equinor/eds-core-react/next` — New EDS 2.0 components (active development)
+- `@equinor/eds-tokens` — Design tokens, CSS variables, and theming
+- `@equinor/eds-icons` — Icon library
 
 ## Build/Lint/Test Commands
 
@@ -39,12 +39,12 @@ New components go in `packages/eds-core-react/src/components/next/`:
 
 ```
 ComponentName/
-  index.ts               # Named exports only
-  ComponentName.tsx      # Main component with forwardRef
-  ComponentName.types.ts # TypeScript types with JSDoc
-  componentname.css      # Vanilla CSS with design tokens
-  componentName.figma.tsx # Figma Code Connect file for mapping code to Figma props
-  ComponentName.test.tsx # Jest + Testing Library + jest-axe
+  index.ts                # Named exports only
+  ComponentName.tsx       # Main component with forwardRef
+  ComponentName.types.ts  # TypeScript types with JSDoc
+  componentname.css       # Vanilla CSS with design tokens
+  ComponentName.figma.tsx # Figma Code Connect (when a Figma design exists)
+  ComponentName.test.tsx  # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
 ```
 
@@ -128,6 +128,94 @@ One `eds-`-prefixed root class per component. Internal elements use simple class
 }
 ```
 
+#### Pseudo-private custom properties
+
+Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0005-typography-approach-for-eds-2.md`) and is now applied broadly across components.
+
+```css
+/* CORRECT */
+.eds-button {
+  --_color: var(--eds-color-text-strong-on-emphasis);
+  --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+  color: var(--_color);
+  background-color: var(--_bg-color);
+}
+.eds-button[data-variant='ghost']:disabled {
+  --_color: var(--eds-color-text-disabled); /* override the variable */
+}
+
+/* WRONG */
+.eds-button[data-variant='ghost']:disabled {
+  color: var(
+    --eds-color-text-disabled
+  ); /* never override the property directly */
+}
+```
+
+#### CSS layers
+
+Wrap all component styles in `@layer eds-components { }`. Rules outside the layer (e.g. display overrides) must be placed after the layer block with a comment explaining why they are outside.
+
+#### Data attributes for variants and states
+
+Use `data-*` attributes for all variants, sizes, and boolean states — not modifier classes.
+
+```css
+.eds-button[data-variant='primary'] {
+}
+.eds-button[data-selectable-space='lg'] {
+}
+.eds-button[data-icon-only] {
+}
+.eds-button[data-round] {
+}
+.eds-button[data-multiline] {
+}
+```
+
+#### Density via ancestor attribute
+
+Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor. See `documentation/adr/0004-component-conventions-for-eds-2.md` and `documentation/adr/0004-spacing-approach-for-eds-2.md` for the rationale.
+
+```css
+[data-density='comfortable'] .eds-button[data-selectable-space='md'] {
+  --_min-height: 1.5rem;
+}
+```
+
+#### Modular type scale
+
+Font sizes follow a mathematical scale based on a `--_base` value:
+
+```css
+:root,
+[data-density='spacious'] {
+  --_base: 16px;
+  --font-size-md: round(calc(var(--_base) * pow(2, -1/5)), 0.5px);
+}
+[data-density='comfortable'] {
+  --_base: 14px; /* only the base changes; all derived values update automatically */
+}
+```
+
+#### Progressive enhancement with `@supports`
+
+Use `@supports` to layer in advanced CSS features. The base styles work everywhere; the `@supports` block adds what only supported browsers can handle:
+
+```css
+/* Base — all browsers: symmetric padding keeps text vertically centred */
+padding-block: var(--eds-selectable-space-vertical);
+
+/* Enhancement — trims whitespace above/below the cap-height */
+@supports (text-box: trim-both ex alphabetic) {
+  padding-top: var(--padding-top-baseline);
+  padding-bottom: 0;
+  text-box: trim-both ex alphabetic;
+}
+```
+
+CSS `@function` (Chrome/Edge 128+) is a future enhancement — define it and comment it in once Safari ships support.
+
 ### Testing
 
 Jest + Testing Library. Organize tests by category with `describe` blocks:
@@ -165,8 +253,20 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 
 - **Components/Types**: PascalCase (`Button`, `ButtonProps`)
 - **Variables/Functions**: camelCase (`isDisabled`, `useToken`)
-- **CSS classes**: `eds-` prefix on root class (`eds-button`, `eds-text-area`); simple nested names for internal elements; variants via data attributes
+- **CSS classes**: `eds-` prefix on root class (`eds-button`, `eds-text-area`); simple nested names for internal elements (`.label-row`, `.icon`); variants via data attributes
 - **Files**: Match export (`Icon.tsx`, `Icon.types.ts`, `icon.css`)
+
+## Polymorphism (`asChild` + `Slot`)
+
+EDS 2.0 uses the `asChild` pattern for components that need polymorphic rendering (e.g. Link, Button). This lets consumers swap the underlying element for router links, custom components, etc. See `documentation/adr/0005-use-aschild-slot-for-polymorphism.md` for the rationale.
+
+- **`Slot`** utility in `packages/eds-core-react/src/components/next/Slot/` merges parent props onto the child element
+- Add `asChild?: boolean` to the component's props type
+- When `asChild` is true, render `<Slot>` instead of the default element
+- Extract shared props into a `sharedProps` object to avoid duplication
+- See `Slot/README.md` for merge behavior details and usage examples
+
+Components that should support `asChild`: **Link**, **Button**, and any component rendering an interactive element that consumers may want to swap.
 
 ## Accessibility
 
@@ -181,10 +281,54 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 type(scope): description
 ```
 
-**Types**: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
-**Scopes**: `eds-core-react`, `eds-tokens`, `eds-icons`
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+
+**Scopes (packages)**: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+
+**Scopes (infrastructure)**: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
+
 **Breaking**: `feat(eds-core-react)!: remove deprecated prop`
 
-## Additional Guidelines
+**Scope and release-please interaction**: Release-please detects packages from file paths — you don't always need a package scope. Using a package scope with a visible type forces a bump regardless of which files changed. For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
 
-See `.github/copilot-instructions.md` and `.github/instructions/` for detailed guidelines.
+**PR titles** must also follow the conventional commits format — they appear in changelogs and merge history.
+
+See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
+
+## Git Workflow
+
+⚠️ **CRITICAL: Always ask the user for permission before:**
+
+- Creating commits
+- Pushing to remote
+- Creating branches
+- Creating PRs with `gh`
+
+**Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
+
+NEVER attribute AI, or add to the commit message "Co-authored by Claude" or similar.
+
+## Architecture Decision Records (ADRs)
+
+Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the relevant ADR before changing or extending these patterns:
+
+- `0002-use-vanilla-css-with-design-tokens-for-eds-2.md` — why vanilla CSS over CSS-in-JS
+- `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density
+- `0004-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
+- `0005-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
+- `0005-use-aschild-slot-for-polymorphism.md` — `asChild` + `Slot` for polymorphic components
+
+## Tool-Specific Configurations
+
+This file is the canonical source. Tool-specific configs add only what's unique to that tool:
+
+| File                              | Purpose                                                    |
+| --------------------------------- | ---------------------------------------------------------- |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
+| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
+| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
+| `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
+| `.cursorrules`                    | Cursor: pointer to copilot instructions                    |
+
+When adding new conventions, update **this file** and let the tool-specific files reference it.

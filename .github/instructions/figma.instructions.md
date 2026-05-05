@@ -4,6 +4,8 @@ applyTo: '**'
 
 # Figma Component Creation
 
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions and `.claude/rules/figma-component.md` for the detailed Figma MCP workflow.
+
 ## Workflow
 
 When creating a component from Figma design:

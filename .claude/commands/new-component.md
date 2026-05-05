@@ -2,6 +2,8 @@
 
 Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/src/components/next/`.
 
+> **Conventions:** The shared EDS conventions (component file structure, code style, CSS patterns, testing, accessibility) live in [`AGENTS.md`](../../AGENTS.md). This command focuses on the scaffolding workflow and component-specific patterns (color modes, data-attributes, token mapping) that are not covered there.
+
 > **Note:** CSS class names must be lowercase. For component `Avatar`, use class `eds-avatar` (not `eds-Avatar`).
 
 ## Contents
@@ -9,11 +11,10 @@ Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/
 1. [Figma Design Integration](#figma-design-integration)
 2. [Check for Existing Components](#check-for-existing-components)
 3. [Implementation Instructions](#instructions)
-4. [Key Patterns](#key-patterns)
-5. [Real-World Examples](#real-world-examples)
-6. [Common Mistakes](#common-mistakes--how-to-fix-them)
-7. [Advanced Patterns](#advanced-patterns)
-8. [Anti-patterns](#anti-patterns)
+4. [Real-World Examples](#real-world-examples)
+5. [Common Mistakes](#common-mistakes--how-to-fix-them)
+6. [Advanced Patterns](#advanced-patterns)
+7. [Anti-patterns](#anti-patterns)
 
 ## Figma Design Integration
 
@@ -53,6 +54,7 @@ Check `packages/eds-core-react/src/components/next/index.ts` for existing compon
 **Goal:** Implement everything visible in Figma. Only add TODOs for complex behavioral features not shown in designs.
 
 **Key Principles:**
+
 - **Figma is the source of truth** for all visual features and states
 - **Old component is only for behavioral awareness** (keyboard nav, focus management)
 - Use modern patterns (`:focus-visible`, CSS tokens, simple state)
@@ -65,11 +67,13 @@ Check `packages/eds-core-react/src/components/next/index.ts` for existing compon
 4. **Add TODO only for complex behaviors** not visible in Figma (keyboard navigation, focus trap, positioning libraries)
 
 **Decision Guide:**
+
 - ✅ Visible in Figma (icons, states, variants) → **Implement directly**
 - 📝 Complex behavior not in Figma (keyboard nav, focus trap) → **Add TODO if needed**
 - ❌ Old patterns (styled-components, portals) → **Skip, use modern approach**
 
 **Modern Alternatives:**
+
 - Custom focus indicators → `:focus-visible`
 - Portal components → `position: fixed`
 - Styled-components → CSS tokens + data-attrs
@@ -171,17 +175,22 @@ $ARGUMENTS.displayName = '$ARGUMENTS'
 ```
 
 > **⚠️ CRITICAL - Icons with disabled state:** If your component has icons with accent/danger color, you MUST change `data-color-appearance` when disabled. Check Figma's disabled state to see if icons change color:
+>
 > ```tsx
-> {icon && (
->   <span
->     className="my-component__icon"
->     data-color-appearance={disabled ? 'neutral' : 'accent'}
->   >
->     {icon}
->   </span>
-> )}
+> {
+>   icon && (
+>     <span
+>       className="my-component__icon"
+>       data-color-appearance={disabled ? 'neutral' : 'accent'}
+>     >
+>       {icon}
+>     </span>
+>   )
+> }
 > ```
+>
 > Then in CSS, set the disabled color from Figma:
+>
 > ```css
 > .my-component__icon {
 >   color: var(--eds-color-bg-fill-emphasis-default);
@@ -237,18 +246,21 @@ $ARGUMENTS.displayName = '$ARGUMENTS'
 > **⚠️ CRITICAL:** Never copy data-attributes from similar components. Always verify from Figma:
 >
 > **`data-space-proportions`** - Calculate from Figma padding tokens:
+>
 > - Compare `--eds-selectable-space-horizontal` vs `--eds-selectable-space-vertical`
 > - If horizontal = vertical (e.g., 16px = 16px) → `"squared"`
 > - If horizontal > vertical (e.g., 24px > 16px) → `"stretched"`
 > - If horizontal < vertical (e.g., 12px < 16px) → `"squished"`
 >
 > Example from `figma_get_variable_defs`:
+>
 > ```json
 > {
 >   "var(--eds-selectable-space-horizontal)": "16",
 >   "var(--eds-selectable-space-vertical)": "16"
 > }
 > ```
+>
 > → 16 = 16, so use `data-space-proportions="squared"`
 >
 > **`data-line-height`** - Check line-height mode (squished/default/spacious)
@@ -278,16 +290,16 @@ Use `@layer eds-components` and data-attribute selectors (matches button.css, ch
 **Data Attributes for Styling Modes:**
 Components use data attributes to enable dynamic token-based styling:
 
-| Attribute                | Purpose             | Values                                         |
-| ------------------------ | ------------------- | ---------------------------------------------- |
-| `data-variant`           | Visual variant      | component-specific (primary, secondary, ghost) |
-| `data-selectable-space`  | Spacing mode        | `xs`, `sm`, `md`, `lg`, `xl`                   |
-| `data-space-proportions` | Padding proportions | `squished`, `squared`, `stretched`             |
-| `data-baseline`          | Text baseline trim  | `center`, `grid`                               |
-| `data-font-family`       | Typography family   | `ui`, `header`                                 |
+| Attribute                | Purpose             | Values                                                          |
+| ------------------------ | ------------------- | --------------------------------------------------------------- |
+| `data-variant`           | Visual variant      | component-specific (primary, secondary, ghost)                  |
+| `data-selectable-space`  | Spacing mode        | `xs`, `sm`, `md`, `lg`, `xl`                                    |
+| `data-space-proportions` | Padding proportions | `squished`, `squared`, `stretched`                              |
+| `data-baseline`          | Text baseline trim  | `center`, `grid`                                                |
+| `data-font-family`       | Typography family   | `ui`, `header`                                                  |
 | `data-font-size`         | Font size           | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl` |
-| `data-line-height`       | Line height mode    | `squished`, `default`                          |
-| `data-color-appearance`  | Color theming       | `neutral`, `accent`, `info`, `success`, `warning`, `danger` |
+| `data-line-height`       | Line height mode    | `squished`, `default`                                           |
+| `data-color-appearance`  | Color theming       | `neutral`, `accent`, `info`, `success`, `warning`, `danger`     |
 
 **CSS Comments:**
 Keep minimal. Only comment: complex calculations, layout tricks, deviations from expected behavior, or TODO notes. Skip obvious headers and self-explanatory properties.
@@ -324,7 +336,8 @@ Before finalizing, check if the component uses any native HTML elements that hav
   .eds-$ARGUMENTS:focus-visible {
     box-shadow:
       0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
-      0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
+      0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
+        var(--eds-color-border-focus);
   }
 
   .eds-$ARGUMENTS[data-disabled] {
@@ -334,7 +347,9 @@ Before finalizing, check if the component uses any native HTML elements that hav
   /* CRITICAL: Elements with data-color-appearance MUST have color property */
   & .icon {
     display: flex;
-    color: var(--eds-color-bg-fill-emphasis-default); /* Dynamic token responds to data-color-appearance */
+    color: var(
+      --eds-color-bg-fill-emphasis-default
+    ); /* Dynamic token responds to data-color-appearance */
   }
 }
 ```
@@ -479,18 +494,6 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 ```
 
 > **Example:** For `Avatar` component: `@import './Avatar/avatar.css';`
-
-## Key Patterns
-
-- **forwardRef**: All /next components use forwardRef with named function
-- **displayName**: Always add `ComponentName.displayName = 'ComponentName'` after component definition
-- **Data attributes**: Use `data-*` for styling variants and modes (see CSS section for attribute list)
-- **CSS layer**: Always wrap in `@layer eds-components { }`
-- **EDS 2.0 Tokens**: Use `--eds-*` CSS custom properties from Figma or `packages/eds-tokens/css/variables/`
-- **Dynamic tokens**: Prefer dynamic tokens (e.g., `--eds-selectable-space-vertical`) over static values
-- **Class naming**: Lowercase with `eds-` prefix (e.g., `eds-button`, `eds-avatar`)
-- **No default exports**: Only use named exports (except story meta)
-- **Composition**: Reuse existing /next components (Field, Icon, Input, Button) instead of creating from scratch
 
 ## Real-World Examples
 
@@ -694,14 +697,16 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
 
 ```tsx
 // If icon uses accent color when enabled, change to neutral when disabled
-{icon && (
-  <span
-    className="my-component__icon"
-    data-color-appearance={disabled ? 'neutral' : 'accent'}
-  >
-    {icon}
-  </span>
-)}
+{
+  icon && (
+    <span
+      className="my-component__icon"
+      data-color-appearance={disabled ? 'neutral' : 'accent'}
+    >
+      {icon}
+    </span>
+  )
+}
 ```
 
 ```css
@@ -730,16 +735,13 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
 
 ```tsx
 // Missing data-baseline attribute!
-<span
-  data-font-family="ui"
-  data-font-size="md"
-  data-line-height="default"
->
+<span data-font-family="ui" data-font-size="md" data-line-height="default">
   Menu Item
 </span>
 ```
 
 **Height calculation WITHOUT text-box-trim:**
+
 - Padding: 16px top + 20px line-height + 16px bottom = 52px ❌
 
 ### ✅ RIGHT: Add data-baseline to match Figma's baseline trimming
@@ -749,18 +751,20 @@ function MyComponent({ size }: { size: 'small' | 'large' }) {
   data-font-family="ui"
   data-font-size="md"
   data-line-height="default"
-  data-baseline="center"  // ✅ Enables text-box-trim
+  data-baseline="center" // ✅ Enables text-box-trim
 >
   Menu Item
 </span>
 ```
 
 **Height calculation WITH text-box-trim:**
+
 - Padding: 16px top + ~12px trimmed text + 16px bottom = 44px ✅ (or 43.99px)
 
 **Why:** Figma applies baseline trimming (shown as "Baseline adjust top/bottom" in variables). `data-baseline="center"` or `"grid"` enables `text-box: trim-both ex alphabetic`, removing extra line-height spacing so text occupies only its cap/x-height.
 
 **When to use:**
+
 - **`data-baseline="center"`**: Interactive elements (buttons, menu items) - optically centered text
 - **`data-baseline="grid"`**: Body text aligned to 4px baseline grid
 - **No data-baseline**: Full line-height box (rare in EDS 2.0)
@@ -771,7 +775,9 @@ If pixel-perfect height is required, add `min-height` to ensure exact 44px while
 
 ```css
 .my-component {
-  min-height: var(--eds-sizing-selectable-lg); /* 44px minimum - fixes 43.99px */
+  min-height: var(
+    --eds-sizing-selectable-lg
+  ); /* 44px minimum - fixes 43.99px */
   padding-block: var(--eds-selectable-space-vertical); /* Keep padding */
   padding-inline: var(--eds-selectable-space-horizontal);
   display: flex;
@@ -780,6 +786,7 @@ If pixel-perfect height is required, add `min-height` to ensure exact 44px while
 ```
 
 This approach:
+
 - ✅ Ensures exact 44px minimum (fixes sub-pixel rounding)
 - ✅ Keeps proper padding spacing
 - ✅ Still grows naturally for multi-line content
@@ -852,7 +859,7 @@ These patterns are for specific edge cases. Most components won't need them - re
   data-font-family="ui"
   data-font-size="md"
   data-line-height="default"
-  data-baseline="center"  // Trims line-height to cap height
+  data-baseline="center" // Trims line-height to cap height
 >
   Menu Item
 </span>

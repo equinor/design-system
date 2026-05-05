@@ -4,6 +4,8 @@ applyTo: '**'
 
 # Global Coding Standards
 
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds Copilot-specific quick-reference for lint/format commands and the naming table.
+
 ## Core Requirements
 
 - **Accessibility:** WCAG 2.1 AA compliance (non-negotiable)

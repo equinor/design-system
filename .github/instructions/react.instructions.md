@@ -4,17 +4,22 @@ applyTo: '**/*.ts,**/*.tsx'
 
 # React Guidelines
 
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds React-specific guidance for Copilot.
+
 ## Component Structure
+
+EDS 2.0 components live in `packages/eds-core-react/src/components/next/`.
 
 **File organization (required):**
 
 ```
 MyComponent/
-  index.ts              # Export only
-  MyComponent.tsx       # Component implementation
-  MyComponent.types.ts  # Props and type definitions
-  my-component.css       # Styles (vanilla CSS, nesting, tokens)
-  MyComponent.test.tsx  # Unit tests (Jest + Testing Library)
+  index.ts                # Named exports only
+  MyComponent.tsx         # forwardRef component
+  MyComponent.types.ts    # Props and type definitions with JSDoc
+  my-component.css        # Vanilla CSS + tokens + nesting
+  MyComponent.figma.tsx   # Figma Code Connect (when a Figma design exists)
+  MyComponent.test.tsx    # Jest + Testing Library + jest-axe
   MyComponent.stories.tsx # Storybook documentation
 ```
 
@@ -22,31 +27,38 @@ MyComponent/
 
 ## Implementation Patterns
 
-**Functional components with hooks:**
+**Components with `forwardRef` and named exports:**
 
 ```typescript
-import { MyComponentProps } from './MyComponent.types';
-import './my-component.css';
+import { forwardRef } from 'react'
+import type { MyComponentProps } from './MyComponent.types'
+import './my-component.css'
 
-export const MyComponent: React.FC<MyComponentProps> = ({
-  children,
-  variant = 'default',
-  ...props
-}) => {
-  return (
-    <div className="my-component" {...props}>
-      {children}
-    </div>
-  );
-};
+export const MyComponent = forwardRef<HTMLDivElement, MyComponentProps>(
+  function MyComponent(
+    { children, variant = 'default', className, ...rest },
+    ref,
+  ) {
+    const classes = ['eds-my-component', className].filter(Boolean).join(' ')
+    return (
+      <div ref={ref} className={classes} data-variant={variant} {...rest}>
+        {children}
+      </div>
+    )
+  },
+)
 ```
 
 **Rules:**
 
+- Use `forwardRef` so consumers can attach refs to the underlying element
+- Named exports only — no default exports (except `.stories.tsx` files)
 - No conditional hooks (move into separate components if needed)
-- No React import needed (no JSX pragma in modern React)
+- No `React` namespace import needed in modern JSX
 - Helper functions in module scope, not inside component
-- Props types in `.types.ts` file
+- Props types in `.types.ts` file with JSDoc
+- Variants and boolean states via `data-*` attributes, not modifier classes
+- Polymorphic components (Link, Button, etc.) support `asChild` via the shared `Slot` utility — see `packages/eds-core-react/src/components/next/Slot/`
 
 ## Accessibility (Required)
 

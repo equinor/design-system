@@ -4,6 +4,8 @@ applyTo: '**/*.ts,**/*.tsx'
 
 # TypeScript Guidelines
 
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds TS-specific guidance for Copilot.
+
 ## Type Definitions
 
 - **Interfaces over types** for object structures
