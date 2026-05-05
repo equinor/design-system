@@ -266,6 +266,44 @@ EDS 2.0 uses the `asChild` pattern for components that need polymorphic renderin
 
 Components that should support `asChild`: **Link**, **Button**, and any component rendering an interactive element that consumers may want to swap.
 
+## Figma-to-Code Workflow
+
+When implementing a component from a Figma design:
+
+1. **Start fresh** — implement only what the design specifies. Do not borrow props or patterns from similar components without verifying them in Figma.
+2. **Use exact variable names from the design.** Never assume tokens based on semantics ("looks like accent blue → `--eds-color-accent-*`"). Verify the actual variable name.
+3. **Never hardcode hex values** — always use `--eds-*` CSS variables from `@equinor/eds-tokens`.
+4. **Check every state** — Default, Hover, Focus, Disabled, Error. Tokens often change between states (especially `data-color-appearance` on disabled icons).
+
+### Sub-component convention
+
+Figma layers prefixed with `⌘`, `.`, or `↳` represent nested sub-components. In React, model them as composable sub-components or map their props with Code Connect's `figma.nestedProps()`:
+
+```tsx
+figma.connect(Component, 'figma-url', {
+  props: {
+    disabled: figma.enum('State', { Disabled: true }),
+    inner: figma.nestedProps('⌘ InnerComponent', {
+      open: figma.enum('Open', { true: true }),
+    }),
+  },
+  example: ({ disabled, inner }) => (
+    <Component disabled={disabled} open={inner.open} />
+  ),
+})
+```
+
+### Anti-patterns
+
+- Combining Figma design with patterns from similar existing components
+- Adding props or features not in the design
+- Importing from other components without explicit design requirement
+- Ignoring `⌘` / `.` / `↳` prefixed layers
+
+### Tool-specific extensions
+
+- **Claude Code with Figma MCP**: see `.claude/rules/figma-component.md` for the `figma_get_design_context` / `figma_get_screenshot` / `figma_get_variable_defs` call sequence (loaded automatically when editing `*.figma.tsx`).
+
 ## Accessibility
 
 - WCAG 2.1 AA compliance required

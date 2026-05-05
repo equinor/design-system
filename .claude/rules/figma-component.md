@@ -1,127 +1,31 @@
 ---
 paths:
-  - "packages/eds-core-react/src/components/next/**/*.figma.tsx"
+  - 'packages/eds-core-react/src/components/next/**/*.figma.tsx'
 ---
 
-# Figma-to-Code Component Guidelines
+# Figma-to-Code Component Guidelines (Claude Code)
 
-When building EDS 2.0 components from Figma designs, follow this workflow.
+> See [`AGENTS.md`](../../AGENTS.md) — **Figma-to-Code Workflow** section — for the universal conventions (sub-component prefixes, critical rules, Code Connect example, anti-patterns).
+>
+> This file adds the Claude-Code-specific MCP workflow that Copilot does not have access to.
 
 ## MCP Workflow
 
-If Figma MCP tools are available, use this workflow:
+When the Figma MCP server is available:
 
-1. **Analyze**: Call `figma_get_design_context` and `figma_get_screenshot`
-2. **Extract tokens**: Call `figma_get_variable_defs` for EACH state (Default, Hover, Focus, Disabled, Error)
-3. **Implement**: Create component files using extracted tokens
+1. **Analyze structure**: Call `figma_get_design_context` with the Figma URL to understand the component layers
+2. **See the design**: Call `figma_get_screenshot` for visual reference
+3. **Extract tokens for EACH state**: Call `figma_get_variable_defs` for:
+   - Default
+   - Hover
+   - Focus
+   - Disabled
+   - Error (and any other states visible in the design)
 
-## File Structure
+**Do not skip step 3 per state.** A single `figma_get_variable_defs` call on the default state will miss state-specific tokens (especially `data-color-appearance` on disabled icons).
 
-```
-ComponentName/
-  index.ts               # Named exports only
-  ComponentName.tsx      # forwardRef component
-  ComponentName.types.ts # Types with JSDoc
-  componentname.css      # Vanilla CSS + tokens + nesting
-  ComponentName.figma.tsx # Figma Code Connect
-  ComponentName.test.tsx # Jest + Testing Library + jest-axe
-  ComponentName.stories.tsx
-```
+## Anti-patterns (MCP-specific)
 
-## Component Pattern
-
-```typescript
-import { forwardRef, useId } from 'react'
-import type { ComponentProps } from './Component.types'
-import './component.css'
-
-export const Component = forwardRef<HTMLElement, ComponentProps>(
-  function Component({ className, ...rest }, ref) {
-    const classes = ['component', className].filter(Boolean).join(' ')
-    return <div ref={ref} className={classes} {...rest} />
-  },
-)
-```
-
-## Types Pattern
-
-```typescript
-export type ComponentProps = {
-  /** Description for prop */
-  variant?: 'primary' | 'secondary'
-} & HTMLAttributes<HTMLElement>
-```
-
-## CSS Pattern
-
-One `eds-`-prefixed root class. Internal elements use simple names scoped by nesting. Variants via data attributes.
-
-```css
-@layer eds-components {
-  .eds-component {
-    color: var(--eds-color-text-primary);
-
-    & .label-row {
-      display: flex;
-      align-items: center;
-    }
-
-    &[data-variant='secondary'] {
-      color: var(--eds-color-text-secondary);
-    }
-  }
-}
-```
-
-## Sub-Component Convention
-
-Figma layers prefixed with special characters are nested sub-components. Use `figma.nestedProps()` in Code Connect:
-
-```tsx
-figma.connect(Component, 'figma-url', {
-  props: {
-    disabled: figma.enum('State', { Disabled: true }),
-    inner: figma.nestedProps('InnerComponent', {
-      open: figma.enum('Open', { true: true }),
-    }),
-  },
-  example: ({ disabled, inner }) => (
-    <Component disabled={disabled} open={inner.open} />
-  ),
-})
-```
-
-## Test Pattern
-
-Organize with `describe` blocks: Rendering, Accessibility, Behavior.
-
-```typescript
-import { render, screen } from '@testing-library/react'
-import { axe } from 'jest-axe'
-import { Component } from '.'
-
-describe('Component (next)', () => {
-  describe('Accessibility', () => {
-    it('passes axe', async () => {
-      const { container } = render(<Component />)
-      expect(await axe(container)).toHaveNoViolations()
-    })
-  })
-})
-```
-
-## Critical Rules
-
-- Use EXACT variable names from `figma_get_variable_defs`
-- Never assume tokens based on semantics
-- Never hardcode hex values - always use CSS variables
-- No default exports (except stories)
-- WCAG 2.1 AA required
-- Query priority: getByRole > getByLabelText > getByText > getByTestId
-
-## Anti-patterns
-
-- Using `figma_get_design_context` alone without `figma_get_variable_defs` for each state
-- Copying patterns from similar components without verifying Figma
-- Adding props/features not in design
-- Ignoring nested component layers
+- Calling `figma_get_design_context` alone without `figma_get_variable_defs` for each state
+- Reusing tokens extracted for a different state
+- Generating Code Connect from intuition instead of from the actual MCP response
