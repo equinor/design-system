@@ -4,7 +4,7 @@ applyTo: '**'
 
 # Figma Component Creation
 
-> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions and `.claude/rules/figma-component.md` for the detailed Figma MCP workflow.
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. The detailed Figma MCP workflow lives in `.claude/rules/figma-component.md` (loaded automatically by Claude Code; not used by Copilot).
 
 ## Workflow
 

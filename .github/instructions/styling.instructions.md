@@ -74,11 +74,9 @@ Define component-scoped variables with a `--_` prefix at the component root. Use
   --_color: var(--eds-color-text-disabled); /* override the variable */
 }
 
-/* WRONG */
+/* WRONG — never override the property directly */
 .eds-button[data-variant='ghost']:disabled {
-  color: var(
-    --eds-color-text-disabled
-  ); /* never override the property directly */
+  color: var(--eds-color-text-disabled);
 }
 ```
 
