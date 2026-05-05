@@ -1,100 +1,120 @@
 ## Features
 
-- Text component with presets for display, heading, body, label, caption, button, and overline.
-- Uses Equinor for display and heading variants; Inter for body, label, and standalone variants.
-- Optional `bold` and `italic` modifiers.
-- Default color is `text.neutral.strong`.
+- Two components: `Typography` for body and UI text, `Typography.Header` for headings and titles.
+- `Typography` uses the Inter typeface. `Typography.Header` uses the Equinor typeface.
+- Both share the same size scale (`xs` through `sixXl`) and support `weight`, `lineHeight`, and `tracking` modifiers.
+- Default color is `text.neutral.strong`, which adapts to light and dark mode automatically.
 
 ## Usage
 
 ```tsx
 import { Typography } from '@equinor/eds-mobile-components'
 
-<Typography>Hello world</Typography>
+<Typography>Body text</Typography>
+<Typography.Header>Heading text</Typography.Header>
 ```
 
-The default variant is `body.md`.
+`Typography` defaults to size `lg`. `Typography.Header` defaults to size `xl`.
 
 ## Examples
 
-### Choosing a variant
+### Choosing a size
 
 ```tsx
-<Typography variant="display.lg">Welcome</Typography>
-<Typography variant="heading.md">Section title</Typography>
-<Typography variant="body.sm">Supporting copy</Typography>
-<Typography variant="caption">Updated 5 minutes ago</Typography>
+<Typography.Header size="twoXl">Screen title</Typography.Header>
+<Typography.Header size="lg">Section heading</Typography.Header>
+<Typography size="sm">Supporting copy</Typography>
 ```
 
-### Bold and italic
+### Adjusting weight
 
 ```tsx
-<Typography bold>Important</Typography>
-<Typography italic>Aside</Typography>
-<Typography bold italic>Attention</Typography>
+<Typography weight="bolder">Highlighted value</Typography>
+<Typography.Header size="lg" weight="lighter">Subtle heading</Typography.Header>
+```
+
+### Adjusting tracking
+
+```tsx
+<Typography tracking="wide">Spaced out label</Typography>
+<Typography.Header size="xl" tracking="tight">Compact title</Typography.Header>
 ```
 
 ### Overriding color
 
-Use `style={{ color }}` with the new color tokens for semantic coloring.
+Use `style={{ color }}` with the color tokens for semantic coloring.
 
 ```tsx
 import { Typography, useToken } from '@equinor/eds-mobile-components'
 
-const token = useToken()
+const { colors } = useToken()
 
-<Typography style={{ color: token.newColors.text.danger.strong }}>
+<Typography style={{ color: colors.text.danger.strong }}>
   Something went wrong.
 </Typography>
 ```
 
 ### Inheriting Text props
 
-Because Typography extends React Native's `Text`, all native props pass through.
+`Typography` and `Typography.Header` extend React Native's `Text`, so all native props pass through.
 
 ```tsx
 <Typography numberOfLines={2} onPress={handlePress}>
-  A tappable, truncating paragraph that spans at most two lines.
+  A tappable, truncating paragraph.
 </Typography>
 ```
 
-## Variants
+## Sizes
 
-| Variant | Family | Size | Line height |
-|---|---|---|---|
-| `display.lg` | Equinor | 34 | 41 |
-| `display.md` | Equinor | 28 | 34 |
-| `display.sm` | Equinor | 22 | 28 |
-| `heading.lg` | Equinor | 20 | 25 |
-| `heading.md` | Equinor | 17 | 22 |
-| `heading.sm` | Equinor | 15 | 20 |
-| `body.lg` | Inter | 17 | 22 |
-| `body.md` | Inter | 15 | 20 |
-| `body.sm` | Inter | 13 | 18 |
-| `label.lg` | Inter | 15 | 20 |
-| `label.md` | Inter | 13 | 18 |
-| `label.sm` | Inter | 12 | 16 |
-| `caption` | Inter | 11 | 13 |
-| `button` | Inter | 17 | 22 |
-| `overline` | Inter | 12 | 16 |
+### Typography.Header — Equinor typeface
+
+| Size | Font size | Line height |
+|---|---|---|
+| `xs` | 12 | 16 |
+| `sm` | 14 | 16 |
+| `md` | 16 | 20 |
+| `lg` | 18 | 24 |
+| `xl` | 21 | 24 |
+| `twoXl` | 24 | 28 |
+| `threeXl` | 27.5 | 32 |
+| `fourXl` | 31.5 | 32 |
+| `fiveXl` | 36.5 | 36 |
+| `sixXl` | 42 | 40 |
+
+### Typography — Inter typeface
+
+| Size | Font size | Line height |
+|---|---|---|
+| `xs` | 10.5 | 16 |
+| `sm` | 12 | 16 |
+| `md` | 14 | 20 |
+| `lg` | 16 | 24 |
+| `xl` | 18.5 | 24 |
+| `twoXl` | 21 | 28 |
+| `threeXl` | 24.5 | 32 |
+| `fourXl` | 28 | 32 |
+| `fiveXl` | 32 | 36 |
+| `sixXl` | 37 | 40 |
 
 ## Props
 
+Both `Typography` and `Typography.Header` accept the following props.
+
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `NewTypographyVariant` | `'body.md'` | Typography preset — see Variants table above |
-| `bold` | `boolean` | `false` | Enables bold weight |
-| `italic` | `boolean` | `false` | Enables italic style |
-| `color` | `string` | — | **Deprecated.** Use `style={{ color: ... }}` with the new color tokens instead — see *Overriding color* above |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'twoXl' \| 'threeXl' \| 'fourXl' \| 'fiveXl' \| 'sixXl'` | `'lg'` (Typography) / `'xl'` (Typography.Header) | Size variant |
+| `weight` | `'lighter' \| 'normal' \| 'bolder'` | `'normal'` | Font weight |
+| `lineHeight` | `'default' \| 'squished'` | `'default'` | `squished` reduces line height for denser layouts |
+| `tracking` | `'normal' \| 'tight' \| 'wide'` | `'normal'` | Letter spacing — `tight` contracts letters, `wide` spreads them |
 
-Also accepts all React Native [`TextProps`](https://reactnative.dev/docs/text#props).
+Both components also accept all React Native [`TextProps`](https://reactnative.dev/docs/text#props).
 
 ## Accessibility
 
-- Does not set an `accessibilityRole` — inherits React Native's `Text` defaults
-- For structural headings (e.g. screen titles), supply `accessibilityRole="header"` on the element
-- All native `Text` accessibility props (`accessibilityLabel`, `accessibilityHint`, etc.) pass through
-- Font scaling follows the OS text-size setting by default; override with `allowFontScaling={false}` if needed
+- Does not set an `accessibilityRole` — inherits React Native's `Text` defaults.
+- For structural headings (such as screen titles), supply `accessibilityRole="header"` on the element.
+- All native `Text` accessibility props (`accessibilityLabel`, `accessibilityHint`, etc.) pass through.
+- Font scaling follows the OS text-size setting by default; override with `allowFontScaling={false}` if needed.
 
 ## Related components
 
