@@ -31,22 +31,11 @@ export default function ChipsScreen() {
                 <Typography.Header size="lg">Basic Chips</Typography.Header>
 
                 <View style={styles.row}>
-                    <Chip
-                        title="Default Chip"
-                        onPress={() => console.log("Chip pressed")}
-                    />
+                    <Chip title="Default Chip" />
 
-                    <Chip
-                        title="Active Chip"
-                        variant="active"
-                        onPress={() => console.log("Active chip pressed")}
-                    />
+                    <Chip title="Active Chip" variant="active" />
 
-                    <Chip
-                        title="Disabled"
-                        disabled
-                        onPress={() => console.log("This won't fire")}
-                    />
+                    <Chip title="Disabled" disabled />
                 </View>
 
                 <ViewCode title="Basic Chips" code={basicChips} />
@@ -56,23 +45,11 @@ export default function ChipsScreen() {
                 <Typography.Header size="lg">Chip Variants</Typography.Header>
 
                 <View style={styles.row}>
-                    <Chip
-                        title="Default"
-                        variant="default"
-                        onPress={() => console.log("Default chip")}
-                    />
+                    <Chip title="Default" variant="default" />
 
-                    <Chip
-                        title="Active"
-                        variant="active"
-                        onPress={() => console.log("Active chip")}
-                    />
+                    <Chip title="Active" variant="active" />
 
-                    <Chip
-                        title="Error"
-                        variant="error"
-                        onPress={() => console.log("Error chip")}
-                    />
+                    <Chip title="Error" variant="error" />
                 </View>
 
                 <View style={styles.row}>
@@ -102,20 +79,16 @@ export default function ChipsScreen() {
                 <Typography.Header size="lg">Deletable Chips</Typography.Header>
 
                 <View style={styles.row}>
-                    {deleteChipVisible ? (
-                        ""
-                    ) : (
+                    {deleteChipVisible ? null : (
                         <Chip
                             title="Delete Me!"
                             onDelete={() => setDeleteChipVisible(true)}
-                            onPress={() => console.log("chip pressed")}
                         />
                     )}
                     <Chip
                         title="Deletable Error"
                         variant="error"
-                        onDelete={() => console.log("Delete pressed")}
-                        onPress={() => console.log("Chip pressed")}
+                        onDelete={() => alert("Delete pressed")}
                     />
                 </View>
 

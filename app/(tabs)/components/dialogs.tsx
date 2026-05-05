@@ -76,10 +76,7 @@ export default function DialogsScreen() {
                             />
                             <Button
                                 label="Confirm"
-                                onPress={() => {
-                                    console.log("Confirmed!");
-                                    setWithActionsOpen(false);
-                                }}
+                                onPress={() => setWithActionsOpen(false)}
                             />
                         </View>
                     </View>

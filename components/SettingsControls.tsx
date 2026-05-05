@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Pressable, useColorScheme, View } from "react-native";
 
 const ICON_SIZE = 24;
-const HIT_PADDING = 8;
+const HIT_PADDING = 6;
 
 export const SettingsControls = () => {
     const styles = useStyles(themeStyles);

@@ -7,8 +7,8 @@ export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: newColors.bg.accent.fillEmphasis.active,
-                tabBarInactiveTintColor: newColors.text.neutral.subtle,
+                tabBarActiveTintColor: newColors.text.accent.subtle,
+                tabBarInactiveTintColor: newColors.border.neutral.medium,
                 tabBarLabelStyle: {
                     fontSize: newTypography.ui.fontFamilySize.sm.fontSize,
                 },
@@ -35,6 +35,19 @@ export default function TabLayout() {
                     tabBarIcon: ({ color, size }) => (
                         <Icon
                             name="puzzle"
+                            size={size}
+                            color={color as IconProps["color"]}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="about"
+                options={{
+                    title: "About",
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon
+                            name="information"
                             size={size}
                             color={color as IconProps["color"]}
                         />

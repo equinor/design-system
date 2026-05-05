@@ -1,88 +1,45 @@
-import { Paper, Typography } from "@equinor/eds-mobile-components";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Typography, useToken } from "@equinor/eds-mobile-components";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { Image, StyleSheet, View } from "react-native";
 
 export default function HomeScreen() {
+    const { newColors, newSpacing } = useToken();
+    const tabBarHeight = useBottomTabBarHeight();
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            paddingHorizontal: newSpacing.spacing.horizontal.threeXl,
+            paddingTop: newSpacing.spacing.vertical.threeXl,
+            paddingBottom: tabBarHeight,
+            gap: newSpacing.spacing.vertical.lg,
+        },
+        logo: {
+            width: 240,
+            height: 240,
+            resizeMode: "contain",
+        },
+    });
+
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.hero}>
-                <Image
-                    source={require("../../assets/images/puzzle_illu.png")}
-                    style={styles.image}
-                />
-            </View>
-            <View style={styles.welcome}>
-                <Typography.Header size="twoXl" style={styles.title}>
-                    EDS Mobile
-                </Typography.Header>
-                <Typography.Header size="lg">
-                    Equinor Design System for React Native
-                </Typography.Header>
-            </View>
-            <View style={styles.section}>
-                <Typography>
-                    This is a component library showcase for the Equinor Design
-                    System Mobile.
-                </Typography>
-            </View>
-            <View
-                style={[
-                    styles.section,
-                    {
-                        flex: 1,
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                    },
-                ]}
+        <View style={styles.container}>
+            <Typography.Header size="fiveXl" weight="normal">
+                EDS Mobile
+            </Typography.Header>
+            <Image
+                source={require("../../assets/images/puzzle_illu.png")}
+                style={styles.logo}
+            />
+            <Typography
+                style={{
+                    textAlign: "center",
+                    color: newColors.text.neutral.subtle,
+                }}
             >
-                <Paper elevation="raised" style={{ padding: 16 }}>
-                    <Typography.Header size="lg">What&apos;s New</Typography.Header>
-                    <Typography
-                       
-                        style={{ flexWrap: "wrap" }}
-                    >
-                        We are happy to...
-                    </Typography>
-                </Paper>
-                <Paper elevation="raised" style={{ padding: 16 }}>
-                    <Typography.Header size="lg">Getting Started</Typography.Header>
-                    <Typography
-                       
-                        style={{ flexWrap: "wrap" }}
-                    >
-                        Welcome to the ...
-                    </Typography>
-                </Paper>
-            </View>
-        </ScrollView>
+                Equinor Design System for React Native
+            </Typography>
+        </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 30,
-        backgroundColor: "#fff",
-    },
-    hero: {
-        padding: 10,
-        alignItems: "center",
-    },
-    welcome: {
-        marginTop: 40,
-        alignItems: "center",
-    },
-    image: {
-        width: 300,
-        height: 300,
-        resizeMode: "contain",
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: "700",
-        color: "#000",
-        paddingVertical: 8,
-    },
-    section: {
-        padding: 24,
-    },
-});
