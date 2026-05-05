@@ -11,7 +11,7 @@ Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/
 1. [Figma Design Integration](#figma-design-integration)
 2. [Check for Existing Components](#check-for-existing-components)
 3. [Implementation Instructions](#instructions)
-4. [Real-World Examples](#real-world-examples)
+4. [Real-world references](#real-world-references)
 5. [Common Mistakes](#common-mistakes--how-to-fix-them)
 6. [Advanced Patterns](#advanced-patterns)
 7. [Anti-patterns](#anti-patterns)
@@ -495,69 +495,17 @@ export type { $ARGUMENTSProps } from './$ARGUMENTS'
 
 > **Example:** For `Avatar` component: `@import './Avatar/avatar.css';`
 
-## Real-World Examples
+## Real-world references
 
-See how existing components use data-attributes and dynamic tokens:
+For canonical examples of foundation `data-*` attributes, dynamic tokens, and component-specific variants, read the source in:
 
-### Button (packages/eds-core-react/src/components/next/Button/)
+- `packages/eds-core-react/src/components/next/Button/` — variants, color-appearance disabled-fallback, full foundation attributes
+- `packages/eds-core-react/src/components/next/Input/` — container sets color context for children
+- `packages/eds-core-react/src/components/next/Icon/` — size inheritance via parent's `data-font-size`
 
-```tsx
-// Button.tsx - Sets multiple foundation data-attributes
-<button
-  data-variant={variant} // Component-specific
-  data-selectable-space={selectableSpace} // Foundation: md, lg, sm
-  data-space-proportions="squished" // Foundation
-  data-font-family="ui" // Foundation
-  data-font-size={typographySize} // Foundation
-  data-line-height="squished" // Foundation
-  data-color-appearance={disabled ? 'neutral' : tone} // Foundation: accent, danger
-/>
-```
+Read the actual source (it's the reference, not a snapshot in this file).
 
-```css
-/* button.css - Dynamic tokens respond to data-attributes */
-.eds-button[data-variant='primary'] {
-  background-color: var(
-    --eds-color-bg-fill-emphasis-default
-  ); /* Changes with data-color-appearance */
-}
-
-.eds-button:hover:not(:disabled) {
-  background-color: var(
-    --eds-color-bg-fill-emphasis-hover
-  ); /* Also responds to data-color-appearance */
-}
-```
-
-### Input (packages/eds-core-react/src/components/next/Input/)
-
-```tsx
-// Input.tsx - Container sets color context for child elements
-<div
-  data-color-appearance={tone} // 'danger' when invalid, 'neutral' otherwise
-  data-font-size="md"
-  data-selectable-space="sm"
-  data-space-proportions="squished"
->
-  <input data-font-family="ui" data-font-size="md" />
-</div>
-```
-
-### Icon (packages/eds-core-react/src/components/next/Icon/)
-
-```tsx
-// Icon.tsx - Size inherits from parent's data-font-size
-<svg data-icon-size={size} /> // Only set if explicit size prop provided
-```
-
-```css
-/* icon.css - Inherits size from parent's typography tokens */
-.icon {
-  font-size: var(--eds-typography-icon-size, 1.5em); /* Inherits from parent */
-  width: 1em;
-  height: 1em;
-}
-```
+````
 
 ## Common Mistakes & How to Fix Them
 
@@ -571,7 +519,7 @@ See how existing components use data-attributes and dynamic tokens:
   <Icon data={settings} />
   Settings
 </button>
-```
+````
 
 ```css
 .menu-item {
