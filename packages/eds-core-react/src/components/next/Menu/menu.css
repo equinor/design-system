@@ -1,0 +1,71 @@
+@layer eds-components {
+  .eds-menu {
+    /* Anchor positioning — flush below trigger, left-aligned */
+    position: fixed;
+    top: anchor(bottom);
+    left: anchor(left);
+    position-anchor: var(--menu-anchor);
+
+    /* Flip above if not enough space below */
+    position-try-fallbacks: --eds-menu-top;
+
+    overflow: visible;
+    overflow-y: auto;
+
+    width: anchor-size(width);
+    max-block-size: 300px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+
+    list-style: none;
+
+    background: var(--eds-color-bg-floating);
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    box-shadow:
+      0 1px 5px 0 rgb(0 0 0 / 12%),
+      0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 3px 1px -2px rgb(0 0 0 / 20%);
+  }
+
+  .eds-menu-item {
+    --_bg: transparent;
+
+    cursor: pointer;
+
+    padding-block: var(--eds-container-space-vertical, 0.75rem);
+    padding-inline: var(--eds-selectable-space-horizontal);
+
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+    color: var(--eds-color-text-strong);
+
+    background: var(--_bg);
+
+    &:hover {
+      --_bg: var(--eds-color-bg-fill-muted-default);
+    }
+
+    &[data-active] {
+      --_bg: var(--eds-color-bg-fill-muted-default);
+
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    }
+
+    &[aria-disabled='true'] {
+      cursor: default;
+      color: var(--eds-color-text-subtle);
+    }
+  }
+}
+
+/* @position-try must be outside @layer per spec */
+@position-try --eds-menu-top {
+  top: auto;
+  bottom: anchor(top);
+  left: anchor(left);
+}
