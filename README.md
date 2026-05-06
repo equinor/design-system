@@ -59,7 +59,7 @@ C4Context
   Rel(designer, eds, "Uses design assets and documentation")
   Rel(developer, eds, "Uses documentation and developer tools")
 
-  Rel(eds, figma, "Publishes design assets to")
+  BiRel(eds, figma, "Syncs assets and tokens with")
   Rel(eds, npm, "Publishes packages to")
   Rel(eds, cdn, "Publishes fonts and static assets to")
 
