@@ -29,7 +29,7 @@
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "colorjs.io": "^0.6.1",
-    "lucide-react": "^1.8.0",
+    "lucide-react": "^1.12.0",
     "next": "16.2.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
@@ -48,7 +48,7 @@
     "tailwindcss": "^4.2.4",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "vite": "^8.0.9",
+    "vite": "^8.0.10",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.1.5"
   }
