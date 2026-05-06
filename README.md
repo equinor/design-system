@@ -53,7 +53,8 @@ C4Context
   
   System_Boundary(applications, "Equinor Web Applications", "All internal web applications built by and for Equinor") {
     Person(enduser, "End User", "Uses Equinor web applications built with EDS")
-    System_Ext(cdn, "CDN", "Serves EDS fonts, icons and CSS to all Equinor web applications across the tenant")
+      System_Ext(cdn, "CDN", "Serves font files, icons and logo for Equinor web applications")
+  
   }
 
   Rel(designer, eds, "Uses design assets and documentation")
