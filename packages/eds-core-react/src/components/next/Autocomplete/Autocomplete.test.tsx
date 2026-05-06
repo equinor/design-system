@@ -294,6 +294,112 @@ describe('Autocomplete (next)', () => {
     })
   })
 
+  describe('Clear button', () => {
+    it('shows clear button when input has a value', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} />)
+      await user.type(screen.getByRole('combobox'), 'Apple')
+      expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument()
+    })
+
+    it('hides clear button when input is empty', () => {
+      const { container } = render(
+        <Autocomplete label="Fruit" options={options} />,
+      )
+      const btn = container.querySelector('[aria-label="Clear"]')
+      expect(btn).toHaveStyle({ visibility: 'hidden' })
+    })
+
+    it('clears the input value when clear button is clicked', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} />)
+      await user.type(screen.getByRole('combobox'), 'Apple')
+      await user.click(screen.getByRole('button', { name: 'Clear' }))
+      expect(screen.getByRole('combobox')).toHaveValue('')
+    })
+
+    it('calls onClear when clear button is clicked', async () => {
+      const onClear = jest.fn()
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} onClear={onClear} />)
+      await user.type(screen.getByRole('combobox'), 'Apple')
+      await user.click(screen.getByRole('button', { name: 'Clear' }))
+      expect(onClear).toHaveBeenCalled()
+    })
+
+    it('hides clear button when disabled', () => {
+      const { container } = render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          defaultValue="Apple"
+          disabled
+        />,
+      )
+      const btn = container.querySelector('[aria-label="Clear"]')
+      expect(btn).toHaveStyle({ visibility: 'hidden' })
+    })
+
+    it('uses custom clearLabel for accessibility', async () => {
+      const user = userEvent.setup()
+      render(
+        <Autocomplete label="Fruit" options={options} clearLabel="Tøm felt" />,
+      )
+      await user.type(screen.getByRole('combobox'), 'Apple')
+      expect(
+        screen.getByRole('button', { name: 'Tøm felt' }),
+      ).toBeInTheDocument()
+    })
+  })
+
+  describe('allowCustomValue', () => {
+    it('shows Add option when typing a value not in the list', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      expect(screen.getByText('Add: \u201cMango\u201d')).toBeInTheDocument()
+    })
+
+    it('does not show Add option when value matches an existing option', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      await user.type(screen.getByRole('combobox'), 'Apple')
+      expect(screen.queryByText(/^Add:/)).not.toBeInTheDocument()
+    })
+
+    it('does not show Add option without allowCustomValue prop', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} />)
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      expect(screen.queryByText(/^Add:/)).not.toBeInTheDocument()
+    })
+
+    it('calls onOptionSelect with typed value when Add option is selected via Enter', async () => {
+      const onOptionSelect = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          allowCustomValue
+          onOptionSelect={onOptionSelect}
+        />,
+      )
+      // 'Mango' matches nothing — Add option is the only item (index 0)
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      await user.keyboard('{ArrowDown}{Enter}')
+      expect(onOptionSelect).toHaveBeenCalledWith('Mango')
+    })
+
+    it('sets input value to typed value when Add option is selected via click', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      await user.click(screen.getByText('Add: \u201cMango\u201d'))
+      expect(screen.getByRole('combobox')).toHaveValue('Mango')
+    })
+  })
+
   describe('Accessibility', () => {
     it('has no accessibility violations', async () => {
       const { container } = render(
@@ -326,7 +432,10 @@ describe('Autocomplete (next)', () => {
       const input = screen.getByRole('combobox')
       const listboxId = input.getAttribute('aria-controls')
       expect(listboxId).toBeTruthy()
-      expect(document.getElementById(listboxId!)).toBeInTheDocument()
+      expect(screen.getByRole('listbox', { hidden: true })).toHaveAttribute(
+        'id',
+        listboxId,
+      )
     })
 
     it('input has aria-expanded false when closed', () => {
@@ -363,7 +472,7 @@ describe('Autocomplete (next)', () => {
       await user.click(screen.getByRole('combobox'))
       await user.keyboard('{ArrowDown}{Escape}')
       expect(
-        screen.getByRole('combobox').getAttribute('aria-activedescendant'),
+        screen.queryByRole('combobox').getAttribute('aria-activedescendant'),
       ).toBeFalsy()
     })
 
@@ -377,7 +486,7 @@ describe('Autocomplete (next)', () => {
       ).toBeTruthy()
       await user.tab()
       expect(
-        screen.getByRole('combobox').getAttribute('aria-activedescendant'),
+        screen.queryByRole('combobox').getAttribute('aria-activedescendant'),
       ).toBeFalsy()
     })
 

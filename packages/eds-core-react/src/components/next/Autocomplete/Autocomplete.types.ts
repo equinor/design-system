@@ -24,6 +24,12 @@ export type AutocompleteProps = {
   onOptionSelect?: (option: string) => void
   /** Text shown when no options match the search value */
   noOptionsText?: string
+  /** Allow the user to confirm a value not in the options list. Shows an "Add: {value}" option while typing. */
+  allowCustomValue?: boolean
+  /** Callback fired when the clear button is clicked */
+  onClear?: () => void
+  /** Accessible label for the clear button. Defaults to "Clear". Override for localisation. */
+  clearLabel?: string
   /** Current value of the search input */
   value?: string
   /** Default value of the search input */
