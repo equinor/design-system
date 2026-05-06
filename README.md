@@ -36,7 +36,7 @@ packages/                # Published npm packages
 
 ### System Context
 
-EDS serves three personas and delivers through four channels: Figma assets for designers, npm packages for developers, a documentation hub for both, and a CDN that provides fonts and CSS to all Equinor web applications utlilizing EDS. The system is built as a monorepo with CI/CD pipelines that automate testing, building and publishing to npm and the CDN.
+EDS serves three personas and delivers through four channels: Figma assets for designers, npm packages for developers, a documentation hub for both, and a CDN that provides fonts and CSS to all Equinor web applications utilizing EDS. The system is built as a monorepo with CI/CD pipelines that automate testing, building and publishing to npm and the CDN.
 
 ```mermaid
 C4Context
