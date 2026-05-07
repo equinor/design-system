@@ -396,6 +396,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                           ? `Add new option: ${inputValue.trim()}`
                           : 'Add new option'
                       }
+                      aria-posinset={1}
+                      aria-setsize={totalOptions}
                       active={activeIndex === 0}
                       className="add-option"
                       onMouseDown={
@@ -418,6 +420,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                         id={getOptionId(displayIndex)}
                         role="option"
                         aria-selected={option === effectiveSelected}
+                        aria-posinset={displayIndex + 1}
+                        aria-setsize={totalOptions}
                         active={activeIndex === displayIndex}
                         onMouseDown={() => handleOptionSelect(option)}
                       >
