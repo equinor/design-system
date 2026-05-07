@@ -40,35 +40,40 @@ EDS serves three personas and delivers through four channels: Figma assets for d
 
 ```mermaid
 C4Context
-  title Equinor Design System – System Context
+  title System Context diagram for Equinor Design System
 
   Person(designer, "Designer", "Creates and maintains UI designs following the Equinor design language")
   Person(developer, "Developer", "Builds web applications using EDS components and tokens")
-  
-  System_Boundary(eds, "Equinor Design System") {
-    System_Ext(figma, "Figma", "Source of truth for design tokens, components and assets")
-    System_Ext(npm, "npm Registry", "Distributes EDS packages: eds-core-react, eds-tokens, eds-icons, etc.")
-    System(eds, "Equinor Design System<br>equinor/design-system | eds.equinor.com", "Documentation hub, GitHub monorepo and CI/CD pipelines delivering reusable UI components, design tokens, icons and typography")
-  }
-  
-  System_Boundary(applications, "Equinor Web Applications", "All internal web applications built by and for Equinor") {
-    Person(enduser, "End User", "Uses Equinor web applications built with EDS")
-      System_Ext(cdn, "CDN", "Serves font files, icons and logo for Equinor web applications")
-  
-  }
+  Person(enduser, "End User", "Uses Equinor web applications built with EDS")
+
+  System_Ext(figma, "Figma", "Source of truth for design tokens, components and assets")
+  System(eds, "Equinor Design System", "Documentation hub, GitHub monorepo and CI/CD pipelines delivering reusable UI components, design tokens, icons and typography")
+  System_Ext(app, "Equinor Web Applications", "Internal web apps built with EDS")
+
+  System_Ext(npm, "npm Registry", "Distributes EDS packages: eds-core-react, eds-tokens, eds-icons, etc.")
+  System_Ext(cdn, "CDN", "Serves font files, icons and logo for Equinor web applications")
 
   Rel(designer, eds, "Uses design assets and documentation")
   Rel(developer, eds, "Uses documentation and developer tools")
+  Rel(designer, figma, "Uses EDS components in", "Figma")
 
   BiRel(eds, figma, "Syncs assets and tokens with")
   Rel(eds, npm, "Publishes packages to")
   Rel(eds, cdn, "Publishes fonts and static assets to")
 
-  Rel(developer, npm, "Installs EDS libraries from", "npm")
-  Rel(designer, figma, "Uses EDS components in", "Figma")
-  Rel(enduser, cdn, "Loads fonts and CSS via applications", "HTTPS")
+  Rel(developer, npm, "Installs EDS packages from")
+  Rel(developer, app, "Builds")
+  Rel(enduser, app, "Uses")
+  Rel(app, cdn, "Loads fonts from", "HTTPS")
 
-  UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="2")
+  UpdateRelStyle(app, cdn, $offsetX="250", $offsetY="0")
+  UpdateRelStyle(eds, figma, $offsetX="0", $offsetY="30")
+  UpdateRelStyle(developer, npm, $offsetX="0", $offsetY="-60")
+  UpdateRelStyle(designer, eds, $offsetX="-150", $offsetY="0")
+  UpdateRelStyle(developer, eds, $offsetX="-80", $offsetY="-30")
+  UpdateRelStyle(eds, cdn, $offsetX="-100", $offsetY="0")
+
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="2")
 ```
 
 ## Table of contents
