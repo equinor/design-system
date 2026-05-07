@@ -351,6 +351,27 @@ export async function createSpacingAndTypographyVariables({
     }
   }
 
+  // Clean up stale typography TS files. Only font-family-* and size-extras
+  // are emitted today; font-size-*, font-weight-*, line-height-*, and
+  // tracking-* used to be emitted but were removed because Style Dictionary
+  // collapses non-family axes to a single arbitrary cell of the family
+  // matrix. Non-CSS consumers should use composeTextStyle from
+  // @equinor/eds-tokens instead.
+  const existingTypographyTsFiles: string[] = await fs.promises
+    .readdir(tsBuildPath)
+    .catch((): string[] => [])
+  const KEPT_TYPOGRAPHY_TS = (file: string) =>
+    file === 'size-extras.ts' || file.startsWith('font-family-')
+  for (const file of existingTypographyTsFiles) {
+    if (
+      file.endsWith('.ts') &&
+      file !== 'index.ts' &&
+      !KEPT_TYPOGRAPHY_TS(file)
+    ) {
+      await fs.promises.unlink(path.join(tsBuildPath, file))
+    }
+  }
+
   // Write aggregated spacing JSON for derived tokens
   const aggregatedJson = createAggregatedSpacingJson()
   const aggregatedPath = path.join(os.tmpdir(), 'eds-aggregated-spacing.json')
@@ -831,6 +852,12 @@ export async function createSpacingAndTypographyVariables({
     }),
   )
 
+  // Font-size builds emit CSS plus a temporary per-size TS file. The TS
+  // is consumed by the size-extras post-step (below) to extract the three
+  // family-independent values (icon-size, gap-horizontal, gap-vertical)
+  // into a single size-extras.ts; the temporary per-size files are then
+  // deleted by the cleanup pass that runs at the next invocation, or
+  // explicitly here at the end of this build.
   const fontSizePromises = fontSizeConfig.map((size) =>
     buildTokenDictionary({
       include: [
@@ -850,6 +877,14 @@ export async function createSpacingAndTypographyVariables({
     }),
   )
 
+  // Font-weight, line-height, and tracking axes do NOT emit TS output.
+  // In CSS these axis files work as runtime selectors via the data-* cascade
+  // (e.g. [data-tracking="wide"] picks --tracking-wide from the active size).
+  // Style Dictionary cannot represent runtime mode switching, so a static
+  // TS export for one of these axes can only contain a single arbitrary cell
+  // from the family matrix — silently wrong for every other combination.
+  // Non-CSS consumers should use composeTextStyle from @equinor/eds-tokens
+  // instead, which resolves all five axes against the family matrix.
   const fontWeightPromises = fontWeightConfig.map(({ mode, slug }) =>
     buildTokenDictionary({
       include: [
@@ -866,8 +901,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-font-weight="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'font-weight'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -887,8 +920,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-line-height="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'line-height'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -908,8 +939,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-tracking="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'tracking'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -920,4 +949,69 @@ export async function createSpacingAndTypographyVariables({
     ...lineHeightPromises,
     ...trackingPromises,
   ])
+
+  // Aggregate the family-independent size-axis extras (icon-size,
+  // gap-horizontal, gap-vertical) into a single size-extras.ts file. These
+  // three numbers are the only data in the per-size builds that doesn't
+  // depend on font-family — everything else is read by composeTextStyle
+  // from the font-family-* matrices. We extract them by parsing the
+  // per-size TS files Style Dictionary just emitted (numeric pixel values
+  // already resolved), then delete those temporary per-size files so they
+  // don't ship.
+  const sizeExtras: Record<
+    string,
+    { iconSize: number; gapHorizontal: number; gapVertical: number }
+  > = {}
+
+  const numberFor = (text: string, key: string): number => {
+    const m = new RegExp(`${key}:\\s*(-?[\\d.]+)`).exec(text)
+    if (!m) {
+      throw new Error(`size-extras: ${key} not found while parsing per-size TS`)
+    }
+    return parseFloat(m[1])
+  }
+
+  for (const size of fontSizeConfig) {
+    const sizeKey = size.toLowerCase()
+    const tsPath = path.join(tsBuildPath, `font-size-${sizeKey}.ts`)
+    const text = await fs.promises.readFile(tsPath, 'utf-8')
+    sizeExtras[sizeKey] = {
+      iconSize: numberFor(text, 'iconSize'),
+      gapHorizontal: numberFor(text, 'gapHorizontal'),
+      gapVertical: numberFor(text, 'gapVertical'),
+    }
+  }
+
+  const sizeExtrasLines = Object.entries(sizeExtras)
+    .map(
+      ([k, v]) =>
+        `  '${k}': { iconSize: ${v.iconSize}, gapHorizontal: ${v.gapHorizontal}, gapVertical: ${v.gapVertical} },`,
+    )
+    .join('\n')
+
+  const sizeExtrasContent = [
+    '/**',
+    ' * Do not edit directly, this file was auto-generated.',
+    ' */',
+    '',
+    'export const sizeExtras = {',
+    sizeExtrasLines,
+    '} as const',
+    '',
+  ].join('\n')
+
+  await fs.promises.writeFile(
+    path.join(tsBuildPath, 'size-extras.ts'),
+    sizeExtrasContent,
+  )
+
+  // Delete the temporary per-size TS files. The cleanup pass at the top of
+  // this function would also remove them on next run, but doing it here
+  // means a single build leaves the directory in its final state.
+  for (const size of fontSizeConfig) {
+    const sizeKey = size.toLowerCase()
+    await fs.promises
+      .unlink(path.join(tsBuildPath, `font-size-${sizeKey}.ts`))
+      .catch(() => {})
+  }
 }
