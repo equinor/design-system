@@ -109,7 +109,24 @@ Five independent axes, each controlled by a `data-*` attribute:
 - **Line height** (`🅰️ Line height.*.json`) — `data-line-height`: `default`, `squished`
 - **Tracking** (`🅰️ Tracking.*.json`) — `data-tracking`: `tight`, `normal`, `wide`, `loose`
 
-Output: `build/css/typography/` (CSS) and `build/ts/typography/` (TypeScript nested objects)
+Output: `build/css/typography/` (CSS, all five axes) and `build/ts/typography/` (TypeScript: `font-family-{ui,header}.ts` + `size-extras.ts` only).
+
+#### Why TS output is minimal
+
+Style Dictionary cannot represent runtime mode switching (which is what `data-*` cascade gives the CSS output). A TS file for `tracking-wide`, `font-weight-normal`, `line-height-default`, or any single `font-size-md` row would have to bake one cell from the size × family matrix and silently be wrong for any other combination. The build therefore emits TS only for self-contained values:
+
+- `font-family-{ui,header}.ts` — the full size matrix per family (font-size, line-height, tracking, weight per size).
+- `size-extras.ts` — the family-independent size-axis extras (`iconSize`, `gapHorizontal`, `gapVertical`) keyed by `fontSize`.
+
+Non-CSS consumers should use `composeTextStyle` from `@equinor/eds-tokens` (in `src/typography/composeTextStyle.ts`). It resolves all five axes against the family matrix and the size-extras file. Figma remains the single source of truth — when a Figma sync regenerates these files, the helper picks up the new values automatically.
+
+#### Build-time aggregation of `size-extras.ts`
+
+`createSpacingAndTypographyVariables.ts` runs the per-size font-size builds with `rootName`/`tsBuildPath` set, which produces 10 temporary `font-size-{xs..6xl}.ts` files. A post-step then reads `iconSize`/`gapHorizontal`/`gapVertical` from each, writes a single `size-extras.ts` keyed by `fontSize`, and deletes the temporary per-size files. This is a pragmatic choice — Style Dictionary's resolved-value APIs aren't ergonomic for cross-source aggregation, and the per-size CSS files use `var(...)` references rather than literal pixels (`outputReferences: true`). Reading the temp TS files gives us already-resolved numeric values for free.
+
+#### Build-order dependency
+
+Because the helper imports from `build/ts/typography/`, those files must exist before `pnpm run build` (rollup + tsc) or `pnpm run test` runs. They are committed to git (build/ is gitignored but tracked), so a fresh `pnpm install && pnpm run build` works. But `pnpm run clean` (which is `rimraf build`) removes them — after a clean, you must run `pnpm run build:variables` before `build` or `test` will succeed.
 
 ### Elevation
 

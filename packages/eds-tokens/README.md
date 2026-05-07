@@ -114,6 +114,33 @@ const padding = comfortableSpacing.SPACING_INLINE_MD
 const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
 ```
 
+#### Typography (non-CSS targets)
+
+Typography is composed at runtime from five orthogonal axes. The CSS bundle resolves them via `data-*` attributes; non-CSS consumers (React Native, SSR, design tooling) use `composeTextStyle`:
+
+```typescript
+import { composeTextStyle } from '@equinor/eds-tokens'
+
+const style = composeTextStyle({
+  fontFamily: 'ui',
+  fontSize: 'md',
+  fontWeight: 'normal',
+  lineHeight: 'default',
+  tracking: 'normal',
+})
+// { fontFamily: 'Inter', fontSize: 14, fontWeight: 400,
+//   lineHeight: 20, letterSpacing: 0 }
+
+// React Native — string fontWeight, ready for <Text style={...}>
+const rn = composeTextStyle({
+  fontFamily: 'ui',
+  fontSize: 'md',
+  format: 'react-native',
+})
+```
+
+See [`instructions/typography.md`](./instructions/typography.md) for the full axis model.
+
 ### Importing variables as JSON
 
 The variables are available in two formats:

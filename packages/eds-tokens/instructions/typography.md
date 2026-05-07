@@ -91,67 +91,57 @@ Change typographic properties by updating data attributes -- no CSS changes need
 </small>
 ```
 
-## TypeScript Tokens
+## Using Typography in TypeScript / JavaScript
 
-Typography tokens are available as nested TypeScript objects with `as const` for type safety.
+The CSS cascade is what composes the five axes into a final style. Targets without a cascade -- React Native, server-side rendering, design tooling, plain JS -- need a runtime helper to do the same job.
 
-### Import
-
-```typescript
-import { typography } from '@equinor/eds-tokens/ts/typography/font-size-md'
-import { typography } from '@equinor/eds-tokens/ts/typography/font-family-header'
-import { typography } from '@equinor/eds-tokens/ts/typography/font-weight-normal'
-import { typography } from '@equinor/eds-tokens/ts/typography/line-height-default'
-import { typography } from '@equinor/eds-tokens/ts/typography/tracking-tight'
-```
-
-### Available Files
-
-Each mode of each axis has its own file:
-
-| Axis | Files |
-|------|-------|
-| Font family | `font-family-header`, `font-family-ui` |
-| Font size | `font-size-xs`, `font-size-sm`, `font-size-md`, `font-size-lg`, `font-size-xl`, `font-size-2xl`, `font-size-3xl`, `font-size-4xl`, `font-size-5xl`, `font-size-6xl` |
-| Font weight | `font-weight-lighter`, `font-weight-normal`, `font-weight-bolder` |
-| Line height | `line-height-default`, `line-height-squished` |
-| Tracking | `tracking-tight`, `tracking-normal`, `tracking-wide`, `tracking-loose` |
-
-### Usage
+### `composeTextStyle` (recommended)
 
 ```typescript
-import { typography } from '@equinor/eds-tokens/ts/typography/font-size-md'
+import { composeTextStyle } from '@equinor/eds-tokens'
 
-// Font size files contain resolved values for that size
-typography.typography['font-size']        // '16'
-typography.typography['line-height-default'] // '20'
-typography.typography['font-weight-normal'] // '400'
+const style = composeTextStyle({
+  fontFamily: 'ui',     // 'ui' | 'header'
+  fontSize: 'md',        // 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'
+  fontWeight: 'normal',  // 'lighter' | 'normal' | 'bolder' (default 'normal')
+  lineHeight: 'default', // 'default' | 'squished' (default 'default')
+  tracking: 'normal',    // 'tight' | 'normal' | 'wide' | 'loose' (default 'normal')
+})
+// { fontFamily: 'Inter', fontSize: 14, fontWeight: 400,
+//   lineHeight: 20, letterSpacing: 0 }
 ```
+
+For React Native, request the RN-shaped output (string `fontWeight`):
 
 ```typescript
-import { typography } from '@equinor/eds-tokens/ts/typography/font-family-header'
-
-// Font family files contain the family and all size-specific values
-typography.typography['font-family']      // 'Equinor'
-typography['font-family-size'].md['font-size'] // '16'
+const style = composeTextStyle({
+  fontFamily: 'ui',
+  fontSize: 'md',
+  format: 'react-native',
+})
+// fontWeight is '400' (string) instead of 400 (number)
 ```
 
-### Naming Conversion
+To also get the size-axis extras (`iconSize`, `gapHorizontal`, `gapVertical`), pass `includeSizeExtras: true`. These values scale with `fontSize` and are family-independent.
 
-CSS variable segments map to TypeScript object keys:
+### Raw TypeScript token files
 
-| CSS variable | TypeScript path |
+For consumers that need direct access to the underlying data, two file groups are emitted:
+
+| File group | Contents |
 |---|---|
-| `--eds-typography-font-size` | `typography.typography['font-size']` |
-| `--eds-typography-font-weight` | `typography.typography['font-weight']` |
-| `--eds-typography-tracking` | `typography.typography.tracking` |
+| `@equinor/eds-tokens/ts/typography/font-family-{ui,header}` | Full size matrix per family (font-size, line-height, tracking, weight per size) |
+| `@equinor/eds-tokens/ts/typography/size-extras` | Family-independent size-axis extras (`iconSize`, `gapHorizontal`, `gapVertical`) keyed by `fontSize` |
+
+The other axes (`font-weight-*`, `line-height-*`, `tracking-*`) and the per-size files (`font-size-{xs..6xl}`) intentionally do **not** ship as TypeScript. Their values depend on the active mode of another axis at runtime, so a static TypeScript export cannot represent them without silently picking one cell of the matrix. Use `composeTextStyle` instead.
 
 ## Output Formats
 
 | Format | Import path | Use case |
 |--------|-------------|----------|
 | **CSS variables** | `@equinor/eds-tokens/css/variables` | Standard web styling via data attributes |
-| **TypeScript (nested)** | `@equinor/eds-tokens/ts/typography/*` | Type-safe access with autocomplete |
+| **TypeScript helper** | `@equinor/eds-tokens` (`composeTextStyle`) | Resolved styles for non-CSS consumers (RN, SSR, design tooling) |
+| **TypeScript matrix** | `@equinor/eds-tokens/ts/typography/font-family-*` and `/size-extras` | Direct matrix access when the helper is not enough |
 
 ## Best Practices
 
