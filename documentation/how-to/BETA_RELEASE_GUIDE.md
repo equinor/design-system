@@ -285,7 +285,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 3. **Trigger publish workflow**
    - Detects beta vs stable by checking whether Release Please updated `CHANGELOG.md` (stable) or `src/components/next/CHANGELOG.md` (beta)
    - Publishes to correct npm dist-tag
-   - Deploys Storybook (beta components visible in "EDS 2.0" section)
+   - Storybook deploys automatically via Radix (beta components visible in "EDS 2.0" section)
 
 ## Example Workflow
 

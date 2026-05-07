@@ -51,7 +51,8 @@ For components under development in the `/next` entry point:
    - Beta changes update `src/components/next/CHANGELOG.md`, stable changes update `CHANGELOG.md`
 
 3. **Merge the release PR** → Publishes to `@equinor/eds-core-react@beta`
-   - All releases deploy to Storybook (beta components visible under "EDS 2.0")
+   - Storybook deploys automatically via Radix when changes are merged to `main`
+   - Beta components are visible under "EDS 2.0" in the deployed Storybook
    - Users must install beta version to actually use the components
 
 4. **Test beta release**: `npm install @equinor/eds-core-react@beta`

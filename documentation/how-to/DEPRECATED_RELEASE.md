@@ -65,7 +65,6 @@ The following steps describe the old manual release process, kept for reference:
 - **Run the Workflow**:
   - Select the release branch you created.
   - **Tag for npm**: Use `latest`.
-  - **Environment for Storybook**: Set to `production`.
 - Ensure the workflow runs successfully by reviewing the action logs.
 - Ensure the new version is published to npm [(@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react)
 
