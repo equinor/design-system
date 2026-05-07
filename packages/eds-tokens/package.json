@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/types/src/index.d.ts",
       "import": "./dist/esm/index.mjs",
       "require": "./dist/tokens.cjs",
       "default": "./dist/tokens.cjs"
@@ -21,7 +21,7 @@
     "./ts/spacing/*": "./build/ts/spacing/*.ts",
     "./ts/typography/*": "./build/ts/typography/*.ts"
   },
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/types/src/index.d.ts",
   "main": "./dist/tokens.cjs",
   "license": "MIT",
   "author": {
@@ -49,6 +49,8 @@
     "build": "rollup -c && pnpm run types",
     "dev": "rollup -c -w",
     "types": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prettier:check": "prettier --check src/",
     "build:variables:color-scheme": "build-color-scheme-variables",
     "build:variables:semantic:static": "build-semantic-static-variables",
@@ -107,6 +109,7 @@
     "style-dictionary": "^5.4.0",
     "style-dictionary-utils": "^6.0.1",
     "typescript": "^5.9.3",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
   }
 }
