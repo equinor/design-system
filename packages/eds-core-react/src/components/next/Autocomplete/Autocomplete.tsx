@@ -394,7 +394,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                           ? `Add new option: ${inputValue.trim()}`
                           : 'Add new option'
                       }
-                      active={activeIndex === 0 && customValueTyped}
+                      active={activeIndex === 0}
                       className="add-option"
                       onMouseDown={
                         customValueTyped

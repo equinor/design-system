@@ -16,19 +16,31 @@
       color: var(--eds-color-text-disabled);
     }
 
-    & .add-option {
-      position: sticky;
-      z-index: 1;
-      top: 0;
+    /* Square connecting corners, suppress focus ring, and use medium border when dropdown is open */
+    &:has(input[aria-expanded='true']) .eds-input-container {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+      outline-color: var(--eds-color-border-medium);
+      box-shadow: none;
+    }
 
+    & .eds-menu:popover-open {
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+    }
+
+    & .add-option {
       display: flex;
       gap: var(--eds-generic-gap-horizontal);
       align-items: center;
 
-      background-color: var(--eds-color-bg-floating);
-
       &[aria-disabled='true'] {
         color: var(--eds-color-text-disabled);
+
+        &:hover,
+        &[data-active] {
+          --_bg: transparent;
+        }
       }
     }
 

@@ -1,5 +1,9 @@
 @layer eds-components {
   .eds-menu {
+    /* Override selectable-space to Figma values (global token resolves to comfortable density ~8px) */
+    --eds-selectable-space-vertical: 1rem;
+    --eds-selectable-space-horizontal: 1rem;
+
     /* Anchor positioning — flush below trigger, left-aligned */
     position: fixed;
     top: anchor(bottom);
@@ -9,25 +13,21 @@
     /* Flip above if not enough space below */
     position-try-fallbacks: --eds-menu-top;
 
-    overflow: visible;
+    overflow: clip;
     overflow-y: auto;
 
+    box-sizing: border-box;
     width: anchor-size(width);
     max-block-size: 300px;
     margin: 0;
+    margin-block-start: -1px;
     padding: 0;
-    border: none;
+    border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     border-radius: var(--eds-spacing-border-radius-rounded, 4px);
 
     list-style: none;
 
     background: var(--eds-color-bg-floating);
-    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
-    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
-    box-shadow:
-      0 1px 5px 0 rgb(0 0 0 / 12%),
-      0 2px 2px 0 rgb(0 0 0 / 14%),
-      0 3px 1px -2px rgb(0 0 0 / 20%);
   }
 
   .eds-menu-item {
@@ -35,15 +35,20 @@
 
     cursor: pointer;
 
-    padding-block: var(--eds-container-space-vertical, 0.75rem);
+    padding-block: var(--eds-selectable-space-vertical);
     padding-inline: var(--eds-selectable-space-horizontal);
 
     font-family: var(--eds-typography-ui-body-font-family);
     font-size: var(--eds-typography-ui-body-md-font-size);
+    font-feature-settings: 'lnum', 'tnum';
+    font-weight: var(--eds-typography-font-weight, 400);
     line-height: var(--eds-typography-ui-body-md-line-height-default);
     color: var(--eds-color-text-strong);
+    letter-spacing: var(--eds-typography-tracking, 0);
 
     background: var(--_bg);
+
+    -webkit-font-smoothing: antialiased;
 
     &:hover {
       --_bg: var(--eds-color-bg-fill-muted-default);
@@ -68,4 +73,5 @@
   top: auto;
   bottom: anchor(top);
   left: anchor(left);
+  margin-block: 0 -1px;
 }
