@@ -98,8 +98,6 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         (o) => o.toLowerCase() === inputValue.trim().toLowerCase(),
       )
 
-    // Add item is always index 0 when allowCustomValue; regular options shift by 1
-    const addOptionIndex = allowCustomValue ? 0 : -1
     const totalOptions = filteredOptions.length + (allowCustomValue ? 1 : 0)
 
     const canOpen = !disabled && !readOnly
