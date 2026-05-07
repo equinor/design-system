@@ -2,7 +2,6 @@
 name: Publish icons
 permissions:
   contents: read
-  id-token: write
 on:
   workflow_dispatch:
     inputs:
@@ -49,7 +48,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.12.0'
+          node-version: '22.14.0'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -68,6 +67,9 @@ jobs:
     name: Publish icons to npm
     runs-on: ubuntu-latest
     needs: [packages, setup]
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Use "dist" cache
         id: dist-cache
@@ -80,7 +82,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.12.0'
+          node-version: '22.14.0'
           registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
