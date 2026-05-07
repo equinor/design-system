@@ -98,9 +98,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       allowCustomValue &&
       isFiltering &&
       inputValue.trim() !== '' &&
-      !filteredOptions.some(
-        (o) => o.toLowerCase() === inputValue.trim().toLowerCase(),
-      )
+      filteredOptions.length === 0
 
     const totalOptions = filteredOptions.length + (allowCustomValue ? 1 : 0)
 
@@ -121,11 +119,25 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!isControlled) setInternalValue(e.target.value)
+      const newValue = e.target.value
+      if (!isControlled) setInternalValue(newValue)
       onChange?.(e)
       setIsFiltering(true)
-      setActiveIndex(-1)
       if (canOpen) listboxRef.current?.showPopover()
+
+      const newFiltered = allOptions.filter((o) =>
+        o.toLowerCase().includes(newValue.toLowerCase()),
+      )
+      const willHaveCustomValue =
+        allowCustomValue && newValue.trim() !== '' && newFiltered.length === 0
+
+      if (newFiltered.length === 1) {
+        setActiveIndex(allowCustomValue ? 1 : 0)
+      } else if (willHaveCustomValue) {
+        setActiveIndex(0)
+      } else {
+        setActiveIndex(-1)
+      }
     }
 
     // onFocus handles Tab-into-field; mouse clicks are handled by onClick
