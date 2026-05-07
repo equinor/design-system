@@ -61,7 +61,7 @@ jobs:
               b. Post a single comment (gh issue comment) that:
                    - Politely thanks the author for opening the issue
                    - Lists specifically what information is missing
-                   - Notes that the issue will be closed automatically after 2 days if not updated
+                   - Notes that the issue will be closed automatically after 3 days if not updated
                    - Invites the author to edit the issue or add a comment with the missing details
 
             If COMPLETE: skip this part entirely. Do nothing.
