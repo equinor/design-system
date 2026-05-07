@@ -15,6 +15,8 @@ import { Input } from '../Input'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
 import { Menu, MenuItem } from '../Menu'
+// TODO: replace with next/Progress when available
+import { Progress } from '../../Progress'
 
 export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
   function Autocomplete(
@@ -30,6 +32,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       allowCustomValue,
       onClear,
       clearLabel = 'Clear',
+      loading,
+      loadingText = 'Loading\u2026',
       disabled,
       readOnly,
       invalid,
@@ -295,8 +299,6 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       }
     }, [isOpen]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const iconTone = disabled || readOnly || invalid ? 'neutral' : 'accent'
-
     return (
       <div
         className="eds-autocomplete"
@@ -343,28 +345,28 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                 hasHelperMessage: !!helperMessage,
               })}
               startAdornment={
-                <Icon
-                  data={searchIcon}
-                  className="search-icon"
-                  data-color-appearance={iconTone}
-                />
+                <Icon data={searchIcon} className="search-icon" />
               }
               endAdornment={
-                <Button
-                  variant="ghost"
-                  icon
-                  round
-                  size="small"
-                  tone={invalid ? 'neutral' : 'accent'}
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={handleClear}
-                  aria-label={clearLabel}
-                  aria-hidden={!showClear}
-                  tabIndex={showClear ? undefined : -1}
-                  style={{ visibility: showClear ? 'visible' : 'hidden' }}
-                >
-                  <Icon data={close} />
-                </Button>
+                loading ? (
+                  <Progress.Circular size={16} />
+                ) : (
+                  <Button
+                    variant="ghost"
+                    icon
+                    round
+                    size="small"
+                    tone={invalid ? 'neutral' : 'accent'}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={handleClear}
+                    aria-label={clearLabel}
+                    aria-hidden={!showClear}
+                    tabIndex={showClear ? undefined : -1}
+                    style={{ visibility: showClear ? 'visible' : 'hidden' }}
+                  >
+                    <Icon data={close} />
+                  </Button>
+                )
               }
               {...inputProps}
             />
@@ -377,7 +379,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               aria-label={typeof label === 'string' ? label : undefined}
               onToggle={handleToggle}
             >
-              {totalOptions === 0 ? (
+              {loading ? (
+                <MenuItem aria-disabled="true">{loadingText}</MenuItem>
+              ) : totalOptions === 0 ? (
                 <MenuItem aria-disabled="true">{noOptionsText}</MenuItem>
               ) : (
                 <>

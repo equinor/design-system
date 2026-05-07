@@ -303,10 +303,8 @@ describe('Autocomplete (next)', () => {
     })
 
     it('hides clear button when input is empty', () => {
-      const { container } = render(
-        <Autocomplete label="Fruit" options={options} />,
-      )
-      const btn = container.querySelector('[aria-label="Clear"]')
+      render(<Autocomplete label="Fruit" options={options} />)
+      const btn = screen.getByRole('button', { name: 'Clear', hidden: true })
       expect(btn).toHaveStyle({ visibility: 'hidden' })
     })
 
@@ -328,7 +326,7 @@ describe('Autocomplete (next)', () => {
     })
 
     it('hides clear button when disabled', () => {
-      const { container } = render(
+      render(
         <Autocomplete
           label="Fruit"
           options={options}
@@ -336,7 +334,7 @@ describe('Autocomplete (next)', () => {
           disabled
         />,
       )
-      const btn = container.querySelector('[aria-label="Clear"]')
+      const btn = screen.getByRole('button', { name: 'Clear', hidden: true })
       expect(btn).toHaveStyle({ visibility: 'hidden' })
     })
 
@@ -360,7 +358,7 @@ describe('Autocomplete (next)', () => {
       expect(screen.getByRole('option', { name: /Mango/ })).toBeInTheDocument()
     })
 
-    it('shows placeholder text when allowCustomValue and no custom value typed', async () => {
+    it('shows placeholder text when allowCustomValue and no custom value typed', () => {
       render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
       expect(screen.getByText('Type to add new option')).toBeInTheDocument()
     })
@@ -369,9 +367,7 @@ describe('Autocomplete (next)', () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
       await user.type(screen.getByRole('combobox'), 'Apple')
-      const addOption = screen
-        .getByText('Type to add new option')
-        .closest('[role="option"]')
+      const addOption = screen.getByRole('option', { name: 'Add new option' })
       expect(addOption).toHaveAttribute('aria-disabled', 'true')
     })
 

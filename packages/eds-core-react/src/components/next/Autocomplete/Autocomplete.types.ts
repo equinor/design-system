@@ -30,6 +30,10 @@ export type AutocompleteProps = {
   onClear?: () => void
   /** Accessible label for the clear button. Defaults to "Clear". Override for localisation. */
   clearLabel?: string
+  /** Shows a loading spinner and disables option selection while data is being fetched */
+  loading?: boolean
+  /** Text shown in the dropdown while loading. Defaults to "Loading…" */
+  loadingText?: string
   /** Current value of the search input */
   value?: string
   /** Default value of the search input */

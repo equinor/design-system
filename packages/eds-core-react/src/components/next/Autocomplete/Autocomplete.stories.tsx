@@ -42,6 +42,7 @@ import { Autocomplete } from '@equinor/eds-core-react/next'
     disabled: { control: 'boolean' },
     readOnly: { control: 'boolean' },
     invalid: { control: 'boolean' },
+    loading: { control: 'boolean' },
     placeholder: { control: 'text' },
   },
 }
@@ -118,3 +119,15 @@ export const AllowCustomValue: StoryFn<AutocompleteProps> = () => (
 )
 
 AllowCustomValue.storyName = 'Allow custom value'
+
+export const Loading: StoryFn<AutocompleteProps> = () => (
+  <Autocomplete
+    label="Element"
+    options={[]}
+    placeholder="Search elements"
+    loading
+    helperMessage="Fetching options from server"
+  />
+)
+
+Loading.storyName = 'Loading'
