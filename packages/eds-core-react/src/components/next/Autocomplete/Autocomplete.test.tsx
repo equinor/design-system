@@ -304,8 +304,9 @@ describe('Autocomplete (next)', () => {
 
     it('hides clear button when input is empty', () => {
       render(<Autocomplete label="Fruit" options={options} />)
-      const btn = screen.getByRole('button', { name: 'Clear', hidden: true })
-      expect(btn).toHaveStyle({ visibility: 'hidden' })
+      expect(
+        screen.queryByRole('button', { name: 'Clear' }),
+      ).not.toBeInTheDocument()
     })
 
     it('clears the input value when clear button is clicked', async () => {
@@ -334,8 +335,9 @@ describe('Autocomplete (next)', () => {
           disabled
         />,
       )
-      const btn = screen.getByRole('button', { name: 'Clear', hidden: true })
-      expect(btn).toHaveStyle({ visibility: 'hidden' })
+      expect(
+        screen.queryByRole('button', { name: 'Clear' }),
+      ).not.toBeInTheDocument()
     })
 
     it('uses custom clearLabel for accessibility', async () => {
@@ -367,7 +369,9 @@ describe('Autocomplete (next)', () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
       await user.type(screen.getByRole('combobox'), 'Apple')
-      const addOption = screen.getByRole('option', { name: 'Add new option' })
+      const addOption = screen.getByRole('option', {
+        name: 'Type to add new option',
+      })
       expect(addOption).toHaveAttribute('aria-disabled', 'true')
     })
 
