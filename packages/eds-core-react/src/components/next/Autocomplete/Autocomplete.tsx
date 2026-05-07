@@ -394,7 +394,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                       aria-label={
                         customValueTyped
                           ? `Add new option: ${inputValue.trim()}`
-                          : 'Add new option'
+                          : undefined
                       }
                       aria-posinset={1}
                       aria-setsize={totalOptions}
