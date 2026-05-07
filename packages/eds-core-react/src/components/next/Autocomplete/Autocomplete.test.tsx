@@ -357,21 +357,31 @@ describe('Autocomplete (next)', () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
       await user.type(screen.getByRole('combobox'), 'Mango')
-      expect(screen.getByText('Add: \u201cMango\u201d')).toBeInTheDocument()
+      expect(screen.getByRole('option', { name: /Mango/ })).toBeInTheDocument()
     })
 
-    it('does not show Add option when value matches an existing option', async () => {
+    it('shows placeholder text when allowCustomValue and no custom value typed', async () => {
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      expect(screen.getByText('Type to add new option')).toBeInTheDocument()
+    })
+
+    it('shows disabled Add option when typed value matches an existing option', async () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
       await user.type(screen.getByRole('combobox'), 'Apple')
-      expect(screen.queryByText(/^Add:/)).not.toBeInTheDocument()
+      const addOption = screen
+        .getByText('Type to add new option')
+        .closest('[role="option"]')
+      expect(addOption).toHaveAttribute('aria-disabled', 'true')
     })
 
     it('does not show Add option without allowCustomValue prop', async () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} />)
       await user.type(screen.getByRole('combobox'), 'Mango')
-      expect(screen.queryByText(/^Add:/)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText('Type to add new option'),
+      ).not.toBeInTheDocument()
     })
 
     it('calls onOptionSelect with typed value when Add option is selected via Enter', async () => {
@@ -395,7 +405,7 @@ describe('Autocomplete (next)', () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
       await user.type(screen.getByRole('combobox'), 'Mango')
-      await user.click(screen.getByText('Add: \u201cMango\u201d'))
+      await user.click(screen.getByRole('option', { name: /Mango/ }))
       expect(screen.getByRole('combobox')).toHaveValue('Mango')
     })
   })

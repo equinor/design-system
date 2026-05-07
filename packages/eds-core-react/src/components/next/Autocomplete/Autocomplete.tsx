@@ -8,7 +8,7 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from 'react'
-import { search as searchIcon, close } from '@equinor/eds-icons'
+import { search as searchIcon, close, add_box } from '@equinor/eds-icons'
 import type { AutocompleteProps } from './Autocomplete.types'
 import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
@@ -61,6 +61,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     )
     const effectiveSelected = selectedOption ?? internalSelectedOption
     const [announcement, setAnnouncement] = useState('')
+    const [customOptions, setCustomOptions] = useState<string[]>([])
     const inputRef = useRef<HTMLInputElement | null>(null)
     const listboxRef = useRef<HTMLUListElement | null>(null)
 
@@ -76,13 +77,20 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       [forwardedRef],
     )
 
+    const allOptions = [
+      ...options,
+      ...customOptions.filter(
+        (o) => !options.some((opt) => opt.toLowerCase() === o.toLowerCase()),
+      ),
+    ]
+
     const filteredOptions = isFiltering
-      ? options.filter((option) =>
+      ? allOptions.filter((option) =>
           option.toLowerCase().includes(inputValue.toLowerCase()),
         )
-      : options
+      : allOptions
 
-    const canAddCustomValue =
+    const customValueTyped =
       allowCustomValue &&
       isFiltering &&
       inputValue.trim() !== '' &&
@@ -90,8 +98,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         (o) => o.toLowerCase() === inputValue.trim().toLowerCase(),
       )
 
-    const addOptionIndex = filteredOptions.length
-    const totalOptions = filteredOptions.length + (canAddCustomValue ? 1 : 0)
+    // Add item is always index 0 when allowCustomValue; regular options shift by 1
+    const addOptionIndex = allowCustomValue ? 0 : -1
+    const totalOptions = filteredOptions.length + (allowCustomValue ? 1 : 0)
 
     const canOpen = !disabled && !readOnly
 
@@ -144,11 +153,23 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     }
 
     const handleOptionSelect = (option: string) => {
+      if (
+        allowCustomValue &&
+        !options.some((o) => o.toLowerCase() === option.toLowerCase())
+      ) {
+        setCustomOptions((prev) =>
+          prev.some((o) => o.toLowerCase() === option.toLowerCase())
+            ? prev
+            : [...prev, option],
+        )
+      }
       if (!isControlled) setInternalValue(option)
       setInternalSelectedOption(option)
       onOptionSelect?.(option)
       setIsFiltering(false)
       closeListbox()
+      // Mark as programmatic re-focus so handleFocus doesn't reopen the listbox
+      isMouseInteraction.current = true
       inputRef.current?.focus()
     }
 
@@ -158,6 +179,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       setIsFiltering(false)
       closeListbox()
       onClear?.()
+      isMouseInteraction.current = true
       inputRef.current?.focus()
     }
 
@@ -177,7 +199,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               ? Math.max(
                   0,
                   effectiveSelected
-                    ? filteredOptions.indexOf(effectiveSelected)
+                    ? filteredOptions.indexOf(effectiveSelected) +
+                        (allowCustomValue ? 1 : 0)
                     : 0,
                 )
               : Math.min(activeIndex + 1, totalOptions - 1)
@@ -220,12 +243,19 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         }
         case 'Enter': {
           e.preventDefault()
-          if (!listboxRef.current?.matches(':popover-open') || activeIndex < 0)
+          if (!listboxRef.current?.matches(':popover-open')) break
+          if (activeIndex < 0) {
+            // No keyboard navigation yet — confirm custom value directly if available
+            if (customValueTyped) handleOptionSelect(inputValue.trim())
             break
-          if (canAddCustomValue && activeIndex === addOptionIndex) {
-            handleOptionSelect(inputValue.trim())
-          } else if (filteredOptions[activeIndex]) {
-            handleOptionSelect(filteredOptions[activeIndex])
+          }
+          if (allowCustomValue && activeIndex === 0) {
+            if (customValueTyped) handleOptionSelect(inputValue.trim())
+          } else {
+            const optionIndex = allowCustomValue ? activeIndex - 1 : activeIndex
+            if (filteredOptions[optionIndex]) {
+              handleOptionSelect(filteredOptions[optionIndex])
+            }
           }
           break
         }
@@ -260,8 +290,9 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       if (!isOpen || !effectiveSelected) return
       const index = filteredOptions.indexOf(effectiveSelected)
       if (index >= 0) {
+        const displayIndex = allowCustomValue ? index + 1 : index
         listboxRef.current
-          ?.querySelector(`#${getOptionId(index)}`)
+          ?.querySelector(`#${getOptionId(displayIndex)}`)
           ?.scrollIntoView({ block: 'nearest' })
       }
     }, [isOpen]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -352,29 +383,46 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                 <MenuItem aria-disabled="true">{noOptionsText}</MenuItem>
               ) : (
                 <>
-                  {filteredOptions.map((option, index) => (
+                  {allowCustomValue && (
                     <MenuItem
-                      key={option}
-                      id={getOptionId(index)}
-                      role="option"
-                      aria-selected={option === effectiveSelected}
-                      active={activeIndex === index}
-                      onMouseDown={() => handleOptionSelect(option)}
-                    >
-                      {option}
-                    </MenuItem>
-                  ))}
-                  {canAddCustomValue && (
-                    <MenuItem
-                      id={getOptionId(addOptionIndex)}
+                      id={getOptionId(0)}
                       role="option"
                       aria-selected={false}
-                      active={activeIndex === addOptionIndex}
-                      onMouseDown={() => handleOptionSelect(inputValue.trim())}
+                      aria-disabled={!customValueTyped}
+                      aria-label={
+                        customValueTyped
+                          ? `Add new option: ${inputValue.trim()}`
+                          : 'Add new option'
+                      }
+                      active={activeIndex === 0 && customValueTyped}
+                      className="add-option"
+                      onMouseDown={
+                        customValueTyped
+                          ? () => handleOptionSelect(inputValue.trim())
+                          : undefined
+                      }
                     >
-                      Add: &ldquo;{inputValue}&rdquo;
+                      <Icon data={add_box} aria-hidden="true" />
+                      {customValueTyped
+                        ? inputValue.trim()
+                        : 'Type to add new option'}
                     </MenuItem>
                   )}
+                  {filteredOptions.map((option, index) => {
+                    const displayIndex = allowCustomValue ? index + 1 : index
+                    return (
+                      <MenuItem
+                        key={option}
+                        id={getOptionId(displayIndex)}
+                        role="option"
+                        aria-selected={option === effectiveSelected}
+                        active={activeIndex === displayIndex}
+                        onMouseDown={() => handleOptionSelect(option)}
+                      >
+                        {option}
+                      </MenuItem>
+                    )
+                  })}
                 </>
               )}
             </Menu>

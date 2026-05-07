@@ -8,18 +8,31 @@ figma.connect(
     props: {
       disabled: figma.enum('State', { Disabled: true }),
       readOnly: figma.enum('State', { 'Read-only': true }),
+      allowCustomValue: figma.enum('State', { 'Active Add Option': true }),
       invalid: figma.enum('Validation', { Error: true }),
+      label: figma.boolean('Title + Description', {
+        true: 'Label',
+        false: undefined,
+      }),
       helperMessage: figma.boolean('Helper Message', {
         true: 'Helper message',
         false: undefined,
       }),
     },
-    example: ({ disabled, readOnly, invalid, helperMessage }) => (
+    example: ({
+      disabled,
+      readOnly,
+      allowCustomValue,
+      invalid,
+      label,
+      helperMessage,
+    }) => (
       <Autocomplete
-        label="Label"
+        label={label}
         options={['Option 1', 'Option 2', 'Option 3']}
         disabled={disabled}
         readOnly={readOnly}
+        allowCustomValue={allowCustomValue}
         invalid={invalid}
         helperMessage={helperMessage}
       />

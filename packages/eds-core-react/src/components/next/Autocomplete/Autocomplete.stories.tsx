@@ -106,3 +106,15 @@ export const WithDescription: StoryFn<AutocompleteProps> = () => (
     helperMessage="Start typing to filter options"
   />
 )
+
+export const AllowCustomValue: StoryFn<AutocompleteProps> = () => (
+  <Autocomplete
+    label="Element"
+    options={options}
+    placeholder="Search or add element"
+    allowCustomValue
+    helperMessage="Type a value not in the list to add it"
+  />
+)
+
+AllowCustomValue.storyName = 'Allow custom value'

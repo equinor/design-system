@@ -16,6 +16,22 @@
       color: var(--eds-color-text-disabled);
     }
 
+    & .add-option {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+
+      display: flex;
+      gap: var(--eds-generic-gap-horizontal);
+      align-items: center;
+
+      background-color: var(--eds-color-bg-floating);
+
+      &[aria-disabled='true'] {
+        color: var(--eds-color-text-disabled);
+      }
+    }
+
     &[data-invalid] .eds-menu-item {
       background-color: var(--eds-color-bg-canvas);
 
