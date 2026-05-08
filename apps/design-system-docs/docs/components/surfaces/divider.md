@@ -33,7 +33,7 @@ Use a divider to group related content or separate sections of a layout when whi
 
 ## Accessibility
 
-Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator) and render as a non-interactive `<hr>` element with `role="separator"`.
+Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator) and renders as a native `<hr>`, which has the implicit ARIA role separator.`.
 
 - Use the divider as a decorative separator between groups of related content - it communicates structure visually without becoming an interactive element
 - Keep enough contrast between the divider and its background so the separation reads clearly, while staying subtle enough to avoid clashing with surrounding content
