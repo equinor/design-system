@@ -24,7 +24,6 @@ Use a divider to group related content or separate sections of a layout when whi
 - Use dividers occasionally, to create groupings rather than separate individual items
 - Dividers should be noticeable in a layout, but not clashing
 - Dividers should only be used if elements can't be split using white space
-- Dividers can help establish rhythm and hierarchy
 
 **Avoid dividers for:**
 
