@@ -247,6 +247,12 @@ export default tseslint.config(
         { ignore: ['^@theme', '^@docusaurus', '^@site'] },
       ],
       'import/no-default-export': 'off',
+      // The docs app isn't part of tsconfig.eslint.json's project graph, so
+      // typescript-eslint can't resolve React types here. Downgrade these
+      // type-aware rules to warn — matches how no-unsafe-return / -assignment
+      // / -argument are handled globally above.
+      '@typescript-eslint/no-unsafe-call': 'warn',
+      '@typescript-eslint/no-unsafe-member-access': 'warn',
     },
   },
 
