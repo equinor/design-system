@@ -105,7 +105,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
         ? controlledActive === activeTab
         : $index === activeTab
 
-      const childRef = getElementRef<HTMLButtonElement>(child) ?? null
+      const childRef = getElementRef<HTMLButtonElement>(child)
       const tabRef =
         isActive && childRef
           ? mergeRefs<HTMLButtonElement>(childRef, selectedTabRef)

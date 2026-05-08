@@ -25,13 +25,13 @@ describe('getElementRef', () => {
     expect(getElementRef(element)).toBe(ref)
   })
 
-  it('returns undefined when no ref is set', () => {
+  it('returns null when no ref is set', () => {
     const element = {
       type: 'div',
       props: {},
     } as unknown as ReactElement
 
-    expect(getElementRef(element)).toBeUndefined()
+    expect(getElementRef(element)).toBeNull()
   })
 
   it('prefers props.ref over element.ref when both are present', () => {
