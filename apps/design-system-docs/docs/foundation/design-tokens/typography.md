@@ -1,3 +1,5 @@
+import TypeSpecimen from '@site/src/components/TypeSpecimen'
+
 # Typography
 
 Typography presents hierarchy and organises information as clearly and efficiently as possible. In EDS 2.0 it does more than that — type is also the **minimum spacing unit** the rest of the system is built on. Padding, gap, line-height and component height all derive from the active text size.
@@ -37,75 +39,7 @@ Inter covers all UI text — button labels, form fields, captions, prose. Equino
 
 The same modular scale drives both typefaces. Spacious density (`lg` = 16 px) shown.
 
-<div style={{display: 'grid', gridTemplateColumns: '3rem auto 1fr auto 1fr', columnGap: '1rem', rowGap: '0.75rem', alignItems: 'baseline', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px', margin: '1rem 0', overflowX: 'auto'}}>
-  {/* sizes derived from pow(2, n/5) × 16 px, rounded to nearest 0.5 px */}
-  <code className="specimen-label">step</code>
-  <code className="specimen-label"></code>
-  <span className="specimen-label" style={{fontFamily: 'Inter, sans-serif'}}>Inter — body / UI</span>
-  <code className="specimen-label"></code>
-  <span className="specimen-label" style={{fontFamily: 'Inter, sans-serif'}}>Equinor — headings</span>
-
-<code className="specimen-label">6xl</code>
-<code className="specimen-label">37px</code>
-<span style={{fontSize: '2.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">42px</code>
-<span style={{fontSize: '2.625rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">5xl</code>
-<code className="specimen-label">32px</code>
-<span style={{fontSize: '2rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">36.5px</code>
-<span style={{fontSize: '2.28125rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">4xl</code>
-<code className="specimen-label">28px</code>
-<span style={{fontSize: '1.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">31.5px</code>
-<span style={{fontSize: '1.96875rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">3xl</code>
-<code className="specimen-label">24.5px</code>
-<span style={{fontSize: '1.53125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">27.5px</code>
-<span style={{fontSize: '1.71875rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">2xl</code>
-<code className="specimen-label">21px</code>
-<span style={{fontSize: '1.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">24px</code>
-<span style={{fontSize: '1.5rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">xl</code>
-<code className="specimen-label">18.5px</code>
-<span style={{fontSize: '1.15625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">21px</code>
-<span style={{fontSize: '1.3125rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">lg</code>
-<code className="specimen-label">16px</code>
-<span style={{fontSize: '1rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">18px</code>
-<span style={{fontSize: '1.125rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">md</code>
-<code className="specimen-label">14px</code>
-<span style={{fontSize: '0.875rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">16px</code>
-<span style={{fontSize: '1rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">sm</code>
-<code className="specimen-label">12px</code>
-<span style={{fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">14px</code>
-<span style={{fontSize: '0.875rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-<code className="specimen-label">xs</code>
-<code className="specimen-label">10.5px</code>
-<span style={{fontSize: '0.65625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-<code className="specimen-label">12px</code>
-<span style={{fontSize: '0.75rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
-
-</div>
+<TypeSpecimen />
 
 ### Loading fonts
 
