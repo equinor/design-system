@@ -24,86 +24,87 @@ We search for a balance of options that avoids decision paralysis but still give
 
 ## Typefaces
 
-EDS 2.0 uses three typefaces, each with a clear job:
+EDS 2.0 uses two typefaces, each with a clear job:
 
-| Context             | Typeface                       |
-| ------------------- | ------------------------------ |
-| UI labels & body    | **Inter** (variable)           |
-| Headings            | **Equinor** (brand typeface)   |
-| Code & monospace    | **Commit Mono**                |
+| Context          | Typeface                     |
+| ---------------- | ---------------------------- |
+| UI labels & body | **Inter** (variable)         |
+| Headings         | **Equinor** (brand typeface) |
 
-Inter covers all UI text — button labels, form fields, captions, prose. Equinor is reserved for display headings. Equinor is rendered slightly larger at every step than Inter — its taller x-height needs a small upward bump so headings and surrounding UI text feel like they belong together.
+Inter covers all UI text — button labels, form fields, captions, prose. Equinor is reserved for display headings. Equinor is rendered slightly larger at every step than Inter — its shorter x-height needs a small upward bump so headings and surrounding UI text feel optically equivalent.
 
 ### Specimens
 
 The same modular scale drives both typefaces. Spacious density (`lg` = 16 px) shown.
 
 <div style={{display: 'grid', gridTemplateColumns: '3rem auto 1fr auto 1fr', columnGap: '1rem', rowGap: '0.75rem', alignItems: 'baseline', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px', margin: '1rem 0', overflowX: 'auto'}}>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>step</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}></code>
-  <span style={{fontSize: '0.75rem', opacity: 0.6, fontFamily: 'Inter, sans-serif'}}>Inter — body / UI</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}></code>
-  <span style={{fontSize: '0.75rem', opacity: 0.6, fontFamily: 'Inter, sans-serif'}}>Equinor — headings</span>
+  {/* sizes derived from pow(2, n/5) × 16 px, rounded to nearest 0.5 px */}
+  <code className="specimen-label">step</code>
+  <code className="specimen-label"></code>
+  <span className="specimen-label" style={{fontFamily: 'Inter, sans-serif'}}>Inter — body / UI</span>
+  <code className="specimen-label"></code>
+  <span className="specimen-label" style={{fontFamily: 'Inter, sans-serif'}}>Equinor — headings</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>6xl</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>37px</code>
-  <span style={{fontSize: '2.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>42px</code>
-  <span style={{fontSize: '2.625rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">6xl</code>
+<code className="specimen-label">37px</code>
+<span style={{fontSize: '2.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">42px</code>
+<span style={{fontSize: '2.625rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>5xl</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>32px</code>
-  <span style={{fontSize: '2rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>36.5px</code>
-  <span style={{fontSize: '2.28125rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">5xl</code>
+<code className="specimen-label">32px</code>
+<span style={{fontSize: '2rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">36.5px</code>
+<span style={{fontSize: '2.28125rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>4xl</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>28px</code>
-  <span style={{fontSize: '1.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>31.5px</code>
-  <span style={{fontSize: '1.96875rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">4xl</code>
+<code className="specimen-label">28px</code>
+<span style={{fontSize: '1.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">31.5px</code>
+<span style={{fontSize: '1.96875rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>3xl</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>24.5px</code>
-  <span style={{fontSize: '1.53125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>27.5px</code>
-  <span style={{fontSize: '1.71875rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">3xl</code>
+<code className="specimen-label">24.5px</code>
+<span style={{fontSize: '1.53125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">27.5px</code>
+<span style={{fontSize: '1.71875rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>2xl</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>21px</code>
-  <span style={{fontSize: '1.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>24px</code>
-  <span style={{fontSize: '1.5rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">2xl</code>
+<code className="specimen-label">21px</code>
+<span style={{fontSize: '1.3125rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">24px</code>
+<span style={{fontSize: '1.5rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>xl</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>18.5px</code>
-  <span style={{fontSize: '1.15625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>21px</code>
-  <span style={{fontSize: '1.3125rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">xl</code>
+<code className="specimen-label">18.5px</code>
+<span style={{fontSize: '1.15625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">21px</code>
+<span style={{fontSize: '1.3125rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>lg</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>16px</code>
-  <span style={{fontSize: '1rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>18px</code>
-  <span style={{fontSize: '1.125rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">lg</code>
+<code className="specimen-label">16px</code>
+<span style={{fontSize: '1rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">18px</code>
+<span style={{fontSize: '1.125rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>md</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>14px</code>
-  <span style={{fontSize: '0.875rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>16px</code>
-  <span style={{fontSize: '1rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">md</code>
+<code className="specimen-label">14px</code>
+<span style={{fontSize: '0.875rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">16px</code>
+<span style={{fontSize: '1rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>sm</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>12px</code>
-  <span style={{fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>14px</code>
-  <span style={{fontSize: '0.875rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">sm</code>
+<code className="specimen-label">12px</code>
+<span style={{fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">14px</code>
+<span style={{fontSize: '0.875rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
 
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>xs</code>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>10.5px</code>
-  <span style={{fontSize: '0.65625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
-  <code style={{fontSize: '0.75rem', opacity: 0.6}}>12px</code>
-  <span style={{fontSize: '0.75rem', fontFamily: 'Equinor, serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+<code className="specimen-label">xs</code>
+<code className="specimen-label">10.5px</code>
+<span style={{fontSize: '0.65625rem', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap'}}>I'm body text</span>
+<code className="specimen-label">12px</code>
+<span style={{fontSize: '0.75rem', fontFamily: 'Equinor, sans-serif', whiteSpace: 'nowrap'}}>I'm a heading</span>
+
 </div>
 
 ### Loading fonts
@@ -111,7 +112,10 @@ The same modular scale drives both typefaces. Spacious density (`lg` = 16 px) sh
 To use EDS components correctly, you must load both font families. The recommended approach is the EDS variable font stylesheet, which includes both Equinor and Inter:
 
 ```html
-<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css"
+/>
 ```
 
 :::warning eds-uprights-vf.css required for EDS 2.0 components
@@ -122,39 +126,44 @@ The older `equinor-font.css` stylesheet only includes the Equinor font. If you u
 
 Too many type sizes cause confusion. EDS 2.0 uses a single modular scale with ten steps from `xs` to `6xl`, anchored at `lg`. Steps follow a geometric progression — five steps per octave (`pow(2, n/5)`) — so consecutive sizes always feel like the same kind of jump.
 
-| Step  | Multiplier         | Spacious (lg = 16px) |
-| ----- | ------------------ | -------------------- |
-| `xs`  | ×2^(−3/5) ≈ 0.66   | 0.65625rem (10.5px)  |
-| `sm`  | ×2^(−2/5) ≈ 0.76   | 0.75rem (12px)       |
-| `md`  | ×2^(−1/5) ≈ 0.87   | 0.875rem (14px)      |
-| `lg`  | ×1                 | 1rem (16px)          |
-| `xl`  | ×2^(1/5) ≈ 1.15    | 1.15625rem (18.5px)  |
-| `2xl` | ×2^(2/5) ≈ 1.32    | 1.3125rem (21px)     |
-| `3xl` | ×2^(3/5) ≈ 1.52    | 1.53125rem (24.5px)  |
-| `4xl` | ×2^(4/5) ≈ 1.74    | 1.75rem (28px)       |
-| `5xl` | ×2^(5/5) = 2       | 2rem (32px)          |
-| `6xl` | ×2^(6/5) ≈ 2.30    | 2.3125rem (37px)     |
+| Step  | Multiplier       | Spacious (lg = 16px) |
+| ----- | ---------------- | -------------------- |
+| `xs`  | ×2^(−3/5) ≈ 0.66 | 0.65625rem (10.5px)  |
+| `sm`  | ×2^(−2/5) ≈ 0.76 | 0.75rem (12px)       |
+| `md`  | ×2^(−1/5) ≈ 0.87 | 0.875rem (14px)      |
+| `lg`  | ×1               | 1rem (16px)          |
+| `xl`  | ×2^(1/5) ≈ 1.15  | 1.15625rem (18.5px)  |
+| `2xl` | ×2^(2/5) ≈ 1.32  | 1.3125rem (21px)     |
+| `3xl` | ×2^(3/5) ≈ 1.52  | 1.53125rem (24.5px)  |
+| `4xl` | ×2^(4/5) ≈ 1.74  | 1.75rem (28px)       |
+| `5xl` | ×2^(5/5) = 2     | 2rem (32px)          |
+| `6xl` | ×2^(6/5) ≈ 2.30  | 2.3125rem (37px)     |
+
+:::warning Reserve `xs` for decoration
+At spacious density `xs` is 10.5 px and at comfortable it falls to ~9 px — below the practical WCAG 2.1 SC 1.4.4 minimum for readable body text. Use it for decorative or supplementary labels (badges, captions on dense visualisations), never for body copy or primary content.
+:::
 
 <iframe
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-foundation-typography--ui-text"
   width="100%"
   height="520"
-  frameborder="1"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-foundation-typography--ui-text)
+
+_Demo shows `xs`–`3xl`; the full scale extends to `6xl`._
 
 ## Density
 
 The whole scale shifts when density changes — only the `--_base` value moves; every derived size and line-height re-derives automatically.
 
-| Density               | Base    |
-| --------------------- | ------- |
-| Spacious (default)    | 16 px   |
-| Comfortable           | 14 px   |
+| Density            | Base  |
+| ------------------ | ----- |
+| Spacious (default) | 16 px |
+| Comfortable        | 14 px |
 
-Density is applied by setting `data-density` on an ancestor element. Components within that ancestor then read the cascaded base.
+Density is applied by setting `data-density` on an ancestor element. Components within that ancestor then read the cascaded base. The cascade reaches every typography axis (`font-size`, `line-height`, `tracking`, `font-weight`), so a single `data-density` is enough — you don't need to set `data-font-size` or other axes on individual components.
 
 ```html
 <div data-density="comfortable">
@@ -178,10 +187,11 @@ Every size step has two line-height variants. Pick the one that matches what the
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-foundation-typography--long-form-text"
   width="100%"
   height="640"
-  frameborder="1"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-foundation-typography--long-form-text)
+
+_Demo shows `xs`–`3xl`; the full scale extends to `6xl`._
 
 <details>
 <summary>Line-height multipliers per step</summary>
@@ -232,17 +242,22 @@ Knowing the category up-front tells you which line-height variant to pick and wh
 
 ## Tokens
 
-| Concept         | Token                                                              |
-| --------------- | ------------------------------------------------------------------ |
-| Font family     | `--eds-typography-header-font-family`                              |
-|                 | `--eds-typography-ui-body-font-family`                             |
-| Font size       | `--eds-typography-ui-body-{size}-font-size`                        |
-| Font weight     | `--eds-font-weight-lighter` &middot; `--eds-font-weight-normal` &middot; `--eds-font-weight-bolder` |
-| Line height     | `--eds-typography-ui-body-{size}-line-height-default`              |
-|                 | `--eds-typography-ui-body-{size}-line-height-squished`             |
-| Letter spacing  | `--eds-typography-letter-spacing-tight` &middot; `--eds-typography-letter-spacing-normal` &middot; `--eds-typography-letter-spacing-loose` |
+| Concept     | Token                                                   |
+| ----------- | ------------------------------------------------------- |
+| Font family | `--eds-typography-header-font-family`                   |
+|             | `--eds-typography-ui-body-font-family`                  |
+| Font size   | `--eds-typography-ui-body-{size}-font-size`             |
+|             | `--eds-typography-header-{size}-font-size`              |
+| Font weight | `--eds-typography-{family}-{size}-font-weight-lighter`  |
+|             | `--eds-typography-{family}-{size}-font-weight-normal`   |
+|             | `--eds-typography-{family}-{size}-font-weight-bolder`   |
+| Line height | `--eds-typography-{family}-{size}-line-height-default`  |
+|             | `--eds-typography-{family}-{size}-line-height-squished` |
+| Tracking    | `--eds-typography-{family}-{size}-tracking-tight`       |
+|             | `--eds-typography-{family}-{size}-tracking-normal`      |
+|             | `--eds-typography-{family}-{size}-tracking-wide`        |
 
-`{size}` is one of `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`.
+`{family}` is one of `ui-body`, `header`. `{size}` is one of `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`.
 
 ## Implementation in Figma
 
@@ -259,19 +274,21 @@ A freshly dragged-in instance leaves every mode at its default, so it inherits w
 
 ## Do's and Don'ts
 
-:::info **Do**
+:::info[Do]
 
 - Pick the line-height variant by what the text is doing — `squished` for controls, `default` for prose
 - Use sentence case (capitalise only the first word) for headings and labels
 - Keep paragraph lines between 55–80 characters
 - Treat density as a global setting on an ancestor — don't switch it per component
 - Provide a way to switch back to spacious when you opt into comfortable density
-  :::
 
-:::danger **Don't**
+:::
+
+:::danger[Don't]
 
 - Wrap button or chip labels over multiple lines — shorten the label instead
 - Mix typefaces within a single piece of UI; let Inter do the UI work and Equinor do the headlines
 - Rely on font weight alone to communicate hierarchy without supporting size or position
 - Override `font-size` directly in components — set density on a parent and let the scale re-derive
-  :::
+
+:::
