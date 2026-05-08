@@ -74,7 +74,7 @@ Too many type sizes cause confusion. EDS 2.0 uses a single modular scale with te
 | `6xl` | ×2^(6/5) ≈ 2.30  | 2.3125rem (37px)     |
 
 :::warning Reserve `xs` for decoration
-At spacious density `xs` is 10.5 px and at comfortable it falls to ~9 px — below the practical WCAG 2.1 SC 1.4.4 minimum for readable body text. Use it for decorative or supplementary labels (badges, captions on dense visualisations), never for body copy or primary content.
+At spacious density `xs` is 10.5 px and at comfortable it falls to ~9 px. Use it for decorative or supplementary labels (badges, captions on dense visualisations), never for body copy or primary content.
 :::
 
 <iframe
