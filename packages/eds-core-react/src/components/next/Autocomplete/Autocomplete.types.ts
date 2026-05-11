@@ -18,10 +18,10 @@ export type AutocompleteProps = {
   id?: string
   /** List of options to display in the dropdown */
   options: string[]
-  /** Currently selected option value */
-  selectedOption?: string
-  /** Callback fired when an option is selected */
-  onOptionSelect?: (option: string) => void
+  /** The currently selected option value */
+  value?: string
+  /** Callback fired when the selected value changes */
+  onValueChange?: (value: string) => void
   /** Text shown when no options match the search value */
   noOptionsText?: string
   /** Allow the user to confirm a value not in the options list. Shows an "Add: {value}" option while typing. */
@@ -34,10 +34,10 @@ export type AutocompleteProps = {
   loading?: boolean
   /** Text shown in the dropdown while loading. Defaults to "Loading…" */
   loadingText?: string
-  /** Current value of the search input */
-  value?: string
-  /** Default value of the search input */
-  defaultValue?: string
+  /** Controlled value of the search input text */
+  inputValue?: string
+  /** Default value of the search input text */
+  defaultInputValue?: string
 } & Omit<
   InputProps,
   | 'startAdornment'

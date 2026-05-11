@@ -26,8 +26,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       helperMessage,
       id: providedId,
       options = [],
-      selectedOption,
-      onOptionSelect,
+      value,
+      onValueChange,
       noOptionsText = 'No options',
       allowCustomValue,
       onClear,
@@ -37,8 +37,8 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       disabled,
       readOnly,
       invalid,
-      value,
-      defaultValue,
+      inputValue: inputValueProp,
+      defaultInputValue,
       onChange,
       ...inputProps
     },
@@ -50,28 +50,28 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     const listboxId = `eds-autocomplete-listbox-${uid.replace(/:/g, '')}`
     const anchorName = `--eds-autocomplete-${uid.replace(/:/g, '')}`
 
-    const isControlled = value !== undefined
+    const isControlled = inputValueProp !== undefined
     const [internalValue, setInternalValue] = useState(
-      () => defaultValue ?? selectedOption ?? '',
+      () => defaultInputValue ?? value ?? '',
     )
-    const inputValue = isControlled ? String(value) : internalValue
+    const inputValue = isControlled ? String(inputValueProp) : internalValue
 
     const [isOpen, setIsOpen] = useState(false)
     const [activeIndex, setActiveIndex] = useState(-1)
     const [isFiltering, setIsFiltering] = useState(false)
     const isMouseInteraction = useRef(false)
     const [internalSelectedOption, setInternalSelectedOption] = useState(
-      () => selectedOption,
+      () => value,
     )
-    const effectiveSelected = selectedOption ?? internalSelectedOption
+    const effectiveSelected = value ?? internalSelectedOption
 
-    // Sync input text when selectedOption changes externally (uncontrolled mode)
+    // Sync input text when value (selected option) changes externally (uncontrolled mode)
     useEffect(() => {
-      if (!isControlled && selectedOption !== undefined) {
-        setInternalValue(selectedOption)
-        setInternalSelectedOption(selectedOption)
+      if (!isControlled && value !== undefined) {
+        setInternalValue(value)
+        setInternalSelectedOption(value)
       }
-    }, [selectedOption, isControlled])
+    }, [value, isControlled])
     const [announcement, setAnnouncement] = useState('')
     const [customOptions, setCustomOptions] = useState<string[]>([])
     const inputRef = useRef<HTMLInputElement | null>(null)
@@ -187,7 +187,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       }
       if (!isControlled) setInternalValue(option)
       setInternalSelectedOption(option)
-      onOptionSelect?.(option)
+      onValueChange?.(option)
       setIsFiltering(false)
       closeListbox()
       // Mark as programmatic re-focus so handleFocus doesn't reopen the listbox

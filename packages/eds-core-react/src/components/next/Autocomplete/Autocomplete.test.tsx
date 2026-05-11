@@ -165,21 +165,21 @@ describe('Autocomplete (next)', () => {
       expect(hidePopoverMock).toHaveBeenCalled()
     })
 
-    it('calls onOptionSelect with selected option', async () => {
-      const onOptionSelect = jest.fn()
+    it('calls onValueChange with selected option', async () => {
+      const onValueChange = jest.fn()
       const user = userEvent.setup()
       render(
         <Autocomplete
           label="Fruit"
           options={options}
-          onOptionSelect={onOptionSelect}
+          onValueChange={onValueChange}
         />,
       )
       await user.click(screen.getByRole('combobox'))
       await user.click(
         screen.getByRole('option', { name: 'Apple', hidden: true }),
       )
-      expect(onOptionSelect).toHaveBeenCalledWith('Apple')
+      expect(onValueChange).toHaveBeenCalledWith('Apple')
     })
 
     it('sets input value to selected option', async () => {
@@ -236,18 +236,18 @@ describe('Autocomplete (next)', () => {
     })
 
     it('Enter selects the active option', async () => {
-      const onOptionSelect = jest.fn()
+      const onValueChange = jest.fn()
       const user = userEvent.setup()
       render(
         <Autocomplete
           label="Fruit"
           options={options}
-          onOptionSelect={onOptionSelect}
+          onValueChange={onValueChange}
         />,
       )
       await user.click(screen.getByRole('combobox'))
       await user.keyboard('{ArrowDown}{Enter}')
-      expect(onOptionSelect).toHaveBeenCalledWith('Apple')
+      expect(onValueChange).toHaveBeenCalledWith('Apple')
     })
 
     it('ArrowDown starts at previously selected option on reopen', async () => {
@@ -338,7 +338,7 @@ describe('Autocomplete (next)', () => {
         <Autocomplete
           label="Fruit"
           options={options}
-          defaultValue="Apple"
+          defaultInputValue="Apple"
           disabled
         />,
       )
@@ -391,21 +391,21 @@ describe('Autocomplete (next)', () => {
       ).not.toBeInTheDocument()
     })
 
-    it('calls onOptionSelect with typed value when Add option is selected via Enter', async () => {
-      const onOptionSelect = jest.fn()
+    it('calls onValueChange with typed value when Add option is selected via Enter', async () => {
+      const onValueChange = jest.fn()
       const user = userEvent.setup()
       render(
         <Autocomplete
           label="Fruit"
           options={options}
           allowCustomValue
-          onOptionSelect={onOptionSelect}
+          onValueChange={onValueChange}
         />,
       )
       // 'Mango' matches nothing — Add option is the only item (index 0)
       await user.type(screen.getByRole('combobox'), 'Mango')
       await user.keyboard('{ArrowDown}{Enter}')
-      expect(onOptionSelect).toHaveBeenCalledWith('Mango')
+      expect(onValueChange).toHaveBeenCalledWith('Mango')
     })
 
     it('sets input value to typed value when Add option is selected via click', async () => {
@@ -509,9 +509,7 @@ describe('Autocomplete (next)', () => {
 
     it('marks selected option with aria-selected', async () => {
       const user = userEvent.setup()
-      render(
-        <Autocomplete label="Fruit" options={options} selectedOption="Apple" />,
-      )
+      render(<Autocomplete label="Fruit" options={options} value="Apple" />)
       await user.click(screen.getByRole('combobox'))
       expect(
         screen.getByRole('option', { name: 'Apple', hidden: true }),

@@ -93,7 +93,7 @@ export const ReadOnly: StoryFn<AutocompleteProps> = () => (
   <Autocomplete
     label="Element"
     options={options}
-    defaultValue="Copper"
+    defaultInputValue="Copper"
     readOnly
   />
 )
