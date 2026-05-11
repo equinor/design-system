@@ -60,3 +60,11 @@ export type { ChipProps, ChipTone, ChipVariant } from './Chip'
 
 export { Divider } from './Divider'
 export type { DividerProps } from './Divider'
+
+export { Accordion } from './Accordion'
+export type {
+  AccordionProps,
+  AccordionItemProps,
+  AccordionHeaderProps,
+  AccordionPanelProps,
+} from './Accordion'

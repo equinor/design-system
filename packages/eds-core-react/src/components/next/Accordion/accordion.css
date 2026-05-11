@@ -1,0 +1,109 @@
+@layer eds-components {
+  .eds-accordion {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+  }
+
+  .eds-accordion__item {
+    border-block-start: var(--eds-sizing-stroke-thin) solid
+      var(--eds-color-border-subtle);
+  }
+
+  /* Native marker is replaced by the custom chevron span */
+  .eds-accordion__item::details-content {
+    /* Animate height open/close — calc-size(auto, size) lets us transition to auto.
+     * Older engines fall back to instant open/close. */
+    overflow: clip;
+    block-size: 0;
+    transition:
+      block-size 200ms ease,
+      content-visibility 200ms ease allow-discrete;
+  }
+
+  .eds-accordion__item[open]::details-content {
+    block-size: calc-size(auto, size);
+  }
+
+  /* Header (summary) */
+  .eds-accordion__header {
+    cursor: pointer;
+
+    display: flex;
+    gap: var(--eds-selectable-space-horizontal);
+    align-items: center;
+
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+
+    list-style: none;
+
+    background-color: transparent;
+
+    transition: background-color 150ms ease;
+  }
+
+  /* Hide native marker (Safari) */
+  .eds-accordion__header::-webkit-details-marker {
+    display: none;
+  }
+
+  .eds-accordion__header:hover,
+  .eds-accordion__header:focus-visible {
+    background-color: var(--eds-color-bg-fill-muted-default);
+
+    & .eds-accordion__title {
+      color: var(--eds-color-text-accent-strong);
+    }
+  }
+
+  .eds-accordion__header:focus-visible {
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+  }
+
+  /* Chevron — the icon's built-in `margin-inline: -0.1em` (icon.css) already shrinks
+   * the column to its optical bounds, same pattern as Chip uses for icon alignment. */
+  .eds-accordion__chevron {
+    display: inline-flex;
+
+    /* Dynamic token resolves against data-color-appearance="accent" on the span */
+    color: var(--eds-color-bg-fill-emphasis-default);
+    transition: rotate 200ms ease;
+  }
+
+  .eds-accordion__item[open] > .eds-accordion__header .eds-accordion__chevron {
+    rotate: 180deg;
+  }
+
+  /* Title */
+  .eds-accordion__title {
+    flex: 1;
+    color: var(--eds-color-text-strong);
+  }
+
+  /* Panel — content slot inside details.
+   * Figma spec: padding 16 28 24 46.4. The 46.4 is the title's horizontal start position
+   * in the header — container padding + chevron optical column + chevron-title gap.
+   * Chevron optical column = title line-height (icon.css's `-0.1em` inline margin
+   * collapses the chevron span's outer width to roughly the surrounding line-height,
+   * same pattern Chip uses for icon alignment). All three terms are EDS tokens. */
+  .eds-accordion__panel-content {
+    padding-block: var(--eds-selectable-space-vertical)
+      var(--eds-spacing-vertical-xl);
+    padding-inline: calc(
+        var(--eds-selectable-space-horizontal) * 2 +
+          var(--eds-typography-ui-body-md-line-height-squished)
+      )
+      var(--eds-spacing-horizontal-2xl);
+    color: var(--eds-color-text-subtle);
+  }
+
+  /* Reduced motion: opt out of height/rotation animations */
+  @media (prefers-reduced-motion: reduce) {
+    .eds-accordion__item::details-content,
+    .eds-accordion__chevron {
+      transition: none;
+    }
+  }
+}
