@@ -9,7 +9,7 @@ export default tseslint.config(
     {
         languageOptions: {
             parserOptions: {
-                projectService: true,
+                project: "./tsconfig.eslint.json",
                 tsconfigRootDir: import.meta.dirname,
             },
         },
@@ -21,6 +21,28 @@ export default tseslint.config(
         files: ["**/*.js", "**/*.cjs"],
         ...tseslint.configs.disableTypeChecked,
         rules: { semi: "error", "no-unused-vars": "error" },
+    },
+    {
+        // Unmigrated Slice 2–4 components are excluded from tsc during the migration window.
+        // Type-checked lint rules are disabled here to match — remove each entry as the component is migrated.
+        // Keep in sync with the exclude list in tsconfig.json.
+        files: [
+            "src/components/Accordion/**",
+            "src/components/Autocomplete/**",
+            "src/components/Cell/**",
+            "src/components/Chip/**",
+            "src/components/Environment/**",
+            "src/components/Menu/**",
+            "src/components/OfflineBanner/**",
+            "src/components/Popover/**",
+            "src/components/Progress/**",
+            "src/components/ProgressIndicator/**",
+            "src/components/Search/**",
+            "src/components/Select/**",
+            "src/components/Spacer/**",
+            "src/components/Tabs/**",
+        ],
+        ...tseslint.configs.disableTypeChecked,
     },
 
     globalIgnores([

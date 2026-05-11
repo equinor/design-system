@@ -1,0 +1,8 @@
+{
+    "extends": "./tsconfig.json",
+    // Overrides (not merges) the parent's exclude — intentionally drops the
+    // Slice 2–4 component dirs so ESLint can parse them. Mirror any other
+    // non-migration excludes added to tsconfig.json here.
+    // Keep in sync with the files list in eslint.config.js.
+    "exclude": ["dist", "node_modules", "**/*.spec.ts"]
+}
