@@ -26,8 +26,8 @@ export const SettingsControls = () => {
 
     const iconColor =
         scheme === "dark"
-            ? token.newColors.text.neutral.strong
-            : token.newColors.bg.accent.fillEmphasis.default;
+            ? token.colors.text.neutral.strong
+            : token.colors.bg.accent.fillEmphasis.default;
 
     return (
         <View style={styles.container}>

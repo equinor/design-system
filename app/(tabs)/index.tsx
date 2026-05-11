@@ -3,7 +3,7 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Image, StyleSheet, View } from "react-native";
 
 export default function HomeScreen() {
-    const { newColors, newSpacing } = useToken();
+    const { colors, spacing } = useToken();
     const tabBarHeight = useBottomTabBarHeight();
 
     const styles = StyleSheet.create({
@@ -11,10 +11,10 @@ export default function HomeScreen() {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            paddingHorizontal: newSpacing.spacing.horizontal.threeXl,
-            paddingTop: newSpacing.spacing.vertical.threeXl,
+            paddingHorizontal: spacing.spacing.horizontal.threeXl,
+            paddingTop: spacing.spacing.vertical.threeXl,
             paddingBottom: tabBarHeight,
-            gap: newSpacing.spacing.vertical.lg,
+            gap: spacing.spacing.vertical.lg,
         },
         logo: {
             width: 240,
@@ -35,7 +35,7 @@ export default function HomeScreen() {
             <Typography
                 style={{
                     textAlign: "center",
-                    color: newColors.text.neutral.subtle,
+                    color: colors.text.neutral.subtle,
                 }}
             >
                 Equinor Design System for React Native

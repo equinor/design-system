@@ -36,12 +36,12 @@ function AppContent() {
                 },
                 dark: false,
                 colors: {
-                    background: token.newColors.bg.neutral.canvas,
-                    primary: token.newColors.bg.accent.fillEmphasis.default,
-                    text: token.newColors.text.neutral.strong,
-                    border: token.newColors.border.neutral.medium,
-                    notification: token.newColors.bg.accent.fillEmphasis.active,
-                    card: token.newColors.bg.neutral.surface,
+                    background: token.colors.bg.neutral.canvas,
+                    primary: token.colors.bg.accent.fillEmphasis.default,
+                    text: token.colors.text.neutral.strong,
+                    border: token.colors.border.neutral.medium,
+                    notification: token.colors.bg.accent.fillEmphasis.active,
+                    card: token.colors.bg.neutral.surface,
                 },
             }}
         >

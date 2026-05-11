@@ -1,4 +1,4 @@
-import { Icon, Typography, useToken } from "@equinor/eds-mobile-components";
+import { EDSStyleSheet, Icon, Typography, useStyles, useToken } from "@equinor/eds-mobile-components";
 import edsPkg from "@equinor/eds-mobile-components/package.json";
 import Constants from "expo-constants";
 import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native";
@@ -26,48 +26,8 @@ const LINKS = [
 ];
 
 export default function AboutScreen() {
-    const { newColors, newSpacing } = useToken();
-
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-        },
-        header: {
-            paddingHorizontal: newSpacing.spacing.horizontal.xl,
-            paddingVertical: newSpacing.spacing.vertical.xl,
-            gap: newSpacing.spacing.vertical.md,
-        },
-        groupLabel: {
-            paddingHorizontal: newSpacing.spacing.horizontal.xl,
-            paddingTop: newSpacing.spacing.vertical.lg,
-            paddingBottom: newSpacing.spacing.vertical.xs,
-        },
-        group: {
-            marginHorizontal: newSpacing.spacing.horizontal.xl,
-            borderRadius: newSpacing.spacing.borderRadius.rounded,
-            overflow: "hidden",
-            backgroundColor: newColors.bg.neutral.surface,
-        },
-        rowInner: {
-            paddingHorizontal: newSpacing.spacing.horizontal.lg,
-            paddingVertical: newSpacing.spacing.vertical.md,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-        },
-        rowDivider: {
-            height: StyleSheet.hairlineWidth,
-            backgroundColor: newColors.border.neutral.subtle,
-            marginLeft: newSpacing.spacing.horizontal.lg,
-        },
-        footer: {
-            paddingVertical: newSpacing.spacing.vertical.xl,
-            alignItems: "center",
-        },
-        subtleText: {
-            color: newColors.text.neutral.subtle,
-        },
-    });
+    const styles = useStyles(themeStyles);
+    const { colors } = useToken();
 
     return (
         <ScrollView
@@ -123,7 +83,7 @@ export default function AboutScreen() {
                             <Icon
                                 name="chevron-right"
                                 size={20}
-                                color={newColors.text.neutral.subtle}
+                                color={colors.text.neutral.subtle}
                             />
                         </Pressable>
                     </View>
@@ -138,3 +98,44 @@ export default function AboutScreen() {
         </ScrollView>
     );
 }
+
+const themeStyles = EDSStyleSheet.create((token) => ({
+    container: {
+        flex: 1,
+    },
+    header: {
+        paddingHorizontal: token.spacing.spacing.horizontal.xl,
+        paddingVertical: token.spacing.spacing.vertical.xl,
+        gap: token.spacing.spacing.vertical.md,
+    },
+    groupLabel: {
+        paddingHorizontal: token.spacing.spacing.horizontal.xl,
+        paddingTop: token.spacing.spacing.vertical.lg,
+        paddingBottom: token.spacing.spacing.vertical.xs,
+    },
+    group: {
+        marginHorizontal: token.spacing.spacing.horizontal.xl,
+        borderRadius: token.spacing.spacing.borderRadius.rounded,
+        overflow: "hidden",
+        backgroundColor: token.colors.bg.neutral.surface,
+    },
+    rowInner: {
+        paddingHorizontal: token.spacing.spacing.horizontal.lg,
+        paddingVertical: token.spacing.spacing.vertical.md,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    rowDivider: {
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: token.colors.border.neutral.subtle,
+        marginLeft: token.spacing.spacing.horizontal.lg,
+    },
+    footer: {
+        paddingVertical: token.spacing.spacing.vertical.xl,
+        alignItems: "center",
+    },
+    subtleText: {
+        color: token.colors.text.neutral.subtle,
+    },
+}));

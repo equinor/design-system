@@ -2,15 +2,15 @@ import { Icon, IconProps, useToken } from "@equinor/eds-mobile-components";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
-    const { newColors, newTypography } = useToken();
+    const { colors, typography } = useToken();
 
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: newColors.text.accent.subtle,
-                tabBarInactiveTintColor: newColors.border.neutral.medium,
+                tabBarActiveTintColor: colors.text.accent.subtle,
+                tabBarInactiveTintColor: colors.border.neutral.medium,
                 tabBarLabelStyle: {
-                    fontSize: newTypography.ui.fontFamilySize.sm.fontSize,
+                    fontSize: typography.ui.fontFamilySize.sm.fontSize,
                 },
                 headerShown: false,
             }}

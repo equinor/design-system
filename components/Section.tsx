@@ -26,12 +26,12 @@ export const Section: FC<PropsWithChildren<{ title?: string; style?: StyleProp<V
 
 const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
-        paddingTop: token.newSpacing.spacing.vertical.xl,
-        paddingBottom: token.newSpacing.spacing.inset.md.verticalSquished,
-        paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
-        gap: token.newSpacing.spacing.vertical.lg,
+        paddingTop: token.spacing.spacing.vertical.xl,
+        paddingBottom: token.spacing.spacing.inset.md.verticalSquished,
+        paddingHorizontal: token.spacing.spacing.inset.xl.horizontal,
+        gap: token.spacing.spacing.vertical.lg,
     },
     title: {
-        color: token.newColors.text.neutral.subtle,
+        color: token.colors.text.neutral.subtle,
     },
 }));

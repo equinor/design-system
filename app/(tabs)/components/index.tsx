@@ -36,10 +36,7 @@ export default function ComponentsIndex() {
     };
 
     const renderItem = ({ item }: { item: ComponentItem }) => (
-        <Pressable
-            onPress={() => navigateTo(item.route)}
-            style={styles.row}
-        >
+        <Pressable onPress={() => navigateTo(item.route)} style={styles.row}>
             <Typography>{item.name}</Typography>
             <Icon name="chevron-right" size={20} color={styles.chevron.color} />
         </Pressable>
@@ -74,32 +71,32 @@ export default function ComponentsIndex() {
 
 const tokenStyles = EDSStyleSheet.create((token) => ({
     contentContainer: {
-        backgroundColor: token.newColors.bg.neutral.surface,
+        backgroundColor: token.colors.bg.neutral.surface,
     },
     row: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingVertical: token.newSpacing.spacing.inset.md.verticalSquished,
-        paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
-        backgroundColor: token.newColors.bg.neutral.surface,
+        paddingVertical: token.spacing.spacing.inset.md.verticalSquished,
+        paddingHorizontal: token.spacing.spacing.inset.xl.horizontal,
+        backgroundColor: token.colors.bg.neutral.surface,
     },
     chevron: {
-        color: token.newColors.text.neutral.subtle,
+        color: token.colors.text.neutral.subtle,
     },
     cellDivider: {
-        height: token.newSpacing.sizing.stroke.thin,
-        backgroundColor: token.newColors.border.neutral.medium,
-        marginHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
+        height: token.spacing.sizing.stroke.thin,
+        backgroundColor: token.colors.border.neutral.medium,
+        marginHorizontal: token.spacing.spacing.inset.xl.horizontal,
     },
     sectionSeparator: {
-        height: token.newSpacing.sizing.stroke.thin,
-        backgroundColor: token.newColors.border.neutral.medium,
+        height: token.spacing.sizing.stroke.thin,
+        backgroundColor: token.colors.border.neutral.medium,
     },
     sectionTitle: {
-        paddingVertical: token.newSpacing.spacing.inset.md.verticalSquished,
-        paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
-        backgroundColor: token.newColors.bg.neutral.canvas,
-        color: token.newColors.text.neutral.subtle,
+        paddingVertical: token.spacing.spacing.inset.md.verticalSquished,
+        paddingHorizontal: token.spacing.spacing.inset.xl.horizontal,
+        backgroundColor: token.colors.bg.neutral.canvas,
+        color: token.colors.text.neutral.subtle,
     },
 }));

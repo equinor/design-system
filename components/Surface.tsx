@@ -9,10 +9,10 @@ export const Surface: FC<PropsWithChildren<{ style?: StyleProp<ViewStyle> }>> = 
 
 const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
-        backgroundColor: token.newColors.bg.neutral.surface,
-        marginHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
-        padding: token.newSpacing.spacing.inset.lg.horizontal,
-        gap: token.newSpacing.spacing.vertical.md,
-        borderRadius: token.newSpacing.spacing.borderRadius.rounded,
+        backgroundColor: token.colors.bg.neutral.surface,
+        marginHorizontal: token.spacing.spacing.inset.xl.horizontal,
+        padding: token.spacing.spacing.inset.lg.horizontal,
+        gap: token.spacing.spacing.vertical.md,
+        borderRadius: token.spacing.spacing.borderRadius.rounded,
     },
 }));

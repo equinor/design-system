@@ -13,15 +13,15 @@ import { ScrollView, View } from "react-native";
 
 export default function TypographyScreen() {
     const styles = useStyles(themeStyles);
-    const { newTypography } = useToken();
+    const { typography } = useToken();
 
-    const uiSizes = Object.entries(newTypography.ui.fontFamilySize).map(
+    const uiSizes = Object.entries(typography.ui.fontFamilySize).map(
         ([size, sizeToken]) => ({
             size: size as NonNullable<TypographyUIProps["size"]>,
             sizeToken,
         })
     );
-    const headerSizes = Object.entries(newTypography.header.fontFamilySize).map(
+    const headerSizes = Object.entries(typography.header.fontFamilySize).map(
         ([size, sizeToken]) => ({
             size: size as NonNullable<TypographyHeaderProps["size"]>,
             sizeToken,
@@ -44,9 +44,9 @@ export default function TypographyScreen() {
             <Section style={styles.groupHeader}>
                 <Typography.Header size="lg" weight="bolder">Typography UI</Typography.Header>
                 <Typography>
-                    Uses the {newTypography.ui.typography.fontFamily} typeface.
+                    Uses the {typography.ui.typography.fontFamily} typeface.
                     The default size is lg (
-                    {newTypography.ui.fontFamilySize.lg.fontSize}px). Render via
+                    {typography.ui.fontFamilySize.lg.fontSize}px). Render via
                     the Typography component directly.
                 </Typography>
             </Section>
@@ -59,7 +59,7 @@ export default function TypographyScreen() {
                             <Typography size={size}>Sample Text</Typography>
                             <Typography size="xs">
                                 {size} · {sizeToken.fontSize}px ·{" "}
-                                {newTypography.ui.typography.fontFamily}
+                                {typography.ui.typography.fontFamily}
                             </Typography>
                         </View>
                         {i < uiSizes.length - 1 && (
@@ -72,9 +72,9 @@ export default function TypographyScreen() {
             <Section title="Weight">
                 <Typography>
                     Three weight steps map to font weights{" "}
-                    {newTypography.ui.fontFamilySize.lg.fontWeightLighter},{" "}
-                    {newTypography.ui.fontFamilySize.lg.fontWeightNormal}, and{" "}
-                    {newTypography.ui.fontFamilySize.lg.fontWeightBolder}.
+                    {typography.ui.fontFamilySize.lg.fontWeightLighter},{" "}
+                    {typography.ui.fontFamilySize.lg.fontWeightNormal}, and{" "}
+                    {typography.ui.fontFamilySize.lg.fontWeightBolder}.
                 </Typography>
             </Section>
             <Surface>
@@ -84,7 +84,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         lighter ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.fontWeightLighter}
+                        {typography.ui.fontFamilySize.lg.fontWeightLighter}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -94,7 +94,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         normal ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.fontWeightNormal}
+                        {typography.ui.fontFamilySize.lg.fontWeightNormal}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -104,7 +104,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         bolder ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.fontWeightBolder}
+                        {typography.ui.fontFamilySize.lg.fontWeightBolder}
                     </Typography>
                 </View>
             </Surface>
@@ -122,7 +122,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         tight ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.trackingTight}
+                        {typography.ui.fontFamilySize.lg.trackingTight}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -132,7 +132,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         normal ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.trackingNormal}
+                        {typography.ui.fontFamilySize.lg.trackingNormal}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -141,7 +141,7 @@ export default function TypographyScreen() {
                         The quick brown fox
                     </Typography>
                     <Typography size="xs">
-                        wide · {newTypography.ui.fontFamilySize.lg.trackingWide}
+                        wide · {typography.ui.fontFamilySize.lg.trackingWide}
                     </Typography>
                 </View>
             </Surface>
@@ -158,7 +158,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         default ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.lineHeightDefault}
+                        {typography.ui.fontFamilySize.lg.lineHeightDefault}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -168,7 +168,7 @@ export default function TypographyScreen() {
                     </Typography>
                     <Typography size="xs">
                         squished ·{" "}
-                        {newTypography.ui.fontFamilySize.lg.lineHeightSquished}
+                        {typography.ui.fontFamilySize.lg.lineHeightSquished}
                     </Typography>
                 </View>
             </Surface>
@@ -178,9 +178,9 @@ export default function TypographyScreen() {
             <Section style={styles.groupHeader}>
                 <Typography.Header size="lg" weight="bolder">Typography Header</Typography.Header>
                 <Typography>
-                    Uses the {newTypography.header.typography.fontFamily}{" "}
+                    Uses the {typography.header.typography.fontFamily}{" "}
                     typeface. Access via Typography.Header. The default size is
-                    xl ({newTypography.header.fontFamilySize.xl.fontSize}px).
+                    xl ({typography.header.fontFamilySize.xl.fontSize}px).
                 </Typography>
             </Section>
 
@@ -194,7 +194,7 @@ export default function TypographyScreen() {
                             </Typography.Header>
                             <Typography size="xs">
                                 {size} · {sizeToken.fontSize}px ·{" "}
-                                {newTypography.header.typography.fontFamily}
+                                {typography.header.typography.fontFamily}
                             </Typography>
                         </View>
                         {i < headerSizes.length - 1 && (
@@ -207,10 +207,10 @@ export default function TypographyScreen() {
             <Section title="Weight">
                 <Typography>
                     Three weight steps map to font weights{" "}
-                    {newTypography.header.fontFamilySize.lg.fontWeightLighter},{" "}
-                    {newTypography.header.fontFamilySize.lg.fontWeightNormal},
+                    {typography.header.fontFamilySize.lg.fontWeightLighter},{" "}
+                    {typography.header.fontFamilySize.lg.fontWeightNormal},
                     and{" "}
-                    {newTypography.header.fontFamilySize.lg.fontWeightBolder}.
+                    {typography.header.fontFamilySize.lg.fontWeightBolder}.
                 </Typography>
             </Section>
             <Surface>
@@ -221,7 +221,7 @@ export default function TypographyScreen() {
                     <Typography size="xs">
                         lighter ·{" "}
                         {
-                            newTypography.header.fontFamilySize.lg
+                            typography.header.fontFamilySize.lg
                                 .fontWeightLighter
                         }
                     </Typography>
@@ -234,7 +234,7 @@ export default function TypographyScreen() {
                     <Typography size="xs">
                         normal ·{" "}
                         {
-                            newTypography.header.fontFamilySize.lg
+                            typography.header.fontFamilySize.lg
                                 .fontWeightNormal
                         }
                     </Typography>
@@ -247,7 +247,7 @@ export default function TypographyScreen() {
                     <Typography size="xs">
                         bolder ·{" "}
                         {
-                            newTypography.header.fontFamilySize.lg
+                            typography.header.fontFamilySize.lg
                                 .fontWeightBolder
                         }
                     </Typography>
@@ -267,7 +267,7 @@ export default function TypographyScreen() {
                     </Typography.Header>
                     <Typography size="xs">
                         tight ·{" "}
-                        {newTypography.header.fontFamilySize.lg.trackingTight}
+                        {typography.header.fontFamilySize.lg.trackingTight}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -277,7 +277,7 @@ export default function TypographyScreen() {
                     </Typography.Header>
                     <Typography size="xs">
                         normal ·{" "}
-                        {newTypography.header.fontFamilySize.lg.trackingNormal}
+                        {typography.header.fontFamilySize.lg.trackingNormal}
                     </Typography>
                 </View>
                 <View style={styles.divider} />
@@ -287,7 +287,7 @@ export default function TypographyScreen() {
                     </Typography.Header>
                     <Typography size="xs">
                         wide ·{" "}
-                        {newTypography.header.fontFamilySize.lg.trackingWide}
+                        {typography.header.fontFamilySize.lg.trackingWide}
                     </Typography>
                 </View>
             </Surface>
@@ -305,7 +305,7 @@ export default function TypographyScreen() {
                     <Typography size="xs">
                         default ·{" "}
                         {
-                            newTypography.header.fontFamilySize.lg
+                            typography.header.fontFamilySize.lg
                                 .lineHeightDefault
                         }
                     </Typography>
@@ -318,7 +318,7 @@ export default function TypographyScreen() {
                     <Typography size="xs">
                         squished ·{" "}
                         {
-                            newTypography.header.fontFamilySize.lg
+                            typography.header.fontFamilySize.lg
                                 .lineHeightSquished
                         }
                     </Typography>
@@ -331,13 +331,13 @@ export default function TypographyScreen() {
 
 const themeStyles = EDSStyleSheet.create((token) => ({
     groupHeader: {
-        paddingTop: token.newSpacing.spacing.vertical.threeXl,
+        paddingTop: token.spacing.spacing.vertical.threeXl,
     },
     row: {
-        gap: token.newSpacing.spacing.vertical.twoXs,
+        gap: token.spacing.spacing.vertical.twoXs,
     },
     divider: {
-        height: token.newSpacing.sizing.stroke.thin,
-        backgroundColor: token.newColors.border.neutral.subtle,
+        height: token.spacing.sizing.stroke.thin,
+        backgroundColor: token.colors.border.neutral.subtle,
     },
 }));

@@ -191,7 +191,7 @@ export default function MyScreen() {
 
 const themeStyles = EDSStyleSheet.create((token) => ({
     container: {
-        paddingTop: token.newSpacing.spacing.vertical.threeXl,
+        paddingTop: token.spacing.spacing.vertical.threeXl,
     },
 }));
 ```
@@ -201,9 +201,9 @@ This keeps styling separate from layout and gets full token type-safety and them
 **Use `useToken()` only when the token value must be passed outside a stylesheet** — e.g. rendered as text content, or passed to a third-party API that doesn't accept a style object:
 
 ```tsx
-const { newTypography } = useToken();
+const { typography } = useToken();
 // OK: displaying font size as a string
-<Typography>{newTypography.ui.fontFamilySize.lg.fontSize}px</Typography>
+<Typography>{typography.ui.fontFamilySize.lg.fontSize}px</Typography>
 ```
 
 **Don't:**
@@ -259,9 +259,9 @@ Use `useToken()` only when you need a token value outside a stylesheet (e.g. to 
 ```tsx
 import { useToken } from "@equinor/eds-mobile-components";
 
-const { newTypography } = useToken();
+const { typography } = useToken();
 // Render the font size value as visible text
-<Typography>{newTypography.ui.fontFamilySize.lg.fontSize}px</Typography>
+<Typography>{typography.ui.fontFamilySize.lg.fontSize}px</Typography>
 ```
 
 ### Creating Reusable Section Layouts

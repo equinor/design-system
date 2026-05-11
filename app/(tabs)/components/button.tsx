@@ -148,6 +148,6 @@ const themeStyles = EDSStyleSheet.create((token) => ({
         flexWrap: "wrap",
         justifyContent: "space-evenly",
         alignItems: "center",
-        rowGap: token.newSpacing.spacing.vertical.md,
+        rowGap: token.spacing.spacing.vertical.md,
     },
 }));
