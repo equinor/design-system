@@ -114,37 +114,37 @@ type ButtonStylesProps = {
 
 const tokenStyles = EDSStyleSheet.create(
     (token, { variant, tone, size, disabled }: ButtonStylesProps) => {
-        const borderColor = token.newColors.border[tone].strong;
+        const borderColor = token.colors.border[tone].strong;
         const sizeKey = SIZE_MAP[size];
 
         const textColor = disabled
-            ? token.newColors.text.disabled
-            : token.newColors.text[tone][TEXT_VARIANT_MAP[variant]];
+            ? token.colors.text.disabled
+            : token.colors.text[tone][TEXT_VARIANT_MAP[variant]];
 
-        const borderThickness = token.newSpacing.sizing.stroke.thin;
+        const borderThickness = token.spacing.sizing.stroke.thin;
 
         const hasBorder = variant === "secondary";
         const verticalPaddingBorderOffset = hasBorder ? borderThickness : 0;
 
         return {
             container: {
-                borderRadius: token.newSpacing.spacing.borderRadius.rounded,
+                borderRadius: token.spacing.spacing.borderRadius.rounded,
                 overflow: "hidden",
                 borderColor,
                 borderWidth: hasBorder ? borderThickness : 0,
             },
             squareButtonContainer: {
-                borderRadius: token.newSpacing.spacing.borderRadius.rounded,
+                borderRadius: token.spacing.spacing.borderRadius.rounded,
                 paddingVertical:
-                    token.newSpacing.spacing.inset[sizeKey].verticalSquished -
+                    token.spacing.spacing.inset[sizeKey].verticalSquished -
                     verticalPaddingBorderOffset,
                 paddingHorizontal:
-                    token.newSpacing.spacing.inset[sizeKey].horizontal,
+                    token.spacing.spacing.inset[sizeKey].horizontal,
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
                 gap:
-                    token.newSpacing.spacing.icon[sizeKey].gapHorizontal -
+                    token.spacing.spacing.icon[sizeKey].gapHorizontal -
                     ICON_NEGATIVE_MARGIN,
             },
             text: {

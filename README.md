@@ -63,7 +63,7 @@ import { EDSStyleSheet, useStyles } from "@equinor/eds-mobile-components";
 
 const themeStyles = EDSStyleSheet.create((theme) => ({
     container: {
-        backgroundColor: theme.colors.container.background,
+        backgroundColor: theme.colors.bg.neutral.surface,
         borderRadius: theme.geometry.border.containerBorderRadius,
     },
 }));
@@ -85,8 +85,8 @@ const themeStyles = EDSStyleSheet.create(
     (theme, props: { highlight?: boolean }) => ({
         container: {
             backgroundColor: props.highlight
-                ? theme.colors.interactive.primary
-                : theme.colors.container.background,
+                ? theme.colors.bg.accent.fillEmphasis.default
+                : theme.colors.bg.neutral.surface,
         },
     })
 );

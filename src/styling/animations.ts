@@ -4,6 +4,7 @@ import {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
+import { useColorScheme } from "react-native";
 import { useToken } from "../hooks/useToken";
 
 type DurationKey = "none" | "fast" | "normal" | "slow";
@@ -18,6 +19,7 @@ export const useFadeAnimation = ({
     fadeOutDuration = "normal",
 }: FadeAnimationOptions = {}) => {
     const token = useToken();
+    const colorScheme = useColorScheme();
     const fadeAnimation = useSharedValue(0);
 
     const durationMapping: Record<DurationKey, number> = {
@@ -27,8 +29,8 @@ export const useFadeAnimation = ({
         slow: token.timing.animation.slow,
     };
 
-    // Extract token values before using in worklet
-    const pressedOverlay = token.colors.interactive.pressedOverlay;
+    // No eds-tokens equivalent yet; values match the old interactive.pressedOverlay
+    const pressedOverlay = colorScheme === "dark" ? "#FFFFFF33" : "#00000033";
 
     const handlePressIn = () => {
         fadeAnimation.value = withTiming(1, {

@@ -14,7 +14,7 @@ export const DialogCustomContent = ({ children }: PropsWithChildren) => {
 
 const themeStyles = EDSStyleSheet.create((theme) => ({
     customContentContainer: {
-        padding: theme.spacing.dialog.padding,
+        padding: theme.spacing.spacing.inset.lg.horizontal,
         paddingBottom: 0,
     },
 }));

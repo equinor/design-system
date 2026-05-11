@@ -85,18 +85,18 @@ const themeStyles = EDSStyleSheet.create(
         const { disabled, isActive, pressed, hasLabel } = props;
 
         // Dimensions derived from selectable icon size (Figma uses percentages within 20px icon)
-        const iconSize = theme.newSpacing.sizing.selectable.sm;
+        const iconSize = theme.spacing.sizing.selectable.sm;
         const trackWidth = iconSize * 0.9167; // 91.67% of icon size
         const trackHeight = iconSize * 0.3333; // 33.33% of icon size
         const knobSize = iconSize * 0.5; // 50% of icon size
 
-        const activeTrackColor = theme.newColors.bg.accent.fillMuted.default;
-        const activeKnobColor = theme.newColors.bg.accent.fillEmphasis.default;
-        const inactiveTrackColor = theme.newColors.bg.neutral.fillMuted.default;
+        const activeTrackColor = theme.colors.bg.accent.fillMuted.default;
+        const activeKnobColor = theme.colors.bg.accent.fillEmphasis.default;
+        const inactiveTrackColor = theme.colors.bg.neutral.fillMuted.default;
         const inactiveKnobColor =
-            theme.newColors.bg.neutral.fillEmphasis.default;
-        const disabledTrackColor = theme.newColors.bg.neutral.fillMuted.default;
-        const disabledKnobColor = theme.newColors.text.disabled;
+            theme.colors.bg.neutral.fillEmphasis.default;
+        const disabledTrackColor = theme.colors.bg.neutral.fillMuted.default;
+        const disabledKnobColor = theme.colors.text.disabled;
 
         const trackColor = disabled
             ? disabledTrackColor
@@ -112,28 +112,28 @@ const themeStyles = EDSStyleSheet.create(
 
         const pressedBackground =
             !disabled && pressed
-                ? theme.newColors.bg.accent.fillMuted.default
+                ? theme.colors.bg.accent.fillMuted.default
                 : "transparent";
 
         const paddingH =
-            theme.newSpacing.spacingProportions.squished.lg.horizontal;
+            theme.spacing.spacingProportions.squished.lg.horizontal;
         const paddingV =
-            theme.newSpacing.spacingProportions.squished.lg.vertical;
+            theme.spacing.spacingProportions.squished.lg.vertical;
 
-        const touchTargetSize = theme.newSpacing.sizing.selectable.lg;
+        const touchTargetSize = theme.spacing.sizing.selectable.lg;
 
         return {
             container: {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: hasLabel ? undefined : "center",
-                gap: theme.newSpacing.spacing.icon.lg.gapHorizontal,
+                gap: theme.spacing.spacing.icon.lg.gapHorizontal,
                 ...(hasLabel
                     ? {
                           paddingHorizontal: paddingH,
                           paddingVertical: paddingV,
                           borderRadius:
-                              theme.newSpacing.spacing.borderRadius.rounded,
+                              theme.spacing.spacing.borderRadius.rounded,
                       }
                     : {
                           width: touchTargetSize,
@@ -162,8 +162,8 @@ const themeStyles = EDSStyleSheet.create(
                 fontWeight: "500",
                 lineHeight: 20,
                 color: disabled
-                    ? theme.newColors.text.disabled
-                    : theme.newColors.text.neutral.strong,
+                    ? theme.colors.text.disabled
+                    : theme.colors.text.neutral.strong,
             },
         };
     }

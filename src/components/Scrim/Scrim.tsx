@@ -41,9 +41,9 @@ export const Scrim = ({ isOpen, onPress, children }: ScrimProps) => {
 const themeStyles = EDSStyleSheet.create((theme) => ({
     scrim: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: theme.colors.container.scrim,
-        paddingHorizontal: theme.spacing.container.paddingHorizontal,
-        paddingVertical: theme.spacing.container.paddingVertical,
+        backgroundColor: "rgba(0,0,0,0.4)", // TODO: replace with color token once @equinor/eds-tokens ships a scrim/backdrop color
+        paddingHorizontal: theme.spacing.spacing.horizontal.twoXl,
+        paddingVertical: theme.spacing.spacing.vertical.lg,
     },
     safeAreaView: {
         flex: 1,

@@ -1,7 +1,25 @@
 {
     "extends": "../tsconfig/base.json",
     "include": ["src"],
-    "exclude": ["dist", "node_modules", "**/*.spec.ts"],
+    "exclude": [
+        "dist",
+        "node_modules",
+        "**/*.spec.ts",
+        "src/components/Accordion",
+        "src/components/Autocomplete",
+        "src/components/Cell",
+        "src/components/Chip",
+        "src/components/Environment",
+        "src/components/Menu",
+        "src/components/OfflineBanner",
+        "src/components/Popover",
+        "src/components/Progress",
+        "src/components/ProgressIndicator",
+        "src/components/Search",
+        "src/components/Select",
+        "src/components/Spacer",
+        "src/components/Tabs"
+    ],
     "compilerOptions": {
         /* Visit https://aka.ms/tsconfig to read more about this file */
 

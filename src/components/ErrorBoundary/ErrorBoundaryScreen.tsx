@@ -27,16 +27,16 @@ export const ErrorBoundaryScreen = ({ resetErrorBoundary }: FallbackProps) => {
     );
 };
 
-const theme = EDSStyleSheet.create((theme) => ({
-    title_color: { color: theme.colors.text.danger },
+const theme = EDSStyleSheet.create((token) => ({
+    title_color: { color: token.colors.text.danger.subtle },
     safeAreaContainer: {
-        backgroundColor: theme.colors.container.background,
+        backgroundColor: token.colors.bg.neutral.canvas,
     },
     container: {
-        paddingHorizontal: theme.spacing.container.paddingHorizontal,
-        paddingVertical: theme.spacing.container.paddingVertical,
+        paddingHorizontal: token.spacing.spacing.inset.xl.horizontal,
+        paddingVertical: token.spacing.spacing.inset.xl.verticalSquished,
         justifyContent: "center",
         height: "100%",
-        gap: theme.spacing.spacer.medium,
+        gap: token.spacing.spacing.vertical.lg,
     },
 }));

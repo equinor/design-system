@@ -24,8 +24,8 @@ const themeStyles = EDSStyleSheet.create((theme, align: "left" | "right") => ({
     actionsContainer: {
         flexDirection: "row",
         flexWrap: "wrap",
-        gap: theme.spacing.dialog.gap,
+        gap: theme.spacing.spacing.inset.lg.horizontal,
         justifyContent: align === "left" ? "flex-start" : "flex-end",
-        padding: theme.spacing.dialog.padding,
+        padding: theme.spacing.spacing.inset.lg.horizontal,
     },
 }));

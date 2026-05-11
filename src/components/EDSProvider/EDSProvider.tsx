@@ -1,16 +1,15 @@
 import React, { PropsWithChildren, useMemo } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { createTokenProxy } from "../../styling/createTokenProxy";
 import {
     ColorToken,
     MasterToken,
-    ProxyableMasterToken,
     SpacingToken,
-    WithoutThemeOptionValues,
     comfortableSpacingToken,
     darkColorToken,
+    geometryToken,
     lightColorToken,
     spaciousSpacingToken,
+    timingToken,
     typographyToken,
 } from "../../styling/tokens";
 import { ColorScheme, Density } from "../../styling/types";
@@ -48,18 +47,17 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
         return darkColorToken;
     }, [props.colorScheme]);
 
-    const masterToken = useMemo(() => {
-        const proxy = createTokenProxy(props.colorScheme, props.density);
-        const cleanProxyable = JSON.parse(
-            JSON.stringify(proxy)
-        ) as WithoutThemeOptionValues<ProxyableMasterToken>;
-        return {
-            ...cleanProxyable,
-            newSpacing: spacingToken,
-            newColors: colorToken,
-            newTypography: typographyToken,
-        } satisfies MasterToken;
-    }, [props.colorScheme, props.density, spacingToken, colorToken]);
+    const masterToken = useMemo(
+        () =>
+            ({
+                colors: colorToken,
+                spacing: spacingToken,
+                typography: typographyToken,
+                geometry: geometryToken,
+                timing: timingToken,
+            }) satisfies MasterToken,
+        [colorToken, spacingToken]
+    );
 
     return (
         <EDSContext.Provider

@@ -93,21 +93,21 @@ const themeStyles = EDSStyleSheet.create(
     (theme, props: TextFieldStyleProps) => ({
         adornmentStyle: {
             justifyContent: "center",
-            paddingHorizontal: theme.newSpacing.spacing.inset.sm.horizontal,
+            paddingHorizontal: theme.spacing.spacing.inset.sm.horizontal,
             flexDirection: "row",
-            gap: theme.newSpacing.spacing.icon.sm.gapHorizontal,
+            gap: theme.spacing.spacing.icon.sm.gapHorizontal,
             alignItems: "center",
         },
         label: {
-            paddingHorizontal: theme.newSpacing.spacing.inset.sm.horizontal,
+            paddingHorizontal: theme.spacing.spacing.inset.sm.horizontal,
             color: props.invalid
-                ? theme.newColors.text.danger.subtle
-                : theme.newColors.text.neutral.subtle,
+                ? theme.colors.text.danger.subtle
+                : theme.colors.text.neutral.subtle,
         },
         iconColor: {
             color: props.invalid
-                ? theme.newColors.text.danger.subtle
-                : theme.newColors.text.neutral.strong,
+                ? theme.colors.text.danger.subtle
+                : theme.colors.text.neutral.strong,
         },
     })
 );

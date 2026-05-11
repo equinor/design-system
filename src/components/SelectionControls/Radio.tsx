@@ -47,7 +47,7 @@ export const Radio = ({
     const styles = useStyles(themeStyles, { disabled, hasLabel });
 
     const token = useToken();
-    const pressedColor = token.newColors.bg.accent.fillMuted.default;
+    const pressedColor = token.colors.bg.accent.fillMuted.default;
     const backgroundColors = useMemo(
         () => ({ default: `${pressedColor}00`, pressed: pressedColor }),
         [pressedColor],
@@ -109,24 +109,24 @@ type RadioStyleProps = {
 
 const themeStyles = EDSStyleSheet.create(
     (theme, props: RadioStyleProps) => {
-        const radioSize = theme.newSpacing.sizing.icon.lg;
-        const touchTargetSize = theme.newSpacing.sizing.selectable.lg;
+        const radioSize = theme.spacing.sizing.icon.lg;
+        const touchTargetSize = theme.spacing.sizing.selectable.lg;
 
         return {
             container: {
                 flexDirection: "row",
                 alignItems: "center",
-                gap: theme.newSpacing.spacing.icon.lg.gapHorizontal,
+                gap: theme.spacing.spacing.icon.lg.gapHorizontal,
                 ...(props.hasLabel
                     ? {
                           paddingHorizontal:
-                              theme.newSpacing.spacingProportions.squished.lg
+                              theme.spacing.spacingProportions.squished.lg
                                   .horizontal,
                           paddingVertical:
-                              theme.newSpacing.spacingProportions.squished.lg
+                              theme.spacing.spacingProportions.squished.lg
                                   .vertical,
                           borderRadius:
-                              theme.newSpacing.spacing.borderRadius.rounded,
+                              theme.spacing.spacing.borderRadius.rounded,
                       }
                     : {
                           width: touchTargetSize,
@@ -138,8 +138,8 @@ const themeStyles = EDSStyleSheet.create(
             icon: {
                 size: radioSize,
                 color: props.disabled
-                    ? theme.newColors.text.disabled
-                    : theme.newColors.bg.accent.fillEmphasis.default,
+                    ? theme.colors.text.disabled
+                    : theme.colors.bg.accent.fillEmphasis.default,
             },
             label: {
                 fontSize: 14,
@@ -147,8 +147,8 @@ const themeStyles = EDSStyleSheet.create(
                 lineHeight: 20,
                 letterSpacing: 0,
                 color: props.disabled
-                    ? theme.newColors.text.disabled
-                    : theme.newColors.text.neutral.strong,
+                    ? theme.colors.text.disabled
+                    : theme.colors.text.neutral.strong,
             },
     };
     }

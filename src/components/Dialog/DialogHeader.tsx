@@ -19,16 +19,14 @@ export const DialogHeader: React.FC<PropsWithChildren> = (props) => {
 
 const themeStyles = EDSStyleSheet.create((token) => ({
     header: {
-        minHeight:
-            token.geometry.dimension.dialog.header.height -
-            token.geometry.border.borderWidth,
+        minHeight: token.geometry.dimension.dialog.header.height - token.geometry.border.borderWidth,
         width: "100%",
         borderBottomWidth: token.geometry.border.borderWidth,
-        borderBottomColor: token.newColors.border.neutral.subtle,
-        padding: token.spacing.dialog.padding,
+        borderBottomColor: token.colors.border.neutral.subtle,
+        padding: token.spacing.spacing.inset.lg.horizontal,
         paddingBottom: 0,
     },
     title: {
-        color: token.newColors.text.neutral.strong,
+        color: token.colors.text.neutral.strong,
     },
 }));

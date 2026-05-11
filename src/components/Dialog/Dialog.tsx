@@ -32,7 +32,7 @@ const themeStyles = EDSStyleSheet.create(
     (theme, props: { style: StyleProp<ViewStyle> }) => ({
         dialog: StyleSheet.flatten([
             {
-                backgroundColor: theme.colors.container.elevation.aboveScrim,
+                backgroundColor: theme.colors.bg.floating,
                 maxHeight: "100%",
                 borderRadius: theme.geometry.border.elementBorderRadius,
                 minHeight: theme.geometry.dimension.dialog.minHeight,

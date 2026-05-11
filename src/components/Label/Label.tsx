@@ -39,6 +39,6 @@ const themeStyles = EDSStyleSheet.create((token) => ({
         paddingVertical: 4,
     },
     text: {
-        color: token.newColors.text.neutral.subtle,
+        color: token.colors.text.neutral.subtle,
     },
 }));

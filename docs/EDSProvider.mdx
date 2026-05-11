@@ -42,8 +42,8 @@ import { EDSStyleSheet, useStyles } from '@equinor/eds-mobile-components'
 
 const styles = EDSStyleSheet.create((token) => ({
   container: {
-    backgroundColor: token.newColors.container.background,
-    padding: token.newSpacing.spacer.medium,
+    backgroundColor: token.colors.bg.neutral.surface,
+    padding: token.spacing.spacing.inset.lg.horizontal,
   },
 }))
 ```
@@ -54,7 +54,7 @@ If you need a token value as a plain JS variable — for animations, SVG fills, 
 import { useToken } from '@equinor/eds-mobile-components'
 
 const token = useToken()
-const dangerColor = token.newColors.text.danger.strong
+const dangerColor = token.colors.text.danger.strong
 ```
 
 ## Color scheme

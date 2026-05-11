@@ -103,7 +103,7 @@ export const Input = forwardRef<TextInput, InputProps>(
                     <Icon
                         name="alert-circle"
                         size={16}
-                        style={styles.errorIcon}
+                        color={styles.errorIcon.color}
                     />
                 )}
                 {startText != null && (

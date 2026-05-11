@@ -38,11 +38,11 @@ export const ButtonBackground: FC<PropsWithChildren<ButtonBackgroundProps>> = ({
 
     const backgroundColors = useMemo(() => {
         const mappedVariant = VARIANT_MAP[variant];
-        let defaultColor = token.newColors.bg[tone][mappedVariant]
+        let defaultColor = token.colors.bg[tone][mappedVariant]
             .default as string;
-        const pressedColor = token.newColors.bg[tone][mappedVariant].active;
+        const pressedColor = token.colors.bg[tone][mappedVariant].active;
         if (disabled) {
-            defaultColor = token.newColors.bg.disabled;
+            defaultColor = token.colors.bg.disabled;
         }
 
         if (__DEV__ && (variant === "ghost" || variant === "secondary")) {

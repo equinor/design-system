@@ -11,36 +11,36 @@ export const inputTokenStyles = EDSStyleSheet.create(
 
         // Background color
         const backgroundColor = invalid
-            ? token.newColors.bg.danger.canvas
-            : token.newColors.bg.input;
+            ? token.colors.bg.danger.canvas
+            : token.colors.bg.input;
 
         // Border
         const borderWidth = disabled ? 0 : 1;
         const borderColor = (() => {
             if (disabled) return "transparent";
-            if (readOnly) return token.newColors.bg.disabled;
+            if (readOnly) return token.colors.bg.disabled;
             if (invalid) {
                 return isSelected
-                    ? token.newColors.border.danger.strong
-                    : token.newColors.border.danger.subtle;
+                    ? token.colors.border.danger.strong
+                    : token.colors.border.danger.subtle;
             }
             return isSelected
-                ? token.newColors.border.neutral.strong
-                : token.newColors.border.neutral.subtle;
+                ? token.colors.border.neutral.strong
+                : token.colors.border.neutral.subtle;
         })();
 
         // Text colors
         const textColor = disabled
-            ? token.newColors.text.disabled
-            : token.newColors.text.neutral.strong;
+            ? token.colors.text.disabled
+            : token.colors.text.neutral.strong;
 
         const placeholderColor = disabled
-            ? token.newColors.text.disabled
-            : token.newColors.text.neutral.subtle;
+            ? token.colors.text.disabled
+            : token.colors.text.neutral.subtle;
 
         const adornmentTextColor = disabled
-            ? token.newColors.text.disabled
-            : token.newColors.text.neutral.subtle;
+            ? token.colors.text.disabled
+            : token.colors.text.neutral.subtle;
 
         return {
             contentContainer: {
@@ -49,12 +49,12 @@ export const inputTokenStyles = EDSStyleSheet.create(
                 alignItems: "center",
                 borderWidth,
                 borderColor,
-                borderRadius: token.newSpacing.spacing.borderRadius.rounded,
-                minHeight: token.newSpacing.sizing.selectable.lg,
-                paddingHorizontal: token.newSpacing.spacing.inset.sm.horizontal,
+                borderRadius: token.spacing.spacing.borderRadius.rounded,
+                minHeight: token.spacing.sizing.selectable.lg,
+                paddingHorizontal: token.spacing.spacing.inset.sm.horizontal,
                 paddingVertical:
-                    token.newSpacing.spacing.inset.lg.verticalSquished,
-                gap: token.newSpacing.spacing.icon.sm.gapHorizontal,
+                    token.spacing.spacing.inset.lg.verticalSquished,
+                gap: token.spacing.spacing.icon.sm.gapHorizontal,
             },
             // Typography tokens will replace hardcoded values
             textInput: {
@@ -75,7 +75,7 @@ export const inputTokenStyles = EDSStyleSheet.create(
                 textTransform: "uppercase",
             },
             errorIcon: {
-                color: token.newColors.text.danger.subtle,
+                color: token.colors.text.danger.subtle,
             },
         };
     }

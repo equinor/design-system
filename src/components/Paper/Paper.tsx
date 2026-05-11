@@ -28,7 +28,9 @@ Paper.displayName = "Paper";
 
 const tokenStyles = EDSStyleSheet.create((token, elevation: Elevation) => ({
     container: {
-        backgroundColor: token.colors.container.elevation[elevation],
+        backgroundColor: elevation === "aboveScrim"
+            ? token.colors.bg.floating
+            : token.colors.bg.neutral.surface,
         ...token.geometry.shadow[elevation],
     },
 }));

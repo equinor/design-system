@@ -83,23 +83,23 @@ const tokenStyles = EDSStyleSheet.create(
     (token, { variant, tone, size, round }: IconButtonStyleProps) => {
         const inset = (
             {
-                small: token.newSpacing.spacing.inset.xs,
-                default: token.newSpacing.spacing.inset.sm,
+                small: token.spacing.spacing.inset.xs,
+                default: token.spacing.spacing.inset.sm,
             } satisfies Record<ButtonSize, unknown>
         )[size];
 
         const borderRadius = round
-            ? token.newSpacing.spacing.borderRadius.pill
-            : token.newSpacing.spacing.borderRadius.rounded;
+            ? token.spacing.spacing.borderRadius.pill
+            : token.spacing.spacing.borderRadius.rounded;
 
         return {
             container: {
                 borderRadius,
                 overflow: "hidden",
-                borderColor: token.newColors.border[tone].strong,
+                borderColor: token.colors.border[tone].strong,
                 borderWidth:
                     variant === "secondary"
-                        ? token.newSpacing.sizing.stroke.thin
+                        ? token.spacing.sizing.stroke.thin
                         : 0,
             },
             iconContainer: {

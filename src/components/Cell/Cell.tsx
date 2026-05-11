@@ -213,10 +213,10 @@ const tokenStyles = EDSStyleSheet.create(
         contentContainer: {
             flexDirection: "row",
             alignItems: "center",
-            gap: token.newSpacing.spacing.horizontal.lg,
-            paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
+            gap: token.spacing.spacing.horizontal.lg,
+            paddingHorizontal: token.spacing.spacing.inset.xl.horizontal,
             paddingVertical:
-                token.newSpacing.spacing.inset.xl.verticalSquished,
+                token.spacing.spacing.inset.xl.verticalSquished,
         },
         adornment: {
             flexDirection: "row",
@@ -226,7 +226,7 @@ const tokenStyles = EDSStyleSheet.create(
             left: 0,
             bottom: 0,
             width: "100%",
-            paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
+            paddingHorizontal: token.spacing.spacing.inset.xl.horizontal,
         },
         dividerInner: {
             height: token.geometry.border.borderWidth,
@@ -240,7 +240,7 @@ const tokenStyles = EDSStyleSheet.create(
             borderRightWidth: token.geometry.border.borderWidth,
             borderColor: token.colors.border.medium,
             marginVertical:
-                token.newSpacing.spacing.inset.xl.verticalSquished,
+                token.spacing.spacing.inset.xl.verticalSquished,
         },
         children: {
             flex: 1,

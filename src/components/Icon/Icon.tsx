@@ -2,7 +2,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { ComponentProps } from "react";
 import { TextProps } from "react-native";
 import { useToken } from "../../hooks/useToken";
-import { Color, resolveColor } from "../../styling";
 
 export type IconName = keyof typeof MaterialCommunityIcons.glyphMap;
 
@@ -20,7 +19,7 @@ export type IconProps = MaterialCommunityIconProps & {
     /**
      * The color of the icon.
      */
-    color?: Color;
+    color?: string;
 } & TextProps;
 
 export const Icon = ({ name, size, color, ...rest }: IconProps) => {
@@ -30,7 +29,7 @@ export const Icon = ({ name, size, color, ...rest }: IconProps) => {
             name={name}
             size={size ?? token.geometry.dimension.icon.size}
             {...rest}
-            color={resolveColor(color ?? "textPrimary", token)}
+            color={color ?? token.colors.text.neutral.strong}
         />
     );
 };

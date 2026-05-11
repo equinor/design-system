@@ -35,11 +35,11 @@ const tokenStyles = EDSStyleSheet.create(
     (token, { disabled, size, variant, tone }: ButtonIconStyleProps) => {
         const sizeKey = SIZE_MAP[size];
         const color = disabled
-            ? token.newColors.text.disabled
-            : token.newColors.text[tone][TEXT_VARIANT_MAP[variant]];
+            ? token.colors.text.disabled
+            : token.colors.text[tone][TEXT_VARIANT_MAP[variant]];
         return {
             icon: {
-                fontSize: token.newSpacing.sizing.icon[sizeKey],
+                fontSize: token.spacing.sizing.icon[sizeKey],
                 color,
                 margin: ICON_NEGATIVE_MARGIN,
             },

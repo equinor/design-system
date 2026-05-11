@@ -101,7 +101,7 @@ const themeStyles = EDSStyleSheet.create((theme) => ({
     contentContainer: {
         flex: 1,
         justifyContent: "center",
-        gap: theme.newSpacing.spacing.vertical.sm,
+        gap: theme.spacing.spacing.vertical.sm,
     },
     iconContainer: {
         justifyContent: "center",

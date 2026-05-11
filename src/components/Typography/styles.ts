@@ -20,21 +20,21 @@ export function createTypographyStyles<TGroup extends keyof TypographyToken>(
                 tracking,
             }: TypographyGroupStyleProps<TGroup>
         ) => {
-            const fontFamilySize = token.newTypography[group]
+            const fontFamilySize = token.typography[group]
                 .fontFamilySize as Record<string, TypographySizeToken>;
             const sizeToken = fontFamilySize[size as string];
 
             return {
                 text: {
                     fontFamily:
-                        token.newTypography[group].typography.fontFamily,
+                        token.typography[group].typography.fontFamily,
                     fontSize: sizeToken.fontSize,
                     fontWeight: sizeToken[PROP_TOKEN_FIELD_MAP.weight[weight]],
                     lineHeight:
                         sizeToken[PROP_TOKEN_FIELD_MAP.lineHeight[lineHeight]],
                     letterSpacing:
                         sizeToken[PROP_TOKEN_FIELD_MAP.tracking[tracking]],
-                    color: token.newColors.text.neutral.strong,
+                    color: token.colors.text.neutral.strong,
                 },
             };
         }
