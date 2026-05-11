@@ -380,7 +380,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={handleClear}
                     aria-label={clearLabel}
-                    inert={!showClear ? '' : undefined}
+                    inert={!showClear || undefined}
                     style={{ visibility: showClear ? 'visible' : 'hidden' }}
                   >
                     <Icon data={close} />
