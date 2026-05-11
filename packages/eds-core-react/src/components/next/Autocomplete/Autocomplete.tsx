@@ -5,6 +5,7 @@ import {
   useState,
   useCallback,
   useEffect,
+  useMemo,
   type CSSProperties,
   type KeyboardEvent,
 } from 'react'
@@ -89,18 +90,25 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       [forwardedRef],
     )
 
-    const allOptions = [
-      ...options,
-      ...customOptions.filter(
-        (o) => !options.some((opt) => opt.toLowerCase() === o.toLowerCase()),
-      ),
-    ]
+    const allOptions = useMemo(
+      () => [
+        ...options,
+        ...customOptions.filter(
+          (o) => !options.some((opt) => opt.toLowerCase() === o.toLowerCase()),
+        ),
+      ],
+      [options, customOptions],
+    )
 
-    const filteredOptions = isFiltering
-      ? allOptions.filter((option) =>
-          option.toLowerCase().includes(inputValue.toLowerCase()),
-        )
-      : allOptions
+    const filteredOptions = useMemo(
+      () =>
+        isFiltering
+          ? allOptions.filter((option) =>
+              option.toLowerCase().includes(inputValue.toLowerCase()),
+            )
+          : allOptions,
+      [allOptions, isFiltering, inputValue],
+    )
 
     const customValueTyped =
       allowCustomValue &&
@@ -395,7 +403,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               role="listbox"
               // auto: top-layer + light-dismiss (click outside closes)
               popover="auto"
-              aria-label={typeof label === 'string' ? label : undefined}
+              aria-labelledby={inputId}
               onToggle={handleToggle}
             >
               {loading ? (

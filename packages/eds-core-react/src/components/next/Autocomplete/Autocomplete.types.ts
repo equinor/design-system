@@ -1,12 +1,6 @@
 import type { ReactNode } from 'react'
 import type { InputProps } from '../Input/Input.types'
 
-/**
- * A single autocomplete option.
- * Pass an array of strings or objects with a custom `optionLabel`.
- */
-export type AutocompleteOption = string
-
 export type AutocompleteProps = {
   /** Label for the field */
   label?: ReactNode

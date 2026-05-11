@@ -4,7 +4,10 @@
     --eds-selectable-space-vertical: 1rem;
     --eds-selectable-space-horizontal: 1rem;
 
-    /* Anchor positioning — flush below trigger, left-aligned */
+    /* Anchor positioning — flush below trigger, left-aligned.
+       --menu-anchor is set on the trigger's wrapper by the consuming component
+       (e.g. Autocomplete). Even though the menu is in the top-layer, CSS custom
+       properties still inherit from the original DOM parent, so this works. */
     position: fixed;
     top: anchor(bottom);
     left: anchor(left);
