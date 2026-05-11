@@ -52,7 +52,7 @@ pnpm start -- --clear
 The app uses [Expo Router](https://docs.expo.dev/router/introduction/) for navigation:
 
 - **Root Layout** (`app/_layout.tsx`): Sets up EDSProvider, loads fonts with `useEDS()`, integrates theme from Zustand store
-- **Tab Navigator** (`app/(tabs)/_layout.tsx`): Two tabs - Home and Components
+- **Tab Navigator** (`app/(tabs)/_layout.tsx`): Three tabs - Home, Components, and About
 - **Component Screens** (`app/(tabs)/components/*.tsx`): Individual showcase pages for each component
 
 ### Directory Structure
@@ -63,26 +63,21 @@ app/
 ├── (tabs)/                  # Tab navigator group
 │   ├── _layout.tsx         # Tab navigation configuration
 │   ├── index.tsx           # Home screen
+│   ├── about.tsx           # About screen
 │   └── components/         # Component showcase screens
 │       ├── _layout.tsx     # Components stack navigator
-│       ├── index.tsx       # Components list
-│       ├── paper.tsx       # Example: Paper component showcase
-│       ├── buttons.tsx     # Example: Button component showcase
-│       └── ...             # Other component screens
+│       ├── index.tsx       # Components list (only Slice 1 components shown)
+│       ├── button.tsx      # Button showcase
+│       ├── input.tsx       # Input showcase
+│       ├── selectioncontrols.tsx  # Radio / Switch / Checkbox showcase
+│       ├── typography.tsx  # Typography showcase
+│       └── ...             # Future screens added per slice
 ├── +not-found.tsx          # 404 screen
 
-codeSnippets/               # Code examples for each component
-├── paper.ts
-├── buttons.ts
-└── ...
-
 components/                 # Storybook-specific utility components
-├── CodeDialog.tsx         # Dialog for displaying code snippets
-├── Section.tsx            # Layout helper for screens
-└── ColorSchemeButton.tsx  # Theme switcher button
-
-hooks/
-└── useCodeSnippet.tsx     # Hook for managing code snippet dialogs
+├── Section.tsx            # Layout helper — canvas-level text, titles, descriptions
+├── Surface.tsx            # Wraps component demos with elevated background
+└── SettingsControls.tsx   # Theme and density controls in the header
 
 lib/
 └── store.ts               # Zustand store for app state (theme)
@@ -107,42 +102,27 @@ setScheme("light");   // Force light mode
 setScheme(null);      // Follow system
 ```
 
-### Code Snippet Pattern
+### Screen Layout Pattern
 
-Each component screen uses the `useCodeSnippet` hook to display copyable code examples:
+Component screens follow a consistent two-level hierarchy:
 
-**1. Define code snippets** (`codeSnippets/mycomponent.ts`):
-```ts
-export const basicExample = `import { MyComponent } from "@equinor/eds-mobile-components";
+- **Group headers** (`Typography.Header size="lg" weight="bolder"`) — top-level divisions within a screen (e.g. "Radio Buttons", "Typography UI"). Use a `Section` with extra `paddingTop` to visually separate from the preceding group.
+- **Subsection labels** (`Section title="..."`) — describe what follows (e.g. "With labels", "Sizes"). Rendered as subtle uppercase small text.
+- **Descriptions** (`Section` with `Typography` children) — body text explaining the section.
+- **Demos** (`Surface`) — wraps the actual component examples with an elevated background.
 
-<MyComponent prop="value" />`;
-```
-
-**2. Use in component screen** (`app/(tabs)/components/mycomponent.tsx`):
 ```tsx
-import { basicExample } from "@/codeSnippets/mycomponent";
-import { useCodeSnippet } from "@/hooks/useCodeSnippet";
+<Section style={styles.groupHeader}>
+    <Typography.Header size="lg" weight="bolder">Group Name</Typography.Header>
+</Section>
 
-export default function MyComponentScreen() {
-    const { ViewCode, CodeSnippetDialog } = useCodeSnippet();
-
-    return (
-        <ScrollView>
-            {/* Component examples */}
-
-            <ViewCode title="Basic Example" code={basicExample} />
-
-            {/* Must be at the end */}
-            <CodeSnippetDialog />
-        </ScrollView>
-    );
-}
+<Section title="Subsection label">
+    <Typography>Optional description.</Typography>
+</Section>
+<Surface>
+    <MyComponent />
+</Surface>
 ```
-
-This pattern provides:
-- "View Code" button that opens a dialog
-- Code syntax display with copy-to-clipboard functionality
-- Consistent UX across all component screens
 
 ## Development Workflow
 
@@ -150,16 +130,7 @@ This pattern provides:
 
 When a new component is added to the library, follow these steps:
 
-1. **Create code snippets** in `codeSnippets/mycomponent.ts`:
-```ts
-export const basicUsage = `import { MyComponent } from "@equinor/eds-mobile-components";
-
-<MyComponent />`;
-
-export const advancedUsage = `// More complex example here`;
-```
-
-2. **Create screen file** in `app/(tabs)/components/mycomponent.tsx`:
+1. **Create screen file** in `app/(tabs)/components/mycomponent.tsx`:
 ```tsx
 import { Section } from "@/components/Section";
 import { Surface } from "@/components/Surface";
@@ -170,7 +141,7 @@ export default function MyComponentScreen() {
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
             <Section>
-                <Typography variant="p">
+                <Typography>
                     Description of the component and its use cases.
                 </Typography>
             </Section>
@@ -184,15 +155,9 @@ export default function MyComponentScreen() {
 }
 ```
 
-**Important layout rules:**
-- Use `<Section>` for all text, titles, and descriptions — never hardcoded `StyleSheet` padding
-- Use `<Surface>` to wrap component demos — this creates the canvas → surface → component layering
-- `<Section>` sits on canvas (app background), `<Surface>` provides a distinct elevated background
-- This pattern ensures consistent spacing and visual depth across all screens
+2. **Add to components list** in `app/(tabs)/components/index.tsx` under the appropriate section.
 
-3. **Register the screen** in `app/(tabs)/components/_layout.tsx` (if needed for navigation configuration)
-
-4. **Add to components list** in `app/(tabs)/components/index.tsx` to make it discoverable
+3. **Export the component** from `packages/components/src/index.ts` if not already exported.
 
 ### Component Screen Best Practices
 
@@ -214,15 +179,38 @@ When working on the component library:
 
 ### Styling Guidelines
 
-**For storybook-specific UI:**
-- Use standard `StyleSheet.create()` for layout and storybook-specific components
-- Use EDS components (Paper, Typography, Button, etc.) for content display
-- Keep styles simple and focused on showcasing components
+**Always use `EDSStyleSheet.create` + `useStyles` for styling:**
+
+```tsx
+import { EDSStyleSheet, useStyles } from "@equinor/eds-mobile-components";
+
+export default function MyScreen() {
+    const styles = useStyles(themeStyles);
+    return <View style={styles.container} />;
+}
+
+const themeStyles = EDSStyleSheet.create((token) => ({
+    container: {
+        paddingTop: token.newSpacing.spacing.vertical.threeXl,
+    },
+}));
+```
+
+This keeps styling separate from layout and gets full token type-safety and theme reactivity.
+
+**Use `useToken()` only when the token value must be passed outside a stylesheet** — e.g. rendered as text content, or passed to a third-party API that doesn't accept a style object:
+
+```tsx
+const { newTypography } = useToken();
+// OK: displaying font size as a string
+<Typography>{newTypography.ui.fontFamilySize.lg.fontSize}px</Typography>
+```
 
 **Don't:**
-- Over-style the showcase screens - keep focus on the components
+- Use `useToken()` + inline style objects for regular styling — use `EDSStyleSheet` instead
+- Over-style the showcase screens — keep focus on the components
 - Use hardcoded colors except for code display backgrounds
-- Create complex custom components - use EDS components
+- Create complex custom components — use EDS components
 
 ## Key Dependencies
 
@@ -230,7 +218,6 @@ When working on the component library:
 - `expo` - Platform and build tools
 - `expo-router` - File-based routing
 - `expo-font` - Font loading (required by EDS components)
-- `expo-clipboard` - Copy code snippets
 
 **Navigation:**
 - `@react-navigation/native` - Navigation primitives
@@ -259,24 +246,22 @@ When working on the component library:
 
 ## Common Tasks
 
-### Adding a Theme Switcher
+### Theme and Density Controls
 
-The `ColorSchemeButton` component is available for toggling themes:
-
-```tsx
-import { ColorSchemeButton } from "@/components/ColorSchemeButton";
-
-<ColorSchemeButton />
-```
+Theme (light/dark) and density (spacious/comfortable) are controlled by `SettingsControls`, which is mounted in the stack header via `_layout.tsx`. It reads/writes the Zustand store in `lib/store.ts`. No action needed in individual screens.
 
 ### Accessing Design Tokens
 
-Use `useToken()` from EDS components to access theme values:
+For styling, use `EDSStyleSheet.create((token) => ...)` — the `token` argument gives full access to all design tokens inside the stylesheet factory.
+
+Use `useToken()` only when you need a token value outside a stylesheet (e.g. to render it as text or pass it to a third-party API):
 
 ```tsx
 import { useToken } from "@equinor/eds-mobile-components";
 
-const { newColors, newSpacing } = useToken();
+const { newTypography } = useToken();
+// Render the font size value as visible text
+<Typography>{newTypography.ui.fontFamilySize.lg.fontSize}px</Typography>
 ```
 
 ### Creating Reusable Section Layouts

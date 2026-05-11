@@ -4,17 +4,20 @@ import {
     useStyles,
 } from "@equinor/eds-mobile-components";
 import { FC, PropsWithChildren } from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 
-export const Section: FC<PropsWithChildren<{ title?: string }>> = ({
+export const Section: FC<PropsWithChildren<{ title?: string; style?: StyleProp<ViewStyle> }>> = ({
     title,
     children,
+    style,
 }) => {
     const styles = useStyles(tokenStyles);
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             {title && (
-                <Typography.Header weight="bolder">{title}</Typography.Header>
+                <Typography size="sm" style={styles.title}>
+                    {title.toUpperCase()}
+                </Typography>
             )}
             {children}
         </View>
@@ -23,8 +26,12 @@ export const Section: FC<PropsWithChildren<{ title?: string }>> = ({
 
 const tokenStyles = EDSStyleSheet.create((token) => ({
     container: {
-        paddingVertical: token.newSpacing.spacing.inset.xl.verticalSquished,
+        paddingTop: token.newSpacing.spacing.vertical.xl,
+        paddingBottom: token.newSpacing.spacing.inset.md.verticalSquished,
         paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
         gap: token.newSpacing.spacing.vertical.lg,
+    },
+    title: {
+        color: token.newColors.text.neutral.subtle,
     },
 }));

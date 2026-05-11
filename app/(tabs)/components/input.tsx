@@ -37,18 +37,23 @@ export default function InputScreen() {
                     like icons or buttons.
                 </Typography>
             </Section>
-            <Surface>
-                <Typography>Amount with prefix and suffix text</Typography>
-                <Input startText="€" endText="EUR" placeholder="Amount" />
 
-                <Typography>With icon</Typography>
+            <Section title="Prefix and suffix text" />
+            <Surface>
+                <Input startText="€" endText="EUR" placeholder="Amount" />
+            </Surface>
+
+            <Section title="With icon" />
+            <Surface>
                 <Input
                     startAdornment={<Icon name="magnify" size={16} />}
                     endAdornment={<Icon name="download" size={16} />}
                     placeholder="With icon"
                 />
+            </Surface>
 
-                <Typography>Search</Typography>
+            <Section title="Search with clear" />
+            <Surface>
                 <Input
                     ref={clearableRef}
                     value={clearableValue}
@@ -68,8 +73,10 @@ export default function InputScreen() {
                     }
                     placeholder="Search"
                 />
+            </Surface>
 
-                <Typography>With unit and icon</Typography>
+            <Section title="With unit and icon" />
+            <Surface>
                 <Input
                     endText="kg"
                     endAdornment={<Icon name="download" size={16} />}

@@ -1,11 +1,11 @@
 import {
-    Cell,
     EDSStyleSheet,
+    Icon,
     Typography,
     useStyles,
 } from "@equinor/eds-mobile-components";
 import { useRouter } from "expo-router";
-import { SectionList, View } from "react-native";
+import { Pressable, SectionList, View } from "react-native";
 
 type ComponentItem = { name: string; route: string };
 
@@ -16,55 +16,13 @@ const sections = [
     },
     {
         title: "Data Display",
-        data: [
-            { name: "Cell", route: "cell" },
-            { name: "Chip", route: "chips" },
-            { name: "Icon", route: "icon" },
-            { name: "Label", route: "label" },
-            { name: "Typography", route: "typography" },
-        ],
+        data: [{ name: "Typography", route: "typography" }],
     },
     {
         title: "Data Entry",
         data: [
-            { name: "Autocomplete", route: "autocomplete" },
             { name: "Input", route: "input" },
-            { name: "Search", route: "search" },
-            { name: "Select", route: "select" },
             { name: "Selection Controls", route: "selectioncontrols" },
-            { name: "TextField", route: "textfield" },
-        ],
-    },
-    {
-        title: "Feedback",
-        data: [
-            { name: "Dialog", route: "dialogs" },
-            { name: "Environment", route: "environment" },
-            { name: "Offline Banner", route: "offlinebanner" },
-            { name: "Progress", route: "progress" },
-            { name: "Progress Indicator", route: "progressindicator" },
-        ],
-    },
-    {
-        title: "Surfaces",
-        data: [
-            { name: "Accordion", route: "accordion" },
-            { name: "Paper", route: "paper" },
-        ],
-    },
-    {
-        title: "Navigation",
-        data: [
-            { name: "Menu", route: "menu" },
-            { name: "Tabs", route: "tabs" },
-        ],
-    },
-    {
-        title: "Utilities",
-        data: [
-            { name: "Popover", route: "popover" },
-            { name: "Scrim", route: "scrim" },
-            { name: "Spacer", route: "spacer" },
         ],
     },
 ];
@@ -78,11 +36,13 @@ export default function ComponentsIndex() {
     };
 
     const renderItem = ({ item }: { item: ComponentItem }) => (
-        <Cell.Navigation
-            title={item.name}
+        <Pressable
             onPress={() => navigateTo(item.route)}
-            style={{ borderTopWidth: 0, borderBottomWidth: 0 }}
-        />
+            style={styles.row}
+        >
+            <Typography>{item.name}</Typography>
+            <Icon name="chevron-right" size={20} color={styles.chevron.color} />
+        </Pressable>
     );
 
     const renderSectionHeader = ({
@@ -90,9 +50,9 @@ export default function ComponentsIndex() {
     }: {
         section: { title: string };
     }) => (
-        <Typography.Header size="lg" style={styles.sectionTitle}>
-            {section.title}
-        </Typography.Header>
+        <Typography size="sm" style={styles.sectionTitle}>
+            {section.title.toUpperCase()}
+        </Typography>
     );
 
     return (
@@ -116,6 +76,17 @@ const tokenStyles = EDSStyleSheet.create((token) => ({
     contentContainer: {
         backgroundColor: token.newColors.bg.neutral.surface,
     },
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingVertical: token.newSpacing.spacing.inset.md.verticalSquished,
+        paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
+        backgroundColor: token.newColors.bg.neutral.surface,
+    },
+    chevron: {
+        color: token.newColors.text.neutral.subtle,
+    },
     cellDivider: {
         height: token.newSpacing.sizing.stroke.thin,
         backgroundColor: token.newColors.border.neutral.medium,
@@ -129,5 +100,6 @@ const tokenStyles = EDSStyleSheet.create((token) => ({
         paddingVertical: token.newSpacing.spacing.inset.md.verticalSquished,
         paddingHorizontal: token.newSpacing.spacing.inset.xl.horizontal,
         backgroundColor: token.newColors.bg.neutral.canvas,
+        color: token.newColors.text.neutral.subtle,
     },
 }));

@@ -2,16 +2,17 @@ import { Section } from "@/components/Section";
 import { Surface } from "@/components/Surface";
 import {
     Checkbox,
+    EDSStyleSheet,
     Radio,
     Switch,
     Typography,
-    useToken,
+    useStyles,
 } from "@equinor/eds-mobile-components";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 
 export default function SelectionControlsScreen() {
-    const token = useToken();
+    const styles = useStyles(themeStyles);
     const [checkA, setCheckA] = useState(true);
     const [checkB, setCheckB] = useState(false);
     const [checkC, setCheckC] = useState(false);
@@ -31,8 +32,8 @@ export default function SelectionControlsScreen() {
                 </Typography>
             </Section>
 
-            <Section>
-                <Typography.Header size="xl">Radio Buttons</Typography.Header>
+            <Section style={styles.groupHeader}>
+                <Typography.Header size="lg" weight="bolder">Radio Buttons</Typography.Header>
             </Section>
 
             <Section title="With labels">
@@ -65,12 +66,7 @@ export default function SelectionControlsScreen() {
                 </Typography>
             </Section>
             <Surface>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        gap: token.newSpacing.spacing.horizontal.md,
-                    }}
-                >
+                <View style={styles.centeredRowMd}>
                     <Radio
                         checked={selectedRadioNoLabel === 0}
                         onPress={() => setSelectedRadioNoLabel(0)}
@@ -99,8 +95,8 @@ export default function SelectionControlsScreen() {
                 <Radio checked={true} disabled label="Disabled checked" />
             </Surface>
 
-            <Section>
-                <Typography.Header size="xl">Switch</Typography.Header>
+            <Section style={styles.groupHeader}>
+                <Typography.Header size="lg" weight="bolder">Switch</Typography.Header>
             </Section>
 
             <Section title="Switch with Label">
@@ -125,20 +121,14 @@ export default function SelectionControlsScreen() {
                 </Typography>
             </Section>
             <Surface>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        gap: token.newSpacing.spacing.horizontal.xl,
-                        alignItems: "center",
-                    }}
-                >
+                <View style={styles.centeredRowXl}>
                     <Switch active={switchActive} onChange={setSwitchActive} />
                     <Switch active={false} disabled />
                 </View>
             </Surface>
 
-            <Section>
-                <Typography.Header size="xl">Checkboxes</Typography.Header>
+            <Section style={styles.groupHeader}>
+                <Typography.Header size="lg" weight="bolder">Checkboxes</Typography.Header>
             </Section>
 
             <Section title="With labels" />
@@ -167,10 +157,7 @@ export default function SelectionControlsScreen() {
             <Surface>
                 <View
                     accessibilityLabel="Select options"
-                    style={{
-                        flexDirection: "row",
-                        gap: token.newSpacing.spacing.horizontal.md,
-                    }}
+                    style={styles.centeredRowMd}
                 >
                     <Checkbox
                         checked={checkNoLabelA}
@@ -208,3 +195,21 @@ export default function SelectionControlsScreen() {
         </ScrollView>
     );
 }
+
+const themeStyles = EDSStyleSheet.create((token) => ({
+    groupHeader: {
+        paddingTop: token.newSpacing.spacing.vertical.threeXl,
+    },
+    centeredRowMd: {
+        flexDirection: "row",
+        justifyContent: "center",
+        gap: token.newSpacing.spacing.horizontal.md,
+    },
+    centeredRowXl: {
+        flexDirection: "row",
+        justifyContent: "center",
+        gap: token.newSpacing.spacing.horizontal.xl,
+        alignItems: "center",
+    },
+}));
+

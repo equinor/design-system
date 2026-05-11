@@ -2,7 +2,6 @@ import { Section } from "@/components/Section";
 import { Surface } from "@/components/Surface";
 import {
     EDSStyleSheet,
-    Spacer,
     Typography,
     type TypographyHeaderProps,
     type TypographyUIProps,
@@ -42,7 +41,8 @@ export default function TypographyScreen() {
 
             {/* ── Typography UI ──────────────────────────────────────── */}
 
-            <Section title="Typography UI">
+            <Section style={styles.groupHeader}>
+                <Typography.Header size="lg" weight="bolder">Typography UI</Typography.Header>
                 <Typography>
                     Uses the {newTypography.ui.typography.fontFamily} typeface.
                     The default size is lg (
@@ -175,7 +175,8 @@ export default function TypographyScreen() {
 
             {/* ── Typography Header ──────────────────────────────────── */}
 
-            <Section title="Typography Header">
+            <Section style={styles.groupHeader}>
+                <Typography.Header size="lg" weight="bolder">Typography Header</Typography.Header>
                 <Typography>
                     Uses the {newTypography.header.typography.fontFamily}{" "}
                     typeface. Access via Typography.Header. The default size is
@@ -324,12 +325,14 @@ export default function TypographyScreen() {
                 </View>
             </Surface>
 
-            <Spacer />
         </ScrollView>
     );
 }
 
 const themeStyles = EDSStyleSheet.create((token) => ({
+    groupHeader: {
+        paddingTop: token.newSpacing.spacing.vertical.threeXl,
+    },
     row: {
         gap: token.newSpacing.spacing.vertical.twoXs,
     },

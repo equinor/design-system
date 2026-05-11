@@ -1,4 +1,4 @@
-import { Icon, Paper, Typography, useToken } from "@equinor/eds-mobile-components";
+import { Icon, Typography, useToken } from "@equinor/eds-mobile-components";
 import edsPkg from "@equinor/eds-mobile-components/package.json";
 import Constants from "expo-constants";
 import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native";
@@ -46,6 +46,7 @@ export default function AboutScreen() {
             marginHorizontal: newSpacing.spacing.horizontal.xl,
             borderRadius: newSpacing.spacing.borderRadius.rounded,
             overflow: "hidden",
+            backgroundColor: newColors.bg.neutral.surface,
         },
         rowInner: {
             paddingHorizontal: newSpacing.spacing.horizontal.lg,
@@ -95,7 +96,7 @@ export default function AboutScreen() {
             <View style={styles.groupLabel}>
                 <Typography style={styles.subtleText}>Versions</Typography>
             </View>
-            <Paper elevation="none" style={styles.group}>
+            <View style={styles.group}>
                 <View style={styles.rowInner}>
                     <Typography>App</Typography>
                     <Typography>{appVersion}</Typography>
@@ -105,12 +106,12 @@ export default function AboutScreen() {
                     <Typography>Library</Typography>
                     <Typography>v{libraryVersion}</Typography>
                 </View>
-            </Paper>
+            </View>
 
             <View style={styles.groupLabel}>
                 <Typography style={styles.subtleText}>Resources</Typography>
             </View>
-            <Paper elevation="none" style={styles.group}>
+            <View style={styles.group}>
                 {LINKS.map(({ label, url }, index) => (
                     <View key={url}>
                         {index > 0 && <View style={styles.rowDivider} />}
@@ -127,7 +128,7 @@ export default function AboutScreen() {
                         </Pressable>
                     </View>
                 ))}
-            </Paper>
+            </View>
 
             <View style={styles.footer}>
                 <Typography style={styles.subtleText}>

@@ -60,22 +60,23 @@ apps/storybook/
 │   ├── _layout.tsx         # Root layout with EDSProvider
 │   └── (tabs)/
 │       ├── index.tsx       # Home screen
-│       └── components/     # Component showcase screens
-│           ├── buttons.tsx
-│           ├── cell.tsx
-│           └── ...
-├── codeSnippets/           # Code examples shown in the app
-├── components/             # Shared storybook components
-├── hooks/                  # Custom hooks (e.g., useCodeSnippet)
+│       ├── about.tsx       # About screen
+│       └── components/     # Component showcase screens (Slice 1 only)
+│           ├── button.tsx
+│           ├── input.tsx
+│           ├── selectioncontrols.tsx
+│           ├── typography.tsx
+│           └── ...         # Future screens added per slice
+├── components/             # Shared storybook UI (Section, Surface, SettingsControls)
 └── ios/                    # Native iOS project
 ```
 
 ## Adding a New Component Screen
 
 1. Create a new file in `app/(tabs)/components/` (e.g., `mycomponent.tsx`)
-2. Add code snippets in `codeSnippets/mycomponent.ts`
-3. Register the screen in `app/(tabs)/components/_layout.tsx`
-4. Add it to the component list in `app/(tabs)/components/index.tsx`
+2. Register the screen in `app/(tabs)/components/_layout.tsx`
+3. Add it to the component list in `app/(tabs)/components/index.tsx`
+4. Export the component from `packages/components/src/index.ts` if not already exported
 
 ## Troubleshooting
 
