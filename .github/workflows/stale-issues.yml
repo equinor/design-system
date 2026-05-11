@@ -12,7 +12,7 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           only-labels: 'issue needs work'
           days-before-issue-stale: 3
