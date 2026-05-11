@@ -25,6 +25,9 @@ const hidePopoverMock = jest.fn(function (this: HTMLElement) {
   this.dispatchEvent(event)
 })
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const originalMatches = HTMLElement.prototype.matches
+
 beforeAll(() => {
   HTMLElement.prototype.showPopover = showPopoverMock
   HTMLElement.prototype.hidePopover = hidePopoverMock
@@ -37,6 +40,10 @@ beforeAll(() => {
       return this.hasAttribute('data-popover-open')
     return Element.prototype.matches.call(this, selector)
   }
+})
+
+afterAll(() => {
+  HTMLElement.prototype.matches = originalMatches
 })
 
 afterEach(() => jest.clearAllMocks())

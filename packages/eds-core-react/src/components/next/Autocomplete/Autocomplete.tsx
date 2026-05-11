@@ -64,6 +64,14 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
       () => selectedOption,
     )
     const effectiveSelected = selectedOption ?? internalSelectedOption
+
+    // Sync input text when selectedOption changes externally (uncontrolled mode)
+    useEffect(() => {
+      if (!isControlled && selectedOption !== undefined) {
+        setInternalValue(selectedOption)
+        setInternalSelectedOption(selectedOption)
+      }
+    }, [selectedOption, isControlled])
     const [announcement, setAnnouncement] = useState('')
     const [customOptions, setCustomOptions] = useState<string[]>([])
     const inputRef = useRef<HTMLInputElement | null>(null)
@@ -372,8 +380,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={handleClear}
                     aria-label={clearLabel}
-                    aria-hidden={!showClear}
-                    tabIndex={showClear ? undefined : -1}
+                    inert={!showClear ? '' : undefined}
                     style={{ visibility: showClear ? 'visible' : 'hidden' }}
                   >
                     <Icon data={close} />
@@ -405,7 +412,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                       aria-disabled={!customValueTyped}
                       aria-label={
                         customValueTyped
-                          ? `Add new option: ${inputValue.trim()}`
+                          ? `Add: ${inputValue.trim()}`
                           : undefined
                       }
                       aria-posinset={1}
@@ -417,10 +424,16 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                           ? () => handleOptionSelect(inputValue.trim())
                           : undefined
                       }
+                      onClick={
+                        customValueTyped &&
+                        listboxRef.current?.matches(':popover-open')
+                          ? () => handleOptionSelect(inputValue.trim())
+                          : undefined
+                      }
                     >
                       <Icon data={add_box} aria-hidden="true" />
                       {customValueTyped
-                        ? inputValue.trim()
+                        ? `Add: ${inputValue.trim()}`
                         : 'Type to add new option'}
                     </MenuItem>
                   )}
@@ -436,6 +449,10 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                         aria-setsize={totalOptions}
                         active={activeIndex === displayIndex}
                         onMouseDown={() => handleOptionSelect(option)}
+                        onClick={() => {
+                          if (listboxRef.current?.matches(':popover-open'))
+                            handleOptionSelect(option)
+                        }}
                       >
                         {option}
                       </MenuItem>
@@ -454,12 +471,7 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
             </Field.HelperMessage>
           )}
         </Field>
-        <div
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-          className="sr-only"
-        >
+        <div role="status" aria-atomic="true" className="sr-only">
           {announcement}
         </div>
       </div>
