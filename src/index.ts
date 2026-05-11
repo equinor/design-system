@@ -1,29 +1,13 @@
 export * from "./components/Button";
-export * from "./components/Paper";
-export * from "./components/Popover";
-export * from "./components/Typography";
-export * from "./components/PressableHighlight";
-export * from "./components/EDSProvider";
-export * from "./components/Spacer";
-export * from "./components/TextField";
-export * from "./components/Label";
 export * from "./components/Input";
-export * from "./components/Autocomplete";
-export * from "./components/Search";
-export * from "./components/Cell";
-export * from "./components/Icon";
-export * from "./components/Accordion";
-export * from "./components/Menu";
-export * from "./components/Progress";
-export * from "./components/ProgressIndicator";
-export * from "./components/Portal";
-export * from "./components/Environment";
-export * from "./components/ErrorBoundary";
 export * from "./components/SelectionControls";
-export * from "./components/Chip";
-export * from "./components/Tabs";
-export * from "./components/Select";
-export * from "./components/OfflineBanner";
+export * from "./components/Typography";
+
+export * from "./components/EDSProvider";
+export * from "./components/ErrorBoundary";
+export * from "./components/Icon";
+export * from "./components/Portal";
+export * from "./components/PressableHighlight";
 
 export * from "./styling/EDSStyleSheet";
 export * from "./styling/types";
@@ -32,15 +16,8 @@ export * from "./hooks/useEDS";
 export * from "./hooks/useStyles";
 export * from "./hooks/useToken";
 export * from "./hooks/useBreakpoint";
-
-// Add to src/index.ts
-export * from "./components/Scrim";
-export * from "./components/Dialog"; // Full export instead of just { alert }
-
-// Add missing hooks
 export * from "./hooks/useDynamicStyle";
 export * from "./hooks/useDynamicStyleSheet";
 export * from "./hooks/useValidChildren";
 
-// Add utilities
 export * from "./utils/types";
