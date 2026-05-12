@@ -391,21 +391,21 @@ describe('Autocomplete (next)', () => {
       ).not.toBeInTheDocument()
     })
 
-    it('calls onValueChange with typed value when Add option is selected via Enter', async () => {
-      const onValueChange = jest.fn()
+    it('calls onCustomValueConfirm with typed value when Add option is selected via Enter', async () => {
+      const onCustomValueConfirm = jest.fn()
       const user = userEvent.setup()
       render(
         <Autocomplete
           label="Fruit"
           options={options}
           allowCustomValue
-          onValueChange={onValueChange}
+          onCustomValueConfirm={onCustomValueConfirm}
         />,
       )
       // 'Mango' matches nothing — Add option is the only item (index 0)
       await user.type(screen.getByRole('combobox'), 'Mango')
       await user.keyboard('{ArrowDown}{Enter}')
-      expect(onValueChange).toHaveBeenCalledWith('Mango')
+      expect(onCustomValueConfirm).toHaveBeenCalledWith('Mango')
     })
 
     it('sets input value to typed value when Add option is selected via click', async () => {
@@ -414,6 +414,83 @@ describe('Autocomplete (next)', () => {
       await user.type(screen.getByRole('combobox'), 'Mango')
       await user.click(screen.getByRole('option', { name: /Mango/ }))
       expect(screen.getByRole('combobox')).toHaveValue('Mango')
+    })
+  })
+
+  describe('Generic options', () => {
+    type FruitObject = { id: string; name: string }
+    const objectOptions: FruitObject[] = [
+      { id: '1', name: 'Apple' },
+      { id: '2', name: 'Banana' },
+    ]
+
+    it('renders options using getOptionLabel', async () => {
+      const user = userEvent.setup()
+      render(
+        <Autocomplete<FruitObject>
+          label="Fruit"
+          options={objectOptions}
+          getOptionLabel={(o) => o.name}
+        />,
+      )
+      await user.click(screen.getByRole('combobox'))
+      expect(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      ).toBeInTheDocument()
+    })
+
+    it('calls onValueChange with the full object when option is selected', async () => {
+      const onValueChange = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete<FruitObject>
+          label="Fruit"
+          options={objectOptions}
+          getOptionLabel={(o) => o.name}
+          onValueChange={onValueChange}
+        />,
+      )
+      await user.click(screen.getByRole('combobox'))
+      await user.click(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      )
+      expect(onValueChange).toHaveBeenCalledWith(objectOptions[0])
+    })
+
+    it('sets input to getOptionLabel result when option is selected', async () => {
+      const user = userEvent.setup()
+      render(
+        <Autocomplete<FruitObject>
+          label="Fruit"
+          options={objectOptions}
+          getOptionLabel={(o) => o.name}
+        />,
+      )
+      await user.click(screen.getByRole('combobox'))
+      await user.click(
+        screen.getByRole('option', { name: 'Apple', hidden: true }),
+      )
+      expect(screen.getByRole('combobox')).toHaveValue('Apple')
+    })
+
+    it('calls onCustomValueConfirm (not onValueChange) for custom values', async () => {
+      const onValueChange = jest.fn()
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete<FruitObject>
+          label="Fruit"
+          options={objectOptions}
+          getOptionLabel={(o) => o.name}
+          allowCustomValue
+          onValueChange={onValueChange}
+          onCustomValueConfirm={onCustomValueConfirm}
+        />,
+      )
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      await user.keyboard('{ArrowDown}{Enter}')
+      expect(onCustomValueConfirm).toHaveBeenCalledWith('Mango')
+      expect(onValueChange).not.toHaveBeenCalled()
     })
   })
 

@@ -65,4 +65,4 @@ export { Menu, MenuItem } from './Menu'
 export type { MenuProps, MenuItemProps } from './Menu'
 
 export { Autocomplete } from './Autocomplete'
-export type { AutocompleteProps, AutocompleteOption } from './Autocomplete'
+export type { AutocompleteProps } from './Autocomplete'
