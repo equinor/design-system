@@ -105,7 +105,11 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     </svg>
   )
 })
+
+Icon.displayName = 'Icon'
 ```
+
+Set `Component.displayName` after every `forwardRef` definition so React DevTools and snapshot output show the component name (sub-components use dotted names, e.g. `Field.Label`).
 
 ### CSS (Vanilla + Tokens + Nesting)
 
@@ -127,6 +131,10 @@ One `eds-`-prefixed root class per component. Internal elements use simple class
   }
 }
 ```
+
+#### Dynamic tokens
+
+Prefer dynamic tokens (e.g. `--eds-selectable-space-vertical`, `--eds-typography-icon-size`) over hard-coded values. They adapt to density, typography, and accessibility settings without per-component overrides.
 
 #### Pseudo-private custom properties
 
