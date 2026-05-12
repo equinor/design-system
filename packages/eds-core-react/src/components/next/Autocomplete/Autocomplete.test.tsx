@@ -495,11 +495,18 @@ describe('Autocomplete (next)', () => {
   })
 
   describe('Accessibility', () => {
+    // aria-valid-attr-value is suppressed because aria-controls referencing a
+    // display:none popover is a known axe-core false positive (axe-core #3141).
+    // WAI-ARIA 1.2 explicitly permits aria-controls to reference hidden elements.
+    const axeOptions = {
+      rules: { 'aria-valid-attr-value': { enabled: false } },
+    }
+
     it('has no accessibility violations', async () => {
       const { container } = render(
         <Autocomplete label="Fruit" options={options} />,
       )
-      expect(await axe(container)).toHaveNoViolations()
+      expect(await axe(container, axeOptions)).toHaveNoViolations()
     })
 
     it('has no accessibility violations in error state', async () => {
@@ -511,14 +518,14 @@ describe('Autocomplete (next)', () => {
           helperMessage="This field is required"
         />,
       )
-      expect(await axe(container)).toHaveNoViolations()
+      expect(await axe(container, axeOptions)).toHaveNoViolations()
     })
 
     it('has no accessibility violations when disabled', async () => {
       const { container } = render(
         <Autocomplete label="Fruit" options={options} disabled />,
       )
-      expect(await axe(container)).toHaveNoViolations()
+      expect(await axe(container, axeOptions)).toHaveNoViolations()
     })
 
     it('input has aria-controls pointing to listbox', () => {
