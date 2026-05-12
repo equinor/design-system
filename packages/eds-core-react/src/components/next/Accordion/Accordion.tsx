@@ -63,7 +63,7 @@ const AccordionItem = forwardRef<HTMLDetailsElement, AccordionItemProps>(
     return (
       <details
         ref={ref}
-        className={['eds-accordion__item', className].filter(Boolean).join(' ')}
+        className={className}
         name={groupName}
         open={open}
         onToggle={handleToggle}
@@ -81,22 +81,20 @@ const AccordionHeader = forwardRef<HTMLElement, AccordionHeaderProps>(
     return (
       <summary
         ref={ref}
-        className={['eds-accordion__header', className]
-          .filter(Boolean)
-          .join(' ')}
+        className={className}
         data-selectable-space="md"
         data-font-size="md"
         {...rest}
       >
         <span
-          className="eds-accordion__chevron"
+          className="chevron"
           aria-hidden="true"
           data-color-appearance="accent"
         >
           <Icon data={chevron_down} />
         </span>
         <span
-          className="eds-accordion__title"
+          className="title"
           data-font-family="ui"
           data-font-size="md"
           data-line-height="squished"
@@ -114,21 +112,15 @@ const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
   function AccordionPanel({ className, children, ...rest }, ref) {
     return (
       <div
-        className={['eds-accordion__panel', className]
-          .filter(Boolean)
-          .join(' ')}
         ref={ref}
+        className={['panel', className].filter(Boolean).join(' ')}
         data-selectable-space="md"
+        data-font-family="ui"
+        data-font-size="md"
+        data-line-height="default"
         {...rest}
       >
-        <div
-          className="eds-accordion__panel-content"
-          data-font-family="ui"
-          data-font-size="md"
-          data-line-height="default"
-        >
-          {children}
-        </div>
+        {children}
       </div>
     )
   },
