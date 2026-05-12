@@ -64,6 +64,9 @@ export type BuildNestedObjectOptions = {
    * Useful when the source token JSON encodes axis variants as hyphenated leaf
    * keys, and the consuming code wants the axis exposed as a nested object so
    * variant names can be derived via `keyof`.
+   *
+   * If multiple prefixes could match a leaf (e.g. `'font-weight'` and
+   * `'font-weight-extra'`), array iteration order wins — first match applied.
    */
   splitLeafPrefixes?: readonly string[]
 }

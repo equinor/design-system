@@ -1,6 +1,14 @@
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { describe, it, expect } from 'vitest'
 import { typography as uiBody } from '../../build/ts/typography/font-family-ui'
 import { typography as header } from '../../build/ts/typography/font-family-header'
+
+const buildDir = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../build/ts/typography',
+)
 
 /**
  * Smoke tests for the emitted nested typography TS shape. These guard
@@ -12,6 +20,18 @@ import { typography as header } from '../../build/ts/typography/font-family-head
  * representative variant keys, not specific numbers.
  */
 describe('typography family TS output', () => {
+  it('emits exactly the two family files (cleanup whitelist enforced)', () => {
+    // The cleanup pass in createSpacingAndTypographyVariables.ts removes any
+    // non-`font-family-*` TS file from the typography build directory. If the
+    // whitelist regresses (e.g. someone re-introduces font-size-md.ts), this
+    // test catches it.
+    const files = fs
+      .readdirSync(buildDir)
+      .filter((f) => f.endsWith('.ts'))
+      .sort()
+    expect(files).toEqual(['font-family-header.ts', 'font-family-ui.ts'])
+  })
+
   describe.each([
     ['ui-body', uiBody],
     ['header', header],

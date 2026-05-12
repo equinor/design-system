@@ -5,6 +5,7 @@ import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import {
   includeTokenFilter,
+  toCamelCase,
   typescriptNestedFormat,
 } from '@equinor/eds-tokens-build'
 
@@ -997,27 +998,12 @@ export async function createSpacingAndTypographyVariables({
     }
   }
 
-  // Mapping from JSON size key (lowercase) to the camelCased identifier the
-  // nested TS format emits. Mirrors `toCamelCase` in `typescriptNested.ts`.
-  const sizeKeyToCamel: Record<string, string> = {
-    xs: 'xs',
-    sm: 'sm',
-    md: 'md',
-    lg: 'lg',
-    xl: 'xl',
-    '2xl': 'twoXl',
-    '3xl': 'threeXl',
-    '4xl': 'fourXl',
-    '5xl': 'fiveXl',
-    '6xl': 'sixXl',
-  }
-
-  for (const familySlug of ['ui', 'header'] as const) {
+  for (const { slug: familySlug } of fontFamilyConfig) {
     const filePath = path.join(tsBuildPath, `font-family-${familySlug}.ts`)
     let content = await fs.promises.readFile(filePath, 'utf-8')
     for (const size of fontSizeConfig) {
       const sizeKey = size.toLowerCase()
-      const camelKey = sizeKeyToCamel[sizeKey]
+      const camelKey = toCamelCase(sizeKey)
       const extras = sizeExtras[sizeKey]
       const injection =
         `      iconSize: ${extras.iconSize},\n` +
