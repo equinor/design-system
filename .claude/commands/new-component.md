@@ -505,8 +505,6 @@ For canonical examples of foundation `data-*` attributes, dynamic tokens, and co
 
 Read the actual source (it's the reference, not a snapshot in this file).
 
-````
-
 ## Common Mistakes & How to Fix Them
 
 ### Color & Dynamic Tokens
@@ -519,7 +517,7 @@ Read the actual source (it's the reference, not a snapshot in this file).
   <Icon data={settings} />
   Settings
 </button>
-````
+```
 
 ```css
 .menu-item {

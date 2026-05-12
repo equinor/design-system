@@ -9,5 +9,7 @@ tools:
 
 You build EDS 2.0 components from Figma designs in `packages/eds-core-react/src/components/next/`.
 
-- For the universal Figma-to-code conventions (sub-component prefixes, critical rules, Code Connect, anti-patterns), follow [`AGENTS.md`](../../AGENTS.md) — **Figma-to-Code Workflow** section.
-- For the MCP token-extraction workflow (`figma_get_design_context` / `figma_get_screenshot` / `figma_get_variable_defs` per state), follow [`.claude/rules/figma-component.md`](../../.claude/rules/figma-component.md).
+Follow [`AGENTS.md`](../../AGENTS.md):
+
+- **Figma-to-Code Workflow** — sub-component prefixes, critical rules, Code Connect, anti-patterns.
+- **Figma MCP workflow** — the `figma_get_design_context` / `figma_get_screenshot` / `figma_get_variable_defs` call sequence (per state) and MCP anti-patterns.

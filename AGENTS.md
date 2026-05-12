@@ -300,9 +300,23 @@ figma.connect(Component, 'figma-url', {
 - Importing from other components without explicit design requirement
 - Ignoring `⌘` / `.` / `↳` prefixed layers
 
-### Tool-specific extensions
+### Figma MCP workflow
 
-- **Claude Code with Figma MCP**: see `.claude/rules/figma-component.md` for the `figma_get_design_context` / `figma_get_screenshot` / `figma_get_variable_defs` call sequence (loaded automatically when editing `*.figma.tsx`).
+When the Figma MCP server is available (Claude Code, OpenCode):
+
+1. **Analyze structure**: `figma_get_design_context` with the Figma URL to understand the component layers.
+2. **See the design**: `figma_get_screenshot` for visual reference.
+3. **Extract tokens for EACH state**: `figma_get_variable_defs` for Default, Hover, Focus, Disabled, Error (and any other states visible in the design).
+
+**Do not skip step 3 per state.** A single `figma_get_variable_defs` call on the default state will miss state-specific tokens (especially `data-color-appearance` on disabled icons).
+
+#### MCP anti-patterns
+
+- Calling `figma_get_design_context` alone without `figma_get_variable_defs` for each state
+- Reusing tokens extracted for a different state
+- Generating Code Connect from intuition instead of from the actual MCP response
+
+In Claude Code, `.claude/rules/figma-component.md` loads this section automatically when editing `*.figma.tsx`.
 
 ## Accessibility
 
@@ -366,5 +380,6 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
 | `.cursorrules`                    | Cursor: pointer to copilot instructions                    |
+| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
 When adding new conventions, update **this file** and let the tool-specific files reference it.
