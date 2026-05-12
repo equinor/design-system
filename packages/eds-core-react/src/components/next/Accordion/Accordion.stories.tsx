@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
-import { Accordion } from './Accordion'
-import type { AccordionProps } from './Accordion.types'
+import { Accordion } from '.'
+import type { AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
   title: 'EDS 2.0 (beta)/Data Display/Accordion',

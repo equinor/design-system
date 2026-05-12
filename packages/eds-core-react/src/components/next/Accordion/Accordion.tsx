@@ -56,8 +56,14 @@ const AccordionItem = forwardRef<HTMLDetailsElement, AccordionItemProps>(
 
     const handleToggle = (event: SyntheticEvent<HTMLDetailsElement>) => {
       const next = event.currentTarget.open
-      if (!isControlled) setUncontrolledOpen(next)
-      onOpenChange?.(next)
+      if (isControlled) {
+        // Native `toggle` also fires when React syncs `open` from the prop — skip
+        // those so onOpenChange only reflects actual user toggles.
+        if (next !== controlledOpen) onOpenChange?.(next)
+      } else {
+        setUncontrolledOpen(next)
+        onOpenChange?.(next)
+      }
     }
 
     return (

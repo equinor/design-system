@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { DetailsHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
 
 export type AccordionProps = {
   /**
@@ -13,9 +13,12 @@ export type AccordionItemProps = {
   defaultOpen?: boolean
   /** Controlled open state. When provided, the item is controlled. */
   open?: boolean
-  /** Called when the open state changes, from user interaction or controlled updates. */
+  /**
+   * Called when the open state changes from a user toggle. Not fired when the
+   * controlled `open` prop is updated from the parent.
+   */
   onOpenChange?: (open: boolean) => void
-} & Omit<HTMLAttributes<HTMLDetailsElement>, 'onToggle'>
+} & Omit<DetailsHTMLAttributes<HTMLDetailsElement>, 'onToggle' | 'open'>
 
 export type AccordionHeaderProps = {
   children: ReactNode

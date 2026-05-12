@@ -77,8 +77,27 @@ describe('Accordion (next)', () => {
       expect(item).not.toHaveAttribute('open')
     })
 
-    it('supports controlled open with onOpenChange', async () => {
+    it('calls onOpenChange with the new value (uncontrolled)', async () => {
       const user = userEvent.setup()
+      const onOpenChange = jest.fn()
+      render(
+        <Accordion>
+          <Accordion.Item onOpenChange={onOpenChange}>
+            <Accordion.Header>Title</Accordion.Header>
+            <Accordion.Panel>Content</Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>,
+      )
+      await user.click(screen.getByText('Title'))
+      expect(onOpenChange).toHaveBeenLastCalledWith(true)
+      await user.click(screen.getByText('Title'))
+      expect(onOpenChange).toHaveBeenLastCalledWith(false)
+    })
+
+    it('supports controlled open/close with onOpenChange', async () => {
+      const user = userEvent.setup()
+      const onOpenChange = jest.fn()
+
       const Controlled = () => {
         const [open, setOpen] = useState(false)
         return (
@@ -86,7 +105,10 @@ describe('Accordion (next)', () => {
             <Accordion.Item
               data-testid="item"
               open={open}
-              onOpenChange={setOpen}
+              onOpenChange={(next) => {
+                onOpenChange(next)
+                setOpen(next)
+              }}
             >
               <Accordion.Header>Title</Accordion.Header>
               <Accordion.Panel>Content</Accordion.Panel>
@@ -96,9 +118,39 @@ describe('Accordion (next)', () => {
       }
       render(<Controlled />)
       const item = screen.getByTestId('item')
+
       expect(item).not.toHaveAttribute('open')
       await user.click(screen.getByText('Title'))
       expect(item).toHaveAttribute('open')
+      expect(onOpenChange).toHaveBeenLastCalledWith(true)
+
+      await user.click(screen.getByText('Title'))
+      expect(item).not.toHaveAttribute('open')
+      expect(onOpenChange).toHaveBeenLastCalledWith(false)
+    })
+
+    it('does not double-fire onOpenChange when the parent drives open', () => {
+      const onOpenChange = jest.fn()
+      const { rerender } = render(
+        <Accordion>
+          <Accordion.Item open={false} onOpenChange={onOpenChange}>
+            <Accordion.Header>Title</Accordion.Header>
+            <Accordion.Panel>Content</Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>,
+      )
+
+      // Parent flips the controlled prop — the resulting toggle event should
+      // not call onOpenChange, because the change originated from the parent.
+      rerender(
+        <Accordion>
+          <Accordion.Item open onOpenChange={onOpenChange}>
+            <Accordion.Header>Title</Accordion.Header>
+            <Accordion.Panel>Content</Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>,
+      )
+      expect(onOpenChange).not.toHaveBeenCalled()
     })
   })
 

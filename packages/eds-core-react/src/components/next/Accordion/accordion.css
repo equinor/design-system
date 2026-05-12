@@ -1,12 +1,28 @@
 @layer eds-components {
   .eds-accordion {
+    /* Pseudo-private component vars. States/variants override these vars rather
+     * than the consuming properties below. */
+    --_summary-bg: transparent;
+    --_title-color: var(--eds-color-text-strong);
+
+    /* TODO: the chevron is an icon foreground, but EDS tokens currently only
+     * expose `accent-9` (#206F77) via bg-fill tokens. Replace with an
+     * `--eds-color-icon-accent-*` or `--eds-color-text-accent-*` semantic token
+     * once those exist. Tracked in a follow-up issue. */
+    --_chevron-color: var(--eds-color-bg-fill-emphasis-default);
+
+    /* Visual width of the chevron column. Equals the summary's line-height so
+     * the chevron sits on the same baseline grid as the title. The panel
+     * references the same var so its inline-start aligns under the title. */
+    --_chevron-column: var(--eds-typography-ui-body-md-line-height-squished);
+
     display: flex;
     flex-direction: column;
     inline-size: 100%;
 
     /* All inner selectors below are scoped with `>` so consumer content inside
-     * <Accordion.Panel> can't accidentally collide with our internal classes
-     * (.chevron, .title, .panel) or nested <details>/<summary> elements. */
+     * <Accordion.Panel> can't collide with our internal classes (.chevron,
+     * .title, .panel) or nested <details>/<summary> elements. */
 
     /* Item — each <details>. */
     & > details {
@@ -42,7 +58,7 @@
 
       list-style: none;
 
-      background-color: transparent;
+      background-color: var(--_summary-bg);
 
       transition: background-color 150ms ease;
     }
@@ -54,11 +70,8 @@
 
     & > details > summary:hover,
     & > details > summary:focus-visible {
-      background-color: var(--eds-color-bg-fill-muted-default);
-
-      & > .title {
-        color: var(--eds-color-text-accent-strong);
-      }
+      --_summary-bg: var(--eds-color-bg-fill-muted-default);
+      --_title-color: var(--eds-color-text-accent-strong);
     }
 
     & > details > summary:focus-visible {
@@ -66,13 +79,18 @@
       outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     }
 
-    /* Chevron — the icon's built-in `margin-inline: -0.1em` (icon.css) shrinks
-     * the column to its optical bounds, same pattern Chip uses. */
+    /* Chevron — explicit inline-size keeps the column predictable; the icon's
+     * built-in `margin-inline: -0.1em` (icon.css) makes the glyph sit optically
+     * tight inside, same pattern Chip uses. */
     & > details > summary > .chevron {
       display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-      /* Resolves against data-color-appearance="accent" on the span */
-      color: var(--eds-color-bg-fill-emphasis-default);
+      inline-size: var(--_chevron-column);
+
+      color: var(--_chevron-color);
+
       transition: rotate 200ms ease;
     }
 
@@ -83,28 +101,29 @@
     /* Title */
     & > details > summary > .title {
       flex: 1;
-      color: var(--eds-color-text-strong);
+      color: var(--_title-color);
+      transition: color 150ms ease;
     }
 
-    /* Panel — Figma spec 16 28 24 46.4. Inline-start equals the title's
-     * horizontal start (container pad + chevron optical column + gap) so content
-     * aligns under the title text. */
+    /* Panel — inline-start equals the title's horizontal start in the header
+     * (container pad + chevron column + gap), so content aligns under the
+     * title. Block padding is taken from EDS spacing tokens. */
     & > details > .panel {
       padding-block: var(--eds-selectable-space-vertical)
         var(--eds-spacing-vertical-xl);
       padding-inline: calc(
-          var(--eds-selectable-space-horizontal) * 2 +
-            var(--eds-typography-ui-body-md-line-height-squished)
+          var(--eds-selectable-space-horizontal) * 2 + var(--_chevron-column)
         )
         var(--eds-spacing-horizontal-2xl);
       color: var(--eds-color-text-subtle);
     }
   }
 
-  /* Reduced motion: skip height + chevron animation */
+  /* Reduced motion: skip height + chevron + title animations */
   @media (prefers-reduced-motion: reduce) {
     .eds-accordion > details::details-content,
-    .eds-accordion > details > summary > .chevron {
+    .eds-accordion > details > summary > .chevron,
+    .eds-accordion > details > summary > .title {
       transition: none;
     }
   }
