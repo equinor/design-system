@@ -7,7 +7,13 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   ref,
 ) {
   return (
-    <ul ref={ref} className="eds-menu" data-selectable-space="md" {...props}>
+    <ul
+      ref={ref}
+      className="eds-menu"
+      data-selectable-space="md"
+      data-space-proportions="squished"
+      {...props}
+    >
       {children}
     </ul>
   )
