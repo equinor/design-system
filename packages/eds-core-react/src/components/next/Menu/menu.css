@@ -4,6 +4,9 @@
     --eds-selectable-space-vertical: 1rem;
     --eds-selectable-space-horizontal: 1rem;
 
+    scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
+    scrollbar-width: thin;
+
     /* Anchor positioning — flush below trigger, left-aligned.
        --menu-anchor is set on the trigger's wrapper by the consuming component
        (e.g. Autocomplete). Even though the menu is in the top-layer, CSS custom
