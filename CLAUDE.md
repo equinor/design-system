@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ## Package Overview
 
-This package is the core React Native component library implementing the Equinor Design System. It provides 25+ UI components with full support for light/dark theming and comfortable/spacious density modes.
+This package is the core React Native component library implementing the Equinor Design System. It provides UI components with full support for light/dark theming and comfortable/spacious density modes.
 
 ## Local Development
 

@@ -61,10 +61,10 @@ Create stylesheets that respond to the current theme using `EDSStyleSheet`:
 ```tsx
 import { EDSStyleSheet, useStyles } from "@equinor/eds-mobile-components";
 
-const themeStyles = EDSStyleSheet.create((theme) => ({
+const themeStyles = EDSStyleSheet.create((token) => ({
     container: {
-        backgroundColor: theme.colors.bg.neutral.surface,
-        borderRadius: theme.geometry.border.containerBorderRadius,
+        backgroundColor: token.colors.bg.neutral.surface,
+        borderRadius: token.geometry.border.containerBorderRadius,
     },
 }));
 
@@ -74,7 +74,7 @@ const MyComponent = () => {
 };
 ```
 
-The `theme` object resolves based on the current configuration, so colours adapt automatically to light/dark mode.
+The `token` object resolves based on the current configuration, so colours adapt automatically to light/dark mode.
 
 ### Passing props to stylesheets
 
@@ -82,11 +82,11 @@ For conditional styling, pass additional props as a second argument:
 
 ```tsx
 const themeStyles = EDSStyleSheet.create(
-    (theme, props: { highlight?: boolean }) => ({
+    (token, props: { highlight?: boolean }) => ({
         container: {
             backgroundColor: props.highlight
-                ? theme.colors.bg.accent.fillEmphasis.default
-                : theme.colors.bg.neutral.surface,
+                ? token.colors.bg.accent.fillEmphasis.default
+                : token.colors.bg.neutral.surface,
         },
     })
 );
@@ -99,14 +99,11 @@ const MyComponent = ({ highlight }: { highlight?: boolean }) => {
 
 ## Components
 
-The library includes:
+- **Inputs** — Button, Input, SelectionControls (Radio, Switch, Checkbox)
+- **Display** — Typography, Icon
+- **Utilities** — EDSProvider, Portal, PressableHighlight, ErrorBoundary
 
-- **Layout** — Paper, Spacer, Scrim
-- **Inputs** — Button, TextField, Input, Search, Select, Autocomplete, SelectionControls, Chip
-- **Feedback** — Dialog, Progress, ProgressIndicator, OfflineBanner
-- **Navigation** — Tabs, Menu, Accordion, Cell
-- **Display** — Typography, Icon, Label, Popover
-- **Utilities** — EDSProvider, Portal, ErrorBoundary, Environment
+The library is actively growing and more components will be added with each release.
 
 ## Hooks
 
