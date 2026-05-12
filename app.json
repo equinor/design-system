@@ -2,7 +2,7 @@
     "expo": {
         "name": "EDS Mobile",
         "slug": "mobile-storybook",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "orientation": "portrait",
         "icon": "./assets/images/eDS_Logo_Light.png",
         "scheme": "mobile-storybook",
