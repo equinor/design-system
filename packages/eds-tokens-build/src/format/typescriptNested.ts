@@ -54,15 +54,58 @@ function formatKey(key: string): string {
 
 type NestedObject = { [key: string]: NestedObject | string }
 
+export type BuildNestedObjectOptions = {
+  /**
+   * Hyphenated prefixes (e.g. `'font-weight'`) that, when found at the start of a
+   * token-path leaf, are split into two segments. `font-weight-lighter` becomes
+   * `['font-weight', 'lighter']`, producing nested output `fontWeight: { lighter }`
+   * instead of flat `fontWeightLighter`.
+   *
+   * Useful when the source token JSON encodes axis variants as hyphenated leaf
+   * keys, and the consuming code wants the axis exposed as a nested object so
+   * variant names can be derived via `keyof`.
+   */
+  splitLeafPrefixes?: readonly string[]
+}
+
+/**
+ * If the leaf of `path` starts with one of the given hyphenated prefixes, split
+ * it into `[prefix, rest]` and return a new path. Otherwise return `path`
+ * unchanged. The match requires the prefix be followed by `-` and at least one
+ * more character, so a bare leaf equal to the prefix (e.g. `font-size`) is left
+ * alone.
+ */
+function splitLeafForPrefixes(
+  path: string[],
+  prefixes: readonly string[],
+): string[] {
+  if (path.length === 0) return path
+  const leaf = path[path.length - 1]
+  for (const prefix of prefixes) {
+    const marker = `${prefix}-`
+    if (leaf.startsWith(marker) && leaf.length > marker.length) {
+      return [...path.slice(0, -1), prefix, leaf.slice(marker.length)]
+    }
+  }
+  return path
+}
+
 /**
  * Build a nested object from Style Dictionary tokens using their path arrays.
  * Each path segment is converted to camelCase.
  */
-export function buildNestedObject(tokens: TransformedToken[]): NestedObject {
+export function buildNestedObject(
+  tokens: TransformedToken[],
+  options?: BuildNestedObjectOptions,
+): NestedObject {
   const root: NestedObject = {}
+  const splitPrefixes = options?.splitLeafPrefixes
 
   for (const token of tokens) {
-    const segments = token.path.map(toCamelCase)
+    const rawPath = splitPrefixes
+      ? splitLeafForPrefixes(token.path, splitPrefixes)
+      : token.path
+    const segments = rawPath.map(toCamelCase)
     let current = root
 
     for (let i = 0; i < segments.length - 1; i++) {
@@ -115,13 +158,19 @@ function serializeObject(obj: NestedObject, indent = 2): string {
  *
  * Options:
  * - rootName: the export name (e.g. "color"). Defaults to "tokens".
+ * - splitLeafPrefixes: optional list of hyphenated prefixes (e.g. `'font-weight'`)
+ *   that should be split into a nested key when found at the start of a leaf path
+ *   segment. See `BuildNestedObjectOptions`.
  */
 export function typescriptNestedFormat({
   dictionary,
   options,
 }: FormatFnArguments): string {
   const rootName = (options?.rootName as string) ?? 'tokens'
-  const nested = buildNestedObject(dictionary.allTokens)
+  const splitLeafPrefixes = options?.splitLeafPrefixes as
+    | readonly string[]
+    | undefined
+  const nested = buildNestedObject(dictionary.allTokens, { splitLeafPrefixes })
 
   const header = `/**\n * Do not edit directly, this file was auto-generated.\n */\n`
 

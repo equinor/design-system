@@ -30,6 +30,12 @@ interface BuildTokenOptions extends BaseOptions {
   outputReferences?: boolean
   rootName?: string
   tsBuildPath?: string
+  /**
+   * Hyphenated prefixes that are split into nested keys when found at the
+   * start of a token-path leaf. See `BuildNestedObjectOptions` in
+   * `@equinor/eds-tokens-build`. Only affects the TS output.
+   */
+  splitLeafPrefixes?: readonly string[]
 }
 
 // TODO: To generate JS and JSON output for all spacing/typography tokens (not just density),
@@ -47,6 +53,7 @@ async function buildTokenDictionary({
   outputReferences = true,
   rootName,
   tsBuildPath,
+  splitLeafPrefixes,
 }: BuildTokenOptions) {
   const platforms: Record<string, unknown> = {
     css: {
@@ -77,7 +84,7 @@ async function buildTokenDictionary({
           filter,
           destination: tsDestination,
           format: 'typescript/nested',
-          options: { rootName },
+          options: { rootName, splitLeafPrefixes },
         },
       ],
     }
@@ -348,6 +355,26 @@ export async function createSpacingAndTypographyVariables({
       file !== 'index.ts'
     ) {
       await fs.promises.unlink(path.join(spacingTsBuildPath, file))
+    }
+  }
+
+  // Clean up stale typography TS files. Only font-family-* is emitted today;
+  // font-size-*, font-weight-*, line-height-*, tracking-*, and the older
+  // size-extras.ts all used to be emitted but were removed. Style Dictionary
+  // collapses non-family axes to a single arbitrary cell of the family
+  // matrix, and the family-independent size extras (icon-size etc.) are now
+  // spliced directly into each size cell of the font-family files.
+  const existingTypographyTsFiles: string[] = await fs.promises
+    .readdir(tsBuildPath)
+    .catch((): string[] => [])
+  const KEPT_TYPOGRAPHY_TS = (file: string) => file.startsWith('font-family-')
+  for (const file of existingTypographyTsFiles) {
+    if (
+      file.endsWith('.ts') &&
+      file !== 'index.ts' &&
+      !KEPT_TYPOGRAPHY_TS(file)
+    ) {
+      await fs.promises.unlink(path.join(tsBuildPath, file))
     }
   }
 
@@ -828,9 +855,20 @@ export async function createSpacingAndTypographyVariables({
       filter: (token: TransformedToken) => includeTokenFilter(token, [mode]),
       rootName: 'typography',
       tsBuildPath,
+      // Source JSON encodes axis variants as hyphenated leaf keys
+      // (font-weight-lighter, tracking-tight, line-height-default). Splitting
+      // them produces nested TS output (fontWeight.lighter etc.) so consumers
+      // can derive variant types directly via `keyof`. CSS output is
+      // unaffected — its format uses the unsplit path for variable naming.
+      splitLeafPrefixes: ['font-weight', 'tracking', 'line-height'],
     }),
   )
 
+  // Font-size builds emit CSS plus a temporary per-size TS file. The TS is
+  // consumed by the post-step below to extract the three family-independent
+  // values (icon-size, gap-horizontal, gap-vertical) which then get spliced
+  // into each size cell of the family TS files. The temporary per-size files
+  // are deleted before this build finishes.
   const fontSizePromises = fontSizeConfig.map((size) =>
     buildTokenDictionary({
       include: [
@@ -850,6 +888,15 @@ export async function createSpacingAndTypographyVariables({
     }),
   )
 
+  // Font-weight, line-height, and tracking axes do NOT emit TS output. In
+  // CSS these axis files work as runtime selectors via the data-* cascade
+  // (e.g. [data-tracking="wide"] picks --tracking-wide from the active size).
+  // Style Dictionary cannot represent runtime mode switching, so a static TS
+  // export for one of these axes can only contain a single arbitrary cell
+  // from the family matrix — silently wrong for every other combination.
+  // Non-CSS consumers should import the family file directly and read the
+  // nested axis values off the size cell (e.g.
+  // `typography.fontFamilySize.md.fontWeight.bolder`).
   const fontWeightPromises = fontWeightConfig.map(({ mode, slug }) =>
     buildTokenDictionary({
       include: [
@@ -866,8 +913,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-font-weight="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'font-weight'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -887,8 +932,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-line-height="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'line-height'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -908,8 +951,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-tracking="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'tracking'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -920,4 +961,94 @@ export async function createSpacingAndTypographyVariables({
     ...lineHeightPromises,
     ...trackingPromises,
   ])
+
+  // Splice the family-independent size-axis extras (icon-size, gap-horizontal,
+  // gap-vertical) into each size cell of the font-family TS files. Style
+  // Dictionary cannot ergonomically aggregate values across sources, but the
+  // per-size CSS builds also emit a temporary TS file with already-resolved
+  // numeric values for those three properties. We parse those files, inject
+  // the values into the matching size cell of each family file, then delete
+  // the temp files.
+  //
+  // This is a build-time string-injection over content this same script just
+  // emitted, so the structure is predictable. The injection throws if a size
+  // cell can't be located, so failures are loud.
+  const sizeExtras: Record<
+    string,
+    { iconSize: number; gapHorizontal: number; gapVertical: number }
+  > = {}
+
+  const numberFor = (text: string, key: string): number => {
+    const m = new RegExp(`${key}:\\s*(-?[\\d.]+)`).exec(text)
+    if (!m) {
+      throw new Error(`size-extras: ${key} not found while parsing per-size TS`)
+    }
+    return parseFloat(m[1])
+  }
+
+  for (const size of fontSizeConfig) {
+    const sizeKey = size.toLowerCase()
+    const tsPath = path.join(tsBuildPath, `font-size-${sizeKey}.ts`)
+    const text = await fs.promises.readFile(tsPath, 'utf-8')
+    sizeExtras[sizeKey] = {
+      iconSize: numberFor(text, 'iconSize'),
+      gapHorizontal: numberFor(text, 'gapHorizontal'),
+      gapVertical: numberFor(text, 'gapVertical'),
+    }
+  }
+
+  // Mapping from JSON size key (lowercase) to the camelCased identifier the
+  // nested TS format emits. Mirrors `toCamelCase` in `typescriptNested.ts`.
+  const sizeKeyToCamel: Record<string, string> = {
+    xs: 'xs',
+    sm: 'sm',
+    md: 'md',
+    lg: 'lg',
+    xl: 'xl',
+    '2xl': 'twoXl',
+    '3xl': 'threeXl',
+    '4xl': 'fourXl',
+    '5xl': 'fiveXl',
+    '6xl': 'sixXl',
+  }
+
+  for (const familySlug of ['ui', 'header'] as const) {
+    const filePath = path.join(tsBuildPath, `font-family-${familySlug}.ts`)
+    let content = await fs.promises.readFile(filePath, 'utf-8')
+    for (const size of fontSizeConfig) {
+      const sizeKey = size.toLowerCase()
+      const camelKey = sizeKeyToCamel[sizeKey]
+      const extras = sizeExtras[sizeKey]
+      const injection =
+        `      iconSize: ${extras.iconSize},\n` +
+        `      gapHorizontal: ${extras.gapHorizontal},\n` +
+        `      gapVertical: ${extras.gapVertical},\n`
+      // Match the size cell's opening line (4-space indent at line start) and
+      // its closing `},` (also 4-space indent at line start). Nested axis
+      // blocks close at 6-space indent, so the line-anchored 4-space close is
+      // unambiguous. Insert the extras before the closing `},`.
+      const pattern = new RegExp(
+        `(^    ${camelKey}: \\{\\n[\\s\\S]*?)(^    \\},)`,
+        'm',
+      )
+      const next = content.replace(pattern, `$1${injection}$2`)
+      if (next === content) {
+        throw new Error(
+          `size-extras inject: size cell "${camelKey}" not found in ${filePath}`,
+        )
+      }
+      content = next
+    }
+    await fs.promises.writeFile(filePath, content, 'utf-8')
+  }
+
+  // Delete the temporary per-size TS files. The cleanup pass at the top of
+  // this function would also remove them on next run, but doing it here
+  // means a single build leaves the directory in its final state.
+  for (const size of fontSizeConfig) {
+    const sizeKey = size.toLowerCase()
+    await fs.promises
+      .unlink(path.join(tsBuildPath, `font-size-${sizeKey}.ts`))
+      .catch(() => {})
+  }
 }
