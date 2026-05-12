@@ -1,9 +1,5 @@
 @layer eds-components {
   .eds-menu {
-    /* Override selectable-space to Figma values (global token resolves to comfortable density ~8px) */
-    --eds-selectable-space-vertical: 1rem;
-    --eds-selectable-space-horizontal: 1rem;
-
     scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
     scrollbar-width: thin;
 
@@ -56,10 +52,6 @@
 
     -webkit-font-smoothing: antialiased;
 
-    &:hover {
-      --_bg: var(--eds-color-bg-fill-muted-default);
-    }
-
     &[data-active] {
       --_bg: var(--eds-color-bg-fill-muted-default);
 
@@ -67,9 +59,15 @@
       outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     }
 
-    &[aria-disabled='true'] {
+    &:is(:disabled, [aria-disabled='true']) {
       cursor: default;
       color: var(--eds-color-text-subtle);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:where(:not([aria-disabled='true'])):hover {
+        --_bg: var(--eds-color-bg-fill-muted-default);
+      }
     }
   }
 }
