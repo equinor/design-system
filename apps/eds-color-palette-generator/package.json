@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
+    "@microsoft/api-extractor": "^7.58.7",
     "@next/eslint-plugin-next": "16.2.4",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4.2.4",
