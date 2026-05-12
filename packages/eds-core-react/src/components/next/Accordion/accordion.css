@@ -4,6 +4,10 @@
     flex-direction: column;
     inline-size: 100%;
 
+    /* All inner selectors below are scoped with `>` so consumer content inside
+     * <Accordion.Panel> can't accidentally collide with our internal classes
+     * (.chevron, .title, .panel) or nested <details>/<summary> elements. */
+
     /* Item — each <details>. */
     & > details {
       border-block-start: var(--eds-sizing-stroke-thin) solid
@@ -26,7 +30,7 @@
     }
 
     /* Header (summary) */
-    & summary {
+    & > details > summary {
       cursor: pointer;
 
       display: flex;
@@ -44,12 +48,12 @@
     }
 
     /* Hide Safari's native marker */
-    & summary::-webkit-details-marker {
+    & > details > summary::-webkit-details-marker {
       display: none;
     }
 
-    & summary:hover,
-    & summary:focus-visible {
+    & > details > summary:hover,
+    & > details > summary:focus-visible {
       background-color: var(--eds-color-bg-fill-muted-default);
 
       & > .title {
@@ -57,14 +61,14 @@
       }
     }
 
-    & summary:focus-visible {
+    & > details > summary:focus-visible {
       outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
       outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     }
 
     /* Chevron — the icon's built-in `margin-inline: -0.1em` (icon.css) shrinks
      * the column to its optical bounds, same pattern Chip uses. */
-    & .chevron {
+    & > details > summary > .chevron {
       display: inline-flex;
 
       /* Resolves against data-color-appearance="accent" on the span */
@@ -77,7 +81,7 @@
     }
 
     /* Title */
-    & .title {
+    & > details > summary > .title {
       flex: 1;
       color: var(--eds-color-text-strong);
     }
@@ -85,7 +89,7 @@
     /* Panel — Figma spec 16 28 24 46.4. Inline-start equals the title's
      * horizontal start (container pad + chevron optical column + gap) so content
      * aligns under the title text. */
-    & .panel {
+    & > details > .panel {
       padding-block: var(--eds-selectable-space-vertical)
         var(--eds-spacing-vertical-xl);
       padding-inline: calc(
@@ -100,7 +104,7 @@
   /* Reduced motion: skip height + chevron animation */
   @media (prefers-reduced-motion: reduce) {
     .eds-accordion > details::details-content,
-    .eds-accordion .chevron {
+    .eds-accordion > details > summary > .chevron {
       transition: none;
     }
   }
