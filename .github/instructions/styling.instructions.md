@@ -1,10 +1,10 @@
 ---
-applyTo: '**'
+applyTo: 'packages/eds-core-react/src/components/next/**/*.css'
 ---
 
 # Styling Guidelines
 
-> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds CSS-specific guidance for Copilot.
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions — `--_` pseudo-private custom properties, `data-density` ancestor pattern, `@layer eds-components`, the modular type scale, and `@supports` progressive enhancement. This file adds Copilot-specific CSS reminders for `/next`.
 
 ## Tech Stack
 
@@ -55,38 +55,6 @@ DataGrid.tsx → data-grid.css
     background: var(--eds-color-bg-input);
     border: 1px solid var(--eds-color-border-medium);
   }
-}
-```
-
-### Pseudo-private custom properties
-
-Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**.
-
-```css
-/* CORRECT */
-.eds-button {
-  --_color: var(--eds-color-text-strong-on-emphasis);
-  --_bg-color: var(--eds-color-bg-fill-emphasis-default);
-  color: var(--_color);
-  background-color: var(--_bg-color);
-}
-.eds-button[data-variant='ghost']:disabled {
-  --_color: var(--eds-color-text-disabled); /* override the variable */
-}
-
-/* WRONG — never override the property directly */
-.eds-button[data-variant='ghost']:disabled {
-  color: var(--eds-color-text-disabled);
-}
-```
-
-### Density via ancestor attribute
-
-Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor:
-
-```css
-[data-density='comfortable'] .eds-button[data-selectable-space='md'] {
-  --_min-height: 1.5rem;
 }
 ```
 

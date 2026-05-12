@@ -1,29 +1,10 @@
 ---
-applyTo: '**/*.ts,**/*.tsx'
+applyTo: 'packages/eds-core-react/src/components/next/**/*.{ts,tsx}'
 ---
 
 # React Guidelines
 
-> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds React-specific guidance for Copilot.
-
-## Component Structure
-
-EDS 2.0 components live in `packages/eds-core-react/src/components/next/`.
-
-**File organization (required):**
-
-```
-MyComponent/
-  index.ts                # Named exports only
-  MyComponent.tsx         # forwardRef component
-  MyComponent.types.ts    # Props and type definitions with JSDoc
-  my-component.css        # Vanilla CSS + tokens + nesting
-  MyComponent.figma.tsx   # Figma Code Connect (when a Figma design exists)
-  MyComponent.test.tsx    # Jest + Testing Library + jest-axe
-  MyComponent.stories.tsx # Storybook documentation
-```
-
-**Directory naming:** PascalCase matching component name
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions (file structure, code style, CSS patterns, polymorphism, testing). This file adds Copilot-specific reminders for `/next` components.
 
 ## Implementation Patterns
 

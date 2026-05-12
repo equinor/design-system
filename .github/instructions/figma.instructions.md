@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+applyTo: 'packages/eds-core-react/src/components/next/**/*.figma.tsx'
 ---
 
 # Figma Component Creation
