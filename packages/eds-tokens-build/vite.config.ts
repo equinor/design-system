@@ -39,6 +39,10 @@ export default defineConfig({
           __dirname,
           'src/scripts/build-elevation-variables.ts',
         ),
+        'scripts/build-dark-scope': resolve(
+          __dirname,
+          'src/scripts/build-dark-scope.ts',
+        ),
       },
       formats: ['es'],
     },

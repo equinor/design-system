@@ -67,11 +67,6 @@ exports[`Checkbox (next) matches snapshot 1`] = `
     <label
       class="eds-field__label"
       data-baseline="center"
-      data-font-family="ui"
-      data-font-size="md"
-      data-font-weight="normal"
-      data-line-height="default"
-      data-tracking="normal"
       for="test-id"
     >
       checkbox

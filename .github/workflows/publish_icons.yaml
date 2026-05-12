@@ -48,7 +48,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.12.0'
+          node-version: '22.14.0'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -67,6 +67,9 @@ jobs:
     name: Publish icons to npm
     runs-on: ubuntu-latest
     needs: [packages, setup]
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Use "dist" cache
         id: dist-cache
@@ -79,7 +82,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.12.0'
+          node-version: '22.14.0'
+          registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -87,9 +91,8 @@ jobs:
           run_install: false
       - name: Publish to npm
         id: publish-to-npm
-        run: |
-          pnpm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_TOKEN }}
-          pnpm --filter ./packages/eds-icons publish --access public --no-git-checks --tag ${{ needs.setup.outputs.tag }}
+        working-directory: packages/eds-icons
+        run: npm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:

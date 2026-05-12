@@ -90,6 +90,11 @@ const sidebars: SidebarsConfig = {
       label: 'Navigation',
       items: ['components/navigation/link'],
     },
+    {
+      type: 'category',
+      label: 'Surfaces',
+      items: ['components/surfaces/divider'],
+    },
   ],
   //Foundation Section
   foundationSidebar: [
