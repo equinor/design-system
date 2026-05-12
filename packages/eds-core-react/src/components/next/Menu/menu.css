@@ -61,7 +61,7 @@
 
     &:is(:disabled, [aria-disabled='true']) {
       cursor: default;
-      color: var(--eds-color-text-subtle);
+      color: var(--eds-color-text-disabled);
     }
 
     @media (hover: hover) and (pointer: fine) {

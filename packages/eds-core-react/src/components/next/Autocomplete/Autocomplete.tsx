@@ -84,20 +84,30 @@ function AutocompleteInner<T = string>(
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
   const [isFiltering, setIsFiltering] = useState(false)
-  const isMouseInteraction = useRef(false)
+  const suppressNextFocusOpen = useRef(false)
   const [internalSelectedOption, setInternalSelectedOption] = useState<
     T | string | undefined
   >(() => value)
   const effectiveSelected: T | string | undefined =
     value ?? internalSelectedOption
 
-  // Sync input text when value (selected option) changes externally (uncontrolled mode)
+  // Sync input text when the external value prop changes (uncontrolled mode only).
+  // getLabelFn is intentionally omitted from deps: an inline getOptionLabel creates
+  // a new function reference every parent render, which would re-fire the effect and
+  // overwrite mid-typed input. When value actually changes the component re-renders,
+  // so getLabelFn is already current in the closure.
+  // Also clears the input when value transitions to undefined (parent clears selection).
   useEffect(() => {
-    if (!isControlled && value !== undefined) {
+    if (isControlled) return
+    if (value !== undefined) {
       setInternalValue(getLabelFn(value))
       setInternalSelectedOption(value)
+    } else {
+      setInternalValue('')
+      setInternalSelectedOption(undefined)
     }
-  }, [value, isControlled, getLabelFn])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, isControlled])
 
   const [announcement, setAnnouncement] = useState('')
   const [customOptions, setCustomOptions] = useState<string[]>([])
@@ -196,12 +206,14 @@ function AutocompleteInner<T = string>(
     }
   }
 
-  // onFocus handles Tab-into-field; mouse clicks are handled by onClick
-  // to avoid the Popover API light-dismissing the popover in the same
-  // pointerdown tick that triggered focus
+  // Event order for mouse clicks: pointerdown → (Popover light-dismiss if open)
+  // → focus → mouseup → click. handleMouseDown sets suppressNextFocusOpen so
+  // that the focus handler (which fires mid-sequence) doesn't immediately reopen
+  // the popover. handleClick then opens it at the correct time. The same flag is
+  // reused after programmatic focus (option select / clear) to prevent reopen.
   const handleFocus = () => {
-    const wasMouse = isMouseInteraction.current
-    isMouseInteraction.current = false
+    const wasMouse = suppressNextFocusOpen.current
+    suppressNextFocusOpen.current = false
     setIsFiltering(false)
     if (!wasMouse) openListbox()
   }
@@ -213,11 +225,11 @@ function AutocompleteInner<T = string>(
   }
 
   const handleMouseDown = () => {
-    isMouseInteraction.current = true
+    suppressNextFocusOpen.current = true
   }
 
   const handleClick = () => {
-    isMouseInteraction.current = false
+    suppressNextFocusOpen.current = false
     setIsFiltering(false)
     openListbox()
   }
@@ -229,7 +241,7 @@ function AutocompleteInner<T = string>(
     setIsFiltering(false)
     closeListbox()
     // Mark as programmatic re-focus so handleFocus doesn't reopen the listbox
-    isMouseInteraction.current = true
+    suppressNextFocusOpen.current = true
     inputRef.current?.focus()
   }
 
@@ -244,7 +256,7 @@ function AutocompleteInner<T = string>(
     onCustomValueConfirm?.(text)
     setIsFiltering(false)
     closeListbox()
-    isMouseInteraction.current = true
+    suppressNextFocusOpen.current = true
     inputRef.current?.focus()
   }
 
@@ -262,7 +274,7 @@ function AutocompleteInner<T = string>(
     setIsFiltering(false)
     closeListbox()
     onClear?.()
-    isMouseInteraction.current = true
+    suppressNextFocusOpen.current = true
     inputRef.current?.focus()
   }
 
@@ -373,6 +385,11 @@ function AutocompleteInner<T = string>(
     }
   }
 
+  // Clamp activeIndex when options shrink (e.g. async search returning fewer results)
+  useEffect(() => {
+    setActiveIndex((prev) => (prev >= totalOptions ? -1 : prev))
+  }, [totalOptions])
+
   // Sync isOpen from popover toggle event (covers light-dismiss too)
   const handleToggle = (e: React.SyntheticEvent<HTMLUListElement>) => {
     const toggleEvent = e.nativeEvent as ToggleEvent
@@ -405,7 +422,10 @@ function AutocompleteInner<T = string>(
         ?.querySelector(`#${getOptionId(displayIndex)}`)
         ?.scrollIntoView({ block: 'nearest' })
     }
-  }, [isOpen]) // eslint-disable-line react-hooks/exhaustive-deps
+    // effectiveSelected and filteredItems are intentionally omitted — this effect
+    // only needs to scroll once when the listbox opens, not on every filter change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
 
   return (
     <div
@@ -485,9 +505,13 @@ function AutocompleteInner<T = string>(
             onToggle={handleToggle}
           >
             {loading ? (
-              <MenuItem aria-disabled="true">{loadingText}</MenuItem>
+              <MenuItem role="presentation" aria-disabled="true">
+                {loadingText}
+              </MenuItem>
             ) : totalOptions === 0 ? (
-              <MenuItem aria-disabled="true">{noOptionsText}</MenuItem>
+              <MenuItem role="presentation" aria-disabled="true">
+                {noOptionsText}
+              </MenuItem>
             ) : (
               <>
                 {allowCustomValue && (
@@ -508,12 +532,13 @@ function AutocompleteInner<T = string>(
                         ? () => handleCustomOptionSelect(inputValue.trim())
                         : undefined
                     }
-                    onClick={
-                      customValueTyped &&
-                      listboxRef.current?.matches(':popover-open')
-                        ? () => handleCustomOptionSelect(inputValue.trim())
-                        : undefined
-                    }
+                    onClick={() => {
+                      if (
+                        customValueTyped &&
+                        listboxRef.current?.matches(':popover-open')
+                      )
+                        handleCustomOptionSelect(inputValue.trim())
+                    }}
                   >
                     <Icon data={add_box} aria-hidden="true" />
                     {customValueTyped
@@ -530,7 +555,11 @@ function AutocompleteInner<T = string>(
                     (optionDisabled?.(item.value) ?? false)
                   return (
                     <MenuItem
-                      key={label}
+                      key={
+                        item.type === 'list' && getOptionValue
+                          ? getOptionValue(item.value)
+                          : label
+                      }
                       id={getOptionId(displayIndex)}
                       role="option"
                       aria-selected={selected}

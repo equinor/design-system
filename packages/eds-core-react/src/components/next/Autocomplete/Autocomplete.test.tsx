@@ -1,3 +1,6 @@
+// Note: many queries use { hidden: true } because jsdom renders the popover
+// listbox as display:none (Popover API not implemented) and getByRole would
+// otherwise throw. hidden:true bypasses the visibility filter.
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
