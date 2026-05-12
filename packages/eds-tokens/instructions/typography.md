@@ -91,67 +91,83 @@ Change typographic properties by updating data attributes -- no CSS changes need
 </small>
 ```
 
-## TypeScript Tokens
+## Using Typography in TypeScript / JavaScript
 
-Typography tokens are available as nested TypeScript objects with `as const` for type safety.
+The CSS cascade is what composes the five axes into a final style. Targets without a cascade -- React Native, server-side rendering, design tooling, plain JS -- read the family matrix directly and pick the variant they want.
 
-### Import
+### Direct token import
 
-```typescript
-import { typography } from '@equinor/eds-tokens/ts/typography/font-size-md'
-import { typography } from '@equinor/eds-tokens/ts/typography/font-family-header'
-import { typography } from '@equinor/eds-tokens/ts/typography/font-weight-normal'
-import { typography } from '@equinor/eds-tokens/ts/typography/line-height-default'
-import { typography } from '@equinor/eds-tokens/ts/typography/tracking-tight'
-```
-
-### Available Files
-
-Each mode of each axis has its own file:
-
-| Axis | Files |
-|------|-------|
-| Font family | `font-family-header`, `font-family-ui` |
-| Font size | `font-size-xs`, `font-size-sm`, `font-size-md`, `font-size-lg`, `font-size-xl`, `font-size-2xl`, `font-size-3xl`, `font-size-4xl`, `font-size-5xl`, `font-size-6xl` |
-| Font weight | `font-weight-lighter`, `font-weight-normal`, `font-weight-bolder` |
-| Line height | `line-height-default`, `line-height-squished` |
-| Tracking | `tracking-tight`, `tracking-normal`, `tracking-wide`, `tracking-loose` |
-
-### Usage
+Two files are emitted, one per font family. Each is a fully resolved matrix keyed by size, with nested axes inside each size cell:
 
 ```typescript
-import { typography } from '@equinor/eds-tokens/ts/typography/font-size-md'
+import { typography as ui } from '@equinor/eds-tokens/ts/typography/font-family-ui'
+import { typography as header } from '@equinor/eds-tokens/ts/typography/font-family-header'
 
-// Font size files contain resolved values for that size
-typography.typography['font-size']        // '16'
-typography.typography['line-height-default'] // '20'
-typography.typography['font-weight-normal'] // '400'
+const md = ui.fontFamilySize.md
+
+const style = {
+  fontFamily: ui.typography.fontFamily,
+  fontSize: md.fontSize,
+  fontWeight: md.fontWeight.normal,    // 300 | 400 | 500
+  lineHeight: md.lineHeight.default,   // pixels
+  letterSpacing: md.tracking.normal,
+}
+// { fontFamily: 'Inter', fontSize: 14, fontWeight: 400,
+//   lineHeight: 20, letterSpacing: 0 }
 ```
+
+The size cell also exposes family-independent extras for chip- and button-like layouts:
 
 ```typescript
-import { typography } from '@equinor/eds-tokens/ts/typography/font-family-header'
-
-// Font family files contain the family and all size-specific values
-typography.typography['font-family']      // 'Equinor'
-typography['font-family-size'].md['font-size'] // '16'
+const md = ui.fontFamilySize.md
+md.iconSize       // matches the size axis
+md.gapHorizontal  // matches the size axis
+md.gapVertical
 ```
 
-### Naming Conversion
+### Deriving variant types
 
-CSS variable segments map to TypeScript object keys:
+Variant names are encoded in the data, so consumers don't have to hand-roll axis-name lookups:
 
-| CSS variable | TypeScript path |
-|---|---|
-| `--eds-typography-font-size` | `typography.typography['font-size']` |
-| `--eds-typography-font-weight` | `typography.typography['font-weight']` |
-| `--eds-typography-tracking` | `typography.typography.tracking` |
+```typescript
+type FontFamily   = 'ui' | 'header'
+type FontSize     = keyof typeof ui.fontFamilySize           // 'xs' | 'sm' | ... | 'sixXl'
+type FontWeight   = keyof typeof ui.fontFamilySize.md.fontWeight   // 'lighter' | 'normal' | 'bolder'
+type LineHeight   = keyof typeof ui.fontFamilySize.md.lineHeight   // 'default' | 'squished'
+type Tracking     = keyof typeof ui.fontFamilySize.md.tracking     // 'tight' | 'normal' | 'wide'
+```
+
+### React Native
+
+Pass `String(...)` over the weight when handing it to `<Text style>` (RN expects string fontWeight):
+
+```typescript
+import { Text, StyleSheet } from 'react-native'
+import { typography as ui } from '@equinor/eds-tokens/ts/typography/font-family-ui'
+
+const md = ui.fontFamilySize.md
+
+const styles = StyleSheet.create({
+  body: {
+    fontFamily: ui.typography.fontFamily,
+    fontSize: md.fontSize,
+    fontWeight: String(md.fontWeight.normal) as '400',
+    lineHeight: md.lineHeight.default,
+    letterSpacing: md.tracking.normal,
+  },
+})
+```
+
+### What's not exported
+
+The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the per-size files (`font-size-{xs..6xl}`) intentionally do **not** ship as TypeScript. Their values depend on the active mode of another axis at runtime, so a static TypeScript export cannot represent them without silently picking one cell of the matrix. The two family files are the only TS surface — everything you need to compose a style lives on a single size cell within them.
 
 ## Output Formats
 
 | Format | Import path | Use case |
 |--------|-------------|----------|
 | **CSS variables** | `@equinor/eds-tokens/css/variables` | Standard web styling via data attributes |
-| **TypeScript (nested)** | `@equinor/eds-tokens/ts/typography/*` | Type-safe access with autocomplete |
+| **TypeScript matrix** | `@equinor/eds-tokens/ts/typography/font-family-{ui,header}` | Direct matrix access for non-CSS consumers (RN, SSR, design tooling) |
 
 ## Best Practices
 

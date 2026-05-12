@@ -114,6 +114,37 @@ const padding = comfortableSpacing.SPACING_INLINE_MD
 const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
 ```
 
+#### Typography (non-CSS targets)
+
+Typography is composed at runtime from five orthogonal axes. The CSS bundle resolves them via `data-*` attributes; non-CSS consumers (React Native, SSR, design tooling) import the family-keyed matrix directly:
+
+```typescript
+import { typography as ui } from '@equinor/eds-tokens/ts/typography/font-family-ui'
+import { typography as header } from '@equinor/eds-tokens/ts/typography/font-family-header'
+
+const md = ui.fontFamilySize.md
+
+const style = {
+  fontFamily: ui.typography.fontFamily,
+  fontSize: md.fontSize,
+  fontWeight: md.fontWeight.normal,
+  lineHeight: md.lineHeight.default,
+  letterSpacing: md.tracking.normal,
+}
+// { fontFamily: 'Inter', fontSize: 14, fontWeight: 400,
+//   lineHeight: 20, letterSpacing: 0 }
+```
+
+Each size cell exposes `fontSize`, nested `fontWeight` / `tracking` / `lineHeight` objects, and inlined `iconSize` / `gapHorizontal` / `gapVertical` extras for chip- and button-like layouts. Variant names can be derived with `keyof`:
+
+```typescript
+type Weight = keyof typeof ui.fontFamilySize.md.fontWeight // 'lighter' | 'normal' | 'bolder'
+```
+
+For React Native, coerce `fontWeight` to a string at the call site (`String(md.fontWeight.normal)`) so it slots into `<Text style>`.
+
+See [`instructions/typography.md`](./instructions/typography.md) for the full axis model.
+
 ### Importing variables as JSON
 
 The variables are available in two formats:
@@ -167,7 +198,7 @@ The typography system requires two font families: **Equinor** (headings) and **I
 
 ### Typography variables that adapt to data-attributes
   * Font family setup (UI and Header fonts)
-  * Font size data attributes (`[data-text-size='xs']`, `[data-text-size='sm']`, etc.)
+  * Font size data attributes (`[data-font-size='xs']`, `[data-font-size='sm']`, etc.)
   * Line height data attributes (`[data-line-height='default']`, `[data-line-height='squished']`)
   * Font weight data attributes (`[data-font-weight='lighter']`, `[data-font-weight='normal']`, `[data-font-weight='bolder']`)
   * Letter spacing data attributes (`[data-tracking='tight']`, `[data-tracking='normal']`, `[data-tracking='wide']`)
@@ -194,17 +225,17 @@ Set typography properties using data attributes:
 
 ```html
 <!-- UI font with medium size -->
-<p data-font-family="ui" data-text-size="md" data-line-height="default">
+<p data-font-family="ui" data-font-size="md" data-line-height="default">
   UI font text
 </p>
 
 <!-- Header font with extra large size and bolder weight -->
-<h1 data-font-family="header" data-text-size="xl" data-font-weight="bolder">
+<h1 data-font-family="header" data-font-size="xl" data-font-weight="bolder">
   Header font text
 </h1>
 
 <!-- Baseline grid alignment -->
-<p data-font-family="ui" data-text-size="md" data-baseline="grid">
+<p data-font-family="ui" data-font-size="md" data-baseline="grid">
   Aligned to 4px baseline grid
 </p>
 ```
@@ -269,7 +300,7 @@ The foundation CSS includes baseline grid alignment for consistent vertical rhyt
 * `data-baseline="center"` -- Centers text vertically while maintaining 4px grid alignment
 
 ```html
-<p data-font-family="ui" data-text-size="md" data-baseline="grid">
+<p data-font-family="ui" data-font-size="md" data-baseline="grid">
   Text aligned to baseline grid
 </p>
 ```
