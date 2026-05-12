@@ -13,50 +13,11 @@ applyTo: 'packages/eds-core-react/src/components/next/**/*.css'
 - **Variables:** CSS custom properties from `@equinor/eds-tokens`
 - **Responsive:** Mobile-first approach with media queries
 
-## Naming Conventions
+## Naming, classes, and `@layer eds-components`
 
-**Files:** Component name in lowercase with hyphens
-
-```
-TextInput.tsx → text-input.css
-DataGrid.tsx → data-grid.css
-```
-
-**Classes:** One `eds-`-prefixed root class per component. Internal elements use simple names scoped by CSS nesting. Variants and state via data attributes.
-
-```css
-@layer eds-components {
-  .eds-text-input {
-    /* Root — eds-prefixed */
-
-    & .label {
-      /* Internal element — simple name, scoped by nesting */
-    }
-
-    &[data-disabled] {
-      /* State via data attribute */
-    }
-
-    &[data-variant='error'] {
-      /* Variant via data attribute */
-    }
-  }
-}
-```
+See [`AGENTS.md`](../../AGENTS.md) for file naming, the `eds-`-prefixed root class with nested simple names, `data-*` attributes for variants, and the `@layer eds-components` wrapper.
 
 ## Patterns
-
-**CSS Variables (from EDS tokens):**
-
-```css
-@layer eds-components {
-  .eds-text-input {
-    color: var(--eds-color-text-strong);
-    background: var(--eds-color-bg-input);
-    border: 1px solid var(--eds-color-border-medium);
-  }
-}
-```
 
 **Responsive Design:**
 
