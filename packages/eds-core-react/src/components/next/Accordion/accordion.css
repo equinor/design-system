@@ -68,6 +68,12 @@
       display: none;
     }
 
+    /* Open state — title picks up the accent appearance to signal expansion.
+     * Same specificity as :hover below, so hover/focus wins by source order. */
+    & > details[open] > summary {
+      --_title-color: var(--eds-color-text-accent-subtle);
+    }
+
     & > details > summary:hover,
     & > details > summary:focus-visible {
       --_summary-bg: var(--eds-color-bg-fill-muted-default);
