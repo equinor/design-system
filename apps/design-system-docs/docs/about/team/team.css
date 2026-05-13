@@ -350,7 +350,7 @@
 
 .component-gallery__preview {
   height: 160px;
-  background-color: var(--ifm-color-emphasis-100);
+  background-color: #fff;
   overflow: hidden;
   display: flex;
   align-items: center;
