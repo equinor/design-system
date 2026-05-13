@@ -44,14 +44,6 @@
       }
     }
 
-    &[data-invalid] .eds-menu-item {
-      background-color: var(--eds-color-bg-canvas);
-
-      &:hover {
-        filter: brightness(0.97);
-      }
-    }
-
     & .sr-only {
       position: absolute;
 
