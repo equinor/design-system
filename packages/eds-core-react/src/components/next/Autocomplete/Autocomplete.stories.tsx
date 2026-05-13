@@ -500,38 +500,6 @@ Loading.parameters = {
   },
 }
 
-export const DensityModes: StoryFn = () => (
-  <div style={{ display: 'flex', gap: '2rem' }}>
-    <div data-density="spacious" style={{ width: '320px' }}>
-      <h3 style={{ marginBottom: '1rem' }}>Spacious</h3>
-      <Autocomplete
-        label="Element"
-        options={elements}
-        placeholder="Search elements"
-        helperMessage="Default density"
-      />
-    </div>
-    <div data-density="comfortable" style={{ width: '320px' }}>
-      <h3 style={{ marginBottom: '1rem' }}>Comfortable</h3>
-      <Autocomplete
-        label="Element"
-        options={elements}
-        placeholder="Search elements"
-        helperMessage="Compact density"
-      />
-    </div>
-  </div>
-)
-
-DensityModes.parameters = {
-  docs: {
-    description: {
-      story:
-        'Autocomplete adapts to density modes via the `data-density` attribute on a parent element. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown items respond to density as well.',
-    },
-  },
-}
-
 export const Async: StoryFn = () => {
   type Country = {
     name: { common: string; official: string }
@@ -714,6 +682,38 @@ WithReactHookForm.parameters = {
   docs: {
     description: {
       story: `Use \`Controller\` from react-hook-form and wire \`value\` / \`onValueChange\` to \`field.value\` / \`field.onChange\`. Pass \`onClear={() => field.onChange(undefined)}\` so clearing the field also resets the form value. \`invalid\` and \`helperMessage\` connect validation errors.`,
+    },
+  },
+}
+
+export const DensityModes: StoryFn = () => (
+  <div style={{ display: 'flex', gap: '2rem' }}>
+    <div data-density="spacious" style={{ width: '320px' }}>
+      <h3 style={{ marginBottom: '1rem' }}>Spacious</h3>
+      <Autocomplete
+        label="Element"
+        options={elements}
+        placeholder="Search elements"
+        helperMessage="Default density"
+      />
+    </div>
+    <div data-density="comfortable" style={{ width: '320px' }}>
+      <h3 style={{ marginBottom: '1rem' }}>Comfortable</h3>
+      <Autocomplete
+        label="Element"
+        options={elements}
+        placeholder="Search elements"
+        helperMessage="Compact density"
+      />
+    </div>
+  </div>
+)
+
+DensityModes.parameters = {
+  docs: {
+    description: {
+      story:
+        'Autocomplete adapts to density modes via the `data-density` attribute on a parent element. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown items respond to density as well.',
     },
   },
 }
