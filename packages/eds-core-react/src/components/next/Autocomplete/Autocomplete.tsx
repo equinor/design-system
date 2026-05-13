@@ -14,6 +14,12 @@ import {
 } from 'react'
 import { search as searchIcon, close, add_box } from '@equinor/eds-icons'
 import type { AutocompleteProps } from './Autocomplete.types'
+import {
+  defaultOptionsFilter,
+  isOptionDisabled,
+  resolveOptionKey,
+  resolveOptionLabel,
+} from '../utils/selectOptions'
 import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
 import { Icon } from '../Icon'
@@ -64,15 +70,9 @@ function AutocompleteInner<T = string>(
   const listboxId = `eds-autocomplete-listbox-${uid.replace(/:/g, '')}`
   const anchorName = `--eds-autocomplete-${uid.replace(/:/g, '')}`
 
-  const resolvedGetOptionLabel = useMemo(
-    () => getOptionLabel ?? ((option: T) => String(option)),
-    [getOptionLabel],
-  )
-
   const getLabelFn = useCallback(
-    (option: T | string): string =>
-      typeof option === 'string' ? option : resolvedGetOptionLabel(option),
-    [resolvedGetOptionLabel],
+    (option: T | string): string => resolveOptionLabel(option, getOptionLabel),
+    [getOptionLabel],
   )
 
   const isControlled = inputValueProp !== undefined
@@ -137,23 +137,22 @@ function AutocompleteInner<T = string>(
           (o) =>
             !options.some(
               (opt) =>
-                resolvedGetOptionLabel(opt).toLowerCase() === o.toLowerCase(),
+                resolveOptionLabel(opt, getOptionLabel).toLowerCase() ===
+                o.toLowerCase(),
             ),
         )
         .map((o) => ({ type: 'custom' as const, value: o })),
     ],
-    [options, customOptions, resolvedGetOptionLabel],
+    [options, customOptions, getOptionLabel],
   )
 
   const matchesFilter = useCallback(
     (item: OptionItem<T>, text: string): boolean => {
-      if (item.type === 'custom') {
-        return item.value.toLowerCase().includes(text.toLowerCase())
-      }
+      if (item.type === 'custom') return defaultOptionsFilter(item.value, text)
       if (optionsFilter) return optionsFilter(item.value, text)
-      return getLabelFn(item.value).toLowerCase().includes(text.toLowerCase())
+      return defaultOptionsFilter(item.value, text, getOptionLabel)
     },
-    [optionsFilter, getLabelFn],
+    [optionsFilter, getOptionLabel],
   )
 
   const filteredItems = useMemo<OptionItem<T>[]>(
@@ -238,7 +237,8 @@ function AutocompleteInner<T = string>(
   }
 
   const handleListOptionSelect = (option: T) => {
-    if (!isControlled) setInternalValue(resolvedGetOptionLabel(option))
+    if (!isControlled)
+      setInternalValue(resolveOptionLabel(option, getOptionLabel))
     setInternalSelectedOption(option)
     onValueChange?.(option)
     setIsFiltering(false)
@@ -374,7 +374,8 @@ function AutocompleteInner<T = string>(
           const item = filteredItems[optionIndex]
           if (item) {
             const isDisabled =
-              item.type === 'list' && (optionDisabled?.(item.value) ?? false)
+              item.type === 'list' &&
+              isOptionDisabled(item.value, optionDisabled)
             if (!isDisabled) handleItemSelect(item)
           }
         }
@@ -555,12 +556,16 @@ function AutocompleteInner<T = string>(
                   const selected = isItemSelected(item)
                   const disabled =
                     item.type === 'list' &&
-                    (optionDisabled?.(item.value) ?? false)
+                    isOptionDisabled(item.value, optionDisabled)
                   return (
                     <MenuItem
                       key={
-                        item.type === 'list' && getOptionValue
-                          ? getOptionValue(item.value)
+                        item.type === 'list'
+                          ? resolveOptionKey(
+                              item.value,
+                              getOptionValue,
+                              getOptionLabel,
+                            )
                           : label
                       }
                       id={getOptionId(displayIndex)}
