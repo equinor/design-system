@@ -3,7 +3,12 @@
     /* Pseudo-private component vars. States/variants override these vars rather
      * than the consuming properties below. */
     --_summary-bg: transparent;
-    --_title-color: var(--eds-color-text-strong);
+
+    /* Title sits in accent appearance in every state. At rest (closed or open)
+     * it uses the subtle accent shade so chevron and title share the same
+     * family; hover/focus pull the title to the strong accent shade for
+     * interaction feedback. */
+    --_title-color: var(--eds-color-text-accent-subtle);
 
     /* TODO: the chevron is an icon foreground, but EDS tokens currently only
      * expose `accent-9` (#206F77) via bg-fill tokens. Replace with an
@@ -68,21 +73,20 @@
       display: none;
     }
 
-    /* Open state — title picks up the accent appearance to signal expansion.
-     * Same specificity as :hover below, so hover/focus wins by source order. */
-    & > details[open] > summary {
-      --_title-color: var(--eds-color-text-accent-subtle);
-    }
-
     & > details > summary:hover,
     & > details > summary:focus-visible {
       --_summary-bg: var(--eds-color-bg-fill-muted-default);
       --_title-color: var(--eds-color-text-accent-strong);
     }
 
+    /* Focus indicator on stacked items (accordion / menu): a single bottom
+     * edge line rather than a full outline, so adjacent items don't stack
+     * visually competing rings. Box-shadow keeps the summary's layout
+     * unchanged. */
     & > details > summary:focus-visible {
-      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+      outline: none;
+      box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thin)) 0
+        var(--eds-color-border-focus);
     }
 
     /* Chevron — explicit inline-size keeps the column predictable; the icon's
