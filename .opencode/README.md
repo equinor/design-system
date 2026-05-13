@@ -4,7 +4,7 @@ This directory contains custom AI agent configurations for OpenCode in the EDS r
 
 ## Global Configuration
 
-The root `AGENTS.md` file provides **global instructions** for all AI coding tools (OpenCode, Claude Code, Cursor, GitHub Copilot). It contains repository-wide conventions that apply regardless of which agent or tool is used.
+The root `AGENTS.md` file provides **global instructions** for all AI coding tools (OpenCode, Claude Code, GitHub Copilot). It contains repository-wide conventions that apply regardless of which agent or tool is used.
 
 The `.opencode/` directory contains **OpenCode-specific** agent definitions that build on top of the global instructions.
 

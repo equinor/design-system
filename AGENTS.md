@@ -1,6 +1,6 @@
 # AGENTS.md — Equinor Design System
 
-This is the **canonical conventions file** for AI coding agents working in this repository. Tool-specific configs (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, `.opencode/`, `.cursorrules`) reference this file rather than duplicating its content.
+This is the **canonical conventions file** for AI coding agents working in this repository. Tool-specific configs (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, `.opencode/`) reference this file rather than duplicating its content.
 
 ## Overview
 
@@ -391,7 +391,6 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
-| `.cursorrules`                    | Cursor: pointer to copilot instructions                    |
 | `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
 When adding new conventions, update **this file** and let the tool-specific files reference it.
