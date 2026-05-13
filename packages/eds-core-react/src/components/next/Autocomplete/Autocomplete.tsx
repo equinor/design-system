@@ -96,16 +96,18 @@ function AutocompleteInner<T = string>(
   // a new function reference every parent render, which would re-fire the effect and
   // overwrite mid-typed input. When value actually changes the component re-renders,
   // so getLabelFn is already current in the closure.
-  // Also clears the input when value transitions to undefined (parent clears selection).
+  // Only clears when value transitions from defined → undefined (parent clears selection).
+  // Skips the clear on initial mount so defaultInputValue is not overwritten.
   useEffect(() => {
     if (isControlled) return
     if (value !== undefined) {
       setInternalValue(getLabelFn(value))
       setInternalSelectedOption(value)
-    } else {
+    } else if (prevValueRef.current !== undefined) {
       setInternalValue('')
       setInternalSelectedOption(undefined)
     }
+    prevValueRef.current = value
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, isControlled])
 
@@ -113,6 +115,7 @@ function AutocompleteInner<T = string>(
   const [customOptions, setCustomOptions] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement | null>(null)
   const listboxRef = useRef<HTMLUListElement | null>(null)
+  const prevValueRef = useRef<T | undefined>(value)
 
   const mergedRef = useCallback(
     (node: HTMLInputElement | null) => {
@@ -505,11 +508,11 @@ function AutocompleteInner<T = string>(
             onToggle={handleToggle}
           >
             {loading ? (
-              <MenuItem role="presentation" aria-disabled="true">
+              <MenuItem role="presentation" data-status>
                 {loadingText}
               </MenuItem>
             ) : totalOptions === 0 ? (
-              <MenuItem role="presentation" aria-disabled="true">
+              <MenuItem role="presentation" data-status>
                 {noOptionsText}
               </MenuItem>
             ) : (

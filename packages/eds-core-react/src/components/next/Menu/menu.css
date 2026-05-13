@@ -60,12 +60,17 @@
     }
 
     &:is(:disabled, [aria-disabled='true']) {
+      cursor: not-allowed;
+      color: var(--eds-color-text-disabled);
+    }
+
+    &[data-status] {
       cursor: default;
       color: var(--eds-color-text-disabled);
     }
 
     @media (hover: hover) and (pointer: fine) {
-      &:where(:not([aria-disabled='true'])):hover {
+      &:where(:not([aria-disabled='true'], [data-status])):hover {
         --_bg: var(--eds-color-bg-fill-muted-default);
       }
     }
