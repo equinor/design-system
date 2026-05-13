@@ -5,7 +5,7 @@ Find the tools, guides, and assets you need to work effectively with the Equinor
 ## Internal References
 
 - [Setup Guide](../about/getting-started/getting_started.md) – Begin using the design system
-- [Components](../components/components.md) – Usage, props, and examples for all EDS components
+- [Components](../components/components.mdx) – Usage, props, and examples for all EDS components
 - [Accessibility Guidelines](../foundation/accessibility.md) – Standards for accessible design
 - [System Icon Guidelines](../foundation/assets/system_icons.md) – System icons for download and use
 - [Product Icon Guidelines](../foundation/assets/product_icons.md) – Product icons for download and use

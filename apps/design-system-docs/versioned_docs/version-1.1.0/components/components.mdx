@@ -1,0 +1,658 @@
+---
+title: Components
+hide_table_of_contents: true
+displayed_sidebar: null
+---
+
+import '../about/team/team.css'
+import { Button, Chip, Tooltip, Banner, Dialog, Snackbar, Autocomplete, Search, Checkbox, Radio, Switch, Slider, TextField, Table, List, Accordion, Card, Tabs, Menu, Breadcrumbs, Pagination, SideBar, Divider, Scrim, Icon, Typography, Progress, TopBar } from '@equinor/eds-core-react'
+
+<div className="about-page">
+
+<div className="about-hero">
+
+# Components
+
+Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Data Display
+
+Present information, status, structure, or relationships.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="data-display/chip">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Chip>Design</Chip>
+      <Chip variant="active">Development</Chip>
+      <Chip>Tokens</Chip>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Chip</div>
+    <div className="component-gallery__subtitle">Advanced badges that represent discrete information as tags or selections.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/divider">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%', gap: '0.125rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Typography variant="body_short">Section one</Typography>
+      <Divider />
+      <Typography variant="body_short">Section two</Typography>
+      <Divider />
+      <Typography variant="body_short">Section three</Typography>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Divider</div>
+    <div className="component-gallery__subtitle">A thin line that separates content into clear groups.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/list">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{alignItems: 'flex-start', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <List>
+        <List.Item>First item</List.Item>
+        <List.Item>Second item</List.Item>
+        <List.Item>Third item</List.Item>
+      </List>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">List</div>
+    <div className="component-gallery__subtitle">Organise information into related groups of content.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/popover">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '70%', gap: '0', background: 'white', borderRadius: '4px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', overflow: 'hidden'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0.75rem', borderBottom: '1px solid #dcdcdc'}}>
+        <Typography variant="h6">Title</Typography>
+        <Button variant="ghost_icon" style={{width: '2rem', height: '2rem'}}>✕</Button>
+      </div>
+      <div style={{padding: '0.75rem'}}>
+        <Typography variant="body_short">Popover content</Typography>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Popover</div>
+    <div className="component-gallery__subtitle">A floating card that provides more information or actions on hover or click.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/table">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '90%', fontSize: '0.75rem'}}>
+      <div style={{background: 'white', borderRadius: '4px', overflow: 'hidden', width: '100%', boxShadow: '0 1px 4px rgba(0,0,0,0.08)'}}>
+        <Table>
+          <Table.Head>
+            <Table.Row>
+              <Table.Cell>Name</Table.Cell>
+              <Table.Cell>Status</Table.Cell>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>Item A</Table.Cell>
+              <Table.Cell>Active</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>Item B</Table.Cell>
+              <Table.Cell>Draft</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Table</div>
+    <div className="component-gallery__subtitle">Display data in a structured row-and-column format.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/table_data_grid">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '90%', fontSize: '0.75rem'}}>
+      <div style={{background: 'white', borderRadius: '4px', overflow: 'hidden', width: '100%', boxShadow: '0 1px 4px rgba(0,0,0,0.08)'}}>
+        <Table>
+          <Table.Head>
+            <Table.Row>
+              <Table.Cell>ID</Table.Cell>
+              <Table.Cell>Value</Table.Cell>
+              <Table.Cell>Type</Table.Cell>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>001</Table.Cell>
+              <Table.Cell>42.5</Table.Cell>
+              <Table.Cell>Metric</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Table Data Grid</div>
+    <div className="component-gallery__subtitle">Display data in a grid-like format with advanced functionalities.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/tooltip">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px'}}>
+      <div style={{width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#deedee', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#6F6F6F"><path d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z" /></svg>
+      </div>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '-4px'}}>
+        <div style={{width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderBottom: '6px solid #333'}} />
+        <div style={{backgroundColor: '#333', color: '#fff', borderRadius: '4px', padding: '6px 12px', fontSize: '13px', whiteSpace: 'nowrap'}}>Explore more actions</div>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Tooltip</div>
+    <div className="component-gallery__subtitle">Brief information shown on hover or focus without cluttering the interface.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section">
+
+## Feedback
+
+Communicate progress, results, validation, or system state.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="feedback/banner">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--full" style={{background: 'white', borderRadius: '4px'}}>
+      <Banner>
+        <Banner.Message>Changes saved successfully.</Banner.Message>
+      </Banner>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Banner</div>
+    <div className="component-gallery__subtitle">Important notifications and related optional actions.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="feedback/dialog">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%', padding: '1rem', background: 'white', borderRadius: '4px', boxShadow: '0 2px 8px rgba(0,0,0,0.15)'}}>
+      <Typography variant="h6">Confirm action</Typography>
+      <Typography variant="body_short">Are you sure you want to proceed?</Typography>
+      <div style={{display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem'}}>
+        <Button variant="ghost">Cancel</Button>
+        <Button>Confirm</Button>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Dialog</div>
+    <div className="component-gallery__subtitle">Critical notifications and required actions presented as an overlay.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="feedback/progress_indicators">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{gap: '1rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Progress.Circular />
+      <Progress.Linear />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Progress Indicators</div>
+    <div className="component-gallery__subtitle">Animated helpers that indicate waiting time as content loads.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="feedback/scrim">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{position: 'relative', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <div style={{padding: '1rem', background: 'white', borderRadius: '4px', zIndex: 1, boxShadow: '0 2px 8px rgba(0,0,0,0.15)'}}>
+        <Typography variant="body_short">Focused content</Typography>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Scrim</div>
+    <div className="component-gallery__subtitle">A temporary visual effect that fades the interface while focusing on an overlay.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="feedback/snackbar">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <div style={{padding: '0.75rem 1rem', background: '#333', color: 'white', borderRadius: '4px', fontSize: '0.875rem'}}>
+        Item deleted <span style={{color: '#97CACE', marginLeft: '1rem', cursor: 'pointer'}}>Undo</span>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Snackbar</div>
+    <div className="component-gallery__subtitle">Brief temporary non-interrupting notifications at the bottom of the screen.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Inputs
+
+Capture and validate user data or choices.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="inputs/autocomplete">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%'}}>
+      <div style={{background: 'white', borderRadius: '4px', padding: '0.5rem', width: '100%'}}>
+        <Autocomplete label="Country" options={[{label: 'Norway'}, {label: 'Sweden'}, {label: 'Denmark'}]} readOnly />
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Autocomplete</div>
+    <div className="component-gallery__subtitle">Choose one or multiple items from a filterable list of options.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/button">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Button>Submit</Button>
+      <Button variant="outlined">Cancel</Button>
+      <Button variant="ghost">Learn more</Button>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Button</div>
+    <div className="component-gallery__subtitle">Trigger actions with hierarchy variants and intent-driven tones.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/date_time_picker">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%'}}>
+      <div style={{background: 'white', borderRadius: '4px', padding: '0.5rem', width: '100%'}}>
+        <TextField id="preview-date" label="Select date" type="date" readOnly />
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Date/Time Picker</div>
+    <div className="component-gallery__subtitle">Select a date and/or time, or a range of dates and/or times.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/search">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%'}}>
+      <div style={{background: 'white', borderRadius: '4px', padding: '0.5rem', width: '100%'}}>
+        <Search aria-label="Search" placeholder="Search components…" readOnly />
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Search</div>
+    <div className="component-gallery__subtitle">Locate or refine content based on simple words or phrases.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/selection_controls">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--selection" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Checkbox label="Accept terms" defaultChecked readOnly />
+      <Checkbox label="Subscribe" readOnly />
+      <Radio label="Option A" name="preview-radio" defaultChecked readOnly />
+      <Radio label="Option B" name="preview-radio" readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Selection Controls</div>
+    <div className="component-gallery__subtitle">Select options, make decisions and set preferences.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/slider">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%'}}>
+      <div style={{background: 'white', borderRadius: '4px', padding: '0.5rem 1rem', width: '100%'}}>
+        <Slider value={60} min={0} max={100} aria-label="Volume" />
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Slider</div>
+    <div className="component-gallery__subtitle">A flexible input to adjust predefined values along a track.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/textfield">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%'}}>
+      <div style={{background: 'white', borderRadius: '4px', padding: '0.5rem', width: '100%'}}>
+        <TextField id="preview-email" label="Email address" placeholder="name@equinor.com" readOnly />
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Text Field</div>
+    <div className="component-gallery__subtitle">Enter, interact and edit content in forms and dialogs.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/toggle_button">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Button variant="outlined">Day</Button>
+      <Button>Week</Button>
+      <Button variant="outlined">Month</Button>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Toggle Button</div>
+    <div className="component-gallery__subtitle">Select one of multiple options with a single click or tap.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section">
+
+## Navigation
+
+Help users move through content and hierarchies.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="navigation/app_launcher">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{gap: '1rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem'}}>
+        <div style={{width: '2rem', height: '2rem', background: '#007079', borderRadius: '4px'}} />
+        <div style={{width: '2rem', height: '2rem', background: '#007079', borderRadius: '4px', opacity: 0.7}} />
+        <div style={{width: '2rem', height: '2rem', background: '#007079', borderRadius: '4px', opacity: 0.5}} />
+        <div style={{width: '2rem', height: '2rem', background: '#007079', borderRadius: '4px', opacity: 0.4}} />
+        <div style={{width: '2rem', height: '2rem', background: '#007079', borderRadius: '4px', opacity: 0.3}} />
+        <div style={{width: '2rem', height: '2rem', background: '#007079', borderRadius: '4px', opacity: 0.2}} />
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">App Launcher</div>
+    <div className="component-gallery__subtitle">Seamless navigation between related applications in an ecosystem.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/breadcrumbs">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Breadcrumbs>
+        <Breadcrumbs.Breadcrumb>Home</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Components</Breadcrumbs.Breadcrumb>
+        <Breadcrumbs.Breadcrumb>Navigation</Breadcrumbs.Breadcrumb>
+      </Breadcrumbs>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Breadcrumbs</div>
+    <div className="component-gallery__subtitle">Show current location within a hierarchy and navigate upward.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/drawer">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{alignItems: 'flex-start', width: '60%', gap: '0', background: 'white', borderRadius: '4px', padding: '0.25rem 0'}}>
+      <div style={{padding: '0.5rem 1rem', borderLeft: '3px solid #007079', width: '100%', fontWeight: 600, fontSize: '0.875rem'}}>Overview</div>
+      <div style={{padding: '0.5rem 1rem', width: '100%', fontSize: '0.875rem'}}>Settings</div>
+      <div style={{padding: '0.5rem 1rem', width: '100%', fontSize: '0.875rem'}}>Permissions</div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Drawer</div>
+    <div className="component-gallery__subtitle">Vertical column of categorised links for multi-level navigation.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/link">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{alignItems: 'flex-start', gap: '0.5rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Typography link href="#">Getting started</Typography>
+      <Typography link href="#">View documentation</Typography>
+      <Typography link href="#">Back to overview</Typography>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Link</div>
+    <div className="component-gallery__subtitle">Interactive navigational elements for moving between pages and views.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/menu">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '60%', background: 'white', borderRadius: '4px', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', gap: '0'}}>
+      <div style={{padding: '0.5rem 1rem', fontSize: '0.875rem'}}>Edit</div>
+      <div style={{padding: '0.5rem 1rem', fontSize: '0.875rem', background: '#f0f0f0'}}>Duplicate</div>
+      <div style={{padding: '0.5rem 1rem', fontSize: '0.875rem', color: '#B30D2F'}}>Delete</div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Menu</div>
+    <div className="component-gallery__subtitle">A temporary dropdown list of actions or functions.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/pagination">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Pagination totalItems={50} itemsPerPage={10} />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Pagination</div>
+    <div className="component-gallery__subtitle">Divide long sets of data or content into navigable pages.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/sidebar">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{alignItems: 'flex-start', width: '60%', gap: '0', background: 'white', borderRadius: '4px', overflow: 'hidden'}}>
+      <div style={{padding: '0.5rem 1rem', background: '#007079', color: 'white', width: '100%', fontSize: '0.875rem'}}>Dashboard</div>
+      <div style={{padding: '0.5rem 1rem', width: '100%', fontSize: '0.875rem'}}>Analytics</div>
+      <div style={{padding: '0.5rem 1rem', width: '100%', fontSize: '0.875rem'}}>Settings</div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Sidebar</div>
+    <div className="component-gallery__subtitle">Display single-level navigational destinations in a vertical panel.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/stepper">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{gap: '0.25rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <div style={{display: 'flex', alignItems: 'center', gap: '0.25rem'}}>
+        <div style={{width: '1.5rem', height: '1.5rem', borderRadius: '50%', background: '#007079', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem'}}>1</div>
+        <span style={{fontSize: '0.75rem'}}>Details</span>
+      </div>
+      <div style={{width: '2rem', height: '1px', background: '#007079'}} />
+      <div style={{display: 'flex', alignItems: 'center', gap: '0.25rem'}}>
+        <div style={{width: '1.5rem', height: '1.5rem', borderRadius: '50%', border: '2px solid #007079', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem'}}>2</div>
+        <span style={{fontSize: '0.75rem'}}>Review</span>
+      </div>
+      <div style={{width: '2rem', height: '1px', background: '#ddd'}} />
+      <div style={{display: 'flex', alignItems: 'center', gap: '0.25rem'}}>
+        <div style={{width: '1.5rem', height: '1.5rem', borderRadius: '50%', border: '2px solid #ddd', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', color: '#999'}}>3</div>
+        <span style={{fontSize: '0.75rem', color: '#999'}}>Submit</span>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Stepper</div>
+    <div className="component-gallery__subtitle">Guide users through the steps of a multi-part task.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/table_of_contents">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{alignItems: 'flex-start', width: '70%', gap: '0.25rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <div style={{fontSize: '0.8rem', fontWeight: 600, borderLeft: '2px solid #007079', paddingLeft: '0.5rem'}}>Introduction</div>
+      <div style={{fontSize: '0.8rem', paddingLeft: '0.5rem', color: '#666'}}>Usage guidelines</div>
+      <div style={{fontSize: '0.8rem', paddingLeft: '1rem', color: '#666'}}>Variants</div>
+      <div style={{fontSize: '0.8rem', paddingLeft: '0.5rem', color: '#666'}}>Accessibility</div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Table of Contents</div>
+    <div className="component-gallery__subtitle">Hyperlinks that scroll to anchored sections on the same page.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/tabs">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{borderBottom: '2px solid #ddd', gap: '0', background: 'white', borderRadius: '4px', padding: '0 0.5rem'}}>
+      <div style={{padding: '0.5rem 1rem', borderBottom: '2px solid #007079', marginBottom: '-2px', fontSize: '0.875rem', fontWeight: 600}}>Overview</div>
+      <div style={{padding: '0.5rem 1rem', fontSize: '0.875rem', color: '#666'}}>Details</div>
+      <div style={{padding: '0.5rem 1rem', fontSize: '0.875rem', color: '#666'}}>History</div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Tabs</div>
+    <div className="component-gallery__subtitle">Organise related content across different views for quick navigation.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="navigation/topbar">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{width: '90%', background: 'white', padding: '0.5rem 1rem', borderRadius: '4px', boxShadow: '0 1px 4px rgba(0,0,0,0.1)', justifyContent: 'space-between'}}>
+      <span style={{fontWeight: 600, fontSize: '0.875rem'}}>App Name</span>
+      <div style={{display: 'flex', gap: '0.75rem', fontSize: '0.8rem', color: '#666'}}>
+        <span>Home</span>
+        <span>Settings</span>
+        <span>Help</span>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Top Bar</div>
+    <div className="component-gallery__subtitle">Display navigation and actions relating to the interface at the top.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Surfaces
+
+Structural or container elements that organise and layer content.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="surfaces/accordion">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--stack" style={{width: '80%', background: 'white', borderRadius: '4px', overflow: 'hidden'}}>
+      <Accordion>
+        <Accordion.Item>
+          <Accordion.Header>Section one</Accordion.Header>
+          <Accordion.Panel>Content inside the accordion panel.</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Accordion</div>
+    <div className="component-gallery__subtitle">Collapse and expand sections of content to manage information density.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="surfaces/card">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row">
+      <Card style={{width: '10rem'}}>
+        <Card.Header>
+          <Card.HeaderTitle>
+            <Typography variant="h5">Title</Typography>
+            <Typography variant="body_short">Supporting text</Typography>
+          </Card.HeaderTitle>
+        </Card.Header>
+      </Card>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Card</div>
+    <div className="component-gallery__subtitle">Container displaying content related to a single subject with an entry point to details.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="surfaces/side_sheet">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{width: '90%', height: '80%', background: 'white', borderRadius: '4px', overflow: 'hidden'}}>
+      <div style={{flex: 1, background: '#f5f5f5', borderRadius: '4px'}} />
+      <div style={{width: '40%', background: 'white', borderRadius: '4px', boxShadow: '-2px 0 8px rgba(0,0,0,0.1)', padding: '0.75rem'}}>
+        <Typography variant="overline">Details</Typography>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Side Sheet</div>
+    <div className="component-gallery__subtitle">A toggleable area anchored to the viewport edge for supplementary content.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="surfaces/toolbar">
+  <div className="component-gallery__preview" style={{background: 'white'}}>
+    <div className="mock mock--row" style={{width: '80%', gap: '0.5rem', background: 'white', borderRadius: '4px', padding: '0.75rem'}}>
+      <Button variant="ghost">Cut</Button>
+      <Button variant="ghost">Copy</Button>
+      <Button variant="ghost">Paste</Button>
+      <Divider variant="small" orientation="vertical" style={{height: '1.5rem'}} />
+      <Button variant="ghost">Undo</Button>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Toolbar</div>
+    <div className="component-gallery__subtitle">A set of actions for applying changes and navigating efficiently.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--cta">
+
+## Explore in Storybook
+
+An interactive [Storybook](https://storybook.eds.equinor.com) is available for all developed components. Use it to explore variants, props, accessibility notes, and usage examples.
+
+If you cannot find a component or need to propose a new one, [open an issue](https://github.com/equinor/design-system/issues/new) describing the use case, constraints, and any interim solutions you have considered.
+
+</div>
+
+</div>

@@ -53,6 +53,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
   /* Navbar styling */
+  --ifm-navbar-shadow: none;
   --ifm-navbar-height: 68px;
   --ifm-navbar-link-color: var(--ifm-font-color-base);
   --ifm-navbar-link-hover-color: var(--ifm-font-color-base);
@@ -214,6 +215,11 @@ nav.menu li a {
   box-shadow: none;
 }
 
+/* Hide in-page version badge — version is already in the navbar dropdown */
+.theme-doc-version-badge {
+  display: none;
+}
+
 /* ======================================
  * MAIN CONTENT AREA
  * ====================================== */
@@ -222,6 +228,87 @@ nav.menu li a {
   background-color: var(--ifm-background-surface-color);
   border: var(--eds-color-border-neutral-subtle) 1px solid;
   border-radius: var(--ifm-global-radius);
+}
+
+/* Full-width pages (about, getting started) break out of the docs wrapper.
+   These overrides strip ALL Docusaurus/Infima spacing from the wrapper chain:
+   main > .container.padding-top--md.padding-bottom--lg > .row > .col > .docItemContainer > article > .theme-doc-markdown.markdown > .about-page */
+
+.theme-doc-markdown:has(.about-page) {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* Hide all docs chrome (breadcrumbs, version badges, edit link, pagination) on full-width pages */
+article:has(.about-page) > .theme-doc-breadcrumbs,
+article:has(.about-page) > [class*='docVersion'],
+article:has(.about-page) > footer {
+  display: none;
+}
+
+[class*='docItemContainer']:has(.about-page) .pagination-nav,
+[class*='docItemContainer']:has(.about-page) > nav {
+  display: none;
+}
+
+/* main — remove all constraints. No overflow-x: clip — it would clip the vw breakout. */
+main:has(.about-page) {
+  border-top: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  max-width: 100% !important;
+}
+
+/* .container.padding-top--md.padding-bottom--lg — use longhand to beat Infima utility !important */
+main:has(.about-page) .container {
+  max-width: 100% !important;
+  padding-top: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+/* .row — remove negative margins */
+main:has(.about-page) .row {
+  margin: 0 !important;
+}
+
+/* .col / .docItemCol — remove padding and width cap */
+main:has(.about-page) .col,
+main:has(.about-page) [class*='col'] {
+  padding: 0 !important;
+  max-width: 100% !important;
+  flex: 0 0 100%;
+}
+
+/* .docItemContainer — remove all spacing */
+main:has(.about-page) [class*='docItemContainer'] {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+main:has(.about-page) [class*='docItemContainer'] > nav {
+  display: none;
+}
+
+/* article — remove spacing */
+main:has(.about-page) article {
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+}
+
+/* .markdown (Infima) — disable vertical rhythm on about-page without breaking the vw breakout margins */
+main:has(.about-page) .markdown > .about-page {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* ======================================
@@ -310,42 +397,96 @@ nav.menu li a {
 .footer {
   background-color: var(--ifm-color-primary);
   color: var(--eds-color-text-accent-strong-on-emphasis);
-}
-
-.footer__container {
-  display: flex;
-  width: 100%;
-  max-width: none;
-  justify-content: space-between;
-}
-
-.footer__links {
-  margin: 0;
-}
-
-.footer-links__group {
-  list-style: none;
-  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0;
+}
+
+/* ---- Column grid ---- */
+
+.footer__columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 3rem 2rem 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footer__columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer__columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer__column-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--eds-color-text-accent-strong-on-emphasis);
+  margin-bottom: 0.75rem;
+}
+
+.footer__column-links {
+  list-style: none;
   margin: 0;
-  width: fit-content;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.footer-links__link {
-  border-radius: var(--ifm-global-radius);
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-  transition: background-color 150ms ease-in-out;
-  display: block;
-  padding: 0.25rem;
+.footer__column-link {
+  color: var(--eds-color-text-accent-on-emphasis);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 150ms ease;
 }
-.footer-links__link:hover {
+
+.footer__column-link:hover {
   color: var(--eds-color-text-accent-strong-on-emphasis);
+  text-decoration: none;
+}
+
+/* ---- Bottom bar ---- */
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+  color: var(--eds-color-text-accent-on-emphasis);
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  border-radius: var(--ifm-global-radius);
+  padding: 0.25rem;
   transition: background-color 150ms ease-in-out;
-  display: block;
+}
+
+.footer__social-link:hover {
   background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
 }
-.footer-links__link svg {
+
+.footer__social-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
   fill: var(--eds-color-text-accent-strong-on-emphasis);
   display: block;
 }
