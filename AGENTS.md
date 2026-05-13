@@ -111,9 +111,11 @@ Icon.displayName = 'Icon'
 
 Set `Component.displayName` after every `forwardRef` definition so React DevTools and snapshot output show the component name (sub-components use dotted names, e.g. `Field.Label`).
 
+Place helper functions and constants at module scope, not inside the component body — they should not be recreated on every render.
+
 ### CSS (Vanilla + Tokens + Nesting)
 
-One `eds-`-prefixed root class per component. Internal elements use simple class names scoped by CSS nesting. Variants and state use data attributes.
+Vanilla CSS only — no CSS-in-JS (`styled-components`, `emotion`), no Tailwind utility classes. One `.css` file per component (single responsibility), with an `eds-`-prefixed root class. Internal elements use simple class names scoped by CSS nesting. Variants and state use data attributes.
 
 ```css
 @layer eds-components {
@@ -331,6 +333,8 @@ In Claude Code, `.claude/rules/figma-component.md` loads this section automatica
 - WCAG 2.1 AA compliance required
 - Decorative elements: `aria-hidden="true"`
 - Semantic elements: `role="img"` with `aria-labelledby`
+- Proper ARIA attributes (roles, labels, states) and keyboard support (Tab, Enter, Escape, Arrow keys where relevant)
+- Manage focus correctly: trap focus in modals/dialogs, restore focus on close, use `:focus-visible` for keyboard-only outlines
 - Test with `jest-axe` in every component
 
 ## Conventional Commits
