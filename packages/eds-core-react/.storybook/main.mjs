@@ -23,8 +23,6 @@ const config = {
         },
       },
     },
-    './remark-gfm-preset.mjs',
-    '@storybook/addon-docs',
   ],
 
   features: {

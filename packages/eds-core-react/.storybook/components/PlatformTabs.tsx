@@ -1,21 +1,11 @@
-import { useState, ReactNode, useEffect } from 'react'
+import { useState, ReactNode, useEffect, CSSProperties } from 'react'
 
 type PlatformTabsProps = {
   mobile?: ReactNode
 }
 
-const getInitialTab = (): 'web' | 'mobile' => {
-  if (typeof window === 'undefined') return 'web'
-  try {
-    const params = new URLSearchParams(window.parent.location.search)
-    return params.get('platform') === 'mobile' ? 'mobile' : 'web'
-  } catch {
-    return 'web'
-  }
-}
-
 export const PlatformTabs = ({ mobile }: PlatformTabsProps) => {
-  const [activeTab, setActiveTab] = useState<'web' | 'mobile'>(getInitialTab)
+  const [activeTab, setActiveTab] = useState<'web' | 'mobile'>('web')
 
   useEffect(() => {
     const wrapper = document.querySelector('.platform-tabs-wrapper')
@@ -30,6 +20,20 @@ export const PlatformTabs = ({ mobile }: PlatformTabsProps) => {
 
   if (!mobile) return null
 
+  const tabStyle = (tab: 'web' | 'mobile'): CSSProperties => ({
+    padding: '0.5rem 1rem',
+    border: 'none',
+    background: 'none',
+    cursor: 'pointer',
+    fontFamily: 'var(--eds-typography-ui-body-font-family), sans-serif',
+    fontSize: '0.875rem',
+    fontWeight: 600,
+    color: activeTab === tab ? '#007079' : '#6F6F6F',
+    borderBottom:
+      activeTab === tab ? '2px solid #007079' : '2px solid transparent',
+    marginBottom: '-2px',
+  })
+
   return (
     <div className="platform-tabs-wrapper">
       <div
@@ -39,43 +43,12 @@ export const PlatformTabs = ({ mobile }: PlatformTabsProps) => {
           marginBottom: '1.5rem',
         }}
       >
-        <button
-          onClick={() => setActiveTab('web')}
-          style={{
-            padding: '0.5rem 1rem',
-            border: 'none',
-            background: 'none',
-            cursor: 'pointer',
-            fontFamily: 'Equinor, sans-serif',
-            fontSize: '0.875rem',
-            fontWeight: activeTab === 'web' ? 500 : 400,
-            color: activeTab === 'web' ? '#007079' : '#6F6F6F',
-            borderBottom:
-              activeTab === 'web'
-                ? '2px solid #007079'
-                : '2px solid transparent',
-            marginBottom: '-2px',
-          }}
-        >
+        <button onClick={() => setActiveTab('web')} style={tabStyle('web')}>
           React
         </button>
         <button
           onClick={() => setActiveTab('mobile')}
-          style={{
-            padding: '0.5rem 1rem',
-            border: 'none',
-            background: 'none',
-            cursor: 'pointer',
-            fontFamily: 'Equinor, sans-serif',
-            fontSize: '0.875rem',
-            fontWeight: activeTab === 'mobile' ? 500 : 400,
-            color: activeTab === 'mobile' ? '#007079' : '#6F6F6F',
-            borderBottom:
-              activeTab === 'mobile'
-                ? '2px solid #007079'
-                : '2px solid transparent',
-            marginBottom: '-2px',
-          }}
+          style={tabStyle('mobile')}
         >
           React Native
         </button>
