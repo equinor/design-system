@@ -420,6 +420,31 @@ describe('Autocomplete (next)', () => {
     })
   })
 
+  describe('defaultInputValue', () => {
+    it('shows defaultInputValue when no value is provided', () => {
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          defaultInputValue="Apple"
+        />,
+      )
+      expect(screen.getByRole('combobox')).toHaveValue('Apple')
+    })
+
+    it('shows defaultInputValue even when value is also provided', () => {
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          defaultInputValue="Ban"
+          value="Apple"
+        />,
+      )
+      expect(screen.getByRole('combobox')).toHaveValue('Ban')
+    })
+  })
+
   describe('Regression', () => {
     it('does not overwrite typed input when parent re-renders with inline getOptionLabel', async () => {
       type Fruit = { id: string; name: string }

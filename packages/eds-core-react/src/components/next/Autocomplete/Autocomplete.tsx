@@ -92,15 +92,21 @@ function AutocompleteInner<T = string>(
     value ?? internalSelectedOption
 
   const prevValueRef = useRef<T | undefined>(value)
+  const mountedRef = useRef(false)
 
   // Sync input text when the external value prop changes and inputValue is not controlled.
+  // Skips the initial mount entirely — useState already seeds internalValue correctly,
+  // so running on mount would overwrite defaultInputValue when value is also provided.
   // getLabelFn is intentionally omitted from deps: an inline getOptionLabel creates
   // a new function reference every parent render, which would re-fire the effect and
   // overwrite mid-typed input. When value actually changes the component re-renders,
   // so getLabelFn is already current in the closure.
   // Only clears when value transitions from defined → undefined (parent clears selection).
-  // Skips the clear on initial mount so defaultInputValue is not overwritten.
   useEffect(() => {
+    if (!mountedRef.current) {
+      mountedRef.current = true
+      return
+    }
     if (isControlled) return
     if (value !== undefined) {
       setInternalValue(getLabelFn(value))
