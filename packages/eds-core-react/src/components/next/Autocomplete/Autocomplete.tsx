@@ -93,7 +93,7 @@ function AutocompleteInner<T = string>(
 
   const prevValueRef = useRef<T | undefined>(value)
 
-  // Sync input text when the external value prop changes (uncontrolled mode only).
+  // Sync input text when the external value prop changes and inputValue is not controlled.
   // getLabelFn is intentionally omitted from deps: an inline getOptionLabel creates
   // a new function reference every parent render, which would re-fire the effect and
   // overwrite mid-typed input. When value actually changes the component re-renders,
@@ -196,6 +196,7 @@ function AutocompleteInner<T = string>(
     setIsFiltering(true)
     if (canOpen) listboxRef.current?.showPopover()
 
+    // Can't use filteredItems here — inputValue state hasn't updated yet
     const newFiltered = allItems.filter((item) => matchesFilter(item, newValue))
     const willHaveCustomValue =
       allowCustomValue && newValue.trim() !== '' && newFiltered.length === 0
@@ -275,6 +276,7 @@ function AutocompleteInner<T = string>(
   const handleClear = () => {
     if (!isControlled) setInternalValue('')
     setInternalSelectedOption(undefined)
+    onValueChange?.(undefined)
     setIsFiltering(false)
     closeListbox()
     onClear?.()

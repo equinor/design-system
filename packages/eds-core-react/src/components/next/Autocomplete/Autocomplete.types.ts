@@ -13,8 +13,11 @@ export type AutocompleteProps<T = string> = {
   id?: string
   /** The currently selected option value */
   value?: T
-  /** Callback fired when the user selects an option from the list */
-  onValueChange?: (value: T) => void
+  /**
+   * Callback fired when the user selects an option from the list, or `undefined`
+   * when the user clears the selection via the clear button.
+   */
+  onValueChange?: (value: T | undefined) => void
   /** Text shown when no options match the search value */
   noOptionsText?: string
   /**
@@ -60,4 +63,11 @@ export type AutocompleteProps<T = string> = {
     | 'type'
     | 'value'
     | 'defaultValue'
+    // Internal combobox handlers — not configurable by consumers
+    | 'onMouseDown'
+    | 'onClick'
+    | 'onFocus'
+    | 'onBlur'
+    | 'onKeyDown'
+    | 'onKeyUp'
   >
