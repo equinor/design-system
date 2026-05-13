@@ -101,6 +101,7 @@ const AccordionHeader = forwardRef<HTMLElement, AccordionHeaderProps>(
         </span>
         <span
           className="title"
+          data-color-appearance="accent"
           data-font-family="ui"
           data-font-size="md"
           data-line-height="squished"

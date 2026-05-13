@@ -1,37 +1,26 @@
 @layer eds-components {
   .eds-accordion {
-    /* Pseudo-private component vars. States/variants override these vars rather
-     * than the consuming properties below. */
+    /* States override these vars; the consuming properties below stay stable. */
     --_summary-bg: transparent;
 
-    /* Title sits in accent appearance in every state. At rest (closed or open)
-     * it uses the subtle accent shade so chevron and title share the same
-     * family; hover/focus pull the title to the strong accent shade for
-     * interaction feedback. */
-    --_title-color: var(--eds-color-text-accent-subtle);
-
-    /* Visual width of the chevron column. Equals the summary's line-height so
-     * the chevron sits on the same baseline grid as the title. The panel
-     * references the same var so its inline-start aligns under the title. */
+    /* Equals the summary's line-height so the chevron sits on the same
+     * baseline grid as the title. The panel's inline-start references the
+     * same var so content aligns under the title. */
     --_chevron-column: var(--eds-typography-ui-body-md-line-height-squished);
 
     display: flex;
     flex-direction: column;
     inline-size: 100%;
 
-    /* All inner selectors below are scoped with `>` so consumer content inside
-     * <Accordion.Panel> can't collide with our internal classes (.chevron,
-     * .title, .panel) or nested <details>/<summary> elements. */
-
-    /* Item — each <details>. */
+    /* Inner selectors scoped with `>` so consumer content inside .panel can't
+     * collide with our internal class names. */
     & > details {
       border-block-start: var(--eds-sizing-stroke-thin) solid
         var(--eds-color-border-subtle);
     }
 
-    /* Animated content slot.
-     * calc-size(auto, size) lets the transition target an intrinsic size; older
-     * engines fall back to instant open/close. */
+    /* calc-size(auto, size) lets the height transition target intrinsic size;
+     * older engines fall back to instant open/close. */
     & > details::details-content {
       overflow: clip;
       block-size: 0;
@@ -44,7 +33,6 @@
       block-size: calc-size(auto, size);
     }
 
-    /* Header (summary) */
     & > details > summary {
       cursor: pointer;
 
@@ -62,7 +50,6 @@
       transition: background-color 150ms ease;
     }
 
-    /* Hide Safari's native marker */
     & > details > summary::-webkit-details-marker {
       display: none;
     }
@@ -70,33 +57,20 @@
     & > details > summary:hover,
     & > details > summary:focus-visible {
       --_summary-bg: var(--eds-color-bg-fill-muted-default);
-      --_title-color: var(--eds-color-text-accent-strong);
     }
 
-    /* Focus indicator on stacked items (accordion / menu): a single bottom
-     * edge line rather than a full outline, so adjacent items don't stack
-     * visually competing rings. Box-shadow keeps the summary's layout
-     * unchanged. */
     & > details > summary:focus-visible {
-      outline: none;
-      box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thin)) 0
-        var(--eds-color-border-focus);
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     }
 
-    /* Chevron — explicit inline-size keeps the column predictable; the icon's
-     * built-in `margin-inline: -0.1em` (icon.css) makes the glyph sit optically
-     * tight inside, same pattern Chip uses.
+    /* --_chevron-color is defined here (not on .eds-accordion) so the
+     * bg-fill-emphasis token resolves under the chevron span's own
+     * `data-color-appearance="accent"` — substitution happens at the
+     * property's defining cascade context, not the use site.
      *
-     * NOTE: --_chevron-color is defined here (not on .eds-accordion) so the
-     * `var(--eds-color-bg-fill-emphasis-default)` resolves under this element's
-     * `data-color-appearance="accent"` context. Defining it at the root would
-     * lock in the neutral-context value (an EDS token gotcha — substitution
-     * happens at the property's defining cascade context).
-     *
-     * TODO: the chevron is an icon foreground, but EDS tokens currently only
-     * expose `accent-9` (#206F77) via bg-fill tokens. Replace with an
-     * `--eds-color-icon-accent-*` or `--eds-color-text-accent-*` semantic token
-     * once those exist. Tracked in a follow-up issue. */
+     * TODO: drop in --eds-color-icon-accent-* once EDS tokens expose a
+     * foreground equivalent for accent-9. */
     & > details > summary > .chevron {
       --_chevron-color: var(--eds-color-bg-fill-emphasis-default);
 
@@ -115,16 +89,24 @@
       rotate: 180deg;
     }
 
-    /* Title */
+    /* Title carries `data-color-appearance="accent"` so its `--eds-color-text-*`
+     * tokens resolve under the accent palette in *both* light and dark schemes.
+     * Static `--eds-color-text-accent-*` tokens are light-only — they were
+     * baked-in #1F6369 / #141F20 regardless of scheme. */
     & > details > summary > .title {
+      --_title-color: var(--eds-color-text-strong);
+
       flex: 1;
       color: var(--_title-color);
       transition: color 150ms ease;
     }
 
-    /* Panel — inline-start equals the title's horizontal start in the header
-     * (container pad + chevron column + gap), so content aligns under the
-     * title. Block padding is taken from EDS spacing tokens. */
+    & > details[open] > summary > .title {
+      --_title-color: var(--eds-color-text-subtle);
+    }
+
+    /* inline-start matches the title's horizontal start in the header
+     * (container pad + chevron column + gap), aligning content under the title. */
     & > details > .panel {
       padding-block: var(--eds-selectable-space-vertical)
         var(--eds-spacing-vertical-xl);
@@ -136,7 +118,6 @@
     }
   }
 
-  /* Reduced motion: skip height + chevron + title animations */
   @media (prefers-reduced-motion: reduce) {
     .eds-accordion > details::details-content,
     .eds-accordion > details > summary > .chevron,

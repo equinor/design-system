@@ -108,3 +108,59 @@ export const Controlled: StoryFn = () => {
     </Accordion>
   )
 }
+
+const SchemePreview = () => (
+  <Accordion>
+    <Accordion.Item defaultOpen>
+      <Accordion.Header>Open by default</Accordion.Header>
+      <Accordion.Panel>
+        Title is held at <code>--eds-color-text-accent-subtle</code> when open.
+        Content uses <code>--eds-color-text-subtle</code>.
+      </Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Closed</Accordion.Header>
+      <Accordion.Panel>Hidden until opened.</Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Hover or focus me</Accordion.Header>
+      <Accordion.Panel>
+        Hover bg <code>--eds-color-bg-fill-muted-default</code>; focus outline{' '}
+        <code>--eds-color-border-focus</code>.
+      </Accordion.Panel>
+    </Accordion.Item>
+  </Accordion>
+)
+
+/**
+ * Side-by-side preview of the Accordion in both color schemes — used to
+ * verify dark theme since Storybook's own dark-mode toggle is unreliable.
+ */
+export const ColorSchemes: StoryFn = () => (
+  <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
+    <div
+      data-color-scheme="light"
+      style={{
+        flex: 1,
+        padding: 24,
+        background: 'var(--eds-color-bg-canvas)',
+        color: 'var(--eds-color-text-strong)',
+      }}
+    >
+      <h3 style={{ marginTop: 0 }}>Light</h3>
+      <SchemePreview />
+    </div>
+    <div
+      data-color-scheme="dark"
+      style={{
+        flex: 1,
+        padding: 24,
+        background: 'var(--eds-color-bg-canvas)',
+        color: 'var(--eds-color-text-strong)',
+      }}
+    >
+      <h3 style={{ marginTop: 0 }}>Dark</h3>
+      <SchemePreview />
+    </div>
+  </div>
+)
