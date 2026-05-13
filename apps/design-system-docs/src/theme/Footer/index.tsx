@@ -1,96 +1,128 @@
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
-import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common'
+import { useThemeConfig } from '@docusaurus/theme-common'
 import GithubSvg from '../../images/github-logo.svg'
 import FigmaSvg from '../../images/figma-logo.svg'
-
 import Link from '@docusaurus/Link'
 
-import type { JSX } from 'react'
+import type { JSX, ReactNode } from 'react'
 
-interface FooterColumnItem {
+type FooterLink = {
   label: string
-  items: FooterLinkItem[]
+  to: string
 }
 
-interface FooterLinksProps {
-  links: FooterColumnItem[] | FooterLinkItem[]
+type FooterColumn = {
+  title: string
+  links: FooterLink[]
 }
 
-// Comprehensive class-based icon mapping
-const getIconComponent = (item: FooterLinkItem): JSX.Element | null => {
-  const className = item.className?.toLowerCase() || ''
+const FOOTER_COLUMNS: FooterColumn[] = [
+  {
+    title: 'Get started',
+    links: [
+      {
+        label: 'Getting Started',
+        to: '/getting-started',
+      },
+      {
+        label: 'Design',
+        to: '/docs/Next/about/getting-started/design/getting_started_design',
+      },
+      {
+        label: 'Develop',
+        to: '/docs/Next/about/getting-started/develop/getting_started_development',
+      },
+      {
+        label: 'Citizen developer',
+        to: '/docs/Next/about/getting-started/develop/citizen_developers',
+      },
+      {
+        label: 'Team lead',
+        to: '/docs/Next/about/getting-started/team_roles',
+      },
+    ],
+  },
+  {
+    title: 'Foundation',
+    links: [
+      {
+        label: 'Typography',
+        to: '/docs/Next/foundation/design-tokens/typography',
+      },
+      { label: 'Colours', to: '/docs/Next/foundation/colour/intro' },
+      { label: 'Icons', to: '/docs/Next/foundation/assets/system_icons' },
+      { label: 'Spacing', to: '/docs/Next/foundation/design-tokens/spacing' },
+    ],
+  },
+  {
+    title: 'Components',
+    links: [
+      { label: 'All components', to: '/docs/Next/components' },
+      { label: 'Storybook', to: 'https://storybook.eds.equinor.com' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'About EDS', to: '/about' },
+      { label: 'Support', to: '/docs/Next/support/support' },
+    ],
+  },
+]
 
-  if (className.includes('github')) {
-    return <GithubSvg />
-  }
-  if (className.includes('figma')) {
-    return <FigmaSvg />
-  }
-
-  return null
-}
-
-// Type guard to check if an item is a FooterColumnItem
-const isFooterColumnItem = (
-  item: FooterLinkItem | FooterColumnItem,
-): item is FooterColumnItem => {
-  return 'items' in item && Array.isArray((item as FooterColumnItem).items)
-}
-
-const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
-  // Prepare presentation object: only links with icons
-  const linkGroupsWithIcons = links
-    .map((linkItem) => {
-      if (isFooterColumnItem(linkItem)) {
-        const itemsWithIcons = linkItem.items
-          .map((item) => {
-            const icon = getIconComponent(item)
-            return icon ? { ...item, icon } : null
-          })
-          .filter(Boolean)
-        return { label: linkItem.label, items: itemsWithIcons }
-      }
-      return null
-    })
-    .filter(Boolean)
-
+function FooterColumn({ title, links }: FooterColumn): ReactNode {
   return (
-    <nav className="footer-links" aria-label="Footer navigation links">
-      {linkGroupsWithIcons.map((group) => (
-        <div key={group.label} className="footer-links__group">
-          {group.items.map((item) => (
-            <Link
-              key={`${item.href || item.to}`}
-              to={item.to || item.href}
-              className={`footer-links__link ${item.className || ''}`}
-              aria-label={
-                (item.label || item.href || 'Social link') +
-                ' (opens in new tab)'
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {item.icon}
+    <div className="footer__column">
+      <p className="footer__column-title">{title}</p>
+      <ul className="footer__column-links">
+        {links.map((link) => (
+          <li key={link.to}>
+            <Link to={link.to} className="footer__column-link">
+              {link.label}
             </Link>
-          ))}
-        </div>
-      ))}
-    </nav>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
+
 function Footer(): JSX.Element | null {
   const { footer } = useThemeConfig()
 
   if (!footer) {
     return null
   }
-  const { copyright, links } = footer
+  const { copyright } = footer
 
   return (
     <footer className="footer">
-      <div className="footer__container">
+      <div className="footer__columns">
+        {FOOTER_COLUMNS.map((col) => (
+          <FooterColumn key={col.title} {...col} />
+        ))}
+      </div>
+      <div className="footer__bottom">
         <div className="footer__copyright">{copyright}</div>
-        {links && links.length > 0 && <FooterLinks links={links} />}
+        <div className="footer__social">
+          <Link
+            to="https://www.figma.com/"
+            className="footer__social-link"
+            aria-label="Figma (opens in new tab)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FigmaSvg />
+          </Link>
+          <Link
+            to="https://www.github.com/equinor/design-system"
+            className="footer__social-link"
+            aria-label="EDS Github (opens in new tab)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GithubSvg />
+          </Link>
+        </div>
       </div>
     </footer>
   )

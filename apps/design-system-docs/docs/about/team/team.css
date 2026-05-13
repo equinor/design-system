@@ -1,15 +1,453 @@
-.img-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
-  gap: 5rem;
-}
-.img-row img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
+/* ======================================
+ * ABOUT PAGE LAYOUT
+ * ====================================== */
+
+.about-page {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
-p {
-  margin: 0 0 0.2rem;
+.about-hero {
+  padding: 5rem max(1.5rem, 5vw) 4rem;
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+.about-hero > *:not(.container) {
+  max-width: var(--ifm-container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-hero h1 {
+  font-size: 2.75rem;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.about-hero p {
+  max-width: 560px;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+/* ======================================
+ * ABOUT SECTIONS
+ * ====================================== */
+
+.about-section {
+  padding: 5rem max(1.5rem, 5vw);
+}
+
+.about-section > *:not(.container) {
+  max-width: var(--ifm-container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-section--surface {
+  background-color: var(--ifm-background-surface-color);
+}
+
+.about-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.about-section p {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.about-section em {
+  display: block;
+  margin-bottom: 2rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Lists inside sections */
+.about-section ul,
+.about-section ol {
+  max-width: var(--ifm-container-width);
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Code blocks inside sections */
+.about-section pre {
+  max-width: var(--ifm-container-width);
+}
+
+/* Admonitions (tip, note, etc.) */
+.about-section .theme-admonition {
+  max-width: var(--ifm-container-width);
+}
+
+/* Sub-headings inside sections */
+.about-section h3 {
+  font-size: 1.125rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ======================================
+ * ROLE CARDS
+ * ====================================== */
+
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: var(--ifm-container-width);
+  margin: 1.5rem auto 0;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem;
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  border-radius: 4px;
+  background-color: var(--ifm-background-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.role-card:hover {
+  text-decoration: none;
+  color: inherit;
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--ifm-global-shadow-lw);
+  transform: translateY(-2px);
+}
+
+.role-card__role {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+.role-card__desc {
+  font-size: 0.875rem;
+  color: var(--eds-color-text-neutral-subtle);
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .role-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================
+ * ACCORDION (details/summary styled as EDS Accordion)
+ * ====================================== */
+
+.about-accordion {
+  max-width: var(--ifm-container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Reset Docusaurus details component styles */
+.about-accordion details,
+.about-accordion details[class] {
+  --docusaurus-details-decoration-color: transparent;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0;
+  background: none;
+  border-top: 1px solid var(--ifm-color-emphasis-200) !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.about-accordion details:last-child {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200) !important;
+}
+
+/* Reset Docusaurus summary styles and apply EDS accordion look */
+.about-accordion summary,
+.about-accordion details[class] > summary {
+  display: flex !important;
+  align-items: center;
+  position: static !important;
+  min-height: 48px;
+  padding: 0.75rem 0 !important;
+  margin: 0;
+  background: none !important;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.about-accordion summary::-webkit-details-marker { display: none; }
+.about-accordion summary::marker { display: none; content: ''; }
+
+/* Override Docusaurus arrow with EDS chevron */
+.about-accordion summary::before,
+.about-accordion details[class] > summary::before {
+  position: static !important;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1.25rem;
+  border: none !important;
+  background-color: var(--ifm-color-primary);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  transform: rotate(0deg) !important;
+  transform-origin: center !important;
+  transition: transform 150ms ease;
+}
+
+.about-accordion details[open] > summary::before,
+.about-accordion details[data-collapsed='false'] > summary::before {
+  transform: rotate(180deg) !important;
+}
+
+.about-accordion details[open] > summary {
+  color: var(--ifm-color-primary);
+}
+
+/* Reset Docusaurus collapsible content wrapper */
+.about-accordion details > div[class],
+.about-accordion details > div,
+.about-accordion [class*='collapsibleContent'] {
+  margin: 0 !important;
+  border: none !important;
+  padding: 0 0 0.75rem calc(1.5rem + 1.25rem) !important;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--eds-color-text-neutral-subtle);
+}
+
+/* ======================================
+ * CTA SECTION
+ * ====================================== */
+
+.about-section--cta {
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+.about-section--cta h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-section--cta p {
+  font-size: 1rem;
+}
+
+.about-section--cta a {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-decoration-line: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+}
+
+.about-section--cta a:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* ======================================
+ * TEAM GRID
+ * ====================================== */
+
+.img-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1.5rem;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.team-card img {
+  width: 5.5rem;
+  height: 5.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+}
+
+.team-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.team-card__name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.team-card__role {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* ======================================
+ * COMPONENT GALLERY
+ * ====================================== */
+
+.component-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: var(--ifm-container-width);
+  margin: 1.5rem auto 0;
+}
+
+.component-gallery__card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  border-radius: 8px;
+  background-color: var(--ifm-background-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.component-gallery__card:hover {
+  text-decoration: none;
+  color: inherit;
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--ifm-global-shadow-lw);
+  transform: translateY(-2px);
+}
+
+.component-gallery__preview {
+  height: 160px;
+  background-color: var(--ifm-color-emphasis-100);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.component-gallery__body {
+  padding: 1.25rem;
+}
+
+.component-gallery__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 0.25rem;
+}
+
+.component-gallery__subtitle {
+  font-size: 0.8125rem;
+  color: var(--eds-color-text-neutral-subtle);
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .component-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .component-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================
+ * COMPONENT GALLERY — LIVE COMPONENT PREVIEWS
+ * Layout wrappers for real EDS components
+ * ====================================== */
+
+.mock {
+  pointer-events: none;
+  width: 100%;
+}
+
+/* Row layout — centered, wrapping (buttons, chips, tooltip) */
+.mock--row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Stack layout — vertical, padded (text fields, search, input) */
+.mock--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+  --eds-color-bg-canvas: #fff;
+}
+
+/* Selection controls — compact vertical list */
+.mock--selection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0 0.25rem;
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+/* Full-width stack — no side padding (banners) */
+.mock--full {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Icon grid — inline SVGs */
+.mock--icon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Links — vertical list */
+.mock--links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
 }

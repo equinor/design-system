@@ -1,0 +1,264 @@
+---
+title: Components
+hide_table_of_contents: true
+displayed_sidebar: null
+---
+
+import '../about/team/team.css'
+import '@equinor/eds-core-react/next/index.css'
+import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Tooltip } from '@equinor/eds-core-react/next'
+
+<div className="about-page">
+
+<div className="about-hero">
+
+# Components
+
+Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Data Display
+
+Present information, status, structure, or relationships.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="data-display/chip">
+  <div className="component-gallery__preview">
+    <div className="mock mock--row">
+      <Chip selected>Design</Chip>
+      <Chip>Development</Chip>
+      <Chip>Accessibility</Chip>
+      <Chip selected>Tokens</Chip>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Chip</div>
+    <div className="component-gallery__subtitle">Compact interactive elements for filtering, tagging, and selections.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/icon">
+  <div className="component-gallery__preview">
+    <div className="mock mock--icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5 1.41-1.41L9 13.38l7.09-7.09 1.41 1.41L9 16.2z" /></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" /></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14v2z" /></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Icon</div>
+    <div className="component-gallery__subtitle">Visual symbols communicating meaning at a glance with auto-sizing.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/tooltip">
+  <div className="component-gallery__preview">
+    <div className="mock" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px'}}>
+      <div style={{width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#deedee', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#6F6F6F"><path d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z" /></svg>
+      </div>
+      <div style={{backgroundColor: '#333', color: '#fff', borderRadius: '4px', padding: '6px 12px', fontSize: '13px', whiteSpace: 'nowrap'}}>Explore more actions</div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Tooltip</div>
+    <div className="component-gallery__subtitle">Brief information shown on hover or focus without cluttering the interface.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section">
+
+## Feedback
+
+Communicate progress, results, validation, or system state.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="feedback/banner">
+  <div className="component-gallery__preview">
+    <div className="mock mock--full">
+      <Banner tone="info">
+        <Banner.Message>Changes saved successfully.</Banner.Message>
+      </Banner>
+      <Banner tone="warning">
+        <Banner.Message>This action cannot be undone.</Banner.Message>
+      </Banner>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Banner</div>
+    <div className="component-gallery__subtitle">Important messages with optional actions for informing, warning, or alerting.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Inputs
+
+Capture and validate user data or choices.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="inputs/button">
+  <div className="component-gallery__preview">
+    <div className="mock mock--row">
+      <Button variant="primary">Submit</Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button variant="ghost">Learn more</Button>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Button</div>
+    <div className="component-gallery__subtitle">Trigger actions with hierarchy variants and intent-driven tones.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/textfield">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Field>
+        <Field.Label htmlFor="preview-email">Email address</Field.Label>
+        <Input id="preview-email" placeholder="name@equinor.com" readOnly />
+      </Field>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">TextField</div>
+    <div className="component-gallery__subtitle">Complete form field combining label, description, input, and validation.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/textarea">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Field>
+        <Field.Label htmlFor="preview-desc">Description</Field.Label>
+        <Input as="textarea" id="preview-desc" placeholder="Enter a detailed description…" rows={2} readOnly />
+      </Field>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">TextArea</div>
+    <div className="component-gallery__subtitle">Multiline text input with auto-growing height and full accessibility.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/search">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Search placeholder="Search components…" aria-label="Search" readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Search</div>
+    <div className="component-gallery__subtitle">Quickly locate content with a search input and clear button.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/selection_controls">
+  <div className="component-gallery__preview">
+    <div className="mock mock--selection">
+      <Checkbox label="Accept terms and conditions" defaultChecked readOnly />
+      <Checkbox label="Subscribe to newsletter" readOnly />
+      <Radio label="Standard delivery" name="preview-delivery" defaultChecked readOnly />
+      <Radio label="Express delivery" name="preview-delivery" readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Selection Controls</div>
+    <div className="component-gallery__subtitle">Select options, make decisions, and set preferences.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/input">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Input placeholder="Enter value…" readOnly />
+      <Input placeholder="Amount" startText="$" readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Input</div>
+    <div className="component-gallery__subtitle">Foundational form element for collecting user data with full control.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/field">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Field>
+        <Field.Label htmlFor="preview-account">Account type</Field.Label>
+        <Input id="preview-account" placeholder="Choose a value" invalid readOnly />
+        <Field.HelperMessage>Please fill in this field</Field.HelperMessage>
+      </Field>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Field</div>
+    <div className="component-gallery__subtitle">Layout primitive connecting labels and helpers accessibly to controls.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section">
+
+## Navigation
+
+Help users move through content and hierarchies.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="navigation/link">
+  <div className="component-gallery__preview">
+    <div className="mock mock--links">
+      <Link href="#">Getting started</Link>
+      <Link href="#">View documentation</Link>
+      <Link href="#">Back to overview</Link>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Link</div>
+    <div className="component-gallery__subtitle">Clickable text navigating users to pages, documents, or locations.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Surfaces
+
+Structural or container elements that organise and layer content.
+
+</div>
+
+<div className="about-section about-section--cta">
+
+## Explore in Storybook
+
+An interactive [Storybook](https://storybook.eds.equinor.com) is available for all developed components. Use it to explore variants, props, accessibility notes, and usage examples.
+
+If you cannot find a component or need to propose a new one, [open an issue](https://github.com/equinor/design-system/issues/new) describing the use case, constraints, and any interim solutions you have considered.
+
+</div>
+
+</div>
