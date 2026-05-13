@@ -467,7 +467,6 @@ function AutocompleteInner<T = string>(
             disabled={disabled}
             readOnly={readOnly}
             invalid={invalid}
-            hideErrorIcon
             value={inputValue}
             onChange={handleChange}
             onMouseDown={handleMouseDown}
