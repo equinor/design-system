@@ -70,11 +70,11 @@ function AutocompleteInner<T = string>(
   const listboxId = `eds-autocomplete-listbox-${uid.replace(/:/g, '')}`
   const anchorName = `--eds-autocomplete-${uid.replace(/:/g, '')}`
 
-  const getLabelFn = useCallback(
-    (option: T | string): string => resolveOptionLabel(option, getOptionLabel),
-    [getOptionLabel],
-  )
+  const getLabelFn = (option: T | string): string =>
+    resolveOptionLabel(option, getOptionLabel)
 
+  // Tracks whether the search input text is controlled via the `inputValue` prop.
+  // The selected value (value/onValueChange) has its own control semantics.
   const isControlled = inputValueProp !== undefined
   const [internalValue, setInternalValue] = useState(
     () => defaultInputValue ?? (value !== undefined ? getLabelFn(value) : ''),
@@ -90,6 +90,8 @@ function AutocompleteInner<T = string>(
   >(() => value)
   const effectiveSelected: T | string | undefined =
     value ?? internalSelectedOption
+
+  const prevValueRef = useRef<T | undefined>(value)
 
   // Sync input text when the external value prop changes (uncontrolled mode only).
   // getLabelFn is intentionally omitted from deps: an inline getOptionLabel creates
@@ -115,7 +117,6 @@ function AutocompleteInner<T = string>(
   const [customOptions, setCustomOptions] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement | null>(null)
   const listboxRef = useRef<HTMLUListElement | null>(null)
-  const prevValueRef = useRef<T | undefined>(value)
 
   const mergedRef = useCallback(
     (node: HTMLInputElement | null) => {
@@ -554,7 +555,7 @@ function AutocompleteInner<T = string>(
                   const label = getLabelFn(item.value)
                   const displayIndex = allowCustomValue ? index + 1 : index
                   const selected = isItemSelected(item)
-                  const disabled =
+                  const optionIsDisabled =
                     item.type === 'list' &&
                     isOptionDisabled(item.value, optionDisabled)
                   return (
@@ -571,16 +572,18 @@ function AutocompleteInner<T = string>(
                       id={getOptionId(displayIndex)}
                       role="option"
                       aria-selected={selected}
-                      aria-disabled={disabled || undefined}
+                      aria-disabled={optionIsDisabled || undefined}
                       aria-posinset={displayIndex + 1}
                       aria-setsize={totalOptions}
                       active={activeIndex === displayIndex}
                       onMouseDown={
-                        disabled ? undefined : () => handleItemSelect(item)
+                        optionIsDisabled
+                          ? undefined
+                          : () => handleItemSelect(item)
                       }
                       onClick={() => {
                         if (
-                          !disabled &&
+                          !optionIsDisabled &&
                           listboxRef.current?.matches(':popover-open')
                         )
                           handleItemSelect(item)

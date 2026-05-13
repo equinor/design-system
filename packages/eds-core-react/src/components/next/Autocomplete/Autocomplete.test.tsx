@@ -420,6 +420,60 @@ describe('Autocomplete (next)', () => {
     })
   })
 
+  describe('Regression', () => {
+    it('does not overwrite typed input when parent re-renders with inline getOptionLabel', async () => {
+      type Fruit = { id: string; name: string }
+      const fruits: Fruit[] = [
+        { id: '1', name: 'Apple' },
+        { id: '2', name: 'Banana' },
+      ]
+
+      const user = userEvent.setup()
+      const { rerender } = render(
+        <Autocomplete
+          label="Fruit"
+          options={fruits}
+          getOptionLabel={(o) => o.name}
+        />,
+      )
+      await user.type(screen.getByRole('combobox'), 'Ban')
+
+      // Re-render with a new inline arrow — simulates a parent re-render where
+      // getOptionLabel is defined inline and gets a new reference each cycle.
+      rerender(
+        <Autocomplete
+          label="Fruit"
+          options={fruits}
+          getOptionLabel={(o) => o.name}
+        />,
+      )
+
+      expect(screen.getByRole('combobox')).toHaveValue('Ban')
+    })
+
+    it('renders two options with duplicate labels without key collision', async () => {
+      type Fruit = { id: string; name: string }
+      const fruits: Fruit[] = [
+        { id: '1', name: 'Apple' },
+        { id: '2', name: 'Apple' },
+      ]
+
+      const user = userEvent.setup()
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={fruits}
+          getOptionLabel={(o) => o.name}
+          getOptionValue={(o) => o.id}
+        />,
+      )
+      await user.click(screen.getByRole('combobox'))
+      expect(
+        screen.getAllByRole('option', { name: 'Apple', hidden: true }),
+      ).toHaveLength(2)
+    })
+  })
+
   describe('Generic options', () => {
     type FruitObject = { id: string; name: string }
     const objectOptions: FruitObject[] = [

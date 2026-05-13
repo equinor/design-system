@@ -24,7 +24,11 @@ export type AutocompleteProps<T = string> = {
   allowCustomValue?: boolean
   /** Callback fired when the user confirms a custom value not in the options list */
   onCustomValueConfirm?: (value: string) => void
-  /** Callback fired when the clear button is clicked */
+  /**
+   * Callback fired when the clear button is clicked.
+   * In uncontrolled mode the input text is also cleared automatically.
+   * In controlled `inputValue` mode you must reset `inputValue` yourself.
+   */
   onClear?: () => void
   /** Accessible label for the clear button. Defaults to "Clear". Override for localisation. */
   clearLabel?: string
