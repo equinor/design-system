@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useForm, Controller } from 'react-hook-form'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Autocomplete, type AutocompleteProps } from '.'
 
@@ -522,12 +523,197 @@ export const DensityModes: StoryFn = () => (
   </div>
 )
 
-DensityModes.storyName = 'Density Modes'
 DensityModes.parameters = {
   docs: {
     description: {
       story:
         'Autocomplete adapts to density modes via the `data-density` attribute on a parent element. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown items respond to density as well.',
+    },
+  },
+}
+
+export const Async: StoryFn = () => {
+  type Country = {
+    name: { common: string; official: string }
+    population: number
+    capital: string[]
+    flags: { png: string; svg: string; alt: string }
+  }
+
+  const [options, setOptions] = useState<Country[]>([])
+  const [loading, setLoading] = useState(false)
+  const [selected, setSelected] = useState<Country | undefined>()
+  const debounce = useRef<ReturnType<typeof setTimeout>>(null)
+
+  useEffect(() => {
+    return () => {
+      if (debounce.current) clearTimeout(debounce.current)
+    }
+  }, [])
+
+  const handleInputChange = (input: string) => {
+    if (debounce.current) clearTimeout(debounce.current)
+    if (input.length < 2) {
+      setOptions([])
+      return
+    }
+    debounce.current = setTimeout(() => {
+      setLoading(true)
+      const controller = new AbortController()
+      fetch(`https://restcountries.com/v3.1/name/${input}`, {
+        signal: controller.signal,
+      })
+        .then((r) =>
+          r.ok ? r.json() : Promise.reject(new Error(r.statusText)),
+        )
+        .then((data: Country[]) => {
+          setOptions(data)
+          setLoading(false)
+        })
+        .catch(() => {
+          setOptions([])
+          setLoading(false)
+        })
+    }, 400)
+  }
+
+  return (
+    <Autocomplete<Country>
+      label="Country"
+      options={options}
+      loading={loading}
+      getOptionLabel={(c) => c.name.common}
+      optionsFilter={() => true}
+      onInputChange={handleInputChange}
+      value={selected}
+      onValueChange={setSelected}
+      placeholder="Type at least 2 characters…"
+      noOptionsText="No countries found"
+      renderOption={(c) => (
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          <img src={c.flags.svg} alt="" style={{ width: '2rem' }} />
+          <div>
+            <div>{c.name.common}</div>
+            <div
+              style={{
+                fontSize: '0.75rem',
+                color: 'var(--eds-color-text-subtle)',
+              }}
+            >
+              {c.capital?.[0]} · {new Intl.NumberFormat().format(c.population)}
+            </div>
+          </div>
+        </div>
+      )}
+      helperMessage={
+        selected
+          ? `Selected: ${selected.name.official}`
+          : 'Start typing to search'
+      }
+    />
+  )
+}
+
+Async.storyName = 'Async search'
+Async.parameters = {
+  docs: {
+    description: {
+      story: `Server-side search pattern: pass \`optionsFilter={() => true}\` to skip local filtering, use \`onInputChange\` to trigger fetches, and toggle \`loading\` while waiting. The debounce avoids a request on every keystroke. \`renderOption\` adds richer rows without affecting what is searched or displayed in the input.`,
+    },
+  },
+}
+
+type FormValues = {
+  element: string | undefined
+  well: { id: string; name: string } | undefined
+}
+
+export const WithReactHookForm: StoryFn = () => {
+  type Well = { id: string; name: string }
+  const wells: Well[] = [
+    { id: 'w1', name: 'Gullfaks A' },
+    { id: 'w2', name: 'Statfjord B' },
+    { id: 'w3', name: 'Troll C' },
+    { id: 'w4', name: 'Johan Sverdrup' },
+  ]
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: { element: undefined, well: undefined },
+  })
+
+  const [submitted, setSubmitted] = useState<FormValues | null>(null)
+
+  return submitted ? (
+    <div>
+      <pre style={{ marginBottom: '1rem' }}>
+        {JSON.stringify(submitted, null, 2)}
+      </pre>
+      <button
+        onClick={() => {
+          setSubmitted(null)
+          reset()
+        }}
+      >
+        Reset
+      </button>
+    </div>
+  ) : (
+    <form
+      onSubmit={handleSubmit((data) => setSubmitted(data))}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        maxWidth: '320px',
+      }}
+    >
+      <Controller
+        control={control}
+        name="element"
+        rules={{ required: 'Select an element' }}
+        render={({ field }) => (
+          <Autocomplete
+            label="Element"
+            options={elements}
+            value={field.value}
+            onValueChange={field.onChange}
+            onClear={() => field.onChange(undefined)}
+            invalid={!!errors.element}
+            helperMessage={errors.element?.message}
+            placeholder="Search elements"
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="well"
+        render={({ field }) => (
+          <Autocomplete<Well>
+            label="Well (optional)"
+            options={wells}
+            getOptionLabel={(w) => w.name}
+            getOptionValue={(w) => w.id}
+            value={field.value}
+            onValueChange={field.onChange}
+            onClear={() => field.onChange(undefined)}
+            placeholder="Search wells"
+          />
+        )}
+      />
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+WithReactHookForm.parameters = {
+  docs: {
+    description: {
+      story: `Use \`Controller\` from react-hook-form and wire \`value\` / \`onValueChange\` to \`field.value\` / \`field.onChange\`. Pass \`onClear={() => field.onChange(undefined)}\` so clearing the field also resets the form value. \`invalid\` and \`helperMessage\` connect validation errors.`,
     },
   },
 }
