@@ -10,12 +10,6 @@
      * interaction feedback. */
     --_title-color: var(--eds-color-text-accent-subtle);
 
-    /* TODO: the chevron is an icon foreground, but EDS tokens currently only
-     * expose `accent-9` (#206F77) via bg-fill tokens. Replace with an
-     * `--eds-color-icon-accent-*` or `--eds-color-text-accent-*` semantic token
-     * once those exist. Tracked in a follow-up issue. */
-    --_chevron-color: var(--eds-color-bg-fill-emphasis-default);
-
     /* Visual width of the chevron column. Equals the summary's line-height so
      * the chevron sits on the same baseline grid as the title. The panel
      * references the same var so its inline-start aligns under the title. */
@@ -91,8 +85,21 @@
 
     /* Chevron — explicit inline-size keeps the column predictable; the icon's
      * built-in `margin-inline: -0.1em` (icon.css) makes the glyph sit optically
-     * tight inside, same pattern Chip uses. */
+     * tight inside, same pattern Chip uses.
+     *
+     * NOTE: --_chevron-color is defined here (not on .eds-accordion) so the
+     * `var(--eds-color-bg-fill-emphasis-default)` resolves under this element's
+     * `data-color-appearance="accent"` context. Defining it at the root would
+     * lock in the neutral-context value (an EDS token gotcha — substitution
+     * happens at the property's defining cascade context).
+     *
+     * TODO: the chevron is an icon foreground, but EDS tokens currently only
+     * expose `accent-9` (#206F77) via bg-fill tokens. Replace with an
+     * `--eds-color-icon-accent-*` or `--eds-color-text-accent-*` semantic token
+     * once those exist. Tracked in a follow-up issue. */
     & > details > summary > .chevron {
+      --_chevron-color: var(--eds-color-bg-fill-emphasis-default);
+
       display: inline-flex;
       align-items: center;
       justify-content: center;
