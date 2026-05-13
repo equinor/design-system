@@ -30,5 +30,5 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
-  plugins: [dts({ rollupTypes: true })],
+  plugins: [dts({ bundleTypes: true })],
 })
