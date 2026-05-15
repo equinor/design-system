@@ -457,6 +457,19 @@ src/components/
 - Sound on slam / drop (chiptune SFX still TBD).
 - Token in-flight state threading (still unwired — each scene self-contained).
 
+### Phase 4.1 — Format Splitter source correction ✓
+
+**Caught by review.** The original Phase 4 Format Splitter used `--eds-color-bg-floating` as its source, but that name *is* the CSS-target output — the splitter was effectively claiming "CSS form fans out into CSS / JS / TS / JSON," which hides the point that each target applies its OWN name transform.
+
+**Fix.** Source card now shows the abstract JSON path `bg-floating` (no prefix, no kebab) with the resolved `#ffffff` value. Each output card legitimately applies its target's own naming convention:
+- CSS → `--eds-color-bg-floating: #ffffff;` (kebab + `--eds-color-` prefix)
+- JS / TS → `BG_FLOATING` (SCREAMING_SNAKE constant)
+- JSON → `"bg-floating"` (preserves source path verbatim)
+
+Station log updated to make the relationship explicit: `> each target applies its own name transform`. Component comment block also rewritten to call out the per-target name transforms.
+
+**Carry-over caveat.** Transform Bench still demonstrates a CSS-specific name transform (`Light.Gray.2 → --eds-color-light-gray-2`). That's defensible as *one example* of what a transform does, but the workshop should call out that other targets (JS, TS) apply different name transforms — Style Dictionary's transform chain is target-specific, not universal. Leaving Transform Bench as-is for now; revisit if the workshop feedback says the conflation is misleading.
+
 ---
 
 ## Open decisions before Phase 0

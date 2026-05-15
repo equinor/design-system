@@ -1,25 +1,31 @@
 import { StationLog } from './StationLog'
 
-// Station 4. Style Dictionary emits the same source token in four
-// target syntaxes from one JSON input. The build outputs land in
-// build/css/, build/js/, build/ts/, build/json/.
+// Station 4. Style Dictionary emits the same abstract source token in
+// four target syntaxes. Each target applies its OWN name transform on
+// top of the source path:
+//   css   → kebab + --eds-color- prefix
+//   js/ts → SCREAMING_SNAKE constant
+//   json  → preserves the source path verbatim
 //
 // The CSS output keeps `var(...)` references; the JSON-flat output
 // flattens them to literals. We don't model that nuance here —
-// lightweight slice just shows that one source → four syntaxes.
+// lightweight slice just shows that one source → four syntaxes,
+// each with the target's own naming convention.
 
 type Output = {
   format: 'css' | 'js' | 'ts' | 'json'
   snippet: string
 }
 
-const SOURCE_NAME = '--eds-color-bg-floating'
+// Abstract source — the JSON token name + resolved value entering the
+// splitter. Not yet shaped for any specific target.
+const SOURCE_PATH = 'bg-floating'
 const SOURCE_VALUE = '#ffffff'
 
 const OUTPUTS: Output[] = [
   {
     format: 'css',
-    snippet: `${SOURCE_NAME}: ${SOURCE_VALUE};`,
+    snippet: `--eds-color-bg-floating:\n  ${SOURCE_VALUE};`,
   },
   {
     format: 'js',
@@ -37,9 +43,9 @@ const OUTPUTS: Output[] = [
 
 const LOG_LINES = [
   '> station 4 :: format splitter online',
-  `> source :: ${SOURCE_NAME} = ${SOURCE_VALUE}`,
+  `> source :: ${SOURCE_PATH} = ${SOURCE_VALUE}`,
+  '> each target applies its own name transform',
   '> emit :: css | js | ts | json',
-  '> one source, four target syntaxes',
 ]
 
 function Manifold() {
@@ -83,7 +89,7 @@ export function FormatSplitter() {
         <div className="splitter-source">
           <div className="bench-card">
             <div className="bench-card-label">source</div>
-            <div className="bench-card-value">{SOURCE_NAME}</div>
+            <div className="bench-card-value">{SOURCE_PATH}</div>
             <div className="splitter-source-value">{SOURCE_VALUE}</div>
           </div>
         </div>
