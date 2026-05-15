@@ -456,3 +456,5 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
 When adding new conventions, update **this file** and let the tool-specific files reference it.
+
+To verify the harness configs haven't drifted, run the cross-harness audit: [`documentation/agent-instructions/HARNESS_AUDIT.md`](./documentation/agent-instructions/HARNESS_AUDIT.md) is the canonical read-only playbook. Harness entry points: `/audit-harnesses` in Claude Code, the `audit-harnesses` prompt in Copilot, the `audit-harnesses` agent in OpenCode.
