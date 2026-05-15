@@ -26,4 +26,9 @@ For color systems: see `packages/eds-tokens/instructions/colors.md`.
 
 ## Hooks (Copilot CLI)
 
-`.github/hooks/block-secrets.{json,js}` registers a `preToolUse` hook that denies tool calls reading `.env*`, `id_rsa*`, `*.pem`, `*.key`, `credentials.json`, `secrets.json`, or anything under `secrets/`. The hook runs automatically for everyone using the Copilot CLI in this repo. IDE Copilot does not execute the hook — see `AGENTS.md` § Secrets & Credentials for the cross-harness rule.
+Two hooks ship in `.github/hooks/`, picked up automatically by Copilot CLI:
+
+- `block-secrets.{json,js}` — `preToolUse` hook that denies reads of `.env*`, `id_rsa*`, `*.pem`, `*.key`, `credentials.json`, `secrets.json`, and anything under `secrets/`. See `AGENTS.md` § Secrets & Credentials.
+- `format-on-edit.{json,js}` — `postToolUse` hook that runs `eslint --fix` on edited `.ts`/`.tsx` and `stylelint --fix` on edited `/components/next/**/*.css` files, mirroring the Claude Code formatter. See `AGENTS.md` § Code Formatting.
+
+IDE Copilot does not execute these hooks; refer to the same AGENTS.md sections for the cross-harness rules.

@@ -35,6 +35,27 @@ If you need to verify a secret file's shape, report length + first/last few char
 | Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually    |
 | OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                   |
 
+## Code Formatting
+
+When an agent edits a file, the result must end up formatted and lint-fixed, regardless of which harness made the edit. Otherwise the same change lands as a clean diff in one harness and a noisy one in another.
+
+The expected behaviour after any edit to a `.ts`, `.tsx`, or `/components/next/**/*.css` file:
+
+- ESLint `--fix` runs on `.ts` / `.tsx`
+- Stylelint `--fix` runs on `.css` files inside `packages/eds-core-react/src/components/next/`
+- Prettier formatting is applied (covered by Prettier itself via VS Code `editor.formatOnSave` or by the lint --fix passes)
+
+**Enforcement matrix:**
+
+| Harness        | Enforcement                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------- |
+| Claude Code    | `.claude/hooks/format_hook.js` runs eslint/stylelint --fix after every Edit/Write                        |
+| Copilot CLI    | `.github/hooks/format-on-edit.{json,js}` runs the same eslint/stylelint --fix as a `postToolUse` hook    |
+| Copilot in IDE | `.vscode/settings.json` `editor.formatOnSave: true` (Prettier) — does NOT run eslint/stylelint auto-fix  |
+| OpenCode       | No enforced hook — run `pnpm run lint <file>` manually after edits, or configure an equivalent post-hook |
+
+If you edit code in a harness without enforced auto-fix, run `pnpm run lint <file>` before considering the change done.
+
 ## Build/Lint/Test Commands
 
 Package manager: `pnpm@10.15.0`
@@ -413,7 +434,8 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
-| `.github/hooks/*.{json,js}`       | Copilot CLI: `preToolUse` hook blocking secret-file access |
+| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access |
+| `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
 | `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
