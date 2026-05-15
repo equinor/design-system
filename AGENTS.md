@@ -384,6 +384,10 @@ In Claude Code, `.claude/rules/figma-component.md` loads this section automatica
 
 For running an accessibility audit on a deployed page or Storybook story, see [`documentation/how-to/ACCESSIBILITY_AUDIT.md`](./documentation/how-to/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
 
+## Component Documentation
+
+Component docs live in `apps/design-system-docs/docs/components/{category}/{component}.md`. For writing or reviewing them — tone of voice, formatting (British English, no em-dashes, admonitions), section order, output template, Storybook iframes workflow, sidebar registration, verification checklist — see [`documentation/how-to/COMPONENT_DOC_STYLE.md`](./documentation/how-to/COMPONENT_DOC_STYLE.md). Harness entry points (`/create-component-doc` in Claude Code, the `structure_components_prompt` / `verify_components_prompt` in Copilot, the `component-doc` agent in OpenCode) all reference that doc.
+
 ## Conventional Commits
 
 ```

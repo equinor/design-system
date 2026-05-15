@@ -1,55 +1,26 @@
 ---
 mode: agent
+description: Restructure raw content into a component documentation file
 ---
 
-You are structuring documentation for components in a design system.
-Your task is to create clear, structured, and approachable documentation that is both practical and inspiring.
-Use the file in context to generate, change the file to reflect the structure in the prompt.
+# Structure Component Documentation
 
-You should not generate or create anything that is not already present in the input text.
+Take the raw content provided in context and restructure it into a properly formatted component documentation file for the Equinor Design System.
 
-Do not create titles that is not present in the structure defined in this systems prompt.
+> **Canonical reference:** [`documentation/how-to/COMPONENT_DOC_STYLE.md`](../../../documentation/how-to/COMPONENT_DOC_STYLE.md) — tone of voice, formatting conventions (British English, no em-dashes, admonitions), section order, output template, Storybook iframes workflow, sidebar registration. Project-wide conventions live in [`AGENTS.md`](../../../AGENTS.md).
 
-Some of the documentation might contain a text string with the folder name in caps lock, remove this.
+## Workflow
 
-Sometimes the documentation might have duplicate paragraphs, only keep one of them.
+1. Identify the component name and category from the input.
+2. Choose the target path: `apps/design-system-docs/docs/components/{category}/{component}.md`.
+3. Restructure into the template at [`COMPONENT_DOC_STYLE.md`](../../../documentation/how-to/COMPONENT_DOC_STYLE.md#output-template). Only include sections that have content from the input.
+4. Embed Storybook iframes for the default story and per variant axis. Measure each iframe's height per [`COMPONENT_DOC_STYLE.md`](../../../documentation/how-to/COMPONENT_DOC_STYLE.md#measuring-iframe-height).
+5. Register the new doc in `apps/design-system-docs/sidebars.ts` per [`COMPONENT_DOC_STYLE.md`](../../../documentation/how-to/COMPONENT_DOC_STYLE.md#sidebar-registration).
 
-It should always contain header 1 title
+## Rules
 
-Do not include date or timestamp of when last reviewed in the output.
-
-## Tone of Voice
-
-- **Friendly and welcoming:** Write in an approachable, encouraging style that fosters collaboration and creativity.
-- **Clear and concise:** Use short sentences and minimal jargon. Present information in a logical, easy-to-scan structure.
-- **Purpose-driven:** Connect guidance to the design system’s values, brand purpose, and the importance of consistency.
-- **Inspirational:** Use positive phrasing to motivate readers (e.g., “designed with care”, “inspire meaningful experiences”).
-- **Trust-building:** Emphasize reliability, long-term value, and thoughtful design decisions.
-- **Inclusive:** Use inclusive language (e.g., “we” and “our”) to build a sense of community.
-
-## Structure
-
-Each component’s documentation should include the following sections (adjust if not relevant, but do not add titles or sections not present in this list):
-
-1. [Component Title]
-
-- Briefly explain what the component is and why it matters.
-- Use approachable language to set context.
-
-2. **When to Use**
-
-3. **Structure**
-
-4. **Guidelines**
-
-5. **Accessibility**
-
-6. **Implementation in Figma**
-
-## Success Criteria
-
-- The documentation is clear, warm, and professional.
-- The input text should be in the structure provided
-- The tone reflects friendliness, trust, and inspiration, aligning with the brand’s values.
-
-Apply it to the files in the context.
+- Use only content provided in the input — do not invent information
+- Skip sections without content rather than filling with filler
+- Always include the H1 title
+- Remove artefacts: caps-locked folder names, duplicate paragraphs, dates/timestamps, scrape noise
+- Follow the canonical tone of voice and formatting (British English, no em-dashes, admonitions)
