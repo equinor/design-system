@@ -379,6 +379,49 @@ src/components/
 - Token state model integration into a UI panel.
 - Aseprite-authored sprites (placeholder SVG character holds the slot).
 
+### Phase 3 — Sync Dock + Transform Bench, scenes chained ✓
+
+**Scope.** Lightweight first cut of Stations 1 and 3, with a scene-router that chains all three stations together via keyboard navigation. Reference Resolver (Phase 1.5) re-enters as one of four scenes.
+
+**New: scene state machine.**
+- `src/components/Stage.tsx` owns the `Scene` type (`'idle' | 'sync' | 'reference' | 'transform'`) and routes to the right component.
+- Keyboard: `Space` or `→` advances to next scene; `←` goes back. Cycles indefinitely.
+- A persistent `.nav-hint` in the bottom-right of the stage shows `[ space ] <next-label>` so the driver knows the control at all times.
+- `App.tsx` mounts `<Stage />`; `Factory.tsx` is now the `idle` scene only (its routing logic moved to Stage).
+
+**Station 1 — Sync Dock (`src/components/SyncDock.tsx`).**
+- Pixel-art wooden crate sprite (`Crate.tsx`, 48×40 logical px) with open/closed states. Click to toggle. Open state shows tokens leaking out.
+- Crate label `🌗 Color scheme.Light` + source line `eds-tokens-sync :: figma → tokens/`.
+- JSON dialog box with a tabbed `.JSON` corner title (purple), showing a real-shape snippet of `bg-floating` (type, value, com.figma codeSyntax). Snippet is collapsed to `· · ·` until the crate is opened.
+- "Five source files" wall map listing all 5 sources as pixel cards; Color scheme is highlighted yellow to indicate the active file.
+- Station log seeds with two lines; opening the crate appends three more narrating the parse.
+
+**Station 3 — Transform Bench (`src/components/TransformBench.tsx`).**
+- Two clickable pixel-art levers (`Lever.tsx`, 20×40 logical px) with up/down states. Red knob, light-gray shaft, dark-gray base, purple pivot.
+- Two transform rows, each `[IN card] → [lever] → [OUT card]`:
+  - Name lever: `Light.Gray.2` → `--eds-color-light-gray-2` (kebab-case + `--eds-color-` prefix).
+  - Unit lever: `16` → `1rem` (numeric / 16 root font-size).
+- OUT cards animate a brief stamp-bounce (`scale 1 → 1.08 → 1` over 220ms with `steps(2)`) when the corresponding lever flips, and pick up a yellow border + orange shadow.
+- Station log appends a `>` narration line on each transform.
+
+**Transform logic** lives next to the component (`applyNameTransform`, `applyUnitTransform`) — small pure functions, no shared library yet. Will graduate to a shared transforms module once more stations need them.
+
+**Verified in Chrome via DevTools** (full keyboard walk through all four scenes):
+- Idle: token walks, conveyor scrolls, nav hint reads "ENTER SYNC DOCK".
+- Sync Dock: crate closed by default; clicking opens it, JSON renders, log narrates parse.
+- Reference Resolver: layout identical to Phase 1.5 (re-mounted unmodified), nav hint reads "TRANSFORM BENCH".
+- Transform Bench: levers pull individually, both rows stamp, log narrates each transform.
+- Back to idle on next press; loop closes.
+- No console errors.
+
+**Verified.** `pnpm --filter @equinor/token-factory build` passes, TypeScript clean.
+
+**Explicit non-goals for Phase 3 (deferred):**
+- Scene transitions / camera pans (current cuts are hard cuts).
+- Token "carrying state" between scenes (each scene is self-contained; the InFlightToken state model from Phase 2 is still unwired).
+- Driver clicking to drive levers + space-to-advance interaction tension (currently both work but they don't gate progression).
+- More transform examples (only one of each lever shown).
+
 ---
 
 ## Open decisions before Phase 0

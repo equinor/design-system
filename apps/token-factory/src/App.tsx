@@ -1,10 +1,10 @@
-import { Factory } from './components/Factory'
+import { Stage } from './components/Stage'
 
 export function App() {
   return (
     <div className="viewport">
       <div className="stage">
-        <Factory />
+        <Stage />
       </div>
     </div>
   )

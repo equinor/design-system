@@ -510,3 +510,239 @@ button {
     transform: translateX(calc(380 * var(--px)));
   }
 }
+
+/* ===== Nav hint overlay (Phase 3) ===== */
+
+.nav-hint {
+  position: absolute;
+  bottom: calc(2 * var(--px));
+  right: calc(4 * var(--px));
+  display: flex;
+  gap: calc(3 * var(--px));
+  align-items: center;
+  padding: calc(2 * var(--px)) calc(4 * var(--px));
+  background: rgba(0, 0, 0, 0.6);
+  font-size: calc(5 * var(--px));
+  pointer-events: none;
+  z-index: 10;
+}
+
+.nav-key {
+  color: var(--pico-yellow);
+}
+
+.nav-label {
+  color: var(--pico-white);
+  text-transform: uppercase;
+}
+
+/* ===== Sync Dock (Phase 3 :: Station 1) ===== */
+
+.sync-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: calc(8 * var(--px));
+}
+
+.crate-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(3 * var(--px));
+  width: calc(80 * var(--px));
+}
+
+.crate-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.crate-sprite {
+  width: calc(48 * var(--px));
+  height: calc(40 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+.crate-label {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-yellow);
+  text-align: center;
+}
+
+.crate-source {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  text-align: center;
+}
+
+.json-area {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--px));
+  min-width: 0;
+}
+
+.json-dialog {
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-white);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  padding: calc(4 * var(--px));
+  position: relative;
+}
+
+.json-dialog-title {
+  position: absolute;
+  top: calc(-7 * var(--px));
+  left: calc(4 * var(--px));
+  background: var(--pico-dark-purple);
+  color: var(--pico-white);
+  border: var(--px) solid var(--pico-white);
+  font-size: calc(4 * var(--px));
+  padding: calc(1 * var(--px)) calc(3 * var(--px));
+  text-transform: uppercase;
+}
+
+.json-snippet {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  line-height: 1.6;
+  white-space: pre;
+  overflow: hidden;
+  max-height: calc(80 * var(--px));
+}
+
+.wall-map {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+}
+
+.wall-map-title {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+}
+
+.source-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(2 * var(--px));
+}
+
+.source-item {
+  font-size: calc(4 * var(--px));
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  color: var(--pico-light-gray);
+}
+
+.source-item.is-active {
+  border-color: var(--pico-yellow);
+  color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+}
+
+/* ===== Transform Bench (Phase 3 :: Station 3) ===== */
+
+.bench-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bench-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--px));
+  width: 100%;
+}
+
+.bench-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(4 * var(--px));
+}
+
+.bench-card {
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-white);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-gray);
+  padding: calc(3 * var(--px)) calc(4 * var(--px));
+  min-width: calc(96 * var(--px));
+  text-align: center;
+}
+
+.bench-card.is-stamped {
+  border-color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
+  animation: stamp-bounce 220ms steps(2, end);
+}
+
+@keyframes stamp-bounce {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bench-card-label {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+}
+
+.bench-card-value {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-white);
+  margin-top: calc(2 * var(--px));
+  word-break: break-all;
+}
+
+.bench-arrow {
+  font-size: calc(8 * var(--px));
+  color: var(--pico-yellow);
+  font-family: monospace;
+}
+
+.lever {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  cursor: pointer;
+}
+
+.lever-sprite {
+  width: calc(20 * var(--px));
+  height: calc(40 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+.lever-label {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-white);
+  text-transform: uppercase;
+}
+
+.lever.is-down .lever-label {
+  color: var(--pico-yellow);
+}
