@@ -213,6 +213,55 @@ apps/token-factory/
 
 **Branch:** `feat/token-factory-workshop`.
 
+### Phase 1 — Reference Resolver (Station 2) ✓
+
+**Stage resize.** The 320×180 logical canvas from Phase 0 was too cramped for three card rows + log strip + mascot. Bumped to **360×220** logical. Still firmly 8-bit; integer-scales cleanly. This is now the canonical stage size for the rest of the build.
+
+**Data — the three-layer model encoded.**
+- Hand-curated three chains in `src/data/chains.ts` with real values verified against the source JSON files in `packages/eds-tokens/tokens/`.
+- Chains: `bg-floating` (Light.Gray.2 = `#ffffff`), `border-focus` (Light.Blue.7 = `#6fb6e9`), `text-link` (Light.Blue.8 = `#0070a9`).
+- The real pipeline has more than three layers (Concept → Color-scheme alias → Raw palette → primitives). For pedagogy we collapse it to the team's three-name vocabulary: **Palette / Semantic / Concept**. This matches `team-assistant/decisions.md:259-263`.
+- Live JSON loading deferred — curated TS data keeps the vertical slice tight. Loading the actual JSON (paths contain emoji filenames) can land later if needed.
+
+**Components.**
+```
+src/components/
+├── Card.tsx               — single token card with layer tag, title, value, swatch
+├── Wire.tsx               — pixel-art horizontal connector (bolt-line-bolt)
+├── ReferenceResolver.tsx  — Station 2 orchestration: chains, toggle, log
+├── LibrarianBot.tsx       — inline-SVG pixel mascot, 2-frame blink (CSS-free)
+└── StationLog.tsx         — typewriter log strip (22ms char interval)
+```
+
+**The toggle (`outputReferences`):**
+- ON: each card shows the reference it resolves to (`{bg-floating}`, `{Light.Gray.2}`, `#ffffff`). Wires are visible, pulsing when a chain is hovered.
+- OFF: every card collapses to the flattened hex. Same value across the row. This is what Style Dictionary's flattened output looks like.
+- Each toggle change logs to the station log: `> outputReferences = true/false`.
+
+**Hover behaviour as the in-game "trace" tool:**
+- Hovering a chain highlights all three cards (yellow border + drop-shadow), activates the wires, and writes a resolve line to the log: `> resolve --eds-color-bg-floating → {bg-floating} → {Light.Gray.2} = #ffffff`.
+- No driver clicking needed — the team narrates as the driver moves the cursor.
+
+**World vs content rule preserved.** Card chrome, wires, layer labels, log, mascot — all pixel-art PICO-8 palette. The swatch on each card uses the real EDS hex with `image-rendering: auto` so the OKLCH-derived colour renders at full fidelity (the educational payload).
+
+**Librarian mascot placeholder.**
+- Inline SVG with `shape-rendering="crispEdges"` so it scales as proper pixel art.
+- 24×32 logical pixels. Body, head, antenna with yellow bulb, two-pixel eyes (open / blink), small purple book under the arm, two feet.
+- Blink driven by React state on a 2.6s interval. To be replaced by an Aseprite asset later — the SVG is a clear placeholder, not pretending to be the final art.
+
+**Station log.**
+- Typewriter effect on the newest line (`steps(2)` caret blink).
+- Holds the 3 most-recent lines; older fade to dark grey.
+- Boots with two seed lines so the strip never looks empty.
+
+**Phase 0 dust.** `src/sprites/floor-tile.svg` retained for Phase 2 (conveyor reuse). Phase 0 stage demo (title + floor strip + lonely card) removed — Phase 1 is a clean replacement.
+
+**Verified:**
+- `pnpm --filter @equinor/token-factory build` passes (22 modules, ~196 kB JS, ~103 kB CSS pre-gzip — CSS is mostly the EDS variables bundle).
+- TypeScript strict mode clean.
+
+**Smoke test on the driver:** `pnpm --filter @equinor/token-factory dev` → <http://localhost:5180>. Hover each chain row, toggle outputReferences, watch the station log narrate.
+
 ---
 
 ## Open decisions before Phase 0
