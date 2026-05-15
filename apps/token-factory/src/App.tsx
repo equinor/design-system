@@ -1,10 +1,10 @@
-import { ReferenceResolver } from './components/ReferenceResolver'
+import { Factory } from './components/Factory'
 
 export function App() {
   return (
     <div className="viewport">
       <div className="stage">
-        <ReferenceResolver />
+        <Factory />
       </div>
     </div>
   )

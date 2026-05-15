@@ -399,3 +399,114 @@ button {
     opacity: 0;
   }
 }
+
+/* ===== Factory scene (Phase 2) ===== */
+
+.factory {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.machinery {
+  position: absolute;
+  inset: 0;
+  bottom: calc(16 * var(--px));
+  pointer-events: none;
+}
+
+.pipe,
+.tower {
+  position: absolute;
+  bottom: 0;
+  background: #0a112a; /* slightly darker than dark-blue stage bg */
+}
+
+.pipe {
+  width: calc(6 * var(--px));
+}
+
+.pipe-a {
+  left: calc(36 * var(--px));
+  height: calc(82 * var(--px));
+}
+
+.pipe-b {
+  left: calc(286 * var(--px));
+  height: calc(96 * var(--px));
+}
+
+.tower-a {
+  left: calc(68 * var(--px));
+  width: calc(28 * var(--px));
+  height: calc(58 * var(--px));
+}
+
+.tower-b {
+  left: calc(172 * var(--px));
+  width: calc(44 * var(--px));
+  height: calc(74 * var(--px));
+}
+
+.tower-c {
+  left: calc(308 * var(--px));
+  width: calc(18 * var(--px));
+  height: calc(46 * var(--px));
+}
+
+.conveyor-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(16 * var(--px));
+  overflow: hidden;
+  background: #000;
+  border-top: var(--px) solid var(--pico-dark-gray);
+}
+
+.conveyor {
+  display: flex;
+  width: max-content;
+  animation: conveyor-roll 1.2s linear infinite;
+}
+
+.conveyor-tile {
+  width: calc(16 * var(--px));
+  height: calc(16 * var(--px));
+  flex-shrink: 0;
+  display: block;
+  image-rendering: pixelated;
+}
+
+@keyframes conveyor-roll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-16 * var(--px)));
+  }
+}
+
+.token-walking {
+  position: absolute;
+  bottom: calc(14 * var(--px));
+  left: 0;
+  animation: walk-across 8s linear infinite;
+}
+
+.token-sprite {
+  width: calc(16 * var(--px));
+  height: calc(24 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+@keyframes walk-across {
+  from {
+    transform: translateX(calc(-20 * var(--px)));
+  }
+  to {
+    transform: translateX(calc(380 * var(--px)));
+  }
+}

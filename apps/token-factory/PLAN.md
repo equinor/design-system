@@ -333,6 +333,52 @@ Verified in browser via Chrome DevTools: clicking the toggle produces `deltaTogg
 
 **Verified.** `pnpm --filter @equinor/token-factory build` passes, TypeScript clean.
 
+### Phase 2 — Token character + conveyor system ✓
+
+**Scope decision.** The user asked to keep Station 2 light-weight and start Phase 2 without the proposed A/B/C additions (light/dark scheme switcher, palette-driven cascade, anti-pattern card). Those return in a later iteration once the full factory exists.
+
+**Scene swap.** `App.tsx` now mounts `<Factory />` instead of `<ReferenceResolver />`. Phase 1.5's Resolver code stays in `src/components/` untouched — future phases will re-mount it as one of several stations on the conveyor.
+
+**New components.**
+```
+src/components/
+├── Factory.tsx     — top-level scene: machinery silhouettes + conveyor + token
+├── Conveyor.tsx    — scrolling row of floor tiles
+├── Token.tsx       — 16×24 walking character, 4-frame cycle @ 8fps
+└── (Phase 1.5 components preserved)
+```
+
+**Token state model.** `src/data/inFlightToken.ts` introduces an `InFlightToken` type with `initial`, `current`, and `history` fields. Phase 2 doesn't mutate it visually yet — it stands up the shape that future stations (Phase 3+) will mutate as the token passes through. One sample token (`samplePalette`) seeded for future use.
+
+**Visual layout (logical pixels, on the 360×220 stage):**
+- Sky: y=0 to ~150, dark-blue stage default
+- Machinery silhouettes: positioned absolutely at the conveyor's top edge — 2 pipes + 3 towers in `#0a112a` (slightly darker than stage bg, reads as distant structure)
+- Conveyor belt: bottom 16 px, scrolling tile row over a black underlay with a 1-px gray top border
+- Walking token: positioned at `bottom: 14 logical px` so feet rest on the belt surface
+
+**Animations (both CSS, no JS RAF).**
+- `conveyor-roll` — translates the conveyor by exactly one tile (-16 logical px) per 1.2 s, loops seamlessly.
+- `walk-across` — translates the token wrapper from `-20` to `380` logical px over 8 s, loops infinite. Crosses the full stage with offstage buffers either side.
+- Walk cycle (inside Token.tsx) — React `setInterval` at 125 ms cycles `frame` through 0/1/2/3. Frames 1 and 3 lift opposite feet by 1 logical px and bob the head/body 1 px. Frames 0 and 2 are neutral. Classic 4-frame stride.
+
+**Sprite design (Token.tsx).** Inline SVG, viewBox 0 0 16 24, `shapeRendering="crispEdges"`. PICO-8 palette: yellow body (`#ffec27`, evokes the coin/token motif from the metaphor), orange band, light-gray head + arms, dark-blue eyes/mouth/feet, dark-gray legs. Token is deliberately blank (no insignia, no prefix lapel) — Phase 3+ will dress it up at each station.
+
+**Verified in Chrome.**
+- Conveyor transform sampling shows mid-animation values (e.g. `translateX(-15.55px)`) — animation running.
+- Token wrapper transform mid-walk (e.g. `translateX(1498px)`) — animation running.
+- Walk frame state observed switching (left foot Y=20, right Y=21 on frame 3) — cycle alive.
+- No overflow: `stage.scrollWidth === clientWidth === 1440` at 1800×1125 viewport.
+- No console errors.
+
+**Verified.** `pnpm --filter @equinor/token-factory build` passes, TypeScript clean.
+
+**Deferred to Phase 2.5 (or later) — explicit non-goals for Phase 2:**
+- Parallax depth (multi-layer machinery scrolling at different speeds).
+- Walk-cycle sync to translation (currently the token "marches in place" while sliding).
+- Sound (chiptune background + step SFX).
+- Token state model integration into a UI panel.
+- Aseprite-authored sprites (placeholder SVG character holds the slot).
+
 ---
 
 ## Open decisions before Phase 0
