@@ -91,6 +91,8 @@ ComponentName/
   ComponentName.stories.tsx
 ```
 
+For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/how-to/BUILDING_EDS_2_COMPONENTS.md`](./documentation/how-to/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
+
 ## Code Style
 
 ### Formatting (Prettier)
