@@ -1238,3 +1238,173 @@ button {
   border-color: var(--pico-yellow);
   box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
 }
+
+/* ===== Lane chyron (Phase 5.5 :: persistent overlay) ===== */
+
+.lane-chyron {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(8 * var(--px));
+  background: var(--pico-black);
+  border-bottom: var(--px) solid var(--pico-dark-purple);
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--px));
+  padding: 0 calc(4 * var(--px));
+  font-size: calc(4 * var(--px));
+  z-index: 20;
+  pointer-events: none;
+}
+
+.chyron-swatch {
+  width: calc(4 * var(--px));
+  height: calc(4 * var(--px));
+  display: inline-block;
+  border: var(--px) solid var(--pico-white);
+  flex-shrink: 0;
+}
+
+.chyron-label {
+  color: var(--pico-white);
+  text-transform: uppercase;
+}
+
+.chyron-spacer {
+  flex: 1;
+}
+
+.chyron-hint {
+  color: var(--pico-light-gray);
+  text-transform: uppercase;
+}
+
+/* When the chyron is visible, push stations down so the header isn't
+   eaten. We do this by reserving space at the top of .station — only
+   when it's a sibling of the chyron (most scenes). */
+.lane-chyron + .station {
+  padding-top: calc(8 * var(--px));
+  box-sizing: border-box;
+}
+
+/* ===== Factory Map (Phase 5.5 :: opener scene) ===== */
+
+.map-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: calc(6 * var(--px));
+  align-items: center;
+  padding: calc(6 * var(--px)) calc(8 * var(--px));
+}
+
+.map-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3 * var(--px));
+}
+
+.map-lane {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto auto auto auto;
+  align-items: center;
+  gap: calc(3 * var(--px));
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  font-size: calc(4 * var(--px));
+  opacity: 0.5;
+}
+
+.map-lane.is-active {
+  opacity: 1;
+  border-color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+}
+
+.map-lane .lane-swatch {
+  width: calc(4 * var(--px));
+  height: calc(4 * var(--px));
+  border: var(--px) solid var(--pico-white);
+  flex-shrink: 0;
+}
+
+.map-lane .lane-name {
+  color: var(--pico-white);
+  text-transform: uppercase;
+  min-width: calc(40 * var(--px));
+}
+
+.map-lane.is-active .lane-name {
+  color: var(--pico-yellow);
+}
+
+.map-lane .lane-source,
+.map-lane .lane-build,
+.map-lane .lane-output {
+  color: var(--pico-light-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-lane .lane-arrow {
+  color: var(--pico-dark-gray);
+}
+
+.map-lane.is-active .lane-arrow {
+  color: var(--pico-yellow);
+}
+
+.map-lane .lane-today {
+  color: var(--pico-yellow);
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  text-shadow: var(--px) var(--px) 0 var(--pico-dark-purple);
+}
+
+.map-bundle {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--px));
+}
+
+.map-bundle-arrow {
+  color: var(--pico-yellow);
+  font-size: calc(8 * var(--px));
+  font-family: monospace;
+}
+
+.map-bundle-box {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+  padding: calc(4 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
+  width: calc(70 * var(--px));
+  text-align: center;
+}
+
+.map-bundle-label {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-yellow);
+  text-transform: uppercase;
+}
+
+.map-bundle-output {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+}
+
+/* ===== Bundler Press lane tint (Phase 5.5) ===== */
+
+.press-file-ours {
+  border-color: var(--pico-yellow);
+  color: var(--pico-yellow);
+}
+
+.press-file-sibling {
+  opacity: 0.55;
+}

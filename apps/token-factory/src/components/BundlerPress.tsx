@@ -12,13 +12,14 @@ import { StationLog } from './StationLog'
 //   bundled → press slammed, one variables.css emerges
 //   final   → elevation envelope dropped into :root, minified output
 
-const INPUT_FILES = [
-  'color/light/concept.css',
-  'color/light/semantic.css',
-  'color/dark/concept.css',
-  'color/dark/semantic.css',
-  'spacing/comfortable.css',
-  'typography/font-family-ui.css',
+// Our lane's outputs are highlighted; sibling-lane outputs are dimmed.
+// All converge here in lightningcss bundling.
+const INPUT_FILES: { path: string; lane: 'ours' | 'sibling' }[] = [
+  { path: 'color-scheme.css (light-dark)', lane: 'ours' },
+  { path: 'static/variables.css', lane: 'sibling' },
+  { path: 'dynamic/variables.css', lane: 'sibling' },
+  { path: 'spacing.css', lane: 'sibling' },
+  { path: 'typography.css', lane: 'sibling' },
 ]
 
 type Phase = 'idle' | 'slammed' | 'final'
@@ -28,7 +29,7 @@ export function BundlerPress() {
   const [shake, setShake] = useState(false)
   const [log, setLog] = useState<string[]>([
     '> station 5 :: bundler press online',
-    `> ${INPUT_FILES.length} css fragments staged`,
+    `> ${INPUT_FILES.length} css fragments staged (1 ours + ${INPUT_FILES.length - 1} sibling lanes)`,
   ])
 
   const slam = () => {
@@ -85,11 +86,11 @@ export function BundlerPress() {
           <ul className="press-files">
             {INPUT_FILES.map((f, i) => (
               <li
-                key={f}
-                className={`press-file ${phase !== 'idle' ? 'is-bundled' : ''}`}
+                key={f.path}
+                className={`press-file press-file-${f.lane} ${phase !== 'idle' ? 'is-bundled' : ''}`}
                 style={{ transitionDelay: `${i * 40}ms` }}
               >
-                {f}
+                {f.path}
               </li>
             ))}
           </ul>

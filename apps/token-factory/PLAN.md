@@ -193,6 +193,35 @@ Semantic and Concept are **parallel consumer-facing namespaces**, both referenci
 
 ---
 
+## Phase 5.5 — Lane awareness + Factory Map
+
+Reviewed the FigJam architecture board ([148:632](https://www.figma.com/board/YcGsTsMuuth5dfsVSjlCuG/AI-Figjam-Testing?node-id=148-632)) against the built game. The diagram revealed the real eds-tokens pipeline is a **fan of five parallel build lanes** converging at the bundle, not a single linear conveyor. The game implicitly walked one lane (Color Scheme / Concept, via `bg-floating`) but never told the team which one — and a few stations leaked sibling-lane content without flagging it.
+
+**Lane commitment:** the workshop walks the **🟪 Color Scheme (Concept) lane** end-to-end. This is the lane where `bg-floating` lives, where `build-color-scheme-variables` emits `color-scheme.css` with `light-dark()` values, and where the Dark-Scope Rewriter is the most distinctive transformation. Sibling lanes (Semantic Static, Semantic Dynamic, Spacing, Typography) are shown for context but not walked.
+
+**Five changes in this pass:**
+
+1. **`src/data/lanes.ts`** — new data file declaring the 5 lanes (id, label, source, build script, output file, lane colour, active flag). Mirrors the FigJam legend so the team can cross-reference. `ACTIVE_LANE` constant exposes the workshop lane.
+
+2. **`LaneBadge.tsx`** — new persistent chyron at the top of every scene. Shows lane colour swatch, lane name (`lane :: color scheme`), and a `[ m ] map` summon hint. Rendered in `Stage.tsx` as an overlay; hidden only on the Map scene itself.
+
+3. **`FactoryMap.tsx`** — new opener scene. Bird's-eye view of all 5 lanes, each with source → build → output, all converging into a single `bundle → variables.min.css` box. Our lane is brightly coloured and gets a `★ TODAY` tag; the rest are dimmed. Added as the first scene in the `Scene` union; the game now boots into the map.
+
+4. **`Stage.tsx`** — `Scene` union and `ORDER` array extended to include `'map'`. New keyboard shortcut: `M` summons the map from any scene. `NEXT_LABEL` updated for the new ordering. Final scene (`showroom`) now loops back to `map` rather than `idle`, so every full traversal closes with a re-orientation view.
+
+5. **Lane-accuracy fixes in three existing stations:**
+   - **Format Splitter:** narration tightened. The 4-target fanout is honest for Semantic tokens but not for Concept tokens (the Color Scheme lane only emits `color-scheme.css`). Station log now says "color scheme lane only emits to color-scheme.css; the 4-target fanout below is from the SEMANTIC lane (shown for reference)."
+   - **Bundler Press:** input file list rewritten. Was a mix of `color/light/concept.css`, `color/dark/semantic.css`, etc. — file paths from one specific point in the build. Now reflects the real architecture: `color-scheme.css` (ours, highlighted), plus four sibling-lane outputs (`static/variables.css`, `dynamic/variables.css`, `spacing.css`, `typography.css`) dimmed.
+   - **Reference Resolver:** librarian's saying updated to flag the lane context. "We're on the concept lane today. Semantic rows shown for reference (sibling lane)."
+
+**What this does NOT change:**
+- Stations 1, 3, 5 (Sync Dock, Transform Bench post-Phase 4.2 corrections, Bundler Press machine + animations), Station 6 (Dark-Scope Rewriter), and the Showroom.
+- The example token `bg-floating` — verified again as the right lead for the Color Scheme lane.
+
+**Exit:** Pressing space from the boot screen takes the team through map → idle → six stations → showroom → back to map. The lane indicator persists across every scene. The Format Splitter no longer claims `bg-floating` has JS/TS/JSON exports. The team always knows which lane they're walking and where it sits in the bigger picture.
+
+---
+
 ## Phase Log
 
 Filled in as each phase completes.
@@ -546,6 +575,50 @@ While verifying the Showroom in Chrome, dark mode wasn't visually toggling. Trac
 - More dramatic dark-mode demo (would need either root-scoped toggling or a token list that all redeclare at dark scope).
 - Real `@equinor/eds-core-react` Button component (currently a CSS-only re-creation using the published variables — close enough for the workshop, and avoids pulling in another workspace dep just for the payoff scene).
 - Animated transitions between scenes (still hard cuts).
+
+### Phase 5.5 — Lane awareness + Factory Map ✓
+
+**Triggered by FigJam review.** Pulled the architecture board the user made in another session ([148:632](https://www.figma.com/board/YcGsTsMuuth5dfsVSjlCuG)). The diagram shows the real pipeline is a **fan of five parallel build lanes** converging at the bundle — not a single conveyor. The game implicitly walked one lane (Color Scheme via `bg-floating`) but never signposted it, and a couple of stations leaked sibling-lane content unannounced.
+
+**Committed lane:** 🟪 **Color Scheme (Concept) lane**. Source `🌗 Color scheme + Concept` → `build-color-scheme-variables` → `color-scheme.css` (light-dark values). This is the lane that makes the Dark-Scope Rewriter distinctive and matches the running `bg-floating` example.
+
+**New files.**
+- `src/data/lanes.ts` — the 5-lane data model with FigJam-aligned colours and the `ACTIVE_LANE` constant.
+- `src/components/LaneBadge.tsx` — persistent 8-px chyron at the top of every scene. Shows lane swatch + name on the left, `[ m ] map` summon hint on the right. Hidden only on the Map scene itself (which IS the lane context).
+- `src/components/FactoryMap.tsx` — opener scene. 5 lanes stacked vertically as `[swatch] [name] [source] → [build] → [output]` rows. Our lane is yellow-bordered, brighter, and gets a `★ TODAY` tag. Sibling lanes dim to 55% opacity. All 5 converge into a `→ BUNDLE → variables.min.css` box on the right.
+
+**Stage routing.**
+- `Scene` union extended: `'map'` added at position 0.
+- `ORDER` is now 9 scenes: `map → idle → sync → reference → transform → format → bundle → darkScope → showroom → map`.
+- New keyboard shortcut: **`M`** (or `m`) summons the map from any scene.
+- `NEXT_LABEL` for `showroom` updated to `back to map` so the loop closes with re-orientation.
+- Initial scene is `'map'`; the game now boots into the bird's-eye view.
+
+**Lane-accuracy fixes in existing stations.**
+- **Format Splitter:** station log rewritten. Was implying `bg-floating` fans out to CSS/JS/TS/JSON, which is the SEMANTIC lane's behavior. Now reads `NOTE :: color scheme lane only emits to color-scheme.css` and `below shows the 4-target fanout from the SEMANTIC lane (reference)`. Visual unchanged — pedagogy now honest.
+- **Bundler Press:** `INPUT_FILES` rewritten from arbitrary `color/light/concept.css` strings to architecture-accurate lane outputs: `color-scheme.css (light-dark)` (ours, yellow border + yellow text) plus four sibling-lane outputs (`static/variables.css`, `dynamic/variables.css`, `spacing.css`, `typography.css`) dimmed to 55% opacity. Log now narrates `5 css fragments staged (1 ours + 4 sibling lanes)`.
+- **Reference Resolver:** librarian's saying updated from "semantic + concept both point at palette" to `we're on the concept lane today. semantic rows shown for reference (sibling lane).` Visual badges already distinguish category — saying now names the lane context.
+
+**CSS additions (`app.css`):**
+- `.lane-chyron` + 4 chyron parts — fixed 8-px top strip, dark-purple underline, pointer-events: none so it never blocks clicks.
+- `.lane-chyron + .station { padding-top: 8px }` — sibling selector reserves vertical space when chyron is present.
+- `.map-body`, `.map-lanes`, `.map-lane`, `.lane-swatch`, `.lane-name`, `.lane-source`, `.lane-build`, `.lane-output`, `.lane-today`, `.map-bundle*` — the full Factory Map layout.
+- `.press-file-ours` / `.press-file-sibling` — yellow tint for our lane's import file, dim for the rest.
+
+**Verified in Chrome via DevTools:**
+- Boot scene is Factory Map; bright lane row with `★ TODAY` tag visible at the top.
+- Pressing space leaves the map, enters idle. Lane chyron appears at top of every subsequent scene with `LANE :: COLOR SCHEME` on the left and `[ M ] MAP` summon hint on the right.
+- Format Splitter log now reads "below shows the 4-target fanout from the SEMANTIC lane (reference)" — explicit.
+- Bundler Press shows `color-scheme.css (light-dark)` yellow-bordered, the other 4 files dimmed.
+- M key summons the map from any scene (verified).
+- No console errors.
+
+**Verified.** `pnpm --filter @equinor/token-factory build` passes, TypeScript strict clean. Bundle now ~220 kB JS / 22.5 kB CSS gzip.
+
+**Explicit non-goals for Phase 5.5 (deferred):**
+- Visually dimming non-CSS output cards in Format Splitter (Option B from the proposal — would explicitly mark each card as "sibling lane reference"). Narration now does this verbally; visual treatment can come later if dress rehearsal feedback wants it.
+- Drift Hotspot station (the generate-* scripts that silently overwrite synced JSON). Still worth doing as a separate phase.
+- Token Tracer wand — the cross-scene-arrow interaction is still deferred.
 
 ---
 

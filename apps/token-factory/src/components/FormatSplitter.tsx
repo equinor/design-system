@@ -42,9 +42,10 @@ const OUTPUTS: Output[] = [
 
 const LOG_LINES = [
   '> station 4 :: format splitter online',
+  '> NOTE :: color scheme lane only emits to color-scheme.css',
+  '> below shows the 4-target fanout from the SEMANTIC lane (reference)',
   `> source :: ${SOURCE_PATH} = ${SOURCE_VALUE}`,
   '> each target applies its own name transform + shape',
-  '> emit :: css | js | ts | json',
 ]
 
 function Manifold() {

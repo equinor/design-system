@@ -34,7 +34,7 @@ export function ReferenceResolver() {
 
   const saying =
     mode === 'references'
-      ? 'semantic + concept both point at palette. two naming systems, one foundation.'
+      ? "we're on the concept lane today. semantic rows shown for reference (sibling lane)."
       : 'flat mode: alias chains resolved. every consumer knows its final hex.'
 
   return (

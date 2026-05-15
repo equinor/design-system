@@ -7,8 +7,11 @@ import { FormatSplitter } from './FormatSplitter'
 import { BundlerPress } from './BundlerPress'
 import { DarkScopeRewriter } from './DarkScopeRewriter'
 import { Showroom } from './Showroom'
+import { FactoryMap } from './FactoryMap'
+import { LaneBadge } from './LaneBadge'
 
 export type Scene =
+  | 'map'
   | 'idle'
   | 'sync'
   | 'reference'
@@ -19,6 +22,7 @@ export type Scene =
   | 'showroom'
 
 const ORDER: Scene[] = [
+  'map',
   'idle',
   'sync',
   'reference',
@@ -30,6 +34,7 @@ const ORDER: Scene[] = [
 ]
 
 const NEXT_LABEL: Record<Scene, string> = {
+  map: 'enter the factory',
   idle: 'enter sync dock',
   sync: 'reference resolver',
   reference: 'transform bench',
@@ -37,23 +42,25 @@ const NEXT_LABEL: Record<Scene, string> = {
   format: 'bundler press',
   bundle: 'dark-scope rewriter',
   darkScope: 'showroom',
-  showroom: 'back to floor',
+  showroom: 'back to map',
 }
 
 export function Stage() {
-  const [scene, setScene] = useState<Scene>('idle')
+  const [scene, setScene] = useState<Scene>('map')
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === ' ' || e.key === 'ArrowRight') {
         e.preventDefault()
         setScene((s) => ORDER[(ORDER.indexOf(s) + 1) % ORDER.length])
-      }
-      if (e.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft') {
         e.preventDefault()
         setScene(
           (s) => ORDER[(ORDER.indexOf(s) - 1 + ORDER.length) % ORDER.length],
         )
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault()
+        setScene('map')
       }
     }
     window.addEventListener('keydown', handler)
@@ -62,6 +69,8 @@ export function Stage() {
 
   return (
     <>
+      {scene !== 'map' && <LaneBadge />}
+      {scene === 'map' && <FactoryMap />}
       {scene === 'idle' && <Factory />}
       {scene === 'sync' && <SyncDock />}
       {scene === 'reference' && <ReferenceResolver />}
