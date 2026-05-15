@@ -1288,114 +1288,179 @@ button {
   box-sizing: border-box;
 }
 
-/* ===== Factory Map (Phase 5.5 :: opener scene) ===== */
+/* ===== Factory Map (Phase 5.5 :: opener scene) =====
+   Three labelled stages stacked vertically:
+     - stage headers (top row)
+     - five lane rows flowing left → right through sources → builds → output
+     - a bundle box at the bottom that all lanes converge into
+*/
 
 .map-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: calc(6 * var(--px));
-  align-items: center;
-  padding: calc(6 * var(--px)) calc(8 * var(--px));
-}
-
-.map-lanes {
   display: flex;
   flex-direction: column;
-  gap: calc(3 * var(--px));
+  gap: calc(4 * var(--px));
+  padding: calc(4 * var(--px)) calc(8 * var(--px));
 }
 
-.map-lane {
+/* Header row showing the three stage labels above the lane rows */
+.map-stages {
   display: grid;
-  grid-template-columns: auto auto 1fr auto auto auto auto auto;
-  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: calc(8 * var(--px));
+  padding: 0 calc(20 * var(--px));
+}
+
+.map-stage {
+  background: var(--pico-dark-blue);
+  border: var(--px) solid var(--pico-lavender);
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  text-align: center;
+}
+
+.map-stage-title {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-yellow);
+  text-transform: uppercase;
+  letter-spacing: calc(1 * var(--px));
+}
+
+.map-stage-sub {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+}
+
+/* The lane grid: 5 lane rows + 1 bundle-rail + 1 final-bundle row */
+.map-grid {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+}
+
+.map-row {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto;
   gap: calc(3 * var(--px));
+  align-items: center;
+  opacity: 0.55;
+}
+
+.map-row.is-active {
+  opacity: 1;
+}
+
+.map-cell {
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--px));
   padding: calc(2 * var(--px)) calc(3 * var(--px));
   background: var(--pico-black);
   border: var(--px) solid var(--pico-dark-gray);
   font-size: calc(4 * var(--px));
-  opacity: 0.5;
+  min-width: 0;
 }
 
-.map-lane.is-active {
-  opacity: 1;
+.map-row.is-active .map-cell {
   border-color: var(--pico-yellow);
   box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
 }
 
-.map-lane .lane-swatch {
+.map-cell .lane-swatch {
   width: calc(4 * var(--px));
   height: calc(4 * var(--px));
   border: var(--px) solid var(--pico-white);
   flex-shrink: 0;
 }
 
-.map-lane .lane-name {
-  color: var(--pico-white);
-  text-transform: uppercase;
-  min-width: calc(40 * var(--px));
-}
-
-.map-lane.is-active .lane-name {
-  color: var(--pico-yellow);
-}
-
-.map-lane .lane-source,
-.map-lane .lane-build,
-.map-lane .lane-output {
+.cell-text {
   color: var(--pico-light-gray);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.map-lane .lane-arrow {
-  color: var(--pico-dark-gray);
+.map-row.is-active .cell-text {
+  color: var(--pico-white);
 }
 
-.map-lane.is-active .lane-arrow {
+.cell-arrow {
+  color: var(--pico-dark-gray);
+  font-size: calc(6 * var(--px));
+  font-family: monospace;
+}
+
+.map-row.is-active .cell-arrow {
   color: var(--pico-yellow);
 }
 
-.map-lane .lane-today {
+.lane-today {
   color: var(--pico-yellow);
   font-size: calc(4 * var(--px));
   text-transform: uppercase;
   text-shadow: var(--px) var(--px) 0 var(--pico-dark-purple);
+  padding-left: calc(3 * var(--px));
 }
 
-.map-bundle {
+.lane-sibling {
+  color: var(--pico-dark-gray);
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  padding-left: calc(3 * var(--px));
+}
+
+/* The convergence rail — a horizontal yellow line below the lanes,
+   visually merging all five outputs before they enter the bundle. */
+.map-bundle-rail {
+  height: var(--px);
+  margin: calc(2 * var(--px)) calc(20 * var(--px));
+  background: var(--pico-yellow);
+  box-shadow: 0 var(--px) 0 0 var(--pico-dark-purple);
+}
+
+/* Final row: arrow → bundle box → arrow → consumers */
+.map-bundle-final {
   display: flex;
   align-items: center;
-  gap: calc(3 * var(--px));
+  justify-content: center;
+  gap: calc(4 * var(--px));
+  margin-top: calc(2 * var(--px));
 }
 
-.map-bundle-arrow {
+.map-bundle-final-arrow {
   color: var(--pico-yellow);
   font-size: calc(8 * var(--px));
   font-family: monospace;
 }
 
-.map-bundle-box {
+.map-bundle-final-box {
   display: flex;
   flex-direction: column;
-  gap: calc(2 * var(--px));
-  padding: calc(4 * var(--px));
+  gap: calc(1 * var(--px));
+  padding: calc(3 * var(--px)) calc(6 * var(--px));
   background: var(--pico-black);
   border: var(--px) solid var(--pico-yellow);
   box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
-  width: calc(70 * var(--px));
   text-align: center;
 }
 
-.map-bundle-label {
+.bundle-final-title {
   font-size: calc(5 * var(--px));
   color: var(--pico-yellow);
   text-transform: uppercase;
 }
 
-.map-bundle-output {
+.bundle-final-sub {
   font-size: calc(4 * var(--px));
   color: var(--pico-light-gray);
+}
+
+.map-bundle-final-consumers {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-white);
+  text-transform: uppercase;
+  padding: calc(3 * var(--px)) calc(5 * var(--px));
+  background: var(--pico-dark-purple);
+  border: var(--px) solid var(--pico-white);
 }
 
 /* ===== Bundler Press lane tint (Phase 5.5) ===== */

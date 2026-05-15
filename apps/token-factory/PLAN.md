@@ -620,6 +620,31 @@ While verifying the Showroom in Chrome, dark mode wasn't visually toggling. Trac
 - Drift Hotspot station (the generate-* scripts that silently overwrite synced JSON). Still worth doing as a separate phase.
 - Token Tracer wand — the cross-scene-arrow interaction is still deferred.
 
+### Phase 5.5b — Map redesign as three explicit stages ✓
+
+**Triggered by review.** The user pushed back: the first map read as "two levels" — five lane rows on the left, a single BUNDLE box on the right. The FigJam's three-stage pipeline (Sources → Builds → Bundle) wasn't visible. The lanes were running through unlabelled space.
+
+**Fix.** `FactoryMap.tsx` rebuilt around three explicit stage headers, with the lane rows as horizontal flows through them.
+
+**Layout now:**
+- **Top:** three labelled stage cards as column headers:
+  - `STAGE 1 :: SOURCES` with sub-label `tokens/{fileKey}/*.json`
+  - `STAGE 2 :: BUILDS` with sub-label `style dictionary`
+  - `STAGE 3 :: BUNDLE` with sub-label `lightningcss`
+- **Middle:** five lane rows, each with three pixel cells linked by `→` arrows. Cell 1 = source file (with lane swatch); cell 2 = build script; cell 3 = output CSS file. Lane row is bright + yellow-bordered if active, dimmed to 55% if sibling. Each row gets a `★ TODAY` or `SIBLING` tag on the right.
+- **Convergence rail:** a horizontal yellow line below the lanes, indented to span only the lane columns, that visually merges the five lane outputs.
+- **Final row:** `→ VARIABLES.MIN.CSS (+ ts/js/json) → CONSUMERS`. The bundle box is yellow-bordered + orange-shadowed; the consumers box is a purple pill.
+
+**What the team now sees at a glance:**
+- Three distinct stages, top to bottom in the conceptual model.
+- Five parallel lanes flow through all three stages (not just two).
+- Their lane (color scheme) is bright; the other four are dimmed but present, so they know what they're not walking today.
+- All lanes converge into one bundle output before reaching consumers.
+
+**Files touched:** `FactoryMap.tsx` (full rewrite of the JSX layout), `app.css` (the `.map-*` rules replaced with stage-header + grid-row + convergence-rail styles).
+
+**Verified in Chrome:** the three stage headers read clearly, the active lane is bright while siblings are dim, the convergence rail and final bundle box render as expected. No console errors.
+
 ---
 
 ## Open decisions before Phase 0
