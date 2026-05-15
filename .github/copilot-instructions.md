@@ -23,3 +23,7 @@ Copilot automatically applies file-pattern instructions from `.github/instructio
 - [Markdown](./instructions/markdown.instructions.md) — Documentation format
 
 For color systems: see `packages/eds-tokens/instructions/colors.md`.
+
+## Hooks (Copilot CLI)
+
+`.github/hooks/block-secrets.{json,js}` registers a `preToolUse` hook that denies tool calls reading `.env*`, `id_rsa*`, `*.pem`, `*.key`, `credentials.json`, `secrets.json`, or anything under `secrets/`. The hook runs automatically for everyone using the Copilot CLI in this repo. IDE Copilot does not execute the hook — see `AGENTS.md` § Secrets & Credentials for the cross-harness rule.

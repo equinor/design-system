@@ -13,6 +13,28 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 - `@equinor/eds-tokens` — Design tokens, CSS variables, and theming
 - `@equinor/eds-icons` — Icon library
 
+## Secrets & Credentials
+
+Never read, search, copy, or print the contents of secret files. The rule applies to **every** harness (Claude Code, Copilot, OpenCode) regardless of whether the harness enforces it.
+
+Treat these patterns as off-limits:
+
+- `.env`, `.env.*` (real `.env` lives at `packages/eds-tokens-sync/bin/.env` — see `packages/eds-tokens-sync/CLAUDE.md`)
+- `id_rsa*`, `*.pem`, `*.key`
+- `credentials.json`, `secrets.json`
+- `secrets/**`, `config/credentials.json`
+
+If you need to verify a secret file's shape, report length + first/last few characters only — never the body. If a tool blocks access (e.g. Claude Code's `read_hook.js`), do not try to work around it; the block is the intended behaviour.
+
+**Enforcement matrix:**
+
+| Harness        | Enforcement                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js`|
+| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`    |
+| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually    |
+| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                   |
+
 ## Build/Lint/Test Commands
 
 Package manager: `pnpm@10.15.0`
@@ -387,9 +409,11 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | File                              | Purpose                                                    |
 | --------------------------------- | ---------------------------------------------------------- |
 | `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
+| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring  |
 | `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
+| `.github/hooks/*.{json,js}`       | Copilot CLI: `preToolUse` hook blocking secret-file access |
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
 | `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
