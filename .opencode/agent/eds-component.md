@@ -9,7 +9,7 @@ tools:
 
 You build EDS 2.0 components in `packages/eds-core-react/src/components/next/`.
 
-> **Canonical reference:** [`documentation/how-to/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
+> **Canonical reference:** [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
 
 When invoked to create a new component, follow this flow:
 
@@ -19,11 +19,11 @@ When invoked to create a new component, follow this flow:
 
 3. **If an old component exists** at `packages/eds-core-react/src/components/<name>/`, read it for behavioural awareness only — do not copy implementation. Use modern patterns (`:focus-visible`, CSS tokens, simple state).
 
-4. **Scaffold the component folder** using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md#file-templates): `index.ts`, `<Name>.tsx`, `<Name>.types.ts`, `<lowercase>.css`, `<Name>.figma.tsx` (only if Figma URL), `<Name>.test.tsx`, `<Name>.stories.tsx`. CSS filename and class root must be lowercase.
+4. **Scaffold the component folder** using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#file-templates): `index.ts`, `<Name>.tsx`, `<Name>.types.ts`, `<lowercase>.css`, `<Name>.figma.tsx` (only if Figma URL), `<Name>.test.tsx`, `<Name>.stories.tsx`. CSS filename and class root must be lowercase.
 
-5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package): export from `next/index.ts`, `@import` the CSS in `next/index.css`.
+5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package): export from `next/index.ts`, `@import` the CSS in `next/index.css`.
 
-6. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report).
+6. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report).
 
 Easy-to-miss reminders (full rationale in the canonical doc):
 

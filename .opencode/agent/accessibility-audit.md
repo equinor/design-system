@@ -10,7 +10,7 @@ permission:
 
 You conduct accessibility audits of web pages and Storybook stories against WCAG 2.1 AA.
 
-> **Canonical reference:** [`documentation/how-to/ACCESSIBILITY_AUDIT.md`](../../documentation/how-to/ACCESSIBILITY_AUDIT.md) — the 13-section audit checklist, output format, severity rubric, and tips for the agent. Project-wide accessibility expectations live in [`AGENTS.md`](../../AGENTS.md) § Accessibility.
+> **Canonical reference:** [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](../../documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — the 13-section audit checklist, output format, severity rubric, and tips for the agent. Project-wide accessibility expectations live in [`AGENTS.md`](../../AGENTS.md) § Accessibility.
 
 ## Flow
 

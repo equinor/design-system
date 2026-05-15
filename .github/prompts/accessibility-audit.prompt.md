@@ -5,7 +5,7 @@ description: Generate an accessibility audit report against WCAG 2.1 AA
 
 # Accessibility Audit
 
-> **Canonical reference:** [`documentation/how-to/ACCESSIBILITY_AUDIT.md`](../../documentation/how-to/ACCESSIBILITY_AUDIT.md) — the 13-section audit checklist, output format, severity rubric, and tips for the agent. Project-wide accessibility expectations live in [`AGENTS.md`](../../AGENTS.md) § Accessibility.
+> **Canonical reference:** [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](../../documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — the 13-section audit checklist, output format, severity rubric, and tips for the agent. Project-wide accessibility expectations live in [`AGENTS.md`](../../AGENTS.md) § Accessibility.
 
 Conduct an accessibility audit of the following URL against WCAG 2.1 AA, following the checklist and output format in the canonical doc above.
 

@@ -91,7 +91,7 @@ ComponentName/
   ComponentName.stories.tsx
 ```
 
-For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/how-to/BUILDING_EDS_2_COMPONENTS.md`](./documentation/how-to/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
+For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
 
 ## Code Style
 
@@ -390,11 +390,11 @@ In Claude Code, `.claude/rules/figma-component.md` loads this section automatica
 - Manage focus correctly: trap focus in modals/dialogs, restore focus on close, use `:focus-visible` for keyboard-only outlines
 - Test with `jest-axe` in every component
 
-For running an accessibility audit on a deployed page or Storybook story, see [`documentation/how-to/ACCESSIBILITY_AUDIT.md`](./documentation/how-to/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
+For running an accessibility audit on a deployed page or Storybook story, see [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](./documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
 
 ## Component Documentation
 
-Component docs live in `apps/design-system-docs/docs/components/{category}/{component}.md`. For writing or reviewing them — tone of voice, formatting (British English, no em-dashes, admonitions), section order, output template, Storybook iframes workflow, sidebar registration, verification checklist — see [`documentation/how-to/COMPONENT_DOC_STYLE.md`](./documentation/how-to/COMPONENT_DOC_STYLE.md). Harness entry points (`/create-component-doc` in Claude Code, the `structure_components_prompt` / `verify_components_prompt` in Copilot, the `component-doc` agent in OpenCode) all reference that doc.
+Component docs live in `apps/design-system-docs/docs/components/{category}/{component}.md`. For writing or reviewing them — tone of voice, formatting (British English, no em-dashes, admonitions), section order, output template, Storybook iframes workflow, sidebar registration, verification checklist — see [`documentation/agent-instructions/COMPONENT_DOC_STYLE.md`](./documentation/agent-instructions/COMPONENT_DOC_STYLE.md). Harness entry points (`/create-component-doc` in Claude Code, the `structure_components_prompt` / `verify_components_prompt` in Copilot, the `component-doc` agent in OpenCode) all reference that doc.
 
 ## Conventional Commits
 

@@ -2,7 +2,7 @@
 
 Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/src/components/next/`.
 
-> **Canonical reference:** [`documentation/how-to/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
+> **Canonical reference:** [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
 
 This command focuses on the per-component scaffolding flow. The patterns and code templates referenced below all live in the canonical doc above — read them there rather than inferring from memory.
 
@@ -17,7 +17,7 @@ This command focuses on the per-component scaffolding flow. The patterns and cod
 
 3. **If an old component exists** at `packages/eds-core-react/src/components/$ARGUMENTS/`, read it for behavioural awareness (keyboard nav, focus management) only — do not copy implementation. Use modern patterns: `:focus-visible`, CSS tokens, simple state.
 
-4. **Create the component folder** with all required files using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md#file-templates):
+4. **Create the component folder** with all required files using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#file-templates):
 
    ```
    $ARGUMENTS/
@@ -32,11 +32,11 @@ This command focuses on the per-component scaffolding flow. The patterns and cod
 
    Substitute `$ARGUMENTS` for the component name and use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
 
-5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package):
+5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package):
    - Export from `next/index.ts`
    - `@import` the CSS in `next/index.css`
 
-6. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/how-to/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report) — a short `## Implementation notes` section summarising what came from Figma, what was inherited, what was assumed, what was skipped, and any TODOs.
+6. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report) — a short `## Implementation notes` section summarising what came from Figma, what was inherited, what was assumed, what was skipped, and any TODOs.
 
 ## Easy-to-miss reminders
 

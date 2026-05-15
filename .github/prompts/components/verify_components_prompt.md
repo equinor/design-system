@@ -7,7 +7,7 @@ description: Verify an existing component documentation file against the EDS sty
 
 Evaluate the component documentation file provided in context against the EDS style guide.
 
-> **Canonical reference:** [`documentation/how-to/COMPONENT_DOC_STYLE.md`](../../../documentation/how-to/COMPONENT_DOC_STYLE.md) — see § Verification Checklist for the six criteria and the output format. Project-wide conventions live in [`AGENTS.md`](../../../AGENTS.md).
+> **Canonical reference:** [`documentation/agent-instructions/COMPONENT_DOC_STYLE.md`](../../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md) — see § Verification Checklist for the six criteria and the output format. Project-wide conventions live in [`AGENTS.md`](../../../AGENTS.md).
 
 Walk through the six criteria (clarity, completeness, tone of voice, consistency, redundancy/noise, practical usability) and return:
 

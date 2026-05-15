@@ -53,7 +53,7 @@ Foundation `data-*` attributes drive the dynamic token system. Components should
 
 Foundation values are reused across components. Component-specific custom types (like `ButtonVariant`) should only be introduced when the design has a visual variant axis not covered by foundation attributes.
 
-See also [`TOKEN_SYSTEM_GUIDE.md`](./TOKEN_SYSTEM_GUIDE.md) for the underlying token system.
+See also [`TOKEN_SYSTEM_GUIDE.md`](../how-to/TOKEN_SYSTEM_GUIDE.md) for the underlying token system.
 
 ## Critical Patterns
 
