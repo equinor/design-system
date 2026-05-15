@@ -16,14 +16,21 @@
   --pico-blue: #29adff;
   --pico-lavender: #83769c;
 
-  /* Pixel scale: 1 logical px = SCALE physical pixels */
-  --scale: 4;
-  --px: calc(1px * var(--scale));
+  /* Logical stage size — taller than the original 180 to fit Station 2's
+     four card rows + log strip while staying tight 8-bit. */
+  --stage-cols: 360;
+  --stage-rows: 220;
 
-  /* Logical stage size — slightly taller than 180 to fit Station 2's
-     three card rows + log strip while staying tight 8-bit. */
-  --stage-w: calc(360 * var(--px));
-  --stage-h: calc(220 * var(--px));
+  /* Pixel scale is the largest integer-friendly value that lets the stage
+     fit the viewport with a small breathing margin. Capped at 4x physical. */
+  --px: min(
+    4px,
+    calc((100vw - 16px) / var(--stage-cols)),
+    calc((100vh - 16px) / var(--stage-rows))
+  );
+
+  --stage-w: calc(var(--stage-cols) * var(--px));
+  --stage-h: calc(var(--stage-rows) * var(--px));
 }
 
 * {
@@ -72,7 +79,11 @@ button {
 .station {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  /* `minmax(0, 1fr)` prevents the implicit column from expanding to
+     min-content (a chain row's intrinsic width) and overflowing the stage. */
+  grid-template-columns: minmax(0, 1fr);
   height: 100%;
+  width: 100%;
 }
 
 .station-head {
@@ -105,6 +116,11 @@ button {
   border: var(--px) solid var(--pico-white);
   box-shadow: var(--px) var(--px) 0 0 var(--pico-black);
   text-transform: uppercase;
+  /* Lock width so ON/OFF doesn't nudge surrounding layout */
+  min-width: calc(120 * var(--px));
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .toggle.is-on {
@@ -115,10 +131,14 @@ button {
 
 .station-body {
   display: grid;
-  grid-template-columns: 1fr auto;
+  /* minmax(0, 1fr) lets the chains column shrink below its intrinsic
+     min-content rather than pushing the librarian column off-stage. */
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   padding: calc(6 * var(--px)) calc(8 * var(--px));
   gap: calc(6 * var(--px));
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* ===== Chains layout ===== */
@@ -132,11 +152,36 @@ button {
 .chain {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: calc(3 * var(--px));
 }
 
 .chain.is-active {
   filter: brightness(1.05);
+}
+
+/* ===== Category badge ===== */
+
+.category-badge {
+  display: inline-block;
+  font-size: calc(4 * var(--px));
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  text-transform: uppercase;
+  letter-spacing: calc(0.5 * var(--px));
+  border: var(--px) solid var(--pico-white);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-black);
+  width: calc(40 * var(--px));
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.badge-semantic {
+  background: var(--pico-dark-blue);
+  color: var(--pico-blue);
+}
+
+.badge-concept {
+  background: var(--pico-dark-purple);
+  color: var(--pico-yellow);
 }
 
 /* ===== Card ===== */
@@ -265,7 +310,10 @@ button {
   flex-direction: column;
   align-items: center;
   gap: calc(3 * var(--px));
-  width: calc(56 * var(--px));
+  /* Fixed column width — bubble wraps within it, so the chains column
+     and toggle don't reflow when the saying changes between modes. */
+  width: calc(72 * var(--px));
+  flex-shrink: 0;
 }
 
 .librarian-sprite {
@@ -284,6 +332,10 @@ button {
   line-height: 1.4;
   position: relative;
   text-align: left;
+  /* Wrap inside the librarian column rather than push it wider */
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
 }
 
 .librarian-bubble::after {

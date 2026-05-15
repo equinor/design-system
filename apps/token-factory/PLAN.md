@@ -20,7 +20,7 @@ Six linear stations + a Showroom, played by one driver while the team narrates. 
 | # | Station | Real pipeline step | What the game shows |
 |---|---|---|---|
 | 1 | Sync Dock | `eds-tokens-sync` writes Figma JSON to `tokens/{fileKey}/` | Crate arrives, opens, JSON dump appears |
-| 2 | Reference Resolver | Style Dictionary resolves `{palette.green.700}` chains | Three card stacks, wires connect Concept → Semantic → Palette |
+| 2 | Reference Resolver | Style Dictionary resolves `{palette.green.700}` chains | Palette as the foundation; Semantic and Concept as parallel consumer namespaces; each row traces one consumer token back to its Palette source via a wire |
 | 3 | Transform Bench | Naming + unit transforms (`palette.green.700` → `--eds-palette-green-700`) | Two physical levers stamp the token |
 | 4 | Format Splitter | Same source → CSS / JS / TS / JSON outputs | 4-way conveyor junction |
 | 5 | Bundler Press | `lightningcss` bundles `@import`s; elevation injected | Many CSS files squish into one `variables.css` |
@@ -105,6 +105,39 @@ Each phase is independently demonstrable. Stop, demo internally, adjust, continu
 - Station log records events.
 
 **Exit:** Driver can narrate Palette → Semantic → Concept in front of the team, and the visualisation keeps up. Internal demo to Frida before continuing.
+
+> ⚠️ This phase shipped with a modeling error — Concept and Semantic ended up as two cards for the same conceptual token, only differing in the CSS-variable prefix. See **Phase 1.5** below for the corrected model.
+
+### Phase 1.5 — Reference Resolver correction
+**Goal:** Fix the misleading three-stacked-layers model. The team's real taxonomy is:
+
+```
+                    Palette
+                  (raw hex values)
+                  ↑              ↑
+            Semantic           Concept
+         (per-intent)     (cross-cutting)
+       Bg.Neutral.Canvas     bg-floating
+       Border.Accent.Medium  border-focus
+       Text.Warning.Strong   text-link
+```
+
+Semantic and Concept are **parallel consumer-facing namespaces**, both referencing Palette directly. They do not chain to each other. Components consume one or the other, never Palette.
+
+**What changes in code:**
+- `src/data/chains.ts` becomes a list of consumer tokens, each tagged with a category (`semantic` | `concept`) and a single reference back to a Palette source.
+- Add at least two Semantic examples sourced from `Semantic.Mode 1.json` (e.g. `Bg.Neutral.Canvas → {Neutral.1}`, `Border.Accent.Medium → {Accent.7}`) with the actual hex values pulled from `Color Light.Mode 1.json`.
+- Keep the three existing Concept examples (`bg-floating`, `border-focus`, `text-link`).
+- Resolver layout shifts from three columns to **two columns + a category badge**: each row is `[CATEGORY] consumer-token — wire — palette-token (hex)`.
+- A small **legend panel** sits next to the librarian showing the Palette-with-two-children diagram, so the parallel-namespaces relationship is on-screen without being narrated only.
+- The librarian's one-liner copy updates to explain Semantic vs Concept as "two ways to name the same Palette underneath."
+- The `outputReferences` toggle behaviour is unchanged — still flattens references to hex across every card.
+
+**What stays:**
+- Stage size, station chrome, wire animation, station log, mascot.
+- Hover-to-trace interaction; only the data and the column count change.
+
+**Exit:** A driver standing in front of the team can say "look — Semantic is one naming system, Concept is another, and both point back to the same Palette" while hovering rows of two different categories, and the visualization makes the parallel relationship obvious without further explanation.
 
 ### Phase 2 — Token character + conveyor system
 **Goal:** Tokens move. The factory feels alive.
@@ -261,6 +294,44 @@ src/components/
 - TypeScript strict mode clean.
 
 **Smoke test on the driver:** `pnpm --filter @equinor/token-factory dev` → <http://localhost:5180>. Hover each chain row, toggle outputReferences, watch the station log narrate.
+
+**⚠️ Known modeling error in this build.** The Concept and Semantic cards in each row represent the same conceptual token expressed twice in the pipeline (Concept file is mostly a thin pass-through that adds the `--eds-color-` prefix to a token already defined in the Color-scheme file). The team's real taxonomy has Semantic and Concept as **parallel** consumer-facing namespaces, both referencing Palette directly — not a single three-layer chain. Phase 1.5 corrects this.
+
+### Phase 1.5 — Reference Resolver correction ✓
+
+**Data — `chains.ts` rewritten.**
+- New shape: each chain is `{ category, consumer, palette, trace }`. The `consumer` is one Semantic or Concept token; the `palette` is the raw hex it ultimately resolves to; `trace` is the full hop list (for station-log narration).
+- Four chains, two per category (semantic, concept). Trimmed from six because six rows × 34 logical px overflow the 220-logical-px stage body. Pedagogy reads cleaner at four anyway.
+- Real values sourced from `Semantic.Mode 1.json`, `🌗 Color scheme.Light.json`, `Color Light.Mode 1.json`:
+  - `[semantic]` Bg.Neutral.Canvas → Neutral.1 → Light.Gray.1 (`#f5f5f5`)
+  - `[semantic]` Text.Warning.Strong → Warning.13 → Light.Orange.13 (`#27190e`)
+  - `[concept]` bg-floating → Light.Gray.2 (`#ffffff`)
+  - `[concept]` border-focus → Light.Blue.7 (`#6fb6e9`)
+- Chain depth differs by category (Semantic: 2 hops, Concept: 1 hop). The card layout collapses to two cards (consumer + palette) for visual consistency; the **station log narrates the full hop list** so the depth difference is visible: `> resolve --eds-color-bg-neutral-canvas :: Bg.Neutral.Canvas → Neutral.1 → Light.Gray.1 → #f5f5f5`.
+
+**Layout — two columns + category badge.**
+- Removed the third (middle) card column from Phase 1.
+- Added `.category-badge` on the left of each row: 40 logical px wide, blue-on-dark-blue for Semantic, yellow-on-purple for Concept. Pixel border + drop shadow consistent with the card chrome.
+- Row gap bumped from 0 to 3 logical px so the badge breathes from the consumer card.
+
+**Librarian copy updated.** From the old "card-catalogue" framing to: "semantic + concept both point at palette. two naming systems, one foundation." (references mode) / "alias chains resolved. every consumer knows its final hex." (flat mode). The diagram-in-bubble idea from the proposal was held back — current text + visible badge already carry the message; if the team still doesn't get it during dress rehearsal, add the diagram then.
+
+**Unchanged.** Stage size (360×220), station header, toggle, wire animation, station log, mascot sprite + blink, hover-to-trace interaction. Only the data shape, column count, and badge are new.
+
+**Files touched.**
+- `src/data/chains.ts` — full rewrite (Chain shape + 4 entries).
+- `src/components/ReferenceResolver.tsx` — full rewrite (badge render, two cards per row, hop-list narration).
+- `src/app.css` — `.chain` gap adjusted; `.category-badge`, `.badge-semantic`, `.badge-concept` added.
+
+**Layout bugs caught and fixed via Chrome DevTools verification:**
+1. **Stage didn't scale responsively.** `--px` was hardcoded to 4px; on smaller viewports the 1440×880 stage clipped. Rewrote as `min(4px, calc((100vw - 16px) / 360), calc((100vh - 16px) / 220))` so the stage stays within the viewport at any size.
+2. **CSS Grid `1fr` was acting as `minmax(auto, 1fr)`** — i.e. it expanded to fit a chain row's intrinsic min-content (≈840 physical px). The body grid overflowed the stage by ~170px and pushed the librarian + toggle off-screen. Fixed by switching both `.station` and `.station-body` to `grid-template-columns: minmax(0, 1fr) [auto]` so the chains column actually respects the stage width.
+3. **Librarian column width drifted** when the saying changed between modes. Locked `.librarian { width: calc(72 * var(--px)); flex-shrink: 0 }` and `.librarian-bubble { width: 100%; box-sizing: border-box; word-break: break-word }` so the bubble wraps within a fixed column instead of pushing the chains.
+4. **Toggle width changed** by a few pixels between `ON` (2 chars) and `OFF` (3 chars), causing the row to nudge. Locked `.toggle { min-width: calc(120 * var(--px)); flex-shrink: 0 }`.
+
+Verified in browser via Chrome DevTools: clicking the toggle produces `deltaToggleX: 0`, `deltaLibX: 0` (no layout shift). Confirmed at 1800×1125 viewport with the full UI visible inside the stage.
+
+**Verified.** `pnpm --filter @equinor/token-factory build` passes, TypeScript clean.
 
 ---
 

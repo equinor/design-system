@@ -7,11 +7,11 @@ import { StationLog } from './StationLog'
 
 type ResolverMode = 'references' | 'flat'
 
-function buildLogLine(chain: Chain, mode: ResolverMode): string {
+function buildHoverLine(chain: Chain, mode: ResolverMode): string {
   if (mode === 'references') {
-    return `> resolve ${chain.concept.cssVar} → {${chain.semantic.name}} → {${chain.palette.name}} = ${chain.palette.value}`
+    return `> resolve ${chain.consumer.cssVar} :: ${chain.trace.join(' → ')}`
   }
-  return `> flatten ${chain.concept.cssVar} = ${chain.palette.value}`
+  return `> flatten ${chain.consumer.cssVar} = ${chain.palette.value}`
 }
 
 export function ReferenceResolver() {
@@ -19,7 +19,7 @@ export function ReferenceResolver() {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [log, setLog] = useState<string[]>([
     '> station 2 :: reference resolver online',
-    '> outputReferences = true',
+    '> semantic and concept :: parallel namespaces above palette',
   ])
 
   useEffect(() => {
@@ -28,14 +28,14 @@ export function ReferenceResolver() {
 
   const onHover = (chain: Chain) => {
     setActiveId(chain.id)
-    setLog((prev) => [...prev, buildLogLine(chain, mode)])
+    setLog((prev) => [...prev, buildHoverLine(chain, mode)])
   }
   const onLeave = () => setActiveId(null)
 
   const saying =
     mode === 'references'
-      ? 'each card points to the next, like a card-catalogue.'
-      : 'flat mode: every card knows the final value, no lookup needed.'
+      ? 'semantic + concept both point at palette. two naming systems, one foundation.'
+      : 'flat mode: alias chains resolved. every consumer knows its final hex.'
 
   return (
     <div className="station">
@@ -57,38 +57,25 @@ export function ReferenceResolver() {
         <div className="chains">
           {chains.map((chain) => {
             const active = activeId === chain.id
-            const conceptValue =
+            const consumerValue =
               mode === 'references'
-                ? `{${chain.semantic.name}}`
-                : chain.palette.value
-            const semanticValue =
-              mode === 'references'
-                ? `{${chain.palette.name}}`
+                ? `{${chain.consumer.refsTo}}`
                 : chain.palette.value
             const paletteValue = chain.palette.value
-
             return (
               <div
                 key={chain.id}
-                className={`chain ${active ? 'is-active' : ''}`}
+                className={`chain chain-${chain.category} ${active ? 'is-active' : ''}`}
                 onMouseEnter={() => onHover(chain)}
                 onMouseLeave={onLeave}
               >
+                <span className={`category-badge badge-${chain.category}`}>
+                  {chain.category}
+                </span>
                 <Card
-                  layer="concept"
-                  title={chain.concept.cssVar}
-                  value={conceptValue}
-                  swatchHex={chain.palette.value}
-                  active={active}
-                />
-                <Wire
-                  active={active}
-                  pulsing={mode === 'references' && active}
-                />
-                <Card
-                  layer="semantic"
-                  title={chain.semantic.name}
-                  value={semanticValue}
+                  layer={chain.category}
+                  title={chain.consumer.name}
+                  value={consumerValue}
                   swatchHex={chain.palette.value}
                   active={active}
                 />
