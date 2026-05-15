@@ -28,7 +28,10 @@ export function TransformBench() {
     '> levers idle. pull to apply.',
   ])
 
-  const colorInput = 'Light.Gray.2'
+  // Same example token as Stations 1, 2, and 4 (`bg-floating`) so the
+  // name carries through the pipeline. Name lever adds the
+  // `--eds-color-` prefix used by the CSS target.
+  const colorInput = 'bg-floating'
   const colorOutput = nameApplied ? applyNameTransform(colorInput) : colorInput
 
   const sizeInput = '16'

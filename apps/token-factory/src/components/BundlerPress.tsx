@@ -43,22 +43,26 @@ export function BundlerPress() {
     ])
   }
 
-  const dropElevation = () => {
+  const injectElevation = () => {
     if (phase !== 'slammed') return
     setPhase('final')
     setLog((l) => [
       ...l,
-      '> elevation envelope :: composed box-shadows',
-      '> injected into :root block of variables.css',
+      '> elevation tokens composed from primitives at build time',
+      '> NOT @imported — injected post-bundle to avoid a duplicate :root',
       '> minified :: variables.min.css :: 20 kb gzip',
     ])
   }
 
   const handleAction =
-    phase === 'idle' ? slam : phase === 'slammed' ? dropElevation : undefined
+    phase === 'idle' ? slam : phase === 'slammed' ? injectElevation : undefined
 
   const actionLabel =
-    phase === 'idle' ? 'SLAM' : phase === 'slammed' ? 'DROP ELEVATION' : 'DONE'
+    phase === 'idle'
+      ? 'SLAM'
+      : phase === 'slammed'
+        ? 'INJECT ELEVATION'
+        : 'DONE'
 
   return (
     <div className="station">

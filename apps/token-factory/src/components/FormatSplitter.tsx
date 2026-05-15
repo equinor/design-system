@@ -1,16 +1,15 @@
 import { StationLog } from './StationLog'
 
 // Station 4. Style Dictionary emits the same abstract source token in
-// four target syntaxes. Each target applies its OWN name transform on
-// top of the source path:
-//   css   → kebab + --eds-color- prefix
-//   js/ts → SCREAMING_SNAKE constant
-//   json  → preserves the source path verbatim
+// four target syntaxes, each applying its own name transform + shape.
+// Verified against build/{css,js,ts,json}/color/color-scheme/*:
+//   css   → kebab + --eds-color- prefix, flat declarations
+//   js    → SCREAMING_SNAKE flat constants
+//   ts    → nested camelCase object tree on a single `color` export
+//   json  → kebab keys in flat form (nested form preserves PascalCase)
 //
-// The CSS output keeps `var(...)` references; the JSON-flat output
-// flattens them to literals. We don't model that nuance here —
-// lightweight slice just shows that one source → four syntaxes,
-// each with the target's own naming convention.
+// The TS rework that landed for mobile (PR #4915) was specifically the
+// typography matrices — colors already shipped as a nested TS object.
 
 type Output = {
   format: 'css' | 'js' | 'ts' | 'json'
@@ -29,11 +28,11 @@ const OUTPUTS: Output[] = [
   },
   {
     format: 'js',
-    snippet: `export const BG_FLOATING\n  = '${SOURCE_VALUE}'`,
+    snippet: `export const\n  BG_FLOATING =\n  "${SOURCE_VALUE}"`,
   },
   {
     format: 'ts',
-    snippet: `export const BG_FLOATING:\n  string = '${SOURCE_VALUE}'`,
+    snippet: `color = {\n  bg: {\n    floating:\n      '${SOURCE_VALUE}'\n  }\n}`,
   },
   {
     format: 'json',
@@ -44,7 +43,7 @@ const OUTPUTS: Output[] = [
 const LOG_LINES = [
   '> station 4 :: format splitter online',
   `> source :: ${SOURCE_PATH} = ${SOURCE_VALUE}`,
-  '> each target applies its own name transform',
+  '> each target applies its own name transform + shape',
   '> emit :: css | js | ts | json',
 ]
 
@@ -100,7 +99,7 @@ export function FormatSplitter() {
           {OUTPUTS.map((out) => (
             <div
               key={out.format}
-              className={`output-card output-${out.format}`}
+              className={`output-card output-${out.format.replace(/\s+/g, '-')}`}
             >
               <div className="output-badge">{out.format}</div>
               <pre className="output-snippet">{out.snippet}</pre>

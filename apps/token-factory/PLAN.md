@@ -470,6 +470,44 @@ Station log updated to make the relationship explicit: `> each target applies it
 
 **Carry-over caveat.** Transform Bench still demonstrates a CSS-specific name transform (`Light.Gray.2 → --eds-color-light-gray-2`). That's defensible as *one example* of what a transform does, but the workshop should call out that other targets (JS, TS) apply different name transforms — Style Dictionary's transform chain is target-specific, not universal. Leaving Transform Bench as-is for now; revisit if the workshop feedback says the conflation is misleading.
 
+### Phase 4.2 — Three corrections from review ✓
+
+Three issues caught when the user pushed back, fixed together.
+
+**1. Token name discrepancy between Stations 3 and 4.**
+- Station 3 (Transform Bench) was using `Light.Gray.2` (palette path) as its color example.
+- Station 4 (Format Splitter) was using `bg-floating` (concept path).
+- Driver POV: the token name flipped mid-pipeline, reading as if Station 4 went backwards.
+- **Fix:** Station 3's color example now uses `bg-floating` → `--eds-color-bg-floating`. The same token name carries from Sync Dock (Station 1) all the way through Bundler Press (Station 5). The Phase 4.1 "carry-over caveat" above is superseded.
+
+**2. The TS output in Format Splitter was wrong.**
+- Phase 4.1 dropped the TS card after I claimed EDS doesn't ship TS for colors.
+- The user pointed at `packages/eds-tokens/build/ts/color/` — EDS does ship color TS, and the shape is a **nested camelCase object tree** on a single `color` export, not flat `export const NAME` constants.
+- The TS rework that landed for mobile (PR #4915) was the typography matrix work — color TS was already shipping in this shape.
+- **Fix:** TS card restored with the accurate shape:
+  ```ts
+  color = {
+    bg: {
+      floating: '#ffffff'
+    }
+  }
+  ```
+- Verified against `build/ts/color/color-scheme/light-semantic.ts`, `build/js/color/color-scheme/light-semantic.js`, `build/json/color/color-scheme/{flat,nested}/light-semantic.json`. CSS, JS, TS, JSON cards now all map to real EDS output.
+- Comment block in `FormatSplitter.tsx` updated with the verified shape list.
+
+**3. "DROP ELEVATION" was cryptic.**
+- The label sounded like "discard elevation" instead of "add elevation tokens to the bundle."
+- The real build step: elevation tokens are composed at build time from primitive shadow values (offset / blur / spread / color in Figma) and injected directly into the bundled `variables.css` `:root` block — they're NOT `@import`ed, because doing so would create a duplicate `:root` selector. (Per `packages/eds-tokens/CLAUDE.md`.)
+- **Fix:** Button label renamed `DROP ELEVATION` → `INJECT ELEVATION`. Station log rewritten to explain the *why* of this distinct phase:
+  ```
+  > elevation tokens composed from primitives at build time
+  > NOT @imported — injected post-bundle to avoid a duplicate :root
+  > minified :: variables.min.css :: 20 kb gzip
+  ```
+- `injectElevation` is now the handler name in `BundlerPress.tsx`.
+
+**Verified in Chrome via DevTools end-to-end:** Transform Bench shows `bg-floating → --eds-color-bg-floating`; Format Splitter source is `bg-floating` with the four target shapes all distinct; Bundler Press button text walks through `SLAM → INJECT ELEVATION → DONE` with the new narration in the log. No console errors.
+
 ---
 
 ## Open decisions before Phase 0
