@@ -422,6 +422,41 @@ src/components/
 - Driver clicking to drive levers + space-to-advance interaction tension (currently both work but they don't gate progression).
 - More transform examples (only one of each lever shown).
 
+### Phase 4 — Format Splitter + Bundler Press ✓
+
+**Scope.** Stations 4 and 5 land as two new scenes appended to the Stage state machine. Six scenes total now: `idle → sync → reference → transform → format → bundle → idle`. Driver still navigates via `Space` / `←` / `→`.
+
+**Station 4 — Format Splitter (`src/components/FormatSplitter.tsx`).**
+- Three-column layout: source card on the left, pixel-art `Manifold` on the middle (1-in / 4-out pipe with horizontal spine + 4 branches, 24×80 logical px), 2×2 grid of output cards on the right.
+- Source token is the just-transformed `--eds-color-bg-floating = #ffffff` (the value coming out of Transform Bench).
+- Four output cards, one per target: `CSS`, `JS`, `TS`, `JSON`. Each has a coloured format badge (purple / green / blue / orange) and a 2-line snippet showing the syntax variant of the same source value.
+- Station log (4 lines, static) narrates the source-to-targets fanout.
+- The real package's nuance — CSS keeps `var()` references while JSON-flat flattens — is *not* modeled in this lightweight cut. Worth a workshop talking point.
+
+**Station 5 — Bundler Press (`src/components/BundlerPress.tsx`).**
+- Three-column layout: imports list (left), pixel-art press machine (anvil shaft + head + base, ~60×~50 logical px), bundled output card (right).
+- Three discrete phases: `idle → slammed → final`. The toggle button in the station header advances them: `SLAM` → `DROP ELEVATION` → `DONE`.
+- On slam: imports animate out (`transform: translateX + scale(0.1) + opacity 0` with staggered `transition-delay`), the anvil drops (`translateY(20px)`), the whole body screen-shakes for 280ms (`steps(4)`), and the bundled `variables.css` output card appears showing a real-shape `:root` block.
+- On drop-elevation: a yellow `--eds-elevation-low: 0 1px 2px …` line slides into the `:root` (`elevation-drop` keyframe, 360ms, `steps(4)`), the bundle title updates to `variables.min.css`, and the log appends the minify line.
+- Station log seeds with 2 lines, appends 2 per slam, 3 per drop.
+
+**Stage routing updated.** `src/components/Stage.tsx` now includes `'format'` and `'bundle'` in the `Scene` union, `ORDER` array, and `NEXT_LABEL` map. Six conditional renders below the header.
+
+**Verified in Chrome via DevTools** (full walk through six scenes):
+- Format Splitter: source card, manifold, four format cards visible with correctly-coloured badges. Output snippets clip at the card edge (overflow hidden) — pedagogy still reads.
+- Bundler Press idle: 6 import files listed, press anvil up, no output yet.
+- Bundler Press slammed: files transition out, anvil drops, `variables.css` :root block appears.
+- Bundler Press final: yellow `--eds-elevation-low` line in :root, bundle title flips to `variables.min.css`, button label `DONE`, button disabled.
+- No console errors.
+
+**Verified.** `pnpm --filter @equinor/token-factory build` passes, TypeScript clean. Bundle JS now ~213 kB (61.7 kB gzip), CSS ~114 kB (21.5 kB gzip) — comfortable for a workshop tool.
+
+**Explicit non-goals for Phase 4 (deferred):**
+- Output snippet wrapping (some snippets clip the card width — fix by either widening cards or trimming snippets in a later pass).
+- CSS-keeps-references vs JSON-flat distinction (one of the more interesting build details, left as a workshop talking point).
+- Sound on slam / drop (chiptune SFX still TBD).
+- Token in-flight state threading (still unwired — each scene self-contained).
+
 ---
 
 ## Open decisions before Phase 0

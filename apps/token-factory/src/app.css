@@ -746,3 +746,261 @@ button {
 .lever.is-down .lever-label {
   color: var(--pico-yellow);
 }
+
+/* ===== Format Splitter (Phase 4 :: Station 4) ===== */
+
+.splitter-body {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: calc(6 * var(--px));
+}
+
+.splitter-source {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.splitter-source-value {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-yellow);
+  margin-top: calc(2 * var(--px));
+}
+
+.manifold-sprite {
+  width: calc(24 * var(--px));
+  height: calc(80 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+.splitter-outputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(4 * var(--px));
+  min-width: 0;
+}
+
+.output-card {
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-white);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-gray);
+  padding: calc(3 * var(--px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(1 * var(--px));
+  min-width: 0;
+}
+
+.output-badge {
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  letter-spacing: calc(1 * var(--px));
+  align-self: flex-start;
+  padding: calc(1 * var(--px)) calc(3 * var(--px));
+  background: var(--pico-dark-blue);
+  color: var(--pico-yellow);
+  border: var(--px) solid var(--pico-yellow);
+}
+
+.output-css .output-badge {
+  background: var(--pico-dark-purple);
+  color: var(--pico-white);
+  border-color: var(--pico-white);
+}
+
+.output-js .output-badge {
+  background: var(--pico-dark-green);
+  color: var(--pico-white);
+  border-color: var(--pico-white);
+}
+
+.output-ts .output-badge {
+  background: var(--pico-blue);
+  color: var(--pico-black);
+  border-color: var(--pico-black);
+}
+
+.output-json .output-badge {
+  background: var(--pico-orange);
+  color: var(--pico-black);
+  border-color: var(--pico-black);
+}
+
+.output-snippet {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  line-height: 1.4;
+  white-space: pre;
+  overflow: hidden;
+}
+
+/* ===== Bundler Press (Phase 4 :: Station 5) ===== */
+
+.press-body {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: calc(6 * var(--px));
+}
+
+.press-body.is-shaking {
+  animation: press-shake 280ms steps(4, end);
+}
+
+@keyframes press-shake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(calc(1 * var(--px)), calc(-1 * var(--px)));
+  }
+  40% {
+    transform: translate(calc(-1 * var(--px)), calc(1 * var(--px)));
+  }
+  60% {
+    transform: translate(calc(1 * var(--px)), 0);
+  }
+  80% {
+    transform: translate(calc(-1 * var(--px)), 0);
+  }
+}
+
+.press-input {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+  min-width: 0;
+}
+
+.press-input-title {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+}
+
+.press-files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+}
+
+.press-file {
+  font-size: calc(4 * var(--px));
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  color: var(--pico-light-gray);
+  transition:
+    transform 200ms steps(3, end),
+    opacity 200ms steps(3, end);
+}
+
+.press-file.is-bundled {
+  transform: translateX(calc(20 * var(--px))) scale(0.1);
+  opacity: 0;
+}
+
+.press-machine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(60 * var(--px));
+}
+
+.press-anvil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 200ms steps(3, end);
+}
+
+.press-anvil.is-down {
+  transform: translateY(calc(20 * var(--px)));
+}
+
+.press-anvil-shaft {
+  width: calc(4 * var(--px));
+  height: calc(30 * var(--px));
+  background: var(--pico-light-gray);
+}
+
+.press-anvil-head {
+  width: calc(40 * var(--px));
+  height: calc(14 * var(--px));
+  background: var(--pico-dark-gray);
+  border: var(--px) solid var(--pico-black);
+  box-shadow: 0 var(--px) 0 0 var(--pico-black);
+}
+
+.press-base {
+  width: calc(56 * var(--px));
+  height: calc(6 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+  margin-top: calc(2 * var(--px));
+}
+
+.press-output {
+  min-width: 0;
+}
+
+.bundle-card {
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
+  padding: calc(3 * var(--px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+}
+
+.bundle-card-title {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-yellow);
+  text-align: center;
+  padding-bottom: calc(2 * var(--px));
+  border-bottom: var(--px) solid var(--pico-dark-gray);
+}
+
+.bundle-root {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1 * var(--px));
+  font-family: 'Press Start 2P', monospace;
+  font-size: calc(4 * var(--px));
+  line-height: 1.4;
+}
+
+.bundle-root-label {
+  color: var(--pico-blue);
+}
+
+.bundle-root-line {
+  color: var(--pico-light-gray);
+  padding-left: calc(4 * var(--px));
+}
+
+.bundle-elevation {
+  color: var(--pico-yellow);
+  animation: elevation-drop 360ms steps(4, end);
+}
+
+@keyframes elevation-drop {
+  from {
+    transform: translateY(calc(-12 * var(--px)));
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
