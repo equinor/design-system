@@ -22,7 +22,7 @@ Copilot automatically applies file-pattern instructions from `.github/instructio
 - [Figma](./instructions/figma.instructions.md) — Design-to-code workflow
 - [Markdown](./instructions/markdown.instructions.md) — Documentation format
 
-For color systems: see `packages/eds-tokens/instructions/colors.md`.
+Token-system references (colours, typography, end-to-end token lifecycle) are listed in [`AGENTS.md`](../AGENTS.md) § CSS — they live in `packages/eds-tokens/instructions/` and `documentation/how-to/TOKEN_SYSTEM_GUIDE.md`.
 
 ## Hooks (Copilot CLI)
 

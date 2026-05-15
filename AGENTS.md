@@ -162,6 +162,14 @@ Place helper functions and constants at module scope, not inside the component b
 
 Vanilla CSS only — no CSS-in-JS (`styled-components`, `emotion`), no Tailwind utility classes. One `.css` file per component (single responsibility), with an `eds-`-prefixed root class. Internal elements use simple class names scoped by CSS nesting. Variants and state use data attributes.
 
+For the underlying token system — colour categories, static vs dynamic tokens, typography — see the package-local instruction files (frontmatter `applyTo: '**'` for Copilot users who configure their instruction-file location to include this path; Claude / OpenCode users read these on demand):
+
+- [`packages/eds-tokens/instructions/colors.md`](./packages/eds-tokens/instructions/colors.md) — colour system overview
+- [`packages/eds-tokens/instructions/colors-static.md`](./packages/eds-tokens/instructions/colors-static.md) — static semantic + concept tokens
+- [`packages/eds-tokens/instructions/colors-dynamic.md`](./packages/eds-tokens/instructions/colors-dynamic.md) — dynamic appearance tokens (the `data-color-appearance` pattern)
+- [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) — typography tokens, modes, baseline trimming
+- [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md) — end-to-end token lifecycle (Figma → JSON → CSS bundle)
+
 ```css
 @layer eds-components {
   .eds-icon {
