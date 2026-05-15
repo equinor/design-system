@@ -34,17 +34,14 @@ OpenCode agents receive instructions from multiple sources, applied in this orde
                   │
 ┌─────────────────▼───────────────────┐
 │     .opencode/agent/<name>.md       │  ← Agent-specific behavior
-└─────────────────┬───────────────────┘
-                  │
-┌─────────────────▼───────────────────┐
-│   .github/instructions/*.md         │  ← File-pattern instructions
 └─────────────────────────────────────┘
 ```
 
 1. **Global instructions** - Built into OpenCode (base capabilities)
 2. **AGENTS.md** - Repository-level guidance for all AI tools
 3. **Agent-specific instructions** - `.opencode/agent/*.md` files define agent behavior
-4. **GitHub instructions** - `.github/instructions/*.md` applied by file pattern (e.g., `*.tsx` files get React instructions)
+
+> **Note:** `.github/instructions/*.md` files are **not** loaded by OpenCode — they apply only to GitHub Copilot via `applyTo:` frontmatter globs. If an OpenCode agent needs file-pattern-specific guidance, put it in the agent body or reference the canonical doc in `documentation/how-to/`.
 
 ## Agent Types
 
