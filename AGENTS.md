@@ -382,6 +382,8 @@ In Claude Code, `.claude/rules/figma-component.md` loads this section automatica
 - Manage focus correctly: trap focus in modals/dialogs, restore focus on close, use `:focus-visible` for keyboard-only outlines
 - Test with `jest-axe` in every component
 
+For running an accessibility audit on a deployed page or Storybook story, see [`documentation/how-to/ACCESSIBILITY_AUDIT.md`](./documentation/how-to/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
+
 ## Conventional Commits
 
 ```
