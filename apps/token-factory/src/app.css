@@ -1,0 +1,125 @@
+@import '@fontsource/press-start-2p/index.css';
+@import '@equinor/eds-tokens/css/variables';
+
+:root {
+  /* PICO-8 palette (selected) */
+  --pico-black: #000000;
+  --pico-dark-blue: #1d2b53;
+  --pico-dark-purple: #7e2553;
+  --pico-dark-gray: #5f574f;
+  --pico-light-gray: #c2c3c7;
+  --pico-white: #fff1e8;
+  --pico-yellow: #ffec27;
+  --pico-orange: #ffa300;
+
+  /* Pixel scale: 1 logical px = SCALE physical pixels */
+  --scale: 4;
+  --px: calc(1px * var(--scale));
+
+  /* Logical stage size (320 x 180 base canvas) */
+  --stage-w: calc(320 * var(--px));
+  --stage-h: calc(180 * var(--px));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--pico-black);
+  font-family: 'Press Start 2P', monospace;
+  color: var(--pico-white);
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+.viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.stage {
+  width: var(--stage-w);
+  height: var(--stage-h);
+  background: var(--pico-dark-blue);
+  position: relative;
+  overflow: hidden;
+  padding: calc(8 * var(--px)) calc(12 * var(--px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 * var(--px));
+}
+
+.title {
+  margin: 0;
+  font-size: calc(16 * var(--px));
+  line-height: 1;
+  color: var(--pico-yellow);
+  letter-spacing: calc(1 * var(--px));
+}
+
+.subtitle {
+  margin: 0;
+  font-size: calc(6 * var(--px));
+  color: var(--pico-light-gray);
+}
+
+.floor {
+  display: flex;
+  margin-top: auto;
+}
+
+.floor-tile {
+  width: calc(16 * var(--px));
+  height: calc(16 * var(--px));
+  display: block;
+  image-rendering: pixelated;
+}
+
+.real-token-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: calc(2 * var(--px)) calc(6 * var(--px));
+  padding: calc(6 * var(--px)) calc(8 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-white);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  position: absolute;
+  right: calc(12 * var(--px));
+  top: calc(40 * var(--px));
+  max-width: calc(170 * var(--px));
+}
+
+.card-label {
+  grid-column: 1 / -1;
+  font-size: calc(5 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+}
+
+.card-name {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-white);
+  word-break: break-all;
+  /* deliberately small to fit in the pixel card */
+  line-height: 1.4;
+}
+
+.card-swatch {
+  width: calc(16 * var(--px));
+  height: calc(16 * var(--px));
+  /* the real EDS token at full fidelity — no pixelation, no approximation */
+  background: var(--eds-color-bg-accent-fill-emphasis-default);
+  image-rendering: auto;
+  border: var(--px) solid var(--pico-white);
+}

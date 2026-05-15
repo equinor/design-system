@@ -1,0 +1,26 @@
+{
+  "name": "@equinor/token-factory",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Workshop-companion game that teaches the eds-tokens build pipeline. See PLAN.md.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@equinor/eds-tokens": "workspace:^",
+    "@fontsource/press-start-2p": "^5.2.5",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.5",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.10"
+  }
+}
