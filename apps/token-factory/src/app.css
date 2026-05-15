@@ -1004,3 +1004,237 @@ button {
     opacity: 1;
   }
 }
+
+/* ===== Dark-Scope Rewriter (Phase 5 :: Station 6) ===== */
+
+.darkscope-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: calc(6 * var(--px));
+  padding: calc(6 * var(--px)) calc(8 * var(--px));
+  align-items: center;
+}
+
+.darkscope-flow {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: start;
+  gap: calc(3 * var(--px));
+}
+
+.darkscope-card {
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-white);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-gray);
+  padding: calc(3 * var(--px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+  min-width: 0;
+}
+
+.darkscope-in {
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+}
+
+.darkscope-out {
+  border-color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
+}
+
+.darkscope-card-label {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+}
+
+.darkscope-out .darkscope-card-label {
+  color: var(--pico-yellow);
+}
+
+.darkscope-snippet {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  line-height: 1.4;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.darkscope-arrow {
+  font-size: calc(8 * var(--px));
+  color: var(--pico-yellow);
+  font-family: monospace;
+  align-self: center;
+}
+
+.darkscope-why {
+  background: var(--pico-dark-blue);
+  border: var(--px) solid var(--pico-lavender);
+  padding: calc(3 * var(--px));
+  width: calc(90 * var(--px));
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.darkscope-why-title {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-yellow);
+  text-transform: uppercase;
+  margin-bottom: calc(2 * var(--px));
+}
+
+.darkscope-why-body {
+  margin: 0;
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  line-height: 1.6;
+}
+
+.darkscope-why-body code {
+  font-family: 'Press Start 2P', monospace;
+  color: var(--pico-orange);
+}
+
+/* ===== Showroom (Phase 5 :: payoff) ===== */
+
+.showroom-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: calc(10 * var(--px));
+  align-items: center;
+  padding: calc(8 * var(--px)) calc(12 * var(--px));
+}
+
+.showroom-stage {
+  /* `bg-floating` is a Concept token with direct light/dark scope rules
+     in the published CSS, so subtree dark-mode actually works here.
+     Semantic tokens like `bg-neutral-canvas` are declared as
+     `var(--eds-color-neutral-1)` at :root only, so their computed
+     value is locked in at :root and doesn't update when a descendant
+     overrides the underlying neutral-1 scale. Worth a workshop call-out. */
+  background: var(--eds-color-bg-floating, #ffffff);
+  border: calc(2 * var(--px)) solid var(--pico-yellow);
+  padding: calc(16 * var(--px)) calc(20 * var(--px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  /* The stage breaks the pixel-art aesthetic — real EDS lives here */
+  image-rendering: auto;
+}
+
+/* Real EDS-style button driven by real EDS variables. The styling
+   mirrors the published Button component closely enough that the
+   driver can recognise it — sizing/colours/hover all live tokens. */
+.showroom-button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  transition: background 100ms ease;
+  background: var(--eds-color-bg-accent-fill-emphasis-default);
+  color: var(--eds-color-text-strong-on-emphasis);
+  -webkit-font-smoothing: antialiased;
+}
+
+.showroom-button:hover {
+  background: var(--eds-color-bg-accent-fill-emphasis-hover);
+}
+
+.showroom-button:active {
+  background: var(--eds-color-bg-accent-fill-emphasis-active);
+}
+
+/* Swap which appearance the button reads from based on ancestor data attr */
+.showroom-stage[data-color-appearance='neutral'] .showroom-button {
+  background: var(--eds-color-bg-neutral-fill-emphasis-default);
+}
+.showroom-stage[data-color-appearance='neutral'] .showroom-button:hover {
+  background: var(--eds-color-bg-neutral-fill-emphasis-hover);
+}
+.showroom-stage[data-color-appearance='info'] .showroom-button {
+  background: var(--eds-color-bg-info-fill-emphasis-default);
+}
+.showroom-stage[data-color-appearance='info'] .showroom-button:hover {
+  background: var(--eds-color-bg-info-fill-emphasis-hover);
+}
+.showroom-stage[data-color-appearance='success'] .showroom-button {
+  background: var(--eds-color-bg-success-fill-emphasis-default);
+}
+.showroom-stage[data-color-appearance='success'] .showroom-button:hover {
+  background: var(--eds-color-bg-success-fill-emphasis-hover);
+}
+.showroom-stage[data-color-appearance='warning'] .showroom-button {
+  background: var(--eds-color-bg-warning-fill-emphasis-default);
+}
+.showroom-stage[data-color-appearance='warning'] .showroom-button:hover {
+  background: var(--eds-color-bg-warning-fill-emphasis-hover);
+}
+.showroom-stage[data-color-appearance='danger'] .showroom-button {
+  background: var(--eds-color-bg-danger-fill-emphasis-default);
+}
+.showroom-stage[data-color-appearance='danger'] .showroom-button:hover {
+  background: var(--eds-color-bg-danger-fill-emphasis-hover);
+}
+
+.showroom-stage[data-density='spacious'] .showroom-button {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.showroom-controls {
+  display: flex;
+  flex-direction: column;
+  gap: calc(5 * var(--px));
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: calc(4 * var(--px));
+}
+
+.control-label {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+  width: calc(50 * var(--px));
+}
+
+.control-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(2 * var(--px));
+}
+
+.segment {
+  font-family: inherit;
+  font-size: calc(4 * var(--px));
+  padding: calc(2 * var(--px)) calc(4 * var(--px));
+  background: var(--pico-black);
+  color: var(--pico-light-gray);
+  border: var(--px) solid var(--pico-dark-gray);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.segment:hover {
+  border-color: var(--pico-white);
+  color: var(--pico-white);
+}
+
+.segment.is-active {
+  background: var(--pico-yellow);
+  color: var(--pico-black);
+  border-color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+}

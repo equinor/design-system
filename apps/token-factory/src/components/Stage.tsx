@@ -5,6 +5,8 @@ import { ReferenceResolver } from './ReferenceResolver'
 import { TransformBench } from './TransformBench'
 import { FormatSplitter } from './FormatSplitter'
 import { BundlerPress } from './BundlerPress'
+import { DarkScopeRewriter } from './DarkScopeRewriter'
+import { Showroom } from './Showroom'
 
 export type Scene =
   | 'idle'
@@ -13,6 +15,8 @@ export type Scene =
   | 'transform'
   | 'format'
   | 'bundle'
+  | 'darkScope'
+  | 'showroom'
 
 const ORDER: Scene[] = [
   'idle',
@@ -21,6 +25,8 @@ const ORDER: Scene[] = [
   'transform',
   'format',
   'bundle',
+  'darkScope',
+  'showroom',
 ]
 
 const NEXT_LABEL: Record<Scene, string> = {
@@ -29,7 +35,9 @@ const NEXT_LABEL: Record<Scene, string> = {
   reference: 'transform bench',
   transform: 'format splitter',
   format: 'bundler press',
-  bundle: 'back to floor',
+  bundle: 'dark-scope rewriter',
+  darkScope: 'showroom',
+  showroom: 'back to floor',
 }
 
 export function Stage() {
@@ -60,6 +68,8 @@ export function Stage() {
       {scene === 'transform' && <TransformBench />}
       {scene === 'format' && <FormatSplitter />}
       {scene === 'bundle' && <BundlerPress />}
+      {scene === 'darkScope' && <DarkScopeRewriter />}
+      {scene === 'showroom' && <Showroom />}
       <div className="nav-hint">
         <span className="nav-key">[ space ]</span>
         <span className="nav-label">{NEXT_LABEL[scene]}</span>

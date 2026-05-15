@@ -508,6 +508,45 @@ Three issues caught when the user pushed back, fixed together.
 
 **Verified in Chrome via DevTools end-to-end:** Transform Bench shows `bg-floating → --eds-color-bg-floating`; Format Splitter source is `bg-floating` with the four target shapes all distinct; Bundler Press button text walks through `SLAM → INJECT ELEVATION → DONE` with the new narration in the log. No console errors.
 
+### Phase 5 — Dark-Scope Rewriter + Showroom ✓
+
+**Stage state machine extended to eight scenes.** New scenes: `darkScope` and `showroom`. Full chain: `idle → sync → reference → transform → format → bundle → darkScope → showroom → idle`.
+
+**Station 6 — Dark-Scope Rewriter (`DarkScopeRewriter.tsx`).**
+- Three-column horizontal layout: IN card (purple shadow) showing source CSS with `light-dark(#fff, #202223)`, arrow, OUT card (yellow border + orange shadow) showing the rewritten output (`:root`, `[data-color-scheme="light"]`, `[data-color-scheme="dark"]`, and `@media (prefers-color-scheme: dark)` rules), then a "why this exists" side panel.
+- Side panel explains the real reason: downstream bundlers (Vite 8 + Rolldown, esbuild legacy targets) polyfill `light-dark()` into a `var()` pattern that resolves at `:root` and breaks subtree dark mode. Emitting explicit rules is immune.
+- Snippets clip slightly at card right edges due to Press Start 2P width — readable enough for workshop.
+
+**Showroom (the payoff scene, `Showroom.tsx`).**
+- The pixel-art aesthetic deliberately breaks here: a real EDS-style button rendered with real EDS variables and real EDS font stack on a clean light/dark "pedestal" surface. This is the "this is your design system" reveal.
+- Three pixel-art segmented controls: `scheme` (light/dark), `appearance` (neutral/accent/info/success/warning/danger), `density` (comfortable/spacious). Each toggle sets a `data-*` attribute on the stage ancestor; the button reacts via the published CSS cascade.
+- Button appearance variants verified working — danger turns red, success turns green, warning yellow, accent teal, etc.
+- Density toggle bumps padding and font size to demonstrate spacious mode.
+
+**Real finding worth a workshop talking point — and the reason for a Showroom CSS tweak.**
+While verifying the Showroom in Chrome, dark mode wasn't visually toggling. Tracing in DevTools:
+- `--eds-color-bg-neutral-canvas` is declared *only* at `:root, [data-color-scheme=light]` as `var(--eds-color-neutral-1)`.
+- `--eds-color-neutral-1` *does* have direct light/dark scope rules (`#f5f5f5` / `#0b0b0b`).
+- But CSS custom properties inherit their **computed** value, so `--eds-color-bg-neutral-canvas` resolves the `var()` at `:root` (where neutral-1 is light) and inherits the resolved hex downstream. Setting `data-color-scheme="dark"` on a subtree updates neutral-1 there, but the already-computed bg-neutral-canvas doesn't re-resolve.
+- **Net effect:** subtree dark-mode toggling does *not* propagate to Semantic tokens that chain through scheme aliases via `var()`. It only works for Concept tokens that have direct light/dark scope declarations (like `--eds-color-bg-floating`).
+- **Workshop call-out:** this is a real EDS published-CSS quirk. The dark-scope rewriter station shows the *theoretical* model; the Showroom shows where it works (Concept tokens) and implicitly where it doesn't (Semantic chain). Worth raising in the debrief.
+
+**Showroom adjustment to keep the demo landing:**
+- Stage background now uses `var(--eds-color-bg-floating)` instead of `var(--eds-color-bg-neutral-canvas)` so subtree dark mode visibly takes effect. CSS comment in `app.css` explains why.
+
+**Verified in Chrome via DevTools end-to-end through all eight scenes:**
+- Dark-Scope: layout reads, IN/OUT cards show the rewrite, why panel reads.
+- Showroom: scheme toggle flips pedestal between white and dark gray. Appearance toggle visibly changes the button colour (red, green, yellow, etc.). Density toggle visible (button padding grows in spacious). Station log narrates the data-* state on every toggle.
+- No console errors.
+
+**Verified.** `pnpm --filter @equinor/token-factory build` passes; TypeScript strict clean. Bundle ~217 kB JS / 22 kB CSS gzip.
+
+**Explicit non-goals for Phase 5 (deferred):**
+- **Token Tracer wand** — clicking a Showroom pixel and watching an arrow fly back across all stations to the originating Sync Dock crate. This is the most ambitious interaction in the PLAN. Deferring to a Phase 5.5 so the core flow ships first.
+- More dramatic dark-mode demo (would need either root-scoped toggling or a token list that all redeclare at dark scope).
+- Real `@equinor/eds-core-react` Button component (currently a CSS-only re-creation using the published variables — close enough for the workshop, and avoids pulling in another workspace dep just for the payoff scene).
+- Animated transitions between scenes (still hard cuts).
+
 ---
 
 ## Open decisions before Phase 0
