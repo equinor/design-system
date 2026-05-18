@@ -900,8 +900,8 @@ button {
   position: absolute;
   bottom: 0;
   left: calc(8 * var(--px));
-  width: calc(20 * var(--px));
-  height: calc(24 * var(--px));
+  width: calc(40 * var(--px));
+  height: calc(44 * var(--px));
   background: #000;
   border-left: var(--px) solid var(--pico-dark-gray);
   border-right: var(--px) solid var(--pico-dark-gray);
@@ -1852,8 +1852,13 @@ button {
 }
 
 .peel-info-middle {
-  border-color: #1cc266;
-  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-green);
+  border-color: #ffa300;
+  box-shadow: var(--px) var(--px) 0 0 #742f00;
+}
+
+.peel-info-summary {
+  border-color: var(--pico-light-gray);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-gray);
 }
 
 .peel-info-inner {
@@ -1879,7 +1884,15 @@ button {
   color: #ff77a8;
 }
 .peel-info-middle .peel-info-label {
-  color: #1cc266;
+  color: #ffa300;
+}
+
+.peel-info-summary .peel-info-label {
+  color: var(--pico-light-gray);
+}
+
+.peel-info-summary .peel-info-purpose {
+  white-space: pre-wrap;
 }
 .peel-info-inner .peel-info-label {
   color: #7cbac1;
@@ -2331,7 +2344,8 @@ button {
 }
 
 @keyframes pkg-bin-pulse {
-  0%, 100% {
+  0%,
+  100% {
     border-color: var(--pico-dark-gray);
   }
   50% {

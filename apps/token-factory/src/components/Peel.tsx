@@ -2,19 +2,25 @@ import { useEffect, useState } from 'react'
 import { NestedStones, type StoneLayer } from './NestedStones'
 import { SceneHeader } from './SceneHeader'
 
-// Scene 5 — The Peel. Rewritten per user direction:
-//   - The geode is TWO-layered (Figma source name + actual value).
-//   - The CSS variable `--eds-color-bg-floating` is NOT a layer.
-//     It's a sticker the BUILD package stamps onto the geode so it can
-//     be shipped as CSS.
+// Scene 5 — The Peel. The alias-chain teach.
+//
+// The geode is THREE-layered (Concept → Scheme → Palette). Each layer
+// lives in its own JSON file and references the next via {alias}
+// syntax. The build resolves the chain to produce the final value.
+//
+// The CSS variable name `--eds-color-bg-floating` is NOT a layer of
+// the chain — it is a sticker the build package attaches to the whole
+// geode at build time so it can be shipped as CSS.
 //
 // Beat mapping:
-//   0 — intro: "the geode is two-layered."
-//   1 — OUTER layer highlighted (Figma source name).
-//   2 — INNER core highlighted (the actual value).
-//   3 — build appears: a stamp press lowers above the geode.
-//   4 — SLAM. The stamp drops a CSS sticker onto the geode.
-//   5 — shippable. Sticker attached, geode ready.
+//   0 — intro: "the geode is three-layered"
+//   1 — OUTER (Concept) highlighted
+//   2 — MIDDLE (Scheme) highlighted — the swap point
+//   3 — INNER (Palette) highlighted — the hex value
+//   4 — summary (no specific layer; reflective beat)
+//   5 — build appears: stamp press lowers above the geode
+//   6 — SLAM. Build stamps a CSS sticker onto the geode
+//   7 — held. Name attached.
 
 type LayerInfo = {
   layer: StoneLayer
@@ -30,38 +36,48 @@ const LAYER_BY_BEAT: Record<number, LayerInfo | null> = {
   0: null,
   1: {
     layer: 'outer',
-    label: 'OUTER · FIGMA SOURCE',
+    label: 'OUTER · CONCEPT',
     source: 'Bg.Floating',
     file: 'Concept.Mode 1.json',
-    output: '{bg-floating} → alias chain',
+    output: '{bg-floating}',
     outputLabel: 'references:',
-    purpose: 'this is the concept-layer name as figma authored it',
+    purpose: 'the stable name product code asks for',
   },
   2: {
+    layer: 'middle',
+    label: 'MIDDLE · SCHEME (SWAP POINT)',
+    source: 'bg-floating',
+    file: '🌗 Color scheme.Light.json',
+    output: '{Light.Gray.2}',
+    outputLabel: 'routes to:',
+    purpose: 'change the scheme — the route changes',
+  },
+  3: {
     layer: 'inner',
-    label: 'CORE · ACTUAL VALUE',
+    label: 'INNER · PALETTE',
     source: 'Light.Gray.2',
     file: 'Color Light.Mode 1.json',
     output: '#ffffff',
     outputLabel: 'value:',
-    purpose: 'the actual colour — resolved through the alias chain',
+    purpose: 'the actual hex — the raw colour',
   },
-  3: null,
   4: null,
   5: null,
+  6: null,
+  7: null,
 }
 
 export function Peel({ activeBeatIdx }: { activeBeatIdx: number }) {
   const info = LAYER_BY_BEAT[activeBeatIdx] ?? null
   const highlight: StoneLayer = info?.layer ?? 'none'
 
-  const showStamp = activeBeatIdx >= 3
-  const stickerOn = activeBeatIdx >= 4
+  const showStamp = activeBeatIdx >= 5
+  const stickerOn = activeBeatIdx >= 6
 
-  // Press slam fires once on beat 4
+  // Press slam fires once on beat 6
   const [slamming, setSlamming] = useState(false)
   useEffect(() => {
-    if (activeBeatIdx === 4) {
+    if (activeBeatIdx === 6) {
       setSlamming(true)
       const t = window.setTimeout(() => setSlamming(false), 520)
       return () => window.clearTimeout(t)
@@ -99,7 +115,7 @@ export function Peel({ activeBeatIdx }: { activeBeatIdx: number }) {
               <div className="peel-info-label">{info.label}</div>
 
               <div className="peel-info-row">
-                <span className="peel-info-row-key">figma source:</span>
+                <span className="peel-info-row-key">name:</span>
                 <span className="peel-info-name">{info.source}</span>
               </div>
 
@@ -117,15 +133,26 @@ export function Peel({ activeBeatIdx }: { activeBeatIdx: number }) {
 
               <div className="peel-info-purpose">{info.purpose}</div>
             </div>
-          ) : activeBeatIdx >= 3 ? (
+          ) : activeBeatIdx === 4 ? (
+            <div className="peel-info peel-info-summary">
+              <div className="peel-info-label">THREE LAYERS · THREE JOBS</div>
+              <div className="peel-info-purpose">
+                › concept = stable API name
+                {'\n'}› scheme = the swap point
+                {'\n'}› palette = the raw colour
+                {'\n\n'}swap the middle layer for a different scheme, and the
+                colour changes without touching product code or palette.
+              </div>
+            </div>
+          ) : activeBeatIdx >= 5 ? (
             <div className="peel-info peel-info-build">
               <div className="peel-info-label">@equinor/eds-tokens-build</div>
               <div className="peel-info-purpose">
-                {activeBeatIdx === 3 &&
+                {activeBeatIdx === 5 &&
                   '› the build package needs to give this geode a CSS variable name.'}
-                {activeBeatIdx === 4 &&
+                {activeBeatIdx === 6 &&
                   '› stamping an EDS-prefixed name onto the geode.'}
-                {activeBeatIdx >= 5 &&
+                {activeBeatIdx >= 7 &&
                   '› name attached. the geode still needs cutting + packaging before it becomes a line of CSS.'}
               </div>
             </div>

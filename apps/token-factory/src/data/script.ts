@@ -59,7 +59,7 @@ export const SCRIPT: Scene[] = [
     title: 'the reveal',
     lines: [
       "Look closer. The geode isn't one solid stone.",
-      "It's two-layered — an outer name and an inner value.",
+      "It's three-layered — concept, scheme, palette. Each ring lives in its own JSON file.",
       'This is what Figma actually ships us.',
     ],
   },
@@ -67,9 +67,11 @@ export const SCRIPT: Scene[] = [
     id: 'peel',
     title: 'the peel',
     lines: [
-      "Let's open the geode. It's two-layered.",
-      'Outer: this is the Figma source name — Bg.Floating — in Concept.Mode 1.json.',
-      'Core: the actual colour — #ffffff — resolved from Light.Gray.2 in Color Light.Mode 1.json.',
+      "This geode is three-layered. Let's open it.",
+      'Outer ring — Bg.Floating in Concept.Mode 1.json. The name product code asks for.',
+      'Middle ring — bg-floating in 🌗 Color scheme.Light.json. Routes the concept to a palette colour. This is the swap point — change the scheme, change the route.',
+      'Inner core — Light.Gray.2 in Color Light.Mode 1.json. The actual hex: #ffffff.',
+      'Three layers, three jobs. Swap the middle ring and the colour changes without touching product code or palette.',
       'Now eds-tokens-build steps in. It needs to give this geode a CSS variable name.',
       'It stamps an EDS-prefixed name onto the geode: --eds-color-bg-floating.',
       'The geode now carries its CSS variable name. It still needs cutting and packaging before it becomes a line of CSS.',
