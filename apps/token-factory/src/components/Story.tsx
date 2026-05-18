@@ -8,6 +8,7 @@ import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
 import { Peel } from './Peel'
 import { Reveal } from './Reveal'
+import { Tray } from './Tray'
 
 // Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
 // the narrator skip-tick counter, and the keyboard handler.
@@ -66,7 +67,8 @@ export function Story() {
     id === 'crack' ||
     id === 'reveal' ||
     id === 'peel' ||
-    id === 'cutting'
+    id === 'cutting' ||
+    id === 'tray'
 
   return (
     <>
@@ -76,6 +78,7 @@ export function Story() {
       {scene.id === 'reveal' && <Reveal activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'peel' && <Peel activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'cutting' && <Cutting activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'tray' && <Tray activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">

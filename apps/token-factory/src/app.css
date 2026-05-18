@@ -1925,3 +1925,173 @@ button {
   padding-top: calc(2 * var(--px));
   border-top: var(--px) dashed var(--pico-dark-gray);
 }
+
+/* ===== Scene 7: The Tray (Phase D.7) ================= */
+
+.tray-scene {
+  flex: 1;
+  position: relative;
+}
+
+.tray-stage {
+  position: absolute;
+  top: calc(20 * var(--px));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8 * var(--px));
+  padding: calc(8 * var(--px)) calc(12 * var(--px));
+}
+
+.tray-hero-hover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  animation: tray-hover 1200ms ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 calc(4 * var(--px)) #ffec27);
+}
+
+@keyframes tray-hover {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-3 * var(--px)));
+  }
+}
+
+.tray-hero-tag {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-yellow);
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-yellow);
+  padding: calc(1 * var(--px)) calc(2 * var(--px));
+}
+
+.tray-bench {
+  display: flex;
+  flex-direction: column;
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  padding: calc(4 * var(--px));
+  gap: calc(4 * var(--px));
+}
+
+.tray-label-strip {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-align: center;
+  letter-spacing: calc(0.5 * var(--px));
+  padding-bottom: calc(2 * var(--px));
+  border-bottom: var(--px) dashed var(--pico-dark-gray);
+}
+
+.tray-slots {
+  display: flex;
+  gap: calc(3 * var(--px));
+  align-items: flex-end;
+}
+
+.tray-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  width: calc(40 * var(--px));
+}
+
+.tray-slot-well {
+  width: calc(36 * var(--px));
+  height: calc(36 * var(--px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: var(--px) solid var(--pico-dark-gray);
+  border-radius: calc(1 * var(--px));
+}
+
+.tray-slot.is-hero .tray-slot-well {
+  border-color: var(--pico-yellow);
+}
+
+.tray-slot.is-empty .tray-slot-well {
+  border-style: dashed;
+  border-color: var(--pico-orange);
+}
+
+.tray-slot-gem {
+  width: calc(32 * var(--px));
+  height: calc(32 * var(--px));
+}
+
+.tray-slot-gem .gemstone-sprite {
+  width: calc(32 * var(--px));
+  height: calc(32 * var(--px));
+}
+
+.tray-slot-gem.is-dropping {
+  animation: tray-drop 360ms steps(6, end);
+}
+
+@keyframes tray-drop {
+  0% {
+    transform: translateY(calc(-40 * var(--px))) scale(1.2);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(calc(2 * var(--px))) scale(0.95);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.tray-slot-name {
+  font-size: calc(3 * var(--px));
+  color: var(--pico-light-gray);
+  text-align: center;
+  letter-spacing: calc(0.5 * var(--px));
+}
+
+.tray-slot.is-hero .tray-slot-name {
+  color: var(--pico-yellow);
+}
+
+.tray-file-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  padding: calc(4 * var(--px)) calc(6 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
+  animation: peel-info-pop 220ms steps(3, end);
+}
+
+.tray-file-key {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+  letter-spacing: calc(1 * var(--px));
+}
+
+.tray-file-name {
+  font-size: calc(6 * var(--px));
+  color: var(--pico-yellow);
+  font-family: 'Press Start 2P', monospace;
+}
+
+.tray-file-note {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  font-style: italic;
+}
