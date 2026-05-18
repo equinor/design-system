@@ -126,11 +126,11 @@ export function Peel({ activeBeatIdx }: { activeBeatIdx: number }) {
               <div className="peel-info-label">@equinor/eds-tokens-build</div>
               <div className="peel-info-purpose">
                 {activeBeatIdx === 3 &&
-                  '› the build package wants to ship this as css.'}
+                  '› the build package needs to give this geode a CSS variable name.'}
                 {activeBeatIdx === 4 &&
-                  '› stamping an EDS-prefixed CSS variable onto the geode.'}
+                  '› stamping an EDS-prefixed name onto the geode.'}
                 {activeBeatIdx >= 5 &&
-                  '› the geode is now shippable as CSS. figma never knew this name existed.'}
+                  '› name attached. the geode still needs cutting + packaging before it becomes a line of CSS.'}
               </div>
             </div>
           ) : (

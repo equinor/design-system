@@ -70,9 +70,9 @@ export const SCRIPT: Scene[] = [
       "let's open the geode. it's two-layered.",
       'outer: this is the figma source name — Bg.Floating — in Concept.Mode 1.json.',
       'core: the actual colour — #ffffff — resolved from Light.Gray.2 in Color Light.Mode 1.json.',
-      'now eds-tokens-build wants to ship this as css.',
-      'it stamps an EDS-prefixed CSS variable onto the geode: --eds-color-bg-floating.',
-      'the geode is now shippable as CSS. figma never knew this name existed.',
+      'now eds-tokens-build steps in. it needs to give this geode a CSS variable name.',
+      'it stamps an EDS-prefixed name onto the geode: --eds-color-bg-floating.',
+      'the geode now carries its CSS variable name. it still needs cutting and packaging before it becomes a line of CSS.',
     ],
   },
   {
