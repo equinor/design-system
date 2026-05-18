@@ -17,6 +17,7 @@ import {
   typographyTemplate,
   bordersTemplate,
   mergeRefs,
+  getElementRef,
 } from '@equinor/eds-utils'
 import { tooltip as tokens } from './Tooltip.tokens'
 import {
@@ -193,11 +194,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       children as ReactElement<any>, // eslint-disable-line @typescript-eslint/no-explicit-any
       {
         ...getReferenceProps(children.props),
-        ref: mergeRefs(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-          (children as ReactElement<any>).props.ref,
-          mergedAnchorRef,
-        ),
+        ref: mergeRefs(getElementRef<HTMLElement>(children), mergedAnchorRef),
       },
     )
 
