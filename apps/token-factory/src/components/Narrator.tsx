@@ -4,7 +4,8 @@ import { LibrarianBot } from './LibrarianBot'
 type Props = {
   lines: string[]
   /** When true, the narrator advances to the next line automatically
-   *  after the current line finishes typing + a short hold. */
+   *  after the current line finishes typing + a short hold. Default off:
+   *  the driver controls every beat with space. */
   autoAdvance?: boolean
   /** Bumped whenever the driver requests a skip — completes the current
    *  line instantly or advances to the next pending line. */
@@ -23,7 +24,7 @@ const HOLD_MS = 1400
 
 export function Narrator({
   lines,
-  autoAdvance = true,
+  autoAdvance = false,
   skipTick = 0,
   onBeatChange,
 }: Props) {

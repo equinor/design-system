@@ -33,6 +33,7 @@ export const SCRIPT: Scene[] = [
       "our crate is labelled 'color scheme'. that's our lane today.",
       "see the other four belts? other lanes. not today's story.",
       'the worker reads the label and sorts our crate onto the color scheme belt.',
+      'the gate slides open and our crate enters the factory.',
     ],
   },
   {

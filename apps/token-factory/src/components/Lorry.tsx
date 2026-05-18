@@ -22,19 +22,21 @@ export function Lorry() {
       <rect x={54} y={17} width={12} height={8} fill="#29adff" />
       <rect x={54} y={17} width={12} height={1} fill="#83bff0" />
       {/* Figma logo on cargo panel — stacked coloured squares */}
-      <rect x={10} y={14} width={6} height={4} fill="#ff5630" />
-      <rect x={10} y={18} width={6} height={4} fill="#a259ff" />
-      <rect x={10} y={22} width={6} height={4} fill="#0acf83" />
-      <rect x={10} y={26} width={6} height={4} fill="#1abcfe" />
-      {/* FIGMA text */}
-      <rect x={20} y={20} width={1} height={6} fill="#fff1e8" />
-      <rect x={20} y={20} width={3} height={1} fill="#fff1e8" />
-      <rect x={20} y={23} width={2} height={1} fill="#fff1e8" />
-      <rect x={25} y={20} width={1} height={6} fill="#fff1e8" />
-      <rect x={28} y={20} width={3} height={1} fill="#fff1e8" />
-      <rect x={28} y={20} width={1} height={6} fill="#fff1e8" />
-      <rect x={28} y={25} width={3} height={1} fill="#fff1e8" />
-      <rect x={28} y={23} width={2} height={1} fill="#fff1e8" />
+      <rect x={6} y={14} width={5} height={3} fill="#ff5630" />
+      <rect x={6} y={17} width={5} height={3} fill="#a259ff" />
+      <rect x={6} y={20} width={5} height={3} fill="#0acf83" />
+      <rect x={6} y={23} width={5} height={3} fill="#1abcfe" />
+      {/* FIGMA text — pixel font via SVG text element */}
+      <text
+        x={14}
+        y={24}
+        fontFamily="'Press Start 2P', monospace"
+        fontSize={6}
+        fill="#fff1e8"
+        textRendering="optimizeSpeed"
+      >
+        FIGMA
+      </text>
       {/* wheels */}
       <rect x={6} y={32} width={8} height={6} fill="#1d2b53" />
       <rect x={7} y={33} width={6} height={4} fill="#000000" />

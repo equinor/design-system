@@ -750,7 +750,7 @@ button {
     background-position-x: 0;
   }
   to {
-    background-position-x: calc(-8 * var(--px));
+    background-position-x: calc(8 * var(--px));
   }
 }
 
@@ -758,7 +758,10 @@ button {
   position: absolute;
   bottom: calc(20 * var(--px));
   left: calc(4 * var(--px));
-  z-index: 2;
+  /* z-index: above hidden/peeking crate so crate is obscured by the
+     lorry, but below other journey states where the crate has slid out
+     onto the belt. The crate raises its own z-index via state class. */
+  z-index: 5;
 }
 
 .lorry-sprite {
@@ -766,64 +769,122 @@ button {
   height: calc(40 * var(--px));
   image-rendering: pixelated;
   display: block;
+  transform: scaleX(-1);
+
+  text {
+    transform: scaleX(-1);
+  }
 }
 
 .dock-worker {
   position: absolute;
   bottom: calc(20 * var(--px));
   left: calc(180 * var(--px));
-  z-index: 3;
+  z-index: 6;
 }
 
-/* The crate — two positioning modes: on-lorry (beats 2–3) and journey
-   (beat 4+). The journey crate slides horizontally via transform on
-   state-class changes. */
-.dock-crate {
-  z-index: 4;
-}
-
-.dock-crate-on-lorry {
+.worker-bubble {
   position: absolute;
-  bottom: calc(48 * var(--px));
-  left: calc(14 * var(--px));
+  bottom: calc(28 * var(--px));
+  left: calc(-12 * var(--px));
+  background: var(--pico-white);
+  color: var(--pico-black);
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  border: var(--px) solid var(--pico-black);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: worker-bubble-in 200ms steps(2, end);
+}
+
+.worker-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: calc(-3 * var(--px));
+  left: calc(8 * var(--px));
+  width: calc(3 * var(--px));
+  height: calc(3 * var(--px));
+  background: var(--pico-white);
+  border-right: var(--px) solid var(--pico-black);
+  border-bottom: var(--px) solid var(--pico-black);
+}
+
+@keyframes worker-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(4 * var(--px)));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The crate — single positioning element, journey-driven. Scale 0.6
+   to make it smaller than the lorry's cargo. */
+.dock-crate-journey {
+  position: absolute;
+  bottom: calc(* var(--px));
+  left: calc(12 * var(--px));
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: calc(2 * var(--px));
-}
-
-.dock-crate-journey {
-  position: absolute;
-  bottom: calc(22 * var(--px));
-  left: 0;
+  gap: calc(1 * var(--px));
+  transform-origin: left bottom;
+  /* Base scale + zero translate. State classes override transform. */
+  transform: scale(0.6) translateX(0);
   transition:
     transform 1200ms steps(12, end),
     opacity 600ms steps(4, end);
+  z-index: 4;
 }
 
-.crate-state-sliding-1 {
-  transform: translateX(calc(60 * var(--px)));
+/* Crate-state classes set the journey position. Scale 0.6 is baked into
+   each transform so it carries through the slide. */
+
+.crate-state-hidden {
+  transform: scale(0.6) translateX(calc(20 * var(--px)));
+  /* Behind the lorry — crate hidden by lorry-spot's higher z-index. */
+  opacity: 1;
+}
+
+.crate-state-peeking {
+  transform: scale(0.6) translateX(calc(45 * var(--px)));
+  /* Peeks slightly out from behind the lorry, label visible. */
+  z-index: 4;
+}
+
+.crate-state-sliding-to-worker {
+  transform: scale(0.6) translateX(calc(230 * var(--px)));
+  /* Out onto the belt heading toward the worker. Raised z so it's
+     above the lorry from here on. */
+  z-index: 7;
 }
 
 .crate-state-inspecting {
-  transform: translateX(calc(140 * var(--px)));
+  transform: scale(0.6) translateX(calc(230 * var(--px)));
+  z-index: 7;
 }
 
-.crate-state-sliding-2 {
-  transform: translateX(calc(280 * var(--px)));
+.crate-state-sliding-to-gate {
+  transform: scale(0.6) translateX(calc(420 * var(--px)));
+  z-index: 7;
 }
 
 .crate-state-entering {
-  transform: translateX(calc(298 * var(--px)));
+  transform: scale(0.6) translateX(calc(460 * var(--px)));
+  z-index: 7;
 }
 
 .crate-state-inside {
-  transform: translateX(calc(305 * var(--px)));
+  transform: scale(0.6) translateX(calc(475 * var(--px)));
   opacity: 0;
+  z-index: 7;
 }
 
-/* On-lorry crate label */
-.dock-crate-on-lorry .crate-label {
+/* Label that travels with the crate on every journey state */
+.crate-travel-label {
   font-size: calc(4 * var(--px));
   text-transform: uppercase;
   color: var(--pico-yellow);
@@ -831,4 +892,9 @@ button {
   padding: calc(1 * var(--px)) calc(3 * var(--px));
   border: var(--px) solid var(--pico-white);
   white-space: nowrap;
+  /* Counter-scale so the label stays readable at 100% even though the
+     crate is 0.6 scaled. */
+  transform: scale(1.67);
+  transform-origin: center;
+  margin-bottom: calc(6 * var(--px));
 }
