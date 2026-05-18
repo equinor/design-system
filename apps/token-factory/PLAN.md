@@ -163,7 +163,7 @@ Order:
 - D.5 — Scene 5: Peel (slow, narrator-heavy). ✓
 - D.6 — Scene 6: Cutting (new `Gemstone.tsx` — two-facet light/dark fusion + `light-dark()` declaration card). ✓
 - D.7 — Scene 7: Tray (collection of gemstones in `color-scheme.css` label). ✓
-- D.8 — Scene 8: Packaging (bundle + dark-scope inspector polish).
+- D.8 — Scene 8: Packaging (bundle + dark-scope inspector polish). ✓
 
 ### Phase E — Polish
 - Audio (ZzFX SFX for SLAM, cutting, sealing, fade).

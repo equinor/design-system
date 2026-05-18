@@ -2095,3 +2095,283 @@ button {
   color: var(--pico-light-gray);
   font-style: italic;
 }
+
+/* ===== Scene 8: The Packaging (Phase D.8) ============ */
+
+.pkg-scene {
+  flex: 1;
+  position: relative;
+}
+
+.pkg-stage {
+  position: absolute;
+  top: calc(20 * var(--px));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: calc(8 * var(--px));
+  align-items: center;
+  padding: calc(8 * var(--px)) calc(12 * var(--px));
+}
+
+/* Bins (other lane materials) */
+.pkg-bins {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--px));
+}
+
+.pkg-bin {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--px));
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  min-width: calc(60 * var(--px));
+}
+
+.pkg-bins.is-flowing .pkg-bin {
+  animation: pkg-bin-pulse 900ms steps(4, end) infinite;
+}
+
+.pkg-bins.is-flowing .pkg-bin:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.pkg-bins.is-flowing .pkg-bin:nth-child(3) {
+  animation-delay: 400ms;
+}
+
+@keyframes pkg-bin-pulse {
+  0%, 100% {
+    border-color: var(--pico-dark-gray);
+  }
+  50% {
+    border-color: var(--pico-yellow);
+  }
+}
+
+.pkg-bin-sprite {
+  width: calc(20 * var(--px));
+  height: calc(20 * var(--px));
+}
+
+.lane-sprite {
+  width: calc(20 * var(--px));
+  height: calc(20 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+.pkg-bin-label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1 * var(--px));
+}
+
+.pkg-bin-label-name {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-yellow);
+}
+
+.pkg-bin-label-pkg {
+  font-size: calc(3 * var(--px));
+  color: var(--pico-light-gray);
+}
+
+/* Center: box + split */
+.pkg-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--px));
+  position: relative;
+}
+
+.pkg-inspector {
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  padding: calc(2 * var(--px)) calc(3 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-orange);
+  animation: pkg-inspector-bob 800ms ease-in-out infinite alternate;
+}
+
+@keyframes pkg-inspector-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-2 * var(--px)));
+  }
+}
+
+.pkg-inspector-mag {
+  font-size: calc(8 * var(--px));
+  color: var(--pico-yellow);
+  font-family: 'Press Start 2P', monospace;
+}
+
+.pkg-inspector-tag {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+  letter-spacing: calc(0.5 * var(--px));
+}
+
+.pkg-box {
+  position: relative;
+  width: calc(96 * var(--px));
+  height: calc(80 * var(--px));
+  background: var(--pico-dark-purple);
+  border: var(--px) solid var(--pico-orange);
+  box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0 var(--pico-black);
+  display: flex;
+  flex-direction: column;
+}
+
+.pkg-box-lid {
+  width: 100%;
+  height: calc(10 * var(--px));
+  background: var(--pico-orange);
+  border-bottom: var(--px) solid var(--pico-black);
+  transition: transform 360ms steps(4, end);
+}
+
+.pkg-box.is-sealed .pkg-box-lid {
+  background: var(--pico-yellow);
+}
+
+.pkg-box-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pkg-box-contents {
+  display: flex;
+  gap: calc(4 * var(--px));
+}
+
+.pkg-box-gem .gemstone-sprite {
+  width: calc(48 * var(--px));
+  height: calc(48 * var(--px));
+}
+
+.pkg-box-stamp {
+  font-family: 'Press Start 2P', monospace;
+  font-size: calc(6 * var(--px));
+  color: var(--pico-black);
+  background: var(--pico-yellow);
+  padding: calc(2 * var(--px)) calc(4 * var(--px));
+  border: var(--px) solid var(--pico-black);
+  transform: rotate(-4deg);
+  animation: pkg-stamp 360ms steps(4, end);
+}
+
+@keyframes pkg-stamp {
+  0% {
+    transform: rotate(-4deg) scale(2);
+    opacity: 0;
+  }
+  60% {
+    transform: rotate(-4deg) scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-4deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Three-face split */
+.pkg-split {
+  display: flex;
+  gap: calc(6 * var(--px));
+  align-items: flex-end;
+  animation: peel-info-pop 220ms steps(3, end);
+}
+
+.pkg-split-gem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+}
+
+.pkg-split-gem .gemstone-sprite {
+  width: calc(40 * var(--px));
+  height: calc(40 * var(--px));
+}
+
+.pkg-split-tag {
+  font-size: calc(4 * var(--px));
+  padding: calc(1 * var(--px)) calc(2 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-yellow);
+  color: var(--pico-yellow);
+}
+
+.pkg-split-tag-light {
+  color: var(--pico-white);
+  border-color: var(--pico-white);
+}
+
+.pkg-split-tag-dark {
+  color: var(--pico-light-gray);
+  border-color: var(--pico-light-gray);
+}
+
+.pkg-split-tag-fused {
+  color: var(--pico-yellow);
+  border-color: var(--pico-yellow);
+}
+
+/* Right rail: code card */
+.pkg-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pkg-code {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3 * var(--px));
+  padding: calc(4 * var(--px)) calc(5 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-orange);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  animation: peel-info-pop 220ms steps(3, end);
+  max-width: calc(140 * var(--px));
+}
+
+.pkg-code-key {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+  letter-spacing: calc(0.5 * var(--px));
+}
+
+.pkg-code-pre {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: calc(3.5 * var(--px));
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.pkg-code-note {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-light-gray);
+  font-style: italic;
+  padding-top: calc(2 * var(--px));
+  border-top: var(--px) dashed var(--pico-dark-gray);
+}

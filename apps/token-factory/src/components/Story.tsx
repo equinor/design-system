@@ -6,6 +6,7 @@ import { Cutting } from './Cutting'
 import { Dock } from './Dock'
 import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
+import { Packaging } from './Packaging'
 import { Peel } from './Peel'
 import { Reveal } from './Reveal'
 import { Tray } from './Tray'
@@ -68,7 +69,8 @@ export function Story() {
     id === 'reveal' ||
     id === 'peel' ||
     id === 'cutting' ||
-    id === 'tray'
+    id === 'tray' ||
+    id === 'packaging'
 
   return (
     <>
@@ -79,6 +81,7 @@ export function Story() {
       {scene.id === 'peel' && <Peel activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'cutting' && <Cutting activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'tray' && <Tray activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'packaging' && <Packaging activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">
