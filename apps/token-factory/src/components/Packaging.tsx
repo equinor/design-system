@@ -1,4 +1,5 @@
-import { Gemstone, HERO_GEM } from './Gemstone'
+import { Gemstone } from './Gemstone'
+import { ChainSprite, ClaspSprite, CordSprite } from './LaneSprites'
 import { SceneHeader } from './SceneHeader'
 
 // Scene 8 — The Packaging.
@@ -28,80 +29,48 @@ const LANES: LaneIcon[] = [
   { label: 'chains', shape: 'chain', pkg: 'typography' },
 ]
 
-function CordSprite() {
-  return (
-    <svg
-      className="lane-sprite"
-      viewBox="0 0 16 16"
-      shapeRendering="crispEdges"
-    >
-      <rect x={2} y={3} width={2} height={2} fill="#83769c" />
-      <rect x={4} y={5} width={2} height={2} fill="#83769c" />
-      <rect x={6} y={7} width={2} height={2} fill="#83769c" />
-      <rect x={8} y={9} width={2} height={2} fill="#83769c" />
-      <rect x={10} y={11} width={2} height={2} fill="#83769c" />
-      <rect x={12} y={9} width={2} height={2} fill="#83769c" />
-      <rect x={10} y={7} width={2} height={2} fill="#83769c" />
-      <rect x={8} y={5} width={2} height={2} fill="#83769c" />
-    </svg>
-  )
-}
-
-function ClaspSprite() {
-  return (
-    <svg
-      className="lane-sprite"
-      viewBox="0 0 16 16"
-      shapeRendering="crispEdges"
-    >
-      <rect x={5} y={3} width={6} height={2} fill="#ffa300" />
-      <rect x={3} y={5} width={2} height={6} fill="#ffa300" />
-      <rect x={11} y={5} width={2} height={6} fill="#ffa300" />
-      <rect x={5} y={11} width={6} height={2} fill="#ffa300" />
-      <rect x={6} y={6} width={4} height={4} fill="#ffec27" />
-    </svg>
-  )
-}
-
-function ChainSprite() {
-  return (
-    <svg
-      className="lane-sprite"
-      viewBox="0 0 16 16"
-      shapeRendering="crispEdges"
-    >
-      <rect x={3} y={3} width={4} height={3} fill="#c2c3c7" />
-      <rect x={4} y={4} width={2} height={1} fill="#202223" />
-      <rect x={6} y={7} width={4} height={3} fill="#c2c3c7" />
-      <rect x={7} y={8} width={2} height={1} fill="#202223" />
-      <rect x={9} y={11} width={4} height={3} fill="#c2c3c7" />
-      <rect x={10} y={12} width={2} height={1} fill="#202223" />
-    </svg>
-  )
-}
-
 function laneSprite(shape: LaneIcon['shape']) {
   if (shape === 'cord') return <CordSprite />
   if (shape === 'clasp') return <ClaspSprite />
   return <ChainSprite />
 }
 
-// Three explicit faces (the dark-scope output).
-// - fused: the light-dark() declaration (full hero gem)
-// - light only: top half (use light colours throughout)
-// - dark only: bottom half (use dark colours throughout)
-const LIGHT_ONLY_GEM = {
-  ...HERO_GEM,
-  dark: HERO_GEM.light,
-  darkHighlight: HERO_GEM.lightHighlight,
-  darkShadow: HERO_GEM.lightShadow,
+// Four scoped declarations the build-dark-scope step appends.
+// Same variable name (--eds-color-bg-floating) — different selectors
+// resolve it to either the light value or the dark value.
+type ScopedDecl = {
+  selector: string
+  value: string
+  isDark: boolean
+  note: string
 }
-const DARK_ONLY_GEM = {
-  ...HERO_GEM,
-  light: HERO_GEM.dark,
-  lightHighlight: HERO_GEM.darkHighlight,
-  lightShadow: HERO_GEM.darkShadow,
-}
+
+const SCOPED_DECLS: ScopedDecl[] = [
+  {
+    selector: ':root',
+    value: '#ffffff',
+    isDark: false,
+    note: 'fallback (light)',
+  },
+  {
+    selector: '[data-color-scheme="light"]',
+    value: '#ffffff',
+    isDark: false,
+    note: 'explicit light',
+  },
+  {
+    selector: '[data-color-scheme="dark"]',
+    value: '#202223',
+    isDark: true,
+    note: 'explicit dark',
+  },
+  {
+    selector: '@media (prefers-color-scheme: dark)',
+    value: '#202223',
+    isDark: true,
+    note: 'system dark',
+  },
+]
 
 export function Packaging({ activeBeatIdx }: { activeBeatIdx: number }) {
   const showMaterials = activeBeatIdx >= 1
@@ -156,53 +125,64 @@ export function Packaging({ activeBeatIdx }: { activeBeatIdx: number }) {
           )}
 
           {showSplit && !sealed && (
-            <div className="pkg-split">
-              <div className="pkg-split-gem">
-                <Gemstone colors={LIGHT_ONLY_GEM} />
-                <div className="pkg-split-tag pkg-split-tag-light">-light</div>
-              </div>
-              <div className="pkg-split-gem">
-                <Gemstone colors={HERO_GEM} />
-                <div className="pkg-split-tag pkg-split-tag-fused">
-                  light-dark()
+            <div className="pkg-scopes">
+              {SCOPED_DECLS.map((d) => (
+                <div
+                  key={d.selector}
+                  className={`pkg-scope ${
+                    d.isDark ? 'is-dark-scope' : 'is-light-scope'
+                  }`}
+                >
+                  <div className="pkg-scope-selector">{d.selector}</div>
+                  <div
+                    className="pkg-scope-swatch"
+                    style={{
+                      background: d.value,
+                      borderColor: d.isDark ? '#3d3d3f' : '#c2c3c7',
+                    }}
+                  />
+                  <div className="pkg-scope-value">{d.value}</div>
+                  <div className="pkg-scope-note">{d.note}</div>
                 </div>
-              </div>
-              <div className="pkg-split-gem">
-                <Gemstone colors={DARK_ONLY_GEM} />
-                <div className="pkg-split-tag pkg-split-tag-dark">-dark</div>
-              </div>
+              ))}
             </div>
           )}
         </div>
 
-        {/* Right rail: code-card showing the three explicit faces */}
+        {/* Right rail: code-card showing the four scoped declarations */}
         <div className="pkg-side">
           {showCodeCard && (
             <div className="pkg-code">
-              <div className="pkg-code-key">three explicit faces</div>
+              <div className="pkg-code-key">scoped declarations</div>
               <pre className="pkg-code-pre">
+                <span className="decl-fn">:root</span>
+                {' {\n  '}
                 <span className="decl-prop">--eds-color-bg-floating</span>
-                {':\n  '}
-                <span className="decl-fn">light-dark</span>
-                <span className="decl-paren">(</span>
-                <span className="decl-light">#ffffff</span>
-                <span className="decl-comma">, </span>
-                <span className="decl-dark">#202223</span>
-                <span className="decl-paren">)</span>
-                <span className="decl-semi">;</span>
-                {'\n'}
-                <span className="decl-prop">--eds-color-bg-floating-light</span>
                 {': '}
                 <span className="decl-light">#ffffff</span>
                 <span className="decl-semi">;</span>
-                {'\n'}
-                <span className="decl-prop">--eds-color-bg-floating-dark</span>
-                {':  '}
+                {'\n}\n'}
+                <span className="decl-fn">[data-color-scheme="light"]</span>
+                {' {\n  '}
+                <span className="decl-prop">--eds-color-bg-floating</span>
+                {': '}
+                <span className="decl-light">#ffffff</span>
+                <span className="decl-semi">;</span>
+                {'\n}\n'}
+                <span className="decl-fn">[data-color-scheme="dark"]</span>
+                {' {\n  '}
+                <span className="decl-prop">--eds-color-bg-floating</span>
+                {': '}
                 <span className="decl-dark">#202223</span>
                 <span className="decl-semi">;</span>
+                {'\n}\n'}
+                <span className="decl-fn">
+                  @media (prefers-color-scheme: dark)
+                </span>
+                {' { … }'}
               </pre>
               <div className="pkg-code-note">
-                consumers without light-dark() use -light or -dark.
+                same variable name. four scopes resolve it.
               </div>
             </div>
           )}

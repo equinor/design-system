@@ -1,110 +1,126 @@
-import { useEffect, useState } from 'react'
-import { Necklace, type NecklaceState } from './Necklace'
+import { Gemstone } from './Gemstone'
+import { ChainSprite, ClaspSprite, CordSprite } from './LaneSprites'
 import { SceneHeader } from './SceneHeader'
 import { Token } from './Token'
 
-// Scene 9 — the payoff. Box arrives at the EDS product team workshop.
-// A jeweller pulls components from it and assembles a necklace. On the
-// narrator's "what they make is your design system" beat (beat 3), the
-// pixel-art necklace transitions into a real EDS <Button>.
+// Scene 9 — the payoff. The sealed box from Scene 8 arrives at the EDS
+// product team's workshop. The team opens it, recognises the same
+// materials we watched the factory produce (gemstones, cords, clasps,
+// chains), and from those raw materials a real EDS <Button> emerges.
 //
-// The pixel-to-real shift IS the bookend. Everything before it is pixel-
-// art chrome; the Button uses real EDS CSS variables and the real font
-// stack — image-rendering: auto overrides the global pixelated rule.
+// The pixel-to-real shift IS the bookend. Everything before it is
+// pixel-art chrome; the Button uses real EDS CSS variables and the
+// real font stack — image-rendering: auto overrides the global rule.
 //
 // Beat mapping:
-//   0 — workshop intro, jeweller alone with empty bench
-//   1 — gemstone, cord, clasp appear separately on the bench
-//   2 — assembly: gem → cord → full necklace (sub-timed within beat 2)
-//   3 — reveal: necklace fades, real Button fades in
+//   0 — sealed `variables.min.css` box sits on the bench, jeweller waits
+//   1 — box opens; the four materials fan out across the bench
+//   2 — materials converge toward the bench centre (the assembly)
+//   3 — flash transition: pixel assembly fades, real Button fades in
 //   4 — Button held, closing beat
 
-type Phase = NecklaceState | 'revealing' | 'revealed'
+type Material = {
+  key: string
+  label: string
+  pkg: string
+  render: () => React.ReactElement
+}
+
+const MATERIALS: Material[] = [
+  {
+    key: 'gem',
+    label: 'gemstone',
+    pkg: 'color',
+    render: () => <Gemstone />,
+  },
+  {
+    key: 'cord',
+    label: 'cord',
+    pkg: 'spacing',
+    render: () => <CordSprite />,
+  },
+  {
+    key: 'clasp',
+    label: 'clasp',
+    pkg: 'density',
+    render: () => <ClaspSprite />,
+  },
+  {
+    key: 'chain',
+    label: 'chain',
+    pkg: 'typography',
+    render: () => <ChainSprite />,
+  },
+]
 
 export function Jeweller({ activeBeatIdx }: { activeBeatIdx: number }) {
-  const [phase, setPhase] = useState<Phase>('none')
-
-  useEffect(() => {
-    if (activeBeatIdx === 0) {
-      setPhase('none')
-    } else if (activeBeatIdx === 1) {
-      setPhase('gem')
-    } else if (activeBeatIdx === 2) {
-      // Sub-timed assembly within beat 2: gem → cord → full
-      setPhase('gem')
-      const t1 = window.setTimeout(() => setPhase('cord'), 700)
-      const t2 = window.setTimeout(() => setPhase('full'), 1500)
-      return () => {
-        window.clearTimeout(t1)
-        window.clearTimeout(t2)
-      }
-    } else if (activeBeatIdx === 3) {
-      setPhase('revealing')
-      const t = window.setTimeout(() => setPhase('revealed'), 600)
-      return () => window.clearTimeout(t)
-    } else if (activeBeatIdx >= 4) {
-      setPhase('revealed')
-    }
-  }, [activeBeatIdx])
-
-  const showNecklace = phase === 'gem' || phase === 'cord' || phase === 'full'
-  const showRevealing = phase === 'revealing'
-  const showRevealed = phase === 'revealed'
+  const showBox = activeBeatIdx === 0
+  const showMaterials = activeBeatIdx === 1 || activeBeatIdx === 2
+  const isAssembling = activeBeatIdx === 2
+  const showFlash = activeBeatIdx === 3
+  const showButton = activeBeatIdx >= 4
 
   return (
     <div className="jeweller-scene">
       <SceneHeader pkg="@equinor/eds-core-react" title="EDS PRODUCT TEAM" />
 
-      {/* workshop interior — simple silhouettes for atmosphere */}
-      <div className="shop-interior">
-        <div className="shop-wall shop-wall-1" />
-        <div className="shop-wall shop-wall-2" />
-        <div className="shop-window shop-window-1" />
-        <div className="shop-window shop-window-2" />
-      </div>
+      <div className="jeweller-stage">
+        <div className="shop-interior">
+          <div className="shop-wall shop-wall-1" />
+          <div className="shop-wall shop-wall-2" />
+          <div className="shop-window shop-window-1" />
+          <div className="shop-window shop-window-2" />
+        </div>
 
-      {/* jeweller character (left side) */}
-      <div className="jeweller-character">
-        <Token />
-      </div>
+        <div className="jeweller-character">
+          <Token />
+        </div>
 
-      {/* the bench + product display (right side) */}
-      <div className="workbench">
-        <div className="bench-surface" />
+        <div className="jeweller-bench">
+          <div className="jeweller-bench-surface" />
 
-        {/* loose components when beat 1: gem alone, but also show cord
-            and clasp as labelled tiny items on the bench */}
-        {phase === 'gem' && activeBeatIdx === 1 && (
-          <div className="bench-components">
-            <span className="component-tag component-tag-gem">gemstone</span>
-            <span className="component-tag component-tag-cord">cord</span>
-            <span className="component-tag component-tag-clasp">clasp</span>
-          </div>
-        )}
+          {showBox && (
+            <div className="jeweller-arrived-box">
+              <div className="jeweller-arrived-box-lid" />
+              <div className="jeweller-arrived-box-body">
+                <div className="jeweller-arrived-box-stamp">
+                  variables.min.css
+                </div>
+              </div>
+            </div>
+          )}
 
-        {/* necklace stages on the bench (beats 1-2) */}
-        {showNecklace && (
-          <div className="necklace-display">
-            <Necklace state={phase as NecklaceState} />
-          </div>
-        )}
+          {showMaterials && (
+            <div
+              className={`jeweller-materials ${
+                isAssembling ? 'is-assembling' : ''
+              }`}
+            >
+              {MATERIALS.map((m) => (
+                <div
+                  key={m.key}
+                  className={`jeweller-material jeweller-material-${m.key}`}
+                >
+                  <div className="jeweller-material-sprite">{m.render()}</div>
+                  <div className="jeweller-material-meta">
+                    <span className="jeweller-material-label">{m.label}</span>
+                    <span className="jeweller-material-pkg">{m.pkg}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
-        {/* fade-out transition (beat 3) */}
-        {showRevealing && (
-          <div className="necklace-display is-fading">
-            <Necklace state="full" />
-          </div>
-        )}
+          {showFlash && <div className="jeweller-flash" />}
 
-        {/* the real EDS Button — image-rendering:auto, real font stack,
-            real CSS variables. The bookend reveal. */}
-        {showRevealed && (
-          <div className="real-button-display">
-            <button type="button" className="showroom-button">
-              Save changes
-            </button>
-          </div>
-        )}
+          {showButton && (
+            <div className="real-button-display">
+              <button type="button" className="showroom-button">
+                Save changes
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
