@@ -761,7 +761,8 @@ button {
   /* z-index: above hidden/peeking crate so crate is obscured by the
      lorry, but below other journey states where the crate has slid out
      onto the belt. The crate raises its own z-index via state class. */
-  z-index: 5;
+  z-index: 8;
+  transform: scaleX(-1);
 }
 
 .lorry-sprite {
@@ -769,7 +770,6 @@ button {
   height: calc(40 * var(--px));
   image-rendering: pixelated;
   display: block;
-  transform: scaleX(-1);
 
   text {
     transform: scaleX(-1);
@@ -825,15 +825,15 @@ button {
    to make it smaller than the lorry's cargo. */
 .dock-crate-journey {
   position: absolute;
-  bottom: calc(22 * var(--px));
-  left: calc(12 * var(--px));
+  bottom: calc(35 * var(--px));
+  left: calc(30 * var(--px));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(1 * var(--px));
   transform-origin: left bottom;
   /* Base scale + zero translate. State classes override transform. */
-  transform: scale(0.6) translateX(0);
+  transform: scale(0.6) translateX(0) translateY(60px);
   transition:
     transform 1200ms steps(12, end),
     opacity 600ms steps(4, end);
@@ -847,40 +847,41 @@ button {
   /* Scale 0 = invisible. The crate is "inside" the lorry's cargo at the
      centre of the lorry's footprint. Transition to peeking grows it AND
      translates it out to the right edge of the lorry — the unload. */
-  transform: scale(0) translateX(calc(20 * var(--px)));
+  transform: scale(0) translateX(calc(20 * var(--px))) translateY(-40px);
   opacity: 0;
 }
 
 .crate-state-peeking {
   /* Just to the right of the lorry, fully visible on the belt. */
-  transform: scale(0.6) translateX(calc(90 * var(--px)));
+  transform: scale(0.6) translateX(calc(120 * var(--px))) translateY(140px);
   z-index: 7;
 }
 
 .crate-state-sliding-to-worker {
-  transform: scale(0.6) translateX(calc(230 * var(--px)));
+  transform: scale(0.6) translateX(calc(200 * var(--px))) translateY(140px);
   /* Out onto the belt heading toward the worker. Raised z so it's
      above the lorry from here on. */
   z-index: 7;
 }
 
 .crate-state-inspecting {
-  transform: scale(0.6) translateX(calc(230 * var(--px)));
+  transform: scale(0.6) translateX(calc(200 * var(--px))) translateY(140px);
   z-index: 7;
 }
 
 .crate-state-sliding-to-gate {
-  transform: scale(0.6) translateX(calc(420 * var(--px)));
+  transform: scale(0.6) translateX(calc(420 * var(--px))) translateY(140px);
   z-index: 7;
 }
 
 .crate-state-entering {
-  transform: scale(0.6) translateX(calc(460 * var(--px)));
+  transform: scale(0.6) translateX(calc(460 * var(--px))) translateY(140px);
+  opacity: 0;
   z-index: 7;
 }
 
 .crate-state-inside {
-  transform: scale(0.6) translateX(calc(475 * var(--px)));
+  transform: scale(0) translateX(calc(460 * var(--px))) translateY(140px);
   opacity: 0;
   z-index: 7;
 }
