@@ -1,35 +1,58 @@
 import { Crate } from './Crate'
 
 // Scene 2 — Inside the Factory.
-// Transition beat. The crate is now inside; the camera follows it
-// while machinery silhouettes parallax past behind. The crate stays
-// centred on the belt — the world moves, not the crate.
+// Transition beat. Camera follows the crate; machinery silhouettes
+// parallax past behind on two layers. The crate stays centred — the
+// world moves.
+//
+// Parallax loop trick: each machinery layer renders TWO identical tiles
+// side-by-side. The container animates translateX(-50%) per loop, so
+// when tile-1 has shifted fully off-screen left, tile-2 occupies its
+// exact starting position. Snap back to 0% is visually identical.
 //
 // Beat mapping:
-//   0 — Crate visible centred on belt, machinery scrolls past behind.
-//   1 — A name tag appears above the crate: "bg-floating".
+//   0 — Crate visible centred on belt, machinery scrolls past.
+//   1 — Name tag pops in: "NAME: BG-FLOATING".
 //   2 — Hold. Narrator says "bg-floating doesn't know what he is yet."
+
+function FarMachineryTile() {
+  return (
+    <div className="machinery-tile">
+      <div className="machinery-tower mt-far-1" />
+      <div className="machinery-pipe mp-far-1" />
+      <div className="machinery-tower mt-far-2" />
+      <div className="machinery-pipe mp-far-2" />
+      <div className="machinery-tower mt-far-3" />
+    </div>
+  )
+}
+
+function NearMachineryTile() {
+  return (
+    <div className="machinery-tile">
+      <div className="machinery-tower mt-near-1" />
+      <div className="machinery-pipe mp-near-1" />
+      <div className="machinery-tower mt-near-2" />
+      <div className="machinery-pipe mp-near-2" />
+    </div>
+  )
+}
 
 export function Inside({ activeBeatIdx }: { activeBeatIdx: number }) {
   const showNameTag = activeBeatIdx >= 1
 
   return (
     <div className="inside-scene">
-      {/* far-back machinery silhouettes — scroll slowly */}
+      {/* far-back machinery silhouettes — two tiles, slow scroll */}
       <div className="inside-machinery inside-machinery-far">
-        <div className="machinery-tower mt-far-1" />
-        <div className="machinery-pipe mp-far-1" />
-        <div className="machinery-tower mt-far-2" />
-        <div className="machinery-pipe mp-far-2" />
-        <div className="machinery-tower mt-far-3" />
+        <FarMachineryTile />
+        <FarMachineryTile />
       </div>
 
-      {/* mid machinery — scroll faster */}
+      {/* mid machinery — two tiles, faster scroll */}
       <div className="inside-machinery inside-machinery-near">
-        <div className="machinery-tower mt-near-1" />
-        <div className="machinery-pipe mp-near-1" />
-        <div className="machinery-tower mt-near-2" />
-        <div className="machinery-pipe mp-near-2" />
+        <NearMachineryTile />
+        <NearMachineryTile />
       </div>
 
       {/* the conveyor belt running the full width */}

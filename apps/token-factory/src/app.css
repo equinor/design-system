@@ -778,7 +778,7 @@ button {
 
 .dock-worker {
   position: absolute;
-  bottom: calc(20 * var(--px));
+  bottom: calc(19 * var(--px));
   left: calc(180 * var(--px));
   z-index: 6;
 }
@@ -825,7 +825,7 @@ button {
    to make it smaller than the lorry's cargo. */
 .dock-crate-journey {
   position: absolute;
-  bottom: calc(35 * var(--px));
+  bottom: calc(10 * var(--px));
   left: calc(30 * var(--px));
   display: flex;
   flex-direction: column;
@@ -848,40 +848,41 @@ button {
      centre of the lorry's footprint. Transition to peeking grows it AND
      translates it out to the right edge of the lorry — the unload. */
   transform: scale(0) translateX(calc(20 * var(--px))) translateY(-40px);
+  bottom: calc(35 * var(--px));
   opacity: 0;
 }
 
 .crate-state-peeking {
   /* Just to the right of the lorry, fully visible on the belt. */
-  transform: scale(0.6) translateX(calc(120 * var(--px))) translateY(140px);
+  transform: scale(0.6) translateX(calc(120 * var(--px)));
   z-index: 7;
 }
 
 .crate-state-sliding-to-worker {
-  transform: scale(0.6) translateX(calc(200 * var(--px))) translateY(140px);
+  transform: scale(0.6) translateX(calc(200 * var(--px)));
   /* Out onto the belt heading toward the worker. Raised z so it's
      above the lorry from here on. */
   z-index: 7;
 }
 
 .crate-state-inspecting {
-  transform: scale(0.6) translateX(calc(200 * var(--px))) translateY(140px);
+  transform: scale(0.6) translateX(calc(200 * var(--px)));
   z-index: 7;
 }
 
 .crate-state-sliding-to-gate {
-  transform: scale(0.6) translateX(calc(420 * var(--px))) translateY(140px);
+  transform: scale(0.6) translateX(calc(420 * var(--px)));
   z-index: 7;
 }
 
 .crate-state-entering {
-  transform: scale(0.6) translateX(calc(460 * var(--px))) translateY(140px);
+  transform: scale(0.6) translateX(calc(460 * var(--px)));
   opacity: 0;
   z-index: 7;
 }
 
 .crate-state-inside {
-  transform: scale(0) translateX(calc(460 * var(--px))) translateY(140px);
+  transform: scale(0) translateX(calc(460 * var(--px)));
   opacity: 0;
   z-index: 7;
 }
@@ -910,41 +911,44 @@ button {
   overflow: hidden;
 }
 
-/* Parallax machinery layers — far behind + near. */
+/* Parallax machinery layers — far behind + near.
+   Each layer is a 200%-wide flex container holding two identical tiles.
+   Animation shifts the container by -50% per loop, so tile-2 lands in
+   tile-1's start position before the snap-back. Seamless loop. */
 .inside-machinery {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   bottom: calc(20 * var(--px));
+  width: 200%;
+  display: flex;
   pointer-events: none;
+}
+
+.machinery-tile {
+  flex: 0 0 50%;
+  position: relative;
+  height: 100%;
 }
 
 .inside-machinery-far {
   z-index: 1;
-  animation: machinery-scroll-far 18s linear infinite;
+  animation: machinery-scroll 18s linear infinite;
   opacity: 0.55;
 }
 
 .inside-machinery-near {
   z-index: 2;
-  animation: machinery-scroll-near 9s linear infinite;
+  animation: machinery-scroll 9s linear infinite;
   opacity: 0.8;
 }
 
-@keyframes machinery-scroll-far {
+@keyframes machinery-scroll {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(calc(-360 * var(--px)));
-  }
-}
-
-@keyframes machinery-scroll-near {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-360 * var(--px)));
+    transform: translateX(-50%);
   }
 }
 
@@ -1019,9 +1023,25 @@ button {
   z-index: 3;
 }
 
+/* Belt strip on the inside scene scrolls in the opposite direction
+   to the dock — camera follows the crate, so the world (and belt
+   surface) moves leftward beneath it. */
+.inside-belt .belt-strip {
+  animation: inside-belt-scroll 0.9s linear infinite;
+}
+
+@keyframes inside-belt-scroll {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: calc(-8 * var(--px));
+  }
+}
+
 .inside-crate {
   position: absolute;
-  bottom: calc(22 * var(--px));
+  bottom: calc(10 * var(--px));
   left: 50%;
   transform: translateX(-50%) scale(0.6);
   transform-origin: center bottom;

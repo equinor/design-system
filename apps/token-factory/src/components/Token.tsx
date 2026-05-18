@@ -52,8 +52,8 @@ export function Token() {
       <rect x={5} y={18} width={2} height={3} fill="#5f574f" />
       <rect x={9} y={18} width={2} height={3} fill="#5f574f" />
       {/* feet */}
-      <rect x={4} y={leftFootY} width={3} height={2} fill="#1d2b53" />
-      <rect x={9} y={rightFootY} width={3} height={2} fill="#1d2b53" />
+      <rect x={4} y={leftFootY} width={3} height={2} fill="#ffa300" />
+      <rect x={9} y={rightFootY} width={3} height={2} fill="#ffa300" />
     </svg>
   )
 }
