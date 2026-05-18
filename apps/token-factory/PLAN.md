@@ -368,3 +368,22 @@ All 9 scenes wired end-to-end. Visual vocabulary is now consistent from dock thr
 - `NestedStones` (Scenes 4, 5)
 
 **Next: Phase E — Polish.** Audio (ZzFX), narrator copy pass end-to-end, multi-viewport smoke tests, internal review with Frida + Alex.
+
+### Phase D.10 — Pipeline accuracy audit + corrections ✓
+
+User asked for a thorough verification of the story against the actual pipeline because earlier sessions had baked in confident assumptions. Read `eds-tokens-sync/CLAUDE.md`, `eds-tokens-build/CLAUDE.md`, `eds-tokens/CLAUDE.md`, the build-dark-scope source, all token JSON files for `bg-floating`, and the published `variables.css` + package.json exports map.
+
+**Verified correct against the codebase:** `light-dark(#ffffff, #202223)` is the literal authored form in `color-scheme.css` (verified by grep); `#ffffff` resolves from `Light.Gray.2`; `#202223` resolves from `Dark.North sea.2`; `color-scheme.css` is the per-lane file output; sync uses Figma REST API; build-dark-scope produces the four selector contexts shown in Scene 8.
+
+**Discrepancies found and fixed (this phase):**
+
+- **Scene 5 — alias chain was three layers, not two** (commit `9a07f6e0a`). My earlier two-stone reduction was based on a confused framing where I had labelled the build-emitted CSS var name as the third stone. The actual chain is `Concept.Mode 1.json` → `🌗 Color scheme.Light.json` → `Color Light.Mode 1.json`, and the middle layer (the *scheme* alias) is the swap point that makes light/dark theming work — exactly the layer that was missing. Restored NestedStones to three concentric stones, extended Peel to 8 beats, rewrote the narrator copy to teach the *why* of three layers (swap the middle = change the colour without touching product code or palette).
+- **Scene 8 — sibling-lane mapping wrong** (this commit). `clasps from density` mixed up a sub-axis (density is a variant of spacing) with a top-level lane. The actual top-level lanes in `build/css/` are color, spacing, typography, elevation. Fixed to `clasps from elevation`.
+
+**Discrepancies surfaced but left as deliberate workshop simplifications:**
+
+- **Scene 1 lane count.** Visual shows 5 lanes (color-scheme, semantic, appearance, spacing, typography); narration says "the other four belts." Strictly, semantic + appearance live *inside* the color domain (not separate top-level lanes), and elevation is omitted. But the audience-level abstraction "logical categories of tokens" works at this granularity; matching the visual to the strict build/css/ structure would make the dock denser and less readable for a 4-min runtime.
+- **Scene 8/9 stamp `variables.css`.** `package.json` actually exports `./build/css/variables.min.css` for both `./css/variables` and `./css/variables.css` import paths, so consumers always receive the minified file. The workshop ends Scene 8 one step earlier (on the file `build-dark-scope` writes) per the locked decision to skip the minify step. This is a knowing simplification, not an error — record it here so a future reader doesn't `fix` it back.
+- **Scene 8 polish reason.** Narration "browsers without light-dark() still need to know which value to use" is shorthand for the deeper motivation per `eds-tokens/CLAUDE.md`: downstream lightningcss polyfills `light-dark()` *incorrectly* — its polyfill resolves at `:root` and breaks subtree-scoped dark mode (when a child element opts into a different scheme than the page root). The simpler framing is workshop-appropriate; the deeper reason is in `eds-tokens/CLAUDE.md` § Pitfalls for anyone digging deeper.
+
+**Audit lesson** (added to "Lessons from the first build"): when modelling the pipeline, *read the source code*, don't reason from the narration. I had previously invented `--eds-color-bg-floating-light/-dark` suffixed variables and a "fallback" framing — both untrue. Verify each pipeline claim against the actual file output before encoding it as a narrator beat.

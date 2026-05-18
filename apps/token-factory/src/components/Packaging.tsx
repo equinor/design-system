@@ -25,7 +25,7 @@ type LaneIcon = {
 
 const LANES: LaneIcon[] = [
   { label: 'cords', shape: 'cord', pkg: 'spacing' },
-  { label: 'clasps', shape: 'clasp', pkg: 'density' },
+  { label: 'clasps', shape: 'clasp', pkg: 'elevation' },
   { label: 'chains', shape: 'chain', pkg: 'typography' },
 ]
 
