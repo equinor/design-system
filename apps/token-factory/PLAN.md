@@ -160,8 +160,8 @@ Order:
 - D.2 — Scene 2: Inside (camera follows crate inward).
 - D.3 — Scene 3: Crack (extract `SlamPress.tsx` here).
 - D.4 — Scene 4: Reveal (new `Geode.tsx` — closed, cracked, three-stones states).
-- D.5 — Scene 5: Peel (slow, narrator-heavy).
-- D.6 — Scene 6: Cutting (new `Gemstone.tsx` — raw, faceted-two, three-explicit states).
+- D.5 — Scene 5: Peel (slow, narrator-heavy). ✓
+- D.6 — Scene 6: Cutting (new `Gemstone.tsx` — two-facet light/dark fusion + `light-dark()` declaration card). ✓
 - D.7 — Scene 7: Tray (collection of gemstones in `color-scheme.css` label).
 - D.8 — Scene 8: Packaging (bundle + dark-scope inspector polish).
 

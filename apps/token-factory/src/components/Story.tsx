@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { SCRIPT } from '../data/script'
 import { Narrator } from './Narrator'
 import { Crack } from './Crack'
+import { Cutting } from './Cutting'
 import { Dock } from './Dock'
 import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
@@ -64,7 +65,8 @@ export function Story() {
     id === 'inside' ||
     id === 'crack' ||
     id === 'reveal' ||
-    id === 'peel'
+    id === 'peel' ||
+    id === 'cutting'
 
   return (
     <>
@@ -73,6 +75,7 @@ export function Story() {
       {scene.id === 'crack' && <Crack activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'reveal' && <Reveal activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'peel' && <Peel activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'cutting' && <Cutting activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">
