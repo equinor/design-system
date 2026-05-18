@@ -825,7 +825,7 @@ button {
    to make it smaller than the lorry's cargo. */
 .dock-crate-journey {
   position: absolute;
-  bottom: calc(* var(--px));
+  bottom: calc(22 * var(--px));
   left: calc(12 * var(--px));
   display: flex;
   flex-direction: column;
@@ -844,15 +844,17 @@ button {
    each transform so it carries through the slide. */
 
 .crate-state-hidden {
-  transform: scale(0.6) translateX(calc(20 * var(--px)));
-  /* Behind the lorry — crate hidden by lorry-spot's higher z-index. */
-  opacity: 1;
+  /* Scale 0 = invisible. The crate is "inside" the lorry's cargo at the
+     centre of the lorry's footprint. Transition to peeking grows it AND
+     translates it out to the right edge of the lorry — the unload. */
+  transform: scale(0) translateX(calc(20 * var(--px)));
+  opacity: 0;
 }
 
 .crate-state-peeking {
-  transform: scale(0.6) translateX(calc(45 * var(--px)));
-  /* Peeks slightly out from behind the lorry, label visible. */
-  z-index: 4;
+  /* Just to the right of the lorry, fully visible on the belt. */
+  transform: scale(0.6) translateX(calc(90 * var(--px)));
+  z-index: 7;
 }
 
 .crate-state-sliding-to-worker {

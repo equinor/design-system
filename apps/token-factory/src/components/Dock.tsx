@@ -63,10 +63,10 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   const gateOpen = journey === 'entering' || journey === 'inside'
   const showReaction = journey === 'inspecting'
-  // Don't render the crate at all during 'hidden' (beats 0-1) — narrator
-  // hasn't introduced it yet. Also drop after 'inside' (it's in the
-  // building). Only visible from 'peeking' through 'entering'.
-  const crateVisible = journey !== 'hidden' && journey !== 'inside'
+  // Crate is always rendered except after it's entered the building.
+  // The 'hidden' state uses scale(0) inside the lorry so the move to
+  // 'peeking' reads as an unload animation rather than a pop-in.
+  const crateVisible = journey !== 'inside'
 
   return (
     <div className="dock-scene">
