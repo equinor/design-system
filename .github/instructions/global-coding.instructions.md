@@ -32,8 +32,7 @@ Use the global prettier config in the repository root. All files should pass Pre
 | Type            | Convention  | Example                             |
 | --------------- | ----------- | ----------------------------------- |
 | Components      | PascalCase  | `Button`, `TextInput`, `DataGrid`   |
-| Interfaces      | PascalCase  | `ButtonProps`, `TableColumn`        |
-| Types           | PascalCase  | `Theme`, `Variant`                  |
+| Types / Interfaces | PascalCase  | `ButtonProps`, `Theme`, `Variant`   |
 | Variables       | camelCase   | `buttonLabel`, `isDisabled`         |
 | Functions       | camelCase   | `handleClick`, `formatDate`         |
 | Constants       | ALL_CAPS    | `MAX_RETRIES`, `DEFAULT_TIMEOUT`    |

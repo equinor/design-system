@@ -41,7 +41,7 @@ OpenCode agents receive instructions from multiple sources, applied in this orde
 2. **AGENTS.md** - Repository-level guidance for all AI tools
 3. **Agent-specific instructions** - `.opencode/agent/*.md` files define agent behavior
 
-> **Note:** `.github/instructions/*.md` files are **not** loaded by OpenCode — they apply only to GitHub Copilot via `applyTo:` frontmatter globs. If an OpenCode agent needs file-pattern-specific guidance, put it in the agent body or reference the canonical doc in `documentation/how-to/`.
+> **Note:** `.github/instructions/*.md` files are **not** loaded by OpenCode — they apply only to GitHub Copilot via `applyTo:` frontmatter globs. If an OpenCode agent needs file-pattern-specific guidance, put it in the agent body or reference the canonical doc in `documentation/agent-instructions/`.
 
 ## Agent Types
 
@@ -62,6 +62,9 @@ Sub-agents are invoked by primary agents to perform specialized tasks. They cann
 |-------|-------------|-------|
 | `eds-component` | Builds EDS 2.0 React components following conventions | write, edit, bash |
 | `figma-component` | Builds components from Figma designs with MCP token extraction | write, edit, bash |
+| `accessibility-audit` | Audits components against WCAG 2.1 AA checklist | read-only (no write/edit/bash) |
+| `component-doc` | Creates and verifies component documentation | write, edit |
+| `audit-harnesses` | Audits AI harness configuration consistency | read-only (no write/edit/bash) |
 
 ## Agent Configuration
 
@@ -208,7 +211,10 @@ Refer to AGENTS.md for full conventions.
 │   ├── build.md        # Primary: Development agent
 │   ├── advisor.md      # Primary: Read-only advisor
 │   ├── eds-component.md    # Sub-agent: Component builder
-│   └── figma-component.md  # Sub-agent: Figma-to-code
+│   ├── figma-component.md  # Sub-agent: Figma-to-code
+│   ├── accessibility-audit.md  # Sub-agent: A11y auditor
+│   ├── component-doc.md    # Sub-agent: Documentation
+│   └── audit-harnesses.md  # Sub-agent: Harness auditor
 ```
 
 ## Best Practices
