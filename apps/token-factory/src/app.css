@@ -1533,7 +1533,7 @@ button {
 .peel-stamp-head {
   width: 100%;
   height: calc(14 * var(--px));
-  background: var(--pico-dark-purple);
+  background: var(--pico-dark-gray);
   border: var(--px) solid var(--pico-white);
   display: flex;
   align-items: center;

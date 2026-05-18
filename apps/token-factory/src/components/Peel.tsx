@@ -79,12 +79,8 @@ export function Peel({ activeBeatIdx }: { activeBeatIdx: number }) {
               <div className="peel-stamp-frame peel-stamp-frame-left" />
               <div className="peel-stamp-frame peel-stamp-frame-right" />
               <div className="peel-stamp-hammer">
-                <div className="peel-stamp-head">
-                  <span className="peel-stamp-label">
-                    @equinor/eds-tokens-build
-                  </span>
-                </div>
                 <div className="peel-stamp-shaft" />
+                <div className="peel-stamp-head" />
               </div>
             </div>
           )}
