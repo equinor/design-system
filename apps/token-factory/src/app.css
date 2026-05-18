@@ -344,6 +344,41 @@ button {
   font-size: calc(5 * var(--px));
 }
 
+/* ===== Scene header bar (shared across all story scenes) ===== */
+
+.scene-header-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(16 * var(--px));
+  background: var(--pico-black);
+  border-bottom: var(--px) solid var(--pico-dark-purple);
+  z-index: 20;
+}
+
+.scene-header-pkg {
+  position: absolute;
+  left: calc(6 * var(--px));
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: calc(4 * var(--px));
+  color: var(--pico-blue);
+  letter-spacing: calc(0.5 * var(--px));
+}
+
+/* Title centred horizontally in the bar — keeps clear of the narrator
+   overlay pinned in the top-right of the stage. */
+.scene-header-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(5 * var(--px));
+  color: var(--pico-yellow);
+  letter-spacing: calc(1 * var(--px));
+}
+
 /* ===== Story hint (Phase B) ============================== */
 
 .story-hint {
@@ -1152,7 +1187,7 @@ button {
    floor/anvil base the crate sits on. */
 .press-rig {
   position: absolute;
-  bottom: calc(36 * var(--px));
+  bottom: calc(10 * var(--px));
   left: 50%;
   transform: translateX(-50%);
   width: calc(100 * var(--px));
@@ -1225,22 +1260,32 @@ button {
   }
 }
 
-.press-floor {
+/* Static belt at the bottom of the Crack scene — same stripes as the
+   other scenes' conveyors, but no scroll animation (the press is
+   stationary; the belt isn't moving). */
+.crack-belt {
   position: absolute;
   bottom: 0;
-  left: calc(-10 * var(--px));
-  right: calc(-10 * var(--px));
-  height: calc(6 * var(--px));
+  left: 0;
+  right: 0;
+  height: calc(20 * var(--px));
   background: var(--pico-dark-gray);
   border-top: var(--px) solid var(--pico-light-gray);
+  border-bottom: var(--px) solid var(--pico-black);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.crack-belt .belt-strip {
+  animation: none;
 }
 
 /* The crate sits beneath the press, on the floor. */
 .crack-crate {
   position: absolute;
-  bottom: calc(42 * var(--px));
+  bottom: calc(19 * var(--px));
   left: 50%;
-  transform: translateX(-50%) scale(0.7);
+  transform: translateX(-50%) scale(0.6);
   transform-origin: center bottom;
   z-index: 3;
   transition: opacity 200ms steps(2, end);
@@ -1256,7 +1301,7 @@ button {
    open crate, below the press hammer (which has retracted back up). */
 .crack-geode {
   position: absolute;
-  bottom: calc(58 * var(--px));
+  bottom: calc(38 * var(--px));
   left: 50%;
   transform: translateX(-50%) scale(1.1);
   transform-origin: center bottom;

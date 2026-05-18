@@ -3,6 +3,7 @@ import { Building } from './Building'
 import { Crate } from './Crate'
 import { Gate } from './Gate'
 import { Lorry } from './Lorry'
+import { SceneHeader } from './SceneHeader'
 import { Token } from './Token'
 
 // Scene 1 — The Goods Terminal.
@@ -70,12 +71,7 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   return (
     <div className="dock-scene">
-      {/* terminal sign */}
-      <div
-        className={`terminal-sign ${activeBeatIdx === 1 ? 'is-pulsing' : ''}`}
-      >
-        <span>★ EDS-TOKENS-SYNC TERMINAL ★</span>
-      </div>
+      <SceneHeader pkg="@equinor/eds-tokens-sync" title="GOODS TERMINAL" />
 
       {/* lane indicator (top-left) — destination labels, not parallel belts */}
       <div

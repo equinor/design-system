@@ -1,4 +1,5 @@
 import { Crate } from './Crate'
+import { SceneHeader } from './SceneHeader'
 
 // Scene 2 — Inside the Factory.
 // Transition beat. Camera follows the crate; machinery silhouettes
@@ -43,6 +44,7 @@ export function Inside({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   return (
     <div className="inside-scene">
+      <SceneHeader pkg="@equinor/eds-tokens" title="INSIDE THE FACTORY" />
       {/* far-back machinery silhouettes — two tiles, slow scroll */}
       <div className="inside-machinery inside-machinery-far">
         <FarMachineryTile />

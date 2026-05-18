@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Crate } from './Crate'
 import { Geode } from './Geode'
+import { SceneHeader } from './SceneHeader'
 
 // Scene 3 — The Crack.
 // The crate sits under a slam press at the build station. On beat 1
@@ -38,10 +39,9 @@ export function Crack({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   return (
     <div className={`crack-scene ${isSlamming ? 'is-shaking' : ''}`}>
-      {/* build station label */}
-      <div className="crack-station-label">★ BUILD STATION ★</div>
+      <SceneHeader pkg="@equinor/eds-tokens-build" title="BUILD STATION" />
 
-      {/* the press: frame + head + base */}
+      {/* the press: frame + head (sits on the belt below) */}
       <div className="press-rig">
         <div className="press-frame press-frame-left" />
         <div className="press-frame press-frame-right" />
@@ -49,7 +49,12 @@ export function Crack({ activeBeatIdx }: { activeBeatIdx: number }) {
           <div className="press-hammer-shaft" />
           <div className="press-hammer-head" />
         </div>
-        <div className="press-floor" />
+      </div>
+
+      {/* static conveyor belt running across the bottom — same look as
+          the dock/inside belts but no scroll animation. */}
+      <div className="crack-belt">
+        <div className="belt-strip" />
       </div>
 
       {/* the crate on the floor */}

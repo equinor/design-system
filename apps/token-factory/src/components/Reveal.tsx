@@ -1,5 +1,6 @@
 import { Geode } from './Geode'
 import { NestedStones } from './NestedStones'
+import { SceneHeader } from './SceneHeader'
 
 // Scene 4 — The Reveal.
 // Camera close-up on the geode. On beat 1 it cracks open, revealing
@@ -17,7 +18,7 @@ export function Reveal({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   return (
     <div className="reveal-scene">
-      <div className="reveal-title">★ INSPECTION ★</div>
+      <SceneHeader pkg="@equinor/eds-tokens-build" title="INSPECTION" />
 
       <div className="reveal-stage">
         {!opened && (

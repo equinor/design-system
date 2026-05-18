@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Necklace, type NecklaceState } from './Necklace'
+import { SceneHeader } from './SceneHeader'
 import { Token } from './Token'
 
 // Scene 9 — the payoff. Box arrives at the EDS product team workshop.
@@ -52,10 +53,7 @@ export function Jeweller({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   return (
     <div className="jeweller-scene">
-      {/* shop sign */}
-      <div className="shop-sign">
-        <span>★ EDS PRODUCT TEAM ★</span>
-      </div>
+      <SceneHeader pkg="@equinor/eds-core-react" title="EDS PRODUCT TEAM" />
 
       {/* workshop interior — simple silhouettes for atmosphere */}
       <div className="shop-interior">
