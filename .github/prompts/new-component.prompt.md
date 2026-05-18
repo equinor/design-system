@@ -1,10 +1,15 @@
+---
+mode: agent
+description: Scaffold a new EDS 2.0 component with all required files
+---
+
 # Create New EDS 2.0 Component
 
-Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/src/components/next/`.
+Scaffold a new EDS 2.0 component named `${input:componentName}` in `packages/eds-core-react/src/components/next/`.
 
 > **Canonical reference:** [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
 
-This command focuses on the per-component scaffolding flow. The patterns and code templates referenced below all live in the canonical doc above — read them there rather than inferring from memory.
+This prompt focuses on the per-component scaffolding flow. The patterns and code templates referenced below all live in the canonical doc above — read them there rather than inferring from memory.
 
 ## Workflow
 
@@ -15,22 +20,22 @@ This command focuses on the per-component scaffolding flow. The patterns and cod
 
 2. **Check for existing components to reuse** in `packages/eds-core-react/src/components/next/index.ts`. Prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography` over reinventing.
 
-3. **If an old component exists** at `packages/eds-core-react/src/components/$ARGUMENTS/`, read it for behavioural awareness (keyboard nav, focus management) only — do not copy implementation. Use modern patterns: `:focus-visible`, CSS tokens, simple state.
+3. **If an old component exists** at `packages/eds-core-react/src/components/${input:componentName}/`, read it for behavioural awareness (keyboard nav, focus management) only — do not copy implementation. Use modern patterns: `:focus-visible`, CSS tokens, simple state.
 
 4. **Create the component folder** with all required files using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#file-templates):
 
    ```
-   $ARGUMENTS/
+   ${input:componentName}/
      index.ts
-     $ARGUMENTS.tsx
-     $ARGUMENTS.types.ts
-     <lowercase>.css                (e.g. avatar.css)
-     $ARGUMENTS.figma.tsx           (only if a Figma URL was provided)
-     $ARGUMENTS.test.tsx
-     $ARGUMENTS.stories.tsx
+     ${input:componentName}.tsx
+     ${input:componentName}.types.ts
+     <lowercase>.css
+     ${input:componentName}.figma.tsx   (only if a Figma URL was provided)
+     ${input:componentName}.test.tsx
+     ${input:componentName}.stories.tsx
    ```
 
-   Substitute `$ARGUMENTS` for the component name and use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
+   Use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
 
 5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package):
    - Export from `next/index.ts`
