@@ -269,3 +269,36 @@ Phase C exit criteria met: Scene 9 plays in isolation, real `<Button>` renders c
 **Verified in Chrome:** scene routes correctly, narrator drives beat state, belts highlight at beat 3, crate animates at beat 4 (but to wrong position).
 
 Pausing here for review before continuing to Scene 2 (Inside the Factory).
+
+### Phase D.1b — Scene 1 redesigned per user mockup
+
+User provided a target mockup showing a more grounded composition than my first cut: lane labels stacked top-left as a *destination indicator* (not five parallel physical belts), one horizontal conveyor running the full stage width at the bottom, a factory building with stepped silhouette + gate on the right, and the crate sliding horizontally along the belt with a pause at the worker for inspection before passing through the gate into the building.
+
+**New components:**
+- `Building.tsx` — pixel-art factory silhouette with stepped roof (three tiers, each progressively taller toward the right), chimney on tallest tier, one small blue window per roof level. Base wall + 3 stepped roof rectangles, dark grey colour, fills the right edge of the stage.
+- `Gate.tsx` — sliding gate with two halves (top half slides up, bottom half slides down) when `open` prop is true. Inline-SVG planks rendered with `preserveAspectRatio="none"` so they stretch to fit the frame.
+
+**Restructured `Dock.tsx`:**
+- Lane labels moved from right-side rails to a vertical stack at top-left. They no longer have arrows pointing into separate physical belts — they're a *destination indicator*. Color Scheme bright when `activeBeatIdx >= 3`, siblings dim to 20%.
+- One horizontal conveyor belt at the bottom of the stage, running full width with `repeating-linear-gradient` stripes that scroll via `belt-scroll` animation.
+- Lorry repositioned to sit on the belt at the left end.
+- Worker repositioned to stand on the belt in the middle.
+- Factory building anchored bottom-right; gate-frame at its base where the belt enters.
+- Crate has two positioning modes: `dock-crate-on-lorry` (visible during beats 2–3, sits on top of the lorry's cargo with a "color scheme" label), and `dock-crate-journey` (visible during beat 4+, slides via state-class transforms).
+
+**Crate journey state machine:**
+- `idle` — pre-beat-4, crate hidden.
+- `sliding-1` — `translateX(60px)` over 1200ms (lorry → just before worker). Triggered at beat 4.
+- `inspecting` — `translateX(140px)`, paused at worker. After 1400ms.
+- `sliding-2` — `translateX(280px)` over 1200ms (worker → gate). After 2400ms.
+- `entering` — `translateX(298px)`, gate is open. After 3600ms.
+- `inside` — `translateX(305px)`, opacity 0, crate disappeared into building. After 4400ms.
+
+The `Gate.open` prop is `journey === 'entering' || journey === 'inside'` — gate slides open just as the crate arrives, closes once it's inside.
+
+**Verified in Chrome:** layout matches the mockup. All elements render at correct positions. Crate visible sliding mid-journey during beat 4 (transition timing works). Lane indicator highlights at beat 3. Gate opens for the crate.
+
+**Known carry-over bugs not yet fixed:**
+1. **"FIE" still showing on lorry cargo** instead of "FIGMA". Manual pixel-rect letters incomplete. Three replacement options proposed (pixel-rect redo, SVG `<text>` element, or drop the wordmark).
+2. **Beat-4 crate has no "color scheme" label** — only the on-lorry crate (beats 2–3) shows the label. Could carry it along.
+3. **Crate doesn't visibly "pause" at worker** — the state transition happens but the worker doesn't react. Could add a brief worker animation (pause to read) or a thought bubble.

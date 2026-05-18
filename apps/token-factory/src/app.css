@@ -563,24 +563,26 @@ button {
   background: var(--eds-color-bg-accent-fill-emphasis-active);
 }
 
-/* ===== Scene 1: The Dock (Phase D.1) ============================== */
+/* ===== Scene 1: The Dock (Phase D.1, redesigned) ================== */
 
 .dock-scene {
   flex: 1;
   position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr;
 }
 
 .terminal-sign {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   text-align: center;
   font-size: calc(6 * var(--px));
   color: var(--pico-yellow);
   letter-spacing: calc(1 * var(--px));
-  padding: calc(6 * var(--px)) 0 calc(2 * var(--px));
+  padding: calc(4 * var(--px)) 0 calc(2 * var(--px));
   background: var(--pico-black);
   border-bottom: var(--px) solid var(--pico-dark-purple);
-  transition: color 200ms steps(2, end);
+  z-index: 5;
 }
 
 .terminal-sign.is-pulsing {
@@ -597,10 +599,165 @@ button {
   }
 }
 
+/* Lane indicator: destination labels at top-left, NOT physical belts. */
+.lane-indicator {
+  position: absolute;
+  top: calc(20 * var(--px));
+  left: calc(6 * var(--px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--px));
+  z-index: 3;
+  width: calc(130 * var(--px));
+}
+
+.lane-row {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--px));
+  padding: calc(2 * var(--px)) calc(4 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  opacity: 0.4;
+  transition: opacity 200ms steps(2, end);
+}
+
+.lane-indicator.is-highlighted .lane-active {
+  opacity: 1;
+  border-color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+}
+
+.lane-indicator.is-highlighted .lane-sibling {
+  opacity: 0.2;
+}
+
+.lane-swatch {
+  width: calc(4 * var(--px));
+  height: calc(4 * var(--px));
+  border: var(--px) solid var(--pico-white);
+  flex-shrink: 0;
+}
+
+.lane-name {
+  color: var(--pico-light-gray);
+  flex: 1;
+}
+
+.lane-active .lane-name {
+  color: var(--pico-yellow);
+}
+
+.lane-arrow {
+  color: var(--pico-dark-gray);
+  font-family: monospace;
+}
+
+.lane-active .lane-arrow {
+  color: var(--pico-yellow);
+}
+
+/* Factory building right side. */
+.factory-building {
+  position: absolute;
+  bottom: calc(20 * var(--px));
+  right: 0;
+  width: calc(80 * var(--px));
+  height: calc(140 * var(--px));
+  z-index: 2;
+}
+
+.building-sprite {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.gate-frame {
+  position: absolute;
+  bottom: 0;
+  left: calc(8 * var(--px));
+  width: calc(20 * var(--px));
+  height: calc(24 * var(--px));
+  background: #000;
+  border-left: var(--px) solid var(--pico-dark-gray);
+  border-right: var(--px) solid var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-dark-gray);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.gate {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gate-half {
+  flex: 1;
+  width: 100%;
+  transition: transform 400ms steps(4, end);
+}
+
+.gate-half svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.gate.is-open .gate-top {
+  transform: translateY(-100%);
+}
+
+.gate.is-open .gate-bottom {
+  transform: translateY(100%);
+}
+
+/* The horizontal conveyor belt running the full stage width. */
+.dock-belt {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(20 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+  border-bottom: var(--px) solid var(--pico-black);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.belt-strip {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--pico-dark-gray) 0,
+    var(--pico-dark-gray) calc(7 * var(--px)),
+    var(--pico-black) calc(7 * var(--px)),
+    var(--pico-black) calc(8 * var(--px))
+  );
+  animation: belt-scroll 0.9s linear infinite;
+}
+
+@keyframes belt-scroll {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: calc(-8 * var(--px));
+  }
+}
+
 .lorry-spot {
   position: absolute;
   bottom: calc(20 * var(--px));
-  left: calc(8 * var(--px));
+  left: calc(4 * var(--px));
   z-index: 2;
 }
 
@@ -611,17 +768,62 @@ button {
   display: block;
 }
 
-.crate-on-lorry {
+.dock-worker {
   position: absolute;
-  top: calc(-30 * var(--px));
-  left: calc(12 * var(--px));
+  bottom: calc(20 * var(--px));
+  left: calc(180 * var(--px));
+  z-index: 3;
+}
+
+/* The crate — two positioning modes: on-lorry (beats 2–3) and journey
+   (beat 4+). The journey crate slides horizontally via transform on
+   state-class changes. */
+.dock-crate {
+  z-index: 4;
+}
+
+.dock-crate-on-lorry {
+  position: absolute;
+  bottom: calc(48 * var(--px));
+  left: calc(14 * var(--px));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(2 * var(--px));
 }
 
-.crate-label {
+.dock-crate-journey {
+  position: absolute;
+  bottom: calc(22 * var(--px));
+  left: 0;
+  transition:
+    transform 1200ms steps(12, end),
+    opacity 600ms steps(4, end);
+}
+
+.crate-state-sliding-1 {
+  transform: translateX(calc(60 * var(--px)));
+}
+
+.crate-state-inspecting {
+  transform: translateX(calc(140 * var(--px)));
+}
+
+.crate-state-sliding-2 {
+  transform: translateX(calc(280 * var(--px)));
+}
+
+.crate-state-entering {
+  transform: translateX(calc(298 * var(--px)));
+}
+
+.crate-state-inside {
+  transform: translateX(calc(305 * var(--px)));
+  opacity: 0;
+}
+
+/* On-lorry crate label */
+.dock-crate-on-lorry .crate-label {
   font-size: calc(4 * var(--px));
   text-transform: uppercase;
   color: var(--pico-yellow);
@@ -629,109 +831,4 @@ button {
   padding: calc(1 * var(--px)) calc(3 * var(--px));
   border: var(--px) solid var(--pico-white);
   white-space: nowrap;
-}
-
-.dock-ramp {
-  position: absolute;
-  bottom: calc(-2 * var(--px));
-  left: calc(80 * var(--px));
-  width: calc(20 * var(--px));
-  height: calc(4 * var(--px));
-  background: var(--pico-dark-gray);
-  border-top: var(--px) solid var(--pico-light-gray);
-}
-
-.dock-worker {
-  position: absolute;
-  bottom: calc(24 * var(--px));
-  left: calc(100 * var(--px));
-  z-index: 3;
-}
-
-.belt-stack {
-  position: absolute;
-  right: 0;
-  top: calc(28 * var(--px));
-  bottom: calc(20 * var(--px));
-  width: calc(180 * var(--px));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: calc(3 * var(--px));
-  padding-right: 0;
-  z-index: 1;
-}
-
-.belt-rail {
-  display: flex;
-  align-items: center;
-  gap: calc(3 * var(--px));
-  height: calc(14 * var(--px));
-  padding: 0 calc(4 * var(--px));
-  background: var(--pico-black);
-  border: var(--px) solid var(--pico-dark-gray);
-  font-size: calc(4 * var(--px));
-  text-transform: uppercase;
-  opacity: 0.35;
-  transition: opacity 200ms steps(2, end);
-}
-
-.belt-stack.is-highlighted .belt-active {
-  opacity: 1;
-  border-color: var(--pico-yellow);
-  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
-}
-
-.belt-stack.is-highlighted .belt-sibling {
-  opacity: 0.2;
-}
-
-.belt-swatch {
-  width: calc(4 * var(--px));
-  height: calc(4 * var(--px));
-  border: var(--px) solid var(--pico-white);
-  flex-shrink: 0;
-}
-
-.belt-label {
-  color: var(--pico-light-gray);
-  flex: 1;
-}
-
-.belt-active .belt-label {
-  color: var(--pico-yellow);
-}
-
-.belt-arrow {
-  color: var(--pico-dark-gray);
-  font-family: monospace;
-}
-
-.belt-active .belt-arrow {
-  color: var(--pico-yellow);
-}
-
-/* Crate in transit: animates from lorry position onto the active belt. */
-.crate-in-transit {
-  position: absolute;
-  bottom: calc(45 * var(--px));
-  left: calc(24 * var(--px));
-  z-index: 4;
-  animation: crate-sort 2200ms steps(8, end) forwards;
-}
-
-@keyframes crate-sort {
-  0% {
-    transform: translate(0, 0);
-  }
-  40% {
-    transform: translate(calc(110 * var(--px)), calc(-25 * var(--px)));
-  }
-  60% {
-    transform: translate(calc(150 * var(--px)), calc(-15 * var(--px)));
-  }
-  100% {
-    transform: translate(calc(260 * var(--px)), calc(-15 * var(--px)));
-    opacity: 1;
-  }
 }
