@@ -247,3 +247,25 @@ Built the bookend first so the end-state is validated before the rest. The pixel
 - The bench-components tags at beat 1 feel pedagogical rather than narrative — could be replaced with mini-sprites of each component appearing one at a time.
 
 Phase C exit criteria met: Scene 9 plays in isolation, real `<Button>` renders correctly with real EDS variables. Time to build Scenes 1–8.
+
+### Phase D.1 — Scene 1 (The Dock) — first draft, awaiting review
+
+**Scope.** Lorry with Figma logo parked at the goods terminal. Five conveyor belts visible. Worker between lorry and belts. Beat-driven state machine: terminal sign pulses at beat 1, crate appears on lorry at beat 2, belts brighten/dim at beat 3, crate animates onto the Color Scheme belt at beat 4.
+
+**New components.**
+- `Lorry.tsx` — 80×40 logical pixel-art lorry. Cargo + cab + window + 3 wheels + headlight. Figma logo on the cargo panel as 4 stacked coloured squares (orange/purple/green/blue).
+- `Dock.tsx` — Scene 1 component. Terminal sign top, lorry-spot bottom-left, dock worker (Token sprite), belt-stack right side with 5 lane rows (color-scheme + 4 siblings). Crate-in-transit element with keyframe animation.
+
+**Modified.**
+- `Story.tsx` — added `Dock` import and route for `scene.id === 'dock'`. Updated `isReady` helper.
+- `app.css` — added `.dock-scene`, `.terminal-sign` + pulse keyframe, `.lorry-spot` + `.lorry-sprite`, `.crate-on-lorry` + `.crate-label`, `.dock-worker`, `.belt-stack` + `.belt-rail` + active/sibling states, `.crate-in-transit` + `crate-sort` keyframe.
+
+**Known issues in this draft (awaiting evaluation):**
+1. **"FIGMA" text on lorry cargo only reads "FIE"** — manual pixel-rect letter drawing is incomplete. Letters need to be redone or replaced with the actual Figma wordmark in another way (image asset, or simplified inline-SVG path).
+2. **Crate-sort animation lands on the wrong belt** — keyframes target `translate(260px, -15px)` which ends up at the Spacing belt level, not Color Scheme. Y translation needs to be significantly more negative (~-110px) to land on the top belt.
+3. **Mid-scene sparseness** — large empty space between the lorry (bottom-left) and the belt stack (right). Could add machinery silhouettes or compress horizontally.
+4. **Crate-on-lorry visibility** — beat 2 should show the crate sitting on the lorry's cargo bed. Position needs verification (current `top: -30 * var(--px)` may be off).
+
+**Verified in Chrome:** scene routes correctly, narrator drives beat state, belts highlight at beat 3, crate animates at beat 4 (but to wrong position).
+
+Pausing here for review before continuing to Scene 2 (Inside the Factory).

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { SCRIPT } from '../data/script'
 import { Narrator } from './Narrator'
+import { Dock } from './Dock'
 import { Jeweller } from './Jeweller'
 
 // Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
@@ -53,13 +54,13 @@ export function Story() {
     return () => window.removeEventListener('keydown', handler)
   }, [advance, back, skip])
 
-  const isReady = (id: string) => id === 'jeweller'
+  const isReady = (id: string) => id === 'jeweller' || id === 'dock'
 
   return (
     <>
-      {scene.id === 'jeweller' ? (
-        <Jeweller activeBeatIdx={activeBeatIdx} />
-      ) : (
+      {scene.id === 'dock' && <Dock activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
+      {!isReady(scene.id) && (
         <div className="scene-placeholder">
           <div className="scene-header">
             <span className="scene-counter">

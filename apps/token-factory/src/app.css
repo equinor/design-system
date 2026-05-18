@@ -562,3 +562,176 @@ button {
 .showroom-button:active {
   background: var(--eds-color-bg-accent-fill-emphasis-active);
 }
+
+/* ===== Scene 1: The Dock (Phase D.1) ============================== */
+
+.dock-scene {
+  flex: 1;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.terminal-sign {
+  text-align: center;
+  font-size: calc(6 * var(--px));
+  color: var(--pico-yellow);
+  letter-spacing: calc(1 * var(--px));
+  padding: calc(6 * var(--px)) 0 calc(2 * var(--px));
+  background: var(--pico-black);
+  border-bottom: var(--px) solid var(--pico-dark-purple);
+  transition: color 200ms steps(2, end);
+}
+
+.terminal-sign.is-pulsing {
+  animation: terminal-pulse 600ms steps(3, end) infinite;
+}
+
+@keyframes terminal-pulse {
+  0%,
+  100% {
+    color: var(--pico-yellow);
+  }
+  50% {
+    color: var(--pico-orange);
+  }
+}
+
+.lorry-spot {
+  position: absolute;
+  bottom: calc(20 * var(--px));
+  left: calc(8 * var(--px));
+  z-index: 2;
+}
+
+.lorry-sprite {
+  width: calc(80 * var(--px));
+  height: calc(40 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+.crate-on-lorry {
+  position: absolute;
+  top: calc(-30 * var(--px));
+  left: calc(12 * var(--px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+}
+
+.crate-label {
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  color: var(--pico-yellow);
+  background: var(--pico-dark-purple);
+  padding: calc(1 * var(--px)) calc(3 * var(--px));
+  border: var(--px) solid var(--pico-white);
+  white-space: nowrap;
+}
+
+.dock-ramp {
+  position: absolute;
+  bottom: calc(-2 * var(--px));
+  left: calc(80 * var(--px));
+  width: calc(20 * var(--px));
+  height: calc(4 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+}
+
+.dock-worker {
+  position: absolute;
+  bottom: calc(24 * var(--px));
+  left: calc(100 * var(--px));
+  z-index: 3;
+}
+
+.belt-stack {
+  position: absolute;
+  right: 0;
+  top: calc(28 * var(--px));
+  bottom: calc(20 * var(--px));
+  width: calc(180 * var(--px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(3 * var(--px));
+  padding-right: 0;
+  z-index: 1;
+}
+
+.belt-rail {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--px));
+  height: calc(14 * var(--px));
+  padding: 0 calc(4 * var(--px));
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-dark-gray);
+  font-size: calc(4 * var(--px));
+  text-transform: uppercase;
+  opacity: 0.35;
+  transition: opacity 200ms steps(2, end);
+}
+
+.belt-stack.is-highlighted .belt-active {
+  opacity: 1;
+  border-color: var(--pico-yellow);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+}
+
+.belt-stack.is-highlighted .belt-sibling {
+  opacity: 0.2;
+}
+
+.belt-swatch {
+  width: calc(4 * var(--px));
+  height: calc(4 * var(--px));
+  border: var(--px) solid var(--pico-white);
+  flex-shrink: 0;
+}
+
+.belt-label {
+  color: var(--pico-light-gray);
+  flex: 1;
+}
+
+.belt-active .belt-label {
+  color: var(--pico-yellow);
+}
+
+.belt-arrow {
+  color: var(--pico-dark-gray);
+  font-family: monospace;
+}
+
+.belt-active .belt-arrow {
+  color: var(--pico-yellow);
+}
+
+/* Crate in transit: animates from lorry position onto the active belt. */
+.crate-in-transit {
+  position: absolute;
+  bottom: calc(45 * var(--px));
+  left: calc(24 * var(--px));
+  z-index: 4;
+  animation: crate-sort 2200ms steps(8, end) forwards;
+}
+
+@keyframes crate-sort {
+  0% {
+    transform: translate(0, 0);
+  }
+  40% {
+    transform: translate(calc(110 * var(--px)), calc(-25 * var(--px)));
+  }
+  60% {
+    transform: translate(calc(150 * var(--px)), calc(-15 * var(--px)));
+  }
+  100% {
+    transform: translate(calc(260 * var(--px)), calc(-15 * var(--px)));
+    opacity: 1;
+  }
+}
