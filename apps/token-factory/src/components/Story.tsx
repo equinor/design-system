@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { SCRIPT } from '../data/script'
 import { Narrator } from './Narrator'
+import { Jeweller } from './Jeweller'
 
 // Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
 // the narrator skip-tick counter, and the keyboard handler.
@@ -12,7 +13,13 @@ import { Narrator } from './Narrator'
 export function Story() {
   const [sceneIdx, setSceneIdx] = useState(0)
   const [skipTick, setSkipTick] = useState(0)
+  const [activeBeatIdx, setActiveBeatIdx] = useState(0)
   const scene = SCRIPT[sceneIdx]
+
+  // Reset the beat index when the scene changes.
+  useEffect(() => {
+    setActiveBeatIdx(0)
+  }, [sceneIdx])
 
   const advance = useCallback(() => {
     setSceneIdx((i) => (i + 1) % SCRIPT.length)
@@ -46,23 +53,38 @@ export function Story() {
     return () => window.removeEventListener('keydown', handler)
   }, [advance, back, skip])
 
+  const isReady = (id: string) => id === 'jeweller'
+
   return (
     <>
-      <div className="scene-placeholder">
-        <div className="scene-header">
-          <span className="scene-counter">
-            scene {sceneIdx + 1} / {SCRIPT.length}
-          </span>
-          <span className="scene-title">{scene.title}</span>
+      {scene.id === 'jeweller' ? (
+        <Jeweller activeBeatIdx={activeBeatIdx} />
+      ) : (
+        <div className="scene-placeholder">
+          <div className="scene-header">
+            <span className="scene-counter">
+              scene {sceneIdx + 1} / {SCRIPT.length}
+            </span>
+            <span className="scene-title">{scene.title}</span>
+          </div>
+          <div className="scene-body">
+            <p>scene visuals land in phase d</p>
+          </div>
         </div>
-        <div className="scene-body">
-          <p>scene visuals land in phase c+</p>
-        </div>
-      </div>
+      )}
 
-      <Narrator lines={scene.lines} skipTick={skipTick} />
+      <Narrator
+        lines={scene.lines}
+        skipTick={skipTick}
+        onBeatChange={setActiveBeatIdx}
+      />
 
       <div className="story-hint">
+        {!isReady(scene.id) && (
+          <>
+            <span className="hint-label">phase b scaffold ·</span>
+          </>
+        )}
         <span className="hint-key">[ space ]</span>
         <span className="hint-label">skip / next line</span>
         <span className="hint-sep">·</span>

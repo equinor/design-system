@@ -220,3 +220,30 @@ Filled in as each chunk completes. The pre-rebuild history (Phases 0 through 5.5
 Verified in Chrome via DevTools: boot loads on Scene 1, narrator auto-types beat 1, hold, auto-advances to beat 2, caret blinking. No console errors.
 
 Next: **Phase C — Scene 9 first.** Build the Jeweller scene including the pixel-art-to-real-Button reveal so the end-state is validated before scenes 1–8 build out.
+
+### Phase C — Scene 9 (Jeweller, the payoff) ✓
+
+Built the bookend first so the end-state is validated before the rest. The pixel-to-real-`<Button>` reveal is the strongest emotional beat in the whole story — if it doesn't land, scenes 1–8 have no destination.
+
+**New:**
+- `Necklace.tsx` — 48×40 logical pixel-art sprite with 4 states (`none` / `gem` / `cord` / `full`). Gemstone is a faceted teal jewel; cord is a grey strand looping around the top; clasp is a small metal piece. Inline-SVG, `shape-rendering="crispEdges"`.
+- `Jeweller.tsx` — Scene 9 component. Shop sign top, simple silhouette interior, jeweller character (kept `Token` sprite), workbench surface, and the display zone where the necklace assembles and then dissolves into the real Button.
+- Beat-driven state machine: beat 0 = empty bench; beat 1 = three component tags appear (gem / cord / clasp); beat 2 = sub-timed assembly (gem at +0ms, +cord at +700ms, +clasp at +1500ms); beat 3 = `revealing` phase (necklace fades out over 600ms); beat 4+ = `revealed` (real `<Button>` visible).
+
+**Modified:**
+- `Narrator.tsx` — added `onBeatChange(idx)` callback. Emits whenever `lineIdx` changes so the active scene can drive visuals in lock-step with the narration.
+- `Story.tsx` — hoisted `activeBeatIdx` state, resets it when `sceneIdx` changes, passes it down to whichever scene is rendering. Routes `scene.id === 'jeweller'` to `<Jeweller />`, all other ids still fall through to the Phase B placeholder.
+- `app.css` — added the Jeweller layout, shop sign, interior silhouettes, workbench, component tags, necklace sprite styles, fade-out transition, and the `.real-button-display` reveal with `animation: button-reveal 600ms steps(3, end)`. The `.showroom-button` rule explicitly sets `image-rendering: auto` to override the global pixelated rule — the visual cue that the world has shifted to "real."
+
+**Verified in Chrome via DevTools:**
+- Pressed ArrowRight ×8 to jump straight to Scene 9. Shop sign, jeweller, bench rendered cleanly.
+- Pressed Space repeatedly to walk through narrator beats 0→4. Component tags showed at beat 1; necklace sub-timing landed (gem → cord → full); reveal triggered on beat 3; real `<Button>` with teal accent + Inter font sat on the bench at beat 4.
+- The real `<Button>` resolves `var(--eds-color-bg-accent-fill-emphasis-default)` correctly — that's the entire eds-tokens pipeline working in production right inside the workshop game.
+
+**Known polish items for Phase E (deliberately not fixed now):**
+- Workshop interior reads sparse — walls and windows are dark blue silhouettes that don't feel grounded. A real Aseprite background would help.
+- Jeweller character is the existing Token sprite — could use a colour variant to read as "different person from the factory worker."
+- Necklace-to-Button transition is a fade; could become a "shatter" or "dissolve" for more drama.
+- The bench-components tags at beat 1 feel pedagogical rather than narrative — could be replaced with mini-sprites of each component appearing one at a time.
+
+Phase C exit criteria met: Scene 9 plays in isolation, real `<Button>` renders correctly with real EDS variables. Time to build Scenes 1–8.

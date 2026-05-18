@@ -9,6 +9,9 @@ type Props = {
   /** Bumped whenever the driver requests a skip — completes the current
    *  line instantly or advances to the next pending line. */
   skipTick?: number
+  /** Emitted whenever the narrator moves to a new line. Scenes can use
+   *  this to drive their visual state in lock-step with the narration. */
+  onBeatChange?: (idx: number) => void
 }
 
 // Top-right narrator overlay. The librarian-bot is the same sprite as
@@ -18,7 +21,12 @@ type Props = {
 const CHAR_MS = 28
 const HOLD_MS = 1400
 
-export function Narrator({ lines, autoAdvance = true, skipTick = 0 }: Props) {
+export function Narrator({
+  lines,
+  autoAdvance = true,
+  skipTick = 0,
+  onBeatChange,
+}: Props) {
   const [lineIdx, setLineIdx] = useState(0)
   const [typed, setTyped] = useState('')
 
@@ -27,6 +35,11 @@ export function Narrator({ lines, autoAdvance = true, skipTick = 0 }: Props) {
     setLineIdx(0)
     setTyped('')
   }, [lines])
+
+  // Notify the scene whenever lineIdx changes so its visuals can sync.
+  useEffect(() => {
+    onBeatChange?.(lineIdx)
+  }, [lineIdx, onBeatChange])
 
   // Skip handler — completes current line if mid-typing, else advances.
   useEffect(() => {

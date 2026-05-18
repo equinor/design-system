@@ -374,3 +374,191 @@ button {
   color: var(--pico-dark-gray);
   margin: 0 calc(2 * var(--px));
 }
+
+/* ===== Scene 9: The Jeweller (Phase C) ============================== */
+
+.jeweller-scene {
+  flex: 1;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.shop-sign {
+  text-align: center;
+  font-size: calc(6 * var(--px));
+  color: var(--pico-yellow);
+  letter-spacing: calc(1 * var(--px));
+  padding: calc(6 * var(--px)) 0 calc(2 * var(--px));
+  background: linear-gradient(
+    to bottom,
+    var(--pico-black) 0,
+    var(--pico-black) calc(100% - var(--px)),
+    var(--pico-dark-purple) calc(100% - var(--px))
+  );
+  border-bottom: var(--px) solid var(--pico-dark-purple);
+}
+
+.shop-interior {
+  position: absolute;
+  inset: calc(16 * var(--px)) 0 0 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shop-wall {
+  position: absolute;
+  bottom: 0;
+  background: #0a112a;
+}
+
+.shop-wall-1 {
+  left: calc(20 * var(--px));
+  width: calc(60 * var(--px));
+  height: calc(80 * var(--px));
+}
+
+.shop-wall-2 {
+  right: calc(20 * var(--px));
+  width: calc(80 * var(--px));
+  height: calc(60 * var(--px));
+}
+
+.shop-window {
+  position: absolute;
+  background: var(--pico-dark-blue);
+  border: var(--px) solid var(--pico-lavender);
+}
+
+.shop-window-1 {
+  top: calc(30 * var(--px));
+  left: calc(34 * var(--px));
+  width: calc(16 * var(--px));
+  height: calc(12 * var(--px));
+}
+
+.shop-window-2 {
+  top: calc(20 * var(--px));
+  right: calc(40 * var(--px));
+  width: calc(20 * var(--px));
+  height: calc(14 * var(--px));
+}
+
+.jeweller-character {
+  position: absolute;
+  bottom: calc(40 * var(--px));
+  left: calc(40 * var(--px));
+  z-index: 2;
+}
+
+.workbench {
+  position: absolute;
+  bottom: calc(20 * var(--px));
+  right: calc(40 * var(--px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  z-index: 2;
+  min-width: calc(140 * var(--px));
+  min-height: calc(60 * var(--px));
+}
+
+.bench-surface {
+  width: calc(140 * var(--px));
+  height: calc(6 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+  border-bottom: var(--px) solid var(--pico-black);
+  order: 99;
+}
+
+.bench-components {
+  display: flex;
+  gap: calc(4 * var(--px));
+  align-items: center;
+  justify-content: center;
+}
+
+.component-tag {
+  font-size: calc(4 * var(--px));
+  padding: calc(1 * var(--px)) calc(3 * var(--px));
+  text-transform: uppercase;
+  background: var(--pico-black);
+  border: var(--px) solid var(--pico-white);
+}
+
+.component-tag-gem {
+  color: var(--pico-blue);
+  border-color: var(--pico-blue);
+}
+
+.component-tag-cord {
+  color: var(--pico-light-gray);
+}
+
+.component-tag-clasp {
+  color: var(--pico-yellow);
+  border-color: var(--pico-yellow);
+}
+
+.necklace-sprite {
+  width: calc(48 * var(--px));
+  height: calc(40 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+.necklace-display {
+  opacity: 1;
+  transition: opacity 300ms steps(3, end);
+}
+
+.necklace-display.is-fading {
+  opacity: 0;
+}
+
+/* The real EDS Button — image-rendering:auto explicitly overrides the
+   global pixelated rule. Uses the real EDS variables that flowed through
+   the entire pipeline we just watched. The bookend. */
+.real-button-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(6 * var(--px)) 0;
+  animation: button-reveal 600ms steps(3, end);
+}
+
+@keyframes button-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.showroom-button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  background: var(--eds-color-bg-accent-fill-emphasis-default);
+  color: var(--eds-color-text-strong-on-emphasis);
+  -webkit-font-smoothing: antialiased;
+  image-rendering: auto;
+}
+
+.showroom-button:hover {
+  background: var(--eds-color-bg-accent-fill-emphasis-hover);
+}
+
+.showroom-button:active {
+  background: var(--eds-color-bg-accent-fill-emphasis-active);
+}
