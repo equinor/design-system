@@ -28,7 +28,7 @@ export function Lorry() {
       <rect x={6} y={23} width={5} height={3} fill="#1abcfe" />
       {/* FIGMA text — pixel font via SVG text element */}
       <text
-        x={14}
+        x={-43}
         y={24}
         fontFamily="'Press Start 2P', monospace"
         fontSize={6}

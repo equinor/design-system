@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { SCRIPT } from '../data/script'
 import { Narrator } from './Narrator'
 import { Dock } from './Dock'
+import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
 
 // Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
@@ -54,11 +55,13 @@ export function Story() {
     return () => window.removeEventListener('keydown', handler)
   }, [advance, back, skip])
 
-  const isReady = (id: string) => id === 'jeweller' || id === 'dock'
+  const isReady = (id: string) =>
+    id === 'jeweller' || id === 'dock' || id === 'inside'
 
   return (
     <>
       {scene.id === 'dock' && <Dock activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'inside' && <Inside activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">
