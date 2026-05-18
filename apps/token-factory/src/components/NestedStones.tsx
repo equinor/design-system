@@ -1,15 +1,18 @@
-// Three concentric pixel-art stones. The geode's interior — Scene 4
-// reveals all three; Scene 5 peels them apart individually.
+// Two concentric pixel-art stones. The geode's interior — Scene 4
+// reveals both; Scene 5 peels them apart individually.
 //
 // Layers (outside-in):
-//   outer  — Concept / CSS-variable name (--eds-color-bg-floating)
-//   middle — scheme alias (bg-floating in Color scheme.Light.json)
-//   inner  — Palette value (Light.Gray.2 = #ffffff)
+//   outer — Figma source name (e.g. Bg.Floating in Concept.Mode 1.json)
+//   inner — the actual value (e.g. #ffffff resolved from Light.Gray.2)
+//
+// The CSS variable name `--eds-color-bg-floating` is NOT a layer — it
+// is a sticker the build package attaches to the whole geode at build
+// time so it can be shipped as CSS. See Scene 5 beat 4.
 //
 // The `highlight` prop is consumed by Scene 5 to brighten one layer at
-// a time and dim the others.
+// a time and dim the other.
 
-export type StoneLayer = 'none' | 'outer' | 'middle' | 'inner'
+export type StoneLayer = 'none' | 'outer' | 'inner'
 
 export function NestedStones({
   highlight = 'none',
@@ -23,13 +26,12 @@ export function NestedStones({
       shapeRendering="crispEdges"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* outer stone — Concept layer (purple) */}
+      {/* outer stone — the Figma source name (purple/pink) */}
       <g
         className={`stone-layer stone-outer ${
           highlight === 'outer' ? 'is-active' : ''
         } ${highlight !== 'none' && highlight !== 'outer' ? 'is-dim' : ''}`}
       >
-        {/* upper half */}
         <rect x={20} y={4} width={20} height={2} fill="#7e2553" />
         <rect x={14} y={6} width={32} height={2} fill="#7e2553" />
         <rect x={10} y={8} width={40} height={2} fill="#7e2553" />
@@ -53,46 +55,25 @@ export function NestedStones({
         <rect x={20} y={55} width={20} height={1} fill="#3d122a" />
       </g>
 
-      {/* middle stone — Scheme alias layer (green) */}
-      <g
-        className={`stone-layer stone-middle ${
-          highlight === 'middle' ? 'is-active' : ''
-        } ${highlight !== 'none' && highlight !== 'middle' ? 'is-dim' : ''}`}
-      >
-        <rect x={24} y={14} width={12} height={2} fill="#008751" />
-        <rect x={20} y={16} width={20} height={2} fill="#008751" />
-        <rect x={16} y={18} width={28} height={2} fill="#008751" />
-        <rect x={14} y={20} width={32} height={20} fill="#008751" />
-        <rect x={16} y={40} width={28} height={2} fill="#008751" />
-        <rect x={20} y={42} width={20} height={2} fill="#008751" />
-        <rect x={24} y={44} width={12} height={2} fill="#008751" />
-        {/* edge highlight */}
-        <rect x={24} y={14} width={12} height={1} fill="#1cc266" />
-        <rect x={20} y={16} width={2} height={2} fill="#1cc266" />
-        <rect x={16} y={18} width={2} height={2} fill="#1cc266" />
-        <rect x={14} y={20} width={2} height={20} fill="#1cc266" />
-        {/* edge shadow */}
-        <rect x={38} y={16} width={2} height={2} fill="#003c25" />
-        <rect x={42} y={18} width={2} height={2} fill="#003c25" />
-        <rect x={44} y={20} width={2} height={20} fill="#003c25" />
-        <rect x={24} y={45} width={12} height={1} fill="#003c25" />
-      </g>
-
-      {/* inner core — Palette value (teal, brightest) */}
+      {/* inner core — the actual value (teal, brightest) */}
       <g
         className={`stone-layer stone-inner ${
           highlight === 'inner' ? 'is-active' : ''
         } ${highlight !== 'none' && highlight !== 'inner' ? 'is-dim' : ''}`}
       >
-        <rect x={26} y={24} width={8} height={2} fill="#287a83" />
-        <rect x={24} y={26} width={12} height={2} fill="#287a83" />
-        <rect x={22} y={28} width={16} height={6} fill="#287a83" />
-        <rect x={24} y={34} width={12} height={2} fill="#287a83" />
-        <rect x={26} y={36} width={8} height={2} fill="#287a83" />
+        <rect x={24} y={18} width={12} height={2} fill="#287a83" />
+        <rect x={22} y={20} width={16} height={2} fill="#287a83" />
+        <rect x={20} y={22} width={20} height={16} fill="#287a83" />
+        <rect x={22} y={38} width={16} height={2} fill="#287a83" />
+        <rect x={24} y={40} width={12} height={2} fill="#287a83" />
         {/* bright highlight */}
-        <rect x={26} y={24} width={8} height={1} fill="#7cbac1" />
-        <rect x={24} y={26} width={2} height={2} fill="#7cbac1" />
-        <rect x={22} y={28} width={2} height={4} fill="#7cbac1" />
+        <rect x={24} y={18} width={12} height={1} fill="#7cbac1" />
+        <rect x={22} y={20} width={2} height={2} fill="#7cbac1" />
+        <rect x={20} y={22} width={2} height={8} fill="#7cbac1" />
+        {/* edge shadow */}
+        <rect x={36} y={20} width={2} height={2} fill="#15363c" />
+        <rect x={38} y={22} width={2} height={16} fill="#15363c" />
+        <rect x={24} y={41} width={12} height={1} fill="#15363c" />
       </g>
     </svg>
   )

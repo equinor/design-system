@@ -29,7 +29,7 @@ export function Reveal({ activeBeatIdx }: { activeBeatIdx: number }) {
         {opened && (
           <div className="reveal-stones">
             <NestedStones highlight="none" />
-            <div className="stones-label">three nested stones</div>
+            <div className="stones-label">two-layered geode</div>
           </div>
         )}
       </div>

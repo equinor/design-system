@@ -59,20 +59,20 @@ export const SCRIPT: Scene[] = [
     title: 'the reveal',
     lines: [
       "look closer. the geode isn't one solid stone.",
-      "it's three concentric stones — like nested boxes.",
-      'this token has three names.',
+      "it's two-layered — an outer name and an inner value.",
+      'this is what figma actually ships us.',
     ],
   },
   {
     id: 'peel',
     title: 'the peel',
     lines: [
-      "let's open them up, one at a time.",
-      "outer name: --eds-color-bg-floating. that's the css variable consumers reference.",
-      'open it up. underneath is just bg-floating — an alias defined in color scheme.light.json.',
-      'open that. and at the very core: Light.Gray.2 = #ffffff. the actual colour.',
-      'three names. one colour. each name lives in a different file.',
-      "this is the alias chain. it's how the team keeps theming flexible.",
+      "let's open the geode. it's two-layered.",
+      'outer: this is the figma source name — Bg.Floating — in Concept.Mode 1.json.',
+      'core: the actual colour — #ffffff — resolved from Light.Gray.2 in Color Light.Mode 1.json.',
+      'now eds-tokens-build wants to ship this as css.',
+      'it stamps an EDS-prefixed CSS variable onto the geode: --eds-color-bg-floating.',
+      'the geode is now shippable as CSS. figma never knew this name existed.',
     ],
   },
   {

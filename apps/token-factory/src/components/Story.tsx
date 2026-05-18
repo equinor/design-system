@@ -5,6 +5,7 @@ import { Crack } from './Crack'
 import { Dock } from './Dock'
 import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
+import { Peel } from './Peel'
 import { Reveal } from './Reveal'
 
 // Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
@@ -62,7 +63,8 @@ export function Story() {
     id === 'dock' ||
     id === 'inside' ||
     id === 'crack' ||
-    id === 'reveal'
+    id === 'reveal' ||
+    id === 'peel'
 
   return (
     <>
@@ -70,6 +72,7 @@ export function Story() {
       {scene.id === 'inside' && <Inside activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'crack' && <Crack activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'reveal' && <Reveal activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'peel' && <Peel activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">
