@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { SCRIPT } from '../data/script'
 import { Narrator } from './Narrator'
+import { Crack } from './Crack'
 import { Dock } from './Dock'
 import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
@@ -56,12 +57,13 @@ export function Story() {
   }, [advance, back, skip])
 
   const isReady = (id: string) =>
-    id === 'jeweller' || id === 'dock' || id === 'inside'
+    id === 'jeweller' || id === 'dock' || id === 'inside' || id === 'crack'
 
   return (
     <>
       {scene.id === 'dock' && <Dock activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'inside' && <Inside activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'crack' && <Crack activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">

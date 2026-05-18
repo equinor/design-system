@@ -1103,3 +1103,183 @@ button {
   border-right: var(--px) solid var(--pico-black);
   border-bottom: var(--px) solid var(--pico-black);
 }
+
+/* ===== Scene 3: The Crack (Phase D.3) ============== */
+
+.crack-scene {
+  flex: 1;
+  position: relative;
+}
+
+.crack-scene.is-shaking {
+  animation: crack-shake 520ms steps(8, end);
+}
+
+@keyframes crack-shake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  15% {
+    transform: translate(calc(2 * var(--px)), calc(-1 * var(--px)));
+  }
+  30% {
+    transform: translate(calc(-2 * var(--px)), calc(1 * var(--px)));
+  }
+  45% {
+    transform: translate(calc(2 * var(--px)), calc(1 * var(--px)));
+  }
+  60% {
+    transform: translate(calc(-1 * var(--px)), calc(-1 * var(--px)));
+  }
+  75% {
+    transform: translate(calc(1 * var(--px)), 0);
+  }
+}
+
+.crack-station-label {
+  position: absolute;
+  top: calc(8 * var(--px));
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: calc(6 * var(--px));
+  color: var(--pico-yellow);
+  letter-spacing: calc(1 * var(--px));
+  z-index: 5;
+}
+
+/* The press rig: frame posts, hammer (head + shaft), and the
+   floor/anvil base the crate sits on. */
+.press-rig {
+  position: absolute;
+  bottom: calc(36 * var(--px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100 * var(--px));
+  height: calc(110 * var(--px));
+  z-index: 2;
+}
+
+.press-frame {
+  position: absolute;
+  top: 0;
+  width: calc(8 * var(--px));
+  height: calc(100 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+  border-bottom: var(--px) solid var(--pico-black);
+}
+
+.press-frame-left {
+  left: 0;
+}
+
+.press-frame-right {
+  right: 0;
+}
+
+.press-hammer {
+  position: absolute;
+  top: calc(8 * var(--px));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0ms;
+}
+
+.press-hammer-shaft {
+  width: calc(6 * var(--px));
+  height: calc(30 * var(--px));
+  background: var(--pico-light-gray);
+  border-left: var(--px) solid var(--pico-white);
+  border-right: var(--px) solid var(--pico-dark-gray);
+  order: 2;
+}
+
+.press-hammer-head {
+  width: calc(56 * var(--px));
+  height: calc(18 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+  border-bottom: calc(2 * var(--px)) solid var(--pico-black);
+  order: 1;
+}
+
+.press-hammer.is-slamming {
+  animation: press-slam 520ms steps(6, end);
+}
+
+@keyframes press-slam {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(calc(36 * var(--px)));
+  }
+  55% {
+    transform: translateX(-50%) translateY(calc(36 * var(--px)));
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.press-floor {
+  position: absolute;
+  bottom: 0;
+  left: calc(-10 * var(--px));
+  right: calc(-10 * var(--px));
+  height: calc(6 * var(--px));
+  background: var(--pico-dark-gray);
+  border-top: var(--px) solid var(--pico-light-gray);
+}
+
+/* The crate sits beneath the press, on the floor. */
+.crack-crate {
+  position: absolute;
+  bottom: calc(42 * var(--px));
+  left: 50%;
+  transform: translateX(-50%) scale(0.7);
+  transform-origin: center bottom;
+  z-index: 3;
+  transition: opacity 200ms steps(2, end);
+}
+
+.crack-crate.is-open {
+  /* When the crate is open after the slam, push it slightly down so the
+     geode sits on top of it instead of overlapping awkwardly. */
+  opacity: 0.85;
+}
+
+/* Geode revealed after the crate cracks open. Sits just above the
+   open crate, below the press hammer (which has retracted back up). */
+.crack-geode {
+  position: absolute;
+  bottom: calc(58 * var(--px));
+  left: 50%;
+  transform: translateX(-50%) scale(1.1);
+  transform-origin: center bottom;
+  z-index: 4;
+  animation: geode-reveal 400ms steps(4, end);
+  filter: drop-shadow(0 0 calc(3 * var(--px)) #287a83);
+}
+
+.geode-sprite {
+  width: calc(36 * var(--px));
+  height: calc(28 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+}
+
+@keyframes geode-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
