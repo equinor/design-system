@@ -30,7 +30,7 @@ The viewer follows one token (`bg-floating`) from Figma to a rendered EDS Button
 | 5 | **The Peel** *(extra-deliberate pacing)* | Each stone peeled in turn. Narrator names + locates each: outer = `--eds-color-bg-floating` (consumer CSS), middle = `bg-floating` (alias in `Color scheme.Light.json`), core = `Light.Gray.2 = #ffffff` (palette). | The 3-layer alias chain — the workshop's strongest "aha." |
 | 6 | **The Cutting** | Inner jewel + dark counterpart fused on cutter's bench (lever sprites flank it). Two facets, one gemstone. | `light-dark()` declarations — light + dark are one token with two values. |
 | 7 | **The Tray** | Gemstone placed in `color-scheme.css` tray with other concept-colour gemstones. | Lane output = `color-scheme.css`. |
-| 8 | **The Packaging** | Tray meets cords (spacing), clasps (density), chains (typography). Inspector adds three explicit faces + a fallback to each gemstone. Box sealed as `variables.min.css`. | lightningcss bundle + `build-dark-scope` rewrite, plain-language framing: *"not every consumer can handle the two-facet cut — so we add a fallback."* |
+| 8 | **The Packaging** | Tray meets cords (spacing), clasps (density), chains (typography). Inspector re-declares the same token under four selector scopes (`:root` fallback, `[data-color-scheme=light]`, `[data-color-scheme=dark]`, `@media (prefers-color-scheme: dark)`). Box sealed as `variables.css`. | lightningcss bundle + `build-dark-scope` rewrite — same variable name resolved by four scopes for browsers without `light-dark()` native support. |
 | 9 | **The Jeweller** | Box arrives at "EDS Product Team." Jeweller assembles a necklace from gemstone + cord + clasp. **Pixel-art necklace fades into a real EDS `<Button>` rendered with real CSS variables and real font stack.** | The whole pipeline serves the design system. Emotional bookend. |
 
 **~30 narrator beats. ~4–5 min runtime at hybrid pace.**
@@ -302,3 +302,69 @@ The `Gate.open` prop is `journey === 'entering' || journey === 'inside'` — gat
 1. **"FIE" still showing on lorry cargo** instead of "FIGMA". Manual pixel-rect letters incomplete. Three replacement options proposed (pixel-rect redo, SVG `<text>` element, or drop the wordmark).
 2. **Beat-4 crate has no "color scheme" label** — only the on-lorry crate (beats 2–3) shows the label. Could carry it along.
 3. **Crate doesn't visibly "pause" at worker** — the state transition happens but the worker doesn't react. Could add a brief worker animation (pause to read) or a thought bubble.
+
+### Phase D.2 — Scene 2 (Inside the Factory) ✓
+
+Parallax-scrolling interior bridge. Belt continues from Scene 1 but scrolls in opposite direction (leftward) under a stationary crate, suggesting the camera is travelling with the crate deeper into the factory. Background machinery silhouettes scroll at half-speed for depth. Two-tile flex container shifted at 200% width with `translateX(-50%)` animation gave a seamless loop after an initial visible snap-back was fixed (commit `938e18856`). Narrator introduces `bg-floating` by name. Commits: `7919aadf1`, `938e18856`.
+
+### Phase D.3 — Scene 3 (The Crack) ✓
+
+Slam-press station. Static (non-animated) belt under the press rig — earlier draft had the belt continuing to scroll which broke the "we've stopped" feel; replaced with a still-belt sprite per user direction. SLAM keyframe on the press head. Crate splits open on impact, glowing geode revealed inside. Also introduced `SceneHeader` here — a shared top bar showing package name (left, blue) + scene title (centre, yellow stars). Commit: `a01617999`, then `1da72662c` for the SceneHeader extraction and belt fix.
+
+### Phase D.4 — Scene 4 (The Reveal) ✓
+
+Geode lifted out of the cracked crate to centre stage. `NestedStones.tsx` introduced as a reusable nested-circle sprite. Originally rendered three concentric stones (concept/semantic/palette per the early "alias chain" model). Narrator names the layered structure but holds detail until Scene 5 (Peel). Label reads "two-layered geode" — was three-layered initially, corrected when the build-emitted var name was separated from Figma-source layers (see Phase D.5 corrections). Commit: `0252d52df`.
+
+### Phase D.5 — Scene 5 (The Peel) ✓
+
+The pedagogical anchor scene. Replanned twice mid-implementation as user corrections compounded:
+- **First correction:** the `--eds-color-bg-floating` CSS variable name is emitted by the *build* package, not part of the Figma source — so it's not a third layer of the geode. Reduced stones to two (outer = Figma source name `Bg.Floating`, inner = actual value `#ffffff` resolved via `Light.Gray.2`).
+- **Second correction:** narration "the geode is now shippable as CSS" was an overclaim. The build-time stamp only attaches the var *name*; cutting + packaging still has to happen. Narration adjusted to "the geode now carries its CSS variable name. it still needs cutting and packaging."
+- **Third correction:** redundant `@equinor/eds-tokens-build` text inside the stamp hammer head was removed — the SceneHeader already labels the package, the hammer should read as a tool. Final state: `6047325ba` → `e00084d70` → `46d34a26d` → `ad1b9a523` → `4a17472bc`. The redesign added a stamp-press sprite that lowers on beat 3, slams on beat 4 to attach the CSS-name sticker.
+
+Beat machine: 0 intro / 1 outer-layer info / 2 inner-core info / 3 stamp lowers / 4 SLAM + sticker drops / 5 holds. Sticker drops from above (`top: calc(18 * var(--px))`) to rest on top of the geode — earlier version had it landing in mid-air, fixed with the lower top value.
+
+### Phase D.6 — Scene 6 (The Cutting) ✓
+
+`light-dark()` introduction. New `Gemstone.tsx` sprite — 36×36 logical px, top half (light value) + yellow seam (`#ffec27` over `#ffa300`) + bottom half (dark value). 5-beat state machine: two raw values on the bench (light + dark hex swatches with labels) → fusion animation (`cutting-pair.is-fusing`) → single two-facet gemstone with yellow glow → CSS declaration card showing `--eds-color-bg-floating: light-dark(#ffffff, #202223);` with per-token colour coding (yellow prop, blue fn, white/grey hex spans). Commit: `386c9bbaa`.
+
+### Phase D.7 — Scene 7 (The Tray) ✓
+
+Lane output as a file: the just-cut gemstone joins a tray of six concept-colour gemstones (`bg-default`, `bg-subtle`, `bg-floating` (hero), `text-default`, `text-subtle`, `border-default`). `Gemstone` extended to accept a `colors` prop so each slot renders its own light/dark facets; `HERO_GEM` exported as a shared constant. 2 beats: beat 0 = hero hovers above its empty (dashed-yellow) slot; beat 1 = drops in + `color-scheme.css` file label appears below. Commit: `44e9fd2cd`.
+
+### Phase D.8 — Scene 8 (The Packaging) ✓ (with two corrections)
+
+Most complex scene. Other-lane bins on the left rail (cords/spacing, clasps/density, chains/typography with new pixel sprites), shipping box in the centre with the hero gem inside, three-rail grid layout. 7-beat state machine through bins pulsing → inspector arrives → focus on two-facet cut → polish-the-output → code-card → box-sealed.
+
+**First-draft error caught by user (commit `1db2b663a` fix):** I had invented `--eds-color-bg-floating-light` and `--eds-color-bg-floating-dark` suffixed variables and framed the build-dark-scope step as "three explicit faces — light, dark, and a fallback." User checked the built CSS and found no such variables. The actual `build-dark-scope` behaviour, per `packages/eds-tokens-build/CLAUDE.md`: it replaces `--name: light-dark(L, D)` with `--name: L` at `:root`, then appends three additional scope blocks (`[data-color-scheme=light]`, `[data-color-scheme=dark]`, and `@media (prefers-color-scheme: dark) :root:not([data-color-scheme=light])`) — same variable name, four resolved values via selector scopes. Replaced the three-face split with a 2×2 grid of "scope tiles" (selector header, solid swatch, hex value, note) and updated narrator copy: was *"the inspector adds three explicit faces — light, dark, and a fallback"*, now *"the inspector re-declares the same token under four selector scopes — one variable, four resolved values."*
+
+**Second-draft error (commit `92449b4d5` fix):** stamp said `variables.min.css` but `build-dark-scope` writes to `variables.css` in-place; the `.min.css` is a downstream `lightningcss --minify` pass that adds no narrative value. Renamed the stamp on both Scene 8 sealed-box and Scene 9 arrived-box, updated narrator to "Box sealed. Labelled variables.css."
+
+Also extracted `CordSprite`, `ClaspSprite`, `ChainSprite` into a shared `LaneSprites.tsx` so Scene 9 can reuse the same sprites for visual continuity.
+
+### Phase D.9b — Scene 9 (The Jeweller) rebuilt for Scene 8 coherence ✓
+
+Original Phase C build (commit `d803fce07`) used a teal-jewel `Necklace.tsx` and a grey-strand cord that bore no resemblance to the bg-floating gemstone or the purple cord sprite established by Scene 8. User feedback: "scene 9 needs better visuals, its not coherent with the elements in scene 8 anymore."
+
+Rewrote `Jeweller.tsx`:
+- Beat 0: the sealed `variables.css` box from Scene 8 sits on the bench (recognisable from Scene 8 — same orange border, dark-purple body, yellow lid, rotated yellow stamp; smaller scale than Scene 8's centre-stage box).
+- Beat 1: the four lane materials (Gemstone, CordSprite, ClaspSprite, ChainSprite — each with `label` + source package badge) appear on the bench.
+- Beat 2: materials converge (per-item staggered `jeweller-converge` keyframe, 100ms delay per item).
+- Beat 3: yellow flash transition (`jeweller-flash` keyframe).
+- Beat 4: real EDS `<Button>` (the original Phase C reveal mechanism preserved verbatim — `image-rendering: auto`, real Inter font stack, real `var(--eds-color-bg-accent-fill-emphasis-default)`).
+
+`Necklace.tsx` is no longer imported but kept in-tree for reference.
+
+Commit covered both the Scene 8 build-dark-scope fix and the Scene 9 rebuild together: `1db2b663a`.
+
+---
+
+### Phase D summary
+
+All 9 scenes wired end-to-end. Visual vocabulary is now consistent from dock through jeweller. Sprite-level components shared across scenes:
+- `Gemstone` (Scenes 6, 7, 8, 9) with the `colors` prop for tray variants
+- `CordSprite` / `ClaspSprite` / `ChainSprite` (Scenes 8, 9) via `LaneSprites.tsx`
+- `SceneHeader` (every scene from D.3 onward) — consistent package-label + title bar
+- `NestedStones` (Scenes 4, 5)
+
+**Next: Phase E — Polish.** Audio (ZzFX), narrator copy pass end-to-end, multi-viewport smoke tests, internal review with Frida + Alex.
