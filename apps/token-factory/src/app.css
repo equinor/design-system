@@ -1187,6 +1187,7 @@ button {
   flex-direction: column;
   align-items: center;
   transition: transform 0ms;
+  z-index: 10;
 }
 
 .press-hammer-shaft {
@@ -1195,7 +1196,6 @@ button {
   background: var(--pico-light-gray);
   border-left: var(--px) solid var(--pico-white);
   border-right: var(--px) solid var(--pico-dark-gray);
-  order: 2;
 }
 
 .press-hammer-head {
@@ -1204,7 +1204,6 @@ button {
   background: var(--pico-dark-gray);
   border-top: var(--px) solid var(--pico-light-gray);
   border-bottom: calc(2 * var(--px)) solid var(--pico-black);
-  order: 1;
 }
 
 .press-hammer.is-slamming {
@@ -1282,4 +1281,111 @@ button {
     opacity: 1;
     transform: translateX(-50%) scale(1.1);
   }
+}
+
+/* ===== Scene 4: The Reveal (Phase D.4) ============== */
+
+.reveal-scene {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal-title {
+  position: absolute;
+  top: calc(8 * var(--px));
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: calc(6 * var(--px));
+  color: var(--pico-yellow);
+  letter-spacing: calc(1 * var(--px));
+  z-index: 5;
+}
+
+.reveal-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6 * var(--px));
+}
+
+.reveal-geode-closed {
+  transform: scale(2.4);
+  transform-origin: center;
+  animation: closed-geode-pulse 1600ms ease-in-out infinite;
+  filter: drop-shadow(0 0 calc(4 * var(--px)) #287a83);
+}
+
+@keyframes closed-geode-pulse {
+  0%,
+  100% {
+    transform: scale(2.4);
+  }
+  50% {
+    transform: scale(2.5);
+  }
+}
+
+.reveal-stones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--px));
+  animation: stones-appear 360ms steps(4, end);
+}
+
+@keyframes stones-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.nested-stones-sprite {
+  width: calc(120 * var(--px));
+  height: calc(120 * var(--px));
+  image-rendering: pixelated;
+  display: block;
+  animation: stones-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes stones-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 calc(2 * var(--px)) #287a83);
+  }
+  50% {
+    filter: drop-shadow(0 0 calc(6 * var(--px)) #287a83);
+  }
+}
+
+/* Layer highlight states (consumed by Scene 5 — defined here so the
+   sprite styles travel with the component). */
+.stone-layer {
+  transition:
+    opacity 200ms steps(2, end),
+    filter 200ms steps(2, end);
+}
+
+.stone-layer.is-dim {
+  opacity: 0.25;
+}
+
+.stone-layer.is-active {
+  opacity: 1;
+  filter: brightness(1.2);
+}
+
+.stones-label {
+  font-size: calc(5 * var(--px));
+  color: var(--pico-light-gray);
+  text-transform: uppercase;
+  letter-spacing: calc(1 * var(--px));
 }

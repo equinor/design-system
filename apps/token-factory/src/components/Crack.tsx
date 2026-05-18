@@ -46,8 +46,8 @@ export function Crack({ activeBeatIdx }: { activeBeatIdx: number }) {
         <div className="press-frame press-frame-left" />
         <div className="press-frame press-frame-right" />
         <div className={`press-hammer ${isSlamming ? 'is-slamming' : ''}`}>
-          <div className="press-hammer-head" />
           <div className="press-hammer-shaft" />
+          <div className="press-hammer-head" />
         </div>
         <div className="press-floor" />
       </div>

@@ -5,6 +5,7 @@ import { Crack } from './Crack'
 import { Dock } from './Dock'
 import { Inside } from './Inside'
 import { Jeweller } from './Jeweller'
+import { Reveal } from './Reveal'
 
 // Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
 // the narrator skip-tick counter, and the keyboard handler.
@@ -57,13 +58,18 @@ export function Story() {
   }, [advance, back, skip])
 
   const isReady = (id: string) =>
-    id === 'jeweller' || id === 'dock' || id === 'inside' || id === 'crack'
+    id === 'jeweller' ||
+    id === 'dock' ||
+    id === 'inside' ||
+    id === 'crack' ||
+    id === 'reveal'
 
   return (
     <>
       {scene.id === 'dock' && <Dock activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'inside' && <Inside activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'crack' && <Crack activeBeatIdx={activeBeatIdx} />}
+      {scene.id === 'reveal' && <Reveal activeBeatIdx={activeBeatIdx} />}
       {scene.id === 'jeweller' && <Jeweller activeBeatIdx={activeBeatIdx} />}
       {!isReady(scene.id) && (
         <div className="scene-placeholder">
