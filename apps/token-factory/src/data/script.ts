@@ -104,7 +104,7 @@ export const SCRIPT: Scene[] = [
       'Browsers without light-dark() still need to know which value to use.',
       'So the inspector re-declares the same token under four selector scopes.',
       'This is the build-dark-scope step. One variable. Four resolved values.',
-      'Box sealed. Labelled variables.min.css.',
+      'Box sealed. Labelled variables.css.',
     ],
   },
   {

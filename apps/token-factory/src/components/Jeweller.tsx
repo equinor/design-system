@@ -83,9 +83,7 @@ export function Jeweller({ activeBeatIdx }: { activeBeatIdx: number }) {
             <div className="jeweller-arrived-box">
               <div className="jeweller-arrived-box-lid" />
               <div className="jeweller-arrived-box-body">
-                <div className="jeweller-arrived-box-stamp">
-                  variables.min.css
-                </div>
+                <div className="jeweller-arrived-box-stamp">variables.css</div>
               </div>
             </div>
           )}

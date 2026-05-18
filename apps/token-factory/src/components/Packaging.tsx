@@ -117,9 +117,7 @@ export function Packaging({ activeBeatIdx }: { activeBeatIdx: number }) {
                     </div>
                   </div>
                 )}
-                {sealed && (
-                  <div className="pkg-box-stamp">variables.min.css</div>
-                )}
+                {sealed && <div className="pkg-box-stamp">variables.css</div>}
               </div>
             </div>
           )}
