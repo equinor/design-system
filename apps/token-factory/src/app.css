@@ -238,3 +238,139 @@ button {
   image-rendering: pixelated;
   display: block;
 }
+
+/* ===== Narrator overlay (Phase B) ============================== */
+
+.narrator {
+  position: absolute;
+  top: calc(4 * var(--px));
+  right: calc(4 * var(--px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: calc(2 * var(--px));
+  width: calc(110 * var(--px));
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* Resize the librarian sprite when used inside the narrator overlay:
+   24×32 → 18×24 logical, repositioned right-aligned. */
+.narrator .librarian {
+  width: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(2 * var(--px));
+}
+
+.narrator .librarian-sprite {
+  width: calc(18 * var(--px));
+  height: calc(24 * var(--px));
+}
+
+/* Bubble below the bot row, fills the narrator column width. */
+.narrator-bubble {
+  background: var(--pico-white);
+  color: var(--pico-black);
+  padding: calc(3 * var(--px)) calc(4 * var(--px));
+  border: var(--px) solid var(--pico-black);
+  box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  font-size: calc(4 * var(--px));
+  line-height: 1.5;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+  min-height: calc(18 * var(--px));
+}
+
+.narrator-bubble::after {
+  content: '';
+  position: absolute;
+  top: calc(-3 * var(--px));
+  right: calc(10 * var(--px));
+  width: calc(3 * var(--px));
+  height: calc(3 * var(--px));
+  background: var(--pico-white);
+  border-left: var(--px) solid var(--pico-black);
+  border-top: var(--px) solid var(--pico-black);
+}
+
+.narrator-caret {
+  display: inline-block;
+  width: calc(2 * var(--px));
+  height: calc(4 * var(--px));
+  background: var(--pico-black);
+  margin-left: calc(1 * var(--px));
+  vertical-align: middle;
+  animation: caret-blink 0.6s steps(2, end) infinite;
+}
+
+/* ===== Scene placeholder (Phase B — replaced in Phase C+) ===== */
+
+.scene-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: calc(8 * var(--px));
+  gap: calc(6 * var(--px));
+}
+
+.scene-header {
+  display: flex;
+  gap: calc(4 * var(--px));
+  align-items: baseline;
+}
+
+.scene-counter {
+  font-size: calc(4 * var(--px));
+  color: var(--pico-orange);
+  text-transform: uppercase;
+}
+
+.scene-title {
+  font-size: calc(7 * var(--px));
+  color: var(--pico-yellow);
+  text-transform: uppercase;
+  letter-spacing: calc(0.5 * var(--px));
+}
+
+.scene-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: var(--pico-dark-gray);
+  font-size: calc(5 * var(--px));
+}
+
+/* ===== Story hint (Phase B) ============================== */
+
+.story-hint {
+  position: absolute;
+  bottom: calc(3 * var(--px));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(2 * var(--px));
+  font-size: calc(4 * var(--px));
+  padding: calc(2 * var(--px)) calc(4 * var(--px));
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hint-key {
+  color: var(--pico-yellow);
+}
+
+.hint-label {
+  color: var(--pico-light-gray);
+  text-transform: uppercase;
+}
+
+.hint-sep {
+  color: var(--pico-dark-gray);
+  margin: 0 calc(2 * var(--px));
+}

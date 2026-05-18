@@ -198,3 +198,25 @@ The earlier Phase 0–5.5 build (commits up to `a2b2d1b42`) shipped 9 station sc
 ## Phase log
 
 Filled in as each chunk completes. The pre-rebuild history (Phases 0 through 5.5b) is in git history; not duplicated here.
+
+### Phase A — Demolition ✓
+
+- Deleted 14 scene-level components + 3 data files.
+- Kept the 5 sprite components (`Crate`, `LibrarianBot`, `Token`, `Lever`, `StationLog`) + `floor-tile.svg`.
+- `App.tsx` rewritten as a boot placeholder.
+- `app.css` stripped from ~1000 station-specific lines down to PICO palette + responsive `--px` + viewport/stage layout + the five kept sprite classes.
+- Bundle ↓14% (220 → 191 kB JS, 122 → 101 kB CSS gzip).
+- Commit `f1daa81c8`.
+
+### Phase B — Story scaffold ✓
+
+- New `Story.tsx` orchestrator owns `sceneIdx` (0..8) and `skipTick`. Keyboard handler: `Space` = skip line / advance line, `→` = next scene, `←` = prev scene, `Esc` = restart.
+- New `Narrator.tsx` overlay component. Renders the resized `LibrarianBot` (24×32 → 18×24 via a `.narrator .librarian-sprite` override, top-right of stage) plus an auto-typing bubble. Types at ~28 ms/char, holds 1400 ms after a line completes, auto-advances to the next line. Skip-tick from `Story` completes a mid-typing line instantly or jumps to the next line if already complete.
+- New `data/script.ts` with all 9 scenes structured as `{ id, title, lines[] }`. Lines are plain-language narrator beats (~30 across the script). Locked from the sparring; will tighten in Phase E.
+- Temporary placeholder scene component shows `scene N / 9 :: <title>` + "scene visuals land in phase c+". Replaced one-by-one in Phase D.
+- `App.tsx` mounts `<Story />`.
+- Persistent keyboard hint pinned bottom-centre: `[ space ] SKIP / NEXT LINE · [ → ] NEXT SCENE`.
+
+Verified in Chrome via DevTools: boot loads on Scene 1, narrator auto-types beat 1, hold, auto-advances to beat 2, caret blinking. No console errors.
+
+Next: **Phase C — Scene 9 first.** Build the Jeweller scene including the pixel-art-to-real-Button reveal so the end-state is validated before scenes 1–8 build out.

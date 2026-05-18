@@ -1,0 +1,74 @@
+import { useCallback, useEffect, useState } from 'react'
+import { SCRIPT } from '../data/script'
+import { Narrator } from './Narrator'
+
+// Top-level story orchestrator. Owns scene index (0..SCRIPT.length-1),
+// the narrator skip-tick counter, and the keyboard handler.
+//
+// Phase B ships with all 9 scenes rendering as titled placeholders.
+// Phase C and D will replace the placeholders with real scene
+// components.
+
+export function Story() {
+  const [sceneIdx, setSceneIdx] = useState(0)
+  const [skipTick, setSkipTick] = useState(0)
+  const scene = SCRIPT[sceneIdx]
+
+  const advance = useCallback(() => {
+    setSceneIdx((i) => (i + 1) % SCRIPT.length)
+  }, [])
+
+  const back = useCallback(() => {
+    setSceneIdx((i) => (i - 1 + SCRIPT.length) % SCRIPT.length)
+  }, [])
+
+  const skip = useCallback(() => {
+    setSkipTick((t) => t + 1)
+  }, [])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === ' ') {
+        e.preventDefault()
+        skip()
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        advance()
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        back()
+      } else if (e.key === 'Escape') {
+        e.preventDefault()
+        setSceneIdx(0)
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [advance, back, skip])
+
+  return (
+    <>
+      <div className="scene-placeholder">
+        <div className="scene-header">
+          <span className="scene-counter">
+            scene {sceneIdx + 1} / {SCRIPT.length}
+          </span>
+          <span className="scene-title">{scene.title}</span>
+        </div>
+        <div className="scene-body">
+          <p>scene visuals land in phase c+</p>
+        </div>
+      </div>
+
+      <Narrator lines={scene.lines} skipTick={skipTick} />
+
+      <div className="story-hint">
+        <span className="hint-key">[ space ]</span>
+        <span className="hint-label">skip / next line</span>
+        <span className="hint-sep">·</span>
+        <span className="hint-key">[ → ]</span>
+        <span className="hint-label">next scene</span>
+      </div>
+    </>
+  )
+}
