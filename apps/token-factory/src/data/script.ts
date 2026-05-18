@@ -114,7 +114,7 @@ export const SCRIPT: Scene[] = [
     title: 'the jeweller',
     lines: [
       'And here are the actual jewels — the core components.',
-      'It takes our gemstones, our cords, our clasps.',
+      'It takes our gemstones, our cords, our clasps, our chains.',
       'And is assembled into jewellery.',
       'This is our design system.',
       'Every component we ship rides on the back of this pipeline.',

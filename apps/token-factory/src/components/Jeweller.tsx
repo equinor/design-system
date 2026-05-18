@@ -42,7 +42,7 @@ const MATERIALS: Material[] = [
   {
     key: 'clasp',
     label: 'clasp',
-    pkg: 'density',
+    pkg: 'elevation',
     render: () => <ClaspSprite />,
   },
   {
