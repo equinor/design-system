@@ -80,7 +80,7 @@ export const STATIC_LANE: Lane = {
       title: 'the packaging',
       lines: [
         'At the shipping bench, our tray meets materials from the other four lanes.',
-        'Cords from spacing primitives. Clasps from foundations (elevation). Chains from design tokens (typography). Lacquer from dynamic (appearance).',
+        'Cords from spacing primitives. Clasps from foundations (elevation). Chains from spacing modes (typography, density, radius). Lacquer from dynamic (appearance).',
         'But before sealing the box, an inspector adds one more polish.',
         'Browsers without light-dark() still need to know which value to use.',
         'So the inspector re-declares the same token under four selector scopes.',

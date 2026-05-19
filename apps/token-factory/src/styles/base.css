@@ -85,7 +85,7 @@
   .stage[data-lane='foundations']        { --_lane-accent: var(--pico-lavender); }
   .stage[data-lane='dynamic']            { --_lane-accent: var(--pico-dark-green); }
   .stage[data-lane='spacing-primitives'] { --_lane-accent: var(--pico-orange); }
-  .stage[data-lane='design-tokens']      { --_lane-accent: var(--pico-light-gray); }
+  .stage[data-lane='spacing-modes']      { --_lane-accent: var(--pico-light-gray); }
 }
 
 /* Shared animation keyframes used across multiple scenes/sprites.

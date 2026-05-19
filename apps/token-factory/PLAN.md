@@ -653,3 +653,29 @@ Multi-lane architecture complete. Token Factory is no longer locked to one scene
 No scene-level CSS forking required. Sprite components reused across lanes. Shared keyframes (`belt-scroll`, `peel-info-pop`, `caret-blink`) declared once in `base.css`.
 
 **Phases E + F (polish + workshop)** continue against this multi-lane structure. The Static lane's 8 scenes are unchanged; the workshop can ship as-is, with Phase G's branching available but exercised only by demo/curiosity.
+
+### Phase G.5 — Lane name correction (audit fix) ✓
+
+Caught during a casual audit prompted by the question *"is design tokens typography?"* — the fifth lane was misnamed in the codebase, and the Scene 8 narration both undersold the file's contents and mislabelled it.
+
+**The bug.** Phase D.10's pipeline audit (commits `67821c16c`, `ddf75c669`) settled the dock LANES around "the five actual Figma files from eds-tokens-sync/CLAUDE.md" but used `design tokens` for the fifth slot. Re-reading `eds-tokens-sync/CLAUDE.md` and grepping `packages/eds-tokens/tokens/FQQqyumcpPQoiFRCjdS9GM/` shows:
+
+| Per sync docs | Per actual JSON contents |
+|---|---|
+| **Spacing modes** — "Spacing density variants" | Border radius, Box, Container space, Density, **Font family / size / weight / baseline / tracking / line height**, Horizontal + Vertical gap, Horizontal + Vertical space, Icon size, Page space, Selectable space, Size, Space proportions, Stroke |
+
+So the fifth lane is actually the Figma file named **Spacing modes**, not "design tokens." Typography axes *do* live inside it (under `🅰️ Font *`), but so do roughly a dozen other modal axes. Calling the lane "design tokens" was wrong on the file name; saying "chains from design tokens (typography)" was wrong on both the file name AND under-counting what's inside it.
+
+**Fixes (this commit):**
+- `data/lanes/types.ts` — `LaneId` union: `'design-tokens'` → `'spacing-modes'`, with a comment explaining the misleading Figma file name.
+- `data/lanes/index.ts` — registry key + `id` + `label` updated to `'spacing modes'`.
+- `styles/base.css` — `[data-lane='design-tokens']` selector updated to `[data-lane='spacing-modes']`.
+- `data/lanes/static.ts` — Scene 8 packaging beat updated: *"Chains from design tokens (typography)"* → *"Chains from spacing modes (typography, density, radius)"* so the parenthetical reflects the file's actual scope.
+- `scenes/static/Packaging.tsx` — bin label `pkg: 'design tokens · typography'` → `'spacing modes · typography'`. Header comment updated to reflect the corrected lane name.
+- `scenes/static/Jeweller.tsx` — chain material `pkg: 'design tokens'` → `'spacing modes'`.
+
+**Not fixed (deliberate):** the Spacing modes Figma file's name is itself misleading (it contains far more than spacing modes), but renaming a Figma file is out of scope here. The lane label matches what the sync sees; the parenthetical does the work of communicating actual contents to the workshop audience.
+
+**Audit lesson #2** (filed alongside Phase D.10's lesson about reading source code instead of reasoning from narration): *the workshop's lane vocabulary is locked to whatever Figma file names happen to exist — they are not always accurate descriptions of their contents.* Future audits should grep `packages/eds-tokens/tokens/<fileKey>/` directly rather than trust the sync doc's `Contents` column, which itself was apparently approximate.
+
+**Verified:** tsc clean, build clean, no remaining `design.tokens|design tokens` references in src/. Phase G architecture unaffected — only data labels changed.

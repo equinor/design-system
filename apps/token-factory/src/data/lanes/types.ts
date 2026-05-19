@@ -12,7 +12,11 @@ export type LaneId =
   | 'foundations'
   | 'dynamic'
   | 'spacing-primitives'
-  | 'design-tokens'
+  // Figma file actually named "Spacing modes" per eds-tokens-sync/CLAUDE.md.
+  // Despite the misleading name, this file contains typography axes,
+  // border radius, density, container space, icon size, stroke, and most
+  // other modal design tokens — not just spacing modes.
+  | 'spacing-modes'
 
 // Scene id is the registry key — see data/sceneRegistry.ts. Kept as a
 // string union for autocomplete; extend when adding new scene components.

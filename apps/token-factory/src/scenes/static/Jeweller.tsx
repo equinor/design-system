@@ -57,7 +57,7 @@ const MATERIALS: Material[] = [
   {
     key: 'chain',
     label: 'chain',
-    pkg: 'design tokens',
+    pkg: 'spacing modes',
     render: () => <ChainSprite />,
   },
   {

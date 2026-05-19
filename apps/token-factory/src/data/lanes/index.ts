@@ -35,9 +35,9 @@ export const LANES: Record<LaneId, Lane> = {
     status: 'locked',
     scenes: [],
   },
-  'design-tokens': {
-    id: 'design-tokens',
-    label: 'design tokens',
+  'spacing-modes': {
+    id: 'spacing-modes',
+    label: 'spacing modes',
     accent: '--pico-light-gray',
     status: 'locked',
     scenes: [],

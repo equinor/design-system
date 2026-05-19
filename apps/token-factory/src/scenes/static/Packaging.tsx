@@ -30,11 +30,13 @@ type LaneIcon = {
 }
 
 // One bin per other-lane from Scene 1. The four siblings to Static
-// (our lane): spacing primitives, foundations, design tokens, dynamic.
+// (our lane): spacing primitives, foundations, spacing modes, dynamic.
+// Note: the "spacing modes" Figma file is the home of typography,
+// density, border radius, and most modal axes — not just spacing.
 const LANES: LaneIcon[] = [
   { label: 'cords', shape: 'cord', pkg: 'spacing primitives' },
   { label: 'clasps', shape: 'clasp', pkg: 'foundations · elevation' },
-  { label: 'chains', shape: 'chain', pkg: 'design tokens · typography' },
+  { label: 'chains', shape: 'chain', pkg: 'spacing modes · typography' },
   { label: 'lacquer', shape: 'lacquer', pkg: 'dynamic · appearance' },
 ]
 
