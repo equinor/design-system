@@ -30,9 +30,9 @@ export const SCRIPT: Scene[] = [
     lines: [
       'Every morning, lorries arrive at our goods terminal.',
       "This is eds-tokens-sync — Figma's REST API drops variable files at our door.",
-      "Our crate is labelled 'concept'. That's our lane today.",
-      "See the other five belts? Other lanes. Not today's story.",
-      'The worker reads the label and sorts our crate onto the concept belt.',
+      "Our crate is labelled 'static'. That's our lane today.",
+      "See the other four belts? Other lanes. Not today's story.",
+      'The worker reads the label and sorts our crate onto the static belt.',
       'The gate slides open and our crate enters the factory.',
     ],
   },
@@ -41,8 +41,8 @@ export const SCRIPT: Scene[] = [
     title: 'inside the factory',
     lines: [
       'Inside, the belt carries our crate deeper.',
-      'This crate is one synced JSON file — Concept.Mode 1.json. It holds dozens of tokens.',
-      "We'll follow just one of them. Let's call him Bg.Floating. We meet him properly when the build cracks the crate open.",
+      'The Static crate carries two JSON files — Semantic.Mode 1.json and Concept.Mode 1.json. We follow the concept side.',
+      "Inside Concept.Mode 1.json are dozens of tokens. We'll pick one: Bg.Floating. We meet him properly when the build cracks the crate open.",
     ],
   },
   {
@@ -68,9 +68,9 @@ export const SCRIPT: Scene[] = [
     title: 'the peel',
     lines: [
       "This geode is three-layered. Let's open it.",
-      'Outer ring — Bg.Floating in Concept.Mode 1.json. The name product code asks for.',
-      'Middle ring — bg-floating in 🌗 Color scheme.Light.json. Routes the concept to a palette colour. This is the swap point — change the scheme, change the route.',
-      'Inner core — Light.Gray.2 in Color Light.Mode 1.json. The actual hex: #ffffff.',
+      'Outer ring — Bg.Floating in Concept.Mode 1.json (Static file). The name product code asks for.',
+      'Middle ring — bg-floating in 🌗 Color scheme.Light.json (Foundations file). Routes the concept to a palette colour. This is the swap point — change the scheme, change the route.',
+      'Inner core — Light.Gray.2 in Color Light.Mode 1.json (Foundations). The actual hex: #ffffff.',
       'Three layers, three jobs. Swap the middle ring and the colour changes without touching product code or palette.',
       'Now eds-tokens-build steps in. It needs to give this geode a CSS variable name.',
       'It stamps an EDS-prefixed name onto the geode: --eds-color-bg-floating.',

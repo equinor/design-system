@@ -65,7 +65,7 @@ export function Inside({ activeBeatIdx }: { activeBeatIdx: number }) {
       {/* the crate — fixed centre, name tag appears at beat 1 */}
       <div className="inside-crate">
         <Crate />
-        <div className="crate-travel-label">concept</div>
+        <div className="crate-travel-label">static</div>
         {showNameTag && (
           <div className="crate-name-tag">
             <span className="tag-key">file:</span>

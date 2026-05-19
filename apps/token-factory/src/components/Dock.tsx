@@ -14,10 +14,10 @@ import { Token } from './Token'
 // Beat mapping:
 //   0 — Lorry parked, conveyor running, worker idle. Crate hidden behind lorry.
 //   1 — Terminal sign pulses. Crate still hidden.
-//   2 — Crate peeks out from behind lorry with the "concept" label.
+//   2 — Crate peeks out from behind lorry with the "static" label.
 //   3 — Lane indicator brightens: Color Scheme bright, others very dim.
 //   4 — Crate slides from behind lorry along the belt, stops at the worker
-//       for inspection. Worker shows a reaction ("✓ concept") bubble.
+//       for inspection. Worker shows a reaction ("✓ static") bubble.
 //   5 — Gate slides open, crate continues, enters factory, gate closes.
 
 type Journey =
@@ -29,13 +29,18 @@ type Journey =
   | 'entering' // gate open, crate going through
   | 'inside' // crate disappeared into building
 
+// Five Figma files = five lanes. Names match the actual files
+// listed in eds-tokens-sync/CLAUDE.md.
 const LANES = [
-  { id: 'concept', label: 'concept', colorVar: '--pico-dark-purple' },
-  { id: 'color-scheme', label: 'color scheme', colorVar: '--pico-lavender' },
-  { id: 'semantic', label: 'semantic', colorVar: '--pico-dark-green' },
-  { id: 'appearance', label: 'appearance', colorVar: '--pico-orange' },
-  { id: 'spacing', label: 'spacing', colorVar: '--pico-light-gray' },
-  { id: 'typography', label: 'typography', colorVar: '--pico-light-gray' },
+  { id: 'static', label: 'static', colorVar: '--pico-dark-purple' },
+  { id: 'foundations', label: 'foundations', colorVar: '--pico-lavender' },
+  { id: 'dynamic', label: 'dynamic', colorVar: '--pico-dark-green' },
+  { id: 'spacing', label: 'spacing primitives', colorVar: '--pico-orange' },
+  {
+    id: 'design-tokens',
+    label: 'design tokens',
+    colorVar: '--pico-light-gray',
+  },
 ]
 
 export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
@@ -82,7 +87,7 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
           <div
             key={lane.id}
             className={`lane-row ${
-              lane.id === 'concept' ? 'lane-active' : 'lane-sibling'
+              lane.id === 'static' ? 'lane-active' : 'lane-sibling'
             }`}
           >
             <span
@@ -112,7 +117,7 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
       <div className="dock-worker">
         {showReaction && (
           <div className="worker-bubble">
-            <span>✓ concept</span>
+            <span>✓ static</span>
           </div>
         )}
         <Token />
@@ -128,7 +133,7 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
       {crateVisible && (
         <div className={`dock-crate dock-crate-journey crate-state-${journey}`}>
           <Crate />
-          <div className="crate-travel-label">concept</div>
+          <div className="crate-travel-label">static</div>
         </div>
       )}
     </div>
