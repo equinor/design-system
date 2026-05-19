@@ -93,7 +93,7 @@ export const SCRIPT: Scene[] = [
     title: 'the tray',
     lines: [
       'The finished gemstone joins a tray of other concept-colour gemstones.',
-      "This tray is our lane's output. It's called color-scheme.css.",
+      'The build emits this tray to a file called color-scheme.css — together with the scheme aliases and palette tokens our concepts resolve through.',
     ],
   },
   {
