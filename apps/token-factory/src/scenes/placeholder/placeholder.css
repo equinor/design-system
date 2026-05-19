@@ -19,7 +19,7 @@
   .placeholder-card {
     display: flex;
     background: var(--pico-black);
-    border: var(--px) solid var(--pico-dark-gray);
+    border: var(--px) solid var(--_lane-accent, var(--pico-dark-gray));
     box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0 var(--pico-black);
     min-width: calc(180 * var(--px));
     animation: peel-info-pop 220ms steps(3, end);
@@ -27,7 +27,7 @@
 
   .placeholder-card-stripe {
     width: calc(6 * var(--px));
-    background: var(--pico-dark-gray);
+    background: var(--_lane-accent, var(--pico-dark-gray));
   }
 
   .placeholder-card-body {

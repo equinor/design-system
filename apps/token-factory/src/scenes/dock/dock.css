@@ -122,6 +122,16 @@
     color: var(--pico-yellow);
   }
 
+  .lane-soon-badge {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-dark-gray);
+    background: transparent;
+    border: var(--px) solid var(--pico-dark-gray);
+    padding: 0 calc(2 * var(--px));
+    letter-spacing: calc(0.5 * var(--px));
+    text-transform: uppercase;
+  }
+
   /* Factory building right side. */
   .factory-building {
     position: absolute;
@@ -274,12 +284,13 @@
     z-index: 7;
   }
 
-  /* Label that travels with the crate on every journey state */
+  /* Label that travels with the crate on every journey state. Background
+     reads the lane accent so switching lanes recolours the sticker. */
   .crate-travel-label {
     font-size: calc(4 * var(--px));
     text-transform: uppercase;
     color: var(--pico-yellow);
-    background: var(--pico-dark-purple);
+    background: var(--_lane-accent, var(--pico-dark-purple));
     padding: calc(1 * var(--px)) calc(3 * var(--px));
     border: var(--px) solid var(--pico-white);
     white-space: nowrap;

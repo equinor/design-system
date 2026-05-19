@@ -174,7 +174,8 @@
     right: 0;
     height: calc(16 * var(--px));
     background: var(--pico-black);
-    border-bottom: var(--px) solid var(--pico-dark-purple);
+    border-bottom: var(--px) solid
+      var(--_lane-accent, var(--pico-dark-purple));
     z-index: 20;
   }
 

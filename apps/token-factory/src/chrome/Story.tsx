@@ -134,32 +134,34 @@ export function Story() {
   return (
     <LaneContext.Provider value={selectedLane}>
       <LaneSelectionContext.Provider value={selectionValue}>
-        {Scene && scene ? (
-          <Scene activeBeatIdx={activeBeatIdx} scene={scene} />
-        ) : (
-          <div className="scene-placeholder">
-            <div className="scene-header">
-              <span className="scene-title">scene not available</span>
+        <div className="stage" data-lane={selectedLaneId}>
+          {Scene && scene ? (
+            <Scene activeBeatIdx={activeBeatIdx} scene={scene} />
+          ) : (
+            <div className="scene-placeholder">
+              <div className="scene-header">
+                <span className="scene-title">scene not available</span>
+              </div>
             </div>
+          )}
+
+          {scene && (
+            <Narrator
+              lines={scene.lines}
+              skipTick={skipTick}
+              onBeatChange={setActiveBeatIdx}
+              onAdvancePastEnd={advance}
+              centered={scene.narrator === 'centered'}
+            />
+          )}
+
+          <div className="story-hint">
+            <span className="hint-key">[ space ]</span>
+            <span className="hint-label">skip / next line</span>
+            <span className="hint-sep">·</span>
+            <span className="hint-key">[ → ]</span>
+            <span className="hint-label">next scene</span>
           </div>
-        )}
-
-        {scene && (
-          <Narrator
-            lines={scene.lines}
-            skipTick={skipTick}
-            onBeatChange={setActiveBeatIdx}
-            onAdvancePastEnd={advance}
-            centered={scene.narrator === 'centered'}
-          />
-        )}
-
-        <div className="story-hint">
-          <span className="hint-key">[ space ]</span>
-          <span className="hint-label">skip / next line</span>
-          <span className="hint-sep">·</span>
-          <span className="hint-key">[ → ]</span>
-          <span className="hint-label">next scene</span>
         </div>
       </LaneSelectionContext.Provider>
     </LaneContext.Provider>

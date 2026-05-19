@@ -607,3 +607,49 @@ Architecturally proves the multi-lane runtime end-to-end. A second lane (Foundat
 - ArrowRight past dock → routes into `lane(foundations)/0`, PlaceholderScene renders "THE LOADING BAY" with "LANE · foundations" + "SCENE 1 / 4 · scene content tbd".
 
 **Bug fixed mid-G.3:** first PlaceholderScene render used `@equinor/eds-tokens · foundations` as the SceneHeader pkg, which was long enough to collide with the centred title. Shortened to `lane · {laneId}`.
+
+### Phase G.4 — Lane theming + locked badge ✓
+
+Final Phase G chunk. Chrome that should tint per-lane now reads `var(--_lane-accent)`. Locked rows in the Dock indicator gain a "soon" badge so the affordance is unambiguous.
+
+**`data-lane` attribute on the stage:**
+- App.tsx no longer renders the `.stage` div directly — it just renders `.viewport > Story`. Story.tsx now owns the `<div className="stage" data-lane={selectedLaneId}>` wrapper. This was the minimum change needed to surface `selectedLaneId` as a CSS-readable attribute without a `display: contents` workaround.
+- `styles/base.css` adds five `.stage[data-lane='X']` selectors that set `--_lane-accent` to the lane's PICO swatch (`--pico-dark-purple` for static, `--pico-lavender` for foundations, etc.). Adding a new lane = one CSS line.
+
+**Chrome reading `--_lane-accent`:**
+- `chrome.css` — `.scene-header-bar` `border-bottom` now `var(--_lane-accent, var(--pico-dark-purple))`. Falls back to dark-purple so Static visuals stay identical.
+- `dock.css` — `.crate-travel-label` `background` same change. The sticker sitting on the crate recolours reactively when the driver switches lanes at the dock.
+- `placeholder.css` — `.placeholder-card` `border` + `.placeholder-card-stripe` `background` read `--_lane-accent` (with `--pico-dark-gray` fallback). PlaceholderScene.tsx dropped its inline `style={{ borderColor: ..., background: ... }}` — no more JS-driven theming.
+
+**Locked-lane soon badge:**
+- Dock.tsx — locked rows render `<span className="lane-soon-badge">soon</span>` in place of the `→` arrow. Clickable rows still get the arrow.
+- `dock.css` — `.lane-soon-badge` is a tiny outlined dark-grey pill, deliberately understated so it reads as a status rather than a primary call to action.
+
+**Verified:** tsc + build clean. Chrome smoke confirms locked rows display the "soon" badge inside the dock indicator, FOUNDATIONS row stays clickable, soon-badge styling is subdued and readable at 360×220 logical / 4× physical scaling. Lane switch repaints `--_lane-accent` consumers (scene header bar bottom border + crate sticker background + placeholder card border/stripe).
+
+**Known pre-existing issue surfaced during G.4 click testing:** clicking a different lane at the Dock causes Story.tsx's `advance` callback to get a new identity (it depends on `selectedLaneId` via useCallback). Narrator's `useEffect(..., [lines, lineIdx, typed])` doesn't reset — but the route-reset effect doesn't fire either, so the visible reset to beat 0 is actually a re-render artefact of the typewriter restarting `typed` due to dependency churn elsewhere. Not a G.4 bug; not blocking the workshop. Notes for future polish: stabilise `advance` with a ref, or move the "lane selection" out of state that the keyboard handler reads. Deferred — Phase E or post-workshop.
+
+---
+
+### Phase G summary
+
+Multi-lane architecture complete. Token Factory is no longer locked to one scene sequence — the Dock is now a diegetic branch point that routes the post-dock story through any number of lanes, with no hub scene needed.
+
+**What shipped (G.0 → G.4):**
+- File layout split: `chrome/` + `sprites/` + `scenes/{intro,dock,static,placeholder}/`. Original `components/` flat dir gone.
+- CSS split: `styles/base.css` + `styles/chrome.css` + colocated per-component CSS. `@layer tf-base, tf-sprites, tf-chrome, tf-scenes` order declared.
+- Data layer: `data/lanes/{types,prologue,static,foundations,index}.ts` + `data/sceneRegistry.ts`.
+- Chrome layer: `chrome/Story.tsx` (route-aware), `chrome/Narrator.tsx` (unchanged), `chrome/SceneHeader.tsx` (unchanged), `chrome/LaneContext.ts` (Lane + LaneSelection contexts).
+- Scenes: `scenes/intro/Intro.tsx` (returns null), `scenes/placeholder/PlaceholderScene.tsx` (generic, reusable across scaffold lanes).
+- 1 placeholder lane (Foundations) demonstrates branching end-to-end; other 3 lanes remain `locked`.
+- Lane theming via `data-lane` + `--_lane-accent`.
+
+**Adding a new lane (foundations → real story, or promoting any locked lane):**
+1. Replace the lane entry in `data/lanes/index.ts` (or create a new `data/lanes/<lane>.ts` file).
+2. Set `status: 'ready'`. Each scene's `id` must match a key in `SCENES`.
+3. For brand-new scene components: drop them in `scenes/<lane>/`, register them in `data/sceneRegistry.ts`, add the id to the `SceneId` union in `data/lanes/types.ts`.
+4. That's it — Dock will pick up the new lane via its `Object.values(LANES)` iteration; theming via `data-lane` picks up the accent automatically.
+
+No scene-level CSS forking required. Sprite components reused across lanes. Shared keyframes (`belt-scroll`, `peel-info-pop`, `caret-blink`) declared once in `base.css`.
+
+**Phases E + F (polish + workshop)** continue against this multi-lane structure. The Static lane's 8 scenes are unchanged; the workshop can ship as-is, with Phase G's branching available but exercised only by demo/curiosity.

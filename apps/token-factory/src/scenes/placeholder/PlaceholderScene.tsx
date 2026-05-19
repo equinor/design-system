@@ -28,14 +28,10 @@ export function PlaceholderScene({ scene }: Props) {
       />
 
       <div className="placeholder-stage">
-        <div
-          className="placeholder-card"
-          style={{ borderColor: `var(${lane.accent})` }}
-        >
-          <div
-            className="placeholder-card-stripe"
-            style={{ background: `var(${lane.accent})` }}
-          />
+        {/* Card border + stripe paint with --_lane-accent — see
+            base.css for the [data-lane] → accent mapping. */}
+        <div className="placeholder-card">
+          <div className="placeholder-card-stripe" />
           <div className="placeholder-card-body">
             <p className="placeholder-meta">
               <span className="placeholder-meta-key">LANE</span>

@@ -100,9 +100,11 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
                 style={{ background: `var(${lane.accent})` }}
               />
               <span className="lane-name">{lane.label}</span>
-              <span className="lane-arrow">
-                {lane.status === 'locked' ? '·' : '→'}
-              </span>
+              {lane.status === 'locked' ? (
+                <span className="lane-soon-badge">soon</span>
+              ) : (
+                <span className="lane-arrow">→</span>
+              )}
             </button>
           )
         })}
