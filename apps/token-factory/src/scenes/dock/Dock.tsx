@@ -1,50 +1,39 @@
 import { useEffect, useState } from 'react'
+import { useLaneSelection } from '../../chrome/LaneContext'
+import { SceneHeader } from '../../chrome/SceneHeader'
+import { LANES } from '../../data/lanes'
 import { Building } from '../../sprites/Building'
 import { Crate } from '../../sprites/Crate'
 import { Gate } from '../../sprites/Gate'
 import { Lorry } from '../../sprites/Lorry'
 import { Token } from '../../sprites/Token'
-import { SceneHeader } from '../../chrome/SceneHeader'
 import './dock.css'
 
-// Scene 1 — The Goods Terminal.
-//
-// Driver-paced (no auto-advance on narrator). Each space press advances
-// the narrator one beat AND advances the crate journey one stage.
+// Scene 1 — The Goods Terminal. Also the diegetic branch point: at
+// beat ≥3 the lane indicator becomes clickable and the driver can
+// switch which lane the crate carries.
 //
 // Beat mapping:
 //   0 — Lorry parked, conveyor running, worker idle. Crate hidden behind lorry.
 //   1 — Terminal sign pulses. Crate still hidden.
-//   2 — Crate peeks out from behind lorry with the "static" label.
-//   3 — Lane indicator brightens: Color Scheme bright, others very dim.
-//   4 — Crate slides from behind lorry along the belt, stops at the worker
-//       for inspection. Worker shows a reaction ("✓ static") bubble.
+//   2 — Crate peeks out from behind lorry with its lane label.
+//   3 — Lane indicator brightens; rows become clickable for ready/scaffold lanes.
+//   4 — Crate slides from lorry along the belt, pauses at the worker for inspection.
 //   5 — Gate slides open, crate continues, enters factory, gate closes.
 
 type Journey =
-  | 'hidden' // behind lorry, not visible (beats 0–1)
-  | 'peeking' // peeking out from behind lorry with label (beats 2–3)
-  | 'sliding-to-worker' // beat 4 start: sliding along belt
-  | 'inspecting' // beat 4 end: paused at worker, reaction shown
-  | 'sliding-to-gate' // beat 5 start: continuing toward gate
-  | 'entering' // gate open, crate going through
-  | 'inside' // crate disappeared into building
+  | 'hidden'
+  | 'peeking'
+  | 'sliding-to-worker'
+  | 'inspecting'
+  | 'sliding-to-gate'
+  | 'entering'
+  | 'inside'
 
-// Five Figma files = five lanes. Names match the actual files
-// listed in eds-tokens-sync/CLAUDE.md.
-const LANES = [
-  { id: 'static', label: 'static', colorVar: '--pico-dark-purple' },
-  { id: 'foundations', label: 'foundations', colorVar: '--pico-lavender' },
-  { id: 'dynamic', label: 'dynamic', colorVar: '--pico-dark-green' },
-  { id: 'spacing', label: 'spacing primitives', colorVar: '--pico-orange' },
-  {
-    id: 'design-tokens',
-    label: 'design tokens',
-    colorVar: '--pico-light-gray',
-  },
-]
+const LANE_LIST = Object.values(LANES)
 
 export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
+  const { selectedLaneId, setSelectedLaneId } = useLaneSelection()
   const [journey, setJourney] = useState<Journey>('hidden')
 
   useEffect(() => {
@@ -53,12 +42,10 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
     } else if (activeBeatIdx === 2 || activeBeatIdx === 3) {
       setJourney('peeking')
     } else if (activeBeatIdx === 4) {
-      // Start sliding, then auto-pause at the worker for inspection.
       setJourney('sliding-to-worker')
       const t = window.setTimeout(() => setJourney('inspecting'), 1400)
       return () => window.clearTimeout(t)
     } else if (activeBeatIdx === 5) {
-      // Continue: slide past worker, then enter the building.
       setJourney('sliding-to-gate')
       const t1 = window.setTimeout(() => setJourney('entering'), 1400)
       const t2 = window.setTimeout(() => setJourney('inside'), 2400)
@@ -71,34 +58,54 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   const gateOpen = journey === 'entering' || journey === 'inside'
   const showReaction = journey === 'inspecting'
-  // Crate is always rendered except after it's entered the building.
-  // The 'hidden' state uses scale(0) inside the lorry so the move to
-  // 'peeking' reads as an unload animation rather than a pop-in.
   const crateVisible = journey !== 'inside'
+
+  const selectionEnabled = activeBeatIdx >= 3
+  const selectedLane = LANES[selectedLaneId]
+  const selectedLabel = selectedLane?.label ?? 'static'
 
   return (
     <div className="dock-scene">
       <SceneHeader pkg="@equinor/eds-tokens-sync" title="GOODS TERMINAL" />
 
-      {/* lane indicator (top-left) — destination labels, not parallel belts */}
+      {/* lane indicator (top-left) — destination labels.
+          At beat ≥3, ready/scaffold rows become clickable. */}
       <div
-        className={`lane-indicator ${activeBeatIdx >= 3 ? 'is-highlighted' : ''}`}
+        className={`lane-indicator ${activeBeatIdx >= 3 ? 'is-highlighted' : ''} ${selectionEnabled ? 'is-selectable' : ''}`}
       >
-        {LANES.map((lane) => (
-          <div
-            key={lane.id}
-            className={`lane-row ${
-              lane.id === 'static' ? 'lane-active' : 'lane-sibling'
-            }`}
-          >
-            <span
-              className="lane-swatch"
-              style={{ background: `var(${lane.colorVar})` }}
-            />
-            <span className="lane-name">{lane.label}</span>
-            <span className="lane-arrow">→</span>
-          </div>
-        ))}
+        {LANE_LIST.map((lane) => {
+          const isActive = lane.id === selectedLaneId
+          const isClickable =
+            selectionEnabled && !isActive && lane.status !== 'locked'
+          return (
+            <button
+              key={lane.id}
+              type="button"
+              className={`lane-row ${isActive ? 'lane-active' : 'lane-sibling'} ${lane.status === 'locked' ? 'is-locked' : ''} ${isClickable ? 'is-clickable' : ''}`}
+              onClick={
+                isClickable ? () => setSelectedLaneId(lane.id) : undefined
+              }
+              disabled={!isClickable}
+              aria-pressed={isActive}
+              aria-label={
+                lane.status === 'locked'
+                  ? `${lane.label} — coming soon`
+                  : isActive
+                    ? `${lane.label} — current lane`
+                    : `Switch to ${lane.label}`
+              }
+            >
+              <span
+                className="lane-swatch"
+                style={{ background: `var(${lane.accent})` }}
+              />
+              <span className="lane-name">{lane.label}</span>
+              <span className="lane-arrow">
+                {lane.status === 'locked' ? '·' : '→'}
+              </span>
+            </button>
+          )
+        })}
       </div>
 
       {/* factory building on the right */}
@@ -118,14 +125,13 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
       <div className="dock-worker">
         {showReaction && (
           <div className="worker-bubble">
-            <span>✓ static</span>
+            <span>✓ {selectedLabel}</span>
           </div>
         )}
         <Token />
       </div>
 
-      {/* lorry at the start of the belt — z-index above the crate when
-          hidden/peeking so the crate is partially obscured. */}
+      {/* lorry at the start of the belt */}
       <div className="lorry-spot">
         <Lorry />
       </div>
@@ -134,7 +140,7 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
       {crateVisible && (
         <div className={`dock-crate dock-crate-journey crate-state-${journey}`}>
           <Crate />
-          <div className="crate-travel-label">static</div>
+          <div className="crate-travel-label">{selectedLabel}</div>
         </div>
       )}
     </div>

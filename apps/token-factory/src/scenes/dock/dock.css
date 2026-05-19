@@ -45,6 +45,7 @@
     width: calc(130 * var(--px));
   }
 
+  /* Rows are <button>s — reset native button look. */
   .lane-row {
     display: flex;
     align-items: center;
@@ -52,10 +53,17 @@
     padding: calc(2 * var(--px)) calc(4 * var(--px));
     background: var(--pico-black);
     border: var(--px) solid var(--pico-dark-gray);
+    font-family: inherit;
     font-size: calc(4 * var(--px));
+    color: inherit;
     text-transform: uppercase;
+    text-align: left;
     opacity: 0.4;
-    transition: opacity 200ms steps(2, end);
+    cursor: default;
+    transition:
+      opacity 200ms steps(2, end),
+      border-color 150ms steps(2, end),
+      transform 100ms steps(2, end);
   }
 
   .lane-indicator.is-highlighted .lane-active {
@@ -65,7 +73,28 @@
   }
 
   .lane-indicator.is-highlighted .lane-sibling {
+    opacity: 0.35;
+  }
+
+  .lane-indicator.is-highlighted .lane-sibling.is-locked {
     opacity: 0.2;
+  }
+
+  /* Clickable sibling rows — slightly more visible so the affordance reads. */
+  .lane-row.is-clickable {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  .lane-row.is-clickable:hover {
+    opacity: 1;
+    border-color: var(--pico-white);
+    transform: translateX(calc(1 * var(--px)));
+  }
+
+  .lane-row.is-clickable:focus-visible {
+    outline: var(--px) solid var(--pico-yellow);
+    outline-offset: var(--px);
   }
 
   .lane-swatch {

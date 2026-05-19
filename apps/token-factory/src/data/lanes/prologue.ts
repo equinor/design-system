@@ -20,9 +20,9 @@ export const PROLOGUE: SceneRef[] = [
     lines: [
       'Every morning, lorries arrive at our goods terminal.',
       "This is eds-tokens-sync — Figma's REST API drops variable files at our door.",
-      "Our crate is labelled 'static'. That's our lane today.",
-      'See the other four belts? Other lanes. Not today’s story.',
-      'The worker reads the label and sorts our crate onto the static belt.',
+      "Our crate is labelled 'static'. Click another lane label to follow that one instead.",
+      'Five Figma files arrive each morning, one per lane.',
+      'The worker reads the label and sorts our crate onto the matching belt.',
       'The gate slides open and our crate enters the factory.',
     ],
   },
