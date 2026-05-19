@@ -54,3 +54,31 @@ export function ChainSprite() {
     </svg>
   )
 }
+
+// Lacquer bottle — represents the Dynamic lane (runtime appearance
+// variants). A bottle of tint that changes the surface look without
+// changing the underlying gemstone.
+export function LacquerSprite() {
+  return (
+    <svg
+      className="lane-sprite"
+      viewBox="0 0 16 16"
+      shapeRendering="crispEdges"
+    >
+      {/* cap */}
+      <rect x={6} y={2} width={4} height={2} fill="#5f5760" />
+      {/* neck */}
+      <rect x={7} y={4} width={2} height={2} fill="#83769c" />
+      {/* shoulders */}
+      <rect x={5} y={6} width={6} height={1} fill="#ff77a8" />
+      {/* body */}
+      <rect x={4} y={7} width={8} height={6} fill="#ff77a8" />
+      {/* base */}
+      <rect x={5} y={13} width={6} height={1} fill="#ff77a8" />
+      {/* highlight */}
+      <rect x={5} y={7} width={1} height={5} fill="#ffccaa" />
+      {/* shadow */}
+      <rect x={10} y={7} width={1} height={6} fill="#7e2553" />
+    </svg>
+  )
+}

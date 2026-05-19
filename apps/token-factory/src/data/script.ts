@@ -7,6 +7,7 @@
 // pinned to the top-right of the stage.
 
 export type SceneId =
+  | 'intro'
   | 'dock'
   | 'inside'
   | 'crack'
@@ -24,6 +25,15 @@ export type Scene = {
 }
 
 export const SCRIPT: Scene[] = [
+  {
+    id: 'intro',
+    title: 'token factory',
+    lines: [
+      'Welcome to the Token Factory.',
+      'A short story about how a design token travels from Figma to the components your team ships.',
+      'Press [space] to advance. Press [→] to jump scenes.',
+    ],
+  },
   {
     id: 'dock',
     title: 'the goods terminal',
@@ -101,7 +111,7 @@ export const SCRIPT: Scene[] = [
     title: 'the packaging',
     lines: [
       'At the shipping bench, our tray meets materials from the other four lanes.',
-      'Cords from spacing primitives. Clasps from foundations (elevation tokens). Chains from design tokens (typography).',
+      'Cords from spacing primitives. Clasps from foundations (elevation). Chains from design tokens (typography). Lacquer from dynamic (appearance).',
       'But before sealing the box, an inspector adds one more polish.',
       'Browsers without light-dark() still need to know which value to use.',
       'So the inspector re-declares the same token under four selector scopes.',
@@ -114,7 +124,7 @@ export const SCRIPT: Scene[] = [
     title: 'the jeweller',
     lines: [
       'And here are the actual jewels — the core components.',
-      'It takes our gemstones, our cords, our clasps, our chains.',
+      'It takes our gemstones, our cords, our clasps, our chains, our lacquer.',
       'And is assembled into jewellery.',
       'This is our design system.',
       'Every component we ship rides on the back of this pipeline.',

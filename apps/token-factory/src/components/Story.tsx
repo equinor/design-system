@@ -62,6 +62,7 @@ export function Story() {
   }, [advance, back, skip])
 
   const isReady = (id: string) =>
+    id === 'intro' ||
     id === 'jeweller' ||
     id === 'dock' ||
     id === 'inside' ||
@@ -102,6 +103,7 @@ export function Story() {
         skipTick={skipTick}
         onBeatChange={setActiveBeatIdx}
         onAdvancePastEnd={advance}
+        centered={scene.id === 'intro'}
       />
 
       <div className="story-hint">

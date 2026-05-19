@@ -17,21 +17,22 @@ Tracks: [equinor/design-system-internal#264](https://github.com/equinor/design-s
 
 ---
 
-## The story — 9 scenes
+## The story — 10 scenes
 
-The viewer follows one token (`bg-floating`) from Figma to a rendered EDS Button.
+The viewer follows one token (`Bg.Floating`) from Figma to a rendered EDS Button. Scene 0 is a centred LibrarianBot welcome; the protagonist arrives in Scene 1.
 
 | # | Scene | Visual core | What it teaches |
 |---|---|---|---|
-| 1 | **The Goods Terminal** | Lorry with Figma logo pulls up to `eds-tokens-sync`. Five conveyor belts visible behind the dock. Worker reads our crate's label and sorts it onto the Color Scheme belt. | Sync = REST API. Lanes are decided at sync time, not build time. |
-| 2 | **Inside the Factory** | Camera follows the crate inward on the belt. Machinery silhouettes. Worker walks alongside. | Continuity bridge. Introduces `bg-floating` by name. |
-| 3 | **The Crack** | Crate stops under the slam press. SLAM. Crate splits open, glowing geode inside. | Build station is where refinement starts. |
-| 4 | **The Reveal** | Geode lifted to centre. Splits visibly into three concentric stones with labels typing in. Narrator pauses. | "Tokens are layered." Sets up the alias-chain teach. |
-| 5 | **The Peel** *(extra-deliberate pacing)* | Each stone peeled in turn. Narrator names + locates each: outer = `--eds-color-bg-floating` (consumer CSS), middle = `bg-floating` (alias in `Color scheme.Light.json`), core = `Light.Gray.2 = #ffffff` (palette). | The 3-layer alias chain — the workshop's strongest "aha." |
-| 6 | **The Cutting** | Inner jewel + dark counterpart fused on cutter's bench (lever sprites flank it). Two facets, one gemstone. | `light-dark()` declarations — light + dark are one token with two values. |
-| 7 | **The Tray** | Gemstone placed in `color-scheme.css` tray with other concept-colour gemstones. | Lane output = `color-scheme.css`. |
-| 8 | **The Packaging** | Tray meets cords (spacing), clasps (density), chains (typography). Inspector re-declares the same token under four selector scopes (`:root` fallback, `[data-color-scheme=light]`, `[data-color-scheme=dark]`, `@media (prefers-color-scheme: dark)`). Box sealed as `variables.css`. | lightningcss bundle + `build-dark-scope` rewrite — same variable name resolved by four scopes for browsers without `light-dark()` native support. |
-| 9 | **The Jeweller** | Box arrives at "EDS Product Team." Jeweller assembles a necklace from gemstone + cord + clasp. **Pixel-art necklace fades into a real EDS `<Button>` rendered with real CSS variables and real font stack.** | The whole pipeline serves the design system. Emotional bookend. |
+| 0 | **Intro** | LibrarianBot centred on stage, scaled up, with a single bubble. No other scene chrome. | Frames the workshop — "follow a design token from Figma to a component." Sets keyboard controls. |
+| 1 | **The Goods Terminal** | Lorry with Figma logo pulls up to `eds-tokens-sync`. Five conveyor belts visible behind the dock (one per Figma file: static / foundations / dynamic / spacing primitives / design tokens). Worker reads our crate's label and sorts it onto the Static belt. | Sync = REST API. Lanes = Figma files. Routing happens at sync time, not build time. |
+| 2 | **Inside the Factory** | Camera follows the crate inward on the belt. Machinery silhouettes. Worker walks alongside. The Static crate carries Semantic.Mode 1.json + Concept.Mode 1.json. | Continuity bridge. Introduces Bg.Floating and clarifies that one crate (one Figma file) holds many tokens — we follow one. |
+| 3 | **The Crack** | Crate stops under the slam press. SLAM. Crate splits open, glowing geode inside. | Build station is where refinement starts; protagonist named ("Bg.Floating in his raw JSON form"). |
+| 4 | **The Reveal** | Geode lifted to centre. Three concentric stones (concept / scheme / palette) with the "three-layered geode" label. | "Tokens are layered." Sets up the alias-chain teach. |
+| 5 | **The Peel** *(extra-deliberate pacing)* | Each stone peeled in turn. Narrator names + locates each: outer = `Bg.Floating` in `Static / Concept.Mode 1.json`; middle = `bg-floating` in `Foundations / 🌗 Color scheme.Light.json` (the swap point); core = `Light.Gray.2` in `Foundations / Color Light.Mode 1.json` (`#ffffff`). Then the build stamp attaches `--eds-color-bg-floating`. | The 3-layer alias chain across two Figma files + the build-emitted CSS variable name. |
+| 6 | **The Cutting** | Inner jewel + dark counterpart fused on cutter's bench. Two facets, one gemstone. | `light-dark()` declarations — light + dark are one token with two values. |
+| 7 | **The Tray** | Gemstone placed in a tray of concept-colour gemstones. Narrator names the file output: `color-scheme.css` (concepts alongside scheme aliases + palette they resolve through). | Lane output as a CSS file — what reaches `variables.css`. |
+| 8 | **The Packaging** | Tray meets four sibling materials (cords / clasps / chains / lacquer) from the four other Figma-file lanes (spacing primitives / foundations · elevation / design tokens · typography / dynamic · appearance). Inspector re-declares the same token under four selector scopes (`:root` fallback, `[data-color-scheme=light]`, `[data-color-scheme=dark]`, `@media (prefers-color-scheme: dark)`). Box sealed as `variables.css`. | lightningcss bundle + `build-dark-scope` rewrite — same variable name resolved by four scopes for browsers without `light-dark()` native support. |
+| 9 | **The Jeweller** | Box arrives at "EDS Product Team." Jeweller assembles jewellery from the five materials (gemstone + cord + clasp + chain + lacquer). **Pixel-art assembly fades into a real EDS `<Button>` rendered with real CSS variables and real font stack.** | The whole pipeline serves the design system. Emotional bookend. |
 
 **~30 narrator beats. ~4–5 min runtime at hybrid pace.**
 
@@ -398,3 +399,28 @@ User asked for a thorough verification of the story against the actual pipeline 
 ### Phase D.11 — Driver UX: space advances scene at end of beat ✓
 
 Previously a space press on the last fully-typed line did nothing — driver had to switch hands to ArrowRight. Added an `onAdvancePastEnd` callback to `Narrator.tsx` and wired it to `Story.tsx`'s existing scene-advance action. Skip flow is now: complete mid-typing → advance line within scene → at end of last line, advance to next scene. Commit `a837dea6e`.
+
+### Phase D.12 — Scene 8 + 9 match Scene 1's lane count ✓
+
+Scene 1 shows 5 Figma-file lanes (static + 4 others). Scene 8's shipping bench previously displayed only 3 sibling bins (cords/clasps/chains), so the "four other lanes" narration didn't line up with the visual — and the **dynamic** lane was missing entirely. User caught this directly.
+
+Fixed by adding a fourth material:
+- New `LacquerSprite` (16×16, small pink/purple vial with cap, highlight, shadow) added to `LaneSprites.tsx` — represents the Dynamic lane (appearance variants applied via `data-color-appearance`).
+- `Packaging.tsx` LANES grew to four bins: cords / clasps / chains / lacquer, mapped to spacing primitives / foundations (elevation) / design tokens (typography) / dynamic (appearance).
+- `Jeweller.tsx` MATERIALS grew to five (gemstone for Static + the four sibling materials) so Scene 9's assembly mirrors what Scene 8 shipped.
+- Scene 8 narration extended to name the fourth bin: *"Lacquer from dynamic (appearance)."*
+- Scene 9 narration extended to mention lacquer alongside the other materials.
+
+### Phase D.13 — Scene 0 intro ✓
+
+User asked for a welcome scene before the dock. The LibrarianBot (otherwise pinned top-right as the in-scene narrator) takes centre stage with a scaled-up speech bubble, and three lines of intro text sit the audience down before the story begins.
+
+- New `intro` scene prepended to `SCRIPT` in `data/script.ts`. Three driver-paced lines:
+  - *Welcome to the Token Factory.*
+  - *A short story about how a design token travels from Figma to the components your team ships.*
+  - *Press [space] to advance. Press [→] to jump scenes.*
+- `Narrator.tsx` gained a `centered` prop. When true, the wrapper applies an `.is-centered` modifier class that absolute-positions the bot + bubble dead centre, swaps the layout to column, scales the LibrarianBot sprite up (24×32 → 36×48 logical), enlarges the bubble font and padding, and points the bubble tail upward at the bot above it.
+- `Story.tsx` passes `centered={scene.id === 'intro'}` and adds `'intro'` to the `isReady` set so the placeholder scene doesn't render under the centred bot.
+- `app.css` carries the centred variant rules right after the default `.narrator-caret` block, scoped via `.narrator.is-centered`.
+
+The intro scene has no other visual chrome — the centred narrator is the whole scene. From here, pressing space three times (or hitting `→` once) lands on the existing Scene 1 Dock. Total scene count is now 10.

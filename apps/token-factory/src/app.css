@@ -306,6 +306,45 @@ button {
   animation: caret-blink 0.6s steps(2, end) infinite;
 }
 
+/* Intro variant — bot in centre stage, bubble below, scaled up.
+   Overrides the default top-right corner positioning. */
+.narrator.is-centered {
+  top: 50%;
+  right: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  align-items: center;
+  width: calc(220 * var(--px));
+  gap: calc(6 * var(--px));
+}
+
+.narrator.is-centered .librarian {
+  flex-direction: column;
+}
+
+.narrator.is-centered .librarian-sprite {
+  width: calc(36 * var(--px));
+  height: calc(48 * var(--px));
+}
+
+.narrator.is-centered .narrator-bubble {
+  font-size: calc(5 * var(--px));
+  padding: calc(6 * var(--px)) calc(8 * var(--px));
+  min-height: calc(36 * var(--px));
+  text-align: center;
+  box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0
+    var(--pico-dark-purple);
+}
+
+.narrator.is-centered .narrator-bubble::after {
+  /* tail points up to the bot above */
+  top: calc(-3 * var(--px));
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /* ===== Scene placeholder (Phase B — replaced in Phase C+) ===== */
 
 .scene-placeholder {

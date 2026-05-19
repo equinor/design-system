@@ -1,5 +1,10 @@
 import { Gemstone } from './Gemstone'
-import { ChainSprite, ClaspSprite, CordSprite } from './LaneSprites'
+import {
+  ChainSprite,
+  ClaspSprite,
+  CordSprite,
+  LacquerSprite,
+} from './LaneSprites'
 import { SceneHeader } from './SceneHeader'
 import { Token } from './Token'
 
@@ -53,6 +58,12 @@ const MATERIALS: Material[] = [
     label: 'chain',
     pkg: 'design tokens',
     render: () => <ChainSprite />,
+  },
+  {
+    key: 'lacquer',
+    label: 'lacquer',
+    pkg: 'dynamic',
+    render: () => <LacquerSprite />,
   },
 ]
 

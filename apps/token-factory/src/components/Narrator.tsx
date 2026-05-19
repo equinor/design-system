@@ -17,6 +17,9 @@ type Props = {
    *  while that line is already fully typed. Story uses this to advance
    *  to the next scene without needing a separate ArrowRight press. */
   onAdvancePastEnd?: () => void
+  /** Render the narrator centred + scaled up, with the speech bubble
+   *  below the bot instead of beside it. Used for the intro scene. */
+  centered?: boolean
 }
 
 // Top-right narrator overlay. The librarian-bot is the same sprite as
@@ -32,6 +35,7 @@ export function Narrator({
   skipTick = 0,
   onBeatChange,
   onAdvancePastEnd,
+  centered = false,
 }: Props) {
   const [lineIdx, setLineIdx] = useState(0)
   const [typed, setTyped] = useState('')
@@ -88,7 +92,7 @@ export function Narrator({
   }, [autoAdvance, lines, lineIdx, typed])
 
   return (
-    <div className="narrator">
+    <div className={`narrator ${centered ? 'is-centered' : ''}`}>
       <LibrarianBot />
       {lines.length > 0 && (
         <div className="narrator-bubble">

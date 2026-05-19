@@ -1,5 +1,10 @@
 import { Gemstone } from './Gemstone'
-import { ChainSprite, ClaspSprite, CordSprite } from './LaneSprites'
+import {
+  ChainSprite,
+  ClaspSprite,
+  CordSprite,
+  LacquerSprite,
+} from './LaneSprites'
 import { SceneHeader } from './SceneHeader'
 
 // Scene 8 — The Packaging.
@@ -19,22 +24,24 @@ import { SceneHeader } from './SceneHeader'
 
 type LaneIcon = {
   label: string
-  shape: 'cord' | 'clasp' | 'chain'
+  shape: 'cord' | 'clasp' | 'chain' | 'lacquer'
   pkg: string
 }
 
-// Lane labels match Scene 1's Figma-file names; the parenthetical
-// shows which sub-collection inside that lane the material comes from.
+// One bin per other-lane from Scene 1. The four siblings to Static
+// (our lane): spacing primitives, foundations, design tokens, dynamic.
 const LANES: LaneIcon[] = [
   { label: 'cords', shape: 'cord', pkg: 'spacing primitives' },
   { label: 'clasps', shape: 'clasp', pkg: 'foundations · elevation' },
   { label: 'chains', shape: 'chain', pkg: 'design tokens · typography' },
+  { label: 'lacquer', shape: 'lacquer', pkg: 'dynamic · appearance' },
 ]
 
 function laneSprite(shape: LaneIcon['shape']) {
   if (shape === 'cord') return <CordSprite />
   if (shape === 'clasp') return <ClaspSprite />
-  return <ChainSprite />
+  if (shape === 'chain') return <ChainSprite />
+  return <LacquerSprite />
 }
 
 // Four scoped declarations the build-dark-scope step appends.
