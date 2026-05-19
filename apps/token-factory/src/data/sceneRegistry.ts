@@ -1,0 +1,35 @@
+// Scene registry. Maps a SceneId (the convention used by lane data) to
+// the React component that renders that scene.
+//
+// Adding a new scene: drop the component under scenes/<lane>/, register
+// it here, then reference its id from a lane's scenes array.
+
+import type { FC } from 'react'
+import { Intro } from '../scenes/intro/Intro'
+import { Dock } from '../scenes/dock/Dock'
+import { Inside } from '../scenes/static/Inside'
+import { Crack } from '../scenes/static/Crack'
+import { Reveal } from '../scenes/static/Reveal'
+import { Peel } from '../scenes/static/Peel'
+import { Cutting } from '../scenes/static/Cutting'
+import { Tray } from '../scenes/static/Tray'
+import { Packaging } from '../scenes/static/Packaging'
+import { Jeweller } from '../scenes/static/Jeweller'
+import type { SceneId } from './lanes'
+
+export type SceneProps = {
+  activeBeatIdx: number
+}
+
+export const SCENES: Record<SceneId, FC<SceneProps>> = {
+  intro: Intro,
+  dock: Dock,
+  inside: Inside,
+  crack: Crack,
+  reveal: Reveal,
+  peel: Peel,
+  cutting: Cutting,
+  tray: Tray,
+  packaging: Packaging,
+  jeweller: Jeweller,
+}

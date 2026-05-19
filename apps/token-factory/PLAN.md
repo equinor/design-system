@@ -518,3 +518,28 @@ Pure structural refactor. **No behavioural change.** Build + Chrome smoke confir
 - Chrome dev playthrough confirms identical visuals on intro / dock / inside / crack / reveal / cutting. No console errors beyond a benign favicon 404.
 
 **Carried forward into G.1+:** the `@layer` order declaration is in place but no scene/sprite CSS yet depends on layer precedence — purely future-proofing. The shared `.belt-strip` rule + cross-scene keyframes (`peel-info-pop`, `caret-blink`) sit in `base.css` because they're used by multiple scenes/sprites; this is the only structural "smell" — if it grows, hoist to a dedicated `shared.css`.
+
+### Phase G.1 — Scene registry + lane data ✓
+
+Introduces the data model that G.2 will route over. **No behavioural change** — the flat sequence of 10 scenes still plays in the same order.
+
+**New data layer:**
+- `src/data/lanes/types.ts` — `Lane`, `LaneId` (5-Figma-file union), `SceneId`, `SceneRef`, `NarratorMode`. SceneId is the union of registered scene ids; LaneId is the union of the five Figma files.
+- `src/data/lanes/prologue.ts` — `PROLOGUE: SceneRef[]` = the two shared pre-branch scenes (intro + dock). Intro carries `narrator: 'centered'` so the rendering policy lives in data, not a hardcoded string check.
+- `src/data/lanes/static.ts` — `STATIC_LANE: Lane` with the 8 post-dock scenes (inside → jeweller) moved verbatim from the old `SCRIPT`.
+- `src/data/lanes/index.ts` — re-exports + `LANES: Partial<Record<LaneId, Lane>>` (only `static` is filled in; the other four lane ids exist in the type but aren't populated yet).
+- `src/data/sceneRegistry.ts` — `SCENES: Record<SceneId, FC<SceneProps>>`. Each scene id resolves to its component. Adding a new scene = drop component + add one line here.
+
+**New chrome:**
+- `src/chrome/LaneContext.ts` — `createContext<Lane>(STATIC_LANE)` + `useLane()` hook. Story.tsx provides; no scene consumes yet (G.2 wires the dock to it).
+- `src/scenes/intro/Intro.tsx` — returns `null`. Exists so the registry resolves `intro` uniformly; the centred narrator carries the whole scene.
+
+**Story.tsx rewrite:**
+- The hardcoded if-chain (`{scene.id === 'dock' && <Dock />} {scene.id === 'inside' && <Inside />} ...`) is replaced by `const Scene = SCENES[scene.id]; <Scene activeBeatIdx={...} />`. Adding scenes no longer requires editing Story.
+- `SCRIPT` consumption replaced with `[...PROLOGUE, ...STATIC_LANE.scenes]` (memoised). Same 10-scene flat sequence as before.
+- Narrator's `centered` prop now reads `scene.narrator === 'centered'` instead of `scene.id === 'intro'`. Per-scene narrator config is data, not hardcoded.
+- Story wrapped in `<LaneContext.Provider value={STATIC_LANE}>`. Default is Static; G.2 changes this when the user selects a different lane at the dock.
+
+**Removed:** `src/data/script.ts` (its contents are now in lane data). The "phase b scaffold" hint label inside Story.tsx is gone — every scene is now backed by a real component.
+
+**Verified:** tsc + vite build clean (59 modules, no diff in module count). Chrome smoke shows intro + dock identical to G.0.
