@@ -1,7 +1,6 @@
 import { EDSStyleSheet } from "../../styling";
 import { TypographySizeToken, TypographyToken } from "../../styling/tokens";
 import { TypographyStyleProps } from "./types";
-import { PROP_TOKEN_FIELD_MAP } from "./utility";
 
 type TypographyGroupStyleProps<TGroup extends keyof TypographyToken> = {
     size: keyof TypographyToken[TGroup]["fontFamilySize"];
@@ -29,11 +28,9 @@ export function createTypographyStyles<TGroup extends keyof TypographyToken>(
                     fontFamily:
                         token.typography[group].typography.fontFamily,
                     fontSize: sizeToken.fontSize,
-                    fontWeight: sizeToken[PROP_TOKEN_FIELD_MAP.weight[weight]],
-                    lineHeight:
-                        sizeToken[PROP_TOKEN_FIELD_MAP.lineHeight[lineHeight]],
-                    letterSpacing:
-                        sizeToken[PROP_TOKEN_FIELD_MAP.tracking[tracking]],
+                    fontWeight: sizeToken.fontWeight[weight],
+                    lineHeight: sizeToken.lineHeight[lineHeight],
+                    letterSpacing: sizeToken.tracking[tracking],
                     color: token.colors.text.neutral.strong,
                 },
             };
