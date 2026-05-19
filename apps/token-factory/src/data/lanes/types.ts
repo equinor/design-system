@@ -27,6 +27,9 @@ export type SceneId =
   | 'tray'
   | 'packaging'
   | 'jeweller'
+  // Generic placeholder — used by every scaffold lane until real
+  // scene components land. One component, many scene-ref instances.
+  | 'placeholder'
 
 export type NarratorMode = 'corner' | 'centered'
 

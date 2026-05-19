@@ -9,22 +9,18 @@
 // G.3 promotes one of the locked entries to status:'scaffold' and
 // gives it a placeholder scene sequence.
 
+import { FOUNDATIONS_LANE } from './foundations'
 import { STATIC_LANE } from './static'
 import type { Lane, LaneId } from './types'
 
 export type { Lane, LaneId, NarratorMode, SceneId, SceneRef } from './types'
 export { PROLOGUE } from './prologue'
 export { STATIC_LANE } from './static'
+export { FOUNDATIONS_LANE } from './foundations'
 
 export const LANES: Record<LaneId, Lane> = {
   static: STATIC_LANE,
-  foundations: {
-    id: 'foundations',
-    label: 'foundations',
-    accent: '--pico-lavender',
-    status: 'locked',
-    scenes: [],
-  },
+  foundations: FOUNDATIONS_LANE,
   dynamic: {
     id: 'dynamic',
     label: 'dynamic',

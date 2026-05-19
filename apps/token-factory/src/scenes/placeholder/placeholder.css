@@ -1,0 +1,70 @@
+@layer tf-scenes {
+  .placeholder-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .placeholder-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(8 * var(--px));
+  }
+
+  .placeholder-card {
+    display: flex;
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-dark-gray);
+    box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0 var(--pico-black);
+    min-width: calc(180 * var(--px));
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+
+  .placeholder-card-stripe {
+    width: calc(6 * var(--px));
+    background: var(--pico-dark-gray);
+  }
+
+  .placeholder-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--px));
+    padding: calc(6 * var(--px)) calc(8 * var(--px));
+  }
+
+  .placeholder-meta {
+    display: flex;
+    align-items: baseline;
+    gap: calc(4 * var(--px));
+    margin: 0;
+  }
+
+  .placeholder-meta-key {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-dark-gray);
+    text-transform: uppercase;
+    letter-spacing: calc(0.5 * var(--px));
+    min-width: calc(24 * var(--px));
+  }
+
+  .placeholder-meta-value {
+    font-size: calc(5 * var(--px));
+    color: var(--pico-yellow);
+    text-transform: uppercase;
+  }
+
+  .placeholder-tbd {
+    margin: calc(2 * var(--px)) 0 0;
+    padding-top: calc(3 * var(--px));
+    border-top: var(--px) dashed var(--pico-dark-gray);
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+    font-style: italic;
+  }
+}

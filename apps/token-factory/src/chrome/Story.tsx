@@ -135,7 +135,7 @@ export function Story() {
     <LaneContext.Provider value={selectedLane}>
       <LaneSelectionContext.Provider value={selectionValue}>
         {Scene && scene ? (
-          <Scene activeBeatIdx={activeBeatIdx} />
+          <Scene activeBeatIdx={activeBeatIdx} scene={scene} />
         ) : (
           <div className="scene-placeholder">
             <div className="scene-header">

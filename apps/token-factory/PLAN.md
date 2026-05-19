@@ -581,3 +581,29 @@ First user-visible behaviour change in Phase G. The dock is now a diegetic branc
 **G.2 caveat:** with only `static` ready, no lane is currently clickable — locked lanes ignore the click, current lane ignores it (`!isActive` guard). The UI affordance is in place; G.3 will make the click meaningful by promoting one lane to `'scaffold'`.
 
 **Verified:** tsc + build clean (59 → 60 modules with the new Intro.tsx + LaneContext extension). Chrome smoke: intro → dock → scene 3 reaches "five Figma files" beat with STATIC highlighted + other 4 dim. ArrowRight from dock advances into `lane(static)/inside` correctly via the route reducer.
+
+### Phase G.3 — Scaffold a placeholder lane ✓
+
+Architecturally proves the multi-lane runtime end-to-end. A second lane (Foundations) now appears as clickable at the Dock; selecting it routes the post-dock story through a generic `PlaceholderScene` component.
+
+**New scene:**
+- `src/scenes/placeholder/PlaceholderScene.tsx` + `placeholder.css` — generic, lane-agnostic scene. Pulls the active lane via `useLane()` for label + accent, reads `scene.title` + computes its own index within the lane for the "SCENE 1/4" badge. SceneHeader pkg reads `lane · {laneId}` so the centre title doesn't collide with a long package name. Card body renders a dashed-line "scene content tbd" hint inside a pixel-art card whose border + stripe paint with the lane's accent.
+
+**Registry + props change:**
+- `SceneProps` gains `scene: SceneRef`. Existing scenes don't destructure it; PlaceholderScene needs it to read title and locate itself in the active lane.
+- `Story.tsx` passes `scene` alongside `activeBeatIdx` to every scene render.
+- `SceneId` union gains `'placeholder'`. `SCENES['placeholder'] = PlaceholderScene`. One component, many scene-ref instances — adding more placeholder scenes is a data-only change.
+
+**New lane data:**
+- `src/data/lanes/foundations.ts` — `FOUNDATIONS_LANE` with `status: 'scaffold'` and 4 scene refs all pointing to id `'placeholder'`. Generic narrator copy that does *not* reference the lane by name (lane labels are surfaced visually, not in narration, so the same lines work for any future scaffold lane).
+  - Scene titles: "the loading bay" / "the assembly line" / "the packing station" / "the courier" — story-shaped but lane-agnostic.
+- `data/lanes/index.ts` — replaces the G.2 locked placeholder for `foundations` with the real `FOUNDATIONS_LANE` import.
+
+**Lane status mapping after G.3:** static → ready · foundations → scaffold (clickable at Dock, routes to 4 placeholder scenes) · dynamic / spacing-primitives / design-tokens → locked (rendered dim, not clickable).
+
+**Verified end-to-end in Chrome:**
+- Dock beat ≥3: FOUNDATIONS row brighter than the three locked rows.
+- Click FOUNDATIONS → active styling moves from STATIC to FOUNDATIONS, crate sticker updates to "FOUNDATIONS" reactively, worker bubble (when reached) reads "✓ foundations".
+- ArrowRight past dock → routes into `lane(foundations)/0`, PlaceholderScene renders "THE LOADING BAY" with "LANE · foundations" + "SCENE 1 / 4 · scene content tbd".
+
+**Bug fixed mid-G.3:** first PlaceholderScene render used `@equinor/eds-tokens · foundations` as the SceneHeader pkg, which was long enough to collide with the centred title. Shortened to `lane · {laneId}`.

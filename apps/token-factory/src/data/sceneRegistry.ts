@@ -7,6 +7,7 @@
 import type { FC } from 'react'
 import { Intro } from '../scenes/intro/Intro'
 import { Dock } from '../scenes/dock/Dock'
+import { PlaceholderScene } from '../scenes/placeholder/PlaceholderScene'
 import { Inside } from '../scenes/static/Inside'
 import { Crack } from '../scenes/static/Crack'
 import { Reveal } from '../scenes/static/Reveal'
@@ -15,10 +16,14 @@ import { Cutting } from '../scenes/static/Cutting'
 import { Tray } from '../scenes/static/Tray'
 import { Packaging } from '../scenes/static/Packaging'
 import { Jeweller } from '../scenes/static/Jeweller'
-import type { SceneId } from './lanes'
+import type { SceneId, SceneRef } from './lanes'
 
 export type SceneProps = {
   activeBeatIdx: number
+  /** The scene-ref currently driving this render. Scenes that need
+   *  per-instance metadata (e.g. PlaceholderScene reading the title)
+   *  consume it; most scenes ignore it. */
+  scene: SceneRef
 }
 
 export const SCENES: Record<SceneId, FC<SceneProps>> = {
@@ -32,4 +37,5 @@ export const SCENES: Record<SceneId, FC<SceneProps>> = {
   tray: Tray,
   packaging: Packaging,
   jeweller: Jeweller,
+  placeholder: PlaceholderScene,
 }
