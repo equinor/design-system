@@ -30,9 +30,9 @@ export const SCRIPT: Scene[] = [
     lines: [
       'Every morning, lorries arrive at our goods terminal.',
       "This is eds-tokens-sync — Figma's REST API drops variable files at our door.",
-      "Our crate is labelled 'color scheme'. That's our lane today.",
-      "See the other four belts? Other lanes. Not today's story.",
-      'The worker reads the label and sorts our crate onto the color scheme belt.',
+      "Our crate is labelled 'concept'. That's our lane today.",
+      "See the other five belts? Other lanes. Not today's story.",
+      'The worker reads the label and sorts our crate onto the concept belt.',
       'The gate slides open and our crate enters the factory.',
     ],
   },
@@ -41,8 +41,8 @@ export const SCRIPT: Scene[] = [
     title: 'inside the factory',
     lines: [
       'Inside, the belt carries our crate deeper.',
-      "The crate holds one token. Let's call him bg-floating.",
-      "Bg-floating doesn't know what he is yet. That gets figured out at the next station.",
+      'This crate is one synced JSON file — Concept.Mode 1.json. It holds dozens of tokens.',
+      "We'll follow just one of them. Let's call him Bg.Floating. We meet him properly when the build cracks the crate open.",
     ],
   },
   {
