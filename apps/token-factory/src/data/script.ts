@@ -51,7 +51,7 @@ export const SCRIPT: Scene[] = [
     lines: [
       'At the build station, the crate gets opened.',
       'SLAM.',
-      'Inside: a geode. This is our token in its raw JSON form.',
+      'Inside: a geode. This is Bg.Floating in his raw JSON form.',
     ],
   },
   {
@@ -82,7 +82,7 @@ export const SCRIPT: Scene[] = [
     title: 'the cutting',
     lines: [
       "But here's the twist: the same token has a different colour in dark mode.",
-      'In dark mode, bg-floating = #202223 instead of #ffffff.',
+      'In dark mode, Bg.Floating = #202223 instead of #ffffff (resolved through 🌗 Color scheme.Dark.json → Dark.North sea.2).',
       'The cutter fuses both into one gemstone with two facets.',
       'Written in CSS: light-dark(#ffffff, #202223).',
       "One token, two values, one declaration. That's how light and dark theming works.",
@@ -101,7 +101,7 @@ export const SCRIPT: Scene[] = [
     title: 'the packaging',
     lines: [
       'At the shipping bench, our tray meets materials from the other four lanes.',
-      'Cords from spacing. Clasps from elevation. Chains from typography.',
+      'Cords from spacing primitives. Clasps from foundations (elevation tokens). Chains from design tokens (typography).',
       'But before sealing the box, an inspector adds one more polish.',
       'Browsers without light-dark() still need to know which value to use.',
       'So the inspector re-declares the same token under four selector scopes.',

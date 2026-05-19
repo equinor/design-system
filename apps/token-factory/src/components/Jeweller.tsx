@@ -26,29 +26,32 @@ type Material = {
   render: () => React.ReactElement
 }
 
+// pkg labels match Scene 1's Figma-file lanes. The gem is our
+// protagonist Bg.Floating — its identity lives in Static
+// (Concept.Mode 1.json); the value resolves through Foundations.
 const MATERIALS: Material[] = [
   {
     key: 'gem',
     label: 'gemstone',
-    pkg: 'color',
+    pkg: 'static',
     render: () => <Gemstone />,
   },
   {
     key: 'cord',
     label: 'cord',
-    pkg: 'spacing',
+    pkg: 'spacing primitives',
     render: () => <CordSprite />,
   },
   {
     key: 'clasp',
     label: 'clasp',
-    pkg: 'elevation',
+    pkg: 'foundations',
     render: () => <ClaspSprite />,
   },
   {
     key: 'chain',
     label: 'chain',
-    pkg: 'typography',
+    pkg: 'design tokens',
     render: () => <ChainSprite />,
   },
 ]

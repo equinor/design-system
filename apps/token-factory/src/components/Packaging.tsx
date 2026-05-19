@@ -23,10 +23,12 @@ type LaneIcon = {
   pkg: string
 }
 
+// Lane labels match Scene 1's Figma-file names; the parenthetical
+// shows which sub-collection inside that lane the material comes from.
 const LANES: LaneIcon[] = [
-  { label: 'cords', shape: 'cord', pkg: 'spacing' },
-  { label: 'clasps', shape: 'clasp', pkg: 'elevation' },
-  { label: 'chains', shape: 'chain', pkg: 'typography' },
+  { label: 'cords', shape: 'cord', pkg: 'spacing primitives' },
+  { label: 'clasps', shape: 'clasp', pkg: 'foundations · elevation' },
+  { label: 'chains', shape: 'chain', pkg: 'design tokens · typography' },
 ]
 
 function laneSprite(shape: LaneIcon['shape']) {
