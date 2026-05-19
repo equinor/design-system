@@ -1,0 +1,29 @@
+@layer tf-sprites {
+  .lever {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(2 * var(--px));
+    cursor: pointer;
+  }
+
+  .lever-sprite {
+    width: calc(20 * var(--px));
+    height: calc(40 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  .lever-label {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-white);
+    text-transform: uppercase;
+  }
+
+  .lever.is-down .lever-label {
+    color: var(--pico-yellow);
+  }
+}

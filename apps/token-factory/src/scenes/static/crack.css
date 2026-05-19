@@ -1,0 +1,185 @@
+@layer tf-scenes {
+  .crack-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .crack-scene.is-shaking {
+    animation: crack-shake 520ms steps(8, end);
+  }
+
+  @keyframes crack-shake {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    15% {
+      transform: translate(calc(2 * var(--px)), calc(-1 * var(--px)));
+    }
+    30% {
+      transform: translate(calc(-2 * var(--px)), calc(1 * var(--px)));
+    }
+    45% {
+      transform: translate(calc(2 * var(--px)), calc(1 * var(--px)));
+    }
+    60% {
+      transform: translate(calc(-1 * var(--px)), calc(-1 * var(--px)));
+    }
+    75% {
+      transform: translate(calc(1 * var(--px)), 0);
+    }
+  }
+
+  .crack-station-label {
+    position: absolute;
+    top: calc(8 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: calc(6 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+    z-index: 5;
+  }
+
+  /* Press rig: frame posts, hammer (head + shaft), floor/anvil base. */
+  .press-rig {
+    position: absolute;
+    bottom: calc(10 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100 * var(--px));
+    height: calc(110 * var(--px));
+    z-index: 2;
+  }
+
+  .press-frame {
+    position: absolute;
+    top: 0;
+    width: calc(8 * var(--px));
+    height: calc(100 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+  }
+
+  .press-frame-left {
+    left: 0;
+  }
+
+  .press-frame-right {
+    right: 0;
+  }
+
+  .press-hammer {
+    position: absolute;
+    top: calc(8 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0ms;
+    z-index: 10;
+  }
+
+  .press-hammer-shaft {
+    width: calc(6 * var(--px));
+    height: calc(30 * var(--px));
+    background: var(--pico-light-gray);
+    border-left: var(--px) solid var(--pico-white);
+    border-right: var(--px) solid var(--pico-dark-gray);
+  }
+
+  .press-hammer-head {
+    width: calc(56 * var(--px));
+    height: calc(18 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: calc(2 * var(--px)) solid var(--pico-black);
+  }
+
+  .press-hammer.is-slamming {
+    animation: press-slam 520ms steps(6, end);
+  }
+
+  @keyframes press-slam {
+    0% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(calc(36 * var(--px)));
+    }
+    55% {
+      transform: translateX(-50%) translateY(calc(36 * var(--px)));
+    }
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  /* Static belt — press is stationary; belt doesn't move. */
+  .crack-belt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(20 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .crack-belt .belt-strip {
+    animation: none;
+  }
+
+  .crack-crate {
+    position: absolute;
+    bottom: calc(19 * var(--px));
+    left: 50%;
+    transform: translateX(-50%) scale(0.6);
+    transform-origin: center bottom;
+    z-index: 3;
+    transition: opacity 200ms steps(2, end);
+    animation: crack-crate-enter 1200ms steps(18, end);
+  }
+
+  @keyframes crack-crate-enter {
+    from {
+      transform: translateX(-500px) scale(0.6);
+    }
+    to {
+      transform: translateX(-50%) scale(0.6);
+    }
+  }
+
+  .crack-crate.is-open {
+    opacity: 0.85;
+  }
+
+  /* Geode revealed after the crate cracks open. Sits just above the
+     open crate, below the press hammer (which has retracted). */
+  .crack-geode {
+    position: absolute;
+    bottom: calc(38 * var(--px));
+    left: 50%;
+    transform: translateX(-50%) scale(1.1);
+    transform-origin: center bottom;
+    z-index: 4;
+    animation: geode-reveal 400ms steps(4, end);
+    filter: drop-shadow(0 0 calc(3 * var(--px)) #287a83);
+  }
+
+  @keyframes geode-reveal {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.4);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) scale(1.1);
+    }
+  }
+}

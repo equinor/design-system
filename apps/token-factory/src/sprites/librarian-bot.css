@@ -1,0 +1,44 @@
+@layer tf-sprites {
+  .librarian {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(3 * var(--px));
+    width: calc(72 * var(--px));
+    flex-shrink: 0;
+  }
+
+  .librarian-sprite {
+    width: calc(24 * var(--px));
+    height: calc(32 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  .librarian-bubble {
+    background: var(--pico-white);
+    color: var(--pico-black);
+    padding: calc(3 * var(--px)) calc(4 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+    font-size: calc(4 * var(--px));
+    line-height: 1.4;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+  }
+
+  .librarian-bubble::after {
+    content: '';
+    position: absolute;
+    top: calc(-3 * var(--px));
+    left: calc(8 * var(--px));
+    width: calc(3 * var(--px));
+    height: calc(3 * var(--px));
+    background: var(--pico-white);
+    border-left: var(--px) solid var(--pico-black);
+    border-top: var(--px) solid var(--pico-black);
+  }
+}

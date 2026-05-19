@@ -1,0 +1,22 @@
+@layer tf-sprites {
+  .lorry-sprite {
+    width: calc(80 * var(--px));
+    height: calc(40 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+    animation: lorry-enter 2000ms steps(18, end);
+
+    text {
+      transform: scaleX(-1);
+    }
+  }
+
+  @keyframes lorry-enter {
+    from {
+      transform: translateX(500px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}

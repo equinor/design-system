@@ -1,0 +1,8 @@
+@layer tf-sprites {
+  .gemstone-sprite {
+    width: calc(80 * var(--px));
+    height: calc(80 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+}

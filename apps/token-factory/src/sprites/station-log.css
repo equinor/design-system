@@ -1,0 +1,38 @@
+@layer tf-sprites {
+  .station-log {
+    background: var(--pico-black);
+    border-top: var(--px) solid var(--pico-lavender);
+    padding: calc(3 * var(--px)) calc(8 * var(--px));
+    min-height: calc(34 * var(--px));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: calc(1 * var(--px));
+  }
+
+  .log-line {
+    font-size: calc(4 * var(--px));
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .log-line-old {
+    color: var(--pico-dark-gray);
+  }
+
+  .log-line-active {
+    color: var(--pico-yellow);
+  }
+
+  .log-caret {
+    display: inline-block;
+    width: calc(3 * var(--px));
+    height: calc(5 * var(--px));
+    background: var(--pico-yellow);
+    margin-left: calc(1 * var(--px));
+    vertical-align: middle;
+    animation: caret-blink 0.6s steps(2, end) infinite;
+  }
+}

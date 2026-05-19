@@ -1,0 +1,17 @@
+@layer tf-sprites {
+  .necklace-sprite {
+    width: calc(48 * var(--px));
+    height: calc(40 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  .necklace-display {
+    opacity: 1;
+    transition: opacity 300ms steps(3, end);
+  }
+
+  .necklace-display.is-fading {
+    opacity: 0;
+  }
+}

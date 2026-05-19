@@ -1,0 +1,71 @@
+@layer tf-scenes {
+  .reveal-scene {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reveal-title {
+    position: absolute;
+    top: calc(8 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: calc(6 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+    z-index: 5;
+  }
+
+  .reveal-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(6 * var(--px));
+  }
+
+  .reveal-geode-closed {
+    transform: scale(2.4);
+    transform-origin: center;
+    animation: closed-geode-pulse 1600ms ease-in-out infinite;
+    filter: drop-shadow(0 0 calc(4 * var(--px)) #287a83);
+  }
+
+  @keyframes closed-geode-pulse {
+    0%,
+    100% {
+      transform: scale(2.4);
+    }
+    50% {
+      transform: scale(2.5);
+    }
+  }
+
+  .reveal-stones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(4 * var(--px));
+    animation: stones-appear 360ms steps(4, end);
+  }
+
+  @keyframes stones-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .stones-label {
+    font-size: calc(5 * var(--px));
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+    letter-spacing: calc(1 * var(--px));
+  }
+}

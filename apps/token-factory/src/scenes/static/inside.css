@@ -1,0 +1,199 @@
+@layer tf-scenes {
+  .inside-scene {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Parallax machinery layers — far behind + near.
+     Each layer is a 200%-wide flex container holding two identical tiles.
+     Animation shifts the container by -50% per loop, so tile-2 lands in
+     tile-1's start position before the snap-back. Seamless loop. */
+  .inside-machinery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: calc(20 * var(--px));
+    width: 200%;
+    display: flex;
+    pointer-events: none;
+  }
+
+  .machinery-tile {
+    flex: 0 0 50%;
+    position: relative;
+    height: 100%;
+  }
+
+  .inside-machinery-far {
+    z-index: 1;
+    animation: machinery-scroll 18s linear infinite;
+    opacity: 0.55;
+  }
+
+  .inside-machinery-near {
+    z-index: 2;
+    animation: machinery-scroll 9s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes machinery-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .machinery-tower,
+  .machinery-pipe {
+    position: absolute;
+    bottom: 0;
+    background: #0a112a;
+  }
+
+  .machinery-pipe {
+    width: calc(6 * var(--px));
+  }
+
+  .mt-far-1 {
+    left: calc(20 * var(--px));
+    width: calc(34 * var(--px));
+    height: calc(80 * var(--px));
+  }
+  .mp-far-1 {
+    left: calc(80 * var(--px));
+    height: calc(110 * var(--px));
+  }
+  .mt-far-2 {
+    left: calc(120 * var(--px));
+    width: calc(50 * var(--px));
+    height: calc(95 * var(--px));
+  }
+  .mp-far-2 {
+    left: calc(220 * var(--px));
+    height: calc(120 * var(--px));
+  }
+  .mt-far-3 {
+    left: calc(280 * var(--px));
+    width: calc(38 * var(--px));
+    height: calc(70 * var(--px));
+  }
+
+  .mt-near-1 {
+    left: calc(40 * var(--px));
+    width: calc(28 * var(--px));
+    height: calc(60 * var(--px));
+    background: #050a1a;
+  }
+  .mp-near-1 {
+    left: calc(140 * var(--px));
+    height: calc(80 * var(--px));
+    background: #050a1a;
+  }
+  .mt-near-2 {
+    left: calc(220 * var(--px));
+    width: calc(44 * var(--px));
+    height: calc(70 * var(--px));
+    background: #050a1a;
+  }
+  .mp-near-2 {
+    left: calc(320 * var(--px));
+    height: calc(90 * var(--px));
+    background: #050a1a;
+  }
+
+  .inside-belt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(20 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+    overflow: hidden;
+    z-index: 3;
+  }
+
+  /* Belt scrolls in opposite direction to the dock — camera follows the
+     crate, so the world (and belt surface) moves leftward beneath it. */
+  .inside-belt .belt-strip {
+    animation: inside-belt-scroll 0.9s linear infinite;
+  }
+
+  @keyframes inside-belt-scroll {
+    from {
+      background-position-x: 0;
+    }
+    to {
+      background-position-x: calc(-8 * var(--px));
+    }
+  }
+
+  .inside-crate {
+    position: absolute;
+    bottom: calc(10 * var(--px));
+    left: 50%;
+    transform: translateX(-50%) scale(0.6);
+    transform-origin: center bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+    z-index: 5;
+  }
+
+  .crate-name-tag {
+    position: absolute;
+    bottom: calc(50 * var(--px));
+    left: 50%;
+    transform: translateX(-50%) scale(1.67);
+    transform-origin: center bottom;
+    display: flex;
+    align-items: center;
+    gap: calc(3 * var(--px));
+    background: var(--pico-yellow);
+    color: var(--pico-black);
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+    font-size: calc(4 * var(--px));
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: name-tag-pop 280ms steps(3, end);
+  }
+
+  @keyframes name-tag-pop {
+    from {
+      transform: translateX(-50%) scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(-50%) scale(1.67);
+      opacity: 1;
+    }
+  }
+
+  .crate-name-tag .tag-key {
+    color: var(--pico-dark-purple);
+  }
+
+  .crate-name-tag .tag-value {
+    color: var(--pico-black);
+  }
+
+  .crate-name-tag::after {
+    content: '';
+    position: absolute;
+    bottom: calc(-3 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(3 * var(--px));
+    height: calc(3 * var(--px));
+    background: var(--pico-yellow);
+    border-right: var(--px) solid var(--pico-black);
+    border-bottom: var(--px) solid var(--pico-black);
+  }
+}

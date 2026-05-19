@@ -1,0 +1,8 @@
+@layer tf-sprites {
+  .crate-sprite {
+    width: calc(48 * var(--px));
+    height: calc(40 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+}

@@ -1,0 +1,8 @@
+@layer tf-sprites {
+  .geode-sprite {
+    width: calc(36 * var(--px));
+    height: calc(28 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+}

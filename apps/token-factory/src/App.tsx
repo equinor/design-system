@@ -1,4 +1,4 @@
-import { Story } from './components/Story'
+import { Story } from './chrome/Story'
 
 export function App() {
   return (

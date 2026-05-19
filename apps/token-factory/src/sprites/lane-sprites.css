@@ -1,0 +1,8 @@
+@layer tf-sprites {
+  .lane-sprite {
+    width: calc(20 * var(--px));
+    height: calc(20 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+}

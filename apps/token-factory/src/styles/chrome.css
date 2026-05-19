@@ -1,0 +1,232 @@
+@layer tf-chrome {
+  /* ===== Boot placeholder (Phase A — kept as fallback) ===== */
+
+  .boot-placeholder {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--px));
+  }
+
+  .boot-title {
+    margin: 0;
+    font-size: calc(12 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+  }
+
+  .boot-sub {
+    margin: 0;
+    font-size: calc(5 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  /* ===== Narrator overlay ===== */
+
+  .narrator {
+    position: absolute;
+    top: calc(4 * var(--px));
+    right: calc(4 * var(--px));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: calc(2 * var(--px));
+    width: calc(110 * var(--px));
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Resize the librarian sprite when used inside the narrator overlay:
+     24×32 → 18×24 logical, repositioned right-aligned. */
+  .narrator .librarian {
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(2 * var(--px));
+  }
+
+  .narrator .librarian-sprite {
+    width: calc(18 * var(--px));
+    height: calc(24 * var(--px));
+  }
+
+  /* Bubble below the bot row, fills the narrator column width. */
+  .narrator-bubble {
+    background: var(--pico-white);
+    color: var(--pico-black);
+    padding: calc(3 * var(--px)) calc(4 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+    font-size: calc(4 * var(--px));
+    line-height: 1.5;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    min-height: calc(18 * var(--px));
+  }
+
+  .narrator-bubble::after {
+    content: '';
+    position: absolute;
+    top: calc(-3 * var(--px));
+    right: calc(10 * var(--px));
+    width: calc(3 * var(--px));
+    height: calc(3 * var(--px));
+    background: var(--pico-white);
+    border-left: var(--px) solid var(--pico-black);
+    border-top: var(--px) solid var(--pico-black);
+  }
+
+  .narrator-caret {
+    display: inline-block;
+    width: calc(2 * var(--px));
+    height: calc(4 * var(--px));
+    background: var(--pico-black);
+    margin-left: calc(1 * var(--px));
+    vertical-align: middle;
+    animation: caret-blink 0.6s steps(2, end) infinite;
+  }
+
+  /* Intro variant — bot in centre stage, bubble below, scaled up. */
+  .narrator.is-centered {
+    top: 50%;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    width: calc(220 * var(--px));
+    gap: calc(6 * var(--px));
+  }
+
+  .narrator.is-centered .librarian {
+    flex-direction: column;
+  }
+
+  .narrator.is-centered .librarian-sprite {
+    width: calc(36 * var(--px));
+    height: calc(48 * var(--px));
+  }
+
+  .narrator.is-centered .narrator-bubble {
+    font-size: calc(5 * var(--px));
+    padding: calc(6 * var(--px)) calc(8 * var(--px));
+    min-height: calc(36 * var(--px));
+    text-align: center;
+    box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0
+      var(--pico-dark-purple);
+  }
+
+  .narrator.is-centered .narrator-bubble::after {
+    /* tail points up to the bot above */
+    top: calc(-3 * var(--px));
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* ===== Scene placeholder (Phase B fallback for not-yet-built scenes) ===== */
+
+  .scene-placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: calc(8 * var(--px));
+    gap: calc(6 * var(--px));
+  }
+
+  .scene-header {
+    display: flex;
+    gap: calc(4 * var(--px));
+    align-items: baseline;
+  }
+
+  .scene-counter {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-orange);
+    text-transform: uppercase;
+  }
+
+  .scene-title {
+    font-size: calc(7 * var(--px));
+    color: var(--pico-yellow);
+    text-transform: uppercase;
+    letter-spacing: calc(0.5 * var(--px));
+  }
+
+  .scene-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--pico-dark-gray);
+    font-size: calc(5 * var(--px));
+  }
+
+  /* ===== Scene header bar (shared across all story scenes) ===== */
+
+  .scene-header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(16 * var(--px));
+    background: var(--pico-black);
+    border-bottom: var(--px) solid var(--pico-dark-purple);
+    z-index: 20;
+  }
+
+  .scene-header-pkg {
+    position: absolute;
+    left: calc(6 * var(--px));
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: calc(4 * var(--px));
+    color: var(--pico-blue);
+    letter-spacing: calc(0.5 * var(--px));
+  }
+
+  /* Title centred horizontally — keeps clear of the narrator pinned top-right. */
+  .scene-header-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: calc(5 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+  }
+
+  /* ===== Story hint (pinned bottom) ===== */
+
+  .story-hint {
+    position: absolute;
+    bottom: calc(3 * var(--px));
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(2 * var(--px));
+    font-size: calc(4 * var(--px));
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .hint-key {
+    color: var(--pico-yellow);
+  }
+
+  .hint-label {
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+
+  .hint-sep {
+    color: var(--pico-dark-gray);
+    margin: 0 calc(2 * var(--px));
+  }
+}

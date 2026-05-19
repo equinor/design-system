@@ -1,0 +1,131 @@
+@import '@fontsource/press-start-2p/index.css';
+@import '@equinor/eds-tokens/css/variables';
+
+/* Layer order is declared once. Later layers win regardless of source order. */
+@layer tf-base, tf-sprites, tf-chrome, tf-scenes;
+
+@layer tf-base {
+  :root {
+    /* PICO-8 palette (selected) */
+    --pico-black: #000000;
+    --pico-dark-blue: #1d2b53;
+    --pico-dark-purple: #7e2553;
+    --pico-dark-green: #008751;
+    --pico-dark-gray: #5f574f;
+    --pico-light-gray: #c2c3c7;
+    --pico-white: #fff1e8;
+    --pico-yellow: #ffec27;
+    --pico-orange: #ffa300;
+    --pico-red: #ff004d;
+    --pico-blue: #29adff;
+    --pico-lavender: #83769c;
+
+    /* Logical stage dimensions */
+    --stage-cols: 360;
+    --stage-rows: 220;
+
+    /* Pixel scale: largest integer-friendly value that lets the stage fit
+       the viewport, capped at 4x physical. */
+    --px: min(
+      4px,
+      calc((100vw - 16px) / var(--stage-cols)),
+      calc((100vh - 16px) / var(--stage-rows))
+    );
+
+    --stage-w: calc(var(--stage-cols) * var(--px));
+    --stage-h: calc(var(--stage-rows) * var(--px));
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--pico-black);
+    font-family: 'Press Start 2P', monospace;
+    color: var(--pico-white);
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+  }
+
+  button {
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .viewport {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .stage {
+    width: var(--stage-w);
+    height: var(--stage-h);
+    background: var(--pico-dark-blue);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Shared animation keyframes used across multiple scenes/sprites.
+   Kept globally so any consumer reaches them regardless of load order. */
+
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes belt-scroll {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: calc(8 * var(--px));
+  }
+}
+
+@keyframes peel-info-pop {
+  from {
+    opacity: 0;
+    transform: translateX(calc(4 * var(--px)));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Shared utility: the conveyor stripe pattern used by Dock, Inside, and
+   Crack scenes. Scene-level wrappers (.dock-belt, .inside-belt, .crack-belt)
+   override the animation direction or disable it. */
+@layer tf-sprites {
+  .belt-strip {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--pico-dark-gray) 0,
+      var(--pico-dark-gray) calc(7 * var(--px)),
+      var(--pico-black) calc(7 * var(--px)),
+      var(--pico-black) calc(8 * var(--px))
+    );
+    animation: belt-scroll 0.9s linear infinite;
+  }
+}

@@ -1,0 +1,170 @@
+@layer tf-scenes {
+  .cutting-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .cutting-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: calc(10 * var(--px));
+    align-items: center;
+    padding: calc(8 * var(--px)) calc(12 * var(--px));
+  }
+
+  .cutting-bench {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(140 * var(--px));
+    height: calc(120 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-dark-gray);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  }
+
+  .cutting-pair {
+    display: flex;
+    align-items: center;
+    gap: calc(4 * var(--px));
+    transition: transform 400ms steps(4, end);
+  }
+
+  .cutting-pair.is-fusing {
+    animation: cutting-fuse 600ms steps(6, end);
+  }
+
+  @keyframes cutting-fuse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.92);
+      filter: brightness(1.6);
+    }
+    100% {
+      transform: scale(0.6);
+      opacity: 0;
+    }
+  }
+
+  .raw-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(2 * var(--px));
+  }
+
+  .raw-swatch {
+    width: calc(28 * var(--px));
+    height: calc(28 * var(--px));
+    border: var(--px) solid var(--pico-white);
+    image-rendering: auto;
+  }
+
+  .raw-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+  }
+
+  .raw-label-key {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-orange);
+    text-transform: uppercase;
+  }
+
+  .raw-label-value {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .cutting-arrow {
+    font-size: calc(10 * var(--px));
+    color: var(--pico-yellow);
+    font-family: monospace;
+  }
+
+  .cutting-gem {
+    animation: gem-appear 380ms steps(4, end);
+    filter: drop-shadow(0 0 calc(4 * var(--px)) #ffec27);
+  }
+
+  @keyframes gem-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.4) rotate(-30deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
+  }
+
+  .cutting-declaration {
+    display: flex;
+    flex-direction: column;
+    gap: calc(3 * var(--px));
+    padding: calc(5 * var(--px)) calc(6 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-yellow);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-orange);
+    animation: peel-info-pop 220ms steps(3, end);
+    min-width: calc(150 * var(--px));
+  }
+
+  .declaration-key {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-orange);
+    text-transform: uppercase;
+    letter-spacing: calc(1 * var(--px));
+  }
+
+  .declaration-value {
+    margin: 0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    line-height: 1.6;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+
+  .decl-prop {
+    color: var(--pico-yellow);
+  }
+  .decl-colon,
+  .decl-semi {
+    color: var(--pico-white);
+  }
+  .decl-fn {
+    color: var(--pico-blue);
+  }
+  .decl-paren,
+  .decl-comma {
+    color: var(--pico-light-gray);
+  }
+  .decl-light {
+    color: var(--pico-white);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0 calc(1 * var(--px));
+  }
+  .decl-dark {
+    color: var(--pico-light-gray);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0 calc(1 * var(--px));
+  }
+
+  .declaration-note {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+    font-style: italic;
+    padding-top: calc(2 * var(--px));
+    border-top: var(--px) dashed var(--pico-dark-gray);
+  }
+}

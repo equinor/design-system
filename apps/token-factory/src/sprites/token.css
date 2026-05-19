@@ -1,0 +1,8 @@
+@layer tf-sprites {
+  .token-sprite {
+    width: calc(16 * var(--px));
+    height: calc(24 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+  }
+}

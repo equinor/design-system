@@ -1,0 +1,293 @@
+@layer tf-scenes {
+  .peel-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .peel-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: calc(8 * var(--px));
+    align-items: center;
+    padding: calc(6 * var(--px)) calc(10 * var(--px));
+  }
+
+  /* Container for the geode + stamp above it. */
+  .peel-stones-area {
+    position: relative;
+    width: calc(120 * var(--px));
+    height: calc(160 * var(--px));
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .peel-stones {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 calc(3 * var(--px)) #287a83);
+  }
+
+  .peel-stones .nested-stones-sprite {
+    width: calc(100 * var(--px));
+    height: calc(100 * var(--px));
+  }
+
+  /* ===== Stamp press (reused from Scene 3's slam, scaled) ===== */
+
+  .peel-stamp {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(110 * var(--px));
+    height: calc(50 * var(--px));
+    z-index: 6;
+    animation: peel-stamp-arrive 280ms steps(3, end);
+  }
+
+  @keyframes peel-stamp-arrive {
+    from {
+      transform: translate(-50%, calc(-30 * var(--px)));
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+  }
+
+  .peel-stamp-frame {
+    position: absolute;
+    top: 0;
+    width: calc(6 * var(--px));
+    height: calc(46 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+  }
+
+  .peel-stamp-frame-left {
+    left: 0;
+  }
+
+  .peel-stamp-frame-right {
+    right: 0;
+  }
+
+  .peel-stamp-hammer {
+    position: absolute;
+    top: calc(4 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(80 * var(--px));
+  }
+
+  .peel-stamp-head {
+    width: 100%;
+    height: calc(14 * var(--px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: calc(2 * var(--px)) solid var(--pico-black);
+  }
+
+  .peel-stamp-label {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(0.5 * var(--px));
+  }
+
+  .peel-stamp-shaft {
+    width: calc(4 * var(--px));
+    height: calc(20 * var(--px));
+    background: var(--pico-light-gray);
+  }
+
+  .peel-stamp.is-slamming .peel-stamp-hammer {
+    animation: peel-stamp-slam 520ms steps(6, end);
+  }
+
+  @keyframes peel-stamp-slam {
+    0% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(calc(50 * var(--px)));
+    }
+    55% {
+      transform: translateX(-50%) translateY(calc(50 * var(--px)));
+    }
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  /* ===== Sticker that drops onto the geode after the slam ===== */
+
+  .peel-sticker {
+    position: absolute;
+    top: calc(18 * var(--px));
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    background: var(--pico-yellow);
+    color: var(--pico-black);
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+    font-size: calc(4 * var(--px));
+    letter-spacing: calc(0.5 * var(--px));
+    white-space: nowrap;
+    z-index: 7;
+    animation: peel-sticker-drop 400ms steps(4, end);
+  }
+
+  @keyframes peel-sticker-drop {
+    from {
+      transform: translateX(-50%) translateY(calc(-50 * var(--px))) rotate(-3deg);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(-50%) translateY(0) rotate(-3deg);
+      opacity: 1;
+    }
+  }
+
+  .peel-info-frame {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* Reserve column space so layout doesn't shift when info appears */
+    min-width: calc(170 * var(--px));
+  }
+
+  .peel-info-placeholder {
+    font-size: calc(5 * var(--px));
+    color: var(--pico-dark-gray);
+    letter-spacing: calc(1 * var(--px));
+  }
+
+  .peel-info {
+    display: flex;
+    flex-direction: column;
+    gap: calc(3 * var(--px));
+    padding: calc(5 * var(--px)) calc(6 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-white);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-gray);
+    animation: peel-info-pop 220ms steps(3, end);
+    min-width: calc(150 * var(--px));
+  }
+
+  .peel-info-outer {
+    border-color: #ff77a8;
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  }
+
+  .peel-info-middle {
+    border-color: #ffa300;
+    box-shadow: var(--px) var(--px) 0 0 #742f00;
+  }
+
+  .peel-info-summary {
+    border-color: var(--pico-light-gray);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-gray);
+  }
+
+  .peel-info-inner {
+    border-color: #7cbac1;
+    box-shadow: var(--px) var(--px) 0 0 #1a4a52;
+  }
+
+  .peel-info-build {
+    border-color: var(--pico-yellow);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  }
+
+  .peel-info-build .peel-info-label {
+    color: var(--pico-yellow);
+  }
+
+  .peel-info-label {
+    font-size: calc(4 * var(--px));
+    letter-spacing: calc(1 * var(--px));
+  }
+
+  .peel-info-outer .peel-info-label {
+    color: #ff77a8;
+  }
+  .peel-info-middle .peel-info-label {
+    color: #ffa300;
+  }
+
+  .peel-info-summary .peel-info-label {
+    color: var(--pico-light-gray);
+  }
+
+  .peel-info-summary .peel-info-purpose {
+    white-space: pre-wrap;
+  }
+  .peel-info-inner .peel-info-label {
+    color: #7cbac1;
+  }
+
+  .peel-info-name {
+    font-size: calc(5 * var(--px));
+    color: var(--pico-yellow);
+    word-break: break-all;
+    line-height: 1.3;
+  }
+
+  .peel-info-row {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1 * var(--px));
+  }
+
+  .peel-info-row-key {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-dark-gray);
+    text-transform: uppercase;
+    letter-spacing: calc(0.5 * var(--px));
+  }
+
+  .peel-info-row-value {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+    word-break: break-all;
+  }
+
+  /* Highlight the "build emits" output value — it's the punchline */
+  .peel-info-output-build-emits {
+    color: var(--pico-yellow);
+  }
+
+  .peel-info-output-references {
+    color: var(--pico-orange);
+  }
+
+  .peel-info-output-value {
+    color: var(--pico-yellow);
+  }
+
+  .peel-info-purpose {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+    line-height: 1.4;
+    margin-top: calc(2 * var(--px));
+    padding-top: calc(2 * var(--px));
+    border-top: var(--px) dashed var(--pico-dark-gray);
+  }
+}

@@ -1,0 +1,36 @@
+@layer tf-sprites {
+  .nested-stones-sprite {
+    width: calc(120 * var(--px));
+    height: calc(120 * var(--px));
+    image-rendering: pixelated;
+    display: block;
+    animation: stones-glow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes stones-glow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 calc(2 * var(--px)) #287a83);
+    }
+    50% {
+      filter: drop-shadow(0 0 calc(6 * var(--px)) #287a83);
+    }
+  }
+
+  /* Layer highlight states — consumed by Scene 5 (Peel) but the sprite
+     itself owns the states so they travel together. */
+  .stone-layer {
+    transition:
+      opacity 200ms steps(2, end),
+      filter 200ms steps(2, end);
+  }
+
+  .stone-layer.is-dim {
+    opacity: 0.25;
+  }
+
+  .stone-layer.is-active {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}

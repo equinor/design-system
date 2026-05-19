@@ -424,3 +424,97 @@ User asked for a welcome scene before the dock. The LibrarianBot (otherwise pinn
 - `app.css` carries the centred variant rules right after the default `.narrator-caret` block, scoped via `.narrator.is-centered`.
 
 The intro scene has no other visual chrome — the centred narrator is the whole scene. From here, pressing space three times (or hitting `→` once) lands on the existing Scene 1 Dock. Total scene count is now 10.
+
+---
+
+## Phase G — Multi-lane architecture
+
+Today's app is locked to one lane (`static` — the Bg.Floating story). Phase G generalises the runtime so the existing five Figma-file lanes (`static`, `foundations`, `dynamic`, `spacing primitives`, `design tokens`) can each carry their own scene sequence, with the **Dock as the diegetic branch point**: at beat 3 of the dock scene, the lane labels become clickable; clicking one swaps the protagonist crate's label and re-routes the downstream story into that lane's arc.
+
+No hub scene — the branch is in the world, not a menu.
+
+### State model
+
+```ts
+type Route =
+  | { kind: 'prologue'; sceneIdx: number }   // 0 = intro, 1 = dock (shared)
+  | { kind: 'lane'; laneId: LaneId; sceneIdx: number }
+
+const [route, setRoute] = useState<Route>({ kind: 'prologue', sceneIdx: 0 })
+const [selectedLaneId, setSelectedLaneId] = useState<LaneId>('static')
+```
+
+Intro + Dock are shared prologue scenes — never duplicated per lane. Each lane owns only its post-Dock arc.
+
+### Lane shape
+
+```ts
+type Lane = {
+  id: LaneId
+  label: string              // shown in indicator + on crate sticker
+  accent: string             // PICO swatch for theming
+  status: 'ready' | 'scaffold' | 'locked'
+  scenes: Array<{ id: SceneId; title: string; lines: string[] }>
+}
+```
+
+- `static` → ready; today's 8 post-Dock scenes (Inside → Jeweller)
+- one placeholder lane → scaffold; ~4 generic placeholder scenes, lane-id deliberately uncommitted
+- remaining lanes → locked; rendered dim in the indicator, not clickable
+
+### Scene registry
+
+`Story.tsx`'s if-chain is replaced by `SCENES: Record<SceneId, FC<SceneProps>>`. Adding a lane = drop new scene components, register, reference from a lane's `scenes` array. `useLane()` context hook gives scenes access to the active lane (for label, accent, future content).
+
+### CSS strategy
+
+- `app.css` (2629-line monolith) is dissolved into:
+  - `styles/base.css` — viewport, stage, palette, `--px`, `@layer` order, shared keyframes
+  - `styles/chrome.css` — narrator, scene-placeholder, scene-header-bar, story-hint
+  - Per-sprite CSS colocated next to each component
+  - Per-scene CSS colocated next to each scene
+- Layer order declared once: `@layer tf-base, tf-sprites, tf-chrome, tf-scenes;`
+- Lane accent via `data-lane` on `.stage` + `--_lane-accent` custom property (G.4)
+
+### Migration phases
+
+| Phase | What ships | Risk |
+|---|---|---|
+| **G.0** | File reorg + CSS split — `components/` → `sprites/` + `chrome/` + `scenes/{dock,static}/`. `app.css` dissolved into base + chrome + per-component files, all wrapped in `@layer`. **No behaviour change.** | Low — pure structural refactor |
+| **G.1** | Scene registry + lane data — introduce `LANES`, `SCENES`, `LaneContext`. Move existing `SCRIPT` into `STATIC_LANE.scenes` (minus prologue). `Story.tsx` switches to registry lookup. | Low |
+| **G.2** | Route state + Dock branch UI — add `Route` + `selectedLaneId`. Lane indicator becomes clickable at beat ≥3. Crate sticker + worker reaction read from selected lane. Narrator line 3 rewritten to invite click. | Medium — first behaviour change |
+| **G.3** | Scaffold a placeholder lane — one extra lane in `LANES` (id TBD), `status: 'scaffold'`, scenes route to a generic `PlaceholderScene` component. Proves end-to-end branching without committing pedagogy for any specific Figma-file lane. | Low |
+| **G.4** | Lane theming via `data-lane` + `--_lane-accent`. Locked lanes get a "soon" badge. | Low |
+
+### Sequencing
+Phase E (polish) and F (workshop) remain the deadline-bearing items. Phase G after F is the safe sequence; G can land before E if there's runway, but the workshop can ship on the existing single-lane structure.
+
+---
+
+## Phase log (cont.)
+
+### Phase G.0 — File reorg + CSS split ✓
+
+Pure structural refactor. **No behavioural change.** Build + Chrome smoke confirmed identical to pre-G.0.
+
+**Directory moves (`git mv`):**
+- `src/components/Story.tsx` `Narrator.tsx` `SceneHeader.tsx` → `src/chrome/`
+- `src/components/{Crate,Gemstone,LaneSprites,NestedStones,LibrarianBot,Lorry,Building,Gate,Lever,Token,StationLog,Necklace,Geode}.tsx` → `src/sprites/`
+- `src/components/Dock.tsx` → `src/scenes/dock/Dock.tsx`
+- `src/components/{Inside,Crack,Reveal,Peel,Cutting,Tray,Packaging,Jeweller}.tsx` → `src/scenes/static/`
+- `src/components/` removed
+
+**CSS split (was: one 2629-line `app.css`):**
+- `src/styles/base.css` — font + EDS imports, PICO palette, stage dims, `--px`, reset, viewport, stage, **`@layer tf-base, tf-sprites, tf-chrome, tf-scenes;` order declaration**, plus three globally-needed keyframes (`caret-blink`, `belt-scroll`, `peel-info-pop`) and the shared `.belt-strip` utility (used by dock + inside + crack).
+- `src/styles/chrome.css` — narrator (default + `is-centered`), scene-placeholder, scene-header-bar, story-hint, boot-placeholder. All inside `@layer tf-chrome`.
+- 12 colocated sprite CSS files under `src/sprites/` — each TSX imports its `.css` neighbour. All inside `@layer tf-sprites`.
+- 9 colocated scene CSS files under `src/scenes/{dock,static}/` — each scene TSX imports its `.css` neighbour. All inside `@layer tf-scenes`.
+
+**Top-level CSS loading:** `main.tsx` imports only `styles/base.css` + `styles/chrome.css`. Sprite + scene CSS flow in transitively via their TSX imports — Vite bundles everything to a single `index.*.css` per build.
+
+**Verified:**
+- `pnpm tsc --noEmit` clean.
+- `pnpm vite build` clean — 59 modules transformed (was 39), CSS bundle 139.29 kB gzip 24.89 kB (was 140.49 kB / 25.00 kB). Tiny reduction from collapsing the old top-level comments.
+- Chrome dev playthrough confirms identical visuals on intro / dock / inside / crack / reveal / cutting. No console errors beyond a benign favicon 404.
+
+**Carried forward into G.1+:** the `@layer` order declaration is in place but no scene/sprite CSS yet depends on layer precedence — purely future-proofing. The shared `.belt-strip` rule + cross-scene keyframes (`peel-info-pop`, `caret-blink`) sit in `base.css` because they're used by multiple scenes/sprites; this is the only structural "smell" — if it grows, hoist to a dedicated `shared.css`.

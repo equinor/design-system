@@ -1,0 +1,263 @@
+@layer tf-scenes {
+  .dock-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .terminal-sign {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: calc(6 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+    padding: calc(4 * var(--px)) 0 calc(2 * var(--px));
+    background: var(--pico-black);
+    border-bottom: var(--px) solid var(--pico-dark-purple);
+    z-index: 5;
+  }
+
+  .terminal-sign.is-pulsing {
+    animation: terminal-pulse 600ms steps(3, end) infinite;
+  }
+
+  @keyframes terminal-pulse {
+    0%,
+    100% {
+      color: var(--pico-yellow);
+    }
+    50% {
+      color: var(--pico-orange);
+    }
+  }
+
+  /* Lane indicator: destination labels at top-left, NOT physical belts. */
+  .lane-indicator {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: calc(6 * var(--px));
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--px));
+    z-index: 3;
+    width: calc(130 * var(--px));
+  }
+
+  .lane-row {
+    display: flex;
+    align-items: center;
+    gap: calc(3 * var(--px));
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-dark-gray);
+    font-size: calc(4 * var(--px));
+    text-transform: uppercase;
+    opacity: 0.4;
+    transition: opacity 200ms steps(2, end);
+  }
+
+  .lane-indicator.is-highlighted .lane-active {
+    opacity: 1;
+    border-color: var(--pico-yellow);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+  }
+
+  .lane-indicator.is-highlighted .lane-sibling {
+    opacity: 0.2;
+  }
+
+  .lane-swatch {
+    width: calc(4 * var(--px));
+    height: calc(4 * var(--px));
+    border: var(--px) solid var(--pico-white);
+    flex-shrink: 0;
+  }
+
+  .lane-name {
+    color: var(--pico-light-gray);
+    flex: 1;
+  }
+
+  .lane-active .lane-name {
+    color: var(--pico-yellow);
+  }
+
+  .lane-arrow {
+    color: var(--pico-dark-gray);
+    font-family: monospace;
+  }
+
+  .lane-active .lane-arrow {
+    color: var(--pico-yellow);
+  }
+
+  /* Factory building right side. */
+  .factory-building {
+    position: absolute;
+    bottom: calc(20 * var(--px));
+    right: 0;
+    width: calc(80 * var(--px));
+    height: calc(140 * var(--px));
+    z-index: 2;
+  }
+
+  .gate-frame {
+    position: absolute;
+    bottom: 0;
+    left: calc(8 * var(--px));
+    width: calc(40 * var(--px));
+    height: calc(44 * var(--px));
+    background: #000;
+    border-left: var(--px) solid var(--pico-dark-gray);
+    border-right: var(--px) solid var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-dark-gray);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* The horizontal conveyor belt running the full stage width. */
+  .dock-belt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(20 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .lorry-spot {
+    position: absolute;
+    bottom: calc(20 * var(--px));
+    left: calc(4 * var(--px));
+    /* z-index: above hidden/peeking crate so crate is obscured by the
+       lorry, but below other journey states where the crate has slid out
+       onto the belt. The crate raises its own z-index via state class. */
+    z-index: 8;
+    transform: scaleX(-1);
+  }
+
+  .dock-worker {
+    position: absolute;
+    bottom: calc(19 * var(--px));
+    left: calc(180 * var(--px));
+    z-index: 6;
+  }
+
+  .worker-bubble {
+    position: absolute;
+    bottom: calc(28 * var(--px));
+    left: calc(-12 * var(--px));
+    background: var(--pico-white);
+    color: var(--pico-black);
+    padding: calc(2 * var(--px)) calc(3 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
+    font-size: calc(4 * var(--px));
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: worker-bubble-in 200ms steps(2, end);
+  }
+
+  .worker-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: calc(-3 * var(--px));
+    left: calc(8 * var(--px));
+    width: calc(3 * var(--px));
+    height: calc(3 * var(--px));
+    background: var(--pico-white);
+    border-right: var(--px) solid var(--pico-black);
+    border-bottom: var(--px) solid var(--pico-black);
+  }
+
+  @keyframes worker-bubble-in {
+    from {
+      opacity: 0;
+      transform: translateY(calc(4 * var(--px)));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* The crate — single positioning element, journey-driven. Scale 0.6
+     to make it smaller than the lorry's cargo. */
+  .dock-crate-journey {
+    position: absolute;
+    bottom: calc(10 * var(--px));
+    left: calc(30 * var(--px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+    transform-origin: left bottom;
+    transform: scale(0.6) translateX(0) translateY(60px);
+    transition:
+      transform 1200ms steps(12, end),
+      opacity 600ms steps(4, end);
+    z-index: 4;
+  }
+
+  /* Crate-state classes set the journey position. */
+
+  .crate-state-hidden {
+    transform: scale(0) translateX(calc(20 * var(--px))) translateY(-40px);
+    bottom: calc(35 * var(--px));
+    opacity: 0;
+  }
+
+  .crate-state-peeking {
+    transform: scale(0.6) translateX(calc(120 * var(--px)));
+    z-index: 7;
+  }
+
+  .crate-state-sliding-to-worker {
+    transform: scale(0.6) translateX(calc(200 * var(--px)));
+    z-index: 7;
+  }
+
+  .crate-state-inspecting {
+    transform: scale(0.6) translateX(calc(200 * var(--px)));
+    z-index: 7;
+  }
+
+  .crate-state-sliding-to-gate {
+    transform: scale(0.6) translateX(calc(420 * var(--px)));
+    z-index: 7;
+  }
+
+  .crate-state-entering {
+    transform: scale(0.6) translateX(calc(460 * var(--px)));
+    opacity: 0;
+    z-index: 7;
+  }
+
+  .crate-state-inside {
+    transform: scale(0) translateX(calc(460 * var(--px)));
+    opacity: 0;
+    z-index: 7;
+  }
+
+  /* Label that travels with the crate on every journey state */
+  .crate-travel-label {
+    font-size: calc(4 * var(--px));
+    text-transform: uppercase;
+    color: var(--pico-yellow);
+    background: var(--pico-dark-purple);
+    padding: calc(1 * var(--px)) calc(3 * var(--px));
+    border: var(--px) solid var(--pico-white);
+    white-space: nowrap;
+    /* Counter-scale so the label stays readable at 100% even though the
+       crate is 0.6 scaled. */
+    transform: scale(1.67);
+    transform-origin: center;
+    margin-bottom: calc(6 * var(--px));
+  }
+}
