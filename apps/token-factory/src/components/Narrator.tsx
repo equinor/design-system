@@ -13,6 +13,10 @@ type Props = {
   /** Emitted whenever the narrator moves to a new line. Scenes can use
    *  this to drive their visual state in lock-step with the narration. */
   onBeatChange?: (idx: number) => void
+  /** Called when the driver hits skip on the final line of the scene
+   *  while that line is already fully typed. Story uses this to advance
+   *  to the next scene without needing a separate ArrowRight press. */
+  onAdvancePastEnd?: () => void
 }
 
 // Top-right narrator overlay. The librarian-bot is the same sprite as
@@ -27,6 +31,7 @@ export function Narrator({
   autoAdvance = false,
   skipTick = 0,
   onBeatChange,
+  onAdvancePastEnd,
 }: Props) {
   const [lineIdx, setLineIdx] = useState(0)
   const [typed, setTyped] = useState('')
@@ -42,7 +47,9 @@ export function Narrator({
     onBeatChange?.(lineIdx)
   }, [lineIdx, onBeatChange])
 
-  // Skip handler — completes current line if mid-typing, else advances.
+  // Skip handler — completes current line if mid-typing, advances to
+  // the next line if still in the scene, or signals the parent to
+  // move on if we're already at the end of the last line.
   useEffect(() => {
     if (skipTick === 0) return
     const current = lines[lineIdx] ?? ''
@@ -51,6 +58,8 @@ export function Narrator({
     } else if (lineIdx < lines.length - 1) {
       setLineIdx((i) => i + 1)
       setTyped('')
+    } else {
+      onAdvancePastEnd?.()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [skipTick])

@@ -101,6 +101,7 @@ export function Story() {
         lines={scene.lines}
         skipTick={skipTick}
         onBeatChange={setActiveBeatIdx}
+        onAdvancePastEnd={advance}
       />
 
       <div className="story-hint">
