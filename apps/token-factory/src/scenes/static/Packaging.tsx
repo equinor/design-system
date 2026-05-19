@@ -29,15 +29,14 @@ type LaneIcon = {
   pkg: string
 }
 
-// One bin per other-lane from Scene 1. The four siblings to Static
-// (our lane): spacing primitives, foundations, spacing modes, dynamic.
-// Note: the "spacing modes" Figma file is the home of typography,
-// density, border radius, and most modal axes — not just spacing.
+// One bin per other-lane from Scene 1. The four siblings to colours-static
+// (our lane): spacing & typography primitives, foundations, spacing &
+// typography tokens, colours-dynamic.
 const LANES: LaneIcon[] = [
-  { label: 'cords', shape: 'cord', pkg: 'spacing primitives' },
+  { label: 'cords', shape: 'cord', pkg: 's&t primitives' },
   { label: 'clasps', shape: 'clasp', pkg: 'foundations · elevation' },
-  { label: 'chains', shape: 'chain', pkg: 'spacing modes · typography' },
-  { label: 'lacquer', shape: 'lacquer', pkg: 'dynamic · appearance' },
+  { label: 'chains', shape: 'chain', pkg: 's&t tokens · typography' },
+  { label: 'lacquer', shape: 'lacquer', pkg: 'colours · dynamic' },
 ]
 
 function laneSprite(shape: LaneIcon['shape']) {

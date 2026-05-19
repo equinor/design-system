@@ -39,13 +39,13 @@ const MATERIALS: Material[] = [
   {
     key: 'gem',
     label: 'gemstone',
-    pkg: 'static',
+    pkg: 'colours · static',
     render: () => <Gemstone />,
   },
   {
     key: 'cord',
     label: 'cord',
-    pkg: 'spacing primitives',
+    pkg: 's&t primitives',
     render: () => <CordSprite />,
   },
   {
@@ -57,13 +57,13 @@ const MATERIALS: Material[] = [
   {
     key: 'chain',
     label: 'chain',
-    pkg: 'spacing modes',
+    pkg: 's&t tokens',
     render: () => <ChainSprite />,
   },
   {
     key: 'lacquer',
     label: 'lacquer',
-    pkg: 'dynamic',
+    pkg: 'colours · dynamic',
     render: () => <LacquerSprite />,
   },
 ]

@@ -29,7 +29,7 @@ type Route =
 
 export function Story() {
   const [route, setRoute] = useState<Route>({ kind: 'prologue', sceneIdx: 0 })
-  const [selectedLaneId, setSelectedLaneId] = useState<LaneId>('static')
+  const [selectedLaneId, setSelectedLaneId] = useState<LaneId>('colours-static')
   const [skipTick, setSkipTick] = useState(0)
   const [activeBeatIdx, setActiveBeatIdx] = useState(0)
 

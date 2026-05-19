@@ -1,13 +1,13 @@
 // Lane registry. Display order matches insertion order — Dock iterates
 // Object.values(LANES) for the lane indicator.
 //
-// G.1 shipped only Static (ready) — the other four lane ids existed in
-// the type but weren't populated. G.2 fills in placeholder entries with
-// status:'locked' so the Dock can render the full 5-row indicator with
-// correct dim/active styling regardless of which lane is selected.
+// Lane ids and labels match the actual Figma file names (verified by
+// opening each file in Figma — eds-tokens-sync/CLAUDE.md's `Contents`
+// column is approximate and has misled the workshop twice).
 //
-// G.3 promotes one of the locked entries to status:'scaffold' and
-// gives it a placeholder scene sequence.
+// G.6 corrected the naming. G.1 shipped only Static (ready); G.2 added
+// locked placeholders for the other four; G.3 promoted foundations to
+// scaffold with placeholder scenes.
 
 import { FOUNDATIONS_LANE } from './foundations'
 import { STATIC_LANE } from './static'
@@ -19,25 +19,25 @@ export { STATIC_LANE } from './static'
 export { FOUNDATIONS_LANE } from './foundations'
 
 export const LANES: Record<LaneId, Lane> = {
-  static: STATIC_LANE,
+  'colours-static': STATIC_LANE,
   foundations: FOUNDATIONS_LANE,
-  dynamic: {
-    id: 'dynamic',
-    label: 'dynamic',
+  'colours-dynamic': {
+    id: 'colours-dynamic',
+    label: 'colours · dynamic',
     accent: '--pico-dark-green',
     status: 'locked',
     scenes: [],
   },
-  'spacing-primitives': {
-    id: 'spacing-primitives',
-    label: 'spacing primitives',
+  'st-primitives': {
+    id: 'st-primitives',
+    label: 's&t primitives',
     accent: '--pico-orange',
     status: 'locked',
     scenes: [],
   },
-  'spacing-modes': {
-    id: 'spacing-modes',
-    label: 'spacing modes',
+  'st-tokens': {
+    id: 'st-tokens',
+    label: 's&t tokens',
     accent: '--pico-light-gray',
     status: 'locked',
     scenes: [],

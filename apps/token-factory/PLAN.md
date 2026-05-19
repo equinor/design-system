@@ -679,3 +679,45 @@ So the fifth lane is actually the Figma file named **Spacing modes**, not "desig
 **Audit lesson #2** (filed alongside Phase D.10's lesson about reading source code instead of reasoning from narration): *the workshop's lane vocabulary is locked to whatever Figma file names happen to exist — they are not always accurate descriptions of their contents.* Future audits should grep `packages/eds-tokens/tokens/<fileKey>/` directly rather than trust the sync doc's `Contents` column, which itself was apparently approximate.
 
 **Verified:** tsc clean, build clean, no remaining `design.tokens|design tokens` references in src/. Phase G architecture unaffected — only data labels changed.
+
+### Phase G.6 — Lane names verified against actual Figma files ✓
+
+Caught immediately after G.5 — the previous fix used `eds-tokens-sync/CLAUDE.md`'s `Contents` column again as a source of truth, and that column was *also* wrong on the file name (it said "Spacing modes" but the file is actually called "🅰️ EDS Spacing & Typography tokens"). The user supplied the real names of all five Figma files by opening each one.
+
+**Real Figma file names → lane id mapping:**
+
+| File key | Real Figma name | Lane id (G.6) | Dock label |
+|---|---|---|---|
+| `OWxw2XogDLUt1aCvcDFXPw` | 🎨 EDS Colours (static) | `colours-static` | `colours · static` |
+| `GnovDpL3UV6X51Ot7Kv6Im` | EDS Foundations (Internal) | `foundations` | `foundations` |
+| `nyPaQ3QnI1UAcxKW4a0d2c` | 🎨 EDS Colours (dynamic) | `colours-dynamic` | `colours · dynamic` |
+| `cpNchKjiIM19dPqTxE0fqg` | 🅰️ Spacing & Typography Primitives | `st-primitives` | `s&t primitives` |
+| `FQQqyumcpPQoiFRCjdS9GM` | 🅰️ EDS Spacing & Typography tokens | `st-tokens` | `s&t tokens` |
+
+**What this means narratively:**
+- The "Static" lane was never just "static" — it's the *Colours (static)* file. Phase D.10's "static" naming dropped the "colours" half.
+- The "Dynamic" lane was never just "dynamic" — it's the *Colours (dynamic)* file. Same drop.
+- Spacing primitives is also typography primitives — the two files are siblings (🅰️ Primitives and 🅰️ tokens) that together cover spacing + typography.
+
+**Changes (this commit, all in `src/`):**
+- `data/lanes/types.ts` — `LaneId` union becomes `'colours-static' | 'foundations' | 'colours-dynamic' | 'st-primitives' | 'st-tokens'`. Comment table at the top of the file lists each id alongside its real Figma file name so future readers don't need to re-derive.
+- `data/lanes/static.ts` — `STATIC_LANE.id` → `'colours-static'`, `.label` → `'colours · static'`. Narrator copy:
+  - Scene 2 / Inside beat 1: "The Static crate carries…" → "Our crate carries…" (the dock already established what's in the crate; no need to re-name the file).
+  - Scene 5 / Peel outer-ring line: "(Static file)" → "(in the colours-static Figma file)".
+  - Scene 8 / Packaging four-bin line: "Cords from spacing primitives … Chains from spacing modes (typography, density, radius). Lacquer from dynamic (appearance)." → "Cords from spacing & typography primitives … Chains from spacing & typography tokens (font axes, density, radius). Lacquer from colours · dynamic (appearance)."
+- `data/lanes/index.ts` — `LANES` keys and locked-stub `id`/`label`/`accent` fields rewritten for all four non-Static entries.
+- `data/lanes/prologue.ts` — dock beat 2: "Our crate is labelled 'static'" → "Our crate is labelled 'colours · static'".
+- `data/lanes/foundations.ts` — placeholder narration "Same scene-ref shape as the Static lane" → "Same scene-ref shape as the colours-static lane".
+- `chrome/Story.tsx` — default `selectedLaneId` → `'colours-static'`.
+- `chrome/LaneContext.ts` — context default `selectedLaneId` → `'colours-static'`.
+- `scenes/dock/Dock.tsx` — fallback `selectedLabel` constant → `'colours · static'`.
+- `scenes/static/Packaging.tsx` — bin pkg labels updated: cords → `'s&t primitives'`, chains → `'s&t tokens · typography'`, lacquer → `'colours · dynamic'`. Header comment corrected.
+- `scenes/static/Jeweller.tsx` — five material pkg labels updated (gem → `'colours · static'`, cord → `'s&t primitives'`, chain → `'s&t tokens'`, lacquer → `'colours · dynamic'`; clasp stays `'foundations'`).
+- `scenes/static/Peel.tsx` — outer-ring `LAYER_BY_BEAT[1].file` → `'Colours (static) / Concept.Mode 1.json'`.
+- `styles/base.css` — `[data-lane=…]` selectors rewritten for the five new ids.
+
+**Folder names unchanged.** `scenes/static/` stays — it's the folder for "scenes consumed by the protagonist lane" regardless of what that lane is called. Renaming directories has more churn than value.
+
+**Audit lesson #3:** the sync doc's `Contents` column is approximate twice over — it misnames at least two of the five files, and the names it does use don't reflect what's actually inside them. **Authoritative source is the Figma file's own title** (visible in the file header, or in the URL's title segment). For any future lane work, open each Figma file directly and copy the title — do not trust `eds-tokens-sync/CLAUDE.md`'s table.
+
+**Verified:** tsc + build clean. Grep confirms no remaining `'static'` / `'spacing-modes'` / `'spacing-primitives'` / `'dynamic'` lane-id references in `src/`.

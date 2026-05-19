@@ -1,8 +1,9 @@
-// The Static lane — today's protagonist story.
+// The colours-static lane — today's protagonist story.
 //
 // Follows Bg.Floating from its raw JSON form in Concept.Mode 1.json
-// (inside the Static Figma file), through the build pipeline, to the
-// real EDS Button rendered with real CSS variables in Scene 9.
+// (inside the 🎨 EDS Colours (static) Figma file), through the build
+// pipeline, to the real EDS Button rendered with real CSS variables in
+// Scene 9.
 //
 // 8 post-Dock scenes: inside, crack, reveal, peel, cutting, tray,
 // packaging, jeweller. Intro + Dock are in PROLOGUE (shared).
@@ -10,8 +11,8 @@
 import type { Lane } from './types'
 
 export const STATIC_LANE: Lane = {
-  id: 'static',
-  label: 'static',
+  id: 'colours-static',
+  label: 'colours · static',
   accent: '--pico-dark-purple',
   status: 'ready',
   scenes: [
@@ -20,7 +21,7 @@ export const STATIC_LANE: Lane = {
       title: 'inside the factory',
       lines: [
         'Inside, the belt carries our crate deeper.',
-        'The Static crate carries two JSON files — Semantic.Mode 1.json and Concept.Mode 1.json. We follow the concept side.',
+        'Our crate carries two JSON files — Semantic.Mode 1.json and Concept.Mode 1.json. We follow the concept side.',
         "Inside Concept.Mode 1.json are dozens of tokens. We'll pick one: Bg.Floating. We meet him properly when the build cracks the crate open.",
       ],
     },
@@ -47,7 +48,7 @@ export const STATIC_LANE: Lane = {
       title: 'the peel',
       lines: [
         "This geode is three-layered. Let's open it.",
-        'Outer ring — Bg.Floating in Concept.Mode 1.json (Static file). The name product code asks for.',
+        'Outer ring — Bg.Floating in Concept.Mode 1.json (in the colours-static Figma file). The name product code asks for.',
         'Middle ring — bg-floating in 🌗 Color scheme.Light.json (Foundations file). Routes the concept to a palette colour. This is the swap point — change the scheme, change the route.',
         'Inner core — Light.Gray.2 in Color Light.Mode 1.json (Foundations). The actual hex: #ffffff.',
         'Three layers, three jobs. Swap the middle ring and the colour changes without touching product code or palette.',
@@ -80,7 +81,7 @@ export const STATIC_LANE: Lane = {
       title: 'the packaging',
       lines: [
         'At the shipping bench, our tray meets materials from the other four lanes.',
-        'Cords from spacing primitives. Clasps from foundations (elevation). Chains from spacing modes (typography, density, radius). Lacquer from dynamic (appearance).',
+        'Cords from spacing & typography primitives. Clasps from foundations (elevation). Chains from spacing & typography tokens (font axes, density, radius). Lacquer from colours · dynamic (appearance).',
         'But before sealing the box, an inspector adds one more polish.',
         'Browsers without light-dark() still need to know which value to use.',
         'So the inspector re-declares the same token under four selector scopes.',

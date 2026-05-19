@@ -62,7 +62,7 @@ export function Dock({ activeBeatIdx }: { activeBeatIdx: number }) {
 
   const selectionEnabled = activeBeatIdx >= 3
   const selectedLane = LANES[selectedLaneId]
-  const selectedLabel = selectedLane?.label ?? 'static'
+  const selectedLabel = selectedLane?.label ?? 'colours · static'
 
   return (
     <div className="dock-scene">

@@ -19,7 +19,7 @@ export type LaneSelection = {
 }
 
 export const LaneSelectionContext = createContext<LaneSelection>({
-  selectedLaneId: 'static',
+  selectedLaneId: 'colours-static',
   setSelectedLaneId: () => {},
 })
 

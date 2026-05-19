@@ -38,7 +38,7 @@ export const FOUNDATIONS_LANE: Lane = {
       id: 'placeholder',
       title: 'the packing station',
       lines: [
-        'Same scene-ref shape as the Static lane — just a different component behind the id.',
+        'Same scene-ref shape as the colours-static lane — just a different component behind the id.',
         'One PlaceholderScene component is reused across all of these scenes.',
       ],
     },

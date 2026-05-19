@@ -39,7 +39,7 @@ const LAYER_BY_BEAT: Record<number, LayerInfo | null> = {
     layer: 'outer',
     label: 'OUTER · CONCEPT',
     source: 'Bg.Floating',
-    file: 'Static / Concept.Mode 1.json',
+    file: 'Colours (static) / Concept.Mode 1.json',
     output: '{bg-floating}',
     outputLabel: 'references:',
     purpose: 'the stable name product code asks for',

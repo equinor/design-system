@@ -3,20 +3,22 @@
 // A Lane is a first-class story branch: one of the five Figma files that
 // eds-tokens-sync drops at the goods terminal. Each lane carries its own
 // scene sequence after the shared prologue (intro + dock).
-//
-// G.1 ships the types + the Static lane only. G.3 adds a placeholder
-// second lane. Other lanes stay 'locked'.
 
+// Five Figma files map to five lane ids. The id corresponds to the file's
+// actual name in Figma (verified directly — eds-tokens-sync/CLAUDE.md's
+// `Contents` column has been wrong about both naming and scope, twice).
+//
+//   colours-static    → 🎨 EDS Colours (static)
+//   foundations       → EDS Foundations (Internal)
+//   colours-dynamic   → 🎨 EDS Colours (dynamic)
+//   st-primitives     → 🅰️ Spacing & Typography Primitives
+//   st-tokens         → 🅰️ EDS Spacing & Typography tokens
 export type LaneId =
-  | 'static'
+  | 'colours-static'
   | 'foundations'
-  | 'dynamic'
-  | 'spacing-primitives'
-  // Figma file actually named "Spacing modes" per eds-tokens-sync/CLAUDE.md.
-  // Despite the misleading name, this file contains typography axes,
-  // border radius, density, container space, icon size, stroke, and most
-  // other modal design tokens — not just spacing modes.
-  | 'spacing-modes'
+  | 'colours-dynamic'
+  | 'st-primitives'
+  | 'st-tokens'
 
 // Scene id is the registry key — see data/sceneRegistry.ts. Kept as a
 // string union for autocomplete; extend when adding new scene components.
