@@ -8,11 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.6.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.5.0...eds-core-react@v2.6.0) (2026-05-20)
 
 
-### ✨ Added
-
-* **eds-icons:** add dark_mode icon ([#4926](https://github.com/equinor/design-system/issues/4926)) ([03bdd0c](https://github.com/equinor/design-system/commit/03bdd0cc1a476cbeb906e739e7069eb157f30105))
-
-
 ### 🐛 Fixed
 
 * forward child refs in Tooltip and TabList on React 18 ([#4904](https://github.com/equinor/design-system/issues/4904)) ([d095239](https://github.com/equinor/design-system/commit/d0952399a167ec5a54e7b99353007d6649191d02))
