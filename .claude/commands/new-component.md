@@ -4,6 +4,8 @@ Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/
 
 > **Canonical reference:** [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
 
+@../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md
+
 This command focuses on the per-component scaffolding flow. The patterns and code templates referenced below all live in the canonical doc above — read them there rather than inferring from memory.
 
 ## Workflow
