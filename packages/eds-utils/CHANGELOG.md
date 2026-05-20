@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.1](https://github.com/equinor/design-system/compare/eds-utils@v2.2.0...eds-utils@v2.2.1) (2026-05-20)
+
+
+### 🐛 Fixed
+
+* publish with correct workspace dependencies — 2.2.0 had an unresolved `workspace:^` reference to `@equinor/eds-tokens` that prevented installation via npm (CI workflow issue, no code changes)
+
 ## [2.2.0](https://github.com/equinor/design-system/compare/eds-utils@v2.1.0...eds-utils@v2.2.0) (2026-05-20)
 
 
