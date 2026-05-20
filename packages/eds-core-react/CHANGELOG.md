@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.5.0...eds-core-react@v2.6.0) (2026-05-20)
+
+
+### ✨ Added
+
+* **eds-icons:** add dark_mode icon ([#4926](https://github.com/equinor/design-system/issues/4926)) ([03bdd0c](https://github.com/equinor/design-system/commit/03bdd0cc1a476cbeb906e739e7069eb157f30105))
+
+
+### 🐛 Fixed
+
+* **eds-icons:** resync grid_off to fix blurry rendering ([#4845](https://github.com/equinor/design-system/issues/4845)) ([748352d](https://github.com/equinor/design-system/commit/748352dfc294e2b45b25ac3509a889268b89b39f))
+* emit explicit dark-scope rules instead of light-dark() in tokens ([#4864](https://github.com/equinor/design-system/issues/4864)) ([e519ff2](https://github.com/equinor/design-system/commit/e519ff2113e13f7a826772cebc9abeda2f04cee7))
+* forward child refs in Tooltip and TabList on React 18 ([#4904](https://github.com/equinor/design-system/issues/4904)) ([d095239](https://github.com/equinor/design-system/commit/d0952399a167ec5a54e7b99353007d6649191d02))
+
 ## [2.5.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.4.1...eds-core-react@v2.5.0) (2026-04-14)
 
 
