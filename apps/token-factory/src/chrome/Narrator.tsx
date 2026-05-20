@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LibrarianBot } from '../sprites/LibrarianBot'
 
 type Props = {
@@ -39,6 +39,11 @@ export function Narrator({
 }: Props) {
   const [lineIdx, setLineIdx] = useState(0)
   const [typed, setTyped] = useState('')
+  // Pending character-typing timeout. Skip needs to cancel this explicitly:
+  // without an explicit clear, a setTimeout queued just before space is
+  // pressed can fire after the skip's setTyped(full) commits and write a
+  // partial-length value back, making the bubble flash to full then revert.
+  const typingTimerRef = useRef<number | null>(null)
 
   // Reset when the line set changes (new scene).
   useEffect(() => {
@@ -56,6 +61,10 @@ export function Narrator({
   // move on if we're already at the end of the last line.
   useEffect(() => {
     if (skipTick === 0) return
+    if (typingTimerRef.current !== null) {
+      window.clearTimeout(typingTimerRef.current)
+      typingTimerRef.current = null
+    }
     const current = lines[lineIdx] ?? ''
     if (typed.length < current.length) {
       setTyped(current)
@@ -73,9 +82,14 @@ export function Narrator({
     const current = lines[lineIdx] ?? ''
     if (typed.length >= current.length) return
     const id = window.setTimeout(() => {
+      typingTimerRef.current = null
       setTyped(current.slice(0, typed.length + 1))
     }, CHAR_MS)
-    return () => window.clearTimeout(id)
+    typingTimerRef.current = id
+    return () => {
+      window.clearTimeout(id)
+      if (typingTimerRef.current === id) typingTimerRef.current = null
+    }
   }, [lines, lineIdx, typed])
 
   // Auto-advance to the next line after the hold.
