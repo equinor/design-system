@@ -172,7 +172,7 @@
 
   .lorry-spot {
     position: absolute;
-    bottom: calc(20 * var(--px));
+    bottom: calc(18 * var(--px));
     left: calc(4 * var(--px));
     /* z-index: above hidden/peeking crate so crate is obscured by the
        lorry, but below other journey states where the crate has slid out
@@ -236,8 +236,6 @@
     flex-direction: column;
     align-items: center;
     gap: calc(1 * var(--px));
-    transform-origin: left bottom;
-    transform: scale(0.6) translateX(0) translateY(60px);
     transition:
       transform 1200ms steps(12, end),
       opacity 600ms steps(4, end);
@@ -253,33 +251,33 @@
   }
 
   .crate-state-peeking {
-    transform: scale(0.6) translateX(calc(120 * var(--px)));
+    transform: scale(0.6) translateX(calc(120 * var(--px))) translateY(60px);
     z-index: 7;
   }
 
   .crate-state-sliding-to-worker {
-    transform: scale(0.6) translateX(calc(200 * var(--px)));
+    transform: scale(0.6) translateX(calc(200 * var(--px))) translateY(60px);
     z-index: 7;
   }
 
   .crate-state-inspecting {
-    transform: scale(0.6) translateX(calc(200 * var(--px)));
+    transform: scale(0.6) translateX(calc(200 * var(--px))) translateY(60px);
     z-index: 7;
   }
 
   .crate-state-sliding-to-gate {
-    transform: scale(0.6) translateX(calc(420 * var(--px)));
+    transform: scale(0.6) translateX(calc(420 * var(--px))) translateY(60px);
     z-index: 7;
   }
 
   .crate-state-entering {
-    transform: scale(0.6) translateX(calc(460 * var(--px)));
+    transform: scale(0.6) translateX(calc(460 * var(--px))) translateY(60px);
     opacity: 0;
     z-index: 7;
   }
 
   .crate-state-inside {
-    transform: scale(0) translateX(calc(460 * var(--px)));
+    transform: scale(0) translateX(calc(460 * var(--px))) translateY(60px);
     opacity: 0;
     z-index: 7;
   }
