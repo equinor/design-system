@@ -109,7 +109,7 @@ jobs:
         id: publish-to-npm
         if: needs.setup.outputs.tag != 'beta'
         working-directory: packages/eds-utils
-        run: npm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }}
+        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
@@ -177,7 +177,7 @@ jobs:
       - name: Publish to npm
         id: publish-to-npm
         working-directory: packages/eds-core-react
-        run: npm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }}
+        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
