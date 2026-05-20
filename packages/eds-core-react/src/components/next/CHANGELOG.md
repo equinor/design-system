@@ -4,6 +4,13 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.6.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.6.0-beta.0...eds-core-react-next@v2.6.0-beta.1) (2026-05-20)
+
+
+### 🐛 Fixed
+
+* publish with correct workspace dependencies — 2.6.0-beta.0 had unresolved `workspace:^` references that prevented installation via npm (CI workflow issue, no code changes in /next)
+
 ## [2.6.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.5.0-beta.0...eds-core-react-next@v2.6.0-beta.0) (2026-05-20)
 
 
