@@ -40,11 +40,11 @@ export function Lorry() {
         FIGMA
       </text>
       {/* wheels */}
-      <rect x={6} y={32} width={8} height={6} fill="#1d2b53" />
+      <rect x={6} y={32} width={8} height={6} fill="#000000" />
       <rect x={7} y={33} width={6} height={4} fill="#000000" />
-      <rect x={38} y={32} width={8} height={6} fill="#1d2b53" />
+      <rect x={38} y={32} width={8} height={6} fill="#000000" />
       <rect x={39} y={33} width={6} height={4} fill="#000000" />
-      <rect x={56} y={32} width={8} height={6} fill="#1d2b53" />
+      <rect x={56} y={32} width={8} height={6} fill="#000000" />
       <rect x={57} y={33} width={6} height={4} fill="#000000" />
       {/* headlight */}
       <rect x={68} y={22} width={2} height={3} fill="#ffec27" />

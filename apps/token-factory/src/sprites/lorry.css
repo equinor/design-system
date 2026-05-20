@@ -7,7 +7,7 @@
     animation: lorry-enter 2000ms steps(18, end);
 
     text {
-      transform: scaleX(-1);
+      transform: scaleX(-1) translate(0);
     }
   }
 
