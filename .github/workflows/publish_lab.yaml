@@ -101,7 +101,7 @@ jobs:
         with:
           run_install: false
       - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@latest
+        run: npm install -g npm@11
       - name: Publish to npm
         id: publish-to-npm
         working-directory: packages/eds-utils
@@ -139,7 +139,7 @@ jobs:
         with:
           run_install: false
       - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@latest
+        run: npm install -g npm@11
       - name: Publish to npm
         id: publish-to-npm
         working-directory: packages/eds-lab-react
