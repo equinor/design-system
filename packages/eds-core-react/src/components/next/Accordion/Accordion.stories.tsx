@@ -4,7 +4,7 @@ import { Accordion } from '.'
 import type { AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
-  title: 'EDS 2.0 (beta)/Data Display/Accordion',
+  title: 'EDS 2.0 (beta)/Surface/Accordion',
   component: Accordion,
   tags: ['beta'],
   parameters: {
@@ -130,6 +130,38 @@ const SchemePreview = () => (
       </Accordion.Panel>
     </Accordion.Item>
   </Accordion>
+)
+
+const DensityPreview = () => (
+  <Accordion>
+    <Accordion.Item defaultOpen>
+      <Accordion.Header>First section</Accordion.Header>
+      <Accordion.Panel>
+        Spacing and sizes pick up the ancestor <code>data-density</code> value.
+      </Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Second section</Accordion.Header>
+      <Accordion.Panel>Content hidden until opened.</Accordion.Panel>
+    </Accordion.Item>
+  </Accordion>
+)
+
+/**
+ * Accordion respects the `data-density` attribute on an ancestor element so
+ * spacing and sizing tokens stay coordinated with sibling components.
+ */
+export const Density: StoryFn = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <div data-density="spacious">
+      <h3 style={{ margin: '0 0 12px' }}>Spacious (default)</h3>
+      <DensityPreview />
+    </div>
+    <div data-density="comfortable">
+      <h3 style={{ margin: '0 0 12px' }}>Comfortable</h3>
+      <DensityPreview />
+    </div>
+  </div>
 )
 
 /**

@@ -2,6 +2,7 @@
   .eds-accordion {
     /* States override these vars; the consuming properties below stay stable. */
     --_summary-bg: transparent;
+    --_transition-duration: 200ms;
 
     /* Equals the summary's line-height so the chevron sits on the same
      * baseline grid as the title. The panel's inline-start references the
@@ -25,8 +26,8 @@
       overflow: clip;
       block-size: 0;
       transition:
-        block-size 200ms ease,
-        content-visibility 200ms ease allow-discrete;
+        block-size var(--_transition-duration) ease,
+        content-visibility var(--_transition-duration) ease allow-discrete;
     }
 
     & > details[open]::details-content {
@@ -43,11 +44,13 @@
       padding-block: var(--eds-selectable-space-vertical);
       padding-inline: var(--eds-selectable-space-horizontal);
 
+      font-size: var(--eds-typography-ui-body-md-font-size);
+
       list-style: none;
 
       background-color: var(--_summary-bg);
 
-      transition: background-color 150ms ease;
+      transition: background-color var(--_transition-duration) ease;
     }
 
     & > details > summary::-webkit-details-marker {
@@ -82,23 +85,24 @@
 
       color: var(--_chevron-color);
 
-      transition: rotate 200ms ease;
+      transition: rotate var(--_transition-duration) ease;
     }
 
     & > details[open] > summary > .chevron {
       rotate: 180deg;
     }
 
-    /* Title carries `data-color-appearance="accent"` so its `--eds-color-text-*`
-     * tokens resolve under the accent palette in *both* light and dark schemes.
-     * Static `--eds-color-text-accent-*` tokens are light-only — they were
-     * baked-in #1F6369 / #141F20 regardless of scheme. */
     & > details > summary > .title {
       --_title-color: var(--eds-color-text-strong);
 
       flex: 1;
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      line-height: var(--eds-typography-ui-body-md-line-height-squished);
       color: var(--_title-color);
-      transition: color 150ms ease;
+
+      transition: color var(--_transition-duration) ease;
     }
 
     & > details[open] > summary > .title {
@@ -114,15 +118,15 @@
           var(--eds-selectable-space-horizontal) * 2 + var(--_chevron-column)
         )
         var(--eds-spacing-horizontal-2xl);
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
       color: var(--eds-color-text-subtle);
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .eds-accordion > details::details-content,
-    .eds-accordion > details > summary > .chevron,
-    .eds-accordion > details > summary > .title {
-      transition: none;
+    @media (prefers-reduced-motion: reduce) {
+      --_transition-duration: 0s;
     }
   }
 }

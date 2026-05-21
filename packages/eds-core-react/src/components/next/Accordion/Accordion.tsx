@@ -89,7 +89,6 @@ const AccordionHeader = forwardRef<HTMLElement, AccordionHeaderProps>(
         ref={ref}
         className={className}
         data-selectable-space="md"
-        data-font-size="md"
         {...rest}
       >
         <span
@@ -102,9 +101,6 @@ const AccordionHeader = forwardRef<HTMLElement, AccordionHeaderProps>(
         <span
           className="title"
           data-color-appearance="accent"
-          data-font-family="ui"
-          data-font-size="md"
-          data-line-height="squished"
           data-baseline="center"
         >
           {children}
@@ -122,9 +118,6 @@ const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
         ref={ref}
         className={['panel', className].filter(Boolean).join(' ')}
         data-selectable-space="md"
-        data-font-family="ui"
-        data-font-size="md"
-        data-line-height="default"
         {...rest}
       >
         {children}
