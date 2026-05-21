@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.3.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.2.0...eds-tokens@v2.3.0) (2026-05-21)
 
+> **Heads-up for downstream bundler setups:** Dark mode tokens are now emitted as explicit `[data-color-scheme="dark"]` scope rules instead of `light-dark()`. This fixes dark mode in bundlers that use lightningcss (including Vite 8+). No action required for most consumers — if you process the tokens CSS through your own build pipeline, the output no longer contains `light-dark()`.
 
 ### ✨ Added
 
