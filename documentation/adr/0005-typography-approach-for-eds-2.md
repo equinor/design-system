@@ -66,6 +66,8 @@ Use **Option 2**. Each heading and body element sets:
 1. `font-weight` using its size-matched token (e.g. `--eds-typography-header-5xl-font-weight-normal`)
 2. `--_font-weight-bolder` and `--_font-weight-lighter` pseudo-private variables pointing to the corresponding bolder/lighter tokens
 
+The same CSS-first principle extends beyond font-weight: components in `/next` set `font-family`, `font-size`, and `line-height` directly in their CSS using per-role semantic tokens (`--eds-typography-ui-body-md-font-size` etc.). The `data-font-family` / `data-font-size` / `data-line-height` runtime-switching mechanism is reserved for `elements.css` defaults and ad-hoc consumer markup — a component's own elements should not carry these attributes, because the size and role are part of the component's design and are encoded in the token name. See [`packages/eds-tokens/instructions/typography.md`](../../packages/eds-tokens/instructions/typography.md) for both paths and the token shape.
+
 Inline elements (`strong`) consume `--_font-weight-bolder` via inheritance with a numeric fallback:
 
 ```css

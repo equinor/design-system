@@ -191,6 +191,22 @@ For the underlying token system — colour categories, static vs dynamic tokens,
 
 Prefer dynamic tokens (e.g. `--eds-selectable-space-vertical`, `--eds-typography-icon-size`) over hard-coded values. They adapt to density, typography, and accessibility settings without per-component overrides.
 
+#### Typography in component CSS
+
+Set `font-family`, `font-size`, and `line-height` directly in the component CSS using the per-role semantic typography tokens — do **not** add `data-font-family` / `data-font-size` / `data-line-height` attributes to the component's own elements:
+
+```css
+.eds-button {
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+}
+```
+
+Token shape: `--eds-typography-{ui-body|header}-{xs..6xl}-{font-size,line-height-default,line-height-squished,font-weight-*}`. `font-family` is set once per role (`--eds-typography-{ui-body,header}-font-family`).
+
+The `data-font-*` runtime-switching pattern still exists for `elements.css` defaults and ad-hoc consumer markup, but inside a component's own CSS the size and role are part of the design and should be expressed as tokens. See [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) for both paths.
+
 #### Pseudo-private custom properties
 
 Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0005-typography-approach-for-eds-2.md`) and is now applied broadly across components.
