@@ -355,15 +355,7 @@ function AutocompleteInner<T = string>(
             ?.scrollIntoView({ block: 'nearest' })
           return
         }
-        if (activeIndex === 0) {
-          // At first item — wrap to last option
-          const last = totalOptions - 1
-          setActiveIndex(last)
-          listboxRef.current
-            ?.querySelector(`#${getOptionId(last)}`)
-            ?.scrollIntoView({ block: 'nearest' })
-          return
-        }
+        if (activeIndex === 0) return
         const prev = activeIndex - 1
         setActiveIndex(prev)
         listboxRef.current
