@@ -22,5 +22,5 @@ export default defineConfig({
       external: [/^node:/, 'fs', 'path', 'os', 'dotenv', 'dotenv/config'],
     },
   },
-  plugins: [dts({ rollupTypes: true })],
+  plugins: [dts({ bundleTypes: true })],
 })

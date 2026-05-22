@@ -235,6 +235,15 @@ nav.menu li a {
 }
 
 /* ======================================
+ * TYPOGRAPHY SPECIMEN GRID
+ * ====================================== */
+
+.specimen-label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* ======================================
  * TABLE OF CONTENTS
  * ====================================== */
 .theme-doc-toc-desktop {

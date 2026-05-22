@@ -1,93 +1,18 @@
 ---
 paths:
-  - "packages/eds-core-react/src/components/next/**/*.tsx"
-  - "packages/eds-core-react/src/components/next/**/*.ts"
-  - "packages/eds-core-react/src/components/next/**/*.css"
+  - 'packages/eds-core-react/src/components/next/**/*.tsx'
+  - 'packages/eds-core-react/src/components/next/**/*.ts'
+  - 'packages/eds-core-react/src/components/next/**/*.css'
 ---
 
-# EDS 2.0 Component Guidelines
+# EDS 2.0 Component Guidelines (path-scoped delta)
 
-When building EDS 2.0 components in `packages/eds-core-react/src/components/next/`, follow these conventions.
+> The full component conventions live in [`AGENTS.md`](../../AGENTS.md): file structure, `forwardRef` pattern, named exports, JSDoc'd types, `eds-`-prefixed CSS with `@layer eds-components`, `--_` pseudo-private vars, `data-*` for variants, density via ancestor, testing with Jest + Testing Library + jest-axe.
 
-## File Structure
+This file is intentionally short. It only highlights what's easy to forget when working in `/next`:
 
-```
-ComponentName/
-  index.ts               # Named exports only
-  ComponentName.tsx      # forwardRef component
-  ComponentName.types.ts # Types with JSDoc
-  componentname.css      # Vanilla CSS + tokens + nesting
-  ComponentName.test.tsx # Jest + Testing Library + jest-axe
-  ComponentName.stories.tsx
-```
-
-## Component Pattern
-
-```typescript
-import { forwardRef, useId } from 'react'
-import type { ComponentProps } from './Component.types'
-import './component.css'
-
-export const Component = forwardRef<HTMLElement, ComponentProps>(
-  function Component({ className, ...rest }, ref) {
-    const classes = ['component', className].filter(Boolean).join(' ')
-    return <div ref={ref} className={classes} {...rest} />
-  },
-)
-```
-
-## Types Pattern
-
-```typescript
-export type ComponentProps = {
-  /** Description for prop */
-  variant?: 'primary' | 'secondary'
-} & HTMLAttributes<HTMLElement>
-```
-
-## CSS Pattern
-
-One `eds-`-prefixed root class. Internal elements use simple names scoped by nesting. Variants via data attributes.
-
-```css
-@layer eds-components {
-  .eds-component {
-    color: var(--eds-color-text-primary);
-
-    & .label-row {
-      display: flex;
-      align-items: center;
-    }
-
-    &[data-variant='secondary'] {
-      color: var(--eds-color-text-secondary);
-    }
-  }
-}
-```
-
-## Test Pattern
-
-Organize with `describe` blocks: Rendering, Accessibility, Behavior.
-
-```typescript
-import { render, screen } from '@testing-library/react'
-import { axe } from 'jest-axe'
-import { Component } from '.'
-
-describe('Component (next)', () => {
-  describe('Accessibility', () => {
-    it('passes axe', async () => {
-      const { container } = render(<Component />)
-      expect(await axe(container)).toHaveNoViolations()
-    })
-  })
-})
-```
-
-## Rules
-
-- No default exports (except stories)
-- WCAG 2.1 AA required
-- Use `--eds-*` design tokens
-- Query priority: getByRole > getByLabelText > getByText > getByTestId
+- **No default exports** (except `.stories.tsx`)
+- **WCAG 2.1 AA** is non-negotiable — `jest-axe` test in every component
+- **Use `--eds-*` design tokens** — never hardcode hex values
+- **Variants and states via `data-*` attributes**, not modifier classes
+- **Test queries**: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`

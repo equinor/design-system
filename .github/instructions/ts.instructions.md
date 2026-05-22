@@ -4,9 +4,11 @@ applyTo: '**/*.ts,**/*.tsx'
 
 # TypeScript Guidelines
 
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds TS-specific guidance for Copilot.
+
 ## Type Definitions
 
-- **Interfaces over types** for object structures
+- **`type` aliases for component props** — matches the pattern in `/next` and supports intersection types (`& Omit<...>`) cleanly
 - **Union types** for constrained options (e.g., `'primary' | 'secondary'` instead of `string`)
 - **Explicit typing** where clarity matters; inference for obvious cases
 - **Immutable data** (const, readonly properties)
@@ -15,10 +17,10 @@ applyTo: '**/*.ts,**/*.tsx'
 
 ```typescript
 // ✅ Good
-interface ButtonProps {
+export type ButtonProps = {
   variant: 'primary' | 'secondary'
   disabled?: boolean
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {}
 

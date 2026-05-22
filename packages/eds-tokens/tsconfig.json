@@ -10,5 +10,10 @@
     "baseUrl": "."
   },
   "include": ["./src/**/*", "./commonjs/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "vitest.config.ts"
+  ]
 }

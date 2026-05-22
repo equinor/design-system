@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-tokens",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Design tokens for the Equinor Design System",
   "type": "module",
   "exports": {
@@ -49,6 +49,8 @@
     "build": "rollup -c && pnpm run types",
     "dev": "rollup -c -w",
     "types": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prettier:check": "prettier --check src/",
     "build:variables:color-scheme": "build-color-scheme-variables",
     "build:variables:semantic:static": "build-semantic-static-variables",
@@ -102,11 +104,12 @@
     "lightningcss-cli": "^1.32.0",
     "prettier": "3.8.3",
     "rimraf": "^6.1.3",
-    "rollup": "^4.60.2",
+    "rollup": "^4.60.3",
     "rollup-plugin-delete": "^3.0.2",
     "style-dictionary": "^5.4.0",
     "style-dictionary-utils": "^6.0.1",
     "typescript": "^5.9.3",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
   }
 }

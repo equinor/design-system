@@ -123,6 +123,108 @@ describe('typescriptNested format', () => {
         },
       })
     })
+
+    describe('with splitLeafPrefixes', () => {
+      it('splits a matching hyphenated leaf into two nested segments', () => {
+        const tokens = [
+          mockToken(['font-family-size', 'xs', 'font-weight-lighter'], '300'),
+          mockToken(['font-family-size', 'xs', 'font-weight-normal'], '400'),
+          mockToken(['font-family-size', 'xs', 'font-weight-bolder'], '500'),
+        ] as TransformedToken[]
+
+        const result = buildNestedObject(tokens, {
+          splitLeafPrefixes: ['font-weight'],
+        })
+
+        expect(result).toEqual({
+          fontFamilySize: {
+            xs: {
+              fontWeight: {
+                lighter: '300',
+                normal: '400',
+                bolder: '500',
+              },
+            },
+          },
+        })
+      })
+
+      it('leaves leaves matching the prefix exactly (no suffix) alone', () => {
+        const tokens = [
+          mockToken(['font-family-size', 'xs', 'font-size'], '12'),
+        ] as TransformedToken[]
+
+        const result = buildNestedObject(tokens, {
+          splitLeafPrefixes: ['font-size'],
+        })
+
+        expect(result).toEqual({
+          fontFamilySize: {
+            xs: {
+              fontSize: '12',
+            },
+          },
+        })
+      })
+
+      it('handles multiple prefixes on different tokens', () => {
+        const tokens = [
+          mockToken(['size', 'xs', 'font-weight-bolder'], '500'),
+          mockToken(['size', 'xs', 'tracking-tight'], '-1'),
+          mockToken(['size', 'xs', 'line-height-default'], '16'),
+          mockToken(['size', 'xs', 'font-size'], '12'),
+        ] as TransformedToken[]
+
+        const result = buildNestedObject(tokens, {
+          splitLeafPrefixes: ['font-weight', 'tracking', 'line-height'],
+        })
+
+        expect(result).toEqual({
+          size: {
+            xs: {
+              fontWeight: { bolder: '500' },
+              tracking: { tight: '-1' },
+              lineHeight: { default: '16' },
+              fontSize: '12',
+            },
+          },
+        })
+      })
+
+      it('only splits the leaf segment, not intermediate segments', () => {
+        const tokens = [
+          mockToken(['font-weight-lighter', 'xs'], '300'),
+        ] as TransformedToken[]
+
+        const result = buildNestedObject(tokens, {
+          splitLeafPrefixes: ['font-weight'],
+        })
+
+        expect(result).toEqual({
+          fontWeightLighter: { xs: '300' },
+        })
+      })
+
+      it('is a no-op when no prefix matches', () => {
+        const tokens = [
+          mockToken(['size', 'xs', 'font-size'], '12'),
+          mockToken(['size', 'xs', 'icon-size'], '16'),
+        ] as TransformedToken[]
+
+        const result = buildNestedObject(tokens, {
+          splitLeafPrefixes: ['font-weight', 'tracking'],
+        })
+
+        expect(result).toEqual({
+          size: {
+            xs: {
+              fontSize: '12',
+              iconSize: '16',
+            },
+          },
+        })
+      })
+    })
   })
 
   describe('typescriptNestedFormat', () => {
@@ -285,6 +387,53 @@ describe('typescriptNested format', () => {
       expect(result).toContain('threeXs: 4,')
       // Pure numeric keys should still be quoted
       expect(result).toContain("'1': '#111111'")
+    })
+
+    it('passes splitLeafPrefixes through to the nested builder', () => {
+      const tokens = [
+        mockToken(['font-family-size', 'xs', 'font-weight-lighter'], '300'),
+        mockToken(['font-family-size', 'xs', 'font-weight-normal'], '400'),
+        mockToken(['font-family-size', 'xs', 'tracking-tight'], '-1.15'),
+        mockToken(['font-family-size', 'xs', 'tracking-normal'], '0'),
+        mockToken(['font-family-size', 'xs', 'line-height-default'], '16'),
+        mockToken(['font-family-size', 'xs', 'font-size'], '12'),
+      ] as TransformedToken[]
+
+      const result = typescriptNestedFormat({
+        dictionary: { allTokens: tokens, tokens: {}, unfilteredTokens: {} },
+        options: {
+          rootName: 'typography',
+          splitLeafPrefixes: ['font-weight', 'tracking', 'line-height'],
+        },
+        file: { destination: 'test.ts' },
+        platform: {},
+      } as unknown as FormatFnArguments)
+
+      expect(result).toMatchInlineSnapshot(`
+        "/**
+         * Do not edit directly, this file was auto-generated.
+         */
+
+        export const typography = {
+          fontFamilySize: {
+            xs: {
+              fontWeight: {
+                lighter: 300,
+                normal: 400,
+              },
+              tracking: {
+                tight: -1.15,
+                normal: 0,
+              },
+              lineHeight: {
+                default: 16,
+              },
+              fontSize: 12,
+            },
+          },
+        } as const
+        "
+      `)
     })
   })
 })
