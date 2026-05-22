@@ -4,6 +4,8 @@ Conduct an accessibility audit of the URL provided in **$ARGUMENTS** against WCA
 
 > **Canonical reference:** [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](../../documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — the 13-section audit checklist, output format, severity rubric, and tips for the agent. Project-wide accessibility expectations live in [`AGENTS.md`](../../AGENTS.md) § Accessibility.
 
+@../../documentation/agent-instructions/ACCESSIBILITY_AUDIT.md
+
 ## Steps
 
 1. Open the URL with a browser-automation MCP server (Playwright or Chrome DevTools). MCP servers are configured in personal Claude Code settings.

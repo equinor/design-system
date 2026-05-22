@@ -5,6 +5,8 @@
 >
 > This file holds only Claude-Code-specific configuration that doesn't belong in `AGENTS.md`.
 
+@../AGENTS.md
+
 ## Path-Scoped Rules
 
 Claude Code automatically loads rules in `.claude/rules/` when working on matching files:

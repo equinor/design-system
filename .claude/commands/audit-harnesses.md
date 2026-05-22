@@ -4,6 +4,8 @@ Run a read-only consistency audit across the AI agent configurations in this rep
 
 > **Canonical reference:** [`documentation/agent-instructions/HARNESS_AUDIT.md`](../../documentation/agent-instructions/HARNESS_AUDIT.md) — explicit scope (Claude Code, Copilot, OpenCode), the canonical-docs pattern, the eight audit steps, finding classification, severity rubric, and report format.
 
+@../../documentation/agent-instructions/HARNESS_AUDIT.md
+
 ## Workflow
 
 1. Read the canonical playbook above. The scope, the surfaces in play, and the report shape all live there.
