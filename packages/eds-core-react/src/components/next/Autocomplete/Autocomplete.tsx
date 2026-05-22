@@ -356,9 +356,12 @@ function AutocompleteInner<T = string>(
           return
         }
         if (activeIndex === 0) {
-          // At first item — return focus to input
-          setActiveIndex(-1)
-          closeListbox()
+          // At first item — wrap to last option
+          const last = totalOptions - 1
+          setActiveIndex(last)
+          listboxRef.current
+            ?.querySelector(`#${getOptionId(last)}`)
+            ?.scrollIntoView({ block: 'nearest' })
           return
         }
         const prev = activeIndex - 1
@@ -413,13 +416,17 @@ function AutocompleteInner<T = string>(
 
   useEffect(() => {
     if (!isOpen) return
+    if (loading) {
+      setAnnouncement(loadingText)
+      return
+    }
     const count = totalOptions
     setAnnouncement(
       count === 0
         ? 'No results'
         : `${count} result${count === 1 ? '' : 's'} available`,
     )
-  }, [totalOptions, isOpen])
+  }, [totalOptions, isOpen, loading, loadingText])
 
   // Scroll selected option into view when listbox opens
   useEffect(() => {

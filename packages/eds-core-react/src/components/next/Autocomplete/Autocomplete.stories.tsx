@@ -133,7 +133,10 @@ const meta: Meta<typeof Autocomplete> = {
       control: false,
       description:
         'Fired when the user selects an option from the list. Receives the full option value `T`.',
-      table: { category: 'Callbacks', type: { summary: '(value: T) => void' } },
+      table: {
+        category: 'Callbacks',
+        type: { summary: '(value: T | undefined) => void' },
+      },
     },
     onCustomValueConfirm: {
       control: false,
@@ -250,12 +253,6 @@ const meta: Meta<typeof Autocomplete> = {
     tabIndex: { table: { disable: true } },
     form: { table: { disable: true } },
     autoComplete: { table: { disable: true } },
-    onFocus: { table: { disable: true } },
-    onBlur: { table: { disable: true } },
-    onKeyDown: { table: { disable: true } },
-    onKeyUp: { table: { disable: true } },
-    onMouseDown: { table: { disable: true } },
-    onClick: { table: { disable: true } },
   },
   parameters: {
     layout: 'padded',
@@ -278,8 +275,12 @@ import { Autocomplete } from '@equinor/eds-core-react/next'
 export default meta
 
 export const Introduction: StoryFn<AutocompleteProps> = (args) => (
-  <Autocomplete options={elements} {...args} />
+  <Autocomplete {...args} />
 )
+
+Introduction.args = {
+  options: elements,
+}
 
 Introduction.parameters = {
   docs: {
