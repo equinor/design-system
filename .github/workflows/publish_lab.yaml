@@ -56,7 +56,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '24.16.0'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -93,7 +93,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '24.16.0'
           registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
@@ -131,7 +131,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '24.16.0'
           registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
