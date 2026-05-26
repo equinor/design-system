@@ -13,8 +13,6 @@ import {
     typographyToken,
 } from "../../styling/tokens";
 import { ColorScheme, Density } from "../../styling/types";
-import { ScrimProvider } from "../_internal/ScrimProvider";
-import { DialogServiceProvider } from "../Dialog/service/DialogServiceProvider";
 import { Portal, PortalProvider } from "../Portal";
 import { EDSContext } from "./EDSContext";
 
@@ -69,12 +67,9 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
         >
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <PortalProvider>
-                    <ScrimProvider>
-                        <Portal.Host style={{ flex: 1 }} name="root">
-                            {props.children}
-                            <DialogServiceProvider />
-                        </Portal.Host>
-                    </ScrimProvider>
+                    <Portal.Host style={{ flex: 1 }} name="root">
+                        {props.children}
+                    </Portal.Host>
                 </PortalProvider>
             </GestureHandlerRootView>
         </EDSContext.Provider>
