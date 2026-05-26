@@ -8,6 +8,7 @@ import {
 } from '../data/lanes'
 import { SCENES } from '../data/sceneRegistry'
 import { LaneContext, LaneSelectionContext } from './LaneContext'
+import { LaneMapDialog } from './LaneMapDialog'
 import { Narrator } from './Narrator'
 
 // Top-level story orchestrator.
@@ -32,6 +33,7 @@ export function Story() {
   const [selectedLaneId, setSelectedLaneId] = useState<LaneId>('colours-static')
   const [skipTick, setSkipTick] = useState(0)
   const [activeBeatIdx, setActiveBeatIdx] = useState(0)
+  const [mapOpen, setMapOpen] = useState(false)
 
   const selectedLane = LANES[selectedLaneId] ?? STATIC_LANE
 
@@ -108,6 +110,20 @@ export function Story() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault()
+        setMapOpen((open) => !open)
+        return
+      }
+      // While the map is open, swallow story keys so the dialog acts
+      // as a modal. Esc closes the map; everything else is ignored.
+      if (mapOpen) {
+        if (e.key === 'Escape') {
+          e.preventDefault()
+          setMapOpen(false)
+        }
+        return
+      }
       if (e.key === ' ') {
         e.preventDefault()
         skip()
@@ -124,7 +140,7 @@ export function Story() {
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [advance, back, skip, restart])
+  }, [advance, back, skip, restart, mapOpen])
 
   const selectionValue = useMemo(
     () => ({ selectedLaneId, setSelectedLaneId }),
@@ -161,7 +177,18 @@ export function Story() {
             <span className="hint-sep">·</span>
             <span className="hint-key">[ → ]</span>
             <span className="hint-label">next scene</span>
+            <span className="hint-sep">·</span>
+            <span className="hint-key">[ m ]</span>
+            <span className="hint-label">map</span>
           </div>
+
+          {mapOpen && scene && (
+            <LaneMapDialog
+              lane={selectedLane}
+              scene={scene}
+              onClose={() => setMapOpen(false)}
+            />
+          )}
         </div>
       </LaneSelectionContext.Provider>
     </LaneContext.Provider>

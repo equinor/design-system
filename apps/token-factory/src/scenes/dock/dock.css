@@ -36,7 +36,8 @@
   /* Lane indicator: destination labels at top-left, NOT physical belts. */
   .lane-indicator {
     position: absolute;
-    top: calc(20 * var(--px));
+    /* Sits below scene-header-bar (top:0 h:16) + lane-map (top:16 h:18). */
+    top: calc(38 * var(--px));
     left: calc(6 * var(--px));
     display: flex;
     flex-direction: column;

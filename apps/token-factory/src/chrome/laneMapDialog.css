@@ -1,0 +1,232 @@
+@layer tf-chrome {
+  /* ===== Lane-map dialog =====
+     Modal overlay opened via 'm'. 3×3 connected snake of pipeline cells. */
+
+  .lane-map-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .lane-map-dialog {
+    width: calc(340 * var(--px));
+    background: var(--pico-dark-blue);
+    border: var(--px) solid var(--_lane-accent, var(--pico-dark-purple));
+    box-shadow:
+      calc(2 * var(--px)) calc(2 * var(--px)) 0 0 var(--pico-black);
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+  }
+
+  .lane-map-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(3 * var(--px)) calc(5 * var(--px));
+    background: var(--pico-black);
+    border-bottom: var(--px) solid
+      var(--_lane-accent, var(--pico-dark-purple));
+  }
+
+  .lane-map-dialog-title {
+    font-size: calc(5 * var(--px));
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+    text-transform: uppercase;
+  }
+
+  .lane-map-close {
+    background: transparent;
+    border: none;
+    color: var(--pico-light-gray);
+    font-family: inherit;
+    font-size: calc(5 * var(--px));
+    padding: calc(1 * var(--px)) calc(3 * var(--px));
+    cursor: pointer;
+  }
+
+  .lane-map-close:hover {
+    color: var(--pico-yellow);
+  }
+
+  .lane-map-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: calc(8 * var(--px));
+    padding: calc(8 * var(--px));
+  }
+
+  .lane-map-cell {
+    position: relative;
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-dark-gray);
+    padding: calc(3 * var(--px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+    min-height: calc(54 * var(--px));
+  }
+
+  .lane-map-cell[data-state='past'] {
+    border-color: var(--_lane-accent, var(--pico-dark-purple));
+    opacity: 0.78;
+  }
+
+  .lane-map-cell[data-state='active'] {
+    border-color: var(--pico-yellow);
+    box-shadow: 0 0 0 var(--px) var(--pico-yellow);
+    background: #14213d;
+  }
+
+  .lane-map-cell-step {
+    position: absolute;
+    top: calc(1 * var(--px));
+    left: calc(2 * var(--px));
+    font-size: calc(3 * var(--px));
+    color: var(--pico-dark-gray);
+    letter-spacing: calc(0.5 * var(--px));
+  }
+
+  .lane-map-cell[data-state='active'] .lane-map-cell-step {
+    color: var(--pico-yellow);
+  }
+
+  .lane-map-cell[data-state='past'] .lane-map-cell-step {
+    color: var(--pico-light-gray);
+  }
+
+  .lane-map-cell-viz {
+    width: calc(20 * var(--px));
+    height: calc(20 * var(--px));
+    margin-top: calc(2 * var(--px));
+  }
+
+  .lane-map-cell-label {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+    letter-spacing: calc(0.5 * var(--px));
+    text-transform: uppercase;
+  }
+
+  .lane-map-cell[data-state='active'] .lane-map-cell-label {
+    color: var(--pico-yellow);
+  }
+
+  .lane-map-cell-pkg {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-dark-gray);
+    letter-spacing: calc(0.3 * var(--px));
+    text-align: center;
+    line-height: 1.4;
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  .lane-map-cell[data-state='past'] .lane-map-cell-pkg,
+  .lane-map-cell[data-state='active'] .lane-map-cell-pkg {
+    color: var(--pico-light-gray);
+  }
+
+  /* ===== Snake connectors =====
+     Each cell may carry a "next" arrow pointing to the next cell in
+     flow order. Arrows sit on the gap between cells. */
+
+  .lane-map-arrow {
+    position: absolute;
+    background: var(--pico-light-gray);
+    z-index: 1;
+  }
+
+  /* Past-step arrows take on the lane accent so the snake "lights up"
+     the completed path. */
+  .lane-map-cell[data-state='past'] .lane-map-arrow,
+  .lane-map-cell[data-state='active'] .lane-map-arrow {
+    background: var(--_lane-accent, var(--pico-dark-purple));
+  }
+
+  .lane-map-arrow[data-direction='right'] {
+    top: 50%;
+    right: calc(-9 * var(--px));
+    width: calc(8 * var(--px));
+    height: var(--px);
+    transform: translateY(-50%);
+  }
+  .lane-map-arrow[data-direction='right']::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: calc(-2 * var(--px));
+    width: var(--px);
+    height: calc(5 * var(--px));
+    background: inherit;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transform: translateX(calc(2 * var(--px)));
+  }
+
+  .lane-map-arrow[data-direction='left'] {
+    top: 50%;
+    left: calc(-9 * var(--px));
+    width: calc(8 * var(--px));
+    height: var(--px);
+    transform: translateY(-50%);
+  }
+  .lane-map-arrow[data-direction='left']::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(-2 * var(--px));
+    width: var(--px);
+    height: calc(5 * var(--px));
+    background: inherit;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    transform: translateX(calc(-2 * var(--px)));
+  }
+
+  .lane-map-arrow[data-direction='down'] {
+    bottom: calc(-9 * var(--px));
+    left: 50%;
+    width: var(--px);
+    height: calc(8 * var(--px));
+    transform: translateX(-50%);
+  }
+  .lane-map-arrow[data-direction='down']::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: calc(-2 * var(--px));
+    width: calc(5 * var(--px));
+    height: var(--px);
+    background: inherit;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform: translateY(calc(2 * var(--px)));
+  }
+
+  .lane-map-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(2 * var(--px));
+    padding: calc(3 * var(--px)) calc(5 * var(--px));
+    background: var(--pico-black);
+    border-top: var(--px) solid var(--pico-dark-gray);
+    font-size: calc(4 * var(--px));
+  }
+
+  .lane-map-footer-key {
+    color: var(--pico-yellow);
+  }
+
+  .lane-map-footer-label {
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+}

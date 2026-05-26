@@ -15,10 +15,32 @@ export const STATIC_LANE: Lane = {
   label: 'colours · static',
   accent: '--pico-dark-purple',
   status: 'ready',
+  // Pipeline stations the token visits. Mirrors the figjam pipeline
+  // map (FigJam node 148:632) for the semantic / Layer-2 path. 9 cells
+  // so LaneMapDialog can render a 3×3 connected snake (flow goes:
+  // top-left → top-right, down, right→left across row 2, down,
+  // left→right across row 3).
+  stages: [
+    { id: 'figma', label: 'figma', viz: 'figma', pkg: 'figma file' },
+    { id: 'sync', label: 'sync', viz: 'sync', pkg: 'eds-tokens-sync' },
+    { id: 'json', label: 'json', viz: 'json', pkg: 'eds-tokens (source)' },
+    { id: 'crack', label: 'open', viz: 'crack', pkg: 'eds-tokens-build' },
+    { id: 'layers', label: 'layers', viz: 'layers', pkg: 'eds-tokens-build' },
+    { id: 'cut', label: 'cut', viz: 'cut', pkg: 'eds-tokens-build' },
+    { id: 'file', label: 'css', viz: 'file', pkg: 'eds-tokens (build/css)' },
+    {
+      id: 'bundle',
+      label: 'bundle',
+      viz: 'bundle',
+      pkg: 'lightningcss + dark-scope',
+    },
+    { id: 'ship', label: 'ship', viz: 'ship', pkg: 'eds-core-react' },
+  ],
   scenes: [
     {
       id: 'inside',
       title: 'inside the factory',
+      stage: 'json',
       lines: [
         'Inside, the belt carries our crate deeper.',
         'Our crate carries two JSON files — Semantic.Mode 1.json and Concept.Mode 1.json. We follow the concept side.',
@@ -28,6 +50,7 @@ export const STATIC_LANE: Lane = {
     {
       id: 'crack',
       title: 'the crack',
+      stage: 'crack',
       lines: [
         'At the build station, the crate gets opened.',
         'SLAM.',
@@ -37,6 +60,7 @@ export const STATIC_LANE: Lane = {
     {
       id: 'reveal',
       title: 'the reveal',
+      stage: 'layers',
       lines: [
         "Look closer. The geode isn't one solid stone.",
         "It's three-layered — concept, scheme, palette. Each ring lives in its own JSON file.",
@@ -45,6 +69,7 @@ export const STATIC_LANE: Lane = {
     },
     {
       id: 'peel',
+      stage: 'layers',
       title: 'the peel',
       lines: [
         "This geode is three-layered. Let's open it.",
@@ -60,6 +85,7 @@ export const STATIC_LANE: Lane = {
     {
       id: 'cutting',
       title: 'the cutting',
+      stage: 'cut',
       lines: [
         "But here's the twist: the same token has a different colour in dark mode.",
         'In dark mode, Bg.Floating = #202223 instead of #ffffff (resolved through 🌗 Color scheme.Dark.json → Dark.North sea.2).',
@@ -71,6 +97,7 @@ export const STATIC_LANE: Lane = {
     {
       id: 'tray',
       title: 'the tray',
+      stage: 'file',
       lines: [
         'The finished gemstone joins a tray of other concept-colour gemstones.',
         'The build emits this tray to a file called color-scheme.css — together with the scheme aliases and palette tokens our concepts resolve through.',
@@ -79,6 +106,7 @@ export const STATIC_LANE: Lane = {
     {
       id: 'packaging',
       title: 'the packaging',
+      stage: 'bundle',
       lines: [
         'At the shipping bench, our tray meets materials from the other four lanes.',
         'Cords from spacing & typography primitives. Clasps from foundations (elevation). Chains from spacing & typography tokens (font axes, density, radius). Lacquer from colours · dynamic (appearance).',
@@ -92,6 +120,7 @@ export const STATIC_LANE: Lane = {
     {
       id: 'jeweller',
       title: 'the jeweller',
+      stage: 'ship',
       lines: [
         'And here are the actual jewels — the core components.',
         'It takes our gemstones, our cords, our clasps, our chains, our lacquer.',

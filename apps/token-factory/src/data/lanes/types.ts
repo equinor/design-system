@@ -39,12 +39,46 @@ export type SceneId =
 
 export type NarratorMode = 'corner' | 'centered'
 
+/** Visualization key for a lane-map cell. LaneMapDialog renders a
+ * pixel-art icon per key. Keys are intentionally semantic (what the
+ * step is) rather than visual (what it looks like). */
+export type StageViz =
+  | 'figma'
+  | 'sync'
+  | 'json'
+  | 'crack'
+  | 'layers'
+  | 'cut'
+  | 'file'
+  | 'bundle'
+  | 'ship'
+
+/** A pipeline stage in a lane's lane-map overlay. Stages are the
+ * abstract pipeline checkpoints the token passes through (sync, json,
+ * cut, etc.) — distinct from scenes, which can group, expand or
+ * subdivide stages narratively. Multiple scenes may share a stage. */
+export type LaneStage = {
+  id: string
+  /** Short label drawn under the cell (~6 chars reads cleanly). */
+  label: string
+  /** Package or external system the work happens in. Used by the
+   * lane-map dialog to show where each step lives. */
+  pkg?: string
+  /** Visualization key — maps to a renderer in LaneMapDialog. */
+  viz?: StageViz
+}
+
 export type SceneRef = {
   id: SceneId
   title: string
   lines: string[]
   /** Narrator overlay position. Defaults to 'corner' (top-right). */
   narrator?: NarratorMode
+  /** Which lane-map stage this scene parks the token at. Must match
+   * one of the active lane's `stages[].id`. Scene authors set this so
+   * LaneMap can light up the right station without consulting scene
+   * components. */
+  stage?: string
 }
 
 export type Lane = {
@@ -55,4 +89,8 @@ export type Lane = {
   status: 'ready' | 'scaffold' | 'locked'
   /** Post-Dock scene sequence. Excludes the shared prologue. */
   scenes: SceneRef[]
+  /** Optional pipeline-map stages. When defined, LaneMap renders the
+   * stations across the top of the stage. Scenes opt-in by setting
+   * their own `stage` to one of these ids. */
+  stages?: LaneStage[]
 }

@@ -17,6 +17,10 @@ export const PROLOGUE: SceneRef[] = [
   {
     id: 'dock',
     title: 'the goods terminal',
+    // Lane-map stage. Each lane that defines a `sync` stage will light
+    // this station up during the dock scene. The colours-static lane
+    // does; placeholder/locked lanes won't, so the map quietly hides.
+    stage: 'sync',
     lines: [
       'Every morning, lorries arrive at our goods terminal.',
       "This is eds-tokens-sync — Figma's REST API drops variable files at our door.",
