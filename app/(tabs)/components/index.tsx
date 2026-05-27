@@ -25,6 +25,10 @@ const sections = [
             { name: "Selection Controls", route: "selectioncontrols" },
         ],
     },
+    {
+        title: "Navigation",
+        data: [{ name: "Link", route: "link" }],
+    },
 ];
 
 export default function ComponentsIndex() {
