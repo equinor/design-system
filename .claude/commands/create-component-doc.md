@@ -10,9 +10,13 @@ Restructure the raw content in **$ARGUMENTS** into a properly formatted componen
 
 $ARGUMENTS
 
+## Audience reminder
+
+These docs are the **usage guide** for the EDS component library. The audience is **anyone deciding whether and how to use a component** - designers, developers picking between components, product folks scoping a feature, accessibility reviewers, contributors new to EDS. They are not a designer-only reference, and they are not a Figma manual. Storybook owns implementation (props, code, callbacks, integration). Read the [Audience](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#audience) section of `COMPONENT_DOC_STYLE.md` before drafting anything.
+
 ## Workflow
 
-1. **Take the raw content above** (from Figma, design specs, meetings, scraped text, etc.) and identify the component name and category.
+1. **Identify the component name and category from the raw input.** The input may include Figma specs, meeting notes, scraped text, or pointers to source code. Treat source code (`*.tsx`, `*.types.ts`, `*.stories.tsx`) as a **fact-check source** for variant names, state names, and accessibility behaviour - not as content to paraphrase. The prose in the doc comes from Figma and design intent.
 
 2. **Decide the target path.** Component docs live at `apps/design-system-docs/docs/components/{category}/{component}.md` — e.g. `apps/design-system-docs/docs/components/inputs/button.md`.
 
@@ -22,6 +26,15 @@ $ARGUMENTS
 
 5. **Register in the sidebar.** Update `apps/design-system-docs/sidebars.ts` per [`COMPONENT_DOC_STYLE.md`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#sidebar-registration).
 
+6. **Self-review pass before saving.** Re-read your draft against [`What NOT to Include`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#what-not-to-include) and remove every red flag you find. Common ones to grep for in your own draft:
+   - Prop names with literal values: `prop={`, `prop="`
+   - JSDoc-style callback descriptions: "fires with", "receives the", "returns "
+   - Integration code in prose (RHF Controller wiring, debounce snippets)
+   - Enumerated ARIA roles or attributes beyond a one-sentence pattern reference
+   - The same redirect appearing in both `When to Use` and the `Don't` list
+   - Sentence-case headings if siblings in the same category folder use Title Case
+   - Then sanity-check against the [Reference Exemplars](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#reference-exemplars) - if your draft is noticeably more prop-heavy or callback-heavy than `autocomplete.md`, rewrite.
+
 ## Rules
 
 - Use only content provided in the input — do not generate or invent information
@@ -29,3 +42,5 @@ $ARGUMENTS
 - Always include the H1 title
 - Remove artefacts: caps-locked folder names, duplicate paragraphs, dates/timestamps, scrape noise
 - Follow the tone of voice and formatting (British English, no em-dashes, admonitions) per the canonical doc
+- Each Guidelines paragraph answers *when* and *why*; the iframe answers *how*
+- Do's and Don'ts are usage guidance only - never API rules, handler overrides, or framework-integration warnings
