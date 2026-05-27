@@ -1,11 +1,11 @@
 ---
 title: Autocomplete
-sidebar_position: 8
+sidebar_position: 1
 ---
 
 # Autocomplete
 
-Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not in the list.
+Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not already in the list.
 
 <iframe
   class="sb-iframe"
@@ -39,18 +39,11 @@ Autocomplete is a composite field that combines several pieces:
 - **Listbox**: A popover that lists filtered options, anchored to the input
 - **Helper message**: Optional text below the input for validation feedback or hints
 
-All Autocomplete instances support:
-
-- **Filtering**: Case-insensitive substring match by default, overridable with `optionsFilter`
-- **Keyboard navigation**: Arrow keys, Enter, and Escape
-- **Loading state**: Spinner inside the field while options are fetched
-- **Custom values**: Optional `Add: {value}` entry for confirming a typed value not in the list
-
 ## Guidelines
 
-### Controlled selection
+### Controlled Selection
 
-Use `value` and `onValueChange` to control the selected option. `onValueChange` receives the full option, or `undefined` when the user clears the field.
+Use a controlled selection when the surrounding form, page, or another component needs to react to which option is currently chosen - for example to enable a Submit button or to drive a dependent field.
 
 <iframe
   class="sb-iframe"
@@ -62,9 +55,9 @@ Use `value` and `onValueChange` to control the selected option. `onValueChange` 
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--controlled)
 
-### Object options
+### Object Options
 
-When options are objects rather than strings, provide `getOptionLabel` so the component knows which field to display and search by. `onValueChange` returns the full object, giving you access to all of its fields.
+Use object options when each choice carries extra data beyond the label - an ID, a category, a relationship - so that information is available to the rest of the screen once a selection is made.
 
 <iframe
   class="sb-iframe"
@@ -76,9 +69,9 @@ When options are objects rather than strings, provide `getOptionLabel` so the co
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--object-options)
 
-### Custom option rendering
+### Custom Option Rendering
 
-Use `renderOption` to show richer rows in the dropdown - icons, subtitles, badges, and so on. `getOptionLabel` still controls what appears in the input after selection and what is matched while typing. Pair with `optionsFilter` to search across multiple fields at once.
+Use a custom row when a single label is not enough to tell options apart - for example a name with a subtitle, an icon, or a status badge. Keep rows scannable and avoid stacking more than two lines of text.
 
 <iframe
   class="sb-iframe"
@@ -90,9 +83,9 @@ Use `renderOption` to show richer rows in the dropdown - icons, subtitles, badge
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--custom-option-rendering)
 
-### Disabled options
+### Disabled Options
 
-Use `optionDisabled` to prevent specific options from being chosen. Disabled options remain visible and keyboard-navigable but cannot be selected, which keeps the list complete and predictable.
+Disable individual options when they exist in the data set but are not available right now - for example out of stock, restricted by role, or already chosen elsewhere. They stay visible so the user can see they exist, but cannot be selected.
 
 <iframe
   class="sb-iframe"
@@ -104,9 +97,9 @@ Use `optionDisabled` to prevent specific options from being chosen. Disabled opt
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--disabled-options)
 
-### Allow custom value
+### Allow Custom Value
 
-Set `allowCustomValue` to let users confirm a value that is not in the list. While the user types, an `Add: {value}` row appears at the top of the dropdown. Use `onCustomValueConfirm` to handle the new value (for example, append it to your options array and set it as the selection). Note that `onValueChange` fires only for existing list items - new values go through `onCustomValueConfirm`.
+Let users add a value that is not in the list when the data set is open-ended - tags, project codes, free-text categories. While the user types, an "Add" row appears at the top of the dropdown so they can confirm the new entry.
 
 <iframe
   class="sb-iframe"
@@ -118,9 +111,9 @@ Set `allowCustomValue` to let users confirm a value that is not in the list. Whi
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--allow-custom-value)
 
-### Loading and asynchronous search
+### Loading and Asynchronous Search
 
-Set `loading` while options are being fetched. The spinner replaces the clear button and a loading message is shown in the dropdown. For server-side search, pass `optionsFilter={() => true}` to skip local filtering and use `onInputChange` to trigger fetches as the user types. Debounce requests so the server is not hit on every keystroke.
+Use the loading state while results are being fetched from a server. For server-side search, turn off the built-in filtering and fetch results in response to input changes. Debounce the requests so the server is not called on every keystroke.
 
 <iframe
   class="sb-iframe"
@@ -142,9 +135,9 @@ Set `loading` while options are being fetched. The spinner replaces the clear bu
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--async)
 
-### Validation states
+### Validation States
 
-Use the `invalid` prop to show error styling. Pair it with `helperMessage` to explain what went wrong - the helper message is announced as a live alert when the field is invalid.
+Show the error state to mark the field as invalid, and pair it with a helper message that tells the user what is wrong and how to fix it. Keep the message specific and short.
 
 <iframe
   class="sb-iframe"
@@ -156,9 +149,9 @@ Use the `invalid` prop to show error styling. Pair it with `helperMessage` to ex
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--invalid)
 
-### Disabled and read-only
+### Disabled and Read Only
 
-Avoid `disabled` where possible. Prefer `readOnly`, which keeps the current value visible and accessible while preventing edits.
+Prefer read-only over disabled when the value should remain visible and copyable but cannot be edited. Use disabled only when the field is currently unavailable and the value is not meaningful to the user.
 
 #### Disabled
 
@@ -172,7 +165,7 @@ Avoid `disabled` where possible. Prefer `readOnly`, which keeps the current valu
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--disabled)
 
-#### Read-only
+#### Read Only
 
 <iframe
   class="sb-iframe"
@@ -186,7 +179,7 @@ Avoid `disabled` where possible. Prefer `readOnly`, which keeps the current valu
 
 ### Forms
 
-Autocomplete integrates with `react-hook-form` via `Controller`. Wire `value` and `onValueChange` to `field.value` and `field.onChange`, and pass `onClear={() => field.onChange(undefined)}` so clearing the field also resets the form value. Connect validation errors through `invalid` and `helperMessage`.
+Autocomplete works inside react-hook-form via Controller. Remember to reset the form value when the field is cleared so validation and submission stay in sync.
 
 <iframe
   class="sb-iframe"
@@ -200,7 +193,7 @@ Autocomplete integrates with `react-hook-form` via `Controller`. Wire `value` an
 
 ### Density
 
-Autocomplete adapts to density modes via the `data-density` attribute on a parent element. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown items respond to density as well.
+Autocomplete adapts to density modes. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown rows respond to density as well.
 
 <iframe
   class="sb-iframe"
@@ -214,51 +207,40 @@ Autocomplete adapts to density modes via the `data-density` attribute on a paren
 
 ## Accessibility
 
-Autocomplete implements the ARIA 1.2 combobox pattern. The input is exposed as `role="combobox"` with `aria-autocomplete="list"`, and the dropdown as `role="listbox"`. Labels, descriptions, and helper messages are connected automatically via `aria-describedby`, and the active option is tracked through `aria-activedescendant`.
+Autocomplete implements the ARIA 1.2 combobox pattern. Labels, descriptions, and helper messages are wired up automatically, and the dropdown announces how many results are available as the user types.
 
 **Keyboard support:**
 
 - **Tab**: Move focus to and from the field
 - **Type**: Filter the list as you type
 - **Arrow Down / Arrow Up**: Open the listbox and move through options
-- **Enter**: Select the highlighted option, or confirm a typed custom value when `allowCustomValue` is enabled
+- **Enter**: Select the highlighted option, or confirm a typed custom value when custom values are allowed
 - **Escape**: Close the listbox without changing the selection
-
-**Screen reader support:**
-
-- The field label is announced on focus
-- A live region announces the number of available results, "No results", or the loading text as the list updates
-- Disabled options are marked with `aria-disabled` and skipped on selection
-- The clear button has an accessible label (`clearLabel`, default "Clear") and can be localised
-
-**Custom values:**
-
-- The `Add: {value}` entry is announced with a descriptive label so screen-reader users know they are creating a new option rather than picking from the list
 
 ## Figma
 
-The Autocomplete component lives in the **EDS Core Components** library as **`Autocomplete [EDS]`**.
+The Autocomplete component lives in the **EDS Core Components** library as **Autocomplete [EDS]**.
 
 ### Variants
 
 The component is defined by two variant axes:
 
-- **State**: `Default`, `Hover`, `Focus`, `Active`, `Active Add Option`, `Filled`, `Read-only`, `Disabled`
-- **Validation**: `Default`, `Error`
+- **State**: Default, Hover, Focus, Active, Active Add Option, Filled, Read-only, Disabled
+- **Validation**: Default, Error
 
-Every state combines with both validation values, except for `Read-only` and `Disabled` which are only published with `Validation = Default` - the error styling does not apply when the field cannot be edited.
+Every state combines with both validation values, except for Read-only and Disabled which are only published with Validation = Default - the error styling does not apply when the field cannot be edited.
 
 ### Properties
 
 The component exposes the following Figma properties:
 
 - **State** (variant): see list above
-- **Validation** (variant): `Default` or `Error`
+- **Validation** (variant): Default or Error
 - **Title + Description** (boolean, default on): toggles the entire label block
 - **Helper Message** (boolean, default off): toggles the helper-message row beneath the field
 - **Helper Message Text** (text): content of the helper-message row
 - **Placeholder** (text): placeholder copy for the empty input
-- **Text area** (text): the filled-input value used when `State = Filled`
+- **Text area** (text): the filled-input value used when State = Filled
 
 ### Using Autocomplete in Figma
 
@@ -271,20 +253,17 @@ The component exposes the following Figma properties:
 :::info **Do**
 
 - Provide a clear, visible label so users know what they are searching for
-- Use `getOptionLabel` and `getOptionValue` when options are objects, so filtering and selection stay stable across renders
-- Use `optionsFilter={() => true}` together with `onInputChange` and `loading` for server-side search
-- Debounce asynchronous fetches so the server is not hit on every keystroke
-- Use `helperMessage` to explain validation errors when `invalid` is set
-- Prefer `readOnly` over `disabled` when the value should remain visible and accessible
+- Keep option labels short and scannable so users can spot the right choice while typing
+- Use a helper message to explain validation errors and how to recover
+- Prefer read-only over disabled when the current value should remain visible and copyable
 
 :::
 
 :::danger **Don't**
 
 - Hide or omit the label - placeholder text is not a substitute
-- Use Autocomplete for free-form text input with no suggestions - use [TextField](./textfield) instead
-- Treat Autocomplete as a site search - use [Search](./search) instead
-- Mix `onValueChange` and `onCustomValueConfirm` expectations - `onValueChange` fires only for existing list items, `onCustomValueConfirm` for new typed values
-- Override `onMouseDown`, `onClick`, `onFocus`, `onBlur`, `onKeyDown`, or `onKeyUp` - these power the combobox behaviour and are not configurable
+- Use Autocomplete when the list is short enough for Radio or a basic Select - the extra typing is friction
+- Pre-fill the field with a placeholder that looks like a real value - users may submit it by mistake
+- Rely on the dropdown alone to communicate errors - always show a helper message
 
 :::
