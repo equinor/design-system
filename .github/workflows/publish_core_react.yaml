@@ -57,7 +57,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '24.16.0'
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -94,7 +94,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '24.16.0'
           registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
@@ -102,9 +102,6 @@ jobs:
         with:
           run_install: false
       # Skip on beta runs — eds-utils has no beta channel
-      - name: Upgrade npm for trusted publishing
-        if: needs.setup.outputs.tag != 'beta'
-        run: npm install -g npm@11
       - name: Publish to npm
         id: publish-to-npm
         if: needs.setup.outputs.tag != 'beta'
@@ -135,7 +132,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22.14.0'
+          node-version: '24.16.0'
           registry-url: 'https://registry.npmjs.org'
       - name: Setup pnpm
         id: setup-pnpm
@@ -172,8 +169,6 @@ jobs:
           "
           echo "Updated exports:"
           cat package.json | grep -A 15 '"exports"'
-      - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@11
       - name: Publish to npm
         id: publish-to-npm
         working-directory: packages/eds-core-react
