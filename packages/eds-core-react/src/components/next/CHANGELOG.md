@@ -9,8 +9,8 @@ These are experimental components available under the `/next` entry point. They 
 
 ### ✨ Added
 
-* Accordion EDS 2.0 ([#4912](https://github.com/equinor/design-system/issues/4912)) ([fbe6874](https://github.com/equinor/design-system/commit/fbe6874a31249ada38656cd1444f770cf4004554))
-* add Autocomplete component to next/ ([#4808](https://github.com/equinor/design-system/issues/4808)) ([10e0217](https://github.com/equinor/design-system/commit/10e0217f266a97ef09f6972f6e4824d83ff29049))
+* Add Accordion component ([#4912](https://github.com/equinor/design-system/issues/4912)) ([fbe6874](https://github.com/equinor/design-system/commit/fbe6874a31249ada38656cd1444f770cf4004554))
+* Add Autocomplete component ([#4808](https://github.com/equinor/design-system/issues/4808)) ([10e0217](https://github.com/equinor/design-system/commit/10e0217f266a97ef09f6972f6e4824d83ff29049))
 
 ## [2.6.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.6.0-beta.0...eds-core-react-next@v2.6.0-beta.1) (2026-05-20)
 
