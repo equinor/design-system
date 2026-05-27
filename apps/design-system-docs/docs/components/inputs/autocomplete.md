@@ -11,7 +11,7 @@ Autocomplete is a text input that filters a list of options as the user types an
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--introduction"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -56,7 +56,7 @@ Use `value` and `onValueChange` to control the selected option. `onValueChange` 
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--controlled"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -70,7 +70,7 @@ When options are objects rather than strings, provide `getOptionLabel` so the co
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--object-options"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -84,7 +84,7 @@ Use `renderOption` to show richer rows in the dropdown - icons, subtitles, badge
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--custom-option-rendering"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -98,7 +98,7 @@ Use `optionDisabled` to prevent specific options from being chosen. Disabled opt
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--disabled-options"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -112,7 +112,7 @@ Set `allowCustomValue` to let users confirm a value that is not in the list. Whi
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--allow-custom-value"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -126,7 +126,7 @@ Set `loading` while options are being fetched. The spinner replaces the clear bu
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--loading"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -136,7 +136,7 @@ Set `loading` while options are being fetched. The spinner replaces the clear bu
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--async"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -150,7 +150,7 @@ Use the `invalid` prop to show error styling. Pair it with `helperMessage` to ex
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--invalid"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -166,7 +166,7 @@ Avoid `disabled` where possible. Prefer `readOnly`, which keeps the current valu
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--disabled"
   width="100%"
-  height="125"
+  height="350"
   frameborder="1"
 ></iframe>
 
@@ -237,24 +237,34 @@ Autocomplete implements the ARIA 1.2 combobox pattern. The input is exposed as `
 
 ## Figma
 
-### Components
+The Autocomplete component lives in the **EDS Core Components** library as **`Autocomplete [EDS]`**.
 
-- **Autocomplete [EDS]**: Complete combobox field combining label, description, input, dropdown, and helper message
+### Variants
+
+The component is defined by two variant axes:
+
+- **State**: `Default`, `Hover`, `Focus`, `Active`, `Active Add Option`, `Filled`, `Read-only`, `Disabled`
+- **Validation**: `Default`, `Error`
+
+Every state combines with both validation values, except for `Read-only` and `Disabled` which are only published with `Validation = Default` - the error styling does not apply when the field cannot be edited.
 
 ### Properties
 
-The Figma component exposes the same surface as the React component:
+The component exposes the following Figma properties:
 
-- **State**: `Default`, `Hover`, `Focus`, `Active Add Option`, `Read-only`, `Disabled`
-- **Validation**: `Default`, `Error`
-- **Title + Description**: Toggle the label and description block
-- **Helper Message**: Toggle the helper text below the input
+- **State** (variant): see list above
+- **Validation** (variant): `Default` or `Error`
+- **Title + Description** (boolean, default on): toggles the entire label block
+- **Helper Message** (boolean, default off): toggles the helper-message row beneath the field
+- **Helper Message Text** (text): content of the helper-message row
+- **Placeholder** (text): placeholder copy for the empty input
+- **Text area** (text): the filled-input value used when `State = Filled`
 
 ### Using Autocomplete in Figma
 
-1. In Figma, open the **Assets Panel** and search for **Autocomplete**
-2. Drag the component into your frame
-3. Select the instance to configure **State**, **Validation**, and the **Title + Description** / **Helper Message** toggles in the **Design Panel**
+1. In Figma, open the **Assets Panel** and search for **Autocomplete [EDS]**
+2. Drag an instance into your frame
+3. In the **Design Panel**, set **State** and **Validation**, toggle **Title + Description** / **Helper Message**, and edit the **Placeholder**, **Text area**, and **Helper Message Text** values to match your content
 
 ## Do's and Don'ts
 
