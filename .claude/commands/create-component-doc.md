@@ -26,14 +26,7 @@ These docs are the **usage guide** for the EDS component library. The audience i
 
 5. **Register in the sidebar.** Update `apps/design-system-docs/sidebars.ts` per [`COMPONENT_DOC_STYLE.md`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#sidebar-registration).
 
-6. **Self-review pass before saving.** Re-read your draft against [`What NOT to Include`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#what-not-to-include) and remove every red flag you find. Common ones to grep for in your own draft:
-   - Prop names with literal values: `prop={`, `prop="`
-   - JSDoc-style callback descriptions: "fires with", "receives the", "returns "
-   - Integration code in prose (RHF Controller wiring, debounce snippets)
-   - Enumerated ARIA roles or attributes beyond a one-sentence pattern reference
-   - The same redirect appearing in both `When to Use` and the `Don't` list
-   - Sentence-case headings if siblings in the same category folder use Title Case
-   - Then sanity-check against the [Reference Exemplars](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#reference-exemplars) - if your draft is noticeably more prop-heavy or callback-heavy than `autocomplete.md`, rewrite.
+6. **Self-review pass before saving.** Re-read your draft against [`What NOT to Include`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#what-not-to-include) and remove every red flag you find. Then sanity-check against the [Reference Exemplars](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md#reference-exemplars).
 
 ## Rules
 

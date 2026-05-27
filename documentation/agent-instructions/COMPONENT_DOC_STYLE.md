@@ -97,7 +97,7 @@ Before saving the file, re-read your draft and remove anything matching the list
 - **A JSDoc-style callback or return description.** Examples: "fires with the selected option", "receives the full option `T` or `undefined`", "returns `true` to include the option". Replace with a user-facing reason to use the pattern.
 - **Integration code described in prose.** RHF Controller wiring, debounce snippets, controlled-vs-uncontrolled walkthroughs. One sentence naming the integration is enough; the iframe carries the wiring.
 - **Exact ARIA role or attribute names beyond a one-sentence pattern reference.** "Implements the ARIA 1.2 combobox pattern" is fine; enumerating `role="combobox"`, `aria-autocomplete="list"`, `aria-activedescendant`, `role="listbox"` is not.
-- **Live-region wording, screen-reader announcement copy, or aria-live mechanics.** Storybook owns this.
+- **Live-region wording, screen-reader announcement copy, or aria-live mechanics beyond one sentence stating what is announced** (e.g. "the number of results is announced when the list updates" is fine; the exact copy and timing belong in Storybook).
 - **The same redirect ("use TextField instead", "use Search instead") appearing in both `When to Use` and the `Don't` list.** Pick one - usually `When to Use`, since that is where readers decide.
 - **The same guidance appearing in a section body and the Do's / Don'ts list.** If `Disabled and Read Only` already says "prefer read-only over disabled", the Do's list should not repeat it.
 - **Headings in sentence case** if siblings in the same category folder use Title Case. Check `apps/design-system-docs/docs/components/{category}/*.md` for the local convention before writing headings.
@@ -298,12 +298,11 @@ After writing the doc, update `apps/design-system-docs/sidebars.ts` so the compo
 
 ## Reference Exemplars
 
-When in doubt about prose style or section weight, imitate these existing docs rather than the raw template:
+When in doubt about prose style or section weight, imitate an existing doc rather than the raw template:
 
-- [`apps/design-system-docs/docs/components/inputs/autocomplete.md`](../../apps/design-system-docs/docs/components/inputs/autocomplete.md) - Guidelines paragraphs that answer *when* and *why*, a two-sentence Accessibility section, and usage-only Do's and Don'ts. Use this as the primary exemplar for the usage-guide voice.
-- [`apps/design-system-docs/docs/components/inputs/search.md`](../../apps/design-system-docs/docs/components/inputs/search.md) - Short Accessibility paragraph in the lighter style.
+- [`apps/design-system-docs/docs/components/inputs/search.md`](../../apps/design-system-docs/docs/components/inputs/search.md) - Use this as the primary exemplar for the usage-guide voice. Guidelines paragraphs that answer *when* and *why*, a short Accessibility paragraph in the lighter style, and usage-only Do's and Don'ts.
 
-If your draft is noticeably more prop-heavy or callback-heavy than these, rewrite before saving.
+If your draft is noticeably more prop-heavy or callback-heavy than this, rewrite before saving.
 
 ## Verification Checklist
 
