@@ -1,0 +1,193 @@
+@layer eds-components {
+  .eds-select-container {
+    inline-size: 100%;
+  }
+
+  .eds-select {
+    /* Pseudo-private variables — override these in states, never the property directly */
+    --_bg: var(--eds-color-bg-input);
+    --_border-color: var(--eds-color-border-subtle);
+
+    cursor: pointer;
+
+    display: block;
+
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-block-size: 36px;
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+
+    /* Reserve space for the chevron in the fallback (SVG background) */
+    padding-inline-end: calc(var(--eds-selectable-space-horizontal) + 1.5rem);
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-feature-settings: 'lnum', 'tnum';
+    font-weight: var(--eds-typography-font-weight, 400);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+    color: var(--eds-color-text-strong);
+    letter-spacing: var(--eds-typography-tracking, 0);
+
+    appearance: none;
+    background-color: var(--_bg);
+
+    /* Fallback chevron — colour #696969 matches --eds-color-border-strong */
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23696969' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--eds-selectable-space-horizontal) center;
+    background-size: 1.5rem;
+    outline: var(--eds-sizing-stroke-thin) solid var(--_border-color);
+    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+
+    transition:
+      outline-color 150ms,
+      box-shadow 150ms;
+
+    &:hover {
+      --_border-color: var(--eds-color-border-strong);
+    }
+
+    &:focus-visible {
+      --_border-color: var(--eds-color-border-focus);
+
+      box-shadow:
+        0 0 0 var(--eds-sizing-stroke-thin) var(--_bg),
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
+    }
+
+    &:disabled {
+      --_border-color: transparent;
+
+      cursor: not-allowed;
+      color: var(--eds-color-text-disabled);
+      opacity: 1;
+
+      /* Dimmed chevron — #aeaeae from Figma disabled state */
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23aeaeae' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+    }
+  }
+
+  /* Read-only: distinct background, strong border, no pointer events */
+  .eds-select-container[data-readonly] .eds-select {
+    --_bg: var(--eds-color-bg-disabled);
+    --_border-color: var(--eds-color-border-strong);
+
+    pointer-events: none;
+
+    /* Dimmed chevron */
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23aeaeae' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+  }
+
+  /*
+   * Invalid/error state.
+   * The container receives data-color-appearance="danger" from JSX, which remaps all
+   * dynamic tokens (--eds-color-bg-canvas → #ffecea, --eds-color-border-subtle → #ffbcba).
+   * We only need to switch which token drives the background.
+   */
+  .eds-select-container[data-invalid] .eds-select {
+    --_bg: var(--eds-color-bg-canvas);
+    --_border-color: var(--eds-color-border-subtle);
+
+    &:focus-visible {
+      --_border-color: var(--eds-color-border-focus);
+    }
+  }
+
+  [data-density='comfortable'] .eds-select {
+    min-block-size: unset;
+    padding-block: var(--eds-spacing-proportions-xs-vertical);
+  }
+}
+
+/*
+ * Progressive enhancement — customizable <select> (Chrome 135+, others coming).
+ * Replaces the SVG background hack with native ::picker(select) styling that
+ * visually matches the Menu component used in Autocomplete.
+ */
+@supports (appearance: base-select) {
+  @layer eds-components {
+    /* Opt in to custom styling */
+    .eds-select,
+    .eds-select::picker(select) {
+      appearance: base-select;
+    }
+
+    .eds-select {
+      padding-inline-end: var(--eds-selectable-space-horizontal);
+
+      /* Drop the SVG arrow — ::picker-icon takes over */
+      background-image: none;
+    }
+
+    /* Native chevron icon */
+    .eds-select::picker-icon {
+      color: var(--eds-color-text-subtle);
+      transition: rotate 150ms;
+    }
+
+    .eds-select:open::picker-icon {
+      rotate: 180deg;
+    }
+
+    .eds-select:disabled::picker-icon {
+      color: var(--eds-color-text-disabled);
+    }
+
+    .eds-select-container[data-readonly] .eds-select::picker-icon {
+      color: var(--eds-color-text-disabled);
+    }
+
+    /* Dropdown surface — matches Menu component */
+    .eds-select::picker(select) {
+      scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
+      scrollbar-width: thin;
+
+      overflow-y: auto;
+
+      box-sizing: border-box;
+      min-inline-size: anchor-size(inline);
+      max-block-size: 300px;
+      margin: 0;
+      margin-block-start: -1px;
+      padding: 0;
+      border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-medium);
+      border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+
+      background: var(--eds-color-bg-floating);
+    }
+
+    /* Option items — matches MenuItem */
+    .eds-select option {
+      padding-block: var(--eds-selectable-space-vertical);
+      padding-inline: var(--eds-selectable-space-horizontal);
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      font-feature-settings: 'lnum', 'tnum';
+      font-weight: var(--eds-typography-font-weight, 400);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--eds-color-text-strong);
+      letter-spacing: var(--eds-typography-tracking, 0);
+
+      background: transparent;
+
+      &:checked {
+        background: var(--eds-color-bg-fill-muted-default);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        color: var(--eds-color-text-disabled);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: var(--eds-color-bg-fill-muted-default);
+        }
+      }
+    }
+  }
+}

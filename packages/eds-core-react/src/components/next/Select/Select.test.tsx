@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react'
 import { axe } from 'jest-axe'
-import { NativeSelect } from '.'
+import { Select } from '.'
 
 const elements = ['Aluminium', 'Copper', 'Iron', 'Lead']
 
-describe('NativeSelect (next)', () => {
+describe('Select (next)', () => {
   describe('Rendering', () => {
     it('renders a select element', () => {
-      render(<NativeSelect label="Element" options={elements} />)
+      render(<Select label="Element" options={elements} />)
       expect(screen.getByRole('combobox')).toBeInTheDocument()
     })
 
     it('renders all options', () => {
-      render(<NativeSelect label="Element" options={elements} />)
+      render(<Select label="Element" options={elements} />)
       expect(screen.getAllByRole('option')).toHaveLength(elements.length)
     })
 
@@ -23,7 +23,7 @@ describe('NativeSelect (next)', () => {
         { id: 'w2', name: 'Statfjord B' },
       ]
       render(
-        <NativeSelect
+        <Select
           label="Well"
           options={wells}
           getOptionLabel={(o) => o.name}
@@ -39,13 +39,13 @@ describe('NativeSelect (next)', () => {
     })
 
     it('renders label', () => {
-      render(<NativeSelect label="Element" options={elements} />)
+      render(<Select label="Element" options={elements} />)
       expect(screen.getByLabelText('Element')).toBeInTheDocument()
     })
 
     it('renders helper message', () => {
       render(
-        <NativeSelect
+        <Select
           label="Element"
           options={elements}
           helperMessage="Pick one"
@@ -56,7 +56,7 @@ describe('NativeSelect (next)', () => {
 
     it('disables specific options via optionDisabled', () => {
       render(
-        <NativeSelect
+        <Select
           label="Element"
           options={elements}
           optionDisabled={(o) => o === 'Lead'}
@@ -69,17 +69,17 @@ describe('NativeSelect (next)', () => {
 
   describe('States', () => {
     it('disables the select when disabled', () => {
-      render(<NativeSelect label="Element" options={elements} disabled />)
+      render(<Select label="Element" options={elements} disabled />)
       expect(screen.getByRole('combobox')).toBeDisabled()
     })
 
     it('disables the select when readOnly', () => {
-      render(<NativeSelect label="Element" options={elements} readOnly />)
+      render(<Select label="Element" options={elements} readOnly />)
       expect(screen.getByRole('combobox')).toBeDisabled()
     })
 
     it('marks the select as invalid', () => {
-      render(<NativeSelect label="Element" options={elements} invalid />)
+      render(<Select label="Element" options={elements} invalid />)
       expect(screen.getByRole('combobox')).toHaveAttribute(
         'aria-invalid',
         'true',
@@ -90,14 +90,14 @@ describe('NativeSelect (next)', () => {
   describe('Accessibility', () => {
     it('passes axe', async () => {
       const { container } = render(
-        <NativeSelect label="Element" options={elements} />,
+        <Select label="Element" options={elements} />,
       )
       expect(await axe(container)).toHaveNoViolations()
     })
 
     it('passes axe in invalid state', async () => {
       const { container } = render(
-        <NativeSelect
+        <Select
           label="Element"
           options={elements}
           invalid
@@ -109,7 +109,7 @@ describe('NativeSelect (next)', () => {
 
     it('passes axe in disabled state', async () => {
       const { container } = render(
-        <NativeSelect label="Element" options={elements} disabled />,
+        <Select label="Element" options={elements} disabled />,
       )
       expect(await axe(container)).toHaveNoViolations()
     })

@@ -1,14 +1,14 @@
 import { forwardRef } from 'react'
-import type { NativeSelectProps } from './NativeSelect.types'
+import type { SelectProps } from './Select.types'
 import { Field, useFieldIds } from '../Field'
 import {
   isOptionDisabled,
   resolveOptionKey,
   resolveOptionLabel,
 } from '../utils/selectOptions'
-import './nativeselect.css'
+import './select.css'
 
-function NativeSelectInner<T = string>(
+function SelectInner<T = string>(
   {
     label,
     description,
@@ -23,17 +23,18 @@ function NativeSelectInner<T = string>(
     invalid,
     className,
     ...selectProps
-  }: NativeSelectProps<T>,
+  }: SelectProps<T>,
   ref: React.ForwardedRef<HTMLSelectElement>,
 ) {
   const { inputId, descriptionId, helperMessageId, getDescribedBy } =
     useFieldIds(providedId)
 
-  const classes = ['eds-native-select', className].filter(Boolean).join(' ')
+  const classes = ['eds-select', className].filter(Boolean).join(' ')
 
   return (
     <div
-      className="eds-native-select-container"
+      className="eds-select-container"
+      data-color-appearance={invalid ? 'danger' : undefined}
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       data-invalid={invalid || undefined}
@@ -83,7 +84,7 @@ function NativeSelectInner<T = string>(
   )
 }
 
-export const NativeSelect = forwardRef(NativeSelectInner) as <T = string>(
-  props: NativeSelectProps<T> & { ref?: React.Ref<HTMLSelectElement> },
+export const Select = forwardRef(SelectInner) as <T = string>(
+  props: SelectProps<T> & { ref?: React.Ref<HTMLSelectElement> },
 ) => React.ReactElement | null
-;(NativeSelect as React.FC).displayName = 'NativeSelect'
+;(Select as React.FC).displayName = 'Select'

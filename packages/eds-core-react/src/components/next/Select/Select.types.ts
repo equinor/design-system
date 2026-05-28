@@ -1,7 +1,7 @@
 import type { ReactNode, SelectHTMLAttributes } from 'react'
 import type { SelectOptionProps } from '../utils/SelectOption.types'
 
-export type NativeSelectProps<T = string> = {
+export type SelectProps<T = string> = {
   /** Label for the field */
   label?: ReactNode
   /** Descriptive text providing additional context */

@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react-vite'
-import { NativeSelect, type NativeSelectProps } from '.'
+import { Select, type SelectProps } from '.'
 
 const elements = [
   'Aluminium',
@@ -15,20 +15,20 @@ const elements = [
   'Zinc',
 ]
 
-const meta: Meta<typeof NativeSelect> = {
-  title: 'EDS 2.0 (beta)/Inputs/NativeSelect',
-  component: NativeSelect,
+const meta: Meta<typeof Select> = {
+  title: 'EDS 2.0 (beta)/Inputs/Select',
+  component: Select,
   tags: ['beta'],
 }
 
 export default meta
 
-export const Default: StoryFn<NativeSelectProps> = (args) => (
-  <NativeSelect label="Element" options={elements} {...args} />
+export const Default: StoryFn<SelectProps> = (args) => (
+  <Select label="Element" options={elements} {...args} />
 )
 
-export const Invalid: StoryFn<NativeSelectProps> = () => (
-  <NativeSelect
+export const Invalid: StoryFn<SelectProps> = () => (
+  <Select
     label="Element"
     options={elements}
     invalid
@@ -36,8 +36,8 @@ export const Invalid: StoryFn<NativeSelectProps> = () => (
   />
 )
 
-export const Disabled: StoryFn<NativeSelectProps> = () => (
-  <NativeSelect
+export const Disabled: StoryFn<SelectProps> = () => (
+  <Select
     label="Element"
     options={elements}
     disabled
@@ -45,8 +45,8 @@ export const Disabled: StoryFn<NativeSelectProps> = () => (
   />
 )
 
-export const ReadOnly: StoryFn<NativeSelectProps> = () => (
-  <NativeSelect
+export const ReadOnly: StoryFn<SelectProps> = () => (
+  <Select
     label="Element"
     options={elements}
     defaultValue="Copper"
@@ -64,7 +64,7 @@ export const ObjectOptions: StoryFn = () => {
     { id: 'w5', name: 'Ekofisk' },
   ]
   return (
-    <NativeSelect
+    <Select
       label="Well"
       options={wells}
       getOptionLabel={(o) => o.name}
@@ -76,7 +76,7 @@ export const ObjectOptions: StoryFn = () => {
 ObjectOptions.storyName = 'Object options'
 
 export const DisabledOptions: StoryFn = () => (
-  <NativeSelect
+  <Select
     label="Element"
     options={elements}
     optionDisabled={(o) => ['Lead', 'Tin'].includes(o)}
@@ -86,8 +86,8 @@ export const DisabledOptions: StoryFn = () => (
 
 DisabledOptions.storyName = 'Disabled options'
 
-export const WithDescription: StoryFn<NativeSelectProps> = () => (
-  <NativeSelect
+export const WithDescription: StoryFn<SelectProps> = () => (
+  <Select
     label="Element"
     description="Select a chemical element from the list"
     options={elements}

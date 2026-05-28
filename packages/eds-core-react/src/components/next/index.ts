@@ -75,5 +75,5 @@ export type { MenuProps, MenuItemProps } from './Menu'
 export { Autocomplete } from './Autocomplete'
 export type { AutocompleteProps } from './Autocomplete'
 
-export { NativeSelect } from './NativeSelect'
-export type { NativeSelectProps } from './NativeSelect'
+export { Select } from './Select'
+export type { SelectProps } from './Select'
