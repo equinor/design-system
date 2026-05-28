@@ -91,6 +91,9 @@
     --_bg: var(--eds-color-bg-canvas);
     --_border-color: var(--eds-color-border-subtle);
 
+    /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23585858' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+
     &:focus-visible {
       --_border-color: var(--eds-color-border-focus);
     }
@@ -144,6 +147,11 @@
 
     .eds-select-container[data-readonly] .eds-select::picker-icon {
       color: var(--eds-color-text-disabled);
+    }
+
+    /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
+    .eds-select-container[data-invalid] .eds-select::picker-icon {
+      color: var(--eds-color-text-neutral-subtle);
     }
 
     /* Dropdown surface — matches Menu component */
