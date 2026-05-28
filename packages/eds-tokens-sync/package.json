@@ -33,7 +33,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && node ./scripts/assert-no-require.mjs",
     "preview": "vite preview",
     "prettier": "prettier . --write",
     "lint": "eslint"
