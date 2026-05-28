@@ -6,7 +6,6 @@ import {
   resolveOptionKey,
   resolveOptionLabel,
 } from '../utils/selectOptions'
-import './select.css'
 
 function SelectInner<T = string>(
   {
@@ -56,6 +55,7 @@ function SelectInner<T = string>(
             hasDescription: !!description,
             hasHelperMessage: !!helperMessage,
           })}
+          data-space-proportions="squared"
           className={classes}
           {...selectProps}
         >

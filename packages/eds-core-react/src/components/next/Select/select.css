@@ -116,6 +116,12 @@
     }
 
     .eds-select {
+      /* In base-select mode the select renders its own button trigger — make it flex
+         so the selected value and picker-icon sit side by side instead of stacking */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
       padding-inline-end: var(--eds-selectable-space-horizontal);
 
       /* Drop the SVG arrow — ::picker-icon takes over */
