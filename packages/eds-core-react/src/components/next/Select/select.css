@@ -144,9 +144,16 @@
     /* Native chevron icon — accent teal (Figma: --eds-color-text-subtle in accent appearance) */
     .eds-select::picker-icon {
       /* Constrain to the same size as the fallback SVG */
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
       width: 1.5rem;
       height: 1.5rem;
+
       color: var(--eds-color-text-accent-subtle);
+
       transition: rotate 150ms;
     }
 
