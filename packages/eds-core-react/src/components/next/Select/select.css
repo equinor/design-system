@@ -34,8 +34,8 @@
     appearance: none;
     background-color: var(--_bg);
 
-    /* Fallback chevron — colour #696969 matches --eds-color-border-strong */
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23696969' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+    /* Fallback chevron — teal accent colour from Figma (--eds-color-text-accent-subtle = #1F6369) */
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%231F6369' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right var(--eds-selectable-space-horizontal) center;
     background-size: 1.5rem;
@@ -128,9 +128,9 @@
       background-image: none;
     }
 
-    /* Native chevron icon */
+    /* Native chevron icon — accent teal (Figma: --eds-color-text-subtle in accent appearance) */
     .eds-select::picker-icon {
-      color: var(--eds-color-text-subtle);
+      color: var(--eds-color-text-accent-subtle);
       transition: rotate 150ms;
     }
 
