@@ -8,6 +8,7 @@
     --_bg: var(--eds-color-bg-input);
     --_border-color: var(--eds-color-border-subtle);
     --_radius: var(--eds-spacing-border-radius-rounded, 4px);
+    --_transition-duration: 200ms;
 
     cursor: pointer;
 
@@ -44,8 +45,8 @@
     outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
 
     transition:
-      outline-color 150ms,
-      box-shadow 150ms;
+      outline-color 150ms ease-in-out,
+      box-shadow 150ms ease-in-out;
 
     &:hover {
       --_border-color: var(--eds-color-border-strong);
@@ -105,6 +106,12 @@
     min-block-size: unset;
     padding-block: var(--eds-spacing-proportions-xs-vertical);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eds-select {
+      --_transition-duration: 0s;
+    }
+  }
 }
 
 /*
@@ -154,7 +161,8 @@
 
       color: var(--eds-color-text-accent-subtle);
 
-      transition: rotate 150ms;
+      /* Inherits --_transition-duration from .eds-select; 0s when reduced-motion */
+      transition: rotate var(--_transition-duration) ease;
     }
 
     .eds-select:open::picker-icon {
