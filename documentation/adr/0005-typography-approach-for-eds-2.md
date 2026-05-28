@@ -76,6 +76,12 @@ Inline elements (`strong`) consume `--_font-weight-bolder` via inheritance with 
 
 Utility classes `.eds-heading-bold` and `.eds-heading-light` work the same way, resolving to the correct weight for whatever heading level they are applied to.
 
+### Extension: font-family, font-size, line-height
+
+The same CSS-first principle extends beyond font-weight. Components in `/next` set `font-family`, `font-size`, and `line-height` directly in their CSS using per-role semantic tokens (`--eds-typography-ui-body-md-font-size` etc.). The `data-font-family` / `data-font-size` / `data-line-height` runtime-switching mechanism is reserved for `elements.css` defaults and ad-hoc consumer markup — a component's own elements should not carry these attributes, because the size and role are part of the component's design and are encoded in the token name. See [`packages/eds-tokens/instructions/typography.md`](../../packages/eds-tokens/instructions/typography.md) for both paths and the token shape.
+
+### Text-box trimming
+
 For text-box trimming, the `@supports` progressive enhancement pattern is used:
 
 ```css

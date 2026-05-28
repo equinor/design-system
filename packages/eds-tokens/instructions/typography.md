@@ -4,11 +4,43 @@ applyTo: '**'
 
 # Typography System
 
-This guide introduces the EDS typography system -- how typographic properties are tokenised, controlled via data attributes, and consumed in CSS and TypeScript.
+This guide introduces the EDS typography system -- how typographic properties are tokenised and consumed in CSS and TypeScript.
 
-## Core Concepts
+There are two ways to apply typography:
 
-Typography in EDS is broken into five independent axes. Each axis has its own set of CSS variables and can be switched at runtime using a `data-*` attribute.
+1. **Static, per-element tokens (preferred for EDS 2.0 components in `/next`)** -- set `font-family`, `font-size`, and `line-height` directly in the component CSS using semantic tokens such as `--eds-typography-ui-body-md-font-size`. The size and family are part of the component's design; consumers do not switch them at runtime. See [Semantic typography tokens for component CSS](#semantic-typography-tokens-for-component-css).
+
+2. **Runtime data-attribute switching** -- set `data-font-family` / `data-font-size` / `data-line-height` etc. on an element to flip the active typography axis at runtime. Useful for `elements.css` (semantic HTML defaults) and ad-hoc consumer markup, but not the default choice inside a component's own CSS. See [Runtime data-attribute switching](#runtime-data-attribute-switching).
+
+If you are building a new component in `packages/eds-core-react/src/components/next/`, use approach 1. Approach 2 is documented for completeness and for cases where it is the right tool.
+
+## Semantic typography tokens for component CSS
+
+Components in `/next` use the per-size, per-role semantic tokens directly in their CSS:
+
+```css
+.eds-button {
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+}
+```
+
+The token shape is `--eds-typography-{role}-{size}-{property}` where:
+
+- **role**: `ui-body` (UI / body copy, Inter) or `header` (headings, Equinor typeface)
+- **size**: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`
+- **property**: `font-size`, `line-height-default`, `line-height-squished`, `font-weight-{lighter,normal,bolder}`
+
+`font-family` is set once per role (`--eds-typography-{ui-body,header}-font-family`); it does not have a size segment.
+
+Reach for these tokens whenever the component's typography is fixed by design -- which is the common case. Do not add `data-font-*` attributes to the component's own elements for this; the tokens above already encode the size + role combination.
+
+For the underlying decision, including font-weight handling with `--_font-weight-{bolder,lighter}` for inline `strong`/`em` inheritance, see [ADR-0005: Typography approach for EDS 2.0](../../../documentation/adr/0005-typography-approach-for-eds-2.md).
+
+## Runtime data-attribute switching
+
+Typography in EDS is also broken into five independent axes. Each axis has its own set of generic CSS variables and can be switched at runtime using a `data-*` attribute. This is the mechanism that `elements.css` and other foundation-level styles use, and it is available for ad-hoc consumer markup.
 
 | Axis | Data attribute | Modes |
 |------|---------------|-------|
@@ -166,12 +198,12 @@ The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the pe
 
 | Format | Import path | Use case |
 |--------|-------------|----------|
-| **CSS variables** | `@equinor/eds-tokens/css/variables` | Standard web styling via data attributes |
+| **CSS variables** | `@equinor/eds-tokens/css/variables` | Component styling via per-role semantic tokens and runtime data-attribute switching |
 | **TypeScript matrix** | `@equinor/eds-tokens/ts/typography/font-family-{ui,header}` | Direct matrix access for non-CSS consumers (RN, SSR, design tooling) |
 
 ## Best Practices
 
-- **Use data attributes** -- Let the token system resolve the right values rather than hardcoding
+- **Prefer per-role semantic tokens in component CSS** -- inside `/next` components, set `font-family`, `font-size`, and `line-height` directly with `--eds-typography-{role}-{size}-{property}` tokens; reach for `data-font-*` only for `elements.css` defaults and ad-hoc consumer markup
 - **Scale together** -- Font size, icon size, and gap are designed to work as a unit
 - **Combine axes freely** -- Each axis is independent; mix and match as needed
 - **Test across sizes** -- Verify layouts work at all font size modes
