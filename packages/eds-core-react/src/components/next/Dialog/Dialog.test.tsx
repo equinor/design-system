@@ -1,0 +1,194 @@
+import { useState } from 'react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
+import { axe } from 'jest-axe'
+import { Dialog } from '.'
+import { Button } from '../Button'
+
+// JSDOM doesn't implement HTMLDialogElement.showModal / .close — patch them
+// onto the prototype so the useEffect open/close sync can be observed via the
+// DOM. Safe to overwrite unconditionally in the test environment.
+beforeAll(() => {
+  HTMLDialogElement.prototype.showModal = function showModal(
+    this: HTMLDialogElement,
+  ) {
+    this.setAttribute('open', '')
+  }
+  HTMLDialogElement.prototype.close = function close(this: HTMLDialogElement) {
+    this.removeAttribute('open')
+    this.dispatchEvent(new Event('close'))
+  }
+})
+
+const renderOpen = (onOpenChange: (open: boolean) => void = () => {}) =>
+  render(
+    <Dialog open onOpenChange={onOpenChange} aria-labelledby="t">
+      <Dialog.Header onClose={() => onOpenChange(false)}>
+        <Dialog.Title id="t">Title</Dialog.Title>
+      </Dialog.Header>
+      <Dialog.Content>Content</Dialog.Content>
+      <Dialog.Actions>
+        <Button>OK</Button>
+      </Dialog.Actions>
+    </Dialog>,
+  )
+
+describe('Dialog (next)', () => {
+  describe('Rendering', () => {
+    it('renders title, content and actions', () => {
+      renderOpen()
+      expect(screen.getByRole('heading', { name: 'Title' })).toBeInTheDocument()
+      expect(screen.getByText('Content')).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: 'OK' })).toBeInTheDocument()
+    })
+
+    it('renders a <dialog> element with the eds-dialog class', () => {
+      renderOpen()
+      const dialog = screen.getByRole('dialog')
+      expect(dialog.tagName).toBe('DIALOG')
+      expect(dialog).toHaveClass('eds-dialog')
+    })
+
+    it('forwards ref to the dialog element', () => {
+      const ref = { current: null as HTMLDialogElement | null }
+      render(
+        <Dialog open ref={ref} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(ref.current).toBeInstanceOf(HTMLDialogElement)
+    })
+
+    it('sets data-scrim by default', () => {
+      renderOpen()
+      expect(screen.getByRole('dialog')).toHaveAttribute('data-scrim')
+    })
+
+    it('omits data-scrim when scrim is false', () => {
+      render(
+        <Dialog open scrim={false} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog')).not.toHaveAttribute('data-scrim')
+    })
+
+    it('omits the close button when onClose is not provided', () => {
+      render(
+        <Dialog open aria-label="d">
+          <Dialog.Header>
+            <Dialog.Title>Title</Dialog.Title>
+          </Dialog.Header>
+        </Dialog>,
+      )
+      expect(
+        screen.queryByRole('button', { name: 'Close' }),
+      ).not.toBeInTheDocument()
+    })
+  })
+
+  describe('Open state', () => {
+    it('opens when the open prop becomes true', () => {
+      const { rerender } = render(
+        <Dialog open={false} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute(
+        'open',
+      )
+
+      rerender(
+        <Dialog open aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog')).toHaveAttribute('open')
+    })
+
+    it('closes when the open prop becomes false', () => {
+      const { rerender } = render(
+        <Dialog open aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog')).toHaveAttribute('open')
+
+      rerender(
+        <Dialog open={false} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute(
+        'open',
+      )
+    })
+  })
+
+  describe('Closing', () => {
+    it('invokes onOpenChange(false) when the close button is clicked', async () => {
+      const user = userEvent.setup()
+      const onOpenChange = jest.fn()
+      renderOpen(onOpenChange)
+      await user.click(screen.getByRole('button', { name: 'Close' }))
+      expect(onOpenChange).toHaveBeenCalledWith(false)
+    })
+
+    it('invokes onOpenChange(false) on backdrop click', () => {
+      const onOpenChange = jest.fn()
+      renderOpen(onOpenChange)
+      // A click whose target IS the dialog element comes from the backdrop —
+      // children stop event.target from being the dialog itself.
+      fireEvent.click(screen.getByRole('dialog'))
+      expect(onOpenChange).toHaveBeenCalledWith(false)
+    })
+
+    it('does not invoke onOpenChange when clicking dialog children', async () => {
+      const user = userEvent.setup()
+      const onOpenChange = jest.fn()
+      renderOpen(onOpenChange)
+      await user.click(screen.getByText('Content'))
+      expect(onOpenChange).not.toHaveBeenCalled()
+    })
+
+    it('invokes onOpenChange(false) on the native close event', () => {
+      const onOpenChange = jest.fn()
+      const Controlled = () => {
+        const [open, setOpen] = useState(true)
+        return (
+          <Dialog
+            open={open}
+            onOpenChange={(next) => {
+              onOpenChange(next)
+              setOpen(next)
+            }}
+            aria-label="d"
+          >
+            <Dialog.Content>x</Dialog.Content>
+          </Dialog>
+        )
+      }
+      render(<Controlled />)
+      const dialog = screen.getByRole('dialog')
+      // ESC triggers the dialog's close() in browsers; simulate by firing
+      // the close event directly (our patched close() does the same).
+      fireEvent(dialog, new Event('close'))
+      expect(onOpenChange).toHaveBeenCalledWith(false)
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('has no violations when open with aria-labelledby', async () => {
+      const { container } = renderOpen()
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('exposes the title as an h2 heading', () => {
+      renderOpen()
+      expect(
+        screen.getByRole('heading', { level: 2, name: 'Title' }),
+      ).toBeInTheDocument()
+    })
+  })
+})

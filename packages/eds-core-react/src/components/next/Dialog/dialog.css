@@ -1,0 +1,78 @@
+@layer eds-components {
+  .eds-dialog {
+    --_text-color: var(--eds-color-text-strong);
+    --_section-padding: var(--eds-spacing-vertical-md);
+
+    inline-size: max-content;
+    max-inline-size: min(calc(100vw - 2rem), 32rem);
+    padding: 0;
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-rounded);
+
+    color: var(--_text-color);
+
+    background: var(--eds-color-bg-floating);
+    box-shadow: var(--eds-elevation-low);
+
+    /* TODO: replace the rgba placeholder with `--eds-color-scrim` (or
+       equivalent) once the scrim is specified in Figma. The longer-term plan
+       is a standalone `Scrim` component; until then, the dialog renders its
+       own backdrop via the native `::backdrop` pseudo when `scrim` is true. */
+    &[data-scrim]::backdrop {
+      background: rgb(0 0 0 / 40%);
+    }
+
+    & > .header {
+      display: flex;
+      gap: var(--eds-spacing-horizontal-sm);
+      align-items: center;
+      padding: var(--_section-padding);
+    }
+
+    & > .header > .title-container {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      align-self: stretch;
+    }
+
+    & > .content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--eds-spacing-vertical-md);
+
+      padding: var(--_section-padding);
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--_text-color);
+    }
+
+    & > .actions {
+      display: flex;
+      gap: var(--eds-spacing-horizontal-sm);
+      align-items: center;
+      justify-content: flex-end;
+
+      padding: var(--_section-padding);
+    }
+
+    & .title {
+      margin: 0;
+
+      font-size: var(--eds-typography-ui-body-lg-font-size);
+      font-weight: var(--eds-typography-ui-body-lg-font-weight);
+      line-height: var(--eds-typography-ui-body-lg-line-height-default);
+      color: var(--_text-color);
+    }
+  }
+}
+
+/* Storybook's preview-head.html applies a `:where(h1-h6) { font-family: Equinor }`
+   reset *outside* any @layer. Layered styles always lose to unlayered styles
+   regardless of specificity, so we set the title font-family outside the layer
+   to win the cascade. Inter is what the Figma design specifies for this size. */
+.eds-dialog .title {
+  font-family: var(--eds-typography-ui-body-font-family);
+}
