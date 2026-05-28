@@ -107,8 +107,8 @@
 
 /*
  * Progressive enhancement — customizable <select> (Chrome 135+, others coming).
- * Replaces the SVG background hack with native ::picker(select) styling that
- * visually matches the Menu component used in Autocomplete.
+ * Dropdown surface + option item styles live in menu.css (shared with .eds-menu).
+ * This block handles only the trigger button appearance and the picker icon.
  */
 @supports (appearance: base-select) {
   @layer eds-components {
@@ -131,8 +131,17 @@
       background-image: none;
     }
 
+    /* Remove bottom corners when open so the trigger connects flush to the picker */
+    .eds-select:open {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+    }
+
     /* Native chevron icon — accent teal (Figma: --eds-color-text-subtle in accent appearance) */
     .eds-select::picker-icon {
+      /* Constrain to the same size as the fallback SVG */
+      width: 1.5rem;
+      height: 1.5rem;
       color: var(--eds-color-text-accent-subtle);
       transition: rotate 150ms;
     }
@@ -152,56 +161,6 @@
     /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
     .eds-select-container[data-invalid] .eds-select::picker-icon {
       color: var(--eds-color-text-neutral-subtle);
-    }
-
-    /* Dropdown surface — matches Menu component */
-    .eds-select::picker(select) {
-      scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
-      scrollbar-width: thin;
-
-      overflow-y: auto;
-
-      box-sizing: border-box;
-      min-inline-size: anchor-size(inline);
-      max-block-size: 300px;
-      margin: 0;
-      margin-block-start: -1px;
-      padding: 0;
-      border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-medium);
-      border-radius: var(--eds-spacing-border-radius-rounded, 4px);
-
-      background: var(--eds-color-bg-floating);
-    }
-
-    /* Option items — matches MenuItem */
-    .eds-select option {
-      padding-block: var(--eds-selectable-space-vertical);
-      padding-inline: var(--eds-selectable-space-horizontal);
-
-      font-family: var(--eds-typography-ui-body-font-family);
-      font-size: var(--eds-typography-ui-body-md-font-size);
-      font-feature-settings: 'lnum', 'tnum';
-      font-weight: var(--eds-typography-font-weight, 400);
-      line-height: var(--eds-typography-ui-body-md-line-height-default);
-      color: var(--eds-color-text-strong);
-      letter-spacing: var(--eds-typography-tracking, 0);
-
-      background: transparent;
-
-      &:checked {
-        background: var(--eds-color-bg-fill-muted-default);
-      }
-
-      &:disabled {
-        cursor: not-allowed;
-        color: var(--eds-color-text-disabled);
-      }
-
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          background: var(--eds-color-bg-fill-muted-default);
-        }
-      }
     }
   }
 }
