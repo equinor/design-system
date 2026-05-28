@@ -7,6 +7,7 @@
     /* Pseudo-private variables — override these in states, never the property directly */
     --_bg: var(--eds-color-bg-input);
     --_border-color: var(--eds-color-border-subtle);
+    --_radius: var(--eds-spacing-border-radius-rounded, 4px);
 
     cursor: pointer;
 
@@ -21,7 +22,7 @@
     /* Reserve space for the chevron in the fallback (SVG background) */
     padding-inline-end: calc(var(--eds-selectable-space-horizontal) + 1.5rem);
     border: none;
-    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+    border-radius: var(--_radius);
 
     font-family: var(--eds-typography-ui-body-font-family);
     font-size: var(--eds-typography-ui-body-md-font-size);
@@ -55,7 +56,8 @@
 
       box-shadow:
         0 0 0 var(--eds-sizing-stroke-thin) var(--_bg),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
+          var(--eds-color-border-focus);
     }
 
     &:disabled {
@@ -106,9 +108,9 @@
 }
 
 /*
- * Progressive enhancement — customizable <select> (Chrome 135+, others coming).
- * Dropdown surface + option item styles live in menu.css (shared with .eds-menu).
- * This block handles only the trigger button appearance and the picker icon.
+ * Progressive enhancement — customizable <select> (Chrome 135+, ~70% global coverage May 2026).
+ * Covers both the trigger button appearance AND the picker dropdown surface + option items.
+ * Kept in one @supports block so Select owns all its own styles end-to-end.
  */
 @supports (appearance: base-select) {
   @layer eds-components {
@@ -117,6 +119,8 @@
     .eds-select::picker(select) {
       appearance: base-select;
     }
+
+    /* ── Trigger button ────────────────────────────────────────────────────── */
 
     .eds-select {
       /* In base-select mode the select renders its own button trigger — make it flex
@@ -161,6 +165,72 @@
     /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
     .eds-select-container[data-invalid] .eds-select::picker-icon {
       color: var(--eds-color-text-neutral-subtle);
+    }
+
+    /* ── Picker dropdown surface ───────────────────────────────────────────── */
+
+    /*
+     * The native <select> picker cannot receive CSS classes, so it is styled
+     * here with pseudo-element selectors.  --_radius is inherited from the
+     * originating .eds-select element (CSS custom properties cross the
+     * ::picker boundary via normal inheritance).
+     */
+    .eds-select::picker(select) {
+      scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
+      scrollbar-width: thin;
+
+      overflow-y: auto;
+
+      box-sizing: border-box;
+      min-inline-size: anchor-size(inline);
+      max-block-size: 300px;
+      margin: 0;
+      margin-block-start: -1px;
+      padding: 0;
+
+      /* No top corners — connects flush to the open trigger */
+      border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+      border-radius: 0 0 var(--_radius) var(--_radius);
+
+      background: var(--eds-color-bg-floating);
+    }
+
+    /* ── Option items ──────────────────────────────────────────────────────── */
+
+    .eds-select option {
+      --_bg: transparent;
+
+      cursor: pointer;
+
+      padding-block: var(--eds-selectable-space-vertical);
+      padding-inline: var(--eds-selectable-space-horizontal);
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      font-feature-settings: 'lnum', 'tnum';
+      font-weight: var(--eds-typography-font-weight, 400);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--eds-color-text-strong);
+      letter-spacing: var(--eds-typography-tracking, 0);
+
+      background: var(--_bg);
+
+      -webkit-font-smoothing: antialiased;
+
+      &:checked {
+        --_bg: var(--eds-color-bg-fill-muted-default);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        color: var(--eds-color-text-disabled);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          --_bg: var(--eds-color-bg-fill-muted-default);
+        }
+      }
     }
   }
 }
