@@ -93,7 +93,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Surfaces',
-      items: ['components/surfaces/divider'],
+      items: ['components/surfaces/accordion', 'components/surfaces/divider'],
     },
   ],
   //Foundation Section
