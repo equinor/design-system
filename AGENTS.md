@@ -203,7 +203,7 @@ Set `font-family`, `font-size`, and `line-height` directly in the component CSS 
 }
 ```
 
-Token shape: `--eds-typography-{ui-body|header}-{xs..6xl}-{font-size,line-height-default,line-height-squished,font-weight-*}`. `font-family` is set once per role (`--eds-typography-{ui-body,header}-font-family`).
+Token shape: `--eds-typography-{ui-body|header}-{xs..6xl}-{font-size,line-height-default,line-height-squished,font-weight-{lighter,normal,bolder}}`. `font-family` is set once per role (`--eds-typography-{ui-body,header}-font-family`).
 
 The `data-font-*` runtime-switching pattern still exists for `elements.css` defaults and ad-hoc consumer markup, but inside a component's own CSS the size and role are part of the design and should be expressed as tokens. See [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) for both paths.
 

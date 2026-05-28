@@ -198,12 +198,12 @@ The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the pe
 
 | Format | Import path | Use case |
 |--------|-------------|----------|
-| **CSS variables** | `@equinor/eds-tokens/css/variables` | Standard web styling via data attributes |
+| **CSS variables** | `@equinor/eds-tokens/css/variables` | Component styling via per-role semantic tokens and runtime data-attribute switching |
 | **TypeScript matrix** | `@equinor/eds-tokens/ts/typography/font-family-{ui,header}` | Direct matrix access for non-CSS consumers (RN, SSR, design tooling) |
 
 ## Best Practices
 
-- **Use data attributes** -- Let the token system resolve the right values rather than hardcoding
+- **Prefer per-role semantic tokens in component CSS** -- inside `/next` components, set `font-family`, `font-size`, and `line-height` directly with `--eds-typography-{role}-{size}-{property}` tokens; reach for `data-font-*` only for `elements.css` defaults and ad-hoc consumer markup
 - **Scale together** -- Font size, icon size, and gap are designed to work as a unit
 - **Combine axes freely** -- Each axis is independent; mix and match as needed
 - **Test across sizes** -- Verify layouts work at all font size modes
