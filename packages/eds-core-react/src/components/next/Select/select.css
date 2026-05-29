@@ -73,10 +73,13 @@
     }
   }
 
-  /* Read-only: distinct background, strong border, no pointer events */
+  /*
+   * Read-only: same background as the default filled state (bg-input), subtle
+   * border using the bg-disabled token (Figma: #e1e1e1), no pointer events.
+   */
   .eds-select-container[data-readonly] .eds-select {
-    --_bg: var(--eds-color-bg-disabled);
-    --_border-color: var(--eds-color-border-strong);
+    --_bg: var(--eds-color-bg-input);
+    --_border-color: var(--eds-color-bg-disabled);
 
     pointer-events: none;
 
@@ -148,38 +151,53 @@
       border-end-end-radius: 0;
     }
 
-    /* Native chevron icon — accent teal (Figma: --eds-color-text-subtle in accent appearance) */
+    /*
+     * Chevron icon — suppress the native browser glyph (which fills the full box
+     * and looks too tall) and replace it with our compact SVG via CSS mask.
+     * This makes base-select mode pixel-identical to the fallback SVG approach.
+     * Color is driven by background-color (not color) so CSS custom properties work.
+     */
     .eds-select::picker-icon {
-      /* Constrain to the same size as the fallback SVG */
-      display: flex;
       flex-shrink: 0;
-      align-items: center;
-      justify-content: center;
+      align-self: center;
 
       width: 1.5rem;
       height: 1.5rem;
 
-      color: var(--eds-color-text-accent-subtle);
+      /* Suppress the native UA glyph */
+      color: transparent;
+
+      /* Accent teal chevron — same token as the fallback SVG */
+      background-color: var(--eds-color-text-accent-subtle);
+
+      /* Same compact path as the fallback SVG: M7 9.5l5 5 5-5H7z in 24×24 */
+      mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: 1.5rem;
 
       /* Inherits --_transition-duration from .eds-select; 0s when reduced-motion */
-      transition: rotate var(--_transition-duration) ease;
+      transition:
+        rotate var(--_transition-duration) ease,
+        background-color 150ms ease-in-out;
     }
 
     .eds-select:open::picker-icon {
       rotate: 180deg;
     }
 
+    /* State overrides — background-color drives the visible chevron colour */
     .eds-select:disabled::picker-icon {
-      color: var(--eds-color-text-disabled);
+      background-color: var(--eds-color-text-disabled);
     }
 
     .eds-select-container[data-readonly] .eds-select::picker-icon {
-      color: var(--eds-color-text-disabled);
+      background-color: var(--eds-color-text-disabled);
     }
 
     /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
     .eds-select-container[data-invalid] .eds-select::picker-icon {
-      color: var(--eds-color-text-neutral-subtle);
+      background-color: var(--eds-color-text-neutral-subtle);
     }
 
     /* ── Picker dropdown surface ───────────────────────────────────────────── */
@@ -218,6 +236,9 @@
 
       cursor: pointer;
 
+      display: flex;
+      align-items: center;
+
       padding-block: var(--eds-selectable-space-vertical);
       padding-inline: var(--eds-selectable-space-horizontal);
 
@@ -247,6 +268,22 @@
           --_bg: var(--eds-color-bg-fill-muted-default);
         }
       }
+    }
+
+    /*
+     * Checkmark indicator — trailing position (right side), Figma spec.
+     * ::checkmark is a generated pseudo-element that only renders for :checked
+     * options, so no space is reserved on unselected items.
+     * color inherits from the option's --eds-color-text-strong context.
+     */
+    .eds-select option::checkmark {
+      order: 1;
+
+      /* Match Selectable/Icon size (20px) */
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-inline-start: auto;
+      padding-inline-start: var(--eds-selectable-space-horizontal);
     }
   }
 }
