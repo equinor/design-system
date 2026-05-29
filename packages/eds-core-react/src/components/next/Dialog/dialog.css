@@ -3,8 +3,12 @@
     --_text-color: var(--eds-color-text-strong);
     --_section-padding: var(--eds-spacing-vertical-md);
 
-    inline-size: max-content;
-    max-inline-size: min(calc(100vw - 2rem), 32rem);
+    /* TODO: replace 300px with a dialog-min-width token once one exists in
+       @equinor/eds-tokens. Width is otherwise content-driven (native
+       `<dialog>` defaults to fit-content with a UA-stylesheet viewport cap);
+       consumers needing a wider layout — forms, prompts with longer copy —
+       override via `style` or `className`. See the SpecificWidth story. */
+    min-inline-size: 300px;
     padding: 0;
     border: none;
     border-radius: var(--eds-spacing-border-radius-rounded);

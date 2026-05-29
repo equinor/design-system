@@ -124,3 +124,42 @@ export const WithoutScrim: StoryFn = () => {
     </>
   )
 }
+
+export const SpecificWidth: StoryFn = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      <Dialog
+        open={open}
+        onOpenChange={setOpen}
+        aria-labelledby="dialog-title-specific-width"
+        style={{ inlineSize: '32rem' }}
+      >
+        <Dialog.Header onClose={() => setOpen(false)}>
+          <Dialog.Title id="dialog-title-specific-width">
+            Dialog with a specific width
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Content>
+          <p style={{ margin: 0 }}>
+            By default the dialog is at least 300px wide and grows with its
+            content (capped to the viewport by the browser). For dialogs holding
+            forms, tables, or longer body copy, set a wider{' '}
+            <code>inlineSize</code> via <code>style</code> or a custom{' '}
+            <code>className</code>.
+          </p>
+          <pre style={{ margin: 0 }}>
+            {`<Dialog style={{ inlineSize: '32rem' }}>...</Dialog>`}
+          </pre>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => setOpen(false)}>Confirm</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
