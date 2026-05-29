@@ -9,13 +9,13 @@ Accordion lets readers reveal and collapse sections of content on demand. It hel
 
 <iframe
   class="sb-iframe"
-  src="http://localhost:9000/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--introduction"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--introduction"
   width="100%"
   height="258"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](http://localhost:9000/?path=/story/eds-2-0-beta-surface-accordion--introduction)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--introduction)
 
 ## When to Use
 
@@ -54,13 +54,13 @@ Switch to an exclusive group when the content is mutually exclusive, when keepin
 
 <iframe
   class="sb-iframe"
-  src="http://localhost:9000/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--exclusive"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--exclusive"
   width="100%"
   height="198"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](http://localhost:9000/?path=/story/eds-2-0-beta-surface-accordion--exclusive)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--exclusive)
 
 ### Controlled and Uncontrolled
 
@@ -68,13 +68,13 @@ Accordion items work uncontrolled out of the box – the component remembers its
 
 <iframe
   class="sb-iframe"
-  src="http://localhost:9000/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--controlled"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--controlled"
   width="100%"
   height="169"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](http://localhost:9000/?path=/story/eds-2-0-beta-surface-accordion--controlled)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--controlled)
 
 ### Density
 
@@ -82,13 +82,13 @@ Accordion follows the active density on its ancestor, so spacing and sizing stay
 
 <iframe
   class="sb-iframe"
-  src="http://localhost:9000/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--density"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--density"
   width="100%"
   height="444"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](http://localhost:9000/?path=/story/eds-2-0-beta-surface-accordion--density)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--density)
 
 ## Accessibility
 
@@ -131,6 +131,6 @@ The component reads from the active theme mode on the containing frame, so colou
 - Hide content people are likely to need on every visit – keep that visible in the main flow
 - Nest accordions inside accordions – the layering quickly becomes hard to follow
 - Stack a single accordion item on its own – a plain disclosure or section is clearer
-- Use accordions for navigation between pages – reach for **Link** instead
+- Bury deeply nested headings inside a panel – flatten the content or split it across items
 
 :::

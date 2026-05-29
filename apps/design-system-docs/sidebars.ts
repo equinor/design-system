@@ -58,6 +58,7 @@ const sidebars: SidebarsConfig = {
         id: 'components/inputs/inputs',
       },
       items: [
+        'components/inputs/autocomplete',
         'components/inputs/button',
         'components/inputs/search',
         'components/inputs/selection_controls',
