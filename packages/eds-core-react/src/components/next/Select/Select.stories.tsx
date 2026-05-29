@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Select, type SelectProps } from '.'
 
@@ -27,6 +28,25 @@ export const Default: StoryFn<SelectProps> = (args) => (
   <Select label="Element" options={elements} {...args} />
 )
 
+export const Controlled: StoryFn = () => {
+  const [value, setValue] = useState('Copper')
+  return (
+    <Select
+      label="Element"
+      options={elements}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      helperMessage={`Selected: ${value}`}
+    />
+  )
+}
+
+export const WithPlaceholder: StoryFn<SelectProps> = () => (
+  <Select label="Element" options={elements} placeholder="Select an element…" />
+)
+
+WithPlaceholder.storyName = 'With placeholder'
+
 export const Invalid: StoryFn<SelectProps> = () => (
   <Select
     label="Element"
@@ -46,13 +66,16 @@ export const Disabled: StoryFn<SelectProps> = () => (
 )
 
 export const ReadOnly: StoryFn<SelectProps> = () => (
-  <Select
-    label="Element"
-    options={elements}
-    defaultValue="Copper"
-    readOnly
-  />
+  <Select label="Element" options={elements} defaultValue="Copper" readOnly />
 )
+
+export const ComfortableDensity: StoryFn = () => (
+  <div data-density="comfortable">
+    <Select label="Element" options={elements} />
+  </div>
+)
+
+ComfortableDensity.storyName = 'Comfortable density'
 
 export const ObjectOptions: StoryFn = () => {
   type Well = { id: string; name: string }

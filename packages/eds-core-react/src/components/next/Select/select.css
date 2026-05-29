@@ -194,6 +194,7 @@
       scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
       scrollbar-width: thin;
 
+      overflow: clip;
       overflow-y: auto;
 
       box-sizing: border-box;

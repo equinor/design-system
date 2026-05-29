@@ -14,5 +14,10 @@ export type SelectProps<T = string> = {
   invalid?: boolean
   /** Makes the field read-only — visible but not editable */
   readOnly?: boolean
+  /**
+   * Placeholder text shown as the first, non-selectable option when no value
+   * is pre-selected. Renders as a disabled `<option value="">` at the top of the list.
+   */
+  placeholder?: string
 } & Omit<SelectOptionProps<T>, 'renderOption'> &
   Omit<SelectHTMLAttributes<HTMLSelectElement>, 'children'>
