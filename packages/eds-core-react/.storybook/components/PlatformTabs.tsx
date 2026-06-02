@@ -70,11 +70,11 @@ export const PlatformTabs = ({ mobile, children }: PlatformTabsProps) => {
               fontFamily:
                 'var(--eds-typography-ui-body-font-family), sans-serif',
               fontSize: '0.875rem',
-              fontWeight: 600,
+              fontWeight: activeTab === id ? 700 : 400,
               color:
                 activeTab === id
                   ? 'var(--eds-color-interactive-primary, #007079)'
-                  : 'var(--eds-color-text-subtle, #6F6F6F)',
+                  : '#585858',
               borderBottom:
                 activeTab === id
                   ? '1px solid var(--eds-color-interactive-primary, #007079)'

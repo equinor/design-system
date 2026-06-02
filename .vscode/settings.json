@@ -57,6 +57,5 @@
     "turbopack",
     "WCAG"
   ],
-  "chat.mcp.access": "all",
-  "snyk.advanced.autoSelectOrganization": true
+  "chat.mcp.access": "all"
 }
