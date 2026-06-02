@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-icons",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Icons from the Equinor Design System",
   "main": "dist/icons.cjs",
   "module": "dist/esm/index.js",
@@ -45,7 +45,7 @@
     "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "rollup": "^4.60.3",
+    "rollup": "^4.60.4",
     "rollup-plugin-delete": "^3.0.2",
     "typescript": "^5.9.3"
   }

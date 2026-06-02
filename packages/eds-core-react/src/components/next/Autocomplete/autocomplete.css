@@ -1,0 +1,63 @@
+@layer eds-components {
+  .eds-autocomplete {
+    & .anchor {
+      anchor-name: var(--menu-anchor);
+    }
+
+    & .search-icon {
+      color: var(--eds-color-text-subtle);
+    }
+
+    &[data-readonly] .search-icon {
+      color: var(--eds-color-border-strong);
+    }
+
+    &[data-disabled] .search-icon {
+      color: var(--eds-color-text-disabled);
+    }
+
+    /* Square connecting corners, suppress focus ring, and use medium border when dropdown is open */
+    &:has(input[aria-expanded='true']) .eds-input-container {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+      outline-color: var(--eds-color-border-medium);
+      box-shadow: none;
+    }
+
+    & .eds-menu:popover-open {
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+    }
+
+    & .add-option {
+      display: flex;
+      gap: var(--eds-generic-gap-horizontal);
+      align-items: center;
+
+      &[aria-disabled='true'] {
+        color: var(--eds-color-text-disabled);
+
+        &:hover,
+        &[data-active] {
+          --_bg: transparent;
+        }
+      }
+    }
+
+    & .sr-only {
+      position: absolute;
+
+      overflow: hidden;
+
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+
+      white-space: nowrap;
+
+      clip-path: inset(50%);
+    }
+  }
+}

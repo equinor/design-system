@@ -12,10 +12,12 @@ export default defineConfig({
         dir: 'build-generate-variables',
       },
       external: [
+        /^node:/,
         'fs',
         'path',
         'os',
         'crypto',
+        'process',
         'style-dictionary',
         'style-dictionary-utils',
         '@equinor/eds-tokens-sync',
