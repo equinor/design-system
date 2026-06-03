@@ -1,3 +1,5 @@
+import remarkGfm from 'remark-gfm'
+
 const config = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
@@ -11,8 +13,16 @@ const config = {
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
-    './remark-gfm-preset.mjs',
-    '@storybook/addon-docs',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
 
   features: {

@@ -14,30 +14,6 @@ const meta: Meta<typeof Radio> = {
   },
   parameters: {
     docs: {
-      description: {
-        component: `**⚠️ Beta Component** - This component is under active development and may have breaking changes.
-
-\`\`\`bash
-npm install @equinor/eds-core-react@beta
-\`\`\`
-
-\`\`\`tsx
-import { Radio } from '@equinor/eds-core-react/next'
-
-// Radio group
-<fieldset>
-  <legend>Select option</legend>
-  <Radio label="Option 1" name="group" value="1" />
-  <Radio label="Option 2" name="group" value="2" />
-</fieldset>
-
-// Without visible label (use aria-label)
-<Radio aria-label="Select row" name="table-row" />
-\`\`\`
-
-Radio buttons allow users to select one option from a set. Always use within a group with the same \`name\` attribute.
-`,
-      },
       source: {
         excludeDecorators: true,
       },

@@ -1,0 +1,67 @@
+import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as TypographyNewStories from './Typography.new.stories'
+import { Links, PlatformTabs } from './../../../.storybook/components'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Typography.mdx'
+
+<Meta of={TypographyNewStories} />
+
+# TypographyNext
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/Typography/Typography.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>}>
+
+The next generation of the Typography component system. It will replace the existing Typography component in the next major version.
+
+## Features
+
+The new typography system provides baseline grid alignment for consistent vertical rhythm.
+
+## Usage
+
+Import the TypographyNext component with alias for a seamless experience:
+
+```tsx
+import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
+
+<Heading as="h1">Welcome</Heading>
+<Paragraph size="lg">This is a paragraph with the new typography system.</Paragraph>
+<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
+  Flexible inline text
+</Typography>
+```
+
+## Proposed migration timeline
+
+1. **Now**: Use the new components with aliasing ( `TypographyNext as Typography` )
+2. **Parallel support**: 6-12 months of both systems supported
+
+## Key Differences from current typography
+
+- **Component names**: Two opinionated semantic components -  `Heading` , and  `Paragraph`
+- **Baseline alignment**: Built-in support for baseline grid alignment
+- **Props**: More explicit control over typography properties
+- **Semantic HTML**: `Heading` renders proper heading tags, `Paragraph` renders `<p>` tags
+
+<Primary />
+<Controls />
+
+## Stories
+
+### Playground
+
+The TypographyNext component provides full control over typography properties. Use it for inline text with specific styling needs.
+
+<Canvas of={TypographyNewStories.Playground} />
+
+### As Link
+
+TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop. All standard anchor attributes are supported, such as `target` and `rel` for external links.
+
+<Canvas of={TypographyNewStories.AsLink} />
+
+</PlatformTabs>
