@@ -24,7 +24,7 @@ on:
         default: 'development'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  NODE_VERSION: '22.12.0'
+  NODE_VERSION: '24.16.0'
   CACHE_KEY: ${{ github.sha }}-publish-core-react
 
 jobs:

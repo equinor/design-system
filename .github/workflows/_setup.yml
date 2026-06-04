@@ -26,13 +26,12 @@ on:
       tag:
         description: 'Package tag'
         value: ${{ jobs.setup.outputs.tag }}
-
 permissions:
   contents: read
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  NODE_VERSION: '22.12.0'
+  NODE_VERSION: '24.16.0'
 
 jobs:
   setup:
