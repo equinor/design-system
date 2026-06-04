@@ -38,7 +38,7 @@ export const Introduction: StoryFn = () => {
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Header closable>
+        <Dialog.Header>
           <Dialog.Title>Dialog title</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
@@ -61,7 +61,7 @@ export const WithoutCloseButton: StoryFn = () => {
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Header>
+        <Dialog.Header closable={false}>
           <Dialog.Title>Decision required</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
@@ -87,7 +87,7 @@ export const DangerAction: StoryFn = () => {
         Delete project
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Header closable>
+        <Dialog.Header>
           <Dialog.Title>Delete this project?</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
@@ -113,7 +113,7 @@ export const SingleAction: StoryFn = () => {
     <>
       <Button onClick={() => setOpen(true)}>Show details</Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Header closable>
+        <Dialog.Header>
           <Dialog.Title>You are now offline</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
@@ -133,7 +133,7 @@ export const WithoutScrim: StoryFn = () => {
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
       <Dialog open={open} onOpenChange={setOpen} scrim={false}>
-        <Dialog.Header closable>
+        <Dialog.Header>
           <Dialog.Title>Dialog title</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
@@ -165,7 +165,7 @@ export const SpecificWidth: StoryFn = () => {
         onOpenChange={setOpen}
         style={{ inlineSize: '32rem' }}
       >
-        <Dialog.Header closable>
+        <Dialog.Header>
           <Dialog.Title>Dialog with a specific width</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>

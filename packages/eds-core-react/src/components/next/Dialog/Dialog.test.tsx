@@ -24,7 +24,7 @@ beforeAll(() => {
 const renderOpen = (onOpenChange: (open: boolean) => void = () => {}) =>
   render(
     <Dialog open onOpenChange={onOpenChange}>
-      <Dialog.Header closable>
+      <Dialog.Header>
         <Dialog.Title>Title</Dialog.Title>
       </Dialog.Header>
       <Dialog.Content>Content</Dialog.Content>
@@ -96,10 +96,21 @@ describe('Dialog (next)', () => {
       expect(screen.getByRole('dialog')).not.toHaveAttribute('data-scrim')
     })
 
-    it('omits the close button when closable is not set', () => {
+    it('renders a close button by default', () => {
       render(
         <Dialog open aria-label="d">
           <Dialog.Header>
+            <Dialog.Title>Title</Dialog.Title>
+          </Dialog.Header>
+        </Dialog>,
+      )
+      expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
+    })
+
+    it('omits the close button when closable is false', () => {
+      render(
+        <Dialog open aria-label="d">
+          <Dialog.Header closable={false}>
             <Dialog.Title>Title</Dialog.Title>
           </Dialog.Header>
         </Dialog>,
@@ -234,7 +245,7 @@ describe('Dialog (next)', () => {
               setOpen(next)
             }}
           >
-            <Dialog.Header closable>
+            <Dialog.Header>
               <Dialog.Title>Title</Dialog.Title>
             </Dialog.Header>
           </Dialog>

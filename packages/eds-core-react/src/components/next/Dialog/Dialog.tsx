@@ -137,7 +137,10 @@ const DialogRoot = forwardRef<HTMLDialogElement, DialogProps>(function Dialog(
 DialogRoot.displayName = 'Dialog'
 
 const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
-  function DialogHeader({ closable, children, className, ...rest }, ref) {
+  function DialogHeader(
+    { closable = true, children, className, ...rest },
+    ref,
+  ) {
     const ctx = useContext(DialogContext)
     return (
       <div

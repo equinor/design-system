@@ -8,6 +8,7 @@ figma.connect(
   {
     props: {
       title: figma.string('Dialog Title'),
+      // Trailing space matches the Figma layer name verbatim.
       content: figma.string('Content '),
       hasClose: figma.boolean('Has Close Icon'),
       showPrimary: figma.boolean('Show Primary Button'),
