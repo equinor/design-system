@@ -28,7 +28,7 @@ jobs:
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}
+      cacheKey: ${{ github.sha }}-publish-storybook
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-publish-storybook
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
