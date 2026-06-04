@@ -204,21 +204,26 @@ jobs:
     name: All checks passed
     runs-on: ubuntu-latest
     if: always()
-    needs: [setup, build, test, lint, types, lint-only]
+    needs: [setup, changes, build, test, lint, types, lint-only]
     steps:
       - name: Evaluate results
         run: |
-          # Fail if setup failed
-          if [ "${{ needs.setup.result }}" = "failure" ]; then
-            echo "::error::Setup failed"
-            exit 1
-          fi
-
-          # Fail if any code check failed (skip "skipped" status from path filtering)
-          for job in build test lint types lint-only; do
-            result="${{ needs[job].result || 'skipped' }}"
-            if [ "$result" = "failure" ]; then
-              echo "::error::Job '$job' failed"
+          # Each needs.<job>.result must be expanded as a static expression:
+          # GitHub Actions evaluates ${{ }} at template-render time, before bash
+          # runs, so a bash loop variable cannot index the needs context.
+          # A "skipped" result is expected (path filtering) and is not a failure.
+          for result in \
+            "setup:${{ needs.setup.result }}" \
+            "changes:${{ needs.changes.result }}" \
+            "build:${{ needs.build.result }}" \
+            "test:${{ needs.test.result }}" \
+            "lint:${{ needs.lint.result }}" \
+            "types:${{ needs.types.result }}" \
+            "lint-only:${{ needs.lint-only.result }}"; do
+            job="${result%%:*}"
+            status="${result#*:}"
+            if [ "$status" = "failure" ] || [ "$status" = "cancelled" ]; then
+              echo "::error::Job '$job' $status"
               exit 1
             fi
           done

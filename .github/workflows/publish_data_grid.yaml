@@ -50,6 +50,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Build packages
@@ -90,6 +91,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Publish to npm

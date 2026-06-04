@@ -46,6 +46,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '24.16.0'
+          package-manager-cache: false
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
