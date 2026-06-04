@@ -178,6 +178,12 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      # lint:all runs type-aware ESLint across the whole monorepo, which
+      # needs each workspace package's built type declarations. Without a
+      # build, cross-package imports resolve to `any`/error and trip
+      # no-unsafe-* / no-redundant-type-constituents. Build first.
+      - name: Build packages
+        run: pnpm run build
       - name: Lint packages
         run: pnpm run lint:all
 
