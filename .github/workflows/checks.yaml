@@ -20,6 +20,7 @@ on:
     paths:
       - 'apps/**'
       - 'packages/**'
+      - 'scripts/**'
       - '.github/workflows/**'
   push:
     branches:
