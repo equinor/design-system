@@ -71,6 +71,7 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
+          fail-on-cache-miss: true
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -102,6 +103,7 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
+          fail-on-cache-miss: true
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -126,6 +128,7 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
+          fail-on-cache-miss: true
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -150,6 +153,7 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
+          fail-on-cache-miss: true
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -186,6 +190,7 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
+          fail-on-cache-miss: true
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
