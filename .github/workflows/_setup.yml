@@ -70,6 +70,7 @@ jobs:
           run_install: false
 
       - name: Debug environment
+        if: runner.debug == '1'
         run: |
           echo "pnpm version: $(pnpm --version)"
           echo "node version: $(node --version)"
