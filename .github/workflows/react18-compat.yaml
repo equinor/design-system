@@ -8,6 +8,9 @@ on:
     paths:
       - 'packages/**'
 
+env:
+  NODE_VERSION: '24.16.0'
+
 jobs:
   setup:
     uses: ./.github/workflows/_setup.yml
@@ -33,7 +36,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Fallback install (cache miss)
