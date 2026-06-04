@@ -24,7 +24,7 @@ beforeAll(() => {
 const renderOpen = (onOpenChange: (open: boolean) => void = () => {}) =>
   render(
     <Dialog open onOpenChange={onOpenChange}>
-      <Dialog.Header onClose={() => onOpenChange(false)}>
+      <Dialog.Header closable>
         <Dialog.Title>Title</Dialog.Title>
       </Dialog.Header>
       <Dialog.Content>Content</Dialog.Content>
@@ -96,7 +96,7 @@ describe('Dialog (next)', () => {
       expect(screen.getByRole('dialog')).not.toHaveAttribute('data-scrim')
     })
 
-    it('omits the close button when onClose is not provided', () => {
+    it('omits the close button when closable is not set', () => {
       render(
         <Dialog open aria-label="d">
           <Dialog.Header>
@@ -169,10 +169,24 @@ describe('Dialog (next)', () => {
     it('invokes onOpenChange(false) on backdrop click', () => {
       const onOpenChange = jest.fn()
       renderOpen(onOpenChange)
-      // A click whose target IS the dialog element comes from the backdrop —
-      // children stop event.target from being the dialog itself.
-      fireEvent.click(screen.getByRole('dialog'))
+      // A click whose target IS the dialog element comes from the backdrop.
+      // Both mousedown and click must land on the dialog itself — guards
+      // against drag-out from a text selection.
+      const dialog = screen.getByRole('dialog')
+      fireEvent.mouseDown(dialog)
+      fireEvent.click(dialog)
       expect(onOpenChange).toHaveBeenCalledWith(false)
+    })
+
+    it('does not close when mousedown started on a child and ended on the dialog', () => {
+      const onOpenChange = jest.fn()
+      renderOpen(onOpenChange)
+      const dialog = screen.getByRole('dialog')
+      // mousedown on a child (text-selection drag start), released over the
+      // dialog itself. Without the mousedown-target guard this would close.
+      fireEvent.mouseDown(screen.getByText('Content'))
+      fireEvent.click(dialog)
+      expect(onOpenChange).not.toHaveBeenCalled()
     })
 
     it('does not invoke onOpenChange when clicking dialog children', async () => {
@@ -180,6 +194,71 @@ describe('Dialog (next)', () => {
       const onOpenChange = jest.fn()
       renderOpen(onOpenChange)
       await user.click(screen.getByText('Content'))
+      expect(onOpenChange).not.toHaveBeenCalled()
+    })
+
+    it('fires onOpenChange exactly once on backdrop click', () => {
+      const onOpenChange = jest.fn()
+      const Controlled = () => {
+        const [open, setOpen] = useState(true)
+        return (
+          <Dialog
+            open={open}
+            onOpenChange={(next) => {
+              onOpenChange(next)
+              setOpen(next)
+            }}
+            aria-label="d"
+          >
+            <Dialog.Content>x</Dialog.Content>
+          </Dialog>
+        )
+      }
+      render(<Controlled />)
+      const dialog = screen.getByRole('dialog', { hidden: true })
+      fireEvent.mouseDown(dialog)
+      fireEvent.click(dialog)
+      expect(onOpenChange).toHaveBeenCalledTimes(1)
+    })
+
+    it('fires onOpenChange exactly once on close-button click', async () => {
+      const user = userEvent.setup()
+      const onOpenChange = jest.fn()
+      const Controlled = () => {
+        const [open, setOpen] = useState(true)
+        return (
+          <Dialog
+            open={open}
+            onOpenChange={(next) => {
+              onOpenChange(next)
+              setOpen(next)
+            }}
+          >
+            <Dialog.Header closable>
+              <Dialog.Title>Title</Dialog.Title>
+            </Dialog.Header>
+          </Dialog>
+        )
+      }
+      render(<Controlled />)
+      await user.click(screen.getByRole('button', { name: 'Close' }))
+      expect(onOpenChange).toHaveBeenCalledTimes(1)
+    })
+
+    it('fires onOpenChange exactly once when consumer flips open to false', () => {
+      const onOpenChange = jest.fn()
+      const { rerender } = render(
+        <Dialog open onOpenChange={onOpenChange} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      rerender(
+        <Dialog open={false} onOpenChange={onOpenChange} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      // The effect-driven close should suppress the close-event callback so
+      // a state-driven close doesn't loop back into onOpenChange.
       expect(onOpenChange).not.toHaveBeenCalled()
     })
 
@@ -253,6 +332,18 @@ describe('Dialog (next)', () => {
       const dialog = screen.getByRole('dialog')
       expect(dialog).toHaveAttribute('aria-label', 'Confirmation')
       expect(dialog).not.toHaveAttribute('aria-labelledby')
+    })
+
+    it('omits aria-labelledby when no title and no aria-label is given', () => {
+      render(
+        <Dialog open>
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      // Without a Dialog.Title or aria-label, defaulting aria-labelledby to
+      // an unregistered id would dangle. The title id is only used if a
+      // Dialog.Title has actually registered.
+      expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-labelledby')
     })
   })
 })

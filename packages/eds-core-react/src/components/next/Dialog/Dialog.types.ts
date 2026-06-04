@@ -21,10 +21,12 @@ export type DialogProps = {
 
 export type DialogHeaderProps = {
   /**
-   * When provided, renders a close icon button at the end of the header
-   * that invokes this handler. Omit to render the header without a close button.
+   * When true, renders a close icon button at the end of the header that
+   * closes the dialog (firing the parent `Dialog`'s `onOpenChange(false)`
+   * exactly once). Defaults to `false` — omit the prop to render a header
+   * without a close affordance.
    */
-  onClose?: () => void
+  closable?: boolean
   children?: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 

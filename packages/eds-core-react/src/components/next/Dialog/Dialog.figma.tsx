@@ -15,7 +15,7 @@ figma.connect(
     },
     example: ({ title, content, hasClose, showPrimary, showSecondary }) => (
       <Dialog open onOpenChange={() => {}}>
-        <Dialog.Header onClose={hasClose ? () => {} : undefined}>
+        <Dialog.Header closable={hasClose}>
           <Dialog.Title>{title}</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>{content}</Dialog.Content>
