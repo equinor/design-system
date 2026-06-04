@@ -17,22 +17,13 @@ Built on the native \`<dialog>\` element with \`showModal()\` for free focus
 trapping, Escape-key handling and inert background. Backdrop clicks close
 the dialog.
 
+### Import
+
 \`\`\`tsx
-import { Dialog, Button } from '@equinor/eds-core-react/next'
-
-const [open, setOpen] = useState(false)
-
-<Dialog open={open} onOpenChange={setOpen}>
-  <Dialog.Header onClose={() => setOpen(false)}>
-    <Dialog.Title>Confirm action</Dialog.Title>
-  </Dialog.Header>
-  <Dialog.Content>Are you sure you want to continue?</Dialog.Content>
-  <Dialog.Actions>
-    <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
-    <Button onClick={() => setOpen(false)}>Confirm</Button>
-  </Dialog.Actions>
-</Dialog>
+import { Dialog } from '@equinor/eds-core-react/next'
 \`\`\`
+
+See the stories below for usage patterns.
         `,
       },
     },

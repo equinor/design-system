@@ -37,7 +37,7 @@
 
     & > .header {
       display: flex;
-      gap: var(--eds-spacing-horizontal-sm);
+      gap: var(--eds-spacing-horizontal-xs);
       align-items: center;
       padding: var(--_section-padding);
     }
@@ -64,7 +64,7 @@
 
     & > .actions {
       display: flex;
-      gap: var(--eds-spacing-horizontal-sm);
+      gap: var(--eds-spacing-horizontal-xs);
       align-items: center;
       justify-content: flex-end;
 
