@@ -1,0 +1,132 @@
+@layer eds-components {
+  .eds-accordion {
+    /* States override these vars; the consuming properties below stay stable. */
+    --_summary-bg: transparent;
+    --_transition-duration: 200ms;
+
+    /* Equals the summary's line-height so the chevron sits on the same
+     * baseline grid as the title. The panel's inline-start references the
+     * same var so content aligns under the title. */
+    --_chevron-column: var(--eds-typography-ui-body-md-line-height-squished);
+
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+
+    /* Inner selectors scoped with `>` so consumer content inside .panel can't
+     * collide with our internal class names. */
+    & > details {
+      border-block-start: var(--eds-sizing-stroke-thin) solid
+        var(--eds-color-border-subtle);
+    }
+
+    /* calc-size(auto, size) lets the height transition target intrinsic size;
+     * older engines fall back to instant open/close. */
+    & > details::details-content {
+      overflow: clip;
+      block-size: 0;
+      transition:
+        block-size var(--_transition-duration) ease,
+        content-visibility var(--_transition-duration) ease allow-discrete;
+    }
+
+    & > details[open]::details-content {
+      block-size: calc-size(auto, size);
+    }
+
+    & > details > summary {
+      cursor: pointer;
+
+      display: flex;
+      gap: var(--eds-selectable-space-horizontal);
+      align-items: center;
+
+      padding-block: var(--eds-selectable-space-vertical);
+      padding-inline: var(--eds-selectable-space-horizontal);
+
+      font-size: var(--eds-typography-ui-body-md-font-size);
+
+      list-style: none;
+
+      background-color: var(--_summary-bg);
+
+      transition: background-color var(--_transition-duration) ease;
+    }
+
+    & > details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    & > details > summary:hover,
+    & > details > summary:focus-visible {
+      --_summary-bg: var(--eds-color-bg-fill-muted-default);
+    }
+
+    & > details > summary:focus-visible {
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    }
+
+    /* --_chevron-color is defined here (not on .eds-accordion) so the
+     * bg-fill-emphasis token resolves under the chevron span's own
+     * `data-color-appearance="accent"` — substitution happens at the
+     * property's defining cascade context, not the use site.
+     *
+     * TODO: drop in --eds-color-icon-accent-* once EDS tokens expose a
+     * foreground equivalent for accent-9. */
+    & > details > summary > .chevron {
+      --_chevron-color: var(--eds-color-bg-fill-emphasis-default);
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      inline-size: var(--_chevron-column);
+
+      color: var(--_chevron-color);
+
+      transition: rotate var(--_transition-duration) ease;
+    }
+
+    & > details[open] > summary > .chevron {
+      rotate: 180deg;
+    }
+
+    & > details > summary > .title {
+      --_title-color: var(--eds-color-text-strong);
+
+      flex: 1;
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      line-height: var(--eds-typography-ui-body-md-line-height-squished);
+      color: var(--_title-color);
+
+      transition: color var(--_transition-duration) ease;
+    }
+
+    & > details[open] > summary > .title {
+      --_title-color: var(--eds-color-text-subtle);
+    }
+
+    /* inline-start matches the title's horizontal start in the header
+     * (container pad + chevron column + gap), aligning content under the title. */
+    & > details > .panel {
+      padding-block: var(--eds-selectable-space-vertical)
+        var(--eds-spacing-vertical-xl);
+      padding-inline: calc(
+          var(--eds-selectable-space-horizontal) * 2 + var(--_chevron-column)
+        )
+        var(--eds-spacing-horizontal-2xl);
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--eds-color-text-subtle);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      --_transition-duration: 0s;
+    }
+  }
+}

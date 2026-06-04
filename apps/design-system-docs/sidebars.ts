@@ -58,6 +58,7 @@ const sidebars: SidebarsConfig = {
         id: 'components/inputs/inputs',
       },
       items: [
+        'components/inputs/autocomplete',
         'components/inputs/button',
         'components/inputs/search',
         'components/inputs/selection_controls',
@@ -75,6 +76,7 @@ const sidebars: SidebarsConfig = {
         id: 'components/data-display/data-display',
       },
       items: [
+        'components/data-display/chip',
         'components/data-display/icon',
         'components/data-display/tooltip',
       ],
@@ -88,6 +90,11 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Navigation',
       items: ['components/navigation/link'],
+    },
+    {
+      type: 'category',
+      label: 'Surfaces',
+      items: ['components/surfaces/divider'],
     },
   ],
   //Foundation Section

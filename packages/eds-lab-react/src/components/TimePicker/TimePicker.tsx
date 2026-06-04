@@ -5,7 +5,11 @@ import {
   UseComboboxProps,
   UseComboboxStateChange,
 } from 'downshift'
-import styled, { css, ThemeProvider } from 'styled-components'
+import styled, {
+  css,
+  ThemeProvider,
+  type DefaultTheme,
+} from 'styled-components'
 import {
   Label,
   Icon,
@@ -78,6 +82,8 @@ const StyledButton = styled(Button as any)(({
   theme: {
     entities: { button },
   },
+}: {
+  theme: DefaultTheme
 }) => {
   return css`
     position: absolute;
@@ -93,7 +99,7 @@ const StyledInputWrapper = styled.div`
 `
 
 const PaddedStyledListItem = styled(StyledListItem as any)`
-  ${({ theme }) => spacingsTemplate(theme.spacings)}
+  ${({ theme }: { theme: DefaultTheme }) => spacingsTemplate(theme.spacings)}
 `
 
 const TimeIcon = styled(Icon as any)`

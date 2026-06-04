@@ -1,0 +1,20 @@
+/* This is just a POC, the real values has to be defined in the design tokens */
+
+/* TODO: Add values */
+
+[data-density='relaxed'] {
+  [data-selectable-space='sm'] {
+    --eds-selectable-space-horizontal: 16px;
+    --eds-selectable-space-vertical: 12px;
+  }
+
+  [data-selectable-space='md'] {
+    --eds-selectable-space-horizontal: 20px;
+    --eds-selectable-space-vertical: 16px;
+  }
+
+  [data-selectable-space='lg'] {
+    --eds-selectable-space-horizontal: 24px;
+    --eds-selectable-space-vertical: 20px;
+  }
+}

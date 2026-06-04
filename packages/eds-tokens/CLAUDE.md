@@ -15,7 +15,13 @@ Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS
    a. Copy index-variables.css to build/css/
    b. lightningcss bundles @imports → variables.css
    c. Elevation build injects --eds-elevation-* into variables.css :root
-   d. lightningcss minifies variables.css → variables.min.css
+   d. build-dark-scope rewrites light-dark() into explicit
+      [data-color-scheme="light"|"dark"] scope rules + a
+      prefers-color-scheme media fallback (immune to downstream
+      lightningcss polyfilling — see Pitfalls)
+   e. lightningcss minifies variables.css → variables.min.css
+   f. assertion check: variables.min.css must NOT contain light-dark(
+      or --lightningcss-* polyfill markers
 ```
 
 **Or all at once:** `pnpm run build:variables` (clean + typography + spacing + color + elevation + bundle)
@@ -59,6 +65,9 @@ Note: The minify step reads from the already-bundled `variables.css` (not from `
 
 ## Pitfalls
 
+### Why `light-dark()` is removed from published CSS
+The transform in `eds-tokens-build` emits `light-dark(L, D)` in source CSS. After lightningcss bundles, the `build-dark-scope` step rewrites these into explicit `[data-color-scheme="light"|"dark"]` rules with a `prefers-color-scheme` media fallback. Reason: Vite 8 (Rolldown) and other downstream bundlers run their own lightningcss pass; without explicit `targets`, that pass polyfills `light-dark()` into a `var(--lightningcss-light, …)` pattern that resolves at the `:root` declaration site and breaks subtree-scoped dark mode. Emitting explicit scope rules instead means there is no `light-dark()` for downstream tools to polyfill incorrectly. The build asserts the final output contains no `light-dark(` literals.
+
 ### Missing step 3
 Running only `build:variables:color` compiles individual CSS files but does NOT update `variables.min.css`. Tokens will exist in `build/css/color/*/` but not reach the browser. Always run `_build:css` after.
 
@@ -100,7 +109,43 @@ Five independent axes, each controlled by a `data-*` attribute:
 - **Line height** (`🅰️ Line height.*.json`) — `data-line-height`: `default`, `squished`
 - **Tracking** (`🅰️ Tracking.*.json`) — `data-tracking`: `tight`, `normal`, `wide`, `loose`
 
-Output: `build/css/typography/` (CSS) and `build/ts/typography/` (TypeScript nested objects)
+Output: `build/css/typography/` (CSS, all five axes) and `build/ts/typography/` (TypeScript: `font-family-{ui,header}.ts` only — two self-contained matrices, one per family).
+
+#### Why TS output is minimal
+
+Style Dictionary cannot represent runtime mode switching (which is what `data-*` cascade gives the CSS output). A TS file for `tracking-wide`, `font-weight-normal`, `line-height-default`, or any single `font-size-md` row would have to bake one cell from the size × family matrix and silently be wrong for any other combination. The build therefore emits TS only for the two family matrices.
+
+Each emitted file is shaped so consumers can read all five axes off a single size cell:
+
+```ts
+typography.fontFamilySize.md = {
+  fontSize: 14,
+  tracking:   { tight, normal, wide },
+  fontWeight: { lighter, normal, bolder },
+  lineHeight: { default, squished },
+  iconSize: 20,         // family-independent, spliced in at build time
+  gapHorizontal: 8.5,
+  gapVertical: 8.5,
+}
+```
+
+The nested axes are produced via `splitLeafPrefixes` on the `typescriptNestedFormat` (declared in `eds-tokens-build`). Source JSON encodes axis variants as hyphenated leaves (`font-weight-lighter`); the format splits those into two segments before nesting. CSS output is unaffected — its format uses the unsplit path for variable naming.
+
+Variant names are derivable directly from the data:
+
+```ts
+type Weight = keyof typeof ui.fontFamilySize.md.fontWeight // 'lighter' | 'normal' | 'bolder'
+```
+
+Figma remains the single source of truth — when a Figma sync regenerates the family files, consumer types track automatically.
+
+#### Build-time splicing of size extras
+
+`createSpacingAndTypographyVariables.ts` runs the per-size font-size builds with `rootName`/`tsBuildPath` set, which produces 10 temporary `font-size-{xs..6xl}.ts` files. A post-step parses each for `iconSize`/`gapHorizontal`/`gapVertical` (Style Dictionary emits them with already-resolved numeric values), injects the three values into the corresponding size cell of `font-family-{ui,header}.ts`, and deletes the temporary per-size files. The injection uses a line-anchored regex over content this same script just emitted, and throws if a size cell can't be located — failures are loud rather than silent. This pragmatic choice avoids the awkwardness of cross-source aggregation in Style Dictionary's resolved-value APIs.
+
+#### Build-order dependency
+
+The smoke test in `src/__tests__/typography-shape.test.ts` imports from `build/ts/typography/`, so those files must exist before `pnpm run test` runs. They are committed to git (build/ is gitignored but tracked), so a fresh `pnpm install && pnpm run build` works. But `pnpm run clean` (which is `rimraf build`) removes them — after a clean, you must run `pnpm run build:variables` before `test` will succeed.
 
 ### Elevation
 

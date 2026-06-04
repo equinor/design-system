@@ -161,6 +161,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-return': 'warn',
       '@typescript-eslint/no-unsafe-assignment': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
+      // TODO: re-enable and clean up existing violations — see issue #4827
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-misused-promises': [
         'error',
         { checksVoidReturn: false },
@@ -245,6 +247,12 @@ export default tseslint.config(
         { ignore: ['^@theme', '^@docusaurus', '^@site'] },
       ],
       'import/no-default-export': 'off',
+      // The docs app isn't part of tsconfig.eslint.json's project graph, so
+      // typescript-eslint can't resolve React types here. Downgrade these
+      // type-aware rules to warn — matches how no-unsafe-return / -assignment
+      // / -argument are handled globally above.
+      '@typescript-eslint/no-unsafe-call': 'warn',
+      '@typescript-eslint/no-unsafe-member-access': 'warn',
     },
   },
 

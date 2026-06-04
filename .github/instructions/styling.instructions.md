@@ -1,89 +1,12 @@
 ---
-applyTo: '**'
+applyTo: 'packages/eds-core-react/src/components/next/**/*.css'
 ---
 
 # Styling Guidelines
 
-## Tech Stack
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions — vanilla CSS, one `.css` per component, `eds-`-prefixed root class with nesting, `data-*` attributes for variants, `@layer eds-components`, `--_` pseudo-private custom properties, `data-density` ancestor pattern, dynamic tokens, the modular type scale, and `@supports` progressive enhancement.
 
-- **Use:** Vanilla CSS only
-- **Avoid:** CSS-in-JS (styled-components, emotion), Tailwind inline classes
-- **Variables:** CSS custom properties from `@equinor/eds-tokens`
-- **Responsive:** Mobile-first approach with media queries
+## Reminders
 
-## Naming Conventions
-
-**Files:** Component name in lowercase with hyphens
-
-```
-TextInput.tsx → text-input.css
-DataGrid.tsx → data-grid.css
-```
-
-**Classes:** One `eds-`-prefixed root class per component. Internal elements use simple names scoped by CSS nesting. Variants and state via data attributes.
-
-```css
-@layer eds-components {
-  .eds-text-input {
-    /* Root — eds-prefixed */
-
-    & .label {
-      /* Internal element — simple name, scoped by nesting */
-    }
-
-    &[data-disabled] {
-      /* State via data attribute */
-    }
-
-    &[data-variant='error'] {
-      /* Variant via data attribute */
-    }
-  }
-}
-```
-
-## Patterns
-
-**CSS Variables (from EDS tokens):**
-
-```css
-.text-input {
-  color: var(--eds-color-text-strong);
-  background: var(--eds-color-bg-input);
-  border: 1px solid var(--eds-color-border-medium);
-}
-```
-
-**Responsive Design:**
-
-```css
-.button {
-  padding: 0.5rem 1rem;
-}
-
-@media (min-width: 768px) {
-  .button {
-    padding: 0.75rem 1.5rem;
-  }
-}
-```
-
-**Avoid:**
-
-```jsx
-// ❌ No inline styles
-<div style={{ color: 'red' }}>
-
-// ❌ No CSS-in-JS
-const StyledDiv = styled.div`...`;
-
-// ✅ Use CSS class
-<div className="button">
-```
-
-## Best Practices
-
-- Single responsibility per CSS file
-- Reuse tokens instead of hardcoding colors/sizes
-- Test responsive breakpoints
-- Ensure theme compatibility (light/dark modes)
+- Use `--eds-*` CSS custom properties from `@equinor/eds-tokens`; never hardcode colors or sizes
+- Avoid inline `style={{}}` on production components (Story files may use it for layout demos)

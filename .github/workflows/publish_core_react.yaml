@@ -1,4 +1,7 @@
 name: Publish core-react
+permissions:
+  contents: read
+  id-token: write
 on:
   workflow_dispatch:
     inputs:
@@ -19,9 +22,6 @@ on:
           - development
           - production
         default: 'development'
-permissions:
-  contents: read
-  id-token: write
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   NODE_VERSION: '22.12.0'

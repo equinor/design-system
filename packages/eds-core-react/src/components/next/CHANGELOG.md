@@ -4,6 +4,47 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [2.7.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.6.0-beta.1...eds-core-react-next@v2.7.0-beta.1) (2026-05-27)
+
+
+### ✨ Added
+
+* Add Accordion component ([#4912](https://github.com/equinor/design-system/issues/4912)) ([fbe6874](https://github.com/equinor/design-system/commit/fbe6874a31249ada38656cd1444f770cf4004554))
+* Add Autocomplete component ([#4808](https://github.com/equinor/design-system/issues/4808)) ([10e0217](https://github.com/equinor/design-system/commit/10e0217f266a97ef09f6972f6e4824d83ff29049))
+
+## [2.6.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.6.0-beta.0...eds-core-react-next@v2.6.0-beta.1) (2026-05-20)
+
+
+### 🐛 Fixed
+
+* publish with correct workspace dependencies — 2.6.0-beta.0 had unresolved `workspace:^` references that prevented installation via npm (CI workflow issue, no code changes in /next)
+
+## [2.6.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.5.0-beta.0...eds-core-react-next@v2.6.0-beta.0) (2026-05-20)
+
+
+### ✨ Added
+
+* add Divider component to next/ ([#4844](https://github.com/equinor/design-system/issues/4844)) ([b5706db](https://github.com/equinor/design-system/commit/b5706dbb3dbb8e3617660e99bfa98a384feb3ed1))
+
+
+### 🐛 Fixed
+
+* correct Chip height to match Figma design spec ([#4871](https://github.com/equinor/design-system/issues/4871)) ([3364526](https://github.com/equinor/design-system/commit/3364526b79b697bdd33019eab6d7c8d25d53294e))
+
+
+### ♻️ Refactoring
+
+* migrate Field off TypographyNext ([#4843](https://github.com/equinor/design-system/issues/4843)) ([6cbc34d](https://github.com/equinor/design-system/commit/6cbc34d791eb4c7219a523826c26cf08e8d3dce2))
+
+## [2.5.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.1-beta.0...eds-core-react-next@v2.5.0-beta.0) (2026-04-23)
+
+
+### ✨ Added
+
+* add asChild prop to Button (next) ([#4810](https://github.com/equinor/design-system/issues/4810)) ([06d961a](https://github.com/equinor/design-system/commit/06d961a49ad79a48e383a23265321d7c1babea16))
+* add Chip component to next/ ([#4802](https://github.com/equinor/design-system/issues/4802)) ([81c6111](https://github.com/equinor/design-system/commit/81c61117fff150bcdd15f141afc223488b545f69))
+* CSS-first typography system and Foundation element styles ([#4660](https://github.com/equinor/design-system/issues/4660)) ([284fbf6](https://github.com/equinor/design-system/commit/284fbf667d497ae24410ffbb9f7acff1e5e91c36)), closes [#4659](https://github.com/equinor/design-system/issues/4659)
+
 ## [2.4.1-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.0-beta.0...eds-core-react-next@v2.4.1-beta.0) (2026-04-14)
 
 

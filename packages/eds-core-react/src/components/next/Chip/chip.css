@@ -1,0 +1,130 @@
+@layer eds-components {
+  .eds-chip {
+    /* Typography metrics — same compensation pattern as Button */
+    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
+    --_label-height: round(1cap, 4px); /* Figma has a cap-rounded value but it is not exposed as a CSS token; 1cap gives the same result (Inter metrics + 4px grid) */
+    --_padding-block: var(--eds-selectable-space-vertical);
+    /*
+     * Reduce block padding by half the line-height overflow so the visual
+     * height equals (padding × 2 + cap-height) instead of (padding × 2 + line-height).
+     * e.g. 8px − (16px − 12px) / 2 = 6px → total 28px
+     */
+    --_padding-adjusted: calc(
+      var(--_padding-block) -
+        (var(--_label-line-height) - var(--_label-height)) / 2
+    );
+
+    cursor: pointer;
+    user-select: none;
+
+    display: inline-flex;
+    gap: var(--eds-typography-gap-horizontal);
+    align-items: center;
+
+    box-sizing: border-box;
+    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
+    padding-block: var(--_padding-adjusted);
+    padding-inline: var(--eds-selectable-space-horizontal);
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
+
+    font: inherit;
+    color: inherit;
+
+    transition:
+      background-color 150ms ease-in-out,
+      outline-color 150ms ease-in-out,
+      color 150ms ease-in-out;
+
+    /* ===== DEFAULT VARIANT (solid muted fill) ===== */
+
+    &[data-variant='default'] {
+      color: var(--eds-color-text-subtle);
+      background-color: var(--eds-color-bg-fill-muted-default);
+      outline: none;
+    }
+
+    &[data-variant='default']:hover {
+      background-color: var(--eds-color-bg-fill-muted-hover);
+    }
+
+    &[data-variant='default']:active {
+      background-color: var(--eds-color-bg-fill-muted-active);
+    }
+
+    /* ===== OUTLINED VARIANT (border + transparent bg) ===== */
+
+    &[data-variant='outlined'] {
+      color: var(--eds-color-text-subtle);
+      background-color: transparent;
+      outline: var(--eds-border-width-default, 1px) solid
+        var(--eds-color-border-strong);
+      outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+    }
+
+    &[data-variant='outlined']:hover {
+      background-color: var(--eds-color-bg-fill-muted-hover);
+    }
+
+    &[data-variant='outlined']:active {
+      background-color: var(--eds-color-bg-fill-muted-active);
+    }
+
+    /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
+
+    &[data-variant='high-contrast'] {
+      color: var(--eds-color-text-strong-on-emphasis);
+      background-color: var(--eds-color-bg-fill-emphasis-default);
+      outline: none;
+    }
+
+    &[data-variant='high-contrast']:hover {
+      background-color: var(--eds-color-bg-fill-emphasis-hover);
+    }
+
+    &[data-variant='high-contrast']:active {
+      background-color: var(--eds-color-bg-fill-emphasis-active);
+    }
+
+    /* ===== FOCUS STATE ===== */
+
+    &:focus-visible {
+      box-shadow:
+        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
+          var(--eds-color-border-focus);
+    }
+
+    /* ===== ICONS ===== */
+
+    & .eds-icon {
+      flex-shrink: 0;
+      margin-block: calc(-1 * var(--_padding-adjusted));
+      margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
+    }
+  }
+}
+
+/*
+ * Outside @layer to override typography.css [data-font-family] { display: block }.
+ * data-font-family/data-font-size on the chip container establishes the typography
+ * context for gap and icon sizing tokens.
+ */
+.eds-chip {
+  display: inline-flex;
+}
+
+/*
+ * Label needs inline-flex to center custom icons with text.
+ * text-box: normal disables baseline trimming — chip handles sizing via
+ * padding + flexbox centering.
+ */
+.eds-chip > .label {
+  display: inline-flex;
+  gap: var(--eds-typography-gap-horizontal);
+  align-items: center;
+
+  padding-block: 0;
+
+  text-box: normal;
+}

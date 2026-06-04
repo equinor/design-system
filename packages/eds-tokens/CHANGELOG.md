@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.2.0...eds-tokens@v2.3.0) (2026-05-21)
+
+> **Heads-up for downstream bundler setups:** Dark mode tokens are now emitted as explicit `[data-color-scheme="dark"]` scope rules instead of `light-dark()`. This fixes dark mode in bundlers that use lightningcss (including Vite 8+). No action required for most consumers — if you process the tokens CSS through your own build pipeline, the output no longer contains `light-dark()`.
+
+### ✨ Added
+
+* Add elevation shadow tokens ([#4783](https://github.com/equinor/design-system/issues/4783)) ([f775560](https://github.com/equinor/design-system/commit/f775560a46aba2207f175405639c248675b30116))
+* Add nested TypeScript token output for typography and spacing ([#4538](https://github.com/equinor/design-system/issues/4538)) ([6100738](https://github.com/equinor/design-system/commit/6100738f24a677a3adeebbbae0b079e3c3e7d644))
+* Add spacing tokens to all build outputs (CSS, TS, JSON) ([#4587](https://github.com/equinor/design-system/issues/4587)) ([5a5b1f0](https://github.com/equinor/design-system/commit/5a5b1f049b899095034b9fe66fde040d6e2d4ee7))
+* Include concept tokens in semantic TS, CSS, and JSON outputs ([#4641](https://github.com/equinor/design-system/issues/4641)) ([adb74eb](https://github.com/equinor/design-system/commit/adb74eb9b9ed3c28b77a7b264b272debec176a79))
+
+
+### 🐛 Fixed
+
+* Strip concept token self-references from generated static CSS ([#4806](https://github.com/equinor/design-system/issues/4806)) ([61ba4b5](https://github.com/equinor/design-system/commit/61ba4b5d3c61dd4625cd481866e261246f3c9e05))
+* Correct `5xl` tracking-wide alias in UI Body mode ([#4885](https://github.com/equinor/design-system/issues/4885)) ([4c4af83](https://github.com/equinor/design-system/commit/4c4af8365801e794b64b4b636a87f6db36a395a5)), closes [#4876](https://github.com/equinor/design-system/issues/4876)
+* Inline size extras in nested typography TypeScript output ([#4915](https://github.com/equinor/design-system/issues/4915)) ([ea9cae3](https://github.com/equinor/design-system/commit/ea9cae3ca7feb84615012d52aa7b8b92d82b5b5a))
+* Emit explicit dark-scope rules instead of `light-dark()` for broader browser support ([#4864](https://github.com/equinor/design-system/issues/4864)) ([e519ff2](https://github.com/equinor/design-system/commit/e519ff2113e13f7a826772cebc9abeda2f04cee7))
+* Re-declare semantic color tokens on `data-color-scheme` scopes ([#4873](https://github.com/equinor/design-system/issues/4873)) ([a43fd38](https://github.com/equinor/design-system/commit/a43fd38c1af791404a9da6db792f90ffec39e712))
+* Register typography length properties as proper CSS custom properties ([#4831](https://github.com/equinor/design-system/issues/4831)) ([34095a8](https://github.com/equinor/design-system/commit/34095a8bb5cc448c7866235bdfde2ea689232b7e))
+
 ## [2.2.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.1.1...eds-tokens@v2.2.0) (2026-02-17)
 
 

@@ -1,0 +1,86 @@
+@layer eds-components {
+  .eds-menu {
+    scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
+    scrollbar-width: thin;
+
+    /* Anchor positioning — flush below trigger, left-aligned.
+       --menu-anchor is set on the trigger's wrapper by the consuming component
+       (e.g. Autocomplete). Even though the menu is in the top-layer, CSS custom
+       properties still inherit from the original DOM parent, so this works. */
+    position: fixed;
+    top: anchor(bottom);
+    left: anchor(left);
+    position-anchor: var(--menu-anchor);
+
+    /* Flip above if not enough space below */
+    position-try-fallbacks: --eds-menu-top;
+
+    overflow: clip;
+    overflow-y: auto;
+
+    box-sizing: border-box;
+    width: anchor-size(width);
+    max-block-size: 300px;
+    margin: 0;
+    margin-block-start: -1px;
+    padding: 0;
+    border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+
+    list-style: none;
+
+    background: var(--eds-color-bg-floating);
+  }
+
+  .eds-menu-item {
+    --_bg: transparent;
+
+    cursor: pointer;
+
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    font-feature-settings: 'lnum', 'tnum';
+    font-weight: var(--eds-typography-font-weight, 400);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+    color: var(--eds-color-text-strong);
+    letter-spacing: var(--eds-typography-tracking, 0);
+
+    background: var(--_bg);
+
+    -webkit-font-smoothing: antialiased;
+
+    &[data-active] {
+      --_bg: var(--eds-color-bg-fill-muted-default);
+
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    }
+
+    &:is(:disabled, [aria-disabled='true']) {
+      cursor: not-allowed;
+      color: var(--eds-color-text-disabled);
+    }
+
+    &[data-status] {
+      cursor: default;
+      color: var(--eds-color-text-disabled);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:where(:not([aria-disabled='true'], [data-status])):hover {
+        --_bg: var(--eds-color-bg-fill-muted-default);
+      }
+    }
+  }
+}
+
+/* @position-try must be outside @layer per spec */
+@position-try --eds-menu-top {
+  top: auto;
+  bottom: anchor(top);
+  left: anchor(left);
+  margin-block: 0 -1px;
+}

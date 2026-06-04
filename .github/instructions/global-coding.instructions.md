@@ -4,6 +4,8 @@ applyTo: '**'
 
 # Global Coding Standards
 
+> See [`AGENTS.md`](../../AGENTS.md) for the canonical conventions. This file adds Copilot-specific quick-reference for lint/format commands and the naming table.
+
 ## Core Requirements
 
 - **Accessibility:** WCAG 2.1 AA compliance (non-negotiable)
@@ -30,8 +32,7 @@ Use the global prettier config in the repository root. All files should pass Pre
 | Type            | Convention  | Example                             |
 | --------------- | ----------- | ----------------------------------- |
 | Components      | PascalCase  | `Button`, `TextInput`, `DataGrid`   |
-| Interfaces      | PascalCase  | `ButtonProps`, `TableColumn`        |
-| Types           | PascalCase  | `Theme`, `Variant`                  |
+| Types / Interfaces | PascalCase  | `ButtonProps`, `Theme`, `Variant`   |
 | Variables       | camelCase   | `buttonLabel`, `isDisabled`         |
 | Functions       | camelCase   | `handleClick`, `formatDate`         |
 | Constants       | ALL_CAPS    | `MAX_RETRIES`, `DEFAULT_TIMEOUT`    |

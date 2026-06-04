@@ -49,7 +49,7 @@ jobs:
         if: steps.check-permission.outputs.authorized == 'true'
         uses: actions/setup-node@v6
         with:
-          node-version: '22.12.0'
+          node-version: '24.16.0'
 
       - name: Setup pnpm
         if: steps.check-permission.outputs.authorized == 'true'
@@ -72,12 +72,11 @@ jobs:
           # or https://code.claude.com/docs/en/cli-reference for available options
           claude_args: >-
             --append-system-prompt
-            "Before making any changes, run: pnpm install --frozen-lockfile && pnpm run build.
-            Useful commands: pnpm run build:core-react, pnpm run test:core-react,
-            pnpm run lint ./path/to/file.tsx,
-            cd packages/eds-core-react && pnpm test -- --testPathPattern=ComponentName.
-            Follow the conventions in CLAUDE.md and .github/copilot-instructions.md.
-            Use conventional commits: type(scope): description.
-            New components go in packages/eds-core-react/src/components/next/."
+            "Read AGENTS.md for the canonical EDS conventions (component structure, code style, CSS patterns, testing, accessibility, conventional commits).
+            Path-scoped rules in .claude/rules/ apply automatically when relevant.
+            Run pnpm install --frozen-lockfile only when you need to install dependencies or run scripts.
+            Run pnpm run build:core-react before tests if you've changed types that other packages depend on.
+            Useful commands: pnpm run test:core-react, pnpm run lint ./path/to/file.tsx,
+            cd packages/eds-core-react && pnpm test -- --testPathPattern=ComponentName."
             --allowed-tools
             "Bash(pnpm:*),Bash(npm:*),Bash(node:*),Bash(git:*),Bash(gh pr:*),Bash(gh issue:*),Bash(ls:*),Bash(cd:*),Bash(cat:*),Bash(find:*),Bash(grep:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(diff:*),Bash(echo:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*)"

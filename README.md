@@ -32,12 +32,57 @@ packages/                # Published npm packages
   eds-tailwind/          # Tailwind CSS plugin
 ```
   
+## Architecture
+
+### System Context
+
+EDS serves three personas and delivers through four channels: Figma assets for designers, npm packages for developers, a documentation hub for both, and a CDN that provides fonts and CSS to all Equinor web applications utilizing EDS. The system is built as a monorepo with CI/CD pipelines that automate testing, building and publishing to npm and the CDN.
+
+```mermaid
+C4Context
+  title System Context diagram for Equinor Design System
+
+  Person(designer, "Designer", "Creates and maintains UI designs following the Equinor design language")
+  Person(developer, "Developer", "Builds web applications using EDS components and tokens")
+  Person(enduser, "End User", "Uses Equinor web applications built with EDS")
+
+  System_Ext(figma, "Figma", "Source of truth for design tokens, components and assets")
+  System(eds, "Equinor Design System", "Documentation hub, GitHub monorepo and CI/CD pipelines delivering reusable UI components, design tokens, icons and typography")
+  System_Ext(app, "Equinor Web Applications", "Internal web apps built with EDS")
+
+  System_Ext(npm, "npm Registry", "Distributes EDS packages: eds-core-react, eds-tokens, eds-icons, etc.")
+  System_Ext(cdn, "CDN", "Serves font files, icons and logo for Equinor web applications")
+
+  Rel(designer, eds, "Uses design assets and documentation")
+  Rel(developer, eds, "Uses documentation and developer tools")
+  Rel(designer, figma, "Uses EDS components in", "Figma")
+
+  BiRel(eds, figma, "Syncs assets and tokens with")
+  Rel(eds, npm, "Publishes packages to")
+  Rel(eds, cdn, "Publishes fonts and static assets to")
+
+  Rel(developer, npm, "Installs EDS packages from")
+  Rel(developer, app, "Builds")
+  Rel(enduser, app, "Uses")
+  Rel(app, cdn, "Loads fonts from", "HTTPS")
+
+  UpdateRelStyle(app, cdn, $offsetX="250", $offsetY="0")
+  UpdateRelStyle(eds, figma, $offsetX="0", $offsetY="30")
+  UpdateRelStyle(developer, npm, $offsetX="0", $offsetY="-60")
+  UpdateRelStyle(designer, eds, $offsetX="-150", $offsetY="0")
+  UpdateRelStyle(developer, eds, $offsetX="-80", $offsetY="-30")
+  UpdateRelStyle(eds, cdn, $offsetX="-100", $offsetY="0")
+
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="2")
+```
+
 ## Table of contents
 
 - [Equinor Design System](#equinor-design-system)
   - [Quick links](#quick-links)
   - [Table of contents](#table-of-contents)
   - [Repository structure](#repository-structure)
+  - [Architecture](#architecture)
   - [Status](#status)
   - [Applications](#applications)
   - [Prerequisites](#prerequisites)
@@ -80,8 +125,6 @@ packages/                # Published npm packages
 
 ## Status
 
-
-
 | Package | Status | Version |
 |--|--|--|
 | [Core React](https://github.com/equinor/design-system/tree/main/packages/eds-core-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react) |
@@ -111,7 +154,7 @@ Before you begin, ensure you have the following installed:
   Source: prerequisites.json (generated from .nvmrc and package.json)
 -->
 
-* **Node.js** — Version 22.12.0 or compatible
+* **Node.js** — Version 24.16.0 or compatible
 * **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm@10.15.0`)
 * **Git** — For version control
 

@@ -1,3 +1,5 @@
+import remarkGfm from 'remark-gfm'
+
 const config = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
@@ -13,7 +15,13 @@ const config = {
     '@storybook/addon-links',
     {
       name: '@storybook/addon-docs',
-      options: {},
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
     },
   ],
 
@@ -54,8 +62,24 @@ const config = {
   },
 
   async viteFinal(config) {
+    // Vite 8 uses Rolldown + lightningcss for CSS by default. Without explicit
+    // targets, lightningcss assumes legacy browsers and downlevels modern
+    // syntax — which broke EDS dark-mode tokens in prod Storybook by polyfilling
+    // light-dark() into a [data-color-scheme]-incompatible pattern.
+    // Resolve targets from the repo browserslist so modern syntax is preserved.
+    const browserslist = (await import('browserslist')).default
+    const { browserslistToTargets } = await import('lightningcss')
+
     return {
       ...config,
+      css: {
+        ...config.css,
+        transformer: 'lightningcss',
+        lightningcss: {
+          ...config.css?.lightningcss,
+          targets: browserslistToTargets(browserslist()),
+        },
+      },
       resolve: {
         ...config.resolve,
         dedupe: ['styled-components', 'react', 'react-dom'],

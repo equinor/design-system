@@ -1,24 +1,28 @@
 @layer eds-components {
   .eds-field {
-    /* Layout - use CSS variable for configurable width */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--eds-generic-gap-vertical);
-    width: var(--eds-field-width, 100%);
     /* Private color variables */
     --_eds-field-label-color: var(--eds-color-text-strong);
     --_eds-field-description-color: var(--eds-color-text-subtle);
     --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
     --_eds-field-helper-color: var(--eds-color-text-subtle);
+
+    /* Layout - use CSS variable for configurable width */
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-generic-gap-vertical);
+    align-items: flex-start;
+
+    width: var(--eds-field-width, 100%);
+
+    /* Shared font-family — inherits to all text children */
+    font-family: var(--eds-typography-ui-body-font-family);
   }
 
   /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
   .eds-field:is([data-position='start'], [data-position='end']) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-flow: row wrap;
     gap: var(--eds-generic-gap-horizontal);
+    align-items: center;
   }
 
   .eds-field[data-position='end'] {
@@ -31,17 +35,23 @@
     flex-basis: 100%;
   }
 
+  /* Label uses data-baseline="center" for text-box trim + grid-snap padding —
+     see [data-baseline='center'] rule in eds-tokens/src/css/typography.css */
   .eds-field__label {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
+    display: block;
+
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
     color: var(--_eds-field-label-color);
   }
 
   .eds-field__indicator {
     margin-inline-start: var(--eds-selectable-space-horizontal);
+
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
     color: var(--_eds-field-indicator-color);
-    font-size: var(--eds-typography-font-size);
     vertical-align: middle;
   }
 
@@ -50,16 +60,22 @@
     color: var(--_eds-field-description-color);
   }
 
-  /* HelperMessage styling */
   .eds-field__helper-message {
     margin: 0;
+    /* Tighten spacing above helper-message to 3xs (overrides parent gap).
+       Longhand follows shorthand to win the cascade. */
+    margin-block-start: calc(
+      var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical)
+    );
     color: var(--_eds-field-helper-color);
   }
 
-  /* Reduce gap before helper message to 3xs spacing.
-     Applied to the preceding sibling (not helper message) to avoid [data-font-family] margin: 0 override. */
-  .eds-field > :has(+ .eds-field__helper-message) {
-    margin-block-end: calc(var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical));
+  /* data-baseline="grid" on these elements handles text-box trim via
+     [data-baseline='grid'] in eds-tokens/src/css/typography.css */
+  .eds-field__description,
+  .eds-field__helper-message {
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
   }
 
   /* Only helper message changes color when disabled */

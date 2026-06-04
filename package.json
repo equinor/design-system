@@ -70,7 +70,7 @@
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-runtime": "^7.29.0",
-    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-env": "^7.29.5",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/runtime": "^7.29.2",
@@ -85,17 +85,17 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.0",
-    "eslint-plugin-storybook": "^10.3.3",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-storybook": "^10.4.0",
     "eslint-plugin-testing-library": "^7.16.2",
-    "globals": "^16.2.0",
-    "typescript-eslint": "^8.58.0",
+    "globals": "^17.6.0",
+    "typescript-eslint": "^8.59.2",
     "jest-axe": "^10.0.0",
-    "stylelint": "^17.6.0",
+    "stylelint": "^17.11.0",
     "stylelint-config-clean-order": "^8.0.1",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
-    "prettier": "3.8.1",
+    "prettier": "3.8.3",
     "typescript": "^5.9.3"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",
@@ -109,9 +109,12 @@
       "picomatch@^2": ">=2.3.2",
       "brace-expansion@^2": ">=2.0.3",
       "@isaacs/brace-expansion": ">=5.0.1",
+      "json5@^1": ">=1.0.3",
       "diff": ">=4.0.4",
       "js-yaml": ">=4.1.1",
-      "lodash": ">=4.18.0"
+      "gray-matter>js-yaml": "^3.14.1",
+      "lodash": ">=4.18.0",
+      "webpackbar": "^7.0.0"
     }
   }
 }
