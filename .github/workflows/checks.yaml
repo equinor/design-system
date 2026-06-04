@@ -158,6 +158,18 @@ jobs:
         run: pnpm run types
 
   # ─── Lint-only for non-code changes (workflows, docs) ───────────
+  #
+  # Trade-off (decided 2026-06): this job runs a full `pnpm run build`
+  # before linting because `lint:all` is type-aware and needs every
+  # workspace package's built `.d.ts` to resolve cross-package imports.
+  # So a docs/workflow-only PR still pays for a full build here.
+  #
+  # We deliberately did NOT add granular per-package affected detection
+  # (e.g. pnpm `--filter "...[origin/main]"` or Turborepo) because CI is
+  # currently fast enough and the existing binary `changes.code` gate +
+  # cross-job `-built` cache already cover the common cases. Revisit only
+  # if build time becomes a real bottleneck — Turborepo (input-hash
+  # caching + affected filtering) is the preferred next step if so.
   lint-only:
     name: Lint (non-code changes)
     runs-on: ubuntu-latest
