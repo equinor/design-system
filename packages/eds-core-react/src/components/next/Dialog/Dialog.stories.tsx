@@ -4,7 +4,7 @@ import { Dialog } from '.'
 import { Button } from '../Button'
 
 const meta: Meta<typeof Dialog> = {
-  title: 'EDS 2.0 (beta)/Surface/Dialog',
+  title: 'EDS 2.0 (beta)/Feedback/Dialog',
   component: Dialog,
   tags: ['beta'],
   parameters: {
@@ -22,9 +22,9 @@ import { Dialog, Button } from '@equinor/eds-core-react/next'
 
 const [open, setOpen] = useState(false)
 
-<Dialog open={open} onOpenChange={setOpen} aria-labelledby="dialog-title">
+<Dialog open={open} onOpenChange={setOpen}>
   <Dialog.Header onClose={() => setOpen(false)}>
-    <Dialog.Title id="dialog-title">Confirm action</Dialog.Title>
+    <Dialog.Title>Confirm action</Dialog.Title>
   </Dialog.Header>
   <Dialog.Content>Are you sure you want to continue?</Dialog.Content>
   <Dialog.Actions>
@@ -46,9 +46,9 @@ export const Introduction: StoryFn = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <Dialog open={open} onOpenChange={setOpen} aria-labelledby="dialog-title">
+      <Dialog open={open} onOpenChange={setOpen}>
         <Dialog.Header onClose={() => setOpen(false)}>
-          <Dialog.Title id="dialog-title">Dialog title</Dialog.Title>
+          <Dialog.Title>Dialog title</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
           This is a short description of the action the user is about to take.
@@ -69,15 +69,9 @@ export const WithoutCloseButton: StoryFn = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <Dialog
-        open={open}
-        onOpenChange={setOpen}
-        aria-labelledby="dialog-title-no-close"
-      >
+      <Dialog open={open} onOpenChange={setOpen}>
         <Dialog.Header>
-          <Dialog.Title id="dialog-title-no-close">
-            Decision required
-          </Dialog.Title>
+          <Dialog.Title>Decision required</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
           The user must pick one of the actions below — no close affordance in
@@ -94,25 +88,70 @@ export const WithoutCloseButton: StoryFn = () => {
   )
 }
 
+export const DangerAction: StoryFn = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button tone="danger" onClick={() => setOpen(true)}>
+        Delete project
+      </Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Header onClose={() => setOpen(false)}>
+          <Dialog.Title>Delete this project?</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Content>
+          This permanently removes the project and all of its data. This action
+          cannot be undone.
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button tone="danger" onClick={() => setOpen(false)}>
+            Delete
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+
+export const SingleAction: StoryFn = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Show details</Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Header onClose={() => setOpen(false)}>
+          <Dialog.Title>You are now offline</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Content>
+          Changes will sync automatically when your connection is restored.
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onClick={() => setOpen(false)}>Got it</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+
 export const WithoutScrim: StoryFn = () => {
   const [open, setOpen] = useState(false)
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <Dialog
-        open={open}
-        onOpenChange={setOpen}
-        scrim={false}
-        aria-labelledby="dialog-title-no-scrim"
-      >
+      <Dialog open={open} onOpenChange={setOpen} scrim={false}>
         <Dialog.Header onClose={() => setOpen(false)}>
-          <Dialog.Title id="dialog-title-no-scrim">Dialog title</Dialog.Title>
+          <Dialog.Title>Dialog title</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
-          With <code>scrim={'{false}'}</code> the backdrop stays transparent —
-          useful when the dialog is part of a flow that already dims the
-          background, or when a standalone Scrim component is composed
-          externally.
+          <p style={{ margin: 0 }}>
+            With <code>scrim={'{false}'}</code> the backdrop is fully
+            transparent — useful when the dialog is part of a flow that already
+            dims the background, or when a standalone Scrim component is
+            composed externally.
+          </p>
         </Dialog.Content>
         <Dialog.Actions>
           <Button variant="secondary" onClick={() => setOpen(false)}>
@@ -133,13 +172,10 @@ export const SpecificWidth: StoryFn = () => {
       <Dialog
         open={open}
         onOpenChange={setOpen}
-        aria-labelledby="dialog-title-specific-width"
         style={{ inlineSize: '32rem' }}
       >
         <Dialog.Header onClose={() => setOpen(false)}>
-          <Dialog.Title id="dialog-title-specific-width">
-            Dialog with a specific width
-          </Dialog.Title>
+          <Dialog.Title>Dialog with a specific width</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
           <p style={{ margin: 0 }}>

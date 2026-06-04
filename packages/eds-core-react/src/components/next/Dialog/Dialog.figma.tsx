@@ -14,9 +14,9 @@ figma.connect(
       showSecondary: figma.boolean('Show Secondary Button'),
     },
     example: ({ title, content, hasClose, showPrimary, showSecondary }) => (
-      <Dialog open onOpenChange={() => {}} aria-labelledby="dialog-title">
+      <Dialog open onOpenChange={() => {}}>
         <Dialog.Header onClose={hasClose ? () => {} : undefined}>
-          <Dialog.Title id="dialog-title">{title}</Dialog.Title>
+          <Dialog.Title>{title}</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>{content}</Dialog.Content>
         <Dialog.Actions>

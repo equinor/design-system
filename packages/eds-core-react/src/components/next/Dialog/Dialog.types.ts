@@ -28,8 +28,19 @@ export type DialogHeaderProps = {
   children?: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
+/**
+ * The dialog title. Defaults to an `<h2>`. If `id` is omitted, an id is
+ * auto-generated and wired up to the parent `Dialog`'s `aria-labelledby`,
+ * so the dialog is correctly labelled without consumer boilerplate.
+ */
 export type DialogTitleProps = HTMLAttributes<HTMLHeadingElement>
 
+/**
+ * The dialog's main content region. Children are laid out in a vertical
+ * stack with consistent spacing — wrap mixed inline/block content in a
+ * block-level element (e.g. `<p>`) to avoid each inline becoming its own row.
+ */
 export type DialogContentProps = HTMLAttributes<HTMLDivElement>
 
+/** The dialog's action row, right-aligned, intended for Button children. */
 export type DialogActionsProps = HTMLAttributes<HTMLDivElement>

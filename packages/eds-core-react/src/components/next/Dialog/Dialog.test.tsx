@@ -23,9 +23,9 @@ beforeAll(() => {
 
 const renderOpen = (onOpenChange: (open: boolean) => void = () => {}) =>
   render(
-    <Dialog open onOpenChange={onOpenChange} aria-labelledby="t">
+    <Dialog open onOpenChange={onOpenChange}>
       <Dialog.Header onClose={() => onOpenChange(false)}>
-        <Dialog.Title id="t">Title</Dialog.Title>
+        <Dialog.Title>Title</Dialog.Title>
       </Dialog.Header>
       <Dialog.Content>Content</Dialog.Content>
       <Dialog.Actions>
@@ -60,6 +60,28 @@ describe('Dialog (next)', () => {
       expect(ref.current).toBeInstanceOf(HTMLDialogElement)
     })
 
+    it('renders Dialog.Actions children inside an action row', () => {
+      render(
+        <Dialog open aria-label="d">
+          <Dialog.Actions>
+            <Button>Confirm</Button>
+          </Dialog.Actions>
+        </Dialog>,
+      )
+      expect(
+        screen.getByRole('button', { name: 'Confirm' }),
+      ).toBeInTheDocument()
+    })
+
+    it('applies an inline width override via style', () => {
+      render(
+        <Dialog open style={{ inlineSize: '32rem' }} aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog')).toHaveStyle({ inlineSize: '32rem' })
+    })
+
     it('sets data-scrim by default', () => {
       renderOpen()
       expect(screen.getByRole('dialog')).toHaveAttribute('data-scrim')
@@ -89,6 +111,15 @@ describe('Dialog (next)', () => {
   })
 
   describe('Open state', () => {
+    it('opens via showModal when initial open is true', () => {
+      render(
+        <Dialog open aria-label="d">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog')).toHaveAttribute('open')
+    })
+
     it('opens when the open prop becomes true', () => {
       const { rerender } = render(
         <Dialog open={false} aria-label="d">
@@ -189,6 +220,39 @@ describe('Dialog (next)', () => {
       expect(
         screen.getByRole('heading', { level: 2, name: 'Title' }),
       ).toBeInTheDocument()
+    })
+
+    it('auto-wires aria-labelledby to Dialog.Title', () => {
+      renderOpen()
+      const dialog = screen.getByRole('dialog')
+      const heading = screen.getByRole('heading', { name: 'Title' })
+      expect(dialog).toHaveAttribute('aria-labelledby', heading.id)
+      expect(heading.id).toBeTruthy()
+    })
+
+    it('respects an explicit aria-labelledby on Dialog', () => {
+      render(
+        <Dialog open aria-labelledby="explicit-id">
+          <Dialog.Header>
+            <Dialog.Title id="explicit-id">Title</Dialog.Title>
+          </Dialog.Header>
+        </Dialog>,
+      )
+      expect(screen.getByRole('dialog')).toHaveAttribute(
+        'aria-labelledby',
+        'explicit-id',
+      )
+    })
+
+    it('uses aria-label without setting aria-labelledby', () => {
+      render(
+        <Dialog open aria-label="Confirmation">
+          <Dialog.Content>x</Dialog.Content>
+        </Dialog>,
+      )
+      const dialog = screen.getByRole('dialog')
+      expect(dialog).toHaveAttribute('aria-label', 'Confirmation')
+      expect(dialog).not.toHaveAttribute('aria-labelledby')
     })
   })
 })

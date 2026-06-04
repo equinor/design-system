@@ -1,4 +1,12 @@
-import { forwardRef, useEffect, useRef, type MouseEvent } from 'react'
+import {
+  createContext,
+  forwardRef,
+  useContext,
+  useEffect,
+  useId,
+  useRef,
+  type MouseEvent,
+} from 'react'
 import { close as closeIcon } from '@equinor/eds-icons'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
@@ -10,11 +18,23 @@ import type {
   DialogTitleProps,
 } from './Dialog.types'
 
+const DialogContext = createContext<{ titleId: string } | null>(null)
+
 const DialogRoot = forwardRef<HTMLDialogElement, DialogProps>(function Dialog(
-  { open, onOpenChange, scrim = true, className, children, ...rest },
+  {
+    open,
+    onOpenChange,
+    scrim = true,
+    className,
+    children,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-label': ariaLabel,
+    ...rest
+  },
   ref,
 ) {
   const dialogRef = useRef<HTMLDialogElement | null>(null)
+  const titleId = useId()
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -38,22 +58,33 @@ const DialogRoot = forwardRef<HTMLDialogElement, DialogProps>(function Dialog(
     if (event.target === dialogRef.current) onOpenChange?.(false)
   }
 
+  // Default aria-labelledby to the auto-generated title id so Dialog.Title is
+  // wired up without consumer boilerplate. Consumer can override with an
+  // explicit aria-labelledby or aria-label.
+  const resolvedAriaLabelledBy =
+    ariaLabelledBy ?? (ariaLabel ? undefined : titleId)
+
   return (
-    // Native <dialog> doesn't expose ::backdrop as a separately clickable
-    // element; a click whose target is the dialog itself comes from the
-    // backdrop. Keyboard dismissal (Escape) is handled by the native dialog
-    // and emits the `close` event we already wire up — no extra key handler.
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
-    <dialog
-      ref={setRef}
-      className={['eds-dialog', className].filter(Boolean).join(' ')}
-      data-scrim={scrim ? '' : undefined}
-      onClose={handleClose}
-      onClick={handleClick}
-      {...rest}
-    >
-      {children}
-    </dialog>
+    <DialogContext.Provider value={{ titleId }}>
+      {/* Native <dialog> doesn't expose ::backdrop as a separately clickable
+          element; a click whose target is the dialog itself comes from the
+          backdrop. Keyboard dismissal (Escape) is handled by the native
+          dialog and emits the `close` event we already wire up — no extra
+          key handler. */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
+      <dialog
+        ref={setRef}
+        className={['eds-dialog', className].filter(Boolean).join(' ')}
+        data-scrim={scrim || undefined}
+        aria-labelledby={resolvedAriaLabelledBy}
+        aria-label={ariaLabel}
+        onClose={handleClose}
+        onClick={handleClick}
+        {...rest}
+      >
+        {children}
+      </dialog>
+    </DialogContext.Provider>
   )
 })
 DialogRoot.displayName = 'Dialog'
@@ -87,10 +118,12 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
 DialogHeader.displayName = 'Dialog.Header'
 
 const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  function DialogTitle({ className, children, ...rest }, ref) {
+  function DialogTitle({ id, className, children, ...rest }, ref) {
+    const ctx = useContext(DialogContext)
     return (
       <h2
         ref={ref}
+        id={id ?? ctx?.titleId}
         className={['title', className].filter(Boolean).join(' ')}
         {...rest}
       >

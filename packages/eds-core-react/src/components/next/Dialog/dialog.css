@@ -18,6 +18,15 @@
     background: var(--eds-color-bg-floating);
     box-shadow: var(--eds-elevation-low);
 
+    /* Chrome's UA stylesheet sets `::backdrop` to `rgba(0 0 0 / 0.1)` by
+       default — explicitly force transparency so `scrim={false}` truly hides
+       the backdrop, letting consumers compose their own (e.g. a standalone
+       Scrim component) without a faint browser-default overlay leaking
+       through. */
+    &::backdrop {
+      background: transparent;
+    }
+
     /* TODO: replace the rgba placeholder with `--eds-color-scrim` (or
        equivalent) once the scrim is specified in Figma. The longer-term plan
        is a standalone `Scrim` component; until then, the dialog renders its
