@@ -342,12 +342,16 @@ export const ObjectOptions: StoryFn = () => {
     { id: 'w4', name: 'Johan Sverdrup' },
     { id: 'w5', name: 'Ekofisk' },
   ]
+  const [value, setValue] = useState('w1')
   return (
     <Select
       label="Well"
       options={wells}
       getOptionLabel={(o) => o.name}
       getOptionValue={(o) => o.id}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      helperMessage={`Form value: "${value}"`}
     />
   )
 }
@@ -357,7 +361,7 @@ ObjectOptions.parameters = {
   docs: {
     description: {
       story:
-        'When options are objects, provide `getOptionLabel` to specify which field to display and `getOptionValue` to specify the submitted form value. The native `<select>` uses the value returned by `getOptionValue` as the `<option value>` attribute.',
+        'When options are objects, provide `getOptionLabel` to specify which field to display and `getOptionValue` to specify the submitted form value. Pick an option — the helper message shows the id that would be submitted, while the trigger shows the human-readable name.',
     },
   },
 }
