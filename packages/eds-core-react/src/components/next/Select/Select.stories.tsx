@@ -307,7 +307,7 @@ WithPlaceholder.parameters = {
   docs: {
     description: {
       story:
-        'A `placeholder` renders as a disabled `<option value="">` at the top of the list and is pre-selected when no `value` or `defaultValue` is provided. Once the user picks a real option they cannot return to the placeholder — this is a native constraint of `<select>`.',
+        'A `placeholder` renders as a hidden, disabled `<option value="">` and is pre-selected when no `value` or `defaultValue` is provided. It does not appear in the open dropdown — its only role is to show hint text when nothing is selected. Once the user picks a real option they cannot return to the placeholder — this is a native constraint of `<select>`.',
     },
   },
 }

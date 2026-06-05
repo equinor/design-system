@@ -55,17 +55,19 @@ describe('Select (next)', () => {
       expect(screen.getByRole('combobox')).toHaveValue('Iron')
     })
 
-    it('renders a disabled placeholder option when placeholder is provided', () => {
-      render(
+    it('renders a hidden disabled placeholder option when placeholder is provided', () => {
+      const { container } = render(
         <Select
           label="Element"
           options={elements}
           placeholder="Select an element…"
         />,
       )
-      expect(
-        screen.getByRole('option', { name: 'Select an element…' }),
-      ).toBeDisabled()
+      const option = container.querySelector(
+        'option[value=""]',
+      ) as HTMLOptionElement
+      expect(option).toBeDisabled()
+      expect(option).not.toBeVisible()
     })
 
     it('shows placeholder as selected value when no defaultValue is provided', () => {

@@ -56,9 +56,10 @@ function SelectInner<T = string>(
           </Field.Description>
         )}
         {/*
-         * <select> has no native `readonly` attribute — we disable it to prevent
-         * interaction. A hidden input preserves the submitted value, which a
-         * disabled select would otherwise exclude from FormData.
+         * <select> has no native `readonly` attribute. Mouse interaction is blocked
+         * via CSS pointer-events:none; keyboard changes are suppressed via onKeyDown.
+         * A hidden input carries the submitted value since the select has no name
+         * when readOnly (preventing it from contributing to FormData itself).
          */}
         {readOnly && !disabled && name && (
           <input
@@ -67,9 +68,6 @@ function SelectInner<T = string>(
             value={String(selectProps.value ?? selectProps.defaultValue ?? '')}
           />
         )}
-        {/* aria-readonly is intentionally absent: setting it on a disabled element
-            is contradictory — screen readers would announce both states at once.
-            The visual read-only distinction is carried by data-readonly on the container. */}
         <div className="eds-select-wrapper">
           {displayErrorIcon && (
             <span aria-hidden="true" className="error-icon" data-font-size="xs">
@@ -110,7 +108,7 @@ function SelectInner<T = string>(
             {...selectProps}
           >
             {placeholder && (
-              <option value="" disabled>
+              <option value="" disabled hidden>
                 {placeholder}
               </option>
             )}
