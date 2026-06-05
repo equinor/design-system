@@ -4,6 +4,8 @@ import type { SelectOptionProps } from '../utils/SelectOption.types'
 export type SelectProps<T = string> = {
   /** Label for the field */
   label?: ReactNode
+  /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
+  indicator?: string
   /** Descriptive text providing additional context */
   description?: ReactNode
   /** Helper or validation message shown below the select */

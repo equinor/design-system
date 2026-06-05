@@ -3,8 +3,55 @@
     inline-size: 100%;
   }
 
+  .eds-select-wrapper {
+    --_chevron-color: var(--eds-color-text-accent-subtle);
+
+    position: relative;
+    inline-size: 100%;
+  }
+
+  .chevron {
+    pointer-events: none;
+
+    position: absolute;
+    top: 50%;
+    right: var(--eds-selectable-space-horizontal);
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+
+    color: var(--_chevron-color);
+  }
+
+  .eds-select-container[data-disabled] .eds-select-wrapper {
+    --_chevron-color: var(--eds-color-text-disabled);
+  }
+
+  .eds-select-container[data-readonly] .eds-select-wrapper {
+    --_chevron-color: var(--eds-color-text-disabled);
+  }
+
+  /* Neutral in error state — not accent teal */
+  .eds-select-container[data-invalid] .eds-select-wrapper {
+    --_chevron-color: var(--eds-color-text-neutral-subtle);
+  }
+
+  .error-icon {
+    pointer-events: none;
+
+    position: absolute;
+    top: 50%;
+    left: var(--eds-selectable-space-horizontal);
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+
+    color: var(--eds-color-text-subtle);
+  }
+
   .eds-select {
-    /* Pseudo-private variables — override these in states, never the property directly */
     --_bg: var(--eds-color-bg-input);
     --_border-color: var(--eds-color-border-subtle);
     --_radius: var(--eds-spacing-border-radius-rounded, 4px);
@@ -16,11 +63,10 @@
 
     box-sizing: border-box;
     inline-size: 100%;
-    min-block-size: 36px;
     padding-block: var(--eds-selectable-space-vertical);
     padding-inline: var(--eds-selectable-space-horizontal);
 
-    /* Reserve space for the chevron in the fallback (SVG background) */
+    /* Reserve space for the absolutely-positioned .chevron */
     padding-inline-end: calc(var(--eds-selectable-space-horizontal) + 1.5rem);
     border: none;
     border-radius: var(--_radius);
@@ -35,18 +81,12 @@
 
     appearance: none;
     background-color: var(--_bg);
-
-    /* Fallback chevron — teal accent colour from Figma (--eds-color-text-accent-subtle = #1F6369) */
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%231F6369' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right var(--eds-selectable-space-horizontal) center;
-    background-size: 1.5rem;
     outline: var(--eds-sizing-stroke-thin) solid var(--_border-color);
     outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
 
     transition:
-      outline-color 150ms ease-in-out,
-      box-shadow 150ms ease-in-out;
+      outline-color var(--_transition-duration) ease-in-out,
+      box-shadow var(--_transition-duration) ease-in-out;
 
     &:hover {
       --_border-color: var(--eds-color-border-strong);
@@ -67,46 +107,56 @@
       cursor: not-allowed;
       color: var(--eds-color-text-disabled);
       opacity: 1;
+    }
 
-      /* Dimmed chevron — #aeaeae from Figma disabled state */
-      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23aeaeae' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+    /* Placeholder option selected — muted, like an input placeholder */
+    &:not(:disabled):has(option[value='']:checked) {
+      color: var(--eds-color-text-subtle);
     }
   }
 
-  /*
-   * Read-only: same background as the default filled state (bg-input), subtle
-   * border using the bg-disabled token (Figma: #e1e1e1), no pointer events.
-   */
   .eds-select-container[data-readonly] .eds-select {
     --_bg: var(--eds-color-bg-input);
     --_border-color: var(--eds-color-bg-disabled);
 
     pointer-events: none;
+    cursor: default;
 
-    /* Dimmed chevron */
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23aeaeae' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+    /* Override the disabled text/cursor — read-only should look normal */
+    color: var(--eds-color-text-strong);
+
+    -webkit-text-fill-color: var(--eds-color-text-strong);
   }
 
-  /*
-   * Invalid/error state.
-   * The container receives data-color-appearance="danger" from JSX, which remaps all
-   * dynamic tokens (--eds-color-bg-canvas → #ffecea, --eds-color-border-subtle → #ffbcba).
-   * We only need to switch which token drives the background.
-   */
-  .eds-select-container[data-invalid] .eds-select {
-    --_bg: var(--eds-color-bg-canvas);
-    --_border-color: var(--eds-color-border-subtle);
+  /* Pin Field label, description, and helper message to neutral colors.
+     Must target .eds-field directly — field.css sets these vars on .eds-field,
+     so only a higher-specificity rule on that element wins. */
+  .eds-select-container[data-invalid] .eds-field {
+    --_eds-field-label-color: var(--eds-color-text-neutral-strong);
+    --_eds-field-description-color: var(--eds-color-text-neutral-subtle);
+    --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
+  }
 
-    /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23585858' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+  /* Static danger tokens — necessary because .eds-select carries
+     data-color-appearance="neutral" to isolate the picker surface */
+  .eds-select-container[data-invalid] .eds-select {
+    --_bg: var(--eds-color-bg-danger-canvas);
+    --_border-color: var(--eds-color-border-danger-subtle);
 
     &:focus-visible {
       --_border-color: var(--eds-color-border-focus);
     }
   }
 
+  /* Make room for the error icon on the left (not shown when disabled) */
+  .eds-select-container[data-invalid]:not([data-disabled]) .eds-select {
+    padding-inline-start: calc(
+      var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-xs) +
+        var(--eds-spacing-icon-xs-gap-horizontal)
+    );
+  }
+
   [data-density='comfortable'] .eds-select {
-    min-block-size: unset;
     padding-block: var(--eds-spacing-proportions-xs-vertical);
   }
 
@@ -117,45 +167,40 @@
   }
 }
 
-/*
- * Progressive enhancement — customizable <select> (Chrome 135+, ~70% global coverage May 2026).
- * Covers both the trigger button appearance AND the picker dropdown surface + option items.
- * Kept in one @supports block so Select owns all its own styles end-to-end.
- */
+/* Progressive enhancement — appearance: base-select (Chrome 135+).
+   Styles the trigger, picker surface, and option items. */
 @supports (appearance: base-select) {
   @layer eds-components {
-    /* Opt in to custom styling */
     .eds-select,
     .eds-select::picker(select) {
       appearance: base-select;
     }
 
-    /* ── Trigger button ────────────────────────────────────────────────────── */
+    /* ── Trigger ───────────────────────────────────────────────────────────── */
+
+    /* ::picker-icon takes over from the DOM .chevron in base-select mode */
+    .chevron {
+      display: none;
+    }
 
     .eds-select {
-      /* In base-select mode the select renders its own button trigger — make it flex
-         so the selected value and picker-icon sit side by side instead of stacking */
+      /* base-select renders a flex button trigger */
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       padding-inline-end: var(--eds-selectable-space-horizontal);
-
-      /* Drop the SVG arrow — ::picker-icon takes over */
-      background-image: none;
     }
 
-    /* Remove bottom corners when open so the trigger connects flush to the picker */
+    /* Flush connection between open trigger and picker */
     .eds-select:open {
       border-end-start-radius: 0;
       border-end-end-radius: 0;
     }
 
     /*
-     * Chevron icon — suppress the native browser glyph (which fills the full box
-     * and looks too tall) and replace it with our compact SVG via CSS mask.
-     * This makes base-select mode pixel-identical to the fallback SVG approach.
-     * Color is driven by background-color (not color) so CSS custom properties work.
+     * Suppress the native UA glyph (too tall) and replace with a mask-image
+     * chevron. Color is driven by background-color so CSS variables work
+     * (color property has no effect on masked pseudo-elements).
      */
     .eds-select::picker-icon {
       flex-shrink: 0;
@@ -164,13 +209,10 @@
       width: 1.5rem;
       height: 1.5rem;
 
-      /* Suppress the native UA glyph */
       color: transparent;
 
-      /* Accent teal chevron — same token as the fallback SVG */
       background-color: var(--eds-color-text-accent-subtle);
 
-      /* Same compact path as the fallback SVG: M7 9.5l5 5 5-5H7z in 24×24 */
       mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
       mask-repeat: no-repeat;
       mask-position: center;
@@ -179,14 +221,13 @@
       /* Inherits --_transition-duration from .eds-select; 0s when reduced-motion */
       transition:
         rotate var(--_transition-duration) ease,
-        background-color 150ms ease-in-out;
+        background-color var(--_transition-duration) ease-in-out;
     }
 
     .eds-select:open::picker-icon {
       rotate: 180deg;
     }
 
-    /* State overrides — background-color drives the visible chevron colour */
     .eds-select:disabled::picker-icon {
       background-color: var(--eds-color-text-disabled);
     }
@@ -195,18 +236,16 @@
       background-color: var(--eds-color-text-disabled);
     }
 
-    /* Chevron is neutral (Auto Neutral in Figma) in error state — not accent teal */
+    /* Neutral in error state — not accent teal */
     .eds-select-container[data-invalid] .eds-select::picker-icon {
       background-color: var(--eds-color-text-neutral-subtle);
     }
 
-    /* ── Picker dropdown surface ───────────────────────────────────────────── */
+    /* ── Picker surface ────────────────────────────────────────────────────── */
 
     /*
-     * The native <select> picker cannot receive CSS classes, so it is styled
-     * here with pseudo-element selectors.  --_radius is inherited from the
-     * originating .eds-select element (CSS custom properties cross the
-     * ::picker boundary via normal inheritance).
+     * ::picker(select) cannot receive classes — styled via pseudo-element.
+     * --_radius crosses the ::picker boundary via CSS custom property inheritance.
      */
     .eds-select::picker(select) {
       scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
@@ -221,15 +260,13 @@
       margin: 0;
       margin-block-start: -1px;
       padding: 0;
-
-      /* No top corners — connects flush to the open trigger */
       border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
       border-radius: 0 0 var(--_radius) var(--_radius);
 
       background: var(--eds-color-bg-floating);
     }
 
-    /* ── Option items ──────────────────────────────────────────────────────── */
+    /* ── Options ───────────────────────────────────────────────────────────── */
 
     .eds-select option {
       --_bg: transparent;
@@ -271,15 +308,12 @@
     }
 
     /*
-     * Checkmark indicator — trailing position (right side), Figma spec.
-     * ::checkmark is a generated pseudo-element that only renders for :checked
-     * options, so no space is reserved on unselected items.
-     * color inherits from the option's --eds-color-text-strong context.
+     * ::checkmark only renders on :checked options — no space reserved on others.
+     * Trailing position (right side) per Figma spec.
      */
     .eds-select option::checkmark {
       order: 1;
 
-      /* Match Selectable/Icon size (20px) */
       width: 1.25rem;
       height: 1.25rem;
       margin-inline-start: auto;

@@ -55,19 +55,28 @@ describe('Select (next)', () => {
       expect(screen.getByRole('combobox')).toHaveValue('Iron')
     })
 
-    it('renders a disabled hidden placeholder option when placeholder is provided', () => {
-      const { container } = render(
+    it('renders a disabled placeholder option when placeholder is provided', () => {
+      render(
         <Select
           label="Element"
           options={elements}
           placeholder="Select an element…"
         />,
       )
-      // <option hidden> is excluded from the a11y tree — query the DOM directly
-      const placeholder = container.querySelector('option[value=""]')
-      expect(placeholder).toBeInTheDocument()
-      expect(placeholder).toHaveTextContent('Select an element…')
-      expect(placeholder).toBeDisabled()
+      expect(
+        screen.getByRole('option', { name: 'Select an element…' }),
+      ).toBeDisabled()
+    })
+
+    it('shows placeholder as selected value when no defaultValue is provided', () => {
+      render(
+        <Select
+          label="Element"
+          options={elements}
+          placeholder="Select an element…"
+        />,
+      )
+      expect(screen.getByRole('combobox')).toHaveValue('')
     })
 
     it('disables specific options via optionDisabled', () => {
@@ -89,14 +98,17 @@ describe('Select (next)', () => {
       expect(screen.getByRole('combobox')).toBeDisabled()
     })
 
-    it('disables the select interaction when readOnly', () => {
+    it('does not disable the select when readOnly (keeps it in tab order / readable by screen readers)', () => {
       render(<Select label="Element" options={elements} readOnly />)
-      expect(screen.getByRole('combobox')).toBeDisabled()
+      expect(screen.getByRole('combobox')).not.toBeDisabled()
     })
 
-    it('does not set aria-readonly (contradicts disabled; data-readonly on container carries the distinction)', () => {
+    it('sets aria-readonly when readOnly', () => {
       render(<Select label="Element" options={elements} readOnly />)
-      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-readonly')
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'aria-readonly',
+        'true',
+      )
     })
 
     it('marks the select as invalid', () => {
@@ -120,49 +132,51 @@ describe('Select (next)', () => {
   })
 
   describe('Form', () => {
-    it('renders a hidden input to preserve the value when readOnly', () => {
-      const { container } = render(
-        <Select
-          label="Element"
-          options={elements}
-          name="element"
-          defaultValue="Copper"
-          readOnly
-        />,
+    it('includes the value in FormData when readOnly', () => {
+      render(
+        <form aria-label="test">
+          <Select
+            label="Element"
+            options={elements}
+            name="element"
+            defaultValue="Copper"
+            readOnly
+          />
+        </form>,
       )
-      const hidden = container.querySelector('input[type="hidden"]')
-      expect(hidden).toBeInTheDocument()
-      expect(hidden).toHaveAttribute('name', 'element')
-      expect(hidden).toHaveAttribute('value', 'Copper')
+      const form = screen.getByRole('form', { name: 'test' }) as HTMLFormElement
+      expect(new FormData(form).get('element')).toBe('Copper')
     })
 
-    it('does not render a hidden input when disabled (value intentionally excluded)', () => {
-      const { container } = render(
-        <Select
-          label="Element"
-          options={elements}
-          name="element"
-          defaultValue="Copper"
-          disabled
-        />,
+    it('excludes the value from FormData when disabled', () => {
+      render(
+        <form aria-label="test">
+          <Select
+            label="Element"
+            options={elements}
+            name="element"
+            defaultValue="Copper"
+            disabled
+          />
+        </form>,
       )
-      expect(
-        container.querySelector('input[type="hidden"]'),
-      ).not.toBeInTheDocument()
+      const form = screen.getByRole('form', { name: 'test' }) as HTMLFormElement
+      expect(new FormData(form).get('element')).toBeNull()
     })
 
-    it('does not render a hidden input when readOnly but no name is set', () => {
-      const { container } = render(
-        <Select
-          label="Element"
-          options={elements}
-          defaultValue="Copper"
-          readOnly
-        />,
+    it('excludes the value from FormData when readOnly but no name is set', () => {
+      render(
+        <form aria-label="test">
+          <Select
+            label="Element"
+            options={elements}
+            defaultValue="Copper"
+            readOnly
+          />
+        </form>,
       )
-      expect(
-        container.querySelector('input[type="hidden"]'),
-      ).not.toBeInTheDocument()
+      const form = screen.getByRole('form', { name: 'test' }) as HTMLFormElement
+      expect(new FormData(form).get('element')).toBeNull()
     })
   })
 

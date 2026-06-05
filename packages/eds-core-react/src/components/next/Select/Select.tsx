@@ -1,6 +1,8 @@
 import { forwardRef } from 'react'
+import { arrow_drop_down, error_filled } from '@equinor/eds-icons'
 import type { SelectProps } from './Select.types'
 import { Field, useFieldIds } from '../Field'
+import { Icon } from '../Icon'
 import {
   isOptionDisabled,
   resolveOptionKey,
@@ -10,6 +12,7 @@ import {
 function SelectInner<T = string>(
   {
     label,
+    indicator,
     description,
     helperMessage,
     id: providedId,
@@ -31,6 +34,7 @@ function SelectInner<T = string>(
     useFieldIds(providedId)
 
   const classes = ['eds-select', className].filter(Boolean).join(' ')
+  const displayErrorIcon = invalid && !disabled && !readOnly
 
   return (
     <div
@@ -41,7 +45,11 @@ function SelectInner<T = string>(
       data-invalid={invalid || undefined}
     >
       <Field disabled={disabled}>
-        {label && <Field.Label htmlFor={inputId}>{label}</Field.Label>}
+        {label && (
+          <Field.Label htmlFor={inputId} indicator={indicator}>
+            {label}
+          </Field.Label>
+        )}
         {description && (
           <Field.Description id={descriptionId}>
             {description}
@@ -62,37 +70,69 @@ function SelectInner<T = string>(
         {/* aria-readonly is intentionally absent: setting it on a disabled element
             is contradictory — screen readers would announce both states at once.
             The visual read-only distinction is carried by data-readonly on the container. */}
-        <select
-          ref={ref}
-          id={inputId}
-          name={name}
-          disabled={disabled || readOnly}
-          aria-invalid={invalid || undefined}
-          aria-describedby={getDescribedBy({
-            hasDescription: !!description,
-            hasHelperMessage: !!helperMessage,
-          })}
-          data-space-proportions="squared"
-          className={classes}
-          {...selectProps}
-        >
-          {placeholder && (
-            <option value="" disabled>
-              {placeholder}
-            </option>
+        <div className="eds-select-wrapper">
+          {displayErrorIcon && (
+            <span aria-hidden="true" className="error-icon" data-font-size="xs">
+              <Icon data={error_filled} />
+            </span>
           )}
-          {options.map((option) => {
-            const label = resolveOptionLabel(option, getOptionLabel)
-            const key = resolveOptionKey(option, getOptionValue, getOptionLabel)
-            const value = getOptionValue ? getOptionValue(option) : label
-            const disabled = isOptionDisabled(option, optionDisabled)
-            return (
-              <option key={key} value={value} disabled={disabled}>
-                {label}
+          <span aria-hidden="true" className="chevron">
+            <Icon data={arrow_drop_down} />
+          </span>
+          <select
+            ref={ref}
+            id={inputId}
+            name={readOnly ? undefined : name}
+            disabled={disabled || undefined}
+            aria-readonly={readOnly || undefined}
+            aria-invalid={invalid || undefined}
+            onKeyDown={
+              readOnly && !disabled
+                ? (e) => {
+                    if (!['Tab', 'Shift'].includes(e.key)) e.preventDefault()
+                  }
+                : undefined
+            }
+            aria-describedby={getDescribedBy({
+              hasDescription: !!description,
+              hasHelperMessage: !!helperMessage,
+            })}
+            data-space-proportions="squared"
+            data-color-appearance="neutral"
+            className={classes}
+            defaultValue={
+              placeholder &&
+              selectProps.value === undefined &&
+              selectProps.defaultValue === undefined
+                ? ''
+                : undefined
+            }
+            {...selectProps}
+          >
+            {placeholder && (
+              <option value="" disabled>
+                {placeholder}
               </option>
-            )
-          })}
-        </select>
+            )}
+            {options.map((option) => {
+              const optionLabel = resolveOptionLabel(option, getOptionLabel)
+              const key = resolveOptionKey(
+                option,
+                getOptionValue,
+                getOptionLabel,
+              )
+              const value = getOptionValue
+                ? getOptionValue(option)
+                : optionLabel
+              const isDisabled = isOptionDisabled(option, optionDisabled)
+              return (
+                <option key={key} value={value} disabled={isDisabled}>
+                  {optionLabel}
+                </option>
+              )
+            })}
+          </select>
+        </div>
         {helperMessage && (
           <Field.HelperMessage
             id={helperMessageId}
@@ -106,7 +146,8 @@ function SelectInner<T = string>(
   )
 }
 
+;(SelectInner as unknown as { displayName?: string }).displayName = 'Select'
+
 export const Select = forwardRef(SelectInner) as <T = string>(
   props: SelectProps<T> & { ref?: React.Ref<HTMLSelectElement> },
 ) => React.ReactElement | null
-;(Select as React.FC).displayName = 'Select'
