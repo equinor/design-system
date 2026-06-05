@@ -33,6 +33,8 @@ function SelectInner<T = string>(
   const { inputId, descriptionId, helperMessageId, getDescribedBy } =
     useFieldIds(providedId)
 
+  const { onChange: handleChange, ...restSelectProps } = selectProps
+
   const classes = ['eds-select', className].filter(Boolean).join(' ')
   const displayErrorIcon = invalid && !disabled && !readOnly
 
@@ -84,6 +86,11 @@ function SelectInner<T = string>(
             disabled={disabled || undefined}
             aria-readonly={readOnly || undefined}
             aria-invalid={invalid || undefined}
+            onChange={
+              readOnly && !disabled
+                ? (handleChange ?? (() => {}))
+                : handleChange
+            }
             onKeyDown={
               readOnly && !disabled
                 ? (e) => {
@@ -100,12 +107,12 @@ function SelectInner<T = string>(
             className={classes}
             defaultValue={
               placeholder &&
-              selectProps.value === undefined &&
-              selectProps.defaultValue === undefined
+              restSelectProps.value === undefined &&
+              restSelectProps.defaultValue === undefined
                 ? ''
                 : undefined
             }
-            {...selectProps}
+            {...restSelectProps}
           >
             {placeholder && (
               <option value="" disabled hidden>

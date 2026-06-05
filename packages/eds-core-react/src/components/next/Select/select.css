@@ -99,7 +99,9 @@
     padding-inline: var(--eds-selectable-space-horizontal);
 
     /* Reserve space for the absolutely-positioned .chevron */
-    padding-inline-end: calc(var(--eds-selectable-space-horizontal) + 1.5rem);
+    padding-inline-end: calc(
+      var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-lg)
+    );
     border: none;
     border-radius: var(--_radius);
 
@@ -186,8 +188,8 @@
         flex-shrink: 0;
         align-self: center;
 
-        width: 1.5rem;
-        height: 1.5rem;
+        width: var(--eds-sizing-icon-lg);
+        height: var(--eds-sizing-icon-lg);
 
         color: transparent;
 
