@@ -1,151 +1,124 @@
 @layer eds-components {
-  .eds-select-container {
-    inline-size: 100%;
-
-    &[data-disabled] .eds-select-wrapper,
-    &[data-readonly] .eds-select-wrapper {
-      --_chevron-color: var(--eds-color-text-disabled);
-    }
-
-    &[data-readonly] .eds-select {
-      --_border-color: var(--eds-color-bg-disabled);
-
-      pointer-events: none;
-      cursor: default;
-    }
-
-    /* Pin Field label, description, and helper message to neutral colors.
-       Must target .eds-field directly — field.css sets these vars on .eds-field,
-       so only a higher-specificity rule on that element wins. */
-    &[data-invalid] .eds-field {
-      --_eds-field-label-color: var(--eds-color-text-neutral-strong);
-      --_eds-field-description-color: var(--eds-color-text-neutral-subtle);
-      --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
-    }
-
-    /* Neutral in error state — not accent teal */
-    &[data-invalid] .eds-select-wrapper {
-      --_chevron-color: var(--eds-color-text-neutral-subtle);
-    }
-
-    /* Static danger tokens — necessary because .eds-select carries
-       data-color-appearance="neutral" to isolate the picker surface */
-    &[data-invalid] .eds-select {
-      --_bg: var(--eds-color-bg-danger-canvas);
-      --_border-color: var(--eds-color-border-danger-subtle);
-
-      &:focus-visible {
-        --_border-color: var(--eds-color-border-focus);
-      }
-    }
-
-    /* Make room for the error icon on the left (not shown when disabled) */
-    &[data-invalid]:not([data-disabled]) .eds-select {
-      padding-inline-start: calc(
-        var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-xs) +
-          var(--eds-spacing-icon-xs-gap-horizontal)
-      );
-    }
-  }
-
-  .eds-select-wrapper {
-    --_chevron-color: var(--eds-color-text-accent-subtle);
-
-    position: relative;
-    inline-size: 100%;
-  }
-
-  .chevron {
-    pointer-events: none;
-
-    position: absolute;
-    top: 50%;
-    right: var(--eds-selectable-space-horizontal);
-    transform: translateY(-50%);
-
-    display: flex;
-    align-items: center;
-
-    color: var(--_chevron-color);
-  }
-
-  .error-icon {
-    pointer-events: none;
-
-    position: absolute;
-    top: 50%;
-    left: var(--eds-selectable-space-horizontal);
-    transform: translateY(-50%);
-
-    display: flex;
-    align-items: center;
-
-    color: var(--eds-color-text-subtle);
-  }
-
   .eds-select {
-    --_bg: var(--eds-color-bg-input);
-    --_border-color: var(--eds-color-border-subtle);
     --_radius: var(--eds-spacing-border-radius-rounded, 4px);
     --_transition-duration: 200ms;
 
-    cursor: pointer;
+    position: relative;
 
-    display: block;
-
-    box-sizing: border-box;
     inline-size: 100%;
-    padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: var(--eds-selectable-space-horizontal);
-
-    /* Reserve space for the absolutely-positioned .chevron */
-    padding-inline-end: calc(
-      var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-lg)
-    );
-    border: none;
     border-radius: var(--_radius);
 
-    font-family: var(--eds-typography-ui-body-font-family);
-    font-size: var(--eds-typography-ui-body-md-font-size);
-    font-feature-settings: 'lnum', 'tnum';
-    font-weight: var(--eds-typography-font-weight, 400);
-    line-height: var(--eds-typography-ui-body-md-line-height-default);
-    color: var(--eds-color-text-strong);
-    letter-spacing: var(--eds-typography-tracking, 0);
-
-    appearance: none;
-    background-color: var(--_bg);
-    outline: var(--eds-sizing-stroke-thin) solid var(--_border-color);
+    background-color: var(--eds-color-bg-canvas);
+    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
     outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
 
     transition:
       outline-color var(--_transition-duration) ease-in-out,
       box-shadow var(--_transition-duration) ease-in-out;
 
-    &:hover {
-      --_border-color: var(--eds-color-border-strong);
+    &:has(select:hover:not(:disabled)) {
+      outline-color: var(--eds-color-border-strong);
     }
 
-    &:focus-visible {
-      --_border-color: var(--eds-color-border-focus);
-
+    &:has(select:focus-visible) {
+      outline-color: var(--eds-color-border-focus);
       box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thin) var(--_bg),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
-          var(--eds-color-border-focus);
+        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
     }
 
-    &:disabled {
-      --_border-color: transparent;
-
-      cursor: not-allowed;
-      color: var(--eds-color-text-disabled);
-      opacity: 1;
+    &:has(select:disabled) {
+      outline-color: transparent;
     }
 
-    /* Placeholder option selected — muted, like an input placeholder */
-    &:not(:disabled):has(option[value='']:checked) {
+    &:has(select[data-readonly]) {
+      outline-color: var(--eds-color-bg-disabled);
+    }
+
+    & .chevron {
+      pointer-events: none;
+
+      position: absolute;
+      top: 50%;
+      right: var(--eds-selectable-space-horizontal);
+      transform: translateY(-50%);
+
+      display: flex;
+      align-items: center;
+
       color: var(--eds-color-text-subtle);
+    }
+
+    &:has(select:disabled) .chevron,
+    &:has(select[data-readonly]) .chevron {
+      color: var(--eds-color-text-disabled);
+    }
+
+    & .error-icon {
+      pointer-events: none;
+
+      position: absolute;
+      top: 50%;
+      left: var(--eds-selectable-space-horizontal);
+      transform: translateY(-50%);
+
+      display: flex;
+      align-items: center;
+
+      color: var(--eds-color-text-subtle);
+    }
+
+    /* Make room for error icon on the left */
+    &:has(.error-icon) select {
+      padding-inline-start: calc(
+        var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-xs) +
+          var(--eds-spacing-icon-xs-gap-horizontal)
+      );
+    }
+
+    & select {
+      cursor: pointer;
+
+      display: block;
+
+      box-sizing: border-box;
+      inline-size: 100%;
+      padding-block: var(--eds-selectable-space-vertical);
+      padding-inline: var(--eds-selectable-space-horizontal);
+
+      /* Reserve space for the absolutely-positioned .chevron */
+      padding-inline-end: calc(
+        var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-lg)
+      );
+      border: none;
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      font-feature-settings: 'lnum', 'tnum';
+      font-weight: var(--eds-typography-font-weight, 400);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--eds-color-text-strong);
+      letter-spacing: var(--eds-typography-tracking, 0);
+
+      appearance: none;
+      background-color: transparent;
+      outline: none;
+
+      &:disabled {
+        cursor: not-allowed;
+        color: var(--eds-color-text-disabled);
+        opacity: 1;
+      }
+
+      &[data-readonly] {
+        pointer-events: none;
+        cursor: default;
+      }
+
+      /* Placeholder option selected — muted, like an input placeholder */
+      &:not(:disabled):has(option[value='']:checked) {
+        color: var(--eds-color-text-subtle);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -154,7 +127,9 @@
   }
 
   [data-density='comfortable'] .eds-select {
-    padding-block: var(--eds-spacing-proportions-xs-vertical);
+    & select {
+      padding-block: var(--eds-spacing-proportions-xs-vertical);
+    }
   }
 }
 
@@ -162,146 +137,144 @@
    Styles the trigger, picker surface, and option items. */
 @supports (appearance: base-select) {
   @layer eds-components {
-    .eds-select,
-    .eds-select::picker(select) {
-      appearance: base-select;
-    }
-
-    /* ::picker-icon takes over from the DOM .chevron in base-select mode */
-    .chevron {
-      display: none;
-    }
-
     .eds-select {
-      /* base-select renders a flex button trigger */
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-inline-end: var(--eds-selectable-space-horizontal);
-
-      /*
-       * Suppress the native UA glyph (too tall) and replace with a mask-image
-       * chevron. Color is driven by background-color so CSS variables work
-       * (color property has no effect on masked pseudo-elements).
-       */
-      &::picker-icon {
-        flex-shrink: 0;
-        align-self: center;
-
-        width: var(--eds-sizing-icon-lg);
-        height: var(--eds-sizing-icon-lg);
-
-        color: transparent;
-
-        background-color: var(--eds-color-text-accent-subtle);
-
-        mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
-        mask-repeat: no-repeat;
-        mask-position: center;
-        mask-size: 1.5rem;
-
-        /* Inherits --_transition-duration from .eds-select; 0s when reduced-motion */
-        transition:
-          rotate var(--_transition-duration) ease,
-          background-color var(--_transition-duration) ease-in-out;
+      & select,
+      & select::picker(select) {
+        appearance: base-select;
       }
 
-      /*
-       * ::picker(select) cannot receive classes — styled via pseudo-element.
-       * --_radius crosses the ::picker boundary via CSS custom property inheritance.
-       */
-      &::picker(select) {
-        scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
-        scrollbar-width: thin;
-
-        overflow: clip;
-        overflow-y: auto;
-
-        box-sizing: border-box;
-        min-inline-size: anchor-size(inline);
-        max-block-size: 300px;
-        margin: 0;
-        margin-block-start: -1px;
-        padding: 0;
-        border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
-        border-radius: 0 0 var(--_radius) var(--_radius);
-
-        background: var(--eds-color-bg-floating);
+      /* ::picker-icon takes over from the DOM .chevron in base-select mode */
+      & .chevron {
+        display: none;
       }
 
-      /* Flush connection between open trigger and picker */
-      &:open {
-        border-end-start-radius: 0;
-        border-end-end-radius: 0;
-      }
-
-      &:open::picker-icon {
-        rotate: 180deg;
-      }
-
-      &:disabled::picker-icon {
-        background-color: var(--eds-color-text-disabled);
-      }
-
-      option {
-        --_bg: transparent;
-
-        cursor: pointer;
-
+      & select {
+        /* base-select renders a flex button trigger */
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        padding-inline-end: var(--eds-selectable-space-horizontal);
 
-        padding-block: var(--eds-selectable-space-vertical);
-        padding-inline: var(--eds-selectable-space-horizontal);
+        /* UA glyph is too tall — replaced with mask-image; color via background-color (masked elements ignore color) */
+        &::picker-icon {
+          flex-shrink: 0;
+          align-self: center;
 
-        font-family: var(--eds-typography-ui-body-font-family);
-        font-size: var(--eds-typography-ui-body-md-font-size);
-        font-feature-settings: 'lnum', 'tnum';
-        font-weight: var(--eds-typography-font-weight, 400);
-        line-height: var(--eds-typography-ui-body-md-line-height-default);
-        color: var(--eds-color-text-strong);
-        letter-spacing: var(--eds-typography-tracking, 0);
+          width: var(--eds-sizing-icon-lg);
+          height: var(--eds-sizing-icon-lg);
 
-        background: var(--_bg);
+          color: transparent;
 
-        -webkit-font-smoothing: antialiased;
+          /* Static — select stays neutral for picker isolation, blocking dynamic accent */
+          background-color: var(--eds-color-text-accent-subtle);
 
-        /* ::checkmark only renders on :checked options — no space reserved on others.
-           Trailing position (right side) per Figma spec. */
-        &::checkmark {
-          order: 1;
+          mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M7 9.5l5 5 5-5H7z'/%3E%3C/svg%3E");
+          mask-repeat: no-repeat;
+          mask-position: center;
+          mask-size: 1.5rem;
 
-          width: 1.25rem;
-          height: 1.25rem;
-          margin-inline-start: auto;
-          padding-inline-start: var(--eds-selectable-space-horizontal);
+          /* Inherits --_transition-duration from .eds-select */
+          transition:
+            rotate var(--_transition-duration) ease,
+            background-color var(--_transition-duration) ease-in-out;
         }
 
-        &:checked {
-          --_bg: var(--eds-color-bg-fill-muted-default);
+        /*
+         * ::picker(select) cannot receive classes — styled via pseudo-element.
+         * --_radius crosses the ::picker boundary via CSS custom property inheritance.
+         */
+        &::picker(select) {
+          scrollbar-color: var(--eds-color-bg-accent-fill-emphasis-default) transparent;
+          scrollbar-width: thin;
+
+          overflow: clip;
+          overflow-y: auto;
+
+          box-sizing: border-box;
+          min-inline-size: anchor-size(inline);
+          max-block-size: 300px;
+          margin: 0;
+          margin-block-start: -1px;
+          padding: 0;
+          border: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+          border-radius: 0 0 var(--_radius) var(--_radius);
+
+          background: var(--eds-color-bg-floating);
         }
 
-        &:disabled {
-          cursor: not-allowed;
-          color: var(--eds-color-text-disabled);
+        &:open::picker-icon {
+          rotate: 180deg;
         }
 
-        @media (hover: hover) and (pointer: fine) {
-          &:hover {
+        /* ::picker-icon does not reliably inherit CSS custom properties in Chrome 135 */
+        &[aria-invalid]::picker-icon {
+          background-color: var(--eds-color-text-subtle);
+        }
+
+        &:disabled::picker-icon,
+        &[data-readonly]::picker-icon {
+          background-color: var(--eds-color-text-disabled);
+        }
+
+        option {
+          --_bg: transparent;
+
+          cursor: pointer;
+
+          display: flex;
+          align-items: center;
+
+          padding-block: var(--eds-selectable-space-vertical);
+          padding-inline: var(--eds-selectable-space-horizontal);
+
+          font-family: var(--eds-typography-ui-body-font-family);
+          font-size: var(--eds-typography-ui-body-md-font-size);
+          font-feature-settings: 'lnum', 'tnum';
+          font-weight: var(--eds-typography-font-weight, 400);
+          line-height: var(--eds-typography-ui-body-md-line-height-default);
+          color: var(--eds-color-text-strong);
+          letter-spacing: var(--eds-typography-tracking, 0);
+
+          background: var(--_bg);
+
+          -webkit-font-smoothing: antialiased;
+
+          /* ::checkmark only renders on :checked options — no space reserved on others.
+             Trailing position (right side) per Figma spec. */
+          &::checkmark {
+            order: 1;
+
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-inline-start: auto;
+            padding-inline-start: var(--eds-selectable-space-horizontal);
+          }
+
+          &[hidden] {
+            display: none;
+          }
+
+          &:checked {
             --_bg: var(--eds-color-bg-fill-muted-default);
+          }
+
+          &:disabled {
+            cursor: not-allowed;
+            color: var(--eds-color-text-disabled);
+          }
+
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              --_bg: var(--eds-color-bg-fill-muted-default);
+            }
           }
         }
       }
-    }
 
-    .eds-select-container {
-      &[data-readonly] .eds-select::picker-icon {
-        background-color: var(--eds-color-text-disabled);
-      }
-
-      /* Neutral in error state — not accent teal */
-      &[data-invalid] .eds-select::picker-icon {
-        background-color: var(--eds-color-text-neutral-subtle);
+      /* Flush connection between open trigger and picker */
+      &:has(select:open) {
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
       }
     }
   }
