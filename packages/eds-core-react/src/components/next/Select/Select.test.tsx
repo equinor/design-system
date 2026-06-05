@@ -56,18 +56,16 @@ describe('Select (next)', () => {
     })
 
     it('renders a hidden disabled placeholder option when placeholder is provided', () => {
-      const { container } = render(
+      render(
         <Select
           label="Element"
           options={elements}
           placeholder="Select an element…"
         />,
       )
-      const option = container.querySelector(
-        'option[value=""]',
-      ) as HTMLOptionElement
-      expect(option).toBeDisabled()
-      expect(option).not.toBeVisible()
+      const [placeholder] = screen.getAllByRole('option', { hidden: true })
+      expect(placeholder).toBeDisabled()
+      expect(placeholder).not.toBeVisible()
     })
 
     it('shows placeholder as selected value when no defaultValue is provided', () => {

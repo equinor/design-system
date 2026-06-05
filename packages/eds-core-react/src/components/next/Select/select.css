@@ -35,37 +35,30 @@
       outline-color: var(--eds-color-bg-disabled);
     }
 
-    & .chevron {
+    & :is(.chevron, .error-icon) {
       pointer-events: none;
 
       position: absolute;
       top: 50%;
-      right: var(--eds-selectable-space-horizontal);
       transform: translateY(-50%);
 
       display: flex;
       align-items: center;
 
       color: var(--eds-color-text-subtle);
+    }
+
+    & .chevron {
+      right: var(--eds-selectable-space-horizontal);
+    }
+
+    & .error-icon {
+      left: var(--eds-selectable-space-horizontal);
     }
 
     &:has(select:disabled) .chevron,
     &:has(select[data-readonly]) .chevron {
       color: var(--eds-color-text-disabled);
-    }
-
-    & .error-icon {
-      pointer-events: none;
-
-      position: absolute;
-      top: 50%;
-      left: var(--eds-selectable-space-horizontal);
-      transform: translateY(-50%);
-
-      display: flex;
-      align-items: center;
-
-      color: var(--eds-color-text-subtle);
     }
 
     /* Make room for error icon on the left */
@@ -121,14 +114,12 @@
       }
     }
 
+    [data-density='comfortable'] & select {
+      padding-block: var(--eds-spacing-proportions-xs-vertical);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       --_transition-duration: 0s;
-    }
-  }
-
-  [data-density='comfortable'] .eds-select {
-    & select {
-      padding-block: var(--eds-spacing-proportions-xs-vertical);
     }
   }
 }
@@ -158,7 +149,6 @@
         /* UA glyph is too tall — replaced with mask-image; color via background-color (masked elements ignore color) */
         &::picker-icon {
           flex-shrink: 0;
-          align-self: center;
 
           width: var(--eds-sizing-icon-lg);
           height: var(--eds-sizing-icon-lg);
