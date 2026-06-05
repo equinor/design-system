@@ -32,6 +32,10 @@ export default function ComponentsLayout() {
                 name="typography"
                 options={{ title: "Typography" }}
             />
+            <Stack.Screen
+                name="textfield"
+                options={{ title: "TextField" }}
+            />
         </Stack>
     );
 }

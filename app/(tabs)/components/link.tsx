@@ -1,7 +1,7 @@
 import { Section } from "@/components/Section";
 import { Surface } from "@/components/Surface";
 import { Link, Typography } from "@equinor/eds-mobile-components";
-import { Alert, Linking, ScrollView } from "react-native";
+import { Linking, ScrollView } from "react-native";
 import { useState } from "react";
 
 const GITHUB_URL = "https://github.com/equinor/design-system-mobile";
