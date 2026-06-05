@@ -56,12 +56,13 @@ export const inputTokenStyles = EDSStyleSheet.create(
                     token.spacing.spacing.inset.lg.verticalSquished,
                 gap: token.spacing.spacing.icon.sm.gapHorizontal,
             },
-            // Typography tokens will replace hardcoded values
             textInput: {
                 flex: 1,
                 color: textColor,
-                fontSize: 14,
-                fontWeight: "400",
+                fontFamily: token.typography.ui.typography.fontFamily,
+                fontSize: token.typography.ui.fontFamilySize.md.fontSize,
+                fontWeight: token.typography.ui.fontFamilySize.md.fontWeight.normal,
+                // lineHeight intentionally omitted — explicit lineHeight on RN TextInput causes cursor offset issues
                 padding: 0,
             },
             placeholder: {
@@ -69,9 +70,10 @@ export const inputTokenStyles = EDSStyleSheet.create(
             },
             adornmentText: {
                 color: adornmentTextColor,
-                fontSize: 10.5,
-                fontWeight: "400",
-                lineHeight: 16,
+                fontFamily: token.typography.ui.typography.fontFamily,
+                fontSize: token.typography.ui.fontFamilySize.xs.fontSize,
+                fontWeight: token.typography.ui.fontFamilySize.xs.fontWeight.normal,
+                lineHeight: token.typography.ui.fontFamilySize.xs.lineHeight.default,
                 textTransform: "uppercase",
             },
             errorIcon: {

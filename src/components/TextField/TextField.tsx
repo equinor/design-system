@@ -1,85 +1,84 @@
-import { TextInput, View } from "react-native";
-import { Input, InputProps } from "../Input";
 import React, { forwardRef } from "react";
-import { EDSStyleSheet } from "../../styling";
+import { TextInput, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
-import { Label } from "../Label";
-import { IconName, Icon } from "../Icon";
+import { EDSStyleSheet } from "../../styling";
+import { Input, InputProps } from "../Input";
+import { Typography } from "../Typography";
 
 export type TextFieldProps = {
     /**
-     * A small label text to add to the input field.
+     * The label displayed above the input.
      */
     label?: string;
-
     /**
-     * Secondary small label text to add to the input field.
+     * Indicator text shown inline after the label, e.g. "(Required)" or "(Optional)".
      */
-    meta?: string;
-
+    indicator?: string;
     /**
-     * A unit describing the input value.
+     * A description shown below the label, above the input. Use for additional context.
      */
-    unit?: string;
-
+    description?: string;
     /**
-     * A description to add to the input field. Use this when more information around the input field is required.
+     * A message shown below the input.
      */
-    helperText?: string;
-
-    /**
-     * An icon to add to inside the inputfield on the right side.
-     */
-    inputIcon?: IconName;
-
-    /**
-     * An icon to add to the left of the helper text.
-     */
-    helperIcon?: IconName;
-} & Omit<InputProps, "startText" | "endText" | "startAdornment" | "endAdornment">;
+    helperMessage?: string;
+} & InputProps;
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(
     (
-        { unit, helperText, label, meta, helperIcon, inputIcon, ...rest },
+        {
+            label,
+            indicator,
+            description,
+            helperMessage,
+            invalid,
+            disabled,
+            accessibilityLabel,
+            accessibilityHint,
+            ...rest
+        },
         ref
     ) => {
-        const styles = useStyles(themeStyles, { invalid: rest.invalid });
+        const styles = useStyles(themeStyles, { disabled });
+
         return (
-            <View style={{ flexGrow: 1 }}>
+            <View style={styles.container}>
                 {label && (
-                    <Label style={styles.label} label={label} meta={meta} />
+                    <View style={styles.labelSection}>
+                        <View style={styles.labelRow}>
+                            <Typography size="md" style={styles.label}>
+                                {label}
+                            </Typography>
+                            {indicator && (
+                                <Typography size="md" style={styles.indicator}>
+                                    {indicator}
+                                </Typography>
+                            )}
+                        </View>
+                        {description && (
+                            <Typography size="sm" style={styles.description}>
+                                {description}
+                            </Typography>
+                        )}
+                    </View>
                 )}
                 <Input
                     ref={ref}
-                    endText={unit}
-                    endAdornment={
-                        inputIcon ? (
-                            <Icon
-                                name={inputIcon}
-                                size={16}
-                                style={styles.iconColor}
-                            />
-                        ) : undefined
+                    invalid={invalid}
+                    disabled={disabled}
+                    accessibilityLabel={accessibilityLabel ?? label}
+                    accessibilityHint={
+                        accessibilityHint ??
+                        ([description, helperMessage]
+                            .filter(Boolean)
+                            .join(". ") || undefined)
                     }
                     {...rest}
                 />
-                {helperText && (
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            paddingHorizontal: 8,
-                        }}
-                    >
-                        {helperIcon && (
-                            <Icon
-                                name={helperIcon}
-                                size={20}
-                                style={styles.iconColor}
-                            />
-                        )}
-                        <Label style={styles.label} label={helperText} />
-                    </View>
+                {helperMessage && (
+                    <Typography size="sm" style={styles.helperMessage}>
+                        {helperMessage}
+                    </Typography>
                 )}
             </View>
         );
@@ -88,26 +87,33 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(
 
 TextField.displayName = "TextField";
 
-type TextFieldStyleProps = Pick<TextFieldProps, "invalid">;
+type TextFieldStyleProps = Pick<TextFieldProps, "disabled">;
+
 const themeStyles = EDSStyleSheet.create(
-    (theme, props: TextFieldStyleProps) => ({
-        adornmentStyle: {
-            justifyContent: "center",
-            paddingHorizontal: theme.spacing.spacing.inset.sm.horizontal,
+    (token, { disabled }: TextFieldStyleProps) => ({
+        container: {
+            gap: token.spacing.spacing.vertical.twoXs,
+        },
+        labelSection: {
+            gap: token.spacing.spacing.vertical.xs,
+        },
+        labelRow: {
             flexDirection: "row",
-            gap: theme.spacing.spacing.icon.sm.gapHorizontal,
-            alignItems: "center",
+            gap: token.spacing.spacing.horizontal.xs,
         },
         label: {
-            paddingHorizontal: theme.spacing.spacing.inset.sm.horizontal,
-            color: props.invalid
-                ? theme.colors.text.danger.subtle
-                : theme.colors.text.neutral.subtle,
+            color: token.colors.text.neutral.strong,
         },
-        iconColor: {
-            color: props.invalid
-                ? theme.colors.text.danger.subtle
-                : theme.colors.text.neutral.strong,
+        indicator: {
+            color: token.colors.text.neutral.subtle,
+        },
+        description: {
+            color: token.colors.text.neutral.subtle,
+        },
+        helperMessage: {
+            color: disabled
+                ? token.colors.text.disabled
+                : token.colors.text.neutral.subtle,
         },
     })
 );

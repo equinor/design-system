@@ -24,7 +24,23 @@ export default function App() {
 }
 ```
 
-`EDSProvider` internally wraps its children in `GestureHandlerRootView`, `PortalProvider`, `ScrimProvider`, and `DialogServiceProvider`, so components that need portals or dialogs (like `Dialog` and `Menu`) work without extra setup.
+`EDSProvider` internally wraps its children in `GestureHandlerRootView` and `PortalProvider`, so components that use portals (like `Dialog` and `Menu`) work without extra setup.
+
+## Dialog service
+
+To use imperative dialogs (`Dialog.alert()`, `Dialog.confirm()`), wrap your app in `DialogServiceProvider` alongside `EDSProvider`:
+
+```tsx
+import { EDSProvider, DialogServiceProvider } from '@equinor/eds-mobile-components'
+
+<EDSProvider colorScheme={scheme} density="comfortable">
+  <DialogServiceProvider>
+    <YourApp />
+  </DialogServiceProvider>
+</EDSProvider>
+```
+
+`DialogServiceProvider` is opt-in — apps that only use the declarative `<Dialog>` component do not need it.
 
 ## Props
 
