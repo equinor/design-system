@@ -99,8 +99,9 @@ export default function TextFieldScreen() {
                 <TextField
                     label="Title"
                     description="Help with more details"
-                    value="Read-only value"
+                    value="This is a read-only value. Long-press to select and copy this text."
                     readOnly
+                    multiline
                 />
             </Surface>
 
