@@ -1,6 +1,14 @@
 import type { ReactNode, SelectHTMLAttributes } from 'react'
 import type { SelectOptionProps } from '../utils/SelectOption.types'
 
+/** A group of options rendered as a native `<optgroup>` */
+export type SelectOptionGroup<T = string> = {
+  /** Label for the option group */
+  label: string
+  /** Options within this group */
+  options: T[]
+}
+
 export type SelectProps<T = string> = {
   /** Label for the field */
   label?: ReactNode
@@ -21,5 +29,7 @@ export type SelectProps<T = string> = {
    * is pre-selected. Renders as a disabled `<option value="">` at the top of the list.
    */
   placeholder?: string
-} & Omit<SelectOptionProps<T>, 'renderOption'> &
+  /** Options to display — either flat or grouped via `SelectOptionGroup` */
+  options?: (T | SelectOptionGroup<T>)[]
+} & Omit<SelectOptionProps<T>, 'renderOption' | 'options'> &
   Omit<SelectHTMLAttributes<HTMLSelectElement>, 'children'>

@@ -79,6 +79,27 @@ describe('Select (next)', () => {
       expect(screen.getByRole('combobox')).toHaveValue('')
     })
 
+    it('renders grouped options as optgroups', () => {
+      render(
+        <Select
+          label="Element"
+          options={[
+            { label: 'Metals', options: ['Aluminium', 'Copper'] },
+            { label: 'Other', options: ['Hydrogen', 'Oxygen'] },
+          ]}
+        />,
+      )
+      expect(
+        screen.getByRole('option', { name: 'Aluminium' }),
+      ).toBeInTheDocument()
+      expect(
+        screen.getByRole('option', { name: 'Hydrogen' }),
+      ).toBeInTheDocument()
+      expect(screen.getAllByRole('option')).toHaveLength(4)
+      expect(screen.getByRole('group', { name: 'Metals' })).toBeInTheDocument()
+      expect(screen.getByRole('group', { name: 'Other' })).toBeInTheDocument()
+    })
+
     it('disables specific options via optionDisabled', () => {
       render(
         <Select

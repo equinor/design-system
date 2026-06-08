@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { arrow_drop_down, error_filled } from '@equinor/eds-icons'
-import type { SelectProps } from './Select.types'
+import type { SelectOptionGroup, SelectProps } from './Select.types'
 import { Field, useFieldIds } from '../Field'
 import { Icon } from '../Icon'
 import {
@@ -8,6 +8,34 @@ import {
   resolveOptionKey,
   resolveOptionLabel,
 } from '../utils/selectOptions'
+
+function isOptionGroup<T>(
+  item: T | SelectOptionGroup<T>,
+): item is SelectOptionGroup<T> {
+  return (
+    typeof item === 'object' &&
+    item !== null &&
+    'options' in (item as object) &&
+    'label' in (item as object)
+  )
+}
+
+function renderOption<T>(
+  option: T,
+  getOptionLabel?: (option: T) => string,
+  getOptionValue?: (option: T) => string,
+  optionDisabled?: (option: T) => boolean,
+) {
+  const label = resolveOptionLabel(option, getOptionLabel)
+  const key = resolveOptionKey(option, getOptionValue, getOptionLabel)
+  const value = getOptionValue ? getOptionValue(option) : label
+  const disabled = isOptionDisabled(option, optionDisabled)
+  return (
+    <option key={key} value={value} disabled={disabled}>
+      {label}
+    </option>
+  )
+}
 
 function SelectInner<T = string>(
   {
@@ -109,17 +137,22 @@ function SelectInner<T = string>(
               {placeholder}
             </option>
           )}
-          {options.map((option) => {
-            const optionLabel = resolveOptionLabel(option, getOptionLabel)
-            const key = resolveOptionKey(option, getOptionValue, getOptionLabel)
-            const value = getOptionValue ? getOptionValue(option) : optionLabel
-            const isDisabled = isOptionDisabled(option, optionDisabled)
-            return (
-              <option key={key} value={value} disabled={isDisabled}>
-                {optionLabel}
-              </option>
-            )
-          })}
+          {options.map((item) =>
+            isOptionGroup(item) ? (
+              <optgroup key={item.label} label={item.label}>
+                {item.options.map((opt) =>
+                  renderOption(
+                    opt,
+                    getOptionLabel,
+                    getOptionValue,
+                    optionDisabled,
+                  ),
+                )}
+              </optgroup>
+            ) : (
+              renderOption(item, getOptionLabel, getOptionValue, optionDisabled)
+            ),
+          )}
         </select>
       </div>
       {helperMessage && (
