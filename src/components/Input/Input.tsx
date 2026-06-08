@@ -110,28 +110,31 @@ export const Input = forwardRef<TextInput, InputProps>(
                     <Text style={styles.adornmentText}>{startText}</Text>
                 )}
                 {startAdornment}
-                <TextInput
-                    {...rest}
-                    ref={ref}
-                    multiline={multiline}
-                    editable={!readOnly && !disabled}
-                    placeholder={placeholder}
-                    onChangeText={onChange}
-                    textAlignVertical="top"
-                    placeholderTextColor={styles.placeholder.color}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    accessibilityState={{
-                        disabled: disabled || readOnly,
-                    }}
-                    style={[
-                        styles.textInput,
-                        Platform.OS === "web"
-                            ? ({ outline: "none" } as Record<string, string>)
-                            : {},
-                        rest.style,
-                    ]}
-                />
+                <View style={{ pointerEvents: disabled ? "none" : "auto" }}>
+                    <TextInput
+                        {...rest}
+                        ref={ref}
+                        multiline={multiline}
+                        editable={!disabled}
+                        readOnly={readOnly}
+                        placeholder={placeholder}
+                        onChangeText={onChange}
+                        textAlignVertical="top"
+                        placeholderTextColor={styles.placeholder.color}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        accessibilityState={{
+                            disabled,
+                        }}
+                        style={[
+                            styles.textInput,
+                            Platform.OS === "web"
+                                ? ({ outline: "none" } as Record<string, string>)
+                                : {},
+                            rest.style,
+                        ]}
+                    />
+                </View>
                 {endText != null && (
                     <Text style={styles.adornmentText}>{endText}</Text>
                 )}
