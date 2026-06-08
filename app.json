@@ -10,7 +10,11 @@
         "newArchEnabled": false,
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "com.equinor.eds.mobile"
+            "bundleIdentifier": "com.equinor.eds.mobile",
+            "buildNumber": "1",
+            "infoPlist": {
+                "ITSAppUsesNonExemptEncryption": false
+            }
         },
         "android": {
             "adaptiveIcon": {
