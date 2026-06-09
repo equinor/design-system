@@ -97,10 +97,22 @@ Please familiarise yourself with the guidelines from [WCAG 2.1][WCAG] and [Di
 
 Here are some resources to help validate your work:
 
-[WebAIM](https://webaim.org/)  
-
-[Are my colours accessible?](https://aremycolorsaccessible.com/)  
-
-[The A11Y Project](https://a11yproject.com/)  
+<div class="resource-cards">
+  <a class="resource-card" href="https://webaim.org/" target="_blank" rel="noopener noreferrer">
+    <span class="resource-card__title">WebAIM</span>
+    <span class="resource-card__desc">Web accessibility evaluation tools and resources</span>
+    <svg class="resource-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" /></svg>
+  </a>
+  <a class="resource-card" href="https://aremycolorsaccessible.com/" target="_blank" rel="noopener noreferrer">
+    <span class="resource-card__title">Are my colours accessible?</span>
+    <span class="resource-card__desc">Check colour contrast ratios for WCAG compliance</span>
+    <svg class="resource-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" /></svg>
+  </a>
+  <a class="resource-card" href="https://a11yproject.com/" target="_blank" rel="noopener noreferrer">
+    <span class="resource-card__title">The A11Y Project</span>
+    <span class="resource-card__desc">Community-driven accessibility knowledge base</span>
+    <svg class="resource-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" /></svg>
+  </a>
+</div>
 
 [WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"  

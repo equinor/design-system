@@ -2,17 +2,29 @@
 title: Side sheet
 sidebar_position: 3
 ---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Side sheet
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
 
 ## When to Use
 
-
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
 
 ## Accessibility
 
+</TabItem>
+<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -30,3 +42,5 @@ sidebar_position: 3
 - 
 :::
 
+</TabItem>
+</Tabs>

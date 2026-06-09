@@ -64,7 +64,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     title: 'Resources',
     links: [
       { label: 'About EDS', to: '/about' },
-      { label: 'Support', to: '/docs/Next/support/support' },
+      { label: 'Support', to: '/docs/Next/support' },
     ],
   },
 ]

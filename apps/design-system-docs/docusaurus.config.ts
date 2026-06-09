@@ -24,7 +24,11 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  clientModules: ['./src/clientModules/syncColorScheme.ts'],
+  clientModules: [
+    './src/clientModules/syncColorScheme.ts',
+    './src/clientModules/foundationDropdownNav.ts',
+    './src/clientModules/sbIframeNoScroll.ts',
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -139,10 +143,43 @@ const config: Config = {
 
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'foundationSidebar',
+          type: 'dropdown',
           label: 'Foundation',
+          to: '/foundation',
           position: 'right',
+          className: 'foundation-dropdown',
+          items: [
+            {
+              type: 'doc',
+              docId: 'foundation/accessibility',
+              label: 'Accessibility',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/colour/intro',
+              label: 'Colour',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/design-tokens/grid',
+              label: 'Design Tokens',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/datavisualisation',
+              label: 'Data Visualisation',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/patterns',
+              label: 'Patterns',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/assets/image_placeholder',
+              label: 'Assets',
+            },
+          ],
         },
         {
           type: 'docSidebar',

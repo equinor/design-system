@@ -7,7 +7,7 @@ displayed_sidebar: null
 import '../about/team/team.css'
 import '@equinor/eds-core-react/next/index.css'
 import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Icon, Switch, Divider } from '@equinor/eds-core-react/next'
-import { favorite, check, access_time, remove, check_circle, info_circle, warning_outlined } from '@equinor/eds-icons'
+import { favorite_filled, check, time, remove, check_circle_outlined, info_circle, warning_outlined } from '@equinor/eds-icons'
 
 export const TooltipMock = ({ title }) => (
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'max-content' }}>
@@ -66,11 +66,11 @@ Present information, status, structure, or relationships.
 <a className="component-gallery__card" href="data-display/icon">
   <div className="component-gallery__preview">
     <div className="mock mock--icon">
-      <Icon data={favorite} />
+      <Icon data={favorite_filled} />
       <Icon data={check} />
-      <Icon data={access_time} />
+      <Icon data={time} />
       <Icon data={remove} />
-      <Icon data={check_circle} />
+      <Icon data={check_circle_outlined} />
     </div>
   </div>
   <div className="component-gallery__body">

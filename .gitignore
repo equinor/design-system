@@ -30,6 +30,7 @@ review.txt
 # local settings
 opencode.json
 settings.local.json
+local-alex-notes*
 
 # Generated build files
 packages/eds-core-react/build/
