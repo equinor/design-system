@@ -85,7 +85,9 @@ function SelectInner<T = string>(
       )}
       <div
         className={['eds-select', className].filter(Boolean).join(' ')}
-        data-color-appearance={invalid && !disabled ? 'danger' : 'neutral'}
+        data-color-appearance={
+          invalid && !disabled && !readOnly ? 'danger' : 'neutral'
+        }
       >
         {displayErrorIcon && (
           <span aria-hidden="true" className="error-icon" data-font-size="xs">
