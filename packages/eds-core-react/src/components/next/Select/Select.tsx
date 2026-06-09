@@ -15,8 +15,7 @@ function isOptionGroup<T>(
   return (
     typeof item === 'object' &&
     item !== null &&
-    'options' in (item as object) &&
-    'label' in (item as object)
+    (item as SelectOptionGroup<T>).type === 'group'
   )
 }
 

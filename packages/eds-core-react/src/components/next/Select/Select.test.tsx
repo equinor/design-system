@@ -84,8 +84,12 @@ describe('Select (next)', () => {
         <Select
           label="Element"
           options={[
-            { label: 'Metals', options: ['Aluminium', 'Copper'] },
-            { label: 'Other', options: ['Hydrogen', 'Oxygen'] },
+            {
+              type: 'group',
+              label: 'Metals',
+              options: ['Aluminium', 'Copper'],
+            },
+            { type: 'group', label: 'Other', options: ['Hydrogen', 'Oxygen'] },
           ]}
         />,
       )
@@ -130,6 +134,20 @@ describe('Select (next)', () => {
         'aria-readonly',
         'true',
       )
+    })
+
+    it('does not change value on keydown when readOnly', () => {
+      render(
+        <Select
+          label="Element"
+          options={elements}
+          defaultValue="Copper"
+          readOnly
+        />,
+      )
+      const select = screen.getByRole('combobox')
+      fireEvent.keyDown(select, { key: 'ArrowDown' })
+      expect(select).toHaveValue('Copper')
     })
 
     it('marks the select as invalid', () => {

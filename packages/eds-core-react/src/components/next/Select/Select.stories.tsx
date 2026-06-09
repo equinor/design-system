@@ -368,9 +368,21 @@ ObjectOptions.parameters = {
 
 export const GroupedOptions: StoryFn = () => {
   const options: SelectOptionGroup<string>[] = [
-    { label: 'Metals', options: ['Aluminium', 'Copper', 'Iron', 'Lead'] },
-    { label: 'Noble gases', options: ['Helium', 'Neon', 'Argon'] },
-    { label: 'Non-metals', options: ['Hydrogen', 'Oxygen', 'Nitrogen'] },
+    {
+      type: 'group',
+      label: 'Metals',
+      options: ['Aluminium', 'Copper', 'Iron', 'Lead'],
+    },
+    {
+      type: 'group',
+      label: 'Noble gases',
+      options: ['Helium', 'Neon', 'Argon'],
+    },
+    {
+      type: 'group',
+      label: 'Non-metals',
+      options: ['Hydrogen', 'Oxygen', 'Nitrogen'],
+    },
   ]
   return (
     <Select

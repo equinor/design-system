@@ -1,8 +1,14 @@
 import type { ReactNode, SelectHTMLAttributes } from 'react'
 import type { SelectOptionProps } from '../utils/SelectOption.types'
 
-/** A group of options rendered as a native `<optgroup>` */
+/**
+ * A group of options rendered as a native `<optgroup>`.
+ * The `type: 'group'` discriminant is required to distinguish groups from
+ * plain object options at runtime.
+ */
 export type SelectOptionGroup<T = string> = {
+  /** Discriminant field — must be `'group'` */
+  type: 'group'
   /** Label for the option group */
   label: string
   /** Options within this group */

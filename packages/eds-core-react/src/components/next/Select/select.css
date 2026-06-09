@@ -212,6 +212,7 @@
 
         option {
           --_bg: transparent;
+          --_color: var(--eds-color-text-strong);
 
           cursor: pointer;
 
@@ -226,7 +227,7 @@
           font-feature-settings: 'lnum', 'tnum';
           font-weight: var(--eds-typography-font-weight, 400);
           line-height: var(--eds-typography-ui-body-md-line-height-default);
-          color: var(--eds-color-text-strong);
+          color: var(--_color);
           letter-spacing: var(--eds-typography-tracking, 0);
 
           background: var(--_bg);
