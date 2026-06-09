@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../../.storybook/components'
-import { Select, type SelectProps } from '.'
+import { Select, type SelectProps, type SelectOptionGroup } from '.'
 
 const elements = [
   'Aluminium',
@@ -362,6 +362,31 @@ ObjectOptions.parameters = {
     description: {
       story:
         'When options are objects, provide `getOptionLabel` to specify which field to display and `getOptionValue` to specify the submitted form value. Pick an option — the helper message shows the id that would be submitted, while the trigger shows the human-readable name.',
+    },
+  },
+}
+
+export const GroupedOptions: StoryFn = () => {
+  const options: SelectOptionGroup<string>[] = [
+    { label: 'Metals', options: ['Aluminium', 'Copper', 'Iron', 'Lead'] },
+    { label: 'Noble gases', options: ['Helium', 'Neon', 'Argon'] },
+    { label: 'Non-metals', options: ['Hydrogen', 'Oxygen', 'Nitrogen'] },
+  ]
+  return (
+    <Select
+      label="Element"
+      options={options}
+      placeholder="Select an element…"
+    />
+  )
+}
+
+GroupedOptions.storyName = 'Grouped options'
+GroupedOptions.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `SelectOptionGroup` objects in the `options` array to render native `<optgroup>` elements. Groups and flat options can be mixed in the same array.',
     },
   },
 }

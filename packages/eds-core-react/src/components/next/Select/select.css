@@ -70,6 +70,8 @@
     }
 
     & select {
+      --_color: var(--eds-color-text-strong);
+
       cursor: pointer;
 
       display: block;
@@ -90,16 +92,19 @@
       font-feature-settings: 'lnum', 'tnum';
       font-weight: var(--eds-typography-font-weight, 400);
       line-height: var(--eds-typography-ui-body-md-line-height-default);
-      color: var(--eds-color-text-strong);
+      color: var(--_color);
       letter-spacing: var(--eds-typography-tracking, 0);
 
       appearance: none;
       background-color: transparent;
       outline: none;
 
+      -webkit-font-smoothing: antialiased;
+
       &:disabled {
+        --_color: var(--eds-color-text-disabled);
+
         cursor: not-allowed;
-        color: var(--eds-color-text-disabled);
         opacity: 1;
       }
 
@@ -110,7 +115,7 @@
 
       /* Placeholder option selected — muted, like an input placeholder */
       &:not(:disabled):has(option[value='']:checked) {
-        color: var(--eds-color-text-subtle);
+        --_color: var(--eds-color-text-subtle);
       }
     }
 
@@ -249,8 +254,10 @@
           }
 
           &:disabled {
+            --_color: var(--eds-color-text-disabled);
+
             cursor: not-allowed;
-            color: var(--eds-color-text-disabled);
+            color: var(--_color);
           }
 
           @media (hover: hover) and (pointer: fine) {
@@ -258,6 +265,23 @@
               --_bg: var(--eds-color-bg-fill-muted-default);
             }
           }
+        }
+
+        optgroup {
+          padding-block: var(--eds-spacing-vertical-sm) var(--eds-spacing-vertical-3xs);
+          padding-inline: var(--eds-selectable-space-horizontal);
+          border-top: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+
+          font-family: var(--eds-typography-ui-body-font-family);
+          font-size: var(--eds-typography-ui-body-xs-font-size);
+          font-weight: var(--eds-typography-font-weight, 400);
+          line-height: var(--eds-typography-ui-body-xs-line-height-default);
+          color: var(--eds-color-text-subtle);
+          letter-spacing: var(--eds-typography-tracking, 0);
+
+          background: var(--eds-color-bg-surface);
+
+          -webkit-font-smoothing: antialiased;
         }
       }
 
