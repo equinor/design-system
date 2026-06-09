@@ -109,13 +109,13 @@
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "@floating-ui/react": "^0.27.19",
-    "@internationalized/date": "^3.12.0",
-    "@react-aria/utils": "^3.33.1",
-    "@react-stately/calendar": "^3.9.3",
-    "@react-stately/datepicker": "^3.16.1",
-    "@react-types/shared": "^3.33.1",
+    "@internationalized/date": "^3.12.2",
+    "@react-aria/utils": "^3.34.1",
+    "@react-stately/calendar": "^3.10.1",
+    "@react-stately/datepicker": "^3.17.1",
+    "@react-types/shared": "^3.35.0",
     "@tanstack/react-virtual": "3.14.2",
     "downshift": "9.3.2",
-    "react-aria": "^3.47.0"
+    "react-aria": "^3.49.0"
   }
 }
