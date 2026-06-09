@@ -36,6 +36,8 @@
     }
 
     & :is(.chevron, .error-icon) {
+      --_color: var(--eds-color-text-subtle);
+
       pointer-events: none;
 
       position: absolute;
@@ -45,7 +47,7 @@
       display: flex;
       align-items: center;
 
-      color: var(--eds-color-text-subtle);
+      color: var(--_color);
     }
 
     & .chevron {
@@ -58,7 +60,7 @@
 
     &:has(select:disabled) .chevron,
     &:has(select[data-readonly]) .chevron {
-      color: var(--eds-color-text-disabled);
+      --_color: var(--eds-color-text-disabled);
     }
 
     /* Make room for error icon on the left */
@@ -268,6 +270,8 @@
         }
 
         optgroup {
+          --_color: var(--eds-color-text-subtle);
+
           padding-block: var(--eds-spacing-vertical-sm) var(--eds-spacing-vertical-3xs);
           padding-inline: var(--eds-selectable-space-horizontal);
           border-top: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
@@ -276,7 +280,7 @@
           font-size: var(--eds-typography-ui-body-xs-font-size);
           font-weight: var(--eds-typography-font-weight, 400);
           line-height: var(--eds-typography-ui-body-xs-line-height-default);
-          color: var(--eds-color-text-subtle);
+          color: var(--_color);
           letter-spacing: var(--eds-typography-tracking, 0);
 
           background: var(--eds-color-bg-surface);
