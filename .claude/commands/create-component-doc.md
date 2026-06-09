@@ -35,5 +35,5 @@ These docs are the **usage guide** for the EDS component library. The audience i
 - Always include the H1 title
 - Remove artefacts: caps-locked folder names, duplicate paragraphs, dates/timestamps, scrape noise
 - Follow the tone of voice and formatting (British English, no em-dashes, admonitions) per the canonical doc
-- Each Guidelines paragraph answers *when* and *why*; the iframe answers *how*
+- Each Guidelines paragraph answers _when_ and _why_; the iframe answers _how_
 - Do's and Don'ts are usage guidance only - never API rules, handler overrides, or framework-integration warnings

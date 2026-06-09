@@ -6,21 +6,29 @@ displayed_sidebar: null
 
 import '../about/team/team.css'
 import '@equinor/eds-core-react/next/index.css'
-import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Tooltip, Icon, Switch, Divider } from '@equinor/eds-core-react/next'
+import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Icon, Switch, Divider } from '@equinor/eds-core-react/next'
 import { favorite, check, access_time, remove, check_circle, info_circle, warning_outlined } from '@equinor/eds-icons'
-import { useEffect, useRef } from 'react'
 
-export const PersistentTooltip = ({ title, placement = 'bottom' }) => {
-  const ref = useRef(null)
-  useEffect(() => {
-    try { ref.current?.showPopover() } catch (e) {}
-  }, [])
-  return (
-    <Tooltip ref={ref} title={title} placement={placement}>
-      <span style={{ display: 'inline-block', width: '1px', height: '1px' }}>&#8203;</span>
-    </Tooltip>
-  )
-}
+export const TooltipMock = ({ title }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'max-content' }}>
+    <div style={{
+      backgroundColor: 'var(--eds-color-text-strong)',
+      color: 'var(--eds-color-text-strong-on-emphasis)',
+      borderRadius: 'var(--eds-spacing-border-radius-rounded)',
+      paddingBlock: 'var(--eds-container-space-vertical)',
+      paddingInline: 'var(--eds-container-space-horizontal)',
+      boxShadow: '0px 2px 4px rgba(0,0,0,0.14), 0px 3px 4px rgba(0,0,0,0.12), 0px 1px 5px rgba(0,0,0,0.2)',
+      fontFeatureSettings: "'lnum', 'tnum'",
+    }}>{title}</div>
+    <div style={{
+      width: 0,
+      height: 0,
+      borderLeft: '6px solid transparent',
+      borderRight: '6px solid transparent',
+      borderTop: '6px solid var(--eds-color-text-strong)',
+    }} />
+  </div>
+)
 
 <div className="about-page">
 
@@ -73,8 +81,8 @@ Present information, status, structure, or relationships.
 
 <a className="component-gallery__card" href="data-display/tooltip">
   <div className="component-gallery__preview">
-    <div className="mock" style={{display: 'flex', alignItems: 'flex-start', justifyContent: 'center', marginTop: '-3rem'}}>
-      <PersistentTooltip title="Explore more actions" placement="bottom" />
+    <div className="mock" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <TooltipMock title="Explore more actions" />
     </div>
   </div>
   <div className="component-gallery__body">
