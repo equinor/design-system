@@ -28,11 +28,6 @@
         padding-inline-end: var(--eds-selectable-space-horizontal);
       }
 
-      &:has(+ .helper-row) {
-        margin-block-end: calc(
-          var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical)
-        );
-      }
     }
 
     & .helper-row {
@@ -40,6 +35,13 @@
       align-items: baseline;
       gap: var(--eds-typography-gap-horizontal);
       inline-size: 100%;
+      margin-block-start: calc(
+        var(--eds-selectable-space-horizontal) - var(--eds-generic-gap-vertical)
+      );
+    }
+
+    & .eds-field__helper-message {
+      margin-block-start: 0;
     }
 
     & .char-count {
