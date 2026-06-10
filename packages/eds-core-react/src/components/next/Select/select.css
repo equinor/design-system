@@ -260,7 +260,6 @@
             --_color: var(--eds-color-text-disabled);
 
             cursor: not-allowed;
-            color: var(--_color);
           }
 
           @media (hover: hover) and (pointer: fine) {
