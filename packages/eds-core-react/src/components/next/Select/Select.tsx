@@ -122,7 +122,8 @@ function SelectInner<T = string>(
             hasDescription: !!description,
             hasHelperMessage: !!helperMessage,
           })}
-          data-space-proportions="squared"
+          data-selectable-space="sm"
+          data-space-proportions="squished"
           data-color-appearance="neutral"
           defaultValue={
             placeholder &&

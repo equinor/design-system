@@ -80,7 +80,7 @@
 
       box-sizing: border-box;
       inline-size: 100%;
-      padding-block: var(--eds-selectable-space-vertical);
+      padding-block: var(--eds-spacing-proportions-xs-vertical);
       padding-inline: var(--eds-selectable-space-horizontal);
 
       /* Reserve space for the absolutely-positioned .chevron */
@@ -121,8 +121,9 @@
       }
     }
 
+    /* Comfortable density: reduced padding to offset native select UA intrinsic height */
     [data-density='comfortable'] & select {
-      padding-block: var(--eds-spacing-proportions-xs-vertical);
+      padding-block: var(--eds-spacing-vertical-3xs);
     }
 
     @media (prefers-reduced-motion: reduce) {
