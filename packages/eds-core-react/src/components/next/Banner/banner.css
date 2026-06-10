@@ -36,9 +36,18 @@
 
   .eds-banner__message {
     flex: 1;
+
     min-width: 0;
     margin: 0;
+
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
     color: var(--eds-color-text-strong);
+
+    @supports (text-box: trim-both cap alphabetic) {
+      text-box: trim-both cap alphabetic;
+    }
   }
 
   .eds-banner__actions {
