@@ -2,9 +2,10 @@
   .eds-text-area {
     & .label-row {
       display: flex;
+      gap: var(--eds-typography-gap-horizontal);
       align-items: center;
       justify-content: space-between;
-      gap: var(--eds-typography-gap-horizontal);
+
       inline-size: 100%;
 
       & > button {
@@ -14,29 +15,32 @@
     }
 
     & .eds-input-container {
+      overflow: hidden;
       align-items: flex-start;
       padding-block: var(--eds-container-space-vertical);
-      overflow: hidden;
 
       & textarea.eds-input {
-        box-sizing: border-box;
-        overflow: auto;
-        white-space: pre-wrap;
-        text-overflow: clip;
         resize: vertical;
+
+        overflow: auto;
+
+        box-sizing: border-box;
         padding-block-end: var(--eds-container-space-vertical);
         padding-inline-end: var(--eds-selectable-space-horizontal);
-      }
 
+        text-overflow: clip;
+        white-space: pre-wrap;
+      }
     }
 
     & .helper-row {
       display: flex;
-      align-items: baseline;
       gap: var(--eds-typography-gap-horizontal);
+      align-items: baseline;
+
       inline-size: 100%;
       margin-block-start: calc(
-        var(--eds-selectable-space-horizontal) - var(--eds-generic-gap-vertical)
+        var(--eds-selectable-space-vertical) - var(--eds-generic-gap-vertical)
       );
     }
 
