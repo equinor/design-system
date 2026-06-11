@@ -3,6 +3,9 @@ title: Selection controls
 sidebar_position: 3
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Selection controls
 
 Selection controls allow users to select options, make decisions, and set preferences. They are designed to be visible and understandable at a quick glance, helping users make confident choices in forms and settings.
@@ -10,14 +13,8 @@ Selection controls allow users to select options, make decisions, and set prefer
 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem'}}>
   <div>
     <strong>Checkbox</strong>
-    <iframe
-      class="sb-iframe"
-      src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--introduction"
-      width="100%"
-      height="70"
-      frameborder="1"
-    ></iframe>
-  </div>
+    
+</div>
   <div>
     <strong>Radio</strong>
     <iframe
@@ -42,6 +39,17 @@ Selection controls allow users to select options, make decisions, and set prefer
 
 View Storybook: [Checkbox](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--introduction) · [Radio](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--introduction) · [Switch](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-switch--introduction)
 
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
+
+<iframe
+      class="sb-iframe"
+      src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--introduction"
+      width="100%"
+      height="70"
+      frameborder="1"
+    ></iframe>
+
 ## When to Use
 
 Use selection controls when users need to:
@@ -63,6 +71,9 @@ Use selection controls when users need to:
 - More than seven options - use Select or Autocomplete instead
 - Navigating between content views - use Tabs or ToggleGroup instead
 - Filtering content - use Chip instead
+
+</TabItem>
+<TabItem value="structure" label="Structure">
 
 ## Structure
 
@@ -107,6 +118,9 @@ Switches toggle a single setting on or off. Changes take effect immediately when
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-switch--states)
+
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -180,6 +194,9 @@ All selection controls support two density modes:
 
 When validation fails on grouped controls, apply error messages to the entire group (the fieldset) rather than individual items.
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
+
 ## Accessibility
 
 A `label` is always required on selection controls. In cases where a visual label is not desirable, use `aria-label` or `aria-labelledby` to provide an accessible name.
@@ -207,6 +224,9 @@ When no visible label is needed (e.g., in tables), use `aria-label` to provide a
 
 If toggling a switch triggers an important status change, announce it with an `aria-live` region so screen reader users are informed of the change.
 
+</TabItem>
+<TabItem value="figma" label="Figma">
+
 ## Figma
 
 ### Using Selection Controls in Figma
@@ -215,6 +235,9 @@ If toggling a switch triggers an important status change, announce it with an `a
 2. Drag and drop the component into your frame
 3. Rename and resize the component if needed
 4. Choose the variant from the **Design Panel**
+
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -235,3 +258,6 @@ If toggling a switch triggers an important status change, announce it with an `a
 - Use switches for form questions - use **Radio** or **Checkbox** instead
 - Use more than seven options in one group - consider **Select** or **Autocomplete**
   :::
+
+</TabItem>
+</Tabs>

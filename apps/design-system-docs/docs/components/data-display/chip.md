@@ -3,9 +3,15 @@ title: Chip
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Chip
 
 Chips are compact, interactive elements that represent a small piece of information users can select, filter, remove, or expand. They work well for filters, tags, selections, or quickly triggering a menu. With variants for visual weight, tones for intent, and built-in support for selectable, deletable, and dropdown behaviours, chips help surface bite-sized actions without stealing focus from the surrounding UI.
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
 
 <iframe
   class="sb-iframe"
@@ -26,6 +32,9 @@ Use a chip when you need a compact, interactive element for selection, filtering
 - Primary calls to action - use **Button** instead
 - Navigating between pages - use **Link** instead
 
+</TabItem>
+<TabItem value="structure" label="Structure">
+
 ## Structure
 
 A chip is always a button. Based on the props you pass, it takes on one of four behaviours:
@@ -44,6 +53,9 @@ A chip is always a button. Based on the props you pass, it takes on one of four 
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--types)
+
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -181,6 +193,9 @@ Every tone works with every variant. Here's the full matrix for picking the righ
 - Use sentence case (capitalise only the first word)
 - Make chips in the same group follow a consistent pattern (e.g. all nouns, or all `Key: value` pairs)
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
+
 ## Accessibility
 
 **Selectable chips**
@@ -208,6 +223,9 @@ Comfortable density should come with the option to switch to spacious mode for a
 - Don't rely on tone alone to convey meaning - always pair tone with a clear label
 - Chips meet WCAG 2.1 AA contrast across every tone and variant combination
 
+</TabItem>
+<TabItem value="figma" label="Figma">
+
 ## Figma
 
 ### Components
@@ -231,6 +249,9 @@ The Chip component exposes these properties:
 
 Switch **Type** to _Deletable_ for a trailing close icon, _Dropdown_ for a trailing arrow, or _Checked_ to preview the selected state with its leading check icon.
 
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
+
 ## Do's and Don'ts
 
 :::info **Do**
@@ -252,3 +273,6 @@ Switch **Type** to _Deletable_ for a trailing close icon, _Dropdown_ for a trail
 - Mix deletable and selectable chips in the same group without a clear visual distinction
 - Use more than one chip shape within the same group (pick one variant and stay consistent)
   :::
+
+</TabItem>
+</Tabs>
