@@ -273,7 +273,7 @@
           --_color: var(--eds-color-text-subtle);
 
           padding-block: var(--eds-spacing-vertical-sm) var(--eds-spacing-vertical-3xs);
-          padding-inline: var(--eds-selectable-space-horizontal);
+          padding-inline: var(--eds-selectable-space-horizontal) 0;
           border-top: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
 
           font-family: var(--eds-typography-ui-body-font-family);
@@ -286,6 +286,17 @@
           background: var(--eds-color-bg-surface);
 
           -webkit-font-smoothing: antialiased;
+
+          /* Options live inside optgroup's content box — shift left to cancel
+             the double-indent while keeping padding intact for full-width hover.
+             padding-inline-start nudged by 3xs to align option text with the label
+             (Chrome's base-select UA adds an offset to optgroup label rendering). */
+          & > option {
+            margin-inline-start: calc(-1 * var(--eds-selectable-space-horizontal));
+            padding-inline-start: calc(
+              var(--eds-selectable-space-horizontal) + var(--eds-spacing-vertical-3xs)
+            );
+          }
         }
       }
 
