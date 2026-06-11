@@ -39,9 +39,6 @@
       align-items: baseline;
 
       inline-size: 100%;
-
-      /* --eds-selectable-space-horizontal is intentional here — vertical (6px)
-         is too small for this gap per the design spec. */
       margin-block-start: calc(
         var(--eds-selectable-space-horizontal) - var(--eds-generic-gap-vertical)
       );
