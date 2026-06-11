@@ -16,7 +16,10 @@ const sections = [
     },
     {
         title: "Data Display",
-        data: [{ name: "Typography", route: "typography" }],
+        data: [
+            { name: "Badge", route: "badge" },
+            { name: "Typography", route: "typography" },
+        ],
     },
     {
         title: "Data Entry",
