@@ -9,10 +9,12 @@ type TeamProps = {
 
 export const Team = ({ image, name, role }: TeamProps) => {
   return (
-    <div>
-      <img src={image} className="circle" alt={name} />
-      <p className="text--center padding-horiz--md">{name}</p>
-      <p className="text--center padding-horiz--md">{role}</p>
+    <div className="team-card">
+      <img src={image} alt={name} />
+      <div className="team-card__info">
+        <p className="team-card__name">{name}</p>
+        <p className="team-card__role">{role}</p>
+      </div>
     </div>
   )
 }

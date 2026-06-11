@@ -137,9 +137,15 @@ importers:
       '@equinor/eds-core-react':
         specifier: workspace:^
         version: link:../../packages/eds-core-react
+      '@equinor/eds-icons':
+        specifier: workspace:^
+        version: link:../../packages/eds-icons
       '@equinor/eds-tokens':
         specifier: workspace:^
         version: link:../../packages/eds-tokens
+      '@equinor/eds-utils':
+        specifier: workspace:^
+        version: link:../../packages/eds-utils
       '@mdx-js/react':
         specifier: ^3.1.1
         version: 3.1.1(@types/react@19.2.17)(react@19.2.7)

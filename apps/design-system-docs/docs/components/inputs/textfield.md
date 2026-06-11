@@ -3,9 +3,15 @@ title: Text field
 sidebar_position: 7
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Text field
 
 TextField lets users enter, interact with, and edit content in forms and dialogs. It's a pre-composed component that combines Label, Description, Input, and HelperMessage into a complete, accessible form field.
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
 
 <iframe
   class="sb-iframe"
@@ -27,6 +33,9 @@ Use TextField when you need a complete form field with label, description, and v
 - Users should choose from limited options - use Radio, Checkbox, Select, or Autocomplete instead
 - You need multiline text entry - use Textarea instead
 
+</TabItem>
+<TabItem value="structure" label="Structure">
+
 ## Structure
 
 TextField is composed of several elements that work together:
@@ -37,6 +46,9 @@ TextField is composed of several elements that work together:
 - **HelperMessage**: Validation feedback or hints below the input
 
 For more flexibility, use the individual components via the [Field](./field) composition pattern.
+
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -145,6 +157,9 @@ TextField adapts to density modes via `data-density` attribute. Spacious mode is
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--density-modes)
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
+
 ## Accessibility
 
 TextField handles accessibility automatically by connecting labels, descriptions, and helper messages via proper ARIA attributes.
@@ -163,6 +178,9 @@ TextField handles accessibility automatically by connecting labels, descriptions
 **Autocomplete attributes:**
 
 Use appropriate `autocomplete` values for predefined input purposes (given-name, email, address-line1). Set `autocomplete="off"` for fields about other people.
+
+</TabItem>
+<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -211,6 +229,9 @@ For inputs with units, prefixes, or icons:
 - Click the adornment instance to switch between text, icon, or text + icon types
 - Click the icon instance within an adornment to swap to a different icon from the library
 
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
+
 ## Do's and Don'ts
 
 :::info **Do**
@@ -230,3 +251,6 @@ For inputs with units, prefixes, or icons:
 - Disable copy and paste functionality
 - Use `type="number"` for numeric input - use `inputmode="numeric"` instead
   :::
+
+</TabItem>
+</Tabs>

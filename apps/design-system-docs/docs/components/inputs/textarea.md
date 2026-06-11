@@ -3,9 +3,15 @@ title: Text area
 sidebar_position: 8
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Text area
 
 Text area lets users enter and edit multiline text content. It combines Label, Description, Textarea, and HelperMessage into a complete, accessible form field designed for longer text entries like descriptions, feedback, or notes. The textarea auto-grows as the user types by default.
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
 
 <iframe
   class="sb-iframe"
@@ -17,12 +23,6 @@ Text area lets users enter and edit multiline text content. It combines Label, D
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--introduction)
 
-```tsx
-import { TextArea } from '@equinor/eds-core-react/next'
-
-<TextArea label="Description" placeholder="Enter text..." rows={3} />
-```
-
 ## When to Use
 
 Use Text area when users are expected to write more than one line of text, or when they need space to express themselves freely with answers that don't have a fixed structure.
@@ -32,6 +32,9 @@ Use Text area when users are expected to write more than one line of text, or wh
 - You expect short, single-line answers - use [TextField](./textfield) instead
 - Users should choose from limited options - use Radio, Checkbox, Select, or Autocomplete instead
 - Dealing with structured data requiring validation (e.g., ID numbers, dates) - use [TextField](./textfield) with the appropriate input type
+
+</TabItem>
+<TabItem value="structure" label="Structure">
 
 ## Structure
 
@@ -44,6 +47,9 @@ Text area is composed of several elements that work together:
 
 For more flexibility, use the individual components via the [Field](./field) composition pattern.
 
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
+
 ## Guidelines
 
 ### Height and Auto-grow
@@ -54,7 +60,7 @@ Text area auto-grows as the user types. Use `rows` to set the initial visible he
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--auto-grow"
   width="100%"
-  height="380"
+  height="450"
   frameborder="1"
 ></iframe>
 
@@ -105,7 +111,7 @@ Use `showCharacterCount` to display a live character count below the textarea. W
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--with-character-count"
   width="100%"
-  height="380"
+  height="460"
   frameborder="1"
 ></iframe>
 
@@ -125,7 +131,7 @@ Use `readOnly` sparingly and only when necessary, as it may confuse users expect
   class="sb-iframe"
   src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--states"
   width="100%"
-  height="500"
+  height="560"
   frameborder="1"
 ></iframe>
 
@@ -145,6 +151,9 @@ Text area adapts to density modes via `data-density` attribute. Spacious mode is
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--density-modes)
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
+
 ## Accessibility
 
 Text area handles accessibility automatically by connecting labels, descriptions, and helper messages via proper ARIA attributes.
@@ -161,6 +170,9 @@ Text area handles accessibility automatically by connecting labels, descriptions
 - Descriptions and helper messages are connected via `aria-describedby`
 - Error states are communicated through `aria-invalid`
 
+</TabItem>
+<TabItem value="figma" label="Figma">
+
 ## Figma
 
 ### Components
@@ -176,6 +188,9 @@ Text area is available as a variant of the shared input component in Figma:
 3. With the instance selected, use the **Instance Swap** menu in the **Design Panel** to swap it to the **Text Area** variant
 4. Configure the outer **Input [EDS]** properties: set the **Title**, **Description**, and toggle **Label + Description** or **Optional/Required** as needed
 5. Configure the inner **Text Area** variant properties: set the **State** (e.g. `Default`, `Focus`, `Filled`, `Read-only`, `Disabled`), **Validation** (`Default` or `Error`), **Placeholder** text, and toggle **Helper Message** on or off
+
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -198,3 +213,6 @@ Text area is available as a variant of the shared input component in Figma:
 - Use text area for short, single-line inputs - use TextField instead
 - Disable fields without providing an explanation to the user
   :::
+
+</TabItem>
+</Tabs>

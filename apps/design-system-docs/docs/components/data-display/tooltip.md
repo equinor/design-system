@@ -3,9 +3,15 @@ title: Tooltip
 sidebar_position: 6
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Tooltip
 
 Tooltips display brief, supplementary information when users hover over or focus on an element. They are ideal for clarifying the meaning of icons, explaining actions, or showing keyboard shortcuts - without cluttering the interface.
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
 
 <iframe
   class="sb-iframe"
@@ -28,6 +34,9 @@ Use a tooltip when a symbol or interactive element needs a brief explanation, or
 - Content with links or interactive elements - use **Popover** instead
 - Replacing alt text or title attributes - tooltips are supplementary, not a substitute
 
+</TabItem>
+<TabItem value="structure" label="Structure">
+
 ## Structure
 
 A tooltip consists of:
@@ -35,6 +44,9 @@ A tooltip consists of:
 - **Trigger** (required) - the focusable element that activates the tooltip on hover or focus. The trigger is wrapped in an inline-block span for anchor positioning.
 - **Label** (required) - the brief text content displayed inside the tooltip bubble
 - **Arrow** (automatic) - a directional indicator pointing toward the trigger
+
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -82,6 +94,9 @@ The tooltip can be disabled via the `disabled` prop. When disabled, the tooltip 
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--disabled)
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
+
 ## Accessibility
 
 Tooltips must be attached to focusable elements so they can be reached via keyboard navigation.
@@ -94,6 +109,9 @@ Tooltips must be attached to focusable elements so they can be reached via keybo
 
 - Avoid attaching tooltips to natively disabled buttons, as browsers handle hover and focus inconsistently on disabled elements
 - Use `aria-disabled` instead of `disabled` when a tooltip is needed on a button that should appear inactive
+
+</TabItem>
+<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -108,6 +126,9 @@ Tooltips must be attached to focusable elements so they can be reached via keybo
 3. Select the component to see its properties in the **Design Panel**
 4. Set the **Tip Position** to control which direction the arrow points (Top, Bottom, Left, Right)
 5. Edit the **text** property to change the tooltip label
+
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -128,3 +149,6 @@ Tooltips must be attached to focusable elements so they can be reached via keybo
 - Attach tooltips to natively disabled elements
 - Repeat text that is already visible on the page
   :::
+
+</TabItem>
+</Tabs>

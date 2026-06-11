@@ -1,0 +1,313 @@
+---
+title: Components
+hide_table_of_contents: true
+displayed_sidebar: null
+---
+
+import '../about/team/team.css'
+import '@equinor/eds-core-react/next/index.css'
+import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Icon, Switch, Divider } from '@equinor/eds-core-react/next'
+import { favorite_filled, check, time, remove, check_circle_outlined, info_circle, warning_outlined } from '@equinor/eds-icons'
+
+export const TooltipMock = ({ title }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 'max-content' }}>
+    <div style={{
+      backgroundColor: 'var(--eds-color-text-strong)',
+      color: 'var(--eds-color-text-strong-on-emphasis)',
+      borderRadius: 'var(--eds-spacing-border-radius-rounded)',
+      paddingBlock: 'var(--eds-container-space-vertical)',
+      paddingInline: 'var(--eds-container-space-horizontal)',
+      boxShadow: '0px 2px 4px rgba(0,0,0,0.14), 0px 3px 4px rgba(0,0,0,0.12), 0px 1px 5px rgba(0,0,0,0.2)',
+      fontFeatureSettings: "'lnum', 'tnum'",
+    }}>{title}</div>
+    <div style={{
+      width: 0,
+      height: 0,
+      borderLeft: '6px solid transparent',
+      borderRight: '6px solid transparent',
+      borderTop: '6px solid var(--eds-color-text-strong)',
+    }} />
+  </div>
+)
+
+<div className="about-page">
+
+<div className="about-hero">
+
+# Components
+
+Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Data Display
+
+Present information, status, structure, or relationships.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="data-display/chip">
+  <div className="component-gallery__preview">
+    <div className="mock mock--row">
+      <Chip tone="accent" selected>Design</Chip>
+      <Chip tone="accent">Development</Chip>
+      <Chip tone="accent">Accessibility</Chip>
+      <Chip tone="accent" selected>Tokens</Chip>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Chip</div>
+    <div className="component-gallery__subtitle">Compact interactive elements for filtering, tagging, and selections.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/icon">
+  <div className="component-gallery__preview">
+    <div className="mock mock--icon">
+      <Icon data={favorite_filled} />
+      <Icon data={check} />
+      <Icon data={time} />
+      <Icon data={remove} />
+      <Icon data={check_circle_outlined} />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Icon</div>
+    <div className="component-gallery__subtitle">Visual symbols communicating meaning at a glance with auto-sizing.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="data-display/tooltip">
+  <div className="component-gallery__preview">
+    <div className="mock" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <TooltipMock title="Explore more actions" />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Tooltip</div>
+    <div className="component-gallery__subtitle">Brief information shown on hover or focus without cluttering the interface.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section">
+
+## Feedback
+
+Communicate progress, results, validation, or system state.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="feedback/banner">
+  <div className="component-gallery__preview">
+    <div className="mock mock--full">
+      <Banner tone="info">
+        <Banner.Icon><Icon data={info_circle} /></Banner.Icon>
+        <Banner.Message>Changes saved successfully.</Banner.Message>
+      </Banner>
+      <Banner tone="warning">
+        <Banner.Icon><Icon data={warning_outlined} /></Banner.Icon>
+        <Banner.Message>This action cannot be undone.</Banner.Message>
+      </Banner>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Banner</div>
+    <div className="component-gallery__subtitle">Important messages with optional actions for informing, warning, or alerting.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Inputs
+
+Capture and validate user data or choices.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="inputs/button">
+  <div className="component-gallery__preview">
+    <div className="mock mock--row">
+      <Button variant="primary">Submit</Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button variant="ghost">Learn more</Button>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Button</div>
+    <div className="component-gallery__subtitle">Trigger actions with hierarchy variants and intent-driven tones.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/textfield">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Field>
+        <Field.Label htmlFor="preview-email">Email address</Field.Label>
+        <Input id="preview-email" placeholder="name@equinor.com" readOnly />
+      </Field>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">TextField</div>
+    <div className="component-gallery__subtitle">Complete form field combining label, description, input, and validation.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/textarea">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Field>
+        <Field.Label htmlFor="preview-desc">Description</Field.Label>
+        <Input as="textarea" id="preview-desc" placeholder="Enter a detailed description…" rows={2} readOnly />
+      </Field>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">TextArea</div>
+    <div className="component-gallery__subtitle">Multiline text input with auto-growing height and full accessibility.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/search">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Search placeholder="Search components…" aria-label="Search" readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Search</div>
+    <div className="component-gallery__subtitle">Quickly locate content with a search input and clear button.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/selection_controls">
+  <div className="component-gallery__preview">
+    <div className="mock mock--selection">
+      <Checkbox label="Accept terms" defaultChecked readOnly />
+      <Radio label="Standard delivery" name="preview-delivery" defaultChecked readOnly />
+      <Switch label="Enable notifications" defaultChecked readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Selection Controls</div>
+    <div className="component-gallery__subtitle">Checkboxes, radios, and switches for toggling options and making selections.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/input">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Input placeholder="Enter value…" readOnly />
+      <Input placeholder="Amount" startText="$" readOnly />
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Input</div>
+    <div className="component-gallery__subtitle">Foundational form element for collecting user data with full control.</div>
+  </div>
+</a>
+
+<a className="component-gallery__card" href="inputs/field">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack">
+      <Field>
+        <Field.Label htmlFor="preview-account">Account type</Field.Label>
+        <Input id="preview-account" placeholder="Choose a value" invalid readOnly />
+        <Field.HelperMessage>Please fill in this field</Field.HelperMessage>
+      </Field>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Field</div>
+    <div className="component-gallery__subtitle">Layout primitive connecting labels and helpers accessibly to controls.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section">
+
+## Navigation
+
+Help users move through content and hierarchies.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="navigation/link">
+  <div className="component-gallery__preview">
+    <div className="mock mock--links">
+      <span className="eds-link" style={{color: 'var(--eds-color-text-link)', textDecoration: 'underline'}}>Getting started</span>
+      <span className="eds-link" style={{color: 'var(--eds-color-text-link)', textDecoration: 'underline'}}>View documentation</span>
+      <span className="eds-link" style={{color: 'var(--eds-color-text-link)', textDecoration: 'underline'}}>Back to overview</span>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Link</div>
+    <div className="component-gallery__subtitle">Clickable text navigating users to pages, documents, or locations.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--surface">
+
+## Surfaces
+
+Structural or container elements that organise and layer content.
+
+<div className="component-gallery">
+
+<a className="component-gallery__card" href="surfaces/divider">
+  <div className="component-gallery__preview">
+    <div className="mock mock--stack" style={{gap: '0.75rem', width: '100%'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <span style={{fontSize: '14px', color: '#333'}}>Section A</span>
+        <span style={{fontSize: '14px', color: '#6F6F6F'}}>Details</span>
+      </div>
+      <Divider />
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <span style={{fontSize: '14px', color: '#333'}}>Section B</span>
+        <span style={{fontSize: '14px', color: '#6F6F6F'}}>Details</span>
+      </div>
+      <Divider />
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <span style={{fontSize: '14px', color: '#333'}}>Section C</span>
+        <span style={{fontSize: '14px', color: '#6F6F6F'}}>Details</span>
+      </div>
+    </div>
+  </div>
+  <div className="component-gallery__body">
+    <div className="component-gallery__title">Divider</div>
+    <div className="component-gallery__subtitle">Thin horizontal rule separating related content into distinct sections.</div>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<div className="about-section about-section--cta">
+
+## Explore in Storybook
+
+An interactive [Storybook](https://storybook.eds.equinor.com) is available for all developed components. Use it to explore variants, props, accessibility notes, and usage examples.
+
+If you cannot find a component or need to propose a new one, [open an issue](https://github.com/equinor/design-system/issues/new) describing the use case, constraints, and any interim solutions you have considered.
+
+</div>
+
+</div>
