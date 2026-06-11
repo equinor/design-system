@@ -11,6 +11,7 @@ const meta: Meta<StoryArgs> = {
   title: 'EDS 2.0 (beta)/Inputs/Button',
   component: Button,
   parameters: {
+    layout: 'centered',
     docs: {
       page,
       source: {
