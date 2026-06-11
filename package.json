@@ -114,7 +114,8 @@
       "js-yaml": ">=4.1.1",
       "gray-matter>js-yaml": "^3.14.1",
       "lodash": ">=4.18.0",
-      "webpackbar": "^7.0.0"
+      "webpackbar": "^7.0.0",
+      "shell-quote": ">=1.8.4"
     }
   }
 }
