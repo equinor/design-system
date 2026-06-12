@@ -12,7 +12,12 @@ import {
   type ReactElement,
   type RefAttributes,
 } from 'react'
-import { search as searchIcon, close, add_box, refresh } from '@equinor/eds-icons'
+import {
+  search as searchIcon,
+  close,
+  add_box,
+  refresh,
+} from '@equinor/eds-icons'
 import type { AutocompleteProps } from './Autocomplete.types'
 import {
   defaultOptionsFilter,
