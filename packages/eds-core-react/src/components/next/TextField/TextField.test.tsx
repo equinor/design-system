@@ -11,8 +11,12 @@ beforeAll(() => {
   HTMLElement.prototype.hidePopover = function (this: HTMLElement) {
     this.removeAttribute('data-popover-open')
   }
-  HTMLElement.prototype.matches = function (this: HTMLElement, selector: string) {
-    if (selector === ':popover-open') return this.hasAttribute('data-popover-open')
+  HTMLElement.prototype.matches = function (
+    this: HTMLElement,
+    selector: string,
+  ) {
+    if (selector === ':popover-open')
+      return this.hasAttribute('data-popover-open')
     return Element.prototype.matches.call(this, selector)
   }
 })
