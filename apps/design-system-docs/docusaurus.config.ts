@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { themes as prismThemes } from 'prism-react-renderer'
 import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
@@ -23,7 +24,11 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  clientModules: ['./src/clientModules/syncColorScheme.ts'],
+  clientModules: [
+    './src/clientModules/syncColorScheme.ts',
+    './src/clientModules/foundationDropdownNav.ts',
+    './src/clientModules/sbIframeNoScroll.ts',
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -91,10 +96,59 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    function edsResolverPlugin() {
+      return {
+        name: 'eds-resolver',
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                // Let webpack find EDS workspace packages from the monorepo root
+                // so that transitive imports inside built components resolve correctly.
+                // Use exact match ($) to avoid breaking subpath imports like /css/variables
+                '@equinor/eds-tokens$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-tokens',
+                ),
+                '@equinor/eds-icons$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-icons',
+                ),
+                '@equinor/eds-utils$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-utils',
+                ),
+                // EDS 2.0 (next) is intentionally NOT exposed via the package's
+                // `exports` map — that entry is injected only for beta npm
+                // releases (see #4395), so stable releases never ship it.
+                // Point the docs build straight at the built artifacts so
+                // `/next` resolves locally without re-adding the export to
+                // source. Requires eds-core-react to be built first.
+                '@equinor/eds-core-react/next$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-core-react/dist/esm-next/index.next.js',
+                ),
+                '@equinor/eds-core-react/next/index.css$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-core-react/build/index.css',
+                ),
+              },
+              fallback: {
+                // eds-utils references Node.js 'url' module (unused in browser)
+                url: false,
+              },
+            },
+          }
+        },
+      }
+    },
+  ],
+
   themeConfig: {
     image: 'img/equinor.png',
     navbar: {
-      title: 'Equinor Design System',
+      title: '',
       logo: {
         alt: 'Equinor type Logo',
         src: 'img/eds-logo.svg',
@@ -103,16 +157,43 @@ const config: Config = {
 
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'aboutSidebar',
-          label: 'About EDS',
-          position: 'right',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'foundationSidebar',
+          type: 'dropdown',
           label: 'Foundation',
+          to: '/foundation',
           position: 'right',
+          className: 'foundation-dropdown',
+          items: [
+            {
+              type: 'doc',
+              docId: 'foundation/accessibility',
+              label: 'Accessibility',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/colour/intro',
+              label: 'Colour',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/design-tokens/grid',
+              label: 'Design Tokens',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/datavisualisation',
+              label: 'Data Visualisation',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/patterns',
+              label: 'Patterns',
+            },
+            {
+              type: 'doc',
+              docId: 'foundation/assets/image_placeholder',
+              label: 'Assets',
+            },
+          ],
         },
         {
           type: 'docSidebar',
@@ -127,9 +208,8 @@ const config: Config = {
           position: 'right',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'supportSidebar',
-          label: 'Support',
+          to: '/getting-started',
+          label: 'Get started',
           position: 'right',
         },
         {

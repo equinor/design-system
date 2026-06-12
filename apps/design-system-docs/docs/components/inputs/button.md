@@ -3,9 +3,15 @@ title: Button
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Button
 
 Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to use" default>
 
 <iframe
   class="sb-iframe"
@@ -13,6 +19,7 @@ Buttons are the primary action triggers in our design system. They help users pe
   width="100%"
   height="70"
   frameborder="1"
+  scrolling="no"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--default)
@@ -27,6 +34,9 @@ Use a button when a concrete action needs to be performed, such as saving or sub
 - Filtering information in lists or tables - use **Chip** instead
 - Displaying selected filters - use **Chip** instead
 
+</TabItem>
+<TabItem value="structure" label="Structure">
+
 ## Structure
 
 All button variants support:
@@ -34,6 +44,9 @@ All button variants support:
 - **Text-only** (default)
 - **Left/right icons** (paired with text)
 - **Icon-only** (requires an accessible name)
+
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -53,6 +66,7 @@ Use variants to guide users to the most important action:
   width="100%"
   height="370"
   frameborder="1"
+  scrolling="no"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--all-variants)
@@ -71,6 +85,7 @@ Tones communicate the intent or nature of an action:
   width="100%"
   height="175"
   frameborder="1"
+  scrolling="no"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--tones)
@@ -121,6 +136,7 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
   width="100%"
   height="120"
   frameborder="1"
+  scrolling="no"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--icon-only-variants)
@@ -135,9 +151,13 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
   width="100%"
   height="130"
   frameborder="1"
+  scrolling="no"
 ></iframe>
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--circular-icon-only)
+
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
 
 ## Accessibility
 
@@ -154,6 +174,9 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
 **Comfortable Density**
 
 Comfortable density should come with the option to switch to spacious mode for accessibility reasons.
+
+</TabItem>
+<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -188,6 +211,9 @@ For buttons with icons:
 - Toggle **Show Trailing Icon** to add an icon after the label
 - Click the icon instance to swap to a different icon from the library
 
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
+
 ## Do's and Don'ts
 
 :::info **Do**
@@ -199,7 +225,7 @@ For buttons with icons:
 - Provide accessible names for icon-only buttons
 - Allow switching from comfortable to spacious density for accessibility
 - Place primary buttons first when grouping (exception: Previous/Next ordering)
-  :::
+:::
 
 :::danger **Don't**
 
@@ -209,4 +235,7 @@ For buttons with icons:
 - Rely on colour alone to convey meaning - ensure text and icons are clear
 - Disable buttons without explanation - add a tooltip explaining why it's disabled
 - Use more than one primary-variant accent-tone button per page
-  :::
+:::
+
+</TabItem>
+</Tabs>
