@@ -1,9 +1,21 @@
 @layer eds-components {
   .eds-chip {
+    /* Replaces data-space-proportions="squished" — squished vertical spacing for sm selectable space */
+    --eds-spacing-proportions-sm-vertical: var(
+      --eds-spacing-inset-sm-vertical-squished
+    );
+
+    /* Replaces data-font-size="md" — sets icon size and gap tokens for md context */
+    --eds-typography-icon-size: var(--eds-sizing-icon-md);
+    --eds-typography-gap-horizontal: var(--eds-spacing-icon-md-gap-horizontal);
+
     /* Typography metrics — same compensation pattern as Button */
+    --_label-font-size: var(--eds-typography-ui-body-md-font-size);
     --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
     --_label-height: round(1cap, 4px); /* Figma has a cap-rounded value but it is not exposed as a CSS token; 1cap gives the same result (Inter metrics + 4px grid) */
+    --_font-family: var(--eds-typography-ui-body-font-family);
     --_padding-block: var(--eds-selectable-space-vertical);
+
     /*
      * Reduce block padding by half the line-height overflow so the visual
      * height equals (padding × 2 + cap-height) instead of (padding × 2 + line-height).
@@ -28,7 +40,9 @@
     border: none;
     border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
 
-    font: inherit;
+    font-family: var(--_font-family);
+    font-size: var(--_label-font-size);
+    line-height: var(--_label-line-height);
     color: inherit;
 
     transition:
@@ -103,15 +117,6 @@
       margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
     }
   }
-}
-
-/*
- * Outside @layer to override typography.css [data-font-family] { display: block }.
- * data-font-family/data-font-size on the chip container establishes the typography
- * context for gap and icon sizing tokens.
- */
-.eds-chip {
-  display: inline-flex;
 }
 
 /*

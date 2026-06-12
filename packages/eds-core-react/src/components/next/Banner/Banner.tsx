@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
 import { close } from '@equinor/eds-icons'
-import { TypographyNext } from '../../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import type {
@@ -27,19 +26,13 @@ const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
 const BannerMessage = forwardRef<HTMLParagraphElement, BannerMessageProps>(
   function BannerMessage({ className, children, ...rest }, ref) {
     return (
-      <TypographyNext
+      <p
         ref={ref}
-        as="p"
-        family="ui"
-        size="md"
-        baseline="center"
-        lineHeight="default"
-        tracking="normal"
         className={['eds-banner__message', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
-      </TypographyNext>
+      </p>
     )
   },
 )
