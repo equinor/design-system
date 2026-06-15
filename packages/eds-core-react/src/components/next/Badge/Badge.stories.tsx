@@ -351,6 +351,55 @@ MultipleLabels.parameters = {
   },
 }
 
+export const Density: StoryFn<BadgeProps> = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '24px',
+      fontFamily: 'var(--eds-typography-ui-body-font-family)',
+    }}
+  >
+    <div data-density="spacious">
+      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        Spacious (default)
+      </p>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <Badge tone="neutral">Draft</Badge>
+        <Badge tone="success">Active</Badge>
+        <Badge tone="warning">Pending</Badge>
+        <Badge tone="danger" emphasis="medium">
+          Critical
+        </Badge>
+        <Badge tone="info">Beta</Badge>
+      </div>
+    </div>
+    <div data-density="comfortable">
+      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        Comfortable
+      </p>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <Badge tone="neutral">Draft</Badge>
+        <Badge tone="success">Active</Badge>
+        <Badge tone="warning">Pending</Badge>
+        <Badge tone="danger" emphasis="medium">
+          Critical
+        </Badge>
+        <Badge tone="info">Beta</Badge>
+      </div>
+    </div>
+  </div>
+)
+
+Density.parameters = {
+  docs: {
+    description: {
+      story:
+        'Badge respects the `data-density` attribute on a parent element. Comfortable reduces padding for denser UIs.',
+    },
+  },
+}
+
 export const AllCombinations: StoryFn<BadgeProps> = () => {
   const tones = [
     'neutral',
