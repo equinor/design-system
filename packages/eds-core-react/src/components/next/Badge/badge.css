@@ -1,0 +1,59 @@
+@layer eds-components {
+  .eds-badge {
+    /* Pseudo-private vars — override these in variants, never the property directly */
+    --_color: var(--eds-color-text-subtle);
+    --_bg: transparent;
+    --_padding-block: var(--eds-spacing-vertical-2xs);
+    --_padding-inline: var(--eds-spacing-vertical-2xs);
+
+    display: inline-block;
+
+    padding-block: var(--_padding-block);
+    padding-inline: var(--_padding-inline);
+    border-radius: var(--eds-spacing-border-radius-rounded);
+
+    /* EDS Typography Mono Num: 12px / 500 / lining tabular numbers */
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    font-feature-settings: 'lnum', 'tnum';
+    font-weight: 500;
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    color: var(--_color);
+    white-space: nowrap;
+
+    background-color: var(--_bg);
+
+    @supports (text-box: trim-both cap alphabetic) {
+      text-box: trim-both cap alphabetic;
+    }
+
+    /* Neutral: wider horizontal padding (8px vs 6px for tonal variants) */
+    &[data-color-appearance='neutral'] {
+      --_padding-inline: var(--eds-spacing-vertical-xs);
+    }
+
+    /* ===== LOW EMPHASIS ===== */
+
+    &[data-emphasis='low'][data-variant='solid'] {
+      --_bg: var(--eds-color-bg-canvas);
+    }
+
+    &[data-emphasis='low'][data-variant='outlined'] {
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    }
+
+    /* ===== MEDIUM EMPHASIS ===== */
+
+    &[data-emphasis='medium'][data-variant='solid'] {
+      --_bg: var(--eds-color-bg-fill-muted-default);
+    }
+
+    &[data-emphasis='medium'][data-variant='outlined'] {
+      --_bg: var(--eds-color-bg-canvas);
+
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-medium);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    }
+  }
+}
