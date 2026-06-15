@@ -66,11 +66,14 @@ const DialogRoot = forwardRef<HTMLDialogElement, DialogProps>(function Dialog(
     }
   }, [open])
 
-  const setRef = (node: HTMLDialogElement | null) => {
-    dialogRef.current = node
-    if (typeof ref === 'function') ref(node)
-    else if (ref) ref.current = node
-  }
+  const setRef = useCallback(
+    (node: HTMLDialogElement | null) => {
+      dialogRef.current = node
+      if (typeof ref === 'function') ref(node)
+      else if (ref) ref.current = node
+    },
+    [ref],
+  )
 
   const handleClose = () => {
     if (expectedCloseRef.current) {
@@ -137,10 +140,7 @@ const DialogRoot = forwardRef<HTMLDialogElement, DialogProps>(function Dialog(
 DialogRoot.displayName = 'Dialog'
 
 const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
-  function DialogHeader(
-    { closable = true, children, className, ...rest },
-    ref,
-  ) {
+  function DialogHeader({ children, className, ...rest }, ref) {
     const ctx = useContext(DialogContext)
     return (
       <div
@@ -149,19 +149,17 @@ const DialogHeader = forwardRef<HTMLDivElement, DialogHeaderProps>(
         {...rest}
       >
         <div className="title-container">{children}</div>
-        {closable && (
-          <Button
-            type="button"
-            variant="ghost"
-            tone="accent"
-            icon
-            round
-            onClick={() => ctx?.close()}
-            aria-label="Close"
-          >
-            <Icon data={closeIcon} />
-          </Button>
-        )}
+        <Button
+          type="button"
+          variant="ghost"
+          tone="accent"
+          icon
+          round
+          onClick={() => ctx?.close()}
+          aria-label="Close"
+        >
+          <Icon data={closeIcon} />
+        </Button>
       </div>
     )
   },

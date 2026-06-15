@@ -53,7 +53,7 @@ describe('Dialog (next)', () => {
     it('forwards ref to the dialog element', () => {
       const ref = { current: null as HTMLDialogElement | null }
       render(
-        <Dialog open ref={ref} aria-label="d">
+        <Dialog open onOpenChange={() => {}} ref={ref} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -62,7 +62,7 @@ describe('Dialog (next)', () => {
 
     it('renders Dialog.Actions children inside an action row', () => {
       render(
-        <Dialog open aria-label="d">
+        <Dialog open onOpenChange={() => {}} aria-label="d">
           <Dialog.Actions>
             <Button>Confirm</Button>
           </Dialog.Actions>
@@ -75,7 +75,12 @@ describe('Dialog (next)', () => {
 
     it('applies an inline width override via style', () => {
       render(
-        <Dialog open style={{ inlineSize: '32rem' }} aria-label="d">
+        <Dialog
+          open
+          onOpenChange={() => {}}
+          style={{ inlineSize: '32rem' }}
+          aria-label="d"
+        >
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -89,16 +94,16 @@ describe('Dialog (next)', () => {
 
     it('omits data-scrim when scrim is false', () => {
       render(
-        <Dialog open scrim={false} aria-label="d">
+        <Dialog open onOpenChange={() => {}} scrim={false} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
       expect(screen.getByRole('dialog')).not.toHaveAttribute('data-scrim')
     })
 
-    it('renders a close button by default', () => {
+    it('renders a close button inside Dialog.Header', () => {
       render(
-        <Dialog open aria-label="d">
+        <Dialog open onOpenChange={() => {}} aria-label="d">
           <Dialog.Header>
             <Dialog.Title>Title</Dialog.Title>
           </Dialog.Header>
@@ -106,25 +111,12 @@ describe('Dialog (next)', () => {
       )
       expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
     })
-
-    it('omits the close button when closable is false', () => {
-      render(
-        <Dialog open aria-label="d">
-          <Dialog.Header closable={false}>
-            <Dialog.Title>Title</Dialog.Title>
-          </Dialog.Header>
-        </Dialog>,
-      )
-      expect(
-        screen.queryByRole('button', { name: 'Close' }),
-      ).not.toBeInTheDocument()
-    })
   })
 
   describe('Open state', () => {
     it('opens via showModal when initial open is true', () => {
       render(
-        <Dialog open aria-label="d">
+        <Dialog open onOpenChange={() => {}} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -133,7 +125,7 @@ describe('Dialog (next)', () => {
 
     it('opens when the open prop becomes true', () => {
       const { rerender } = render(
-        <Dialog open={false} aria-label="d">
+        <Dialog open={false} onOpenChange={() => {}} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -142,7 +134,7 @@ describe('Dialog (next)', () => {
       )
 
       rerender(
-        <Dialog open aria-label="d">
+        <Dialog open onOpenChange={() => {}} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -151,14 +143,14 @@ describe('Dialog (next)', () => {
 
     it('closes when the open prop becomes false', () => {
       const { rerender } = render(
-        <Dialog open aria-label="d">
+        <Dialog open onOpenChange={() => {}} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
       expect(screen.getByRole('dialog')).toHaveAttribute('open')
 
       rerender(
-        <Dialog open={false} aria-label="d">
+        <Dialog open={false} onOpenChange={() => {}} aria-label="d">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -322,7 +314,7 @@ describe('Dialog (next)', () => {
 
     it('respects an explicit aria-labelledby on Dialog', () => {
       render(
-        <Dialog open aria-labelledby="explicit-id">
+        <Dialog open onOpenChange={() => {}} aria-labelledby="explicit-id">
           <Dialog.Header>
             <Dialog.Title id="explicit-id">Title</Dialog.Title>
           </Dialog.Header>
@@ -336,7 +328,7 @@ describe('Dialog (next)', () => {
 
     it('uses aria-label without setting aria-labelledby', () => {
       render(
-        <Dialog open aria-label="Confirmation">
+        <Dialog open onOpenChange={() => {}} aria-label="Confirmation">
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )
@@ -347,7 +339,7 @@ describe('Dialog (next)', () => {
 
     it('omits aria-labelledby when no title and no aria-label is given', () => {
       render(
-        <Dialog open>
+        <Dialog open onOpenChange={() => {}}>
           <Dialog.Content>x</Dialog.Content>
         </Dialog>,
       )

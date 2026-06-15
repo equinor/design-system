@@ -74,18 +74,11 @@
     & .title {
       margin: 0;
 
+      font-family: var(--eds-typography-ui-body-font-family);
       font-size: var(--eds-typography-ui-body-lg-font-size);
       font-weight: var(--eds-typography-ui-body-lg-font-weight);
       line-height: var(--eds-typography-ui-body-lg-line-height-default);
       color: var(--_text-color);
     }
   }
-}
-
-/* Storybook's preview-head.html applies a `:where(h1-h6) { font-family: Equinor }`
-   reset *outside* any @layer. Layered styles always lose to unlayered styles
-   regardless of specificity, so we set the title font-family outside the layer
-   to win the cascade. Inter is what the Figma design specifies for this size. */
-.eds-dialog .title {
-  font-family: var(--eds-typography-ui-body-font-family);
 }

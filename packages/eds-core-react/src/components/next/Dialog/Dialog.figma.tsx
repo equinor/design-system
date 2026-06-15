@@ -10,13 +10,12 @@ figma.connect(
       title: figma.string('Dialog Title'),
       // Trailing space matches the Figma layer name verbatim.
       content: figma.string('Content '),
-      hasClose: figma.boolean('Has Close Icon'),
       showPrimary: figma.boolean('Show Primary Button'),
       showSecondary: figma.boolean('Show Secondary Button'),
     },
-    example: ({ title, content, hasClose, showPrimary, showSecondary }) => (
+    example: ({ title, content, showPrimary, showSecondary }) => (
       <Dialog open onOpenChange={() => {}}>
-        <Dialog.Header closable={hasClose}>
+        <Dialog.Header>
           <Dialog.Title>{title}</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>{content}</Dialog.Content>

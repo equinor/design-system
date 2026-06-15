@@ -55,25 +55,19 @@ export const Introduction: StoryFn = () => {
   )
 }
 
-export const WithoutCloseButton: StoryFn = () => {
+export const Passive: StoryFn = () => {
   const [open, setOpen] = useState(false)
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Header closable={false}>
-          <Dialog.Title>Decision required</Dialog.Title>
+        <Dialog.Header>
+          <Dialog.Title>You are now offline</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
-          The user must pick one of the actions below — no close affordance in
-          the header.
+          A passive dialog — no action row. Dismiss via the close icon, Escape,
+          or backdrop click.
         </Dialog.Content>
-        <Dialog.Actions>
-          <Button variant="secondary" onClick={() => setOpen(false)}>
-            Discard
-          </Button>
-          <Button onClick={() => setOpen(false)}>Keep</Button>
-        </Dialog.Actions>
       </Dialog>
     </>
   )

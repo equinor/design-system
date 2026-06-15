@@ -8,9 +8,10 @@ export type DialogProps = {
   open: boolean
   /**
    * Called when the dialog requests to close — via Escape key, backdrop click,
-   * or any consumer-rendered close trigger. Update your `open` state in response.
+   * or the header close button. Update your `open` state in response; the
+   * component is fully controlled.
    */
-  onOpenChange?: (open: boolean) => void
+  onOpenChange: (open: boolean) => void
   /**
    * Whether to render a visible backdrop (scrim) behind the dialog.
    * Defaults to true. Set to false for transparent backdrops.
@@ -20,14 +21,6 @@ export type DialogProps = {
 } & Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open' | 'onClose'>
 
 export type DialogHeaderProps = {
-  /**
-   * Renders a close icon button at the end of the header that closes the
-   * dialog (firing the parent `Dialog`'s `onOpenChange(false)` exactly once).
-   * Set to `false` for decision-forcing dialogs where the user must pick an
-   * action.
-   * @default true
-   */
-  closable?: boolean
   children?: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
