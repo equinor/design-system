@@ -1,10 +1,10 @@
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useColorScheme } from "react-native";
 import "react-native-gesture-handler";
 
 import { useAppStore } from "@/lib/store";
+import { useUserScheme } from "@/lib/useUserScheme";
 import { EDSProvider, useEDS, useToken } from "@equinor/eds-mobile-components";
 import { ThemeProvider } from "@react-navigation/native";
 import { useEffect } from "react";
@@ -56,8 +56,7 @@ function AppContent() {
 
 export default function RootLayout() {
     const [loaded] = useEDS();
-    const systemScheme = useColorScheme();
-    const userScheme = useAppStore((state) => state.scheme);
+    const resolvedScheme = useUserScheme();
     const density = useAppStore((state) => state.density);
 
     useEffect(() => {
@@ -71,7 +70,7 @@ export default function RootLayout() {
     return (
         <EDSProvider
             density={density}
-            colorScheme={userScheme ?? systemScheme ?? "light"}
+            colorScheme={resolvedScheme}
         >
             <AppContent />
         </EDSProvider>

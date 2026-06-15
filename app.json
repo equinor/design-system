@@ -7,7 +7,6 @@
         "icon": "./assets/images/eDS_Logo_Light.png",
         "scheme": "mobile-storybook",
         "userInterfaceStyle": "automatic",
-        "newArchEnabled": false,
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.equinor.eds.mobile",
@@ -20,8 +19,7 @@
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/eDS_Logo_Light.png",
                 "backgroundColor": "#ffffff"
-            },
-            "edgeToEdgeEnabled": true
+            }
         },
         "web": {
             "bundler": "metro",
@@ -38,7 +36,10 @@
                     "resizeMode": "contain",
                     "backgroundColor": "#ffffff"
                 }
-            ]
+            ],
+            "expo-font",
+            "expo-image",
+            "expo-web-browser"
         ],
         "experiments": {
             "typedRoutes": true
