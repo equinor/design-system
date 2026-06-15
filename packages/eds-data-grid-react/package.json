@@ -72,7 +72,7 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-hook-form": "^7.75.0",
-    "rollup": "^4.60.4",
+    "rollup": "^4.61.1",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^10.4.3",
