@@ -27,11 +27,6 @@
       text-box: trim-both cap alphabetic;
     }
 
-    /* Neutral: wider horizontal padding (8px vs 6px for tonal variants) */
-    &[data-color-appearance='neutral'] {
-      --_padding-inline: var(--eds-spacing-vertical-xs);
-    }
-
     /* ===== LOW EMPHASIS ===== */
 
     &[data-emphasis='low'][data-variant='solid'] {
