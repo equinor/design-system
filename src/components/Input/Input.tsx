@@ -1,10 +1,8 @@
 import React, { ReactNode, forwardRef, useState } from "react";
 import {
-    NativeSyntheticEvent,
     Platform,
     Text,
     TextInput,
-    TextInputFocusEventData,
     TextInputProps,
     View,
 } from "react-native";
@@ -87,12 +85,12 @@ export const Input = forwardRef<TextInput, InputProps>(
         });
         const showErrorIcon = invalid && !hideErrorIcon && !disabled;
 
-        const onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+        const onFocus: TextInputProps["onFocus"] = (e) => {
             setIsSelected(true);
             rest.onFocus?.(e);
         };
 
-        const onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+        const onBlur: TextInputProps["onBlur"] = (e) => {
             setIsSelected(false);
             rest.onBlur?.(e);
         };
