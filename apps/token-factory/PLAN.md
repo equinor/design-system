@@ -834,4 +834,13 @@ The modular-scale teach, replacing colour's three-ring Reveal.
 - Wired: `SceneId` gains `'master-gauge'`; registered; lane ref 2 repointed.
 - **Verified in Chrome:** build clean. Scene shows the BASE rod + the 10-block ladder with md glowing yellow + the formula card. No console errors.
 
-Next: **H.4 — Milling to Spec** + extract the `MetalSort` sprite.
+### Phase H.4 — Milling to Spec + MetalSort sprite ✓
+
+The size-cut teach, replacing colour's Peel + name-stamp.
+
+- Extracted `sprites/MetalSort.tsx` + `metalSort.css` from Assembly's inline block (the "extract later" note from H.1). `Assembly.tsx` now imports it; the duplicated `.metal-sort` rules were removed from `assembly.css`.
+- New `scenes/typography/Milling.tsx` + `milling.css`. 4 beats: blank billet on the mill bed → mill cuts (sort + "font-size: 14px") → seat cut (a blue dashed line-box around the sort + "line-height: 16px · leading · 4px grid") → build engraves the `--eds-typography-ui-body-md-font-size` sticker. Added an intro narration line so the 4 visual beats align with the script.
+- Wired: `SceneId` gains `'milling'`; registered; lane ref 3 repointed.
+- **Verified in Chrome:** build clean. Scene shows the cutter, the md sort in its leading line-box, both callouts, and the engraved sticker. No console errors. (Polish note for H.7: the long sticker grazes the narrator bubble — shorten or reposition.)
+
+Next: **H.5 — The Density Dial** (hero scene).

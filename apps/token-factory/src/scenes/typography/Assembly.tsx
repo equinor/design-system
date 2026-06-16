@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Gemstone } from '../../sprites/Gemstone'
+import { MetalSort } from '../../sprites/MetalSort'
 import { SceneHeader } from '../../chrome/SceneHeader'
 import './assembly.css'
 
@@ -81,9 +82,7 @@ export function Assembly({ activeBeatIdx }: { activeBeatIdx: number }) {
 
               <div className="assembly-material assembly-material-sort">
                 <div className="assembly-material-sprite">
-                  <div className="metal-sort">
-                    <span className="metal-sort-face">md</span>
-                  </div>
+                  <MetalSort />
                 </div>
                 <div className="assembly-material-meta">
                   <span className="assembly-material-label">sort</span>

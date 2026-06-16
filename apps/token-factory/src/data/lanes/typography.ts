@@ -81,10 +81,11 @@ export const TYPOGRAPHY_LANE: Lane = {
       ],
     },
     {
-      id: 'placeholder',
+      id: 'milling',
       title: 'milling to spec',
       stage: 'mill',
       lines: [
+        'The blank billet goes on the mill bed.',
         'The mill cuts md to spec: the base, times two-to-the-minus-one-fifth. At the default base, 14 pixels — snapped to the nearest half-pixel so it stays crisp.',
         'Then the seat is cut — line-height from a second curve, snapped to a 4-pixel grid so every line shares one rhythm. The old printers called that strip of metal the leading. For md, 16.',
         'eds-tokens-build engraves the part number: --eds-typography-ui-body-md-font-size.',

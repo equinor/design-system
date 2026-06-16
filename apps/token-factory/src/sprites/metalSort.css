@@ -1,0 +1,23 @@
+@layer tf-sprites {
+  /* The milled metal sort — a steel block with the size engraved on its
+     face. Bevelled top (catches light) and dark foot. */
+  .metal-sort {
+    position: relative;
+    width: calc(22 * var(--px));
+    height: calc(26 * var(--px));
+    background: var(--pico-light-gray);
+    border: var(--px) solid var(--pico-black);
+    border-top-color: var(--pico-white);
+    border-bottom-width: calc(3 * var(--px));
+    border-bottom-color: var(--pico-dark-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .metal-sort-face {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(6 * var(--px));
+    color: var(--pico-black);
+  }
+}

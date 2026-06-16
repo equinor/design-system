@@ -1,0 +1,159 @@
+@layer tf-scenes {
+  .milling-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .milling-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  /* The mill — a cutter head on an arm, centred above the bed. */
+  .mill-rig {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mill-rig.is-cutting {
+    animation: mill-cut 420ms steps(6, end);
+  }
+
+  @keyframes mill-cut {
+    0% {
+      transform: translate(-50%, calc(-10 * var(--px)));
+    }
+    50% {
+      transform: translate(-50%, calc(2 * var(--px)));
+    }
+    55% {
+      transform: translate(calc(-50% - 1 * var(--px)), 0);
+    }
+    60% {
+      transform: translate(calc(-50% + 1 * var(--px)), 0);
+    }
+    100% {
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .mill-arm {
+    width: calc(6 * var(--px));
+    height: calc(40 * var(--px));
+    background: var(--pico-dark-gray);
+  }
+
+  .mill-head {
+    width: calc(30 * var(--px));
+    height: calc(12 * var(--px));
+    background: var(--pico-light-gray);
+    border: var(--px) solid var(--pico-black);
+    border-bottom: calc(3 * var(--px)) solid var(--pico-orange);
+  }
+
+  .mill-bed {
+    position: absolute;
+    bottom: calc(46 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(120 * var(--px));
+    height: calc(6 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    z-index: 1;
+  }
+
+  .milling-piece {
+    position: absolute;
+    bottom: calc(52 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    gap: calc(6 * var(--px));
+  }
+
+  /* The line-box around the sort — appears when the seat (leading) is
+     cut. Blue dashed top/bottom shows the line-height the glyph sits in. */
+  .milling-linebox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    border: var(--px) dashed transparent;
+    transition: padding 200ms ease;
+  }
+
+  .milling-linebox.is-on {
+    padding-top: calc(6 * var(--px));
+    padding-bottom: calc(6 * var(--px));
+    border-top-color: var(--pico-blue);
+    border-bottom-color: var(--pico-blue);
+  }
+
+  .milling-blank {
+    width: calc(22 * var(--px));
+    height: calc(26 * var(--px));
+    background: var(--pico-dark-gray);
+    border: var(--px) solid var(--pico-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(8 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .milling-callout {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1 * var(--px));
+    padding: calc(2 * var(--px)) calc(3 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-light-gray);
+    animation: peel-info-pop 200ms steps(3, end);
+  }
+
+  .mc-key {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+
+  .mc-val {
+    font-size: calc(5 * var(--px));
+    color: var(--pico-yellow);
+  }
+
+  .mc-note {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-blue);
+  }
+
+  /* The engraved part-number sticker. */
+  .milling-stamp {
+    position: absolute;
+    top: calc(12 * var(--px));
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    z-index: 4;
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-black);
+    background: var(--pico-yellow);
+    padding: calc(2 * var(--px)) calc(3 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+}
