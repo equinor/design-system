@@ -32,7 +32,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
     "tailwindcss": "^4.2.4",
-    "vite": "^8.0.10"
+    "vite": "^8.0.16"
   },
   "scripts": {
     "dev": "vite",
