@@ -36,6 +36,8 @@ export type SceneId =
   // Typography lane (st-tokens, foundry frame). Built scene-by-scene;
   // unbuilt scenes route through 'placeholder' until their component
   // lands. 'assembly' is the validated payoff (H.1).
+  | 'foundry-inside'
+  | 'billet'
   | 'assembly'
   // Generic placeholder — used by every scaffold lane until real
   // scene components land. One component, many scene-ref instances.

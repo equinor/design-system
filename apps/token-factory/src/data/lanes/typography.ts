@@ -51,7 +51,7 @@ export const TYPOGRAPHY_LANE: Lane = {
   // validated payoff (H.1), built first.
   scenes: [
     {
-      id: 'placeholder',
+      id: 'foundry-inside',
       title: 'inside the foundry',
       stage: 'json',
       lines: [
@@ -61,7 +61,7 @@ export const TYPOGRAPHY_LANE: Lane = {
       ],
     },
     {
-      id: 'placeholder',
+      id: 'billet',
       title: 'the billet',
       stage: 'billet',
       lines: [

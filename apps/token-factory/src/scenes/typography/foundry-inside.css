@@ -1,0 +1,121 @@
+@layer tf-scenes {
+  .foundry-inside-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .foundry-inside-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  .machine-shop-sign {
+    position: absolute;
+    top: calc(4 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    font-size: calc(5 * var(--px));
+    color: var(--pico-light-gray);
+    letter-spacing: calc(1 * var(--px));
+  }
+
+  /* Steel machinery silhouettes — two tiles, slow leftward scroll. */
+  .foundry-machinery {
+    position: absolute;
+    bottom: calc(20 * var(--px));
+    left: 0;
+    display: flex;
+    width: 200%;
+    height: calc(70 * var(--px));
+    animation: foundry-scroll 6s linear infinite;
+  }
+
+  .foundry-machinery-tile {
+    position: relative;
+    width: 50%;
+    flex-shrink: 0;
+    height: 100%;
+  }
+
+  .foundry-rig {
+    position: absolute;
+    bottom: 0;
+    background: #2a2f3a;
+    border-top: var(--px) solid #3b4250;
+  }
+
+  .fr-1 {
+    left: calc(20 * var(--px));
+    width: calc(26 * var(--px));
+    height: calc(50 * var(--px));
+  }
+
+  .fr-2 {
+    left: calc(70 * var(--px));
+    width: calc(18 * var(--px));
+    height: calc(70 * var(--px));
+  }
+
+  .fr-3 {
+    left: calc(120 * var(--px));
+    width: calc(34 * var(--px));
+    height: calc(40 * var(--px));
+  }
+
+  @keyframes foundry-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .foundry-inside-belt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(20 * var(--px));
+    overflow: hidden;
+  }
+
+  .foundry-inside-crate {
+    position: absolute;
+    bottom: calc(16 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(2 * var(--px));
+  }
+
+  .foundry-part-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+    padding: calc(2 * var(--px)) calc(3 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-light-gray);
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+
+  .foundry-part-tag .tag-key {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+
+  .foundry-part-tag .tag-value {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-yellow);
+  }
+}

@@ -816,4 +816,13 @@ Built the bookend first to validate the end-state before scenes 2–8 (mirrors t
 - **Bug found + fixed in Chrome:** first render showed an empty bench — `.assembly-stage` used `position: relative` + a grid `1fr` track, but `.scene-header-bar` is `position: absolute` (out of flow), so the track collapsed to zero height. Fixed by positioning `.assembly-stage` absolutely below the 16px header (`top: 20px`), mirroring `.jeweller-stage`.
 - **Verified in Chrome:** intro → dock → select s&t tokens → advance to Assembly. Real teal Button with Inter font renders on the steel bench; density tag + button size cycle COMFORTABLE↔SPACIOUS live. No console errors (benign favicon 404 only).
 
-Next: **H.2 — Inside (foundry) + Billet**, replacing the first two placeholders with real components.
+### Phase H.2 — Inside the Foundry + The Billet ✓
+
+First two real foundry scenes, replacing placeholders 0 and 1.
+
+- New `scenes/typography/FoundryInside.tsx` + `foundry-inside.css`. The shared belt + `Crate` sprite route into a MACHINE SHOP wing — steel machinery silhouettes scroll past (two-tile `foundry-scroll` loop) instead of the gem hall. Crate carries the lane-accent "s&t tokens" label; a "part: ui-body / md" tag pops at beat 1. Not a reuse of the colours-static `Inside` (which hardcodes colour labels) — kept separate so the colour scene is untouched.
+- New `scenes/typography/Billet.tsx` + `billet.css`. The crate cracks under the press (SLAM at beat 1) and opens to a **dull, speckled grey billet** — no glow, a "?" face, tagged "no dimensions yet". The visual anticlimax vs colour's glowing geode IS the teach: typography's value doesn't exist yet, it gets machined.
+- Wired: `SceneId` gains `'foundry-inside'` + `'billet'`; registered in `sceneRegistry`; lane refs 0 and 1 repointed off `placeholder`.
+- **Verified in Chrome:** build clean. Lane select → INSIDE THE FOUNDRY shows MACHINE SHOP sign + steel rigs + s&t tokens crate; → THE BILLET shows the split crate halves with the blank billet between them. No console errors.
+
+Next: **H.3 — The Master Gauge** + `GaugeRack` sprite (the modular scale).

@@ -16,6 +16,8 @@ import { Cutting } from '../scenes/static/Cutting'
 import { Tray } from '../scenes/static/Tray'
 import { Packaging } from '../scenes/static/Packaging'
 import { Jeweller } from '../scenes/static/Jeweller'
+import { FoundryInside } from '../scenes/typography/FoundryInside'
+import { Billet } from '../scenes/typography/Billet'
 import { Assembly } from '../scenes/typography/Assembly'
 import type { SceneId, SceneRef } from './lanes'
 
@@ -38,6 +40,8 @@ export const SCENES: Record<SceneId, FC<SceneProps>> = {
   tray: Tray,
   packaging: Packaging,
   jeweller: Jeweller,
+  'foundry-inside': FoundryInside,
+  billet: Billet,
   assembly: Assembly,
   placeholder: PlaceholderScene,
 }

@@ -1,0 +1,198 @@
+@layer tf-scenes {
+  .billet-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .billet-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  /* The press rig, centred above the crate. */
+  .billet-press {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 120ms steps(2, end);
+  }
+
+  .billet-press.is-slamming {
+    animation: billet-slam 360ms steps(4, end);
+  }
+
+  .billet-press-arm {
+    width: calc(6 * var(--px));
+    height: calc(48 * var(--px));
+    background: var(--pico-dark-gray);
+  }
+
+  .billet-press-head {
+    width: calc(48 * var(--px));
+    height: calc(14 * var(--px));
+    background: var(--pico-light-gray);
+    border: var(--px) solid var(--pico-black);
+    border-bottom-width: calc(3 * var(--px));
+    border-bottom-color: var(--pico-dark-gray);
+  }
+
+  @keyframes billet-slam {
+    0% {
+      transform: translate(-50%, calc(-18 * var(--px)));
+    }
+    50% {
+      transform: translate(-50%, 0);
+    }
+    60% {
+      transform: translate(-50%, calc(-2 * var(--px)));
+    }
+    100% {
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .billet-floor {
+    position: absolute;
+    bottom: calc(24 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(4 * var(--px));
+  }
+
+  .billet-crate.is-hit {
+    animation: billet-jolt 360ms steps(4, end);
+  }
+
+  @keyframes billet-jolt {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(calc(2 * var(--px)));
+    }
+  }
+
+  .billet-open {
+    display: flex;
+    align-items: flex-end;
+    gap: calc(2 * var(--px));
+    animation: billet-open-pop 220ms steps(3, end);
+  }
+
+  @keyframes billet-open-pop {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* The split crate halves, shoved apart. */
+  .billet-crate-half {
+    width: calc(14 * var(--px));
+    height: calc(26 * var(--px));
+    background: #8a4a17;
+    border: var(--px) solid var(--pico-black);
+  }
+
+  .billet-crate-half-left {
+    transform: translateX(calc(-4 * var(--px))) rotate(-6deg);
+  }
+
+  .billet-crate-half-right {
+    transform: translateX(calc(4 * var(--px))) rotate(6deg);
+  }
+
+  /* The billet — a dull, rough metal blank. No glow. The whole point:
+     raw stock with no measurements yet, unlike colour's glowing geode. */
+  .billet-block {
+    position: relative;
+    width: calc(28 * var(--px));
+    height: calc(30 * var(--px));
+    background: var(--pico-dark-gray);
+    border: var(--px) solid var(--pico-black);
+    border-top-color: #7a736a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* speckle — rough cast surface */
+  .billet-block::before {
+    content: '';
+    position: absolute;
+    inset: calc(4 * var(--px));
+    background:
+      radial-gradient(
+        var(--pico-black) calc(1 * var(--px)),
+        transparent calc(1 * var(--px))
+      ),
+      radial-gradient(
+        #7a736a calc(1 * var(--px)),
+        transparent calc(1 * var(--px))
+      );
+    background-size: calc(6 * var(--px)) calc(6 * var(--px));
+    background-position:
+      0 0,
+      calc(3 * var(--px)) calc(3 * var(--px));
+    opacity: 0.5;
+  }
+
+  .billet-block-face {
+    position: relative;
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(8 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .billet-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+    padding: calc(2 * var(--px)) calc(3 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-light-gray);
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+
+  .billet-tag-name {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-yellow);
+  }
+
+  .billet-tag-note {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+
+  .billet-belt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(20 * var(--px));
+    overflow: hidden;
+  }
+
+  /* Still belt — we've stopped at the build station. */
+  .billet-belt-still {
+    animation: none;
+  }
+}
