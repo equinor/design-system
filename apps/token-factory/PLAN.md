@@ -825,4 +825,13 @@ First two real foundry scenes, replacing placeholders 0 and 1.
 - Wired: `SceneId` gains `'foundry-inside'` + `'billet'`; registered in `sceneRegistry`; lane refs 0 and 1 repointed off `placeholder`.
 - **Verified in Chrome:** build clean. Lane select → INSIDE THE FOUNDRY shows MACHINE SHOP sign + steel rigs + s&t tokens crate; → THE BILLET shows the split crate halves with the blank billet between them. No console errors.
 
-Next: **H.3 — The Master Gauge** + `GaugeRack` sprite (the modular scale).
+### Phase H.3 — The Master Gauge + GaugeRack sprite ✓
+
+The modular-scale teach, replacing colour's three-ring Reveal.
+
+- New `sprites/GaugeRack.tsx` + `gaugeRack.css` — the type scale as a rack of milled steel blocks, heights ∝ `2^(n/5)` (xs..6xl). Props: `highlight` (glow one block), `animate` (staggered mill-out), `scale` (shrink the whole rack — used by the density dial in H.5). Reusable across H.3/H.5.
+- New `scenes/typography/MasterGauge.tsx` + `master-gauge.css` — an orange BASE rod on the reference plate; the rack mills out at beat 1; md highlights at beat 2 alongside a formula card `size = base × 2^(n/5)` / `md = base × 2^(-1/5) ≈ 14px`. Teaches: sizes are one curve from one base, not ten hand-typed values.
+- Wired: `SceneId` gains `'master-gauge'`; registered; lane ref 2 repointed.
+- **Verified in Chrome:** build clean. Scene shows the BASE rod + the 10-block ladder with md glowing yellow + the formula card. No console errors.
+
+Next: **H.4 — Milling to Spec** + extract the `MetalSort` sprite.

@@ -38,6 +38,7 @@ export type SceneId =
   // lands. 'assembly' is the validated payoff (H.1).
   | 'foundry-inside'
   | 'billet'
+  | 'master-gauge'
   | 'assembly'
   // Generic placeholder — used by every scaffold lane until real
   // scene components land. One component, many scene-ref instances.

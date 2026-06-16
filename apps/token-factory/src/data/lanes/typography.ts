@@ -71,7 +71,7 @@ export const TYPOGRAPHY_LANE: Lane = {
       ],
     },
     {
-      id: 'placeholder',
+      id: 'master-gauge',
       title: 'the master gauge',
       stage: 'gauge',
       lines: [

@@ -1,0 +1,102 @@
+@layer tf-scenes {
+  .master-gauge-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .master-gauge-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  /* The reference plate the gauge + rack sit on. */
+  .gauge-plate {
+    position: absolute;
+    bottom: calc(24 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(240 * var(--px));
+    height: calc(6 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    z-index: 1;
+  }
+
+  .gauge-assembly {
+    position: absolute;
+    bottom: calc(30 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    gap: calc(12 * var(--px));
+    z-index: 2;
+  }
+
+  /* The master measure — distinct orange rod, the source every size is
+     milled from. */
+  .master-rod {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(3 * var(--px));
+  }
+
+  .master-rod-bar {
+    width: calc(8 * var(--px));
+    height: calc(52 * var(--px));
+    background: var(--pico-orange);
+    border: var(--px) solid var(--pico-black);
+    border-top-color: var(--pico-yellow);
+  }
+
+  .master-rod-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-orange);
+  }
+
+  .gauge-formula {
+    position: absolute;
+    top: calc(10 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(2 * var(--px));
+    padding: calc(3 * var(--px)) calc(5 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-light-gray);
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+
+  .gauge-formula-line {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(5 * var(--px));
+    color: var(--pico-white);
+  }
+
+  .gf-out {
+    color: var(--pico-yellow);
+  }
+
+  .gf-base {
+    color: var(--pico-orange);
+  }
+
+  .gf-ratio {
+    color: var(--pico-blue);
+  }
+
+  .gauge-formula-note {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+}

@@ -1,0 +1,55 @@
+@layer tf-sprites {
+  .gauge-rack {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: calc(2 * var(--px));
+  }
+
+  .gauge-bar {
+    position: relative;
+    width: calc(12 * var(--px));
+    background: var(--pico-light-gray);
+    border: var(--px) solid var(--pico-black);
+    border-top-color: var(--pico-white);
+    border-bottom-width: calc(2 * var(--px));
+    border-bottom-color: var(--pico-dark-gray);
+    transition: height 350ms ease;
+  }
+
+  .gauge-rack.is-milling .gauge-bar {
+    animation: gauge-mill 260ms steps(4, end) backwards;
+  }
+
+  @keyframes gauge-mill {
+    from {
+      opacity: 0;
+      transform: scaleY(0.2);
+      transform-origin: bottom;
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  .gauge-bar.is-highlight {
+    background: var(--pico-yellow);
+    border-color: var(--pico-orange);
+    border-top-color: var(--pico-white);
+  }
+
+  .gauge-bar-label {
+    position: absolute;
+    bottom: calc(-6 * var(--px));
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .gauge-bar.is-highlight .gauge-bar-label {
+    color: var(--pico-yellow);
+  }
+}
