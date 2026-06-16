@@ -6,8 +6,8 @@ import { Badge } from '.'
 describe('Badge (next)', () => {
   describe('Rendering', () => {
     it('renders with default props', () => {
-      render(<Badge data-testid="eds-badge">Label</Badge>)
-      expect(screen.getByTestId('eds-badge')).toBeInTheDocument()
+      render(<Badge>Label</Badge>)
+      expect(screen.getByText('Label')).toBeInTheDocument()
     })
 
     it('renders children', () => {
@@ -16,12 +16,8 @@ describe('Badge (next)', () => {
     })
 
     it('applies custom className', () => {
-      render(
-        <Badge data-testid="eds-badge" className="custom">
-          Label
-        </Badge>,
-      )
-      expect(screen.getByTestId('eds-badge')).toHaveClass('eds-badge', 'custom')
+      render(<Badge className="custom">Label</Badge>)
+      expect(screen.getByText('Label')).toHaveClass('eds-badge', 'custom')
     })
 
     it('forwards ref', () => {
@@ -31,55 +27,39 @@ describe('Badge (next)', () => {
     })
 
     it('spreads additional props', () => {
-      render(
-        <Badge data-testid="test" data-custom="value">
-          Label
-        </Badge>,
-      )
-      expect(screen.getByTestId('test')).toHaveAttribute('data-custom', 'value')
+      render(<Badge data-custom="value">Label</Badge>)
+      expect(screen.getByText('Label')).toHaveAttribute('data-custom', 'value')
     })
   })
 
   describe('Variants', () => {
     it('sets default data attributes', () => {
-      render(<Badge data-testid="eds-badge">Label</Badge>)
-      const badge = screen.getByTestId('eds-badge')
+      render(<Badge>Label</Badge>)
+      const badge = screen.getByText('Label')
       expect(badge).toHaveAttribute('data-color-appearance', 'neutral')
       expect(badge).toHaveAttribute('data-emphasis', 'low')
       expect(badge).toHaveAttribute('data-variant', 'solid')
     })
 
     it('sets tone data attribute', () => {
-      render(
-        <Badge data-testid="eds-badge" tone="accent">
-          Label
-        </Badge>,
-      )
-      expect(screen.getByTestId('eds-badge')).toHaveAttribute(
+      render(<Badge tone="accent">Label</Badge>)
+      expect(screen.getByText('Label')).toHaveAttribute(
         'data-color-appearance',
         'accent',
       )
     })
 
     it('sets emphasis data attribute', () => {
-      render(
-        <Badge data-testid="eds-badge" emphasis="medium">
-          Label
-        </Badge>,
-      )
-      expect(screen.getByTestId('eds-badge')).toHaveAttribute(
+      render(<Badge emphasis="medium">Label</Badge>)
+      expect(screen.getByText('Label')).toHaveAttribute(
         'data-emphasis',
         'medium',
       )
     })
 
     it('sets variant data attribute', () => {
-      render(
-        <Badge data-testid="eds-badge" variant="outlined">
-          Label
-        </Badge>,
-      )
-      expect(screen.getByTestId('eds-badge')).toHaveAttribute(
+      render(<Badge variant="outlined">Label</Badge>)
+      expect(screen.getByText('Label')).toHaveAttribute(
         'data-variant',
         'outlined',
       )

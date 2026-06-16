@@ -264,7 +264,13 @@ InTable.parameters = {
   },
 }
 
-const assets = [
+type Asset = {
+  name: string
+  description: string
+  tags: { label: string; tone: BadgeProps['tone'] }[]
+}
+
+const assets: Asset[] = [
   {
     name: 'Oseberg A',
     description: 'Fixed steel jacket platform, North Sea',
@@ -290,7 +296,7 @@ const assets = [
       { label: 'Operational', tone: 'success' },
     ],
   },
-] as const
+]
 
 export const MultipleLabels: StoryFn<BadgeProps> = () => (
   <ul
@@ -395,7 +401,7 @@ Density.parameters = {
   docs: {
     description: {
       story:
-        'Badge respects the `data-density` attribute on a parent element. Comfortable reduces padding for denser UIs.',
+        'Badge responds to `data-density` on a parent element. Comfortable reduces block and inline padding from 6px to 4px.',
     },
   },
 }
