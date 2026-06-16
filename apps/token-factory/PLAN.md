@@ -851,4 +851,13 @@ Typography's equivalent of colour's light/dark twist — the standout beat.
 - Wired: `SceneId` gains `'density-dial'`; registered; lane ref 4 repointed.
 - **Verified in Chrome:** build clean. Dial knob slides between stops; MASTER + md readouts and the full rack rescale live between 16/14px (spacious) and 14/12px (comfortable). No console errors.
 
-Next: **H.6 — The Rack + Final Inspection**.
+### Phase H.6 — The Rack + Final Inspection ✓
+
+The last two scenes — every post-dock scene is now real.
+
+- New `scenes/typography/Rack.tsx` + `rack.css` — the type ramp as lane output (colour's Tray). A shelf with the ui-body row (Inter, steel sorts) and the header row (Equinor, brass-tinted sorts), md the orange hero; facet chips (weights / tracking / line-height ×2); a "typography CSS · --eds-typography-*" file plate.
+- New `scenes/typography/Inspection.tsx` + `inspection.css` — baseline trimming (colour's Packaging). Other-lane materials converge (reusing `Gemstone` + `LaneSprites`); the md sort grinds down onto a 4px baseline grid on the surface plate (`text-box: trim-both` callout); then a sealed steel `variables.css` box.
+- Wired: `SceneId` gains `'rack'` + `'inspection'`; registered; lane refs 5 and 6 repointed. No more `placeholder` refs in the typography lane.
+- **Verified in Chrome:** build clean. The Rack shows both typeface rows + facets + file plate; Inspection shows the lane convergence, the sort seating on the baseline grid, and the trim callout. No console errors.
+
+Next: **H.7 — flip lane to ready + polish + multi-viewport smoke**.

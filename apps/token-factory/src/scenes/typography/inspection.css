@@ -1,0 +1,147 @@
+@layer tf-scenes {
+  .inspection-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .inspection-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--px));
+  }
+
+  /* Other-lane materials converging. */
+  .inspection-lanes {
+    display: flex;
+    gap: calc(8 * var(--px));
+    align-items: flex-end;
+  }
+
+  .inspection-lane {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+  }
+
+  .inspection-lane span {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .inspection-lane .lane-sprite {
+    width: calc(16 * var(--px));
+    height: calc(16 * var(--px));
+  }
+
+  .inspection-lane .gemstone-sprite {
+    width: calc(18 * var(--px));
+    height: calc(18 * var(--px));
+  }
+
+  /* The surface plate with a 4px baseline grid. */
+  .surface-plate {
+    position: relative;
+    width: calc(120 * var(--px));
+    height: calc(56 * var(--px));
+    border: var(--px) solid var(--pico-dark-gray);
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(194, 195, 199, 0.25) 0,
+      rgba(194, 195, 199, 0.25) var(--px),
+      transparent var(--px),
+      transparent calc(4 * var(--px))
+    );
+  }
+
+  .inspection-sort {
+    position: absolute;
+    left: 50%;
+    bottom: calc(12 * var(--px));
+    transform: translate(-50%, calc(-8 * var(--px)));
+    transition: transform 400ms steps(4, end);
+  }
+
+  .inspection-sort.is-ground {
+    transform: translate(-50%, 0);
+  }
+
+  /* The baseline the cap-height snaps onto. */
+  .baseline-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(12 * var(--px));
+    height: var(--px);
+    background: var(--pico-yellow);
+  }
+
+  .inspection-callout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-blue);
+    animation: peel-info-pop 200ms steps(3, end);
+  }
+
+  .ic-key {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-blue);
+  }
+
+  .ic-note {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  /* Sealed box — steel, matching the assembly box. */
+  .inspection-box {
+    position: relative;
+    width: calc(70 * var(--px));
+    height: calc(58 * var(--px));
+    background: var(--pico-dark-gray);
+    border: var(--px) solid var(--pico-light-gray);
+    box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0 var(--pico-black);
+    display: flex;
+    flex-direction: column;
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+
+  .inspection-box-lid {
+    width: 100%;
+    height: calc(8 * var(--px));
+    background: var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+  }
+
+  .inspection-box-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inspection-box-stamp {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-black);
+    background: var(--pico-yellow);
+    padding: calc(1 * var(--px)) calc(2 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    transform: rotate(-4deg);
+  }
+}

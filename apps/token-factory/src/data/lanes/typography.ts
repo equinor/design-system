@@ -103,7 +103,7 @@ export const TYPOGRAPHY_LANE: Lane = {
       ],
     },
     {
-      id: 'placeholder',
+      id: 'rack',
       title: 'the rack',
       stage: 'rack',
       lines: [
@@ -113,7 +113,7 @@ export const TYPOGRAPHY_LANE: Lane = {
       ],
     },
     {
-      id: 'placeholder',
+      id: 'inspection',
       title: 'final inspection',
       stage: 'grind',
       lines: [

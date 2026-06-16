@@ -21,6 +21,8 @@ import { Billet } from '../scenes/typography/Billet'
 import { MasterGauge } from '../scenes/typography/MasterGauge'
 import { Milling } from '../scenes/typography/Milling'
 import { DensityDial } from '../scenes/typography/DensityDial'
+import { Rack } from '../scenes/typography/Rack'
+import { Inspection } from '../scenes/typography/Inspection'
 import { Assembly } from '../scenes/typography/Assembly'
 import type { SceneId, SceneRef } from './lanes'
 
@@ -48,6 +50,8 @@ export const SCENES: Record<SceneId, FC<SceneProps>> = {
   'master-gauge': MasterGauge,
   milling: Milling,
   'density-dial': DensityDial,
+  rack: Rack,
+  inspection: Inspection,
   assembly: Assembly,
   placeholder: PlaceholderScene,
 }

@@ -1,0 +1,94 @@
+@layer tf-scenes {
+  .rack-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .rack-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(6 * var(--px));
+  }
+
+  .rack-shelf {
+    display: flex;
+    flex-direction: column;
+    gap: calc(6 * var(--px));
+    padding: calc(4 * var(--px)) calc(6 * var(--px));
+    background: rgba(0, 0, 0, 0.25);
+    border: var(--px) solid var(--pico-dark-gray);
+  }
+
+  .rack-row {
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--px));
+  }
+
+  .rack-row-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+
+  .rack-row-sorts {
+    display: flex;
+    align-items: flex-end;
+    gap: calc(3 * var(--px));
+    /* sit the sorts on a shelf rail */
+    border-bottom: var(--px) solid var(--pico-dark-gray);
+    padding-bottom: calc(2 * var(--px));
+  }
+
+  .rack-slot {
+    animation: peel-info-pop 200ms steps(3, end);
+  }
+
+  /* The hero md sort — orange-bordered glint. */
+  .rack-hero .metal-sort {
+    border-color: var(--pico-orange);
+    border-top-color: var(--pico-yellow);
+  }
+
+  /* Header row cut in Equinor — brass tint to read as a different
+     typeface from the Inter (steel) ui-body row. */
+  .rack-row-header .metal-sort {
+    background: #c8a24a;
+    border-top-color: #e8d49a;
+    border-bottom-color: #8a6a20;
+  }
+
+  .rack-facets {
+    display: flex;
+    gap: calc(4 * var(--px));
+    animation: peel-info-pop 200ms steps(3, end);
+  }
+
+  .rack-facet {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-blue);
+    padding: calc(1 * var(--px)) calc(3 * var(--px));
+    border: var(--px) solid var(--pico-blue);
+    text-transform: uppercase;
+  }
+
+  .rack-file {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-black);
+    background: var(--pico-light-gray);
+    padding: calc(2 * var(--px)) calc(4 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    animation: peel-info-pop 220ms steps(3, end);
+  }
+}
