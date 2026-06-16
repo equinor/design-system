@@ -34,30 +34,36 @@ When using "Squash and merge", the PR title becomes the commit message in the de
 ## Required Format
 
 ```
+type: description
+```
+
+Scope is optional and usually omitted — see [Scope and Release-Please Interaction](#scope-and-release-please-interaction). The full form is:
+
+```
 type(scope): description
 ```
 
 ### Components
 
 - **type**: The type of change (required)
-- **scope**: The package or area affected (optional)
+- **scope**: The package or area affected (optional — usually omitted)
 - **description**: Brief description of the change (required)
 
 ## Supported Types
 
-| Type       | Description                           | Example                                                  |
-| ---------- | ------------------------------------- | -------------------------------------------------------- |
-| `feat`     | New feature                           | `feat(eds-core-react): add button variants`              |
-| `fix`      | Bug fix                               | `fix(eds-icons): resolve alignment issues`               |
-| `docs`     | Documentation changes                 | `docs: update installation guide`                        |
-| `style`    | Code style changes (formatting, etc.) | `style(eds-tokens): improve naming consistency`          |
-| `refactor` | Code refactoring                      | `refactor(eds-core-react): simplify component structure` |
-| `perf`     | Performance improvements              | `perf(eds-data-grid): optimize rendering`                |
-| `test`     | Adding or updating tests              | `test(eds-utils): add validation tests`                  |
-| `build`    | Build system changes                  | `build: update webpack configuration`                    |
-| `ci`       | CI/CD changes                         | `ci: add automated release workflow`                     |
-| `chore`    | Maintenance tasks                     | `chore: update dependencies`                             |
-| `revert`   | Revert previous changes               | `revert: undo button color changes`                      |
+| Type       | Description                           | Example                                       |
+| ---------- | ------------------------------------- | --------------------------------------------- |
+| `feat`     | New feature                           | `feat: add button variants`                   |
+| `fix`      | Bug fix                               | `fix: resolve icon alignment issues`          |
+| `docs`     | Documentation changes                 | `docs: update installation guide`             |
+| `style`    | Code style changes (formatting, etc.) | `style: improve token naming consistency`     |
+| `refactor` | Code refactoring                      | `refactor: simplify component structure`      |
+| `perf`     | Performance improvements              | `perf: optimize data grid rendering`          |
+| `test`     | Adding or updating tests              | `test: add utility validation tests`          |
+| `build`    | Build system changes                  | `build: update webpack configuration`         |
+| `ci`       | CI/CD changes                         | `ci: add automated release workflow`          |
+| `chore`    | Maintenance tasks                     | `chore: update dependencies`                  |
+| `revert`   | Revert previous changes               | `revert: undo button color changes`           |
 
 ## Supported Scopes
 

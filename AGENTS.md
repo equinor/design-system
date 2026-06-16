@@ -415,18 +415,26 @@ Component docs live in `apps/design-system-docs/docs/components/{category}/{comp
 ## Conventional Commits
 
 ```
-type(scope): description
+type: description
 ```
 
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
-**Scopes (packages)**: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+**Breaking**: `feat!: remove deprecated prop`
 
-**Scopes (infrastructure)**: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
+**Scope is optional and usually omitted.** Release-please detects the affected package from file paths, so a scopeless commit still routes correctly. Adding a package scope forces a version bump for that package regardless of which files changed, so default to no scope unless one of the exceptions below applies.
 
-**Breaking**: `feat(eds-core-react)!: remove deprecated prop`
+**When to add a scope:**
 
-**Scope and release-please interaction**: Release-please detects packages from file paths — you don't always need a package scope. Using a package scope with a visible type forces a bump regardless of which files changed. For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
+- The commit touches a single package and the file paths don't make that obvious from the diff (rare — usually the path makes it clear).
+- It's an infrastructure scope (`config`, `github`, `build`, `deps`, `docs`, `devcontainer`) for changes that don't belong to any package.
+
+**Available scopes (when needed):**
+
+- Packages: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+- Infrastructure: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
+
+For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
 
 **PR titles** must also follow the conventional commits format — they appear in changelogs and merge history.
 
