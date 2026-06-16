@@ -884,3 +884,11 @@ inside the foundry → the billet → the master gauge → milling to spec → t
 - Lane-map viz icons are reused from the colour set (e.g. SCALE shows the concentric "layers" icon, MILL the "cut" icon). Foundry-specific `StageViz` icons would sharpen the map.
 - The known pre-existing lane-switch narrator-reset artefact (logged in G.4) still applies; not specific to typography.
 - The G.4 caveat about `advance` identity churn is unchanged.
+
+### Phase H.8 — Half-pixel accuracy correction ✓
+
+User caught a confidently-wrong detail (the D.10/G.5/G.6 failure mode again): the Milling narration claimed sizes are "snapped to the nearest half-pixel so it stays crisp", implying whole, crisp pixels. Verified against source — the font-size rounding step in the foundation formula is `round(..., 0.03125rem)` = a **0.5px grid**, so font-sizes routinely land on half-pixels (spacious: xs 10.5, xl 18.5, 3xl 24.5). `md` = 14px is whole only by coincidence; half-pixels are not "crisp". Line-heights are the ones on a whole-pixel 4px grid.
+
+- Narration fixed (commit `8bd6e9f81`): "…that lands on 14 pixels — sizes round to a half-pixel grid, so plenty come out fractional, like xs at 10.5."
+- Visual fixed (this commit): the Milling FONT-SIZE callout gains a "0.5px grid · halves ok" note, mirroring the LINE-HEIGHT callout's "leading · 4px grid". Both grids are now visible and contrasted in-scene.
+- **Verified in Chrome:** the two callouts render side by side with their distinct grids.

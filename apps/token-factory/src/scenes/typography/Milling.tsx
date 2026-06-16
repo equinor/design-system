@@ -48,6 +48,7 @@ export function Milling({ activeBeatIdx }: { activeBeatIdx: number }) {
             <div className="milling-callout milling-callout-size">
               <span className="mc-key">font-size</span>
               <span className="mc-val">14px</span>
+              <span className="mc-note">0.5px grid · halves ok</span>
             </div>
           )}
 
