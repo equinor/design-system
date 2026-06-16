@@ -11,17 +11,18 @@
 5. [Examples](#examples)
    - [Valid PR Titles](#valid-pr-titles)
    - [Invalid PR Titles](#invalid-pr-titles)
-6. [Emojis (Optional)](#emojis-optional)
-7. [Breaking Changes](#breaking-changes)
-8. [Enforcement](#enforcement)
-9. [Why This Matters](#why-this-matters)
-10. [Maintaining the Workflow](#maintaining-the-workflow)
+6. [Scope and Release-Please Interaction](#scope-and-release-please-interaction)
+7. [Emojis (Optional)](#emojis-optional)
+8. [Breaking Changes](#breaking-changes)
+9. [Enforcement](#enforcement)
+10. [Why This Matters](#why-this-matters)
+11. [Maintaining the Workflow](#maintaining-the-workflow)
     - [Workflow Location](#workflow-location)
     - [Adding New Scopes](#adding-new-scopes)
     - [Testing Changes](#testing-changes)
-11. [VSCode Integration](#vscode-integration)
+12. [VSCode Integration](#vscode-integration)
     - [Conventional Commits Plugin](#conventional-commits-plugin)
-12. [Need Help?](#need-help)
+13. [Need Help?](#need-help)
 
 ---
 
@@ -105,13 +106,19 @@ refactor(eds-tokens, eds-icons): standardize naming conventions
 
 ### Valid PR Titles
 
-✅ `feat(eds-core-react): add new button variant`
-✅ `fix(eds-icons): resolve icon alignment in Safari`
-✅ `docs(design-system-docs): update component guidelines`
-✅ `style(eds-tokens): improve color naming`
-✅ `feat(eds-core-react, eds-utils): add shared validation logic`
-✅ `chore: update project dependencies`
+Scopeless (the default — see [Scope and Release-Please Interaction](#scope-and-release-please-interaction)):
+
+✅ `feat: add new button variant`
+✅ `fix: resolve icon alignment in Safari`
 ✅ `docs: add setup instructions to README`
+✅ `chore: update project dependencies`
+✅ `refactor: simplify component structure`
+
+With scope (only when needed):
+
+✅ `chore(config): update release-please exclude-paths`
+✅ `ci(github): fix PR title workflow regex`
+✅ `feat(eds-core-react, eds-utils): add shared validation logic` (cross-package)
 
 ### Invalid PR Titles
 
@@ -131,9 +138,9 @@ Release-please detects which packages are affected based on **file paths** — y
 
 ### When to use a scope
 
-- **Package scope** (`eds-core-react`, `eds-tokens`, etc.): Only when the commit message alone doesn't make the package clear, or for changelog readability. Be aware this forces a bump regardless of `exclude-paths`.
+- **No scope** (default): Use this for most commits — release-please figures out the affected package from file paths, and `exclude-paths` keeps non-publishable files (Storybook, tests, README, config) from triggering releases.
+- **Package scope** (`eds-core-react`, `eds-tokens`, etc.): Only when the commit message alone doesn't make the package clear, or for changelog readability. Be aware this forces a bump regardless of `exclude-paths` when combined with a visible type (`feat`, `fix`).
 - **Infrastructure scope** (`config`, `github`, `build`, `deps`): For changes that don't belong to a specific package.
-- **No scope**: Perfectly fine for most commits — release-please will figure it out from the file paths.
 
 ### Avoiding unnecessary version bumps
 
