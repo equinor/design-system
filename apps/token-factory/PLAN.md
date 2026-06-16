@@ -843,4 +843,12 @@ The size-cut teach, replacing colour's Peel + name-stamp.
 - Wired: `SceneId` gains `'milling'`; registered; lane ref 3 repointed.
 - **Verified in Chrome:** build clean. Scene shows the cutter, the md sort in its leading line-box, both callouts, and the engraved sticker. No console errors. (Polish note for H.7: the long sticker grazes the narrator bubble — shorten or reposition.)
 
-Next: **H.5 — The Density Dial** (hero scene).
+### Phase H.5 — The Density Dial (hero scene) ✓
+
+Typography's equivalent of colour's light/dark twist — the standout beat.
+
+- New `scenes/typography/DensityDial.tsx` + `density-dial.css`. A 3-stop dial (SPACIOUS / COMFORTABLE / RELAXED) with a sliding knob; a MASTER readout (16px ↔ 14px); the `GaugeRack` (reused with the `scale` prop); and an md readout (14px ↔ 12px). Beats: dial at spacious → turns to comfortable (master drops) → **live oscillation** of the whole rack re-milling (md 14↔12, every bar rescaling) → hold. One dial, the entire system follows.
+- Wired: `SceneId` gains `'density-dial'`; registered; lane ref 4 repointed.
+- **Verified in Chrome:** build clean. Dial knob slides between stops; MASTER + md readouts and the full rack rescale live between 16/14px (spacious) and 14/12px (comfortable). No console errors.
+
+Next: **H.6 — The Rack + Final Inspection**.

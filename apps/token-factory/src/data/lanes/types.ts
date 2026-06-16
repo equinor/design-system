@@ -40,6 +40,7 @@ export type SceneId =
   | 'billet'
   | 'master-gauge'
   | 'milling'
+  | 'density-dial'
   | 'assembly'
   // Generic placeholder — used by every scaffold lane until real
   // scene components land. One component, many scene-ref instances.

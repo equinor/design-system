@@ -20,6 +20,7 @@ import { FoundryInside } from '../scenes/typography/FoundryInside'
 import { Billet } from '../scenes/typography/Billet'
 import { MasterGauge } from '../scenes/typography/MasterGauge'
 import { Milling } from '../scenes/typography/Milling'
+import { DensityDial } from '../scenes/typography/DensityDial'
 import { Assembly } from '../scenes/typography/Assembly'
 import type { SceneId, SceneRef } from './lanes'
 
@@ -46,6 +47,7 @@ export const SCENES: Record<SceneId, FC<SceneProps>> = {
   billet: Billet,
   'master-gauge': MasterGauge,
   milling: Milling,
+  'density-dial': DensityDial,
   assembly: Assembly,
   placeholder: PlaceholderScene,
 }

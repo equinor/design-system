@@ -92,7 +92,7 @@ export const TYPOGRAPHY_LANE: Lane = {
       ],
     },
     {
-      id: 'placeholder',
+      id: 'density-dial',
       title: 'the density dial',
       stage: 'mill',
       lines: [

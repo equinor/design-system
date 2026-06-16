@@ -1,0 +1,102 @@
+@layer tf-scenes {
+  .density-dial-scene {
+    flex: 1;
+    position: relative;
+  }
+
+  .density-dial-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--px));
+  }
+
+  .dial {
+    width: calc(180 * var(--px));
+    display: flex;
+    flex-direction: column;
+    gap: calc(3 * var(--px));
+  }
+
+  .dial-stops {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dial-stop {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .dial-stop[data-on='true'] {
+    color: var(--pico-yellow);
+  }
+
+  .dial-stop-muted {
+    color: var(--pico-dark-gray);
+  }
+
+  .dial-track {
+    position: relative;
+    height: calc(8 * var(--px));
+    background: var(--pico-dark-gray);
+    border: var(--px) solid var(--pico-black);
+  }
+
+  .dial-knob {
+    position: absolute;
+    top: calc(-2 * var(--px));
+    width: calc(16 * var(--px));
+    height: calc(12 * var(--px));
+    background: var(--pico-light-gray);
+    border: var(--px) solid var(--pico-black);
+    border-top-color: var(--pico-white);
+    transition: left 400ms steps(4, end);
+  }
+
+  .dial[data-density='spacious'] .dial-knob {
+    left: 0;
+  }
+
+  .dial[data-density='comfortable'] .dial-knob {
+    left: calc(50% - 8 * var(--px));
+  }
+
+  .dial-readout {
+    display: flex;
+    align-items: baseline;
+    gap: calc(3 * var(--px));
+  }
+
+  .dial-readout-key {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  .dial-readout-val {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(6 * var(--px));
+    color: var(--pico-orange);
+  }
+
+  .dial-rack {
+    min-height: calc(48 * var(--px));
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .dial-md {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(7 * var(--px));
+    color: var(--pico-yellow);
+  }
+}
