@@ -860,4 +860,27 @@ The last two scenes — every post-dock scene is now real.
 - Wired: `SceneId` gains `'rack'` + `'inspection'`; registered; lane refs 5 and 6 repointed. No more `placeholder` refs in the typography lane.
 - **Verified in Chrome:** build clean. The Rack shows both typeface rows + facets + file plate; Inspection shows the lane convergence, the sort seating on the baseline grid, and the trim callout. No console errors.
 
-Next: **H.7 — flip lane to ready + polish + multi-viewport smoke**.
+### Phase H.7 — Ready + polish + multi-viewport smoke ✓
+
+- Flipped `TYPOGRAPHY_LANE.status` `scaffold` → `ready`. The dock now shows `s&t tokens` as a full ready lane (no "soon" badge), alongside colours-static.
+- Polish: moved the Milling part-number sticker from top-centre to low-centre so the long `--eds-typography-ui-body-md-font-size` string clears the top-right narrator bubble (the H.4 note).
+- **Verified in Chrome:** build clean. Lane-map (`m`) renders the S&T TOKENS pipeline snake (figma → sync → json → billet → scale → mill → css → bundle → fit) with the active stage highlighted. At a reduced viewport (820×560) the stage scales down via `--px` with no clipping. All 8 post-dock scenes were individually rendered and confirmed during H.1–H.6 with no console errors (benign favicon 404 only).
+
+---
+
+### Phase H summary
+
+Second real lane complete. The Token Factory now has two fully playable stories: the **colours-static** gem hall and the **st-tokens** foundry. Selecting `s&t tokens` at the dock flips the wing palette to steel and routes the post-dock story through 8 machine-shop scenes:
+
+inside the foundry → the billet → the master gauge → milling to spec → the density dial → the rack → final inspection → assembly.
+
+**What shipped (H.0 → H.7):**
+- `data/lanes/typography.ts` (`TYPOGRAPHY_LANE`, ready) + registry/types wiring; no placeholder refs remain.
+- 8 scene components under `scenes/typography/` + colocated CSS.
+- New sprites: `GaugeRack` (the modular scale), `MetalSort` (the milled type-sort, also adopted by Assembly).
+- The frame contrast is legible: colour *finds* a buried value (geode/peel/light-dark); typography *mills* one from a base (gauge/formula/density dial). The two wings converge only at Assembly, where the gem drops into the milled seat and a real `<Button>` renders with a live density toggle.
+
+**Deferred / future polish (non-blocking):**
+- Lane-map viz icons are reused from the colour set (e.g. SCALE shows the concentric "layers" icon, MILL the "cut" icon). Foundry-specific `StageViz` icons would sharpen the map.
+- The known pre-existing lane-switch narrator-reset artefact (logged in G.4) still applies; not specific to typography.
+- The G.4 caveat about `advance` identity churn is unchanged.

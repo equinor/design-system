@@ -141,10 +141,11 @@
     color: var(--pico-blue);
   }
 
-  /* The engraved part-number sticker. */
+  /* The engraved part-number sticker. Anchored low-centre so the long
+     variable name clears the top-right narrator bubble. */
   .milling-stamp {
     position: absolute;
-    top: calc(12 * var(--px));
+    bottom: calc(26 * var(--px));
     left: 50%;
     transform: translateX(-50%) rotate(-2deg);
     z-index: 4;

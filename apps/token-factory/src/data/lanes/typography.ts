@@ -31,9 +31,9 @@ export const TYPOGRAPHY_LANE: Lane = {
   // Steel-grey accent — the machine-shop wing reads metallic, distinct
   // from the gem hall's purple. Already mapped in base.css.
   accent: '--pico-light-gray',
-  // 'scaffold' while scenes are built out one chunk at a time; flips to
-  // 'ready' once every post-dock scene has a real component (Phase H.7).
-  status: 'scaffold',
+  // All 8 post-dock scenes have real components (H.1–H.6), so the lane
+  // is a full ready story alongside colours-static.
+  status: 'ready',
   stages: [
     { id: 'figma', label: 'figma', viz: 'figma', pkg: 'figma file' },
     { id: 'sync', label: 'sync', viz: 'sync', pkg: 'eds-tokens-sync' },
