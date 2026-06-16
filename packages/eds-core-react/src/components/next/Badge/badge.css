@@ -52,9 +52,4 @@
       outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
     }
   }
-
-  [data-density='comfortable'] .eds-badge {
-    --_padding-block: var(--eds-spacing-vertical-3xs);
-    --_padding-inline: var(--eds-spacing-horizontal-3xs);
-  }
 }
