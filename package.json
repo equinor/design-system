@@ -67,7 +67,7 @@
     "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types && pnpm --filter @equinor/eds-color-palette-generator types && pnpm --filter design-system-docs typecheck"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-runtime": "^7.29.0",
     "@babel/preset-env": "^7.29.5",
