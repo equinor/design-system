@@ -1,0 +1,281 @@
+@layer tf-scenes {
+  .assembly-scene {
+    flex: 1;
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  /* Absolutely positioned below the overlaid .scene-header-bar (16px tall,
+     position:absolute in chrome.css). Mirrors .jeweller-stage — relying on
+     the grid 1fr track instead collapses the stage to zero height. */
+  .assembly-stage {
+    position: absolute;
+    top: calc(20 * var(--px));
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .assembly-bench {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(6 * var(--px));
+  }
+
+  /* The bench surface — a steel slab the work sits on. */
+  .assembly-bench-surface {
+    position: absolute;
+    bottom: calc(34 * var(--px));
+    width: calc(220 * var(--px));
+    height: calc(6 * var(--px));
+    background: var(--pico-dark-gray);
+    border-top: var(--px) solid var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+  }
+
+  /* Sealed box, arrived from final inspection. Steel-grey body with the
+     lane's metal accent, distinct from the gem hall's purple box. */
+  .assembly-arrived-box {
+    position: relative;
+    z-index: 2;
+    width: calc(64 * var(--px));
+    height: calc(54 * var(--px));
+    background: var(--pico-dark-gray);
+    border: var(--px) solid var(--pico-light-gray);
+    box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0 var(--pico-black);
+    display: flex;
+    flex-direction: column;
+    animation: assembly-pop 220ms steps(3, end);
+  }
+
+  .assembly-arrived-box-lid {
+    width: 100%;
+    height: calc(8 * var(--px));
+    background: var(--pico-light-gray);
+    border-bottom: var(--px) solid var(--pico-black);
+  }
+
+  .assembly-arrived-box-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .assembly-arrived-box-stamp {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-black);
+    background: var(--pico-yellow);
+    padding: calc(1 * var(--px)) calc(2 * var(--px));
+    border: var(--px) solid var(--pico-black);
+    transform: rotate(-4deg);
+  }
+
+  /* The two converging materials: colour's gem + the milled sort. */
+  .assembly-materials {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: calc(14 * var(--px));
+    align-items: flex-end;
+    animation: assembly-pop 220ms steps(3, end);
+  }
+
+  .assembly-materials.is-converging .assembly-material {
+    animation: assembly-converge 700ms steps(7, end);
+  }
+
+  .assembly-materials.is-converging .assembly-material-sort {
+    animation-delay: 120ms;
+  }
+
+  @keyframes assembly-converge {
+    0% {
+      transform: translateY(0);
+    }
+    60% {
+      transform: translateY(calc(-2 * var(--px))) scale(1.08);
+      filter: brightness(1.3);
+    }
+    100% {
+      transform: translateY(0);
+      filter: brightness(1);
+    }
+  }
+
+  .assembly-material {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(2 * var(--px));
+    padding: calc(2 * var(--px)) calc(3 * var(--px));
+    background: var(--pico-black);
+    border: var(--px) solid var(--pico-dark-gray);
+  }
+
+  .assembly-material-gem {
+    border-color: var(--pico-blue);
+  }
+
+  .assembly-material-sort {
+    border-color: var(--pico-light-gray);
+  }
+
+  .assembly-material-sprite {
+    width: calc(28 * var(--px));
+    height: calc(28 * var(--px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .assembly-material-gem .gemstone-sprite {
+    width: calc(28 * var(--px));
+    height: calc(28 * var(--px));
+  }
+
+  .assembly-material-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(1 * var(--px));
+  }
+
+  .assembly-material-label {
+    font-size: calc(4 * var(--px));
+    color: var(--pico-yellow);
+    text-transform: uppercase;
+  }
+
+  .assembly-material-pkg {
+    font-size: calc(3 * var(--px));
+    color: var(--pico-light-gray);
+  }
+
+  /* The milled metal sort — a steel block with the size engraved on its
+     face. Bevelled top (catches light) and dark foot. Inline for now;
+     extracted to a sprite when Milling/Rack land (H.4/H.6). */
+  .metal-sort {
+    position: relative;
+    width: calc(22 * var(--px));
+    height: calc(26 * var(--px));
+    background: var(--pico-light-gray);
+    border: var(--px) solid var(--pico-black);
+    border-top-color: var(--pico-white);
+    border-bottom-width: calc(3 * var(--px));
+    border-bottom-color: var(--pico-dark-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .metal-sort-face {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(6 * var(--px));
+    color: var(--pico-black);
+  }
+
+  /* Flash between the pixel assembly and the real component. */
+  .assembly-flash {
+    z-index: 2;
+    width: calc(90 * var(--px));
+    height: calc(44 * var(--px));
+    background: var(--pico-yellow);
+    animation: assembly-flash 500ms steps(5, end) forwards;
+  }
+
+  @keyframes assembly-flash {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    40% {
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+
+  @keyframes assembly-pop {
+    from {
+      opacity: 0;
+      transform: translateY(calc(4 * var(--px)));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* The real component reveal. image-rendering:auto and the real EDS
+     font stack break the pixel aesthetic deliberately — the tonal shift
+     is the "this is your design system" payoff. data-density toggles the
+     eds-tokens typography variables live for this subtree. */
+  .assembly-render {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(4 * var(--px));
+    image-rendering: auto;
+    animation: assembly-reveal 600ms steps(3, end);
+  }
+
+  @keyframes assembly-reveal {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .assembly-button {
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-md-font-size);
+    line-height: var(--eds-typography-ui-body-md-line-height-squished);
+    font-weight: var(--eds-typography-ui-body-md-font-weight-bolder);
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    background: var(--eds-color-bg-accent-fill-emphasis-default);
+    color: var(--eds-color-text-strong-on-emphasis);
+    -webkit-font-smoothing: antialiased;
+    image-rendering: auto;
+    transition:
+      font-size 350ms ease,
+      line-height 350ms ease;
+  }
+
+  .assembly-button:hover {
+    background: var(--eds-color-bg-accent-fill-emphasis-hover);
+  }
+
+  /* Thin rail under the button echoing "aligned on the baseline rail". */
+  .assembly-baseline-rail {
+    width: calc(120 * var(--px));
+    height: var(--px);
+    background: var(--pico-yellow);
+    opacity: 0.7;
+  }
+
+  .assembly-density-tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-light-gray);
+    text-transform: uppercase;
+  }
+}

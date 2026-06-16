@@ -16,6 +16,7 @@ import { Cutting } from '../scenes/static/Cutting'
 import { Tray } from '../scenes/static/Tray'
 import { Packaging } from '../scenes/static/Packaging'
 import { Jeweller } from '../scenes/static/Jeweller'
+import { Assembly } from '../scenes/typography/Assembly'
 import type { SceneId, SceneRef } from './lanes'
 
 export type SceneProps = {
@@ -37,5 +38,6 @@ export const SCENES: Record<SceneId, FC<SceneProps>> = {
   tray: Tray,
   packaging: Packaging,
   jeweller: Jeweller,
+  assembly: Assembly,
   placeholder: PlaceholderScene,
 }

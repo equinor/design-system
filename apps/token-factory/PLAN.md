@@ -721,3 +721,99 @@ Caught immediately after G.5 — the previous fix used `eds-tokens-sync/CLAUDE.m
 **Audit lesson #3:** the sync doc's `Contents` column is approximate twice over — it misnames at least two of the five files, and the names it does use don't reflect what's actually inside them. **Authoritative source is the Figma file's own title** (visible in the file header, or in the URL's title segment). For any future lane work, open each Figma file directly and copy the title — do not trust `eds-tokens-sync/CLAUDE.md`'s table.
 
 **Verified:** tsc + build clean. Grep confirms no remaining `'static'` / `'spacing-modes'` / `'spacing-primitives'` / `'dynamic'` lane-id references in `src/`.
+
+---
+
+## Phase H — Typography lane (foundry frame)
+
+The second real lane. Promotes `st-tokens` (🅰️ EDS Spacing & Typography tokens) from a locked stub to a full story that teaches the **typography** pipeline. Protagonist: `ui-body / md` → `--eds-typography-ui-body-md-font-size`.
+
+### Locked frame decision: the foundry, not the gem hall
+
+Colour and typography reach their value by **opposite means**, and that contrast is the lesson. Reusing the gemstone metaphor for both would flatten it (user direction: "using same frame of reference can be confusing"). So:
+
+- **Gem Hall (colours-static)** — geology. A geode is cracked; the value is *already inside*; you peel a 3-ring alias chain to *find* it; two facets fuse for light/dark. Organic, mineral, purple.
+- **Machine Shop / Foundry (st-tokens)** — engineering. There's no value yet; a blank billet is *milled to spec* from one master gauge, by formula, then ground to the baseline. Mechanical, calibrated, steel-grey.
+
+The geode stays untouched in colour. Typography gets its own visual identity (steel palette via the existing G.4 `data-lane` → `--_lane-accent` mechanism; `st-tokens` already maps to `--pico-light-gray`). The two wings only meet at **Assembly**, where colour's gem drops into the milled typographic seat — justifying two frames: they're different production lines that converge into one component.
+
+The foundry frame also hands us accurate vocabulary for free: **point size** = the body of a cast sort, **leading** = the metal between lines (line-height), **baseline** = the rail the sorts sit on.
+
+### The contrast spine (the pedagogical takeaway)
+
+| | Colour — Gem Hall | Typography — Machine Shop |
+|---|---|---|
+| Origin | cracked from a geode | raw billet, milled from a master gauge |
+| Value arrives | already inside; peel to find it | doesn't exist yet; cut to spec by formula |
+| Resolution model | alias chain (3 rings) | geometric scale (`base × 2^(n/5)`) |
+| Process verbs | reveal · peel · facet | measure · mill · calibrate |
+| The "mode" twist | light ↔ dark, `light-dark()` | density dial — one base, whole rack rescales |
+| Finishing polish | re-declare under 4 scopes (build-dark-scope) | grind to the baseline grid (text-box trim) |
+| Material feel | organic, mineral, glowing | metal, calibrated, matte |
+| At assembly | the gem | the seat + rail the gem sits in |
+
+### Accuracy notes (verified against source — D.10/G.5/G.6 discipline)
+
+- The app imports only `@equinor/eds-tokens/css/variables`, which ships **static per-density** typography values (`--eds-typography-ui-body-md-font-size: .875rem` spacious / `.75rem` comfortable). The `pow(2, n/5)` modular-scale formula lives in the component-library foundation (`eds-core-react/.../Foundation/typography.css`) the app does **not** load. So the foundry depicts the **eds-tokens build output** (what actually ships); the formula is taught as the *shape* of the scale, not claimed as a runtime artefact of this output. This resolves the "which layer does the cutting" fork — it's the build.
+- `md` = `base × 2^(-1/5)` ≈ 14px at the 16px spacious base; ≈ 12px at the 14px comfortable base. Line-height md squished = 16px (snapped to the 4px grid). Verified in `variables.css`.
+- Typography spans **two** Figma files: `st-primitives` (raw type-scale steps + font-family primitives `Inter`/`Equinor`) and `st-tokens` (the role tokens `ui-body.md` that alias the primitives). The protagonist's role token lives in `st-tokens` — its lane home — and resolves through `st-primitives`, mirroring how colour's concept token resolves through Foundations.
+
+### 10-scene beat sheet (foundry frame)
+
+Scenes 0–1 (intro + dock) are shared prologue. The dock palette flips to steel when `st-tokens` is selected. The 8 post-dock scenes:
+
+| # | Scene | Was (colour) | Visual core | Teaches |
+|---|---|---|---|---|
+| 2 | inside the foundry | inside | belt routes the crate to the machine shop, not the gem hall | the token spans two s&t Figma files; protagonist `ui-body/md` |
+| 3 | the billet | crack | crate opens → a dull **blank billet**, not a glowing geode | the value doesn't exist yet — it gets machined (deliberate anticlimax vs colour) |
+| 4 | the master gauge | reveal | master measure + a milled **rack** of 10 sizes at fixed ratios | the modular scale: sizes are `base × 2^(n/5)`, not a typed list |
+| 5 | milling to spec | peel | mill cuts md (14px, snapped 0.5px) + the seat/leading (16px, 4px grid); build engraves the var name | md's exact cut, line-height derivation, the part-number stamp |
+| 6 | the density dial | cutting | one dial; turn spacious→comfortable, the whole rack re-mills live | the density cascade — typography's light/dark equivalent (HERO scene) |
+| 7 | the rack | tray | md joins the full range + the Equinor header row; interchangeable facets | lane output as the typography CSS; per-role family + axes |
+| 8 | final inspection | packaging | rack meets the other lanes; surface-plate grind to the baseline | baseline trimming (`text-box: trim-both`); seal → variables.css |
+| 9 | assembly | jeweller | gem drops into the milled seat → real `<Button>` + **live density toggle** | the two wings converge; the whole component resizes from one measure |
+
+### Sprite plan
+
+- **Reuse:** Crate, Dock/belt, LibrarianBot, StationLog, SceneHeader, Narrator, LaneSprites, real `<Button>`.
+- **Borrowed at assembly only:** `Gemstone` — explicitly colour's contribution.
+- **New:** `Billet` (3) · `MasterGauge` + reference plate (4,5) · `Mill`/step-cutter (4,5,6) · `GaugeRack` (4,6,7) · `Micrometer` (5) · `DensityDial` (6,9) · `SurfacePlate`/baseline jig + grid (8) · `MetalSort` (the milled size block, engraved — inlined in Assembly for H.1, extracted later).
+- **Retired for this lane:** `Geode`, `NestedStones`, the light-dark two-facet cut.
+
+### Migration sub-phases
+
+| Phase | Ships |
+|---|---|
+| **H.0** | Plan locked + `st-tokens` lane data (full narrator script, foundry frame), registered. Unbuilt scenes route through `placeholder`. Routes end-to-end. |
+| **H.1** | Assembly scene (payoff first) — gem-in-seat → real `<Button>` + live density toggle. Validated in Chrome. |
+| **H.2** | Inside (foundry) + Billet (the anticlimax). |
+| **H.3** | Master Gauge + `GaugeRack` sprite. |
+| **H.4** | Milling to Spec + `MetalSort`/`Mill` sprites. |
+| **H.5** | Density Dial (hero scene, deliberate pacing). |
+| **H.6** | Rack + Final Inspection (baseline grid). |
+| **H.7** | Flip lane to `ready`; end-to-end narrator tighten; multi-viewport smoke. |
+
+---
+
+## Phase log (cont.)
+
+### Phase H.0 — Plan locked + typography lane scaffold ✓
+
+- Wrote the Phase H plan above (frame decision, contrast spine, beat sheet, sprite plan, sub-phases) so the locked foundry decision is recorded alongside the colour lane's locked decisions.
+- New `data/lanes/typography.ts` — `TYPOGRAPHY_LANE` (id `st-tokens`, status `scaffold`, steel accent). Full 8-scene narrator script in the foundry voice; 9 lane-map stages reusing existing `StageViz` keys (foundry-specific icons are a polish item). Header comment records the static-per-density vs foundation-formula accuracy note.
+- `data/lanes/index.ts` — replaced the locked `st-tokens` stub with `TYPOGRAPHY_LANE`.
+- `data/lanes/types.ts` — added `'assembly'` to the `SceneId` union. The other 7 scenes route through `'placeholder'` until their components land (H.2–H.6).
+- **Verified:** `pnpm build` clean (73 modules, was 59). Chrome: dock shows `s&t tokens` as "Switch to s&t tokens" (clickable scaffold lane); selecting it routes the post-dock story through the typography placeholders + the real Assembly.
+
+### Phase H.1 — Assembly scene (payoff, built first) ✓
+
+Built the bookend first to validate the end-state before scenes 2–8 (mirrors the colour lane's Phase C).
+
+- New `scenes/typography/Assembly.tsx` + `assembly.css`. Beat machine: 0 sealed `variables.css` box (steel, distinct from colour's purple box) → 1 gem + milled `MetalSort` converge → 2 flash → real `<Button>` reveal → 3+ **live density oscillation**.
+- The real `<Button>` text uses the real typography tokens (`--eds-typography-ui-body-md-font-size` / `-line-height-squished` / `-font-weight-bolder`, `--eds-typography-ui-body-font-family` → Inter) and the colour fill token (`--eds-color-bg-accent-fill-emphasis-default`). `image-rendering: auto` + anti-aliasing break the pixel aesthetic deliberately.
+- **Live density toggle** = typography's light/dark moment. A `data-density` attribute on the render wrapper oscillates spacious↔comfortable on an interval; eds-tokens ships static per-density values, so the button visibly resizes (14px ↔ 12px) — genuine shipped behaviour, with a `font-size` transition for smoothness.
+- The `MetalSort` (steel block, `md` engraved, bevelled top + dark foot) is inlined in Assembly for now; extracted to a sprite when Milling/Rack land.
+- **Bug found + fixed in Chrome:** first render showed an empty bench — `.assembly-stage` used `position: relative` + a grid `1fr` track, but `.scene-header-bar` is `position: absolute` (out of flow), so the track collapsed to zero height. Fixed by positioning `.assembly-stage` absolutely below the 16px header (`top: 20px`), mirroring `.jeweller-stage`.
+- **Verified in Chrome:** intro → dock → select s&t tokens → advance to Assembly. Real teal Button with Inter font renders on the steel bench; density tag + button size cycle COMFORTABLE↔SPACIOUS live. No console errors (benign favicon 404 only).
+
+Next: **H.2 — Inside (foundry) + Billet**, replacing the first two placeholders with real components.

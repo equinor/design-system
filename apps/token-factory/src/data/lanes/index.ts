@@ -11,12 +11,14 @@
 
 import { FOUNDATIONS_LANE } from './foundations'
 import { STATIC_LANE } from './static'
+import { TYPOGRAPHY_LANE } from './typography'
 import type { Lane, LaneId } from './types'
 
 export type { Lane, LaneId, NarratorMode, SceneId, SceneRef } from './types'
 export { PROLOGUE } from './prologue'
 export { STATIC_LANE } from './static'
 export { FOUNDATIONS_LANE } from './foundations'
+export { TYPOGRAPHY_LANE } from './typography'
 
 export const LANES: Record<LaneId, Lane> = {
   'colours-static': STATIC_LANE,
@@ -35,11 +37,5 @@ export const LANES: Record<LaneId, Lane> = {
     status: 'locked',
     scenes: [],
   },
-  'st-tokens': {
-    id: 'st-tokens',
-    label: 's&t tokens',
-    accent: '--pico-light-gray',
-    status: 'locked',
-    scenes: [],
-  },
+  'st-tokens': TYPOGRAPHY_LANE,
 }
