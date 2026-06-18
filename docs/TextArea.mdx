@@ -1,0 +1,112 @@
+## Features
+
+- Multi-line text input that grows automatically as the user types.
+- Optional label, description, indicator, and helper message.
+- Character count display — shows `n` or `n / maxLength` when a limit is set.
+- Invalid state with error border and background.
+- Read-only state for non-editable values that can still be selected and copied.
+
+## Usage
+
+```tsx
+import { TextArea } from '@equinor/eds-mobile-components'
+
+const [value, setValue] = useState('')
+
+<TextArea
+  label="Comments"
+  placeholder="Enter your comments"
+  value={value}
+  onChangeText={setValue}
+/>
+```
+
+## Examples
+
+### With description and helper message
+
+```tsx
+<TextArea
+  label="Observations"
+  description="Describe what you observed on site."
+  helperMessage="Required before submitting"
+  placeholder="Enter observations"
+  value={value}
+  onChangeText={setValue}
+/>
+```
+
+### Character count
+
+Pass `showCharacterCount` to show a live count below the field. Combine with `maxLength` to show `n / max`.
+
+```tsx
+<TextArea
+  label="Notes"
+  showCharacterCount
+  maxLength={500}
+  value={value}
+  onChangeText={setValue}
+/>
+```
+
+### Invalid
+
+```tsx
+<TextArea
+  label="Description"
+  invalid
+  helperMessage="This field is required"
+  value={value}
+  onChangeText={setValue}
+/>
+```
+
+### Read-only
+
+```tsx
+<TextArea
+  label="Submitted notes"
+  value="These notes were submitted and cannot be edited."
+  readOnly
+/>
+```
+
+### Disabled
+
+```tsx
+<TextArea
+  label="Comments"
+  placeholder="Not available"
+  disabled
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Label displayed above the field |
+| `indicator` | `string` | — | Inline text after the label, e.g. `"(Optional)"` |
+| `description` | `string` | — | Descriptive text below the label |
+| `helperMessage` | `string` | — | Message shown below the field |
+| `invalid` | `boolean` | `false` | Error state — red border and background |
+| `disabled` | `boolean` | `false` | Disables all interaction |
+| `readOnly` | `boolean` | `false` | Prevents editing; value can still be selected and copied |
+| `showCharacterCount` | `boolean` | `false` | Shows a character count below the field |
+| `maxLength` | `number` | — | Maximum character count; shows `n / max` when combined with `showCharacterCount` |
+
+Also accepts all React Native [`TextInputProps`](https://reactnative.dev/docs/textinput#props), excluding `multiline`, `editable`, `readOnly`, and `scrollEnabled` which are managed internally.
+
+## Accessibility
+
+- Reports `disabled` state to assistive technology via `accessibilityState`.
+- `accessibilityLabel` defaults to the `label` prop when not provided.
+- `accessibilityHint` defaults to a concatenation of `description` and `helperMessage` when not provided.
+- When `showCharacterCount` and `maxLength` are both set, the count is read aloud by screen readers once the user reaches 80% of the limit.
+- Always provide a `label` or `accessibilityLabel`.
+
+## Related components
+
+- `TextField` — single-line labelled input with the same field structure.
+- `Input` — bare single-line input without label or helper message.
