@@ -4,6 +4,7 @@ import { axe } from 'jest-axe'
 import { TextField } from './TextField'
 
 // jsdom does not implement the Popover API (used by next/Tooltip)
+const originalMatches = Element.prototype.matches
 beforeAll(() => {
   HTMLElement.prototype.showPopover = function (this: HTMLElement) {
     this.setAttribute('data-popover-open', '')
@@ -19,6 +20,9 @@ beforeAll(() => {
       return this.hasAttribute('data-popover-open')
     return Element.prototype.matches.call(this, selector)
   }
+})
+afterAll(() => {
+  Element.prototype.matches = originalMatches
 })
 
 describe('TextField (Next EDS 2.0)', () => {
