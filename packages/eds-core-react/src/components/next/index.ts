@@ -77,3 +77,11 @@ export type { AutocompleteProps } from './Autocomplete'
 
 export { Select } from './Select'
 export type { SelectProps } from './Select'
+
+export { Badge } from './Badge'
+export type {
+  BadgeProps,
+  BadgeTone,
+  BadgeEmphasis,
+  BadgeVariant,
+} from './Badge'
