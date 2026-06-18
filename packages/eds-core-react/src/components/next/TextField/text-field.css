@@ -8,7 +8,7 @@
     inline-size: 100%;
   }
 
-  .eds-text-field__info,
+  .eds-text-field__header > .eds-text-field__info,
   .eds-text-field__header > .eds-tooltip-anchor {
     flex-shrink: 0;
 
