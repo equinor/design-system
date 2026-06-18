@@ -1,0 +1,82 @@
+@layer tf-chrome {
+  /* ===== Start gate (title card / press-start splash) ===== */
+
+  .start-gate {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    background: var(--pico-dark-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--px));
+    padding: calc(12 * var(--px));
+    text-align: center;
+  }
+
+  .start-gate-title {
+    margin: 0;
+    font-size: calc(22 * var(--px));
+    line-height: 1.3;
+    color: var(--pico-yellow);
+    letter-spacing: calc(1 * var(--px));
+    text-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0
+      var(--pico-dark-purple);
+  }
+
+  .start-gate-sub {
+    margin: 0;
+    max-width: calc(220 * var(--px));
+    font-size: calc(5 * var(--px));
+    line-height: 1.6;
+    color: var(--pico-light-gray);
+  }
+
+  .start-gate-btn {
+    font-size: calc(7 * var(--px));
+    color: var(--pico-black);
+    background: var(--pico-orange);
+    border: var(--px) solid var(--pico-black);
+    box-shadow: calc(2 * var(--px)) calc(2 * var(--px)) 0 0
+      var(--pico-dark-purple);
+    padding: calc(4 * var(--px)) calc(9 * var(--px));
+    text-transform: uppercase;
+    letter-spacing: calc(1 * var(--px));
+    animation: start-blink 1s steps(2, end) infinite;
+  }
+
+  .start-gate-btn:hover {
+    background: var(--pico-red);
+  }
+
+  .start-gate-btn:active {
+    transform: translate(calc(1 * var(--px)), calc(1 * var(--px)));
+    box-shadow: calc(1 * var(--px)) calc(1 * var(--px)) 0 0
+      var(--pico-dark-purple);
+  }
+
+  .start-gate-btn:focus-visible {
+    outline: var(--px) solid var(--pico-blue);
+    outline-offset: calc(2 * var(--px));
+  }
+
+  .start-gate-note {
+    margin: 0;
+    font-size: calc(4 * var(--px));
+    color: var(--pico-dark-gray);
+    text-transform: uppercase;
+    letter-spacing: calc(0.5 * var(--px));
+  }
+}
+
+@keyframes start-blink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.55;
+  }
+}

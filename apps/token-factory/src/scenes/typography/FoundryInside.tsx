@@ -7,8 +7,10 @@ import './foundry-inside.css'
 // The colour lane's Inside carries the crate "deeper into the factory".
 // Here the same belt routes it into the MACHINE SHOP wing — steel
 // machinery instead of the gem hall, signalling early that this is a
-// different production line. The crate carries the two s&t Figma files;
-// we follow ui-body / md.
+// different production line. The crate is the s&t tokens file; its
+// roles resolve through the sibling s&t primitives file (a separate
+// lane/crate at the dock), the way colours-static resolves through
+// Foundations. We follow ui-body / md.
 //
 // Not a reuse of the colours-static Inside: that component hardcodes
 // colour-specific labels ("static", "Concept.Mode 1.json"). Kept

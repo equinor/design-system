@@ -258,6 +258,7 @@
     box-shadow: var(--px) var(--px) 0 0 var(--pico-dark-purple);
     animation: peel-info-pop 220ms steps(3, end);
     max-width: calc(140 * var(--px));
+    z-index: 1;
   }
 
   .pkg-code-key {

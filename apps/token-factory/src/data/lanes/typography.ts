@@ -56,8 +56,8 @@ export const TYPOGRAPHY_LANE: Lane = {
       stage: 'json',
       lines: [
         "Inside, the belt carries our crate deeper — but it's routed to the machine shop, not the gem hall.",
-        'Our crate carries two files: the Spacing & Typography Primitives, and the Spacing & Typography tokens. Type is split across the two.',
-        "We follow one part: ui-body, size md. The body text your buttons wear. The machine shop makes it — it isn't dug up.",
+        'Our crate is the s&t tokens file — named roles like ui-body and header. Their raw sizes and font stacks live in the s&t primitives file, a separate crate you saw at the dock.',
+        "We follow one role: ui-body, size md. The body text your buttons wear. The machine shop mills it — it isn't dug up.",
       ],
     },
     {

@@ -7,9 +7,12 @@ import {
   type SceneRef,
 } from '../data/lanes'
 import { SCENES } from '../data/sceneRegistry'
+import { AudioControl } from './AudioControl'
 import { LaneContext, LaneSelectionContext } from './LaneContext'
 import { LaneMapDialog } from './LaneMapDialog'
 import { Narrator } from './Narrator'
+import { StartGate } from './StartGate'
+import { useBackgroundMusic } from './useBackgroundMusic'
 
 // Top-level story orchestrator.
 //
@@ -34,6 +37,7 @@ export function Story() {
   const [skipTick, setSkipTick] = useState(0)
   const [activeBeatIdx, setActiveBeatIdx] = useState(0)
   const [mapOpen, setMapOpen] = useState(false)
+  const music = useBackgroundMusic()
 
   const selectedLane = LANES[selectedLaneId] ?? STATIC_LANE
 
@@ -110,6 +114,9 @@ export function Story() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      // Story keys are inert until the start gate hands control over.
+      // The gate's button owns its own keyboard activation (it's focused).
+      if (!music.started) return
       if (e.key === 'm' || e.key === 'M') {
         e.preventDefault()
         setMapOpen((open) => !open)
@@ -140,7 +147,7 @@ export function Story() {
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [advance, back, skip, restart, mapOpen])
+  }, [advance, back, skip, restart, mapOpen, music.started])
 
   const selectionValue = useMemo(
     () => ({ selectedLaneId, setSelectedLaneId }),
@@ -151,44 +158,57 @@ export function Story() {
     <LaneContext.Provider value={selectedLane}>
       <LaneSelectionContext.Provider value={selectionValue}>
         <div className="stage" data-lane={selectedLaneId}>
-          {Scene && scene ? (
-            <Scene activeBeatIdx={activeBeatIdx} scene={scene} />
-          ) : (
-            <div className="scene-placeholder">
-              <div className="scene-header">
-                <span className="scene-title">scene not available</span>
+          {music.started ? (
+            <>
+              {Scene && scene ? (
+                <Scene activeBeatIdx={activeBeatIdx} scene={scene} />
+              ) : (
+                <div className="scene-placeholder">
+                  <div className="scene-header">
+                    <span className="scene-title">scene not available</span>
+                  </div>
+                </div>
+              )}
+
+              {scene && (
+                <Narrator
+                  lines={scene.lines}
+                  skipTick={skipTick}
+                  onBeatChange={setActiveBeatIdx}
+                  onAdvancePastEnd={advance}
+                  centered={scene.narrator === 'centered'}
+                />
+              )}
+
+              <div className="story-hint">
+                <span className="hint-key">[ space ]</span>
+                <span className="hint-label">skip / next line</span>
+                <span className="hint-sep">·</span>
+                <span className="hint-key">[ → ]</span>
+                <span className="hint-label">next scene</span>
+                <span className="hint-sep">·</span>
+                <span className="hint-key">[ m ]</span>
+                <span className="hint-label">map</span>
               </div>
-            </div>
+
+              {mapOpen && scene && (
+                <LaneMapDialog
+                  lane={selectedLane}
+                  scene={scene}
+                  onClose={() => setMapOpen(false)}
+                />
+              )}
+            </>
+          ) : (
+            <StartGate onStart={music.start} muted={music.muted} />
           )}
 
-          {scene && (
-            <Narrator
-              lines={scene.lines}
-              skipTick={skipTick}
-              onBeatChange={setActiveBeatIdx}
-              onAdvancePastEnd={advance}
-              centered={scene.narrator === 'centered'}
-            />
-          )}
-
-          <div className="story-hint">
-            <span className="hint-key">[ space ]</span>
-            <span className="hint-label">skip / next line</span>
-            <span className="hint-sep">·</span>
-            <span className="hint-key">[ → ]</span>
-            <span className="hint-label">next scene</span>
-            <span className="hint-sep">·</span>
-            <span className="hint-key">[ m ]</span>
-            <span className="hint-label">map</span>
-          </div>
-
-          {mapOpen && scene && (
-            <LaneMapDialog
-              lane={selectedLane}
-              scene={scene}
-              onClose={() => setMapOpen(false)}
-            />
-          )}
+          <AudioControl
+            muted={music.muted}
+            volume={music.volume}
+            onToggleMute={music.toggleMute}
+            onVolumeChange={music.setVolume}
+          />
         </div>
       </LaneSelectionContext.Provider>
     </LaneContext.Provider>

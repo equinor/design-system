@@ -179,9 +179,10 @@
     z-index: 20;
   }
 
+  /* left clears the always-present audio toggle pinned top-left. */
   .scene-header-pkg {
     position: absolute;
-    left: calc(6 * var(--px));
+    left: calc(20 * var(--px));
     top: 50%;
     transform: translateY(-50%);
     font-size: calc(4 * var(--px));
