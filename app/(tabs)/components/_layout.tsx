@@ -1,7 +1,10 @@
 import { SettingsControls } from "@/components/SettingsControls";
+import { useToken } from "@equinor/eds-mobile-components";
 import { Stack } from "expo-router";
 
 export default function ComponentsLayout() {
+    const token = useToken();
+
     return (
         <Stack
             screenOptions={{
@@ -9,9 +12,13 @@ export default function ComponentsLayout() {
                 headerBlurEffect: "none",
                 headerLargeTitle: true,
                 headerLargeTitleShadowVisible: true,
-                headerLargeTitleStyle: { fontFamily: "Equinor-Bold" },
+                headerLargeTitleStyle: {
+                    fontFamily: "Equinor-Bold",
+                    color: token.colors.text.neutral.strong,
+                },
                 headerTitleStyle: {
                     fontFamily: "Equinor-Bold",
+                    color: token.colors.text.neutral.strong,
                 },
                 headerRight: () => <SettingsControls />,
             }}
