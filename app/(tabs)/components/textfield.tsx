@@ -9,7 +9,10 @@ export default function TextFieldScreen() {
     const [errorValue, setErrorValue] = useState("");
 
     return (
-        <ScrollView contentInsetAdjustmentBehavior="automatic" keyboardShouldPersistTaps="handled">
+        <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            keyboardShouldPersistTaps="handled"
+        >
             <Section>
                 <Typography>
                     TextField combines a label, an input, and a helper message
@@ -77,8 +80,8 @@ export default function TextFieldScreen() {
 
             <Section title="Indicator">
                 <Typography>
-                    Use the indicator prop to show "(Required)" or "(Optional)"
-                    inline after the label.
+                    Use the indicator prop to show &quot;(Required)&quot; or
+                    &quot;(Optional)&quot; inline after the label.
                 </Typography>
             </Section>
             <Surface>

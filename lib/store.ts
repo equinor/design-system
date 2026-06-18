@@ -11,6 +11,6 @@ type AppStoreState = {
 export const useAppStore = create<AppStoreState>((set) => ({
     scheme: null as "light" | "dark" | null,
     setScheme: (scheme: "light" | "dark" | null) => set({ scheme }),
-    density: "spacious",
+    density: "comfortable",
     setDensity: (density: Density) => set({ density }),
 }));
