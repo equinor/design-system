@@ -44,7 +44,7 @@ Use specific semantic variables:
 
 ```css
 .button-primary {
-  background-color: var(--eds-color-bg-accent-emphasis);
+  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
   color: var(--eds-color-text-accent-strong-on-emphasis);
 }
 ```
@@ -74,7 +74,7 @@ Use abstract variables:
 
 ```css
 .button {
-  background: var(--eds-color-bg-emphasis);
+  background: var(--eds-color-bg-fill-emphasis-default);
   color: var(--eds-color-text-strong-on-emphasis);
 }
 ```
