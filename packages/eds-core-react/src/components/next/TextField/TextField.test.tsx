@@ -4,7 +4,6 @@ import { axe } from 'jest-axe'
 import { TextField } from './TextField'
 
 // jsdom does not implement the Popover API (used by next/Tooltip)
-const originalMatches = Element.prototype.matches
 beforeAll(() => {
   HTMLElement.prototype.showPopover = function (this: HTMLElement) {
     this.setAttribute('data-popover-open', '')
@@ -22,7 +21,8 @@ beforeAll(() => {
   }
 })
 afterAll(() => {
-  Element.prototype.matches = originalMatches
+  // Remove the own-property override — prototype chain falls back to Element.prototype.matches
+  Reflect.deleteProperty(HTMLElement.prototype, 'matches')
 })
 
 describe('TextField (Next EDS 2.0)', () => {
