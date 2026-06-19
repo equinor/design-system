@@ -32,6 +32,8 @@ export const inputTokenStyles = EDSStyleSheet.create(
         // Text colors
         const textColor = disabled
             ? token.colors.text.disabled
+            : readOnly
+            ? token.colors.border.neutral.strong
             : token.colors.text.neutral.strong;
 
         const placeholderColor = disabled
@@ -78,6 +80,10 @@ export const inputTokenStyles = EDSStyleSheet.create(
             },
             errorIcon: {
                 color: token.colors.text.danger.subtle,
+            },
+            textInputWrapper: {
+                flex: 1,
+                pointerEvents: disabled ? "none" : "auto",
             },
         };
     }

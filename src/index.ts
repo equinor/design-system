@@ -2,6 +2,7 @@ export * from "./components/Badge";
 export * from "./components/Button";
 export * from "./components/Input";
 export * from "./components/Link";
+export * from "./components/Search";
 export * from "./components/TextArea";
 export * from "./components/TextField";
 export * from "./components/SelectionControls";

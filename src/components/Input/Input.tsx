@@ -49,11 +49,14 @@ export type InputProps = {
      */
     hideErrorIcon?: boolean;
     /**
-     * Whether or not the text should be editable.
+     * When true, the value cannot be edited but can be selected and copied.
+     * Unlike disabled, the field remains interactive and is not visually dimmed.
+     * Note: on iOS, text selection requires multiline mode — single-line read-only
+     * inputs are not selectable due to a platform constraint.
      */
     readOnly?: boolean;
     /**
-     * Whether or not the input is disabled.
+     * When true, the input is fully non-interactive — no editing, selection, or focus.
      */
     disabled?: boolean;
 } & Omit<TextInputProps, "onChange" | "onChangeText" | "readOnly">;
@@ -108,13 +111,12 @@ export const Input = forwardRef<TextInput, InputProps>(
                     <Text style={styles.adornmentText}>{startText}</Text>
                 )}
                 {startAdornment}
-                <View style={{ pointerEvents: disabled ? "none" : "auto" }}>
+                <View style={styles.textInputWrapper}>
                     <TextInput
                         {...rest}
                         ref={ref}
                         multiline={multiline}
-                        editable={!disabled}
-                        readOnly={readOnly}
+                        editable={!disabled && !readOnly}
                         placeholder={placeholder}
                         onChangeText={onChange}
                         textAlignVertical="top"
