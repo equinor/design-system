@@ -8,7 +8,8 @@
 
       inline-size: 100%;
 
-      & > button {
+      & > button,
+      & > .eds-tooltip-anchor {
         flex-shrink: 0;
         margin-block: calc(var(--eds-sizing-icon-xs) / -2);
       }
@@ -37,7 +38,6 @@
       display: flex;
       gap: var(--eds-typography-gap-horizontal);
       align-items: baseline;
-
       inline-size: 100%;
       margin-block-start: calc(
         var(--eds-selectable-space-horizontal) - var(--eds-generic-gap-vertical)

@@ -3,6 +3,28 @@ import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { TextField } from './TextField'
 
+// jsdom does not implement the Popover API (used by next/Tooltip)
+beforeAll(() => {
+  HTMLElement.prototype.showPopover = function (this: HTMLElement) {
+    this.setAttribute('data-popover-open', '')
+  }
+  HTMLElement.prototype.hidePopover = function (this: HTMLElement) {
+    this.removeAttribute('data-popover-open')
+  }
+  HTMLElement.prototype.matches = function (
+    this: HTMLElement,
+    selector: string,
+  ) {
+    if (selector === ':popover-open')
+      return this.hasAttribute('data-popover-open')
+    return Element.prototype.matches.call(this, selector)
+  }
+})
+afterAll(() => {
+  // Remove the own-property override — prototype chain falls back to Element.prototype.matches
+  Reflect.deleteProperty(HTMLElement.prototype, 'matches')
+})
+
 describe('TextField (Next EDS 2.0)', () => {
   it('Matches snapshot', () => {
     const { container } = render(

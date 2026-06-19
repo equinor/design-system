@@ -1,5 +1,15 @@
+@keyframes eds-autocomplete-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @layer eds-components {
   .eds-autocomplete {
+    & .loading-icon {
+      animation: eds-autocomplete-spin 1s linear infinite;
+    }
+
     & .anchor {
       anchor-name: var(--menu-anchor);
     }

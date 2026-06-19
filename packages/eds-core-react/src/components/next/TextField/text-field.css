@@ -1,14 +1,17 @@
 @layer eds-components {
   .eds-text-field__header {
     display: flex;
+    gap: var(--eds-typography-gap-horizontal);
     align-items: center;
     justify-content: space-between;
-    gap: var(--eds-typography-gap-horizontal);
+
     inline-size: 100%;
   }
 
-  .eds-text-field__info {
+  .eds-text-field__header > .eds-text-field__info,
+  .eds-text-field__header > .eds-tooltip-anchor {
     flex-shrink: 0;
+
     /* Negative margin collapses the button's 24px layout contribution to ~8px,
        matching Figma's 8px icon container. Label text-box height determines row height. */
     margin-block: calc(var(--eds-sizing-icon-xs) / -2);

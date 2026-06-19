@@ -67,7 +67,7 @@
     "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types && pnpm --filter @equinor/eds-color-palette-generator types && pnpm --filter design-system-docs typecheck"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-runtime": "^7.29.0",
     "@babel/preset-env": "^7.29.5",
@@ -86,7 +86,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-storybook": "^10.4.2",
+    "eslint-plugin-storybook": "^10.4.3",
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.6.0",
     "typescript-eslint": "^8.59.2",
@@ -114,7 +114,11 @@
       "js-yaml": ">=4.1.1",
       "gray-matter>js-yaml": "^3.14.1",
       "lodash": ">=4.18.0",
-      "webpackbar": "^7.0.0"
+      "webpackbar": "^7.0.0",
+      "shell-quote": ">=1.8.4",
+      "react-stately": "3.47.0",
+      "@types/react": ">=19.2.17",
+      "@internationalized/date": "3.12.2"
     }
   }
 }

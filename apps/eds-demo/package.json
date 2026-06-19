@@ -25,14 +25,14 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.59.1",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.27",
     "eslint": "^9.38.0",
-    "eslint-config-next": "16.2.7",
+    "eslint-config-next": "16.2.9",
     "postcss": "^8.5.15",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3"
