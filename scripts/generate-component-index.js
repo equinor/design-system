@@ -253,7 +253,7 @@ function truncate(str, max) {
 
 function escapePipe(str) {
   if (!str) return str
-  return str.replace(/\|/g, '\\|')
+  return str.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
 }
 
 function renderTable(rows) {
