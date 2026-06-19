@@ -29,8 +29,10 @@ export default function ComponentsLayout() {
                     title: "Components",
                 }}
             />
+            <Stack.Screen name="badge" options={{ title: "Badge" }} />
             <Stack.Screen name="button" options={{ title: "Button" }} />
             <Stack.Screen name="input" options={{ title: "Input" }} />
+            <Stack.Screen name="link" options={{ title: "Link" }} />
             <Stack.Screen
                 name="selectioncontrols"
                 options={{ title: "Selection Controls" }}
@@ -43,6 +45,7 @@ export default function ComponentsLayout() {
                 name="textfield"
                 options={{ title: "TextField" }}
             />
+            <Stack.Screen name="search" options={{ title: "Search" }} />
         </Stack>
     );
 }
