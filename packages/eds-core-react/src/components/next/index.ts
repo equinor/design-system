@@ -85,3 +85,12 @@ export type {
   BadgeEmphasis,
   BadgeVariant,
 } from './Badge'
+
+export { Dialog } from './Dialog'
+export type {
+  DialogActionsProps,
+  DialogContentProps,
+  DialogHeaderProps,
+  DialogProps,
+  DialogTitleProps,
+} from './Dialog'
