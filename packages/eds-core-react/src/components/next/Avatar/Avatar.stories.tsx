@@ -1,6 +1,10 @@
 import type { Meta, StoryFn } from '@storybook/react-vite'
-import { Avatar, type AvatarProps } from '.'
-import { AvatarNameLabel, type AvatarNameLabelProps } from '.'
+import {
+  Avatar,
+  AvatarNameLabel,
+  type AvatarProps,
+  type AvatarNameLabelProps,
+} from '.'
 
 const meta: Meta<typeof Avatar> = {
   title: 'EDS 2.0 (beta)/Data Display/Avatar',

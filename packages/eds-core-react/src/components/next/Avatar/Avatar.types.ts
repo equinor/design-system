@@ -8,7 +8,11 @@ export type AvatarProps = {
   size?: AvatarSize
   /** Colour emphasis — low uses muted background, high uses emphasis background */
   emphasis?: AvatarEmphasis
-  /** Initial letter displayed in the avatar */
+  /**
+   * Initial letter displayed in the avatar. The span is `aria-hidden` — the
+   * letter is decorative. For standalone use as a meaningful image, also pass
+   * `role="img"` and `aria-label` with the person's name.
+   */
   initial?: string
   /** Show a success-tone notification indicator */
   notification?: boolean
