@@ -1,6 +1,5 @@
 import figma from '@figma/code-connect'
-import { Avatar } from '.'
-import { AvatarNameLabel } from '.'
+import { Avatar, AvatarNameLabel } from '.'
 
 figma.connect(
   Avatar,
