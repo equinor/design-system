@@ -34,10 +34,18 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
           />
           <div className="names">
             <p className="full-name">{fullName}</p>
-            {email && <p className="email">{email}</p>}
+            {email && (
+              <p className="email" data-testid="eds-avatar-email">
+                {email}
+              </p>
+            )}
           </div>
         </div>
-        {children && <div className="slot-right">{children}</div>}
+        {children && (
+          <div className="slot-right" data-testid="eds-avatar-slot-right">
+            {children}
+          </div>
+        )}
       </div>
     )
   },

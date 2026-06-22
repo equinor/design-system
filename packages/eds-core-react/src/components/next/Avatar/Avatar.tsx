@@ -27,6 +27,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       {notification && (
         <span
           className="notification"
+          data-testid="eds-avatar-notification"
           data-color-appearance="success"
           aria-hidden="true"
         />
