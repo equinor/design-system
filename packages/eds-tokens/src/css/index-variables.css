@@ -2,20 +2,23 @@
 @import 'color/static/variables.css';
 @import 'color/dynamic/variables.css';
 
-/* Density CSS must be imported BEFORE the per-axis alias files below.
+/* Keep per-axis alias files AFTER the density blocks below.
  *
- * Per-axis files declare bare aliases like
+ * Per-axis files declare bare aliases as `var()` references, e.g.
  *   :root, [data-vertical-gap="xs"] { --eds-generic-gap-vertical: var(...); }
- * The var() resolves locally, so on descendants that set the size attribute the
- * primitive lookup picks up the active density correctly.
+ * which re-resolve locally — so on descendants that set the size attribute,
+ * the primitive lookup picks up the active density correctly.
  *
- * Density blocks redeclare the same bare aliases with already-resolved values
- * for elements that only set data-density (no size attribute). Because density
- * is imported first, the per-axis files win at descendants with an explicit
- * size attribute (their var() then re-resolves locally against the density
- * primitive) while density wins at descendants that only set data-density.
- * Reordering these breaks density propagation through the alias chain — see
- * #5090.
+ * Density blocks redeclare the same bare aliases with already-resolved values,
+ * which is what makes density propagate to descendants that only set
+ * data-density (no size attribute). See #5090.
+ *
+ * Today every bare alias is declared at default-size selectors only, so the
+ * per-axis rule and the density rule resolve to the same value and order
+ * merely decides which equal value wins. The robust choice is still to keep
+ * per-axis last, so the dynamic var() form takes precedence — that way, if a
+ * future non-default-size alias is added, the cascade still resolves through
+ * the active density primitive instead of a frozen value.
  */
 @import 'spacing/spacious.css';
 @import 'spacing/comfortable.css';
