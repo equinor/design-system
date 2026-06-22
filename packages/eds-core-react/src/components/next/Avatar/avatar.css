@@ -4,11 +4,14 @@
     --_size: var(--eds-sizing-icon-2xl); /* 32px — Large */
     --_font-size: var(--eds-typography-ui-body-md-font-size);
     --_line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    /* Dot sizes have no token equivalent in the design — hardcoded per Figma spec */
     --_dot-size: 12px;
 
     /* Colour tokens — overridden for high emphasis */
     --_bg: var(--eds-color-bg-fill-muted-default);
     --_color: var(--eds-color-text-strong);
+    --_notification-bg: var(--eds-color-bg-fill-emphasis-default);
 
     position: relative;
 
@@ -56,6 +59,8 @@
 
     & .notification {
       position: absolute;
+
+      /* -2px overlap — no token equivalent, intentional per Figma spec */
       right: -2px;
       bottom: -2px;
 
@@ -64,13 +69,15 @@
       border: var(--eds-sizing-stroke-thin) solid var(--eds-color-bg-surface);
       border-radius: var(--eds-spacing-border-radius-pill);
 
-      background-color: var(--eds-color-bg-fill-emphasis-default);
+      background-color: var(--_notification-bg);
     }
   }
 
   .eds-avatar-name-label {
     display: inline-flex;
-    gap: var(--eds-container-gap-vertical);
+
+    /* Row container: horizontal gap between avatar+content and slot-right */
+    gap: var(--eds-container-gap-horizontal);
     align-items: center;
 
     & .content {
@@ -86,7 +93,9 @@
       display: flex;
       flex: 1 0 0;
       flex-direction: column;
-      gap: var(--eds-selectable-space-horizontal);
+
+      /* Column layout: use vertical spacing between stacked name and email */
+      gap: var(--eds-selectable-space-vertical);
       align-items: flex-start;
       justify-content: center;
 
@@ -108,6 +117,9 @@
         flex: initial;
         flex-direction: row;
         flex-shrink: 0;
+
+        /* Row layout: use horizontal spacing between inline name and email */
+        gap: var(--eds-selectable-space-horizontal);
         align-items: center;
 
         white-space: nowrap;
@@ -116,8 +128,6 @@
 
     & .full-name,
     & .email {
-      margin: 0;
-
       @supports (text-box: trim-both cap alphabetic) {
         text-box: trim-both cap alphabetic;
       }
