@@ -33,11 +33,11 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
             notification={notification}
           />
           <div className="names">
-            <p className="full-name">{fullName}</p>
+            <span className="full-name">{fullName}</span>
             {email && (
-              <p className="email" data-testid="eds-avatar-email">
+              <span className="email" data-testid="eds-avatar-email">
                 {email}
-              </p>
+              </span>
             )}
           </div>
         </div>

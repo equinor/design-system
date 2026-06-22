@@ -5,7 +5,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   {
     size = 'lg',
     emphasis = 'low',
-    initial = 'A',
+    initial,
     notification = false,
     className,
     ...rest
@@ -23,7 +23,15 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       data-emphasis={emphasis}
       {...rest}
     >
-      <span className="initial">{initial}</span>
+      {initial && (
+        <span
+          className="initial"
+          data-testid="eds-avatar-initial"
+          aria-hidden="true"
+        >
+          {initial}
+        </span>
+      )}
       {notification && (
         <span
           className="notification"
