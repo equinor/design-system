@@ -597,6 +597,32 @@
   --eds-typography-header-6xl-font-weight-bolder: 500;
   --eds-typography-header-6xl-line-height-default: 2.5rem;
   --eds-typography-header-6xl-line-height-squished: 2.25rem;
+  --eds-container-space-horizontal: 1rem;
+  --eds-container-space-vertical: 1rem;
+  --eds-page-space-horizontal: 1.5rem;
+  --eds-page-space-vertical: 1.5rem;
+  --eds-generic-gap-horizontal: .5rem;
+  --eds-generic-gap-vertical: .5rem;
+  --eds-generic-space-horizontal: .5rem;
+  --eds-generic-space-vertical: .5rem;
+  --eds-selectable-space-horizontal: .5rem;
+  --eds-selectable-space-vertical: .5rem;
+  --eds-spacing-proportions-xs-horizontal: .5rem;
+  --eds-spacing-proportions-xs-vertical: .5rem;
+  --eds-spacing-proportions-sm-horizontal: .75rem;
+  --eds-spacing-proportions-sm-vertical: .75rem;
+  --eds-spacing-proportions-md-horizontal: 1rem;
+  --eds-spacing-proportions-md-vertical: 1rem;
+  --eds-spacing-proportions-lg-horizontal: 1.25rem;
+  --eds-spacing-proportions-lg-vertical: 1.25rem;
+  --eds-spacing-proportions-xl-horizontal: 1.5rem;
+  --eds-spacing-proportions-xl-vertical: 1.5rem;
+  --eds-selectable-gap-horizontal: .5rem;
+  --eds-selectable-gap-vertical: .5rem;
+  --eds-container-gap-horizontal: 1rem;
+  --eds-container-gap-vertical: 1rem;
+  --eds-page-gap-horizontal: 1.5rem;
+  --eds-page-gap-vertical: 1.5rem;
 }
 
 [data-density="comfortable"] {
@@ -864,6 +890,32 @@
   --eds-typography-header-6xl-font-weight-bolder: 500;
   --eds-typography-header-6xl-line-height-default: 2.25rem;
   --eds-typography-header-6xl-line-height-squished: 2rem;
+  --eds-container-space-horizontal: .75rem;
+  --eds-container-space-vertical: .75rem;
+  --eds-page-space-horizontal: 1.25rem;
+  --eds-page-space-vertical: 1.25rem;
+  --eds-generic-gap-horizontal: .375rem;
+  --eds-generic-gap-vertical: .375rem;
+  --eds-generic-space-horizontal: .375rem;
+  --eds-generic-space-vertical: .375rem;
+  --eds-selectable-space-horizontal: .375rem;
+  --eds-selectable-space-vertical: .375rem;
+  --eds-spacing-proportions-xs-horizontal: .375rem;
+  --eds-spacing-proportions-xs-vertical: .375rem;
+  --eds-spacing-proportions-sm-horizontal: .5rem;
+  --eds-spacing-proportions-sm-vertical: .5rem;
+  --eds-spacing-proportions-md-horizontal: .75rem;
+  --eds-spacing-proportions-md-vertical: .75rem;
+  --eds-spacing-proportions-lg-horizontal: 1rem;
+  --eds-spacing-proportions-lg-vertical: 1rem;
+  --eds-spacing-proportions-xl-horizontal: 1.25rem;
+  --eds-spacing-proportions-xl-vertical: 1.25rem;
+  --eds-selectable-gap-horizontal: .375rem;
+  --eds-selectable-gap-vertical: .375rem;
+  --eds-container-gap-horizontal: .75rem;
+  --eds-container-gap-vertical: .75rem;
+  --eds-page-gap-horizontal: 1.25rem;
+  --eds-page-gap-vertical: 1.25rem;
 }
 
 [data-space-proportions="squished"] {
