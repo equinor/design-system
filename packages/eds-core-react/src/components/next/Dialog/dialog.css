@@ -76,7 +76,7 @@
 
       font-family: var(--eds-typography-ui-body-font-family);
       font-size: var(--eds-typography-ui-body-lg-font-size);
-      font-weight: var(--eds-typography-ui-body-lg-font-weight);
+      font-weight: var(--eds-typography-ui-body-lg-font-weight-bolder);
       line-height: var(--eds-typography-ui-body-lg-line-height-default);
       color: var(--_text-color);
     }

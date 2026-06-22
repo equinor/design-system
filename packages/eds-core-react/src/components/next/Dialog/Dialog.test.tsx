@@ -21,6 +21,11 @@ beforeAll(() => {
   }
 })
 
+afterAll(() => {
+  Reflect.deleteProperty(HTMLDialogElement.prototype, 'showModal')
+  Reflect.deleteProperty(HTMLDialogElement.prototype, 'close')
+})
+
 const renderOpen = (onOpenChange: (open: boolean) => void = () => {}) =>
   render(
     <Dialog open onOpenChange={onOpenChange}>
