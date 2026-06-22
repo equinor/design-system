@@ -39,13 +39,6 @@
       gap: var(--eds-typography-gap-horizontal);
       align-items: baseline;
       inline-size: 100%;
-      margin-block-start: calc(
-        var(--eds-selectable-space-horizontal) - var(--eds-generic-gap-vertical)
-      );
-    }
-
-    & .eds-field__helper-message {
-      margin-block-start: 0;
     }
 
     & .char-count {

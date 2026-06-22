@@ -41,8 +41,8 @@
     display: block;
 
     font-size: var(--eds-typography-ui-body-md-font-size);
-    line-height: var(--eds-typography-ui-body-md-line-height-default);
     font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+    line-height: var(--eds-typography-ui-body-md-line-height-default);
     color: var(--_eds-field-label-color);
   }
 
@@ -62,11 +62,6 @@
 
   .eds-field__helper-message {
     margin: 0;
-    /* Tighten spacing above helper-message to 3xs (overrides parent gap).
-       Longhand follows shorthand to win the cascade. */
-    margin-block-start: calc(
-      var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical)
-    );
     color: var(--_eds-field-helper-color);
   }
 
