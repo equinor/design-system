@@ -62,13 +62,6 @@
 
   .eds-field__helper-message {
     margin: 0;
-
-    /* Density-aware gap above helper-message (overrides parent gap).
-       Matches TextArea's .helper-row spacing for consistency across all
-       Field-based inputs. Longhand follows shorthand to win the cascade. */
-    margin-block-start: calc(
-      var(--eds-selectable-space-horizontal) - var(--eds-generic-gap-vertical)
-    );
     color: var(--_eds-field-helper-color);
   }
 
