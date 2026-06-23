@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.1...eds-core-react@v2.7.0) (2026-06-23)
+
+
+### ✨ Added
+
+* Dialog EDS 2.0 ([#4956](https://github.com/equinor/design-system/issues/4956)) ([e2f6df2](https://github.com/equinor/design-system/commit/e2f6df2f62991d3f5a0205b416ffcf5d880a3d17))
+
 ## [2.6.1](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.0...eds-core-react@v2.6.1) (2026-05-20)
 
 
