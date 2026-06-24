@@ -253,6 +253,22 @@ describe('AvatarNameLabel (next)', () => {
       expect(await axe(container)).toHaveNoViolations()
     })
 
+    it('announces notification via visually-hidden text', () => {
+      render(<AvatarNameLabel name="Ada Lovelace" notification />)
+      expect(screen.getByText('Notification')).toBeInTheDocument()
+    })
+
+    it('has no accessibility violations with notification', async () => {
+      const { container } = render(
+        <AvatarNameLabel
+          name="Ada Lovelace"
+          meta="Senior Engineer"
+          notification
+        />,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
     it('has no accessibility violations with photo — image is decorative', async () => {
       const { container } = render(
         <AvatarNameLabel
