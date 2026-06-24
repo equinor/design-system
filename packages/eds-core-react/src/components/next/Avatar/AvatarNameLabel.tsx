@@ -1,6 +1,13 @@
 import { forwardRef } from 'react'
 import type { AvatarNameLabelProps } from './AvatarNameLabel.types'
-import { Avatar, deriveInitials } from './Avatar'
+import { Avatar } from './Avatar'
+
+function deriveInitials(name: string): string {
+  const words = name.trim().split(/\s+/)
+  if (!words[0]) return ''
+  if (words.length === 1) return words[0][0].toUpperCase()
+  return (words[0][0] + words[words.length - 1][0]).toUpperCase()
+}
 
 export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
   function AvatarNameLabel(
@@ -39,6 +46,9 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
           <div className="names">
             <span className="full-name">{name}</span>
             {meta && <span className="meta">{meta}</span>}
+            {notification && (
+              <span className="notification-label">Notification</span>
+            )}
           </div>
         </div>
         {children && <div className="slot-right">{children}</div>}

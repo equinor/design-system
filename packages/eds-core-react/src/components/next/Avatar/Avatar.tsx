@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import type { AvatarProps } from './Avatar.types'
 
-export function deriveInitials(name: string): string {
+function deriveInitials(name: string): string {
   const words = name.trim().split(/\s+/)
   if (!words[0]) return ''
   if (words.length === 1) return words[0][0].toUpperCase()

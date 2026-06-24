@@ -8,7 +8,7 @@
     /* Dot sizes have no token equivalent in the design — hardcoded per Figma spec */
     --_dot-size: 12px;
 
-    /* Colour tokens — overridden for high emphasis */
+    /* Colour tokens — overridden for high emphasis; --_color consumed by .initial */
     --_bg: var(--eds-color-bg-fill-muted-default);
     --_color: var(--eds-color-text-strong);
 
@@ -88,7 +88,7 @@
   .eds-avatar-name-label {
     display: flex;
 
-    /* Row container: horizontal gap between avatar+content and slot-right */
+    /* Gap between avatar+content block and slot-right — horizontal arrangement */
     gap: var(--eds-container-gap-horizontal);
     align-items: center;
     font-family: var(--eds-typography-ui-body-font-family);
@@ -152,6 +152,22 @@
     & .meta {
       color: var(--eds-color-text-subtle);
       overflow-wrap: break-word;
+    }
+
+    & .notification-label {
+      position: absolute;
+
+      overflow: hidden;
+
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+
+      white-space: nowrap;
+
+      clip: rect(0, 0, 0, 0);
     }
 
     & .slot-right {
