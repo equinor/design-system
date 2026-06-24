@@ -32,7 +32,7 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
             size={size}
             emphasis={emphasis}
             src={src}
-            alt={alt ?? name}
+            alt={alt ?? ''}
             initial={src ? undefined : derivedInitial}
             notification={notification}
           />
