@@ -46,6 +46,8 @@
     }
 
     & .initial {
+      overflow: hidden;
+
       font-family: var(--eds-typography-ui-body-font-family);
       font-size: var(--_font-size);
       font-feature-settings: 'lnum', 'tnum';
@@ -74,7 +76,7 @@
   }
 
   .eds-avatar-name-label {
-    display: inline-flex;
+    display: flex;
 
     /* Row container: horizontal gap between avatar+content and slot-right */
     gap: var(--eds-container-gap-horizontal);
@@ -127,18 +129,26 @@
     }
 
     & .full-name,
-    & .email {
+    & .meta {
       @supports (text-box: trim-both cap alphabetic) {
         text-box: trim-both cap alphabetic;
       }
     }
 
     & .full-name {
+      overflow: hidden;
+
+      max-width: 100%;
+
       color: var(--eds-color-text-strong);
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    & .email {
+    & .meta {
+      max-width: 100%;
       color: var(--eds-color-text-subtle);
+      overflow-wrap: break-word;
     }
 
     & .slot-right {
