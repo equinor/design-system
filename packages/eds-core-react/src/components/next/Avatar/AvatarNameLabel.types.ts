@@ -6,8 +6,8 @@ export type AvatarNameLabelLayout = 'horizontal' | 'vertical'
 export type AvatarNameLabelProps = {
   /** Full name displayed as the primary label */
   fullName: string
-  /** Secondary label, typically email or a metadata string */
-  email?: string
+  /** Secondary label — email, job title, or any short metadata string */
+  meta?: string
   /**
    * Layout variant for the name/email block.
    *
