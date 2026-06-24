@@ -33,6 +33,7 @@
   "scripts": {
     "build": "rollup -c && tsc",
     "dev": "rollup -c -w",
+    "prepublishOnly": "pnpm run build",
     "types": "tsc"
   },
   "keywords": [

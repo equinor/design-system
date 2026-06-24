@@ -34,6 +34,7 @@
   ],
   "scripts": {
     "build": "rollup -c && tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "types": "tsc -p tsconfig.build.json"
