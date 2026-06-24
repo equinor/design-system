@@ -82,6 +82,40 @@ Introduction.parameters = {
   },
 }
 
+export const Photo: StoryFn = () => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="sm"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="md"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="lg"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="lg"
+      notification
+    />
+  </div>
+)
+Photo.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `src` to show a profile photo instead of initials. The image fills the circle with `object-fit: cover`. Use `name` for the accessible label — it becomes the `alt` text on the image.',
+    },
+  },
+}
+
 export const Sizes: StoryFn = () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
     <Avatar initial="A" size="sm" />

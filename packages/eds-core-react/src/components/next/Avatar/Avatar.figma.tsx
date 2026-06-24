@@ -15,17 +15,25 @@ figma.connect(
         High: 'high',
         Low: 'low',
       }),
+      isPhoto: figma.enum('Variant', { Photo: true }),
       initial: figma.string('Initial'),
       notification: figma.boolean('Notification'),
     },
-    example: ({ size, emphasis, initial, notification }) => (
-      <Avatar
-        size={size}
-        emphasis={emphasis}
-        initial={initial}
-        notification={notification}
-      />
-    ),
+    example: ({ size, emphasis, isPhoto, initial, notification }) =>
+      isPhoto ? (
+        <Avatar
+          size={size}
+          src="https://i.pravatar.cc/150"
+          notification={notification}
+        />
+      ) : (
+        <Avatar
+          size={size}
+          emphasis={emphasis}
+          initial={initial}
+          notification={notification}
+        />
+      ),
   },
 )
 
