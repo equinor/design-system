@@ -44,6 +44,17 @@
       --_color: var(--eds-color-text-strong-on-emphasis);
     }
 
+    & .photo {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+
+      object-fit: cover;
+    }
+
     & .initial {
       overflow: hidden;
 

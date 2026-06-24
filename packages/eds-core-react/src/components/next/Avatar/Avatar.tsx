@@ -13,6 +13,8 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
     emphasis = 'low',
     initial,
     name,
+    src,
+    alt,
     notification = false,
     className,
     ...rest
@@ -21,11 +23,9 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
 ) {
   const classes = ['eds-avatar', className].filter(Boolean).join(' ')
   const resolvedInitial = initial ?? (name ? deriveInitials(name) : undefined)
-  const label = name
-    ? notification
-      ? `${name}, notification`
-      : name
-    : undefined
+  // When src is provided the <img> element carries the accessible name — skip role/aria-label on the div
+  const label =
+    !src && name ? (notification ? `${name}, notification` : name) : undefined
   const a11yProps = label ? { role: 'img' as const, 'aria-label': label } : {}
 
   return (
@@ -38,10 +38,14 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       {...a11yProps}
       {...rest}
     >
-      {resolvedInitial && (
-        <span className="initial" aria-hidden="true">
-          {resolvedInitial}
-        </span>
+      {src ? (
+        <img className="photo" src={src} alt={alt ?? name ?? ''} />
+      ) : (
+        resolvedInitial && (
+          <span className="initial" aria-hidden="true">
+            {resolvedInitial}
+          </span>
+        )
       )}
       {notification && (
         <span

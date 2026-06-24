@@ -21,6 +21,13 @@ export type AvatarProps = {
    * where the adjacent name text provides context.
    */
   name?: string
+  /**
+   * Image source URL. When provided, renders a circular photo instead of initials.
+   * Pair with `name` or `alt` for accessibility.
+   */
+  src?: string
+  /** Alt text for the image. Falls back to `name` if not provided. Pass `""` explicitly for decorative images. */
+  alt?: string
   /** Show a success-tone notification indicator. Announced to screen readers as "Notification" via `role="img"` and `aria-label`. */
   notification?: boolean
 } & HTMLAttributes<HTMLDivElement>
