@@ -1,4 +1,9 @@
 import type { Meta, StoryFn } from '@storybook/react-vite'
+import { more_vertical } from '@equinor/eds-icons'
+import { Button } from '../Button'
+import { Badge } from '../Badge'
+import { Divider } from '../Divider'
+import { Icon } from '../Icon'
 import {
   Avatar,
   AvatarNameLabel,
@@ -10,6 +15,38 @@ const meta: Meta<typeof Avatar> = {
   title: 'EDS 2.0 (beta)/Data Display/Avatar',
   component: Avatar,
   tags: ['beta'],
+  argTypes: {
+    name: {
+      control: 'text',
+      description:
+        'Full name of the person. Auto-derives initials and sets role="img" + aria-label for screen readers.',
+      table: { category: 'Core' },
+    },
+    initial: {
+      control: 'text',
+      description:
+        'Override the auto-derived initial(s). 1–2 characters recommended.',
+      table: { category: 'Core' },
+    },
+    size: {
+      control: 'inline-radio',
+      options: ['sm', 'md', 'lg'],
+      description: 'Size of the avatar — sm (16px), md (24px), lg (32px).',
+      table: { category: 'Appearance', defaultValue: { summary: 'lg' } },
+    },
+    emphasis: {
+      control: 'inline-radio',
+      options: ['low', 'high'],
+      description:
+        'low uses the muted accent background; high uses the emphasis background with white text.',
+      table: { category: 'Appearance', defaultValue: { summary: 'low' } },
+    },
+    notification: {
+      control: 'boolean',
+      description: 'Show a success-tone notification indicator dot.',
+      table: { category: 'States', defaultValue: { summary: 'false' } },
+    },
+  },
   parameters: {
     docs: {
       description: {
@@ -92,28 +129,6 @@ WithNotification.parameters = {
   },
 }
 
-export const AllCombinations: StoryFn = () => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px',
-      flexWrap: 'wrap',
-    }}
-  >
-    {(['sm', 'md', 'lg'] as const).map((size) =>
-      (['low', 'high'] as const).map((emphasis) => (
-        <Avatar
-          key={`${size}-${emphasis}`}
-          initial="A"
-          size={size}
-          emphasis={emphasis}
-        />
-      )),
-    )}
-  </div>
-)
-
 export const NameLabelHorizontal: StoryFn<AvatarNameLabelProps> = (args) => (
   <AvatarNameLabel {...args} />
 )
@@ -121,6 +136,49 @@ NameLabelHorizontal.args = {
   fullName: 'Ada Lovelace',
   meta: 'Senior Engineer',
   layout: 'horizontal',
+}
+NameLabelHorizontal.argTypes = {
+  fullName: {
+    control: 'text',
+    description: 'Full name of the person.',
+    table: { category: 'Core' },
+  },
+  meta: {
+    control: 'text',
+    description: 'Secondary label — email, job title, or any short metadata.',
+    table: { category: 'Core' },
+  },
+  initial: {
+    control: 'text',
+    description: 'Override the auto-derived initial(s).',
+    table: { category: 'Core' },
+  },
+  layout: {
+    control: 'inline-radio',
+    options: ['horizontal', 'vertical'],
+    description: 'Layout of the name and metadata.',
+    table: { category: 'Appearance', defaultValue: { summary: 'horizontal' } },
+  },
+  size: {
+    control: 'inline-radio',
+    options: ['sm', 'md', 'lg'],
+    description: 'Size of the avatar.',
+    table: { category: 'Appearance', defaultValue: { summary: 'lg' } },
+  },
+  emphasis: {
+    control: 'inline-radio',
+    options: ['low', 'high'],
+    description: 'Colour emphasis of the avatar.',
+    table: { category: 'Appearance', defaultValue: { summary: 'low' } },
+  },
+  notification: {
+    control: 'boolean',
+    description: 'Show a notification dot on the avatar.',
+    table: { category: 'States', defaultValue: { summary: 'false' } },
+  },
+  children: {
+    table: { disable: true },
+  },
 }
 NameLabelHorizontal.parameters = {
   docs: {
@@ -148,58 +206,6 @@ NameLabelVertical.parameters = {
   },
 }
 
-export const NameLabelEdgeCases: StoryFn = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-    <div>
-      <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
-        Horizontal (default)
-      </p>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          maxWidth: '200px',
-        }}
-      >
-        <AvatarNameLabel
-          fullName="Bartholomew Featherstonehaugh"
-          meta="Senior Petroleum Engineer"
-        />
-        <AvatarNameLabel
-          fullName="Mary Jane Watson"
-          meta="Reservoir Geoscientist"
-        />
-      </div>
-    </div>
-    <div>
-      <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
-        Vertical — designed for wider contexts (name + email on one line)
-      </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <AvatarNameLabel
-          layout="vertical"
-          fullName="Bartholomew Featherstonehaugh"
-          meta="Senior Petroleum Engineer"
-        />
-        <AvatarNameLabel
-          layout="vertical"
-          fullName="Mary Jane Watson"
-          meta="Reservoir Geoscientist"
-        />
-      </div>
-    </div>
-  </div>
-)
-NameLabelEdgeCases.parameters = {
-  docs: {
-    description: {
-      story:
-        'The component fills its container. **Horizontal** layout is designed for narrow contexts like lists — long names truncate, emails wrap. **Vertical** layout keeps name and email on one line and is intended for wider contexts like headers or nav. Three-part names derive initials from first and last word (`"Mary Jane Watson"` → `"MW"`).',
-    },
-  },
-}
-
 export const NameLabelWithNotification: StoryFn = () => (
   <AvatarNameLabel
     fullName="Ada Lovelace"
@@ -208,17 +214,155 @@ export const NameLabelWithNotification: StoryFn = () => (
   />
 )
 
+export const NameLabelEdgeCases: StoryFn = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div>
+      <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
+        Horizontal (default)
+      </p>
+      <ListWithDividers maxWidth="200px">
+        {[
+          {
+            fullName: 'Bartholomew Featherstonehaugh',
+            meta: 'b.featherstonehaugh@equinor.com',
+          },
+          {
+            fullName: 'Mary Jane Elizabeth Watson',
+            meta: 'mary.watson@equinor.com',
+          },
+        ].map(({ fullName, meta }) => (
+          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta} />
+        ))}
+      </ListWithDividers>
+    </div>
+    <div>
+      <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
+        Vertical — designed for wider contexts (name + metadata on one line)
+      </p>
+      <ListWithDividers>
+        {[
+          {
+            fullName: 'Bartholomew Featherstonehaugh',
+            meta: 'b.featherstonehaugh@equinor.com',
+          },
+          {
+            fullName: 'Mary Jane Elizabeth Watson',
+            meta: 'mary.watson@equinor.com',
+          },
+        ].map(({ fullName, meta }) => (
+          <AvatarNameLabel
+            key={fullName}
+            layout="vertical"
+            fullName={fullName}
+            meta={meta}
+          />
+        ))}
+      </ListWithDividers>
+    </div>
+  </div>
+)
+NameLabelEdgeCases.parameters = {
+  docs: {
+    description: {
+      story:
+        'The component fills its container. Long names wrap naturally — the row height grows with the content. **Vertical** layout keeps name and metadata on one line and is intended for wider contexts like headers or nav. Initials are always derived from the **first and last word**, regardless of how many names — `"Mary Jane Elizabeth Watson"` → `"MW"`.',
+    },
+  },
+}
+
+const sectionLabel = { fontSize: '11px', color: '#6f6f6f', marginBottom: '4px' }
+
+const ListWithDividers = ({
+  children,
+  maxWidth = '320px',
+}: {
+  children: React.ReactNode[]
+  maxWidth?: string
+}) => (
+  <div style={{ maxWidth }}>
+    {children.map((child, i) => (
+      <div key={i}>
+        <div style={{ padding: '8px 0' }}>{child}</div>
+        {i < children.length - 1 && <Divider />}
+      </div>
+    ))}
+  </div>
+)
+
 export const NameLabelWithSlot: StoryFn = () => (
-  <AvatarNameLabel fullName="Ada Lovelace" meta="Senior Engineer">
-    <span aria-label="Settings" role="img">
-      ⚙
-    </span>
-  </AvatarNameLabel>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div>
+      <p style={sectionLabel}>Overflow menu</p>
+      <ListWithDividers>
+        {[
+          { fullName: 'Ada Lovelace', meta: 'Senior Engineer' },
+          { fullName: 'Mary Jane Watson', meta: 'Reservoir Geoscientist' },
+        ].map(({ fullName, meta }) => (
+          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta}>
+            <Button variant="ghost" size="sm" aria-label="More options">
+              <Icon data={more_vertical} />
+            </Button>
+          </AvatarNameLabel>
+        ))}
+      </ListWithDividers>
+    </div>
+
+    <div>
+      <p style={sectionLabel}>Role badge</p>
+      <ListWithDividers>
+        {[
+          {
+            fullName: 'Ada Lovelace',
+            meta: 'ada@equinor.com',
+            role: 'Admin',
+            tone: 'info' as const,
+          },
+          {
+            fullName: 'Mary Jane Watson',
+            meta: 'mary@equinor.com',
+            role: 'Viewer',
+            tone: 'neutral' as const,
+          },
+        ].map(({ fullName, meta, role, tone }) => (
+          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta}>
+            <Badge tone={tone}>{role}</Badge>
+          </AvatarNameLabel>
+        ))}
+      </ListWithDividers>
+    </div>
+
+    <div>
+      <p style={sectionLabel}>Last active</p>
+      <ListWithDividers>
+        {[
+          { fullName: 'Ada Lovelace', meta: 'Senior Engineer', time: '2h ago' },
+          {
+            fullName: 'Mary Jane Watson',
+            meta: 'Reservoir Geoscientist',
+            time: '3d ago',
+          },
+        ].map(({ fullName, meta, time }) => (
+          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta}>
+            <span
+              style={{
+                fontSize: 'var(--eds-typography-ui-body-xs-font-size)',
+                color: 'var(--eds-color-text-subtle)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {time}
+            </span>
+          </AvatarNameLabel>
+        ))}
+      </ListWithDividers>
+    </div>
+  </div>
 )
 NameLabelWithSlot.parameters = {
   docs: {
     description: {
-      story: 'The `children` prop renders into the trailing slot.',
+      story:
+        'The `children` prop renders into a trailing slot to the right of the name. It is open — use it for anything contextual to that person, like an action button, a role badge, or a timestamp. The examples here are just starting points.',
     },
   },
 }
