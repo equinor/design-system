@@ -9,11 +9,18 @@ export type AvatarProps = {
   /** Colour emphasis — low uses muted background, high uses emphasis background */
   emphasis?: AvatarEmphasis
   /**
-   * Initial letter displayed in the avatar. The span is `aria-hidden` — the
-   * letter is decorative. For standalone use as a meaningful image, also pass
-   * `role="img"` and `aria-label` with the person's name.
+   * Initial(s) displayed in the avatar — intended to be 1–2 characters (e.g.
+   * `"A"` or `"AL"`). The span is `aria-hidden`; provide `name` to give
+   * screen readers an accessible label. Longer strings are clipped by the circle.
    */
   initial?: string
-  /** Show a success-tone notification indicator */
+  /**
+   * Full name of the person. Sets `role="img"` and `aria-label` on the avatar
+   * so screen readers announce the person's name instead of skipping it.
+   * Required when using Avatar standalone — not needed inside `AvatarNameLabel`
+   * where the adjacent name text provides context.
+   */
+  name?: string
+  /** Show a success-tone notification indicator. Announced to screen readers as "Notification" via `role="img"` and `aria-label`. */
   notification?: boolean
 } & HTMLAttributes<HTMLDivElement>

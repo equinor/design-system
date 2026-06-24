@@ -35,14 +35,14 @@ figma.connect(
   {
     props: {
       fullName: figma.string('Full Name'),
-      email: figma.string('Email'),
+      meta: figma.string('Email'),
       layout: figma.enum('Layout', {
         Horizontal: 'horizontal',
         Vertical: 'vertical',
       }),
     },
-    example: ({ fullName, email, layout }) => (
-      <AvatarNameLabel fullName={fullName} email={email} layout={layout} />
+    example: ({ fullName, meta, layout }) => (
+      <AvatarNameLabel fullName={fullName} meta={meta} layout={layout} />
     ),
   },
 )

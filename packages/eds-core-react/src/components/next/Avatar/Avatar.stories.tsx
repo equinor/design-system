@@ -16,7 +16,7 @@ const meta: Meta<typeof Avatar> = {
         component: `
 ⚠️ **Beta Component** — this component is under active development.
 
-Displays a user's initial in a circular badge. Use \`AvatarNameLabel\` to pair it with a name and email.
+Displays a user's initial(s) in a circular badge. Use \`AvatarNameLabel\` to pair it with a name and metadata.
 
 \`\`\`tsx
 import { Avatar, AvatarNameLabel } from '@equinor/eds-core-react/next'
@@ -31,10 +31,18 @@ export default meta
 
 export const Introduction: StoryFn<AvatarProps> = (args) => <Avatar {...args} />
 Introduction.args = {
-  initial: 'A',
+  name: 'Ada Lovelace',
   size: 'lg',
   emphasis: 'low',
   notification: false,
+}
+Introduction.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `name` to make the avatar accessible — initials are derived automatically and the avatar is announced to screen readers as `role="img"`. Without `name`, the initial is purely decorative. Inside `AvatarNameLabel` this is handled automatically from `fullName`.',
+    },
+  },
 }
 
 export const Sizes: StoryFn = () => (
@@ -111,14 +119,14 @@ export const NameLabelHorizontal: StoryFn<AvatarNameLabelProps> = (args) => (
 )
 NameLabelHorizontal.args = {
   fullName: 'Ada Lovelace',
-  email: 'ada@equinor.com',
+  meta: 'Senior Engineer',
   layout: 'horizontal',
 }
 NameLabelHorizontal.parameters = {
   docs: {
     description: {
       story:
-        'Horizontal layout stacks the name and email vertically beside the avatar.',
+        'Horizontal layout stacks the name and metadata vertically beside the avatar.',
     },
   },
 }
@@ -128,14 +136,66 @@ export const NameLabelVertical: StoryFn<AvatarNameLabelProps> = (args) => (
 )
 NameLabelVertical.args = {
   fullName: 'Ada Lovelace',
-  email: 'ada@equinor.com',
+  meta: 'ada@equinor.com',
   layout: 'vertical',
 }
 NameLabelVertical.parameters = {
   docs: {
     description: {
       story:
-        'Vertical layout places the name and email on the same line — compact for use in dense lists.',
+        'Vertical layout places the name and metadata on the same line — compact for use in wider contexts like headers or nav.',
+    },
+  },
+}
+
+export const NameLabelEdgeCases: StoryFn = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div>
+      <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
+        Horizontal (default)
+      </p>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          maxWidth: '200px',
+        }}
+      >
+        <AvatarNameLabel
+          fullName="Bartholomew Featherstonehaugh"
+          meta="Senior Petroleum Engineer"
+        />
+        <AvatarNameLabel
+          fullName="Mary Jane Watson"
+          meta="Reservoir Geoscientist"
+        />
+      </div>
+    </div>
+    <div>
+      <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
+        Vertical — designed for wider contexts (name + email on one line)
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <AvatarNameLabel
+          layout="vertical"
+          fullName="Bartholomew Featherstonehaugh"
+          meta="Senior Petroleum Engineer"
+        />
+        <AvatarNameLabel
+          layout="vertical"
+          fullName="Mary Jane Watson"
+          meta="Reservoir Geoscientist"
+        />
+      </div>
+    </div>
+  </div>
+)
+NameLabelEdgeCases.parameters = {
+  docs: {
+    description: {
+      story:
+        'The component fills its container. **Horizontal** layout is designed for narrow contexts like lists — long names truncate, emails wrap. **Vertical** layout keeps name and email on one line and is intended for wider contexts like headers or nav. Three-part names derive initials from first and last word (`"Mary Jane Watson"` → `"MW"`).',
     },
   },
 }
@@ -143,13 +203,13 @@ NameLabelVertical.parameters = {
 export const NameLabelWithNotification: StoryFn = () => (
   <AvatarNameLabel
     fullName="Ada Lovelace"
-    email="ada@equinor.com"
+    meta="Senior Engineer"
     notification
   />
 )
 
 export const NameLabelWithSlot: StoryFn = () => (
-  <AvatarNameLabel fullName="Ada Lovelace" email="ada@equinor.com">
+  <AvatarNameLabel fullName="Ada Lovelace" meta="Senior Engineer">
     <span aria-label="Settings" role="img">
       ⚙
     </span>
