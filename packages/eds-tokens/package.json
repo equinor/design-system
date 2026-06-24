@@ -48,6 +48,7 @@
   "scripts": {
     "build": "rollup -c && pnpm run types",
     "dev": "rollup -c -w",
+    "prepublishOnly": "pnpm run build",
     "types": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
