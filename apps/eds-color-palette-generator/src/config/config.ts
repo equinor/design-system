@@ -17,7 +17,8 @@ import { getLightnessValues } from './helpers'
 export const BG_CANVAS: StepDefinition = {
   id: 'bg-canvas',
   name: 'Background Canvas',
-  category: 'Background',
+  groupId: 'background',
+  role: 'canvas',
   lightValue: 0.97,
   darkValue: 0.15,
 }
@@ -25,7 +26,7 @@ export const BG_CANVAS: StepDefinition = {
 export const BG_SURFACE: StepDefinition = {
   id: 'bg-surface',
   name: 'Background Surface',
-  category: 'Background',
+  groupId: 'background',
   variant: 'surface',
   lightValue: 0.999,
   darkValue: 0.25,
@@ -34,7 +35,7 @@ export const BG_SURFACE: StepDefinition = {
 export const BG_FILL_MUTED_DEFAULT: StepDefinition = {
   id: 'bg-fill-muted-default',
   name: 'Background Fill Muted Default',
-  category: 'Background Fill Muted',
+  groupId: 'fill-muted',
   variant: 'default',
   lightValue: 0.91,
   darkValue: 0.47,
@@ -50,7 +51,7 @@ export const BG_FILL_MUTED_DEFAULT: StepDefinition = {
 export const BG_FILL_MUTED_HOVER: StepDefinition = {
   id: 'bg-fill-muted-hover',
   name: 'Background Fill Muted Hover',
-  category: 'Background Fill Muted',
+  groupId: 'fill-muted',
   variant: 'hover',
   lightValue: 0.87,
   darkValue: 0.52,
@@ -66,7 +67,7 @@ export const BG_FILL_MUTED_HOVER: StepDefinition = {
 export const BG_FILL_MUTED_ACTIVE: StepDefinition = {
   id: 'bg-fill-muted-active',
   name: 'Background Fill Muted Active',
-  category: 'Background Fill Muted',
+  groupId: 'fill-muted',
   variant: 'active',
   lightValue: 0.82,
   darkValue: 0.58,
@@ -82,7 +83,7 @@ export const BG_FILL_MUTED_ACTIVE: StepDefinition = {
 export const BORDER_SUBTLE: StepDefinition = {
   id: 'border-subtle',
   name: 'Border Subtle',
-  category: 'Border',
+  groupId: 'border',
   variant: 'subtle',
   lightValue: 0.87,
   darkValue: 0.47,
@@ -103,7 +104,7 @@ export const BORDER_SUBTLE: StepDefinition = {
 export const BORDER_MEDIUM: StepDefinition = {
   id: 'border-medium',
   name: 'Border Medium',
-  category: 'Border',
+  groupId: 'border',
   variant: 'medium',
   lightValue: 0.75,
   darkValue: 0.61,
@@ -129,7 +130,7 @@ export const BORDER_MEDIUM: StepDefinition = {
 export const BORDER_STRONG: StepDefinition = {
   id: 'border-strong',
   name: 'Border Strong',
-  category: 'Border',
+  groupId: 'border',
   variant: 'strong',
   lightValue: 0.52,
   darkValue: 0.76,
@@ -165,8 +166,9 @@ export const BORDER_STRONG: StepDefinition = {
 export const BG_FILL_EMPHASIS_DEFAULT: StepDefinition = {
   id: 'bg-fill-emphasis-default',
   name: 'Background Fill Emphasis Default',
-  category: 'Background Fill Emphasis',
+  groupId: 'fill-emphasis',
   variant: 'default',
+  role: 'heading',
   lightValue: 0.5,
   darkValue: 0.82,
   contrastWith: [
@@ -186,7 +188,7 @@ export const BG_FILL_EMPHASIS_DEFAULT: StepDefinition = {
 export const BG_FILL_EMPHASIS_HOVER: StepDefinition = {
   id: 'bg-fill-emphasis-hover',
   name: 'Background Fill Emphasis Hover',
-  category: 'Background Fill Emphasis',
+  groupId: 'fill-emphasis',
   variant: 'hover',
   lightValue: 0.44,
   darkValue: 0.88,
@@ -207,7 +209,7 @@ export const BG_FILL_EMPHASIS_HOVER: StepDefinition = {
 export const BG_FILL_EMPHASIS_ACTIVE: StepDefinition = {
   id: 'bg-fill-emphasis-active',
   name: 'Background Fill Emphasis Active',
-  category: 'Background Fill Emphasis',
+  groupId: 'fill-emphasis',
   variant: 'active',
   lightValue: 0.42,
   darkValue: 0.93,
@@ -228,7 +230,7 @@ export const BG_FILL_EMPHASIS_ACTIVE: StepDefinition = {
 export const TEXT_SUBTLE: StepDefinition = {
   id: 'text-subtle',
   name: 'Text Subtle',
-  category: 'Text',
+  groupId: 'text',
   variant: 'subtle',
   lightValue: 0.46,
   darkValue: 0.91,
@@ -254,8 +256,9 @@ export const TEXT_SUBTLE: StepDefinition = {
 export const TEXT_STRONG: StepDefinition = {
   id: 'text-strong',
   name: 'Text Strong',
-  category: 'Text',
+  groupId: 'text',
   variant: 'strong',
+  role: 'swatch-text-light',
   lightValue: 0.23,
   darkValue: 0.99,
   contrastWith: [
@@ -280,7 +283,7 @@ export const TEXT_STRONG: StepDefinition = {
 export const TEXT_SUBTLE_ON_EMPHASIS: StepDefinition = {
   id: 'text-subtle-on-emphasis',
   name: 'Text Subtle on Emphasis',
-  category: 'Text',
+  groupId: 'text',
   variant: 'subtle-on-emphasis',
   lightValue: 0.9,
   darkValue: 0.33,
@@ -306,8 +309,9 @@ export const TEXT_SUBTLE_ON_EMPHASIS: StepDefinition = {
 export const TEXT_STRONG_ON_EMPHASIS: StepDefinition = {
   id: 'text-strong-on-emphasis',
   name: 'Text Strong on Emphasis',
-  category: 'Text',
+  groupId: 'text',
   variant: 'strong-on-emphasis',
+  role: 'swatch-text-dark',
   lightValue: 1,
   darkValue: 0.1,
   contrastWith: [

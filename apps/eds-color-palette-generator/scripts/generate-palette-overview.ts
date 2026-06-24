@@ -9,6 +9,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { PALETTE_STEPS } from '../src/config/config'
+import { getGroupName } from '../src/config/groups'
 import { APCA_CONTRAST_LEVELS } from '../src/config/APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from '../src/config/WCAG_CONTRAST_LEVELS'
 
@@ -34,13 +35,13 @@ function formatNumber(n: number, digits = 2) {
 }
 
 function buildStepsTable() {
-  const header = '| ID | Name | Category | Variant | Light (L) | Dark (L) |'
-  const sep = '| --- | ---- | -------- | ------- | --------- | -------- |'
+  const header = '| ID | Name | Group | Variant | Light (L) | Dark (L) |'
+  const sep = '| --- | ---- | ----- | ------- | --------- | -------- |'
   const rows = PALETTE_STEPS.map((s) =>
     [
       s.id,
       s.name,
-      s.category,
+      getGroupName(s.groupId),
       s.variant,
       formatNumber(s.lightValue, 2),
       formatNumber(s.darkValue, 2),

@@ -1,4 +1,6 @@
 import { ColorDefinition, ContrastMethod, ColorFormat } from '@/types'
+import { StepDefinition } from '@/config/types'
+import { isValidStepArray, stepsFromLightness } from '@/utils/stepConfig'
 
 // Keys for localStorage
 const STORAGE_KEYS = {
@@ -8,11 +10,13 @@ const STORAGE_KEYS = {
   STD_DEV_DARK: 'colorPalette_stdDevDark',
   LIGHT_MODE_VALUES: 'colorPalette_lightModeValues',
   DARK_MODE_VALUES: 'colorPalette_darkModeValues',
+  STEPS: 'colorPalette_steps',
   COLORS: 'colorPalette_colors',
   COLOR_SCHEME: 'colorPalette_colorScheme',
   SHOW_CONTRAST: 'colorPalette_showContrast',
   SHOW_LIGHTNESS_INPUTS: 'colorPalette_showLightnessInputs',
   SHOW_GAUSSIAN_PARAMETERS: 'colorPalette_showGaussianParameters',
+  SHOW_STEP_CONFIG: 'colorPalette_showStepConfig',
   CONTRAST_METHOD: 'colorPalette_contrastMethod',
   COLOR_FORMAT: 'colorPalette_colorFormat',
 } as const
@@ -59,16 +63,28 @@ export const localStorageUtils = {
     getItem(STORAGE_KEYS.STD_DEV_DARK, defaultValue),
   setStdDevDark: (value: number) => setItem(STORAGE_KEYS.STD_DEV_DARK, value),
 
-  // Lightness values
-  getLightModeValues: (defaultValue: number[]) =>
-    getItem(STORAGE_KEYS.LIGHT_MODE_VALUES, defaultValue),
-  setLightModeValues: (value: number[]) =>
-    setItem(STORAGE_KEYS.LIGHT_MODE_VALUES, value),
+  // Steps (structure + lightness). Authoritative; light/dark arrays are derived.
+  setSteps: (value: StepDefinition[]) => setItem(STORAGE_KEYS.STEPS, value),
+  getSteps: (defaultValue: StepDefinition[]): StepDefinition[] => {
+    // Prefer the persisted step model.
+    const stored = getItem<unknown>(STORAGE_KEYS.STEPS, null)
+    if (isValidStepArray(stored)) return stored
 
-  getDarkModeValues: (defaultValue: number[]) =>
-    getItem(STORAGE_KEYS.DARK_MODE_VALUES, defaultValue),
-  setDarkModeValues: (value: number[]) =>
-    setItem(STORAGE_KEYS.DARK_MODE_VALUES, value),
+    // Migrate older saves that only stored positional lightness arrays.
+    const legacyLight = getItem<number[] | null>(
+      STORAGE_KEYS.LIGHT_MODE_VALUES,
+      null,
+    )
+    const legacyDark = getItem<number[] | null>(
+      STORAGE_KEYS.DARK_MODE_VALUES,
+      null,
+    )
+    return stepsFromLightness(
+      defaultValue,
+      legacyLight ?? undefined,
+      legacyDark ?? undefined,
+    )
+  },
 
   // Colors
   getColors: (defaultValue: ColorDefinition[]) =>
@@ -97,6 +113,11 @@ export const localStorageUtils = {
   setShowGaussianParameters: (value: boolean) =>
     setItem(STORAGE_KEYS.SHOW_GAUSSIAN_PARAMETERS, value),
 
+  getShowStepConfig: (defaultValue: boolean) =>
+    getItem(STORAGE_KEYS.SHOW_STEP_CONFIG, defaultValue),
+  setShowStepConfig: (value: boolean) =>
+    setItem(STORAGE_KEYS.SHOW_STEP_CONFIG, value),
+
   getContrastMethod: (defaultValue: ContrastMethod) =>
     getItem(STORAGE_KEYS.CONTRAST_METHOD, defaultValue),
   setContrastMethod: (value: ContrastMethod) =>
@@ -118,6 +139,7 @@ export const localStorageUtils = {
       STORAGE_KEYS.STD_DEV_DARK,
       STORAGE_KEYS.LIGHT_MODE_VALUES,
       STORAGE_KEYS.DARK_MODE_VALUES,
+      STORAGE_KEYS.STEPS,
       STORAGE_KEYS.COLORS,
     ]
 

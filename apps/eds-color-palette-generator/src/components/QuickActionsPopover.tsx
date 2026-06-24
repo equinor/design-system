@@ -3,15 +3,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Download, Upload, FileJson, FileCode } from 'lucide-react'
 import { ColorDefinition, ColorFormat, ConfigFile } from '@/types'
+import { StepDefinition } from '@/config/types'
 import {
   downloadColorTokens,
   downloadConfiguration,
   downloadDesignSystemCSS,
 } from '@/utils/configurationUtils'
+import { isValidStepArray } from '@/utils/stepConfig'
 
 type Props = {
   lightModeValues: number[]
   darkModeValues: number[]
+  steps: StepDefinition[]
   meanLight: number
   stdDevLight: number
   meanDark: number
@@ -26,6 +29,7 @@ export function QuickActionsPopover(props: Props) {
   const {
     lightModeValues,
     darkModeValues,
+    steps,
     meanLight,
     stdDevLight,
     meanDark,
@@ -106,6 +110,7 @@ export function QuickActionsPopover(props: Props) {
                 meanDark,
                 stdDevDark,
                 colors,
+                steps,
               )
             }
           >
@@ -117,6 +122,8 @@ export function QuickActionsPopover(props: Props) {
             onClick={() =>
               downloadDesignSystemCSS(
                 colors,
+                lightModeValues,
+                darkModeValues,
                 meanLight,
                 stdDevLight,
                 meanDark,
@@ -217,9 +224,14 @@ export function QuickActionsPopover(props: Props) {
                   stdDevDark: cfg.stdDev,
                 }
               }
+              // A config is valid if it carries the Gaussian parameters plus
+              // either a full step model or the legacy light/dark arrays.
+              const hasStructure =
+                isValidStepArray(cfg.steps) ||
+                (Array.isArray(cfg.lightModeValues) &&
+                  Array.isArray(cfg.darkModeValues))
               if (
-                !cfg.lightModeValues ||
-                !cfg.darkModeValues ||
+                !hasStructure ||
                 typeof cfg.meanLight !== 'number' ||
                 typeof cfg.stdDevLight !== 'number' ||
                 typeof cfg.meanDark !== 'number' ||

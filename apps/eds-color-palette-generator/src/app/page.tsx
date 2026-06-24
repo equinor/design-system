@@ -10,6 +10,7 @@ import { GaussianParametersPanel } from '@/components/GaussianParametersPanel'
 import { DisplayOptionsPanel } from '@/components/DisplayOptionsPanel'
 import { LightnessValueInputs } from '@/components/LightnessValueInputs'
 import { ColorScalesHeader } from '@/components/ColorScalesHeader'
+import { StepConfigPanel } from '@/components/StepConfigPanel'
 import {
   ColorDefinition,
   ColorAnchor,
@@ -17,13 +18,20 @@ import {
   ContrastMethod,
   ColorFormat,
 } from '@/types'
-import { arraysEqual, colorsEqual } from '@/utils/compare'
+import { StepDefinition } from '@/config/types'
+import { colorsEqual } from '@/utils/compare'
 import { localStorageUtils } from '@/utils/localStorage'
 import { paletteConfig as config } from '@/config/palette'
+import { PALETTE_STEPS } from '@/config/config'
 import {
-  lightnessValuesInLightMode,
-  darknessValuesInDarkMode,
-} from '@/config/config'
+  insertStepAt,
+  removeStepAt,
+  updateStepAt,
+  stepsFromLightness,
+  isValidStepArray,
+  areStepsEqual,
+  NewStepInput,
+} from '@/utils/stepConfig'
 import { computeContrastSummary } from '@/utils/contrastSummary'
 import { QuickActionsPopover } from '@/components/QuickActionsPopover'
 import { RotateCcw } from 'lucide-react'
@@ -52,6 +60,9 @@ export default function App() {
   const [showGaussianParameters, setShowGaussianParameters] = useState(() =>
     localStorageUtils.getShowGaussianParameters(false),
   )
+  const [showStepConfig, setShowStepConfig] = useState(() =>
+    localStorageUtils.getShowStepConfig(false),
+  )
   const [showConfigPanel, setShowConfigPanel] = useState(false) // Don't persist this one
   const [contrastMethod, setContrastMethod] = useState<ContrastMethod>(() =>
     localStorageUtils.getContrastMethod('APCA'),
@@ -60,18 +71,23 @@ export default function App() {
     localStorageUtils.getColorFormat('OKLCH'),
   )
 
-  // Add state for lightness values
-  const [lightModeValues, setLightModeValues] = useState(() =>
-    localStorageUtils.getLightModeValues(lightnessValuesInLightMode),
-  )
-  const [darkModeValues, setDarkModeValues] = useState(() =>
-    localStorageUtils.getDarkModeValues(darknessValuesInDarkMode),
+  // The ordered scale steps are the source of truth for both structure
+  // (name, group, role) and per-step lightness. Light/dark arrays are derived.
+  const [steps, setSteps] = useState<StepDefinition[]>(() =>
+    localStorageUtils.getSteps(PALETTE_STEPS),
   )
 
   // Define colors in an array for easier management
   const [colors, setColors] = useState<ColorDefinition[]>(() =>
     localStorageUtils.getColors(config.colors),
   )
+
+  // Lightness arrays derived from the steps, fed to the generator.
+  const lightModeValues = useMemo(
+    () => steps.map((s) => s.lightValue),
+    [steps],
+  )
+  const darkModeValues = useMemo(() => steps.map((s) => s.darkValue), [steps])
 
   // Save to localStorage whenever state changes
   useEffect(() => {
@@ -103,6 +119,10 @@ export default function App() {
   }, [showGaussianParameters])
 
   useEffect(() => {
+    localStorageUtils.setShowStepConfig(showStepConfig)
+  }, [showStepConfig])
+
+  useEffect(() => {
     localStorageUtils.setContrastMethod(contrastMethod)
   }, [contrastMethod])
 
@@ -111,12 +131,8 @@ export default function App() {
   }, [colorFormat])
 
   useEffect(() => {
-    localStorageUtils.setLightModeValues(lightModeValues)
-  }, [lightModeValues])
-
-  useEffect(() => {
-    localStorageUtils.setDarkModeValues(darkModeValues)
-  }, [darkModeValues])
+    localStorageUtils.setSteps(steps)
+  }, [steps])
 
   useEffect(() => {
     localStorageUtils.setColors(colors)
@@ -164,20 +180,35 @@ export default function App() {
     setColors((prev) => [...prev, newColor])
   }
 
-  // Update a specific lightness value
+  // Update a specific lightness value for the current color scheme
   const updateLightnessValue = (index: number, value: number) => {
-    if (colorScheme === 'light') {
-      const newValues = [...lightModeValues]
-      newValues[index] = value
-      setLightModeValues(newValues)
-    } else {
-      const newValues = [...darkModeValues]
-      newValues[index] = value
-      setDarkModeValues(newValues)
-    }
+    const field = colorScheme === 'light' ? 'lightValue' : 'darkValue'
+    setSteps((prev) => updateStepAt(prev, index, { [field]: value }))
   }
 
-  // Reset only configuration settings (colors, Gaussian parameters, lightness values)
+  // Step structure editing (insert between, remove, rename, reassign group)
+  const insertStep = (index: number, input: NewStepInput = {}) => {
+    setSteps((prev) => insertStepAt(prev, index, input))
+  }
+  const removeStep = (index: number) => {
+    setSteps((prev) => removeStepAt(prev, index))
+  }
+  const updateStepName = (index: number, name: string) => {
+    setSteps((prev) => updateStepAt(prev, index, { name }))
+  }
+  const updateStepGroup = (index: number, groupId: string) => {
+    setSteps((prev) => updateStepAt(prev, index, { groupId }))
+  }
+  const setStepLightness = (
+    index: number,
+    mode: 'light' | 'dark',
+    value: number,
+  ) => {
+    const field = mode === 'light' ? 'lightValue' : 'darkValue'
+    setSteps((prev) => updateStepAt(prev, index, { [field]: value }))
+  }
+
+  // Reset only configuration settings (colors, Gaussian parameters, steps)
   const resetConfiguration = () => {
     // Clear only configuration-related localStorage items
     localStorageUtils.clearConfiguration()
@@ -187,15 +218,24 @@ export default function App() {
     setStdDevLight(config.stdDevLight)
     setMeanDark(config.meanDark)
     setStdDevDark(config.stdDevDark)
-    setLightModeValues(lightnessValuesInLightMode)
-    setDarkModeValues(darknessValuesInDarkMode)
+    setSteps(PALETTE_STEPS)
     setColors(config.colors)
   }
 
   // Handle configuration upload
   const handleConfigUpload = (cfg: ConfigFile) => {
-    setLightModeValues(cfg.lightModeValues)
-    setDarkModeValues(cfg.darkModeValues)
+    // Prefer full step definitions; fall back to legacy positional lightness.
+    if (isValidStepArray(cfg.steps)) {
+      setSteps(cfg.steps)
+    } else {
+      setSteps(
+        stepsFromLightness(
+          PALETTE_STEPS,
+          cfg.lightModeValues,
+          cfg.darkModeValues,
+        ),
+      )
+    }
     setMeanLight(cfg.meanLight)
     setStdDevLight(cfg.stdDevLight)
     setMeanDark(cfg.meanDark)
@@ -272,26 +312,17 @@ export default function App() {
   // Client flag to avoid hydration mismatch
   const isMounted = useIsMounted()
 
-  // Determine if configuration differs from defaults (mean, stdDev, light/dark values, colors)
+  // Determine if configuration differs from defaults (mean, stdDev, steps, colors)
   const isConfigDirty = useMemo(() => {
     return (
       meanLight !== config.meanLight ||
       stdDevLight !== config.stdDevLight ||
       meanDark !== config.meanDark ||
       stdDevDark !== config.stdDevDark ||
-      !arraysEqual(lightModeValues, lightnessValuesInLightMode) ||
-      !arraysEqual(darkModeValues, darknessValuesInDarkMode) ||
+      !areStepsEqual(steps, PALETTE_STEPS) ||
       !colorsEqual(colors, config.colors)
     )
-  }, [
-    meanLight,
-    stdDevLight,
-    meanDark,
-    stdDevDark,
-    lightModeValues,
-    darkModeValues,
-    colors,
-  ])
+  }, [meanLight, stdDevLight, meanDark, stdDevDark, steps, colors])
 
   const contrastSummary = useMemo(() => {
     if (!isMounted || !showContrast) {
@@ -303,8 +334,9 @@ export default function App() {
       colorScales: payload,
       contrastMethod,
       enabled: showContrast,
+      steps,
     })
-  }, [currentScalesOnly, contrastMethod, showContrast, isMounted])
+  }, [currentScalesOnly, contrastMethod, showContrast, isMounted, steps])
 
   return (
     <div className="min-h-screen bg-canvas text-default">
@@ -328,11 +360,13 @@ export default function App() {
                   showContrast={showContrast}
                   showLightnessInputs={showLightnessInputs}
                   showGaussianParameters={showGaussianParameters}
+                  showStepConfig={showStepConfig}
                   contrastMethod={contrastMethod}
                   colorFormat={colorFormat}
                   setShowContrast={setShowContrast}
                   setShowLightnessInputs={setShowLightnessInputs}
                   setShowGaussianParameters={setShowGaussianParameters}
+                  setShowStepConfig={setShowStepConfig}
                   setContrastMethod={setContrastMethod}
                   setColorFormat={setColorFormat}
                 />
@@ -351,6 +385,20 @@ export default function App() {
                     />
                   </div>
                 )}
+
+                {showStepConfig && (
+                  <div className="mt-6">
+                    <StepConfigPanel
+                      steps={steps}
+                      colorScheme={colorScheme}
+                      onInsertStep={insertStep}
+                      onRemoveStep={removeStep}
+                      onRenameStep={updateStepName}
+                      onChangeStepGroup={updateStepGroup}
+                      onChangeStepLightness={setStepLightness}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -359,7 +407,9 @@ export default function App() {
         {/* Full-width sticky subheader after display options */}
         <div className="sticky top-0 z-30 bg-canvas/80 backdrop-blur-md print-hide">
           <div className="mx-auto max-w-7xl px-6 py-2">
-            <ColorScalesHeader />
+            {/* Depends on persisted step count, so render only after mount to
+                avoid an SSR/client hydration mismatch (server has defaults). */}
+            {isMounted && <ColorScalesHeader steps={steps} />}
             {showLightnessInputs && (
               <LightnessValueInputs
                 colorScheme={colorScheme}
@@ -384,6 +434,7 @@ export default function App() {
                   >
                     <ColorScale
                       colors={colorData.scale}
+                      steps={steps}
                       showContrast={showContrast}
                       contrastMethod={contrastMethod}
                       colorName={colorData.name}
@@ -425,6 +476,7 @@ export default function App() {
         <QuickActionsPopover
           lightModeValues={lightModeValues}
           darkModeValues={darkModeValues}
+          steps={steps}
           meanLight={meanLight}
           stdDevLight={stdDevLight}
           meanDark={meanDark}

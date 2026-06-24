@@ -125,7 +125,7 @@ export function createColorWithGaussianChroma(
 
 /**
  * Generates a color scale by interpolating between multiple anchor colors at specific steps
- * @param anchors - Array of color anchors with step positions (1-15, must be unique)
+ * @param anchors - Array of color anchors with step positions (1..steps, must be unique)
  * @param lightnessValues - Array of target lightness values for each step
  * @param mean - Mean value for Gaussian chroma adjustment
  * @param stdDev - Standard deviation for Gaussian chroma adjustment
@@ -144,11 +144,12 @@ export function generateColorScaleWithInterpolation(
     throw new Error('At least one anchor is required')
   }
 
-  // Validate step ranges (must be between 1 and 15)
-  const invalidSteps = anchors.filter((a) => a.step < 1 || a.step > 15)
+  // Validate step ranges (must be within the scale, 1..number of steps)
+  const stepCount = lightnessValues.length
+  const invalidSteps = anchors.filter((a) => a.step < 1 || a.step > stepCount)
   if (invalidSteps.length > 0) {
     throw new Error(
-      `Anchor steps must be between 1 and 15. Invalid steps: ${invalidSteps.map((a) => a.step).join(', ')}`,
+      `Anchor steps must be between 1 and ${stepCount}. Invalid steps: ${invalidSteps.map((a) => a.step).join(', ')}`,
     )
   }
 

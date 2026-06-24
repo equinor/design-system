@@ -1,8 +1,7 @@
 import { ColorDefinition, ColorFormat, ColorAnchor } from '@/types'
+import { StepDefinition } from '@/config/types'
 import { generateColorScale } from './color'
 import { formatColorsAsTokens } from './tokenFormatter'
-import { PALETTE_STEPS } from '@/config/config'
-import { getLightnessValues } from '@/config/helpers'
 
 /**
  * Helper function to get color input from a ColorDefinition
@@ -45,8 +44,12 @@ export const downloadConfiguration = (
   meanDark: number,
   stdDevDark: number,
   colors: ColorDefinition[],
+  steps: StepDefinition[],
 ) => {
   const config = {
+    // Full step model is authoritative; lightModeValues/darkModeValues are kept
+    // alongside it for compatibility with tools that read the legacy shape.
+    steps,
     lightModeValues: customLightModeValues,
     darkModeValues: customDarkModeValues,
     meanLight,
@@ -151,16 +154,14 @@ export const downloadColorTokens = (
  */
 export const generateDesignSystemCSS = (
   colors: ColorDefinition[],
+  lightModeValues: number[],
+  darkModeValues: number[],
   meanLight: number = 0.7,
   stdDevLight: number = 2,
   meanDark: number = 0.7,
   stdDevDark: number = 2,
   colorFormat: ColorFormat,
 ) => {
-  // Use the palette steps for lightness values
-  const lightModeValues = getLightnessValues('light')(PALETTE_STEPS)
-  const darkModeValues = getLightnessValues('dark')(PALETTE_STEPS)
-
   // Generate CSS using light-dark() function
   let css =
     ':root {\n  /* Design system colors using light-dark() function */\n'
@@ -202,6 +203,8 @@ export const generateDesignSystemCSS = (
  */
 export const downloadDesignSystemCSS = (
   colors: ColorDefinition[],
+  lightModeValues: number[],
+  darkModeValues: number[],
   meanLight: number,
   stdDevLight: number,
   meanDark: number,
@@ -210,6 +213,8 @@ export const downloadDesignSystemCSS = (
 ) => {
   const cssContent = generateDesignSystemCSS(
     colors,
+    lightModeValues,
+    darkModeValues,
     meanLight,
     stdDevLight,
     meanDark,

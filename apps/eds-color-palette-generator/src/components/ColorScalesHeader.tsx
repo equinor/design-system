@@ -1,64 +1,47 @@
 import React from 'react'
-import { PALETTE_STEPS } from '@/config/config'
+import { StepDefinition } from '@/config/types'
+import { getGroupName } from '@/config/groups'
 
-export const ColorScalesHeader = () => {
-  // Generate category groups based on consecutive steps with the same category
-  const generateCategoryGroups = () => {
-    const groups: Array<{ category: string; span: number; title: string }> = []
-    let currentCategory = ''
-    let currentSpan = 0
+type ColorScalesHeaderProps = {
+  steps: StepDefinition[]
+}
 
-    PALETTE_STEPS.forEach((step) => {
-      if (step.category !== currentCategory) {
-        // If we have a previous group, add it to the groups array
-        if (currentSpan > 0) {
-          groups.push({
-            category: currentCategory,
-            span: currentSpan,
-            title: capitalizeCategory(currentCategory),
-          })
-        }
-        // Start a new group
-        currentCategory = step.category
-        currentSpan = 1
+export const ColorScalesHeader = ({ steps }: ColorScalesHeaderProps) => {
+  // Group label spans are derived from runs of consecutive steps sharing a
+  // groupId, so reassigning a step's group or inserting one updates the header
+  // automatically.
+  const generateGroupSpans = () => {
+    const groups: Array<{ groupId: string; span: number; title: string }> = []
+
+    steps.forEach((step) => {
+      const last = groups[groups.length - 1]
+      if (last && last.groupId === step.groupId) {
+        last.span++
       } else {
-        // Continue the current group
-        currentSpan++
+        groups.push({
+          groupId: step.groupId,
+          span: 1,
+          title: getGroupName(step.groupId),
+        })
       }
     })
-
-    // Add the last group
-    if (currentSpan > 0) {
-      groups.push({
-        category: currentCategory,
-        span: currentSpan,
-        title: capitalizeCategory(currentCategory),
-      })
-    }
 
     return groups
   }
 
-  const capitalizeCategory = (category: string): string => {
-    return category
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ')
-  }
-
-  const categoryGroups = generateCategoryGroups()
+  const groupSpans = generateGroupSpans()
 
   return (
     <>
       <div
         className="grid gap-3 mb-2 text-center text-subtle"
         style={{
-          gridTemplateColumns: `repeat(${PALETTE_STEPS.length}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
         }}
       >
-        {categoryGroups.map((group, index) => (
+        {groupSpans.map((group, index) => (
           <div
-            key={index}
+            key={`${group.groupId}-${index}`}
             className="border-b border-neutral-subtle pb-2"
             style={{
               gridColumn: `span ${group.span}`,
@@ -72,10 +55,10 @@ export const ColorScalesHeader = () => {
       <div
         className="grid gap-3 mb-1 px-4"
         style={{
-          gridTemplateColumns: `repeat(${PALETTE_STEPS.length}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
         }}
       >
-        {Array.from({ length: PALETTE_STEPS.length }).map((_, index) => (
+        {steps.map((_, index) => (
           <div key={index} className="flex items-center justify-center">
             {index + 1}
           </div>

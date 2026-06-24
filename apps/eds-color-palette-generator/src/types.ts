@@ -1,3 +1,5 @@
+import type { StepDefinition } from '@/config/types'
+
 export type ColorValue = string
 
 export type ColorAnchor = {
@@ -17,6 +19,12 @@ export type ConfigFile = {
   meanDark: number
   stdDevDark: number
   colors?: ColorDefinition[]
+  /**
+   * Full step definitions (names, groups, lightness, roles, contrast targets).
+   * When present this is authoritative over the positional light/dark arrays,
+   * which are kept for backward compatibility with older config files.
+   */
+  steps?: StepDefinition[]
 }
 
 export type ContrastMethod = 'WCAG21' | 'APCA'

@@ -1,6 +1,7 @@
 'use client'
 
 import { PALETTE_STEPS } from '@/config/config'
+import { getGroupName } from '@/config/groups'
 import { APCA_CONTRAST_LEVELS } from '@/config/APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from '@/config/WCAG_CONTRAST_LEVELS'
 
@@ -17,7 +18,7 @@ export const ContrastRequirementsTable = () => {
           <div className="mb-4">
             <h4 className="text-lg font-semibold">{step.name}</h4>
             <p className="text-sm text-neutral-subtle">
-              Category: {step.category}
+              Group: {getGroupName(step.groupId)}
               {step.variant && ` • Variant: ${step.variant}`}
             </p>
             <div className="flex gap-4 mt-2 text-sm">

@@ -1,6 +1,6 @@
 'use client'
-import { PALETTE_STEPS } from '@/config/config'
-import { getStepIndex } from '@/config/helpers'
+import { getStepIndex, getStepIndexByRole } from '@/config/helpers'
+import { StepDefinition } from '@/config/types'
 import { contrast } from '@/utils/color'
 import Color from 'colorjs.io'
 import React, { useState, useRef, useMemo, useEffect, useCallback } from 'react'
@@ -10,6 +10,8 @@ import { NameAndControls } from './NameAndControls'
 
 type ColorScaleProps = {
   colors: string[]
+  /** Live step definitions for this scale (drives contrast, roles, count). */
+  steps: StepDefinition[]
   showContrast?: boolean
   contrastMethod?: 'WCAG21' | 'APCA'
   colorName?: string
@@ -23,6 +25,15 @@ type ColorScaleProps = {
   testId?: string
 }
 
+/**
+ * A swatch counts as "dark" when its OKLCH lightness is at or below the midpoint
+ * — dark swatches get the light-on-dark text color, light swatches the dark one.
+ * Lightness-driven (not positional) so inserted/reordered steps stay legible.
+ */
+function swatchIsDark(lightness: number): boolean {
+  return lightness <= 0.5
+}
+
 // Type for color information in OKLCH format
 type OklchInfo = {
   l: number // lightness
@@ -32,25 +43,18 @@ type OklchInfo = {
   index: number // color step index
 }
 
-// Function to determine text color for steps
-function getTextColorForStep(colors: string[], stepIndex: number): string {
-  if (stepIndex >= 9 && stepIndex <= 13) {
-    return colors[14] // text inverted strong
-  }
-  return colors[12] // text strong
-}
-
-function getSystemTextColorClassNameForStep({
-  stepIndex,
+// System (success/danger) text color class for a contrast label, chosen by
+// whether the swatch it sits on is dark or light rather than by step position.
+function getSystemTextColorClassNameForSwatch({
+  isDark,
   status,
 }: {
-  stepIndex: number
+  isDark: boolean
   status: 'success' | 'danger'
 }): string {
-  if (stepIndex >= 9 && stepIndex <= 13) {
-    return `text-${status}-subtle-on-emphasis`
-  }
-  return `text-${status}-subtle`
+  return isDark
+    ? `text-${status}-subtle-on-emphasis`
+    : `text-${status}-subtle`
 }
 
 // Convert color string to OKLCH format
@@ -80,6 +84,7 @@ function getOklchInfo(colorValue: string, index: number): OklchInfo {
 
 function ColorScaleBase({
   colors,
+  steps,
   showContrast = true,
   contrastMethod = 'WCAG21',
   colorName,
@@ -104,7 +109,22 @@ function ColorScaleBase({
     Array(colors.length).fill(null),
   )
   const copiedTimeoutRef = useRef<number | null>(null)
-  const headingColor = colors[8] || '#000000'
+
+  // Resolve UI-chrome colors by semantic role (not fixed index) so they keep
+  // pointing at the right step after inserts / reorders. Each falls back to a
+  // sensible position if the role is absent from a custom scale.
+  const lastIndex = colors.length - 1
+  const roleColor = (
+    role: Parameters<typeof getStepIndexByRole>[0],
+    fallbackIndex: number,
+  ): string => {
+    const idx = getStepIndexByRole(role)(steps)
+    return colors[idx] ?? colors[fallbackIndex] ?? '#000000'
+  }
+  const textOnLightColor = roleColor('swatch-text-light', lastIndex)
+  const textOnDarkColor = roleColor('swatch-text-dark', 0)
+  const dialogBgColor = roleColor('canvas', 0)
+  const headingColor = roleColor('heading', Math.floor(lastIndex / 2))
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -202,14 +222,12 @@ function ColorScaleBase({
   // Memoize contrast calculations to only recalculate when colors or contrastMethod change
   const contrasts = useMemo(() => {
     return colors.map((color: string, i: number) => {
-      const step = PALETTE_STEPS[i]
+      const step = steps[i]
       if (!step?.contrastWith || step.contrastWith.length === 0) return null
 
       const contrastForAllBackgroundPairings = step.contrastWith
         .map((contrastReq) => {
-          const targetStepIndex = getStepIndex(contrastReq.targetStep)(
-            PALETTE_STEPS,
-          )
+          const targetStepIndex = getStepIndex(contrastReq.targetStep)(steps)
           if (targetStepIndex === -1) return null
 
           const contrastResult = contrast({
@@ -223,7 +241,7 @@ function ColorScaleBase({
 
       return contrastForAllBackgroundPairings
     })
-  }, [colors, contrastMethod])
+  }, [colors, contrastMethod, steps])
 
   // Only render on client to avoid hydration issues
   if (!isMounted) {
@@ -237,18 +255,25 @@ function ColorScaleBase({
         headingColor={headingColor}
         baseColor={baseColor}
         anchors={anchors}
+        stepCount={colors.length}
         onRename={onRename}
         onChangeValue={onChangeValue}
         onChangeAnchors={onChangeAnchors}
         onRemove={onRemove}
         testId={testId}
       />
-      <div className="grid gap-2 mb-4 grid-cols-15 print:mb-0 print:gap-0">
+      <div
+        className="grid gap-2 mb-4 print:mb-0 print:gap-0"
+        style={{
+          gridTemplateColumns: `repeat(${colors.length}, minmax(0, 1fr))`,
+        }}
+      >
         {colors.map((color: string, i: number) => {
-          const textColor = getTextColorForStep(colors, i + 1)
-          const step = PALETTE_STEPS[i]
-          const pairsWithSteps = step?.contrastWith || []
           const oklchInfo = getOklchInfo(color, i)
+          const isDark = swatchIsDark(oklchInfo.l)
+          const textColor = isDark ? textOnDarkColor : textOnLightColor
+          const step = steps[i]
+          const pairsWithSteps = step?.contrastWith || []
           const isDialogActive = activeDialog === i
           const stepTestId = testId ? `${testId}-step-${i}` : `color-step-${i}`
 
@@ -281,8 +306,8 @@ function ColorScaleBase({
                 id={`color-dialog-${i}`}
                 className="min-w-[320px] backdrop:bg-black/20 cursor-default"
                 style={{
-                  backgroundColor: colors[0],
-                  color: colors[12],
+                  backgroundColor: dialogBgColor,
+                  color: textOnLightColor,
                 }}
                 onClose={handleDialogClose}
                 aria-labelledby={`color-details-heading-${i}`}
@@ -395,7 +420,7 @@ function ColorScaleBase({
                         {pairsWithSteps.map((contrastReq, colorPairIndex) => {
                           const targetStepIndex = getStepIndex(
                             contrastReq.targetStep,
-                          )(PALETTE_STEPS)
+                          )(steps)
                           if (targetStepIndex === -1) return null
 
                           const contrastArray = contrasts[i]
@@ -458,7 +483,7 @@ function ColorScaleBase({
                     {pairsWithSteps.map((contrastReq, colorPairIndex) => {
                       const targetStepIndex = getStepIndex(
                         contrastReq.targetStep,
-                      )(PALETTE_STEPS)
+                      )(steps)
                       if (targetStepIndex === -1) return null
 
                       const contrastArray = contrasts[i]
@@ -479,8 +504,8 @@ function ColorScaleBase({
 
                       const status = isContrastValid ? 'success' : 'danger'
                       const textStatusClassName =
-                        getSystemTextColorClassNameForStep({
-                          stepIndex: i + 1,
+                        getSystemTextColorClassNameForSwatch({
+                          isDark,
                           status,
                         })
 
@@ -527,6 +552,7 @@ function areEqual(prev: ColorScaleProps, next: ColorScaleProps) {
     prev.showContrast !== next.showContrast ||
     prev.contrastMethod !== next.contrastMethod ||
     prev.colors !== next.colors ||
+    prev.steps !== next.steps ||
     prev.testId !== next.testId
   ) {
     return false

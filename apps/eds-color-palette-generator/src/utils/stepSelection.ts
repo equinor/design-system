@@ -1,15 +1,17 @@
 /**
  * Finds an available step that is not in the usedSteps array
  * @param usedSteps - Array of step numbers that are already in use
- * @param preferredStep - The preferred step to use if available (defaults to 8, the middle step)
- * @returns The first available step number (1-15)
+ * @param stepCount - Total number of steps in the scale (steps are 1..stepCount)
+ * @param preferredStep - The preferred step to use if available (defaults to the middle step)
+ * @returns The first available step number (1..stepCount)
  */
 export function findAvailableStep(
   usedSteps: number[],
-  preferredStep: number = 8,
+  stepCount: number,
+  preferredStep: number = Math.ceil(stepCount / 2),
 ): number {
-  // Ensure preferredStep is within valid range (1-15)
-  const validPreferredStep = Math.max(1, Math.min(15, preferredStep))
+  // Ensure preferredStep is within valid range (1..stepCount)
+  const validPreferredStep = Math.max(1, Math.min(stepCount, preferredStep))
 
   // Convert usedSteps to Set for O(1) lookup performance
   const usedStepsSet = new Set(usedSteps)
@@ -19,13 +21,13 @@ export function findAvailableStep(
     return validPreferredStep
   }
 
-  // If not, search from step 1 to 15 for the first available step
-  for (let i = 1; i <= 15; i++) {
+  // If not, search from step 1 to stepCount for the first available step
+  for (let i = 1; i <= stepCount; i++) {
     if (!usedStepsSet.has(i)) {
       return i
     }
   }
 
-  // This should never happen if usedSteps.length < 15, but return the preferred step as fallback
+  // This should never happen if usedSteps.length < stepCount, but return the preferred step as fallback
   return validPreferredStep
 }

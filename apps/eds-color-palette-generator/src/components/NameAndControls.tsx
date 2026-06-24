@@ -12,6 +12,8 @@ type NameAndControlsProps = {
   headingColor: string
   baseColor?: string
   anchors?: ColorAnchor[]
+  /** Total number of steps in the scale (anchors can target 1..stepCount). */
+  stepCount: number
   onRename?: (n: string) => void
   onChangeValue?: (v: string) => void
   onChangeAnchors?: (anchors: ColorAnchor[]) => void
@@ -28,6 +30,7 @@ function NameAndControlsBase({
   headingColor,
   baseColor,
   anchors,
+  stepCount,
   onRename,
   onChangeValue,
   onChangeAnchors,
@@ -110,7 +113,7 @@ function NameAndControlsBase({
     if (baseColor && onChangeAnchors) {
       onChangeAnchors([
         { value: baseColor, step: 1 },
-        { value: baseColor, step: 15 },
+        { value: baseColor, step: stepCount },
       ])
     }
   }
@@ -134,9 +137,9 @@ function NameAndControlsBase({
     if (!anchors || !onChangeAnchors) return
     const usedSteps = anchors.map((a) => a.step)
 
-    if (usedSteps.length >= 15) {
+    if (usedSteps.length >= stepCount) {
       setMaxAnchorsError(
-        'All 15 steps are already in use. Remove an anchor before adding a new one.',
+        `All ${stepCount} steps are already in use. Remove an anchor before adding a new one.`,
       )
       return
     }
@@ -144,7 +147,7 @@ function NameAndControlsBase({
     // Clear error when successful
     setMaxAnchorsError(null)
 
-    const newStep = findAvailableStep(usedSteps)
+    const newStep = findAvailableStep(usedSteps, stepCount)
     onChangeAnchors([
       ...anchors,
       { value: anchors[0]?.value || DEFAULT_ANCHOR_COLOR, step: newStep },
@@ -252,6 +255,7 @@ function NameAndControlsBase({
               index={index}
               anchor={anchor}
               anchors={anchors}
+              stepCount={stepCount}
               onUpdateAnchor={handleUpdateAnchor}
               onRemoveAnchor={handleRemoveAnchor}
               testId={testId}
@@ -294,6 +298,7 @@ function areNameAndControlsEqual(
     prev.name !== next.name ||
     prev.baseColor !== next.baseColor ||
     prev.headingColor !== next.headingColor ||
+    prev.stepCount !== next.stepCount ||
     prev.testId !== next.testId
   ) {
     return false

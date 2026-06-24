@@ -5,11 +5,13 @@ type DisplayOptionsPanelProps = {
   showContrast: boolean
   showLightnessInputs: boolean
   showGaussianParameters: boolean
+  showStepConfig: boolean
   contrastMethod: ContrastMethod
   colorFormat: ColorFormat
   setShowContrast: React.Dispatch<React.SetStateAction<boolean>>
   setShowLightnessInputs: React.Dispatch<React.SetStateAction<boolean>>
   setShowGaussianParameters: React.Dispatch<React.SetStateAction<boolean>>
+  setShowStepConfig: React.Dispatch<React.SetStateAction<boolean>>
   setContrastMethod: React.Dispatch<React.SetStateAction<ContrastMethod>>
   setColorFormat: React.Dispatch<React.SetStateAction<ColorFormat>>
 }
@@ -18,11 +20,13 @@ export const DisplayOptionsPanel = ({
   showContrast,
   showLightnessInputs,
   showGaussianParameters,
+  showStepConfig,
   contrastMethod,
   colorFormat,
   setShowContrast,
   setShowLightnessInputs,
   setShowGaussianParameters,
+  setShowStepConfig,
   setContrastMethod,
   setColorFormat,
 }: DisplayOptionsPanelProps) => {
@@ -91,6 +95,15 @@ export const DisplayOptionsPanel = ({
           className="accent-current"
         />
         <span>Gaussian parameters</span>
+      </label>
+      <label className="flex items-center gap-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={showStepConfig}
+          onChange={(e) => setShowStepConfig(e.target.checked)}
+          className="accent-current"
+        />
+        <span>Step configuration</span>
       </label>
     </fieldset>
   )

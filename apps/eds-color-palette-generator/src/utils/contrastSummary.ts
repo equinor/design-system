@@ -1,5 +1,5 @@
-import { PALETTE_STEPS } from '@/config/config'
 import { getStepIndex } from '@/config/helpers'
+import { StepDefinition } from '@/config/types'
 import { contrast } from '@/utils/color'
 import { ContrastMethod } from '@/types'
 
@@ -18,10 +18,13 @@ export function computeContrastSummary({
   colorScales,
   contrastMethod,
   enabled,
+  steps: stepDefs,
 }: {
   colorScales: GeneratedColorScale[]
   contrastMethod: ContrastMethod
   enabled: boolean
+  /** Live step definitions; their contrastWith requirements drive the summary. */
+  steps: StepDefinition[]
 }): ContrastSummaryResult {
   if (!enabled) return { passed: 0, total: 0, percentage: 0 }
 
@@ -29,16 +32,16 @@ export function computeContrastSummary({
   let total = 0
 
   colorScales.forEach((colorScale) => {
-    const steps = colorScale.scale
-    if (!Array.isArray(steps) || steps.length === 0) return
+    const scale = colorScale.scale
+    if (!Array.isArray(scale) || scale.length === 0) return
 
-    PALETTE_STEPS.forEach((stepDef, stepIndex) => {
+    stepDefs.forEach((stepDef, stepIndex) => {
       const requirements = stepDef.contrastWith || []
       requirements.forEach((req) => {
-        const targetIndex = getStepIndex(req.targetStep)(PALETTE_STEPS)
+        const targetIndex = getStepIndex(req.targetStep)(stepDefs)
         if (targetIndex === -1) return
-        const fg = steps[stepIndex]
-        const bg = steps[targetIndex]
+        const fg = scale[stepIndex]
+        const bg = scale[targetIndex]
         if (!fg || !bg) return
         const result = contrast({
           foreground: fg,

@@ -8,6 +8,8 @@ type AnchorColorInputProps = {
   index: number
   anchor: ColorAnchor
   anchors: ColorAnchor[]
+  /** Total number of steps in the scale (step options are 1..stepCount). */
+  stepCount: number
   onUpdateAnchor: (
     index: number,
     field: 'value' | 'step',
@@ -36,6 +38,7 @@ export function AnchorColorInput({
   index,
   anchor,
   anchors,
+  stepCount,
   onUpdateAnchor,
   onRemoveAnchor,
   testId,
@@ -100,7 +103,7 @@ export function AnchorColorInput({
           aria-label={`Step for anchor ${index + 1}`}
           data-testid={testId ? `${testId}-anchor-${index}-step` : undefined}
         >
-          {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => {
+          {Array.from({ length: stepCount }, (_, i) => i + 1).map((step) => {
             const isUsed = isStepAlreadyUsed(anchors, step, index)
             return (
               <option
