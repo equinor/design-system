@@ -15,6 +15,18 @@ describe('Avatar (next)', () => {
       expect(screen.getByText('C')).toBeInTheDocument()
     })
 
+    it('renders an image when src is provided', () => {
+      render(<Avatar src="photo.jpg" name="Ada Lovelace" />)
+      expect(
+        screen.getByRole('img', { name: 'Ada Lovelace' }),
+      ).toBeInTheDocument()
+    })
+
+    it('does not render initials when src is provided', () => {
+      render(<Avatar src="photo.jpg" name="Ada Lovelace" />)
+      expect(screen.queryByText('AL')).not.toBeInTheDocument()
+    })
+
     it('does not render initial span when initial is not provided', () => {
       render(<Avatar data-testid="eds-avatar" />)
       expect(screen.getByTestId('eds-avatar')).toBeEmptyDOMElement()
