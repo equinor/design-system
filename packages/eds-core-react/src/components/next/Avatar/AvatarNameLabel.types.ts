@@ -24,7 +24,7 @@ export type AvatarNameLabelProps = {
   initial?: string
   /** Profile photo URL. When provided, renders a circular photo instead of initials. */
   src?: string
-  /** Alt text for the photo. Falls back to `name` if not provided. */
+  /** Alt text for the photo. Defaults to `""` (decorative) so the visible name is not announced twice. Pass a value to override. */
   alt?: string
   /** Size of the avatar */
   size?: AvatarSize
