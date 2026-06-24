@@ -5,10 +5,12 @@ import { Avatar, deriveInitials } from './Avatar'
 export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
   function AvatarNameLabel(
     {
-      fullName,
+      name,
       meta,
       layout = 'horizontal',
       initial,
+      src,
+      alt,
       size = 'lg',
       emphasis = 'low',
       notification = false,
@@ -18,7 +20,7 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
     },
     ref,
   ) {
-    const derivedInitial = initial ?? deriveInitials(fullName)
+    const derivedInitial = initial ?? deriveInitials(name)
     const classes = ['eds-avatar-name-label', className]
       .filter(Boolean)
       .join(' ')
@@ -29,11 +31,13 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
           <Avatar
             size={size}
             emphasis={emphasis}
-            initial={derivedInitial}
+            src={src}
+            alt={alt ?? name}
+            initial={src ? undefined : derivedInitial}
             notification={notification}
           />
           <div className="names">
-            <span className="full-name">{fullName}</span>
+            <span className="full-name">{name}</span>
             {meta && <span className="meta">{meta}</span>}
           </div>
         </div>
