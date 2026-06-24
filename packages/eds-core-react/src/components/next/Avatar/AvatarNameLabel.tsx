@@ -1,12 +1,12 @@
 import { forwardRef } from 'react'
 import type { AvatarNameLabelProps } from './AvatarNameLabel.types'
-import { Avatar } from './Avatar'
+import { Avatar, deriveInitials } from './Avatar'
 
 export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
   function AvatarNameLabel(
     {
       fullName,
-      email,
+      meta,
       layout = 'horizontal',
       initial,
       size = 'lg',
@@ -18,7 +18,7 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
     },
     ref,
   ) {
-    const derivedInitial = initial ?? (fullName?.[0]?.toUpperCase() || 'A')
+    const derivedInitial = initial ?? deriveInitials(fullName)
     const classes = ['eds-avatar-name-label', className]
       .filter(Boolean)
       .join(' ')
@@ -34,18 +34,10 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
           />
           <div className="names">
             <span className="full-name">{fullName}</span>
-            {email && (
-              <span className="email" data-testid="eds-avatar-email">
-                {email}
-              </span>
-            )}
+            {meta && <span className="meta">{meta}</span>}
           </div>
         </div>
-        {children && (
-          <div className="slot-right" data-testid="eds-avatar-slot-right">
-            {children}
-          </div>
-        )}
+        {children && <div className="slot-right">{children}</div>}
       </div>
     )
   },

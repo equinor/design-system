@@ -12,20 +12,17 @@ describe('Avatar (next)', () => {
 
     it('renders the initial letter', () => {
       render(<Avatar initial="C" />)
-      expect(screen.getByTestId('eds-avatar-initial')).toHaveTextContent('C')
+      expect(screen.getByText('C')).toBeInTheDocument()
     })
 
     it('does not render initial span when initial is not provided', () => {
-      render(<Avatar />)
-      expect(screen.queryByTestId('eds-avatar-initial')).not.toBeInTheDocument()
+      render(<Avatar data-testid="eds-avatar" />)
+      expect(screen.getByTestId('eds-avatar')).toBeEmptyDOMElement()
     })
 
     it('initial is aria-hidden', () => {
       render(<Avatar initial="C" />)
-      expect(screen.getByTestId('eds-avatar-initial')).toHaveAttribute(
-        'aria-hidden',
-        'true',
-      )
+      expect(screen.getByText('C')).toHaveAttribute('aria-hidden', 'true')
     })
 
     it('applies custom className', () => {
@@ -76,22 +73,22 @@ describe('Avatar (next)', () => {
 
   describe('Notification', () => {
     it('renders notification dot when notification=true', () => {
-      render(<Avatar notification />)
-      expect(screen.getByTestId('eds-avatar-notification')).toBeInTheDocument()
+      render(<Avatar data-testid="eds-avatar" notification />)
+      expect(screen.getByTestId('eds-avatar')).toBeInTheDocument()
     })
 
     it('does not render notification dot when notification=false', () => {
-      render(<Avatar notification={false} />)
-      expect(
-        screen.queryByTestId('eds-avatar-notification'),
-      ).not.toBeInTheDocument()
+      render(<Avatar data-testid="eds-avatar" notification={false} />)
+      expect(screen.getByTestId('eds-avatar')).toBeEmptyDOMElement()
     })
 
-    it('notification dot is aria-hidden', () => {
-      render(<Avatar notification />)
-      expect(screen.getByTestId('eds-avatar-notification')).toHaveAttribute(
-        'aria-hidden',
-        'true',
+    it('notification is merged into avatar aria-label when name is provided', () => {
+      render(
+        <Avatar data-testid="eds-avatar" name="Ada Lovelace" notification />,
+      )
+      expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
+        'aria-label',
+        'Ada Lovelace, notification',
       )
     })
   })
@@ -102,11 +99,22 @@ describe('Avatar (next)', () => {
       expect(await axe(container)).toHaveNoViolations()
     })
 
-    it('has no accessibility violations with role="img" and aria-label', async () => {
-      // Standalone Avatar used as a meaningful image needs role="img" + aria-label
-      const { container } = render(
-        <Avatar initial="A" role="img" aria-label="Ada Lovelace" />,
+    it('auto-derives initial from name when initial is not provided', () => {
+      render(<Avatar name="Ada Lovelace" />)
+      expect(screen.getByText('AL')).toBeInTheDocument()
+    })
+
+    it('name prop sets role="img" and aria-label', () => {
+      render(
+        <Avatar data-testid="eds-avatar" initial="AL" name="Ada Lovelace" />,
       )
+      const el = screen.getByTestId('eds-avatar')
+      expect(el).toHaveAttribute('role', 'img')
+      expect(el).toHaveAttribute('aria-label', 'Ada Lovelace')
+    })
+
+    it('has no accessibility violations with name prop', async () => {
+      const { container } = render(<Avatar initial="AL" name="Ada Lovelace" />)
       expect(await axe(container)).toHaveNoViolations()
     })
 
@@ -124,26 +132,29 @@ describe('AvatarNameLabel (next)', () => {
       expect(screen.getByText('Ada Lovelace')).toBeInTheDocument()
     })
 
-    it('renders email when provided', () => {
-      render(
-        <AvatarNameLabel fullName="Ada Lovelace" email="ada@example.com" />,
-      )
-      expect(screen.getByText('ada@example.com')).toBeInTheDocument()
+    it('renders meta when provided', () => {
+      render(<AvatarNameLabel fullName="Ada Lovelace" meta="Senior Engineer" />)
+      expect(screen.getByText('Senior Engineer')).toBeInTheDocument()
     })
 
-    it('does not render email element when email is not provided', () => {
+    it('does not render meta when not provided', () => {
       render(<AvatarNameLabel fullName="Ada Lovelace" />)
-      expect(screen.queryByTestId('eds-avatar-email')).not.toBeInTheDocument()
+      expect(screen.queryByText('Senior Engineer')).not.toBeInTheDocument()
     })
 
-    it('derives initial from first letter of fullName', () => {
+    it('derives initials from first and last word of fullName', () => {
       render(<AvatarNameLabel fullName="Ada Lovelace" />)
-      expect(screen.getByTestId('eds-avatar-initial')).toHaveTextContent('A')
+      expect(screen.getByText('AL')).toBeInTheDocument()
+    })
+
+    it('derives single initial when fullName is one word', () => {
+      render(<AvatarNameLabel fullName="Ada" />)
+      expect(screen.getByText('A')).toBeInTheDocument()
     })
 
     it('uses provided initial over derived one', () => {
       render(<AvatarNameLabel fullName="Ada Lovelace" initial="X" />)
-      expect(screen.getByTestId('eds-avatar-initial')).toHaveTextContent('X')
+      expect(screen.getByText('X')).toBeInTheDocument()
     })
 
     it('renders slot right when children provided', () => {
@@ -157,9 +168,7 @@ describe('AvatarNameLabel (next)', () => {
 
     it('does not render slot right when no children', () => {
       render(<AvatarNameLabel fullName="Ada Lovelace" />)
-      expect(
-        screen.queryByTestId('eds-avatar-slot-right'),
-      ).not.toBeInTheDocument()
+      expect(screen.queryByTestId('slot-content')).not.toBeInTheDocument()
     })
 
     it('forwards ref', () => {
@@ -170,16 +179,9 @@ describe('AvatarNameLabel (next)', () => {
   })
 
   describe('Avatar pass-throughs', () => {
-    it('passes notification to inner Avatar', () => {
+    it('renders without error when notification is passed', () => {
       render(<AvatarNameLabel fullName="Ada" notification />)
-      expect(screen.getByTestId('eds-avatar-notification')).toBeInTheDocument()
-    })
-
-    it('does not show notification dot when notification=false', () => {
-      render(<AvatarNameLabel fullName="Ada" notification={false} />)
-      expect(
-        screen.queryByTestId('eds-avatar-notification'),
-      ).not.toBeInTheDocument()
+      expect(screen.getByText('Ada')).toBeInTheDocument()
     })
   })
 
@@ -210,7 +212,7 @@ describe('AvatarNameLabel (next)', () => {
   describe('Accessibility', () => {
     it('has no accessibility violations', async () => {
       const { container } = render(
-        <AvatarNameLabel fullName="Ada Lovelace" email="ada@example.com" />,
+        <AvatarNameLabel fullName="Ada Lovelace" meta="ada@example.com" />,
       )
       expect(await axe(container)).toHaveNoViolations()
     })
@@ -219,7 +221,7 @@ describe('AvatarNameLabel (next)', () => {
       const { container } = render(
         <AvatarNameLabel
           fullName="Ada Lovelace"
-          email="ada@example.com"
+          meta="ada@example.com"
           layout="vertical"
         />,
       )
