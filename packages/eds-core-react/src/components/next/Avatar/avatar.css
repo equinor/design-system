@@ -146,6 +146,7 @@
 
     & .full-name {
       color: var(--eds-color-text-strong);
+      overflow-wrap: break-word;
     }
 
     & .meta {
