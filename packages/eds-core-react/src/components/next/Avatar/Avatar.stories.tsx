@@ -32,13 +32,13 @@ const meta: Meta<typeof Avatar> = {
       control: 'text',
       description:
         'Profile photo URL. When provided, renders a circular photo instead of initials.',
-      table: { category: 'Core' },
+      table: { category: 'Appearance' },
     },
     alt: {
       control: 'text',
       description:
         'Alt text for the photo. Falls back to `name` if not provided.',
-      table: { category: 'Core' },
+      table: { category: 'Appearance' },
     },
     size: {
       control: 'inline-radio',
@@ -203,13 +203,13 @@ NameLabelHorizontal.argTypes = {
     control: 'text',
     description:
       'Profile photo URL. When provided, renders a circular photo instead of initials.',
-    table: { category: 'Core' },
+    table: { category: 'Appearance' },
   },
   alt: {
     control: 'text',
     description:
       'Alt text for the photo. Falls back to `name` if not provided.',
-    table: { category: 'Core' },
+    table: { category: 'Appearance' },
   },
   layout: {
     control: 'inline-radio',
