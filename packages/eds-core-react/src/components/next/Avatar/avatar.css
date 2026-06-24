@@ -11,7 +11,6 @@
     /* Colour tokens — overridden for high emphasis */
     --_bg: var(--eds-color-bg-fill-muted-default);
     --_color: var(--eds-color-text-strong);
-    --_notification-bg: var(--eds-color-bg-fill-emphasis-default);
 
     position: relative;
 
@@ -71,7 +70,7 @@
       border: var(--eds-sizing-stroke-thin) solid var(--eds-color-bg-surface);
       border-radius: var(--eds-spacing-border-radius-pill);
 
-      background-color: var(--_notification-bg);
+      background-color: var(--eds-color-bg-fill-emphasis-default);
     }
   }
 
@@ -81,6 +80,7 @@
     /* Row container: horizontal gap between avatar+content and slot-right */
     gap: var(--eds-container-gap-horizontal);
     align-items: center;
+    font-family: var(--eds-typography-ui-body-font-family);
 
     & .content {
       display: flex;
@@ -98,12 +98,10 @@
 
       /* Column layout: use vertical spacing between stacked name and email */
       gap: var(--eds-selectable-space-vertical);
-      align-items: flex-start;
       justify-content: center;
 
       min-width: 0;
 
-      font-family: var(--eds-typography-ui-body-font-family);
       font-size: var(--eds-typography-ui-body-xs-font-size);
       font-feature-settings: 'lnum', 'tnum';
       line-height: var(--eds-typography-ui-body-xs-line-height-default);
@@ -136,17 +134,10 @@
     }
 
     & .full-name {
-      overflow: hidden;
-
-      max-width: 100%;
-
       color: var(--eds-color-text-strong);
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     & .meta {
-      max-width: 100%;
       color: var(--eds-color-text-subtle);
       overflow-wrap: break-word;
     }
