@@ -355,6 +355,52 @@ NameLabelEdgeCases.parameters = {
   },
 }
 
+export const NameLabelDensity: StoryFn = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '24px',
+      fontFamily: 'var(--eds-typography-ui-body-font-family)',
+    }}
+  >
+    <div data-density="spacious">
+      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        Spacious (default)
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
+        <AvatarNameLabel
+          name="Ada Lovelace"
+          meta="Senior Engineer"
+          layout="vertical"
+        />
+      </div>
+    </div>
+    <div data-density="comfortable">
+      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        Comfortable
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
+        <AvatarNameLabel
+          name="Ada Lovelace"
+          meta="Senior Engineer"
+          layout="vertical"
+        />
+      </div>
+    </div>
+  </div>
+)
+NameLabelDensity.parameters = {
+  docs: {
+    description: {
+      story:
+        '`AvatarNameLabel` responds to `data-density` on a parent element — spacing between the avatar and name/metadata adapts automatically via spacing tokens.',
+    },
+  },
+}
+
 const sectionLabel = { fontSize: '11px', color: '#6f6f6f', marginBottom: '4px' }
 
 const ListWithDividers = ({
