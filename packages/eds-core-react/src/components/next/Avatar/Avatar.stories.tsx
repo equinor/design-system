@@ -28,6 +28,18 @@ const meta: Meta<typeof Avatar> = {
         'Override the auto-derived initial(s). 1–2 characters recommended.',
       table: { category: 'Core' },
     },
+    src: {
+      control: 'text',
+      description:
+        'Profile photo URL. When provided, renders a circular photo instead of initials.',
+      table: { category: 'Core' },
+    },
+    alt: {
+      control: 'text',
+      description:
+        'Alt text for the photo. Falls back to `name` if not provided.',
+      table: { category: 'Core' },
+    },
     size: {
       control: 'inline-radio',
       options: ['sm', 'md', 'lg'],
@@ -77,41 +89,7 @@ Introduction.parameters = {
   docs: {
     description: {
       story:
-        'Pass `name` to make the avatar accessible — initials are derived automatically and the avatar is announced to screen readers as `role="img"`. Without `name`, the initial is purely decorative. Inside `AvatarNameLabel` this is handled automatically from `fullName`.',
-    },
-  },
-}
-
-export const Photo: StoryFn = () => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-    <Avatar
-      src="https://i.pravatar.cc/150?img=47"
-      name="Ada Lovelace"
-      size="sm"
-    />
-    <Avatar
-      src="https://i.pravatar.cc/150?img=47"
-      name="Ada Lovelace"
-      size="md"
-    />
-    <Avatar
-      src="https://i.pravatar.cc/150?img=47"
-      name="Ada Lovelace"
-      size="lg"
-    />
-    <Avatar
-      src="https://i.pravatar.cc/150?img=47"
-      name="Ada Lovelace"
-      size="lg"
-      notification
-    />
-  </div>
-)
-Photo.parameters = {
-  docs: {
-    description: {
-      story:
-        'Pass `src` to show a profile photo instead of initials. The image fills the circle with `object-fit: cover`. Use `name` for the accessible label — it becomes the `alt` text on the image.',
+        'Pass `name` to make the avatar accessible — initials are derived automatically and the avatar is announced to screen readers as `role="img"`. Without `name`, the initial is purely decorative. Inside `AvatarNameLabel` this is handled automatically from `name`.',
     },
   },
 }
@@ -163,16 +141,50 @@ WithNotification.parameters = {
   },
 }
 
+export const Photo: StoryFn = () => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="sm"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="md"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="lg"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?img=47"
+      name="Ada Lovelace"
+      size="lg"
+      notification
+    />
+  </div>
+)
+Photo.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `src` to show a profile photo instead of initials. The image fills the circle with `object-fit: cover`. Use `name` for the accessible label — it becomes the `alt` text on the image.',
+    },
+  },
+}
+
 export const NameLabelHorizontal: StoryFn<AvatarNameLabelProps> = (args) => (
   <AvatarNameLabel {...args} />
 )
 NameLabelHorizontal.args = {
-  fullName: 'Ada Lovelace',
+  name: 'Ada Lovelace',
   meta: 'Senior Engineer',
   layout: 'horizontal',
 }
 NameLabelHorizontal.argTypes = {
-  fullName: {
+  name: {
     control: 'text',
     description: 'Full name of the person.',
     table: { category: 'Core' },
@@ -185,6 +197,18 @@ NameLabelHorizontal.argTypes = {
   initial: {
     control: 'text',
     description: 'Override the auto-derived initial(s).',
+    table: { category: 'Core' },
+  },
+  src: {
+    control: 'text',
+    description:
+      'Profile photo URL. When provided, renders a circular photo instead of initials.',
+    table: { category: 'Core' },
+  },
+  alt: {
+    control: 'text',
+    description:
+      'Alt text for the photo. Falls back to `name` if not provided.',
     table: { category: 'Core' },
   },
   layout: {
@@ -227,7 +251,7 @@ export const NameLabelVertical: StoryFn<AvatarNameLabelProps> = (args) => (
   <AvatarNameLabel {...args} />
 )
 NameLabelVertical.args = {
-  fullName: 'Ada Lovelace',
+  name: 'Ada Lovelace',
   meta: 'ada@equinor.com',
   layout: 'vertical',
 }
@@ -241,12 +265,38 @@ NameLabelVertical.parameters = {
 }
 
 export const NameLabelWithNotification: StoryFn = () => (
-  <AvatarNameLabel
-    fullName="Ada Lovelace"
-    meta="Senior Engineer"
-    notification
-  />
+  <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" notification />
 )
+
+export const NameLabelWithPhoto: StoryFn = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <AvatarNameLabel
+      name="Ada Lovelace"
+      meta="Senior Engineer"
+      src="https://i.pravatar.cc/150?img=47"
+    />
+    <AvatarNameLabel
+      name="Ada Lovelace"
+      meta="Senior Engineer"
+      src="https://i.pravatar.cc/150?img=47"
+      layout="vertical"
+    />
+    <AvatarNameLabel
+      name="Ada Lovelace"
+      meta="Senior Engineer"
+      src="https://i.pravatar.cc/150?img=47"
+      notification
+    />
+  </div>
+)
+NameLabelWithPhoto.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `src` to show a profile photo in the avatar. Works with both layouts and the notification dot.',
+    },
+  },
+}
 
 export const NameLabelEdgeCases: StoryFn = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -257,15 +307,15 @@ export const NameLabelEdgeCases: StoryFn = () => (
       <ListWithDividers maxWidth="200px">
         {[
           {
-            fullName: 'Bartholomew Featherstonehaugh',
+            name: 'Bartholomew Featherstonehaugh',
             meta: 'b.featherstonehaugh@equinor.com',
           },
           {
-            fullName: 'Mary Jane Elizabeth Watson',
+            name: 'Mary Jane Elizabeth Watson',
             meta: 'mary.watson@equinor.com',
           },
-        ].map(({ fullName, meta }) => (
-          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta} />
+        ].map(({ name, meta }) => (
+          <AvatarNameLabel key={name} name={name} meta={meta} />
         ))}
       </ListWithDividers>
     </div>
@@ -276,18 +326,18 @@ export const NameLabelEdgeCases: StoryFn = () => (
       <ListWithDividers>
         {[
           {
-            fullName: 'Bartholomew Featherstonehaugh',
+            name: 'Bartholomew Featherstonehaugh',
             meta: 'b.featherstonehaugh@equinor.com',
           },
           {
-            fullName: 'Mary Jane Elizabeth Watson',
+            name: 'Mary Jane Elizabeth Watson',
             meta: 'mary.watson@equinor.com',
           },
-        ].map(({ fullName, meta }) => (
+        ].map(({ name, meta }) => (
           <AvatarNameLabel
-            key={fullName}
+            key={name}
             layout="vertical"
-            fullName={fullName}
+            name={name}
             meta={meta}
           />
         ))}
@@ -329,10 +379,18 @@ export const NameLabelWithSlot: StoryFn = () => (
       <p style={sectionLabel}>Overflow menu</p>
       <ListWithDividers>
         {[
-          { fullName: 'Ada Lovelace', meta: 'Senior Engineer' },
-          { fullName: 'Mary Jane Watson', meta: 'Reservoir Geoscientist' },
-        ].map(({ fullName, meta }) => (
-          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta}>
+          {
+            name: 'Ada Lovelace',
+            meta: 'Senior Engineer',
+            img: 'https://i.pravatar.cc/150?img=47',
+          },
+          {
+            name: 'Mary Jane Watson',
+            meta: 'Reservoir Geoscientist',
+            img: 'https://i.pravatar.cc/150?img=32',
+          },
+        ].map(({ name, meta, img }) => (
+          <AvatarNameLabel key={name} name={name} meta={meta} src={img}>
             <Button variant="ghost" size="sm" aria-label="More options">
               <Icon data={more_vertical} />
             </Button>
@@ -346,19 +404,21 @@ export const NameLabelWithSlot: StoryFn = () => (
       <ListWithDividers>
         {[
           {
-            fullName: 'Ada Lovelace',
+            name: 'Ada Lovelace',
             meta: 'ada@equinor.com',
             role: 'Admin',
             tone: 'info' as const,
+            img: 'https://i.pravatar.cc/150?img=47',
           },
           {
-            fullName: 'Mary Jane Watson',
+            name: 'Mary Jane Watson',
             meta: 'mary@equinor.com',
             role: 'Viewer',
             tone: 'neutral' as const,
+            img: 'https://i.pravatar.cc/150?img=32',
           },
-        ].map(({ fullName, meta, role, tone }) => (
-          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta}>
+        ].map(({ name, meta, role, tone, img }) => (
+          <AvatarNameLabel key={name} name={name} meta={meta} src={img}>
             <Badge tone={tone}>{role}</Badge>
           </AvatarNameLabel>
         ))}
@@ -369,14 +429,20 @@ export const NameLabelWithSlot: StoryFn = () => (
       <p style={sectionLabel}>Last active</p>
       <ListWithDividers>
         {[
-          { fullName: 'Ada Lovelace', meta: 'Senior Engineer', time: '2h ago' },
           {
-            fullName: 'Mary Jane Watson',
+            name: 'Ada Lovelace',
+            meta: 'Senior Engineer',
+            time: '2h ago',
+            img: 'https://i.pravatar.cc/150?img=47',
+          },
+          {
+            name: 'Mary Jane Watson',
             meta: 'Reservoir Geoscientist',
             time: '3d ago',
+            img: 'https://i.pravatar.cc/150?img=32',
           },
-        ].map(({ fullName, meta, time }) => (
-          <AvatarNameLabel key={fullName} fullName={fullName} meta={meta}>
+        ].map(({ name, meta, time, img }) => (
+          <AvatarNameLabel key={name} name={name} meta={meta} src={img}>
             <span
               style={{
                 fontSize: 'var(--eds-typography-ui-body-xs-font-size)',
