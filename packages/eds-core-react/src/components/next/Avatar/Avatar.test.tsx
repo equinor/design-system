@@ -196,12 +196,15 @@ describe('AvatarNameLabel (next)', () => {
       expect(screen.getByText('Ada')).toBeInTheDocument()
     })
 
-    it('renders with size prop', () => {
+    // size and emphasis flow to the inner Avatar via props — verified visually
+    // and by TypeScript. Testing Library's no-node-access rule prevents querying
+    // the inner div's data attributes directly; the type system enforces the wiring.
+    it('renders with size prop without error', () => {
       render(<AvatarNameLabel name="Ada" size="sm" />)
       expect(screen.getByText('Ada')).toBeInTheDocument()
     })
 
-    it('renders with emphasis prop', () => {
+    it('renders with emphasis prop without error', () => {
       render(<AvatarNameLabel name="Ada" emphasis="high" />)
       expect(screen.getByText('Ada')).toBeInTheDocument()
     })
@@ -245,6 +248,17 @@ describe('AvatarNameLabel (next)', () => {
           name="Ada Lovelace"
           meta="ada@example.com"
           layout="vertical"
+        />,
+      )
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('has no accessibility violations with photo — image is decorative', async () => {
+      const { container } = render(
+        <AvatarNameLabel
+          name="Ada Lovelace"
+          meta="ada@example.com"
+          src="photo.jpg"
         />,
       )
       expect(await axe(container)).toHaveNoViolations()
