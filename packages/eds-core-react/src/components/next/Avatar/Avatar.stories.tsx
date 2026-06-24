@@ -1,3 +1,4 @@
+import React from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { more_vertical } from '@equinor/eds-icons'
 import { Button } from '../Button'
@@ -362,16 +363,19 @@ const ListWithDividers = ({
 }: {
   children: React.ReactNode[]
   maxWidth?: string
-}) => (
-  <div style={{ maxWidth }}>
-    {children.map((child, i) => (
-      <div key={i}>
-        <div style={{ padding: '8px 0' }}>{child}</div>
-        {i < children.length - 1 && <Divider />}
-      </div>
-    ))}
-  </div>
-)
+}) => {
+  const items = React.Children.toArray(children)
+  return (
+    <div style={{ maxWidth }}>
+      {items.map((child, i) => (
+        <div key={(child as React.ReactElement).key}>
+          <div style={{ padding: '8px 0' }}>{child}</div>
+          {i < items.length - 1 && <Divider />}
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export const NameLabelWithSlot: StoryFn = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
