@@ -42,15 +42,15 @@ figma.connect(
   'https://www.figma.com/design/dz0XQdc5j7AAtjXr1gTfVR/%F0%9F%94%B9-EDS-Core-Components?node-id=9319-5429',
   {
     props: {
-      fullName: figma.string('Full Name'),
+      name: figma.string('Full Name'),
       meta: figma.string('Email'),
       layout: figma.enum('Layout', {
         Horizontal: 'horizontal',
         Vertical: 'vertical',
       }),
     },
-    example: ({ fullName, meta, layout }) => (
-      <AvatarNameLabel fullName={fullName} meta={meta} layout={layout} />
+    example: ({ name, meta, layout }) => (
+      <AvatarNameLabel name={name} meta={meta} layout={layout} />
     ),
   },
 )

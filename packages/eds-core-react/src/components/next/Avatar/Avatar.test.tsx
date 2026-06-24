@@ -139,39 +139,39 @@ describe('Avatar (next)', () => {
 
 describe('AvatarNameLabel (next)', () => {
   describe('Rendering', () => {
-    it('renders full name', () => {
-      render(<AvatarNameLabel fullName="Ada Lovelace" />)
+    it('renders name', () => {
+      render(<AvatarNameLabel name="Ada Lovelace" />)
       expect(screen.getByText('Ada Lovelace')).toBeInTheDocument()
     })
 
     it('renders meta when provided', () => {
-      render(<AvatarNameLabel fullName="Ada Lovelace" meta="Senior Engineer" />)
+      render(<AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />)
       expect(screen.getByText('Senior Engineer')).toBeInTheDocument()
     })
 
     it('does not render meta when not provided', () => {
-      render(<AvatarNameLabel fullName="Ada Lovelace" />)
+      render(<AvatarNameLabel name="Ada Lovelace" />)
       expect(screen.queryByText('Senior Engineer')).not.toBeInTheDocument()
     })
 
-    it('derives initials from first and last word of fullName', () => {
-      render(<AvatarNameLabel fullName="Ada Lovelace" />)
+    it('derives initials from first and last word of name', () => {
+      render(<AvatarNameLabel name="Ada Lovelace" />)
       expect(screen.getByText('AL')).toBeInTheDocument()
     })
 
-    it('derives single initial when fullName is one word', () => {
-      render(<AvatarNameLabel fullName="Ada" />)
+    it('derives single initial when name is one word', () => {
+      render(<AvatarNameLabel name="Ada" />)
       expect(screen.getByText('A')).toBeInTheDocument()
     })
 
     it('uses provided initial over derived one', () => {
-      render(<AvatarNameLabel fullName="Ada Lovelace" initial="X" />)
+      render(<AvatarNameLabel name="Ada Lovelace" initial="X" />)
       expect(screen.getByText('X')).toBeInTheDocument()
     })
 
     it('renders slot right when children provided', () => {
       render(
-        <AvatarNameLabel fullName="Ada Lovelace">
+        <AvatarNameLabel name="Ada Lovelace">
           <span data-testid="slot-content">icon</span>
         </AvatarNameLabel>,
       )
@@ -179,27 +179,27 @@ describe('AvatarNameLabel (next)', () => {
     })
 
     it('does not render slot right when no children', () => {
-      render(<AvatarNameLabel fullName="Ada Lovelace" />)
+      render(<AvatarNameLabel name="Ada Lovelace" />)
       expect(screen.queryByTestId('slot-content')).not.toBeInTheDocument()
     })
 
     it('forwards ref', () => {
       const ref = { current: null as HTMLDivElement | null }
-      render(<AvatarNameLabel ref={ref} fullName="Ada Lovelace" />)
+      render(<AvatarNameLabel ref={ref} name="Ada Lovelace" />)
       expect(ref.current).toBeInstanceOf(HTMLDivElement)
     })
   })
 
   describe('Avatar pass-throughs', () => {
     it('renders without error when notification is passed', () => {
-      render(<AvatarNameLabel fullName="Ada" notification />)
+      render(<AvatarNameLabel name="Ada" notification />)
       expect(screen.getByText('Ada')).toBeInTheDocument()
     })
   })
 
   describe('Layout', () => {
     it('applies horizontal layout by default', () => {
-      render(<AvatarNameLabel data-testid="label" fullName="Ada Lovelace" />)
+      render(<AvatarNameLabel data-testid="label" name="Ada Lovelace" />)
       expect(screen.getByTestId('label')).toHaveAttribute(
         'data-layout',
         'horizontal',
@@ -210,7 +210,7 @@ describe('AvatarNameLabel (next)', () => {
       render(
         <AvatarNameLabel
           data-testid="label"
-          fullName="Ada Lovelace"
+          name="Ada Lovelace"
           layout="vertical"
         />,
       )
@@ -224,7 +224,7 @@ describe('AvatarNameLabel (next)', () => {
   describe('Accessibility', () => {
     it('has no accessibility violations', async () => {
       const { container } = render(
-        <AvatarNameLabel fullName="Ada Lovelace" meta="ada@example.com" />,
+        <AvatarNameLabel name="Ada Lovelace" meta="ada@example.com" />,
       )
       expect(await axe(container)).toHaveNoViolations()
     })
@@ -232,7 +232,7 @@ describe('AvatarNameLabel (next)', () => {
     it('has no accessibility violations with vertical layout', async () => {
       const { container } = render(
         <AvatarNameLabel
-          fullName="Ada Lovelace"
+          name="Ada Lovelace"
           meta="ada@example.com"
           layout="vertical"
         />,
