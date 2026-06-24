@@ -89,7 +89,7 @@
     "react-hook-form": "^7.75.0",
     "react-router-dom": "^7.15.0",
     "remark-gfm": "^4.0.1",
-    "rollup": "^4.61.1",
+    "rollup": "^4.62.1",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-preserve-directives": "^1.1.3",
