@@ -48,9 +48,26 @@ figma.connect(
         Horizontal: 'horizontal',
         Vertical: 'vertical',
       }),
+      size: figma.enum('Size', {
+        Small: 'sm',
+        Medium: 'md',
+        Large: 'lg',
+      }),
+      emphasis: figma.enum('Emphasis', {
+        High: 'high',
+        Low: 'low',
+      }),
+      notification: figma.boolean('Notification'),
     },
-    example: ({ name, meta, layout }) => (
-      <AvatarNameLabel name={name} meta={meta} layout={layout} />
+    example: ({ name, meta, layout, size, emphasis, notification }) => (
+      <AvatarNameLabel
+        name={name}
+        meta={meta}
+        layout={layout}
+        size={size}
+        emphasis={emphasis}
+        notification={notification}
+      />
     ),
   },
 )

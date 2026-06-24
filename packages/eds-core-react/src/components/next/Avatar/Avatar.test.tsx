@@ -195,6 +195,16 @@ describe('AvatarNameLabel (next)', () => {
       render(<AvatarNameLabel name="Ada" notification />)
       expect(screen.getByText('Ada')).toBeInTheDocument()
     })
+
+    it('renders with size prop', () => {
+      render(<AvatarNameLabel name="Ada" size="sm" />)
+      expect(screen.getByText('Ada')).toBeInTheDocument()
+    })
+
+    it('renders with emphasis prop', () => {
+      render(<AvatarNameLabel name="Ada" emphasis="high" />)
+      expect(screen.getByText('Ada')).toBeInTheDocument()
+    })
   })
 
   describe('Layout', () => {
