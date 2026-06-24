@@ -4,8 +4,8 @@ import type { AvatarEmphasis, AvatarSize } from './Avatar.types'
 export type AvatarNameLabelLayout = 'horizontal' | 'vertical'
 
 export type AvatarNameLabelProps = {
-  /** Full name displayed as the primary label */
-  fullName: string
+  /** Name of the person, displayed as the primary label. Also auto-derives the avatar initial. */
+  name: string
   /** Secondary label — email, job title, or any short metadata string */
   meta?: string
   /**
@@ -20,8 +20,12 @@ export type AvatarNameLabelProps = {
    * to the orientation of the containing list, not the internal text direction.
    */
   layout?: AvatarNameLabelLayout
-  /** Override the initial shown in the avatar (defaults to first letter of fullName) */
+  /** Override the initial shown in the avatar (defaults to first letter of name) */
   initial?: string
+  /** Profile photo URL. When provided, renders a circular photo instead of initials. */
+  src?: string
+  /** Alt text for the photo. Falls back to `name` if not provided. */
+  alt?: string
   /** Size of the avatar */
   size?: AvatarSize
   /** Colour emphasis of the avatar */
