@@ -58,8 +58,17 @@ figma.connect(
         Low: 'low',
       }),
       notification: figma.boolean('Notification'),
+      isPhoto: figma.enum('Variant', { Photo: true }),
     },
-    example: ({ name, meta, layout, size, emphasis, notification }) => (
+    example: ({
+      name,
+      meta,
+      layout,
+      size,
+      emphasis,
+      notification,
+      isPhoto,
+    }) => (
       <AvatarNameLabel
         name={name}
         meta={meta}
@@ -67,6 +76,7 @@ figma.connect(
         size={size}
         emphasis={emphasis}
         notification={notification}
+        src={isPhoto ? 'https://i.pravatar.cc/150' : undefined}
       />
     ),
   },
