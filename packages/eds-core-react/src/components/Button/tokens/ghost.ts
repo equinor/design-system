@@ -19,7 +19,7 @@ const {
   },
 } = tokens
 
-export const primary: ButtonToken = mergeDeepRight(button, {
+export const primary = mergeDeepRight(button, {
   typography: {
     color: primaryColor,
   },
@@ -37,7 +37,7 @@ export const primary: ButtonToken = mergeDeepRight(button, {
       },
     },
   },
-})
+}) as ButtonToken
 
 export const secondary = mergeDeepRight(primary, {
   typography: {
