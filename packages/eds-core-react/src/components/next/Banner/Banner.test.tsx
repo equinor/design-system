@@ -294,10 +294,7 @@ describe('Banner (next)', () => {
           <Banner.Message>Test</Banner.Message>
         </Banner>,
       )
-      expect(screen.getByTestId('icon')).toHaveClass(
-        'eds-banner__icon',
-        'custom-icon',
-      )
+      expect(screen.getByTestId('icon')).toHaveClass('icon', 'custom-icon')
     })
 
     it('merges className on Banner.Message', () => {
@@ -308,10 +305,7 @@ describe('Banner (next)', () => {
           </Banner.Message>
         </Banner>,
       )
-      expect(screen.getByTestId('msg')).toHaveClass(
-        'eds-banner__message',
-        'custom-msg',
-      )
+      expect(screen.getByTestId('msg')).toHaveClass('message', 'custom-msg')
     })
 
     it('merges className on Banner.Actions', () => {
@@ -324,7 +318,7 @@ describe('Banner (next)', () => {
         </Banner>,
       )
       expect(screen.getByTestId('actions')).toHaveClass(
-        'eds-banner__actions',
+        'actions',
         'custom-actions',
       )
     })
