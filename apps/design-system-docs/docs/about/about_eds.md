@@ -56,6 +56,16 @@ EDS provides everything you need to build consistent, accessible interfaces:
 
 Start building immediately with tools designed for your workflow.
 
+## Versioning
+
+"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, alongside the stable EDS 1 components.
+
+When EDS 2.0 stabilises, the components move out of `/next` and EDS 1 is deprecated. Because removing EDS 1 is a breaking change, the package bumps to `eds-core-react@3.0.0`.
+
+:::info
+The numbers line up by coincidence: "2.0" is the design system name, and "3.0.0" is the semver consequence of removing EDS 1. There is no "EDS 3.0" — the package version and the design system name are separate things.
+:::
+
 ## Support & Community
 
 Visit our [Support page](../support/support.md) for help channels, office hours, and direct access to our team.
