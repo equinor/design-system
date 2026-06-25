@@ -68,7 +68,7 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
   "release-type": "node",
   "package-name": "@equinor/eds-core-react",
   "component": "eds-core-react",
-  "exclude-paths": ["src/components/next"]
+  "exclude-paths": ["packages/eds-core-react/src/components/next"]
 }
 ```
 
@@ -100,6 +100,8 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 ### Exclude Paths
 
 All packages use `exclude-paths` to prevent non-publishable files from triggering version bumps. This includes config files, test files, Storybook, documentation, and build tooling.
+
+**Paths are resolved relative to the repository root**, not to the package directory, and matched as directory prefixes (release-please checks that a file path starts with `<exclude-path>/`). Always write the full path including the package prefix — e.g. `packages/eds-core-react/src/components/next`, **not** `src/components/next`. A package-relative entry silently matches nothing, which previously let `/next`-only commits leak into the stable `eds-core-react` release.
 
 **Important limitation:** `exclude-paths` only filters file-path-based detection. If a commit has a **scope that matches a package's `component` name** (e.g. `feat(eds-core-react): ...`), it will trigger a release for that package regardless of `exclude-paths`. To avoid this, use non-release-triggering types (`chore`, `build`, `ci`, `test`) for commits that only touch excluded files. See `documentation/how-to/CONVENTIONAL_COMMITS.md` for guidance.
 
