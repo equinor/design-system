@@ -89,8 +89,8 @@
         }
       }
 
-      & .eds-adornment__text,
-      & .eds-adornment__adornment,
+      & .text,
+      & .item,
       & .eds-error-icon {
         color: var(--eds-color-text-disabled);
       }
@@ -107,8 +107,8 @@
         -webkit-text-fill-color: var(--_readonly-text-color);
       }
 
-      & .eds-adornment__text,
-      & .eds-adornment__adornment {
+      & .text,
+      & .item {
         color: var(--_readonly-text-color);
       }
     }
@@ -161,38 +161,38 @@
     align-items: center;
 
     color: var(--eds-color-text-subtle);
-  }
 
-  /* Adornment icons and buttons */
-  .eds-adornment__adornment {
-    display: flex;
-    align-items: center;
-  }
+    /* Adornment icons and buttons */
+    & .item {
+      display: flex;
+      align-items: center;
 
-  /* Prevent button from expanding Input (Button size="small" is 24px, Input needs 20px) */
-  .eds-adornment__adornment:has(button) {
-    block-size: var(--eds-typography-ui-body-md-line-height-default);
-  }
+      /* Prevent button from expanding Input (Button size="small" is 24px, Input needs 20px) */
+      &:has(button) {
+        block-size: var(--eds-typography-ui-body-md-line-height-default);
+      }
 
-  /* Make button fit the 20px space to match Input content height */
-  .eds-adornment__adornment button {
-    inline-size: var(--eds-typography-ui-body-md-line-height-default);
-    block-size: var(--eds-typography-ui-body-md-line-height-default);
-    padding: 0;
+      /* Make button fit the 20px space to match Input content height */
+      & button {
+        inline-size: var(--eds-typography-ui-body-md-line-height-default);
+        block-size: var(--eds-typography-ui-body-md-line-height-default);
+        padding: 0;
+      }
+    }
   }
 
   /* Negative margin aligns buttons with icon adornments
      Applied to wrapper to avoid [data-font-family] margin override */
 
   /* End adornment */
-  .eds-input ~ .eds-adornment .eds-adornment__adornment:has(button) {
+  .eds-input ~ .eds-adornment .item:has(button) {
     margin-inline-end: calc(
       (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
     );
   }
 
   /* Start adornment */
-  .eds-adornment:has(~ .eds-input) .eds-adornment__adornment:has(button) {
+  .eds-adornment:has(~ .eds-input) .item:has(button) {
     margin-inline-start: calc(
       (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
     );

@@ -58,7 +58,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           <div className="eds-adornment" data-color-appearance="neutral">
             {startText && (
               <span
-                className="eds-adornment__text"
+                className="text"
                 data-font-family="ui"
                 data-font-size="xs"
                 data-baseline="center"
@@ -67,7 +67,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
               </span>
             )}
             {startAdornment && (
-              <span className="eds-adornment__adornment" data-font-size="xs">
+              <span className="item" data-font-size="xs">
                 {startAdornment}
               </span>
             )}
@@ -92,7 +92,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           <div className="eds-adornment" data-color-appearance="neutral">
             {endText && (
               <span
-                className="eds-adornment__text"
+                className="text"
                 data-font-family="ui"
                 data-font-size="xs"
                 data-baseline="center"
@@ -101,7 +101,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
               </span>
             )}
             {endAdornment && (
-              <span className="eds-adornment__adornment" data-font-size="xs">
+              <span className="item" data-font-size="xs">
                 {endAdornment}
               </span>
             )}
