@@ -29,9 +29,9 @@ export const TextField = forwardRef<
     useFieldIds(providedId)
 
   return (
-    <Field disabled={disabled}>
+    <Field disabled={disabled} className="eds-text-field">
       {label && (
-        <div className="eds-text-field__header">
+        <div className="header">
           <Field.Label htmlFor={inputId} indicator={indicator}>
             {label}
           </Field.Label>
@@ -43,7 +43,7 @@ export const TextField = forwardRef<
                 round
                 size="small"
                 tone="neutral"
-                className="eds-text-field__info"
+                className="info"
                 aria-label="More information"
               >
                 <Icon data={info_circle} size="xs" />
