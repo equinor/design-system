@@ -164,8 +164,8 @@ describe('Input (Next EDS 2.0)', () => {
     it('Text has text class', () => {
       const { container } = render(<Input startText="NOK" endText="kg" />)
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      const startText = container.querySelector('.eds-adornment__text')
-      const endText = container.querySelectorAll('.eds-adornment__text')[1]
+      const startText = container.querySelector('.text')
+      const endText = container.querySelectorAll('.text')[1]
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
       expect(startText).toBeInTheDocument()
       expect(endText).toBeInTheDocument()
@@ -179,12 +179,8 @@ describe('Input (Next EDS 2.0)', () => {
         />,
       )
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      const startAdornment = container.querySelector(
-        '.eds-adornment__adornment',
-      )
-      const endAdornment = container.querySelectorAll(
-        '.eds-adornment__adornment',
-      )[1]
+      const startAdornment = container.querySelector('.item')
+      const endAdornment = container.querySelectorAll('.item')[1]
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
       expect(startAdornment).toBeInTheDocument()
       expect(endAdornment).toBeInTheDocument()
