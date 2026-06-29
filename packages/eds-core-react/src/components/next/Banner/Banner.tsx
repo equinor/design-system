@@ -14,7 +14,7 @@ const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
     return (
       <span
         ref={ref}
-        className={['eds-banner__icon', className].filter(Boolean).join(' ')}
+        className={['icon', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
@@ -28,7 +28,7 @@ const BannerMessage = forwardRef<HTMLParagraphElement, BannerMessageProps>(
     return (
       <p
         ref={ref}
-        className={['eds-banner__message', className].filter(Boolean).join(' ')}
+        className={['message', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
@@ -45,7 +45,7 @@ const BannerActions = forwardRef<HTMLDivElement, BannerActionsProps>(
     return (
       <div
         ref={ref}
-        className={['eds-banner__actions', className].filter(Boolean).join(' ')}
+        className={['actions', className].filter(Boolean).join(' ')}
         data-placement={placement}
         {...rest}
       >
@@ -73,7 +73,7 @@ const BannerComponent = forwardRef<HTMLDivElement, BannerProps>(function Banner(
           variant="ghost"
           icon
           size="small"
-          className="eds-banner__dismiss"
+          className="dismiss"
           aria-label="Dismiss"
           onClick={onDismiss}
         >
