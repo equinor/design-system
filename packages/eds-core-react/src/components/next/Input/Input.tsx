@@ -31,7 +31,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
 
     return (
       <div
-        className={['eds-input-container', className].filter(Boolean).join(' ')}
+        className={['eds-input', className].filter(Boolean).join(' ')}
         style={style}
         data-color-appearance={tone}
         data-font-size="md"
@@ -75,7 +75,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={Component === 'textarea' ? undefined : type}
           disabled={disabled}
           readOnly={readOnly}
-          className="input"
+          className="control"
           data-color-appearance="neutral"
           data-font-family="ui"
           data-font-size="md"

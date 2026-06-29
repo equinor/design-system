@@ -64,9 +64,10 @@ describe('Input (Next EDS 2.0)', () => {
       const input = screen.getByDisplayValue('textfield')
       // eslint-disable-next-line testing-library/no-node-access
       const container = input.parentElement
+      expect(container).toHaveClass('eds-input')
       expect(container).toHaveClass('custom-class')
       expect(container).toHaveStyle({ marginTop: '8px' })
-      expect(input).toHaveClass('input')
+      expect(input).toHaveClass('control')
       expect(input).not.toHaveClass('custom-class')
     })
   })
@@ -271,14 +272,14 @@ describe('Input (Next EDS 2.0)', () => {
       it('Applies base class and custom className to the root container', () => {
         render(<Input className="test-class" />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input-container')
+        expect(wrapper).toHaveClass('eds-input')
         expect(wrapper).toHaveClass('test-class')
       })
 
       it('Applies input class to the inner input element', () => {
         render(<Input value="test" readOnly />)
         const input = screen.getByDisplayValue('test')
-        expect(input).toHaveClass('input')
+        expect(input).toHaveClass('control')
       })
 
       it('Applies disabled data attribute when disabled', () => {
