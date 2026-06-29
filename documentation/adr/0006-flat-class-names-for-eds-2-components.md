@@ -6,15 +6,17 @@
 
 ## Context
 
-[ADR 0002](0002-use-vanilla-css-with-design-tokens-for-eds-2.md) established vanilla CSS with design tokens as the styling approach for EDS 2.0 and mentioned "BEM-inspired naming" as the class naming convention. Early components (Radio, Checkbox, Input, Field, Switch, TextField, Banner) were built following BEM, resulting in class names like `.eds-field__label`, `.eds-radio__icon-wrapper`, and `.eds-checkbox--standalone`.
+The architectural direction for EDS 2.0 was established in [discussion #4639](https://github.com/equinor/design-system/discussions/4639), which argued that modern CSS features (nesting, `@layer`, `:has()`, custom properties) replace the workarounds that methodologies like BEM were built to provide. One of its conclusions was: **one root selector, nesting for everything else** — with BEM explicitly removed from the Stylelint config.
 
-As more components were built and the component architecture matured, the BEM approach showed practical drawbacks:
+[ADR 0002](0002-use-vanilla-css-with-design-tokens-for-eds-2.md) codified the move to vanilla CSS but retained "BEM-inspired naming" as a placeholder. Early components (Radio, Checkbox, Input, Field, Switch, TextField, Banner) were built before the convention fully settled, resulting in class names like `.eds-field__label`, `.eds-radio__icon-wrapper`, and `.eds-checkbox--standalone`.
+
+As more components were built and the architecture matured, the BEM approach showed practical drawbacks:
 
 - **Verbose class names** — `.eds-radio__icon--checked` adds noise in the DOM with little benefit when CSS nesting already provides scoping.
 - **Modifier classes duplicate data attributes** — EDS 2.0 already uses `data-*` attributes for variants and states (e.g., `data-variant`, `data-disabled`). BEM modifiers like `--standalone` or `--checked` created a parallel, inconsistent state-signalling system.
 - **Cross-component leakage** — Components that composed Field (Radio, Checkbox, Switch) reached into Field's internals via `.eds-field__label`, creating brittle selector coupling across component boundaries.
 
-Newer components (Button, Chip, Badge, Avatar) were built with a simpler flat approach and proved easier to read, maintain, and style.
+Newer components (Button, Chip, Badge, Avatar) were built following the flat approach from discussion #4639 and proved easier to read, maintain, and style.
 
 ## Decision Drivers
 
@@ -44,11 +46,14 @@ Continue with `.eds-{component}__{element}--{modifier}` naming.
 
 `eds-`-prefixed root class only. Inner elements use short, descriptive flat names scoped by CSS nesting. Modifiers/variants use `data-*` attributes.
 
+This approach is aligned with [CUBE CSS blocks](https://cube.fyi/block.html#no-formal-element-syntax), which explicitly avoids formal element syntax: the parent block class provides the namespace, so inner selectors can be simple (`.icon-wrapper`, `label`, `img`) without encoding hierarchy in their names.
+
 **Pros:**
 
 - Clean, readable DOM — `<span class="icon-wrapper">` instead of `<span class="eds-radio__icon-wrapper">`
 - Consistent with the existing `data-*` attribute convention for variants
 - CSS nesting provides scoping without encoding hierarchy in the name
+- Aligns with the architectural direction set in [discussion #4639](https://github.com/equinor/design-system/discussions/4639)
 
 **Cons:**
 
@@ -110,6 +115,8 @@ We will use **flat class names scoped by CSS nesting** for all EDS 2.0 `/next` c
 
 ## Related
 
+- [Discussion #4639 — Designing with CSS, not around it](https://github.com/equinor/design-system/discussions/4639) — architectural direction that established "one root selector, nesting for everything else" and removed BEM from the Stylelint config
+- [CUBE CSS — Block: No formal element syntax](https://cube.fyi/block.html#no-formal-element-syntax) — the methodology whose block convention this approach is inspired by
 - [ADR 0002](0002-use-vanilla-css-with-design-tokens-for-eds-2.md) — establishes vanilla CSS; this ADR supersedes the BEM-naming section
 - [ADR 0004](0004-component-conventions-for-eds-2.md) — `data-*` attributes for variants and density
 - [GitHub issue #5104](https://github.com/equinor/design-system/issues/5104) — migration of existing BEM components
