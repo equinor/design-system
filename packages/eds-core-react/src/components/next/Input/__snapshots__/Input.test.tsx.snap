@@ -11,7 +11,7 @@ exports[`Input (Next EDS 2.0) Matches snapshot 1`] = `
     data-space-proportions="squished"
   >
     <input
-      class="eds-input"
+      class="input"
       data-color-appearance="neutral"
       data-font-family="ui"
       data-font-size="md"

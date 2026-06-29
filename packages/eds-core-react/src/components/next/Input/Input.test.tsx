@@ -66,6 +66,7 @@ describe('Input (Next EDS 2.0)', () => {
       const container = input.parentElement
       expect(container).toHaveClass('custom-class')
       expect(container).toHaveStyle({ marginTop: '8px' })
+      expect(input).toHaveClass('input')
       expect(input).not.toHaveClass('custom-class')
     })
   })
@@ -100,7 +101,7 @@ describe('Input (Next EDS 2.0)', () => {
     it('Shows error icon when invalid by default', () => {
       const { container } = render(<Input invalid aria-label="Invalid input" />)
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).toBeInTheDocument()
     })
 
@@ -109,7 +110,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid hideErrorIcon aria-label="Invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
 
@@ -118,7 +119,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid disabled aria-label="Disabled invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
 
@@ -127,7 +128,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid readOnly aria-label="ReadOnly invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
   })
@@ -277,7 +278,7 @@ describe('Input (Next EDS 2.0)', () => {
       it('Applies input class to the inner input element', () => {
         render(<Input value="test" readOnly />)
         const input = screen.getByDisplayValue('test')
-        expect(input).toHaveClass('eds-input')
+        expect(input).toHaveClass('input')
       })
 
       it('Applies disabled data attribute when disabled', () => {
