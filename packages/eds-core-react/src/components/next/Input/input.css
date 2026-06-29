@@ -1,6 +1,6 @@
 @layer eds-components {
   /* Container */
-  .eds-input-container {
+  .eds-input {
     /* Temporary alias until proper input background token is available */
     --_bg-input: var(--eds-color-bg-canvas);
 
@@ -37,7 +37,7 @@
     &:hover:not([data-disabled], [data-readonly]) {
       outline-color: var(--eds-color-border-strong);
 
-      & .input {
+      & .control {
         color: var(--eds-color-text-strong);
 
         /* Safari autofill override */
@@ -77,7 +77,7 @@
       cursor: not-allowed;
       outline-color: transparent;
 
-      & .input {
+      & .control {
         cursor: not-allowed;
         color: var(--eds-color-text-disabled);
         opacity: 1;
@@ -104,7 +104,7 @@
     &[data-readonly] {
       outline-color: transparent;
 
-      & .input {
+      & .control {
         color: var(--_readonly-text-color);
 
         /* Safari autofill override */
@@ -118,7 +118,7 @@
     }
 
     /* Input/Textarea element */
-    & .input {
+    & .control {
       --_placeholder-text-color: var(--eds-color-text-subtle);
 
       resize: none;
@@ -183,14 +183,14 @@
        Applied to wrapper to avoid [data-font-family] margin override */
 
     /* End adornment */
-    & .input ~ .adornment .item:has(button) {
+    & .control ~ .adornment .item:has(button) {
       margin-inline-end: calc(
         (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
       );
     }
 
     /* Start adornment */
-    & .adornment:has(~ .input) .item:has(button) {
+    & .adornment:has(~ .control) .item:has(button) {
       margin-inline-start: calc(
         (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
       );

@@ -29,7 +29,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const hasStartAdornment = startText || startAdornment
     const hasEndAdornment = endText || endAdornment
 
-    const containerClasses = ['eds-input-container', containerClassName]
+    const containerClasses = ['eds-input', containerClassName]
       .filter(Boolean)
       .join(' ')
 
@@ -78,7 +78,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={Component === 'textarea' ? undefined : type}
           disabled={disabled}
           readOnly={readOnly}
-          className={['input', className].filter(Boolean).join(' ')}
+          className={['control', className].filter(Boolean).join(' ')}
           data-color-appearance="neutral"
           data-font-family="ui"
           data-font-size="md"
