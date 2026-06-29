@@ -65,7 +65,7 @@ describe('Input (Next EDS 2.0)', () => {
     it('Can be extended with className on input element', () => {
       render(<Input value="textfield" className="input-class" readOnly />)
       const input = screen.getByDisplayValue('textfield')
-      expect(input).toHaveClass('input')
+      expect(input).toHaveClass('control')
       expect(input).toHaveClass('input-class')
     })
   })
@@ -270,14 +270,14 @@ describe('Input (Next EDS 2.0)', () => {
       it('Applies base class and custom containerClassName', () => {
         render(<Input containerClassName="test-class" />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input-container')
+        expect(wrapper).toHaveClass('eds-input')
         expect(wrapper).toHaveClass('test-class')
       })
 
       it('Applies input class to input element', () => {
         render(<Input value="test" readOnly />)
         const input = screen.getByDisplayValue('test')
-        expect(input).toHaveClass('input')
+        expect(input).toHaveClass('control')
       })
 
       it('Applies disabled data attribute when disabled', () => {

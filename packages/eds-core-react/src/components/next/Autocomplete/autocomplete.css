@@ -27,7 +27,7 @@
     }
 
     /* Square connecting corners, suppress focus ring, and use medium border when dropdown is open */
-    &:has(input[aria-expanded='true']) .eds-input-container {
+    &:has(input[aria-expanded='true']) .eds-input {
       border-end-start-radius: 0;
       border-end-end-radius: 0;
       outline-color: var(--eds-color-border-medium);

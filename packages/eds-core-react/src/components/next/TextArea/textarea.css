@@ -15,12 +15,12 @@
       }
     }
 
-    & .eds-input-container {
+    & .eds-input {
       overflow: hidden;
       align-items: flex-start;
       padding-block: var(--eds-container-space-vertical);
 
-      & textarea.eds-input {
+      & textarea.control {
         resize: vertical;
 
         overflow: auto;
@@ -51,7 +51,7 @@
 /* Must be outside @layer: [data-font-family] { margin: 0 } in variables.css
    is unlayered and overrides any margin inside @layer eds-components. */
 .eds-text-area {
-  & .eds-error-icon {
+  & .error-icon {
     margin-block-start: var(--eds-spacing-vertical-2xs);
   }
 
@@ -60,7 +60,7 @@
   }
 
   /* Extend textarea to bottom-right corner so the resize handle sits flush. */
-  & textarea.eds-input {
+  & textarea.control {
     margin-block-end: calc(-1 * var(--eds-container-space-vertical));
     margin-inline-end: calc(-1 * var(--eds-selectable-space-horizontal));
   }
