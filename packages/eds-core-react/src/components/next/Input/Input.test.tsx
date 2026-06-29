@@ -65,7 +65,7 @@ describe('Input (Next EDS 2.0)', () => {
     it('Can be extended with className on input element', () => {
       render(<Input value="textfield" className="input-class" readOnly />)
       const input = screen.getByDisplayValue('textfield')
-      expect(input).toHaveClass('eds-input')
+      expect(input).toHaveClass('input')
       expect(input).toHaveClass('input-class')
     })
   })
@@ -100,7 +100,7 @@ describe('Input (Next EDS 2.0)', () => {
     it('Shows error icon when invalid by default', () => {
       const { container } = render(<Input invalid aria-label="Invalid input" />)
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).toBeInTheDocument()
     })
 
@@ -109,7 +109,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid hideErrorIcon aria-label="Invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
 
@@ -118,7 +118,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid disabled aria-label="Disabled invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
 
@@ -127,7 +127,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid readOnly aria-label="ReadOnly invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
   })
@@ -277,7 +277,7 @@ describe('Input (Next EDS 2.0)', () => {
       it('Applies input class to input element', () => {
         render(<Input value="test" readOnly />)
         const input = screen.getByDisplayValue('test')
-        expect(input).toHaveClass('eds-input')
+        expect(input).toHaveClass('input')
       })
 
       it('Applies disabled data attribute when disabled', () => {

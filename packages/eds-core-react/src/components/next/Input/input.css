@@ -30,10 +30,14 @@
       background-color 150ms,
       outline-color 150ms;
 
+    [data-density='comfortable'] & {
+      padding-block: var(--eds-spacing-proportions-xs-vertical);
+    }
+
     &:hover:not([data-disabled], [data-readonly]) {
       outline-color: var(--eds-color-border-strong);
 
-      & .eds-input {
+      & .input {
         color: var(--eds-color-text-strong);
 
         /* Safari autofill override */
@@ -73,7 +77,7 @@
       cursor: not-allowed;
       outline-color: transparent;
 
-      & .eds-input {
+      & .input {
         cursor: not-allowed;
         color: var(--eds-color-text-disabled);
         opacity: 1;
@@ -91,7 +95,7 @@
 
       & .text,
       & .item,
-      & .eds-error-icon {
+      & .error-icon {
         color: var(--eds-color-text-disabled);
       }
     }
@@ -100,7 +104,7 @@
     &[data-readonly] {
       outline-color: transparent;
 
-      & .eds-input {
+      & .input {
         color: var(--_readonly-text-color);
 
         /* Safari autofill override */
@@ -112,89 +116,84 @@
         color: var(--_readonly-text-color);
       }
     }
-  }
 
-  /* Comfortable density: uses XS vertical spacing for 24px height */
-  [data-density='comfortable'] .eds-input-container {
-    padding-block: var(--eds-spacing-proportions-xs-vertical);
-  }
+    /* Input/Textarea element */
+    & .input {
+      --_placeholder-text-color: var(--eds-color-text-subtle);
 
-  /* Input/Textarea element */
-  .eds-input {
-    --_placeholder-text-color: var(--eds-color-text-subtle);
+      resize: none;
 
-    resize: none;
+      overflow: hidden;
+      flex: 1;
 
-    overflow: hidden;
-    flex: 1;
+      min-inline-size: 0;
+      padding: 0;
+      border: var(--eds-sizing-stroke-none);
 
-    min-inline-size: 0;
-    padding: 0;
-    border: var(--eds-sizing-stroke-none);
+      color: var(--eds-color-text-strong);
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
-    color: var(--eds-color-text-strong);
-    text-overflow: ellipsis;
-    white-space: nowrap;
+      background: transparent;
+      outline: none;
 
-    background: transparent;
-    outline: none;
+      &::placeholder {
+        color: var(--_placeholder-text-color);
 
-    &::placeholder {
-      color: var(--_placeholder-text-color);
-
-      /* Safari autofill override */
-      -webkit-text-fill-color: var(--_placeholder-text-color);
+        /* Safari autofill override */
+        -webkit-text-fill-color: var(--_placeholder-text-color);
+      }
     }
-  }
 
-  /* Error icon */
-  .eds-error-icon {
-    flex-shrink: 0;
-    color: var(--eds-color-text-subtle);
-  }
+    /* Error icon */
+    & .error-icon {
+      flex-shrink: 0;
+      color: var(--eds-color-text-subtle);
+    }
 
-  /* Adornments container */
-  .eds-adornment {
-    display: flex;
-    flex-shrink: 0;
-    gap: var(--eds-typography-gap-horizontal);
-    align-items: center;
-
-    color: var(--eds-color-text-subtle);
-
-    /* Adornment icons and buttons */
-    & .item {
+    /* Adornments container */
+    & .adornment {
       display: flex;
+      flex-shrink: 0;
+      gap: var(--eds-typography-gap-horizontal);
       align-items: center;
 
-      /* Prevent button from expanding Input (Button size="small" is 24px, Input needs 20px) */
-      &:has(button) {
-        block-size: var(--eds-typography-ui-body-md-line-height-default);
-      }
+      color: var(--eds-color-text-subtle);
 
-      /* Make button fit the 20px space to match Input content height */
-      & button {
-        inline-size: var(--eds-typography-ui-body-md-line-height-default);
-        block-size: var(--eds-typography-ui-body-md-line-height-default);
-        padding: 0;
+      /* Adornment icons and buttons */
+      & .item {
+        display: flex;
+        align-items: center;
+
+        /* Prevent button from expanding Input (Button size="small" is 24px, Input needs 20px) */
+        &:has(button) {
+          block-size: var(--eds-typography-ui-body-md-line-height-default);
+        }
+
+        /* Make button fit the 20px space to match Input content height */
+        & button {
+          inline-size: var(--eds-typography-ui-body-md-line-height-default);
+          block-size: var(--eds-typography-ui-body-md-line-height-default);
+          padding: 0;
+        }
       }
     }
-  }
 
-  /* Negative margin aligns buttons with icon adornments
-     Applied to wrapper to avoid [data-font-family] margin override */
+    /* Negative margin aligns buttons with icon adornments
+       Applied to wrapper to avoid [data-font-family] margin override */
 
-  /* End adornment */
-  .eds-input ~ .eds-adornment .item:has(button) {
-    margin-inline-end: calc(
-      (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
-    );
-  }
+    /* End adornment */
+    & .input ~ .adornment .item:has(button) {
+      margin-inline-end: calc(
+        (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
+      );
+    }
 
-  /* Start adornment */
-  .eds-adornment:has(~ .eds-input) .item:has(button) {
-    margin-inline-start: calc(
-      (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
-    );
+    /* Start adornment */
+    & .adornment:has(~ .input) .item:has(button) {
+      margin-inline-start: calc(
+        (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
+      );
+    }
   }
 }
