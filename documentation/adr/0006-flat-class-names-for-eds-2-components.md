@@ -70,7 +70,7 @@ We will use **flat class names scoped by CSS nesting** for all EDS 2.0 `/next` c
 2. **Inner elements** — simple, descriptive flat names (e.g., `.label`, `.icon-wrapper`, `.track`). No component prefix. Scoped in CSS by nesting inside the root class.
 3. **Variants and states** — always `data-*` attributes, never modifier classes (e.g., `data-standalone`, `data-variant="primary"`, `data-disabled`).
 4. **Pseudo-private CSS variables** — component-internal variables use the `--_` prefix (e.g., `--_icon-color`).
-5. **Cross-component selectors** — target native HTML elements (e.g., `label`) rather than another component's internal class names.
+5. **Cross-component selectors** — when one component's CSS needs to style an element owned by another component, target native HTML elements (e.g., `label`) rather than the other component's internal class names. This rule is about EDS-internal coupling; consumer-facing inner elements still get flat class names (see the section below).
 
 ### Native element selectors vs flat class names
 
@@ -80,7 +80,7 @@ CUBE CSS blocks allow targeting native elements directly within the block scope 
 
 ```tsx
 // Radio.tsx — standalone variant uses data attribute, not modifier class
-<span className="eds-radio" data-standalone={true}>
+<span className="eds-radio" data-standalone>
   <input className="input" type="radio" />
   <span className="icon-wrapper">
     <Icon className="icon icon-checked" />
@@ -93,8 +93,8 @@ CUBE CSS blocks allow targeting native elements directly within the block scope 
 /* radio.css */
 @layer eds-components {
   .eds-radio {
-    & .icon-wrapper { … }
-    & .input { … }
+    & .icon-wrapper { /* … */ }
+    & .input { /* … */ }
     & .icon-checked { display: none; }
     & .icon-unchecked { display: block; }
     &:has(.input:checked) .icon-checked { display: block; }
@@ -114,7 +114,7 @@ CUBE CSS blocks allow targeting native elements directly within the block scope 
 ### Confirmation
 
 - Code reviews verify new `/next` components use flat inner class names and `data-*` attributes for variants
-- The `eds-component.md` rule file loaded by Claude Code in `.claude/rules/` references this convention
+- The `eds-component.md` rule file loaded by Claude Code in `.claude/rules/` references the flat inner class name and `data-*` convention
 - AGENTS.md documents the convention under the **CSS** section
 
 ## Related
