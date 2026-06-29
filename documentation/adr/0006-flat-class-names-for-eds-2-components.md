@@ -76,6 +76,10 @@ We will use **flat class names scoped by CSS nesting** for all EDS 2.0 `/next` c
 
 CUBE CSS blocks allow targeting native elements directly within the block scope (e.g., `& p`, `& img`) rather than adding a class to every inner element. This is fine where an element is semantically stable, unique within the component, and not something consumers need to target. However, flat class names are preferred for most inner elements because they give consumers a stable, documented surface to hook into — e.g., to apply Tailwind utilities or custom CSS. Removing a class from an inner element is a breaking change; changing an element tag is not. When in doubt, use a class.
 
+### Native element selectors vs flat class names
+
+CUBE CSS blocks allow targeting native elements directly within the block scope (e.g., `& p`, `& img`) rather than adding a class to every inner element. This is fine where an element is semantically stable, unique within the component, and not something consumers need to target. However, flat class names are preferred for most inner elements because they give consumers a stable, documented surface to hook into — e.g., to apply Tailwind utilities or custom CSS. Removing a class from an inner element is a breaking change; changing an element tag is not. When in doubt, use a class.
+
 ### Example
 
 ```tsx
