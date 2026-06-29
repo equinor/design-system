@@ -352,8 +352,8 @@ importers:
         specifier: ^3.17.1
         version: 3.17.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@react-types/shared':
-        specifier: ^3.35.0
-        version: 3.35.0(react@19.2.7)
+        specifier: ^3.36.0
+        version: 3.36.0(react@19.2.7)
       '@tanstack/react-virtual':
         specifier: 3.14.3
         version: 3.14.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -361,8 +361,8 @@ importers:
         specifier: 9.3.6
         version: 9.3.6(react@19.2.7)
       react-aria:
-        specifier: ^3.49.0
-        version: 3.49.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: ^3.50.0
+        version: 3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     devDependencies:
       '@equinor/eds-mobile-components':
         specifier: ^0.2.0
@@ -4389,8 +4389,8 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-types/shared@3.35.0':
-    resolution: {integrity: sha512-iNWvuzEwANttpQpdlu8nPBtdHb0mcCMj1ZTH//iRB5E/14IAnyRlR25rxH7pNLyzHINsPGEKnWvpwDMCT6vziQ==}
+  '@react-types/shared@3.36.0':
+    resolution: {integrity: sha512-DkP/H0C2YjjS7gZWKNqOmU8a16qHPjQNdzMwmTq9SzplM6Iw0kVMTZ0OIoe6FOgGqa+FwMsE2QbPjh/n3g/jXQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -4926,6 +4926,9 @@ packages:
 
   '@swc/helpers@0.5.21':
     resolution: {integrity: sha512-jI/VAmtdjB/RnI8GTnokyX7Ug8c+g+ffD6QRLa6XQewtnGyukKkKSk3wLTM3b5cjt1jNh9x0jfVlagdN2gDKQg==}
+
+  '@swc/helpers@0.5.23':
+    resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
 
   '@szmarczak/http-timer@5.0.1':
     resolution: {integrity: sha512-+PmQX0PiAYPMeVYe237LJAYvOMYW1j2rH5YROyS3b4CTVJum34HfRvKvAzozHAQG0TnHNdUfY9nCeUyRAs//cw==}
@@ -11123,8 +11126,8 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-aria@3.49.0:
-    resolution: {integrity: sha512-4+oK9FwJQWYhyA5zLfj/feOGY0zZbkE1muoF4gyxMroHVypjcYaRSTlJwvxph2zIlxt757KX6xIK2wJ5Aw1Kog==}
+  react-aria@3.50.0:
+    resolution: {integrity: sha512-S0Os6QZk33fzUAKu1QLT9afoUaCBt1ZNdoiq0n2YMVgKIdNIQS8zxiZ8O9hYE6QyDkHKjD6q39LQZ+qaSAIgjw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
@@ -16243,11 +16246,11 @@ snapshots:
       '@react-aria/utils': 3.34.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@react-stately/calendar': 3.10.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@react-stately/datepicker': 3.17.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@react-types/shared': 3.35.0(react@19.2.7)
+      '@react-types/shared': 3.36.0(react@19.2.7)
       '@tanstack/react-virtual': 3.13.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       downshift: 9.3.2(react@19.2.7)
       react: 19.2.7
-      react-aria: 3.49.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react-aria: 3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react-dom: 19.2.7(react@19.2.7)
       styled-components: 6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react-native@0.79.7(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
 
@@ -16925,11 +16928,11 @@ snapshots:
 
   '@internationalized/number@3.6.7':
     dependencies:
-      '@swc/helpers': 0.5.21
+      '@swc/helpers': 0.5.23
 
   '@internationalized/string@3.2.9':
     dependencies:
-      '@swc/helpers': 0.5.21
+      '@swc/helpers': 0.5.23
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -17978,7 +17981,7 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.21
       react: 19.2.7
-      react-aria: 3.49.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react-aria: 3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react-dom: 19.2.7(react@19.2.7)
       react-stately: 3.47.0(react@19.2.7)
 
@@ -18154,7 +18157,7 @@ snapshots:
       react-dom: 19.2.7(react@19.2.7)
       react-stately: 3.47.0(react@19.2.7)
 
-  '@react-types/shared@3.35.0(react@19.2.7)':
+  '@react-types/shared@3.36.0(react@19.2.7)':
     dependencies:
       react: 19.2.7
 
@@ -18761,6 +18764,10 @@ snapshots:
       tslib: 2.8.1
 
   '@swc/helpers@0.5.21':
+    dependencies:
+      tslib: 2.8.1
+
+  '@swc/helpers@0.5.23':
     dependencies:
       tslib: 2.8.1
 
@@ -26612,13 +26619,13 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-aria@3.49.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  react-aria@3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.7
       '@internationalized/string': 3.2.9
-      '@react-types/shared': 3.35.0(react@19.2.7)
-      '@swc/helpers': 0.5.21
+      '@react-types/shared': 3.36.0(react@19.2.7)
+      '@swc/helpers': 0.5.23
       aria-hidden: 1.2.6
       clsx: 2.1.1
       react: 19.2.7
@@ -26834,8 +26841,8 @@ snapshots:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.7
       '@internationalized/string': 3.2.9
-      '@react-types/shared': 3.35.0(react@19.2.7)
-      '@swc/helpers': 0.5.21
+      '@react-types/shared': 3.36.0(react@19.2.7)
+      '@swc/helpers': 0.5.23
       react: 19.2.7
       use-sync-external-store: 1.6.0(react@19.2.7)
 
