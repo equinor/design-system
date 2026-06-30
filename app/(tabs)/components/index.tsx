@@ -18,6 +18,7 @@ const sections = [
         title: "Data Display",
         data: [
             { name: "Badge", route: "badge" },
+            { name: "Divider", route: "divider" },
             { name: "Typography", route: "typography" },
         ],
     },
