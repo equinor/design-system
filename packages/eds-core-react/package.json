@@ -75,7 +75,7 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "babel-plugin-styled-components": "^2.3.0",
-    "browserslist": "^4.28.2",
+    "browserslist": "^4.28.4",
     "eslint-plugin-storybook": "10.4.6",
     "lightningcss": "^1.32.0",
     "jest": "^30.4.2",
