@@ -15,4 +15,5 @@ This file is intentionally short. It only highlights what's easy to forget when 
 - **WCAG 2.1 AA** is non-negotiable — `jest-axe` test in every component
 - **Use `--eds-*` design tokens** — never hardcode hex values
 - **Variants and states via `data-*` attributes**, not modifier classes
+- **Flat inner class names** — one `eds-`-prefixed root class; inner elements use simple flat names (`.label`, `.icon-wrapper`) scoped by CSS nesting. No BEM `__` element or `--` modifier syntax.
 - **Test queries**: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
