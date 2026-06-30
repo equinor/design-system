@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.3.0](https://github.com/equinor/design-system-mobile/compare/mobile-storybook-v0.2.0...mobile-storybook-v0.3.0) (2026-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** upgrade Expo SDK 53 → 55 ([#202](https://github.com/equinor/design-system-mobile/issues/202))
+
+### Features
+
+* **components:** add Badge component ([#190](https://github.com/equinor/design-system-mobile/issues/190)) ([6c18b76](https://github.com/equinor/design-system-mobile/commit/6c18b76f45d6b4c60e3f6f542900ecbb092fd4df))
+* **components:** implement Divider component ([#207](https://github.com/equinor/design-system-mobile/issues/207)) ([069e07d](https://github.com/equinor/design-system-mobile/commit/069e07d4080644cae25e5b20672e1985a4e96c35))
+* **components:** implement Link component ([#188](https://github.com/equinor/design-system-mobile/issues/188)) ([b0b3a6d](https://github.com/equinor/design-system-mobile/commit/b0b3a6df520fc91c491b48a87bc9387ecc1e5208))
+* **components:** implement TextArea component ([#204](https://github.com/equinor/design-system-mobile/issues/204)) ([4fe04dc](https://github.com/equinor/design-system-mobile/commit/4fe04dc59d4d13c64e9a074def49989bc8f838a1)), closes [#131](https://github.com/equinor/design-system-mobile/issues/131)
+* **components:** implement TextField component ([#195](https://github.com/equinor/design-system-mobile/issues/195)) ([2701d5b](https://github.com/equinor/design-system-mobile/commit/2701d5be4013a23917cb3e975adf192de35bea0e))
+* **components:** migrate Search component ([#206](https://github.com/equinor/design-system-mobile/issues/206)) ([606dedb](https://github.com/equinor/design-system-mobile/commit/606dedb7319a50439216bf72ed3bc94eb89115a9))
+
+
+### Bug Fixes
+
+* **ci:** fix iOS release workflow provisioning profile and build number ([#197](https://github.com/equinor/design-system-mobile/issues/197)) ([5ed8c9a](https://github.com/equinor/design-system-mobile/commit/5ed8c9ad036206666771c5b2c2a8923b1397ffcf))
+* **components:** adopt nested typography token shape from @equinor/eds-tokens@2.3.0-beta.3 ([#180](https://github.com/equinor/design-system-mobile/issues/180)) ([02e82bd](https://github.com/equinor/design-system-mobile/commit/02e82bd1ef8f20ae24807b0e0306f1af867d61d4))
+* **components:** read-only Input allows copy; disabled blocks all interaction ([#200](https://github.com/equinor/design-system-mobile/issues/200)) ([cec811f](https://github.com/equinor/design-system-mobile/commit/cec811f96be8ae30a518ad1cf4a1bcbd3ee578c3))
+* **storybook:** Components header title not theme-aware in dark mode ([#210](https://github.com/equinor/design-system-mobile/issues/210)) ([432242f](https://github.com/equinor/design-system-mobile/commit/432242f7c1b55160ce85631dc00c10ccb34f0e6d))
+
+
+### Miscellaneous Chores
+
+* **deps:** upgrade Expo SDK 53 → 55 ([#202](https://github.com/equinor/design-system-mobile/issues/202)) ([7eaef66](https://github.com/equinor/design-system-mobile/commit/7eaef66f61aceb179add912800bf745f68e19fe9)), closes [#196](https://github.com/equinor/design-system-mobile/issues/196)
+
 ## [0.2.0](https://github.com/equinor/design-system-mobile/compare/mobile-storybook-v0.1.0...mobile-storybook-v0.2.0) (2026-05-11)
 
 
