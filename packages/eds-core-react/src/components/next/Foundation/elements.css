@@ -370,7 +370,7 @@
   .eds-elements :where(input):not(
     [type='checkbox'], [type='radio'],
     [type='range'], [type='color'], [type='file'], [type='image'],
-    [type='submit'], [type='reset'], [type='button'], .eds-input
+    [type='submit'], [type='reset'], [type='button'], .control
   ) {
     --_bg-color: var(--eds-color-bg-input);
 
