@@ -25,7 +25,7 @@ export default tseslint.config(
     {
         // Unmigrated Slice 2–4 components are excluded from tsc during the migration window.
         // Type-checked lint rules are disabled here to match — remove each entry as the component is migrated.
-        // Keep in sync with the exclude list in tsconfig.json.
+        // Keep in sync with the exclude list in tsconfig.json and the testPathIgnorePatterns list in jest.config.cjs.
         files: [
             "src/components/Accordion/**",
             "src/components/Autocomplete/**",
@@ -37,7 +37,6 @@ export default tseslint.config(
             "src/components/Popover/**",
             "src/components/Progress/**",
             "src/components/ProgressIndicator/**",
-            "src/components/Search/**",
             "src/components/Select/**",
             "src/components/Spacer/**",
             "src/components/Tabs/**",
@@ -52,5 +51,6 @@ export default tseslint.config(
         "**/__tests__/**",
         "**/tsup.config.ts",
         "eslint.config.js",
+        "jest.config.cjs",
     ])
 );
