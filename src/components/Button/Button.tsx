@@ -61,8 +61,8 @@ export const Button: FC<ButtonProps> = ({
             disabled={disabled}
             {...pressableProps}
             accessibilityState={{
-                disabled: disabled ?? false,
                 ...pressableProps.accessibilityState,
+                disabled: disabled ?? false,
             }}
         >
             {(pressedEvent) => (

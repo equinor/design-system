@@ -157,7 +157,7 @@ export const TextArea = ({
                                 .filter(Boolean)
                                 .join(". ") || undefined)
                         }
-                        accessibilityState={{ disabled, ...userAccessibilityState }}
+                        accessibilityState={{ ...userAccessibilityState, disabled }}
                         style={[styles.textInput, userStyle]}
                         {...rest}
                     />
