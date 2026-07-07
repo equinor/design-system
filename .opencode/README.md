@@ -53,6 +53,7 @@ Primary agents are selectable by the user and run as the main conversation agent
 |-------|-------------|-------|
 | `build` | Development agent with EDS conventions | All (asks for git commit/push/branch) |
 | `advisor` | Read-only architectural advice and code reviews | Read-only (no write/edit/bash) |
+| `tokens-studio` | Tokens Studio pipeline assistant (studio CLI, pull, exports, config) | All (asks for git commit/push/branch, gh, and remote-mutating studio commands) |
 
 ### Sub-Agents
 
@@ -214,7 +215,8 @@ Refer to AGENTS.md for full conventions.
 │   ├── figma-component.md  # Sub-agent: Figma-to-code
 │   ├── accessibility-audit.md  # Sub-agent: A11y auditor
 │   ├── component-doc.md    # Sub-agent: Documentation
-│   └── audit-harnesses.md  # Sub-agent: Harness auditor
+│   ├── audit-harnesses.md  # Sub-agent: Harness auditor
+│   └── tokens-studio.md    # Primary: Tokens Studio pipeline assistant
 ```
 
 ## Best Practices
