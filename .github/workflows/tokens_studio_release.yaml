@@ -1,0 +1,22 @@
+name: Tokens Studio release
+# Triggered by the outbound CI trigger in Tokens Studio (Integrations →
+# CI Triggers). Studio sends a repository_dispatch event with this event
+# type when a release is created. Note: repository_dispatch only triggers
+# workflows on the default branch.
+on:
+  repository_dispatch:
+    types: [tokens-release]
+jobs:
+  handle-release:
+    name: Handle Tokens Studio release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Log release payload
+        env:
+          EVENT_TYPE: ${{ github.event.action }}
+          CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: |
+          echo "Received repository_dispatch event: $EVENT_TYPE"
+          echo "$CLIENT_PAYLOAD" | jq .
