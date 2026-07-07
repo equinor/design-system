@@ -10,6 +10,7 @@ jobs:
   handle-release:
     name: Handle Tokens Studio release
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
     steps:
