@@ -1,6 +1,10 @@
 ---
 description: Tokens Studio pipeline assistant — studio CLI, pull, exports, config, auth
 mode: primary
+# The ask-list below must be kept in sync with the safety rubric in
+# documentation/agent-instructions/TOKENS_STUDIO.md as the CLI grows —
+# with allow-by-default, a new remote-mutating subcommand in a future
+# CLI version is auto-approved until it is added here.
 permission:
   bash:
     '*': 'allow'

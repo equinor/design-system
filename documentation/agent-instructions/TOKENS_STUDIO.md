@@ -21,7 +21,6 @@ The CLI is `@tokens-studio/studio-cli` (binary name `studio`), installed as a **
 
 - Run it from `packages/eds-tokens` via `pnpm exec studio <command>` (the binary is not on the global PATH). Package scripts get `node_modules/.bin` automatically, so `package.json` scripts can call `studio` directly.
 - The package downloads its binary in a postinstall script. pnpm 10 blocks build scripts by default, so the package must be listed under `onlyBuiltDependencies` in the repo-root `pnpm-workspace.yaml`. If the binary is missing ("Studio CLI binary not found"), check that list, then `pnpm rebuild @tokens-studio/studio-cli`.
-- npm dist-tags: `latest` plus an `rc` channel for release candidates.
 
 ## Authentication
 
