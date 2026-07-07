@@ -28,12 +28,12 @@ If you need to verify a secret file's shape, report length + first/last few char
 
 **Enforcement matrix:**
 
-| Harness        | Enforcement                                                                                |
-| -------------- | ------------------------------------------------------------------------------------------ |
-| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js`|
-| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`    |
-| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually    |
-| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                   |
+| Harness        | Enforcement                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js` |
+| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`     |
+| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually     |
+| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                    |
 
 ## Code Formatting
 
@@ -412,6 +412,10 @@ For running an accessibility audit on a deployed page or Storybook story, see [`
 
 Component docs live in `apps/design-system-docs/docs/components/{category}/{component}.md`. For writing or reviewing them — tone of voice, formatting (British English, no em-dashes, admonitions), section order, output template, Storybook iframes workflow, sidebar registration, verification checklist — see [`documentation/agent-instructions/COMPONENT_DOC_STYLE.md`](./documentation/agent-instructions/COMPONENT_DOC_STYLE.md). Harness entry points (`/create-component-doc` in Claude Code, the `structure_components_prompt` / `verify_components_prompt` in Copilot, the `component-doc` agent in OpenCode) all reference that doc.
 
+## Tokens Studio Pipeline
+
+EDS is adopting the Tokens Studio platform as the source for a new token pipeline, replacing the legacy Figma-REST sync over time. For platform concepts (organizations, projects, branches, releases), `studio` CLI setup and commands, the `.studio.json` configuration model, the safety rubric for CLI commands, and how to verify against live sources instead of answering from memory, see [`documentation/agent-instructions/TOKENS_STUDIO.md`](./documentation/agent-instructions/TOKENS_STUDIO.md). Harness entry points (`/tokens-studio` in Claude Code, the `tokens-studio` prompt in Copilot, the `tokens-studio` agent in OpenCode) all reference that doc. The legacy pipeline remains documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md).
+
 ## Conventional Commits
 
 ```
@@ -422,7 +426,7 @@ type: description
 
 **Breaking**: `feat!: remove deprecated prop`
 
-**Scope is optional and usually omitted in this repo.** Most monorepos using release-please *do* use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
+**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
 
 **When to add a scope:**
 
@@ -467,17 +471,17 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 
 This file is the canonical source. Tool-specific configs add only what's unique to that tool:
 
-| File                              | Purpose                                                    |
-| --------------------------------- | ---------------------------------------------------------- |
-| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
-| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring  |
-| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
-| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
-| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
-| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access |
+| File                              | Purpose                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------- |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings                            |
+| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring               |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                 |
+| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions              |
+| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                             |
+| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access              |
 | `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
-| `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
-| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
+| `.opencode/agent/*.md`            | OpenCode: agent definitions                                             |
+| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here                      |
 
 When adding new conventions, update **this file** and let the tool-specific files reference it.
 

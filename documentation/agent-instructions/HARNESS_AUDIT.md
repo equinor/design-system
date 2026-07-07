@@ -16,7 +16,7 @@ This is a **read-only** workflow. The agent must not edit, create, or delete fil
   - Copilot CLI specifically: `.github/hooks/*.{json,js}`
 - **OpenCode** — `.opencode/agent/*.md`, `.opencode/README.md`
 
-**Out of scope** — do not audit configs for Cursor, Cline, Aider, Continue, Windsurf, Zed, Gemini CLI, Codex, or any other harness. If a stray `.cursorrules` / `.clinerules` / `.windsurfrules` / `GEMINI.md` etc. exists, note it under *Open questions* ("found a config for an out-of-scope harness — confirm intent or delete") — do not write findings against it.
+**Out of scope** — do not audit configs for Cursor, Cline, Aider, Continue, Windsurf, Zed, Gemini CLI, Codex, or any other harness. If a stray `.cursorrules` / `.clinerules` / `.windsurfrules` / `GEMINI.md` etc. exists, note it under _Open questions_ ("found a config for an out-of-scope harness — confirm intent or delete") — do not write findings against it.
 
 **Cross-harness surfaces** (canonical, shared by all three in-scope harnesses):
 
@@ -77,26 +77,27 @@ For each finding, quote offending lines with `path:line` references.
 
 A developer must not lose access to a workflow by switching harnesses. Build a matrix:
 
-| Capability (intent)          | Claude Code            | Copilot                                  | OpenCode             |
-| ---------------------------- | ---------------------- | ---------------------------------------- | -------------------- |
-| Scaffold new EDS 2.0 component | `/new-component`     | `new-component` prompt                   | `eds-component` agent |
-| Accessibility audit          | `/accessibility-audit` | `accessibility-audit` prompt             | `accessibility-audit` agent |
-| Structure component doc      | `/create-component-doc`| `structure_components_prompt`            | `component-doc` agent |
-| Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |
-| Re-sync harnesses (this audit) | `/audit-harnesses`   | `audit-harnesses` prompt                 | `audit-harnesses` agent |
-| Read-only advisor            | `.claude/rules/advisor.md` (general scope) | (none) | `advisor` primary agent |
+| Capability (intent)            | Claude Code                                | Copilot                       | OpenCode                    |
+| ------------------------------ | ------------------------------------------ | ----------------------------- | --------------------------- |
+| Scaffold new EDS 2.0 component | `/new-component`                           | `new-component` prompt        | `eds-component` agent       |
+| Accessibility audit            | `/accessibility-audit`                     | `accessibility-audit` prompt  | `accessibility-audit` agent |
+| Structure component doc        | `/create-component-doc`                    | `structure_components_prompt` | `component-doc` agent       |
+| Verify component doc           | (covered by the same)                      | `verify_components_prompt`    | (covered by the same)       |
+| Re-sync harnesses (this audit) | `/audit-harnesses`                         | `audit-harnesses` prompt      | `audit-harnesses` agent     |
+| Tokens Studio pipeline         | `/tokens-studio`                           | `tokens-studio` prompt        | `tokens-studio` agent       |
+| Read-only advisor              | `.claude/rules/advisor.md` (general scope) | (none)                        | `advisor` primary agent     |
 
-Rows are *intent*, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
+Rows are _intent_, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
 
 ### Step 5 — Path-scoped rule consistency
 
 Check that path-scoped rules covering the same intent in different harnesses target the **same glob/path set**.
 
-| Intent           | Claude Code (`.claude/rules/`)            | Copilot (`.github/instructions/`) |
-| ---------------- | ----------------------------------------- | --------------------------------- |
-| EDS 2.0 component code | `eds-component.md` paths frontmatter | `react.instructions.md` + `ts.instructions.md` + `styling.instructions.md` `applyTo` |
-| Figma Code Connect files | `figma-component.md` paths           | `figma.instructions.md` `applyTo` |
-| Global / markdown / TS | (none)                                 | `global-coding`, `markdown`, `ts` `applyTo` |
+| Intent                   | Claude Code (`.claude/rules/`)       | Copilot (`.github/instructions/`)                                                    |
+| ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------ |
+| EDS 2.0 component code   | `eds-component.md` paths frontmatter | `react.instructions.md` + `ts.instructions.md` + `styling.instructions.md` `applyTo` |
+| Figma Code Connect files | `figma-component.md` paths           | `figma.instructions.md` `applyTo`                                                    |
+| Global / markdown / TS   | (none)                               | `global-coding`, `markdown`, `ts` `applyTo`                                          |
 
 Mismatched globs are findings. Each rule's documented scope should also still hit real files (`find` returns results).
 
@@ -177,6 +178,6 @@ _Canonical source:_ <path or "none declared">
 
 - **Read-only.** Do not edit, create, or delete files. Do not run formatters, linters, or tests. Do not commit anything.
 - **Cite, don't paraphrase.** Every finding must have a `path:line` reference and a short quote.
-- **No speculation.** If you are unsure whether something is a real divergence (e.g. you can't tell whether a harness surface is in use), put it in *Open questions*, not *Findings*.
-- **Stay in scope.** Only audit Claude Code, GitHub Copilot, and OpenCode. Other harness configs go to *Open questions*.
+- **No speculation.** If you are unsure whether something is a real divergence (e.g. you can't tell whether a harness surface is in use), put it in _Open questions_, not _Findings_.
+- **Stay in scope.** Only audit Claude Code, GitHub Copilot, and OpenCode. Other harness configs go to _Open questions_.
 - **Single output file.** Print the report to chat (or write to the path the user specifies). Do not scatter notes across multiple files.
