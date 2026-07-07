@@ -6,13 +6,7 @@ Tokens Studio (the platform at `tokens.studio`) is the successor to the Tokens S
 
 ## Relationship to the legacy pipeline
 
-The current production pipeline is documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](../how-to/TOKEN_SYSTEM_GUIDE.md) and consists of:
-
-- `packages/eds-tokens-sync` — bidirectional Figma REST API sync (`sync-figma-to-tokens` / `sync-tokens-to-figma`) keyed by Figma file keys in `packages/eds-tokens/token-config.json`
-- `packages/eds-tokens-build` — Style Dictionary generation and build scripts
-- `packages/eds-tokens` — token JSON source (`tokens/{fileKey}/`) and built CSS/JS/TS output (`build/`)
-
-The Tokens Studio pipeline replaces the **sync source** (Figma REST → Studio platform). The generation/build stages are being reworked separately. Do not assume the legacy `token-config.json` file keys, sync scripts, or JSON layout apply to Studio-pulled tokens — they are different systems that coexist during the migration.
+The current production pipeline — bidirectional Figma REST sync (`packages/eds-tokens-sync`) plus Style Dictionary generation and build (`packages/eds-tokens-build` → `packages/eds-tokens`) — is documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](../how-to/TOKEN_SYSTEM_GUIDE.md); read that guide for its details rather than restating them here. The Tokens Studio pipeline replaces the **sync source** (Figma REST → Studio platform). The generation/build stages are being reworked separately. Do not assume the legacy sync scripts, file-key configuration, or JSON layout apply to Studio-pulled tokens — they are different systems that coexist during the migration.
 
 ## Platform concepts
 
@@ -42,10 +36,10 @@ The CLI is `@tokens-studio/studio-cli` (binary name `studio`), installed as a **
 ```json
 {
   "sources": {
-    "eds-test-3": {
+    "my-tokens": {
       "project": "proj_abc123",
       "branch": "main",
-      "output": "src/tokens/eds-test-3"
+      "output": "src/tokens/my-tokens"
     }
   }
 }
@@ -53,7 +47,7 @@ The CLI is `@tokens-studio/studio-cli` (binary name `studio`), installed as a **
 
 - Sources can reference a `branch`, a `release`, or a `tag` — pin to a release for reproducible builds.
 - Pull formats are `raw` (default), `dtcg`, and `css`. **There is no TypeScript pull format** — pull raw/DTCG JSON and generate TS locally, as the existing Style Dictionary build does for `build/ts/*`.
-- `studio config show` displays the config; `studio config remove <alias>` removes a source (`--delete-files` also deletes the downloaded tokens).
+- `studio config show` displays the config; `studio config remove <alias>` (alias `rm`) removes a source from `.studio.json`. It does **not** delete already-pulled token files — clean those up manually.
 - `.studio.json` is meant to be committed for team consistency.
 
 ## Command overview
@@ -65,9 +59,11 @@ The CLI is `@tokens-studio/studio-cli` (binary name `studio`), installed as a **
 | `studio tokens watch [alias]`                     | WebSocket watch — auto-pulls when tokens change remotely                                                                                                                                                                                                              |
 | `studio exports list / show / templates / schema` | Inspect saved export configurations, preset templates, and the JSON schema per format (`--format css` etc.)                                                                                                                                                           |
 | `studio exports preview <name-or-id>`             | Render an export without saving anything (`--out` to write files, omit for a summary; `--config-file` to override)                                                                                                                                                    |
-| `studio exports create / update / duplicate`      | Create or modify a saved export configuration (`--format`, `--name`, `--template`, `--config-file`)                                                                                                                                                                   |
+| `studio exports create`                           | Create a saved export configuration — `--format` and `--name` required; `--template`, `--config-file` optional                                                                                                                                                        |
+| `studio exports update <name-or-id>`              | Modify a saved configuration: `--name` (rename), `--template`, `--config-file` (replaces the config wholesale), `--clear-config`. The format cannot be changed — create a new configuration instead                                                                   |
+| `studio exports duplicate <name-or-id>`           | Clone a configuration; its only flag is `--new-name` (defaults to `<source> (copy)`)                                                                                                                                                                                  |
 | `studio exports run <name-or-id> --out <dir>`     | Run a saved export configuration and write the output                                                                                                                                                                                                                 |
-| `studio exports delete`                           | Delete a saved export configuration — **destructive, remote**                                                                                                                                                                                                         |
+| `studio exports delete <name-or-id>`              | Delete a saved export configuration (`--force` skips the confirmation prompt) — **destructive, remote**                                                                                                                                                               |
 
 Export formats on the platform: CSS Variables, DTCG JSON, Raw JSON, and Figma Variables. Aliases: `studio pull` = `tokens pull`, `studio login`/`logout` = `auth login`/`logout`, `studio init` = `config init`. Global flags everywhere: `--json`, `--verbose`, `--host`.
 
@@ -76,8 +72,8 @@ Export formats on the platform: CSS Variables, DTCG JSON, Raw JSON, and Figma Va
 Classify every command before running it:
 
 - **Safe, run freely:** any `--help`, `studio info`, `auth status`, `config show`, `exports list/show/templates/schema`, `exports preview` (without `--out`), `tokens pull --dry-run`.
-- **Overwrites local files (fine in a clean git tree, mention it):** `tokens pull` without `--dry-run`, `exports run`/`exports preview --out`.
-- **Mutates remote state — always ask the user first:** `exports create/update/duplicate/delete`, `config remove --delete-files`, `auth logout`, and any push-like or write-scoped command that appears in future CLI versions. When in doubt, treat a command as remote-mutating until `--help` proves otherwise.
+- **Edits or overwrites local files (fine in a clean git tree, mention it):** `tokens pull` without `--dry-run`, `exports run`/`exports preview --out`, `config init/add/remove` (edit `.studio.json` only).
+- **Mutates remote state or credentials — always ask the user first:** `exports create/update/duplicate/delete`, `auth logout` (revokes and deletes stored credentials), and any push-like or write-scoped command that appears in future CLI versions. Remember the shortcut aliases (`studio logout` = `auth logout`) count too. When in doubt, treat a command as remote-mutating until `--help` proves otherwise.
 
 ## Staying current
 
@@ -105,4 +101,4 @@ studio
 └── flags       --host --json --no-color --verbose
 ```
 
-Known state in this repo at snapshot time: CLI installed as devDep in `packages/eds-tokens`, approved in `onlyBuiltDependencies`, no `.studio.json` committed yet (pipeline exploration happens on the `chore/tokens-pipeline` branch against the "EDS Test 3" project).
+Known state in this repo at snapshot time: CLI installed as a devDependency of `packages/eds-tokens` and approved in `onlyBuiltDependencies`; no `.studio.json` committed yet.

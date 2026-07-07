@@ -27,6 +27,8 @@ User-invokable prompts triggered with `/command-name`.
 | ----------------------- | ------------------------------------- | -------------------------------------------------------- |
 | `/new-component`        | `/new-component Button`               | Scaffold a new EDS 2.0 component with all required files |
 | `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation     |
+| `/accessibility-audit`  | `/accessibility-audit <url>`          | Audit a page or Storybook story against WCAG 2.1 AA      |
+| `/audit-harnesses`      | `/audit-harnesses`                    | Audit AI harness configs for drift across tools          |
 | `/tokens-studio`        | `/tokens-studio <task>`               | Tokens Studio platform / studio CLI pipeline assistant   |
 
 ## Hooks

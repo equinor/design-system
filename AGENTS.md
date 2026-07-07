@@ -28,12 +28,12 @@ If you need to verify a secret file's shape, report length + first/last few char
 
 **Enforcement matrix:**
 
-| Harness        | Enforcement                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------- |
-| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js` |
-| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`     |
-| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually     |
-| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                    |
+| Harness        | Enforcement                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js`|
+| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`    |
+| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually    |
+| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                   |
 
 ## Code Formatting
 
@@ -426,7 +426,7 @@ type: description
 
 **Breaking**: `feat!: remove deprecated prop`
 
-**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
+**Scope is optional and usually omitted in this repo.** Most monorepos using release-please *do* use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
 
 **When to add a scope:**
 
@@ -471,17 +471,17 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 
 This file is the canonical source. Tool-specific configs add only what's unique to that tool:
 
-| File                              | Purpose                                                                 |
-| --------------------------------- | ----------------------------------------------------------------------- |
-| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings                            |
-| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring               |
-| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                 |
-| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions              |
-| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                             |
-| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access              |
+| File                              | Purpose                                                    |
+| --------------------------------- | ---------------------------------------------------------- |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
+| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring  |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
+| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
+| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
+| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access |
 | `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
-| `.opencode/agent/*.md`            | OpenCode: agent definitions                                             |
-| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here                      |
+| `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
+| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
 When adding new conventions, update **this file** and let the tool-specific files reference it.
 

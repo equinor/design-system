@@ -9,7 +9,7 @@ Help with the Tokens Studio platform and `studio` CLI task described in **$ARGUM
 ## Steps
 
 1. Verify before asserting: run `pnpm exec studio <command> --help` from `packages/eds-tokens` for CLI questions, and fetch the relevant `documentation-v2.tokens.studio` page for platform questions — do not answer from memory alone.
-2. Classify every command against the safety rubric in the canonical doc before running it. Ask the user before anything that mutates remote state (`exports create/update/delete`, `config remove --delete-files`). `studio auth login` is interactive — the user runs it themselves.
+2. Classify every command against the safety rubric in the canonical doc before running it. Ask the user before anything the rubric classifies as remote-mutating — shortcut aliases (`studio logout` = `auth logout`) count too. `studio auth login` is interactive — the user runs it themselves.
 3. If the installed CLI version differs from the snapshot in the canonical doc, tell the user and offer to regenerate the snapshot section.
 
 If `$ARGUMENTS` is empty, ask what the user wants to do with Tokens Studio before proceeding.
