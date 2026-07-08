@@ -28,6 +28,12 @@
         /* Visit https://aka.ms/tsconfig to read more about this file */
 
         "rootDir": "./src",
+        // Mirrors the "test-utils" alias in jest.config.cjs's moduleNameMapper,
+        // which points at the package-root test-utils.tsx (kept outside src/
+        // so it's excluded from the build).
+        "paths": {
+            "test-utils": ["./test-utils"]
+        },
         "allowSyntheticDefaultImports": true,
         "jsx": "react-native",
         "noImplicitOverride": true,

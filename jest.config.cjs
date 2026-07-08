@@ -32,26 +32,22 @@ const testPathIgnorePatterns = [
     // Migrated components with no test file yet (issue #214). Remove each
     // entry as soon as its ComponentName.test.tsx lands — this list is a
     // checklist, not a migration-status list like the one above.
-    "<rootDir>/src/components/Badge/",
-    "<rootDir>/src/components/Button/",
-    "<rootDir>/src/components/Dialog/",
-    "<rootDir>/src/components/Divider/",
+    //
+    // Dialog, ErrorBoundary, Icon, Label, Portal, Scrim, and _internal are
+    // intentionally not on this checklist — they're internal/utility pieces
+    // covered indirectly through the components that consume them, not with
+    // dedicated test files of their own.
+    //
+    // Paper and PressableHighlight are also intentionally not on this
+    // checklist — both are slated for removal/replacement (Paper -> Card,
+    // PressableHighlight -> Pressable) once the library migration completes,
+    // so we're not adding new tests for code we're about to delete.
     "<rootDir>/src/components/EDSProvider/",
-    "<rootDir>/src/components/ErrorBoundary/",
-    "<rootDir>/src/components/Icon/",
     "<rootDir>/src/components/Input/",
-    "<rootDir>/src/components/Label/",
-    "<rootDir>/src/components/Link/",
-    "<rootDir>/src/components/Paper/",
-    "<rootDir>/src/components/Portal/",
-    "<rootDir>/src/components/PressableHighlight/",
-    "<rootDir>/src/components/Scrim/",
     "<rootDir>/src/components/Search/",
     "<rootDir>/src/components/SelectionControls/",
     "<rootDir>/src/components/TextArea/",
     "<rootDir>/src/components/TextField/",
-    "<rootDir>/src/components/Typography/",
-    "<rootDir>/src/components/_internal/",
 ];
 
 // Guard against the exact footgun these lists create: a follow-up PR adds
@@ -96,6 +92,7 @@ module.exports = {
     // changes its internal lib/ layout.
     moduleNameMapper: {
         "^react-native-worklets$": "react-native-worklets/lib/module/mock",
+        "^test-utils$": "<rootDir>/test-utils",
     },
     transformIgnorePatterns: (() => {
         const basePattern = jestExpoPreset.transformIgnorePatterns[0];

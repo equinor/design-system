@@ -1,9 +1,9 @@
 {
     "extends": "./tsconfig.json",
-    // Overrides (not merges) the parent's include — adds jest.setup.ts, which
-    // lives outside src/ so it's excluded from the build, but still needs to
-    // be lintable.
-    "include": ["src", "jest.setup.ts"],
+    // Overrides (not merges) the parent's include — adds jest.setup.ts and
+    // test-utils.tsx, which live outside src/ so they're excluded from the
+    // build, but still need to be lintable.
+    "include": ["src", "jest.setup.ts", "test-utils.tsx"],
     // Overrides (not merges) the parent's exclude — intentionally drops the
     // Slice 2–4 component dirs so ESLint can parse them. Mirror any other
     // non-migration excludes added to tsconfig.json here.
