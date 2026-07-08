@@ -30,21 +30,26 @@ The CLI is `@tokens-studio/studio-cli` (binary name `studio`), installed as a **
 
 ## Configuration (`.studio.json`)
 
-`studio config init` creates `.studio.json`; `studio config add <alias>` adds a token source (interactively, or with `--project <uuid> --branch <name> --format <fmt> --output <dir>`). The file maps aliases to sources:
+`studio config init` creates `.studio.json`; `studio config add <alias>` adds a token source (interactively, or with `--project <uuid> --branch <name> --format <fmt> --output <dir>`). The file maps aliases to sources under a `configurations` key:
 
 ```json
 {
-  "sources": {
+  "$schema": "https://tokens.studio/schema/cli",
+  "configurations": {
     "my-tokens": {
-      "project": "proj_abc123",
-      "branch": "main",
-      "output": "src/tokens/my-tokens"
+      "project": "4952a007-699a-4124-a043-124e80cc28d6",
+      "ref": {
+        "type": "branch",
+        "name": "main"
+      },
+      "output": "src/tokens/my-tokens",
+      "format": "raw"
     }
   }
 }
 ```
 
-- Sources can reference a `branch`, a `release`, or a `tag` — pin to a release for reproducible builds.
+- The `ref` can reference a `branch`, a `release`, or a `tag` — pin to a release for reproducible builds.
 - Pull formats are `raw` (default), `dtcg`, and `css`. **There is no TypeScript pull format** — pull raw/DTCG JSON and generate TS locally, as the existing Style Dictionary build does for `build/ts/*`.
 - `studio config show` displays the config; `studio config remove <alias>` (alias `rm`) removes a source from `.studio.json`. It does **not** delete already-pulled token files — clean those up manually.
 - `.studio.json` is meant to be committed for team consistency.
@@ -100,4 +105,4 @@ studio
 └── flags       --host --json --no-color --verbose
 ```
 
-Known state in this repo at snapshot time: CLI installed as a devDependency of `packages/eds-tokens` and approved in `onlyBuiltDependencies`; no `.studio.json` committed yet.
+Known state in this repo at snapshot time: CLI installed as a devDependency of `packages/eds-tokens` and approved in `onlyBuiltDependencies`. `.studio.json` lives in `packages/eds-tokens` and is pulled in CI by `.github/workflows/tokens_studio_release.yaml`, triggered by the Tokens Studio CI integration (`repository_dispatch`, event type `tokens-release`) on every platform release. CI auth is OIDC (`id-token: write` + `--ci`) — no service token stored.
