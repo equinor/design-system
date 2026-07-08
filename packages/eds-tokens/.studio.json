@@ -1,0 +1,14 @@
+{
+  "$schema": "https://tokens.studio/schema/cli",
+  "configurations": {
+    "eds-test-3": {
+      "project": "4952a007-699a-4124-a043-124e80cc28d6",
+      "ref": {
+        "type": "branch",
+        "name": "main"
+      },
+      "output": "src/tokens/eds-test-3",
+      "format": "raw"
+    }
+  }
+}
