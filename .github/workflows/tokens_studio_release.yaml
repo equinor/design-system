@@ -10,6 +10,11 @@ name: Tokens Studio release
 on:
   repository_dispatch:
     types: [tokens-release]
+# Two releases in quick succession would otherwise race on the shared
+# tokens-studio-release branch — serialise runs instead
+concurrency:
+  group: tokens-studio-release
+  cancel-in-progress: false
 jobs:
   setup:
     permissions:
@@ -44,6 +49,7 @@ jobs:
         with:
           node-version: '24.16.0'
       - name: Use "setup" cache
+        id: setup-cache
         uses: actions/cache@v6
         with:
           path: |
@@ -54,6 +60,14 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           run_install: false
+      # Fallback if the cache from the setup job was evicted — without it
+      # the workspace is empty and the studio binary is missing
+      - name: Checkout (cache-miss fallback)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
+      - name: Install dependencies (cache-miss fallback)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        run: pnpm install --force
       - name: Pull tokens from Tokens Studio
         run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci
       - name: Create Pull Request
@@ -63,3 +77,13 @@ jobs:
           title: 'chore: update tokens from Tokens Studio release'
           body: 'Automated pull of the token state after a Tokens Studio release, via the CI integration and `studio tokens pull`. See `packages/eds-tokens/.studio.json` for the configured sources.'
           branch: tokens-studio-release
+      # This workflow runs unattended (release-triggered) and the PR it
+      # creates gets no CI runs, so a failed pull must not be silent
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
