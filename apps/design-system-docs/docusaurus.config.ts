@@ -58,6 +58,9 @@ const config: Config = {
             // Add additional CSS files here
           ],
         },
+        sitemap: {
+          lastmod: 'datetime',
+        },
       } satisfies Preset.Options,
     ],
   ],
