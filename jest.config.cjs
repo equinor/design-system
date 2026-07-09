@@ -20,6 +20,7 @@ const testPathIgnorePatterns = [
     "<rootDir>/src/components/Autocomplete/",
     "<rootDir>/src/components/Cell/",
     "<rootDir>/src/components/Chip/",
+    "<rootDir>/src/components/Dialog/",
     "<rootDir>/src/components/Environment/",
     "<rootDir>/src/components/Menu/",
     "<rootDir>/src/components/OfflineBanner/",
@@ -42,7 +43,6 @@ const testPathIgnorePatterns = [
     // checklist — both are slated for removal/replacement (Paper -> Card,
     // PressableHighlight -> Pressable) once the library migration completes,
     // so we're not adding new tests for code we're about to delete.
-    "<rootDir>/src/components/SelectionControls/",
 ];
 
 // Guard against the exact footgun these lists create: a follow-up PR adds

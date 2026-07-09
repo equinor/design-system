@@ -31,6 +31,7 @@ export default tseslint.config(
             "src/components/Autocomplete/**",
             "src/components/Cell/**",
             "src/components/Chip/**",
+            "src/components/Dialog/**",
             "src/components/Environment/**",
             "src/components/Menu/**",
             "src/components/OfflineBanner/**",
