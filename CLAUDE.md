@@ -187,6 +187,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
     - Main component file: `YourComponent.tsx`
     - Types file: `YourComponent.types.ts` (if complex)
     - Styles using `EDSStyleSheet.create`
+    - Test file: `YourComponent.test.tsx` — write it alongside the component, not as a follow-up. See `Divider.test.tsx` for the minimal shape: render via `test-utils` (wraps `@testing-library/react-native` with `EDSProvider`) and assert it renders plus any accessibility basics.
 2. Export from `src/index.ts`
 3. Add storybook story in `../../apps/storybook/app/(tabs)/YourComponent.tsx`
 4. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
@@ -217,6 +218,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 - [ ] Exports TypeScript types for all props
 - [ ] Follows existing component patterns (prop naming, structure)
 - [ ] Has corresponding storybook story for visual testing
+- [ ] Has a `YourComponent.test.tsx` covering rendering and accessibility basics
 - [ ] Has developer MDX doc in `docs/` (Features → Usage → Examples → Props → Accessibility → Related components)
 
 ## Important Patterns
