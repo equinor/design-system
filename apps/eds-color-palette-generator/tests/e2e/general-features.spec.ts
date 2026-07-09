@@ -5,7 +5,7 @@ import 'dotenv/config'
 
 // Clear localStorage before each test to ensure consistent state
 test.beforeEach(async ({ page }) => {
-  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/')
+  await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/old')
   await page.evaluate(() => localStorage.clear())
   await page.reload()
 })

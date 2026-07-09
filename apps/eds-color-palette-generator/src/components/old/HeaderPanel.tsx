@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeToggle } from './ThemeToggle'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { Settings, Info, BarChart3, Palette, Layers, Paintbrush } from 'lucide-react'
 import Link from 'next/link'
 
@@ -23,7 +23,7 @@ export const HeaderPanel = ({
       </div>
       <div className="flex items-center gap-3">
         <Link
-          href="/themebuilder"
+          href="/"
           className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
           title="Theme builder"
         >

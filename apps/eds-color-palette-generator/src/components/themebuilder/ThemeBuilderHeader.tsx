@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { ThemeToggle } from '@/components/ThemeToggle'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { Link2, Check } from 'lucide-react'
 
 type Tab = 'fargesystem' | 'eksempler' | 'kontrast'

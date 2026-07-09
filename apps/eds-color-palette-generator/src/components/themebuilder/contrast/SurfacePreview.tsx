@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { calcContrast } from '@/utils/palette'
-import { Badge } from '@/components/Badge'
+import { Badge } from '@/components/shared/Badge'
 import { StepSelect } from './StepSelect'
 
 type Palette = { name: string; steps: string[] }

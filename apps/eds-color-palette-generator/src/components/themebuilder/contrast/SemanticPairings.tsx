@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { calcContrast, getApcaFontBreakdown } from '@/utils/palette'
-import { Badge } from '@/components/Badge'
+import { Badge } from '@/components/shared/Badge'
 
 type Palette = { name: string; steps: string[] }
 

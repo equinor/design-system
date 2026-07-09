@@ -11,7 +11,7 @@ import {
   calcContrast,
 } from '@/utils/palette'
 import type { ContrastResult } from '@/utils/palette'
-import { Badge } from '@/components/Badge'
+import { Badge } from '@/components/shared/Badge'
 import { CATEGORY_GROUPS } from '@/config/categories'
 
 function getLightness(hex: string): number {
