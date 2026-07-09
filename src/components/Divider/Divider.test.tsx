@@ -21,4 +21,17 @@ describe("Divider", () => {
             marginVertical: 8,
         });
     });
+
+    it("cannot be made accessible by a caller-supplied prop", () => {
+        render(
+            <Divider
+                testID="divider"
+                accessible={true}
+                importantForAccessibility="yes"
+            />
+        );
+        const divider = screen.getByTestId("divider");
+        expect(divider).toHaveProp("accessible", false);
+        expect(divider).toHaveProp("importantForAccessibility", "no");
+    });
 });

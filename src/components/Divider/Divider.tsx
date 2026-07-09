@@ -10,9 +10,9 @@ export const Divider = ({ style, ...rest }: DividerProps) => {
     return (
         <View
             style={[styles.divider, style]}
+            {...rest}
             accessible={false}
             importantForAccessibility="no"
-            {...rest}
         />
     );
 };
