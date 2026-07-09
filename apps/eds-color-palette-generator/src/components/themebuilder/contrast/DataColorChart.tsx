@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { STEP_ROLES, calcContrast } from '@/utils/palette'
-import { Badge } from '@/components/Badge'
+import { Badge } from '@/components/shared/Badge'
 import { StepSelect } from './StepSelect'
 
 type Palette = { name: string; steps: string[] }
@@ -151,7 +151,15 @@ function StackedBarChart({ colors, bgHex, textHex }: ChartProps) {
 
 function DonutChart({ colors, bgHex, textHex }: ChartProps) {
   const total = DONUT_SEGMENTS.slice(0, colors.length).reduce((a, b) => a + b, 0)
-  let cumulative = 0
+  const pcts = colors.map(
+    (_, i) => (DONUT_SEGMENTS[i % DONUT_SEGMENTS.length] / total) * 100,
+  )
+  const segments = colors.map((pc, i) => ({
+    name: pc.name,
+    hex: pc.hex,
+    pct: pcts[i],
+    offset: 25 - pcts.slice(0, i).reduce((a, b) => a + b, 0),
+  }))
 
   return (
     <div
@@ -160,25 +168,19 @@ function DonutChart({ colors, bgHex, textHex }: ChartProps) {
     >
       <div style={{ position: 'relative', width: 160, height: 160 }}>
         <svg viewBox="0 0 42 42" style={{ width: '100%', height: '100%' }}>
-          {colors.map((pc, i) => {
-            const seg = DONUT_SEGMENTS[i % DONUT_SEGMENTS.length]
-            const pct = (seg / total) * 100
-            const offset = 25 - cumulative
-            cumulative += pct
-            return (
-              <circle
-                key={pc.name}
-                cx="21"
-                cy="21"
-                r="15.915"
-                fill="none"
-                stroke={pc.hex}
-                strokeWidth="5"
-                strokeDasharray={`${pct} ${100 - pct}`}
-                strokeDashoffset={offset}
-              />
-            )
-          })}
+          {segments.map(({ name, hex, pct, offset }) => (
+            <circle
+              key={name}
+              cx="21"
+              cy="21"
+              r="15.915"
+              fill="none"
+              stroke={hex}
+              strokeWidth="5"
+              strokeDasharray={`${pct} ${100 - pct}`}
+              strokeDashoffset={offset}
+            />
+          ))}
         </svg>
         <div
           className="absolute inset-0 flex items-center justify-center text-sm font-bold"

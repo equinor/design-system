@@ -14,29 +14,38 @@ type ComponentPreviewPanelProps = {
   palettes: GeneratedPalette[]
 }
 
-export function ComponentPreviewPanel({
-  palettes,
-}: ComponentPreviewPanelProps) {
-  if (palettes.length === 0) return null
-
-  // Gray is always the neutral — find it by name
+// Gray is always the neutral — find it by name
+function findNeutralIndex(palettes: GeneratedPalette[]): number {
   const grayIdx = palettes.findIndex(
     (p) =>
       p.name.toLowerCase().includes('gray') ||
       p.name.toLowerCase().includes('grey'),
   )
-  const neutralIdx = grayIdx >= 0 ? grayIdx : 0
+  return grayIdx >= 0 ? grayIdx : 0
+}
+
+// Default accent: first non-gray palette, else the neutral itself
+function defaultAccentIndex(palettes: GeneratedPalette[]): number {
+  if (palettes.length === 0) return 0
+  const neutralIdx = findNeutralIndex(palettes)
+  const firstNonNeutral = palettes.findIndex((_, i) => i !== neutralIdx)
+  return firstNonNeutral >= 0 ? firstNonNeutral : neutralIdx
+}
+
+export function ComponentPreviewPanel({
+  palettes,
+}: ComponentPreviewPanelProps) {
+  const [accentIdx, setAccentIdx] = useState(() => defaultAccentIndex(palettes))
+
+  if (palettes.length === 0) return null
+
+  const neutralIdx = findNeutralIndex(palettes)
   const neutral = palettes[neutralIdx].steps
 
   // Non-gray palettes are candidates for accent
   const accentCandidates = palettes
     .map((p, i) => ({ ...p, idx: i }))
     .filter((_, i) => i !== neutralIdx)
-
-  // Default accent: first non-gray palette
-  const [accentIdx, setAccentIdx] = useState(
-    accentCandidates.length > 0 ? accentCandidates[0].idx : neutralIdx,
-  )
 
   const accent = palettes[accentIdx]?.steps ?? neutral
 

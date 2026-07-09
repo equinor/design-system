@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import {
   STEP_ROLES,
@@ -11,7 +11,7 @@ import {
   getSimulationPalettes,
 } from '@/utils/palette'
 import type { StepRole, TokenPalette } from '@/utils/palette'
-import { Badge } from '@/components/Badge'
+import { Badge } from '@/components/shared/Badge'
 
 /* ------------------------------------------------------------------ */
 /*  Pre-defined example groups                                         */
@@ -548,20 +548,50 @@ function SurfacePreview({
   )
 }
 
+/* ------------------------------------------------------------------ */
+/*  Custom-palette store — SSR-safe mirror of the localStorage bridge   */
+/*  filled by the Palette Editor. useSyncExternalStore renders [] on    */
+/*  the server + first client paint, then the stored value after        */
+/*  hydration; the Refresh button re-reads on demand.                   */
+/* ------------------------------------------------------------------ */
+
+const SIMULATION_REFRESH_EVENT = 'eds-simulation-palettes-refresh'
+const EMPTY_PALETTES: TokenPalette[] = []
+let cachedRaw: string | null = null
+let cachedPalettes: TokenPalette[] = EMPTY_PALETTES
+
+function getCustomPalettesSnapshot(): TokenPalette[] {
+  const next = getSimulationPalettes() // [] during SSR (window guard)
+  const raw = JSON.stringify(next) // stable ref unless content changed
+  if (raw === cachedRaw) return cachedPalettes
+  cachedRaw = raw
+  cachedPalettes = next
+  return cachedPalettes
+}
+
+function getCustomPalettesServerSnapshot(): TokenPalette[] {
+  return EMPTY_PALETTES
+}
+
+function subscribeCustomPalettes(callback: () => void): () => void {
+  window.addEventListener(SIMULATION_REFRESH_EVENT, callback)
+  return () => window.removeEventListener(SIMULATION_REFRESH_EVENT, callback)
+}
+
 export default function ExamplePage() {
   const [activePalette, setActivePalette] = useState(0)
   const [fgRole, setFgRole] = useState<StepRole>('12 · fg/strong')
   const [bgRole, setBgRole] = useState<StepRole>('1 · bg/canvas')
   const [surfaceConfig, setSurfaceConfig] =
     useState<SurfaceConfig>(DEFAULT_SURFACE)
-  const [customPalettes, setCustomPalettes] = useState<TokenPalette[]>([])
-
-  useEffect(() => {
-    setCustomPalettes(getSimulationPalettes())
-  }, [])
+  const customPalettes = useSyncExternalStore(
+    subscribeCustomPalettes,
+    getCustomPalettesSnapshot,
+    getCustomPalettesServerSnapshot,
+  )
 
   const refreshCustomPalettes = useCallback(() => {
-    setCustomPalettes(getSimulationPalettes())
+    window.dispatchEvent(new Event(SIMULATION_REFRESH_EVENT))
   }, [])
 
   const allPalettes = useMemo(

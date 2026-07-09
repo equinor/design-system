@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Color from 'colorjs.io'
 import Link from 'next/link'
 import { contrast, generateColorScale } from '@/utils/color'
@@ -75,6 +75,7 @@ export default function PalettePage() {
   /* ---- Auto-import primitives from generator on first load ---- */
   useEffect(() => {
     if (hasAutoImported) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only hydration from localStorage; a lazy initializer would run during SSR and cause a hydration mismatch
     setHasAutoImported(true)
 
     const colors = localStorageUtils.getColors(paletteConfig.colors)

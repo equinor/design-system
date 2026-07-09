@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { calcContrast } from '@/utils/palette'
 import { STEP_ROLES } from '@/utils/palette'
-import { Badge } from '@/components/Badge'
+import { Badge } from '@/components/shared/Badge'
 
 type GeneratedPalette = {
   name: string
@@ -37,9 +37,9 @@ export function ContrastTable({
   onActivePaletteChange,
 }: ContrastTableProps) {
   const palette = palettes[activePaletteIndex]
-  if (!palette) return null
 
   const grid = useMemo(() => {
+    if (!palette) return []
     return FG_INDICES.map((fgIdx) => ({
       fgIdx,
       fgRole: STEP_ROLES[fgIdx],
@@ -57,6 +57,8 @@ export function ContrastTable({
       }),
     }))
   }, [palette])
+
+  if (!palette) return null
 
   return (
     <section className="rounded-xl overflow-hidden border border-neutral-subtle bg-default">
