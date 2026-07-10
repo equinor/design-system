@@ -45,7 +45,7 @@ density and colour mode axes at once (the colour layer already works this way).
                   │ one-way ▼
   ┌───────────────┴───────────────────────────────────────────────────┐
   │ SEMANTIC  (single "default" mode — MODE-FREE, PUBLISHED)           │
-  │   spacing/{none,4xs…4xl}                                           │
+  │   spacing/{none,4xs…3xl}                                           │
   │   corner-radius/{none,rounded,rounded-outer,pill}                  │
   │   typography/{ui,header}/{size}/{font-size,line-height}            │
   │   font-family/{ui,heading} · font-weight/{lighter,normal,bolder}   │
@@ -132,12 +132,15 @@ density and colour mode axes at once (the colour layer already works this way).
 
 ### Naming
 
-- **Primitives:** `primitives/<domain>/<step|key>`. Numeric scales use the rem-relative
-  hundredths convention — `name = round(px / 16 × 100)`, ties resolving **down** (`12.5→12`,
-  `37.5→37`, `87.5→87`); e.g. spacing `100 = 16px`, `25 = 4px`.
+- **Primitives:** `primitives/<domain>/<step|key>`. **Spacing** (and corner-radius, which aliases
+  spacing) uses the rem-relative hundredths convention — `name = round(px / 16 × 100)`, ties
+  resolving **down** (`12.5→12`, `37.5→37`); e.g. spacing `100 = 16px`, `25 = 4px`. **The type
+  scale uses a separate 100-step index** — `type-scale/{inter,equinor}/{100…1100}`, where the
+  number is the scale step (not a px-derived name) and values are rounded to whole px (e.g.
+  `type-scale/inter/500 = 16px`, the base).
 - **Mapping layers are namespaced by where they live** — `density/…`, `font/…`, `colour/…` —
   so a reference makes its source (and whether it's density-dependent) obvious.
-- **Semantic:** `<domain>/<tier>`, **lowercase and hyphenated** everywhere (`4xs…4xl`,
+- **Semantic:** `<domain>/<tier>`, **lowercase and hyphenated** everywhere (`4xs…3xl`,
   `rounded-outer`), so names map cleanly to both CSS custom properties and nested TS keys.
 - The primitive line-height group is `line-height`, one `default` value per step (no
   `squished`). `corner-radius/pill` is a raw literal (`999`) — there is no `primitives/radius/*`
