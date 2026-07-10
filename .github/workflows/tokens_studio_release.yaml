@@ -69,12 +69,15 @@ jobs:
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install --force
       - name: Pull tokens from Tokens Studio
-        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci
+        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
       # Runs the saved "EDS" export configuration (CSS Variables) on the
-      # platform and writes the generated CSS files. This output replaces
-      # the local Style Dictionary build in the new pipeline.
+      # platform and writes the generated CSS files. This output will
+      # replace the local Style Dictionary build in the new pipeline —
+      # it is not yet wired into the package exports map.
+      # --verbose because the run is unattended and the resulting PR gets
+      # no CI — the Actions log is the only place to diagnose a bad export
       - name: Run CSS export from Tokens Studio
-        run: pnpm --filter @equinor/eds-tokens exec studio exports run EDS --ci --out src/tokens/css
+        run: pnpm --filter @equinor/eds-tokens exec studio exports run EDS --ci --verbose --out src/tokens/css
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
