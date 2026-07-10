@@ -69,13 +69,21 @@ jobs:
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install --force
       - name: Pull tokens from Tokens Studio
-        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci
+        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
+      # Runs the saved "EDS" export configuration (CSS Variables) on the
+      # platform and writes the generated CSS files. This output will
+      # replace the local Style Dictionary build in the new pipeline —
+      # it is not yet wired into the package exports map.
+      # --verbose because the run is unattended and the resulting PR gets
+      # no CI — the Actions log is the only place to diagnose a bad export
+      - name: Run CSS export from Tokens Studio
+        run: pnpm --filter @equinor/eds-tokens exec studio exports run EDS --ci --verbose --out src/tokens/css
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'chore: update tokens from Tokens Studio release'
           title: 'chore: update tokens from Tokens Studio release'
-          body: 'Automated pull of the token state after a Tokens Studio release, via the CI integration and `studio tokens pull`. See `packages/eds-tokens/.studio.json` for the configured sources.'
+          body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`) and generated CSS via `studio exports run EDS` into `packages/eds-tokens/src/tokens/css/`.'
           branch: tokens-studio-release
       # This workflow runs unattended (release-triggered) and the PR it
       # creates gets no CI runs, so a failed pull must not be silent
