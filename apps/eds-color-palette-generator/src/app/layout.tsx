@@ -17,8 +17,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Color Generator',
-  description: 'Generate color scales with gaussian distribution',
+  title: 'EDS Theme Builder',
+  description:
+    'Build accessible colour themes and palettes for the Equinor Design System',
 }
 
 export default function RootLayout({

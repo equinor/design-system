@@ -27,7 +27,7 @@ export const BG_SURFACE: StepDefinition = {
   name: 'Background Surface',
   category: 'Background',
   variant: 'surface',
-  lightValue: 0.999,
+  lightValue: 0.94,
   darkValue: 0.25,
 }
 
@@ -84,7 +84,7 @@ export const BORDER_SUBTLE: StepDefinition = {
   name: 'Border Subtle',
   category: 'Border',
   variant: 'subtle',
-  lightValue: 0.87,
+  lightValue: 0.77,
   darkValue: 0.47,
   contrastWith: [
     {
@@ -105,7 +105,7 @@ export const BORDER_MEDIUM: StepDefinition = {
   name: 'Border Medium',
   category: 'Border',
   variant: 'medium',
-  lightValue: 0.75,
+  lightValue: 0.72,
   darkValue: 0.61,
   contrastWith: [
     {
@@ -131,7 +131,7 @@ export const BORDER_STRONG: StepDefinition = {
   name: 'Border Strong',
   category: 'Border',
   variant: 'strong',
-  lightValue: 0.52,
+  lightValue: 0.62,
   darkValue: 0.76,
   contrastWith: [
     {
@@ -167,7 +167,7 @@ export const BG_FILL_EMPHASIS_DEFAULT: StepDefinition = {
   name: 'Background Fill Emphasis Default',
   category: 'Background Fill Emphasis',
   variant: 'default',
-  lightValue: 0.5,
+  lightValue: 0.52,
   darkValue: 0.82,
   contrastWith: [
     {
@@ -188,7 +188,7 @@ export const BG_FILL_EMPHASIS_HOVER: StepDefinition = {
   name: 'Background Fill Emphasis Hover',
   category: 'Background Fill Emphasis',
   variant: 'hover',
-  lightValue: 0.44,
+  lightValue: 0.47,
   darkValue: 0.88,
   contrastWith: [
     {
@@ -230,7 +230,7 @@ export const TEXT_SUBTLE: StepDefinition = {
   name: 'Text Subtle',
   category: 'Text',
   variant: 'subtle',
-  lightValue: 0.46,
+  lightValue: 0.37,
   darkValue: 0.91,
   contrastWith: [
     {
@@ -256,7 +256,7 @@ export const TEXT_STRONG: StepDefinition = {
   name: 'Text Strong',
   category: 'Text',
   variant: 'strong',
-  lightValue: 0.23,
+  lightValue: 0.32,
   darkValue: 0.99,
   contrastWith: [
     {

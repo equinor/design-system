@@ -208,21 +208,25 @@ export function generateColorScaleWithInterpolation(
         interpolatedColor = range(t)
       }
 
-      // Convert to OKLCH to extract and modify values
-      const oklchColor = interpolatedColor.to('oklch')
+      let finalColor: Color
 
-      // Get the interpolated hue and base chroma
-      const interpolatedHue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
-      const baseChroma = oklchColor.c ?? 0
+      if (exactAnchor) {
+        // Exact anchor step — preserve the anchor color as-is
+        finalColor = interpolatedColor.to('oklch')
+      } else {
+        // Interpolated step — apply Gaussian chroma and target lightness
+        const oklchColor = interpolatedColor.to('oklch')
+        const interpolatedHue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
+        const baseChroma = oklchColor.c ?? 0
 
-      // Create the final color with Gaussian-adjusted chroma
-      const finalColor = createColorWithGaussianChroma(
-        targetLightness,
-        baseChroma,
-        interpolatedHue,
-        mean,
-        stdDev,
-      )
+        finalColor = createColorWithGaussianChroma(
+          targetLightness,
+          baseChroma,
+          interpolatedHue,
+          mean,
+          stdDev,
+        )
+      }
 
       // Format and add to array
       colors.push(formatColorAsString(finalColor, format))

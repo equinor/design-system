@@ -1,6 +1,13 @@
 # EDS Color Palette Generator
 
-An accessible color palette generator for the Equinor Design System. This tool creates harmonious color scales using Gaussian distribution and the OKLCH color space, ensuring consistent, accessible colors across different lightness levels.
+Internal tooling for building accessible colour themes and palettes for the Equinor Design System.
+
+The project hosts two tools in one Next.js App Router app:
+
+- **Theme Builder** (`/`, the primary tool) — build accessible colour themes and palettes, preview them on example components, and check contrast. Palette state is shareable via the URL.
+- **Colour Palette Generator** (`/old`, archived) — the original Gaussian colour-scale generator. It creates harmonious colour scales using Gaussian distribution and the OKLCH colour space, ensuring consistent, accessible colours across different lightness levels. Still fully functional but no longer the default entry point.
+
+> The `/themebuilder` route now redirects to `/`.
 
 ## Features
 
@@ -24,9 +31,9 @@ First, run the development server:
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the color palette generator.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the Theme Builder (the primary tool).
 
-To learn how the generator works internally, visit the About page at [http://localhost:3000/about](http://localhost:3000/about).
+The archived Gaussian colour-scale generator is available at [http://localhost:3000/old](http://localhost:3000/old). To learn how that generator works internally, visit the About page at [http://localhost:3000/about](http://localhost:3000/about).
 
 ### CLI Tool
 

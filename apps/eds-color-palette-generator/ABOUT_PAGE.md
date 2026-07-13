@@ -23,7 +23,7 @@ The page explains:
 
 ### 2. Interactive Bell Curve Visualization
 
-The `BellCurveVisualization` component (`src/components/BellCurveVisualization.tsx`) provides:
+The `BellCurveVisualization` component (`src/components/docs/BellCurveVisualization.tsx`) provides:
 
 - Visual representation of the Gaussian function
 - Interactive controls for mean and standard deviation
@@ -33,7 +33,7 @@ The `BellCurveVisualization` component (`src/components/BellCurveVisualization.t
 
 ### 3. Interactive Chroma Distribution Demo
 
-The `ChromaDistributionDemo` component (`src/components/ChromaDistributionDemo.tsx`) provides:
+The `ChromaDistributionDemo` component (`src/components/docs/ChromaDistributionDemo.tsx`) provides:
 
 - Color picker to select any base color
 - Interactive controls for Gaussian parameters (mean and standard deviation)
@@ -43,7 +43,7 @@ The `ChromaDistributionDemo` component (`src/components/ChromaDistributionDemo.t
 
 ### 4. Color Step Pairings and Contrast Requirements
 
-The `ContrastRequirementsTable` component (`src/components/ContrastRequirementsTable.tsx`) provides:
+The `ContrastRequirementsTable` component (`src/components/docs/ContrastRequirementsTable.tsx`) provides:
 
 - Comprehensive list of all color steps with contrast requirements
 - Direct reference to configuration file for always up-to-date information
@@ -65,7 +65,7 @@ The `ContrastRequirementsTable` component (`src/components/ContrastRequirementsT
 
 ### BellCurveVisualization
 
-**File:** `src/components/BellCurveVisualization.tsx`
+**File:** `src/components/docs/BellCurveVisualization.tsx`
 
 A client-side component that visualizes the Gaussian function used to calculate chroma multipliers.
 
@@ -84,7 +84,7 @@ A client-side component that visualizes the Gaussian function used to calculate 
 
 ### ChromaDistributionDemo
 
-**File:** `src/components/ChromaDistributionDemo.tsx`
+**File:** `src/components/docs/ChromaDistributionDemo.tsx`
 
 A client-side component that demonstrates how chroma varies across a color scale.
 
@@ -104,7 +104,7 @@ A client-side component that demonstrates how chroma varies across a color scale
 
 ### ContrastRequirementsTable
 
-**File:** `src/components/ContrastRequirementsTable.tsx`
+**File:** `src/components/docs/ContrastRequirementsTable.tsx`
 
 A client-side component that displays color step pairings and their contrast requirements, directly referencing the configuration file.
 
@@ -122,10 +122,10 @@ A client-side component that displays color step pairings and their contrast req
 
 The About page is accessible from the main page via:
 
-- An "About" link in the header (added to `HeaderPanel` component)
+- An "About" link in the header (added to the `HeaderPanel` component, now at `/old`)
 - Direct URL navigation to `/about`
 
-A "Back to generator" link is provided on the About page for easy navigation back to the main tool.
+A "Back to generator" link is provided on the About page, pointing at the archived Gaussian generator at `/old` (the tool this page documents).
 
 ## Technical Implementation
 

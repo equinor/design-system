@@ -1,8 +1,8 @@
 'use client'
 
-import { BellCurveVisualization } from '@/components/BellCurveVisualization'
-import { ChromaDistributionDemo } from '@/components/ChromaDistributionDemo'
-import { ContrastRequirementsTable } from '@/components/ContrastRequirementsTable'
+import { BellCurveVisualization } from '@/components/docs/BellCurveVisualization'
+import { ChromaDistributionDemo } from '@/components/docs/ChromaDistributionDemo'
+import { ContrastRequirementsTable } from '@/components/docs/ContrastRequirementsTable'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
@@ -12,7 +12,7 @@ export default function AboutPage() {
       <header className="border-b bg-surface border-neutral-subtle">
         <div className="max-w-4xl px-6 py-8 mx-auto">
           <Link
-            href="/"
+            href="/old"
             className="inline-flex items-center gap-2 mb-4 text-sm text-neutral-subtle hover:text-default"
           >
             <ArrowLeft className="w-4 h-4" />
