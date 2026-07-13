@@ -44,9 +44,9 @@ const StyledTab = styled.button.attrs<StyledTabProps>(
     ${spacingsTemplate(tab.spacings)}
     ${typographyTemplate(tab.typography)}
 
-    color: ${$active
-      ? tab.states.active.typography.color
-      : tab.typography.color};
+    color: ${
+      $active ? tab.states.active.typography.color : tab.typography.color
+    };
     background-color: ${tab.background};
     position: relative;
     white-space: nowrap;
@@ -74,24 +74,30 @@ const StyledTab = styled.button.attrs<StyledTabProps>(
     @media (hover: hover) and (pointer: fine) {
       &[data-hover],
       &:hover {
-        color: ${$active
-          ? tab.states.active.states.hover.typography.color
-          : tab.typography.color};
-        ${disabled
-          ? css`
-              background: ${tab.states.disabled.background};
-              cursor: not-allowed;
-            `
-          : css`
-              background: ${tab.states.hover.background};
-              cursor: pointer;
-            `}
+        color: ${
+          $active
+            ? tab.states.active.states.hover.typography.color
+            : tab.typography.color
+        };
+        ${
+          disabled
+            ? css`
+                background: ${tab.states.disabled.background};
+                cursor: not-allowed;
+              `
+            : css`
+                background: ${tab.states.hover.background};
+                cursor: pointer;
+              `
+        }
       }
     }
 
-    ${disabled
-      ? bordersTemplate(tab.states.disabled.border)
-      : bordersTemplate(tab.border)}
+    ${
+      disabled
+        ? bordersTemplate(tab.states.disabled.border)
+        : bordersTemplate(tab.border)
+    }
     ${$active && bordersTemplate(tab.states.active.border)}
   `
 })

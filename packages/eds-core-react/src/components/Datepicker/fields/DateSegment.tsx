@@ -19,17 +19,21 @@ const Segment = styled.div<{
       outline: 2px solid ${tokens.colors.interactive.primary__resting.rgba};
       background-color: ${tokens.colors.ui.background__medium.rgba};
     }
-    ${$placeholder
-      ? css({
-          color: tokens.colors.text.static_icons__tertiary.rgba,
-        })
-      : css({
-          color: tokens.colors.text.static_icons__default.rgba,
-        })}
-    ${$disabled &&
-    css`
-      color: ${tokens.colors.interactive.disabled__text.rgba};
-    `}
+    ${
+      $placeholder
+        ? css({
+            color: tokens.colors.text.static_icons__tertiary.rgba,
+          })
+        : css({
+            color: tokens.colors.text.static_icons__default.rgba,
+          })
+    }
+    ${
+      $disabled &&
+      css`
+        color: ${tokens.colors.interactive.disabled__text.rgba};
+      `
+    }
   `
 })
 

@@ -32,8 +32,7 @@ const colors = {
 }
 
 export type QuickTypographyVariants =
-  | TypographyTokens['heading']
-  | TypographyTokens['paragraph']
+  TypographyTokens['heading'] | TypographyTokens['paragraph']
 
 const quickVariants: QuickTypographyVariants = {
   ...heading,
@@ -49,12 +48,7 @@ type TypographyVariants =
   | keyof TypographyTokens['table']
 
 type ColorVariants =
-  | 'primary'
-  | 'secondary'
-  | 'danger'
-  | 'warning'
-  | 'success'
-  | 'disabled'
+  'primary' | 'secondary' | 'danger' | 'warning' | 'success' | 'disabled'
 
 type TypographyGroups = keyof typeof typography
 

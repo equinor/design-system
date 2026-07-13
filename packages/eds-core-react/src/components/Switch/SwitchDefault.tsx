@@ -11,26 +11,32 @@ const Input = styled(BaseInput)(
     aspect-ratio: 1/1;
     /*  Track */
     &:checked + span > span {
-      background-color: ${disabled
-        ? theme.states.disabled.background
-        : theme.entities.track.states.active.background};
+      background-color: ${
+        disabled
+          ? theme.states.disabled.background
+          : theme.entities.track.states.active.background
+      };
     }
     /* Handle */
     &:checked + span > span:last-child {
       transform: translate(105%, -50%);
-      background-color: ${disabled
-        ? theme.states.disabled.background
-        : theme.entities.handle.states.active.background};
+      background-color: ${
+        disabled
+          ? theme.states.disabled.background
+          : theme.entities.handle.states.active.background
+      };
     }
     &:hover + span {
-      background-color: ${disabled
-        ? 'transparent'
-        : theme.states.hover.background};
+      background-color: ${
+        disabled ? 'transparent' : theme.states.hover.background
+      };
     }
     &:hover + span > span:last-child {
-      background-color: ${disabled
-        ? theme.states.disabled.background
-        : theme.states.hover.entities.handle.background};
+      background-color: ${
+        disabled
+          ? theme.states.disabled.background
+          : theme.states.hover.entities.handle.background
+      };
     }
   `,
 )
@@ -54,9 +60,11 @@ const Track = styled.span<StyledProps>(
     top: 50%;
     transform: translate(-50%, -50%);
     transition: background 0.36s;
-    ${$isDisabled && {
-      backgroundColor: states.disabled.background,
-    }}
+    ${
+      $isDisabled && {
+        backgroundColor: states.disabled.background,
+      }
+    }
   `,
 )
 const Handle = styled.span<StyledProps>(
@@ -68,9 +76,11 @@ const Handle = styled.span<StyledProps>(
     },
   }) => css`
     background-color: ${handle.background};
-    ${$isDisabled && {
-      backgroundColor: states.disabled.background,
-    }}
+    ${
+      $isDisabled && {
+        backgroundColor: states.disabled.background,
+      }
+    }
     box-shadow: ${handle.boxShadow};
     width: ${handle.width};
     height: ${handle.height};

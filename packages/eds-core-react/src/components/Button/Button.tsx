@@ -15,11 +15,7 @@ import { useEds } from '../EdsProvider'
 
 type Colors = 'primary' | 'secondary' | 'danger'
 type Variants =
-  | 'contained'
-  | 'contained_icon'
-  | 'outlined'
-  | 'ghost'
-  | 'ghost_icon'
+  'contained' | 'contained_icon' | 'outlined' | 'ghost' | 'ghost_icon'
 
 const getVariant = (
   tokenSet: ButtonTokenSet,
