@@ -3,9 +3,15 @@ title: Field
 sidebar_position: 5
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
 # Field
 
 Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes - ensuring a consistent and accessible experience.
+
+<Tabs className="component-doc-tabs" queryString="tab">
+<TabItem value="when-to-use" label="When to Use" default>
 
 <iframe
   class="sb-iframe"
@@ -28,6 +34,9 @@ Use Field when you need to ensure Label, Description, and helper messages are co
 - You need a complete, ready-to-use form field - use TextField instead
 - You're grouping multiple related fields - use Fieldset instead
 
+</TabItem>
+<TabItem value="structure" label="Structure">
+
 ## Structure
 
 Field is composed of several sub-components that work together:
@@ -41,6 +50,9 @@ Use the `useFieldIds` hook to generate IDs and wire up accessibility attributes:
 ```tsx
 const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds()
 ```
+
+</TabItem>
+<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -106,6 +118,9 @@ Set `disabled` on Field to apply disabled styling to all sub-components. The dis
 
 Field supports flexible label positioning through the `position` prop. This is used internally by selection controls (Checkbox, Radio, Switch) to allow labels before or after the control.
 
+</TabItem>
+<TabItem value="accessibility" label="Accessibility">
+
 ## Accessibility
 
 Field automatically manages ARIA relationships between form elements:
@@ -126,6 +141,9 @@ The hook provides:
 
 Screen readers won't automatically announce prefix/suffix text (like currency symbols or units). Ensure this information is also present in the label text for full accessibility.
 
+</TabItem>
+<TabItem value="dos-and-donts" label="Do's and don'ts">
+
 ## Do's and Don'ts
 
 :::info **Do**
@@ -144,3 +162,6 @@ Screen readers won't automatically announce prefix/suffix text (like currency sy
 - Rely only on visual indicators for required/optional status
 - Skip the `useFieldIds` hook - manual ID management is error-prone
   :::
+
+</TabItem>
+</Tabs>

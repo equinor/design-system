@@ -1,0 +1,98 @@
+---
+title: Team Leads
+hide_table_of_contents: true
+displayed_sidebar: null
+---
+
+import '../team/team.css'
+
+<div className="about-page">
+<div className="about-hero">
+
+# Team Leads
+
+A guide for team leads adopting EDS — from initial setup to scaling across projects.
+
+</div>
+<div className="about-section about-section--surface">
+
+## Getting your team started
+
+### 1. Map your team to the right guides
+
+<div className="role-cards">
+  <a className="role-card" href="design/getting_started_design">
+    <span className="role-card__role">Designers</span>
+    <span className="role-card__desc">Figma setup and design workflows</span>
+  </a>
+  <a className="role-card" href="develop/getting_started_development">
+    <span className="role-card__role">Developers</span>
+    <span className="role-card__desc">Component installation and implementation</span>
+  </a>
+  <a className="role-card" href="develop/citizen_developers">
+    <span className="role-card__role">Citizen Developers</span>
+    <span className="role-card__desc">Power Platform templates</span>
+  </a>
+</div>
+
+### 2. Request access
+
+Designers need Figma licences (through AccessIT). Developers need the npm packages (public, no licence required). Citizen developers need their standard Microsoft 365 access.
+
+### 3. Start with a new project
+
+Adopt EDS on a new project rather than migrating an existing one. This lets the team learn the components without the pressure of a running system. Once the team is comfortable, you can plan migration for existing projects.
+
+</div>
+<div className="about-section">
+
+## Scaling adoption
+
+You don't need to adopt everything at once. A practical approach:
+
+1. **Pick a pilot project** — one new project where the team uses EDS from day one
+2. **Replace components incrementally** — when you touch existing code, swap custom components for EDS equivalents
+3. **Add EDS checks to reviews** — include EDS usage as a review criterion in design and code reviews
+4. **Track what matters** — accessibility compliance, component reuse rate, and design consistency are useful signals
+
+</div>
+<div className="about-section about-section--surface">
+
+## Common questions & challenges
+
+<div className="about-accordion">
+  <details>
+    <summary>What if we already have our own components?</summary>
+    <div>You don't need to replace everything. Use EDS for new work and evaluate migration for existing components based on maintenance cost vs. benefit.</div>
+  </details>
+  <details>
+    <summary>What if we need something EDS doesn't cover?</summary>
+    <div>Document the deviation, flag it for review, and consider proposing it as a new EDS component if other teams share the same need.</div>
+  </details>
+  <details>
+    <summary>How long does it take to get up to speed?</summary>
+    <div>Expect the team to be slower during the first few weeks while learning the component APIs and token system. This is normal and recovers quickly.</div>
+  </details>
+  <details>
+    <summary>What does EDS cost?</summary>
+    <div>The npm packages are open source. Figma licences are managed through Equinor's existing agreements. Training and support from the EDS team are provided at no additional cost.</div>
+  </details>
+  <details>
+    <summary>Do we need to migrate existing projects?</summary>
+    <div>No. New projects should use EDS from the start. Existing projects can migrate gradually — or not at all, if the cost doesn't justify it.</div>
+  </details>
+  <details>
+    <summary>How do we get training?</summary>
+    <div>Contact the EDS team to schedule role-specific workshops. There are also regular office hours and Slack channels for ongoing questions.</div>
+  </details>
+</div>
+
+</div>
+<div className="about-section about-section--cta">
+
+## Support & community
+
+Visit the [Support page](/docs/Next/support) for Slack channels, office hours, and direct contact.
+
+</div>
+</div>

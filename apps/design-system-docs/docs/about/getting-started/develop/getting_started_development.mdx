@@ -1,0 +1,135 @@
+---
+title: Getting started with development
+hide_table_of_contents: true
+displayed_sidebar: null
+---
+
+import '../../team/team.css'
+import Prerequisites from '@site/src/components/Prerequisites'
+
+<div className="about-page">
+<div className="about-hero">
+
+# Getting started with development
+
+Install the React component library, load fonts, and start building with EDS components and design tokens.
+
+**Prerequisites:** <Prerequisites minimal />
+
+</div>
+<div className="about-section about-section--surface">
+
+## Install
+
+```bash
+npm install @equinor/eds-core-react styled-components
+# or
+pnpm add @equinor/eds-core-react styled-components
+```
+
+`styled-components@6` is a peer dependency of `eds-core-react`.
+
+### Load fonts
+
+Add the EDS variable font stylesheet to your HTML `<head>`:
+
+```html
+<link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
+```
+
+:::tip
+This stylesheet loads both **Equinor** and **Inter**. If you use EDS 2.0 (`next`) components, it is required — the older `equinor-font.css` only includes Equinor and will cause fallback fonts. See [Typography](../../../foundation/design-tokens/typography.md) for details.
+:::
+
+</div>
+<div className="about-section">
+
+## Use components
+
+EDS has two component sets: the current stable API and the new **EDS 2.0** (`next`) components.
+
+### Current components
+
+```tsx
+import { Button, Typography } from '@equinor/eds-core-react'
+
+function App() {
+  return (
+    <div>
+      <Typography variant="h1">Welcome to EDS</Typography>
+      <Button variant="contained">Get Started</Button>
+    </div>
+  )
+}
+```
+
+### EDS 2.0 components
+
+New components are available under the `/next` export. They use vanilla CSS with design tokens instead of styled-components:
+
+```tsx
+import { Button } from '@equinor/eds-core-react/next'
+import '@equinor/eds-tokens/css/variables'
+
+function App() {
+  return <Button variant="primary">Get Started</Button>
+}
+```
+
+See the [component overview](/docs/Next/components) for what's available in each set.
+
+</div>
+<div className="about-section about-section--surface">
+
+## Design tokens
+
+For custom styling, use EDS design tokens to stay consistent with the system.
+
+### CSS variables (recommended)
+
+```css
+@import '@equinor/eds-tokens/css/variables';
+
+.my-card {
+  color: var(--eds-color-text-neutral-strong);
+  padding: var(--eds-spacing-md);
+  border-radius: var(--eds-shape-corners-md);
+}
+```
+
+### JavaScript tokens
+
+```bash
+npm install @equinor/eds-tokens
+```
+
+```javascript
+import { tokens } from '@equinor/eds-tokens'
+
+const { typography, colors } = tokens
+const styles = {
+  fontSize: typography.heading.h1.fontSize,
+  color: colors.interactive.primary__resting.rgba,
+}
+```
+
+</div>
+<div className="about-section">
+
+## Troubleshooting
+
+**Missing fonts** — If components render in a generic sans-serif, check that the `eds-uprights-vf.css` stylesheet is loaded. EDS 2.0 components require Inter, which is only in the variable font stylesheet.
+
+**Peer dependency warnings** — `eds-core-react` expects `react@^18 || ^19`, `react-dom@^18 || ^19`, and `styled-components@^6`. Check versions with `npm ls react styled-components`.
+
+**TypeScript version** — EDS requires <Prerequisites />. If you see type errors, check your `tsconfig.json` targets a compatible version.
+
+</div>
+<div className="about-section about-section--cta">
+
+## Need help?
+
+Check the [Support page](/docs/Next/support) for Slack channels, GitHub issues, and office hours.
+
+</div>
+</div>
