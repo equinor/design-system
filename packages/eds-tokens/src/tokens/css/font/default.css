@@ -1,0 +1,7 @@
+:root {
+  --eds-family-heading: Equinor;
+  --eds-family-ui: Inter;
+  --eds-weight-bolder: var(--eds-primitives-weight-scale-bolder);
+  --eds-weight-lighter: var(--eds-primitives-weight-scale-lighter);
+  --eds-weight-normal: var(--eds-primitives-weight-scale-normal);
+}
