@@ -76,14 +76,14 @@
     "ramda": "^0.32.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-hook-form": "^7.80.0",
+    "react-hook-form": "^7.81.0",
     "react-is": "^19.2.7",
     "rollup": "^4.62.2",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "10.4.6",
-    "styled-components": "6.4.2",
-    "tsc-watch": "^7.2.0",
+    "styled-components": "6.4.3",
+    "tsc-watch": "^7.2.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
@@ -99,7 +99,7 @@
     "@equinor/eds-utils": "workspace:^",
     "@types/react-datepicker": "^7.0.0",
     "date-fns": "^4.4.0",
-    "downshift": "9.3.6",
+    "downshift": "9.4.0",
     "react-datepicker": "^9.1.0",
     "react-fast-compare": "3.2.2"
   }
