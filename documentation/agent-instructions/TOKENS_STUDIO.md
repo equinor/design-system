@@ -95,8 +95,6 @@ Classify every command before running it:
 3. **Steps:** `studio tokens pull` (raw token sets → `src/tokens/<alias>/`), `studio exports run` for the two saved configurations — `EDS-CSS` (css) and `EDS-DTCG` (dtcg), referenced by ID — into `src/tokens/css/` and `src/tokens/dtcg/`, then `pnpm run generate:ts-tokens` which combines DTCG structure with evaluated CSS values into TS modules in `src/tokens/ts/` (see the script header in `packages/eds-tokens/scripts/generate-ts-tokens.mjs` for the mechanics, including CSS Color 4 gamut mapping).
 4. **Output:** all three directories are committed to the release PR. They are **generated — never edit them by hand**, and they are not yet wired into the package `exports` map.
 
-⚠️ PRs that modify this workflow file do not get `@claude` reviews — the Claude action skips PRs with workflow changes (a security guard). Verify such changes locally before merging; the first push may get a review through, but re-reviews will skip.
-
 ## Staying current
 
 The CLI and platform are young and move fast (v0.1.x as of the snapshot below). **Never answer Tokens Studio questions from memory alone.** In order of authority:
