@@ -52,6 +52,7 @@
     "types": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
+    "generate:ts-tokens": "node scripts/generate-ts-tokens.mjs",
     "prettier:check": "prettier --check src/",
     "build:variables:color-scheme": "build-color-scheme-variables",
     "build:variables:semantic:static": "build-semantic-static-variables",
