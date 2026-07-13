@@ -184,21 +184,20 @@ function oklchToHex(value) {
   const EPSILON = 0.0001
   let low = 0
   let high = chroma
-  let current = direct
   while (high - low > EPSILON) {
     const mid = (low + high) / 2
-    current = toLinear(mid)
-    if (inSrgbGamut(current)) {
+    const mapped = toLinear(mid)
+    if (inSrgbGamut(mapped)) {
       low = mid
     } else {
-      const clipped = linearSrgbToOklab(clip(current))
+      const clipped = linearSrgbToOklab(clip(mapped))
       const candidate = [lightness, mid * Math.cos(hue), mid * Math.sin(hue)]
       const deltaE = Math.hypot(
         clipped[0] - candidate[0],
         clipped[1] - candidate[1],
         clipped[2] - candidate[2],
       )
-      if (deltaE < JND) return linearToHex(current)
+      if (deltaE < JND) return linearToHex(mapped)
       high = mid
     }
   }
@@ -255,9 +254,12 @@ const DIGIT_WORDS = [
 function tsKey(segment) {
   if (/^\d+$/.test(segment)) return segment
   const sized = /^(\d+)([a-z]+)$/.exec(segment)
-  const normalized = sized
-    ? `${DIGIT_WORDS[Number(sized[1])] ?? fail(`unmappable numeric prefix: ${segment}`)}-${sized[2]}`
-    : segment
+  let normalized = segment
+  if (sized) {
+    const word = DIGIT_WORDS[Number(sized[1])]
+    if (!word) fail(`unmappable numeric prefix: ${segment}`)
+    normalized = `${word}-${sized[2]}`
+  }
   return normalized.replace(/-([a-z0-9])/g, (_, letter) => letter.toUpperCase())
 }
 
@@ -281,14 +283,27 @@ function resolveGroup(group, path, context) {
   return resolved
 }
 
+const IDENTIFIER = /^[A-Za-z_$][\w$]*$/
+const singleQuoted = (text) =>
+  `'${text.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`
+
+/** Serialize a resolved value object as a Prettier-conformant TS literal
+ * (single quotes with proper escaping, trailing commas, 2-space indent). */
+function toLiteral(value, indent) {
+  if (typeof value === 'number') return String(value)
+  if (typeof value === 'string') return singleQuoted(value)
+  const inner = `${indent}  `
+  const entries = Object.entries(value).map(([key, child]) => {
+    const tsName = IDENTIFIER.test(key) ? key : singleQuoted(key)
+    return `${inner}${tsName}: ${toLiteral(child, inner)},`
+  })
+  if (entries.length === 0) return '{}'
+  return `{\n${entries.join('\n')}\n${indent}}`
+}
+
 function toTsSource(exportName, value) {
   const typeName = exportName[0].toUpperCase() + exportName.slice(1)
-  const literal = JSON.stringify(value, null, 2)
-    // JSON quotes every key — strip them from keys that are valid identifiers
-    .replace(/"([A-Za-z_$][\w$]*)":/g, '$1:')
-    .replace(/"(\d+)":/g, "'$1':")
-    .replace(/"/g, "'")
-  return `${HEADER}\nexport const ${exportName} = ${literal} as const\n\nexport type ${typeName} = typeof ${exportName}\n`
+  return `${HEADER}\nexport const ${exportName} = ${toLiteral(value, '')} as const\n\nexport type ${typeName} = typeof ${exportName}\n`
 }
 
 function deepEqual(a, b) {
@@ -348,6 +363,8 @@ for (const file of dtcgFiles) {
     ]
   } else if (folder === 'density') {
     outputs = [
+      // density tokens are dimension values and never reference
+      // scheme-varying colours, so any scheme works as context
       [file, resolveGroup(tree, basePath, contextFor(schemes[0], variant))],
     ]
   } else {
