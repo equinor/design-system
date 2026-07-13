@@ -171,7 +171,6 @@ describe('Filter', () => {
         </TableProvider>,
       )
       openPopover(baseElement)
-
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
       ) as Array<HTMLInputElement>
@@ -201,7 +200,6 @@ describe('Filter', () => {
       )
 
       openPopover(baseElement)
-
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
       ) as Array<HTMLInputElement>
@@ -239,8 +237,6 @@ describe('Filter', () => {
         </TableProvider>,
       )
       openPopover(baseElement)
-      // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
-
       const input = within(baseElement).getByTestId('input') as HTMLInputElement
       expect(input).toBeDefined()
       expect(input.placeholder).toBe('Custom filter')
