@@ -82,7 +82,7 @@
     "jest-environment-jsdom": "^30.4.1",
     "jest-styled-components": "^7.4.0",
     "js-file-download": "^0.4.12",
-    "postcss": "^8.5.16",
+    "postcss": "^8.5.17",
     "postcss-import": "^16.1.1",
     "ramda": "^0.32.0",
     "react": "^19.2.6",
