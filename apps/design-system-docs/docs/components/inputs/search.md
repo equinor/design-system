@@ -3,8 +3,6 @@ title: Search
 sidebar_position: 5
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Search
 
@@ -13,13 +11,7 @@ Search allows users to quickly locate relevant content within a website or appli
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to Use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--introduction"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--introduction" height={100} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--introduction)
 
@@ -61,13 +53,7 @@ Use placeholder text with care. It disappears when users begin typing, which can
 
 Use a visible label above the search field when the search purpose is not immediately obvious, or when the search field is part of a larger form. In standalone search contexts, an `aria-label` is sufficient.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--without-label"
-  width="100%"
-  height="68"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--without-label" height={68} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--without-label)
 
@@ -75,13 +61,7 @@ Use a visible label above the search field when the search purpose is not immedi
 
 Use `description` to provide additional context about what the user can search for. Use `helperMessage` for validation feedback or hints displayed below the field.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--with-description"
-  width="100%"
-  height="120"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--with-description" height={120} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--with-description)
 
@@ -89,13 +69,7 @@ Use `description` to provide additional context about what the user can search f
 
 A clear button appears automatically when the input has a value, allowing users to quickly reset the field. Use the `onClear` callback to handle clear events. The `clearLabel` prop lets you customize the accessible label for localization (defaults to "Clear search").
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--with-clear-button"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--with-clear-button" height={100} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--with-clear-button)
 
@@ -103,13 +77,7 @@ A clear button appears automatically when the input has a value, allowing users 
 
 Search supports both controlled and uncontrolled modes. In controlled mode, manage the value via `value` and `onChange` props. In uncontrolled mode, provide `defaultValue` and optionally use `onClear`.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--controlled"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--controlled" height={100} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--controlled)
 
@@ -117,13 +85,7 @@ Search supports both controlled and uncontrolled modes. In controlled mode, mana
 
 Use the `invalid` prop to indicate a validation error. Pair it with `helperMessage` to explain what went wrong.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--invalid"
-  width="100%"
-  height="120"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--invalid" height={120} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--invalid)
 
@@ -131,13 +93,7 @@ Use the `invalid` prop to indicate a validation error. Pair it with `helperMessa
 
 A disabled search field prevents user interaction. Use this sparingly and only when the search functionality is temporarily unavailable. The clear button is automatically hidden when the field is disabled.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--disabled"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--disabled" height={100} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--disabled)
 
@@ -145,13 +101,7 @@ A disabled search field prevents user interaction. Use this sparingly and only w
 
 A read-only search field displays the current value but prevents editing. The clear button is hidden in this state.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-search--read-only"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-search--read-only" height={100} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--read-only)
 

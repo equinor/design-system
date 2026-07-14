@@ -22,13 +22,13 @@ const config: Config = {
   projectName: 'design-system',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
-  clientModules: [
-    './src/clientModules/syncColorScheme.ts',
-    './src/clientModules/foundationDropdownNav.ts',
-    './src/clientModules/sbIframeNoScroll.ts',
-  ],
+  clientModules: ['./src/clientModules/syncColorScheme.ts'],
 
   i18n: {
     defaultLocale: 'en',
@@ -41,14 +41,10 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          exclude:
-            process.env.NODE_ENV === 'production' ||
-            process.env.NODE_ENV === 'development'
-              ? ['**/tone-guide/**']
-              : [],
+          exclude: ['**/tone-guide/**'],
           breadcrumbs: true,
           editUrl:
-            'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
+            'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
           versions: {
             current: {
               label: '2.0.0-beta', // Current version label
@@ -58,10 +54,7 @@ const config: Config = {
           },
         },
         theme: {
-          customCss: [
-            './src/css/custom.css',
-            // Add additional CSS files here
-          ],
+          customCss: ['./src/css/custom.css', './src/css/docs-components.css'],
         },
         sitemap: {
           lastmod: 'datetime',
@@ -160,43 +153,9 @@ const config: Config = {
 
       items: [
         {
-          type: 'dropdown',
-          label: 'Foundation',
           to: '/foundation',
+          label: 'Foundation',
           position: 'right',
-          className: 'foundation-dropdown',
-          items: [
-            {
-              type: 'doc',
-              docId: 'foundation/accessibility',
-              label: 'Accessibility',
-            },
-            {
-              type: 'doc',
-              docId: 'foundation/colour/intro',
-              label: 'Colour',
-            },
-            {
-              type: 'doc',
-              docId: 'foundation/design-tokens/grid',
-              label: 'Design Tokens',
-            },
-            {
-              type: 'doc',
-              docId: 'foundation/datavisualisation',
-              label: 'Data Visualisation',
-            },
-            {
-              type: 'doc',
-              docId: 'foundation/patterns',
-              label: 'Patterns',
-            },
-            {
-              type: 'doc',
-              docId: 'foundation/assets/image_placeholder',
-              label: 'Assets',
-            },
-          ],
         },
         {
           type: 'docSidebar',
@@ -227,23 +186,65 @@ const config: Config = {
       ],
     },
     footer: {
+      // Rendered by the swizzled Footer (src/theme/Footer). Internal links use
+      // `to`, external links use `href`.
       links: [
         {
+          title: 'Get started',
           items: [
+            { label: 'Getting Started', to: '/getting-started' },
             {
-              to: 'https://www.figma.com/',
-              label: 'EDS Figma',
-              className: 'figma',
+              label: 'Design',
+              to: '/docs/Next/about/getting-started/design/getting_started_design',
             },
             {
-              to: 'https://www.github.com/equinor/design-system',
-              label: 'EDS Github',
-              className: 'github',
+              label: 'Develop',
+              to: '/docs/Next/about/getting-started/develop/getting_started_development',
+            },
+            {
+              label: 'Citizen developer',
+              to: '/docs/Next/about/getting-started/develop/citizen_developers',
+            },
+            {
+              label: 'Team lead',
+              to: '/docs/Next/about/getting-started/team_roles',
             },
           ],
         },
+        {
+          title: 'Foundation',
+          items: [
+            {
+              label: 'Typography',
+              to: '/docs/Next/foundation/design-tokens/typography',
+            },
+            { label: 'Colours', to: '/docs/Next/foundation/colour/intro' },
+            {
+              label: 'Icons',
+              to: '/docs/Next/foundation/assets/system_icons',
+            },
+            {
+              label: 'Spacing',
+              to: '/docs/Next/foundation/design-tokens/spacing',
+            },
+          ],
+        },
+        {
+          title: 'Components',
+          items: [
+            { label: 'All components', to: '/docs/Next/components' },
+            { label: 'Storybook', href: 'https://storybook.eds.equinor.com' },
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
+            { label: 'About EDS', to: '/about' },
+            { label: 'Support', to: '/docs/Next/support' },
+          ],
+        },
       ],
-      copyright: `Equinor ${new Date().getFullYear()} `,
+      copyright: `© Equinor ${new Date().getFullYear()}`,
     },
     prism: {
       theme: prismThemes.github,

@@ -1,0 +1,38 @@
+/*
+ * Documentation-site design variables and layout utilities.
+ * These fill the gaps where no EDS/Infima token exists (section rhythm, prose
+ * measure, grid gap). Component-level styling lives colocated with each
+ * component in src/components/.
+ */
+
+:root {
+  --docs-hero-space-block: 5rem;
+  --docs-section-space-block: 5rem;
+  --docs-measure: 35rem;
+  --docs-grid-gap: 1.5rem;
+  --docs-card-min-height: 11.25rem;
+  /* Centred content column + the responsive gutter that flanks it. */
+  --docs-content-max: var(--ifm-container-width);
+  --docs-gutter: max(2rem, calc((100% - var(--docs-content-max)) / 2));
+  /* Hero band background. Uses Infima's --ifm-color-primary-lightest, which is a
+     light accent tint in light mode and is recomputed to a dark accent shade in
+     dark mode by Infima's primary-palette scale — the same switch .about-hero
+     uses. No manual [data-theme='dark'] override needed. */
+  --docs-hero-bg: var(--ifm-color-primary-lightest);
+}
+
+.docs-section {
+  padding-block: var(--docs-section-space-block);
+}
+
+.docs-section--muted {
+  /* Infima surface colour flips reliably in dark mode (see --docs-hero-bg note). */
+  background-color: var(--ifm-background-surface-color);
+}
+
+.docs-about-motto {
+  font-style: italic;
+  color: var(--eds-color-text-link, var(--ifm-color-primary));
+  margin-bottom: 2rem;
+}
+

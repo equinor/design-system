@@ -4,7 +4,7 @@ hide_table_of_contents: true
 displayed_sidebar: null
 ---
 
-import '../about/team/team.css'
+import './component-gallery.css'
 import '@equinor/eds-core-react/next/index.css'
 import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Icon, Switch, Divider } from '@equinor/eds-core-react/next'
 import { favorite_filled, check, time, remove, check_circle_outlined, info_circle, warning_outlined } from '@equinor/eds-icons'
@@ -30,17 +30,9 @@ export const TooltipMock = ({ title }) => (
   </div>
 )
 
-<div className="about-page">
-
-<div className="about-hero">
-
 # Components
 
 Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.
-
-</div>
-
-<div className="about-section about-section--surface">
 
 ## Data Display
 
@@ -93,10 +85,6 @@ Present information, status, structure, or relationships.
 
 </div>
 
-</div>
-
-<div className="about-section">
-
 ## Feedback
 
 Communicate progress, results, validation, or system state.
@@ -123,10 +111,6 @@ Communicate progress, results, validation, or system state.
 </a>
 
 </div>
-
-</div>
-
-<div className="about-section about-section--surface">
 
 ## Inputs
 
@@ -235,10 +219,6 @@ Capture and validate user data or choices.
 
 </div>
 
-</div>
-
-<div className="about-section">
-
 ## Navigation
 
 Help users move through content and hierarchies.
@@ -261,10 +241,6 @@ Help users move through content and hierarchies.
 
 </div>
 
-</div>
-
-<div className="about-section about-section--surface">
-
 ## Surfaces
 
 Structural or container elements that organise and layer content.
@@ -275,18 +251,18 @@ Structural or container elements that organise and layer content.
   <div className="component-gallery__preview">
     <div className="mock mock--stack" style={{gap: '0.75rem', width: '100%'}}>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <span style={{fontSize: '14px', color: '#333'}}>Section A</span>
-        <span style={{fontSize: '14px', color: '#6F6F6F'}}>Details</span>
+        <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-800)'}}>Section A</span>
+        <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-600)'}}>Details</span>
       </div>
       <Divider />
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <span style={{fontSize: '14px', color: '#333'}}>Section B</span>
-        <span style={{fontSize: '14px', color: '#6F6F6F'}}>Details</span>
+        <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-800)'}}>Section B</span>
+        <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-600)'}}>Details</span>
       </div>
       <Divider />
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <span style={{fontSize: '14px', color: '#333'}}>Section C</span>
-        <span style={{fontSize: '14px', color: '#6F6F6F'}}>Details</span>
+        <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-800)'}}>Section C</span>
+        <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-600)'}}>Details</span>
       </div>
     </div>
   </div>
@@ -298,16 +274,8 @@ Structural or container elements that organise and layer content.
 
 </div>
 
-</div>
-
-<div className="about-section about-section--cta">
-
 ## Explore in Storybook
 
 An interactive [Storybook](https://storybook.eds.equinor.com) is available for all developed components. Use it to explore variants, props, accessibility notes, and usage examples.
 
 If you cannot find a component or need to propose a new one, [open an issue](https://github.com/equinor/design-system/issues/new) describing the use case, constraints, and any interim solutions you have considered.
-
-</div>
-
-</div>

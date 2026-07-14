@@ -244,7 +244,10 @@ export default tseslint.config(
     rules: {
       'import/no-unresolved': [
         2,
-        { ignore: ['^@theme', '^@docusaurus', '^@site'] },
+        // Docusaurus aliases plus colocated CSS side-effect imports, which the
+        // import resolver (scoped to packages/*) can't resolve but Docusaurus
+        // and tsc handle via ambient '*.css' module declarations.
+        { ignore: ['^@theme', '^@docusaurus', '^@site', '\\.css$'] },
       ],
       'import/no-default-export': 'off',
       // The docs app isn't part of tsconfig.eslint.json's project graph, so

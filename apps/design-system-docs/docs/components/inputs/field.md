@@ -3,8 +3,6 @@ title: Field
 sidebar_position: 5
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Field
 
@@ -13,13 +11,7 @@ Field is a layout primitive for building accessible form fields. It automaticall
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to Use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--default"
-  width="100%"
-  height="125"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-field--default" height={125} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--default)
 
@@ -60,13 +52,7 @@ const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds(
 
 Use the `indicator` prop on Field.Label to show required or optional status. This is a visual indicator only - remember to also set `aria-required` on the input for accessibility.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--with-indicator"
-  width="100%"
-  height="200"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-field--with-indicator" height={200} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--with-indicator)
 
@@ -74,13 +60,7 @@ Use the `indicator` prop on Field.Label to show required or optional status. Thi
 
 Use Field.Description to provide additional context below the label. Connect it to the input using `aria-describedby` for screen reader support.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--with-description"
-  width="100%"
-  height="105"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-field--with-description" height={105} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--with-description)
 
@@ -90,13 +70,7 @@ For accessible live validation, wrap conditional content in a container with `ro
 
 Pass IDs to `getDescribedBy()` conditionally based on what's rendered.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--live-validation"
-  width="100%"
-  height="125"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-field--live-validation" height={125} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--live-validation)
 
@@ -104,13 +78,7 @@ Pass IDs to `getDescribedBy()` conditionally based on what's rendered.
 
 Set `disabled` on Field to apply disabled styling to all sub-components. The disabled state is passed down via the `data-disabled` attribute.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--disabled"
-  width="100%"
-  height="105"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-field--disabled" height={105} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--disabled)
 

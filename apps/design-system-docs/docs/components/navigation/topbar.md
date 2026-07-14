@@ -3,8 +3,6 @@ title: Top bar
 sidebar_position: 11
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Top bar
 

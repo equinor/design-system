@@ -1,0 +1,137 @@
+/*
+ * Component gallery — the /components landing page. These are live-preview
+ * cards (they render a real EDS component in the preview area), a distinct card
+ * type from the shared IconCard used elsewhere.
+ */
+
+.component-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.component-gallery__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: var(--eds-elevation-low);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition:
+    box-shadow 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.component-gallery__card:hover {
+  text-decoration: none;
+  color: inherit;
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--eds-elevation-high);
+  transform: translateY(-2px);
+}
+
+.component-gallery__preview {
+  min-height: 160px;
+  background-color: var(--ifm-background-surface-color);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+  border-bottom: 1px solid var(--eds-color-border-neutral-subtle);
+}
+
+.component-gallery__body {
+  padding: 1.25rem;
+}
+
+.component-gallery__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 0.25rem;
+}
+
+.component-gallery__subtitle {
+  font-size: 0.8125rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .component-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .component-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Layout wrappers for the live component previews. */
+.mock {
+  pointer-events: none;
+  width: 100%;
+}
+
+/* Row layout — centred, wrapping (buttons, chips, tooltip). */
+.mock--row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Stack layout — vertical, padded (text fields, search, input). */
+.mock--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+/* Selection controls — compact vertical list. */
+.mock--selection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0 0.25rem;
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+/* Full-width stack — no side padding (banners). */
+.mock--full {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Icon grid — inline SVGs. */
+.mock--icon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Links — vertical list. */
+.mock--links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}

@@ -3,8 +3,6 @@ title: Link
 sidebar_position: 4
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Link
 
@@ -13,13 +11,7 @@ Links are clickable text elements that take users to other pages, documents, or 
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to Use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--introduction"
-  width="100%"
-  height="83"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-navigation-link--introduction" height={83} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--introduction)
 
@@ -57,13 +49,7 @@ Link has two definitions:
 
 Inline links sit within body text and inherit the surrounding typography. Use them when linking to related content or references within a sentence.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--inline"
-  width="100%"
-  height="115"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-navigation-link--inline" height={115} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--inline)
 
@@ -71,13 +57,7 @@ Inline links sit within body text and inherit the surrounding typography. Use th
 
 Standalone links are used outside of body text, such as in navigation areas, card footers, or call-to-action sections. They use the UI font family.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--standalone"
-  width="100%"
-  height="83"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-navigation-link--standalone" height={83} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--standalone)
 
@@ -87,13 +67,7 @@ When a link takes the user outside the current application context, use the exte
 
 Use `target="_blank"` with `rel="noreferrer"` to open external links in a new tab.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--external-link"
-  width="100%"
-  height="83"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-navigation-link--external-link" height={83} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--external-link)
 

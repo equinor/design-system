@@ -1,83 +1,34 @@
 import { useThemeConfig } from '@docusaurus/theme-common'
-import GithubSvg from '../../images/github-logo.svg'
-import FigmaSvg from '../../images/figma-logo.svg'
 import Link from '@docusaurus/Link'
 
 import type { JSX, ReactNode } from 'react'
 
-type FooterLink = {
+import GithubSvg from '../../images/github-logo.svg'
+import FigmaSvg from '../../images/figma-logo.svg'
+
+type FooterItem = {
   label: string
-  to: string
+  to?: string
+  href?: string
 }
 
-type FooterColumn = {
-  title: string
-  links: FooterLink[]
+type FooterColumnProps = {
+  title?: string
+  items: FooterItem[]
 }
 
-const FOOTER_COLUMNS: FooterColumn[] = [
-  {
-    title: 'Get started',
-    links: [
-      {
-        label: 'Getting Started',
-        to: '/getting-started',
-      },
-      {
-        label: 'Design',
-        to: '/docs/Next/about/getting-started/design/getting_started_design',
-      },
-      {
-        label: 'Develop',
-        to: '/docs/Next/about/getting-started/develop/getting_started_development',
-      },
-      {
-        label: 'Citizen developer',
-        to: '/docs/Next/about/getting-started/develop/citizen_developers',
-      },
-      {
-        label: 'Team lead',
-        to: '/docs/Next/about/getting-started/team_roles',
-      },
-    ],
-  },
-  {
-    title: 'Foundation',
-    links: [
-      {
-        label: 'Typography',
-        to: '/docs/Next/foundation/design-tokens/typography',
-      },
-      { label: 'Colours', to: '/docs/Next/foundation/colour/intro' },
-      { label: 'Icons', to: '/docs/Next/foundation/assets/system_icons' },
-      { label: 'Spacing', to: '/docs/Next/foundation/design-tokens/spacing' },
-    ],
-  },
-  {
-    title: 'Components',
-    links: [
-      { label: 'All components', to: '/docs/Next/components' },
-      { label: 'Storybook', to: 'https://storybook.eds.equinor.com' },
-    ],
-  },
-  {
-    title: 'Resources',
-    links: [
-      { label: 'About EDS', to: '/about' },
-      { label: 'Support', to: '/docs/Next/support' },
-    ],
-  },
-]
-
-function FooterColumn({ title, links }: FooterColumn): ReactNode {
+function FooterColumn({ title, items }: FooterColumnProps): ReactNode {
   return (
     <div className="footer__column">
-      <p className="footer__column-title">{title}</p>
+      {title && <p className="footer__column-title">{title}</p>}
       <ul className="footer__column-links">
-        {links.map((link) => (
-          <li key={link.to}>
-            <Link to={link.to} className="footer__column-link">
-              {link.label}
+        {items.map((item) => (
+          <li key={item.to ?? item.href}>
+            <Link
+              className="footer__column-link"
+              {...(item.href ? { href: item.href } : { to: item.to })}
+            >
+              {item.label}
             </Link>
           </li>
         ))}
@@ -92,13 +43,15 @@ function Footer(): JSX.Element | null {
   if (!footer) {
     return null
   }
-  const { copyright } = footer
+
+  const { copyright, links = [] } = footer
+  const columns = links as unknown as FooterColumnProps[]
 
   return (
     <footer className="footer">
       <div className="footer__columns">
-        {FOOTER_COLUMNS.map((col) => (
-          <FooterColumn key={col.title} {...col} />
+        {columns.map((col, index) => (
+          <FooterColumn key={col.title ?? index} {...col} />
         ))}
       </div>
       <div className="footer__bottom">

@@ -3,8 +3,6 @@ title: Text area
 sidebar_position: 8
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Text area
 
@@ -13,13 +11,7 @@ Text area lets users enter and edit multiline text content. It combines Label, D
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to Use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--introduction"
-  width="100%"
-  height="200"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--introduction" height={200} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--introduction)
 
@@ -56,13 +48,7 @@ For more flexibility, use the individual components via the [Field](./field) com
 
 Text area auto-grows as the user types. Use `rows` to set the initial visible height (acts as the minimum), and `maxRows` to cap how tall it can grow before becoming scrollable. Set both to the same value for a fixed-height textarea.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--auto-grow"
-  width="100%"
-  height="450"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--auto-grow" height={450} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--auto-grow)
 
@@ -79,13 +65,7 @@ Follow this rule to keep forms clear and reduce visual noise:
 - **If most fields are required** - only mark optional fields by adding "(Optional)" to the label
 - **If most fields are optional** - only mark required fields by adding "(Required)" to the label
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--with-indicator"
-  width="100%"
-  height="380"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--with-indicator" height={380} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--with-indicator)
 
@@ -93,13 +73,7 @@ Follow this rule to keep forms clear and reduce visual noise:
 
 Use the `description` prop to provide additional context below the label.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--full-field"
-  width="100%"
-  height="220"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--full-field" height={220} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--full-field)
 
@@ -107,13 +81,7 @@ Use the `description` prop to provide additional context below the label.
 
 Use `showCharacterCount` to display a live character count below the textarea. When `maxLength` is also set, it renders as "n / max".
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--with-character-count"
-  width="100%"
-  height="460"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--with-character-count" height={460} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--with-character-count)
 
@@ -127,13 +95,7 @@ Avoid using `disabled` where possible. Disabled states can confuse users about w
 
 Use `readOnly` sparingly and only when necessary, as it may confuse users expecting editable fields. Read-only fields remain in tab order and their content submits with forms, making them useful for form summaries. When using this state, make sure to explain to the user why the content cannot be edited.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--states"
-  width="100%"
-  height="560"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--states" height={560} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--states)
 
@@ -141,13 +103,7 @@ Use `readOnly` sparingly and only when necessary, as it may confuse users expect
 
 Text area adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout for dense UIs.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textarea--density-modes"
-  width="100%"
-  height="250"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-textarea--density-modes" height={250} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textarea--density-modes)
 

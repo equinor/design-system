@@ -3,8 +3,6 @@ title: Button
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Button
 
@@ -13,14 +11,7 @@ Buttons are the primary action triggers in our design system. They help users pe
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--default"
-  width="100%"
-  height="70"
-  frameborder="1"
-  scrolling="no"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-button--default" height={70} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--default)
 
@@ -60,14 +51,7 @@ Use variants to guide users to the most important action:
 | Secondary | Medium   | Supporting actions (e.g., "Cancel")    |
 | Ghost     | Low      | Tertiary actions (e.g., toolbar icons) |
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--all-variants"
-  width="100%"
-  height="370"
-  frameborder="1"
-  scrolling="no"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-button--all-variants" height={370} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--all-variants)
 
@@ -79,14 +63,7 @@ Tones communicate the intent or nature of an action:
 - **Neutral**: A subdued option for actions that shouldn't compete for attention.
 - **Danger**: Reserved for destructive actions (e.g., "Delete"). Danger buttons should be placed in opposite order to positive actions in button groups to prevent accidental activation.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--tones"
-  width="100%"
-  height="175"
-  frameborder="1"
-  scrolling="no"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-button--tones" height={175} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--tones)
 
@@ -130,14 +107,7 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 - Can be circular for a softer appearance
 - Must always have an accessible name for screen readers
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--icon-only-variants"
-  width="100%"
-  height="120"
-  frameborder="1"
-  scrolling="no"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-button--icon-only-variants" height={120} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--icon-only-variants)
 
@@ -145,14 +115,7 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 
 Use the `round` prop on icon-only buttons to create circular buttons for a softer appearance.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--circular-icon-only"
-  width="100%"
-  height="130"
-  frameborder="1"
-  scrolling="no"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-inputs-button--circular-icon-only" height={130} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--circular-icon-only)
 

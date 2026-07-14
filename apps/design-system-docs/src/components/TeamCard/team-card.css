@@ -1,0 +1,44 @@
+.docs-team-card-grid {
+  display: grid;
+  gap: var(--docs-grid-gap, 1.5rem);
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+
+.docs-team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+  background-color: var(--ifm-background-color);
+  box-shadow: var(--eds-elevation-low);
+  text-align: center;
+}
+
+.docs-team-card__image {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.docs-team-card__name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.docs-team-card__role {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .docs-team-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  }
+}
+

@@ -1,65 +1,16 @@
-/* ======================================
- * SHARED SECTION STYLES
- * ====================================== */
+/*
+ * Styles unique to the homepage sections. Shared card/hero/section/CTA styling
+ * lives in the reusable components under src/components/. What remains here is
+ * the hero entry-point grid and the brand-logo resource tiles (distinct layouts).
+ */
 
-.sectionHeading {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-}
-
-.sectionSubtitle {
-  color: var(--ifm-color-emphasis-700);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  max-width: 560px;
-  margin-bottom: 2rem;
-}
-
-/* ======================================
- * 1. HERO
- * ====================================== */
-
-.hero {
-  padding: 6rem 0 5rem;
-  background-color: var(--ifm-color-primary-lightest);
-}
-
-.heroEyebrow {
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--ifm-color-primary);
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.heroTitle {
-  max-width: 640px;
-  margin-bottom: 1.25rem;
-  font-size: 2.75rem;
-  line-height: 1.15;
-}
-
-.heroBody {
-  max-width: 560px;
-  font-size: 1.1875rem;
-  line-height: 1.6;
-  color: var(--ifm-color-emphasis-700);
-  margin-bottom: 0.5rem;
-}
+/* ---- Hero entry grid ---- */
 
 .entryGrid {
   margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-@media screen and (max-width: 768px) {
-  .entryGrid {
-    grid-template-columns: 1fr;
-  }
+  gap: var(--docs-grid-gap, 1.5rem);
 }
 
 .entryCard {
@@ -68,28 +19,27 @@
   gap: 1.5rem;
   padding: 1.75rem;
   border: 1px solid var(--eds-color-border-neutral-subtle);
-  border-radius: 4px;
+  border-radius: var(--eds-spacing-border-radius-rounded);
   background-color: var(--ifm-background-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  text-decoration: none;
+  box-shadow: var(--eds-elevation-low);
   color: inherit;
   transition:
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .entryCard:hover {
   text-decoration: none;
   color: inherit;
-  box-shadow: var(--ifm-global-shadow-lw);
+  box-shadow: var(--eds-elevation-high);
   border-color: var(--ifm-color-primary);
   transform: translateY(-2px);
 }
 
 .entryCardIllustration {
-  width: 88px;
-  height: 88px;
+  width: 5.5rem;
+  height: 5.5rem;
   flex-shrink: 0;
 }
 
@@ -103,84 +53,46 @@
   color: var(--ifm-color-emphasis-700);
 }
 
-.inlineArrow {
-  width: 1rem;
-  height: 1rem;
-  fill: currentColor;
-  flex-shrink: 0;
-}
+/* ---- Resource tiles (brand logos) ---- */
 
-/* ======================================
- * 2. WHY EDS
- * ====================================== */
-
-.whyEds {
-  padding: 5rem 0;
-  background-color: var(--ifm-background-surface-color);
-}
-
-.fourColGrid {
+.resourceGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--docs-grid-gap, 1.5rem);
+  margin-bottom: 1.5rem;
 }
 
-@media screen and (max-width: 768px) {
-  .fourColGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .fourColGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.fourColGrid h3 {
-  margin-bottom: 0.5rem;
-}
-
-.fourColGrid p {
-  margin: 0;
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.9375rem;
-  line-height: 1.55;
-}
-
-.principleCard {
-  padding: 0;
-}
-
-/* ======================================
- * SHARED TILE ICON STYLES
- * ====================================== */
-
-.tileIconWrapper {
+.resourceTile {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: var(--ifm-color-primary);
-  border-radius: 4px;
-  margin-bottom: 0.75rem;
-  flex-shrink: 0;
+  gap: 1rem;
+  padding: 1.75rem;
+  border: 1px solid var(--eds-color-border-neutral-subtle);
+  border-radius: var(--eds-spacing-border-radius-rounded);
+  background-color: var(--ifm-background-color);
+  box-shadow: var(--eds-elevation-low);
+  color: inherit;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
-.tileIconWrapper svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  fill: #fff;
+.resourceTile:hover {
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--eds-elevation-high);
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
 }
 
-.tileIconBrand {
+.tileIconBrand,
+.tileIconPlain {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  margin-bottom: 0.75rem;
   flex-shrink: 0;
 }
 
@@ -189,176 +101,9 @@
   height: 1.5rem;
 }
 
-/* ======================================
- * 3. BROWSE BY CATEGORY
- * ====================================== */
-
-.designLanguage {
-  padding: 5rem 0;
-}
-
-/* ---- Bento grid ---- */
-.bentoGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-@media screen and (max-width: 768px) {
-  .bentoGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.bentoCard {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  border: 1px solid var(--eds-color-border-neutral-subtle);
-  border-radius: 4px;
-  background-color: var(--ifm-background-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  text-decoration: none;
-  color: inherit;
-  min-height: 240px;
-  transition:
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
-}
-
-.bentoCard:hover:not([data-disabled]) {
-  text-decoration: none;
-  color: inherit;
-  border-color: var(--ifm-color-primary);
-  box-shadow: var(--ifm-global-shadow-lw);
-  transform: translateY(-2px);
-}
-
-.bentoCard[data-disabled] {
-  opacity: 0.6;
-  cursor: default;
-}
-
-.bentoTopRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-}
-
-.bentoIconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: var(--ifm-color-primary);
-  border-radius: 4px;
-}
-
-.bentoIconWrapper svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  fill: #fff;
-}
-
-.bentoCard h3 {
-  font-size: 1.375rem;
-  margin-bottom: 0.5rem;
-}
-
-.bentoCard p {
-  margin: 0;
-  font-size: 0.9375rem;
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.55;
-}
-
-.bentoArrow {
-  margin-top: auto;
-  padding-top: 1.25rem;
+.tileIconPlain {
   color: var(--ifm-color-primary);
-}
-
-/* Mirrors EDS Chip (high-contrast variant) visuals for non-interactive status labels */
-.statusBadge {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  padding: 0.125rem 0.625rem;
-  border-radius: 100vmax;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.4;
-  white-space: nowrap;
-  color: var(--eds-color-text-strong-on-emphasis);
-  background-color: var(--eds-color-bg-fill-emphasis-default);
-}
-
-.statusBadge[data-tone='accent'] {
-  color: var(--eds-color-text-strong-on-emphasis);
-  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
-}
-
-/* ======================================
- * 4. RESOURCES
- * ====================================== */
-
-.resources {
-  padding: 5rem 0;
-  background-color: var(--ifm-background-surface-color);
-}
-
-.resourcesSubtitle {
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.9375rem;
-  margin-bottom: 1.5rem;
-  max-width: 560px;
-}
-
-.resourceGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-@media screen and (max-width: 768px) {
-  .resourceGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.resourceTile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.75rem;
-  border: 1px solid var(--eds-color-border-neutral-subtle);
-  border-radius: 4px;
-  background-color: var(--ifm-background-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  text-decoration: none;
-  color: inherit;
-  transition:
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
-}
-
-.resourceTile:hover {
-  text-decoration: none;
-  color: inherit;
-  box-shadow: var(--ifm-global-shadow-lw);
-  border-color: var(--ifm-color-primary);
-  transform: translateY(-2px);
-}
-
-.resourceTile .tileIconBrand,
-.resourceTile .tileIconWrapper {
-  margin-bottom: 0;
+  font-size: 1.5rem;
 }
 
 .resourceTile h3 {
@@ -378,46 +123,9 @@
   font-size: 0.875rem;
 }
 
-/* ======================================
- * 5. CONTRIBUTE
- * ====================================== */
-
-.contribute {
-  padding: 6rem 0;
-  background-color: var(--ifm-color-primary);
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-}
-
-.contribute h2 {
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-  font-size: 2.25rem;
-}
-
-.contributeBody {
-  max-width: 560px;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  color: var(--eds-color-text-accent-on-emphasis);
-}
-
-.contributeCta {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.75rem 2rem;
-  border: 2px solid var(--eds-color-text-accent-strong-on-emphasis);
-  border-radius: 4px;
-  font-size: 1rem;
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    background-color 200ms ease,
-    color 200ms ease;
-}
-
-.contributeCta:hover {
-  background-color: var(--eds-color-text-accent-strong-on-emphasis);
-  color: var(--ifm-color-primary);
-  text-decoration: none;
+@media screen and (max-width: 768px) {
+  .entryGrid,
+  .resourceGrid {
+    grid-template-columns: 1fr;
+  }
 }

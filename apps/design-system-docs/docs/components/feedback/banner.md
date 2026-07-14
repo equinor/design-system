@@ -3,8 +3,6 @@ title: Banner
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Banner
 
@@ -13,13 +11,7 @@ Banners display important, brief messages and provide optional actions for users
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to Use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--introduction"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--introduction" height={128} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--introduction)
 
@@ -61,13 +53,7 @@ Tones communicate the intent or severity of the banner message. Each tone uses a
 | Danger  | Errors, critical alerts, or destructive consequences          |
 | Success | Positive confirmations or successful completions              |
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--all-variants"
-  width="100%"
-  height="600"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--all-variants" height={600} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--all-variants)
 
@@ -78,13 +64,7 @@ Actions allow users to respond directly to the banner message. They can contain 
 - Action buttons should directly relate to the banner's message and clearly represent the intended action
 - Actions can be placed **inline** (beside the text) when space allows, or **stacked** (below the text) when the message is longer
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--with-actions"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--with-actions" height={128} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--with-actions)
 
@@ -92,13 +72,7 @@ Actions allow users to respond directly to the banner message. They can contain 
 
 Use `placement="bottom"` on `Banner.Actions` when the message is long and action buttons need more room.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--actions-bottom"
-  width="100%"
-  height="160"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--actions-bottom" height={160} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--actions-bottom)
 
@@ -106,13 +80,7 @@ Use `placement="bottom"` on `Banner.Actions` when the message is long and action
 
 Banners can also use links as actions for navigating to more information.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--with-link"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--with-link" height={128} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--with-link)
 
@@ -120,13 +88,7 @@ Banners can also use links as actions for navigating to more information.
 
 When the `onDismiss` callback is provided, a close button is rendered in the top-right corner. Use this when the user should be able to acknowledge and remove the banner.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--dismissible"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--dismissible" height={128} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--dismissible)
 

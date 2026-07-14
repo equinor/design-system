@@ -1,0 +1,13 @@
+.docs-section-heading__title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.docs-section-heading__subtitle {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: var(--docs-measure, 35rem);
+  margin-bottom: 0;
+}
+

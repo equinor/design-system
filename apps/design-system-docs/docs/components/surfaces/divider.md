@@ -3,8 +3,6 @@ title: Divider
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Divider
 
@@ -13,13 +11,7 @@ A divider is a thin horizontal line that brings clarity to layout by grouping an
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-divider--introduction"
-  width="100%"
-  height="245"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-surface-divider--introduction" height={245} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-divider--introduction)
 

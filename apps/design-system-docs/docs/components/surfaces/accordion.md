@@ -3,8 +3,6 @@ title: Accordion
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Accordion
 
@@ -13,13 +11,7 @@ Accordion lets readers reveal and collapse sections of content on demand. It hel
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--introduction"
-  width="100%"
-  height="258"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-surface-accordion--introduction" height={258} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--introduction)
 
@@ -64,13 +56,7 @@ By default, accordion items open and close independently of one another. This is
 
 Switch to an exclusive group when the content is mutually exclusive, when keeping multiple panels open would confuse the layout, or when the surrounding container is short on vertical space.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--exclusive"
-  width="100%"
-  height="198"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-surface-accordion--exclusive" height={198} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--exclusive)
 
@@ -78,13 +64,7 @@ Switch to an exclusive group when the content is mutually exclusive, when keepin
 
 Accordion items work uncontrolled out of the box – the component remembers its own open state and you only need to set the initial value. Reach for a controlled item when the open state is part of broader UI logic: syncing with a URL parameter, restoring layout from saved preferences, or co-ordinating with another panel on the page.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--controlled"
-  width="100%"
-  height="169"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-surface-accordion--controlled" height={169} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--controlled)
 
@@ -92,13 +72,7 @@ Accordion items work uncontrolled out of the box – the component remembers its
 
 Accordion follows the active density on its ancestor, so spacing and sizing stay coordinated with the rest of the layout. Use the spacious default in standalone or content-led views, and switch to comfortable density inside dense surfaces like tools, settings panes, or side panels.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--density"
-  width="100%"
-  height="444"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-surface-accordion--density" height={444} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--density)
 

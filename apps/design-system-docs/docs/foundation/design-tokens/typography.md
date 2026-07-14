@@ -77,12 +77,7 @@ Too many type sizes cause confusion. EDS 2.0 uses a single modular scale with te
 At spacious density `xs` is 10.5 px and at comfortable it falls to ~9 px. Use it for decorative or supplementary labels (badges, captions on dense visualisations), never for body copy or primary content.
 :::
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-foundation-typography--ui-text"
-  width="100%"
-  height="520"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-foundation-typography--ui-text" height={520} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-foundation-typography--ui-text)
 
@@ -116,12 +111,7 @@ Every size step has two line-height variants. Pick the one that matches what the
 - **`squished`** — tight leading for UI controls. Use this wherever text sits inside a component (buttons, inputs, badges, tabs). The reduced line-height keeps controls compact without sacrificing single-line legibility.
 - **`default`** — comfortable leading for reading. Use this for body copy, descriptions, tooltips, and any text that may wrap to multiple lines.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-foundation-typography--long-form-text"
-  width="100%"
-  height="640"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-foundation-typography--long-form-text" height={640} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-foundation-typography--long-form-text)
 

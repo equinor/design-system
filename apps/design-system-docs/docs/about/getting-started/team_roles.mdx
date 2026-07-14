@@ -5,6 +5,7 @@ displayed_sidebar: null
 ---
 
 import '../team/team.css'
+import { brush, code, apps } from '@equinor/eds-icons'
 
 <div className="about-page">
 <div className="about-hero">
@@ -20,20 +21,26 @@ A guide for team leads adopting EDS — from initial setup to scaling across pro
 
 ### 1. Map your team to the right guides
 
-<div className="role-cards">
-  <a className="role-card" href="design/getting_started_design">
-    <span className="role-card__role">Designers</span>
-    <span className="role-card__desc">Figma setup and design workflows</span>
-  </a>
-  <a className="role-card" href="develop/getting_started_development">
-    <span className="role-card__role">Developers</span>
-    <span className="role-card__desc">Component installation and implementation</span>
-  </a>
-  <a className="role-card" href="develop/citizen_developers">
-    <span className="role-card__role">Citizen Developers</span>
-    <span className="role-card__desc">Power Platform templates</span>
-  </a>
-</div>
+<IconCardGrid columns={3}>
+  <IconCard
+    icon={brush}
+    to="design/getting_started_design"
+    title="Designers"
+    description="Figma setup and design workflows"
+  />
+  <IconCard
+    icon={code}
+    to="develop/getting_started_development"
+    title="Developers"
+    description="Component installation and implementation"
+  />
+  <IconCard
+    icon={apps}
+    to="develop/citizen_developers"
+    title="Citizen Developers"
+    description="Power Platform templates"
+  />
+</IconCardGrid>
 
 ### 2. Request access
 

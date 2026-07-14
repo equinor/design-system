@@ -74,23 +74,6 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Inputs',
-      link: {
-        type: 'doc',
-        id: 'components/inputs/inputs',
-      },
-      items: [
-        'components/inputs/button',
-        'components/inputs/search',
-        'components/inputs/selection_controls',
-        'components/inputs/input',
-        'components/inputs/field',
-        'components/inputs/textfield',
-        'components/inputs/textarea',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Navigation',
       items: ['components/navigation/link'],
     },

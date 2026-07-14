@@ -3,8 +3,6 @@ title: Tooltip
 sidebar_position: 6
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 
 # Tooltip
 
@@ -13,13 +11,7 @@ Tooltips display brief, supplementary information when users hover over or focus
 <Tabs className="component-doc-tabs" queryString="tab">
 <TabItem value="when-to-use" label="When to Use" default>
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--introduction"
-  width="100%"
-  height="150"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--introduction" height={150} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--introduction)
 
@@ -63,13 +55,7 @@ Tooltips support flexible positioning relative to their trigger element:
 
 The tooltip will automatically reposition itself to stay within the viewport boundary using CSS Anchor Positioning fallbacks.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--placements"
-  width="100%"
-  height="228"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--placements" height={228} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--placements)
 
@@ -84,13 +70,7 @@ The tooltip will automatically reposition itself to stay within the viewport bou
 
 The tooltip can be disabled via the `disabled` prop. When disabled, the tooltip is not rendered and the trigger element is returned unwrapped, with no additional DOM elements added.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--disabled"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
+<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--disabled" height={100} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--disabled)
 
