@@ -19,7 +19,7 @@ export function CtaSection({
     <section className="docs-cta-section" data-tone={tone}>
       <div className="container">
         <h2 className="docs-cta-section__title">{title}</h2>
-        <p className="docs-cta-section__body">{children}</p>
+        <div className="docs-cta-section__body">{children}</div>
         <Link
           to={cta.to}
           className="docs-cta-section__button"

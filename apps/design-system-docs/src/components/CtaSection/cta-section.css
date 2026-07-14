@@ -19,6 +19,11 @@
   margin-bottom: 1.5rem;
 }
 
+/* MDX wraps text children in their own <p>; keep spacing owned by the body wrapper */
+.docs-cta-section__body > p:last-child {
+  margin-bottom: 0;
+}
+
 .docs-cta-section__button {
   display: inline-flex;
   align-items: center;

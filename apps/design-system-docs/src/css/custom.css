@@ -563,6 +563,22 @@ html[class*='docs-doc-id-components/'][class*='docs-version-current'] [class*='d
   width: 100%;
 }
 
+/* Strip the outer Docusaurus container's 1140px cap so the hero + content span
+   full width. Scoped to `main > .container` (direct child) so it never touches
+   the inner section `.container`s used by the landing pages. */
+html[class*='docs-doc-id-foundation/'] main > .container,
+html[class*='docs-doc-id-components/'][class*='docs-version-current'] main > .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Zero the Infima row negative margins (they'd overflow now that col padding
+   is stripped). */
+html[class*='docs-doc-id-foundation/'] main > .container .row,
+html[class*='docs-doc-id-components/'][class*='docs-version-current'] main > .container .row {
+  margin: 0 !important;
+}
+
 html[class*='docs-doc-id-foundation/'] [class*='docItemCol'],
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] [class*='docItemCol'] {
   max-width: 100% !important;
