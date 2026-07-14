@@ -11,6 +11,8 @@ on:
   schedule:
     # Hourly, off the whole hour to avoid the GitHub cron rush
     - cron: '23 * * * *'
+  # Dispatch from main only — the OIDC subject must match the inbound
+  # CI integration's refs/heads/main pattern; any other ref gets a 403
   workflow_dispatch:
 # A slow run must not race the next hourly tick on the shared branch
 concurrency:
@@ -24,9 +26,10 @@ jobs:
     permissions:
       # OIDC token so the studio CLI can authenticate against the
       # Tokens Studio CI integration (no service token needed).
-      # Scheduled and dispatched runs execute on main, so the token
-      # subject matches the integration's subject pattern
-      # (repo:equinor/design-system:ref:refs/heads/main).
+      # Scheduled runs always execute on main, so the token subject
+      # matches the integration's subject pattern
+      # (repo:equinor/design-system:ref:refs/heads/main). Manual
+      # dispatches must also pick main — see the trigger comment.
       id-token: write
       # Push backup commits to the tokens-studio-backup branch
       contents: write
