@@ -1,0 +1,98 @@
+name: Tokens Studio backup
+# Tokens Studio has no undo/rollback — only a read-only version history
+# of releases. Plugin changes push to the platform in real time, so a
+# designer mistake propagates immediately and the release workflow only
+# snapshots at release moments. This job is the safety net in between:
+# it pulls the current state of every token source on a schedule and
+# commits changes to the orphan branch `tokens-studio-backup`, giving us
+# diffs, history and a recovery point independent of the platform.
+# Recovery instructions: documentation/agent-instructions/TOKENS_STUDIO.md
+on:
+  schedule:
+    # Hourly, off the whole hour to avoid the GitHub cron rush
+    - cron: '23 * * * *'
+  workflow_dispatch:
+# A slow run must not race the next hourly tick on the shared branch
+concurrency:
+  group: tokens-studio-backup
+  cancel-in-progress: false
+jobs:
+  backup-tokens:
+    name: Back up tokens from Tokens Studio
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      # OIDC token so the studio CLI can authenticate against the
+      # Tokens Studio CI integration (no service token needed).
+      # Scheduled and dispatched runs execute on main, so the token
+      # subject matches the integration's subject pattern
+      # (repo:equinor/design-system:ref:refs/heads/main).
+      id-token: write
+      # Push backup commits to the tokens-studio-backup branch
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      # The branch was seeded manually once (orphan, README only) so
+      # this checkout can always assume it exists
+      - name: Checkout backup branch
+        uses: actions/checkout@v7
+        with:
+          ref: tokens-studio-backup
+          path: backup
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.16.0'
+      # Same key as _setup.yml so the store cache is shared with the
+      # other workflows
+      - name: Cache pnpm-store
+        uses: actions/cache@v6
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('pnpm-lock.yaml') }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      - name: Install dependencies
+        run: pnpm install --force
+      # No alias argument = pull every source configured in
+      # packages/eds-tokens/.studio.json (token sets + $themes.json +
+      # $metadata.json). --verbose because the run is unattended — the
+      # Actions log is the only place to diagnose a bad pull
+      - name: Pull tokens from Tokens Studio
+        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
+      # Aliases and output dirs are read from .studio.json so a config
+      # rename (e.g. the planned eds-test-3 → eds) never requires a
+      # workflow change. Each source lands at backup/<alias>/;
+      # --delete keeps removals visible in the diff
+      - name: Sync pulled sources into the backup branch
+        run: |
+          jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output)"' packages/eds-tokens/.studio.json |
+          while IFS=$'\t' read -r alias output; do
+            echo "Syncing $alias (packages/eds-tokens/$output → backup/$alias)"
+            rsync -a --delete "packages/eds-tokens/$output/" "backup/$alias/"
+          done
+      - name: Commit and push backup
+        working-directory: backup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No token changes since last backup'
+          else
+            git commit -m "chore: tokens backup $(date -u +%Y-%m-%dT%H:%M:%SZ) (run ${GITHUB_RUN_ID})"
+            git push origin tokens-studio-backup
+          fi
+      # The run is unattended and hourly — a broken backup must not be
+      # silent, or the safety net quietly stops existing
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
