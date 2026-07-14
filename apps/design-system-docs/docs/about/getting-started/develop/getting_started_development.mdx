@@ -4,22 +4,24 @@ hide_table_of_contents: true
 displayed_sidebar: null
 ---
 
-import '../../team/team.css'
 import Prerequisites from '@site/src/components/Prerequisites'
 
-<div className="about-page">
-<div className="about-hero">
+<DocsLanding>
 
-# Getting started with development
+<Hero
+  title="Getting started with development"
+  lead={
+    <>
+      <p>Install the React component library, load fonts, and start building with EDS components and design tokens.</p>
+      <p><strong>Prerequisites:</strong> <Prerequisites minimal /></p>
+    </>
+  }
+/>
 
-Install the React component library, load fonts, and start building with EDS components and design tokens.
+<section className="docs-section docs-section--muted">
+<div className="container">
 
-**Prerequisites:** <Prerequisites minimal />
-
-</div>
-<div className="about-section about-section--surface">
-
-## Install
+<SectionHeading title="Install" />
 
 ```bash
 npm install @equinor/eds-core-react styled-components
@@ -42,9 +44,12 @@ This stylesheet loads both **Equinor** and **Inter**. If you use EDS 2.0 (`next`
 :::
 
 </div>
-<div className="about-section">
+</section>
 
-## Use components
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Use components" />
 
 EDS has two component sets: the current stable API and the new **EDS 2.0** (`next`) components.
 
@@ -79,9 +84,12 @@ function App() {
 See the [component overview](/docs/Next/components) for what's available in each set.
 
 </div>
-<div className="about-section about-section--surface">
+</section>
 
-## Design tokens
+<section className="docs-section docs-section--muted">
+<div className="container">
+
+<SectionHeading title="Design tokens" />
 
 For custom styling, use EDS design tokens to stay consistent with the system.
 
@@ -114,9 +122,12 @@ const styles = {
 ```
 
 </div>
-<div className="about-section">
+</section>
 
-## Troubleshooting
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Troubleshooting" />
 
 **Missing fonts** — If components render in a generic sans-serif, check that the `eds-uprights-vf.css` stylesheet is loaded. EDS 2.0 components require Inter, which is only in the variable font stylesheet.
 
@@ -125,11 +136,14 @@ const styles = {
 **TypeScript version** — EDS requires <Prerequisites />. If you see type errors, check your `tsconfig.json` targets a compatible version.
 
 </div>
-<div className="about-section about-section--cta">
+</section>
 
-## Need help?
+<CtaSection
+  title="Need help?"
+  cta={{ label: 'Visit support', to: '/docs/Next/support' }}
+  tone="muted"
+>
+  The support page has Slack channels, GitHub issues, and office hours.
+</CtaSection>
 
-Check the [Support page](/docs/Next/support) for Slack channels, GitHub issues, and office hours.
-
-</div>
-</div>
+</DocsLanding>

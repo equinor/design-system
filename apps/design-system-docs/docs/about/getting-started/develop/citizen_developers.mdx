@@ -4,19 +4,17 @@ hide_table_of_contents: true
 displayed_sidebar: null
 ---
 
-import '../../team/team.css'
+<DocsLanding>
 
-<div className="about-page">
-<div className="about-hero">
+<Hero
+  title="Citizen developers"
+  lead={<p>Use EDS templates for Power Apps and Power BI to build brand-aligned solutions with the Microsoft 365 tools you already use.</p>}
+/>
 
-# Citizen developers
+<section className="docs-section docs-section--muted">
+<div className="container">
 
-Use EDS templates for Power Apps and Power BI to build brand-aligned solutions with the Microsoft 365 tools you already use.
-
-</div>
-<div className="about-section about-section--surface">
-
-## Getting started
+<SectionHeading title="Getting started" />
 
 1. **Access Power Apps** through your Microsoft 365 account
 2. **Download an EDS template** from the links below
@@ -24,9 +22,12 @@ Use EDS templates for Power Apps and Power BI to build brand-aligned solutions w
 4. **Customise** using the documented configuration areas
 
 </div>
-<div className="about-section">
+</section>
 
-## Power Apps
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Power Apps" />
 
 A canvas app template with pre-configured components, layout, theming, and interaction patterns aligned to EDS guidelines.
 
@@ -45,9 +46,12 @@ Import the template, review the built-in guidance, then tailor the documented co
 **Download:** [EDS Template and importing instructions](https://apps.equinor.com/edspadl) (Equinor network)
 
 </div>
-<div className="about-section about-section--surface">
+</section>
 
-## Power BI
+<section className="docs-section docs-section--muted">
+<div className="container">
+
+<SectionHeading title="Power BI" />
 
 Light-themed report templates with pre-configured charts, layouts, and styling that follow EDS principles.
 
@@ -65,9 +69,12 @@ Light-themed report templates with pre-configured charts, layouts, and styling t
 **Theme:** [Power BI EDS Theme (JSON)](pathname:///assets/eds-pbi-theme-v2.json)
 
 </div>
-<div className="about-section">
+</section>
 
-## Working with EDS templates
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Working with EDS templates" />
 
 These guidelines are specific to customising the Power Platform templates:
 
@@ -78,11 +85,15 @@ These guidelines are specific to customising the Power Platform templates:
 - **Check colour contrast** if you add custom colours — use the built-in EDS palette where possible, as it already meets WCAG 2.1 AA.
 
 </div>
-<div className="about-section about-section--cta">
+</section>
 
-## Getting support
+<CtaSection
+  title="Getting support"
+  cta={{ label: 'Visit support', to: '/docs/Next/support' }}
+  tone="muted"
+>
+  Connect with other citizen developers through internal Power Platform channels
+  — see the support page for Slack, office hours, and contact details.
+</CtaSection>
 
-Connect with other citizen developers through internal Power Platform channels. Visit the [Support page](/docs/Next/support) for Slack, office hours, and contact details.
-
-</div>
-</div>
+</DocsLanding>

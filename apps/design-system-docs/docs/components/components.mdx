@@ -30,13 +30,14 @@ export const TooltipMock = ({ title }) => (
   </div>
 )
 
-# Components
+<DocsLanding>
 
-Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.
+<Hero title="Components" lead={<p>Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.</p>} />
 
-## Data Display
+<section className="docs-section">
+<div className="container">
 
-Present information, status, structure, or relationships.
+<SectionHeading title="Data Display" subtitle="Present information, status, structure, or relationships." />
 
 <div className="component-gallery">
 
@@ -85,9 +86,13 @@ Present information, status, structure, or relationships.
 
 </div>
 
-## Feedback
+</div>
+</section>
 
-Communicate progress, results, validation, or system state.
+<section className="docs-section docs-section--muted">
+<div className="container">
+
+<SectionHeading title="Feedback" subtitle="Communicate progress, results, validation, or system state." />
 
 <div className="component-gallery">
 
@@ -112,9 +117,13 @@ Communicate progress, results, validation, or system state.
 
 </div>
 
-## Inputs
+</div>
+</section>
 
-Capture and validate user data or choices.
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Inputs" subtitle="Capture and validate user data or choices." />
 
 <div className="component-gallery">
 
@@ -219,9 +228,13 @@ Capture and validate user data or choices.
 
 </div>
 
-## Navigation
+</div>
+</section>
 
-Help users move through content and hierarchies.
+<section className="docs-section docs-section--muted">
+<div className="container">
+
+<SectionHeading title="Navigation" subtitle="Help users move through content and hierarchies." />
 
 <div className="component-gallery">
 
@@ -241,9 +254,13 @@ Help users move through content and hierarchies.
 
 </div>
 
-## Surfaces
+</div>
+</section>
 
-Structural or container elements that organise and layer content.
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Surfaces" subtitle="Structural or container elements that organise and layer content." />
 
 <div className="component-gallery">
 
@@ -274,8 +291,11 @@ Structural or container elements that organise and layer content.
 
 </div>
 
-## Explore in Storybook
+</div>
+</section>
 
-An interactive [Storybook](https://storybook.eds.equinor.com) is available for all developed components. Use it to explore variants, props, accessibility notes, and usage examples.
+<CtaSection title="Explore in Storybook" cta={{ label: 'Open Storybook', to: 'https://storybook.eds.equinor.com' }} tone="muted">
+An interactive Storybook is available for all developed components — explore variants, props, accessibility notes, and usage examples. If you cannot find a component or need to propose a new one, <a href="https://github.com/equinor/design-system/issues/new">open an issue</a> describing the use case.
+</CtaSection>
 
-If you cannot find a component or need to propose a new one, [open an issue](https://github.com/equinor/design-system/issues/new) describing the use case, constraints, and any interim solutions you have considered.
+</DocsLanding>

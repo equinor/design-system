@@ -223,11 +223,28 @@ nav.menu li a {
   border-radius: var(--ifm-global-radius);
 }
 
-/* Full-width pages (about, getting started) break out of the docs wrapper.
-   These overrides strip ALL Docusaurus/Infima spacing from the wrapper chain:
-   main > .container.padding-top--md.padding-bottom--lg > .row > .col > .docItemContainer > article > .theme-doc-markdown.markdown > .about-page */
+/* ======================================
+ * LANDING LAYOUT (.docs-landing)
+ * The "landing" layout for MDX docs (Components, Resources, Support, and the
+ * getting-started guides). A doc opts in by wrapping its content in the
+ * <DocsLanding> component (src/components/DocsLanding). It breaks the content
+ * out of the Docusaurus docs wrapper chain to full viewport width, matching the
+ * React landing pages (/foundation, /getting-started, /about) that use @theme/Layout.
+ * Docs WITHOUT this wrapper use the default doc layout (sidebar + TOC + column).
+ * Lives here (not colocated) because it must target `main`/`.col` ancestors of
+ * the doc content — server-rendered, so no flash.
+ * ====================================== */
 
-.theme-doc-markdown:has(.about-page) {
+.docs-landing {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.theme-doc-markdown:has(.docs-landing) {
   padding: 0;
   margin: 0;
   background: none;
@@ -236,20 +253,26 @@ nav.menu li a {
   overflow: visible;
 }
 
-/* Hide all docs chrome (breadcrumbs, version badges, edit link, pagination) on full-width pages */
-article:has(.about-page) > .theme-doc-breadcrumbs,
-article:has(.about-page) > [class*='docVersion'],
-article:has(.about-page) > footer {
+/* Hide Docusaurus's auto-generated doc-title header — the <Hero> inside
+   <DocsLanding> provides the title. */
+.theme-doc-markdown:has(.docs-landing) > header {
   display: none;
 }
 
-[class*='docItemContainer']:has(.about-page) .pagination-nav,
-[class*='docItemContainer']:has(.about-page) > nav {
+/* Hide all docs chrome (breadcrumbs, version badges, edit link, pagination) on full-width pages */
+article:has(.docs-landing) > .theme-doc-breadcrumbs,
+article:has(.docs-landing) > [class*='docVersion'],
+article:has(.docs-landing) > footer {
+  display: none;
+}
+
+[class*='docItemContainer']:has(.docs-landing) .pagination-nav,
+[class*='docItemContainer']:has(.docs-landing) > nav {
   display: none;
 }
 
 /* main — remove all constraints. No overflow-x: clip — it would clip the vw breakout. */
-main:has(.about-page) {
+main:has(.docs-landing) {
   border-top: none;
   box-shadow: none;
   margin: 0;
@@ -257,8 +280,11 @@ main:has(.about-page) {
   max-width: 100% !important;
 }
 
-/* .container.padding-top--md.padding-bottom--lg — use longhand to beat Infima utility !important */
-main:has(.about-page) .container {
+/* Docusaurus's OUTER container only (direct child of main) — strip its width
+   cap/padding so the content breaks out full-width. Scoped to `> .container`
+   so it does NOT hit the inner `.container`s that our sections use to centre
+   content at 1140px (same as the React landing pages). */
+main:has(.docs-landing) > .container {
   max-width: 100% !important;
   padding-top: 0 !important;
   padding-right: 0 !important;
@@ -268,38 +294,38 @@ main:has(.about-page) .container {
 }
 
 /* .row — remove negative margins */
-main:has(.about-page) .row {
+main:has(.docs-landing) .row {
   margin: 0 !important;
 }
 
 /* .col / .docItemCol — remove padding and width cap */
-main:has(.about-page) .col,
-main:has(.about-page) [class*='col'] {
+main:has(.docs-landing) .col,
+main:has(.docs-landing) [class*='col'] {
   padding: 0 !important;
   max-width: 100% !important;
   flex: 0 0 100%;
 }
 
 /* .docItemContainer — remove all spacing */
-main:has(.about-page) [class*='docItemContainer'] {
+main:has(.docs-landing) [class*='docItemContainer'] {
   margin: 0;
   padding: 0;
   overflow: visible;
 }
 
-main:has(.about-page) [class*='docItemContainer'] > nav {
+main:has(.docs-landing) [class*='docItemContainer'] > nav {
   display: none;
 }
 
 /* article — remove spacing */
-main:has(.about-page) article {
+main:has(.docs-landing) article {
   overflow: visible;
   margin: 0;
   padding: 0;
 }
 
-/* .markdown (Infima) — disable vertical rhythm on about-page without breaking the vw breakout margins */
-main:has(.about-page) .markdown > .about-page {
+/* .markdown (Infima) — disable vertical rhythm on docs-landing without breaking the vw breakout margins */
+main:has(.docs-landing) .markdown > .docs-landing {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -497,19 +523,22 @@ html[class*='docs-doc-id-components/'] .navbar__link[href*='/components/'] {
   box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
 }
 
+/*
+ * This block styles the FULL-WIDTH doc pages: foundation subpages and the
+ * component reference docs (Button, Icon, …). Both get a full-bleed hero from
+ * their first heading, hidden sidebar/TOC, and gutter-centred content.
+ *
+ * The /components, /resources, /support LANDING pages share the
+ * `docs-doc-id-components/` etc. class but use the <DocsLanding> component
+ * instead — they are excluded from the CONTENT rules below via
+ * `.theme-doc-markdown:not(:has(.docs-landing))`.
+ */
+
 /* ---- Hide sidebar, breadcrumbs, TOC, edit link, and pagination ---- */
 html[class*='docs-doc-id-foundation/'] .theme-doc-sidebar-container,
 html[class*='docs-doc-id-foundation/'] .theme-doc-breadcrumbs,
 html[class*='docs-doc-id-foundation/'] .theme-doc-toc-desktop,
 html[class*='docs-doc-id-foundation/'] .theme-doc-toc-mobile,
-html[class*='docs-doc-id-resources/'] .theme-doc-sidebar-container,
-html[class*='docs-doc-id-resources/'] .theme-doc-breadcrumbs,
-html[class*='docs-doc-id-resources/'] .theme-doc-toc-desktop,
-html[class*='docs-doc-id-resources/'] .theme-doc-toc-mobile,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-sidebar-container,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-breadcrumbs,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-toc-desktop,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-toc-mobile,
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-sidebar-container,
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-breadcrumbs,
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-toc-desktop,
@@ -517,119 +546,74 @@ html[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc
   display: none;
 }
 
-/* Hide edit link and pagination for clean landing-page feel */
+/* Hide edit link and pagination */
 html[class*='docs-doc-id-foundation/'] .theme-doc-footer,
 html[class*='docs-doc-id-foundation/'] article > footer,
 html[class*='docs-doc-id-foundation/'] .pagination-nav,
-html[class*='docs-doc-id-resources/'] .theme-doc-footer,
-html[class*='docs-doc-id-resources/'] article > footer,
-html[class*='docs-doc-id-resources/'] .pagination-nav,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-footer,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] article > footer,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] .pagination-nav,
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-footer,
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] article > footer,
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] .pagination-nav {
   display: none;
 }
 
-/* Let the content area take the full width */
+/* Full-width content area */
 html[class*='docs-doc-id-foundation/'] [class*='docMainContainer'],
-html[class*='docs-doc-id-resources/'] [class*='docMainContainer'],
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] [class*='docMainContainer'],
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] [class*='docMainContainer'] {
   max-width: 100%;
   width: 100%;
 }
 
-/* Remove container max-width and padding so hero can span full viewport */
-html[class*='docs-doc-id-foundation/'] [class*='docMainContainer'] .container,
-html[class*='docs-doc-id-resources/'] [class*='docMainContainer'] .container,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] [class*='docMainContainer'] .container,
-html[class*='docs-doc-id-components/'][class*='docs-version-current'] [class*='docMainContainer'] .container {
-  max-width: 100% !important;
-  padding: 0 !important;
-}
-
-/* Remove row negative margins */
-html[class*='docs-doc-id-foundation/'] [class*='docMainContainer'] .row,
-html[class*='docs-doc-id-resources/'] [class*='docMainContainer'] .row,
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] [class*='docMainContainer'] .row,
-html[class*='docs-doc-id-components/'][class*='docs-version-current'] [class*='docMainContainer'] .row {
-  margin: 0 !important;
-}
-
-/* Remove col max-width and padding so content spans full width */
 html[class*='docs-doc-id-foundation/'] [class*='docItemCol'],
-html[class*='docs-doc-id-resources/'] [class*='docItemCol'],
-html[class*='docs-doc-id-support/'][class*='docs-version-current'] [class*='docItemCol'],
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] [class*='docItemCol'] {
   max-width: 100% !important;
   flex: 0 0 100% !important;
   padding: 0 !important;
 }
 
-/* Page background — grey canvas, matching the React landing pages (/foundation
-   etc.). White cards/sections sit on it for contrast. */
+/* Page background — grey canvas, matching the React landing pages. */
 html[class*='docs-doc-id-foundation/'],
-html[class*='docs-doc-id-resources/'],
-html[class*='docs-doc-id-support/'][class*='docs-version-current'],
 html[class*='docs-doc-id-components/'][class*='docs-version-current'] {
   background-color: var(--ifm-background-color);
 }
 
-/* ---- Content area ---- */
+/* ---- Content area (excludes the <DocsLanding> landing pages) ---- */
 
-/* Remove card container — plain white background, add bottom breathing room */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown {
+/* Remove card container — plain background, add bottom breathing room */
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) {
   padding: 0 0 4rem;
   background-color: transparent;
   border: none;
   border-radius: 0;
 }
 
-/* Hero title — teal banner spanning full width (matches /foundation hero) */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > h1:first-child,
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > header:first-child,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > h1:first-child,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > header:first-child,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > h1:first-child,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > h1:first-child,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child {
+/* Hero title — banner spanning full width */
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > h1:first-child,
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > header:first-child {
   margin: 0;
   padding: 5rem 0 1.25rem;
   background-color: var(--docs-hero-bg);
   font-size: 2.75rem;
   line-height: 1.15;
-  /* Constrain title within a centered container */
   max-width: 100%;
   padding-left: var(--docs-gutter);
   padding-right: var(--docs-gutter);
 }
 
-/* Header variant: also style the inner h1 when Docusaurus wraps the title */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > header:first-child h1,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > header:first-child h1,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child h1,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child h1 {
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > header:first-child h1 {
   font-size: 2.75rem;
   line-height: 1.15;
   margin-bottom: 0;
 }
 
-/* Subtitle — first paragraph continues the hero background, full-width bg */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > h1:first-child + p,
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > header:first-child + p,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > h1:first-child + p,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > header:first-child + p,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > h1:first-child + p,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child + p,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > h1:first-child + p,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child + p {
+/* Subtitle — first paragraph continues the hero background */
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > h1:first-child + p,
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > header:first-child + p {
   margin: 0;
   padding: 0 0 4rem;
   background-color: var(--docs-hero-bg);
@@ -637,83 +621,60 @@ html[class*='docs-doc-id-components/'][class*='docs-version-current'] {
   font-size: 1.0625rem;
   line-height: 1.6;
   max-width: 100%;
-  /* Constrain subtitle within the same centered container */
   padding-left: var(--docs-gutter);
   padding-right: var(--docs-gutter);
 }
 
-/* ---- Body content — constrained and centered ---- */
-
-/* Content below hero gets centered container-width padding.
-   Exclude admonitions — they have their own background/border and need
-   margin-based centering instead (see rule below). */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > *:not(h1):not(header):not(.admonition):not(.theme-admonition):not(.about-page):not(.sb-iframe),
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > *:not(h1):not(header):not(.admonition):not(.theme-admonition):not(.about-page):not(.sb-iframe),
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > *:not(h1):not(header):not(.admonition):not(.theme-admonition):not(.about-page):not(.sb-iframe),
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > *:not(h1):not(header):not(.admonition):not(.theme-admonition):not(.about-page):not(.sb-iframe):not(:has(.component-doc-tabs)) {
+/* ---- Body content — constrained and centred via the shared gutter ---- */
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > *:not(h1):not(header):not(.admonition):not(.theme-admonition):not(.docs-landing):not(.sb-iframe):not(:has(.component-doc-tabs)) {
   padding-left: var(--docs-gutter);
   padding-right: var(--docs-gutter);
 }
 
-/* Admonitions: use margins to center so their background/border renders correctly */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > .admonition,
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > .theme-admonition,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > .admonition,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > .theme-admonition,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > .admonition,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > .theme-admonition,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > .admonition,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > .theme-admonition {
+/* Admonitions: use margins so their background/border renders correctly */
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > .admonition,
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > .theme-admonition {
   margin-left: var(--docs-gutter);
   margin-right: var(--docs-gutter);
 }
 
 /* First content element after hero subtitle gets extra top spacing */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > h1:first-child + p + *,
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown > header:first-child + p + *,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > h1:first-child + p + *,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown > header:first-child + p + *,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > h1:first-child + p + *,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child + p + *,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > h1:first-child + p + *,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown > header:first-child + p + * {
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > h1:first-child + p + *,
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) > header:first-child + p + * {
   margin-top: 3rem;
 }
 
 /* Section headings — separator line above to divide sections */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown h2,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown h2,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown h2,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown h2 {
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) h2 {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--eds-color-border-neutral-subtle);
   font-size: 1.75rem;
 }
 
-/* First h2 — no separator needed, hero already provides visual separation */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown h2:first-of-type,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown h2:first-of-type,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown h2:first-of-type,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown h2:first-of-type {
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) h2:first-of-type {
   border-top: none;
   padding-top: 0;
 }
 
 /* Sub-section headings */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown h3,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown h3,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown h3,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown h3 {
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) h3 {
   margin-top: 2rem;
   font-size: 1.25rem;
 }
 
 /* Body text */
-[class*='docs-doc-id-foundation/'] .theme-doc-markdown p,
-[class*='docs-doc-id-resources/'] .theme-doc-markdown p,
-[class*='docs-doc-id-support/'][class*='docs-version-current'] .theme-doc-markdown p,
-[class*='docs-doc-id-components/'][class*='docs-version-current'] .theme-doc-markdown p {
+:is([class*='docs-doc-id-foundation/'], [class*='docs-doc-id-components/'][class*='docs-version-current'])
+  .theme-doc-markdown:not(:has(.docs-landing)) p {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--ifm-color-emphasis-800);

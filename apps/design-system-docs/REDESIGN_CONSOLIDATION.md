@@ -171,6 +171,58 @@ Every phase verified with:
   across home, foundation, getting-started, about, resources, support,
   components, a component doc, and team_roles.
 
+## Layout consolidation (follow-up pass)
+
+The visuals were unified but the *layout mechanism* was not — React pages used
+`Layout` + `<Hero>`/`.docs-section`, while MDX landing docs relied on the
+`docs-doc-id-*` URL-prefix auto-styling over the docs plugin's `.col`/`.container`
+chain, and `/components` (which had `displayed_sidebar: null`) differed from
+`/resources` (which didn't). Established **two explicit layouts**:
+
+- **Landing layout** — `<DocsLanding>` component (`src/components/DocsLanding`)
+  wraps MDX content, breaking it out of the docs `.col` to full width, with
+  frontmatter `hide_table_of_contents: true` + `displayed_sidebar: null`. Inside,
+  the MDX uses the **same** `<Hero>` + `<section className="docs-section">` +
+  `<SectionHeading>` building blocks as the React landing pages. Applied to
+  `components.mdx`, `resources.mdx`, `support.mdx`. The full-width CSS
+  (`.docs-landing`, renamed from `.about-page`) lives in `custom.css` because it
+  targets `main`/`.col` ancestors.
+- **Full-width doc layout** — foundation subpages and the component reference
+  docs (button, icon, …): a full-bleed hero generated from the doc's first
+  heading, hidden sidebar/TOC, gutter-centred content; component docs add the
+  tab bar. Driven by the `docs-doc-id-{foundation,components}/` auto-styling,
+  scoped `.theme-doc-markdown:not(:has(.docs-landing))` so it does NOT touch the
+  landing pages (which share the `docs-doc-id-components/` class but use
+  `<DocsLanding>`).
+
+The signal is explicit: content wrapped in `<DocsLanding>` → landing layout;
+otherwise → the full-width doc layout.
+
+NOTE: `/components`, `/resources`, `/support` (landings) and the component
+reference docs (button, …) all share the `docs-doc-id-components/` html class.
+They are distinguished by the presence of `.docs-landing`: the landing pages use
+`<DocsLanding>` + explicit `<Hero>`/`<section>`; the reference docs use the
+auto-styling. Removing `components/` from the auto-styling breaks the reference
+docs, so it must stay — scoped away from `.docs-landing`.
+
+### Final state — exactly two layouts
+
+1. **Landing** — `<DocsLanding>` (MDX) or `@theme/Layout` (React pages) + `<Hero>`
+   + `<section className="docs-section">` + `<SectionHeading>` + cards. Used by:
+   `/`, `/foundation`, `/getting-started`, `/about` (React pages) and
+   `components.mdx`, `resources.mdx`, `support.mdx`, plus the getting-started
+   **guides** (`design`, `develop`, `citizen_developers`, `team_roles`). The
+   guides were folded in from the old `.about-hero`/`.about-section` system,
+   which is now deleted; `team.css` is reduced to just `.about-accordion` (the
+   FAQ component on team_roles).
+2. **Doc (full-width, auto-hero)** — foundation subpages + component reference
+   docs, via the `docs-doc-id-{foundation,components}/` auto-styling (scoped
+   `:not(:has(.docs-landing))`); component docs add the `component-doc-tabs` tab
+   bar. Signal: no `<DocsLanding>` on a doc under those id prefixes. Fixes found along the way: a duplicate hero (Docusaurus's
+auto doc-title `<header>` — now hidden under `.docs-landing`), and inner section
+`.container`s being forced full-width by the breakout rule (scoped to
+`main:has(.docs-landing) > .container`).
+
 ## Net result
 
 `/`, `/foundation`, `/getting-started`, `/about`, `/resources`, `/support`, and

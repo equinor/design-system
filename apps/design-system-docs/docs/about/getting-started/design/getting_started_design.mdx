@@ -4,21 +4,22 @@ hide_table_of_contents: true
 displayed_sidebar: null
 ---
 
-import '../../team/team.css'
+<DocsLanding>
 
-<div className="about-page">
-<div className="about-hero">
+<Hero
+  title="Getting started with design"
+  lead={
+    <>
+      <p>Set up Figma, connect to the EDS component libraries, and start designing with shared tokens and components.</p>
+      <p><strong>Prerequisites:</strong> Equinor Figma account</p>
+    </>
+  }
+/>
 
-# Getting started with design
+<section className="docs-section docs-section--muted">
+<div className="container">
 
-Set up Figma, connect to the EDS component libraries, and start designing with shared tokens and components.
-
-**Prerequisites:** Equinor Figma account
-
-</div>
-<div className="about-section about-section--surface">
-
-## Set up Figma
+<SectionHeading title="Set up Figma" />
 
 1. **Get Figma access** — apply through AccessIT or contact your team administrator
 2. **Join your design team** — search for your team in Figma and request access, or ask your team admin to add you
@@ -27,9 +28,12 @@ Set up Figma, connect to the EDS component libraries, and start designing with s
 For detailed permissions guidance and workspace setup, see the [Figma guide](figma.md).
 
 </div>
-<div className="about-section">
+</section>
 
-## Configure your workspace
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Configure your workspace" />
 
 Before you start designing, adjust a few Figma settings:
 
@@ -38,9 +42,12 @@ Before you start designing, adjust a few Figma settings:
 - Familiarise yourself with the EDS component naming in the Assets panel
 
 </div>
-<div className="about-section about-section--surface">
+</section>
 
-## Build your first interface
+<section className="docs-section docs-section--muted">
+<div className="container">
+
+<SectionHeading title="Build your first interface" />
 
 Start simple and layer in complexity:
 
@@ -56,11 +63,15 @@ Start simple and layer in complexity:
 - Ensure touch targets are at minimum **44px**
 
 </div>
-<div className="about-section about-section--cta">
+</section>
 
-## Next steps
+<CtaSection
+  title="Next steps"
+  cta={{ label: 'Explore components', to: '/docs/Next/components' }}
+  tone="muted"
+>
+  Connect with other designers in the community channels, or propose a new
+  component if something is missing.
+</CtaSection>
 
-Explore [advanced components](/docs/Next/components), connect with other designers in the [community channels](/docs/Next/support), or [propose a new component](https://github.com/equinor/design-system/issues) if something is missing.
-
-</div>
-</div>
+</DocsLanding>

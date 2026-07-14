@@ -4,20 +4,20 @@ hide_table_of_contents: true
 displayed_sidebar: null
 ---
 
-import '../team/team.css'
+import '../team/accordion.css'
 import { brush, code, apps } from '@equinor/eds-icons'
 
-<div className="about-page">
-<div className="about-hero">
+<DocsLanding>
 
-# Team Leads
+<Hero
+  title="Team Leads"
+  lead={<p>A guide for team leads adopting EDS — from initial setup to scaling across projects.</p>}
+/>
 
-A guide for team leads adopting EDS — from initial setup to scaling across projects.
+<section className="docs-section docs-section--muted">
+<div className="container">
 
-</div>
-<div className="about-section about-section--surface">
-
-## Getting your team started
+<SectionHeading title="Getting your team started" />
 
 ### 1. Map your team to the right guides
 
@@ -51,9 +51,12 @@ Designers need Figma licences (through AccessIT). Developers need the npm packag
 Adopt EDS on a new project rather than migrating an existing one. This lets the team learn the components without the pressure of a running system. Once the team is comfortable, you can plan migration for existing projects.
 
 </div>
-<div className="about-section">
+</section>
 
-## Scaling adoption
+<section className="docs-section">
+<div className="container">
+
+<SectionHeading title="Scaling adoption" />
 
 You don't need to adopt everything at once. A practical approach:
 
@@ -63,9 +66,12 @@ You don't need to adopt everything at once. A practical approach:
 4. **Track what matters** — accessibility compliance, component reuse rate, and design consistency are useful signals
 
 </div>
-<div className="about-section about-section--surface">
+</section>
 
-## Common questions & challenges
+<section className="docs-section docs-section--muted">
+<div className="container">
+
+<SectionHeading title="Common questions & challenges" />
 
 <div className="about-accordion">
   <details>
@@ -95,11 +101,14 @@ You don't need to adopt everything at once. A practical approach:
 </div>
 
 </div>
-<div className="about-section about-section--cta">
+</section>
 
-## Support & community
+<CtaSection
+  title="Support & community"
+  cta={{ label: 'Visit support', to: '/docs/Next/support' }}
+  tone="muted"
+>
+  The support page has Slack channels, office hours, and direct contact.
+</CtaSection>
 
-Visit the [Support page](/docs/Next/support) for Slack channels, office hours, and direct contact.
-
-</div>
-</div>
+</DocsLanding>
