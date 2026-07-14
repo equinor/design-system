@@ -58,7 +58,7 @@ Start building immediately with tools designed for your workflow.
 
 ## Versioning
 
-"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, alongside the stable EDS 1 components.
+"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, alongside the stable EDS 1 components. The package itself is on version `2.x` today, so an installed `eds-core-react@2.x` matching "EDS 2.0" is also a coincidence.
 
 When EDS 2.0 stabilises, the components move out of `/next` and EDS 1 is deprecated. Because removing EDS 1 is a breaking change, the package bumps to `eds-core-react@3.0.0`.
 
