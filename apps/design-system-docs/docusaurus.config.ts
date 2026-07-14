@@ -14,7 +14,7 @@ const config: Config = {
   //   v4: true, // Improve compatibility with the upcoming Docusaurus v4
   // },
 
-  url: 'https://equinor.github.io',
+  url: 'https://eds.equinor.com',
   baseUrl: '/',
 
   organizationName: 'equinor',
