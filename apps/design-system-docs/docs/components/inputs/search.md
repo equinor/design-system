@@ -1,15 +1,9 @@
 ---
 title: Search
 sidebar_position: 5
+hide_title: true
+description: 'Search allows users to quickly locate relevant content within a website or application. It consists of a search input field with a built-in search icon and an optional clear button that appears when text is entered.'
 ---
-
-
-# Search
-
-Search allows users to quickly locate relevant content within a website or application. It consists of a search input field with a built-in search icon and an optional clear button that appears when text is entered.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to Use" default>
 
 <StorybookEmbed id="eds-2-0-beta-inputs-search--introduction" height={100} />
 
@@ -25,9 +19,6 @@ Use Search when users need help finding relevant information quickly on a websit
 - Replacing solid navigation design - Search should supplement, not replace primary navigation
 - Filtering structured data in tables - use **Chip** or dedicated filter controls instead
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 The Search component is a composite element consisting of:
@@ -35,9 +26,6 @@ The Search component is a composite element consisting of:
 - **Search icon**: A magnifying glass icon on the left side indicating the field's purpose
 - **Input field**: A text input where users type their query
 - **Clear button**: A close icon button that appears when text is entered, allowing users to quickly clear the field
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -105,9 +93,6 @@ A read-only search field displays the current value but prevents editing. The cl
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-search--read-only)
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 - **Label**: Always provide a `label` or `aria-label` that describes what is being searched. This helps screen reader users understand the purpose of the search field.
@@ -115,9 +100,6 @@ A read-only search field displays the current value but prevents editing. The cl
 - **Keyboard**: Supports Tab focus. The clear button is keyboard-accessible when visible, and focus returns to the input after clearing.
 - **ARIA associations**: `description` and `helperMessage` are automatically associated with the input via `aria-describedby`.
 - **Disabled state**: Disabled search fields remain visible to screen readers. Consider communicating why the search is unavailable.
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -134,9 +116,6 @@ Search is available as a variant of the shared input component in Figma:
 3. With the instance selected, use the **Instance Swap** menu in the **Design Panel** to swap it to the **Search** variant — this adds the search icon as the left adornment
 4. Configure the outer **Input [EDS]** properties: set the **Title**, **Description**, and toggle **Label + Description** or **Optional/Required** as needed
 5. Configure the inner **Search** variant properties: set the **State** (e.g. `Default`, `Focus`, `Disabled`), **Validation** (`Default` or `Error`), **Placeholder** text, and toggle **Helper Message** or **Right Adornment** (clear button) on or off
-
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -156,6 +135,3 @@ Search is available as a variant of the shared input component in Figma:
 - Make the search field so narrow that typical queries are cut off
 - Disable the search field without communicating why it is unavailable
   :::
-
-</TabItem>
-</Tabs>

@@ -1,14 +1,8 @@
 ---
 title: Icon
+hide_title: true
+description: 'Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to scale automatically with typography, adapt to density modes, and meet accessibility standards out of the box.'
 ---
-
-
-# Icon
-
-Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to scale automatically with typography, adapt to density modes, and meet accessibility standards out of the box.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to Use" default>
 
 <StorybookEmbed id="eds-2-0-beta-icon--introduction" height={88} />
 
@@ -23,9 +17,6 @@ Use Icon to reinforce meaning alongside text - in buttons, form fields, status m
 - Purely decorative illustrations - use an image instead
 - Complex graphics or logos - use a dedicated image or SVG
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 The Icon component renders an SVG element with a single `data` prop from `@equinor/eds-icons`. It supports three sizing layers:
@@ -33,9 +24,6 @@ The Icon component renders an SVG element with a single `data` prop from `@equin
 - **Explicit `size` prop** - highest priority, for precise control
 - **Parent Typography** - automatically inherits the right size when placed inside Typography
 - **Dynamic fallback** - scales at 1.5× relative to the surrounding font size
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -99,9 +87,9 @@ Icons inherit `currentColor` by default, making them adapt to text color automat
 
 How you use Icon depends on the layout context:
 
-| Context     | Usage                          | Why                                                             |
-| ----------- | ------------------------------ | --------------------------------------------------------------- |
-| Inline text | `<Icon data={save} />`         | Auto-sizes to 1.5em, negative margins for optical alignment     |
+| Context     | Usage                          | Why                                                                |
+| ----------- | ------------------------------ | ------------------------------------------------------------------ |
+| Inline text | `<Icon data={save} />`         | Auto-sizes to 1.5em, negative margins for optical alignment        |
 | Flex/Button | `<Icon data={save} size="md">` | Fixed size from tokens, no margins - layout controlled by flex gap |
 
 The `size` prop removes negative margins, giving full control to your layout system.
@@ -109,9 +97,6 @@ The `size` prop removes negative margins, giving full control to your layout sys
 <StorybookEmbed id="eds-2-0-beta-icon--inline-with-text" height={257} />
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--inline-with-text)
-
-</TabItem>
-<TabItem value="usage-in-figma" label="Usage in Figma">
 
 ## Usage in Figma
 
@@ -123,19 +108,16 @@ There is no dedicated Icon component in Figma. Instead, icons are imported direc
 
 The container exposes variables for controlling size and negative padding:
 
-| Variable                                 | Purpose                                      |
-| ---------------------------------------- | -------------------------------------------- |
-| `Selectable/Icon size`                   | Controls the icon dimensions                 |
-| `Selectable/Icon container padding ↕︎`  | Negative vertical padding for optical alignment |
-| `Selectable/Icon container padding ↔︎`  | Negative horizontal padding (square containers only) |
+| Variable                              | Purpose                                              |
+| ------------------------------------- | ---------------------------------------------------- |
+| `Selectable/Icon size`                | Controls the icon dimensions                         |
+| `Selectable/Icon container padding ↕︎` | Negative vertical padding for optical alignment      |
+| `Selectable/Icon container padding ↔︎` | Negative horizontal padding (square containers only) |
 
 **Which padding variables to use depends on the container shape:**
 
 - **Rectangular containers** (e.g., a button with text) — Only vertical padding (`↕︎`) is needed. Horizontal spacing is handled by the parent layout's gap.
 - **Square containers** (e.g., an icon-only button) — Both vertical (`↕︎`) and horizontal (`↔︎`) padding are needed, set to the same value, since the icon fills the container in both directions.
-
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
 
 ## Accessibility
 
@@ -157,9 +139,6 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--accessibility)
 
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
-
 ## Do's and Don'ts
 
 :::info **Do**
@@ -168,14 +147,11 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Let icons inherit size from Typography when used inline with text
 - Use the `size` prop in flex layouts where you control spacing with gap
 - Rely on `currentColor` for icons that should match surrounding text color
-:::
+  :::
 
 :::danger **Don't**
 
 - Don't use icons without a `title` when there is no accompanying text to convey the meaning
 - Don't combine the `size` prop with Typography auto-sizing. The `size` prop takes priority and overrides the inherited size, so the Typography context has no effect
 - Don't use custom pixel values for sizing - use the `size` prop or let tokens handle it
-:::
-
-</TabItem>
-</Tabs>
+  :::

@@ -1,15 +1,9 @@
 ---
 title: Link
 sidebar_position: 4
+hide_title: true
+description: 'Links are clickable text elements that take users to other pages, documents, or locations within a page. They are essential for navigation and help users discover and move between content. Links should always have clear, descriptive text so users understand where they will be taken.'
 ---
-
-
-# Link
-
-Links are clickable text elements that take users to other pages, documents, or locations within a page. They are essential for navigation and help users discover and move between content. Links should always have clear, descriptive text so users understand where they will be taken.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to Use" default>
 
 <StorybookEmbed id="eds-2-0-beta-navigation-link--introduction" height={83} />
 
@@ -28,18 +22,12 @@ Use a link when the user needs to:
 - Performing actions like "Save" or "Log in" - use **Button** instead
 - Changing application state such as opening dialogs, starting processes, or saving data - use **Button** instead
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 Link has two definitions:
 
 - **Link**: A text-only link used for both inline and standalone contexts.
 - **External link**: A standalone link with a trailing external-link icon, signalling that the user will leave the current application context.
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -90,9 +78,6 @@ Both internal and external links should open in the current tab for a predictabl
 
 In these cases, add "(opens in a new tab)" to the link text so users know what to expect.
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 - **Keyboard**: Links are natively focusable and activated with Enter
@@ -100,9 +85,6 @@ In these cases, add "(opens in a new tab)" to the link text so users know what t
 - **Descriptive text**: Link text must describe the destination - avoid "Click here" or "Read more"
 - **External links**: When opening in a new tab, include "(opens in a new tab)" in the link text or as visually hidden text for screen readers
 - **Colour contrast**: Link colour meets WCAG 2.1 AA contrast requirements against the background
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -116,9 +98,6 @@ In these cases, add "(opens in a new tab)" to the link text so users know what t
 2. Drag the component into your frame
 3. Select the component to see its properties in the **Design Panel**
 4. Set the **Type** to either **Inline** or **Standalone**
-
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -139,6 +118,3 @@ In these cases, add "(opens in a new tab)" to the link text so users know what t
 - Use the external-link icon for internal navigation
 - Rely on colour alone to distinguish links from surrounding text
   :::
-
-</TabItem>
-</Tabs>

@@ -1,15 +1,9 @@
 ---
 title: Divider
 sidebar_position: 2
+hide_title: true
+description: 'A divider is a thin horizontal line that brings clarity to layout by grouping and separating content. Designed with care, dividers should be noticeable but never compete for attention - they help establish rhythm and hierarchy across our interfaces.'
 ---
-
-
-# Divider
-
-A divider is a thin horizontal line that brings clarity to layout by grouping and separating content. Designed with care, dividers should be noticeable but never compete for attention - they help establish rhythm and hierarchy across our interfaces.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to use" default>
 
 <StorybookEmbed id="eds-2-0-beta-surface-divider--introduction" height={245} />
 
@@ -28,9 +22,6 @@ Use a divider to group related content or separate sections of a layout when whi
 - Decorating layouts where white space already creates clear separation
 - Splitting every individual item in a list - reserve them for meaningful groupings
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator) and render as a native `<hr>`, which has the implicit ARIA role `separator`.
@@ -38,9 +29,6 @@ Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-
 - Use the divider as a decorative separator between groups of related content - it communicates structure visually without becoming an interactive element
 - Keep enough contrast between the divider and its background so the separation reads clearly, while staying subtle enough to avoid clashing with surrounding content
 - Do not rely on dividers alone to convey grouping for assistive technology - structure content with appropriate landmarks, headings, or list semantics
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -55,9 +43,6 @@ Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-
 3. Resize the divider horizontally to match the width of the container it separates
 
 The divider uses the `--eds-color-border-subtle` token, so it adapts automatically to the active theme mode set on the containing frame.
-
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -76,6 +61,3 @@ The divider uses the `--eds-color-border-subtle` token, so it adapts automatical
 - Override the subtle border colour with a stronger tone - dividers should support content, not compete with it
 
 :::
-
-</TabItem>
-</Tabs>

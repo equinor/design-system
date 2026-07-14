@@ -1,15 +1,9 @@
 ---
 title: Autocomplete
 sidebar_position: 1
+hide_title: true
+description: 'Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not already in the list.'
 ---
-
-
-# Autocomplete
-
-Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not already in the list.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to use" default>
 
 <StorybookEmbed id="eds-2-0-beta-inputs-autocomplete--introduction" height={350} />
 
@@ -26,9 +20,6 @@ Use Autocomplete when users need to choose a single value from a list that is to
 - A small, fixed set of mutually exclusive options - use Radio or a basic Select instead
 - Multi-value selection - the EDS 2.0 Autocomplete is single-select
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 Autocomplete is a composite field that combines several pieces:
@@ -39,9 +30,6 @@ Autocomplete is a composite field that combines several pieces:
 - **Clear button**: A close icon that appears when the input has a value
 - **Listbox**: A popover that lists filtered options, anchored to the input
 - **Helper message**: Optional text below the input for validation feedback or hints
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -137,9 +125,6 @@ Autocomplete adapts to density modes. Spacious is the default; comfortable provi
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--density-modes)
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 Autocomplete implements the ARIA 1.2 combobox pattern. Labels, descriptions, and helper messages are wired up automatically, and the dropdown announces how many results are available as the user types.
@@ -151,9 +136,6 @@ Autocomplete implements the ARIA 1.2 combobox pattern. Labels, descriptions, and
 - **Arrow Down / Arrow Up**: Open the listbox and move through options
 - **Enter**: Select the highlighted option, or confirm a typed custom value when custom values are allowed
 - **Escape**: Close the listbox without changing the selection
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -186,9 +168,6 @@ The component exposes the following Figma properties:
 2. Drag an instance into your frame
 3. In the **Design Panel**, set **State** and **Validation**, toggle **Title + Description** / **Helper Message**, and edit the **Placeholder**, **Text area**, and **Helper Message Text** values to match your content
 
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
-
 ## Do's and Don'ts
 
 :::info **Do**
@@ -208,6 +187,3 @@ The component exposes the following Figma properties:
 - Rely on the dropdown alone to communicate errors - always show a helper message
 
 :::
-
-</TabItem>
-</Tabs>

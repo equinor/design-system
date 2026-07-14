@@ -187,25 +187,57 @@ chain, and `/components` (which had `displayed_sidebar: null`) differed from
   `components.mdx`, `resources.mdx`, `support.mdx`. The full-width CSS
   (`.docs-landing`, renamed from `.about-page`) lives in `custom.css` because it
   targets `main`/`.col` ancestors.
-- **Full-width doc layout** — foundation subpages and the component reference
-  docs (button, icon, …): a full-bleed hero generated from the doc's first
-  heading, hidden sidebar/TOC, gutter-centred content; component docs add the
-  tab bar. Driven by the `docs-doc-id-{foundation,components}/` auto-styling,
-  scoped `.theme-doc-markdown:not(:has(.docs-landing))` so it does NOT touch the
-  landing pages (which share the `docs-doc-id-components/` class but use
-  `<DocsLanding>`).
+- **Foundation doc layout** — foundation subpages (accessibility, colour,
+  design-tokens, …): a full-bleed hero generated from the doc's first heading,
+  hidden sidebar/TOC, gutter-centred content. Driven by the
+  `docs-doc-id-foundation/` auto-styling, scoped
+  `.theme-doc-markdown:not(:has(.docs-landing))` so it does NOT touch the
+  `/foundation` landing (which shares the class but uses `<DocsLanding>`).
+- **Component doc layout** — the component reference docs (button, chip, …): the
+  **standard Docusaurus three-column layout** (left `componentsSidebar` + content
+  + right TOC) with a **full-width hero band** on top. See the follow-up below.
 
-The signal is explicit: content wrapped in `<DocsLanding>` → landing layout;
-otherwise → the full-width doc layout.
+The signal is explicit: content wrapped in `<DocsLanding>` → landing layout; a
+foundation doc → foundation full-width layout; a component doc → three-column +
+hero.
 
-NOTE: `/components`, `/resources`, `/support` (landings) and the component
-reference docs (button, …) all share the `docs-doc-id-components/` html class.
-They are distinguished by the presence of `.docs-landing`: the landing pages use
-`<DocsLanding>` + explicit `<Hero>`/`<section>`; the reference docs use the
-auto-styling. Removing `components/` from the auto-styling breaks the reference
-docs, so it must stay — scoped away from `.docs-landing`.
+### Component docs — sidebar + TOC + full-width hero (follow-up pass)
 
-### Final state — exactly two layouts
+The first pass gave component docs a full-bleed hero + a `component-doc-tabs` tab
+bar but hid the sidebar and TOC. That was reworked into a **standard, accessible
+three-column doc** with the hero kept on top:
+
+- **Tabs removed.** The `<Tabs className="component-doc-tabs">` / `<TabItem>`
+  wrappers were stripped from all 38 tabbed component docs; each tab's `##`
+  section is now a normal sequential heading, so the headings populate the
+  right-hand TOC.
+- **New component-doc template.** Every `docs/components/**/*.md` now carries
+  `hide_title: true` + a `description:` frontmatter field (the lead paragraph);
+  the in-body `# Title` and intro paragraph were removed. `description` doubles
+  as the SEO meta description.
+- **Hero via swizzle.** `src/theme/DocItem/Layout/index.tsx` (swizzled from
+  theme-classic) renders a full-width `<header>` hero band — `metadata.title` +
+  `metadata.description` — above the standard content/TOC `.row`, gated on
+  `frontMatter.hide_title === true && id.startsWith('components/')` so foundation
+  docs and the `/components` landing are untouched. The band breaks out of the
+  centred 1140px `.container` to fill the main area right of the sidebar
+  (`width: calc(100vw - var(--doc-sidebar-width))`); styles live in
+  `theme/DocItem/Layout/styles.module.css`.
+- **Accessibility.** Exactly one `<h1>` per page (the hero's; `hide_title`
+  suppresses the auto title and the markdown `#` was removed); the hero is a
+  semantic `<header>` landmark; heading order is preserved for the TOC.
+- **CSS.** Removed the `components/` arm from the foundation full-width block and
+  deleted the ~125-line `component-doc-tabs` block in `custom.css`; added a small
+  component-scoped block (flush hero via container `padding-top: 0`, plus
+  `overflow-x: clip` to absorb the 100vw breakout's scrollbar rounding).
+  `sidebars.ts` was left unchanged — `componentsSidebar` already curates the
+  substantive docs and intentionally omits the 44-line "coming soon" stubs.
+
+> Note: adding a swizzled theme component (`DocItem/Layout`) requires a dev-server
+> restart — Docusaurus hot-reloads content and existing swizzles, but not a
+> newly-added theme file.
+
+### Final state — three layouts
 
 1. **Landing** — `<DocsLanding>` (MDX) or `@theme/Layout` (React pages) + `<Hero>`
    + `<section className="docs-section">` + `<SectionHeading>` + cards. Used by:
@@ -215,10 +247,12 @@ docs, so it must stay — scoped away from `.docs-landing`.
    guides were folded in from the old `.about-hero`/`.about-section` system,
    which is now deleted; `team.css` is reduced to just `.about-accordion` (the
    FAQ component on team_roles).
-2. **Doc (full-width, auto-hero)** — foundation subpages + component reference
-   docs, via the `docs-doc-id-{foundation,components}/` auto-styling (scoped
-   `:not(:has(.docs-landing))`); component docs add the `component-doc-tabs` tab
-   bar. Signal: no `<DocsLanding>` on a doc under those id prefixes.
+2. **Foundation doc (full-width, auto-hero)** — foundation subpages, via the
+   `docs-doc-id-foundation/` auto-styling (scoped `:not(:has(.docs-landing))`).
+   Sidebar and TOC hidden; hero generated from the first heading.
+3. **Component doc (three-column + hero)** — component reference docs: standard
+   left `componentsSidebar` + content + right TOC, with a full-width hero band
+   rendered by the `DocItem/Layout` swizzle. Sequential sections, no tabs.
 
 ### Which layout each area uses
 
@@ -228,16 +262,12 @@ docs, so it must stay — scoped away from `.docs-landing`.
 | `docs/components/components.mdx` (the `/components` overview) | **Landing** | `<DocsLanding>` + gallery |
 | `docs/resources/resources.mdx`, `docs/support/support.mdx` | **Landing** | `<DocsLanding>` + `IconCard` grids |
 | `docs/about/getting-started/{design,develop/*,team_roles}` (guides) | **Landing** | `<DocsLanding>` + `Hero` + `docs-section` |
-| `docs/components/**/*.md` (button, icon, chip, table, …) | **Doc** | full-width auto-hero **+ `component-doc-tabs`** |
-| `docs/components/**/{data-display,inputs,…}.md` (category index files) | **Doc** | full-width auto-hero, **no** tab bar |
-| `docs/foundation/**` (accessibility, colour, design-tokens, …) | **Doc** | full-width auto-hero, no tabs |
+| `docs/components/**/*.md` (button, icon, chip, category index files, …) | **Component doc** | three-column: sidebar + content + TOC, full-width hero band, sequential sections |
+| `docs/foundation/**` (accessibility, colour, design-tokens, …) | **Foundation doc** | full-width auto-hero, no sidebar/TOC |
 
-Example — everything in `docs/components/data-display/*` (chip, icon, tooltip,
-table, list, popover, table_data_grid) is **Doc** layout with the tab-bar
-variant; only `components.mdx` in that tree is **Landing**. Fixes found along the way: a duplicate hero (Docusaurus's
-auto doc-title `<header>` — now hidden under `.docs-landing`), and inner section
-`.container`s being forced full-width by the breakout rule (scoped to
-`main:has(.docs-landing) > .container`).
+Component docs are distinguished from the `/components` landing (which shares the
+`docs-doc-id-components/` html class) by `frontMatter.hide_title` + the absence of
+`<DocsLanding>`.
 
 ## Net result
 

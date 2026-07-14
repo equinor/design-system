@@ -1,15 +1,9 @@
 ---
 title: Banner
 sidebar_position: 1
+hide_title: true
+description: 'Banners display important, brief messages and provide optional actions for users to respond to. They are designed to inform, warn, or alert users about something relevant to their current context - such as a system change, an error, or a required action. Banners are interruptive by nature, so their level of interruption should match the significance of the information they carry.'
 ---
-
-
-# Banner
-
-Banners display important, brief messages and provide optional actions for users to respond to. They are designed to inform, warn, or alert users about something relevant to their current context - such as a system change, an error, or a required action. Banners are interruptive by nature, so their level of interruption should match the significance of the information they carry.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to Use" default>
 
 <StorybookEmbed id="eds-2-0-beta-feedback-banner--introduction" height={128} />
 
@@ -25,9 +19,6 @@ Use a banner when you need to communicate a change, error, or important notifica
 - Blocking the user from interacting with the page - use **Dialog** instead
 - Inline form validation messages - use field-level feedback instead
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 Banner is a compound component made up of the following parts:
@@ -36,9 +27,6 @@ Banner is a compound component made up of the following parts:
 - **`Banner.Icon`** (optional) - a supporting icon that reinforces the message tone
 - **`Banner.Message`** (required) - the text content communicating the notification
 - **`Banner.Actions`** (optional) - buttons or links that let the user respond to the banner
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -92,9 +80,6 @@ When the `onDismiss` callback is provided, a close button is rendered in the top
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--dismissible)
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 - Banners use `role="status"` by default, which politely announces content to screen readers
@@ -102,9 +87,6 @@ When the `onDismiss` callback is provided, a close button is rendered in the top
 - Ensure banner messages are concise and clearly describe the situation
 - Action buttons and links must have descriptive labels that explain what will happen when activated
 - Avoid relying on colour alone to convey meaning - always pair tone colours with an icon or clear text
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -126,9 +108,6 @@ When the `onDismiss` callback is provided, a close button is rendered in the top
 - **Dismiss** - toggle the dismiss close button on or off
 - **Icon** - toggle the leading icon on or off
 
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
-
 ## Do's and Don'ts
 
 :::info **Do**
@@ -149,6 +128,3 @@ When the `onDismiss` callback is provided, a close button is rendered in the top
 - Use icon-only action buttons inside banners - always use text labels
 - Leave banners visible indefinitely if the situation has been resolved
   :::
-
-</TabItem>
-</Tabs>

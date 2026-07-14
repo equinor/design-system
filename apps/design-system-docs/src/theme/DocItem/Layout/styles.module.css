@@ -1,0 +1,57 @@
+/* Swizzled from @docusaurus/theme-classic — adds the component-doc hero band. */
+
+.docItemContainer header + *,
+.docItemContainer article > *:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 997px) {
+  .docItemCol {
+    max-width: 75% !important;
+  }
+}
+
+/* ======================================
+ * Component-doc hero band
+ * Full-bleed banner (title + lead) that fills the main area to the right of the
+ * sidebar, sitting above the standard content + TOC row. The horizontal
+ * breakout escapes the centred 1140px `.container`: `100%` is the container
+ * content width, and the negative inline margins expand the band to the full
+ * `docMainContainer` width (`100vw - sidebar`).
+ * ====================================== */
+.docHero {
+  width: calc(100vw - var(--doc-sidebar-width, 0px));
+  margin-inline: calc((100% - (100vw - var(--doc-sidebar-width, 0px))) / 2);
+  padding-block: 4rem 3rem;
+  background-color: var(--docs-hero-bg);
+}
+
+/* Re-align the hero text with the doc content column below it. */
+.docHeroInner {
+  max-width: var(--ifm-container-width);
+  margin-inline: auto;
+  padding-inline: var(--ifm-spacing-horizontal, 1rem);
+}
+
+.docHeroTitle {
+  margin: 0;
+  font-size: 2.75rem;
+  line-height: 1.15;
+}
+
+.docHeroLead {
+  max-width: 46rem;
+  margin: 0.75rem 0 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+/* On mobile the sidebar is an off-canvas drawer, so the band is edge-to-edge. */
+@media (max-width: 996px) {
+  .docHero {
+    width: 100vw;
+    margin-inline: calc((100% - 100vw) / 2);
+    padding-block: 2.5rem 2rem;
+  }
+}

@@ -1,15 +1,9 @@
 ---
 title: Accordion
 sidebar_position: 1
+hide_title: true
+description: 'Accordion lets readers reveal and collapse sections of content on demand. It helps manage information density on long pages while keeping the layout scannable, so people can focus on what matters to them without losing the rest of the structure.'
 ---
-
-
-# Accordion
-
-Accordion lets readers reveal and collapse sections of content on demand. It helps manage information density on long pages while keeping the layout scannable, so people can focus on what matters to them without losing the rest of the structure.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to use" default>
 
 <StorybookEmbed id="eds-2-0-beta-surface-accordion--introduction" height={258} />
 
@@ -26,9 +20,6 @@ Use an accordion when a page would otherwise overwhelm readers with long-form co
 - Navigating between pages – use **Link** instead
 - Sequential, step-by-step flows – reach for a dedicated stepper pattern
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 Accordion is a compound component built from a small set of parts that compose together:
@@ -44,9 +35,6 @@ All Accordion items support:
 - **Exclusive grouping** on the root – opening one item closes the others
 - **Controlled and uncontrolled modes** at the item level – let consumers manage open state externally or let the component handle it
 - **Density** through the ancestor `data-density` attribute, keeping spacing in step with sibling components
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -76,9 +64,6 @@ Accordion follows the active density on its ancestor, so spacing and sizing stay
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--density)
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 Accordion is built on the native `<details>` and `<summary>` elements, so disclosure semantics, keyboard support, and screen reader announcements come from the browser without bespoke ARIA wiring.
@@ -87,9 +72,6 @@ Accordion is built on the native `<details>` and `<summary>` elements, so disclo
 
 - **Tab**: Move focus to and from the accordion header
 - **Enter / Space**: Toggle the focused section open or closed
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -106,9 +88,6 @@ Accordion is built on the native `<details>` and `<summary>` elements, so disclo
 5. Set the **Title** and **Content** text properties on each instance to match your real content
 
 The component reads from the active theme mode on the containing frame, so colours, typography, and spacing follow the rest of your composition without manual overrides.
-
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -129,6 +108,3 @@ The component reads from the active theme mode on the containing frame, so colou
 - Bury deeply nested headings inside a panel – flatten the content or split it across items
 
 :::
-
-</TabItem>
-</Tabs>

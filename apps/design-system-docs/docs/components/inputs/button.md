@@ -1,15 +1,9 @@
 ---
 title: Button
 sidebar_position: 2
+hide_title: true
+description: 'Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.'
 ---
-
-
-# Button
-
-Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to use" default>
 
 <StorybookEmbed id="eds-2-0-beta-inputs-button--default" height={70} />
 
@@ -25,9 +19,6 @@ Use a button when a concrete action needs to be performed, such as saving or sub
 - Filtering information in lists or tables - use **Chip** instead
 - Displaying selected filters - use **Chip** instead
 
-</TabItem>
-<TabItem value="structure" label="Structure">
-
 ## Structure
 
 All button variants support:
@@ -35,9 +26,6 @@ All button variants support:
 - **Text-only** (default)
 - **Left/right icons** (paired with text)
 - **Icon-only** (requires an accessible name)
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -119,9 +107,6 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--circular-icon-only)
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 **Standard Buttons**
@@ -137,9 +122,6 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
 **Comfortable Density**
 
 Comfortable density should come with the option to switch to spacious mode for accessibility reasons.
-
-</TabItem>
-<TabItem value="figma" label="Figma">
 
 ## Figma
 
@@ -174,9 +156,6 @@ For buttons with icons:
 - Toggle **Show Trailing Icon** to add an icon after the label
 - Click the icon instance to swap to a different icon from the library
 
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
-
 ## Do's and Don'ts
 
 :::info **Do**
@@ -188,7 +167,7 @@ For buttons with icons:
 - Provide accessible names for icon-only buttons
 - Allow switching from comfortable to spacious density for accessibility
 - Place primary buttons first when grouping (exception: Previous/Next ordering)
-:::
+  :::
 
 :::danger **Don't**
 
@@ -198,7 +177,4 @@ For buttons with icons:
 - Rely on colour alone to convey meaning - ensure text and icons are clear
 - Disable buttons without explanation - add a tooltip explaining why it's disabled
 - Use more than one primary-variant accent-tone button per page
-:::
-
-</TabItem>
-</Tabs>
+  :::

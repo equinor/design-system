@@ -1,15 +1,9 @@
 ---
 title: Input
 sidebar_position: 4
+hide_title: true
+description: 'Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation - serving as a building block for higher-level components like TextField.'
 ---
-
-
-# Input
-
-Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation - serving as a building block for higher-level components like TextField.
-
-<Tabs className="component-doc-tabs" queryString="tab">
-<TabItem value="when-to-use" label="When to Use" default>
 
 <StorybookEmbed id="eds-2-0-beta-inputs-input--introduction" height={70} />
 
@@ -23,9 +17,6 @@ Use Input when you need a basic input field without additional functionality, or
 
 - You need a complete form field with label, description, and validation message - use **TextField** instead
 - The field requires built-in accessibility features - use **TextField** which handles composition automatically
-
-</TabItem>
-<TabItem value="guidelines" label="Guidelines">
 
 ## Guidelines
 
@@ -95,9 +86,6 @@ Input can render as a multi-line textarea by setting `as="textarea"`.
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--casted)
 
-</TabItem>
-<TabItem value="accessibility" label="Accessibility">
-
 ## Accessibility
 
 When using Input without a visible label (e.g., in search fields or toolbars), you **must** provide an `aria-label` for accessibility.
@@ -110,9 +98,6 @@ While labels may be visually hidden in special cases (such as in tables), they m
 - **Type**: Enter text when focused
 
 **For form fields with visible labels**, use the TextField component instead - it handles accessibility automatically.
-
-</TabItem>
-<TabItem value="dos-and-donts" label="Do's and don'ts">
 
 ## Do's and Don'ts
 
@@ -132,6 +117,3 @@ While labels may be visually hidden in special cases (such as in tables), they m
 - Overuse the disabled state - prefer readOnly when appropriate
 - Hide validation messages behind obscured elements
   :::
-
-</TabItem>
-</Tabs>
