@@ -7,6 +7,11 @@ name: Tokens Studio backup
 # commits changes to the orphan branch `tokens-studio-backup`, giving us
 # diffs, history and a recovery point independent of the platform.
 # Recovery instructions: documentation/agent-instructions/TOKENS_STUDIO.md
+#
+# The CLI is installed standalone with npm outside the pnpm workspace —
+# a full workspace install just to obtain one binary is not worth two
+# minutes every hour. npm cannot run inside the workspace (workspace:
+# protocol deps), hence the --prefix install into the runner home.
 on:
   schedule:
     # Hourly, off the whole hour to avoid the GitHub cron rush
@@ -43,29 +48,30 @@ jobs:
         with:
           ref: tokens-studio-backup
           path: backup
-      - name: Install Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24.16.0'
-      # Same key as _setup.yml so the store cache is shared with the
-      # other workflows
-      - name: Cache pnpm-store
+      # The version follows the semver range in package.json (single
+      # source of truth) rather than the lockfile-exact version — for a
+      # read-only pull that drift is acceptable
+      - name: Resolve studio CLI version
+        id: cli-version
+        run: echo "version=$(jq -r '.devDependencies["@tokens-studio/studio-cli"]' packages/eds-tokens/package.json)" >> "$GITHUB_OUTPUT"
+      # Caches the installed CLI (including the platform binary its
+      # postinstall downloads) — a warm run skips npm entirely
+      - name: Cache studio CLI
+        id: cache-cli
         uses: actions/cache@v6
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('pnpm-lock.yaml') }}
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          run_install: false
-      - name: Install dependencies
-        run: pnpm install --force
+          path: ~/studio-cli
+          key: studio-cli-${{ runner.os }}-${{ steps.cli-version.outputs.version }}
+      - name: Install studio CLI
+        if: steps.cache-cli.outputs.cache-hit != 'true'
+        run: npm install --prefix ~/studio-cli "@tokens-studio/studio-cli@${{ steps.cli-version.outputs.version }}" --no-audit --no-fund
       # No alias argument = pull every source configured in
       # packages/eds-tokens/.studio.json (token sets + $themes.json +
       # $metadata.json). --verbose because the run is unattended — the
       # Actions log is the only place to diagnose a bad pull
       - name: Pull tokens from Tokens Studio
-        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
+        working-directory: packages/eds-tokens
+        run: ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
       # Aliases and output dirs are read from .studio.json so a config
       # rename (e.g. the planned eds-test-3 → eds) never requires a
       # workflow change. Each source lands at backup/<alias>/;

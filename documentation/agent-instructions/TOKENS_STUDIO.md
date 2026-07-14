@@ -99,6 +99,8 @@ Classify every command before running it:
 
 The platform has **no undo, rollback or restore** — only a read-only version history of releases — and plugin changes push to Studio in real time. `.github/workflows/tokens_studio_backup.yaml` is the safety net for everything between releases: every hour (cron `23 * * * *`, plus manual `workflow_dispatch`) it runs `studio tokens pull` for all sources in `.studio.json` and commits changes to the orphan branch **`tokens-studio-backup`** (one directory per source alias — never merge this branch). Runs that find no changes make no commit. Auth is the same inbound CI Integration as the release pipeline — no extra setup. Failures alert via the Slack step; an hourly backup that fails silently is no safety net.
 
+Unlike the release workflow, the backup does **not** install the pnpm workspace — it installs the CLI standalone with `npm install --prefix` outside the workspace (version resolved from the package's `devDependencies` range) and caches the install. This is the one sanctioned exception to "never install the CLI with npm": npm only fails on `workspace:` protocol deps _inside_ the workspace, and a full workspace install every hour just to obtain one binary is not worth the time.
+
 **Recovery is manual — the CLI has no push command (only `pull`/`watch`):**
 
 1. On the `tokens-studio-backup` branch, find the last good state: `git log --stat -- <alias>/`, then `git diff` between commits to locate when the bad change landed (hourly granularity).
