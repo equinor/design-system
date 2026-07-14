@@ -218,7 +218,23 @@ docs, so it must stay — scoped away from `.docs-landing`.
 2. **Doc (full-width, auto-hero)** — foundation subpages + component reference
    docs, via the `docs-doc-id-{foundation,components}/` auto-styling (scoped
    `:not(:has(.docs-landing))`); component docs add the `component-doc-tabs` tab
-   bar. Signal: no `<DocsLanding>` on a doc under those id prefixes. Fixes found along the way: a duplicate hero (Docusaurus's
+   bar. Signal: no `<DocsLanding>` on a doc under those id prefixes.
+
+### Which layout each area uses
+
+| Area / page | Layout | Notes |
+| --- | --- | --- |
+| `/`, `/foundation`, `/getting-started`, `/about` (`src/pages/*.tsx`) | **Landing** | React pages via `@theme/Layout` |
+| `docs/components/components.mdx` (the `/components` overview) | **Landing** | `<DocsLanding>` + gallery |
+| `docs/resources/resources.mdx`, `docs/support/support.mdx` | **Landing** | `<DocsLanding>` + `IconCard` grids |
+| `docs/about/getting-started/{design,develop/*,team_roles}` (guides) | **Landing** | `<DocsLanding>` + `Hero` + `docs-section` |
+| `docs/components/**/*.md` (button, icon, chip, table, …) | **Doc** | full-width auto-hero **+ `component-doc-tabs`** |
+| `docs/components/**/{data-display,inputs,…}.md` (category index files) | **Doc** | full-width auto-hero, **no** tab bar |
+| `docs/foundation/**` (accessibility, colour, design-tokens, …) | **Doc** | full-width auto-hero, no tabs |
+
+Example — everything in `docs/components/data-display/*` (chip, icon, tooltip,
+table, list, popover, table_data_grid) is **Doc** layout with the tab-bar
+variant; only `components.mdx` in that tree is **Landing**. Fixes found along the way: a duplicate hero (Docusaurus's
 auto doc-title `<header>` — now hidden under `.docs-landing`), and inner section
 `.container`s being forced full-width by the breakout rule (scoped to
 `main:has(.docs-landing) > .container`).
