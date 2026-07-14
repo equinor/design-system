@@ -48,12 +48,17 @@ jobs:
         with:
           ref: tokens-studio-backup
           path: backup
-      # The version follows the semver range in package.json (single
-      # source of truth) rather than the lockfile-exact version — for a
-      # read-only pull that drift is acceptable
+      # The version spec comes from package.json (single source of
+      # truth). Because the install is cached on the spec string, the
+      # CLI is effectively pinned to the patch resolved on the first
+      # cold run — it only moves when the spec in package.json changes.
+      # That stability is intentional for an unattended backup.
       - name: Resolve studio CLI version
         id: cli-version
-        run: echo "version=$(jq -r '.devDependencies["@tokens-studio/studio-cli"]' packages/eds-tokens/package.json)" >> "$GITHUB_OUTPUT"
+        run: |
+          version=$(jq -er '.devDependencies["@tokens-studio/studio-cli"]' packages/eds-tokens/package.json) \
+            || { echo "::error::@tokens-studio/studio-cli not found in eds-tokens devDependencies"; exit 1; }
+          echo "version=$version" >> "$GITHUB_OUTPUT"
       # Caches the installed CLI (including the platform binary its
       # postinstall downloads) — a warm run skips npm entirely
       - name: Cache studio CLI
@@ -62,9 +67,19 @@ jobs:
         with:
           path: ~/studio-cli
           key: studio-cli-${{ runner.os }}-${{ steps.cli-version.outputs.version }}
+      # The cache post-step saves even when the job fails, so a partial
+      # install (e.g. network blip during the binary download) would be
+      # cached and poison every later run. Verify the binary and remove
+      # the directory on failure — no directory, nothing to cache
       - name: Install studio CLI
         if: steps.cache-cli.outputs.cache-hit != 'true'
-        run: npm install --prefix ~/studio-cli "@tokens-studio/studio-cli@${{ steps.cli-version.outputs.version }}" --no-audit --no-fund
+        run: |
+          if ! npm install --prefix ~/studio-cli "@tokens-studio/studio-cli@${{ steps.cli-version.outputs.version }}" --no-audit --no-fund \
+            || ! ~/studio-cli/node_modules/.bin/studio --version; then
+            rm -rf ~/studio-cli
+            echo "::error::studio CLI install failed verification"
+            exit 1
+          fi
       # No alias argument = pull every source configured in
       # packages/eds-tokens/.studio.json (token sets + $themes.json +
       # $metadata.json). --verbose because the run is unattended — the
