@@ -1,12 +1,14 @@
 .docs-hero {
   display: flex;
-  align-items: center;
   /* Consistent hero height across pages so content below doesn't jump on
      navigation. Covers the tallest text hero (~about); the homepage hero has
      more content and grows past it. */
   min-height: var(--docs-hero-min-height, 27rem);
   padding-block: var(--docs-hero-space-block, 5rem);
-  background-color: var(--docs-hero-bg, var(--eds-color-bg-accent-fill-muted-default));
+  background-color: var(
+    --docs-hero-bg,
+    var(--eds-color-bg-accent-fill-muted-default)
+  );
 }
 
 .docs-hero > .container {
@@ -39,4 +41,3 @@
 .docs-hero__lead p:last-child {
   margin-bottom: 0;
 }
-
