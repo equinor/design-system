@@ -1,0 +1,122 @@
+name: Tokens Studio backup
+# Tokens Studio has no undo/rollback — only a read-only version history
+# of releases. Plugin changes push to the platform in real time, so a
+# designer mistake propagates immediately and the release workflow only
+# snapshots at release moments. This job is the safety net in between:
+# it pulls the current state of every token source on a schedule and
+# commits changes to the orphan branch `tokens-studio-backup`, giving us
+# diffs, history and a recovery point independent of the platform.
+# Recovery instructions: documentation/agent-instructions/TOKENS_STUDIO.md
+#
+# The CLI is installed standalone with npm outside the pnpm workspace —
+# a full workspace install just to obtain one binary is not worth two
+# minutes every hour. npm cannot run inside the workspace (workspace:
+# protocol deps), hence the --prefix install into the runner home.
+on:
+  schedule:
+    # Hourly, off the whole hour to avoid the GitHub cron rush
+    - cron: '23 * * * *'
+  # Dispatch from main only — the OIDC subject must match the inbound
+  # CI integration's refs/heads/main pattern; any other ref gets a 403
+  workflow_dispatch:
+# A slow run must not race the next hourly tick on the shared branch
+concurrency:
+  group: tokens-studio-backup
+  cancel-in-progress: false
+jobs:
+  backup-tokens:
+    name: Back up tokens from Tokens Studio
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      # OIDC token so the studio CLI can authenticate against the
+      # Tokens Studio CI integration (no service token needed).
+      # Scheduled runs always execute on main, so the token subject
+      # matches the integration's subject pattern
+      # (repo:equinor/design-system:ref:refs/heads/main). Manual
+      # dispatches must also pick main — see the trigger comment.
+      id-token: write
+      # Push backup commits to the tokens-studio-backup branch
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      # The branch was seeded manually once (orphan, README only) so
+      # this checkout can always assume it exists
+      - name: Checkout backup branch
+        uses: actions/checkout@v7
+        with:
+          ref: tokens-studio-backup
+          path: backup
+      # The version spec comes from package.json (single source of
+      # truth). Because the install is cached on the spec string, the
+      # CLI is effectively pinned to the patch resolved on the first
+      # cold run — it only moves when the spec in package.json changes.
+      # That stability is intentional for an unattended backup.
+      - name: Resolve studio CLI version
+        id: cli-version
+        run: |
+          version=$(jq -er '.devDependencies["@tokens-studio/studio-cli"]' packages/eds-tokens/package.json) \
+            || { echo "::error::@tokens-studio/studio-cli not found in eds-tokens devDependencies"; exit 1; }
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      # Caches the installed CLI (including the platform binary its
+      # postinstall downloads) — a warm run skips npm entirely
+      - name: Cache studio CLI
+        id: cache-cli
+        uses: actions/cache@v6
+        with:
+          path: ~/studio-cli
+          key: studio-cli-${{ runner.os }}-${{ steps.cli-version.outputs.version }}
+      # The cache post-step saves even when the job fails, so a partial
+      # install (e.g. network blip during the binary download) would be
+      # cached and poison every later run. Verify the binary and remove
+      # the directory on failure — no directory, nothing to cache
+      - name: Install studio CLI
+        if: steps.cache-cli.outputs.cache-hit != 'true'
+        run: |
+          if ! npm install --prefix ~/studio-cli "@tokens-studio/studio-cli@${{ steps.cli-version.outputs.version }}" --no-audit --no-fund \
+            || ! ~/studio-cli/node_modules/.bin/studio --version; then
+            rm -rf ~/studio-cli
+            echo "::error::studio CLI install failed verification"
+            exit 1
+          fi
+      # No alias argument = pull every source configured in
+      # packages/eds-tokens/.studio.json (token sets + $themes.json +
+      # $metadata.json). --verbose because the run is unattended — the
+      # Actions log is the only place to diagnose a bad pull
+      - name: Pull tokens from Tokens Studio
+        working-directory: packages/eds-tokens
+        run: ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
+      # Aliases and output dirs are read from .studio.json so a config
+      # rename (e.g. the planned eds-test-3 → eds) never requires a
+      # workflow change. Each source lands at backup/<alias>/;
+      # --delete keeps removals visible in the diff
+      - name: Sync pulled sources into the backup branch
+        run: |
+          jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output)"' packages/eds-tokens/.studio.json |
+          while IFS=$'\t' read -r alias output; do
+            echo "Syncing $alias (packages/eds-tokens/$output → backup/$alias)"
+            rsync -a --delete "packages/eds-tokens/$output/" "backup/$alias/"
+          done
+      - name: Commit and push backup
+        working-directory: backup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No token changes since last backup'
+          else
+            git commit -m "chore: tokens backup $(date -u +%Y-%m-%dT%H:%M:%SZ) (run ${GITHUB_RUN_ID})"
+            git push origin tokens-studio-backup
+          fi
+      # The run is unattended and hourly — a broken backup must not be
+      # silent, or the safety net quietly stops existing
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()

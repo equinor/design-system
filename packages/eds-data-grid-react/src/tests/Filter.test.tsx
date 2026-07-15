@@ -171,7 +171,6 @@ describe('Filter', () => {
         </TableProvider>,
       )
       openPopover(baseElement)
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
       ) as Array<HTMLInputElement>
@@ -201,7 +200,6 @@ describe('Filter', () => {
       )
 
       openPopover(baseElement)
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const inputs = within(baseElement).getAllByRole(
         'spinbutton',
       ) as Array<HTMLInputElement>
@@ -239,8 +237,6 @@ describe('Filter', () => {
         </TableProvider>,
       )
       openPopover(baseElement)
-      // eslint complains about unneccessary cast, but HTMLElement != HTMLInputElement
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const input = within(baseElement).getByTestId('input') as HTMLInputElement
       expect(input).toBeDefined()
       expect(input.placeholder).toBe('Custom filter')

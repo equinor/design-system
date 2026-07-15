@@ -20,18 +20,20 @@ const StyledDialogContent = styled.div<{ $scrollable: boolean }>(
         padding-bottom: ${theme.entities.children.spacings.bottom};
       }
 
-      ${$scrollable &&
-      css`
-        &:not(:first-child) {
-          margin-top: calc(var(--content-spacing-top) * -1);
-        }
-        padding-top: var(--content-spacing-top);
-        margin-bottom: calc(var(--content-spacing-top) * -1);
-        padding-bottom: var(--content-spacing-top);
-        min-height: initial;
-        height: ${theme.entities.content.height};
-        overflow-y: auto;
-      `}
+      ${
+        $scrollable &&
+        css`
+          &:not(:first-child) {
+            margin-top: calc(var(--content-spacing-top) * -1);
+          }
+          padding-top: var(--content-spacing-top);
+          margin-bottom: calc(var(--content-spacing-top) * -1);
+          padding-bottom: var(--content-spacing-top);
+          min-height: initial;
+          height: ${theme.entities.content.height};
+          overflow-y: auto;
+        `
+      }
     `
   },
 )

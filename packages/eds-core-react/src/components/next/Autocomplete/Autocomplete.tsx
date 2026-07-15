@@ -32,8 +32,7 @@ import { Button } from '../Button'
 import { Menu, MenuItem } from '../Menu'
 
 type OptionItem<T> =
-  | { type: 'list'; value: T }
-  | { type: 'custom'; value: string }
+  { type: 'list'; value: T } | { type: 'custom'; value: string }
 
 function AutocompleteInner<T = string>(
   {
