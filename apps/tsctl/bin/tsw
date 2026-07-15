@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Guarded write CLI (Phase 2). Separate from bin/tsctl (read-only).
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+exec npx --no-install tsx "$DIR/src/write-cli.ts" "$@"

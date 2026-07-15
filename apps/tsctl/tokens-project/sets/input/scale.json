@@ -1,0 +1,345 @@
+{
+  "$set": "input/scale",
+  "tokens": {
+    "input.scale.dark.1": {
+      "$type": "number",
+      "$value": 0.15,
+      "$description": "bg-canvas",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.10": {
+      "$type": "number",
+      "$value": 0.88,
+      "$description": "bg-fill-emphasis-hover",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.11": {
+      "$type": "number",
+      "$value": 0.93,
+      "$description": "bg-fill-emphasis-active",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.12": {
+      "$type": "number",
+      "$value": 0.91,
+      "$description": "text-subtle",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.13": {
+      "$type": "number",
+      "$value": 0.99,
+      "$description": "text-strong",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.14": {
+      "$type": "number",
+      "$value": 0.33,
+      "$description": "text-subtle-on-emphasis",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.15": {
+      "$type": "number",
+      "$value": 0.1,
+      "$description": "text-strong-on-emphasis",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.2": {
+      "$type": "number",
+      "$value": 0.25,
+      "$description": "bg-surface",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.3": {
+      "$type": "number",
+      "$value": 0.47,
+      "$description": "bg-fill-muted-default",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.4": {
+      "$type": "number",
+      "$value": 0.52,
+      "$description": "bg-fill-muted-hover",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.5": {
+      "$type": "number",
+      "$value": 0.58,
+      "$description": "bg-fill-muted-active",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.6": {
+      "$type": "number",
+      "$value": 0.47,
+      "$description": "border-subtle",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.7": {
+      "$type": "number",
+      "$value": 0.61,
+      "$description": "border-medium",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.8": {
+      "$type": "number",
+      "$value": 0.76,
+      "$description": "border-strong",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.dark.9": {
+      "$type": "number",
+      "$value": 0.82,
+      "$description": "bg-fill-emphasis-default",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.gaussian.dark.mean": {
+      "$type": "number",
+      "$value": 0.7,
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.gaussian.dark.std-dev": {
+      "$type": "number",
+      "$value": 2,
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.gaussian.light.mean": {
+      "$type": "number",
+      "$value": 0.6,
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.gaussian.light.std-dev": {
+      "$type": "number",
+      "$value": 2,
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.1": {
+      "$type": "number",
+      "$value": 0.97,
+      "$description": "bg-canvas",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.10": {
+      "$type": "number",
+      "$value": 0.44,
+      "$description": "bg-fill-emphasis-hover",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.11": {
+      "$type": "number",
+      "$value": 0.42,
+      "$description": "bg-fill-emphasis-active",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.12": {
+      "$type": "number",
+      "$value": 0.46,
+      "$description": "text-subtle",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.13": {
+      "$type": "number",
+      "$value": 0.23,
+      "$description": "text-strong",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.14": {
+      "$type": "number",
+      "$value": 0.9,
+      "$description": "text-subtle-on-emphasis",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.15": {
+      "$type": "number",
+      "$value": 1,
+      "$description": "text-strong-on-emphasis",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.2": {
+      "$type": "number",
+      "$value": 0.999,
+      "$description": "bg-surface",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.3": {
+      "$type": "number",
+      "$value": 0.91,
+      "$description": "bg-fill-muted-default",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.4": {
+      "$type": "number",
+      "$value": 0.87,
+      "$description": "bg-fill-muted-hover",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.5": {
+      "$type": "number",
+      "$value": 0.82,
+      "$description": "bg-fill-muted-active",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.6": {
+      "$type": "number",
+      "$value": 0.87,
+      "$description": "border-subtle",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.7": {
+      "$type": "number",
+      "$value": 0.75,
+      "$description": "border-medium",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.8": {
+      "$type": "number",
+      "$value": 0.52,
+      "$description": "border-strong",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.scale.light.9": {
+      "$type": "number",
+      "$value": 0.5,
+      "$description": "bg-fill-emphasis-default",
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  }
+}

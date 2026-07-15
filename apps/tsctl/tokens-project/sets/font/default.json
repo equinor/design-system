@@ -1,0 +1,70 @@
+{
+  "$set": "font/default",
+  "tokens": {
+    "family.heading": {
+      "$type": "fontFamily",
+      "$value": "{primitives.font-family.equinor}",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "family.ui": {
+      "$type": "fontFamily",
+      "$value": "{primitives.font-family.inter}",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "weight.bolder": {
+      "$type": "fontWeight",
+      "$value": "{primitives.weight-scale.bolder}",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "weight.lighter": {
+      "$type": "fontWeight",
+      "$value": "{primitives.weight-scale.lighter}",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "weight.normal": {
+      "$type": "fontWeight",
+      "$value": "{primitives.weight-scale.normal}",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  }
+}

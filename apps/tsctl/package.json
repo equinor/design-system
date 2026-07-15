@@ -1,0 +1,21 @@
+{
+  "name": "tsctl",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CLI over the Tokens Studio v2 REST API: read-only inspection (tsctl) + guarded scratch-branch writes (tsw)",
+  "bin": {
+    "tsctl": "./bin/tsctl",
+    "tsw": "./bin/tsw"
+  },
+  "scripts": {
+    "login": "tsx login.mts",
+    "tsctl": "tsx src/index.ts",
+    "tsw": "tsx src/write-cli.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

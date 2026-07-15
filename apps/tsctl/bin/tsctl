@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Thin launcher so `tsctl <cmd>` works from anywhere without a build step.
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+exec npx --no-install tsx "$DIR/src/index.ts" "$@"

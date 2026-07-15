@@ -1,0 +1,75 @@
+{
+  "$set": "input/palette",
+  "tokens": {
+    "input.palette.blue.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.5857, 0.135751, 240.6802)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.palette.gray.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.4091, 0, 0)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.palette.green.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.6291, 0.1659, 142.98)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.palette.moss-green.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.4973, 0.084851, 204.553)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.palette.north-sea.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.3274, 0.0363, 242.96)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.palette.orange.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.6934, 0.164689, 58.7381)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "input.palette.red.anchor": {
+      "$type": "color",
+      "$value": "oklch(0.5776, 0.2314, 21.12)",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  }
+}

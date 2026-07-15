@@ -1,0 +1,305 @@
+{
+  "$set": "foundation/gaussian",
+  "tokens": {
+    "foundation.gaussian.dark.1": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.1}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.10": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.10}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.11": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.11}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.12": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.12}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.13": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.13}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.14": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.14}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.15": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.15}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.2": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.2}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.3": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.3}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.4": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.4}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.5": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.5}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.6": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.6}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.7": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.7}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.8": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.8}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.dark.9": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.9}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.1": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.1}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.10": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.10}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.11": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.11}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.12": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.12}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.13": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.13}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.14": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.14}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.15": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.15}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.2": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.2}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.3": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.3}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.4": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.4}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.5": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.5}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.6": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.6}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.7": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.7}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.8": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.8}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.gaussian.light.9": {
+      "$type": "number",
+      "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.9}, 2))",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  }
+}

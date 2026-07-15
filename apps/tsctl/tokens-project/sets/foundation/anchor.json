@@ -1,0 +1,145 @@
+{
+  "$set": "foundation/anchor",
+  "tokens": {
+    "foundation.anchor.blue.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.blue.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.blue.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.blue.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.gray.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.gray.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.gray.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.gray.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.green.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.green.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.green.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.green.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.moss-green.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.moss-green.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.moss-green.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.moss-green.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.north-sea.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.north-sea.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.north-sea.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.north-sea.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.orange.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.orange.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.orange.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.orange.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.red.anchor.c": {
+      "$type": "number",
+      "$value": "chroma({input.palette.red.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "foundation.anchor.red.anchor.h": {
+      "$type": "number",
+      "$value": "hue({input.palette.red.anchor})",
+      "$description": null,
+      "$extensions": {
+        "com.figma": {
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  }
+}
