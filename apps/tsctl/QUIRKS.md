@@ -13,7 +13,7 @@ Last updated 2026-07-07.
 
 ## A. The scraped docs & the API disagree
 
-- **The scraped `../docs/` are unreliable on auth/transport/shape.** They read as idealized/AI-generated
+- **The scraped `docs/` are unreliable on auth/transport/shape.** They read as idealized/AI-generated
   and diverge from the running API. Trust `API-NOTES.md` and live probes. *(API-NOTES intro)*
 - **Base URL in the docs is wrong.** `api.tokens.studio` → ENOTFOUND. Real host:
   **`api-production.tokens.studio/api/v1`**. *(§1)*

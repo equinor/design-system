@@ -1,7 +1,7 @@
 # Tokens Studio v2 API — field notes
 
 Reverse-engineered by probing the live API on 2026-07-03 while building `tsctl`.
-**The scraped docs in `../docs/v2-current/` are unreliable on the points below** — they
+**The scraped docs in `docs/v2-current/` are unreliable on the points below** — they
 read as idealized/AI-generated and diverge from the running API in many places (base URL, SAT
 exchange, response shape, login response, device-code path, permission model — see §§1–6). Trust
 this file over the docs for anything auth- or transport-related, and confirm new endpoints against

@@ -432,9 +432,13 @@ mutations before sending.
 - **`CLAUDE.md`** — the operational how-to for AI assistants: when to use which command, plus
   battle-tested *Recipes & gotchas* (branch iteration, `jq` filtering, the colour-import loop).
 - **`API-NOTES.md`** — the reverse-engineered API truth (host, auth, JSON:API shapes, write shapes).
-  Trust it over the scraped `../docs/` for anything auth/transport-related.
+  Trust it over the scraped `docs/` for anything auth/transport-related.
 - **`QUIRKS.md`** — a consolidated index of counter-intuitive behaviours (API / CLI / Figma /
   platform). Skim before trusting anything to "just work."
+- **`docs/`** — an offline scrape of the Tokens Studio product docs, colocated in this folder:
+  `docs/v2-current/` (current v2 platform — default here) and `docs/v1-legacy/` (previous version,
+  incl. the graph-engine reference). Conceptual reference; **not** authoritative on auth/transport
+  (that's `API-NOTES.md`).
 - **`WRITE-LAYER-PLAN.md`, `PROBE-PLAN.md`, `SCOPING-PLAN.md`, `EXTENSIONS-PLAN.md`,
   `POC-alex-color-import.md`** — planning & history: why the write layer is shaped this way, how
   endpoints were verified, the colour-import POC. Deep background, not day-to-day.

@@ -246,10 +246,32 @@ scope vocabulary: `ALL_SCOPES`, `TEXT_FILL`, `FRAME_FILL`, `SHAPE_FILL`, `STROKE
 - **This file (`CLAUDE.md`)** — the AI operational how-to: when to use which command, the recipes &
   gotchas above. Start here.
 - **`API-NOTES.md`** — reverse-engineered API truth (host, auth, JSON:API, write shapes §6, resolved
-  shape). Trust it over the scraped `../docs/` for anything auth/transport/shape.
+  shape). **Trust it over the scraped `docs/` for anything auth/transport/shape** — the scraped docs
+  are idealized/AI-generated and are wrong on the API host, the service-account exchange flow, and
+  response shapes. Also remember `tsctl`/`tsw` authenticate with a **User JWT from a password login**
+  (`login.mts`), **not** a service-account token — ignore any SAT-based auth the scraped docs push.
 - **`QUIRKS.md`** — the consolidated index of counter-intuitive behaviours (API, CLI, companion→Figma,
   platform). Skim it before trusting anything to "just work."
 - **`README.md`** — human-facing setup + full command/flow reference + troubleshooting + code paths.
+- **`docs/`** — an offline scrape of the Tokens Studio product documentation, colocated in this
+  folder (a child directory), split by version. Reference material for concepts — read it here
+  rather than re-fetching from the web. ⚠️ **Conceptual, not authoritative for transport:** for
+  anything auth/host/response-shape it is superseded by `API-NOTES.md` (see the caveat above).
+  - **`docs/v2-current/`** (59 files) — the **current** Tokens Studio v2 docs; default to these.
+    Flat files named `documentation-v2.tokens.studio-<area>-<page>.html.md`, covering: `getting-started`
+    (what-is-studio, quick-start, glossary, project-types, your-first-project), `api` (overview,
+    authentication, tokens, token-sets, variables, branches, releases, webhooks), `cli` (overview,
+    authentication, configuration, pulling-tokens, exporting-tokens), `branching`, `theming`, `tokens`,
+    `tokenscript`, `integrations` (github-actions, service-account-tokens, webhooks, ci-cd-triggers),
+    `figma`, `migration`, `releases`, `settings`, `team`. **Start here for platform concepts, the
+    Connect Studio CLI, branching/theming, and token model questions.**
+  - **`docs/v1-legacy/`** (232 files) — the **previous** version's docs. Flat files named
+    `documentation.tokens.studio-<area>-<page>.md`, covering: `connect-studio-to-code` (graphql /
+    postman / **tokens-studio-cli**), `connect-studio-to-figma` (companion + classic Figma plugin),
+    `getting-started`, `platform` (tokens/themes/releases/configuration), `plugins`, `settings`,
+    `graph-engine` (the bulk — full node reference under `available-nodes-*`, editor, types), and
+    `example-graphs`. Legacy, but often the **only** place a concept is explained in depth (e.g. the
+    graph engine, the legacy CLI/GraphQL flow) — consult it when v2 doesn't cover something.
 - **`WRITE-LAYER-PLAN.md`, `PROBE-PLAN.md`, `POC-alex-color-import.md`, `EXTENSIONS-PLAN.md`** —
   planning/history (why the write layer is shaped this way; endpoint-verification results; the
   colour-import POC; the scopes/`extensions` support plan). Background, not day-to-day.
