@@ -95,5 +95,6 @@ The release workflow (`tokens_studio_release.yaml`) runs the script on every Tok
 ## Related
 
 - [`documentation/agent-instructions/TOKENS_STUDIO.md`](../agent-instructions/TOKENS_STUDIO.md) — pipeline documentation
+- [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](../how-to/TOKEN_SYSTEM_GUIDE.md) — the legacy Figma-REST + Style Dictionary pipeline this replaces
 - [ADR-0007](./0007-token-variable-architecture-spacing-typography.md) — token variable architecture (Figma structure)
 - Issues [#5164](https://github.com/equinor/design-system/issues/5164), [#5108](https://github.com/equinor/design-system/issues/5108); PR [#5166](https://github.com/equinor/design-system/pull/5166)
