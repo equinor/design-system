@@ -13,19 +13,12 @@ changes. Fix token values in Tokens Studio instead.
 | `dtcg/`    | DTCG interchange JSON                  | `studio exports run` (EDS-DTCG configuration)   |
 | `ts/`      | TypeScript modules                     | `pnpm run generate:ts-tokens` (combines `dtcg/` + `css/`) |
 
-Two files in this directory are **not** pipeline-generated — they are owned
-by release-please, which uses this directory as the root of the
-`eds-tokens-next` beta release component (see
-`.github/release-please-config.json`):
-
-| File           | Owner                                                    |
-| -------------- | -------------------------------------------------------- |
-| `version.txt`  | release-please (current `3.0.0-beta.N` beta version)     |
-| `CHANGELOG.md` | release-please (beta release notes)                      |
-
-The generated output is published only on the beta line
+The generated output is published on the beta line
 (`@equinor/eds-tokens@beta`, injected at publish time by
-`.github/workflows/publish_tokens.yaml`) — the stable package's `exports`
-map still serves the legacy Style Dictionary build in `build/`.
+`.github/workflows/publish_tokens.yaml` under temporary additive
+`./next/{css,dtcg,ts}/*` subpaths) — the `exports` map in git still serves
+the legacy Style Dictionary build in `build/`. Note that `./next/ts/*`
+ships raw `.ts` modules (no compiled `.js`/`.d.ts`), so it requires a
+TypeScript-aware consumer.
 
 Pipeline documentation: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../../../documentation/agent-instructions/TOKENS_STUDIO.md).

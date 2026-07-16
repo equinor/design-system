@@ -106,7 +106,6 @@ jobs:
       data-grid-react: ${{ steps.check.outputs.data-grid-react }}
       icons: ${{ steps.check.outputs.icons }}
       tokens: ${{ steps.check.outputs.tokens }}
-      tokens-beta: ${{ steps.check.outputs.tokens-beta }}
 
     steps:
       # Checkout the repository - we only need the current state
@@ -182,8 +181,7 @@ jobs:
             echo "- ⏭️ **eds-icons** unchanged" >> $GITHUB_STEP_SUMMARY
           fi
 
-          # Check eds-tokens (stable — the regex requires ": right after
-          # the package path, so it cannot match the beta key below)
+          # Check eds-tokens
           if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-tokens":'; then
             echo "tokens=true" >> $GITHUB_OUTPUT
             echo "✅ eds-tokens changed"
@@ -192,18 +190,6 @@ jobs:
             echo "tokens=false" >> $GITHUB_OUTPUT
             echo "⏭️  eds-tokens unchanged"
             echo "- ⏭️ **eds-tokens** unchanged" >> $GITHUB_STEP_SUMMARY
-          fi
-
-          # Check eds-tokens beta (the eds-tokens-next component rooted at
-          # packages/eds-tokens/src/tokens)
-          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-tokens/src/tokens":'; then
-            echo "tokens-beta=true" >> $GITHUB_OUTPUT
-            echo "✅ eds-tokens beta changed"
-            echo "- ✅ **eds-tokens beta** changed" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "tokens-beta=false" >> $GITHUB_OUTPUT
-            echo "⏭️  eds-tokens beta unchanged"
-            echo "- ⏭️ **eds-tokens beta** unchanged" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -332,7 +318,11 @@ jobs:
           echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
 
   # Job 8: Trigger tokens publish workflow
-  # Only runs if the Release Please manifest bumped tokens
+  # Only runs if the Release Please manifest bumped tokens.
+  # The whole eds-tokens package is in beta (pinned 3.0.0-beta.N) during
+  # the Tokens Studio rewrite — every release publishes to the `beta`
+  # dist-tag while `latest` stays on the last stable 2.x. Flip the tag
+  # back to `latest` when the rework graduates as stable 3.0.0.
   trigger-tokens:
     needs: check-releases
     if: needs.check-releases.outputs.tokens == 'true'
@@ -346,7 +336,7 @@ jobs:
           gh workflow run publish_tokens.yaml \
             --repo ${{ github.repository }} \
             --ref main \
-            -f npm-tag=latest
+            -f npm-tag=beta
         continue-on-error: true
 
       - name: Report failure
@@ -354,33 +344,6 @@ jobs:
         run: |
           echo "::error title=Tokens Publish Failed::Failed to trigger publish workflow for @equinor/eds-tokens"
           echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
-
-  # Job 8b: Trigger tokens beta publish workflow
-  # Only runs if the Release Please manifest bumped the eds-tokens-next
-  # beta component (packages/eds-tokens/src/tokens). No changelog gate is
-  # needed: unlike core-react, the two tokens channels have distinct
-  # manifest keys.
-  trigger-tokens-beta:
-    needs: check-releases
-    if: needs.check-releases.outputs.tokens-beta == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger tokens beta publish
-        id: trigger
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run publish_tokens.yaml \
-            --repo ${{ github.repository }} \
-            --ref main \
-            -f npm-tag=beta
-        continue-on-error: true
-
-      - name: Report failure
-        if: steps.trigger.outcome == 'failure'
-        run: |
-          echo "::error title=Tokens Beta Publish Failed::Failed to trigger beta publish workflow for @equinor/eds-tokens"
-          echo "❌ Failed to trigger tokens beta publish workflow" >> $GITHUB_STEP_SUMMARY
 
   # Job 9: Summary report of all publish triggers
   # Runs independently after check-releases completes
@@ -464,15 +427,9 @@ jobs:
           fi
 
           if [ "${{ needs.check-releases.outputs.tokens }}" == "true" ]; then
-            echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered (beta dist-tag during the Tokens Studio transition)" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
-          fi
-
-          if [ "${{ needs.check-releases.outputs.tokens-beta }}" == "true" ]; then
-            echo "- ✅ **@equinor/eds-tokens@beta**: Beta publish workflow triggered" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- ⏭️ **@equinor/eds-tokens@beta**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY

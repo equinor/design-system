@@ -81,11 +81,14 @@
       ]
     },
     "packages/eds-tokens": {
-      "release-type": "node",
+      "release-type": "simple",
       "package-name": "@equinor/eds-tokens",
       "component": "eds-tokens",
+      "versioning": "prerelease",
+      "prerelease": true,
+      "prerelease-type": "beta",
       "exclude-paths": [
-        "packages/eds-tokens/src/tokens",
+        "packages/eds-tokens/src/tokens/README.md",
         "packages/eds-tokens/tokens",
         "packages/eds-tokens/build-generate-variables",
         "packages/eds-tokens/scripts",
@@ -100,13 +103,6 @@
         "packages/eds-tokens/README.md",
         "packages/eds-tokens/CLAUDE.md"
       ]
-    },
-    "packages/eds-tokens/src/tokens": {
-      "release-type": "simple",
-      "component": "eds-tokens-next",
-      "versioning": "prerelease",
-      "prerelease": true,
-      "prerelease-type": "beta"
     },
     "packages/eds-utils": {
       "release-type": "node",

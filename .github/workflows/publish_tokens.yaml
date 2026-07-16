@@ -90,13 +90,15 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           run_install: false
-      # Beta releases (eds-tokens-next) publish the pinned 3.0.0-beta.N
-      # version managed by release-please in src/tokens/version.txt
+      # Beta releases publish the pinned 3.0.0-beta.N version managed by
+      # release-please in version.txt. package.json stays at the last
+      # stable version in git so that pnpm's workspace:^ rewriting keeps
+      # other packages' stable releases depending on stable tokens.
       - name: Set beta version from version.txt
         if: github.event.inputs.npm-tag == 'beta'
         id: set-beta-version
         run: |
-          BETA_VERSION=$(cat packages/eds-tokens/src/tokens/version.txt | tr -d '[:space:]')
+          BETA_VERSION=$(cat packages/eds-tokens/version.txt | tr -d '[:space:]')
           echo "Beta version: $BETA_VERSION"
           cd packages/eds-tokens
           npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
