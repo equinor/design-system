@@ -5,5 +5,6 @@
   "packages/eds-icons": "1.5.1",
   "packages/eds-lab-react": "0.11.0",
   "packages/eds-tokens": "2.3.1",
+  "packages/eds-tokens/src/tokens": "3.0.0-beta.0",
   "packages/eds-utils": "2.2.1"
 }

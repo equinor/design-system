@@ -5,12 +5,13 @@ on:
   workflow_dispatch:
     inputs:
       npm-tag:
-        description: 'Tag for npm package (next | latest)'
+        description: 'Tag for npm package (next | latest | beta)'
         required: true
         type: choice
         options:
           - next
           - latest
+          - beta
         default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -89,6 +90,42 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           run_install: false
+      # Beta releases (eds-tokens-next) publish the pinned 3.0.0-beta.N
+      # version managed by release-please in src/tokens/version.txt
+      - name: Set beta version from version.txt
+        if: github.event.inputs.npm-tag == 'beta'
+        id: set-beta-version
+        run: |
+          BETA_VERSION=$(cat packages/eds-tokens/src/tokens/version.txt | tr -d '[:space:]')
+          echo "Beta version: $BETA_VERSION"
+          cd packages/eds-tokens
+          npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
+          echo "Updated package.json version to $BETA_VERSION"
+      # The Tokens Studio pipeline output (src/tokens/{css,dtcg,ts}) is only
+      # published on the beta line, additively under ./next/* subpaths. The
+      # stable specifiers (./css/variables etc.) keep serving the legacy
+      # build until the new output replaces it at graduation.
+      - name: Add Tokens Studio output for beta release
+        if: github.event.inputs.npm-tag == 'beta'
+        id: add-tokens-studio-output
+        run: |
+          cd packages/eds-tokens
+          for dir in src/tokens/css src/tokens/dtcg src/tokens/ts; do
+            if [ ! -d "$dir" ]; then
+              echo "::error title=Missing Tokens Studio output::$dir does not exist — a beta cannot be published before the first tokens_studio_release PR has been merged"
+              exit 1
+            fi
+          done
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            pkg.files.push('src/tokens/css', 'src/tokens/dtcg', 'src/tokens/ts');
+            pkg.exports['./next/css/*'] = './src/tokens/css/*';
+            pkg.exports['./next/dtcg/*'] = './src/tokens/dtcg/*';
+            pkg.exports['./next/ts/*'] = './src/tokens/ts/*';
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+            console.log('Added Tokens Studio output to files and exports');
+          "
       - name: Publish to npm
         id: publish-to-npm
         working-directory: packages/eds-tokens

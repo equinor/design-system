@@ -137,6 +137,21 @@ pnpm storybook
 
 Beta versions follow this pattern: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
 
+## The `@equinor/eds-tokens` Beta Line
+
+The tokens package has its own beta line for the redefined tokens produced by the Tokens Studio pipeline (issue #5120). It follows the same dual-release model as `eds-core-react`, with two differences: releases are cut by automation rather than by hand-written commits, and the version base is **pinned**.
+
+| Action              | Command                                              |
+| ------------------- | ---------------------------------------------------- |
+| Install beta tokens | `npm install @equinor/eds-tokens@beta`               |
+| View beta versions  | `npm view @equinor/eds-tokens versions \| grep beta` |
+
+- **Component**: `eds-tokens-next`, rooted at `packages/eds-tokens/src/tokens` (the Tokens Studio pipeline output). The stable `eds-tokens` entry excludes that path.
+- **Version scheme**: pinned `3.0.0-beta.N` — the base never moves. The entry uses release-please's `prerelease` versioning strategy (`versioning: "prerelease"`, `prerelease: true`), which at a `x.0.0` base increments only the counter for every commit type (`fix`, `feat`, even `feat!`). See `.github/release-please-config.md` for why this differs from the core-react beta entry.
+- **Automatic cadence**: each release in Tokens Studio triggers `tokens_studio_release.yaml`, which opens a `fix: update tokens from Tokens Studio release` PR. Merging it makes release-please add an `eds-tokens-next` bump to the release PR; merging *that* publishes `3.0.0-beta.N` to the `beta` dist-tag via `publish_tokens.yaml`. Keep those PR titles **unscoped** — a `fix(eds-tokens):` scope would bump the stable package by scope-matching.
+- **Package contents**: the beta ships everything the stable package ships **plus** the Tokens Studio output under temporary additive subpaths (`@equinor/eds-tokens/next/css/*`, `/next/dtcg/*`, `/next/ts/*`), injected at publish time. Repointing the stable specifiers (`./css/variables` etc.) to the new output is planned before graduation so consumers won't need to change imports.
+- **Graduation**: tokens graduate together with the components as part of the single `3.0.0` major — flip `prerelease` to `false` in the `eds-tokens-next` entry and the same configuration emits stable `3.0.0`.
+
 ## Graduation: Moving from Beta to Stable
 
 Components graduate from `/next` to stable when they meet these criteria:

@@ -54,8 +54,9 @@ We currently track these packages for releases:
 3. `@equinor/eds-data-grid-react` - Data grid component
 4. `@equinor/eds-icons` - Icon library
 5. `@equinor/eds-lab-react` - Experimental components
-6. `@equinor/eds-tokens` - Design tokens and variables
-7. `@equinor/eds-utils` - Shared utilities
+6. `@equinor/eds-tokens` - Design tokens and variables (stable)
+7. `@equinor/eds-tokens` (`src/tokens`, Tokens Studio output) - Beta tokens (published with `@beta` tag as a pinned `3.0.0-beta.N` series)
+8. `@equinor/eds-utils` - Shared utilities
 
 ### Dual Release Strategy for `@equinor/eds-core-react`
 
@@ -96,6 +97,27 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 - `exclude-paths`: Prevents `/next` components from affecting stable releases
 - `prerelease-type: "beta"`: Adds `-beta.X` suffix to versions
 - `changelog-path`: Uses separate changelog for beta releases
+
+### Dual Release Strategy for `@equinor/eds-tokens`
+
+The `eds-tokens` package uses the same dual strategy: the stable 2.x line covers the legacy Style Dictionary build, while the Tokens Studio pipeline output in `src/tokens/` is released as a **pinned `3.0.0-beta.N` series** under the `eds-tokens-next` component:
+
+```json
+"packages/eds-tokens/src/tokens": {
+  "release-type": "simple",
+  "component": "eds-tokens-next",
+  "versioning": "prerelease",
+  "prerelease": true,
+  "prerelease-type": "beta"
+}
+```
+
+- Only includes files in `src/tokens/` (the stable entry excludes that path)
+- Published to `@equinor/eds-tokens@beta` by `publish_tokens.yaml` (`npm-tag=beta`), which reads the version from `src/tokens/version.txt`
+- Uses `src/tokens/CHANGELOG.md`
+- The releases are cut by the automated `fix: update tokens from Tokens Studio release` PRs from `tokens_studio_release.yaml`
+
+**Why `versioning: "prerelease"` + `prerelease: true`:** `prerelease-type` alone does **not** increment the beta counter — the default versioning strategy bumps the base version and carries the prerelease suffix through unchanged, which is how the core-react beta line drifted `2.6.0-beta.0 → 2.7.0-beta.1 → 2.8.0-beta.1` (see issue #5141). With the `prerelease` versioning strategy and the base pinned at a major boundary (`3.0.0`), **every** commit type — `fix`, `feat`, even `feat!` — increments only the counter: `3.0.0-beta.1`, `3.0.0-beta.2`, … The `prerelease: true` flag is required (without it the strategy releases a stable `3.0.0`) and also marks the GitHub releases as Pre-release. At graduation, flip `prerelease` to `false` and the same configuration emits stable `3.0.0`.
 
 ### Exclude Paths
 
@@ -308,6 +330,8 @@ feat(next): redesign Input 2.0 API (breaking)
 ```
 
 **Important:** Avoid using `!` (breaking change marker) for beta releases. Beta components are experimental and breaking changes are expected. Using `!` would trigger a major version bump (e.g., `2.0.1-beta.0` → `3.0.0-beta.0`), which is unnecessary for components under development.
+
+This warning applies to the `eds-core-react-next` entry, which uses the default versioning strategy. The `eds-tokens-next` entry is immune: with `versioning: "prerelease"` and its base pinned at `3.0.0`, any commit type only increments the beta counter (see the eds-tokens dual release section above).
 
 ## Related Files
 
