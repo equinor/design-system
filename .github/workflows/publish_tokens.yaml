@@ -98,7 +98,7 @@ jobs:
         if: github.event.inputs.npm-tag == 'beta'
         id: set-beta-version
         run: |
-          BETA_VERSION=$(cat packages/eds-tokens/version.txt | tr -d '[:space:]')
+          BETA_VERSION=$(tr -d '[:space:]' < packages/eds-tokens/version.txt)
           echo "Beta version: $BETA_VERSION"
           cd packages/eds-tokens
           npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
@@ -107,6 +107,10 @@ jobs:
       # published on the beta line, additively under ./next/* subpaths. The
       # stable specifiers (./css/variables etc.) keep serving the legacy
       # build until the new output replaces it at graduation.
+      # Ordering dependency: these package.json edits (and the version bump
+      # above) happen before `pnpm publish` runs prepublishOnly (the build) —
+      # if a build step ever starts generating package.json, it would
+      # silently overwrite them.
       - name: Add Tokens Studio output for beta release
         if: github.event.inputs.npm-tag == 'beta'
         id: add-tokens-studio-output
