@@ -114,7 +114,7 @@ Unlike core-react, `eds-tokens` has **no stable/beta split** — the entire pack
 ```
 
 - Every release is a pinned `3.0.0-beta.N`, published to `@equinor/eds-tokens@beta` by `publish_tokens.yaml` (`trigger_publish.yml` dispatches it with `npm-tag=beta` during the transition)
-- Releases are cut by any `fix`/`feat` commit touching the package — in practice mostly the automated `fix: update tokens from Tokens Studio release` PRs from `tokens_studio_release.yaml`
+- Releases are cut by any `fix`/`feat` commit touching the package — in practice mostly the automated `feat: update tokens from Tokens Studio release` PRs from `tokens_studio_release.yaml`
 - **Why `release-type: "simple"` (version.txt) instead of `node` (package.json):** four packages depend on `@equinor/eds-tokens` via `workspace:^`, and `pnpm publish` rewrites that to the version in eds-tokens' `package.json`. Keeping `package.json` at the last stable version means stable releases of e.g. `eds-core-react` keep depending on stable tokens; the beta version lives in `version.txt` and is applied by the publish workflow at publish time
 - An urgent stable 2.x patch during the transition is a manual job (branch from the `eds-tokens@v2.3.1` tag and publish by hand) — accepted trade-off
 
