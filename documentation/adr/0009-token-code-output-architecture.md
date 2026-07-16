@@ -90,7 +90,7 @@ Pull raw token sets and run the platform's saved CSS + DTCG export configuration
 
 ## Decision
 
-The pipeline consumes Tokens Studio exports and generates TypeScript locally (Option 1), and the published CSS bundle is wrapped in `@layer eds-tokens` (Option 4):
+The pipeline consumes Tokens Studio exports and generates TypeScript locally (Option 1), and the published CSS bundle is wrapped in `@layer eds-tokens` (Option 4). All `src/tokens/…` paths below are relative to the `packages/eds-tokens` package root:
 
 ```
 Tokens Studio release
@@ -111,7 +111,7 @@ Tokens Studio release
 3. **Path → naming transform.** One deterministic mapping from token path to both output names:
    - **CSS:** `eds` prefix + path segments joined with `-` — `background/surface/accent/default/hover` → `--eds-background-surface-accent-default-hover`.
    - **TypeScript:** slashes become nested object keys; hyphenated segments become camelCase (`corner-radius` → `cornerRadius`, `rounded-outer` → `roundedOuter`); digit-leading tiers become spelled-out JS-safe keys (`2xl` → `twoXl`, `4xs` → `fourXs`). The DTCG tree drives the nesting, so the flattened CSS names never need to be parsed back into a tree (the ambiguity that rejected CSS-only generation in ADR-0008).
-   - The current export still carries `font/family/heading` where ADR-0007 unified the spelling to `header`; this is fixed **in the Studio source**, not papered over in the codegen.
+   - The generated output still carries `font/family/heading` because it predates the source rename: the Studio source has since unified the spelling to `header` (ADR-0007), and the next release cycle picks it up. Spelling fixes happen **in the Studio source**, never papered over in the codegen.
 
 4. **One resolved tree per mode.** Files under a dimension folder are resolved in their own variant's context and emitted as complete, self-contained trees: `ts/density/{compact,comfortable,relaxed}.ts` each carry fully resolved values (no cross-file references for consumers to assemble). Mode-less files are resolved once per colour scheme at the base density (`comfortable` — must match the saved export configurations) and split per scheme **only when the resolved values actually differ** (`ts/semantic/{light,dark}.ts` exists because they do; `ts/font/default.ts` does not split because they don't). New divergent dimensions surface automatically rather than by configuration.
 
