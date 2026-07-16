@@ -62,7 +62,9 @@
       "onAutoForward": "notify"
     }
   },
-  "onCreateCommand": "npm install -g pnpm gitmoji-cli && pnpm install && pnpm recursive install --filter ./packages",
+  // Install dependencies and build the project on container creation. Use a temporary directory for pnpm to avoid permission issues (TMPDIR=/workspaces/design-system/.tmp).
+  // TMPDIR can be removed once tokens-studio/studio-cli-releases#1 is resolved and the studio-cli package is updated to use the correct temporary directory.
+  "onCreateCommand": "npm install -g pnpm gitmoji-cli && TMPDIR=/workspaces/design-system/.tmp pnpm install && pnpm recursive install --filter ./packages",
   // Install additional dependencies for axe linter, especially for devcontainers where the host is ARM-based (e.g., MacBook M1+).
   "postCreateCommand": "sudo dpkg --add-architecture amd64 && sudo apt-get update && sudo apt-get install -y libc6:amd64 libstdc++6:amd64 && sudo ln -sf /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2",
   "remoteUser": "node",

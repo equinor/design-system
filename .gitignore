@@ -33,3 +33,4 @@ settings.local.json
 
 # Generated build files
 packages/eds-core-react/build/
+.tmp/
