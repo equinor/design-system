@@ -4,7 +4,7 @@ Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS
 
 ## Two pipelines coexist
 
-The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns everything the package *publishes* (`build/`, the `exports` map). The **new Tokens Studio pipeline** writes generated output to `src/tokens/{<alias>,css,dtcg,ts}` via `.github/workflows/tokens_studio_release.yaml` — those directories are **generated, never edit them by hand**, and are not yet wired into the `exports` map. The TS modules are produced by `pnpm run generate:ts-tokens` (`scripts/generate-ts-tokens.mjs` — DTCG export for structure + CSS export for evaluated values; the script header documents the mechanics). Canonical pipeline doc: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../documentation/agent-instructions/TOKENS_STUDIO.md).
+The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns everything the package *publishes* (`build/`, the `exports` map). The **new Tokens Studio pipeline** writes generated output to `src/tokens/{raw,css,dtcg,ts}` via `.github/workflows/tokens_studio_release.yaml` — those directories are **generated, never edit them by hand**, and are not yet wired into the `exports` map. The TS modules are produced by `pnpm run generate:ts-tokens` (`scripts/generate-ts-tokens.mjs` — DTCG export for structure + CSS export for evaluated values; the script header documents the mechanics). Canonical pipeline doc: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../documentation/agent-instructions/TOKENS_STUDIO.md).
 
 ## Build Pipeline (3 steps)
 

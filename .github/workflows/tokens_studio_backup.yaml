@@ -88,9 +88,11 @@ jobs:
         working-directory: packages/eds-tokens
         run: ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
       # Aliases and output dirs are read from .studio.json so a config
-      # rename (e.g. the planned eds-test-3 → eds) never requires a
-      # workflow change. Each source lands at backup/<alias>/;
-      # --delete keeps removals visible in the diff
+      # rename (e.g. eds-test-3 → eds) never requires a workflow
+      # change — but removed aliases are never cleaned up; delete
+      # backup/<old-alias>/ on the backup branch manually. Each source
+      # lands at backup/<alias>/; --delete keeps removals visible in
+      # the diff
       - name: Sync pulled sources into the backup branch
         run: |
           jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output)"' packages/eds-tokens/.studio.json |
