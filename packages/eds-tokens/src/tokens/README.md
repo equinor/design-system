@@ -8,7 +8,7 @@ changes. Fix token values in Tokens Studio instead.
 
 | Directory  | Content                                | Produced by                                     |
 | ---------- | -------------------------------------- | ----------------------------------------------- |
-| `<alias>/` | Raw token sets (JSON, with `{alias}`s) | `studio tokens pull` (sources in `.studio.json`) |
+| `raw/`     | Raw token sets (JSON, with `{alias}`s) | `studio tokens pull` (sources in `.studio.json`) |
 | `css/`     | CSS custom properties                  | `studio exports run` (EDS-CSS configuration)    |
 | `dtcg/`    | DTCG interchange JSON                  | `studio exports run` (EDS-DTCG configuration)   |
 | `ts/`      | TypeScript modules                     | `pnpm run generate:ts-tokens` (combines `dtcg/` + `css/`) |
