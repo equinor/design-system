@@ -3,26 +3,128 @@
     --_radio-icon-color: var(--eds-color-bg-fill-emphasis-default);
     --_radio-hover-color: var(--eds-color-bg-fill-muted-default);
     --_radio-icon-size: var(--eds-sizing-icon-lg);
+
     /* Touch target: 36px spacious, 28px comfortable */
     --_radio-touch-target: 2.25rem;
+
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
+
+    [data-density='comfortable'] & {
+      --_radio-touch-target: 1.75rem;
+    }
+
+    /* Standalone variant (no label) */
+    &[data-standalone] {
+      position: relative;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      /* Padding calculated from touch target and icon size */
+      padding: calc((var(--_radio-touch-target) - var(--_radio-icon-size)) / 2);
+
+      &::before {
+        content: '';
+
+        position: absolute;
+        inset: 0;
+
+        border-radius: var(--eds-spacing-border-radius-pill);
+
+        background-color: transparent;
+
+        transition: background-color 150ms;
+      }
+
+      &:has(.input:focus-visible) {
+        border-radius: var(--eds-spacing-border-radius-pill);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover::before {
+          background-color: var(--_radio-hover-color);
+        }
+
+        &[data-disabled='true']:hover::before {
+          background-color: transparent;
+        }
+      }
+    }
+
+    &[data-disabled='true'] {
+      cursor: not-allowed;
+    }
+
+    &:has(.input:focus-visible) {
+      border-radius: var(--eds-spacing-border-radius-rounded);
+      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thick);
+    }
+
+    & .icon-wrapper {
+      position: relative;
+
+      overflow: visible;
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
+      line-height: 0;
+    }
+
+    & .input {
+      cursor: pointer;
+
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+
+      margin: 0;
+
+      appearance: none;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & .icon {
+      pointer-events: none;
+      flex-shrink: 0;
+      fill: var(--_radio-icon-color);
+    }
+
+    &[data-disabled='true'] .icon {
+      fill: var(--eds-color-text-disabled);
+    }
+
+    /* Icon visibility */
+    & .icon-checked {
+      display: none;
+    }
+
+    & .icon-unchecked {
+      display: block;
+    }
+
+    &:has(.input:checked) .icon-checked {
+      display: block;
+    }
+
+    &:has(.input:checked) .icon-unchecked {
+      display: none;
+    }
   }
 
-  [data-density='comfortable'] .eds-radio {
-    --_radio-touch-target: 1.75rem;
-  }
-
-  .eds-radio--standalone {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    /* Padding calculated from touch target and icon size */
-    padding: calc((var(--_radio-touch-target) - var(--_radio-icon-size)) / 2);
-  }
-
+  /* Field layout variant */
   .eds-field.eds-radio {
     /*
      * Gap compensation for label alignment.
@@ -42,133 +144,51 @@
      * since the icons have different internal padding (Checkbox: 3px, Radio: 2px).
      */
     --_radio-gap-compensation: 0.2375rem;
+
     gap: calc(
       var(--eds-generic-gap-horizontal) + var(--_radio-gap-compensation)
     );
-    padding-inline: var(--eds-selectable-space-horizontal);
-    padding-block: var(--eds-selectable-space-vertical);
+
     width: auto;
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
     border-radius: var(--eds-spacing-border-radius-rounded);
+
     transition: background-color 150ms;
-  }
 
-  .eds-radio[data-disabled='true'] {
-    cursor: not-allowed;
-  }
-
-  .eds-radio__icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex-shrink: 0;
-    overflow: visible;
-    line-height: 0;
-  }
-
-  /*
-   * Negative margin to match Figma's icon container padding.
-   *
-   * In Figma, the icon container has internal padding that positions the icon
-   * inward from the component edge. We replicate this with negative margin to:
-   * 1. Align the icon's left edge with Figma's design
-   * 2. Keep the component's padding consistent with other Field-based components
-   *
-   * The gap compensation (--_radio-gap-compensation) counteracts this for
-   * proper label spacing. See the gap compensation comment above for details.
-   */
-  .eds-field.eds-radio .eds-radio__icon-wrapper {
-    margin-block: -6px;
-    margin-inline: -4.8px;
-  }
-
-  .eds-radio--standalone::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--eds-spacing-border-radius-pill);
-    background-color: transparent;
-    transition: background-color 150ms;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .eds-radio--standalone:hover::before {
-      background-color: var(--_radio-hover-color);
+    & .icon-wrapper {
+      /*
+       * Negative margin to match Figma's icon container padding.
+       *
+       * In Figma, the icon container has internal padding that positions the icon
+       * inward from the component edge. We replicate this with negative margin to:
+       * 1. Align the icon's left edge with Figma's design
+       * 2. Keep the component's padding consistent with other Field-based components
+       *
+       * The gap compensation (--_radio-gap-compensation) counteracts this for
+       * proper label spacing. See the gap compensation comment above for details.
+       */
+      margin-block: -6px;
+      margin-inline: -4.8px;
     }
 
-    .eds-radio--standalone[data-disabled='true']:hover::before {
-      background-color: transparent;
+    & label {
+      cursor: pointer;
     }
 
-    .eds-field.eds-radio:hover {
-      background-color: var(--_radio-hover-color);
+    &[data-disabled='true'] label {
+      cursor: not-allowed;
+      color: var(--eds-color-text-disabled);
     }
 
-    .eds-field.eds-radio[data-disabled='true']:hover {
-      background-color: transparent;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--_radio-hover-color);
+      }
+
+      &[data-disabled='true']:hover {
+        background-color: transparent;
+      }
     }
-  }
-
-  .eds-radio__input {
-    appearance: none;
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    cursor: pointer;
-    z-index: 1;
-  }
-
-  .eds-radio__input:disabled {
-    cursor: not-allowed;
-  }
-
-  .eds-radio__input:focus {
-    outline: none;
-  }
-
-  .eds-radio:has(.eds-radio__input:focus-visible) {
-    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-    outline-offset: var(--eds-sizing-stroke-thick);
-    border-radius: var(--eds-spacing-border-radius-rounded);
-  }
-
-  .eds-radio--standalone:has(.eds-radio__input:focus-visible) {
-    border-radius: var(--eds-spacing-border-radius-pill);
-  }
-
-  .eds-radio__icon {
-    pointer-events: none;
-    fill: var(--_radio-icon-color);
-    flex-shrink: 0;
-  }
-
-  .eds-radio[data-disabled='true'] .eds-radio__icon {
-    fill: var(--eds-color-text-disabled);
-  }
-
-  /* Icon visibility */
-  .eds-radio__icon--checked {
-    display: none;
-  }
-
-  .eds-radio__icon--unchecked {
-    display: block;
-  }
-
-  .eds-radio:has(.eds-radio__input:checked) .eds-radio__icon--checked {
-    display: block;
-  }
-
-  .eds-radio:has(.eds-radio__input:checked) .eds-radio__icon--unchecked {
-    display: none;
-  }
-
-  .eds-field.eds-radio .eds-field__label {
-    cursor: pointer;
-  }
-
-  .eds-field.eds-radio[data-disabled='true'] .eds-field__label {
-    color: var(--eds-color-text-disabled);
-    cursor: not-allowed;
   }
 }
