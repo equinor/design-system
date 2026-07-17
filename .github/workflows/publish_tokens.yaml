@@ -125,7 +125,7 @@ jobs:
           node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-            pkg.files.push('src/tokens/css', 'src/tokens/dtcg', 'src/tokens/ts');
+            pkg.files.push('src/tokens/css/*', 'src/tokens/dtcg/*', 'src/tokens/ts/*');
             pkg.exports['./next/css/*'] = './src/tokens/css/*';
             pkg.exports['./next/dtcg/*'] = './src/tokens/dtcg/*';
             pkg.exports['./next/ts/*'] = './src/tokens/ts/*';
