@@ -1,0 +1,83 @@
+{
+  "input": {
+    "palette": {
+      "blue": {
+        "anchor": {
+          "$value": "oklch(0.5857, 0.135751, 240.6802)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "gray": {
+        "anchor": {
+          "$value": "oklch(0.4091, 0, 0)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "green": {
+        "anchor": {
+          "$value": "oklch(0.6291, 0.1659, 142.98)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "moss-green": {
+        "anchor": {
+          "$value": "oklch(0.4973, 0.084851, 204.553)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "north-sea": {
+        "anchor": {
+          "$value": "oklch(0.3274, 0.0363, 242.96)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "orange": {
+        "anchor": {
+          "$value": "oklch(0.6934, 0.164689, 58.7381)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "red": {
+        "anchor": {
+          "$value": "oklch(0.5776, 0.2314, 21.12)",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
