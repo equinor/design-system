@@ -1,0 +1,160 @@
+{
+  "foundation": {
+    "anchor": {
+      "blue": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.blue.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.blue.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "gray": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.gray.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.gray.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "green": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.green.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.green.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "moss-green": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.moss-green.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.moss-green.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "north-sea": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.north-sea.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.north-sea.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "orange": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.orange.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.orange.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "red": {
+        "anchor": {
+          "c": {
+            "$value": "chroma({input.palette.red.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "h": {
+            "$value": "hue({input.palette.red.anchor})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
