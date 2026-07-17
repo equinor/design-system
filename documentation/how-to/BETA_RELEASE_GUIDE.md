@@ -137,6 +137,21 @@ pnpm storybook
 
 Beta versions follow this pattern: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
 
+## `@equinor/eds-tokens`: Whole Package in Beta
+
+The tokens package works differently from core-react's dual model: while the token system is rewritten on the Tokens Studio pipeline (issue #5120), the **entire package is in beta**. There is no stable release channel — no stable 2.x releases are cut until the rework graduates as `3.0.0`. Consumers on `latest` simply stay on the last stable 2.x.
+
+| Action              | Command                                              |
+| ------------------- | ---------------------------------------------------- |
+| Install beta tokens | `npm install @equinor/eds-tokens@beta`               |
+| View beta versions  | `npm view @equinor/eds-tokens versions \| grep beta` |
+
+- **Version scheme**: pinned `3.0.0-beta.N` — the base never moves. The entry uses release-please's `prerelease` versioning strategy (`versioning: "prerelease"`, `prerelease: true`), which at a `x.0.0` base increments only the counter for every commit type (`fix`, `feat`, even `feat!`). See `.github/release-please-config.md` for details, including why the version lives in `version.txt` rather than `package.json`.
+- **Automatic cadence**: each release in Tokens Studio triggers `tokens_studio_release.yaml`, which opens a `feat: update tokens from Tokens Studio release` PR. Merging it makes release-please add an `eds-tokens` bump to the release PR; merging *that* publishes `3.0.0-beta.N` to the `beta` dist-tag via `publish_tokens.yaml`. Any other `fix`/`feat` commit touching the package cuts a beta the same way.
+- **Package contents**: the beta ships everything 2.x ships **plus** the Tokens Studio output under temporary additive subpaths (`@equinor/eds-tokens/next/css/*`, `/next/dtcg/*`, `/next/ts/*`), injected at publish time. Repointing the stable specifiers (`./css/variables` etc.) to the new output is planned before graduation so consumers won't need to change imports.
+- **Urgent stable patch**: if a critical 2.x fix is needed during the transition, it's a manual publish from the `eds-tokens@v2.3.1` tag — the automated channel only produces betas.
+- **Graduation**: tokens graduate together with the components as part of the single `3.0.0` major — flip `prerelease` to `false` and switch the dist-tag in `trigger_publish.yml` back to `latest`.
+
 ## Graduation: Moving from Beta to Stable
 
 Components graduate from `/next` to stable when they meet these criteria:

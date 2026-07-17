@@ -90,8 +90,14 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: 'chore: update tokens from Tokens Studio release'
-          title: 'chore: update tokens from Tokens Studio release'
+          # feat: so release-please cuts an eds-tokens beta (3.0.0-beta.N)
+          # when the PR is squash-merged (chore: would not trigger a
+          # release). During the beta the commit type doesn't affect the
+          # version — the prerelease strategy pins the base and only
+          # increments the counter — but feat lands the entry under
+          # "Added" in the changelog, which is what a token update is.
+          commit-message: 'feat: update tokens from Tokens Studio release'
+          title: 'feat: update tokens from Tokens Studio release'
           body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`), generated CSS (EDS-CSS export) into `packages/eds-tokens/src/tokens/css/`, DTCG (EDS-DTCG export) into `src/tokens/dtcg/`, and TypeScript modules generated from the two into `src/tokens/ts/`.'
           branch: tokens-studio-release
       # This workflow runs unattended (release-triggered) and the PR it
