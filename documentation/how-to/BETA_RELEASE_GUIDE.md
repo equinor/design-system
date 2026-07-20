@@ -34,11 +34,11 @@ feat(next): add new TextInput component
 # Bug fixes
 fix(next): correct Placeholder styling
 
-# Breaking changes
-feat(next): change Button API
+# Breaking changes — use ! and a BREAKING CHANGE footer
+feat(next)!: change Button API
 ```
 
-> **Note:** Skip the conventional-commit `!` marker for beta components. Release Please treats `!` as a major-bump signal even for prereleases, so we call out breaking details in the description/body instead of using `!`.
+> **Note:** Use the conventional-commit `!` marker for breaking changes in beta components. The version base is pinned at `3.0.0` (`versioning: "prerelease"` in `release-please-config.json`), so `!` does not bump the major — it only increments the beta counter — while giving consumers a "⚠ BREAKING CHANGES" section in the changelog and release notes.
 
 ### Stable Release (for existing components)
 
@@ -135,7 +135,9 @@ pnpm storybook
 
 ## Version Scheme
 
-Beta versions follow this pattern: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
+Beta versions follow a fixed series pinned at the upcoming major: `3.0.0-beta.1`, `3.0.0-beta.2`, etc.
+
+The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`.
 
 ## `@equinor/eds-tokens`: Whole Package in Beta
 
@@ -262,7 +264,8 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 | Major release        | 3.0.0   | EDS 2.0 only                       | Update imports, test, migrate |
 
 5. **Release**:
-   - Major version bump: `2.x.x` → `3.0.0`
+   - The beta series graduates in place: `3.0.0-beta.N` → `3.0.0`
+   - Mechanism: set `"prerelease": false` on the `eds-core-react-next` entry in `.github/release-please-config.json` (the `prerelease` versioning strategy then emits a stable version), or force the version with a `Release-As: 3.0.0` commit footer
    - All EDS 2.0 components become the default
    - Beta releases deprecated
    - Migration guide published
@@ -278,8 +281,8 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 **Within `/next` (beta releases):**
 
 - ✅ Breaking changes are allowed and expected
-- ✅ Use regular `feat(next):` commits (no `!` needed)
-- ✅ Version bumps prerelease number: `beta.0` → `beta.1`
+- ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix(next)!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
+- ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
 
 **After graduation (stable releases):**
 

@@ -82,19 +82,23 @@ The `eds-core-react` package uses a **dual release strategy** to support both st
 "packages/eds-core-react/src/components/next": {
   "release-type": "simple",
   "component": "eds-core-react-next",
-  "prerelease-type": "beta"
+  "prerelease": true,
+  "prerelease-type": "beta",
+  "versioning": "prerelease"
 }
 ```
 
 - Only includes files in `src/components/next/`
 - Published to `@equinor/eds-core-react@beta`
 - Uses `src/components/next/CHANGELOG.md`
-- Version format: `2.0.1-beta.0`, `2.0.1-beta.1`, etc.
+- Version format: `3.0.0-beta.1`, `3.0.0-beta.2`, etc. — the base is pinned at the upcoming `3.0.0` major; only the beta counter increments
 
 **Key Configuration Options:**
 
 - `exclude-paths`: Prevents `/next` components from affecting stable releases
 - `prerelease-type: "beta"`: Adds `-beta.X` suffix to versions
+- `versioning: "prerelease"`: Pins the version base. At `3.0.0-beta.N` (minor and patch are both 0), every commit type — `fix`, `feat`, and breaking `!` — bumps only the beta counter, never the base
+- `prerelease: true`: Keeps the `-beta.N` suffix on bumps (without it, the `prerelease` versioning strategy strips the suffix). Flipping this to `false` is the graduation lever: the next release becomes a clean `3.0.0`
 - `changelog-path`: Uses separate changelog for beta releases
 
 ### `@equinor/eds-tokens`: Whole Package in Beta
@@ -288,8 +292,8 @@ fix(next): fix Placeholder styling
 
 Release-please will include beta changes in the release PR:
 
-- Title includes "next": `chore: release eds-core-react-next 2.0.1-beta.1`
-- Bumps beta version: `2.0.1-beta.0` → `2.0.1-beta.1`
+- Title includes "next": `chore: release eds-core-react-next 3.0.0-beta.2`
+- Bumps beta version: `3.0.0-beta.1` → `3.0.0-beta.2`
 - Updates `src/components/next/CHANGELOG.md`
 - When merged, publishes to `@equinor/eds-core-react@beta`
 
@@ -325,14 +329,11 @@ feat(next): add Input 2.0 component
 # Bug fixes
 fix(next): correct Input 2.0 styling
 
-# Breaking changes - DO NOT use ! for beta
-feat(next): redesign Input 2.0 API (breaking)
-# NOT: feat(next)!: redesign Button API
+# Breaking changes - use ! so the change lands in the BREAKING CHANGES changelog section
+fix(next)!: convert Input 2.0 BEM classes to flat class names
 ```
 
-**Important:** Avoid using `!` (breaking change marker) for beta releases. Beta components are experimental and breaking changes are expected. Using `!` would trigger a major version bump (e.g., `2.0.1-beta.0` → `3.0.0-beta.0`), which is unnecessary for components under development.
-
-This warning applies to the `eds-core-react-next` entry, which uses the default versioning strategy. The `eds-tokens` entry is immune: with `versioning: "prerelease"` and its base pinned at `3.0.0`, any commit type only increments the beta counter (see the whole-package-in-beta section above).
+**Breaking changes:** Use the `!` marker (with a `BREAKING CHANGE:` footer describing the migration). Both `eds-core-react-next` and `eds-tokens` use `versioning: "prerelease"` with the base pinned at `3.0.0`, so `!` does **not** roll the version — every commit type only increments the beta counter (`3.0.0-beta.1` → `3.0.0-beta.2`). The `!` gives consumers a "⚠ BREAKING CHANGES" section in the changelog and the GitHub release notes.
 
 ## Related Files
 
