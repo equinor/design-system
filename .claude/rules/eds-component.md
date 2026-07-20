@@ -11,6 +11,7 @@ paths:
 
 This file is intentionally short. It only highlights what's easy to forget when working in `/next`:
 
+- **Check [`documentation/AI-COMPONENT-INDEX.md`](../../documentation/AI-COMPONENT-INDEX.md) before creating a component** — a generated, CI-verified list of every `/next` component with props and sub-components; it may already exist
 - **No default exports** (except `.stories.tsx`)
 - **WCAG 2.1 AA** is non-negotiable — `jest-axe` test in every component
 - **Use `--eds-*` design tokens** — never hardcode hex values

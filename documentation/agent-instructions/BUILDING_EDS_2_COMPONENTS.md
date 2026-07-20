@@ -4,6 +4,8 @@ This is the canonical reference for the patterns that go into an EDS 2.0 compone
 
 For the project-wide conventions (file structure, code style, CSS layering, testing, accessibility, conventional commits), see [`AGENTS.md`](../../AGENTS.md). This guide adds the component-building specifics that are not covered there.
 
+**Before building anything, check [`documentation/AI-COMPONENT-INDEX.md`](../AI-COMPONENT-INDEX.md)** — a generated, CI-verified list of every existing `/next` component with its props and sub-components. The component you are about to build may already exist, or an existing one may compose into what you need. One file read replaces walking the whole `/next` tree.
+
 ## Table of Contents
 
 - [Foundation Data-Attribute Reference](#foundation-data-attribute-reference)
