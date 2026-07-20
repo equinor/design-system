@@ -41,7 +41,7 @@
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "@tanstack/react-table": "^8.21.3",
-    "@tanstack/react-virtual": "^3.14.5"
+    "@tanstack/react-virtual": "^3.14.6"
   },
   "devDependencies": {
     "@equinor/eds-core-react": "^2",
