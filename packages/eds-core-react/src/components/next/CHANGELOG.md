@@ -10,7 +10,6 @@ These are experimental components available under the `/next` entry point. They 
 ### ⚠ BREAKING CHANGES
 
 * consumers targeting these class names directly in their own CSS must update to the new flat names.
-* consumers targeting these class names directly in their own CSS must update to the new flat names.
 
 ### 🐛 Fixed
 
