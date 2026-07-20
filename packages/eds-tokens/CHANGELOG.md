@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * update tokens from Tokens Studio release ([#5182](https://github.com/equinor/design-system/issues/5182)) ([6074f72](https://github.com/equinor/design-system/commit/6074f721b4072741c50498d63c10ab3ebe45185e))
 
+## [2.3.2](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.1...eds-tokens@v2.3.2) (2026-07-20)
+
+Documentation-only release — no token changes.
+
+### 📝 Documentation
+
+* mark the legacy `tokens` JavaScript object as deprecated (do not use in new code) and flag the CSS variables as transitional: still the supported option for production, but the variable names will be replaced by the new token structure (currently on `@equinor/eds-tokens@beta`) in the next major release ([#5120](https://github.com/equinor/design-system/issues/5120))
+
 ## [2.3.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.0...eds-tokens@v2.3.1) (2026-06-23)
 
 
