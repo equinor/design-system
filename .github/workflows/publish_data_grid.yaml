@@ -54,7 +54,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-data-grid
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24.16.0'
       - name: Setup pnpm
@@ -91,7 +91,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-data-grid
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24.16.0'
           registry-url: 'https://registry.npmjs.org'
