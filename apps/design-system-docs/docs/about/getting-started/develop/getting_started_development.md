@@ -19,6 +19,10 @@ npm install @equinor/eds-core-react
 yarn add @equinor/eds-core-react
 ```
 
+:::note
+"EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are not the same — see [Versioning](../../about_eds.md#versioning) for the relationship.
+:::
+
 ### Load fonts
 
 EDS components use the **Equinor** font family. EDS 2.0 (`next`) components additionally require **Inter**. Add the EDS variable font stylesheet to your HTML `<head>` to load both:
