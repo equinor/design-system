@@ -4,6 +4,18 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.8.0-beta.1...eds-core-react-next@v3.0.0-beta.1) (2026-07-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* consumers targeting these class names directly in their own CSS must update to the new flat names.
+
+### 🐛 Fixed
+
+* convert Banner BEM classes to flat class names ([#5114](https://github.com/equinor/design-system/issues/5114)) ([778515c](https://github.com/equinor/design-system/commit/778515ca9e2eb6144fcf96f57b483d6afdaae25d))
+* convert Field, Switch, Radio, Checkbox BEM classes to flat class names ([#5115](https://github.com/equinor/design-system/issues/5115)) ([84906f3](https://github.com/equinor/design-system/commit/84906f3932d6049190ca91859c7b9a03968ab7d3))
+
 ## [2.8.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.7.0-beta.1...eds-core-react-next@v2.8.0-beta.1) (2026-06-23)
 
 
