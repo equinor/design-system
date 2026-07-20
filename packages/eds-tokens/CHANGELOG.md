@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.0...eds-tokens@v3.0.0-beta.1) (2026-07-20)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5182](https://github.com/equinor/design-system/issues/5182)) ([6074f72](https://github.com/equinor/design-system/commit/6074f721b4072741c50498d63c10ab3ebe45185e))
+
 ## [2.3.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.0...eds-tokens@v2.3.1) (2026-06-23)
 
 
