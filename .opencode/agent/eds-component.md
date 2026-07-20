@@ -15,7 +15,7 @@ When invoked to create a new component, follow this flow:
 
 1. **Ask for a Figma URL.** If provided, run `figma_get_design_context`, `figma_get_screenshot`, and `figma_get_variable_defs` **per state** (Default, Hover, Focus, Disabled, etc.). Use the EXACT variable names returned.
 
-2. **Check for existing components to reuse** in `packages/eds-core-react/src/components/next/index.ts` — prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography`.
+2. **Check the component index first** — [`documentation/AI-COMPONENT-INDEX.md`](../../documentation/AI-COMPONENT-INDEX.md) lists every existing `/next` component with its props and sub-components (generated, CI-verified). Confirm the component doesn't already exist, and prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography`. The underlying source of truth is `packages/eds-core-react/src/components/next/index.ts`.
 
 3. **If an old component exists** at `packages/eds-core-react/src/components/<name>/`, read it for behavioural awareness only — do not copy implementation. Use modern patterns (`:focus-visible`, CSS tokens, simple state).
 

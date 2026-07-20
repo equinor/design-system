@@ -13,6 +13,10 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 - `@equinor/eds-tokens` — Design tokens, CSS variables, and theming
 - `@equinor/eds-icons` — Icon library
 
+### Existing /next components
+
+Before scaffolding a new component, check [`documentation/AI-COMPONENT-INDEX.md`](./documentation/AI-COMPONENT-INDEX.md) — a generated list of every `/next` component with its props and sub-components. It is regenerated on `pnpm run build` (or run `pnpm run generate:component-index` ad-hoc). Don't edit it by hand.
+
 ## Secrets & Credentials
 
 Never read, search, copy, or print the contents of secret files. The rule applies to **every** harness (Claude Code, Copilot, OpenCode) regardless of whether the harness enforces it.

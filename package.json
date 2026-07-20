@@ -12,7 +12,8 @@
     "lint:css": "stylelint ./packages/eds-core-react/src/components/next/**/*.css",
     "init": "pnpm install --force && pnpm run build",
     "extract-prerequisites": "node scripts/extract-prerequisites.js",
-    "prebuild": "pnpm run extract-prerequisites",
+    "generate:component-index": "node scripts/generate-component-index.js",
+    "prebuild": "pnpm run extract-prerequisites && pnpm run generate:component-index",
     "build": "pnpm run build:token-sync && pnpm run build:tokens-build && pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab && pnpm run build:color-palette-generator:cli",
     "build:color-palette-generator:cli": "pnpm --filter @equinor/eds-color-palette-generator run build:cli",
     "build:core-react": "pnpm --filter @equinor/eds-core-react run build",
@@ -96,6 +97,7 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
     "prettier": "3.9.5",
+    "ts-morph": "^27.0.2",
     "typescript": "^5.9.3"
   },
   "browserslist": "last 2 Chrome versions, last 2 firefox versions, last 2 safari versions, last 2 edge versions, not dead",

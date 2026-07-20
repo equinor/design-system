@@ -22,7 +22,7 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}
-      checkout_paths: packages apps scripts .github
+      checkout_paths: packages apps scripts .github documentation
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -48,6 +48,11 @@ jobs:
       - name: Fallback install (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install
+      # Must run BEFORE the build: `prebuild` regenerates the index in the
+      # workspace, which would mask a stale committed file.
+      - name: Check AI component index freshness
+        id: check-component-index
+        run: pnpm run generate:component-index --check
       - name: Build packages
         id: build-packages
         run: pnpm run build
