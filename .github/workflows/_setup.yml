@@ -82,7 +82,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-and-store-force-${{ hashFiles('pnpm-lock.yaml') }}
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24.16.0'
       - name: Setup pnpm

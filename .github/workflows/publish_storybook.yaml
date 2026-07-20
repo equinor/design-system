@@ -44,7 +44,7 @@ jobs:
             ~/.pnpm-store
           key: ${{ github.sha }}
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24.16.0'
       - name: Setup pnpm
