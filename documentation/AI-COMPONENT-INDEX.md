@@ -9,7 +9,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 
 - Source path: `packages/eds-core-react/src/components/next/<Component>/`
 - Top-level barrel: `packages/eds-core-react/src/components/next/index.ts`
-- Components: 22 • Props documented: 93 • With JSDoc description: 1
+- Components: 23 • Props documented: 96 • With JSDoc description: 1
 
 ## Components
 
@@ -22,6 +22,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 | Button | — | asChild, icon, multiline, round, size, tone, variant | — | ✓ | active |
 | Checkbox | — | disabled, helperMessage, indeterminate, indicator, label | — | — | active |
 | Chip | — | dropdown, onDelete, selected, tone, variant | — | — | active |
+| Dialog | — | onOpenChange, open, scrim | Dialog.Header, Dialog.Title, Dialog.Content, Dialog.Actions | — | active |
 | Divider | — | — | — | — | active |
 | Field | — | disabled, position | Field.Label, Field.Description, Field.HelperMessage | — | active |
 | Icon | Icon component for EDS 2.0 | color, data, size, title | — | — | active |
@@ -41,7 +42,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 ## Field reference
 
 - **Description** — first paragraph of the JSDoc above the component's `forwardRef` declaration (also tries `<Name>Component` / `<Name>Root` for compound components), with the `<Name>Props` type alias as fallback. `—` means no JSDoc is present yet; consider adding one.
-- **Props** — EDS-defined props only, from the `<Name>Props` type literal. Intersected HTML attributes (`HTMLAttributes<...>`, `InputHTMLAttributes<...>`, etc.) and React-conventional props (`children`, `className`, `style`, `ref`, `key`) are NOT listed — assume the standard DOM props for the underlying element are available.
+- **Props** — EDS-defined props only, from the `<Name>Props` type literal. Intersected HTML attributes (`HTMLAttributes<...>`, `InputHTMLAttributes<...>`, etc.) and React-conventional props (`children`, `className`, `style`, `ref`, `key`) are NOT listed — assume the standard DOM props for the underlying element are available. Known limitation: only inline type literals and intersections are walked — props coming from a referenced local type alias (`type FooProps = SharedBase & {...}`) or a union type are not expanded.
 - **Sub-components** — compound sub-components attached via the `Compound<Name>` type pattern (e.g. `Field.Label`, `Banner.Icon`). Standalone components exported from the same directory (e.g. `MenuItem` from `./Menu`) appear as their own rows.
 - **asChild** — `✓` if the component supports the `asChild` polymorphism pattern (see `Slot/README.md`).
 - **Status** — `active` unless the props type carries an `@deprecated` JSDoc tag.

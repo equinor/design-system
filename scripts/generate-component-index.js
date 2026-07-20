@@ -9,7 +9,13 @@
  * (the top-level barrel — what consumers can actually import).
  *
  * Re-run via `pnpm run generate:component-index`. Also runs as part of
- * `prebuild`, so any `pnpm run build` keeps the file fresh.
+ * `prebuild`, so a root `pnpm run build` keeps the file fresh (note:
+ * `pnpm run build:core-react` does NOT — pre-hooks only fire for the exact
+ * script name `build`).
+ *
+ * `--check` regenerates in memory and exits 1 if the committed file is
+ * stale, naming the affected components. Wired into the Checks workflow so
+ * a PR that changes the /next API surface without regenerating fails CI.
  */
 
 const fs = require('fs')
@@ -272,7 +278,7 @@ function renderTable(rows) {
   return [header, sep, ...body].join('\n')
 }
 
-function generate() {
+function buildContent() {
   const publicComponents = discoverPublicComponents()
   const rows = publicComponents
     .map(extractComponentData)
@@ -301,7 +307,7 @@ ${renderTable(rows)}
 ## Field reference
 
 - **Description** — first paragraph of the JSDoc above the component's \`forwardRef\` declaration (also tries \`<Name>Component\` / \`<Name>Root\` for compound components), with the \`<Name>Props\` type alias as fallback. \`—\` means no JSDoc is present yet; consider adding one.
-- **Props** — EDS-defined props only, from the \`<Name>Props\` type literal. Intersected HTML attributes (\`HTMLAttributes<...>\`, \`InputHTMLAttributes<...>\`, etc.) and React-conventional props (\`children\`, \`className\`, \`style\`, \`ref\`, \`key\`) are NOT listed — assume the standard DOM props for the underlying element are available.
+- **Props** — EDS-defined props only, from the \`<Name>Props\` type literal. Intersected HTML attributes (\`HTMLAttributes<...>\`, \`InputHTMLAttributes<...>\`, etc.) and React-conventional props (\`children\`, \`className\`, \`style\`, \`ref\`, \`key\`) are NOT listed — assume the standard DOM props for the underlying element are available. Known limitation: only inline type literals and intersections are walked — props coming from a referenced local type alias (\`type FooProps = SharedBase & {...}\`) or a union type are not expanded.
 - **Sub-components** — compound sub-components attached via the \`Compound<Name>\` type pattern (e.g. \`Field.Label\`, \`Banner.Icon\`). Standalone components exported from the same directory (e.g. \`MenuItem\` from \`./Menu\`) appear as their own rows.
 - **asChild** — \`✓\` if the component supports the \`asChild\` polymorphism pattern (see \`Slot/README.md\`).
 - **Status** — \`active\` unless the props type carries an \`@deprecated\` JSDoc tag.
@@ -314,12 +320,81 @@ ${renderTable(rows)}
 - Storybook links
 `
 
+  return { content, rows }
+}
+
+/**
+ * Extract `componentName -> full table row` from generated markdown, so a
+ * failed --check can say which components are affected instead of just
+ * "files differ".
+ */
+function tableRowsByName(markdown) {
+  const rows = new Map()
+  for (const line of markdown.split('\n')) {
+    const match = /^\| ([A-Za-z0-9]+) \| /.exec(line)
+    if (match && match[1] !== 'Component') {
+      rows.set(match[1], line)
+    }
+  }
+  return rows
+}
+
+function reportStaleness(committed, generated) {
+  const committedRows = tableRowsByName(committed)
+  const generatedRows = tableRowsByName(generated)
+
+  const missing = [...generatedRows.keys()].filter(
+    (name) => !committedRows.has(name),
+  )
+  const removed = [...committedRows.keys()].filter(
+    (name) => !generatedRows.has(name),
+  )
+  const changed = [...generatedRows.keys()].filter(
+    (name) =>
+      committedRows.has(name) &&
+      committedRows.get(name) !== generatedRows.get(name),
+  )
+
+  if (missing.length > 0) {
+    console.error(`  Missing from the index: ${missing.join(', ')}`)
+  }
+  if (removed.length > 0) {
+    console.error(`  No longer exported: ${removed.join(', ')}`)
+  }
+  if (changed.length > 0) {
+    console.error(`  Rows out of date: ${changed.join(', ')}`)
+  }
+  if (missing.length + removed.length + changed.length === 0) {
+    console.error('  Table rows match — header, stats, or prose changed.')
+  }
+}
+
+function main() {
+  const check = process.argv.includes('--check')
+  const { content, rows } = buildContent()
+  const relativePath = path.relative(rootDir, outputPath)
+
+  if (check) {
+    const committed = fs.existsSync(outputPath)
+      ? fs.readFileSync(outputPath, 'utf8')
+      : ''
+    if (committed === content) {
+      console.log(`${relativePath} is up to date (${rows.length} components).`)
+      return
+    }
+    console.error(`${relativePath} is stale.`)
+    reportStaleness(committed, content)
+    console.error(
+      '  Run `pnpm run generate:component-index` and commit the result.',
+    )
+    process.exitCode = 1
+    return
+  }
+
   fs.mkdirSync(path.dirname(outputPath), { recursive: true })
   fs.writeFileSync(outputPath, content)
 
-  console.log(
-    `Wrote ${path.relative(rootDir, outputPath)} (${rows.length} components).`,
-  )
+  console.log(`Wrote ${relativePath} (${rows.length} components).`)
 }
 
-generate()
+main()
