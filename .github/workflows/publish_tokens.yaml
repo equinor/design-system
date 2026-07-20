@@ -106,7 +106,11 @@ jobs:
       # The Tokens Studio pipeline output (src/tokens/{css,dtcg,ts}) is only
       # published on the beta line, additively under ./next/* subpaths. The
       # stable specifiers (./css/variables etc.) keep serving the legacy
-      # build until the new output replaces it at graduation.
+      # build while /next components migrate to the new variable names;
+      # once that migration completes, a beta release drops the legacy build
+      # and moves this output to the final specifiers — before graduation,
+      # so the 3.0.0 export surface is tested in beta. See
+      # documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md.
       # Ordering dependency: these package.json edits (and the version bump
       # above) happen before `pnpm publish` runs prepublishOnly (the build) —
       # if a build step ever starts generating package.json, it would
