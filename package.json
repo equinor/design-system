@@ -76,7 +76,7 @@
     "@babel/runtime": "^7.29.2",
     "@types/jest": "^30.0.0",
     "@types/jest-axe": "^3.5.9",
-    "@eslint/js": "^9.38.0",
+    "@eslint/js": "^9.39.5",
     "babel-plugin-styled-components": "^2.3.0",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
