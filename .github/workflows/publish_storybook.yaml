@@ -101,38 +101,6 @@ jobs:
           tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
           allow-no-subscriptions: true
 
-      - name: Delete all existing blobs to ensure clean deployment 🗑️
-        env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
-        run: |
-          set -euo pipefail
-          echo "Checking existing blobs in container '\$web'..."
-          BLOB_COUNT=$(az storage blob list \
-            --container-name '$web' \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --query 'length(@)' \
-            --output tsv)
-
-          if [ "$BLOB_COUNT" -eq 0 ]; then
-            echo "Container already empty."
-          else
-            echo "Deleting $BLOB_COUNT blobs..."
-            az storage blob delete-batch \
-              --source '$web' \
-              --pattern "*" \
-              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-              --output none
-            echo "Deletion request submitted."
-          fi
-
-          REMAINING=$(az storage blob list \
-            --container-name '$web' \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --query 'length(@)' \
-            --output tsv)
-
-          echo "✅ Blob deletion completed. Remaining blobs: $REMAINING"
-
       - name: Deploy to Azure Blob Storage 🚀
         id: deploy-website
         env:
@@ -150,20 +118,78 @@ jobs:
           FILE_COUNT=$(find packages/eds-core-react/storybook-build -type f | wc -l)
           echo "Uploading $FILE_COUNT files..."
 
+          # Blobs modified before this timestamp are orphans from a previous
+          # deploy and are cleaned up after the upload (zero-downtime deploy:
+          # upload with --overwrite first, delete stale blobs afterwards).
+          # Format matches az CLI's lastModified output for safe comparison.
+          DEPLOY_START=$(date -u '+%Y-%m-%dT%H:%M:%S+00:00')
+          echo "deploy-start=$DEPLOY_START" >> "$GITHUB_OUTPUT"
+
+          # 1) Content-hashed assets: cache forever. Uploaded first so the new
+          #    index.html never references chunks that don't exist yet.
+          az storage blob upload-batch \
+            --destination '$web' \
+            --destination-path assets \
+            --source packages/eds-core-react/storybook-build/assets \
+            --content-cache-control 'public, max-age=31536000, immutable' \
+            --overwrite \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+
+          # 2) Un-hashed files (index.html, iframe.html, sb-manager/**,
+          #    sb-addons/** etc.): browsers must revalidate on every load, or a
+          #    stale bundle mix breaks the Manager UI after each deploy (#5205).
+          #    Revalidation is cheap 304s via ETag/Last-Modified. Move assets/
+          #    aside so it is not re-uploaded with the wrong header.
+          mv packages/eds-core-react/storybook-build/assets /tmp/assets-uploaded
           az storage blob upload-batch \
             --destination '$web' \
             --source packages/eds-core-react/storybook-build \
+            --content-cache-control 'no-cache' \
             --overwrite \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
 
           # Verify upload
           UPLOADED=$(az storage blob list \
             --container-name '$web' \
+            --num-results '*' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
             --query 'length(@)' \
             --output tsv)
 
           echo "✅ Deployment completed successfully. Total blobs in container: $UPLOADED"
+
+      - name: Delete stale blobs from previous deploy 🗑️
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
+          DEPLOY_START: ${{ steps.deploy-website.outputs.deploy-start }}
+        run: |
+          set -euo pipefail
+          echo "Deleting blobs not touched by this deploy (last modified before $DEPLOY_START)..."
+
+          # ISO timestamps in identical format compare correctly as strings.
+          # The comparison is done in bash because JMESPath only defines
+          # ordering operators for numbers, not strings.
+          BLOBS=$(az storage blob list \
+            --container-name '$web' \
+            --num-results '*' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --query '[].[name, properties.lastModified]' \
+            --output tsv)
+
+          COUNT=0
+          while IFS=$'\t' read -r name lastmodified; do
+            [ -n "$name" ] || continue
+            if [[ "$lastmodified" < "$DEPLOY_START" ]]; then
+              az storage blob delete \
+                --container-name '$web' \
+                --name "$name" \
+                --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+                --output none
+              COUNT=$((COUNT + 1))
+            fi
+          done <<< "$BLOBS"
+
+          echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
 
       - name: logout 🔓
         run: az logout
