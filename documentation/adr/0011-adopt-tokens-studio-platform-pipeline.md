@@ -1,6 +1,6 @@
 # Adopt the Tokens Studio platform as the source and pipeline for design tokens
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-07-20
 - **Decision makers:** Frida Erdal, EDS Core Team
 
