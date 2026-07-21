@@ -118,12 +118,13 @@ jobs:
           FILE_COUNT=$(find packages/eds-core-react/storybook-build -type f | wc -l)
           echo "Uploading $FILE_COUNT files..."
 
-          # Blobs modified before this timestamp are orphans from a previous
-          # deploy and are cleaned up after the upload (zero-downtime deploy:
-          # upload with --overwrite first, delete stale blobs afterwards).
-          # Format matches az CLI's lastModified output for safe comparison.
-          DEPLOY_START=$(date -u '+%Y-%m-%dT%H:%M:%S+00:00')
-          echo "deploy-start=$DEPLOY_START" >> "$GITHUB_OUTPUT"
+          # Capture the full set of blob names this deploy produces. Blobs not
+          # in this set are orphans from a previous deploy and are cleaned up
+          # after the upload (zero-downtime deploy: upload with --overwrite
+          # first, delete stale blobs afterwards). Deleting by name set is
+          # deterministic — timestamps would race the Azure server clock.
+          (cd packages/eds-core-react/storybook-build && find . -type f | sed 's|^\./||') \
+            | LC_ALL=C sort > /tmp/deployed-blobs.txt
 
           # 1) Content-hashed assets: cache forever. Uploaded first so the new
           #    index.html never references chunks that don't exist yet.
@@ -156,38 +157,36 @@ jobs:
             --query 'length(@)' \
             --output tsv)
 
-          echo "✅ Deployment completed successfully. Total blobs in container: $UPLOADED"
+          echo "✅ Deployment completed successfully. Total blobs in container (before stale cleanup): $UPLOADED"
 
       - name: Delete stale blobs from previous deploy 🗑️
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
-          DEPLOY_START: ${{ steps.deploy-website.outputs.deploy-start }}
         run: |
           set -euo pipefail
-          echo "Deleting blobs not touched by this deploy (last modified before $DEPLOY_START)..."
+          echo "Deleting blobs not part of this deploy..."
 
-          # ISO timestamps in identical format compare correctly as strings.
-          # The comparison is done in bash because JMESPath only defines
-          # ordering operators for numbers, not strings.
-          BLOBS=$(az storage blob list \
+          az storage blob list \
             --container-name '$web' \
             --num-results '*' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --query '[].[name, properties.lastModified]' \
-            --output tsv)
+            --query '[].name' \
+            --output tsv \
+            | LC_ALL=C sort > /tmp/existing-blobs.txt
+
+          # Blobs present in the container but not in this deploy's file set
+          LC_ALL=C comm -13 /tmp/deployed-blobs.txt /tmp/existing-blobs.txt > /tmp/stale-blobs.txt
 
           COUNT=0
-          while IFS=$'\t' read -r name lastmodified; do
+          while IFS= read -r name; do
             [ -n "$name" ] || continue
-            if [[ "$lastmodified" < "$DEPLOY_START" ]]; then
-              az storage blob delete \
-                --container-name '$web' \
-                --name "$name" \
-                --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-                --output none
-              COUNT=$((COUNT + 1))
-            fi
-          done <<< "$BLOBS"
+            az storage blob delete \
+              --container-name '$web' \
+              --name "$name" \
+              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+              --output none
+            COUNT=$((COUNT + 1))
+          done < /tmp/stale-blobs.txt
 
           echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
 
