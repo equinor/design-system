@@ -1,31 +1,47 @@
+/**
+ * Regression guard for published CSS bundles: no light-dark() literals,
+ * no lightningcss polyfill markers, and both explicit color-scheme
+ * scopes present.
+ *
+ * Usage: node scripts/assert-no-light-dark.mjs [file] [minSchemeScopes]
+ *
+ * Defaults match the 2.x build (`build/css/variables.min.css`, where
+ * build-dark-scope widening produces at least 3 occurrences per scheme).
+ * The Tokens Studio bundle (`src/tokens/css/variables.css`) has exactly
+ * one block per scheme and is checked with a threshold of 1.
+ */
 import { readFileSync } from 'node:fs'
 
-const css = readFileSync('./build/css/variables.min.css', 'utf8')
+const [file = './build/css/variables.min.css', minSchemeScopes = '3'] =
+  process.argv.slice(2)
+const minScopes = Number(minSchemeScopes)
+
+const css = readFileSync(file, 'utf8')
 
 if (css.includes('light-dark(')) {
   throw new Error(
-    'variables.min.css still contains light-dark() — build-dark-scope step did not run or was skipped',
+    `${file} still contains light-dark() — build-dark-scope step did not run or was skipped`,
   )
 }
 
 if (/--lightningcss-(light|dark)/.test(css)) {
   throw new Error(
-    'variables.min.css contains lightningcss polyfill markers — a downstream tool downleveled light-dark()',
+    `${file} contains lightningcss polyfill markers — a downstream tool downleveled light-dark()`,
   )
 }
 
 const darkScopeMatches =
   css.match(/\[data-color-scheme=["']?dark["']?\]/g) ?? []
-if (darkScopeMatches.length < 3) {
+if (darkScopeMatches.length < minScopes) {
   throw new Error(
-    'variables.min.css is missing expected [data-color-scheme=dark] occurrences (need at least 3: original color-scheme rule + appended primitive token override + semantic token re-declaration)',
+    `${file} is missing expected [data-color-scheme=dark] occurrences (found ${darkScopeMatches.length}, need at least ${minScopes})`,
   )
 }
 
 const lightScopeMatches =
   css.match(/\[data-color-scheme=["']?light["']?\]/g) ?? []
-if (lightScopeMatches.length < 3) {
+if (lightScopeMatches.length < minScopes) {
   throw new Error(
-    'variables.min.css is missing expected [data-color-scheme=light] occurrences (need at least 3: original color-scheme rule + widened primitive block + widened semantic block)',
+    `${file} is missing expected [data-color-scheme=light] occurrences (found ${lightScopeMatches.length}, need at least ${minScopes})`,
   )
 }
