@@ -191,13 +191,23 @@ jobs:
 
           # Every deploy renames all content-hashed assets, so the whole
           # previous assets/* set is stale each run — parallelise the deletes.
+          # Cleanup is best-effort: the new content is already live at this
+          # point, and blobs that survive a transient delete failure are
+          # re-detected as stale on the next deploy. Don't fail the job.
+          set +e
           xargs -r -P 8 -I{} az storage blob delete \
             --container-name '$web' \
             --name '{}' \
             --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
             --output none < /tmp/stale-blobs.txt
+          rc=$?
+          set -e
 
-          echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
+          if [ "$rc" -eq 0 ]; then
+            echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
+          else
+            echo "⚠️ Some stale deletes failed (rc=$rc); orphans will be retried on the next deploy"
+          fi
 
       - name: logout 🔓
         run: az logout
