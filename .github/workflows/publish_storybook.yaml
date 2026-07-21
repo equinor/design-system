@@ -183,7 +183,10 @@ jobs:
             --output tsv \
             | LC_ALL=C sort > /tmp/existing-blobs.txt
 
-          # Blobs present in the container but not in this deploy's file set
+          # Blobs present in the container but not in this deploy's file set.
+          # Assumes this workflow is the sole writer to the $web container —
+          # anything uploaded out-of-band (e.g. a manual 404.html) is treated
+          # as stale and deleted on the next deploy.
           LC_ALL=C comm -13 /tmp/deployed-blobs.txt /tmp/existing-blobs.txt > /tmp/stale-blobs.txt
 
           COUNT=$(wc -l < /tmp/stale-blobs.txt | tr -d ' ')
