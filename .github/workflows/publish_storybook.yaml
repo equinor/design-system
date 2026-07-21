@@ -123,6 +123,8 @@ jobs:
           # after the upload (zero-downtime deploy: upload with --overwrite
           # first, delete stale blobs afterwards). Deleting by name set is
           # deterministic — timestamps would race the Azure server clock.
+          # Must run before the mv of assets/ below, or assets/* drops out of
+          # the set and the cleanup deletes all live assets.
           (cd packages/eds-core-react/storybook-build && find . -type f | sed 's|^\./||') \
             | LC_ALL=C sort > /tmp/deployed-blobs.txt
 
@@ -166,6 +168,13 @@ jobs:
           set -euo pipefail
           echo "Deleting blobs not part of this deploy..."
 
+          # An empty deploy set would classify every blob in the container as
+          # stale and wipe the live site — refuse to continue.
+          if [ ! -s /tmp/deployed-blobs.txt ]; then
+            echo "❌ Deploy set is empty — refusing to run stale cleanup"
+            exit 1
+          fi
+
           az storage blob list \
             --container-name '$web' \
             --num-results '*' \
@@ -177,16 +186,16 @@ jobs:
           # Blobs present in the container but not in this deploy's file set
           LC_ALL=C comm -13 /tmp/deployed-blobs.txt /tmp/existing-blobs.txt > /tmp/stale-blobs.txt
 
-          COUNT=0
-          while IFS= read -r name; do
-            [ -n "$name" ] || continue
-            az storage blob delete \
-              --container-name '$web' \
-              --name "$name" \
-              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-              --output none
-            COUNT=$((COUNT + 1))
-          done < /tmp/stale-blobs.txt
+          COUNT=$(wc -l < /tmp/stale-blobs.txt | tr -d ' ')
+          echo "Deleting $COUNT stale blobs..."
+
+          # Every deploy renames all content-hashed assets, so the whole
+          # previous assets/* set is stale each run — parallelise the deletes.
+          xargs -r -P 8 -I{} az storage blob delete \
+            --container-name '$web' \
+            --name '{}' \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+            --output none < /tmp/stale-blobs.txt
 
           echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
 
