@@ -3,30 +3,14 @@
 import { useState, useMemo } from 'react'
 import { STEP_ROLES, calcContrast } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
+import { CVDFilter, cvdFilterStyle } from '@/components/shared/CVDFilter'
+import { CVD_OPTIONS, type CVDType } from '@/utils/cvd'
 import { StepSelect } from './StepSelect'
 
 type Palette = { name: string; steps: string[] }
 
-type CVDType = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'achromatopsia'
-
-const CVD_OPTIONS: { key: CVDType; label: string }[] = [
-  { key: 'none', label: 'Normal vision' },
-  { key: 'protanopia', label: 'Protanopia (no red)' },
-  { key: 'deuteranopia', label: 'Deuteranopia (no green)' },
-  { key: 'tritanopia', label: 'Tritanopia (no blue)' },
-  { key: 'achromatopsia', label: 'Achromatopsia (grayscale)' },
-]
-
-const CVD_MATRICES: Record<Exclude<CVDType, 'none'>, string> = {
-  protanopia:
-    '0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0',
-  deuteranopia:
-    '0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0',
-  tritanopia:
-    '0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0',
-  achromatopsia:
-    '0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0',
-}
+/** A chart series colour. `step` is present only for palette-derived colours. */
+type ChartColor = { name: string; hex: string; step?: number }
 
 type ChartType = 'bar' | 'stacked-bar' | 'donut' | 'line'
 
@@ -44,6 +28,17 @@ const BAR_DATA = [
 
 const DONUT_SEGMENTS = [35, 25, 20, 12, 8]
 
+/**
+ * Pick black or white text for a fill, whichever gives the higher APCA
+ * contrast (Lc). Used for labels sitting directly on a series colour so they
+ * stay legible on both light and dark fills instead of a fixed colour.
+ */
+function bestTextColor(bg: string): string {
+  const onBlack = Math.abs(parseFloat(calcContrast('#000000', bg).apca))
+  const onWhite = Math.abs(parseFloat(calcContrast('#ffffff', bg).apca))
+  return onBlack >= onWhite ? '#000000' : '#ffffff'
+}
+
 function findGrayIndex(palettes: Palette[]) {
   const idx = palettes.findIndex(
     (p) =>
@@ -58,6 +53,37 @@ function monochromaticSteps(): number[] {
   return [8, 2, 12, 5, 10]
 }
 
+/**
+ * Translucent stripe overlays laid over a series colour so charts stay
+ * readable without relying on hue alone (the survey's #1 accessibility habit).
+ * Index 0 is solid; the rest cycle through distinct hatchings.
+ */
+const PATTERN_OVERLAYS: (string | undefined)[] = [
+  undefined,
+  'repeating-linear-gradient(45deg, rgba(255,255,255,.55) 0 2px, transparent 2px 8px)',
+  'repeating-linear-gradient(-45deg, rgba(0,0,0,.4) 0 2px, transparent 2px 8px)',
+  'repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 2px, transparent 2px 8px)',
+  'repeating-linear-gradient(0deg, rgba(0,0,0,.4) 0 2px, transparent 2px 8px)',
+  'repeating-linear-gradient(45deg, rgba(255,255,255,.6) 0 1px, transparent 1px 4px)',
+]
+
+function overlayFor(index: number, on: boolean): string | undefined {
+  return on ? PATTERN_OVERLAYS[index % PATTERN_OVERLAYS.length] : undefined
+}
+
+/** Line dash patterns keyed by series index (index 0 is solid). */
+const LINE_DASHES: (string | undefined)[] = [
+  undefined,
+  '6 4',
+  '2 3',
+  '8 3 2 3',
+  '1 4',
+  '10 4',
+]
+
+/** Point-marker shapes for line series, keyed by index. */
+const MARKER_SHAPES = ['circle', 'square', 'triangle', 'diamond'] as const
+
 /* ---------------------------------------------------------------------- */
 /*  Chart renderers                                                        */
 /* ---------------------------------------------------------------------- */
@@ -66,9 +92,10 @@ type ChartProps = {
   colors: { name: string; hex: string }[]
   bgHex: string
   textHex: string
+  showPatterns?: boolean
 }
 
-function BarChart({ colors, bgHex, textHex }: ChartProps) {
+function BarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   return (
     <div className="rounded-lg p-4" style={{ backgroundColor: bgHex }}>
       <div className="flex items-end gap-2" style={{ height: 160 }}>
@@ -90,6 +117,7 @@ function BarChart({ colors, bgHex, textHex }: ChartProps) {
                 className="w-full rounded-t"
                 style={{
                   backgroundColor: pc.hex,
+                  backgroundImage: overlayFor(i, !!showPatterns),
                   height: `${h}%`,
                   minHeight: 8,
                 }}
@@ -103,7 +131,7 @@ function BarChart({ colors, bgHex, textHex }: ChartProps) {
   )
 }
 
-function StackedBarChart({ colors, bgHex, textHex }: ChartProps) {
+function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   const groups = ['Q1', 'Q2', 'Q3', 'Q4']
   return (
     <div className="rounded-lg p-4" style={{ backgroundColor: bgHex }}>
@@ -121,6 +149,7 @@ function StackedBarChart({ colors, bgHex, textHex }: ChartProps) {
                   key={pc.name}
                   style={{
                     backgroundColor: pc.hex,
+                    backgroundImage: overlayFor(ci, !!showPatterns),
                     height: `${val}%`,
                     minHeight: 4,
                   }}
@@ -149,7 +178,7 @@ function StackedBarChart({ colors, bgHex, textHex }: ChartProps) {
   )
 }
 
-function DonutChart({ colors, bgHex, textHex }: ChartProps) {
+function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   const total = DONUT_SEGMENTS.slice(0, colors.length).reduce((a, b) => a + b, 0)
   const pcts = colors.map(
     (_, i) => (DONUT_SEGMENTS[i % DONUT_SEGMENTS.length] / total) * 100,
@@ -168,14 +197,38 @@ function DonutChart({ colors, bgHex, textHex }: ChartProps) {
     >
       <div style={{ position: 'relative', width: 160, height: 160 }}>
         <svg viewBox="0 0 42 42" style={{ width: '100%', height: '100%' }}>
-          {segments.map(({ name, hex, pct, offset }) => (
+          {showPatterns && (
+            <defs>
+              {segments.map(({ name, hex }, i) => (
+                <pattern
+                  key={name}
+                  id={`donut-pat-${i}`}
+                  width="4"
+                  height="4"
+                  patternUnits="userSpaceOnUse"
+                  patternTransform={`rotate(${(i % 4) * 45})`}
+                >
+                  <rect width="4" height="4" fill={hex} />
+                  <line
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="4"
+                    stroke={i % 2 ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.6)'}
+                    strokeWidth="1.5"
+                  />
+                </pattern>
+              ))}
+            </defs>
+          )}
+          {segments.map(({ name, hex, pct, offset }, i) => (
             <circle
               key={name}
               cx="21"
               cy="21"
               r="15.915"
               fill="none"
-              stroke={hex}
+              stroke={showPatterns ? `url(#donut-pat-${i})` : hex}
               strokeWidth="5"
               strokeDasharray={`${pct} ${100 - pct}`}
               strokeDashoffset={offset}
@@ -193,7 +246,38 @@ function DonutChart({ colors, bgHex, textHex }: ChartProps) {
   )
 }
 
-function LineChart({ colors, bgHex, textHex }: ChartProps) {
+function Marker({
+  shape,
+  cx,
+  cy,
+  color,
+}: {
+  shape: (typeof MARKER_SHAPES)[number]
+  cx: number
+  cy: number
+  color: string
+}) {
+  const s = 3
+  if (shape === 'square')
+    return <rect x={cx - s} y={cy - s} width={s * 2} height={s * 2} fill={color} />
+  if (shape === 'triangle')
+    return (
+      <polygon
+        points={`${cx},${cy - s} ${cx + s},${cy + s} ${cx - s},${cy + s}`}
+        fill={color}
+      />
+    )
+  if (shape === 'diamond')
+    return (
+      <polygon
+        points={`${cx},${cy - s} ${cx + s},${cy} ${cx},${cy + s} ${cx - s},${cy}`}
+        fill={color}
+      />
+    )
+  return <circle cx={cx} cy={cy} r={s} fill={color} />
+}
+
+function LineChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   const points = [20, 45, 35, 60, 50, 75, 65]
   const w = 280
   const h = 120
@@ -214,15 +298,30 @@ function LineChart({ colors, bgHex, textHex }: ChartProps) {
             .map((v, i) => `${i === 0 ? 'M' : 'L'}${px(i)},${py(v, offset)}`)
             .join(' ')
           return (
-            <path
-              key={pc.name}
-              d={d}
-              fill="none"
-              stroke={pc.hex}
-              strokeWidth="2"
-              strokeDasharray={undefined}
-              vectorEffect="non-scaling-stroke"
-            />
+            <g key={pc.name}>
+              <path
+                d={d}
+                fill="none"
+                stroke={pc.hex}
+                strokeWidth="2"
+                strokeDasharray={
+                  showPatterns
+                    ? LINE_DASHES[ci % LINE_DASHES.length]
+                    : undefined
+                }
+                vectorEffect="non-scaling-stroke"
+              />
+              {showPatterns &&
+                points.map((v, i) => (
+                  <Marker
+                    key={i}
+                    shape={MARKER_SHAPES[ci % MARKER_SHAPES.length]}
+                    cx={px(i)}
+                    cy={py(v, offset)}
+                    color={pc.hex}
+                  />
+                ))}
+            </g>
           )
         })}
       </svg>
@@ -273,13 +372,7 @@ function XAxis({
 /*  Legend                                                                  */
 /* ---------------------------------------------------------------------- */
 
-function Legend({
-  colors,
-  bgHex,
-}: {
-  colors: { name: string; hex: string; step: number }[]
-  bgHex: string
-}) {
+function Legend({ colors, bgHex }: { colors: ChartColor[]; bgHex: string }) {
   return (
     <div
       className="rounded-lg p-3 flex flex-wrap gap-x-4 gap-y-1"
@@ -296,8 +389,15 @@ function Legend({
             }}
           />
           <span className="text-subtle">
-            {pc.name}{' '}
-            <span className="font-mono text-[10px]">({STEP_ROLES[pc.step]})</span>
+            {pc.name}
+            {pc.step != null && (
+              <>
+                {' '}
+                <span className="font-mono text-[10px]">
+                  ({STEP_ROLES[pc.step]})
+                </span>
+              </>
+            )}
           </span>
         </div>
       ))}
@@ -309,44 +409,79 @@ function Legend({
 /*  Main component                                                         */
 /* ---------------------------------------------------------------------- */
 
-export function DataColorChart({ palettes }: { palettes: Palette[] }) {
+type DataColorChartProps = {
+  /** Palette-derived mode (theme builder): colours are sliced from these. */
+  palettes?: Palette[]
+  /** Direct mode (data-viz route): render exactly these generated colours. */
+  colors?: ChartColor[]
+  /** Chart background / text hex — used in direct mode. */
+  bgHex?: string
+  textHex?: string
+  /**
+   * Show the pairwise "every pair ≥ 3:1" matrix. Meaningful for categorical
+   * series; misleading for sequential/diverging scales whose steps are
+   * intentionally similar, so the panel turns it off for those.
+   */
+  pairwiseCheck?: boolean
+}
+
+export function DataColorChart({
+  palettes,
+  colors: externalColors,
+  bgHex: externalBg,
+  textHex: externalText,
+  pairwiseCheck = true,
+}: DataColorChartProps) {
   const [bgStep, setBgStep] = useState(0)
   const [textStep, setTextStep] = useState(11)
   const [chartType, setChartType] = useState<ChartType>('bar')
   const [mono, setMono] = useState(false)
   const [monoPaletteIdx, setMonoPaletteIdx] = useState(0)
   const [cvd, setCvd] = useState<CVDType>('none')
+  const [showPatterns, setShowPatterns] = useState(false)
 
-  const neutralIdx = findGrayIndex(palettes)
-  const bgHex = palettes[neutralIdx].steps[bgStep]
-  const textHex = palettes[neutralIdx].steps[textStep]
+  // Palette mode drives the derivation + step selectors; direct mode renders
+  // the passed colours and hides the palette-only controls.
+  const paletteMode = !externalColors
+  const safePalettes = useMemo(() => palettes ?? [], [palettes])
+  const neutralIdx = findGrayIndex(safePalettes)
+  const paletteBg = safePalettes.length
+    ? safePalettes[neutralIdx].steps[bgStep]
+    : '#ffffff'
+  const paletteText = safePalettes.length
+    ? safePalettes[neutralIdx].steps[textStep]
+    : '#1a1a1a'
+  const bgHex = externalBg ?? paletteBg
+  const textHex = externalText ?? paletteText
 
   /**
    * Multi-chromatic with lightness spread: each palette uses a different step
    * so colors are distinguishable by lightness alone (achromatopsia-friendly).
    * Center step is 8 (fill/emphasis), then spreads ±1 per palette.
    */
-  const multiColors = useMemo(() => {
+  const multiColors = useMemo<ChartColor[]>(() => {
     const center = 8
-    const count = palettes.length
+    const count = safePalettes.length
     const startStep = Math.max(0, center - Math.floor((count - 1) / 2))
-    return palettes.map((p, i) => {
+    return safePalettes.map((p, i) => {
       const step = Math.min(14, startStep + i)
       return { name: p.name, hex: p.steps[step], step }
     })
-  }, [palettes])
+  }, [safePalettes])
 
   // Monochromatic: multiple shades from a single palette
-  const monoColors = useMemo(() => {
-    const p = palettes[monoPaletteIdx] ?? palettes[0]
+  const monoColors = useMemo<ChartColor[]>(() => {
+    if (!safePalettes.length) return []
+    const p = safePalettes[monoPaletteIdx] ?? safePalettes[0]
     return monochromaticSteps().map((step) => ({
       name: `${p.name}/${step + 1}`,
       hex: p.steps[step],
       step,
     }))
-  }, [palettes, monoPaletteIdx])
+  }, [safePalettes, monoPaletteIdx])
 
-  const colors = mono ? monoColors : multiColors
+  const derivedColors = mono ? monoColors : multiColors
+  const colors: ChartColor[] = externalColors ?? derivedColors
 
   const ChartComponent = {
     bar: BarChart,
@@ -362,8 +497,9 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
           Data color chart
         </h2>
         <p className="text-sm text-subtle m-0 mt-1">
-          Preview palette colors in chart contexts — multi-chromatic (one color
-          per palette) or monochromatic (shades from a single palette)
+          {paletteMode
+            ? 'Preview palette colors in chart contexts — multi-chromatic (one color per palette) or monochromatic (shades from a single palette)'
+            : 'Preview the generated data-viz palette in chart contexts, then check it under colour-vision-deficiency simulation.'}
         </p>
       </div>
 
@@ -387,16 +523,18 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
           ))}
         </div>
 
-        <label className="flex items-center gap-1.5 text-xs text-strong">
-          <input
-            type="checkbox"
-            checked={mono}
-            onChange={(e) => setMono(e.target.checked)}
-          />
-          <span className="font-medium">Monochromatic</span>
-        </label>
+        {paletteMode && (
+          <label className="flex items-center gap-1.5 text-xs text-strong">
+            <input
+              type="checkbox"
+              checked={mono}
+              onChange={(e) => setMono(e.target.checked)}
+            />
+            <span className="font-medium">Monochromatic</span>
+          </label>
+        )}
 
-        {mono && (
+        {paletteMode && mono && (
           <label className="flex items-center gap-1.5 text-xs text-strong">
             <span className="font-medium">Palette</span>
             <select
@@ -404,7 +542,7 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
               onChange={(e) => setMonoPaletteIdx(Number(e.target.value))}
               className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
             >
-              {palettes.map((p, i) => (
+              {safePalettes.map((p, i) => (
                 <option key={i} value={i}>
                   {p.name}
                 </option>
@@ -416,8 +554,22 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
 
       {/* Controls row 2: bg + text + accessibility */}
       <div className="flex flex-wrap gap-4 items-center">
-        <StepSelect label="Chart bg" value={bgStep} onChange={setBgStep} only={['bg/']} />
-        <StepSelect label="Text" value={textStep} onChange={setTextStep} only={['fg/']} />
+        {paletteMode && (
+          <>
+            <StepSelect
+              label="Chart bg"
+              value={bgStep}
+              onChange={setBgStep}
+              only={['bg/']}
+            />
+            <StepSelect
+              label="Text"
+              value={textStep}
+              onChange={setTextStep}
+              only={['fg/']}
+            />
+          </>
+        )}
 
         <label className="flex items-center gap-1.5 text-xs text-strong">
           <span className="font-medium">Vision</span>
@@ -435,23 +587,29 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
             ))}
           </select>
         </label>
+
+        <label className="flex items-center gap-1.5 text-xs text-strong">
+          <input
+            type="checkbox"
+            checked={showPatterns}
+            onChange={(e) => setShowPatterns(e.target.checked)}
+          />
+          <span className="font-medium">Show patterns</span>
+        </label>
       </div>
 
       {/* SVG filter definitions */}
-      {cvd !== 'none' && (
-        <svg width="0" height="0" style={{ position: 'absolute' }}>
-          <defs>
-            <filter id="cvd-filter">
-              <feColorMatrix type="matrix" values={CVD_MATRICES[cvd]} />
-            </filter>
-          </defs>
-        </svg>
-      )}
+      <CVDFilter type={cvd} />
 
       {/* Filtered preview area */}
-      <div style={cvd !== 'none' ? { filter: 'url(#cvd-filter)' } : undefined}>
+      <div style={cvdFilterStyle(cvd)}>
         {/* Chart */}
-        <ChartComponent colors={colors} bgHex={bgHex} textHex={textHex} />
+        <ChartComponent
+          colors={colors}
+          bgHex={bgHex}
+          textHex={textHex}
+          showPatterns={showPatterns}
+        />
 
         {/* Legend */}
         <div className="mt-4">
@@ -467,7 +625,7 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
             className="rounded-lg p-4 flex flex-wrap gap-2"
             style={{ backgroundColor: bgHex }}
           >
-            {colors.map((pc) => (
+            {colors.map((pc, i) => (
               <span
                 key={pc.name}
                 className="inline-flex items-center rounded-full font-semibold"
@@ -475,7 +633,8 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
                   padding: '4px 12px',
                   fontSize: 12,
                   backgroundColor: pc.hex,
-                  color: bgHex,
+                  backgroundImage: overlayFor(i, showPatterns),
+                  color: bestTextColor(pc.hex),
                 }}
               >
                 {pc.name}
@@ -522,7 +681,7 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
       </div>
 
       {/* Inter-color contrast matrix */}
-      {colors.length > 1 && (
+      {pairwiseCheck && colors.length > 1 && (
         <div className="flex flex-col gap-2">
           <h3 className="text-xs font-semibold text-strong m-0">
             Color-to-color contrast
@@ -593,8 +752,12 @@ export function DataColorChart({ palettes }: { palettes: Palette[] }) {
                           key={col.name}
                           className="px-2 py-1 text-center font-mono"
                           style={{
-                            backgroundColor: pass3 ? '#dcfce7' : '#fee2e2',
-                            color: pass3 ? '#166534' : '#991b1b',
+                            backgroundColor: pass3
+                              ? 'var(--eds-color-bg-success-fill-muted-default)'
+                              : 'var(--eds-color-bg-danger-fill-muted-default)',
+                            color: pass3
+                              ? 'var(--eds-color-text-success-subtle)'
+                              : 'var(--eds-color-text-danger-subtle)',
                           }}
                         >
                           {result.wcag}

@@ -1,33 +1,21 @@
 'use client'
 
 import { useId } from 'react'
+import type { SemanticColors } from '@/config/semanticColors'
 
 type LoginFormPreviewProps = {
-  neutral: string[]
-  accent: string[]
+  colors: SemanticColors
 }
 
 /**
- * Figma semantic → primitive mapping:
- *
- *   background/container/card/default             → neutral[14] (card fill, Gray/15 = white)
- *   background/surface/default/default  = Gray/1  → neutral[0]  (input bg)
- *   border/default                      = Gray/4  → neutral[3]  (input border default)
- *   border/hover                        = Gray/7  → neutral[6]  (input border hover)
- *   border/strong                       = Gray/9  → neutral[8]  (input border focus)
- *
- *   border/accent/default               = Accent/8 → accent[7]  (focus ring)
- *
- *   background/surface/accent/default/default = Accent/11 → accent[10] (button)
- *   background/surface/accent/default/hover   = Accent/12 → accent[11] (button hover)
- *   background/surface/accent/default/pressed = Accent/13 → accent[12] (button pressed)
- *
- *   text/primary                                 → neutral[11] (labels, Gray/12)
- *   text/subtle                                  → neutral[8]  (placeholder, Gray/9)
- *   text/link                                    → accent[12]  (link text)
- *   text/on-emphasis                             → accent[14]  (button text, L=1.00 = white)
+ * Wired to canonical EDS semantic tokens (Figma Color Map):
+ *   card       → bg-neutral-surface + border-neutral-subtle
+ *   input      → bg-neutral-canvas + border-neutral-{subtle,medium}, focus border-focus
+ *   text       → text-neutral-{strong,subtle}
+ *   link       → text-link
+ *   button     → bg-accent-fill-emphasis-{default,hover,active} + text-accent-strong-on-emphasis
  */
-export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
+export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
   const uid = useId().replace(/:/g, '')
 
   return (
@@ -35,22 +23,21 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
       data-lf={uid}
       style={
         {
-          backgroundColor: neutral[14],
+          backgroundColor: c['bg-neutral-surface'],
           borderRadius: '8px',
           padding: '28px',
-          border: `1px solid ${neutral[3]}`,
+          border: `1px solid ${c['border-neutral-subtle']}`,
           maxWidth: '420px',
-          '--_bg-input': neutral[0],
-          '--_border': neutral[3],
-          '--_border-hover': neutral[6],
-          '--_border-focus': neutral[8],
-          '--_focus-ring': accent[7],
-          '--_text': neutral[11],
-          '--_placeholder': neutral[8],
-          '--_btn-bg': accent[10],
-          '--_btn-hover': accent[11],
-          '--_btn-pressed': accent[12],
-          '--_btn-text': accent[14],
+          '--_bg-input': c['bg-neutral-canvas'],
+          '--_border': c['border-neutral-subtle'],
+          '--_border-hover': c['border-neutral-medium'],
+          '--_border-focus': c['border-focus'],
+          '--_text': c['text-neutral-strong'],
+          '--_placeholder': c['text-neutral-subtle'],
+          '--_btn-bg': c['bg-accent-fill-emphasis-default'],
+          '--_btn-hover': c['bg-accent-fill-emphasis-hover'],
+          '--_btn-pressed': c['bg-accent-fill-emphasis-active'],
+          '--_btn-text': c['text-accent-strong-on-emphasis'],
         } as React.CSSProperties
       }
     >
@@ -77,7 +64,6 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
         [data-lf="${uid}"] input:focus {
           border: 2px solid var(--_border-focus);
           padding: 7px 9px;
-          box-shadow: 0 0 0 1px var(--_focus-ring);
         }
         [data-lf="${uid}"] [data-btn] {
           cursor: pointer;
@@ -111,7 +97,7 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
         style={{
           fontSize: '18px',
           fontWeight: 700,
-          color: neutral[11],
+          color: c['text-neutral-strong'],
           marginBottom: '4px',
         }}
       >
@@ -120,7 +106,7 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
       <div
         style={{
           fontSize: '13px',
-          color: neutral[11],
+          color: c['text-neutral-subtle'],
           marginBottom: '24px',
         }}
       >
@@ -132,7 +118,7 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
           display: 'block',
           fontSize: '12px',
           fontWeight: 500,
-          color: neutral[11],
+          color: c['text-neutral-strong'],
           marginBottom: '4px',
         }}
       >
@@ -149,7 +135,7 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
           display: 'block',
           fontSize: '12px',
           fontWeight: 500,
-          color: neutral[11],
+          color: c['text-neutral-strong'],
           marginBottom: '4px',
         }}
       >
@@ -165,7 +151,7 @@ export function LoginFormPreview({ neutral, accent }: LoginFormPreviewProps) {
         data-link=""
         style={{
           fontSize: '12px',
-          color: accent[12],
+          color: c['text-link'],
           marginBottom: '20px',
           textDecoration: 'underline',
         }}

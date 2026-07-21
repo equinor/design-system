@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { LoginFormPreview } from './LoginFormPreview'
 import { DataTablePreview } from './DataTablePreview'
 import { CardPreview } from './CardPreview'
+import { ButtonPreview } from './ButtonPreview'
+import { useColorScheme } from '@/context/ColorSchemeContext'
+import { getSemanticColors } from '@/config/semanticColors'
 
 type GeneratedPalette = {
   name: string
@@ -36,6 +39,10 @@ export function ComponentPreviewPanel({
   palettes,
 }: ComponentPreviewPanelProps) {
   const [accentIdx, setAccentIdx] = useState(() => defaultAccentIndex(palettes))
+  const { colorScheme } = useColorScheme()
+  // Canonical EDS semantic colours (from Figma Color Map) — the previews use
+  // these directly so they render like real EDS variable usage.
+  const colors = getSemanticColors(colorScheme)
 
   if (palettes.length === 0) return null
 
@@ -46,8 +53,6 @@ export function ComponentPreviewPanel({
   const accentCandidates = palettes
     .map((p, i) => ({ ...p, idx: i }))
     .filter((_, i) => i !== neutralIdx)
-
-  const accent = palettes[accentIdx]?.steps ?? neutral
 
   // All palettes except Gray and the selected accent are data colors
   const dataColors = palettes.filter(
@@ -119,30 +124,28 @@ export function ComponentPreviewPanel({
         </div>
       </section>
 
+      {/* Buttons */}
+      <section>
+        <h2 className="font-semibold text-sm mb-3">Buttons</h2>
+        <ButtonPreview colors={colors} />
+      </section>
+
       {/* Login Form */}
       <section>
         <h2 className="font-semibold text-sm mb-3">Login Form</h2>
-        <LoginFormPreview neutral={neutral} accent={accent} />
+        <LoginFormPreview colors={colors} />
       </section>
 
       {/* Data Table */}
       <section>
         <h2 className="font-semibold text-sm mb-3">Data Table</h2>
-        <DataTablePreview
-          neutral={neutral}
-          accent={accent}
-          dataColors={dataColors}
-        />
+        <DataTablePreview colors={colors} />
       </section>
 
       {/* Cards */}
       <section>
         <h2 className="font-semibold text-sm mb-3">Article Cards</h2>
-        <CardPreview
-          neutral={neutral}
-          accent={accent}
-          dataColors={dataColors}
-        />
+        <CardPreview colors={colors} />
       </section>
     </div>
   )

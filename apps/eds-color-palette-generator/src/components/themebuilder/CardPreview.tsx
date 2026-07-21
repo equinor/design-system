@@ -1,45 +1,35 @@
-type GeneratedPalette = {
-  name: string
-  steps: string[]
-}
+'use client'
+
+import type { SemanticColors } from '@/config/semanticColors'
 
 type CardPreviewProps = {
-  neutral: string[]
-  accent: string[]
-  dataColors: GeneratedPalette[]
+  colors: SemanticColors
 }
 
 /**
- * Figma token mapping:
- *   neutral[14] card fill        → background/container/card/default (Gray/15 = white)
- *   neutral[3]  border-default   → card stroke (Gray/4)
- *   neutral[8]  text-subtle      → body text (Gray/9)
- *   neutral[11] text-primary     → title (Gray/12)
- *
- *   accent[10]  bg-fill-emphasis → accent bar (MG/11)
- *   accent[12]  text-strong      → link text (MG/13)
- *
- *   dataColor[2]  bg-fill-muted  → tag background
- *   dataColor[3]  border         → tag border
- *   dataColor[11] text           → tag text
+ * Wired to canonical EDS semantic tokens (Figma Color Map):
+ *   card      → bg-neutral-surface + border-neutral-subtle
+ *   accent bar→ bg-accent-fill-emphasis-default
+ *   tag       → bg-{concept}-fill-muted-default + text-{concept}-subtle + border-{concept}-subtle
+ *   title/body→ text-neutral-strong / text-neutral-subtle
+ *   link      → text-link
  */
-export function CardPreview({
-  neutral,
-  accent,
-  dataColors,
-}: CardPreviewProps) {
+export function CardPreview({ colors: c }: CardPreviewProps) {
   const cards = [
     {
+      concept: 'info',
       tag: 'Technology',
       title: 'Building Design Systems',
       body: 'A comprehensive guide to creating scalable and consistent design tokens.',
     },
     {
+      concept: 'accent',
       tag: 'Design',
       title: 'Color Theory in UI',
       body: 'How perceptual color spaces like OKLCH improve accessibility.',
     },
     {
+      concept: 'success',
       tag: 'Engineering',
       title: 'Accessible Palettes',
       body: 'Using Gaussian chroma distribution for balanced color scales.',
@@ -54,89 +44,81 @@ export function CardPreview({
         gap: '16px',
       }}
     >
-        {cards.map((card, i) => {
-          const tagPalette = dataColors.length > 0
-            ? dataColors[i % dataColors.length]
-            : null
+      {cards.map((card) => (
+        <div
+          key={card.title}
+          style={{
+            backgroundColor: c['bg-neutral-surface'],
+            borderRadius: '8px',
+            border: `1px solid ${c['border-neutral-subtle']}`,
+            overflow: 'hidden',
+          }}
+        >
+          {/* Accent bar */}
+          <div
+            style={{
+              height: '3px',
+              backgroundColor: c['bg-accent-fill-emphasis-default'],
+            }}
+          />
 
-          return (
-            <div
-              key={card.title}
+          <div style={{ padding: '16px' }}>
+            {/* Tag — concept muted fill */}
+            <span
               style={{
-                backgroundColor: neutral[14],
-                borderRadius: '8px',
-                border: `1px solid ${neutral[3]}`,
-                overflow: 'hidden',
+                display: 'inline-block',
+                backgroundColor: c[`bg-${card.concept}-fill-muted-default`],
+                color: c[`text-${card.concept}-subtle`],
+                fontSize: '10px',
+                fontWeight: 600,
+                padding: '2px 8px',
+                borderRadius: '4px',
+                marginBottom: '10px',
+                border: `1px solid ${c[`border-${card.concept}-subtle`]}`,
               }}
             >
-              {/* Accent bar */}
-              <div
-                style={{
-                  height: '3px',
-                  backgroundColor: accent[10],
-                }}
-              />
+              {card.tag}
+            </span>
 
-              <div style={{ padding: '16px' }}>
-                {/* Tag — data color muted fill */}
-                <span
-                  style={{
-                    display: 'inline-block',
-                    backgroundColor: tagPalette ? tagPalette.steps[2] : accent[2],
-                    color: tagPalette ? tagPalette.steps[12] : accent[12],
-                    fontSize: '10px',
-                    fontWeight: 600,
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                    marginBottom: '10px',
-                    border: tagPalette
-                      ? `1px solid ${tagPalette.steps[5]}`
-                      : `1px solid ${accent[5]}`,
-                  }}
-                >
-                  {card.tag}
-                </span>
-
-                {/* Title */}
-                <div
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: 700,
-                    color: neutral[11],
-                    marginBottom: '6px',
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {card.title}
-                </div>
-
-                {/* Body */}
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: neutral[8],
-                    lineHeight: 1.5,
-                    marginBottom: '12px',
-                  }}
-                >
-                  {card.body}
-                </div>
-
-                {/* Link — accent text */}
-                <div
-                  style={{
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    color: accent[12],
-                    textDecoration: 'underline',
-                  }}
-                >
-                  Read more
-                </div>
-              </div>
+            {/* Title */}
+            <div
+              style={{
+                fontSize: '14px',
+                fontWeight: 700,
+                color: c['text-neutral-strong'],
+                marginBottom: '6px',
+                lineHeight: 1.3,
+              }}
+            >
+              {card.title}
             </div>
-          )
-        })}
+
+            {/* Body */}
+            <div
+              style={{
+                fontSize: '12px',
+                color: c['text-neutral-subtle'],
+                lineHeight: 1.5,
+                marginBottom: '12px',
+              }}
+            >
+              {card.body}
+            </div>
+
+            {/* Link */}
+            <div
+              style={{
+                fontSize: '12px',
+                fontWeight: 600,
+                color: c['text-link'],
+                textDecoration: 'underline',
+              }}
+            >
+              Read more
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

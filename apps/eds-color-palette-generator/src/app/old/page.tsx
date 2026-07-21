@@ -19,7 +19,7 @@ import {
 } from '@/types'
 import { arraysEqual, colorsEqual } from '@/utils/compare'
 import { localStorageUtils } from '@/utils/localStorage'
-import { paletteConfig as config } from '@/config/palette'
+import { paletteConfig as config } from '@/config/palette-config'
 import {
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,

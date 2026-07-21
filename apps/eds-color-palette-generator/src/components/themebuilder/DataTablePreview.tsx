@@ -1,55 +1,30 @@
 'use client'
 
 import { useId, useState } from 'react'
-
-type GeneratedPalette = {
-  name: string
-  steps: string[]
-}
+import type { SemanticColors } from '@/config/semanticColors'
 
 type DataTablePreviewProps = {
-  neutral: string[]
-  accent: string[]
-  dataColors: GeneratedPalette[]
+  colors: SemanticColors
 }
 
 /**
- * Figma semantic → primitive mapping:
- *
- *   background/surface/default/default    = Gray/1  → neutral[0]  (default row)
- *   background/surface/default/hover      = Gray/2  → neutral[1]  (hover row)
- *   background/surface/default/pressed    = Gray/3  → neutral[2]  (pressed row)
- *   background/surface/default/selected   = Accent/2 → accent[1]  (selected row)
- *   border/default                        = Gray/4  → neutral[3]  (row separator)
- *
- *   text/primary                                    → neutral[11] (primary text, Gray/12)
- *   text/subtle                                     → neutral[8]  (timestamps, Gray/9)
- *   text/link                                       → accent[12]  (name link)
- *
- *   dataColor text/strong                           → dataColor[12] (status text)
+ * Wired to canonical EDS semantic tokens (Figma Color Map):
+ *   row hover / pressed → bg-neutral-fill-muted-{default,hover}
+ *   selected row        → bg-accent-fill-muted-default + solid-accent left bar
+ *   separator           → border-neutral-subtle
+ *   name / value        → text-neutral-strong / text-neutral-subtle
+ *   status              → text-{success,warning,danger}-subtle
  */
-export function DataTablePreview({
-  neutral,
-  accent,
-  dataColors,
-}: DataTablePreviewProps) {
+export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
   const uid = useId().replace(/:/g, '')
   const [activeRow, setActiveRow] = useState<number | null>(null)
 
-  const greenPal = dataColors.find((p) =>
-    p.name.toLowerCase().includes('green'),
-  )
-  const orangePal = dataColors.find((p) =>
-    p.name.toLowerCase().includes('orange'),
-  )
-  const redPal = dataColors.find((p) => p.name.toLowerCase().includes('red'))
-
   const rows = [
-    { name: 'Hywind Scotland', status: 'Online', statusColor: greenPal, value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Online', statusColor: greenPal, value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Pending', statusColor: orangePal, value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Offline', statusColor: redPal, value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Online', statusColor: greenPal, value: '124 MW', time: '2 min ago' },
+    { name: 'Hywind Scotland', status: 'Online', statusColor: c['text-success-subtle'], value: '124 MW', time: '2 min ago' },
+    { name: 'Hywind Scotland', status: 'Online', statusColor: c['text-success-subtle'], value: '124 MW', time: '2 min ago' },
+    { name: 'Hywind Scotland', status: 'Pending', statusColor: c['text-warning-subtle'], value: '124 MW', time: '2 min ago' },
+    { name: 'Hywind Scotland', status: 'Offline', statusColor: c['text-danger-subtle'], value: '124 MW', time: '2 min ago' },
+    { name: 'Hywind Scotland', status: 'Online', statusColor: c['text-success-subtle'], value: '124 MW', time: '2 min ago' },
   ]
 
   return (
@@ -58,10 +33,11 @@ export function DataTablePreview({
       style={
         {
           overflow: 'hidden',
-          '--_hover': neutral[1],
-          '--_pressed': neutral[2],
-          '--_selected': accent[1],
-          '--_border': neutral[3],
+          '--_hover': c['bg-neutral-fill-muted-default'],
+          '--_pressed': c['bg-neutral-fill-muted-hover'],
+          '--_selected': c['bg-accent-fill-muted-default'],
+          '--_selected-bar': c['bg-accent-fill-emphasis-default'],
+          '--_border': c['border-neutral-subtle'],
         } as React.CSSProperties
       }
     >
@@ -69,6 +45,7 @@ export function DataTablePreview({
         [data-dt="${uid}"] [data-row] {
           cursor: pointer;
           transition: background-color 100ms;
+          box-shadow: inset 3px 0 0 transparent;
         }
         [data-dt="${uid}"] [data-row]:hover {
           background-color: var(--_hover);
@@ -78,6 +55,7 @@ export function DataTablePreview({
         }
         [data-dt="${uid}"] [data-row][data-active] {
           background-color: var(--_selected);
+          box-shadow: inset 3px 0 0 var(--_selected-bar);
         }
       `}</style>
       {rows.map((row, i) => (
@@ -90,7 +68,7 @@ export function DataTablePreview({
             display: 'flex',
             alignItems: 'center',
             padding: '10px 0',
-            borderTop: `0.5px solid ${neutral[3]}`,
+            borderTop: `0.5px solid ${c['border-neutral-subtle']}`,
           }}
         >
           <div
@@ -99,7 +77,7 @@ export function DataTablePreview({
               padding: '0 16px',
               fontSize: '14px',
               lineHeight: '20px',
-              color: accent[12],
+              color: c['text-neutral-strong'],
               flexShrink: 0,
             }}
           >
@@ -110,7 +88,7 @@ export function DataTablePreview({
               padding: '0 16px',
               fontSize: '14px',
               lineHeight: '20px',
-              color: row.statusColor?.steps[11] ?? neutral[11],
+              color: row.statusColor,
               flexShrink: 0,
             }}
           >
@@ -121,7 +99,7 @@ export function DataTablePreview({
               padding: '0 16px',
               fontSize: '14px',
               lineHeight: '20px',
-              color: neutral[11],
+              color: c['text-neutral-strong'],
               flexShrink: 0,
             }}
           >
@@ -133,7 +111,7 @@ export function DataTablePreview({
               padding: '0 16px',
               fontSize: '12px',
               lineHeight: '16px',
-              color: neutral[8],
+              color: c['text-neutral-subtle'],
               flexShrink: 0,
             }}
           >

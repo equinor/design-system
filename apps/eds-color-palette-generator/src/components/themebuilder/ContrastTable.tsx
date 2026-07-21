@@ -16,10 +16,58 @@ type ContrastTableProps = {
   onActivePaletteChange: (index: number) => void
 }
 
-// Background column indices (steps 1-5, 9-11 → 0-indexed)
-const BG_INDICES = [0, 1, 2, 3, 4, 8, 9, 10]
-// Foreground row indices (border 6-8, text 12-15 → 0-indexed)
-const FG_INDICES = [5, 6, 7, 11, 12, 13, 14]
+/**
+ * Background / surface tokens (contrast columns) as used in the EDS UI.
+ * `step` is 1-indexed into the palette scale.
+ */
+const BG_GROUPS = [
+  {
+    group: 'accent / default',
+    cols: [
+      { label: 'default', step: 9 },
+      { label: 'hover', step: 10 },
+      { label: 'pressed', step: 11 },
+    ],
+  },
+  {
+    group: 'accent / subtle',
+    cols: [
+      { label: 'default', step: 1 },
+      { label: 'hover', step: 2 },
+      { label: 'pressed', step: 3 },
+    ],
+  },
+  {
+    group: 'accent / selected',
+    cols: [
+      { label: 'default', step: 4 },
+      { label: 'hover', step: 5 },
+      { label: 'pressed', step: 6 },
+    ],
+  },
+] as const
+
+const BG_COLUMNS = BG_GROUPS.flatMap((g) =>
+  g.cols.map((c) => ({ ...c, group: g.group })),
+)
+
+/**
+ * Text / foreground tokens (contrast rows) as named in the EDS UI.
+ * `step` is 1-indexed into the palette scale. `source` decides which palette
+ * the text color is pulled from: `'neutral'` (the Gray ramp — e.g. gray text
+ * on an accent background) or `'accent'` (the active/surface palette).
+ */
+const FG_TOKENS = [
+  { label: 'primary', step: 12, source: 'neutral' },
+  { label: 'secondary', step: 8, source: 'neutral' },
+  { label: 'muted', step: 7, source: 'neutral' },
+  { label: 'disabled', step: 5, source: 'neutral' },
+  { label: 'accent', step: 9, source: 'accent' },
+  { label: 'pressed', step: 10, source: 'accent' },
+  { label: 'on-accent', step: 14, source: 'neutral' },
+  { label: 'color on dark', step: 15, source: 'neutral' },
+  { label: 'color on light', step: 12, source: 'neutral' },
+] as const
 
 function getContrastLevel(
   wcagRatio: number,
@@ -38,25 +86,33 @@ export function ContrastTable({
 }: ContrastTableProps) {
   const palette = palettes[activePaletteIndex]
 
+  // Neutral text (primary/secondary/muted/…) is pulled from the Gray ramp when
+  // one exists, so we can check e.g. gray text on an accent surface. Falls back
+  // to the active palette when there is no Gray palette.
+  const neutralPalette = useMemo(
+    () => palettes.find((p) => /^gr[ae]y$/i.test(p.name.trim())) ?? palette,
+    [palettes, palette],
+  )
+
   const grid = useMemo(() => {
     if (!palette) return []
-    return FG_INDICES.map((fgIdx) => ({
-      fgIdx,
-      fgRole: STEP_ROLES[fgIdx],
-      fgHex: palette.steps[fgIdx],
-      cells: BG_INDICES.map((bgIdx) => {
-        const result = calcContrast(palette.steps[fgIdx], palette.steps[bgIdx])
-        const wcagNum = parseFloat(result.wcag)
-        const level = getContrastLevel(wcagNum)
-        return {
-          bgIdx,
-          bgRole: STEP_ROLES[bgIdx],
-          wcag: result.wcag,
-          level,
-        }
-      }),
-    }))
-  }, [palette])
+    return FG_TOKENS.map((fg) => {
+      const fgPalette = fg.source === 'neutral' ? neutralPalette : palette
+      const fgHex = fgPalette.steps[fg.step - 1]
+      return {
+        ...fg,
+        fgHex,
+        fgPaletteName: fgPalette.name,
+        crossPalette: fgPalette !== palette,
+        cells: BG_COLUMNS.map((bg) => {
+          const bgHex = palette.steps[bg.step - 1]
+          const result = calcContrast(fgHex, bgHex)
+          const level = getContrastLevel(parseFloat(result.wcag))
+          return { ...bg, bgHex, wcag: result.wcag, level }
+        }),
+      }
+    })
+  }, [palette, neutralPalette])
 
   if (!palette) return null
 
@@ -95,23 +151,49 @@ export function ContrastTable({
           }}
         >
           <thead>
+            {/* Group headers — background/surface token families */}
             <tr>
               <th
-                className="text-left text-subtle font-semibold border-b border-neutral-subtle"
+                className="border-b border-neutral-subtle"
                 style={{ padding: '6px 8px' }}
-              >
-                fg \ bg
-              </th>
-              {BG_INDICES.map((bgIdx) => (
+              />
+              {BG_GROUPS.map((group) => (
                 <th
-                  key={bgIdx}
-                  className="text-center text-subtle font-medium border-b border-neutral-subtle"
+                  key={group.group}
+                  colSpan={group.cols.length}
+                  className="text-center text-subtle font-semibold border-b border-l border-neutral-subtle"
                   style={{
                     padding: '6px 4px',
                     whiteSpace: 'nowrap',
                     fontSize: '9px',
                   }}
-                  title={STEP_ROLES[bgIdx]}
+                >
+                  {group.group}
+                </th>
+              ))}
+            </tr>
+            {/* State + swatch + step per background column */}
+            <tr>
+              <th
+                className="text-left text-subtle font-semibold border-b border-neutral-subtle"
+                style={{ padding: '6px 8px' }}
+              >
+                text \ surface
+              </th>
+              {BG_COLUMNS.map((col, i) => (
+                <th
+                  key={`${col.group}-${col.label}`}
+                  className="text-center text-subtle font-medium border-b border-neutral-subtle"
+                  style={{
+                    padding: '6px 4px',
+                    whiteSpace: 'nowrap',
+                    fontSize: '9px',
+                    borderLeft:
+                      i % 3 === 0
+                        ? '1px solid var(--eds-color-border-neutral-subtle, #e5e7eb)'
+                        : undefined,
+                  }}
+                  title={`${col.group} / ${col.label} — ${STEP_ROLES[col.step - 1]}`}
                 >
                   <div className="flex flex-col items-center gap-0.5">
                     <span
@@ -120,11 +202,12 @@ export function ContrastTable({
                         width: '14px',
                         height: '14px',
                         borderRadius: '3px',
-                        backgroundColor: palette.steps[bgIdx],
+                        backgroundColor: palette.steps[col.step - 1],
                         border: '1px solid rgba(128,128,128,0.2)',
                       }}
                     />
-                    <span>{bgIdx + 1}</span>
+                    <span>{col.label}</span>
+                    <span style={{ opacity: 0.6 }}>{col.step}</span>
                   </div>
                 </th>
               ))}
@@ -132,7 +215,7 @@ export function ContrastTable({
           </thead>
           <tbody>
             {grid.map((row) => (
-              <tr key={row.fgIdx}>
+              <tr key={row.label}>
                 <td
                   className="font-medium border-b border-neutral-subtle/50"
                   style={{
@@ -152,16 +235,27 @@ export function ContrastTable({
                         flexShrink: 0,
                       }}
                     />
-                    <span className="text-subtle" style={{ fontSize: '10px' }}>
-                      {row.fgIdx + 1}. {row.fgRole}
+                    <span className="text-strong" style={{ fontSize: '11px' }}>
+                      {row.label}
+                    </span>
+                    <span className="text-subtle" style={{ fontSize: '9px' }}>
+                      {row.crossPalette
+                        ? `${row.fgPaletteName}/${row.step}`
+                        : row.step}
                     </span>
                   </div>
                 </td>
-                {row.cells.map((cell) => (
+                {row.cells.map((cell, i) => (
                   <td
-                    key={cell.bgIdx}
+                    key={`${cell.group}-${cell.label}`}
                     className="text-center border-b border-neutral-subtle/50"
-                    style={{ padding: '4px' }}
+                    style={{
+                      padding: '4px',
+                      borderLeft:
+                        i % 3 === 0
+                          ? '1px solid var(--eds-color-border-neutral-subtle, #e5e7eb)'
+                          : undefined,
+                    }}
                   >
                     <div className="flex flex-col items-center gap-0.5">
                       <Badge

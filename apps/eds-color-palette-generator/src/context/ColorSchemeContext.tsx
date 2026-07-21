@@ -19,19 +19,27 @@ export function ColorSchemeProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
-    // Check for saved preference first, then system preference
-    if (typeof window !== 'undefined') {
-      const savedScheme = localStorageUtils.getColorScheme('light')
-      if (savedScheme) {
-        return savedScheme
-      }
-      // Check system preference on mount if no saved preference
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      return mediaQuery.matches ? 'dark' : 'light'
-    }
-    return 'light'
-  })
+  // Always initialise to 'light' so the server-rendered HTML and the first
+  // client render agree — reading localStorage/system preference in the
+  // useState initializer runs only on the client and causes a hydration
+  // mismatch (server 'light' vs client 'dark'), which can throw a hydration
+  // error and leave the page in a broken state. The saved / system preference
+  // is applied on mount in the effect below instead.
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
+
+  useEffect(() => {
+    // Apply the saved preference, or fall back to the system preference. This
+    // runs once on the client after hydration, so the first render still
+    // matches the server ('light') and there is no hydration mismatch.
+    const savedScheme = localStorageUtils.getColorScheme('light')
+    const next: ColorScheme = savedScheme
+      ? savedScheme
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional client-only preference sync on mount; server renders 'light' to avoid a hydration mismatch
+    setColorScheme(next)
+  }, [])
 
   useEffect(() => {
     // Listen for system changes (but don't override saved preference automatically)

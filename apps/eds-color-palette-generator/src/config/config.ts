@@ -18,8 +18,12 @@ export const BG_CANVAS: StepDefinition = {
   id: 'bg-canvas',
   name: 'Background Canvas',
   category: 'Background',
-  lightValue: 0.97,
-  darkValue: 0.15,
+  // Light: lighter than surface (0.94) for clear separation, below the
+  // pure-white card step (1.0). Dark: 0.19 → #141414 (canvas), per the Figma
+  // "surfaces" artboard (node 136:26170). Chroma still follows the gaussian
+  // bell curve.
+  lightValue: 0.98,
+  darkValue: 0.19,
 }
 
 export const BG_SURFACE: StepDefinition = {
@@ -27,8 +31,10 @@ export const BG_SURFACE: StepDefinition = {
   name: 'Background Surface',
   category: 'Background',
   variant: 'surface',
+  // Dark: 0.226 → #1c1c1c, the elevated card surface from the Figma "surfaces"
+  // artboard (node 136:26170), lifting subtly off the #141414 canvas.
   lightValue: 0.94,
-  darkValue: 0.25,
+  darkValue: 0.226,
 }
 
 export const BG_FILL_MUTED_DEFAULT: StepDefinition = {

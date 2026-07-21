@@ -1,19 +1,23 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import Link from 'next/link'
 import { ThemeToggle } from '@/components/shared/ThemeToggle'
-import { Link2, Check } from 'lucide-react'
+import { Link2, Check, Download, BarChart3 } from 'lucide-react'
 
 type Tab = 'fargesystem' | 'eksempler' | 'kontrast'
 
 type ThemeBuilderHeaderProps = {
   activeTab: Tab
   onTabChange: (tab: Tab) => void
+  /** Download the current palette configuration as JSON */
+  onDownloadConfig: () => void
 }
 
 export function ThemeBuilderHeader({
   activeTab,
   onTabChange,
+  onDownloadConfig,
 }: ThemeBuilderHeaderProps) {
   const [copied, setCopied] = useState(false)
 
@@ -66,7 +70,26 @@ export function ThemeBuilderHeader({
         </div>
 
         <div className="ml-auto flex items-center gap-3">
+          <Link
+            href="/dataviz"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-neutral-subtle bg-default text-subtle hover:text-strong transition-colors"
+            title="Data visualisation palettes"
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            Data viz
+          </Link>
+
           <ThemeToggle />
+
+          <button
+            type="button"
+            onClick={onDownloadConfig}
+            className="flex items-center gap-1.5 cursor-pointer px-3 py-1.5 text-xs font-medium rounded-lg border border-neutral-subtle bg-default text-subtle hover:text-strong transition-colors"
+            title="Download palette configuration (JSON)"
+          >
+            <Download className="w-3.5 h-3.5" />
+            Config
+          </button>
 
           <button
             type="button"

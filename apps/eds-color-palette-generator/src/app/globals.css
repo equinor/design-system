@@ -6,6 +6,17 @@
   --font-mono: var(--font-geist-mono);
 }
 
+:root {
+  /* Default page background. Light = EDS neutral *canvas* (#f5f5f5). */
+  --background: var(--eds-color-bg-neutral-canvas);
+}
+
+/* Dark: page backdrop = #0b0b0b = tonal-inversion neutral canvas (Gray/1).
+   See plan/light-dark-parity-comparison.md §4a. */
+[data-color-scheme='dark'] {
+  --background: #0b0b0b;
+}
+
 html,
 body {
   min-height: 100vh;

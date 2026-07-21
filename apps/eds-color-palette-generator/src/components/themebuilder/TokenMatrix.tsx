@@ -1,9 +1,9 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { contrast } from '@/utils/color'
 import { STEP_ROLES } from '@/utils/palette'
-import { CATEGORY_GROUPS } from '@/config/categories'
+import { STEP_TOKENS, TOKEN_CATEGORY_GROUPS } from '@/config/categories'
 
 type GeneratedPalette = {
   name: string
@@ -40,13 +40,13 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(100px, auto) repeat(15, minmax(48px, 1fr))',
+            gridTemplateColumns: 'minmax(100px, auto) repeat(15, minmax(58px, 1fr))',
             gap: '2px',
           }}
         >
           {/* Spacer for row label column */}
           <div />
-          {CATEGORY_GROUPS.map((group) => (
+          {TOKEN_CATEGORY_GROUPS.map((group) => (
             <div
               key={group.label}
               className="text-center text-subtle"
@@ -65,16 +65,22 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
             </div>
           ))}
 
-          {/* Step number headers */}
+          {/* Token name + step number headers */}
           <div />
-          {STEP_ROLES.map((role, i) => (
+          {STEP_TOKENS.map((token, i) => (
             <div
-              key={role}
+              key={`${token.name}-${token.sub ?? ''}-${i}`}
               className="text-center text-subtle"
-              style={{ fontSize: '10px', paddingBottom: '4px' }}
-              title={role}
+              style={{
+                fontSize: '8px',
+                lineHeight: 1.2,
+                paddingBottom: '4px',
+              }}
+              title={`Step ${i + 1} · ${STEP_ROLES[i]}`}
             >
-              {i + 1}
+              <div style={{ fontWeight: 600 }}>{token.name}</div>
+              {token.sub ? <div>{token.sub}</div> : null}
+              <div style={{ opacity: 0.5 }}>{i + 1}</div>
             </div>
           ))}
 
@@ -93,6 +99,27 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
     () => palette.steps.map(getTextColor),
     [palette.steps],
   )
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Clear the pending "Copied!" reset timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
+  }, [])
+
+  const handleCopy = useCallback(async (hex: string, i: number) => {
+    try {
+      await navigator.clipboard.writeText(hex)
+    } catch {
+      // Clipboard unavailable (e.g. non-secure context) — nothing to show
+      return
+    }
+    setCopiedIndex(i)
+    if (timerRef.current) clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setCopiedIndex(null), 1200)
+  }, [])
 
   return (
     <>
@@ -102,29 +129,40 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
       >
         {palette.name}
       </div>
-      {palette.steps.map((hex, i) => (
-        <div
-          key={`${palette.name}-${i}`}
-          className="flex items-center justify-center"
-          style={{
-            backgroundColor: hex,
-            color: textColors[i],
-            height: '44px',
-            borderRadius:
-              i === 0
-                ? '8px 0 0 8px'
-                : i === palette.steps.length - 1
-                  ? '0 8px 8px 0'
-                  : undefined,
-            fontSize: '10px',
-            fontWeight: 600,
-            cursor: 'default',
-          }}
-          title={`${i + 1}. ${STEP_ROLES[i]}: ${hex}`}
-        >
-          {i + 1}
-        </div>
-      ))}
+      {palette.steps.map((hex, i) => {
+        const isCopied = copiedIndex === i
+        return (
+          <button
+            type="button"
+            key={`${palette.name}-${i}`}
+            onClick={() => handleCopy(hex, i)}
+            className="flex items-center justify-center"
+            style={{
+              backgroundColor: hex,
+              color: textColors[i],
+              height: '44px',
+              border: 'none',
+              padding: '0 2px',
+              appearance: 'none',
+              borderRadius:
+                i === 0
+                  ? '8px 0 0 8px'
+                  : i === palette.steps.length - 1
+                    ? '0 8px 8px 0'
+                    : undefined,
+              fontSize: '9px',
+              fontWeight: 600,
+              fontVariantNumeric: 'tabular-nums',
+              whiteSpace: 'nowrap',
+              cursor: 'pointer',
+            }}
+            title={`${i + 1}. ${STEP_ROLES[i]}: ${hex} — click to copy`}
+            aria-label={`Copy ${palette.name} step ${i + 1} (${STEP_ROLES[i]}): ${hex}`}
+          >
+            {isCopied ? 'Copied!' : hex}
+          </button>
+        )
+      })}
     </>
   )
 }

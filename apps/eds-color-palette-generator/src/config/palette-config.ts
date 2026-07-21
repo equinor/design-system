@@ -7,14 +7,14 @@ export const paletteConfig: PaletteConfig = {
   meanDark: 0.7,
   stdDevDark: 2,
   colors: [
-    {
-      name: 'Moss Green',
-      anchors: [
-        { value: 'oklch(0.5915 0.0731 184.63)', step: 6 },
-        { value: 'oklch(0.4973 0.084851 204.553)', step: 9 },
-      ],
-    },
-    { name: 'Gray', value: 'oklch(0.4091 0 0)' },
+    // Accent — the fixed Equinor brand colour. Always #206F77. Kept as a single
+    // colour (not anchors) so the accent/default (step 9) is pinned in light and
+    // inverts to a light tint in dark (Model 1 / accessible), not pinned dark.
+    { name: 'Moss Green', value: '#206F77' },
+    // Neutral — the fixed Gray ramp (achromatic). Base is #696969 so the step-9
+    // pin lands on Figma's Gray/9 value; every other step is achromatic and
+    // unaffected by the base, so the ramp matches the Figma Light/Gray primitive.
+    { name: 'Gray', value: '#696969' },
     {
       name: 'North sea',
       anchors: [

@@ -339,3 +339,28 @@ export function contrast({
     return '0'
   }
 }
+
+/**
+ * Perceptual colour difference between two colours. Used to keep categorical
+ * data-viz series visually distinct (not just contrasty).
+ * @param a - First colour (any colorjs.io-supported format)
+ * @param b - Second colour
+ * @param method - 'OK' (OKLab ΔE, ~0-1 scale) or '2000' (CIEDE2000)
+ * @param silent - Whether to suppress error logging (useful for tests)
+ * @returns ΔE as a number (0 = identical), or 0 on error
+ */
+export function deltaE(
+  a: string,
+  b: string,
+  method: '2000' | 'OK' = 'OK',
+  silent = false,
+): number {
+  try {
+    return new Color(a).deltaE(new Color(b), method)
+  } catch (error) {
+    if (!silent) {
+      console.error('Error calculating deltaE:', error)
+    }
+    return 0
+  }
+}
