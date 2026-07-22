@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}
+      cacheKey: ${{ github.sha }}-setup-core-react
       checkout_paths: packages scripts
       tag: ${{ github.event.inputs.npm-tag }}
   packages:
@@ -45,7 +45,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-setup-core-react
       - name: Use "dist" cache
         id: dist-cache
         uses: actions/cache@v6

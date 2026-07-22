@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}
+      cacheKey: ${{ github.sha }}-setup-checks
       checkout_paths: packages apps scripts .github documentation
   packages:
     name: Process packages
@@ -35,7 +35,7 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}
+          key: ${{ github.sha }}-setup-checks
       - name: Fallback checkout (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v7
