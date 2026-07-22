@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.1...eds-tokens@v3.0.0-beta.2) (2026-07-22)
+
+
+### ✨ Added
+
+* add bundled variables.css to the Tokens Studio release pipeline ([#5209](https://github.com/equinor/design-system/issues/5209)) ([1243030](https://github.com/equinor/design-system/commit/1243030ac8175465241c4e9ea288393f00693010))
+
 ## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.0...eds-tokens@v3.0.0-beta.1) (2026-07-20)
 
 
