@@ -110,9 +110,13 @@ granular files stay internal.
   the nine source files (inspectable in the release workflow's automated
   PRs like everything else in `src/tokens/`). Concatenation is
   conflict-free by construction — every mode file is attribute-scoped.
-  The step is a plain concat + minify: the bundle adds no behaviour of
-  its own on top of the generated files (see the colour-scheme note
-  below).
+  The step is a plain concatenation, deliberately not minified: the
+  committed bundle stays a pure function of the source files (no
+  minifier-version churn in release-PR diffs, no extra toolchain
+  dependency in the pipeline) and diffs stay reviewable. Gzip closes
+  the size gap (4.8 vs 4.6 kB); consumers that bundle minify with
+  their own tooling. The bundle adds no behaviour of its own on top of
+  the generated files (see the colour-scheme note below).
 - **Beta validation costs nothing extra:** the existing `./next/css/*`
   wildcard maps to `src/tokens/css/*`, so the committed bundle is
   importable as `@equinor/eds-tokens/next/css/variables.css` in the next
