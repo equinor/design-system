@@ -1,0 +1,177 @@
+@layer eds-components {
+  .eds-avatar {
+    /* Size + font tokens — overridden per data-size */
+    --_size: var(--eds-sizing-icon-2xl); /* 32px — Large */
+    --_font-size: var(--eds-typography-ui-body-md-font-size);
+    --_line-height: var(--eds-typography-ui-body-md-line-height-default);
+
+    /* Dot sizes have no token equivalent in the design — hardcoded per Figma spec */
+    --_dot-size: 12px;
+
+    /* Colour tokens — overridden for high emphasis; --_color consumed by .initial */
+    --_bg: var(--eds-color-bg-fill-muted-default);
+    --_color: var(--eds-color-text-strong);
+
+    position: relative;
+
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--_size);
+    height: var(--_size);
+    border-radius: var(--eds-spacing-border-radius-pill);
+
+    background-color: var(--_bg);
+
+    &[data-size='sm'] {
+      --_size: var(--eds-sizing-icon-xs); /* 16px */
+      --_font-size: var(--eds-typography-ui-body-xs-font-size);
+      --_line-height: var(--eds-typography-ui-body-xs-line-height-default);
+      --_dot-size: 8px;
+    }
+
+    &[data-size='md'] {
+      --_size: var(--eds-sizing-icon-lg); /* 24px */
+      --_font-size: var(--eds-typography-ui-body-sm-font-size);
+      --_line-height: var(--eds-typography-ui-body-sm-line-height-default);
+      --_dot-size: 10px;
+    }
+
+    &[data-emphasis='high'] {
+      --_bg: var(--eds-color-bg-fill-emphasis-default);
+      --_color: var(--eds-color-text-strong-on-emphasis);
+    }
+
+    & .photo {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+
+      object-fit: cover;
+    }
+
+    & .initial {
+      overflow: hidden;
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--_font-size);
+      font-feature-settings: 'lnum', 'tnum';
+      line-height: var(--_line-height);
+      color: var(--_color);
+
+      @supports (text-box: trim-both cap alphabetic) {
+        text-box: trim-both cap alphabetic;
+      }
+    }
+
+    & .notification {
+      position: absolute;
+
+      /* -2px overlap — no token equivalent, intentional per Figma spec */
+      right: -2px;
+      bottom: -2px;
+
+      width: var(--_dot-size);
+      height: var(--_dot-size);
+      border: var(--eds-sizing-stroke-thin) solid var(--eds-color-bg-surface);
+      border-radius: var(--eds-spacing-border-radius-pill);
+
+      background-color: var(--eds-color-bg-fill-emphasis-default);
+    }
+  }
+
+  .eds-avatar-name-label {
+    display: flex;
+
+    /* Gap between avatar+content block and slot-right — horizontal arrangement */
+    gap: var(--eds-container-gap-horizontal);
+    align-items: center;
+    font-family: var(--eds-typography-ui-body-font-family);
+
+    & .content {
+      display: flex;
+      flex: 1 0 0;
+      gap: var(--eds-selectable-space-horizontal);
+      align-items: center;
+
+      min-width: 0;
+    }
+
+    & .names {
+      display: flex;
+      flex: 1 0 0;
+      flex-direction: column;
+
+      /* Column layout: use vertical spacing between stacked name and email */
+      gap: var(--eds-selectable-space-vertical);
+      justify-content: center;
+
+      min-width: 0;
+
+      font-size: var(--eds-typography-ui-body-xs-font-size);
+      font-feature-settings: 'lnum', 'tnum';
+      line-height: var(--eds-typography-ui-body-xs-line-height-default);
+    }
+
+    &[data-layout='vertical'] {
+      & .content {
+        flex: initial;
+        flex-shrink: 0;
+      }
+
+      & .names {
+        flex: initial;
+        flex-direction: row;
+        flex-shrink: 0;
+
+        /* Row layout: use horizontal spacing between inline name and email */
+        gap: var(--eds-selectable-space-horizontal);
+        align-items: center;
+
+        white-space: nowrap;
+      }
+    }
+
+    & .full-name,
+    & .meta {
+      @supports (text-box: trim-both cap alphabetic) {
+        text-box: trim-both cap alphabetic;
+      }
+    }
+
+    & .full-name {
+      color: var(--eds-color-text-strong);
+      overflow-wrap: break-word;
+    }
+
+    & .meta {
+      color: var(--eds-color-text-subtle);
+      overflow-wrap: break-word;
+    }
+
+    & .notification-label {
+      position: absolute;
+
+      overflow: hidden;
+
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+
+      white-space: nowrap;
+
+      clip: rect(0, 0, 0, 0);
+    }
+
+    & .slot-right {
+      flex-shrink: 0;
+    }
+  }
+}
