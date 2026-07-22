@@ -16,6 +16,15 @@ const [file = './build/css/variables.min.css', minSchemeScopes = '3'] =
   process.argv.slice(2)
 const minScopes = Number(minSchemeScopes)
 
+// A guard that can be silently disabled is no guard: NaN (from a
+// non-numeric argument) makes every `length < minScopes` comparison
+// false, so reject bad thresholds loudly instead
+if (!Number.isInteger(minScopes) || minScopes < 1) {
+  throw new Error(
+    `invalid minSchemeScopes argument "${minSchemeScopes}" — expected a positive integer`,
+  )
+}
+
 const css = readFileSync(file, 'utf8')
 
 if (css.includes('light-dark(')) {
