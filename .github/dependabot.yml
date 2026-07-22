@@ -90,3 +90,21 @@ updates:
           - major
           - minor
           - patch
+
+  - package-ecosystem: devcontainers
+    directory: /
+    commit-message:
+      prefix: 'chore(deps)'
+    schedule:
+      interval: weekly
+      day: monday
+      time: '05:00'
+      timezone: Europe/Oslo
+    groups:
+      devcontainer:
+        patterns:
+          - '*'
+        update-types:
+          - major
+          - minor
+          - patch
