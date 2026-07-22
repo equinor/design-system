@@ -153,7 +153,9 @@ jobs:
     steps:
       # The setup job's sparse checkout only includes packages/apps/scripts
       # (and the workspace cache glob skips dot-directories), so .github and
-      # the local deploy action must be checked out here.
+      # the local deploy action must be checked out here. Must stay the first
+      # step: checkout cleans the workspace and would wipe the restored
+      # storybook build otherwise.
       - name: Checkout deploy action
         uses: actions/checkout@v7
         with:

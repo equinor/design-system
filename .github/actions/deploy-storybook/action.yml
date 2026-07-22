@@ -5,6 +5,16 @@ description: >-
   everything else must be revalidated on every load. Without these headers
   Azure Front Door applies its 48h default TTL and warm browser caches mix
   bundles from two deploys, crashing the Manager UI (#5205, #5212).
+
+  Requires Azure CLI on the runner (pre-installed on GitHub-hosted runners).
+  Static-website hosting and the container access policy are pre-existing
+  account configuration and are NOT (re)applied here — unlike the previous
+  tibor19/static-website-deploy action, this action will not self-heal an
+  account whose static-website config has been reset.
+
+  The stale cleanup assumes this deploy is the sole writer to the target
+  account's $web container, so each environment must point its
+  connection-string secret at a separate storage account.
 inputs:
   folder:
     description: 'Path to the built Storybook (static website root)'
