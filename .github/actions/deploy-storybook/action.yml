@@ -1,0 +1,130 @@
+name: 'Deploy Storybook to Azure Blob Storage'
+description: >-
+  Zero-downtime upload of a static Storybook build to the $web container with
+  correct Cache-Control headers: content-hashed assets/* are cached forever,
+  everything else must be revalidated on every load. Without these headers
+  Azure Front Door applies its 48h default TTL and warm browser caches mix
+  bundles from two deploys, crashing the Manager UI (#5205, #5212).
+inputs:
+  folder:
+    description: 'Path to the built Storybook (static website root)'
+    required: true
+  connection-string:
+    description: 'Connection string for the target Azure Storage account'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Deploy to Azure Blob Storage 🚀
+      shell: bash
+      env:
+        AZURE_STORAGE_CONNECTION_STRING: ${{ inputs.connection-string }}
+        FOLDER: ${{ inputs.folder }}
+      run: |
+        set -euo pipefail
+        echo "Deploying to Azure Blob Storage..."
+
+        if [ ! -d "$FOLDER" ]; then
+          echo "❌ Error: folder '$FOLDER' not found"
+          exit 1
+        fi
+
+        FILE_COUNT=$(find "$FOLDER" -type f | wc -l)
+        echo "Uploading $FILE_COUNT files..."
+
+        # Capture the full set of blob names this deploy produces. Blobs not
+        # in this set are orphans from a previous deploy and are cleaned up
+        # after the upload (zero-downtime deploy: upload with --overwrite
+        # first, delete stale blobs afterwards). Deleting by name set is
+        # deterministic — timestamps would race the Azure server clock.
+        # Must run before the mv of assets/ below, or assets/* drops out of
+        # the set and the cleanup deletes all live assets.
+        (cd "$FOLDER" && find . -type f | sed 's|^\./||') \
+          | LC_ALL=C sort > "$RUNNER_TEMP/deployed-blobs.txt"
+
+        # 1) Content-hashed assets: cache forever. Uploaded first so the new
+        #    index.html never references chunks that don't exist yet.
+        if [ -d "$FOLDER/assets" ]; then
+          az storage blob upload-batch \
+            --destination '$web' \
+            --destination-path assets \
+            --source "$FOLDER/assets" \
+            --content-cache-control 'public, max-age=31536000, immutable' \
+            --overwrite \
+            --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+
+          # Move assets/ aside so it is not re-uploaded with the wrong header.
+          mv "$FOLDER/assets" "$RUNNER_TEMP/assets-uploaded"
+        fi
+
+        # 2) Un-hashed files (index.html, iframe.html, sb-manager/**,
+        #    sb-addons/** etc.): browsers must revalidate on every load, or a
+        #    stale bundle mix breaks the Manager UI after each deploy (#5205).
+        #    Revalidation is cheap 304s via ETag/Last-Modified.
+        az storage blob upload-batch \
+          --destination '$web' \
+          --source "$FOLDER" \
+          --content-cache-control 'no-cache' \
+          --overwrite \
+          --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+
+        UPLOADED=$(az storage blob list \
+          --container-name '$web' \
+          --num-results '*' \
+          --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+          --query 'length(@)' \
+          --output tsv)
+
+        echo "✅ Deployment completed successfully. Total blobs in container (before stale cleanup): $UPLOADED"
+
+    - name: Delete stale blobs from previous deploy 🗑️
+      shell: bash
+      env:
+        AZURE_STORAGE_CONNECTION_STRING: ${{ inputs.connection-string }}
+      run: |
+        set -euo pipefail
+        echo "Deleting blobs not part of this deploy..."
+
+        # An empty deploy set would classify every blob in the container as
+        # stale and wipe the live site — refuse to continue.
+        if [ ! -s "$RUNNER_TEMP/deployed-blobs.txt" ]; then
+          echo "❌ Deploy set is empty — refusing to run stale cleanup"
+          exit 1
+        fi
+
+        az storage blob list \
+          --container-name '$web' \
+          --num-results '*' \
+          --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+          --query '[].name' \
+          --output tsv \
+          | LC_ALL=C sort > "$RUNNER_TEMP/existing-blobs.txt"
+
+        # Blobs present in the container but not in this deploy's file set.
+        # Assumes this deploy is the sole writer to the $web container —
+        # anything uploaded out-of-band (e.g. a manual 404.html) is treated
+        # as stale and deleted on the next deploy.
+        LC_ALL=C comm -13 "$RUNNER_TEMP/deployed-blobs.txt" "$RUNNER_TEMP/existing-blobs.txt" > "$RUNNER_TEMP/stale-blobs.txt"
+
+        COUNT=$(wc -l < "$RUNNER_TEMP/stale-blobs.txt" | tr -d ' ')
+        echo "Deleting $COUNT stale blobs..."
+
+        # Every deploy renames all content-hashed assets, so the whole
+        # previous assets/* set is stale each run — parallelise the deletes.
+        # Cleanup is best-effort: the new content is already live at this
+        # point, and blobs that survive a transient delete failure are
+        # re-detected as stale on the next deploy. Don't fail the job.
+        set +e
+        xargs -r -P 8 -I{} az storage blob delete \
+          --container-name '$web' \
+          --name '{}' \
+          --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+          --output none < "$RUNNER_TEMP/stale-blobs.txt"
+        rc=$?
+        set -e
+
+        if [ "$rc" -eq 0 ]; then
+          echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
+        else
+          echo "⚠️ Some stale deletes failed (rc=$rc); orphans will be retried on the next deploy"
+        fi
