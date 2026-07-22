@@ -26,6 +26,20 @@
         (var(--_label-line-height) - var(--_label-height)) / 2
     );
 
+    /* Colours from the eds-tokens beta (Tokens Studio) — same --_tone-N step
+     * indirection as Button; data-color-appearance selects the scale (Chip
+     * always sets it, default tone is neutral). Steps follow the semantic
+     * ladders: 2/4/6 for subtle fills (rest/hover/pressed, matching
+     * --eds-background-surface-accent-subtle-*), 9/10/11 for emphasis fills. */
+    --_tone-2: var(--eds-neutral-2);
+    --_tone-4: var(--eds-neutral-4);
+    --_tone-6: var(--eds-neutral-6);
+    --_tone-8: var(--eds-neutral-8);
+    --_tone-9: var(--eds-neutral-9);
+    --_tone-10: var(--eds-neutral-10);
+    --_tone-11: var(--eds-neutral-11);
+    --_tone-12: var(--eds-neutral-12);
+
     cursor: pointer;
     user-select: none;
 
@@ -50,63 +64,119 @@
       outline-color 150ms ease-in-out,
       color 150ms ease-in-out;
 
+    /* ===== TONES ===== */
+
+    &[data-color-appearance='accent'] {
+      --_tone-2: var(--eds-accent-2);
+      --_tone-4: var(--eds-accent-4);
+      --_tone-6: var(--eds-accent-6);
+      --_tone-8: var(--eds-accent-8);
+      --_tone-9: var(--eds-accent-9);
+      --_tone-10: var(--eds-accent-10);
+      --_tone-11: var(--eds-accent-11);
+      --_tone-12: var(--eds-accent-12);
+    }
+
+    &[data-color-appearance='success'] {
+      --_tone-2: var(--eds-success-2);
+      --_tone-4: var(--eds-success-4);
+      --_tone-6: var(--eds-success-6);
+      --_tone-8: var(--eds-success-8);
+      --_tone-9: var(--eds-success-9);
+      --_tone-10: var(--eds-success-10);
+      --_tone-11: var(--eds-success-11);
+      --_tone-12: var(--eds-success-12);
+    }
+
+    &[data-color-appearance='info'] {
+      --_tone-2: var(--eds-info-2);
+      --_tone-4: var(--eds-info-4);
+      --_tone-6: var(--eds-info-6);
+      --_tone-8: var(--eds-info-8);
+      --_tone-9: var(--eds-info-9);
+      --_tone-10: var(--eds-info-10);
+      --_tone-11: var(--eds-info-11);
+      --_tone-12: var(--eds-info-12);
+    }
+
+    &[data-color-appearance='warning'] {
+      --_tone-2: var(--eds-warning-2);
+      --_tone-4: var(--eds-warning-4);
+      --_tone-6: var(--eds-warning-6);
+      --_tone-8: var(--eds-warning-8);
+      --_tone-9: var(--eds-warning-9);
+      --_tone-10: var(--eds-warning-10);
+      --_tone-11: var(--eds-warning-11);
+      --_tone-12: var(--eds-warning-12);
+    }
+
+    &[data-color-appearance='danger'] {
+      --_tone-2: var(--eds-danger-2);
+      --_tone-4: var(--eds-danger-4);
+      --_tone-6: var(--eds-danger-6);
+      --_tone-8: var(--eds-danger-8);
+      --_tone-9: var(--eds-danger-9);
+      --_tone-10: var(--eds-danger-10);
+      --_tone-11: var(--eds-danger-11);
+      --_tone-12: var(--eds-danger-12);
+    }
+
     /* ===== DEFAULT VARIANT (solid muted fill) ===== */
 
     &[data-variant='default'] {
-      color: var(--eds-color-text-subtle);
-      background-color: var(--eds-color-bg-fill-muted-default);
+      color: var(--_tone-12);
+      background-color: var(--_tone-2);
       outline: none;
     }
 
     &[data-variant='default']:hover {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+      background-color: var(--_tone-4);
     }
 
     &[data-variant='default']:active {
-      background-color: var(--eds-color-bg-fill-muted-active);
+      background-color: var(--_tone-6);
     }
 
     /* ===== OUTLINED VARIANT (border + transparent bg) ===== */
 
     &[data-variant='outlined'] {
-      color: var(--eds-color-text-subtle);
+      color: var(--_tone-12);
       background-color: transparent;
-      outline: var(--eds-border-width-default, 1px) solid
-        var(--eds-color-border-strong);
+      outline: var(--eds-border-width-default, 1px) solid var(--_tone-8);
       outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
     }
 
     &[data-variant='outlined']:hover {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+      background-color: var(--_tone-4);
     }
 
     &[data-variant='outlined']:active {
-      background-color: var(--eds-color-bg-fill-muted-active);
+      background-color: var(--_tone-6);
     }
 
     /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
 
     &[data-variant='high-contrast'] {
-      color: var(--eds-color-text-strong-on-emphasis);
-      background-color: var(--eds-color-bg-fill-emphasis-default);
+      color: var(--eds-text-on-accent);
+      background-color: var(--_tone-9);
       outline: none;
     }
 
     &[data-variant='high-contrast']:hover {
-      background-color: var(--eds-color-bg-fill-emphasis-hover);
+      background-color: var(--_tone-10);
     }
 
     &[data-variant='high-contrast']:active {
-      background-color: var(--eds-color-bg-fill-emphasis-active);
+      background-color: var(--_tone-11);
     }
 
     /* ===== FOCUS STATE ===== */
 
     &:focus-visible {
       box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
-          var(--eds-color-border-focus);
+        0 0 0 var(--eds-sizing-stroke-thin)
+          var(--eds-background-container-canvas-default),
+        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-border-focus);
     }
 
     /* ===== ICONS ===== */
