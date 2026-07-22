@@ -186,6 +186,15 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
+      # The setup job's sparse checkout only includes packages/apps/scripts
+      # (and the workspace cache glob skips dot-directories), so .github and
+      # the local deploy action must be checked out here. Must stay the first
+      # step: checkout cleans the workspace and would wipe the restored
+      # storybook build otherwise.
+      - name: Checkout deploy action
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github
       - name: Use cache with storybook files
         id: use-cache-storybook
         uses: actions/cache@v6
@@ -196,11 +205,9 @@ jobs:
           key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
       - name: Deploy the website
         id: deploy-website
-        uses: tibor19/static-website-deploy@v4
+        uses: ./.github/actions/deploy-storybook
         with:
-          enabled-static-website: 'true'
-          folder: 'packages/eds-core-react/storybook-build'
-          public-access-policy: 'container'
+          folder: packages/eds-core-react/storybook-build
           connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2

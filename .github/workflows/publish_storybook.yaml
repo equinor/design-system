@@ -73,6 +73,16 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
+      # The setup job's sparse checkout only includes packages/apps/scripts
+      # (and the workspace cache glob skips dot-directories), so .github and
+      # the local deploy action must be checked out here. Must stay the first
+      # step: checkout cleans the workspace and would wipe the downloaded
+      # storybook build otherwise.
+      - name: Checkout deploy action
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github
+
       - name: Download storybook build
         uses: actions/download-artifact@v8
         with:
@@ -94,127 +104,12 @@ jobs:
           echo "=== All Foundation/Spacing entries ==="
           grep -o '"foundation-spacing--[^"]*"' packages/eds-core-react/storybook-build/index.json || echo "No Foundation/Spacing entries found"
 
-      - name: Az CLI login 🔑
-        uses: azure/login@v3
-        with:
-          client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
-          tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
-          allow-no-subscriptions: true
-
-      - name: Deploy to Azure Blob Storage 🚀
+      - name: Deploy the website
         id: deploy-website
-        env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
-        run: |
-          set -euo pipefail
-          echo "Deploying to Azure Blob Storage..."
-
-          # Verify source directory exists and has content
-          if [ ! -d "packages/eds-core-react/storybook-build" ]; then
-            echo "❌ Error: storybook-build directory not found"
-            exit 1
-          fi
-
-          FILE_COUNT=$(find packages/eds-core-react/storybook-build -type f | wc -l)
-          echo "Uploading $FILE_COUNT files..."
-
-          # Capture the full set of blob names this deploy produces. Blobs not
-          # in this set are orphans from a previous deploy and are cleaned up
-          # after the upload (zero-downtime deploy: upload with --overwrite
-          # first, delete stale blobs afterwards). Deleting by name set is
-          # deterministic — timestamps would race the Azure server clock.
-          # Must run before the mv of assets/ below, or assets/* drops out of
-          # the set and the cleanup deletes all live assets.
-          (cd packages/eds-core-react/storybook-build && find . -type f | sed 's|^\./||') \
-            | LC_ALL=C sort > /tmp/deployed-blobs.txt
-
-          # 1) Content-hashed assets: cache forever. Uploaded first so the new
-          #    index.html never references chunks that don't exist yet.
-          az storage blob upload-batch \
-            --destination '$web' \
-            --destination-path assets \
-            --source packages/eds-core-react/storybook-build/assets \
-            --content-cache-control 'public, max-age=31536000, immutable' \
-            --overwrite \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
-
-          # 2) Un-hashed files (index.html, iframe.html, sb-manager/**,
-          #    sb-addons/** etc.): browsers must revalidate on every load, or a
-          #    stale bundle mix breaks the Manager UI after each deploy (#5205).
-          #    Revalidation is cheap 304s via ETag/Last-Modified. Move assets/
-          #    aside so it is not re-uploaded with the wrong header.
-          mv packages/eds-core-react/storybook-build/assets /tmp/assets-uploaded
-          az storage blob upload-batch \
-            --destination '$web' \
-            --source packages/eds-core-react/storybook-build \
-            --content-cache-control 'no-cache' \
-            --overwrite \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
-
-          # Verify upload
-          UPLOADED=$(az storage blob list \
-            --container-name '$web' \
-            --num-results '*' \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --query 'length(@)' \
-            --output tsv)
-
-          echo "✅ Deployment completed successfully. Total blobs in container (before stale cleanup): $UPLOADED"
-
-      - name: Delete stale blobs from previous deploy 🗑️
-        env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
-        run: |
-          set -euo pipefail
-          echo "Deleting blobs not part of this deploy..."
-
-          # An empty deploy set would classify every blob in the container as
-          # stale and wipe the live site — refuse to continue.
-          if [ ! -s /tmp/deployed-blobs.txt ]; then
-            echo "❌ Deploy set is empty — refusing to run stale cleanup"
-            exit 1
-          fi
-
-          az storage blob list \
-            --container-name '$web' \
-            --num-results '*' \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --query '[].name' \
-            --output tsv \
-            | LC_ALL=C sort > /tmp/existing-blobs.txt
-
-          # Blobs present in the container but not in this deploy's file set.
-          # Assumes this workflow is the sole writer to the $web container —
-          # anything uploaded out-of-band (e.g. a manual 404.html) is treated
-          # as stale and deleted on the next deploy.
-          LC_ALL=C comm -13 /tmp/deployed-blobs.txt /tmp/existing-blobs.txt > /tmp/stale-blobs.txt
-
-          COUNT=$(wc -l < /tmp/stale-blobs.txt | tr -d ' ')
-          echo "Deleting $COUNT stale blobs..."
-
-          # Every deploy renames all content-hashed assets, so the whole
-          # previous assets/* set is stale each run — parallelise the deletes.
-          # Cleanup is best-effort: the new content is already live at this
-          # point, and blobs that survive a transient delete failure are
-          # re-detected as stale on the next deploy. Don't fail the job.
-          set +e
-          xargs -r -P 8 -I{} az storage blob delete \
-            --container-name '$web' \
-            --name '{}' \
-            --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
-            --output none < /tmp/stale-blobs.txt
-          rc=$?
-          set -e
-
-          if [ "$rc" -eq 0 ]; then
-            echo "✅ Stale blob cleanup completed. Deleted $COUNT stale blobs."
-          else
-            echo "⚠️ Some stale deletes failed (rc=$rc); orphans will be retried on the next deploy"
-          fi
-
-      - name: logout 🔓
-        run: az logout
-        if: always()
+        uses: ./.github/actions/deploy-storybook
+        with:
+          folder: packages/eds-core-react/storybook-build
+          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
 
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
