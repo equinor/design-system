@@ -289,7 +289,7 @@ jobs:
             "test:${{ needs.test.result }}" \
             "lint:${{ needs.lint.result }}" \
             "types:${{ needs.types.result }}" \
-            "lint-only:${{ needs['lint-only'].result }}"; do
+            "lint-only:${{ needs.lint-only.result }}"; do
             job="${result%%:*}"
             status="${result#*:}"
             if [ "$status" = "failure" ] || [ "$status" = "cancelled" ]; then
