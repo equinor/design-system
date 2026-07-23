@@ -33,23 +33,22 @@ See the stories below for usage patterns.
 export default meta
 
 export const Introduction: StoryFn = () => {
-  const [open, setOpen] = useState(false)
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Header>
-          <Dialog.Title>Dialog title</Dialog.Title>
-        </Dialog.Header>
-        <Dialog.Content>
-          This is a short description of the action the user is about to take.
-        </Dialog.Content>
-        <Dialog.Actions>
-          <Button variant="secondary" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>
-          <Button onClick={() => setOpen(false)}>Confirm</Button>
-        </Dialog.Actions>
+      <Dialog>
+        <Dialog.Trigger>Open dialog</Dialog.Trigger>
+        <Dialog.Popup>
+          <Dialog.Header>
+            <Dialog.Title>Dialog title</Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Content>
+            This is a short description of the action the user is about to take.
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Dialog.Close>Close</Dialog.Close>
+            <Button onClick={() => {}}>Confirm</Button>
+          </Dialog.Actions>
+        </Dialog.Popup>
       </Dialog>
     </>
   )
