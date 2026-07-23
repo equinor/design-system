@@ -4,8 +4,8 @@
 # Build runs first (required by all others), then test/lint/types fan out.
 #
 # Path filtering:
-# - packages/** or apps/** changes → full checks (build + test + lint + types)
-# - docs-only or workflow-only changes → lint only
+# - code (packages/apps/scripts) or root deps/config -> full checks (build + test + lint + types)
+# - docs-only or workflow-only changes -> lint only
 #
 # Addresses: https://github.com/equinor/design-system/issues/4624
 
@@ -23,6 +23,13 @@ on:
       - 'scripts/**'
       - 'documentation/**'
       - '.github/workflows/**'
+      # Root files that affect every package's build/test/lint/types
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'tsconfig*.json'
+      - 'babel.config.cjs'
+      - 'eslint.config.mjs'
   push:
     branches:
       - main
@@ -67,6 +74,13 @@ jobs:
               - 'packages/**'
               - 'apps/**'
               - 'scripts/**'
+              # Root deps/config changes warrant full checks, not lint-only
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
+              - 'tsconfig*.json'
+              - 'babel.config.cjs'
+              - 'eslint.config.mjs'
 
   # ─── Build (required before test/lint/types) ─────────────────────
   build:
