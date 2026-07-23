@@ -21,6 +21,7 @@ on:
       - 'apps/**'
       - 'packages/**'
       - 'scripts/**'
+      - 'documentation/**'
       - '.github/workflows/**'
   push:
     branches:
@@ -65,13 +66,19 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore workspace cache
+        id: cache
         uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
-          fail-on-cache-miss: true
+      # Cache misses are rare (setup runs first and saves the workspace) but
+      # not impossible — a cache-service hiccup, eviction, or size limit
+      # shouldn't fail the run when a plain checkout + install can proceed.
+      - name: Fallback checkout (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
@@ -79,6 +86,9 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      - name: Fallback install (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile
       # Must run BEFORE the build: `prebuild` regenerates the index in the
       # workspace, which would mask a stale committed file.
       - name: Check AI component index freshness
@@ -101,13 +111,19 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore build cache
+        id: cache
         uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
-          fail-on-cache-miss: true
+      # On a build-cache miss, reconstruct from scratch (checkout + install +
+      # build) rather than failing — the build job's output cache is not
+      # guaranteed to survive a cache-service hiccup or eviction.
+      - name: Fallback checkout (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
@@ -115,6 +131,11 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      - name: Fallback build (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
       - name: Test packages
         run: pnpm run test
 
@@ -126,13 +147,19 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore build cache
+        id: cache
         uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
-          fail-on-cache-miss: true
+      # On a build-cache miss, reconstruct from scratch (checkout + install +
+      # build) rather than failing — the build job's output cache is not
+      # guaranteed to survive a cache-service hiccup or eviction.
+      - name: Fallback checkout (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
@@ -140,6 +167,11 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      - name: Fallback build (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
       - name: Lint packages
         run: pnpm run lint:all
 
@@ -151,13 +183,19 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore build cache
+        id: cache
         uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
-          fail-on-cache-miss: true
+      # On a build-cache miss, reconstruct from scratch (checkout + install +
+      # build) rather than failing — the build job's output cache is not
+      # guaranteed to survive a cache-service hiccup or eviction.
+      - name: Fallback checkout (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
@@ -165,6 +203,11 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      - name: Fallback build (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
       - name: Type check packages
         run: pnpm run types
 
@@ -188,13 +231,19 @@ jobs:
     if: needs.changes.outputs.code != 'true'
     steps:
       - name: Restore workspace cache
+        id: cache
         uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
-          fail-on-cache-miss: true
+      # Cache misses are rare (setup runs first and saves the workspace) but
+      # not impossible — a cache-service hiccup, eviction, or size limit
+      # shouldn't fail the run when a plain checkout + install can proceed.
+      - name: Fallback checkout (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
@@ -202,6 +251,9 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      - name: Fallback install (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile
       # lint:all runs type-aware ESLint across the whole monorepo, which
       # needs each workspace package's built type declarations. Without a
       # build, cross-package imports resolve to `any`/error and trip

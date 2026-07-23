@@ -2,8 +2,8 @@
 # Checks out code, installs dependencies, and caches the workspace.
 #
 # Changes from legacy version:
-# - Replaced manual sparse checkout (raw git commands) with actions/checkout@v6
-# - Uses pnpm-lock.yaml hash for cache key (instead of github.sha which never hits)
+# - Replaced manual sparse checkout (raw git commands) with actions/checkout@v7
+# - Caches the pnpm store by pnpm-lock.yaml hash (instead of github.sha which never hits)
 # - Uses --frozen-lockfile instead of --force for faster, safer installs
 # - Simplified tag resolution logic
 
