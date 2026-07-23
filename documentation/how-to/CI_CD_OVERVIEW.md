@@ -46,9 +46,9 @@ This document provides a high-level overview of all GitHub Actions workflows in 
 
 `_setup.yml` is the shared entry point for almost every other workflow (~10 callers). It runs as a single job that:
 
-1. Checks out the repository with `actions/checkout@v6` (`fetch-depth: 1`)
+1. Checks out the repository with `actions/checkout@v7` (`fetch-depth: 1`)
 2. Restores the pnpm store cache (key: `${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}`, with a `restore-keys` fallback)
-3. Installs Node via `actions/setup-node@v6` and pnpm via `pnpm/action-setup@v6`
+3. Installs Node via `actions/setup-node@v7` and pnpm via `pnpm/action-setup@v6`
 4. Installs dependencies with `pnpm install --frozen-lockfile`
 5. Saves the full workspace (`./*` + `~/.pnpm-store`) under the caller-supplied `cacheKey` so downstream jobs can restore it
 
@@ -202,8 +202,12 @@ npm publishing no longer uses an `NPM_TOKEN` secret — see [Trusted publishing 
 
 ### Storybook deployment fails
 
-- **Azure login failure:** Verify `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` are set as repository variables.
-- **Connection string issues:** Each Storybook environment has its own connection string secret. Verify the correct one is configured.
+- **Connection string issues:** Storybook deploys authenticate with the storage connection string via the `deploy-storybook` action; they do **not** run `azure/login`. Each Storybook target has its own secret (`AZ_STORYBOOK_CONNECTION_STRING`, `AZ_STORAGE_STORYBOOK_DATAGRID_CONNECTION_STRING`, `AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING`). Verify the correct one is configured for the environment.
+- **Missing deploy action:** The `publish-storybook` jobs restore a workspace cache that excludes dot-directories, so they sparse-checkout `.github` before invoking `./.github/actions/deploy-storybook`. An "action not found" error usually means that checkout step is missing.
+
+### Azure OIDC login fails (setup, purge-cdn, publish-assets)
+
+- **Azure login failure:** The OIDC workflows (`setup_azure`, `_purge_cdn`, `publish_assets_to_cdn`) authenticate via `azure/login`. Verify `AZURE_CLIENT_ID` (an **environment** variable, set on both `development` and `production`) and `AZURE_TENANT_ID` (a **repository** variable) exist, and that the calling job grants `id-token: write`.
 
 ### Release Please not detecting changes
 

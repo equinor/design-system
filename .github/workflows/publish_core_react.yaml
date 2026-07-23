@@ -208,6 +208,12 @@ jobs:
     if: github.event.inputs.npm-tag == 'latest'
     needs: publish-storybook
     name: Purge cdn
+    # _purge_cdn.yaml logs into Azure via OIDC; the workflow-level permissions
+    # grant only contents: read, so grant id-token here or the reusable
+    # workflow can't request a token.
+    permissions:
+      contents: read
+      id-token: write
     uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:

@@ -43,6 +43,12 @@ jobs:
   # ─── Detect what changed to skip unnecessary jobs ───────────────
   changes:
     runs-on: ubuntu-latest
+    # dorny/paths-filter fetches the PR's changed-file list via the REST API on
+    # pull_request events, which needs pull-requests: read on top of the
+    # workflow's contents: read.
+    permissions:
+      contents: read
+      pull-requests: read
     outputs:
       code: ${{ steps.filter.outputs.code }}
     steps:
@@ -283,7 +289,7 @@ jobs:
             "test:${{ needs.test.result }}" \
             "lint:${{ needs.lint.result }}" \
             "types:${{ needs.types.result }}" \
-            "lint-only:${{ needs.lint-only.result }}"; do
+            "lint-only:${{ needs['lint-only'].result }}"; do
             job="${result%%:*}"
             status="${result#*:}"
             if [ "$status" = "failure" ] || [ "$status" = "cancelled" ]; then
