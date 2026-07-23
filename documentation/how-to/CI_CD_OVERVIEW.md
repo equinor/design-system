@@ -85,9 +85,7 @@ graph LR
     LO --> CP
 ```
 
-**Path filtering:** If only documentation, workflows, or config files changed, only lint runs -- build/test/types are skipped.
-
-**Parallelism:** After the build step completes, test, lint, and type-check run in parallel for faster feedback.
+**Path filtering:** If only documentation, workflows, or config files changed, the checks workflow runs the lint-only path (test/types are skipped), and it builds first so type-aware linting can resolve cross-package types.
 
 ## Release Pipeline
 
