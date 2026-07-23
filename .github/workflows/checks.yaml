@@ -52,7 +52,11 @@ jobs:
     outputs:
       code: ${{ steps.filter.outputs.code }}
     steps:
+      # fetch-depth: 2 so dorny/paths-filter can diff against the previous
+      # commit on push events (the default depth of 1 omits it).
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
       # SHA-pinned (v3.0.2) — third-party action running on every PR; pin to an
       # immutable commit so a compromised tag can't inject code into CI.
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
