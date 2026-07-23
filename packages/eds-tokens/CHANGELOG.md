@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.1...eds-tokens@v3.0.0-beta.2) (2026-07-22)
+
+
+### ✨ Added
+
+* add bundled variables.css to the Tokens Studio release pipeline ([#5209](https://github.com/equinor/design-system/issues/5209)) ([1243030](https://github.com/equinor/design-system/commit/1243030ac8175465241c4e9ea288393f00693010))
+
+## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.0...eds-tokens@v3.0.0-beta.1) (2026-07-20)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5182](https://github.com/equinor/design-system/issues/5182)) ([6074f72](https://github.com/equinor/design-system/commit/6074f721b4072741c50498d63c10ab3ebe45185e))
+
+## [2.3.2](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.1...eds-tokens@v2.3.2) (2026-07-20)
+
+Documentation-only release — no token changes.
+
+### 📝 Documentation
+
+* mark the legacy `tokens` JavaScript object as deprecated (do not use in new code) and flag the CSS variables as transitional: still the supported option for production, but the variable names will be replaced by the new token structure (currently on `@equinor/eds-tokens@beta`) in the next major release ([#5120](https://github.com/equinor/design-system/issues/5120))
+
+## [2.3.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.0...eds-tokens@v2.3.1) (2026-06-23)
+
+
+### 🐛 Fixed
+
+* propagate density-aware spacing aliases to comfortable mode ([#5091](https://github.com/equinor/design-system/issues/5091)) ([331477d](https://github.com/equinor/design-system/commit/331477decf681fce4db1a385c8533e2574f38ca4))
+
 ## [2.3.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.2.0...eds-tokens@v2.3.0) (2026-05-21)
 
 > **Heads-up for downstream bundler setups:** Dark mode tokens are now emitted as explicit `[data-color-scheme="dark"]` scope rules instead of `light-dark()`. This fixes dark mode in bundlers that use lightningcss (including Vite 8+). No action required for most consumers — if you process the tokens CSS through your own build pipeline, the output no longer contains `light-dark()`.

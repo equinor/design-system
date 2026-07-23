@@ -30,9 +30,9 @@
     "tailwindcss": ">=4.0.0 <5"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.2.4",
-    "tailwindcss": "^4.2.4",
-    "vite": "^8.0.10"
+    "@tailwindcss/vite": "^4.3.2",
+    "tailwindcss": "^4.3.2",
+    "vite": "^8.1.4"
   },
   "scripts": {
     "dev": "vite",

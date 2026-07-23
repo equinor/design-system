@@ -13,14 +13,32 @@ pnpm add @equinor/eds-tokens
 
 ## Usage
 
+> **⚠️ Transition notice.** The token structure in this package is being
+> replaced. The replacement is developed on the beta line
+> (`@equinor/eds-tokens@beta`) and ships as the next major release.
+>
+> * **Need tokens today?** Use the CSS variables — they are the supported
+>   option for production and keep working throughout 2.x. Expect the
+>   variable names to change in the next major release; keeping direct
+>   variable references few and centralised will make that migration cheap.
+> * **Do not** adopt the legacy `tokens` JavaScript object in new code — it
+>   is deprecated and will be removed in the next major release.
+> * The beta line is for testing and feedback, not production use.
+
 The package provides two token systems:
 
-* **CSS Variables (Recommended)** -- Modern, theme-aware design tokens synced from Figma
-* **Legacy Tokens** -- Original token format, still supported for backward compatibility
+* **CSS Variables** -- Theme-aware design tokens synced from Figma. Supported for production; the variable names will change in the next major release.
+* **Legacy Tokens** -- Original token format. Deprecated: do not use in new code.
 
 ---
 
-## CSS Variables (Recommended)
+## CSS Variables
+
+> These `--eds-*` variables will be replaced by the new token structure in
+> the next major release. They remain the supported way to consume EDS
+> tokens today (`@equinor/eds-core-react` 2.x requires `css/variables`) —
+> just keep direct variable references organised so the rename in the next
+> major is easy to absorb.
 
 The new token system uses CSS custom properties that automatically adapt to light and dark color schemes via explicit `[data-color-scheme]` scope rules with a `prefers-color-scheme` media-query fallback. These tokens are directly synced from Figma variables.
 
@@ -309,9 +327,9 @@ These utilities use modern CSS features (`text-box-trim`) and gracefully degrade
 
 ---
 
-## Legacy Tokens (Backward Compatible)
+## Legacy Tokens (deprecated — do not use)
 
-The original token format is still available for existing applications. These tokens use a structured JavaScript object format.
+**Deprecated.** The original token format remains published only so existing applications keep working, and will be removed in the next major release. These tokens use a structured JavaScript object format.
 
 ### Using Legacy Tokens in JavaScript/TypeScript
 
@@ -334,7 +352,7 @@ const typography = tokens.typography.heading.h1
 * Interaction states
 * Typography (`ot`, `woff` or `woff2` font required)
 
-> We recommend migrating to CSS Variables for new projects to benefit from automatic theme support and better performance.
+> Do not adopt these legacy tokens in new projects. If you need tokens today, use the CSS variables above; the long-term replacement is the new token structure currently on the beta line (`@equinor/eds-tokens@beta`).
 
 [design tokens]: https://css-tricks.com/what-are-design-tokens/
 

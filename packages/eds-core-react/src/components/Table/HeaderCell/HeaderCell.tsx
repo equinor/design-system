@@ -37,11 +37,13 @@ const StyledTableCell = styled.th((props: BaseProps) => {
 
   if (ariaSort && ariaSort !== 'none') {
     sortStylingActive = css`
-      ${activeToken.border.type === 'bordergroup'
-        ? css`
-            border-color: ${activeToken.border.bottom.color};
-          `
-        : ''};
+      ${
+        activeToken.border.type === 'bordergroup'
+          ? css`
+              border-color: ${activeToken.border.bottom.color};
+            `
+          : ''
+      };
       background: ${activeToken.background};
       color: ${activeToken.typography.color};
     `
@@ -77,13 +79,15 @@ const StyledTableCell = styled.th((props: BaseProps) => {
       font-weight: inherit;
     }
 
-    ${$sticky
-      ? css`
-          position: sticky;
-          top: 0;
-          z-index: 1;
-        `
-      : ''}
+    ${
+      $sticky
+        ? css`
+            position: sticky;
+            top: 0;
+            z-index: 1;
+          `
+        : ''
+    }
   `
 })
 

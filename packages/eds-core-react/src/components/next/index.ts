@@ -74,3 +74,23 @@ export type { MenuProps, MenuItemProps } from './Menu'
 
 export { Autocomplete } from './Autocomplete'
 export type { AutocompleteProps } from './Autocomplete'
+
+export { Select } from './Select'
+export type { SelectProps } from './Select'
+
+export { Badge } from './Badge'
+export type {
+  BadgeProps,
+  BadgeTone,
+  BadgeEmphasis,
+  BadgeVariant,
+} from './Badge'
+
+export { Dialog } from './Dialog'
+export type {
+  DialogActionsProps,
+  DialogContentProps,
+  DialogHeaderProps,
+  DialogProps,
+  DialogTitleProps,
+} from './Dialog'

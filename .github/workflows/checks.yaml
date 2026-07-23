@@ -45,7 +45,7 @@ jobs:
     outputs:
       code: ${{ steps.filter.outputs.code }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       # SHA-pinned (v3.0.2) — third-party action running on every PR; pin to an
       # immutable commit so a compromised tag can't inject code into CI.
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
@@ -65,7 +65,7 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore workspace cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
@@ -73,16 +73,20 @@ jobs:
           key: ${{ env.CACHE_KEY }}
           fail-on-cache-miss: true
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      # Must run BEFORE the build: `prebuild` regenerates the index in the
+      # workspace, which would mask a stale committed file.
+      - name: Check AI component index freshness
+        run: pnpm run generate:component-index --check
       - name: Build packages
         run: pnpm run build
       - name: Cache build output
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: |
             ./*
@@ -97,7 +101,7 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
@@ -105,7 +109,7 @@ jobs:
           key: ${{ env.CACHE_KEY }}-built
           fail-on-cache-miss: true
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false
@@ -122,7 +126,7 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
@@ -130,7 +134,7 @@ jobs:
           key: ${{ env.CACHE_KEY }}-built
           fail-on-cache-miss: true
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false
@@ -147,7 +151,7 @@ jobs:
     if: needs.changes.outputs.code == 'true'
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
@@ -155,7 +159,7 @@ jobs:
           key: ${{ env.CACHE_KEY }}-built
           fail-on-cache-miss: true
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false
@@ -184,7 +188,7 @@ jobs:
     if: needs.changes.outputs.code != 'true'
     steps:
       - name: Restore workspace cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
@@ -192,7 +196,7 @@ jobs:
           key: ${{ env.CACHE_KEY }}
           fail-on-cache-miss: true
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false

@@ -2,6 +2,10 @@
 
 Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS components and product teams.
 
+## Two pipelines coexist
+
+The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns everything in the published `exports` map (`build/`). The **new Tokens Studio pipeline** writes generated output to `src/tokens/{raw,css,dtcg,ts}` via `.github/workflows/tokens_studio_release.yaml` — those directories are **generated, never edit them by hand**. During the Tokens Studio rewrite the **whole package is in beta**: every release is a pinned `3.0.0-beta.N` on the npm `beta` dist-tag (no stable releases until the rework graduates as `3.0.0`; `latest` stays on the last 2.x). The version is release-please-managed in `version.txt` at the package root — `package.json` stays on the last stable version so pnpm's `workspace:^` rewriting keeps other packages' stable releases depending on stable tokens — and `publish_tokens.yaml` sets the beta version and injects the generated `src/tokens` directories into `files`/`exports` at publish time. The TS modules are produced by `pnpm run generate:ts-tokens` (`scripts/generate-ts-tokens.mjs` — DTCG export for structure + CSS export for evaluated values; the script header documents the mechanics). Canonical pipeline doc: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../documentation/agent-instructions/TOKENS_STUDIO.md).
+
 ## Build Pipeline (3 steps)
 
 ```

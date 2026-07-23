@@ -37,14 +37,17 @@ jobs:
             echo "✅ Title matches Conventional Commits"
           else
             echo "❌ Invalid title: Must follow conventional commit format"
-            echo "   Valid formats:"
+            echo "   Default format (scope is optional and usually omitted):"
             echo "     • type: description"
+            echo "     • type!: breaking change description"
+            echo "   With scope (only when needed — see AGENTS.md):"
             echo "     • type(scope): description"
             echo "     • type(scope)!: breaking change description"
             echo "   Examples:"
+            echo "     • fix: resolve TextArea helper spacing"
             echo "     • feat: add new component"
-            echo "     • fix(eds-tokens): resolve build issue"
-            echo "     • feat(core)!: remove deprecated API"
+            echo "     • chore(config): update release-please config"
+            echo "     • feat!: remove deprecated API"
             exit 1
           fi
 

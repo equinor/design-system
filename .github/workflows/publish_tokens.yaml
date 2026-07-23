@@ -5,16 +5,17 @@ on:
   workflow_dispatch:
     inputs:
       npm-tag:
-        description: 'Tag for npm package (next | latest)'
+        description: "Tag for npm package (next | latest | beta)"
         required: true
         type: choice
         options:
           - next
           - latest
-        default: 'next'
+          - beta
+        default: "next"
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  NODE_VERSION: '24.16.0'
+  NODE_VERSION: "24.16.0"
   CACHE_KEY: ${{ github.sha }}-publish-tokens
 
 jobs:
@@ -32,14 +33,14 @@ jobs:
     needs: setup
     steps:
       - name: Restore workspace cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false
@@ -48,7 +49,7 @@ jobs:
       - name: Build packages
         run: pnpm run build
       - name: Cache build output
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: |
             ./*
@@ -70,20 +71,64 @@ jobs:
       id-token: write
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      # Beta releases publish the pinned 3.0.0-beta.N version managed by
+      # release-please in version.txt. package.json stays at the last
+      # stable version in git so that pnpm's workspace:^ rewriting keeps
+      # other packages' stable releases depending on stable tokens.
+      - name: Set beta version from version.txt
+        if: github.event.inputs.npm-tag == 'beta'
+        run: |
+          BETA_VERSION=$(tr -d '[:space:]' < packages/eds-tokens/version.txt)
+          echo "Beta version: $BETA_VERSION"
+          cd packages/eds-tokens
+          npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
+          echo "Updated package.json version to $BETA_VERSION"
+      # The Tokens Studio pipeline output (src/tokens/{css,dtcg,ts}) is only
+      # published on the beta line, additively under ./next/* subpaths. The
+      # stable specifiers (./css/variables etc.) keep serving the legacy
+      # build while /next components migrate to the new variable names;
+      # once that migration completes, a beta release drops the legacy build
+      # and moves this output to the final specifiers — before graduation,
+      # so the 3.0.0 export surface is tested in beta. See
+      # documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md.
+      # Ordering dependency: these package.json edits (and the version bump
+      # above) happen before `pnpm publish` runs prepublishOnly (the build) —
+      # if a build step ever starts generating package.json, it would
+      # silently overwrite them.
+      - name: Add Tokens Studio output for beta release
+        if: github.event.inputs.npm-tag == 'beta'
+        run: |
+          cd packages/eds-tokens
+          for dir in src/tokens/css src/tokens/dtcg src/tokens/ts; do
+            if [ ! -d "$dir" ]; then
+              echo "::error title=Missing Tokens Studio output::$dir does not exist — a beta cannot be published before the first tokens_studio_release PR has been merged"
+              exit 1
+            fi
+          done
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            pkg.files.push('src/tokens/css/*', 'src/tokens/dtcg/*', 'src/tokens/ts/*');
+            pkg.exports['./next/css/*'] = './src/tokens/css/*';
+            pkg.exports['./next/dtcg/*'] = './src/tokens/dtcg/*';
+            pkg.exports['./next/ts/*'] = './src/tokens/ts/*';
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+            console.log('Added Tokens Studio output to files and exports');
+          "
       - name: Publish to npm
         run: pnpm --filter @equinor/eds-tokens publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack

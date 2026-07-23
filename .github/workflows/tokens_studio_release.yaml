@@ -1,0 +1,119 @@
+name: Tokens Studio release
+# Triggered by the outbound CI trigger in Tokens Studio (Integrations →
+# CI Triggers). Studio sends a repository_dispatch event with this event
+# type when a release is created. Note: repository_dispatch only triggers
+# workflows on the default branch.
+#
+# The payload does not include the release version, so the workflow pulls
+# the current state of the sources configured in
+# packages/eds-tokens/.studio.json and opens a PR with any changes.
+on:
+  repository_dispatch:
+    types: [tokens-release]
+# Two releases in quick succession would otherwise race on the shared
+# tokens-studio-release branch — serialise runs instead
+concurrency:
+  group: tokens-studio-release
+  cancel-in-progress: false
+jobs:
+  setup:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/_setup.yml
+    secrets: inherit
+    with:
+      cacheKey: ${{ github.sha }}-tokens-studio-release
+      checkout_paths: packages/eds-tokens
+  pull-tokens:
+    name: Pull tokens from Tokens Studio
+    runs-on: ubuntu-latest
+    needs: setup
+    timeout-minutes: 15
+    permissions:
+      # OIDC token so the studio CLI can authenticate against the
+      # Tokens Studio CI integration (no service token needed)
+      id-token: write
+      # Create the branch and pull request with the pulled changes
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Log release payload
+        env:
+          EVENT_TYPE: ${{ github.event.action }}
+          CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: |
+          echo "Received repository_dispatch event: $EVENT_TYPE"
+          echo "$CLIENT_PAYLOAD" | jq .
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24.16.0'
+      - name: Use "setup" cache
+        id: setup-cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-tokens-studio-release
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      # Fallback if the cache from the setup job was evicted — without it
+      # the workspace is empty and the studio binary is missing
+      - name: Checkout (cache-miss fallback)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
+      - name: Install dependencies (cache-miss fallback)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        run: pnpm install --force
+      - name: Pull tokens from Tokens Studio
+        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
+      # Runs the saved export configurations on the platform and writes
+      # the generated files. This output will replace the local Style
+      # Dictionary build in the new pipeline — it is not yet wired into
+      # the package exports map.
+      # The exports are referenced by ID, not name — a rename in Tokens
+      # Studio must not break the pipeline (it already happened once).
+      # --verbose because the run is unattended and the resulting PR gets
+      # no CI — the Actions log is the only place to diagnose a bad export
+      - name: Run CSS export from Tokens Studio (EDS-CSS)
+        run: pnpm --filter @equinor/eds-tokens exec studio exports run 39d37416-632b-4f04-b49b-cfaec63e3baa --ci --verbose --out src/tokens/css
+      - name: Run DTCG export from Tokens Studio (EDS-DTCG)
+        run: pnpm --filter @equinor/eds-tokens exec studio exports run 019463d4-9bef-4e37-9425-6de80eec87c8 --ci --verbose --out src/tokens/dtcg
+      # TypeScript token modules are generated locally from the DTCG
+      # export (structure) + CSS export (evaluated values) — the platform
+      # has no TS export format. See the script header for details.
+      - name: Generate TypeScript tokens
+        run: pnpm --filter @equinor/eds-tokens run generate:ts-tokens
+      # Concatenate the generated CSS into one committed bundle (adds
+      # no behaviour on top of the generated files, deliberately not
+      # minified — ADR-0010). Importable on the beta line as
+      # @equinor/eds-tokens/next/css/variables.css via the ./next/css/*
+      # wildcard publish_tokens.yaml already injects.
+      - name: Bundle CSS into variables.css
+        run: pnpm --filter @equinor/eds-tokens run generate:css-bundle
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          # feat: so release-please cuts an eds-tokens beta (3.0.0-beta.N)
+          # when the PR is squash-merged (chore: would not trigger a
+          # release). During the beta the commit type doesn't affect the
+          # version — the prerelease strategy pins the base and only
+          # increments the counter — but feat lands the entry under
+          # "Added" in the changelog, which is what a token update is.
+          commit-message: 'feat: update tokens from Tokens Studio release'
+          title: 'feat: update tokens from Tokens Studio release'
+          body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`), generated CSS (EDS-CSS export) into `packages/eds-tokens/src/tokens/css/`, DTCG (EDS-DTCG export) into `src/tokens/dtcg/`, TypeScript modules generated from the two into `src/tokens/ts/`, and the bundled `src/tokens/css/variables.css` (concatenation of the CSS export, per ADR-0010).'
+          branch: tokens-studio-release
+      # This workflow runs unattended (release-triggered) and the PR it
+      # creates gets no CI runs, so a failed pull must not be silent
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()

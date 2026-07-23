@@ -131,8 +131,40 @@ async function buildDensityDictionary({
   selector,
   rootName,
 }: BuildDensityOptions) {
-  // Aggregated tokens should only appear in the nested TS output.
-  // CSS, JS, and JSON have their own dedicated builds for these tokens.
+  // Most aggregated tokens are size-nested (e.g. generic.gap.xs.horizontal →
+  // eds-generic-gap-xs-horizontal) and have dedicated per-size CSS builds, so
+  // they're excluded from CSS/JS/JSON to avoid duplicate output. They still
+  // flow into the nested TS output.
+  //
+  // The exception: bare aliases (e.g. generic-gap-vertical, selectable-space-vertical,
+  // spacing-proportions-xs-vertical). These exist *only* in the aggregated
+  // source and need to appear in CSS density blocks so density values
+  // propagate through the alias chain — see #5090.
+  // Top-level aggregated keys whose tokens are size-suffixed (and have their
+  // own dedicated per-size CSS builds) — exclude them from density CSS. The
+  // top-level keys `container-space` and `page-space` are NOT in this set:
+  // their JSON nesting (`{horizontal, vertical}`) is just shape, the produced
+  // variable names (`eds-container-space-horizontal` etc.) are already bare
+  // aliases that need to participate in density CSS output.
+  const NESTED_AGGREGATED_ROOTS = new Set([
+    'generic',
+    'spacing-proportions',
+    'selectable-space',
+  ])
+  const isBareAliasFromAggregated = (token: TransformedToken): boolean =>
+    token.filePath.includes('eds-aggregated-spacing') &&
+    token.path.length >= 1 &&
+    !NESTED_AGGREGATED_ROOTS.has(token.path[0])
+
+  // For CSS: include non-aggregated tokens + bare aliases.
+  const cssFilter = (token: TransformedToken): boolean => {
+    if (!filter(token)) return false
+    if (!token.filePath.includes('eds-aggregated-spacing')) return true
+    return isBareAliasFromAggregated(token)
+  }
+
+  // For JS/JSON: keep the original behaviour (no aggregated tokens — they have
+  // their own dedicated builds for these consumers).
   const nonAggregatedFilter = (token: TransformedToken): boolean =>
     filter(token) && !token.filePath.includes('eds-aggregated-spacing')
 
@@ -176,7 +208,7 @@ async function buildDensityDictionary({
       transforms,
       files: [
         {
-          filter: nonAggregatedFilter,
+          filter: cssFilter,
           destination: `${name}.css`,
           format: 'css/variables',
           options: {
@@ -286,6 +318,35 @@ function createAggregatedSpacingJson() {
       ]),
     )
 
+  // Bare-named aliases — these mirror the aliases otherwise declared at :root
+  // in per-axis CSS files (e.g. generic-gap-vertical-xs.css, container-space.css,
+  // semantic-spacing-gap.css, space-proportions-squared.css). When fed through
+  // buildDensityDictionary they are re-emitted with resolved values inside the
+  // [data-density="comfortable"] / [data-density="spacious"] blocks, which is
+  // what makes density propagate through the alias chain. Fixes #5090.
+  //
+  // Defaults match the :root selector of each per-axis file:
+  //   generic-{gap,space}    → XS
+  //   selectable-space       → XS (squared)
+  //   spacing-proportions    → squared variant (used directly by Chip/Input/Select)
+  //   container-space        → MD-squared
+  //   page-space             → XL-squared
+  //   selectable-gap         → XS  (from semantic-spacing-gap.css)
+  //   container-gap          → MD
+  //   page-gap               → XL
+  const spacingProportionsFlat = Object.fromEntries(
+    insetSizes.flatMap((s) => [
+      [
+        `spacing-proportions-${s}-horizontal`,
+        numToken(`{spacing.inset.${s}.horizontal}`),
+      ],
+      [
+        `spacing-proportions-${s}-vertical`,
+        numToken(`{spacing.inset.${s}.vertical-squared}`),
+      ],
+    ]),
+  )
+
   return {
     generic: {
       gap: buildGenericScale(),
@@ -301,6 +362,23 @@ function createAggregatedSpacingJson() {
       horizontal: numToken('{spacing.inset.xl.horizontal}'),
       vertical: numToken('{spacing.inset.xl.vertical-squared}'),
     },
+    // Bare aliases (see comment above) — included in CSS density output via
+    // `isBareAliasFromAggregated` in buildDensityDictionary.
+    'generic-gap-horizontal': numToken('{spacing.horizontal.xs}'),
+    'generic-gap-vertical': numToken('{spacing.vertical.xs}'),
+    'generic-space-horizontal': numToken('{spacing.horizontal.xs}'),
+    'generic-space-vertical': numToken('{spacing.vertical.xs}'),
+    'selectable-space-horizontal': numToken('{spacing.inset.xs.horizontal}'),
+    'selectable-space-vertical': numToken(
+      '{spacing.inset.xs.vertical-squared}',
+    ),
+    ...spacingProportionsFlat,
+    'selectable-gap-horizontal': numToken('{spacing.horizontal.xs}'),
+    'selectable-gap-vertical': numToken('{spacing.vertical.xs}'),
+    'container-gap-horizontal': numToken('{spacing.horizontal.md}'),
+    'container-gap-vertical': numToken('{spacing.vertical.md}'),
+    'page-gap-horizontal': numToken('{spacing.horizontal.xl}'),
+    'page-gap-vertical': numToken('{spacing.vertical.xl}'),
   }
 }
 
@@ -402,9 +480,14 @@ export async function createSpacingAndTypographyVariables({
     (token: TransformedToken): boolean => {
       const name = token.name.toLowerCase()
       if (DENSITY_EXCLUSIONS.some((ex) => name.includes(ex))) return false
-      // Exclude icon container sizing (e.g. sizing-icon-xs-container) but NOT container-space
-      if (name.includes('-container') && !name.startsWith('container-space'))
-        return false
+      // Exclude icon container sizing tokens (named like
+      // `*-icon-{size}-container`). Earlier this used `includes('-container')`
+      // with a `startsWith('container-space')` allow-list, but `token.name`
+      // carries the `eds-` prefix at filter time, so the allow-list never
+      // matched and container-space / container-gap tokens were silently
+      // dropped from density CSS output. `endsWith` matches the intended
+      // pattern precisely without affecting tokens that start with container-.
+      if (name.endsWith('-container')) return false
       // Include tokens from density file OR aggregated file
       return (
         token.filePath.includes(densitySegment) ||

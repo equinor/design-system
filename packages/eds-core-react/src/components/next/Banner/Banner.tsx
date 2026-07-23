@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
 import { close } from '@equinor/eds-icons'
-import { TypographyNext } from '../../Typography'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import type {
@@ -15,7 +14,7 @@ const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
     return (
       <span
         ref={ref}
-        className={['eds-banner__icon', className].filter(Boolean).join(' ')}
+        className={['icon', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
@@ -27,19 +26,13 @@ const BannerIcon = forwardRef<HTMLSpanElement, BannerIconProps>(
 const BannerMessage = forwardRef<HTMLParagraphElement, BannerMessageProps>(
   function BannerMessage({ className, children, ...rest }, ref) {
     return (
-      <TypographyNext
+      <p
         ref={ref}
-        as="p"
-        family="ui"
-        size="md"
-        baseline="center"
-        lineHeight="default"
-        tracking="normal"
-        className={['eds-banner__message', className].filter(Boolean).join(' ')}
+        className={['message', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
-      </TypographyNext>
+      </p>
     )
   },
 )
@@ -52,7 +45,7 @@ const BannerActions = forwardRef<HTMLDivElement, BannerActionsProps>(
     return (
       <div
         ref={ref}
-        className={['eds-banner__actions', className].filter(Boolean).join(' ')}
+        className={['actions', className].filter(Boolean).join(' ')}
         data-placement={placement}
         {...rest}
       >
@@ -80,7 +73,7 @@ const BannerComponent = forwardRef<HTMLDivElement, BannerProps>(function Banner(
           variant="ghost"
           icon
           size="small"
-          className="eds-banner__dismiss"
+          className="dismiss"
           aria-label="Dismiss"
           onClick={onDismiss}
         >

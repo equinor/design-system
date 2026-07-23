@@ -8,9 +8,6 @@ import { Field } from '../Field'
 import { Icon } from '../Icon'
 import type { RadioProps } from './Radio.types'
 
-const classNames = (...classes: (string | boolean | undefined)[]) =>
-  classes.filter(Boolean).join(' ')
-
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   { label, disabled = false, id: providedId, ...rest },
   ref,
@@ -23,21 +20,21 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <input
         type="radio"
         id={inputId}
-        className="eds-radio__input"
+        className="input"
         disabled={disabled}
         ref={ref}
         {...rest}
       />
-      <span className="eds-radio__icon-wrapper">
+      <span className="icon-wrapper">
         <Icon
           data={radio_button_selected}
           size="lg"
-          className="eds-radio__icon eds-radio__icon--checked"
+          className="icon icon-checked"
         />
         <Icon
           data={radio_button_unselected}
           size="lg"
-          className="eds-radio__icon eds-radio__icon--unchecked"
+          className="icon icon-unchecked"
         />
       </span>
     </>
@@ -62,7 +59,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
 
   return (
     <span
-      className={classNames('eds-radio', 'eds-radio--standalone')}
+      className="eds-radio"
+      data-standalone={true}
       data-color-appearance={disabled ? 'neutral' : 'accent'}
       data-disabled={disabled || undefined}
     >

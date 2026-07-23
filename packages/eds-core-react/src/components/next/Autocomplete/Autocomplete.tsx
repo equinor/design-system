@@ -12,7 +12,12 @@ import {
   type ReactElement,
   type RefAttributes,
 } from 'react'
-import { search as searchIcon, close, add_box } from '@equinor/eds-icons'
+import {
+  search as searchIcon,
+  close,
+  add_box,
+  refresh,
+} from '@equinor/eds-icons'
 import type { AutocompleteProps } from './Autocomplete.types'
 import {
   defaultOptionsFilter,
@@ -25,12 +30,9 @@ import { Input } from '../Input'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
 import { Menu, MenuItem } from '../Menu'
-// TODO: replace with next/Progress when available
-import { Progress } from '../../Progress'
 
 type OptionItem<T> =
-  | { type: 'list'; value: T }
-  | { type: 'custom'; value: string }
+  { type: 'list'; value: T } | { type: 'custom'; value: string }
 
 function AutocompleteInner<T = string>(
   {
@@ -486,7 +488,13 @@ function AutocompleteInner<T = string>(
             startAdornment={<Icon data={searchIcon} className="search-icon" />}
             endAdornment={
               loading ? (
-                <Progress.Circular size={16} />
+                // TODO: replace with next/Progress when available
+                <Icon
+                  data={refresh}
+                  size="xs"
+                  className="loading-icon"
+                  aria-label="Loading"
+                />
               ) : (
                 <Button
                   variant="ghost"

@@ -5,3 +5,4 @@ packages:
 
 onlyBuiltDependencies:
   - lightningcss-cli
+  - '@tokens-studio/studio-cli'

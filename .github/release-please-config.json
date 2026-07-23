@@ -7,29 +7,31 @@
       "package-name": "@equinor/eds-core-react",
       "component": "eds-core-react",
       "exclude-paths": [
-        "src/components/next",
-        ".storybook",
-        "stories",
-        "tests",
-        ".gitignore",
-        ".cachebust",
-        "rollup.config.js",
-        "jest.config.cjs",
-        "jest.setup.ts",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "tsconfig.test.json",
-        "playwright.config.ts",
-        "Dockerfile.storybook",
-        "nginx.conf",
-        "README.md",
-        "FIGMA_CODE_CONNECT.md",
-        "figma.config.json"
+        "packages/eds-core-react/src/components/next",
+        "packages/eds-core-react/.storybook",
+        "packages/eds-core-react/stories",
+        "packages/eds-core-react/tests",
+        "packages/eds-core-react/.gitignore",
+        "packages/eds-core-react/.cachebust",
+        "packages/eds-core-react/rollup.config.js",
+        "packages/eds-core-react/jest.config.cjs",
+        "packages/eds-core-react/jest.setup.ts",
+        "packages/eds-core-react/tsconfig.json",
+        "packages/eds-core-react/tsconfig.build.json",
+        "packages/eds-core-react/tsconfig.test.json",
+        "packages/eds-core-react/playwright.config.ts",
+        "packages/eds-core-react/Dockerfile.storybook",
+        "packages/eds-core-react/nginx.conf",
+        "packages/eds-core-react/README.md",
+        "packages/eds-core-react/FIGMA_CODE_CONNECT.md",
+        "packages/eds-core-react/figma.config.json"
       ]
     },
     "packages/eds-core-react/src/components/next": {
       "release-type": "simple",
       "component": "eds-core-react-next",
+      "versioning": "prerelease",
+      "prerelease": true,
       "prerelease-type": "beta"
     },
     "packages/eds-data-grid-react": {
@@ -37,17 +39,17 @@
       "package-name": "@equinor/eds-data-grid-react",
       "component": "eds-data-grid-react",
       "exclude-paths": [
-        ".storybook",
-        "src/tests",
-        "src/stories",
-        "src/EdsDataGrid.stories.tsx",
-        "jest.config.ts",
-        "jest.setup.ts",
-        "rollup.config.js",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "tsconfig.test.json",
-        "README.md"
+        "packages/eds-data-grid-react/.storybook",
+        "packages/eds-data-grid-react/src/tests",
+        "packages/eds-data-grid-react/src/stories",
+        "packages/eds-data-grid-react/src/EdsDataGrid.stories.tsx",
+        "packages/eds-data-grid-react/jest.config.ts",
+        "packages/eds-data-grid-react/jest.setup.ts",
+        "packages/eds-data-grid-react/rollup.config.js",
+        "packages/eds-data-grid-react/tsconfig.json",
+        "packages/eds-data-grid-react/tsconfig.build.json",
+        "packages/eds-data-grid-react/tsconfig.test.json",
+        "packages/eds-data-grid-react/README.md"
       ]
     },
     "packages/eds-icons": {
@@ -55,9 +57,9 @@
       "package-name": "@equinor/eds-icons",
       "component": "eds-icons",
       "exclude-paths": [
-        "rollup.config.js",
-        "tsconfig.json",
-        "README.md"
+        "packages/eds-icons/rollup.config.js",
+        "packages/eds-icons/tsconfig.json",
+        "packages/eds-icons/README.md"
       ]
     },
     "packages/eds-lab-react": {
@@ -65,39 +67,43 @@
       "package-name": "@equinor/eds-lab-react",
       "component": "eds-lab-react",
       "exclude-paths": [
-        ".storybook",
-        "stories",
-        "src/stories",
-        "babel.config.cjs",
-        "jest.config.cjs",
-        "jest.setup.ts",
-        "rollup.config.js",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "tsconfig.test.json",
-        "Dockerfile.storybook",
-        "nginx.conf",
-        "README.md"
+        "packages/eds-lab-react/.storybook",
+        "packages/eds-lab-react/stories",
+        "packages/eds-lab-react/src/stories",
+        "packages/eds-lab-react/babel.config.cjs",
+        "packages/eds-lab-react/jest.config.cjs",
+        "packages/eds-lab-react/jest.setup.ts",
+        "packages/eds-lab-react/rollup.config.js",
+        "packages/eds-lab-react/tsconfig.json",
+        "packages/eds-lab-react/tsconfig.build.json",
+        "packages/eds-lab-react/tsconfig.test.json",
+        "packages/eds-lab-react/Dockerfile.storybook",
+        "packages/eds-lab-react/nginx.conf",
+        "packages/eds-lab-react/README.md"
       ]
     },
     "packages/eds-tokens": {
-      "release-type": "node",
+      "release-type": "simple",
       "package-name": "@equinor/eds-tokens",
       "component": "eds-tokens",
+      "versioning": "prerelease",
+      "prerelease": true,
+      "prerelease-type": "beta",
       "exclude-paths": [
-        "tokens",
-        "build-generate-variables",
-        "scripts",
-        ".vscode",
-        ".gitignore",
-        "rollup.config.js",
-        "tsconfig.json",
-        "vite.generate-variables.config.ts",
-        "palette-config.json",
-        "token-config.json",
-        "tokens.json",
-        "README.md",
-        "CLAUDE.md"
+        "packages/eds-tokens/src/tokens/README.md",
+        "packages/eds-tokens/tokens",
+        "packages/eds-tokens/build-generate-variables",
+        "packages/eds-tokens/scripts",
+        "packages/eds-tokens/.vscode",
+        "packages/eds-tokens/.gitignore",
+        "packages/eds-tokens/rollup.config.js",
+        "packages/eds-tokens/tsconfig.json",
+        "packages/eds-tokens/vite.generate-variables.config.ts",
+        "packages/eds-tokens/palette-config.json",
+        "packages/eds-tokens/token-config.json",
+        "packages/eds-tokens/tokens.json",
+        "packages/eds-tokens/README.md",
+        "packages/eds-tokens/CLAUDE.md"
       ]
     },
     "packages/eds-utils": {
@@ -105,12 +111,12 @@
       "package-name": "@equinor/eds-utils",
       "component": "eds-utils",
       "exclude-paths": [
-        "rollup.config.js",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "vitest.config.ts",
-        "vitest.setup.ts",
-        "README.md"
+        "packages/eds-utils/rollup.config.js",
+        "packages/eds-utils/tsconfig.json",
+        "packages/eds-utils/tsconfig.build.json",
+        "packages/eds-utils/vitest.config.ts",
+        "packages/eds-utils/vitest.setup.ts",
+        "packages/eds-utils/README.md"
       ]
     }
   },

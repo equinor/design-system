@@ -40,14 +40,14 @@ jobs:
     needs: setup
     steps:
       - name: Restore workspace cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           package-manager-cache: false
@@ -58,7 +58,7 @@ jobs:
       - name: Build lab Storybook
         run: pnpm build:storybook:lab
       - name: Cache build output
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: |
             ./*
@@ -80,14 +80,14 @@ jobs:
       id-token: write
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
@@ -112,14 +112,14 @@ jobs:
       id-token: write
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
@@ -141,18 +141,16 @@ jobs:
     needs: build
     steps:
       - name: Restore build cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
           key: ${{ env.CACHE_KEY }}-built
       - name: Deploy the website
-        uses: tibor19/static-website-deploy@v4
+        uses: ./.github/actions/deploy-storybook
         with:
-          enabled-static-website: 'true'
-          folder: 'packages/eds-lab-react/storybook-build'
-          public-access-policy: 'container'
+          folder: packages/eds-lab-react/storybook-build
           connection-string: ${{ secrets.AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING }}
       - name: log-errors-to-slack
         uses: act10ns/slack@v2

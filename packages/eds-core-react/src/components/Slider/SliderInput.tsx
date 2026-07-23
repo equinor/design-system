@@ -28,8 +28,10 @@ const thumb = css`
 const thumbHover = css`
   @media (hover: hover) and (pointer: fine) {
     box-shadow: 0px 0px 0px 6px ${handle.states.hover.background};
-    border-color: ${handle.states.hover.border.type === 'border' &&
-    handle.states.hover.border.color};
+    border-color: ${
+      handle.states.hover.border.type === 'border' &&
+      handle.states.hover.border.color
+    };
   }
 `
 

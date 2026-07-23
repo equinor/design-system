@@ -4,7 +4,7 @@ import type { TextFieldProps } from './TextField.types'
 import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
 import { Button } from '../Button'
-import { Tooltip } from '../../Tooltip'
+import { Tooltip } from '../Tooltip'
 import { Icon } from '../Icon'
 import './text-field.css'
 

@@ -1,0 +1,84 @@
+@layer eds-components {
+  .eds-dialog {
+    --_text-color: var(--eds-color-text-strong);
+    --_section-padding: var(--eds-spacing-vertical-md);
+
+    /* TODO: replace 300px with a dialog-min-width token once one exists in
+       @equinor/eds-tokens. Width is otherwise content-driven (native
+       `<dialog>` defaults to fit-content with a UA-stylesheet viewport cap);
+       consumers needing a wider layout — forms, prompts with longer copy —
+       override via `style` or `className`. See the SpecificWidth story. */
+    min-inline-size: 300px;
+    padding: 0;
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-rounded);
+
+    color: var(--_text-color);
+
+    background: var(--eds-color-bg-floating);
+    box-shadow: var(--eds-elevation-low);
+
+    /* Chrome's UA stylesheet sets `::backdrop` to `rgba(0 0 0 / 0.1)` by
+       default — explicitly force transparency so `scrim={false}` truly hides
+       the backdrop, letting consumers compose their own (e.g. a standalone
+       Scrim component) without a faint browser-default overlay leaking
+       through. */
+    &::backdrop {
+      background: transparent;
+    }
+
+    /* TODO: replace the rgba placeholder with `--eds-color-scrim` (or
+       equivalent) once the scrim is specified in Figma. The longer-term plan
+       is a standalone `Scrim` component; until then, the dialog renders its
+       own backdrop via the native `::backdrop` pseudo when `scrim` is true. */
+    &[data-scrim]::backdrop {
+      background: rgb(0 0 0 / 40%);
+    }
+
+    & > .header {
+      display: flex;
+      gap: var(--eds-spacing-horizontal-xs);
+      align-items: center;
+      padding: var(--_section-padding);
+    }
+
+    & > .header > .title-container {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      align-self: stretch;
+    }
+
+    & > .content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--eds-spacing-vertical-md);
+
+      padding: var(--_section-padding);
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--_text-color);
+    }
+
+    & > .actions {
+      display: flex;
+      gap: var(--eds-spacing-horizontal-xs);
+      align-items: center;
+      justify-content: flex-end;
+
+      padding: var(--_section-padding);
+    }
+
+    & .title {
+      margin: 0;
+
+      font-family: var(--eds-typography-ui-body-font-family);
+      font-size: var(--eds-typography-ui-body-lg-font-size);
+      font-weight: var(--eds-typography-ui-body-lg-font-weight-bolder);
+      line-height: var(--eds-typography-ui-body-lg-line-height-default);
+      color: var(--_text-color);
+    }
+  }
+}
