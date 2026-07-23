@@ -279,8 +279,8 @@ jobs:
       - name: Evaluate results
         run: |
           # Each needs.<job>.result must be expanded as a static expression:
-          # GitHub Actions evaluates ${{ }} at template-render time, before bash
-          # runs, so a bash loop variable cannot index the needs context.
+          # template expressions are evaluated at render time, before bash runs,
+          # so a bash loop variable cannot index the needs context.
           # A "skipped" result is expected (path filtering) and is not a failure.
           for result in \
             "setup:${{ needs.setup.result }}" \
