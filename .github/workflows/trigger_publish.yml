@@ -106,7 +106,6 @@ jobs:
       data-grid-react: ${{ steps.check.outputs.data-grid-react }}
       icons: ${{ steps.check.outputs.icons }}
       tokens: ${{ steps.check.outputs.tokens }}
-      utils: ${{ steps.check.outputs.utils }}
 
     steps:
       # Checkout the repository - we only need the current state
@@ -193,19 +192,8 @@ jobs:
             echo "- ⏭️ **eds-tokens** unchanged" >> $GITHUB_STEP_SUMMARY
           fi
 
-          # Check eds-utils
-          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-utils":'; then
-            echo "utils=true" >> $GITHUB_OUTPUT
-            echo "✅ eds-utils changed"
-            echo "- ✅ **eds-utils** changed" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "utils=false" >> $GITHUB_OUTPUT
-            echo "⏭️  eds-utils unchanged"
-            echo "- ⏭️ **eds-utils** unchanged" >> $GITHUB_STEP_SUMMARY
-          fi
-
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📝 **Note:** eds-utils is also published as part of eds-core-react and eds-lab-react publish workflows" >> $GITHUB_STEP_SUMMARY
+          echo "📝 **Note:** eds-utils is published as part of eds-core-react" >> $GITHUB_STEP_SUMMARY
 
   # Job 3: Trigger core-react stable publish workflow
   trigger-core-react-stable:
@@ -444,13 +432,9 @@ jobs:
             echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
-          if [ "${{ needs.check-releases.outputs.utils }}" == "true" ]; then
-            echo "- ✅ **@equinor/eds-utils**: Version changed (published via eds-core-react workflow)" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- ⏭️ **@equinor/eds-utils**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
-          fi
-
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "💡 **Note:** This workflow triggers publish workflows for changed packages. Check individual publish workflow runs for actual publishing status." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📝 **eds-utils** is published as part of eds-core-react and does not have a separate publish workflow." >> $GITHUB_STEP_SUMMARY

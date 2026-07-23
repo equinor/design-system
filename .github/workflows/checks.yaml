@@ -4,8 +4,9 @@
 # Build runs first (required by all others), then test/lint/types fan out.
 #
 # Path filtering:
-# - code (packages/apps/scripts) or root deps/config -> full checks (build + test + lint + types)
-# - docs-only or workflow-only changes -> lint only
+# - code or tooling config -> full checks (build + test + lint + types)
+# - other non-code changes -> build + lint only
+# - manual dispatch -> full checks
 #
 # Addresses: https://github.com/equinor/design-system/issues/4624
 
@@ -17,22 +18,13 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'apps/**'
-      - 'packages/**'
-      - 'scripts/**'
-      - 'documentation/**'
-      - '.github/workflows/**'
-      # Root files that affect every package's build/test/lint/types
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - 'pnpm-workspace.yaml'
-      - 'tsconfig*.json'
-      - 'babel.config.cjs'
-      - 'eslint.config.mjs'
   push:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -57,7 +49,8 @@ jobs:
       contents: read
       pull-requests: read
     outputs:
-      code: ${{ steps.filter.outputs.code }}
+      # Manual runs are an explicit request for the complete suite.
+      code: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.code == 'true' }}
     steps:
       # fetch-depth: 2 so dorny/paths-filter can diff against the previous
       # commit on push events (the default depth of 1 omits it).
@@ -67,6 +60,7 @@ jobs:
       # SHA-pinned (v3.0.2) — third-party action running on every PR; pin to an
       # immutable commit so a compromised tag can't inject code into CI.
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        if: github.event_name != 'workflow_dispatch'
         id: filter
         with:
           filters: |
@@ -74,7 +68,13 @@ jobs:
               - 'packages/**'
               - 'apps/**'
               - 'scripts/**'
-              # Root deps/config changes warrant full checks, not lint-only
+              - '.github/actions/**'
+              # Root dependencies and tooling config warrant full checks.
+              - '.npmrc'
+              - '.node-version'
+              - '.nvmrc'
+              - '.prettier*'
+              - '.stylelintrc*'
               - 'package.json'
               - 'pnpm-lock.yaml'
               - 'pnpm-workspace.yaml'

@@ -5,17 +5,17 @@ on:
   workflow_dispatch:
     inputs:
       npm-tag:
-        description: "Tag for npm package (next | latest | beta)"
+        description: 'Tag for npm package (next | latest | beta)'
         required: true
         type: choice
         options:
           - next
           - latest
           - beta
-        default: "next"
+        default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  NODE_VERSION: "24.16.0"
+  NODE_VERSION: '24.16.0'
   CACHE_KEY: ${{ github.sha }}-publish-tokens
 
 jobs:
@@ -81,7 +81,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6

@@ -47,10 +47,10 @@ This document provides a high-level overview of all GitHub Actions workflows in 
 `_setup.yml` is the shared entry point for almost every other workflow (~10 callers). It runs as a single job that:
 
 1. Checks out the repository with `actions/checkout@v7` (`fetch-depth: 1`)
-2. Restores the pnpm store cache (key: `${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}`, with a `restore-keys` fallback)
-3. Installs Node via `actions/setup-node@v7` and pnpm via `pnpm/action-setup@v6`
+2. Installs Node via `actions/setup-node@v7` and pnpm via `pnpm/action-setup@v6`
+3. Resolves `pnpm store path` and restores that directory using a lockfile-keyed cache
 4. Installs dependencies with `pnpm install --frozen-lockfile`
-5. Saves the full workspace (`./*` + `~/.pnpm-store`) under the caller-supplied `cacheKey` so downstream jobs can restore it
+5. Saves the workspace under the caller-supplied `cacheKey` so downstream jobs can restore it
 
 **Inputs:** `cacheKey` (required), `tag` (optional, defaults to `next`).
 **Outputs:** `tag` (resolved package tag).
@@ -74,8 +74,8 @@ graph LR
 
     CH --> S[Setup: checkout + install]
     S --> PF{Path filter}
-    PF -->|code changed| B[Build]
-    PF -->|docs/config only| LO[Lint only]
+    PF -->|code/tooling config changed| B[Build]
+    PF -->|other non-code changes| LO[Build + lint only]
     B --> T[Test]
     B --> L[Lint]
     B --> TY[Types]
@@ -85,7 +85,9 @@ graph LR
     LO --> CP
 ```
 
-**Path filtering:** If only documentation, workflows, or config files changed, the checks workflow runs the lint-only path (test/types are skipped), and it builds first so type-aware linting can resolve cross-package types.
+**Path filtering:** Every pull request starts the workflow so the aggregate status check is always reported. Code and tooling configuration changes run the full suite. Other non-code changes run the build-and-lint path, where the build provides the type declarations required by type-aware linting. Manual dispatch always runs the full suite.
+
+New commits cancel older Checks runs for the same pull request or ref so superseded work does not continue consuming runners.
 
 ## Release Pipeline
 
@@ -116,11 +118,11 @@ graph TD
 3. When the release PR is merged, **Trigger Package Publishing** runs
 4. It reads `.github/release-please-manifest.json` to detect which packages changed
 5. Individual publish workflows are triggered via `gh workflow run`
-6. Each publish workflow: builds → publishes to npm → deploys Storybook (if applicable)
+6. Each publish workflow builds once; npm publication and Storybook deployment may then run independently
 
 ### Package publish dependencies
 
-- `eds-core-react` and `eds-lab-react` both depend on `eds-utils` -- utils is published first
+- `eds-core-react` and `eds-lab-react` both depend on `eds-utils`
 - Beta releases of `eds-core-react` add `/next` exports and read version from `version.txt`
 
 ### Trusted publishing (OIDC)
@@ -131,6 +133,7 @@ All npm publishes use [npm trusted publishing](https://docs.npmjs.com/trusted-pu
 - `actions/setup-node` sets `registry-url: 'https://registry.npmjs.org'` so npm authenticates through the OIDC exchange
 - Packages are published with `--provenance`, which attaches a signed provenance attestation visible on npmjs.com
 - Trusted publishing must be configured per package on npmjs.com (Settings → Trusted publishers) for the exchange to succeed
+- npm permits one trusted publisher workflow per package, so each package must have one publishing owner
 
 ## Storybook Deployment
 
@@ -189,10 +192,10 @@ npm publishing no longer uses an `NPM_TOKEN` secret — see [Trusted publishing 
 
 ### PR checks are slow or failing
 
-- **Cache miss:** `_setup.yml` saves the workspace under the caller's `cacheKey` (typically `${{ github.sha }}-<workflow>`), while the pnpm store is cached separately under `${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}`. If a cache was evicted, setup re-runs from scratch. Check the Actions cache tab.
+- **Cache miss:** `_setup.yml` saves the workspace under the caller's `cacheKey` (typically `${{ github.sha }}-<workflow>`), while the path returned by `pnpm store path` is cached separately under `${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}`. If a cache was evicted, setup re-runs from scratch. Check the Actions cache tab.
 - **Lockfile out of sync:** `pnpm install --frozen-lockfile` fails if `pnpm-lock.yaml` doesn't match `package.json`. Commit the regenerated lockfile.
 - **Build failure:** Build must succeed before test/lint/types can run. Check the build job first.
-- **Skipped jobs:** If only docs changed, build/test/types are intentionally skipped via path filtering.
+- **Skipped jobs:** If only docs changed, the dedicated build/test/types jobs are skipped. The non-code lint job still builds first so type-aware linting can resolve workspace packages.
 
 ### Publish workflow fails
 
@@ -203,7 +206,7 @@ npm publishing no longer uses an `NPM_TOKEN` secret — see [Trusted publishing 
 ### Storybook deployment fails
 
 - **Connection string issues:** Storybook deploys authenticate with the storage connection string via the `deploy-storybook` action; they do **not** run `azure/login`. Each Storybook target has its own secret (`AZ_STORYBOOK_CONNECTION_STRING`, `AZ_STORAGE_STORYBOOK_DATAGRID_CONNECTION_STRING`, `AZ_STORAGE_STORYBOOK_LAB_CONNECTION_STRING`). Verify the correct one is configured for the environment.
-- **Missing deploy action:** The `publish-storybook` jobs restore a workspace cache that excludes dot-directories, so they sparse-checkout `.github` before invoking `./.github/actions/deploy-storybook`. An "action not found" error usually means that checkout step is missing.
+- **Missing deploy action:** Jobs that invoke `./.github/actions/deploy-storybook` explicitly sparse-checkout `.github` before restoring or downloading the Storybook build. The checkout must run first because `actions/checkout` cleans the workspace. An "action not found" error usually means that checkout step is missing or out of order.
 
 ### Azure OIDC login fails (setup, purge-cdn, publish-assets)
 
