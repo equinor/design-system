@@ -175,6 +175,15 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
+      # The build job caches ./* + ~/.pnpm-store, which excludes dot-directories,
+      # so .github (and the local deploy-storybook action) is absent from the
+      # restored workspace. Check it out here — and keep it first, because
+      # actions/checkout cleans the workspace and would wipe the storybook build
+      # restored by the next step.
+      - name: Checkout deploy action
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github
       - name: Restore build cache
         uses: actions/cache/restore@v6
         with:
