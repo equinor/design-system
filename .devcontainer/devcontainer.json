@@ -62,9 +62,20 @@
       "onAutoForward": "notify"
     }
   },
-  "onCreateCommand": "npm install -g pnpm gitmoji-cli && pnpm install && pnpm recursive install --filter ./packages",
-  // Install additional dependencies for axe linter, especially for devcontainers where the host is ARM-based (e.g., MacBook M1+).
-  "postCreateCommand": "sudo dpkg --add-architecture amd64 && sudo apt-get update && sudo apt-get install -y libc6:amd64 libstdc++6:amd64 && sudo ln -sf /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2",
+  // Install dependencies on container creation.
+  // The @tokens-studio/studio-cli postinstall downloads a binary into os.tmpdir() and moves it into
+  // node_modules with fs.renameSync. In a devcontainer /tmp lives on the container overlay fs while
+  // the workspace (and node_modules) is a bind mount / Codespaces volume — a DIFFERENT device — so the
+  // rename fails with "EXDEV: cross-device link not permitted". Pointing TMPDIR at a dir on the SAME
+  // filesystem as node_modules makes the rename intra-device. The dir must be created first: other
+  // install scripts assume os.tmpdir() already exists and throw ENOENT if it doesn't (setting TMPDIR
+  // without mkdir -p is why the earlier attempt failed with a different error). .tmp/ is gitignored.
+  // Remove the TMPDIR workaround once tokens-studio/studio-cli-releases#1 is resolved.
+  "onCreateCommand": "npm install -g pnpm gitmoji-cli && mkdir -p /workspaces/design-system/.tmp && TMPDIR=/workspaces/design-system/.tmp pnpm install && pnpm recursive install --filter ./packages",
+  // Install additional dependencies:
+  // - libc6:amd64 / libstdc++6:amd64 + the ld-linux symlink are for the axe linter on ARM-based hosts (e.g., MacBook M1+).
+  // - bubblewrap (bwrap) and socat provide process-level sandboxing for running untrusted/agent-driven commands with least privilege inside the container.
+  "postCreateCommand": "sudo dpkg --add-architecture amd64 && sudo apt-get update && sudo apt-get install -y libc6:amd64 libstdc++6:amd64 bubblewrap socat && sudo ln -sf /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2",
   "remoteUser": "node",
   "features": {
     "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {},
@@ -73,4 +84,4 @@
       "version": "22.12.0"
     }
   }
-}
+} 
