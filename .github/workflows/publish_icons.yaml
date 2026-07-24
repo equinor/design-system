@@ -1,4 +1,3 @@
-# TODO: Create a composite action for publishing to simplify things
 name: Publish icons
 permissions:
   contents: read
@@ -15,84 +14,78 @@ on:
         default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '24.16.0'
+  CACHE_KEY: ${{ github.sha }}-publish-icons
 
 jobs:
   setup:
+    name: Setup
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}-setup-icons
-      checkout_paths: packages scripts
+      cacheKey: ${{ github.sha }}-publish-icons
       tag: ${{ github.event.inputs.npm-tag }}
-  packages:
-    name: Process packages
+
+  build:
+    name: Build packages
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: setup
     steps:
-      - name: Use "setup" cache
-        id: setup-cache
-        uses: actions/cache@v6
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-setup-icons
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-icons
+          key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Build packages
-        id: build-packages
         run: pnpm run build
+      - name: Cache build output
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+
   publish:
     name: Publish icons to npm
     runs-on: ubuntu-latest
-    needs: [packages, setup]
+    needs: build
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-icons
+          key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Publish to npm
-        id: publish-to-npm
-        working-directory: packages/eds-icons
-        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        run: pnpm --filter ./packages/eds-icons publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:

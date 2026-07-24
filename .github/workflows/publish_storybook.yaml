@@ -28,8 +28,7 @@ jobs:
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}-setup-storybook
-      checkout_paths: packages apps scripts
+      cacheKey: ${{ github.sha }}-publish-storybook
   packages:
     name: Process packages
     runs-on: ubuntu-latest
@@ -42,11 +41,12 @@ jobs:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-setup-storybook
+          key: ${{ github.sha }}-publish-storybook
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
           node-version: '24.16.0'
+          package-manager-cache: false
       - name: Setup pnpm
         id: setup-pnpm
         uses: pnpm/action-setup@v6
@@ -73,10 +73,10 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
-      # The setup job's sparse checkout only includes packages/apps/scripts
-      # (and the workspace cache glob skips dot-directories), so .github and
-      # the local deploy action must be checked out here. Must stay the first
-      # step: checkout cleans the workspace and would wipe the downloaded
+      # This job does not restore the workspace cache (it only needs the
+      # storybook-build artifact), so `.github/actions/deploy-storybook`
+      # isn't present unless checked out here. Must stay the first step:
+      # checkout cleans the workspace and would wipe the downloaded
       # storybook build otherwise.
       - name: Checkout deploy action
         uses: actions/checkout@v7
