@@ -3,7 +3,7 @@
   "name": "Node.js & TypeScript",
   "runArgs": ["--init"],
   // https://github.com/devcontainers/images/tree/main/src/typescript-node
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bookworm",
   "customizations": {
     "vscode": {
       "settings": {
