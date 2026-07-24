@@ -7,8 +7,23 @@
     --_label-height: round(1cap, 4px);
     --captured-size-2: var(--_label-height); /* capture cap-height before SVG overrides font-size */
     --_font-family: var(--eds-typography-ui-body-font-family);
-    --_color: var(--eds-color-text-strong-on-emphasis);
-    --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+
+    /* Colours from the eds-tokens beta (Tokens Studio). Fill and border
+     * states use the static step scales — the beta semantic layer has no
+     * action/fill group yet and its surface group is accent-only. The
+     * --_tone-* indirection replaces the legacy dynamic (appearance-scoped)
+     * tokens: data-color-appearance selects the scale here instead.
+     * Disabled states stay on legacy tokens until the alpha-channel disabled
+     * tokens (#4741) land in the export. */
+    --_tone-4: var(--eds-accent-4);
+    --_tone-6: var(--eds-accent-6);
+    --_tone-8: var(--eds-accent-8);
+    --_tone-9: var(--eds-accent-9);
+    --_tone-10: var(--eds-accent-10);
+    --_tone-11: var(--eds-accent-11);
+    --_tone-12: var(--eds-accent-12);
+    --_color: var(--eds-text-on-accent);
+    --_bg-color: var(--_tone-9);
     --_padding-block: var(--eds-selectable-space-vertical);
 
     cursor: pointer;
@@ -85,6 +100,29 @@
     }
   }
 
+  /* ===== TONES ===== */
+  /* The tone prop sets data-color-appearance on the button itself */
+
+  .eds-button[data-color-appearance='neutral'] {
+    --_tone-4: var(--eds-neutral-4);
+    --_tone-6: var(--eds-neutral-6);
+    --_tone-8: var(--eds-neutral-8);
+    --_tone-9: var(--eds-neutral-9);
+    --_tone-10: var(--eds-neutral-10);
+    --_tone-11: var(--eds-neutral-11);
+    --_tone-12: var(--eds-neutral-12);
+  }
+
+  .eds-button[data-color-appearance='danger'] {
+    --_tone-4: var(--eds-danger-4);
+    --_tone-6: var(--eds-danger-6);
+    --_tone-8: var(--eds-danger-8);
+    --_tone-9: var(--eds-danger-9);
+    --_tone-10: var(--eds-danger-10);
+    --_tone-11: var(--eds-danger-11);
+    --_tone-12: var(--eds-danger-12);
+  }
+
   /* ===== SIZE VARIANTS ===== */
   /* Font size and line-height scale with data-selectable-space.
    * Button height is derived from padding-block + line-height.
@@ -113,10 +151,12 @@
   /* ===== PRIMARY VARIANT ===== */
 
   .eds-button[data-variant='primary'] {
-    --_color: var(--eds-color-text-strong-on-emphasis);
-    --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+    --_color: var(--eds-text-on-accent);
+    --_bg-color: var(--_tone-9);
   }
 
+  /* TODO(#4741): disabled states (all variants) keep legacy tokens until the
+   * alpha-channel disabled tokens ship in the eds-tokens beta export */
   .eds-button[data-variant='primary']:disabled {
     --_bg-color: var(--eds-color-bg-fill-emphasis-disabled);
     --_color: var(--eds-color-text-disabled);
@@ -125,21 +165,21 @@
   }
 
   .eds-button[data-variant='primary']:hover:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-emphasis-hover);
+    --_bg-color: var(--_tone-10);
   }
 
   .eds-button[data-variant='primary']:active:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-emphasis-active);
+    --_bg-color: var(--_tone-11);
   }
 
   /* ===== SECONDARY VARIANT ===== */
 
   .eds-button[data-variant='secondary'] {
-    --_color: var(--eds-color-text-subtle);
+    /* Step tokens — the beta semantic layer has no accent text/border token */
+    --_color: var(--_tone-12);
     --_bg-color: transparent;
 
-    outline: var(--eds-border-width-default, 1px) solid
-      var(--eds-color-border-strong);
+    outline: var(--eds-border-width-default, 1px) solid var(--_tone-8);
     outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
   }
 
@@ -157,17 +197,20 @@
   }
 
   .eds-button[data-variant='secondary']:hover:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-default);
+    /* Steps matching --eds-background-surface-accent-subtle-hover/-pressed —
+     * the semantic surface group is accent-only, so tones need the scale */
+    --_bg-color: var(--_tone-4);
   }
 
   .eds-button[data-variant='secondary']:active:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-hover);
+    --_bg-color: var(--_tone-6);
   }
 
   /* ===== GHOST VARIANT ===== */
 
   .eds-button[data-variant='ghost'] {
-    --_color: var(--eds-color-text-subtle);
+    /* Step token — the beta semantic layer has no accent text token */
+    --_color: var(--_tone-12);
     --_bg-color: transparent;
   }
 
@@ -178,17 +221,17 @@
   }
 
   .eds-button[data-variant='ghost']:hover:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-default);
+    --_bg-color: var(--_tone-4);
   }
 
   .eds-button[data-variant='ghost']:active:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-hover);
+    --_bg-color: var(--_tone-6);
   }
 
   /* ===== FOCUS STATE ===== */
 
   .eds-button:focus-visible {
-    outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
+    outline: var(--eds-sizing-stroke-thick) solid var(--eds-border-focus);
     outline-offset: var(--eds-sizing-stroke-thin);
   }
 
