@@ -1,4 +1,4 @@
-:root, [data-color-scheme] {
+:root {
   --eds-density-corner-radius-none: var(--eds-primitives-spacing-0);
   --eds-density-corner-radius-pill: 9999px;
   --eds-density-corner-radius-rounded: var(--eds-primitives-spacing-25);

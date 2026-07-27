@@ -54,9 +54,10 @@ const preview = {
       return createElement(
         'div',
         {
-          // Both token bundles scope their tokens under [data-color-scheme]
-          // (nearest ancestor wins), so the attribute on the wrapper is all
-          // that subtree colour-scheme switching needs (ADR-0013 / #5226).
+          // The wrapper attribute is all subtree colour-scheme switching
+          // needs: the beta bundle re-declares its semantic layer under
+          // [data-color-scheme] (#5226), and the legacy bundle scopes its
+          // scheme-dependent tokens the same way (nearest ancestor wins).
           'data-color-scheme': colorScheme,
           className: 'eds-storybook-wrapper',
         },

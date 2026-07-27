@@ -1,4 +1,4 @@
-:root, [data-color-scheme] {
+:root {
   --eds-family-header: Equinor;
   --eds-family-ui: Inter;
   --eds-weight-bolder: var(--eds-primitives-weight-scale-bolder);

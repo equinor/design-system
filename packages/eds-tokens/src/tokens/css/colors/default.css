@@ -1,4 +1,4 @@
-:root, [data-color-scheme] {
+:root {
   --eds-dark-blue-1: oklch(0.19 0.0053 240.68);
   --eds-dark-blue-10: oklch(0.88 0.0905 240.68);
   --eds-dark-blue-11: oklch(0.93 0.0701 240.68);

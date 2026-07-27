@@ -4,10 +4,18 @@
  * Concatenates every generated CSS file under `src/tokens/css/` into
  * `src/tokens/css/variables.css` (ADR-0010). The bundle adds no
  * behaviour on top of the generated files — every mode file is
- * `:root`- or attribute-scoped, so plain concatenation is
- * conflict-free, and `var()` references are late-bound so source order
- * does not affect resolution. Files are still concatenated in sorted
- * path order to keep the committed artifact deterministic.
+ * `:root`- or attribute-scoped, and `var()` references are late-bound.
+ * Files are concatenated in sorted path order to keep the committed
+ * artifact deterministic.
+ *
+ * One caveat to "concatenation is conflict-free": the semantic layer is
+ * widened to `:root, [data-color-scheme]` before bundling (see
+ * widen-semantic-scope.mjs, chained in the `generate:css-bundle`
+ * script), so on `[data-color-scheme]` elements it overlaps the
+ * color-scheme layer at equal specificity for the few names declared in
+ * both — there, sorted order decides (semantic sorts last and wins).
+ * Those duplicate names are a token-content bug tracked in #5221, not
+ * something ordering can fix here.
  *
  * The bundle is deliberately NOT minified: the committed file stays a
  * pure function of the source files (no toolchain-version churn in

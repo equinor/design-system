@@ -1,4 +1,4 @@
-:root, [data-color-scheme] {
+:root {
   --eds-primitives-font-family-equinor: Equinor;
   --eds-primitives-font-family-inter: Inter;
   --eds-primitives-lineheight-scale-100-default: var(--eds-primitives-spacing-75);
