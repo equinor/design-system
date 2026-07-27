@@ -1,3 +1,9 @@
+/* Tokens Studio beta bundle (ADR-0009: published consumers import
+   @equinor/eds-tokens/next/css/variables.css; the ./next/* exports are
+   injected at publish time only, hence the relative path locally).
+   Imported BEFORE the legacy bundle so legacy wins the name collisions
+   (--eds-typography-header-*-font-size) during the mixed period. */
+@import '../../eds-tokens/src/tokens/css/variables.css';
 @import '@equinor/eds-tokens/css/variables';
 
 /* Ensure form elements inherit EDS typography */
