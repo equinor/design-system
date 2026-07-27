@@ -1,4 +1,3 @@
-# TODO: Create a composite action for publishing to simplify things
 name: Publish lab-react
 permissions:
   contents: read
@@ -23,153 +22,138 @@ on:
         default: 'development'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '24.16.0'
+  CACHE_KEY: ${{ github.sha }}-publish-lab
 
 jobs:
   setup:
+    name: Setup
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}-setup-lab
-      checkout_paths: packages scripts
+      cacheKey: ${{ github.sha }}-publish-lab
       tag: ${{ github.event.inputs.npm-tag }}
-  packages:
-    name: Process packages
+
+  build:
+    name: Build packages & Storybook
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: setup
     steps:
-      - name: Use "setup" cache
-        id: setup-cache
-        uses: actions/cache@v6
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-setup-lab
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+          key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Build packages
-        id: build-packages
         run: pnpm run build
       - name: Build lab Storybook
-        id: build-storybook
         run: pnpm build:storybook:lab
+      - name: Cache build output
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  publish-utils-package:
+
+  publish-utils:
     name: Publish utils to npm
     runs-on: ubuntu-latest
-    needs: [packages, setup]
+    needs: build
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+          key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Publish to npm
-        id: publish-to-npm
-        working-directory: packages/eds-utils
-        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        run: pnpm --filter @equinor/eds-utils publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  publish-lab-package:
+
+  publish-lab:
     name: Publish lab to npm
     runs-on: ubuntu-latest
-    needs: [publish-utils-package, setup]
+    needs: publish-utils
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+          key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Publish to npm
-        id: publish-to-npm
-        working-directory: packages/eds-lab-react
-        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        run: pnpm --filter @equinor/eds-lab-react publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+
   publish-storybook:
-    needs: [setup, packages]
     name: Publish Storybook
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      # The setup job's sparse checkout only includes packages/apps/scripts
-      # (and the workspace cache glob skips dot-directories), so .github and
-      # the local deploy action must be checked out here. Must stay the first
-      # step: checkout cleans the workspace and would wipe the restored
-      # storybook build otherwise.
+      # Keep checkout first: actions/checkout cleans the workspace and would
+      # wipe the Storybook build restored by the next step.
       - name: Checkout deploy action
         uses: actions/checkout@v7
         with:
           sparse-checkout: .github
-      - name: Use cache with storybook files
-        id: use-cache-storybook
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-lab
+          key: ${{ env.CACHE_KEY }}-built
       - name: Deploy the website
-        id: deploy-website
         uses: ./.github/actions/deploy-storybook
         with:
           folder: packages/eds-lab-react/storybook-build

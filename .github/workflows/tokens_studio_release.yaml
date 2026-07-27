@@ -23,7 +23,6 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}-tokens-studio-release
-      checkout_paths: packages/eds-tokens
   pull-tokens:
     name: Pull tokens from Tokens Studio
     runs-on: ubuntu-latest

@@ -9,7 +9,6 @@ jobs:
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}-sync-figma-to-tokens
-      checkout_paths: packages/eds-tokens-sync packages/eds-tokens-build packages/eds-tokens
   sync-figma-to-tokens:
     name: Sync Figma variables to tokens
     runs-on: ubuntu-latest

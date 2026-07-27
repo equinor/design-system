@@ -1,7 +1,6 @@
 name: Publish core-react
 permissions:
   contents: read
-  id-token: write
 on:
   workflow_dispatch:
     inputs:
@@ -24,136 +23,126 @@ on:
         default: 'development'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '24.16.0'
+  CACHE_KEY: ${{ github.sha }}-publish-core-react
 
 jobs:
   setup:
+    name: Setup
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}-setup-core-react
-      checkout_paths: packages scripts
+      cacheKey: ${{ github.sha }}-publish-core-react
       tag: ${{ github.event.inputs.npm-tag }}
-  packages:
-    name: Process packages
+
+  build:
+    name: Build packages & Storybook
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: setup
     steps:
-      - name: Use "setup" cache
-        id: setup-cache
-        uses: actions/cache@v6
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-setup-core-react
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Build packages
-        id: build-packages
         run: pnpm run build
       - name: Build Storybook
-        id: build-storybook
         run: pnpm build:storybook
+      - name: Cache build output
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  publish-utils-package:
+
+  publish-utils:
     name: Publish utils to npm
     runs-on: ubuntu-latest
-    needs: [packages, setup]
+    needs: build
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       # Skip on beta runs — eds-utils has no beta channel
       - name: Publish to npm
-        id: publish-to-npm
-        if: needs.setup.outputs.tag != 'beta'
-        working-directory: packages/eds-utils
-        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        if: github.event.inputs.npm-tag != 'beta'
+        run: pnpm --filter @equinor/eds-utils publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
-  publish-core-package:
+
+  publish-core:
     name: Publish core-react to npm
     runs-on: ubuntu-latest
-    needs: [publish-utils-package, setup]
+    needs: publish-utils
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
+
       - name: Set beta version from version.txt
         if: github.event.inputs.npm-tag == 'beta'
-        id: set-beta-version
         run: |
-          BETA_VERSION=$(tr -d '[:space:]' < packages/eds-core-react/src/components/next/version.txt)
+          BETA_VERSION=$(cat packages/eds-core-react/src/components/next/version.txt | tr -d '[:space:]')
           echo "Beta version: $BETA_VERSION"
           cd packages/eds-core-react
           npm version "$BETA_VERSION" --no-git-tag-version --allow-same-version
           echo "Updated package.json version to $BETA_VERSION"
+
       - name: Add /next exports for beta release
         if: github.event.inputs.npm-tag == 'beta'
-        id: add-next-exports
         run: |
           cd packages/eds-core-react
-          # Add /next exports to package.json for beta releases
           node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
@@ -169,42 +158,37 @@ jobs:
           "
           echo "Updated exports:"
           cat package.json | grep -A 15 '"exports"'
+
       - name: Publish to npm
-        id: publish-to-npm
-        working-directory: packages/eds-core-react
-        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        run: pnpm --filter @equinor/eds-core-react publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+
   publish-storybook:
-    needs: [setup, packages]
-    name: Build & Deploy Website
+    name: Deploy Storybook
     runs-on: ubuntu-latest
+    needs: build
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
-      # The setup job's sparse checkout only includes packages/apps/scripts
-      # (and the workspace cache glob skips dot-directories), so .github and
-      # the local deploy action must be checked out here. Must stay the first
-      # step: checkout cleans the workspace and would wipe the restored
-      # storybook build otherwise.
+      # Keep checkout first: actions/checkout cleans the workspace and would
+      # wipe the Storybook build restored by the next step.
       - name: Checkout deploy action
         uses: actions/checkout@v7
         with:
           sparse-checkout: .github
-      - name: Use cache with storybook files
-        id: use-cache-storybook
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-${{ github.event.inputs.environment }}-core-react
+          key: ${{ env.CACHE_KEY }}-built
       - name: Deploy the website
-        id: deploy-website
         uses: ./.github/actions/deploy-storybook
         with:
           folder: packages/eds-core-react/storybook-build
@@ -215,11 +199,18 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
         if: failure()
+
   purge-cdn:
     # Only purge CDN for production releases (latest tag)
     if: github.event.inputs.npm-tag == 'latest'
-    needs: [publish-storybook]
+    needs: publish-storybook
     name: Purge cdn
+    # _purge_cdn.yaml logs into Azure via OIDC; the workflow-level permissions
+    # grant only contents: read, so grant id-token here or the reusable
+    # workflow can't request a token.
+    permissions:
+      contents: read
+      id-token: write
     uses: ./.github/workflows/_purge_cdn.yaml
     secrets: inherit
     with:
