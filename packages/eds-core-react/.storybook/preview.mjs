@@ -66,6 +66,11 @@ const preview = {
       return createElement(
         'div',
         {
+          // Kept alongside the <html> attribute on purpose: the legacy 2.x
+          // bundle scopes its tokens under [data-color-scheme] (nearest
+          // ancestor wins), so the wrapper and unmigrated /next components
+          // need it here — synchronously from first paint, independent of
+          // the effect above. Only the beta semantic layer needs <html>.
           'data-color-scheme': colorScheme,
           className: 'eds-storybook-wrapper',
         },
