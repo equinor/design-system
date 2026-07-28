@@ -18,7 +18,8 @@
  * element clobbers a `[data-density]` ancestor's values for the whole
  * subtree. The export format has no per-layer selector, hence this
  * post-export step. It runs before generate-css-bundle.mjs (chained in
- * the `generate:css-bundle` package script).
+ * the `generate:css-bundle` package script), and the bundler asserts
+ * the widening happened (shared pattern in semantic-scope.mjs).
  *
  * Known caveat, tracked in #5221: three names (`border-focus`,
  * `text-disabled`, `border-disabled`) are declared in both the
@@ -27,33 +28,40 @@
  * (it sorts last in the bundle) — a token-content bug upstream, not a
  * consequence of this step.
  *
- * Idempotent; fails loudly if the semantic file is missing or does not
- * start with the expected selector.
+ * Every `semantic/*.css` file is widened, matching the bundler's
+ * directory glob — a file the export adds later must not slip through
+ * with the narrow selector. Idempotent; fails loudly if a semantic
+ * file does not start with either the narrow or the widened selector.
  *
- * Usage: node scripts/widen-semantic-scope.mjs [--file <path>]
+ * Usage: node scripts/widen-semantic-scope.mjs [--dir <path>]
  */
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import process from 'node:process'
+import { NARROW_RE, WIDE, WIDE_RE } from './semantic-scope.mjs'
 
 const args = parseArgs(process.argv.slice(2))
-const FILE = args.file ?? 'src/tokens/css/semantic/default.css'
+const DIR = args.dir ?? 'src/tokens/css/semantic'
 
-const NARROW = ':root {'
-const WIDE = ':root, [data-color-scheme] {'
+const files = (await readdir(DIR).catch(() => fail(`cannot read ${DIR}`)))
+  .filter((file) => file.endsWith('.css'))
+  .sort()
 
-const css = await readFile(FILE, 'utf8').catch(() =>
-  fail(`cannot read ${FILE}`),
-)
+if (files.length === 0) fail(`no CSS files found under ${DIR}`)
 
-if (css.startsWith(WIDE)) {
-  console.log(`widen-semantic-scope: ${FILE} already widened`)
-} else if (css.startsWith(NARROW)) {
-  await writeFile(FILE, WIDE + css.slice(NARROW.length))
-  console.log(`widen-semantic-scope: widened ${FILE} to "${WIDE.slice(0, -2)}"`)
-} else {
-  fail(
-    `${FILE} does not start with "${NARROW}" — the export layout changed, review #5226 before proceeding`,
-  )
+for (const file of files) {
+  const path = join(DIR, file)
+  const css = await readFile(path, 'utf8')
+  if (WIDE_RE.test(css)) {
+    console.log(`widen-semantic-scope: ${path} already widened`)
+  } else if (NARROW_RE.test(css)) {
+    await writeFile(path, css.replace(NARROW_RE, WIDE))
+    console.log(`widen-semantic-scope: widened ${path}`)
+  } else {
+    fail(
+      `${path} does not start with a ":root" selector — the export layout changed, review #5226 before proceeding`,
+    )
+  }
 }
 
 function parseArgs(argv) {

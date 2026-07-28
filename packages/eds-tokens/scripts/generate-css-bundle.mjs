@@ -35,9 +35,10 @@
  */
 import { execFileSync } from 'node:child_process'
 import { readFile, readdir, writeFile } from 'node:fs/promises'
-import { join, relative, resolve } from 'node:path'
+import { join, relative, resolve, sep } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { WIDE_RE } from './semantic-scope.mjs'
 
 const args = parseArgs(process.argv.slice(2))
 const CSS_DIR = args.css ?? 'src/tokens/css'
@@ -57,23 +58,24 @@ const files = (await readdir(CSS_DIR, { recursive: true }))
 
 if (files.length === 0) fail(`no CSS files found under ${CSS_DIR}`)
 
+const contents = await Promise.all(
+  files.map(async (file) => [file, await readFile(file, 'utf8')]),
+)
+
 // The widen-semantic-scope.mjs step must have run first (it is chained
 // before this script in the `generate:css-bundle` package script) —
 // bundling an unwidened semantic layer would silently regress subtree
-// colour-scheme switching (#5226). Must match WIDE in that script.
-const SEMANTIC_FILE = join(CSS_DIR, 'semantic', 'default.css')
-const WIDENED = ':root, [data-color-scheme] {'
-const semantic = await readFile(SEMANTIC_FILE, 'utf8').catch(() =>
-  fail(`cannot read ${SEMANTIC_FILE}`),
-)
-if (!semantic.startsWith(WIDENED))
-  fail(
-    `${SEMANTIC_FILE} does not start with "${WIDENED}" — run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
-  )
+// colour-scheme switching (#5226). Checked for every semantic/*.css
+// file, mirroring the widen script's own glob.
+for (const [file, css] of contents) {
+  if (relative(CSS_DIR, file).split(sep)[0] !== 'semantic') continue
+  if (!WIDE_RE.test(css))
+    fail(
+      `${file} is not widened to ":root, [data-color-scheme]" — run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+    )
+}
 
-const concatenated = (
-  await Promise.all(files.map((file) => readFile(file, 'utf8')))
-).join('\n')
+const concatenated = contents.map(([, css]) => css).join('\n')
 
 await writeFile(OUT_FILE, HEADER + concatenated)
 
