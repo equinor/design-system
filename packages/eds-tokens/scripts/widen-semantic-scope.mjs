@@ -43,7 +43,13 @@ import { NARROW_RE, WIDE, WIDE_RE } from './semantic-scope.mjs'
 const args = parseArgs(process.argv.slice(2))
 const DIR = args.dir ?? 'src/tokens/css/semantic'
 
-const files = (await readdir(DIR).catch(() => fail(`cannot read ${DIR}`)))
+// Recursive to mirror the bundler's directory glob — a nested file the
+// export adds later must be widened too, not just top-level ones
+const files = (
+  await readdir(DIR, { recursive: true }).catch(() =>
+    fail(`cannot read ${DIR}`),
+  )
+)
   .filter((file) => file.endsWith('.css'))
   .sort()
 
@@ -53,7 +59,14 @@ for (const file of files) {
   const path = join(DIR, file)
   const css = await readFile(path, 'utf8')
   if (WIDE_RE.test(css)) {
-    console.log(`widen-semantic-scope: ${path} already widened`)
+    if (css.startsWith(WIDE)) {
+      console.log(`widen-semantic-scope: ${path} already widened`)
+    } else {
+      // Tolerated on input, but normalise so the committed bytes are a
+      // function of content only, whatever shape the selector arrived in
+      await writeFile(path, css.replace(WIDE_RE, WIDE))
+      console.log(`widen-semantic-scope: normalised ${path}`)
+    }
   } else if (NARROW_RE.test(css)) {
     await writeFile(path, css.replace(NARROW_RE, WIDE))
     console.log(`widen-semantic-scope: widened ${path}`)

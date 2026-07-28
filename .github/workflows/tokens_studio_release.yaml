@@ -86,12 +86,15 @@ jobs:
       # has no TS export format. See the script header for details.
       - name: Generate TypeScript tokens
         run: pnpm --filter @equinor/eds-tokens run generate:ts-tokens
-      # Concatenate the generated CSS into one committed bundle (adds
-      # no behaviour on top of the generated files, deliberately not
-      # minified — ADR-0010). Importable on the beta line as
-      # @equinor/eds-tokens/next/css/variables.css via the ./next/css/*
-      # wildcard publish_tokens.yaml already injects.
-      - name: Bundle CSS into variables.css
+      # Widen the semantic layer to [data-color-scheme] (#5226 —
+      # scripts/widen-semantic-scope.mjs rewrites the generated
+      # src/tokens/css/semantic/*.css in place, so that selector change
+      # is expected in this PR's diff), then concatenate the generated
+      # CSS into one committed bundle (the bundler itself adds no
+      # behaviour, deliberately not minified — ADR-0010). Importable on
+      # the beta line as @equinor/eds-tokens/next/css/variables.css via
+      # the ./next/css/* wildcard publish_tokens.yaml already injects.
+      - name: Widen semantic scope and bundle CSS into variables.css
         run: pnpm --filter @equinor/eds-tokens run generate:css-bundle
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
@@ -104,7 +107,7 @@ jobs:
           # "Added" in the changelog, which is what a token update is.
           commit-message: 'feat: update tokens from Tokens Studio release'
           title: 'feat: update tokens from Tokens Studio release'
-          body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`), generated CSS (EDS-CSS export) into `packages/eds-tokens/src/tokens/css/`, DTCG (EDS-DTCG export) into `src/tokens/dtcg/`, TypeScript modules generated from the two into `src/tokens/ts/`, and the bundled `src/tokens/css/variables.css` (concatenation of the CSS export, per ADR-0010).'
+          body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`), generated CSS (EDS-CSS export) into `packages/eds-tokens/src/tokens/css/`, DTCG (EDS-DTCG export) into `src/tokens/dtcg/`, TypeScript modules generated from the two into `src/tokens/ts/`, and the bundled `src/tokens/css/variables.css` (concatenation of the CSS export, per ADR-0010). The `semantic/*.css` files are widened to `:root, [data-color-scheme]` by `scripts/widen-semantic-scope.mjs` before bundling (#5226) — that selector diff against the raw export is expected.'
           branch: tokens-studio-release
       # This workflow runs unattended (release-triggered) and the PR it
       # creates gets no CI runs, so a failed pull must not be silent
