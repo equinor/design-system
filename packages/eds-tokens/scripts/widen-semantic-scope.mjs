@@ -23,10 +23,13 @@
  *
  * Known caveat, tracked in #5221: three names (`border-focus`,
  * `text-disabled`, `border-disabled`) are declared in both the
- * color-scheme layer and the semantic layer. On `[data-color-scheme]`
- * elements the widened semantic block wins those at equal specificity
- * (it sorts last in the bundle) — a token-content bug upstream, not a
- * consequence of this step.
+ * color-scheme layer and the semantic layer — a token-content bug
+ * upstream. On `[data-color-scheme]` elements both blocks now apply at
+ * equal specificity; generate-css-bundle.mjs concatenates the
+ * color-scheme files last so the scheme-specific values keep winning,
+ * as they did before the widening (`--eds-border-focus` is the
+ * focus-ring token, and the semantic copy is a self-reference that
+ * would drop focus outlines).
  *
  * Every `semantic/*.css` file is widened, matching the bundler's
  * directory glob — a file the export adds later must not slip through
