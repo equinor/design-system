@@ -57,6 +57,20 @@ const files = (await readdir(CSS_DIR, { recursive: true }))
 
 if (files.length === 0) fail(`no CSS files found under ${CSS_DIR}`)
 
+// The widen-semantic-scope.mjs step must have run first (it is chained
+// before this script in the `generate:css-bundle` package script) —
+// bundling an unwidened semantic layer would silently regress subtree
+// colour-scheme switching (#5226). Must match WIDE in that script.
+const SEMANTIC_FILE = join(CSS_DIR, 'semantic', 'default.css')
+const WIDENED = ':root, [data-color-scheme] {'
+const semantic = await readFile(SEMANTIC_FILE, 'utf8').catch(() =>
+  fail(`cannot read ${SEMANTIC_FILE}`),
+)
+if (!semantic.startsWith(WIDENED))
+  fail(
+    `${SEMANTIC_FILE} does not start with "${WIDENED}" — run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+  )
+
 const concatenated = (
   await Promise.all(files.map((file) => readFile(file, 'utf8')))
 ).join('\n')
