@@ -187,8 +187,8 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(
   })
 
   const popoverRef = useMemo(
-    () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
-    [refs.setFloating, ref],
+    () => mergeRefs<HTMLDivElement>((node) => refs.setFloating(node), ref),
+    [refs, ref],
   )
   useIsomorphicLayoutEffect(() => {
     if (refs.reference.current && refs.floating.current && open) {
