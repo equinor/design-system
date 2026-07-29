@@ -139,12 +139,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       whileElementsMounted: autoUpdate,
     })
     const mergedAnchorRef = useMemo(
-      () => mergeRefs<HTMLElement>(refs.setReference),
-      [refs.setReference],
+      () => mergeRefs<HTMLElement>((node) => refs.setReference(node)),
+      [refs],
     )
     const tooltipRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
-      [refs.setFloating, ref],
+      () => mergeRefs<HTMLDivElement>((node) => refs.setFloating(node), ref),
+      [refs, ref],
     )
 
     const { getReferenceProps, getFloatingProps } = useInteractions([

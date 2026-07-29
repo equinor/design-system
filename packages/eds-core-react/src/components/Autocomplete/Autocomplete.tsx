@@ -216,6 +216,7 @@ export function Autocomplete<T>({ ...props }: AutocompleteProps<T>) {
             meta={meta}
             disabled={disabled}
           />
+          {/* eslint-disable-next-line @typescript-eslint/unbound-method -- floating-ui's setReference is a stable standalone callback, not a `this`-bound method */}
           <Container ref={floatingProps.refs.setReference}>
             {multiple ? <MultipleInput /> : <SingleInput />}
           </Container>
