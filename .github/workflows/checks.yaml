@@ -59,7 +59,7 @@ jobs:
           fetch-depth: 2
       # SHA-pinned (v3.0.2) — third-party action running on every PR; pin to an
       # immutable commit so a compromised tag can't inject code into CI.
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+      - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706 # v4.0.2
         if: github.event_name != 'workflow_dispatch'
         id: filter
         with:
