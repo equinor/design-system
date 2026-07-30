@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-color-scheme] {
   --eds-background-container-canvas-default: var(--eds-neutral-1);
   --eds-background-container-card-default: var(--eds-neutral-15);
   --eds-background-container-popover-default: var(--eds-neutral-15);
