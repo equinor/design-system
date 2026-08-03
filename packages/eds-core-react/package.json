@@ -56,7 +56,7 @@
   "devDependencies": {
     "@equinor/eds-mobile-components": "^0.3.0",
     "@figma/code-connect": "^1.4.9",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.0",
     "@rollup/plugin-babel": "^7.1.0",
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -65,7 +65,7 @@
     "@storybook/addon-links": "^10.5.5",
     "@storybook/react-vite": "^10.5.5",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "^30.0.0",
