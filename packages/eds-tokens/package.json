@@ -108,7 +108,7 @@
     "lightningcss-cli": "^1.33.0",
     "prettier": "3.9.6",
     "rimraf": "^6.1.3",
-    "rollup": "^4.62.2",
+    "rollup": "^4.62.3",
     "rollup-plugin-delete": "^3.0.2",
     "style-dictionary": "^5.5.0",
     "style-dictionary-utils": "^6.0.1",
