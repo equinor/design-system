@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/equinor/design-system-mobile/compare/eds-mobile-components-v0.3.0...eds-mobile-components-v0.3.1) (2026-07-09)
+
+
+### Bug Fixes
+
+* **components:** Divider accessibility defaults can't be overridden ([#224](https://github.com/equinor/design-system-mobile/issues/224)) ([9873283](https://github.com/equinor/design-system-mobile/commit/9873283f82659baa10b20690bbfa4707b135d320))
+* **components:** make component's own disabled state win accessibilityState merges ([#221](https://github.com/equinor/design-system-mobile/issues/221)) ([ed5d78d](https://github.com/equinor/design-system-mobile/commit/ed5d78de4807f17101235eae870ea830de8ca801))
+
 ## [0.3.0](https://github.com/equinor/design-system-mobile/compare/eds-mobile-components-v0.2.0...eds-mobile-components-v0.3.0) (2026-06-30)
 
 
