@@ -78,6 +78,46 @@ The documentation site includes:
 * **static/** -- Static assets like images and files
 * **docusaurus.config.ts** -- Docusaurus configuration
 
+## Page Layouts
+
+The site has three layouts. Pick one when adding a page -- do not invent a fourth.
+
+| Layout | How a page opts in | Used by |
+| --- | --- | --- |
+| **Landing** | React pages: `@theme/Layout`. MDX docs: wrap the content in `<DocsLanding>` with frontmatter `hide_table_of_contents: true` + `displayed_sidebar: null`. | `/`, `/foundation`, `/getting-started`, `/about`, `components.mdx`, `resources.mdx`, `support.mdx`, and the getting-started guides |
+| **Component doc** | Frontmatter `hide_title: true` + `description:`, no in-body `# Title`. | `docs/components/**/*.md` |
+| **Foundation doc** | Automatic for any page under `docs/foundation/`. | `docs/foundation/**` |
+
+Shared building blocks (`Hero`, `SectionHeading`, `IconCard`/`IconCardGrid`,
+`CtaSection`, `TeamCard`, `Icon`, `StorybookEmbed`, `Tabs`, `TabItem`) are
+registered globally in `src/theme/MDXComponents.tsx`, so MDX files use them
+without imports. Repeated content (team, foundation nav, getting-started paths,
+Slack URL) lives in `src/data/`.
+
+**Landing** pages compose `<Hero>` + `<section className="docs-section">` +
+`<SectionHeading>` + cards. `<SectionHeading>` emits a slugified `id` from its
+`title`, so sections are deep-linkable the same way markdown headings are.
+Docusaurus's broken-anchor check only reads markdown headings, so it reports
+these anchors as broken even though they resolve at runtime.
+
+**Component docs** render a full-width hero band (title + `description`) above
+the standard three-column body via the `src/theme/DocItem/Layout` swizzle. The
+`description` frontmatter doubles as the SEO meta description, and `hide_title`
+keeps exactly one `<h1>` on the page. Unwritten component docs are parked as
+`_name.md` -- Docusaurus skips `_`-prefixed files, so they stay out of the
+build, the sidebar and the search index until someone writes them. Drop the
+underscore and add a `description` to publish one.
+
+**Foundation docs** get a full-bleed hero from the first heading with the
+sidebar and TOC hidden, driven by `docs-doc-id-foundation/` styling in
+`custom.css`. That styling is scoped to `docs-version-current`; archived
+versions keep the stock Docusaurus layout.
+
+For colours and surfaces, use **Infima variables** (`--ifm-*`) for neutral
+backgrounds and text -- they flip in dark mode. EDS `--eds-*` tokens are correct
+for accent and brand, but EDS *neutral* tokens resolve to their light value
+regardless of colour scheme in this app.
+
 ## Writing Documentation
 
 When adding or updating documentation:
