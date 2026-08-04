@@ -15,7 +15,7 @@ This command focuses on the per-component scaffolding flow. The patterns and cod
    - `figma_get_screenshot` — visual reference
    - `figma_get_variable_defs` — tokens **per state** (Default, Hover, Focus, Disabled, and any other state in the design). Use the EXACT variable names returned.
 
-2. **Check for existing components to reuse** in `packages/eds-core-react/src/components/next/index.ts`. Prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography` over reinventing.
+2. **Check the component index first** — [`documentation/AI-COMPONENT-INDEX.md`](../../documentation/AI-COMPONENT-INDEX.md) lists every existing `/next` component with its props and sub-components (generated, CI-verified). Confirm `$ARGUMENTS` doesn't already exist, and prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography` over reinventing. The underlying source of truth is `packages/eds-core-react/src/components/next/index.ts`.
 
 3. **If an old component exists** at `packages/eds-core-react/src/components/$ARGUMENTS/`, read it for behavioural awareness (keyboard nav, focus management) only — do not copy implementation. Use modern patterns: `:focus-visible`, CSS tokens, simple state.
 

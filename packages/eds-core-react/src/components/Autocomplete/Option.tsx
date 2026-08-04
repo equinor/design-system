@@ -33,11 +33,13 @@ export const StyledListItem = styled.li<StyledListItemType>(
       cursor: ${$highlighted === 'true' ? 'pointer' : 'default'};
       ${typographyTemplate(theme.typography)}
       ${spacingsTemplate(theme.spacings)}
-      ${$isdisabled === 'true'
-        ? css`
-            color: ${theme.states.disabled.typography.color};
-          `
-        : ''}
+      ${
+        $isdisabled === 'true'
+          ? css`
+              color: ${theme.states.disabled.typography.color};
+            `
+          : ''
+      }
     `
   },
 )

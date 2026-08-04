@@ -26,18 +26,22 @@ const StyledAccordionHeaderActions =
         align-items: center;
         justify-content: flex-end;
         padding-right: ${header.spacings.right};
-        ${disabled
-          ? css({
-              color: header.states.disabled.typography.color,
-              cursor: 'not-allowed',
-            })
-          : css({
-              color: header.typography.color,
-              cursor: 'pointer',
-            })}
-        color: ${$isExpanded && !disabled
-          ? header.states.active.typography?.color
-          : 'inherit'};
+        ${
+          disabled
+            ? css({
+                color: header.states.disabled.typography.color,
+                cursor: 'not-allowed',
+              })
+            : css({
+                color: header.typography.color,
+                cursor: 'pointer',
+              })
+        }
+        color: ${
+          $isExpanded && !disabled
+            ? header.states.active.typography?.color
+            : 'inherit'
+        };
       `
     },
   )

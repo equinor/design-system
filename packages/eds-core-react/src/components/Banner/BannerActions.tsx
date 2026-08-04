@@ -15,10 +15,12 @@ const StyledBannerActions = styled.div<StyledBannerActionsProps>(
       margin-left: ${theme.spacings.left};
       grid-gap: 8px;
       grid-column: ${$placement === 'bottom' ? '1/-1' : 'auto'};
-      ${$placement === 'bottom' && {
-        marginTop: theme.spacings.top,
-        marginLeft: '0',
-      }}
+      ${
+        $placement === 'bottom' && {
+          marginTop: theme.spacings.top,
+          marginLeft: '0',
+        }
+      }
     `
   },
 )

@@ -40,25 +40,30 @@ const Container = styled.div<StyledProps>(({ $token, disabled, readOnly }) => {
     ${outlineTemplate($token.outline)}
 
     &:focus-within {
-      --eds-input-adornment-color: ${entities.adornment?.states.focus?.outline
-        .color};
+      --eds-input-adornment-color: ${
+        entities.adornment?.states.focus?.outline.color
+      };
 
       box-shadow: none;
       ${outlineTemplate(states.focus.outline)}
     }
 
-    ${disabled &&
-    css`
-      --eds-input-adornment-color: ${states.disabled.typography.color};
-      --eds-input-color: ${states.disabled.typography.color};
-      cursor: not-allowed;
-      box-shadow: none;
-    `}
-    ${readOnly &&
-    css({
-      background: states.readOnly.background,
-      boxShadow: states.readOnly.boxShadow,
-    })}
+    ${
+      disabled &&
+      css`
+        --eds-input-adornment-color: ${states.disabled.typography.color};
+        --eds-input-color: ${states.disabled.typography.color};
+        cursor: not-allowed;
+        box-shadow: none;
+      `
+    }
+    ${
+      readOnly &&
+      css({
+        background: states.readOnly.background,
+        boxShadow: states.readOnly.boxShadow,
+      })
+    }
     & > input {
       overflow: hidden;
       white-space: nowrap;

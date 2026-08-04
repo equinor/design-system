@@ -1,0 +1,963 @@
+{
+  "light": {
+    "blue": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.blue.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.blue.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "gray": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.gray.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.gray.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "green": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.green.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "moss-green": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.moss-green.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.moss-green.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "north-sea": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.north-sea.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.north-sea.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "orange": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.orange.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.orange.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "red": {
+      "1": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.1}), {foundation.gaussian.light.1} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.2}), {foundation.gaussian.light.2} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.3}), {foundation.gaussian.light.3} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.4}), {foundation.gaussian.light.4} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.5}), {foundation.gaussian.light.5} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.6}), {foundation.gaussian.light.6} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.7}), {foundation.gaussian.light.7} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.8}), {foundation.gaussian.light.8} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.9}), {foundation.gaussian.light.9} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "10": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.10}), {foundation.gaussian.light.10} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "11": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.11}), {foundation.gaussian.light.11} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "12": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.12}), {foundation.gaussian.light.12} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "13": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.13}), {foundation.gaussian.light.13} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "14": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.14}), {foundation.gaussian.light.14} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "15": {
+        "$value": "set_chroma(set_lightness({input.palette.red.anchor}, {input.scale.light.15}), {foundation.gaussian.light.15} * {foundation.anchor.red.anchor.c})",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    }
+  }
+}

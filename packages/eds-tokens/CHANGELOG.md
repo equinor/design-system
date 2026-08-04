@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.3](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.2...eds-tokens@v3.0.0-beta.3) (2026-07-30)
+
+
+### 🐛 Fixed
+
+* emit the beta semantic token layer under the color-scheme scopes ([#5239](https://github.com/equinor/design-system/issues/5239)) ([470a35e](https://github.com/equinor/design-system/commit/470a35e8c97dc3b6dee6235b4d809cf9fe5d894e))
+
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.1...eds-tokens@v3.0.0-beta.2) (2026-07-22)
+
+
+### ✨ Added
+
+* add bundled variables.css to the Tokens Studio release pipeline ([#5209](https://github.com/equinor/design-system/issues/5209)) ([1243030](https://github.com/equinor/design-system/commit/1243030ac8175465241c4e9ea288393f00693010))
+
+## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.0...eds-tokens@v3.0.0-beta.1) (2026-07-20)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5182](https://github.com/equinor/design-system/issues/5182)) ([6074f72](https://github.com/equinor/design-system/commit/6074f721b4072741c50498d63c10ab3ebe45185e))
+
+## [2.3.2](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.1...eds-tokens@v2.3.2) (2026-07-20)
+
+Documentation-only release — no token changes.
+
+### 📝 Documentation
+
+* mark the legacy `tokens` JavaScript object as deprecated (do not use in new code) and flag the CSS variables as transitional: still the supported option for production, but the variable names will be replaced by the new token structure (currently on `@equinor/eds-tokens@beta`) in the next major release ([#5120](https://github.com/equinor/design-system/issues/5120))
+
 ## [2.3.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.0...eds-tokens@v2.3.1) (2026-06-23)
 
 

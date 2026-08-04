@@ -10,17 +10,17 @@ exports[`Checkbox (next) matches snapshot 1`] = `
     data-space-proportions="squished"
   >
     <input
-      class="eds-checkbox__input"
+      class="input"
       data-indeterminate="false"
       id="test-id"
       type="checkbox"
     />
     <span
-      class="eds-checkbox__icon-wrapper"
+      class="icon-wrapper"
     >
       <svg
         aria-hidden="true"
-        class="eds-icon eds-checkbox__icon eds-checkbox__icon--checked"
+        class="eds-icon icon icon-checked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -35,7 +35,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
       </svg>
       <svg
         aria-hidden="true"
-        class="eds-icon eds-checkbox__icon eds-checkbox__icon--unchecked"
+        class="eds-icon icon icon-unchecked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -50,7 +50,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
       </svg>
       <svg
         aria-hidden="true"
-        class="eds-icon eds-checkbox__icon eds-checkbox__icon--indeterminate"
+        class="eds-icon icon icon-indeterminate"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -65,7 +65,7 @@ exports[`Checkbox (next) matches snapshot 1`] = `
       </svg>
     </span>
     <label
-      class="eds-field__label"
+      class="label"
       data-baseline="center"
       for="test-id"
     >

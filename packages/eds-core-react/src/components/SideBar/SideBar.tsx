@@ -44,14 +44,16 @@ const GridContainer = styled.div<ContainerProps>(({ theme, open }) => {
     overflow: auto;
     width: ${open ? theme.maxWidth : theme.minWidth};
     min-width: ${open ? theme.maxWidth : theme.minWidth};
-    ${!open &&
-    css`
-      scrollbar-width: none; //firefox
-      //chrome/edge/safari
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    `}
+    ${
+      !open &&
+      css`
+        scrollbar-width: none; //firefox
+        //chrome/edge/safari
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      `
+    }
   `
 })
 

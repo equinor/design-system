@@ -21,12 +21,14 @@ const StyledTableOfContents = styled.nav<StyledTableOfContentsProps>(
       margin-top: ${theme.spacings.top};
       margin-bottom: ${theme.spacings.bottom};
 
-      ${$sticky &&
-      css`
-        position: fixed;
-        top: ${theme.entities.sticky.spacings.top};
-        right: ${theme.entities.sticky.spacings.right};
-      `}
+      ${
+        $sticky &&
+        css`
+          position: fixed;
+          top: ${theme.entities.sticky.spacings.top};
+          right: ${theme.entities.sticky.spacings.right};
+        `
+      }
     `
   },
 )

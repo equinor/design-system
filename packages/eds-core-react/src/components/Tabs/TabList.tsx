@@ -30,11 +30,9 @@ type StyledProps = {
   $scrollable?: boolean
 }
 
-const StyledTabList = styled.div.attrs(
-  (): HTMLAttributes<HTMLDivElement> => ({
-    role: 'tablist',
-  }),
-)<StyledProps>`
+const StyledTabList = styled.div.attrs((): HTMLAttributes<HTMLDivElement> => ({
+  role: 'tablist',
+}))<StyledProps>`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ $variant }) => variants[$variant] as VariantsRecord};

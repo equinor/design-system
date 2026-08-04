@@ -31,6 +31,10 @@ pnpm add @equinor/eds-core-react styled-components
 
 `styled-components@6` is a peer dependency of `eds-core-react`.
 
+:::note
+"EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are not the same — see [Versioning](#versioning) for the relationship.
+:::
+
 ### Load fonts
 
 Add the EDS variable font stylesheet to your HTML `<head>`:
@@ -83,6 +87,16 @@ function App() {
 
 See the [component overview](/docs/Next/components) for what's available in each set.
 
+### Versioning
+
+"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, alongside the stable EDS 1 components. The package itself is on version `2.x` today, so an installed `eds-core-react@2.x` matching "EDS 2.0" is also a coincidence.
+
+When EDS 2.0 stabilises, the components move out of `/next` and EDS 1 is deprecated. Because removing EDS 1 is a breaking change, the package bumps to `eds-core-react@3.0.0`.
+
+:::info
+The numbers line up by coincidence: "2.0" is the design system name, and "3.0.0" is the semver consequence of removing EDS 1. There is no "EDS 3.0" — the package version and the design system name are separate things.
+:::
+
 </div>
 </section>
 
@@ -105,21 +119,13 @@ For custom styling, use EDS design tokens to stay consistent with the system.
 }
 ```
 
-### JavaScript tokens
-
 ```bash
 npm install @equinor/eds-tokens
 ```
 
-```javascript
-import { tokens } from '@equinor/eds-tokens'
-
-const { typography, colors } = tokens
-const styles = {
-  fontSize: typography.heading.h1.fontSize,
-  color: colors.interactive.primary__resting.rgba,
-}
-```
+:::note
+The token structure is being replaced. The CSS variables are the supported option today, but the variable names will change in the next major release of `@equinor/eds-tokens`, so keep direct variable references few and centralised. The older `tokens` JavaScript object is deprecated and should not be used in new code. See the [package README](https://www.npmjs.com/package/@equinor/eds-tokens) for details.
+:::
 
 </div>
 </section>

@@ -9,9 +9,6 @@ import { Field } from '../Field'
 import { Icon } from '../Icon'
 import type { CheckboxProps } from './Checkbox.types'
 
-const classNames = (...classes: (string | boolean | undefined)[]) =>
-  classes.filter(Boolean).join(' ')
-
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
     {
@@ -44,27 +41,23 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={inputId}
           aria-checked={indeterminate ? 'mixed' : undefined}
           aria-describedby={helperMessage ? helperMessageId : undefined}
-          className="eds-checkbox__input"
+          className="input"
           disabled={disabled}
           ref={inputRef}
           data-indeterminate={indeterminate}
           {...rest}
         />
-        <span className="eds-checkbox__icon-wrapper">
-          <Icon
-            data={checkbox}
-            size="lg"
-            className="eds-checkbox__icon eds-checkbox__icon--checked"
-          />
+        <span className="icon-wrapper">
+          <Icon data={checkbox} size="lg" className="icon icon-checked" />
           <Icon
             data={checkbox_outline}
             size="lg"
-            className="eds-checkbox__icon eds-checkbox__icon--unchecked"
+            className="icon icon-unchecked"
           />
           <Icon
             data={checkbox_indeterminate}
             size="lg"
-            className="eds-checkbox__icon eds-checkbox__icon--indeterminate"
+            className="icon icon-indeterminate"
           />
         </span>
       </>
@@ -96,7 +89,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className={classNames('eds-checkbox', 'eds-checkbox--standalone')}
+        className="eds-checkbox"
+        data-standalone={true}
         data-color-appearance={disabled ? 'neutral' : 'accent'}
         data-disabled={disabled || undefined}
       >

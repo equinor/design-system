@@ -34,10 +34,8 @@
     border-radius: var(--eds-spacing-border-radius-rounded);
 
     transition: background-color 150ms;
-  }
 
-  .eds-switch {
-    &:has(.eds-switch__input:focus-visible) {
+    &:has(.input:focus-visible) {
       outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
       outline-offset: var(--eds-sizing-stroke-thick);
     }
@@ -46,105 +44,103 @@
       cursor: not-allowed;
     }
 
-    & .eds-field__label {
+    & label {
       cursor: pointer;
     }
 
-    &[data-disabled='true'] .eds-field__label {
+    &[data-disabled='true'] label {
       cursor: not-allowed;
       color: var(--eds-color-text-disabled);
+    }
+
+    &:has(.input:checked) .handle {
+      inset-inline-start: calc(100% - var(--_handle-size));
+    }
+
+    &:has(.input:disabled) .handle {
+      background-color: var(--eds-color-bg-disabled);
+    }
+
+    & .control {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
+      min-block-size: var(--_icon-size);
+
+      /* Negative margin for alignment with Checkbox/Radio icons */
+      margin-block: -6px;
+      margin-inline: -1.9px;
+
+      [data-density='comfortable'] & {
+        margin-inline: -2.1px;
+      }
+    }
+
+    & .input {
+      cursor: pointer;
+
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+
+      margin: 0;
+
+      appearance: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    & .track {
+      pointer-events: none;
+
+      position: relative;
+
+      display: inline-block;
+
+      inline-size: var(--_track-width);
+      block-size: var(--_track-height);
+      border-radius: var(--eds-spacing-border-radius-pill);
+
+      background-color: var(--eds-color-bg-fill-muted-default);
+
+      transition: background-color 150ms;
+    }
+
+    & .handle {
+      pointer-events: none;
+
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 0;
+      translate: 0 -50%;
+
+      inline-size: var(--_handle-size);
+      block-size: var(--_handle-size);
+      border-radius: var(--eds-spacing-border-radius-pill);
+
+      background-color: var(--eds-color-bg-fill-emphasis-default);
+
+      transition:
+        inset-inline-start 150ms,
+        background-color 150ms;
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover:not([data-disabled='true']) {
         background-color: var(--_switch-hover-color);
       }
-    }
-  }
 
-  .eds-switch__control {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-
-    min-block-size: var(--_icon-size);
-
-    /* Negative margin for alignment with Checkbox/Radio icons */
-    margin-block: -6px;
-    margin-inline: -1.9px;
-  }
-
-  [data-density='comfortable'] .eds-switch__control {
-    margin-inline: -2.1px;
-  }
-
-  .eds-switch__input {
-    cursor: pointer;
-
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-
-    margin: 0;
-
-    appearance: none;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-
-  .eds-switch__track {
-    pointer-events: none;
-
-    position: relative;
-
-    display: inline-block;
-
-    inline-size: var(--_track-width);
-    block-size: var(--_track-height);
-    border-radius: var(--eds-spacing-border-radius-pill);
-
-    background-color: var(--eds-color-bg-fill-muted-default);
-
-    transition: background-color 150ms;
-
-    @media (hover: hover) and (pointer: fine) {
-      .eds-switch:hover:not([data-disabled='true']) & {
+      &:hover:not([data-disabled='true']) .track {
         background-color: var(--_track-hover-bg);
       }
-    }
-  }
-
-  .eds-switch__handle {
-    pointer-events: none;
-
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: 0;
-    translate: 0 -50%;
-
-    inline-size: var(--_handle-size);
-    block-size: var(--_handle-size);
-    border-radius: var(--eds-spacing-border-radius-pill);
-
-    background-color: var(--eds-color-bg-fill-emphasis-default);
-
-    transition:
-      inset-inline-start 150ms,
-      background-color 150ms;
-
-    .eds-switch:has(.eds-switch__input:checked) & {
-      inset-inline-start: calc(100% - var(--_handle-size));
-    }
-
-    .eds-switch:has(.eds-switch__input:disabled) & {
-      background-color: var(--eds-color-bg-disabled);
     }
   }
 }

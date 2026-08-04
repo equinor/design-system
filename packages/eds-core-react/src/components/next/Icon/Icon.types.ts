@@ -2,16 +2,7 @@ import type { IconData, IconName } from '@equinor/eds-icons'
 import type { SVGProps, Ref } from 'react'
 
 export type IconSize =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl'
+  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'
 
 export type IconProps = {
   /** Icon data from @equinor/eds-icons */

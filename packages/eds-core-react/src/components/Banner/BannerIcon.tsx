@@ -28,9 +28,11 @@ const StyledBannerIcon = styled.span<StyledBannerIconProps>(
       justify-content: center;
       flex-shrink: 0;
       ${bordersTemplate(theme.entities.icon.border)};
-      background-color: ${$variant === 'warning'
-        ? warning.entities.icon.background
-        : info.entities.icon.background};
+      background-color: ${
+        $variant === 'warning'
+          ? warning.entities.icon.background
+          : info.entities.icon.background
+      };
       width: ${theme.entities.icon.width};
       height: ${theme.entities.icon.height};
       margin-right: ${theme.spacings.right};

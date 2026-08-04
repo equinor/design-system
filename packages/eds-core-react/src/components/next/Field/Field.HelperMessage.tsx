@@ -27,9 +27,7 @@ export const HelperMessage = forwardRef<
       data-baseline="grid"
       id={id}
       role={role}
-      className={['eds-field__helper-message', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['helper-message', className].filter(Boolean).join(' ')}
       {...rest}
     >
       {children}

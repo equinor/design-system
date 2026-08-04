@@ -9,7 +9,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       class="eds-text-field__header"
     >
       <label
-        class="eds-field__label"
+        class="label"
         data-baseline="center"
         for="test-id-input"
       >
@@ -17,7 +17,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       </label>
     </div>
     <p
-      class="eds-field__description"
+      class="description"
       data-baseline="center"
       id="test-id-description"
     >
@@ -43,7 +43,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       />
     </div>
     <p
-      class="eds-field__helper-message"
+      class="helper-message"
       data-baseline="grid"
       id="test-id-helper-message"
     >

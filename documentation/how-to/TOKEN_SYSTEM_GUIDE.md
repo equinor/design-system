@@ -1,5 +1,10 @@
 # Token System Guide
 
+> **Note:** A new Tokens Studio-based pipeline is being phased in — see
+> [`documentation/agent-instructions/TOKENS_STUDIO.md`](../agent-instructions/TOKENS_STUDIO.md).
+> This guide covers the **legacy pipeline** (Figma REST sync + Style Dictionary),
+> which still owns everything the `@equinor/eds-tokens` package publishes.
+
 This guide provides a comprehensive walkthrough of the <abbr title="Equinor Design System">EDS</abbr> token system – from Figma setup through syncing, building, and implementation. It covers the complete token lifecycle and serves as documentation for working with design tokens in the EDS.
 
 ## Table of Contents

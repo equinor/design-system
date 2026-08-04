@@ -21,9 +21,9 @@ const Input = styled(BaseInput)(
     }
     /*  Track */
     &:checked + span > span {
-      background-color: ${disabled
-        ? states.disabled.background
-        : track.states.active.background};
+      background-color: ${
+        disabled ? states.disabled.background : track.states.active.background
+      };
     }
     /* Handle */
     &:checked + span > span:last-child {
@@ -50,9 +50,11 @@ const Track = styled.span<StyledProps>(
     height: ${track.height};
     border-radius: 10px;
     border: none;
-    background-color: ${$isDisabled
-      ? states.disabled.background
-      : track.states.disabled.background};
+    background-color: ${
+      $isDisabled
+        ? states.disabled.background
+        : track.states.disabled.background
+    };
     position: absolute;
     left: 50%;
     top: 50%;

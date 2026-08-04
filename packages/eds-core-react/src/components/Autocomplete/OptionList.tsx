@@ -56,6 +56,7 @@ export const OptionList = ({
     isOpen && !availableItems.length && noOptionsText.length > 0
 
   const floatingProps = getFloatingProps({
+    // eslint-disable-next-line @typescript-eslint/unbound-method -- floating-ui's setFloating is a stable standalone callback, not a `this`-bound method
     ref: refs.setFloating,
     onFocus: handleListFocus,
     style: {

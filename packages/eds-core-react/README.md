@@ -21,6 +21,8 @@ import { Button, Typography } from '@equinor/eds-core-react'
 
 ⚠️ **Experimental** – For testing and feedback only. Not production-ready.
 
+> **Note on naming:** "EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are separate; the numbers line up by coincidence. See [Versioning](https://eds.equinor.com/docs/about/about_eds#versioning) for the full explanation.
+
 ```bash
 npm install @equinor/eds-core-react@beta
 ```
