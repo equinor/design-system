@@ -31,5 +31,8 @@ review.txt
 opencode.json
 settings.local.json
 
+# Playwright MCP scratch output
+.playwright-mcp/
+
 # Generated build files
 packages/eds-core-react/build/

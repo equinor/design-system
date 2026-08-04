@@ -24,6 +24,11 @@ export default tseslint.config(
       '.eslintcache',
       'node_modules/.cache/**',
       '**/build/**',
+      // Docusaurus generated output. Not skipped automatically when a path is
+      // passed explicitly (pnpm run lint:docs), and its .js files match the
+      // docs-app override that sets @typescript-eslint rules, which then fails
+      // config validation because the plugin only loads for .ts/.tsx.
+      '**/.docusaurus/**',
       '**/coverage/**',
       '**/.next/**',
       '**/playwright-report/**',
