@@ -1,6 +1,8 @@
 .docs-section-heading__title {
   font-size: 1.75rem;
   margin-bottom: 1rem;
+  /* Keep deep-linked headings clear of the sticky navbar. */
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
 }
 
 .docs-section-heading__subtitle {
