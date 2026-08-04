@@ -6,18 +6,12 @@ hide_title: true
 
 ## When to Use
 
+## Structure
+
 ## Guidelines
 
 ## Accessibility
 
 ## Figma
 
-### Do's and don'ts
-
-:::info **Do**
-
-- :::
-
-:::danger **Don't**
-
-- :::
+## Do's and Don'ts

@@ -41,7 +41,18 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          exclude: ['**/tone-guide/**'],
+          // `exclude` replaces Docusaurus's defaults rather than extending
+          // them, so GlobExcludeDefault is repeated here. Without it the
+          // `_`-prefixed convention stops working — that's what keeps the
+          // unwritten component stubs (docs/components/**/_*.md) out of the
+          // build, the sidebar, and the search index.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            '**/tone-guide/**',
+          ],
           breadcrumbs: true,
           editUrl:
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
