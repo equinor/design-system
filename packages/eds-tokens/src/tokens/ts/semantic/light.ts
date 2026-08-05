@@ -5,71 +5,254 @@
 
 export const semantic = {
   background: {
-    container: {
-      canvas: {
-        default: '#f8f8f8',
-      },
-      card: {
-        default: '#ffffff',
-      },
-      popover: {
-        default: '#ffffff',
-        inverted: '#404040',
-      },
-      sheet: {
-        dialog: {
-          default: '#ffffff',
-        },
-      },
-    },
-    surface: {
+    canvas: '#f8f8f8',
+    danger: '#ffe1df',
+    dialog: '#ffffff',
+    floating: '#ffffff',
+    info: '#d9efff',
+    interactive: {
       accent: {
-        default: {
-          default: '#cae4e7',
-          hover: '#20565c',
-          pressed: '#ffffff',
+        emphasis: {
+          default: '#21767e',
+          hover: '#1f666d',
+          pressed: '#20565c',
+        },
+        muted: {
+          default: '#ddeff1',
+          hover: '#cfe7e9',
+          pressed: '#bbdbdf',
         },
         selected: {
           default: '#a2cdd2',
-          hover: '#87c0c6',
-          pressed: '#6cb2b9',
-        },
-        subtle: {
-          default: '#ddeff1',
-          hover: '#bbdbdf',
-          pressed: '#87c0c6',
+          hover: '#6cb2b9',
+          pressed: '#3c959e',
         },
       },
-      default: {
-        active: '#ebebeb',
-        default: '#f8f8f8',
-        disabled: '#f8f8f8',
-        hover: '#ebebeb',
-        muted: '#f8f8f8',
-        pressed: '#e1e1e1',
-        readOnly: '#f8f8f8',
+      danger: {
+        emphasis: {
+          default: '#c5002e',
+          hover: '#ab0428',
+          pressed: '#8e1525',
+        },
+        muted: {
+          default: '#ffe1df',
+          hover: '#ffd4d2',
+          pressed: '#ffc3c0',
+        },
+      },
+      disabled: '#ebebeb',
+      neutral: {
+        emphasis: {
+          default: '#696969',
+          hover: '#5b5b5b',
+          pressed: '#4d4d4d',
+        },
+        muted: {
+          default: '#f8f8f8',
+          hover: '#ebebeb',
+          pressed: '#e1e1e1',
+        },
         selected: {
           default: '#ddeff1',
           hover: '#cfe7e9',
           pressed: '#bbdbdf',
         },
       },
+      readOnly: '#ebebeb',
+      warning: {
+        emphasis: {
+          default: '#9f5100',
+          hover: '#894700',
+          pressed: '#753c00',
+        },
+        muted: {
+          default: '#ffe6d3',
+          hover: '#fbdac1',
+          pressed: '#f6caaa',
+        },
+      },
     },
+    inverted: '#404040',
+    success: '#ddf2db',
+    surface: '#ffffff',
+    warning: '#ffe6d3',
   },
   border: {
-    default: '#d4d4d4',
-    disabled: '#a4a4a4',
-    emphasized: '#b4b4b4',
-    focus: '#5cade5',
-    hover: '#a4a4a4',
-    selected: '#1e383a',
-    subtle: '#ebebeb',
+    accent: {
+      medium: '#6cb2b9',
+      strong: '#21767e',
+      subtle: '#bbdbdf',
+    },
+    danger: {
+      subtle: '#ffc3c0',
+    },
+    info: {
+      subtle: '#b5daf5',
+    },
+    interactive: {
+      accent: {
+        emphasis: {
+          default: '#21767e',
+          hover: '#1f666d',
+          pressed: '#20565c',
+        },
+        muted: {
+          default: '#bbdbdf',
+          hover: '#a2cdd2',
+          pressed: '#6cb2b9',
+        },
+      },
+      danger: {
+        emphasis: {
+          default: '#c5002e',
+          hover: '#ab0428',
+          pressed: '#8e1525',
+        },
+        muted: {
+          default: '#ffc3c0',
+          hover: '#ffa7a5',
+          pressed: '#ff6d71',
+        },
+      },
+      disabled: '#ebebeb',
+      focus: '#5cade5',
+      neutral: {
+        emphasis: {
+          default: '#696969',
+          hover: '#5b5b5b',
+          pressed: '#4d4d4d',
+        },
+        muted: {
+          default: '#d4d4d4',
+          hover: '#a4a4a4',
+          pressed: '#868686',
+        },
+      },
+      selectedIndicator: '#1e383a',
+      warning: {
+        emphasis: {
+          default: '#9f5100',
+          hover: '#894700',
+          pressed: '#753c00',
+        },
+        muted: {
+          default: '#f6caaa',
+          hover: '#f0b689',
+          pressed: '#e38d42',
+        },
+      },
+    },
+    neutral: {
+      medium: '#d4d4d4',
+      strong: '#b4b4b4',
+      subtle: '#ebebeb',
+    },
+    success: {
+      subtle: '#bbe0b8',
+    },
+    warning: {
+      subtle: '#f6caaa',
+    },
   },
   cornerRadius: {
     none: 0,
     pill: 9999,
     rounded: 4,
     roundedOuter: 6,
+  },
+  dataVisualization: {
+    cat: {
+      '1': {
+        '1': '#adc3c4',
+        '2': '#5d8386',
+        '3': '#03484c',
+        '4': '#00383c',
+        '5': '#00282c',
+      },
+      '2': {
+        '1': '#f9eab5',
+        '2': '#f7db79',
+        '3': '#f4cb00',
+        '4': '#a28200',
+        '5': '#544100',
+      },
+      '3': {
+        '1': '#c0e6ff',
+        '2': '#8aceff',
+        '3': '#4bb6fc',
+        '4': '#0078b7',
+        '5': '#003f6e',
+      },
+      '4': {
+        '1': '#f4c8dc',
+        '2': '#df96ba',
+        '3': '#c86499',
+        '4': '#92376a',
+        '5': '#5e053e',
+      },
+      '5': {
+        '1': '#c2d9b3',
+        '2': '#8ab06f',
+        '3': '#548723',
+        '4': '#315f00',
+        '5': '#153900',
+      },
+      '6': {
+        '1': '#d9c1e5',
+        '2': '#af86c2',
+        '3': '#854b9e',
+        '4': '#622c79',
+        '5': '#410a55',
+      },
+      '7': {
+        '1': '#edbcba',
+        '2': '#ca7b7a',
+        '3': '#a3383e',
+        '4': '#7e1823',
+        '5': '#590009',
+      },
+      '8': {
+        '1': '#b7e5d1',
+        '2': '#75c9a8',
+        '3': '#00ad81',
+        '4': '#007853',
+        '5': '#00432b',
+      },
+      '9': {
+        '1': '#bfd4f9',
+        '2': '#87a9e7',
+        '3': '#507ed3',
+        '4': '#2a53a0',
+        '5': '#052a70',
+      },
+      '10': {
+        '1': '#ffd5bf',
+        '2': '#f7b18a',
+        '3': '#ed8b52',
+        '4': '#aa5215',
+        '5': '#671f00',
+      },
+    },
+    div: {
+      '1': '#1564b0',
+      '2': '#5387c1',
+      '3': '#87a9d2',
+      '4': '#bacce1',
+      '5': '#eeeeee',
+      '6': '#dcc5b4',
+      '7': '#c89c7a',
+      '8': '#b2733f',
+      '9': '#9b4900',
+    },
+    seq: {
+      '1': '#dff7fa',
+      '2': '#a4dbe2',
+      '3': '#59c1cc',
+      '4': '#00a4b3',
+      '5': '#008290',
+      '6': '#00626c',
+      '7': '#054046',
+    },
   },
   fontFamily: {
     header: 'Equinor',
@@ -81,16 +264,39 @@ export const semantic = {
     normal: 400,
   },
   icon: {
-    accent: '#1e383a',
-    accentHover: '#cae4e7',
-    accentPressed: '#ffffff',
-    colorOnDark: '#dedede',
-    colorOnLight: '#404040',
-    disabled: '#c4c4c4',
-    muted: '#a4a4a4',
-    onAccent: '#dedede',
-    primary: '#5b5b5b',
+    accent: '#20474b',
+    danger: '#ab0428',
+    info: '#006192',
+    interactive: {
+      accent: {
+        default: '#20565c',
+        hover: '#20474b',
+        pressed: '#1e383a',
+      },
+      danger: {
+        default: '#ab0428',
+        hover: '#8e1525',
+        pressed: '#721c22',
+      },
+      disabled: '#c4c4c4',
+      link: {
+        default: '#1d8fcf',
+        hover: '#0070a7',
+        pressed: '#006192',
+      },
+      warning: {
+        default: '#894700',
+        hover: '#753c00',
+        pressed: '#603204',
+      },
+    },
+    inverted: '#f8f8f8',
+    onEmphasis: '#ffffff',
+    primary: '#404040',
     secondary: '#868686',
+    success: '#206d1f',
+    tertiary: '#a4a4a4',
+    warning: '#894700',
   },
   overlay: {
     scrim: '#1d1d1d1a',
@@ -108,32 +314,40 @@ export const semantic = {
     xl: 24,
     xs: 8,
   },
-  status: {
-    warning: {
-      default: '#fff6f0',
-      emphased: {
-        default: '#c86a00',
-        hover: '#753c00',
-        selected: '#603204',
-      },
-      hover: '#fbdac1',
-      selected: '#f0b689',
-    },
-  },
   text: {
-    accent: '#1d8fcf',
-    colorOnDark: '#dedede',
-    colorOnLight: '#404040',
-    disabled: '#a4a4a4',
-    muted: '#a4a4a4',
-    onAccent: '#dedede',
-    pressed: '#006192',
+    accent: '#20474b',
+    danger: '#ab0428',
+    info: '#006192',
+    interactive: {
+      accent: {
+        default: '#1f666d',
+        hover: '#20565c',
+        pressed: '#20474b',
+      },
+      danger: {
+        default: '#ab0428',
+        hover: '#8e1525',
+        pressed: '#721c22',
+      },
+      disabled: '#c4c4c4',
+      link: {
+        default: '#1d8fcf',
+        hover: '#0070a7',
+        pressed: '#006192',
+      },
+      warning: {
+        default: '#894700',
+        hover: '#753c00',
+        pressed: '#603204',
+      },
+    },
+    inverted: '#f8f8f8',
+    onEmphasis: '#ffffff',
     primary: '#404040',
     secondary: '#868686',
-    status: {
-      onDark: '#ffffff',
-      onLight: '#753c00',
-    },
+    success: '#206d1f',
+    tertiary: '#a4a4a4',
+    warning: '#894700',
   },
   typography: {
     header: {
