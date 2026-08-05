@@ -115,8 +115,14 @@ granular files stay internal.
   minifier-version churn in release-PR diffs, no extra toolchain
   dependency in the pipeline) and diffs stay reviewable. Gzip closes
   the size gap (4.8 vs 4.6 kB); consumers that bundle minify with
-  their own tooling. The bundle adds no behaviour of its own on top of
-  the generated files (see the colour-scheme note below).
+  their own tooling. The bundle's only added behaviour is the
+  `@layer eds-tokens` wrap decided in
+  [ADR-0014](./0014-token-code-output-architecture.md) (proposed in
+  [#5178](https://github.com/equinor/design-system/pull/5178), decision
+  point 6; not yet implemented — the shipped bundle is unlayered until
+  then). The wrap is deterministic, so the bundle stays a pure function
+  of the source files; beyond it the step adds nothing on top of the
+  generated files (see the colour-scheme note below).
 - **Beta validation costs nothing extra:** the existing `./next/css/*`
   wildcard maps to `src/tokens/css/*`, so the committed bundle is
   importable as `@equinor/eds-tokens/next/css/variables.css` in the next
@@ -180,6 +186,10 @@ app decides the policy.
 - [ADR-0013](./0013-attribute-scoped-custom-properties-not-light-dark.md)
   — why the token CSS uses attribute-scoped rules and never
   `light-dark()`
+- [ADR-0014](./0014-token-code-output-architecture.md) (proposed in
+  [#5178](https://github.com/equinor/design-system/pull/5178)) — the
+  output architecture; decides the `@layer eds-tokens` wrap this
+  bundle step applies
 - PR [#4864](https://github.com/equinor/design-system/pull/4864) — why the
   2.x bundle has explicit dark scopes + the `prefers-color-scheme`
   fallback (`build-dark-scope`)
