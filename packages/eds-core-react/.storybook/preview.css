@@ -20,7 +20,7 @@ legend {
   color: var(--eds-text-primary);
   min-height: 100%;
   padding: 1rem;
-  background-color: var(--eds-background-container-canvas-default);
+  background-color: var(--eds-background-canvas);
 }
 
 /* Debug grid */
