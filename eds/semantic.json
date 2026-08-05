@@ -508,7 +508,7 @@
   },
   "overlay": {
     "scrim": {
-      "$value": "#1d1d1d30",
+      "$value": "#1d1d1d1a",
       "$type": "color",
       "$extensions": {
         "com.figma": {
