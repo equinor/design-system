@@ -50,7 +50,7 @@
   --eds-icon-on-accent: var(--eds-neutral-14);
   --eds-icon-primary: var(--eds-neutral-10);
   --eds-icon-secondary: var(--eds-neutral-8);
-  --eds-overlay-scrim: rgb(29 29 29 / 0.1);
+  --eds-overlay-scrim: #1d1d1d1a;
   --eds-spacing-2xl: var(--eds-density-spacing-2xl);
   --eds-spacing-2xs: var(--eds-density-spacing-2xs);
   --eds-spacing-3xl: var(--eds-density-spacing-3xl);

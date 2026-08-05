@@ -2,13 +2,11 @@
   "family": {
     "header": {
       "$extensions": {
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": true,
-            "scopes": [
-              "FONT_FAMILY"
-            ]
-          }
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "FONT_FAMILY"
+          ]
         }
       },
       "$type": "fontFamily",
@@ -16,13 +14,11 @@
     },
     "ui": {
       "$extensions": {
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": true,
-            "scopes": [
-              "FONT_FAMILY"
-            ]
-          }
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "FONT_FAMILY"
+          ]
         }
       },
       "$type": "fontFamily",
@@ -32,13 +28,11 @@
   "weight": {
     "bolder": {
       "$extensions": {
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": true,
-            "scopes": [
-              "FONT_WEIGHT"
-            ]
-          }
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "FONT_WEIGHT"
+          ]
         }
       },
       "$type": "fontWeight",
@@ -46,13 +40,11 @@
     },
     "lighter": {
       "$extensions": {
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": true,
-            "scopes": [
-              "FONT_WEIGHT"
-            ]
-          }
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "FONT_WEIGHT"
+          ]
         }
       },
       "$type": "fontWeight",
@@ -60,13 +52,11 @@
     },
     "normal": {
       "$extensions": {
-        "$extensions": {
-          "com.figma": {
-            "hiddenFromPublishing": true,
-            "scopes": [
-              "FONT_WEIGHT"
-            ]
-          }
+        "com.figma": {
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "FONT_WEIGHT"
+          ]
         }
       },
       "$type": "fontWeight",
