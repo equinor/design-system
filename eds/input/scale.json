@@ -53,7 +53,7 @@
           }
         },
         "6": {
-          "$value": 0.47,
+          "$value": "0.595",
           "$type": "number",
           "$description": "border-subtle",
           "$extensions": {
