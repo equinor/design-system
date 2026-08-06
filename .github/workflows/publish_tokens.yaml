@@ -15,48 +15,46 @@ on:
         default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '24.16.0'
+  CACHE_KEY: ${{ github.sha }}-publish-tokens
 
 jobs:
   setup:
+    name: Setup
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
-      cacheKey: ${{ github.sha }}-setup-tokens
-      checkout_paths: packages apps scripts
+      cacheKey: ${{ github.sha }}-publish-tokens
       tag: ${{ github.event.inputs.npm-tag }}
-  packages:
-    name: Process packages
+
+  build:
+    name: Build packages
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: setup
     steps:
-      - name: Use "setup" cache
-        id: setup-cache
-        uses: actions/cache@v6
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-setup-tokens
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
-        with:
-          path: |
-            ./*
-            ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-tokens
+          key: ${{ env.CACHE_KEY }}
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       - name: Build packages
-        id: build-packages
         run: pnpm run build
+      - name: Cache build output
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:
@@ -67,36 +65,32 @@ jobs:
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
-    needs: [packages, setup]
+    needs: build
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Use "dist" cache
-        id: dist-cache
-        uses: actions/cache@v6
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
         with:
           path: |
             ./*
             ~/.pnpm-store
-          key: ${{ github.sha }}-dist-production-tokens
+          key: ${{ env.CACHE_KEY }}-built
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
       - name: Setup pnpm
-        id: setup-pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: false
       # Beta releases publish the pinned 3.0.0-beta.N version managed by
       # release-please in version.txt. package.json stays at the last
       # stable version in git so that pnpm's workspace:^ rewriting keeps
       # other packages' stable releases depending on stable tokens.
       - name: Set beta version from version.txt
         if: github.event.inputs.npm-tag == 'beta'
-        id: set-beta-version
         run: |
           BETA_VERSION=$(tr -d '[:space:]' < packages/eds-tokens/version.txt)
           echo "Beta version: $BETA_VERSION"
@@ -117,7 +111,6 @@ jobs:
       # silently overwrite them.
       - name: Add Tokens Studio output for beta release
         if: github.event.inputs.npm-tag == 'beta'
-        id: add-tokens-studio-output
         run: |
           cd packages/eds-tokens
           for dir in src/tokens/css src/tokens/dtcg src/tokens/ts; do
@@ -137,9 +130,7 @@ jobs:
             console.log('Added Tokens Studio output to files and exports');
           "
       - name: Publish to npm
-        id: publish-to-npm
-        working-directory: packages/eds-tokens
-        run: pnpm publish --access public --provenance --tag ${{ needs.setup.outputs.tag }} --no-git-checks
+        run: pnpm --filter @equinor/eds-tokens publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack
         uses: act10ns/slack@v2
         with:

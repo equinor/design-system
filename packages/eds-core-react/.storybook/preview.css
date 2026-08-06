@@ -12,12 +12,15 @@ legend {
   font-family: var(--eds-typography-ui-body-font-family), sans-serif;
 }
 
-/* Storybook color scheme wrapper */
+/* Storybook color scheme wrapper. Uses the beta semantic tokens (not the
+   legacy --eds-color-* ones): legacy declares no dark value for its
+   surface token, while these re-resolve per [data-color-scheme] subtree
+   (#5226), so the canvas follows the colour-scheme toolbar toggle. */
 .eds-storybook-wrapper {
-  color: var(--eds-color-text-strong);
+  color: var(--eds-text-primary);
   min-height: 100%;
   padding: 1rem;
-  background-color: var(--eds-color-bg-neutral-surface);
+  background-color: var(--eds-background-canvas);
 }
 
 /* Debug grid */

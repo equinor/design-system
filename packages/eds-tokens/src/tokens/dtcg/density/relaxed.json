@@ -3,13 +3,11 @@
     "corner-radius": {
       "none": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "CORNER_RADIUS"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "CORNER_RADIUS"
+            ]
           }
         },
         "$type": "dimension",
@@ -17,13 +15,11 @@
       },
       "pill": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "CORNER_RADIUS"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "CORNER_RADIUS"
+            ]
           }
         },
         "$type": "dimension",
@@ -34,13 +30,11 @@
       },
       "rounded": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "CORNER_RADIUS"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "CORNER_RADIUS"
+            ]
           }
         },
         "$type": "dimension",
@@ -48,13 +42,11 @@
       },
       "rounded-outer": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "CORNER_RADIUS"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "CORNER_RADIUS"
+            ]
           }
         },
         "$type": "dimension",
@@ -64,14 +56,12 @@
     "spacing": {
       "2xl": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -79,14 +69,12 @@
       },
       "2xs": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -94,14 +82,12 @@
       },
       "3xl": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -109,14 +95,12 @@
       },
       "3xs": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -124,14 +108,12 @@
       },
       "4xs": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -139,14 +121,12 @@
       },
       "lg": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -154,14 +134,12 @@
       },
       "md": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -169,14 +147,12 @@
       },
       "none": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -184,14 +160,12 @@
       },
       "sm": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -199,14 +173,12 @@
       },
       "xl": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -214,14 +186,12 @@
       },
       "xs": {
         "$extensions": {
-          "$extensions": {
-            "com.figma": {
-              "hiddenFromPublishing": true,
-              "scopes": [
-                "WIDTH_HEIGHT",
-                "GAP"
-              ]
-            }
+          "com.figma": {
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
           }
         },
         "$type": "dimension",
@@ -233,13 +203,11 @@
         "2xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -247,13 +215,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -263,13 +229,11 @@
         "3xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -277,13 +241,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -293,13 +255,11 @@
         "4xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -307,13 +267,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -323,13 +281,11 @@
         "lg": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -337,13 +293,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -353,13 +307,11 @@
         "md": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -367,13 +319,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -383,13 +333,11 @@
         "sm": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -397,13 +345,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -413,13 +359,11 @@
         "xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -427,13 +371,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -443,13 +385,11 @@
         "xs": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -457,13 +397,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -475,13 +413,11 @@
         "2xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -489,13 +425,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -505,13 +439,11 @@
         "3xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -519,13 +451,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -535,13 +465,11 @@
         "4xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -549,13 +477,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -565,13 +491,11 @@
         "5xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -579,13 +503,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -595,13 +517,11 @@
         "lg": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -609,13 +529,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -625,13 +543,11 @@
         "md": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -639,13 +555,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -655,13 +569,11 @@
         "sm": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -669,13 +581,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -685,13 +595,11 @@
         "xl": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -699,13 +607,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",
@@ -715,13 +621,11 @@
         "xs": {
           "font-size": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "FONT_SIZE"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "FONT_SIZE"
+                ]
               }
             },
             "$type": "fontSize",
@@ -729,13 +633,11 @@
           },
           "line-height": {
             "$extensions": {
-              "$extensions": {
-                "com.figma": {
-                  "hiddenFromPublishing": true,
-                  "scopes": [
-                    "LINE_HEIGHT"
-                  ]
-                }
+              "com.figma": {
+                "hiddenFromPublishing": true,
+                "scopes": [
+                  "LINE_HEIGHT"
+                ]
               }
             },
             "$type": "lineHeight",

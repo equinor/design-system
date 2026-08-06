@@ -49,23 +49,15 @@ const preview = {
 
       const colorScheme = context.globals.colorScheme || 'light'
 
-      useEffect(() => {
-        // The Tokens Studio beta semantic tokens are declared at :root and
-        // reference step aliases that only exist under [data-color-scheme].
-        // Custom properties substitute where they are declared, so the
-        // attribute must sit on <html> for the semantic layer to resolve —
-        // the subtree wrapper below is not enough.
-        if (!isNext) return
-        document.documentElement.setAttribute('data-color-scheme', colorScheme)
-        return () =>
-          document.documentElement.removeAttribute('data-color-scheme')
-      }, [isNext, colorScheme])
-
       if (!isNext) return createElement(Story)
 
       return createElement(
         'div',
         {
+          // The wrapper attribute is all subtree colour-scheme switching
+          // needs: the beta bundle re-declares its semantic layer under
+          // [data-color-scheme] (#5226), and the legacy bundle scopes its
+          // scheme-dependent tokens the same way (nearest ancestor wins).
           'data-color-scheme': colorScheme,
           className: 'eds-storybook-wrapper',
         },
