@@ -11,8 +11,8 @@
     /* Colours from the eds-tokens beta (Tokens Studio) semantic interactive
      * group. The --_ indirection only exists so data-color-appearance can
      * switch the accent/neutral/danger token set — states read these vars.
-     * The text-interactive group has no neutral variant; the neutral tone
-     * maps text to --eds-text-primary instead. */
+     * The text-interactive group deliberately has no neutral variant:
+     * neutral interactive text uses --eds-text-primary by design (#5283). */
     --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
     --_bg-emphasis-hover: var(--eds-background-interactive-accent-emphasis-hover);
     --_bg-emphasis-pressed: var(
