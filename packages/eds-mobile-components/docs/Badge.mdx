@@ -1,0 +1,76 @@
+Badge labels content with status, category, or a numeric value. Use it in table cells, list rows, and card headers to communicate information at a glance.
+
+Badge is a non-interactive component. For selectable or dismissible labels, use Chip. A notification badge (dot or count indicator on top of an icon or avatar) is planned as a separate component.
+
+## Features
+
+- Six tones: `neutral`, `accent`, `success`, `info`, `warning`, and `danger`.
+- Two emphasis levels that control fill intensity: `low` (canvas) and `medium` (muted fill).
+- Two variants: `solid` (default) and `outlined`.
+- Accepts a string or number as children — useful for status labels and counts.
+
+
+## Usage
+
+```tsx
+import { Badge } from '@equinor/eds-mobile-components'
+
+<Badge tone="success">Approved</Badge>
+```
+
+## Examples
+
+### Tones
+
+```tsx
+<Badge tone="neutral">Neutral</Badge>
+<Badge tone="accent">Accent</Badge>
+<Badge tone="success">Success</Badge>
+<Badge tone="info">Info</Badge>
+<Badge tone="warning">Warning</Badge>
+<Badge tone="danger">Danger</Badge>
+```
+
+### Emphasis
+
+```tsx
+<Badge tone="accent" emphasis="low">Low</Badge>
+<Badge tone="accent" emphasis="medium">Medium</Badge>
+```
+
+### Outlined
+
+```tsx
+<Badge tone="accent" variant="outlined" emphasis="low">Low</Badge>
+<Badge tone="accent" variant="outlined" emphasis="medium">Medium</Badge>
+```
+
+### Numbers
+
+```tsx
+<Badge tone="danger">{3}</Badge>
+<Badge tone="neutral" emphasis="medium">{42}</Badge>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `string \| number` | — | The label text or count (required) |
+| `tone` | `'neutral' \| 'accent' \| 'success' \| 'info' \| 'warning' \| 'danger'` | `'neutral'` | Semantic color tone |
+| `emphasis` | `'low' \| 'medium'` | `'low'` | Fill intensity |
+| `variant` | `'solid' \| 'outlined'` | `'solid'` | Solid fill or outlined border |
+
+## Accessibility
+
+- VoiceOver and TalkBack read the badge text automatically — no extra setup needed for basic use.
+- Tone is not announced by screen readers. Avoid relying on color alone to convey meaning — pair the badge with a visible text label where possible.
+- When additional context is needed beyond the badge text, pass `accessibilityLabel` directly to the Badge component:
+
+```tsx
+<Badge tone="success" variant="solid" accessibilityLabel="Status: Approved">Approved</Badge>
+```
+
+## Related components
+
+- [`Typography`](/components/typography) — for plain text labels that do not need a colored badge.
