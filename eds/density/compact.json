@@ -577,7 +577,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.200.default}",
+            "$value": "{primitives.lineheight-scale.100.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
