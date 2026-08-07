@@ -1672,7 +1672,7 @@
   },
   "icon": {
     "accent": {
-      "$value": "{accent.12}",
+      "$value": "{accent.10}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
