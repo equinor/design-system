@@ -1,0 +1,280 @@
+{
+  "foundation": {
+    "gaussian": {
+      "dark": {
+        "1": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.1}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "2": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.2}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "3": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.3}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "4": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.4}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "5": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.5}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "6": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.6}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "7": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.7}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "8": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.8}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "9": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.9}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "10": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.10}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "11": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.11}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "12": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.12}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "13": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.13}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "14": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.14}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "15": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.dark.std-dev}) * pow({input.scale.gaussian.dark.mean} - {input.scale.dark.15}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      },
+      "light": {
+        "1": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.1}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "2": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.2}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "3": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.3}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "4": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.4}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "5": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.5}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "6": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.6}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "7": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.7}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "8": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.8}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "9": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.9}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "10": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.10}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "11": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.11}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "12": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.12}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "13": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.13}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "14": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.14}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        },
+        "15": {
+          "$value": "pow(2.718281828459045, (-25 / {input.scale.gaussian.light.std-dev}) * pow({input.scale.gaussian.light.mean} - {input.scale.light.15}, 2))",
+          "$type": "number",
+          "$extensions": {
+            "com.figma": {
+              "hiddenFromPublishing": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

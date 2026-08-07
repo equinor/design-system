@@ -46,14 +46,14 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       data-color-appearance={disabled ? 'neutral' : 'accent'}
     >
       <span
-        className="eds-switch__control"
+        className="control"
         data-color-appearance={!disabled && isChecked ? 'accent' : 'neutral'}
       >
         <input
           type="checkbox"
           role="switch"
           id={inputId}
-          className="eds-switch__input"
+          className="input"
           disabled={disabled}
           ref={ref}
           checked={isControlled ? controlledChecked : undefined}
@@ -61,8 +61,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           onChange={handleChange}
           {...rest}
         />
-        <span className="eds-switch__track">
-          <span className="eds-switch__handle" />
+        <span className="track">
+          <span className="handle" />
         </span>
       </span>
       <Field.Label htmlFor={inputId}>{label}</Field.Label>

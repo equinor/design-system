@@ -277,6 +277,8 @@ See our [storybook](https://storybook.eds.equinor.com/) for more examples.
 
 We're developing the next generation of EDS components under the `/next` entry point. These components are available as **beta releases** for early testing and feedback.
 
+> **Note on naming:** "EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are separate; the numbers line up by coincidence. See [Versioning](https://eds.equinor.com/docs/about/about_eds#versioning) for the full explanation.
+
 #### Installation
 
 ```sh

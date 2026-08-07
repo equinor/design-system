@@ -318,7 +318,11 @@ jobs:
           echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
 
   # Job 8: Trigger tokens publish workflow
-  # Only runs if the Release Please manifest bumped tokens
+  # Only runs if the Release Please manifest bumped tokens.
+  # The whole eds-tokens package is in beta (pinned 3.0.0-beta.N) during
+  # the Tokens Studio rewrite — every release publishes to the `beta`
+  # dist-tag while `latest` stays on the last stable 2.x. Flip the tag
+  # back to `latest` when the rework graduates as stable 3.0.0.
   trigger-tokens:
     needs: check-releases
     if: needs.check-releases.outputs.tokens == 'true'
@@ -332,7 +336,7 @@ jobs:
           gh workflow run publish_tokens.yaml \
             --repo ${{ github.repository }} \
             --ref main \
-            -f npm-tag=latest
+            -f npm-tag=beta
         continue-on-error: true
 
       - name: Report failure
@@ -423,7 +427,7 @@ jobs:
           fi
 
           if [ "${{ needs.check-releases.outputs.tokens }}" == "true" ]; then
-            echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered (beta dist-tag during the Tokens Studio transition)" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi

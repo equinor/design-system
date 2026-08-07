@@ -19,6 +19,10 @@ npm install @equinor/eds-core-react
 yarn add @equinor/eds-core-react
 ```
 
+:::note
+"EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are not the same — see [Versioning](../../about_eds.md#versioning) for the relationship.
+:::
+
 ### Load fonts
 
 EDS components use the **Equinor** font family. EDS 2.0 (`next`) components additionally require **Inter**. Add the EDS variable font stylesheet to your HTML `<head>` to load both:
@@ -54,16 +58,20 @@ For consistent styling, install and use design tokens:
 npm install @equinor/eds-tokens
 ```
 
-```javascript
-import { tokens } from '@equinor/eds-tokens'
+Import the CSS variables and use them in your styles:
 
-const { typography, colors } = tokens
+```css
+@import '@equinor/eds-tokens/css/variables';
 
-const styles = {
-  fontSize: typography.heading.h1.fontSize,
-  color: colors.interactive.primary__resting.rgba,
+.my-component {
+  background-color: var(--eds-color-bg-neutral-surface);
+  color: var(--eds-color-text-neutral-strong);
 }
 ```
+
+:::note
+The token structure is being replaced. The CSS variables are the supported option today, but the variable names will change in the next major release of `@equinor/eds-tokens`, so keep direct variable references few and centralised. The older `tokens` JavaScript object is deprecated and should not be used in new code. See the [package README](https://www.npmjs.com/package/@equinor/eds-tokens) for details.
+:::
 
 ## Key Features
 

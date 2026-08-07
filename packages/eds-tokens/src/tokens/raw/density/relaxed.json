@@ -1,0 +1,647 @@
+{
+  "density": {
+    "corner-radius": {
+      "none": {
+        "$value": "{primitives.spacing.0}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "pill": {
+        "$value": "9999px",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "rounded": {
+        "$value": "{primitives.spacing.37}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "rounded-outer": {
+        "$value": "{primitives.spacing.50}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "CORNER_RADIUS"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "spacing": {
+      "2xl": {
+        "$value": "{primitives.spacing.200}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "2xs": {
+        "$value": "{primitives.spacing.50}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3xl": {
+        "$value": "{primitives.spacing.225}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "3xs": {
+        "$value": "{primitives.spacing.37}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "4xs": {
+        "$value": "{primitives.spacing.25}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "lg": {
+        "$value": "{primitives.spacing.150}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "md": {
+        "$value": "{primitives.spacing.125}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "none": {
+        "$value": "{primitives.spacing.0}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "sm": {
+        "$value": "{primitives.spacing.100}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "xl": {
+        "$value": "{primitives.spacing.175}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "xs": {
+        "$value": "{primitives.spacing.62}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "hiddenFromPublishing": true
+          }
+        }
+      }
+    },
+    "typography": {
+      "header": {
+        "2xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.800.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.800.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "3xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.900.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.800.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "4xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.1000.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.1000.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "lg": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.600.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.500.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "md": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.500.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.500.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "sm": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.400.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.400.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.700.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.700.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "xs": {
+          "font-size": {
+            "$value": "{primitives.type-scale.equinor.300.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.200.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "ui": {
+        "2xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.800.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.800.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "3xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.900.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.800.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "4xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.1000.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.1000.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "5xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.1100.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.1100.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "lg": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.600.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.500.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "md": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.500.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.500.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "sm": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.400.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.400.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "xl": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.700.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.700.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "xs": {
+          "font-size": {
+            "$value": "{primitives.type-scale.inter.300.font-size}",
+            "$type": "fontSize",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FONT_SIZE"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "line-height": {
+            "$value": "{primitives.lineheight-scale.200.default}",
+            "$type": "lineHeight",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "LINE_HEIGHT"
+                ],
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
