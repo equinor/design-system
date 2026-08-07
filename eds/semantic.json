@@ -288,6 +288,36 @@
           }
         }
       },
+      "info": {
+        "emphasis": {
+          "default": {
+            "$value": "{info.9}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{info.10}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{info.11}",
+            "$type": "color"
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{info.2}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{info.3}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{info.4}",
+            "$type": "color"
+          }
+        }
+      },
       "neutral": {
         "emphasis": {
           "default": {
@@ -423,6 +453,36 @@
               "SHAPE_FILL"
             ],
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "success": {
+        "emphasis": {
+          "default": {
+            "$value": "{success.9}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{success.10}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{success.11}",
+            "$type": "color"
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{success.2}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{success.3}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{success.4}",
+            "$type": "color"
           }
         }
       },
@@ -812,6 +872,36 @@
           }
         }
       },
+      "info": {
+        "emphasis": {
+          "default": {
+            "$value": "{info.9}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{info.10}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{info.11}",
+            "$type": "color"
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{info.4}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{info.5}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{info.7}",
+            "$type": "color"
+          }
+        }
+      },
       "neutral": {
         "emphasis": {
           "default": {
@@ -899,6 +989,36 @@
               "STROKE_COLOR"
             ],
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "success": {
+        "emphasis": {
+          "default": {
+            "$value": "{success.9}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{success.10}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{success.11}",
+            "$type": "color"
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{success.4}",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "{success.5}",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "{success.7}",
+            "$type": "color"
           }
         }
       },
@@ -1796,6 +1916,20 @@
           }
         }
       },
+      "info": {
+        "default": {
+          "$value": "{info.11}",
+          "$type": "color"
+        },
+        "hover": {
+          "$value": "{info.12}",
+          "$type": "color"
+        },
+        "pressed": {
+          "$value": "{info.13}",
+          "$type": "color"
+        }
+      },
       "link": {
         "default": {
           "$value": "{info.8}",
@@ -1832,6 +1966,20 @@
               "hiddenFromPublishing": false
             }
           }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{success.11}",
+          "$type": "color"
+        },
+        "hover": {
+          "$value": "{success.12}",
+          "$type": "color"
+        },
+        "pressed": {
+          "$value": "{success.13}",
+          "$type": "color"
         }
       },
       "warning": {
@@ -2097,6 +2245,20 @@
           }
         }
       },
+      "info": {
+        "default": {
+          "$value": "{info.10}",
+          "$type": "color"
+        },
+        "hover": {
+          "$value": "{info.11}",
+          "$type": "color"
+        },
+        "pressed": {
+          "$value": "{info.12}",
+          "$type": "color"
+        }
+      },
       "link": {
         "default": {
           "$value": "{info.8}",
@@ -2133,6 +2295,20 @@
               "hiddenFromPublishing": false
             }
           }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{success.10}",
+          "$type": "color"
+        },
+        "hover": {
+          "$value": "{success.11}",
+          "$type": "color"
+        },
+        "pressed": {
+          "$value": "{success.12}",
+          "$type": "color"
         }
       },
       "warning": {
