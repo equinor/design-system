@@ -3,7 +3,7 @@
     "scale": {
       "dark": {
         "1": {
-          "$value": "0.19",
+          "$value": 0.19,
           "$type": "number",
           "$description": "bg-canvas",
           "$extensions": {
@@ -13,7 +13,7 @@
           }
         },
         "2": {
-          "$value": "0.226",
+          "$value": 0.226,
           "$type": "number",
           "$description": "bg-surface",
           "$extensions": {
@@ -53,7 +53,7 @@
           }
         },
         "6": {
-          "$value": "0.595",
+          "$value": 0.595,
           "$type": "number",
           "$description": "border-subtle",
           "$extensions": {
@@ -113,7 +113,7 @@
           }
         },
         "12": {
-          "$value": 0.91,
+          "$value": 0.96,
           "$type": "number",
           "$description": "text-subtle",
           "$extensions": {
@@ -197,7 +197,7 @@
       },
       "light": {
         "1": {
-          "$value": "0.98",
+          "$value": 0.98,
           "$type": "number",
           "$description": "bg-canvas",
           "$extensions": {
@@ -207,7 +207,7 @@
           }
         },
         "2": {
-          "$value": "0.94",
+          "$value": 0.94,
           "$type": "number",
           "$description": "bg-surface",
           "$extensions": {
@@ -247,7 +247,7 @@
           }
         },
         "6": {
-          "$value": "0.77",
+          "$value": 0.77,
           "$type": "number",
           "$description": "border-subtle",
           "$extensions": {
@@ -257,7 +257,7 @@
           }
         },
         "7": {
-          "$value": "0.72",
+          "$value": 0.72,
           "$type": "number",
           "$description": "border-medium",
           "$extensions": {
@@ -267,7 +267,7 @@
           }
         },
         "8": {
-          "$value": "0.62",
+          "$value": 0.62,
           "$type": "number",
           "$description": "border-strong",
           "$extensions": {
@@ -277,7 +277,7 @@
           }
         },
         "9": {
-          "$value": "0.52",
+          "$value": 0.52,
           "$type": "number",
           "$description": "bg-fill-emphasis-default",
           "$extensions": {
@@ -287,7 +287,7 @@
           }
         },
         "10": {
-          "$value": "0.47",
+          "$value": 0.47,
           "$type": "number",
           "$description": "bg-fill-emphasis-hover",
           "$extensions": {
@@ -307,7 +307,7 @@
           }
         },
         "12": {
-          "$value": "0.37",
+          "$value": 0.37,
           "$type": "number",
           "$description": "text-subtle",
           "$extensions": {
@@ -317,7 +317,7 @@
           }
         },
         "13": {
-          "$value": "0.32",
+          "$value": 0.32,
           "$type": "number",
           "$description": "text-strong",
           "$extensions": {
