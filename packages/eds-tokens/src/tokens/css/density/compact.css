@@ -43,7 +43,7 @@
   --eds-density-typography-ui-md-font-size: var(--eds-primitives-type-scale-inter-300-font-size);
   --eds-density-typography-ui-md-line-height: var(--eds-primitives-lineheight-scale-200-default);
   --eds-density-typography-ui-sm-font-size: var(--eds-primitives-type-scale-inter-200-font-size);
-  --eds-density-typography-ui-sm-line-height: var(--eds-primitives-lineheight-scale-200-default);
+  --eds-density-typography-ui-sm-line-height: var(--eds-primitives-lineheight-scale-100-default);
   --eds-density-typography-ui-xl-font-size: var(--eds-primitives-type-scale-inter-500-font-size);
   --eds-density-typography-ui-xl-line-height: var(--eds-primitives-lineheight-scale-500-default);
   --eds-density-typography-ui-xs-font-size: var(--eds-primitives-type-scale-inter-100-font-size);
