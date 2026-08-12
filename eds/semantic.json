@@ -82,7 +82,19 @@
     },
     "input": {
       "$value": "{bg-input}",
-      "$type": "color"
+      "$type": "color",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-input)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
     },
     "interactive": {
       "accent": {
