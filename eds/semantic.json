@@ -941,6 +941,36 @@
       }
     },
     "danger": {
+      "medium": {
+        "$value": "{danger.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-danger-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{danger.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-danger-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{danger.4}",
         "$type": "color",
@@ -958,6 +988,36 @@
       }
     },
     "info": {
+      "medium": {
+        "$value": "{info.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-info-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{info.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-info-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{info.4}",
         "$type": "color",
@@ -1599,7 +1659,7 @@
     },
     "neutral": {
       "medium": {
-        "$value": "{neutral.4}",
+        "$value": "{neutral.7}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -1614,7 +1674,7 @@
         }
       },
       "strong": {
-        "$value": "{neutral.6}",
+        "$value": "{neutral.9}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -1645,6 +1705,36 @@
       }
     },
     "success": {
+      "medium": {
+        "$value": "{success.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-success-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{success.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-success-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{success.4}",
         "$type": "color",
@@ -1662,6 +1752,36 @@
       }
     },
     "warning": {
+      "medium": {
+        "$value": "{warning.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-warning-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{warning.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-warning-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{warning.4}",
         "$type": "color",
