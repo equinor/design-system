@@ -80,6 +80,10 @@
         }
       }
     },
+    "input": {
+      "$value": "{bg-input}",
+      "$type": "color"
+    },
     "interactive": {
       "accent": {
         "emphasis": {
