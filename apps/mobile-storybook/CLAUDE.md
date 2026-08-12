@@ -11,11 +11,9 @@ This is an Expo application that showcases and documents the @equinor/eds-mobile
 From the monorepo root:
 
 ```bash
-# Build the components package first (required)
-pnpm build
-
-# Run the storybook app
-pnpm dev:storybook
+# Build the components package first, then run the storybook app
+# (mobile:dev hand-sequences both steps)
+pnpm mobile:dev
 
 # Or from this directory
 pnpm ios       # Run on iOS simulator
@@ -157,7 +155,7 @@ export default function MyComponentScreen() {
 
 2. **Add to components list** in `app/(tabs)/components/index.tsx` under the appropriate section.
 
-3. **Export the component** from `packages/components/src/index.ts` if not already exported.
+3. **Export the component** from `packages/eds-mobile-components/src/index.ts` if not already exported.
 
 ### Component Screen Best Practices
 
@@ -172,8 +170,8 @@ export default function MyComponentScreen() {
 
 When working on the component library:
 
-1. Make changes in `packages/components/src/`
-2. Run `pnpm dev:components` from root (watch mode)
+1. Make changes in `packages/eds-mobile-components/src/`
+2. Run `pnpm mobile:watch` from root (watch mode)
 3. The storybook app will hot-reload with changes
 4. Test in both light and dark modes using the theme switcher
 

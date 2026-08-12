@@ -8,7 +8,7 @@ This package is the core React Native component library implementing the Equinor
 
 ## Local Development
 
-From the monorepo root or this package directory:
+From this package directory:
 
 ```bash
 # Build the component library
@@ -26,6 +26,8 @@ pnpm check-types
 # Clean build artifacts
 pnpm clean
 ```
+
+From the monorepo root, the equivalents are `pnpm mobile:build`, `pnpm mobile:watch`, and `pnpm mobile:check-types` (hand-sequenced to build this package first). There's no root-level `mobile:lint` — `pnpm lint:all` at root already sweeps this package along with everything else.
 
 ## Architecture
 
@@ -165,7 +167,7 @@ export default function App() {
 
 1. Make changes in `src/`
 2. Run `pnpm dev` for watch mode (auto-rebuilds)
-3. Test changes in storybook app: `cd ../../ && pnpm dev:storybook`
+3. Test changes in storybook app: `cd ../../ && pnpm mobile:dev`
 4. **Always use tokens** (`theme.colors`, `theme.spacing`, `theme.typography`) for new work
 5. All components must support both light/dark mode and comfortable/spacious density
 
