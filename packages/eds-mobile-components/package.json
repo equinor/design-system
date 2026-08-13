@@ -44,6 +44,7 @@
     "license": "MIT",
     "main": "./dist/index.js",
     "peerDependencies": {
+        "@expo/vector-icons": "^15.1.1",
         "expo-font": "^55.0.8",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
