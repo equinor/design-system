@@ -48,8 +48,19 @@ jobs:
           pnpm add -Dw react@18 react-dom@18 @types/react@18 @types/react-dom@18
       - name: Build packages
         run: pnpm run build
+      # Explicit list rather than the root `test` aggregate: mobile's tests
+      # exercise React Native under packages/eds-mobile-components's own
+      # exact react@19.2.8 devDependency, which the -Dw override above
+      # doesn't touch. Running them here would add cost with zero React 18
+      # signal, and could red this job for reasons that have nothing to do
+      # with React 18 compatibility.
       - name: Test packages
-        run: pnpm run test
+        run: |
+          pnpm run test:utils
+          pnpm run test:core-react
+          pnpm run test:lab
+          pnpm run test:data-grid-react
+          pnpm run test:color-palette-generator
       - name: Type check packages
         run: |
           pnpm --filter @equinor/eds-tokens types

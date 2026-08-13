@@ -8,7 +8,7 @@ This package is the core React Native component library implementing the Equinor
 
 ## Local Development
 
-From the monorepo root or this package directory:
+From this package directory:
 
 ```bash
 # Build the component library
@@ -26,6 +26,8 @@ pnpm check-types
 # Clean build artifacts
 pnpm clean
 ```
+
+From the monorepo root, the equivalents are `pnpm build:mobile`, `pnpm watch:mobile`, and `pnpm check-types:mobile` (hand-sequenced to build this package first). There's no root-level lint equivalent — and don't rely on `pnpm lint:all` for this package: ESLint's flat config doesn't cascade per-directory, so it lints these files with root's config instead of this package's own `eslint.config.js`, applying root's Prettier-style rules (single quotes, no semicolons) to code written in this package's own style. It runs without crashing, but produces thousands of style-only findings that aren't meaningful signal. Use `pnpm --filter @equinor/eds-mobile-components run lint` (or run it from this directory) to get this package's own config.
 
 ## Architecture
 
@@ -165,7 +167,7 @@ export default function App() {
 
 1. Make changes in `src/`
 2. Run `pnpm dev` for watch mode (auto-rebuilds)
-3. Test changes in storybook app: `cd ../../ && pnpm dev:storybook`
+3. Test changes in storybook app: `cd ../../ && pnpm dev:mobile` (requires macOS/Xcode — use `pnpm start:mobile` for the cross-platform Metro bundler instead)
 4. **Always use tokens** (`theme.colors`, `theme.spacing`, `theme.typography`) for new work
 5. All components must support both light/dark mode and comfortable/spacious density
 

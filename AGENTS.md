@@ -62,7 +62,7 @@ If you edit code in a harness without enforced auto-fix, run `pnpm run lint <fil
 
 ## Build/Lint/Test Commands
 
-Package manager: `pnpm@10.15.0`
+Package manager: `pnpm@10.28.0`
 
 ```bash
 pnpm run build                    # Build all packages
