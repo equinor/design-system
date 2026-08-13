@@ -144,7 +144,8 @@
       "react-stately": "3.47.0",
       "@types/react": ">=19.2.17",
       "@internationalized/date": "3.12.2",
-      "react-test-renderer": "19.2.8"
+      "react-test-renderer": "19.2.8",
+      "eslint-import-resolver-typescript": "4.4.5"
     }
   }
 }
