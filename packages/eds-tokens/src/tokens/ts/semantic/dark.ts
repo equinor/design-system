@@ -10,6 +10,7 @@ export const semantic = {
     dialog: '#030303',
     floating: '#030303',
     info: '#33607e',
+    input: '#131414',
     interactive: {
       accent: {
         emphasis: {
@@ -108,9 +109,13 @@ export const semantic = {
       subtle: '#3e7378',
     },
     danger: {
+      medium: '#e53748',
+      strong: '#ffa4a2',
       subtle: '#b03940',
     },
     info: {
+      medium: '#2d8bc5',
+      strong: '#82cdff',
       subtle: '#316f98',
     },
     interactive: {
@@ -191,14 +196,18 @@ export const semantic = {
       },
     },
     neutral: {
-      medium: '#5d6b76',
-      strong: '#6f8190',
+      medium: '#738696',
+      strong: '#b4c7d7',
       subtle: '#5d6b76',
     },
     success: {
+      medium: '#449941',
+      strong: '#8cdb87',
       subtle: '#3e793c',
     },
     warning: {
+      medium: '#c26900',
+      strong: '#ffaf6b',
       subtle: '#97571b',
     },
   },
@@ -322,9 +331,9 @@ export const semantic = {
         pressed: '#f1ffff',
       },
       danger: {
-        default: '#ffc4c1',
-        hover: '#ffdddb',
-        pressed: '#ffeceb',
+        default: '#ffdddb',
+        hover: '#ffeceb',
+        pressed: '#fff7f6',
       },
       disabled: '#6b7d8b',
       info: {
@@ -343,9 +352,9 @@ export const semantic = {
         pressed: '#f1ffef',
       },
       warning: {
-        default: '#ffcba2',
-        hover: '#ffdebe',
-        pressed: '#ffeddb',
+        default: '#ffdebe',
+        hover: '#ffeddb',
+        pressed: '#fff8e9',
       },
     },
     inverted: '#131414',
@@ -374,24 +383,24 @@ export const semantic = {
   },
   text: {
     accent: '#d7fafd',
-    danger: '#ffc4c1',
-    info: '#b0deff',
+    danger: '#ffeceb',
+    info: '#e1f5ff',
     interactive: {
       accent: {
-        default: '#ace3e9',
-        hover: '#c7f1f6',
-        pressed: '#d7fafd',
+        default: '#c7f1f6',
+        hover: '#d7fafd',
+        pressed: '#f1ffff',
       },
       danger: {
-        default: '#ffc4c1',
-        hover: '#ffdddb',
-        pressed: '#ffeceb',
+        default: '#ffdddb',
+        hover: '#ffeceb',
+        pressed: '#fff7f6',
       },
       disabled: '#6b7d8b',
       info: {
-        default: '#b0deff',
-        hover: '#c9edff',
-        pressed: '#e1f5ff',
+        default: '#c9edff',
+        hover: '#e1f5ff',
+        pressed: '#eefeff',
       },
       link: {
         default: '#5abbfb',
@@ -399,23 +408,23 @@ export const semantic = {
         pressed: '#b0deff',
       },
       success: {
-        default: '#aceba8',
-        hover: '#c7f7c3',
-        pressed: '#d7ffd3',
+        default: '#c7f7c3',
+        hover: '#d7ffd3',
+        pressed: '#f1ffef',
       },
       warning: {
-        default: '#ffcba2',
-        hover: '#ffdebe',
-        pressed: '#ffeddb',
+        default: '#ffdebe',
+        hover: '#ffeddb',
+        pressed: '#fff8e9',
       },
     },
     inverted: '#131414',
     onEmphasis: '#030303',
     primary: '#e9f3fc',
     secondary: '#9fb4c6',
-    success: '#aceba8',
+    success: '#d7ffd3',
     tertiary: '#738696',
-    warning: '#ffcba2',
+    warning: '#ffeddb',
   },
   typography: {
     header: {
