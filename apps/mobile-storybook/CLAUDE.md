@@ -12,8 +12,12 @@ From the monorepo root:
 
 ```bash
 # Build the components package first, then run the storybook app
-# (mobile:dev hand-sequences both steps)
-pnpm mobile:dev
+# (dev:mobile hand-sequences both steps — requires macOS/Xcode, resolves
+# to `expo run:ios`)
+pnpm dev:mobile
+
+# Cross-platform equivalent (Metro bundler only, no Xcode required)
+pnpm start:mobile
 
 # Or from this directory
 pnpm ios       # Run on iOS simulator
@@ -171,7 +175,7 @@ export default function MyComponentScreen() {
 When working on the component library:
 
 1. Make changes in `packages/eds-mobile-components/src/`
-2. Run `pnpm mobile:watch` from root (watch mode)
+2. Run `pnpm watch:mobile` from root (watch mode)
 3. The storybook app will hot-reload with changes
 4. Test in both light and dark modes using the theme switcher
 
