@@ -195,7 +195,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 4. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
 5. Follow existing patterns for prop naming and component structure
 
-**MDX handoff to EDS Storybook:** Files in `docs/` ship via npm and are consumed by the EDS Storybook repo, which wraps each one with source/npm `<Links>` inside `<PlatformTabs>`. Mobile MDX should not import `<Links>` or `<PlatformTabs>` itself — write component-focused content only. The consumer-side wrapping pattern (in EDS Storybook's `next/<Component>/<Component>.docs.mdx`) is:
+**MDX handoff to EDS Storybook:** Files in `docs/` are consumed by `packages/eds-core-react` via a `workspace:^` link in this monorepo, which wraps each one with source/npm `<Links>` inside `<PlatformTabs>` — changes appear as soon as both packages are built, no release needed. Mobile MDX should not import `<Links>` or `<PlatformTabs>` itself — write component-focused content only. The consumer-side wrapping pattern (in `packages/eds-core-react/src/components/<Component>/<Component>.docs.mdx` — most under `next/`, but `EdsProvider` and `Typography.new` sit outside it) is:
 
 ```tsx
 <PlatformTabs
