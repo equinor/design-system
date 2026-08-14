@@ -936,6 +936,9 @@ importers:
       '@equinor/eds-tokens':
         specifier: 2.3.0-beta.3
         version: 2.3.0-beta.3
+      '@expo/vector-icons':
+        specifier: ^15.1.1
+        version: 15.1.1(expo-font@55.0.8)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       '@floating-ui/react-native':
         specifier: ^0.10.7
         version: 0.10.10(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
