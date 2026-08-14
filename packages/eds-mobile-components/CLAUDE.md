@@ -202,7 +202,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
     mobile={
         <>
             <Links
-                sourceUrl="https://github.com/equinor/design-system-mobile/blob/main/packages/components/src/components/SelectionControls/Switch.tsx"
+                sourceUrl="https://github.com/equinor/design-system/blob/main/packages/eds-mobile-components/src/components/SelectionControls/Switch.tsx"
                 npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
             />
             <MobileDocs />
