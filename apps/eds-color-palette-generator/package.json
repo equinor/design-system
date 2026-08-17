@@ -38,7 +38,7 @@
     "@eslint/eslintrc": "^3.3.6",
     "@microsoft/api-extractor": "^7.58.12",
     "@next/eslint-plugin-next": "16.2.11",
-    "@playwright/test": "^1.62.0",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.18",
