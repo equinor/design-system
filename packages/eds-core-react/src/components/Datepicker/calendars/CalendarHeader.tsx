@@ -80,6 +80,7 @@ export function CalendarHeader({
   setShowYearPicker,
   setYearPickerPage,
   yearPickerPage,
+  onSelectDate,
 }: {
   state: CalendarState | RangeCalendarState
   title: string
@@ -89,6 +90,7 @@ export function CalendarHeader({
   setShowYearPicker: (showYearPicker: boolean) => void
   setYearPickerPage?: Dispatch<SetStateAction<number>>
   yearPickerPage: number
+  onSelectDate?: (date: CalendarDate) => void
 }) {
   const years = getPageYears(state.focusedDate.year, yearPickerPage)
   const backButtonDisabled =
@@ -128,7 +130,14 @@ export function CalendarHeader({
         </TitleButton>
         <TodayPicker
           disabled={showYearPicker}
-          onClick={(v: CalendarDate) => state.setFocusedDate(v)}
+          onClick={(v: CalendarDate) => {
+            if (onSelectDate) {
+              onSelectDate(v)
+            } else {
+              state.selectDate(v)
+            }
+            state.setFocusedDate(v)
+          }}
         />
         <span style={{ flex: '1 1 auto' }}></span>
         <Button

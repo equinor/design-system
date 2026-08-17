@@ -313,6 +313,80 @@ describe('DatePicker', () => {
     expect(screen.getByRole('presentation')).toHaveTextContent('01/22/2025')
   })
 
+  describe('Bug #4933: Today button', () => {
+    it('selects today when clicked', async () => {
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(2020, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0] as Date
+      const today = new Date()
+      expect(result.getFullYear()).toBe(today.getFullYear())
+      expect(result.getMonth()).toBe(today.getMonth())
+      expect(result.getDate()).toBe(today.getDate())
+    })
+
+    it('selects today when the calendar is showing a future month', async () => {
+      const onChange = jest.fn()
+      // Use a future date so the calendar opens past today — this is the exact
+      // scenario from the bug: today < startDate causes selectDate to bail out
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(2027, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0] as Date
+      const today = new Date()
+      expect(result.getFullYear()).toBe(today.getFullYear())
+      expect(result.getMonth()).toBe(today.getMonth())
+      expect(result.getDate()).toBe(today.getDate())
+    })
+
+    it('selects today on repeated clicks', async () => {
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(2020, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      const toggle = screen.getByLabelText(/^Change date.*/)
+
+      await userEvent.click(toggle)
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      // Re-open and click Today again — must still fire onChange
+      await userEvent.click(toggle)
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
+
   it('should display localized message for unavailable dates', () => {
     const unavailableDate = new Date(2024, 4, 30)
 

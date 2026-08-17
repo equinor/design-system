@@ -191,6 +191,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 ref={pickerRef}
                 Footer={Footer}
                 Header={Header}
+                onSelectDate={_onChange}
                 {...calendarProps}
               />
             }
