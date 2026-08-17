@@ -1197,7 +1197,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{danger.4}",
+            "$value": "{danger.1}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1212,7 +1212,7 @@
             }
           },
           "hover": {
-            "$value": "{danger.5}",
+            "$value": "{danger.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1227,7 +1227,7 @@
             }
           },
           "pressed": {
-            "$value": "{danger.7}",
+            "$value": "{danger.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1626,7 +1626,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{warning.4}",
+            "$value": "{warning.1}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1641,7 +1641,7 @@
             }
           },
           "hover": {
-            "$value": "{warning.5}",
+            "$value": "{warning.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1656,7 +1656,7 @@
             }
           },
           "pressed": {
-            "$value": "{warning.7}",
+            "$value": "{warning.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -3478,7 +3478,7 @@
       }
     },
     "primary": {
-      "$value": "{neutral.12}",
+      "$value": "{neutral.13}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
