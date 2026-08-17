@@ -44,6 +44,10 @@ jobs:
       eds-icons--tag_name: ${{ steps.release.outputs['packages/eds-icons--tag_name'] }}
       eds-lab-react--release_created: ${{ steps.release.outputs['packages/eds-lab-react--release_created'] }}
       eds-lab-react--tag_name: ${{ steps.release.outputs['packages/eds-lab-react--tag_name'] }}
+      eds-mobile-components--release_created: ${{ steps.release.outputs['packages/eds-mobile-components--release_created'] }}
+      eds-mobile-components--tag_name: ${{ steps.release.outputs['packages/eds-mobile-components--tag_name'] }}
+      mobile-storybook--release_created: ${{ steps.release.outputs['apps/mobile-storybook--release_created'] }}
+      mobile-storybook--tag_name: ${{ steps.release.outputs['apps/mobile-storybook--tag_name'] }}
       eds-tokens--release_created: ${{ steps.release.outputs['packages/eds-tokens--release_created'] }}
       eds-tokens--tag_name: ${{ steps.release.outputs['packages/eds-tokens--tag_name'] }}
       eds-utils--release_created: ${{ steps.release.outputs['packages/eds-utils--release_created'] }}
