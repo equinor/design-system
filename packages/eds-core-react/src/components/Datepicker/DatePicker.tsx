@@ -120,6 +120,21 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       [onChange, isOpen, showTimeInput, timezone],
     )
 
+    const _onSelectToday = useCallback(
+      (value: CalendarDate | CalendarDateTime) => {
+        if (value) {
+          setInnerValue(
+            showTimeInput ? toCalendarDateTime(value) : toCalendarDate(value),
+          )
+        }
+        if (onChange) {
+          const date = value.toDate(timezone)
+          onChange(date)
+        }
+      },
+      [onChange, showTimeInput, timezone],
+    )
+
     const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
 
     const locale = useGetLocale(propLocale)
@@ -191,7 +206,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 ref={pickerRef}
                 Footer={Footer}
                 Header={Header}
-                onSelectDate={_onChange}
+                onSelectDate={_onSelectToday}
                 {...calendarProps}
               />
             }

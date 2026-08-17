@@ -315,7 +315,7 @@ describe('DatePicker', () => {
 
   describe('Bug #4933: Today button', () => {
     it('selects today when clicked', async () => {
-      const onChange = jest.fn()
+      const onChange = jest.fn<void, [Date]>()
       render(
         <I18nProvider locale={'en-US'}>
           <DatePicker
@@ -330,7 +330,7 @@ describe('DatePicker', () => {
       await userEvent.click(screen.getByText('Today'))
 
       expect(onChange).toHaveBeenCalledTimes(1)
-      const result = onChange.mock.calls[0][0] as Date
+      const result = onChange.mock.calls[0][0]
       const today = new Date()
       expect(result.getFullYear()).toBe(today.getFullYear())
       expect(result.getMonth()).toBe(today.getMonth())
@@ -338,7 +338,7 @@ describe('DatePicker', () => {
     })
 
     it('selects today when the calendar is showing a future month', async () => {
-      const onChange = jest.fn()
+      const onChange = jest.fn<void, [Date]>()
       // Use a future date so the calendar opens past today — this is the exact
       // scenario from the bug: today < startDate causes selectDate to bail out
       render(
@@ -355,14 +355,14 @@ describe('DatePicker', () => {
       await userEvent.click(screen.getByText('Today'))
 
       expect(onChange).toHaveBeenCalledTimes(1)
-      const result = onChange.mock.calls[0][0] as Date
+      const result = onChange.mock.calls[0][0]
       const today = new Date()
       expect(result.getFullYear()).toBe(today.getFullYear())
       expect(result.getMonth()).toBe(today.getMonth())
       expect(result.getDate()).toBe(today.getDate())
     })
 
-    it('selects today on repeated clicks', async () => {
+    it('selects today on repeated clicks without closing the picker', async () => {
       const onChange = jest.fn()
       render(
         <I18nProvider locale={'en-US'}>
@@ -374,14 +374,11 @@ describe('DatePicker', () => {
         </I18nProvider>,
       )
 
-      const toggle = screen.getByLabelText(/^Change date.*/)
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
 
-      await userEvent.click(toggle)
+      // Picker stays open — click Today multiple times without re-opening
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).toHaveBeenCalledTimes(1)
-
-      // Re-open and click Today again — must still fire onChange
-      await userEvent.click(toggle)
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).toHaveBeenCalledTimes(2)
     })
