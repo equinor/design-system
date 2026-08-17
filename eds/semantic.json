@@ -420,7 +420,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{info.3}",
+            "$value": "{info.1}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -436,7 +436,7 @@
             }
           },
           "hover": {
-            "$value": "{info.4}",
+            "$value": "{info.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -452,7 +452,7 @@
             }
           },
           "pressed": {
-            "$value": "{info.5}",
+            "$value": "{info.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
