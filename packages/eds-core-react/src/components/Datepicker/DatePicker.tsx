@@ -120,22 +120,43 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       [onChange, isOpen, showTimeInput, timezone],
     )
 
+    const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
+
     const _onSelectToday = useCallback(
-      (value: CalendarDate | CalendarDateTime) => {
-        if (value) {
-          setInnerValue(
-            showTimeInput ? toCalendarDateTime(value) : toCalendarDate(value),
-          )
-        }
+      (calendarDate: CalendarDate) => {
+        if (_minValue && calendarDate.compare(_minValue) < 0) return
+        if (_maxValue && calendarDate.compare(_maxValue) > 0) return
+        if (
+          _isDateUnavailable &&
+          _isDateUnavailable(calendarDate.toDate(timezone))
+        )
+          return
+
+        // Preserve an existing time selection when showTimeInput is active
+        const newValue =
+          showTimeInput && _value && 'hour' in _value
+            ? _value.set({
+                year: calendarDate.year,
+                month: calendarDate.month,
+                day: calendarDate.day,
+              })
+            : calendarDate
+
+        setInnerValue(showTimeInput ? toCalendarDateTime(newValue) : newValue)
         if (onChange) {
-          const date = value.toDate(timezone)
-          onChange(date)
+          onChange(newValue.toDate(timezone))
         }
       },
-      [onChange, showTimeInput, timezone],
+      [
+        onChange,
+        showTimeInput,
+        timezone,
+        _minValue,
+        _maxValue,
+        _isDateUnavailable,
+        _value,
+      ],
     )
-
-    const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
 
     const locale = useGetLocale(propLocale)
 
@@ -206,7 +227,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 ref={pickerRef}
                 Footer={Footer}
                 Header={Header}
-                onSelectDate={_onSelectToday}
+                onSelectToday={_onSelectToday}
                 {...calendarProps}
               />
             }

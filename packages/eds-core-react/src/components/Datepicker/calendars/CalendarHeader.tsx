@@ -25,22 +25,13 @@ function TodayPicker({
   onClick,
   disabled,
 }: {
-  onClick: (v: CalendarDate) => void
+  onClick: () => void
   disabled: boolean
 }) {
-  const today = new Date()
   return (
     <Button
       disabled={disabled}
-      onClick={() =>
-        onClick(
-          new CalendarDate(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            today.getDate(),
-          ),
-        )
-      }
+      onClick={onClick}
       variant={'ghost'}
       style={{ marginLeft: 4 }}
     >
@@ -80,7 +71,7 @@ export function CalendarHeader({
   setShowYearPicker,
   setYearPickerPage,
   yearPickerPage,
-  onSelectDate,
+  onSelectToday,
 }: {
   state: CalendarState | RangeCalendarState
   title: string
@@ -90,8 +81,16 @@ export function CalendarHeader({
   setShowYearPicker: (showYearPicker: boolean) => void
   setYearPickerPage?: Dispatch<SetStateAction<number>>
   yearPickerPage: number
-  onSelectDate?: (date: CalendarDate) => void
+  /** Called when the Today button is clicked. Only provided by DatePicker, not DateRangePicker. */
+  onSelectToday?: (date: CalendarDate) => void
 }) {
+  const now = new Date()
+  const todayDate = new CalendarDate(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    now.getDate(),
+  )
+
   const years = getPageYears(state.focusedDate.year, yearPickerPage)
   const backButtonDisabled =
     showYearPicker && state.minValue
@@ -102,6 +101,11 @@ export function CalendarHeader({
     showYearPicker && state.maxValue
       ? years[years.length - 1] > state.maxValue.year
       : nextMonthDisabled
+
+  const isTodayDisabled =
+    showYearPicker ||
+    state.isInvalid(todayDate) ||
+    state.isCellUnavailable(todayDate)
 
   return (
     <HeaderWrapper>
@@ -129,14 +133,12 @@ export function CalendarHeader({
           <Icon data={showYearPicker ? chevron_up : chevron_down} />
         </TitleButton>
         <TodayPicker
-          disabled={showYearPicker}
-          onClick={(v: CalendarDate) => {
-            if (onSelectDate) {
-              onSelectDate(v)
-            } else {
-              state.selectDate(v)
+          disabled={isTodayDisabled}
+          onClick={() => {
+            if (onSelectToday) {
+              onSelectToday(todayDate)
             }
-            state.setFocusedDate(v)
+            state.setFocusedDate(todayDate)
           }}
         />
         <span style={{ flex: '1 1 auto' }}></span>

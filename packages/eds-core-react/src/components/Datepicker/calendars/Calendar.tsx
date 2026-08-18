@@ -23,7 +23,7 @@ export const Calendar = forwardRef(
     {
       Header,
       Footer,
-      onSelectDate,
+      onSelectToday,
       ...props
     }: {
       /**
@@ -34,7 +34,7 @@ export const Calendar = forwardRef(
        * Custom footer component
        */
       Footer?: (props: HeaderFooterProps) => ReactNode
-      onSelectDate?: (date: CalendarDate) => void
+      onSelectToday?: (date: CalendarDate) => void
     } & AriaCalendarProps<DateValue>,
     ref: RefObject<HTMLDivElement | null>,
   ) => {
@@ -80,7 +80,7 @@ export const Calendar = forwardRef(
               showYearPicker={showYearPicker}
               yearPickerPage={yearPickerPage}
               setYearPickerPage={setYearPickerPage}
-              onSelectDate={onSelectDate}
+              onSelectToday={onSelectToday}
             />
           )}
         </Popover.Header>

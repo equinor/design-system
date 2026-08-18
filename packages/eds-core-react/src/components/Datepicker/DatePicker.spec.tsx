@@ -313,8 +313,11 @@ describe('DatePicker', () => {
     expect(screen.getByRole('presentation')).toHaveTextContent('01/22/2025')
   })
 
-  describe('Bug #4933: Today button', () => {
-    it('selects today when clicked', async () => {
+  describe('Today button (#4933)', () => {
+    // Use a date well in the future so these tests remain valid regardless of when they run
+    const futureYear = new Date().getFullYear() + 2
+
+    it('selects today when the calendar is showing a past month', async () => {
       const onChange = jest.fn<void, [Date]>()
       render(
         <I18nProvider locale={'en-US'}>
@@ -337,15 +340,14 @@ describe('DatePicker', () => {
       expect(result.getDate()).toBe(today.getDate())
     })
 
-    it('selects today when the calendar is showing a future month', async () => {
+    it('selects today when the calendar is showing a future month (bug #4933)', async () => {
+      // today < startDate caused react-stately's selectDate to bail out silently
       const onChange = jest.fn<void, [Date]>()
-      // Use a future date so the calendar opens past today — this is the exact
-      // scenario from the bug: today < startDate causes selectDate to bail out
       render(
         <I18nProvider locale={'en-US'}>
           <DatePicker
             label={'Datepicker'}
-            value={new Date(2027, 0, 1)}
+            value={new Date(futureYear, 0, 1)}
             onChange={onChange}
           />
         </I18nProvider>,
@@ -362,7 +364,7 @@ describe('DatePicker', () => {
       expect(result.getDate()).toBe(today.getDate())
     })
 
-    it('selects today on repeated clicks without closing the picker', async () => {
+    it('fires onChange on repeated clicks without closing the picker', async () => {
       const onChange = jest.fn()
       render(
         <I18nProvider locale={'en-US'}>
@@ -375,12 +377,56 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-
-      // Picker stays open — click Today multiple times without re-opening
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).toHaveBeenCalledTimes(1)
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).toHaveBeenCalledTimes(2)
+    })
+
+    it('does not fire onChange when today is before minValue', async () => {
+      const onChange = jest.fn()
+      const tomorrow = new Date()
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(futureYear, 0, 1)}
+            minValue={tomorrow}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      // Today button should be disabled — click does nothing
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('does not fire onChange when today is unavailable', async () => {
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(futureYear, 0, 1)}
+            isDateUnavailable={(d) => {
+              const today = new Date()
+              return (
+                d.getFullYear() === today.getFullYear() &&
+                d.getMonth() === today.getMonth() &&
+                d.getDate() === today.getDate()
+              )
+            }}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).not.toHaveBeenCalled()
     })
   })
 
