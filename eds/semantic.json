@@ -68,7 +68,7 @@
       "accent": {
         "emphasis": {
           "default": {
-            "$value": "{accent.9}",
+            "$value": "{background.non-interactive.emphasis.accent}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -118,7 +118,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{accent.3}",
+            "$value": "{background.non-interactive.muted.accent}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -134,7 +134,7 @@
             }
           },
           "hover": {
-            "$value": "{accent.4}",
+            "$value": "{accent.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -150,7 +150,7 @@
             }
           },
           "pressed": {
-            "$value": "{accent.5}",
+            "$value": "{accent.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -220,7 +220,7 @@
       "danger": {
         "emphasis": {
           "default": {
-            "$value": "{danger.9}",
+            "$value": "{background.non-interactive.emphasis.danger}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -270,7 +270,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{danger.3}",
+            "$value": "{background.non-interactive.muted.danger}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -286,7 +286,7 @@
             }
           },
           "hover": {
-            "$value": "{danger.4}",
+            "$value": "{danger.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -302,7 +302,7 @@
             }
           },
           "pressed": {
-            "$value": "{danger.5}",
+            "$value": "{danger.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -338,7 +338,7 @@
       "info": {
         "emphasis": {
           "default": {
-            "$value": "{info.9}",
+            "$value": "{background.non-interactive.emphasis.info}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -388,7 +388,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{info.1}",
+            "$value": "{background.non-interactive.muted.info}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -440,7 +440,7 @@
       "neutral": {
         "emphasis": {
           "default": {
-            "$value": "{neutral.9}",
+            "$value": "{background.non-interactive.emphasis.neutral}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -490,7 +490,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{neutral.3}",
+            "$value": "{background.non-interactive.muted.neutral}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -506,7 +506,7 @@
             }
           },
           "hover": {
-            "$value": "{neutral.4}",
+            "$value": "{neutral.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -522,7 +522,7 @@
             }
           },
           "pressed": {
-            "$value": "{neutral.5}",
+            "$value": "{neutral.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -608,7 +608,7 @@
       "success": {
         "emphasis": {
           "default": {
-            "$value": "{success.9}",
+            "$value": "{background.non-interactive.emphasis.success}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -658,7 +658,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{success.3}",
+            "$value": "{background.non-interactive.muted.success}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -674,7 +674,7 @@
             }
           },
           "hover": {
-            "$value": "{success.4}",
+            "$value": "{success.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -690,7 +690,7 @@
             }
           },
           "pressed": {
-            "$value": "{success.5}",
+            "$value": "{success.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -710,7 +710,7 @@
       "warning": {
         "emphasis": {
           "default": {
-            "$value": "{warning.9}",
+            "$value": "{background.non-interactive.emphasis.warning}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -760,7 +760,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{warning.3}",
+            "$value": "{background.non-interactive.muted.warning}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -776,7 +776,7 @@
             }
           },
           "hover": {
-            "$value": "{warning.4}",
+            "$value": "{warning.2}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -792,7 +792,7 @@
             }
           },
           "pressed": {
-            "$value": "{warning.5}",
+            "$value": "{warning.3}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -827,86 +827,148 @@
       }
     },
     "non-interactive": {
-      "danger": {
-        "$value": "{danger.3}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "FRAME_FILL",
-              "SHAPE_FILL"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-background-danger)"
-            },
-            "hiddenFromPublishing": false
+      "default": {
+        "accent": {
+          "$value": "{accent.3}",
+          "$type": "color",
+          "$description": "Static status surface — medium emphasis, non-clickable."
+        },
+        "danger": {
+          "$value": "{danger.3}",
+          "$type": "color",
+          "$description": "Static status surface — medium emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-background-danger)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "info": {
+          "$value": "{info.3}",
+          "$type": "color",
+          "$description": "Static status surface — medium emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-background-info)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "neutral": {
+          "$value": "{neutral.3}",
+          "$type": "color",
+          "$description": "Static status surface — medium emphasis, non-clickable."
+        },
+        "success": {
+          "$value": "{success.3}",
+          "$type": "color",
+          "$description": "Static status surface — medium emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-background-success)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "warning": {
+          "$value": "{warning.3}",
+          "$type": "color",
+          "$description": "Static status surface — medium emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-background-warning)"
+              },
+              "hiddenFromPublishing": false
+            }
           }
         }
       },
-      "info": {
-        "$value": "{info.3}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "FRAME_FILL",
-              "SHAPE_FILL"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-background-info)"
-            },
-            "hiddenFromPublishing": false
-          }
+      "emphasis": {
+        "accent": {
+          "$value": "{accent.9}",
+          "$type": "color",
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+        },
+        "danger": {
+          "$value": "{danger.9}",
+          "$type": "color",
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+        },
+        "info": {
+          "$value": "{info.9}",
+          "$type": "color",
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+        },
+        "neutral": {
+          "$value": "{neutral.9}",
+          "$type": "color",
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+        },
+        "success": {
+          "$value": "{success.9}",
+          "$type": "color",
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+        },
+        "warning": {
+          "$value": "{warning.9}",
+          "$type": "color",
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
         }
       },
       "muted": {
+        "accent": {
+          "$value": "{accent.1}",
+          "$type": "color",
+          "$description": "Static status surface — low emphasis, non-clickable."
+        },
         "danger": {
           "$value": "{danger.1}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Static status surface — low emphasis, non-clickable."
         },
         "info": {
           "$value": "{info.1}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Static status surface — low emphasis, non-clickable."
+        },
+        "neutral": {
+          "$value": "{neutral.1}",
+          "$type": "color",
+          "$description": "Static status surface — low emphasis, non-clickable."
         },
         "success": {
           "$value": "{success.1}",
-          "$type": "color"
+          "$type": "color",
+          "$description": "Static status surface — low emphasis, non-clickable."
         },
         "warning": {
           "$value": "{warning.1}",
-          "$type": "color"
-        }
-      },
-      "success": {
-        "$value": "{success.3}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "FRAME_FILL",
-              "SHAPE_FILL"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-background-success)"
-            },
-            "hiddenFromPublishing": false
-          }
-        }
-      },
-      "warning": {
-        "$value": "{warning.3}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "FRAME_FILL",
-              "SHAPE_FILL"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-background-warning)"
-            },
-            "hiddenFromPublishing": false
-          }
+          "$type": "color",
+          "$description": "Static status surface — low emphasis, non-clickable."
         }
       }
     },
@@ -1074,7 +1136,7 @@
       "accent": {
         "emphasis": {
           "default": {
-            "$value": "{accent.9}",
+            "$value": "{border.accent.strong}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1121,7 +1183,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{accent.4}",
+            "$value": "{border.accent.subtle}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1170,7 +1232,7 @@
       "danger": {
         "emphasis": {
           "default": {
-            "$value": "{danger.9}",
+            "$value": "{border.danger.strong}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1217,7 +1279,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{danger.1}",
+            "$value": "{border.danger.subtle}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1232,7 +1294,7 @@
             }
           },
           "hover": {
-            "$value": "{danger.2}",
+            "$value": "{danger.5}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1247,7 +1309,7 @@
             }
           },
           "pressed": {
-            "$value": "{danger.3}",
+            "$value": "{danger.7}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1296,7 +1358,7 @@
       "info": {
         "emphasis": {
           "default": {
-            "$value": "{info.9}",
+            "$value": "{border.info.strong}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1343,7 +1405,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{info.4}",
+            "$value": "{border.info.subtle}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1392,7 +1454,7 @@
       "neutral": {
         "emphasis": {
           "default": {
-            "$value": "{neutral.9}",
+            "$value": "{border.neutral.strong}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1439,7 +1501,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{neutral.4}",
+            "$value": "{border.neutral.subtle}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1454,7 +1516,7 @@
             }
           },
           "hover": {
-            "$value": "{neutral.7}",
+            "$value": "{neutral.5}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1469,7 +1531,7 @@
             }
           },
           "pressed": {
-            "$value": "{neutral.8}",
+            "$value": "{neutral.7}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1503,7 +1565,7 @@
       "success": {
         "emphasis": {
           "default": {
-            "$value": "{success.9}",
+            "$value": "{border.success.strong}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1550,7 +1612,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{success.4}",
+            "$value": "{border.success.subtle}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1599,7 +1661,7 @@
       "warning": {
         "emphasis": {
           "default": {
-            "$value": "{warning.9}",
+            "$value": "{border.warning.strong}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1646,7 +1708,7 @@
         },
         "muted": {
           "default": {
-            "$value": "{warning.1}",
+            "$value": "{border.warning.subtle}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1661,7 +1723,7 @@
             }
           },
           "hover": {
-            "$value": "{warning.2}",
+            "$value": "{warning.5}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -1676,7 +1738,7 @@
             }
           },
           "pressed": {
-            "$value": "{warning.3}",
+            "$value": "{warning.7}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -3482,6 +3544,38 @@
         }
       }
     },
+    "on-default": {
+      "accent": {
+        "$value": "{accent.12}",
+        "$type": "color",
+        "$description": "Text/icon on default status background."
+      },
+      "danger": {
+        "$value": "{danger.12}",
+        "$type": "color",
+        "$description": "Text/icon on default status background."
+      },
+      "info": {
+        "$value": "{info.12}",
+        "$type": "color",
+        "$description": "Text/icon on default status background."
+      },
+      "neutral": {
+        "$value": "{neutral.12}",
+        "$type": "color",
+        "$description": "Text/icon on default status background."
+      },
+      "success": {
+        "$value": "{success.12}",
+        "$type": "color",
+        "$description": "Text/icon on default status background."
+      },
+      "warning": {
+        "$value": "{warning.12}",
+        "$type": "color",
+        "$description": "Text/icon on default status background."
+      }
+    },
     "on-emphasis": {
       "$value": "{neutral.15}",
       "$type": "color",
@@ -3495,6 +3589,38 @@
           },
           "hiddenFromPublishing": false
         }
+      }
+    },
+    "on-muted": {
+      "accent": {
+        "$value": "{accent.12}",
+        "$type": "color",
+        "$description": "Text/icon on muted status background."
+      },
+      "danger": {
+        "$value": "{danger.12}",
+        "$type": "color",
+        "$description": "Text/icon on muted status background."
+      },
+      "info": {
+        "$value": "{info.12}",
+        "$type": "color",
+        "$description": "Text/icon on muted status background."
+      },
+      "neutral": {
+        "$value": "{neutral.12}",
+        "$type": "color",
+        "$description": "Text/icon on muted status background."
+      },
+      "success": {
+        "$value": "{success.12}",
+        "$type": "color",
+        "$description": "Text/icon on muted status background."
+      },
+      "warning": {
+        "$value": "{warning.12}",
+        "$type": "color",
+        "$description": "Text/icon on muted status background."
       }
     },
     "primary": {
