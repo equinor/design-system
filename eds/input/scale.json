@@ -3,7 +3,7 @@
     "scale": {
       "dark": {
         "1": {
-          "$value": 0.19,
+          "$value": 0.215,
           "$type": "number",
           "$description": "bg-canvas",
           "$extensions": {
