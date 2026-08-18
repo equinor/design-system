@@ -33,7 +33,7 @@
           }
         },
         "4": {
-          "$value": 0.52,
+          "$value": 0.3,
           "$type": "number",
           "$description": "bg-fill-muted-hover",
           "$extensions": {
@@ -43,7 +43,7 @@
           }
         },
         "5": {
-          "$value": 0.58,
+          "$value": 0.45,
           "$type": "number",
           "$description": "bg-fill-muted-active",
           "$extensions": {
