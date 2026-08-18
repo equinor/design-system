@@ -8,10 +8,11 @@ import {
   chevron_right,
   chevron_up,
 } from '@equinor/eds-icons'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate, today } from '@internationalized/date'
 import { tokens } from '@equinor/eds-tokens'
 import { Dispatch, SetStateAction } from 'react'
 import { getPageYears } from '../utils/getPageYears'
+import { useTimezone } from '../utils/context'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -84,12 +85,8 @@ export function CalendarHeader({
   /** Called when the Today button is clicked. Only provided by DatePicker, not DateRangePicker. */
   onSelectToday?: (date: CalendarDate) => void
 }) {
-  const now = new Date()
-  const todayDate = new CalendarDate(
-    now.getFullYear(),
-    now.getMonth() + 1,
-    now.getDate(),
-  )
+  const timezone = useTimezone()
+  const todayDate = today(timezone)
 
   const years = getPageYears(state.focusedDate.year, yearPickerPage)
   const backButtonDisabled =
@@ -104,8 +101,8 @@ export function CalendarHeader({
 
   const isTodayDisabled =
     showYearPicker ||
-    state.isInvalid(todayDate) ||
-    state.isCellUnavailable(todayDate)
+    (!!onSelectToday &&
+      (state.isInvalid(todayDate) || state.isCellUnavailable(todayDate)))
 
   return (
     <HeaderWrapper>

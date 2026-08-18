@@ -354,7 +354,19 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
+
+      // Heading should show the future year before clicking Today
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(futureYear),
+      )
+
       await userEvent.click(screen.getByText('Today'))
+
+      // Heading should navigate back to current month
+      const now = new Date()
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(now.getFullYear()),
+      )
 
       expect(onChange).toHaveBeenCalledTimes(1)
       const result = onChange.mock.calls[0][0]
@@ -399,7 +411,8 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      // Today button should be disabled — click does nothing
+      expect(screen.getByText('Today').closest('button')).toBeDisabled()
+      // Disabled button — click does nothing
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
@@ -425,13 +438,13 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      expect(screen.getByText('Today').closest('button')).toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
 
     it('preserves the existing time when showTimeInput is active', async () => {
       const onChange = jest.fn<void, [Date]>()
-      const futureYear = new Date().getFullYear() + 2
       // 14:30 should survive clicking Today
       const valueWithTime = new Date(futureYear, 0, 1, 14, 30)
       render(
