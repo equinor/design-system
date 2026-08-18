@@ -126,11 +126,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       (calendarDate: CalendarDate) => {
         if (_minValue && calendarDate.compare(_minValue) < 0) return
         if (_maxValue && calendarDate.compare(_maxValue) > 0) return
-        if (
-          _isDateUnavailable &&
-          _isDateUnavailable(calendarDate.toDate(timezone))
-        )
-          return
+        if (_isDateUnavailable && _isDateUnavailable(calendarDate)) return
 
         // Preserve an existing time selection when showTimeInput is active
         const newValue =
