@@ -428,6 +428,31 @@ describe('DatePicker', () => {
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
+
+    it('preserves the existing time when showTimeInput is active', async () => {
+      const onChange = jest.fn<void, [Date]>()
+      const futureYear = new Date().getFullYear() + 2
+      // 14:30 should survive clicking Today
+      const valueWithTime = new Date(futureYear, 0, 1, 14, 30)
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            showTimeInput
+            value={valueWithTime}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0]
+      expect(result.getHours()).toBe(14)
+      expect(result.getMinutes()).toBe(30)
+    })
   })
 
   it('should display localized message for unavailable dates', () => {
