@@ -320,7 +320,7 @@
         }
       },
       "disabled": {
-        "$value": "{neutral.3}",
+        "$value": "{neutral.2}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -590,7 +590,7 @@
         }
       },
       "read-only": {
-        "$value": "{neutral.3}",
+        "$value": "{neutral.2}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -1314,6 +1314,20 @@
               }
             }
           }
+        }
+      },
+      "link": {
+        "default": {
+          "$value": "{info.8}",
+          "$type": "color"
+        },
+        "hover": {
+          "$value": "{info.9}",
+          "$type": "color"
+        },
+        "pressed": {
+          "$value": "{info.10}",
+          "$type": "color"
         }
       },
       "neutral": {
@@ -2840,7 +2854,7 @@
         }
       },
       "disabled": {
-        "$value": "{neutral.5}",
+        "$value": "{neutral.7}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -3201,7 +3215,7 @@
   "text": {
     "interactive": {
       "disabled": {
-        "$value": "{neutral.5}",
+        "$value": "{neutral.7}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
