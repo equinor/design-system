@@ -128,6 +128,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     // it is before the visible-range startDate — the root cause of #4933).
     const _onSelectToday = useCallback(
       (calendarDate: CalendarDate) => {
+        if (isDisabled || isReadOnly) return
         if (_minValue && calendarDate.compare(_minValue) < 0) return
         if (_maxValue && calendarDate.compare(_maxValue) > 0) return
         if (_isDateUnavailable(calendarDate)) return
@@ -155,6 +156,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         _maxValue,
         _isDateUnavailable,
         _value,
+        isDisabled,
+        isReadOnly,
       ],
     )
 

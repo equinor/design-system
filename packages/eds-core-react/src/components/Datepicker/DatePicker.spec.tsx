@@ -415,6 +415,10 @@ describe('DatePicker', () => {
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
       expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
+      // Still navigates to today's month even though onChange is suppressed
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(new Date().getFullYear()),
+      )
       expect(onChange).not.toHaveBeenCalled()
     })
 
@@ -441,6 +445,10 @@ describe('DatePicker', () => {
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
       expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
+      // Still navigates to today's month even though onChange is suppressed
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(new Date().getFullYear()),
+      )
       expect(onChange).not.toHaveBeenCalled()
     })
 
@@ -498,6 +506,27 @@ describe('DatePicker', () => {
       expect(dateInKiritimati).toBe('2026-08-19')
 
       jest.useRealTimers()
+    })
+
+    it('does not fire onChange on a readOnly DatePicker opened via keyboard', async () => {
+      // FieldWrapper opens the popover on Enter without checking readOnly,
+      // so the popover is reachable by keyboard even in readOnly mode.
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            readOnly
+            value={new Date(futureYear, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).not.toHaveBeenCalled()
     })
   })
 

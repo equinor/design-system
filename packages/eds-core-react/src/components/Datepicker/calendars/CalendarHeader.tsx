@@ -99,8 +99,6 @@ export function CalendarHeader({
       ? years[years.length - 1] > state.maxValue.year
       : nextMonthDisabled
 
-  const isTodayDisabled = showYearPicker
-
   return (
     <HeaderWrapper>
       <HeaderActions>
@@ -127,7 +125,7 @@ export function CalendarHeader({
           <Icon data={showYearPicker ? chevron_up : chevron_down} />
         </TitleButton>
         <TodayPicker
-          disabled={isTodayDisabled}
+          disabled={showYearPicker}
           onClick={() => {
             if (onSelectToday) {
               onSelectToday(todayDate)
