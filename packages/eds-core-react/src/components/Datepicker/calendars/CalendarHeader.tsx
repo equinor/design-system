@@ -99,10 +99,7 @@ export function CalendarHeader({
       ? years[years.length - 1] > state.maxValue.year
       : nextMonthDisabled
 
-  const isTodayDisabled =
-    showYearPicker ||
-    (!!onSelectToday &&
-      (state.isInvalid(todayDate) || state.isCellUnavailable(todayDate)))
+  const isTodayDisabled = showYearPicker
 
   return (
     <HeaderWrapper>

@@ -317,6 +317,8 @@ describe('DatePicker', () => {
     // Use a date well in the future so these tests remain valid regardless of when they run
     const futureYear = new Date().getFullYear() + 2
 
+    afterEach(() => jest.useRealTimers())
+
     it('selects today when the calendar is showing a past month', async () => {
       const onChange = jest.fn<void, [Date]>()
       render(
@@ -411,7 +413,7 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      expect(screen.getByText('Today').closest('button')).toBeDisabled()
+      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
@@ -437,7 +439,7 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      expect(screen.getByText('Today').closest('button')).toBeDisabled()
+      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
