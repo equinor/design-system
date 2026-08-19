@@ -122,11 +122,15 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
 
+    // Separate from _onChange so the picker stays open after Today is clicked.
+    // Re-validates min/max/unavailable here because this path bypasses
+    // react-stately's normalizeValue (which would silently reject today when
+    // it is before the visible-range startDate — the root cause of #4933).
     const _onSelectToday = useCallback(
       (calendarDate: CalendarDate) => {
         if (_minValue && calendarDate.compare(_minValue) < 0) return
         if (_maxValue && calendarDate.compare(_maxValue) > 0) return
-        if (_isDateUnavailable && _isDateUnavailable(calendarDate)) return
+        if (_isDateUnavailable(calendarDate)) return
 
         // Preserve an existing time selection when showTimeInput is active
         const newValue =

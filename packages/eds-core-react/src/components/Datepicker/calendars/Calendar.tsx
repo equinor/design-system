@@ -34,6 +34,7 @@ export const Calendar = forwardRef(
        * Custom footer component
        */
       Footer?: (props: HeaderFooterProps) => ReactNode
+      /** Called when the Today button is clicked. Not passed by DateRangePicker — Today navigates only there. */
       onSelectToday?: (date: CalendarDate) => void
     } & AriaCalendarProps<DateValue>,
     ref: RefObject<HTMLDivElement | null>,

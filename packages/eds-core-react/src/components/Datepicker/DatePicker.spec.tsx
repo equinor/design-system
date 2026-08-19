@@ -313,7 +313,7 @@ describe('DatePicker', () => {
     expect(screen.getByRole('presentation')).toHaveTextContent('01/22/2025')
   })
 
-  describe('Today button (#4933)', () => {
+  describe('Today button', () => {
     // Use a date well in the future so these tests remain valid regardless of when they run
     const futureYear = new Date().getFullYear() + 2
 
@@ -411,8 +411,8 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      expect(screen.getByText('Today').closest('button')).toBeDisabled()
-      // Disabled button — click does nothing
+      // Button stays enabled for navigation; _onSelectToday guards onChange
+      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
@@ -438,7 +438,8 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      expect(screen.getByText('Today').closest('button')).toBeDisabled()
+      // Button stays enabled for navigation; _onSelectToday guards onChange
+      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
@@ -465,6 +466,38 @@ describe('DatePicker', () => {
       const result = onChange.mock.calls[0][0]
       expect(result.getHours()).toBe(14)
       expect(result.getMinutes()).toBe(30)
+    })
+
+    it('selects the correct day in the picker timezone, not the local timezone', async () => {
+      // 20:00 UTC on Aug 18 is already Aug 19 in Pacific/Kiritimati (UTC+14)
+      jest.useFakeTimers()
+      jest.setSystemTime(new Date('2026-08-18T20:00:00Z'))
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+      const onChange = jest.fn<void, [Date]>()
+
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            timezone={'Pacific/Kiritimati'}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await user.click(screen.getByLabelText(/^Change date.*/))
+      await user.click(screen.getByText('Today'))
+
+      // Kiritimati is UTC+14, so "today" there is Aug 19 — midnight in Kiritimati is
+      // 2026-08-18T10:00:00Z in UTC. Check the local date in that timezone.
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0]
+      const dateInKiritimati = result.toLocaleDateString('en-CA', {
+        timeZone: 'Pacific/Kiritimati',
+      })
+      expect(dateInKiritimati).toBe('2026-08-19')
+
+      jest.useRealTimers()
     })
   })
 
