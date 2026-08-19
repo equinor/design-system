@@ -411,8 +411,7 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      // Button stays enabled for navigation; _onSelectToday guards onChange
-      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
+      expect(screen.getByText('Today').closest('button')).toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })
@@ -438,8 +437,7 @@ describe('DatePicker', () => {
       )
 
       await userEvent.click(screen.getByLabelText(/^Change date.*/))
-      // Button stays enabled for navigation; _onSelectToday guards onChange
-      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
+      expect(screen.getByText('Today').closest('button')).toBeDisabled()
       await userEvent.click(screen.getByText('Today'))
       expect(onChange).not.toHaveBeenCalled()
     })

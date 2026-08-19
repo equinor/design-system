@@ -99,10 +99,10 @@ export function CalendarHeader({
       ? years[years.length - 1] > state.maxValue.year
       : nextMonthDisabled
 
-  // Today is disabled only while the year picker is open — navigation to today's
-  // month is always meaningful. _onSelectToday in DatePicker guards against
-  // emitting an out-of-range value through onChange.
-  const isTodayDisabled = showYearPicker
+  const isTodayDisabled =
+    showYearPicker ||
+    (!!onSelectToday &&
+      (state.isInvalid(todayDate) || state.isCellUnavailable(todayDate)))
 
   return (
     <HeaderWrapper>
