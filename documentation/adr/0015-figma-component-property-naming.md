@@ -1,6 +1,6 @@
 # Name Figma component properties by one internally consistent convention
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-19
 - **Decision makers:** Edvard Pires Bjørgen, EDS Core Team
 
@@ -33,7 +33,7 @@ Two facts frame the decision:
 - A property name must survive translation into a legal code identifier
 - Designers read these names in the Figma properties panel, so they must stay readable there
 - The convention must be machine-checkable — an unenforced glossary is what produced the drift in the first place
-- Figma imposes hard limits that any convention has to accept (see *Constraints imposed by Figma*)
+- Figma imposes hard limits that any convention has to accept (see _Constraints imposed by Figma_)
 - Parity with code is not achievable and must not be assumed by the convention
 
 ## Options Considered
@@ -89,16 +89,16 @@ Publish a reference of what each property is called today and leave the library 
 
 **Adopt Option 2. Figma component properties follow one internally consistent convention: the same concept is named the same way on every component, and a property's name and values are mechanically derivable.**
 
-Internal consistency is the objective. This is explicitly *not* an attempt to reach parity with code. What the convention does is make the Figma side of the mapping predictable, so it can be written once and stay stable. Where a well-named code counterpart already exists, reusing its name is sensible and shortens the mapping — but it is a convenience, not a rule, and it never overrides the library's own consistency.
+Internal consistency is the objective. This is explicitly _not_ an attempt to reach parity with code. What the convention does is make the Figma side of the mapping predictable, so it can be written once and stay stable. Where a well-named code counterpart already exists, reusing its name is sensible and shortens the mapping — but it is a convenience, not a rule, and it never overrides the library's own consistency.
 
 ### 1. Casing, and the one transform
 
 Property names and enum values are **Title Case with single spaces**. One transform derives a code identifier: **collapse the spaces, camelCase**.
 
-| Figma | Derives |
-| --- | --- |
-| `Leading Icon` | `leadingIcon` |
-| `High Contrast` | `highContrast` |
+| Figma            | Derives        |
+| ---------------- | -------------- |
+| `Leading Icon`   | `leadingIcon`  |
+| `High Contrast`  | `highContrast` |
 | `Has Close Icon` | `hasCloseIcon` |
 
 No kebab-case anywhere. Every word is capitalised, separated by exactly one space, with no punctuation and nothing that cannot begin an identifier — `Optional/Required`, `Title + Description` and `Read-only` are all invalid because they derive nothing usable.
@@ -109,14 +109,14 @@ No kebab-case anywhere. Every word is capitalised, separated by exactly one spac
 
 Figma has **five** property types.
 
-| Type | Named after | Examples |
-| --- | --- | --- |
-| Variant | the concept the axis expresses | `Variant`, `Tone`, `Size`, `State`, `Composition`, `Selection` |
-| Boolean — visibility | `Has` + what it reveals | `Has Label`, `Has Leading Icon`, `Has Helper Message` |
-| Boolean — mirroring a code boolean | the prop name, no prefix | `Invalid`, `Disabled` |
-| Instance swap | the slot | `Leading Icon`, `Trailing Icon`, `Icon` |
-| Text | the content | `Label`, `Placeholder`, `Value`, `Description` |
-| Slot | the content hole | `Slot` |
+| Type                               | Named after                    | Examples                                                       |
+| ---------------------------------- | ------------------------------ | -------------------------------------------------------------- |
+| Variant                            | the concept the axis expresses | `Variant`, `Tone`, `Size`, `State`, `Composition`, `Selection` |
+| Boolean — visibility               | `Has` + what it reveals        | `Has Label`, `Has Leading Icon`, `Has Helper Message`          |
+| Boolean — mirroring a code boolean | the prop name, no prefix       | `Invalid`, `Disabled`                                          |
+| Instance swap                      | the slot                       | `Leading Icon`, `Trailing Icon`, `Icon`                        |
+| Text                               | the content                    | `Label`, `Placeholder`, `Value`, `Description`                 |
+| Slot                               | the content hole               | `Slot`                                                         |
 
 `Has` states **presence** — not an action, and not suppression. Prefer `Has Label` over `Show Label`, and never invert to `No Label` or `Hide Label`: code models these as optional content, so presence is the honest reading and it maps without negation.
 
@@ -152,7 +152,7 @@ Three names that look like duplicates but are not: `Text` is a component's own c
 
 **The first value in a variant axis is the default Figma applies when the component is inserted from the assets picker.** Order encodes intent, is chosen deliberately per component, and must never be normalised.
 
-- Only the *spelling* of boolean values is canonical. `false / true` and `true / false` are both correct; which comes first is a design decision.
+- Only the _spelling_ of boolean values is canonical. `false / true` and `true / false` are both correct; which comes first is a design decision.
 - **Renaming a value can move its position**, because value order is re-derived rather than preserved. Any value retitle must check the first value before and after, and treat a change in position 1 as a functional change.
 
 ### 7. Every property is declared mapping or Figma-only
@@ -186,30 +186,30 @@ Property order as reported by the API is **creation order**, and it cannot be se
 
 ### Canonical glossary
 
-| Concept | Name | Type | Notes |
-| --- | --- | --- | --- |
-| Appearance | `Variant` | Variant | values are component-specific |
-| Preset / compose-your-own | `Composition` | Variant | `💠 Custom` exposes the slots |
-| Colour | `Tone` | Variant | `Neutral`, `Accent`, `Success`, `Warning`, `Info`, `Danger` — never `Error` |
-| Emphasis ladder | `Emphasis` | Variant | `Low` < `Medium` < `High` |
-| Size ladder | `Size` | Variant | `Small` < `Medium` < `Large`; `Default` where a code prop uses it |
-| Interaction state | `State` | Variant | mapping-partial |
-| Selection state | `Selection` | Variant | `Unchecked` / `Checked` / `Indeterminate` |
-| Checked (binary) | `Checked` | Variant | `false` / `true` |
-| Validity | `Invalid` | Variant | `false` / `true` |
-| Layout direction | `Layout` | Variant | |
-| Required marker | `Indicator` | Variant | `Optional` / `Required` |
-| Label text | `Label` | Text | `↳ Label` when nested |
-| Description text | `Description` | Text | `↳ Description` when nested |
-| Helper text | `Helper Message` | Text | `↳ Helper Message` when nested |
-| Input value | `Value` | Text | |
-| Placeholder | `Placeholder` | Text | |
-| Component's own content | `Text` | Text | maps to `children` |
-| Heading in a composite | `Title` | Text | |
-| Leading / trailing slot | `Leading Icon` / `Trailing Icon` | Instance swap | |
-| Generic icon slot | `Icon` | Instance swap | |
-| Slot visibility | `Has ` + slot name | Boolean | `Has Label`, `Has Leading Icon` |
-| Content hole | `Slot` | Slot | |
+| Concept                   | Name                             | Type          | Notes                                                                       |
+| ------------------------- | -------------------------------- | ------------- | --------------------------------------------------------------------------- |
+| Appearance                | `Variant`                        | Variant       | values are component-specific                                               |
+| Preset / compose-your-own | `Composition`                    | Variant       | `💠 Custom` exposes the slots                                               |
+| Colour                    | `Tone`                           | Variant       | `Neutral`, `Accent`, `Success`, `Warning`, `Info`, `Danger` — never `Error` |
+| Emphasis ladder           | `Emphasis`                       | Variant       | `Low` < `Medium` < `High`                                                   |
+| Size ladder               | `Size`                           | Variant       | `Small` < `Medium` < `Large`; `Default` where a code prop uses it           |
+| Interaction state         | `State`                          | Variant       | mapping-partial                                                             |
+| Selection state           | `Selection`                      | Variant       | `Unchecked` / `Checked` / `Indeterminate`                                   |
+| Checked (binary)          | `Checked`                        | Variant       | `false` / `true`                                                            |
+| Validity                  | `Invalid`                        | Variant       | `false` / `true`                                                            |
+| Layout direction          | `Layout`                         | Variant       |                                                                             |
+| Required marker           | `Indicator`                      | Variant       | `Optional` / `Required`                                                     |
+| Label text                | `Label`                          | Text          | `↳ Label` when nested                                                       |
+| Description text          | `Description`                    | Text          | `↳ Description` when nested                                                 |
+| Helper text               | `Helper Message`                 | Text          | `↳ Helper Message` when nested                                              |
+| Input value               | `Value`                          | Text          |                                                                             |
+| Placeholder               | `Placeholder`                    | Text          |                                                                             |
+| Component's own content   | `Text`                           | Text          | maps to `children`                                                          |
+| Heading in a composite    | `Title`                          | Text          |                                                                             |
+| Leading / trailing slot   | `Leading Icon` / `Trailing Icon` | Instance swap |                                                                             |
+| Generic icon slot         | `Icon`                           | Instance swap |                                                                             |
+| Slot visibility           | `Has ` + slot name               | Boolean       | `Has Label`, `Has Leading Icon`                                             |
+| Content hole              | `Slot`                           | Slot          |                                                                             |
 
 New names are added to the glossary before being used in the file.
 
@@ -227,11 +227,11 @@ Recorded so they are not rediscovered:
 
 The convention is mechanical, so it is machine-checkable — and it needs to be. A linter reads the library and checks name shape, value shape, boolean spelling, the `Has` prefix, uniqueness of derived identifiers, and dead properties. It is scoped by component tier:
 
-| Prefix | Meaning | Enforcement |
-| --- | --- | --- |
-| *(none)* | published | error |
-| `_` | unfinished | warning; error on the PR that removes the `_` |
-| `.` | sub-component — permanent, and visible through nesting | error |
+| Prefix   | Meaning                                                | Enforcement                                   |
+| -------- | ------------------------------------------------------ | --------------------------------------------- |
+| _(none)_ | published                                              | error                                         |
+| `_`      | unfinished                                             | warning; error on the PR that removes the `_` |
+| `.`      | sub-component — permanent, and visible through nesting | error                                         |
 
 The linter cannot catch everything: a typo that is valid Title Case passes, and so does a name that is internally consistent but means the wrong thing. The linter enforces shape; the glossary enforces meaning. Both are needed.
 
@@ -245,6 +245,5 @@ Adopt the convention for new component designs immediately. Migrate remaining co
 
 - Issue: [equinor/design-system#4974](https://github.com/equinor/design-system/issues/4974)
 - Component priority matrix: discussion #4962
-- Audit data, decision log and the linter live in `design-system-internal`
 - Figma Plugin API: `componentPropertyDefinitions`, `componentPropertyReferences`
 - Figma MCP: `get_design_context`, `get_variable_defs`
