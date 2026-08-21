@@ -8,7 +8,10 @@
           "scopes": [
             "FRAME_FILL",
             "SHAPE_FILL"
-          ]
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-backdrop)"
+          }
         }
       }
     },
@@ -843,17 +846,38 @@
         "default": {
           "$value": "{accent.3}",
           "$type": "color",
-          "$description": "Static status surface — medium emphasis, non-clickable."
+          "$description": "Static status surface — medium emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-accent-default)"
+              }
+            }
+          }
         },
         "emphasis": {
           "$value": "{accent.9}",
           "$type": "color",
-          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-accent-emphasis)"
+              }
+            }
+          }
         },
         "muted": {
           "$value": "{accent.1}",
           "$type": "color",
-          "$description": "Static status surface — low emphasis, non-clickable."
+          "$description": "Static status surface — low emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-accent-muted)"
+              }
+            }
+          }
         }
       },
       "danger": {
@@ -868,7 +892,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-background-danger)"
+                "WEB": "var(--eds-background-non-interactive-danger-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -877,12 +901,26 @@
         "emphasis": {
           "$value": "{danger.9}",
           "$type": "color",
-          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-danger-emphasis)"
+              }
+            }
+          }
         },
         "muted": {
           "$value": "{danger.1}",
           "$type": "color",
-          "$description": "Static status surface — low emphasis, non-clickable."
+          "$description": "Static status surface — low emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-danger-muted)"
+              }
+            }
+          }
         }
       },
       "info": {
@@ -897,7 +935,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-background-info)"
+                "WEB": "var(--eds-background-non-interactive-info-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -906,29 +944,64 @@
         "emphasis": {
           "$value": "{info.9}",
           "$type": "color",
-          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-info-emphasis)"
+              }
+            }
+          }
         },
         "muted": {
           "$value": "{info.1}",
           "$type": "color",
-          "$description": "Static status surface — low emphasis, non-clickable."
+          "$description": "Static status surface — low emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-info-muted)"
+              }
+            }
+          }
         }
       },
       "neutral": {
         "default": {
           "$value": "{neutral.3}",
           "$type": "color",
-          "$description": "Static status surface — medium emphasis, non-clickable."
+          "$description": "Static status surface — medium emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-neutral-default)"
+              }
+            }
+          }
         },
         "emphasis": {
           "$value": "{neutral.9}",
           "$type": "color",
-          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-neutral-emphasis)"
+              }
+            }
+          }
         },
         "muted": {
           "$value": "{neutral.1}",
           "$type": "color",
-          "$description": "Static status surface — low emphasis, non-clickable."
+          "$description": "Static status surface — low emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-neutral-muted)"
+              }
+            }
+          }
         }
       },
       "success": {
@@ -943,7 +1016,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-background-success)"
+                "WEB": "var(--eds-background-non-interactive-success-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -952,12 +1025,26 @@
         "emphasis": {
           "$value": "{success.9}",
           "$type": "color",
-          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-success-emphasis)"
+              }
+            }
+          }
         },
         "muted": {
           "$value": "{success.1}",
           "$type": "color",
-          "$description": "Static status surface — low emphasis, non-clickable."
+          "$description": "Static status surface — low emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-success-muted)"
+              }
+            }
+          }
         }
       },
       "warning": {
@@ -972,7 +1059,7 @@
                 "SHAPE_FILL"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-background-warning)"
+                "WEB": "var(--eds-background-non-interactive-warning-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -981,12 +1068,26 @@
         "emphasis": {
           "$value": "{warning.9}",
           "$type": "color",
-          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes."
+          "$description": "Static status surface — high emphasis (bold fill). Fill lightness inverts between light/dark schemes.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-warning-emphasis)"
+              }
+            }
+          }
         },
         "muted": {
           "$value": "{warning.1}",
           "$type": "color",
-          "$description": "Static status surface — low emphasis, non-clickable."
+          "$description": "Static status surface — low emphasis, non-clickable.",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-background-non-interactive-warning-muted)"
+              }
+            }
+          }
         }
       }
     },
@@ -1331,15 +1432,36 @@
       "link": {
         "default": {
           "$value": "{info.8}",
-          "$type": "color"
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-border-interactive-link-default)"
+              }
+            }
+          }
         },
         "hover": {
           "$value": "{info.9}",
-          "$type": "color"
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-border-interactive-link-hover)"
+              }
+            }
+          }
         },
         "pressed": {
           "$value": "{info.10}",
-          "$type": "color"
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-border-interactive-link-pressed)"
+              }
+            }
+          }
         }
       },
       "neutral": {
@@ -1658,7 +1780,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-accent-medium)"
+                "WEB": "var(--eds-border-non-interactive-accent-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -1674,7 +1796,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-accent-strong)"
+                "WEB": "var(--eds-border-non-interactive-accent-emphasis)"
               },
               "hiddenFromPublishing": false
             }
@@ -1690,7 +1812,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-accent-subtle)"
+                "WEB": "var(--eds-border-non-interactive-accent-muted)"
               },
               "hiddenFromPublishing": false
             }
@@ -1708,7 +1830,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-danger-medium)"
+                "WEB": "var(--eds-border-non-interactive-danger-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -1724,7 +1846,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-danger-strong)"
+                "WEB": "var(--eds-border-non-interactive-danger-emphasis)"
               },
               "hiddenFromPublishing": false
             }
@@ -1740,7 +1862,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-danger-subtle)"
+                "WEB": "var(--eds-border-non-interactive-danger-muted)"
               },
               "hiddenFromPublishing": false
             }
@@ -1758,7 +1880,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-info-medium)"
+                "WEB": "var(--eds-border-non-interactive-info-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -1774,7 +1896,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-info-strong)"
+                "WEB": "var(--eds-border-non-interactive-info-emphasis)"
               },
               "hiddenFromPublishing": false
             }
@@ -1790,7 +1912,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-info-subtle)"
+                "WEB": "var(--eds-border-non-interactive-info-muted)"
               },
               "hiddenFromPublishing": false
             }
@@ -1808,7 +1930,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-neutral-medium)"
+                "WEB": "var(--eds-border-non-interactive-neutral-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -1824,7 +1946,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-neutral-strong)"
+                "WEB": "var(--eds-border-non-interactive-neutral-emphasis)"
               },
               "hiddenFromPublishing": false
             }
@@ -1840,7 +1962,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-neutral-subtle)"
+                "WEB": "var(--eds-border-non-interactive-neutral-muted)"
               },
               "hiddenFromPublishing": false
             }
@@ -1858,7 +1980,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-success-medium)"
+                "WEB": "var(--eds-border-non-interactive-success-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -1874,7 +1996,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-success-strong)"
+                "WEB": "var(--eds-border-non-interactive-success-emphasis)"
               },
               "hiddenFromPublishing": false
             }
@@ -1890,7 +2012,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-success-subtle)"
+                "WEB": "var(--eds-border-non-interactive-success-muted)"
               },
               "hiddenFromPublishing": false
             }
@@ -1908,7 +2030,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-warning-medium)"
+                "WEB": "var(--eds-border-non-interactive-warning-default)"
               },
               "hiddenFromPublishing": false
             }
@@ -1924,7 +2046,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-warning-strong)"
+                "WEB": "var(--eds-border-non-interactive-warning-emphasis)"
               },
               "hiddenFromPublishing": false
             }
@@ -1940,7 +2062,7 @@
                 "STROKE_COLOR"
               ],
               "codeSyntax": {
-                "WEB": "var(--eds-border-warning-subtle)"
+                "WEB": "var(--eds-border-non-interactive-warning-muted)"
               },
               "hiddenFromPublishing": false
             }
@@ -3087,79 +3209,205 @@
     "on-default": {
       "accent": {
         "$value": "{accent.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-default-accent)"
+            }
+          }
+        }
       },
       "danger": {
         "$value": "{danger.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-default-danger)"
+            }
+          }
+        }
       },
       "info": {
         "$value": "{info.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-default-info)"
+            }
+          }
+        }
       },
       "neutral": {
         "$value": "{neutral.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-default-neutral)"
+            }
+          }
+        }
       },
       "success": {
         "$value": "{success.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-default-success)"
+            }
+          }
+        }
       },
       "warning": {
         "$value": "{warning.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-default-warning)"
+            }
+          }
+        }
       }
     },
     "on-emphasis": {
       "accent": {
         "$value": "{accent.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-emphasis-accent)"
+            }
+          }
+        }
       },
       "danger": {
         "$value": "{danger.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-emphasis-danger)"
+            }
+          }
+        }
       },
       "info": {
         "$value": "{info.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-emphasis-info)"
+            }
+          }
+        }
       },
       "neutral": {
         "$value": "{neutral.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-emphasis-neutral)"
+            }
+          }
+        }
       },
       "success": {
         "$value": "{success.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-emphasis-success)"
+            }
+          }
+        }
       },
       "warning": {
         "$value": "{warning.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-emphasis-warning)"
+            }
+          }
+        }
       }
     },
     "on-muted": {
       "accent": {
         "$value": "{accent.12}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-muted-accent)"
+            }
+          }
+        }
       },
       "danger": {
         "$value": "{danger.12}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-muted-danger)"
+            }
+          }
+        }
       },
       "info": {
         "$value": "{info.12}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-muted-info)"
+            }
+          }
+        }
       },
       "neutral": {
         "$value": "{neutral.12}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-muted-neutral)"
+            }
+          }
+        }
       },
       "success": {
         "$value": "{success.12}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-muted-success)"
+            }
+          }
+        }
       },
       "warning": {
         "$value": "{warning.12}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-on-muted-warning)"
+            }
+          }
+        }
       }
     },
     "primary": {
@@ -3307,85 +3555,211 @@
     "on-default": {
       "accent": {
         "$value": "{accent.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-default-accent)"
+            }
+          }
+        }
       },
       "danger": {
         "$value": "{danger.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-default-danger)"
+            }
+          }
+        }
       },
       "info": {
         "$value": "{info.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-default-info)"
+            }
+          }
+        }
       },
       "neutral": {
         "$value": "{neutral.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-default-neutral)"
+            }
+          }
+        }
       },
       "success": {
         "$value": "{success.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-default-success)"
+            }
+          }
+        }
       },
       "warning": {
         "$value": "{warning.10}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-default-warning)"
+            }
+          }
+        }
       }
     },
     "on-emphasis": {
       "accent": {
         "$value": "{accent.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-emphasis-accent)"
+            }
+          }
+        }
       },
       "danger": {
         "$value": "{danger.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-emphasis-danger)"
+            }
+          }
+        }
       },
       "info": {
         "$value": "{info.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-emphasis-info)"
+            }
+          }
+        }
       },
       "neutral": {
         "$value": "{neutral.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-emphasis-neutral)"
+            }
+          }
+        }
       },
       "success": {
         "$value": "{success.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-emphasis-success)"
+            }
+          }
+        }
       },
       "warning": {
         "$value": "{warning.15}",
-        "$type": "color"
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-emphasis-warning)"
+            }
+          }
+        }
       }
     },
     "on-muted": {
       "accent": {
         "$value": "{accent.12}",
         "$type": "color",
-        "$description": "Text/icon on muted status background."
+        "$description": "Text/icon on muted status background.",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-muted-accent)"
+            }
+          }
+        }
       },
       "danger": {
         "$value": "{danger.12}",
         "$type": "color",
-        "$description": "Text/icon on muted status background."
+        "$description": "Text/icon on muted status background.",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-muted-danger)"
+            }
+          }
+        }
       },
       "info": {
         "$value": "{info.12}",
         "$type": "color",
-        "$description": "Text/icon on muted status background."
+        "$description": "Text/icon on muted status background.",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-muted-info)"
+            }
+          }
+        }
       },
       "neutral": {
         "$value": "{neutral.12}",
         "$type": "color",
-        "$description": "Text/icon on muted status background."
+        "$description": "Text/icon on muted status background.",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-muted-neutral)"
+            }
+          }
+        }
       },
       "success": {
         "$value": "{success.12}",
         "$type": "color",
-        "$description": "Text/icon on muted status background."
+        "$description": "Text/icon on muted status background.",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-muted-success)"
+            }
+          }
+        }
       },
       "warning": {
         "$value": "{warning.12}",
         "$type": "color",
-        "$description": "Text/icon on muted status background."
+        "$description": "Text/icon on muted status background.",
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-text-on-muted-warning)"
+            }
+          }
+        }
       }
     },
     "primary": {
