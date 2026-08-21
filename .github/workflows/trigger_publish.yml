@@ -106,6 +106,7 @@ jobs:
       data-grid-react: ${{ steps.check.outputs.data-grid-react }}
       icons: ${{ steps.check.outputs.icons }}
       tokens: ${{ steps.check.outputs.tokens }}
+      mobile-storybook: ${{ steps.check.outputs.mobile-storybook }}
 
     steps:
       # Checkout the repository - we only need the current state
@@ -190,6 +191,18 @@ jobs:
             echo "tokens=false" >> $GITHUB_OUTPUT
             echo "⏭️  eds-tokens unchanged"
             echo "- ⏭️ **eds-tokens** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check apps/mobile-storybook (gates the iOS TestFlight build,
+          # not an npm publish - see build_release_ios.yaml)
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"apps/mobile-storybook":'; then
+            echo "mobile-storybook=true" >> $GITHUB_OUTPUT
+            echo "✅ apps/mobile-storybook changed"
+            echo "- ✅ **apps/mobile-storybook** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "mobile-storybook=false" >> $GITHUB_OUTPUT
+            echo "⏭️  apps/mobile-storybook unchanged"
+            echo "- ⏭️ **apps/mobile-storybook** unchanged" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -317,6 +330,31 @@ jobs:
           echo "::error title=Icons Publish Failed::Failed to trigger publish workflow for @equinor/eds-icons"
           echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
 
+  # Job: Trigger the iOS TestFlight build/release workflow
+  # Only runs if the Release Please manifest bumped apps/mobile-storybook.
+  # This isn't an npm publish - it builds the Expo app and uploads it to
+  # TestFlight - see build_release_ios.yaml.
+  trigger-mobile-ios:
+    needs: check-releases
+    if: needs.check-releases.outputs.mobile-storybook == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger iOS build/release
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run build_release_ios.yaml \
+            --repo ${{ github.repository }} \
+            --ref main
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Mobile iOS Build Failed::Failed to trigger iOS build/release workflow for apps/mobile-storybook"
+          echo "❌ Failed to trigger iOS build/release workflow" >> $GITHUB_STEP_SUMMARY
+
   # Job 8: Trigger tokens publish workflow
   # Only runs if the Release Please manifest bumped tokens.
   # The whole eds-tokens package is in beta (pinned 3.0.0-beta.N) during
@@ -430,6 +468,12 @@ jobs:
             echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered (beta dist-tag during the Tokens Studio transition)" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.check-releases.outputs.mobile-storybook }}" == "true" ]; then
+            echo "- ✅ **apps/mobile-storybook**: iOS build/release workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **apps/mobile-storybook**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
