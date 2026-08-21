@@ -11,12 +11,19 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '24.16.0'
+
 jobs:
   build:
     name: Build and upload IPA
     runs-on: macos-26
-    permissions:
-      contents: read
+    timeout-minutes: 45
     env:
       CERTIFICATE_FILE: build_certificate.p12
       PROVISIONING_PROFILE_FILE: build_pp.mobileprovision
@@ -29,7 +36,6 @@ jobs:
           xcode-version: '26.2'
 
       - name: Set build number
-        id: set-build-number
         run: |
           build_number="$(date +'%Y%m%d').${{ github.run_number }}"
           echo "BUILD_NUMBER=$build_number" >> $GITHUB_ENV
@@ -63,13 +69,19 @@ jobs:
 
       - name: Generate ExportOptions.plist
         working-directory: apps/mobile-storybook
+        env:
+          APPLE_BUNDLE_IDENTIFIER: ${{ vars.APPLE_BUNDLE_IDENTIFIER }}
+          APPLE_PROVISIONING_PROFILE_NAME: ${{ vars.APPLE_PROVISIONING_PROFILE_NAME }}
+          APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
         run: |
           FILE=ExportOptions.plist
-          /usr/libexec/PlistBuddy -c "add :method string app-store" $FILE
+          # app-store-connect: Apple deprecated the "app-store" value in
+          # Xcode 15.4. Still accepted with a warning as of Xcode 16.
+          /usr/libexec/PlistBuddy -c "add :method string app-store-connect" $FILE
           /usr/libexec/PlistBuddy -c "add :provisioningProfiles dict" $FILE
-          /usr/libexec/PlistBuddy -c "add :provisioningProfiles:${{ vars.APPLE_BUNDLE_IDENTIFIER }} string ${{ vars.APPLE_PROVISIONING_PROFILE_NAME }}" $FILE
+          /usr/libexec/PlistBuddy -c "add :provisioningProfiles:$APPLE_BUNDLE_IDENTIFIER string $APPLE_PROVISIONING_PROFILE_NAME" $FILE
           /usr/libexec/PlistBuddy -c "add :signingStyle string manual" $FILE
-          /usr/libexec/PlistBuddy -c "add :teamId string ${{ vars.APPLE_TEAM_ID }}" $FILE
+          /usr/libexec/PlistBuddy -c "add :teamId string $APPLE_TEAM_ID" $FILE
           cat $FILE
 
       - name: Setup pnpm
@@ -78,7 +90,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
 
       - name: Install dependencies
@@ -98,6 +110,9 @@ jobs:
 
       - name: Xcode archive
         working-directory: apps/mobile-storybook
+        env:
+          APPLE_CODE_SIGN_IDENTITY: ${{ vars.APPLE_CODE_SIGN_IDENTITY }}
+          APPLE_PROVISIONING_PROFILE_NAME: ${{ vars.APPLE_PROVISIONING_PROFILE_NAME }}
         run: |
           /usr/bin/xcodebuild archive \
             -workspace ios/EDSMobile.xcworkspace \
@@ -105,8 +120,8 @@ jobs:
             -destination 'generic/platform=iOS' \
             -archivePath build/EDSMobile.xcarchive \
             CODE_SIGN_STYLE="Manual" \
-            CODE_SIGN_IDENTITY="${{ vars.APPLE_CODE_SIGN_IDENTITY }}" \
-            PROVISIONING_PROFILE_SPECIFIER="${{ vars.APPLE_PROVISIONING_PROFILE_NAME }}"
+            CODE_SIGN_IDENTITY="$APPLE_CODE_SIGN_IDENTITY" \
+            PROVISIONING_PROFILE_SPECIFIER="$APPLE_PROVISIONING_PROFILE_NAME"
 
       - name: Export IPA
         working-directory: apps/mobile-storybook
@@ -116,16 +131,26 @@ jobs:
             -exportOptionsPlist ExportOptions.plist \
             -exportPath build
 
+      # Resolved once and reused below rather than hardcoding EDSMobile.ipa
+      # in one step and globbing *.ipa in the other - if the exported
+      # product name ever changes, this step fails with a clear "no IPA
+      # found" instead of the artifact upload silently passing and only
+      # the TestFlight step failing later.
+      - name: Locate IPA
+        id: ipa
+        working-directory: apps/mobile-storybook
+        run: echo "path=$(ls build/*.ipa)" >> "$GITHUB_OUTPUT"
+
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v7
         with:
           name: EDSMobile-${{ env.BUILD_NUMBER }}
-          path: apps/mobile-storybook/build/*.ipa
+          path: apps/mobile-storybook/${{ steps.ipa.outputs.path }}
 
       - name: Upload to TestFlight
         uses: apple-actions/upload-testflight-build@v5
         with:
-          app-path: ${{ github.workspace }}/apps/mobile-storybook/build/EDSMobile.ipa
+          app-path: ${{ github.workspace }}/apps/mobile-storybook/${{ steps.ipa.outputs.path }}
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
@@ -133,9 +158,18 @@ jobs:
       - name: Clean up signing artifacts
         if: ${{ always() }}
         run: |
+          CERTIFICATE_PATH="$RUNNER_TEMP/$CERTIFICATE_FILE"
           PROVISIONING_PROFILE_PATH="$RUNNER_TEMP/$PROVISIONING_PROFILE_FILE"
           KEYCHAIN_PATH="$RUNNER_TEMP/$KEYCHAIN_FILE"
 
           security delete-keychain "$KEYCHAIN_PATH" || true
+          rm -f "$CERTIFICATE_PATH"
           rm -f "$PROVISIONING_PROFILE_PATH"
           rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/build_pp.mobileprovision"
+
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()

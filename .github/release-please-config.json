@@ -8,6 +8,7 @@
       "exclude-paths": [
         "apps/mobile-storybook/CLAUDE.md",
         "apps/mobile-storybook/README.md",
+        "apps/mobile-storybook/.gitignore",
         "apps/mobile-storybook/eslint.config.js",
         "apps/mobile-storybook/tsconfig.json",
         "apps/mobile-storybook/babel.config.js",
