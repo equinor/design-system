@@ -98,18 +98,6 @@
         "packages/eds-mobile-components/tsup.config.ts"
       ]
     },
-    "apps/mobile-storybook": {
-      "release-type": "expo",
-      "component": "mobile-storybook",
-      "exclude-paths": [
-        "apps/mobile-storybook/CLAUDE.md",
-        "apps/mobile-storybook/README.md",
-        "apps/mobile-storybook/eslint.config.js",
-        "apps/mobile-storybook/tsconfig.json",
-        "apps/mobile-storybook/babel.config.js",
-        "apps/mobile-storybook/metro.config.js"
-      ]
-    },
     "packages/eds-tokens": {
       "release-type": "simple",
       "package-name": "@equinor/eds-tokens",

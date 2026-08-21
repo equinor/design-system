@@ -5,7 +5,6 @@
   "packages/eds-icons": "1.5.1",
   "packages/eds-lab-react": "0.11.0",
   "packages/eds-mobile-components": "0.3.1",
-  "apps/mobile-storybook": "0.3.0",
   "packages/eds-tokens": "3.0.0-beta.4",
   "packages/eds-utils": "2.2.1"
 }
