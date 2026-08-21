@@ -159,8 +159,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     })
 
     const popoverRef = useMemo(
-      () => mergeRefs<HTMLDivElement>(refs.setFloating, ref),
-      [refs.setFloating, ref],
+      () => mergeRefs<HTMLDivElement>((node) => refs.setFloating(node), ref),
+      [refs, ref],
     )
 
     const { getFloatingProps } = useInteractions([useDismiss(context)])

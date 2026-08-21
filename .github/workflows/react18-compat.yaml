@@ -8,13 +8,15 @@ on:
     paths:
       - 'packages/**'
 
+env:
+  NODE_VERSION: '24.16.0'
+
 jobs:
   setup:
     uses: ./.github/workflows/_setup.yml
     secrets: inherit
     with:
       cacheKey: ${{ github.sha }}-react18
-      checkout_paths: packages apps scripts .github
   react18:
     name: Build & test with React 18
     runs-on: ubuntu-latest
@@ -34,7 +36,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
       - name: Fallback install (cache miss)
