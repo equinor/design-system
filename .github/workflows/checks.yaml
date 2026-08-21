@@ -119,6 +119,14 @@ jobs:
         run: pnpm run generate:component-index --check
       - name: Build packages
         run: pnpm run build
+      # Separate step, not folded into the `build` aggregate above: that
+      # aggregate is also called by every publish_*.yaml workflow and by
+      # react18-compat.yaml, none of which want mobile built (mobile
+      # requires react ^19.2.0 - the react18-compat job overrides to React
+      # 18 - and unrelated package publishes shouldn't pay for or depend on
+      # mobile's build). This is CI's only exercise of `build:mobile` today.
+      - name: Build mobile package
+        run: pnpm run build:mobile
       - name: Cache build output
         uses: actions/cache/save@v6
         with:
@@ -232,8 +240,18 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpm run build
+          pnpm run build:mobile
       - name: Type check packages
         run: pnpm run types
+      # Separate step, not folded into the `types` aggregate above - same
+      # reasoning as "Build mobile package" in the build job. Uses the two
+      # packages' own check-types scripts directly rather than the
+      # check-types:mobile root script, which reruns build:mobile - this
+      # job already restored that build from the build job's cache above.
+      - name: Type check mobile
+        run: |
+          pnpm --filter @equinor/eds-mobile-components run types
+          pnpm --filter @equinor/mobile-storybook run check-types
 
   # ─── Lint-only for non-code changes (workflows, docs) ───────────
   #

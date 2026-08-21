@@ -21,7 +21,7 @@ pnpm dev
 pnpm lint
 
 # Type check
-pnpm check-types
+pnpm types
 
 # Clean build artifacts
 pnpm clean
