@@ -48,6 +48,8 @@ jobs:
       eds-tokens--tag_name: ${{ steps.release.outputs['packages/eds-tokens--tag_name'] }}
       eds-utils--release_created: ${{ steps.release.outputs['packages/eds-utils--release_created'] }}
       eds-utils--tag_name: ${{ steps.release.outputs['packages/eds-utils--tag_name'] }}
+      mobile-storybook--release_created: ${{ steps.release.outputs['apps/mobile-storybook--release_created'] }}
+      mobile-storybook--tag_name: ${{ steps.release.outputs['apps/mobile-storybook--tag_name'] }}
 
     steps:
       # Main step: Run the release-please action
