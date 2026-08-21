@@ -1,5 +1,17 @@
 {
   "background": {
+    "backdrop": {
+      "$value": "{neutral.7}",
+      "$type": "color",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      }
+    },
     "canvas": {
       "$value": "{neutral.1}",
       "$type": "color",
@@ -49,7 +61,7 @@
       }
     },
     "input": {
-      "$value": "{bg-input}",
+      "$value": "{neutral.1}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
@@ -1206,7 +1218,7 @@
         }
       },
       "focus": {
-        "$value": "{border-focus}",
+        "$value": "{info.7}",
         "$type": "color",
         "$extensions": {
           "com.figma": {

@@ -181,78 +181,6 @@
       }
     }
   },
-  "bg-backdrop": {
-    "$value": "{light.gray.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-backdrop)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "bg-disabled": {
-    "$value": "{neutral.3}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-disabled)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "bg-floating": {
-    "$value": "{light.gray.2}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-floating)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "bg-input": {
-    "$value": "{light.gray.1}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-input)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "border-disabled": {
-    "$value": "{neutral.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-border-disabled)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "border-focus": {
-    "$value": "{light.blue.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-border-focus)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
   "danger": {
     "1": {
       "$value": "{light.red.1}",
@@ -1798,30 +1726,6 @@
           },
           "hiddenFromPublishing": true
         }
-      }
-    }
-  },
-  "text-disabled": {
-    "$value": "{neutral.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-text-disabled)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "text-link": {
-    "$value": "{light.blue.8}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-text-link)"
-        },
-        "hiddenFromPublishing": true
       }
     }
   },
