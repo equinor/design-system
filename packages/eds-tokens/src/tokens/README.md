@@ -17,8 +17,11 @@ The generated output is published on the beta line
 (`@equinor/eds-tokens@beta`, injected at publish time by
 `.github/workflows/publish_tokens.yaml` under temporary additive
 `./next/{css,dtcg,ts}/*` subpaths) — the `exports` map in git still serves
-the legacy Style Dictionary build in `build/`. Note that `./next/ts/*`
-ships raw `.ts` modules (no compiled `.js`/`.d.ts`), so it requires a
-TypeScript-aware consumer.
+the legacy Style Dictionary build in `build/`. The `next/*` subpaths last
+only until the `/next` components finish migrating to the new variable
+names; the output then moves to the final specifiers within the beta line —
+see [ADR-0009](../../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)
+for the full lifecycle. Note that `./next/ts/*` ships raw `.ts` modules
+(no compiled `.js`/`.d.ts`), so it requires a TypeScript-aware consumer.
 
 Pipeline documentation: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../../../documentation/agent-instructions/TOKENS_STUDIO.md).

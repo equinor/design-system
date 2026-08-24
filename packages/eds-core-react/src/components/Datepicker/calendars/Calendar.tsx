@@ -10,7 +10,7 @@ import { useCalendarState } from '@react-stately/calendar'
 import { CalendarGrid } from './CalendarGrid'
 import { CalendarHeader } from './CalendarHeader'
 import { HeaderFooterProps } from '../props'
-import { createCalendar } from '@internationalized/date'
+import { CalendarDate, createCalendar } from '@internationalized/date'
 import { Popover } from '../../Popover'
 import { CalendarWrapper } from './CalendarWrapper'
 
@@ -23,6 +23,7 @@ export const Calendar = forwardRef(
     {
       Header,
       Footer,
+      onSelectToday,
       ...props
     }: {
       /**
@@ -33,6 +34,8 @@ export const Calendar = forwardRef(
        * Custom footer component
        */
       Footer?: (props: HeaderFooterProps) => ReactNode
+      /** Called when the Today button is clicked. Not passed by DateRangePicker — Today navigates only there. */
+      onSelectToday?: (date: CalendarDate) => void
     } & AriaCalendarProps<DateValue>,
     ref: RefObject<HTMLDivElement | null>,
   ) => {
@@ -78,6 +81,7 @@ export const Calendar = forwardRef(
               showYearPicker={showYearPicker}
               yearPickerPage={yearPickerPage}
               setYearPickerPage={setYearPickerPage}
+              onSelectToday={onSelectToday}
             />
           )}
         </Popover.Header>
