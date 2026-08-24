@@ -2,8 +2,9 @@
  * Bundle the Tokens Studio CSS export into one committed file.
  *
  * Concatenates every generated CSS file under `src/tokens/css/` into
- * `src/tokens/css/variables.css` (ADR-0010). The bundle adds no
- * behaviour on top of the generated files — every mode file is
+ * `src/tokens/css/variables.css` (ADR-0010, proposed in #5199). The
+ * bundle adds no behaviour on top of the generated files — every mode
+ * file is
  * `:root`- or attribute-scoped, and `var()` references are late-bound.
  * Files are concatenated in sorted path order to keep the committed
  * artifact deterministic.
