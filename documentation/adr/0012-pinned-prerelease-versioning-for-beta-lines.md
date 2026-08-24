@@ -1,6 +1,6 @@
 # Pin beta release lines to a fixed 3.0.0-beta.N series with release-please prerelease versioning
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-07-20
 - **Decision makers:** Frida Erdal, EDS Core Team
 
