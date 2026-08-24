@@ -175,7 +175,7 @@ export default function App() {
 
 While working on a component (migration, docs, bug fix, or review), you may notice gaps that aren't in scope for the current PR — things the Figma design doesn't account for, patterns missing from the EDS web Storybook, accessibility gaps, or API inconsistencies across components. Do not silently drop these.
 
-Append them as a checklist item to the tracking issue: **[#152 — Tracking: Findings from component migration](https://github.com/equinor/design-system-mobile/issues/152)**. Each item should include:
+Append them as a checklist item to the tracking issue: **[#152 — Tracking: Findings from component migration](https://github.com/equinor/design-system-mobile/issues/152)** (this issue will be transferred to this repo once `design-system-mobile` is archived — see equinor/design-system#5138). Each item should include:
 
 - **What** — one-line description of the gap
 - **Rationale** — why it matters (a11y, parity with web, dev ergonomics, etc.)
@@ -191,7 +191,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
     - Styles using `EDSStyleSheet.create`
     - Test file: `YourComponent.test.tsx` — write it alongside the component, not as a follow-up. See `Divider.test.tsx` for the minimal shape: render via `test-utils` (wraps `@testing-library/react-native` with `EDSProvider`) and assert it renders plus any accessibility basics.
 2. Export from `src/index.ts`
-3. Add storybook story in `../../apps/storybook/app/(tabs)/YourComponent.tsx`
+3. Add storybook story in `../../apps/mobile-storybook/app/(tabs)/YourComponent.tsx`
 4. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
 5. Follow existing patterns for prop naming and component structure
 

@@ -4,7 +4,7 @@ import { Link, Typography } from "@equinor/eds-mobile-components";
 import { Linking, ScrollView } from "react-native";
 import { useState } from "react";
 
-const GITHUB_URL = "https://github.com/equinor/design-system-mobile";
+const GITHUB_URL = "https://github.com/equinor/design-system";
 const DOCS_URL = "https://eds.equinor.com/docs/Next/components/navigation/link";
 
 export default function LinkScreen() {
