@@ -8,10 +8,11 @@ import {
   chevron_right,
   chevron_up,
 } from '@equinor/eds-icons'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate, today } from '@internationalized/date'
 import { tokens } from '@equinor/eds-tokens'
 import { Dispatch, SetStateAction } from 'react'
 import { getPageYears } from '../utils/getPageYears'
+import { useTimezone } from '../utils/context'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -25,22 +26,13 @@ function TodayPicker({
   onClick,
   disabled,
 }: {
-  onClick: (v: CalendarDate) => void
+  onClick: () => void
   disabled: boolean
 }) {
-  const today = new Date()
   return (
     <Button
       disabled={disabled}
-      onClick={() =>
-        onClick(
-          new CalendarDate(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            today.getDate(),
-          ),
-        )
-      }
+      onClick={onClick}
       variant={'ghost'}
       style={{ marginLeft: 4 }}
     >
@@ -80,6 +72,7 @@ export function CalendarHeader({
   setShowYearPicker,
   setYearPickerPage,
   yearPickerPage,
+  onSelectToday,
 }: {
   state: CalendarState | RangeCalendarState
   title: string
@@ -89,7 +82,12 @@ export function CalendarHeader({
   setShowYearPicker: (showYearPicker: boolean) => void
   setYearPickerPage?: Dispatch<SetStateAction<number>>
   yearPickerPage: number
+  /** Called when the Today button is clicked. Only provided by DatePicker, not DateRangePicker. */
+  onSelectToday?: (date: CalendarDate) => void
 }) {
+  const timezone = useTimezone()
+  const todayDate = today(timezone)
+
   const years = getPageYears(state.focusedDate.year, yearPickerPage)
   const backButtonDisabled =
     showYearPicker && state.minValue
@@ -128,7 +126,12 @@ export function CalendarHeader({
         </TitleButton>
         <TodayPicker
           disabled={showYearPicker}
-          onClick={(v: CalendarDate) => state.setFocusedDate(v)}
+          onClick={() => {
+            if (onSelectToday) {
+              onSelectToday(todayDate)
+            }
+            state.setFocusedDate(todayDate)
+          }}
         />
         <span style={{ flex: '1 1 auto' }}></span>
         <Button
