@@ -47,7 +47,7 @@
         }
       },
       "rounded-outer": {
-        "$value": "{primitives.spacing.50}",
+        "$value": "{density.corner-radius.rounded} + {primitives.spacing.6}",
         "$type": "dimension",
         "$extensions": {
           "com.figma": {
