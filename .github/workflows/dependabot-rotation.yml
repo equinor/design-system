@@ -27,6 +27,6 @@ jobs:
             -H 'Content-type: application/json' \
             -d @- <<EOF
           {
-            "text": ":robot_face: *<@$MENTION>, you're on Dependabot duty this week!* (week $WEEK)\n\n:broom: Time to sweep through those dependency PRs — most take under 5 min!\n:warning: Any critical or high severity alerts on the alerts page? Handle those too.\n\n:point_right: <https://github.com/equinor/design-system/pulls/app%2Fdependabot|Open Dependabot PRs> · <https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system|Dependabot alerts> · <https://github.com/equinor/design-system/blob/main/documentation/how-to/DEPENDABOT_GUIDE.md|Dependabot guide>"
+            "text": ":robot_face: *<@$MENTION>, you're on Dependabot duty this week!* (week $WEEK)\n\n:broom: Time to sweep through those dependency PRs — most take under 5 min!\n:warning: Any critical or high severity alerts on the alerts page? Tackle those too.\n\n:point_right: <https://github.com/equinor/design-system/pulls/app%2Fdependabot|Open Dependabot PRs> · <https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system|Dependabot alerts> · <https://github.com/equinor/design-system/blob/main/documentation/how-to/DEPENDABOT_GUIDE.md|Dependabot guide>"
           }
           EOF
