@@ -1,5 +1,6 @@
 import { composeStories } from '@storybook/react'
 
+import * as AutocompleteStories from '@eds-core-react-src/components/next/Autocomplete/Autocomplete.stories'
 import * as ButtonStories from '@eds-core-react-src/components/next/Button/Button.stories'
 
 /**
@@ -10,6 +11,7 @@ import * as ButtonStories from '@eds-core-react-src/components/next/Button/Butto
  * a silently broken iframe.
  */
 export const storyRegistry = {
+  Autocomplete: composeStories(AutocompleteStories),
   Button: composeStories(ButtonStories),
 } as const
 

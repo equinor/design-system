@@ -5,7 +5,9 @@ hide_title: true
 description: 'Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not already in the list.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-inputs-autocomplete--introduction" height={350} showLink />
+{/* Portable-stories pilot — see src/components/StoryCanvas. */}
+
+<StoryCanvas of="Autocomplete/Introduction" showLink />
 
 ## When to Use
 
