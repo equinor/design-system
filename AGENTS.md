@@ -487,6 +487,13 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
 | `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
 
+Directory-scoped conventions live next to the code they describe and take precedence there:
+
+| File                                | Scope                                                                                              |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `apps/design-system-docs/AGENTS.md` | Docs site: global CSS architecture, token bundles, typography scale, version scoping, StoryCanvas   |
+| `apps/design-system-docs/CLAUDE.md` | Claude Code pointer to the above                                                                    |
+
 When adding new conventions, update **this file** and let the tool-specific files reference it.
 
 To verify the harness configs haven't drifted, run the cross-harness audit: [`documentation/agent-instructions/HARNESS_AUDIT.md`](./documentation/agent-instructions/HARNESS_AUDIT.md) is the canonical read-only playbook. Harness entry points: `/audit-harnesses` in Claude Code, the `audit-harnesses` prompt in Copilot, the `audit-harnesses` agent in OpenCode.
