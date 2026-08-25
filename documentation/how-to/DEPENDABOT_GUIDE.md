@@ -99,6 +99,13 @@ These come from `dependabot alerts` and may arrive outside the Monday schedule. 
 
 You can recognize them by the group name `npm_and_yarn` in the PR title or by the "security" label.
 
+## Dependabot alerts (no PR)
+
+Not all vulnerabilities auto-create a PR. Also check the [Dependabot alerts page](https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system) — sorted by severity — for alerts without a corresponding PR.
+
+- **High/critical with no PR?** Investigate and handle manually (see "When CI fails" for options).
+- **Low/moderate with no PR?** Log it and move on — these are often transitive dependencies Dependabot can't auto-fix.
+
 ## FAQ
 
 **Q: Can I just approve without reviewing?**
