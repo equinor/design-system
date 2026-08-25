@@ -6,7 +6,62 @@
  */
 
 :root {
+  /* ------------------------------------------------------------------
+   * Site typography scale — the single source of truth for every text
+   * role on the site. Each role maps to a Tokens Studio typography
+   * token; the two --docs-font-display-* values and the prose
+   * line-height are documented site-local exceptions: the token set is
+   * a product-UI scale whose largest header step (header-4xl) is 32px
+   * and whose line-heights are UI-tuned, so the marketing hero size and
+   * long-form prose leading live here instead.
+   * ------------------------------------------------------------------ */
+  /* Display — hero/page titles on landing pages and doc-page hero bands */
+  --docs-font-display-size: 2.75rem; /* site-local: above header-4xl */
+  --docs-font-display-line-height: 1.15; /* site-local */
+  /* Header-role tokens are referenced through the density layer
+     (--eds-density-typography-header-*) rather than the semantic
+     --eds-typography-header-* names: the legacy token bundle (still imported
+     for elevation + /next previews) defines the same semantic names with
+     different values, and webpack's CSS ordering lets it win. The density
+     names exist only in the Tokens Studio bundle and still flip with
+     [data-density] modes. The ui-* names don't collide (legacy uses
+     ui-body-*), so they are referenced semantically. */
+  /* Section headings (h2 role) */
+  --docs-font-section-size: var(--eds-density-typography-header-3xl-font-size);
+  --docs-font-section-line-height: var(
+    --eds-density-typography-header-3xl-line-height
+  );
+  /* Sub-section headings (h3 role) */
+  --docs-font-subsection-size: var(
+    --eds-density-typography-header-xl-font-size
+  );
+  --docs-font-subsection-line-height: var(
+    --eds-density-typography-header-xl-line-height
+  );
+  /* Card titles */
+  --docs-font-card-title-size: var(
+    --eds-density-typography-header-lg-font-size
+  );
+  --docs-font-card-title-line-height: var(
+    --eds-density-typography-header-lg-line-height
+  );
+  /* Lead / subtitle paragraphs */
+  --docs-font-lead-size: var(--eds-typography-ui-xl-font-size);
+  /* Body prose */
+  --docs-font-body-size: var(--eds-typography-ui-lg-font-size);
+  /* Secondary text — card descriptions, UI labels */
+  --docs-font-body-sm-size: var(--eds-typography-ui-md-font-size);
+  --docs-font-body-sm-line-height: var(--eds-typography-ui-md-line-height);
+  /* Caption — badges, footnotes, copyright */
+  --docs-font-caption-size: var(--eds-typography-ui-sm-font-size);
+  --docs-font-caption-line-height: var(--eds-typography-ui-sm-line-height);
+  /* Long-form prose leading (site-local: token line-heights are UI-tuned) */
+  --docs-prose-line-height: 1.6;
+  /* Emphasis weight — headings, buttons, labels */
+  --docs-font-weight-emphasis: var(--eds-font-weight-bolder);
+
   --docs-hero-space-block: 5rem;
+  --docs-hero-min-height: 27rem;
   --docs-section-space-block: 5rem;
   --docs-measure: 35rem;
   --docs-grid-gap: 1.5rem;
@@ -21,6 +76,32 @@
   --docs-hero-bg: var(--ifm-color-primary-lightest);
 }
 
+/* ----------------------------------------------------------------------
+ * Breakpoint convention: the site uses exactly two breakpoints —
+ *   996px  Infima's layout flip (sidebar drawer, doc columns)
+ *   600px  phone
+ * Custom properties can't be used in media queries, so the values are a
+ * documented convention, not tokens. Grids should prefer
+ * repeat(auto-fill|auto-fit, minmax(…)) over breakpoints where possible.
+ * ---------------------------------------------------------------------- */
+
+/* Phone — one override block; every component consumes these vars, so the
+   mobile scale lives here rather than per component. */
+@media (max-width: 600px) {
+  :root {
+    /* Display steps down to the token scale's top step (header-4xl, 32px);
+       the desktop 44px is the documented above-token exception. */
+    --docs-font-display-size: var(
+      --eds-density-typography-header-4xl-font-size
+    );
+    --docs-hero-space-block: 3rem;
+    --docs-hero-min-height: auto;
+    --docs-section-space-block: 3rem;
+    /* Match Infima's 1rem container padding on phones. */
+    --docs-gutter: max(1rem, calc((100% - var(--docs-content-max)) / 2));
+  }
+}
+
 .docs-section {
   padding-block: var(--docs-section-space-block);
 }
@@ -32,7 +113,12 @@
 
 .docs-about-motto {
   font-style: italic;
-  color: var(--eds-color-text-link, var(--ifm-color-primary));
+  color: var(--eds-text-link);
   margin-bottom: 2rem;
 }
 
+/* Label used by the TypeSpecimen component (src/components/TypeSpecimen.tsx). */
+.specimen-label {
+  font-size: var(--docs-font-caption-size);
+  opacity: 0.6;
+}

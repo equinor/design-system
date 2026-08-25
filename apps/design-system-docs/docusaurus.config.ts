@@ -65,7 +65,12 @@ const config: Config = {
           },
         },
         theme: {
-          customCss: ['./src/css/custom.css', './src/css/docs-components.css'],
+          customCss: [
+            './src/css/theme-variables.css',
+            './src/css/docs-components.css',
+            './src/css/site-chrome.css',
+            './src/css/doc-layouts.css',
+          ],
         },
         sitemap: {
           lastmod: 'datetime',
@@ -139,6 +144,15 @@ const config: Config = {
                 '@equinor/eds-core-react/next/index.css$': path.resolve(
                   __dirname,
                   '../../packages/eds-core-react/build/index.css',
+                ),
+                // The Tokens Studio bundle (ADR-0011) is published on the beta
+                // line as `@equinor/eds-tokens/next/css/variables.css` through
+                // an exports entry injected by publish_tokens.yaml — like
+                // /next above, it is absent from the committed exports map, so
+                // point the specifier at the committed source bundle.
+                '@equinor/eds-tokens/next/css/variables.css$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-tokens/src/tokens/css/variables.css',
                 ),
               },
               fallback: {

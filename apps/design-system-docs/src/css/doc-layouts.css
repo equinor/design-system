@@ -1,0 +1,350 @@
+/**
+ * Doc-page layouts — the three layout treatments applied to docs-plugin pages.
+ *
+ * 1. Default doc card (.theme-doc-markdown) — all versions.
+ * 2. Landing layout (.docs-landing) — MDX docs that opt in via <DocsLanding>.
+ * 3. Component reference docs — container chrome around the hero band the
+ *    DocItem/Layout swizzle renders (current version only).
+ * 4. Foundation doc pages — full-bleed hero + gutter-centred content, done in
+ *    CSS because the title/lead live in the markdown itself (current version
+ *    only). Possible follow-up: converge on the DocItem/Layout swizzle by
+ *    moving titles/leads to frontmatter.
+ *
+ * These rules target `main`/`.col`/docItem* ancestors of the doc content, so
+ * they cannot be colocated with a component. Variables live in
+ * theme-variables.css; navbar/sidebar/footer chrome in site-chrome.css.
+ */
+
+/* ======================================
+ * 1. DEFAULT DOC CARD
+ * ====================================== */
+.theme-doc-markdown {
+  padding: 1.5rem;
+  background-color: var(--ifm-background-surface-color);
+  border: var(--eds-border-neutral-subtle) 1px solid;
+  border-radius: var(--ifm-global-radius);
+}
+
+/* ======================================
+ * 2. LANDING LAYOUT (.docs-landing)
+ * The "landing" layout for MDX docs (Components, Resources, Support, and the
+ * getting-started guides). A doc opts in by wrapping its content in the
+ * <DocsLanding> component (src/components/DocsLanding). It breaks the content
+ * out of the Docusaurus docs wrapper chain to full viewport width, matching the
+ * React landing pages (/foundation, /getting-started, /about) that use
+ * @theme/Layout. Docs WITHOUT this wrapper use the default doc layout.
+ * ====================================== */
+
+.docs-landing {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.theme-doc-markdown:has(.docs-landing) {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* Hide Docusaurus's auto-generated doc-title header — the <Hero> inside
+   <DocsLanding> provides the title. */
+.theme-doc-markdown:has(.docs-landing) > header {
+  display: none;
+}
+
+/* Hide all docs chrome (breadcrumbs, version badges, edit link, pagination) on full-width pages */
+article:has(.docs-landing) > .theme-doc-breadcrumbs,
+article:has(.docs-landing) > [class*='docVersion'],
+article:has(.docs-landing) > footer {
+  display: none;
+}
+
+[class*='docItemContainer']:has(.docs-landing) .pagination-nav,
+[class*='docItemContainer']:has(.docs-landing) > nav {
+  display: none;
+}
+
+/* main — remove all constraints. No overflow-x: clip — it would clip the vw breakout. */
+main:has(.docs-landing) {
+  border-top: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  max-width: 100% !important;
+}
+
+/* Docusaurus's OUTER container only (direct child of main) — strip its width
+   cap/padding so the content breaks out full-width. Scoped to `> .container`
+   so it does NOT hit the inner `.container`s that our sections use to centre
+   content at 1140px (same as the React landing pages). */
+main:has(.docs-landing) > .container {
+  max-width: 100% !important;
+  padding-top: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+/* .row — remove negative margins */
+main:has(.docs-landing) .row {
+  margin: 0 !important;
+}
+
+/* .col (Infima) / docItemCol (hashed theme class) — remove padding and width cap */
+main:has(.docs-landing) .col,
+main:has(.docs-landing) [class*='docItemCol'] {
+  padding: 0 !important;
+  max-width: 100% !important;
+  flex: 0 0 100%;
+}
+
+/* .docItemContainer — remove all spacing */
+main:has(.docs-landing) [class*='docItemContainer'] {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+/* article — remove spacing */
+main:has(.docs-landing) article {
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+}
+
+/* .markdown (Infima) — disable vertical rhythm on docs-landing without breaking the vw breakout margins */
+main:has(.docs-landing) .markdown > .docs-landing {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ======================================
+ * 3. COMPONENT REFERENCE DOCS
+ * Standard three-column layout (left sidebar + content + right TOC) plus a
+ * full-width hero band rendered by the DocItem/Layout swizzle. Only the
+ * container chrome is adjusted here; the hero band itself is styled in
+ * theme/DocItem/Layout/styles.module.css. The /components landing (DocsLanding)
+ * is excluded via :not(:has(.docs-landing)).
+ * ====================================== */
+
+/* Let the hero band sit flush under the navbar — it owns its own top padding. */
+html[class*='docs-doc-id-components/'][class*='docs-version-current']
+  main:not(:has(.docs-landing))
+  > .container {
+  padding-top: 0;
+}
+
+/* Clip any sub-pixel/scrollbar overflow from the hero's 100vw breakout. */
+html[class*='docs-doc-id-components/'][class*='docs-version-current']
+  [class*='docMainContainer']:not(:has(.docs-landing)) {
+  overflow-x: clip;
+}
+
+/* ======================================
+ * 4. FOUNDATION DOC PAGES
+ * Full-bleed hero from the first heading, hidden sidebar/TOC, gutter-centred
+ * content. Component reference docs intentionally keep the default
+ * three-column layout and are NOT styled here.
+ *
+ * The /foundation landing route shares the `docs-doc-id-foundation/` class but
+ * uses the <DocsLanding> component instead — it is excluded from the CONTENT
+ * rules below via `.theme-doc-markdown:not(:has(.docs-landing))`.
+ *
+ * Everything below is scoped to `docs-version-current` (the 2.0.0-beta
+ * redesign); the archived 1.1.0 docs keep the stock Docusaurus layout.
+ * ====================================== */
+
+/* ---- Hide sidebar, breadcrumbs, TOC, edit link, and pagination ---- */
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-sidebar-container,
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-breadcrumbs,
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-toc-desktop,
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-toc-mobile {
+  display: none;
+}
+
+/* Hide edit link and pagination */
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-footer,
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  article
+  > footer,
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .pagination-nav {
+  display: none;
+}
+
+/* Full-width content area */
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  [class*='docMainContainer'] {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Strip the outer Docusaurus container's 1140px cap so the hero + content span
+   full width. Scoped to `main > .container` (direct child) so it never touches
+   the inner section `.container`s used by the landing pages. */
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  main
+  > .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Zero the Infima row negative margins (they'd overflow now that col padding
+   is stripped). */
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  main
+  > .container
+  .row {
+  margin: 0 !important;
+}
+
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  [class*='docItemCol'] {
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  padding: 0 !important;
+}
+
+/* Page background — grey canvas, matching the React landing pages. */
+html[class*='docs-doc-id-foundation/'][class*='docs-version-current'] {
+  background-color: var(--ifm-background-color);
+}
+
+/* ---- Content area (excludes the <DocsLanding> landing pages) ---- */
+
+/* Remove card container — plain background, add bottom breathing room */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing)) {
+  padding: 0 0 4rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+/* Hero title — banner spanning full width */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > h1:first-child,
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > header:first-child {
+  margin: 0;
+  padding: 5rem 0 1.25rem;
+  background-color: var(--docs-hero-bg);
+  font-size: var(--docs-font-display-size);
+  line-height: var(--docs-font-display-line-height);
+  max-width: 100%;
+  padding-left: var(--docs-gutter);
+  padding-right: var(--docs-gutter);
+}
+
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > header:first-child
+  h1 {
+  font-size: var(--docs-font-display-size);
+  line-height: var(--docs-font-display-line-height);
+  margin-bottom: 0;
+}
+
+/* Subtitle — first paragraph continues the hero background */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > h1:first-child
+  + p,
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > header:first-child
+  + p {
+  margin: 0;
+  padding: 0 0 4rem;
+  background-color: var(--docs-hero-bg);
+  color: var(--ifm-color-emphasis-700);
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
+  max-width: 100%;
+  padding-left: var(--docs-gutter);
+  padding-right: var(--docs-gutter);
+}
+
+/* ---- Body content — constrained and centred via the shared gutter ---- */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > *:not(h1):not(header):not(.admonition):not(.theme-admonition):not(
+    .docs-landing
+  ):not(.sb-iframe) {
+  padding-left: var(--docs-gutter);
+  padding-right: var(--docs-gutter);
+}
+
+/* Admonitions: use margins so their background/border renders correctly */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > .admonition,
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > .theme-admonition {
+  margin-left: var(--docs-gutter);
+  margin-right: var(--docs-gutter);
+}
+
+/* First content element after hero subtitle gets extra top spacing */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > h1:first-child
+  + p
+  + *,
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  > header:first-child
+  + p
+  + * {
+  margin-top: 3rem;
+}
+
+/* Section headings — separator line above to divide sections */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  h2 {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--eds-border-neutral-subtle);
+  font-size: var(--docs-font-section-size);
+}
+
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  h2:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Sub-section headings */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  h3 {
+  margin-top: 2rem;
+  font-size: var(--docs-font-subsection-size);
+}
+
+/* Body text */
+[class*='docs-doc-id-foundation/'][class*='docs-version-current']
+  .theme-doc-markdown:not(:has(.docs-landing))
+  p {
+  font-size: var(--docs-font-body-size);
+  line-height: var(--docs-prose-line-height);
+  color: var(--ifm-color-emphasis-800);
+}
