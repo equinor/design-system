@@ -5,9 +5,7 @@ hide_title: true
 description: 'Banners display important, brief messages and provide optional actions for users to respond to. They are designed to inform, warn, or alert users about something relevant to their current context - such as a system change, an error, or a required action. Banners are interruptive by nature, so their level of interruption should match the significance of the information they carry.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-feedback-banner--introduction" height={128} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--introduction)
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--introduction" height={128} showLink />
 
 ## When to Use
 
@@ -41,9 +39,7 @@ Tones communicate the intent or severity of the banner message. Each tone uses a
 | Danger  | Errors, critical alerts, or destructive consequences          |
 | Success | Positive confirmations or successful completions              |
 
-<StorybookEmbed id="eds-2-0-beta-feedback-banner--all-variants" height={600} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--all-variants)
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--all-variants" height={600} showLink />
 
 ### Actions
 
@@ -52,33 +48,25 @@ Actions allow users to respond directly to the banner message. They can contain 
 - Action buttons should directly relate to the banner's message and clearly represent the intended action
 - Actions can be placed **inline** (beside the text) when space allows, or **stacked** (below the text) when the message is longer
 
-<StorybookEmbed id="eds-2-0-beta-feedback-banner--with-actions" height={128} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--with-actions)
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--with-actions" height={128} showLink />
 
 **Stacked actions**
 
 Use `placement="bottom"` on `Banner.Actions` when the message is long and action buttons need more room.
 
-<StorybookEmbed id="eds-2-0-beta-feedback-banner--actions-bottom" height={160} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--actions-bottom)
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--actions-bottom" height={160} showLink />
 
 **Links as actions**
 
 Banners can also use links as actions for navigating to more information.
 
-<StorybookEmbed id="eds-2-0-beta-feedback-banner--with-link" height={128} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--with-link)
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--with-link" height={128} showLink />
 
 ### Dismissible
 
 When the `onDismiss` callback is provided, a close button is rendered in the top-right corner. Use this when the user should be able to acknowledge and remove the banner.
 
-<StorybookEmbed id="eds-2-0-beta-feedback-banner--dismissible" height={128} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--dismissible)
+<StorybookEmbed id="eds-2-0-beta-feedback-banner--dismissible" height={128} showLink />
 
 ## Accessibility
 

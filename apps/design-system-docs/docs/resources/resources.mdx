@@ -8,10 +8,7 @@ displayed_sidebar: null
 
 <Hero title="Resources" lead={<p>Find the tools, guides, and assets you need to work effectively with the Equinor Design System.</p>} />
 
-<section className="docs-section">
-<div className="container">
-
-<SectionHeading title="Internal References" />
+<DocsSection title="Internal References">
 
 <IconCardGrid columns={3}>
 
@@ -59,13 +56,9 @@ displayed_sidebar: null
 
 </IconCardGrid>
 
-</div>
-</section>
+</DocsSection>
 
-<section className="docs-section docs-section--muted">
-<div className="container">
-
-<SectionHeading title="External References" />
+<DocsSection title="External References" tone="muted">
 
 <IconCardGrid columns={3}>
 
@@ -103,13 +96,9 @@ displayed_sidebar: null
 
 </IconCardGrid>
 
-</div>
-</section>
+</DocsSection>
 
-<section className="docs-section">
-<div className="container">
-
-<SectionHeading title="Equinor Resources" />
+<DocsSection title="Equinor Resources">
 
 <IconCardGrid columns={3}>
 
@@ -147,13 +136,9 @@ displayed_sidebar: null
 
 </IconCardGrid>
 
-</div>
-</section>
+</DocsSection>
 
-<section className="docs-section docs-section--muted">
-<div className="container">
-
-<SectionHeading title="Available packages" subtitle="Each package follows independent semantic versioning; the badges update automatically from npm." />
+<DocsSection title="Available packages" subtitle="Each package follows independent semantic versioning; the badges update automatically from npm." tone="muted">
 
 | Package                                                                                                                                                                                                | Changelog                                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -166,7 +151,6 @@ displayed_sidebar: null
 
 For full release notes, see [Release notes](https://github.com/equinor/design-system/releases). For questions, support, and contributions, visit our [support page](/docs/Next/support).
 
-</div>
-</section>
+</DocsSection>
 
 </DocsLanding>

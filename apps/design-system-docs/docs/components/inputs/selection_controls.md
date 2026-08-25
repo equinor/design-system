@@ -52,25 +52,19 @@ Use selection controls when users need to:
 
 Checkboxes allow users to select one or more options from a set, or toggle a single option on/off. They are ideal for accepting terms and conditions or selecting multiple items from a list.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-checkbox--spacious" height={275} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--spacious)
+<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-checkbox--spacious" height={275} showLink />
 
 ### Radio
 
 Radio buttons allow users to select exactly one option from a group. They expose all available options, making it easy to compare choices at a glance.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-radio--spacious" height={225} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--spacious)
+<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-radio--spacious" height={225} showLink />
 
 ### Switch
 
 Switches toggle a single setting on or off. Changes take effect immediately when the user interacts with the switch - there's no need for a submit action.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-switch--states" height={275} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-switch--states)
+<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-switch--states" height={275} showLink />
 
 ## Guidelines
 
@@ -109,17 +103,13 @@ Exercise caution with preselected options, as they can influence user choice. Fo
 
 The indeterminate state indicates a partially checked condition - useful for "select all" scenarios where some, but not all, child items are selected.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-checkbox--grouped-checkbox" height={180} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--grouped-checkbox)
+<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-checkbox--grouped-checkbox" height={180} showLink />
 
 ### Grouped Radio Buttons
 
 Radio buttons with the same `name` attribute form a group. Users can navigate within the group using arrow keys (↑↓ or ←→).
 
-<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-radio--grouped-radio" height={180} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--grouped-radio)
+<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-radio--grouped-radio" height={180} showLink />
 
 ### Density
 
@@ -145,9 +135,7 @@ A `label` is always required on selection controls. In cases where a visual labe
 
 When no visible label is needed (e.g., in tables), use `aria-label` to provide an accessible name for screen readers.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-checkbox--without-visible-label" height={100} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--without-visible-label)
+<StorybookEmbed id="eds-2-0-beta-inputs-selection-controls-checkbox--without-visible-label" height={100} showLink />
 
 **Status announcements (Switch):**
 

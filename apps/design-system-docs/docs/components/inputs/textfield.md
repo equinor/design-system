@@ -5,9 +5,7 @@ hide_title: true
 description: "TextField lets users enter, interact with, and edit content in forms and dialogs. It's a pre-composed component that combines Label, Description, Input, and HelperMessage into a complete, accessible form field."
 ---
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--introduction" height={125} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--introduction)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--introduction" height={125} showLink />
 
 ## When to Use
 
@@ -36,25 +34,19 @@ For more flexibility, use the individual components via the [Field](./field) com
 
 Use the `indicator` prop to show "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation - these are separate concerns.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--with-indicator" height={235} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--with-indicator)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--with-indicator" height={235} showLink />
 
 ### Descriptions
 
 Use the `description` prop to provide additional context below the label.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--with-description" height={105} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--with-description)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--with-description" height={105} showLink />
 
 ### Validation States
 
 Use the `invalid` prop to show error styling with a red border and error icon. Pair it with a `helperMessage` to explain what went wrong.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--invalid-state" height={110} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--invalid-state)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--invalid-state" height={110} showLink />
 
 ### Disabled and Read Only
 
@@ -62,22 +54,17 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead - it ke
 
 #### Disabled state
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--disabled-state" height={195} />
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--disabled-state)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--disabled-state" height={195} showLink />
 
 #### Read-only state
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--read-only-state" height={110} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--read-only-state)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--read-only-state" height={110} showLink />
 
 ### Prefix and Suffix
 
 Use `startText` and `endText` to display units, currency, or contextual information. Note that screen readers won't announce these automatically - ensure matching information appears in the label text as well.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--full-example" height={125} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--full-example)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--full-example" height={125} showLink />
 
 ### Input Types
 
@@ -91,9 +78,7 @@ Adjust the width to match expected input length - shorter for phone numbers, wid
 
 TextField adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout for dense UIs.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-textfield--density-modes" height={235} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--density-modes)
+<StorybookEmbed id="eds-2-0-beta-inputs-textfield--density-modes" height={235} showLink />
 
 ## Accessibility
 

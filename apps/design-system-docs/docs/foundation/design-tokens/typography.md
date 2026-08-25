@@ -1,4 +1,4 @@
-import TypeSpecimen from '@site/src/components/TypeSpecimen'
+import { TypeSpecimen } from '@site/src/components/TypeSpecimen'
 
 # Typography
 

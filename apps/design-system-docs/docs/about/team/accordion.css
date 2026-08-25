@@ -90,5 +90,5 @@
   padding: 0 0 0.75rem calc(1.5rem + 1.25rem) !important;
   font-size: 0.875rem;
   line-height: 1.6;
-  color: var(--eds-color-text-neutral-subtle);
+  color: var(--eds-text-secondary);
 }

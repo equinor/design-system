@@ -5,9 +5,7 @@ hide_title: true
 description: 'Links are clickable text elements that take users to other pages, documents, or locations within a page. They are essential for navigation and help users discover and move between content. Links should always have clear, descriptive text so users understand where they will be taken.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-navigation-link--introduction" height={83} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--introduction)
+<StorybookEmbed id="eds-2-0-beta-navigation-link--introduction" height={83} showLink />
 
 ## When to Use
 
@@ -37,17 +35,13 @@ Link has two definitions:
 
 Inline links sit within body text and inherit the surrounding typography. Use them when linking to related content or references within a sentence.
 
-<StorybookEmbed id="eds-2-0-beta-navigation-link--inline" height={115} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--inline)
+<StorybookEmbed id="eds-2-0-beta-navigation-link--inline" height={115} showLink />
 
 #### Standalone
 
 Standalone links are used outside of body text, such as in navigation areas, card footers, or call-to-action sections. They use the UI font family.
 
-<StorybookEmbed id="eds-2-0-beta-navigation-link--standalone" height={83} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--standalone)
+<StorybookEmbed id="eds-2-0-beta-navigation-link--standalone" height={83} showLink />
 
 ### External Links
 
@@ -55,9 +49,7 @@ When a link takes the user outside the current application context, use the exte
 
 Use `target="_blank"` with `rel="noreferrer"` to open external links in a new tab.
 
-<StorybookEmbed id="eds-2-0-beta-navigation-link--external-link" height={83} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--external-link)
+<StorybookEmbed id="eds-2-0-beta-navigation-link--external-link" height={83} showLink />
 
 ### Link Text
 

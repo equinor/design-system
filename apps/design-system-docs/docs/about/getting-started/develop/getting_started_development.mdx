@@ -18,10 +18,7 @@ import Prerequisites from '@site/src/components/Prerequisites'
   }
 />
 
-<section className="docs-section docs-section--muted">
-<div className="container">
-
-<SectionHeading title="Install" />
+<DocsSection title="Install" tone="muted">
 
 ```bash
 npm install @equinor/eds-core-react styled-components
@@ -47,13 +44,9 @@ Add the EDS variable font stylesheet to your HTML `<head>`:
 This stylesheet loads both **Equinor** and **Inter**. If you use EDS 2.0 (`next`) components, it is required — the older `equinor-font.css` only includes Equinor and will cause fallback fonts. See [Typography](../../../foundation/design-tokens/typography.md) for details.
 :::
 
-</div>
-</section>
+</DocsSection>
 
-<section className="docs-section">
-<div className="container">
-
-<SectionHeading title="Use components" />
+<DocsSection title="Use components">
 
 EDS has two component sets: the current stable API and the new **EDS 2.0** (`next`) components.
 
@@ -97,13 +90,9 @@ When EDS 2.0 stabilises, the components move out of `/next` and EDS 1 is depreca
 The numbers line up by coincidence: "2.0" is the design system name, and "3.0.0" is the semver consequence of removing EDS 1. There is no "EDS 3.0" — the package version and the design system name are separate things.
 :::
 
-</div>
-</section>
+</DocsSection>
 
-<section className="docs-section docs-section--muted">
-<div className="container">
-
-<SectionHeading title="Design tokens" />
+<DocsSection title="Design tokens" tone="muted">
 
 For custom styling, use EDS design tokens to stay consistent with the system.
 
@@ -127,13 +116,9 @@ npm install @equinor/eds-tokens
 The token structure is being replaced. The CSS variables are the supported option today, but the variable names will change in the next major release of `@equinor/eds-tokens`, so keep direct variable references few and centralised. The older `tokens` JavaScript object is deprecated and should not be used in new code. See the [package README](https://www.npmjs.com/package/@equinor/eds-tokens) for details.
 :::
 
-</div>
-</section>
+</DocsSection>
 
-<section className="docs-section">
-<div className="container">
-
-<SectionHeading title="Troubleshooting" />
+<DocsSection title="Troubleshooting">
 
 **Missing fonts** — If components render in a generic sans-serif, check that the `eds-uprights-vf.css` stylesheet is loaded. EDS 2.0 components require Inter, which is only in the variable font stylesheet.
 
@@ -141,8 +126,7 @@ The token structure is being replaced. The CSS variables are the supported optio
 
 **TypeScript version** — EDS requires <Prerequisites />. If you see type errors, check your `tsconfig.json` targets a compatible version.
 
-</div>
-</section>
+</DocsSection>
 
 <CtaSection
   title="Need help?"

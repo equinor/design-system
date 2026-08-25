@@ -4,9 +4,7 @@ hide_title: true
 description: 'Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to scale automatically with typography, adapt to density modes, and meet accessibility standards out of the box.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-icon--introduction" height={88} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--introduction)
+<StorybookEmbed id="eds-2-0-beta-icon--introduction" height={88} showLink />
 
 ## When to Use
 
@@ -44,17 +42,13 @@ Use the `size` prop for explicit sizing. Each size maps to an EDS design token, 
 | 5xl  | 48px               | 42px                  |
 | 6xl  | 56px               | 48px                  |
 
-<StorybookEmbed id="eds-2-0-beta-icon--explicit-sizes" height={136} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--explicit-sizes)
+<StorybookEmbed id="eds-2-0-beta-icon--explicit-sizes" height={136} showLink />
 
 ### Auto-sizing with Typography
 
 When placed inside a Typography component, icons automatically inherit the correct size via the `--eds-typography-icon-size` CSS variable. This is the recommended approach for icons inline with text.
 
-<StorybookEmbed id="eds-2-0-beta-icon--auto-size-from-typography" height={308} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--auto-size-from-typography)
+<StorybookEmbed id="eds-2-0-beta-icon--auto-size-from-typography" height={308} showLink />
 
 ### Density modes
 
@@ -63,25 +57,19 @@ Icons respect the `data-density` attribute for density-aware sizing. The same `s
 - **Spacious** (default) - larger icons for more breathing room
 - **Comfortable** - smaller icons for compact UIs
 
-<StorybookEmbed id="eds-2-0-beta-icon--density-modes" height={162} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--density-modes)
+<StorybookEmbed id="eds-2-0-beta-icon--density-modes" height={162} showLink />
 
 ### Default sizing
 
 When no `size` prop is set and the icon is outside a Typography component, it scales to 1.5× the surrounding font size. This provides a sensible default in any context.
 
-<StorybookEmbed id="eds-2-0-beta-icon--dynamic-fallback" height={251} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--dynamic-fallback)
+<StorybookEmbed id="eds-2-0-beta-icon--dynamic-fallback" height={251} showLink />
 
 ### Color
 
 Icons inherit `currentColor` by default, making them adapt to text color automatically. You can also set a custom color using the `color` prop.
 
-<StorybookEmbed id="eds-2-0-beta-icon--color" height={88} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--color)
+<StorybookEmbed id="eds-2-0-beta-icon--color" height={88} showLink />
 
 ### Inline text vs flex layout
 
@@ -94,9 +82,7 @@ How you use Icon depends on the layout context:
 
 The `size` prop removes negative margins, giving full control to your layout system.
 
-<StorybookEmbed id="eds-2-0-beta-icon--inline-with-text" height={257} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--inline-with-text)
+<StorybookEmbed id="eds-2-0-beta-icon--inline-with-text" height={257} showLink />
 
 ## Usage in Figma
 
@@ -135,9 +121,7 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Announced by screen readers using the title text
 - Use when the icon conveys meaning that is not available through surrounding text
 
-<StorybookEmbed id="eds-2-0-beta-icon--accessibility" height={197} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--accessibility)
+<StorybookEmbed id="eds-2-0-beta-icon--accessibility" height={197} showLink />
 
 ## Do's and Don'ts
 

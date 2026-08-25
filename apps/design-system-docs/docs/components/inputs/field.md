@@ -5,9 +5,7 @@ hide_title: true
 description: 'Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes - ensuring a consistent and accessible experience.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-inputs-field--default" height={125} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--default)
+<StorybookEmbed id="eds-2-0-beta-inputs-field--default" height={125} showLink />
 
 ## When to Use
 
@@ -41,17 +39,13 @@ const { inputId, descriptionId, helperMessageId, getDescribedBy } =
 
 Use the `indicator` prop on Field.Label to show required or optional status. This is a visual indicator only - remember to also set `aria-required` on the input for accessibility.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-field--with-indicator" height={200} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--with-indicator)
+<StorybookEmbed id="eds-2-0-beta-inputs-field--with-indicator" height={200} showLink />
 
 ### Descriptions
 
 Use Field.Description to provide additional context below the label. Connect it to the input using `aria-describedby` for screen reader support.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-field--with-description" height={105} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--with-description)
+<StorybookEmbed id="eds-2-0-beta-inputs-field--with-description" height={105} showLink />
 
 ### Live Validation
 
@@ -59,17 +53,13 @@ For accessible live validation, wrap conditional content in a container with `ro
 
 Pass IDs to `getDescribedBy()` conditionally based on what's rendered.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-field--live-validation" height={125} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--live-validation)
+<StorybookEmbed id="eds-2-0-beta-inputs-field--live-validation" height={125} showLink />
 
 ### Disabled State
 
 Set `disabled` on Field to apply disabled styling to all sub-components. The disabled state is passed down via the `data-disabled` attribute.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-field--disabled" height={105} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--disabled)
+<StorybookEmbed id="eds-2-0-beta-inputs-field--disabled" height={105} showLink />
 
 ### Label Position
 

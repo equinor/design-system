@@ -5,9 +5,7 @@ hide_title: true
 description: 'Tooltips display brief, supplementary information when users hover over or focus on an element. They are ideal for clarifying the meaning of icons, explaining actions, or showing keyboard shortcuts - without cluttering the interface.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--introduction" height={150} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--introduction)
+<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--introduction" height={150} showLink />
 
 ## When to Use
 
@@ -43,9 +41,7 @@ Tooltips support flexible positioning relative to their trigger element:
 
 The tooltip will automatically reposition itself to stay within the viewport boundary using CSS Anchor Positioning fallbacks.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--placements" height={228} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--placements)
+<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--placements" height={228} showLink />
 
 ### Text Content
 
@@ -58,9 +54,7 @@ The tooltip will automatically reposition itself to stay within the viewport bou
 
 The tooltip can be disabled via the `disabled` prop. When disabled, the tooltip is not rendered and the trigger element is returned unwrapped, with no additional DOM elements added.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--disabled" height={100} />
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--disabled)
+<StorybookEmbed id="eds-2-0-beta-data-display-tooltip--disabled" height={100} showLink />
 
 ## Accessibility
 
