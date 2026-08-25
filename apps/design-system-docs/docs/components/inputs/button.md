@@ -5,7 +5,10 @@ hide_title: true
 description: 'Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-inputs-button--default" height={70} showLink />
+{/* Portable-stories pilot: this story renders natively (no iframe) via
+    composeStories — see src/components/StoryCanvas. */}
+
+<StoryCanvas of="Button/Default" showLink />
 
 ## When to Use
 

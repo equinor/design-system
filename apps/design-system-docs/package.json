@@ -33,12 +33,15 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@docusaurus/babel": "3.10.2",
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
     "@playwright/test": "^1.62.1",
+    "@storybook/react": "^10.5.7",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "storybook": "^10.5.7",
     "typescript": "~5.9.3"
   },
   "browserslist": {

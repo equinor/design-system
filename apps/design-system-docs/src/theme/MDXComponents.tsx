@@ -6,6 +6,7 @@ import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
 import { CtaSection } from '@site/src/components/CtaSection'
 import { Icon } from '@site/src/components/Icon'
 import { StorybookEmbed } from '@site/src/components/StorybookEmbed'
+import { StoryCanvas } from '@site/src/components/StoryCanvas'
 import { DocsLanding } from '@site/src/components/DocsLanding'
 import { DocsSection } from '@site/src/components/DocsSection'
 import { GalleryCard, GalleryGrid } from '@site/src/components/GalleryCard'
@@ -25,6 +26,7 @@ export default {
   CtaSection,
   Icon,
   StorybookEmbed,
+  StoryCanvas,
   DocsLanding,
   DocsSection,
   GalleryCard,

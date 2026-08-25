@@ -154,11 +154,55 @@ const config: Config = {
                   __dirname,
                   '../../packages/eds-tokens/src/tokens/css/variables.css',
                 ),
+                // Portable-stories pilot: story files are imported straight
+                // from eds-core-react source (stories are not shipped in
+                // dist) and rendered via composeStories — see
+                // src/components/StoryCanvas.
+                '@eds-core-react-src': path.resolve(
+                  __dirname,
+                  '../../packages/eds-core-react/src',
+                ),
               },
               fallback: {
                 // eds-utils references Node.js 'url' module (unused in browser)
                 url: false,
               },
+            },
+            module: {
+              rules: [
+                // Portable-stories pilot: transpile eds-core-react source
+                // (story files + the components they import) with the same
+                // preset Docusaurus uses for site code. Scoped to the package
+                // src so it can't affect anything else.
+                {
+                  test: /\.tsx?$/,
+                  include: path.resolve(
+                    __dirname,
+                    '../../packages/eds-core-react/src',
+                  ),
+                  use: {
+                    loader: require.resolve('babel-loader'),
+                    options: {
+                      babelrc: false,
+                      configFile: false,
+                      presets: [require.resolve('@docusaurus/babel/preset')],
+                    },
+                  },
+                },
+                // Story files import their Storybook docs page
+                // (`./X.docs.mdx`) for parameters.docs.page — Storybook-
+                // flavoured MDX that Docusaurus cannot compile. Import it as
+                // an inert source string instead; portable stories never
+                // render it.
+                {
+                  test: /\.docs\.mdx$/,
+                  include: path.resolve(
+                    __dirname,
+                    '../../packages/eds-core-react/src',
+                  ),
+                  type: 'asset/source',
+                },
+              ],
             },
           }
         },
