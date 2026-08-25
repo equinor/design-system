@@ -82,6 +82,22 @@
         "packages/eds-lab-react/README.md"
       ]
     },
+    "packages/eds-mobile-components": {
+      "release-type": "node",
+      "package-name": "@equinor/eds-mobile-components",
+      "component": "eds-mobile-components",
+      "exclude-paths": [
+        "packages/eds-mobile-components/CLAUDE.md",
+        "packages/eds-mobile-components/README.md",
+        "packages/eds-mobile-components/tsconfig.json",
+        "packages/eds-mobile-components/tsconfig.eslint.json",
+        "packages/eds-mobile-components/eslint.config.js",
+        "packages/eds-mobile-components/jest.config.cjs",
+        "packages/eds-mobile-components/jest.setup.ts",
+        "packages/eds-mobile-components/test-utils.tsx",
+        "packages/eds-mobile-components/tsup.config.ts"
+      ]
+    },
     "packages/eds-tokens": {
       "release-type": "simple",
       "package-name": "@equinor/eds-tokens",

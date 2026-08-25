@@ -5,7 +5,9 @@
     "author": {
         "name": "Equinor Design System Mobile"
     },
-    "bugs": "https://github.com/equinor/design-system-mobile/issues",
+    "bugs": {
+        "url": "https://github.com/equinor/design-system/issues"
+    },
     "dependencies": {
         "@equinor/eds-tokens": "2.3.0-beta.3",
         "@floating-ui/react-native": "^0.10.7",
@@ -34,7 +36,7 @@
         "dist",
         "docs"
     ],
-    "homepage": "https://github.com/equinor/design-system-mobile/",
+    "homepage": "https://eds.equinor.com",
     "keywords": [
         "react native",
         "typescript",
@@ -53,13 +55,18 @@
         "react-native-svg": "^15.15.3",
         "react-native-worklets": "^0.7.4"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/equinor/design-system",
+        "directory": "packages/eds-mobile-components"
+    },
     "scripts": {
         "build": "tsup-node && echo '\n ⚙️ Generating typescript declarations..' && tsc --project tsconfig.json --emitDeclarationOnly --declaration",
-        "check-types": "tsc --noEmit",
         "clean": "rm -rf node_modules dist .turbo",
         "dev": "tsup-node --watch --clean=false",
         "lint": "eslint .",
-        "test": "jest --passWithNoTests"
+        "test": "jest --passWithNoTests",
+        "types": "tsc --noEmit"
     },
     "type": "module",
     "types": "./dist/index.d.ts"

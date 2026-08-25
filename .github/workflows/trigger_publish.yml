@@ -106,6 +106,7 @@ jobs:
       data-grid-react: ${{ steps.check.outputs.data-grid-react }}
       icons: ${{ steps.check.outputs.icons }}
       tokens: ${{ steps.check.outputs.tokens }}
+      mobile-components: ${{ steps.check.outputs.mobile-components }}
 
     steps:
       # Checkout the repository - we only need the current state
@@ -190,6 +191,19 @@ jobs:
             echo "tokens=false" >> $GITHUB_OUTPUT
             echo "⏭️  eds-tokens unchanged"
             echo "- ⏭️ **eds-tokens** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check eds-mobile-components (apps/mobile-storybook releases are
+          # handled separately - see build_release_ios.yaml - this only
+          # covers the npm-published component package)
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-mobile-components":'; then
+            echo "mobile-components=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-mobile-components changed"
+            echo "- ✅ **eds-mobile-components** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "mobile-components=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-mobile-components unchanged"
+            echo "- ⏭️ **eds-mobile-components** unchanged" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -317,6 +331,32 @@ jobs:
           echo "::error title=Icons Publish Failed::Failed to trigger publish workflow for @equinor/eds-icons"
           echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
 
+  # Job: Trigger mobile-components publish workflow
+  # Only runs if the Release Please manifest bumped eds-mobile-components.
+  # apps/mobile-storybook's own release (which gates the iOS build/release
+  # pipeline) is handled separately, not here - see the tracking issue.
+  trigger-mobile-components:
+    needs: check-releases
+    if: needs.check-releases.outputs.mobile-components == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger mobile-components publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_mobile_components.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=Mobile Components Publish Failed::Failed to trigger publish workflow for @equinor/eds-mobile-components"
+          echo "❌ Failed to trigger mobile-components publish workflow" >> $GITHUB_STEP_SUMMARY
+
   # Job 8: Trigger tokens publish workflow
   # Only runs if the Release Please manifest bumped tokens.
   # The whole eds-tokens package is in beta (pinned 3.0.0-beta.N) during
@@ -430,6 +470,12 @@ jobs:
             echo "- ✅ **@equinor/eds-tokens**: Publish workflow triggered (beta dist-tag during the Tokens Studio transition)" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-tokens**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.check-releases.outputs.mobile-components }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-mobile-components**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-mobile-components**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
