@@ -1183,6 +1183,18 @@
       }
     }
   },
+  "elevation": {
+    "ambient": {
+      "$value": "rgba(0, 0, 0, 0.12)",
+      "$type": "color",
+      "$description": "Ambient (diffuse) shadow colour for the light scheme. From Figma '🌗 Color scheme/elevation-ambient'."
+    },
+    "key": {
+      "$value": "rgba(0, 0, 0, 0.2)",
+      "$type": "color",
+      "$description": "Key (direct) shadow colour for the light scheme. From Figma '🌗 Color scheme/elevation-key'."
+    }
+  },
   "info": {
     "1": {
       "$value": "{light.blue.1}",
