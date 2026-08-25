@@ -2,6 +2,7 @@
   display: grid;
   gap: var(--docs-grid-gap, 1.5rem);
   grid-template-columns: repeat(var(--_columns, 3), 1fr);
+  margin-block: 1.5rem;
 }
 
 .docs-icon-card-grid[data-columns='2'] {
@@ -17,8 +18,8 @@
   flex-direction: column;
   min-height: var(--docs-card-min-height, 11.25rem);
   padding: 1.5rem;
-  border: 1px solid var(--eds-color-border-neutral-subtle);
-  border-radius: var(--eds-spacing-border-radius-rounded);
+  border: 1px solid var(--eds-border-neutral-subtle);
+  border-radius: var(--eds-corner-radius-rounded);
   background-color: var(--ifm-background-surface-color);
   box-shadow: var(--eds-elevation-low);
   color: inherit;
@@ -58,9 +59,9 @@ a.docs-icon-card:hover {
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  border-radius: var(--eds-spacing-border-radius-rounded);
+  border-radius: var(--eds-corner-radius-rounded);
   background-color: var(--ifm-color-primary);
-  color: var(--eds-color-text-accent-strong-on-emphasis);
+  color: var(--eds-text-on-emphasis);
   font-size: 1.5rem;
 }
 
@@ -74,31 +75,29 @@ a.docs-icon-card:hover {
 .docs-icon-card__badge {
   align-self: flex-start;
   padding: 0.125rem 0.625rem;
-  border-radius: var(--eds-spacing-border-radius-rounded);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.4;
-  background-color: var(
-    --eds-color-bg-fill-muted-default,
-    var(--ifm-color-emphasis-200)
-  );
+  border-radius: var(--eds-corner-radius-rounded);
+  font-size: var(--docs-font-caption-size);
+  font-weight: var(--docs-font-weight-emphasis);
+  line-height: var(--docs-font-caption-line-height);
+  background-color: var(--eds-background-interactive-neutral-muted-default);
   color: var(--ifm-color-emphasis-800);
 }
 
 .docs-icon-card__badge[data-tone='accent'] {
-  background-color: var(--eds-color-bg-accent-fill-muted-default);
-  color: var(--eds-color-text-link, var(--ifm-color-primary));
+  background-color: var(--eds-background-interactive-accent-muted-default);
+  color: var(--eds-text-link);
 }
 
 .docs-icon-card__title {
-  font-size: 1.1875rem;
+  font-size: var(--docs-font-card-title-size);
+  line-height: var(--docs-font-card-title-line-height);
   margin-bottom: 0.5rem;
 }
 
 .docs-icon-card__description {
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-size: var(--docs-font-body-sm-size);
+  line-height: var(--docs-font-body-sm-line-height);
   margin-bottom: 0;
 }
 
@@ -117,8 +116,12 @@ a.docs-icon-card:hover {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .docs-icon-card-grid {
+@media screen and (max-width: 600px) {
+  /* The [data-columns] variant is restated so this rule ties the 996px rule's
+     specificity (0,2,0) and wins on source order — without it, 3/4-column
+     grids stay 2-up on phones and overflow the viewport. */
+  .docs-icon-card-grid,
+  .docs-icon-card-grid[data-columns] {
     --_columns: 1;
   }
 }

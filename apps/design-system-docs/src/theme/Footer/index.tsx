@@ -45,7 +45,15 @@ function Footer(): JSX.Element | null {
   }
 
   const { copyright, links = [] } = footer
-  const columns = links as unknown as FooterColumnProps[]
+  // themeConfig.footer.links can be multi-column ({title, items}[]) or simple
+  // (FooterItem[]); this footer only renders the multi-column shape, so filter
+  // instead of casting — a simple config renders no columns rather than crashing.
+  const columns = links.filter(
+    (link): link is FooterColumnProps =>
+      typeof link === 'object' &&
+      link !== null &&
+      Array.isArray((link as { items?: unknown }).items),
+  )
 
   return (
     <footer className="footer">

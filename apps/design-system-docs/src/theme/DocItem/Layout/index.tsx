@@ -36,9 +36,12 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
 
   // Component reference docs render a full-width hero band (title + lead) above
   // the standard three-column doc body. Gated on `hide_title` so foundation
-  // pages and the /components landing keep their own layouts.
+  // pages and the /components landing keep their own layouts, and on the
+  // current version so archived docs can never opt in via frontmatter.
   const showHero =
-    frontMatter.hide_title === true && metadata.id.startsWith('components/')
+    frontMatter.hide_title === true &&
+    metadata.id.startsWith('components/') &&
+    metadata.version === 'current'
 
   return (
     <>

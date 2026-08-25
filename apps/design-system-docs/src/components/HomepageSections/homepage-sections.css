@@ -1,0 +1,124 @@
+/*
+ * Styles unique to the homepage sections. Shared card/hero/section/CTA styling
+ * lives in the reusable components under src/components/. What remains here is
+ * the hero entry-point grid and the brand-logo resource tiles (distinct layouts
+ * that share one interactive-card surface).
+ */
+
+/* ---- Grids ---- */
+
+.docs-entry-grid {
+  margin-top: 3rem;
+  display: grid;
+  /* auto-fit collapses 2 → 1 columns continuously — no breakpoint needed. */
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--docs-grid-gap, 1.5rem);
+}
+
+.docs-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--docs-grid-gap, 1.5rem);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Shared interactive-card surface ---- */
+
+.docs-entry-card,
+.docs-resource-tile {
+  display: flex;
+  align-items: center;
+  padding: 1.75rem;
+  border: 1px solid var(--eds-border-neutral-subtle);
+  border-radius: var(--eds-corner-radius-rounded);
+  background-color: var(--ifm-background-color);
+  box-shadow: var(--eds-elevation-low);
+  color: inherit;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.docs-entry-card:hover,
+.docs-resource-tile:hover {
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--eds-elevation-high);
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
+}
+
+.docs-entry-card {
+  gap: 1.5rem;
+}
+
+.docs-resource-tile {
+  gap: 1rem;
+}
+
+/* ---- Card content ---- */
+
+.docs-entry-card__illustration {
+  width: 5.5rem;
+  height: 5.5rem;
+  flex-shrink: 0;
+}
+
+.docs-entry-card__content h3,
+.docs-resource-tile h3 {
+  font-size: var(--docs-font-card-title-size);
+  line-height: var(--docs-font-card-title-line-height);
+  margin-bottom: 0.25rem;
+}
+
+.docs-entry-card__content p,
+.docs-resource-tile p {
+  margin: 0;
+  font-size: var(--docs-font-body-sm-size);
+  line-height: var(--docs-font-body-sm-line-height);
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* ---- Tile icons ---- */
+
+.docs-resource-tile__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+.docs-resource-tile__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.docs-resource-tile__icon[data-tone='plain'] {
+  color: var(--ifm-color-primary);
+  font-size: 1.5rem;
+}
+
+/* Phone (600px — see the breakpoint convention in docs-components.css) */
+@media (max-width: 600px) {
+  .docs-entry-card,
+  .docs-resource-tile {
+    padding: 1.25rem;
+  }
+
+  .docs-entry-card__illustration {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+/* ---- Footnote link ---- */
+
+.docs-resources-footnote {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--docs-font-body-sm-size);
+}

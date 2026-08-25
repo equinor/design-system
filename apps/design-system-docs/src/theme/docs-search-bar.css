@@ -1,0 +1,36 @@
+/*
+ * Styling scope for the wrapped @easyops-cn/docusaurus-search-local SearchBar
+ * (see SearchBar.tsx). The plugin's own class names are CSS-module hashed, so
+ * the rules target elements through the stable wrapper class instead. The
+ * descendant selectors mirror the plugin's DOM and may need adjusting on
+ * plugin upgrades.
+ */
+
+.docs-search-bar input {
+  border-radius: var(--ifm-global-radius);
+  box-shadow: 0px 0px 0px 1px var(--eds-border-neutral-subtle) inset;
+  background-color: var(--eds-background-canvas);
+}
+
+.docs-search-bar input::placeholder {
+  color: var(--eds-text-tertiary);
+}
+
+/* The keyboard-shortcut hint (kbd) inside the input */
+.docs-search-bar > div > div kbd {
+  background-color: unset;
+  border: unset;
+  box-shadow: unset;
+  padding: 0;
+  color: var(--eds-text-secondary);
+}
+
+/* The clear-text button that shows up when the input is in use */
+.docs-search-bar button {
+  padding: 0 0.125rem !important;
+  cursor: pointer;
+}
+
+.docs-search-bar button:hover {
+  background-color: var(--eds-border-neutral-subtle);
+}

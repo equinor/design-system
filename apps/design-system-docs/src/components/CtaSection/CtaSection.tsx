@@ -3,8 +3,7 @@ import Link from '@docusaurus/Link'
 import type { CtaSectionProps } from './CtaSection.types'
 
 import './cta-section.css'
-
-const isExternal = (to: string) => /^https?:\/\//.test(to)
+import { isExternal } from '@site/src/utils/isExternal'
 
 /** Heading + body + call-to-action button. Replaces the repeated contact/next-steps/contribute sections. */
 export function CtaSection({

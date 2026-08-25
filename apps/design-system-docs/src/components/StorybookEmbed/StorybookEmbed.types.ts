@@ -5,4 +5,9 @@ export type StorybookEmbedProps = {
   height?: number | string
   /** Accessible title for the embed. Defaults to the story id. */
   title?: string
+  /**
+   * Render a "View in Storybook" link under the embed, derived from `id` —
+   * replaces the hand-written markdown links that had to repeat the story id.
+   */
+  showLink?: boolean
 }

@@ -3,7 +3,7 @@ import Layout from '@theme/Layout'
 import type { JSX } from 'react'
 
 import { Hero } from '@site/src/components/Hero'
-import { SectionHeading } from '@site/src/components/SectionHeading'
+import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
 import { CtaSection } from '@site/src/components/CtaSection'
 import { gettingStartedPaths } from '@site/src/data/gettingStartedPaths'
@@ -26,25 +26,22 @@ export default function GettingStarted(): JSX.Element {
             </p>
           }
         />
-        <section className="docs-section">
-          <div className="container">
-            <SectionHeading
-              title="Choose your path"
-              subtitle="Each guide is tailored to your role — jump straight into the resources and steps that matter most for your work."
-            />
-            <IconCardGrid columns={4}>
-              {gettingStartedPaths.map((path) => (
-                <IconCard
-                  key={path.title}
-                  icon={path.icon}
-                  title={path.title}
-                  description={path.description}
-                  to={path.to}
-                />
-              ))}
-            </IconCardGrid>
-          </div>
-        </section>
+        <DocsSection
+          title="Choose your path"
+          subtitle="Each guide is tailored to your role — jump straight into the resources and steps that matter most for your work."
+        >
+          <IconCardGrid columns={4}>
+            {gettingStartedPaths.map((path) => (
+              <IconCard
+                key={path.title}
+                icon={path.icon}
+                title={path.title}
+                description={path.description}
+                to={path.to}
+              />
+            ))}
+          </IconCardGrid>
+        </DocsSection>
         <CtaSection
           title="What's next"
           cta={{ label: 'Join us on Slack', to: slackUrl }}

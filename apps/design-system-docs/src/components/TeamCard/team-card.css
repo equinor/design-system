@@ -9,8 +9,8 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  border: 1px solid var(--eds-color-border-neutral-subtle);
-  border-radius: var(--eds-spacing-border-radius-rounded);
+  border: 1px solid var(--eds-border-neutral-subtle);
+  border-radius: var(--eds-corner-radius-rounded);
   background-color: var(--ifm-background-color);
   box-shadow: var(--eds-elevation-low);
   text-align: center;
@@ -25,18 +25,18 @@
 }
 
 .docs-team-card__name {
-  font-weight: 600;
+  font-weight: var(--docs-font-weight-emphasis);
   margin-bottom: 0.25rem;
 }
 
 .docs-team-card__role {
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.875rem;
-  line-height: 1.4;
+  font-size: var(--docs-font-body-sm-size);
+  line-height: var(--docs-font-body-sm-line-height);
   margin-bottom: 0;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   .docs-team-card-grid {
     grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
   }

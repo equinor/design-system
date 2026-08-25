@@ -7,7 +7,7 @@
   padding-block: var(--docs-hero-space-block, 5rem);
   background-color: var(
     --docs-hero-bg,
-    var(--eds-color-bg-accent-fill-muted-default)
+    var(--eds-background-interactive-accent-muted-default)
   );
 }
 
@@ -18,23 +18,23 @@
 .docs-hero__eyebrow {
   display: inline-block;
   margin-bottom: 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: var(--docs-font-body-sm-size);
+  font-weight: var(--docs-font-weight-emphasis);
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: var(--eds-color-text-link, var(--ifm-color-primary));
+  color: var(--eds-text-link);
 }
 
 .docs-hero__title {
-  font-size: 2.75rem;
-  line-height: 1.15;
+  font-size: var(--docs-font-display-size);
+  line-height: var(--docs-font-display-line-height);
   margin-bottom: 1.5rem;
   max-width: 20ch;
 }
 
 .docs-hero__lead p {
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
   max-width: var(--docs-measure, 35rem);
 }
 

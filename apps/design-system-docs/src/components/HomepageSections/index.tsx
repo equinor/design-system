@@ -13,7 +13,7 @@ import {
 } from '@equinor/eds-icons'
 
 import { Hero as PageHero } from '@site/src/components/Hero'
-import { SectionHeading } from '@site/src/components/SectionHeading'
+import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
 import type { IconCardProps } from '@site/src/components/IconCard'
 import { CtaSection } from '@site/src/components/CtaSection'
@@ -23,7 +23,7 @@ import { githubUrl, storybookUrl } from '@site/src/data/siteLinks'
 import Designer from '../../../static/img/illustrations/designer_illu.svg'
 import Devices from '../../../static/img/illustrations/devices_illu.svg'
 
-import styles from './styles.module.css'
+import './homepage-sections.css'
 
 /* Brand marks are kept as inline SVG — they are third-party logos, not EDS icons. */
 const FigmaMark = () => (
@@ -71,16 +71,16 @@ export function Hero(): ReactNode {
         </p>
       }
     >
-      <div className={styles.entryGrid}>
+      <div className="docs-entry-grid">
         <Link
           to="docs/Next/about/getting-started/design/getting_started_design"
-          className={styles.entryCard}
+          className="docs-entry-card"
         >
           <Designer
-            className={styles.entryCardIllustration}
+            className="docs-entry-card__illustration"
             aria-hidden="true"
           />
-          <div className={styles.entryCardContent}>
+          <div className="docs-entry-card__content">
             <h3>Design</h3>
             <p>
               Set up the Figma libraries and start designing with EDS components
@@ -91,13 +91,13 @@ export function Hero(): ReactNode {
 
         <Link
           to="docs/Next/about/getting-started/develop/getting_started_development"
-          className={styles.entryCard}
+          className="docs-entry-card"
         >
           <Devices
-            className={styles.entryCardIllustration}
+            className="docs-entry-card__illustration"
             aria-hidden="true"
           />
-          <div className={styles.entryCardContent}>
+          <div className="docs-entry-card__content">
             <h3>Develop</h3>
             <p>
               Install the packages and start building with React components and
@@ -143,19 +143,17 @@ const PRINCIPLES = [
 
 export function WhyEds(): ReactNode {
   return (
-    <section className="docs-section docs-section--muted">
-      <div className="container">
-        <SectionHeading
-          title="Why EDS"
-          subtitle="Principles that guide how EDS is built — and how it helps your team ship better products."
-        />
-        <IconCardGrid columns={4}>
-          {PRINCIPLES.map((principle) => (
-            <IconCard key={principle.title} {...principle} />
-          ))}
-        </IconCardGrid>
-      </div>
-    </section>
+    <DocsSection
+      title="Why EDS"
+      subtitle="Principles that guide how EDS is built — and how it helps your team ship better products."
+      tone="muted"
+    >
+      <IconCardGrid columns={4}>
+        {PRINCIPLES.map((principle) => (
+          <IconCard key={principle.title} {...principle} />
+        ))}
+      </IconCardGrid>
+    </DocsSection>
   )
 }
 
@@ -191,19 +189,16 @@ const CATEGORIES = [
 
 export function DesignLanguage(): ReactNode {
   return (
-    <section className="docs-section">
-      <div className="container">
-        <SectionHeading
-          title="Browse by category"
-          subtitle="Explore the building blocks of EDS — from foundational styles to ready-made UI components."
-        />
-        <IconCardGrid columns={3}>
-          {CATEGORIES.map((category) => (
-            <IconCard key={category.title} {...category} />
-          ))}
-        </IconCardGrid>
-      </div>
-    </section>
+    <DocsSection
+      title="Browse by category"
+      subtitle="Explore the building blocks of EDS — from foundational styles to ready-made UI components."
+    >
+      <IconCardGrid columns={3}>
+        {CATEGORIES.map((category) => (
+          <IconCard key={category.title} {...category} />
+        ))}
+      </IconCardGrid>
+    </DocsSection>
   )
 }
 
@@ -213,58 +208,56 @@ export function DesignLanguage(): ReactNode {
 
 export function Resources(): ReactNode {
   return (
-    <section className="docs-section docs-section--muted">
-      <div className="container">
-        <SectionHeading
-          title="Resources"
-          subtitle="Tools, libraries, and guides that support how you design and build with EDS."
-        />
-        <div className={styles.resourceGrid}>
-          <Link
-            to="docs/Next/about/getting-started/design/figma"
-            className={styles.resourceTile}
-          >
-            <span className={styles.tileIconBrand}>
-              <FigmaMark />
-            </span>
-            <div>
-              <h3>EDS Figma Library</h3>
-              <p>Set up access and start using EDS components in Figma.</p>
-            </div>
-          </Link>
+    <DocsSection
+      title="Resources"
+      subtitle="Tools, libraries, and guides that support how you design and build with EDS."
+      tone="muted"
+    >
+      <div className="docs-resource-grid">
+        <Link
+          to="docs/Next/about/getting-started/design/figma"
+          className="docs-resource-tile"
+        >
+          <span className="docs-resource-tile__icon">
+            <FigmaMark />
+          </span>
+          <div>
+            <h3>EDS Figma Library</h3>
+            <p>Set up access and start using EDS components in Figma.</p>
+          </div>
+        </Link>
 
-          <Link
-            to={storybookUrl}
-            className={styles.resourceTile}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className={styles.tileIconBrand}>
-              <StorybookMark />
-            </span>
-            <div>
-              <h3>Storybook</h3>
-              <p>Interactive component playground with live examples.</p>
-            </div>
-          </Link>
+        <Link
+          to={storybookUrl}
+          className="docs-resource-tile"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="docs-resource-tile__icon">
+            <StorybookMark />
+          </span>
+          <div>
+            <h3>Storybook</h3>
+            <p>Interactive component playground with live examples.</p>
+          </div>
+        </Link>
 
-          <Link to="docs/Next/support" className={styles.resourceTile}>
-            <span className={styles.tileIconPlain}>
-              <Icon data={help} />
-            </span>
-            <div>
-              <h3>Support</h3>
-              <p>Get help through Slack, Teams, or other channels.</p>
-            </div>
-          </Link>
-        </div>
-
-        <Link to="docs/Next/resources" className={styles.resourcesFootnote}>
-          See all resources
-          <Icon data={arrow_forward} />
+        <Link to="docs/Next/support" className="docs-resource-tile">
+          <span className="docs-resource-tile__icon" data-tone="plain">
+            <Icon data={help} />
+          </span>
+          <div>
+            <h3>Support</h3>
+            <p>Get help through Slack, Teams, or other channels.</p>
+          </div>
         </Link>
       </div>
-    </section>
+
+      <Link to="docs/Next/resources" className="docs-resources-footnote">
+        See all resources
+        <Icon data={arrow_forward} />
+      </Link>
+    </DocsSection>
   )
 }
 

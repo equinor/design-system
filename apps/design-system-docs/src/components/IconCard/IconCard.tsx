@@ -6,12 +6,11 @@ import { Icon } from '../Icon'
 import type { IconCardProps } from './IconCard.types'
 
 import './icon-card.css'
+import { isExternal } from '@site/src/utils/isExternal'
 
 /** Distinguishes eds-icons IconData from an arbitrary React node. */
 const isIconData = (icon: unknown): icon is IconData =>
   typeof icon === 'object' && icon !== null && 'svgPathData' in icon
-
-const isExternal = (to: string) => /^https?:\/\//.test(to)
 
 /**
  * Icon + title + description card. Replaces the topic/path/principle/bento card

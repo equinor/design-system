@@ -13,17 +13,25 @@ export function StorybookEmbed({
   id,
   height = 88,
   title,
+  showLink = false,
 }: StorybookEmbedProps) {
   return (
-    <iframe
-      className="sb-iframe"
-      src={`${storybookUrl}/iframe.html?globals=&args=&id=${id}`}
-      title={title ?? id}
-      width="100%"
-      height={height}
-      loading="lazy"
-      scrolling="no"
-    />
+    <>
+      <iframe
+        className="sb-iframe"
+        src={`${storybookUrl}/iframe.html?globals=&args=&id=${id}`}
+        title={title ?? id}
+        width="100%"
+        height={height}
+        loading="lazy"
+        scrolling="no"
+      />
+      {showLink && (
+        <p>
+          <a href={`${storybookUrl}/?path=/story/${id}`}>View in Storybook</a>
+        </p>
+      )}
+    </>
   )
 }
 

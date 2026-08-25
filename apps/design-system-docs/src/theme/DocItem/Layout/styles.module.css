@@ -35,16 +35,16 @@
 
 .docHeroTitle {
   margin: 0;
-  font-size: 2.75rem;
-  line-height: 1.15;
+  font-size: var(--docs-font-display-size);
+  line-height: var(--docs-font-display-line-height);
 }
 
 .docHeroLead {
   max-width: 46rem;
   margin: 0.75rem 0 0;
   color: var(--ifm-color-emphasis-700);
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
 }
 
 /* On mobile the sidebar is an off-canvas drawer, so the band is edge-to-edge. */

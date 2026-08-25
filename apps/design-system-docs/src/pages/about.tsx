@@ -3,7 +3,7 @@ import Layout from '@theme/Layout'
 import type { JSX } from 'react'
 
 import { Hero } from '@site/src/components/Hero'
-import { SectionHeading } from '@site/src/components/SectionHeading'
+import { DocsSection } from '@site/src/components/DocsSection'
 import { TeamCardGrid } from '@site/src/components/TeamCard'
 import { CtaSection } from '@site/src/components/CtaSection'
 import { teamMembers } from '@site/src/data/team'
@@ -34,18 +34,15 @@ export default function About(): JSX.Element {
             </>
           }
         />
-        <section className="docs-section">
-          <div className="container">
-            <SectionHeading
-              title="The Team"
-              subtitle="We're a diverse team combining design, development, accessibility, and user experience expertise to maintain and evolve EDS. Working closely with Equinor's brand team, we ensure every component aligns with corporate identity."
-            />
-            <p className="docs-about-motto">
-              From ideas to interfaces — we connect the dots.
-            </p>
-            <TeamCardGrid members={teamMembers} />
-          </div>
-        </section>
+        <DocsSection
+          title="The Team"
+          subtitle="We're a diverse team combining design, development, accessibility, and user experience expertise to maintain and evolve EDS. Working closely with Equinor's brand team, we ensure every component aligns with corporate identity."
+        >
+          <p className="docs-about-motto">
+            From ideas to interfaces — we connect the dots.
+          </p>
+          <TeamCardGrid members={teamMembers} />
+        </DocsSection>
         <CtaSection
           title="Contact us"
           cta={{ label: 'Reach us on Slack', to: slackUrl }}
