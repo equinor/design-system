@@ -3,7 +3,7 @@ import * as fs from 'node:fs'
 import * as os from 'node:os'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 
 /**
  * Guards `scripts/generate-ts-tokens.mjs` against new value shapes from
@@ -105,6 +105,9 @@ const dtcgFixture = (overrides: Record<string, unknown> = {}) => ({
 
 type RunResult = { status: number; stderr: string; outDir: string }
 
+/** Every fixture tree created by `run`, removed in afterAll. */
+const tempRoots: string[] = []
+
 const write = (dir: string, file: string, contents: string) => {
   const target = path.join(dir, file)
   fs.mkdirSync(path.dirname(target), { recursive: true })
@@ -117,6 +120,7 @@ const run = (
   seedOutDir = false,
 ): RunResult => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'eds-ts-tokens-'))
+  tempRoots.push(root)
   for (const [file, contents] of Object.entries(css))
     write(path.join(root, 'css'), file, contents)
   for (const [file, contents] of Object.entries(dtcg))
@@ -150,8 +154,16 @@ const readModule = (outDir: string, file: string) =>
   fs.readFileSync(path.join(outDir, file), 'utf-8')
 
 describe('generate-ts-tokens', () => {
+  afterAll(() => {
+    for (const root of tempRoots)
+      fs.rmSync(root, { recursive: true, force: true })
+  })
+
   describe('calc() from token math', () => {
-    const result = run(cssFixture(), dtcgFixture())
+    let result: RunResult
+    beforeAll(() => {
+      result = run(cssFixture(), dtcgFixture())
+    })
 
     it('resolves without error', () => {
       expect(result.stderr).toBe('')
@@ -337,20 +349,23 @@ describe('generate-ts-tokens', () => {
   })
 
   describe('failure reporting', () => {
-    const result = run(
-      cssFixture({
-        'semantic/default.css': `:root {
+    let result: RunResult
+    beforeAll(() => {
+      result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
   --eds-space-inline: auto;
   --eds-space-block: 1rem;
 }`,
-      }),
-      dtcgFixture({
-        'semantic/default.json': {
-          space: { inline: leaf('dimension'), block: leaf('dimension') },
-        },
-      }),
-      true,
-    )
+        }),
+        dtcgFixture({
+          'semantic/default.json': {
+            space: { inline: leaf('dimension'), block: leaf('dimension') },
+          },
+        }),
+        true,
+      )
+    })
 
     it('reports every bad token in one run, not just the first', () => {
       expect(result.stderr).toContain('--eds-space-inline')
@@ -450,6 +465,145 @@ describe('generate-ts-tokens', () => {
       expect(result.status).toBe(1)
       expect(result.stderr).toContain(
         'unsupported shadow value for --eds-elevation-low',
+      )
+    })
+  })
+
+  describe('export folders the script does not recognise', () => {
+    // buildContext discovers its dimension-independent files, but
+    // DIMENSION_FOLDERS is still a literal list. A dimension folder that
+    // is not on it would otherwise have every variant merged into every
+    // context, silently keeping whichever sorts last.
+    it('fails on a multi-variant folder it does not know is a dimension', () => {
+      const result = run(
+        cssFixture({
+          'contrast/high.css': `:root {
+  --eds-contrast-border: 3px;
+}`,
+          'contrast/low.css': `:root {
+  --eds-contrast-border: 1px;
+}`,
+          'semantic/default.css': `:root {
+  --eds-space-inline: var(--eds-contrast-border);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('export folder "contrast" has 2 files')
+      expect(result.stderr).toContain('add it to DIMENSION_FOLDERS')
+    })
+
+    it('fails when two base files disagree about one property', () => {
+      // precedence among discovered files is alphabetical, which is no
+      // basis for picking a value
+      const result = run(
+        cssFixture({
+          'zz/default.css': `:root {
+  --eds-line-height-md: 99;
+}`,
+        }),
+        dtcgFixture(),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        '--eds-line-height-md declared with different values',
+      )
+    })
+
+    it('still allows the dimension files to override a base value', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-line-height-md: 1.5;
+}`,
+          'density/comfortable.css': `[data-density='comfortable'] {
+  --eds-density-corner-radius-rounded: var(--eds-primitives-spacing-25);
+  --eds-density-corner-radius-rounded-outer: ${CALC_OUTER};
+  --eds-density-spacing-md: 8px;
+  --eds-line-height-md: 2;
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': {
+            'line-height': { md: leaf('lineHeight') },
+          },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'md: 2,',
+      )
+    })
+  })
+
+  describe('colour conversion', () => {
+    it('names the token in a colour-conversion failure', () => {
+      // failures are batched and printed together, so an anonymous
+      // message is not actionable
+      const result = run(
+        cssFixture({
+          'colors/default.css': `:root {
+  --eds-color-neutral-strong: oklch(0.3 0.02 250);
+  --eds-color-brand: rgb(10 20 30 / bogus);
+  --eds-color-overlay: rgb(0 0 0 / 0.5);
+}`,
+        }),
+        dtcgFixture(),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        'unsupported rgb form for --eds-color-brand',
+      )
+    })
+
+    it('converts an rgb() without an alpha channel to 6-digit hex', () => {
+      const result = run(
+        cssFixture({
+          'colors/default.css': `:root {
+  --eds-color-neutral-strong: oklch(0.3 0.02 250);
+  --eds-color-brand: rgb(10 20 30);
+  --eds-color-overlay: rgb(0 0 0 / 0.5);
+}`,
+        }),
+        dtcgFixture(),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'colors/default.ts')).toContain(
+        "brand: '#0a141e',",
+      )
+    })
+
+    it('converts every layer of a two-layer shadow', () => {
+      const result = run(
+        cssFixture({
+          'elevation/default.css': `:root {
+  --eds-shadow-key-y: 4px;
+  --eds-shadow-ambient-y: 12px;
+}`,
+          'color-scheme/light.css': `:root {
+  --eds-scheme-bg: #ffffff;
+  --eds-elevation-key: rgb(0 0 0 / 0.2);
+  --eds-elevation-ambient: rgb(0 0 0 / 0.12);
+}`,
+          'color-scheme/dark.css': `:root {
+  --eds-scheme-bg: #000000;
+  --eds-elevation-key: rgb(0 0 0 / 0.2);
+  --eds-elevation-ambient: rgb(0 0 0 / 0.12);
+}`,
+          'semantic/default.css': `:root {
+  --eds-elevation-high: 0px var(--eds-shadow-key-y) 12px 0px var(--eds-elevation-key), 0px var(--eds-shadow-ambient-y) 16px 6px var(--eds-elevation-ambient);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { elevation: { high: leaf('shadow') } },
+        }),
+      )
+      expect(result.stderr).toBe('')
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        "high: '0px 4px 12px 0px #00000033, 0px 12px 16px 6px #0000001f',",
       )
     })
   })

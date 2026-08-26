@@ -107,11 +107,12 @@ function parseCssVariables(css) {
 const DIMENSION_FOLDERS = ['color-scheme', 'density']
 
 /**
- * The committed bundle written by generate-css-bundle.mjs. It
- * concatenates every file below — including every dimension variant — so
- * merging it into a context would let one density's values leak into
- * another's. It also predates the current run (the release workflow
- * bundles after this script), so it must never take part in resolution.
+ * The committed bundle written by generate-css-bundle.mjs — keep in step
+ * with the `OUT_FILE` default in that script. It concatenates every file
+ * below, including every dimension variant, so merging it into a context
+ * would let one density's values leak into another's. It also predates
+ * the current run (the release workflow bundles after this script), so it
+ * must never take part in resolution.
  */
 const BUNDLE_FILE = 'variables.css'
 
@@ -124,22 +125,54 @@ const BUNDLE_FILE = 'variables.css'
  * every `--eds-shadow-*` primitive it declares.
  */
 function buildContext(cssFiles, scheme, density) {
-  const context = new Map()
-  const parts = [
-    ...[...cssFiles.keys()]
-      .filter(
-        (file) =>
-          file !== BUNDLE_FILE &&
-          !DIMENSION_FOLDERS.some((folder) => file.startsWith(`${folder}/`)),
+  const base = [...cssFiles.keys()]
+    .filter(
+      (file) =>
+        file !== BUNDLE_FILE &&
+        !DIMENSION_FOLDERS.some((folder) => file.startsWith(`${folder}/`)),
+    )
+    .sort()
+
+  // Every dimension-independent folder contributes exactly one file. More
+  // than one means the platform added a dimension this script does not
+  // know about, and merging its variants would silently keep whichever
+  // sorts last — the discovery above must not turn that into a quiet
+  // wrong value
+  const byFolder = new Map()
+  for (const file of base) {
+    const folder = dirname(file)
+    if (!byFolder.has(folder)) byFolder.set(folder, [])
+    byFolder.get(folder).push(file)
+  }
+  for (const [folder, files] of byFolder) {
+    if (files.length > 1)
+      fail(
+        `export folder "${folder}" has ${files.length} files (${files.join(', ')}) — if it is a new dimension, add it to DIMENSION_FOLDERS`,
       )
-      .sort(),
+  }
+
+  const context = new Map()
+  const declaredIn = new Map()
+  const baseFiles = new Set(base)
+  for (const part of [
+    ...base,
     `color-scheme/${scheme}.css`,
     `density/${density}.css`,
-  ]
-  for (const part of parts) {
+  ]) {
     const variables = cssFiles.get(part)
     if (!variables) fail(`missing CSS export file: ${part}`)
-    for (const [name, value] of variables) context.set(name, value)
+    for (const [name, value] of variables) {
+      // Among the base files precedence is alphabetical, which is no
+      // basis for deciding a value — so a conflict there is an error. The
+      // dimension files that follow are meant to override (#5221).
+      const previous = declaredIn.get(name)
+      if (baseFiles.has(part) && previous && context.get(name) !== value)
+        fail(
+          `--${name} declared with different values in ${previous} and ${part}`,
+        )
+      declaredIn.set(name, part)
+      context.set(name, value)
+    }
   }
   return context
 }
@@ -302,9 +335,9 @@ function linearToHex(linear) {
  * clip shortcut) so the result matches what browsers/lightningcss
  * produce for the CSS export — not naive channel clipping.
  */
-function oklchToHex(value) {
+function oklchToHex(value, cssName) {
   const match = /^oklch\(([\d.]+) ([\d.]+) ([\d.]+)\)$/.exec(value)
-  if (!match) tokenFail(`unsupported oklch form: ${value}`)
+  if (!match) tokenFail(`unsupported oklch form for --${cssName}: ${value}`)
   const [lightness, chroma, hueDegrees] = match.slice(1).map(Number)
   if (lightness >= 1) return '#ffffff'
   if (lightness <= 0) return '#000000'
@@ -339,13 +372,13 @@ function oklchToHex(value) {
   return linearToHex(toLinear(low))
 }
 
-/** rgb(r g b / a) → #rrggbbaa. */
-function rgbToHex(value) {
-  const match = /^rgb\((\d+) (\d+) (\d+) \/ ([\d.]+)\)$/.exec(value)
-  if (!match) tokenFail(`unsupported rgb form: ${value}`)
-  const [red, green, blue] = match.slice(1, 4).map(Number)
-  const alpha = Math.round(Number(match[4]) * 255)
-  return `#${[red, green, blue, alpha].map((c) => c.toString(16).padStart(2, '0')).join('')}`
+/** rgb(r g b) → #rrggbb, rgb(r g b / a) → #rrggbbaa. */
+function rgbToHex(value, cssName) {
+  const match = /^rgb\((\d+) (\d+) (\d+)(?: \/ ([\d.]+))?\)$/.exec(value)
+  if (!match) tokenFail(`unsupported rgb form for --${cssName}: ${value}`)
+  const channels = match.slice(1, 4).map(Number)
+  if (match[4] !== undefined) channels.push(Math.round(Number(match[4]) * 255))
+  return `#${channels.map((c) => c.toString(16).padStart(2, '0')).join('')}`
 }
 
 const NUMERIC_TERM = /^(-?(?:\d+\.?\d*|\.\d+))([a-z%]*)/i
@@ -481,7 +514,9 @@ const COLOR_FUNCTION = /(?:oklch|rgb)\([^()]*\)/g
  */
 function convertShadow(rawValue, cssName) {
   const converted = rawValue.replace(COLOR_FUNCTION, (color) =>
-    color.startsWith('oklch(') ? oklchToHex(color) : rgbToHex(color),
+    color.startsWith('oklch(')
+      ? oklchToHex(color, cssName)
+      : rgbToHex(color, cssName),
   )
   // Every value form this script knows how to convert is paren-free by
   // now; anything left is a function it has not been taught
@@ -499,8 +534,8 @@ const isExpression = (value) =>
 function convertValue(rawValue, type, cssName) {
   if (type === 'color') {
     if (rawValue.startsWith('#')) return rawValue
-    if (rawValue.startsWith('oklch(')) return oklchToHex(rawValue)
-    if (rawValue.startsWith('rgb(')) return rgbToHex(rawValue)
+    if (rawValue.startsWith('oklch(')) return oklchToHex(rawValue, cssName)
+    if (rawValue.startsWith('rgb(')) return rgbToHex(rawValue, cssName)
     tokenFail(`unsupported color value for --${cssName}: ${rawValue}`)
   }
   if (
