@@ -103,7 +103,7 @@ You can recognize them by the group name `npm_and_yarn` in the PR title or by th
 
 Not all vulnerabilities auto-create a PR. Also check the [Dependabot alerts page](https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system) — sorted by severity — for alerts without a corresponding PR.
 
-- **High/critical with no PR?** Investigate and handle manually (see "When CI fails" for options).
+- **High/critical with no PR?** Fix it manually, open a PR, and get a review before merging to main.
 - **Low/moderate with no PR?** Log it and move on — these are often transitive dependencies Dependabot can't auto-fix.
 
 ## FAQ
