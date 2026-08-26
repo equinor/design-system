@@ -6,7 +6,7 @@ This is an [Expo](https://expo.dev) project using [file-based routing](https://d
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or higher)
+- [Node.js](https://nodejs.org/) (v22 or higher)
 - [pnpm](https://pnpm.io/) (v10 or higher)
 - For iOS: [Xcode](https://developer.apple.com/xcode/) and CocoaPods
 - For Android: [Android Studio](https://developer.android.com/studio) with an emulator configured
@@ -22,13 +22,13 @@ This is an [Expo](https://expo.dev) project using [file-based routing](https://d
 2. Build the components package:
 
     ```bash
-    pnpm build
+    pnpm build:mobile
     ```
 
 3. Run the storybook app:
 
     ```bash
-    pnpm dev:storybook
+    pnpm dev:mobile
     ```
 
 4. Press `i` to open in iOS Simulator or `a` for Android Emulator.
@@ -38,7 +38,7 @@ This is an [Expo](https://expo.dev) project using [file-based routing](https://d
 For iOS development, install CocoaPods dependencies:
 
 ```bash
-cd apps/storybook/ios && pod install
+cd apps/mobile-storybook/ios && pod install
 ```
 
 ### Running on a Physical Device
@@ -47,7 +47,7 @@ Use Expo's development build to run on a physical device:
 
 ```bash
 # iOS
-pnpm dev:storybook -- --device
+pnpm dev:mobile -- --device
 
 # Or scan the QR code with the Expo Go app (limited functionality)
 ```
@@ -55,7 +55,7 @@ pnpm dev:storybook -- --device
 ## Project Structure
 
 ```
-apps/storybook/
+apps/mobile-storybook/
 ├── app/                    # Expo Router pages
 │   ├── _layout.tsx         # Root layout with EDSProvider
 │   └── (tabs)/
@@ -76,7 +76,7 @@ apps/storybook/
 1. Create a new file in `app/(tabs)/components/` (e.g., `mycomponent.tsx`)
 2. Register the screen in `app/(tabs)/components/_layout.tsx`
 3. Add it to the component list in `app/(tabs)/components/index.tsx`
-4. Export the component from `packages/components/src/index.ts` if not already exported
+4. Export the component from `packages/eds-mobile-components/src/index.ts` if not already exported
 
 ## Troubleshooting
 
@@ -89,7 +89,7 @@ This error appears in the iOS Simulator because it doesn't support haptic feedba
 If you encounter iOS build errors after updating dependencies:
 
 ```bash
-cd apps/storybook/ios
+cd apps/mobile-storybook/ios
 rm -rf Pods Podfile.lock
 pod install
 ```
@@ -99,11 +99,11 @@ pod install
 Clear the cache and restart:
 
 ```bash
-pnpm dev:storybook -- --clear
+pnpm dev:mobile -- --clear
 ```
 
 ## Learn more
 
 - [Expo documentation](https://docs.expo.dev/)
-- [EDS Mobile Components](../../packages/components/README.md)
+- [EDS Mobile Components](../../packages/eds-mobile-components/README.md)
 - [Equinor Design System](https://eds.equinor.com/)

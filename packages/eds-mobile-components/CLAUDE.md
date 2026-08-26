@@ -191,7 +191,9 @@ If the finding needs real work, open a dedicated issue and link it next to the c
     - Styles using `EDSStyleSheet.create`
     - Test file: `YourComponent.test.tsx` — write it alongside the component, not as a follow-up. See `Divider.test.tsx` for the minimal shape: render via `test-utils` (wraps `@testing-library/react-native` with `EDSProvider`) and assert it renders plus any accessibility basics.
 2. Export from `src/index.ts`
-3. Add storybook story in `../../apps/mobile-storybook/app/(tabs)/YourComponent.tsx`
+3. Add a storybook screen in `../../apps/mobile-storybook/app/(tabs)/components/yourcomponent.tsx`
+   (lowercase filename — Expo Router derives the route from it), then register it in that
+   directory's `_layout.tsx` and `index.tsx`
 4. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
 5. Follow existing patterns for prop naming and component structure
 
