@@ -21,7 +21,7 @@ const LINKS = [
     },
     {
         label: "GitHub repository",
-        url: "https://github.com/equinor/design-system-mobile",
+        url: "https://github.com/equinor/design-system",
     },
 ];
 
