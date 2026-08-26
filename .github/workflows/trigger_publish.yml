@@ -344,10 +344,11 @@ jobs:
           echo "::error title=Icons Publish Failed::Failed to trigger publish workflow for @equinor/eds-icons"
           echo "❌ Failed to trigger icons publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job: Trigger mobile-components publish workflow
+  # Job 8: Trigger mobile-components publish workflow
   # Only runs if the Release Please manifest bumped eds-mobile-components.
-  # apps/mobile-storybook's own release (which gates the iOS build/release
-  # pipeline) is handled separately, not here - see the tracking issue.
+  # The npm publish itself is handled here; the iOS build/release pipeline
+  # this release also gates is a separate job (trigger-mobile-ios) below,
+  # since a components release triggers both.
   trigger-mobile-components:
     needs: check-releases
     if: needs.check-releases.outputs.mobile-components == 'true'
@@ -370,13 +371,19 @@ jobs:
           echo "::error title=Mobile Components Publish Failed::Failed to trigger publish workflow for @equinor/eds-mobile-components"
           echo "❌ Failed to trigger mobile-components publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job: Trigger the iOS TestFlight build/release workflow
-  # Only runs if the Release Please manifest bumped apps/mobile-storybook.
-  # This isn't an npm publish - it builds the Expo app and uploads it to
-  # TestFlight - see build_release_ios.yaml.
+  # Job 9: Trigger the iOS TestFlight build/release workflow
+  # Runs if the Release Please manifest bumped apps/mobile-storybook OR
+  # packages/eds-mobile-components. This isn't an npm publish - it builds
+  # the Expo app and uploads it to TestFlight - see build_release_ios.yaml.
+  # Triggering on a components-only release too (no app version bump,
+  # no npm involvement on the app's side) means a component change gets
+  # validated on a real device without anyone having to remember to kick
+  # off a TestFlight build manually - see #5138 for the reasoning. This
+  # never ships to the public App Store by itself - that's always a
+  # separate, manual submission-for-review step in App Store Connect.
   trigger-mobile-ios:
     needs: check-releases
-    if: needs.check-releases.outputs.mobile-storybook == 'true'
+    if: needs.check-releases.outputs.mobile-storybook == 'true' || needs.check-releases.outputs.mobile-components == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger iOS build/release
@@ -395,7 +402,7 @@ jobs:
           echo "::error title=Mobile iOS Build Failed::Failed to trigger iOS build/release workflow for apps/mobile-storybook"
           echo "❌ Failed to trigger iOS build/release workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 8: Trigger tokens publish workflow
+  # Job 10: Trigger tokens publish workflow
   # Only runs if the Release Please manifest bumped tokens.
   # The whole eds-tokens package is in beta (pinned 3.0.0-beta.N) during
   # the Tokens Studio rewrite — every release publishes to the `beta`
@@ -423,7 +430,7 @@ jobs:
           echo "::error title=Tokens Publish Failed::Failed to trigger publish workflow for @equinor/eds-tokens"
           echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
 
-  # Job 9: Summary report of all publish triggers
+  # Job 11: Summary report of all publish triggers
   # Runs independently after check-releases completes
   # Provides a clear overview of which packages were triggered for publishing
   publish-summary:
@@ -516,7 +523,11 @@ jobs:
             echo "- ⏭️ **@equinor/eds-mobile-components**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
 
-          if [ "${{ needs.check-releases.outputs.mobile-storybook }}" == "true" ]; then
+          # iOS build fires on either package's release (see trigger-mobile-ios's
+          # own if: condition) - check both, not just mobile-storybook's own
+          # output, or this summary would wrongly say "skipped" on a
+          # components-only release that still triggered a real iOS build.
+          if [ "${{ needs.check-releases.outputs.mobile-storybook }}" == "true" ] || [ "${{ needs.check-releases.outputs.mobile-components }}" == "true" ]; then
             echo "- ✅ **apps/mobile-storybook**: iOS build/release workflow triggered" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **apps/mobile-storybook**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
