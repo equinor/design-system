@@ -13,6 +13,11 @@
 
 ## Claude-Code-specific notes
 
+- **All tokens derive ONLY from the semantic layer of the redefined
+  (Tokens Studio) eds-tokens** — never primitives, palette steps, the
+  density layer, or legacy `--eds-color-*` names. The two sanctioned bridge
+  exceptions are documented in [`AGENTS.md`](./AGENTS.md) § Tokens.
+
 - The viewport-overflow gate (`node scripts/check-viewport-overflow.mjs`)
   needs the dev server running on port 3000 — the user usually runs
   `pnpm start` themselves; ask before starting or restarting it.

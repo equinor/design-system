@@ -18,32 +18,23 @@
   /* Display — hero/page titles on landing pages and doc-page hero bands */
   --docs-font-display-size: 2.75rem; /* site-local: above header-4xl */
   --docs-font-display-line-height: 1.15; /* site-local */
-  /* Header-role tokens are referenced through the density layer
-     (--eds-density-typography-header-*) rather than the semantic
-     --eds-typography-header-* names: the legacy token bundle (still imported
-     for elevation + /next previews) defines the same semantic names with
-     different values, and webpack's CSS ordering lets it win. The density
-     names exist only in the Tokens Studio bundle and still flip with
-     [data-density] modes. The ui-* names don't collide (legacy uses
-     ui-body-*), so they are referenced semantically. */
+  /* All roles reference the SEMANTIC token layer only. The header-*
+     font-size names collide with the legacy bundle; the semantic typography
+     bridge in theme-variables.css pins them to the Tokens Studio values. */
   /* Section headings (h2 role) */
-  --docs-font-section-size: var(--eds-density-typography-header-3xl-font-size);
+  --docs-font-section-size: var(--eds-typography-header-3xl-font-size);
   --docs-font-section-line-height: var(
-    --eds-density-typography-header-3xl-line-height
+    --eds-typography-header-3xl-line-height
   );
   /* Sub-section headings (h3 role) */
-  --docs-font-subsection-size: var(
-    --eds-density-typography-header-xl-font-size
-  );
+  --docs-font-subsection-size: var(--eds-typography-header-xl-font-size);
   --docs-font-subsection-line-height: var(
-    --eds-density-typography-header-xl-line-height
+    --eds-typography-header-xl-line-height
   );
   /* Card titles */
-  --docs-font-card-title-size: var(
-    --eds-density-typography-header-lg-font-size
-  );
+  --docs-font-card-title-size: var(--eds-typography-header-lg-font-size);
   --docs-font-card-title-line-height: var(
-    --eds-density-typography-header-lg-line-height
+    --eds-typography-header-lg-line-height
   );
   /* Lead / subtitle paragraphs */
   --docs-font-lead-size: var(--eds-typography-ui-xl-font-size);
@@ -59,6 +50,12 @@
   --docs-prose-line-height: 1.6;
   /* Emphasis weight — headings, buttons, labels */
   --docs-font-weight-emphasis: var(--eds-font-weight-bolder);
+
+  /* The Tokens Studio bundle ships no elevation tokens yet — these bridge to
+     the legacy pipeline until it does. The ONLY sanctioned legacy references
+     in site styling; components must use --docs-elevation-*. */
+  --docs-elevation-low: var(--eds-elevation-low);
+  --docs-elevation-high: var(--eds-elevation-high);
 
   --docs-hero-space-block: 5rem;
   --docs-hero-min-height: 27rem;
@@ -91,9 +88,7 @@
   :root {
     /* Display steps down to the token scale's top step (header-4xl, 32px);
        the desktop 44px is the documented above-token exception. */
-    --docs-font-display-size: var(
-      --eds-density-typography-header-4xl-font-size
-    );
+    --docs-font-display-size: var(--eds-typography-header-4xl-font-size);
     --docs-hero-space-block: 3rem;
     --docs-hero-min-height: auto;
     --docs-section-space-block: 3rem;

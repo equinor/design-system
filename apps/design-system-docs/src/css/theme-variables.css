@@ -10,9 +10,11 @@
 /* ======================================
  * TOKEN + FONT IMPORTS
  * ====================================== */
-/* Legacy-pipeline token bundle — still required for the tokens the Tokens
-   Studio bundle doesn't define yet (--eds-elevation-*, --eds-container-space-*)
-   and for the embedded /next component previews, which consume legacy names. */
+/* Legacy-pipeline token bundle — still required for --eds-elevation-* (no
+   Tokens Studio equivalent yet; bridged as --docs-elevation-* in
+   docs-components.css) and for the embedded /next component previews, which
+   consume legacy names. Site styling must not reference legacy names
+   directly. */
 @import '@equinor/eds-tokens/css/variables';
 /* Tokens Studio bundle (ADR-0011) — the source of truth for the site's own
    colour and typography tokens. Resolved via the eds-resolver webpack alias
@@ -37,6 +39,43 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
+}
+
+/* ======================================
+ * SEMANTIC TYPOGRAPHY BRIDGE
+ * Both token bundles declare the --eds-typography-header-*-font-size names
+ * with different values, and webpack CSS ordering lets the legacy bundle's
+ * :root declarations win. :root:root (specificity 0,2,0) outranks any single
+ * :root, so these re-declarations pin the semantic names to the Tokens
+ * Studio values (via the density layer, which still flips with
+ * [data-density]). Site CSS must consume ONLY the semantic
+ * --eds-typography-* names — never the density layer directly.
+ * ====================================== */
+:root:root {
+  --eds-typography-header-xs-font-size: var(
+    --eds-density-typography-header-xs-font-size
+  );
+  --eds-typography-header-sm-font-size: var(
+    --eds-density-typography-header-sm-font-size
+  );
+  --eds-typography-header-md-font-size: var(
+    --eds-density-typography-header-md-font-size
+  );
+  --eds-typography-header-lg-font-size: var(
+    --eds-density-typography-header-lg-font-size
+  );
+  --eds-typography-header-xl-font-size: var(
+    --eds-density-typography-header-xl-font-size
+  );
+  --eds-typography-header-2xl-font-size: var(
+    --eds-density-typography-header-2xl-font-size
+  );
+  --eds-typography-header-3xl-font-size: var(
+    --eds-density-typography-header-3xl-font-size
+  );
+  --eds-typography-header-4xl-font-size: var(
+    --eds-density-typography-header-4xl-font-size
+  );
 }
 
 /* ======================================
@@ -127,14 +166,12 @@
 html:not([class*='docs-version-']),
 html[class*='docs-version-current'] {
   --ifm-heading-font-weight: var(--docs-font-weight-emphasis);
-  /* header-* tokens go through the density layer — see the collision note in
-     docs-components.css. */
-  --ifm-h1-font-size: var(--eds-density-typography-header-4xl-font-size);
+  --ifm-h1-font-size: var(--eds-typography-header-4xl-font-size);
   --ifm-h2-font-size: var(--docs-font-section-size);
   --ifm-h3-font-size: var(--docs-font-subsection-size);
   --ifm-h4-font-size: var(--docs-font-card-title-size);
-  --ifm-h5-font-size: var(--eds-density-typography-header-md-font-size);
-  --ifm-h6-font-size: var(--eds-density-typography-header-sm-font-size);
+  --ifm-h5-font-size: var(--eds-typography-header-md-font-size);
+  --ifm-h6-font-size: var(--eds-typography-header-sm-font-size);
   /* --ifm-font-size-base stays at Infima's 100% so user font-size
      preferences are respected; ui-lg (16px) equals that default. */
   --ifm-line-height-base: var(--docs-prose-line-height);
@@ -146,7 +183,7 @@ html[class*='docs-version-current'] {
    restated at those exact scopes. */
 html:not([class*='docs-version-']) .markdown h1:first-child,
 html[class*='docs-version-current'] .markdown h1:first-child {
-  --ifm-h1-font-size: var(--eds-density-typography-header-4xl-font-size);
+  --ifm-h1-font-size: var(--eds-typography-header-4xl-font-size);
 }
 
 html:not([class*='docs-version-']) .markdown > h2,
@@ -163,7 +200,7 @@ html[class*='docs-version-current'] .markdown > h3 {
    has one shared --ifm-heading-line-height). :where() keeps specificity at
    0,0,2 so any single-class rule (hero titles, card titles) still wins. */
 html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h1 {
-  line-height: var(--eds-density-typography-header-4xl-line-height);
+  line-height: var(--eds-typography-header-4xl-line-height);
 }
 
 html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h2 {

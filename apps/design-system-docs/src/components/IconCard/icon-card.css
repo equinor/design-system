@@ -21,7 +21,7 @@
   border: 1px solid var(--eds-border-neutral-subtle);
   border-radius: var(--eds-corner-radius-rounded);
   background-color: var(--ifm-background-surface-color);
-  box-shadow: var(--eds-elevation-low);
+  box-shadow: var(--docs-elevation-low);
   color: inherit;
 }
 
@@ -37,7 +37,7 @@ a.docs-icon-card:hover {
   text-decoration: none;
   color: inherit;
   border-color: var(--ifm-color-primary);
-  box-shadow: var(--eds-elevation-high);
+  box-shadow: var(--docs-elevation-high);
   transform: translateY(-2px);
 }
 

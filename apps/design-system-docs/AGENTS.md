@@ -59,6 +59,20 @@ the upstream Docusaurus file.
 
 ## Tokens — two bundles, one collision
 
+**RULE: site styling derives ONLY from the semantic layer of the Tokens
+Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
+`--eds-icon-*`, `--eds-typography-*`, `--eds-font-*`, `--eds-spacing-*`,
+`--eds-corner-radius-*`. Never reference primitives (`--eds-primitives-*`,
+`--eds-light-*`/`--eds-dark-*`, palette steps like `--eds-accent-9`), the
+density layer (`--eds-density-*`), or legacy `--eds-color-*` names. The only
+sanctioned exceptions are the two bridges, each defined in exactly one place:
+
+- the semantic typography bridge in `theme-variables.css` (`:root:root`
+  re-declarations resolving the header-* font-size collision below), and
+- `--docs-elevation-low/high` in `docs-components.css` (the Tokens Studio
+  bundle ships no elevation tokens yet) — components use the `--docs-*`
+  names, never `--eds-elevation-*` directly.
+
 Both token bundles load (see imports in `theme-variables.css`):
 
 1. **Tokens Studio bundle** (ADR-0011) — the source of truth for the site's
@@ -75,9 +89,10 @@ Both token bundles load (see imports in `theme-variables.css`):
 
 **Collision gotcha:** both bundles define `--eds-typography-header-*-font-size`
 with different values, and webpack CSS ordering lets the legacy bundle win.
-Site CSS therefore references header-role typography through the density
-layer: `--eds-density-typography-header-*`. Do not "simplify" that back to
-the semantic names.
+The semantic typography bridge in `theme-variables.css` (`:root:root`
+specificity 0,2,0) pins the semantic names to the Tokens Studio values, so
+site CSS consumes the semantic `--eds-typography-header-*` names normally.
+Do not remove the bridge and do not reference `--eds-density-*` directly.
 
 Dark mode: `src/clientModules/syncColorScheme.ts` mirrors Docusaurus's
 `data-theme` to `data-color-scheme` on `<html>`, which is what both token
