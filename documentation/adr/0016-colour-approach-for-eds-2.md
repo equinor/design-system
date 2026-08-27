@@ -145,7 +145,7 @@ The ladder is **deliberately not monotonic**: the dark values dip at steps 4–5
 
 Steps **14 and 15 are inverse-polarity**: text and icon values intended to sit _on_ an emphasis fill (light .90 / 1.00, dark .33 / .10). They are outside the ladder by design and must be excluded from any ladder assertion.
 
-Because hand-set inputs can drift and there is no alpha left to absorb error, a generator fault is now a visible fault. The assertions in _Confirmation_ are a condition of this decision, not a nice-to-have.
+Because hand-set inputs can drift and there is no alpha left to absorb error, a generator fault is now a visible fault. Hand-set inputs are therefore only acceptable with the build-time checks in the [Confirmation](#confirmation) section of this ADR in place; without them, this decision does not stand.
 
 ### D4: Opaque only
 
@@ -232,7 +232,7 @@ Colour is **authored in OKLCH** and OKLCH is the canonical form. Figma variables
 
 ### Confirmation
 
-Colour correctness is not reviewable by eye at this scale. These checks belong in the token build, and none of them exists yet: `packages/eds-tokens/scripts/` currently holds only `assert-no-light-dark.mjs` alongside the generators:
+This section lists the automated checks that confirm the decision holds in practice: colour correctness is not reviewable by eye at this scale. They belong in the token build, as scripts in `packages/eds-tokens/scripts/` run as part of the CSS build (the same place `assert-no-light-dark.mjs` runs today). None of them exists yet; that directory currently holds only `assert-no-light-dark.mjs` alongside the generators:
 
 1. **Ladder progression**: every state ladder in D5 resolves in one direction in lightness, with hover and pressed visibly distinct from default and no inversions; steps 14–15 excluded. The scale as a whole is not required to be monotonic (D3)
 2. **No duplicate steps**: no two steps within one generated hue scale resolve to the same value (the [#5282](https://github.com/equinor/design-system/issues/5282) failure mode)
