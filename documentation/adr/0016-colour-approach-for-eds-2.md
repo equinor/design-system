@@ -263,6 +263,7 @@ Recorded so that they are not mistaken for oversights:
 - [ADR-0011: Adopt the Tokens Studio platform token pipeline](./0011-adopt-tokens-studio-platform-pipeline.md)
 - [ADR-0013: Attribute-scoped custom properties, not `light-dark()`](./0013-attribute-scoped-custom-properties-not-light-dark.md)
 - Epic [#4740](https://github.com/equinor/design-system/issues/4740): EDS token redefinition
+- [#4963](https://github.com/equinor/design-system/issues/4963): define the token variable architecture (Figma + code ADRs); the parent task this decision record delivers on
 - [#4741](https://github.com/equinor/design-system/issues/4741): alpha/opacity support (closed 2026-08-26; the opaque decision write-up)
 - [#4742](https://github.com/equinor/design-system/issues/4742): colour scale values
 - [#4744](https://github.com/equinor/design-system/issues/4744): colour token naming
