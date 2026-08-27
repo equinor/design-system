@@ -94,28 +94,48 @@ nav.menu li a {
   font-family: var(--eds-font-family-header, 'Equinor'), sans-serif;
 }
 
+/* Navbar tabs follow the EDS Tabs colour spec (Figma Core Components, node
+   4240-243515): text-primary + neutral-muted underline at rest, neutral
+   hover fill; text-accent + accent-emphasis underline when active, accent
+   hover fill. Sizes/spacing are the site's own. */
 .navbar__item {
   padding: 1.75rem 1.5rem;
   font-size: var(--eds-typography-ui-md-font-size);
   /* Deliberately below the ui-md line-height token (20px) — single-line navbar
      items are centred by padding, not leading. */
   line-height: 0.75rem;
-  box-shadow: 0px -1px 0px 0px var(--eds-border-neutral-subtle) inset;
+  box-shadow: 0px -1px 0px 0px var(--eds-border-interactive-neutral-muted-default)
+    inset;
   transition:
     box-shadow 150ms,
     background-color 150ms;
 }
 
 .navbar__item:hover {
-  background-color: transparent !important;
-  box-shadow: 0px -2px 0px 0px var(--eds-border-neutral-subtle) inset;
+  background-color: var(--eds-background-interactive-neutral-muted-hover) !important;
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-neutral-muted-default)
+    inset;
+}
+
+.navbar__link:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: -2px;
 }
 
 .navbar__link--active {
-  box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
+  color: var(--eds-text-accent);
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-accent-emphasis-default)
+    inset !important;
 }
 
-/* Version dropdown: remove border line and fix caret wrapping */
+.navbar__link--active:hover {
+  color: var(--eds-text-accent);
+  background-color: var(--eds-background-interactive-accent-muted-hover) !important;
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-accent-emphasis-hover)
+    inset !important;
+}
+
+/* Version dropdown: not a tab — no underline, no hover fill */
 .navbar__item.dropdown {
   box-shadow: none;
   white-space: nowrap;
@@ -123,31 +143,40 @@ nav.menu li a {
 
 .navbar__item.dropdown:hover {
   box-shadow: none;
+  background-color: transparent !important;
 }
 
 /* Mark the Foundation navbar link as active on Foundation doc pages
    (the plain link only matches the exact /foundation route otherwise). */
 html[class*='docs-doc-id-foundation/'] .navbar__link[href*='/foundation'] {
-  box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
+  color: var(--eds-text-accent);
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-accent-emphasis-default)
+    inset !important;
 }
 
 /* Mark Components navbar link as active on Components pages. Reference docs get
    this natively via the componentsSidebar, but the /components landing page uses
    displayed_sidebar: null, so it needs this fallback. */
 html[class*='docs-doc-id-components/'] .navbar__link[href*='/components/'] {
-  box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
+  color: var(--eds-text-accent);
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-accent-emphasis-default)
+    inset !important;
 }
 
 /* Mark the Get started navbar link as active on the getting-started doc pages
    (the navbar item is a plain link to /getting-started, which only matches its
    own route). */
 html[class*='docs-doc-id-about/'] .navbar__link[href*='/getting-started'] {
-  box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
+  color: var(--eds-text-accent);
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-accent-emphasis-default)
+    inset !important;
 }
 
 /* Same fallback for the Resources navbar link on resources doc pages. */
 html[class*='docs-doc-id-resources/'] .navbar__link[href*='/resources'] {
-  box-shadow: 0px -2px 0px 0px var(--ifm-color-primary) inset !important;
+  color: var(--eds-text-accent);
+  box-shadow: 0px -2px 0px 0px var(--eds-border-interactive-accent-emphasis-default)
+    inset !important;
 }
 
 /* Hide the in-page version badge on the redesign — the version is already in

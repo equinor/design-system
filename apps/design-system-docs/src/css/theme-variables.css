@@ -132,8 +132,10 @@
   /* Navbar styling */
   --ifm-navbar-shadow: none;
   --ifm-navbar-height: 68px;
-  --ifm-navbar-link-color: var(--ifm-font-color-base);
-  --ifm-navbar-link-hover-color: var(--ifm-font-color-base);
+  /* Tab text colours from the EDS Tabs spec (active gets --eds-text-accent
+     in site-chrome.css). */
+  --ifm-navbar-link-color: var(--eds-text-primary);
+  --ifm-navbar-link-hover-color: var(--eds-text-primary);
   --ifm-navbar-padding-vertical: 0;
 
   /* Menu and sidebar styling */
