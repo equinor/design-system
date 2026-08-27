@@ -34,6 +34,22 @@ import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, relative } from 'node:path'
 import process from 'node:process'
 
+/**
+ * A problem with one token's value, as opposed to a structural problem
+ * with the export. Thrown so `resolveGroup` can record it and carry on:
+ * this script runs unattended in the release workflow, and one run
+ * should surface every token that needs attention rather than one per
+ * re-run.
+ */
+class TokenError extends Error {}
+
+/** @type {Set<string>} deduped — a token resolves once per dimension context */
+const problems = new Set()
+
+function tokenFail(message) {
+  throw new TokenError(message)
+}
+
 const args = parseArgs(process.argv.slice(2))
 const DTCG_DIR = args.dtcg ?? 'src/tokens/dtcg'
 const CSS_DIR = args.css ?? 'src/tokens/css'
@@ -60,25 +76,19 @@ function parseArgs(argv) {
   return out
 }
 
-function fail(message) {
-  console.error(`generate-ts-tokens: ${message}`)
-  process.exit(1)
+/** Print every accumulated token problem, sorted, and forget them. */
+function flushProblems() {
+  for (const problem of [...problems].sort())
+    console.error(`generate-ts-tokens: ${problem}`)
+  problems.clear()
 }
 
-/**
- * A problem with one token's value, as opposed to a structural problem
- * with the export. Thrown so `resolveGroup` can record it and carry on:
- * this script runs unattended in the release workflow, and one run
- * should surface every token that needs attention rather than one per
- * re-run.
- */
-class TokenError extends Error {}
-
-/** @type {Set<string>} deduped — a token resolves once per dimension context */
-const problems = new Set()
-
-function tokenFail(message) {
-  throw new TokenError(message)
+function fail(message) {
+  // A structural problem must not hide the token problems found before
+  // it — batched reporting is the whole point of collecting them
+  flushProblems()
+  console.error(`generate-ts-tokens: ${message}`)
+  process.exit(1)
 }
 
 async function listFiles(dir, extension) {
@@ -233,8 +243,13 @@ function asOperand(value) {
     : value
 }
 
-/** The variable currently being resolved, for error messages. */
-const resolvingName = (path) => [...path].at(-1)
+/**
+ * Render the resolution path for an error message. It starts at the
+ * token's own custom property, so a report names the DTCG tokens that
+ * are affected rather than the intermediate they happen to share.
+ */
+const resolvingChain = (path) =>
+  [...path].map((name) => `--${name}`).join(' → ')
 
 /**
  * Resolve a CSS variable to a concrete value, substituting every `var()`
@@ -274,7 +289,7 @@ function substituteReferences(value, context, path) {
     if (context.has(referenced)) {
       resolved += asOperand(dereference(referenced, context, path))
     } else if (separator === -1) {
-      tokenFail(`broken var() chain: --${resolvingName(path)} → ${reference}`)
+      tokenFail(`broken var() chain: ${resolvingChain(path)} → ${reference}`)
     } else {
       resolved += asOperand(
         substituteReferences(body.slice(separator + 1).trim(), context, path),
@@ -503,26 +518,102 @@ function evaluateExpression(expression, cssName) {
   return { value: Number(result.value.toFixed(5)), unit: result.unit }
 }
 
-/** A colour function inside a composite value. */
-const COLOR_FUNCTION = /(?:oklch|rgb)\([^()]*\)/g
+/** A colour: hex, or an `oklch()` / `rgb()` function. */
+const COLOUR = /^(?:#[\da-f]+|(?:oklch|rgb)\()/i
+
+/** Split on separators at nesting depth 0. */
+function splitTopLevel(value, isSeparator) {
+  const parts = []
+  let depth = 0
+  let current = ''
+  for (const character of value) {
+    if (character === '(') depth += 1
+    else if (character === ')') depth -= 1
+    if (depth === 0 && isSeparator(character)) {
+      if (current.trim()) parts.push(current.trim())
+      current = ''
+      continue
+    }
+    current += character
+  }
+  if (current.trim()) parts.push(current.trim())
+  return parts
+}
+
+/** The alpha channel of a resolved colour, 0–1 at 2 decimals. */
+function colourAlpha(colour) {
+  const rgb = /^rgb\(\s*[\d.]+\s+[\d.]+\s+[\d.]+\s*\/\s*([\d.]+)\s*\)$/.exec(
+    colour,
+  )
+  if (rgb) return Number(Number(rgb[1]).toFixed(2))
+  if (/^#[\da-f]{8}$/i.test(colour))
+    return Number((parseInt(colour.slice(7), 16) / 255).toFixed(2))
+  return 1
+}
+
+/** One `<x> <y> <blur> <spread> <colour>` box-shadow layer. */
+function convertShadowLayer(layer, cssName) {
+  const parts = splitTopLevel(layer, (character) => /\s/.test(character))
+  const colours = parts.filter((part) => COLOUR.test(part))
+  if (colours.length !== 1)
+    tokenFail(`expected one colour per shadow layer for --${cssName}: ${layer}`)
+  const lengths = parts.filter((part) => !COLOUR.test(part))
+  if (lengths.length < 2 || lengths.length > 4)
+    tokenFail(
+      `expected 2 to 4 lengths per shadow layer for --${cssName}: ${layer}`,
+    )
+
+  // A shadow length comes from the same primitives that started emitting
+  // token math, so it can be an expression just like any other dimension
+  const [offsetX, offsetY, blur = 0, spread = 0] = lengths.map((length) => {
+    const numeric = /^(-?\d*\.?\d+)(px)?$/.exec(length)
+    if (numeric) return Number(numeric[1])
+    const { value, unit } = evaluateExpression(length, cssName)
+    if (unit !== '' && unit !== 'px')
+      tokenFail(
+        `unsupported shadow length unit "${unit}" for --${cssName}: ${length}`,
+      )
+    return value
+  })
+
+  const colour = colours[0]
+  const hex = colour.startsWith('#')
+    ? colour
+    : colour.startsWith('oklch(')
+      ? oklchToHex(colour, cssName)
+      : rgbToHex(colour, cssName)
+
+  return {
+    css: `${offsetX}px ${offsetY}px ${blur}px ${spread}px ${hex}`,
+    // React Native takes the colour opaque with the alpha split out, and
+    // has no spread — kept alongside for parity with the legacy
+    // build/ts/elevation output
+    native: {
+      shadowColor: hex.length > 7 ? hex.slice(0, 7) : hex,
+      shadowOffset: { width: offsetX, height: offsetY },
+      shadowOpacity: colourAlpha(colour),
+      shadowRadius: blur,
+      spread,
+    },
+  }
+}
 
 /**
- * A `shadow` token resolves to a CSS `box-shadow`: one or more
- * `<x> <y> <blur> <spread> <color>` layers. The value is emitted as the
- * string, so the lengths keep their units and only the colours are
- * converted to the hex form used everywhere else in these modules.
+ * A `shadow` token resolves to a CSS `box-shadow` — one or more
+ * comma-separated `<x> <y> <blur> <spread> <colour>` layers. It is
+ * emitted as the ready-to-use `boxShadow` string plus the per-layer
+ * React Native properties, mirroring the shape the legacy Style
+ * Dictionary output publishes at `build/ts/elevation/elevation.ts`.
  */
 function convertShadow(rawValue, cssName) {
-  const converted = rawValue.replace(COLOR_FUNCTION, (color) =>
-    color.startsWith('oklch(')
-      ? oklchToHex(color, cssName)
-      : rgbToHex(color, cssName),
+  const layers = splitTopLevel(rawValue, (character) => character === ',').map(
+    (layer) => convertShadowLayer(layer, cssName),
   )
-  // Every value form this script knows how to convert is paren-free by
-  // now; anything left is a function it has not been taught
-  if (converted.includes('('))
-    tokenFail(`unsupported shadow value for --${cssName}: ${rawValue}`)
-  return converted
+  if (layers.length === 0) tokenFail(`empty shadow for --${cssName}`)
+  return {
+    boxShadow: layers.map((layer) => layer.css).join(', '),
+    layers: layers.map((layer) => layer.native),
+  }
 }
 
 /** A resolved value that still needs arithmetic folding. */
@@ -628,6 +719,12 @@ function toLiteral(value, indent) {
   if (typeof value === 'number') return String(value)
   if (typeof value === 'string') return singleQuoted(value)
   const inner = `${indent}  `
+  // a shadow's layers are ordered, so they serialize as an array
+  if (Array.isArray(value)) {
+    if (value.length === 0) return '[]'
+    const items = value.map((item) => `${inner}${toLiteral(item, inner)},`)
+    return `[\n${items.join('\n')}\n${indent}]`
+  }
   const entries = Object.entries(value).map(([key, child]) => {
     const tsName = IDENTIFIER.test(key) ? key : singleQuoted(key)
     return `${inner}${tsName}: ${toLiteral(child, inner)},`
@@ -722,13 +819,10 @@ for (const file of dtcgFiles) {
     ])
 }
 
-if (problems.size > 0) {
-  for (const problem of [...problems].sort())
-    console.error(`generate-ts-tokens: ${problem}`)
+if (problems.size > 0)
   fail(
     `${problems.size} token value(s) could not be converted — nothing written, ${OUT_DIR} left untouched`,
   )
-}
 
 // Clear the previous output only once the whole export resolved, so a
 // failed run leaves the committed modules in place

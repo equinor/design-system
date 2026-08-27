@@ -445,10 +445,13 @@ describe('generate-ts-tokens', () => {
         }),
       )
       expect(result.stderr).toBe('')
-      // lengths keep their units, colours become hex
-      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
-        "low: '0px 1px 8px 0px #00000033',",
-      )
+      const semantic = readModule(result.outDir, 'semantic/default.ts')
+      // the ready-to-use CSS string, colours as hex
+      expect(semantic).toContain("boxShadow: '0px 1px 8px 0px #00000033',")
+      // plus the React Native properties: colour opaque, alpha split out
+      expect(semantic).toContain("shadowColor: '#000000',")
+      expect(semantic).toContain('shadowOpacity: 0.2,')
+      expect(semantic).toContain('shadowRadius: 8,')
     })
 
     it('rejects a shadow colour function it cannot convert', () => {
@@ -464,7 +467,7 @@ describe('generate-ts-tokens', () => {
       )
       expect(result.status).toBe(1)
       expect(result.stderr).toContain(
-        'unsupported shadow value for --eds-elevation-low',
+        'expected one colour per shadow layer for --eds-elevation-low',
       )
     })
   })
@@ -602,8 +605,97 @@ describe('generate-ts-tokens', () => {
         }),
       )
       expect(result.stderr).toBe('')
-      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
-        "high: '0px 4px 12px 0px #00000033, 0px 12px 16px 6px #0000001f',",
+      const semantic = readModule(result.outDir, 'semantic/default.ts')
+      expect(semantic).toContain(
+        "boxShadow: '0px 4px 12px 0px #00000033, 0px 12px 16px 6px #0000001f',",
+      )
+      // one entry per layer, in source order
+      expect(semantic).toContain('shadowOpacity: 0.2,')
+      expect(semantic).toContain('shadowOpacity: 0.12,')
+      expect(semantic).toContain('spread: 6,')
+    })
+  })
+
+  describe('review follow-ups', () => {
+    it('folds token math inside a shadow length', () => {
+      // shadow lengths come from the same primitives that started
+      // emitting calc(), so they need the same treatment as any dimension
+      const result = run(
+        cssFixture({
+          'elevation/default.css': `:root {
+  --eds-shadow-y: calc(var(--eds-primitives-spacing-25) + var(--eds-primitives-spacing-6));
+}`,
+          'color-scheme/light.css': `:root {
+  --eds-scheme-bg: #ffffff;
+  --eds-elevation-key: rgb(0 0 0 / 0.2);
+}`,
+          'color-scheme/dark.css': `:root {
+  --eds-scheme-bg: #000000;
+  --eds-elevation-key: rgb(0 0 0 / 0.2);
+}`,
+          'semantic/default.css': `:root {
+  --eds-elevation-low: 0px var(--eds-shadow-y) 8px 0px var(--eds-elevation-key);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { elevation: { low: leaf('shadow') } },
+        }),
+      )
+      expect(result.stderr).toBe('')
+      const semantic = readModule(result.outDir, 'semantic/default.ts')
+      expect(semantic).toContain("boxShadow: '0px 5px 8px 0px #00000033',")
+      expect(semantic).toContain('height: 5,')
+    })
+
+    it('names the affected token in a broken chain, not the intermediate', () => {
+      // two tokens sharing one broken intermediate must not collapse into
+      // a single anonymous line
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-mid: var(--eds-never-exported);
+  --eds-space-inline: var(--eds-mid);
+  --eds-space-block: var(--eds-mid);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': {
+            space: { inline: leaf('dimension'), block: leaf('dimension') },
+          },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        '--eds-space-inline → --eds-mid → --eds-never-exported',
+      )
+      expect(result.stderr).toContain(
+        '--eds-space-block → --eds-mid → --eds-never-exported',
+      )
+      expect(result.stderr).toContain('2 token value(s) could not be converted')
+    })
+
+    it('reports token problems even when a structural error aborts the run', () => {
+      // files resolve in sorted order, so the bad colour in colors/ is
+      // found before density/relaxed.json hits its missing CSS file
+      const result = run(
+        cssFixture({
+          'colors/default.css': `:root {
+  --eds-color-neutral-strong: oklch(0.3 0.02 250);
+  --eds-color-brand: bogus;
+  --eds-color-overlay: rgb(0 0 0 / 0.5);
+}`,
+        }),
+        dtcgFixture({
+          'density/relaxed.json': {
+            density: { spacing: { md: leaf('dimension') } },
+          },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('missing CSS export file')
+      // ...and the token problem found before it is not swallowed
+      expect(result.stderr).toContain(
+        'unsupported color value for --eds-color-brand',
       )
     })
   })
