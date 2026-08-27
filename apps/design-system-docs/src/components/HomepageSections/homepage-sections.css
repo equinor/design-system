@@ -28,25 +28,25 @@
 .docs-resource-tile {
   display: flex;
   align-items: center;
-  padding: 1.75rem;
-  border: 1px solid var(--eds-border-neutral-subtle);
-  border-radius: var(--eds-corner-radius-rounded);
-  background-color: var(--ifm-background-color);
-  box-shadow: var(--docs-elevation-low);
+  padding: var(--docs-card-padding);
+  border: var(--docs-card-border);
+  border-radius: var(--docs-card-radius);
+  background-color: var(--docs-card-bg);
   color: inherit;
-  transition:
-    box-shadow 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.15s ease;
+  transition: box-shadow 0.15s ease;
 }
 
 .docs-entry-card:hover,
 .docs-resource-tile:hover {
   text-decoration: none;
   color: inherit;
-  box-shadow: var(--docs-elevation-high);
-  border-color: var(--ifm-color-primary);
-  transform: translateY(-2px);
+  box-shadow: var(--docs-card-hover-shadow);
+}
+
+.docs-entry-card:focus-visible,
+.docs-resource-tile:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
 }
 
 .docs-entry-card {
@@ -67,17 +67,20 @@
 
 .docs-entry-card__content h3,
 .docs-resource-tile h3 {
-  font-size: var(--docs-font-card-title-size);
-  line-height: var(--docs-font-card-title-line-height);
-  margin-bottom: 0.25rem;
+  font-family: var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
+  font-size: var(--docs-card-title-size);
+  font-weight: var(--docs-font-weight-emphasis);
+  line-height: var(--docs-card-title-line-height);
+  color: var(--eds-text-primary);
+  margin-bottom: var(--docs-card-gap);
 }
 
 .docs-entry-card__content p,
 .docs-resource-tile p {
   margin: 0;
-  font-size: var(--docs-font-body-sm-size);
-  line-height: var(--docs-font-body-sm-line-height);
-  color: var(--ifm-color-emphasis-700);
+  font-size: var(--docs-card-text-size);
+  line-height: var(--docs-card-text-line-height);
+  color: var(--eds-text-secondary);
 }
 
 /* ---- Tile icons ---- */

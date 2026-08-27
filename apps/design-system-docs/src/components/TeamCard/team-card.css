@@ -8,11 +8,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
-  border: 1px solid var(--eds-border-neutral-subtle);
-  border-radius: var(--eds-corner-radius-rounded);
-  background-color: var(--ifm-background-color);
-  box-shadow: var(--docs-elevation-low);
+  padding: var(--docs-card-padding);
+  border: var(--docs-card-border);
+  border-radius: var(--docs-card-radius);
+  background-color: var(--docs-card-bg);
   text-align: center;
 }
 
@@ -25,14 +24,17 @@
 }
 
 .docs-team-card__name {
+  font-size: var(--docs-card-title-size);
   font-weight: var(--docs-font-weight-emphasis);
-  margin-bottom: 0.25rem;
+  line-height: var(--docs-card-title-line-height);
+  color: var(--eds-text-primary);
+  margin-bottom: var(--docs-card-gap);
 }
 
 .docs-team-card__role {
-  color: var(--ifm-color-emphasis-700);
-  font-size: var(--docs-font-body-sm-size);
-  line-height: var(--docs-font-body-sm-line-height);
+  color: var(--eds-text-secondary);
+  font-size: var(--docs-card-text-size);
+  line-height: var(--docs-card-text-line-height);
   margin-bottom: 0;
 }
 

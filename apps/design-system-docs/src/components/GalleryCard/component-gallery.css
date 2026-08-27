@@ -19,54 +19,55 @@
   /* No min-width — cards must shrink with their grid track, or 2-up layouts
      overflow narrow viewports. */
   min-width: 0;
-  border: 1px solid var(--eds-border-neutral-subtle);
-  border-radius: var(--eds-corner-radius-rounded);
-  background-color: var(--ifm-background-surface-color);
-  box-shadow: var(--docs-elevation-low);
+  border: var(--docs-card-border);
+  border-radius: var(--docs-card-radius);
+  background-color: var(--docs-card-bg);
   text-decoration: none;
   color: inherit;
   overflow: hidden;
-  transition:
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
+  transition: box-shadow 200ms ease;
 }
 
 .component-gallery__card:hover {
   text-decoration: none;
   color: inherit;
-  border-color: var(--ifm-color-primary);
-  box-shadow: var(--docs-elevation-high);
-  transform: translateY(-2px);
+  box-shadow: var(--docs-card-hover-shadow);
+}
+
+.component-gallery__card:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
 }
 
 .component-gallery__preview {
   min-height: 160px;
-  background-color: var(--ifm-background-surface-color);
+  background-color: var(--docs-card-bg);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
   position: relative;
-  border-bottom: 1px solid var(--eds-border-neutral-subtle);
 }
 
 .component-gallery__body {
-  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--docs-card-gap);
+  padding: var(--docs-card-padding);
 }
 
 .component-gallery__title {
-  font-size: var(--docs-font-body-size);
+  font-size: var(--docs-card-title-size);
   font-weight: var(--docs-font-weight-emphasis);
-  color: var(--ifm-font-color-base);
-  margin-bottom: 0.25rem;
+  line-height: var(--docs-card-title-line-height);
+  color: var(--eds-text-primary);
 }
 
 .component-gallery__subtitle {
-  font-size: var(--docs-font-body-sm-size);
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.5;
+  font-size: var(--docs-card-text-size);
+  line-height: var(--docs-card-text-line-height);
+  color: var(--eds-text-secondary);
 }
 
 /* Layout wrappers for the live component previews. */

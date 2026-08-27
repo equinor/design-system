@@ -57,12 +57,29 @@
   --docs-elevation-low: var(--eds-elevation-low);
   --docs-elevation-high: var(--eds-elevation-high);
 
+  /* ------------------------------------------------------------------
+   * Card recipe — from the EDS IllustrativeCard spec (Figma Core
+   * Components, node 4663-25088). Every site card consumes these:
+   * floating surface, interactive-neutral border, no shadow at rest,
+   * elevation-low on hover (no lift, no border change), focus ring via
+   * outline, ui/bolder/md title + ui/sm secondary content.
+   * ------------------------------------------------------------------ */
+  --docs-card-bg: var(--eds-background-floating);
+  --docs-card-border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  --docs-card-radius: var(--eds-corner-radius-rounded);
+  --docs-card-padding: var(--eds-spacing-sm);
+  --docs-card-gap: var(--eds-spacing-4xs);
+  --docs-card-hover-shadow: var(--docs-elevation-low);
+  --docs-card-title-size: var(--eds-typography-ui-md-font-size);
+  --docs-card-title-line-height: var(--eds-typography-ui-md-line-height);
+  --docs-card-text-size: var(--eds-typography-ui-sm-font-size);
+  --docs-card-text-line-height: var(--eds-typography-ui-sm-line-height);
+
   --docs-hero-space-block: 5rem;
   --docs-hero-min-height: 27rem;
   --docs-section-space-block: 5rem;
   --docs-measure: 35rem;
   --docs-grid-gap: 1.5rem;
-  --docs-card-min-height: 11.25rem;
   /* Centred content column + the responsive gutter that flanks it. */
   --docs-content-max: var(--ifm-container-width);
   --docs-gutter: max(2rem, calc((100% - var(--docs-content-max)) / 2));

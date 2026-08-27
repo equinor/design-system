@@ -16,29 +16,27 @@
 .docs-icon-card {
   display: flex;
   flex-direction: column;
-  min-height: var(--docs-card-min-height, 11.25rem);
-  padding: 1.5rem;
-  border: 1px solid var(--eds-border-neutral-subtle);
-  border-radius: var(--eds-corner-radius-rounded);
-  background-color: var(--ifm-background-surface-color);
-  box-shadow: var(--docs-elevation-low);
+  padding: var(--docs-card-padding);
+  border: var(--docs-card-border);
+  border-radius: var(--docs-card-radius);
+  background-color: var(--docs-card-bg);
   color: inherit;
 }
 
 /* Interactive cards are rendered as links. */
 a.docs-icon-card {
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.15s ease;
+  transition: box-shadow 0.15s ease;
 }
 
 a.docs-icon-card:hover {
   text-decoration: none;
   color: inherit;
-  border-color: var(--ifm-color-primary);
-  box-shadow: var(--docs-elevation-high);
-  transform: translateY(-2px);
+  box-shadow: var(--docs-card-hover-shadow);
+}
+
+a.docs-icon-card:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
 }
 
 .docs-icon-card[data-disabled] {
@@ -89,15 +87,18 @@ a.docs-icon-card:hover {
 }
 
 .docs-icon-card__title {
-  font-size: var(--docs-font-card-title-size);
-  line-height: var(--docs-font-card-title-line-height);
-  margin-bottom: 0.5rem;
+  font-family: var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
+  font-size: var(--docs-card-title-size);
+  font-weight: var(--docs-font-weight-emphasis);
+  line-height: var(--docs-card-title-line-height);
+  color: var(--eds-text-primary);
+  margin-bottom: var(--docs-card-gap);
 }
 
 .docs-icon-card__description {
-  color: var(--ifm-color-emphasis-700);
-  font-size: var(--docs-font-body-sm-size);
-  line-height: var(--docs-font-body-sm-line-height);
+  color: var(--eds-text-secondary);
+  font-size: var(--docs-card-text-size);
+  line-height: var(--docs-card-text-line-height);
   margin-bottom: 0;
 }
 
