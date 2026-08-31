@@ -5,7 +5,7 @@ hide_title: true
 description: 'Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation - serving as a building block for higher-level components like TextField.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--introduction" height={70} showLink />
+<StoryCanvas of="Input/Introduction" showLink />
 
 ## When to Use
 
@@ -22,13 +22,13 @@ Use Input when you need a basic input field without additional functionality, or
 
 Input supports a variety of native HTML input types for different data entry needs.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--types" height={175} showLink />
+<StoryCanvas of="Input/Types" showLink />
 
 ### Validation States
 
 Use the `invalid` prop to indicate validation errors. The input displays a red border and adornments inherit the error colour.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--validation-states" height={120} showLink />
+<StoryCanvas of="Input/ValidationStates" showLink />
 
 ### Disabled & Read Only
 
@@ -37,7 +37,7 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead - it ke
 - **Disabled**: The input is non-interactive and visually dimmed
 - **Read Only**: The value is visible but not editable, maintaining better accessibility
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--states" height={225} showLink />
+<StoryCanvas of="Input/States" showLink />
 
 ### Using with Labels
 
@@ -45,7 +45,7 @@ For a complete form field with label, description, helper message, and required/
 
 When using Input with a visible label, use the Field component for proper spacing.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--with-label" height={160} showLink />
+<StoryCanvas of="Input/WithLabel" showLink />
 
 ### Density
 
@@ -54,7 +54,7 @@ Input supports two density modes to fit different UI contexts:
 - **Spacious**: The default density with comfortable padding
 - **Comfortable**: A more compact option for dense UIs like data tables
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--compact" height={115} showLink />
+<StoryCanvas of="Input/Compact" showLink />
 
 ### Adornments
 
@@ -62,7 +62,7 @@ Use `startText` and `endText` for prefix/suffix text (e.g., "$", "USD", "km"). T
 
 Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colours - turning red when invalid.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--with-adornments" height={380} showLink />
+<StoryCanvas of="Input/WithAdornments" showLink />
 
 ### Textarea Mode
 

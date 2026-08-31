@@ -40,7 +40,7 @@ Use variants to guide users to the most important action:
 | Secondary | Medium   | Supporting actions (e.g., "Cancel")    |
 | Ghost     | Low      | Tertiary actions (e.g., toolbar icons) |
 
-<StorybookEmbed id="eds-2-0-beta-inputs-button--all-variants" height={370} showLink />
+<StoryCanvas of="Button/AllVariants" showLink />
 
 ### Tones
 
@@ -50,7 +50,7 @@ Tones communicate the intent or nature of an action:
 - **Neutral**: A subdued option for actions that shouldn't compete for attention.
 - **Danger**: Reserved for destructive actions (e.g., "Delete"). Danger buttons should be placed in opposite order to positive actions in button groups to prevent accidental activation.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-button--tones" height={175} showLink />
+<StoryCanvas of="Button/Tones" showLink />
 
 ### Sizes
 
@@ -92,13 +92,13 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 - Can be circular for a softer appearance
 - Must always have an accessible name for screen readers
 
-<StorybookEmbed id="eds-2-0-beta-inputs-button--icon-only-variants" height={120} showLink />
+<StoryCanvas of="Button/IconOnlyVariants" showLink />
 
 **Circular icon-only buttons**
 
 Use the `round` prop on icon-only buttons to create circular buttons for a softer appearance.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-button--circular-icon-only" height={130} showLink />
+<StoryCanvas of="Button/CircularIconOnly" showLink />
 
 ## Accessibility
 

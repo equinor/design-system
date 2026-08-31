@@ -5,7 +5,7 @@ hide_title: true
 description: 'Chips are compact, interactive elements that represent a small piece of information users can select, filter, remove, or expand. They work well for filters, tags, selections, or quickly triggering a menu. With variants for visual weight, tones for intent, and built-in support for selectable, deletable, and dropdown behaviours, chips help surface bite-sized actions without stealing focus from the surrounding UI.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--default" height={96} showLink />
+<StoryCanvas of="Chip/Default" showLink />
 
 ## When to Use
 
@@ -25,7 +25,7 @@ A chip is always a button. Based on the props you pass, it takes on one of four 
 - **Dropdown**: shows a trailing arrow that flips up when the chip is selected, signalling an open menu
 - **Custom icons**: pass icons as children for full control over leading and/or trailing content
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--types" height={96} showLink />
+<StoryCanvas of="Chip/Types" showLink />
 
 ## Guidelines
 
@@ -39,7 +39,7 @@ Variants control the visual weight of the chip. Pick the one that matches how mu
 | Outlined      | Low      | Quiet chips that shouldn't compete with surrounding UI   |
 | High contrast | High     | Prominent chips that need to stand out, e.g. key filters |
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--variants" height={96} showLink />
+<StoryCanvas of="Chip/Variants" showLink />
 
 ### Tones
 
@@ -52,31 +52,31 @@ Tones communicate the meaning or category behind a chip:
 - **Warning**: Caution or attention-needed states
 - **Danger**: Destructive or error states
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--tones" height={96} showLink />
+<StoryCanvas of="Chip/Tones" showLink />
 
 ### Selectable chips
 
 Selectable chips are controlled components - manage `selected` in your own state and pass an `onClick` handler to flip it. When `selected` is true, the chip shows a leading check icon. Selection is ideal for filter chips, tag pickers, or any group where one or more options can be active at the same time.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--selectable" height={96} showLink />
+<StoryCanvas of="Chip/Selectable" showLink />
 
 ### Deletable chips
 
 Pass `onDelete` to turn a chip into a removable tag. The entire chip becomes the delete target - clicking anywhere on it, or pressing Backspace / Delete while focused, fires the callback. Deletable chips are a great fit for active-filter summaries or recipient lists.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--deletable" height={96} showLink />
+<StoryCanvas of="Chip/Deletable" showLink />
 
 ### Dropdown chips
 
 Use `dropdown` to add a trailing arrow that signals the chip opens a menu. Combine `dropdown` with `selected` while the menu is open - the arrow flips from down to up. The chip owns the trigger and visual state; you own the popover or menu behaviour.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--dropdown" height={96} showLink />
+<StoryCanvas of="Chip/Dropdown" showLink />
 
 ### Custom icons
 
 For chips that need a leading icon, a different trailing icon, or both, pass icons directly as children. Two common patterns: a saved filter with a leading bookmark icon, and recipient chips that combine a leading person icon with the built-in `onDelete` close icon.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--custom-icons" height={255} showLink />
+<StoryCanvas of="Chip/CustomIcons" showLink />
 
 ### Density
 
@@ -85,13 +85,13 @@ Chips respond to a `data-density` attribute on a parent element, so they feel at
 - **Spacious** (default): Comfortable padding for general-purpose use
 - **Comfortable**: A denser option for toolbars, tables, and data-heavy views. As with other EDS components, provide a way to switch back to spacious mode for accessibility.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--density" height={247} showLink />
+<StoryCanvas of="Chip/Density" showLink />
 
 ### Tone × variant
 
 Every tone works with every variant. Here's the full matrix for picking the right combination.
 
-<StorybookEmbed id="eds-2-0-beta-data-display-chip--tone-variant-matrix" height={362} showLink />
+<StoryCanvas of="Chip/ToneVariantMatrix" showLink />
 
 ### Chip text
 

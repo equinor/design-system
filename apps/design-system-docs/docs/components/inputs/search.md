@@ -5,7 +5,7 @@ hide_title: true
 description: 'Search allows users to quickly locate relevant content within a website or application. It consists of a search input field with a built-in search icon and an optional clear button that appears when text is entered.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--introduction" height={100} showLink />
+<StoryCanvas of="Search/Introduction" showLink />
 
 ## When to Use
 
@@ -39,43 +39,43 @@ Use placeholder text with care. It disappears when users begin typing, which can
 
 Use a visible label above the search field when the search purpose is not immediately obvious, or when the search field is part of a larger form. In standalone search contexts, an `aria-label` is sufficient.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--without-label" height={68} showLink />
+<StoryCanvas of="Search/WithoutLabel" showLink />
 
 ### Description and Helper Message
 
 Use `description` to provide additional context about what the user can search for. Use `helperMessage` for validation feedback or hints displayed below the field.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--with-description" height={120} showLink />
+<StoryCanvas of="Search/WithDescription" showLink />
 
 ### Clear Button
 
 A clear button appears automatically when the input has a value, allowing users to quickly reset the field. Use the `onClear` callback to handle clear events. The `clearLabel` prop lets you customize the accessible label for localization (defaults to "Clear search").
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--with-clear-button" height={100} showLink />
+<StoryCanvas of="Search/WithClearButton" showLink />
 
 ### Controlled and Uncontrolled
 
 Search supports both controlled and uncontrolled modes. In controlled mode, manage the value via `value` and `onChange` props. In uncontrolled mode, provide `defaultValue` and optionally use `onClear`.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--controlled" height={100} showLink />
+<StoryCanvas of="Search/Controlled" showLink />
 
 ### Invalid State
 
 Use the `invalid` prop to indicate a validation error. Pair it with `helperMessage` to explain what went wrong.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--invalid" height={120} showLink />
+<StoryCanvas of="Search/Invalid" showLink />
 
 ### Disabled State
 
 A disabled search field prevents user interaction. Use this sparingly and only when the search functionality is temporarily unavailable. The clear button is automatically hidden when the field is disabled.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--disabled" height={100} showLink />
+<StoryCanvas of="Search/Disabled" showLink />
 
 ### Read-Only State
 
 A read-only search field displays the current value but prevents editing. The clear button is hidden in this state.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-search--read-only" height={100} showLink />
+<StoryCanvas of="Search/ReadOnly" showLink />
 
 ## Accessibility
 

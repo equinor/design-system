@@ -252,7 +252,17 @@ export default tseslint.config(
         // Docusaurus aliases plus colocated CSS side-effect imports, which the
         // import resolver (scoped to packages/*) can't resolve but Docusaurus
         // and tsc handle via ambient '*.css' module declarations.
-        { ignore: ['^@theme', '^@docusaurus', '^@site', '\\.css$'] },
+        // '@eds-core-react-src' is the portable-stories alias, resolved by the
+        // eds-resolver webpack plugin and the docs app's own tsconfig paths.
+        {
+          ignore: [
+            '^@theme',
+            '^@docusaurus',
+            '^@site',
+            '^@eds-core-react-src',
+            '\\.css$',
+          ],
+        },
       ],
       'import/no-default-export': 'off',
       // The docs app isn't part of tsconfig.eslint.json's project graph, so

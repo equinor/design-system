@@ -12,5 +12,14 @@
       "@eds-core-react-src/*": ["../../packages/eds-core-react/src/*"]
     }
   },
+  "include": [
+    "**/*",
+    // Portable stories reach legacy eds-core-react components (via the shared
+    // `.storybook` helpers and barrel imports in some story files), which read
+    // token values off styled-components' `DefaultTheme`. That interface is
+    // augmented here; without it every legacy `theme.entities.…` access is a
+    // type error in this project.
+    "../../packages/eds-core-react/src/components/styled.d.ts"
+  ],
   "exclude": [".docusaurus", "build"]
 }

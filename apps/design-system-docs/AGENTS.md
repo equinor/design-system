@@ -145,11 +145,16 @@ MDX docs use these without imports; React pages import them from
   (previews import real components from `@equinor/eds-core-react/next`)
 - `StorybookEmbed` — iframe of the deployed Storybook; `showLink` derives
   the View-in-Storybook link from the `id` (never hand-write those links)
-- `StoryCanvas` — **the successor**: renders actual CSF story files natively
-  via `composeStories()` (`src/components/StoryCanvas/`). Registry in
-  `stories.ts`; usage `<StoryCanvas of="Button/Default" showLink />`. Full
-  migration off StorybookEmbed is planned — check for
-  `.local-eddi-notes/2026-08-25-storycanvas-full-migration-plan.md`.
+- `StoryCanvas` — **what every component doc uses**: renders actual CSF story
+  files natively via `composeStories()` (`src/components/StoryCanvas/`).
+  Registry in `stories.ts` (one namespace import + one `composeStories` entry
+  per component, alphabetical); usage
+  `<StoryCanvas of="Button/Default" showLink />`. No `height` — canvases
+  auto-size. An unknown `of` path logs and renders nothing, so verify the
+  story name against the component's `.stories.tsx` exports. Stories that
+  drive their own state through Storybook's `useArgs()` render but cannot be
+  interacted with here (`Switch/Introduction` is the one such case) — prefer a
+  story with local `useState` when the doc needs interactivity.
 - `DocsLanding` — wrapper that opts an MDX doc into the full-width landing
   layout (styled in `doc-layouts.css`)
 
@@ -183,10 +188,23 @@ exact-match so subpath imports still resolve through package `exports`:
   bundle.
 - `@eds-core-react-src` → `packages/eds-core-react/src` (portable stories).
   Mirrored in `tsconfig.json` `paths` — note `paths` REPLACES the inherited
-  `@site/*` mapping, so it is restated there; never remove it.
-- Module rules: babel-compiles `packages/eds-core-react/src` with
-  `@docusaurus/babel/preset`, and stubs `*.docs.mdx` imports inside story
-  files as `asset/source` (Storybook MDX is not Docusaurus-compilable).
+  `@site/*` mapping, so it is restated there; never remove it. Also listed in
+  the root `eslint.config.mjs` `import/no-unresolved` ignore list for this app,
+  because the shared import resolver only covers `packages/*`.
+- `@storybook/addon-docs/blocks$` → `src/stubs/storybook-addon-docs-blocks.tsx`.
+  Story files import `Stack` from `packages/eds-core-react/.storybook/components`,
+  whose barrel also re-exports helpers built on Storybook's docs blocks; those
+  need a docs context that does not exist here. The stub keeps them inert.
+- Module rules: babel-compiles `packages/eds-core-react/src` **and its
+  `.storybook` helpers** with `@docusaurus/babel/preset`, and stubs
+  `*.docs.mdx` imports inside story files as `asset/source` (Storybook MDX is
+  not Docusaurus-compilable).
+
+`tsconfig.json` also pulls in
+`packages/eds-core-react/src/components/styled.d.ts`: portable stories reach
+legacy components that read token values off styled-components'
+`DefaultTheme`, and without that augmentation every `theme.entities.…` access
+is a type error in this project.
 
 Webpack config changes require a dev-server restart; content and CSS
 hot-reload.

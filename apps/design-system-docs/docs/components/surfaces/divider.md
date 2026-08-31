@@ -5,7 +5,7 @@ hide_title: true
 description: 'A divider is a thin horizontal line that brings clarity to layout by grouping and separating content. Designed with care, dividers should be noticeable but never compete for attention - they help establish rhythm and hierarchy across our interfaces.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-surface-divider--introduction" height={245} showLink />
+<StoryCanvas of="Divider/Introduction" showLink />
 
 ## When to Use
 

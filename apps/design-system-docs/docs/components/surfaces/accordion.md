@@ -5,7 +5,7 @@ hide_title: true
 description: 'Accordion lets readers reveal and collapse sections of content on demand. It helps manage information density on long pages while keeping the layout scannable, so people can focus on what matters to them without losing the rest of the structure.'
 ---
 
-<StorybookEmbed id="eds-2-0-beta-surface-accordion--introduction" height={258} showLink />
+<StoryCanvas of="Accordion/Introduction" showLink />
 
 ## When to Use
 
@@ -42,19 +42,19 @@ By default, accordion items open and close independently of one another. This is
 
 Switch to an exclusive group when the content is mutually exclusive, when keeping multiple panels open would confuse the layout, or when the surrounding container is short on vertical space.
 
-<StorybookEmbed id="eds-2-0-beta-surface-accordion--exclusive" height={198} showLink />
+<StoryCanvas of="Accordion/Exclusive" showLink />
 
 ### Controlled and Uncontrolled
 
 Accordion items work uncontrolled out of the box – the component remembers its own open state and you only need to set the initial value. Reach for a controlled item when the open state is part of broader UI logic: syncing with a URL parameter, restoring layout from saved preferences, or co-ordinating with another panel on the page.
 
-<StorybookEmbed id="eds-2-0-beta-surface-accordion--controlled" height={169} showLink />
+<StoryCanvas of="Accordion/Controlled" showLink />
 
 ### Density
 
 Accordion follows the active density on its ancestor, so spacing and sizing stay coordinated with the rest of the layout. Use the spacious default in standalone or content-led views, and switch to comfortable density inside dense surfaces like tools, settings panes, or side panels.
 
-<StorybookEmbed id="eds-2-0-beta-surface-accordion--density" height={444} showLink />
+<StoryCanvas of="Accordion/Density" showLink />
 
 ## Accessibility
 

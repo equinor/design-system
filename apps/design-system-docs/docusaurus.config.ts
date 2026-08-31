@@ -154,13 +154,23 @@ const config: Config = {
                   __dirname,
                   '../../packages/eds-tokens/src/tokens/css/variables.css',
                 ),
-                // Portable-stories pilot: story files are imported straight
-                // from eds-core-react source (stories are not shipped in
-                // dist) and rendered via composeStories — see
+                // Portable stories: story files are imported straight from
+                // eds-core-react source (stories are not shipped in dist)
+                // and rendered via composeStories — see
                 // src/components/StoryCanvas.
                 '@eds-core-react-src': path.resolve(
                   __dirname,
                   '../../packages/eds-core-react/src',
+                ),
+                // Several story files import `Stack` from the shared
+                // `.storybook/components` barrel, which also re-exports
+                // helpers built on Storybook's docs blocks. Those need a
+                // Storybook docs context that does not exist here and pull
+                // manager internals into the bundle, so resolve them to an
+                // inert stub — the stories only ever render `Stack`.
+                '@storybook/addon-docs/blocks$': path.resolve(
+                  __dirname,
+                  'src/stubs/storybook-addon-docs-blocks.tsx',
                 ),
               },
               fallback: {
@@ -170,16 +180,23 @@ const config: Config = {
             },
             module: {
               rules: [
-                // Portable-stories pilot: transpile eds-core-react source
-                // (story files + the components they import) with the same
-                // preset Docusaurus uses for site code. Scoped to the package
-                // src so it can't affect anything else.
+                // Portable stories: transpile eds-core-react source (story
+                // files + the components they import) with the same preset
+                // Docusaurus uses for site code. Scoped to the package src
+                // plus its `.storybook` helpers — which story files import
+                // for `Stack` — so it can't affect anything else.
                 {
                   test: /\.tsx?$/,
-                  include: path.resolve(
-                    __dirname,
-                    '../../packages/eds-core-react/src',
-                  ),
+                  include: [
+                    path.resolve(
+                      __dirname,
+                      '../../packages/eds-core-react/src',
+                    ),
+                    path.resolve(
+                      __dirname,
+                      '../../packages/eds-core-react/.storybook',
+                    ),
+                  ],
                   use: {
                     loader: require.resolve('babel-loader'),
                     options: {
