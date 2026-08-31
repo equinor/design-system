@@ -87,7 +87,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-storybook": "^10.5.6",
+    "eslint-plugin-storybook": "^10.5.10",
     "eslint-plugin-testing-library": "^7.16.2",
     "globals": "^17.7.0",
     "typescript-eslint": "^8.65.0",
@@ -133,9 +133,10 @@
       "qs": ">=6.15.2",
       "postcss": ">=8.5.23",
       "uuid": "^11.1.1",
-      "react-stately": "3.47.0",
+      "react-stately": "3.49.0",
       "@types/react": ">=19.2.17",
-      "@internationalized/date": "3.12.2"
+      "@internationalized/date": "3.12.3",
+      "nanoid@^3": ">=3.3.18"
     }
   }
 }
