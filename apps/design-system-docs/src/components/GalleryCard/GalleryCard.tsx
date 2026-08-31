@@ -26,7 +26,9 @@ export function GalleryCard({
 
   return (
     <a className="component-gallery__card" href={href}>
-      <div className="component-gallery__preview">
+      {/* Previews are decorative: inert removes them from tab order, pointer
+          interaction, and the accessibility tree, so clicks land on the card link */}
+      <div className="component-gallery__preview" inert>
         <div className={mockClasses} style={mockStyle}>
           {children}
         </div>
