@@ -8,13 +8,8 @@ export const teamMembers: TeamMember[] = [
     role: 'Product Owner / UX Designer',
   },
   {
-    image: '/team-images/victor.jpg',
-    name: 'Victor Nystad',
-    role: 'Design Lead / Tech Lead / Design Engineer',
-  },
-  {
     image: '/team-images/alexandra.png',
-    name: 'Alexandra Louviers',
+    name: 'Alex Louviers',
     role: 'UI / UX Designer',
   },
   {
@@ -30,12 +25,12 @@ export const teamMembers: TeamMember[] = [
   {
     image: '/team-images/edvard.png',
     name: 'Edvard Pires Bjørgen',
-    role: 'UI / UX Designer',
+    role: 'Design Lead',
   },
   {
     image: '/team-images/frida.jpg',
     name: 'Frida Erdal',
-    role: 'Frontend Developer',
+    role: 'Tech Lead',
   },
   {
     image: '/team-images/hjalmar.jpg',
