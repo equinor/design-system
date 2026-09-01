@@ -1,6 +1,6 @@
 @layer eds-components {
   .eds-text-field {
-    & .header {
+    & > .header {
       display: flex;
       gap: var(--eds-typography-gap-horizontal);
       align-items: center;

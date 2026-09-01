@@ -37,7 +37,7 @@
     &:hover:not([data-disabled], [data-readonly]) {
       outline-color: var(--eds-color-border-strong);
 
-      & .control {
+      & > .control {
         color: var(--eds-color-text-strong);
 
         /* Safari autofill override */
@@ -77,7 +77,7 @@
       cursor: not-allowed;
       outline-color: transparent;
 
-      & .control {
+      & > .control {
         cursor: not-allowed;
         color: var(--eds-color-text-disabled);
         opacity: 1;
@@ -93,9 +93,9 @@
         }
       }
 
-      & .text,
-      & .item,
-      & .error-icon {
+      & > .text,
+      & > .item,
+      & > .error-icon {
         color: var(--eds-color-text-disabled);
       }
     }
@@ -104,21 +104,21 @@
     &[data-readonly] {
       outline-color: transparent;
 
-      & .control {
+      & > .control {
         color: var(--_readonly-text-color);
 
         /* Safari autofill override */
         -webkit-text-fill-color: var(--_readonly-text-color);
       }
 
-      & .text,
-      & .item {
+      & > .text,
+      & > .item {
         color: var(--_readonly-text-color);
       }
     }
 
     /* Input/Textarea element */
-    & .control {
+    & > .control {
       --_placeholder-text-color: var(--eds-color-text-subtle);
 
       resize: none;
@@ -146,13 +146,13 @@
     }
 
     /* Error icon */
-    & .error-icon {
+    & > .error-icon {
       flex-shrink: 0;
       color: var(--eds-color-text-subtle);
     }
 
     /* Adornments container */
-    & .adornment {
+    & > .adornment {
       display: flex;
       flex-shrink: 0;
       gap: var(--eds-typography-gap-horizontal);
@@ -161,7 +161,7 @@
       color: var(--eds-color-text-subtle);
 
       /* Adornment icons and buttons */
-      & .item {
+      & > .item {
         display: flex;
         align-items: center;
 
