@@ -7,6 +7,15 @@
 
 /* ---- Grids ---- */
 
+/* Homepage lead — the paragraph the display hero hands off to the first
+   section. Matches the lead sizing the other heroes use. */
+.docs-home-lead {
+  max-width: var(--docs-measure, 35rem);
+  margin-bottom: 0;
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
+}
+
 .docs-entry-grid {
   display: grid;
 

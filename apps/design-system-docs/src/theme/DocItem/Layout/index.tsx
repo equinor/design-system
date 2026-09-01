@@ -11,6 +11,8 @@ import DocItemContent from '@theme/DocItem/Content'
 import DocBreadcrumbs from '@theme/DocBreadcrumbs'
 import ContentVisibility from '@theme/ContentVisibility'
 
+import { DotField } from '@site/src/components/DotField'
+
 import type { JSX } from 'react'
 import type { Props } from '@theme/DocItem/Layout'
 
@@ -46,7 +48,8 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   return (
     <>
       {showHero && (
-        <header className={styles.docHero}>
+        <header className={clsx(styles.docHero, 'docs-dot-host')}>
+          <DotField />
           <div className={styles.docHeroInner}>
             <h1 className={styles.docHeroTitle}>{metadata.title}</h1>
             {metadata.description && (

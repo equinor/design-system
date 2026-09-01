@@ -2,6 +2,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import {
   Hero,
+  Intro,
   WhyEds,
   DesignLanguage,
   Resources,
@@ -19,6 +20,7 @@ export default function Home(): JSX.Element {
     >
       <main>
         <Hero />
+        <Intro />
         <WhyEds />
         <DesignLanguage />
         <Resources />

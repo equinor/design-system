@@ -16,6 +16,7 @@ export default function Foundation(): JSX.Element {
       <main>
         <Hero
           title="Foundation"
+          dots
           lead={
             <p>
               The building blocks of EDS &mdash; colour, typography, spacing,

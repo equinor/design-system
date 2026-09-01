@@ -55,22 +55,24 @@ const StorybookMark = () => (
 )
 
 /* ======================================
- * 1. HERO
+ * 1. HERO + INTRO
  * ====================================== */
 
+/** Brand header — a single centred title on the dot field, per the Figma design. */
 export function Hero(): ReactNode {
+  return <PageHero dots variant="display" title="Equinor Design System" />
+}
+
+/** The lead and the two entry points, which the display hero no longer carries. */
+export function Intro(): ReactNode {
   return (
-    <PageHero
-      eyebrow="Equinor Design System"
-      title="Guidelines, tokens, and components for Equinor digital products"
-      lead={
-        <p>
-          EDS is Equinor&rsquo;s official design system. It provides shared
-          design tokens, UI components, and guidelines so teams can build
-          consistent, accessible digital products without starting from scratch.
-        </p>
-      }
-    >
+    <DocsSection>
+      <p className="docs-home-lead">
+        EDS is Equinor&rsquo;s official design system. It provides shared design
+        tokens, UI components, and guidelines so teams can build consistent,
+        accessible digital products without starting from scratch.
+      </p>
+
       <div className="docs-entry-grid">
         <Link
           to="docs/Next/about/getting-started/design/getting_started_design"
@@ -106,7 +108,7 @@ export function Hero(): ReactNode {
           </div>
         </Link>
       </div>
-    </PageHero>
+    </DocsSection>
   )
 }
 
@@ -174,7 +176,7 @@ const CATEGORIES = [
     title: 'Components',
     description:
       'Ready-to-use UI elements like buttons, inputs, dialogs, and more — with matching Figma and React implementations.',
-    to: 'docs/Next/components',
+    to: 'docs/Next/components/',
     badge: { label: 'In progress', tone: 'accent' },
   },
   {

@@ -252,6 +252,14 @@ html[class*='docs-doc-id-foundation/'][class*='docs-version-current'] {
   line-height: var(--docs-font-display-line-height);
 
   background-color: var(--docs-hero-bg);
+
+  /* Static dot grid. These bands come straight from markdown, so there is no
+     element to hang a <DotField> on and no spotlight — just the resting grid.
+     The title block and the subtitle are separate elements, so the grid
+     restarts at the subtitle's top edge rather than continuing the title
+     block's rhythm. */
+  background-image: var(--docs-dot-grid);
+  background-size: var(--docs-dot-pitch) var(--docs-dot-pitch);
 }
 
 [class*='docs-doc-id-foundation/'][class*='docs-version-current']
@@ -283,6 +291,14 @@ html[class*='docs-doc-id-foundation/'][class*='docs-version-current'] {
   color: var(--ifm-color-emphasis-700);
 
   background-color: var(--docs-hero-bg);
+
+  /* Static dot grid. These bands come straight from markdown, so there is no
+     element to hang a <DotField> on and no spotlight — just the resting grid.
+     The title block and the subtitle are separate elements, so the grid
+     restarts at the subtitle's top edge rather than continuing the title
+     block's rhythm. */
+  background-image: var(--docs-dot-grid);
+  background-size: var(--docs-dot-pitch) var(--docs-dot-pitch);
 }
 
 /* ---- Body content — constrained and centred via the shared gutter ---- */

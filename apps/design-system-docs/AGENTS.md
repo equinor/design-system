@@ -157,6 +157,17 @@ MDX docs use these without imports; React pages import them from
   story with local `useState` when the doc needs interactivity.
 - `DocsLanding` — wrapper that opts an MDX doc into the full-width landing
   layout (styled in `doc-layouts.css`)
+- `DotField` — the EDS dot grid for hero bands: 2px dots on an 18px pitch plus
+  a pointer-following spotlight. Render it as a child of the band and add
+  `docs-dot-host` to the band, which becomes its positioning context and drives
+  the hover. `Hero` wires this up behind its `dots` prop; the component-doc hero
+  band does it directly in the `DocItem/Layout` swizzle. Bands that come from
+  markdown and cannot host an element set
+  `background-image: var(--docs-dot-grid)` instead (resting grid, no
+  spotlight) — the foundation hero band in `doc-layouts.css` is the one case.
+  All the geometry lives in `--docs-dot-*` in `docs-components.css`; the two
+  gradients resolve at `:root`, so overriding `--docs-dot-size` per band has no
+  effect by design.
 
 New site components follow the root AGENTS.md recipe transposed to `docs-`
 prefixes; no default exports (Docusaurus swizzles and `Prerequisites` are the

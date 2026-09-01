@@ -18,6 +18,7 @@ export default function About(): JSX.Element {
       <main>
         <Hero
           title="About EDS"
+          dots
           lead={
             <>
               <p>

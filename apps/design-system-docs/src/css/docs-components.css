@@ -19,6 +19,10 @@
   --docs-font-display-size: 2.75rem; /* site-local: above header-4xl */
   --docs-font-display-line-height: 1.15; /* site-local */
 
+  /* Hero — the homepage brand title only. 112px per the Figma header, held
+     exactly at the 1440px design width and scaled down from there. */
+  --docs-font-hero-size: clamp(2.75rem, 7.78vw, 7rem); /* site-local */
+
   /* All roles reference the SEMANTIC token layer only. The header-*
      font-size names collide with the legacy bundle; the semantic typography
      bridge in theme-variables.css pins them to the Tokens Studio values. */
@@ -84,7 +88,7 @@
   --docs-card-text-line-height: var(--eds-typography-ui-sm-line-height);
   --docs-hero-space-block: 5rem;
   --docs-hero-min-height: 27rem;
-  --docs-section-space-block: 5rem;
+  --docs-section-space-block: 3rem;
   --docs-measure: 35rem;
   --docs-grid-gap: 1.5rem;
 
@@ -97,6 +101,36 @@
      dark mode by Infima's primary-palette scale — the same switch .about-hero
      uses. No manual [data-theme='dark'] override needed. */
   --docs-hero-bg: var(--ifm-color-primary-lightest);
+
+  /* Hero dot grid — 2px dots with 16px between them, per the Figma header
+     pattern. Consumed by <DotField> (dot-field.css) and, for the markdown
+     hero bands that cannot host an element, directly in doc-layouts.css.
+
+     The two gradients resolve here rather than per band: the pattern is the
+     same everywhere, and a gradient held in a custom property takes the colour
+     it had where the property was declared, so a per-band override of
+     --docs-dot-size or the accent token would not reach it. Both bundles key
+     their theme blocks off <html>, which is this element, so the dot colour
+     still flips with the colour scheme. */
+  --docs-dot-size: 2px;
+  --docs-dot-gap: 16px;
+  --docs-dot-pitch: calc(var(--docs-dot-size) + var(--docs-dot-gap));
+  --docs-dot-spotlight-radius: 10rem;
+  --docs-dot-grid: radial-gradient(
+    circle at center,
+    color-mix(
+        in srgb,
+        var(--eds-icon-interactive-accent-default) 20%,
+        transparent
+      )
+      calc(var(--docs-dot-size) / 2),
+    transparent calc(var(--docs-dot-size) / 2)
+  );
+  --docs-dot-grid-lit: radial-gradient(
+    circle at center,
+    var(--eds-icon-interactive-accent-default) calc(var(--docs-dot-size) / 2),
+    transparent calc(var(--docs-dot-size) / 2)
+  );
 }
 
 /* ----------------------------------------------------------------------

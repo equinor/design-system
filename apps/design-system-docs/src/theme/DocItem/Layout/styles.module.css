@@ -31,6 +31,10 @@
 
 /* Re-align the hero text with the doc content column below it. */
 .docHeroInner {
+  /* Above the dot field. */
+  position: relative;
+  z-index: 1;
+
   max-width: var(--ifm-container-width);
   margin-inline: auto;
   padding-inline: var(--ifm-spacing-horizontal, 1rem);

@@ -17,6 +17,7 @@ export default function GettingStarted(): JSX.Element {
     >
       <main>
         <Hero
+          dots
           title="Getting started"
           lead={
             <p>

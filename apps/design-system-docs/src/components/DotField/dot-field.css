@@ -1,0 +1,60 @@
+/**
+ * Dot-grid layer for hero bands. The tokens it reads (--docs-dot-*) live in
+ * docs-components.css, because doc-layouts.css consumes them too.
+ */
+
+/* Any band containing a <DotField>. The field positions against it, and the
+   spotlight is driven off its hover state. */
+.docs-dot-host {
+  position: relative;
+  overflow: hidden;
+}
+
+.docs-dot-field {
+  pointer-events: none;
+
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  background-image: var(--docs-dot-grid);
+  background-size: var(--docs-dot-pitch) var(--docs-dot-pitch);
+}
+
+/* Pointer-following spotlight: the same grid at full strength, revealed through
+   a radial mask centred on the cursor. Overlaying full-opacity dots on the
+   dimmed ones is what takes them back to 100%, and the mask's gradient is the
+   falloff. Hover-capable pointers only — on touch there is no cursor to follow,
+   so the grid stays at its resting 50%. */
+@media (hover: hover) {
+  .docs-dot-field::after {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+    background-image: var(--docs-dot-grid-lit);
+    background-size: var(--docs-dot-pitch) var(--docs-dot-pitch);
+
+    mask-image: radial-gradient(
+      circle var(--docs-dot-spotlight-radius) at var(--docs-dot-x, 50%)
+        var(--docs-dot-y, 50%),
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 55%) 45%,
+      transparent 100%
+    );
+
+    transition: opacity 240ms ease-out;
+  }
+
+  .docs-dot-host:hover .docs-dot-field::after {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-dot-field::after {
+    transition: none;
+  }
+}
