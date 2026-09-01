@@ -364,9 +364,15 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
  * FOOTER (swizzled — see src/theme/Footer)
  * ====================================== */
 .footer {
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 2rem;
   border-top: 1px solid rgb(255 255 255 / 20%);
+
   color: var(--eds-text-on-emphasis);
+
   background-color: var(--ifm-color-primary);
 }
 
@@ -378,7 +384,6 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
   /* auto-fit adapts 4 → 2 → 1 columns continuously — no breakpoints needed. */
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 2rem;
-  padding: 3rem 2rem 2rem;
 }
 
 .footer__column-title {
@@ -418,16 +423,8 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
 .footer__bottom {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-
-  padding: 1rem 2rem;
-  border-top: 1px solid rgb(255 255 255 / 20%);
-}
-
-.footer__copyright {
-  font-size: var(--docs-font-caption-size);
-  color: var(--eds-text-on-emphasis);
 }
 
 .footer__social {
@@ -443,10 +440,37 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
   border-radius: var(--ifm-global-radius);
 
   transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: var(--eds-background-interactive-accent-emphasis-hover);
+  }
 }
 
-.footer__social-link:hover {
-  background-color: var(--eds-background-interactive-accent-emphasis-hover);
+.footer__brand-link {
+  border-radius: var(--ifm-global-radius);
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: var(--eds-background-interactive-accent-emphasis-hover);
+  }
+
+  /* Uniform scale — height drives the size, width follows the 40:41 viewBox. */
+}
+
+.footer__logo {
+  width: auto;
+  height: 70px;
+  margin-top: 0;
+
+  & path {
+    fill: var(--eds-text-on-emphasis);
+  }
+}
+
+[data-theme='dark'] .footer__logo {
+  & path {
+    fill: #ff1243; /* hard code Energy Red from brand, so we dont get into trouble */
+  }
 }
 
 .footer__social-link svg {

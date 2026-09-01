@@ -5,6 +5,7 @@ import type { JSX, ReactNode } from 'react'
 
 import GithubSvg from '../../images/github-logo.svg'
 import FigmaSvg from '../../images/figma-logo.svg'
+import EquinorLogoSvg from '../../images/equinor-full-logo.svg'
 
 type FooterItem = {
   label: string
@@ -63,10 +64,9 @@ function Footer(): JSX.Element | null {
         ))}
       </div>
       <div className="footer__bottom">
-        <div className="footer__copyright">{copyright}</div>
         <div className="footer__social">
           <Link
-            to="https://www.figma.com/"
+            to="https://www.figma.com/@equinorasa"
             className="footer__social-link"
             aria-label="Figma (opens in new tab)"
             target="_blank"
@@ -84,6 +84,19 @@ function Footer(): JSX.Element | null {
             <GithubSvg />
           </Link>
         </div>
+        <Link
+          to="https://www.equinor.com"
+          className="footer__brand-link"
+          aria-label="Equinor (opens in new tab)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <EquinorLogoSvg
+            className="footer__logo"
+            role="img"
+            aria-label="Equinor"
+          />
+        </Link>
       </div>
     </footer>
   )
