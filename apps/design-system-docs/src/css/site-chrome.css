@@ -234,9 +234,9 @@ html[class*='docs-doc-id-foundation/'] .navbar__link[href*='/foundation'] {
     inset !important;
 }
 
-/* Mark Components navbar link as active on Components pages. Reference docs get
-   this natively via the componentsSidebar, but the /components landing page uses
-   displayed_sidebar: null, so it needs this fallback. */
+/* Mark Components navbar link as active on Components pages. The docSidebar
+   navbar item already does this for every doc in the componentsSidebar; this
+   keeps it robust if a components doc is ever left out of that sidebar. */
 html[class*='docs-doc-id-components/'] .navbar__link[href*='/components/'] {
   color: var(--eds-text-accent);
   box-shadow: 0 -2px 0 0 var(--eds-border-interactive-accent-emphasis-default)

@@ -29,7 +29,10 @@
   background-color: var(--docs-hero-bg);
 }
 
-/* Re-align the hero text with the doc content column below it. */
+/* Re-align the hero text with the doc content column below it. Reproduces
+ * Docusaurus's `main > .container` (the hero escapes it via the breakout above),
+ * and the inner `.row`/`.col` chain is real Infima markup — so the hero text
+ * tracks `.theme-doc-markdown` at every viewport instead of approximating it. */
 .docHeroInner {
   /* Above the dot field. */
   position: relative;
@@ -40,6 +43,13 @@
   padding-inline: var(--ifm-spacing-horizontal, 1rem);
 }
 
+/* Matches .docItemCol below: the doc column is 75%, the TOC takes the rest. */
+@media (width >= 997px) {
+  .docHeroCol {
+    max-width: 75%;
+  }
+}
+
 .docHeroTitle {
   margin: 0;
   font-size: var(--docs-font-display-size);
@@ -47,12 +57,9 @@
 }
 
 .docHeroLead {
-  max-width: 46rem;
   margin: 0.75rem 0 0;
-
   font-size: var(--docs-font-lead-size);
   line-height: var(--docs-prose-line-height);
-  color: var(--ifm-color-emphasis-700);
 }
 
 /* On mobile the sidebar is an off-canvas drawer, so the band is edge-to-edge. */
@@ -77,5 +84,15 @@
     margin-inline: calc(
       (100% - (100vw - var(--doc-sidebar-hidden-width, 30px))) / 2
     );
+  }
+
+  /* Collapsing the sidebar also widens the doc content: Docusaurus puts
+   * `.docItemWrapperEnhanced` on `main > .container`, raising its cap to
+   * `--ifm-container-width + --doc-sidebar-width` so the body spends the
+   * reclaimed space. `.docHeroInner` stands in for that container, so it has to
+   * grow by the same amount — otherwise it stays at the narrow cap and the hero
+   * text sits inset from `.theme-doc-markdown` by half the sidebar width. */
+  [class*='docMainContainerEnhanced'] .docHeroInner {
+    max-width: calc(var(--ifm-container-width) + var(--doc-sidebar-width, 0px));
   }
 }

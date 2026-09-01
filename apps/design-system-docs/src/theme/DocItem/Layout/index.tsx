@@ -51,10 +51,17 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
         <header className={clsx(styles.docHero, 'docs-dot-host')}>
           <DotField />
           <div className={styles.docHeroInner}>
-            <h1 className={styles.docHeroTitle}>{metadata.title}</h1>
-            {metadata.description && (
-              <p className={styles.docHeroLead}>{metadata.description}</p>
-            )}
+            {/* Mirrors the `.row` / `.col` chain the doc body below uses, so the
+                hero text lines up with `.theme-doc-markdown` exactly — same
+                gutters, same 75% column when the TOC takes the remaining 25%. */}
+            <div className="row">
+              <div className={clsx('col', !docTOC.hidden && styles.docHeroCol)}>
+                <h1 className={styles.docHeroTitle}>{metadata.title}</h1>
+                {metadata.description && (
+                  <p className={styles.docHeroLead}>{metadata.description}</p>
+                )}
+              </div>
+            </div>
           </div>
         </header>
       )}
