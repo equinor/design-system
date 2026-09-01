@@ -5,7 +5,7 @@
     --_font-size: var(--eds-typography-ui-body-md-font-size);
     --_line-height: var(--eds-typography-ui-body-md-line-height-default);
 
-    /* Dot sizes have no token equivalent in the design — hardcoded per Figma spec */
+    /* Dot sizes have no token equivalent — hardcoded per Figma spec (node 9319-5410) */
     --_dot-size: 12px;
 
     /* Colour tokens — overridden for high emphasis; --_color consumed by .initial */
@@ -25,14 +25,14 @@
 
     background-color: var(--_bg);
 
-    &[data-size='sm'] {
+    &[data-avatar-size='sm'] {
       --_size: var(--eds-sizing-icon-xs); /* 16px */
       --_font-size: var(--eds-typography-ui-body-xs-font-size);
       --_line-height: var(--eds-typography-ui-body-xs-line-height-default);
       --_dot-size: 8px;
     }
 
-    &[data-size='md'] {
+    &[data-avatar-size='md'] {
       --_size: var(--eds-sizing-icon-lg); /* 24px */
       --_font-size: var(--eds-typography-ui-body-sm-font-size);
       --_line-height: var(--eds-typography-ui-body-sm-line-height-default);
@@ -72,7 +72,7 @@
     & .notification {
       position: absolute;
 
-      /* -2px overlap — no token equivalent, intentional per Figma spec */
+      /* -2px overlap — no token equivalent, per Figma spec (node 9319-5410) */
       right: -2px;
       bottom: -2px;
 
@@ -82,6 +82,23 @@
       border-radius: var(--eds-spacing-border-radius-pill);
 
       background-color: var(--eds-color-bg-fill-emphasis-default);
+    }
+
+    /* Visually-hidden span announces notification when the div carries no aria-label */
+    & .notification-label {
+      position: absolute;
+
+      overflow: hidden;
+
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+
+      white-space: nowrap;
+
+      clip: rect(0, 0, 0, 0);
     }
   }
 
@@ -120,20 +137,27 @@
 
     &[data-layout='vertical'] {
       & .content {
-        flex: initial;
-        flex-shrink: 0;
+        flex: 1 1 auto;
+        min-width: 0;
       }
 
       & .names {
-        flex: initial;
+        flex: 1 1 auto;
         flex-direction: row;
-        flex-shrink: 0;
 
         /* Row layout: use horizontal spacing between inline name and email */
         gap: var(--eds-selectable-space-horizontal);
         align-items: center;
 
+        min-width: 0;
+
         white-space: nowrap;
+      }
+
+      & .meta {
+        overflow: hidden;
+        min-width: 0;
+        text-overflow: ellipsis;
       }
     }
 
@@ -152,22 +176,6 @@
     & .meta {
       color: var(--eds-color-text-subtle);
       overflow-wrap: break-word;
-    }
-
-    & .notification-label {
-      position: absolute;
-
-      overflow: hidden;
-
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      border: 0;
-
-      white-space: nowrap;
-
-      clip: rect(0, 0, 0, 0);
     }
 
     & .slot-right {
