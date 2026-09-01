@@ -5,9 +5,10 @@
   margin-top: 0;
 }
 
-@media (min-width: 997px) {
+@media (width >= 997px) {
   .docItemCol {
     max-width: 75% !important;
+    padding-top: 1rem;
   }
 }
 
@@ -21,8 +22,10 @@
  * ====================================== */
 .docHero {
   width: calc(100vw - var(--doc-sidebar-width, 0px));
+  min-height: 300px;
   margin-inline: calc((100% - (100vw - var(--doc-sidebar-width, 0px))) / 2);
   padding-block: 4rem 3rem;
+
   background-color: var(--docs-hero-bg);
 }
 
@@ -42,16 +45,33 @@
 .docHeroLead {
   max-width: 46rem;
   margin: 0.75rem 0 0;
-  color: var(--ifm-color-emphasis-700);
+
   font-size: var(--docs-font-lead-size);
   line-height: var(--docs-prose-line-height);
+  color: var(--ifm-color-emphasis-700);
 }
 
 /* On mobile the sidebar is an off-canvas drawer, so the band is edge-to-edge. */
-@media (max-width: 996px) {
+@media (width <= 996px) {
   .docHero {
     width: 100vw;
     margin-inline: calc((100% - 100vw) / 2);
     padding-block: 2.5rem 2rem;
+  }
+}
+
+/* Collapsed desktop sidebar (themeConfig.docs.sidebar.hideable). Docusaurus
+ * widens `docMainContainer` down to a narrow rail but leaves
+ * `--doc-sidebar-width` at its expanded value, so the band above would keep
+ * subtracting the full sidebar and float inset with a gap on both sides.
+ * Subtract the rail width instead. The ancestor is Docusaurus's own CSS
+ * module class, so it is matched by attribute — css-loader only rewrites the
+ * class selectors this file owns, and the hash makes a literal name unusable. */
+@media (width >= 997px) {
+  [class*='docMainContainerEnhanced'] .docHero {
+    width: calc(100vw - var(--doc-sidebar-hidden-width, 30px));
+    margin-inline: calc(
+      (100% - (100vw - var(--doc-sidebar-hidden-width, 30px))) / 2
+    );
   }
 }

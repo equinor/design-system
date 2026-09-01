@@ -53,7 +53,7 @@ const config: Config = {
             '**/__tests__/**',
             '**/tone-guide/**',
           ],
-          breadcrumbs: true,
+          breadcrumbs: false,
           editUrl:
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
           versions: {
@@ -229,6 +229,19 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/equinor.png',
+    docs: {
+      sidebar: {
+        // Let readers collapse the sidebar on desktop to give a component doc
+        // the full width — useful on the wide story canvases. The control is
+        // desktop-only (below 997px the sidebar is already a drawer). The
+        // collapsed state is React state, not stored: it survives client-side
+        // navigation between docs but resets on a hard reload. This is a
+        // themeConfig-level flag, so it applies to every doc sidebar including
+        // the 1.1.0 archive — consistent with chrome being version-independent
+        // here.
+        hideable: true,
+      },
+    },
     navbar: {
       title: '',
       logo: {
