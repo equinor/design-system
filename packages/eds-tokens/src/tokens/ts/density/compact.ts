@@ -8,7 +8,7 @@ export const density = {
     none: 0,
     pill: 9999,
     rounded: 2,
-    roundedOuter: 4,
+    roundedOuter: 3,
   },
   spacing: {
     twoXl: 24,

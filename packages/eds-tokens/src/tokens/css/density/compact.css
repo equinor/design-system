@@ -2,7 +2,7 @@
   --eds-density-corner-radius-none: var(--eds-primitives-spacing-0);
   --eds-density-corner-radius-pill: 9999px;
   --eds-density-corner-radius-rounded: var(--eds-primitives-spacing-12);
-  --eds-density-corner-radius-rounded-outer: var(--eds-primitives-spacing-25);
+  --eds-density-corner-radius-rounded-outer: calc(var(--eds-density-corner-radius-rounded) + var(--eds-primitives-spacing-6));
   --eds-density-spacing-2xl: var(--eds-primitives-spacing-150);
   --eds-density-spacing-2xs: var(--eds-primitives-spacing-25);
   --eds-density-spacing-3xl: var(--eds-primitives-spacing-175);

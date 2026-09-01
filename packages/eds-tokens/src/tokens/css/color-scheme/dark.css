@@ -14,12 +14,6 @@
   --eds-accent-7: var(--eds-dark-moss-green-7);
   --eds-accent-8: var(--eds-dark-moss-green-8);
   --eds-accent-9: var(--eds-dark-moss-green-9);
-  --eds-bg-backdrop: var(--eds-dark-north-sea-7);
-  --eds-bg-disabled: var(--eds-neutral-3);
-  --eds-bg-floating: var(--eds-dark-north-sea-2);
-  --eds-bg-input: var(--eds-dark-north-sea-1);
-  --eds-border-disabled: var(--eds-neutral-7);
-  --eds-border-focus: var(--eds-dark-blue-7);
   --eds-danger-1: var(--eds-dark-red-1);
   --eds-danger-10: var(--eds-dark-red-10);
   --eds-danger-11: var(--eds-dark-red-11);
@@ -101,6 +95,8 @@
   --eds-dataviz-seq-5: var(--eds-dark-dataviz-seq-5);
   --eds-dataviz-seq-6: var(--eds-dark-dataviz-seq-6);
   --eds-dataviz-seq-7: var(--eds-dark-dataviz-seq-7);
+  --eds-elevation-ambient: rgb(0 0 0 / 0.12);
+  --eds-elevation-key: rgb(0 0 0 / 0.2);
   --eds-info-1: var(--eds-dark-blue-1);
   --eds-info-10: var(--eds-dark-blue-10);
   --eds-info-11: var(--eds-dark-blue-11);
@@ -146,8 +142,6 @@
   --eds-success-7: var(--eds-dark-green-7);
   --eds-success-8: var(--eds-dark-green-8);
   --eds-success-9: var(--eds-dark-green-9);
-  --eds-text-disabled: var(--eds-neutral-7);
-  --eds-text-link: var(--eds-dark-blue-8);
   --eds-warning-1: var(--eds-dark-orange-1);
   --eds-warning-10: var(--eds-dark-orange-10);
   --eds-warning-11: var(--eds-dark-orange-11);
