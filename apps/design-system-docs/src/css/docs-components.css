@@ -24,9 +24,7 @@
      bridge in theme-variables.css pins them to the Tokens Studio values. */
   /* Section headings (h2 role) */
   --docs-font-section-size: var(--eds-typography-header-3xl-font-size);
-  --docs-font-section-line-height: var(
-    --eds-typography-header-3xl-line-height
-  );
+  --docs-font-section-line-height: var(--eds-typography-header-3xl-line-height);
 
   /* Sub-section headings (h3 role) */
   --docs-font-subsection-size: var(--eds-typography-header-xl-font-size);
@@ -74,7 +72,8 @@
    * outline, ui/bolder/md title + ui/sm secondary content.
    * ------------------------------------------------------------------ */
   --docs-card-bg: var(--eds-background-floating);
-  --docs-card-border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  --docs-card-border: 1px solid
+    var(--eds-border-interactive-neutral-muted-default);
   --docs-card-radius: var(--eds-corner-radius-rounded);
   --docs-card-padding: var(--eds-spacing-sm);
   --docs-card-gap: var(--eds-spacing-4xs);

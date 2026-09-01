@@ -10,12 +10,12 @@ specific to this app.
 
 A versioned Docusaurus site documenting EDS 2.0. Two doc versions exist:
 
-| Version | Content dir | URL path | Status |
-| --- | --- | --- | --- |
-| `current` (labelled **2.0.0-beta**) | `docs/` | `/docs/Next/…` (capital N, baked into footer links) | the active redesign |
-| `1.1.0` | `versioned_docs/version-1.1.0/` | `/docs/…` | **frozen archive — never restyle or edit its rendering** |
+| Version                             | Content dir                     | URL path                                            | Status                                                   |
+| ----------------------------------- | ------------------------------- | --------------------------------------------------- | -------------------------------------------------------- |
+| `current` (labelled **2.0.0-beta**) | `docs/`                         | `/docs/Next/…` (capital N, baked into footer links) | the active redesign                                      |
+| `1.1.0`                             | `versioned_docs/version-1.1.0/` | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
 
-**Version scoping is the #1 footgun.** Anything that styles doc *content*
+**Version scoping is the #1 footgun.** Anything that styles doc _content_
 must be scoped so 1.1.0 keeps its stock rendering:
 
 - CSS: pair `html[class*='docs-version-current']` (current docs) with
@@ -44,12 +44,12 @@ docusaurus.config.ts       aliases + webpack rules (see Config)
 
 ## Global CSS — four files, strict responsibilities
 
-| File | Owns |
-| --- | --- |
-| `src/css/theme-variables.css` | token/font imports, every `--ifm-*` override, the site typography scale. Variables only — no element rules. |
+| File                          | Owns                                                                                                                         |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `src/css/theme-variables.css` | token/font imports, every `--ifm-*` override, the site typography scale. Variables only — no element rules.                  |
 | `src/css/docs-components.css` | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`) |
-| `src/css/site-chrome.css` | navbar, sidebar, TOC, breadcrumbs, footer rules |
-| `src/css/doc-layouts.css` | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block |
+| `src/css/site-chrome.css`     | navbar, sidebar, TOC, breadcrumbs, footer rules                                                                              |
+| `src/css/doc-layouts.css`     | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block             |
 
 Component styling is colocated (`src/components/X/x.css`). Convention:
 **plain CSS files, not CSS modules**, `docs-` prefixed root class, BEM-style
@@ -103,18 +103,18 @@ bundles key on. New colours must come from tokens so they flip automatically.
 `docs-components.css` defines the `--docs-font-*` roles; everything consumes
 them. Never hardcode font sizes/weights/line-heights in component CSS.
 
-| Role | Variable | Token (desktop) |
-| --- | --- | --- |
-| Display (heroes) | `--docs-font-display-*` | site-local 44px/1.15 (above the token scale); steps to `header-4xl` 32px on phones |
-| h1 markdown | `--ifm-h1-font-size` | `header-4xl` 32px |
-| h2 / sections | `--docs-font-section-*` | `header-3xl` 24/32 |
-| h3 / sub-sections | `--docs-font-subsection-*` | `header-xl` 21/24 |
-| Card titles / h4 | `--docs-font-card-title-*` | `header-lg` 18/24 |
-| Lead paragraphs | `--docs-font-lead-size` | `ui-xl` 18px |
-| Body prose | `--docs-font-body-size` + `--docs-prose-line-height` | `ui-lg` 16px, lh 1.6 (site-local) |
-| Secondary text | `--docs-font-body-sm-*` | `ui-md` 14/20 |
-| Captions/badges | `--docs-font-caption-*` | `ui-sm` 12/16 |
-| Emphasis weight | `--docs-font-weight-emphasis` | `bolder` = 500 (never 600/700) |
+| Role              | Variable                                             | Token (desktop)                                                                    |
+| ----------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Display (heroes)  | `--docs-font-display-*`                              | site-local 44px/1.15 (above the token scale); steps to `header-4xl` 32px on phones |
+| h1 markdown       | `--ifm-h1-font-size`                                 | `header-4xl` 32px                                                                  |
+| h2 / sections     | `--docs-font-section-*`                              | `header-3xl` 24/32                                                                 |
+| h3 / sub-sections | `--docs-font-subsection-*`                           | `header-xl` 21/24                                                                  |
+| Card titles / h4  | `--docs-font-card-title-*`                           | `header-lg` 18/24                                                                  |
+| Lead paragraphs   | `--docs-font-lead-size`                              | `ui-xl` 18px                                                                       |
+| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `ui-lg` 16px, lh 1.6 (site-local)                                                  |
+| Secondary text    | `--docs-font-body-sm-*`                              | `ui-md` 14/20                                                                      |
+| Captions/badges   | `--docs-font-caption-*`                              | `ui-sm` 12/16                                                                      |
+| Emphasis weight   | `--docs-font-weight-emphasis`                        | `bolder` = 500 (never 600/700)                                                     |
 
 Docusaurus re-declares heading size vars **on the markdown heading elements**
 (`.markdown h1:first-child`, `.markdown > h2/h3`), so overrides must be

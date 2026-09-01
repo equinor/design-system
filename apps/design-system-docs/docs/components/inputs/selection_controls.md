@@ -8,7 +8,7 @@ description: 'Selection controls allow users to select options, make decisions, 
 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem'}}>
   <div>
     <strong>Checkbox</strong>
-    
+
 </div>
   <div>
     <strong>Radio</strong>

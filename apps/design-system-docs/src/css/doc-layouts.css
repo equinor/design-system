@@ -288,7 +288,14 @@ html[class*='docs-doc-id-foundation/'][class*='docs-version-current'] {
 /* ---- Body content — constrained and centred via the shared gutter ---- */
 [class*='docs-doc-id-foundation/'][class*='docs-version-current']
   .theme-doc-markdown:not(:has(.docs-landing))
-  > *:not(h1, header, .admonition, .theme-admonition, .docs-landing, .sb-iframe) {
+  > *:not(
+    h1,
+    header,
+    .admonition,
+    .theme-admonition,
+    .docs-landing,
+    .sb-iframe
+  ) {
   padding-right: var(--docs-gutter);
   padding-left: var(--docs-gutter);
 }

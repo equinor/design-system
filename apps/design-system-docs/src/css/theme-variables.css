@@ -23,7 +23,7 @@
 @import '@equinor/eds-tokens/next/css/variables.css';
 
 /* Equinor brand font */
-@import "https://cdn.eds.equinor.com/font/equinor-font.css";
+@import 'https://cdn.eds.equinor.com/font/equinor-font.css';
 
 /* Inter is self-hosted (the Equinor CDN only serves the Equinor font).
    Static weights register as family 'Inter', matching --eds-family-ui. */
@@ -138,7 +138,7 @@
   /* Navbar styling */
   --ifm-navbar-shadow: none;
   --ifm-navbar-height: 68px;
-  
+
   /* Tab text colours from the EDS Tabs spec (active gets --eds-text-accent
      in site-chrome.css). */
   --ifm-navbar-link-color: var(--eds-text-primary);

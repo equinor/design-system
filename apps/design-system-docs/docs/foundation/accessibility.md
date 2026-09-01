@@ -8,32 +8,30 @@ The UI components for all Equinor's internal digital interfaces are built to mee
 
 Accessibility ensures that users of different abilities can understand, navigate, interact with and contribute to the digital interface in a meaningful way. This means:
 
--   Keyboard interaction alternatives for all mouse-based actions are provided
--   All button and input fields are properly identified 
--   Images, SVGs and videos have text-based alternatives
--   All components are built to convey their identity, operation model and state to assistive technologies
-    
+- Keyboard interaction alternatives for all mouse-based actions are provided
+- All button and input fields are properly identified
+- Images, SVGs and videos have text-based alternatives
+- All components are built to convey their identity, operation model and state to assistive technologies
 
 ## What are different abilities
 
 There are many different types of abilities that need consideration:
 
--   Age
--   Blindness
--   Low vision
--   Colour-blindness
--   Hearing disabilities
--   Physical disabilities
--   Cognitive disabilities
--   Situational disabilities (such as a broken arm)
-    
+- Age
+- Blindness
+- Low vision
+- Colour-blindness
+- Hearing disabilities
+- Physical disabilities
+- Cognitive disabilities
+- Situational disabilities (such as a broken arm)
 
 There are also different types of situations that need consideration:
 
--   Physical location
--   Limited screen size
--   Lighting issues
-    
+- Physical location
+- Limited screen size
+- Lighting issues
+
 ## Guidelines
 
 ### Spacing
@@ -100,29 +98,29 @@ Here are some resources to help validate your work:
 <IconCardGrid columns={3}>
 
 <IconCard
-  to="https://webaim.org/"
-  title="WebAIM"
-  description="Web accessibility evaluation tools and resources"
-  badge={{ label: 'External' }}
-  icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
+to="https://webaim.org/"
+title="WebAIM"
+description="Web accessibility evaluation tools and resources"
+badge={{ label: 'External' }}
+icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
 />
 
 <IconCard
-  to="https://aremycolorsaccessible.com/"
-  title="Are my colours accessible?"
-  description="Check colour contrast ratios for WCAG compliance"
-  badge={{ label: 'External' }}
-  icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
+to="https://aremycolorsaccessible.com/"
+title="Are my colours accessible?"
+description="Check colour contrast ratios for WCAG compliance"
+badge={{ label: 'External' }}
+icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
 />
 
 <IconCard
-  to="https://a11yproject.com/"
-  title="The A11Y Project"
-  description="Community-driven accessibility knowledge base"
-  badge={{ label: 'External' }}
-  icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
+to="https://a11yproject.com/"
+title="The A11Y Project"
+description="Community-driven accessibility knowledge base"
+badge={{ label: 'External' }}
+icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
 />
 
 </IconCardGrid>
 
-[WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"  
+[WCAG]: https://www.w3.org/TR/WCAG21/ 'WCAG 2.1'
