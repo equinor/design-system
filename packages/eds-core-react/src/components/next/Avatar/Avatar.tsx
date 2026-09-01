@@ -1,11 +1,11 @@
 import { forwardRef } from 'react'
 import type { AvatarProps } from './Avatar.types'
+import { deriveInitials } from './utils'
 
-function deriveInitials(name: string): string {
-  const words = name.trim().split(/\s+/)
-  if (!words[0]) return ''
-  if (words.length === 1) return words[0][0].toUpperCase()
-  return (words[0][0] + words[words.length - 1][0]).toUpperCase()
+const pixelSizeMap: Record<'sm' | 'md' | 'lg', number> = {
+  sm: 16,
+  md: 24,
+  lg: 32,
 }
 
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
@@ -28,19 +28,26 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   const label =
     !src && name ? (notification ? `${name}, notification` : name) : undefined
   const a11yProps = label ? { role: 'img' as const, 'aria-label': label } : {}
+  const px = pixelSizeMap[size]
 
   return (
     <div
       ref={ref}
       className={classes}
       data-color-appearance="accent"
-      data-size={size}
+      data-avatar-size={size}
       data-emphasis={emphasis}
       {...a11yProps}
       {...rest}
     >
       {src ? (
-        <img className="photo" src={src} alt={alt ?? name ?? ''} />
+        <img
+          className="photo"
+          src={src}
+          alt={alt ?? name ?? ''}
+          width={px}
+          height={px}
+        />
       ) : (
         resolvedInitial && (
           <span className="initial" aria-hidden="true">
@@ -54,6 +61,10 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
           data-color-appearance="success"
           aria-hidden="true"
         />
+      )}
+      {/* Announce notification to screen readers when the div carries no aria-label */}
+      {notification && !label && (
+        <span className="notification-label">Notification</span>
       )}
     </div>
   )

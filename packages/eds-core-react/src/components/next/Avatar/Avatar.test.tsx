@@ -61,7 +61,7 @@ describe('Avatar (next)', () => {
     it('applies size attribute', () => {
       render(<Avatar data-testid="eds-avatar" size="sm" />)
       expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
-        'data-size',
+        'data-avatar-size',
         'sm',
       )
     })
@@ -102,6 +102,16 @@ describe('Avatar (next)', () => {
         'aria-label',
         'Ada Lovelace, notification',
       )
+    })
+
+    it('renders visually-hidden Notification text when notification is true but no name', () => {
+      render(<Avatar data-testid="eds-avatar" notification />)
+      expect(screen.getByText('Notification')).toBeInTheDocument()
+    })
+
+    it('does not render visually-hidden Notification text when name is provided (aria-label covers it)', () => {
+      render(<Avatar name="Ada Lovelace" notification />)
+      expect(screen.queryByText('Notification')).not.toBeInTheDocument()
     })
   })
 
@@ -175,7 +185,9 @@ describe('AvatarNameLabel (next)', () => {
           <span data-testid="slot-content">icon</span>
         </AvatarNameLabel>,
       )
-      expect(screen.getByTestId('slot-content')).toBeInTheDocument()
+      const slotContent = screen.getByTestId('slot-content')
+      expect(slotContent).toBeInTheDocument()
+      expect(slotContent.closest('.slot-right')).toBeInTheDocument()
     })
 
     it('does not render slot right when no children', () => {
@@ -196,17 +208,16 @@ describe('AvatarNameLabel (next)', () => {
       expect(screen.getByText('Ada')).toBeInTheDocument()
     })
 
-    // size and emphasis flow to the inner Avatar via props — verified visually
-    // and by TypeScript. Testing Library's no-node-access rule prevents querying
-    // the inner div's data attributes directly; the type system enforces the wiring.
-    it('renders with size prop without error', () => {
-      render(<AvatarNameLabel name="Ada" size="sm" />)
-      expect(screen.getByText('Ada')).toBeInTheDocument()
+    it('passes size to the inner Avatar', () => {
+      render(<AvatarNameLabel name="Ada Lovelace" size="sm" />)
+      const avatar = screen.getByText('AL').closest('.eds-avatar')
+      expect(avatar).toHaveAttribute('data-avatar-size', 'sm')
     })
 
-    it('renders with emphasis prop without error', () => {
-      render(<AvatarNameLabel name="Ada" emphasis="high" />)
-      expect(screen.getByText('Ada')).toBeInTheDocument()
+    it('passes emphasis to the inner Avatar', () => {
+      render(<AvatarNameLabel name="Ada Lovelace" emphasis="high" />)
+      const avatar = screen.getByText('AL').closest('.eds-avatar')
+      expect(avatar).toHaveAttribute('data-emphasis', 'high')
     })
   })
 
