@@ -31,25 +31,27 @@ must be scoped so 1.1.0 keeps its stock rendering:
 ```
 docs/                      current-version content (md/mdx)
 versioned_docs/1.1.0/      frozen archive — do not touch
-src/css/                   the four global stylesheets (see below)
+src/css/                   the five global stylesheets (see below)
 src/components/            shared site components (docs- prefixed CSS)
 src/theme/                 Docusaurus swizzles + MDXComponents registry
 src/pages/                 unversioned React pages (index, foundation, …)
-src/clientModules/         syncColorScheme (data-theme → data-color-scheme)
+src/clientModules/         syncColorScheme (data-theme → data-color-scheme),
+                           pageTransitions (View Transitions on route change)
 scripts/                   check-viewport-overflow.mjs regression gate
 sidebars.ts                hand-maintained; category link docs must NOT be
                            repeated in their own items array
 docusaurus.config.ts       aliases + webpack rules (see Config)
 ```
 
-## Global CSS — four files, strict responsibilities
+## Global CSS — five files, strict responsibilities
 
-| File                          | Owns                                                                                                                         |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `src/css/theme-variables.css` | token/font imports, every `--ifm-*` override, the site typography scale. Variables only — no element rules.                  |
-| `src/css/docs-components.css` | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`) |
-| `src/css/site-chrome.css`     | navbar, sidebar, TOC, breadcrumbs, footer rules                                                                              |
-| `src/css/doc-layouts.css`     | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block             |
+| File                           | Owns                                                                                                                                         |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables only — no element rules.                                  |
+| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`)                 |
+| `src/css/site-chrome.css`      | navbar, sidebar, TOC, breadcrumbs, footer rules                                                                                              |
+| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block                             |
+| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts` |
 
 Component styling is colocated (`src/components/X/x.css`). Convention:
 **plain CSS files, not CSS modules**, `docs-` prefixed root class, BEM-style
@@ -182,6 +184,9 @@ the 1.1.0 archive imports it).
 - `Footer` — full custom footer; styled via Infima `footer__*` classes in
   `site-chrome.css`.
 - `MDXComponents` — the global registry (wrap).
+- `Root` — capture-phase click interceptor that runs internal navigations
+  inside a View Transition (`src/utils/pageTransitions.ts` holds the shared
+  state; the `pageTransitions` client module settles it on route commit).
 - `SearchBar` — wrapper div (`.docs-search-bar`) giving a stable styling
   scope over the search-local plugin; selectors mirror plugin DOM and may
   need adjusting on plugin upgrades.

@@ -28,7 +28,10 @@ const config: Config = {
     },
   },
 
-  clientModules: ['./src/clientModules/syncColorScheme.ts'],
+  clientModules: [
+    './src/clientModules/syncColorScheme.ts',
+    './src/clientModules/pageTransitions.ts',
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -70,6 +73,7 @@ const config: Config = {
             './src/css/docs-components.css',
             './src/css/site-chrome.css',
             './src/css/doc-layouts.css',
+            './src/css/page-transitions.css',
           ],
         },
         sitemap: {
