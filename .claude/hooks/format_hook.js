@@ -45,6 +45,15 @@ async function main() {
   if (ext === '.css' && filePath.includes('/components/next/')) {
     run('./node_modules/.bin/stylelint', ['--fix', '--cache', filePath])
   }
+
+  // Prettier for the types the linters above don't format. eslint --fix
+  // already applies it to .ts/.tsx through eslint-plugin-prettier, and
+  // stylelint only fixes ordering and notation — not Prettier's whitespace —
+  // so CSS needs this pass too, after stylelint. Prettier reads
+  // .prettierignore itself, so ignored paths (e.g. *.mdx) stay untouched.
+  if (['.css', '.md'].includes(ext)) {
+    run('./node_modules/.bin/prettier', ['--write', '--ignore-unknown', filePath])
+  }
 }
 
 main()

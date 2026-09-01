@@ -14,7 +14,10 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "prettier.prettierPath": "",
+  // No "prettier.prettierPath": that setting is an explicit override for where
+  // the extension loads Prettier from, and it was set to an empty string. With
+  // prettier a root devDependency the extension resolves the workspace copy on
+  // its own, which is what keeps the editor on the same version as the hooks.
   "typescript.tsdk": "node_modules/typescript/lib",
   "task.allowAutomaticTasks": "off",
   "[bicep]": {
