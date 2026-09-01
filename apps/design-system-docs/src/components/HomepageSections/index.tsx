@@ -66,13 +66,11 @@ export function Hero(): ReactNode {
 /** The lead and the two entry points, which the display hero no longer carries. */
 export function Intro(): ReactNode {
   return (
-    <DocsSection>
-      <p className="docs-home-lead">
-        EDS is Equinor&rsquo;s official design system. It provides shared design
-        tokens, UI components, and guidelines so teams can build consistent,
-        accessible digital products without starting from scratch.
-      </p>
-
+    <DocsSection
+      title="Get started"
+      subtitle="Dive right in to the Equinor Design System, get started with design and development."
+      tone="muted"
+    >
       <div className="docs-entry-grid">
         <Link
           to="docs/Next/about/getting-started/design/getting_started_design"
@@ -113,54 +111,7 @@ export function Intro(): ReactNode {
 }
 
 /* ======================================
- * 2. WHY EDS
- * ====================================== */
-
-const PRINCIPLES = [
-  {
-    icon: puzzle,
-    title: 'Flexible and adaptable',
-    description:
-      'Components work together seamlessly whilst accommodating diverse use cases across different projects.',
-  },
-  {
-    icon: accessible,
-    title: 'Accessible by design',
-    description:
-      'Inclusive design from the start. Every element supports assistive technologies and meets WCAG 2.1 AA.',
-  },
-  {
-    icon: touch,
-    title: 'Purposeful interaction',
-    description:
-      'Motion and interactive elements serve clear functions, helping users navigate without unnecessary decoration.',
-  },
-  {
-    icon: desktop_mac,
-    title: 'Cross-platform consistency',
-    description:
-      'Web, mobile, or desktop — EDS maintains the same visual language and interaction patterns everywhere.',
-  },
-] satisfies IconCardProps[]
-
-export function WhyEds(): ReactNode {
-  return (
-    <DocsSection
-      title="Why EDS"
-      subtitle="Principles that guide how EDS is built — and how it helps your team ship better products."
-      tone="muted"
-    >
-      <IconCardGrid columns={4}>
-        {PRINCIPLES.map((principle) => (
-          <IconCard key={principle.title} {...principle} />
-        ))}
-      </IconCardGrid>
-    </DocsSection>
-  )
-}
-
-/* ======================================
- * 3. BROWSE BY CATEGORY
+ *  BROWSE BY CATEGORY
  * ====================================== */
 
 const CATEGORIES = [
@@ -205,7 +156,7 @@ export function DesignLanguage(): ReactNode {
 }
 
 /* ======================================
- * 4. RESOURCES
+ *  RESOURCES
  * ====================================== */
 
 export function Resources(): ReactNode {
@@ -264,7 +215,7 @@ export function Resources(): ReactNode {
 }
 
 /* ======================================
- * 5. CONTRIBUTE
+ *  CONTRIBUTE
  * ====================================== */
 
 export function Contribute(): ReactNode {
@@ -272,7 +223,6 @@ export function Contribute(): ReactNode {
     <CtaSection
       title="Shape the system"
       cta={{ label: 'Start contributing', to: githubUrl }}
-      tone="muted"
     >
       EDS is built by the teams that use it. Report issues, suggest
       improvements, or contribute code and design. Every contribution helps the
