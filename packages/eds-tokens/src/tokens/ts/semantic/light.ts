@@ -5,11 +5,10 @@
 
 export const semantic = {
   background: {
+    backdrop: '#a4a4a4',
     canvas: '#f8f8f8',
-    danger: '#ffd4d2',
     dialog: '#ffffff',
     floating: '#ffffff',
-    info: '#cae6fa',
     input: '#f8f8f8',
     interactive: {
       accent: {
@@ -19,9 +18,9 @@ export const semantic = {
           pressed: '#20565c',
         },
         muted: {
-          default: '#cfe7e9',
-          hover: '#bbdbdf',
-          pressed: '#a2cdd2',
+          default: '#eefbfd',
+          hover: '#ddeff1',
+          pressed: '#cfe7e9',
         },
         selected: {
           default: '#a2cdd2',
@@ -36,12 +35,12 @@ export const semantic = {
           pressed: '#8e1525',
         },
         muted: {
-          default: '#ffd4d2',
-          hover: '#ffc3c0',
-          pressed: '#ffa7a5',
+          default: '#fff4f3',
+          hover: '#ffe1df',
+          pressed: '#ffd4d2',
         },
       },
-      disabled: '#e1e1e1',
+      disabled: '#ebebeb',
       info: {
         emphasis: {
           default: '#0070a7',
@@ -49,9 +48,9 @@ export const semantic = {
           pressed: '#0e5279',
         },
         muted: {
-          default: '#cae6fa',
-          hover: '#b5daf5',
-          pressed: '#99cbf0',
+          default: '#f2faff',
+          hover: '#d9efff',
+          pressed: '#cae6fa',
         },
       },
       neutral: {
@@ -61,9 +60,9 @@ export const semantic = {
           pressed: '#4d4d4d',
         },
         muted: {
-          default: '#e1e1e1',
-          hover: '#d4d4d4',
-          pressed: '#c4c4c4',
+          default: '#f8f8f8',
+          hover: '#ebebeb',
+          pressed: '#e1e1e1',
         },
         selected: {
           default: '#cfe7e9',
@@ -71,7 +70,7 @@ export const semantic = {
           pressed: '#a2cdd2',
         },
       },
-      readOnly: '#e1e1e1',
+      readOnly: '#ebebeb',
       success: {
         emphasis: {
           default: '#227e22',
@@ -79,9 +78,9 @@ export const semantic = {
           pressed: '#205c1f',
         },
         muted: {
-          default: '#cfeacc',
-          hover: '#bbe0b8',
-          pressed: '#a2d49e',
+          default: '#eefeed',
+          hover: '#ddf2db',
+          pressed: '#cfeacc',
         },
       },
       warning: {
@@ -91,33 +90,48 @@ export const semantic = {
           pressed: '#753c00',
         },
         muted: {
-          default: '#fbdac1',
-          hover: '#f6caaa',
-          pressed: '#f0b689',
+          default: '#fff6f0',
+          hover: '#ffe6d3',
+          pressed: '#fbdac1',
         },
       },
     },
     inverted: '#404040',
-    success: '#cfeacc',
+    nonInteractive: {
+      accent: {
+        default: '#cfe7e9',
+        emphasis: '#21767e',
+        muted: '#eefbfd',
+      },
+      danger: {
+        default: '#ffd4d2',
+        emphasis: '#c5002e',
+        muted: '#fff4f3',
+      },
+      info: {
+        default: '#cae6fa',
+        emphasis: '#0070a7',
+        muted: '#f2faff',
+      },
+      neutral: {
+        default: '#e1e1e1',
+        emphasis: '#696969',
+        muted: '#f8f8f8',
+      },
+      success: {
+        default: '#cfeacc',
+        emphasis: '#227e22',
+        muted: '#eefeed',
+      },
+      warning: {
+        default: '#fbdac1',
+        emphasis: '#9f5100',
+        muted: '#fff6f0',
+      },
+    },
     surface: '#ffffff',
-    warning: '#fbdac1',
   },
   border: {
-    accent: {
-      medium: '#6cb2b9',
-      strong: '#21767e',
-      subtle: '#bbdbdf',
-    },
-    danger: {
-      medium: '#ff6d71',
-      strong: '#c5002e',
-      subtle: '#ffc3c0',
-    },
-    info: {
-      medium: '#5cade5',
-      strong: '#0070a7',
-      subtle: '#b5daf5',
-    },
     interactive: {
       accent: {
         emphasis: {
@@ -157,6 +171,11 @@ export const semantic = {
           pressed: '#5cade5',
         },
       },
+      link: {
+        default: '#1d8fcf',
+        hover: '#0070a7',
+        pressed: '#006192',
+      },
       neutral: {
         emphasis: {
           default: '#696969',
@@ -165,8 +184,8 @@ export const semantic = {
         },
         muted: {
           default: '#d4d4d4',
-          hover: '#a4a4a4',
-          pressed: '#868686',
+          hover: '#c4c4c4',
+          pressed: '#a4a4a4',
         },
       },
       selectedIndicator: '#1e383a',
@@ -195,27 +214,44 @@ export const semantic = {
         },
       },
     },
-    neutral: {
-      medium: '#a4a4a4',
-      strong: '#696969',
-      subtle: '#d4d4d4',
-    },
-    success: {
-      medium: '#6dba69',
-      strong: '#227e22',
-      subtle: '#bbe0b8',
-    },
-    warning: {
-      medium: '#e38d42',
-      strong: '#9f5100',
-      subtle: '#f6caaa',
+    nonInteractive: {
+      accent: {
+        default: '#6cb2b9',
+        emphasis: '#21767e',
+        muted: '#bbdbdf',
+      },
+      danger: {
+        default: '#ff6d71',
+        emphasis: '#c5002e',
+        muted: '#ffc3c0',
+      },
+      info: {
+        default: '#5cade5',
+        emphasis: '#0070a7',
+        muted: '#b5daf5',
+      },
+      neutral: {
+        default: '#a4a4a4',
+        emphasis: '#696969',
+        muted: '#d4d4d4',
+      },
+      success: {
+        default: '#6dba69',
+        emphasis: '#227e22',
+        muted: '#bbe0b8',
+      },
+      warning: {
+        default: '#e38d42',
+        emphasis: '#9f5100',
+        muted: '#f6caaa',
+      },
     },
   },
   cornerRadius: {
     none: 0,
     pill: 9999,
     rounded: 4,
-    roundedOuter: 6,
+    roundedOuter: 5,
   },
   dataVisualization: {
     cat: {
@@ -311,6 +347,58 @@ export const semantic = {
       '7': '#054046',
     },
   },
+  elevation: {
+    high: {
+      boxShadow: '0px 4px 12px 0px #00000033, 0px 12px 16px 6px #0000001f',
+      layers: [
+        {
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 12,
+          spread: 0,
+        },
+        {
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 12,
+          },
+          shadowOpacity: 0.12,
+          shadowRadius: 16,
+          spread: 6,
+        },
+      ],
+    },
+    low: {
+      boxShadow: '0px 1px 8px 0px #00000033, 0px 4px 8px 3px #0000001f',
+      layers: [
+        {
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 8,
+          spread: 0,
+        },
+        {
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.12,
+          shadowRadius: 8,
+          spread: 3,
+        },
+      ],
+    },
+  },
   fontFamily: {
     header: 'Equinor',
     ui: 'Inter',
@@ -321,9 +409,6 @@ export const semantic = {
     normal: 400,
   },
   icon: {
-    accent: '#1f666d',
-    danger: '#ab0428',
-    info: '#006192',
     interactive: {
       accent: {
         default: '#20565c',
@@ -335,7 +420,7 @@ export const semantic = {
         hover: '#721c22',
         pressed: '#571c1f',
       },
-      disabled: '#c4c4c4',
+      disabled: '#a4a4a4',
       info: {
         default: '#0e5279',
         hover: '#164461',
@@ -358,12 +443,33 @@ export const semantic = {
       },
     },
     inverted: '#f8f8f8',
-    onEmphasis: '#ffffff',
-    primary: '#404040',
+    onDefault: {
+      accent: '#1f666d',
+      danger: '#ab0428',
+      info: '#006192',
+      neutral: '#5b5b5b',
+      success: '#206d1f',
+      warning: '#894700',
+    },
+    onEmphasis: {
+      accent: '#ffffff',
+      danger: '#ffffff',
+      info: '#ffffff',
+      neutral: '#ffffff',
+      success: '#ffffff',
+      warning: '#ffffff',
+    },
+    onMuted: {
+      accent: '#20474b',
+      danger: '#721c22',
+      info: '#164461',
+      neutral: '#404040',
+      success: '#214b1f',
+      warning: '#603204',
+    },
+    primary: '#333333',
     secondary: '#868686',
-    success: '#206d1f',
     tertiary: '#a4a4a4',
-    warning: '#894700',
   },
   overlay: {
     scrim: '#1d1d1d1a',
@@ -382,49 +488,42 @@ export const semantic = {
     xs: 8,
   },
   text: {
-    accent: '#20474b',
-    danger: '#721c22',
-    info: '#164461',
     interactive: {
-      accent: {
-        default: '#20565c',
-        hover: '#20474b',
-        pressed: '#1e383a',
-      },
-      danger: {
-        default: '#8e1525',
-        hover: '#721c22',
-        pressed: '#571c1f',
-      },
-      disabled: '#c4c4c4',
-      info: {
-        default: '#0e5279',
-        hover: '#164461',
-        pressed: '#18364a',
-      },
+      disabled: '#a4a4a4',
       link: {
         default: '#1d8fcf',
         hover: '#0070a7',
         pressed: '#006192',
       },
-      success: {
-        default: '#205c1f',
-        hover: '#214b1f',
-        pressed: '#1e3b1d',
-      },
-      warning: {
-        default: '#753c00',
-        hover: '#603204',
-        pressed: '#4a2a0e',
-      },
     },
     inverted: '#f8f8f8',
-    onEmphasis: '#ffffff',
-    primary: '#404040',
+    onDefault: {
+      accent: '#1f666d',
+      danger: '#ab0428',
+      info: '#006192',
+      neutral: '#5b5b5b',
+      success: '#206d1f',
+      warning: '#894700',
+    },
+    onEmphasis: {
+      accent: '#ffffff',
+      danger: '#ffffff',
+      info: '#ffffff',
+      neutral: '#ffffff',
+      success: '#ffffff',
+      warning: '#ffffff',
+    },
+    onMuted: {
+      accent: '#20474b',
+      danger: '#721c22',
+      info: '#164461',
+      neutral: '#404040',
+      success: '#214b1f',
+      warning: '#603204',
+    },
+    primary: '#333333',
     secondary: '#868686',
-    success: '#214b1f',
     tertiary: '#a4a4a4',
-    warning: '#603204',
   },
   typography: {
     header: {
@@ -433,12 +532,12 @@ export const semantic = {
         lineHeight: 28,
       },
       threeXl: {
-        fontSize: 24,
+        fontSize: 28,
         lineHeight: 32,
       },
       fourXl: {
         fontSize: 32,
-        lineHeight: 32,
+        lineHeight: 36,
       },
       lg: {
         fontSize: 18,

@@ -62,7 +62,10 @@
           }
         },
         "$type": "dimension",
-        "$value": "{primitives.spacing.50}"
+        "$value": {
+          "unit": "px",
+          "value": 7
+        }
       }
     },
     "spacing": {
@@ -306,7 +309,7 @@
               }
             },
             "$type": "lineHeight",
-            "$value": "{primitives.lineheight-scale.800.default}"
+            "$value": "{primitives.lineheight-scale.1000.default}"
           }
         },
         "4xl": {
@@ -338,7 +341,7 @@
               }
             },
             "$type": "lineHeight",
-            "$value": "{primitives.lineheight-scale.1000.default}"
+            "$value": "{primitives.lineheight-scale.1100.default}"
           }
         },
         "lg": {
