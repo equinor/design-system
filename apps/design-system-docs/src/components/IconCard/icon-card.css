@@ -1,7 +1,7 @@
 .docs-icon-card-grid {
   display: grid;
-  gap: var(--docs-grid-gap, 1.5rem);
   grid-template-columns: repeat(var(--_columns, 3), 1fr);
+  gap: var(--docs-grid-gap, 1.5rem);
   margin-block: 1.5rem;
 }
 
@@ -16,11 +16,14 @@
 .docs-icon-card {
   display: flex;
   flex-direction: column;
+
   padding: var(--docs-card-padding);
   border: var(--docs-card-border);
   border-radius: var(--docs-card-radius);
-  background-color: var(--docs-card-bg);
+
   color: inherit;
+
+  background-color: var(--docs-card-bg);
 }
 
 /* Interactive cards are rendered as links. */
@@ -29,8 +32,8 @@ a.docs-icon-card {
 }
 
 a.docs-icon-card:hover {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
   box-shadow: var(--docs-card-hover-shadow);
 }
 
@@ -45,9 +48,10 @@ a.docs-icon-card:focus-visible {
 
 .docs-icon-card__top {
   display: flex;
+  gap: 0.75rem;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+
   margin-bottom: 1rem;
 }
 
@@ -55,69 +59,78 @@ a.docs-icon-card:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   width: 3rem;
   height: 3rem;
   border-radius: var(--eds-corner-radius-rounded);
-  background-color: var(--ifm-color-primary);
-  color: var(--eds-text-on-emphasis);
+
   font-size: 1.5rem;
+  color: var(--eds-text-on-emphasis);
+
+  background-color: var(--ifm-color-primary);
 }
 
 /* Raw SVG icons (brand marks) passed as the `icon` node. */
 .docs-icon-card__icon > svg {
   width: 1.5rem;
   height: 1.5rem;
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .docs-icon-card__badge {
   align-self: flex-start;
+
   padding: 0.125rem 0.625rem;
   border-radius: var(--eds-corner-radius-rounded);
+
   font-size: var(--docs-font-caption-size);
   font-weight: var(--docs-font-weight-emphasis);
   line-height: var(--docs-font-caption-line-height);
-  background-color: var(--eds-background-interactive-neutral-muted-default);
   color: var(--ifm-color-emphasis-800);
+
+  background-color: var(--eds-background-interactive-neutral-muted-default);
 }
 
 .docs-icon-card__badge[data-tone='accent'] {
-  background-color: var(--eds-background-interactive-accent-muted-default);
   color: var(--eds-text-link);
+  background-color: var(--eds-background-interactive-accent-muted-default);
 }
 
 .docs-icon-card__title {
+  margin-bottom: var(--docs-card-gap);
+
   font-family: var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
   font-size: var(--docs-card-title-size);
   font-weight: var(--docs-font-weight-emphasis);
   line-height: var(--docs-card-title-line-height);
   color: var(--eds-text-primary);
-  margin-bottom: var(--docs-card-gap);
 }
 
 .docs-icon-card__description {
-  color: var(--eds-text-secondary);
+  margin-bottom: 0;
   font-size: var(--docs-card-text-size);
   line-height: var(--docs-card-text-line-height);
-  margin-bottom: 0;
+  color: var(--eds-text-secondary);
 }
 
 .docs-icon-card__arrow {
   display: inline-flex;
+
   margin-top: auto;
   padding-top: 1rem;
-  color: var(--ifm-color-primary);
+
   font-size: 1rem;
+  color: var(--ifm-color-primary);
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (width <= 996px) {
   .docs-icon-card-grid[data-columns='3'],
   .docs-icon-card-grid[data-columns='4'] {
     --_columns: 2;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width <= 600px) {
   /* The [data-columns] variant is restated so this rule ties the 996px rule's
      specificity (0,2,0) and wins on source order — without it, 3/4-column
      grids stay 2-up on phones and overflow the viewport. */

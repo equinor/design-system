@@ -1,9 +1,11 @@
 /* Frame matching the .sb-iframe treatment so native story canvases sit
    visually alongside the remaining iframe embeds. */
 .docs-story-canvas {
+  overflow-x: auto;
+
   padding: 1.5rem;
   border: 1px solid var(--eds-border-neutral-subtle);
   border-radius: var(--eds-corner-radius-rounded);
+
   background-color: var(--eds-background-surface);
-  overflow-x: auto;
 }

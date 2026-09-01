@@ -18,6 +18,7 @@
   /* Display — hero/page titles on landing pages and doc-page hero bands */
   --docs-font-display-size: 2.75rem; /* site-local: above header-4xl */
   --docs-font-display-line-height: 1.15; /* site-local */
+
   /* All roles reference the SEMANTIC token layer only. The header-*
      font-size names collide with the legacy bundle; the semantic typography
      bridge in theme-variables.css pins them to the Tokens Studio values. */
@@ -26,28 +27,36 @@
   --docs-font-section-line-height: var(
     --eds-typography-header-3xl-line-height
   );
+
   /* Sub-section headings (h3 role) */
   --docs-font-subsection-size: var(--eds-typography-header-xl-font-size);
   --docs-font-subsection-line-height: var(
     --eds-typography-header-xl-line-height
   );
+
   /* Card titles */
   --docs-font-card-title-size: var(--eds-typography-header-lg-font-size);
   --docs-font-card-title-line-height: var(
     --eds-typography-header-lg-line-height
   );
+
   /* Lead / subtitle paragraphs */
   --docs-font-lead-size: var(--eds-typography-ui-xl-font-size);
+
   /* Body prose */
   --docs-font-body-size: var(--eds-typography-ui-lg-font-size);
+
   /* Secondary text — card descriptions, UI labels */
   --docs-font-body-sm-size: var(--eds-typography-ui-md-font-size);
   --docs-font-body-sm-line-height: var(--eds-typography-ui-md-line-height);
+
   /* Caption — badges, footnotes, copyright */
   --docs-font-caption-size: var(--eds-typography-ui-sm-font-size);
   --docs-font-caption-line-height: var(--eds-typography-ui-sm-line-height);
+
   /* Long-form prose leading (site-local: token line-heights are UI-tuned) */
   --docs-prose-line-height: 1.6;
+
   /* Emphasis weight — headings, buttons, labels */
   --docs-font-weight-emphasis: var(--eds-font-weight-bolder);
 
@@ -74,15 +83,16 @@
   --docs-card-title-line-height: var(--eds-typography-ui-md-line-height);
   --docs-card-text-size: var(--eds-typography-ui-sm-font-size);
   --docs-card-text-line-height: var(--eds-typography-ui-sm-line-height);
-
   --docs-hero-space-block: 5rem;
   --docs-hero-min-height: 27rem;
   --docs-section-space-block: 5rem;
   --docs-measure: 35rem;
   --docs-grid-gap: 1.5rem;
+
   /* Centred content column + the responsive gutter that flanks it. */
   --docs-content-max: var(--ifm-container-width);
   --docs-gutter: max(2rem, calc((100% - var(--docs-content-max)) / 2));
+
   /* Hero band background. Uses Infima's --ifm-color-primary-lightest, which is a
      light accent tint in light mode and is recomputed to a dark accent shade in
      dark mode by Infima's primary-palette scale — the same switch .about-hero
@@ -101,7 +111,7 @@
 
 /* Phone — one override block; every component consumes these vars, so the
    mobile scale lives here rather than per component. */
-@media (max-width: 600px) {
+@media (width <= 600px) {
   :root {
     /* Display steps down to the token scale's top step (header-4xl, 32px);
        the desktop 44px is the documented above-token exception. */
@@ -109,6 +119,7 @@
     --docs-hero-space-block: 3rem;
     --docs-hero-min-height: auto;
     --docs-section-space-block: 3rem;
+
     /* Match Infima's 1rem container padding on phones. */
     --docs-gutter: max(1rem, calc((100% - var(--docs-content-max)) / 2));
   }
@@ -124,8 +135,8 @@
 }
 
 .docs-about-motto {
-  font-style: italic;
   margin-bottom: 2rem;
+  font-style: italic;
 }
 
 /* Label used by the TypeSpecimen component (src/components/TypeSpecimen.tsx). */

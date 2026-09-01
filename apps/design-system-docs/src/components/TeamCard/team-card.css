@@ -1,44 +1,49 @@
 .docs-team-card-grid {
   display: grid;
-  gap: var(--docs-grid-gap, 1.5rem);
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--docs-grid-gap, 1.5rem);
 }
 
 .docs-team-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   padding: var(--docs-card-padding);
   border: var(--docs-card-border);
   border-radius: var(--docs-card-radius);
-  background-color: var(--docs-card-bg);
+
   text-align: center;
+
+  background-color: var(--docs-card-bg);
 }
 
 .docs-team-card__image {
   width: 7rem;
   height: 7rem;
-  border-radius: 50%;
-  object-fit: cover;
   margin-bottom: 1rem;
+  border-radius: 50%;
+
+  object-fit: cover;
 }
 
 .docs-team-card__name {
+  margin-bottom: var(--docs-card-gap);
+
   font-size: var(--docs-card-title-size);
   font-weight: var(--docs-font-weight-emphasis);
   line-height: var(--docs-card-title-line-height);
   color: var(--eds-text-primary);
-  margin-bottom: var(--docs-card-gap);
 }
 
 .docs-team-card__role {
-  color: var(--eds-text-secondary);
+  margin-bottom: 0;
   font-size: var(--docs-card-text-size);
   line-height: var(--docs-card-text-line-height);
-  margin-bottom: 0;
+  color: var(--eds-text-secondary);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width <= 600px) {
   .docs-team-card-grid {
     grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
   }

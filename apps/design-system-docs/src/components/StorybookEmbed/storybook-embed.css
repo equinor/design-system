@@ -1,11 +1,13 @@
 .sb-iframe {
-  box-sizing: content-box;
+  overflow: hidden;
   display: block;
-  border: 1px solid var(--eds-border-neutral-subtle);
-  border-radius: var(--eds-corner-radius-rounded);
-  background-color: var(--eds-background-surface);
+
+  box-sizing: content-box;
   max-width: var(--docs-content-max);
   margin: 1.5rem auto;
   padding: 1rem;
-  overflow: hidden;
+  border: 1px solid var(--eds-border-neutral-subtle);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  background-color: var(--eds-background-surface);
 }

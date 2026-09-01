@@ -1,5 +1,6 @@
 .docs-hero {
   display: flex;
+
   /* Consistent hero height across pages so content below doesn't jump on
      navigation. Covers the tallest text hero (~about); the homepage hero has
      more content and grows past it. */
@@ -17,25 +18,27 @@
 
 .docs-hero__eyebrow {
   display: inline-block;
+
   margin-bottom: 0.75rem;
+
   font-size: var(--docs-font-body-sm-size);
   font-weight: var(--docs-font-weight-emphasis);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
   color: var(--eds-text-link);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .docs-hero__title {
+  max-width: 20ch;
+  margin-bottom: 1.5rem;
   font-size: var(--docs-font-display-size);
   line-height: var(--docs-font-display-line-height);
-  margin-bottom: 1.5rem;
-  max-width: 20ch;
 }
 
 .docs-hero__lead p {
+  max-width: var(--docs-measure, 35rem);
   font-size: var(--docs-font-lead-size);
   line-height: var(--docs-prose-line-height);
-  max-width: var(--docs-measure, 35rem);
 }
 
 .docs-hero__lead p:last-child {

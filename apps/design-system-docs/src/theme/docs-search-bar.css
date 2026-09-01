@@ -8,8 +8,8 @@
 
 .docs-search-bar input {
   border-radius: var(--ifm-global-radius);
-  box-shadow: 0px 0px 0px 1px var(--eds-border-neutral-subtle) inset;
   background-color: var(--eds-background-canvas);
+  box-shadow: 0 0 0 1px var(--eds-border-neutral-subtle) inset;
 }
 
 .docs-search-bar input::placeholder {
@@ -18,17 +18,19 @@
 
 /* The keyboard-shortcut hint (kbd) inside the input */
 .docs-search-bar > div > div kbd {
-  background-color: unset;
-  border: unset;
-  box-shadow: unset;
   padding: 0;
+  border: unset;
+
   color: var(--eds-text-secondary);
+
+  background-color: unset;
+  box-shadow: unset;
 }
 
 /* The clear-text button that shows up when the input is in use */
 .docs-search-bar button {
-  padding: 0 0.125rem !important;
   cursor: pointer;
+  padding: 0 0.125rem !important;
 }
 
 .docs-search-bar button:hover {

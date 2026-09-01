@@ -1,15 +1,16 @@
 .docs-section-heading__title {
-  font-size: var(--docs-font-section-size);
-  margin-bottom: 1rem;
   /* Keep deep-linked headings clear of the sticky navbar. */
   scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+  margin-bottom: 1rem;
+  font-size: var(--docs-font-section-size);
 }
 
 .docs-section-heading__subtitle {
-  color: var(--ifm-color-emphasis-700);
-  font-size: var(--docs-font-lead-size);
-  line-height: var(--docs-prose-line-height);
   max-width: var(--docs-measure, 35rem);
   margin-bottom: 0;
+
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
+  color: var(--ifm-color-emphasis-700);
 }
 
