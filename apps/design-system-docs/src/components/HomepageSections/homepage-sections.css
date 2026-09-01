@@ -22,7 +22,6 @@
   /* auto-fit collapses 2 → 1 columns continuously — no breakpoint needed. */
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: var(--docs-grid-gap, 1.5rem);
-  margin-top: 3rem;
 }
 
 .docs-resource-grid {

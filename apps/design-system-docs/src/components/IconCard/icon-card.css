@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(var(--_columns, 3), 1fr);
   gap: var(--docs-grid-gap, 1.5rem);
-  margin-block: 1.5rem;
 }
 
 .docs-icon-card-grid[data-columns='2'] {
