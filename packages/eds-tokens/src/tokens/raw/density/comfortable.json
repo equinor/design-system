@@ -47,7 +47,7 @@
         }
       },
       "rounded-outer": {
-        "$value": "{primitives.spacing.37}",
+        "$value": "{density.corner-radius.rounded} + {primitives.spacing.6}",
         "$type": "dimension",
         "$extensions": {
           "com.figma": {
@@ -276,7 +276,7 @@
         },
         "3xl": {
           "font-size": {
-            "$value": "{primitives.type-scale.equinor.700.font-size}",
+            "$value": "{primitives.type-scale.equinor.800.font-size}",
             "$type": "fontSize",
             "$extensions": {
               "com.figma": {
@@ -323,7 +323,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.800.default}",
+            "$value": "{primitives.lineheight-scale.1000.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
