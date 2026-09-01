@@ -85,7 +85,7 @@ export const density = {
       },
       sm: {
         fontSize: 10,
-        lineHeight: 16,
+        lineHeight: 12,
       },
       xl: {
         fontSize: 16,

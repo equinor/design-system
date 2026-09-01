@@ -9,12 +9,15 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-canvas)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "danger": {
-      "$value": "{danger.2}",
+      "$value": "{danger.3}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
@@ -22,6 +25,9 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-danger)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -35,6 +41,9 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-dialog)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -48,12 +57,15 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-floating)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "info": {
-      "$value": "{info.2}",
+      "$value": "{info.3}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
@@ -61,6 +73,25 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-info)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
+    "input": {
+      "$value": "{bg-input}",
+      "$type": "color",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-input)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -77,6 +108,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -90,6 +124,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -103,6 +140,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -110,19 +150,6 @@
         },
         "muted": {
           "default": {
-            "$value": "{accent.2}",
-            "$type": "color",
-            "$extensions": {
-              "com.figma": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ],
-                "hiddenFromPublishing": false
-              }
-            }
-          },
-          "hover": {
             "$value": "{accent.3}",
             "$type": "color",
             "$extensions": {
@@ -131,11 +158,14 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
           },
-          "pressed": {
+          "hover": {
             "$value": "{accent.4}",
             "$type": "color",
             "$extensions": {
@@ -144,6 +174,25 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{accent.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -159,6 +208,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-selected-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -172,6 +224,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-selected-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -185,6 +240,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-accent-selected-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -202,6 +260,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-danger-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -215,6 +276,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-danger-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -228,6 +292,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-danger-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -235,19 +302,6 @@
         },
         "muted": {
           "default": {
-            "$value": "{danger.2}",
-            "$type": "color",
-            "$extensions": {
-              "com.figma": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ],
-                "hiddenFromPublishing": false
-              }
-            }
-          },
-          "hover": {
             "$value": "{danger.3}",
             "$type": "color",
             "$extensions": {
@@ -256,11 +310,14 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-danger-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
           },
-          "pressed": {
+          "hover": {
             "$value": "{danger.4}",
             "$type": "color",
             "$extensions": {
@@ -269,6 +326,25 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-danger-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{danger.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-danger-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -276,7 +352,7 @@
         }
       },
       "disabled": {
-        "$value": "{neutral.2}",
+        "$value": "{neutral.3}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -284,7 +360,112 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-background-interactive-disabled)"
+            },
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "info": {
+        "emphasis": {
+          "default": {
+            "$value": "{info.9}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-info-emphasis-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{info.10}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-info-emphasis-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{info.11}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-info-emphasis-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{info.3}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-info-muted-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{info.4}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-info-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{info.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-info-muted-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
           }
         }
       },
@@ -299,6 +480,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -312,6 +496,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -325,6 +512,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -332,32 +522,6 @@
         },
         "muted": {
           "default": {
-            "$value": "{neutral.1}",
-            "$type": "color",
-            "$extensions": {
-              "com.figma": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ],
-                "hiddenFromPublishing": false
-              }
-            }
-          },
-          "hover": {
-            "$value": "{neutral.2}",
-            "$type": "color",
-            "$extensions": {
-              "com.figma": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ],
-                "hiddenFromPublishing": false
-              }
-            }
-          },
-          "pressed": {
             "$value": "{neutral.3}",
             "$type": "color",
             "$extensions": {
@@ -366,14 +530,15 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
-          }
-        },
-        "selected": {
-          "default": {
-            "$value": "{accent.2}",
+          },
+          "hover": {
+            "$value": "{neutral.4}",
             "$type": "color",
             "$extensions": {
               "com.figma": {
@@ -381,11 +546,32 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-muted-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
           },
-          "hover": {
+          "pressed": {
+            "$value": "{neutral.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-muted-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          }
+        },
+        "selected": {
+          "default": {
             "$value": "{accent.3}",
             "$type": "color",
             "$extensions": {
@@ -394,11 +580,14 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-selected-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
           },
-          "pressed": {
+          "hover": {
             "$value": "{accent.4}",
             "$type": "color",
             "$extensions": {
@@ -407,6 +596,25 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-selected-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{accent.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-neutral-selected-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -414,7 +622,7 @@
         }
       },
       "read-only": {
-        "$value": "{neutral.2}",
+        "$value": "{neutral.3}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
@@ -422,7 +630,112 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-background-interactive-read-only)"
+            },
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "success": {
+        "emphasis": {
+          "default": {
+            "$value": "{success.9}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-success-emphasis-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{success.10}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-success-emphasis-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{success.11}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-success-emphasis-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{success.3}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-success-muted-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{success.4}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-success-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{success.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-success-muted-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
           }
         }
       },
@@ -437,6 +750,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-warning-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -450,6 +766,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-warning-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -463,6 +782,9 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-warning-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -470,19 +792,6 @@
         },
         "muted": {
           "default": {
-            "$value": "{warning.2}",
-            "$type": "color",
-            "$extensions": {
-              "com.figma": {
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ],
-                "hiddenFromPublishing": false
-              }
-            }
-          },
-          "hover": {
             "$value": "{warning.3}",
             "$type": "color",
             "$extensions": {
@@ -491,11 +800,14 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-warning-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
           },
-          "pressed": {
+          "hover": {
             "$value": "{warning.4}",
             "$type": "color",
             "$extensions": {
@@ -504,6 +816,25 @@
                   "FRAME_FILL",
                   "SHAPE_FILL"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-warning-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{warning.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-background-interactive-warning-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -520,12 +851,15 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-inverted)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "success": {
-      "$value": "{success.2}",
+      "$value": "{success.3}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
@@ -533,6 +867,9 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-success)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -544,14 +881,18 @@
         "com.figma": {
           "scopes": [
             "FRAME_FILL",
-            "SHAPE_FILL"
+            "SHAPE_FILL",
+            "STROKE_COLOR"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-surface)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "warning": {
-      "$value": "{warning.2}",
+      "$value": "{warning.3}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
@@ -559,6 +900,9 @@
             "FRAME_FILL",
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-background-warning)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -574,6 +918,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-accent-medium)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -586,6 +933,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-accent-strong)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -598,12 +948,45 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-accent-subtle)"
+            },
             "hiddenFromPublishing": false
           }
         }
       }
     },
     "danger": {
+      "medium": {
+        "$value": "{danger.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-danger-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{danger.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-danger-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{danger.4}",
         "$type": "color",
@@ -612,12 +995,45 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-danger-subtle)"
+            },
             "hiddenFromPublishing": false
           }
         }
       }
     },
     "info": {
+      "medium": {
+        "$value": "{info.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-info-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{info.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-info-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{info.4}",
         "$type": "color",
@@ -626,6 +1042,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-info-subtle)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -642,6 +1061,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-accent-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -654,6 +1076,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-accent-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -666,6 +1091,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-accent-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -680,6 +1108,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-accent-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -692,6 +1123,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-accent-muted-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -704,6 +1138,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-accent-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -720,6 +1157,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-danger-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -732,6 +1172,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-danger-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -744,6 +1187,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-danger-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -758,6 +1204,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-danger-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -770,6 +1219,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-danger-muted-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -782,6 +1234,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-danger-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -789,13 +1244,16 @@
         }
       },
       "disabled": {
-        "$value": "{neutral.2}",
+        "$value": "{neutral.4}",
         "$type": "color",
         "$extensions": {
           "com.figma": {
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-interactive-disabled)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -808,7 +1266,106 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-interactive-focus)"
+            },
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "info": {
+        "emphasis": {
+          "default": {
+            "$value": "{info.9}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-info-emphasis-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{info.10}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-info-emphasis-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{info.11}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-info-emphasis-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{info.4}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-info-muted-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{info.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-info-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{info.7}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-info-muted-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
           }
         }
       },
@@ -822,6 +1379,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-neutral-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -834,6 +1394,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-neutral-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -846,6 +1409,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-neutral-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -860,6 +1426,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-neutral-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -872,6 +1441,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-neutral-muted-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -884,6 +1456,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-neutral-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -898,7 +1473,106 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-interactive-selected-indicator)"
+            },
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "success": {
+        "emphasis": {
+          "default": {
+            "$value": "{success.9}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-success-emphasis-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{success.10}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-success-emphasis-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{success.11}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-success-emphasis-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          }
+        },
+        "muted": {
+          "default": {
+            "$value": "{success.4}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-success-muted-default)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "hover": {
+            "$value": "{success.5}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-success-muted-hover)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
+          },
+          "pressed": {
+            "$value": "{success.7}",
+            "$type": "color",
+            "$extensions": {
+              "com.figma": {
+                "scopes": [
+                  "STROKE_COLOR"
+                ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-success-muted-pressed)"
+                },
+                "hiddenFromPublishing": false
+              }
+            }
           }
         }
       },
@@ -912,6 +1586,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-warning-emphasis-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -924,6 +1601,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-warning-emphasis-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -936,6 +1616,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-warning-emphasis-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -950,6 +1633,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-warning-muted-default)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -962,6 +1648,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-warning-muted-hover)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -974,6 +1663,9 @@
                 "scopes": [
                   "STROKE_COLOR"
                 ],
+                "codeSyntax": {
+                  "WEB": "var(--eds-border-interactive-warning-muted-pressed)"
+                },
                 "hiddenFromPublishing": false
               }
             }
@@ -983,6 +1675,36 @@
     },
     "neutral": {
       "medium": {
+        "$value": "{neutral.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-neutral-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{neutral.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-neutral-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "subtle": {
         "$value": "{neutral.4}",
         "$type": "color",
         "$extensions": {
@@ -990,36 +1712,45 @@
             "scopes": [
               "STROKE_COLOR"
             ],
-            "hiddenFromPublishing": false
-          }
-        }
-      },
-      "strong": {
-        "$value": "{neutral.6}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "STROKE_COLOR"
-            ],
-            "hiddenFromPublishing": false
-          }
-        }
-      },
-      "subtle": {
-        "$value": "{neutral.2}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "STROKE_COLOR"
-            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-neutral-subtle)"
+            },
             "hiddenFromPublishing": false
           }
         }
       }
     },
     "success": {
+      "medium": {
+        "$value": "{success.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-success-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{success.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-success-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{success.4}",
         "$type": "color",
@@ -1028,12 +1759,45 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-success-subtle)"
+            },
             "hiddenFromPublishing": false
           }
         }
       }
     },
     "warning": {
+      "medium": {
+        "$value": "{warning.7}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-warning-medium)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
+      "strong": {
+        "$value": "{warning.9}",
+        "$type": "color",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-warning-strong)"
+            },
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "subtle": {
         "$value": "{warning.4}",
         "$type": "color",
@@ -1042,6 +1806,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-border-warning-subtle)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1056,6 +1823,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-1-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1065,6 +1835,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-1-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1074,6 +1847,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-1-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1083,6 +1859,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-1-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1092,6 +1871,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-1-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1103,6 +1885,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-2-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1112,6 +1897,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-2-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1121,6 +1909,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-2-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1130,6 +1921,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-2-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1139,6 +1933,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-2-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1150,6 +1947,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-3-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1159,6 +1959,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-3-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1168,6 +1971,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-3-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1177,6 +1983,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-3-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1186,6 +1995,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-3-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1197,6 +2009,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-4-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1206,6 +2021,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-4-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1215,6 +2033,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-4-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1224,6 +2045,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-4-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1233,6 +2057,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-4-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1244,6 +2071,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-5-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1253,6 +2083,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-5-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1262,6 +2095,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-5-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1271,6 +2107,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-5-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1280,6 +2119,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-5-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1291,6 +2133,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-6-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1300,6 +2145,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-6-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1309,6 +2157,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-6-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1318,6 +2169,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-6-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1327,6 +2181,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-6-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1338,6 +2195,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-7-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1347,6 +2207,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-7-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1356,6 +2219,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-7-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1365,6 +2231,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-7-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1374,6 +2243,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-7-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1385,6 +2257,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-8-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1394,6 +2269,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-8-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1403,6 +2281,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-8-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1412,6 +2293,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-8-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1421,6 +2305,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-8-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1432,6 +2319,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-9-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1441,6 +2331,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-9-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1450,6 +2343,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-9-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1459,6 +2355,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-9-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1468,6 +2367,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-9-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1479,6 +2381,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-1)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1488,6 +2393,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-2)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1497,6 +2405,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-3)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1506,6 +2417,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-4)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1515,6 +2429,9 @@
           "$type": "color",
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-5)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1527,6 +2444,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-1)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1536,6 +2456,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-2)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1545,6 +2468,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-3)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1554,6 +2480,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-4)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1563,6 +2492,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-5)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1572,6 +2504,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-6)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1581,6 +2516,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-7)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1590,6 +2528,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-8)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1599,6 +2540,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-div-9)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1610,6 +2554,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-1)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1619,6 +2566,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-2)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1628,6 +2578,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-3)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1637,6 +2590,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-4)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1646,6 +2602,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-5)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1655,6 +2614,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-6)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1664,6 +2626,9 @@
         "$type": "color",
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-data-visualization-seq-7)"
+            },
             "hiddenFromPublishing": false
           }
         }
@@ -1672,13 +2637,16 @@
   },
   "icon": {
     "accent": {
-      "$value": "{accent.12}",
+      "$value": "{accent.10}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-accent)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1691,6 +2659,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-danger)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1703,6 +2674,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-info)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1717,6 +2691,9 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-accent-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1729,6 +2706,9 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-accent-hover)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1741,6 +2721,9 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-accent-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1748,18 +2731,6 @@
       },
       "danger": {
         "default": {
-          "$value": "{danger.10}",
-          "$type": "color",
-          "$extensions": {
-            "com.figma": {
-              "scopes": [
-                "SHAPE_FILL"
-              ],
-              "hiddenFromPublishing": false
-            }
-          }
-        },
-        "hover": {
           "$value": "{danger.11}",
           "$type": "color",
           "$extensions": {
@@ -1767,11 +2738,14 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-danger-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
         },
-        "pressed": {
+        "hover": {
           "$value": "{danger.12}",
           "$type": "color",
           "$extensions": {
@@ -1779,6 +2753,24 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-danger-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{danger.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-danger-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1792,7 +2784,57 @@
             "scopes": [
               "SHAPE_FILL"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-icon-interactive-disabled)"
+            },
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "info": {
+        "default": {
+          "$value": "{info.11}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-info-default)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "hover": {
+          "$value": "{info.12}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-info-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{info.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-info-pressed)"
+              },
+              "hiddenFromPublishing": false
+            }
           }
         }
       },
@@ -1805,6 +2847,9 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-link-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1817,6 +2862,9 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-link-hover)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1829,6 +2877,56 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-link-pressed)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{success.11}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-success-default)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "hover": {
+          "$value": "{success.12}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-success-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{success.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-success-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1836,18 +2934,6 @@
       },
       "warning": {
         "default": {
-          "$value": "{warning.10}",
-          "$type": "color",
-          "$extensions": {
-            "com.figma": {
-              "scopes": [
-                "SHAPE_FILL"
-              ],
-              "hiddenFromPublishing": false
-            }
-          }
-        },
-        "hover": {
           "$value": "{warning.11}",
           "$type": "color",
           "$extensions": {
@@ -1855,11 +2941,14 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-warning-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
         },
-        "pressed": {
+        "hover": {
           "$value": "{warning.12}",
           "$type": "color",
           "$extensions": {
@@ -1867,6 +2956,24 @@
               "scopes": [
                 "SHAPE_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-warning-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{warning.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "SHAPE_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-icon-interactive-warning-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -1881,6 +2988,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-inverted)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1893,6 +3003,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-on-emphasis)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1905,6 +3018,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-primary)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1916,7 +3032,10 @@
         "com.figma": {
           "scopes": [
             "SHAPE_FILL"
-          ]
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-secondary)"
+          }
         }
       }
     },
@@ -1928,6 +3047,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-success)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1940,6 +3062,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-tertiary)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1952,6 +3077,9 @@
           "scopes": [
             "SHAPE_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-icon-warning)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -1966,7 +3094,10 @@
           "scopes": [
             "FRAME_FILL",
             "SHAPE_FILL"
-          ]
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-overlay-scrim)"
+          }
         }
       }
     }
@@ -1980,30 +3111,39 @@
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-accent)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "danger": {
-      "$value": "{danger.10}",
+      "$value": "{danger.12}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-danger)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "info": {
-      "$value": "{info.10}",
+      "$value": "{info.12}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-info)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -2011,18 +3151,6 @@
     "interactive": {
       "accent": {
         "default": {
-          "$value": "{accent.10}",
-          "$type": "color",
-          "$extensions": {
-            "com.figma": {
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "hiddenFromPublishing": false
-            }
-          }
-        },
-        "hover": {
           "$value": "{accent.11}",
           "$type": "color",
           "$extensions": {
@@ -2030,11 +3158,14 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-accent-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
         },
-        "pressed": {
+        "hover": {
           "$value": "{accent.12}",
           "$type": "color",
           "$extensions": {
@@ -2042,6 +3173,24 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-accent-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{accent.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-accent-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -2049,18 +3198,6 @@
       },
       "danger": {
         "default": {
-          "$value": "{danger.10}",
-          "$type": "color",
-          "$extensions": {
-            "com.figma": {
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "hiddenFromPublishing": false
-            }
-          }
-        },
-        "hover": {
           "$value": "{danger.11}",
           "$type": "color",
           "$extensions": {
@@ -2068,11 +3205,14 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-danger-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
         },
-        "pressed": {
+        "hover": {
           "$value": "{danger.12}",
           "$type": "color",
           "$extensions": {
@@ -2080,6 +3220,24 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-danger-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{danger.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-danger-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -2093,7 +3251,57 @@
             "scopes": [
               "TEXT_FILL"
             ],
+            "codeSyntax": {
+              "WEB": "var(--eds-text-interactive-disabled)"
+            },
             "hiddenFromPublishing": false
+          }
+        }
+      },
+      "info": {
+        "default": {
+          "$value": "{info.11}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-info-default)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "hover": {
+          "$value": "{info.12}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-info-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{info.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-info-pressed)"
+              },
+              "hiddenFromPublishing": false
+            }
           }
         }
       },
@@ -2106,6 +3314,9 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-link-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -2118,6 +3329,9 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-link-hover)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -2130,6 +3344,56 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-link-pressed)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        }
+      },
+      "success": {
+        "default": {
+          "$value": "{success.11}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-success-default)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "hover": {
+          "$value": "{success.12}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-success-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{success.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-success-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -2137,18 +3401,6 @@
       },
       "warning": {
         "default": {
-          "$value": "{warning.10}",
-          "$type": "color",
-          "$extensions": {
-            "com.figma": {
-              "scopes": [
-                "TEXT_FILL"
-              ],
-              "hiddenFromPublishing": false
-            }
-          }
-        },
-        "hover": {
           "$value": "{warning.11}",
           "$type": "color",
           "$extensions": {
@@ -2156,11 +3408,14 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-warning-default)"
+              },
               "hiddenFromPublishing": false
             }
           }
         },
-        "pressed": {
+        "hover": {
           "$value": "{warning.12}",
           "$type": "color",
           "$extensions": {
@@ -2168,6 +3423,24 @@
               "scopes": [
                 "TEXT_FILL"
               ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-warning-hover)"
+              },
+              "hiddenFromPublishing": false
+            }
+          }
+        },
+        "pressed": {
+          "$value": "{warning.13}",
+          "$type": "color",
+          "$extensions": {
+            "com.figma": {
+              "scopes": [
+                "TEXT_FILL"
+              ],
+              "codeSyntax": {
+                "WEB": "var(--eds-text-interactive-warning-pressed)"
+              },
               "hiddenFromPublishing": false
             }
           }
@@ -2182,6 +3455,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-inverted)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -2194,6 +3470,9 @@
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-on-emphasis)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -2205,7 +3484,10 @@
         "com.figma": {
           "scopes": [
             "TEXT_FILL"
-          ]
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-primary)"
+          }
         }
       }
     },
@@ -2216,18 +3498,24 @@
         "com.figma": {
           "scopes": [
             "TEXT_FILL"
-          ]
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-secondary)"
+          }
         }
       }
     },
     "success": {
-      "$value": "{success.10}",
+      "$value": "{success.12}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-success)"
+          },
           "hiddenFromPublishing": false
         }
       }
@@ -2240,18 +3528,24 @@
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-tertiary)"
+          },
           "hiddenFromPublishing": false
         }
       }
     },
     "warning": {
-      "$value": "{warning.10}",
+      "$value": "{warning.12}",
       "$type": "color",
       "$extensions": {
         "com.figma": {
           "scopes": [
             "TEXT_FILL"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-text-warning)"
+          },
           "hiddenFromPublishing": false
         }
       }
