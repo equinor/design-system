@@ -9,7 +9,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 
 - Source path: `packages/eds-core-react/src/components/next/<Component>/`
 - Top-level barrel: `packages/eds-core-react/src/components/next/index.ts`
-- Components: 23 • Props documented: 96 • With JSDoc description: 1
+- Components: 25 • Props documented: 112 • With JSDoc description: 1
 
 ## Components
 
@@ -17,6 +17,8 @@ This file is the canonical "what already exists" reference for AI coding assista
 | --- | --- | --- | --- | --- | --- |
 | Accordion | — | exclusive | Accordion.Item, Accordion.Header, Accordion.Panel | — | active |
 | Autocomplete | — | allowCustomValue, clearLabel, defaultInputValue, description, helperMessage, id, inputValue, label, loading, loadingText, noOptionsText, onClear, onCustomValueConfirm, onInputChange, onValueChange, optionsFilter, value | — | — | active |
+| Avatar | — | alt, emphasis, initial, name, notification, size, src | — | — | active |
+| AvatarNameLabel | — | alt, emphasis, initial, layout, meta, name, notification, size, src | — | — | active |
 | Badge | — | emphasis, tone, variant | — | — | active |
 | Banner | — | onDismiss, role, tone | Banner.Icon, Banner.Message, Banner.Actions | — | active |
 | Button | — | asChild, icon, multiline, round, size, tone, variant | — | ✓ | active |
