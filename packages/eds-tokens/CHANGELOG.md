@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.6...eds-tokens@v3.0.0-beta.7) (2026-09-01)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5362](https://github.com/equinor/design-system/issues/5362)) ([916f867](https://github.com/equinor/design-system/commit/916f867e96977c4a15bf6c46ec1f98e54da0b6ee))
+
+
+### 🐛 Fixed
+
+* fold token math and discover export files when generating TS tokens ([#5369](https://github.com/equinor/design-system/issues/5369)) ([da33289](https://github.com/equinor/design-system/commit/da33289b0ee50f51e9ac4193e7ba358915403fbc))
+
 ## [3.0.0-beta.6](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.5...eds-tokens@v3.0.0-beta.6) (2026-08-13)
 
 
