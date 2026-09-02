@@ -22,7 +22,7 @@
   padding: 1.5rem;
   border: var(--eds-border-non-interactive-neutral-muted) 1px solid;
   border-radius: var(--ifm-global-radius);
-  background-color: var(--ifm-background-surface-color);
+  background-color: var(--eds-background-surface);
 }
 
 /* ======================================
@@ -224,7 +224,7 @@ html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
 
 /* Page background — grey canvas, matching the React landing pages. */
 html[class*='docs-doc-id-foundation/'][class*='docs-version-current'] {
-  background-color: var(--ifm-background-color);
+  background-color: var(--eds-background-canvas);
 }
 
 /* ---- Content area (excludes the <DocsLanding> landing pages) ---- */
