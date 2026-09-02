@@ -8,7 +8,12 @@
 
 .docs-search-bar input {
   border-radius: var(--ifm-global-radius);
-  background-color: var(--eds-background-canvas);
+
+  /* Shorthand, so it carries the colour as well as the search icon — a
+     separate background-color above this would be dead, since the shorthand
+     resets it. */
+  background: var(--eds-background-input) var(--ifm-navbar-search-input-icon)
+    no-repeat 0.75rem center / 1rem 1rem;
   box-shadow: 0 0 0 1px var(--eds-border-neutral-subtle) inset;
 }
 

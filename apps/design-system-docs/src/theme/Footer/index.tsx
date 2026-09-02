@@ -45,7 +45,9 @@ function Footer(): JSX.Element | null {
     return null
   }
 
-  const { copyright, links = [] } = footer
+  // themeConfig.footer.copyright is deliberately not read: the footer's bottom
+  // row shows the Equinor brand logo instead of a copyright line.
+  const { links = [] } = footer
   // themeConfig.footer.links can be multi-column ({title, items}[]) or simple
   // (FooterItem[]); this footer only renders the multi-column shape, so filter
   // instead of casting — a simple config renders no columns rather than crashing.

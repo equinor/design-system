@@ -1,16 +1,6 @@
 import type { ReactNode } from 'react'
 import Link from '@docusaurus/Link'
-import {
-  puzzle,
-  accessible,
-  touch,
-  desktop_mac,
-  color_palette,
-  widgets,
-  view_module,
-  help,
-  arrow_forward,
-} from '@equinor/eds-icons'
+import { color_palette, widgets, help, arrow_forward } from '@equinor/eds-icons'
 
 import { Hero as PageHero } from '@site/src/components/Hero'
 import { DocsSection } from '@site/src/components/DocsSection'
@@ -129,14 +119,6 @@ const CATEGORIES = [
       'Ready-to-use UI elements like buttons, inputs, dialogs, and more — with matching Figma and React implementations.',
     to: 'docs/Next/components/',
     badge: { label: 'In progress', tone: 'accent' },
-  },
-  {
-    icon: view_module,
-    title: 'Patterns',
-    description:
-      'Guidance on how to combine components for common tasks like forms, navigation, and data display.',
-    badge: { label: 'Coming soon' },
-    disabled: true,
   },
 ] satisfies IconCardProps[]
 
