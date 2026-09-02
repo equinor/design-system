@@ -48,9 +48,10 @@
     --_text: var(--eds-text-primary);
     --_icon: var(--eds-icon-primary);
 
-    /* All tones share the neutral on-emphasis colour on purpose: the per-tone
-     * --eds-*-on-emphasis-{tone} tokens exist, but Chip keeps the flat
-     * high-contrast look until design confirms the per-tone intent. */
+    /* All tones share the neutral on-emphasis colour per the Figma design:
+     * high-contrast text is flat white (neutral.15) across all six tones.
+     * The per-tone --eds-*-on-emphasis-{tone} tokens exist but Chip does
+     * not use them. */
     --_text-emphasis: var(--eds-text-on-emphasis-neutral);
     --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
     --_border-interactive: var(
