@@ -28,10 +28,11 @@
 
     /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
      * selects the tone (Chip always sets it, default tone is neutral). Neutral
-     * has no --eds-text-neutral token; it maps text to --eds-text-primary by
-     * design (#5283). Non-neutral tones use --eds-text-{tone} for label text
-     * and --eds-icon-{tone} for icons (the two differ for accent: shade 12 vs
-     * shade 10). Surfaces use --eds-background-interactive-{tone}-*. */
+     * maps text to --eds-text-primary by design (#5283). Non-neutral tones use
+     * --eds-text-on-muted-{tone} for label text and --eds-icon-on-default-{tone}
+     * for icons — the shade difference (12 vs 10) is carried by the on-muted vs
+     * on-default surface, not by text vs icon. Surfaces use
+     * --eds-background-interactive-{tone}-*. */
     --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
     --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
     --_bg-muted-pressed: var(
@@ -46,6 +47,12 @@
     );
     --_text: var(--eds-text-primary);
     --_icon: var(--eds-icon-primary);
+
+    /* All tones share the neutral on-emphasis colour on purpose: the per-tone
+     * --eds-*-on-emphasis-{tone} tokens exist, but Chip keeps the flat
+     * high-contrast look until design confirms the per-tone intent. */
+    --_text-emphasis: var(--eds-text-on-emphasis-neutral);
+    --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
     --_border-interactive: var(
       --eds-border-interactive-neutral-emphasis-default
     );
@@ -89,8 +96,8 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-accent-emphasis-pressed
       );
-      --_text: var(--eds-text-accent);
-      --_icon: var(--eds-icon-accent);
+      --_text: var(--eds-text-on-muted-accent);
+      --_icon: var(--eds-icon-on-default-accent);
       --_border-interactive: var(
         --eds-border-interactive-accent-emphasis-default
       );
@@ -111,8 +118,8 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-success-emphasis-pressed
       );
-      --_text: var(--eds-text-success);
-      --_icon: var(--eds-icon-success);
+      --_text: var(--eds-text-on-muted-success);
+      --_icon: var(--eds-icon-on-default-success);
       --_border-interactive: var(
         --eds-border-interactive-success-emphasis-default
       );
@@ -129,8 +136,8 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-info-emphasis-pressed
       );
-      --_text: var(--eds-text-info);
-      --_icon: var(--eds-icon-info);
+      --_text: var(--eds-text-on-muted-info);
+      --_icon: var(--eds-icon-on-default-info);
       --_border-interactive: var(
         --eds-border-interactive-info-emphasis-default
       );
@@ -151,8 +158,8 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-warning-emphasis-pressed
       );
-      --_text: var(--eds-text-warning);
-      --_icon: var(--eds-icon-warning);
+      --_text: var(--eds-text-on-muted-warning);
+      --_icon: var(--eds-icon-on-default-warning);
       --_border-interactive: var(
         --eds-border-interactive-warning-emphasis-default
       );
@@ -171,8 +178,8 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-danger-emphasis-pressed
       );
-      --_text: var(--eds-text-danger);
-      --_icon: var(--eds-icon-danger);
+      --_text: var(--eds-text-on-muted-danger);
+      --_icon: var(--eds-icon-on-default-danger);
       --_border-interactive: var(
         --eds-border-interactive-danger-emphasis-default
       );
@@ -213,8 +220,8 @@
     /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
 
     &[data-variant='high-contrast'] {
-      --_text: var(--eds-text-on-emphasis);
-      --_icon: var(--eds-icon-on-emphasis);
+      --_text: var(--_text-emphasis);
+      --_icon: var(--_icon-emphasis);
 
       background-color: var(--_bg-emphasis);
       outline: none;
