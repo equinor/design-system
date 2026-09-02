@@ -24,7 +24,7 @@
   width: calc(100vw - var(--doc-sidebar-width, 0px));
   min-height: 300px;
   margin-inline: calc((100% - (100vw - var(--doc-sidebar-width, 0px))) / 2);
-  padding-block: 4rem 3rem;
+  padding-block: var(--docs-hero-space-block, 5rem);
 
   background-color: var(--docs-hero-bg);
 }
@@ -67,7 +67,6 @@
   .docHero {
     width: 100vw;
     margin-inline: calc((100% - 100vw) / 2);
-    padding-block: 2.5rem 2rem;
   }
 }
 
@@ -79,20 +78,21 @@
  * module class, so it is matched by attribute — css-loader only rewrites the
  * class selectors this file owns, and the hash makes a literal name unusable. */
 @media (width >= 997px) {
+  /* The band's width is derived from the sidebar width rather than from flex,
+   * so unlike `main` it has nothing clamping it mid-transition — it would snap
+   * to the new width a full 200ms before the sidebar finished moving, in both
+   * directions. Run it on the sidebar's clock. `doc-layouts.css` does the same
+   * for `main`'s `max-width`; see the comment there. */
+  .docHero {
+    transition:
+      width var(--ifm-transition-fast) ease,
+      margin-inline var(--ifm-transition-fast) ease;
+  }
+
   [class*='docMainContainerEnhanced'] .docHero {
     width: calc(100vw - var(--doc-sidebar-hidden-width, 30px));
     margin-inline: calc(
       (100% - (100vw - var(--doc-sidebar-hidden-width, 30px))) / 2
     );
-  }
-
-  /* Collapsing the sidebar also widens the doc content: Docusaurus puts
-   * `.docItemWrapperEnhanced` on `main > .container`, raising its cap to
-   * `--ifm-container-width + --doc-sidebar-width` so the body spends the
-   * reclaimed space. `.docHeroInner` stands in for that container, so it has to
-   * grow by the same amount — otherwise it stays at the narrow cap and the hero
-   * text sits inset from `.theme-doc-markdown` by half the sidebar width. */
-  [class*='docMainContainerEnhanced'] .docHeroInner {
-    max-width: calc(var(--ifm-container-width) + var(--doc-sidebar-width, 0px));
   }
 }

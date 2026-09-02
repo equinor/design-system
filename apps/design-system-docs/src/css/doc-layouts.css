@@ -25,6 +25,50 @@
   background-color: var(--eds-background-surface);
 }
 
+/* Collapsing the desktop sidebar must not widen the content column.
+   Docusaurus puts `.docItemWrapperEnhanced` on `main > .container` and raises
+   its cap to `--ifm-container-width + --doc-sidebar-width` (1440px) so the doc
+   spends the reclaimed space. That makes component/foundation reference pages
+   the only place on the site where the content measure changes, and it breaks
+   the alignment `--ifm-container-width-xl` in theme-variables.css exists to
+   keep. Pin it back to `--ifm-container-width` (1140px cap, 1108px content box
+   after the container's horizontal padding) so every page reads at one measure
+   and collapsing the sidebar only re-centres the column. The attribute
+   selector matches Docusaurus's hashed CSS-module class; the `!important` and
+   the extra specificity are needed to beat its own `!important` rule.
+
+   Two exclusions, both because the specificity needed above would otherwise
+   overrule layouts that deliberately drop the cap. `.docs-landing` (section 2)
+   is excluded here, since its own `main:has(.docs-landing) > .container` rule
+   is less specific and would lose. The foundation pages (section 4) need no
+   exclusion: their rule matches this specificity and comes later in the file.
+
+   Scoped to the current version — the frozen 1.1.0 archive keeps stock
+   behaviour. */
+@media (width >= 997px) {
+  html[class*='docs-version-current']
+    main:not(:has(.docs-landing))
+    > .container[class*='docItemWrapperEnhanced'] {
+    max-width: var(--ifm-container-width) !important;
+  }
+}
+
+/* Expanding the sidebar must not overshoot. Docusaurus transitions the
+   sidebar `aside`'s width between `--doc-sidebar-width` and
+   `--doc-sidebar-hidden-width`, but `main`'s matching `max-width` is a plain
+   class swap with no transition. Collapsing hides that — flex keeps `main`
+   clamped to the space the shrinking aside has actually vacated — but
+   expanding does not: `max-width` drops the full sidebar width in one frame
+   while the aside is still a rail, so the content jerks ~240px left and then
+   slides back right over the aside's 200ms. Transitioning `max-width` on the
+   same clock keeps the two edges together. `--ifm-transition-fast` is 0ms
+   under `prefers-reduced-motion`, so this needs no separate opt-out. */
+@media (width >= 997px) {
+  main[class*='docMainContainer'] {
+    transition: max-width var(--ifm-transition-fast) ease;
+  }
+}
+
 /* ======================================
  * 2. LANDING LAYOUT (.docs-landing)
  * The "landing" layout for MDX docs (Components, Resources, Support, and the
