@@ -201,8 +201,11 @@ pnpm build
 # Run all tests
 pnpm test
 
-# Lint entire codebase
+# Lint entire codebase, except packages/eds-mobile-components and
+# apps/mobile-storybook (they ship their own eslint.config.js)
 pnpm lint:all
+pnpm --filter @equinor/eds-mobile-components run lint
+pnpm --filter @equinor/mobile-storybook run lint
 
 # Start Storybook for component development
 pnpm storybook
