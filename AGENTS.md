@@ -58,7 +58,9 @@ The expected behaviour after any edit to a `.ts`, `.tsx`, or `/components/next/*
 | Copilot in IDE | `.vscode/settings.json` `editor.formatOnSave: true` (Prettier) — does NOT run eslint/stylelint auto-fix  |
 | OpenCode       | No enforced hook — run `pnpm run lint <file>` manually after edits, or configure an equivalent post-hook |
 
-If you edit code in a harness without enforced auto-fix, run `pnpm run lint <file>` before considering the change done. **Exception:** `packages/eds-mobile-components` and `apps/mobile-storybook` are excluded from root's ESLint config (see below) — root's `lint` command silently exits 0 on their files without checking anything. Use `pnpm --filter @equinor/eds-mobile-components run lint` or `pnpm --filter @equinor/mobile-storybook run lint` instead.
+If you edit code in a harness without enforced auto-fix, run `pnpm run lint <file>` before considering the change done.
+
+**Exception:** `packages/eds-mobile-components` and `apps/mobile-storybook` are excluded from root's ESLint config — root's `lint` command exits 0 on their files (with an easy-to-miss "File ignored" warning) without actually checking anything. Use the per-package commands below instead.
 
 ## Build/Lint/Test Commands
 
