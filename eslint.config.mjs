@@ -29,8 +29,8 @@ export default tseslint.config(
       '**/playwright-report/**',
       '**/test-results/**',
       '**/.turbo/**',
-      // These packages ship their own eslint.config.js with a different
-      // style (double quotes, semicolons). Flat config doesn't cascade
+      // These packages ship their own eslint.config.js and are written in a
+      // different style (double quotes, semicolons). Flat config doesn't cascade
       // per-directory — running `eslint .` from the root would otherwise
       // apply this file's Prettier rules to their code instead of theirs.
       // Linted separately via each package's own `lint` script (see the
