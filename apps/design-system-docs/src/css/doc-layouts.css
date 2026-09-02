@@ -20,7 +20,7 @@
  * ====================================== */
 .theme-doc-markdown {
   padding: 1.5rem;
-  border: var(--eds-border-neutral-subtle) 1px solid;
+  border: var(--eds-border-non-interactive-neutral-muted) 1px solid;
   border-radius: var(--ifm-global-radius);
   background-color: var(--ifm-background-surface-color);
 }
@@ -349,7 +349,7 @@ html[class*='docs-doc-id-foundation/'][class*='docs-version-current'] {
   h2 {
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--eds-border-neutral-subtle);
+  border-top: 1px solid var(--eds-border-non-interactive-neutral-muted);
   font-size: var(--docs-font-section-size);
 }
 

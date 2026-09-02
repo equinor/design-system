@@ -5,7 +5,7 @@
 
   margin-bottom: 0.5rem;
   padding: 1.5rem;
-  border: 1px solid var(--eds-border-neutral-subtle);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
   border-radius: var(--eds-corner-radius-rounded);
 
   background-color: var(--eds-background-surface);

@@ -12,7 +12,7 @@
  * ====================================== */
 nav.menu {
   padding: 0;
-  border-right: var(--eds-border-neutral-subtle) 1px solid;
+  border-right: var(--eds-border-non-interactive-neutral-muted) 1px solid;
 
   font-size: var(--eds-typography-ui-md-font-size);
 
@@ -29,8 +29,8 @@ nav.menu {
   width: 40px;
   padding: 0.5rem;
   border: none;
-  border-top: var(--eds-border-neutral-subtle) 1px solid;
-  border-bottom: var(--eds-border-neutral-subtle) 1px solid;
+  border-top: var(--eds-border-non-interactive-neutral-muted) 1px solid;
+  border-bottom: var(--eds-border-non-interactive-neutral-muted) 1px solid;
 
   text-align: center;
 
@@ -164,7 +164,7 @@ nav.menu li a {
  * TOP NAVIGATION BAR
  * ====================================== */
 .navbar {
-  border-bottom: var(--eds-border-neutral-subtle) 1px solid;
+  border-bottom: 1px solid var(--eds-border-non-interactive-neutral-muted);
   box-shadow: unset;
 }
 
@@ -207,13 +207,13 @@ nav.menu li a {
 }
 
 .navbar__link--active {
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
   box-shadow: 0 -2px 0 0 var(--eds-border-interactive-accent-emphasis-default)
     inset !important;
 }
 
 .navbar__link--active:hover {
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
   background-color: var(
     --eds-background-interactive-accent-muted-hover
   ) !important;
@@ -235,7 +235,7 @@ nav.menu li a {
 /* Mark the Foundation navbar link as active on Foundation doc pages
    (the plain link only matches the exact /foundation route otherwise). */
 html[class*='docs-doc-id-foundation/'] .navbar__link[href*='/foundation'] {
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
   box-shadow: 0 -2px 0 0 var(--eds-border-interactive-accent-emphasis-default)
     inset !important;
 }
@@ -244,7 +244,7 @@ html[class*='docs-doc-id-foundation/'] .navbar__link[href*='/foundation'] {
    navbar item already does this for every doc in the componentsSidebar; this
    keeps it robust if a components doc is ever left out of that sidebar. */
 html[class*='docs-doc-id-components/'] .navbar__link[href*='/components/'] {
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
   box-shadow: 0 -2px 0 0 var(--eds-border-interactive-accent-emphasis-default)
     inset !important;
 }
@@ -253,14 +253,14 @@ html[class*='docs-doc-id-components/'] .navbar__link[href*='/components/'] {
    (the navbar item is a plain link to /getting-started, which only matches its
    own route). */
 html[class*='docs-doc-id-about/'] .navbar__link[href*='/getting-started'] {
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
   box-shadow: 0 -2px 0 0 var(--eds-border-interactive-accent-emphasis-default)
     inset !important;
 }
 
 /* Same fallback for the Resources navbar link on resources doc pages. */
 html[class*='docs-doc-id-resources/'] .navbar__link[href*='/resources'] {
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
   box-shadow: 0 -2px 0 0 var(--eds-border-interactive-accent-emphasis-default)
     inset !important;
 }
@@ -285,7 +285,7 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
 .theme-doc-toc-mobile {
   margin-top: 1rem;
-  border: var(--eds-border-neutral-subtle) 1px solid;
+  border: var(--eds-border-non-interactive-neutral-muted) 1px solid;
   border-radius: var(--eds-corner-radius-rounded);
   background-color: var(--ifm-background-surface-color) !important;
 }
@@ -320,7 +320,7 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 .table-of-contents__link:hover {
   font-weight: var(--docs-font-weight-emphasis);
   text-decoration: underline;
-  text-decoration-color: var(--eds-border-neutral-subtle);
+  text-decoration-color: var(--eds-border-non-interactive-neutral-muted);
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
 
@@ -377,7 +377,7 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
   padding: 2rem;
   border-top: 1px solid rgb(255 255 255 / 20%);
 
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
 
   background-color: var(--ifm-color-primary);
 }
@@ -397,7 +397,7 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
   font-size: var(--docs-font-caption-size);
   font-weight: var(--docs-font-weight-emphasis);
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -415,13 +415,13 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
 .footer__column-link {
   font-size: var(--eds-typography-ui-md-font-size);
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
   text-decoration: none;
   transition: color 150ms ease;
 }
 
 .footer__column-link:hover {
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
   text-decoration: underline;
 }
 
@@ -469,7 +469,7 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
   margin-top: 0;
 
   & path {
-    fill: var(--eds-text-on-emphasis);
+    fill: var(--eds-text-on-emphasis-accent);
   }
 }
 
@@ -483,5 +483,5 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
   display: block;
   width: 1.25rem;
   height: 1.25rem;
-  fill: var(--eds-text-on-emphasis);
+  fill: var(--eds-text-on-emphasis-accent);
 }

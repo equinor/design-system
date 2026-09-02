@@ -97,30 +97,40 @@ above deliberately relies on specificity order). Every other rule applies —
 **RULE: site styling derives ONLY from the semantic layer of the Tokens
 Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
 `--eds-icon-*`, `--eds-typography-*`, `--eds-font-*`, `--eds-spacing-*`,
-`--eds-corner-radius-*`. Never reference primitives (`--eds-primitives-*`,
-`--eds-light-*`/`--eds-dark-*`, palette steps like `--eds-accent-9`), the
-density layer (`--eds-density-*`), or legacy `--eds-color-*` names. The only
-sanctioned exceptions are the two bridges, each defined in exactly one place:
+`--eds-corner-radius-*`, `--eds-elevation-*`. Never reference primitives
+(`--eds-primitives-*`, `--eds-light-*`/`--eds-dark-*`, palette steps like
+`--eds-accent-9`), the density layer (`--eds-density-*`), or legacy
+`--eds-color-*` names. There is one sanctioned exception: the semantic
+typography bridge in `theme-variables.css` (`:root:root` re-declarations
+resolving the header-* font-size collision below).
 
-- the semantic typography bridge in `theme-variables.css` (`:root:root`
-  re-declarations resolving the header-* font-size collision below), and
-- `--docs-elevation-low/high` in `docs-components.css` (the Tokens Studio
-  bundle ships no elevation tokens yet) — components use the `--docs-*`
-  names, never `--eds-elevation-*` directly.
+**Elevation is a composite token — use it as one.** `--eds-elevation-low` and
+`--eds-elevation-high` are `boxShadow` composites in the Tokens Studio
+semantic layer, each already composed into a full two-layer (key + ambient)
+`box-shadow` value. Consume those two names directly. Do not compose a shadow
+from the `--eds-shadow-{low,high}-{key,ambient}-{x,y,blur,spread,color}` parts
+they are built from — those are the composite's internals, and restating the
+composition in site CSS silently goes stale if a layer is ever added.
 
 Both token bundles load (see imports in `theme-variables.css`):
 
 1. **Tokens Studio bundle** (ADR-0011) — the source of truth for the site's
-   own colours/typography. Imported as
+   own colours, typography and elevation. Imported as
    `@equinor/eds-tokens/next/css/variables.css` via a webpack alias to the
    committed `packages/eds-tokens/src/tokens/css/variables.css`. Names:
    `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
    `--eds-corner-radius-*`, `--eds-typography-{ui,header}-*`,
-   `--eds-font-family-*`, `--eds-font-weight-*` (max weight `bolder` = 500).
+   `--eds-font-family-*`, `--eds-font-weight-*` (max weight `bolder` = 500),
+   `--eds-elevation-{low,high}`.
 2. **Legacy bundle** (`@equinor/eds-tokens/css/variables`) — retained ONLY for
-   `--eds-elevation-*`, `--eds-container-space-*`, and the embedded `/next`
-   component previews, which consume legacy names. Do not use legacy
-   `--eds-color-*` names in site CSS.
+   `--eds-container-space-*` and the embedded `/next` component previews,
+   which consume legacy names. Do not use legacy `--eds-color-*` names in
+   site CSS. **It must stay the first of the two imports:** it also declares
+   `--eds-elevation-low/high`, at the same specificity as the Tokens Studio
+   pair (both 0,1,0), so import order is the only thing making the Tokens
+   Studio composite win. The values agree today, so a reordering would not
+   show up visually — it would just silently pin the site to the legacy flat
+   shadow, which does not flip with the colour scheme.
 
 ## Fonts
 

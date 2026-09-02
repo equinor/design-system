@@ -10,16 +10,21 @@
 /* ======================================
  * TOKEN + FONT IMPORTS
  * ====================================== */
-/* Legacy-pipeline token bundle — still required for --eds-elevation-* (no
-   Tokens Studio equivalent yet; bridged as --docs-elevation-* in
-   docs-components.css) and for the embedded /next component previews, which
-   consume legacy names. Site styling must not reference legacy names
-   directly. */
+/* Legacy-pipeline token bundle — still required for --eds-container-space-*
+   and for the embedded /next component previews, which consume legacy names.
+   Site styling must not reference legacy names directly.
+
+   It must stay FIRST: both bundles declare --eds-elevation-low/high at equal
+   specificity (legacy on `:root, [data-color-scheme="light"]`, Tokens Studio
+   on `[data-color-scheme]` — both 0,1,0), so the later import wins and the
+   Tokens Studio composite is what site CSS resolves. The two agree value for
+   value today, but only the Tokens Studio pair is composed from
+   --eds-shadow-* parts whose colours flip with the colour scheme. */
 @import '@equinor/eds-tokens/css/variables';
 
 /* Tokens Studio bundle (ADR-0011) — the source of truth for the site's own
-   colour and typography tokens. Resolved via the eds-resolver webpack alias
-   in docusaurus.config.ts. */
+   colour, typography and elevation tokens. Resolved via the eds-resolver
+   webpack alias in docusaurus.config.ts. */
 @import '@equinor/eds-tokens/next/css/variables.css';
 
 /* Equinor brand font */
@@ -141,21 +146,23 @@
      while doc content stays 1140px, so content jumps on navigation. */
   --ifm-container-width-xl: var(--ifm-container-width);
   --docusaurus-highlighted-code-line-bg: rgb(0 0 0 / 10%);
-  --ifm-link-color: var(--eds-text-link);
+  --ifm-link-color: var(--eds-text-interactive-link-default);
 
   /* Navbar styling */
   --ifm-navbar-shadow: none;
   --ifm-navbar-height: 68px;
 
-  /* Tab text colours from the EDS Tabs spec (active gets --eds-text-accent
-     in site-chrome.css). */
+  /* Tab text colours from the EDS Tabs spec (active gets
+     --eds-text-on-default-accent in site-chrome.css). */
   --ifm-navbar-link-color: var(--eds-text-primary);
   --ifm-navbar-link-hover-color: var(--eds-text-primary);
   --ifm-navbar-padding-vertical: 0;
 
   /* Menu and sidebar styling */
   --ifm-menu-color: var(--ifm-font-color-base);
-  --ifm-menu-vertical-line-color: var(--eds-border-neutral-subtle);
+  --ifm-menu-vertical-line-color: var(
+    --eds-border-non-interactive-neutral-muted
+  );
   --ifm-menu-color-active: var(--ifm-color-primary);
   --ifm-menu-color-background-active: var(--ifm-hover-overlay);
   --ifm-menu-color-background-hover: var(--ifm-hover-overlay);

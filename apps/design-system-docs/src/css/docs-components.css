@@ -63,12 +63,6 @@
   /* Emphasis weight — headings, buttons, labels */
   --docs-font-weight-emphasis: var(--eds-font-weight-bolder);
 
-  /* The Tokens Studio bundle ships no elevation tokens yet — these bridge to
-     the legacy pipeline until it does. The ONLY sanctioned legacy references
-     in site styling; components must use --docs-elevation-*. */
-  --docs-elevation-low: var(--eds-elevation-low);
-  --docs-elevation-high: var(--eds-elevation-high);
-
   /* ------------------------------------------------------------------
    * Card recipe — from the EDS IllustrativeCard spec (Figma Core
    * Components, node 4663-25088). Every site card consumes these:
@@ -82,7 +76,7 @@
   --docs-card-radius: var(--eds-corner-radius-rounded);
   --docs-card-padding: var(--eds-spacing-sm);
   --docs-card-gap: var(--eds-spacing-4xs);
-  --docs-card-hover-shadow: var(--docs-elevation-low);
+  --docs-card-hover-shadow: var(--eds-elevation-low);
   --docs-card-title-size: var(--eds-typography-ui-md-font-size);
   --docs-card-title-line-height: var(--eds-typography-ui-md-line-height);
   --docs-card-text-size: var(--eds-typography-ui-sm-font-size);

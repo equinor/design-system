@@ -6,7 +6,7 @@
   max-width: var(--docs-content-max);
   margin: 1.5rem auto;
   padding: 1rem;
-  border: 1px solid var(--eds-border-neutral-subtle);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
   border-radius: var(--eds-corner-radius-rounded);
 
   background-color: var(--eds-background-surface);

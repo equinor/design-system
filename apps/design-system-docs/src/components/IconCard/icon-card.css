@@ -75,7 +75,7 @@ a.docs-icon-card:focus-visible {
   border-radius: var(--eds-corner-radius-rounded);
 
   font-size: 1.5rem;
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
 
   background-color: var(--ifm-color-primary);
 }
@@ -102,7 +102,7 @@ a.docs-icon-card:focus-visible {
 }
 
 .docs-icon-card__badge[data-tone='accent'] {
-  color: var(--eds-text-link);
+  color: var(--eds-text-interactive-link-default);
   background-color: var(--eds-background-interactive-accent-muted-default);
 }
 

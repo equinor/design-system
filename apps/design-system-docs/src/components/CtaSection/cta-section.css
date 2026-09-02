@@ -33,7 +33,7 @@
   border-radius: var(--eds-corner-radius-rounded);
 
   font-weight: var(--docs-font-weight-emphasis);
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
 
   background-color: var(--ifm-color-primary);
 
@@ -41,7 +41,7 @@
 }
 
 .docs-cta-section__button:hover {
-  color: var(--eds-text-on-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
   text-decoration: none;
   background-color: var(--eds-background-interactive-accent-emphasis-hover);
 }

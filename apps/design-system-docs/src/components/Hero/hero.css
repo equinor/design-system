@@ -31,7 +31,7 @@
 
   font-size: var(--docs-font-body-sm-size);
   font-weight: var(--docs-font-weight-emphasis);
-  color: var(--eds-text-link);
+  color: var(--eds-text-interactive-link-default);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -81,5 +81,5 @@
   max-width: none;
   margin-bottom: 0;
   font-size: var(--docs-font-hero-size);
-  color: var(--eds-text-accent);
+  color: var(--eds-text-on-default-accent);
 }
