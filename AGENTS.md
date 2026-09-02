@@ -49,7 +49,7 @@ The expected behaviour after any edit to a `.ts`, `.tsx`, `.css`, or `.md` file:
 - Stylelint `--fix` runs on `.css` files inside `packages/eds-core-react/src/components/next/`
 - Prettier `--write` runs on `.css` and `.md`, after Stylelint. Stylelint only fixes ordering and notation, not Prettier's whitespace, so CSS needs both. The two converge in one pass — verified — so the order is stable and neither undoes the other. Prettier reads `.prettierignore` itself, which is why `*.mdx` stays untouched.
 
-`.md` and `.css` outside `components/next/` were unformatted for a long time because nothing ran Prettier on them: ESLint's Prettier integration only covers JS/TS, and the hooks only called Stylelint inside `components/next/`. **122 `.css`/`.md` files repo-wide are still Prettier-unclean** — `apps/design-system-docs` has been cleaned, the rest have not. Run `pnpm run format:check` to see them.
+`.md` and `.css` outside `components/next/` were unformatted for a long time because nothing ran Prettier on them: ESLint's Prettier integration only covers JS/TS, and the hooks only called Stylelint inside `components/next/`. **100 `.css`/`.md` files repo-wide are still Prettier-unclean** — run `pnpm run format:check` to see them. 25 of those are `apps/design-system-docs/versioned_docs/version-1.1.0/`, the frozen docs archive, which is deliberately left alone; the rest of that app is clean and gated in CI by `pnpm run format:check:docs`.
 
 **Enforcement matrix:**
 
