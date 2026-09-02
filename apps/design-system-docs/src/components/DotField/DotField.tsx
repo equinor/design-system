@@ -7,7 +7,8 @@ import './dot-field.css'
 /**
  * The EDS dot grid, for hero bands and any similar full-bleed surface: 2px dots
  * on an 18px pitch at 50% of the accent icon colour, with a pointer-following
- * spotlight that lifts nearby dots to 100%.
+ * spotlight that lifts nearby dots to 100% and grows them as it does, so the
+ * dots swell towards the cursor and taper back down across the falloff.
  *
  * Render it as a child of the band and give the band `docs-dot-host`, which
  * makes it the positioning context. The field listens on that host rather than

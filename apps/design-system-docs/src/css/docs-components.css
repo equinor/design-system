@@ -107,16 +107,27 @@
      pattern. Consumed by <DotField> (dot-field.css) and, for the markdown
      hero bands that cannot host an element, directly in doc-layouts.css.
 
-     The two gradients resolve here rather than per band: the pattern is the
-     same everywhere, and a gradient held in a custom property takes the colour
-     it had where the property was declared, so a per-band override of
+     The gradients resolve here rather than per band: the pattern is the same
+     everywhere, and a gradient held in a custom property takes the colour it
+     had where the property was declared, so a per-band override of
      --docs-dot-size or the accent token would not reach it. Both bundles key
      their theme blocks off <html>, which is this element, so the dot colour
-     still flips with the colour scheme. */
+     still flips with the colour scheme.
+
+     The spotlight grows the dots as well as brightening them, so there are
+     three dot sizes on one shared pitch: the resting size, and two larger lit
+     steps that <DotField> stacks in rings around the pointer. Only the resting
+     size feeds the pitch — the lit dots grow inside their existing cell, which
+     is what keeps all three layers registered on the same grid. */
   --docs-dot-size: 2px;
+  --docs-dot-size-lit: 3px;
+  --docs-dot-size-lit-near: 4.5px;
   --docs-dot-gap: 16px;
   --docs-dot-pitch: calc(var(--docs-dot-size) + var(--docs-dot-gap));
-  --docs-dot-spotlight-radius: 10rem;
+  --docs-dot-spotlight-radius: 15rem;
+
+  /* Fraction of the spotlight radius covered by the largest dots. */
+  --docs-dot-spotlight-core: 0.42;
   --docs-dot-grid: radial-gradient(
     circle at center,
     color-mix(
@@ -127,10 +138,21 @@
       calc(var(--docs-dot-size) / 2),
     transparent calc(var(--docs-dot-size) / 2)
   );
+
+  /* The lit dots feather over the last half pixel. The resting dot is small
+     enough that a hard stop still reads as round, but at these radii the
+     un-antialiased edge of a hard stop turns the dot into a square. */
   --docs-dot-grid-lit: radial-gradient(
     circle at center,
-    var(--eds-icon-interactive-accent-default) calc(var(--docs-dot-size) / 2),
-    transparent calc(var(--docs-dot-size) / 2)
+    var(--eds-icon-interactive-accent-default)
+      calc(var(--docs-dot-size-lit) / 2 - 0.5px),
+    transparent calc(var(--docs-dot-size-lit) / 2)
+  );
+  --docs-dot-grid-lit-near: radial-gradient(
+    circle at center,
+    var(--eds-icon-interactive-accent-default)
+      calc(var(--docs-dot-size-lit-near) / 2 - 0.5px),
+    transparent calc(var(--docs-dot-size-lit-near) / 2)
   );
 }
 

@@ -25,8 +25,17 @@
    a radial mask centred on the cursor. Overlaying full-opacity dots on the
    dimmed ones is what takes them back to 100%, and the mask's gradient is the
    falloff. Hover-capable pointers only — on touch there is no cursor to follow,
-   so the grid stays at its resting 50%. */
+   so the grid stays at its resting 50%.
+
+   The dots grow towards the cursor as well as brightening. A background tile
+   has one size for the whole layer, so the size falloff is built from two
+   stacked lit layers rather than from one: ::before carries the medium dots
+   over the full spotlight radius, ::after the largest dots over its core. Both
+   dots are centred in the same cell, so the larger simply covers the smaller,
+   and each layer's mask fades out over its own band — which blends the two
+   steps into what reads as a continuous ramp instead of two visible rings. */
 @media (hover: hover) {
+  .docs-dot-field::before,
   .docs-dot-field::after {
     content: '';
 
@@ -34,9 +43,15 @@
     inset: 0;
 
     opacity: 0;
-    background-image: var(--docs-dot-grid-lit);
     background-size: var(--docs-dot-pitch) var(--docs-dot-pitch);
 
+    transition: opacity 240ms ease-out;
+  }
+
+  /* Medium dots, full radius — also the layer that carries the brightness
+     falloff out to the resting grid. */
+  .docs-dot-field::before {
+    background-image: var(--docs-dot-grid-lit);
     mask-image: radial-gradient(
       circle var(--docs-dot-spotlight-radius) at var(--docs-dot-x, 50%)
         var(--docs-dot-y, 50%),
@@ -44,16 +59,30 @@
       rgb(0 0 0 / 55%) 45%,
       transparent 100%
     );
-
-    transition: opacity 240ms ease-out;
   }
 
+  /* Largest dots, spotlight core. The mask fades from the centre out so the
+     size step arrives gradually. */
+  .docs-dot-field::after {
+    background-image: var(--docs-dot-grid-lit-near);
+    mask-image: radial-gradient(
+      circle
+        calc(var(--docs-dot-spotlight-radius) * var(--docs-dot-spotlight-core))
+        at var(--docs-dot-x, 50%) var(--docs-dot-y, 50%),
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 70%) 40%,
+      transparent 100%
+    );
+  }
+
+  .docs-dot-host:hover .docs-dot-field::before,
   .docs-dot-host:hover .docs-dot-field::after {
     opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .docs-dot-field::before,
   .docs-dot-field::after {
     transition: none;
   }
