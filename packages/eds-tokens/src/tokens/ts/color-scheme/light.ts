@@ -21,12 +21,6 @@ export const colorScheme = {
     '14': '#cae4e7',
     '15': '#ffffff',
   },
-  bgBackdrop: '#a4a4a4',
-  bgDisabled: '#e1e1e1',
-  bgFloating: '#ebebeb',
-  bgInput: '#f8f8f8',
-  borderDisabled: '#a4a4a4',
-  borderFocus: '#5cade5',
   danger: {
     '1': '#fff4f3',
     '2': '#ffe1df',
@@ -138,6 +132,10 @@ export const colorScheme = {
       '7': '#054046',
     },
   },
+  elevation: {
+    ambient: '#0000001f',
+    key: '#00000033',
+  },
   info: {
     '1': '#f2faff',
     '2': '#d9efff',
@@ -189,8 +187,6 @@ export const colorScheme = {
     '14': '#cae8c7',
     '15': '#ffffff',
   },
-  textDisabled: '#a4a4a4',
-  textLink: '#1d8fcf',
   warning: {
     '1': '#fff6f0',
     '2': '#ffe6d3',
