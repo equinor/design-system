@@ -74,7 +74,7 @@
 .component-gallery__subtitle {
   font-size: var(--docs-card-text-size);
   line-height: var(--docs-card-text-line-height);
-  color: var(--eds-text-secondary);
+  color: var(--eds-text-primary);
 }
 
 /* Layout wrappers for the live component previews. */
@@ -128,7 +128,7 @@
   align-items: center;
   justify-content: center;
 
-  color: var(--ifm-color-emphasis-700);
+  color: var(--eds-text-secondary);
 }
 
 /* Links — vertical list. */

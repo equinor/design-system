@@ -39,14 +39,17 @@
 .docs-hero__title {
   max-width: 20ch;
   margin-bottom: 1.5rem;
+
   font-size: var(--docs-font-display-size);
   line-height: var(--docs-font-display-line-height);
+  color: var(--eds-text-primary);
 }
 
 .docs-hero__lead p {
   max-width: var(--docs-measure, 35rem);
   font-size: var(--docs-font-lead-size);
   line-height: var(--docs-prose-line-height);
+  color: var(--eds-text-primary);
 }
 
 .docs-hero__lead p:last-child {

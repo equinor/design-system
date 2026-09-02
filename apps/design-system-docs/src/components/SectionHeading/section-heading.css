@@ -11,5 +11,5 @@
 
   font-size: var(--docs-font-lead-size);
   line-height: var(--docs-prose-line-height);
-  color: var(--ifm-color-emphasis-700);
+  color: var(--eds-text-primary);
 }
