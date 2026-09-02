@@ -68,8 +68,6 @@ Use `startAdornment` and `endAdornment` for elements (icons, buttons) that shoul
 
 Input can render as a multi-line textarea by setting `as="textarea"`.
 
-<StorybookEmbed id="eds-2-0-beta-inputs-input--casted" height={90} showLink />
-
 ## Accessibility
 
 When using Input without a visible label (e.g., in search fields or toolbars), you **must** provide an `aria-label` for accessibility.
