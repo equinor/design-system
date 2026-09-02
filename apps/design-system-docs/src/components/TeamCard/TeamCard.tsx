@@ -13,7 +13,9 @@ export function TeamCard({ image, name, role }: TeamCardProps) {
       <img
         className="docs-team-card__image"
         src={imageUrl}
-        alt={name}
+        // Decorative: the name is rendered as visible text directly below,
+        // so alt={name} would make a screen reader announce it twice.
+        alt=""
         loading="lazy"
       />
       <p className="docs-team-card__name">{name}</p>

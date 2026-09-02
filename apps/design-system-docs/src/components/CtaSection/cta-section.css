@@ -45,3 +45,8 @@
   text-decoration: none;
   background-color: var(--eds-background-interactive-accent-emphasis-hover);
 }
+
+.docs-cta-section__button:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
