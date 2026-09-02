@@ -439,5 +439,12 @@
     },
     "$figmaCollectionId": "VariableCollectionId:5:2",
     "$figmaModeId": "5:0"
+  },
+  {
+    "name": "default",
+    "group": "elevation",
+    "selectedTokenSets": {
+      "elevation/default": "enabled"
+    }
   }
 ]
