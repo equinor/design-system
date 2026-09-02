@@ -24,7 +24,12 @@ export type IconCardProps = {
 }
 
 export type IconCardGridProps = {
-  /** Column count at the widest breakpoint. Defaults to 3. */
+  /**
+   * Fixed columns (`'grid'`, the default) or a single row of equal-width cards
+   * that wraps when it runs out of space (`'row'`).
+   */
+  layout?: 'grid' | 'row'
+  /** Column count at the widest breakpoint. Defaults to 3. Ignored when `layout` is `'row'`. */
   columns?: 2 | 3 | 4
   children: ReactNode
 }

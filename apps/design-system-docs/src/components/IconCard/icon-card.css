@@ -4,6 +4,17 @@
   gap: var(--docs-grid-gap, 1.5rem);
 }
 
+/* Row layout: cards share the row equally and wrap instead of being squeezed,
+   which is what keeps them stacking on narrow viewports without [data-columns]. */
+.docs-icon-card-grid[data-layout='row'] {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.docs-icon-card-grid[data-layout='row'] > * {
+  flex: 1 1 var(--docs-card-row-basis, 18rem);
+}
+
 .docs-icon-card-grid[data-columns='2'] {
   --_columns: 2;
 }

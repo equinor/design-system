@@ -128,7 +128,7 @@ export function DesignLanguage(): ReactNode {
       title="Browse by category"
       subtitle="Explore the building blocks of EDS — from foundational styles to ready-made UI components."
     >
-      <IconCardGrid columns={3}>
+      <IconCardGrid layout="row">
         {CATEGORIES.map((category) => (
           <IconCard key={category.title} {...category} />
         ))}
