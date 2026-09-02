@@ -1,10 +1,11 @@
 # PR Checks Workflow
 #
-# Runs build, test, lint, and type-check in parallel for faster feedback.
-# Build runs first (required by all others), then test/lint/types fan out.
+# Runs build, test, lint, type-check, and the docs site in parallel for faster
+# feedback. Build runs first (required by all others), then test/lint/types/docs
+# fan out.
 #
 # Path filtering:
-# - code or tooling config -> full checks (build + test + lint + types)
+# - code or tooling config -> full checks (build + test + lint + types + docs)
 # - other non-code changes -> build + lint only
 # - manual dispatch -> full checks
 #
@@ -235,6 +236,65 @@ jobs:
       - name: Type check packages
         run: pnpm run types
 
+  # ─── Docs site (parallel, depends on build) ─────────────────────
+  #
+  # The docs site is NOT covered by `pnpm run build`, so without this job its
+  # strongest gate — `onBrokenLinks: 'throw'` — never runs on a PR and a broken
+  # link first fails in the Radix *prod* deployment.
+  #
+  # It also needs `build`, not just `setup`: the site resolves
+  # `@equinor/eds-core-react/next` and `/next/index.css` through webpack aliases
+  # pointing straight at built artifacts (see the eds-resolver plugin in
+  # docusaurus.config.ts), and babel-compiles the package's story files for
+  # StoryCanvas. This job is what verifies that coupling holds.
+  #
+  # Uses `build:docs` rather than `docu:build` to mirror DockerfileEdsDocs,
+  # which is what actually ships — it does not regenerate prerequisites.json.
+  docs:
+    name: Docs site
+    runs-on: ubuntu-latest
+    needs: [build, changes]
+    if: needs.changes.outputs.code == 'true'
+    steps:
+      - name: Restore build cache
+        id: cache
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+      # On a build-cache miss, reconstruct from scratch (checkout + install +
+      # build) rather than failing — the build job's output cache is not
+      # guaranteed to survive a cache-service hiccup or eviction.
+      - name: Fallback checkout (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+      - name: Fallback build (cache miss)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
+      # Cheap checks first: they fail in seconds, the site build takes minutes.
+      - name: Check docs formatting
+        run: pnpm run format:check:docs
+      - name: Lint docs CSS
+        run: pnpm run lint:css:docs
+      # Both StoryCanvas `of=` and StorybookEmbed `id=` fail silently at
+      # runtime (missing canvas / Storybook error frame), so nothing else
+      # catches a renamed or deleted story.
+      - name: Check docs story references
+        run: pnpm run check:docs-stories
+      - name: Build docs site
+        run: pnpm run build:docs
+
   # ─── Lint-only for non-code changes (workflows, docs) ───────────
   #
   # Trade-off (decided 2026-06): this job runs a full `pnpm run build`
@@ -292,7 +352,7 @@ jobs:
     name: All checks passed
     runs-on: ubuntu-latest
     if: always()
-    needs: [setup, changes, build, test, lint, types, lint-only]
+    needs: [setup, changes, build, test, lint, types, docs, lint-only]
     steps:
       - name: Evaluate results
         run: |
@@ -307,6 +367,7 @@ jobs:
             "test:${{ needs.test.result }}" \
             "lint:${{ needs.lint.result }}" \
             "types:${{ needs.types.result }}" \
+            "docs:${{ needs.docs.result }}" \
             "lint-only:${{ needs.lint-only.result }}"; do
             job="${result%%:*}"
             status="${result#*:}"

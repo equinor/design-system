@@ -1,21 +1,13 @@
 ---
 title: Autocomplete
 sidebar_position: 1
+hide_title: true
+description: 'Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not already in the list.'
 ---
 
-# Autocomplete
+{/* Portable-stories pilot — see src/components/StoryCanvas. */}
 
-Autocomplete is a text input that filters a list of options as the user types and lets them pick one. It supports string and object option lists, custom option rendering, asynchronous search, and the ability to confirm a typed value that is not already in the list.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--introduction"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--introduction)
+<StoryCanvas of="Autocomplete/Introduction" showLink />
 
 ## When to Use
 
@@ -45,109 +37,45 @@ Autocomplete is a composite field that combines several pieces:
 
 Use a controlled selection when the surrounding form, page, or another component needs to react to which option is currently chosen - for example to enable a Submit button or to drive a dependent field.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--controlled"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--controlled)
+<StoryCanvas of="Autocomplete/Controlled" showLink />
 
 ### Object Options
 
 Use object options when each choice carries extra data beyond the label - an ID, a category, a relationship - so that information is available to the rest of the screen once a selection is made.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--object-options"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--object-options)
+<StoryCanvas of="Autocomplete/ObjectOptions" showLink />
 
 ### Custom Option Rendering
 
 Use a custom row when a single label is not enough to tell options apart - for example a name with a subtitle, an icon, or a status badge. Keep rows scannable and avoid stacking more than two lines of text.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--custom-option-rendering"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--custom-option-rendering)
+<StoryCanvas of="Autocomplete/CustomOptionRendering" showLink />
 
 ### Disabled Options
 
 Disable individual options when they exist in the data set but are not available right now - for example out of stock, restricted by role, or already chosen elsewhere. They stay visible so the user can see they exist, but cannot be selected.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--disabled-options"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--disabled-options)
+<StoryCanvas of="Autocomplete/DisabledOptions" showLink />
 
 ### Allow Custom Value
 
 Let users add a value that is not in the list when the data set is open-ended - tags, project codes, free-text categories. While the user types, an "Add" row appears at the top of the dropdown so they can confirm the new entry.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--allow-custom-value"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--allow-custom-value)
+<StoryCanvas of="Autocomplete/AllowCustomValue" showLink />
 
 ### Loading and Asynchronous Search
 
 Use the loading state while results are being fetched from a server. For server-side search, turn off the built-in filtering and fetch results in response to input changes. Debounce the requests so the server is not called on every keystroke.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--loading"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
+<StoryCanvas of="Autocomplete/Loading" showLink />
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--loading)
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--async"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--async)
+<StoryCanvas of="Autocomplete/Async" showLink />
 
 ### Validation States
 
 Show the error state to mark the field as invalid, and pair it with a helper message that tells the user what is wrong and how to fix it. Keep the message specific and short.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--invalid"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--invalid)
+<StoryCanvas of="Autocomplete/Invalid" showLink />
 
 ### Disabled and Read Only
 
@@ -155,55 +83,23 @@ Prefer read-only over disabled when the value should remain visible and copyable
 
 #### Disabled
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--disabled"
-  width="100%"
-  height="350"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--disabled)
+<StoryCanvas of="Autocomplete/Disabled" showLink />
 
 #### Read Only
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--read-only"
-  width="100%"
-  height="105"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--read-only)
+<StoryCanvas of="Autocomplete/ReadOnly" showLink />
 
 ### Forms
 
 Autocomplete works inside react-hook-form via Controller. Remember to reset the form value when the field is cleared so validation and submission stay in sync.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--with-react-hook-form"
-  width="100%"
-  height="280"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--with-react-hook-form)
+<StoryCanvas of="Autocomplete/WithReactHookForm" showLink />
 
 ### Density
 
 Autocomplete adapts to density modes. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown rows respond to density as well.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-autocomplete--density-modes"
-  width="100%"
-  height="260"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-autocomplete--density-modes)
+<StoryCanvas of="Autocomplete/DensityModes" showLink />
 
 ## Accessibility
 

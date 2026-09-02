@@ -1,11 +1,9 @@
 ---
 title: Data Display
 sidebar_position: 0
+hide_title: true
+description: 'Data display components present information to users in clear, structured formats. They help organise content so that it is easy to scan, understand, and act upon.'
 ---
-
-# Component group - Data Display
-
-Data display components present information to users in clear, structured formats. They help organise content so that it is easy to scan, understand, and act upon.
 
 ## When to use
 

@@ -1,21 +1,11 @@
 ---
 title: Divider
 sidebar_position: 2
+hide_title: true
+description: 'A divider is a thin horizontal line that brings clarity to layout by grouping and separating content. Designed with care, dividers should be noticeable but never compete for attention - they help establish rhythm and hierarchy across our interfaces.'
 ---
 
-# Divider
-
-A divider is a thin horizontal line that brings clarity to layout by grouping and separating content. Designed with care, dividers should be noticeable but never compete for attention - they help establish rhythm and hierarchy across our interfaces.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-divider--introduction"
-  width="100%"
-  height="245"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-divider--introduction)
+<StoryCanvas of="Divider/Introduction" showLink />
 
 ## When to Use
 
@@ -32,7 +22,7 @@ Use a divider to group related content or separate sections of a layout when whi
 
 ## Accessibility
 
-Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator) and renders as a native `<hr>`, which has the implicit ARIA role separator.`.
+Dividers follow the [WAI-ARIA separator pattern](https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#separator) and render as a native `<hr>`, which has the implicit ARIA role `separator`.
 
 - Use the divider as a decorative separator between groups of related content - it communicates structure visually without becoming an interactive element
 - Keep enough contrast between the divider and its background so the separation reads clearly, while staying subtle enough to avoid clashing with surrounding content
@@ -59,11 +49,13 @@ The divider uses the `--eds-color-border-subtle` token, so it adapts automatical
 - Use dividers to group related content into meaningful sections
 - Let the surrounding layout control the divider's width - the component fills its container by default
 - Keep dividers consistent across similar layouts to reinforce rhythm and hierarchy
-  :::
+
+:::
 
 :::danger **Don't**
 
 - Place a divider between every item in a list - white space is usually enough
 - Use dividers as decoration where they add visual noise without clarifying structure
 - Override the subtle border colour with a stronger tone - dividers should support content, not compete with it
-  :::
+
+:::

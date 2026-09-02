@@ -1,0 +1,85 @@
+.docs-hero {
+  display: flex;
+
+  /* Consistent hero height across pages so content below doesn't jump on
+     navigation. Covers the tallest text hero (~about); the homepage hero has
+     more content and grows past it. */
+  min-height: var(--docs-hero-min-height, 27rem);
+  padding-block: var(--docs-hero-space-block, 5rem);
+  background-color: var(
+    --docs-hero-bg,
+    var(--eds-background-interactive-accent-muted-default)
+  );
+}
+
+.docs-hero > .container {
+  position: relative;
+
+  /* Above the dot layer. */
+  z-index: 1;
+  width: 100%;
+}
+
+/* ======================================
+ * CONTENT
+ * ====================================== */
+
+.docs-hero__eyebrow {
+  display: inline-block;
+
+  margin-bottom: 0.75rem;
+
+  font-size: var(--docs-font-body-sm-size);
+  font-weight: var(--docs-font-weight-emphasis);
+  color: var(--eds-text-interactive-link-default);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.docs-hero__title {
+  max-width: 20ch;
+  margin-bottom: 1.5rem;
+
+  font-size: var(--docs-font-display-size);
+  line-height: var(--docs-font-display-line-height);
+  color: var(--eds-text-primary);
+}
+
+.docs-hero__lead p {
+  max-width: var(--docs-measure, 35rem);
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
+  color: var(--eds-text-primary);
+}
+
+.docs-hero__lead p:last-child {
+  margin-bottom: 0;
+}
+
+/* ======================================
+ * DISPLAY VARIANT (homepage brand header)
+ * ====================================== */
+
+/**
+ * The Figma header is a full-bleed dot field with nothing on it but the brand
+ * title, centred on both axes. The 43.5rem floor is the design's 698px band;
+ * it collapses to `auto` on phones via --docs-hero-min-height.
+ */
+.docs-hero[data-variant='display'] {
+  align-items: center;
+  min-height: var(--docs-hero-min-height, 43.5rem);
+  text-align: center;
+}
+
+/* The title is centred on the page, not inside the content measure — at 112px
+   it needs more room than --docs-content-max allows. */
+.docs-hero[data-variant='display'] > .container {
+  max-width: none;
+}
+
+.docs-hero[data-variant='display'] .docs-hero__title {
+  max-width: none;
+  margin-bottom: 0;
+  font-size: var(--docs-font-hero-size);
+  color: var(--eds-text-on-default-accent);
+}

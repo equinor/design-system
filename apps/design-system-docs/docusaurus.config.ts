@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { themes as prismThemes } from 'prism-react-renderer'
 import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
@@ -21,9 +22,16 @@ const config: Config = {
   projectName: 'design-system',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
-  clientModules: ['./src/clientModules/syncColorScheme.ts'],
+  clientModules: [
+    './src/clientModules/syncColorScheme.ts',
+    './src/clientModules/pageTransitions.ts',
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -36,26 +44,52 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          exclude:
-            process.env.NODE_ENV === 'production' ||
-            process.env.NODE_ENV === 'development'
-              ? ['**/tone-guide/**']
-              : [],
-          breadcrumbs: true,
+          // `exclude` replaces Docusaurus's defaults rather than extending
+          // them, so GlobExcludeDefault is repeated here. Without it the
+          // `_`-prefixed convention stops working — that's what keeps the
+          // unwritten component stubs (docs/components/**/_*.md) out of the
+          // build, the sidebar, and the search index.
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            '**/tone-guide/**',
+          ],
+          breadcrumbs: false,
           editUrl:
-            'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
+            'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
           versions: {
             current: {
               label: '2.0.0-beta', // Current version label
               path: 'Next', // URL path for the current version
               banner: 'none',
             },
+            // A non-lastVersion normally gets its version name as its path, so
+            // pinning lastVersion to 'current' below would silently move the
+            // whole archive from /docs/… to /docs/1.1.0/… and break every
+            // existing link to it. An empty path keeps it exactly where it is.
+            '1.1.0': {
+              path: '',
+            },
           },
+          // Without this, Docusaurus defaults lastVersion to the newest entry
+          // in versions.json (1.1.0), which makes the frozen archive the
+          // target of every `type: 'docSidebar'` navbar item and of the version
+          // dropdown — while the footer and the landing pages link to
+          // /docs/Next/…. The site then contradicts its own chrome. Pinning it
+          // to 'current' points the default at the 2.0.0-beta redesign;
+          // `path: 'Next'` above keeps the beta's URLs unchanged and leaves
+          // 1.1.0 served at /docs/.
+          lastVersion: 'current',
         },
         theme: {
           customCss: [
-            './src/css/custom.css',
-            // Add additional CSS files here
+            './src/css/theme-variables.css',
+            './src/css/docs-components.css',
+            './src/css/site-chrome.css',
+            './src/css/doc-layouts.css',
+            './src/css/page-transitions.css',
           ],
         },
         sitemap: {
@@ -94,10 +128,142 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    function edsResolverPlugin() {
+      return {
+        name: 'eds-resolver',
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                // Let webpack find EDS workspace packages from the monorepo root
+                // so that transitive imports inside built components resolve correctly.
+                // Use exact match ($) to avoid breaking subpath imports like /css/variables
+                '@equinor/eds-tokens$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-tokens',
+                ),
+                '@equinor/eds-icons$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-icons',
+                ),
+                '@equinor/eds-utils$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-utils',
+                ),
+                // EDS 2.0 (next) is intentionally NOT exposed via the package's
+                // `exports` map — that entry is injected only for beta npm
+                // releases (see #4395), so stable releases never ship it.
+                // Point the docs build straight at the built artifacts so
+                // `/next` resolves locally without re-adding the export to
+                // source. Requires eds-core-react to be built first.
+                '@equinor/eds-core-react/next$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-core-react/dist/esm-next/index.next.js',
+                ),
+                '@equinor/eds-core-react/next/index.css$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-core-react/build/index.css',
+                ),
+                // The Tokens Studio bundle (ADR-0011) is published on the beta
+                // line as `@equinor/eds-tokens/next/css/variables.css` through
+                // an exports entry injected by publish_tokens.yaml — like
+                // /next above, it is absent from the committed exports map, so
+                // point the specifier at the committed source bundle.
+                '@equinor/eds-tokens/next/css/variables.css$': path.resolve(
+                  __dirname,
+                  '../../packages/eds-tokens/src/tokens/css/variables.css',
+                ),
+                // Portable stories: story files are imported straight from
+                // eds-core-react source (stories are not shipped in dist)
+                // and rendered via composeStories — see
+                // src/components/StoryCanvas.
+                '@eds-core-react-src': path.resolve(
+                  __dirname,
+                  '../../packages/eds-core-react/src',
+                ),
+                // Several story files import `Stack` from the shared
+                // `.storybook/components` barrel, which also re-exports
+                // helpers built on Storybook's docs blocks. Those need a
+                // Storybook docs context that does not exist here and pull
+                // manager internals into the bundle, so resolve them to an
+                // inert stub — the stories only ever render `Stack`.
+                '@storybook/addon-docs/blocks$': path.resolve(
+                  __dirname,
+                  'src/stubs/storybook-addon-docs-blocks.tsx',
+                ),
+              },
+              fallback: {
+                // eds-utils references Node.js 'url' module (unused in browser)
+                url: false,
+              },
+            },
+            module: {
+              rules: [
+                // Portable stories: transpile eds-core-react source (story
+                // files + the components they import) with the same preset
+                // Docusaurus uses for site code. Scoped to the package src
+                // plus its `.storybook` helpers — which story files import
+                // for `Stack` — so it can't affect anything else.
+                {
+                  test: /\.tsx?$/,
+                  include: [
+                    path.resolve(
+                      __dirname,
+                      '../../packages/eds-core-react/src',
+                    ),
+                    path.resolve(
+                      __dirname,
+                      '../../packages/eds-core-react/.storybook',
+                    ),
+                  ],
+                  use: {
+                    loader: require.resolve('babel-loader'),
+                    options: {
+                      babelrc: false,
+                      configFile: false,
+                      presets: [require.resolve('@docusaurus/babel/preset')],
+                    },
+                  },
+                },
+                // Story files import their Storybook docs page
+                // (`./X.docs.mdx`) for parameters.docs.page — Storybook-
+                // flavoured MDX that Docusaurus cannot compile. Import it as
+                // an inert source string instead; portable stories never
+                // render it.
+                {
+                  test: /\.docs\.mdx$/,
+                  include: path.resolve(
+                    __dirname,
+                    '../../packages/eds-core-react/src',
+                  ),
+                  type: 'asset/source',
+                },
+              ],
+            },
+          }
+        },
+      }
+    },
+  ],
+
   themeConfig: {
     image: 'img/equinor.png',
+    docs: {
+      sidebar: {
+        // Let readers collapse the sidebar on desktop to give a component doc
+        // the full width — useful on the wide story canvases. The control is
+        // desktop-only (below 997px the sidebar is already a drawer). The
+        // collapsed state is React state, not stored: it survives client-side
+        // navigation between docs but resets on a hard reload. This is a
+        // themeConfig-level flag, so it applies to every doc sidebar including
+        // the 1.1.0 archive — consistent with chrome being version-independent
+        // here.
+        hideable: true,
+      },
+    },
     navbar: {
-      title: 'Equinor Design System',
+      title: '',
       logo: {
         alt: 'Equinor type Logo',
         src: 'img/eds-logo.svg',
@@ -106,14 +272,7 @@ const config: Config = {
 
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'aboutSidebar',
-          label: 'About EDS',
-          position: 'right',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'foundationSidebar',
+          to: '/foundation',
           label: 'Foundation',
           position: 'right',
         },
@@ -130,9 +289,8 @@ const config: Config = {
           position: 'right',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'supportSidebar',
-          label: 'Support',
+          to: '/getting-started',
+          label: 'Get started',
           position: 'right',
         },
         {
@@ -147,23 +305,66 @@ const config: Config = {
       ],
     },
     footer: {
+      // Rendered by the swizzled Footer (src/theme/Footer). Internal links use
+      // `to`, external links use `href`.
       links: [
         {
+          title: 'Get started',
           items: [
+            { label: 'Getting Started', to: '/getting-started' },
             {
-              to: 'https://www.figma.com/',
-              label: 'EDS Figma',
-              className: 'figma',
+              label: 'Design',
+              to: '/docs/Next/about/getting-started/design/getting_started_design',
             },
             {
-              to: 'https://www.github.com/equinor/design-system',
-              label: 'EDS Github',
-              className: 'github',
+              label: 'Develop',
+              to: '/docs/Next/about/getting-started/develop/getting_started_development',
+            },
+            {
+              label: 'Citizen developer',
+              to: '/docs/Next/about/getting-started/develop/citizen_developers',
+            },
+            {
+              label: 'Team lead',
+              to: '/docs/Next/about/getting-started/team_roles',
             },
           ],
         },
+        {
+          title: 'Foundation',
+          items: [
+            {
+              label: 'Typography',
+              to: '/docs/Next/foundation/design-tokens/typography',
+            },
+            { label: 'Colours', to: '/docs/Next/foundation/colour/intro' },
+            {
+              label: 'Icons',
+              to: '/docs/Next/foundation/assets/system_icons',
+            },
+            {
+              label: 'Spacing',
+              to: '/docs/Next/foundation/design-tokens/spacing',
+            },
+          ],
+        },
+        {
+          title: 'Components',
+          items: [
+            { label: 'All components', to: '/docs/Next/components' },
+            { label: 'Storybook', href: 'https://storybook.eds.equinor.com' },
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
+            { label: 'About EDS', to: '/about' },
+            { label: 'Support', to: '/docs/Next/support' },
+          ],
+        },
       ],
-      copyright: `Equinor ${new Date().getFullYear()} `,
+      // No `copyright`: the swizzled Footer renders the Equinor brand logo in
+      // its bottom row instead (src/theme/Footer/index.tsx).
     },
     prism: {
       theme: prismThemes.github,

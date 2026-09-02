@@ -1,0 +1,128 @@
+/*
+ * Styling scope for the wrapped @easyops-cn/docusaurus-search-local SearchBar
+ * (see SearchBar.tsx), matching the "Text Field [EDS]" search variant in the
+ * EDS Core Components Figma file. The plugin's own class names are CSS-module
+ * hashed, so the rules target elements through the stable wrapper class
+ * instead. The descendant selectors mirror the plugin's DOM and may need
+ * adjusting on plugin upgrades.
+ */
+
+.docs-search-bar {
+  /* 8px padding + 16px icon + 4px gap, per the Figma field spec. */
+  --docs-search-bar-padding-inline-start: calc(
+    var(--eds-spacing-xs) + 1rem + var(--eds-spacing-3xs)
+  );
+
+  /* Wide enough to clear the longest shortcut hint ("Ctrl K" on Windows). */
+  --docs-search-bar-padding-inline-end: 2.75rem;
+  --docs-search-bar-icon-size: 1rem;
+}
+
+.docs-search-bar input {
+  height: 36px;
+  padding: 0 var(--docs-search-bar-padding-inline-end) 0
+    var(--docs-search-bar-padding-inline-start);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-ui-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-ui-md-line-height);
+  color: var(--eds-text-primary);
+
+  /* Shorthand, so it also clears Infima's built-in magnifying-glass
+     background image — the EDS search icon is drawn by the ::before below,
+     which can take its colour from a token. */
+  background: var(--eds-background-input);
+
+  transition: border-color 150ms ease-in-out;
+}
+
+.docs-search-bar input:hover {
+  border-color: var(--eds-border-interactive-neutral-muted-hover);
+}
+
+.docs-search-bar input:focus-within {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+
+.docs-search-bar input::placeholder {
+  color: var(--eds-text-secondary);
+}
+
+/* The EDS `search` icon (packages/eds-icons `search`), masked so its colour
+   comes from --eds-icon-secondary and follows the colour scheme. Hosted on the
+   plugin's own container rather than the wrapper, so it disappears together
+   with the field when the plugin sets `hidden`.
+
+   The z-index is required: on first hover, autocomplete.js wraps the input in
+   a `position: relative` span, which would otherwise paint its opaque
+   background over this pseudo-element and make the icon vanish. */
+.docs-search-bar .navbar__search::before {
+  pointer-events: none;
+  content: '';
+
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: var(--eds-spacing-xs);
+  translate: 0 -50%;
+
+  width: var(--docs-search-bar-icon-size);
+  height: var(--docs-search-bar-icon-size);
+
+  background-color: var(--eds-icon-secondary);
+
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.966 14.255h.79l4.99 5-1.49 1.49-5-4.99v-.79l-.27-.28a6.47 6.47 0 0 1-4.23 1.57 6.5 6.5 0 1 1 6.5-6.5c0 1.61-.59 3.09-1.57 4.23zm-9.71-4.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5-4.5 2.01-4.5 4.5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+/* The keyboard-shortcut hint container and its kbd keys */
+.docs-search-bar > div > div:has(kbd) {
+  right: var(--eds-spacing-xs);
+}
+
+.docs-search-bar > div > div kbd {
+  padding: 0;
+  border: unset;
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-ui-xs-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-ui-xs-line-height);
+  color: var(--eds-text-secondary);
+
+  background-color: unset;
+  box-shadow: unset;
+}
+
+/* On macOS the plugin renders the hint as ⌘ + K, which Figma sets flush as
+   "⌘K". Elsewhere it renders "ctrl" + "K", which needs the gap to stay
+   readable. See SearchBar.tsx for how data-platform is set. */
+.docs-search-bar[data-platform='mac'] > div > div:has(kbd) {
+  gap: 0;
+}
+
+.docs-search-bar:not([data-platform='mac']) > div > div kbd {
+  text-transform: capitalize;
+}
+
+/* The clear-text button that shows up when the input is in use */
+.docs-search-bar button {
+  cursor: pointer;
+
+  right: var(--eds-spacing-xs) !important;
+
+  width: 16px;
+  height: 16px;
+  padding: 0 0.125rem !important;
+  border-radius: var(--eds-corner-radius-pill);
+
+  color: var(--eds-text-secondary);
+}
+
+.docs-search-bar button:hover {
+  background-color: var(--eds-background-interactive-neutral-muted-hover);
+}

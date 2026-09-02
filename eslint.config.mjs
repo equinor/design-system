@@ -24,6 +24,11 @@ export default tseslint.config(
       '.eslintcache',
       'node_modules/.cache/**',
       '**/build/**',
+      // Docusaurus generated output. Not skipped automatically when a path is
+      // passed explicitly (pnpm run lint:docs), and its .js files match the
+      // docs-app override that sets @typescript-eslint rules, which then fails
+      // config validation because the plugin only loads for .ts/.tsx.
+      '**/.docusaurus/**',
       '**/coverage/**',
       '**/.next/**',
       '**/playwright-report/**',
@@ -244,7 +249,20 @@ export default tseslint.config(
     rules: {
       'import/no-unresolved': [
         2,
-        { ignore: ['^@theme', '^@docusaurus', '^@site'] },
+        // Docusaurus aliases plus colocated CSS side-effect imports, which the
+        // import resolver (scoped to packages/*) can't resolve but Docusaurus
+        // and tsc handle via ambient '*.css' module declarations.
+        // '@eds-core-react-src' is the portable-stories alias, resolved by the
+        // eds-resolver webpack plugin and the docs app's own tsconfig paths.
+        {
+          ignore: [
+            '^@theme',
+            '^@docusaurus',
+            '^@site',
+            '^@eds-core-react-src',
+            '\\.css$',
+          ],
+        },
       ],
       'import/no-default-export': 'off',
       // The docs app isn't part of tsconfig.eslint.json's project graph, so

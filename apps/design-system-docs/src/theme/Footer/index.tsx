@@ -1,96 +1,105 @@
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
-import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common'
-import GithubSvg from '../../images/github-logo.svg'
-import FigmaSvg from '../../images/figma-logo.svg'
-
+import { useThemeConfig } from '@docusaurus/theme-common'
 import Link from '@docusaurus/Link'
 
-import type { JSX } from 'react'
+import type { JSX, ReactNode } from 'react'
 
-interface FooterColumnItem {
+import GithubSvg from '../../images/github-logo.svg'
+import FigmaSvg from '../../images/figma-logo.svg'
+import EquinorLogoSvg from '../../images/equinor-full-logo.svg'
+
+type FooterItem = {
   label: string
-  items: FooterLinkItem[]
+  to?: string
+  href?: string
 }
 
-interface FooterLinksProps {
-  links: FooterColumnItem[] | FooterLinkItem[]
+type FooterColumnProps = {
+  title?: string
+  items: FooterItem[]
 }
 
-// Comprehensive class-based icon mapping
-const getIconComponent = (item: FooterLinkItem): JSX.Element | null => {
-  const className = item.className?.toLowerCase() || ''
-
-  if (className.includes('github')) {
-    return <GithubSvg />
-  }
-  if (className.includes('figma')) {
-    return <FigmaSvg />
-  }
-
-  return null
-}
-
-// Type guard to check if an item is a FooterColumnItem
-const isFooterColumnItem = (
-  item: FooterLinkItem | FooterColumnItem,
-): item is FooterColumnItem => {
-  return 'items' in item && Array.isArray((item as FooterColumnItem).items)
-}
-
-const FooterLinks = ({ links }: FooterLinksProps): JSX.Element => {
-  // Prepare presentation object: only links with icons
-  const linkGroupsWithIcons = links
-    .map((linkItem) => {
-      if (isFooterColumnItem(linkItem)) {
-        const itemsWithIcons = linkItem.items
-          .map((item) => {
-            const icon = getIconComponent(item)
-            return icon ? { ...item, icon } : null
-          })
-          .filter(Boolean)
-        return { label: linkItem.label, items: itemsWithIcons }
-      }
-      return null
-    })
-    .filter(Boolean)
-
+function FooterColumn({ title, items }: FooterColumnProps): ReactNode {
   return (
-    <nav className="footer-links" aria-label="Footer navigation links">
-      {linkGroupsWithIcons.map((group) => (
-        <div key={group.label} className="footer-links__group">
-          {group.items.map((item) => (
+    <div className="footer__column">
+      {title && <p className="footer__column-title">{title}</p>}
+      <ul className="footer__column-links">
+        {items.map((item) => (
+          <li key={item.to ?? item.href}>
             <Link
-              key={`${item.href || item.to}`}
-              to={item.to || item.href}
-              className={`footer-links__link ${item.className || ''}`}
-              aria-label={
-                (item.label || item.href || 'Social link') +
-                ' (opens in new tab)'
-              }
-              target="_blank"
-              rel="noopener noreferrer"
+              className="footer__column-link"
+              {...(item.href ? { href: item.href } : { to: item.to })}
             >
-              {item.icon}
+              {item.label}
             </Link>
-          ))}
-        </div>
-      ))}
-    </nav>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
+
 function Footer(): JSX.Element | null {
   const { footer } = useThemeConfig()
 
   if (!footer) {
     return null
   }
-  const { copyright, links } = footer
+
+  // themeConfig.footer.copyright is deliberately not read (and not set): the
+  // footer's bottom row shows the Equinor brand logo instead of a copyright
+  // line.
+  const { links = [] } = footer
+  // themeConfig.footer.links can be multi-column ({title, items}[]) or simple
+  // (FooterItem[]); this footer only renders the multi-column shape, so filter
+  // instead of casting — a simple config renders no columns rather than crashing.
+  const columns = links.filter(
+    (link): link is FooterColumnProps =>
+      typeof link === 'object' &&
+      link !== null &&
+      Array.isArray((link as { items?: unknown }).items),
+  )
 
   return (
     <footer className="footer">
-      <div className="footer__container">
-        <div className="footer__copyright">{copyright}</div>
-        {links && links.length > 0 && <FooterLinks links={links} />}
+      <div className="footer__columns">
+        {columns.map((col, index) => (
+          <FooterColumn key={col.title ?? index} {...col} />
+        ))}
+      </div>
+      <div className="footer__bottom">
+        <div className="footer__social">
+          <Link
+            to="https://www.figma.com/@equinorasa"
+            className="footer__social-link"
+            aria-label="Figma (opens in new tab)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FigmaSvg />
+          </Link>
+          <Link
+            to="https://www.github.com/equinor/design-system"
+            className="footer__social-link"
+            aria-label="EDS Github (opens in new tab)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GithubSvg />
+          </Link>
+        </div>
+        <Link
+          to="https://www.equinor.com"
+          className="footer__brand-link"
+          aria-label="Equinor (opens in new tab)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <EquinorLogoSvg
+            className="footer__logo"
+            role="img"
+            aria-label="Equinor"
+          />
+        </Link>
       </div>
     </footer>
   )
