@@ -110,5 +110,15 @@ describe('Radio', () => {
     expect(one).toHaveStyleRule('fill', tokens.states.disabled.background, {
       modifier: ':disabled ~ svg',
     })
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = one.parentElement
+    expect(wrapper).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':has(input:disabled)',
+    })
+    // eslint-disable-next-line testing-library/no-node-access
+    const label = one.closest('label')
+    expect(label).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':has(input:disabled)',
+    })
   })
 })

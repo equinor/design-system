@@ -75,7 +75,27 @@ describe('Switch', () => {
     expect(one).toHaveStyleRule(
       'background-color',
       tokens.states.disabled.background,
-      { modifier: ':disabled + span > span' },
+      { modifier: ':disabled + span > span:is(:first-child,:last-child)' },
+    )
+    // eslint-disable-next-line testing-library/no-node-access
+    const label = one.closest('label')
+    expect(label).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':has(input:disabled)',
+    })
+  })
+  it('Gets disabled styling on the small track when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Switch label="Small switch" size="small" />
+      </fieldset>,
+    )
+    const small = screen.getByLabelText('Small switch')
+    expect(small).toBeDisabled()
+    // Only the track (:first-child) turns grey; the handle keeps its colour
+    expect(small).toHaveStyleRule(
+      'background-color',
+      tokens.states.disabled.background,
+      { modifier: ':disabled + span > span:first-child' },
     )
   })
   it('Can be set as default on without being a controlled component', () => {

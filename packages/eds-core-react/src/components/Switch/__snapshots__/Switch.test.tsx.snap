@@ -69,8 +69,7 @@ exports[`Switch Matches snapshot 1`] = `
   background-color: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
 }
 
-.c3:disabled+span>span,
-.c3:disabled+span>span:last-child {
+.c3:disabled+span>span:is(:first-child,:last-child) {
   background-color: var(--eds_interactive__disabled__fill, rgba(234, 234, 234, 1));
 }
 

@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import { forwardRef, InputHTMLAttributes, useMemo, type JSX } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import {
   radio_button_selected,
@@ -145,30 +145,27 @@ export type RadioProps = {
   disabled?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
+const iconSize = 24
+
+const renderSVG = (
+  <Svg
+    width={iconSize}
+    height={iconSize}
+    viewBox={`0 0 ${iconSize} ${iconSize}`}
+    fill={tokens.background}
+    aria-hidden
+  >
+    <StyledPath $icon={radio_button_selected} name="selected" />
+    <StyledPath $icon={radio_button_unselected} name="unselected" />
+  </Svg>
+)
+
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   { label, disabled = false, className, style, ...rest },
   ref,
 ) {
   const { density } = useEds()
   const token = useToken({ density }, tokens)
-
-  const iconSize = 24
-  const fill = tokens.background
-
-  const renderSVG = useMemo<JSX.Element>(() => {
-    return (
-      <Svg
-        width={iconSize}
-        height={iconSize}
-        viewBox={`0 0 ${iconSize} ${iconSize}`}
-        fill={fill}
-        aria-hidden
-      >
-        <StyledPath $icon={radio_button_selected} name="selected" />
-        <StyledPath $icon={radio_button_unselected} name="unselected" />
-      </Svg>
-    )
-  }, [fill])
 
   return (
     <ThemeProvider theme={token}>

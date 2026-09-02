@@ -130,7 +130,6 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     const token = useToken({ density }, tokens)
 
     const iconSize = 24
-    const fill = tokens.background
 
     const inputWrapperProps = {
       disabled,
@@ -154,7 +153,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
               width={iconSize}
               height={iconSize}
               viewBox={`0 0 ${iconSize} ${iconSize}`}
-              fill={fill}
+              fill={tokens.background}
               aria-hidden
             >
               <StyledPath $icon={checkbox_indeterminate} name="indeterminate" />
@@ -164,7 +163,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
               width={iconSize}
               height={iconSize}
               viewBox={`0 0 ${iconSize} ${iconSize}`}
-              fill={fill}
+              fill={tokens.background}
               aria-hidden
             >
               <StyledPath $icon={checkbox} name="checked" />

@@ -104,5 +104,10 @@ describe('Checkbox', () => {
     expect(one).toHaveStyleRule('fill', tokens.states.disabled.background, {
       modifier: ':disabled ~ svg',
     })
+    // eslint-disable-next-line testing-library/no-node-access
+    const label = one.closest('label')
+    expect(label).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':has(input:disabled)',
+    })
   })
 })

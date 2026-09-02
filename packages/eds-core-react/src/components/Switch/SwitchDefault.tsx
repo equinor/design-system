@@ -22,9 +22,10 @@ const Input = styled(BaseInput)(
     &:hover:not(:disabled) + span > span:last-child {
       background-color: ${theme.states.hover.entities.handle.background};
     }
-    /* Placed last so disabled wins over the checked rules above */
-    &:disabled + span > span,
-    &:disabled + span > span:last-child {
+    /* :is(:first-child, :last-child) matches both track and handle and lifts
+       the specificity to tie the :checked handle rule above, so this later
+       rule wins when disabled — don't simplify to a bare "+ span > span" */
+    &:disabled + span > span:is(:first-child, :last-child) {
       background-color: ${theme.states.disabled.background};
     }
   `,
