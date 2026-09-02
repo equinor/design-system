@@ -82,17 +82,15 @@ nav.menu li a {
   background-color: var(--ifm-background-surface-color);
 }
 
-/* The chevron inside the collapse button. It is the EDS `chevron_right` icon
-   (the `@theme/Icon/Arrow` swizzle), which points right at 0deg — so collapse
-   flips it to point back at the sidebar. Size and colour are set here rather
-   than on the icon so the expand rail below can share the same values. */
+/* The icon inside the collapse button — the EDS `collapse` icon, rendered by
+   the `DocSidebar/Desktop/CollapseButton` swizzle. It already points left, so
+   there is no rotation here; upstream needed one because it pointed a single
+   arrow both ways. Size and colour live here rather than on the icon so the
+   expand rail below can restate the same two values. */
 .theme-doc-sidebar-container button svg {
-  transform: rotate(180deg);
-
   width: 1.25rem;
   height: 1.25rem;
   margin: 0;
-
   color: var(--eds-icon-secondary);
 }
 
@@ -114,11 +112,10 @@ nav.menu li a {
   background-color: var(--docusaurus-collapse-button-bg-hover);
 }
 
-/* Same chevron, unrotated so it points away from the collapsed rail. The
-   expand button is a `div[role="button"]`, not a `<button>`, so the rule
-   above does not reach it and the values are restated. */
+/* The mirrored EDS `expand` icon, pointing away from the collapsed rail. The
+   expand button is a `div[role="button"]`, not a `<button>`, so the rule above
+   does not reach it and the two values are restated. */
 .theme-doc-sidebar-container div[aria-label='Expand sidebar'] svg {
-  transform: rotate(0deg);
   width: 1.25rem;
   height: 1.25rem;
   color: var(--eds-icon-secondary);
