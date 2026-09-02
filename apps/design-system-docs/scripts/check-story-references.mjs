@@ -43,14 +43,42 @@ function walk(dir, test, found = []) {
   return found
 }
 
-/** `export const Foo` names + the CSF `title` from a story file. */
+/** Every exported story name in a file: `export const Foo` + `export { A as B }`. */
+function readStoryExports(source) {
+  const names = [...source.matchAll(/^export const (\w+)/gm)].map((m) => m[1])
+  for (const [, clause] of source.matchAll(/^export \{([^}]*)\}/gm)) {
+    for (const spec of clause.split(',')) {
+      const name = spec
+        .trim()
+        .split(/\s+as\s+/)
+        .pop()
+      if (name && /^\w+$/.test(name) && name !== 'default') names.push(name)
+    }
+  }
+  return new Set(names)
+}
+
+/**
+ * The CSF `title`, read from the `const meta` block only.
+ *
+ * An unanchored `/title:/` search would just as happily match an
+ * `args: { title: '…' }` or a `parameters` block declared above `meta` and
+ * return a wrong-but-plausible title. Every id derived from it would then be
+ * wrong rather than absent — a false *pass*, which is the one failure mode a
+ * silent-drift gate must not have.
+ */
+function readStoryTitle(source) {
+  const metaStart = source.search(/^(?:export )?const meta\b/m)
+  if (metaStart === -1) return undefined
+  return source.slice(metaStart).match(/^ {2}title:\s*'([^']+)'/m)?.[1]
+}
+
+/** Exported story names + the CSF `title` from a story file. */
 function readStoryFile(path) {
   const source = readFileSync(path, 'utf8')
   return {
-    exports: new Set(
-      [...source.matchAll(/^export const (\w+)/gm)].map((m) => m[1]),
-    ),
-    title: source.match(/title:\s*'([^']+)'/)?.[1],
+    exports: readStoryExports(source),
+    title: readStoryTitle(source),
   }
 }
 

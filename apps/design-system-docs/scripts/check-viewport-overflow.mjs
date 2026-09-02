@@ -28,27 +28,32 @@ const viewports = [
 ]
 
 const browser = await chromium.launch()
-const page = await browser.newPage()
 let failures = 0
 
-for (const viewport of viewports) {
-  await page.setViewportSize(viewport)
-  for (const path of pages) {
-    await page.goto(baseUrl + path, { waitUntil: 'networkidle' })
-    const { docW, vw } = await page.evaluate(() => ({
-      docW: document.documentElement.scrollWidth,
-      vw: window.innerWidth,
-    }))
-    const ok = docW <= vw
-    if (!ok) failures++
-    console.log(
-      `${ok ? 'ok  ' : 'FAIL'} ${String(viewport.width).padStart(4)}px ${path}` +
-        (ok ? '' : ` — scrollWidth ${docW} > viewport ${vw}`),
-    )
-  }
-}
+// try/finally so a `page.goto` throw (dev server down, or `networkidle`
+// never settling) can't strand the chromium process.
+try {
+  const page = await browser.newPage()
 
-await browser.close()
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport)
+    for (const path of pages) {
+      await page.goto(baseUrl + path, { waitUntil: 'networkidle' })
+      const { docW, vw } = await page.evaluate(() => ({
+        docW: document.documentElement.scrollWidth,
+        vw: window.innerWidth,
+      }))
+      const ok = docW <= vw
+      if (!ok) failures++
+      console.log(
+        `${ok ? 'ok  ' : 'FAIL'} ${String(viewport.width).padStart(4)}px ${path}` +
+          (ok ? '' : ` — scrollWidth ${docW} > viewport ${vw}`),
+      )
+    }
+  }
+} finally {
+  await browser.close()
+}
 if (failures > 0) {
   console.error(`\n${failures} page/viewport combinations overflow`)
   process.exit(1)
