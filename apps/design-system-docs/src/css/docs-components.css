@@ -178,3 +178,7 @@
   font-size: var(--docs-font-caption-size);
   opacity: 0.6;
 }
+
+.pagination-nav a {
+  color: var(--ifm-color-primary);
+}
