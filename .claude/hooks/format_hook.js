@@ -52,7 +52,11 @@ async function main() {
   // so CSS needs this pass too, after stylelint. Prettier reads
   // .prettierignore itself, so ignored paths (e.g. *.mdx) stay untouched.
   if (['.css', '.md'].includes(ext)) {
-    run('./node_modules/.bin/prettier', ['--write', '--ignore-unknown', filePath])
+    run('./node_modules/.bin/prettier', [
+      '--write',
+      '--ignore-unknown',
+      filePath,
+    ])
   }
 }
 
