@@ -19,9 +19,10 @@
   --docs-font-display-size: 2.75rem; /* site-local: above header-4xl */
   --docs-font-display-line-height: 1.15; /* site-local */
 
-  /* Hero — the homepage brand title only. 112px per the Figma header, held
-     exactly at the 1440px design width and scaled down from there. */
-  --docs-font-hero-size: clamp(2.75rem, 7.78vw, 7rem); /* site-local */
+  /* Hero — the homepage brand title only. Capped at 96px; the Figma header
+     specifies 112px, but that overpowered the page at the 1440px design
+     width. Scales down from the cap on narrower viewports. */
+  --docs-font-hero-size: clamp(2.75rem, 7.78vw, 6rem); /* site-local */
 
   /* All roles reference the SEMANTIC token layer only. The header-*
      font-size names collide with the legacy bundle; the semantic typography
