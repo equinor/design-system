@@ -65,7 +65,23 @@ const config: Config = {
               path: 'Next', // URL path for the current version
               banner: 'none',
             },
+            // A non-lastVersion normally gets its version name as its path, so
+            // pinning lastVersion to 'current' below would silently move the
+            // whole archive from /docs/… to /docs/1.1.0/… and break every
+            // existing link to it. An empty path keeps it exactly where it is.
+            '1.1.0': {
+              path: '',
+            },
           },
+          // Without this, Docusaurus defaults lastVersion to the newest entry
+          // in versions.json (1.1.0), which makes the frozen archive the
+          // target of every `type: 'docSidebar'` navbar item and of the version
+          // dropdown — while the footer and the landing pages link to
+          // /docs/Next/…. The site then contradicts its own chrome. Pinning it
+          // to 'current' points the default at the 2.0.0-beta redesign;
+          // `path: 'Next'` above keeps the beta's URLs unchanged and leaves
+          // 1.1.0 served at /docs/.
+          lastVersion: 'current',
         },
         theme: {
           customCss: [
