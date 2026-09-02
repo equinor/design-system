@@ -37,6 +37,11 @@ nav.menu {
   background-color: var(--ifm-background-surface-color);
 }
 
+/* Mobile nav bar */
+.navbar-sidebar {
+  z-index: 1000;
+}
+
 nav.menu .menu__list {
   margin-top: 0;
   padding: 0;
