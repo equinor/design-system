@@ -189,7 +189,6 @@
 
     &[data-variant='default'] {
       background-color: var(--_bg-muted);
-      outline: none;
     }
 
     &[data-variant='default']:hover {
@@ -204,9 +203,11 @@
 
     &[data-variant='outlined'] {
       background-color: transparent;
-      outline: var(--eds-border-width-default, 1px) solid
+
+      /* Inset box-shadow rather than outline, so outline stays free for the
+       * focus ring (with a truly transparent offset gap, like Button). */
+      box-shadow: inset 0 0 0 var(--eds-border-width-default, 1px)
         var(--_border-interactive);
-      outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
     }
 
     &[data-variant='outlined']:hover {
@@ -224,7 +225,6 @@
       --_icon: var(--_icon-emphasis);
 
       background-color: var(--_bg-emphasis);
-      outline: none;
     }
 
     &[data-variant='high-contrast']:hover {
@@ -238,10 +238,9 @@
     /* ===== FOCUS STATE ===== */
 
     &:focus-visible {
-      box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-background-canvas),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
-          var(--eds-border-interactive-focus);
+      outline: var(--eds-sizing-stroke-thin) solid
+        var(--eds-border-interactive-focus);
+      outline-offset: var(--eds-sizing-stroke-thin);
     }
 
     /* ===== ICONS ===== */
@@ -251,6 +250,17 @@
       margin-block: calc(-1 * var(--_padding-adjusted));
       margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
       color: var(--_icon);
+    }
+
+    /* Forced colors (Windows High Contrast) strips box-shadow, so the
+     * outlined border needs outline there. While focused, the focus ring
+     * takes over outline and communicates the boundary instead —
+     * :not(:focus-visible) keeps that handover independent of source order. */
+    @media (forced-colors: active) {
+      &[data-variant='outlined']:not(:focus-visible) {
+        outline: var(--eds-border-width-default, 1px) solid;
+        outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+      }
     }
   }
 }
