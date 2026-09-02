@@ -40,10 +40,17 @@ must be scoped so 1.1.0 keeps its stock rendering:
   its path, so `'1.1.0': { path: '' }` is what keeps the archive at `/docs/…`
   instead of relocating it to `/docs/1.1.0/…` and breaking every existing link.
 
-Consequence to know about: the archive now carries Docusaurus's standard
-"no longer actively maintained" banner, because it genuinely is not the latest
-version. That is the one sanctioned change to its rendering; suppress with
-`banner: 'none'` on the `1.1.0` entry if it is ever unwanted.
+Two sanctioned changes to the archive's rendering, and only these two:
+
+1. It carries Docusaurus's standard "no longer actively maintained" banner,
+   because it genuinely is not the latest version. Suppress with
+   `banner: 'none'` on the `1.1.0` entry if that is ever unwanted.
+2. It has no breadcrumbs. `breadcrumbs: false` is a docs-**plugin** option,
+   not a per-version one, so the redesign's choice to drop them necessarily
+   applies to the archive too. There is no way to scope it; re-enabling for
+   1.1.0 alone would mean a second plugin instance.
+
+Anything else that changes how 1.1.0 renders is a bug.
 
 ## Directory map
 
@@ -69,7 +76,7 @@ docusaurus.config.ts       aliases + webpack rules (see Config)
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                   |
 | `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`)                 |
-| `src/css/site-chrome.css`      | navbar, sidebar, TOC, breadcrumbs, footer rules                                                                                              |
+| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                   |
 | `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block                             |
 | `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts` |
 
@@ -338,10 +345,8 @@ When eds-core-react's Storybook moves, move these two with it.
 
 ## Verification workflow
 
-CI runs 1–5 in the `docs` job of `.github/workflows/checks.yaml`. Note that the
-root `pnpm run build` does **not** build this app, which is why that job exists
-and why it `needs: build` — the webpack aliases point at eds-core-react's built
-artifacts.
+All five run in CI, but they are spread across three jobs of
+`.github/workflows/checks.yaml` — see the note under the list.
 
 1. `npx tsc --noEmit -p apps/design-system-docs`
 2. `pnpm run format:check:docs` — scoped to `{src,docs,scripts}` plus the app's
@@ -359,6 +364,15 @@ artifacts.
    the archive's `#external-references`), left unfixed because the archive is
    frozen. Also css-minimizer warnings on modern CSS functions
    (`tan(atan2())`) in compiled component source.
+
+**Which job runs what**, since "the docs job" is only two thirds true and it
+matters if anyone ever narrows one of them: the `docs` job runs 2, the CSS half
+of 3 (`lint:css:docs`), 4 and 5. Step 1 runs in the **`types`** job, via
+`pnpm run types` → `design-system-docs typecheck`. The `lint:docs` half of 3
+runs in the **`lint`** job, via `lint:all` (which lints the whole repo,
+this app included). Note also that the root `pnpm run build` does **not** build
+this app — that is why the `docs` job exists and why it `needs: build`, since
+the webpack aliases point at eds-core-react's built artifacts.
 
 Not in CI (both need a running server):
 

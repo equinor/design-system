@@ -65,8 +65,7 @@
   display: none;
 }
 
-/* Hide all docs chrome (breadcrumbs, version badges, edit link, pagination) on full-width pages */
-article:has(.docs-landing) > .theme-doc-breadcrumbs,
+/* Hide all docs chrome (version badges, edit link, pagination) on full-width pages */
 article:has(.docs-landing) > [class*='docVersion'],
 article:has(.docs-landing) > footer {
   display: none;
@@ -166,11 +165,9 @@ html[class*='docs-doc-id-components/'][class*='docs-version-current']
  * redesign); the archived 1.1.0 docs keep the stock Docusaurus layout.
  * ====================================== */
 
-/* ---- Hide sidebar, breadcrumbs, TOC, edit link, and pagination ---- */
+/* ---- Hide sidebar, TOC, edit link, and pagination ---- */
 html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
   .theme-doc-sidebar-container,
-html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
-  .theme-doc-breadcrumbs,
 html[class*='docs-doc-id-foundation/'][class*='docs-version-current']
   .theme-doc-toc-desktop,
 html[class*='docs-doc-id-foundation/'][class*='docs-version-current']

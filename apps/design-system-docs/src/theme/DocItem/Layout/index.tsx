@@ -8,7 +8,6 @@ import DocItemFooter from '@theme/DocItem/Footer'
 import DocItemTOCMobile from '@theme/DocItem/TOC/Mobile'
 import DocItemTOCDesktop from '@theme/DocItem/TOC/Desktop'
 import DocItemContent from '@theme/DocItem/Content'
-import DocBreadcrumbs from '@theme/DocBreadcrumbs'
 import ContentVisibility from '@theme/ContentVisibility'
 
 import { DotField } from '@site/src/components/DotField'
@@ -70,8 +69,9 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
           <ContentVisibility metadata={metadata} />
           <DocVersionBanner />
           <div className={styles.docItemContainer}>
+            {/* No <DocBreadcrumbs />: the docs plugin sets
+                `breadcrumbs: false`, so upstream would render nothing here. */}
             <article>
-              <DocBreadcrumbs />
               <DocVersionBadge />
               {docTOC.mobile}
               <DocItemContent>{children}</DocItemContent>

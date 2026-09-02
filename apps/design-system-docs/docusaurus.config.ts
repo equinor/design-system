@@ -363,7 +363,8 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© Equinor ${new Date().getFullYear()}`,
+      // No `copyright`: the swizzled Footer renders the Equinor brand logo in
+      // its bottom row instead (src/theme/Footer/index.tsx).
     },
     prism: {
       theme: prismThemes.github,

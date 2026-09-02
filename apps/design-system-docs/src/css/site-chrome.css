@@ -82,10 +82,18 @@ nav.menu li a {
   background-color: var(--ifm-background-surface-color);
 }
 
+/* The chevron inside the collapse button. It is the EDS `chevron_right` icon
+   (the `@theme/Icon/Arrow` swizzle), which points right at 0deg — so collapse
+   flips it to point back at the sidebar. Size and colour are set here rather
+   than on the icon so the expand rail below can share the same values. */
 .theme-doc-sidebar-container button svg {
-  transform: scale(0.7) rotate(180deg);
+  transform: rotate(180deg);
+
+  width: 1.25rem;
+  height: 1.25rem;
   margin: 0;
-  opacity: 0.6;
+
+  color: var(--eds-icon-secondary);
 }
 
 /* Expand sidebar button */
@@ -106,9 +114,14 @@ nav.menu li a {
   background-color: var(--docusaurus-collapse-button-bg-hover);
 }
 
+/* Same chevron, unrotated so it points away from the collapsed rail. The
+   expand button is a `div[role="button"]`, not a `<button>`, so the rule
+   above does not reach it and the values are restated. */
 .theme-doc-sidebar-container div[aria-label='Expand sidebar'] svg {
-  transform: scale(0.7) rotate(0deg);
-  opacity: 0.6;
+  transform: rotate(0deg);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--eds-icon-secondary);
 }
 
 /* 1) Vertical guide lines for nested sidebar items */
@@ -141,28 +154,36 @@ nav.menu li a {
   background-color: transparent !important;
 }
 
-/* Make sidebar chevrons smaller and lighter.
+/* Swap Infima's category chevron for the EDS `chevron_up` icon, smaller and
+ * in --eds-icon-secondary.
  *
- * Docusaurus renders them in two shapes: a category with a link doc gets a
- * separate `.menu__caret` button whose chevron is its `::before`, while a
- * category without one draws the chevron as the label's own `::after`. Both
- * need styling or the two kinds of category look different.
+ * Docusaurus renders the chevron in two shapes: a category with a link doc
+ * gets a separate `.menu__caret` button whose chevron is its `::before`, while
+ * a category without one draws it as the label's own `::after`. Both need
+ * styling or the two kinds of category look different.
  *
- * Two constraints on how: size the pseudo-element rather than the host, so the
- * caret button keeps its full click target; and change the box and
- * background-size rather than `transform`, because Infima puts `rotate()` on
- * these same pseudo-elements to flip the chevron between open and closed.
- * Infima's own ratio of background-size to box is 1.6, kept here. The chevron
- * is a background image with a baked-in fill, tinted per colour scheme by
- * `--ifm-menu-link-sublist-icon-filter`, so `color` has no effect on it. */
+ * Three constraints on how. Size the pseudo-element rather than the host, so
+ * the caret button keeps its full click target. Change the box and mask-size
+ * rather than `transform`, because Infima puts `rotate()` on these same
+ * pseudo-elements to flip the chevron between open and closed — which also
+ * means the EDS icon has to be the *up* chevron, matching the orientation
+ * Infima's own artwork is drawn at. Infima's ratio of icon size to box is 1.6,
+ * kept here. And paint the icon as a mask over a background colour rather than
+ * as a background image: an image bakes in its fill, which is why Infima has
+ * to tint it per colour scheme with `--ifm-menu-link-sublist-icon-filter`,
+ * whereas a mask takes the token directly. The `background` shorthand drops
+ * Infima's image, and `filter: none` drops the tint that went with it. */
 .menu__caret::before,
 .menu__link--sublist-caret::after {
   width: 0.875rem;
   min-width: 0.875rem;
   height: 0.875rem;
 
-  opacity: 0.6;
-  background-size: 1.4rem 1.4rem;
+  background: var(--eds-icon-secondary);
+  filter: none;
+
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m7.41 15.705 4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6z'/%3E%3C/svg%3E")
+    center / 1.4rem 1.4rem no-repeat;
 }
 
 /* ======================================
@@ -356,19 +377,6 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
 .table-of-contents__link--active::before {
   background-color: var(--ifm-color-primary);
-}
-
-/* ======================================
- * BREADCRUMBS
- * ====================================== */
-.theme-doc-breadcrumbs .breadcrumbs__item:not(:last-child)::after {
-  content: '/';
-  margin: 0 0.5rem;
-  color: var(--ifm-breadcrumb-separator-color);
-}
-
-.theme-doc-breadcrumbs .breadcrumbs__item .breadcrumbs__link {
-  background-color: unset;
 }
 
 /* ======================================

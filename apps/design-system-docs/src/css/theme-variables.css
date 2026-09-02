@@ -168,15 +168,11 @@
   --ifm-menu-color-background-hover: var(--ifm-hover-overlay);
   --ifm-menu-link-padding-horizontal: 1rem;
   --ifm-menu-link-padding-vertical: 0.375rem;
-  --ifm-menu-link-sublist-icon-filter: none;
   --doc-sidebar-hidden-width: 56px !important;
 
   /* Table of contents */
   --ifm-toc-padding-vertical: 0;
   --ifm-toc-padding-horizontal: 0;
-
-  /* Breadcrumbs */
-  --ifm-breadcrumb-separator: '';
 
   /* Text */
   --ifm-heading-color: var(--eds-text-primary);
