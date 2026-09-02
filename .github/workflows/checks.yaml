@@ -206,6 +206,15 @@ jobs:
           pnpm run build
       - name: Lint packages
         run: pnpm run lint:all
+      # Separate step, not folded into `lint:all` above - same reasoning as
+      # "Type check mobile" in the types job below. lint:all's root
+      # eslint.config.mjs ignores these two packages (they ship their own
+      # eslint.config.js and are written in a different style) so they need
+      # their own lint script run explicitly.
+      - name: Lint mobile
+        run: |
+          pnpm --filter @equinor/eds-mobile-components run lint
+          pnpm --filter @equinor/mobile-storybook run lint
 
   # ─── Type check (parallel, depends on build) ────────────────────
   types:

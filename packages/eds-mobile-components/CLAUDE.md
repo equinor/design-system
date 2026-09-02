@@ -27,7 +27,7 @@ pnpm types
 pnpm clean
 ```
 
-From the monorepo root, the equivalents are `pnpm build:mobile`, `pnpm watch:mobile`, and `pnpm check-types:mobile` (hand-sequenced to build this package first). There's no root-level lint equivalent — and don't rely on `pnpm lint:all` for this package: ESLint's flat config doesn't cascade per-directory, so it lints these files with root's config instead of this package's own `eslint.config.js`, applying root's Prettier-style rules (single quotes, no semicolons) to code written in this package's own style. It runs without crashing, but produces thousands of style-only findings that aren't meaningful signal. Use `pnpm --filter @equinor/eds-mobile-components run lint` (or run it from this directory) to get this package's own config.
+From the monorepo root, the equivalents are `pnpm build:mobile`, `pnpm watch:mobile`, and `pnpm check-types:mobile` (hand-sequenced to build this package first). There's no root-level lint equivalent — root's `eslint.config.mjs` ignores this package outright (ESLint's flat config doesn't cascade per-directory, so linting it from the root would otherwise apply root's Prettier-style rules — single quotes, no semicolons — to code written in this package's own style). `pnpm lint:all` exits 0 on these files (with an easy-to-miss "File ignored" warning) rather than actually checking them. Use `pnpm --filter @equinor/eds-mobile-components run lint` (or run it from this directory) to get this package's own config.
 
 ## Architecture
 

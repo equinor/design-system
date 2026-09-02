@@ -60,6 +60,8 @@ The expected behaviour after any edit to a `.ts`, `.tsx`, or `/components/next/*
 
 If you edit code in a harness without enforced auto-fix, run `pnpm run lint <file>` before considering the change done.
 
+**Exception:** `packages/eds-mobile-components` and `apps/mobile-storybook` are excluded from root's ESLint config — root's `lint` command exits 0 on their files (with an easy-to-miss "File ignored" warning) without actually checking anything. Use the per-package commands below instead.
+
 ## Build/Lint/Test Commands
 
 Package manager: `pnpm@10.28.0`
@@ -67,8 +69,11 @@ Package manager: `pnpm@10.28.0`
 ```bash
 pnpm run build                    # Build all packages
 pnpm run build:core-react         # Build eds-core-react only
-pnpm run lint:all                 # Lint entire codebase
+pnpm run lint:all                 # Lint entire codebase, except packages/eds-mobile-components and apps/mobile-storybook (they ship their own eslint.config.js — see below)
 pnpm run lint ./path/to/file.tsx  # Lint specific file
+
+pnpm --filter @equinor/eds-mobile-components run lint  # Lint eds-mobile-components with its own config
+pnpm --filter @equinor/mobile-storybook run lint       # Lint mobile-storybook with its own config
 
 pnpm run test:core-react          # Run eds-core-react tests
 pnpm run test:watch:core-react    # Watch mode
