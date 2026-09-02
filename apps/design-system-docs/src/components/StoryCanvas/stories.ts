@@ -22,8 +22,10 @@ import * as TooltipStories from '@eds-core-react-src/components/next/Tooltip/Too
  * Portable-stories registry. Each entry composes a component's actual CSF
  * story file from eds-core-react source into render-ready React components —
  * the same stories Storybook shows, with args and decorators applied.
- * Renaming or removing a story becomes a docs build error instead of a
- * silently broken iframe.
+ *
+ * Note this registry does NOT make a bad reference a build error — StoryCanvas
+ * takes `of` as a plain string, and an unknown one logs and renders nothing.
+ * `pnpm run check:docs-stories` is what catches that; it runs in CI.
  */
 export const storyRegistry = {
   Accordion: composeStories(AccordionStories),

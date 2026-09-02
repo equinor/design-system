@@ -26,6 +26,25 @@ must be scoped so 1.1.0 keeps its stock rendering:
 - React: the DocItem hero gate checks `metadata.version === 'current'`.
 - Chrome (navbar, sidebar, TOC, footer) is deliberately version-independent.
 
+**Both version paths are pinned explicitly, and both must stay that way.**
+`docusaurus.config.ts` sets `lastVersion: 'current'` plus
+`'1.1.0': { path: '' }`. Neither is decoration:
+
+- Without `lastVersion`, Docusaurus defaults it to the newest entry in
+  `versions.json` (`1.1.0`), which silently makes the frozen archive the target
+  of every `type: 'docSidebar'` navbar item and of the version dropdown — while
+  the footer and landing pages link to `/docs/Next/…`. The site then
+  contradicts its own chrome and the redesign is unreachable from the primary
+  navigation.
+- With `lastVersion: 'current'`, a non-last version takes its version _name_ as
+  its path, so `'1.1.0': { path: '' }` is what keeps the archive at `/docs/…`
+  instead of relocating it to `/docs/1.1.0/…` and breaking every existing link.
+
+Consequence to know about: the archive now carries Docusaurus's standard
+"no longer actively maintained" banner, because it genuinely is not the latest
+version. That is the one sanctioned change to its rendering; suppress with
+`banner: 'none'` on the `1.1.0` entry if it is ever unwanted.
+
 ## Directory map
 
 ```
@@ -37,7 +56,8 @@ src/theme/                 Docusaurus swizzles + MDXComponents registry
 src/pages/                 unversioned React pages (index, foundation, …)
 src/clientModules/         syncColorScheme (data-theme → data-color-scheme),
                            pageTransitions (View Transitions on route change)
-scripts/                   check-viewport-overflow.mjs regression gate
+scripts/                   check-viewport-overflow.mjs (needs a running
+                           server) and check-story-references.mjs (static)
 sidebars.ts                hand-maintained; category link docs must NOT be
                            repeated in their own items array
 docusaurus.config.ts       aliases + webpack rules (see Config)
@@ -47,17 +67,30 @@ docusaurus.config.ts       aliases + webpack rules (see Config)
 
 | File                           | Owns                                                                                                                                         |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables only — no element rules.                                  |
+| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                   |
 | `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`)                 |
 | `src/css/site-chrome.css`      | navbar, sidebar, TOC, breadcrumbs, footer rules                                                                                              |
 | `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block                             |
 | `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts` |
+
+The exception in `theme-variables.css`: the per-level heading line-heights at
+the end of the file set `line-height` on `h1`–`h6` directly, not through a
+variable. Infima has only one shared `--ifm-heading-line-height` while the
+token scale ships an absolute value per level, so there is no variable to
+override. They use `html:where(…)` to stay at specificity 0,0,2 so single-class
+component rules still win. Everything else in the file is variables.
 
 Component styling is colocated (`src/components/X/x.css`). Convention:
 **plain CSS files, not CSS modules**, `docs-` prefixed root class, BEM-style
 elements, `data-*` attributes for variants. One exception:
 `src/theme/DocItem/Layout/styles.module.css` stays a module because it tracks
 the upstream Docusaurus file.
+
+Two stylelint rules are switched off for this app in `.stylelintrc.yaml`:
+`selector-class-pattern` (the site must select Infima/Docusaurus classes it
+does not own) and `no-descending-specificity` (the version-scoping strategy
+above deliberately relies on specificity order). Every other rule applies —
+`pnpm run lint:css:docs`.
 
 ## Tokens — two bundles, one collision
 
@@ -88,6 +121,32 @@ Both token bundles load (see imports in `theme-variables.css`):
    `--eds-elevation-*`, `--eds-container-space-*`, and the embedded `/next`
    component previews, which consume legacy names. Do not use legacy
    `--eds-color-*` names in site CSS.
+
+## Fonts
+
+Equinor comes from the CDN (`cdn.eds.equinor.com`); Inter is self-hosted via
+`@fontsource/inter`, imported in `theme-variables.css`.
+
+**Import the `latin-NNN.css` entrypoints, never the unsuffixed `NNN.css`.**
+The unsuffixed ones pull seven subsets each (latin, latin-ext, cyrillic,
+cyrillic-ext, greek, greek-ext, vietnamese). The site is `locales: ['en']`, and
+the six extra subsets cost more than their file size: their smaller `.woff2`
+files fall under Docusaurus's asset-inlining threshold, so they get base64'd
+straight into the render-blocking stylesheet. Measured, that was 31 inlined
+blobs and 28 `@font-face` rules, and it held the global sheet at 279.9 kB gzip
+compressing at only 2.2:1. Latin-only: 4 rules, no base64, **47.7 kB gzip**.
+
+Safe because every non-ASCII character in `docs/` and `src/` is inside the
+latin subset's `unicode-range`. The ones that are not — arrows, `≈`, `≥`, `⌘`,
+emoji — are absent from _all_ of Inter's subsets, so they render from a
+fallback font either way.
+
+Weights 400, 500, 600 and 700 are all loaded. 400 and 500 are the site's own
+(`--docs-font-weight-emphasis` is `bolder` = 500); 600 and 700 back Infima's
+`--ifm-font-weight-{semibold,bold}`, and `<strong>` really does compute to 700.
+Do not trim to 400+500 on the strength of the "never 600/700" rule in the root
+AGENTS.md — that rule is about EDS component CSS, and dropping them here would
+lighten every bold run of prose on the site.
 
 **Collision gotcha:** both bundles define `--eds-typography-header-*-font-size`
 with different values, and webpack CSS ordering lets the legacy bundle win.
@@ -146,17 +205,29 @@ MDX docs use these without imports; React pages import them from
 - `GalleryCard`/`GalleryGrid` — live-preview cards on `/components`
   (previews import real components from `@equinor/eds-core-react/next`)
 - `StorybookEmbed` — iframe of the deployed Storybook; `showLink` derives
-  the View-in-Storybook link from the `id` (never hand-write those links)
+  the View-in-Storybook link from the `id` (never hand-write those links).
+  Now only used for Foundation stories that have no registry entry
+  (`foundation/design-tokens/typography.md`); component docs use StoryCanvas.
 - `StoryCanvas` — **what every component doc uses**: renders actual CSF story
   files natively via `composeStories()` (`src/components/StoryCanvas/`).
   Registry in `stories.ts` (one namespace import + one `composeStories` entry
   per component, alphabetical); usage
   `<StoryCanvas of="Button/Default" showLink />`. No `height` — canvases
-  auto-size. An unknown `of` path logs and renders nothing, so verify the
-  story name against the component's `.stories.tsx` exports. Stories that
-  drive their own state through Storybook's `useArgs()` render but cannot be
-  interacted with here (`Switch/Introduction` is the one such case) — prefer a
-  story with local `useState` when the doc needs interactivity.
+  auto-size. Stories that drive their own state through Storybook's `useArgs()`
+  render but cannot be interacted with here (`Switch/Introduction` is the one
+  such case) — prefer a story with local `useState` when the doc needs
+  interactivity.
+
+Both reference styles fail **silently** at runtime — an unknown StoryCanvas
+`of` logs to the console and renders nothing, and a wrong StorybookEmbed `id`
+renders Storybook's error frame inside the iframe, which the Docusaurus build
+never sees. `pnpm run check:docs-stories`
+(`scripts/check-story-references.mjs`) is the gate: it resolves every `of`
+against the registry and the story file's real exports, and every `id` against
+ids derived with Storybook's own `toId`/`storyNameFromExport`, so it cannot
+drift from how Storybook slugifies a title. It runs in CI. Note that the
+registry itself gives no such guarantee — `of` is a plain `string`.
+
 - `DocsLanding` — wrapper that opts an MDX doc into the full-width landing
   layout (styled in `doc-layouts.css`)
 - `DotField` — the EDS dot grid for hero bands: 2px dots on an 18px pitch plus
@@ -225,16 +296,53 @@ is a type error in this project.
 Webpack config changes require a dev-server restart; content and CSS
 hot-reload.
 
+### Dependencies
+
+Only declare what **this app's own source** imports. Portable stories drag
+`styled-components`, `react-hook-form`, `@storybook/react-vite` and
+`storybook/{actions,preview-api}` into the bundle, but those are imported by
+story files inside `packages/eds-core-react`, so webpack resolves them from
+that package's `node_modules`, where eds-core-react declares them. They are
+correctly absent from this manifest; adding them only lets two declarations
+drift apart.
+
+`@storybook/react` is the exception and belongs in `dependencies`, not
+`devDependencies`: `StoryCanvas/stories.ts` imports `composeStories` from it, so
+it ships in the production bundle. Its required peer `storybook` sits alongside
+it. Their major must track eds-core-react's Storybook (both on 10.x today) —
+nothing enforces that automatically.
+
 ## Verification workflow
 
+CI runs 1–5 in the `docs` job of `.github/workflows/checks.yaml`. Note that the
+root `pnpm run build` does **not** build this app, which is why that job exists
+and why it `needs: build` — the webpack aliases point at eds-core-react's built
+artifacts.
+
 1. `npx tsc --noEmit -p apps/design-system-docs`
-2. `npx docusaurus build` (from this dir) — `onBrokenLinks: 'throw'` is the
-   link gate. Known-acceptable warnings: two broken-anchor warnings on the
-   resources page (JSX-rendered heading ids are invisible to the checker —
-   verified present at runtime) and css-minimizer warnings on modern CSS
-   functions (`tan(atan2())`) in compiled component source.
-3. `node scripts/check-viewport-overflow.mjs` with the dev server running.
-4. Browser pass in light AND dark mode. Standard regression set: `/`,
+2. `pnpm run format:check:docs` — scoped to `{src,docs,scripts}` plus the app's
+   root files. `versioned_docs/version-1.1.0/` is deliberately excluded: 25 of
+   its files are Prettier-unclean and the archive is frozen, so the gate would
+   otherwise demand edits nobody is allowed to make.
+3. `pnpm run lint:css:docs` and `pnpm run lint:docs`
+4. `pnpm run check:docs-stories` — StoryCanvas / StorybookEmbed references.
+5. `pnpm run build:docs` — `onBrokenLinks: 'throw'` is the link gate.
+   Known-acceptable warnings: two broken anchors on the **photography** pages
+   (`foundation/assets/photography` links to the resources page). The
+   current-version one is a false positive — `SectionHeading` slugifies its
+   `title`, so `#external-references` does resolve at runtime, invisibly to the
+   checker. The 1.1.0 one is a **real** broken link (`#external-resources` vs
+   the archive's `#external-references`), left unfixed because the archive is
+   frozen. Also css-minimizer warnings on modern CSS functions
+   (`tan(atan2())`) in compiled component source.
+
+Not in CI (both need a running server):
+
+6. `node scripts/check-viewport-overflow.mjs [baseUrl]` — 8 pages ×
+   375/768/1440px. Serve the build on a spare port (`npx docusaurus serve
+--port 3100`) rather than assuming 3000 is free; the dev server usually has
+   it.
+7. Browser pass in light AND dark mode. Standard regression set: `/`,
    `/foundation`, `/getting-started`, `/about`, `/docs/Next/components`,
    `/docs/Next/components/inputs/button`,
    `/docs/Next/foundation/accessibility`, and
