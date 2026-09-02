@@ -26,11 +26,19 @@
 @import 'https://cdn.eds.equinor.com/font/equinor-font.css';
 
 /* Inter is self-hosted (the Equinor CDN only serves the Equinor font).
-   Static weights register as family 'Inter', matching --eds-family-ui. */
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
+   Static weights register as family 'Inter', matching --eds-family-ui.
+
+   Latin subset only. The unsuffixed `NNN.css` entrypoints pull seven subsets
+   each (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext,
+   vietnamese); the site is `i18n: locales: ['en']` and every non-ASCII
+   character in docs/ and src/ falls inside the latin subset's
+   unicode-range. The glyphs that do not — arrows (← → ↔ ↕ ↳), ≈, ≥, ⌘ and
+   emoji — are absent from ALL of Inter's subsets, so they already render
+   from a fallback font and lose nothing here. */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-700.css';
 
 /* ======================================
  * COLOR SCHEME
