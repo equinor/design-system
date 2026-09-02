@@ -309,8 +309,17 @@ drift apart.
 `@storybook/react` is the exception and belongs in `dependencies`, not
 `devDependencies`: `StoryCanvas/stories.ts` imports `composeStories` from it, so
 it ships in the production bundle. Its required peer `storybook` sits alongside
-it. Their major must track eds-core-react's Storybook (both on 10.x today) —
-nothing enforces that automatically.
+it.
+
+**Keep both ranges equal to eds-core-react's Storybook version — the exact
+version, not just the major.** Nothing enforces this, and a patch-level gap is
+enough to break the model: when a Dependabot bump moved eds-core-react to
+`^10.5.10` while this app stayed on `^10.5.7`, pnpm installed both, so
+`composeStories` resolved from one copy while the story files'
+`storybook/preview-api` resolved from another. Portable stories still rendered,
+but that is the shape of the failure to watch for — anything relying on
+Storybook's preview singleton (decorators, `useArgs`) is where it would surface.
+When eds-core-react's Storybook moves, move these two with it.
 
 ## Verification workflow
 

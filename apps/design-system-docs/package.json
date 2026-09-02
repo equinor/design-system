@@ -27,12 +27,12 @@
     "@equinor/eds-utils": "workspace:^",
     "@fontsource/inter": "^5.3.0",
     "@mdx-js/react": "^3.1.1",
-    "@storybook/react": "^10.5.7",
+    "@storybook/react": "^10.5.10",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "storybook": "^10.5.7"
+    "storybook": "^10.5.10"
   },
   "devDependencies": {
     "@docusaurus/babel": "3.10.2",
