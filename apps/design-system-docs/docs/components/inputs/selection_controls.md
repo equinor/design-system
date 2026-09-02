@@ -8,8 +8,8 @@ description: 'Selection controls allow users to select options, make decisions, 
 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem'}}>
   <div>
     <strong>Checkbox</strong>
-
-</div>
+    <StoryCanvas of="Checkbox/Introduction" />
+  </div>
   <div>
     <strong>Radio</strong>
     <StoryCanvas of="Radio/Introduction" />
@@ -21,8 +21,6 @@ description: 'Selection controls allow users to select options, make decisions, 
 </div>
 
 View Storybook: [Checkbox](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--introduction) · [Radio](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--introduction) · [Switch](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-switch--introduction)
-
-<StoryCanvas of="Checkbox/Introduction" />
 
 ## When to Use
 
