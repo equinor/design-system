@@ -31,12 +31,12 @@
   line-height: var(--eds-typography-ui-md-line-height);
   color: var(--eds-text-primary);
 
-  transition: border-color 150ms ease-in-out;
-
   /* Shorthand, so it also clears Infima's built-in magnifying-glass
      background image — the EDS search icon is drawn by the ::before below,
      which can take its colour from a token. */
   background: var(--eds-background-input);
+
+  transition: border-color 150ms ease-in-out;
 }
 
 .docs-search-bar input:hover {
@@ -112,14 +112,17 @@
 /* The clear-text button that shows up when the input is in use */
 .docs-search-bar button {
   cursor: pointer;
+
   right: var(--eds-spacing-xs) !important;
-  padding: 0 0.125rem !important;
-  height: 16px;
+
   width: 16px;
-  color: var(--eds-text-secondary);
+  height: 16px;
+  padding: 0 0.125rem !important;
   border-radius: var(--eds-corner-radius-pill);
+
+  color: var(--eds-text-secondary);
 }
 
 .docs-search-bar button:hover {
-  background-color: var(--eds-border-neutral-subtle);
+  background-color: var(--eds-background-interactive-neutral-muted-hover);
 }
