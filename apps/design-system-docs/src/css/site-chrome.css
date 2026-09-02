@@ -83,6 +83,7 @@ nav.menu li a {
   opacity: 0.6;
 }
 
+/* Expand sidebar button */
 .theme-doc-sidebar-container div[aria-label='Expand sidebar'] {
   top: unset;
   bottom: 0;
@@ -93,6 +94,11 @@ nav.menu li a {
   border: none;
 
   background-color: var(--ifm-background-surface-color);
+}
+
+/* Hover state for the expand sidebar button */
+.theme-doc-sidebar-container div[aria-label='Expand sidebar']:hover {
+  background-color: var(--docusaurus-collapse-button-bg-hover);
 }
 
 .theme-doc-sidebar-container div[aria-label='Expand sidebar'] svg {
