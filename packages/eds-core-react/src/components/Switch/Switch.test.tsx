@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Switch } from './Switch'
+import { comfortable as tokens } from './Switch.tokens'
 
 const StyledSwitch = styled(Switch)`
   clip-path: unset;
@@ -59,6 +60,23 @@ describe('Switch', () => {
     expect(one).not.toBeChecked()
     await userEvent.click(one)
     expect(one).not.toBeChecked()
+  })
+  it('Gets disabled styling when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Switch label="Switch one" />
+      </fieldset>,
+    )
+    const one = screen.getByLabelText('Switch one')
+    expect(one).toBeDisabled()
+    expect(one).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':disabled',
+    })
+    expect(one).toHaveStyleRule(
+      'background-color',
+      tokens.states.disabled.background,
+      { modifier: ':disabled + span > span' },
+    )
   })
   it('Can be set as default on without being a controlled component', () => {
     const labelText = 'Default checked switch'

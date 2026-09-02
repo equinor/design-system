@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Checkbox } from './Checkbox'
+import { checkbox as tokens } from './Checkbox.tokens'
 
 const StyledCheckbox = styled(Checkbox)`
   clip-path: unset;
@@ -88,5 +89,20 @@ describe('Checkbox', () => {
     expect(one).not.toBeChecked()
     await userEvent.click(one)
     expect(one).not.toBeChecked()
+  })
+  it('Gets disabled styling when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Checkbox label="Checkbox one" />
+      </fieldset>,
+    )
+    const one = screen.getByLabelText('Checkbox one')
+    expect(one).toBeDisabled()
+    expect(one).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':disabled',
+    })
+    expect(one).toHaveStyleRule('fill', tokens.states.disabled.background, {
+      modifier: ':disabled ~ svg',
+    })
   })
 })

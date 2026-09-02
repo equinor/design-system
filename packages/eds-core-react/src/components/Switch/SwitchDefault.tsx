@@ -3,49 +3,36 @@ import styled, { css } from 'styled-components'
 import { bordersTemplate } from '@equinor/eds-utils'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 
-type StyledProps = { $isDisabled: boolean }
-
 const Input = styled(BaseInput)(
-  ({ disabled, theme }) => css`
+  ({ theme }) => css`
     width: ${theme.clickbound.height};
     aspect-ratio: 1/1;
     /*  Track */
     &:checked + span > span {
-      background-color: ${
-        disabled
-          ? theme.states.disabled.background
-          : theme.entities.track.states.active.background
-      };
+      background-color: ${theme.entities.track.states.active.background};
     }
     /* Handle */
     &:checked + span > span:last-child {
       transform: translate(105%, -50%);
-      background-color: ${
-        disabled
-          ? theme.states.disabled.background
-          : theme.entities.handle.states.active.background
-      };
+      background-color: ${theme.entities.handle.states.active.background};
     }
-    &:hover + span {
-      background-color: ${
-        disabled ? 'transparent' : theme.states.hover.background
-      };
+    &:hover:not(:disabled) + span {
+      background-color: ${theme.states.hover.background};
     }
-    &:hover + span > span:last-child {
-      background-color: ${
-        disabled
-          ? theme.states.disabled.background
-          : theme.states.hover.entities.handle.background
-      };
+    &:hover:not(:disabled) + span > span:last-child {
+      background-color: ${theme.states.hover.entities.handle.background};
+    }
+    /* Placed last so disabled wins over the checked rules above */
+    &:disabled + span > span,
+    &:disabled + span > span:last-child {
+      background-color: ${theme.states.disabled.background};
     }
   `,
 )
 
-const Track = styled.span<StyledProps>(
+const Track = styled.span(
   ({
-    $isDisabled,
     theme: {
-      states,
       entities: { track },
     },
   }) => css`
@@ -60,27 +47,15 @@ const Track = styled.span<StyledProps>(
     top: 50%;
     transform: translate(-50%, -50%);
     transition: background 0.36s;
-    ${
-      $isDisabled && {
-        backgroundColor: states.disabled.background,
-      }
-    }
   `,
 )
-const Handle = styled.span<StyledProps>(
+const Handle = styled.span(
   ({
-    $isDisabled,
     theme: {
-      states,
       entities: { handle },
     },
   }) => css`
     background-color: ${handle.background};
-    ${
-      $isDisabled && {
-        backgroundColor: states.disabled.background,
-      }
-    }
     box-shadow: ${handle.boxShadow};
     width: ${handle.width};
     height: ${handle.height};
@@ -104,8 +79,8 @@ export const SwitchDefault = forwardRef<HTMLInputElement, SwitchDefaultProps>(
       <GridWrapper className={className} style={style}>
         <Input {...rest} ref={ref} disabled={disabled} />
         <BaseInputWrapper>
-          <Track $isDisabled={disabled} />
-          <Handle $isDisabled={disabled} />
+          <Track />
+          <Handle />
         </BaseInputWrapper>
       </GridWrapper>
     )

@@ -30,7 +30,13 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
   margin: 0;
   grid-area: input;
   transform: scale(var(--scale));
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:disabled ~ svg {
+    fill: ${tokens.states.disabled.background};
+  }
   &:focus {
     outline: none;
   }
@@ -61,6 +67,10 @@ const StyledLabel = styled.label<StyledRadioProps>`
   display: inline-flex;
   align-items: center;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
 `
 
 type StyledIconPathProps = {
@@ -98,6 +108,10 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
   position: relative;
   isolation: isolate;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
   &::before {
     content: '';
     position: absolute;
@@ -118,6 +132,10 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
           disabled ? 'transparent' : tokens.states.hover.background};
       }
     }
+    /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    &:hover:has(input:disabled)::before {
+      background-color: transparent;
+    }
   }
 `
 export type RadioProps = {
@@ -135,7 +153,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   const token = useToken({ density }, tokens)
 
   const iconSize = 24
-  const fill = disabled ? tokens.states.disabled.background : tokens.background
+  const fill = tokens.background
 
   const renderSVG = useMemo<JSX.Element>(() => {
     return (

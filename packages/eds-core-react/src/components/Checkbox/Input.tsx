@@ -37,7 +37,13 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'checkbox' }) => ({
   margin: 0;
   grid-area: input;
   transform: scale(var(--scale));
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:disabled ~ svg {
+    fill: ${tokens.states.disabled.background};
+  }
   &:focus {
     outline: none;
   }
@@ -100,6 +106,10 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
           disabled ? 'transparent' : tokens.states.hover.background};
       }
     }
+    /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    &:hover:has(input:disabled)::before {
+      background-color: transparent;
+    }
   }
 `
 export type InputProps = {
@@ -120,9 +130,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     const token = useToken({ density }, tokens)
 
     const iconSize = 24
-    const fill = disabled
-      ? tokens.states.disabled.background
-      : tokens.background
+    const fill = tokens.background
 
     const inputWrapperProps = {
       disabled,

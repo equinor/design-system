@@ -13,6 +13,10 @@ const StyledLabel = styled.label<StyledLabelProps>`
   display: inline-flex;
   align-items: center;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
 `
 
 const LabelText = styled.span`

@@ -10,6 +10,10 @@ type StyledProps = { $isDisabled: boolean; $size: 'default' | 'small' }
 
 const StyledLabel = styled.label<StyledProps>`
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
+  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
   border: none;
   background-color: transparent;
   vertical-align: middle;

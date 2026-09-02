@@ -4,6 +4,7 @@ import { axe } from 'jest-axe'
 import styled from 'styled-components'
 
 import { Radio } from './Radio'
+import { comfortable as tokens } from './Radio.tokens'
 
 const StyledRadio = styled(Radio)`
   clip-path: unset;
@@ -94,5 +95,20 @@ describe('Radio', () => {
     // See https://github.com/testing-library/react-testing-library/issues/275
     await userEvent.click(one)
     expect(one).not.toBeChecked()
+  })
+  it('Gets disabled styling when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Radio label="Radio" />
+      </fieldset>,
+    )
+    const one = screen.getByLabelText('Radio')
+    expect(one).toBeDisabled()
+    expect(one).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':disabled',
+    })
+    expect(one).toHaveStyleRule('fill', tokens.states.disabled.background, {
+      modifier: ':disabled ~ svg',
+    })
   })
 })
