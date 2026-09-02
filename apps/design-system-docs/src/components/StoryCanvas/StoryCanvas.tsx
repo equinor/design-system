@@ -36,7 +36,11 @@ export function StoryCanvas({ of, showLink = false }: StoryCanvasProps) {
       </div>
       {showLink && Story.id && (
         <p>
-          <a href={`${storybookUrl}/?path=/story/${Story.id}`}>
+          <a
+            href={`${storybookUrl}/?path=/story/${Story.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View in Storybook
           </a>
         </p>

@@ -3,6 +3,7 @@
 .docs-story-canvas {
   overflow-x: auto;
 
+  margin-bottom: 0.5rem;
   padding: 1.5rem;
   border: 1px solid var(--eds-border-neutral-subtle);
   border-radius: var(--eds-corner-radius-rounded);
