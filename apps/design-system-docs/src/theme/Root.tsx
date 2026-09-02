@@ -50,10 +50,17 @@ export default function Root({ children }: { children: ReactNode }): ReactNode {
 
       if (!canStartPageTransition()) return
 
-      // Take over from react-router's Link handler: prevent the default
-      // navigation AND the bubble-phase onClick that would push immediately.
+      // Take over from react-router's Link handler. `preventDefault()` alone
+      // is enough: react-router's LinkAnchor runs the consumer's onClick
+      // first, then navigates only when the event is not already prevented.
+      //
+      // Do NOT add stopPropagation() here. React delegates events at
+      // #__docusaurus, a descendant of document, so stopping in the capture
+      // phase means no React onClick ever fires — including the handlers
+      // Docusaurus uses to close the mobile drawers (DocSidebar/Mobile's
+      // onItemClick and the navbar's link handler), leaving the overlay up
+      // over the newly navigated page.
       event.preventDefault()
-      event.stopPropagation()
       startPageTransition(() => {
         history.push(url.pathname + url.search + url.hash)
       })
