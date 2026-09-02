@@ -1,0 +1,143 @@
+---
+title: The palette
+description: How the colour scale is built, why the same token names work in both light and dark, and what each step does.
+---
+
+This page is about the layer underneath the tokens. You do not use it — the scale is hidden from the
+Figma picker and is not part of the public token set. Read it when you want to know *why* a token
+looks the way it does, or when you are proposing a new one.
+
+## Colour is generated, not picked
+
+Every value in the scale is produced by a formula from three inputs: a **hue anchor**, a
+**lightness** value, and a **chroma** curve. Nobody chooses individual colours.
+
+There are seven hue anchors — blue, gray, green, moss green, north sea, orange and red — each defined
+once in **OKLCH**. OKLCH is used because changing hue in it does not change perceived lightness, so
+every tone's step 9 reads as equally solid whatever colour it is.
+
+Chroma follows a bell curve across the scale rather than being set per step, which keeps the middle
+of the scale saturated and both ends muted without anyone tuning it.
+
+The practical consequence: **adding a seventh tone is not a design exercise.** Point it at a hue
+anchor and the whole scale follows.
+
+## What the step numbers mean
+
+Each tone has 15 steps. The obvious reading — "1 is lightest, 15 is darkest" — is wrong.
+
+A step number is a **role position**, not a lightness. Step 9 is "the solid fill". Step 15 is "the
+foreground that sits on a solid fill". That is true in both schemes, and it is what lets one set of
+token names work in light and dark with no overrides.
+
+Steps 1 → 13 broadly travel from *closest to the background* toward *furthest from it*, which means
+descending lightness in light mode and ascending in dark.
+
+:::warning The scale is deliberately not monotonic
+"Broadly" is doing real work in that sentence. In dark mode the lightness values **dip at steps 4 and
+5** on purpose: a strictly increasing ramp could not hold the contrast that the border and muted-fill
+roles at those steps need.
+
+So do not treat global ordering as a rule, and do not "fix" the dip. The two rules that do hold are
+narrower:
+
+1. **No two steps within one scale resolve to the same value.**
+2. **Every state ladder progresses visibly in one direction.**
+
+Steps 14 and 15 are excluded from both — see below.
+:::
+
+## Which step does what
+
+Read this as the map between the scale and the tokens you actually use.
+
+| Step | Role |
+| --- | --- |
+| 1 | canvas, input fills, and the resting muted fill |
+| 2 | muted fill on hover; the disabled fill |
+| 3 | muted fill when pressed |
+| 4 | muted borders, the disabled border, neutral selected hover |
+| 5 | accent selected; muted border on hover |
+| 6 | *no consumer* |
+| 7 | muted border when pressed; backdrop; tertiary foreground |
+| 8 | links; secondary foreground; accent selected pressed |
+| 9 | **the solid fill**; emphasis borders |
+| 10 | solid fill on hover; `on-default` foregrounds |
+| 11 | solid fill when pressed; interactive foregrounds |
+| 12 | `on-muted` foregrounds; the inverted surface |
+| 13 | primary foreground; the selected indicator |
+| 14 | *no consumer* |
+| 15 | the content plane; `on-emphasis` foregrounds |
+
+### Steps 14 and 15 are inverse-polarity
+
+They sit outside the ladder by design. Both are **foreground values meant to sit *on* a solid fill**,
+so their polarity is reversed relative to steps 1–13 and they must be excluded from any ordering
+check.
+
+Step 15 does double duty: it is also the content plane, which is why `background.surface`,
+`background.dialog` and `background.floating` all resolve to it.
+
+### Steps 6 and 14 have no consumer
+
+They are not spare capacity waiting to be used. Inserting or repurposing a step renames everything
+above it, which breaks every consumer at once — so either they are given roles or they are dropped
+before the scale is settled. Treat "just use step 6" as a proposal, not a fix.
+
+## The steps jump on purpose
+
+The scale is not a smooth gradient. Lightness values are chosen per step so that the pairings that
+matter — text against surface, fill against canvas — land *at* the contrast target rather than near
+it.
+
+Notice that the middle of the scale is evenly spaced while the run from borders into fills jumps
+roughly twice as far. That gap is where strokes stop and fills begin, and it needs to be visible.
+
+:::note The lightness inputs are hand-tuned, and that is deliberate
+A purely formulaic lightness ramp was tried and did not produce usable contrast steps. The values are
+tuned by hand; the algorithm's job is to propagate them across hues, not to invent them. This is not
+technical debt and should not be "corrected" by deriving the ramp from a formula.
+:::
+
+## Tone to hue
+
+The mapping from a tone to a hue happens per scheme, which is what allows `neutral` to be a different
+hue in each:
+
+| Tone | Light | Dark |
+| --- | --- | --- |
+| `accent` | Moss green | Moss green |
+| `neutral` | **Gray** | **North sea** |
+| `info` | Blue | Blue |
+| `success` | Green | Green |
+| `warning` | Orange | Orange |
+| `danger` | Red | Red |
+
+Dark-mode neutral is North sea rather than grey on purpose: a pure-grey dark interface reads as dead,
+and the slight blue keeps large dark surfaces feeling like a material.
+
+## Data visualisation
+
+`data-visualization.*` is a separate group with its own rules, because chart colour is about telling
+series apart rather than about contrast against a background.
+
+- `cat.1` … `cat.10`, five steps each — categorical hues
+- `seq.1` … `seq.7` — a sequential ramp for magnitude
+- `div.1` … `div.9` — a diverging ramp for values around a midpoint
+
+These are the only values in the set that sit outside the OKLCH generator, and no EDS component binds
+them — they are for you to apply in charts. Guidance on ordering and accessibility is still being
+written.
+
+## Why you cannot extend the scale yourself
+
+Inserting a step shifts every position above it and renames the whole scale, which silently breaks
+every consumer. So the scale is treated as fixed: an expanded scale ships alongside the current one
+rather than replacing it, and consumers move at their own pace.
+
+If you need a value the scale does not have, that is a token request rather than something to
+generate locally.
+
+## Values
+
+Every resolved value, in both schemes, is on the [token reference](./reference.mdx) page.

@@ -1,0 +1,148 @@
+---
+title: Introduction
+description: How EDS colour works — semantic names, six tones, and one set of tokens that is correct in both light and dark.
+---
+
+You never pick a colour in EDS. You describe what you are colouring, and the system supplies the
+value — correct in light and dark, with contrast already checked.
+
+That is the whole idea. The rest of this page is how to read a token name.
+
+<iframe src="https://statoilsrm.sharepoint.com/sites/Designsystem/_layouts/15/embed.aspx?UniqueId=b4080d97-494b-44f5-a85f-d9fa25adc76c&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameBorder="0" scrolling="no" allowFullScreen title="Colour foundation intro.mp4"></iframe>
+
+[Link to introduction video](https://statoilsrm.sharepoint.com/:v:/r/sites/Designsystem/Open%20library/Tutorials/Colour%20foundation%20intro.mp4?csf=1&web=1&e=Yfjhui&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+
+:::note The video predates the current naming
+It explains the model, which has not changed. Some token names in it have — this page and
+[Getting started](./getting_started.mdx) are the current ones.
+:::
+
+## Reading a token name
+
+A name answers four questions, left to right:
+
+```
+background . interactive . accent . emphasis . hover
+ surface      stateful?     tone     level      state
+```
+
+Answer the four and you have the token. If you cannot answer one of them, that is usually a sign the
+design decision has not been made yet — which is more useful to know than it is annoying.
+
+### 1. Surface — what am I colouring?
+
+| Surface | Use for |
+| --- | --- |
+| `background` | fills: page, card, button body, row, input |
+| `border` | strokes, dividers, outlines, focus rings |
+| `text` | text and anything read as text |
+| `icon` | icons and glyphs |
+
+`text` and `icon` are separate because a thin icon stroke needs more contrast than a letterform of
+the same size to read as equally solid.
+
+### 2. Interactive — can the user act on it?
+
+| Segment | Meaning |
+| --- | --- |
+| `interactive` | responds to input, so it has `hover` and `pressed` values |
+| `non-interactive` | static. One value, no states |
+
+This is the distinction that most often goes wrong, and it is worth slowing down for. A tinted banner
+and a tinted button can look identical today and must not share a token: the button needs hover
+values, and the banner must never acquire them. Choose by **behaviour**, not by appearance.
+
+### 3. Tone — what does it mean?
+
+Six tones. Tone carries meaning, so picking one is a content decision, not a styling one.
+
+| Tone | Means | Not for |
+| --- | --- | --- |
+| `accent` | the primary action, brand emphasis, the current selection | decoration |
+| `neutral` | structure and default UI — surfaces, borders, secondary actions | conveying state |
+| `info` | neutral information worth noticing | success |
+| `success` | a completed or valid state | "on" or "enabled" generally |
+| `warning` | proceed with care; reversible risk | errors |
+| `danger` | destructive actions and errors | emphasis |
+
+Only `accent` and `neutral` have `selected` values, because selection is a UI state rather than a
+semantic condition — there is no such thing as a "selected success".
+
+### 4. Level — how loud?
+
+| Level | Looks like | Foreground on top |
+| --- | --- | --- |
+| `emphasis` | a solid, saturated fill | `text.on-emphasis.<tone>` |
+| `muted` | a light tint of the tone | `text.on-muted.<tone>` |
+| `selected` | a tint that reads as "chosen" — accent and neutral only | `text.primary` |
+
+The third column is a contract, not a suggestion. See
+[foreground pairing](./getting_started.mdx#foreground-pairing).
+
+### 5. State
+
+Interactive tokens carry `default`, `hover` and `pressed` as the last segment — so the accent
+button's pressed fill is `background.interactive.accent.emphasis.pressed`. Selected variants take
+`selected` as their level, giving `background.interactive.accent.selected.hover` and its siblings.
+
+Every state is a real, named colour. There is no opacity overlay and no `filter: brightness()` —
+those break against tinted backgrounds, invert wrongly in dark mode, and leave the hover value with
+no name anyone can refer to.
+
+## Colours that sit outside the tone matrix
+
+Some tokens mean the same thing regardless of tone.
+
+| Token | Job |
+| --- | --- |
+| `background.canvas` | the page behind everything |
+| `background.surface` | the plane content sits on — cards, panels, table bodies |
+| `background.floating` | menus, popovers, tooltips |
+| `background.dialog` | modal surfaces |
+| `background.input` | form field fills |
+| `background.inverted` | inverted surfaces, e.g. snackbars |
+| `background.backdrop` | the layer behind a floating element |
+| `border.interactive.focus` | the focus ring. One token, every component |
+| `border.interactive.selected-indicator` | the bar or underline marking the active item |
+| `overlay.scrim` | the dim behind a modal |
+| `text.primary`, `.secondary`, `.tertiary` | text hierarchy on ordinary surfaces |
+| `icon.primary`, `.secondary`, `.tertiary` | the icon equivalents |
+| `text.inverted`, `icon.inverted` | foregrounds on `background.inverted` |
+
+Disabled is its own small set — `background.interactive.disabled`, `border.interactive.disabled`,
+`text.interactive.disabled`, `icon.interactive.disabled` — because a disabled control loses its tone
+entirely. A disabled destructive button is not a faint red; it is neutral.
+
+## Light and dark
+
+One set of names, two schemes, switched by an attribute:
+
+```html
+<html data-color-scheme="dark"></html>
+```
+
+There is no scheme-specific token and no scheme-specific CSS to write. `text.primary` is a dark grey
+in light and a pale blue-white in dark, under one name. [The palette](./palette.mdx) explains the
+mechanism that makes that work.
+
+## Accessibility is built in
+
+Contrast is measured with **APCA**, which models human vision more accurately than the older WCAG 2
+formula. The targets are **Lc 90 for body text** and **Lc 60 for interactive elements**, measured
+against `background.surface`.
+
+Because both sides of every pairing are opaque, known values, contrast is a property of the token set
+rather than something to check per screen. Use the pairings in
+[Getting started](./getting_started.mdx#foreground-pairing) and it is already handled.
+
+:::info Every value is opaque
+No colour token is translucent. A translucent value has no contrast number until its backdrop is
+known, which would make the targets above unverifiable. The single exception is `overlay.scrim`,
+whose whole job is to sit over unknown content.
+:::
+
+## Where to go next
+
+- **[Getting started](./getting_started.mdx)** — picking tokens, pairing rules, and the mistakes worth avoiding
+- **[The palette](./palette.mdx)** — how the scale is built, and why the same names work in both schemes
+- **[Token reference](./reference.mdx)** — every token with its CSS custom property and resolved values

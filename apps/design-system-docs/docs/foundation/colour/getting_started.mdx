@@ -1,0 +1,161 @@
+---
+title: Getting Started
+description: Picking colour tokens — the pairing contract, worked examples, and the mistakes that survive review.
+---
+
+Colour in EDS is **static and semantic**: the tone is part of the token name, and you bind to it
+directly. There is one approach, in both design and code.
+
+```css
+.button--primary {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+}
+```
+
+In Figma the same token is `background.interactive.accent.emphasis.default`. The two names are
+generated from one definition, so they cannot drift apart — see the
+[token reference](./reference.mdx) for the full mapping.
+
+:::info Dynamic colour has been removed
+Earlier versions offered a second approach, where a `data-color-appearance` attribute decided which
+tone a generic token resolved to. It is gone. If you have `data-color-appearance` in your markup or
+appearance modes in your Figma file, name the tone explicitly instead.
+:::
+
+## Foreground pairing
+
+This is the part worth memorising. A fill in the left column admits only the foregrounds beside it —
+anything else fails contrast in light mode, dark mode, or both.
+
+| Fill | Text | Icon | Border |
+| --- | --- | --- | --- |
+| `background.surface` | `text.primary`, `.secondary`, `.tertiary` | `icon.primary`, `.secondary`, `.tertiary` | `border.non-interactive.neutral.*` |
+| `background.canvas` | `text.primary`, `.secondary` | `icon.primary`, `.secondary` | `border.non-interactive.neutral.muted` |
+| `background.interactive.<tone>.emphasis.*` | `text.on-emphasis.<tone>` | `icon.on-emphasis.<tone>` | `border.interactive.<tone>.emphasis.*` |
+| `background.interactive.<tone>.muted.*` | `text.on-muted.<tone>` | `icon.on-muted.<tone>` | `border.interactive.<tone>.muted.*` |
+| `background.non-interactive.<tone>.emphasis` | `text.on-emphasis.<tone>` | `icon.on-emphasis.<tone>` | `border.non-interactive.<tone>.emphasis` |
+| `background.non-interactive.<tone>.muted` | `text.on-muted.<tone>` | `icon.on-muted.<tone>` | `border.non-interactive.<tone>.muted` |
+| `background.non-interactive.<tone>.default` | `text.on-default.<tone>` | `icon.on-default.<tone>` | `border.non-interactive.<tone>.default` |
+| `background.interactive.accent.selected.*` | `text.primary` | `icon.primary` | `border.interactive.selected-indicator` |
+| `background.inverted` | `text.inverted` | `icon.inverted` | — |
+| `background.input` | `text.primary` | `icon.secondary` | `border.interactive.neutral.muted.*` |
+| `background.interactive.disabled` | `text.interactive.disabled` | `icon.interactive.disabled` | `border.interactive.disabled` |
+
+Both foreground families are **per tone**. `text.on-muted.danger` is a different value from
+`text.on-muted.accent` — do not substitute `text.primary` on a tinted fill, because that loses the
+tone the tint was there to convey.
+
+## Worked examples
+
+### Primary button
+
+| Part | Token |
+| --- | --- |
+| fill, rest | `background.interactive.accent.emphasis.default` |
+| fill, hover | `background.interactive.accent.emphasis.hover` |
+| fill, pressed | `background.interactive.accent.emphasis.pressed` |
+| label | `text.on-emphasis.accent` |
+| focus ring | `border.interactive.focus` |
+
+```css
+.button--primary {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+}
+.button--primary:hover {
+  background: var(--eds-background-interactive-accent-emphasis-hover);
+}
+.button--primary:active {
+  background: var(--eds-background-interactive-accent-emphasis-pressed);
+}
+.button--primary:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+}
+```
+
+### Destructive button
+
+The same shape with `danger` in place of `accent` — with one thing to notice:
+
+```css
+.button--destructive:disabled {
+  background: var(--eds-background-interactive-disabled);
+  color: var(--eds-text-interactive-disabled);
+}
+```
+
+**Disabled is neutral, not a faint red.** A control that cannot be actioned has no tone to convey.
+
+### A status banner
+
+A banner is static. It gets a tint and a border, and **no hover values**:
+
+```css
+.banner--warning {
+  background: var(--eds-background-non-interactive-warning-muted);
+  border: 1px solid var(--eds-border-non-interactive-warning-muted);
+  color: var(--eds-text-on-muted-warning);
+}
+```
+
+If you later make the banner dismissible, the dismiss control becomes interactive — the banner's own
+fill does not.
+
+### Focus ring
+
+One token, every component, on every fill:
+
+```css
+:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+```
+
+## Do and don't
+
+| Do | Don't |
+| --- | --- |
+| Pick by **behaviour** — a static tint and an interactive tint use different tokens even when they look identical today | Pick by appearance, and give a banner hover values it will eventually be handed by accident |
+| Use the named `hover` and `pressed` tokens | Derive states with `opacity` or `filter: brightness()` — they break on tinted fills and invert wrongly in dark mode |
+| Let the scheme attribute do the work | Write `[data-color-scheme="dark"] .thing { … }`. If you need that, the token you picked is wrong |
+| Use `text.on-muted.<tone>` on a tinted fill | Fall back to `text.primary` on a tint — it discards the tone |
+| Treat disabled as its own set | Use a tone's faint end for disabled |
+
+## Mistakes that survive review
+
+1. **A raw palette step in a component.** Binding to a numbered scale value instead of a semantic
+   token. It looks right and breaks the moment the scale is extended.
+2. **Tone on a disabled control.** Disabled has four tokens of its own and no tone.
+3. **`text.tertiary` used for body text.** It is for de-emphasised metadata, not a third body colour.
+4. **Data-visualisation tokens in UI chrome.** `data-visualization.*` is tuned for telling series
+   apart, not for contrast against a surface.
+
+## Switching colour scheme
+
+By default the system reads the `data-color-scheme` attribute:
+
+```html
+<!-- Light (default) -->
+<html data-color-scheme="light"></html>
+<!-- Dark -->
+<html data-color-scheme="dark"></html>
+```
+
+It can be set on any ancestor, not only `<html>`, and it cascades — so a dark panel inside a light
+page is a normal thing to do.
+
+## For designers
+
+Add the EDS colour library to your Figma file and pick tokens by name. The variable names are
+identical to the ones above, so a design and its implementation refer to the same thing.
+
+Only the semantic layer is published to the variable picker. The numbered scale underneath it is
+hidden on purpose, so there is no way to bind a raw palette value to a component by accident — see
+[The palette](./palette.mdx).
+
+:::note Existing tutorials cover the earlier naming
+The colour tutorials in the Design System SharePoint site were recorded against the previous token
+names and the static/dynamic split. The model they teach still holds; the names have moved on.
+:::
