@@ -95,6 +95,9 @@ describe('Radio', () => {
     // See https://github.com/testing-library/react-testing-library/issues/275
     await userEvent.click(one)
     expect(one).not.toBeChecked()
+    // disabled must stay on the input, not leak onto the wrapper span
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(one.parentElement).not.toHaveAttribute('disabled')
   })
   it('Gets disabled styling when disabled is inherited from a fieldset', () => {
     render(

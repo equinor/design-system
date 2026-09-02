@@ -78,9 +78,7 @@ const Svg = styled.svg.attrs(({ height, width, fill }) => ({
   pointer-events: none;
 `
 
-type StyledInputWrapperProps = { disabled: boolean }
-
-const InputWrapper = styled.span<StyledInputWrapperProps>`
+const InputWrapper = styled.span`
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
@@ -102,11 +100,11 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
     }
     &:hover {
       &::before {
-        background-color: ${({ disabled }) =>
-          disabled ? 'transparent' : tokens.states.hover.background};
+        background-color: ${tokens.states.hover.background};
       }
     }
-    /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    /* Covers both the disabled prop and disabling inherited from an
+       ancestor, e.g. fieldset[disabled] */
     &:hover:has(input:disabled)::before {
       background-color: transparent;
     }
@@ -132,7 +130,6 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     const iconSize = 24
 
     const inputWrapperProps = {
-      disabled,
       style,
       className,
     }

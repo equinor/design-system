@@ -61,13 +61,12 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
     display: inline;
   }
 `
-type StyledRadioProps = { $disabled: boolean }
-
-const StyledLabel = styled.label<StyledRadioProps>`
+const StyledLabel = styled.label`
   display: inline-flex;
   align-items: center;
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  cursor: pointer;
+  /* Covers both the disabled prop and disabling inherited from an
+     ancestor, e.g. fieldset[disabled] */
   &:has(input:disabled) {
     cursor: not-allowed;
   }
@@ -99,16 +98,15 @@ const LabelText = styled.span`
   ${typographyTemplate(tokens.typography)}
 `
 
-type StyledInputWrapperProps = { disabled: boolean }
-
-const InputWrapper = styled.span<StyledInputWrapperProps>`
+const InputWrapper = styled.span`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
   isolation: isolate;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  cursor: pointer;
+  /* Covers both the disabled prop and disabling inherited from an
+     ancestor, e.g. fieldset[disabled] */
   &:has(input:disabled) {
     cursor: not-allowed;
   }
@@ -128,11 +126,11 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
     }
     &:hover {
       &::before {
-        background-color: ${({ disabled }) =>
-          disabled ? 'transparent' : tokens.states.hover.background};
+        background-color: ${tokens.states.hover.background};
       }
     }
-    /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    /* Covers both the disabled prop and disabling inherited from an
+       ancestor, e.g. fieldset[disabled] */
     &:hover:has(input:disabled)::before {
       background-color: transparent;
     }
@@ -170,8 +168,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel $disabled={disabled} className={className} style={style}>
-          <InputWrapper disabled={disabled}>
+        <StyledLabel className={className} style={style}>
+          <InputWrapper>
             <Input
               {...rest}
               ref={ref}
@@ -183,7 +181,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
           <LabelText>{label}</LabelText>
         </StyledLabel>
       ) : (
-        <InputWrapper disabled={disabled} className={className} style={style}>
+        <InputWrapper className={className} style={style}>
           <Input {...rest} ref={ref} disabled={disabled} $iconSize={iconSize} />
           {renderSVG}
         </InputWrapper>

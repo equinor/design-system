@@ -5,15 +5,12 @@ import { checkbox as tokens } from './Checkbox.tokens'
 import { typographyTemplate } from '@equinor/eds-utils'
 import { CheckboxInput } from './Input'
 
-type StyledLabelProps = {
-  $disabled: boolean
-}
-
-const StyledLabel = styled.label<StyledLabelProps>`
+const StyledLabel = styled.label`
   display: inline-flex;
   align-items: center;
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  cursor: pointer;
+  /* Covers both the disabled prop and disabling inherited from an
+     ancestor, e.g. fieldset[disabled] */
   &:has(input:disabled) {
     cursor: not-allowed;
   }
@@ -41,7 +38,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     ref,
   ) {
     return label ? (
-      <StyledLabel $disabled={disabled} className={className} style={style}>
+      <StyledLabel className={className} style={style}>
         <CheckboxInput
           {...rest}
           disabled={disabled}

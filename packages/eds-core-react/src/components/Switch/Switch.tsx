@@ -6,11 +6,12 @@ import { comfortable as tokens } from './Switch.tokens'
 import { typographyTemplate, useToken } from '@equinor/eds-utils'
 import { useEds } from '../EdsProvider'
 
-type StyledProps = { $isDisabled: boolean; $size: 'default' | 'small' }
+type StyledProps = { $size: 'default' | 'small' }
 
 const StyledLabel = styled.label<StyledProps>`
-  cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
-  /* :has() catches disabling inherited from an ancestor, e.g. fieldset[disabled] */
+  cursor: pointer;
+  /* Covers both the disabled prop and disabling inherited from an
+     ancestor, e.g. fieldset[disabled] */
   &:has(input:disabled) {
     cursor: not-allowed;
   }
@@ -50,12 +51,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel
-          $size={size}
-          $isDisabled={disabled}
-          className={className}
-          style={style}
-        >
+        <StyledLabel $size={size} className={className} style={style}>
           {size === 'small' ? (
             <SwitchSmall disabled={disabled} {...rest} ref={ref} />
           ) : (
