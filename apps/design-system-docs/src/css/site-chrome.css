@@ -66,6 +66,7 @@ nav.menu li a {
 }
 
 .theme-doc-sidebar-container {
+  cursor: default !important;
   background-color: var(--ifm-background-surface-color);
 }
 
@@ -96,6 +97,8 @@ nav.menu li a {
 
 /* Expand sidebar button */
 .theme-doc-sidebar-container div[aria-label='Expand sidebar'] {
+  cursor: pointer;
+
   top: unset;
   bottom: 0;
 
