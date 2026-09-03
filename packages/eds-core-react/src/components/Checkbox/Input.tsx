@@ -110,6 +110,33 @@ const InputWrapper = styled.span`
     }
   }
 `
+const iconSize = 24
+
+const indeterminateSvg = (
+  <Svg
+    width={iconSize}
+    height={iconSize}
+    viewBox={`0 0 ${iconSize} ${iconSize}`}
+    fill={tokens.background}
+    aria-hidden
+  >
+    <StyledPath $icon={checkbox_indeterminate} name="indeterminate" />
+  </Svg>
+)
+
+const checkboxSvg = (
+  <Svg
+    width={iconSize}
+    height={iconSize}
+    viewBox={`0 0 ${iconSize} ${iconSize}`}
+    fill={tokens.background}
+    aria-hidden
+  >
+    <StyledPath $icon={checkbox} name="checked" />
+    <StyledPath $icon={checkbox_outline} name="not-checked" />
+  </Svg>
+)
+
 export type InputProps = {
   /** If true, the checkbox will be disabled */
   disabled?: boolean
@@ -127,13 +154,6 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
     const { density } = useEds()
     const token = useToken({ density }, tokens)
 
-    const iconSize = 24
-
-    const inputWrapperProps = {
-      style,
-      className,
-    }
-
     const inputProps = {
       ref,
       disabled,
@@ -143,30 +163,9 @@ export const CheckboxInput = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <ThemeProvider theme={token}>
-        <InputWrapper {...inputWrapperProps}>
+        <InputWrapper style={style} className={className}>
           <Input $iconSize={iconSize} {...inputProps} />
-          {indeterminate ? (
-            <Svg
-              width={iconSize}
-              height={iconSize}
-              viewBox={`0 0 ${iconSize} ${iconSize}`}
-              fill={tokens.background}
-              aria-hidden
-            >
-              <StyledPath $icon={checkbox_indeterminate} name="indeterminate" />
-            </Svg>
-          ) : (
-            <Svg
-              width={iconSize}
-              height={iconSize}
-              viewBox={`0 0 ${iconSize} ${iconSize}`}
-              fill={tokens.background}
-              aria-hidden
-            >
-              <StyledPath $icon={checkbox} name="checked" />
-              <StyledPath $icon={checkbox_outline} name="not-checked" />
-            </Svg>
-          )}
+          {indeterminate ? indeterminateSvg : checkboxSvg}
         </InputWrapper>
       </ThemeProvider>
     )

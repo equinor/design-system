@@ -49,6 +49,9 @@ const Track = styled.span(
     height: ${track.height};
     border-radius: 10px;
     border: none;
+    /* Despite its name, track.states.disabled.background is the resting
+       (off) track colour — the actual disabled state is handled by the
+       :disabled rule on Input */
     background-color: ${track.states.disabled.background};
     position: absolute;
     left: 50%;
