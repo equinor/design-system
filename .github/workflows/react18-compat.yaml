@@ -7,6 +7,8 @@ on:
       - main
     paths:
       - 'packages/**'
+      # Mobile is excluded from everything this job runs - skip mobile-only PRs.
+      - '!packages/eds-mobile-components/**'
 
 env:
   NODE_VERSION: '24.16.0'
