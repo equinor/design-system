@@ -59,6 +59,8 @@
     --_border: var(
       --eds-border-interactive-neutral-emphasis-default
     );
+    --_border-hover: var(--eds-border-interactive-neutral-emphasis-hover);
+    --_border-pressed: var(--eds-border-interactive-neutral-emphasis-pressed);
 
     cursor: pointer;
     user-select: none;
@@ -79,9 +81,12 @@
     line-height: var(--_label-line-height);
     color: var(--_text);
 
-    /* Only the fill changes between states — text/icon are static per tone,
-     * and outline is the focus ring, which must appear instantly. */
-    transition: background-color 150ms ease-in-out;
+    /* Fill and (on outlined) the box-shadow border change between states —
+     * text/icon are static per tone, and outline is the focus ring, which
+     * must appear instantly. */
+    transition:
+      background-color 150ms ease-in-out,
+      box-shadow 150ms ease-in-out;
 
     /* ===== TONES ===== */
     /* NOTE: the variant blocks further down override --_text / --_icon at the
@@ -106,6 +111,8 @@
       --_border: var(
         --eds-border-interactive-accent-emphasis-default
       );
+      --_border-hover: var(--eds-border-interactive-accent-emphasis-hover);
+      --_border-pressed: var(--eds-border-interactive-accent-emphasis-pressed);
     }
 
     &[data-color-appearance='success'] {
@@ -128,6 +135,10 @@
       --_border: var(
         --eds-border-interactive-success-emphasis-default
       );
+      --_border-hover: var(--eds-border-interactive-success-emphasis-hover);
+      --_border-pressed: var(
+        --eds-border-interactive-success-emphasis-pressed
+      );
     }
 
     &[data-color-appearance='info'] {
@@ -146,6 +157,8 @@
       --_border: var(
         --eds-border-interactive-info-emphasis-default
       );
+      --_border-hover: var(--eds-border-interactive-info-emphasis-hover);
+      --_border-pressed: var(--eds-border-interactive-info-emphasis-pressed);
     }
 
     &[data-color-appearance='warning'] {
@@ -168,6 +181,10 @@
       --_border: var(
         --eds-border-interactive-warning-emphasis-default
       );
+      --_border-hover: var(--eds-border-interactive-warning-emphasis-hover);
+      --_border-pressed: var(
+        --eds-border-interactive-warning-emphasis-pressed
+      );
     }
 
     &[data-color-appearance='danger'] {
@@ -188,6 +205,8 @@
       --_border: var(
         --eds-border-interactive-danger-emphasis-default
       );
+      --_border-hover: var(--eds-border-interactive-danger-emphasis-hover);
+      --_border-pressed: var(--eds-border-interactive-danger-emphasis-pressed);
     }
 
     /* ===== DEFAULT VARIANT (solid muted fill) ===== */
@@ -215,11 +234,17 @@
         var(--_border);
     }
 
+    /* The border follows the state ladder (9 → 10 → 11), per the Figma
+     * design and the ADR-0016 rule that states move along the scale. */
     &[data-variant='outlined']:hover {
+      --_border: var(--_border-hover);
+
       background-color: var(--_bg-muted-hover);
     }
 
     &[data-variant='outlined']:active {
+      --_border: var(--_border-pressed);
+
       background-color: var(--_bg-muted-pressed);
     }
 
