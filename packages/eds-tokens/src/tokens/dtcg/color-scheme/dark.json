@@ -3,6 +3,9 @@
     "1": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-1)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -12,6 +15,9 @@
     "10": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-10)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -21,6 +27,9 @@
     "11": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-11)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -30,6 +39,9 @@
     "12": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-12)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -39,6 +51,9 @@
     "13": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-13)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -48,6 +63,9 @@
     "14": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-14)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -57,6 +75,9 @@
     "15": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-15)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -66,6 +87,9 @@
     "2": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-2)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -75,6 +99,9 @@
     "3": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-3)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -84,6 +111,9 @@
     "4": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-4)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -93,6 +123,9 @@
     "5": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-5)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -102,6 +135,9 @@
     "6": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-6)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -111,6 +147,9 @@
     "7": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-7)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -120,6 +159,9 @@
     "8": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-8)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -129,6 +171,9 @@
     "9": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-accent-9)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -136,64 +181,13 @@
       "$value": "{dark.moss-green.9}"
     }
   },
-  "bg-backdrop": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{dark.north-sea.7}"
-  },
-  "bg-disabled": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{neutral.3}"
-  },
-  "bg-floating": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{dark.north-sea.2}"
-  },
-  "bg-input": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{dark.north-sea.1}"
-  },
-  "border-disabled": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{neutral.7}"
-  },
-  "border-focus": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{dark.blue.7}"
-  },
   "danger": {
     "1": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-1)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -203,6 +197,9 @@
     "10": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-10)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -212,6 +209,9 @@
     "11": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-11)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -221,6 +221,9 @@
     "12": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-12)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -230,6 +233,9 @@
     "13": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-13)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -239,6 +245,9 @@
     "14": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-14)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -248,6 +257,9 @@
     "15": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-15)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -257,6 +269,9 @@
     "2": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-2)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -266,6 +281,9 @@
     "3": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-3)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -275,6 +293,9 @@
     "4": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-4)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -284,6 +305,9 @@
     "5": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-5)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -293,6 +317,9 @@
     "6": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-6)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -302,6 +329,9 @@
     "7": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-7)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -311,6 +341,9 @@
     "8": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-8)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -320,6 +353,9 @@
     "9": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-danger-9)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -333,6 +369,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-1-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -342,6 +381,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-1-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -351,6 +393,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-1-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -360,6 +405,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-1-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -369,6 +417,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-1-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -380,6 +431,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-10-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -389,6 +443,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-10-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -398,6 +455,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-10-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -407,6 +467,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-10-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -416,6 +479,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-10-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -427,6 +493,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-2-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -436,6 +505,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-2-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -445,6 +517,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-2-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -454,6 +529,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-2-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -463,6 +541,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-2-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -474,6 +555,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-3-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -483,6 +567,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-3-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -492,6 +579,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-3-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -501,6 +591,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-3-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -510,6 +603,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-3-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -521,6 +617,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-4-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -530,6 +629,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-4-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -539,6 +641,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-4-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -548,6 +653,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-4-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -557,6 +665,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-4-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -568,6 +679,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-5-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -577,6 +691,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-5-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -586,6 +703,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-5-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -595,6 +715,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-5-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -604,6 +727,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-5-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -615,6 +741,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-6-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -624,6 +753,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-6-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -633,6 +765,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-6-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -642,6 +777,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-6-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -651,6 +789,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-6-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -662,6 +803,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-7-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -671,6 +815,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-7-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -680,6 +827,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-7-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -689,6 +839,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-7-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -698,6 +851,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-7-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -709,6 +865,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-8-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -718,6 +877,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-8-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -727,6 +889,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-8-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -736,6 +901,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-8-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -745,6 +913,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-8-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -756,6 +927,9 @@
         "1": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-9-1)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -765,6 +939,9 @@
         "2": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-9-2)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -774,6 +951,9 @@
         "3": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-9-3)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -783,6 +963,9 @@
         "4": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-9-4)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -792,6 +975,9 @@
         "5": {
           "$extensions": {
             "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-dataviz-cat-9-5)"
+              },
               "hiddenFromPublishing": false
             }
           },
@@ -804,6 +990,9 @@
       "1": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-1)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -813,6 +1002,9 @@
       "2": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-2)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -822,6 +1014,9 @@
       "3": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-3)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -831,6 +1026,9 @@
       "4": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-4)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -840,6 +1038,9 @@
       "5": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-5)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -849,6 +1050,9 @@
       "6": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-6)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -858,6 +1062,9 @@
       "7": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-7)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -867,6 +1074,9 @@
       "8": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-8)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -876,6 +1086,9 @@
       "9": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-div-9)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -887,6 +1100,9 @@
       "1": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-1)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -896,6 +1112,9 @@
       "2": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-2)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -905,6 +1124,9 @@
       "3": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-3)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -914,6 +1136,9 @@
       "4": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-4)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -923,6 +1148,9 @@
       "5": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-5)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -932,6 +1160,9 @@
       "6": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-6)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -941,6 +1172,9 @@
       "7": {
         "$extensions": {
           "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-dataviz-seq-7)"
+            },
             "hiddenFromPublishing": false
           }
         },
@@ -949,10 +1183,41 @@
       }
     }
   },
+  "elevation": {
+    "ambient": {
+      "$description": "Ambient (diffuse) shadow colour for the light scheme. From Figma '🌗 Color scheme/elevation-ambient'.",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.12,
+        "colorSpace": "rgb",
+        "components": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "key": {
+      "$description": "Key (direct) shadow colour for the light scheme. From Figma '🌗 Color scheme/elevation-key'.",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.2,
+        "colorSpace": "rgb",
+        "components": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
   "info": {
     "1": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-1)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -962,6 +1227,9 @@
     "10": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-10)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -971,6 +1239,9 @@
     "11": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-11)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -980,6 +1251,9 @@
     "12": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-12)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -989,6 +1263,9 @@
     "13": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-13)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -998,6 +1275,9 @@
     "14": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-14)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1007,6 +1287,9 @@
     "15": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-15)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1016,6 +1299,9 @@
     "2": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-2)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1025,6 +1311,9 @@
     "3": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-3)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1034,6 +1323,9 @@
     "4": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-4)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1043,6 +1335,9 @@
     "5": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-5)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1052,6 +1347,9 @@
     "6": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-6)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1061,6 +1359,9 @@
     "7": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-7)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1070,6 +1371,9 @@
     "8": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-8)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1079,6 +1383,9 @@
     "9": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-info-9)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1090,6 +1397,9 @@
     "1": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-1)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1099,6 +1409,9 @@
     "10": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-10)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1108,6 +1421,9 @@
     "11": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-11)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1117,6 +1433,9 @@
     "12": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-12)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1126,6 +1445,9 @@
     "13": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-13)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1135,6 +1457,9 @@
     "14": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-14)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1144,6 +1469,9 @@
     "15": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-15)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1153,6 +1481,9 @@
     "2": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-2)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1162,6 +1493,9 @@
     "3": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-3)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1171,6 +1505,9 @@
     "4": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-4)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1180,6 +1517,9 @@
     "5": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-5)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1189,6 +1529,9 @@
     "6": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-6)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1198,6 +1541,9 @@
     "7": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-7)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1207,6 +1553,9 @@
     "8": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-8)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1216,6 +1565,9 @@
     "9": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-neutral-9)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1227,6 +1579,9 @@
     "1": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-1)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1236,6 +1591,9 @@
     "10": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-10)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1245,6 +1603,9 @@
     "11": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-11)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1254,6 +1615,9 @@
     "12": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-12)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1263,6 +1627,9 @@
     "13": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-13)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1272,6 +1639,9 @@
     "14": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-14)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1281,6 +1651,9 @@
     "15": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-15)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1290,6 +1663,9 @@
     "2": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-2)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1299,6 +1675,9 @@
     "3": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-3)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1308,6 +1687,9 @@
     "4": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-4)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1317,6 +1699,9 @@
     "5": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-5)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1326,6 +1711,9 @@
     "6": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-6)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1335,6 +1723,9 @@
     "7": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-7)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1344,6 +1735,9 @@
     "8": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-8)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1353,6 +1747,9 @@
     "9": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-success-9)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1360,28 +1757,13 @@
       "$value": "{dark.green.9}"
     }
   },
-  "text-disabled": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{neutral.7}"
-  },
-  "text-link": {
-    "$extensions": {
-      "com.figma": {
-        "hiddenFromPublishing": true
-      }
-    },
-    "$type": "color",
-    "$value": "{dark.blue.8}"
-  },
   "warning": {
     "1": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-1)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1391,6 +1773,9 @@
     "10": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-10)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1400,6 +1785,9 @@
     "11": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-11)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1409,6 +1797,9 @@
     "12": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-12)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1418,6 +1809,9 @@
     "13": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-13)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1427,6 +1821,9 @@
     "14": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-14)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1436,6 +1833,9 @@
     "15": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-15)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1445,6 +1845,9 @@
     "2": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-2)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1454,6 +1857,9 @@
     "3": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-3)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1463,6 +1869,9 @@
     "4": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-4)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1472,6 +1881,9 @@
     "5": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-5)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1481,6 +1893,9 @@
     "6": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-6)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1490,6 +1905,9 @@
     "7": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-7)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1499,6 +1917,9 @@
     "8": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-8)"
+          },
           "hiddenFromPublishing": true
         }
       },
@@ -1508,6 +1929,9 @@
     "9": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-warning-9)"
+          },
           "hiddenFromPublishing": true
         }
       },
