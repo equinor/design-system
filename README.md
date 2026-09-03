@@ -155,7 +155,7 @@ Before you begin, ensure you have the following installed:
 -->
 
 * **Node.js** — Version 24.16.0 or compatible
-* **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm@10.15.0`)
+* **pnpm** — Version 10.28.0 or higher (install globally with `npm install -g pnpm@10.28.0`)
 * **Git** — For version control
 
 
@@ -180,7 +180,7 @@ git clone git@github.com:your-github-username/design-system
 We use [pnpm][] as the package manager, because it's fast, space efficient, and has some very useful commands when working with a monorepo.
 
 ```bash
-npm install -g pnpm@10.15.0
+npm install -g pnpm@10.28.0
 ```
 
 Install dependencies and build all packages using our `init` script:
@@ -201,8 +201,11 @@ pnpm build
 # Run all tests
 pnpm test
 
-# Lint entire codebase
+# Lint entire codebase, except packages/eds-mobile-components and
+# apps/mobile-storybook (they ship their own eslint.config.js)
 pnpm lint:all
+pnpm --filter @equinor/eds-mobile-components run lint
+pnpm --filter @equinor/mobile-storybook run lint
 
 # Start Storybook for component development
 pnpm storybook

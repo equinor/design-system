@@ -2,6 +2,19 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "tag-separator": "@",
   "packages": {
+    "apps/mobile-storybook": {
+      "release-type": "expo",
+      "component": "mobile-storybook",
+      "exclude-paths": [
+        "apps/mobile-storybook/CLAUDE.md",
+        "apps/mobile-storybook/README.md",
+        "apps/mobile-storybook/.gitignore",
+        "apps/mobile-storybook/eslint.config.js",
+        "apps/mobile-storybook/tsconfig.json",
+        "apps/mobile-storybook/babel.config.js",
+        "apps/mobile-storybook/metro.config.js"
+      ]
+    },
     "packages/eds-core-react": {
       "release-type": "node",
       "package-name": "@equinor/eds-core-react",
@@ -80,6 +93,22 @@
         "packages/eds-lab-react/Dockerfile.storybook",
         "packages/eds-lab-react/nginx.conf",
         "packages/eds-lab-react/README.md"
+      ]
+    },
+    "packages/eds-mobile-components": {
+      "release-type": "node",
+      "package-name": "@equinor/eds-mobile-components",
+      "component": "eds-mobile-components",
+      "exclude-paths": [
+        "packages/eds-mobile-components/CLAUDE.md",
+        "packages/eds-mobile-components/README.md",
+        "packages/eds-mobile-components/tsconfig.json",
+        "packages/eds-mobile-components/tsconfig.eslint.json",
+        "packages/eds-mobile-components/eslint.config.js",
+        "packages/eds-mobile-components/jest.config.cjs",
+        "packages/eds-mobile-components/jest.setup.ts",
+        "packages/eds-mobile-components/test-utils.tsx",
+        "packages/eds-mobile-components/tsup.config.ts"
       ]
     },
     "packages/eds-tokens": {

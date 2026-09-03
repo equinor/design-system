@@ -1,0 +1,73 @@
+{
+    "name": "@equinor/eds-mobile-components",
+    "description": "A React Native component library implementing the Equinor Design System.",
+    "version": "0.3.1",
+    "author": {
+        "name": "Equinor Design System Mobile"
+    },
+    "bugs": {
+        "url": "https://github.com/equinor/design-system/issues"
+    },
+    "dependencies": {
+        "@equinor/eds-tokens": "2.3.0-beta.3",
+        "@floating-ui/react-native": "^0.10.7",
+        "react-error-boundary": "^6.0.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.32.0",
+        "@testing-library/react-native": "^13.3.3",
+        "@types/jest": "^29.5.14",
+        "@types/react": "~19.2.17",
+        "@types/react-test-renderer": "^19.1.0",
+        "@typescript-eslint/eslint-plugin": "^8.39.0",
+        "@typescript-eslint/parser": "^8.39.0",
+        "eslint": "^9.25.0",
+        "jest": "^29.7.0",
+        "jest-expo": "^55.0.19",
+        "react": "19.2.8",
+        "react-test-renderer": "19.2.8",
+        "tsup": "^8.5.0",
+        "typescript": "~5.9.3",
+        "typescript-eslint": "^8.39.0"
+    },
+    "files": [
+        "LICENSE",
+        "CHANGELOG.md",
+        "dist",
+        "docs"
+    ],
+    "homepage": "https://eds.equinor.com",
+    "keywords": [
+        "react native",
+        "typescript",
+        "ui"
+    ],
+    "license": "MIT",
+    "main": "./dist/index.js",
+    "peerDependencies": {
+        "@expo/vector-icons": "^15.1.1",
+        "expo-font": "^55.0.8",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "react-native": "^0.83.6",
+        "react-native-gesture-handler": "^2.30.0",
+        "react-native-reanimated": "^4.2.1",
+        "react-native-svg": "^15.15.3",
+        "react-native-worklets": "^0.7.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/equinor/design-system",
+        "directory": "packages/eds-mobile-components"
+    },
+    "scripts": {
+        "build": "tsup-node && echo '\n ⚙️ Generating typescript declarations..' && tsc --project tsconfig.json --emitDeclarationOnly --declaration",
+        "clean": "rm -rf node_modules dist .turbo",
+        "dev": "tsup-node --watch --clean=false",
+        "lint": "eslint .",
+        "test": "jest --passWithNoTests",
+        "types": "tsc --noEmit"
+    },
+    "type": "module",
+    "types": "./dist/index.d.ts"
+}
