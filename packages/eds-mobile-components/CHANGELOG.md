@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/equinor/design-system/compare/eds-mobile-components@v0.3.1...eds-mobile-components@v0.3.2) (2026-09-03)
+
+
+### 🐛 Fixed
+
+* close remaining findings from Claude review ([3f7ad9e](https://github.com/equinor/design-system/commit/3f7ad9ea27b136d6a0a7fb07afe07246ba55fc5a))
+
 ## [0.3.1](https://github.com/equinor/design-system-mobile/compare/eds-mobile-components-v0.3.0...eds-mobile-components-v0.3.1) (2026-07-09)
 
 
