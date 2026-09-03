@@ -29,9 +29,11 @@
     /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
      * selects the tone (Chip always sets it, default tone is neutral). Neutral
      * maps text to --eds-text-primary by design (#5283). Non-neutral tones use
-     * --eds-text-on-muted-{tone} for label text and --eds-icon-on-default-{tone}
-     * for icons — the shade difference (12 vs 10) is carried by the on-muted vs
-     * on-default surface, not by text vs icon. Surfaces use
+     * --eds-text-on-muted-{tone} (shade 12) for label text and
+     * --eds-icon-on-default-{tone} (shade 10) for icons. The steps follow the
+     * documented readability targets (#5330): text aims for APCA Lc 90 (first
+     * step that clears it is 12), icons aim for Lc 60 (step 10 clears it) —
+     * the split is target-driven, not surface-driven. Surfaces use
      * --eds-background-interactive-{tone}-*. */
     --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
     --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
@@ -54,7 +56,7 @@
      * not use them. */
     --_text-emphasis: var(--eds-text-on-emphasis-neutral);
     --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
-    --_border-interactive: var(
+    --_border: var(
       --eds-border-interactive-neutral-emphasis-default
     );
 
@@ -77,12 +79,14 @@
     line-height: var(--_label-line-height);
     color: var(--_text);
 
-    transition:
-      background-color 150ms ease-in-out,
-      outline-color 150ms ease-in-out,
-      color 150ms ease-in-out;
+    /* Only the fill changes between states — text/icon are static per tone,
+     * and outline is the focus ring, which must appear instantly. */
+    transition: background-color 150ms ease-in-out;
 
     /* ===== TONES ===== */
+    /* NOTE: the variant blocks further down override --_text / --_icon at the
+     * same specificity (0,2,0) — they win by source order alone. Keep the
+     * tone blocks BEFORE the variant blocks. */
 
     &[data-color-appearance='accent'] {
       --_bg-muted: var(--eds-background-interactive-accent-muted-default);
@@ -99,7 +103,7 @@
       );
       --_text: var(--eds-text-on-muted-accent);
       --_icon: var(--eds-icon-on-default-accent);
-      --_border-interactive: var(
+      --_border: var(
         --eds-border-interactive-accent-emphasis-default
       );
     }
@@ -121,7 +125,7 @@
       );
       --_text: var(--eds-text-on-muted-success);
       --_icon: var(--eds-icon-on-default-success);
-      --_border-interactive: var(
+      --_border: var(
         --eds-border-interactive-success-emphasis-default
       );
     }
@@ -139,7 +143,7 @@
       );
       --_text: var(--eds-text-on-muted-info);
       --_icon: var(--eds-icon-on-default-info);
-      --_border-interactive: var(
+      --_border: var(
         --eds-border-interactive-info-emphasis-default
       );
     }
@@ -161,7 +165,7 @@
       );
       --_text: var(--eds-text-on-muted-warning);
       --_icon: var(--eds-icon-on-default-warning);
-      --_border-interactive: var(
+      --_border: var(
         --eds-border-interactive-warning-emphasis-default
       );
     }
@@ -181,7 +185,7 @@
       );
       --_text: var(--eds-text-on-muted-danger);
       --_icon: var(--eds-icon-on-default-danger);
-      --_border-interactive: var(
+      --_border: var(
         --eds-border-interactive-danger-emphasis-default
       );
     }
@@ -208,7 +212,7 @@
       /* Inset box-shadow rather than outline, so outline stays free for the
        * focus ring (with a truly transparent offset gap, like Button). */
       box-shadow: inset 0 0 0 var(--eds-border-width-default, 1px)
-        var(--_border-interactive);
+        var(--_border);
     }
 
     &[data-variant='outlined']:hover {
@@ -220,6 +224,8 @@
     }
 
     /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
+    /* Must stay AFTER the tone blocks: the --_text / --_icon overrides here
+     * have the same specificity and win by source order only. */
 
     &[data-variant='high-contrast'] {
       --_text: var(--_text-emphasis);
