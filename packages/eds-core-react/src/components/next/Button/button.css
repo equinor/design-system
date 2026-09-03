@@ -22,7 +22,10 @@
     --_bg-muted-pressed: var(--eds-background-interactive-accent-muted-pressed);
     --_text-interactive: var(--eds-text-interactive-accent-default);
     --_border-interactive: var(--eds-border-interactive-accent-emphasis-default);
-    --_color: var(--eds-text-on-emphasis);
+
+    /* Flat white across tones per the Figma design (Button [EDS] primary),
+     * same as Chip — the per-tone on-emphasis tokens are not used. */
+    --_color: var(--eds-text-on-emphasis-neutral);
     --_bg-color: var(--_bg-emphasis);
     --_padding-block: var(--eds-selectable-space-vertical);
 
@@ -165,7 +168,7 @@
   /* ===== PRIMARY VARIANT ===== */
 
   .eds-button[data-variant='primary'] {
-    --_color: var(--eds-text-on-emphasis);
+    --_color: var(--eds-text-on-emphasis-neutral);
     --_bg-color: var(--_bg-emphasis);
   }
 
