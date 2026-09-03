@@ -96,6 +96,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # apps/mobile-storybook resolves @equinor/eds-mobile-components through
+      # its `main` (dist/index.js), which Metro needs at archive time - same
+      # reason dev:mobile/start:mobile build it first (package.json).
+      - name: Build mobile components
+        run: pnpm run build:mobile
+
       - name: Patch app.json
         run: |
           jq --arg buildNumber "${{ env.BUILD_NUMBER }}" \
@@ -135,11 +141,20 @@ jobs:
       # in one step and globbing *.ipa in the other - if the exported
       # product name ever changes, this step fails with a clear "no IPA
       # found" instead of the artifact upload silently passing and only
-      # the TestFlight step failing later.
+      # the TestFlight step failing later. `ls build/*.ipa` inside a command
+      # substitution wouldn't actually fail the step on no match (echo still
+      # exits 0), so count matches explicitly instead.
       - name: Locate IPA
         id: ipa
         working-directory: apps/mobile-storybook
-        run: echo "path=$(ls build/*.ipa)" >> "$GITHUB_OUTPUT"
+        run: |
+          shopt -s nullglob
+          ipas=(build/*.ipa)
+          if [ ${#ipas[@]} -ne 1 ]; then
+            echo "::error title=IPA not found::Expected exactly 1 IPA in build/, found ${#ipas[@]}"
+            exit 1
+          fi
+          echo "path=${ipas[0]}" >> "$GITHUB_OUTPUT"
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v7
