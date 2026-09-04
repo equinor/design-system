@@ -1,7 +1,7 @@
 # Mirror the 2.x CSS export surface in eds-tokens 3.0.0: one bundled `./css/variables` entry
 
-- **Status:** Proposed (accept after the bundle has been exercised on the
-  beta line — see validation plan below)
+- **Status:** Accepted (2026-09-04; proposed 2026-07-20 — the bundle has
+  shipped and been exercised on the beta line, see validation below)
 - **Date:** 2026-07-20
 - **Decision makers:** Frida Erdal, EDS Core Team
 
@@ -145,21 +145,38 @@ follow the OS make that choice themselves by setting the attribute (e.g.
 from a `matchMedia` listener); the design system provides the switch, the
 app decides the policy.
 
-### Open question (must be settled before Accepted)
+### Open question — resolved by the implementation
 
 - **Whether anything beyond colour needs mode files bundled** as the
   token architecture rework lands (density set may change shape).
+  Resolved: the bundle step globs `src/tokens/css/` instead of
+  hard-coding file names, so shape changes are absorbed automatically —
+  demonstrated when the `elevation` mode set was added after the step
+  landed and flowed into the bundle without touching it. Which mode
+  files exist is a pipeline detail this ADR does not need to gate on.
 
-### Validation plan
+### Validation
 
-1. Add the concat step; the bundle ships in the next beta as
-   `next/css/variables.css`
-2. Use it in the `/next` component migration and let beta testers exercise
-   it
-3. Settle the open questions; at the flip, map `./css/variables` to the
-   bundle per ADR-0009's exit plan
-4. Mark this ADR Accepted when at least one beta has exposed the exact
-   3.0.0 surface
+The plan was to ship the bundle on the beta line and exercise it before
+the flip. That has happened:
+
+1. The concat step (`scripts/generate-css-bundle.mjs`) is live; the
+   bundle has shipped as `next/css/variables.css` in every beta since
+   `3.0.0-beta.2`
+2. The `/next` Button and Chip token migrations
+   ([#5222](https://github.com/equinor/design-system/pull/5222),
+   [#5225](https://github.com/equinor/design-system/pull/5225)) import
+   the bundle
+3. At the flip, `./css/variables` is mapped to the bundle per ADR-0009's
+   exit plan — a mechanical export-map change owned by that ADR, not a
+   gate on this one
+
+The original acceptance criterion ("at least one beta has exposed the
+exact 3.0.0 surface") tied this ADR's status to ADR-0009's flip. The
+decision made *here* — one bundled entry, granular files internal — is
+validated by the shipped, consumed bundle; the specifier mapping at the
+flip adds no information about it. The criterion was therefore dropped
+when the ADR was marked Accepted.
 
 ### Consequences
 
