@@ -54,7 +54,7 @@
     "react"
   ],
   "devDependencies": {
-    "@equinor/eds-mobile-components": "^0.3.0",
+    "@equinor/eds-mobile-components": "workspace:^",
     "@figma/code-connect": "^1.4.9",
     "@playwright/test": "^1.62.1",
     "@rollup/plugin-babel": "^7.1.0",
