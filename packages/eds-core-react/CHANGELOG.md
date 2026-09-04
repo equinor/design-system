@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.3](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.2...eds-core-react@v2.6.3) (2026-09-04)
+
+
+### 🐛 Fixed
+
+* reflect inherited disabled state in Checkbox, Radio and Switch ([#5392](https://github.com/equinor/design-system/issues/5392)) ([cfa17df](https://github.com/equinor/design-system/commit/cfa17df1f03f45dcced33ef32c69932cc37b984e))
+
 ## [2.6.2](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.1...eds-core-react@v2.6.2) (2026-09-01)
 
 
