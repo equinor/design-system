@@ -1,0 +1,157 @@
+import React, { FC } from "react";
+import { Pressable, View } from "react-native";
+import { useStyles } from "../../hooks/useStyles";
+import { EDSStyleSheet } from "../../styling";
+import { IconName } from "../Icon";
+import { Typography } from "../Typography";
+import { ButtonBackground } from "./ButtonBackground";
+import { ButtonIcon } from "./ButtonIcon";
+import {
+    BaseButtonProps,
+    ButtonSize,
+    ButtonTone,
+    ButtonVariant,
+} from "./types";
+import {
+    BUTTON_TEXT_NEGATIVE_MARGIN,
+    BUTTON_TEXT_PADDING,
+    ICON_NEGATIVE_MARGIN,
+    SIZE_MAP,
+    TEXT_VARIANT_MAP,
+} from "./utility";
+
+export type ButtonProps = BaseButtonProps & {
+    /**
+     * Label text of the button.
+     */
+    label: string;
+    /**
+     * Name of the leading icon to display alongside the button label.
+     */
+    leadingIcon?: IconName;
+    /**
+     * Name of the trailing icon to display alongside the button label.
+     */
+    trailingIcon?: IconName;
+};
+
+export const Button: FC<ButtonProps> = ({
+    label,
+    tone = "accent",
+    size = "default",
+    variant = "primary",
+    leadingIcon,
+    trailingIcon,
+    ref,
+    disabled = false,
+    ...pressableProps
+}) => {
+    const styles = useStyles(tokenStyles, {
+        variant,
+        tone,
+        size,
+        disabled: disabled ?? false,
+    });
+
+    return (
+        <Pressable
+            ref={ref}
+            style={styles.container}
+            accessibilityRole={"button"}
+            disabled={disabled}
+            {...pressableProps}
+            accessibilityState={{
+                ...pressableProps.accessibilityState,
+                disabled: disabled ?? false,
+            }}
+        >
+            {(pressedEvent) => (
+                <ButtonBackground
+                    isPressed={pressedEvent.pressed}
+                    tone={tone}
+                    variant={variant}
+                    disabled={disabled ?? false}
+                >
+                    <View style={styles.squareButtonContainer}>
+                        {leadingIcon && (
+                            <ButtonIcon
+                                name={leadingIcon}
+                                tone={tone}
+                                variant={variant}
+                                size={size}
+                                disabled={disabled ?? false}
+                            />
+                        )}
+                        <Typography
+                            weight="bolder"
+                            size="md"
+                            style={styles.text}
+                        >
+                            {label}
+                        </Typography>
+                        {trailingIcon && (
+                            <ButtonIcon
+                                name={trailingIcon}
+                                tone={tone}
+                                variant={variant}
+                                size={size}
+                                disabled={disabled ?? false}
+                            />
+                        )}
+                    </View>
+                </ButtonBackground>
+            )}
+        </Pressable>
+    );
+};
+
+type ButtonStylesProps = {
+    tone: ButtonTone;
+    variant: ButtonVariant;
+    size: ButtonSize;
+    disabled: boolean;
+};
+
+const tokenStyles = EDSStyleSheet.create(
+    (token, { variant, tone, size, disabled }: ButtonStylesProps) => {
+        const borderColor = token.colors.border[tone].strong;
+        const sizeKey = SIZE_MAP[size];
+
+        const textColor = disabled
+            ? token.colors.text.disabled
+            : token.colors.text[tone][TEXT_VARIANT_MAP[variant]];
+
+        const borderThickness = token.spacing.sizing.stroke.thin;
+
+        const hasBorder = variant === "secondary";
+        const verticalPaddingBorderOffset = hasBorder ? borderThickness : 0;
+
+        return {
+            container: {
+                borderRadius: token.spacing.spacing.borderRadius.rounded,
+                overflow: "hidden",
+                borderColor,
+                borderWidth: hasBorder ? borderThickness : 0,
+            },
+            squareButtonContainer: {
+                borderRadius: token.spacing.spacing.borderRadius.rounded,
+                paddingVertical:
+                    token.spacing.spacing.inset[sizeKey].verticalSquished -
+                    verticalPaddingBorderOffset,
+                paddingHorizontal:
+                    token.spacing.spacing.inset[sizeKey].horizontal,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                gap:
+                    token.spacing.spacing.icon[sizeKey].gapHorizontal -
+                    ICON_NEGATIVE_MARGIN,
+            },
+            text: {
+                color: textColor,
+                marginVertical: BUTTON_TEXT_NEGATIVE_MARGIN,
+                paddingVertical: BUTTON_TEXT_PADDING,
+            },
+        };
+    }
+);

@@ -90,7 +90,9 @@ beforeAll(() => {
     },
   })
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   rafOrig = window.requestAnimationFrame
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   cafOrig = window.cancelAnimationFrame
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = (cb: FrameRequestCallback) =>

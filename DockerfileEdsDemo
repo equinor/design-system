@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
 WORKDIR /app
 
 # Install pnpm globally
-RUN npm install -g pnpm@10.15.0
+RUN npm install -g pnpm@10.28.0
 
 # Copy everything
 COPY . ./
@@ -35,7 +35,7 @@ ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1
 
 # Install pnpm and create non-root user
-RUN npm install -g pnpm@10.15.0 && \
+RUN npm install -g pnpm@10.28.0 && \
     addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
     apk add --no-cache tini

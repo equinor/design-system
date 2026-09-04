@@ -47,13 +47,17 @@ const preview = {
         return () => document.body.classList.remove('eds-debug-grid')
       }, [debugGrid])
 
-      if (!isNext) return createElement(Story)
-
       const colorScheme = context.globals.colorScheme || 'light'
+
+      if (!isNext) return createElement(Story)
 
       return createElement(
         'div',
         {
+          // The wrapper attribute is all subtree colour-scheme switching
+          // needs: the beta bundle re-declares its semantic layer under
+          // [data-color-scheme] (#5226), and the legacy bundle scopes its
+          // scheme-dependent tokens the same way (nearest ancestor wins).
           'data-color-scheme': colorScheme,
           className: 'eds-storybook-wrapper',
         },

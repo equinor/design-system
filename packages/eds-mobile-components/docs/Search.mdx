@@ -1,0 +1,135 @@
+Search lets users filter or find content. It combines a label, a magnify icon, an inline clear button, and an optional animated Cancel button into a single field. For a general-purpose text input, use [`TextField`](/components/textfield) instead.
+
+## Features
+
+- Built-in magnify icon and a clear button that appears when text is present.
+- Optional Cancel button slides in from the right on focus and dismisses the keyboard on press.
+- Invalid state adds an alert icon alongside the magnify icon and applies error border styling.
+- Read-only: value is visible and can be selected and copied, but cannot be edited.
+
+## Usage
+
+```tsx
+import { Search } from '@equinor/eds-mobile-components'
+
+const [query, setQuery] = useState('')
+
+<Search
+  label="Title"
+  placeholder="Placeholder"
+  value={query}
+  onChange={setQuery}
+/>
+```
+
+## Examples
+
+### With description
+
+Use `description` to clarify the scope of the search before the user starts typing.
+
+```tsx
+<Search
+  label="Projects"
+  description="Filter by project name or tag."
+  placeholder="Placeholder"
+  value={query}
+  onChange={setQuery}
+/>
+```
+
+### With helper message
+
+Use `helperMessage` to surface feedback below the field, such as result counts or validation errors.
+
+```tsx
+<Search
+  label="Title"
+  helperMessage="No results found."
+  value={query}
+  onChange={setQuery}
+  invalid
+/>
+```
+
+### With indicator
+
+Use `indicator` to show a short inline cue after the label, such as `"(Required)"` or `"(Optional)"`.
+
+```tsx
+<Search label="Title" indicator="(Optional)" value={query} onChange={setQuery} />
+```
+
+### With Cancel button
+
+When `cancellable` is true, a Cancel button slides in from the right when the field is focused. Pressing it clears the text and dismisses the keyboard automatically — you don't need to reset the value yourself. Use `onCancelPress` for an additional side effect, such as closing a search panel or navigating back.
+
+```tsx
+<Search
+  label="Title"
+  placeholder="Placeholder"
+  value={query}
+  onChange={setQuery}
+  cancellable
+  onCancelPress={() => setSearchOpen(false)}
+/>
+```
+
+### Invalid
+
+```tsx
+<Search
+  label="Title"
+  helperMessage="No results found."
+  value={query}
+  onChange={setQuery}
+  invalid
+/>
+```
+
+### Read-only
+
+The value can be selected and copied but not edited. Long-press to select text.
+
+> **iOS note:** read-only mode switches to a multiline text view internally to enable text selection. Long values will wrap rather than truncate — this is an iOS platform constraint.
+
+```tsx
+<Search label="Title" value="Saved query" readOnly />
+```
+
+### Disabled
+
+```tsx
+<Search label="Title" placeholder="Placeholder" disabled />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Label displayed above the search input |
+| `indicator` | `string` | — | Short cue shown inline after the label, e.g. `"(Required)"` or `"(Optional)"` |
+| `description` | `string` | — | Secondary text below the label, above the search input |
+| `helperMessage` | `string` | — | Text below the search input |
+| `value` | `string` | — | Controlled value |
+| `defaultValue` | `string` | — | Initial value for uncontrolled usage |
+| `onChange` | `(text: string) => void` | — | Called when the text changes |
+| `placeholder` | `string` | — | Placeholder text |
+| `cancellable` | `boolean` | `false` | Shows a Cancel button that slides in on focus |
+| `onCancelPress` | `() => void` | — | Called when the Cancel button is pressed |
+| `invalid` | `boolean` | `false` | Error state; adds an alert icon alongside the magnify icon |
+| `readOnly` | `boolean` | `false` | Value is visible and copyable but not editable |
+| `disabled` | `boolean` | `false` | Fully non-interactive — no editing, selection, or focus |
+
+Also accepts all [`Input` props](/components/input#props), excluding `multiline`, `startAdornment`, `endAdornment`, and `hideErrorIcon` which are managed internally.
+
+## Accessibility
+
+- `Search` defaults `accessibilityLabel` to the `label` value and `accessibilityHint` to a joined `description` + `helperMessage`. Pass these props explicitly to override.
+- The clear button reports `accessibilityRole="button"` and `accessibilityLabel="Clear search"` automatically.
+- `disabled` state is reported via `accessibilityState`.
+
+## Related components
+
+- [`TextField`](/components/textfield) — labeled input for general-purpose text entry.
+- [`Input`](/components/input) — the underlying input primitive.

@@ -5,6 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.6...eds-tokens@v3.0.0-beta.7) (2026-09-01)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5362](https://github.com/equinor/design-system/issues/5362)) ([916f867](https://github.com/equinor/design-system/commit/916f867e96977c4a15bf6c46ec1f98e54da0b6ee))
+
+## [3.0.0-beta.6](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.5...eds-tokens@v3.0.0-beta.6) (2026-08-13)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5331](https://github.com/equinor/design-system/issues/5331)) ([9120256](https://github.com/equinor/design-system/commit/91202564625a776bbe3a10e7b1374b575c740b84))
+
+## [3.0.0-beta.5](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.4...eds-tokens@v3.0.0-beta.5) (2026-08-11)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5284](https://github.com/equinor/design-system/issues/5284)) ([4be182a](https://github.com/equinor/design-system/commit/4be182af039471e9b06001b8a8537c6aa95ae35d))
+
+## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.3...eds-tokens@v3.0.0-beta.4) (2026-08-05)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5275](https://github.com/equinor/design-system/issues/5275)) ([7bff44b](https://github.com/equinor/design-system/commit/7bff44b292a215a74d467ee2c303e7bbc0802e0c))
+* update tokens from Tokens Studio release ([#5280](https://github.com/equinor/design-system/issues/5280)) ([6ebf5b6](https://github.com/equinor/design-system/commit/6ebf5b65f9b97cd404e7447b2d36c8c92677ea1e))
+
+## [3.0.0-beta.3](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.2...eds-tokens@v3.0.0-beta.3) (2026-07-30)
+
+
+### 🐛 Fixed
+
+* emit the beta semantic token layer under the color-scheme scopes ([#5239](https://github.com/equinor/design-system/issues/5239)) ([470a35e](https://github.com/equinor/design-system/commit/470a35e8c97dc3b6dee6235b4d809cf9fe5d894e))
+
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.1...eds-tokens@v3.0.0-beta.2) (2026-07-22)
+
+
+### ✨ Added
+
+* add bundled variables.css to the Tokens Studio release pipeline ([#5209](https://github.com/equinor/design-system/issues/5209)) ([1243030](https://github.com/equinor/design-system/commit/1243030ac8175465241c4e9ea288393f00693010))
+
 ## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.0...eds-tokens@v3.0.0-beta.1) (2026-07-20)
 
 

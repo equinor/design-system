@@ -8,7 +8,7 @@ export const density = {
     none: 0,
     pill: 9999,
     rounded: 2,
-    roundedOuter: 4,
+    roundedOuter: 3,
   },
   spacing: {
     twoXl: 24,
@@ -85,7 +85,7 @@ export const density = {
       },
       sm: {
         fontSize: 10,
-        lineHeight: 16,
+        lineHeight: 12,
       },
       xl: {
         fontSize: 16,
