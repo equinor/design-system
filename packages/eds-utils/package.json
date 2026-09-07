@@ -59,7 +59,7 @@
     "@types/ramda": "^0.32.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
-    "babel-jest": "^30.4.1",
+    "babel-jest": "^30.5.1",
     "babel-plugin-styled-components": "^2.3.0",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
@@ -71,11 +71,11 @@
     "react-is": "^19.2.8",
     "rollup": "^4.63.0",
     "rollup-plugin-delete": "^3.0.2",
-    "styled-components": "6.4.4",
+    "styled-components": "6.5.3",
     "typescript": "^5.9.3",
-    "vite": "^8.1.5",
-    "vitest": "^4.1.10",
-    "@vitejs/plugin-react": "^6.0.4"
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11",
+    "@vitejs/plugin-react": "^6.1.1"
   },
   "peerDependencies": {
     "react": "^18 || ^19",
