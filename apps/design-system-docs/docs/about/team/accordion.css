@@ -1,0 +1,94 @@
+/* ======================================
+ * ACCORDION (details/summary styled as EDS Accordion)
+ * ====================================== */
+
+.about-accordion {
+  max-width: var(--ifm-container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Reset Docusaurus details component styles */
+.about-accordion details,
+.about-accordion details[class] {
+  --docusaurus-details-decoration-color: transparent;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0;
+  background: none;
+  border-top: 1px solid var(--ifm-color-emphasis-200) !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.about-accordion details:last-child {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200) !important;
+}
+
+/* Reset Docusaurus summary styles and apply EDS accordion look */
+.about-accordion summary,
+.about-accordion details[class] > summary {
+  display: flex !important;
+  align-items: center;
+  position: static !important;
+  min-height: 48px;
+  padding: 0.75rem 0 !important;
+  margin: 0;
+  background: none !important;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.about-accordion summary::-webkit-details-marker {
+  display: none;
+}
+.about-accordion summary::marker {
+  display: none;
+  content: '';
+}
+
+/* Override Docusaurus arrow with EDS chevron */
+.about-accordion summary::before,
+.about-accordion details[class] > summary::before {
+  position: static !important;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1.25rem;
+  border: none !important;
+  background-color: var(--ifm-color-primary);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  transform: rotate(0deg) !important;
+  transform-origin: center !important;
+  transition: transform 150ms ease;
+}
+
+.about-accordion details[open] > summary::before,
+.about-accordion details[data-collapsed='false'] > summary::before {
+  transform: rotate(180deg) !important;
+}
+
+.about-accordion details[open] > summary {
+  color: var(--ifm-color-primary);
+}
+
+/* Reset Docusaurus collapsible content wrapper */
+.about-accordion details > div[class],
+.about-accordion details > div,
+.about-accordion [class*='collapsibleContent'] {
+  margin: 0 !important;
+  border: none !important;
+  padding: 0 0 0.75rem calc(1.5rem + 1.25rem) !important;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--eds-text-secondary);
+}

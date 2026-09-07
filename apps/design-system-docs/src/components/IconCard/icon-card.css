@@ -1,0 +1,151 @@
+.docs-icon-card-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--_columns, 3), 1fr);
+  gap: var(--docs-grid-gap, 1.5rem);
+}
+
+/* Row layout: cards share the row equally and wrap instead of being squeezed,
+   which is what keeps them stacking on narrow viewports without [data-columns]. */
+.docs-icon-card-grid[data-layout='row'] {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.docs-icon-card-grid[data-layout='row'] > * {
+  flex: 1 1 var(--docs-card-row-basis, 18rem);
+}
+
+.docs-icon-card-grid[data-columns='2'] {
+  --_columns: 2;
+}
+
+.docs-icon-card-grid[data-columns='4'] {
+  --_columns: 4;
+}
+
+.docs-icon-card {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--docs-card-padding);
+  border: var(--docs-card-border);
+  border-radius: var(--docs-card-radius);
+
+  color: inherit;
+
+  background-color: var(--docs-card-bg);
+}
+
+/* Interactive cards are rendered as links. */
+a.docs-icon-card {
+  transition: box-shadow 0.15s ease;
+}
+
+a.docs-icon-card:hover {
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--docs-card-hover-shadow);
+}
+
+a.docs-icon-card:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+
+.docs-icon-card[data-disabled] {
+  opacity: 0.6;
+}
+
+.docs-icon-card__top {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+}
+
+.docs-icon-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  font-size: 1.5rem;
+  color: var(--eds-text-on-emphasis-accent);
+
+  background-color: var(--ifm-color-primary);
+}
+
+/* Raw SVG icons (brand marks) passed as the `icon` node. */
+.docs-icon-card__icon > svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentcolor;
+}
+
+.docs-icon-card__badge {
+  align-self: flex-start;
+
+  padding: 0.125rem 0.625rem;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  font-size: var(--docs-font-caption-size);
+  font-weight: var(--docs-font-weight-emphasis);
+  line-height: var(--docs-font-caption-line-height);
+  color: var(--ifm-color-emphasis-800);
+
+  background-color: var(--eds-background-interactive-neutral-muted-default);
+}
+
+.docs-icon-card__badge[data-tone='accent'] {
+  color: var(--eds-text-interactive-link-default);
+  background-color: var(--eds-background-interactive-accent-muted-default);
+}
+
+.docs-icon-card__title {
+  margin-bottom: var(--docs-card-gap);
+
+  font-family: var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
+  font-size: var(--docs-card-title-size);
+  font-weight: var(--docs-font-weight-emphasis);
+  line-height: var(--docs-card-title-line-height);
+  color: var(--eds-text-primary);
+}
+
+.docs-icon-card__description {
+  margin-bottom: 0;
+  font-size: var(--docs-card-text-size);
+  line-height: var(--docs-card-text-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.docs-icon-card__arrow {
+  display: inline-flex;
+
+  margin-top: auto;
+  padding-top: 1rem;
+
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+@media screen and (width <= 996px) {
+  .docs-icon-card-grid[data-columns='3'],
+  .docs-icon-card-grid[data-columns='4'] {
+    --_columns: 2;
+  }
+}
+
+@media screen and (width <= 600px) {
+  /* The [data-columns] variant is restated so this rule ties the 996px rule's
+     specificity (0,2,0) and wins on source order — without it, 3/4-column
+     grids stay 2-up on phones and overflow the viewport. */
+  .docs-icon-card-grid,
+  .docs-icon-card-grid[data-columns] {
+    --_columns: 1;
+  }
+}

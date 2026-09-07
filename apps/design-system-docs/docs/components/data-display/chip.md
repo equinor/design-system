@@ -1,21 +1,11 @@
 ---
 title: Chip
 sidebar_position: 1
+hide_title: true
+description: 'Chips are compact, interactive elements that represent a small piece of information users can select, filter, remove, or expand. They work well for filters, tags, selections, or quickly triggering a menu. With variants for visual weight, tones for intent, and built-in support for selectable, deletable, and dropdown behaviours, chips help surface bite-sized actions without stealing focus from the surrounding UI.'
 ---
 
-# Chip
-
-Chips are compact, interactive elements that represent a small piece of information users can select, filter, remove, or expand. They work well for filters, tags, selections, or quickly triggering a menu. With variants for visual weight, tones for intent, and built-in support for selectable, deletable, and dropdown behaviours, chips help surface bite-sized actions without stealing focus from the surrounding UI.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--default"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--default)
+<StoryCanvas of="Chip/Default" showLink />
 
 ## When to Use
 
@@ -35,15 +25,7 @@ A chip is always a button. Based on the props you pass, it takes on one of four 
 - **Dropdown**: shows a trailing arrow that flips up when the chip is selected, signalling an open menu
 - **Custom icons**: pass icons as children for full control over leading and/or trailing content
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--types"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--types)
+<StoryCanvas of="Chip/Types" showLink />
 
 ## Guidelines
 
@@ -57,15 +39,7 @@ Variants control the visual weight of the chip. Pick the one that matches how mu
 | Outlined      | Low      | Quiet chips that shouldn't compete with surrounding UI   |
 | High contrast | High     | Prominent chips that need to stand out, e.g. key filters |
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--variants"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--variants)
+<StoryCanvas of="Chip/Variants" showLink />
 
 ### Tones
 
@@ -78,71 +52,31 @@ Tones communicate the meaning or category behind a chip:
 - **Warning**: Caution or attention-needed states
 - **Danger**: Destructive or error states
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--tones"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--tones)
+<StoryCanvas of="Chip/Tones" showLink />
 
 ### Selectable chips
 
 Selectable chips are controlled components - manage `selected` in your own state and pass an `onClick` handler to flip it. When `selected` is true, the chip shows a leading check icon. Selection is ideal for filter chips, tag pickers, or any group where one or more options can be active at the same time.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--selectable"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--selectable)
+<StoryCanvas of="Chip/Selectable" showLink />
 
 ### Deletable chips
 
 Pass `onDelete` to turn a chip into a removable tag. The entire chip becomes the delete target - clicking anywhere on it, or pressing Backspace / Delete while focused, fires the callback. Deletable chips are a great fit for active-filter summaries or recipient lists.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--deletable"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--deletable)
+<StoryCanvas of="Chip/Deletable" showLink />
 
 ### Dropdown chips
 
 Use `dropdown` to add a trailing arrow that signals the chip opens a menu. Combine `dropdown` with `selected` while the menu is open - the arrow flips from down to up. The chip owns the trigger and visual state; you own the popover or menu behaviour.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--dropdown"
-  width="100%"
-  height="96"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--dropdown)
+<StoryCanvas of="Chip/Dropdown" showLink />
 
 ### Custom icons
 
 For chips that need a leading icon, a different trailing icon, or both, pass icons directly as children. Two common patterns: a saved filter with a leading bookmark icon, and recipient chips that combine a leading person icon with the built-in `onDelete` close icon.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--custom-icons"
-  width="100%"
-  height="255"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--custom-icons)
+<StoryCanvas of="Chip/CustomIcons" showLink />
 
 ### Density
 
@@ -151,29 +85,13 @@ Chips respond to a `data-density` attribute on a parent element, so they feel at
 - **Spacious** (default): Comfortable padding for general-purpose use
 - **Comfortable**: A denser option for toolbars, tables, and data-heavy views. As with other EDS components, provide a way to switch back to spacious mode for accessibility.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--density"
-  width="100%"
-  height="247"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--density)
+<StoryCanvas of="Chip/Density" showLink />
 
 ### Tone × variant
 
 Every tone works with every variant. Here's the full matrix for picking the right combination.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-chip--tone-variant-matrix"
-  width="100%"
-  height="362"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-chip--tone-variant-matrix)
+<StoryCanvas of="Chip/ToneVariantMatrix" showLink />
 
 ### Chip text
 

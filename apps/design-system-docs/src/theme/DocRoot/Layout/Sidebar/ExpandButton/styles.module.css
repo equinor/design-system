@@ -1,0 +1,47 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* Swizzled from @docusaurus/theme-classic 3.10.2. Same rules and values as
+ * upstream; only the property order and the media-query range notation were
+ * normalised by this repo's stylelint config. It comes along because ejecting
+ * the sibling index.tsx (see its header) also detaches this module from the
+ * bundle. The .expandButtonIcon rules are dead: the ejected index.tsx no
+ * longer applies that class, because the EDS `expand` icon needs no rotation.
+ * They are kept so this file stays a straight diff against upstream. Re-diff
+ * on upgrades. */
+
+@media (width >= 997px) {
+  .expandButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--docusaurus-collapse-button-bg);
+
+    transition: background-color var(--ifm-transition-fast) ease;
+  }
+
+  .expandButton:hover,
+  .expandButton:focus {
+    background-color: var(--docusaurus-collapse-button-bg-hover);
+  }
+
+  .expandButtonIcon {
+    transform: rotate(0);
+  }
+
+  [dir='rtl'] .expandButtonIcon {
+    transform: rotate(180deg);
+  }
+}

@@ -1,42 +1,22 @@
 ---
 title: Selection controls
 sidebar_position: 3
+hide_title: true
+description: 'Selection controls allow users to select options, make decisions, and set preferences. They are designed to be visible and understandable at a quick glance, helping users make confident choices in forms and settings.'
 ---
-
-# Selection controls
-
-Selection controls allow users to select options, make decisions, and set preferences. They are designed to be visible and understandable at a quick glance, helping users make confident choices in forms and settings.
 
 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem'}}>
   <div>
     <strong>Checkbox</strong>
-    <iframe
-      class="sb-iframe"
-      src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--introduction"
-      width="100%"
-      height="70"
-      frameborder="1"
-    ></iframe>
+    <StoryCanvas of="Checkbox/Introduction" />
   </div>
   <div>
     <strong>Radio</strong>
-    <iframe
-      class="sb-iframe"
-      src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-radio--introduction"
-      width="100%"
-      height="70"
-      frameborder="1"
-    ></iframe>
+    <StoryCanvas of="Radio/Introduction" />
   </div>
   <div>
     <strong>Switch</strong>
-    <iframe
-      class="sb-iframe"
-      src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-switch--introduction"
-      width="100%"
-      height="70"
-      frameborder="1"
-    ></iframe>
+    <StoryCanvas of="Switch/Introduction" />
   </div>
 </div>
 
@@ -70,43 +50,19 @@ Use selection controls when users need to:
 
 Checkboxes allow users to select one or more options from a set, or toggle a single option on/off. They are ideal for accepting terms and conditions or selecting multiple items from a list.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--spacious"
-  width="100%"
-  height="275"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--spacious)
+<StoryCanvas of="Checkbox/Spacious" showLink />
 
 ### Radio
 
 Radio buttons allow users to select exactly one option from a group. They expose all available options, making it easy to compare choices at a glance.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-radio--spacious"
-  width="100%"
-  height="225"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--spacious)
+<StoryCanvas of="Radio/Spacious" showLink />
 
 ### Switch
 
 Switches toggle a single setting on or off. Changes take effect immediately when the user interacts with the switch - there's no need for a submit action.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-switch--states"
-  width="100%"
-  height="275"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-switch--states)
+<StoryCanvas of="Switch/States" showLink />
 
 ## Guidelines
 
@@ -145,29 +101,13 @@ Exercise caution with preselected options, as they can influence user choice. Fo
 
 The indeterminate state indicates a partially checked condition - useful for "select all" scenarios where some, but not all, child items are selected.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--grouped-checkbox"
-  width="100%"
-  height="180"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--grouped-checkbox)
+<StoryCanvas of="Checkbox/GroupedCheckbox" showLink />
 
 ### Grouped Radio Buttons
 
 Radio buttons with the same `name` attribute form a group. Users can navigate within the group using arrow keys (↑↓ or ←→).
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-radio--grouped-radio"
-  width="100%"
-  height="180"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--grouped-radio)
+<StoryCanvas of="Radio/GroupedRadio" showLink />
 
 ### Density
 
@@ -193,15 +133,7 @@ A `label` is always required on selection controls. In cases where a visual labe
 
 When no visible label is needed (e.g., in tables), use `aria-label` to provide an accessible name for screen readers.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--without-visible-label"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--without-visible-label)
+<StoryCanvas of="Checkbox/WithoutVisibleLabel" showLink />
 
 **Status announcements (Switch):**
 

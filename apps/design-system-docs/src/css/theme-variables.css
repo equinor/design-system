@@ -1,0 +1,242 @@
+/**
+ * Theme variables — the Infima ↔ EDS token bridge.
+ *
+ * This file owns the token/font imports and every --ifm-* variable override,
+ * including the site typography scale. It contains variables only; rules that
+ * style elements live in site-chrome.css (navbar/sidebar/TOC/footer),
+ * doc-layouts.css (doc-page layouts), and colocated component CSS.
+ */
+
+/* ======================================
+ * TOKEN + FONT IMPORTS
+ * ====================================== */
+/* Legacy-pipeline token bundle — still required for --eds-container-space-*
+   and for the embedded /next component previews, which consume legacy names.
+   Site styling must not reference legacy names directly.
+
+   It must stay FIRST: both bundles declare --eds-elevation-low/high at equal
+   specificity (legacy on `:root, [data-color-scheme="light"]`, Tokens Studio
+   on `[data-color-scheme]` — both 0,1,0), so the later import wins and the
+   Tokens Studio composite is what site CSS resolves. The two agree value for
+   value today, but only the Tokens Studio pair is composed from
+   --eds-shadow-* parts whose colours flip with the colour scheme. */
+@import '@equinor/eds-tokens/css/variables';
+
+/* Tokens Studio bundle (ADR-0011) — the source of truth for the site's own
+   colour, typography and elevation tokens. Resolved via the eds-resolver
+   webpack alias in docusaurus.config.ts. */
+@import '@equinor/eds-tokens/next/css/variables.css';
+
+/* Equinor brand font */
+@import 'https://cdn.eds.equinor.com/font/equinor-font.css';
+
+/* Inter is self-hosted (the Equinor CDN only serves the Equinor font).
+   Static weights register as family 'Inter', matching --eds-family-ui.
+
+   Latin subset only. The unsuffixed `NNN.css` entrypoints pull seven subsets
+   each (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext,
+   vietnamese); the site is `i18n: locales: ['en']` and every non-ASCII
+   character in docs/ and src/ falls inside the latin subset's
+   unicode-range. The glyphs that do not — arrows (← → ↔ ↕ ↳), ≈, ≥, ⌘ and
+   emoji — are absent from ALL of Inter's subsets, so they already render
+   from a fallback font and lose nothing here. */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-700.css';
+
+/* ======================================
+ * COLOR SCHEME
+ * ====================================== */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* ======================================
+ * SEMANTIC TYPOGRAPHY BRIDGE
+ * Both token bundles declare the --eds-typography-header-*-font-size names
+ * with different values, and webpack CSS ordering lets the legacy bundle's
+ * :root declarations win. :root:root (specificity 0,2,0) outranks any single
+ * :root, so these re-declarations pin the semantic names to the Tokens
+ * Studio values (via the density layer, which still flips with
+ * [data-density]). Site CSS must consume ONLY the semantic
+ * --eds-typography-* names — never the density layer directly.
+ * ====================================== */
+:root:root {
+  --eds-typography-header-xs-font-size: var(
+    --eds-density-typography-header-xs-font-size
+  );
+  --eds-typography-header-sm-font-size: var(
+    --eds-density-typography-header-sm-font-size
+  );
+  --eds-typography-header-md-font-size: var(
+    --eds-density-typography-header-md-font-size
+  );
+  --eds-typography-header-lg-font-size: var(
+    --eds-density-typography-header-lg-font-size
+  );
+  --eds-typography-header-xl-font-size: var(
+    --eds-density-typography-header-xl-font-size
+  );
+  --eds-typography-header-2xl-font-size: var(
+    --eds-density-typography-header-2xl-font-size
+  );
+  --eds-typography-header-3xl-font-size: var(
+    --eds-density-typography-header-3xl-font-size
+  );
+  --eds-typography-header-4xl-font-size: var(
+    --eds-density-typography-header-4xl-font-size
+  );
+}
+
+/* ======================================
+ * INFIMA VARIABLE OVERRIDES
+ * ====================================== */
+:root {
+  /* Typography — families come from the Tokens Studio font tokens */
+  --ifm-font-family-base:
+    var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
+  --ifm-heading-font-family:
+    var(--eds-font-family-header, 'Equinor'), system-ui, sans-serif;
+
+  /* Base text colour is left to Infima so it flips correctly in dark mode.
+     (The EDS neutral-strong token resolves to a fixed dark value regardless of
+     scheme here, so overriding --ifm-font-color-base with it breaks dark mode.) */
+
+  /* Primary colors based on EDS accent */
+  --ifm-color-primary: var(
+    --eds-background-interactive-accent-emphasis-default
+  );
+  --ifm-color-primary-dark: var(
+    --eds-background-interactive-accent-emphasis-hover
+  );
+  --ifm-color-primary-darker: var(
+    --eds-background-interactive-accent-emphasis-pressed
+  );
+  --ifm-color-primary-darkest: var(
+    --eds-background-interactive-accent-emphasis-pressed
+  );
+  --ifm-color-primary-light: var(
+    --eds-background-interactive-accent-muted-pressed
+  );
+  --ifm-color-primary-lighter: var(
+    --eds-background-interactive-accent-muted-hover
+  );
+  --ifm-color-primary-lightest: var(
+    --eds-background-interactive-accent-muted-default
+  );
+
+  /* Background and surface colors */
+  --ifm-background-color: var(--eds-background-canvas);
+  --ifm-background-surface-color: var(--eds-background-surface);
+  --ifm-code-font-size: 95%;
+
+  /* General UI elements */
+  --ifm-hover-overlay: var(--eds-background-interactive-accent-muted-default);
+  --ifm-global-radius: 4px;
+
+  /* Keep .container the same width at every breakpoint so landing pages (which
+     use Infima's .container) match the doc pages (which use --docs-content-max =
+     --ifm-container-width). Without this, .container widens to 1320px at ≥1440px
+     while doc content stays 1140px, so content jumps on navigation. */
+  --ifm-container-width-xl: var(--ifm-container-width);
+  --docusaurus-highlighted-code-line-bg: rgb(0 0 0 / 10%);
+  --ifm-link-color: var(--eds-text-interactive-link-default);
+
+  /* Navbar styling */
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-height: 68px;
+
+  /* Tab text colours from the EDS Tabs spec (active gets
+     --eds-text-on-default-accent in site-chrome.css). */
+  --ifm-navbar-link-color: var(--eds-text-primary);
+  --ifm-navbar-link-hover-color: var(--eds-text-primary);
+  --ifm-navbar-padding-vertical: 0;
+
+  /* Menu and sidebar styling */
+  --ifm-menu-color: var(--ifm-font-color-base);
+  --ifm-menu-vertical-line-color: var(
+    --eds-border-non-interactive-neutral-muted
+  );
+  --ifm-menu-color-active: var(--ifm-color-primary);
+  --ifm-menu-color-background-active: var(--ifm-hover-overlay);
+  --ifm-menu-color-background-hover: var(--ifm-hover-overlay);
+  --ifm-menu-link-padding-horizontal: 1rem;
+  --ifm-menu-link-padding-vertical: 0.375rem;
+  --doc-sidebar-hidden-width: 56px !important;
+
+  /* Table of contents */
+  --ifm-toc-padding-vertical: 0;
+  --ifm-toc-padding-horizontal: 0;
+
+  /* Text */
+  --ifm-heading-color: var(--eds-text-primary);
+}
+
+/* ======================================
+ * SITE TYPOGRAPHY SCALE
+ * One token-driven scale for headings and body text (defined as --docs-font-*
+ * in docs-components.css). Scoped to unversioned pages (landing, /foundation,
+ * /getting-started, /about — no docs-version-* class on <html>) and to
+ * current-version docs; the archived 1.1.0 docs keep the stock Infima
+ * typography.
+ * ====================================== */
+
+html:not([class*='docs-version-']),
+html[class*='docs-version-current'] {
+  --ifm-heading-font-weight: var(--docs-font-weight-emphasis);
+  --ifm-h1-font-size: var(--eds-typography-header-4xl-font-size);
+  --ifm-h2-font-size: var(--docs-font-section-size);
+  --ifm-h3-font-size: var(--docs-font-subsection-size);
+  --ifm-h4-font-size: var(--docs-font-card-title-size);
+  --ifm-h5-font-size: var(--eds-typography-header-md-font-size);
+  --ifm-h6-font-size: var(--eds-typography-header-sm-font-size);
+
+  /* --ifm-font-size-base stays at Infima's 100% so user font-size
+     preferences are respected; ui-lg (16px) equals that default. */
+  --ifm-line-height-base: var(--docs-prose-line-height);
+}
+
+/* Docusaurus theme-classic re-declares the h1–h3 size vars on the markdown
+   heading elements themselves (.markdown h1:first-child → 3rem,
+   .markdown > h2 → 2rem, .markdown > h3 → 1.5rem), so the scale must be
+   restated at those exact scopes. */
+html:not([class*='docs-version-']) .markdown h1:first-child,
+html[class*='docs-version-current'] .markdown h1:first-child {
+  --ifm-h1-font-size: var(--eds-typography-header-4xl-font-size);
+}
+
+html:not([class*='docs-version-']) .markdown > h2,
+html[class*='docs-version-current'] .markdown > h2 {
+  --ifm-h2-font-size: var(--docs-font-section-size);
+}
+
+html:not([class*='docs-version-']) .markdown > h3,
+html[class*='docs-version-current'] .markdown > h3 {
+  --ifm-h3-font-size: var(--docs-font-subsection-size);
+}
+
+/* Per-level line-heights (the token scale ships absolute values; Infima only
+   has one shared --ifm-heading-line-height). :where() keeps specificity at
+   0,0,2 so any single-class rule (hero titles, card titles) still wins. */
+html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h1 {
+  line-height: var(--eds-typography-header-4xl-line-height);
+}
+
+html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h2 {
+  line-height: var(--docs-font-section-line-height);
+}
+
+html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h3 {
+  line-height: var(--docs-font-subsection-line-height);
+}
+
+html:where(:not([class*='docs-version-']), [class*='docs-version-current'])
+  :is(h4, h5, h6) {
+  line-height: var(--docs-font-card-title-line-height);
+}

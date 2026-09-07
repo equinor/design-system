@@ -1,21 +1,14 @@
 ---
 title: Button
 sidebar_position: 2
+hide_title: true
+description: 'Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.'
 ---
 
-# Button
+{/* Portable-stories pilot: this story renders natively (no iframe) via
+composeStories — see src/components/StoryCanvas. */}
 
-Buttons are the primary action triggers in our design system. They help users perform concrete actions like saving, submitting forms, or confirming decisions. With variants to indicate hierarchy (primary, secondary, ghost) and tones to convey intent (accent, neutral, danger), buttons guide users toward meaningful interactions. Always pair buttons with clear, action-oriented labels.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--default"
-  width="100%"
-  height="70"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--default)
+<StoryCanvas of="Button/Default" showLink />
 
 ## When to Use
 
@@ -47,15 +40,7 @@ Use variants to guide users to the most important action:
 | Secondary | Medium   | Supporting actions (e.g., "Cancel")    |
 | Ghost     | Low      | Tertiary actions (e.g., toolbar icons) |
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--all-variants"
-  width="100%"
-  height="370"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--all-variants)
+<StoryCanvas of="Button/AllVariants" showLink />
 
 ### Tones
 
@@ -65,15 +50,7 @@ Tones communicate the intent or nature of an action:
 - **Neutral**: A subdued option for actions that shouldn't compete for attention.
 - **Danger**: Reserved for destructive actions (e.g., "Delete"). Danger buttons should be placed in opposite order to positive actions in button groups to prevent accidental activation.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--tones"
-  width="100%"
-  height="175"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--tones)
+<StoryCanvas of="Button/Tones" showLink />
 
 ### Sizes
 
@@ -115,29 +92,13 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 - Can be circular for a softer appearance
 - Must always have an accessible name for screen readers
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--icon-only-variants"
-  width="100%"
-  height="120"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--icon-only-variants)
+<StoryCanvas of="Button/IconOnlyVariants" showLink />
 
 **Circular icon-only buttons**
 
 Use the `round` prop on icon-only buttons to create circular buttons for a softer appearance.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-button--circular-icon-only"
-  width="100%"
-  height="130"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-button--circular-icon-only)
+<StoryCanvas of="Button/CircularIconOnly" showLink />
 
 ## Accessibility
 

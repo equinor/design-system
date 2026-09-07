@@ -1,21 +1,11 @@
 ---
 title: Tooltip
 sidebar_position: 6
+hide_title: true
+description: 'Tooltips display brief, supplementary information when users hover over or focus on an element. They are ideal for clarifying the meaning of icons, explaining actions, or showing keyboard shortcuts - without cluttering the interface.'
 ---
 
-# Tooltip
-
-Tooltips display brief, supplementary information when users hover over or focus on an element. They are ideal for clarifying the meaning of icons, explaining actions, or showing keyboard shortcuts - without cluttering the interface.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--introduction"
-  width="100%"
-  height="150"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--introduction)
+<StoryCanvas of="Tooltip/Introduction" showLink />
 
 ## When to Use
 
@@ -51,15 +41,7 @@ Tooltips support flexible positioning relative to their trigger element:
 
 The tooltip will automatically reposition itself to stay within the viewport boundary using CSS Anchor Positioning fallbacks.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--placements"
-  width="100%"
-  height="228"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--placements)
+<StoryCanvas of="Tooltip/Placements" showLink />
 
 ### Text Content
 
@@ -72,15 +54,7 @@ The tooltip will automatically reposition itself to stay within the viewport bou
 
 The tooltip can be disabled via the `disabled` prop. When disabled, the tooltip is not rendered and the trigger element is returned unwrapped, with no additional DOM elements added.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-data-display-tooltip--disabled"
-  width="100%"
-  height="100"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-data-display-tooltip--disabled)
+<StoryCanvas of="Tooltip/Disabled" showLink />
 
 ## Accessibility
 

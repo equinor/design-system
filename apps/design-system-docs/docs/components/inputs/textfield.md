@@ -1,21 +1,11 @@
 ---
 title: Text field
 sidebar_position: 7
+hide_title: true
+description: "TextField lets users enter, interact with, and edit content in forms and dialogs. It's a pre-composed component that combines Label, Description, Input, and HelperMessage into a complete, accessible form field."
 ---
 
-# Text field
-
-TextField lets users enter, interact with, and edit content in forms and dialogs. It's a pre-composed component that combines Label, Description, Input, and HelperMessage into a complete, accessible form field.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--introduction"
-  width="100%"
-  height="125"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--introduction)
+<StoryCanvas of="TextField/Introduction" showLink />
 
 ## When to Use
 
@@ -44,43 +34,19 @@ For more flexibility, use the individual components via the [Field](./field) com
 
 Use the `indicator` prop to show "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation - these are separate concerns.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--with-indicator"
-  width="100%"
-  height="235"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--with-indicator)
+<StoryCanvas of="TextField/WithIndicator" showLink />
 
 ### Descriptions
 
 Use the `description` prop to provide additional context below the label.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--with-description"
-  width="100%"
-  height="105"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--with-description)
+<StoryCanvas of="TextField/WithDescription" showLink />
 
 ### Validation States
 
 Use the `invalid` prop to show error styling with a red border and error icon. Pair it with a `helperMessage` to explain what went wrong.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--invalid-state"
-  width="100%"
-  height="110"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--invalid-state)
+<StoryCanvas of="TextField/InvalidState" showLink />
 
 ### Disabled and Read Only
 
@@ -88,40 +54,17 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead - it ke
 
 #### Disabled state
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--disabled-state"
-  width="100%"
-  height="195"
-  frameborder="1"
-></iframe>
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--disabled-state)
+<StoryCanvas of="TextField/DisabledState" showLink />
 
 #### Read-only state
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--read-only-state"
-  width="100%"
-  height="110"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--read-only-state)
+<StoryCanvas of="TextField/ReadOnlyState" showLink />
 
 ### Prefix and Suffix
 
 Use `startText` and `endText` to display units, currency, or contextual information. Note that screen readers won't announce these automatically - ensure matching information appears in the label text as well.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--full-example"
-  width="100%"
-  height="125"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--full-example)
+<StoryCanvas of="TextField/FullExample" showLink />
 
 ### Input Types
 
@@ -135,15 +78,7 @@ Adjust the width to match expected input length - shorter for phone numbers, wid
 
 TextField adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout for dense UIs.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-textfield--density-modes"
-  width="100%"
-  height="235"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-textfield--density-modes)
+<StoryCanvas of="TextField/DensityModes" showLink />
 
 ## Accessibility
 

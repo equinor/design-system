@@ -1,0 +1,51 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* Swizzled from @docusaurus/theme-classic 3.10.2. Same rules and values as
+ * upstream; only the property order and the media-query range notation were
+ * normalised by this repo's stylelint config. It comes along because ejecting
+ * the sibling index.tsx (see its header) also detaches this module from the
+ * bundle, and `--doc-sidebar-width` plus the collapse transition are declared
+ * here. `--doc-sidebar-hidden-width` is overridden to 56px in
+ * src/css/theme-variables.css. Re-diff against upstream on upgrades. */
+
+:root {
+  --doc-sidebar-width: 300px;
+  --doc-sidebar-hidden-width: 30px;
+}
+
+.docSidebarContainer {
+  display: none;
+}
+
+@media (width >= 997px) {
+  .docSidebarContainer {
+    will-change: width;
+
+    display: block;
+
+    width: var(--doc-sidebar-width);
+    margin-top: calc(-1 * var(--ifm-navbar-height));
+    border-right: 1px solid var(--eds-border-non-interactive-neutral-muted);
+
+    clip-path: inset(0);
+
+    transition: width var(--ifm-transition-fast) ease;
+  }
+
+  .docSidebarContainerHidden {
+    cursor: pointer;
+    width: var(--doc-sidebar-hidden-width);
+  }
+
+  .sidebarViewport {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    max-height: 100vh;
+  }
+}
