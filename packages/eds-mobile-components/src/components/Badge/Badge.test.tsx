@@ -72,6 +72,18 @@ describe("Badge", () => {
     });
 
     it("merges a caller-supplied style with the container style rather than replacing it", () => {
+        // Compared against a baseline: unfixed, the container style is replaced
+        // and borderColor is undefined, which a not.toBe("transparent") check
+        // would happily pass.
+        render(
+            <Badge variant="outlined" testID="baseline-badge">
+                Label
+            </Badge>
+        );
+        const baselineBorderColor = flattenBorderColor(
+            screen.getByTestId("baseline-badge")
+        );
+
         render(
             <Badge
                 variant="outlined"
@@ -84,7 +96,7 @@ describe("Badge", () => {
 
         const style = flattenStyle(screen.getByTestId("styled-badge"));
         expect(style?.minWidth).toBe(200);
-        expect(style?.borderColor).not.toBe("transparent");
+        expect(style?.borderColor).toBe(baselineBorderColor);
         expect(style?.borderWidth).toBeGreaterThan(0);
     });
 });
