@@ -13,6 +13,14 @@ exports[`Radio Matches snapshot 1`] = `
   cursor: pointer;
 }
 
+.c2:disabled {
+  cursor: not-allowed;
+}
+
+.c2:disabled~svg {
+  fill: var(--eds_interactive__disabled__text, rgba(190, 190, 190, 1));
+}
+
 .c2:focus {
   outline: none;
 }
@@ -49,6 +57,10 @@ exports[`Radio Matches snapshot 1`] = `
   cursor: pointer;
 }
 
+.c0:has(input:disabled) {
+  cursor: not-allowed;
+}
+
 .c3 {
   grid-area: input;
   pointer-events: none;
@@ -77,6 +89,10 @@ exports[`Radio Matches snapshot 1`] = `
   cursor: pointer;
 }
 
+.c1:has(input:disabled) {
+  cursor: not-allowed;
+}
+
 .c1::before {
   content: '';
   position: absolute;
@@ -95,6 +111,10 @@ exports[`Radio Matches snapshot 1`] = `
 
   .c1:hover::before {
     background-color: var(--eds_interactive_primary__hover_alt, rgba(222, 237, 238, 1));
+  }
+
+  .c1:hover:has(input:disabled)::before {
+    background-color: transparent;
   }
 }
 

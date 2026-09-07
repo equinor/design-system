@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Switch } from './Switch'
+import { comfortable as tokens } from './Switch.tokens'
 
 const StyledSwitch = styled(Switch)`
   clip-path: unset;
@@ -59,6 +60,43 @@ describe('Switch', () => {
     expect(one).not.toBeChecked()
     await userEvent.click(one)
     expect(one).not.toBeChecked()
+  })
+  it('Gets disabled styling when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Switch label="Switch one" />
+      </fieldset>,
+    )
+    const one = screen.getByLabelText('Switch one')
+    expect(one).toBeDisabled()
+    expect(one).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':disabled',
+    })
+    expect(one).toHaveStyleRule(
+      'background-color',
+      tokens.states.disabled.background,
+      { modifier: ':disabled + span > span:is(:first-child,:last-child)' },
+    )
+    // eslint-disable-next-line testing-library/no-node-access
+    const label = one.closest('label')
+    expect(label).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':has(input:disabled)',
+    })
+  })
+  it('Gets disabled styling on the small track when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Switch label="Small switch" size="small" />
+      </fieldset>,
+    )
+    const small = screen.getByLabelText('Small switch')
+    expect(small).toBeDisabled()
+    // Only the track (:first-child) turns grey; the handle keeps its colour
+    expect(small).toHaveStyleRule(
+      'background-color',
+      tokens.states.disabled.background,
+      { modifier: ':disabled + span > span:first-child' },
+    )
   })
   it('Can be set as default on without being a controlled component', () => {
     const labelText = 'Default checked switch'
