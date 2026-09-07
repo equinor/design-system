@@ -1,6 +1,6 @@
 # Token code / output architecture for the redefined token system
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-07-15
 - **Decision makers:** Frida Erdal, EDS Core Team
 
