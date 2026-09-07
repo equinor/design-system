@@ -169,6 +169,20 @@ Radio buttons with the same `name` attribute form a group. Users can navigate wi
 
 [View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--grouped-radio)
 
+### Disabled State
+
+Use the `disabled` prop to disable a single control. Controls inside a `<fieldset disabled>` are disabled by the browser without a prop, and the styling follows the input's `:disabled` state, so both cases look the same.
+
+<iframe
+  class="sb-iframe"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-selection-controls-checkbox--inherited-disabled"
+  width="100%"
+  height="200"
+  frameborder="1"
+></iframe>
+
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--inherited-disabled)
+
 ### Density
 
 All selection controls support two density modes:
