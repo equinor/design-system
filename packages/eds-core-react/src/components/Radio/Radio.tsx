@@ -1,5 +1,5 @@
 /* eslint camelcase: "off" */
-import { forwardRef, InputHTMLAttributes, useMemo, type JSX } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import {
   radio_button_selected,
@@ -30,7 +30,13 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
   margin: 0;
   grid-area: input;
   transform: scale(var(--scale));
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:disabled ~ svg {
+    fill: ${tokens.states.disabled.background};
+  }
   &:focus {
     outline: none;
   }
@@ -55,12 +61,15 @@ const Input = styled.input.attrs<StyledInputProps>(({ type = 'radio' }) => ({
     display: inline;
   }
 `
-type StyledRadioProps = { $disabled: boolean }
-
-const StyledLabel = styled.label<StyledRadioProps>`
+const StyledLabel = styled.label`
   display: inline-flex;
   align-items: center;
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+  /* Covers both the disabled prop and disabling inherited from an
+     ancestor, e.g. fieldset[disabled] */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
 `
 
 type StyledIconPathProps = {
@@ -89,15 +98,18 @@ const LabelText = styled.span`
   ${typographyTemplate(tokens.typography)}
 `
 
-type StyledInputWrapperProps = { disabled: boolean }
-
-const InputWrapper = styled.span<StyledInputWrapperProps>`
+const InputWrapper = styled.span`
   ${({ theme }) => spacingsTemplate(theme.spacings)}
   display: inline-grid;
   grid: [input] 1fr / [input] 1fr;
   position: relative;
   isolation: isolate;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+  /* Covers both the disabled prop and disabling inherited from an
+     ancestor, e.g. fieldset[disabled] */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
   &::before {
     content: '';
     position: absolute;
@@ -114,9 +126,13 @@ const InputWrapper = styled.span<StyledInputWrapperProps>`
     }
     &:hover {
       &::before {
-        background-color: ${({ disabled }) =>
-          disabled ? 'transparent' : tokens.states.hover.background};
+        background-color: ${tokens.states.hover.background};
       }
+    }
+    /* Covers both the disabled prop and disabling inherited from an
+       ancestor, e.g. fieldset[disabled] */
+    &:hover:has(input:disabled)::before {
+      background-color: transparent;
     }
   }
 `
@@ -127,6 +143,21 @@ export type RadioProps = {
   disabled?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
+const iconSize = 24
+
+const renderSVG = (
+  <Svg
+    width={iconSize}
+    height={iconSize}
+    viewBox={`0 0 ${iconSize} ${iconSize}`}
+    fill={tokens.background}
+    aria-hidden
+  >
+    <StyledPath $icon={radio_button_selected} name="selected" />
+    <StyledPath $icon={radio_button_unselected} name="unselected" />
+  </Svg>
+)
+
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   { label, disabled = false, className, style, ...rest },
   ref,
@@ -134,29 +165,11 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   const { density } = useEds()
   const token = useToken({ density }, tokens)
 
-  const iconSize = 24
-  const fill = disabled ? tokens.states.disabled.background : tokens.background
-
-  const renderSVG = useMemo<JSX.Element>(() => {
-    return (
-      <Svg
-        width={iconSize}
-        height={iconSize}
-        viewBox={`0 0 ${iconSize} ${iconSize}`}
-        fill={fill}
-        aria-hidden
-      >
-        <StyledPath $icon={radio_button_selected} name="selected" />
-        <StyledPath $icon={radio_button_unselected} name="unselected" />
-      </Svg>
-    )
-  }, [fill])
-
   return (
     <ThemeProvider theme={token}>
       {label ? (
-        <StyledLabel $disabled={disabled} className={className} style={style}>
-          <InputWrapper disabled={disabled}>
+        <StyledLabel className={className} style={style}>
+          <InputWrapper>
             <Input
               {...rest}
               ref={ref}
@@ -168,7 +181,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
           <LabelText>{label}</LabelText>
         </StyledLabel>
       ) : (
-        <InputWrapper disabled={disabled} className={className} style={style}>
+        <InputWrapper className={className} style={style}>
           <Input {...rest} ref={ref} disabled={disabled} $iconSize={iconSize} />
           {renderSVG}
         </InputWrapper>

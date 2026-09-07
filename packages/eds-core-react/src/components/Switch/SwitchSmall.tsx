@@ -3,11 +3,8 @@ import styled, { css } from 'styled-components'
 import { BaseInput, BaseInputWrapper, GridWrapper } from './Switch.styles'
 import { outlineTemplate } from '@equinor/eds-utils'
 
-type StyledProps = { $isDisabled: boolean }
-
 const Input = styled(BaseInput)(
   ({
-    disabled,
     theme: {
       states,
       entities: { handle, track },
@@ -21,28 +18,30 @@ const Input = styled(BaseInput)(
     }
     /*  Track */
     &:checked + span > span {
-      background-color: ${
-        disabled ? states.disabled.background : track.states.active.background
-      };
+      background-color: ${track.states.active.background};
     }
     /* Handle */
     &:checked + span > span:last-child {
       transform: translate(180%, -50%);
       background-color: ${handle.background};
     }
+    /* :first-child targets only the track; the handle keeps its colour when
+       disabled. Higher specificity than the checked rule above, so disabled
+       wins for checked + disabled */
+    &:disabled + span > span:first-child {
+      background-color: ${states.disabled.background};
+    }
     @media (hover: hover) and (pointer: fine) {
-      &:hover + span {
-        background-color: ${disabled ? 'transparent' : states.hover.background};
+      &:hover:not(:disabled) + span {
+        background-color: ${states.hover.background};
       }
     }
   `,
 )
 
-const Track = styled.span<StyledProps>(
+const Track = styled.span(
   ({
-    $isDisabled,
     theme: {
-      states,
       entities: { track },
     },
   }) => css`
@@ -50,11 +49,10 @@ const Track = styled.span<StyledProps>(
     height: ${track.height};
     border-radius: 10px;
     border: none;
-    background-color: ${
-      $isDisabled
-        ? states.disabled.background
-        : track.states.disabled.background
-    };
+    /* Despite its name, track.states.disabled.background is the resting
+       (off) track colour — the actual disabled state is handled by the
+       :disabled rule on Input */
+    background-color: ${track.states.disabled.background};
     position: absolute;
     left: 50%;
     top: 50%;
@@ -91,7 +89,7 @@ export const SwitchSmall = forwardRef<HTMLInputElement, SwitchSmallProps>(
       <GridWrapper className={className} style={style}>
         <Input {...rest} ref={ref} disabled={disabled} />
         <BaseInputWrapper>
-          <Track $isDisabled={disabled} />
+          <Track />
           <Handle />
         </BaseInputWrapper>
       </GridWrapper>
