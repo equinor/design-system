@@ -128,12 +128,18 @@ A `data-color-appearance` attribute alone has no effect — the element also nee
 
 Figma specifies exact disabled color tokens. Use them.
 
-Key disabled styling off the native `:disabled` state in CSS — on the form
-element itself, or via `:has(.input:disabled)` on a wrapper. Do **not** derive
-it from the React prop at render time (a prop-keyed `data-disabled` attribute
-or a `data-color-appearance={disabled ? 'neutral' : 'accent'}` flip): an input
+Key disabled styling off the native `:disabled` state in CSS. Bare
+`:disabled` applies only when the component's root element **is** the form
+control (see `next/Button`); for a wrapper root, use `:has(:disabled)` /
+`:has(.input:disabled)`. Do **not** derive it from the React prop at render
+time (a prop-keyed `data-disabled` attribute or a
+`data-color-appearance={disabled ? 'neutral' : 'accent'}` flip): an input
 disabled by an ancestor `<fieldset disabled>` then stays visually enabled.
 See `next/Checkbox`, `next/Radio` and `next/Switch` for the pattern.
+
+Exception: a component with no native form control in its subtree has nothing
+for `:disabled` to match, so a prop-set `data-disabled` is the right tool
+there — this is why `next/Field` sets it.
 
 ```css
 .eds-component {
@@ -302,9 +308,11 @@ Use `@layer eds-components` and data-attribute selectors. Use EXACT `--eds-*` to
         var(--eds-color-border-focus);
   }
 
-  /* :disabled (or :has(...:disabled) on a wrapper) also covers disabling
-     inherited from an ancestor fieldset[disabled] — see § Disabled state */
-  .eds-componentname:disabled {
+  /* This scaffold's root is a <div>, so key disabled styling off a form
+     control in the subtree with :has() — bare `.eds-componentname:disabled`
+     would never match. It also covers disabling inherited from an ancestor
+     fieldset[disabled] — see § Disabled state */
+  .eds-componentname:has(:disabled) {
     cursor: not-allowed;
   }
 
