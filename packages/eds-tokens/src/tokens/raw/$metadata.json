@@ -14,6 +14,7 @@
     "font/default",
     "density/comfortable",
     "density/compact",
-    "density/relaxed"
+    "density/relaxed",
+    "elevation/default"
   ]
 }

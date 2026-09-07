@@ -69,6 +69,13 @@ jobs:
         run: pnpm install --force
       - name: Pull tokens from Tokens Studio
         run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
+      # `studio exports run` writes over the previous release's files
+      # without pruning, and the TS generator discovers its inputs from
+      # whatever is on disk (see buildContext). A folder renamed upstream
+      # would otherwise leave both copies behind and abort the run, and a
+      # removed one would keep resolving to its stale value.
+      - name: Clear the previous generated exports
+        run: rm -rf packages/eds-tokens/src/tokens/css packages/eds-tokens/src/tokens/dtcg
       # Runs the saved export configurations on the platform and writes
       # the generated files. This output will replace the local Style
       # Dictionary build in the new pipeline — it is not yet wired into

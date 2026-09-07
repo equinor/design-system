@@ -313,6 +313,223 @@ describe('DatePicker', () => {
     expect(screen.getByRole('presentation')).toHaveTextContent('01/22/2025')
   })
 
+  describe('Today button', () => {
+    // Use a date well in the future so these tests remain valid regardless of when they run
+    const futureYear = new Date().getFullYear() + 2
+
+    afterEach(() => jest.useRealTimers())
+
+    it('selects today when the calendar is showing a past month', async () => {
+      const onChange = jest.fn<void, [Date]>()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(2020, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0]
+      const today = new Date()
+      expect(result.getFullYear()).toBe(today.getFullYear())
+      expect(result.getMonth()).toBe(today.getMonth())
+      expect(result.getDate()).toBe(today.getDate())
+    })
+
+    it('selects today when the calendar is showing a future month (bug #4933)', async () => {
+      // today < startDate caused react-stately's selectDate to bail out silently
+      const onChange = jest.fn<void, [Date]>()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(futureYear, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+
+      // Heading should show the future year before clicking Today
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(futureYear),
+      )
+
+      await userEvent.click(screen.getByText('Today'))
+
+      // Heading should navigate back to current month
+      const now = new Date()
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(now.getFullYear()),
+      )
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0]
+      const today = new Date()
+      expect(result.getFullYear()).toBe(today.getFullYear())
+      expect(result.getMonth()).toBe(today.getMonth())
+      expect(result.getDate()).toBe(today.getDate())
+    })
+
+    it('fires onChange on repeated clicks without closing the picker', async () => {
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(2020, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).toHaveBeenCalledTimes(1)
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+
+    it('does not fire onChange when today is before minValue', async () => {
+      const onChange = jest.fn()
+      const tomorrow = new Date()
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(futureYear, 0, 1)}
+            minValue={tomorrow}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
+      await userEvent.click(screen.getByText('Today'))
+      // Still navigates to today's month even though onChange is suppressed
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(new Date().getFullYear()),
+      )
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('does not fire onChange when today is unavailable', async () => {
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            value={new Date(futureYear, 0, 1)}
+            isDateUnavailable={(d) => {
+              const today = new Date()
+              return (
+                d.getFullYear() === today.getFullYear() &&
+                d.getMonth() === today.getMonth() &&
+                d.getDate() === today.getDate()
+              )
+            }}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
+      await userEvent.click(screen.getByText('Today'))
+      // Still navigates to today's month even though onChange is suppressed
+      expect(screen.getByTestId('heading')).toHaveTextContent(
+        String(new Date().getFullYear()),
+      )
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it('preserves the existing time when showTimeInput is active', async () => {
+      const onChange = jest.fn<void, [Date]>()
+      // 14:30 should survive clicking Today
+      const valueWithTime = new Date(futureYear, 0, 1, 14, 30)
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            showTimeInput
+            value={valueWithTime}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.click(screen.getByLabelText(/^Change date.*/))
+      await userEvent.click(screen.getByText('Today'))
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0]
+      expect(result.getHours()).toBe(14)
+      expect(result.getMinutes()).toBe(30)
+    })
+
+    it('selects the correct day in the picker timezone, not the local timezone', async () => {
+      // 20:00 UTC on Aug 18 is already Aug 19 in Pacific/Kiritimati (UTC+14)
+      jest.useFakeTimers()
+      jest.setSystemTime(new Date('2026-08-18T20:00:00Z'))
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+      const onChange = jest.fn<void, [Date]>()
+
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            timezone={'Pacific/Kiritimati'}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await user.click(screen.getByLabelText(/^Change date.*/))
+      await user.click(screen.getByText('Today'))
+
+      // Kiritimati is UTC+14, so "today" there is Aug 19 — midnight in Kiritimati is
+      // 2026-08-18T10:00:00Z in UTC. Check the local date in that timezone.
+      expect(onChange).toHaveBeenCalledTimes(1)
+      const result = onChange.mock.calls[0][0]
+      const dateInKiritimati = result.toLocaleDateString('en-CA', {
+        timeZone: 'Pacific/Kiritimati',
+      })
+      expect(dateInKiritimati).toBe('2026-08-19')
+
+      jest.useRealTimers()
+    })
+
+    it('does not fire onChange on a readOnly DatePicker opened via keyboard', async () => {
+      // FieldWrapper opens the popover on Enter without checking readOnly,
+      // so the popover is reachable by keyboard even in readOnly mode.
+      const onChange = jest.fn()
+      render(
+        <I18nProvider locale={'en-US'}>
+          <DatePicker
+            label={'Datepicker'}
+            readOnly
+            value={new Date(futureYear, 0, 1)}
+            onChange={onChange}
+          />
+        </I18nProvider>,
+      )
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await userEvent.click(screen.getByText('Today'))
+      expect(onChange).not.toHaveBeenCalled()
+    })
+  })
+
   it('should display localized message for unavailable dates', () => {
     const unavailableDate = new Date(2024, 4, 30)
 

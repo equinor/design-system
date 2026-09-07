@@ -3,6 +3,9 @@
     "header": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-family-header)"
+          },
           "hiddenFromPublishing": true,
           "scopes": [
             "FONT_FAMILY"
@@ -15,6 +18,9 @@
     "ui": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-family-ui)"
+          },
           "hiddenFromPublishing": true,
           "scopes": [
             "FONT_FAMILY"
@@ -29,6 +35,9 @@
     "bolder": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-bolder)"
+          },
           "hiddenFromPublishing": true,
           "scopes": [
             "FONT_WEIGHT"
@@ -41,6 +50,9 @@
     "lighter": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-lighter)"
+          },
           "hiddenFromPublishing": true,
           "scopes": [
             "FONT_WEIGHT"
@@ -53,6 +65,9 @@
     "normal": {
       "$extensions": {
         "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-normal)"
+          },
           "hiddenFromPublishing": true,
           "scopes": [
             "FONT_WEIGHT"

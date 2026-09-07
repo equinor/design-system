@@ -122,6 +122,45 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const _value = getCalendarDate(value, timezone, showTimeInput) ?? innerValue
 
+    // Separate from _onChange so the picker stays open after Today is clicked.
+    // Re-validates min/max/unavailable here because this path bypasses
+    // react-stately's normalizeValue (which would silently reject today when
+    // it is before the visible-range startDate — the root cause of #4933).
+    const _onSelectToday = useCallback(
+      (calendarDate: CalendarDate) => {
+        if (isDisabled || isReadOnly) return
+        if (_minValue && calendarDate.compare(_minValue) < 0) return
+        if (_maxValue && calendarDate.compare(_maxValue) > 0) return
+        if (_isDateUnavailable(calendarDate)) return
+
+        // Preserve an existing time selection when showTimeInput is active
+        const newValue =
+          showTimeInput && _value && 'hour' in _value
+            ? _value.set({
+                year: calendarDate.year,
+                month: calendarDate.month,
+                day: calendarDate.day,
+              })
+            : calendarDate
+
+        setInnerValue(showTimeInput ? toCalendarDateTime(newValue) : newValue)
+        if (onChange) {
+          onChange(newValue.toDate(timezone))
+        }
+      },
+      [
+        onChange,
+        showTimeInput,
+        timezone,
+        _minValue,
+        _maxValue,
+        _isDateUnavailable,
+        _value,
+        isDisabled,
+        isReadOnly,
+      ],
+    )
+
     const locale = useGetLocale(propLocale)
 
     const dateCreateProps = {
@@ -191,6 +230,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 ref={pickerRef}
                 Footer={Footer}
                 Header={Header}
+                onSelectToday={_onSelectToday}
                 {...calendarProps}
               />
             }

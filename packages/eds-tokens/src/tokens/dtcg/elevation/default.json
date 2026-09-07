@@ -1,0 +1,164 @@
+{
+  "shadow": {
+    "high": {
+      "ambient": {
+        "blur": {
+          "$description": "Figma Elevation/Shadow/High/Ambient/blur",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 16
+          }
+        },
+        "color": {
+          "$description": "Figma Elevation/Shadow/High/Ambient/color",
+          "$type": "color",
+          "$value": "{elevation.ambient}"
+        },
+        "spread": {
+          "$description": "Figma Elevation/Shadow/High/Ambient/spread",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 6
+          }
+        },
+        "x": {
+          "$description": "Figma Elevation/Shadow/High/Ambient/offset-x",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "y": {
+          "$description": "Figma Elevation/Shadow/High/Ambient/offset-y",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 12
+          }
+        }
+      },
+      "key": {
+        "blur": {
+          "$description": "Figma Elevation/Shadow/High/Key/blur",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 12
+          }
+        },
+        "color": {
+          "$description": "Figma Elevation/Shadow/High/Key/color",
+          "$type": "color",
+          "$value": "{elevation.key}"
+        },
+        "spread": {
+          "$description": "Figma Elevation/Shadow/High/Key/spread",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "x": {
+          "$description": "Figma Elevation/Shadow/High/Key/offset-x",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "y": {
+          "$description": "Figma Elevation/Shadow/High/Key/offset-y",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 4
+          }
+        }
+      }
+    },
+    "low": {
+      "ambient": {
+        "blur": {
+          "$description": "Figma Elevation/Shadow/Low/Ambient/blur",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 8
+          }
+        },
+        "color": {
+          "$description": "Figma Elevation/Shadow/Low/Ambient/color",
+          "$type": "color",
+          "$value": "{elevation.ambient}"
+        },
+        "spread": {
+          "$description": "Figma Elevation/Shadow/Low/Ambient/spread",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 3
+          }
+        },
+        "x": {
+          "$description": "Figma Elevation/Shadow/Low/Ambient/offset-x",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "y": {
+          "$description": "Figma Elevation/Shadow/Low/Ambient/offset-y",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 4
+          }
+        }
+      },
+      "key": {
+        "blur": {
+          "$description": "Figma Elevation/Shadow/Low/Key/blur",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 8
+          }
+        },
+        "color": {
+          "$description": "Figma Elevation/Shadow/Low/Key/color",
+          "$type": "color",
+          "$value": "{elevation.key}"
+        },
+        "spread": {
+          "$description": "Figma Elevation/Shadow/Low/Key/spread",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "x": {
+          "$description": "Figma Elevation/Shadow/Low/Key/offset-x",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "y": {
+          "$description": "Figma Elevation/Shadow/Low/Key/offset-y",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 1
+          }
+        }
+      }
+    }
+  }
+}

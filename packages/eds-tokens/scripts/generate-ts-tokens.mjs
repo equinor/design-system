@@ -11,6 +11,12 @@
  *    values (the platform's formula engine only runs for CSS), joined
  *    across files by `var(--eds-*)` chains
  *
+ * The platform's formula engine folds colour formulas but not dimension
+ * arithmetic — token math arrives in the CSS export as an unevaluated
+ * `calc(var(--a) + var(--b))`. This script substitutes the references
+ * and folds the arithmetic locally, because the TS modules need plain
+ * numbers.
+ *
  * For every DTCG leaf the script derives the CSS custom property name
  * (`eds-` + path joined with `-`), dereferences the `var()` chain in the
  * relevant dimension context, and converts values to React Native
@@ -27,6 +33,22 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, relative } from 'node:path'
 import process from 'node:process'
+
+/**
+ * A problem with one token's value, as opposed to a structural problem
+ * with the export. Thrown so `resolveGroup` can record it and carry on:
+ * this script runs unattended in the release workflow, and one run
+ * should surface every token that needs attention rather than one per
+ * re-run.
+ */
+class TokenError extends Error {}
+
+/** @type {Set<string>} deduped — a token resolves once per dimension context */
+const problems = new Set()
+
+function tokenFail(message) {
+  throw new TokenError(message)
+}
 
 const args = parseArgs(process.argv.slice(2))
 const DTCG_DIR = args.dtcg ?? 'src/tokens/dtcg'
@@ -54,7 +76,17 @@ function parseArgs(argv) {
   return out
 }
 
+/** Print every accumulated token problem, sorted, and forget them. */
+function flushProblems() {
+  for (const problem of [...problems].sort())
+    console.error(`generate-ts-tokens: ${problem}`)
+  problems.clear()
+}
+
 function fail(message) {
+  // A structural problem must not hide the token problems found before
+  // it — batched reporting is the whole point of collecting them
+  flushProblems()
   console.error(`generate-ts-tokens: ${message}`)
   process.exit(1)
 }
@@ -81,40 +113,191 @@ function parseCssVariables(css) {
   return variables
 }
 
-/** Merge the CSS variable maps that make up one dimension context. */
+/** Export folders whose files are variants of one dimension. */
+const DIMENSION_FOLDERS = ['color-scheme', 'density']
+
+/**
+ * The committed bundle written by generate-css-bundle.mjs — keep in step
+ * with the `OUT_FILE` default in that script. It concatenates every file
+ * below, including every dimension variant, so merging it into a context
+ * would let one density's values leak into another's. It also predates
+ * the current run (the release workflow bundles after this script), so it
+ * must never take part in resolution.
+ */
+const BUNDLE_FILE = 'variables.css'
+
+/**
+ * Merge the CSS variable maps that make up one dimension context: every
+ * dimension-independent file, then the selected color scheme and
+ * density. The set of dimension-independent files is discovered rather
+ * than listed, so a new export folder is picked up automatically —
+ * v0.0.6 added `elevation/`, and a hard-coded list silently dropped
+ * every `--eds-shadow-*` primitive it declares.
+ */
 function buildContext(cssFiles, scheme, density) {
+  const base = [...cssFiles.keys()]
+    .filter(
+      (file) =>
+        file !== BUNDLE_FILE &&
+        !DIMENSION_FOLDERS.some((folder) => file.startsWith(`${folder}/`)),
+    )
+    .sort()
+
+  // Every dimension-independent folder contributes exactly one file. More
+  // than one means the platform added a dimension this script does not
+  // know about, and merging its variants would silently keep whichever
+  // sorts last — the discovery above must not turn that into a quiet
+  // wrong value
+  const byFolder = new Map()
+  for (const file of base) {
+    const folder = dirname(file)
+    if (!byFolder.has(folder)) byFolder.set(folder, [])
+    byFolder.get(folder).push(file)
+  }
+  for (const [folder, files] of byFolder) {
+    if (files.length > 1)
+      fail(
+        `export folder "${folder}" has ${files.length} files (${files.join(', ')}) — if it is a new dimension, add it to DIMENSION_FOLDERS`,
+      )
+  }
+
   const context = new Map()
-  const parts = [
-    'colors/default',
-    'primitives/default',
-    'font/default',
-    'semantic/default',
-    `color-scheme/${scheme}`,
-    `density/${density}`,
-  ]
-  for (const part of parts) {
-    const variables = cssFiles.get(`${part}.css`)
-    if (!variables) fail(`missing CSS export file: ${part}.css`)
-    for (const [name, value] of variables) context.set(name, value)
+  const declaredIn = new Map()
+  const baseFiles = new Set(base)
+  for (const part of [
+    ...base,
+    `color-scheme/${scheme}.css`,
+    `density/${density}.css`,
+  ]) {
+    const variables = cssFiles.get(part)
+    if (!variables) fail(`missing CSS export file: ${part}`)
+    for (const [name, value] of variables) {
+      // Among the base files precedence is alphabetical, which is no
+      // basis for deciding a value — so a conflict there is an error. The
+      // dimension files that follow are meant to override (#5221).
+      const previous = declaredIn.get(name)
+      if (baseFiles.has(part) && previous && context.get(name) !== value)
+        fail(
+          `--${name} declared with different values in ${previous} and ${part}`,
+        )
+      declaredIn.set(name, part)
+      context.set(name, value)
+    }
   }
   return context
 }
 
-/** Follow `var(--x)` chains until a concrete value is reached. */
-function dereference(name, context) {
-  const seen = new Set()
-  let current = context.get(name)
-  if (current === undefined) fail(`CSS variable not found: --${name}`)
-  while (true) {
-    const reference = /^var\(--([\w-]+)\)$/.exec(current)
-    if (!reference) return current
-    if (seen.has(reference[1]))
-      fail(`circular var() chain at --${reference[1]}`)
-    seen.add(reference[1])
-    current = context.get(reference[1])
-    if (current === undefined)
-      fail(`broken var() chain: --${name} → --${reference[1]}`)
+/** Index of the `)` closing the group opened before `start`, or -1. */
+function closingParen(value, start) {
+  let depth = 1
+  for (let index = start; index < value.length; index += 1) {
+    if (value[index] === '(') depth += 1
+    else if (value[index] === ')') {
+      depth -= 1
+      if (depth === 0) return index
+    }
   }
+  return -1
+}
+
+/** Index of the first comma at nesting depth 0, or -1. */
+function topLevelComma(value) {
+  let depth = 0
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index]
+    if (character === '(') depth += 1
+    else if (character === ')') depth -= 1
+    else if (character === ',' && depth === 0) return index
+  }
+  return -1
+}
+
+/** True when an arithmetic operator sits outside every group. */
+function hasTopLevelOperator(value) {
+  let depth = 0
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index]
+    if (character === '(') depth += 1
+    else if (character === ')') depth -= 1
+    else if (
+      depth === 0 &&
+      '+-*/'.includes(character) &&
+      /\s/.test(value[index - 1] ?? '') &&
+      /\s/.test(value[index + 1] ?? '')
+    )
+      return true
+  }
+  return false
+}
+
+/**
+ * Parenthesise a substituted value when it is itself arithmetic, so
+ * inlining cannot change operator association: `var(--a) * 2` with
+ * `--a: calc(1px + 2px)` must not fold as `1px + 2px * 2`. Values that
+ * only look arithmetic because of function syntax (`rgb(255 0 0 / 0.5)`)
+ * keep their exact form — the operator there is not at top level.
+ */
+function asOperand(value) {
+  return value.startsWith('calc(') || hasTopLevelOperator(value)
+    ? `(${value})`
+    : value
+}
+
+/**
+ * Render the resolution path for an error message. It starts at the
+ * token's own custom property, so a report names the DTCG tokens that
+ * are affected rather than the intermediate they happen to share.
+ */
+const resolvingChain = (path) =>
+  [...path].map((name) => `--${name}`).join(' → ')
+
+/**
+ * Resolve a CSS variable to a concrete value, substituting every `var()`
+ * it references — including references nested inside a larger expression
+ * such as `calc(var(--a) + var(--b))`, and the fallback arm of
+ * `var(--a, <fallback>)`.
+ */
+function dereference(name, context, path = new Set()) {
+  if (path.has(name)) tokenFail(`circular var() chain at --${name}`)
+  const value = context.get(name)
+  if (value === undefined) tokenFail(`CSS variable not found: --${name}`)
+  return substituteReferences(value, context, new Set([...path, name]))
+}
+
+function substituteReferences(value, context, path) {
+  if (!value.includes('var(')) return value
+  let resolved = ''
+  let index = 0
+  while (index < value.length) {
+    const start = value.indexOf('var(', index)
+    if (start === -1) {
+      resolved += value.slice(index)
+      break
+    }
+    resolved += value.slice(index, start)
+    const open = start + 'var('.length
+    const close = closingParen(value, open)
+    if (close === -1) tokenFail(`unbalanced var() in value: ${value}`)
+    const body = value.slice(open, close)
+    const separator = topLevelComma(body)
+    const reference = (
+      separator === -1 ? body : body.slice(0, separator)
+    ).trim()
+    if (!/^--[\w-]+$/.test(reference))
+      tokenFail(`unsupported var() reference: ${reference}`)
+    const referenced = reference.slice(2)
+    if (context.has(referenced)) {
+      resolved += asOperand(dereference(referenced, context, path))
+    } else if (separator === -1) {
+      tokenFail(`broken var() chain: ${resolvingChain(path)} → ${reference}`)
+    } else {
+      resolved += asOperand(
+        substituteReferences(body.slice(separator + 1).trim(), context, path),
+      )
+    }
+    index = close + 1
+  }
+  return resolved
 }
 
 /** OKLab → linear sRGB. */
@@ -167,9 +350,9 @@ function linearToHex(linear) {
  * clip shortcut) so the result matches what browsers/lightningcss
  * produce for the CSS export — not naive channel clipping.
  */
-function oklchToHex(value) {
+function oklchToHex(value, cssName) {
   const match = /^oklch\(([\d.]+) ([\d.]+) ([\d.]+)\)$/.exec(value)
-  if (!match) fail(`unsupported oklch form: ${value}`)
+  if (!match) tokenFail(`unsupported oklch form for --${cssName}: ${value}`)
   const [lightness, chroma, hueDegrees] = match.slice(1).map(Number)
   if (lightness >= 1) return '#ffffff'
   if (lightness <= 0) return '#000000'
@@ -204,21 +387,247 @@ function oklchToHex(value) {
   return linearToHex(toLinear(low))
 }
 
-/** rgb(r g b / a) → #rrggbbaa. */
-function rgbToHex(value) {
-  const match = /^rgb\((\d+) (\d+) (\d+) \/ ([\d.]+)\)$/.exec(value)
-  if (!match) fail(`unsupported rgb form: ${value}`)
-  const [red, green, blue] = match.slice(1, 4).map(Number)
-  const alpha = Math.round(Number(match[4]) * 255)
-  return `#${[red, green, blue, alpha].map((c) => c.toString(16).padStart(2, '0')).join('')}`
+/** rgb(r g b) → #rrggbb, rgb(r g b / a) → #rrggbbaa. */
+function rgbToHex(value, cssName) {
+  const match = /^rgb\((\d+) (\d+) (\d+)(?: \/ ([\d.]+))?\)$/.exec(value)
+  if (!match) tokenFail(`unsupported rgb form for --${cssName}: ${value}`)
+  const channels = match.slice(1, 4).map(Number)
+  if (match[4] !== undefined) channels.push(Math.round(Number(match[4]) * 255))
+  return `#${channels.map((c) => c.toString(16).padStart(2, '0')).join('')}`
 }
+
+const NUMERIC_TERM = /^(-?(?:\d+\.?\d*|\.\d+))([a-z%]*)/i
+
+/**
+ * Split a resolved expression into number / operator / paren tokens.
+ * `calc(` is treated as a plain group so nested and inlined calls need no
+ * special case. A `+`/`-` directly after an operand is a binary operator;
+ * anywhere else it is the sign of the following number (`calc(4px * -1)`).
+ */
+function tokenizeExpression(expression, cssName) {
+  const tokens = []
+  let index = 0
+  while (index < expression.length) {
+    const character = expression[index]
+    if (/\s/.test(character)) {
+      index += 1
+      continue
+    }
+    if (expression.startsWith('calc(', index)) {
+      tokens.push({ kind: '(' })
+      index += 'calc('.length
+      continue
+    }
+    if (character === '(' || character === ')') {
+      tokens.push({ kind: character })
+      index += 1
+      continue
+    }
+    const previous = tokens.at(-1)
+    const afterOperand = previous?.kind === 'number' || previous?.kind === ')'
+    if ('+-*/'.includes(character) && afterOperand) {
+      tokens.push({ kind: character })
+      index += 1
+      continue
+    }
+    const term = NUMERIC_TERM.exec(expression.slice(index))
+    if (!term)
+      tokenFail(
+        `unparsable term for --${cssName}: ${expression.slice(index)} (in ${expression})`,
+      )
+    tokens.push({
+      kind: 'number',
+      value: Number(term[1]),
+      unit: term[2].toLowerCase(),
+    })
+    index += term[0].length
+  }
+  return tokens
+}
+
+/** `<number>`, `( … )`. */
+function parseTerm(tokens, cssName) {
+  const token = tokens.shift()
+  if (!token) tokenFail(`unexpected end of expression for --${cssName}`)
+  if (token.kind === 'number') return { value: token.value, unit: token.unit }
+  if (token.kind === '(') {
+    const inner = parseSum(tokens, cssName)
+    if (tokens.shift()?.kind !== ')')
+      tokenFail(`unbalanced parentheses for --${cssName}`)
+    return inner
+  }
+  return tokenFail(`unexpected "${token.kind}" for --${cssName}`)
+}
+
+/** `term (('*' | '/') term)*` — CSS allows a unit on at most one factor. */
+function parseProduct(tokens, cssName) {
+  let left = parseTerm(tokens, cssName)
+  while (tokens[0]?.kind === '*' || tokens[0]?.kind === '/') {
+    const operator = tokens.shift().kind
+    const right = parseTerm(tokens, cssName)
+    if (operator === '*') {
+      if (left.unit && right.unit)
+        tokenFail(
+          `cannot multiply two dimensions for --${cssName}: ${left.unit} and ${right.unit}`,
+        )
+      left = { value: left.value * right.value, unit: left.unit || right.unit }
+    } else {
+      if (right.unit)
+        tokenFail(
+          `cannot divide by a dimension for --${cssName}: ${right.unit}`,
+        )
+      if (right.value === 0) tokenFail(`division by zero for --${cssName}`)
+      left = { value: left.value / right.value, unit: left.unit }
+    }
+  }
+  return left
+}
+
+/** `product (('+' | '-') product)*` — CSS requires matching units here. */
+function parseSum(tokens, cssName) {
+  let left = parseProduct(tokens, cssName)
+  while (tokens[0]?.kind === '+' || tokens[0]?.kind === '-') {
+    const operator = tokens.shift().kind
+    const right = parseProduct(tokens, cssName)
+    if (left.unit !== right.unit)
+      tokenFail(
+        `cannot ${operator === '+' ? 'add' : 'subtract'} mismatched units for --${cssName}: "${left.unit}" and "${right.unit}"`,
+      )
+    left = {
+      value:
+        operator === '+' ? left.value + right.value : left.value - right.value,
+      unit: left.unit,
+    }
+  }
+  return left
+}
+
+/**
+ * Fold a fully-substituted arithmetic expression to `{ value, unit }`.
+ * The value is rounded to 5 decimals so binary-float noise
+ * (`0.1 + 0.2`) doesn't reach the committed modules.
+ */
+function evaluateExpression(expression, cssName) {
+  const tokens = tokenizeExpression(expression, cssName)
+  if (tokens.length === 0) tokenFail(`empty expression for --${cssName}`)
+  const result = parseSum(tokens, cssName)
+  if (tokens.length > 0)
+    tokenFail(
+      `unexpected "${tokens[0].kind}" after expression for --${cssName}`,
+    )
+  return { value: Number(result.value.toFixed(5)), unit: result.unit }
+}
+
+/** A colour: hex, or an `oklch()` / `rgb()` function. */
+const COLOUR = /^(?:#[\da-f]+|(?:oklch|rgb)\()/i
+
+/** Split on separators at nesting depth 0. */
+function splitTopLevel(value, isSeparator) {
+  const parts = []
+  let depth = 0
+  let current = ''
+  for (const character of value) {
+    if (character === '(') depth += 1
+    else if (character === ')') depth -= 1
+    if (depth === 0 && isSeparator(character)) {
+      if (current.trim()) parts.push(current.trim())
+      current = ''
+      continue
+    }
+    current += character
+  }
+  if (current.trim()) parts.push(current.trim())
+  return parts
+}
+
+/** The alpha channel of a resolved colour, 0–1 at 2 decimals. */
+function colourAlpha(colour) {
+  const rgb = /^rgb\(\s*[\d.]+\s+[\d.]+\s+[\d.]+\s*\/\s*([\d.]+)\s*\)$/.exec(
+    colour,
+  )
+  if (rgb) return Number(Number(rgb[1]).toFixed(2))
+  if (/^#[\da-f]{8}$/i.test(colour))
+    return Number((parseInt(colour.slice(7), 16) / 255).toFixed(2))
+  return 1
+}
+
+/** One `<x> <y> <blur> <spread> <colour>` box-shadow layer. */
+function convertShadowLayer(layer, cssName) {
+  const parts = splitTopLevel(layer, (character) => /\s/.test(character))
+  const colours = parts.filter((part) => COLOUR.test(part))
+  if (colours.length !== 1)
+    tokenFail(`expected one colour per shadow layer for --${cssName}: ${layer}`)
+  const lengths = parts.filter((part) => !COLOUR.test(part))
+  if (lengths.length < 2 || lengths.length > 4)
+    tokenFail(
+      `expected 2 to 4 lengths per shadow layer for --${cssName}: ${layer}`,
+    )
+
+  // A shadow length comes from the same primitives that started emitting
+  // token math, so it can be an expression just like any other dimension
+  const [offsetX, offsetY, blur = 0, spread = 0] = lengths.map((length) => {
+    const numeric = /^(-?\d*\.?\d+)(px)?$/.exec(length)
+    if (numeric) return Number(numeric[1])
+    const { value, unit } = evaluateExpression(length, cssName)
+    if (unit !== '' && unit !== 'px')
+      tokenFail(
+        `unsupported shadow length unit "${unit}" for --${cssName}: ${length}`,
+      )
+    return value
+  })
+
+  const colour = colours[0]
+  const hex = colour.startsWith('#')
+    ? colour
+    : colour.startsWith('oklch(')
+      ? oklchToHex(colour, cssName)
+      : rgbToHex(colour, cssName)
+
+  return {
+    css: `${offsetX}px ${offsetY}px ${blur}px ${spread}px ${hex}`,
+    // React Native takes the colour opaque with the alpha split out, and
+    // has no spread — kept alongside for parity with the legacy
+    // build/ts/elevation output
+    native: {
+      shadowColor: hex.length > 7 ? hex.slice(0, 7) : hex,
+      shadowOffset: { width: offsetX, height: offsetY },
+      shadowOpacity: colourAlpha(colour),
+      shadowRadius: blur,
+      spread,
+    },
+  }
+}
+
+/**
+ * A `shadow` token resolves to a CSS `box-shadow` — one or more
+ * comma-separated `<x> <y> <blur> <spread> <colour>` layers. It is
+ * emitted as the ready-to-use `boxShadow` string plus the per-layer
+ * React Native properties, mirroring the shape the legacy Style
+ * Dictionary output publishes at `build/ts/elevation/elevation.ts`.
+ */
+function convertShadow(rawValue, cssName) {
+  const layers = splitTopLevel(rawValue, (character) => character === ',').map(
+    (layer) => convertShadowLayer(layer, cssName),
+  )
+  if (layers.length === 0) tokenFail(`empty shadow for --${cssName}`)
+  return {
+    boxShadow: layers.map((layer) => layer.css).join(', '),
+    layers: layers.map((layer) => layer.native),
+  }
+}
+
+/** A resolved value that still needs arithmetic folding. */
+const isExpression = (value) =>
+  value.startsWith('calc(') ||
+  value.startsWith('(') ||
+  hasTopLevelOperator(value)
 
 function convertValue(rawValue, type, cssName) {
   if (type === 'color') {
     if (rawValue.startsWith('#')) return rawValue
-    if (rawValue.startsWith('oklch(')) return oklchToHex(rawValue)
-    if (rawValue.startsWith('rgb(')) return rgbToHex(rawValue)
-    fail(`unsupported color value for --${cssName}: ${rawValue}`)
+    if (rawValue.startsWith('oklch(')) return oklchToHex(rawValue, cssName)
+    if (rawValue.startsWith('rgb(')) return rgbToHex(rawValue, cssName)
+    tokenFail(`unsupported color value for --${cssName}: ${rawValue}`)
   }
   if (
     ['dimension', 'number', 'fontWeight', 'fontSize', 'lineHeight'].includes(
@@ -226,13 +635,22 @@ function convertValue(rawValue, type, cssName) {
     )
   ) {
     const numeric = /^(-?\d*\.?\d+)(px)?$/.exec(rawValue)
-    if (!numeric) fail(`non-numeric ${type} for --${cssName}: ${rawValue}`)
-    return Number(numeric[1])
+    if (numeric) return Number(numeric[1])
+    if (!isExpression(rawValue))
+      tokenFail(`non-numeric ${type} for --${cssName}: ${rawValue}`)
+    // Token math from Tokens Studio arrives as an unevaluated calc()
+    const { value, unit } = evaluateExpression(rawValue, cssName)
+    if (unit !== '' && unit !== 'px')
+      tokenFail(
+        `unsupported ${type} unit "${unit}" for --${cssName}: ${rawValue}`,
+      )
+    return value
   }
+  if (type === 'shadow') return convertShadow(rawValue, cssName)
   if (type === 'fontFamily' || type === 'text' || type === 'string') {
     return rawValue
   }
-  fail(`unknown $type "${type}" for --${cssName}`)
+  return tokenFail(`unknown $type "${type}" for --${cssName}`)
 }
 
 const DIGIT_WORDS = [
@@ -272,8 +690,16 @@ function cssSegment(segment) {
 function resolveGroup(group, path, context) {
   if (group.$value !== undefined) {
     const cssName = `eds-${path.map(cssSegment).join('-')}`
-    const rawValue = dereference(cssName, context)
-    return convertValue(rawValue, group.$type, cssName)
+    try {
+      return convertValue(dereference(cssName, context), group.$type, cssName)
+    } catch (error) {
+      if (!(error instanceof TokenError)) throw error
+      // Record and carry on so one run reports every bad token; nothing
+      // is written while `problems` is non-empty, so the placeholder
+      // below never reaches a module
+      problems.add(error.message)
+      return 0
+    }
   }
   const resolved = {}
   for (const [key, child] of Object.entries(group)) {
@@ -293,6 +719,12 @@ function toLiteral(value, indent) {
   if (typeof value === 'number') return String(value)
   if (typeof value === 'string') return singleQuoted(value)
   const inner = `${indent}  `
+  // a shadow's layers are ordered, so they serialize as an array
+  if (Array.isArray(value)) {
+    if (value.length === 0) return '[]'
+    const items = value.map((item) => `${inner}${toLiteral(item, inner)},`)
+    return `[\n${items.join('\n')}\n${indent}]`
+  }
   const entries = Object.entries(value).map(([key, child]) => {
     const tsName = IDENTIFIER.test(key) ? key : singleQuoted(key)
     return `${inner}${tsName}: ${toLiteral(child, inner)},`
@@ -334,8 +766,8 @@ const contextFor = (scheme, density) => {
   return contexts.get(key)
 }
 
-await rm(OUT_DIR, { recursive: true, force: true })
-const written = []
+/** @type {Array<[outPath: string, exportName: string, value: unknown]>} */
+const modules = []
 
 for (const file of dtcgFiles) {
   let tree = JSON.parse(await readFile(join(DTCG_DIR, file), 'utf8'))
@@ -379,12 +811,27 @@ for (const file of dtcgFiles) {
       : perScheme
   }
 
-  for (const [outFile, value] of outputs) {
-    const outPath = join(OUT_DIR, outFile.replace('.json', '.ts'))
-    await mkdir(dirname(outPath), { recursive: true })
-    await writeFile(outPath, toTsSource(exportName, value))
-    written.push(relative(OUT_DIR, outPath))
-  }
+  for (const [outFile, value] of outputs)
+    modules.push([
+      join(OUT_DIR, outFile.replace('.json', '.ts')),
+      exportName,
+      value,
+    ])
+}
+
+if (problems.size > 0)
+  fail(
+    `${problems.size} token value(s) could not be converted — nothing written, ${OUT_DIR} left untouched`,
+  )
+
+// Clear the previous output only once the whole export resolved, so a
+// failed run leaves the committed modules in place
+await rm(OUT_DIR, { recursive: true, force: true })
+const written = []
+for (const [outPath, exportName, value] of modules) {
+  await mkdir(dirname(outPath), { recursive: true })
+  await writeFile(outPath, toTsSource(exportName, value))
+  written.push(relative(OUT_DIR, outPath))
 }
 
 console.log(

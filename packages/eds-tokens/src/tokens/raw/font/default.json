@@ -8,6 +8,9 @@
           "scopes": [
             "FONT_FAMILY"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-family-header)"
+          },
           "hiddenFromPublishing": true
         }
       }
@@ -20,6 +23,9 @@
           "scopes": [
             "FONT_FAMILY"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-family-ui)"
+          },
           "hiddenFromPublishing": true
         }
       }
@@ -34,6 +40,9 @@
           "scopes": [
             "FONT_WEIGHT"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-bolder)"
+          },
           "hiddenFromPublishing": true
         }
       }
@@ -46,6 +55,9 @@
           "scopes": [
             "FONT_WEIGHT"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-lighter)"
+          },
           "hiddenFromPublishing": true
         }
       }
@@ -58,6 +70,9 @@
           "scopes": [
             "FONT_WEIGHT"
           ],
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-normal)"
+          },
           "hiddenFromPublishing": true
         }
       }

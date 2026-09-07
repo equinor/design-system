@@ -14,7 +14,7 @@ import {
   Link,
   matchPath,
   useLocation,
-} from 'react-router-dom'
+} from 'react-router'
 
 const icons = {
   chevron_left,
@@ -203,7 +203,7 @@ WithPanels.decorators = [
 ]
 
 export const Router: StoryFn<TabsProps> = () => {
-  /*import {MemoryRouter, Route, Routes, Link, matchPath, useLocation} from 'react-router-dom' */
+  /*import {MemoryRouter, Route, Routes, Link, matchPath, useLocation} from 'react-router' */
   function CurrentRoute() {
     const location = useLocation()
     return <Typography>Current route: {location.pathname}</Typography>

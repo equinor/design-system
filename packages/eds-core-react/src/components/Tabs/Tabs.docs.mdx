@@ -91,7 +91,7 @@ The non-active `Tabs.Panels` are by default hidden with `display: none`, but can
 `Tabs.Tab` can be rendered as another component using the `as` prop.
 ```tsx
 import { Tabs } from '@equinor/eds-core-react'
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router";
 
   <Tabs activeTab="/foo/bar">
   <Tabs.List>
@@ -101,7 +101,7 @@ import { Link, Outlet } from "react-router-dom";
   <Outlet />
   </Tabs>
 ```
-Routes can of course be entered by other means than clicking tabs. Therefore, we can not reliably use `onChange` to send a new index to `activeTab`. Instead `activeTab` can take a string value that sets the correct active tab if it matches the `value` prop on a tab. In the below example we use `react-router-dom` and its provided functions to match the current path to the correct tab.
+Routes can of course be entered by other means than clicking tabs. Therefore, we can not reliably use `onChange` to send a new index to `activeTab`. Instead `activeTab` can take a string value that sets the correct active tab if it matches the `value` prop on a tab. In the below example we use `react-router` and its provided functions to match the current path to the correct tab.
 <Canvas of={ComponentStories.Router} />
 
 ### With search
