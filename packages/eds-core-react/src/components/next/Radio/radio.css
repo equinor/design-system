@@ -181,10 +181,10 @@
 
     &:has(.input:disabled) {
       --_eds-field-label-color: var(--_radio-disabled-color);
-    }
 
-    &:has(.input:disabled) label {
-      cursor: not-allowed;
+      & label {
+        cursor: not-allowed;
+      }
     }
 
     @media (hover: hover) and (pointer: fine) {

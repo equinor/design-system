@@ -171,7 +171,7 @@ describe('Checkbox (next)', () => {
       // Disabled styling is keyed off :has(.input:disabled) in CSS, so the
       // wrapper must not depend on a prop-set attribute
       render(<Checkbox aria-label="Standalone disabled" disabled />)
-      const checkbox = screen.getByLabelText('Standalone disabled')
+      const checkbox = screen.getByRole('checkbox')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = checkbox.closest('.eds-checkbox')
       expect(wrapper).not.toHaveAttribute('data-disabled')

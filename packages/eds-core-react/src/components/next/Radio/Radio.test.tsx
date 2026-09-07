@@ -173,7 +173,7 @@ describe('Radio (next)', () => {
       // Disabled styling is keyed off :has(.input:disabled) in CSS, so the
       // wrapper must not depend on a prop-set attribute
       render(<Radio aria-label="Standalone disabled" name="test" disabled />)
-      const radio = screen.getByLabelText('Standalone disabled')
+      const radio = screen.getByRole('radio')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = radio.closest('.eds-radio')
       expect(wrapper).not.toHaveAttribute('data-disabled')

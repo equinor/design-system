@@ -46,32 +46,35 @@
       outline-offset: var(--eds-sizing-stroke-thick);
     }
 
-    /* :has(.input:disabled) instead of a prop-set attribute so the styling
-       also covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
-    &:has(.input:disabled) {
-      --_eds-field-label-color: var(--_switch-disabled-color);
-
-      cursor: not-allowed;
-    }
-
     & label {
       cursor: pointer;
     }
 
-    &:has(.input:disabled) label {
+    /* :has(.input:disabled) instead of a prop-set attribute so the styling
+       also covers disabling inherited from an ancestor, e.g. fieldset[disabled].
+       The variable overrides outrank the :hover rules below on specificity,
+       so hover needs no :not() guard */
+    &:has(.input:disabled) {
+      --_eds-field-label-color: var(--_switch-disabled-color);
+      --_switch-hover-color: transparent;
+
       cursor: not-allowed;
+
+      & label {
+        cursor: not-allowed;
+      }
+
+      & .track {
+        --_track-bg: var(--eds-color-bg-disabled);
+      }
+
+      & .handle {
+        --_handle-bg: var(--eds-color-bg-disabled);
+      }
     }
 
     &:has(.input:checked) .handle {
       inset-inline-start: calc(100% - var(--_handle-size));
-    }
-
-    &:has(.input:disabled) .track {
-      --_track-bg: var(--eds-color-bg-disabled);
-    }
-
-    &:has(.input:disabled) .handle {
-      --_handle-bg: var(--eds-color-bg-disabled);
     }
 
     & .control {
@@ -155,11 +158,11 @@
     }
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover:not(:has(.input:disabled)) {
+      &:hover {
         background-color: var(--_switch-hover-color);
       }
 
-      &:hover:not(:has(.input:disabled)) .track {
+      &:hover .track {
         --_track-bg: var(--_track-hover-bg);
       }
     }

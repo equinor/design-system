@@ -1,6 +1,8 @@
 @layer eds-components {
   .eds-field {
-    /* Private color variables */
+    /* Private color variables. The --_eds-field-* colour variables are
+       intended override points for Field-based components (Checkbox, Radio
+       and Switch set them from their own CSS) — keep the names stable */
     --_eds-field-label-color: var(--eds-color-text-strong);
     --_eds-field-description-color: var(--eds-color-text-subtle);
     --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
