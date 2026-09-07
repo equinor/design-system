@@ -48,7 +48,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <Field
         position="start"
         disabled={disabled}
-        className="eds-radio"
+        className={['eds-radio', className].filter(Boolean).join(' ')}
         data-color-appearance="accent"
         data-selectable-space="md"
         data-space-proportions="squished"
@@ -61,7 +61,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
 
   return (
     <span
-      className="eds-radio"
+      className={['eds-radio', className].filter(Boolean).join(' ')}
       data-standalone={true}
       data-color-appearance="accent"
     >
