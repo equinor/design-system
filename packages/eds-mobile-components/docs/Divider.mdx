@@ -1,0 +1,50 @@
+Divider is a thin horizontal rule for visually separating content sections. It has no interactive states and is hidden from assistive technology by default.
+
+## Features
+
+- Full-width horizontal line that stretches to fill its container.
+- Hidden from screen readers — it is a purely decorative element.
+
+## Usage
+
+```tsx
+import { Divider } from '@equinor/eds-mobile-components'
+
+<Divider />
+```
+
+## Examples
+
+### Default
+
+```tsx
+<Divider />
+```
+
+### With vertical spacing
+
+Pass a `style` prop to control the space above and below.
+
+```tsx
+<Divider style={{ marginVertical: 16 }} />
+```
+
+### Separating content blocks
+
+```tsx
+<Typography>First paragraph of content.</Typography>
+<Divider style={{ marginVertical: 16 }} />
+<Typography.Header size="lg" weight="bolder">New Section</Typography.Header>
+<Typography>Content for the new section.</Typography>
+```
+
+## Props
+
+Divider has no props of its own.
+
+Also accepts all React Native [`ViewProps`](https://reactnative.dev/docs/view#props), including `style` for spacing and layout overrides.
+
+## Accessibility
+
+- Hidden from VoiceOver and TalkBack by default (`accessible={false}`) — it carries no semantic meaning.
+- If the divider is meaningful in context (e.g. a landmark separator), pass `accessible={true}` and `accessibilityRole="separator"` explicitly.

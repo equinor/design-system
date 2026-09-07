@@ -1,6 +1,6 @@
 {
   "nodejs": "24.16.0",
-  "pnpm": "10.15.0",
+  "pnpm": "10.28.0",
   "react": "18",
   "typescript": "5.9.3",
   "reactDom": "18"
