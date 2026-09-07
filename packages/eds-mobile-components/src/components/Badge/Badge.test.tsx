@@ -12,6 +12,9 @@ const flattenBorderColor = (element: ReactTestInstance) =>
     StyleSheet.flatten(element.props.style as StyleProp<ViewStyle>)
         ?.borderColor;
 
+const flattenStyle = (element: ReactTestInstance) =>
+    StyleSheet.flatten(element.props.style as StyleProp<ViewStyle>);
+
 describe("Badge", () => {
     it("renders string children", () => {
         render(<Badge>New</Badge>);
@@ -66,5 +69,22 @@ describe("Badge", () => {
         );
 
         expect(mediumEmphasisBackground).not.toEqual(lowEmphasisBackground);
+    });
+
+    it("merges a caller-supplied style with the container style rather than replacing it", () => {
+        render(
+            <Badge
+                variant="outlined"
+                testID="styled-badge"
+                style={{ minWidth: 200 }}
+            >
+                Label
+            </Badge>
+        );
+
+        const style = flattenStyle(screen.getByTestId("styled-badge"));
+        expect(style?.minWidth).toBe(200);
+        expect(style?.borderColor).not.toBe("transparent");
+        expect(style?.borderWidth).toBeGreaterThan(0);
     });
 });

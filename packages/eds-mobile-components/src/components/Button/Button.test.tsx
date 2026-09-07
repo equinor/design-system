@@ -112,6 +112,40 @@ describe("Button", () => {
             flattenStyle(screen.getByRole("button"))?.borderWidth
         ).toBeGreaterThan(0);
     });
+
+    it("merges a caller-supplied style with the container style rather than replacing it", () => {
+        // The reported repro: a style prop landed in pressableProps and was
+        // spread over the explicit style={styles.container}, so the secondary
+        // variant's border disappeared the moment any style was passed.
+        render(
+            <Button label="Save" variant="secondary" style={{ minWidth: 200 }} />
+        );
+
+        const style = flattenStyle(screen.getByRole("button"));
+        expect(style?.minWidth).toBe(200);
+        expect(style?.borderWidth).toBeGreaterThan(0);
+        expect(style?.borderColor).toBeTruthy();
+        expect(style?.overflow).toBe("hidden");
+    });
+
+    it("lets a caller-supplied style win on a property the container also sets", () => {
+        render(<Button label="Save" style={{ borderRadius: 3 }} />);
+        expect(flattenStyle(screen.getByRole("button"))?.borderRadius).toBe(3);
+    });
+
+    it("supports the function form of style, which receives press state", () => {
+        render(
+            <Button
+                label="Save"
+                variant="secondary"
+                style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+            />
+        );
+
+        const style = flattenStyle(screen.getByRole("button"));
+        expect(style?.opacity).toBe(1);
+        expect(style?.borderWidth).toBeGreaterThan(0);
+    });
 });
 
 describe("Button.Icon", () => {
@@ -164,5 +198,36 @@ describe("Button.Icon", () => {
             selected: true,
             disabled: false,
         });
+    });
+
+    it("merges a caller-supplied style with the container style rather than replacing it", () => {
+        render(
+            <Button.Icon
+                name="close"
+                accessibilityLabel="Close"
+                variant="secondary"
+                style={{ minWidth: 200 }}
+            />
+        );
+
+        const style = flattenStyle(screen.getByRole("button"));
+        expect(style?.minWidth).toBe(200);
+        expect(style?.borderWidth).toBeGreaterThan(0);
+        expect(style?.overflow).toBe("hidden");
+    });
+
+    it("supports the function form of style, which receives press state", () => {
+        render(
+            <Button.Icon
+                name="close"
+                accessibilityLabel="Close"
+                variant="secondary"
+                style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+            />
+        );
+
+        const style = flattenStyle(screen.getByRole("button"));
+        expect(style?.opacity).toBe(1);
+        expect(style?.borderWidth).toBeGreaterThan(0);
     });
 });

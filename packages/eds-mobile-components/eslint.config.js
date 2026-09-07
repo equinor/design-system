@@ -15,6 +15,20 @@ export default tseslint.config(
         },
         rules: {
             "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+            // A props spread placed after an explicit style or accessibilityState
+            // attribute replaces that value outright instead of merging into it, so
+            // a caller passing either one silently drops the component's own
+            // container styles or computed accessibility state. Put the spread
+            // first and merge the caller's value in explicitly. See #5411.
+            "no-restricted-syntax": [
+                "error",
+                {
+                    selector:
+                        'JSXOpeningElement > JSXAttribute[name.name=/^(style|accessibilityState)$/] ~ JSXSpreadAttribute',
+                    message:
+                        "Move this props spread above the element's style/accessibilityState attribute, then merge the caller's value in explicitly (see mergePressableStyle, or the [ownStyle, rest.style] pattern). A spread after those attributes replaces them wholesale.",
+                },
+            ],
         },
     },
     {

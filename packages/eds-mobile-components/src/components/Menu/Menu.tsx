@@ -66,8 +66,8 @@ export const Menu = ({
                             elevation="temporaryNav"
                         >
                             <View
-                                style={[styles.innerContainer, rest.style]}
                                 {...rest}
+                                style={[styles.innerContainer, rest.style]}
                             >
                                 <MenuContext.Provider
                                     value={{
