@@ -9,7 +9,7 @@ import { Icon } from '../Icon'
 import type { RadioProps } from './Radio.types'
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { label, disabled = false, id: providedId, ...rest },
+  { label, disabled = false, className, id: providedId, ...rest },
   ref,
 ) {
   const generatedId = useId()
@@ -20,7 +20,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <input
         type="radio"
         id={inputId}
-        className="input"
+        // Merge so a consumer className can't clobber the 'input' class the
+        // component CSS keys its :has(.input:...) state selectors on
+        className={['input', className].filter(Boolean).join(' ')}
         disabled={disabled}
         ref={ref}
         {...rest}

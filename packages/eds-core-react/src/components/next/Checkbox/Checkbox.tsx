@@ -17,6 +17,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       indicator,
       helperMessage,
+      className,
       id: providedId,
       ...rest
     },
@@ -41,7 +42,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={inputId}
           aria-checked={indeterminate ? 'mixed' : undefined}
           aria-describedby={helperMessage ? helperMessageId : undefined}
-          className="input"
+          // Merge so a consumer className can't clobber the 'input' class the
+          // component CSS keys its :has(.input:...) state selectors on
+          className={['input', className].filter(Boolean).join(' ')}
           disabled={disabled}
           ref={inputRef}
           data-indeterminate={indeterminate}

@@ -54,6 +54,9 @@ describe('Checkbox (next)', () => {
       const checkbox = screen.getByLabelText('checkbox-test')
       expect(checkbox).toBeInTheDocument()
       expect(checkbox).toHaveClass('custom-checkbox')
+      // The 'input' class must survive a consumer className — the component
+      // CSS keys its :has(.input:...) state selectors on it
+      expect(checkbox).toHaveClass('input')
     })
 
     it('applies data-* attributes to input element', () => {

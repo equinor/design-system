@@ -14,7 +14,8 @@
 
     /* Not --eds-color-text-disabled: that token is switched by
        data-color-appearance (tinted, not grey, under 'accent') and the wrapper
-       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled] */
+       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled].
+       TODO: Replace with semantic token when available */
     --_switch-disabled-color: var(--eds-color-neutral-7);
 
     /*
@@ -48,6 +49,8 @@
     /* :has(.input:disabled) instead of a prop-set attribute so the styling
        also covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
     &:has(.input:disabled) {
+      --_eds-field-label-color: var(--_switch-disabled-color);
+
       cursor: not-allowed;
     }
 
@@ -57,7 +60,6 @@
 
     &:has(.input:disabled) label {
       cursor: not-allowed;
-      color: var(--_switch-disabled-color);
     }
 
     &:has(.input:checked) .handle {
@@ -65,11 +67,11 @@
     }
 
     &:has(.input:disabled) .track {
-      background-color: var(--eds-color-bg-disabled);
+      --_track-bg: var(--eds-color-bg-disabled);
     }
 
     &:has(.input:disabled) .handle {
-      background-color: var(--eds-color-bg-disabled);
+      --_handle-bg: var(--eds-color-bg-disabled);
     }
 
     & .control {
@@ -110,6 +112,10 @@
     }
 
     & .track {
+      /* Declared on the element, not the root: the appearance-switched token
+         must resolve under .control's data-color-appearance */
+      --_track-bg: var(--eds-color-bg-fill-muted-default);
+
       pointer-events: none;
 
       position: relative;
@@ -120,12 +126,16 @@
       block-size: var(--_track-height);
       border-radius: var(--eds-spacing-border-radius-pill);
 
-      background-color: var(--eds-color-bg-fill-muted-default);
+      background-color: var(--_track-bg);
 
       transition: background-color 150ms;
     }
 
     & .handle {
+      /* Declared on the element, not the root: the appearance-switched token
+         must resolve under .control's data-color-appearance */
+      --_handle-bg: var(--eds-color-bg-fill-emphasis-default);
+
       pointer-events: none;
 
       position: absolute;
@@ -137,7 +147,7 @@
       block-size: var(--_handle-size);
       border-radius: var(--eds-spacing-border-radius-pill);
 
-      background-color: var(--eds-color-bg-fill-emphasis-default);
+      background-color: var(--_handle-bg);
 
       transition:
         inset-inline-start 150ms,
@@ -150,7 +160,7 @@
       }
 
       &:hover:not(:has(.input:disabled)) .track {
-        background-color: var(--_track-hover-bg);
+        --_track-bg: var(--_track-hover-bg);
       }
     }
   }

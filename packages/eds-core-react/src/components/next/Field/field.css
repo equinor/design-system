@@ -72,10 +72,18 @@
       line-height: var(--eds-typography-ui-body-sm-line-height-default);
     }
 
-    /* Only helper message changes color when disabled — :has(:disabled) also
-       covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
-    &:is([data-disabled='true'], :has(:disabled)) {
-      --_eds-field-helper-color: var(--eds-color-text-disabled);
+    /* Only helper message changes color when disabled. The :has() arm covers
+       disabling inherited from an ancestor, e.g. fieldset[disabled], and is
+       scoped to the form controls a Field labels — a bare :has(:disabled)
+       would also match a placeholder <option disabled> inside an enabled
+       select. Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance and renders tinted, not grey, under non-neutral
+       appearances. TODO: Replace with semantic token when available */
+    &:is(
+        [data-disabled='true'],
+        :has(input:disabled, select:disabled, textarea:disabled)
+      ) {
+      --_eds-field-helper-color: var(--eds-color-neutral-7);
     }
   }
 }

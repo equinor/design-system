@@ -71,6 +71,9 @@ describe('Radio (next)', () => {
       const radio = screen.getByLabelText('radio-test')
       expect(radio).toBeInTheDocument()
       expect(radio).toHaveClass('custom-radio')
+      // The 'input' class must survive a consumer className — the component
+      // CSS keys its :has(.input:...) state selectors on it
+      expect(radio).toHaveClass('input')
     })
 
     it('applies data-* attributes to input element', () => {
