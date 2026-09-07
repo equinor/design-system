@@ -12,6 +12,11 @@
     /* TODO: Replace with semantic token when available */
     --_track-hover-bg: var(--eds-color-neutral-2);
 
+    /* Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance (tinted, not grey, under 'accent') and the wrapper
+       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled] */
+    --_switch-disabled-color: var(--eds-color-neutral-7);
+
     /*
      * Gap compensation for label alignment with Checkbox and Radio.
      * Checkbox/Radio icons have ~3px internal SVG padding, but the Switch
@@ -40,7 +45,9 @@
       outline-offset: var(--eds-sizing-stroke-thick);
     }
 
-    &[data-disabled='true'] {
+    /* :has(.input:disabled) instead of a prop-set attribute so the styling
+       also covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    &:has(.input:disabled) {
       cursor: not-allowed;
     }
 
@@ -48,13 +55,17 @@
       cursor: pointer;
     }
 
-    &[data-disabled='true'] label {
+    &:has(.input:disabled) label {
       cursor: not-allowed;
-      color: var(--eds-color-text-disabled);
+      color: var(--_switch-disabled-color);
     }
 
     &:has(.input:checked) .handle {
       inset-inline-start: calc(100% - var(--_handle-size));
+    }
+
+    &:has(.input:disabled) .track {
+      background-color: var(--eds-color-bg-disabled);
     }
 
     &:has(.input:disabled) .handle {
@@ -134,11 +145,11 @@
     }
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover:not([data-disabled='true']) {
+      &:hover:not(:has(.input:disabled)) {
         background-color: var(--_switch-hover-color);
       }
 
-      &:hover:not([data-disabled='true']) .track {
+      &:hover:not(:has(.input:disabled)) .track {
         background-color: var(--_track-hover-bg);
       }
     }

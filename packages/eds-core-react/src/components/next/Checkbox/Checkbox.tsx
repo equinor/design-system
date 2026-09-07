@@ -70,7 +70,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           position="start"
           disabled={disabled}
           className="eds-checkbox"
-          data-color-appearance={disabled ? 'neutral' : 'accent'}
+          data-color-appearance="accent"
           data-selectable-space="md"
           data-space-proportions="squished"
         >
@@ -91,8 +91,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <span
         className="eds-checkbox"
         data-standalone={true}
-        data-color-appearance={disabled ? 'neutral' : 'accent'}
-        data-disabled={disabled || undefined}
+        data-color-appearance="accent"
       >
         {checkboxInput}
       </span>

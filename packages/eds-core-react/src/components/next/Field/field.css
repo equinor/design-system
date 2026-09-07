@@ -72,8 +72,9 @@
       line-height: var(--eds-typography-ui-body-sm-line-height-default);
     }
 
-    /* Only helper message changes color when disabled */
-    &[data-disabled='true'] {
+    /* Only helper message changes color when disabled — :has(:disabled) also
+       covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    &:is([data-disabled='true'], :has(:disabled)) {
       --_eds-field-helper-color: var(--eds-color-text-disabled);
     }
   }

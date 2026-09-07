@@ -47,7 +47,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         position="start"
         disabled={disabled}
         className="eds-radio"
-        data-color-appearance={disabled ? 'neutral' : 'accent'}
+        data-color-appearance="accent"
         data-selectable-space="md"
         data-space-proportions="squished"
       >
@@ -61,8 +61,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
     <span
       className="eds-radio"
       data-standalone={true}
-      data-color-appearance={disabled ? 'neutral' : 'accent'}
-      data-disabled={disabled || undefined}
+      data-color-appearance="accent"
     >
       {radioInput}
     </span>

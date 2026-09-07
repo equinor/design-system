@@ -4,6 +4,11 @@
     --_radio-hover-color: var(--eds-color-bg-fill-muted-default);
     --_radio-icon-size: var(--eds-sizing-icon-lg);
 
+    /* Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance (tinted, not grey, under 'accent') and the wrapper
+       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled] */
+    --_radio-disabled-color: var(--eds-color-neutral-7);
+
     /* Touch target: 36px spacious, 28px comfortable */
     --_radio-touch-target: 2.25rem;
 
@@ -48,13 +53,15 @@
           background-color: var(--_radio-hover-color);
         }
 
-        &[data-disabled='true']:hover::before {
+        &:has(.input:disabled):hover::before {
           background-color: transparent;
         }
       }
     }
 
-    &[data-disabled='true'] {
+    /* :has(.input:disabled) instead of a prop-set attribute so the styling
+       also covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    &:has(.input:disabled) {
       cursor: not-allowed;
     }
 
@@ -102,8 +109,8 @@
       fill: var(--_radio-icon-color);
     }
 
-    &[data-disabled='true'] .icon {
-      fill: var(--eds-color-text-disabled);
+    &:has(.input:disabled) .icon {
+      fill: var(--_radio-disabled-color);
     }
 
     /* Icon visibility */
@@ -176,9 +183,9 @@
       cursor: pointer;
     }
 
-    &[data-disabled='true'] label {
+    &:has(.input:disabled) label {
       cursor: not-allowed;
-      color: var(--eds-color-text-disabled);
+      color: var(--_radio-disabled-color);
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -186,7 +193,7 @@
         background-color: var(--_radio-hover-color);
       }
 
-      &[data-disabled='true']:hover {
+      &:has(.input:disabled):hover {
         background-color: transparent;
       }
     }
