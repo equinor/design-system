@@ -59,7 +59,7 @@ describe('Radio (next)', () => {
       expect(radio).toBeInTheDocument()
     })
 
-    it('extends css with custom className and style', () => {
+    it('applies className to the outer wrapper, not the hidden input', () => {
       render(
         <Radio
           label="radio-test"
@@ -68,9 +68,12 @@ describe('Radio (next)', () => {
           style={{ clipPath: 'unset' }}
         />,
       )
-      const radio = screen.getByLabelText('radio-test')
-      expect(radio).toBeInTheDocument()
-      expect(radio).toHaveClass('custom-radio')
+      const input = screen.getByLabelText('radio-test')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-radio')
+      expect(wrapper).toHaveClass('custom-radio')
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-radio')
     })
 
     it('applies data-* attributes to input element', () => {

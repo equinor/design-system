@@ -43,7 +43,7 @@ describe('Checkbox (next)', () => {
       expect(checkbox).toBeInTheDocument()
     })
 
-    it('extends css with custom className and style', () => {
+    it('applies className to the outer wrapper, not the hidden input', () => {
       render(
         <Checkbox
           label="checkbox-test"
@@ -51,9 +51,12 @@ describe('Checkbox (next)', () => {
           style={{ clipPath: 'unset' }}
         />,
       )
-      const checkbox = screen.getByLabelText('checkbox-test')
-      expect(checkbox).toBeInTheDocument()
-      expect(checkbox).toHaveClass('custom-checkbox')
+      const input = screen.getByLabelText('checkbox-test')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-checkbox')
+      expect(wrapper).toHaveClass('custom-checkbox')
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-checkbox')
     })
 
     it('applies data-* attributes to input element', () => {

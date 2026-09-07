@@ -18,6 +18,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indicator,
       helperMessage,
       id: providedId,
+      className,
       ...rest
     },
     ref,
@@ -69,7 +70,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         <Field
           position="start"
           disabled={disabled}
-          className="eds-checkbox"
+          className={['eds-checkbox', className].filter(Boolean).join(' ')}
           data-color-appearance={disabled ? 'neutral' : 'accent'}
           data-selectable-space="md"
           data-space-proportions="squished"
@@ -89,7 +90,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className="eds-checkbox"
+        className={['eds-checkbox', className].filter(Boolean).join(' ')}
         data-standalone={true}
         data-color-appearance={disabled ? 'neutral' : 'accent'}
         data-disabled={disabled || undefined}
