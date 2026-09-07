@@ -9,7 +9,7 @@ import { Icon } from '../Icon'
 import type { RadioProps } from './Radio.types'
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { label, disabled = false, id: providedId, ...rest },
+  { label, disabled = false, id: providedId, className, ...rest },
   ref,
 ) {
   const generatedId = useId()
@@ -46,7 +46,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <Field
         position="start"
         disabled={disabled}
-        className="eds-radio"
+        className={['eds-radio', className].filter(Boolean).join(' ')}
         data-color-appearance={disabled ? 'neutral' : 'accent'}
         data-selectable-space="md"
         data-space-proportions="squished"
@@ -59,7 +59,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
 
   return (
     <span
-      className="eds-radio"
+      className={['eds-radio', className].filter(Boolean).join(' ')}
       data-standalone={true}
       data-color-appearance={disabled ? 'neutral' : 'accent'}
       data-disabled={disabled || undefined}
