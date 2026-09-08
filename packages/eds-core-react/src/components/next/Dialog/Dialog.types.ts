@@ -5,13 +5,17 @@ export type DialogProps = {
    * Controlled open state. When true, the dialog is shown via the native
    * `HTMLDialogElement.showModal()` (modal mode: focus trap + inert background).
    */
-  open: boolean
+  open?: boolean
   /**
    * Called when the dialog requests to close — via Escape key, backdrop click,
    * or the header close button. Update your `open` state in response; the
    * component is fully controlled.
    */
-  onOpenChange: (open: boolean) => void
+  onOpenChange?: (open: boolean) => void
+  children: ReactNode
+}
+
+export type DialogPopupProps = {
   /**
    * Whether to render a visible backdrop (scrim) behind the dialog.
    * Defaults to true. Set to false for transparent backdrops.
