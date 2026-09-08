@@ -3,6 +3,9 @@ title: The palette
 description: How the colour scale is built, why the same token names work in both light and dark, and what each step does.
 ---
 
+import ColourScale from '@site/src/components/ColourScale'
+import DataVizPalette from '@site/src/components/DataVizPalette'
+
 This page is about the layer underneath the tokens. The scale is not exposed, so it is hidden from
 the Figma picker and is not part of the public token set. Read it when you want to know *why* a token
 looks the way it does, or when you are proposing a new one.
@@ -48,36 +51,21 @@ muted-fill roles at those steps need.
 So global ordering is not a rule and the dip is not a bug. The two rules that do hold are narrower:
 
 1. **No two steps within one scale resolve to the same value.**
-2. **Every state ladder progresses visibly in one direction.**
+2. **Every sequence of states progresses visibly in one direction.**
 
 Steps 14 and 15 are excluded from both, as described below.
 :::
 
 ## Which step does what
 
-Read this as the map between the scale and the tokens you actually use.
+Every tone, every step. Reading down a column shows the jump where strokes stop and fills begin;
+reading across a row shows that a step is the same role in every tone.
 
-| Step | Role |
-| --- | --- |
-| 1 | canvas, input fills, and the resting muted fill |
-| 2 | muted fill on hover; the disabled fill |
-| 3 | muted fill when pressed |
-| 4 | muted borders, the disabled border, neutral selected hover |
-| 5 | accent selected; muted border on hover |
-| 6 | *no consumer* |
-| 7 | muted border when pressed; backdrop; tertiary foreground |
-| 8 | links; secondary foreground; accent selected pressed |
-| 9 | **the solid fill**; emphasis borders |
-| 10 | solid fill on hover; `on-default` foregrounds |
-| 11 | solid fill when pressed; interactive foregrounds |
-| 12 | `on-muted` foregrounds; the inverted surface |
-| 13 | primary foreground; the selected indicator |
-| 14 | *no consumer* |
-| 15 | the content plane; `on-emphasis` foregrounds |
+<ColourScale />
 
 ### Steps 14 and 15 are inverse-polarity
 
-They sit outside the ladder by design. Both are **foreground values meant to sit *on* a solid fill**,
+They sit outside the ordering by design. Both are **foreground values meant to sit *on* a solid fill**,
 so their polarity is reversed relative to steps 1–13 and they must be excluded from any ordering
 check.
 
@@ -115,9 +103,7 @@ and the slight blue keeps large dark surfaces feeling like a material.
 `data-visualization.*` is a separate group with its own rules, because chart colour is about telling
 series apart rather than about contrast against a background.
 
-- `cat.1` … `cat.10`, five steps each: categorical hues
-- `seq.1` … `seq.7`: a sequential ramp for magnitude
-- `div.1` … `div.9`: a diverging ramp for values around a midpoint
+<DataVizPalette />
 
 These are the only values in the set that sit outside the OKLCH generator, and no EDS component binds
 them. They are for you to apply in charts.

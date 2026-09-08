@@ -74,7 +74,7 @@ const PAIRINGS: Pairing[] = [
     border: 'border.interactive.{tone}.muted.default',
   },
   {
-    title: 'Static, emphasis',
+    title: 'Non-interactive, emphasis',
     note: 'Solid fills that do not respond to input, such as a status pip.',
     fill: 'background.non-interactive.{tone}.emphasis',
     text: 'text.on-emphasis.{tone}',
@@ -82,15 +82,15 @@ const PAIRINGS: Pairing[] = [
     border: 'border.non-interactive.{tone}.emphasis',
   },
   {
-    title: 'Static, default',
-    note: 'The middle strength for a static tinted element.',
+    title: 'Non-interactive, default',
+    note: 'The middle strength for a non-interactive tinted element.',
     fill: 'background.non-interactive.{tone}.default',
     text: 'text.on-default.{tone}',
     icon: 'icon.on-default.{tone}',
     border: 'border.non-interactive.{tone}.default',
   },
   {
-    title: 'Static, muted',
+    title: 'Non-interactive, muted',
     note: 'The faintest tint that still reads as tinted, such as a banner.',
     fill: 'background.non-interactive.{tone}.muted',
     text: 'text.on-muted.{tone}',
@@ -150,10 +150,10 @@ function Specimen({
         background: cssVar(fill),
         border: `2px solid ${border ? cssVar(border) : 'transparent'}`,
         borderRadius: '6px',
-        padding: '0.875rem 1rem',
+        padding: '1.125rem 1.25rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.5rem',
+        gap: '0.625rem',
         minWidth: 0,
       }}
     >
@@ -237,8 +237,8 @@ function Group({ pairing }: { pairing: Pairing }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
-          gap: '0.75rem',
+          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+          gap: '1rem',
         }}
       >
         {tones.map((tone) => (

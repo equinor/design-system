@@ -1,0 +1,78 @@
+---
+title: Migrating to the redefined colours
+sidebar_label: Migration
+description: Moving to the redefined colour tokens from EDS 1.x or from the 2.0.0-beta semantic and dynamic layers.
+---
+
+Two generations of EDS colour are in use, and each needs a different route to the redefined tokens.
+Neither is a find-and-replace, so this page starts with what changed and why.
+
+The most useful thing to know before you start: **the redefined scale is contrast-driven, not
+lightness-driven.** Picking the closest hex to what you have today is the wrong mental model and will
+give you a palette that fails contrast in one scheme or the other. Choose by role instead, and let
+[the pairings](./getting_started.mdx#foreground-pairing) do the rest.
+
+Work is tracked in
+[equinor/design-system#5399](https://github.com/equinor/design-system/issues/5399).
+
+## Coming from EDS 1.x
+
+1.x named colours by **component role**, in a flat set of hand-picked hex values:
+`colors.interactive.primary__resting`, `colors.text.static_icons__default`,
+`colors.ui.background__light`. There were 75 colour tokens in five groups, and states were suffixes
+(`__resting`, `__hover`, `__selected`).
+
+The redefined set names colours by **surface, behaviour, tone, level and state**, and there are
+considerably more of them. That means a 1.x token usually has several possible answers rather than
+one, and which is right depends on what you were colouring. A single `primary__resting` might become
+a button fill, a link, a selected row or an icon, and each takes a different token.
+
+So the route from 1.x is to work from **what you were building**, not from the old name.
+[Getting started](./getting_started.mdx) has worked examples for the common cases, and
+[Introduction](./intro.mdx) explains how to read a name so you can derive the rest.
+
+Two groups have no direct route:
+
+- **`infographic`** becomes `data-visualization.*`, which is a different palette rather than a
+  rename. Re-pick your series colours; [the palette](./palette.mdx#data-visualisation) describes what
+  is available.
+- **`logo`** has no equivalent in the colour scale.
+
+## Coming from 2.0.0-beta
+
+The beta shares the redefined set's vocabulary, so this route is closer to a translation. `emphasis`
+and `muted` already exist, tones already exist, and fill, border and text are already separated. What
+changes is the shape of the names and one removed feature.
+
+### Dynamic colour is removed
+
+The `Appearance` collection and appearance-switching at the semantic-colour level are gone. There is
+one approach now: semantic colour, where the tone is part of the token name.
+
+If you relied on a generic role token resolving to a different tone depending on context, name the
+tone explicitly instead. If you have `data-color-appearance` in your markup, or appearance modes in
+your Figma file, those come out.
+
+### Names are reordered
+
+The beta put the tone before the surface word and used `fill`. The redefined set puts the surface
+first and drops `fill`:
+
+```
+--eds-color-bg-accent-fill-emphasis-hover        beta
+--eds-background-interactive-accent-emphasis-hover   redefined
+```
+
+The interactive and non-interactive split is also new, and it is the part worth reading about before
+you start. [Introduction](./intro.mdx#2-interactive-can-the-user-act-on-it) covers it.
+
+### `active` becomes `pressed`
+
+The state word changed, because `active` was read as "currently on" about as often as "being
+pressed".
+
+## Checking your work
+
+APCA contrast against `background.surface` is the acceptance criterion, and the pairings are built to
+meet it. If you use a fill with the foregrounds it is specified for, contrast is already handled. See
+[Accessibility](./intro.mdx#accessibility-is-built-in).

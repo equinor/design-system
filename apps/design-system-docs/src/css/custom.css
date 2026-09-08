@@ -11,6 +11,12 @@
  * ====================================== */
 /* Equinor brand font */
 @import '@equinor/eds-tokens/css/variables';
+/* The 3.x Tokens Studio bundle, which defines the semantic layer the colour docs document
+ * (--eds-background-*, --eds-text-on-*, …). The package exposes it as ./next/css/* only on the
+ * beta dist-tag, injected at publish time per ADR-0009, so a workspace app cannot import it by
+ * specifier. Relative path until that output moves onto the final specifiers.
+ * Additive: the 2.x bundle above stays, because the rest of the site still reads --eds-color-*. */
+@import '../../../../packages/eds-tokens/src/tokens/css/variables.css';
 @import url(https://cdn.eds.equinor.com/font/equinor-font.css);
 /* TODO: This needs to be imported from Equinor CDN later */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');

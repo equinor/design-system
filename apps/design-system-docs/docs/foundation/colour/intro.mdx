@@ -3,6 +3,8 @@ title: Introduction
 description: How EDS colour works. Semantic names, six tones, and one set of tokens that is correct in both light and dark.
 ---
 
+import { StateLadder, DefaultTwoWays } from '@site/src/components/ColourStates'
+
 In EDS you describe what you are colouring, and the system supplies the value. It will be correct in
 both light and dark, and the contrast has already been checked for you.
 
@@ -46,7 +48,7 @@ the same size to read as equally solid.
 | Segment | Meaning |
 | --- | --- |
 | `interactive` | responds to input, so it has `hover` and `pressed` values |
-| `non-interactive` | static. One value, no states |
+| `non-interactive` | does not respond to input. One value, no states |
 
 This is the distinction that most often trips people up, so it is worth a moment. A tinted banner and
 a tinted button can look identical today, but they should not share a token. The button needs hover
@@ -86,7 +88,7 @@ The two branches have different levels, so read the one that matches your answer
 | Level | Looks like | Foreground on top |
 | --- | --- | --- |
 | `muted` | the faintest tint that still reads as tinted | `text.on-muted.<tone>` |
-| `default` | the ordinary strength for a static tinted element | `text.on-default.<tone>` |
+| `default` | the ordinary strength for a non-interactive tinted element | `text.on-default.<tone>` |
 | `emphasis` | a solid, saturated fill | `text.on-emphasis.<tone>` |
 
 Please treat the foreground column as part of the choice rather than a suggestion, since it is what
@@ -96,7 +98,7 @@ set.
 To choose between the levels: **`muted` suits anything that carries a tone but is not what you want
 looked at first**, such as banners, tags and tinted table rows. Reach for `emphasis` when the element
 *is* the point, like a primary action or a filled status pip. `default` sits between the two, and
-exists only on the non-interactive side where a static element needs a middle strength and has no
+exists only on the non-interactive side, where an element needs a middle strength and has no
 states to spend the distinction on.
 
 :::warning `default` means two different things
@@ -112,6 +114,10 @@ level.** Interactive tokens then add a state on the end, so an interactive token
 a state and a non-interactive one never does.
 :::
 
+The same word, on both axes:
+
+<DefaultTwoWays />
+
 ### 5. State
 
 Interactive tokens carry `default`, `hover` and `pressed` as the last segment, so the accent button's
@@ -121,6 +127,8 @@ their level, giving `background.interactive.accent.selected.hover` and its sibli
 Every state is a real, named colour. We do not use an opacity overlay or `filter: brightness()`,
 because those break against tinted backgrounds, invert wrongly in dark mode, and leave the hover value
 without a name anyone can refer to.
+
+<StateLadder />
 
 ## Colours that sit outside the tone matrix
 

@@ -112,6 +112,7 @@ const sidebars: SidebarsConfig = {
         'foundation/colour/getting_started',
         'foundation/colour/palette',
         'foundation/colour/reference',
+        'foundation/colour/migration',
       ],
     },
     {

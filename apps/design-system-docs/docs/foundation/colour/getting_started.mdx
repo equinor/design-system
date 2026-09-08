@@ -5,8 +5,8 @@ description: Picking colour tokens. Pairing rules, worked examples, and the mist
 
 import ColourPairing from '@site/src/components/ColourPairing'
 
-Colour in EDS is **static and semantic**: the tone is part of the token name, and you bind to it
-directly. There is one approach, in both design and code.
+Colour in EDS is **semantic**: the tone is part of the token name, and you bind to it directly.
+There is one approach, in both design and code.
 
 ```css
 .button--primary {
@@ -103,7 +103,7 @@ The same shape with `danger` in place of `accent`, with one thing to notice:
 
 ### A status banner
 
-A banner is static. It gets a tint and a border, and **no hover values**:
+A banner is non-interactive. It gets a tint and a border, and **no hover values**:
 
 ```css
 .banner--warning {
@@ -152,7 +152,7 @@ One token, every component, on every fill:
 
 :::info **Do**
 
-- Pick by **behaviour**. A static tint and an interactive tint use different tokens even when they
+- Pick by **behaviour**. A non-interactive tint and an interactive tint use different tokens even when they
   look identical today
 - Use the named `hover` and `pressed` tokens
 - Let the scheme attribute do the work
@@ -181,9 +181,11 @@ One token, every component, on every fill:
 4. **Data-visualisation tokens in UI chrome.** `data-visualization.*` is tuned for telling series
    apart, not for contrast against a surface.
 
-{/* STUB - the "If you know the earlier vocabulary" section was removed here on 2026-09-08.
-    It belongs in a migration guide, not on this page. Two guides are planned, 1.x to 3.x and
-    2.x to 3.x; link this section's replacement from here once one of them exists. */}
+## Coming from an earlier version
+
+If you are moving an existing app or Figma file across, the state and strength names have changed and
+some tokens have no direct equivalent. [Migration](./migration.mdx) covers both routes, from EDS 1.x
+and from 2.0.0-beta.
 
 ## Switching colour scheme
 

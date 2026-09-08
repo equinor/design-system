@@ -5,11 +5,11 @@ description: Every colour token, with its CSS custom property and its resolved v
 ---
 
 A complete list. If you are choosing a colour rather than looking one up, start with
-[Getting started](./getting_started.mdx) — this page is for checking a name or a value.
+[Getting started](./getting_started.mdx). This page is for checking a name or a value.
 
 :::info Generated page
 These tables are generated from the token source. If a value here disagrees with what you see in
-Figma or in the browser, the page is stale — say so rather than working around it.
+Figma or in the browser, the page is stale, so please say so rather than working around it.
 :::
 
 {/* GENERATED:BEGIN — regenerate with scripts/port-colour-docs.mjs. Do not edit by hand. */}
@@ -18,7 +18,7 @@ Figma or in the browser, the page is stale — say so rather than working around
 not vary with density, only with colour scheme.
 
 The **Token** column is the name you pick in Figma. The **CSS custom property** column is the same
-token's name in code — both come from the token definition itself, so they cannot drift apart.
+token's name in code. Both come from the token definition itself, so they cannot drift apart.
 
 ## Surfaces and planes
 
@@ -89,9 +89,9 @@ Fills for anything the user can act on. Every one carries `default`, `hover` and
 | `background.interactive.warning.muted.hover` | `--eds-background-interactive-warning-muted-hover` | `oklch(0.94 0.0388 58.74)` | `oklch(0.226 0.0099 58.74)` |
 | `background.interactive.warning.muted.pressed` | `--eds-background-interactive-warning-muted-pressed` | `oklch(0.91 0.0495 58.74)` | `oklch(0.47 0.085 58.74)` |
 
-## Static backgrounds
+## Non-interactive backgrounds
 
-Fills for things that convey state but cannot be clicked — banners, badges, status chips. No hover values, deliberately.
+Fills for things that convey state but cannot be clicked: banners, badges, status chips. No hover values, deliberately.
 
 18 tokens.
 
@@ -167,9 +167,9 @@ Strokes on actionable elements, plus the focus ring and the selected indicator.
 | `border.interactive.warning.muted.hover` | `--eds-border-interactive-warning-muted-hover` | `oklch(0.82 0.0899 58.74)` | `oklch(0.45 0.0754 58.74)` |
 | `border.interactive.warning.muted.pressed` | `--eds-border-interactive-warning-muted-pressed` | `oklch(0.72 0.1376 58.74)` | `oklch(0.61 0.1488 58.74)` |
 
-## Static borders
+## Non-interactive borders
 
-Dividers, outlines and containers. `muted` / `default` / `emphasis` is a loudness ladder, not a state ladder.
+Dividers, outlines and containers. `muted` / `default` / `emphasis` is a scale of prominence, not a set of states.
 
 18 tokens.
 
