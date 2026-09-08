@@ -69,6 +69,16 @@ pnpm lint:docs
 
 Run ESLint to check for code quality issues in the documentation site.
 
+### Colour docs
+
+```bash
+pnpm generate:colour-reference
+pnpm check:colour-docs
+```
+
+Regenerate the colour token reference from `packages/eds-tokens`, and verify the colour pages and
+components against it. See [Colour docs generation](#colour-docs-generation).
+
 ## Project Structure
 
 The documentation site includes:
@@ -94,6 +104,62 @@ When creating content for the documentation site, choose the appropriate tone gu
 * [Friendly Professional](./docs/tone-guide/friendly-professional.md) -- Default for most documentation
 * [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) -- Concise but approachable
 * [Minimalist](./docs/tone-guide/minimalist.md) -- Essential information only
+
+## Colour docs generation
+
+The colour foundation docs are partly generated. Two scripts in `scripts/` keep them true to the
+token source, and both read only from `packages/eds-tokens/src/tokens` - no external service, no
+authentication, no separate export step.
+
+```bash
+pnpm generate:colour-reference   # rewrite the reference table
+pnpm check:colour-docs           # verify the pages and components against the tokens
+```
+
+Run the generator after any token release, and the checker before opening a PR that touches the
+colour docs.
+
+### What is generated, and what is not
+
+| | |
+|---|---|
+| **Generated** | `docs/foundation/colour/reference.mdx`, the region between the `GENERATED` markers: 263 tokens in 9 groups, each with its CSS custom property and its resolved light and dark values |
+| **Hand-written** | everything else. All prose on `intro`, `getting_started`, `palette` and `migration`, and the frontmatter and introduction above the markers on `reference` |
+
+Do not edit inside the markers. The next run overwrites it.
+
+### The components sit in between
+
+`ColourPairing`, `ColourStates`, `ColourScale` and `DataVizPalette` never hard-code a colour. They
+emit `var(--eds-*)` and the browser resolves it, so a token value change appears without regenerating
+anything.
+
+What they do hold as literals is **structure**: which pairings exist, the role of each of the 15
+steps, and how many data-visualisation ramps there are. Those cannot be read from a `var()`, so
+`check:colour-docs` asserts them against the token source instead. If a seventh tone were added, the
+pages would otherwise quietly render an incomplete picture.
+
+### Where the values come from
+
+| Source | Used for |
+|---|---|
+| `dtcg/semantic/default.json` | token names, and each token's own CSS custom property, from `$extensions["com.figma"].codeSyntax.WEB` |
+| `css/variables.css` | the resolved value in each colour scheme |
+
+The CSS names are not derived from the Figma names by a transform. Both come from one definition, so
+they cannot drift apart. If you need a value, look it up rather than converting one yourself.
+
+### What the checker catches
+
+Docusaurus catches none of this: a mistyped custom property renders as an unstyled element, and a
+stale count renders as a smaller grid. Neither raises an error.
+
+- a dotted token name in prose that does not exist
+- a `--eds-*` property that does not exist, in prose or in a component
+- a structural count in a component that no longer matches the token source
+
+2.x names are accepted where the migration page quotes them deliberately, read from the legacy build
+rather than allowed by prefix, so a typo in a legacy name still fails.
 
 ## Design token CSS
 
