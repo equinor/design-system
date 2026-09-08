@@ -2,7 +2,7 @@
   --eds-density-corner-radius-none: var(--eds-primitives-spacing-0);
   --eds-density-corner-radius-pill: 9999px;
   --eds-density-corner-radius-rounded: var(--eds-primitives-spacing-25);
-  --eds-density-corner-radius-rounded-outer: var(--eds-primitives-spacing-37);
+  --eds-density-corner-radius-rounded-outer: calc(var(--eds-density-corner-radius-rounded) + var(--eds-primitives-spacing-6));
   --eds-density-spacing-2xl: var(--eds-primitives-spacing-175);
   --eds-density-spacing-2xs: var(--eds-primitives-spacing-37);
   --eds-density-spacing-3xl: var(--eds-primitives-spacing-200);
@@ -16,10 +16,10 @@
   --eds-density-spacing-xs: var(--eds-primitives-spacing-50);
   --eds-density-typography-header-2xl-font-size: var(--eds-primitives-type-scale-equinor-700-font-size);
   --eds-density-typography-header-2xl-line-height: var(--eds-primitives-lineheight-scale-700-default);
-  --eds-density-typography-header-3xl-font-size: var(--eds-primitives-type-scale-equinor-700-font-size);
+  --eds-density-typography-header-3xl-font-size: var(--eds-primitives-type-scale-equinor-800-font-size);
   --eds-density-typography-header-3xl-line-height: var(--eds-primitives-lineheight-scale-800-default);
   --eds-density-typography-header-4xl-font-size: var(--eds-primitives-type-scale-equinor-900-font-size);
-  --eds-density-typography-header-4xl-line-height: var(--eds-primitives-lineheight-scale-800-default);
+  --eds-density-typography-header-4xl-line-height: var(--eds-primitives-lineheight-scale-1000-default);
   --eds-density-typography-header-lg-font-size: var(--eds-primitives-type-scale-equinor-500-font-size);
   --eds-density-typography-header-lg-line-height: var(--eds-primitives-lineheight-scale-500-default);
   --eds-density-typography-header-md-font-size: var(--eds-primitives-type-scale-equinor-400-font-size);

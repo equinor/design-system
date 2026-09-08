@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
 WORKDIR /app
 
 # Install pnpm globally
-RUN npm install -g pnpm@10.15.0
+RUN npm install -g pnpm@10.28.0
 
 # Copy everything else
 COPY . ./

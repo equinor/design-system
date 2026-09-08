@@ -181,78 +181,6 @@
       }
     }
   },
-  "bg-backdrop": {
-    "$value": "{light.gray.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-backdrop)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "bg-disabled": {
-    "$value": "{neutral.3}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-disabled)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "bg-floating": {
-    "$value": "{light.gray.2}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-floating)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "bg-input": {
-    "$value": "{light.gray.1}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-bg-input)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "border-disabled": {
-    "$value": "{neutral.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-border-disabled)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "border-focus": {
-    "$value": "{light.blue.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-border-focus)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
   "danger": {
     "1": {
       "$value": "{light.red.1}",
@@ -1255,6 +1183,18 @@
       }
     }
   },
+  "elevation": {
+    "ambient": {
+      "$value": "rgba(0, 0, 0, 0.12)",
+      "$type": "color",
+      "$description": "Ambient (diffuse) shadow colour for the light scheme. From Figma '🌗 Color scheme/elevation-ambient'."
+    },
+    "key": {
+      "$value": "rgba(0, 0, 0, 0.2)",
+      "$type": "color",
+      "$description": "Key (direct) shadow colour for the light scheme. From Figma '🌗 Color scheme/elevation-key'."
+    }
+  },
   "info": {
     "1": {
       "$value": "{light.blue.1}",
@@ -1798,30 +1738,6 @@
           },
           "hiddenFromPublishing": true
         }
-      }
-    }
-  },
-  "text-disabled": {
-    "$value": "{neutral.7}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-text-disabled)"
-        },
-        "hiddenFromPublishing": true
-      }
-    }
-  },
-  "text-link": {
-    "$value": "{light.blue.8}",
-    "$type": "color",
-    "$extensions": {
-      "com.figma": {
-        "codeSyntax": {
-          "WEB": "var(--eds-text-link)"
-        },
-        "hiddenFromPublishing": true
       }
     }
   },

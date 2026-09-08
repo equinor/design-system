@@ -1,0 +1,22 @@
+:root {
+  --eds-shadow-high-ambient-blur: 16px;
+  --eds-shadow-high-ambient-color: var(--eds-elevation-ambient);
+  --eds-shadow-high-ambient-spread: 6px;
+  --eds-shadow-high-ambient-x: 0px;
+  --eds-shadow-high-ambient-y: 12px;
+  --eds-shadow-high-key-blur: 12px;
+  --eds-shadow-high-key-color: var(--eds-elevation-key);
+  --eds-shadow-high-key-spread: 0px;
+  --eds-shadow-high-key-x: 0px;
+  --eds-shadow-high-key-y: 4px;
+  --eds-shadow-low-ambient-blur: 8px;
+  --eds-shadow-low-ambient-color: var(--eds-elevation-ambient);
+  --eds-shadow-low-ambient-spread: 3px;
+  --eds-shadow-low-ambient-x: 0px;
+  --eds-shadow-low-ambient-y: 4px;
+  --eds-shadow-low-key-blur: 8px;
+  --eds-shadow-low-key-color: var(--eds-elevation-key);
+  --eds-shadow-low-key-spread: 0px;
+  --eds-shadow-low-key-x: 0px;
+  --eds-shadow-low-key-y: 1px;
+}

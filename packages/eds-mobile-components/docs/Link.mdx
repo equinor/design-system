@@ -1,0 +1,82 @@
+## Features
+
+- Two variants: `standalone` (default) for CTAs and navigation links with a proper touch target, and `inline` for embedding inside a sentence alongside other text.
+- Five sizes that follow the Typography UI scale, allowing a link to match the text it sits alongside.
+- Optional external link icon via the `external` prop.
+- Visited state via the `visited` prop, which the consumer tracks after the link is pressed.
+
+## Usage
+
+```tsx
+import { Link } from '@equinor/eds-mobile-components'
+
+<Link onPress={handlePress}>Open documentation</Link>
+```
+
+## Examples
+
+### External link
+
+Use `external` to indicate the link opens outside the app. An icon is shown alongside the text.
+
+```tsx
+<Link onPress={handlePress} external>View on GitHub</Link>
+```
+
+### Sizes
+
+Size matches the Typography UI scale. Use this to align a link with surrounding text.
+
+```tsx
+<Link onPress={handlePress} size="xs">Extra small</Link>
+<Link onPress={handlePress} size="sm">Small</Link>
+<Link onPress={handlePress} size="md">Medium (default)</Link>
+<Link onPress={handlePress} size="lg">Large</Link>
+<Link onPress={handlePress} size="xl">Extra large</Link>
+```
+
+### Visited
+
+The consumer is responsible for tracking visited state and passing it as a prop.
+
+```tsx
+const [visited, setVisited] = useState(false)
+
+<Link onPress={() => setVisited(true)} visited={visited}>
+    Open documentation
+</Link>
+```
+
+### Inline usage
+
+Use `variant="inline"` to embed a link inside a sentence. It renders as a `Text` element so it sits naturally alongside other text.
+
+```tsx
+<Typography>
+    Read the{" "}
+    <Link variant="inline" size="lg" onPress={handlePress}>
+        full documentation
+    </Link>
+    {" "}for more details.
+</Typography>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `ReactNode` | — | The link label (required) |
+| `onPress` | `() => void` | — | Called when the link is pressed |
+| `variant` | `'standalone' \| 'inline'` | `'standalone'` | `standalone` renders as a `Pressable` with a proper touch target; `inline` renders as `Text` inside a sentence |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Font size, matching the Typography UI scale |
+| `external` | `boolean` | `false` | Shows an external link icon alongside the text |
+| `visited` | `boolean` | `false` | Marks the link as previously visited. The consumer is responsible for tracking this state. |
+
+## Accessibility
+
+- Uses `accessibilityRole="link"` automatically on both variants.
+- VoiceOver builds the accessible name from the text content of `children`. If `children` contains no readable text, provide an explicit `accessibilityLabel`.
+
+## Related components
+
+- [`Typography`](/components/typography) — for body text that surrounds inline links.

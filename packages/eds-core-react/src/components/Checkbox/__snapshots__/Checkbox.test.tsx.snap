@@ -13,6 +13,14 @@ exports[`Checkbox Matches snapshot 1`] = `
   cursor: pointer;
 }
 
+.c2:disabled {
+  cursor: not-allowed;
+}
+
+.c2:disabled~svg {
+  fill: var(--eds_interactive__disabled__text, rgba(190, 190, 190, 1));
+}
+
 .c2:focus {
   outline: none;
 }
@@ -76,6 +84,10 @@ exports[`Checkbox Matches snapshot 1`] = `
   cursor: pointer;
 }
 
+.c0:has(input:disabled) {
+  cursor: not-allowed;
+}
+
 .c4 {
   margin: 0;
   color: var(--eds_navigation__menu_title_color, rgba(61, 61, 61, 1));
@@ -94,6 +106,10 @@ exports[`Checkbox Matches snapshot 1`] = `
 
   .c1:hover::before {
     background-color: var(--eds_interactive_primary__hover_alt, rgba(222, 237, 238, 1));
+  }
+
+  .c1:hover:has(input:disabled)::before {
+    background-color: transparent;
   }
 }
 
