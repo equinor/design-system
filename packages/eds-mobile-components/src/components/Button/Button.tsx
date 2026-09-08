@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Pressable, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
-import { EDSStyleSheet } from "../../styling";
+import { EDSStyleSheet, mergePressableStyle } from "../../styling";
 import { IconName } from "../Icon";
 import { Typography } from "../Typography";
 import { ButtonBackground } from "./ButtonBackground";
@@ -44,6 +44,7 @@ export const Button: FC<ButtonProps> = ({
     trailingIcon,
     ref,
     disabled = false,
+    style,
     ...pressableProps
 }) => {
     const styles = useStyles(tokenStyles, {
@@ -56,10 +57,10 @@ export const Button: FC<ButtonProps> = ({
     return (
         <Pressable
             ref={ref}
-            style={styles.container}
             accessibilityRole={"button"}
             disabled={disabled}
             {...pressableProps}
+            style={mergePressableStyle(styles.container, style)}
             accessibilityState={{
                 ...pressableProps.accessibilityState,
                 disabled: disabled ?? false,

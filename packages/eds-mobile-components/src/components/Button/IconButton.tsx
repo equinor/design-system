@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Pressable, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
-import { EDSStyleSheet } from "../../styling";
+import { EDSStyleSheet, mergePressableStyle } from "../../styling";
 import { IconName } from "../Icon";
 import { ButtonBackground } from "./ButtonBackground";
 import { ButtonIcon } from "./ButtonIcon";
@@ -32,6 +32,7 @@ export const IconButton: FC<IconButtonProps> = ({
     round = false,
     disabled,
     ref,
+    style,
     ...pressableProps
 }) => {
     const styles = useStyles(tokenStyles, { variant, tone, size, round });
@@ -39,10 +40,10 @@ export const IconButton: FC<IconButtonProps> = ({
     return (
         <Pressable
             ref={ref}
-            style={styles.container}
             accessibilityRole={"button"}
             disabled={disabled}
             {...pressableProps}
+            style={mergePressableStyle(styles.container, style)}
             accessibilityState={{
                 ...pressableProps.accessibilityState,
                 disabled: disabled ?? false,
