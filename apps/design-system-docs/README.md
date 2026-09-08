@@ -95,6 +95,34 @@ When creating content for the documentation site, choose the appropriate tone gu
 * [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) -- Concise but approachable
 * [Minimalist](./docs/tone-guide/minimalist.md) -- Essential information only
 
+## Design token CSS
+
+`src/css/custom.css` imports **two** token bundles, on purpose:
+
+```css
+@import '@equinor/eds-tokens/css/variables';                        /* 2.x */
+@import '../../../../packages/eds-tokens/src/tokens/css/variables.css';  /* 3.x */
+```
+
+The first is the legacy build (603 variables, `--eds-color-*`). Most of the site still reads those
+names, so it stays.
+
+The second is the Tokens Studio output (975 variables, `--eds-background-*`, `--eds-text-on-*`, …),
+which the colour foundation docs document and which the colour components paint with. Without it,
+every `var(--eds-background-*)` on the site resolves to nothing.
+
+**Why the relative path.** The package exposes the Tokens Studio output as `./next/css/*`, but that
+export is injected at publish time and only on the beta dist-tag, per
+[ADR-0009](../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md). A workspace
+app resolves against the checked-in `package.json`, where the specifier does not exist, so it cannot
+be imported by name.
+
+**When to remove it.** ADR-0009's exit plan is that once the last `/next` component has migrated, a
+beta release drops the legacy `build/` output and moves the Tokens Studio output onto the final
+specifiers. At that point both imports collapse into a single
+`@import '@equinor/eds-tokens/css/variables';` and the relative path goes. Until then it will break
+if the tokens package moves that file, so it is worth checking after any change to the tokens build.
+
 ## Technology Stack
 
 The documentation site uses:
