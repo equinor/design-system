@@ -123,6 +123,8 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   const pathProps = {
     $height: icon.height ? parseInt(icon.height) : size,
     $size: size || parseInt(icon.height),
+    stroke: icon.stroke,
+    strokeWidth: icon.strokeWidth,
   }
 
   // Accessibility

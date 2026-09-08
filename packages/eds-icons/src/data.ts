@@ -1,5 +1,15 @@
 import type { IconData } from './types'
 
+export const classification: IconData = {
+  name: 'classification',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M3 5L12 1L21 5V11C21 16.55 17.16 21.74 12 23C6.84 21.74 3 16.55 3 11V5Z',
+  stroke: '#3D3D3D',
+  strokeWidth: '2',
+}
+
 export const open_side_sheet: IconData = {
   name: 'open_side_sheet',
   prefix: 'eds',
