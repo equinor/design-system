@@ -301,8 +301,8 @@ import '@equinor/eds-core-react/next/index.css'
 
 #### Important Notes
 
-- **Beta components are under active development** and may have breaking changes
-- **Not production-ready** until they graduate to the stable package
+- **Safe to adopt alongside EDS 1.0** - the API may still change in small ways before the stable 3.0 release; every change is listed in the beta changelog
+- **EDS 1.0 stays supported** until EDS 2.0 ships as the stable 3.0 release, and mixing EDS 1.0 and `/next` components in one application is expected
 - **Visible in Storybook** - browse components at [storybook.eds.equinor.com](https://storybook.eds.equinor.com/) under "EDS 2.0"
 - **Requires beta installation** - viewing in Storybook doesn't enable usage, you must install `@beta`
 - **Separate changelog** - see `src/components/next/CHANGELOG.md` for beta changes

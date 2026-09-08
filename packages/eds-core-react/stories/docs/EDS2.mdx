@@ -20,14 +20,14 @@ EDS 2.0 is a complete redesign of our component library, bringing:
 - 🔧 **Refined APIs** - Cleaner, more intuitive component interfaces
 
 <br />
-## Current Status: Beta
+## What Beta Means
 
-All components in the **"EDS 2.0"** section are currently in **beta testing**. This means:
+All components in the **"EDS 2.0"** section are in **beta**. Beta is not a warning against using them:
 
-- ⚠️ **Breaking changes may occur** - APIs are not yet finalized
-- 🧪 **Testing phase** - We're gathering feedback and iterating
-- 📝 **Documentation evolving** - Stories and examples are being refined
-- 🎨 **Design alignment ongoing** - Ensuring perfect match with Figma
+- ✅ **Safe to adopt** - The components are tested and ready for production use. The API may still change in small ways before the stable release; every change is listed in the [beta changelog](https://github.com/equinor/design-system/blob/main/packages/eds-core-react/src/components/next/CHANGELOG.md)
+- 🤝 **EDS 1.0 is still supported** - The current components in `@equinor/eds-core-react` are maintained until EDS 2.0 ships as the stable 3.0 release. There is no need to stop using them
+- 🧩 **Mixing is expected** - Use EDS 1.0 and `/next` components side by side in the same application, and adopt the new ones as they fit your work
+- 🛠️ **Tooling for the 3.0 migration** - We plan to provide codemods and AI-assisted rewrites so that moving from EDS 1.0 to 3.0 is not a manual job
 
 <br />
 ## How to Use Beta Components
@@ -112,6 +112,8 @@ import { Button } from '@equinor/eds-core-react'
 ```
 
 That's it! No component name changes, just update the import path.
+
+Applications still on EDS 1.0 components get a migration guide with the 3.0 release, and we plan to ship codemods and AI-assisted rewrites so the move is not a manual job. Until then, EDS 1.0 stays supported and you can adopt `/next` components at your own pace.
 
 <br />
 ## Provide Feedback

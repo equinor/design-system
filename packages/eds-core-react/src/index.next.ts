@@ -1,8 +1,9 @@
 /**
  * EDS 2.0 Beta Components
  *
- * These components are experimental and under active development.
- * Breaking changes may occur between beta releases.
+ * These components are safe to adopt alongside EDS 1.0. The API may still
+ * change in small ways between beta releases before the stable 3.0 release;
+ * see src/components/next/CHANGELOG.md for every change.
  *
  * Install: npm install @equinor/eds-core-react@beta
  *
