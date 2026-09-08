@@ -1,11 +1,12 @@
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import type { CSSProperties, InputHTMLAttributes, ReactNode } from 'react'
 
 export type SwitchProps = {
   /**
    * Visible label for the switch (required).
    */
   label: ReactNode
-  /** Custom class name, applied to the wrapping Field element (unlike
-   * Checkbox/Radio, which apply it to the native input element) */
+  /** CSS class names applied to the outer wrapper element, not the hidden input */
   className?: string
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>
+  /** Inline styles applied to the outer wrapper element, not the hidden input */
+  style?: CSSProperties
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'className' | 'style'>

@@ -40,19 +40,20 @@ describe('Switch (next)', () => {
       expect(screen.getByRole('switch')).toBeInTheDocument()
     })
 
-    it('can extend the css for the component', () => {
+    it('applies className and style to the outer wrapper, not the hidden input', () => {
       render(
         <Switch
           label="switch-test"
           className="custom-switch"
-          style={{ clipPath: 'unset' }}
+          style={{ marginTop: '8px' }}
         />,
       )
-      const switchEl = screen.getByLabelText('switch-test')
-      expect(switchEl).toBeInTheDocument()
+      const input = screen.getByLabelText('switch-test')
       // eslint-disable-next-line testing-library/no-node-access
-      const wrapper = switchEl.closest('.eds-switch')
+      const wrapper = input.closest('.eds-switch')
       expect(wrapper).toHaveClass('custom-switch')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+      expect(input).not.toHaveClass('custom-switch')
     })
   })
 
