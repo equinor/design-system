@@ -9,7 +9,7 @@ const meta: Meta<typeof Badge> = {
     docs: {
       description: {
         component: `
-⚠️ **Beta Component** — this component is under active development.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before the stable 3.0 release. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
 \`\`\`tsx
 import { Badge } from '@equinor/eds-core-react/next'

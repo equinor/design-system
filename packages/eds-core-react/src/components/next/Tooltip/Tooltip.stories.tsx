@@ -11,7 +11,7 @@ const meta: Meta<typeof Tooltip> = {
     docs: {
       description: {
         component: `
-⚠️ **Beta Component** - This component is under active development.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before the stable 3.0 release. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
 Uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) (\`popover="hint"\`)
 and [CSS Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning)

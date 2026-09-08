@@ -259,7 +259,7 @@ const meta: Meta<typeof Autocomplete> = {
     docs: {
       description: {
         component: `
-⚠️ **Beta Component** - This component is under active development.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before the stable 3.0 release. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
 An Autocomplete input that filters a list of options as the user types. Supports string arrays, object arrays, custom option rendering, and async search.
 
