@@ -23,6 +23,22 @@ const meta: Meta<typeof Switch> = {
       control: 'boolean',
       description: 'Checked state (controlled)',
     },
+    className: {
+      control: 'text',
+      description:
+        'Additional CSS class names applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
+    },
   },
   args: {
     label: 'Enable notifications',
