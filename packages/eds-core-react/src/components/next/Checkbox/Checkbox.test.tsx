@@ -44,17 +44,28 @@ describe('Checkbox (next)', () => {
     })
 
     it('applies className to the outer wrapper, not the hidden input', () => {
-      render(
-        <Checkbox
-          label="checkbox-test"
-          className="custom-checkbox"
-          style={{ clipPath: 'unset' }}
-        />,
-      )
+      render(<Checkbox label="checkbox-test" className="custom-checkbox" />)
       const input = screen.getByLabelText('checkbox-test')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = input.closest('.eds-checkbox')
       expect(wrapper).toHaveClass('custom-checkbox')
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-checkbox')
+    })
+
+    it('applies className and style to the wrapper when standalone (no label)', () => {
+      render(
+        <Checkbox
+          aria-label="standalone"
+          className="custom-checkbox"
+          style={{ marginTop: 8 }}
+        />,
+      )
+      const input = screen.getByRole('checkbox')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-checkbox')
+      expect(wrapper).toHaveClass('custom-checkbox')
+      expect(wrapper).toHaveStyle({ marginTop: 8 })
       expect(input).toHaveClass('input')
       expect(input).not.toHaveClass('custom-checkbox')
     })
