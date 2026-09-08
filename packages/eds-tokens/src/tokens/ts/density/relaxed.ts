@@ -8,7 +8,7 @@ export const density = {
     none: 0,
     pill: 9999,
     rounded: 6,
-    roundedOuter: 8,
+    roundedOuter: 7,
   },
   spacing: {
     twoXl: 32,
@@ -31,11 +31,11 @@ export const density = {
       },
       threeXl: {
         fontSize: 32,
-        lineHeight: 32,
+        lineHeight: 36,
       },
       fourXl: {
         fontSize: 36,
-        lineHeight: 36,
+        lineHeight: 40,
       },
       lg: {
         fontSize: 21,

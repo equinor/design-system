@@ -3,7 +3,7 @@
 # Commit this file to version control.
 
 version = 2
-generated_at = "2026-08-12T14:11:46Z"
+generated_at = "2026-09-01T07:54:16Z"
 cli_version = "dev"
 
 [[dependencies]]
@@ -11,128 +11,135 @@ cli_version = "dev"
   project = "4952a007-699a-4124-a043-124e80cc28d6"
   ref_type = "branch"
   ref_name = "main"
-  content_hash = "sha256:3a832c2f768f6d984e70f89bbbd3ffc8f9986a98816dc7eb16d468a036662ec2"
-  updated_at = "2026-08-12T14:11:46Z"
+  content_hash = "sha256:15c63fa2c317dd12107c7ba222af97801a3d77fecf9f6b72cb50ae9bb1435a10"
+  updated_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "$metadata.json"
-    hash = "sha256:5c7e72d0bcadc512d8f9ec8a46f5ce39a39699530fa0e46b6ecf2de98d4fa46f"
-    size = 354
+    hash = "sha256:0547960b1abbe34611be3dbb2c29c40bc2a45ca970f8eff027952bba3c733994"
+    size = 379
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "$themes.json"
-    hash = "sha256:1d5d25c2087e9090428a1e8c3bbfc311ab0c5b77fd09eca23795af5dc6250096"
-    size = 27200
+    hash = "sha256:a7bff0744a319fbd97ae9e261123bd3cd51099a85ac44a6e28b8df5eedef86df"
+    size = 27328
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "color/dark.json"
     hash = "sha256:e104c32e0c0a7f30bfa22cb091737df372d6482d4491db3b3a9005683026b21f"
     size = 66502
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "color/light.json"
     hash = "sha256:a7796234c4a12281a78685c1e4567c0897266b0fb195a08fe0306e8205176c84"
     size = 66884
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "density/comfortable.json"
-    hash = "sha256:bc622a2e639be9755469b47d151d4d5e715f67c93e7dd5227a548f34e7a78040"
-    size = 22834
+    hash = "sha256:44031dcba5f1e111e2346bbd8a974601a704a1383cc74cfff6a86337888a4f14"
+    size = 22868
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "density/compact.json"
-    hash = "sha256:61507d3d46294a434cc6ea8787d6fe94c184a051b01d9a2178bea39936d4369a"
-    size = 22830
+    hash = "sha256:287f4fb10c82c2e0e12ed0f6b76aac9fc4ca5eef427ed97bd063783a6a6efec1"
+    size = 22863
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "density/relaxed.json"
-    hash = "sha256:75e57fecaaefb63abc53f44921799ec27486b5b3ac26f2cb5d0f1d7749001a05"
-    size = 22839
+    hash = "sha256:f12898e32c650f41cbc2670244a25a3e0744f798a401ac7d825e344521c7d917"
+    size = 22873
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
+
+  [[dependencies.files]]
+    path = "elevation/default.json"
+    hash = "sha256:d03bcc820760af2f16decd3772fd864f4f8b18d1bd045fd9fa8d7f15602aef84"
+    size = 3324
+    tokens = 0
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "font/default.json"
     hash = "sha256:acf9807bc8b7fac1fa53e2bb64f6e005f391b59beb378d308c5edb1e19d8fde5"
     size = 1796
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "foundation/anchor.json"
     hash = "sha256:65797fd6431330b7d06db2c99f1094e298f13708893653b37774840100e57762"
     size = 4012
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "foundation/gaussian.json"
     hash = "sha256:f0e9fe5f857e9bd5bb775ac50338b1a779545f53cc94bf93e707507aa4e56f27"
     size = 10216
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "input/palette.json"
     hash = "sha256:46abf3262dbf15fbb6fc2a1f78f245f098c0cc01b62cfe123f9d4b3aa383a87a"
     size = 1867
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "input/scale.json"
-    hash = "sha256:d1651682660f524652fb17febebd79eaed8e57b83d938e259d29f04b5b4d83d3"
+    hash = "sha256:03829a2673f1bae09b323db07b19e4917bdb8177b7f3df0fbce4e3a3f9594049"
     size = 8611
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "primitives/default.json"
     hash = "sha256:6abf9f066c67e06748e1643d2f75a83c02c7d1922a43d22333552d7164b97c8a"
     size = 27516
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "scheme/dark.json"
-    hash = "sha256:0ea2bbfc947e58bf9b452d03b05180db582f4390456e4c20b383e7356d5189a5"
-    size = 46805
+    hash = "sha256:8eef151aff17d4bef5cb0b55e00ab2e5e9c6484b9be60aa35de0f7283fe23be1"
+    size = 45423
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "scheme/light.json"
-    hash = "sha256:43363298b4e22c0d6afc58609a4d716f79966e327f948832cf27640093b61640"
-    size = 46876
+    hash = "sha256:d2d9496487df090df6131b1fcdbbb4c08b9ea04dfbea90469a42ad0d7bf10925"
+    size = 45334
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "semantic.json"
-    hash = "sha256:03d9116ddd7f8b18b365f9645361fd2934c2218faf93d036371fd32799caa690"
-    size = 93667
+    hash = "sha256:e9c4d6d61d1f13a8b75f41f037f5426e056c7052daef0753ce38e5bf44f06c80"
+    size = 103299
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
   [[dependencies.files]]
     path = "semantic/default.json"
-    hash = "sha256:a326a291420bb800e26c214702f3d4ace3e2cf2b71cd3e1d703b07be15fa9596"
-    size = 22525
+    hash = "sha256:81f811d9eb6c22d432b0f3600769e1ceb57af0215fb923a9dfd35835cfee74d4"
+    size = 24026
     tokens = 0
-    modified_at = "2026-08-12T14:11:46Z"
+    modified_at = "2026-09-01T07:54:16Z"
 
 [integrity]
-  lockfile_hash = "sha256:70874774b2fade16dee81bb173599e51fd5a19b0c5a348a01c4b8b8c0e5d03c3"
+  lockfile_hash = "sha256:0d73977e30b6d2508e7bde5b3e03f905831c05ce282ea2f46bc61499f057c90b"
   algorithm = "sha256"

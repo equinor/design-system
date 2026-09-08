@@ -1,0 +1,116 @@
+{
+  "shadow": {
+    "high": {
+      "ambient": {
+        "blur": {
+          "$value": "16px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Ambient/blur"
+        },
+        "color": {
+          "$value": "{elevation.ambient}",
+          "$type": "color",
+          "$description": "Figma Elevation/Shadow/High/Ambient/color"
+        },
+        "spread": {
+          "$value": "6px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Ambient/spread"
+        },
+        "x": {
+          "$value": "0px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Ambient/offset-x"
+        },
+        "y": {
+          "$value": "12px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Ambient/offset-y"
+        }
+      },
+      "key": {
+        "blur": {
+          "$value": "12px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Key/blur"
+        },
+        "color": {
+          "$value": "{elevation.key}",
+          "$type": "color",
+          "$description": "Figma Elevation/Shadow/High/Key/color"
+        },
+        "spread": {
+          "$value": "0px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Key/spread"
+        },
+        "x": {
+          "$value": "0px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Key/offset-x"
+        },
+        "y": {
+          "$value": "4px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/High/Key/offset-y"
+        }
+      }
+    },
+    "low": {
+      "ambient": {
+        "blur": {
+          "$value": "8px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Ambient/blur"
+        },
+        "color": {
+          "$value": "{elevation.ambient}",
+          "$type": "color",
+          "$description": "Figma Elevation/Shadow/Low/Ambient/color"
+        },
+        "spread": {
+          "$value": "3px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Ambient/spread"
+        },
+        "x": {
+          "$value": "0px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Ambient/offset-x"
+        },
+        "y": {
+          "$value": "4px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Ambient/offset-y"
+        }
+      },
+      "key": {
+        "blur": {
+          "$value": "8px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Key/blur"
+        },
+        "color": {
+          "$value": "{elevation.key}",
+          "$type": "color",
+          "$description": "Figma Elevation/Shadow/Low/Key/color"
+        },
+        "spread": {
+          "$value": "0px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Key/spread"
+        },
+        "x": {
+          "$value": "0px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Key/offset-x"
+        },
+        "y": {
+          "$value": "1px",
+          "$type": "dimension",
+          "$description": "Figma Elevation/Shadow/Low/Key/offset-y"
+        }
+      }
+    }
+  }
+}

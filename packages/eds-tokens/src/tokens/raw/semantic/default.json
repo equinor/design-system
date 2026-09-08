@@ -61,6 +61,48 @@
       }
     }
   },
+  "elevation": {
+    "high": {
+      "$value": [
+        {
+          "x": "{shadow.high.key.x}",
+          "y": "{shadow.high.key.y}",
+          "blur": "{shadow.high.key.blur}",
+          "color": "{shadow.high.key.color}",
+          "spread": "{shadow.high.key.spread}"
+        },
+        {
+          "x": "{shadow.high.ambient.x}",
+          "y": "{shadow.high.ambient.y}",
+          "blur": "{shadow.high.ambient.blur}",
+          "color": "{shadow.high.ambient.color}",
+          "spread": "{shadow.high.ambient.spread}"
+        }
+      ],
+      "$type": "shadow",
+      "$description": "High elevation — two-layer (key + ambient) shadow. Semantic face over the shadow.* parts in elevation/default, mirroring how spacing.* faces density.spacing.*."
+    },
+    "low": {
+      "$value": [
+        {
+          "x": "{shadow.low.key.x}",
+          "y": "{shadow.low.key.y}",
+          "blur": "{shadow.low.key.blur}",
+          "color": "{shadow.low.key.color}",
+          "spread": "{shadow.low.key.spread}"
+        },
+        {
+          "x": "{shadow.low.ambient.x}",
+          "y": "{shadow.low.ambient.y}",
+          "blur": "{shadow.low.ambient.blur}",
+          "color": "{shadow.low.ambient.color}",
+          "spread": "{shadow.low.ambient.spread}"
+        }
+      ],
+      "$type": "shadow",
+      "$description": "Low elevation — two-layer (key + ambient) shadow. Semantic face over the shadow.* parts in elevation/default, mirroring how spacing.* faces density.spacing.*."
+    }
+  },
   "font-family": {
     "header": {
       "$value": "{family.header}",

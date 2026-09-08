@@ -62,7 +62,10 @@
           }
         },
         "$type": "dimension",
-        "$value": "{primitives.spacing.25}"
+        "$value": {
+          "unit": "px",
+          "value": 3
+        }
       }
     },
     "spacing": {
