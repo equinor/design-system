@@ -3,8 +3,8 @@ title: The palette
 description: How the colour scale is built, why the same token names work in both light and dark, and what each step does.
 ---
 
-This page is about the layer underneath the tokens. You do not use it — the scale is hidden from the
-Figma picker and is not part of the public token set. Read it when you want to know *why* a token
+This page is about the layer underneath the tokens. The scale is not exposed, so it is hidden from
+the Figma picker and is not part of the public token set. Read it when you want to know *why* a token
 looks the way it does, or when you are proposing a new one.
 
 ## Colour is generated, not picked
@@ -12,9 +12,15 @@ looks the way it does, or when you are proposing a new one.
 Every value in the scale is produced by a formula from three inputs: a **hue anchor**, a
 **lightness** value, and a **chroma** curve. Nobody chooses individual colours.
 
-There are seven hue anchors — blue, gray, green, moss green, north sea, orange and red — each defined
-once in **OKLCH**. OKLCH is used because changing hue in it does not change perceived lightness, so
-every tone's step 9 reads as equally solid whatever colour it is.
+There are seven hue anchors, each defined once in **OKLCH**: blue, gray, green, moss green, north
+sea, orange and red.
+
+[OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) is a way of writing a
+colour as three numbers: **L** for how light it is, **C** for how saturated, and **H** for which hue.
+It replaces hex and RGB, where the same three numbers tell you nothing about how a colour will look.
+The property we rely on is that L means the same thing across every hue, so changing H does not change
+how light the colour appears. That is what lets every tone's step 9 read as equally solid whatever
+colour it is.
 
 Chroma follows a bell curve across the scale rather than being set per step, which keeps the middle
 of the scale saturated and both ends muted without anyone tuning it.
@@ -24,7 +30,8 @@ anchor and the whole scale follows.
 
 ## What the step numbers mean
 
-Each tone has 15 steps. The obvious reading — "1 is lightest, 15 is darkest" — is wrong.
+Each tone has 15 steps. The obvious reading, "1 is lightest and 15 is darkest", is not how they
+work.
 
 A step number is a **role position**, not a lightness. Step 9 is "the solid fill". Step 15 is "the
 foreground that sits on a solid fill". That is true in both schemes, and it is what lets one set of
@@ -34,17 +41,16 @@ Steps 1 → 13 broadly travel from *closest to the background* toward *furthest 
 descending lightness in light mode and ascending in dark.
 
 :::warning The scale is deliberately not monotonic
-"Broadly" is doing real work in that sentence. In dark mode the lightness values **dip at steps 4 and
-5** on purpose: a strictly increasing ramp could not hold the contrast that the border and muted-fill
-roles at those steps need.
+"Broadly" is carrying weight in that sentence. In dark mode the lightness values **dip at steps 4 and
+5** on purpose, because a strictly increasing ramp could not hold the contrast that the border and
+muted-fill roles at those steps need.
 
-So do not treat global ordering as a rule, and do not "fix" the dip. The two rules that do hold are
-narrower:
+So global ordering is not a rule and the dip is not a bug. The two rules that do hold are narrower:
 
 1. **No two steps within one scale resolve to the same value.**
 2. **Every state ladder progresses visibly in one direction.**
 
-Steps 14 and 15 are excluded from both — see below.
+Steps 14 and 15 are excluded from both, as described below.
 :::
 
 ## Which step does what
@@ -78,26 +84,14 @@ check.
 Step 15 does double duty: it is also the content plane, which is why `background.surface`,
 `background.dialog` and `background.floating` all resolve to it.
 
-### Steps 6 and 14 have no consumer
-
-They are not spare capacity waiting to be used. Inserting or repurposing a step renames everything
-above it, which breaks every consumer at once — so either they are given roles or they are dropped
-before the scale is settled. Treat "just use step 6" as a proposal, not a fix.
-
 ## The steps jump on purpose
 
 The scale is not a smooth gradient. Lightness values are chosen per step so that the pairings that
-matter — text against surface, fill against canvas — land *at* the contrast target rather than near
-it.
+matter, such as text against surface and fill against canvas, meet the contrast target exactly rather
+than approximately.
 
 Notice that the middle of the scale is evenly spaced while the run from borders into fills jumps
 roughly twice as far. That gap is where strokes stop and fills begin, and it needs to be visible.
-
-:::note The lightness inputs are hand-tuned, and that is deliberate
-A purely formulaic lightness ramp was tried and did not produce usable contrast steps. The values are
-tuned by hand; the algorithm's job is to propagate them across hues, not to invent them. This is not
-technical debt and should not be "corrected" by deriving the ramp from a formula.
-:::
 
 ## Tone to hue
 
@@ -121,13 +115,12 @@ and the slight blue keeps large dark surfaces feeling like a material.
 `data-visualization.*` is a separate group with its own rules, because chart colour is about telling
 series apart rather than about contrast against a background.
 
-- `cat.1` … `cat.10`, five steps each — categorical hues
-- `seq.1` … `seq.7` — a sequential ramp for magnitude
-- `div.1` … `div.9` — a diverging ramp for values around a midpoint
+- `cat.1` … `cat.10`, five steps each: categorical hues
+- `seq.1` … `seq.7`: a sequential ramp for magnitude
+- `div.1` … `div.9`: a diverging ramp for values around a midpoint
 
 These are the only values in the set that sit outside the OKLCH generator, and no EDS component binds
-them — they are for you to apply in charts. Guidance on ordering and accessibility is still being
-written.
+them. They are for you to apply in charts.
 
 ## Why you cannot extend the scale yourself
 
@@ -137,7 +130,3 @@ rather than replacing it, and consumers move at their own pace.
 
 If you need a value the scale does not have, that is a token request rather than something to
 generate locally.
-
-## Values
-
-Every resolved value, in both schemes, is on the [token reference](./reference.mdx) page.

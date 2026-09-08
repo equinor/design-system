@@ -1,7 +1,9 @@
 ---
 title: Getting Started
-description: Picking colour tokens — the pairing contract, worked examples, and the mistakes that survive review.
+description: Picking colour tokens. Pairing rules, worked examples, and the mistakes that survive review.
 ---
+
+import ColourPairing from '@site/src/components/ColourPairing'
 
 Colour in EDS is **static and semantic**: the tone is part of the token name, and you bind to it
 directly. There is one approach, in both design and code.
@@ -16,15 +18,15 @@ directly. There is one approach, in both design and code.
 In Figma the same token is `background.interactive.accent.emphasis.default`. Both names are
 generated from one definition, so they cannot drift apart.
 
-:::tip Reaching for a hex value? The token exists — look it up
+:::tip Reaching for a hex value? The token exists, so look it up
 Every colour token has exactly one Figma name and one CSS custom property, and the
 [token reference](./reference.mdx) lists them side by side. If you know the Figma name, the CSS name
 is on the same row; if you know the colour by sight, the resolved values in both schemes are there
 too.
 
-The two notations line up mechanically — `--eds-` followed by the dotted name with hyphens for dots
-— so you can usually spell one from the other. The reference is still the authority: each CSS name is
-carried in the token's own definition rather than derived from the Figma name, so if the two ever
+The two notations line up mechanically, with `--eds-` followed by the dotted name and hyphens for
+dots, so you can usually spell one from the other. The reference is still the authority. Each CSS name
+is carried in the token's own definition rather than derived from the Figma name, so if the two ever
 disagree, the reference is right and the pattern is not.
 
 A hardcoded hex is the failure mode this page exists to prevent. It will not follow the colour
@@ -39,36 +41,23 @@ appearance modes in your Figma file, name the tone explicitly instead.
 
 ## Foreground pairing
 
-This is the part worth memorising. The foregrounds beside a fill are the ones it is specified for;
-reaching outside the row is how contrast failures get in.
+Every fill below is shown painted, with the text, icon and border tokens it is specified for rendered
+inside it. The pairings are worth getting right, because they are what keeps contrast working without
+anyone checking it per screen.
 
-| Fill | Text | Icon | Border |
-| --- | --- | --- | --- |
-| `background.surface` | `text.primary`, `.secondary`, `.tertiary` | `icon.primary`, `.secondary`, `.tertiary` | `border.non-interactive.neutral.*` |
-| `background.canvas` | `text.primary`, `.secondary` | `icon.primary`, `.secondary` | `border.non-interactive.neutral.muted` |
-| `background.interactive.<tone>.emphasis.*` | `text.on-emphasis.<tone>` | `icon.on-emphasis.<tone>` | `border.interactive.<tone>.emphasis.*` |
-| `background.interactive.<tone>.muted.*` | `text.on-muted.<tone>` | `icon.on-muted.<tone>` | `border.interactive.<tone>.muted.*` |
-| `background.non-interactive.<tone>.emphasis` | `text.on-emphasis.<tone>` | `icon.on-emphasis.<tone>` | `border.non-interactive.<tone>.emphasis` |
-| `background.non-interactive.<tone>.muted` | `text.on-muted.<tone>` | `icon.on-muted.<tone>` | `border.non-interactive.<tone>.muted` |
-| `background.non-interactive.<tone>.default` | `text.on-default.<tone>` | `icon.on-default.<tone>` | `border.non-interactive.<tone>.default` |
-| `background.interactive.accent.selected.*` | `text.primary` | `icon.primary` | `border.interactive.selected-indicator` |
-| `background.inverted` | `text.inverted` | `icon.inverted` | — |
-| `background.input` | `text.primary` | `icon.secondary` | `border.interactive.neutral.muted.*` |
-| `background.interactive.disabled` | `text.interactive.disabled` | `icon.interactive.disabled` | `border.interactive.disabled` |
+<ColourPairing />
 
 Both foreground families are **per tone**. `text.on-muted.danger` is a different value from
-`text.on-muted.accent` — do not substitute `text.primary` on a tinted fill, because that loses the
+`text.on-muted.accent`. Try not to substitute `text.primary` on a tinted fill, because that loses the
 tone the tint was there to convey.
 
-:::note `inverted` on a solid fill
-`text.on-emphasis.<tone>` is the canonical foreground on an `emphasis` fill, and it is what the table
-above specifies. `text.inverted` also clears contrast there, so it is tolerated rather than wrong — it
-is a near-white in light mode and a near-dark in dark mode, which lands it close to `on-emphasis`
-without being it.
+:::note Use `text.on-emphasis.<tone>` on a solid fill
+`text.on-emphasis.<tone>` is the foreground we recommend on any `emphasis` fill, and it is what the
+table above specifies.
 
-Prefer `text.on-emphasis.<tone>`. It is defined per tone, so it tracks the fill it sits on; `inverted` is a
-single value for all six tones, which means it stops being the right answer the moment one tone's
-emphasis fill moves.
+`text.inverted` also passes contrast on those fills, so you will not have broken anything by reaching
+for it. The reason to prefer `on-emphasis` is that it is defined per tone and follows the fill it sits
+on, while `inverted` is one value shared by all six tones.
 :::
 
 ## Worked examples
@@ -101,7 +90,7 @@ emphasis fill moves.
 
 ### Destructive button
 
-The same shape with `danger` in place of `accent` — with one thing to notice:
+The same shape with `danger` in place of `accent`, with one thing to notice:
 
 ```css
 .button--destructive:disabled {
@@ -124,12 +113,12 @@ A banner is static. It gets a tint and a border, and **no hover values**:
 }
 ```
 
-If you later make the banner dismissible, the dismiss control becomes interactive — the banner's own
+If you later make the banner dismissible, the dismiss control becomes interactive. The banner's own
 fill does not.
 
 ### A link
 
-`link` sits in the tone position but is a role, not a tone — so it has `default`, `hover` and
+`link` sits in the tone position but is a role rather than a tone, so it has `default`, `hover` and
 `pressed` and no level:
 
 ```css
@@ -146,7 +135,7 @@ a:active {
 ```
 
 `icon.interactive.link.*` matches, for a link that carries an icon. Do not substitute `info` because
-links are blue — `info` means the content is informational, and the two are free to diverge.
+links are blue. `info` means the content is informational, and the two are free to diverge.
 
 ### Focus ring
 
@@ -159,15 +148,29 @@ One token, every component, on every fill:
 }
 ```
 
-## Do and don't
+## Do's and Don'ts
 
-| Do | Don't |
-| --- | --- |
-| Pick by **behaviour** — a static tint and an interactive tint use different tokens even when they look identical today | Pick by appearance, and give a banner hover values it will eventually be handed by accident |
-| Use the named `hover` and `pressed` tokens | Derive states with `opacity` or `filter: brightness()` — they break on tinted fills and invert wrongly in dark mode |
-| Let the scheme attribute do the work | Write `[data-color-scheme="dark"] .thing { … }`. If you need that, the token you picked is wrong |
-| Use `text.on-muted.<tone>` on a tinted fill | Fall back to `text.primary` on a tint — it discards the tone |
-| Treat disabled as its own set | Use a tone's faint end for disabled |
+:::info **Do**
+
+- Pick by **behaviour**. A static tint and an interactive tint use different tokens even when they
+  look identical today
+- Use the named `hover` and `pressed` tokens
+- Let the scheme attribute do the work
+- Use `text.on-muted.<tone>` on a tinted fill
+- Treat disabled as its own set
+
+:::
+
+:::danger **Don't**
+
+- Pick by appearance, and give a banner hover values it will be handed by accident later
+- Derive states with `opacity` or `filter: brightness()`. They break on tinted fills and invert
+  wrongly in dark mode
+- Write `[data-color-scheme="dark"] .thing { … }`. If you need that, the token you picked is wrong
+- Fall back to `text.primary` on a tint, which discards the tone
+- Use a tone's faint end for disabled
+
+:::
 
 ## Mistakes that survive review
 
@@ -178,32 +181,9 @@ One token, every component, on every fill:
 4. **Data-visualisation tokens in UI chrome.** `data-visualization.*` is tuned for telling series
    apart, not for contrast against a surface.
 
-## If you know the earlier vocabulary
-
-The state and strength words have changed twice, so what you recognise depends on which generation
-you learned. The names you are most likely to be carrying:
-
-| You may know | Now | |
-| --- | --- | --- |
-| `__resting` *(1.x)* | `default` | the state before the user touches the control |
-| `__hover` *(1.x)* | `hover` | unchanged |
-| `__selected` *(1.x)* | `selected` | still the word, but now a **level**, not a state |
-| `-active` *(2.x)* | `pressed` | renamed — `active` was read as "currently on" about as often as "being pressed" |
-| `emphasis`, `muted` *(2.x)* | `emphasis`, `muted` | unchanged, and now applied to borders and static elements too |
-
-**Why it changed.** The older vocabulary mixed two independent questions: *how prominent is this*
-and *what is the user doing to it*. `active` is the clearest casualty — it answered both, and which
-one it meant depended on the component.
-
-Splitting them into a **level** and a **state** makes every combination expressible and gives each
-one a name. It is also what lets the interactive/non-interactive split work at all: a static element
-needs the prominence axis and has no use for the interaction axis, which is why non-interactive
-tokens have three levels and no states.
-
-:::note This is not the full migration path
-The table above is orientation for names you will recognise, not a complete mapping. A token-by-token
-migration guide is written separately.
-:::
+{/* STUB - the "If you know the earlier vocabulary" section was removed here on 2026-09-08.
+    It belongs in a migration guide, not on this page. Two guides are planned, 1.x to 3.x and
+    2.x to 3.x; link this section's replacement from here once one of them exists. */}
 
 ## Switching colour scheme
 
@@ -216,8 +196,12 @@ By default the system reads the `data-color-scheme` attribute:
 <html data-color-scheme="dark"></html>
 ```
 
-It can be set on any ancestor, not only `<html>`, and it cascades — so a dark panel inside a light
-page is a normal thing to do.
+Set it once, at the top of the page or app, so the whole interface switches together. That is what
+people expect from a colour scheme, and it is what we recommend.
+
+The attribute can be set on any ancestor and it cascades, so scoping a single panel to dark inside a
+light page is technically possible. We would not advise it. A colour scheme describes the interface,
+not a region inside it.
 
 ## For designers
 
@@ -225,7 +209,7 @@ Add the EDS colour library to your Figma file and pick tokens by name. The varia
 identical to the ones above, so a design and its implementation refer to the same thing.
 
 Only the semantic layer is published to the variable picker. The numbered scale underneath it is
-hidden on purpose, so there is no way to bind a raw palette value to a component by accident — see
+hidden on purpose, so there is no way to bind a raw palette value to a component by accident. See
 [The palette](./palette.mdx).
 
 ### Tokens are scoped to the property they belong on
@@ -234,18 +218,13 @@ The variable picker is filtered by what you are colouring. Open the fill picker 
 tokens; open the stroke picker and you get border tokens. Text and icon tokens do not appear where a
 background belongs, and vice versa.
 
-This is not a setting to switch on — the scoping is part of each token's definition. Two consequences
-worth knowing:
+This is not a setting to switch on, because the scoping is part of each token's definition. Two
+consequences are worth knowing:
 
-- **The list you choose from is already short.** Most of the 263 colour tokens are irrelevant to any
-  given property, and you are never shown them.
+- **The list you choose from is already short.** Most colour tokens are irrelevant to any given
+  property, and you are never shown them.
 - **A whole class of mistake is simply unavailable.** You cannot bind `text.primary` to a rectangle's
   fill, or drop a background token onto a stroke.
 
 So if a token you expected is missing from a picker, that absence is usually the answer: it belongs
 on a different property.
-
-:::note Existing tutorials cover the earlier naming
-The colour tutorials in the Design System SharePoint site were recorded against the previous token
-names and the static/dynamic split. The model they teach still holds; the names have moved on.
-:::
