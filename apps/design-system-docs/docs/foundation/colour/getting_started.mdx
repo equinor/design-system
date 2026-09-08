@@ -13,9 +13,23 @@ directly. There is one approach, in both design and code.
 }
 ```
 
-In Figma the same token is `background.interactive.accent.emphasis.default`. The two names are
-generated from one definition, so they cannot drift apart — see the
-[token reference](./reference.mdx) for the full mapping.
+In Figma the same token is `background.interactive.accent.emphasis.default`. Both names are
+generated from one definition, so they cannot drift apart.
+
+:::tip Reaching for a hex value? The token exists — look it up
+Every colour token has exactly one Figma name and one CSS custom property, and the
+[token reference](./reference.mdx) lists them side by side. If you know the Figma name, the CSS name
+is on the same row; if you know the colour by sight, the resolved values in both schemes are there
+too.
+
+The two notations line up mechanically — `--eds-` followed by the dotted name with hyphens for dots
+— so you can usually spell one from the other. The reference is still the authority: each CSS name is
+carried in the token's own definition rather than derived from the Figma name, so if the two ever
+disagree, the reference is right and the pattern is not.
+
+A hardcoded hex is the failure mode this page exists to prevent. It will not follow the colour
+scheme, and nothing will tell you when it has stopped matching the token it was copied from.
+:::
 
 :::info Dynamic colour has been removed
 Earlier versions offered a second approach, where a `data-color-appearance` attribute decided which
@@ -164,6 +178,33 @@ One token, every component, on every fill:
 4. **Data-visualisation tokens in UI chrome.** `data-visualization.*` is tuned for telling series
    apart, not for contrast against a surface.
 
+## If you know the earlier vocabulary
+
+The state and strength words have changed twice, so what you recognise depends on which generation
+you learned. The names you are most likely to be carrying:
+
+| You may know | Now | |
+| --- | --- | --- |
+| `__resting` *(1.x)* | `default` | the state before the user touches the control |
+| `__hover` *(1.x)* | `hover` | unchanged |
+| `__selected` *(1.x)* | `selected` | still the word, but now a **level**, not a state |
+| `-active` *(2.x)* | `pressed` | renamed — `active` was read as "currently on" about as often as "being pressed" |
+| `emphasis`, `muted` *(2.x)* | `emphasis`, `muted` | unchanged, and now applied to borders and static elements too |
+
+**Why it changed.** The older vocabulary mixed two independent questions: *how prominent is this*
+and *what is the user doing to it*. `active` is the clearest casualty — it answered both, and which
+one it meant depended on the component.
+
+Splitting them into a **level** and a **state** makes every combination expressible and gives each
+one a name. It is also what lets the interactive/non-interactive split work at all: a static element
+needs the prominence axis and has no use for the interaction axis, which is why non-interactive
+tokens have three levels and no states.
+
+:::note This is not the full migration path
+The table above is orientation for names you will recognise, not a complete mapping. A token-by-token
+migration guide is written separately.
+:::
+
 ## Switching colour scheme
 
 By default the system reads the `data-color-scheme` attribute:
@@ -186,6 +227,23 @@ identical to the ones above, so a design and its implementation refer to the sam
 Only the semantic layer is published to the variable picker. The numbered scale underneath it is
 hidden on purpose, so there is no way to bind a raw palette value to a component by accident — see
 [The palette](./palette.mdx).
+
+### Tokens are scoped to the property they belong on
+
+The variable picker is filtered by what you are colouring. Open the fill picker and you get fill
+tokens; open the stroke picker and you get border tokens. Text and icon tokens do not appear where a
+background belongs, and vice versa.
+
+This is not a setting to switch on — the scoping is part of each token's definition. Two consequences
+worth knowing:
+
+- **The list you choose from is already short.** Most of the 263 colour tokens are irrelevant to any
+  given property, and you are never shown them.
+- **A whole class of mistake is simply unavailable.** You cannot bind `text.primary` to a rectangle's
+  fill, or drop a background token onto a stroke.
+
+So if a token you expected is missing from a picker, that absence is usually the answer: it belongs
+on a different property.
 
 :::note Existing tutorials cover the earlier naming
 The colour tutorials in the Design System SharePoint site were recorded against the previous token
