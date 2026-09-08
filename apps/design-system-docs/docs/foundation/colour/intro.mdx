@@ -70,14 +70,45 @@ semantic condition — there is no such thing as a "selected success".
 
 ### 4. Level — how loud?
 
+The two branches have different levels, so read the one that matches your answer to question 2.
+
+**Interactive** — two levels, plus a third for selection:
+
 | Level | Looks like | Foreground on top |
 | --- | --- | --- |
 | `emphasis` | a solid, saturated fill | `text.on-emphasis.<tone>` |
 | `muted` | a light tint of the tone | `text.on-muted.<tone>` |
 | `selected` | a tint that reads as "chosen" — accent and neutral only | `text.primary` |
 
-The third column is a contract, not a suggestion. See
+**Non-interactive** — three levels, and no states at all:
+
+| Level | Looks like | Foreground on top |
+| --- | --- | --- |
+| `muted` | the faintest tint that still reads as tinted | `text.on-muted.<tone>` |
+| `default` | the ordinary strength for a static tinted element | `text.on-default.<tone>` |
+| `emphasis` | a solid, saturated fill | `text.on-emphasis.<tone>` |
+
+The foreground column is a contract, not a suggestion. See
 [foreground pairing](./getting_started.mdx#foreground-pairing).
+
+Choosing between them: **`muted` is the ordinary choice for anything that carries a tone but is not
+the thing you want looked at first** — banners, tags, tinted table rows. Reach for `emphasis` when the
+element *is* the point: a primary action, a filled status pip. `default` sits between the two and
+exists only on the non-interactive side, where a static element needs a middle strength and has no
+states to spend the distinction on.
+
+:::warning `default` means two different things
+It is a **state** on interactive tokens and a **level** on non-interactive ones:
+
+```
+background.interactive.accent.emphasis.default    ← default STATE (vs hover, pressed)
+background.non-interactive.accent.default         ← default LEVEL (vs muted, emphasis)
+```
+
+Position tells you which. **The segment straight after the tone is always the level**; interactive
+tokens then add a state on the end. So an interactive token always finishes with a state, and a
+non-interactive one never does.
+:::
 
 ### 5. State
 
@@ -104,6 +135,7 @@ Some tokens mean the same thing regardless of tone.
 | `background.backdrop` | the layer behind a floating element |
 | `border.interactive.focus` | the focus ring. One token, every component |
 | `border.interactive.selected-indicator` | the bar or underline marking the active item |
+| `text.interactive.link.*` | links, with `default`, `hover` and `pressed`. `icon.` and `border.` carry the same family |
 | `overlay.scrim` | the dim behind a modal |
 | `text.primary`, `.secondary`, `.tertiary` | text hierarchy on ordinary surfaces |
 | `icon.primary`, `.secondary`, `.tertiary` | the icon equivalents |
@@ -112,6 +144,33 @@ Some tokens mean the same thing regardless of tone.
 Disabled is its own small set — `background.interactive.disabled`, `border.interactive.disabled`,
 `text.interactive.disabled`, `icon.interactive.disabled` — because a disabled control loses its tone
 entirely. A disabled destructive button is not a faint red; it is neutral.
+
+Links work the same way: `link` sits in the tone position but is a **role**, not a tone. Do not reach
+for `info` because links happen to be blue — that would claim the link is conveying information, and
+the two are free to diverge.
+
+### Three surface names, one value
+
+`background.surface`, `background.dialog` and `background.floating` resolve to the same colour today.
+Check the [reference](./reference.mdx) and you will find identical values in both schemes.
+
+They are three tokens anyway, because they answer three different questions. A dialog or a dropdown
+is allowed to diverge from a card — picking up a tint, a different elevation relationship, or a
+scheme-specific treatment — and on the day one of them does, everything bound by role moves with it
+and everything bound by appearance does not. Binding a popover to `background.surface` because "it is
+the same white" is precisely the mistake this split exists to prevent.
+
+`canvas` and `surface` are a different case: those two already differ. `canvas` is the page behind
+everything, `surface` is the plane content sits on.
+
+### `inverted` is not dark mode
+
+`background.inverted` inverts against **the scheme you are already in** — a dark surface in light
+mode, a light one in dark mode. It is for elements that deliberately break out of the surface around
+them, like a snackbar or a tooltip.
+
+The scheme attribute still applies to it, exactly as it does to every other token. What `inverted`
+reverses is the element's relationship to its surroundings, not the scheme.
 
 ## Light and dark
 

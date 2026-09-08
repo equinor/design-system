@@ -25,8 +25,8 @@ appearance modes in your Figma file, name the tone explicitly instead.
 
 ## Foreground pairing
 
-This is the part worth memorising. A fill in the left column admits only the foregrounds beside it —
-anything else fails contrast in light mode, dark mode, or both.
+This is the part worth memorising. The foregrounds beside a fill are the ones it is specified for;
+reaching outside the row is how contrast failures get in.
 
 | Fill | Text | Icon | Border |
 | --- | --- | --- | --- |
@@ -45,6 +45,17 @@ anything else fails contrast in light mode, dark mode, or both.
 Both foreground families are **per tone**. `text.on-muted.danger` is a different value from
 `text.on-muted.accent` — do not substitute `text.primary` on a tinted fill, because that loses the
 tone the tint was there to convey.
+
+:::note `inverted` on a solid fill
+`text.on-emphasis.<tone>` is the canonical foreground on an `emphasis` fill, and it is what the table
+above specifies. `text.inverted` also clears contrast there, so it is tolerated rather than wrong — it
+is a near-white in light mode and a near-dark in dark mode, which lands it close to `on-emphasis`
+without being it.
+
+Prefer `text.on-emphasis.<tone>`. It is defined per tone, so it tracks the fill it sits on; `inverted` is a
+single value for all six tones, which means it stops being the right answer the moment one tone's
+emphasis fill moves.
+:::
 
 ## Worked examples
 
@@ -101,6 +112,27 @@ A banner is static. It gets a tint and a border, and **no hover values**:
 
 If you later make the banner dismissible, the dismiss control becomes interactive — the banner's own
 fill does not.
+
+### A link
+
+`link` sits in the tone position but is a role, not a tone — so it has `default`, `hover` and
+`pressed` and no level:
+
+```css
+a {
+  color: var(--eds-text-interactive-link-default);
+}
+a:hover {
+  color: var(--eds-text-interactive-link-hover);
+  text-decoration-color: var(--eds-border-interactive-link-hover);
+}
+a:active {
+  color: var(--eds-text-interactive-link-pressed);
+}
+```
+
+`icon.interactive.link.*` matches, for a link that carries an icon. Do not substitute `info` because
+links are blue — `info` means the content is informational, and the two are free to diverge.
 
 ### Focus ring
 
