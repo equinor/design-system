@@ -17,7 +17,7 @@ const ROLES: Record<number, string> = {
   3: 'muted fill when pressed',
   4: 'muted borders, disabled border',
   5: 'accent selected; muted border on hover',
-  6: 'no consumer',
+  6: 'not used',
   7: 'muted border when pressed; tertiary foreground',
   8: 'links; secondary foreground',
   9: 'the solid fill; emphasis borders',
@@ -25,7 +25,7 @@ const ROLES: Record<number, string> = {
   11: 'solid fill when pressed; interactive foregrounds',
   12: 'on-muted foregrounds; the inverted surface',
   13: 'primary foreground; the selected indicator',
-  14: 'no consumer',
+  14: 'not used',
   15: 'the content plane; on-emphasis foregrounds',
 }
 
@@ -77,8 +77,8 @@ export function ColourScale() {
               style={{
                 ...label,
                 whiteSpace: 'normal',
-                fontStyle: ROLES[step] === 'no consumer' ? 'italic' : undefined,
-                opacity: ROLES[step] === 'no consumer' ? 0.6 : 1,
+                fontStyle: ROLES[step] === 'not used' ? 'italic' : undefined,
+                opacity: ROLES[step] === 'not used' ? 0.6 : 1,
               }}
             >
               {ROLES[step]}

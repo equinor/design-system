@@ -31,6 +31,10 @@ const components = join(app, 'src', 'components')
 const PROSE = ['intro.mdx', 'getting_started.mdx', 'palette.mdx', 'migration.mdx']
 const COMPONENTS = ['ColourPairing.tsx', 'ColourStates.tsx', 'ColourScale.tsx', 'DataVizPalette.tsx']
 
+// MigrationMap is scanned differently: its `from` field holds old 1.x and 2.x names, which are
+// supposed not to exist. Only the `to` field points at a redefined token.
+const MAPPING_COMPONENTS = ['MigrationMap.tsx']
+
 // --- canonical names ---------------------------------------------------------------------------
 
 const dtcg = JSON.parse(readFileSync(join(tokens, 'dtcg', 'semantic', 'default.json'), 'utf8'))
@@ -114,6 +118,34 @@ for (const file of COMPONENTS) {
   }
 }
 
+// --- migration mapping targets -------------------------------------------------------------------
+
+for (const file of MAPPING_COMPONENTS) {
+  const path = join(components, file)
+  if (!existsSync(path)) continue
+  const src = readFileSync(path, 'utf8')
+  let targets = 0
+  for (const m of src.matchAll(/\bto:\s*'([^']+)'/g)) {
+    targets++
+    if (canon.has(m[1])) continue
+    problems.push({
+      file: `src/components/${file}`,
+      line: src.slice(0, m.index).split('\n').length,
+      name: `mapping target does not exist: ${m[1]}`,
+      kind: 'token',
+    })
+  }
+  // A mapping that silently stopped pointing anywhere would look like a finished migration guide.
+  if (targets === 0) {
+    problems.push({
+      file: `src/components/${file}`,
+      line: 0,
+      name: 'no mapping targets found - has the data shape changed?',
+      kind: 'structure',
+    })
+  }
+}
+
 // --- 3: structural counts ------------------------------------------------------------------------
 
 const distinct = (re) => new Set([...canon].map((n) => n.match(re)?.[1]).filter(Boolean)).size
@@ -160,7 +192,7 @@ if (problems.length) {
 }
 
 console.log(
-  `ok - ${PROSE.length} pages and ${COMPONENTS.length} components: every token name and custom ` +
+  `ok - ${PROSE.length} pages and ${COMPONENTS.length + MAPPING_COMPONENTS.length} components: every token name and custom ` +
     `property resolves, and every structural count matches the token source ` +
     `(${canon.size} tokens, ${cssCanon.size} custom properties)`,
 )

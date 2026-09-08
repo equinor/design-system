@@ -4,45 +4,94 @@ sidebar_label: Migration
 description: Moving to the redefined colour tokens from EDS 1.x or from the 2.0.0-beta semantic and dynamic layers.
 ---
 
-Two generations of EDS colour are in use, and each needs a different route to the redefined tokens.
-Neither is a find-and-replace, so this page starts with what changed and why.
+import {
+  MigrationOneText,
+  MigrationOneUi,
+  MigrationOneInteractive,
+  MigrationOneTable,
+  MigrationTwoSurfaces,
+  MigrationTwoFills,
+  MigrationTwoBorders,
+  MigrationTwoText,
+} from '@site/src/components/MigrationMap'
 
-The most useful thing to know before you start: **the redefined scale is contrast-driven, not
-lightness-driven.** Picking the closest hex to what you have today is the wrong mental model and will
-give you a palette that fails contrast in one scheme or the other. Choose by role instead, and let
-[the pairings](./getting_started.mdx#foreground-pairing) do the rest.
+Two generations of EDS colour are in use, and each needs a different route. This page starts with the
+one thing that decides how you approach either of them.
+
+:::warning No value survived the redefinition
+Not one of the 115 semantic colours in 2.0.0-beta resolves to the same value as any redefined token,
+and the 1.x palette was replaced outright. The scale is now **contrast-driven rather than
+lightness-driven**, so matching your old colours by eye, or by nearest hex, gives you a palette that
+fails contrast in one scheme or the other.
+
+Map by **role**: what was this colouring, and what was it doing. The pairs below are matched that
+way, and the swatches show how large a change to expect.
+:::
 
 Work is tracked in
 [equinor/design-system#5399](https://github.com/equinor/design-system/issues/5399).
 
 ## Coming from EDS 1.x
 
-1.x named colours by **component role**, in a flat set of hand-picked hex values:
-`colors.interactive.primary__resting`, `colors.text.static_icons__default`,
-`colors.ui.background__light`. There were 75 colour tokens in five groups, and states were suffixes
-(`__resting`, `__hover`, `__selected`).
+1.x named colours by **component role** in a flat set of hand-picked hex values:
+`colors.interactive.primary__resting`, `colors.text.static_icons__default`. There were 75 tokens in
+five groups, and states were suffixes: `__resting`, `__hover`, `__selected`, `__activated`.
 
-The redefined set names colours by **surface, behaviour, tone, level and state**, and there are
-considerably more of them. That means a 1.x token usually has several possible answers rather than
-one, and which is right depends on what you were colouring. A single `primary__resting` might become
-a button fill, a link, a selected row or an icon, and each takes a different token.
+The redefined set names colours by **surface, behaviour, tone, level and state**. That is five
+questions where 1.x asked one, which is why a single old token often has more than one right answer.
+[Introduction](./intro.mdx#reading-a-token-name) explains how to read a name, and it is worth reading
+before you start rather than after.
 
-So the route from 1.x is to work from **what you were building**, not from the old name.
-[Getting started](./getting_started.mdx) has worked examples for the common cases, and
-[Introduction](./intro.mdx) explains how to read a name so you can derive the rest.
+### Text
 
-Two groups have no direct route:
+`static_icons__*` covered both text and icons. The redefined set separates them, because a thin icon
+stroke needs more contrast than a letterform of the same size. Everything below has an `icon.*` twin.
 
-- **`infographic`** becomes `data-visualization.*`, which is a different palette rather than a
-  rename. Re-pick your series colours; [the palette](./palette.mdx#data-visualisation) describes what
-  is available.
-- **`logo`** has no equivalent in the colour scale.
+<MigrationOneText />
+
+### Backgrounds and surfaces
+
+The `ui` group was a small set of planes plus three status tints. The planes map cleanly. The status tints
+become non-interactive tone fills, which is the group for anything that carries meaning but cannot be
+clicked.
+
+<MigrationOneUi />
+
+### Interactive colours
+
+The largest group, and the one that changes shape most. Three things to know before reading it:
+
+- **`primary` and `secondary` are not tones.** They described a button's rank. The redefined set uses
+  `accent` for the primary action and `neutral` for the secondary one, and rank is expressed by
+  choosing `emphasis` or `muted`.
+- **`__resting` is now `default`, and `__activated` is now `pressed`.** `active` was read as
+  "currently on" about as often as "being pressed".
+- **`__highlight` was doing two different jobs**, a muted tint and a selection state. Those are now
+  `muted` and `selected`, and only `accent` and `neutral` have `selected`.
+
+<MigrationOneInteractive />
+
+### Table colours
+
+1.x shipped table fills as their own tokens. The redefined set has no component-specific colour: a
+table cell is a surface, and a hovered row is an interactive neutral fill. Use the same tokens you
+would use anywhere else.
+
+<MigrationOneTable />
+
+### Infographic and logo
+
+`infographic` (24 tokens) becomes `data-visualization.*`, but this is a **re-palette rather than a
+rename**. The redefined set has ten categorical hues of five steps each, plus a sequential and a
+diverging ramp, and none of them corresponds to an old `substitute__*` or `primary__*` value. Re-pick
+your series colours from [the palette](./palette.mdx#data-visualisation).
+
+`logo` (2 tokens) has no equivalent. Brand marks are not part of the colour scale.
 
 ## Coming from 2.0.0-beta
 
-The beta shares the redefined set's vocabulary, so this route is closer to a translation. `emphasis`
-and `muted` already exist, tones already exist, and fill, border and text are already separated. What
-changes is the shape of the names and one removed feature.
+This route is closer to a translation. `emphasis` and `muted` already exist, tones already exist, and
+fill, border and text are already separated. Four things change.
 
 ### Dynamic colour is removed
 
@@ -50,29 +99,60 @@ The `Appearance` collection and appearance-switching at the semantic-colour leve
 one approach now: semantic colour, where the tone is part of the token name.
 
 If you relied on a generic role token resolving to a different tone depending on context, name the
-tone explicitly instead. If you have `data-color-appearance` in your markup, or appearance modes in
-your Figma file, those come out.
+tone explicitly. If you have `data-color-appearance` in your markup, or appearance modes in your
+Figma file, those come out.
 
-### Names are reordered
+### Names are reordered, and `fill` is dropped
 
 The beta put the tone before the surface word and used `fill`. The redefined set puts the surface
-first and drops `fill`:
+first, drops `fill`, and adds the interactive split:
 
 ```
---eds-color-bg-accent-fill-emphasis-hover        beta
---eds-background-interactive-accent-emphasis-hover   redefined
+--eds-color-bg-accent-fill-emphasis-hover             2.0.0-beta
+--eds-background-interactive-accent-emphasis-hover    redefined
 ```
 
-The interactive and non-interactive split is also new, and it is the part worth reading about before
-you start. [Introduction](./intro.mdx#2-interactive-can-the-user-act-on-it) covers it.
+### The interactive split is new
+
+This is the part that needs a decision rather than a rename. In the beta, a tinted banner and a
+tinted button could share `--eds-color-bg-accent-fill-muted-default`. They cannot now: the button is
+`background.interactive.*` and carries hover and pressed values, the banner is
+`background.non-interactive.*` and has none.
+
+So when you meet a `fill` token, ask whether the thing it colours responds to input.
+[Introduction](./intro.mdx#2-interactive-can-the-user-act-on-it) covers the distinction.
 
 ### `active` becomes `pressed`
 
-The state word changed, because `active` was read as "currently on" about as often as "being
-pressed".
+### Surfaces and planes
+
+<MigrationTwoSurfaces />
+
+### Fills
+
+The pattern below repeats for all six tones. `accent` is shown; substitute `neutral`, `info`,
+`success`, `warning` or `danger` for the rest.
+
+<MigrationTwoFills />
+
+### Borders
+
+`subtle` / `medium` / `strong` becomes `muted` / `default` / `emphasis`, the same three levels used
+everywhere else.
+
+<MigrationTwoBorders />
+
+### Text
+
+Tone-coloured text is now named for **what it sits on** rather than for how strong it is. That is what
+makes the pairing checkable: `text.on-muted.accent` is the foreground for an accent muted fill, and
+nothing else needs to be worked out.
+
+<MigrationTwoText />
 
 ## Checking your work
 
 APCA contrast against `background.surface` is the acceptance criterion, and the pairings are built to
 meet it. If you use a fill with the foregrounds it is specified for, contrast is already handled. See
-[Accessibility](./intro.mdx#accessibility-is-built-in).
+[Accessibility](./intro.mdx#accessibility-is-built-in) and
+[Foreground pairing](./getting_started.mdx#foreground-pairing).

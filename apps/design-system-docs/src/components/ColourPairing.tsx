@@ -43,7 +43,7 @@ type Pairing = {
 const PAIRINGS: Pairing[] = [
   {
     title: 'Surfaces',
-    note: 'The planes content sits on.',
+    note: 'The planes your content sits on.',
     fill: 'background.surface',
     text: 'text.primary',
     icon: 'icon.secondary',

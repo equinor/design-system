@@ -139,6 +139,13 @@ steps, and how many data-visualisation ramps there are. Those cannot be read fro
 `check:colour-docs` asserts them against the token source instead. If a seventh tone were added, the
 pages would otherwise quietly render an incomplete picture.
 
+### Component copy follows the same style guide
+
+The labels and notes inside these components are documentation, so they follow
+[`COMPONENT_DOC_STYLE.md`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md) exactly as
+the prose does: British English, no em-dashes, and plain language over internal vocabulary. A reader
+does not know what a "consumer" is, so a step with nothing pointing at it reads as *not used*.
+
 ### Where the values come from
 
 | Source | Used for |
