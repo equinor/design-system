@@ -43,14 +43,14 @@
     "node": ">=22"
   },
   "devDependencies": {
-    "@figma/rest-api-spec": "^0.41.0",
-    "@microsoft/api-extractor": "^7.58.12",
+    "@figma/rest-api-spec": "^0.42.0",
+    "@microsoft/api-extractor": "^7.59.0",
     "@types/node": "^25.5.2",
-    "axios": "^1.18.1",
+    "axios": "^1.20.0",
     "dotenv": "^17.4.0",
     "prettier": "^3.9.6",
     "typescript": "^5.9.3",
-    "vite": "^8.1.5",
-    "vite-plugin-dts": "^5.0.3"
+    "vite": "^8.2.2",
+    "vite-plugin-dts": "^5.1.0"
   }
 }
