@@ -65,7 +65,7 @@ function SelectInner<T = string>(
   const displayErrorIcon = invalid && !disabled && !readOnly
 
   return (
-    <Field disabled={disabled}>
+    <Field disabled={disabled} className={className}>
       {label && (
         <Field.Label htmlFor={inputId} indicator={indicator}>
           {label}
@@ -83,7 +83,7 @@ function SelectInner<T = string>(
         />
       )}
       <div
-        className={['eds-select', className].filter(Boolean).join(' ')}
+        className="eds-select"
         data-color-appearance={
           invalid && !disabled && !readOnly ? 'danger' : 'neutral'
         }

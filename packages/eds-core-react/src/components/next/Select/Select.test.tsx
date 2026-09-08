@@ -43,6 +43,14 @@ describe('Select (next)', () => {
       expect(screen.getByLabelText('Element')).toBeInTheDocument()
     })
 
+    it('applies className to the outer field element, not the inner select wrapper', () => {
+      const { container } = render(
+        <Select label="Element" options={elements} className="custom-class" />,
+      )
+      expect(container.firstChild).toHaveClass('custom-class')
+      expect(container.firstChild).not.toHaveClass('eds-select')
+    })
+
     it('renders helper message', () => {
       render(
         <Select label="Element" options={elements} helperMessage="Pick one" />,
