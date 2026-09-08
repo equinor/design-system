@@ -19,6 +19,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       helperMessage,
       id: providedId,
       className,
+      style,
       ...rest
     },
     ref,
@@ -64,13 +65,16 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </>
     )
 
+    const rootClassName = ['eds-checkbox', className].filter(Boolean).join(' ')
+
     // Use Field for layout when label is provided
     if (label) {
       return (
         <Field
           position="start"
           disabled={disabled}
-          className={['eds-checkbox', className].filter(Boolean).join(' ')}
+          className={rootClassName}
+          style={style}
           data-color-appearance={disabled ? 'neutral' : 'accent'}
           data-selectable-space="md"
           data-space-proportions="squished"
@@ -90,7 +94,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className={['eds-checkbox', className].filter(Boolean).join(' ')}
+        className={rootClassName}
+        style={style}
         data-standalone={true}
         data-color-appearance={disabled ? 'neutral' : 'accent'}
         data-disabled={disabled || undefined}

@@ -60,18 +60,29 @@ describe('Radio (next)', () => {
     })
 
     it('applies className to the outer wrapper, not the hidden input', () => {
-      render(
-        <Radio
-          label="radio-test"
-          name="test"
-          className="custom-radio"
-          style={{ clipPath: 'unset' }}
-        />,
-      )
+      render(<Radio label="radio-test" name="test" className="custom-radio" />)
       const input = screen.getByLabelText('radio-test')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = input.closest('.eds-radio')
       expect(wrapper).toHaveClass('custom-radio')
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-radio')
+    })
+
+    it('applies className and style to the wrapper when standalone (no label)', () => {
+      render(
+        <Radio
+          aria-label="standalone"
+          name="test"
+          className="custom-radio"
+          style={{ marginTop: 8 }}
+        />,
+      )
+      const input = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-radio')
+      expect(wrapper).toHaveClass('custom-radio')
+      expect(wrapper).toHaveStyle({ marginTop: 8 })
       expect(input).toHaveClass('input')
       expect(input).not.toHaveClass('custom-radio')
     })
