@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0](https://github.com/equinor/design-system/compare/eds-icons@v1.5.1...eds-icons@v1.6.0) (2026-09-08)
+
+
+### ✨ Added
+
+* add plug_connect icon ([#5405](https://github.com/equinor/design-system/issues/5405)) ([5f044d0](https://github.com/equinor/design-system/commit/5f044d0f639588a55b7249c0c92a2c3824c0902c))
+* **eds-icons:** add shield and shield_outline icons ([#5421](https://github.com/equinor/design-system/issues/5421)) ([4c691ad](https://github.com/equinor/design-system/commit/4c691adedaf8f6a8949d71b9190e29520d73ba39))
+
 ## [1.5.1](https://github.com/equinor/design-system/compare/eds-icons@v1.5.0...eds-icons@v1.5.1) (2026-06-25)
 
 
