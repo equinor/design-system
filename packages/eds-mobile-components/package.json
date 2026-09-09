@@ -33,8 +33,7 @@
     "files": [
         "LICENSE",
         "CHANGELOG.md",
-        "dist",
-        "docs"
+        "dist"
     ],
     "homepage": "https://eds.equinor.com",
     "keywords": [
