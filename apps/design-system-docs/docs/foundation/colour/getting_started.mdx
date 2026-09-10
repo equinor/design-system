@@ -100,10 +100,36 @@ on, while `inverted` is one value shared by all six tones.
 
 ### Destructive button
 
-The same shape with `danger` in place of `accent`, with one thing to notice when it is disabled:
+The same shape with `danger` in place of `accent`. Every tone follows this pattern, so swapping the
+tone is the whole change:
 
 <TokenAnatomy
-  caption="Disabled, on a destructive button."
+  caption="The rest state. Hover and pressed take the matching values on the same fill."
+  annotations={[
+    { token: 'text.on-emphasis.danger', edge: 'top', label: 'label' },
+    { token: 'background.interactive.danger.emphasis.default', edge: 'bottom', label: 'fill' },
+  ]}
+>
+  <ButtonSpecimen tone="danger">Delete</ButtonSpecimen>
+</TokenAnatomy>
+
+```css
+.button--destructive {
+  background: var(--eds-background-interactive-danger-emphasis-default);
+  color: var(--eds-text-on-emphasis-danger);
+}
+.button--destructive:hover {
+  background: var(--eds-background-interactive-danger-emphasis-hover);
+}
+.button--destructive:active {
+  background: var(--eds-background-interactive-danger-emphasis-pressed);
+}
+```
+
+Disabled is the one place the pattern breaks:
+
+<TokenAnatomy
+  caption="The same button, disabled."
   annotations={[
     { token: 'text.interactive.disabled', edge: 'top', label: 'label' },
     { token: 'background.interactive.disabled', edge: 'bottom', label: 'fill' },

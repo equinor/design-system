@@ -282,7 +282,7 @@ export function LinkSpecimen() {
         pointerEvents: 'none',
       }}
     >
-      release notes
+      Release notes
     </a>
   )
 }
