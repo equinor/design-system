@@ -6,9 +6,10 @@ import React from 'react'
  * The worked examples used to be a table of part names beside a code block, which told you which
  * token to use but never showed you what it did. This points at the thing itself.
  *
- * Geometry is fixed rather than measured: the specimen sits in a slot of known size, so the leader
- * lines can be drawn without a layout pass. That keeps it correct during server rendering, where
- * there is nothing to measure.
+ * The connectors are positioned relative to the **specimen's own box**, not to a fixed slot, so a
+ * dot always sits exactly on the element's edge whatever its height. Only the vertical distance out
+ * to each label depends on fixed numbers, and that is a function of the annotation's row index
+ * rather than of anything that needs measuring. So it is correct during server rendering too.
  *
  * Every annotation names a real token. `check:colour-docs` verifies them, so a renamed token fails
  * the build rather than quietly labelling a diagram with something that no longer exists.
@@ -23,36 +24,102 @@ export type Annotation = {
   label?: string
 }
 
-const SPEC_W = 240
-const SPEC_H = 76
-const ROW = 32
-const PAD_X = 8
-const LABEL_X = SPEC_W + 56
-const DOT_R = 5
+/** Vertical distance between one annotation row and the next */
+const ROW = 30
+/** How far the first row sits from the specimen edge */
+const LIFT = 22
+/** Where the label column starts, measured from the specimen's left edge */
+const LABEL_X = 300
+/** Horizontal distance between connectors leaving the same edge */
+const STAGGER = 22
+/** Where the first connector meets the edge */
+const FIRST_X = 26
+
+const DOT = 9
+const LINE = 'var(--ifm-color-emphasis-400)'
 
 const cssName = (token: string) => `--eds-${token.replaceAll('.', '-')}`
 
+/** One L-shaped leader, anchored to the specimen edge it leaves from. */
 function Leader({
-  x,
-  from,
-  to,
-  labelY,
+  annotation,
+  index,
+  count,
 }: {
-  x: number
-  from: number
-  to: number
-  labelY: number
+  annotation: Annotation
+  index: number
+  count: number
 }) {
+  const isTop = annotation.edge === 'top'
+  const x = FIRST_X + index * STAGGER
+  // Rows fan outwards: for the top edge the last annotation sits highest.
+  const depth = LIFT + (isTop ? count - 1 - index : index) * ROW
+  const edge = isTop ? { bottom: '100%' } : { top: '100%' }
+
   return (
     <>
-      <polyline
-        points={`${x},${from} ${x},${to} ${LABEL_X - 10},${to}`}
-        fill="none"
-        stroke="var(--ifm-color-emphasis-500)"
-        strokeWidth="1.5"
+      {/* vertical, from the edge out to the row */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          ...edge,
+          left: x,
+          height: depth,
+          borderLeft: `1.5px solid ${LINE}`,
+        }}
       />
-      <circle cx={x} cy={from} r={DOT_R} fill="var(--ifm-color-emphasis-600)" />
-      <circle cx={x} cy={labelY} r={0} />
+      {/* horizontal, along the row to the label */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          ...(isTop ? { bottom: `calc(100% + ${depth}px)` } : { top: `calc(100% + ${depth}px)` }),
+          left: x,
+          width: LABEL_X - x - 12,
+          borderTop: `1.5px solid ${LINE}`,
+        }}
+      />
+      {/* the dot, sitting on the edge itself */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          ...(isTop ? { top: -DOT / 2 } : { bottom: -DOT / 2 }),
+          left: x - DOT / 2,
+          width: DOT,
+          height: DOT,
+          borderRadius: '50%',
+          background: 'var(--ifm-color-emphasis-500)',
+        }}
+      />
+      {/* the label */}
+      <span
+        style={{
+          position: 'absolute',
+          ...(isTop
+            ? { bottom: `calc(100% + ${depth - 10}px)` }
+            : { top: `calc(100% + ${depth - 10}px)` }),
+          left: LABEL_X,
+          fontFamily: 'var(--ifm-font-family-monospace)',
+          fontSize: 12,
+          lineHeight: '20px',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {cssName(annotation.token)}
+        {annotation.label ? (
+          <span
+            style={{
+              fontFamily: 'var(--ifm-font-family-base)',
+              color: 'var(--ifm-color-emphasis-700)',
+              marginLeft: '0.5rem',
+            }}
+          >
+            {annotation.label}
+          </span>
+        ) : null}
+      </span>
     </>
   )
 }
@@ -71,83 +138,29 @@ export function TokenAnatomy({
   const top = annotations.filter((a) => a.edge === 'top')
   const bottom = annotations.filter((a) => a.edge === 'bottom')
 
-  const specTop = top.length * ROW + 8
-  const height = specTop + SPEC_H + bottom.length * ROW + 16
-  const width = LABEL_X + 380
+  // Room for the leaders, which are drawn outside the specimen's box.
+  const above = top.length ? LIFT + (top.length - 1) * ROW + 16 : 0
+  const below = bottom.length ? LIFT + (bottom.length - 1) * ROW + 16 : 0
 
   return (
-    <figure style={{ margin: '1.5rem 0', maxWidth: '100%', overflowX: 'auto' }}>
-      <div style={{ position: 'relative', width, height, minWidth: width }}>
-        {/* Leader lines sit underneath, so the specimen always wins on overlap. */}
-        <svg
-          width={width}
-          height={height}
-          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-          aria-hidden="true"
-        >
-          {top.map((a, i) => {
-            const x = PAD_X + 26 + i * 24
-            const y = (top.length - 1 - i) * ROW + 16
-            return <Leader key={a.token} x={x} from={specTop} to={y} labelY={y} />
-          })}
-          {bottom.map((a, i) => {
-            const x = PAD_X + 26 + i * 24
-            const y = specTop + SPEC_H + i * ROW + 16
-            return <Leader key={a.token} x={x} from={specTop + SPEC_H} to={y} labelY={y} />
-          })}
-        </svg>
-
-        {/* The specimen */}
-        <div
-          style={{
-            position: 'absolute',
-            left: PAD_X,
-            top: specTop,
-            width: SPEC_W,
-            height: SPEC_H,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}
-        >
+    <figure style={{ margin: '1.5rem 0', overflowX: 'auto' }}>
+      <div
+        style={{
+          paddingTop: above,
+          paddingBottom: below,
+          minWidth: LABEL_X + 360,
+        }}
+      >
+        {/* The specimen is the coordinate system: every leader is positioned against its box. */}
+        <div style={{ position: 'relative', display: 'inline-block', maxWidth: 240 }}>
           {children}
+          {top.map((a, i) => (
+            <Leader key={a.token} annotation={a} index={i} count={top.length} />
+          ))}
+          {bottom.map((a, i) => (
+            <Leader key={a.token} annotation={a} index={i} count={bottom.length} />
+          ))}
         </div>
-
-        {/* Labels */}
-        {[...top, ...bottom].map((a) => {
-          const isTop = a.edge === 'top'
-          const i = isTop ? top.indexOf(a) : bottom.indexOf(a)
-          const y = isTop
-            ? (top.length - 1 - i) * ROW + 16
-            : specTop + SPEC_H + i * ROW + 16
-          return (
-            <div
-              key={a.token}
-              style={{
-                position: 'absolute',
-                left: LABEL_X,
-                top: y - 10,
-                fontFamily: 'var(--ifm-font-family-monospace)',
-                fontSize: 12,
-                lineHeight: '20px',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {cssName(a.token)}
-              {a.label ? (
-                <span
-                  style={{
-                    fontFamily: 'var(--ifm-font-family-base)',
-                    color: 'var(--ifm-color-emphasis-700)',
-                    marginLeft: '0.5rem',
-                  }}
-                >
-                  {a.label}
-                </span>
-              ) : null}
-            </div>
-          )
-        })}
       </div>
       {caption ? (
         <figcaption
@@ -182,6 +195,7 @@ export function ButtonSpecimen({
     <button
       type="button"
       style={{
+        display: 'block',
         background: v(`background.interactive.${tone}.emphasis.default`),
         color: v(`text.on-emphasis.${tone}`),
         border: 'none',
@@ -203,6 +217,7 @@ export function DisabledButtonSpecimen() {
       type="button"
       disabled
       style={{
+        display: 'block',
         background: v('background.interactive.disabled'),
         color: v('text.interactive.disabled'),
         border: `1px solid ${v('border.interactive.disabled')}`,
@@ -227,7 +242,8 @@ export function BannerSpecimen({ tone = 'warning' }: { tone?: string }) {
         borderRadius: 4,
         padding: '0.625rem 0.875rem',
         fontSize: '0.875rem',
-        width: '100%',
+        width: 240,
+        boxSizing: 'border-box',
       }}
     >
       Check the values before continuing.
@@ -237,7 +253,7 @@ export function BannerSpecimen({ tone = 'warning' }: { tone?: string }) {
 
 export function LinkSpecimen() {
   return (
-    <span style={{ fontSize: '0.9375rem' }}>
+    <span style={{ display: 'block', fontSize: '0.9375rem' }}>
       Read the{' '}
       <a
         href="#"
@@ -255,6 +271,7 @@ export function FocusRingSpecimen() {
     <button
       type="button"
       style={{
+        display: 'block',
         background: v('background.interactive.accent.emphasis.default'),
         color: v('text.on-emphasis.accent'),
         border: 'none',
