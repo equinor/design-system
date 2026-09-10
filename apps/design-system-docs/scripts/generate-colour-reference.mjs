@@ -143,7 +143,11 @@ const row = (name) => {
   const light = cssName ? resolve('light', cssName) : null
   const dark = cssName ? resolve('dark', cssName) : null
   if (!light || !dark) unresolved.push(name)
-  return `| \`${name}\` | ${cssName ? '`' + cssName + '`' : 'none'} | \`${light ?? '?'}\` | \`${dark ?? '?'}\` |`
+  // The swatch is a live var(), so it follows the colour scheme and never goes stale. It sits in
+  // the Token cell rather than a column of its own: a fifth column squeezed the CSS property into a
+  // vertical stack, and the swatch belongs next to the name anyway.
+  const swatch = cssName ? `<Swatch t="${cssName.replace(/^--eds-/, '')}" /> ` : ''
+  return `| ${swatch}\`${name}\` | ${cssName ? '`' + cssName + '`' : 'none'} | \`${light ?? '?'}\` | \`${dark ?? '?'}\` |`
 }
 
 const out = [
@@ -160,8 +164,10 @@ for (const [label, matches, blurb] of GROUPS) {
   names.forEach((n) => seen.add(n))
   if (!names.length) continue
   out.push('', `## ${label}`, '', blurb, '', `${names.length} tokens.`, '')
+  out.push('<div className="colour-reference">', '')
   out.push('| Token | CSS custom property | Light | Dark |', '| --- | --- | --- | --- |')
   names.forEach((n) => out.push(row(n)))
+  out.push('', '</div>')
 }
 
 const ungrouped = all.filter((n) => !seen.has(n))
