@@ -15,8 +15,9 @@ looks the way it does, or when you are proposing a new one.
 Every value in the scale is produced by a formula from three inputs: a **hue anchor**, a
 **lightness** value, and a **chroma** curve. Nobody chooses individual colours.
 
-There are seven hue anchors, each defined once in **OKLCH**: blue, gray, green, moss green, north
-sea, orange and red.
+There are seven hue anchors, each defined once in **OKLCH**: `blue`, `gray`, `green`, `moss green`,
+`north sea`, `orange` and `red`. Those are the names in the token source, which is why `gray` is
+spelled the American way there and "grey" everywhere else on this page.
 
 [OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) is a way of writing a
 colour as three numbers: **L** for how light it is, **C** for how saturated, and **H** for which hue.
@@ -88,14 +89,14 @@ hue in each:
 
 | Tone | Light | Dark |
 | --- | --- | --- |
-| `accent` | Moss green | Moss green |
-| `neutral` | **Gray** | **North sea** |
-| `info` | Blue | Blue |
-| `success` | Green | Green |
-| `warning` | Orange | Orange |
-| `danger` | Red | Red |
+| `accent` | `moss green` | `moss green` |
+| `neutral` | `gray` | `north sea` |
+| `info` | `blue` | `blue` |
+| `success` | `green` | `green` |
+| `warning` | `orange` | `orange` |
+| `danger` | `red` | `red` |
 
-Dark-mode neutral is North sea rather than grey on purpose: a pure-grey dark interface reads as dead,
+Dark-mode neutral is north sea rather than grey on purpose: a pure-grey dark interface reads as dead,
 and the slight blue keeps large dark surfaces feeling like a material.
 
 ## Data visualisation
