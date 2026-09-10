@@ -163,6 +163,22 @@ does not know what a "consumer" is, so a step with nothing pointing at it reads 
 The CSS names are not derived from the Figma names by a transform. Both come from one definition, so
 they cannot drift apart. If you need a value, look it up rather than converting one yourself.
 
+### The three name forms
+
+A colour token is written three ways, and the docs cover all of them:
+
+| Where | How it is written |
+|---|---|
+| Figma | `background.non-interactive.accent.muted` |
+| CSS | `--eds-background-non-interactive-accent-muted` |
+| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+
+The reference table carries the first two. The TypeScript form is documented as a rule rather than a
+column, because a fourth column made the table unreadable and the rule holds for all 263 colour
+tokens. `check:colour-docs` asserts that: it flattens the generated `ts/semantic/light.ts` and
+verifies every canonical name camel-cases to a path that actually exists, so the documented rule
+cannot quietly become false.
+
 ### What the checker catches
 
 Docusaurus catches none of this: a mistyped custom property renders as an unstyled element, and a
@@ -171,6 +187,7 @@ stale count renders as a smaller grid. Neither raises an error.
 - a dotted token name in prose that does not exist
 - a `--eds-*` property that does not exist, in prose or in a component
 - a structural count in a component that no longer matches the token source
+- a colour token whose TypeScript path no longer follows the documented camel-case rule
 
 2.x names are accepted where the migration page quotes them deliberately, read from the legacy build
 rather than allowed by prefix, so a typo in a legacy name still fails.

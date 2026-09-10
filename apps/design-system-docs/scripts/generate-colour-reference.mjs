@@ -156,6 +156,10 @@ const out = [
   '',
   'The **Token** column is the name you pick in Figma. The **CSS custom property** column is the same',
   "token's name in code. Both come from the token definition itself, so they cannot drift apart.",
+  '',
+  'There is a TypeScript form as well, which is the dotted name with each segment camel-cased:',
+  '`semantic.background.nonInteractive.accent.muted`. See',
+  '[Using the tokens in TypeScript](./getting_started.mdx#using-the-tokens-in-typescript).',
 ]
 
 const seen = new Set()

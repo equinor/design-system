@@ -189,6 +189,62 @@ for (const [what, source, file, found] of structure) {
   }
 }
 
+// --- the TypeScript path rule ------------------------------------------------------------------
+
+// Getting Started tells the reader a TypeScript path is the dotted name with each segment
+// camel-cased. That is a claim about generated output, so it is checked rather than trusted: if the
+// generator ever changes how it keys a name, the documented rule becomes a lie that nothing else
+// would catch.
+const tsFile = join(tokens, 'ts', 'semantic', 'light.ts')
+if (existsSync(tsFile)) {
+  const src = readFileSync(tsFile, 'utf8')
+  const body = src.slice(src.indexOf('export const semantic'))
+  const stack = []
+  const tsPaths = new Set()
+  for (const line of body.split('\n')) {
+    const open = line.match(/^\s*([A-Za-z0-9_'"-]+):\s*\{/)
+    if (open) {
+      stack.push(open[1].replace(/['"]/g, ''))
+      continue
+    }
+    const leaf = line.match(/^\s*([A-Za-z0-9_'"-]+):\s*'([^']*)'/)
+    if (leaf) {
+      tsPaths.add([...stack, leaf[1].replace(/['"]/g, '')].join('.'))
+      continue
+    }
+    if (/^\s*\},?\s*$/.test(line) && stack.length) stack.pop()
+  }
+
+  const camel = (segment) =>
+    segment
+      .split('-')
+      .map((word, i) => (i === 0 ? word : word.slice(0, 1).toUpperCase() + word.slice(1)))
+      .join('')
+
+  let checked = 0
+  for (const name of canon) {
+    if (!/^(background|border|text|icon|overlay|data-visualization)\./.test(name)) continue
+    checked++
+    const derived = name.split('.').map(camel).join('.')
+    if (!tsPaths.has(derived)) {
+      problems.push({
+        file: 'docs/foundation/colour/getting_started.mdx',
+        line: 0,
+        name: `TypeScript path rule broken: ${name} should be ${derived}, which the generated TS does not have`,
+        kind: 'structure',
+      })
+    }
+  }
+  if (checked === 0) {
+    problems.push({
+      file: 'scripts/check-colour-docs.mjs',
+      line: 0,
+      name: 'no colour tokens checked against the TypeScript output',
+      kind: 'structure',
+    })
+  }
+}
+
 // --- report --------------------------------------------------------------------------------------
 
 if (problems.length) {

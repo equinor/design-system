@@ -24,18 +24,26 @@ There is one approach, in both design and code.
 ```
 
 In Figma the same token is `background.interactive.accent.emphasis.default`. Both names are
-generated from one definition, so they cannot drift apart.
+generated from one definition, so they cannot drift apart. There is a TypeScript form too, for
+places a custom property cannot reach: see [Using the tokens in TypeScript](#using-the-tokens-in-typescript).
 
 :::tip Reaching for a hex value? The token exists, so look it up
-Every colour token has exactly one Figma name and one CSS custom property, and the
-[token reference](./reference.mdx) lists them side by side. If you know the Figma name, the CSS name
-is on the same row; if you know the colour by sight, the resolved values in both schemes are there
-too.
+Every colour token has one name in Figma, one CSS custom property and one TypeScript path. The
+[token reference](./reference.mdx) lists the first two side by side with the resolved values in both
+schemes, and the third follows from the name.
 
-The two notations line up mechanically, with `--eds-` followed by the dotted name and hyphens for
-dots, so you can usually spell one from the other. The reference is still the authority. Each CSS name
-is carried in the token's own definition rather than derived from the Figma name, so if the two ever
-disagree, the reference is right and the pattern is not.
+The three line up mechanically:
+
+| Where | How it is written |
+| --- | --- |
+| Figma | `background.non-interactive.accent.muted` |
+| CSS | `--eds-background-non-interactive-accent-muted` |
+| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+
+CSS is `--eds-` followed by the dotted name with hyphens for dots. TypeScript is the dotted name with
+each segment camel-cased. The reference is still the authority for the CSS name, which is carried in
+the token's own definition rather than derived, so if the two ever disagree the reference is right and
+the pattern is not.
 
 A hardcoded hex is the failure mode this page exists to prevent. It will not follow the colour
 scheme, and nothing will tell you when it has stopped matching the token it was copied from.
@@ -280,6 +288,47 @@ people expect from a colour scheme, and it is what we recommend.
 The attribute can be set on any ancestor and it cascades, so scoping a single panel to dark inside a
 light page is technically possible. We would not advise it. A colour scheme describes the interface,
 not a region inside it.
+
+## Using the tokens in TypeScript
+
+The tokens also ship as TypeScript objects, for the places a CSS custom property cannot reach: a
+chart library that wants a colour string, a canvas, an email template, a React Native surface.
+
+```ts
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+
+semantic.background.interactive.accent.emphasis.default // '#21767e'
+```
+
+Each module is imported directly; there is no barrel. The objects are `as const`, and each one also
+exports its type, so `Semantic` gives you autocompletion and a compile error on a name that does not
+exist.
+
+:::warning The colour scheme does not switch for you
+This is the one real difference from CSS, and it is easy to miss.
+
+In CSS you write one name and the `data-color-scheme` attribute decides the value. In TypeScript
+there is no attribute to read: `semantic/light` and `semantic/dark` are two separate objects, and you
+choose which to import.
+
+```ts
+import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
+
+const tokens = prefersDark ? dark : light
+```
+
+So prefer CSS custom properties wherever they work. Reach for the TypeScript objects only where they
+do not, and expect to handle the scheme yourself when you do.
+:::
+
+Values are **hex**, not the OKLCH of the CSS output. They are generated from the same source, so they
+agree, but a value copied from here will not carry the wide-gamut precision the CSS has.
+
+Beyond `semantic`, the other modules under `next/ts/` expose the layers underneath: `colorScheme` for
+the tone scales, `colors` for the hue primitives, and `density`, `font`, `elevation` and `primitives`
+for the non-colour axes. [The palette](./palette.mdx) explains what those layers are for. Only
+`semantic` is meant for everyday use.
 
 ## For designers
 
