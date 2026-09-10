@@ -370,6 +370,12 @@ nav.menu li a {
 .colour-reference table {
   display: table;
   width: 100%;
+  font-size: 12px;
+}
+
+/* Inherit rather than keep Infima's own code sizing, which would otherwise stay larger. */
+.colour-reference table code {
+  font-size: inherit;
 }
 
 .colour-reference table code {
