@@ -29,7 +29,13 @@ const colourDocs = join(app, 'docs', 'foundation', 'colour')
 const components = join(app, 'src', 'components')
 
 const PROSE = ['intro.mdx', 'getting_started.mdx', 'palette.mdx', 'migration.mdx']
-const COMPONENTS = ['ColourPairing.tsx', 'ColourStates.tsx', 'ColourScale.tsx', 'DataVizPalette.tsx']
+const COMPONENTS = [
+  'ColourPairing.tsx',
+  'ColourStates.tsx',
+  'ColourScale.tsx',
+  'DataVizPalette.tsx',
+  'TokenAnatomy.tsx',
+]
 
 // MigrationMap is scanned differently: its `from` field holds old 1.x and 2.x names, which are
 // supposed not to exist. Only the `to` field points at a redefined token.

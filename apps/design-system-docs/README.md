@@ -130,9 +130,16 @@ Do not edit inside the markers. The next run overwrites it.
 
 ### The components sit in between
 
-`ColourPairing`, `ColourStates`, `ColourScale` and `DataVizPalette` never hard-code a colour. They
-emit `var(--eds-*)` and the browser resolves it, so a token value change appears without regenerating
-anything.
+`ColourPairing`, `ColourStates`, `ColourScale`, `DataVizPalette`, `TokenAnatomy`, `MigrationMap` and
+`ColourSwatch` never hard-code a colour. They emit `var(--eds-*)` and the browser resolves it, so a
+token value change appears without regenerating anything. The one exception is the 1.x column in
+`MigrationMap`, which is literal hex because that generation was a hand-picked palette whose
+variables are not loaded here.
+
+`TokenAnatomy` is the general one: give it a specimen and a list of annotations and it draws leader
+lines from the element out to the tokens that produce it. Its geometry is fixed rather than measured,
+so it renders correctly on the server where there is nothing to measure. Reach for it whenever a
+worked example would otherwise be a table of part names.
 
 What they do hold as literals is **structure**: which pairings exist, the role of each of the 15
 steps, and how many data-visualisation ramps there are. Those cannot be read from a `var()`, so

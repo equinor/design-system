@@ -4,6 +4,14 @@ description: Picking colour tokens. Pairing rules, worked examples, and the mist
 ---
 
 import ColourPairing from '@site/src/components/ColourPairing'
+import {
+  TokenAnatomy,
+  ButtonSpecimen,
+  DisabledButtonSpecimen,
+  BannerSpecimen,
+  LinkSpecimen,
+  FocusRingSpecimen,
+} from '@site/src/components/TokenAnatomy'
 
 Colour in EDS is **semantic**: the tone is part of the token name, and you bind to it directly.
 There is one approach, in both design and code.
@@ -64,13 +72,15 @@ on, while `inverted` is one value shared by all six tones.
 
 ### Primary button
 
-| Part | Token |
-| --- | --- |
-| fill, rest | `background.interactive.accent.emphasis.default` |
-| fill, hover | `background.interactive.accent.emphasis.hover` |
-| fill, pressed | `background.interactive.accent.emphasis.pressed` |
-| label | `text.on-emphasis.accent` |
-| focus ring | `border.interactive.focus` |
+<TokenAnatomy
+  caption="The rest state. Hover and pressed take the matching values on the same fill."
+  annotations={[
+    { token: 'text.on-emphasis.accent', edge: 'top', label: 'label' },
+    { token: 'background.interactive.accent.emphasis.default', edge: 'bottom', label: 'fill' },
+  ]}
+>
+  <ButtonSpecimen />
+</TokenAnatomy>
 
 ```css
 .button--primary {
@@ -90,7 +100,18 @@ on, while `inverted` is one value shared by all six tones.
 
 ### Destructive button
 
-The same shape with `danger` in place of `accent`, with one thing to notice:
+The same shape with `danger` in place of `accent`, with one thing to notice when it is disabled:
+
+<TokenAnatomy
+  caption="Disabled, on a destructive button."
+  annotations={[
+    { token: 'text.interactive.disabled', edge: 'top', label: 'label' },
+    { token: 'background.interactive.disabled', edge: 'bottom', label: 'fill' },
+    { token: 'border.interactive.disabled', edge: 'bottom', label: 'stroke' },
+  ]}
+>
+  <DisabledButtonSpecimen />
+</TokenAnatomy>
 
 ```css
 .button--destructive:disabled {
@@ -104,6 +125,17 @@ The same shape with `danger` in place of `accent`, with one thing to notice:
 ### A status banner
 
 A banner is non-interactive. It gets a tint and a border, and **no hover values**:
+
+<TokenAnatomy
+  caption="A warning banner. Substitute any tone."
+  annotations={[
+    { token: 'text.on-muted.warning', edge: 'top', label: 'text' },
+    { token: 'background.non-interactive.warning.muted', edge: 'bottom', label: 'fill' },
+    { token: 'border.non-interactive.warning.muted', edge: 'bottom', label: 'stroke' },
+  ]}
+>
+  <BannerSpecimen />
+</TokenAnatomy>
 
 ```css
 .banner--warning {
@@ -120,6 +152,15 @@ fill does not.
 
 `link` sits in the tone position but is a role rather than a tone, so it has `default`, `hover` and
 `pressed` and no level:
+
+<TokenAnatomy
+  caption="A link in running text."
+  annotations={[
+    { token: 'text.interactive.link.default', edge: 'bottom', label: 'link text' },
+  ]}
+>
+  <LinkSpecimen />
+</TokenAnatomy>
 
 ```css
 a {
@@ -140,6 +181,15 @@ links are blue. `info` means the content is informational, and the two are free 
 ### Focus ring
 
 One token, every component, on every fill:
+
+<TokenAnatomy
+  caption="The focus ring sits outside the element, so it works on any fill."
+  annotations={[
+    { token: 'border.interactive.focus', edge: 'bottom', label: 'ring' },
+  ]}
+>
+  <FocusRingSpecimen />
+</TokenAnatomy>
 
 ```css
 :focus-visible {
