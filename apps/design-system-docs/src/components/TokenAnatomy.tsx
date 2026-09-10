@@ -145,7 +145,9 @@ export function TokenAnatomy({
   const below = bottom.length ? LIFT + (bottom.length - 1) * ROW + 16 : 0
 
   return (
-    <figure style={{ margin: '1.5rem 0', overflowX: 'auto' }}>
+    <figure
+      style={{ margin: '1.5rem 0', overflowX: 'auto', padding: '0.5rem' }}
+    >
       <div
         style={{
           paddingTop: above,
