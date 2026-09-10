@@ -115,7 +115,7 @@ Interactive tokens carry `default`, `hover` and `pressed` as the last segment, s
 pressed fill is `background.interactive.accent.emphasis.pressed`. Selected variants take `selected` as
 their level, giving `background.interactive.accent.selected.hover` and its siblings.
 
-Every state is a real, named colour. We do not use an opacity overlay or `filter: brightness()`,
+Every state has its own named colour. We do not use an opacity overlay or `filter: brightness()`,
 because those break against tinted backgrounds, invert wrongly in dark mode, and leave the hover value
 without a name anyone can refer to.
 

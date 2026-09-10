@@ -188,6 +188,7 @@ stale count renders as a smaller grid. Neither raises an error.
 - a `--eds-*` property that does not exist, in prose or in a component
 - a structural count in a component that no longer matches the token source
 - a colour token whose TypeScript path no longer follows the documented camel-case rule
+- banned wording in prose: em-dashes, "real", "land", "ladder", "rung", "load-bearing"
 
 2.x names are accepted where the migration page quotes them deliberately, read from the legacy build
 rather than allowed by prefix, so a typo in a legacy name still fails.

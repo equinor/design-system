@@ -11,7 +11,7 @@ import React from 'react'
  * to each label depends on fixed numbers, and that is a function of the annotation's row index
  * rather than of anything that needs measuring. So it is correct during server rendering too.
  *
- * Every annotation names a real token. `check:colour-docs` verifies them, so a renamed token fails
+ * Every annotation names an existing token. `check:colour-docs` verifies them, so a renamed token fails
  * the build rather than quietly labelling a diagram with something that no longer exists.
  */
 

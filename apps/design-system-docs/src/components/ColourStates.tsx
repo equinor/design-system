@@ -3,7 +3,7 @@ import React from 'react'
 /**
  * Two small specimens for the Introduction.
  *
- * `StateLadder` shows that every state is a real, named colour rather than an opacity trick.
+ * `StateLadder` shows that every state has its own named colour rather than an opacity trick.
  * `DefaultTwoWays` shows the one thing readers reliably trip on: `default` is a state on the
  * interactive side and a level on the non-interactive side. Both are easier to see than to read.
  */

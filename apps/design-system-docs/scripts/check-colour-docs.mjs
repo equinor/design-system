@@ -189,6 +189,45 @@ for (const [what, source, file, found] of structure) {
   }
 }
 
+// --- banned wording ---------------------------------------------------------------------------
+
+// Words Edvard has ruled out. They keep reappearing because they are easy to reach for, so they are
+// checked rather than remembered. Code blocks and inline code are exempt: `land` could legitimately
+// be part of a token name, and `real` appears in third-party API names.
+const BANNED = [
+  [/\breal(ly)?\b/i, 'real / really'],
+  [/\bland(s|ed|ing)?\b/i, 'land / lands / landed / landing'],
+  [/\bload-bearing\b/i, 'load-bearing'],
+  [/\bladder\b/i, 'ladder (use scale or step)'],
+  [/\brung\b/i, 'rung (use step)'],
+  [/—/, 'em-dash (use a hyphen)'],
+]
+
+for (const file of PROSE) {
+  const path = join(colourDocs, file)
+  if (!existsSync(path)) continue
+  let fenced = false
+  readFileSync(path, 'utf8')
+    .split('\n')
+    .forEach((line, i) => {
+      if (line.trim().startsWith('```')) {
+        fenced = !fenced
+        return
+      }
+      if (fenced) return
+      // Inline code, JSX tags and MDX comments are not prose.
+      const prose = line
+        .replace(/`[^`]*`/g, '')
+        .replace(/<[^>]*>/g, '')
+        .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')
+      for (const [re, what] of BANNED) {
+        if (re.test(prose)) {
+          problems.push({ file, line: i + 1, name: `banned wording: ${what}`, kind: 'wording' })
+        }
+      }
+    })
+}
+
 // --- the TypeScript path rule ------------------------------------------------------------------
 
 // Getting Started tells the reader a TypeScript path is the dotted name with each segment
