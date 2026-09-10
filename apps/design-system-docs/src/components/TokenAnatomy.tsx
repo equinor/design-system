@@ -29,7 +29,7 @@ const ROW = 30
 /** How far the first row sits from the specimen edge */
 const LIFT = 22
 /** Where the label column starts, measured from the specimen's left edge */
-const LABEL_X = 300
+const LABEL_X = 200
 /** Horizontal distance between connectors leaving the same edge */
 const STAGGER = 22
 /** Where the first connector meets the edge */
@@ -74,7 +74,9 @@ function Leader({
         aria-hidden="true"
         style={{
           position: 'absolute',
-          ...(isTop ? { bottom: `calc(100% + ${depth}px)` } : { top: `calc(100% + ${depth}px)` }),
+          ...(isTop
+            ? { bottom: `calc(100% + ${depth}px)` }
+            : { top: `calc(100% + ${depth}px)` }),
           left: x,
           width: LABEL_X - x - 12,
           borderTop: `1.5px solid ${LINE}`,
@@ -152,13 +154,24 @@ export function TokenAnatomy({
         }}
       >
         {/* The specimen is the coordinate system: every leader is positioned against its box. */}
-        <div style={{ position: 'relative', display: 'inline-block', maxWidth: 240 }}>
+        <div
+          style={{
+            position: 'relative',
+            display: 'inline-block',
+            maxWidth: 240,
+          }}
+        >
           {children}
           {top.map((a, i) => (
             <Leader key={a.token} annotation={a} index={i} count={top.length} />
           ))}
           {bottom.map((a, i) => (
-            <Leader key={a.token} annotation={a} index={i} count={bottom.length} />
+            <Leader
+              key={a.token}
+              annotation={a}
+              index={i}
+              count={bottom.length}
+            />
           ))}
         </div>
       </div>
@@ -251,18 +264,26 @@ export function BannerSpecimen({ tone = 'warning' }: { tone?: string }) {
   )
 }
 
+/**
+ * Only the link, not a sentence around it.
+ *
+ * Leaders anchor to the specimen's box, so wrapping the link in running text put the dot under the
+ * first word of the sentence rather than under the link. The context belongs in the caption.
+ */
 export function LinkSpecimen() {
   return (
-    <span style={{ display: 'block', fontSize: '0.9375rem' }}>
-      Read the{' '}
-      <a
-        href="#"
-        onClick={(e) => e.preventDefault()}
-        style={{ color: v('text.interactive.link.default') }}
-      >
-        release notes
-      </a>
-    </span>
+    <a
+      href="/#"
+      style={{
+        display: 'block',
+        width: 'fit-content',
+        fontSize: '0.9375rem',
+        color: v('text.interactive.link.default'),
+        pointerEvents: 'none',
+      }}
+    >
+      release notes
+    </a>
   )
 }
 
