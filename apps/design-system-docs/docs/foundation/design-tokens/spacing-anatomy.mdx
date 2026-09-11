@@ -1,0 +1,84 @@
+---
+title: Spacing anatomy (test)
+description: A scratch page for the TokenAnatomy diagram in spacing mode. Not part of the guidance.
+---
+
+import { TokenAnatomy } from '@site/src/components/TokenAnatomy'
+import { DensitySwitch } from '@site/src/components/DensitySwitch'
+
+This page exists to exercise the diagram, not to teach anything.
+
+In spacing mode the tinted regions are sized from the same custom property the element is padded
+with, so they match it exactly without anything being measured. Switching density below moves the
+regions, the leader dots and the resolved values together, because all three come from the one
+declaration.
+
+The gap region is the exception. Where it falls depends on how wide the child before it is, so its
+leader is measured after layout and stays hidden until it has a position.
+
+<DensitySwitch>
+
+### Padding on two axes
+
+<TokenAnatomy
+  mode="spacing"
+  caption="Block padding above and below, inline padding left and right."
+  bindings={{
+    paddingBlock: { token: 'spacing.xs', label: 'block' },
+    paddingInline: { token: 'spacing.md', label: 'inline' },
+  }}
+  style={{
+    borderRadius: 4,
+    fontWeight: 500,
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
+>
+  Label
+</TokenAnatomy>
+
+### A gap between an icon and its label
+
+<TokenAnatomy
+  mode="spacing"
+  caption="The strip sits in the flex gap itself, not beside it."
+  maxWidth={320}
+  bindings={{
+    paddingBlock: { token: 'spacing.xs', label: 'block' },
+    paddingInline: { token: 'spacing.sm', label: 'inline' },
+    gap: { token: 'spacing.2xs', label: 'gap' },
+  }}
+  style={{
+    borderRadius: 4,
+    fontWeight: 500,
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
+>
+  <span aria-hidden="true">+</span>
+  <span>Add row</span>
+</TokenAnatomy>
+
+### A card, with its corner radius
+
+<TokenAnatomy
+  mode="spacing"
+  caption="The dashed marker at the top left is the corner radius token."
+  maxWidth={280}
+  bindings={{
+    paddingBlock: { token: 'spacing.md', label: 'block' },
+    paddingInline: { token: 'spacing.lg', label: 'inline' },
+    borderRadius: { token: 'corner-radius.rounded', label: 'corner' },
+  }}
+  style={{
+    fontSize: '0.875rem',
+    width: 280,
+    background: 'var(--eds-background-non-interactive-neutral-muted)',
+    color: 'var(--eds-text-primary)',
+    border: '1px solid var(--eds-border-non-interactive-neutral-muted)',
+  }}
+>
+  Three tokens decide every edge of this card.
+</TokenAnatomy>
+
+</DensitySwitch>

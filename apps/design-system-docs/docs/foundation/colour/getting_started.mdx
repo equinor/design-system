@@ -1,0 +1,384 @@
+---
+title: Getting Started
+description: Picking colour tokens. Pairing rules, worked examples, and the mistakes that survive review.
+---
+
+import ColourPairing from '@site/src/components/ColourPairing'
+import { TokenAnatomy } from '@site/src/components/TokenAnatomy'
+
+Colour in EDS is **semantic**: the tone is part of the token name, and you bind to it directly.
+There is one approach, in both design and code.
+
+```css
+.button--primary {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+}
+```
+
+In Figma the same token is `background.interactive.accent.emphasis.default`. Both names are
+generated from one definition, so they cannot drift apart. There is a TypeScript form too, for
+places a custom property cannot reach: see [Using the tokens in TypeScript](#using-the-tokens-in-typescript).
+
+:::tip Reaching for a hex value? The token exists, so look it up
+Every colour token has one name in Figma, one CSS custom property and one TypeScript path. The
+[token reference](./reference.mdx) lists the first two side by side with the resolved values in both
+schemes, and the third follows from the name.
+
+The three line up mechanically:
+
+| Where      | How it is written                                 |
+| ---------- | ------------------------------------------------- |
+| Figma      | `background.non-interactive.accent.muted`         |
+| CSS        | `--eds-background-non-interactive-accent-muted`   |
+| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+
+CSS is `--eds-` followed by the dotted name with hyphens for dots. TypeScript is the dotted name with
+each segment camel-cased. The reference is still the authority for the CSS name, which is carried in
+the token's own definition rather than derived, so if the two ever disagree the reference is right and
+the pattern is not.
+
+A hardcoded hex is the failure mode this page exists to prevent. It will not follow the colour
+scheme, and nothing will tell you when it has stopped matching the token it was copied from.
+:::
+
+## Foreground pairing
+
+Every fill below is shown painted, with the text, icon and border tokens it is specified for rendered
+inside it. The pairings are worth getting right, because they are what keeps contrast working without
+anyone checking it per screen.
+
+<ColourPairing />
+
+Both foreground families are **per tone**. `text.on-muted.danger` is a different value from
+`text.on-muted.accent`. Try not to substitute `text.primary` on a tinted fill, because that loses the
+tone the tint was there to convey.
+
+:::note Use `text.on-emphasis.<tone>` on a solid fill
+`text.on-emphasis.<tone>` is the foreground we recommend on any `emphasis` fill, and it is what the
+table above specifies.
+
+`text.inverted` also passes contrast on those fills, so you will not have broken anything by reaching
+for it. The reason to prefer `on-emphasis` is that it is defined per tone and follows the fill it sits
+on, while `inverted` is one value shared by all six tones.
+:::
+
+## Worked examples
+
+### Primary button
+
+<TokenAnatomy
+  mode="colour"
+  caption="The rest state. Hover and pressed take the matching values on the same fill."
+  bindings={{
+    color: { token: 'text.on-emphasis.accent', label: 'label' },
+    background: {
+      token: 'background.interactive.accent.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Label
+</TokenAnatomy>
+
+```css
+.button--primary {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+}
+.button--primary:hover {
+  background: var(--eds-background-interactive-accent-emphasis-hover);
+}
+.button--primary:active {
+  background: var(--eds-background-interactive-accent-emphasis-pressed);
+}
+.button--primary:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+}
+```
+
+### Destructive button
+
+The same shape with `danger` in place of `accent`. Every tone follows this pattern, so swapping the
+tone is the whole change:
+
+<TokenAnatomy
+  mode="colour"
+  caption="The rest state. Hover and pressed take the matching values on the same fill."
+  bindings={{
+    color: { token: 'text.on-emphasis.danger', label: 'label' },
+    background: {
+      token: 'background.interactive.danger.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Delete
+</TokenAnatomy>
+
+```css
+.button--destructive {
+  background: var(--eds-background-interactive-danger-emphasis-default);
+  color: var(--eds-text-on-emphasis-danger);
+}
+.button--destructive:hover {
+  background: var(--eds-background-interactive-danger-emphasis-hover);
+}
+.button--destructive:active {
+  background: var(--eds-background-interactive-danger-emphasis-pressed);
+}
+```
+
+Disabled is the one place the pattern breaks:
+
+<TokenAnatomy
+  mode="colour"
+  caption="The same button, disabled."
+  bindings={{
+    color: { token: 'text.interactive.disabled', label: 'label' },
+    background: { token: 'background.interactive.disabled', label: 'fill' },
+    borderColor: { token: 'border.interactive.disabled', label: 'stroke' },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Delete
+</TokenAnatomy>
+
+```css
+.button--destructive:disabled {
+  background: var(--eds-background-interactive-disabled);
+  color: var(--eds-text-interactive-disabled);
+}
+```
+
+**Disabled is neutral, not a faint red.** A control that cannot be actioned has no tone to convey.
+
+### A status banner
+
+A banner is non-interactive. It gets a tint and a border, and **no hover values**:
+
+<TokenAnatomy
+  mode="colour"
+  caption="A warning banner. Substitute any tone."
+  bindings={{
+    color: { token: 'text.on-muted.warning', label: 'text' },
+    background: {
+      token: 'background.non-interactive.warning.muted',
+      label: 'fill',
+    },
+    borderColor: {
+      token: 'border.non-interactive.warning.muted',
+      label: 'stroke',
+    },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.625rem 0.875rem',
+    fontSize: '0.875rem',
+    width: 240,
+  }}
+>
+  Check the values before continuing.
+</TokenAnatomy>
+
+```css
+.banner--warning {
+  background: var(--eds-background-non-interactive-warning-muted);
+  border: 1px solid var(--eds-border-non-interactive-warning-muted);
+  color: var(--eds-text-on-muted-warning);
+}
+```
+
+If you later make the banner dismissible, the dismiss control becomes interactive. The banner's own
+fill does not.
+
+### A link
+
+`link` sits in the tone position but is a role rather than a tone, so it has `default`, `hover` and
+`pressed` and no level:
+
+<TokenAnatomy
+  mode="colour"
+  caption="A link, as it appears in running text."
+  bindings={{
+    color: {
+      token: 'text.interactive.link.default',
+      edge: 'bottom',
+      label: 'link text',
+    },
+  }}
+  style={{ fontSize: '0.9375rem' }}
+>
+  Release notes
+</TokenAnatomy>
+
+```css
+a {
+  color: var(--eds-text-interactive-link-default);
+}
+a:hover {
+  color: var(--eds-text-interactive-link-hover);
+  text-decoration-color: var(--eds-border-interactive-link-hover);
+}
+a:active {
+  color: var(--eds-text-interactive-link-pressed);
+}
+```
+
+`icon.interactive.link.*` matches, for a link that carries an icon. It is worth resisting `info`
+just because links are blue: `info` says the content is informational, and the two are free to
+diverge.
+
+### Focus ring
+
+One token, every component, on every fill:
+
+<TokenAnatomy
+  mode="colour"
+  caption="The focus ring sits outside the element, so it works on any fill."
+  bindings={{
+    outlineColor: { token: 'border.interactive.focus', label: 'ring' },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.5rem 1.25rem',
+    fontWeight: 500,
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
+>
+  Label
+</TokenAnatomy>
+
+```css
+:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+```
+
+## Do's and Don'ts
+
+:::info **Do**
+
+- Pick by **behaviour**. A non-interactive tint and an interactive tint use different tokens even when they
+  look identical today
+- Use the named `hover` and `pressed` tokens
+- Let the scheme attribute do the work
+- Use `text.on-muted.<tone>` on a tinted fill
+- Treat disabled as its own set
+
+:::
+
+:::danger **Don't**
+
+- Pick by appearance, and give a banner hover values it will be handed by accident later
+- Derive states with `opacity` or `filter: brightness()`. They break on tinted fills and invert
+  wrongly in dark mode
+- Write `[data-color-scheme="dark"] .thing { … }`. If you need that, the token you picked is wrong
+- Fall back to `text.primary` on a tint, which discards the tone
+- Use a tone's faint end for disabled
+
+:::
+
+## Mistakes that survive review
+
+1. **A raw palette step in a component.** Binding to a numbered scale value instead of a semantic
+   token. It looks right and breaks the moment the scale is extended.
+2. **Tone on a disabled control.** Disabled has four tokens of its own and no tone.
+3. **`text.tertiary` used for body text.** It is for de-emphasised metadata, not a third body colour.
+4. **Data-visualisation tokens in UI chrome.** `data-visualization.*` is tuned for telling series
+   apart, not for contrast against a surface.
+
+## Coming from an earlier version
+
+If you are moving an existing app or Figma file across, the state and strength names have changed and
+some tokens have no direct equivalent. [Migration](./migration.mdx) covers both routes, from EDS 1.x
+and from 2.0.0-beta.
+
+## Switching colour scheme
+
+By default the system reads the `data-color-scheme` attribute:
+
+```html
+<!-- Light (default) -->
+<html data-color-scheme="light"></html>
+<!-- Dark -->
+<html data-color-scheme="dark"></html>
+```
+
+Set it once, at the top of the page or app, so the whole interface switches together. That is what
+people expect from a colour scheme, and it is what we recommend.
+
+The attribute can be set on any ancestor and it cascades, so scoping a single panel to dark inside a
+light page is technically possible. We would not advise it. A colour scheme describes the interface,
+not a region inside it.
+
+## Using the tokens in TypeScript
+
+The tokens also ship as TypeScript objects, for the places a CSS custom property cannot reach: a
+chart library that wants a colour string, a canvas, an email template, a React Native surface.
+
+```ts
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+
+semantic.background.interactive.accent.emphasis.default // '#21767e'
+```
+
+Each module is imported directly; there is no barrel. The objects are `as const`, and each one also
+exports its type, so `Semantic` gives you autocompletion and a compile error on a name that does not
+exist.
+
+:::warning The colour scheme does not switch for you
+This is the one meaningful difference from CSS, and it is easy to miss.
+
+In CSS you write one name and the `data-color-scheme` attribute decides the value. In TypeScript
+there is no attribute to read: `semantic/light` and `semantic/dark` are two separate objects, and you
+choose which to import.
+
+```ts
+import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
+
+const tokens = prefersDark ? dark : light
+```
+
+So prefer CSS custom properties wherever they work. Reach for the TypeScript objects only where they
+do not, and expect to handle the scheme yourself when you do.
+:::
+
+Values are **hex**, not the OKLCH of the CSS output. They are generated from the same source, so they
+agree, but a value copied from here will not carry the wide-gamut precision the CSS has.
+
+Beyond `semantic`, the other modules under `next/ts/` expose the layers underneath: `colorScheme` for
+the tone scales, `colors` for the hue primitives, and `density`, `font`, `elevation` and `primitives`
+for the non-colour axes. [The palette](./palette.mdx) explains what those layers are for. Only
+`semantic` is meant for everyday use.
+
+## For designers
+
+Add the EDS colour library to your Figma file and pick tokens by name. The variable names are
+identical to the ones above, so a design and its implementation refer to the same thing.
+
+Only the semantic layer is published to the variable picker. The numbered scale underneath it is
+hidden on purpose, so there is no way to bind a raw palette value to a component by accident. See
+[The palette](./palette.mdx).
+
+### Tokens are scoped to the property they belong on
+
+The variable picker is filtered by what you are colouring. Open the fill picker and you get fill
+tokens; open the stroke picker and you get border tokens. Text and icon tokens do not appear where a
+background belongs, and vice versa.
+
+This is not a setting to switch on, because the scoping is part of each token's definition. Two
+consequences are worth knowing:
+
+- **The list you choose from is already short.** Most colour tokens are irrelevant to any given
+  property, and you are never shown them.
+- **A whole class of mistake is simply unavailable.** You cannot bind `text.primary` to a rectangle's
+  fill, or drop a background token onto a stroke.
+
+So if a token you expected is missing from a picker, that absence is usually the answer: it belongs
+on a different property.

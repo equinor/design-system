@@ -1,0 +1,119 @@
+---
+title: The palette
+description: How the colour scale is built, why the same token names work in both light and dark, and what each step does.
+---
+
+import ColourScale from '@site/src/components/ColourScale'
+import DataVizPalette from '@site/src/components/DataVizPalette'
+
+This page is about the layer underneath the tokens. The scale is not exposed, so it is hidden from
+the Figma picker and is not part of the public token set. Read it when you want to know *why* a token
+looks the way it does, or when you are proposing a new one.
+
+## Colour is generated, not picked
+
+Every value in the scale is produced by a formula from three inputs: a **hue anchor**, a
+**lightness** value, and a **chroma** curve. Nobody chooses individual colours.
+
+There are seven hue anchors, each defined once in **OKLCH**: `blue`, `gray`, `green`, `moss green`,
+`north sea`, `orange` and `red`. Those are the names in the token source, which is why `gray` is
+spelled the American way there and "grey" everywhere else on this page.
+
+[OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) is a way of writing a
+colour as three numbers: **L** for how light it is, **C** for how saturated, and **H** for which hue.
+It replaces hex and RGB, where the same three numbers tell you nothing about how a colour will look.
+The property we rely on is that L means the same thing across every hue, so changing H does not change
+how light the colour appears. That is what lets every tone's step 9 read as equally solid whatever
+colour it is.
+
+Chroma follows a bell curve across the scale rather than being set per step, which keeps the middle
+of the scale saturated and both ends muted without anyone tuning it.
+
+The practical consequence: **adding a seventh tone is not a design exercise.** Point it at a hue
+anchor and the whole scale follows.
+
+## What the step numbers mean
+
+Each tone has 15 steps. The obvious reading, "1 is lightest and 15 is darkest", is not how they
+work.
+
+A step number is a **role position**, not a lightness. Step 9 is "the solid fill". Step 15 is "the
+foreground that sits on a solid fill". That is true in both schemes, and it is what lets one set of
+token names work in light and dark with no overrides.
+
+Steps 1 → 13 broadly travel from *closest to the background* toward *furthest from it*, which means
+descending lightness in light mode and ascending in dark.
+
+:::info The scale is deliberately not monotonic
+"Broadly" is carrying weight in that sentence. In dark mode the lightness values **dip at steps 4 and
+5** on purpose, because a strictly increasing ramp could not hold the contrast that the border and
+muted-fill roles at those steps need.
+
+So global ordering is not a rule and the dip is not a bug. The two rules that do hold are narrower:
+
+1. **No two steps within one scale resolve to the same value.**
+2. **Every sequence of states progresses visibly in one direction.**
+
+Steps 14 and 15 are excluded from both, as described below.
+:::
+
+## Which step does what
+
+Every tone, every step. Reading down a column shows the jump where strokes stop and fills begin;
+reading across a row shows that a step is the same role in every tone.
+
+<ColourScale />
+
+### Steps 14 and 15 are inverse-polarity
+
+They sit outside the ordering by design. Both are **foreground values meant to sit *on* a solid fill**,
+so their polarity is reversed relative to steps 1–13 and they must be excluded from any ordering
+check.
+
+Step 15 does double duty: it is also the content plane, which is why `background.surface`,
+`background.dialog` and `background.floating` all resolve to it.
+
+## The steps jump on purpose
+
+The scale is not a smooth gradient. Lightness values are chosen per step so that the pairings that
+matter, such as text against surface and fill against canvas, meet the contrast target exactly rather
+than approximately.
+
+Notice that the middle of the scale is evenly spaced while the run from borders into fills jumps
+roughly twice as far. That gap is where strokes stop and fills begin, and it needs to be visible.
+
+## Tone to hue
+
+The mapping from a tone to a hue happens per scheme, which is what allows `neutral` to be a different
+hue in each:
+
+| Tone | Light | Dark |
+| --- | --- | --- |
+| `accent` | `moss green` | `moss green` |
+| `neutral` | `gray` | `north sea` |
+| `info` | `blue` | `blue` |
+| `success` | `green` | `green` |
+| `warning` | `orange` | `orange` |
+| `danger` | `red` | `red` |
+
+Dark-mode neutral is north sea rather than grey on purpose: a pure-grey dark interface reads as dead,
+and the slight blue keeps large dark surfaces feeling like a material.
+
+## Data visualisation
+
+`data-visualization.*` is a separate group with its own rules, because chart colour is about telling
+series apart rather than about contrast against a background.
+
+<DataVizPalette />
+
+These are the only values in the set that sit outside the OKLCH generator, and no EDS component binds
+them. They are for you to apply in charts.
+
+## Why you cannot extend the scale yourself
+
+Inserting a step shifts every position above it and renames the whole scale, which silently breaks
+every consumer. So the scale is treated as fixed: an expanded scale ships alongside the current one
+rather than replacing it, and consumers move at their own pace.
+
+If you need a value the scale does not have, that is a token request rather than something to
+generate locally.

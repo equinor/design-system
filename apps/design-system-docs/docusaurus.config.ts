@@ -44,10 +44,24 @@ const config: Config = {
           breadcrumbs: true,
           editUrl:
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/shared',
+          // `lastVersion` is the version served at /docs/. It stays on 1.1.0, the last stable
+          // release, so the betas are opt-in and existing 1.1.0 links keep working. Move it when a
+          // 3.x line goes stable.
+          lastVersion: '1.1.0',
           versions: {
             current: {
-              label: '2.0.0-beta', // Current version label
+              label: '3.0.0-beta', // Current version label
               path: 'Next', // URL path for the current version
+              banner: 'none',
+            },
+            '2.0.0-beta': {
+              // Frozen at the point the colour foundation was redefined. Kept because consumers are
+              // still on it; new work goes to current.
+              //
+              // No banner: Docusaurus points its "unmaintained" banner at `lastVersion`, which would
+              // send a 2.0.0-beta reader to 1.1.0. The useful destination is 3.0.0-beta, which the
+              // banner cannot express, so the version dropdown carries that instead.
+              path: '2.0.0-beta',
               banner: 'none',
             },
           },

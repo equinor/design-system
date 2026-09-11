@@ -1,0 +1,222 @@
+---
+title: Introduction
+description: How EDS colour works. Semantic names, six tones, and one set of tokens that is correct in both light and dark.
+---
+
+import { StateLadder, DefaultTwoWays } from '@site/src/components/ColourStates'
+
+In EDS you describe what you are colouring, and the system supplies the value. It will be correct in
+both light and dark, and the contrast has already been checked for you.
+
+That is the whole idea, and the rest of this page shows you how to read a token name.
+
+## Reading a token name
+
+A name answers four questions, left to right:
+
+```
+background . interactive . accent . emphasis . hover
+ surface      stateful?     tone     level      state
+```
+
+Answer the four and you have the token. If one of them has no obvious answer, that usually means the
+design decision has not been made yet, which is a useful thing to discover early.
+
+### 1. Surface: what am I colouring?
+
+| Surface | Use for |
+| --- | --- |
+| `background` | fills: page, card, button body, row, input |
+| `border` | strokes, dividers, outlines, focus rings |
+| `text` | text and anything read as text |
+| `icon` | icons and glyphs |
+
+`text` and `icon` are separate because a thin icon stroke needs more contrast than a letterform of
+the same size to read as equally solid.
+
+### 2. Interactive: can the user act on it?
+
+| Segment | Meaning |
+| --- | --- |
+| `interactive` | responds to input, so it has `hover` and `pressed` values |
+| `non-interactive` | does not respond to input. One value, no states |
+
+This is the distinction that most often trips people up, so it is worth a moment. A tinted banner and
+a tinted button can look identical today, but they should not share a token. The button needs hover
+and pressed values; the banner should never pick them up. Choose by **behaviour** rather than by
+appearance.
+
+### 3. Tone: what does it mean?
+
+Six tones. Tone carries meaning, so picking one is a content decision, not a styling one.
+
+| Tone | Means | Not for |
+| --- | --- | --- |
+| `accent` | the primary action, brand emphasis, the current selection | decoration |
+| `neutral` | structure and default UI: surfaces, borders, secondary actions | conveying state |
+| `info` | neutral information worth noticing | success |
+| `success` | a completed or valid state | "on" or "enabled" generally |
+| `warning` | proceed with care; reversible risk | errors |
+| `danger` | destructive actions and errors | emphasis |
+
+Only `accent` and `neutral` have `selected` values, because selection is a UI state rather than a
+semantic condition.
+
+### 4. Level: how loud?
+
+The two branches have different levels, so read the one that matches your answer to question 2.
+
+**Interactive** has two levels, plus a third for selection:
+
+| Level | Looks like | Foreground on top |
+| --- | --- | --- |
+| `emphasis` | a solid, saturated fill | `text.on-emphasis.<tone>` |
+| `muted` | a light tint of the tone | `text.on-muted.<tone>` |
+| `selected` | a tint that reads as "chosen", on accent and neutral only | `text.primary` |
+
+**Non-interactive** has three levels and no states at all:
+
+| Level | Looks like | Foreground on top |
+| --- | --- | --- |
+| `muted` | the faintest tint that still reads as tinted | `text.on-muted.<tone>` |
+| `default` | the ordinary strength for a non-interactive tinted element | `text.on-default.<tone>` |
+| `emphasis` | a solid, saturated fill | `text.on-emphasis.<tone>` |
+
+Please treat the foreground column as part of the choice rather than a suggestion, since it is what
+keeps contrast working. [Foreground pairing](./getting_started.mdx#foreground-pairing) has the full
+set.
+
+To choose between the levels: **`muted` suits anything that carries a tone but is not what you want
+looked at first**, such as banners, tags and tinted table rows. Reach for `emphasis` when the element
+*is* the point, like a primary action or a filled status pip. `default` sits between the two, and
+exists only on the non-interactive side, where an element needs a middle strength and has no
+states to spend the distinction on.
+
+:::warning `default` means two different things
+It is a **state** on interactive tokens and a **level** on non-interactive ones:
+
+```
+background.interactive.accent.emphasis.default    ← default STATE (vs hover, pressed)
+background.non-interactive.accent.default         ← default LEVEL (vs muted, emphasis)
+```
+
+Position tells you which one you are looking at. **The segment straight after the tone is always the
+level.** Interactive tokens then add a state on the end, so an interactive token always finishes with
+a state and a non-interactive one never does.
+:::
+
+The same word, on both axes:
+
+<DefaultTwoWays />
+
+### 5. State
+
+Interactive tokens carry `default`, `hover` and `pressed` as the last segment, so the accent button's
+pressed fill is `background.interactive.accent.emphasis.pressed`. Selected variants take `selected` as
+their level, giving `background.interactive.accent.selected.hover` and its siblings.
+
+Every state has its own named colour. We do not use an opacity overlay or `filter: brightness()`,
+because those break against tinted backgrounds, invert wrongly in dark mode, and leave the hover value
+without a name anyone can refer to.
+
+<StateLadder />
+
+## Colours that sit outside the tone matrix
+
+Some tokens mean the same thing regardless of tone.
+
+| Token | Job |
+| --- | --- |
+| `background.canvas` | the page behind everything |
+| `background.surface` | the plane content sits on: cards, panels, table bodies |
+| `background.floating` | menus, popovers, tooltips |
+| `background.dialog` | modal surfaces |
+| `background.input` | form field fills |
+| `background.inverted` | inverted surfaces, e.g. snackbars |
+| `border.interactive.focus` | the focus ring. One token, every component |
+| `border.interactive.selected-indicator` | the bar or underline marking the active item |
+| `text.interactive.link.*` | links, with `default`, `hover` and `pressed`. `icon.` and `border.` carry the same family |
+| `text.primary`, `.secondary`, `.tertiary` | text hierarchy on ordinary surfaces |
+| `icon.primary`, `.secondary`, `.tertiary` | the icon equivalents |
+| `text.inverted`, `icon.inverted` | foregrounds on `background.inverted` |
+
+{/* STUB - `background.backdrop` and `overlay.scrim` were removed here on 2026-09-08.
+    Their descriptions ("the layer behind a floating element" and "the dim behind a modal")
+    describe the same job, and whether both tokens should exist is unresolved. Document them
+    again once that is settled - do not reinstate the old wording. */}
+
+Disabled is its own small set, because a disabled control loses its tone entirely:
+
+| Token | Job |
+| --- | --- |
+| `background.interactive.disabled` | the fill of a disabled control |
+| `border.interactive.disabled` | its stroke |
+| `text.interactive.disabled` | its label |
+| `icon.interactive.disabled` | any icon it carries |
+
+A disabled destructive button is not a faint red. It is neutral.
+
+Links work the same way. `link` sits in the tone position but is a **role** rather than a tone. It is
+worth resisting `info` just because links happen to be blue: `info` says the content is
+informational, and the two are free to diverge.
+
+### Three surface names, one value
+
+`background.surface`, `background.dialog` and `background.floating` resolve to the same colour today.
+Check the [reference](./reference.mdx) and you will find identical values in both schemes.
+
+They stay three tokens because they answer three different questions, and any one of them may change
+later. If dialogs pick up a tint, everything bound to `background.dialog` follows automatically.
+Binding a popover to `background.surface` because it is the same white today is what this split helps
+you avoid.
+
+`canvas` and `surface` are a different case, because those two already differ. `canvas` is the page
+behind everything and `surface` is the plane content sits on.
+
+### `inverted` is not dark mode
+
+`background.inverted` inverts against **the scheme you are already in**, so it is a dark surface in
+light mode and a light one in dark mode. Use it for elements that deliberately stand apart from the
+surface around them, such as a snackbar or a tooltip.
+
+The scheme attribute still applies to it, exactly as it does to every other token. What `inverted`
+reverses is the element's relationship to its surroundings, not the scheme.
+
+## Light and dark
+
+The same token names work in both schemes. An attribute decides which one applies:
+
+```html
+<html data-color-scheme="dark"></html>
+```
+
+There is no scheme-specific token and no scheme-specific CSS to write. `text.primary` is a dark grey
+in light and a pale blue-white in dark, under one name. [The palette](./palette.mdx) explains the
+mechanism that makes that work.
+
+## Accessibility is built in
+
+Contrast is measured with **APCA**, the Accessible Perceptual Contrast Algorithm. It scores the
+readability of a text colour on a background colour, and it accounts for things the older WCAG 2
+formula does not, such as font size and weight and the fact that light text on dark reads differently
+from dark text on light. Scores are given in **Lc** (lightness contrast), running from 0 to about 106.
+Higher is more readable. You can read the full method in the
+[APCA documentation](https://git.apcacontrast.com/).
+
+Our targets are **Lc 90 for body text** and **Lc 60 for interactive elements**, measured against
+`background.surface`.
+
+Because both sides of every pairing are opaque, known values, contrast is a property of the token set
+rather than something to check screen by screen. Use the pairings in
+[Getting started](./getting_started.mdx#foreground-pairing) and it is handled for you.
+
+:::info Every value is opaque
+Colour tokens are opaque. A translucent value has no contrast number until what sits behind it is
+known, which would make the targets above unverifiable.
+:::
+
+## Where to go next
+
+- **[Getting started](./getting_started.mdx)**: picking tokens, pairing rules, and the mistakes worth avoiding
+- **[The palette](./palette.mdx)**: how the scale is built, and why the same names work in both schemes
+- **[Token reference](./reference.mdx)**: every token with its CSS custom property and resolved values
