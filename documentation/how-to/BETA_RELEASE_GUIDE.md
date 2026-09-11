@@ -282,6 +282,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 
 - ✅ Breaking changes are allowed and expected
 - ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix(next)!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
+- ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page is the single living list consumers use to tell intended changes from bugs (#5387)
 - ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
 
 **After graduation (stable releases):**
