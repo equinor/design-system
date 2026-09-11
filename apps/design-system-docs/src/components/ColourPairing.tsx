@@ -201,7 +201,6 @@ function Specimen({
           lineHeight: 1.45,
           fontFamily: 'var(--ifm-font-family-monospace)',
           color: cssVar(text),
-          opacity: 0.75,
           wordBreak: 'break-all',
         }}
       >
@@ -218,7 +217,8 @@ function Group({ pairing }: { pairing: Pairing }) {
   const isPerTone = pairing.fill.includes('{tone}')
   const tones: readonly string[] = isPerTone ? TONES : ['']
 
-  const expand = (token: string, tone: string) => token.replaceAll('{tone}', tone)
+  const expand = (token: string, tone: string) =>
+    token.replaceAll('{tone}', tone)
 
   return (
     <section style={{ margin: '2rem 0' }}>

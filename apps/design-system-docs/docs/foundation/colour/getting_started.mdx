@@ -4,14 +4,7 @@ description: Picking colour tokens. Pairing rules, worked examples, and the mist
 ---
 
 import ColourPairing from '@site/src/components/ColourPairing'
-import {
-  TokenAnatomy,
-  ButtonSpecimen,
-  DisabledButtonSpecimen,
-  BannerSpecimen,
-  LinkSpecimen,
-  FocusRingSpecimen,
-} from '@site/src/components/TokenAnatomy'
+import { TokenAnatomy } from '@site/src/components/TokenAnatomy'
 
 Colour in EDS is **semantic**: the tone is part of the token name, and you bind to it directly.
 There is one approach, in both design and code.
@@ -34,10 +27,10 @@ schemes, and the third follows from the name.
 
 The three line up mechanically:
 
-| Where | How it is written |
-| --- | --- |
-| Figma | `background.non-interactive.accent.muted` |
-| CSS | `--eds-background-non-interactive-accent-muted` |
+| Where      | How it is written                                 |
+| ---------- | ------------------------------------------------- |
+| Figma      | `background.non-interactive.accent.muted`         |
+| CSS        | `--eds-background-non-interactive-accent-muted`   |
 | TypeScript | `semantic.background.nonInteractive.accent.muted` |
 
 CSS is `--eds-` followed by the dotted name with hyphens for dots. TypeScript is the dotted name with
@@ -47,12 +40,6 @@ the pattern is not.
 
 A hardcoded hex is the failure mode this page exists to prevent. It will not follow the colour
 scheme, and nothing will tell you when it has stopped matching the token it was copied from.
-:::
-
-:::info Dynamic colour has been removed
-Earlier versions offered a second approach, where a `data-color-appearance` attribute decided which
-tone a generic token resolved to. It is gone. If you have `data-color-appearance` in your markup or
-appearance modes in your Figma file, name the tone explicitly instead.
 :::
 
 ## Foreground pairing
@@ -81,13 +68,18 @@ on, while `inverted` is one value shared by all six tones.
 ### Primary button
 
 <TokenAnatomy
+  mode="colour"
   caption="The rest state. Hover and pressed take the matching values on the same fill."
-  annotations={[
-    { token: 'text.on-emphasis.accent', edge: 'top', label: 'label' },
-    { token: 'background.interactive.accent.emphasis.default', edge: 'bottom', label: 'fill' },
-  ]}
+  bindings={{
+    color: { token: 'text.on-emphasis.accent', label: 'label' },
+    background: {
+      token: 'background.interactive.accent.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
 >
-  <ButtonSpecimen />
+  Label
 </TokenAnatomy>
 
 ```css
@@ -112,13 +104,18 @@ The same shape with `danger` in place of `accent`. Every tone follows this patte
 tone is the whole change:
 
 <TokenAnatomy
+  mode="colour"
   caption="The rest state. Hover and pressed take the matching values on the same fill."
-  annotations={[
-    { token: 'text.on-emphasis.danger', edge: 'top', label: 'label' },
-    { token: 'background.interactive.danger.emphasis.default', edge: 'bottom', label: 'fill' },
-  ]}
+  bindings={{
+    color: { token: 'text.on-emphasis.danger', label: 'label' },
+    background: {
+      token: 'background.interactive.danger.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
 >
-  <ButtonSpecimen tone="danger">Delete</ButtonSpecimen>
+  Delete
 </TokenAnatomy>
 
 ```css
@@ -137,14 +134,16 @@ tone is the whole change:
 Disabled is the one place the pattern breaks:
 
 <TokenAnatomy
+  mode="colour"
   caption="The same button, disabled."
-  annotations={[
-    { token: 'text.interactive.disabled', edge: 'top', label: 'label' },
-    { token: 'background.interactive.disabled', edge: 'bottom', label: 'fill' },
-    { token: 'border.interactive.disabled', edge: 'bottom', label: 'stroke' },
-  ]}
+  bindings={{
+    color: { token: 'text.interactive.disabled', label: 'label' },
+    background: { token: 'background.interactive.disabled', label: 'fill' },
+    borderColor: { token: 'border.interactive.disabled', label: 'stroke' },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
 >
-  <DisabledButtonSpecimen />
+  Delete
 </TokenAnatomy>
 
 ```css
@@ -161,14 +160,27 @@ Disabled is the one place the pattern breaks:
 A banner is non-interactive. It gets a tint and a border, and **no hover values**:
 
 <TokenAnatomy
+  mode="colour"
   caption="A warning banner. Substitute any tone."
-  annotations={[
-    { token: 'text.on-muted.warning', edge: 'top', label: 'text' },
-    { token: 'background.non-interactive.warning.muted', edge: 'bottom', label: 'fill' },
-    { token: 'border.non-interactive.warning.muted', edge: 'bottom', label: 'stroke' },
-  ]}
+  bindings={{
+    color: { token: 'text.on-muted.warning', label: 'text' },
+    background: {
+      token: 'background.non-interactive.warning.muted',
+      label: 'fill',
+    },
+    borderColor: {
+      token: 'border.non-interactive.warning.muted',
+      label: 'stroke',
+    },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.625rem 0.875rem',
+    fontSize: '0.875rem',
+    width: 240,
+  }}
 >
-  <BannerSpecimen />
+  Check the values before continuing.
 </TokenAnatomy>
 
 ```css
@@ -188,12 +200,18 @@ fill does not.
 `pressed` and no level:
 
 <TokenAnatomy
+  mode="colour"
   caption="A link, as it appears in running text."
-  annotations={[
-    { token: 'text.interactive.link.default', edge: 'bottom', label: 'link text' },
-  ]}
+  bindings={{
+    color: {
+      token: 'text.interactive.link.default',
+      edge: 'bottom',
+      label: 'link text',
+    },
+  }}
+  style={{ fontSize: '0.9375rem' }}
 >
-  <LinkSpecimen />
+  Release notes
 </TokenAnatomy>
 
 ```css
@@ -218,12 +236,20 @@ diverge.
 One token, every component, on every fill:
 
 <TokenAnatomy
+  mode="colour"
   caption="The focus ring sits outside the element, so it works on any fill."
-  annotations={[
-    { token: 'border.interactive.focus', edge: 'bottom', label: 'ring' },
-  ]}
+  bindings={{
+    outlineColor: { token: 'border.interactive.focus', label: 'ring' },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.5rem 1.25rem',
+    fontWeight: 500,
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
 >
-  <FocusRingSpecimen />
+  Label
 </TokenAnatomy>
 
 ```css

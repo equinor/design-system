@@ -1,0 +1,72 @@
+---
+title: Typography anatomy (test)
+description: A scratch page for the TokenAnatomy diagram in typography mode. Not part of the guidance.
+---
+
+import { TokenAnatomy } from '@site/src/components/TokenAnatomy'
+import { DensitySwitch } from '@site/src/components/DensitySwitch'
+
+This page exists to exercise the diagram, not to teach anything.
+
+Typography mode uses the same point geometry as colour mode. What it adds is the resolved value on
+each row: the family name, the weight, and the font size and line height in pixels. Switching
+density below changes the size and line height without any of the token names changing, which is
+the whole point of naming a step rather than a number.
+
+<DensitySwitch>
+
+### A UI label
+
+<TokenAnatomy
+  mode="typography"
+  caption="Four tokens decide how one line of interface text is set."
+  maxWidth={320}
+  bindings={{
+    fontFamily: { token: 'font-family.ui', label: 'family' },
+    fontWeight: { token: 'font-weight.normal', label: 'weight' },
+    fontSize: { token: 'typography.ui.md.font-size', label: 'size' },
+    lineHeight: { token: 'typography.ui.md.line-height', label: 'line height' },
+  }}
+  style={{ color: 'var(--eds-text-primary)' }}
+>
+  Pipeline pressure
+</TokenAnatomy>
+
+### A paragraph, where line height shows
+
+<TokenAnatomy
+  mode="typography"
+  caption="The same step over several lines, so the line height token is visible."
+  maxWidth={360}
+  bindings={{
+    fontFamily: { token: 'font-family.ui', label: 'family' },
+    fontSize: { token: 'typography.ui.md.font-size', label: 'size' },
+    lineHeight: { token: 'typography.ui.md.line-height', label: 'line height' },
+  }}
+  style={{ color: 'var(--eds-text-secondary)', width: 360 }}
+>
+  A size token and a line height token are picked as a pair. Taking the size from one step and the
+  line height from another is how a column of text stops sitting on a consistent rhythm.
+</TokenAnatomy>
+
+### A heading
+
+<TokenAnatomy
+  mode="typography"
+  caption="Headings take a different family and a heavier weight."
+  maxWidth={360}
+  bindings={{
+    fontFamily: { token: 'font-family.header', label: 'family' },
+    fontWeight: { token: 'font-weight.bolder', label: 'weight' },
+    fontSize: { token: 'typography.header.lg.font-size', label: 'size' },
+    lineHeight: {
+      token: 'typography.header.lg.line-height',
+      label: 'line height',
+    },
+  }}
+  style={{ color: 'var(--eds-text-primary)' }}
+>
+  Well integrity
+</TokenAnatomy>
+
+</DensitySwitch>

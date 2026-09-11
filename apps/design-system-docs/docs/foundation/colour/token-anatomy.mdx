@@ -1,0 +1,228 @@
+---
+title: Token anatomy (test)
+description: A scratch page for the TokenAnatomy diagram. Colour mode throughout, plus one button in all three modes. Not part of the guidance.
+---
+
+import { TokenAnatomy } from '@site/src/components/TokenAnatomy'
+import { DensitySwitch } from '@site/src/components/DensitySwitch'
+
+This page exists to exercise the diagram, not to teach anything. Each figure below is rendered from
+its bindings alone, so what the leaders point at and what the specimen paints cannot disagree.
+
+Colour mode shows the token name and its part only. The resolved value is left out on purpose: a
+colour resolves to an oklch string, which tells the reader nothing the swatch does not. Spacing and
+typography mode print their values, because a length or a weight is worth reading off the diagram.
+
+## Colour mode
+
+### Primary button
+
+<TokenAnatomy
+  mode="colour"
+  caption="Two bindings, one per edge."
+  bindings={{
+    color: { token: 'text.on-emphasis.accent', label: 'label' },
+    background: {
+      token: 'background.interactive.accent.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Label
+</TokenAnatomy>
+
+### Destructive button
+
+<TokenAnatomy
+  mode="colour"
+  caption="The same shape with the tone swapped."
+  bindings={{
+    color: { token: 'text.on-emphasis.danger', label: 'label' },
+    background: {
+      token: 'background.interactive.danger.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Delete
+</TokenAnatomy>
+
+### Disabled button
+
+<TokenAnatomy
+  mode="colour"
+  caption="A bound border colour brings its own border style, so it paints."
+  bindings={{
+    color: { token: 'text.interactive.disabled', label: 'label' },
+    background: { token: 'background.interactive.disabled', label: 'fill' },
+    borderColor: { token: 'border.interactive.disabled', label: 'stroke' },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Delete
+</TokenAnatomy>
+
+### Status banner
+
+<TokenAnatomy
+  mode="colour"
+  caption="A tint, a border and a foreground, all per tone."
+  bindings={{
+    color: { token: 'text.on-muted.warning', label: 'text' },
+    background: {
+      token: 'background.non-interactive.warning.muted',
+      label: 'fill',
+    },
+    borderColor: {
+      token: 'border.non-interactive.warning.muted',
+      label: 'stroke',
+    },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.625rem 0.875rem',
+    fontSize: '0.875rem',
+    width: 240,
+  }}
+>
+  Check the values before continuing.
+</TokenAnatomy>
+
+### Link
+
+<TokenAnatomy
+  mode="colour"
+  caption="One binding, moved to the bottom edge."
+  bindings={{
+    color: {
+      token: 'text.interactive.link.default',
+      edge: 'bottom',
+      label: 'link text',
+    },
+  }}
+  style={{ fontSize: '0.9375rem' }}
+>
+  Release notes
+</TokenAnatomy>
+
+### Focus ring
+
+<TokenAnatomy
+  mode="colour"
+  caption="The fill here is chrome, not a binding, so the diagram points only at the ring."
+  bindings={{
+    outlineColor: { token: 'border.interactive.focus', label: 'ring' },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.5rem 1.25rem',
+    fontWeight: 500,
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
+>
+  Label
+</TokenAnatomy>
+
+## The same button in the other two modes
+
+One specimen, three declarations. The chrome is identical; only the bindings change, so the diagram
+points at the padding in spacing mode and at the type in typography mode. Switch density to see the
+values, the strips and the dots move together.
+
+<DensitySwitch>
+
+### Spacing mode
+
+<TokenAnatomy
+  mode="spacing"
+  caption="The primary button's padding. Block above and below, inline left and right."
+  bindings={{
+    paddingBlock: { token: 'spacing.xs', label: 'block' },
+    paddingInline: { token: 'spacing.lg', label: 'inline' },
+  }}
+  style={{
+    borderRadius: 4,
+    fontWeight: 500,
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
+>
+  Label
+</TokenAnatomy>
+
+### Typography mode
+
+<TokenAnatomy
+  mode="typography"
+  caption="The primary button's label, given more words so the three rings on the glyphs have room. Line height sits on the line box."
+  bindings={{
+    fontFamily: { token: 'font-family.ui', label: 'family' },
+    fontWeight: { token: 'font-weight.bolder', label: 'weight' },
+    fontSize: { token: 'typography.ui.md.font-size', label: 'size' },
+    lineHeight: { token: 'typography.ui.md.line-height', label: 'line height' },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.5rem 1.25rem',
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+  }}
+>
+  Save changes
+</TokenAnatomy>
+
+</DensitySwitch>
+
+## Cases the six worked examples do not cover
+
+### An underline colour of its own
+
+A bound `textDecorationColor` brings the underline with it, so the specimen shows the token doing
+something rather than sitting inert.
+
+<TokenAnatomy
+  mode="colour"
+  caption="The text and its underline take different tokens."
+  bindings={{
+    color: { token: 'text.interactive.link.hover', label: 'text' },
+    textDecorationColor: {
+      token: 'border.interactive.link.hover',
+      label: 'underline',
+    },
+  }}
+  style={{ fontSize: '0.9375rem' }}
+>
+  Release notes
+</TokenAnatomy>
+
+### Four bindings sharing two edges
+
+Rows fan outwards from the specimen, so the connectors do not cross whichever edge they leave from.
+
+<TokenAnatomy
+  mode="colour"
+  caption="Two rows above, two below, with the longest custom property in the set."
+  bindings={{
+    color: { token: 'text.on-muted.info', label: 'text' },
+    textDecorationColor: {
+      token: 'border.interactive.link.hover',
+      label: 'underline',
+    },
+    background: {
+      token: 'background.non-interactive.info.muted',
+      label: 'fill',
+    },
+    borderColor: { token: 'border.non-interactive.info.muted', label: 'stroke' },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.625rem 0.875rem',
+    fontSize: '0.875rem',
+    width: 240,
+  }}
+>
+  Four tokens on one element.
+</TokenAnatomy>
