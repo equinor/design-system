@@ -206,6 +206,25 @@ GroupedRadio.parameters = {
   },
 }
 
+export const InheritedDisabled: StoryFn<RadioProps> = () => (
+  <fieldset disabled>
+    <legend>Disabled fieldset</legend>
+    <Wrapper gap={8}>
+      <Radio label="Unchecked" name="inherited" value="1" />
+      <Radio label="Checked" name="inherited" value="2" defaultChecked />
+    </Wrapper>
+  </fieldset>
+)
+InheritedDisabled.storyName = 'Inherited disabled'
+InheritedDisabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Radio buttons inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input’s `:disabled` state, so it covers this inherited disabling too.',
+    },
+  },
+}
+
 export const WithoutVisibleLabel: StoryFn<RadioProps> = () => (
   <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
     <div data-density="spacious">

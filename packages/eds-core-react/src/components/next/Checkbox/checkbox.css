@@ -4,6 +4,12 @@
     --_checkbox-hover-color: var(--eds-color-bg-fill-muted-default);
     --_checkbox-icon-size: var(--eds-sizing-icon-lg);
 
+    /* Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance (tinted, not grey, under 'accent') and the wrapper
+       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled].
+       TODO: Replace with semantic token when available */
+    --_checkbox-disabled-color: var(--eds-color-neutral-7);
+
     /* Touch target: 36px spacious, 28px comfortable */
     --_checkbox-touch-target: 2.25rem;
 
@@ -49,14 +55,15 @@
         &:hover::before {
           background-color: var(--_checkbox-hover-color);
         }
-
-        &[data-disabled='true']:hover::before {
-          background-color: transparent;
-        }
       }
     }
 
-    &[data-disabled='true'] {
+    /* :has(.input:disabled) instead of a prop-set attribute so the styling
+       also covers disabling inherited from an ancestor, e.g. fieldset[disabled] */
+    &:has(.input:disabled) {
+      --_checkbox-icon-color: var(--_checkbox-disabled-color);
+      --_checkbox-hover-color: transparent;
+
       cursor: not-allowed;
     }
 
@@ -103,10 +110,6 @@
       position: relative;
       flex-shrink: 0;
       fill: var(--_checkbox-icon-color);
-    }
-
-    &[data-disabled='true'] .icon {
-      fill: var(--eds-color-text-disabled);
     }
 
     /* Icon visibility */
@@ -190,18 +193,17 @@
       cursor: pointer;
     }
 
-    &[data-disabled='true'] label {
-      cursor: not-allowed;
-      color: var(--eds-color-text-disabled);
+    &:has(.input:disabled) {
+      --_eds-field-label-color: var(--_checkbox-disabled-color);
+
+      & label {
+        cursor: not-allowed;
+      }
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: var(--_checkbox-hover-color);
-      }
-
-      &[data-disabled='true']:hover {
-        background-color: transparent;
       }
     }
   }
