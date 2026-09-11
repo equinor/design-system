@@ -26,6 +26,42 @@
         (var(--_label-line-height) - var(--_label-height)) / 2
     );
 
+    /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
+     * selects the tone (Chip always sets it, default tone is neutral). Neutral
+     * maps text to --eds-text-primary by design (#5283). Non-neutral tones use
+     * --eds-text-on-muted-{tone} (shade 12) for label text and
+     * --eds-icon-on-default-{tone} (shade 10) for icons. The steps follow the
+     * documented readability targets (#5330): text aims for APCA Lc 90 (first
+     * step that clears it is 12), icons aim for Lc 60 (step 10 clears it) —
+     * the split is target-driven, not surface-driven. Surfaces use
+     * --eds-background-interactive-{tone}-*. */
+    --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
+    --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
+    --_bg-muted-pressed: var(
+      --eds-background-interactive-neutral-muted-pressed
+    );
+    --_bg-emphasis: var(--eds-background-interactive-neutral-emphasis-default);
+    --_bg-emphasis-hover: var(
+      --eds-background-interactive-neutral-emphasis-hover
+    );
+    --_bg-emphasis-pressed: var(
+      --eds-background-interactive-neutral-emphasis-pressed
+    );
+    --_text: var(--eds-text-primary);
+    --_icon: var(--eds-icon-primary);
+
+    /* All tones share the neutral on-emphasis colour per the Figma design:
+     * high-contrast text is flat white (neutral.15) across all six tones.
+     * The per-tone --eds-*-on-emphasis-{tone} tokens exist but Chip does
+     * not use them. */
+    --_text-emphasis: var(--eds-text-on-emphasis-neutral);
+    --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
+    --_border: var(
+      --eds-border-interactive-neutral-emphasis-default
+    );
+    --_border-hover: var(--eds-border-interactive-neutral-emphasis-hover);
+    --_border-pressed: var(--eds-border-interactive-neutral-emphasis-pressed);
+
     cursor: pointer;
     user-select: none;
 
@@ -43,70 +79,200 @@
     font-family: var(--_font-family);
     font-size: var(--_label-font-size);
     line-height: var(--_label-line-height);
-    color: inherit;
+    color: var(--_text);
 
+    /* Fill and (on outlined) the box-shadow border change between states —
+     * text/icon are static per tone, and outline is the focus ring, which
+     * must appear instantly. */
     transition:
       background-color 150ms ease-in-out,
-      outline-color 150ms ease-in-out,
-      color 150ms ease-in-out;
+      box-shadow 150ms ease-in-out;
+
+    /* ===== TONES ===== */
+    /* NOTE: the variant blocks further down override --_text / --_icon at the
+     * same specificity (0,2,0) — they win by source order alone. Keep the
+     * tone blocks BEFORE the variant blocks. */
+
+    &[data-color-appearance='accent'] {
+      --_bg-muted: var(--eds-background-interactive-accent-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-accent-muted-pressed
+      );
+      --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-accent-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-accent-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-accent);
+      --_icon: var(--eds-icon-on-default-accent);
+      --_border: var(
+        --eds-border-interactive-accent-emphasis-default
+      );
+      --_border-hover: var(--eds-border-interactive-accent-emphasis-hover);
+      --_border-pressed: var(--eds-border-interactive-accent-emphasis-pressed);
+    }
+
+    &[data-color-appearance='success'] {
+      --_bg-muted: var(--eds-background-interactive-success-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-success-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-success-muted-pressed
+      );
+      --_bg-emphasis: var(
+        --eds-background-interactive-success-emphasis-default
+      );
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-success-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-success-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-success);
+      --_icon: var(--eds-icon-on-default-success);
+      --_border: var(
+        --eds-border-interactive-success-emphasis-default
+      );
+      --_border-hover: var(--eds-border-interactive-success-emphasis-hover);
+      --_border-pressed: var(
+        --eds-border-interactive-success-emphasis-pressed
+      );
+    }
+
+    &[data-color-appearance='info'] {
+      --_bg-muted: var(--eds-background-interactive-info-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-info-muted-hover);
+      --_bg-muted-pressed: var(--eds-background-interactive-info-muted-pressed);
+      --_bg-emphasis: var(--eds-background-interactive-info-emphasis-default);
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-info-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-info-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-info);
+      --_icon: var(--eds-icon-on-default-info);
+      --_border: var(
+        --eds-border-interactive-info-emphasis-default
+      );
+      --_border-hover: var(--eds-border-interactive-info-emphasis-hover);
+      --_border-pressed: var(--eds-border-interactive-info-emphasis-pressed);
+    }
+
+    &[data-color-appearance='warning'] {
+      --_bg-muted: var(--eds-background-interactive-warning-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-warning-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-warning-muted-pressed
+      );
+      --_bg-emphasis: var(
+        --eds-background-interactive-warning-emphasis-default
+      );
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-warning-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-warning-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-warning);
+      --_icon: var(--eds-icon-on-default-warning);
+      --_border: var(
+        --eds-border-interactive-warning-emphasis-default
+      );
+      --_border-hover: var(--eds-border-interactive-warning-emphasis-hover);
+      --_border-pressed: var(
+        --eds-border-interactive-warning-emphasis-pressed
+      );
+    }
+
+    &[data-color-appearance='danger'] {
+      --_bg-muted: var(--eds-background-interactive-danger-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-danger-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-danger-muted-pressed
+      );
+      --_bg-emphasis: var(--eds-background-interactive-danger-emphasis-default);
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-danger-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-danger-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-danger);
+      --_icon: var(--eds-icon-on-default-danger);
+      --_border: var(
+        --eds-border-interactive-danger-emphasis-default
+      );
+      --_border-hover: var(--eds-border-interactive-danger-emphasis-hover);
+      --_border-pressed: var(--eds-border-interactive-danger-emphasis-pressed);
+    }
 
     /* ===== DEFAULT VARIANT (solid muted fill) ===== */
 
     &[data-variant='default'] {
-      color: var(--eds-color-text-subtle);
-      background-color: var(--eds-color-bg-fill-muted-default);
-      outline: none;
+      background-color: var(--_bg-muted);
     }
 
     &[data-variant='default']:hover {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+      background-color: var(--_bg-muted-hover);
     }
 
     &[data-variant='default']:active {
-      background-color: var(--eds-color-bg-fill-muted-active);
+      background-color: var(--_bg-muted-pressed);
     }
 
     /* ===== OUTLINED VARIANT (border + transparent bg) ===== */
 
     &[data-variant='outlined'] {
-      color: var(--eds-color-text-subtle);
       background-color: transparent;
-      outline: var(--eds-border-width-default, 1px) solid
-        var(--eds-color-border-strong);
-      outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+
+      /* Inset box-shadow rather than outline, so outline stays free for the
+       * focus ring (with a truly transparent offset gap, like Button). */
+      box-shadow: inset 0 0 0 var(--eds-border-width-default, 1px)
+        var(--_border);
     }
 
+    /* The border follows the state ladder (9 → 10 → 11), per the Figma
+     * design and the ADR-0016 rule that states move along the scale. */
     &[data-variant='outlined']:hover {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+      --_border: var(--_border-hover);
+
+      background-color: var(--_bg-muted-hover);
     }
 
     &[data-variant='outlined']:active {
-      background-color: var(--eds-color-bg-fill-muted-active);
+      --_border: var(--_border-pressed);
+
+      background-color: var(--_bg-muted-pressed);
     }
 
     /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
+    /* Must stay AFTER the tone blocks: the --_text / --_icon overrides here
+     * have the same specificity and win by source order only. */
 
     &[data-variant='high-contrast'] {
-      color: var(--eds-color-text-strong-on-emphasis);
-      background-color: var(--eds-color-bg-fill-emphasis-default);
-      outline: none;
+      --_text: var(--_text-emphasis);
+      --_icon: var(--_icon-emphasis);
+
+      background-color: var(--_bg-emphasis);
     }
 
     &[data-variant='high-contrast']:hover {
-      background-color: var(--eds-color-bg-fill-emphasis-hover);
+      background-color: var(--_bg-emphasis-hover);
     }
 
     &[data-variant='high-contrast']:active {
-      background-color: var(--eds-color-bg-fill-emphasis-active);
+      background-color: var(--_bg-emphasis-pressed);
     }
 
     /* ===== FOCUS STATE ===== */
 
     &:focus-visible {
-      box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
-          var(--eds-color-border-focus);
+      outline: var(--eds-sizing-stroke-thin) solid
+        var(--eds-border-interactive-focus);
+      outline-offset: var(--eds-sizing-stroke-thin);
     }
 
     /* ===== ICONS ===== */
@@ -115,6 +281,18 @@
       flex-shrink: 0;
       margin-block: calc(-1 * var(--_padding-adjusted));
       margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
+      color: var(--_icon);
+    }
+
+    /* Forced colors (Windows High Contrast) strips box-shadow, so the
+     * outlined border needs outline there. While focused, the focus ring
+     * takes over outline and communicates the boundary instead —
+     * :not(:focus-visible) keeps that handover independent of source order. */
+    @media (forced-colors: active) {
+      &[data-variant='outlined']:not(:focus-visible) {
+        outline: var(--eds-border-width-default, 1px) solid;
+        outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+      }
     }
   }
 }
