@@ -575,6 +575,7 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
+- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx`
 
 ## Implementation Status Report
 
