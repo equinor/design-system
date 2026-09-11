@@ -51,7 +51,8 @@ const meta: Meta<typeof Radio> = {
     },
     className: {
       control: 'text',
-      description: 'Additional CSS class names for the input element',
+      description:
+        'Additional CSS class names applied to the outer wrapper element',
       table: {
         category: 'Styling',
       },

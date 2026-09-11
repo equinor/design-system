@@ -7,6 +7,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     label,
     disabled,
     className,
+    style,
     id,
     checked: controlledChecked,
     defaultChecked,
@@ -40,6 +41,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       position="start"
       disabled={disabled}
       className={['eds-switch', className].filter(Boolean).join(' ')}
+      style={style}
       data-font-size="md"
       data-selectable-space="md"
       data-space-proportions="squished"
