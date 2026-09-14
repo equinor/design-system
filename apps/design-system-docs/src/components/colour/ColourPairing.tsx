@@ -162,7 +162,7 @@ function Specimen({
           style={{
             width: '0.875rem',
             height: '0.875rem',
-            borderRadius: '2px',
+            borderRadius: '2px 6px',
             background: cssVar(icon),
             flex: 'none',
           }}
@@ -194,18 +194,18 @@ function Specimen({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.125rem',
-          fontSize: '0.6875rem',
+          gap: '0.25rem',
+          fontSize: '0.675rem',
           lineHeight: 1.45,
           fontFamily: 'var(--ifm-font-family-monospace)',
           color: cssVar(text),
           wordBreak: 'break-all',
         }}
       >
-        <span>{fill}</span>
-        <span>{text}</span>
-        <span>{icon}</span>
-        {border ? <span>{border}</span> : null}
+        <span>Fill: {fill}</span>
+        <span>Text: {text}</span>
+        <span>Icon: {icon}</span>
+        {border ? <span>Border: {border}</span> : null}
       </div>
     </div>
   )
