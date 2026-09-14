@@ -82,8 +82,8 @@ export function HueAnchors() {
       ))}
 
       <figcaption>
-        All {ANCHORS.length} anchors, every step, ordered by hue angle — which
-        is the same at every step and in both schemes, so it is listed once.
+        All {ANCHORS.length} anchors, every step, ordered by hue angle, which is
+        the same at every step and in both schemes, so it is listed once.
         Reading down a column shows every anchor taking the same lightness at
         that step. Reading across a row shows the chroma curve: muted at both
         ends, strongest through the middle. The curve is one shape scaled per
