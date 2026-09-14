@@ -39,25 +39,25 @@ const PROSE = [
   'foundation/design-tokens/typography-anatomy.mdx',
 ]
 
-// Paths relative to src/components/. TokenAnatomy is a folder now, and every file in it can name a
-// token, so the whole folder is scanned rather than one entry point.
-const tokenAnatomy = join(components, 'TokenAnatomy')
+// Paths relative to src/components/, grouped by docs area. TokenAnatomy is a folder, and every
+// file in it can name a token, so the whole folder is scanned rather than one entry point.
+const tokenAnatomy = join(components, 'tokens', 'TokenAnatomy')
 const anatomyFiles = existsSync(tokenAnatomy)
-  ? readdirSync(tokenAnatomy).filter((n) => /\.tsx?$/.test(n)).map((n) => `TokenAnatomy/${n}`)
+  ? readdirSync(tokenAnatomy).filter((n) => /\.tsx?$/.test(n)).map((n) => `tokens/TokenAnatomy/${n}`)
   : []
 
 const COMPONENTS = [
-  'ColourPairing.tsx',
-  'ColourStates.tsx',
-  'ColourScale.tsx',
-  'DataVizPalette.tsx',
-  'DensitySwitch.tsx',
+  'colour/ColourPairing.tsx',
+  'colour/ColourStates.tsx',
+  'colour/ColourScale.tsx',
+  'colour/DataVizPalette.tsx',
+  'tokens/DensitySwitch.tsx',
   ...anatomyFiles,
 ]
 
 // MigrationMap is scanned differently: its `from` field holds old 1.x and 2.x names, which are
 // supposed not to exist. Only the `to` field points at a redefined token.
-const MAPPING_COMPONENTS = ['MigrationMap.tsx']
+const MAPPING_COMPONENTS = ['colour/MigrationMap.tsx']
 
 // --- canonical names ---------------------------------------------------------------------------
 
@@ -192,14 +192,14 @@ const quoted = (file, re) => {
 }
 
 const structure = [
-  ['tones', distinct(/^background\.interactive\.([a-z]+)\./), 'ColourPairing.tsx', quoted('ColourPairing.tsx', /const TONES = \[([\s\S]*?)\]/)],
-  ['interactive states', distinct(/^background\.interactive\.accent\.emphasis\.([a-z]+)$/), 'ColourStates.tsx', quoted('ColourStates.tsx', /const STATES = \[([\s\S]*?)\]/)],
-  ['non-interactive levels', distinct(/^background\.non-interactive\.accent\.([a-z]+)$/), 'ColourStates.tsx', quoted('ColourStates.tsx', /const LEVELS = \[([\s\S]*?)\]/)],
-  ['data-visualisation categories', distinct(/^data-visualization\.cat\.(\d+)\./), 'DataVizPalette.tsx', literal('DataVizPalette.tsx', /const CATEGORIES = Array\.from\(\{ length: (\d+)/)],
-  ['category steps', distinct(/^data-visualization\.cat\.\d+\.(\d+)$/), 'DataVizPalette.tsx', literal('DataVizPalette.tsx', /const CAT_STEPS = Array\.from\(\{ length: (\d+)/)],
-  ['sequential steps', distinct(/^data-visualization\.seq\.(\d+)$/), 'DataVizPalette.tsx', literal('DataVizPalette.tsx', /const SEQ = Array\.from\(\{ length: (\d+)/)],
-  ['diverging steps', distinct(/^data-visualization\.div\.(\d+)$/), 'DataVizPalette.tsx', literal('DataVizPalette.tsx', /const DIV = Array\.from\(\{ length: (\d+)/)],
-  ['scale steps', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'ColourScale.tsx', literal('ColourScale.tsx', /const STEPS = Array\.from\(\{ length: (\d+)/)],
+  ['tones', distinct(/^background\.interactive\.([a-z]+)\./), 'colour/ColourPairing.tsx', quoted('colour/ColourPairing.tsx', /const TONES = \[([\s\S]*?)\]/)],
+  ['interactive states', distinct(/^background\.interactive\.accent\.emphasis\.([a-z]+)$/), 'colour/ColourStates.tsx', quoted('colour/ColourStates.tsx', /const STATES = \[([\s\S]*?)\]/)],
+  ['non-interactive levels', distinct(/^background\.non-interactive\.accent\.([a-z]+)$/), 'colour/ColourStates.tsx', quoted('colour/ColourStates.tsx', /const LEVELS = \[([\s\S]*?)\]/)],
+  ['data-visualisation categories', distinct(/^data-visualization\.cat\.(\d+)\./), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const CATEGORIES = Array\.from\(\{ length: (\d+)/)],
+  ['category steps', distinct(/^data-visualization\.cat\.\d+\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const CAT_STEPS = Array\.from\(\{ length: (\d+)/)],
+  ['sequential steps', distinct(/^data-visualization\.seq\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const SEQ = Array\.from\(\{ length: (\d+)/)],
+  ['diverging steps', distinct(/^data-visualization\.div\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const DIV = Array\.from\(\{ length: (\d+)/)],
+  ['scale steps', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/ColourScale.tsx', literal('colour/ColourScale.tsx', /const STEPS = Array\.from\(\{ length: (\d+)/)],
 ]
 
 for (const [what, source, file, found] of structure) {

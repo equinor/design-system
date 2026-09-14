@@ -4,9 +4,9 @@ import Heading from '@theme/Heading'
 import styles from './styles.module.css'
 import Link from '@docusaurus/Link'
 
-import Designer from '../../../static/img/illustrations/designer_illu.svg'
-import Devices from '../../../static/img/illustrations/devices_illu.svg'
-import Puzzle from '../../../static/img/illustrations/puzzle_illu.svg'
+import Designer from '@site/static/img/illustrations/designer_illu.svg'
+import Devices from '@site/static/img/illustrations/devices_illu.svg'
+import Puzzle from '@site/static/img/illustrations/puzzle_illu.svg'
 
 type FeatureItem = {
   title: string
