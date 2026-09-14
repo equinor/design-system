@@ -23,6 +23,8 @@ export const jumpTo = (id) => () =>
 
 This page lists the intentional breaking changes between EDS 1.0 components and their EDS 2.0 successors under `/next`. It is kept up to date while EDS 2.0 is in beta, so that you can tell an intended change from a bug. The full migration guide, together with codemods and AI-assisted rewrites, comes when EDS 2.0 becomes stable.
 
+Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a component page in this Storybook shows a different API, the component page is right and this page needs an update.
+
 **What counts as a breaking change on this page**
 
 - **Props**: removed or renamed props, changed accepted values, changed callback signatures.
@@ -70,7 +72,7 @@ This page lists the intentional breaking changes between EDS 1.0 components and 
 | `Button`                                                  | [Button](#button)                           | `contained`/`outlined` → `primary`/`secondary`; `color` → `tone`; `href` → `asChild`                    |
 | `Checkbox`                                                | [Checkbox](#checkbox)                       | Labelled root `<label>` → `<div>`; `className` lands on the input                                       |
 | `Chip`                                                    | [Chip](#chip)                               | Real `<button>`; `variant="active"` → `selected`; delete fires on whole-chip click                       |
-| `Dialog`                                                  | [Dialog](#dialog)                           | `onClose` → required `onOpenChange(open)`; always dismissable; ref points at `<dialog>`                 |
+| `Dialog`                                                  | [Dialog](#dialog)                           | `onClose` → required `onOpenChange(open)`; native `<dialog>`, ref points at it; children always mounted    |
 | `Divider`                                                 | [Divider](#divider)                         | `color`, `variant` and `size` removed; no built-in margins                                              |
 | `InputWrapper`, `Label`                                   | [Field](#field)                             | Compose `Field.Label`, `Field.Description` and `Field.HelperMessage` yourself                           |
 | `Icon`                                                    | [Icon](#icon)                               | Numeric `size` → semantic `size`; `name` and `Icon.add()` removed                                       |
@@ -152,6 +154,9 @@ EDS 1.0: `Banner` with `Banner.Icon`, `Banner.Message` and `Banner.Actions`.
 
 **Markup and behaviour**: the default role changes from `alert` to `status`, so the banner is announced politely instead of interrupting. Tests using `getByRole('alert')` need `getByRole('status')`, or pass `role="alert"` for urgent messages. The inner Paper wrapper and trailing divider are gone.
 
+<span id="buttongroup" />
+<span id="buttontoggle" />
+
 ## Button
 
 EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
@@ -194,6 +199,8 @@ EDS 1.0: `Chip`.
 
 **Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. A plain label chip currently also renders `aria-pressed="false"` and is announced as a toggle. Known issue: [#5458](https://github.com/equinor/design-system/issues/5458). Use `Badge` for labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` and `Avatar` elements are no longer resized automatically. The close icon title changes from `close` to `Remove`.
 
+<span id="scrim" />
+
 ## Dialog
 
 <Tag tone="danger">Known issues</Tag>
@@ -202,7 +209,7 @@ EDS 1.0: `Dialog` with `Dialog.Header`, `Dialog.Title`, `Dialog.Content`, `Dialo
 
 **Props**
 
-- `onClose()` → `onOpenChange(open: boolean)`, and it is required.
+- `onClose()` → `onOpenChange(open: boolean)`, and it is required. `open` is required too (it was optional in EDS 1.0), and the native `onClose` attribute is blocked in the types, so an EDS 1.0 `onClose` handler is a compile error.
 - Removed: `dialogRef`, and `scrollable` on `Dialog.Content`. New: `scrim` (default `true`).
 - `isDismissable` is missing with no replacement, so there is no non-dismissable mode. Known issue: [#5461](https://github.com/equinor/design-system/issues/5461).
 
@@ -223,6 +230,7 @@ All three props are removed: `color` (`lighter` | `light` | `medium`), `variant`
 <span id="inputwrapper" />
 <span id="label" />
 <span id="helpertext" />
+<span id="useinputfield" />
 
 ## Field
 
