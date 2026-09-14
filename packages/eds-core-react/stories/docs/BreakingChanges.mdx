@@ -70,7 +70,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 | `Accordion`              | [Accordion](#accordion)       | <Tag tone="danger">Known issues</Tag>                                      | Native `<details>`; `isExpanded` → `open`; `HeaderTitle` and `HeaderActions` removed                    |
 | `Autocomplete`           | [Autocomplete](#autocomplete) |                                                                            | Single-select only; `selectedOptions`/`onOptionsChange` → `value`/`onValueChange`                       |
 | none                     | [Badge](#badge)               | <Tag tone="info">New</Tag>                                                 | New component for non-interactive labels                                                                |
-| `Banner`                 | [Banner](#banner)             | <Tag tone="warning">Under review</Tag>                                     | `tone` moves to the root; default role `alert` → `status`; `elevation` removed                          |
+| `Banner`                 | [Banner](#banner)             |                                                                            | `tone` moves to the root; default role `alert` → `status`; `elevation` removed                          |
 | `Button`                 | [Button](#button)             |                                                                            | `contained`/`outlined` → `primary`/`secondary`; `color` → `tone`; `href` → `asChild`                    |
 | `Checkbox`               | [Checkbox](#checkbox)         | <Tag tone="danger">Known issues</Tag>                                      | Labelled root `<label>` → `<div>`; `className` lands on the input                                       |
 | `Chip`                   | [Chip](#chip)                 | <Tag tone="danger">Known issues</Tag>                                      | Real `<button>`; `variant="active"` → `selected`; delete fires on whole-chip click                      |
@@ -78,7 +78,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 | `Divider`                | [Divider](#divider)           | <Tag tone="warning">Under review</Tag>                                     | `color`, `variant` and `size` removed; no built-in margins                                              |
 | `InputWrapper`, `Label`  | [Field](#field)               | <Tag tone="info">New</Tag>                                                 | Compose `Field.Label`, `Field.Description` and `Field.HelperMessage` yourself                           |
 | `Icon`                   | [Icon](#icon)                 | <Tag tone="danger">Known issues</Tag>                                      | Numeric `size` → semantic `size`; `name` and `Icon.add()` removed                                       |
-| `Input`                  | [Input](#input)               | <Tag tone="warning">Under review</Tag>                                     | `leftAdornments`/`rightAdornments` → `startAdornment`/`endAdornment`; `variant` → `invalid`             |
+| `Input`                  | [Input](#input)               |                                                                            | `leftAdornments`/`rightAdornments` → `startAdornment`/`endAdornment`; `variant` → `invalid`             |
 | none (`Typography link`) | [Link](#link)                 | <Tag tone="info">New</Tag>                                                 | New component                                                                                           |
 | `Menu`                   | [Menu](#menu)                 | <Tag>Not a replacement</Tag> <Tag tone="danger">Known issues</Tag>         | Keep using the EDS 1.0 `Menu`                                                                           |
 | `Radio`                  | [Radio](#radio)               | <Tag tone="danger">Known issues</Tag>                                      | Labelled root `<label>` → `<div>`; SVG `path[name]` hooks removed                                       |
@@ -147,8 +147,6 @@ Props: `tone` (`neutral` | `accent` | `success` | `info` | `warning` | `danger`,
 
 ## Banner
 
-<Tag tone="warning">Under review</Tag>
-
 EDS 1.0: `Banner` with `Banner.Icon`, `Banner.Message` and `Banner.Actions`.
 
 **Props**
@@ -158,7 +156,7 @@ EDS 1.0: `Banner` with `Banner.Icon`, `Banner.Message` and `Banner.Actions`.
 - `Banner.Message` no longer accepts Typography props (`variant`, `color`, `bold`, `italic`, `link`, `group`, `token`, `lines`, `as`). It renders `<p class="message">`. The element is unchanged for default usage, but the Typography props can no longer change it.
 - New: `onDismiss`, which renders a close button with `aria-label="Dismiss"`, and `role`.
 
-**Markup and behaviour**: the default role changes from `alert` to `status`, so the banner is announced politely instead of interrupting. Tests using `getByRole('alert')` need `getByRole('status')`, or pass `role="alert"` for urgent messages. The inner Paper wrapper and trailing divider are gone.
+**Markup and behaviour**: the default role changes from `alert` to `status`, so the banner is announced politely instead of interrupting. `alert` is reserved for time-sensitive messages, which most banners are not, so pass `role="alert"` explicitly when a message must interrupt. Tests using `getByRole('alert')` need `getByRole('status')`. The inner Paper wrapper and trailing divider are gone.
 
 <span id="buttongroup" />
 <span id="buttontoggle" />
@@ -287,14 +285,12 @@ EDS 1.0: `Icon`.
 
 ## Input
 
-<Tag tone="warning">Under review</Tag>
-
 EDS 1.0: `Input`.
 
 **Props**
 
 - `leftAdornments` → `startAdornment`, `rightAdornments` → `endAdornment`. New `startText` and `endText` for plain text.
-- `variant` (`error` | `warning` | `success`) → `invalid`.
+- `variant` (`error` | `warning` | `success`) → `invalid`. There is no `warning` or `success` prop in the beta. The state and token model for inputs is being reworked, so this may change again before EDS 2.0 becomes stable.
 - Removed: `leftAdornmentsProps`, `rightAdornmentsProps`, `leftAdornmentsWidth`, `rightAdornmentsWidth`.
 - `as` is limited to `input` | `textarea` and is internal.
 
@@ -452,9 +448,7 @@ Behaviour described above that we consider a bug. It stays on this page until th
 
 Changes listed above as implemented today, where the team has not yet confirmed that they are final:
 
-- **Banner**: default role `status` instead of `alert`.
-- **Tooltip**: default placement `top` instead of `bottom`.
-- **Input family**: no replacement for `variant="warning"` and `variant="success"`.
-- **Divider**: no replacement for the thicker `size="2"` and the lighter colours.
+- **Tooltip**: default placement `top` instead of `bottom` ([#5386](https://github.com/equinor/design-system/issues/5386)).
+- **Divider**: no replacement for the thicker `size="2"`, the lighter colours and the built-in spacing.
 
 Follow [#5383](https://github.com/equinor/design-system/issues/5383) for the status of these.
