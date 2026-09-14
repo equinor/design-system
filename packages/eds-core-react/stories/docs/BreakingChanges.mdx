@@ -1,6 +1,23 @@
-import { Meta } from '@storybook/addon-docs/blocks'
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { Badge, Banner, Button, Chip, Icon } from '../../src/components/next'
+import { info_circle } from '@equinor/eds-icons'
 
 <Meta title="EDS 2.0 (beta)/Breaking changes" />
+
+export const Tag = ({ tone = 'neutral', children }) => (
+  <span className="sb-unstyled" style={{ display: 'inline-flex', marginBlockEnd: '0.5rem' }}>
+    <Badge tone={tone} emphasis="medium">{children}</Badge>
+  </span>
+)
+
+export const components = [
+  'Accordion', 'Autocomplete', 'Badge', 'Banner', 'Button', 'Checkbox', 'Chip',
+  'Dialog', 'Divider', 'Field', 'Icon', 'Input', 'Link', 'Menu', 'Radio',
+  'Search', 'Select', 'Switch', 'TextArea', 'TextField', 'Tooltip',
+]
+
+export const jumpTo = (id) => () =>
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
 # Breaking changes in EDS 2.0
 
@@ -12,9 +29,35 @@ This page lists the intentional breaking changes between EDS 1.0 components and 
 - **Composition**: added or removed sub-components, changed children API.
 - **Markup and behaviour**: changed elements, roles, ARIA attributes, class names or test ids that can break consumer tests or CSS.
 
-**Not tracked**: visual changes such as spacing, colour and typography. Every EDS 2.0 component is restyled, and styled-components hash class names are replaced by stable `eds-*` class names. Treat any CSS that targets EDS internals as broken until you have verified it.
+**How to read the markers**: an unmarked change is intentional. <Tag tone="danger">Known issues</Tag> means the section also describes behaviour we consider a bug; it is listed so you are not surprised, and each one links to its bug report. <Tag tone="warning">Under review</Tag> means the team has not yet confirmed that the change is final.
 
-**Found a change that is not listed here?** It may be unintentional. Please [open an issue](https://github.com/equinor/design-system/issues) so we can either fix it or add it to this page.
+**Not tracked**: visual changes such as spacing, colour and typography. Every EDS 2.0 component is restyled, and styled-components hash class names are replaced by stable class names: an `eds-*` class on each component root and short, unprefixed names (`label`, `panel`, `message`, `content`) on internal parts. Treat any CSS that targets EDS internals as broken until you have verified it.
+
+<Unstyled>
+  <Banner tone="info">
+    <Banner.Icon>
+      <Icon data={info_circle} />
+    </Banner.Icon>
+    <Banner.Message>{'Found a change that is not listed here? It may be unintentional. Open an issue so we can either fix it or add it to this page.'}</Banner.Message>
+    <Banner.Actions>
+      <Button asChild variant="secondary">
+        <a href="https://github.com/equinor/design-system/issues/new/choose" target="_blank" rel="noreferrer">Open an issue</a>
+      </Button>
+    </Banner.Actions>
+  </Banner>
+</Unstyled>
+
+**Jump to a component**
+
+<Unstyled>
+  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBlock: '0.5rem 1.5rem' }}>
+    {components.map((name) => (
+      <Chip key={name} variant="outlined" onClick={jumpTo(name.toLowerCase())}>
+        {name}
+      </Chip>
+    ))}
+  </div>
+</Unstyled>
 
 ## Overview
 
@@ -25,46 +68,50 @@ This page lists the intentional breaking changes between EDS 1.0 components and 
 | none                                                      | [Badge](#badge)                             | New component for non-interactive labels                                                                |
 | `Banner`                                                  | [Banner](#banner)                           | `tone` moves to the root; default role `alert` → `status`; `elevation` removed                          |
 | `Button`                                                  | [Button](#button)                           | `contained`/`outlined` → `primary`/`secondary`; `color` → `tone`; `href` → `asChild`                    |
-| `Checkbox`                                                | [Checkbox](#checkbox)                       | Root `<label>` → `<div>`; `className` lands on the input                                                |
+| `Checkbox`                                                | [Checkbox](#checkbox)                       | Labelled root `<label>` → `<div>`; `className` lands on the input                                       |
 | `Chip`                                                    | [Chip](#chip)                               | Real `<button>`; `variant="active"` → `selected`; delete fires on whole-chip click                       |
 | `Dialog`                                                  | [Dialog](#dialog)                           | `onClose` → required `onOpenChange(open)`; always dismissable; ref points at `<dialog>`                 |
 | `Divider`                                                 | [Divider](#divider)                         | `color`, `variant` and `size` removed; no built-in margins                                              |
-| `InputWrapper`, `Label`, `HelperText`                     | [Field](#field)                             | Compose `Field.Label`, `Field.Description` and `Field.HelperMessage` yourself                           |
+| `InputWrapper`, `Label`                                   | [Field](#field)                             | Compose `Field.Label`, `Field.Description` and `Field.HelperMessage` yourself                           |
 | `Icon`                                                    | [Icon](#icon)                               | Numeric `size` → semantic `size`; `name` and `Icon.add()` removed                                       |
 | `Input`                                                   | [Input](#input)                             | `leftAdornments`/`rightAdornments` → `startAdornment`/`endAdornment`; `variant` → `invalid`             |
 | none (`Typography link`)                                  | [Link](#link)                               | New component                                                                                           |
 | `Menu`                                                    | [Menu](#menu)                               | Not a replacement yet; keep using the EDS 1.0 `Menu`                                                    |
-| `Radio`                                                   | [Radio](#radio)                             | Root `<label>` → `<div>`; SVG `path[name]` hooks removed                                                |
+| `Radio`                                                   | [Radio](#radio)                             | Labelled root `<label>` → `<div>`; SVG `path[name]` hooks removed                                       |
 | `Search`                                                  | [Search](#search)                           | Clearing calls `onClear`, not `onChange`; native `<search>` element                                     |
 | `NativeSelect`                                            | [Select](#select)                           | `<option>` children → `options` prop; ref points at `<select>`                                          |
 | `Switch`                                                  | [Switch](#switch)                           | `label` required; `size` removed; `role="switch"`                                                       |
 | `Textarea`                                                | [TextArea](#textarea)                       | Renamed export; `rowsMax` → `maxRows`; `helperText` → `helperMessage`; auto-grows by default            |
 | `TextField`                                               | [TextField](#textfield)                     | `helperText` → `helperMessage`; `meta` → `indicator`; `variant` → `invalid`; `id` gets `-input` suffix  |
-| `Tooltip`                                                 | [Tooltip](#tooltip)                         | `placement` reduced to four values, default `top`; rendered inline without an arrow                     |
+| `Tooltip`                                                 | [Tooltip](#tooltip)                         | `placement` reduced to four values, default `top`; rendered inline, arrow is a CSS pseudo-element       |
 
-Shared changes across the form components (Checkbox, Input, Radio, Search, Select, Switch, TextArea, TextField):
+Shared changes across the form components:
 
-- The `variant` prop with `error` / `warning` / `success` is replaced by a boolean `invalid`. There is no `warning` or `success` state.
-- `helperText` becomes `helperMessage` and accepts a ReactNode. `meta` becomes `indicator` and is meant for `(Required)` / `(Optional)`.
-- Components built on [Field](#field) derive their ids: `id="name"` puts `name-input` on the input and `name-label`, `name-description`, `name-helper-message` on the other parts.
-- The helper message gets `role="alert"` when the field is invalid.
-- The container is no longer forced to `width: 100%`.
+- On Input, TextField and TextArea the `variant` prop with `error` / `warning` / `success` is replaced by a boolean `invalid`. Select and Search gain `invalid`. Checkbox, Radio and Switch have no invalid state. There is no `warning` or `success` state anywhere.
+- On TextField, TextArea and Autocomplete `helperText` becomes `helperMessage` and accepts a ReactNode. On TextField, TextArea and Select `meta` becomes `indicator`, typed `string` instead of ReactNode and meant for `(Required)` / `(Optional)`. Autocomplete drops `meta` without a replacement.
+- TextField, TextArea, Search, Select and Autocomplete derive their ids through `useFieldIds`: `id="name"` puts `name-input` on the input, `name-description` on the description and `name-helper-message` on the helper message. `name-label` is only set on Search's label. Checkbox, Radio and Switch do not derive ids, so `id="name"` stays `name` on the input, and Checkbox's helper message id is `name-helper`. The inconsistency is tracked in [#5456](https://github.com/equinor/design-system/issues/5456).
+- In TextField, TextArea, Search and Select the helper message gets `role="alert"` when `invalid` is set. Checkbox's helper message never gets a role.
+- `className` and `style` now land on the `<input>` or `<textarea>` instead of the outer container (Switch merges `className` onto its root instead). Use `containerClassName` on Input for the input wrapper. The inconsistency is tracked in [#5456](https://github.com/equinor/design-system/issues/5456).
+- `.eds-field` still defaults to `width: 100%`, but as plain CSS (`width: var(--eds-field-width, 100%)`) instead of the inline style EDS 1.0 put on the container, so it can be overridden. Checkbox, Radio and Switch set `width: auto`.
 
 ## Accordion
+
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `Accordion` with `Accordion.Item`, `Accordion.Header`, `Accordion.HeaderTitle`, `Accordion.HeaderActions` and `Accordion.Panel`.
 
 **Props**
 
 - Removed on `Accordion`: `headerLevel`, `chevronPosition`.
-- Removed on `Accordion.Item`: `disabled`.
+- `disabled` on `Accordion.Item` is missing with no replacement. Known issue: [#5463](https://github.com/equinor/design-system/issues/5463).
 - Renamed on `Accordion.Item`: `isExpanded` → `open` (controlled) or `defaultOpen` (uncontrolled); `onExpandedChange` → `onOpenChange`.
 - New on `Accordion`: `exclusive`, which keeps at most one item open.
 - An item is controlled when `open` is defined. In EDS 1.0 it was controlled as soon as `onExpandedChange` was passed.
+- `onToggle` on `Accordion.Header` is removed, and `Accordion.Item` omits the native `onToggle` of `<details>`, so use `onOpenChange`.
 
 **Composition**: `Accordion.HeaderTitle` and `Accordion.HeaderActions` are removed. Put the title directly in `Accordion.Header`.
 
-**Markup**: built on native `<details>` and `<summary>`. There is no heading element, no `button[aria-expanded]`, no `role="region"` and no generated header or panel ids. Collapsed panels are closed by `<details>`, not hidden with `hidden`.
+**Markup**: built on native `<details>` and `<summary>`. There is no heading element, no `button[aria-expanded]`, no `role="region"` and no generated header or panel ids. Collapsed panels are closed by `<details>`, not hidden with `hidden`. The root gets `class="eds-accordion"`, header content is wrapped in `span.title` next to a `span.chevron`, and the panel is `div.panel`.
 
 ## Autocomplete
 
@@ -77,16 +124,22 @@ EDS 1.0: `Autocomplete`.
 - Value API: `selectedOptions: T[]` + `onOptionsChange({ selectedItems })` → `value?: T` + `onValueChange(value: T | undefined)`.
 - Renamed: `optionLabel` → `getOptionLabel`; `optionComponent(option, isSelected)` → `renderOption(option, { isSelected })`; `helperText` → `helperMessage`; `variant="error"` → `invalid`; `onAddNewOption` → `allowCustomValue` + `onCustomValueConfirm`.
 - Removed: `totalOptions`, `meta`, `helperIcon`, `hideClearButton`, `autoWidth`, `multiline`, `dropdownHeight`, `itemToKey`, `itemCompare`, `clearSearchOnChange`, and the exported `AutocompleteChanges` type.
-- `options` no longer accepts `readonly` arrays. `label` is optional. New: `inputValue` and `defaultInputValue` for controlling the text.
-- Event handlers and `className` are no longer spread on the container. `onClick`, `onFocus`, `onBlur`, `onKeyDown` and the adornment props are blocked; the remaining input props go to the `<input>`.
+- `options` no longer accepts `readonly` arrays. `label` is optional. New: `inputValue` and `defaultInputValue` for controlling the text, `description`, `clearLabel`, `loadingText`.
+- `className` and `style` are no longer applied to the container; they go to the `<input>`, and the root class is always `eds-autocomplete`. Event handlers already went to the input in EDS 1.0, but `onMouseDown`, `onClick`, `onFocus`, `onBlur`, `onKeyDown` and `onKeyUp` are now blocked, as are `value`, `defaultValue`, `type`, `as`, `hideErrorIcon` and the adornment props. The remaining input props go to the `<input>`.
 
 **Markup**: `data-testid="add-item"` and `data-testid="select-all"` are gone. Listbox and option ids are generated as `eds-autocomplete-listbox-*`. `aria-multiselectable` is gone. Options are no longer virtualised, so every option is in the DOM. The list uses the Popover API with CSS anchor positioning instead of a floating-ui positioned element.
 
 ## Badge
 
-New component, no EDS 1.0 counterpart. Use it for non-interactive labels where you previously used a static `Chip`. Compared to a `Chip` used as a label: `variant="error"` → `tone="danger"`, and there is no `onDelete`, `onClick` or `disabled`. Props: `tone`, `emphasis`, `variant`.
+<Tag tone="info">New</Tag>
+
+New component, no EDS 1.0 counterpart. Use it for non-interactive labels where you previously used a static `Chip`. Compared to a `Chip` used as a label: `variant="error"` → `tone="danger"`, and there is no `onDelete` or `disabled`. Badge is not interactive; if you need a click target, use `Chip` or `Button`.
+
+Props: `tone` (`neutral` | `accent` | `success` | `info` | `warning` | `danger`, default `neutral`), `emphasis` (`low` | `medium`, default `low`), `variant` (`solid` | `outlined`, default `solid`). Note that `variant` is a different set from Chip's.
 
 ## Banner
+
+<Tag tone="warning">Under review</Tag>
 
 EDS 1.0: `Banner` with `Banner.Icon`, `Banner.Message` and `Banner.Actions`.
 
@@ -94,7 +147,7 @@ EDS 1.0: `Banner` with `Banner.Icon`, `Banner.Message` and `Banner.Actions`.
 
 - Removed on `Banner`: `elevation`.
 - Moved: `variant` (`info` | `warning`) on `Banner.Icon` → `tone` on `Banner`, now `info` | `warning` | `danger` | `success`. `Banner.Icon` has no EDS props.
-- `Banner.Message` no longer accepts Typography props (`variant`, `color`, `bold`, `italic`, `link`). It renders a plain `<p>`.
+- `Banner.Message` no longer accepts Typography props (`variant`, `color`, `bold`, `italic`, `link`, `group`, `token`, `lines`, `as`). It renders `<p class="message">`. The element is unchanged for default usage, but the Typography props can no longer change it.
 - New: `onDismiss`, which renders a close button with `aria-label="Dismiss"`, and `role`.
 
 **Markup and behaviour**: the default role changes from `alert` to `status`, so the banner is announced politely instead of interrupting. Tests using `getByRole('alert')` need `getByRole('status')`, or pass `role="alert"` for urgent messages. The inner Paper wrapper and trailing divider are gone.
@@ -112,50 +165,60 @@ EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 
 **Composition**: `Button.Group` and `Button.Toggle` have no EDS 2.0 counterpart yet.
 
-**Markup**: text children are wrapped in `<span class="label">`. `tabIndex` is no longer forced on the element.
+**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element.
 
 ## Checkbox
 
+<Tag tone="danger">Known issues</Tag>
+
 EDS 1.0: `Checkbox`.
 
-**Props**: `label` accepts a ReactNode. `type` cannot be passed. New: `indicator`, `helperMessage`.
+**Props**: `label` accepts a ReactNode. `type` cannot be passed. New: `indicator`, `helperMessage`. `helperMessage` is planned for removal again, since helper text on selection controls is not an intended use case ([#5183](https://github.com/equinor/design-system/issues/5183)).
 
-**Markup**: the root changes from `<label>` to `<div class="eds-field eds-checkbox">`, and `className` and `style` now land on the `<input>`. The icon is three SVGs with the classes `icon-checked`, `icon-unchecked` and `icon-indeterminate` instead of one swapped SVG. Indeterminate state sets `aria-checked="mixed"` and is applied by the component, not by you.
+**Markup**: with a `label`, the root changes from `<label>` to `<div class="eds-field eds-checkbox">`; without a label it is `<span class="eds-checkbox" data-standalone>`. `className` and `style` now land on the `<input>`. A consumer `className` currently replaces the internal `input` class, so the native checkbox becomes visible. Known issue: [#5323](https://github.com/equinor/design-system/issues/5323). The icon is three SVGs with the classes `icon-checked`, `icon-unchecked` and `icon-indeterminate` instead of one swapped SVG. Indeterminate state sets `aria-checked="mixed"` and is applied by the component, not by you.
 
 ## Chip
+
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `Chip`.
 
 **Props**
 
 - `variant="active"` → `selected`; `variant="error"` → `tone="danger"`. `variant` now takes `default` | `outlined` | `high-contrast`.
-- New: `dropdown`. `type` is fixed to `button`.
+- New: `tone` (`neutral` | `accent` | `success` | `info` | `warning` | `danger`) and `dropdown`. `type` is fixed to `button`.
 - `disabled` is the native button attribute. It no longer suppresses `onClick` and `onDelete` in JavaScript, and disabled chips leave the tab order.
+- `ref` and event types change from `HTMLDivElement` to `HTMLButtonElement`.
 
 **Behaviour**: `onDelete` fires on a click anywhere on the chip and on Backspace or Delete, not only on the close icon and Enter. `onClick` is ignored when `onDelete` is set.
 
-**Markup**: the root changes from `<div role="button">` to a real `<button>` with `aria-pressed` (selectable chips) or `aria-expanded` (dropdown chips). Child `Icon` and `Avatar` elements are no longer resized automatically. The close icon title changes from `close` to `Remove`.
+**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. A plain label chip currently also renders `aria-pressed="false"` and is announced as a toggle. Known issue: [#5458](https://github.com/equinor/design-system/issues/5458). Use `Badge` for labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` and `Avatar` elements are no longer resized automatically. The close icon title changes from `close` to `Remove`.
 
 ## Dialog
 
-EDS 1.0: `Dialog` with `Dialog.Header`, `Dialog.Title`, `Dialog.Content`, `Dialog.CustomContent`, `Dialog.Actions`, used together with `Scrim`.
+<Tag tone="danger">Known issues</Tag>
+
+EDS 1.0: `Dialog` with `Dialog.Header`, `Dialog.Title`, `Dialog.Content`, `Dialog.CustomContent` and `Dialog.Actions`.
 
 **Props**
 
 - `onClose()` → `onOpenChange(open: boolean)`, and it is required.
-- Removed: `isDismissable`, `dialogRef`, and `scrollable` on `Dialog.Content`. New: `scrim` (default `true`).
+- Removed: `dialogRef`, and `scrollable` on `Dialog.Content`. New: `scrim` (default `true`).
+- `isDismissable` is missing with no replacement, so there is no non-dismissable mode. Known issue: [#5461](https://github.com/equinor/design-system/issues/5461).
 
-**Behaviour**: Escape and backdrop click always close the dialog and call `onOpenChange(false)`. There is no non-dismissable mode. Children stay mounted while the dialog is closed, so `queryBy*` assertions on a closed dialog now find its content.
+**Behaviour**: Escape and backdrop click close the dialog and call `onOpenChange(false)`. Children stay mounted while the dialog is closed, so text and test-id queries on a closed dialog now find its content. Role-based queries still exclude it, because a closed `<dialog>` is hidden.
 
 **Composition**: `Dialog.CustomContent` is removed. `Dialog.Header` always renders a close button with `aria-label="Close"`.
 
-**Markup**: `ref` points at the `<dialog>` element, not an inner div. `Dialog.Title` renders an `<h2>`. The fixed ids `eds-dialog-title` and `eds-dialog-customcontent` are gone; `aria-labelledby` is wired automatically and `aria-describedby` is not set. The scrim is the native `::backdrop`, so `Scrim` is not needed. Body scroll is no longer locked by the component. `Scrim` itself has no EDS 2.0 counterpart.
+**Markup**: `ref` points at the `<dialog>` element, not an inner div. `Dialog.Title` renders an `<h2>`. The fixed ids `eds-dialog-title` and `eds-dialog-customcontent` are gone; `aria-labelledby` is wired automatically. The scrim is the native `::backdrop`, toggled with the `scrim` prop. `aria-describedby` is currently not set and body scroll is not locked while the dialog is open. Known issue: [#5461](https://github.com/equinor/design-system/issues/5461). The standalone EDS 1.0 `Scrim` component has no EDS 2.0 counterpart.
 
 ## Divider
 
+<Tag tone="warning">Under review</Tag>
+
 EDS 1.0: `Divider`.
 
-All three props are removed: `color` (`lighter` | `light` | `medium`), `variant` (`small` | `medium`) and `size` (`1` | `2`). Colour and thickness come from tokens. Margins are `0`, where EDS 1.0 added vertical spacing around the rule, so add spacing with your layout (`gap` or margin).
+All three props are removed: `color` (`lighter` | `light` | `medium`), `variant` (`small` | `medium`) and `size` (`1` | `2`). Colour and thickness come from tokens. Margins are `0`, where EDS 1.0 added vertical spacing around the rule, so add spacing with your layout (`gap` or margin). The rule is now a `border-block-start` on a zero-height `<hr>` with `inline-size: 100%`, instead of `height` and `background-color`, so CSS overriding those stops working.
 
 <span id="inputwrapper" />
 <span id="label" />
@@ -163,18 +226,22 @@ All three props are removed: `color` (`lighter` | `light` | `medium`), `variant`
 
 ## Field
 
-New composition primitive. Replaces `InputWrapper`, `Label`, `HelperText` and the `useInputField` hook.
+<Tag tone="info">New</Tag>
 
-**Composition**: `Field` renders only its children, so you place `Field.Label`, `Field.Description` and `Field.HelperMessage` yourself. `children` is required. Props: `disabled`, `position` (`start` | `end`, for toggles with the control before the label). For most forms use [TextField](#textfield) instead.
+New composition primitive. Replaces `InputWrapper`, `Label`, the internal `HelperText` (never exported from the package root) and the `useInputField` hook.
+
+**Composition**: `Field` renders a single `<div class="eds-field">` wrapper and nothing else, so you place `Field.Label`, `Field.Description` and `Field.HelperMessage` inside it yourself. `children` is required. Props: `disabled`, `position` (`start` puts the control before the label, `end` puts the label first; for toggles). For most forms use [TextField](#textfield) instead.
 
 - `InputWrapper` props `label`, `labelProps`, `helperProps`, `color`, `readOnly` and `helperIcon` have no equivalent. Compose the parts instead.
-- `Label` `meta` → `Field.Label` `indicator`; `label` → children.
+- `Label` `meta` → `Field.Label` `indicator` (now `string`); `label` → children. `Label` `disabled` is replaced by `disabled` on `Field`. The extra `<span>` around the label text is gone.
 - `HelperText` `text` → children; `icon` and `color` are removed. It renders a single `<p>` and always renders, so wrap it in a condition when there is no message.
 - `useInputField` → `useFieldIds`, which returns `inputId`, `labelId`, `descriptionId`, `helperMessageId` and `getDescribedBy`.
 
 **Markup**: sub-element class names are flat and unprefixed (`label`, `description`, `helper-message`, `indicator`) and scoped under `.eds-field`.
 
 ## Icon
+
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `Icon`.
 
@@ -183,11 +250,13 @@ EDS 1.0: `Icon`.
 - `size`: numeric `16 | 18 | 24 | 32 | 40 | 48` → semantic `xs` | `sm` | `md` | `lg` | `xl` | `2xl` | `3xl` | `4xl` | `5xl` | `6xl`, resolved through the `--eds-sizing-icon-*` tokens. See the Icon page for the size scale.
 - Removed: `name` and the `Icon.add()` registry. `data` is required. `rotation` is removed.
 
-**Behaviour**: missing `data` logs an error and renders nothing, where EDS 1.0 threw.
+**Behaviour**: missing `data` logs an error and renders nothing, where EDS 1.0 threw. EDS 1.0 swapped in a dedicated small icon dataset below 24 px; EDS 2.0 currently always renders the base icon data, so `xs` and `sm` icons are the 24 px geometry scaled down. Known issue: [#5462](https://github.com/equinor/design-system/issues/5462).
 
-**Markup**: no `width`, `height` or `name` attributes on the `<svg>`. `data-testid="eds-icon-path"` on the `<path>` → `data-testid="eds-icon"` on the `<svg>`.
+**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-icon-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
 
 ## Input
+
+<Tag tone="warning">Under review</Tag>
 
 EDS 1.0: `Input`.
 
@@ -198,25 +267,32 @@ EDS 1.0: `Input`.
 - Removed: `leftAdornmentsProps`, `rightAdornmentsProps`, `leftAdornmentsWidth`, `rightAdornmentsWidth`.
 - `as` is limited to `input` | `textarea` and is internal.
 
-**Markup**: `className` and `style` go on the `<input>`; use `containerClassName` for the wrapper. An error icon renders when `invalid` (opt out with `hideErrorIcon`), and `aria-invalid` is set automatically.
+**Markup**: `className` and `style` go on the `<input>`; use `containerClassName` for the wrapper. An error icon renders when `invalid` and the field is neither disabled nor read-only (opt out with `hideErrorIcon`), and `aria-invalid` is set automatically.
 
 ## Link
+
+<Tag tone="info">New</Tag>
 
 New component, no EDS 1.0 counterpart. Use it where you used `Typography` with `link` or `Button` with `href`. Props: `variant` (`inline` | `standalone`) and `asChild` for router links.
 
 ## Menu
 
+<Tag>Not a replacement</Tag>
+<Tag tone="danger">Known issues</Tag>
+
 EDS 1.0: `Menu` with `Menu.Item` and `Menu.Section`.
 
-`Menu` and `MenuItem` are exported from `/next`, but they are currently an internal building block used by Autocomplete: a bare `<ul>` and `<li>` with no props except `active`, and no popover, positioning, roles, keyboard handling or `Menu.Section`. They are not a replacement for the EDS 1.0 `Menu`. Keep using the EDS 1.0 `Menu` until an EDS 2.0 Menu ships.
+`Menu` and `MenuItem` are exported from `/next`, but they are currently an internal building block used by Autocomplete: a bare `<ul>` and `<li>` with no props except `active`, and no popover, positioning, roles, keyboard handling or `Menu.Section`. They are not a replacement for the EDS 1.0 `Menu`. Keep using the EDS 1.0 `Menu` until the EDS 2.0 Menu ships ([#4417](https://github.com/equinor/design-system/issues/4417)). The public export and the `className` handling are tracked in [#5103](https://github.com/equinor/design-system/issues/5103).
 
 ## Radio
+
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `Radio`.
 
 **Props**: `label` accepts a ReactNode. `type` cannot be passed. Unlike Checkbox, Radio has no `indicator` or `helperMessage`.
 
-**Markup**: the root changes from `<label>` to `<div class="eds-field eds-radio">`, and `className` and `style` now land on the `<input>`. The inline SVG with `path[name="selected"]` and `path[name="unselected"]` is replaced by two icons with the classes `icon-checked` and `icon-unchecked`. Density comes from `data-density` on an ancestor, not from `EdsProvider`.
+**Markup**: with a `label`, the root changes from `<label>` to `<div class="eds-field eds-radio">`; without a label it is `<span class="eds-radio" data-standalone>`. `className` and `style` now land on the `<input>`. A consumer `className` currently replaces the internal `input` class, so the native radio becomes visible. Known issue: [#5323](https://github.com/equinor/design-system/issues/5323). The inline SVG with `path[name="selected"]` and `path[name="unselected"]` is replaced by two icons with the classes `icon-checked` and `icon-unchecked`. Density comes from `data-density` on an ancestor, not from `EdsProvider`.
 
 ## Search
 
@@ -224,16 +300,18 @@ EDS 1.0: `Search`.
 
 **Props**
 
-- New: `label`, `description`, `helperMessage`, `onClear`, `clearLabel`.
-- Blocked: `type` (always `search`), `startAdornment`, `endAdornment`, `startText`, `endText`, `hideErrorIcon`.
+- New: `label`, `description`, `helperMessage`, `onClear`, `clearLabel`, `invalid`, `readOnly`. `invalid` never shows the Input error icon, because Search hides it internally.
+- Blocked in the types: `type` (always `search`), `as`, `startAdornment`, `endAdornment`, `startText`, `endText`, `hideErrorIcon`.
 
 **Behaviour**: clearing does not fire `onChange`. In controlled mode, handle `onClear` and reset your value, otherwise the field keeps the old value. Focus returns to the input after clearing.
 
-**Markup**: the root is a native `<search>` element without a `role` attribute. `getByRole('search')` still works; a `[role="search"]` selector does not. The clear button has `aria-label="Clear search"` and no `title`.
+**Markup**: the root is a native `<search>` element without a `role` attribute, where EDS 1.0 rendered a `div` with `role="search"`. Neither `[role="search"]` selectors nor Testing Library's `getByRole('search')` find it, because aria-query does not yet map `<search>` to the `search` role. Query the input with `getByRole('searchbox')` instead. Browsers and screen readers do expose `<search>` as a search landmark. The clear button's accessible name changes from `clear search` to `Clear search`, and its `title="clear"` is gone. `className` and `style` land on the `<input>`.
 
 <span id="nativeselect" />
 
 ## Select
+
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `NativeSelect`. There was no EDS 1.0 component named `Select`.
 
@@ -241,20 +319,22 @@ EDS 1.0: `NativeSelect`. There was no EDS 1.0 component named `Select`.
 
 - Options are passed with the `options` prop instead of `<option>` children, which are blocked. Groups are `{ type: 'group', label, options }`. Object options need `getOptionLabel`, and `getOptionValue` and `optionDisabled` are available.
 - Removed: `meta`, `selectRef`. `id` and `label` are optional. New: `indicator`, `description`, `helperMessage`, `invalid`, `readOnly`, `placeholder`.
-- Single selection only. Multi-select comes with Combobox ([#4435](https://github.com/equinor/design-system/issues/4435)).
+- The documented `multiple` prop is gone; multi-select comes with Combobox ([#4435](https://github.com/equinor/design-system/issues/4435)). Native `multiple` is currently not blocked in the types even though it is unsupported. Known issue: [#5460](https://github.com/equinor/design-system/issues/5460).
 
-**Markup**: `ref` points at the `<select>` element. EDS 1.0 pointed `ref` at the container and `selectRef` at the select.
+**Markup**: `ref` points at the `<select>` element. EDS 1.0 pointed `ref` at the container and `selectRef` at the select. `className` currently lands on the inner `div.eds-select`, not the Field root, so it cannot size the whole field. Known issue: [#5322](https://github.com/equinor/design-system/issues/5322). `readOnly` is emulated with `aria-readonly`, key blocking and a hidden input, since `<select>` has no native read-only state.
 
 ## Switch
+
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `Switch`.
 
 **Props**
 
 - `label` is required and accepts a ReactNode.
-- `size` (`default` | `small`) is removed. For the compact variant set `data-density="comfortable"` on an ancestor.
+- `size` (`default` | `small`) is removed. For the compact variant set `data-density="comfortable"` on an ancestor. The native numeric `size` attribute currently type-checks and is forwarded to the input, where EDS 1.0 blocked it. Known issue: [#5457](https://github.com/equinor/design-system/issues/5457).
 
-**Markup**: the input has `role="switch"`, so `getByRole('checkbox')` → `getByRole('switch')`. The component always renders inside a Field wrapper with the internal classes `control`, `track` and `handle`.
+**Markup**: the input has `role="switch"`, so `getByRole('checkbox')` → `getByRole('switch')`. The component always renders inside a Field wrapper with the internal classes `control`, `track` and `handle`. `className` is merged onto the root, while `style` goes to the `<input>`. The component keeps internal checked state to drive its colour, so `onChange` is intercepted and re-emitted.
 
 ## TextArea
 
@@ -268,7 +348,7 @@ EDS 1.0: `Textarea`.
 
 **Behaviour**: the field auto-grows by default. `rows` sets the initial height and `maxRows` caps it.
 
-**Markup**: built on [Field](#field), so ids are derived (`${id}-input` on the textarea) and the helper message gets `role="alert"` when invalid.
+**Markup**: built on [Field](#field), so ids are derived (`${id}-input` on the textarea) and the helper message gets `role="alert"` when invalid. The root is `div.eds-field.eds-text-area` with new `div.label-row` and `div.helper-row` wrappers, so the helper message is no longer a direct child of the field. `className` and `style` land on the `<textarea>`, which is now `resize: vertical`.
 
 ## TextField
 
@@ -277,33 +357,50 @@ EDS 1.0: `TextField`.
 **Props**
 
 - `helperText` → `helperMessage`; `meta` → `indicator`; `variant="error"` → `invalid`.
-- `unit` → `endText`; `inputIcon` → `startAdornment` or `endAdornment`; `inputRef` → `ref`. `helperIcon` is removed.
+- `unit` → `endText`; `inputIcon` → `endAdornment` (it always rendered on the right in EDS 1.0, `startAdornment` is new). `inputRef` is removed; `ref` already pointed at the `<input>` and still does. `helperIcon` is removed.
 - New: `description`, `labelInfo` (info icon with a tooltip).
 
 **Composition**: built on [Field](#field). For layouts TextField does not cover, compose `Field` yourself.
 
-**Markup**: the root is `div.eds-field`. Ids are derived (`${id}-input` on the input). The helper message is a single `<p class="helper-message">` with `role="alert"` when invalid.
+**Markup**: the root is `div.eds-field`, with a new `div.eds-text-field__header` around the label and info button. Ids are derived (`${id}-input` on the input). `className` and `style` land on the `<input>`. The helper message is a single `<p class="helper-message">` with `role="alert"` when invalid.
 
 ## Tooltip
+
+<Tag tone="warning">Under review</Tag>
+<Tag tone="danger">Known issues</Tag>
 
 EDS 1.0: `Tooltip`.
 
 **Props**
 
-- `placement`: the twelve floating-ui placements → `top` | `bottom` | `left` | `right`. The `-start` and `-end` variants are removed. The default changes from `bottom` to `top`.
+- `placement`: the twelve floating-ui placements → `top` | `bottom` | `left` | `right`. The `-start` and `-end` variants are removed ([#5386](https://github.com/equinor/design-system/issues/5386)). The default changes from `bottom` to `top`.
 - `title`: ReactNode → string.
-- Removed: `enterDelay`, `portalContainer`.
+- Removed: `portalContainer`.
+- `enterDelay` is removed and there is currently no open delay at all: the tooltip shows immediately on hover or focus. Known issue: [#5459](https://github.com/equinor/design-system/issues/5459).
 
-**Markup**: rendered inline instead of in a portal. The trigger is wrapped in `<span class="eds-tooltip-anchor">` (inline-block, so wrap it in a block element for full-width triggers) and the tooltip is a sibling `div[role="tooltip"][popover="hint"]`. There is no arrow. `aria-describedby` on the trigger replaces the visually hidden "Has tooltip" text. Safari falls back to `popover="manual"`, so the tooltip works but is not dismissed with Escape.
+**Markup**: rendered inline instead of in a portal. The trigger is wrapped in `<span class="eds-tooltip-anchor">` (inline-block, so wrap it in a block element for full-width triggers) and the tooltip is a sibling `div[role="tooltip"][popover="hint"]`. The tooltip element is always in the DOM as a closed popover, where EDS 1.0 mounted it only while open, so `queryByRole('tooltip', { hidden: true })` and text queries match a closed tooltip. The arrow is no longer a DOM element: the `svg.arrowSvg` is replaced by a CSS `::before` pseudo-element. The visually hidden "Has tooltip" text is gone. `aria-describedby` is still set on the trigger, but now for as long as the tooltip is mounted, not only while open. It currently replaces any `aria-describedby` the trigger already had instead of merging with it. Known issue: [#5459](https://github.com/equinor/design-system/issues/5459). In browsers without `popover="hint"` support the tooltip falls back to manual popover behaviour and is not dismissed with Escape.
+
+## Known issues
+
+Behaviour described above that we consider a bug. It stays on this page until the fix ships, so you know what to expect in the current beta.
+
+- **Accordion**: no `disabled` on items ([#5463](https://github.com/equinor/design-system/issues/5463)). Panels do not expand in Safari 18.4+ ([#5325](https://github.com/equinor/design-system/issues/5325)).
+- **Checkbox, Radio**: a consumer `className` replaces the class that hides the native input ([#5323](https://github.com/equinor/design-system/issues/5323)).
+- **Chip**: `aria-pressed="false"` on plain label chips ([#5458](https://github.com/equinor/design-system/issues/5458)).
+- **Dialog**: no non-dismissable mode, body scroll not locked, no `aria-describedby` ([#5461](https://github.com/equinor/design-system/issues/5461)).
+- **Icon**: small icon dataset not used for `xs` and `sm` ([#5462](https://github.com/equinor/design-system/issues/5462)).
+- **Menu**: exported publicly although it is an internal building block; `className` replaces `eds-menu` ([#5103](https://github.com/equinor/design-system/issues/5103)).
+- **Select**: `className` lands on an inner wrapper ([#5322](https://github.com/equinor/design-system/issues/5322)); native `multiple` not blocked ([#5460](https://github.com/equinor/design-system/issues/5460)).
+- **Switch**: native numeric `size` attribute accepted ([#5457](https://github.com/equinor/design-system/issues/5457)).
+- **Tooltip**: no open delay; `aria-describedby` on the trigger is overwritten ([#5459](https://github.com/equinor/design-system/issues/5459)).
+- **Form components**: where `className`, `style` and a consumer `id` land differs between components ([#5456](https://github.com/equinor/design-system/issues/5456)).
 
 ## Under review
 
-These changes are listed above as they are implemented today, but the team has not yet confirmed that they are final:
+Changes listed above as implemented today, where the team has not yet confirmed that they are final:
 
 - **Banner**: default role `status` instead of `alert`.
 - **Tooltip**: default placement `top` instead of `bottom`.
-- **Accordion**: no `disabled` on items.
-- **Menu**: whether the current `Menu` and `MenuItem` should be marked internal.
 - **Input family**: no replacement for `variant="warning"` and `variant="success"`.
 - **Divider**: no replacement for the thicker `size="2"` and the lighter colours.
 

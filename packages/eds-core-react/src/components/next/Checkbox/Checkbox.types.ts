@@ -5,8 +5,8 @@ export type CheckboxProps = {
   label?: ReactNode
   /** If true, the checkbox will be disabled */
   disabled?: boolean
-  /** If true, the checkbox appears indeterminate. Note: You must also set
-   * the native element's indeterminate property via ref if needed.
+  /** If true, the checkbox appears indeterminate. The component sets the
+   * native element's `indeterminate` property for you.
    */
   indeterminate?: boolean
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
