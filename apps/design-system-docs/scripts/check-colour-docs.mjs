@@ -72,8 +72,12 @@ function* walk(node, path = []) {
 
 const canon = new Set()
 const cssCanon = new Set()
+// Colour is the subset the reference page publishes, so it is counted separately: the summary line
+// otherwise reports a bigger number than the page claims and reads as a contradiction.
+const canonColour = new Set()
 for (const [name, token] of walk(dtcg)) {
   canon.add(name)
+  if (token.$type === 'color') canonColour.add(name)
   const web = token.$extensions?.['com.figma']?.codeSyntax?.WEB
   if (web) cssCanon.add(web.replace(/^var\(|\)$/g, ''))
 }
@@ -190,6 +194,13 @@ const quoted = (file, re) => {
   const body = readFileSync(path, 'utf8').match(re)?.[1]
   return body ? (body.match(/'/g)?.length ?? 0) / 2 : -1
 }
+/** Number of `n:` keys in an object literal, for maps that must cover a whole range. */
+const keyed = (file, re) => {
+  const path = join(components, file)
+  if (!existsSync(path)) return null
+  const body = readFileSync(path, 'utf8').match(re)?.[1]
+  return body ? (body.match(/^\s*\d+:/gm)?.length ?? 0) : -1
+}
 
 const structure = [
   ['tones', distinct(/^background\.interactive\.([a-z]+)\./), 'colour/ColourPairing.tsx', quoted('colour/ColourPairing.tsx', /const TONES = \[([\s\S]*?)\]/)],
@@ -200,6 +211,10 @@ const structure = [
   ['sequential steps', distinct(/^data-visualization\.seq\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const SEQ = Array\.from\(\{ length: (\d+)/)],
   ['diverging steps', distinct(/^data-visualization\.div\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const DIV = Array\.from\(\{ length: (\d+)/)],
   ['scale steps', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/ColourScale.tsx', literal('colour/ColourScale.tsx', /const STEPS = Array\.from\(\{ length: (\d+)/)],
+  // ROLES is the one hand-written literal left in these components: what each step is for is a
+  // design decision with no machine-readable source. The wording cannot be checked, but a step
+  // gaining or losing a row can be, which is the failure that would leave a blank cell in the grid.
+  ['scale role descriptions', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/ColourScale.tsx', keyed('colour/ColourScale.tsx', /const ROLES: Record<number, string> = \{([\s\S]*?)\n\}/)],
 ]
 
 for (const [what, source, file, found] of structure) {
@@ -320,5 +335,6 @@ if (problems.length) {
 console.log(
   `ok - ${PROSE.length} pages and ${COMPONENTS.length + MAPPING_COMPONENTS.length} components: every token name and custom ` +
     `property resolves, and every structural count matches the token source ` +
-    `(${canon.size} tokens, ${cssCanon.size} custom properties)`,
+    `(${canon.size} semantic tokens accepted, ${canonColour.size} of them colour; ` +
+    `${cssCanon.size} custom properties)`,
 )

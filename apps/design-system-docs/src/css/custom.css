@@ -375,9 +375,6 @@ nav.menu li a {
 /* Inherit rather than keep Infima's own code sizing, which would otherwise stay larger. */
 .colour-reference table code {
   font-size: inherit;
-}
-
-.colour-reference table code {
   white-space: nowrap;
 }
 

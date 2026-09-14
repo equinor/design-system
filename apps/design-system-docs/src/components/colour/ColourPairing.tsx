@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 /**
  * Renders the foreground pairing rules as specimens rather than as a table of names.
@@ -19,8 +19,6 @@ const TONES = [
   'warning',
   'danger',
 ] as const
-
-type Tone = (typeof TONES)[number]
 
 /** `background.interactive.accent.emphasis.default` -> `var(--eds-background-...)` */
 function cssVar(token: string): string {
