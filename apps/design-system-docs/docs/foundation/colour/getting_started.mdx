@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Picking colour tokens. Pairing rules, worked examples, and the mistakes that survive review.
+description: Picking colour tokens. Pairing rules, worked examples, and the mistakes that are easy to miss.
 ---
 
 import ColourPairing from '@site/src/components/colour/ColourPairing'
@@ -20,13 +20,12 @@ In Figma the same token is `background.interactive.accent.emphasis.default`. Bot
 generated from one definition, so they cannot drift apart. There is a TypeScript form too, for
 places a custom property cannot reach: see [Using the tokens in TypeScript](#using-the-tokens-in-typescript).
 
-:::tip Reaching for a hex value? The token exists, so look it up
+:::tip Wanna use a hex value? The token exists, so look it up
 Every colour token has one name in Figma, one CSS custom property and one TypeScript path. The
 [token reference](./reference.mdx) lists the first two side by side with the resolved values in both
 schemes, and the third follows from the name.
 
-The three line up mechanically:
-
+Token name line-up:
 | Where      | How it is written                                 |
 | ---------- | ------------------------------------------------- |
 | Figma      | `background.non-interactive.accent.muted`         |
@@ -58,9 +57,8 @@ tone the tint was there to convey.
 `text.on-emphasis.<tone>` is the foreground we recommend on any `emphasis` fill, and it is what the
 table above specifies.
 
-`text.inverted` also passes contrast on those fills, so you will not have broken anything by reaching
-for it. The reason to prefer `on-emphasis` is that it is defined per tone and follows the fill it sits
-on, while `inverted` is one value shared by all six tones.
+`text.inverted` also passes contrast on those fills, so you will not have broken anything by using it. The reason to use `on-emphasis` is that it is defined per tone and follows the fill it sits
+on, while `inverted` is one value that doesn't change based on tone.
 :::
 
 ## Worked examples
@@ -131,7 +129,7 @@ tone is the whole change:
 }
 ```
 
-Disabled is the one place the pattern breaks:
+Disabled is the exception, it has its own grey-scale colors, and is not part of the usual tone-based system:
 
 <TokenAnatomy
   mode="colour"
@@ -157,7 +155,7 @@ Disabled is the one place the pattern breaks:
 
 ### A status banner
 
-A banner is non-interactive. It gets a tint and a border, and **no hover values**:
+A banner is *non-interactive*. It gets a tint and a border, and **no hover values**:
 
 <TokenAnatomy
   mode="colour"
@@ -233,7 +231,7 @@ diverge.
 
 ### Focus ring
 
-One token, every component, on every fill:
+Focus ring colour is the same on every element, never changes
 
 <TokenAnatomy
   mode="colour"
@@ -266,7 +264,7 @@ One token, every component, on every fill:
 - Pick by **behaviour**. A non-interactive tint and an interactive tint use different tokens even when they
   look identical today
 - Use the named `hover` and `pressed` tokens
-- Let the scheme attribute do the work
+- Write one token name. Its contrast is already checked in both light and dark
 - Use `text.on-muted.<tone>` on a tinted fill
 - Treat disabled as its own set
 
@@ -277,13 +275,12 @@ One token, every component, on every fill:
 - Pick by appearance, and give a banner hover values it will be handed by accident later
 - Derive states with `opacity` or `filter: brightness()`. They break on tinted fills and invert
   wrongly in dark mode
-- Write `[data-color-scheme="dark"] .thing { … }`. If you need that, the token you picked is wrong
 - Fall back to `text.primary` on a tint, which discards the tone
 - Use a tone's faint end for disabled
 
 :::
 
-## Mistakes that survive review
+## Mistakes that are easy to miss
 
 1. **A raw palette step in a component.** Binding to a numbered scale value instead of a semantic
    token. It looks right and breaks the moment the scale is extended.
