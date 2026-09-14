@@ -215,6 +215,7 @@ const structure = [
   // design decision with no machine-readable source. The wording cannot be checked, but a step
   // gaining or losing a row can be, which is the failure that would leave a blank cell in the grid.
   ['scale role descriptions', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/ColourScale.tsx', keyed('colour/ColourScale.tsx', /const ROLES: Record<number, string> = \{([\s\S]*?)\n\}/)],
+  ['hue anchor steps', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/HueAnchors.tsx', literal('colour/HueAnchors.tsx', /const STEPS = Array\.from\(\{ length: (\d+)/)],
 ]
 
 for (const [what, source, file, found] of structure) {

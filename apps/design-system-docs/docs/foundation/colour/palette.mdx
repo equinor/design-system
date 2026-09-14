@@ -5,19 +5,22 @@ description: How the colour scale is built, why the same token names work in bot
 
 import ColourScale from '@site/src/components/colour/ColourScale'
 import DataVizPalette from '@site/src/components/colour/DataVizPalette'
+import HueAnchors from '@site/src/components/colour/HueAnchors'
 
 This page is about the layer underneath the tokens. The scale is not exposed, so it is hidden from
 the Figma picker and is not part of the public token set. Read it when you want to know *why* a token
 looks the way it does, or when you are proposing a new one.
 
-## Colour is generated, not picked
+## How the scale is built
 
-Every value in the scale is produced by a formula from three inputs: a **hue anchor**, a
-**lightness** value, and a **chroma** curve. Nobody chooses individual colours.
+No individual colour in the scale is hand-picked. Each one is three **OKLCH** numbers, assembled
+from three decisions taken once: a **hue** angle per anchor, a **chroma** curve shared by every hue,
+and one **lightness** value per step, shared by every hue and every tone.
 
-There are seven hue anchors, each defined once in **OKLCH**: `blue`, `gray`, `green`, `moss green`,
-`north sea`, `orange` and `red`. Those are the names in the token source, which is why `gray` is
-spelled the American way there and "grey" everywhere else on this page.
+There are seven hue anchors, each one a single hue angle that does not change across the 15 steps or
+between schemes: `blue`, `gray`, `green`, `moss green`, `north sea`, `orange` and `red`. Those are
+the names in the token source, which is why `gray` is spelled the American way there and "grey"
+everywhere else on this page.
 
 [OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) is a way of writing a
 colour as three numbers: **L** for how light it is, **C** for how saturated, and **H** for which hue.
@@ -26,11 +29,18 @@ The property we rely on is that L means the same thing across every hue, so chan
 how light the colour appears. That is what lets every tone's step 9 read as equally solid whatever
 colour it is.
 
-Chroma follows a bell curve across the scale rather than being set per step, which keeps the middle
-of the scale saturated and both ends muted without anyone tuning it.
+<HueAnchors />
 
-The practical consequence: **adding a seventh tone is not a design exercise.** Point it at a hue
-anchor and the whole scale follows.
+**Chroma** is one curve per scheme, scaled by a single constant per hue: saturated through the middle
+of the scale and muted at both ends. Because the shape is shared, saturation is never set per step or
+per tone. `red` carries more chroma than `north sea` at every step, and `gray` carries none.
+
+**Lightness** is the part that is chosen rather than derived. Every hue takes the same L at the same
+step, so it is set once for the whole scale, but the steps are deliberately uneven, and in dark mode
+they do not even rise in order. [The steps jump on purpose](#the-steps-jump-on-purpose) explains why.
+
+The practical consequence: **adding a tone is not a design exercise.** Point it at a hue anchor in
+each scheme and it inherits the chroma curve and the lightness values already in use.
 
 ## What the step numbers mean
 

@@ -430,3 +430,80 @@ nav.menu li a {
 .migration-map tbody tr:hover {
   background: none;
 }
+
+/* ======================================
+ * COLOUR HUE ANCHOR GRID
+ * ====================================== */
+.hue-anchors {
+  margin: 1.5rem 0 2rem;
+  overflow-x: auto;
+}
+
+.hue-anchors .grid + .grid {
+  margin-top: 1.25rem;
+}
+
+.hue-anchors .grid-title {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Each grid sits on its own scheme's surface rather than on the page. A dark scale read against a
+ * light page is not the colour anyone will see it as: the surrounding value is half of how a colour
+ * is perceived, so the dark grid on white made its low steps look like holes and its high steps
+ * look washed out. The grid carries data-color-scheme, so these tokens resolve per grid. */
+.hue-anchors .rows {
+  display: grid;
+  grid-template-columns: 6.5rem repeat(15, minmax(1.25rem, 1fr));
+  gap: 0.1875rem;
+  align-items: center;
+  min-width: 38rem;
+  background: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: 4px;
+  padding: 0.625rem 0.75rem;
+}
+
+.hue-anchors .step-head {
+  text-align: center;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.625rem;
+  color: var(--eds-text-secondary);
+}
+
+.hue-anchors .hue-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  padding-right: 0.5rem;
+}
+
+.hue-anchors .hue-label b {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--eds-text-primary);
+}
+
+.hue-anchors .hue-label i {
+  font-style: normal;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.625rem;
+  color: var(--eds-text-tertiary);
+}
+
+.hue-anchors .cell {
+  height: 1.5rem;
+  border-radius: 2px;
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.hue-anchors figcaption {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+}
