@@ -27,9 +27,14 @@ const cssVar = (token: string) => `var(--eds-${token.replaceAll('.', '-')})`
 const paint = (value: string) =>
   value.startsWith('--') ? `var(${value})` : value
 
+/**
+ * Decorative: the colour is the point, and the token name beside it already says which colour.
+ * Announcing it would read as an empty cell, so it is hidden from the accessibility tree.
+ */
 function Swatch({ value, muted = false }: { value: string; muted?: boolean }) {
   return (
     <span
+      aria-hidden="true"
       style={{
         background: muted ? 'transparent' : paint(value),
         backgroundImage: muted
@@ -51,74 +56,78 @@ const name: React.CSSProperties = {
   wordBreak: 'break-word',
 }
 
+const cell: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.625rem',
+}
+
 function Row({ pair }: { pair: Pair }) {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'auto minmax(0, 1fr) 1.25rem auto minmax(0, 1fr)',
-        gap: '0.625rem',
-        alignItems: 'center',
-        padding: '0.5rem 0',
-        borderTop: '1px solid var(--ifm-color-emphasis-200)',
-      }}
-    >
-      <Swatch value={pair.fromValue} />
-      <span style={name}>{pair.from}</span>
-      <span
-        aria-hidden="true"
-        style={{ textAlign: 'center', color: 'var(--ifm-color-emphasis-600)' }}
-      >
+    <tr>
+      <td>
+        <span style={cell}>
+          <Swatch value={pair.fromValue} />
+          <span style={name}>{pair.from}</span>
+        </span>
+      </td>
+      <td aria-hidden="true" className="direction">
         →
-      </span>
-      <Swatch value={pair.to ? cssVar(pair.to) : ''} muted={!pair.to} />
-      <span style={name}>
-        {pair.to ?? (
-          <em style={{ color: 'var(--ifm-color-emphasis-700)' }}>
-            no equivalent
-          </em>
-        )}
-        {pair.note ? (
-          <span
-            style={{
-              display: 'block',
-              fontFamily: 'var(--ifm-font-family-base)',
-              fontSize: '0.75rem',
-              color: 'var(--ifm-color-emphasis-700)',
-              marginTop: '0.125rem',
-            }}
-          >
-            {pair.note}
+      </td>
+      <td>
+        <span style={cell}>
+          <Swatch value={pair.to ? cssVar(pair.to) : ''} muted={!pair.to} />
+          <span style={name}>
+            {pair.to ?? (
+              <em style={{ color: 'var(--ifm-color-emphasis-700)' }}>
+                no equivalent
+              </em>
+            )}
+            {pair.note ? (
+              <span
+                style={{
+                  display: 'block',
+                  fontFamily: 'var(--ifm-font-family-base)',
+                  fontSize: '0.75rem',
+                  color: 'var(--ifm-color-emphasis-700)',
+                  marginTop: '0.125rem',
+                }}
+              >
+                {pair.note}
+              </span>
+            ) : null}
           </span>
-        ) : null}
-      </span>
-    </div>
+        </span>
+      </td>
+    </tr>
   )
 }
 
+/**
+ * A real table, because this is tabular data.
+ *
+ * The direction of the mapping is carried visually by the `→`, which a screen reader cannot see.
+ * Column headers carry it instead: without them a row reads as two token names with nothing to say
+ * which one you are migrating away from. The arrow column is hidden rather than given a header,
+ * since the headers now say the same thing.
+ */
 function Table({ pairs }: { pairs: Pair[] }) {
   return (
-    <div style={{ margin: '1rem 0 2rem' }}>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns:
-            'auto minmax(0, 1fr) 1.25rem auto minmax(0, 1fr)',
-          gap: '0.625rem',
-          fontSize: '0.75rem',
-          color: 'var(--ifm-color-emphasis-700)',
-          paddingBottom: '0.375rem',
-        }}
-      >
-        <span />
-        <span>Old</span>
-        <span />
-        <span />
-        <span>Redefined</span>
-      </div>
-      {pairs.map((p) => (
-        <Row key={p.from} pair={p} />
-      ))}
+    <div className="migration-map">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Old</th>
+            <th aria-hidden="true" className="direction" />
+            <th scope="col">Redefined</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pairs.map((p) => (
+            <Row key={p.from} pair={p} />
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

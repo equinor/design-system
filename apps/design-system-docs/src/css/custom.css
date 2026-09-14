@@ -356,7 +356,6 @@ nav.menu li a {
   display: block;
 }
 
-
 /* ======================================
  * COLOUR TOKEN REFERENCE TABLES
  * ====================================== */
@@ -386,4 +385,51 @@ nav.menu li a {
 .colour-reference table th {
   white-space: nowrap;
   vertical-align: middle;
+}
+
+/* ======================================
+ * COLOUR MIGRATION MAP
+ * ====================================== */
+/* MigrationMap is a real table so the mapping direction survives a screen reader, but Infima's
+ * table styling paints a border around every cell, which turned a two-column mapping into a grid
+ * of boxes. Strip the cell borders back to a single rule per row, which is what the figure had
+ * when it was built from divs. */
+.migration-map {
+  margin: 1rem 0 2rem;
+  overflow-x: auto;
+}
+
+.migration-map table {
+  display: table;
+  width: 100%;
+  margin: 0;
+}
+
+.migration-map th,
+.migration-map td {
+  border: none;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.5rem 0.625rem 0.5rem 0;
+  vertical-align: middle;
+}
+
+.migration-map thead th {
+  border-top: none;
+  padding-top: 0;
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--ifm-color-emphasis-700);
+  text-align: left;
+}
+
+/* The arrow column is chrome: narrow enough not to take width from the names it sits between. */
+.migration-map .direction {
+  width: 1.25rem;
+  padding-right: 0;
+  text-align: center;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.migration-map tbody tr:hover {
+  background: none;
 }
