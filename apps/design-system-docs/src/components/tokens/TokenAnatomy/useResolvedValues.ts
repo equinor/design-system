@@ -37,6 +37,12 @@ export function useResolvedValues(
     const element = ref.current
     if (!element) return
 
+    // Both observers fire on things that need not have moved a value: a density switch that only
+    // changes spacing, a font arriving, a reflow. Without this the callback hands React a fresh
+    // object every tick and re-renders for nothing, which is the shape that becomes a loop the
+    // moment a render nudges the specimen's size. useAnchors guards the same way.
+    let previous = ''
+
     const read = () => {
       const computed = getComputedStyle(element)
       const next: Resolved = {}
@@ -45,6 +51,10 @@ export function useResolvedValues(
         const token = latest.current[prop]?.token
         if (token) next[prop] = computed.getPropertyValue(cssName(token)).trim()
       }
+
+      const serialised = JSON.stringify(next)
+      if (serialised === previous) return
+      previous = serialised
       setValues(next)
     }
 
