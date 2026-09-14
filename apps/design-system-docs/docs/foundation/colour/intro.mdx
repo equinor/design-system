@@ -43,12 +43,12 @@ the same size to read as equally solid.
 
 This is the distinction that most often trips people up, so it is worth a moment. A tinted banner and
 a tinted button can look identical today, but they should not share a token. The button needs hover
-and pressed values; the banner should never pick them up. Choose by **behaviour** rather than by
+and pressed values; the banner, for instance, does not. Choose by **behaviour** rather than by
 appearance.
 
 ### 3. Tone: what does it mean?
 
-Six tones. Tone carries meaning, so picking one is a content decision, not a styling one.
+Six tones. Tone carries meaning, so picking one is about content decision and not a styling one.
 
 | Tone | Means | Not for |
 | --- | --- | --- |
@@ -64,7 +64,7 @@ semantic condition.
 
 ### 4. Level: how loud?
 
-The two branches have different levels, so read the one that matches your answer to question 2.
+The two branches have different levels, so read the one that matches your answer to [question 2](./intro.mdx#2-interactive-can-the-user-act-on-it).
 
 **Interactive** has two levels, plus a third for selection:
 
@@ -86,14 +86,16 @@ Please treat the foreground column as part of the choice rather than a suggestio
 keeps contrast working. [Foreground pairing](./getting_started.mdx#foreground-pairing) has the full
 set.
 
-To choose between the levels: **`muted` suits anything that carries a tone but is not what you want
-looked at first**, such as banners, tags and tinted table rows. Reach for `emphasis` when the element
-*is* the point, like a primary action or a filled status pip. `default` sits between the two, and
-exists only on the non-interactive side, where an element needs a middle strength and has no
+To choose between the levels: Reach for `emphasis` when the element *is* the point, like a primary action or a filled status pip. 
+
+`muted` suits anything that carries a tone but is not what you want looked at **first**, such as banners, tags and tinted table rows.
+
+`default` sits between the two, and exists only on the **non-interactive** side, where an element needs a middle strength and has no
 states to spend the distinction on.
 
 :::warning `default` means two different things
-It is a **state** on interactive tokens and a **level** on non-interactive ones:
+- On *interactive*: It is a **state**
+- On *non-interactive*: It is a **level**
 
 ```
 background.interactive.accent.emphasis.default    ← default STATE (vs hover, pressed)
@@ -165,13 +167,8 @@ informational, and the two are free to diverge.
 `background.surface`, `background.dialog` and `background.floating` resolve to the same colour today.
 Check the [reference](./reference.mdx) and you will find identical values in both schemes.
 
-They stay three tokens because they answer three different questions, and any one of them may change
-later. If dialogs pick up a tint, everything bound to `background.dialog` follows automatically.
-Binding a popover to `background.surface` because it is the same white today is what this split helps
-you avoid.
-
-`canvas` and `surface` are a different case, because those two already differ. `canvas` is the page
-behind everything and `surface` is the plane content sits on.
+They are three tokens because they answer three different questions and have different usages.
+`canvas` and `surface` differ. `canvas` is the page behind everything and `surface` is the plane content sits on.
 
 ### `inverted` is not dark mode
 
