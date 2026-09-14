@@ -18,7 +18,13 @@ const label: React.CSSProperties = {
   color: 'var(--ifm-color-emphasis-700)',
 }
 
-function Swatch({ token, height = '2rem' }: { token: string; height?: string }) {
+function Swatch({
+  token,
+  height = '2rem',
+}: {
+  token: string
+  height?: string
+}) {
   return (
     <span
       title={token}
@@ -33,7 +39,15 @@ function Swatch({ token, height = '2rem' }: { token: string; height?: string }) 
   )
 }
 
-function Ramp({ title, note, tokens }: { title: string; note: string; tokens: string[] }) {
+function Ramp({
+  title,
+  note,
+  tokens,
+}: {
+  title: string
+  note: string
+  tokens: string[]
+}) {
   return (
     <section style={{ margin: '1.5rem 0' }}>
       <strong style={{ display: 'block' }}>{title}</strong>
@@ -59,8 +73,8 @@ export function DataVizPalette() {
       <section style={{ margin: '1.5rem 0' }}>
         <strong style={{ display: 'block' }}>Categorical</strong>
         <p style={{ ...label, margin: '0.125rem 0 0.5rem' }}>
-          Ten hues, five steps each. Use the hues to separate series; use the steps within one hue
-          when a single series needs shading.
+          Ten hues, five steps each. Use the hues to separate series; use the
+          steps within one hue when a single series needs shading.
         </p>
         <div style={{ display: 'grid', gap: '0.25rem' }}>
           {CAT_STEPS.map((step) => (

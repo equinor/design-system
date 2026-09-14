@@ -8,7 +8,14 @@ import React from 'react'
  * interactive side and a level on the non-interactive side. Both are easier to see than to read.
  */
 
-const TONES = ['accent', 'neutral', 'info', 'success', 'warning', 'danger'] as const
+const TONES = [
+  'accent',
+  'neutral',
+  'info',
+  'success',
+  'warning',
+  'danger',
+] as const
 const STATES = ['default', 'hover', 'pressed'] as const
 const LEVELS = ['muted', 'default', 'emphasis'] as const
 
@@ -41,7 +48,9 @@ export function StateLadder() {
     <div style={{ margin: '1.5rem 0', display: 'grid', gap: '1rem' }}>
       {TONES.map((tone) => (
         <div key={tone}>
-          <span style={{ ...label, display: 'block', marginBottom: '0.375rem' }}>
+          <span
+            style={{ ...label, display: 'block', marginBottom: '0.375rem' }}
+          >
             background.interactive.{tone}.emphasis.*
           </span>
           <div
@@ -83,7 +92,13 @@ export function DefaultTwoWays() {
         <span style={{ ...label, display: 'block', marginBottom: '0.5rem' }}>
           background.interactive.accent.emphasis.<b>&lt;state&gt;</b>
         </span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '0.5rem',
+          }}
+        >
           {STATES.map((state) => (
             <Chip
               key={state}
@@ -101,7 +116,13 @@ export function DefaultTwoWays() {
         <span style={{ ...label, display: 'block', marginBottom: '0.5rem' }}>
           background.non-interactive.accent.<b>&lt;level&gt;</b>
         </span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '0.5rem',
+          }}
+        >
           {LEVELS.map((level) => (
             <Chip
               key={level}

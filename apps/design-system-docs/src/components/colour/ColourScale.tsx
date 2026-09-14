@@ -8,7 +8,14 @@ import React from 'react'
  * the fill steps, and reading across a row shows that the same step is the same role in every tone.
  */
 
-const TONES = ['accent', 'neutral', 'info', 'success', 'warning', 'danger'] as const
+const TONES = [
+  'accent',
+  'neutral',
+  'info',
+  'success',
+  'warning',
+  'danger',
+] as const
 
 /** Kept in step with the role table on this page. */
 const ROLES: Record<number, string> = {
