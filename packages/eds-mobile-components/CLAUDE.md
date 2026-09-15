@@ -213,6 +213,8 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 />
 ```
 
+**`docs/` is not published.** It is left out of `files` in `package.json` on purpose, because every consumer reads it through the workspace symlink. Do not add it back (equinor/design-system#5452).
+
 ### Component Development Checklist
 
 - [ ] Uses `EDSStyleSheet.create` for all theming
