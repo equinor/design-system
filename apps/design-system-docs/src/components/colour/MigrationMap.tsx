@@ -1,10 +1,10 @@
 import React from 'react'
 
 /**
- * Old token beside new token, both painted.
+ * Previous-generation token beside its 3.0.0-beta replacement, both painted.
  *
- * Not one value survived the redefinition: none of the 115 semantic 2.x colours resolves to the
- * same hex as any redefined token. So a mapping cannot be derived from values, and "find the
+ * Not one value carries over: none of the 115 semantic 2.0.0-beta colours resolves to the same hex
+ * as any 3.0.0-beta token. So a mapping cannot be derived from values, and "find the
  * closest hex" produces a palette that fails contrast in one scheme or the other. These pairs are
  * mapped by role, and the swatches show the size of the change you should expect.
  *
@@ -13,11 +13,17 @@ import React from 'react'
  */
 
 type Pair = {
-  /** Old token, as the consumer knows it */
+  /**
+   * The token you are migrating away from, dotted.
+   *
+   * 1.x is dotted because that is its JS token path. 2.0.0-beta only ever shipped as CSS custom
+   * properties, so its dotted form is written out here rather than quoted from a source: one
+   * notation per table keeps the pair readable as a rename.
+   */
   from: string
-  /** The colour the old token had. A hex for 1.x, a custom property for 2.x. */
+  /** The colour the old token had. A hex for 1.x, a custom property for 2.0.0-beta. */
   fromValue: string
-  /** Redefined token, dotted. `null` where there is no equivalent. */
+  /** 3.0.0-beta token, dotted. `null` where there is no equivalent. */
   to: string | null
   /** Why, or what to decide when `to` is null */
   note?: string
@@ -108,18 +114,19 @@ function Row({ pair }: { pair: Pair }) {
  *
  * The direction of the mapping is carried visually by the `→`, which a screen reader cannot see.
  * Column headers carry it instead: without them a row reads as two token names with nothing to say
- * which one you are migrating away from. The arrow column is hidden rather than given a header,
- * since the headers now say the same thing.
+ * which one you are migrating away from. They name the version rather than saying "old" and "new",
+ * since a reader arrives on this page from one specific version. The arrow column is hidden rather
+ * than given a header, since the headers now say the same thing.
  */
-function Table({ pairs }: { pairs: Pair[] }) {
+function Table({ pairs, from }: { pairs: Pair[]; from: string }) {
   return (
     <div className="migration-map">
       <table>
         <thead>
           <tr>
-            <th scope="col">Old</th>
+            <th scope="col">{from}</th>
             <th aria-hidden="true" className="direction" />
-            <th scope="col">Redefined</th>
+            <th scope="col">3.0.0-beta</th>
           </tr>
         </thead>
         <tbody>
@@ -181,7 +188,7 @@ const ONE_UI: Pair[] = [
     from: 'ui.background__semitransparent',
     fromValue: '#ffffff',
     to: null,
-    note: 'Colour tokens are opaque now, so translucency has no token. Use opacity on the element.',
+    note: 'Colour tokens are opaque now, so translucency has no token.',
   },
   {
     from: 'ui.background__info',
@@ -394,33 +401,33 @@ const ONE_TABLE: Pair[] = [
 
 const TWO_SURFACES: Pair[] = [
   {
-    from: '--eds-color-bg-canvas',
+    from: 'bg.canvas',
     fromValue: '--eds-color-bg-canvas',
     to: 'background.canvas',
   },
   {
-    from: '--eds-color-bg-surface',
+    from: 'bg.surface',
     fromValue: '--eds-color-bg-surface',
     to: 'background.surface',
   },
   {
-    from: '--eds-color-bg-floating',
+    from: 'bg.floating',
     fromValue: '--eds-color-bg-floating',
     to: 'background.floating',
   },
   {
-    from: '--eds-color-bg-input',
+    from: 'bg.input',
     fromValue: '--eds-color-bg-input',
     to: 'background.input',
   },
   {
-    from: '--eds-color-bg-backdrop',
+    from: 'bg.backdrop',
     fromValue: '--eds-color-bg-backdrop',
     to: null,
     note: 'Under review together with overlay.scrim; the two describe the same job.',
   },
   {
-    from: '--eds-color-bg-disabled',
+    from: 'bg.disabled',
     fromValue: '--eds-color-bg-disabled',
     to: 'background.interactive.disabled',
   },
@@ -428,34 +435,34 @@ const TWO_SURFACES: Pair[] = [
 
 const TWO_FILLS: Pair[] = [
   {
-    from: '--eds-color-bg-accent-fill-emphasis-default',
+    from: 'bg.accent.fill.emphasis.default',
     fromValue: '--eds-color-bg-accent-fill-emphasis-default',
     to: 'background.interactive.accent.emphasis.default',
   },
   {
-    from: '--eds-color-bg-accent-fill-emphasis-hover',
+    from: 'bg.accent.fill.emphasis.hover',
     fromValue: '--eds-color-bg-accent-fill-emphasis-hover',
     to: 'background.interactive.accent.emphasis.hover',
   },
   {
-    from: '--eds-color-bg-accent-fill-emphasis-active',
+    from: 'bg.accent.fill.emphasis.active',
     fromValue: '--eds-color-bg-accent-fill-emphasis-active',
     to: 'background.interactive.accent.emphasis.pressed',
     note: 'active became pressed.',
   },
   {
-    from: '--eds-color-bg-accent-fill-muted-default',
+    from: 'bg.accent.fill.muted.default',
     fromValue: '--eds-color-bg-accent-fill-muted-default',
     to: 'background.interactive.accent.muted.default',
   },
   {
-    from: '--eds-color-bg-accent-canvas',
+    from: 'bg.accent.canvas',
     fromValue: '--eds-color-bg-accent-canvas',
     to: 'background.non-interactive.accent.muted',
     note: 'A tinted plane that cannot be clicked is non-interactive now.',
   },
   {
-    from: '--eds-color-bg-accent-surface',
+    from: 'bg.accent.surface',
     fromValue: '--eds-color-bg-accent-surface',
     to: 'background.non-interactive.accent.default',
   },
@@ -463,32 +470,32 @@ const TWO_FILLS: Pair[] = [
 
 const TWO_BORDERS: Pair[] = [
   {
-    from: '--eds-color-border-accent-subtle',
+    from: 'border.accent.subtle',
     fromValue: '--eds-color-border-accent-subtle',
     to: 'border.non-interactive.accent.muted',
   },
   {
-    from: '--eds-color-border-accent-medium',
+    from: 'border.accent.medium',
     fromValue: '--eds-color-border-accent-medium',
     to: 'border.non-interactive.accent.default',
   },
   {
-    from: '--eds-color-border-accent-strong',
+    from: 'border.accent.strong',
     fromValue: '--eds-color-border-accent-strong',
     to: 'border.non-interactive.accent.emphasis',
   },
   {
-    from: '--eds-color-border-subtle',
+    from: 'border.subtle',
     fromValue: '--eds-color-border-subtle',
     to: 'border.non-interactive.neutral.muted',
   },
   {
-    from: '--eds-color-border-focus',
+    from: 'border.focus',
     fromValue: '--eds-color-border-focus',
     to: 'border.interactive.focus',
   },
   {
-    from: '--eds-color-border-disabled',
+    from: 'border.disabled',
     fromValue: '--eds-color-border-disabled',
     to: 'border.interactive.disabled',
   },
@@ -496,49 +503,61 @@ const TWO_BORDERS: Pair[] = [
 
 const TWO_TEXT: Pair[] = [
   {
-    from: '--eds-color-text-strong',
+    from: 'text.strong',
     fromValue: '--eds-color-text-strong',
     to: 'text.primary',
   },
   {
-    from: '--eds-color-text-subtle',
+    from: 'text.subtle',
     fromValue: '--eds-color-text-subtle',
     to: 'text.secondary',
   },
   {
-    from: '--eds-color-text-accent-strong',
+    from: 'text.accent.strong',
     fromValue: '--eds-color-text-accent-strong',
     to: 'text.on-muted.accent',
     note: 'Tone-coloured text sits on a tinted fill, so it is named for what it sits on.',
   },
   {
-    from: '--eds-color-text-accent-strong-on-emphasis',
+    from: 'text.accent.strong.on-emphasis',
     fromValue: '--eds-color-text-accent-strong-on-emphasis',
     to: 'text.on-emphasis.accent',
   },
   {
-    from: '--eds-color-text-accent-subtle-on-emphasis',
+    from: 'text.accent.subtle.on-emphasis',
     fromValue: '--eds-color-text-accent-subtle-on-emphasis',
     to: null,
     note: 'Only one foreground per tone on an emphasis fill now. Use text.on-emphasis.accent.',
   },
   {
-    from: '--eds-color-text-link',
+    from: 'text.link',
     fromValue: '--eds-color-text-link',
     to: 'text.interactive.link.default',
   },
   {
-    from: '--eds-color-text-disabled',
+    from: 'text.disabled',
     fromValue: '--eds-color-text-disabled',
     to: 'text.interactive.disabled',
   },
 ]
 
-export const MigrationOneText = () => <Table pairs={ONE_TEXT} />
-export const MigrationOneUi = () => <Table pairs={ONE_UI} />
-export const MigrationOneInteractive = () => <Table pairs={ONE_INTERACTIVE} />
-export const MigrationOneTable = () => <Table pairs={ONE_TABLE} />
-export const MigrationTwoSurfaces = () => <Table pairs={TWO_SURFACES} />
-export const MigrationTwoFills = () => <Table pairs={TWO_FILLS} />
-export const MigrationTwoBorders = () => <Table pairs={TWO_BORDERS} />
-export const MigrationTwoText = () => <Table pairs={TWO_TEXT} />
+export const MigrationOneText = () => <Table pairs={ONE_TEXT} from="EDS 1.x" />
+export const MigrationOneUi = () => <Table pairs={ONE_UI} from="EDS 1.x" />
+export const MigrationOneInteractive = () => (
+  <Table pairs={ONE_INTERACTIVE} from="EDS 1.x" />
+)
+export const MigrationOneTable = () => (
+  <Table pairs={ONE_TABLE} from="EDS 1.x" />
+)
+export const MigrationTwoSurfaces = () => (
+  <Table pairs={TWO_SURFACES} from="2.0.0-beta" />
+)
+export const MigrationTwoFills = () => (
+  <Table pairs={TWO_FILLS} from="2.0.0-beta" />
+)
+export const MigrationTwoBorders = () => (
+  <Table pairs={TWO_BORDERS} from="2.0.0-beta" />
+)
+export const MigrationTwoText = () => (
+  <Table pairs={TWO_TEXT} from="2.0.0-beta" />
+)

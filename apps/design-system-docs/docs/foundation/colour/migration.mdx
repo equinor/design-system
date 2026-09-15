@@ -1,7 +1,7 @@
 ---
-title: Migrating to the redefined colours
+title: Migrating to 3.0.0-beta colours
 sidebar_label: Migration
-description: Moving to the redefined colour tokens from EDS 1.x or from the 2.0.0-beta semantic and dynamic layers.
+description: Moving to the 3.0.0-beta colour tokens from EDS 1.x or from the 2.0.0-beta semantic and dynamic layers.
 ---
 
 import {
@@ -18,9 +18,9 @@ import {
 Two generations of EDS colour are in use, and each needs a different route. This page starts with the
 one thing that decides how you approach either of them.
 
-:::warning No value survived the redefinition
-Not one of the 115 semantic colours in 2.0.0-beta resolves to the same value as any redefined token,
-and the 1.x palette was replaced outright. The scale is now **contrast-driven rather than
+:::warning No value carries over
+Not one of the 115 semantic colours in 2.0.0-beta resolves to the same value as any 3.0.0-beta
+token, and the 1.x palette was replaced outright. The scale is now **contrast-driven rather than
 lightness-driven**, so matching your old colours by eye, or by nearest hex, gives you a palette that
 fails contrast in one scheme or the other.
 
@@ -34,15 +34,15 @@ way, and the swatches show how large a change to expect.
 `colors.interactive.primary__resting`, `colors.text.static_icons__default`. There were 75 tokens in
 five groups, and states were suffixes: `__resting`, `__hover`, `__selected`, `__activated`.
 
-The redefined set names colours by **surface, behaviour, tone, level and state**. That is five
-questions where 1.x asked one, which is why a single old token often has more than one right answer.
+3.0.0-beta names colours by **surface, behaviour, tone, level and state**. That is five questions
+where 1.x asked one, which is why a single old token often has more than one right answer.
 [Introduction](./intro.mdx#reading-a-token-name) explains how to read a name, and it is worth reading
 before you start rather than after.
 
 ### Text
 
-`static_icons__*` covered both text and icons. The redefined set separates them, because a thin icon
-stroke needs more contrast than a letterform of the same size. Everything below has an `icon.*` twin.
+`static_icons__*` covered both text and icons. 3.0.0-beta separates them, because a thin icon stroke
+needs more contrast than a letterform of the same size. Everything below has an `icon.*` twin.
 
 <MigrationOneText />
 
@@ -58,7 +58,7 @@ clicked.
 
 The largest group, and the one that changes shape most. Three things to know before reading it:
 
-- **`primary` and `secondary` are not tones.** They described a button's rank. The redefined set uses
+- **`primary` and `secondary` are not tones.** They described a component's rank. 3.0.0-beta uses
   `accent` for the primary action and `neutral` for the secondary one, and rank is expressed by
   choosing `emphasis` or `muted`.
 - **`__resting` is now `default`, and `__activated` is now `pressed`.** `active` was read as
@@ -70,18 +70,18 @@ The largest group, and the one that changes shape most. Three things to know bef
 
 ### Table colours
 
-1.x shipped table fills as their own tokens. The redefined set has no component-specific colour: a
-table cell is a surface, and a hovered row is an interactive neutral fill. Use the same tokens you
-would use anywhere else.
+1.x shipped table fills as their own tokens. 3.0.0-beta has no component-specific colour: a table
+cell is a surface, and a hovered row is an interactive neutral fill. Use the same tokens you would
+use anywhere else.
 
 <MigrationOneTable />
 
 ### Infographic and logo
 
 `infographic` (24 tokens) becomes `data-visualization.*`, but this is a **re-palette rather than a
-rename**. The redefined set has ten categorical hues of five steps each, plus a sequential and a
-diverging ramp, and none of them corresponds to an old `substitute__*` or `primary__*` value. Re-pick
-your series colours from [the palette](./palette.mdx#data-visualisation).
+rename**. 3.0.0-beta has ten categorical hues of five steps each, plus a sequential and a diverging
+ramp, and none of them corresponds to an old `substitute__*` or `primary__*` value. Re-pick your
+series colours from [the palette](./palette.mdx#data-visualisation).
 
 `logo` (2 tokens) has no equivalent. Brand marks are not part of the colour scale.
 
@@ -101,17 +101,17 @@ Figma file, those come out.
 
 ### Names are reordered, and `fill` is dropped
 
-The beta put the tone before the surface word and used `fill`. The redefined set puts the surface
-first, drops `fill`, and adds the interactive split:
+2.0.0-beta put the tone before the surface word and used `fill`. 3.0.0-beta puts the surface first,
+drops `fill`, and adds the interactive split:
 
 ```
---eds-color-bg-accent-fill-emphasis-hover             2.0.0-beta
---eds-background-interactive-accent-emphasis-hover    redefined
+bg.accent.fill.emphasis.hover                   2.0.0-beta
+background.interactive.accent.emphasis.hover    3.0.0-beta
 ```
 
 ### The interactive split is new
 
-This is the part that needs a decision rather than a rename. In the beta, a tinted banner and a
+This is the part that needs a decision rather than a rename. In 2.0.0-beta, a tinted banner and a
 tinted button could share `--eds-color-bg-accent-fill-muted-default`. They cannot now: the button is
 `background.interactive.*` and carries hover and pressed values, the banner is
 `background.non-interactive.*` and has none.
