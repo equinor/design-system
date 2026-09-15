@@ -77,6 +77,20 @@ describe('TextField (Next EDS 2.0)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <TextField
+          label="Name"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      expect(container.firstChild).toHaveClass('custom-class')
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Basic functionality', () => {
     it('Renders label correctly', () => {
       render(<TextField label="Test Label" />)

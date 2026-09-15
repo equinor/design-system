@@ -62,6 +62,8 @@ function AutocompleteInner<T = string>(
     optionDisabled,
     optionsFilter,
     renderOption,
+    className,
+    style,
     ...inputProps
   }: AutocompleteProps<T>,
   forwardedRef: ForwardedRef<HTMLInputElement>,
@@ -443,7 +445,8 @@ function AutocompleteInner<T = string>(
 
   return (
     <div
-      className="eds-autocomplete"
+      className={['eds-autocomplete', className].filter(Boolean).join(' ')}
+      style={style}
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       data-invalid={invalid || undefined}
