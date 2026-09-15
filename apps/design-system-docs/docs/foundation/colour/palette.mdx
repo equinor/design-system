@@ -9,7 +9,7 @@ import HueAnchors from '@site/src/components/colour/HueAnchors'
 
 This page is about the layer underneath the tokens. The scale is not exposed, so it is hidden from
 the Figma picker and is not part of the public token set. Read it when you want to know *why* a token
-looks the way it does, or when you are proposing a new one.
+looks the way it does.
 
 ## How the scale is built
 
@@ -39,9 +39,9 @@ per tone. `red` carries more chroma than `north sea` at every step, and `gray` c
 step, so it is set once for the whole scale, but the steps are deliberately uneven, and in dark mode
 they do not even rise in order. [The steps jump on purpose](#the-steps-jump-on-purpose) explains why.
 
-**Every tone is built the same way.** Step 9 is the solid fill in all six at the same lightness, and
-the chroma curve peaks at the same step in each, so swapping a tone changes the colour and nothing
-else. What varies is the hue and its chroma level, both set once per anchor.
+**Every tone is built the same way.** A step number means the same thing in each: the same
+lightness, and the same position on the chroma curve. So swapping a tone changes the colour and
+nothing else. What varies is the hue and how much chroma it carries, both set once per hue anchor.
 
 ## What the step numbers mean
 
@@ -57,15 +57,15 @@ descending lightness in light mode and ascending in dark.
 
 :::info The scale is deliberately not monotonic
 "Broadly" is carrying weight in that sentence. In dark mode the lightness values **dip at steps 4 and
-5** on purpose, because a strictly increasing ramp could not hold the contrast that the border and
-muted-fill roles at those steps need.
+5** on purpose, because a strictly increasing ramp cannot hold the contrast that every role at those
+steps needs.
 
 So global ordering is not a rule and the dip is not a bug. The two rules that do hold are narrower:
 
 1. **No two steps within one scale resolve to the same value.**
 2. **Every sequence of states progresses visibly in one direction.**
 
-Steps 14 and 15 are excluded from both, as described below.
+Steps 14 and 15 sit outside the second rule, as described below. The first holds for them too.
 :::
 
 ## Which step does what
@@ -77,12 +77,14 @@ reading across a row shows that a step is the same role in every tone.
 
 ### Steps 14 and 15 are inverse-polarity
 
-They sit outside the ordering by design. Both are **foreground values meant to sit *on* a solid fill**,
-so their polarity is reversed relative to steps 1–13 and they must be excluded from any ordering
-check.
+They sit outside the ordering by design: their lightness runs **against** the direction of steps 1 to
+13. That is the criterion, not what a step is used for, which is why step 1 can hold `text.inverted`
+and `icon.inverted` and still be in order. Both must be excluded from any check on state order.
 
-Step 15 does double duty: it is also the content plane, which is why `background.surface`,
-`background.dialog` and `background.floating` all resolve to it.
+Step 15 serves two roles at once: the `on-emphasis` foregrounds that sit *on* a solid fill, and the
+panel surface, which is why `background.surface`, `background.dialog` and `background.floating` all
+resolve to it. That is the point of the reversal rather than a conflict, because it makes the panel
+lighter than the canvas in light and darker in dark.
 
 ## The steps jump on purpose
 
@@ -122,9 +124,9 @@ them. They are for you to apply in charts.
 
 ## Why you cannot extend the scale yourself
 
-Inserting a step shifts every position above it and renames the whole scale, which silently breaks
-every consumer. So the scale is treated as fixed: an expanded scale ships alongside the current one
-rather than replacing it, and consumers move at their own pace.
+A step number is a position, not a name for a particular colour. Inserting one moves every position
+above it, and most semantic tokens are defined by step number, so each of those would resolve to a
+different colour while the name a consumer binds to stayed exactly the same.
 
 If you need a value the scale does not have, that is a token request rather than something to
 generate locally.
