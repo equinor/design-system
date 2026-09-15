@@ -128,8 +128,6 @@ const sidebars: SidebarsConfig = {
         'foundation/design-tokens/shape',
         'foundation/design-tokens/spacing',
         'foundation/design-tokens/typography',
-        'foundation/design-tokens/spacing-anatomy',
-        'foundation/design-tokens/typography-anatomy',
       ],
     },
     'foundation/datavisualisation',
