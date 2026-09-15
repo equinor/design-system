@@ -75,7 +75,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 | `Checkbox`               | [Checkbox](#checkbox)         | <Tag tone="danger">Known issues</Tag>                                      | Labelled root `<label>` → `<div>`; `className` lands on the input                                       |
 | `Chip`                   | [Chip](#chip)                 | <Tag tone="danger">Known issues</Tag>                                      | Real `<button>`; `variant="active"` → `selected`; delete fires on whole-chip click                      |
 | `Dialog`                 | [Dialog](#dialog)             | <Tag tone="danger">Known issues</Tag>                                      | `onClose` → required `onOpenChange(open)`; native `<dialog>`, ref points at it; children always mounted |
-| `Divider`                | [Divider](#divider)           | <Tag tone="warning">Under review</Tag>                                     | `color`, `variant` and `size` removed; no built-in margins                                              |
+| `Divider`                | [Divider](#divider)           |                                                                            | `color`, `variant` and `size` removed; no built-in margins                                              |
 | `InputWrapper`, `Label`  | [Field](#field)               | <Tag tone="info">New</Tag>                                                 | Compose `Field.Label`, `Field.Description` and `Field.HelperMessage` yourself                           |
 | `Icon`                   | [Icon](#icon)                 | <Tag tone="danger">Known issues</Tag>                                      | Numeric `size` → semantic `size`; `name` and `Icon.add()` removed                                       |
 | `Input`                  | [Input](#input)               |                                                                            | `leftAdornments`/`rightAdornments` → `startAdornment`/`endAdornment`; `variant` → `invalid`             |
@@ -238,11 +238,9 @@ EDS 1.0: `Dialog` with `Dialog.Header`, `Dialog.Title`, `Dialog.Content`, `Dialo
 
 ## Divider
 
-<Tag tone="warning">Under review</Tag>
-
 EDS 1.0: `Divider`.
 
-All three props are removed: `color` (`lighter` | `light` | `medium`), `variant` (`small` | `medium`) and `size` (`1` | `2`). Colour and thickness come from tokens. Margins are `0`, where EDS 1.0 added vertical spacing around the rule, so add spacing with your layout (`gap` or margin). The rule is now a `border-block-start` on a zero-height `<hr>` with `inline-size: 100%`, instead of `height` and `background-color`, so CSS overriding those stops working.
+All three props are removed: `color` (`lighter` | `light` | `medium`), `variant` (`small` | `medium`) and `size` (`1` | `2`). Colour and thickness come from tokens; the Figma Divider never had colour or thickness options. Margins are `0` by design: `variant` was vertical spacing around the rule, and spacing now belongs to the layout the divider sits in, so add it with `gap` or margin. Built-in spacing would either constrain layouts that already have their own spacing or lead to ever more spacing variants. The rule is now a `border-block-start` on a zero-height `<hr>` with `inline-size: 100%`, instead of `height` and `background-color`, so CSS overriding those stops working.
 
 <span id="inputwrapper" />
 <span id="label" />
@@ -418,7 +416,7 @@ EDS 1.0: `Tooltip`.
 
 **Props**
 
-- `placement`: the twelve floating-ui placements → `top` | `bottom` | `left` | `right`. The `-start` and `-end` variants are removed ([#5386](https://github.com/equinor/design-system/issues/5386)). The default changes from `bottom` to `top`.
+- `placement`: the twelve floating-ui placements → `top` | `bottom` | `left` | `right`. The `-start` and `-end` variants are removed for the beta, a deliberate choice to start from a small base. Whether aligned placements return is decided on demand, collected in [#5386](https://github.com/equinor/design-system/issues/5386); add your use case there if your team relies on them. Note that a tooltip near the viewport edge is shifted into view automatically, so alignment is not needed for that. The default changes from `bottom` to `top`.
 - `title`: ReactNode → string.
 - Removed: `enterDelay`, `portalContainer`.
 
@@ -428,6 +426,7 @@ EDS 1.0: `Tooltip`.
 
 - There is no open delay: the tooltip shows immediately on hover or focus ([#5459](https://github.com/equinor/design-system/issues/5459)).
 - `aria-describedby` on the trigger replaces any existing value instead of merging with it ([#5459](https://github.com/equinor/design-system/issues/5459)).
+- When the tooltip is shifted to stay inside the viewport, the arrow stays centred on the tooltip instead of pointing at the trigger ([#5473](https://github.com/equinor/design-system/issues/5473)).
 
 ## Known issues
 
@@ -441,7 +440,7 @@ Behaviour described above that we consider a bug. It stays on this page until th
 - **Menu**: exported publicly although it is an internal building block; `className` replaces `eds-menu` ([#5103](https://github.com/equinor/design-system/issues/5103)).
 - **Select**: `className` lands on an inner wrapper ([#5322](https://github.com/equinor/design-system/issues/5322)); native `multiple` not blocked ([#5460](https://github.com/equinor/design-system/issues/5460)).
 - **Switch**: native numeric `size` attribute accepted ([#5457](https://github.com/equinor/design-system/issues/5457)).
-- **Tooltip**: no open delay; `aria-describedby` on the trigger is overwritten ([#5459](https://github.com/equinor/design-system/issues/5459)).
+- **Tooltip**: no open delay; `aria-describedby` on the trigger is overwritten ([#5459](https://github.com/equinor/design-system/issues/5459)); the arrow does not follow the trigger when the tooltip is shifted at the viewport edge ([#5473](https://github.com/equinor/design-system/issues/5473)).
 - **Form components**: where `className`, `style` and a consumer `id` land differs between components ([#5456](https://github.com/equinor/design-system/issues/5456)).
 
 ## Under review
@@ -449,6 +448,5 @@ Behaviour described above that we consider a bug. It stays on this page until th
 Changes listed above as implemented today, where the team has not yet confirmed that they are final:
 
 - **Tooltip**: default placement `top` instead of `bottom` ([#5386](https://github.com/equinor/design-system/issues/5386)).
-- **Divider**: no replacement for the thicker `size="2"`, the lighter colours and the built-in spacing.
 
 Follow [#5383](https://github.com/equinor/design-system/issues/5383) for the status of these.
