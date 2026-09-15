@@ -30,7 +30,7 @@
     "@equinor/eds-utils": "workspace:^",
     "colorjs.io": "^0.7.0",
     "lucide-react": "^1.25.0",
-    "next": "16.2.11",
+    "next": "16.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

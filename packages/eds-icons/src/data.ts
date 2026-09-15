@@ -5751,3 +5751,19 @@ export const plug_connect: IconData = {
   width: '24',
   svgPathData: 'M7 20v-1H6a2.9 2.9 0 0 1-2.125-.875A2.9 2.9 0 0 1 3 16v-3H1v-2h2V8q0-1.25.875-2.125A2.9 2.9 0 0 1 6 5h1V4h2v16zm-1-3h1V7H6a.97.97 0 0 0-.713.287A.97.97 0 0 0 5 8v8q0 .424.287.712Q5.576 17 6 17m9 3v-4h-4v-2h4v-4h-4V8h4V4h2v1h1q1.25 0 2.125.875T21 8v3h2v2h-2v3q0 1.25-.875 2.125A2.9 2.9 0 0 1 18 19h-1v1zm2-3h1q.424 0 .712-.288A.97.97 0 0 0 19 16V8a.97.97 0 0 0-.288-.713A.97.97 0 0 0 18 7h-1z',
 }
+
+export const shield_outline: IconData = {
+  name: 'shield_outline',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M12 22q-3.476-.875-5.737-3.988Q4 14.9 4 11.1V5l8-3 8 3v6.1q0 3.8-2.262 6.913Q15.475 21.124 12 22m0-2.1q2.6-.825 4.3-3.3t1.7-5.5V6.375l-6-2.25-6 2.25V11.1q0 3.025 1.7 5.5t4.3 3.3',
+}
+
+export const shield: IconData = {
+  name: 'shield',
+  prefix: 'eds',
+  height: '24',
+  width: '24',
+  svgPathData: 'M12 22q-3.476-.875-5.737-3.988Q4 14.9 4 11.1V5l8-3 8 3v6.1q0 3.8-2.262 6.913Q15.475 21.124 12 22',
+}
