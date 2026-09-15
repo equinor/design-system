@@ -1,12 +1,14 @@
-# Dependabot PR Runbook
+# Dependabot Duty Runbook
 
-How to handle dependabot PRs in this repo. It's quick — most take under 5 minutes.
+How to handle Dependabot duty in this repo. The job has two halves: the **open Dependabot PRs**, and the **Dependabot alerts on the Security tab** that did not get a PR. Most PRs take under 5 minutes; the alerts half is the part that tends to get skipped.
+
+An AI agent can do the sweep for you and hand back a report with the commands to run: `/dependabot-duty` in Claude Code, the `dependabot-duty` prompt in Copilot, the `dependabot-duty` agent in OpenCode. The long-form playbook they follow is [`documentation/agent-instructions/DEPENDABOT_DUTY.md`](../agent-instructions/DEPENDABOT_DUTY.md).
 
 ## When do they arrive?
 
-Dependabot opens PRs every **Monday at 05:00 UTC** (07:00 Oslo time). Expect up to ~5 new PRs per week, grouped by category (see below).
+Dependabot opens PRs every **Monday at 05:00 UTC** (07:00 Oslo time). Expect up to ~5 new PRs per week, grouped by category (see below). Security PRs (`npm_and_yarn` group) can arrive any day.
 
-## The 3-step process
+## The 4-step process
 
 ### 1. Open the PR and check CI status
 
@@ -26,7 +28,8 @@ Go to the PR on GitHub. Three checks must pass:
 Check the **Files changed** tab. Dependabot PRs only touch `package.json` and `pnpm-lock.yaml` files. You're looking for:
 
 - **Is it a minor/patch bump?** → Almost always safe. Just verify CI passes.
-- **Is it a major bump?** → Read the changelog link in the PR description. Look for breaking changes that could affect us.
+- **Is it a major bump?** → Read the changelog link in the PR description. Look for breaking changes that could affect us. Also check that the tests for the affected packages actually ran in the `Test` job — the root `pnpm run test` script does not cover every package (as of September 2026, `eds-tokens` and `eds-tokens-build` are missing). Run those locally if needed.
+- **Two PRs for the same bump?** → Dependabot often opens a `npm_and_yarn` security PR and a regular version PR for the same package. The security PR sometimes lacks the `pnpm-lock.yaml` change and fails `setup` with `ERR_PNPM_OUTDATED_LOCKFILE`. Merge the one with the lockfile, close the other with a comment pointing at it.
 
 #### PR categories (from our dependabot config)
 
@@ -51,6 +54,12 @@ Check the **Files changed** tab. Dependabot PRs only touch `package.json` and `p
 3. Done!
 
 No need to check out the branch locally. No need to test manually. CI covers build + test + lint + types + React 18 compat.
+
+### 4. Check the Security tab
+
+Open the [Dependabot alerts page](https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system), sorted by severity. Anything **critical or high without a matching PR** is fixed the same week. See "Dependabot alerts (no PR)" below for how.
+
+The duty is not done until this step is done. Merging the PRs alone leaves the alerts that Dependabot cannot auto-fix sitting there.
 
 ## When CI fails
 
@@ -101,10 +110,27 @@ You can recognize them by the group name `npm_and_yarn` in the PR title or by th
 
 ## Dependabot alerts (no PR)
 
-Not all vulnerabilities auto-create a PR. Also check the [Dependabot alerts page](https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system) — sorted by severity — for alerts without a corresponding PR.
+Not all vulnerabilities auto-create a PR. Most of the leftovers are **transitive** dependencies (the alert's manifest is `pnpm-lock.yaml`, not a `package.json`), which Dependabot cannot bump on its own.
 
-- **High/critical with no PR?** Fix it manually, open a PR, and get a review before merging to main.
-- **Low/moderate with no PR?** Log it and move on — these are often transitive dependencies Dependabot can't auto-fix.
+- **High/critical with no PR?** Fix it the same week, in its own PR, with a review before merging to main.
+- **Low/moderate with no PR?** Fix it if it rides along in the same override PR, otherwise log it (see below).
+- **No patched version exists?** Log it and move on.
+
+### Fixing a transitive alert
+
+The repo uses `pnpm.overrides` in the root `package.json` for this (examples: #5177, #5368, #5472). The short version:
+
+1. Find the installed version(s) and which package pulls each one in, using `main`'s `pnpm-lock.yaml`.
+2. Check the patched version exists for that major line and does not change module format (ESM-only) or Node floor in a way the parent cannot take.
+3. Add or raise the override. Key per major when several coexist (`"js-yaml@^3"`, `"js-yaml@^4"`); use `>=<fix>` or `>=<fix> <next-major`.
+4. `pnpm install --no-frozen-lockfile`, then check the lockfile diff only touches the target packages, then `pnpm install --frozen-lockfile` must pass.
+5. One PR: `chore: bump pnpm overrides to resolve transitive dependabot alerts`, with a before/after table and a "deliberately left out" list.
+
+Full procedure with commands: [`DEPENDABOT_DUTY.md` § Step 3](../agent-instructions/DEPENDABOT_DUTY.md#step-3--fix-transitive-alerts-with-pnpmoverrides).
+
+### Logging alerts that cannot be fixed
+
+"Log it" means a comment on the open issue titled **"Dependabot alerts without a fix"**: package, advisory id, why it cannot be fixed, date. Create the issue if it does not exist. The next person on duty checks that issue before re-investigating the same alert.
 
 ## FAQ
 
@@ -121,4 +147,7 @@ A: Yes, but merge them one at a time (not simultaneously) so CI runs on each mer
 A: Check why. If CI fails, see "When CI fails". If it just needs a review, review and merge it. If it's a problematic major upgrade, close it with a comment explaining why.
 
 **Q: Who should handle these?**
-A: Everyone on the team. We aim to clear the queue within the week they arrive.
+A: Everyone on the team, on a weekly rotation (the Monday Slack reminder names who). We aim to clear the queue, PRs and alerts, within the week they arrive.
+
+**Q: Can I let an AI agent do the sweep?**
+A: Yes. `/dependabot-duty` (Claude Code), the `dependabot-duty` prompt (Copilot) or agent (OpenCode) triages both PRs and alerts and hands back a report with the `gh` commands to run. It does not approve, merge, or close anything itself; you do, after reading the report.

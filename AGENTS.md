@@ -425,6 +425,10 @@ Component docs live in `apps/design-system-docs/docs/components/{category}/{comp
 
 EDS is adopting the Tokens Studio platform as the source for a new token pipeline, replacing the legacy Figma-REST sync over time. For platform concepts (organizations, projects, branches, releases), `studio` CLI setup and commands, the `.studio.json` configuration model, the safety rubric for CLI commands, and how to verify against live sources instead of answering from memory, see [`documentation/agent-instructions/TOKENS_STUDIO.md`](./documentation/agent-instructions/TOKENS_STUDIO.md). Harness entry points (`/tokens-studio` in Claude Code, the `tokens-studio` prompt in Copilot, the `tokens-studio` agent in OpenCode) all reference that doc. The legacy pipeline remains documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md).
 
+## Dependabot Duty
+
+The weekly Dependabot rotation covers two things: the open Dependabot PRs **and** the Dependabot alerts on the Security tab that did not get a PR (usually transitive dependencies fixed via `pnpm.overrides` in the root `package.json`). For the triage steps, the duplicate-PR pattern, the decision table for majors, the override recipe, the report format, and the boundaries (report first, never approve/merge/close without a go-ahead), see [`documentation/agent-instructions/DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md). Harness entry points (`/dependabot-duty` in Claude Code, the `dependabot-duty` prompt in Copilot, the `dependabot-duty` agent in OpenCode) all reference that doc. The short human runbook is [`documentation/how-to/DEPENDABOT_GUIDE.md`](./documentation/how-to/DEPENDABOT_GUIDE.md).
+
 ## Conventional Commits
 
 ```
