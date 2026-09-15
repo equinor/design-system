@@ -42,7 +42,9 @@ const END = '{/* GENERATED:END */}'
 
 // --- names and CSS custom properties, from the DTCG export -------------------------------------
 
-const dtcg = JSON.parse(readFileSync(join(tokens, 'dtcg', 'semantic', 'default.json'), 'utf8'))
+const dtcg = JSON.parse(
+  readFileSync(join(tokens, 'dtcg', 'semantic', 'default.json'), 'utf8'),
+)
 
 function* walk(node, path = []) {
   if (node && typeof node === 'object') {
@@ -69,15 +71,29 @@ const css = readFileSync(join(tokens, 'css', 'variables.css'), 'utf8')
 
 function declarations(selector) {
   const block = css.match(
-    new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([\\s\\S]*?)\\n\\}'),
+    new RegExp(
+      selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
+        '\\s*\\{([\\s\\S]*?)\\n\\}',
+    ),
   )
-  return block ? Object.fromEntries([...block[1].matchAll(/(--eds-[a-z0-9-]+)\s*:\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()])) : {}
+  return block
+    ? Object.fromEntries(
+        [...block[1].matchAll(/(--eds-[a-z0-9-]+)\s*:\s*([^;]+);/g)].map(
+          (m) => [m[1], m[2].trim()],
+        ),
+      )
+    : {}
 }
 
 /** Later selectors win, the same way the cascade resolves them in the browser. */
 function scope(scheme) {
   return {
-    ...Object.fromEntries([...css.matchAll(/(--eds-[a-z0-9-]+)\s*:\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()])),
+    ...Object.fromEntries(
+      [...css.matchAll(/(--eds-[a-z0-9-]+)\s*:\s*([^;]+);/g)].map((m) => [
+        m[1],
+        m[2].trim(),
+      ]),
+    ),
     ...declarations('[data-color-scheme]'),
     ...declarations(`[data-color-scheme="${scheme}"]`),
   }
@@ -98,7 +114,9 @@ function resolve(scheme, cssName, depth = 0) {
 const GROUPS = [
   [
     'Surfaces and planes',
-    (n) => n.startsWith('background.') && !/^background\.(interactive|non-interactive)\./.test(n),
+    (n) =>
+      n.startsWith('background.') &&
+      !/^background\.(interactive|non-interactive)\./.test(n),
     'The planes an interface is built from. `canvas` sits behind everything; `surface` is what content sits on.',
   ],
   [
@@ -127,7 +145,11 @@ const GROUPS = [
     (n) => n.startsWith('icon.'),
     'Split from text because a thin icon stroke needs more contrast than a letterform of the same size to read as equally solid.',
   ],
-  ['Overlay', (n) => n.startsWith('overlay.'), 'The dim behind a modal. The only alpha value in the colour set.'],
+  [
+    'Overlay',
+    (n) => n.startsWith('overlay.'),
+    'The dim behind a modal. The only alpha value in the colour set.',
+  ],
   [
     'Data visualisation',
     (n) => n.startsWith('data-visualization.'),
@@ -146,7 +168,9 @@ const row = (name) => {
   // The swatch is a live var(), so it follows the colour scheme and never goes stale. It sits in
   // the Token cell rather than a column of its own: a fifth column squeezed the CSS property into a
   // vertical stack, and the swatch belongs next to the name anyway.
-  const swatch = cssName ? `<Swatch t="${cssName.replace(/^--eds-/, '')}" /> ` : ''
+  const swatch = cssName
+    ? `<Swatch t="${cssName.replace(/^--eds-/, '')}" /> `
+    : ''
   return `| ${swatch}\`${name}\` | ${cssName ? '`' + cssName + '`' : 'none'} | \`${light ?? '?'}\` | \`${dark ?? '?'}\` |`
 }
 
@@ -169,19 +193,30 @@ for (const [label, matches, blurb] of GROUPS) {
   if (!names.length) continue
   out.push('', `## ${label}`, '', blurb, '', `${names.length} tokens.`, '')
   out.push('<div className="colour-reference">', '')
-  out.push('| Token | CSS custom property | Light | Dark |', '| --- | --- | --- | --- |')
+  out.push(
+    '| Token | CSS custom property | Light | Dark |',
+    '| --- | --- | --- | --- |',
+  )
   names.forEach((n) => out.push(row(n)))
   out.push('', '</div>')
 }
 
 const ungrouped = all.filter((n) => !seen.has(n))
 if (ungrouped.length) {
-  out.push('', '## Other', '', '| Token | CSS custom property | Light | Dark |', '| --- | --- | --- | --- |')
+  out.push(
+    '',
+    '## Other',
+    '',
+    '| Token | CSS custom property | Light | Dark |',
+    '| --- | --- | --- | --- |',
+  )
   ungrouped.forEach((n) => out.push(row(n)))
 }
 
 if (unresolved.length) {
-  console.error(`${unresolved.length} token(s) could not be resolved from the CSS bundle:`)
+  console.error(
+    `${unresolved.length} token(s) could not be resolved from the CSS bundle:`,
+  )
   unresolved.forEach((n) => console.error(`  ${n}`))
   console.error('Refusing to write a page with unresolved values.')
   process.exit(1)
@@ -211,9 +246,13 @@ if (begin && end && end.index < begin.index) {
 
 const next =
   begin && end
-    ? current.slice(0, begin.index) + generated + current.slice(end.index + end[0].length)
+    ? current.slice(0, begin.index) +
+      generated +
+      current.slice(end.index + end[0].length)
     : current.trimEnd() + '\n\n' + generated + '\n'
 
 writeFileSync(target, next)
 console.log(`wrote ${target}`)
-console.log(`  ${all.length} tokens across ${GROUPS.filter(([, m]) => all.some(m)).length} groups`)
+console.log(
+  `  ${all.length} tokens across ${GROUPS.filter(([, m]) => all.some(m)).length} groups`,
+)

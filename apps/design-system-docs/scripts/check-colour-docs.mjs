@@ -43,7 +43,9 @@ const PROSE = [
 // file in it can name a token, so the whole folder is scanned rather than one entry point.
 const tokenAnatomy = join(components, 'tokens', 'TokenAnatomy')
 const anatomyFiles = existsSync(tokenAnatomy)
-  ? readdirSync(tokenAnatomy).filter((n) => /\.tsx?$/.test(n)).map((n) => `tokens/TokenAnatomy/${n}`)
+  ? readdirSync(tokenAnatomy)
+      .filter((n) => /\.tsx?$/.test(n))
+      .map((n) => `tokens/TokenAnatomy/${n}`)
   : []
 
 const COMPONENTS = [
@@ -61,12 +63,15 @@ const MAPPING_COMPONENTS = ['colour/MigrationMap.tsx']
 
 // --- canonical names ---------------------------------------------------------------------------
 
-const dtcg = JSON.parse(readFileSync(join(tokens, 'dtcg', 'semantic', 'default.json'), 'utf8'))
+const dtcg = JSON.parse(
+  readFileSync(join(tokens, 'dtcg', 'semantic', 'default.json'), 'utf8'),
+)
 
 function* walk(node, path = []) {
   if (node && typeof node === 'object') {
     if ('$value' in node) return yield [path.join('.'), node]
-    for (const [k, v] of Object.entries(node)) if (!k.startsWith('$')) yield* walk(v, [...path, k])
+    for (const [k, v] of Object.entries(node))
+      if (!k.startsWith('$')) yield* walk(v, [...path, k])
   }
 }
 
@@ -84,13 +89,17 @@ for (const [name, token] of walk(dtcg)) {
 
 // Primitives are below the semantic layer and are painted directly by ColourScale.
 const bundle = readFileSync(join(tokens, 'css', 'variables.css'), 'utf8')
-const declared = new Set([...bundle.matchAll(/(--eds-[a-z0-9-]+)\s*:/g)].map((m) => m[1]))
+const declared = new Set(
+  [...bundle.matchAll(/(--eds-[a-z0-9-]+)\s*:/g)].map((m) => m[1]),
+)
 
 // The migration page quotes 2.x names on purpose, as the "before" side. Read them from the legacy
 // build rather than allowing a prefix, so a typo in a legacy name still fails.
 const legacyBuild = join(tokens, '..', '..', 'build', 'css', 'variables.css')
 if (existsSync(legacyBuild)) {
-  for (const m of readFileSync(legacyBuild, 'utf8').matchAll(/(--eds-[a-z0-9-]+)\s*:/g)) {
+  for (const m of readFileSync(legacyBuild, 'utf8').matchAll(
+    /(--eds-[a-z0-9-]+)\s*:/g,
+  )) {
     declared.add(m[1])
   }
 }
@@ -113,19 +122,34 @@ for (const file of PROSE) {
     if (canon.has(probe) || isPrefix(probe)) continue
     const dv = 'data-visualization.' + probe
     if (canon.has(dv) || isPrefix(dv)) continue
-    problems.push({ file, line: body.slice(0, m.index).split('\n').length, name, kind: 'token' })
+    problems.push({
+      file,
+      line: body.slice(0, m.index).split('\n').length,
+      name,
+      kind: 'token',
+    })
   }
 
   // The diagrams name their tokens in a JSX prop rather than in backticks. Without this they
   // would have moved out of a scanned component file into an unscanned page.
   for (const m of body.matchAll(/\btoken:\s*'([^']+)'/g)) {
     if (canon.has(m[1])) continue
-    problems.push({ file, line: body.slice(0, m.index).split('\n').length, name: m[1], kind: 'token' })
+    problems.push({
+      file,
+      line: body.slice(0, m.index).split('\n').length,
+      name: m[1],
+      kind: 'token',
+    })
   }
 
   for (const m of src.matchAll(/--eds-[a-z0-9-]+/g)) {
     if (cssCanon.has(m[0]) || declared.has(m[0])) continue
-    problems.push({ file, line: src.slice(0, m.index).split('\n').length, name: m[0], kind: 'css' })
+    problems.push({
+      file,
+      line: src.slice(0, m.index).split('\n').length,
+      name: m[0],
+      kind: 'css',
+    })
   }
 }
 
@@ -183,10 +207,13 @@ for (const file of MAPPING_COMPONENTS) {
 
 // --- 3: structural counts ------------------------------------------------------------------------
 
-const distinct = (re) => new Set([...canon].map((n) => n.match(re)?.[1]).filter(Boolean)).size
+const distinct = (re) =>
+  new Set([...canon].map((n) => n.match(re)?.[1]).filter(Boolean)).size
 const literal = (file, re) => {
   const path = join(components, file)
-  return existsSync(path) ? Number(readFileSync(path, 'utf8').match(re)?.[1] ?? -1) : null
+  return existsSync(path)
+    ? Number(readFileSync(path, 'utf8').match(re)?.[1] ?? -1)
+    : null
 }
 const quoted = (file, re) => {
   const path = join(components, file)
@@ -203,19 +230,93 @@ const keyed = (file, re) => {
 }
 
 const structure = [
-  ['tones', distinct(/^background\.interactive\.([a-z]+)\./), 'colour/ColourPairing.tsx', quoted('colour/ColourPairing.tsx', /const TONES = \[([\s\S]*?)\]/)],
-  ['interactive states', distinct(/^background\.interactive\.accent\.emphasis\.([a-z]+)$/), 'colour/ColourStates.tsx', quoted('colour/ColourStates.tsx', /const STATES = \[([\s\S]*?)\]/)],
-  ['non-interactive levels', distinct(/^background\.non-interactive\.accent\.([a-z]+)$/), 'colour/ColourStates.tsx', quoted('colour/ColourStates.tsx', /const LEVELS = \[([\s\S]*?)\]/)],
-  ['data-visualisation categories', distinct(/^data-visualization\.cat\.(\d+)\./), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const CATEGORIES = Array\.from\(\{ length: (\d+)/)],
-  ['category steps', distinct(/^data-visualization\.cat\.\d+\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const CAT_STEPS = Array\.from\(\{ length: (\d+)/)],
-  ['sequential steps', distinct(/^data-visualization\.seq\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const SEQ = Array\.from\(\{ length: (\d+)/)],
-  ['diverging steps', distinct(/^data-visualization\.div\.(\d+)$/), 'colour/DataVizPalette.tsx', literal('colour/DataVizPalette.tsx', /const DIV = Array\.from\(\{ length: (\d+)/)],
-  ['scale steps', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/ColourScale.tsx', literal('colour/ColourScale.tsx', /const STEPS = Array\.from\(\{ length: (\d+)/)],
+  [
+    'tones',
+    distinct(/^background\.interactive\.([a-z]+)\./),
+    'colour/ColourPairing.tsx',
+    quoted('colour/ColourPairing.tsx', /const TONES = \[([\s\S]*?)\]/),
+  ],
+  [
+    'interactive states',
+    distinct(/^background\.interactive\.accent\.emphasis\.([a-z]+)$/),
+    'colour/ColourStates.tsx',
+    quoted('colour/ColourStates.tsx', /const STATES = \[([\s\S]*?)\]/),
+  ],
+  [
+    'non-interactive levels',
+    distinct(/^background\.non-interactive\.accent\.([a-z]+)$/),
+    'colour/ColourStates.tsx',
+    quoted('colour/ColourStates.tsx', /const LEVELS = \[([\s\S]*?)\]/),
+  ],
+  [
+    'data-visualisation categories',
+    distinct(/^data-visualization\.cat\.(\d+)\./),
+    'colour/DataVizPalette.tsx',
+    literal(
+      'colour/DataVizPalette.tsx',
+      /const CATEGORIES = Array\.from\(\{ length: (\d+)/,
+    ),
+  ],
+  [
+    'category steps',
+    distinct(/^data-visualization\.cat\.\d+\.(\d+)$/),
+    'colour/DataVizPalette.tsx',
+    literal(
+      'colour/DataVizPalette.tsx',
+      /const CAT_STEPS = Array\.from\(\{ length: (\d+)/,
+    ),
+  ],
+  [
+    'sequential steps',
+    distinct(/^data-visualization\.seq\.(\d+)$/),
+    'colour/DataVizPalette.tsx',
+    literal(
+      'colour/DataVizPalette.tsx',
+      /const SEQ = Array\.from\(\{ length: (\d+)/,
+    ),
+  ],
+  [
+    'diverging steps',
+    distinct(/^data-visualization\.div\.(\d+)$/),
+    'colour/DataVizPalette.tsx',
+    literal(
+      'colour/DataVizPalette.tsx',
+      /const DIV = Array\.from\(\{ length: (\d+)/,
+    ),
+  ],
+  [
+    'scale steps',
+    new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1]))
+      .size,
+    'colour/ColourScale.tsx',
+    literal(
+      'colour/ColourScale.tsx',
+      /const STEPS = Array\.from\(\{ length: (\d+)/,
+    ),
+  ],
   // ROLES is the one hand-written literal left in these components: what each step is for is a
   // design decision with no machine-readable source. The wording cannot be checked, but a step
   // gaining or losing a row can be, which is the failure that would leave a blank cell in the grid.
-  ['scale role descriptions', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/ColourScale.tsx', keyed('colour/ColourScale.tsx', /const ROLES: Record<number, string> = \{([\s\S]*?)\n\}/)],
-  ['hue anchor steps', new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1])).size, 'colour/HueAnchors.tsx', literal('colour/HueAnchors.tsx', /const STEPS = Array\.from\(\{ length: (\d+)/)],
+  [
+    'scale role descriptions',
+    new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1]))
+      .size,
+    'colour/ColourScale.tsx',
+    keyed(
+      'colour/ColourScale.tsx',
+      /const ROLES: Record<number, string> = \{([\s\S]*?)\n\}/,
+    ),
+  ],
+  [
+    'hue anchor steps',
+    new Set([...bundle.matchAll(/--eds-accent-(\d+)\s*:/g)].map((m) => m[1]))
+      .size,
+    'colour/HueAnchors.tsx',
+    literal(
+      'colour/HueAnchors.tsx',
+      /const STEPS = Array\.from\(\{ length: (\d+)/,
+    ),
+  ],
 ]
 
 for (const [what, source, file, found] of structure) {
@@ -256,14 +357,22 @@ for (const file of PROSE) {
         return
       }
       if (fenced) return
-      // Inline code, JSX tags and MDX comments are not prose.
+      // Inline code, JSX tags and MDX comments are not prose. Tags are split out
+      // rather than replaced: a `.replace()` that strips `<...>` reads as HTML
+      // sanitisation to CodeQL, which this is not - the output is never rendered.
       const prose = line
         .replace(/`[^`]*`/g, '')
-        .replace(/<[^>]*>/g, '')
         .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')
+        .split(/<[^>]*>/)
+        .join(' ')
       for (const [re, what] of BANNED) {
         if (re.test(prose)) {
-          problems.push({ file, line: i + 1, name: `banned wording: ${what}`, kind: 'wording' })
+          problems.push({
+            file,
+            line: i + 1,
+            name: `banned wording: ${what}`,
+            kind: 'wording',
+          })
         }
       }
     })
@@ -298,12 +407,17 @@ if (existsSync(tsFile)) {
   const camel = (segment) =>
     segment
       .split('-')
-      .map((word, i) => (i === 0 ? word : word.slice(0, 1).toUpperCase() + word.slice(1)))
+      .map((word, i) =>
+        i === 0 ? word : word.slice(0, 1).toUpperCase() + word.slice(1),
+      )
       .join('')
 
   let checked = 0
   for (const name of canon) {
-    if (!/^(background|border|text|icon|overlay|data-visualization)\./.test(name)) continue
+    if (
+      !/^(background|border|text|icon|overlay|data-visualization)\./.test(name)
+    )
+      continue
     checked++
     const derived = name.split('.').map(camel).join('.')
     if (!tsPaths.has(derived)) {
@@ -329,7 +443,8 @@ if (existsSync(tsFile)) {
 
 if (problems.length) {
   console.error(`${problems.length} problem(s) in the colour docs:`)
-  for (const p of problems) console.error(`  ${p.file}:${p.line}  [${p.kind}]  ${p.name}`)
+  for (const p of problems)
+    console.error(`  ${p.file}:${p.line}  [${p.kind}]  ${p.name}`)
   process.exit(1)
 }
 
