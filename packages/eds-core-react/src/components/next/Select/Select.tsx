@@ -52,6 +52,7 @@ function SelectInner<T = string>(
     invalid,
     placeholder,
     className,
+    style,
     name,
     ...selectProps
   }: SelectProps<T>,
@@ -65,7 +66,7 @@ function SelectInner<T = string>(
   const displayErrorIcon = invalid && !disabled && !readOnly
 
   return (
-    <Field disabled={disabled} className={className}>
+    <Field disabled={disabled} className={className} style={style}>
       {label && (
         <Field.Label htmlFor={inputId} indicator={indicator}>
           {label}

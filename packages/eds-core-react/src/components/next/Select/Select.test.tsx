@@ -43,12 +43,21 @@ describe('Select (next)', () => {
       expect(screen.getByLabelText('Element')).toBeInTheDocument()
     })
 
-    it('applies className to the outer field element, not the inner select wrapper', () => {
+    it('applies className and style to the root field element', () => {
       const { container } = render(
-        <Select label="Element" options={elements} className="custom-class" />,
+        <Select
+          label="Element"
+          options={elements}
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
       )
       expect(container.firstChild).toHaveClass('custom-class')
-      expect(container.firstChild).not.toHaveClass('eds-select')
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.querySelector('.eds-select')).not.toHaveClass(
+        'custom-class',
+      )
     })
 
     it('renders helper message', () => {

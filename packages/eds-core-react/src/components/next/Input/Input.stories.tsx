@@ -124,14 +124,16 @@ const meta: Meta<typeof Input> = {
     // Styling
     className: {
       control: 'text',
-      description: 'CSS class names applied to the input element',
+      description:
+        'CSS class names applied to the root element (the visual input container with border and focus ring).',
       table: {
         category: 'Styling',
       },
     },
-    containerClassName: {
-      control: 'text',
-      description: 'CSS class names applied to the container wrapper',
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the root element (the visual input container).',
       table: {
         category: 'Styling',
       },
@@ -514,54 +516,28 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
 ColorSchemes.storyName = 'Light & Dark Mode'
 
 /**
- * The Input component provides two props for applying custom CSS classes:
- * - `className`: Applied to the input element itself
- * - `containerClassName`: Applied to the container wrapper
- *
- * This separation allows for precise styling control over both elements.
+ * `className` and `style` land on the root element — the visual input container
+ * with the border and focus ring. Use this to control width, border-radius, or layout.
+ * Inner elements (the native `<input>`) are reached via CSS selectors.
  */
 export const CustomStyling: StoryFn<InputProps> = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
     <style>
       {`
-        .custom-container {
-          border-radius: 999px;
-        }
         .custom-input {
-          text-transform: uppercase;
-        }
-        .custom-input::placeholder {
-          text-transform: none;
+          border-radius: 999px;
+          width: 300px;
         }
       `}
     </style>
     <div>
       <p style={{ marginBottom: '8px' }}>
-        <code>containerClassName</code> - styles the wrapper (e.g.,
-        border-radius)
+        <code>className</code> — applied to the root container (border-radius,
+        width)
       </p>
       <Input
-        aria-label="Container styled"
-        placeholder="Rounded container"
-        containerClassName="custom-container"
-      />
-    </div>
-    <div>
-      <p style={{ marginBottom: '8px' }}>
-        <code>className</code> - styles the input element (e.g., text-transform)
-      </p>
-      <Input
-        aria-label="Input styled"
-        placeholder="Type to see uppercase"
-        className="custom-input"
-      />
-    </div>
-    <div>
-      <p style={{ marginBottom: '8px' }}>Both props combined</p>
-      <Input
-        aria-label="Both styled"
-        placeholder="Type to see both styles"
-        containerClassName="custom-container"
+        aria-label="Custom styled"
+        placeholder="Rounded and fixed width"
         className="custom-input"
       />
     </div>
