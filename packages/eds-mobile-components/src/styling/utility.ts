@@ -1,3 +1,4 @@
+import type { PressableProps, StyleProp, ViewStyle } from "react-native";
 import type {
     EDSColor,
     EDSTextColor,
@@ -5,6 +6,22 @@ import type {
     RGBAColorValue,
     RGBColorValue,
 } from "./types";
+
+/**
+ * Merges a caller-supplied `style` on top of a component's own container style
+ * instead of letting it replace the whole thing.
+ *
+ * Use this on Pressable-based components, where `style` may arrive either as a
+ * value or as a function of press state. The function form is only produced
+ * when the caller used it, so the common case stays a plain array.
+ */
+export const mergePressableStyle = (
+    containerStyle: StyleProp<ViewStyle>,
+    style: PressableProps["style"]
+): PressableProps["style"] =>
+    typeof style === "function"
+        ? (state) => [containerStyle, style(state)]
+        : [containerStyle, style];
 
 export const isHexColorValue = (obj: string): obj is HexColorValue =>
     obj.startsWith("#");
