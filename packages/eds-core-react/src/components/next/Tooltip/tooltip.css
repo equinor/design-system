@@ -50,7 +50,12 @@
        `position: fixed` is required so the pseudo-element's containing block is the viewport;
        with `absolute` its containing block would be the body and the trigger would not be an
        acceptable anchor. This replaces the earlier `margin: inherit` approach, which Firefox
-       resolves against the base placement instead of the chosen @position-try option. */
+       resolves against the base placement instead of the chosen @position-try option.
+       Trade-off: if either anchor name cannot be resolved (e.g. `.eds-tooltip` used without the
+       `.eds-tooltip-anchor` wrapper, or a browser without named anchor() support) the whole
+       `inset` declaration is invalid at computed-value time, the pseudo-element collapses to 0x0
+       and no arrow is drawn. A plain `inset` fallback declared before it would not help, so the
+       degradation is accepted for the supported browsers (Chromium, Firefox). */
     &::before {
       content: '';
 

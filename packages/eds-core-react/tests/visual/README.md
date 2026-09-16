@@ -1,4 +1,4 @@
-# Visual Regression Tests for Typography Components
+# Playwright Tests for eds-core-react
 
 This directory contains Playwright visual regression tests for the Typography component system, plus geometry tests for the Tooltip (next) component.
 
@@ -73,7 +73,7 @@ Playwright reuses a Storybook that is already running on the configured port. If
 
 ### Continuous Integration
 
-Tests run automatically in CI using Chromium. The baseline screenshots are stored in `tests/visual/*.spec.ts-snapshots/`.
+These tests do not run in CI yet (tracked in equinor/design-system#5480). The baseline screenshots are stored in `tests/visual/*.spec.ts-snapshots/` and are Chromium-only. Whoever wires the suite into CI needs both browsers installed: `pnpm exec playwright install --with-deps chromium firefox`.
 
 ## How It Works
 

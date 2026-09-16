@@ -1,8 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
 
 /**
- * Playwright configuration for visual regression testing of Typography components
- * Tests run against Storybook stories to ensure visual consistency
+ * Playwright configuration for browser tests against Storybook stories:
+ * screenshot regression tests for the Typography components (Chromium only)
+ * and geometry tests for the Tooltip (next) component (Chromium + Firefox).
  *
  * Set STORYBOOK_PORT to run against a Storybook on another port, e.g. when port 9000
  * is already taken by a Storybook from a different checkout.

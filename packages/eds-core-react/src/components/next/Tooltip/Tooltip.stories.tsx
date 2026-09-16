@@ -109,7 +109,7 @@ ViewportEdges.parameters = {
   docs: {
     description: {
       story:
-        'Triggers in the corners of the viewport. The default `top` placement does not fit centred, so the tooltip falls back to a free side instead of being shifted sideways, so the arrow keeps pointing at the trigger.',
+        'Triggers in the corners of the viewport. The default `top` placement does not fit centred, so the tooltip falls back to a free side instead of being shifted sideways. The arrow keeps pointing at the trigger. Note: `tests/visual/Tooltip.next.spec.ts` asserts the geometry of this story; changing the labels or positions will affect those tests.',
     },
   },
 }
