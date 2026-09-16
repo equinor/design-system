@@ -153,7 +153,7 @@ const ROLES = {
   lg: 'separating groups inside a container',
   xl: 'separating sections',
   '2xl': 'page-level rhythm, in layouts rather than components',
-  '3xl': 'page-level rhythm, the widest step there is',
+  '3xl': 'page-level rhythm, wider than a component has a use for',
 }
 
 const RADIUS_ROLES = {

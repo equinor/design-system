@@ -154,14 +154,15 @@ switch, and the primitive layer is not published to the Figma picker at all.
 
 ## Adding a step
 
-The bar is deliberately high, and the argument has to be about relationships rather than about one
-screen.
+Two things a proposal has to answer.
 
-1. **Show the pairing the existing steps cannot express.** Two things that are neither
-   `sm`-related nor `md`-related. If the answer is "`sm` is slightly too tight here", that is a
-   case for using `md`, not for a twelfth name.
-2. **Check every density.** A new name needs a value in all three, one position apart, and
-   Compact's low end is already at 1px.
-3. **Prefer a new primitive step over a new name.** Eleven names is close to the limit of what
-   people hold in their head. Primitive steps cost nothing, and most requests turn out to be a
-   layout value rather than a component one.
+1. **What relationship do the existing steps not express?** The case has to be about a pairing,
+   not about one screen. "`sm` is slightly too tight here" is an argument for using `md`, not for
+   a new name.
+2. **What is the value in all three densities?** A new name needs one position in the shared set
+   per density, which is what keeps it in step with everything else. At the low end that is the
+   binding constraint, since Compact already starts at 1px.
+
+Neither question is a bar against growth. Steps get added when the work reaches a scale the set
+does not cover yet, and the layout end of the scale is where that happens: the steps above `3xl`
+exist for page-level spacing, which is newer work than the components.

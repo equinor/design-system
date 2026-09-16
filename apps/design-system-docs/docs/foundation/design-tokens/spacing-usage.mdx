@@ -233,15 +233,17 @@ in descending order of use:
 | `corner-radius.rounded-outer` | where a container wraps rounded children |
 | `spacing.2xs`, `spacing.4xs`, `spacing.none` | fine adjustment inside controls |
 | `spacing.xl` | lightly: section separation |
-| `spacing.2xl`, `spacing.3xl` | **never bound by any component.** Layout only |
+| `spacing.2xl`, `spacing.3xl` | not bound by any component yet |
 
-`2xl` and `3xl` are not dead tokens. They are page-level, and a component is the wrong place to
-look for them: they belong in the grid, the page gutter and the space between sections.
+The zero at the bottom of that table says more about the work done so far than about the tokens.
+The team has been building **components**, not patterns and layout, so the file has little for a
+page-level step to bind to. `2xl` and `3xl` are for the grid, the page gutter and the space between
+sections, and that work is still ahead.
 
-:::note This is the design side only
-No EDS React component consumes a 3.0.0-beta semantic token yet, so Figma bindings are the only
-thing that can be measured today. Treat the ordering as a guide to what is common, not as a
-constraint.
+:::note What this table measures
+Figma variable bindings in the Core Components file, which is the design side only: no EDS React
+component consumes a 3.0.0-beta semantic token yet. It is a snapshot of one file at one moment, so
+read it as what is common in component work today, not as a rule about where a step may be used.
 :::
 
 ## Do's and Don'ts
