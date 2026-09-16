@@ -107,7 +107,13 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'foundation/colour/intro',
       },
-      items: ['foundation/colour/intro', 'foundation/colour/getting_started'],
+      items: [
+        'foundation/colour/intro',
+        'foundation/colour/getting_started',
+        'foundation/colour/palette',
+        'foundation/colour/migration',
+        'foundation/colour/reference',
+      ],
     },
     {
       type: 'category',

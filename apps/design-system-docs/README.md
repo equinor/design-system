@@ -69,6 +69,16 @@ pnpm lint:docs
 
 Run ESLint to check for code quality issues in the documentation site.
 
+### Colour docs
+
+```bash
+pnpm generate:colour-reference
+pnpm check:colour-docs
+```
+
+Regenerate the colour token reference from `packages/eds-tokens`, and verify the colour pages and
+components against it. See [Colour docs generation](#colour-docs-generation).
+
 ## Project Structure
 
 The documentation site includes:
@@ -94,6 +104,122 @@ When creating content for the documentation site, choose the appropriate tone gu
 * [Friendly Professional](./docs/tone-guide/friendly-professional.md) -- Default for most documentation
 * [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) -- Concise but approachable
 * [Minimalist](./docs/tone-guide/minimalist.md) -- Essential information only
+
+## Colour docs generation
+
+The colour foundation docs are partly generated. Two scripts in `scripts/` keep them true to the
+token source, and both read only from `packages/eds-tokens/src/tokens` - no external service, no
+authentication, no separate export step.
+
+```bash
+pnpm generate:colour-reference   # rewrite the reference table
+pnpm check:colour-docs           # verify the pages and components against the tokens
+```
+
+Run the generator after any token release, and the checker before opening a PR that touches the
+colour docs.
+
+### What is generated, and what is not
+
+| | |
+|---|---|
+| **Generated** | `docs/foundation/colour/reference.mdx`, the region between the `GENERATED` markers: 263 tokens in 9 groups, each with its CSS custom property and its resolved light and dark values |
+| **Hand-written** | everything else. All prose on `intro`, `getting_started`, `palette` and `migration`, and the frontmatter and introduction above the markers on `reference` |
+
+Do not edit inside the markers. The next run overwrites it.
+
+### The components sit in between
+
+`ColourPairing`, `ColourStates`, `ColourScale`, `DataVizPalette`, `TokenAnatomy`, `MigrationMap` and
+`ColourSwatch` never hard-code a colour. They emit `var(--eds-*)` and the browser resolves it, so a
+token value change appears without regenerating anything. The one exception is the 1.x column in
+`MigrationMap`, which is literal hex because that generation was a hand-picked palette whose
+variables are not loaded here.
+
+`TokenAnatomy` is the general one: give it a specimen and a list of annotations and it draws leader
+lines from the element out to the tokens that produce it. Its geometry is fixed rather than measured,
+so it renders correctly on the server where there is nothing to measure. Reach for it whenever a
+worked example would otherwise be a table of part names.
+
+What they do hold as literals is **structure**: which pairings exist, the role of each of the 15
+steps, and how many data-visualisation ramps there are. Those cannot be read from a `var()`, so
+`check:colour-docs` asserts them against the token source instead. If a seventh tone were added, the
+pages would otherwise quietly render an incomplete picture.
+
+### Component copy follows the same style guide
+
+The labels and notes inside these components are documentation, so they follow
+[`COMPONENT_DOC_STYLE.md`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md) exactly as
+the prose does: British English, no em-dashes, and plain language over internal vocabulary. A reader
+does not know what a "consumer" is, so a step with nothing pointing at it reads as *not used*.
+
+### Where the values come from
+
+| Source | Used for |
+|---|---|
+| `dtcg/semantic/default.json` | token names, and each token's own CSS custom property, from `$extensions["com.figma"].codeSyntax.WEB` |
+| `css/variables.css` | the resolved value in each colour scheme |
+
+The CSS names are not derived from the Figma names by a transform. Both come from one definition, so
+they cannot drift apart. If you need a value, look it up rather than converting one yourself.
+
+### The three name forms
+
+A colour token is written three ways, and the docs cover all of them:
+
+| Where | How it is written |
+|---|---|
+| Figma | `background.non-interactive.accent.muted` |
+| CSS | `--eds-background-non-interactive-accent-muted` |
+| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+
+The reference table carries the first two. The TypeScript form is documented as a rule rather than a
+column, because a fourth column made the table unreadable and the rule holds for all 263 colour
+tokens. `check:colour-docs` asserts that: it flattens the generated `ts/semantic/light.ts` and
+verifies every canonical name camel-cases to a path that actually exists, so the documented rule
+cannot quietly become false.
+
+### What the checker catches
+
+Docusaurus catches none of this: a mistyped custom property renders as an unstyled element, and a
+stale count renders as a smaller grid. Neither raises an error.
+
+- a dotted token name in prose that does not exist
+- a `--eds-*` property that does not exist, in prose or in a component
+- a structural count in a component that no longer matches the token source
+- a colour token whose TypeScript path no longer follows the documented camel-case rule
+- banned wording in prose: em-dashes, "real", "land", "ladder", "rung", "load-bearing"
+
+2.x names are accepted where the migration page quotes them deliberately, read from the legacy build
+rather than allowed by prefix, so a typo in a legacy name still fails.
+
+## Design token CSS
+
+`src/css/custom.css` imports **two** token bundles, on purpose:
+
+```css
+@import '@equinor/eds-tokens/css/variables';                        /* 2.x */
+@import '../../../../packages/eds-tokens/src/tokens/css/variables.css';  /* 3.x */
+```
+
+The first is the legacy build (603 variables, `--eds-color-*`). Most of the site still reads those
+names, so it stays.
+
+The second is the Tokens Studio output (975 variables, `--eds-background-*`, `--eds-text-on-*`, …),
+which the colour foundation docs document and which the colour components paint with. Without it,
+every `var(--eds-background-*)` on the site resolves to nothing.
+
+**Why the relative path.** The package exposes the Tokens Studio output as `./next/css/*`, but that
+export is injected at publish time and only on the beta dist-tag, per
+[ADR-0009](../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md). A workspace
+app resolves against the checked-in `package.json`, where the specifier does not exist, so it cannot
+be imported by name.
+
+**When to remove it.** ADR-0009's exit plan is that once the last `/next` component has migrated, a
+beta release drops the legacy `build/` output and moves the Tokens Studio output onto the final
+specifiers. At that point both imports collapse into a single
+`@import '@equinor/eds-tokens/css/variables';` and the relative path goes. Until then it will break
+if the tokens package moves that file, so it is worth checking after any change to the tokens build.
 
 ## Technology Stack
 
