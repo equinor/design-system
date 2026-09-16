@@ -14,14 +14,17 @@ const meta: Meta<typeof Switch> = {
     label: {
       control: 'text',
       description: 'Visible label for the switch (required)',
+      table: { category: 'Core' },
     },
     disabled: {
       control: 'boolean',
       description: 'Disables the switch',
+      table: { category: 'States', defaultValue: { summary: 'false' } },
     },
     checked: {
       control: 'boolean',
       description: 'Checked state (controlled)',
+      table: { category: 'States' },
     },
     className: {
       control: 'text',
