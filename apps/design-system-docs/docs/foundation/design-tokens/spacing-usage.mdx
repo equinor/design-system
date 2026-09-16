@@ -126,58 +126,32 @@ Four steps for four levels of relatedness, and they are not interchangeable. Set
 `spacing.sm` is legal, renders fine, and destroys the grouping: the reader can no longer tell which
 helper text belongs to which input without reading it.
 
-### Nested radius
+### A focus ring
 
-A container wrapping rounded children needs a slightly larger radius than the children, or the
-curves pinch where they meet. That is what `corner-radius.rounded-outer` is for:
+Worth including because it is the one place `corner-radius.rounded-outer` shows up, and because the
+code and the Figma file get there differently.
+
+In code, a focus ring is an `outline` with an `outline-offset`. The browser follows the element's
+own `border-radius` and widens it by the offset, so the outer curve comes out right without naming
+a second radius:
 
 ```css
-.toolbar {
-  padding: var(--eds-spacing-3xs);
-  border-radius: var(--eds-corner-radius-rounded-outer);
+.button {
+  border-radius: var(--eds-corner-radius-rounded); /* 4px at Comfortable */
 }
-.toolbar > button {
-  border-radius: var(--eds-corner-radius-rounded);
+.button:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px; /* the outer curve comes out at 5px on its own */
 }
 ```
 
-At Comfortable density that is 5px outside and 4px inside. The difference is 1px, which is the whole
-point: it is the padding, not a design flourish, and the correct outer radius is always the inner one
-plus the gap between them. Both constructions below use the same padding, and differ only in the
-container's radius. The magnified view is the same pair at 6 times size, cropped to the top-left
-corner:
+Figma has no `outline-offset`. A ring there is a separate rectangle behind the element, and it needs
+its radius set explicitly, one step larger than the element it surrounds. `corner-radius.rounded-outer`
+is that value, which is why it is `rounded` plus 1px: the same 1px the CSS offset adds.
 
-<div className="radius-nesting">
-  <figure>
-    <div className="radius-nesting__outer radius-nesting__outer--correct">
-      <div className="radius-nesting__inner" />
-    </div>
-    <div className="radius-nesting__zoom">
-      <div className="radius-nesting__outer radius-nesting__outer--correct">
-        <div className="radius-nesting__inner" />
-      </div>
-    </div>
-    <figcaption>
-      <code>rounded-outer</code> outside, <code>rounded</code> inside. The curves stay parallel
-    </figcaption>
-  </figure>
-  <figure>
-    <div className="radius-nesting__outer radius-nesting__outer--pinched">
-      <div className="radius-nesting__inner" />
-    </div>
-    <div className="radius-nesting__zoom">
-      <div className="radius-nesting__outer radius-nesting__outer--pinched">
-        <div className="radius-nesting__inner" />
-      </div>
-    </div>
-    <figcaption>
-      <code>rounded</code> on both. The outer curve tightens and pinches the inner one
-    </figcaption>
-  </figure>
-</div>
-
-Because `rounded-outer` is defined as `rounded` plus 1px rather than as its own value, this stays
-correct at every density. You do not re-pick it for Compact.
+So the token is a workaround for one tool, rather than a radius with a design meaning. Do not reach
+for it in code, and do not use it for nested containers. If a container around a rounded child needs
+a particular corner, set that corner.
 
 ### A compact table
 
@@ -240,7 +214,7 @@ in descending order of use:
 | `spacing.xs`, `spacing.3xs` | very heavily: control interiors and the icon-to-label gap |
 | `spacing.sm`, `spacing.md` | heavily: padding, and gaps between related items |
 | `spacing.lg` | moderately, and mostly as a fixed size rather than as padding |
-| `corner-radius.rounded-outer` | where a container wraps rounded children |
+| `corner-radius.rounded-outer` | focus rings, in the Figma file only |
 | `spacing.2xs`, `spacing.4xs`, `spacing.none` | fine adjustment inside controls |
 | `spacing.xl` | lightly: section separation |
 | `spacing.2xl`, `spacing.3xl` | not bound by any component yet |
@@ -266,7 +240,7 @@ read it as what is common in component work today, not as a rule about where a s
 - Pick by relationship, so the same pairing gets the same step on every page
 - Let density resize things, with one attribute on a wrapper
 - Use different steps on the block and inline axes when the optics need it
-- Use `corner-radius.rounded-outer` on anything wrapping a rounded child
+- Let a focus ring's `outline-offset` produce the outer curve, rather than naming a second radius
 
 :::
 
@@ -278,6 +252,7 @@ read it as what is common in component work today, not as a rule about where a s
 - Use a spacing token for a component's height. Height falls out of type size plus padding
 - Use a spacing token for icon size. They resolve to the same values today, so it works, and it
   breaks silently the day icon sizing changes
+- Reach for `corner-radius.rounded-outer`. It exists for Figma's focus rings, not for code
 - Space everything equally. If every gap is `md`, nothing is grouped
 
 :::

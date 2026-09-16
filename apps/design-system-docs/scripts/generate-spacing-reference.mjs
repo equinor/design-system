@@ -178,7 +178,7 @@ const RADIUS_ROLES = {
   none: 'full-bleed edges and table cells',
   rounded: 'the default: buttons, inputs, chips',
   'rounded-outer':
-    'a container wrapping rounded children, so the curves nest instead of pinching',
+    'nothing, in code. It exists so Figma can draw the focus ring, which CSS derives from `outline-offset`',
   pill: 'fully round ends: pills, avatars, toggles',
 }
 

@@ -141,7 +141,9 @@ Same collection, same one-position-per-density behaviour:
 {/* GEN:density-radius END */}
 
 `rounded-outer` is not an independent value. It is defined as `rounded` plus 1px, so it follows
-`rounded` automatically and the nesting stays correct at every density.
+`rounded` at every density without being maintained separately. The plus-1px mirrors the 1px
+`outline-offset` a focus ring uses in CSS, which is the only thing the token is for. See
+[why not to reach for it](./spacing.mdx#corner-radius-travels-with-spacing).
 
 ## The cascade, end to end
 

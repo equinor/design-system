@@ -122,13 +122,38 @@ without you asking for it.
 | --- | --- | --- |
 | `corner-radius.none` | 0px | full-bleed edges and table cells |
 | `corner-radius.rounded` | 4px | the default: buttons, inputs, chips |
-| `corner-radius.rounded-outer` | 5px | a container wrapping rounded children, so the curves nest instead of pinching |
+| `corner-radius.rounded-outer` | 5px | nothing, in code. It exists so Figma can draw the focus ring, which CSS derives from `outline-offset` |
 | `corner-radius.pill` | 9999px | fully round ends: pills, avatars, toggles |
 
 {/* GEN:radius-steps END */}
 
 `pill` is a sentinel rather than a measurement. It is large enough that the browser clamps it to
 half the element's height, which is what "fully round" means at any size.
+
+:::warning `rounded-outer` is not a token to reach for
+It exists for one reason: Figma has no equivalent of `outline-offset`, so a focus ring drawn in
+Figma needs an explicit radius one step larger than the element it surrounds. That is what
+`rounded-outer` supplies, and the Figma components use it for exactly that.
+
+In code you do not need it. A focus ring is an `outline` with an `outline-offset`, and the browser
+derives the outer curve from the element's own `border-radius` plus the offset. A 4px corner with a
+1px offset already paints a 5px outer curve, which is the same number `rounded-outer` holds.
+
+```css
+.button:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+  /* no radius needed: the outline follows border-radius and the offset widens it */
+}
+```
+
+The widths are literals because the redefined set has no stroke-width token. `border.interactive.focus`
+carries the colour and nothing carries the thickness, so that is one to raise if it matters to you.
+
+No EDS component binds `--eds-corner-radius-rounded-outer`, and there is no case where you should
+need to. If you find yourself wanting it for nested containers, set the radius you mean on each
+element instead.
+:::
 
 ## Density
 
