@@ -17,6 +17,9 @@
     /* UA popover reset */
     position: fixed;
     inset: auto;
+
+    /* The body is an anchor for its own arrow (see ::before) */
+    anchor-name: var(--tooltip-body-name);
     position-anchor: var(--tooltip-anchor-name);
 
     overflow: visible;
@@ -38,18 +41,39 @@
       0 3px 4px rgb(0 0 0 / 12%),
       0 1px 5px rgb(0 0 0 / 20%);
 
-    /* Arrow: ::before is expanded by --_arrow on all sides via `inset: calc(-1 * var(--_arrow))`.
-       A 16-point star clip-path pre-draws all 4 arrows. `margin: inherit` shifts the pseudo-element
-       to match the tooltip's own margin, so 3 arrows hide behind the tooltip body (z-index:-1)
-       and only the gap-side arrow remains visible. */
+    /* Arrow: ::before covers the tooltip body and is extended by --_arrow on the side that faces
+       the trigger. A 16-point star clip-path pre-draws all 4 arrows; the 3 arrows that are not
+       extended stay behind the body (z-index: -1) and only the gap-side arrow remains visible.
+       The extension is computed with anchor() against both the trigger (position-anchor) and the
+       body (--tooltip-body-name): each edge is clamped between "body edge" and "body edge minus
+       --_arrow", and only the edge that has the trigger right next to it ends up extended.
+       `position: fixed` is required so the pseudo-element's containing block is the viewport;
+       with `absolute` its containing block would be the body and the trigger would not be an
+       acceptable anchor. This replaces the earlier `margin: inherit` approach, which Firefox
+       resolves against the base placement instead of the chosen @position-try option. */
     &::before {
       content: '';
 
-      position: absolute;
+      position: fixed;
       z-index: -1;
-      inset: calc(-1 * var(--_arrow));
-
-      margin: inherit;
+      inset: clamp(
+        calc(anchor(var(--tooltip-body-name) top) - var(--_arrow)),
+        anchor(bottom),
+        anchor(var(--tooltip-body-name) top)
+      ) clamp(
+        calc(anchor(var(--tooltip-body-name) right) - var(--_arrow)),
+        anchor(left),
+        anchor(var(--tooltip-body-name) right)
+      ) clamp(
+        calc(anchor(var(--tooltip-body-name) bottom) - var(--_arrow)),
+        anchor(top),
+        anchor(var(--tooltip-body-name) bottom)
+      ) clamp(
+        calc(anchor(var(--tooltip-body-name) left) - var(--_arrow)),
+        anchor(right),
+        anchor(var(--tooltip-body-name) left)
+      );
+      position-anchor: var(--tooltip-anchor-name);
 
       background: inherit;
       clip-path: polygon(

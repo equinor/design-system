@@ -26,6 +26,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const uid = useId()
     const tooltipId = `eds-tooltip-${uid.replace(/:/g, '')}`
     const anchorName = `--${tooltipId}`
+    // The tooltip body is an anchor too, so the arrow (::before) can position itself
+    // against both the trigger and the body regardless of which fallback side was chosen.
+    const bodyName = `${anchorName}-body`
     const tooltipRef = useRef<HTMLDivElement>(null)
     const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -59,7 +62,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     return (
       <span
         className="eds-tooltip-anchor"
-        style={{ '--tooltip-anchor-name': anchorName } as CSSProperties}
+        style={
+          {
+            '--tooltip-anchor-name': anchorName,
+            '--tooltip-body-name': bodyName,
+          } as CSSProperties
+        }
         onMouseEnter={show}
         onMouseLeave={hide}
         onFocus={show}
