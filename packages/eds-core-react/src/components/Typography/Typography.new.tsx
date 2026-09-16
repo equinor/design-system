@@ -2,6 +2,10 @@ import { forwardRef } from 'react'
 import { TypographyNextProps } from './Typography.new.types'
 
 /**
+ * @deprecated Use CSS-first typography instead. Import `@equinor/eds-core-react/next/index.css`
+ * and use semantic HTML (`h1`–`h6`, `p`) inside a `.eds-elements` container.
+ * See the Foundation Typography Storybook docs for the full approach.
+ *
  * TypographyNext component for flexible typography with baseline grid support.
  *
  * Provides full control over typography properties including family, size,
