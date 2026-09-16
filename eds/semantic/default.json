@@ -247,6 +247,22 @@
         }
       }
     },
+    "4xl": {
+      "$value": "{density.spacing.4xl}",
+      "$type": "dimension",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-4xl)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
     "4xs": {
       "$value": "{density.spacing.4xs}",
       "$type": "dimension",
@@ -258,6 +274,38 @@
           ],
           "codeSyntax": {
             "WEB": "var(--eds-spacing-4xs)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
+    "5xl": {
+      "$value": "{density.spacing.5xl}",
+      "$type": "dimension",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-5xl)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
+    "6xl": {
+      "$value": "{density.spacing.6xl}",
+      "$type": "dimension",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-6xl)"
           },
           "hiddenFromPublishing": false
         }
