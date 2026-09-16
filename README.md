@@ -155,7 +155,7 @@ Before you begin, ensure you have the following installed:
 -->
 
 * **Node.js** — Version 24.16.0 or compatible
-* **pnpm** — Version 11.27.0 or higher (install globally with `npm install -g pnpm@11.27.0`)
+* **pnpm** — Version 11.27.0, pinned via the `packageManager` field (install globally with `npm install -g pnpm@11.27.0`)
 * **Git** — For version control
 
 

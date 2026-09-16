@@ -50,6 +50,8 @@ overrides:
   postcss: '>=8.5.23'
   uuid: '^11.1.1'
   react-stately: 3.50.0
+  # Exact pin: a range let 19.3.0 split the tree (#5484). Dependabot ignores this
+  # package; bump it here and in the workspace devDependency specifiers together.
   '@types/react': 19.2.18
   '@internationalized/date': 3.12.4
   'react-test-renderer@19': 19.2.8
