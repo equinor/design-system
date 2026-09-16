@@ -2,22 +2,27 @@
 
 Typography components used to help render typography in <abbr title="Equinor Design System">EDS</abbr>.
 
-## The next-generation typography system is now available
+## EDS 2.0 typography: CSS-first
 
-A new and improved typography system is now available!
+EDS 2.0 applies typography through CSS tokens and semantic HTML. `TypographyNext`, `Heading`, and `Paragraph` are deprecated transitional components — do not adopt them for new work.
 
-**Get started:**
+**The recommended approach:**
 
 ```tsx
-import '@equinor/eds-tokens/css/variables.css'
-import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
-
-<Heading as="h1">Welcome</Heading>
-<Paragraph>This uses the new typography system.</Paragraph>
-<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
-  Flexible inline text
-</Typography>
+import '@equinor/eds-core-react/next/index.css'
 ```
+
+```html
+<div class="eds-elements">
+  <h1>Page title</h1>
+  <p>Correct size, weight, and flow spacing come from the stylesheet.</p>
+  <h2>Section heading</h2>
+  <p>No extra gap, margin, or wrapper components needed.</p>
+</div>
+```
+
+See the [Foundation Typography Storybook docs](https://eds.equinor.com/storybook/?path=/docs/eds-2-0-beta-foundation-typography--docs) for the full approach. The decision is documented in [ADR-0005: Typography approach for EDS 2.0](../../../../documentation/adr/0005-typography-approach-for-eds-2.md).
+
 ---
 
 ## Current/Old/Deprecated Typography Component

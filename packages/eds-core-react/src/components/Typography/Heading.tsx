@@ -23,6 +23,11 @@ const getHeadingSize = (as: HeadingProps['as']): FontSize => {
 }
 
 /**
+ * @deprecated Use CSS-first typography instead. Import
+ * `@equinor/eds-core-react/next/index.css` and use plain `h1`–`h6` inside
+ * a `.eds-elements` container — sizing, weight, and flow spacing come from
+ * the stylesheet with no wrapper component needed.
+ *
  * Heading component for semantic headings (h1-h6).
  * Uses the design system's typography styles for headings.
  */

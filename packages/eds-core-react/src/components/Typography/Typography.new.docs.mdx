@@ -15,52 +15,49 @@ import MobileDocs from '@equinor/eds-mobile-components/docs/Typography.mdx'
   <MobileDocs />
 </>}>
 
-The next generation of the Typography component system. It will replace the existing Typography component in the next major version.
+> **Deprecated.** `TypographyNext`, `Heading`, and `Paragraph` are a transitional API from the data-attribute era and are not the target approach for EDS 2.0. Use CSS-first typography instead — see the [Foundation Typography](/docs/eds-2-0-beta-foundation-typography--docs) docs.
 
-## Features
+These components remain available while existing consumers migrate. They will be removed in a future major version.
 
-The new typography system provides baseline grid alignment for consistent vertical rhythm.
+## EDS 2.0 approach: CSS-first typography
 
-## Usage
+EDS 2.0 applies typography through CSS tokens and semantic HTML, not wrapper components. Add the `@equinor/eds-core-react/next` CSS bundle to your app and use plain `h1`–`h6` and `p` tags inside a `.eds-elements` container:
 
-Import the TypographyNext component with alias for a seamless experience:
-
-```tsx
-import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
-
-<Heading as="h1">Welcome</Heading>
-<Paragraph size="lg">This is a paragraph with the new typography system.</Paragraph>
-<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
-  Flexible inline text
-</Typography>
+```html
+<div class="eds-elements">
+  <h1>Page title</h1>
+  <p>Body copy — correct size, weight, and spacing come from the stylesheet.</p>
+  <h2>Section heading</h2>
+  <p>Another paragraph.</p>
+</div>
 ```
 
-## Proposed migration timeline
+```tsx
+import '@equinor/eds-core-react/next/index.css'
+```
 
-1. **Now**: Use the new components with aliasing ( `TypographyNext as Typography` )
-2. **Parallel support**: 6-12 months of both systems supported
+Spacing between adjacent block elements (headings and paragraphs) is provided by the flow spacing rules in `elements.css`. You do not need `gap`, `margin`, or wrapper components to get vertical rhythm.
 
-## Key Differences from current typography
+For inline text with explicit token control, use CSS custom properties directly on any element:
 
-- **Component names**: Two opinionated semantic components -  `Heading` , and  `Paragraph`
-- **Baseline alignment**: Built-in support for baseline grid alignment
-- **Props**: More explicit control over typography properties
-- **Semantic HTML**: `Heading` renders proper heading tags, `Paragraph` renders `<p>` tags
+```css
+.my-label {
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+}
+```
+
+## Playground
+
+`TypographyNext` is still available for inline text with explicit size and weight control. The playground below reflects the current component API.
 
 <Primary />
 <Controls />
 
-## Stories
-
-### Playground
-
-The TypographyNext component provides full control over typography properties. Use it for inline text with specific styling needs.
-
-<Canvas of={TypographyNewStories.Playground} />
-
 ### As Link
 
-TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop. All standard anchor attributes are supported, such as `target` and `rel` for external links.
+TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop.
 
 <Canvas of={TypographyNewStories.AsLink} />
 
