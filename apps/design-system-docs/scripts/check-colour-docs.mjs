@@ -35,6 +35,9 @@ const PROSE = [
   'foundation/colour/palette.mdx',
   'foundation/colour/migration.mdx',
   'foundation/colour/token-anatomy.mdx',
+  'foundation/design-tokens/spacing.mdx',
+  'foundation/design-tokens/spacing-scale.mdx',
+  'foundation/design-tokens/spacing-usage.mdx',
   'foundation/design-tokens/spacing-anatomy.mdx',
   'foundation/design-tokens/typography-anatomy.mdx',
 ]

@@ -1,0 +1,84 @@
+---
+title: Spacing token reference
+sidebar_label: Token reference
+description: Every spacing and corner-radius token, with its CSS custom property and its resolved value in all three densities.
+---
+
+A complete list. If you are choosing a step rather than looking one up, start with
+[Using spacing](./spacing-usage.mdx). This page is for checking a name or a value.
+
+:::info Generated page
+These tables are generated from the token source. If a value here disagrees with what you see in
+Figma or in the browser, the page is stale, so please say so rather than working around it.
+:::
+
+{/* GEN:token-reference BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+**15 tokens.** Each one has three values, one per density. The **Token** column is the
+name you pick in Figma and the **CSS custom property** column is the same token in code. Both come
+from the token definition itself, so they cannot drift apart. The **Comfortable** column is what
+you get with no `data-density` attribute set.
+
+## Spacing
+
+11 steps, applied to `padding`, `gap` and `margin`.
+
+| Token | CSS custom property | Compact | Comfortable | Relaxed |
+| --- | --- | --- | --- | --- |
+| `spacing.none` | `--eds-spacing-none` | 0px | 0px | 0px |
+| `spacing.4xs` | `--eds-spacing-4xs` | 1px | 2px | 4px |
+| `spacing.3xs` | `--eds-spacing-3xs` | 2px | 4px | 6px |
+| `spacing.2xs` | `--eds-spacing-2xs` | 4px | 6px | 8px |
+| `spacing.xs` | `--eds-spacing-xs` | 6px | 8px | 10px |
+| `spacing.sm` | `--eds-spacing-sm` | 10px | 12px | 16px |
+| `spacing.md` | `--eds-spacing-md` | 12px | 16px | 20px |
+| `spacing.lg` | `--eds-spacing-lg` | 16px | 20px | 24px |
+| `spacing.xl` | `--eds-spacing-xl` | 20px | 24px | 28px |
+| `spacing.2xl` | `--eds-spacing-2xl` | 24px | 28px | 32px |
+| `spacing.3xl` | `--eds-spacing-3xl` | 28px | 32px | 36px |
+
+## Corner radius
+
+4 tokens, in the same density collection as spacing.
+
+| Token | CSS custom property | Compact | Comfortable | Relaxed |
+| --- | --- | --- | --- | --- |
+| `corner-radius.none` | `--eds-corner-radius-none` | 0px | 0px | 0px |
+| `corner-radius.rounded` | `--eds-corner-radius-rounded` | 2px | 4px | 6px |
+| `corner-radius.rounded-outer` | `--eds-corner-radius-rounded-outer` | 3px | 5px | 7px |
+| `corner-radius.pill` | `--eds-corner-radius-pill` | 9999px | 9999px | 9999px |
+
+## In TypeScript
+
+The tokens also ship as TypeScript objects, for the places a CSS custom property cannot reach.
+Spacing has one wrinkle the colour tokens do not: a name segment starting with a digit becomes a
+word, so `spacing.2xl` is `spacing.twoXl` and `corner-radius.rounded-outer` is
+`cornerRadius.roundedOuter`.
+
+```ts
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
+
+semantic.spacing.md // 16
+semantic.spacing.twoXl // 28
+semantic.cornerRadius.roundedOuter // 5
+```
+
+Three differences from the CSS form, all easy to miss:
+
+- **The specifier carries the file extension.** `./next/*` is a wildcard onto the source tree, so
+  `next/ts/semantic/light` does not resolve and `next/ts/semantic/light.ts` does. The `next/`
+  paths are temporary for the beta line.
+- **The values are unitless numbers, not lengths.** `16`, not `16px`. Add the unit yourself.
+- **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the
+  densities are separate modules and you pick one:
+
+```ts
+import { density } from '@equinor/eds-tokens/next/ts/density/compact.ts'
+
+density.spacing.md // 12
+```
+
+So prefer the CSS custom properties wherever they work. Reach for the TypeScript objects only
+where they do not, and expect to handle density yourself when you do.
+
+{/* GEN:token-reference END */}

@@ -126,7 +126,20 @@ const sidebars: SidebarsConfig = {
         'foundation/design-tokens/grid',
         'foundation/design-tokens/elevation',
         'foundation/design-tokens/shape',
-        'foundation/design-tokens/spacing',
+        {
+          type: 'category',
+          label: 'Spacing',
+          link: {
+            type: 'doc',
+            id: 'foundation/design-tokens/spacing',
+          },
+          items: [
+            'foundation/design-tokens/spacing',
+            'foundation/design-tokens/spacing-scale',
+            'foundation/design-tokens/spacing-usage',
+            'foundation/design-tokens/spacing-reference',
+          ],
+        },
         'foundation/design-tokens/typography',
       ],
     },

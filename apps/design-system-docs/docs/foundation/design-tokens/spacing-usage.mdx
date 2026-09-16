@@ -1,0 +1,296 @@
+---
+title: Using spacing
+sidebar_label: Using spacing
+description: Which step to reach for per case, worked examples with the tokens annotated, and the mistakes that survive review.
+---
+
+import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
+import DensitySwitch from '@site/src/components/tokens/DensitySwitch'
+
+[Overview](./spacing.mdx) gives you two questions to pick a step with. This page turns them into
+specific answers, shows the tokens on the elements themselves, and lists what tends to go wrong.
+
+## Decision table
+
+Every row is one of the two questions already answered. If your case is not here, the nearest row is
+usually right.
+
+| You are spacing | Use | Why |
+| --- | --- | --- |
+| a button's interior, block axis | `spacing.xs` | text needs less room above it than beside it |
+| a button's interior, inline axis | `spacing.md` | and more beside it, or the label looks off-centre |
+| an icon from its label, inside a control | `spacing.xs` | one control, two parts |
+| a chip or badge interior | `spacing.3xs` | dense by definition. `2xs` if it carries an icon |
+| an input's interior | `spacing.xs` block, `spacing.sm` inline | shorter inline than a button: the value needs to look aligned with the label above it |
+| a label from its field | `spacing.xs` | same control |
+| a field from its helper text | `spacing.4xs` | the helper belongs to the field, tighter than the label |
+| one field from the next | `spacing.sm` | related, separate |
+| one fieldset from the next | `spacing.lg` | a group boundary |
+| a card's interior | `spacing.md` | the default container padding |
+| a card's children from each other | `spacing.sm` | related items in a group |
+| a list row's interior | `spacing.sm` block, `spacing.md` inline | rows read as a stack, so the block axis stays tighter |
+| a table cell's interior | `spacing.2xs` block, `spacing.sm` inline | and then use Compact density rather than shrinking these |
+| one section from the next | `spacing.xl` | a page-level boundary |
+| a page gutter | `spacing.xl` or wider | layout, and the one place `2xl` and `3xl` belong |
+
+## Worked examples
+
+Each diagram is rendered from the tokens it names, so the labels cannot describe something the
+element is not doing. The values are read back from the browser after layout, which is why they
+follow the density around them.
+
+### Padding a control
+
+<TokenAnatomy
+  mode="spacing"
+  caption="A button at Comfortable density. Horizontal and vertical padding are different steps on purpose."
+  bindings={{
+    paddingBlock: { token: 'spacing.xs', label: 'block padding' },
+    paddingInline: { token: 'spacing.md', label: 'inline padding' },
+    gap: { token: 'spacing.xs', label: 'icon to label' },
+    borderRadius: { token: 'corner-radius.rounded' },
+  }}
+  style={{
+    background: 'var(--eds-background-interactive-accent-emphasis-default)',
+    color: 'var(--eds-text-on-emphasis-accent)',
+    fontWeight: 500,
+  }}
+  maxWidth={200}
+>
+  <span aria-hidden="true">+</span>
+  <span>Add item</span>
+</TokenAnatomy>
+
+```css
+.button {
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-md);
+  gap: var(--eds-spacing-xs);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+```
+
+Two steps apart on the two axes is deliberate rather than sloppy. Text needs more room beside it
+than above it to look optically centred, because the letterforms already carry their own vertical
+space in the line box. Equal padding on both axes reads as too tight horizontally.
+
+### Gaps in a form
+
+This is the example that teaches "distance tracks relatedness" better than prose does. Four
+different gaps, each one a statement about what belongs to what:
+
+<TokenAnatomy
+  mode="spacing"
+  caption="One field. The gap separates the label from the input."
+  bindings={{
+    gap: { token: 'spacing.xs', label: 'label to field' },
+    borderRadius: { token: 'corner-radius.rounded' },
+  }}
+  style={{
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    color: 'var(--eds-text-primary)',
+  }}
+  maxWidth={240}
+>
+  <span>Well name</span>
+  <span
+    style={{
+      background: 'var(--eds-background-input)',
+      borderBottom: '1px solid var(--eds-border-non-interactive-neutral-default)',
+      padding: 'var(--eds-spacing-xs) var(--eds-spacing-sm)',
+    }}
+  >
+    31/2-A-14
+  </span>
+</TokenAnatomy>
+
+```css
+.field        { gap: var(--eds-spacing-xs); }   /* label to input        */
+.field__help  { margin-top: var(--eds-spacing-4xs); }  /* input to helper text  */
+.fieldset     { gap: var(--eds-spacing-sm); }   /* field to field        */
+.form         { gap: var(--eds-spacing-lg); }   /* fieldset to fieldset  */
+```
+
+Four steps for four levels of relatedness, and they are not interchangeable. Setting all four to
+`spacing.sm` is legal, renders fine, and destroys the grouping: the reader can no longer tell which
+helper text belongs to which input without reading it.
+
+### Nested radius
+
+A container wrapping rounded children needs a slightly larger radius than the children, or the
+curves pinch where they meet. That is what `corner-radius.rounded-outer` is for:
+
+```css
+.toolbar {
+  padding: var(--eds-spacing-3xs);
+  border-radius: var(--eds-corner-radius-rounded-outer);
+}
+.toolbar > button {
+  border-radius: var(--eds-corner-radius-rounded);
+}
+```
+
+At Comfortable density that is 5px outside and 4px inside. The difference is 1px, which is the whole
+point: it is the padding, not a design flourish, and the correct outer radius is always the inner one
+plus the gap between them. Both constructions below use the same padding, and differ only in the
+container's radius. The magnified view is the same pair at 6 times size, cropped to the top-left
+corner:
+
+<div className="radius-nesting">
+  <figure>
+    <div className="radius-nesting__outer radius-nesting__outer--correct">
+      <div className="radius-nesting__inner" />
+    </div>
+    <div className="radius-nesting__zoom">
+      <div className="radius-nesting__outer radius-nesting__outer--correct">
+        <div className="radius-nesting__inner" />
+      </div>
+    </div>
+    <figcaption>
+      <code>rounded-outer</code> outside, <code>rounded</code> inside. The curves stay parallel
+    </figcaption>
+  </figure>
+  <figure>
+    <div className="radius-nesting__outer radius-nesting__outer--pinched">
+      <div className="radius-nesting__inner" />
+    </div>
+    <div className="radius-nesting__zoom">
+      <div className="radius-nesting__outer radius-nesting__outer--pinched">
+        <div className="radius-nesting__inner" />
+      </div>
+    </div>
+    <figcaption>
+      <code>rounded</code> on both. The outer curve tightens and pinches the inner one
+    </figcaption>
+  </figure>
+</div>
+
+Because `rounded-outer` is defined as `rounded` plus 1px rather than as its own value, this stays
+correct at every density. You do not re-pick it for Compact.
+
+### A compact table
+
+Switching density is one attribute on a wrapper. Nothing in the markup below it changes, and no
+spacing token in it is re-picked:
+
+<DensitySwitch initial="comfortable">
+  <table style={{ margin: 0, display: 'table', width: '100%' }}>
+    <thead>
+      <tr>
+        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Well</th>
+        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Status</th>
+        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Depth</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>31/2-A-14</td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Producing</td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>2 940 m</td>
+      </tr>
+      <tr>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>31/2-B-07</td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Shut in</td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>3 120 m</td>
+      </tr>
+    </tbody>
+  </table>
+</DensitySwitch>
+
+```html
+<section data-density="compact">
+  <table>…</table>
+</section>
+```
+
+```css
+td,
+th {
+  padding: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+}
+```
+
+Density can be set on any ancestor and it cascades, so a compact table inside a comfortable page is
+a normal thing to want. Two cautions:
+
+- **Do not nest a looser density inside a tighter one to undo it.** Set the density once, where the
+  content changes. `relaxed` inside `compact` inside `relaxed` is legal CSS and unreadable design.
+- **Compact reduces hit area.** Less padding means a smaller target, so do not use Compact for a
+  primary touch interface. That is what Relaxed is for.
+
+## What components actually use
+
+Measured by variable bindings across the six component pages of the EDS Core Components Figma file,
+in descending order of use:
+
+| Step | Use in components |
+| --- | --- |
+| `corner-radius.rounded`, `corner-radius.pill` | the two most-bound tokens in the whole system |
+| `spacing.xs`, `spacing.3xs` | very heavily: control interiors and the icon-to-label gap |
+| `spacing.sm`, `spacing.md` | heavily: padding, and gaps between related items |
+| `spacing.lg` | moderately, and mostly as a fixed size rather than as padding |
+| `corner-radius.rounded-outer` | where a container wraps rounded children |
+| `spacing.2xs`, `spacing.4xs`, `spacing.none` | fine adjustment inside controls |
+| `spacing.xl` | lightly: section separation |
+| `spacing.2xl`, `spacing.3xl` | **never bound by any component.** Layout only |
+
+`2xl` and `3xl` are not dead tokens. They are page-level, and a component is the wrong place to
+look for them: they belong in the grid, the page gutter and the space between sections.
+
+:::note This is the design side only
+No EDS React component consumes a 3.0.0-beta semantic token yet, so Figma bindings are the only
+thing that can be measured today. Treat the ordering as a guide to what is common, not as a
+constraint.
+:::
+
+## Do's and Don'ts
+
+:::info **Do**
+
+- Use `spacing.none` when you mean zero. It states the intent and survives a density change
+- Pick by relationship, so the same pairing gets the same step on every page
+- Let density resize things, with one attribute on a wrapper
+- Use different steps on the block and inline axes when the optics need it
+- Use `corner-radius.rounded-outer` on anything wrapping a rounded child
+
+:::
+
+:::danger **Don't**
+
+- Write a hard `0`. It is indistinguishable from a value nobody set
+- Hand-pick a smaller step through a dense area. That reimplements Compact badly and drifts from
+  every other dense view in the product
+- Use a spacing token for a component's height. Height falls out of type size plus padding
+- Use a spacing token for icon size. They resolve to the same values today, so it works, and it
+  breaks silently the day icon sizing changes
+- Space everything equally. If every gap is `md`, nothing is grouped
+
+:::
+
+## Mistakes that survive review
+
+Observed in the Core Components Figma file, in descending order of how often:
+
+1. **Legacy directional tokens still bound.** `Generic/Space vertical` (80 bindings),
+   `Container/Space vertical` (30), `Container/Space horizontal` (12),
+   `Selectable/Gap horizontal` (12), `Generic/Space horizontal` (6). All from the deprecated 2.x
+   library. Direction is a CSS property now, so one step applies to whichever property you mean.
+2. **Legacy 1.x t-shirt spacers.** `Spacing :: XX Large` and `Spacing :: Medium`, still bound in
+   Data Display. These come from a scale that no longer exists.
+3. **A spacing token used for component height.** Height is not a spacing decision: it is type size
+   plus padding, and pinning it to a spacing value fights the density switch.
+4. **Equal spacing everywhere.** The most common and the least visible. A layout where every gap is
+   `md` has no grouping, and it reads as a list of things rather than as a structure.
+
+:::warning There is no icon-size token
+`Selectable/Icon size` has 1,020 bindings in the Figma file and **no replacement in the
+3.0.0-beta semantic layer**. Until there is one, an icon size is a hard-coded value, not a token.
+Do not substitute a spacing token for it: the two are unrelated axes that happen to share numbers
+today.
+:::
+
+## Where to go next
+
+- [The scale](./spacing-scale.mdx): why the steps are these sizes, and how density maps onto them.
+- [Token reference](./spacing-reference.mdx): every token and every value, in all three densities.

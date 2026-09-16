@@ -1,0 +1,167 @@
+---
+title: The spacing scale
+sidebar_label: The scale
+description: The primitive scale under the eleven named steps, how each density maps onto it, and what it takes to add a step.
+---
+
+Background for the eleven steps in [Overview](./spacing.mdx). You do not use the primitive scale
+directly, and it is hidden from the Figma variable picker, but you need it to understand why the
+steps are the sizes they are and to make a case for adding one.
+
+## The primitive scale
+
+One scale, indexed so that **step `100` is 16px**. The index is hundredths of the 16px root, so the
+px value is:
+
+```
+px = round(index × 0.16)
+```
+
+That is `25` for 4px, `100` for 16px, `200` for 32px. It is also why the low end has awkward names:
+1px is `6`, not `1`.
+
+:::note The rule only works in that direction
+Rounding is lossy, so you cannot recover the index from the px. Four steps round into their
+neighbours: 2px, 6px, 10px and 14px are `12`, `37`, `62` and `87`, not `13`, `38`, `63` and `88`.
+Read the table rather than calculating backwards.
+:::
+
+{/* GEN:primitive-scale BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Index | px | Index | px | Index | px |
+| --- | --- | --- | --- | --- | --- |
+| `0` | 0px | `225` | 36px | `1000` * | 160px |
+| `6` | 1px | `250` | 40px | `1100` * | 176px |
+| `12` | 2px | `275` * | 44px | `1200` * | 192px |
+| `19` * | 3px | `300` * | 48px | `1300` * | 208px |
+| `25` | 4px | `325` * | 52px | `1400` * | 224px |
+| `37` | 6px | `350` * | 56px | `1500` * | 240px |
+| `50` | 8px | `375` * | 60px | `1600` * | 256px |
+| `62` | 10px | `400` * | 64px | `1700` * | 272px |
+| `75` | 12px | `450` * | 72px | `1800` * | 288px |
+| `87` * | 14px | `500` * | 80px | `1900` * | 304px |
+| `100` | 16px | `550` * | 88px | `2000` * | 320px |
+| `125` | 20px | `600` * | 96px | `2100` * | 336px |
+| `150` | 24px | `700` * | 112px | `2200` * | 352px |
+| `175` | 28px | `800` * | 128px |  |  |
+| `200` | 32px | `900` * | 144px |  |  |
+
+`*` marks a step nothing points at: 28 of 43.
+
+{/* GEN:primitive-scale END */}
+
+### Two regions, at different resolutions
+
+- **Below 16px** the steps are 1, 2, 3, 4, 6, 8, 10, 12 and 14px, so roughly 2px resolution. This is
+  control-interior territory, and a 4px grid cannot pad a chip or offset an icon precisely enough.
+- **From 16px up** it is a 4px grid to 64px, then 8px to 96px, then 16px to 352px. Layout territory,
+  where precision below 4px is noise.
+
+### Most of the scale is unused
+
+Fifteen of the 43 steps are pointed at by anything at all. The table above marks the other 28 with
+`*`. Two facts explain them:
+
+- **The scale is shared with line height.** Eleven line-height primitives are aliases of spacing
+  primitives, which is why `250` (40px) is in use even though no spacing step is 40px.
+- **The top of the scale is provision, not product.** Nothing from `275` (44px) up is referenced
+  today. Defining those steps costs nothing, and it means a layout token added later does not need
+  a new primitive underneath it.
+
+Two steps sit inside the used range and are still pointed at by nothing: `19` (3px) and `87` (14px).
+That is deliberate, and it is what makes density work evenly. See below.
+
+## How density works
+
+Each density is a **distinct assignment** of the eleven names to primitive steps. It is not a
+multiplier, not a `transform: scale()`, and `Compact` is not `Comfortable` × 0.75.
+
+The rule is simpler than a multiplier would be: **there is one shared set of values, and each
+density starts one position further along it.**
+
+{/* GEN:shared-spacing-scale BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+The 13 values the eleven names are assigned from, numbered by position:
+
+**1.** `1px` · **2.** `2px` · **3.** `4px` · **4.** `6px` · **5.** `8px` · **6.** `10px` · **7.** `12px` · **8.** `16px` · **9.** `20px` · **10.** `24px` · **11.** `28px` · **12.** `32px` · **13.** `36px`
+
+{/* GEN:shared-spacing-scale END */}
+
+Every name moves exactly one position between densities. The number in brackets below is the
+position each value occupies in that set, so reading across a row gives you three consecutive
+numbers, on every row:
+
+{/* GEN:density-spacing BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Step | Compact | Comfortable | Relaxed |
+| --- | --- | --- | --- |
+| `spacing.none` | 0px | 0px | 0px |
+| `spacing.4xs` | 1px (1) | 2px (2) | 4px (3) |
+| `spacing.3xs` | 2px (2) | 4px (3) | 6px (4) |
+| `spacing.2xs` | 4px (3) | 6px (4) | 8px (5) |
+| `spacing.xs` | 6px (4) | 8px (5) | 10px (6) |
+| `spacing.sm` | 10px (6) | 12px (7) | 16px (8) |
+| `spacing.md` | 12px (7) | 16px (8) | 20px (9) |
+| `spacing.lg` | 16px (8) | 20px (9) | 24px (10) |
+| `spacing.xl` | 20px (9) | 24px (10) | 28px (11) |
+| `spacing.2xl` | 24px (10) | 28px (11) | 32px (12) |
+| `spacing.3xl` | 28px (11) | 32px (12) | 36px (13) |
+
+{/* GEN:density-spacing END */}
+
+This is where `19` (3px) and `87` (14px) come in. They exist on the primitive scale but are left out
+of the set the names are assigned from, because including them would make some names move one
+position and others two. `spacing.none` is the one name that does not move at all, since there is
+nothing below zero.
+
+### Corner radius
+
+Same collection, same one-position-per-density behaviour:
+
+{/* GEN:density-radius BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Token | Compact | Comfortable | Relaxed |
+| --- | --- | --- | --- |
+| `corner-radius.none` | 0px | 0px | 0px |
+| `corner-radius.rounded` | 2px | 4px | 6px |
+| `corner-radius.rounded-outer` | 3px | 5px | 7px |
+| `corner-radius.pill` | 9999px | 9999px | 9999px |
+
+{/* GEN:density-radius END */}
+
+`rounded-outer` is not an independent value. It is defined as `rounded` plus 1px, so it follows
+`rounded` automatically and the nesting stays correct at every density.
+
+## The cascade, end to end
+
+```
+spacing.md                     semantic     ← you use this
+  → density.spacing.md         density      ← the active density supplies it
+    → primitives.spacing.100   primitive    ← 16px
+```
+
+Three hops, one direction. A semantic spacing token never points at another semantic token, and
+nothing points back up. In CSS the same chain is:
+
+```css
+--eds-spacing-md: var(--eds-density-spacing-md);
+--eds-density-spacing-md: var(--eds-primitives-spacing-100);
+--eds-primitives-spacing-100: 16px;
+```
+
+Bind to the first of those three. The density layer is an implementation detail of the density
+switch, and the primitive layer is not published to the Figma picker at all.
+
+## Adding a step
+
+The bar is deliberately high, and the argument has to be about relationships rather than about one
+screen.
+
+1. **Show the pairing the existing steps cannot express.** Two things that are neither
+   `sm`-related nor `md`-related. If the answer is "`sm` is slightly too tight here", that is a
+   case for using `md`, not for a twelfth name.
+2. **Check every density.** A new name needs a value in all three, one position apart, and
+   Compact's low end is already at 1px.
+3. **Prefer a new primitive step over a new name.** Eleven names is close to the limit of what
+   people hold in their head. Primitive steps cost nothing, and most requests turn out to be a
+   layout value rather than a component one.
