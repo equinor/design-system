@@ -49,7 +49,7 @@ Webpack/config changes need a dev-server restart; content and CSS hot-reload.
 
 ### Checks
 
-These are the same checks CI runs in the `docs` job of `.github/workflows/checks.yaml`. The root `pnpm run build` does **not** include this app, which is why that job exists.
+CI splits these across three jobs in `.github/workflows/checks.yaml`: `docs` runs `format:check:docs`, `lint:css:docs`, `check:docs-stories` and `build:docs`; `tsc` runs in `types`; `lint:docs` runs in `lint` via `lint:all`. The root `pnpm run build` does **not** include this app, which is why the `docs` job exists.
 
 | Command                        | What it checks                                        |
 | ------------------------------ | ----------------------------------------------------- |
@@ -71,7 +71,7 @@ Three tone guides are available, and are excluded from the build:
 - [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) — concise but approachable
 - [Minimalist](./docs/tone-guide/minimalist.md) — essential information only
 
-Unwritten component docs are parked as `_name.md`. Docusaurus skips `_`-prefixed files, so they stay out of the build, the sidebar and the search index; drop the underscore and add a `description` to publish one.
+Unwritten component docs are parked as `_name.md`. Docusaurus skips `_`-prefixed files, so they stay out of the build, the sidebar and the search index; drop the underscore, add a `description`, and add the doc id to `componentsSidebar` in `sidebars.ts` to publish one.
 
 ## Troubleshooting
 

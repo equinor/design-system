@@ -484,17 +484,17 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 
 This file is the canonical source. Tool-specific configs add only what's unique to that tool:
 
-| File                              | Purpose                                                                 |
-| --------------------------------- | ----------------------------------------------------------------------- |
-| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings                            |
-| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring               |
-| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                 |
-| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions              |
-| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                             |
-| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access              |
-| `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
-| `.opencode/agent/*.md`            | OpenCode: agent definitions                                             |
-| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here                      |
+| File                              | Purpose                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings                                               |
+| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring                                  |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                                    |
+| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions                                 |
+| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                                                |
+| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access                                 |
+| `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix + prettier --write on edits |
+| `.opencode/agent/*.md`            | OpenCode: agent definitions                                                                |
+| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here                                         |
 
 Directory-scoped conventions live next to the code they describe and take precedence there:
 

@@ -488,7 +488,12 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
 [data-theme='dark'] .footer__logo {
   & path {
-    fill: #ff1243; /* hard code Energy Red from brand, so we dont get into trouble */
+    /* Brand-mandated Energy Red. The light-mode rule above uses
+       --eds-text-on-emphasis-accent, but on a dark background of this lightness
+       brand permits no other colour for the Equinor logo. Deliberately not a
+       token: Energy Red is a one-off for this mark, not part of EDS, so it is
+       not going into Tokens Studio. Do not "fix" this to a token. */
+    fill: #ff1243;
   }
 }
 
