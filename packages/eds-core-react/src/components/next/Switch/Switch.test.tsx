@@ -54,6 +54,7 @@ describe('Switch (next)', () => {
       expect(wrapper).toHaveClass('custom-switch')
       expect(wrapper).toHaveStyle({ marginTop: '8px' })
       expect(input).not.toHaveClass('custom-switch')
+      expect(input).toHaveClass('input')
     })
   })
 
