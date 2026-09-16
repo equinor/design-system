@@ -52,9 +52,11 @@ describe('Select (next)', () => {
           style={{ marginTop: '8px' }}
         />,
       )
-      expect(container.firstChild).toHaveClass('custom-class')
-      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
       // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      // eslint-disable-next-line testing-library/no-container
       expect(container.querySelector('.eds-select')).not.toHaveClass(
         'custom-class',
       )
