@@ -443,7 +443,7 @@ EDS 1.0: `Typography` with `variant` (`h1` to `h6`, `body_short`, `body_long` an
 - `bold` and `italic` → `<strong>` and `<em>`, which inherit the right weight for their context. `.eds-heading-bold` and `.eds-heading-light` are available on headings.
 - `link` → the [Link](#link) component.
 - `color`, `token` and `lines` have no equivalent. Colour comes from the text tokens on the surrounding surface; clamp lines with your own CSS.
-- Text elements are trimmed with `text-box` and have `margin: 0`, so spacing between them comes from `elements.css` flow spacing or from the layout (`gap` with the `--eds-spacing-vertical-*` tokens), never from the element itself.
+- Text elements have `margin: 0`, so spacing between them comes from `elements.css` flow spacing or from the layout (`gap` with the `--eds-spacing-vertical-*` tokens), never from the element itself. In the current beta they are also trimmed with `text-box`; that trimming is being removed (ADR 0007, phase 2 of [#5119](https://github.com/equinor/design-system/issues/5119)), which will shift component padding but not the spacing model.
 
 **In the beta today**
 
