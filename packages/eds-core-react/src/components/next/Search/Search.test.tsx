@@ -30,12 +30,11 @@ describe('Search (next)', () => {
       const { container } = render(
         <Search className="custom-class" style={{ marginTop: '8px' }} />,
       )
-      // eslint-disable-next-line testing-library/no-node-access
+      /* eslint-disable testing-library/no-node-access */
       expect(container.firstChild).toHaveClass('eds-search')
-      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveClass('custom-class')
-      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      /* eslint-enable testing-library/no-node-access */
     })
   })
 
