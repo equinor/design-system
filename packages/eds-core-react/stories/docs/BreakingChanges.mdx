@@ -13,7 +13,7 @@ export const Tag = ({ tone = 'neutral', children }) => (
 export const components = [
   'Accordion', 'Autocomplete', 'Badge', 'Banner', 'Button', 'Checkbox', 'Chip',
   'Dialog', 'Divider', 'Field', 'Icon', 'Input', 'Link', 'Menu', 'Radio',
-  'Search', 'Select', 'Switch', 'TextArea', 'TextField', 'Tooltip',
+  'Search', 'Select', 'Switch', 'TextArea', 'TextField', 'Tooltip', 'Typography',
 ]
 
 export const jumpTo = (id) => () =>
@@ -33,7 +33,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 
 **How to read the markers**: an unmarked change is intentional. <Tag tone="danger">Known issues</Tag> means the section also describes behaviour we consider a bug; it is listed so you are not surprised, and each one links to its bug report. <Tag tone="warning">Under review</Tag> means the team has not yet confirmed that the change is final.
 
-**Not tracked**: visual changes such as spacing, colour and typography. Every EDS 2.0 component is restyled, and styled-components hash class names are replaced by stable class names: an `eds-*` class on each component root and short, unprefixed names (`label`, `panel`, `message`, `content`) on internal parts. Treat any CSS that targets EDS internals as broken until you have verified it.
+**Not tracked**: visual changes such as spacing, colour and the type scale itself (the removal of the `Typography` component is tracked, see [Typography](#typography)). Every EDS 2.0 component is restyled, and styled-components hash class names are replaced by stable class names: an `eds-*` class on each component root and short, unprefixed names (`label`, `panel`, `message`, `content`) on internal parts. Treat any CSS that targets EDS internals as broken until you have verified it.
 
 <Unstyled>
   <div data-color-scheme="light">
@@ -88,6 +88,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 | `Textarea`               | [TextArea](#textarea)         |                                                                            | Renamed export; `rowsMax` → `maxRows`; `helperText` → `helperMessage`; auto-grows by default            |
 | `TextField`              | [TextField](#textfield)       |                                                                            | `helperText` → `helperMessage`; `meta` → `indicator`; `variant` → `invalid`; `id` gets `-input` suffix  |
 | `Tooltip`                | [Tooltip](#tooltip)           | <Tag tone="warning">Under review</Tag> <Tag tone="danger">Known issues</Tag> | `placement` reduced to four values, default `top`; rendered inline, arrow is a CSS pseudo-element       |
+| `Typography`             | [Typography](#typography)     |                                                                            | No component; semantic HTML with `.eds-elements` and typography tokens. `Heading`/`Paragraph` are transitional |
 
 Shared changes across the form components:
 
@@ -427,6 +428,27 @@ EDS 1.0: `Tooltip`.
 - There is no open delay: the tooltip shows immediately on hover or focus ([#5459](https://github.com/equinor/design-system/issues/5459)).
 - `aria-describedby` on the trigger replaces any existing value instead of merging with it ([#5459](https://github.com/equinor/design-system/issues/5459)).
 - When the tooltip is shifted to stay inside the viewport, the arrow stays centred on the tooltip instead of pointing at the trigger ([#5473](https://github.com/equinor/design-system/issues/5473)).
+
+<span id="typographynext" />
+<span id="heading" />
+<span id="paragraph" />
+
+## Typography
+
+EDS 1.0: `Typography` with `variant` (`h1` to `h6`, `body_short`, `body_long` and the rest of the scale), `group`, `bold`, `italic`, `link`, `color`, `token`, `lines` and `as`.
+
+**There is no typography component in EDS 2.0.** Typography is CSS-first ([#4655](https://github.com/equinor/design-system/issues/4655), ADR 0005): every component sets its own font family, size, line height and weight from the typography tokens, and free text uses semantic HTML (`h1` to `h6`, `p`, lists) inside a `.eds-elements` wrapper, styled by `elements.css`. The two typefaces are set by role: Equinor for headings, Inter for UI and body text.
+
+- `variant` and `group` → the element you write (`<h2>`, `<p>`), sized by `elements.css`. Utility classes `.eds-heading-1` to `.eds-heading-6` exist for a heading level that differs from the visual size.
+- `bold` and `italic` → `<strong>` and `<em>`, which inherit the right weight for their context. `.eds-heading-bold` and `.eds-heading-light` are available on headings.
+- `link` → the [Link](#link) component.
+- `color`, `token` and `lines` have no equivalent. Colour comes from the text tokens on the surrounding surface; clamp lines with your own CSS.
+- Text elements are trimmed with `text-box` and have `margin: 0`, so spacing between them comes from `elements.css` flow spacing or from the layout (`gap` with the `--eds-spacing-vertical-*` tokens), never from the element itself.
+
+**In the beta today**
+
+- `elements.css` is not yet part of `@equinor/eds-core-react/next/index.css`, so the flow spacing is not available to consumers ([#5477](https://github.com/equinor/design-system/issues/5477)). Until it ships, lay text out with flex or grid and `gap`.
+- `TypographyNext`, `Heading` and `Paragraph` are exported from the stable `@equinor/eds-core-react` entry, not from `/next`. They are a transitional API from the data-attribute era and will be deprecated ([#5478](https://github.com/equinor/design-system/issues/5478)). If you use them, keep the usage thin so the swap to semantic HTML is easy.
 
 ## Known issues
 
