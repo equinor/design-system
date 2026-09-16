@@ -2,29 +2,41 @@
   .eds-tooltip {
     /* Gap between tooltip and anchor; also used for the arrow height */
     --_arrow: var(--eds-spacing-vertical-3xs);
+
     /* Width of the arrow tip (1px = visually sharp, matches Figma) */
     --_tip: 1px;
 
+    /* Inset that centres the tooltip on the anchor WITHOUT letting the browser shift it.
+       Used on both insets of the cross axis: the available area is trimmed on the side farthest
+       from the anchor so the anchor sits at its centre. When the tooltip is wider than that area,
+       it overflows and the browser moves on to the next `position-try-fallbacks` option instead
+       of shifting the body sideways and leaving the arrow pointing at nothing (#5473).
+       (`anchor-center` alignment would shift first and never trigger the fallbacks.) */
+    --_center: max(0px, calc(2 * anchor(center) - 100%));
+
     /* UA popover reset */
     position: fixed;
-    margin: 0;
     inset: auto;
-    border: none;
+    position-anchor: var(--tooltip-anchor-name);
+
     overflow: visible;
 
-    position-anchor: var(--tooltip-anchor-name);
     width: max-content;
-    background-color: var(--eds-color-text-strong);
-    color: var(--eds-color-text-strong-on-emphasis);
-    border-radius: var(--eds-spacing-border-radius-rounded);
+    margin: 0;
     padding-block: var(--eds-container-space-vertical);
     padding-inline: var(--eds-container-space-horizontal);
+    border: none;
+    border-radius: var(--eds-spacing-border-radius-rounded);
+
+    color: var(--eds-color-text-strong-on-emphasis);
+
+    background-color: var(--eds-color-text-strong);
 
     /* Rectangle shadow — always downward regardless of arrow direction (no shadow tokens in EDS 2.0) */
     box-shadow:
-      0px 2px 4px rgba(0, 0, 0, 0.14),
-      0px 3px 4px rgba(0, 0, 0, 0.12),
-      0px 1px 5px rgba(0, 0, 0, 0.2);
+      0 2px 4px rgb(0 0 0 / 14%),
+      0 3px 4px rgb(0 0 0 / 12%),
+      0 1px 5px rgb(0 0 0 / 20%);
 
     /* Arrow: ::before is expanded by --_arrow on all sides via `inset: calc(-1 * var(--_arrow))`.
        A 16-point star clip-path pre-draws all 4 arrows. `margin: inherit` shifts the pseudo-element
@@ -32,11 +44,14 @@
        and only the gap-side arrow remains visible. */
     &::before {
       content: '';
+
       position: absolute;
       z-index: -1;
-      background: inherit;
       inset: calc(-1 * var(--_arrow));
+
       margin: inherit;
+
+      background: inherit;
       clip-path: polygon(
         /* top */
         calc(50% - var(--_arrow)) var(--_arrow),
@@ -61,32 +76,59 @@
       );
     }
 
+    /* Placement: the preferred side first, then the opposite side, then the two perpendicular
+       sides. Only named @position-try options are used (no flip-* keywords) because every option
+       must restate the insets and self-alignment for BOTH axes to switch centring axis. */
     &[data-placement='top'] {
-      position-area: top;
+      right: var(--_center);
       bottom: var(--_arrow);
+      left: var(--_center);
+      position-area: top;
+      position-try-fallbacks:
+        --eds-tooltip-bottom, --eds-tooltip-right, --eds-tooltip-left;
+
+      justify-self: center;
+
       margin: var(--_arrow) var(--_arrow) 0;
-      position-try-fallbacks: flip-block, --eds-tooltip-bottom;
     }
 
     &[data-placement='bottom'] {
-      position-area: bottom;
       top: var(--_arrow);
+      right: var(--_center);
+      left: var(--_center);
+      position-area: bottom;
+      position-try-fallbacks:
+        --eds-tooltip-top, --eds-tooltip-right, --eds-tooltip-left;
+
+      justify-self: center;
+
       margin: 0 var(--_arrow) var(--_arrow);
-      position-try-fallbacks: flip-block, --eds-tooltip-top;
     }
 
     &[data-placement='right'] {
-      position-area: right;
+      top: var(--_center);
+      bottom: var(--_center);
       left: var(--_arrow);
+      position-area: right;
+      position-try-fallbacks:
+        --eds-tooltip-left, --eds-tooltip-top, --eds-tooltip-bottom;
+
+      align-self: center;
+
       margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
-      position-try-fallbacks: flip-inline, --eds-tooltip-left;
     }
 
     &[data-placement='left'] {
-      position-area: left;
+      top: var(--_center);
       right: var(--_arrow);
+      bottom: var(--_center);
+      position-area: left;
+      position-try-fallbacks:
+        --eds-tooltip-right, --eds-tooltip-top, --eds-tooltip-bottom;
+
+      align-self: center;
+
       margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
-      position-try-fallbacks: flip-inline, --eds-tooltip-right;
     }
 
     & .label {
@@ -95,33 +137,69 @@
   }
 
   .eds-tooltip-anchor {
-    display: inline-block;
     anchor-name: var(--tooltip-anchor-name);
+    display: inline-block;
   }
 }
 
-/* @position-try must be outside @layer per spec. */
+/* @position-try must be outside @layer per spec.
+   Each option restates all four insets and both self-alignment properties: anything not listed
+   here is kept from the base placement, which centres along the other axis.
+   Longhands on purpose: Chromium does not apply the `place-self` shorthand inside @position-try
+   (verified in Chrome 153), which would leave the base `justify-self`/`align-self` in effect. */
 
-@position-try --eds-tooltip-bottom {
-  position-area: bottom;
-  top: var(--_arrow);
-  margin: 0 var(--_arrow) var(--_arrow);
-}
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
 
 @position-try --eds-tooltip-top {
-  position-area: top;
+  top: auto;
+  right: var(--_center);
   bottom: var(--_arrow);
+  left: var(--_center);
+  position-area: top;
+
+  align-self: auto;
+  justify-self: center;
+
   margin: var(--_arrow) var(--_arrow) 0;
 }
 
-@position-try --eds-tooltip-left {
-  position-area: left;
-  right: var(--_arrow);
-  margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
+@position-try --eds-tooltip-bottom {
+  top: var(--_arrow);
+  right: var(--_center);
+  bottom: auto;
+  left: var(--_center);
+  position-area: bottom;
+
+  align-self: auto;
+  justify-self: center;
+
+  margin: 0 var(--_arrow) var(--_arrow);
 }
 
 @position-try --eds-tooltip-right {
-  position-area: right;
+  top: var(--_center);
+  right: auto;
+  bottom: var(--_center);
   left: var(--_arrow);
+  position-area: right;
+
+  align-self: center;
+  justify-self: auto;
+
   margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
 }
+
+@position-try --eds-tooltip-left {
+  top: var(--_center);
+  right: var(--_arrow);
+  bottom: var(--_center);
+  left: auto;
+  position-area: left;
+
+  align-self: center;
+  justify-self: auto;
+
+  margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
+}
+
+/* stylelint-enable declaration-block-no-redundant-longhand-properties */
