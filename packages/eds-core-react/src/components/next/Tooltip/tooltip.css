@@ -57,43 +57,42 @@
       position: fixed;
       z-index: -1;
       inset: clamp(
-        calc(anchor(var(--tooltip-body-name) top) - var(--_arrow)),
-        anchor(bottom),
-        anchor(var(--tooltip-body-name) top)
-      ) clamp(
-        calc(anchor(var(--tooltip-body-name) right) - var(--_arrow)),
-        anchor(left),
-        anchor(var(--tooltip-body-name) right)
-      ) clamp(
-        calc(anchor(var(--tooltip-body-name) bottom) - var(--_arrow)),
-        anchor(top),
-        anchor(var(--tooltip-body-name) bottom)
-      ) clamp(
-        calc(anchor(var(--tooltip-body-name) left) - var(--_arrow)),
-        anchor(right),
-        anchor(var(--tooltip-body-name) left)
-      );
+          calc(anchor(var(--tooltip-body-name) top) - var(--_arrow)),
+          anchor(bottom),
+          anchor(var(--tooltip-body-name) top)
+        )
+        clamp(
+          calc(anchor(var(--tooltip-body-name) right) - var(--_arrow)),
+          anchor(left),
+          anchor(var(--tooltip-body-name) right)
+        )
+        clamp(
+          calc(anchor(var(--tooltip-body-name) bottom) - var(--_arrow)),
+          anchor(top),
+          anchor(var(--tooltip-body-name) bottom)
+        )
+        clamp(
+          calc(anchor(var(--tooltip-body-name) left) - var(--_arrow)),
+          anchor(right),
+          anchor(var(--tooltip-body-name) left)
+        );
       position-anchor: var(--tooltip-anchor-name);
 
       background: inherit;
       clip-path: polygon(
-        /* top */
-        calc(50% - var(--_arrow)) var(--_arrow),
+        /* top */ calc(50% - var(--_arrow)) var(--_arrow),
         calc(50% - var(--_tip)) 0,
         calc(50% + var(--_tip)) 0,
         calc(50% + var(--_arrow)) var(--_arrow),
-        /* right */
-        calc(100% - var(--_arrow)) calc(50% - var(--_arrow)),
+        /* right */ calc(100% - var(--_arrow)) calc(50% - var(--_arrow)),
         100% calc(50% - var(--_tip)),
         100% calc(50% + var(--_tip)),
         calc(100% - var(--_arrow)) calc(50% + var(--_arrow)),
-        /* bottom */
-        calc(50% + var(--_arrow)) calc(100% - var(--_arrow)),
+        /* bottom */ calc(50% + var(--_arrow)) calc(100% - var(--_arrow)),
         calc(50% + var(--_tip)) 100%,
         calc(50% - var(--_tip)) 100%,
         calc(50% - var(--_arrow)) calc(100% - var(--_arrow)),
-        /* left */
-        var(--_arrow) calc(50% + var(--_arrow)),
+        /* left */ var(--_arrow) calc(50% + var(--_arrow)),
         0 calc(50% + var(--_tip)),
         0 calc(50% - var(--_tip)),
         var(--_arrow) calc(50% - var(--_arrow))
@@ -112,8 +111,6 @@
         --eds-tooltip-bottom, --eds-tooltip-right, --eds-tooltip-left;
 
       justify-self: center;
-
-      margin: var(--_arrow) var(--_arrow) 0;
     }
 
     &[data-placement='bottom'] {
@@ -125,8 +122,6 @@
         --eds-tooltip-top, --eds-tooltip-right, --eds-tooltip-left;
 
       justify-self: center;
-
-      margin: 0 var(--_arrow) var(--_arrow);
     }
 
     &[data-placement='right'] {
@@ -138,8 +133,6 @@
         --eds-tooltip-left, --eds-tooltip-top, --eds-tooltip-bottom;
 
       align-self: center;
-
-      margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
     }
 
     &[data-placement='left'] {
@@ -151,8 +144,6 @@
         --eds-tooltip-right, --eds-tooltip-top, --eds-tooltip-bottom;
 
       align-self: center;
-
-      margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
     }
 
     & .label {
@@ -183,8 +174,6 @@
 
   align-self: auto;
   justify-self: center;
-
-  margin: var(--_arrow) var(--_arrow) 0;
 }
 
 @position-try --eds-tooltip-bottom {
@@ -196,8 +185,6 @@
 
   align-self: auto;
   justify-self: center;
-
-  margin: 0 var(--_arrow) var(--_arrow);
 }
 
 @position-try --eds-tooltip-right {
@@ -209,8 +196,6 @@
 
   align-self: center;
   justify-self: auto;
-
-  margin: var(--_arrow) var(--_arrow) var(--_arrow) 0;
 }
 
 @position-try --eds-tooltip-left {
@@ -222,8 +207,6 @@
 
   align-self: center;
   justify-self: auto;
-
-  margin: var(--_arrow) 0 var(--_arrow) var(--_arrow);
 }
 
 /* stylelint-enable declaration-block-no-redundant-longhand-properties */
