@@ -31,7 +31,17 @@ usually right.
 | a list row's interior | `spacing.sm` block, `spacing.md` inline | rows read as a stack, so the block axis stays tighter |
 | a table cell's interior | `spacing.2xs` block, `spacing.sm` inline | and then use Compact density rather than shrinking these |
 | one section from the next | `spacing.xl` | a page-level boundary |
-| a page gutter | `spacing.xl` or wider | layout, and the one place `2xl` and `3xl` belong |
+| one section from the next, on a long page | `spacing.5xl` | a boundary that has to read as a break in the page |
+| a page gutter | `spacing.2xl` or `spacing.3xl` | layout, outside any component |
+| one major region of a page from another | `spacing.4xl` | the gap between a sidebar and its content, or a header and the body |
+| full-page composition | `spacing.6xl` | the widest step, for the space around a whole page of content |
+
+:::info `4xl`, `5xl` and `6xl` are not published yet
+They are merged in Tokens Studio and the values are settled, but they are not in
+`@equinor/eds-tokens` until the next token release, so `var(--eds-spacing-4xl)` resolves to nothing
+today. Design with them; wait for the release before binding them in code. Tracked in
+[equinor/design-system#5487](https://github.com/equinor/design-system/issues/5487).
+:::
 
 ## Worked examples
 
@@ -234,11 +244,13 @@ in descending order of use:
 | `spacing.2xs`, `spacing.4xs`, `spacing.none` | fine adjustment inside controls |
 | `spacing.xl` | lightly: section separation |
 | `spacing.2xl`, `spacing.3xl` | not bound by any component yet |
+| `spacing.4xl`, `spacing.5xl`, `spacing.6xl` | added for layout, so no component binding is expected |
 
-The zero at the bottom of that table says more about the work done so far than about the tokens.
+The zeros at the bottom of that table say more about the work done so far than about the tokens.
 The team has been building **components**, not patterns and layout, so the file has little for a
-page-level step to bind to. `2xl` and `3xl` are for the grid, the page gutter and the space between
-sections, and that work is still ahead.
+page-level step to bind to. The five widest steps are for the grid, page gutters, the space between
+regions and the separation between sections, and that work is still ahead. `4xl` through `6xl` were
+added for it.
 
 :::note What this table measures
 Figma variable bindings in the Core Components file, which is the design side only: no EDS React

@@ -24,6 +24,11 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import {
+  PENDING_ISSUE,
+  PENDING_STEPS,
+  pendingPrimitives,
+} from './pending-spacing-steps.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const app = join(here, '..')
@@ -134,7 +139,17 @@ const STEPS = [
   'xl',
   '2xl',
   '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
 ]
+
+/** Steps the package does not carry yet. Their values come from the primitives they point at. */
+const isPending = (step) =>
+  step in PENDING_STEPS && !named.has(`spacing.${step}`)
+
+/** Marks a pending step in a table cell, so no row claims to be shipped when it is not. */
+const mark = (step) => (isPending(step) ? ' †' : '')
 const RADII = ['none', 'rounded', 'rounded-outer', 'pill']
 
 /**
@@ -154,6 +169,9 @@ const ROLES = {
   xl: 'separating sections',
   '2xl': 'page-level rhythm, in layouts rather than components',
   '3xl': 'page-level rhythm, wider than a component has a use for',
+  '4xl': 'layout: the gap between major regions of a page',
+  '5xl': 'layout: separating whole sections of a long page',
+  '6xl': 'layout: the widest step, for full-page composition',
 }
 
 const RADIUS_ROLES = {
@@ -167,9 +185,32 @@ const RADIUS_ROLES = {
 const problems = []
 
 for (const step of STEPS) {
-  if (!named.has(`spacing.${step}`))
+  if (!named.has(`spacing.${step}`) && !(step in PENDING_STEPS))
     problems.push(`spacing.${step} is not in the token source`)
   if (!ROLES[step]) problems.push(`spacing.${step} has no wording in ROLES`)
+}
+
+// A pending step that has arrived in the package is checked against what this file claimed its
+// value would be, and then has to be taken off the pending list. Without this, a wrong index
+// would publish as a correct-looking value, and a shipped step would keep rendering the
+// "not in the package yet" note forever.
+for (const [step, densities] of Object.entries(PENDING_STEPS)) {
+  const name = `spacing.${step}`
+  if (!named.has(name)) continue
+  for (const [density, index] of Object.entries(densities)) {
+    const fromSource = resolve(density, named.get(name))
+    const fromPending = base[`--eds-primitives-spacing-${index}`]
+    if (fromSource !== fromPending) {
+      problems.push(
+        `${name} at ${density} is ${fromSource} in the package but pending-spacing-steps.mjs ` +
+          `claims primitive ${index} (${fromPending})`,
+      )
+    }
+  }
+  problems.push(
+    `${name} is in the package now: remove it from scripts/pending-spacing-steps.mjs, ` +
+      `drop the pending note from the pages, and delete the file once it is empty`,
+  )
 }
 for (const name of named.keys()) {
   const step = name.replace(/^spacing\.|^corner-radius\./, '')
@@ -187,11 +228,27 @@ for (const radius of RADII) {
 }
 
 const value = (name, density) => {
+  // A pending step has no token in the source to resolve, but the primitive it points at ships,
+  // so the measurement still comes from the package rather than from a number typed in a page.
+  const step = name.replace(/^spacing\./, '')
+  if (isPending(step)) {
+    const index = PENDING_STEPS[step][density]
+    const resolved = base[`--eds-primitives-spacing-${index}`]
+    if (!resolved)
+      problems.push(
+        `primitive ${index} for pending ${name} is not in the package`,
+      )
+    return resolved
+  }
   const cssName = named.get(name)
   const resolved = cssName ? resolve(density, cssName) : null
   if (!resolved) problems.push(`${name} does not resolve at ${density}`)
   return resolved
 }
+
+/** The custom property a step compiles to. Pending steps have no codeSyntax to read yet. */
+const cssNameOf = (name) =>
+  named.get(name) ?? `--eds-${name.replaceAll('.', '-')}`
 
 // --- the primitive scale -----------------------------------------------------------------------
 
@@ -206,6 +263,11 @@ const referenced = new Set(
   [...css.matchAll(/var\(--eds-primitives-spacing-(\d+)\)/g)].map((m) =>
     Number(m[1]),
   ),
+)
+
+/** Primitives pointed at only by a pending step, so the page does not call them unused. */
+const pendingRefs = new Set(
+  [...pendingPrimitives()].filter((index) => !referenced.has(index)),
 )
 
 // The page states this rule, so it is checked rather than trusted. It holds in one direction only:
@@ -280,13 +342,23 @@ for (const [file, prefix] of [
 
 const tables = {}
 
+const pendingNow = STEPS.filter(isPending)
+
 tables['spacing-steps'] = [
   '| Step | Comfortable | Reach for it when |',
   '| --- | --- | --- |',
   ...STEPS.map(
     (step) =>
-      `| \`spacing.${step}\` | ${value(`spacing.${step}`, 'comfortable')} | ${ROLES[step]} |`,
+      `| \`spacing.${step}\`${mark(step)} | ${value(`spacing.${step}`, 'comfortable')} | ${ROLES[step]} |`,
   ),
+  ...(pendingNow.length
+    ? [
+        '',
+        `\`†\` ${pendingNow.map((step) => '`' + step + '`').join(', ')} ${pendingNow.length === 1 ? 'is' : 'are'} decided and merged in Tokens Studio, but ${pendingNow.length === 1 ? 'is' : 'are'} not in`,
+        `\`@equinor/eds-tokens\` yet. The values are resolved from the primitives they point at, which do ship.`,
+        `Release tracked in [equinor/design-system#${PENDING_ISSUE}](https://github.com/equinor/design-system/issues/${PENDING_ISSUE}).`,
+      ]
+    : []),
 ]
 
 tables['radius-steps'] = [
@@ -321,7 +393,7 @@ tables['density-spacing'] = [
       (density) =>
         `${value(name, density)}${step === 'none' ? '' : position(name, density)}`,
     )
-    return `| \`${name}\` | ${cells.join(' | ')} |`
+    return `| \`${name}\`${mark(step)} | ${cells.join(' | ')} |`
   }),
 ]
 
@@ -337,7 +409,8 @@ tables['density-radius'] = [
 // Prose rather than a code block or a table: 13 values is too many columns to read across, and a
 // single-line code block scrolls sideways out of the content column.
 tables['shared-spacing-scale'] = [
-  `The ${shared.length} values the eleven names are assigned from, numbered by position:`,
+  `The ${shared.length} values the ${STEPS.length - 1} steps other than \`none\` are assigned from,`,
+  'numbered by position:',
   '',
   shared.map((v, i) => `**${i + 1}.** \`${v}px\``).join(' · '),
 ]
@@ -352,20 +425,36 @@ tables['primitive-scale'] = [
     const cells = Array.from({ length: COLUMNS }, (_, column) => {
       const step = primitives[column * rows + row]
       if (!step) return ' | '
-      const mark = referenced.has(step.index) ? '' : ' *'
-      return `\`${step.index}\`${mark} | ${step.px}px`
+      const marker = referenced.has(step.index)
+        ? ''
+        : pendingRefs.has(step.index)
+          ? ' †'
+          : ' *'
+      return `\`${step.index}\`${marker} | ${step.px}px`
     })
     return `| ${cells.join(' | ')} |`
   }),
   '',
-  `\`*\` marks a step nothing points at: ${primitives.length - referenced.size} of ${primitives.length}.`,
+  `\`*\` marks a step nothing points at: ${primitives.filter((p) => !referenced.has(p.index) && !pendingRefs.has(p.index)).length} of ${primitives.length}.` +
+    (pendingRefs.size
+      ? ` \`†\` marks the ${pendingRefs.size} pointed at only by the steps not in the package yet.`
+      : ''),
 ]
 
 tables['token-reference'] = [
-  `**${named.size} tokens.** Each one has three values, one per density. The **Token** column is the`,
-  'name you pick in Figma and the **CSS custom property** column is the same token in code. Both come',
-  'from the token definition itself, so they cannot drift apart. The **Comfortable** column is what',
-  'you get with no `data-density` attribute set.',
+  `**${STEPS.length + RADII.length} tokens.** Each one has three values, one per density. The **Token**`,
+  'column is the name you pick in Figma and the **CSS custom property** column is the same token in',
+  'code. Both come from the token definition itself, so they cannot drift apart. The **Comfortable**',
+  'column is what you get with no `data-density` attribute set.',
+  ...(pendingNow.length
+    ? [
+        '',
+        `\`†\` marks a token that is merged in Tokens Studio but not in \`@equinor/eds-tokens\` yet, so it`,
+        'has no custom property to bind to until the next token release. The values shown are resolved',
+        'from the primitives it points at, which do ship. Tracked in',
+        `[equinor/design-system#${PENDING_ISSUE}](https://github.com/equinor/design-system/issues/${PENDING_ISSUE}).`,
+      ]
+    : []),
   '',
   '## Spacing',
   '',
@@ -375,7 +464,7 @@ tables['token-reference'] = [
   '| --- | --- | --- | --- | --- |',
   ...STEPS.map((step) => {
     const name = `spacing.${step}`
-    return `| \`${name}\` | \`${named.get(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
+    return `| \`${name}\`${mark(step)} | \`${cssNameOf(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
   }),
   '',
   '## Corner radius',
@@ -386,7 +475,7 @@ tables['token-reference'] = [
   '| --- | --- | --- | --- | --- |',
   ...RADII.map((radius) => {
     const name = `corner-radius.${radius}`
-    return `| \`${name}\` | \`${named.get(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
+    return `| \`${name}\` | \`${cssNameOf(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
   }),
   '',
   '## In TypeScript',
@@ -488,6 +577,7 @@ for (const [file, blocks] of Object.entries(TARGETS)) {
 
 console.log(
   `ok - ${written} tables across ${Object.keys(TARGETS).length} pages: ` +
-    `${named.size} named tokens resolved at ${DENSITIES.length} densities, ` +
+    `${STEPS.length + RADII.length} named tokens resolved at ${DENSITIES.length} densities ` +
+    `(${pendingNow.length} not in the package yet), ` +
     `${primitives.length} primitive steps, ${referenced.size} of them referenced`,
 )

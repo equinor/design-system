@@ -1,13 +1,14 @@
 ---
 title: Spacing
 sidebar_label: Overview
-description: Eleven named steps, applied directly as padding, gap and margin. Which one to reach for, and why the numbers are published.
+description: Fourteen named steps, applied directly as padding, gap and margin. Which one to reach for, and why the numbers are published.
 ---
 
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
 
-Spacing in EDS is eleven named steps and nothing else. You apply them directly to `padding`, `gap`
-and `margin`, and the value you get depends on the density the element sits in.
+Spacing in EDS is fourteen named steps and nothing else. You apply them directly to `padding`,
+`gap` and `margin`, and the value you get depends on the density the element sits in. Eleven of
+them are for components and the widest three are for layout.
 
 These pages document the **3.0.0-beta** spacing tokens. The names are new and so are the values, so
 if you are on EDS 1.x or on 2.0.0-beta, see [coming from an earlier version](#coming-from-an-earlier-version).
@@ -43,7 +44,7 @@ A card's own geometry is three tokens:
 }
 ```
 
-## The eleven steps
+## The fourteen steps
 
 {/* GEN:spacing-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
@@ -60,10 +61,17 @@ A card's own geometry is three tokens:
 | `spacing.xl` | 24px | separating sections |
 | `spacing.2xl` | 28px | page-level rhythm, in layouts rather than components |
 | `spacing.3xl` | 32px | page-level rhythm, wider than a component has a use for |
+| `spacing.4xl` † | 48px | layout: the gap between major regions of a page |
+| `spacing.5xl` † | 96px | layout: separating whole sections of a long page |
+| `spacing.6xl` † | 128px | layout: the widest step, for full-page composition |
+
+`†` `4xl`, `5xl`, `6xl` are decided and merged in Tokens Studio, but are not in
+`@equinor/eds-tokens` yet. The values are resolved from the primitives they point at, which do ship.
+Release tracked in [equinor/design-system#5487](https://github.com/equinor/design-system/issues/5487).
 
 {/* GEN:spacing-steps END */}
 
-Values shown are Comfortable, which is the default. All eleven move together when the density
+Values shown are Comfortable, which is the default. They all move together when the density
 changes, and the names stay put. [The scale](./spacing-scale.mdx) has every value.
 
 :::info Why the numbers are published
@@ -150,7 +158,7 @@ covers what it does instead, and why `Compact` is not `Comfortable` × 0.75.
 
 ## Coming from an earlier version
 
-Both earlier generations used a different set of names, and neither maps cleanly onto the eleven
+Both earlier generations used a different set of names, and neither maps cleanly onto the current
 steps:
 
 - **EDS 1.x** had eight t-shirt spacers on an 8px grid, with `XX Small` and `X Small` reserved for
@@ -164,7 +172,7 @@ spacing is gone for the same reason colour lost its component tokens: a card and
 happen to share a value should not share a name.
 
 :::note The mapping table is not written yet
-The old-name to new-name mapping needs the 2.x families resolved against the eleven steps first,
+The old-name to new-name mapping needs the 2.x families resolved against the current steps first,
 which is tracked in [equinor/design-system#5121](https://github.com/equinor/design-system/issues/5121).
 Until then, re-pick by the two questions above rather than by matching the old value.
 :::
