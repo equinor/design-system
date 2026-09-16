@@ -18,6 +18,7 @@
 @import '@equinor/eds-tokens/css/variables';
 @import './Foundation/registered-properties.css';
 @import './Foundation/typography.css';
+@import './Foundation/elements.css';
 @import './Foundation/relaxed-density.css';
 @import './Icon/icon.css';
 @import './Button/button.css';
