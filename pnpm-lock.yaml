@@ -20,7 +20,6 @@ overrides:
   diff: '>=4.0.4'
   js-yaml@^3: ^3.15.2
   js-yaml@^4: ^4.3.2
-  gray-matter>js-yaml: ^3.15.2
   lodash: '>=4.18.0'
   webpackbar: ^7.0.0
   shell-quote: '>=1.8.4'
@@ -30,8 +29,8 @@ overrides:
   serialize-javascript: '>=7.0.5'
   http-proxy-middleware@^2: ^2.0.10
   launch-editor: '>=2.14.1'
-  joi: '>=18.2.5'
-  qs: '>=6.16.0'
+  joi: '>=18.2.5 <19'
+  qs: '>=6.16.0 <7'
   postcss: '>=8.5.23'
   uuid: ^11.1.1
   react-stately: 3.50.0
@@ -40,10 +39,10 @@ overrides:
   react-test-renderer@19: 19.2.8
   eslint-import-resolver-typescript: 4.4.5
   nanoid@^3: '>=3.3.18'
-  browserslist@^4: '>=4.28.9'
+  autoprefixer>browserslist: '>=4.28.9 <5'
   '@xmldom/xmldom@^0.8': '>=0.8.15 <0.9'
-  '@xmldom/xmldom@^0.9': '>=0.9.12'
-  '@humanfs/node@^0.16': '>=0.16.8'
+  '@xmldom/xmldom@^0.9': '>=0.9.12 <0.10'
+  '@humanfs/node@^0.16': '>=0.16.8 <0.17'
 
 importers:
 
@@ -396,7 +395,7 @@ importers:
         version: 55.0.16(expo@55.0.23)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       expo-router:
         specifier: ~55.0.16
-        version: 55.0.17(db924759debce275f250b522099810c9)
+        version: 55.0.17(09ccd46779381dc0a2eec6c050f029a5)
       expo-splash-screen:
         specifier: ~55.0.21
         version: 55.0.23(expo@55.0.23)(typescript@5.9.3)
@@ -577,7 +576,7 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0(@babel/core@7.29.7)(styled-components@6.4.4(css-to-react-native@3.2.0)(react-dom@19.2.8(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))
       browserslist:
-        specifier: '>=4.28.9'
+        specifier: ^4.28.9
         version: 4.28.9
       eslint-plugin-storybook:
         specifier: 10.5.10
@@ -1213,7 +1212,7 @@ importers:
         version: 2.3.0(@babel/core@7.29.7)(styled-components@6.4.4(css-to-react-native@3.2.0)(react-dom@19.2.8(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@26.1.1)
+        version: 30.4.2(@types/node@26.1.1)(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -14377,7 +14376,7 @@ packages:
     resolution: {integrity: sha512-UQ+MSxlhRm1bzjhU+DcuXfjFO1FzNtqhK5+9Yvlp90ItDLk5vT932A0rFu619nf7RVS+Y/VeaUW1jaRDqZ8VJw==}
     hasBin: true
     peerDependencies:
-      browserslist: '>=4.28.9'
+      browserslist: '>= 4.21.0'
 
   update-notifier@6.0.2:
     resolution: {integrity: sha512-EDxhTEVPZZRLWYcJ4ZXjGFN0oP7qYvbXWzEgRm/Yql4dHX5wDbvh89YHP6PK1lzZJYrMtXUuZZz8XGK+U6U1og==}
@@ -18776,7 +18775,7 @@ snapshots:
       ws: 8.21.3
       zod: 3.25.76
     optionalDependencies:
-      expo-router: 55.0.17(db924759debce275f250b522099810c9)
+      expo-router: 55.0.17(09ccd46779381dc0a2eec6c050f029a5)
       react-native: 0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8)
     transitivePeerDependencies:
       - '@expo/dom-webview'
@@ -19058,7 +19057,7 @@ snapshots:
       react: 19.2.8
     optionalDependencies:
       '@expo/metro-runtime': 55.0.12(@expo/dom-webview@55.0.6)(expo@55.0.23)(react-dom@19.2.8(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
-      expo-router: 55.0.17(db924759debce275f250b522099810c9)
+      expo-router: 55.0.17(09ccd46779381dc0a2eec6c050f029a5)
       react-dom: 19.2.8(react@19.2.8)
     transitivePeerDependencies:
       - supports-color
@@ -21749,7 +21748,7 @@ snapshots:
     optionalDependencies:
       jest: 29.7.0(@types/node@25.9.5)(ts-node@10.9.2(@types/node@25.9.5)(typescript@5.9.3))
 
-  '@testing-library/react-native@13.3.3(jest@30.4.2)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@testing-library/react-native@13.3.3(jest@30.4.2(@types/node@26.1.1)(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3)))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       jest-matcher-utils: 30.4.1
       picocolors: 1.1.1
@@ -21759,7 +21758,7 @@ snapshots:
       react-test-renderer: 19.2.8(react@19.2.8)
       redent: 3.0.0
     optionalDependencies:
-      jest: 30.4.2(@types/node@26.1.1)
+      jest: 30.4.2(@types/node@26.1.1)(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3))
     optional: true
 
   '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
@@ -25130,7 +25129,7 @@ snapshots:
     optionalDependencies:
       react-native-worklets: 0.7.4(@babel/core@7.29.7)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
 
-  expo-router@55.0.17(db924759debce275f250b522099810c9):
+  expo-router@55.0.17(09ccd46779381dc0a2eec6c050f029a5):
     dependencies:
       '@expo/log-box': 55.0.13(@expo/dom-webview@55.0.6)(expo@55.0.23)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       '@expo/metro-runtime': 55.0.12(@expo/dom-webview@55.0.6)(expo@55.0.23)(react-dom@19.2.8(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
@@ -25168,7 +25167,7 @@ snapshots:
       vaul: 1.1.2(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     optionalDependencies:
       '@react-navigation/drawer': 7.13.8(@react-navigation/native@7.3.16(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native-gesture-handler@2.30.1(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native-reanimated@4.2.3(react-native-worklets@0.7.4(@babel/core@7.29.7)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native-safe-area-context@5.6.2(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native-screens@4.23.0(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
-      '@testing-library/react-native': 13.3.3(jest@30.4.2)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.2.8(react@19.2.8))(react@19.2.8)
+      '@testing-library/react-native': 13.3.3(jest@30.4.2(@types/node@26.1.1)(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3)))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.2.8(react@19.2.8))(react@19.2.8)
       react-dom: 19.2.8(react@19.2.8)
       react-native-gesture-handler: 2.30.1(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       react-native-reanimated: 4.2.3(react-native-worklets@0.7.4(@babel/core@7.29.7)(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.83.6(@babel/core@7.29.7)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
@@ -26586,25 +26585,6 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-cli@30.4.2(@types/node@26.1.1):
-    dependencies:
-      '@jest/core': 30.4.2(ts-node@10.9.2(@types/node@25.6.0)(typescript@5.9.3))
-      '@jest/test-result': 30.4.1
-      '@jest/types': 30.4.1
-      chalk: 4.1.2
-      exit-x: 0.2.2
-      import-local: 3.2.0
-      jest-config: 30.4.2(@types/node@26.1.1)(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3))
-      jest-util: 30.4.1
-      jest-validate: 30.4.1
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
   jest-cli@30.4.2(@types/node@26.1.1)(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3)):
     dependencies:
       '@jest/core': 30.4.2(ts-node@10.9.2(@types/node@26.1.1)(typescript@5.9.3))
@@ -27356,19 +27336,6 @@ snapshots:
       '@jest/types': 30.4.1
       import-local: 3.2.0
       jest-cli: 30.4.2(@types/node@25.6.0)(ts-node@10.9.2(@types/node@25.6.0)(typescript@5.9.3))
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
-  jest@30.4.2(@types/node@26.1.1):
-    dependencies:
-      '@jest/core': 30.4.2(ts-node@10.9.2(@types/node@25.6.0)(typescript@5.9.3))
-      '@jest/types': 30.4.1
-      import-local: 3.2.0
-      jest-cli: 30.4.2(@types/node@26.1.1)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
