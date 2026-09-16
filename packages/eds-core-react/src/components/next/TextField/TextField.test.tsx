@@ -86,7 +86,9 @@ describe('TextField (Next EDS 2.0)', () => {
           style={{ marginTop: '8px' }}
         />,
       )
+      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
     })
   })

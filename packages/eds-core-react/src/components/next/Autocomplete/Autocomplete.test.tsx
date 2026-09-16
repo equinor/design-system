@@ -112,8 +112,11 @@ describe('Autocomplete (next)', () => {
           style={{ marginTop: '8px' }}
         />,
       )
+      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveClass('eds-autocomplete')
+      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
     })
   })
