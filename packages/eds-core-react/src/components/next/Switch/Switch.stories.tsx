@@ -14,14 +14,33 @@ const meta: Meta<typeof Switch> = {
     label: {
       control: 'text',
       description: 'Visible label for the switch (required)',
+      table: { category: 'Core' },
     },
     disabled: {
       control: 'boolean',
       description: 'Disables the switch',
+      table: { category: 'States', defaultValue: { summary: 'false' } },
     },
     checked: {
       control: 'boolean',
       description: 'Checked state (controlled)',
+      table: { category: 'States' },
+    },
+    className: {
+      control: 'text',
+      description:
+        'Additional CSS class names applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
     },
   },
   args: {
