@@ -488,7 +488,7 @@ If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports
 If you encounter build failures:
 1. Ensure all dependencies are up to date: `pnpm install`
 2. Clean and rebuild: `pnpm clean && pnpm build`
-3. Make sure you're using the correct Node.js version (22.12.0)
+3. Make sure you're using the correct Node.js version (24.16.0, see `.nvmrc`)
 
 ### Module not found errors
 
