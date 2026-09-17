@@ -473,7 +473,7 @@ When it comes to the Equinor logo, we have two versions – primary and horizont
 
 ## Browser support
 
-We support the most up to date version of evergreen browsers (browsers that auto-update), which means Chrome, Safari, Firefox and (Chromium) Edge.
+We support the most up to date version of evergreen browsers (browsers that auto-update): Chrome, Firefox, and Chromium-based Edge. Safari is not supported for the web design system because it is retired in Equinor's application portfolio. Safari-only issues may remain open as best-effort work and are not prioritised as supported-browser defects. The mobile package targets iOS through React Native and is unaffected by this web-browser policy.
 
 ## Troubleshooting
 
