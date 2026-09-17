@@ -3,6 +3,61 @@ packages:
   - packages/**
   - apps/**
 
-onlyBuiltDependencies:
-  - lightningcss-cli
-  - '@tokens-studio/studio-cli'
+# pnpm 11 replaced onlyBuiltDependencies with allowBuilds. Unlisted packages
+# with build scripts are skipped with a warning; set false to silence explicitly.
+allowBuilds:
+  '@tokens-studio/studio-cli': true
+  lightningcss-cli: true
+  core-js: false
+  esbuild: false
+  unrs-resolver: false
+
+# Settings moved here from .npmrc: pnpm 11+ only reads auth/registry from .npmrc.
+sharedWorkspaceLockfile: true
+linkWorkspacePackages: false
+autoInstallPeers: true
+strictPeerDependencies: false
+
+# Moved from package.json pnpm.overrides: pnpm 11+ no longer reads that field.
+# Keep ranges bounded (or pinned for @types/*) so a new release cannot split the tree.
+overrides:
+  mdast-util-to-hast: '>=13.2.1'
+  flatted: '>=3.4.2'
+  undici: '>=8.9.0 <9'
+  'yaml@^2': '>=2.8.3'
+  'picomatch@^2': '>=2.3.2'
+  'brace-expansion@^1': '>=1.1.18 <2'
+  'brace-expansion@^2': '>=2.1.4 <3'
+  'brace-expansion@^5': '>=5.0.9 <6'
+  '@isaacs/brace-expansion': '>=5.0.1'
+  'fast-uri@^3': '^3.1.6'
+  sharp: '>=0.35.0'
+  'json5@^1': '>=1.0.3'
+  diff: '>=4.0.4'
+  'js-yaml@^3': '^3.15.2'
+  'js-yaml@^4': '^4.3.2'
+  lodash: '>=4.18.0'
+  webpackbar: '^7.0.0'
+  shell-quote: '>=1.8.4'
+  webpack-dev-server: '^5.2.5'
+  'ws@^7': '^7.5.11'
+  'ws@^8': '^8.21.0'
+  serialize-javascript: '>=7.0.5'
+  'http-proxy-middleware@^2': '^2.0.10'
+  launch-editor: '>=2.14.1'
+  joi: '>=18.2.5 <19'
+  qs: '>=6.16.0 <7'
+  postcss: '>=8.5.23'
+  uuid: '^11.1.1'
+  react-stately: 3.50.0
+  # Exact pin: a range let 19.3.0 split the tree (#5484). Dependabot ignores this
+  # package; bump it here and in the workspace devDependency specifiers together.
+  '@types/react': 19.2.18
+  '@internationalized/date': 3.12.4
+  'react-test-renderer@19': 19.2.8
+  eslint-import-resolver-typescript: 4.4.5
+  'nanoid@^3': '>=3.3.18'
+  'autoprefixer>browserslist': '>=4.28.9 <5'
+  '@xmldom/xmldom@^0.8': '>=0.8.15 <0.9'
+  '@xmldom/xmldom@^0.9': '>=0.9.12 <0.10'
+  '@humanfs/node@^0.16': '>=0.16.8 <0.17'
