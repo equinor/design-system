@@ -43,6 +43,25 @@ describe('Select (next)', () => {
       expect(screen.getByLabelText('Element')).toBeInTheDocument()
     })
 
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <Select
+          label="Element"
+          options={elements}
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      // eslint-disable-next-line testing-library/no-container
+      expect(container.querySelector('.eds-select')).not.toHaveClass(
+        'custom-class',
+      )
+    })
+
     it('renders helper message', () => {
       render(
         <Select label="Element" options={elements} helperMessage="Pick one" />,

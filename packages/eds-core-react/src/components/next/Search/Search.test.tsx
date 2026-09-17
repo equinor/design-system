@@ -25,6 +25,19 @@ describe('Search (next)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root search element', () => {
+      const { container } = render(
+        <Search className="custom-class" style={{ marginTop: '8px' }} />,
+      )
+      /* eslint-disable testing-library/no-node-access */
+      expect(container.firstChild).toHaveClass('eds-search')
+      expect(container.firstChild).toHaveClass('custom-class')
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      /* eslint-enable testing-library/no-node-access */
+    })
+  })
+
   describe('Clear button', () => {
     it('is hidden when input is empty', () => {
       render(<Search />)

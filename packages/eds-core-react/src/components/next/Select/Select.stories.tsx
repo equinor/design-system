@@ -150,7 +150,16 @@ const meta: Meta<typeof Select> = {
     // Styling
     className: {
       control: 'text',
-      description: 'CSS class names applied to the select element',
+      description:
+        'CSS class names applied to the root element (the outer labeled field wrapper). Use this to control layout, width, or margin of the entire field.',
+      table: {
+        category: 'Styling',
+      },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the root element (the outer labeled field wrapper).',
       table: {
         category: 'Styling',
       },
