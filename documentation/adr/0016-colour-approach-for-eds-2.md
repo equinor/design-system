@@ -1,6 +1,6 @@
 # Colour approach for EDS 2.0
 
-- **Status:** Proposed
+- **Status:** Approved
 - **Date:** 2026-08-27
 - **Decision makers:** EDS core team
 
