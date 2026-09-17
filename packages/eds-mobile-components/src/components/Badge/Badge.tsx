@@ -1,7 +1,10 @@
 import React from "react";
 import { View } from "react-native";
-import { useStyles } from "../../hooks/useStyles";
-import { EDSStyleSheet } from "../../styling";
+// SPIKE: useStyles/EDSStyleSheet swapped for the spike token hook.
+import {
+    SpikeToken,
+    useSpikeTokens,
+} from "../../styling/tokens/__spike__/useSpikeTokens";
 import { Typography } from "../Typography";
 
 import {
@@ -24,7 +27,11 @@ export const Badge = ({
     variant = "solid",
     ...rest
 }: BadgeProps) => {
-    const styles = useStyles(badgeThemeStyles, { tone, emphasis, variant });
+    const styles = badgeSpikeStyles(useSpikeTokens(), {
+        tone,
+        emphasis,
+        variant,
+    });
 
     return (
         <View {...rest} style={[styles.container, rest.style]}>
@@ -35,39 +42,51 @@ export const Badge = ({
     );
 };
 
-const badgeThemeStyles = EDSStyleSheet.create(
-    (token, { tone, emphasis, variant }: BadgeStyleProps) => {
-        const backgroundColor = variant === "outlined"
-            ? token.colors.bg[tone].canvas
+// SPIKE: styles below are resolved from the Tokens Studio TypeScript export via
+// `useSpikeTokens` rather than from the generated token modules. See
+// src/styling/tokens/__spike__/ and equinor/design-system#5464. Revert before merging.
+const badgeSpikeStyles = (
+    token: SpikeToken,
+    { tone, emphasis, variant }: BadgeStyleProps
+) => {
+    const backgroundColor =
+        variant === "outlined"
+            ? token.background.nonInteractive[tone].muted
             : emphasis === "medium"
-                ? token.colors.bg[tone].fillMuted.default
-                : token.colors.bg[tone].canvas;
+              ? token.background.nonInteractive[tone].default
+              : token.background.nonInteractive[tone].muted;
 
-        const borderColor = variant === "outlined"
+    const borderColor =
+        variant === "outlined"
             ? emphasis === "low"
-                ? token.colors.border[tone].subtle
-                : token.colors.border[tone].medium
+                ? token.border.nonInteractive[tone].muted
+                : token.border.nonInteractive[tone].default
             : "transparent"; // keeps solid and outlined badges the same total size
 
-        const textColor = token.colors.text[tone].subtle;
+    const textColor = token.text.onDefault[tone];
 
-        return {
-            container: {
-                alignSelf: "flex-start",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                minWidth: token.spacing.sizing.icon.lg,
-                borderRadius: token.spacing.spacing.borderRadius.rounded,
-                paddingHorizontal: token.spacing.spacing.horizontal.sm,
-                paddingVertical: token.spacing.spacing.vertical.threeXs,
-                backgroundColor,
-                borderWidth: token.spacing.sizing.stroke.thin,
-                borderColor,
-            },
-            label: {
-                color: textColor,
-            },
-        };
-    }
-);
+    return {
+        container: {
+            alignSelf: "flex-start" as const,
+            flexDirection: "row" as const,
+            alignItems: "center" as const,
+            justifyContent: "center" as const,
+            // No icon-sizing token in the new foundation; spacing.xl is the same
+            // 24px the old sizing.icon.lg gave us, but it is a spacing token
+            // doing a sizing job.
+            minWidth: token.spacing.xl,
+            borderRadius: token.cornerRadius.rounded,
+            paddingHorizontal: token.spacing.sm,
+            paddingVertical: token.spacing["3xs"],
+            backgroundColor,
+            // Was sizing.stroke.thin, a flat 1px in both old densities. The new
+            // foundation has no stroke concept, so a hairline scales with
+            // density: 1px compact, 2px comfortable, 4px relaxed.
+            borderWidth: token.spacing["4xs"],
+            borderColor,
+        },
+        label: {
+            color: textColor,
+        },
+    };
+};
