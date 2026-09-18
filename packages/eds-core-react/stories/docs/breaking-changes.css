@@ -1,0 +1,40 @@
+/* Pill-shaped in-page links on the Breaking changes page. Plain anchors so
+   the URL fragment updates, focus moves to the target and nothing gets
+   aria-pressed (Chip has no asChild and renders a <button>, see #5458).
+   Visuals mirror the default Chip variant. */
+.eds-breaking-changes-jump-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.5rem 1.5rem;
+}
+
+.eds-breaking-changes-jump-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding-inline: var(--eds-selectable-space-horizontal, 0.75rem);
+  border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+  color: var(--eds-color-text-subtle);
+  text-decoration: none;
+  background-color: var(--eds-color-bg-fill-muted-default);
+  transition: background-color 150ms ease-in-out;
+}
+
+.eds-breaking-changes-jump-links a:hover {
+  background-color: var(--eds-color-bg-fill-muted-hover);
+}
+
+.eds-breaking-changes-jump-links a:active {
+  background-color: var(--eds-color-bg-fill-muted-active);
+}
+
+.eds-breaking-changes-jump-links a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+    0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
+}
