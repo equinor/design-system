@@ -2,22 +2,17 @@
 
 Typography components used to help render typography in <abbr title="Equinor Design System">EDS</abbr>.
 
-## The next-generation typography system is now available
+## EDS 2.0 typography — replacement in progress
 
-A new and improved typography system is now available!
+`TypographyNext`, `Heading`, and `Paragraph` are deprecated. They still work, but avoid new adoption — every new use has to be undone when the replacement lands.
 
-**Get started:**
+**What is coming ([ADR-0005](../../../../documentation/adr/0005-typography-approach-for-eds-2.md)):**
 
-```tsx
-import '@equinor/eds-tokens/css/variables.css'
-import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
+- A base element stylesheet giving `h1`–`h6` and `p` their default size and flow spacing ([#5477](https://github.com/equinor/design-system/issues/5477))
+- Utility classes per text style for exceptions, mirroring Figma text styles ([#5501](https://github.com/equinor/design-system/issues/5501))
 
-<Heading as="h1">Welcome</Heading>
-<Paragraph>This uses the new typography system.</Paragraph>
-<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
-  Flexible inline text
-</Typography>
-```
+**In the meantime:** stay on EDS 1.0, or use plain `gap` on a flex/grid container to control spacing yourself.
+
 ---
 
 ## Current/Old/Deprecated Typography Component
