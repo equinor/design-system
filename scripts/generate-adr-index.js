@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Generates documentation/adr/README.md — an index of every ADR with its
+ * Generates documentation/adr/README.md, an index of every ADR with its
  * title, status and decision date, so readers can find the relevant decision
  * without opening twenty files named by number.
  *
