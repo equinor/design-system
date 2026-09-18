@@ -15,49 +15,23 @@ import MobileDocs from '@equinor/eds-mobile-components/docs/Typography.mdx'
   <MobileDocs />
 </>}>
 
-> **Deprecated.** `TypographyNext`, `Heading`, and `Paragraph` are a transitional API from the data-attribute era and are not the target approach for EDS 2.0. Use CSS-first typography instead — see the [Foundation Typography](/docs/eds-2-0-beta-foundation-typography--docs) docs.
+> **Deprecated — avoid new adoption.** These components still work, but every new use has to be undone when the replacement lands. A CSS-first replacement is in progress: a base element stylesheet ([#5477](https://github.com/equinor/design-system/issues/5477)) and utility classes per text style ([#5501](https://github.com/equinor/design-system/issues/5501)). Until those ship, consumers who need typography should **stay on EDS 1.0** or apply `--eds-typography-*` tokens directly with their own spacing.
 
-These components remain available while existing consumers migrate. They will be removed in a future major version.
+## What is coming
 
-## EDS 2.0 approach: CSS-first typography
+The EDS 2.0 direction ([ADR-0005](https://github.com/equinor/design-system/blob/main/documentation/adr/0005-typography-approach-for-eds-2.md)) replaces this component with two pieces:
 
-EDS 2.0 applies typography through CSS tokens and semantic HTML, not wrapper components. Add the `@equinor/eds-core-react/next` CSS bundle to your app and use plain `h1`–`h6` and `p` tags inside a `.eds-elements` container:
+1. **Base element stylesheet** — `h1`–`h6` and `p` get their default size and flow spacing from the stylesheet automatically, so developers do not have to annotate every element.
+2. **Utility classes per text style** — one class per Figma text style for cases where the design needs a heading-level element at a different visual size.
 
-```html
-<div class="eds-elements">
-  <h1>Page title</h1>
-  <p>Body copy — correct size, weight, and spacing come from the stylesheet.</p>
-  <h2>Section heading</h2>
-  <p>Another paragraph.</p>
-</div>
-```
-
-```tsx
-import '@equinor/eds-core-react/next/index.css'
-```
-
-Spacing between adjacent block elements (headings and paragraphs) is provided by the flow spacing rules in `elements.css`. You do not need `gap`, `margin`, or wrapper components to get vertical rhythm.
-
-For inline text with explicit token control, use CSS custom properties directly on any element:
-
-```css
-.my-label {
-  font-family: var(--eds-typography-ui-body-font-family);
-  font-size: var(--eds-typography-ui-body-md-font-size);
-  line-height: var(--eds-typography-ui-body-md-line-height-squished);
-}
-```
+This mirrors how Figma works today: the team dropped the typography component and applies text styles to the text element directly. The CSS classes correspond to the same list so designer and developer choose from the same vocabulary.
 
 ## Playground
-
-`TypographyNext` is still available for inline text with explicit size and weight control. The playground below reflects the current component API.
 
 <Primary />
 <Controls />
 
 ### As Link
-
-TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop.
 
 <Canvas of={TypographyNewStories.AsLink} />
 
