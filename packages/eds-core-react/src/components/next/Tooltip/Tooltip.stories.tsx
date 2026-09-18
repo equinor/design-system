@@ -57,7 +57,7 @@ export const Introduction: StoryFn<TooltipProps> = (args) => (
 
 Introduction.args = {
   title: 'Tooltip text',
-  placement: 'top',
+  placement: 'bottom',
 }
 
 export const Placements: StoryFn<TooltipProps> = () => (

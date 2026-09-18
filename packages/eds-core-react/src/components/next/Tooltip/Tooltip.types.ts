@@ -5,8 +5,9 @@ export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
 export type TooltipProps = {
   /** Text displayed inside the tooltip bubble */
   title?: string
-  /** Placement of the tooltip relative to the anchor element
-   * @default 'top'
+  /** Placement of the tooltip relative to the anchor element.
+   * Named after the side the tooltip sits on, not the side the arrow points from.
+   * @default 'bottom'
    */
   placement?: TooltipPlacement
   /** Disable the tooltip */
