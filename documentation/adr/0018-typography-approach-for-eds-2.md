@@ -111,4 +111,4 @@ Two typefaces are used: **Equinor** for headings, **Inter** for body text and UI
 ## Related
 
 - [ADR-0002: Use vanilla CSS with design tokens for EDS 2.0](0002-use-vanilla-css-with-design-tokens-for-eds-2.md)
-- [ADR-0004: Spacing approach for EDS 2.0](0004-spacing-approach-for-eds-2.md)
+- [ADR-0017: Spacing approach for EDS 2.0](0017-spacing-approach-for-eds-2.md)

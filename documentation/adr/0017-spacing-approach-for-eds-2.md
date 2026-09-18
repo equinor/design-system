@@ -87,4 +87,4 @@ For elements with text-box trimming, padding must be combined with the baseline 
 ## Related
 
 - [ADR-0002: Use vanilla CSS with design tokens for EDS 2.0](0002-use-vanilla-css-with-design-tokens-for-eds-2.md)
-- [ADR-0005: Typography approach for EDS 2.0](0005-typography-approach-for-eds-2.md)
+- [ADR-0018: Typography approach for EDS 2.0](0018-typography-approach-for-eds-2.md)
