@@ -311,6 +311,54 @@
         }
       }
     },
+    "7xl": {
+      "$value": "{density.spacing.7xl}",
+      "$type": "dimension",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-7xl)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
+    "8xl": {
+      "$value": "{density.spacing.8xl}",
+      "$type": "dimension",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-8xl)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
+    "9xl": {
+      "$value": "{density.spacing.9xl}",
+      "$type": "dimension",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-9xl)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
     "lg": {
       "$value": "{density.spacing.lg}",
       "$type": "dimension",

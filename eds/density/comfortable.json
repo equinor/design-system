@@ -128,7 +128,7 @@
         }
       },
       "4xl": {
-        "$value": "{primitives.spacing.300}",
+        "$value": "{primitives.spacing.250}",
         "$type": "dimension",
         "$extensions": {
           "com.figma": {
@@ -160,7 +160,7 @@
         }
       },
       "5xl": {
-        "$value": "{primitives.spacing.600}",
+        "$value": "{primitives.spacing.300}",
         "$type": "dimension",
         "$extensions": {
           "com.figma": {
@@ -176,7 +176,7 @@
         }
       },
       "6xl": {
-        "$value": "{primitives.spacing.800}",
+        "$value": "{primitives.spacing.400}",
         "$type": "dimension",
         "$extensions": {
           "com.figma": {
@@ -186,6 +186,54 @@
             ],
             "codeSyntax": {
               "WEB": "var(--eds-density-spacing-6xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7xl": {
+        "$value": "{primitives.spacing.500}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-7xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8xl": {
+        "$value": "{primitives.spacing.600}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-8xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9xl": {
+        "$value": "{primitives.spacing.800}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-9xl)"
             },
             "hiddenFromPublishing": true
           }
