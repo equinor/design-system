@@ -27,7 +27,7 @@ Records: 18
 | [0007](./0007-token-variable-architecture-spacing-typography.md) | Token variable architecture (typography & spacing) for the redefined token system | Accepted | 2026-06-26 |  |
 | [0008](./0008-generate-ts-tokens-from-studio-exports.md) | Generate TypeScript tokens by combining the Tokens Studio DTCG and CSS exports | Accepted | 2026-07-13 |  |
 | [0009](./0009-temporary-next-subpaths-for-eds-tokens-beta.md) | Publish Tokens Studio output under temporary `next/*` subpaths during the eds-tokens beta | Accepted | 2026-07-20 |  |
-| [0010](./0010-single-bundled-css-entry-for-eds-tokens-3.md) | Mirror the 2.x CSS export surface in eds-tokens 3.0.0: one bundled `./css/variables` entry | Accepted | 2026-07-20 |  |
+| [0010](./0010-single-bundled-css-entry-for-eds-tokens-3.md) | Mirror the 2.x CSS export surface in eds-tokens 3.0.0: one bundled `./css/variables` entry | Accepted | 2026-07-20 | 2026-09-04; proposed 2026-07-20 — the bundle has shipped and been exercised on the beta… |
 | [0011](./0011-adopt-tokens-studio-platform-pipeline.md) | Adopt the Tokens Studio platform as the source and pipeline for design tokens | Accepted | 2026-07-20 |  |
 | [0012](./0012-pinned-prerelease-versioning-for-beta-lines.md) | Pin beta release lines to a fixed 3.0.0-beta.N series with release-please prerelease versioning | Accepted | 2026-07-20 |  |
 | [0013](./0013-attribute-scoped-custom-properties-not-light-dark.md) | Use attribute-scoped custom properties, not `light-dark()`, for colour-scheme switching in token CSS | Accepted | 2026-07-20 |  |

@@ -37,11 +37,39 @@ const TEMPLATE_STATUSES = [
   'Superseded',
 ]
 
-const firstLineAfter = (body, label) => {
-  const match = body.match(
-    new RegExp(`^-\\s*\\*\\*${label}:\\*\\*\\s*(.+)$`, 'm'),
-  )
-  return match ? match[1].trim() : null
+// Longest note kept in the table. Beyond this the row stops being scannable.
+const NOTE_MAX = 90
+
+/**
+ * Reads a `- **Label:** value` field, including any indented continuation
+ * lines. ADR 0010's status wraps onto a second line, and reading only the
+ * first would cut its acceptance date off mid-sentence.
+ */
+const fieldValue = (body, label) => {
+  const lines = body.split('\n')
+  const labelPattern = new RegExp(`^-\\s*\\*\\*${label}:\\*\\*`)
+  const start = lines.findIndex((line) => labelPattern.test(line))
+
+  if (start === -1) return null
+
+  const parts = [lines[start].replace(labelPattern, '')]
+
+  // A continuation line is indented. The next field starts at column 0, so
+  // it ends the value.
+  for (let i = start + 1; i < lines.length; i += 1) {
+    if (!/^\s+\S/.test(lines[i])) break
+    parts.push(lines[i].trim())
+  }
+
+  return parts.join(' ').trim() || null
+}
+
+// Cuts on a word boundary so the note doesn't end mid-word.
+const truncate = (text) => {
+  if (text.length <= NOTE_MAX) return text
+  const cut = text.slice(0, NOTE_MAX - 1)
+  const lastSpace = cut.lastIndexOf(' ')
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).trimEnd()}…`
 }
 
 const parseAdr = (filename) => {
@@ -49,29 +77,28 @@ const parseAdr = (filename) => {
 
   const number = filename.slice(0, 4)
   const titleMatch = body.match(/^#\s+(.+)$/m)
-  const rawStatus = firstLineAfter(body, 'Status')
-  const rawDate = firstLineAfter(body, 'Date')
+  const rawStatus = fieldValue(body, 'Status')
+  const rawDate = fieldValue(body, 'Date')
 
-  // Statuses carry trailing detail ("Accepted (superseded by ADR 0006)"), and
-  // one spans two lines. Keep the keyword for the column, the detail for Note.
+  // Statuses carry trailing detail ("Accepted (superseded by ADR 0006)"), so
+  // keep the keyword for the column and the detail for the note. Matching is
+  // deliberately case-insensitive and normalises to the template's casing:
+  // `accepted` is the same decision as `Accepted`, so it is not drift. A word
+  // outside the template survives as written and is reported below.
   const statusKeyword = rawStatus
     ? TEMPLATE_STATUSES.find((s) =>
         new RegExp(`^${s}\\b`, 'i').test(rawStatus),
       ) || rawStatus.split(/[\s(]/)[0]
     : null
 
-  // One status wraps onto a second line, which would otherwise leave the note
-  // cut off mid-sentence. Unbalanced brackets are the tell, so drop those.
-  const rawNote =
-    rawStatus && statusKeyword ? rawStatus.slice(statusKeyword.length) : ''
-  const balanced =
-    (rawNote.match(/\(/g) || []).length === (rawNote.match(/\)/g) || []).length
-  const note = balanced
-    ? rawNote
-        // Keep link text, drop the target, so "superseded by ADR 0006" fits.
-        .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-        .replace(/^[\s(]+|[\s)]+$/g, '')
-    : ''
+  const note =
+    rawStatus && statusKeyword
+      ? rawStatus
+          .slice(statusKeyword.length)
+          // Keep link text, drop the target, so "superseded by ADR 0006" fits.
+          .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+          .replace(/^[\s(]+|[\s)]+$/g, '')
+      : ''
 
   // Dates range from "2026-03-20" to "2025-06 (recorded retrospectively...)".
   const dateMatch = rawDate ? rawDate.match(/\d{4}(?:-\d{2}){0,2}/) : null
@@ -84,7 +111,9 @@ const parseAdr = (filename) => {
     offTemplateStatus: Boolean(
       statusKeyword && !TEMPLATE_STATUSES.includes(statusKeyword),
     ),
-    note: note.length > 90 ? '' : note,
+    // Truncated rather than dropped: the opening clause usually carries the
+    // part worth reading, such as the date a proposal was actually accepted.
+    note: truncate(note),
     date: dateMatch ? dateMatch[0] : 'not recorded',
   }
 }
@@ -111,17 +140,22 @@ if (duplicates.length > 0) {
     '\nAn ADR number must be unique so it can be cited unambiguously.',
   )
   console.error(
-    'Move the file that claimed the number second to the next free number,',
+    'Move one of them to the next free number and update every reference',
   )
-  console.error('and update every reference to it.')
+  console.error('to it. Convention is that the file which claimed the number')
+  console.error(
+    'first keeps it, which `git log --diff-filter=A` will tell you.',
+  )
   process.exit(1)
 }
 
-const escapePipes = (text) => text.replace(/\|/g, '\\|')
+// Backslashes are escaped first. Otherwise a title containing one before a
+// pipe would emit a real cell break and shift the rest of the row.
+const escapeCell = (text) => text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
 
 const rows = adrs.map((adr) => {
   const link = `[${adr.number}](./${adr.filename})`
-  return `| ${link} | ${escapePipes(adr.title)} | ${adr.status} | ${adr.date} | ${escapePipes(adr.note)} |`
+  return `| ${link} | ${escapeCell(adr.title)} | ${adr.status} | ${adr.date} | ${escapeCell(adr.note)} |`
 })
 
 const offTemplate = adrs.filter((adr) => adr.offTemplateStatus)
