@@ -11,7 +11,7 @@ Typography components used to help render typography in <abbr title="Equinor Des
 - A base element stylesheet giving `h1`–`h6` and `p` their default size and flow spacing ([#5477](https://github.com/equinor/design-system/issues/5477))
 - Utility classes per text style for exceptions, mirroring Figma text styles ([#5501](https://github.com/equinor/design-system/issues/5501))
 
-**In the meantime:** stay on EDS 1.0, or apply `--eds-typography-*` tokens directly with your own spacing (`gap` with `--eds-spacing-vertical-*` tokens on a flex/grid container).
+**In the meantime:** stay on EDS 1.0, or use plain `gap` on a flex/grid container to control spacing yourself.
 
 ---
 
