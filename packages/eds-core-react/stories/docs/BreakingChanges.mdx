@@ -69,7 +69,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 | `Autocomplete`           | [Autocomplete](#autocomplete) |                                                                            | Single-select only; `selectedOptions`/`onOptionsChange` → `value`/`onValueChange`                       |
 | none                     | [Badge](#badge)               | <Tag tone="info">New</Tag>                                                 | New component for non-interactive labels                                                                |
 | `Banner`                 | [Banner](#banner)             |                                                                            | `tone` moves to the root; default role `alert` → `status`; `elevation` removed                          |
-| `Button`                 | [Button](#button)             |                                                                            | `contained`/`outlined` → `primary`/`secondary`; `color` → `tone`; `href` → `asChild`                    |
+| `Button`                 | [Button](#button)             | <Tag tone="warning">Under review</Tag>                                     | `contained`/`outlined` → `primary`/`secondary`; `color` → `tone`; `href` → `asChild`                    |
 | `Checkbox`               | [Checkbox](#checkbox)         | <Tag tone="danger">Known issues</Tag>                                      | Labelled root `<label>` → `<div>`; `className` lands on the input                                       |
 | `Chip`                   | [Chip](#chip)                 | <Tag tone="danger">Known issues</Tag>                                      | Real `<button>`; `variant="active"` → `selected`; delete fires on whole-chip click                      |
 | `Dialog`                 | [Dialog](#dialog)             | <Tag tone="danger">Known issues</Tag>                                      | `onClose` → required `onOpenChange(open)`; native `<dialog>`, ref points at it; children always mounted |
@@ -115,9 +115,10 @@ EDS 1.0: `Accordion` with `Accordion.Item`, `Accordion.Header`, `Accordion.Heade
 
 **Markup**: built on native `<details>` and `<summary>`. There is no heading element, no `button[aria-expanded]`, no `role="region"` and no generated header or panel ids. Collapsed panels are closed by `<details>`, not hidden with `hidden`. The root gets `class="eds-accordion"`, header content is wrapped in `span.title` next to a `span.chevron`, and the panel is `div.panel`.
 
+**No disabled state**: `Accordion.Item` has no `disabled` and will not get one. A disabled accordion signals the wrong component rather than a missing state, and the usage audit found two live cases across the organisation ([#5463](https://github.com/equinor/design-system/issues/5463)).
+
 **Known issues**
 
-- `Accordion.Item` has no `disabled` and no replacement for it ([#5463](https://github.com/equinor/design-system/issues/5463)).
 - Panels do not expand in Safari 18.4+ ([#5325](https://github.com/equinor/design-system/issues/5325)).
 
 ## Autocomplete
@@ -162,6 +163,8 @@ EDS 1.0: `Banner` with `Banner.Icon`, `Banner.Message` and `Banner.Actions`.
 
 ## Button
 
+<Tag tone="warning">Under review</Tag>
+
 EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 
 **Props**
@@ -171,7 +174,7 @@ EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 - Removed: `href`, `as`, `fullWidth`. Use `asChild` to render an anchor or a router link.
 - New: `size` (`small` | `default`), `round` for circular icon buttons, `multiline`.
 
-**Composition**: `Button.Group` and `Button.Toggle` have no EDS 2.0 counterpart yet.
+**Composition**: `Button.Group` and `Button.Toggle` have no EDS 2.0 counterpart yet. The toggle button is coming as its own component, not as a Button sub-component ([#5342](https://github.com/equinor/design-system/issues/5342), [#5343](https://github.com/equinor/design-system/issues/5343), [#5344](https://github.com/equinor/design-system/issues/5344), [#5345](https://github.com/equinor/design-system/issues/5345)). Whether `Button.Group` is in scope at all is still open ([#5503](https://github.com/equinor/design-system/issues/5503)).
 
 **Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element.
 
@@ -231,7 +234,7 @@ EDS 1.0: `Dialog` with `Dialog.Header`, `Dialog.Title`, `Dialog.Content`, `Dialo
 
 **Known issues**
 
-- `isDismissable` has no replacement, so there is no non-dismissable mode. Design has confirmed one is coming, with one rule: a dialog without action buttons must always keep its close button ([#5461](https://github.com/equinor/design-system/issues/5461)).
+- `isDismissable` is not implemented yet, so there is no non-dismissable mode in the beta. It is coming back, with one rule: a dialog without action buttons must keep its dismiss control, because a backdrop click alone is not an acceptable way to close ([#5461](https://github.com/equinor/design-system/issues/5461)).
 - Body scroll is not locked while the dialog is open ([#5461](https://github.com/equinor/design-system/issues/5461)).
 - `aria-describedby` is not set ([#5461](https://github.com/equinor/design-system/issues/5461)).
 
@@ -410,7 +413,7 @@ EDS 1.0: `Tooltip`.
 
 **Props**
 
-- `placement`: the twelve floating-ui placements → `top` | `bottom` | `left` | `right`. The `-start` and `-end` variants are removed for the beta, a deliberate choice to start from a small base. Whether aligned placements return is decided on demand, collected in [#5386](https://github.com/equinor/design-system/issues/5386); add your use case there if your team relies on them. Note that a tooltip near the viewport edge is shifted into view automatically, so alignment is not needed for that. The default stays `bottom`, as in EDS 1.0; the beta currently defaults to `top`, see Known issues.
+- `placement`: the twelve floating-ui placements → `top` | `bottom` | `left` | `right`. The `-start` and `-end` variants are removed for the beta, a deliberate choice to start from a small base. Whether aligned placements return is decided on demand, collected in [#5386](https://github.com/equinor/design-system/issues/5386); add your use case there if your team relies on them. Note that a tooltip near the viewport edge is shifted into view automatically, so alignment is not needed for that. `placement` is named after the side the tooltip sits on, not the side the arrow points from. Figma named it after the arrow, which made the two look reversed, and is being corrected ([#5499](https://github.com/equinor/design-system/issues/5499)). The default is not changing from EDS 1.0's `bottom`, but the beta currently ships `top`, see Known issues.
 - `title`: ReactNode → string.
 - Removed: `enterDelay`, `portalContainer`.
 
@@ -418,8 +421,8 @@ EDS 1.0: `Tooltip`.
 
 **Known issues**
 
-- The default placement is `top`. Design has confirmed it should stay `bottom`, as in EDS 1.0, so every tooltip without an explicit `placement` currently renders on the wrong side ([#5386](https://github.com/equinor/design-system/issues/5386)).
-- There is no open delay: the tooltip shows immediately on hover or focus. Design has set the delay to 150 ms, the same as other EDS transitions ([#5459](https://github.com/equinor/design-system/issues/5459)).
+- The default placement is `top`, so a tooltip without an explicit `placement` sits above the trigger. EDS 1.0 defaulted to `bottom` and the default is not meant to change, so this is being corrected in the component ([#5386](https://github.com/equinor/design-system/issues/5386)).
+- There is no open delay: the tooltip shows immediately on hover or focus, where EDS 1.0 waited 100 ms (`enterDelay`). Design has set the EDS 2.0 delay to 150 ms, matching the value already used for transitions across the components; it becomes a token in [#5498](https://github.com/equinor/design-system/issues/5498) ([#5459](https://github.com/equinor/design-system/issues/5459)).
 - `aria-describedby` on the trigger replaces any existing value instead of merging with it ([#5459](https://github.com/equinor/design-system/issues/5459)).
 - When the tooltip is shifted to stay inside the viewport, the arrow stays centred on the tooltip instead of pointing at the trigger ([#5473](https://github.com/equinor/design-system/issues/5473)).
 
@@ -448,18 +451,20 @@ EDS 1.0: `Typography` with `variant` (`h1` to `h6`, `body_short`, `body_long` an
 
 Behaviour described above that we consider a bug. It stays on this page until the fix ships, so you know what to expect in the current beta.
 
-- **Accordion**: no `disabled` on items ([#5463](https://github.com/equinor/design-system/issues/5463)). Panels do not expand in Safari 18.4+ ([#5325](https://github.com/equinor/design-system/issues/5325)).
+- **Accordion**: panels do not expand in Safari 18.4+ ([#5325](https://github.com/equinor/design-system/issues/5325)).
 - **Checkbox, Radio**: a consumer `className` replaces the class that hides the native input ([#5323](https://github.com/equinor/design-system/issues/5323)).
 - **Chip**: `aria-pressed="false"` on plain label chips ([#5458](https://github.com/equinor/design-system/issues/5458)).
 - **Dialog**: no non-dismissable mode, body scroll not locked, no `aria-describedby` ([#5461](https://github.com/equinor/design-system/issues/5461)).
 - **Menu**: exported publicly although it is an internal building block; `className` replaces `eds-menu` ([#5103](https://github.com/equinor/design-system/issues/5103)).
 - **Select**: `className` lands on an inner wrapper ([#5322](https://github.com/equinor/design-system/issues/5322)); native `multiple` not blocked ([#5460](https://github.com/equinor/design-system/issues/5460)).
 - **Switch**: native numeric `size` attribute accepted ([#5457](https://github.com/equinor/design-system/issues/5457)).
-- **Tooltip**: default placement is `top`, design has confirmed `bottom` ([#5386](https://github.com/equinor/design-system/issues/5386)); no open delay; `aria-describedby` on the trigger is overwritten ([#5459](https://github.com/equinor/design-system/issues/5459)); the arrow does not follow the trigger when the tooltip is shifted at the viewport edge ([#5473](https://github.com/equinor/design-system/issues/5473)).
+- **Tooltip**: the default placement is `top` where EDS 1.0 used `bottom` ([#5386](https://github.com/equinor/design-system/issues/5386)); no open delay; `aria-describedby` on the trigger is overwritten ([#5459](https://github.com/equinor/design-system/issues/5459)); the arrow does not follow the trigger when the tooltip is shifted at the viewport edge ([#5473](https://github.com/equinor/design-system/issues/5473)).
 - **Input, TextField, TextArea, Search, Select, Autocomplete, Checkbox, Radio, Switch**: where `className`, `style` and a consumer `id` land differs between these components ([#5456](https://github.com/equinor/design-system/issues/5456)).
 
 ## Under review
 
-Changes listed above as implemented today, where the team has not yet confirmed that they are final. There are no open items at the moment.
+Changes listed above as implemented today, where the team has not yet confirmed that they are final:
+
+- **Button**: whether `Button.Group` is in scope for EDS 2.0 at all ([#5503](https://github.com/equinor/design-system/issues/5503)).
 
 Follow [#5383](https://github.com/equinor/design-system/issues/5383) for the status of these.
