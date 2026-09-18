@@ -19,7 +19,7 @@
     "@next/mdx": "^16.2.11",
     "@types/mdx": "^2.0.14",
     "github-markdown-css": "^5.9.0",
-    "next": "16.2.11",
+    "next": "16.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "remark-gfm": "^4.0.1"
