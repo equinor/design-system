@@ -1,6 +1,6 @@
-# Visual Regression Tests for Typography Components
+# Playwright Tests for eds-core-react
 
-This directory contains Playwright visual regression tests for the Typography component system.
+This directory contains Playwright visual regression tests for the Typography component system, plus geometry tests for the Tooltip (next) component.
 
 ## Overview
 
@@ -9,6 +9,7 @@ The tests leverage existing Storybook stories to ensure visual consistency acros
 * **TypographyNext**: Flexible typography component with full property control
 * **Heading**: Semantic heading component (h1-h6)
 * **Paragraph**: Block-level paragraph component
+* **Tooltip (next)**: CSS anchor positioning — preferred side, viewport-edge fallbacks and arrow direction (`Tooltip.next.spec.ts`). These tests assert geometry (bounding boxes) instead of screenshots, so they are platform independent and run in both the `chromium` and `firefox` projects.
 
 ## Test Coverage
 
@@ -60,11 +61,19 @@ pnpm test:visual:ui
 
 # Update snapshots when intentional changes are made
 pnpm test:visual:update
+
+# Run a single spec, e.g. the Tooltip geometry tests
+pnpm exec playwright test tests/visual/Tooltip.next.spec.ts
+
+# Use another port if a Storybook from a different checkout already runs on 9000
+STORYBOOK_PORT=9010 pnpm test:visual
 ```
+
+Playwright reuses a Storybook that is already running on the configured port. If that Storybook belongs to a different checkout, stories may be missing — set `STORYBOOK_PORT` to start a separate one.
 
 ### Continuous Integration
 
-Tests run automatically in CI using Chromium. The baseline screenshots are stored in `tests/visual/*.spec.ts-snapshots/`.
+These tests do not run in CI yet (tracked in equinor/design-system#5480). The baseline screenshots are stored in `tests/visual/*.spec.ts-snapshots/` and are Chromium-only. Whoever wires the suite into CI needs both browsers installed: `pnpm exec playwright install --with-deps chromium firefox`.
 
 ## How It Works
 

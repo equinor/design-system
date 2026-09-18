@@ -49,7 +49,9 @@ Tooltips support flexible positioning relative to their trigger element:
 | Left      | Useful beside right-aligned elements         |
 | Right     | Useful beside left-aligned elements          |
 
-The tooltip will automatically reposition itself to stay within the viewport boundary using CSS Anchor Positioning fallbacks.
+The `placement` prop is a preference, not a guarantee. When the preferred side does not fit in the viewport, the tooltip moves to the opposite side and then to one of the perpendicular sides, using CSS Anchor Positioning fallbacks. It is not shifted sideways along the trigger, so the arrow stays centred on the trigger whenever a side has room.
+
+For triggers near the top or bottom edge, `left` or `right` are the placements most likely to be used as given. For triggers in a corner, the component picks whichever side is free.
 
 <iframe
   class="sb-iframe"
