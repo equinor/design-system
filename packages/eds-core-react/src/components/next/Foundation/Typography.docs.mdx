@@ -234,22 +234,9 @@ The scale uses equal-ratio steps of `pow(2, n/5)` — five steps per octave — 
 
 ## Spacing between text elements
 
-EDS 2.0 text elements use `text-box` trimming to remove the whitespace above cap-height and below the alphabetic baseline. This gives optically correct spacing when you control gaps yourself — but it also means `margin: 0` is the correct default, and adjacent headings and paragraphs will sit flush unless you add space.
+EDS 2.0 sets `margin: 0` on heading and paragraph elements. Adjacent headings and paragraphs sit flush unless you add space deliberately.
 
-**The intended solution is `elements.css`.** Import `@equinor/eds-core-react/next/index.css` and wrap your content in `.eds-elements`:
-
-```html
-<div class="eds-elements">
-  <h1>Page title</h1>
-  <p>Intro paragraph — correct spacing is provided by the stylesheet.</p>
-  <h2>Section heading</h2>
-  <p>Another paragraph.</p>
-</div>
-```
-
-The flow spacing rules use a lobotomised-owl selector (`A + B`) with per-element `--_flow-space` variables, so each heading level contributes the right amount of breathing room.
-
-If you are not using `.eds-elements` (for example, inside a form or a component where you own the layout), use `gap` with a spacing token on the flex/grid container:
+**A base element stylesheet is in progress** ([#5477](https://github.com/equinor/design-system/issues/5477)) that will give `h1`–`h6` and `p` default sizes and flow spacing on the new tokens. Until it ships, use `gap` with a spacing token on a flex or grid container:
 
 ```css
 .my-content {

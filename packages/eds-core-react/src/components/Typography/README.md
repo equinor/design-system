@@ -2,26 +2,16 @@
 
 Typography components used to help render typography in <abbr title="Equinor Design System">EDS</abbr>.
 
-## EDS 2.0 typography: CSS-first
+## EDS 2.0 typography — replacement in progress
 
-EDS 2.0 applies typography through CSS tokens and semantic HTML. `TypographyNext`, `Heading`, and `Paragraph` are deprecated transitional components — do not adopt them for new work.
+`TypographyNext`, `Heading`, and `Paragraph` are deprecated. They still work, but avoid new adoption — every new use has to be undone when the replacement lands.
 
-**The recommended approach:**
+**What is coming ([ADR-0005](../../../../documentation/adr/0005-typography-approach-for-eds-2.md)):**
 
-```tsx
-import '@equinor/eds-core-react/next/index.css'
-```
+- A base element stylesheet giving `h1`–`h6` and `p` their default size and flow spacing ([#5477](https://github.com/equinor/design-system/issues/5477))
+- Utility classes per text style for exceptions, mirroring Figma text styles ([#5501](https://github.com/equinor/design-system/issues/5501))
 
-```html
-<div class="eds-elements">
-  <h1>Page title</h1>
-  <p>Correct size, weight, and flow spacing come from the stylesheet.</p>
-  <h2>Section heading</h2>
-  <p>No extra gap, margin, or wrapper components needed.</p>
-</div>
-```
-
-See the [Foundation Typography Storybook docs](https://eds.equinor.com/storybook/?path=/docs/eds-2-0-beta-foundation-typography--docs) for the full approach. The decision is documented in [ADR-0005: Typography approach for EDS 2.0](../../../../documentation/adr/0005-typography-approach-for-eds-2.md).
+**In the meantime:** stay on EDS 1.0, or apply `--eds-typography-*` tokens directly with your own spacing (`gap` with `--eds-spacing-vertical-*` tokens on a flex/grid container).
 
 ---
 
