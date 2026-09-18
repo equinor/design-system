@@ -8,7 +8,7 @@
 
 EDS 2.0 replaces the hand-picked 1.x palette with an algorithmically generated colour system: OKLCH anchors, a step scale per tone, and a semantic layer that components bind to. That work has been running since early 2026 under epic [#4740](https://github.com/equinor/design-system/issues/4740): colour values ([#4742](https://github.com/equinor/design-system/issues/4742)), naming ([#4744](https://github.com/equinor/design-system/issues/4744)), the semantic restructure ([#5280](https://github.com/equinor/design-system/pull/5280)) and migration ([#5119](https://github.com/equinor/design-system/issues/5119)).
 
-**None of it is written down as a decision.** Spacing has [ADR-0004](./0004-spacing-approach-for-eds-2.md); typography has [ADR-0005](./0005-typography-approach-for-eds-2.md) and [ADR-0007](./0007-token-variable-architecture-spacing-typography.md). Colour, the largest part of the epic, has nothing: no ADR in this directory covers it. The reasoning currently lives in issue comments, sync notes and an internal team doc, which means every question that has already been settled (why the scale is opaque, why the lightness inputs are hand-typed, why step 9 is the emphasis fill) gets re-litigated from scratch, and a future maintainer or code agent has nothing to check a change against.
+**None of it is written down as a decision.** Spacing has [ADR-0017](./0017-spacing-approach-for-eds-2.md); typography has [ADR-0018](./0018-typography-approach-for-eds-2.md) and [ADR-0007](./0007-token-variable-architecture-spacing-typography.md). Colour, the largest part of the epic, has nothing: no ADR in this directory covers it. The reasoning currently lives in issue comments, sync notes and an internal team doc, which means every question that has already been settled (why the scale is opaque, why the lightness inputs are hand-typed, why step 9 is the emphasis fill) gets re-litigated from scratch, and a future maintainer or code agent has nothing to check a change against.
 
 Two triggers made this urgent:
 
@@ -279,8 +279,8 @@ Recorded so that they are not mistaken for oversights:
 ## Related
 
 - [ADR-0002: Use vanilla CSS with design tokens for EDS 2.0](./0002-use-vanilla-css-with-design-tokens-for-eds-2.md)
-- [ADR-0004: Spacing approach for EDS 2.0](./0004-spacing-approach-for-eds-2.md)
-- [ADR-0005: Typography approach for EDS 2.0](./0005-typography-approach-for-eds-2.md)
+- [ADR-0017: Spacing approach for EDS 2.0](./0017-spacing-approach-for-eds-2.md)
+- [ADR-0018: Typography approach for EDS 2.0](./0018-typography-approach-for-eds-2.md)
 - [ADR-0007: Token variable architecture (spacing & typography)](./0007-token-variable-architecture-spacing-typography.md)
 - [ADR-0011: Adopt the Tokens Studio platform token pipeline](./0011-adopt-tokens-studio-platform-pipeline.md)
 - [ADR-0013: Attribute-scoped custom properties, not `light-dark()`](./0013-attribute-scoped-custom-properties-not-light-dark.md)
