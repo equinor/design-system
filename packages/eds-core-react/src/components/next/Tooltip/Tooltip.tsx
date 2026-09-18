@@ -13,7 +13,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
     {
       title,
-      placement = 'top',
+      placement = 'bottom',
       disabled,
       children,
       className,

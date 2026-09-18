@@ -92,6 +92,14 @@ describe('Tooltip (next)', () => {
       )
     })
 
+    it('defaults to bottom placement, matching EDS 1.0', () => {
+      render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
+      expect(screen.getByRole('tooltip', { hidden: true })).toHaveAttribute(
+        'data-placement',
+        'bottom',
+      )
+    })
+
     it('adds aria-describedby on trigger pointing to tooltip id', () => {
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       const btn = screen.getByRole('button')
