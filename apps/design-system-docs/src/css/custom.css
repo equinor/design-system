@@ -384,6 +384,27 @@ nav.menu li a {
   vertical-align: middle;
 }
 
+/* Keep the primitive spacing scale in index order instead of splitting it across columns. */
+.spacing-primitive-scale {
+  max-height: 1000px;
+  overflow: auto;
+}
+
+.spacing-primitive-scale table {
+  display: table;
+  width: 100%;
+}
+
+.spacing-primitive-scale tr:has(.spacing-primitive-scale__base) {
+  background: var(--ifm-color-emphasis-200);
+  box-shadow: inset 4px 0 0 var(--ifm-color-primary);
+}
+
+.spacing-primitive-scale__base {
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 700;
+}
+
 /* ======================================
  * COLOUR MIGRATION MAP
  * ====================================== */
