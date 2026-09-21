@@ -24,11 +24,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import {
-  PENDING_ISSUE,
-  PENDING_STEPS,
-  pendingPrimitives,
-} from './pending-spacing-steps.mjs'
+import { PENDING_STEPS } from './pending-spacing-steps.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const app = join(here, '..')
@@ -142,14 +138,15 @@ const STEPS = [
   '4xl',
   '5xl',
   '6xl',
+  '7xl',
+  '8xl',
+  '9xl',
 ]
 
 /** Steps the package does not carry yet. Their values come from the primitives they point at. */
 const isPending = (step) =>
   step in PENDING_STEPS && !named.has(`spacing.${step}`)
 
-/** Marks a pending step in a table cell, so no row claims to be shipped when it is not. */
-const mark = (step) => (isPending(step) ? ' †' : '')
 const RADII = ['none', 'rounded', 'rounded-outer', 'pill']
 
 /**
@@ -169,9 +166,13 @@ const ROLES = {
   xl: 'separating sections',
   '2xl': 'page-level rhythm, in layouts rather than components',
   '3xl': 'page-level rhythm, wider than a component has a use for',
-  '4xl': 'layout: the gap between major regions of a page',
-  '5xl': 'layout: separating whole sections of a long page',
-  '6xl': 'layout: the widest step, for full-page composition',
+  '4xl': 'layout: row height, and the size of an icon button',
+  '5xl':
+    'layout: the 48px touch target, and the gap between major regions of a page',
+  '6xl': 'layout: card gutters, and the space between grouped blocks',
+  '7xl': 'layout: the gap between one section and the next',
+  '8xl': 'layout: separating whole sections of a long page',
+  '9xl': 'layout: the widest step, for full-page composition',
 }
 
 const RADIUS_ROLES = {
@@ -258,18 +259,6 @@ const primitives = [
   .map((m) => ({ index: Number(m[1]), px: Number(m[2]) }))
   .sort((a, b) => a.index - b.index)
 
-/** Which primitive steps anything in the bundle points at. The rest are defined and unused. */
-const referenced = new Set(
-  [...css.matchAll(/var\(--eds-primitives-spacing-(\d+)\)/g)].map((m) =>
-    Number(m[1]),
-  ),
-)
-
-/** Primitives pointed at only by a pending step, so the page does not call them unused. */
-const pendingRefs = new Set(
-  [...pendingPrimitives()].filter((index) => !referenced.has(index)),
-)
-
 // The page states this rule, so it is checked rather than trusted. It holds in one direction only:
 // px is the index rounded, and rounding is lossy, so four steps cannot be recovered from their px.
 for (const { index, px: value } of primitives) {
@@ -345,20 +334,12 @@ const tables = {}
 const pendingNow = STEPS.filter(isPending)
 
 tables['spacing-steps'] = [
-  '| Step | Comfortable | Reach for it when |',
+  '| Step | Comfortable | Use it when |',
   '| --- | --- | --- |',
   ...STEPS.map(
     (step) =>
-      `| \`spacing.${step}\`${mark(step)} | ${value(`spacing.${step}`, 'comfortable')} | ${ROLES[step]} |`,
+      `| \`spacing.${step}\` | ${value(`spacing.${step}`, 'comfortable')} | ${ROLES[step]} |`,
   ),
-  ...(pendingNow.length
-    ? [
-        '',
-        `\`†\` ${pendingNow.map((step) => '`' + step + '`').join(', ')} ${pendingNow.length === 1 ? 'is' : 'are'} decided and merged in Tokens Studio, but ${pendingNow.length === 1 ? 'is' : 'are'} not in`,
-        `\`@equinor/eds-tokens\` yet. The values are resolved from the primitives they point at, which do ship.`,
-        `Release tracked in [equinor/design-system#${PENDING_ISSUE}](https://github.com/equinor/design-system/issues/${PENDING_ISSUE}).`,
-      ]
-    : []),
 ]
 
 tables['radius-steps'] = [
@@ -370,30 +351,13 @@ tables['radius-steps'] = [
   ),
 ]
 
-/** The values the three densities draw from, in order. `none` is excluded: it never moves. */
-const shared = [
-  ...new Set(
-    STEPS.filter((step) => step !== 'none').flatMap((step) =>
-      DENSITIES.map((density) => px(value(`spacing.${step}`, density))),
-    ),
-  ),
-].sort((a, b) => a - b)
-
-const position = (name, density) => {
-  const found = shared.indexOf(px(value(name, density)))
-  return found === -1 ? '' : ` (${found + 1})`
-}
-
 tables['density-spacing'] = [
   '| Step | Compact | Comfortable | Relaxed |',
   '| --- | --- | --- | --- |',
   ...STEPS.map((step) => {
     const name = `spacing.${step}`
-    const cells = DENSITIES.map(
-      (density) =>
-        `${value(name, density)}${step === 'none' ? '' : position(name, density)}`,
-    )
-    return `| \`${name}\`${mark(step)} | ${cells.join(' | ')} |`
+    const cells = DENSITIES.map((density) => value(name, density))
+    return `| \`${name}\` | ${cells.join(' | ')} |`
   }),
 ]
 
@@ -406,39 +370,19 @@ tables['density-radius'] = [
   ),
 ]
 
-// Prose rather than a code block or a table: 13 values is too many columns to read across, and a
-// single-line code block scrolls sideways out of the content column.
-tables['shared-spacing-scale'] = [
-  `The ${shared.length} values the ${STEPS.length - 1} steps other than \`none\` are assigned from,`,
-  'numbered by position:',
-  '',
-  shared.map((v, i) => `**${i + 1}.** \`${v}px\``).join(' · '),
-]
-
-/** Three index/px pairs per row, so 43 steps do not become 43 screen-heights. */
-const COLUMNS = 3
-const rows = Math.ceil(primitives.length / COLUMNS)
 tables['primitive-scale'] = [
-  `| ${Array.from({ length: COLUMNS }, () => 'Index | px').join(' | ')} |`,
-  `| ${Array.from({ length: COLUMNS * 2 }, () => '---').join(' | ')} |`,
-  ...Array.from({ length: rows }, (_, row) => {
-    const cells = Array.from({ length: COLUMNS }, (_, column) => {
-      const step = primitives[column * rows + row]
-      if (!step) return ' | '
-      const marker = referenced.has(step.index)
-        ? ''
-        : pendingRefs.has(step.index)
-          ? ' †'
-          : ' *'
-      return `\`${step.index}\`${marker} | ${step.px}px`
-    })
-    return `| ${cells.join(' | ')} |`
+  '<div className="spacing-primitive-scale">',
+  '',
+  '| Index | px |',
+  '| --- | --- |',
+  ...primitives.map((step) => {
+    if (step.index === 100) {
+      return '| **`100`** | <span className="spacing-primitive-scale__base">**16px (base)**</span> |'
+    }
+    return `| \`${step.index}\` | ${step.px}px |`
   }),
   '',
-  `\`*\` marks a step nothing points at: ${primitives.filter((p) => !referenced.has(p.index) && !pendingRefs.has(p.index)).length} of ${primitives.length}.` +
-    (pendingRefs.size
-      ? ` \`†\` marks the ${pendingRefs.size} pointed at only by the steps not in the package yet.`
-      : ''),
+  '</div>',
 ]
 
 tables['token-reference'] = [
@@ -446,15 +390,6 @@ tables['token-reference'] = [
   'column is the name you pick in Figma and the **CSS custom property** column is the same token in',
   'code. Both come from the token definition itself, so they cannot drift apart. The **Comfortable**',
   'column is what you get with no `data-density` attribute set.',
-  ...(pendingNow.length
-    ? [
-        '',
-        `\`†\` marks a token that is merged in Tokens Studio but not in \`@equinor/eds-tokens\` yet, so it`,
-        'has no custom property to bind to until the next token release. The values shown are resolved',
-        'from the primitives it points at, which do ship. Tracked in',
-        `[equinor/design-system#${PENDING_ISSUE}](https://github.com/equinor/design-system/issues/${PENDING_ISSUE}).`,
-      ]
-    : []),
   '',
   '## Spacing',
   '',
@@ -464,7 +399,7 @@ tables['token-reference'] = [
   '| --- | --- | --- | --- | --- |',
   ...STEPS.map((step) => {
     const name = `spacing.${step}`
-    return `| \`${name}\`${mark(step)} | \`${cssNameOf(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
+    return `| \`${name}\` | \`${cssNameOf(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
   }),
   '',
   '## Corner radius',
@@ -508,7 +443,7 @@ tables['token-reference'] = [
   `density.${tsNames.get('spacing.md')} // ${px(value('spacing.md', 'compact'))}`,
   '```',
   '',
-  'So prefer the CSS custom properties wherever they work. Reach for the TypeScript objects only',
+  'So prefer the CSS custom properties wherever they work. Use the TypeScript objects only',
   'where they do not, and expect to handle density yourself when you do.',
 ]
 
@@ -522,12 +457,7 @@ if (problems.length) {
 
 const TARGETS = {
   'spacing.mdx': ['spacing-steps', 'radius-steps'],
-  'spacing-scale.mdx': [
-    'primitive-scale',
-    'shared-spacing-scale',
-    'density-spacing',
-    'density-radius',
-  ],
+  'spacing-scale.mdx': ['primitive-scale', 'density-spacing', 'density-radius'],
   'spacing-reference.mdx': ['token-reference'],
 }
 
@@ -579,5 +509,5 @@ console.log(
   `ok - ${written} tables across ${Object.keys(TARGETS).length} pages: ` +
     `${STEPS.length + RADII.length} named tokens resolved at ${DENSITIES.length} densities ` +
     `(${pendingNow.length} not in the package yet), ` +
-    `${primitives.length} primitive steps, ${referenced.size} of them referenced`,
+    `${primitives.length} primitive steps`,
 )

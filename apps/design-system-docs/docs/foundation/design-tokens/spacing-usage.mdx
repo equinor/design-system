@@ -1,7 +1,7 @@
 ---
 title: Using spacing
 sidebar_label: Using spacing
-description: Which step to reach for per case, worked examples with the tokens annotated, and the mistakes that survive review.
+description: Which step to use per case, worked examples with the tokens annotated, and the mistakes that survive review.
 ---
 
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
@@ -15,33 +15,26 @@ specific answers, shows the tokens on the elements themselves, and lists what te
 Every row is one of the two questions already answered. If your case is not here, the nearest row is
 usually right.
 
-| You are spacing | Use | Why |
-| --- | --- | --- |
-| a button's interior, block axis | `spacing.xs` | text needs less room above it than beside it |
-| a button's interior, inline axis | `spacing.md` | and more beside it, or the label looks off-centre |
-| an icon from its label, inside a control | `spacing.xs` | one control, two parts |
-| a chip or badge interior | `spacing.3xs` | dense by definition. `2xs` if it carries an icon |
-| an input's interior | `spacing.xs` block, `spacing.sm` inline | shorter inline than a button: the value needs to look aligned with the label above it |
-| a label from its field | `spacing.xs` | same control |
-| a field from its helper text | `spacing.4xs` | the helper belongs to the field, tighter than the label |
-| one field from the next | `spacing.sm` | related, separate |
-| one fieldset from the next | `spacing.lg` | a group boundary |
-| a card's interior | `spacing.md` | the default container padding |
-| a card's children from each other | `spacing.sm` | related items in a group |
-| a list row's interior | `spacing.sm` block, `spacing.md` inline | rows read as a stack, so the block axis stays tighter |
-| a table cell's interior | `spacing.2xs` block, `spacing.sm` inline | and then use Compact density rather than shrinking these |
-| one section from the next | `spacing.xl` | a page-level boundary |
-| one section from the next, on a long page | `spacing.5xl` | a boundary that has to read as a break in the page |
-| a page gutter | `spacing.2xl` or `spacing.3xl` | layout, outside any component |
-| one major region of a page from another | `spacing.4xl` | the gap between a sidebar and its content, or a header and the body |
-| full-page composition | `spacing.6xl` | the widest step, for the space around a whole page of content |
-
-:::info `4xl`, `5xl` and `6xl` are not published yet
-They are merged in Tokens Studio and the values are settled, but they are not in
-`@equinor/eds-tokens` until the next token release, so `var(--eds-spacing-4xl)` resolves to nothing
-today. Design with them; wait for the release before binding them in code. Tracked in
-[equinor/design-system#5487](https://github.com/equinor/design-system/issues/5487).
-:::
+| You are spacing                           | Use                                      | Why                                                                                   |
+| ----------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------- |
+| a button's interior, block axis           | `spacing.xs`                             | text needs less room above it than beside it                                          |
+| a button's interior, inline axis          | `spacing.md`                             | and more beside it, or the label looks off-centre                                     |
+| an icon from its label, inside a control  | `spacing.xs`                             | one control, two parts                                                                |
+| a chip or badge interior                  | `spacing.3xs`                            | dense by definition. `2xs` if it carries an icon                                      |
+| an input's interior                       | `spacing.xs` block, `spacing.sm` inline  | shorter inline than a button: the value needs to look aligned with the label above it |
+| a label from its field                    | `spacing.xs`                             | same control                                                                          |
+| a field from its helper text              | `spacing.4xs`                            | the helper belongs to the field, tighter than the label                               |
+| one field from the next                   | `spacing.sm`                             | related, separate                                                                     |
+| one fieldset from the next                | `spacing.lg`                             | a group boundary                                                                      |
+| a card's interior                         | `spacing.md`                             | the default container padding                                                         |
+| a card's children from each other         | `spacing.sm`                             | related items in a group                                                              |
+| a list row's interior                     | `spacing.sm` block, `spacing.md` inline  | rows read as a stack, so the block axis stays tighter                                 |
+| a table cell's interior                   | `spacing.2xs` block, `spacing.sm` inline | and then use Compact density rather than shrinking these                              |
+| one section from the next                 | `spacing.xl`                             | a page-level boundary                                                                 |
+| one section from the next, on a long page | `spacing.8xl`                            | a boundary that has to read as a break in the page                                    |
+| a page gutter                             | `spacing.2xl` or `spacing.3xl`           | layout, outside any component                                                         |
+| one major region of a page from another   | `spacing.5xl`                            | the gap between a sidebar and its content, or a header and the body                   |
+| full-page composition                     | `spacing.9xl`                            | the widest step, for the space around a whole page of content                         |
 
 ## Worked examples
 
@@ -107,7 +100,8 @@ different gaps, each one a statement about what belongs to what:
   <span
     style={{
       background: 'var(--eds-background-input)',
-      borderBottom: '1px solid var(--eds-border-non-interactive-neutral-default)',
+      borderBottom:
+        '1px solid var(--eds-border-non-interactive-neutral-default)',
       padding: 'var(--eds-spacing-xs) var(--eds-spacing-sm)',
     }}
   >
@@ -116,10 +110,18 @@ different gaps, each one a statement about what belongs to what:
 </TokenAnatomy>
 
 ```css
-.field        { gap: var(--eds-spacing-xs); }   /* label to input        */
-.field__help  { margin-top: var(--eds-spacing-4xs); }  /* input to helper text  */
-.fieldset     { gap: var(--eds-spacing-sm); }   /* field to field        */
-.form         { gap: var(--eds-spacing-lg); }   /* fieldset to fieldset  */
+.field {
+  gap: var(--eds-spacing-xs);
+} /* label to input        */
+.field__help {
+  margin-top: var(--eds-spacing-4xs);
+} /* input to helper text  */
+.fieldset {
+  gap: var(--eds-spacing-sm);
+} /* field to field        */
+.form {
+  gap: var(--eds-spacing-lg);
+} /* fieldset to fieldset  */
 ```
 
 Four steps for four levels of relatedness, and they are not interchangeable. Setting all four to
@@ -149,7 +151,7 @@ Figma has no `outline-offset`. A ring there is a separate rectangle behind the e
 its radius set explicitly, one step larger than the element it surrounds. `corner-radius.rounded-outer`
 is that value, which is why it is `rounded` plus 1px: the same 1px the CSS offset adds.
 
-So the token is a workaround for one tool, rather than a radius with a design meaning. Do not reach
+So the token is a workaround for one tool, rather than a radius with a design meaning. Do not use
 for it in code, and do not use it for nested containers. If a container around a rounded child needs
 a particular corner, set that corner.
 
@@ -162,21 +164,39 @@ spacing token in it is re-picked:
   <table style={{ margin: 0, display: 'table', width: '100%' }}>
     <thead>
       <tr>
-        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Well</th>
-        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Status</th>
-        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Depth</th>
+        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          Well
+        </th>
+        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          Status
+        </th>
+        <th style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          Depth
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>31/2-A-14</td>
-        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Producing</td>
-        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>2 940 m</td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          31/2-A-14
+        </td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          Producing
+        </td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          2 940 m
+        </td>
       </tr>
       <tr>
-        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>31/2-B-07</td>
-        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>Shut in</td>
-        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>3 120 m</td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          31/2-B-07
+        </td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          Shut in
+        </td>
+        <td style={{ padding: 'var(--eds-spacing-2xs) var(--eds-spacing-sm)' }}>
+          3 120 m
+        </td>
       </tr>
     </tbody>
   </table>
@@ -184,7 +204,9 @@ spacing token in it is re-picked:
 
 ```html
 <section data-density="compact">
-  <table>…</table>
+  <table>
+    …
+  </table>
 </section>
 ```
 
@@ -208,22 +230,22 @@ a normal thing to want. Two cautions:
 Measured by variable bindings across the six component pages of the EDS Core Components Figma file,
 in descending order of use:
 
-| Step | Use in components |
-| --- | --- |
-| `corner-radius.rounded`, `corner-radius.pill` | the two most-bound tokens in the whole system |
-| `spacing.xs`, `spacing.3xs` | very heavily: control interiors and the icon-to-label gap |
-| `spacing.sm`, `spacing.md` | heavily: padding, and gaps between related items |
-| `spacing.lg` | moderately, and mostly as a fixed size rather than as padding |
-| `corner-radius.rounded-outer` | focus rings, in the Figma file only |
-| `spacing.2xs`, `spacing.4xs`, `spacing.none` | fine adjustment inside controls |
-| `spacing.xl` | lightly: section separation |
-| `spacing.2xl`, `spacing.3xl` | not bound by any component yet |
-| `spacing.4xl`, `spacing.5xl`, `spacing.6xl` | added for layout, so no component binding is expected |
+| Step                                          | Use in components                                             |
+| --------------------------------------------- | ------------------------------------------------------------- |
+| `corner-radius.rounded`, `corner-radius.pill` | the two most-bound tokens in the whole system                 |
+| `spacing.xs`, `spacing.3xs`                   | very heavily: control interiors and the icon-to-label gap     |
+| `spacing.sm`, `spacing.md`                    | heavily: padding, and gaps between related items              |
+| `spacing.lg`                                  | moderately, and mostly as a fixed size rather than as padding |
+| `corner-radius.rounded-outer`                 | focus rings, in the Figma file only                           |
+| `spacing.2xs`, `spacing.4xs`, `spacing.none`  | fine adjustment inside controls                               |
+| `spacing.xl`                                  | lightly: section separation                                   |
+| `spacing.2xl`, `spacing.3xl`                  | not bound by any component yet                                |
+| `spacing.4xl` through `spacing.9xl`           | added for layout, so no component binding is expected         |
 
 The zeros at the bottom of that table say more about the work done so far than about the tokens.
 The team has been building **components**, not patterns and layout, so the file has little for a
-page-level step to bind to. The five widest steps are for the grid, page gutters, the space between
-regions and the separation between sections, and that work is still ahead. `4xl` through `6xl` were
+page-level step to bind to. The eight widest steps are for the grid, page gutters, the space between
+regions and the separation between sections, and that work is still ahead. `4xl` through `9xl` were
 added for it.
 
 :::note What this table measures
@@ -252,7 +274,7 @@ read it as what is common in component work today, not as a rule about where a s
 - Use a spacing token for a component's height. Height falls out of type size plus padding
 - Use a spacing token for icon size. They resolve to the same values today, so it works, and it
   breaks silently the day icon sizing changes
-- Reach for `corner-radius.rounded-outer`. It exists for Figma's focus rings, not for code
+- Use `corner-radius.rounded-outer`. It exists for Figma's focus rings, not for code
 - Space everything equally. If every gap is `md`, nothing is grouped
 
 :::

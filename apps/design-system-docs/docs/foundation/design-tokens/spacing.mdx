@@ -1,19 +1,23 @@
 ---
 title: Spacing
 sidebar_label: Overview
-description: Fourteen named steps, applied directly as padding, gap and margin. Which one to reach for, and why the numbers are published.
+description: Seventeen named steps for padding, gap and margin. Which one to use, and why we publish the numbers.
 ---
 
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
 
-Spacing in EDS is fourteen named steps and nothing else. You apply them directly to `padding`,
-`gap` and `margin`, and the value you get depends on the density the element sits in. Eleven of
-them are for components and the widest three are for layout.
+Spacing in EDS consists of seventeen named steps. You apply them straight to
+`padding`, `gap` and `margin`, and the value you get follows the density the element sits in.
+Eleven of the steps are sized for the inside of components, and the widest six are for page
+layout.
 
-These pages document the **3.0.0-beta** spacing tokens. The names are new and so are the values, so
-if you are on EDS 1.x or on 2.0.0-beta, see [coming from an earlier version](#coming-from-an-earlier-version).
+We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
 
-A card's own geometry is three tokens:
+These pages cover the EDS 2.0 spacing tokens. Both the names and the values are new, so if
+you are working in EDS 1.x or an earlier 2.0 version, please start with
+[coming from an earlier version](#coming-from-an-earlier-version).
+
+Here is a card, with its whole geometry described by three tokens:
 
 <TokenAnatomy
   mode="spacing"
@@ -44,96 +48,90 @@ A card's own geometry is three tokens:
 }
 ```
 
-## The fourteen steps
+## The spacing steps
 
 {/* GEN:spacing-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
-| Step | Comfortable | Reach for it when |
-| --- | --- | --- |
-| `spacing.none` | 0px | removing space on purpose. Better than `0`, because it survives a density change |
-| `spacing.4xs` | 2px | hairline separation, and nudging an icon off its text |
-| `spacing.3xs` | 4px | padding inside dense controls: chips, badges, tags |
-| `spacing.2xs` | 6px | tight control padding |
-| `spacing.xs` | 8px | the default gap between a control's own parts, such as an icon and its label |
-| `spacing.sm` | 12px | the default gap between related items in a group |
-| `spacing.md` | 16px | **the default container padding. Start here** |
-| `spacing.lg` | 20px | separating groups inside a container |
-| `spacing.xl` | 24px | separating sections |
-| `spacing.2xl` | 28px | page-level rhythm, in layouts rather than components |
-| `spacing.3xl` | 32px | page-level rhythm, wider than a component has a use for |
-| `spacing.4xl` † | 48px | layout: the gap between major regions of a page |
-| `spacing.5xl` † | 96px | layout: separating whole sections of a long page |
-| `spacing.6xl` † | 128px | layout: the widest step, for full-page composition |
-
-`†` `4xl`, `5xl`, `6xl` are decided and merged in Tokens Studio, but are not in
-`@equinor/eds-tokens` yet. The values are resolved from the primitives they point at, which do ship.
-Release tracked in [equinor/design-system#5487](https://github.com/equinor/design-system/issues/5487).
+| Step           | Comfortable | Use it when                                                                      |
+| -------------- | ----------- | -------------------------------------------------------------------------------- |
+| `spacing.none` | 0px         | removing space on purpose. Better than `0`, because it survives a density change |
+| `spacing.4xs`  | 2px         | hairline separation, and nudging an icon off its text                            |
+| `spacing.3xs`  | 4px         | padding inside dense controls: chips, badges, tags                               |
+| `spacing.2xs`  | 6px         | tight control padding                                                            |
+| `spacing.xs`   | 8px         | the default gap between a control's own parts, such as an icon and its label     |
+| `spacing.sm`   | 12px        | the default gap between related items in a group                                 |
+| `spacing.md`   | 16px        | **the default container padding. Start here**                                    |
+| `spacing.lg`   | 20px        | separating groups inside a container                                             |
+| `spacing.xl`   | 24px        | separating sections                                                              |
+| `spacing.2xl`  | 28px        | page-level rhythm, in layouts rather than components                             |
+| `spacing.3xl`  | 32px        | page-level rhythm, wider than a component has a use for                          |
+| `spacing.4xl`  | 40px        | layout: row height, and the size of an icon button                               |
+| `spacing.5xl`  | 48px        | layout: the 48px touch target, and the gap between major regions of a page       |
+| `spacing.6xl`  | 64px        | layout: card gutters, and the space between grouped blocks                       |
+| `spacing.7xl`  | 80px        | layout: the gap between one section and the next                                 |
+| `spacing.8xl`  | 96px        | layout: separating whole sections of a long page                                 |
+| `spacing.9xl`  | 128px       | layout: the widest step, for full-page composition                               |
 
 {/* GEN:spacing-steps END */}
 
-Values shown are Comfortable, which is the default. They all move together when the density
-changes, and the names stay put. [The scale](./spacing-scale.mdx) has every value.
-
-:::info Why the numbers are published
-2.x hid the values behind abstract names, and the most common complaint was not knowing what
-`Medium` meant. You should be able to read `spacing.md` = 16px off this page and off the Figma
-variable without opening a generator or a browser inspector.
-:::
+Every value in the table is Comfortable, our default density. The steps move together when the
+density changes and the names stay put, so you can pick a name once and trust it to behave.
+[The scale](./spacing-scale.mdx) lists every value.
 
 ## Choosing a step
 
-Two questions, in order. They are worth answering in this order because the second one is the one
-that keeps a layout consistent across pages.
+Two questions, in this order. The second one is what keeps a layout consistent from page to page,
+so it is worth answering even when the first feels obvious.
 
 ### 1. Is this inside a component, or between components?
 
 - **Inside** a component: `4xs` through `xs`. A control's own interior, such as the gap between an
-  icon and its label, a chip's padding, or a checkbox's offset from its text.
-- **Between** components: `sm` and up. Layout space, such as gaps in a list, padding on a card, or
-  the separation between two sections.
+  icon and its label, the padding in a chip, or a checkbox's offset from its text.
+- **Between** components: `sm` and up. Layout space, such as the gaps in a list, the padding on a
+  card, or the separation between two sections.
 
 ### 2. How closely related are the two things?
 
-Space is the main signal of grouping, so distance should track relatedness:
+Space is our main signal of grouping, so let distance track relatedness:
 
-| Relationship | Step |
-| --- | --- |
+| Relationship                                            | Step |
+| ------------------------------------------------------- | ---- |
 | two parts of one control, such as an icon and its label | `xs` |
-| two labels in the same field | `xs` |
-| two fields in the same fieldset | `sm` |
-| two fieldsets in the same form | `lg` |
-| two sections on a page | `xl` |
+| two labels in the same field                            | `xs` |
+| two fields in the same fieldset                         | `sm` |
+| two fieldsets in the same form                          | `lg` |
+| two sections on a page                                  | `xl` |
 
-The failure this avoids is picking by how it looks on the screen in front of you, which is how you
-end up with `sm` between two sections on one page and `xl` between the same two on another. Pick by
-relationship and consistency comes for free.
+Choosing by relationship, rather than by how the gap looks on the screen in front of you, is what
+keeps two sections the same distance apart on every page in a product. It also makes a design
+easier to hand over, because the next person can read the intent in the token name.
 
 [Using spacing](./spacing-usage.mdx) has worked examples, a per-case decision table, and the
 mistakes that tend to survive review.
 
 ## Corner radius travels with spacing
 
-Corner radius is in the same density collection, so a compact component gets tighter corners
-without you asking for it.
+Corner radius sits in the same density collection as spacing, so a compact component gets tighter
+corners without anyone having to ask for it.
 
 {/* GEN:radius-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
-| Token | Comfortable | Use for |
-| --- | --- | --- |
-| `corner-radius.none` | 0px | full-bleed edges and table cells |
-| `corner-radius.rounded` | 4px | the default: buttons, inputs, chips |
-| `corner-radius.rounded-outer` | 5px | nothing, in code. It exists so Figma can draw the focus ring, which CSS derives from `outline-offset` |
-| `corner-radius.pill` | 9999px | fully round ends: pills, avatars, toggles |
+| Token                         | Comfortable | Use for                                                                                               |
+| ----------------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
+| `corner-radius.none`          | 0px         | full-bleed edges and table cells                                                                      |
+| `corner-radius.rounded`       | 4px         | the default: buttons, inputs, chips                                                                   |
+| `corner-radius.rounded-outer` | 5px         | nothing, in code. It exists so Figma can draw the focus ring, which CSS derives from `outline-offset` |
+| `corner-radius.pill`          | 9999px      | fully round ends: pills, avatars, toggles                                                             |
 
 {/* GEN:radius-steps END */}
 
 `pill` is a sentinel rather than a measurement. It is large enough that the browser clamps it to
 half the element's height, which is what "fully round" means at any size.
 
-:::warning `rounded-outer` is not a token to reach for
-It exists for one reason: Figma has no equivalent of `outline-offset`, so a focus ring drawn in
-Figma needs an explicit radius one step larger than the element it surrounds. That is what
-`rounded-outer` supplies, and the Figma components use it for exactly that.
+:::warning `rounded-outer` is not a token to use
+It exists for one reason. Figma has no equivalent of `outline-offset`, so a focus ring drawn in
+Figma needs an explicit radius one step larger than the element it surrounds. `rounded-outer`
+supplies that number, and the Figma components use it for exactly that.
 
 In code you do not need it. A focus ring is an `outline` with an `outline-offset`, and the browser
 derives the outer curve from the element's own `border-radius` plus the offset. A 4px corner with a
@@ -147,65 +145,67 @@ derives the outer curve from the element's own `border-radius` plus the offset. 
 }
 ```
 
-The widths are literals because the redefined set has no stroke-width token. `border.interactive.focus`
-carries the colour and nothing carries the thickness, so that is one to raise if it matters to you.
+The widths above are literals because the redefined set has no stroke-width token.
+`border.interactive.focus` carries the colour and nothing yet carries the thickness, so that is a
+good one to raise with us if your work depends on it.
 
-No EDS component binds `--eds-corner-radius-rounded-outer`, and there is no case where you should
-need to. If you find yourself wanting it for nested containers, set the radius you mean on each
-element instead.
+No EDS component binds `--eds-corner-radius-rounded-outer`, and we have not found a case that needs
+it. If you want it for nested containers, set the radius you mean on each element instead.
 :::
 
 ## Density
 
 One attribute resizes the interface. It moves spacing, corner radius and type size together, by one
-position each, so proportions hold:
+position each, so the proportions you designed hold:
 
 ```html
 <div data-density="compact">…</div>
 ```
 
-| Density | Attribute | Use it for |
-| --- | --- | --- |
-| **Compact** | `data-density="compact"` | dense data: tables, monitoring, dashboards, anything where more rows on screen beats more air |
-| **Comfortable** | *(none, this is the default)* | ordinary application UI. If you are not sure, this is the answer |
-| **Relaxed** | `data-density="relaxed"` | touch and mobile, and reading-heavy pages where targets need to be larger |
+| Density         | Attribute                     | Use it for                                                                              |
+| --------------- | ----------------------------- | --------------------------------------------------------------------------------------- |
+| **Compact**     | `data-density="compact"`      | dense data: tables, monitoring, dashboards, anywhere more rows on screen beats more air |
+| **Comfortable** | _(none, this is the default)_ | ordinary application UI. If you are unsure, this is the answer                          |
+| **Relaxed**     | `data-density="relaxed"`      | touch and mobile, and reading-heavy pages where targets need to be larger               |
 
 Comfortable is emitted at `:root` rather than behind a selector, so setting nothing gives you
-Comfortable. `data-density="comfortable"` is allowed and does no harm.
+Comfortable. Writing `data-density="comfortable"` is allowed and does no harm.
 
 :::warning `spacious` no longer exists
-2.x had a `spacious` density. Its replacement is **Relaxed**. `data-density="spacious"` fails
-silently: no error, and you get Comfortable. Search your codebase for it.
+2.x had a `spacious` density, and **Relaxed** replaces it. `data-density="spacious"` fails
+silently: no error, and you get Comfortable. It is worth a search through your codebase.
 :::
 
-Density is not a multiplier and not a `transform: scale()`. [How density works](./spacing-scale.mdx#how-density-works)
-covers what it does instead, and why `Compact` is not `Comfortable` × 0.75.
+Density is not a multiplier, and not a `transform: scale()`.
+[How density works](./spacing-scale.mdx#how-density-works) covers what it does instead, and why
+Compact is not Comfortable × 0.75.
 
 ## Coming from an earlier version
 
 Both earlier generations used a different set of names, and neither maps cleanly onto the current
 steps:
 
-- **EDS 1.x** had eight t-shirt spacers on an 8px grid, with `XX Small` and `X Small` reserved for
+- **EDS 1.x** had eight t-shirt spacers on an 8px grid, with `XX Small` and `X Small` kept for
   component interiors.
 - **2.0.0-beta** split spacing by direction and by component role, with families such as
   `generic-space-*`, `generic-gap-*` and `selectable-space-*`.
 
-Direction is a CSS property now, not part of the token name, so `Space vertical` and
+Direction is a CSS property now rather than part of the token name, so `Space vertical` and
 `Space horizontal` both become one step applied to the property you mean. Component-specific
 spacing is gone for the same reason colour lost its component tokens: a card and a table row that
-happen to share a value should not share a name.
+happen to share a value should not have to share a name.
 
-:::note The mapping table is not written yet
-The old-name to new-name mapping needs the 2.x families resolved against the current steps first,
-which is tracked in [equinor/design-system#5121](https://github.com/equinor/design-system/issues/5121).
-Until then, re-pick by the two questions above rather than by matching the old value.
+:::note The mapping table is still to come
+Mapping the old names onto the new ones needs the 2.x families resolved against the current steps
+first, which is tracked in
+[equinor/design-system#5121](https://github.com/equinor/design-system/issues/5121). Until it is
+ready, please re-pick with the two questions above rather than by matching the old value.
 :::
 
 ## Where to go next
 
 - [The scale](./spacing-scale.mdx): the primitive scale under the names, how density maps onto it,
   and what it takes to add a step.
-- [Using spacing](./spacing-usage.mdx): worked examples, what components actually use, and the
+- [Using spacing](./spacing-usage.mdx): worked examples, what our components use today, and the
   mistakes to avoid.
 - [Token reference](./spacing-reference.mdx): every token and every value, in all three densities.

@@ -10,43 +10,77 @@ steps are the sizes they are and to make a case for adding one.
 
 ## The primitive scale
 
-One scale, indexed so that **step `100` is 16px**. The index is hundredths of the 16px root, so the
-px value is:
+The scale starts from one base: **index `100` equals 16px**. Every other index expresses a fraction
+or multiple of that base. For example, `50` is half the base and resolves to 8px, while `200` is
+twice the base and resolves to 32px.
+
+The index is measured in hundredths of the 16px base, so the px value is:
 
 ```
 px = round(index × 0.16)
 ```
 
-That is `25` for 4px, `100` for 16px, `200` for 32px. It is also why the low end has awkward names:
-1px is `6`, not `1`.
+The highlighted `100` / 16px row is the base for the whole scale. The rounding in the formula is why
+the low end has awkward indices: 1px is `6`, not `1`.
 
-:::note The rule only works in that direction
-Rounding is lossy, so you cannot recover the index from the px. Four steps round into their
-neighbours: 2px, 6px, 10px and 14px are `12`, `37`, `62` and `87`, not `13`, `38`, `63` and `88`.
-Read the table rather than calculating backwards.
+:::note Convert an index to pixels, not pixels to an index
+The formula tells you the pixel value of a known index. It cannot tell you which index the scale
+uses for a known pixel value, because more than one index can round to the same number. For example,
+both `12 × 0.16` and `13 × 0.16` round to 2px, but this scale defines 2px as index `12`. Use the table
+to look up an index from a pixel value.
 :::
 
 {/* GEN:primitive-scale BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
-| Index | px | Index | px | Index | px |
-| --- | --- | --- | --- | --- | --- |
-| `0` | 0px | `225` | 36px | `1000` * | 160px |
-| `6` | 1px | `250` | 40px | `1100` * | 176px |
-| `12` | 2px | `275` † | 44px | `1200` * | 192px |
-| `19` * | 3px | `300` † | 48px | `1300` * | 208px |
-| `25` | 4px | `325` † | 52px | `1400` * | 224px |
-| `37` | 6px | `350` * | 56px | `1500` * | 240px |
-| `50` | 8px | `375` * | 60px | `1600` * | 256px |
-| `62` | 10px | `400` * | 64px | `1700` * | 272px |
-| `75` | 12px | `450` * | 72px | `1800` * | 288px |
-| `87` * | 14px | `500` * | 80px | `1900` * | 304px |
-| `100` | 16px | `550` † | 88px | `2000` * | 320px |
-| `125` | 20px | `600` † | 96px | `2100` * | 336px |
-| `150` | 24px | `700` † | 112px | `2200` * | 352px |
-| `175` | 28px | `800` † | 128px |  |  |
-| `200` | 32px | `900` † | 144px |  |  |
+<div className="spacing-primitive-scale">
 
-`*` marks a step nothing points at: 20 of 43. `†` marks the 8 pointed at only by the steps not in the package yet.
+| Index     | px                                                                     |
+| --------- | ---------------------------------------------------------------------- |
+| `0`       | 0px                                                                    |
+| `6`       | 1px                                                                    |
+| `12`      | 2px                                                                    |
+| `19`      | 3px                                                                    |
+| `25`      | 4px                                                                    |
+| `37`      | 6px                                                                    |
+| `50`      | 8px                                                                    |
+| `62`      | 10px                                                                   |
+| `75`      | 12px                                                                   |
+| `87`      | 14px                                                                   |
+| **`100`** | <span className="spacing-primitive-scale__base">**16px (base)**</span> |
+| `125`     | 20px                                                                   |
+| `150`     | 24px                                                                   |
+| `175`     | 28px                                                                   |
+| `200`     | 32px                                                                   |
+| `225`     | 36px                                                                   |
+| `250`     | 40px                                                                   |
+| `275`     | 44px                                                                   |
+| `300`     | 48px                                                                   |
+| `325`     | 52px                                                                   |
+| `350`     | 56px                                                                   |
+| `375`     | 60px                                                                   |
+| `400`     | 64px                                                                   |
+| `450`     | 72px                                                                   |
+| `500`     | 80px                                                                   |
+| `550`     | 88px                                                                   |
+| `600`     | 96px                                                                   |
+| `700`     | 112px                                                                  |
+| `800`     | 128px                                                                  |
+| `900`     | 144px                                                                  |
+| `1000`    | 160px                                                                  |
+| `1100`    | 176px                                                                  |
+| `1200`    | 192px                                                                  |
+| `1300`    | 208px                                                                  |
+| `1400`    | 224px                                                                  |
+| `1500`    | 240px                                                                  |
+| `1600`    | 256px                                                                  |
+| `1700`    | 272px                                                                  |
+| `1800`    | 288px                                                                  |
+| `1900`    | 304px                                                                  |
+| `2000`    | 320px                                                                  |
+| `2100`    | 336px                                                                  |
+| `2200`    | 352px                                                                  |
+
+</div>
 
 {/* GEN:primitive-scale END */}
 
@@ -57,73 +91,40 @@ Read the table rather than calculating backwards.
 - **From 16px up** it is a 4px grid to 64px, then 8px to 96px, then 16px to 352px. Layout territory,
   where precision below 4px is noise.
 
-### Much of the scale is unused
-
-Most primitive steps are pointed at by nothing, which the table above marks. Three things explain
-the pattern:
-
-- **The scale is shared with line height.** Eleven line-height primitives are aliases of spacing
-  primitives, which is why `250` (40px) is in use even though no spacing step is 40px.
-- **The layout steps reach further up than the component steps.** `4xl` through `6xl` are what
-  point at `275` through `900`. Before they were added, nothing above 40px was referenced at all.
-- **The top of the scale is provision, not product.** Above `900` (144px) nothing is referenced.
-  Defining those steps costs nothing, and it means a layout token added later does not need a new
-  primitive underneath it.
-
-Three steps sit inside the used range and are pointed at by no spacing token: `19` (3px), `87`
-(14px) and `250` (40px), the last of which line height uses. Leaving them out of the assignment is
-deliberate, and it is what makes density move evenly. See below.
-
 ## How density works
 
 Each density is a **distinct assignment** of the names to primitive steps. It is not a
 multiplier, not a `transform: scale()`, and `Compact` is not `Comfortable` × 0.75.
 
-The rule is simpler than a multiplier would be: **there is one shared set of values, and each
-density starts one position further along it.**
-
-{/* GEN:shared-spacing-scale BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
-
-The 21 values the 13 steps other than `none` are assigned from,
-numbered by position:
-
-**1.** `1px` · **2.** `2px` · **3.** `4px` · **4.** `6px` · **5.** `8px` · **6.** `10px` · **7.** `12px` · **8.** `16px` · **9.** `20px` · **10.** `24px` · **11.** `28px` · **12.** `32px` · **13.** `36px` · **14.** `44px` · **15.** `48px` · **16.** `52px` · **17.** `88px` · **18.** `96px` · **19.** `112px` · **20.** `128px` · **21.** `144px`
-
-{/* GEN:shared-spacing-scale END */}
-
-Every name moves exactly one position between densities. The number in brackets below is the
-position each value occupies in that set, so reading across a row gives you three consecutive
-numbers, on every row:
+Each spacing name maps to a smaller primitive in Compact and a larger primitive in Relaxed. The
+table shows those assignments directly:
 
 {/* GEN:density-spacing BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
-| Step | Compact | Comfortable | Relaxed |
-| --- | --- | --- | --- |
-| `spacing.none` | 0px | 0px | 0px |
-| `spacing.4xs` | 1px (1) | 2px (2) | 4px (3) |
-| `spacing.3xs` | 2px (2) | 4px (3) | 6px (4) |
-| `spacing.2xs` | 4px (3) | 6px (4) | 8px (5) |
-| `spacing.xs` | 6px (4) | 8px (5) | 10px (6) |
-| `spacing.sm` | 10px (6) | 12px (7) | 16px (8) |
-| `spacing.md` | 12px (7) | 16px (8) | 20px (9) |
-| `spacing.lg` | 16px (8) | 20px (9) | 24px (10) |
-| `spacing.xl` | 20px (9) | 24px (10) | 28px (11) |
-| `spacing.2xl` | 24px (10) | 28px (11) | 32px (12) |
-| `spacing.3xl` | 28px (11) | 32px (12) | 36px (13) |
-| `spacing.4xl` † | 44px (14) | 48px (15) | 52px (16) |
-| `spacing.5xl` † | 88px (17) | 96px (18) | 112px (19) |
-| `spacing.6xl` † | 112px (19) | 128px (20) | 144px (21) |
+| Step           | Compact | Comfortable | Relaxed |
+| -------------- | ------- | ----------- | ------- |
+| `spacing.none` | 0px     | 0px         | 0px     |
+| `spacing.4xs`  | 1px     | 2px         | 4px     |
+| `spacing.3xs`  | 2px     | 4px         | 6px     |
+| `spacing.2xs`  | 4px     | 6px         | 8px     |
+| `spacing.xs`   | 6px     | 8px         | 10px    |
+| `spacing.sm`   | 10px    | 12px        | 16px    |
+| `spacing.md`   | 12px    | 16px        | 20px    |
+| `spacing.lg`   | 16px    | 20px        | 24px    |
+| `spacing.xl`   | 20px    | 24px        | 28px    |
+| `spacing.2xl`  | 24px    | 28px        | 32px    |
+| `spacing.3xl`  | 28px    | 32px        | 36px    |
+| `spacing.4xl`  | 36px    | 40px        | 44px    |
+| `spacing.5xl`  | 44px    | 48px        | 52px    |
+| `spacing.6xl`  | 60px    | 64px        | 72px    |
+| `spacing.7xl`  | 72px    | 80px        | 88px    |
+| `spacing.8xl`  | 88px    | 96px        | 112px   |
+| `spacing.9xl`  | 112px   | 128px       | 144px   |
 
 {/* GEN:density-spacing END */}
 
-This is where the skipped primitives come in. `19` (3px), `87` (14px) and `250` (40px) exist on the
-primitive scale but are left out of the set the names are assigned from, because including them
-would make some names move one position and others two. `spacing.none` is the one name that does
-not move at all, since there is nothing below zero.
-
-The set is not evenly spaced, and it does not need to be. What has to hold is that consecutive
-members are one position apart, so `5xl` going 88 to 96 to 112px is as regular, in the terms that
-matter here, as `md` going 12 to 16 to 20px.
+Some primitive values are not assigned to a spacing name. The difference between densities grows
+with the scale, from a few pixels for smaller steps to as much as 16px for larger steps.
 
 ### Corner radius
 
@@ -131,19 +132,19 @@ Same collection, same one-position-per-density behaviour:
 
 {/* GEN:density-radius BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
-| Token | Compact | Comfortable | Relaxed |
-| --- | --- | --- | --- |
-| `corner-radius.none` | 0px | 0px | 0px |
-| `corner-radius.rounded` | 2px | 4px | 6px |
-| `corner-radius.rounded-outer` | 3px | 5px | 7px |
-| `corner-radius.pill` | 9999px | 9999px | 9999px |
+| Token                         | Compact | Comfortable | Relaxed |
+| ----------------------------- | ------- | ----------- | ------- |
+| `corner-radius.none`          | 0px     | 0px         | 0px     |
+| `corner-radius.rounded`       | 2px     | 4px         | 6px     |
+| `corner-radius.rounded-outer` | 3px     | 5px         | 7px     |
+| `corner-radius.pill`          | 9999px  | 9999px      | 9999px  |
 
 {/* GEN:density-radius END */}
 
 `rounded-outer` is not an independent value. It is defined as `rounded` plus 1px, so it follows
 `rounded` at every density without being maintained separately. The plus-1px mirrors the 1px
 `outline-offset` a focus ring uses in CSS, which is the only thing the token is for. See
-[why not to reach for it](./spacing.mdx#corner-radius-travels-with-spacing).
+[why not to use it](./spacing.mdx#corner-radius-travels-with-spacing).
 
 ## The cascade, end to end
 
