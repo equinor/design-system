@@ -1,12 +1,12 @@
 ---
 title: The spacing scale
 sidebar_label: The scale
-description: The primitive scale under the named steps, how each density maps onto it, and what it takes to add a step.
+description: The primitive scale under the named steps and how each density maps onto it.
 ---
 
 Background for the named steps in [Overview](./spacing.mdx). You do not use the primitive scale
 directly, and it is hidden from the Figma variable picker, but you need it to understand why the
-steps are the sizes they are and to make a case for adding one.
+steps are the sizes they are.
 
 ## The primitive scale
 
@@ -146,37 +146,7 @@ Same collection, same one-position-per-density behaviour:
 `outline-offset` a focus ring uses in CSS, which is the only thing the token is for. See
 [why not to use it](./spacing.mdx#corner-radius-travels-with-spacing).
 
-## The cascade, end to end
+## Where to go next
 
-```
-spacing.md                     semantic     ← you use this
-  → density.spacing.md         density      ← the active density supplies it
-    → primitives.spacing.100   primitive    ← 16px
-```
-
-Three hops, one direction. A semantic spacing token never points at another semantic token, and
-nothing points back up. In CSS the same chain is:
-
-```css
---eds-spacing-md: var(--eds-density-spacing-md);
---eds-density-spacing-md: var(--eds-primitives-spacing-100);
---eds-primitives-spacing-100: 16px;
-```
-
-Bind to the first of those three. The density layer is an implementation detail of the density
-switch, and the primitive layer is not published to the Figma picker at all.
-
-## Adding a step
-
-Two things a proposal has to answer.
-
-1. **What relationship do the existing steps not express?** The case has to be about a pairing,
-   not about one screen. "`sm` is slightly too tight here" is an argument for using `md`, not for
-   a new name.
-2. **What is the value in all three densities?** A new name needs one position in the shared set
-   per density, which is what keeps it in step with everything else. At the low end that is the
-   binding constraint, since Compact already starts at 1px.
-
-Neither question is a bar against growth. Steps get added when the work reaches a scale the set
-does not cover yet, and the layout end of the scale is where that happens: the steps above `3xl`
-exist for page-level spacing, which is newer work than the components.
+- [Using spacing](./spacing-usage.mdx): guidance and examples for choosing a spacing step.
+- [Token reference](./spacing-reference.mdx): every token and value in all three densities.
