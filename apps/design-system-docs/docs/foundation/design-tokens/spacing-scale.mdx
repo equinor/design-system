@@ -1,0 +1,152 @@
+---
+title: The spacing scale
+sidebar_label: The scale
+description: The primitive scale under the named steps and how each density maps onto it.
+---
+
+Background for the named steps in [Overview](./spacing.mdx). You do not use the primitive scale
+directly, and it is hidden from the Figma variable picker, but you need it to understand why the
+steps are the sizes they are.
+
+## The primitive scale
+
+The scale starts from one base: **index `100` equals 16px**. Every other index expresses a fraction
+or multiple of that base. For example, `50` is half the base and resolves to 8px, while `200` is
+twice the base and resolves to 32px.
+
+The index is measured in hundredths of the 16px base, so the px value is:
+
+```
+px = round(index × 0.16)
+```
+
+The highlighted `100` / 16px row is the base for the whole scale. The rounding in the formula is why
+the low end has awkward indices: 1px is `6`, not `1`.
+
+:::note Convert an index to pixels, not pixels to an index
+The formula tells you the pixel value of a known index. It cannot tell you which index the scale
+uses for a known pixel value, because more than one index can round to the same number. For example,
+both `12 × 0.16` and `13 × 0.16` round to 2px, but this scale defines 2px as index `12`. Use the table
+to look up an index from a pixel value.
+:::
+
+{/* GEN:primitive-scale BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+<div className="spacing-primitive-scale">
+
+| Index     | px                                                                     |
+| --------- | ---------------------------------------------------------------------- |
+| `0`       | 0px                                                                    |
+| `6`       | 1px                                                                    |
+| `12`      | 2px                                                                    |
+| `19`      | 3px                                                                    |
+| `25`      | 4px                                                                    |
+| `37`      | 6px                                                                    |
+| `50`      | 8px                                                                    |
+| `62`      | 10px                                                                   |
+| `75`      | 12px                                                                   |
+| `87`      | 14px                                                                   |
+| **`100`** | <span className="spacing-primitive-scale__base">**16px (base)**</span> |
+| `125`     | 20px                                                                   |
+| `150`     | 24px                                                                   |
+| `175`     | 28px                                                                   |
+| `200`     | 32px                                                                   |
+| `225`     | 36px                                                                   |
+| `250`     | 40px                                                                   |
+| `275`     | 44px                                                                   |
+| `300`     | 48px                                                                   |
+| `325`     | 52px                                                                   |
+| `350`     | 56px                                                                   |
+| `375`     | 60px                                                                   |
+| `400`     | 64px                                                                   |
+| `450`     | 72px                                                                   |
+| `500`     | 80px                                                                   |
+| `550`     | 88px                                                                   |
+| `600`     | 96px                                                                   |
+| `700`     | 112px                                                                  |
+| `800`     | 128px                                                                  |
+| `900`     | 144px                                                                  |
+| `1000`    | 160px                                                                  |
+| `1100`    | 176px                                                                  |
+| `1200`    | 192px                                                                  |
+| `1300`    | 208px                                                                  |
+| `1400`    | 224px                                                                  |
+| `1500`    | 240px                                                                  |
+| `1600`    | 256px                                                                  |
+| `1700`    | 272px                                                                  |
+| `1800`    | 288px                                                                  |
+| `1900`    | 304px                                                                  |
+| `2000`    | 320px                                                                  |
+| `2100`    | 336px                                                                  |
+| `2200`    | 352px                                                                  |
+
+</div>
+
+{/* GEN:primitive-scale END */}
+
+### Two regions, at different resolutions
+
+- **Below 16px** the steps are 1, 2, 3, 4, 6, 8, 10, 12 and 14px, so roughly 2px resolution. This is
+  control-interior territory, and a 4px grid cannot pad a chip or offset an icon precisely enough.
+- **From 16px up** it is a 4px grid to 64px, then 8px to 96px, then 16px to 352px. Layout territory,
+  where precision below 4px is noise.
+
+## How density works
+
+Each density is a **distinct assignment** of the names to primitive steps. It is not a
+multiplier, not a `transform: scale()`, and `Compact` is not `Comfortable` × 0.75.
+
+Each spacing name maps to a smaller primitive in Compact and a larger primitive in Relaxed. The
+table shows those assignments directly:
+
+{/* GEN:density-spacing BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Step           | Compact | Comfortable | Relaxed |
+| -------------- | ------- | ----------- | ------- |
+| `spacing.none` | 0px     | 0px         | 0px     |
+| `spacing.4xs`  | 1px     | 2px         | 4px     |
+| `spacing.3xs`  | 2px     | 4px         | 6px     |
+| `spacing.2xs`  | 4px     | 6px         | 8px     |
+| `spacing.xs`   | 6px     | 8px         | 10px    |
+| `spacing.sm`   | 10px    | 12px        | 16px    |
+| `spacing.md`   | 12px    | 16px        | 20px    |
+| `spacing.lg`   | 16px    | 20px        | 24px    |
+| `spacing.xl`   | 20px    | 24px        | 28px    |
+| `spacing.2xl`  | 24px    | 28px        | 32px    |
+| `spacing.3xl`  | 28px    | 32px        | 36px    |
+| `spacing.4xl`  | 36px    | 40px        | 44px    |
+| `spacing.5xl`  | 44px    | 48px        | 52px    |
+| `spacing.6xl`  | 60px    | 64px        | 72px    |
+| `spacing.7xl`  | 72px    | 80px        | 88px    |
+| `spacing.8xl`  | 88px    | 96px        | 112px   |
+| `spacing.9xl`  | 112px   | 128px       | 144px   |
+
+{/* GEN:density-spacing END */}
+
+Some primitive values are not assigned to a spacing name. The difference between densities grows
+with the scale, from a few pixels for smaller steps to as much as 16px for larger steps.
+
+### Corner radius
+
+Same collection, same one-position-per-density behaviour:
+
+{/* GEN:density-radius BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Token                         | Compact | Comfortable | Relaxed |
+| ----------------------------- | ------- | ----------- | ------- |
+| `corner-radius.none`          | 0px     | 0px         | 0px     |
+| `corner-radius.rounded`       | 2px     | 4px         | 6px     |
+| `corner-radius.rounded-outer` | 3px     | 5px         | 7px     |
+| `corner-radius.pill`          | 9999px  | 9999px      | 9999px  |
+
+{/* GEN:density-radius END */}
+
+`rounded-outer` is not an independent value. It is defined as `rounded` plus 1px, so it follows
+`rounded` at every density without being maintained separately. The plus-1px mirrors the 1px
+`outline-offset` a focus ring uses in CSS, which is the only thing the token is for. See
+[why not to use it](./spacing.mdx#corner-radius-travels-with-spacing).
+
+## Where to go next
+
+- [Using spacing](./spacing-usage.mdx): guidance and examples for choosing a spacing step.
+- [Token reference](./spacing-reference.mdx): every token and value in all three densities.
