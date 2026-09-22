@@ -212,29 +212,8 @@ a normal thing to want. Two cautions:
 
 :::
 
-## Mistakes that survive review
-
-Observed in the Core Components Figma file, in descending order of how often:
-
-1. **Legacy directional tokens still bound.** `Generic/Space vertical` (80 bindings),
-   `Container/Space vertical` (30), `Container/Space horizontal` (12),
-   `Selectable/Gap horizontal` (12), `Generic/Space horizontal` (6). All from the deprecated 2.x
-   library. Direction is a CSS property now, so one step applies to whichever property you mean.
-2. **Legacy 1.x t-shirt spacers.** `Spacing :: XX Large` and `Spacing :: Medium`, still bound in
-   Data Display. These come from a scale that no longer exists.
-3. **A spacing token used for component height.** Height is not a spacing decision: it is type size
-   plus padding, and pinning it to a spacing value fights the density switch.
-4. **Equal spacing everywhere.** The most common and the least visible. A layout where every gap is
-   `md` has no grouping, and it reads as a list of things rather than as a structure.
-
-:::warning There is no icon-size token
-`Selectable/Icon size` has 1,020 bindings in the Figma file and **no replacement in the
-3.0.0-beta semantic layer**. Until there is one, an icon size is a hard-coded value, not a token.
-Do not substitute a spacing token for it: the two are unrelated axes that happen to share numbers
-today.
-:::
 
 ## Where to go next
 
-- [The scale](./spacing-scale.mdx): why the steps are these sizes, and how density maps onto them.
 - [Token reference](./spacing-reference.mdx): every token and every value, in all three densities.
+- [The scale](./spacing-scale.mdx): why the steps are these sizes, and how density maps onto them.
