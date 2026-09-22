@@ -10,6 +10,21 @@ import DensitySwitch from '@site/src/components/tokens/DensitySwitch'
 [Overview](./spacing.mdx) gives you two questions to pick a step with. This page turns them into
 specific answers, shows the tokens on the elements themselves, and lists what tends to go wrong.
 
+## Inline and block
+
+Inline and block describe direction relative to the flow of the content, rather than fixed sides of
+the screen.
+
+| Axis       | What it follows                              | In horizontal text |
+| ---------- | -------------------------------------------- | ------------------ |
+| **Inline** | the direction a line of text is written      | left and right     |
+| **Block**  | the direction lines and elements are stacked | top and bottom     |
+
+For example, `padding-inline` adds space before and after content on the inline axis, while
+`padding-block` adds space before and after it on the block axis. These logical properties adapt to
+right-to-left and vertical writing modes, unlike `padding-left`, `padding-right`, `padding-top` and
+`padding-bottom`.
+
 ## Decision table
 
 Every row is one of the two questions already answered. If your case is not here, the nearest row is
@@ -22,8 +37,6 @@ usually right.
 | an icon from its label, inside a control  | `spacing.xs`                             | one control, two parts                                                                |
 | a chip or badge interior                  | `spacing.3xs`                            | dense by definition. `2xs` if it carries an icon                                      |
 | an input's interior                       | `spacing.xs` block, `spacing.sm` inline  | shorter inline than a button: the value needs to look aligned with the label above it |
-| a label from its field                    | `spacing.xs`                             | same control                                                                          |
-| a field from its helper text              | `spacing.4xs`                            | the helper belongs to the field, tighter than the label                               |
 | one field from the next                   | `spacing.sm`                             | related, separate                                                                     |
 | one fieldset from the next                | `spacing.lg`                             | a group boundary                                                                      |
 | a card's interior                         | `spacing.md`                             | the default container padding                                                         |
@@ -76,57 +89,6 @@ follow the density around them.
 Two steps apart on the two axes is deliberate rather than sloppy. Text needs more room beside it
 than above it to look optically centred, because the letterforms already carry their own vertical
 space in the line box. Equal padding on both axes reads as too tight horizontally.
-
-### Gaps in a form
-
-This is the example that teaches "distance tracks relatedness" better than prose does. Four
-different gaps, each one a statement about what belongs to what:
-
-<TokenAnatomy
-  mode="spacing"
-  caption="One field. The gap separates the label from the input."
-  bindings={{
-    gap: { token: 'spacing.xs', label: 'label to field' },
-    borderRadius: { token: 'corner-radius.rounded' },
-  }}
-  style={{
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    color: 'var(--eds-text-primary)',
-  }}
-  maxWidth={240}
->
-  <span>Well name</span>
-  <span
-    style={{
-      background: 'var(--eds-background-input)',
-      borderBottom:
-        '1px solid var(--eds-border-non-interactive-neutral-default)',
-      padding: 'var(--eds-spacing-xs) var(--eds-spacing-sm)',
-    }}
-  >
-    31/2-A-14
-  </span>
-</TokenAnatomy>
-
-```css
-.field {
-  gap: var(--eds-spacing-xs);
-} /* label to input        */
-.field__help {
-  margin-top: var(--eds-spacing-4xs);
-} /* input to helper text  */
-.fieldset {
-  gap: var(--eds-spacing-sm);
-} /* field to field        */
-.form {
-  gap: var(--eds-spacing-lg);
-} /* fieldset to fieldset  */
-```
-
-Four steps for four levels of relatedness, and they are not interchangeable. Setting all four to
-`spacing.sm` is legal, renders fine, and destroys the grouping: the reader can no longer tell which
-helper text belongs to which input without reading it.
 
 ### A focus ring
 
@@ -224,35 +186,6 @@ a normal thing to want. Two cautions:
   content changes. `relaxed` inside `compact` inside `relaxed` is legal CSS and unreadable design.
 - **Compact reduces hit area.** Less padding means a smaller target, so do not use Compact for a
   primary touch interface. That is what Relaxed is for.
-
-## What components actually use
-
-Measured by variable bindings across the six component pages of the EDS Core Components Figma file,
-in descending order of use:
-
-| Step                                          | Use in components                                             |
-| --------------------------------------------- | ------------------------------------------------------------- |
-| `corner-radius.rounded`, `corner-radius.pill` | the two most-bound tokens in the whole system                 |
-| `spacing.xs`, `spacing.3xs`                   | very heavily: control interiors and the icon-to-label gap     |
-| `spacing.sm`, `spacing.md`                    | heavily: padding, and gaps between related items              |
-| `spacing.lg`                                  | moderately, and mostly as a fixed size rather than as padding |
-| `corner-radius.rounded-outer`                 | focus rings, in the Figma file only                           |
-| `spacing.2xs`, `spacing.4xs`, `spacing.none`  | fine adjustment inside controls                               |
-| `spacing.xl`                                  | lightly: section separation                                   |
-| `spacing.2xl`, `spacing.3xl`                  | not bound by any component yet                                |
-| `spacing.4xl` through `spacing.9xl`           | added for layout, so no component binding is expected         |
-
-The zeros at the bottom of that table say more about the work done so far than about the tokens.
-The team has been building **components**, not patterns and layout, so the file has little for a
-page-level step to bind to. The eight widest steps are for the grid, page gutters, the space between
-regions and the separation between sections, and that work is still ahead. `4xl` through `9xl` were
-added for it.
-
-:::note What this table measures
-Figma variable bindings in the Core Components file, which is the design side only: no EDS React
-component consumes a 3.0.0-beta semantic token yet. It is a snapshot of one file at one moment, so
-read it as what is common in component work today, not as a rule about where a step may be used.
-:::
 
 ## Do's and Don'ts
 
