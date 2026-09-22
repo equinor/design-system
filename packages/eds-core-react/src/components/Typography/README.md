@@ -6,7 +6,7 @@ Typography components used to help render typography in <abbr title="Equinor Des
 
 `TypographyNext`, `Heading`, and `Paragraph` are deprecated. They still work, but avoid new adoption — every new use has to be undone when the replacement lands.
 
-**What is coming ([ADR-0005](../../../../documentation/adr/0005-typography-approach-for-eds-2.md)):**
+**What is coming ([ADR-0005](../../../../../documentation/adr/0005-typography-approach-for-eds-2.md)):**
 
 - A base element stylesheet giving `h1`–`h6` and `p` their default size and flow spacing ([#5477](https://github.com/equinor/design-system/issues/5477))
 - Utility classes per text style for exceptions, mirroring Figma text styles ([#5501](https://github.com/equinor/design-system/issues/5501))
