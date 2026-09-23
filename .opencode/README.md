@@ -54,7 +54,7 @@ Primary agents are selectable by the user and run as the main conversation agent
 | `build` | Development agent with EDS conventions | All (asks for git commit/push/branch) |
 | `advisor` | Read-only architectural advice and code reviews | Read-only (no write/edit/bash) |
 | `tokens-studio` | Tokens Studio pipeline assistant (studio CLI, pull, exports, config) | All (asks for git commit/push/branch, gh, and remote-mutating studio commands) |
-| `dependabot-duty` | Triages Dependabot PRs and Security-tab alerts, proposes pnpm overrides, reports | All (asks for git commit/push/branch and any PR/issue-mutating `gh` command) |
+| `dependabot-duty` | Triages Dependabot PRs, Dependabot alerts and code scanning alerts, proposes pnpm overrides, reports | All (asks for git commit/push/branch and any PR-, issue- or alert-mutating `gh` command) |
 
 ### Sub-Agents
 
@@ -218,7 +218,7 @@ Refer to AGENTS.md for full conventions.
 │   ├── component-doc.md    # Sub-agent: Documentation
 │   ├── audit-harnesses.md  # Sub-agent: Harness auditor
 │   ├── tokens-studio.md    # Primary: Tokens Studio pipeline assistant
-│   └── dependabot-duty.md  # Primary: Dependabot PR + alerts triage
+│   └── dependabot-duty.md  # Primary: Dependabot PR + security alerts triage
 ```
 
 ## Best Practices

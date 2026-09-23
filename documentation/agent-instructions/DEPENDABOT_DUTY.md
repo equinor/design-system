@@ -4,17 +4,18 @@ This is the canonical playbook for the weekly Dependabot rotation. Harness entry
 
 The short human runbook lives in [`documentation/how-to/DEPENDABOT_GUIDE.md`](../how-to/DEPENDABOT_GUIDE.md). This document is the long version: what an agent should check, in which order, and what it must **not** do on its own.
 
-Dependabot duty has two halves, and both are part of the job:
+Dependabot duty has three parts, and all three are part of the job:
 
 1. **Open Dependabot PRs** — review, merge, or close.
 2. **Dependabot alerts** on the repo's Security tab — vulnerabilities that did not get a PR, usually transitive dependencies that need a `pnpm.overrides` entry.
+3. **Code scanning alerts** on the same tab — CodeQL findings in our own source, which are either fixed or dismissed with a reason.
 
-Historically only the first half got done. The alerts page is where the critical and high findings accumulate.
+Historically only the first part got done. The alerts pages are where the critical and high findings accumulate.
 
 ## Prerequisites
 
 - `gh` CLI authenticated against `github.com`. Check with `gh auth status`.
-- The token needs the `security_events` scope to read alerts. If the alerts call below returns `403` or an empty list while the Security tab shows alerts, run `gh auth refresh -s security_events` (the user does this — it is interactive).
+- The token needs the `security_events` scope to read alerts. The same scope covers both the Dependabot alerts call in § Step 2 and the code scanning call in § Step 4. If either returns `403` or an empty list while the Security tab shows alerts, run `gh auth refresh -s security_events` (the user does this — it is interactive).
 - A local checkout with `node_modules` installed, for the override workflow in § Step 3.
 
 Copilot in the IDE cannot run `gh`; there the agent walks the user through the checks and the user reads the Security tab manually.
@@ -25,7 +26,8 @@ This is a **report-first** workflow. The agent gathers, verifies, and recommends
 
 - Never `gh pr review --approve`, `gh pr merge`, `gh pr close`, or `gh pr comment` without an explicit go-ahead for that specific PR. Batch approval ("merge all the green ones") is fine once given, but state which PRs it covers.
 - Never commit, push, create a branch, or open a PR without confirmation ([`AGENTS.md`](../../AGENTS.md) § Git Workflow applies).
-- The only thing the agent builds is the override PR in § Step 3, on its own branch, after the user has seen the proposed override list.
+- Never dismiss an alert of either kind (`gh api --method PATCH … -f state=dismissed`) without a go-ahead for that specific alert. A dismissal is recorded against the person whose token ran it, and it does not reopen on its own.
+- The agent builds code in two places only, both after the user has seen and approved the proposal: the override PR in § Step 3, on its own branch, and a small fix pushed to a Dependabot branch under the "CI red, real breakage" row of the decision table. Nothing else.
 - Do not run `@dependabot` commands (`rebase`, `recreate`) without asking; they trigger CI and rewrite the PR branch.
 
 ## Step 1 — Triage open PRs
@@ -48,17 +50,21 @@ Dependabot regularly opens two PRs for the same bump: a `npm_and_yarn` **securit
 
 Recommend: merge the passing one, close the other with a one-line comment pointing at the merged PR. Do not try to fix the lockfile on the security PR.
 
-Also check for PRs Dependabot has already superseded (`gh pr view <n> --json comments` shows "Superseded by #…"); those are closed automatically and need no action.
+Dependabot closes its own superseded PRs, so a `--state open` listing will not show them. Nothing to do there.
 
 ### Decision table
 
-| Situation                                     | Recommendation                                                                                                              |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| CI green, patch or minor, any group           | Approve and squash-merge                                                                                                    |
-| CI green, major                               | Read the release notes for the `.0` release (see below) before recommending. Check the coverage gap in the next subsection. |
-| CI red, lockfile out of date on a security PR | Close as duplicate of the passing version PR                                                                                |
-| CI red, real breakage                         | Follow "When CI fails" in the runbook: flaky → rerun, easy → fix on the branch, complex → close with comment                |
-| Merge conflict / `BEHIND`                     | `@dependabot rebase` (ask first) or close and let Monday's run recreate it                                                  |
+| Situation                                     | Recommendation                                                                                                                       |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| CI green, patch or minor, any group           | Recommend approve + squash-merge                                                                                                     |
+| CI green, major                               | Read the release notes for the `.0` release (see below) before recommending anything. Check the coverage gap in the next subsection. |
+| CI red, lockfile out of date on a security PR | Recommend closing as a duplicate of the passing version PR                                                                           |
+| CI red, real breakage                         | Follow "When CI fails" in the runbook: flaky → recommend a rerun, easy → propose the fix, complex → recommend closing with a comment |
+| Merge conflict / `BEHIND`                     | Recommend `@dependabot rebase`, or closing and letting Monday's run recreate it                                                      |
+
+Every cell is a recommendation for the report, not an action to take. The user runs the commands.
+
+One caveat on the "easy → propose the fix" path: pushing a commit to a Dependabot branch makes Dependabot stop updating that PR, so a later rebase or recreate has to be done by hand. Say so when proposing it, and ask before pushing.
 
 Merge one PR at a time so CI runs on `main` between merges.
 
@@ -81,15 +87,21 @@ gh api /repos/equinor/design-system/actions/jobs/<job-id>/logs | grep -E '^> @eq
 
 If an affected package is missing from the log, run its tests locally against the PR's version before recommending a merge. Say in the report which suites CI covered and which you ran yourself.
 
-## Step 2 — Triage alerts
+## Step 2 — Triage Dependabot alerts
 
-Read the open alerts sorted by severity:
+Read the open alerts, worst first:
 
 ```bash
-gh api '/repos/equinor/design-system/dependabot/alerts?state=open&per_page=100' \
-  --jq '.[] | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dependency.manifest_path)\t\(.security_vulnerability.vulnerable_version_range)\tfix: \(.security_vulnerability.first_patched_version.identifier // "none")\t\(.security_advisory.ghsa_id)"' \
-  | sort
+gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=open&per_page=100' \
+  --jq '.[] | "\({critical:0,high:1,medium:2,low:3}[.security_advisory.severity] // 9)\t\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dependency.manifest_path)\t\(.security_vulnerability.vulnerable_version_range)\tfix: \(.security_vulnerability.first_patched_version.identifier // "none")\t\(.security_advisory.ghsa_id)"' \
+  | sort | cut -f2-
 ```
+
+Three things the obvious version of this command gets wrong:
+
+- `--paginate` is not optional. `per_page=100` on its own truncates silently, which is the worst failure mode for a sweep meant to catch what the PRs miss. The open list is short today, but the same endpoint returns six pages for `state=fixed`, so the cap is not theoretical.
+- Sorting on the severity word alone is alphabetical, not severity order — it puts `LOW` above `MEDIUM`. Hence the numeric rank column, stripped again by `cut`.
+- `--jq` runs **once per page**, not once over the whole result. Streaming expressions like `.[] | …` are fine; aggregates are not. `--jq length` against a six-page result prints six numbers, not their sum. Use the streaming form, or drop `--jq` and pipe the pages through `jq -s`.
 
 Same alert often appears several times (one per manifest, one per advisory). Group by package and vulnerable range before counting.
 
@@ -100,9 +112,43 @@ Classify each package:
 | **Has a PR**          | An open Dependabot PR bumps it                       | Handled in Step 1; note the link                                            |
 | **Direct dependency** | `manifest_path` is a `package.json`                  | Bump the dependency in that package; usually Dependabot already opened a PR |
 | **Transitive**        | `manifest_path` is `pnpm-lock.yaml` and no PR exists | Override, see Step 3                                                        |
-| **No fix**            | `first_patched_version` is `none`                    | Log it (see § Logging), no code change                                      |
+| **No fix**            | `first_patched_version` is `none`                    | Recommend a dismissal with a reason, see below                              |
 
-Critical and high without a PR are fixed the same week. Medium and low are fixed when they ride along in the same override PR, otherwise logged.
+Critical and high without a PR are fixed the same week. Medium and low are fixed when they ride along in the same override PR, otherwise dismissed with a reason.
+
+### Alerts we are not going to fix
+
+"Log it and move on" means dismissing the alert with a reason and a comment, the same way code scanning alerts are handled in § Step 4. The reasoning then lives on the alert rather than in a document that has to be found first.
+
+| Reason           | When                                                                  |
+| ---------------- | --------------------------------------------------------------------- |
+| `tolerable_risk` | No patched version exists, or the fix is riskier than the advisory    |
+| `no_bandwidth`   | Fixable, but not this week — the honest answer when the week runs out |
+| `not_used`       | The vulnerable code path is not reachable from anything we ship       |
+| `inaccurate`     | The advisory does not apply to how the package is used here           |
+| `fix_started`    | A PR is open for it                                                   |
+
+```bash
+gh api --method PATCH /repos/equinor/design-system/dependabot/alerts/<n> \
+  -f state=dismissed \
+  -f dismissed_reason=tolerable_risk \
+  -f dismissed_comment='<why, in one sentence>'
+```
+
+Always recommend a `dismissed_comment`. A dismissal without one tells the next person nothing, and they will re-investigate from scratch.
+
+### Re-check what was dismissed earlier
+
+A dismissed alert does not reopen on its own, not even when a patched version finally ships. So the sweep has to look:
+
+```bash
+gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=dismissed&per_page=100' \
+  --jq '.[] | select(.dismissed_reason == "tolerable_risk" or .dismissed_reason == "no_bandwidth")
+        | select(.security_vulnerability.first_patched_version != null)
+        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\tnow fixable: \(.security_vulnerability.first_patched_version.identifier)\t#\(.number)"'
+```
+
+Anything this prints was parked for lack of a fix and now has one. Put it in the report as a candidate for the override PR in § Step 3, with the original dismissal comment for context.
 
 ## Step 3 — Fix transitive alerts with `pnpm.overrides`
 
@@ -164,7 +210,57 @@ chore: bump pnpm overrides to resolve transitive dependabot alerts
 
 PR body: a before/after table per package with severity and the parent that pulls it in, and a "deliberately left out" list with the reason for each. Commit, push, and `gh pr create` only after the user has confirmed.
 
-## Step 4 — Report
+## Step 4 — Triage code scanning alerts
+
+The Security tab has a second list: CodeQL findings in our own source, rather than in a dependency. These never produce a PR, so nothing surfaces them except this step.
+
+### How it is set up
+
+Code scanning runs through CodeQL **default setup**, not a workflow file — there is no `codeql.yml` in `.github/workflows/`, so do not go looking for one and do not propose a PR to change the configuration. It lives in the repo's Settings → Code security. Current configuration:
+
+```bash
+gh api /repos/equinor/design-system/code-scanning/default-setup
+# state: configured · languages: actions, javascript, javascript-typescript, typescript
+# query_suite: default · schedule: weekly
+```
+
+Two CodeQL check runs therefore appear on every PR: `CodeQL` (security queries) and `CodeQL - Code Quality`. Both are informational on the PR itself; the alerts they raise land on the Security tab.
+
+### Read the open alerts
+
+```bash
+gh api --paginate '/repos/equinor/design-system/code-scanning/alerts?state=open&per_page=100' \
+  --jq '.[] | "\(.rule.security_severity_level // .rule.severity | ascii_upcase)\t\(.rule.id)\t\(.most_recent_instance.location.path):\(.most_recent_instance.location.start_line)\t#\(.number)"'
+```
+
+`rule.security_severity_level` is the CVSS-derived level and is what the Security tab sorts on; quality rules have no such level, hence the fallback to `rule.severity`. This list is usually empty — as of September 2026 the repo has zero open, one dismissed and 35 fixed — so the step normally costs half a minute. It is still the part of the duty that was never written down anywhere.
+
+### Decide per alert
+
+Read the flagged line before judging. `most_recent_instance.location` gives the path and line; the alert's `html_url` shows the data-flow path CodeQL followed.
+
+| Finding                                     | Recommendation                                                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Real, reachable from consumer input         | Fix it in a normal PR, referencing the rule id in the description                                      |
+| Real but only in test or Storybook fixtures | Recommend dismissal with reason `used in tests`                                                        |
+| CodeQL is wrong about the flow              | Recommend dismissal with reason `false positive`, and say in the comment which step of the flow breaks |
+| Real, but already handled elsewhere         | Recommend dismissal with reason `mitigated`, naming the control that handles it                        |
+| Real, low severity, not worth the churn     | Recommend dismissal with reason `won't fix`                                                            |
+
+`false positive`, `won't fix`, `used in tests` and `mitigated` are the only values the API accepts for `dismissed_reason`. The dismissal goes in the report for the user to run:
+
+```bash
+gh api --method PATCH /repos/equinor/design-system/code-scanning/alerts/<n> \
+  -f state=dismissed \
+  -f dismissed_reason='false positive' \
+  -f dismissed_comment='<why, in one sentence>'
+```
+
+`dismissed_comment` is optional to the API and mandatory for us — a dismissal without one is indistinguishable from someone clearing the list, and the next person on duty has no way to re-check the judgement. It is capped at 280 characters.
+
+Dismissals are not permanent: an alert reopens if CodeQL sees the same pattern again on a later scan. Re-dismissing it is fine; silently dismissing something that keeps coming back is a signal the code should change instead.
+
+## Step 5 — Report
 
 Print the report to chat (or to the path the user gave). Shape:
 
@@ -176,29 +272,46 @@ Print the report to chat (or to the path the user gave). Shape:
 | PR  | Bump | Type | CI  | Recommendation |
 | --- | ---- | ---- | --- | -------------- |
 
-### Alerts without a PR
+### Dependabot alerts without a PR
 
 | Severity | Package | Installed | Fix | Pulled in by | Action |
 | -------- | ------- | --------- | --- | ------------ | ------ |
 
-### Deliberately not fixed
+### Code scanning alerts
 
-- <package>: <reason>
+| Severity | Rule | Location | Alert | Recommendation |
+| -------- | ---- | -------- | ----- | -------------- |
+
+### Parked earlier, fixable now
+
+| Severity | Package | Dismissed as | Fix available | Alert |
+| -------- | ------- | ------------ | ------------- | ----- |
+
+### To dismiss
+
+| Alert | What | Reason | Comment |
+| ----- | ---- | ------ | ------- |
 
 ### Commands to run
 
 gh pr review <n> --approve
 gh pr merge <n> --squash
 gh pr close <n> --comment "Superseded by #<m>, which includes the lockfile update."
+gh api --method PATCH /repos/equinor/design-system/dependabot/alerts/<n> -f state=dismissed -f dismissed_reason=tolerable_risk -f dismissed_comment='<why>'
+gh api --method PATCH /repos/equinor/design-system/code-scanning/alerts/<n> -f state=dismissed -f dismissed_reason='false positive' -f dismissed_comment='<why>'
 ```
+
+Leave out the sections with nothing in them rather than printing empty tables.
 
 Put the exact `gh` commands at the end so the person on duty can paste them. The agent does not run them without a go-ahead.
 
-## Logging alerts that cannot be fixed
+## Where the reasoning lives
 
-"Log it and move on" in the runbook needs a place. Comment on the open issue titled **"Dependabot alerts without a fix"** with the package, advisory id, why it cannot be fixed, and the date. If no such issue exists, ask the user before creating it. The next person on duty checks that issue before re-investigating the same alert.
+There is no separate log. An alert we are not fixing gets dismissed with a reason and a comment — § Step 2 for Dependabot alerts, § Step 4 for code scanning — and that dismissal _is_ the record. It sits on the alert, it is filterable (`state=dismissed`), and the weekly re-check in § Step 2 brings anything back that has since become fixable.
+
+If you find yourself wanting to write the reasoning down somewhere else, the dismissal comment is too short or too vague. Fix the comment.
 
 ## Follow-ups this playbook knows about
 
 - `packages/eds-tokens` and `packages/eds-tokens-build` tests are not in the root `test` script (September 2026). Until that is fixed, run them locally for any vitest or vite major.
-- `image-size` (high, via `metro` and `@docusaurus/mdx-loader`) has no patched version. Logged, not fixable by override.
+- `image-size` (high, via `metro` and `@docusaurus/mdx-loader`) has no patched version. Dismiss as `tolerable_risk`; the § Step 2 re-check picks it up if upstream ever patches.
