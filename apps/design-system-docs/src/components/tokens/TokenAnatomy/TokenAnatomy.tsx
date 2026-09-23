@@ -5,7 +5,6 @@ import {
   DEFAULT_EDGE,
   DOT_TINT,
   boundProperties,
-  cssName,
   cssVar,
   impliedStyle,
 } from './bindings'
@@ -81,7 +80,7 @@ function unwrapParagraphs(children: ReactNode): ReactNode[] {
 function figureWidth(rows: Row[]): number {
   const longest = rows.reduce(
     (widest, row) =>
-      Math.max(widest, cssName(row.token).length + (row.label?.length ?? 0)),
+      Math.max(widest, row.token.length + (row.label?.length ?? 0)),
     36,
   )
   return Math.round(LABEL_X + 16 + (longest + 24) * 7.3)

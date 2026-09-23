@@ -1,6 +1,5 @@
 import React from 'react'
 import type { BindableProperty } from './bindings'
-import { cssName } from './bindings'
 
 /** Vertical distance between one leader row and the next */
 export const ROW = 30
@@ -24,7 +23,10 @@ const len = (value: number | string) =>
 export type LeaderProps = {
   /** The bound property this leader belongs to. Exposed as `data-property` on every part. */
   property: BindableProperty
-  /** Dotted token name, shown as the custom property. */
+  /**
+   * Dotted token name, shown as written. The diagram shows where a token is applied, not how a
+   * framework binds it, so the CSS custom property is not repeated here.
+   */
   token: string
   /** What the token does here. */
   label?: string
@@ -139,7 +141,7 @@ export function Leader({
           color: 'var(--eds-text-primary)',
         }}
       >
-        <span className="token-anatomy__label-name">{cssName(token)}</span>
+        <span className="token-anatomy__label-name">{token}</span>
         {label ? (
           <span
             className="token-anatomy__label-part"
