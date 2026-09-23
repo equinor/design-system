@@ -384,6 +384,27 @@ nav.menu li a {
   vertical-align: middle;
 }
 
+.markdown a.colour-usage-link {
+  color: var(--eds-text-interactive-link-default);
+  text-decoration: underline;
+  text-decoration-color: var(--eds-border-interactive-link-default);
+}
+
+.markdown a.colour-usage-link:hover {
+  color: var(--eds-text-interactive-link-hover);
+  text-decoration-color: var(--eds-border-interactive-link-hover);
+}
+
+.markdown a.colour-usage-link:active {
+  color: var(--eds-text-interactive-link-pressed);
+  text-decoration-color: var(--eds-border-interactive-link-pressed);
+}
+
+.markdown a.colour-usage-link:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+
 /* ======================================
  * COLOUR MIGRATION MAP
  * ====================================== */

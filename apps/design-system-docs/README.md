@@ -124,7 +124,7 @@ colour docs.
 | | |
 |---|---|
 | **Generated** | `docs/foundation/colour/reference.mdx`, the region between the `GENERATED` markers: 263 tokens in 9 groups, each with its CSS custom property and its resolved light and dark values |
-| **Hand-written** | everything else. All prose on `intro`, `getting_started`, `palette` and `migration`, and the frontmatter and introduction above the markers on `reference` |
+| **Hand-written** | everything else. All prose on `intro`, `getting_started`, `usage`, `palette` and `migration`, and the frontmatter and introduction above the markers on `reference` |
 
 Do not edit inside the markers. The next run overwrites it.
 

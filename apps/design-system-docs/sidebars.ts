@@ -110,6 +110,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'foundation/colour/intro',
         'foundation/colour/getting_started',
+        'foundation/colour/usage',
         'foundation/colour/palette',
         'foundation/colour/migration',
         'foundation/colour/reference',

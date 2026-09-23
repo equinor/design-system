@@ -1,0 +1,602 @@
+---
+title: Usage
+description: Choose colour levels and states, pair foregrounds, and apply semantic tokens to common interface patterns.
+---
+
+import ColourPairing from '@site/src/components/colour/ColourPairing'
+import {
+  BehaviourComparison,
+  DefaultTwoWays,
+  InteractiveBackgroundMatrix,
+  InteractiveBorderMatrix,
+  NonInteractiveBackgroundLevels,
+  NonInteractiveBorderLevels,
+} from '@site/src/components/colour/ColourStates'
+import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
+
+Choose colour by what an element does, not by which swatch looks closest. Check for a dedicated
+role first; otherwise choose behaviour, tone and level. Interactive levels bring their states
+with them. Token names below use Figma's dotted form; [Getting Started](./getting_started.mdx#one-name-in-figma-css-and-typescript)
+shows the CSS and TypeScript forms.
+
+## Check for a dedicated role
+
+Some tokens name their job directly. Use them instead of forcing the tone and level matrix onto
+a page surface, link, focus ring or disabled control:
+
+| Token | Job |
+| --- | --- |
+| `background.canvas` | The page behind everything |
+| `background.surface` | The plane content sits on: cards, panels and table bodies |
+| `background.floating`, `background.dialog` | Menus and dialogs |
+| `background.input` | Form field fills |
+| `background.inverted` | Surfaces that stand apart, such as snackbars |
+| `border.interactive.focus` | Focus rings |
+| `text.interactive.link.*` | Link states: `default`, `hover` and `pressed` |
+| `text.primary`, `.secondary`, `.tertiary` | Text hierarchy on ordinary surfaces |
+| `icon.primary`, `.secondary`, `.tertiary` | The icon equivalents |
+| `text.inverted`, `icon.inverted` | Foregrounds on `background.inverted` |
+
+`background.surface`, `background.dialog` and `background.floating` resolve to the same colour
+today. Keep their distinct names so their roles can change independently. Inverted does not mean
+dark mode: its value changes with the colour scheme. Focus, link and disabled examples appear
+below.
+
+{/* `background.backdrop` and `overlay.scrim` are intentionally not documented here.
+    Their descriptions currently overlap. Add guidance once the token decision is settled. */}
+
+## Start with behaviour
+
+Use `interactive` only when the user can act on the element; [the Introduction](./intro.mdx#interactive-and-non-interactive-colour)
+explains the two branches. A neutral muted row can be a control or a static piece of information.
+Both examples below use the same tone and level, but only the actionable row has hover and pressed
+values:
+
+<BehaviourComparison />
+
+The presence of an action determines the branch, not whether a hover effect would look good. A
+static panel does not become interactive because it contains a separate button; that button uses
+its own interactive tokens.
+
+## Choose a tone
+
+Use `accent` for primary actions and selection, `neutral` for structure and secondary actions,
+and `info`, `success`, `warning` or `danger` when the content communicates that meaning. Tone
+does not determine how prominent a static message should be: a warning can be muted or emphasised.
+See [the tone guide](./intro.mdx#six-tones) for the full distinctions.
+
+## Choose a level
+
+Levels depend on both the surface and whether it is interactive.
+
+**Interactive backgrounds** have two levels, plus a third for selection:
+
+| Level | Use for | Foreground |
+| --- | --- | --- |
+| `muted` | Tinted controls and interactive surfaces that should not dominate | Typically `text.on-muted.<tone>` |
+| `emphasis` | Solid controls and the primary action | Typically `text.on-emphasis.<tone>` |
+| `selected` | Persistent selection, available on accent and neutral only | See [Foreground pairing](#foreground-pairing) |
+
+**Interactive borders** have `muted` and `emphasis`, each with `default`, `hover` and `pressed`
+states. They have neither a `default` nor a `selected` **level**.
+
+**Non-interactive backgrounds and borders** have three levels and no interaction states:
+
+| Level | Use for | Foreground on a background |
+| --- | --- | --- |
+| `muted` | The faintest tint that still communicates a tone | Typically `text.on-muted.<tone>` |
+| `default` | The middle strength for a tinted element | Typically `text.on-default.<tone>` |
+| `emphasis` | A solid status fill or other strong, static signal | Typically `text.on-emphasis.<tone>` |
+
+The foreground column applies to backgrounds, not borders. [Foreground pairing](#foreground-pairing)
+covers how to check it and where the typical pairing does not hold.
+
+:::warning `default` has two meanings
+
+- On the interactive branch, `default` is a **state**.
+- On the non-interactive branch, `default` is a **level**.
+
+```
+background.interactive.accent.emphasis.default
+background.non-interactive.accent.default
+```
+
+Position tells you which one you are reading. Interactive names finish with a state;
+non-interactive names do not.
+
+:::
+
+<DefaultTwoWays />
+
+## Interactive levels and states
+
+Pick a level, and its `default`, `hover` and `pressed` states come attached. These states describe
+the current interaction, not a lasting choice: `selected` is a persistent **level**, and even a
+selected item can be hovered or pressed. Every state has its own named colour. Do not derive
+states with opacity or `filter: brightness()`: those approaches break against tinted surfaces,
+invert incorrectly in dark mode and leave the resulting colour without a semantic name.
+
+### Background
+
+The complete matrix is shown for neutral and accent because they are the two tones that also have a
+`selected` level.
+
+<InteractiveBackgroundMatrix />
+
+The `info`, `success`, `warning` and `danger` tones follow the same `muted` and `emphasis` columns,
+with all three states, but have no `selected` level, because selection is a UI state rather than a
+semantic condition.
+
+### Border
+
+Interactive borders use the same three states, but only the `muted` and `emphasis` levels:
+
+<InteractiveBorderMatrix />
+
+There is no selected border level. A selected item can use the selected background level, which has
+its own default, hover and pressed states. Do not assume that selecting an item adds a border.
+
+## Non-interactive levels
+
+Non-interactive backgrounds and borders have `muted`, `default` and `emphasis` levels. These are
+three degrees of prominence, not interaction states. Neither surface has hover or pressed values.
+
+### Background
+
+The neutral and accent examples show how a static fill changes across the three levels:
+
+<NonInteractiveBackgroundLevels />
+
+### Border
+
+The same levels apply to static borders. A neutral border at the middle level is
+`border.non-interactive.neutral.default`:
+
+<NonInteractiveBorderLevels />
+
+Both surfaces have the same levels for all six tones. See [Foreground pairing](#foreground-pairing)
+for backgrounds with their text and icon foregrounds, or the [reference](./reference.mdx) for every
+token.
+
+## Foreground pairing
+
+A foreground is the text or icon that sits on a background. Choose it from the background you
+are placing it on.
+
+### Match the level and tone
+
+Each tinted or solid background level has a foreground named after it. Use the one with the same
+level and the same tone:
+
+| Background level | Text | Icon |
+| --- | --- | --- |
+| `muted` | `text.on-muted.<tone>` | `icon.on-muted.<tone>` |
+| `default` (non-interactive only) | `text.on-default.<tone>` | `icon.on-default.<tone>` |
+| `emphasis` | `text.on-emphasis.<tone>` | `icon.on-emphasis.<tone>` |
+
+A `background.non-interactive.danger.muted` fill takes `text.on-muted.danger`. The tone must match
+as well as the level: `text.on-muted.accent` is a different colour.
+
+On ordinary surfaces such as `background.surface` and `background.canvas`, use `text.primary`,
+`.secondary` or `.tertiary` instead. See [Check for a dedicated role](#check-for-a-dedicated-role).
+
+### When to use something else
+
+- **A component specifies another foreground.** Follow the component. The
+  [warning banner](#a-warning-banner) uses `text.primary` and `icon.on-default.warning` on a muted
+  fill.
+- **Do not use `text.inverted` on solid fills.** Use `text.on-emphasis.<tone>`. `inverted` belongs
+  only on `background.inverted`, and its value changes with the colour scheme.
+
+### Selected backgrounds
+
+Selected backgrounds have no `on-selected` foreground. Use `text.primary` and `icon.primary`, then
+check each state:
+
+| Selected background | Light (default / hover / pressed) | Dark (default / hover / pressed) | Result |
+| --- | --- | --- | --- |
+| `neutral` | Lc 65 or higher | Lc 65 or higher | Suitable for short labels in every state |
+| `accent` | About Lc 65 / 49 / 34 | About Lc 88 / 67 / 43 | Light hover, light pressed and dark pressed fall below Lc 60 |
+
+Selected accent passes in its default state, but that does not carry through to every hover and
+pressed state. Check every state in both schemes, with the intended text size and weight, before
+you use it.
+
+### Specimens
+
+The gallery shows representative default-state pairings first; expand it to see every tone and
+level. Borders in the gallery are optional examples, not required with the fill.
+
+<ColourPairing />
+
+## Interactive examples
+
+These controls respond to input. Their backgrounds change state; foreground and border tokens
+are chosen for the actual design, not derived from the fill.
+
+### An emphasis action
+
+The default, hover and pressed colours all come from the same level:
+
+<TokenAnatomy
+  mode="colour"
+  caption="The default state. Hover and pressed use the matching values from the same emphasis level."
+  bindings={{
+    color: { token: 'text.on-emphasis.accent', label: 'label' },
+    background: {
+      token: 'background.interactive.accent.emphasis.default',
+      label: 'fill',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Continue
+</TokenAnatomy>
+
+```css
+.primary-action {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+}
+
+.primary-action:hover {
+  background: var(--eds-background-interactive-accent-emphasis-hover);
+}
+
+.primary-action:active {
+  background: var(--eds-background-interactive-accent-emphasis-pressed);
+}
+```
+
+Swap `accent` for `danger` to create a destructive action. The level and state structure stays the
+same.
+
+### A muted action
+
+A quiet secondary action uses the neutral muted level. Its hover and pressed colours come from
+the same interactive family:
+
+<TokenAnatomy
+  mode="colour"
+  caption="The default state of a quiet interactive surface."
+  bindings={{
+    color: { token: 'text.on-muted.neutral', label: 'label' },
+    background: {
+      token: 'background.interactive.neutral.muted.default',
+      label: 'fill',
+    },
+    borderColor: {
+      token: 'border.interactive.neutral.muted.default',
+      label: 'stroke',
+    },
+  }}
+  style={{ borderRadius: 4, padding: '0.5rem 1.25rem', fontWeight: 500 }}
+>
+  Secondary action
+</TokenAnatomy>
+
+```css
+.secondary-action {
+  background: var(--eds-background-interactive-neutral-muted-default);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  color: var(--eds-text-on-muted-neutral);
+}
+
+.secondary-action:hover {
+  background: var(--eds-background-interactive-neutral-muted-hover);
+  border-color: var(--eds-border-interactive-neutral-muted-hover);
+}
+
+.secondary-action:active {
+  background: var(--eds-background-interactive-neutral-muted-pressed);
+  border-color: var(--eds-border-interactive-neutral-muted-pressed);
+}
+```
+
+### A selected row
+
+A selected neutral row moves to the selected level and still has default, hover and pressed
+states. It uses the neutral `text.primary` pairing from [Foreground pairing](#foreground-pairing),
+which does not carry over to accent selected.
+
+<TokenAnatomy
+  mode="colour"
+  caption="The default state of a selected row."
+  bindings={{
+    color: { token: 'text.primary', label: 'content' },
+    background: {
+      token: 'background.interactive.neutral.selected.default',
+      label: 'fill',
+    },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.625rem 0.875rem',
+    fontSize: '1rem',
+    fontWeight: 700,
+    width: 260,
+  }}
+>
+  Selected row
+</TokenAnatomy>
+
+```css
+.table-row[aria-selected='true'] {
+  background: var(--eds-background-interactive-neutral-selected-default);
+  color: var(--eds-text-primary);
+}
+
+.table-row[aria-selected='true']:hover {
+  background: var(--eds-background-interactive-neutral-selected-hover);
+}
+
+.table-row[aria-selected='true']:active {
+  background: var(--eds-background-interactive-neutral-selected-pressed);
+}
+```
+
+### A link
+
+This working link jumps to the non-interactive examples below. Hover it to see both the text
+and underline change; Tab to it to see the focus ring:
+
+<a className="colour-usage-link" href="#non-interactive-examples">
+  Explore non-interactive examples
+</a>
+
+`link` sits in the tone position but is a role rather than a tone. The underline is a
+`border.interactive.link.*` token, not a colour chosen by eye:
+
+```css
+.colour-usage-link {
+  color: var(--eds-text-interactive-link-default);
+  text-decoration: underline;
+  text-decoration-color: var(--eds-border-interactive-link-default);
+}
+
+.colour-usage-link:hover {
+  color: var(--eds-text-interactive-link-hover);
+  text-decoration-color: var(--eds-border-interactive-link-hover);
+}
+
+.colour-usage-link:active {
+  color: var(--eds-text-interactive-link-pressed);
+  text-decoration-color: var(--eds-border-interactive-link-pressed);
+}
+
+.colour-usage-link:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+```
+
+`icon.interactive.link.*` follows the same states for a link that carries an icon.
+
+### Focus and disabled
+
+Focus colour is the same on every element. This static specimen shows the ring a keyboard-focused
+action would have:
+
+<span
+  style={{
+    background: 'var(--eds-background-interactive-neutral-muted-default)',
+    borderRadius: 4,
+    color: 'var(--eds-text-on-muted-neutral)',
+    display: 'inline-block',
+    margin: '0.5rem 0.125rem 1rem',
+    outline: '2px solid var(--eds-border-interactive-focus)',
+    outlineOffset: 1,
+    padding: '0.5rem 1rem',
+  }}
+>
+  <span>Focused action</span>
+</span>
+
+```css
+:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+```
+
+Disabled is a separate neutral set rather than a faint version of the element's tone. This is a
+static illustration, not an interactive control:
+
+<span
+  style={{
+    background: 'var(--eds-background-interactive-disabled)',
+    border: '1px solid var(--eds-border-interactive-disabled)',
+    borderRadius: 4,
+    color: 'var(--eds-text-interactive-disabled)',
+    display: 'inline-block',
+    margin: '0.5rem 0 1rem',
+    padding: '0.5rem 1rem',
+  }}
+>
+  <span>Disabled action</span>
+</span>
+
+```css
+.action:disabled {
+  background: var(--eds-background-interactive-disabled);
+  border: 1px solid var(--eds-border-interactive-disabled);
+  color: var(--eds-text-interactive-disabled);
+}
+```
+
+A disabled destructive action is not a faint red. A control that cannot be actioned has no tone to
+convey.
+
+## Non-interactive examples
+
+These backgrounds communicate meaning without hover or pressed states. Any controls inside them
+use their own interactive tokens.
+
+### A warning banner
+
+The Figma warning Banner has a muted fill and border, a warning icon, primary text and a dismiss
+control. The banner surface remains non-interactive.
+
+<TokenAnatomy
+  mode="colour"
+  caption="A warning Banner: static background and border."
+  bindings={{
+    color: { token: 'text.primary', label: 'message' },
+    background: {
+      token: 'background.non-interactive.warning.muted',
+      label: 'fill',
+    },
+    borderColor: {
+      token: 'border.non-interactive.warning.muted',
+      label: 'stroke',
+    },
+  }}
+  maxWidth={560}
+  style={{
+    borderRadius: 'var(--eds-corner-radius-rounded)',
+    display: 'flex',
+    fontFamily: 'var(--eds-family-ui)',
+    fontSize: 'var(--eds-typography-ui-md-font-size)',
+    fontWeight: 'var(--eds-font-weight-normal)',
+    lineHeight: 'var(--eds-typography-ui-md-line-height)',
+    padding: 'var(--eds-spacing-md)',
+    width: '100%',
+  }}
+>
+  <span
+    style={{
+      alignItems: 'flex-start',
+      display: 'flex',
+      gap: 'var(--eds-spacing-xl)',
+      width: '100%',
+    }}
+  >
+    <svg
+      aria-hidden="true"
+      width="24"
+      height="24"
+      viewBox="0 0 22 19"
+      fill="currentColor"
+      style={{ color: 'var(--eds-icon-on-default-warning)', flexShrink: 0 }}
+    >
+      <path d="M22 19H0L11 0L22 19ZM3.46973 17H18.5303L11 3.99023L3.46973 17ZM12 16H10V14H12V16ZM12 8V12H10V8H12Z" />
+    </svg>
+    <span style={{ flex: 1, minWidth: 0 }}>
+      Check the values before continuing. Some inputs may need correction.
+    </span>
+
+  </span>
+</TokenAnatomy>
+
+```css
+.warning-banner {
+  background: var(--eds-background-non-interactive-warning-muted);
+  border: 1px solid var(--eds-border-non-interactive-warning-muted);
+  color: var(--eds-text-primary);
+}
+
+.warning-banner .warning-icon {
+  color: var(--eds-icon-on-default-warning);
+}
+```
+
+### A default informational panel
+
+Use the middle level when information needs more presence than a muted tint but is not the main
+focus. This panel is not a control:
+
+<TokenAnatomy
+  mode="colour"
+  caption="A static information panel at the non-interactive default level."
+  bindings={{
+    color: { token: 'text.on-default.info', label: 'text' },
+    background: {
+      token: 'background.non-interactive.info.default',
+      label: 'fill',
+    },
+  }}
+  style={{
+    borderRadius: 4,
+    padding: '0.625rem 0.875rem',
+    fontSize: '1rem',
+    fontWeight: 400,
+    width: 240,
+  }}
+>
+  Scheduled maintenance is tomorrow.
+</TokenAnatomy>
+
+```css
+.information-panel {
+  background: var(--eds-background-non-interactive-info-default);
+  color: var(--eds-text-on-default-info);
+}
+```
+
+There is no hover or pressed token to add to this panel. A control inside it would use its own
+interactive tokens.
+
+### A solid success badge
+
+The Figma Badge's **Success / High / Solid** variant uses the non-interactive emphasis fill
+with the matching foreground and a small, medium-weight label. The badge is not a control:
+
+<TokenAnatomy
+  mode="colour"
+  caption="A high-emphasis solid success Badge, using its Figma typography and spacing."
+  bindings={{
+    color: { token: 'text.on-emphasis.success', label: 'text' },
+    background: {
+      token: 'background.non-interactive.success.emphasis',
+      label: 'fill',
+    },
+  }}
+  style={{
+    borderRadius: 'var(--eds-corner-radius-rounded)',
+    fontFamily: 'var(--eds-family-ui)',
+    fontSize: 'var(--eds-typography-ui-sm-font-size)',
+    fontWeight: 'var(--eds-font-weight-bolder)',
+    lineHeight: 'var(--eds-typography-ui-sm-line-height)',
+    padding: 'var(--eds-spacing-4xs) var(--eds-spacing-2xs)',
+  }}
+>
+  Completed
+</TokenAnatomy>
+
+```css
+.completed-badge {
+  background: var(--eds-background-non-interactive-success-emphasis);
+  color: var(--eds-text-on-emphasis-success);
+  font-size: var(--eds-typography-ui-sm-font-size);
+  font-weight: var(--eds-font-weight-bolder);
+  line-height: var(--eds-typography-ui-sm-line-height);
+  padding: var(--eds-spacing-4xs) var(--eds-spacing-2xs);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+```
+
+## Do's and Don'ts
+
+:::info **Do**
+
+- Choose by **behaviour**: actionable elements use interactive tokens; static surfaces do not have hover or pressed states.
+- Use the named `hover` and `pressed` tokens for interactive states.
+- Use semantic tokens and check the actual foreground, fill, scheme, state and typography with APCA.
+- Follow component-specific foregrounds when they differ from the general pairing, as the warning Banner does.
+- Use the dedicated, tone-free tokens for disabled controls.
+
+:::
+
+:::danger **Don't**
+
+- Pick by appearance or give a static banner hover values.
+- Derive states with opacity or filters instead of using their named tokens.
+- Assume `text.primary` works on every tinted fill or every selected accent state.
+- Bind components to numbered palette steps, use `text.tertiary` for ordinary body text, or use `data-visualization.*` for interface chrome.
+
+:::
+
+## Coming from an earlier version
+
+The state and strength names changed from EDS 1.x and 2.0.0-beta, and some tokens have no direct
+equivalent. [Migration](./migration.mdx) covers both routes.
