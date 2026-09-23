@@ -31,6 +31,15 @@ User-invokable prompts triggered with `/command-name`.
 | `/audit-harnesses`      | `/audit-harnesses`                    | Audit AI harness configs for drift across tools          |
 | `/tokens-studio`        | `/tokens-studio <task>`               | Tokens Studio platform / studio CLI pipeline assistant   |
 
+## Skills
+
+Skills in `.claude/skills/<name>/SKILL.md` are applied automatically when the task matches, and can also be invoked as `/name`.
+
+| Skill                  | Applied when                | Description                                                            |
+| ---------------------- | --------------------------- | ---------------------------------------------------------------------- |
+| `write-pr-description` | Opening or editing a PR     | Short PR description per `documentation/agent-instructions/PR_AND_ISSUE_WRITING.md` |
+| `write-issue`          | Opening or editing an issue | Issue from notes, screenshots or a conversation, per the same doc      |
+
 ## Hooks
 
 Configured in `.claude/settings.json`. Scripts live in `.claude/hooks/`.

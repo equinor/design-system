@@ -54,6 +54,8 @@ Primary agents are selectable by the user and run as the main conversation agent
 | `build` | Development agent with EDS conventions | All (asks for git commit/push/branch) |
 | `advisor` | Read-only architectural advice and code reviews | Read-only (no write/edit/bash) |
 | `tokens-studio` | Tokens Studio pipeline assistant (studio CLI, pull, exports, config) | All (asks for git commit/push/branch, gh, and remote-mutating studio commands) |
+| `write-pr-description` | Writes a short PR description | All (asks for git commit/push and `gh pr create`/`edit`) |
+| `write-issue` | Writes a GitHub issue from notes, screenshots or a conversation | All (asks for git commit/push and `gh issue create`/`edit`) |
 
 ### Sub-Agents
 

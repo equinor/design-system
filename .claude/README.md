@@ -12,7 +12,8 @@ Claude Code reads this directory automatically. The shared EDS conventions live 
 ├── settings.local.json # Personal settings (gitignored)
 ├── commands/           # Slash commands (/new-component, /create-component-doc)
 ├── hooks/              # Hook scripts (read_hook.js, format_hook.js)
-└── rules/              # Path-scoped rules
+├── rules/              # Path-scoped rules
+└── skills/             # Skills (write-pr-description, write-issue)
 ```
 
 ## Instruction Pipeline
@@ -47,6 +48,15 @@ Commands are user-invokable prompts triggered with `/command-name`.
 |---------|-------|-------------|
 | `/new-component` | `/new-component Button` | Scaffold a new EDS 2.0 component with all files |
 | `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation |
+
+## Skills
+
+Skills live in `skills/<name>/SKILL.md`. Claude Code applies a skill on its own when the task matches the skill's `description`, and you can also invoke it as `/name`.
+
+| Skill | Applied when | Description |
+|-------|--------------|-------------|
+| `write-pr-description` | Opening or editing a PR | Short PR description per [`PR_AND_ISSUE_WRITING.md`](../documentation/agent-instructions/PR_AND_ISSUE_WRITING.md) |
+| `write-issue` | Opening or editing an issue | Issue from notes, screenshots or a conversation, per the same doc |
 
 ## Hooks
 
