@@ -132,10 +132,10 @@ The inherited token layer is treated as debt to be paid down, not as the target 
 
 ### Consequences
 
-- Good, because the boundary of what EDS owns is now legible. The mobile package implements the design system, and nothing in it speaks to authentication, telemetry or navigation.
-- Good, because MAD is a consumer like any other team, so EDS can release on its own cadence and MAD can upgrade when it suits them.
-- Good, because the library moved onto current platform versions quickly once it was no longer pinned by MAD's release train. It now targets `react@^19.2.0` and `react-native@^0.83.6`, and it depends on `@equinor/eds-tokens` directly.
-- Good, because components MAD never had, including Badge, Divider, Link and TextArea, could be added without negotiating scope with another team.
+- Good: the boundary of what EDS owns is now legible. The mobile package implements the design system, and nothing in it speaks to authentication, telemetry or navigation.
+- Good: MAD is a consumer like any other team, so EDS can release on its own cadence and MAD can upgrade when it suits them.
+- Good: the library moved onto current platform versions quickly once it was no longer pinned by MAD's release train. It now targets `react@^19.2.0` and `react-native@^0.83.6`, and it depends on `@equinor/eds-tokens` directly.
+- Good: components MAD never had, including Badge, Divider, Link and TextArea, could be added without negotiating scope with another team.
 - Bad, because two implementations of the same design are published at once, and both are alive. `@equinor/mad-components` was at `0.20.0` when the split happened and is at `0.25.5` as of 2026-08-25, so it has kept shipping releases since. An application depending on both `mad-core` and `@equinor/eds-mobile-components` will resolve two component libraries into one bundle for as long as MAD's own packages keep depending on `mad-components`.
 - Bad, because there is no shared fix path. A bug fixed in one library has to be ported by hand to the other, if it is ported at all, and the two have been diverging for over a year.
 - Bad, because capabilities that lived in MAD's other packages have no EDS home yet. Toast is the clearest case: `@equinor/mad-toast` provided it, EDS did not take that package, and a Toast component is still planned rather than shipped.
