@@ -123,7 +123,7 @@ The decisive point is scope, not code quality. `mad-components` was the only pac
 
 | Kept                                                                                                        | Left behind                                                                 |
 | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| All 28 components plus the shared `_internal` folder, including `EDSProvider`, `Portal` and `ErrorBoundary` | Every other MAD package, including the shared ESLint and TypeScript configs |
+| All 28 components (including `EDSProvider`, `Portal` and `ErrorBoundary`) plus the shared `_internal` folder (`ScrimProvider`, `RootModal`, `PopInContainer`) | Every other MAD package, including the shared ESLint and TypeScript configs |
 | `src/styling` (`EDSStyleSheet`, animations, the token layer), `hooks`, `utils`                              | Turborepo, Yarn 4 and Changesets, replaced by pnpm and release-please       |
 | Fonts and assets needed by `useEDS`                                                                         | MAD's documentation site and the Chronicles application                     |
 | The `tsup` build and the general shape of the public API                                                    | The `@equinor/mad-*` package names and the `0.20.x` version line            |
