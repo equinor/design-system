@@ -3,6 +3,7 @@
 - **Status:** Accepted (recorded retrospectively 2026-09-11)
 - **Date:** 2025-06 (the imported component tree first appears in `equinor/design-system-mobile` on 2025-06-27)
 - **Decision makers:** Chibuzor Nwemambu, EDS Core Team
+- **Scope:** Mobile
 
 ## Context
 
