@@ -14,7 +14,7 @@ Run the weekly Dependabot rotation: triage the open Dependabot PRs **and** both 
 1. **PRs** (§ Step 1): list open Dependabot PRs with CI state. Spot `npm_and_yarn` security PRs that duplicate a version PR and fail on `ERR_PNPM_OUTDATED_LOCKFILE`. For majors, read the `.0` release notes and confirm the affected packages' tests actually ran in the `Test` job log; run locally what CI skipped.
 2. **Dependabot alerts** (§ Step 2): read open alerts via `gh api`, group by package, and classify each as has-a-PR / direct / transitive / no-fix. In the IDE without `gh`, ask the user to read the Security tab and paste the list.
 3. **Overrides** (§ Step 3): for transitive alerts, trace the parent in `main`'s lockfile, check the fix is installable for us (module format, engines), and propose the `pnpm.overrides` changes. Build the override PR only after the user has confirmed the list.
-4. **Code scanning** (§ Step 4): read open CodeQL alerts, look at the flagged line, and recommend either a fix PR or a dismissal with one of the four accepted reasons. In the IDE without `gh`, ask the user to read the code scanning page and paste the list.
+4. **Code scanning** (§ Step 4): read open CodeQL alerts, look at the flagged line, and recommend either a fix PR or a dismissal with an accepted reason and a comment. In the IDE without `gh`, ask the user to read the code scanning page and paste the list.
 5. **Report** (§ Step 5): print the report with the `gh` commands at the end.
 
 ## Boundaries

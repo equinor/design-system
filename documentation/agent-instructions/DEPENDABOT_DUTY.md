@@ -268,7 +268,14 @@ gh api --method PATCH /repos/equinor/design-system/code-scanning/alerts/<n> \
 
 `dismissed_comment` is optional to the API and mandatory for us — a dismissal without one is indistinguishable from someone clearing the list, and the next person on duty has no way to re-check the judgement. It is capped at 280 characters.
 
-Dismissals are not permanent: an alert reopens if CodeQL sees the same pattern again on a later scan. Re-dismissing it is fine; silently dismissing something that keeps coming back is a signal the code should change instead.
+A dismissal sticks. GitHub's wording is "next time code scanning runs, the same code won't generate an alert" — so the flagged code stops being reported until it changes enough to be a different alert. Both alert types behave the same way here: nothing reopens on its own, which is why the comment carries the whole weight of the decision.
+
+That also means the dismissed code scanning list deserves the same periodic look as the parked Dependabot alerts in § Step 2:
+
+```bash
+gh api --paginate '/repos/equinor/design-system/code-scanning/alerts?state=dismissed&per_page=100' \
+  --jq '.[] | "\(.rule.security_severity_level // .rule.severity | ascii_upcase)\t\(.rule.id)\t\(.dismissed_reason)\t\(.dismissed_comment // "(no comment)")"'
+```
 
 ## Step 5 — Report
 

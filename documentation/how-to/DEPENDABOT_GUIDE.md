@@ -142,8 +142,6 @@ The list is usually empty. When something is on it:
 - **Real problem?** Fix it in a normal PR and reference the rule id (`js/…`) in the description.
 - **Not a real problem?** Dismiss it with a reason and a one-line comment saying why. The comment is optional to GitHub and required by us — a dismissal without one is useless to the next person.
 
-Dismissing is not permanent — an alert reopens if CodeQL sees the same pattern again. Something that keeps coming back is usually a hint that the code should change instead.
-
 Commands and the per-alert decision table: [`DEPENDABOT_DUTY.md` § Step 4](../agent-instructions/DEPENDABOT_DUTY.md#step-4--triage-code-scanning-alerts).
 
 ## Alerts we are not going to fix
@@ -154,7 +152,9 @@ GitHub offers a fixed set of reasons, and the two alert types have different set
 
 Write a real comment either way. A reason on its own means the next person redoes your investigation from scratch.
 
-One catch: a dismissed alert never reopens by itself, not even when a patch finally ships. The weekly sweep therefore re-reads the dismissed list and flags anything parked as *tolerable risk* or *no bandwidth* that has since become fixable. The agent does this automatically; if you are doing it by hand, filter the alerts page on dismissed and skim the ones with no patch at the time.
+One catch, and it applies to both alert types: a dismissal is permanent. A Dependabot alert does not reopen when a patch finally ships, and GitHub's own wording for code scanning is that "the same code won't generate an alert" on later runs. So nothing brings a dismissed alert back except someone looking.
+
+The weekly sweep therefore re-reads the dismissed lists: anything parked as *tolerable risk* or *no bandwidth* that has since become fixable, plus a plain list of what is still parked so the pile stays visible. The agent does this automatically. By hand, filter the alerts page on dismissed and skim it.
 
 ## FAQ
 
