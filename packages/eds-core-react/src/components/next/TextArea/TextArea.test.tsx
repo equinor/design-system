@@ -54,6 +54,22 @@ describe('TextArea (next)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <TextArea
+          label="Description"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Character count', () => {
     it('shows character count when showCharacterCount is true', () => {
       render(<TextArea showCharacterCount defaultValue="hello" />)
