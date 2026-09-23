@@ -32,6 +32,7 @@ const components = join(app, 'src', 'components')
 const PROSE = [
   'foundation/colour/intro.mdx',
   'foundation/colour/getting_started.mdx',
+  'foundation/colour/usage.mdx',
   'foundation/colour/palette.mdx',
   'foundation/colour/migration.mdx',
   'foundation/colour/token-anatomy.mdx',
@@ -215,12 +216,16 @@ const literal = (file, re) => {
     ? Number(readFileSync(path, 'utf8').match(re)?.[1] ?? -1)
     : null
 }
-const quoted = (file, re) => {
+const quotedValues = (file, re) => {
   const path = join(components, file)
   if (!existsSync(path)) return null
   const body = readFileSync(path, 'utf8').match(re)?.[1]
-  return body ? (body.match(/'/g)?.length ?? 0) / 2 : -1
+  return body ? [...body.matchAll(/'([^']+)'/g)].map((m) => m[1]) : []
 }
+const valuesFromTokens = (re) =>
+  [
+    ...new Set([...canon].map((name) => name.match(re)?.[1]).filter(Boolean)),
+  ].sort()
 /** Number of `n:` keys in an object literal, for maps that must cover a whole range. */
 const keyed = (file, re) => {
   const path = join(components, file)
@@ -230,24 +235,6 @@ const keyed = (file, re) => {
 }
 
 const structure = [
-  [
-    'tones',
-    distinct(/^background\.interactive\.([a-z]+)\./),
-    'colour/ColourPairing.tsx',
-    quoted('colour/ColourPairing.tsx', /const TONES = \[([\s\S]*?)\]/),
-  ],
-  [
-    'interactive states',
-    distinct(/^background\.interactive\.accent\.emphasis\.([a-z]+)$/),
-    'colour/ColourStates.tsx',
-    quoted('colour/ColourStates.tsx', /const STATES = \[([\s\S]*?)\]/),
-  ],
-  [
-    'non-interactive levels',
-    distinct(/^background\.non-interactive\.accent\.([a-z]+)$/),
-    'colour/ColourStates.tsx',
-    quoted('colour/ColourStates.tsx', /const LEVELS = \[([\s\S]*?)\]/),
-  ],
   [
     'data-visualisation categories',
     distinct(/^data-visualization\.cat\.(\d+)\./),
@@ -329,6 +316,116 @@ for (const [what, source, file, found] of structure) {
       kind: 'structure',
     })
   }
+}
+
+const matrixAxes = [
+  [
+    'tones',
+    /^background\.interactive\.([a-z]+)\.emphasis\.default$/,
+    'colour/ColourPairing.tsx',
+    /const TONES = \[([\s\S]*?)\]/,
+  ],
+  [
+    'interactive states',
+    /^background\.interactive\.accent\.emphasis\.([a-z]+)$/,
+    'colour/ColourStates.tsx',
+    /const STATES = \[([\s\S]*?)\]/,
+  ],
+  [
+    'interactive background levels',
+    /^background\.interactive\.accent\.([a-z]+)\.default$/,
+    'colour/ColourStates.tsx',
+    /const BACKGROUND_LEVELS = \[([\s\S]*?)\]/,
+  ],
+  [
+    'interactive border levels',
+    /^border\.interactive\.accent\.([a-z]+)\.default$/,
+    'colour/ColourStates.tsx',
+    /const BORDER_LEVELS = \[([\s\S]*?)\]/,
+  ],
+  [
+    'tones with a selected background level',
+    /^background\.interactive\.([a-z]+)\.selected\.default$/,
+    'colour/ColourStates.tsx',
+    /const SELECTABLE_TONES = \[([\s\S]*?)\]/,
+  ],
+  [
+    'non-interactive background levels',
+    /^background\.non-interactive\.accent\.([a-z]+)$/,
+    'colour/ColourStates.tsx',
+    /const NON_INTERACTIVE_LEVELS = \[([\s\S]*?)\]/,
+  ],
+  [
+    'non-interactive border levels',
+    /^border\.non-interactive\.accent\.([a-z]+)$/,
+    'colour/ColourStates.tsx',
+    /const NON_INTERACTIVE_LEVELS = \[([\s\S]*?)\]/,
+  ],
+]
+
+for (const [what, pattern, file, declaration] of matrixAxes) {
+  const found = quotedValues(file, declaration)
+  if (found === null) continue
+  const source = valuesFromTokens(pattern)
+  if (
+    found.length !== source.length ||
+    found.slice().sort().join() !== source.join()
+  ) {
+    problems.push({
+      file: `src/components/${file}`,
+      line: 0,
+      name: `${what}: component has [${found.join(', ')}], token source has [${source.join(', ')}]`,
+      kind: 'structure',
+    })
+  }
+}
+
+const matrixFile = 'colour/ColourStates.tsx'
+const matrixTones = quotedValues(
+  matrixFile,
+  /const SELECTABLE_TONES = \[([\s\S]*?)\]/,
+)
+const matrixStates = quotedValues(matrixFile, /const STATES = \[([\s\S]*?)\]/)
+if (matrixTones && matrixStates) {
+  for (const [surface, levels] of [
+    [
+      'background.interactive',
+      quotedValues(matrixFile, /const BACKGROUND_LEVELS = \[([\s\S]*?)\]/),
+    ],
+    [
+      'border.interactive',
+      quotedValues(matrixFile, /const BORDER_LEVELS = \[([\s\S]*?)\]/),
+    ],
+  ]) {
+    for (const tone of matrixTones)
+      for (const level of levels ?? [])
+        for (const state of matrixStates) {
+          const name = `${surface}.${tone}.${level}.${state}`
+          if (!canon.has(name))
+            problems.push({
+              file: `src/components/${matrixFile}`,
+              line: 0,
+              name: `matrix token does not exist: ${name}`,
+              kind: 'token',
+            })
+        }
+  }
+  const nonInteractiveLevels = quotedValues(
+    matrixFile,
+    /const NON_INTERACTIVE_LEVELS = \[([\s\S]*?)\]/,
+  )
+  for (const surface of ['background', 'border'])
+    for (const tone of matrixTones)
+      for (const level of nonInteractiveLevels ?? []) {
+        const name = `${surface}.non-interactive.${tone}.${level}`
+        if (!canon.has(name))
+          problems.push({
+            file: `src/components/${matrixFile}`,
+            line: 0,
+            name: `matrix token does not exist: ${name}`,
+            kind: 'token',
+          })
+      }
 }
 
 // --- banned wording ---------------------------------------------------------------------------
