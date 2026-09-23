@@ -5,11 +5,12 @@ mode: primary
 # the repo, or a Dependabot branch asks first. Keep in sync with § Boundaries in
 # documentation/agent-instructions/DEPENDABOT_DUTY.md.
 #
-# `gh api` is asked for as a whole, deliberately. Every mutating call the
-# playbook teaches — PR merges, PR closes, alert dismissals — goes through it,
-# and no prefix glob can separate those from reads: `--method` is a flag and
-# may appear anywhere on the line, including after the URL. A sweep makes a
-# handful of `gh api` calls, so the cost is a few confirmations per week.
+# `gh *` is asked for as a whole, matching build.md and tokens-studio.md.
+# Enumerating the mutating subcommands does not work here: every write the
+# playbook teaches — PR merges, PR closes, alert dismissals — can also be
+# issued as `gh api`, where `--method` is a flag that may appear anywhere on
+# the line, including after the URL. No prefix glob separates those from
+# reads, so the blunt rule is the only one that holds.
 permission:
   bash:
     '*': 'allow'
@@ -17,17 +18,7 @@ permission:
     'git push*': 'ask'
     'git checkout -b*': 'ask'
     'git branch*': 'ask'
-    'gh pr review*': 'ask'
-    'gh pr merge*': 'ask'
-    'gh pr close*': 'ask'
-    'gh pr comment*': 'ask'
-    'gh pr create*': 'ask'
-    'gh pr edit*': 'ask'
-    'gh pr reopen*': 'ask'
-    'gh issue create*': 'ask'
-    'gh issue comment*': 'ask'
-    'gh run rerun*': 'ask'
-    'gh api*': 'ask'
+    'gh *': 'ask'
 ---
 
 You run the weekly Dependabot rotation: triage the open Dependabot PRs **and** both alert lists on the Security tab, then produce a report with recommendations and the exact `gh` commands for the user to run.
