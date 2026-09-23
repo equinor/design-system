@@ -150,6 +150,16 @@ gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=dismisse
 
 Anything this prints was parked for lack of a fix and now has one. Put it in the report as a candidate for the override PR in § Step 3, with the original dismissal comment for context.
 
+That query only catches the parked alerts that have become _actionable_. An alert dismissed as `tolerable_risk` with no patch stays invisible indefinitely, including if the risk changes because the package starts being reachable from shipped code. So also print a plain count, and list the packages behind it every few weeks so the pile stays in view:
+
+```bash
+gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=dismissed&per_page=100' \
+  --jq '.[] | select(.dismissed_reason == "tolerable_risk" or .dismissed_reason == "no_bandwidth")
+        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dismissed_reason)\t\(.dismissed_comment // "(no comment)")"'
+```
+
+A pile that keeps growing, or an entry whose comment no longer describes the situation, is worth raising with the team rather than re-dismissing.
+
 ## Step 3 — Fix transitive alerts with `pnpm.overrides`
 
 The repo already uses `pnpm.overrides` in the root `package.json` for this (see PRs #5177, #5368, #5472). Follow the same shape.

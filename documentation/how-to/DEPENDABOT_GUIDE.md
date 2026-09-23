@@ -119,7 +119,7 @@ Not all vulnerabilities auto-create a PR. Most of the leftovers are **transitive
 
 - **High/critical with no PR?** Fix it the same week, in its own PR, with a review before merging to main.
 - **Low/moderate with no PR?** Fix it if it rides along in the same override PR, otherwise dismiss it with a reason (see below).
-- **No patched version exists?** Dismiss it as **tolerable risk** with a comment saying why.
+- **No patched version exists?** Dismiss it with a reason and a comment saying why.
 
 ### Fixing a transitive alert
 
@@ -140,7 +140,7 @@ CodeQL scans our own source on every PR and weekly, and raises alerts on the [co
 The list is usually empty. When something is on it:
 
 - **Real problem?** Fix it in a normal PR and reference the rule id (`js/…`) in the description.
-- **Not a real problem?** Dismiss it with a reason and a one-line comment saying why. The reasons GitHub accepts are **false positive**, **used in tests**, **mitigated** and **won't fix**. The comment is optional to GitHub and required by us — a dismissal without one is useless to the next person.
+- **Not a real problem?** Dismiss it with a reason and a one-line comment saying why. The comment is optional to GitHub and required by us — a dismissal without one is useless to the next person.
 
 Dismissing is not permanent — an alert reopens if CodeQL sees the same pattern again. Something that keeps coming back is usually a hint that the code should change instead.
 
@@ -148,11 +148,11 @@ Commands and the per-alert decision table: [`DEPENDABOT_DUTY.md` § Step 4](../a
 
 ## Alerts we are not going to fix
 
-There is no separate log to keep. Dismiss the alert with a reason and a comment, and that is the record — it stays on the alert, where the next person will actually see it.
+There is no separate log to keep. Dismiss the alert with a reason and a comment, and that is the record — it stays on the alert, where the next person will actually see it. Anyone with write access can dismiss, so the whole rotation can do this.
 
-For Dependabot alerts the reasons are **tolerable risk** (no patch exists, or the fix is riskier than the bug), **no bandwidth** (fixable, just not this week — an honest answer), **not used**, **inaccurate** and **fix started**. For code scanning they are the four listed above. Anyone with write access can dismiss, so the whole rotation can do this.
+GitHub offers a fixed set of reasons, and the two alert types have different sets. Pick from the dropdown on the alert, or see [`DEPENDABOT_DUTY.md` § Step 2](../agent-instructions/DEPENDABOT_DUTY.md#step-2--triage-dependabot-alerts) for what each one means and when to use it.
 
-Write a real comment. "Won't fix" on its own means the next person redoes your investigation from scratch.
+Write a real comment either way. A reason on its own means the next person redoes your investigation from scratch.
 
 One catch: a dismissed alert never reopens by itself, not even when a patch finally ships. The weekly sweep therefore re-reads the dismissed list and flags anything parked as *tolerable risk* or *no bandwidth* that has since become fixable. The agent does this automatically; if you are doing it by hand, filter the alerts page on dismissed and skim the ones with no patch at the time.
 
