@@ -117,6 +117,6 @@
     "@react-types/shared": "^3.36.1",
     "@tanstack/react-virtual": "3.14.13",
     "downshift": "9.4.0",
-    "react-aria": "^3.52.0"
+    "react-aria": "^3.52.1"
   }
 }
