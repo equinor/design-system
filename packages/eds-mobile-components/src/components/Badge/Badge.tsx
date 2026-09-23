@@ -1,10 +1,10 @@
 import React from "react";
 import { View } from "react-native";
-// SPIKE: useStyles/EDSStyleSheet swapped for the spike token hook.
+// SPIKE: useStyles/EDSStyleSheet swapped for the spike token hook (now V2).
 import {
-    SpikeToken,
-    useSpikeTokens,
-} from "../../styling/tokens/__spike__/useSpikeTokens";
+    SpikeTokenV2,
+    useSpikeTokensV2,
+} from "../../styling/tokens/__spike__/useSpikeTokensV2";
 import { Typography } from "../Typography";
 
 import {
@@ -27,7 +27,7 @@ export const Badge = ({
     variant = "solid",
     ...rest
 }: BadgeProps) => {
-    const styles = badgeSpikeStyles(useSpikeTokens(), {
+    const styles = badgeSpikeStyles(useSpikeTokensV2(), {
         tone,
         emphasis,
         variant,
@@ -42,11 +42,11 @@ export const Badge = ({
     );
 };
 
-// SPIKE: styles below are resolved from the Tokens Studio TypeScript export via
-// `useSpikeTokens` rather than from the generated token modules. See
+// SPIKE: styles below are resolved from the Tokens Studio V2 TypeScript export
+// via `useSpikeTokensV2` rather than from the generated token modules. See
 // src/styling/tokens/__spike__/ and equinor/design-system#5464. Revert before merging.
 const badgeSpikeStyles = (
-    token: SpikeToken,
+    token: SpikeTokenV2,
     { tone, emphasis, variant }: BadgeStyleProps
 ) => {
     const backgroundColor =
