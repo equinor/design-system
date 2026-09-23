@@ -36,8 +36,8 @@ five groups, and states were suffixes: `__resting`, `__hover`, `__selected`, `__
 
 3.0.0-beta names colours by **surface, behaviour, tone, level and state**. That is five questions
 where 1.x asked one, which is why a single old token often has more than one right answer.
-[Introduction](./intro.mdx#reading-a-token-name) explains how to read a name, and it is worth reading
-before you start rather than after.
+[Getting Started](./getting_started.mdx#reading-a-token-name) explains how to read a name, and it is
+worth reading before you start rather than after.
 
 ### Text
 
@@ -117,9 +117,12 @@ tinted button could share `--eds-color-bg-accent-fill-muted-default`. They canno
 `background.non-interactive.*` and has none.
 
 So when you meet a `fill` token, ask whether the thing it colours responds to input.
-[Introduction](./intro.mdx#2-interactive-can-the-user-act-on-it) covers the distinction.
+[Usage](./usage.mdx#start-with-behaviour) covers the distinction.
 
 ### `active` becomes `pressed`
+
+Interactive `active` tokens become `pressed` states, not selected levels. Selection has its own
+background level on accent and neutral, with default, hover and pressed states.
 
 ### Surfaces and planes
 
@@ -134,22 +137,24 @@ The pattern below repeats for all six tones. `accent` is shown; substitute `neut
 
 ### Borders
 
-`subtle` / `medium` / `strong` becomes `muted` / `default` / `emphasis`, the same three levels used
-everywhere else.
+The rows below map old border roles to **non-interactive** borders: `subtle` / `medium` / `strong`
+becomes `muted` / `default` / `emphasis`. For a border that responds to input, decide its role
+instead of translating by strength alone. [Interactive borders](./usage.mdx#border) have only
+`muted` and `emphasis` levels, each with default, hover and pressed states.
 
 <MigrationTwoBorders />
 
 ### Text
 
-Tone-coloured text is now named for **what it sits on** rather than for how strong it is. That is what
-makes the pairing checkable: `text.on-muted.accent` is the foreground for an accent muted fill, and
-nothing else needs to be worked out.
+Tone-coloured text is now named for **what it sits on** rather than for how strong it is. This
+makes the pairing checkable: `text.on-muted.accent` is the foreground for an accent muted fill.
+Check the actual fill, foreground, states, schemes and typography with APCA before shipping.
 
 <MigrationTwoText />
 
 ## Checking your work
 
-APCA contrast against `background.surface` is the acceptance criterion, and the pairings are built to
-meet it. If you use a fill with the foregrounds it is specified for, contrast is already handled. See
-[Accessibility](./intro.mdx#accessibility-is-built-in) and
-[Foreground pairing](./getting_started.mdx#foreground-pairing).
+Use APCA to assess text and controls against their actual backgrounds in both schemes and all
+applicable states, with the intended text size and weight. Do not treat a default-state pairing as
+proof that its hover and pressed states also pass. See [Contrast](./intro.mdx#contrast)
+and [Foreground pairing](./usage.mdx#foreground-pairing).
