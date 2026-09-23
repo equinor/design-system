@@ -1,14 +1,14 @@
 # Adopt only the component library from the MAD monorepo
 
-- **Status:** Accepted
-- **Date:** 2025-06 (recorded retrospectively on 2026-09-11; the imported component tree first appears in `equinor/design-system-mobile` on 2025-06-27)
+- **Status:** Accepted (recorded retrospectively 2026-09-11)
+- **Date:** 2025-06 (the imported component tree first appears in `equinor/design-system-mobile` on 2025-06-27)
 - **Decision makers:** Chibuzor Nwemambu, EDS Core Team
 
 ## Context
 
 EDS had no React Native library of its own. The one that existed at Equinor was maintained by the Mobile App Delivery (MAD) team inside `equinor/mad`, a Yarn 4 and Turborepo monorepo holding twelve packages and two applications. Only one of those packages was a design system.
 
-| Package                                   | What it is                                   | Taken by EDS |
+| Package / app                             | What it is                                   | Taken by EDS |
 | ----------------------------------------- | -------------------------------------------- | ------------ |
 | `@equinor/mad-components`                 | React Native implementation of EDS           | Yes          |
 | `@equinor/mad-core`                       | MAD's own application core                   | No           |
@@ -41,7 +41,7 @@ So the question was not whether the code was worth having. It was how much of a 
 - Whatever EDS takes has to be maintainable by the EDS team, in this repository's toolchain (pnpm, release-please, no Turborepo), without inheriting MAD's release cadence.
 - The mobile library must be free to move onto `@equinor/eds-tokens` and onto current React and React Native versions on EDS's own schedule.
 - Existing MAD applications must keep working. Nothing here is allowed to strand a shipping app.
-- Migration cost matters, but rewriting a working 28 component library from nothing costs more than adapting it.
+- Migration cost matters, but rewriting a working 28-component library from nothing costs more than adapting it.
 
 ## Options Considered
 
@@ -77,7 +77,7 @@ Take the design system implementation, leave everything else with MAD, and repub
 
 - Creates a fork. `@equinor/mad-components` stays published and can drift, and there is no merge path back in either direction
 - Applications built on `mad-core` and its siblings can end up with both libraries in one tree until MAD migrates
-- EDS inherits MAD-era internals, including the hand maintained token layer, and has to migrate them component by component
+- EDS inherits MAD-era internals, including the hand-maintained token layer, and has to migrate them component by component
 - Version numbering restarts, so a consumer who knew `mad-components@0.20` meets `eds-mobile-components@0.x` and has to be told it is not a downgrade
 
 ### Option 3: Leave the library in MAD and co-maintain it
@@ -103,7 +103,7 @@ Take nothing, and implement mobile components fresh against the current EDS desi
 **Pros:**
 
 - No inherited internals and no fork
-- Every component would be tokens driven from its first commit
+- Every component would be tokens-driven from its first commit
 
 **Cons:**
 
@@ -121,12 +121,12 @@ The decisive point is scope, not code quality. `mad-components` was the only pac
 
 ### What crossed the boundary
 
-| Kept                                                                                                        | Left behind                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Kept                                                                                                                                                          | Left behind                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | All 28 components (including `EDSProvider`, `Portal` and `ErrorBoundary`) plus the shared `_internal` folder (`ScrimProvider`, `RootModal`, `PopInContainer`) | Every other MAD package, including the shared ESLint and TypeScript configs |
-| `src/styling` (`EDSStyleSheet`, animations, the token layer), `hooks`, `utils`                              | Turborepo, Yarn 4 and Changesets, replaced by pnpm and release-please       |
-| Fonts and assets needed by `useEDS`                                                                         | MAD's documentation site and the Chronicles application                     |
-| The `tsup` build and the general shape of the public API                                                    | The `@equinor/mad-*` package names and the `0.20.x` version line            |
+| `src/styling` (`EDSStyleSheet`, animations, the token layer), `hooks`, `utils`                                                                                | Turborepo, Yarn 4 and Changesets, replaced by pnpm and release-please       |
+| Fonts and assets needed by `useEDS`                                                                                                                           | MAD's documentation site and the Chronicles application                     |
+| The `tsup` build and the general shape of the public API                                                                                                      | The `@equinor/mad-*` package names and the `0.20.x` version line            |
 
 The inherited token layer is treated as debt to be paid down, not as the target state. Components are being migrated onto `@equinor/eds-tokens` one at a time, and the package now declares that dependency directly.
 
@@ -140,18 +140,18 @@ The inherited token layer is treated as debt to be paid down, not as the target 
 - Bad: there is no shared fix path. A bug fixed in one library has to be ported by hand to the other, if it is ported at all, and the two have been diverging for over a year.
 - Bad: capabilities that lived in MAD's other packages have no EDS home yet. Toast is the clearest case: `@equinor/mad-toast` provided it, EDS did not take that package, and a Toast component is still planned rather than shipped.
 - Bad: EDS inherited internals it did not design, and every component migration carries the cost of untangling the MAD-era token layer before the design work can start.
-- Bad: the version reset needs explaining, and gets worse over time. `eds-mobile-components@0.3.x` is the current library and `mad-components` is on `0.25.5`, so the numbers point a consumer at the wrong one.
+- Bad: the version reset needs explaining, and gets worse over time. `eds-mobile-components@0.3.x` is the current library as of 2026-09-11, and `mad-components` is on `0.25.5`, so the numbers point a consumer at the wrong one.
 
 ### Confirmation
 
 - `packages/eds-mobile-components/package.json` must not declare any `@equinor/mad-*` dependency. Reintroducing one would undo the boundary this ADR draws.
 - Reviews reject new dependencies on MAD packages in mobile code. A capability that only exists in a MAD package is a candidate for an EDS component, not a candidate for a dependency.
-- Anything outside the design system surface, meaning authentication, telemetry, navigation, device APIs and product specific components, does not belong in `packages/eds-mobile-components`.
+- Anything outside the design system surface, meaning authentication, telemetry, navigation, device APIs and product-specific components, does not belong in `packages/eds-mobile-components`.
 
 ## Related
 
 - Follow-on migration into this monorepo: [equinor/design-system#5138](https://github.com/equinor/design-system/issues/5138)
 - Source repository: [equinor/mad](https://github.com/equinor/mad), package `packages/components`
 - Intermediate repository: `equinor/design-system-mobile`, archived with a redirect README when [#5394](https://github.com/equinor/design-system/issues/5394) closed on 2026-09-09
-- `documentation/adr/0011-adopt-tokens-studio-platform-pipeline.md` for the token pipeline the mobile library is migrating onto
+- [ADR-0011](./0011-adopt-tokens-studio-platform-pipeline.md) — the token pipeline the mobile library is migrating onto
 - Release strategy for the stable cutover: tracked in [#5515](https://github.com/equinor/design-system/issues/5515)

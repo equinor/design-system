@@ -36,7 +36,7 @@ Records: 19
 | [0016](./0016-colour-approach-for-eds-2.md) | Colour approach for EDS 2.0 | Approved | 2026-08-27 |  |
 | [0017](./0017-spacing-approach-for-eds-2.md) | Spacing approach for EDS 2.0 | Accepted | 2026-04-23 |  |
 | [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Accepted | 2026-04-23 |  |
-| [0019](./0019-adopt-only-the-component-library-from-mad.md) | Adopt only the component library from the MAD monorepo | Accepted | 2025-06 |  |
+| [0019](./0019-adopt-only-the-component-library-from-mad.md) | Adopt only the component library from the MAD monorepo | Accepted | 2025-06 | recorded retrospectively 2026-09-11 |
 
 ## Statuses outside the template
 
