@@ -56,7 +56,7 @@ describe('Select (next)', () => {
       expect(container.firstChild).toHaveClass('custom-class')
       // eslint-disable-next-line testing-library/no-node-access
       expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
-      // eslint-disable-next-line testing-library/no-container
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       expect(container.querySelector('.eds-select')).not.toHaveClass(
         'custom-class',
       )
