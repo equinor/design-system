@@ -3,9 +3,8 @@ import React from 'react'
 /**
  * Renders the foreground pairing rules as specimens rather than as a table of names.
  *
- * Each specimen is painted with the fill token and carries, inside it, the text, icon and border
- * tokens that fill is specified for. The point is that the pairing can be seen rather than trusted:
- * if a combination were wrong, it would be visibly wrong here.
+ * Each specimen is painted with a fill and its corresponding text and icon tokens. Border tokens
+ * are examples where a border is used, not a requirement for every fill.
  *
  * Token names are the canonical dotted form. The CSS custom property is derived by replacing dots
  * with hyphens, which holds for every colour token in the set.
@@ -34,8 +33,10 @@ type Pairing = {
   fill: string
   text: string
   icon: string
-  /** Some fills have no paired border */
+  /** An example border, where the specimen has one */
   border?: string
+  /** One representative tone; the full gallery includes every tone. */
+  featuredTone?: (typeof TONES)[number] | ''
 }
 
 const PAIRINGS: Pairing[] = [
@@ -46,6 +47,7 @@ const PAIRINGS: Pairing[] = [
     text: 'text.primary',
     icon: 'icon.secondary',
     border: 'border.non-interactive.neutral.default',
+    featuredTone: '',
   },
   {
     title: 'Canvas',
@@ -61,7 +63,7 @@ const PAIRINGS: Pairing[] = [
     fill: 'background.interactive.{tone}.emphasis.default',
     text: 'text.on-emphasis.{tone}',
     icon: 'icon.on-emphasis.{tone}',
-    border: 'border.interactive.{tone}.emphasis.default',
+    featuredTone: 'accent',
   },
   {
     title: 'Interactive, muted',
@@ -77,7 +79,7 @@ const PAIRINGS: Pairing[] = [
     fill: 'background.non-interactive.{tone}.emphasis',
     text: 'text.on-emphasis.{tone}',
     icon: 'icon.on-emphasis.{tone}',
-    border: 'border.non-interactive.{tone}.emphasis',
+    featuredTone: 'success',
   },
   {
     title: 'Non-interactive, default',
@@ -85,23 +87,31 @@ const PAIRINGS: Pairing[] = [
     fill: 'background.non-interactive.{tone}.default',
     text: 'text.on-default.{tone}',
     icon: 'icon.on-default.{tone}',
-    border: 'border.non-interactive.{tone}.default',
+    featuredTone: 'info',
   },
   {
     title: 'Non-interactive, muted',
-    note: 'The faintest tint that still reads as tinted, such as a banner.',
+    note: 'A faint tint with a tone-specific foreground; component designs may specify another.',
     fill: 'background.non-interactive.{tone}.muted',
     text: 'text.on-muted.{tone}',
     icon: 'icon.on-muted.{tone}',
     border: 'border.non-interactive.{tone}.muted',
+    featuredTone: 'warning',
   },
   {
-    title: 'Selected',
-    note: 'Available on accent and neutral only.',
+    title: 'Selected, neutral',
+    note: 'Short labels on a selected neutral row; check typography in every state.',
+    fill: 'background.interactive.neutral.selected.default',
+    text: 'text.primary',
+    icon: 'icon.primary',
+    featuredTone: '',
+  },
+  {
+    title: 'Selected, accent (default only)',
+    note: 'The default state only. Check APCA before using hover or pressed.',
     fill: 'background.interactive.accent.selected.default',
     text: 'text.primary',
     icon: 'icon.primary',
-    border: 'border.interactive.selected-indicator',
   },
   {
     title: 'Inverted',
@@ -128,6 +138,12 @@ const PAIRINGS: Pairing[] = [
   },
 ]
 
+const FEATURED_PAIRINGS = PAIRINGS.flatMap((pairing) =>
+  pairing.featuredTone === undefined
+    ? []
+    : [{ pairing, tone: pairing.featuredTone }],
+)
+
 /** A single painted specimen: the fill, with its paired foregrounds inside it. */
 function Specimen({
   fill,
@@ -146,7 +162,7 @@ function Specimen({
     <div
       style={{
         background: cssVar(fill),
-        border: `2px solid ${border ? cssVar(border) : 'transparent'}`,
+        border: border ? `2px solid ${cssVar(border)}` : undefined,
         borderRadius: '6px',
         padding: '1.125rem 1.25rem',
         display: 'flex',
@@ -170,8 +186,8 @@ function Specimen({
         <span
           style={{
             color: cssVar(text),
-            fontWeight: 600,
-            fontSize: '0.8125rem',
+            fontWeight: 400,
+            fontSize: '1rem',
             textTransform: 'capitalize',
           }}
         >
@@ -182,31 +198,69 @@ function Specimen({
       <span
         style={{
           color: cssVar(text),
-          fontSize: '0.75rem',
+          fontSize: '1rem',
+          fontWeight: 400,
           lineHeight: 1.5,
-          opacity: 0.9,
         }}
       >
         Sample text on this fill
       </span>
+    </div>
+  )
+}
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.25rem',
-          fontSize: '0.675rem',
-          lineHeight: 1.45,
-          fontFamily: 'var(--ifm-font-family-monospace)',
-          color: cssVar(text),
-          wordBreak: 'break-all',
-        }}
-      >
-        <span>Fill: {fill}</span>
-        <span>Text: {text}</span>
-        <span>Icon: {icon}</span>
-        {border ? <span>Border: {border}</span> : null}
-      </div>
+function TokenLabels({
+  fill,
+  text,
+  icon,
+  border,
+}: Pick<Pairing, 'fill' | 'text' | 'icon' | 'border'>) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: 'var(--ifm-font-family-monospace)',
+        fontSize: '0.75rem',
+        gap: '0.25rem',
+        marginTop: '0.5rem',
+        overflowWrap: 'anywhere',
+      }}
+    >
+      <span>Fill: {fill}</span>
+      <span>Text: {text}</span>
+      <span>Icon: {icon}</span>
+      {border ? <span>Border (example): {border}</span> : null}
+    </div>
+  )
+}
+
+function expand(token: string, tone: string) {
+  return token.replaceAll('{tone}', tone)
+}
+
+function PairingSpecimen({
+  pairing,
+  tone,
+}: {
+  pairing: Pairing
+  tone: string
+}) {
+  const fill = expand(pairing.fill, tone)
+  const text = expand(pairing.text, tone)
+  const icon = expand(pairing.icon, tone)
+  const border = pairing.border ? expand(pairing.border, tone) : undefined
+
+  return (
+    <div style={{ minWidth: 0 }}>
+      <Specimen
+        label={tone || pairing.title}
+        fill={fill}
+        text={text}
+        icon={icon}
+        border={border}
+      />
+      <TokenLabels fill={fill} text={text} icon={icon} border={border} />
     </div>
   )
 }
@@ -215,12 +269,9 @@ function Group({ pairing }: { pairing: Pairing }) {
   const isPerTone = pairing.fill.includes('{tone}')
   const tones: readonly string[] = isPerTone ? TONES : ['']
 
-  const expand = (token: string, tone: string) =>
-    token.replaceAll('{tone}', tone)
-
   return (
     <section style={{ margin: '2rem 0' }}>
-      <h3 style={{ marginBottom: '0.25rem' }}>{pairing.title}</h3>
+      <h4 style={{ marginBottom: '0.25rem' }}>{pairing.title}</h4>
       <p
         style={{
           marginTop: 0,
@@ -235,18 +286,16 @@ function Group({ pairing }: { pairing: Pairing }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+          gridTemplateColumns:
+            'repeat(auto-fit, minmax(min(100%, 18rem), 1fr))',
           gap: '1rem',
         }}
       >
         {tones.map((tone) => (
-          <Specimen
+          <PairingSpecimen
             key={tone || pairing.fill}
-            label={tone || pairing.title}
-            fill={expand(pairing.fill, tone)}
-            text={expand(pairing.text, tone)}
-            icon={expand(pairing.icon, tone)}
-            border={pairing.border ? expand(pairing.border, tone) : undefined}
+            pairing={pairing}
+            tone={tone}
           />
         ))}
       </div>
@@ -257,9 +306,29 @@ function Group({ pairing }: { pairing: Pairing }) {
 export function ColourPairing() {
   return (
     <div>
-      {PAIRINGS.map((pairing) => (
-        <Group key={pairing.title} pairing={pairing} />
-      ))}
+      <h3>Representative pairings</h3>
+      <div
+        style={{
+          display: 'grid',
+          gap: '1.5rem',
+          gridTemplateColumns:
+            'repeat(auto-fit, minmax(min(100%, 18rem), 1fr))',
+        }}
+      >
+        {FEATURED_PAIRINGS.map(({ pairing, tone }) => (
+          <section key={pairing.title} style={{ minWidth: 0 }}>
+            <h4>{pairing.title}</h4>
+            <PairingSpecimen pairing={pairing} tone={tone} />
+          </section>
+        ))}
+      </div>
+      <details style={{ margin: '2rem 0' }}>
+        <summary>Explore all tones and levels</summary>
+        <h3>Full pairing gallery</h3>
+        {PAIRINGS.map((pairing) => (
+          <Group key={pairing.title} pairing={pairing} />
+        ))}
+      </details>
     </div>
   )
 }
