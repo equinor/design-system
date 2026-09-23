@@ -3,6 +3,7 @@
 - **Status:** Accepted (recorded retrospectively 2026-09-23)
 - **Date:** 2026-04 (opened as design-system-internal#256 on 2026-04-09, settled through 2026-06-25)
 - **Decision makers:** Chibuzor Nwemambu, EDS Core Team
+- **Scope:** Mobile
 
 ## Context
 
