@@ -36,7 +36,7 @@ These apply to both PRs and issues.
 
 **Purpose:** let a reviewer understand what changed, why it changed, and how it was checked.
 
-Before drafting, read the diff against the base branch (`git diff main...HEAD`), the commit log (`git log main..HEAD`) and the linked issue. Describe the final state of the change and scale the detail to how complex that change is.
+Before drafting, read the diff against the base branch (`git diff origin/main...HEAD`), the commit log (`git log origin/main..HEAD`) and the linked issue. Describe the final state of the change and scale the detail to how complex that change is.
 
 1. Start with the behaviour that changed and the reason for changing it.
 2. Link the issue the PR resolves (`Resolves #1234`) instead of restating it.
@@ -64,15 +64,16 @@ Leave out:
 
 An issue is often written from rough notes, screenshots or a conversation. Keep what was observed separate from what is assumed, and do not fill missing information with guesses. If something is unknown, say so, or ask the person you are writing for.
 
-1. Give the issue a title that names the affected component and the problem or requested change.
-2. Start with what happens, who encounters it and what the consequence is, as far as that is known.
-3. Describe the expected behaviour or the outcome you want.
-4. For bugs, include reproduction steps when they are available.
-5. Add technical context only when it helps someone investigate or implement the change.
-6. Treat a suspected cause as a hypothesis. Keep a proposed solution open unless a decision has already been made, and say where it was made.
-7. Add acceptance criteria when they describe an observable outcome. Do not repeat the description as a checklist.
+1. Search the existing issues first. If one already covers the problem, add to it instead of opening a new one.
+2. Give the issue a title that names the affected component and the problem or requested change.
+3. Start with what happens, who encounters it and what the consequence is, as far as that is known.
+4. Describe the expected behaviour or the outcome you want.
+5. For bugs, include reproduction steps when they are available.
+6. Add technical context only when it helps someone investigate or implement the change.
+7. Treat a suspected cause as a hypothesis. Keep a proposed solution open unless a decision has already been made, and say where it was made.
+8. Add acceptance criteria when they describe an observable outcome. Do not repeat the description as a checklist.
 
-When one of the templates in `.github/ISSUE_TEMPLATE/` applies (bug, feature request, generic), use its sections. Replace the placeholder text instead of keeping it, and drop a section that has nothing to say.
+When one of the templates in `.github/ISSUE_TEMPLATE/` applies (bug, feature request, generic), use its sections. Replace the placeholder text instead of keeping it, and drop a section that has nothing to say. The title rule in step 2 applies even when a template suggests another format, such as the user-story title in the generic template.
 
 **Example**
 
