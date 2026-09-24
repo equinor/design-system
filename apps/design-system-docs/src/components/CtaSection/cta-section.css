@@ -1,0 +1,52 @@
+.docs-cta-section {
+  padding-block: var(--docs-section-space-block, 5rem);
+}
+
+.docs-cta-section[data-tone='muted'] {
+  background-color: var(--ifm-background-surface-color);
+}
+
+.docs-cta-section__title {
+  margin-bottom: 1rem;
+  font-size: var(--docs-font-section-size);
+}
+
+.docs-cta-section__body {
+  max-width: var(--docs-measure, 35rem);
+  margin-bottom: 1.5rem;
+
+  font-size: var(--docs-font-lead-size);
+  line-height: var(--docs-prose-line-height);
+  color: var(--eds-text-primary);
+}
+
+/* MDX wraps text children in their own <p>; keep spacing owned by the body wrapper */
+.docs-cta-section__body > p:last-child {
+  margin-bottom: 0;
+}
+
+.docs-cta-section__button {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  font-weight: var(--docs-font-weight-emphasis);
+  color: var(--eds-text-on-emphasis-accent);
+
+  background-color: var(--ifm-color-primary);
+
+  transition: background-color 0.15s ease;
+}
+
+.docs-cta-section__button:hover {
+  color: var(--eds-text-on-emphasis-accent);
+  text-decoration: none;
+  background-color: var(--eds-background-interactive-accent-emphasis-hover);
+}
+
+.docs-cta-section__button:focus-visible {
+  outline: 1px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}

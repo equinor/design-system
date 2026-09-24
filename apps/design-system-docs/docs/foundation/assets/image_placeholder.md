@@ -12,8 +12,7 @@ An image placeholder provides a space for the image before it is loaded, this is
 
 There are two avatar image placeholders to choose between: **Avatar/Circle** and **Avatar/Square corners**. Avatars can represent users or brands. If a user does not have an image to represent themselves, the user's initials can be used on a solid background.
 
-![circle](circle.png) - and - ![square corner](sqcorners.png)  
-
+![circle](circle.png) - and - ![square corner](sqcorners.png)
 
 ### Rounded corners
 
