@@ -34,7 +34,8 @@ documentation/agent-instructions/<TOPIC>.md   ← single source of truth
         │          │          │
 .claude/    .github/      .opencode/        ← thin entry points,
 commands/   prompts/      agent/              each ~20-50 lines,
-<topic>.md  <topic>.md    <topic>.md          referencing the canonical
+or skills/  <topic>.md    <topic>.md          referencing the canonical
+<topic>.md
 ```
 
 A correct harness entry point is a thin wrapper that:
@@ -59,7 +60,7 @@ List every file in scope (see § Scope) with one-line descriptions. Include `git
 
 ### Step 2 — Verify canonical source
 
-Confirm `AGENTS.md` still declares itself canonical (look for an explicit statement like "this is the canonical conventions file"). Confirm each harness primary instruction file (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, the three OpenCode agents' opening sections) defers to `AGENTS.md` rather than restating content. Any harness file that doesn't defer is a finding.
+Confirm `AGENTS.md` still declares itself canonical (look for an explicit statement like "this is the canonical conventions file"). Confirm each harness primary instruction file (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, each OpenCode agent's opening section) defers to `AGENTS.md` rather than restating content. Any harness file that doesn't defer is a finding.
 
 ### Step 3 — Content drift
 

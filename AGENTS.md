@@ -455,9 +455,7 @@ See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 ## PR and Issue Descriptions
 
-Keep PR descriptions to at most 300 words and issues to at most 400 words of prose. Tables and code blocks do not count. Start a PR with the behaviour that changed and why, link the issue it resolves instead of restating it, and mention only testing that was run. Start an issue with what happens, who it affects and what you expect instead, and keep a suspected cause marked as a hypothesis. Leave out session chronology, file inventories, benefit claims without the mechanism behind them, and closing summaries.
-
-The full rules, the writing restrictions, examples and the checklist before posting are in [`documentation/agent-instructions/PR_AND_ISSUE_WRITING.md`](./documentation/agent-instructions/PR_AND_ISSUE_WRITING.md). Harness entry points (the `write-pr-description` and `write-issue` skills in Claude Code, the matching prompts in Copilot and the matching agents in OpenCode) all reference that doc.
+PR descriptions have a limit of 300 words and issues a limit of 400 words. For what counts towards the limit, the rules for each, the writing restrictions, examples and the checklist before posting, see [`documentation/agent-instructions/PR_AND_ISSUE_WRITING.md`](./documentation/agent-instructions/PR_AND_ISSUE_WRITING.md). Harness entry points (the `write-pr-description` and `write-issue` skills in Claude Code, the matching prompts in Copilot and the matching agents in OpenCode) all reference that doc.
 
 ## Git Workflow
 
@@ -490,12 +488,14 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 
 | File                              | Purpose                                                    |
 | --------------------------------- | ---------------------------------------------------------- |
-| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, skills, settings       |
+| `.claude/commands/*.md`           | Claude Code: slash-command entry points                    |
 | `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring  |
 | `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
 | `.claude/skills/*/SKILL.md`       | Claude Code: skills, applied automatically when their task comes up |
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
+| `.github/prompts/**/*.prompt.md`  | GitHub Copilot: prompt entry points                        |
 | `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access |
 | `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
