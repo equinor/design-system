@@ -55,7 +55,7 @@ Hooks are shell commands that run in response to Claude Code events.
 | Hook | Event | Purpose |
 |------|-------|---------|
 | `read_hook.js` | `PreToolUse` | Blocks access to `.env` and other secret files |
-| `format_hook.js` | `PostToolUse` | Runs ESLint+Prettier auto-fix on edited files |
+| `format_hook.js` | `PostToolUse` | Runs `eslint --fix` on edited `.ts`/`.tsx` and `stylelint --fix` on `/components/next/` CSS |
 
 For hook authoring, configuration, and the full event reference, see [`documentation/how-to/CLAUDE_HOOKS.md`](../documentation/how-to/CLAUDE_HOOKS.md).
 
