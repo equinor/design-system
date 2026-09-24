@@ -53,19 +53,26 @@
   }
 }
 
-/* Expanding the sidebar must not overshoot. Docusaurus transitions the
-   sidebar `aside`'s width between `--doc-sidebar-width` and
-   `--doc-sidebar-hidden-width`, but `main`'s matching `max-width` is a plain
-   class swap with no transition. Collapsing hides that — flex keeps `main`
-   clamped to the space the shrinking aside has actually vacated — but
-   expanding does not: `max-width` drops the full sidebar width in one frame
-   while the aside is still a rail, so the content jerks ~240px left and then
-   slides back right over the aside's 200ms. Transitioning `max-width` on the
-   same clock keeps the two edges together. `--ifm-transition-fast` is 0ms
-   under `prefers-reduced-motion`, so this needs no separate opt-out. */
+/* Size `main` from flex alone, so it always fills exactly the space the
+   sidebar `aside` leaves. Docusaurus instead caps `main` with a `max-width`
+   that it swaps between `100% - --doc-sidebar-width` and
+   `100% - --doc-sidebar-hidden-width` when the sidebar collapses. That swap
+   happens in one frame while the aside animates its width over 200ms, so
+   expanding the sidebar made the content jerk ~240px left and slide back.
+
+   Transitioning `max-width` fixed the collapse, but it also fired on route
+   changes: going between a page with a sidebar and one without (the
+   foundation pages, the DocsLanding pages) changes `main`'s cap too, and the
+   content slid sideways on every such navigation. With a zero flex basis
+   there is no cap to animate. `main` follows the aside frame by frame when it
+   collapses, and takes the full width at once when the aside is hidden.
+   `min-width: 0` stops wide content (code blocks, tables) from pushing
+   `main` past the space it has. */
 @media (width >= 997px) {
   main[class*='docMainContainer'] {
-    transition: max-width var(--ifm-transition-fast) ease;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
   }
 }
 
