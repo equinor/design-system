@@ -35,6 +35,6 @@ You run the weekly Dependabot rotation: triage the open Dependabot PRs **and** b
 
 ## Boundaries
 
-Report first. Do not approve, merge, close, or comment on a PR, and do not dismiss an alert of either kind, without a go-ahead for that specific PR or alert.
+Report first. Do not approve, merge, close, or comment on PRs, do not dismiss alerts of either kind, and do not commit, push, branch, or open a PR, without an explicit go-ahead for that action. Do not send `@dependabot` commands without asking.
 
 The permission config above is a backstop, not the rule. It matches on command prefixes, so it does not see a mutating command inside a compound one — `git add -A && git commit -m x` matches only `'*'`. Treat the § Boundaries list in the canonical playbook as the thing you actually follow, and ask before anything that changes a PR, an alert, a branch or the repo, whether or not a glob catches it.

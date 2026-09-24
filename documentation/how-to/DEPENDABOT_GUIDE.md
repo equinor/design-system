@@ -61,7 +61,7 @@ No need to check out the branch locally. No need to test manually. CI covers bui
 
 Two lists, both weekly:
 
-- [Dependabot alerts](https://github.com/orgs/equinor/security/alerts/dependabot?q=is%3Aopen+team%3Aeds-core+sort%3Aseverity+repo%3Adesign-system), sorted by severity. Anything **critical or high without a matching PR** is fixed the same week. See "Dependabot alerts (no PR)" below.
+- [Dependabot alerts](https://github.com/equinor/design-system/security/dependabot?q=is%3Aopen+sort%3Aseverity), sorted by severity. Anything **critical or high without a matching PR** is fixed the same week. See "Dependabot alerts (no PR)" below.
 - [Code scanning alerts](https://github.com/equinor/design-system/security/code-scanning?query=is%3Aopen) — CodeQL findings in our own source. Usually empty. See "Code scanning alerts" below.
 
 The duty is not done until this step is done. Merging the PRs alone leaves the alerts that Dependabot cannot auto-fix sitting there.
