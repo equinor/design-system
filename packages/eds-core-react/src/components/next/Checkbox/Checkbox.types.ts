@@ -14,4 +14,7 @@ export type CheckboxProps = {
   indicator?: string
   /** Helper message shown below the checkbox, useful for additional context */
   helperMessage?: ReactNode
+  /** Custom class name, merged onto the native input element together with
+   * the internal 'input' class */
+  className?: string
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>

@@ -185,7 +185,7 @@ The code / output layer — Tokens Studio export (equinor/design-system-internal
 - This ADR's issue — _Define the Token Variable Architecture_ (#4963)
 - Tokens Studio — _Equinor Design System_ project (canonical source of truth): `primitives/default` (primitive), `density/{compact,comfortable,relaxed}` + `font/default` (mapping), and the mode-free `semantic/default` set. Figma variables and text styles are synced from here (_EDS Redefined Foundation_, `mZ7SefYcGCfiT1XYbaEbi7`).
 - Marco Krenn session (1 Jul 2026) — mode-free semantic layer decision
-- ADR 0005 — Typography approach for EDS 2.0
+- ADR 0018 — Typography approach for EDS 2.0
 - Typography/spacing/corner-radius redefinition (#5107); density rename (#4743)
 - Color (out of scope) — color token values (#4742), state-naming (#4744) — separate track, own ADR to follow
 - Code output & pipeline — Tokens Studio (equinor/design-system-internal#158), pipeline rebuild (#5108) — to be captured in a separate ADR
