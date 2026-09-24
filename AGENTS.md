@@ -68,7 +68,7 @@ Do not set `prettier.prettierPath` in `.vscode/settings.json`. It is an explicit
 
 ## Build/Lint/Test Commands
 
-Package manager: `pnpm@10.28.0`
+Package manager: `pnpm@11.27.0`
 
 ```bash
 pnpm run build                    # Build all packages
@@ -222,7 +222,7 @@ The `data-font-*` runtime-switching pattern still exists for `elements.css` defa
 
 #### Pseudo-private custom properties
 
-Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0005-typography-approach-for-eds-2.md`) and is now applied broadly across components.
+Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0018-typography-approach-for-eds-2.md`) and is now applied broadly across components.
 
 ```css
 /* CORRECT */
@@ -265,7 +265,7 @@ Use `data-*` attributes for all variants, sizes, and boolean states — not modi
 
 #### Density via ancestor attribute
 
-Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor. See `documentation/adr/0004-component-conventions-for-eds-2.md` and `documentation/adr/0004-spacing-approach-for-eds-2.md` for the rationale.
+Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor. See `documentation/adr/0004-component-conventions-for-eds-2.md` and `documentation/adr/0017-spacing-approach-for-eds-2.md` for the rationale.
 
 ```css
 [data-density='comfortable'] .eds-button[data-selectable-space='md'] {
@@ -476,9 +476,11 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 
 - `0002-use-vanilla-css-with-design-tokens-for-eds-2.md` — why vanilla CSS over CSS-in-JS
 - `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density
-- `0004-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
-- `0005-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
 - `0005-use-aschild-slot-for-polymorphism.md` — `asChild` + `Slot` for polymorphic components
+- `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
+- `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
+
+Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 
 ## Tool-Specific Configurations
 

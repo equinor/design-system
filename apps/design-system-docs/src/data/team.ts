@@ -8,9 +8,19 @@ export const teamMembers: TeamMember[] = [
     role: 'Product Owner / UX Designer',
   },
   {
+    image: '/team-images/edvard.png',
+    name: 'Edvard Pires Bjørgen',
+    role: 'Design Lead',
+  },
+  {
     image: '/team-images/alexandra.png',
     name: 'Alex Louviers',
     role: 'UI / UX Designer',
+  },
+  {
+    image: '/team-images/frida.jpg',
+    name: 'Frida Erdal',
+    role: 'Tech Lead / Frontend Developer',
   },
   {
     image: '/team-images/camilla.jpg',
@@ -23,16 +33,6 @@ export const teamMembers: TeamMember[] = [
     role: 'Frontend Developer',
   },
   {
-    image: '/team-images/edvard.png',
-    name: 'Edvard Pires Bjørgen',
-    role: 'Design Lead',
-  },
-  {
-    image: '/team-images/frida.jpg',
-    name: 'Frida Erdal',
-    role: 'Tech Lead',
-  },
-  {
     image: '/team-images/hjalmar.jpg',
     name: 'Hjalmar Otto Fjøsne',
     role: 'Developer / DevOps',
@@ -40,6 +40,6 @@ export const teamMembers: TeamMember[] = [
   {
     image: '/team-images/elsa.jpeg',
     name: 'Elsa Mäyrä Irgens',
-    role: 'Team Coordinator',
+    role: 'Team Lead',
   },
 ]

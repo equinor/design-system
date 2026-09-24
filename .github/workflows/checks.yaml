@@ -118,6 +118,10 @@ jobs:
       # workspace, which would mask a stale committed file.
       - name: Check AI component index freshness
         run: pnpm run generate:component-index --check
+      # Same ordering reason as above. This step also fails on duplicate ADR
+      # numbers, which is the condition it mainly exists to catch.
+      - name: Check ADR index freshness
+        run: pnpm run generate:adr-index --check
       - name: Build packages
         run: pnpm run build
       # Separate step, not folded into the `build` aggregate above: that
@@ -369,6 +373,13 @@ jobs:
       # needs each workspace package's built type declarations. Without a
       # build, cross-package imports resolve to `any`/error and trip
       # no-unsafe-* / no-redundant-type-constituents. Build first.
+      # This job, not `build`, is the one that runs for an ADR-only PR:
+      # `documentation/**` is outside the `code` paths-filter. Without this
+      # step nothing compares the committed index to a fresh one, so a stale
+      # index would merge green. Must run before the build, whose `prebuild`
+      # regenerates the index in the workspace and would mask staleness.
+      - name: Check ADR index freshness
+        run: pnpm run generate:adr-index --check
       - name: Build packages
         run: pnpm run build
       - name: Lint packages

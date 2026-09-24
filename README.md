@@ -155,7 +155,7 @@ Before you begin, ensure you have the following installed:
 -->
 
 * **Node.js** — Version 24.16.0 or compatible
-* **pnpm** — Version 10.28.0 or higher (install globally with `npm install -g pnpm@10.28.0`)
+* **pnpm** — Version 11.27.0, pinned via the `packageManager` field (install globally with `npm install -g pnpm@11.27.0`)
 * **Git** — For version control
 
 
@@ -180,7 +180,7 @@ git clone git@github.com:your-github-username/design-system
 We use [pnpm][] as the package manager, because it's fast, space efficient, and has some very useful commands when working with a monorepo.
 
 ```bash
-npm install -g pnpm@10.28.0
+npm install -g pnpm@11.27.0
 ```
 
 Install dependencies and build all packages using our `init` script:
@@ -488,7 +488,7 @@ If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports
 If you encounter build failures:
 1. Ensure all dependencies are up to date: `pnpm install`
 2. Clean and rebuild: `pnpm clean && pnpm build`
-3. Make sure you're using the correct Node.js version (22.12.0)
+3. Make sure you're using the correct Node.js version (24.16.0, see `.nvmrc`)
 
 ### Module not found errors
 
