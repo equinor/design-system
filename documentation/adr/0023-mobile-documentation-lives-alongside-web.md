@@ -87,10 +87,10 @@ Design docs for a mobile component follow the web counterpart's design doc when 
 ### Consequences
 
 - Good: design guidance shared across platforms lives in one place; a consuming team reads the same Docusaurus page regardless of which platform they're building for.
+- Good: on-device testing has a real native app to run in (`apps/mobile-storybook`), rather than no way to verify native rendering at all — a web Storybook can't render React Native components.
 - Good: TestFlight distribution is already wired into CI (`trigger-mobile-ios`) — no manual step is needed to get a build in front of testers; only the final public App Store submission stays manual.
 - Bad: mobile developer docs are static markdown with no live preview — the `mobile` slot never renders `<Controls />` or `<Canvas />`, unlike the web tab on the same page. Moving them into Storybook doesn't change that; it only changes where the static content sits.
-- Bad: a mobile component's developer docs only render correctly once `@equinor/eds-mobile-components/docs/<Component>.mdx` exists and is imported into the matching web `.docs.mdx`. This is currently the exception, not the rule: of the 11 shipped mobile components with a comparable web component, only `Button`, `Checkbox`, `Input`, `Radio`, and `Switch` have that import wired up. `Badge`, `Divider`, `Link`, `Search`, `TextArea`, and `TextField` don't. If it's left out, `PlatformTabs` silently falls back to `if (!mobile) return <>{children}</>` — a web-only page with no mobile tab and no error.
-- Bad: no mobile-only component (no web equivalent at all) has shipped yet, so the "write a design doc directly in `apps/design-system-docs/docs/components/`" path above is this ADR's stated intent, not something verified working end to end.
+- Bad: a mobile component's developer docs only render correctly once `@equinor/eds-mobile-components/docs/<Component>.mdx` exists and is imported into the matching web `.docs.mdx`. There's no build-time check for this — if it's left out, `PlatformTabs` silently falls back to `if (!mobile) return <>{children}</>`, a web-only page with no mobile tab and no error.
 
 ### Confirmation
 
