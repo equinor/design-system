@@ -1,7 +1,8 @@
 /**
  * Swizzled (eject) from @docusaurus/theme-classic 3.10.2 — verbatim except for
- * the icon, marked FIX below. `styles.module.css` alongside it keeps upstream's
- * rules and values; re-diff both against upstream on Docusaurus upgrades.
+ * the icon, marked FIX below, and the key handler. `styles.module.css`
+ * alongside it keeps upstream's rules and values; re-diff both against
+ * upstream on Docusaurus upgrades.
  *
  * See `DocSidebar/Desktop/CollapseButton` for why both buttons are ejected:
  * they now use the two directional EDS icons (`expand` here, `collapse`
@@ -37,7 +38,13 @@ export default function DocRootLayoutSidebarExpandButton({
       })}
       tabIndex={0}
       role="button"
-      onKeyDown={toggleSidebar}
+      // Default Docusaurus toggles on any key, Tab included; here only Enter and Space do.
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          toggleSidebar()
+        }
+      }}
       onClick={toggleSidebar}
     >
       {/* FIX: the EDS icon already points right, so upstream's
