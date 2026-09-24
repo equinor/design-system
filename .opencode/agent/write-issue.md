@@ -6,8 +6,14 @@ permission:
     '*': 'allow'
     'git commit*': 'ask'
     'git push*': 'ask'
-    'gh issue create*': 'ask'
-    'gh issue edit*': 'ask'
+    'git checkout -b*': 'ask'
+    'git switch -c*': 'ask'
+    'git branch*': 'ask'
+    'gh *': 'ask'
+    'gh issue view*': 'allow'
+    'gh issue list*': 'allow'
+    'gh pr view*': 'allow'
+    'gh pr list*': 'allow'
 ---
 
 You write GitHub issues for the Equinor Design System that explain a problem or proposed change clearly enough for someone to investigate it or decide what to do next.
