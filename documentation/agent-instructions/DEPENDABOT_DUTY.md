@@ -152,14 +152,14 @@ A dismissed alert does not reopen on its own, not even when a patched version fi
 ```bash
 gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=dismissed&per_page=100' \
   --jq '.[] | select(.dismissed_reason == "tolerable_risk" or .dismissed_reason == "no_bandwidth")
-        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dismissed_reason)\tfix: \(.security_vulnerability.first_patched_version.identifier // "still none")\t#\(.number)\t\(.dismissed_comment // "(no comment)")"'
+        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dismissed_reason)\tfix: \(.security_vulnerability.first_patched_version.identifier // "still none")\t#\(.number)\tsince \(.dismissed_at[:10])\t\(.dismissed_comment // "(no comment)")"'
 ```
 
 Read the two reasons differently, because they were parked for different causes:
 
 - **`tolerable_risk` that now shows a fix.** This is the one that changed. It was parked because no patch existed, and now one does. Report it as a candidate for the override PR in § Step 3, with the original comment for context.
-- **`tolerable_risk` that still shows `still none`.** Unchanged, and invisible unless someone looks — including if the risk grew because the package became reachable from shipped code. Worth a glance at whether the comment still describes the situation.
-- **`no_bandwidth`.** These always had a fix; that is what the reason means. They are not news, so do not report them as "now fixable" — list them as still parked. A `no_bandwidth` entry surviving several sweeps is the signal: either do it or re-park it as `tolerable_risk` with an honest reason.
+- **`tolerable_risk` that still shows `still none`.** Unchanged, and invisible unless someone looks — including if the risk grew because the package became reachable from shipped code. Worth a glance at whether the comment still describes the situation. Goes in the report's "Still parked" table.
+- **`no_bandwidth`.** These always had a fix; that is what the reason means. They are not news, so do not report them as "now fixable" — list them in "Still parked". A `no_bandwidth` entry whose `dismissed_at` is several weeks old is the signal: either do it or re-park it as `tolerable_risk` with an honest reason.
 
 A pile that keeps growing, or an entry whose comment no longer matches reality, is worth raising with the team rather than re-dismissing.
 
@@ -290,6 +290,8 @@ gh api --paginate '/repos/equinor/design-system/code-scanning/alerts?state=dismi
   --jq '.[] | "\(.rule.security_severity_level // .rule.severity | ascii_upcase)\t\(.rule.id)\t\(.dismissed_reason)\t\(.dismissed_comment // "(no comment)")"'
 ```
 
+List them in the report's "Dismissed code scanning alerts" table, so the judgement stays visible after the alert leaves the open list.
+
 ## Step 5 — Report
 
 Print the report to chat (or to the path the user gave). Shape:
@@ -316,6 +318,16 @@ Print the report to chat (or to the path the user gave). Shape:
 
 | Severity | Package | Dismissed as | Fix available | Alert |
 | -------- | ------- | ------------ | ------------- | ----- |
+
+### Still parked
+
+| Severity | Package | Dismissed as | Fix | Parked since | Alert | Comment |
+| -------- | ------- | ------------ | --- | ------------ | ----- | ------- |
+
+### Dismissed code scanning alerts
+
+| Severity | Rule | Dismissed as | Comment |
+| -------- | ---- | ------------ | ------- |
 
 ### To dismiss
 
