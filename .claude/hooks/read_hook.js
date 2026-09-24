@@ -1,3 +1,24 @@
+// Secret-file patterns, shared by the Bash and file-path checks below.
+// Keep in sync with .github/hooks/block-secrets.js and AGENTS.md § Secrets & Credentials.
+const isEnvBasename = (basename) =>
+  basename === '.env' || basename.startsWith('.env.')
+
+const credentialPatterns = [
+  /^id_rsa(\.pub)?$/,
+  /\.pem$/,
+  /\.key$/,
+  /^\.?credentials\.json$/,
+  /^\.?secrets\.json$/,
+]
+
+const secretDir = /(^|\/)secrets\//
+
+// Split a shell command into path-like tokens. Whitespace, shell operators,
+// quotes and `=` (as in `--file=foo.pem`) separate tokens, so the basename of
+// each token can be checked against the same patterns as a file path.
+const commandTokens = (command) =>
+  command.split(/[\s;|&<>()`'"=]+/).filter(Boolean)
+
 async function main() {
   const chunks = []
   for await (const chunk of process.stdin) {
@@ -15,12 +36,29 @@ async function main() {
   const toolName = toolArgs.tool_name || ''
   const toolInput = toolArgs.tool_input || {}
 
-  // Check Bash commands for .env references
+  // Check Bash commands for references to any secret-file pattern
   if (toolName === 'Bash') {
     const command = toolInput.command || ''
     if (/\.\benv\b/.test(command)) {
       console.error('Blocked: shell command references .env file')
       process.exit(2)
+    }
+    for (const token of commandTokens(command)) {
+      const tokenBasename = token.split('/').pop() || ''
+      if (isEnvBasename(tokenBasename)) {
+        console.error('Blocked: shell command references .env file')
+        process.exit(2)
+      }
+      if (credentialPatterns.some((p) => p.test(tokenBasename))) {
+        console.error(
+          'Blocked: shell command references credential/certificate file',
+        )
+        process.exit(2)
+      }
+      if (secretDir.test(token)) {
+        console.error('Blocked: shell command references secrets/ directory')
+        process.exit(2)
+      }
     }
     return
   }
@@ -30,20 +68,12 @@ async function main() {
     toolInput.file_path || toolInput.path || toolInput.notebook_path || ''
   const basename = filePath.split('/').pop() || ''
 
-  if (basename === '.env' || basename.startsWith('.env.')) {
+  if (isEnvBasename(basename)) {
     console.error('Blocked: cannot access .env files')
     process.exit(2)
   }
 
   // Block common credential/certificate file patterns
-  const credentialPatterns = [
-    /^id_rsa(\.pub)?$/,
-    /\.pem$/,
-    /\.key$/,
-    /^\.?credentials\.json$/,
-    /^\.?secrets\.json$/,
-  ]
-
   if (credentialPatterns.some((p) => p.test(basename))) {
     console.error('Blocked: cannot access credential/certificate files')
     process.exit(2)

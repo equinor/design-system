@@ -85,7 +85,7 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 | Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |
 | Re-sync harnesses (this audit) | `/audit-harnesses`   | `audit-harnesses` prompt                 | `audit-harnesses` agent |
 | Tokens Studio pipeline       | `/tokens-studio`       | `tokens-studio` prompt                   | `tokens-studio` agent |
-| Read-only advisor            | `.claude/rules/advisor.md` (general scope) | (none) | `advisor` primary agent |
+| Read-only advisor            | `.claude/rules/advisor.md` (general scope) | `advisor` prompt | `advisor` primary agent |
 
 Rows are *intent*, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
 

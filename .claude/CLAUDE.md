@@ -35,10 +35,10 @@ User-invokable prompts triggered with `/command-name`.
 
 Configured in `.claude/settings.json`. Scripts live in `.claude/hooks/`.
 
-| Hook             | Event         | Matcher                                             | Purpose                                        |
-| ---------------- | ------------- | --------------------------------------------------- | ---------------------------------------------- |
-| `read_hook.js`   | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files |
-| `format_hook.js` | `PostToolUse` | `Edit\|Write`                                       | Runs ESLint+Prettier auto-fix on edited files  |
+| Hook             | Event         | Matcher                                             | Purpose                                                                                     |
+| ---------------- | ------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `read_hook.js`   | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files                                              |
+| `format_hook.js` | `PostToolUse` | `Edit\|Write`                                       | Runs `eslint --fix` on edited `.ts`/`.tsx` and `stylelint --fix` on `/components/next/` CSS |
 
 See [`.claude/README.md`](./README.md) for hook authoring details.
 
