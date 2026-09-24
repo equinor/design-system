@@ -1,7 +1,7 @@
 # Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover
 
 - **Status:** Accepted (recorded retrospectively 2026-09-23)
-- **Date:** 2026-03 (ordered vertical slices adopted end of Q1 2026, following an unstructured Q4 2025 attempt; loosened to individual per-component releases through Q2–Q3 2026 once slice-batching itself became the bottleneck — both tracked in design-system-internal#255)
+- **Date:** 2026-09-10 (individual per-component releases adopted at the Q4 planning meeting, superseding the batched-slice approach; ordered vertical slices were originally adopted end of Q1 2026 (2026-03), following an unstructured Q4 2025 attempt — both tracked in design-system-internal#255)
 - **Decision makers:** Chibuzor Nwemambu, EDS Core Team
 - **Scope:** Mobile
 
@@ -88,7 +88,7 @@ Keep the same dependency-ordered priority groups as Option 2, but treat group me
 
 Components are grouped by rough dependency priority into four groups: core controls that other components compose; form and basic UI elements built from those controls; layout and feedback components that arrange or wrap other components; and data and navigation components. Exact group membership isn't enumerated here — it shifts as component scope decisions land (see [ADR-0020](./0020-mobile-component-scope-exclusions-and-renames.md), [ADR-0021](./0021-align-mobile-apis-with-eds-2-next.md)), and pinning specific component names to a group in this ADR would need updating every time scope moves, defeating the point of dropping the hard batching in the first place.
 
-Priority order is a guideline, not a release gate. If a component's design isn't ready, or a blocking issue surfaces, work moves to another ready component — including one in a different group — rather than stalling on the blocked one. Each component is released individually as beta the moment it's ready; there is no batched, group-level beta release. A single stable release is still cut only once every component across all groups is complete and validated by consuming teams.
+Priority order is a guideline, not a release gate. If a component's design isn't ready, or a blocking issue surfaces, work moves to another ready component — including one in a different group — rather than stalling on the blocked one. Each component is released individually as beta — one `eds-mobile-components` package release the moment that component is ready, not a separate package or tag per component — rather than waiting for a batched, group-level beta release; see Consequences for the interim state before a dedicated beta dist-tag exists. The stable release is not incremental: a single stable release is still cut only once every component across all groups is complete and validated by consuming teams, replacing the rolling per-component betas with one release.
 
 ### Consequences
 
@@ -102,7 +102,7 @@ Priority order is a guideline, not a release gate. If a component's design isn't
 ### Confirmation
 
 - A new mobile component is assigned a rough priority group based on dependency (does it compose other not-yet-built components, or is it composed by them) before implementation starts, but starting a different, ready component out of group order when one is blocked is expected, not an exception requiring sign-off.
-- When the beta-publishing line for `eds-mobile-components` is wired into release-please, it uses a dedicated dist-tag rather than `latest` — mirroring the approach [ADR-0012](./0012-pinned-prerelease-versioning-for-beta-lines.md) already established for `eds-core-react`'s `/next` line and for `eds-tokens`.
+- When the beta-publishing line for `eds-mobile-components` is wired into release-please, it uses a dedicated dist-tag rather than `latest`, pointing at ordinary `0.x` releases (e.g. `0.4.0`) with no `-beta.N` suffix — the `0.x` version number itself already signals pre-stable, so there's no known future major to pin ahead of the way [ADR-0012](./0012-pinned-prerelease-versioning-for-beta-lines.md)'s `eds-core-react`/`eds-tokens` lines do. The dist-tag mechanism mirrors ADR-0012; the version-numbering convention does not.
 - The stable release does not ship until every planned component, across all priority groups, is complete and validated by consuming teams, and it ships with a migration guide.
 
 ## Related
