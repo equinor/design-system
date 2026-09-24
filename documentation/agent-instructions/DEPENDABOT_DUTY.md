@@ -169,14 +169,24 @@ The repo already uses `pnpm.overrides` in the root `package.json` for this (see 
 
 ### 3a. Establish what is actually installed
 
-Read the lockfile on `main`, not the working branch:
+Find the installed version(s) and who pulls each one in. The parent tells you whether an override is safe (a `^` range in the parent) or will fight a pin.
+
+The quick way, if the checkout is installed:
+
+```bash
+pnpm why -r <pkg> | head -40
+```
+
+It prints the chain from each workspace package down to the vulnerable version, which is more legible than counting lockfile indentation. Two caveats: the output repeats the same path many times in a large tree, so pipe it through `head` or grep for the version you care about; and it reflects what is **installed locally**, not what `main` resolves to. If the branch's lockfile differs from `main`'s, `pnpm why` is describing the branch.
+
+The authoritative version, for what `main` actually ships:
 
 ```bash
 git show origin/main:pnpm-lock.yaml > /tmp/main-lock.yaml
 grep -oE "^  '?<pkg>@[0-9][^'(:]*" /tmp/main-lock.yaml | sort -u      # resolved versions
 ```
 
-Find who pulls each vulnerable version in. In the `snapshots:` section, every entry lists its dependencies two indent levels deeper; the parents of `<pkg>@<ver>` are the entries whose block contains `<pkg>: <ver>`. Knowing the parent tells you whether the override is safe (a `^` range in the parent) or will fight a pin.
+In the `snapshots:` section, every entry lists its dependencies two indent levels deeper; the parents of `<pkg>@<ver>` are the entries whose block contains `<pkg>: <ver>`.
 
 ### 3b. Check the fix is real for us
 
