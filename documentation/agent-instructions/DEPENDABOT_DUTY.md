@@ -18,7 +18,7 @@ Historically only the first part got done. The alerts pages are where the critic
 - The token needs the `security_events` scope to read alerts. The same scope covers both the Dependabot alerts call in § Step 2 and the code scanning call in § Step 4. If either returns `403` or an empty list while the Security tab shows alerts, run `gh auth refresh -s security_events` (the user does this — it is interactive).
 - A local checkout with `node_modules` installed, for the override workflow in § Step 3.
 
-Copilot in the IDE cannot run `gh`; there the agent walks the user through the checks and the user reads the Security tab manually.
+Where `gh` is not available — for instance Copilot in the IDE without a terminal, though agent mode can run one — walk the user through the checks instead and have them read the Security tab manually.
 
 ## Boundaries
 
@@ -82,8 +82,16 @@ Then verify the tests that would catch a break actually ran. The root `pnpm run 
 
 ```bash
 gh pr checks <n>                         # find the Test job URL / id
-gh api /repos/equinor/design-system/actions/jobs/<job-id>/logs | grep -E '^> @equinor/|Test Files'
+gh run view --job <job-id> --log | grep -E 'pnpm --filter @equinor/|Test (Files|Suites)'
 ```
+
+Three things that make the obvious grep miss everything:
+
+- Job log lines are timestamp-prefixed, so anchoring with `^` never matches.
+- The package headers are `$ pnpm --filter @equinor/<pkg> run test`, not the `> @equinor/<pkg>` you would expect from a local `pnpm run`.
+- The two runners print different summaries: vitest says `Test Files`, jest says `Test Suites`. Matching only one silently drops half the packages.
+
+The result reads as one line per package followed by its summary, which is what makes the gap visible. On a September 2026 run it lists `eds-utils`, `eds-core-react`, `eds-lab-react`, `eds-data-grid-react`, `eds-color-palette-generator` and `eds-mobile-components` — and not `eds-tokens` or `eds-tokens-build`.
 
 If an affected package is missing from the log, run its tests locally against the PR's version before recommending a merge. Say in the report which suites CI covered and which you ran yourself.
 
@@ -139,26 +147,21 @@ Always recommend a `dismissed_comment`. A dismissal without one tells the next p
 
 ### Re-check what was dismissed earlier
 
-A dismissed alert does not reopen on its own, not even when a patched version finally ships. So the sweep has to look:
+A dismissed alert does not reopen on its own, not even when a patched version finally ships. So the sweep has to look. Read the whole parked pile in one pass, every week:
 
 ```bash
 gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=dismissed&per_page=100' \
   --jq '.[] | select(.dismissed_reason == "tolerable_risk" or .dismissed_reason == "no_bandwidth")
-        | select(.security_vulnerability.first_patched_version != null)
-        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\tnow fixable: \(.security_vulnerability.first_patched_version.identifier)\t#\(.number)"'
+        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dismissed_reason)\tfix: \(.security_vulnerability.first_patched_version.identifier // "still none")\t#\(.number)\t\(.dismissed_comment // "(no comment)")"'
 ```
 
-Anything this prints was parked for lack of a fix and now has one. Put it in the report as a candidate for the override PR in § Step 3, with the original dismissal comment for context.
+Read the two reasons differently, because they were parked for different causes:
 
-That query only catches the parked alerts that have become _actionable_. An alert dismissed as `tolerable_risk` with no patch stays invisible indefinitely, including if the risk changes because the package starts being reachable from shipped code. So also print a plain count, and list the packages behind it every few weeks so the pile stays in view:
+- **`tolerable_risk` that now shows a fix.** This is the one that changed. It was parked because no patch existed, and now one does. Report it as a candidate for the override PR in § Step 3, with the original comment for context.
+- **`tolerable_risk` that still shows `still none`.** Unchanged, and invisible unless someone looks — including if the risk grew because the package became reachable from shipped code. Worth a glance at whether the comment still describes the situation.
+- **`no_bandwidth`.** These always had a fix; that is what the reason means. They are not news, so do not report them as "now fixable" — list them as still parked. A `no_bandwidth` entry surviving several sweeps is the signal: either do it or re-park it as `tolerable_risk` with an honest reason.
 
-```bash
-gh api --paginate '/repos/equinor/design-system/dependabot/alerts?state=dismissed&per_page=100' \
-  --jq '.[] | select(.dismissed_reason == "tolerable_risk" or .dismissed_reason == "no_bandwidth")
-        | "\(.security_advisory.severity | ascii_upcase)\t\(.dependency.package.name)\t\(.dismissed_reason)\t\(.dismissed_comment // "(no comment)")"'
-```
-
-A pile that keeps growing, or an entry whose comment no longer describes the situation, is worth raising with the team rather than re-dismissing.
+A pile that keeps growing, or an entry whose comment no longer matches reality, is worth raising with the team rather than re-dismissing.
 
 ## Step 3 — Fix transitive alerts with `pnpm.overrides`
 
@@ -185,7 +188,7 @@ npm view <pkg>@<fix> type engines              # ESM-only? new Node floor?
 Do **not** override when:
 
 - The fix jumps to a version that changes module format (`"type": "module"` where the parent is CommonJS) or raises `engines.node` above what the parent supports. Example: `decode-uri-component` 0.2 → 0.5 is ESM-only while `query-string@7` (Expo) is CJS.
-- The fix crosses a 0.x "major" in a build-tool chain (`esbuild` 0.27 → 0.28 under `tsup`) for a low-severity advisory. Not worth the risk; log it.
+- The fix crosses a 0.x "major" in a build-tool chain (`esbuild` 0.27 → 0.28 under `tsup`) for a low-severity advisory. Not worth the risk; recommend dismissing it as `tolerable_risk` with the reason in the comment.
 - The alert has no patched version.
 
 ### 3c. Write the override
@@ -243,7 +246,7 @@ gh api --paginate '/repos/equinor/design-system/code-scanning/alerts?state=open&
   --jq '.[] | "\(.rule.security_severity_level // .rule.severity | ascii_upcase)\t\(.rule.id)\t\(.most_recent_instance.location.path):\(.most_recent_instance.location.start_line)\t#\(.number)"'
 ```
 
-`rule.security_severity_level` is the CVSS-derived level and is what the Security tab sorts on; quality rules have no such level, hence the fallback to `rule.severity`. This list is usually empty — as of September 2026 the repo has zero open, one dismissed and 35 fixed — so the step normally costs half a minute. It is still the part of the duty that was never written down anywhere.
+`rule.security_severity_level` is the CVSS-derived level and is what the Security tab sorts on; quality rules have no such level, hence the fallback to `rule.severity`. This list is usually empty, so the step normally costs half a minute. It is still the part of the duty that was never written down anywhere.
 
 ### Decide per alert
 
