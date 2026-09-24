@@ -111,6 +111,29 @@ export const States: StoryFn<SwitchProps> = () => {
   )
 }
 
+export const InheritedDisabled: StoryFn<SwitchProps> = () => (
+  <fieldset disabled>
+    <legend>Disabled fieldset</legend>
+    <UnstyledList>
+      <li>
+        <Switch label="Unchecked" />
+      </li>
+      <li>
+        <Switch label="Checked" defaultChecked />
+      </li>
+    </UnstyledList>
+  </fieldset>
+)
+InheritedDisabled.storyName = 'Inherited disabled'
+InheritedDisabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Switches inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input’s `:disabled` state, so it covers this inherited disabling too.',
+    },
+  },
+}
+
 export const DarkMode: StoryFn<SwitchProps> = () => {
   return (
     <div
