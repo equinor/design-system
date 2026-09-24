@@ -12,13 +12,12 @@ Before the [#5138](https://github.com/equinor/design-system/issues/5138) monorep
 Mobile documentation isn't one thing — it splits into concerns with different audiences and different tooling needs:
 
 - **Design docs** — guidelines, when to use a component, anatomy, do/don't. Largely platform-agnostic prose and imagery, aimed at anyone deciding whether a component fits their use case.
-- **Developer docs** — install instructions, usage snippets, prop tables, interactive examples. Aimed at engineers integrating the component, and benefits from a live props/controls playground rather than static prose.
+- **Developer docs** — install instructions, usage snippets, prop tables, examples. Aimed at engineers integrating the component.
 - **Hands-on native testing** — verifying a component actually looks and behaves right on a physical device or simulator, which no web page can substitute for.
 
 ## Decision Drivers
 
 - Design guidance for a component that exists on both platforms is largely the same guidance with a platform-specific variant, not two different documents; duplicating a whole site to say the same thing twice invites drift.
-- Storybook already provides an interactive props/controls playground (`<Controls />` against live `.stories.tsx` args) that Docusaurus prose pages don't; developer docs benefit from that.
 - A native Expo/React Native component cannot be verified visually from a web page — a Storybook story rendered in a browser does not prove the component renders correctly on iOS.
 - Consuming teams should be able to find any component's documentation without needing to know which repo or platform team wrote it.
 
@@ -46,7 +45,7 @@ Design docs live on the shared EDS Docusaurus site, developer docs live inside w
 **Pros:**
 
 - Design guidance that's shared across platforms lives in one place instead of two
-- Developer docs reuse Storybook's interactive props playground instead of rebuilding an equivalent in Docusaurus
+- Developer docs reuse the `PlatformTabs` mechanism already built for this, instead of building an equivalent from scratch
 - On-device testing uses an actual native app, the only way to genuinely verify native rendering
 - Consuming teams check the same two sites (Docusaurus, web Storybook) regardless of platform
 
@@ -66,7 +65,6 @@ Write mobile's usage instructions, props, and examples as Docusaurus prose pages
 
 **Cons:**
 
-- Docusaurus prose has no equivalent to Storybook's live `<Controls />` playground against real component args — developer docs would be static text describing props instead of an interactive table
 - Web developer docs already live in Storybook; splitting mobile's developer docs into a different site than web's breaks the "same two sites regardless of platform" property Option 2 achieves
 - Throws away the platform-tab pattern already built for exactly this problem
 
@@ -80,7 +78,7 @@ Write mobile's usage instructions, props, and examples as Docusaurus prose pages
 | Developer docs | Install, usage, props, examples | Web Storybook, alongside the equivalent web component's docs |
 | Hands-on native testing | Verifying real on-device behaviour | A native Expo app (`apps/mobile-storybook`), distributed via TestFlight |
 
-Developer docs use the mechanism already built for this: each web component's `.docs.mdx` renders a `PlatformTabs` component with a `mobile` prop, and that prop imports the mobile package's own MDX file directly. For example, `Button.docs.mdx` does `import MobileDocs from '@equinor/eds-mobile-components/docs/Button.mdx'` and passes `<MobileDocs />` into `PlatformTabs`'s `mobile` slot. A reader on Button's Storybook page switches to the mobile tab and sees mobile's own install command, links, and usage content, without mobile needing its own Storybook instance.
+Developer docs use the mechanism already built for this: each web component's `.docs.mdx` imports the mobile package's own MDX file directly and passes it into a `PlatformTabs` component's `mobile` prop. For example, `Button.docs.mdx` does `import MobileDocs from '@equinor/eds-mobile-components/docs/Button.mdx'` and renders `<MobileDocs />` inside `PlatformTabs`'s `mobile` slot. A reader on Button's Storybook page switches to the mobile tab and sees mobile's own usage, examples, and props content, without mobile needing its own Storybook instance. This is static markdown, the same as it would be on any other site — moving it into Storybook doesn't add interactivity, it just puts it next to the equivalent web page.
 
 There is deliberately no separate React Native Storybook as a documentation website — a second Storybook instance would duplicate the sidebar and furniture `PlatformTabs` already handles inside web's. `apps/mobile-storybook` exists, but it is a native Expo app for hands-on component testing on a real device or simulator, not a documentation site; it ships to testers via TestFlight, triggered automatically by `.github/workflows/trigger_publish.yml`'s `trigger-mobile-ios` job whenever a mobile-components or mobile-storybook release lands.
 
@@ -89,15 +87,16 @@ Design docs for a mobile component follow the web counterpart's design doc when 
 ### Consequences
 
 - Good: design guidance shared across platforms lives in one place; a consuming team reads the same Docusaurus page regardless of which platform they're building for.
-- Good: developer docs get the same interactive `<Controls />` playground web already has, instead of a lesser Docusaurus-only equivalent.
 - Good: TestFlight distribution is already wired into CI (`trigger-mobile-ios`) — no manual step is needed to get a build in front of testers; only the final public App Store submission stays manual.
-- Bad: a mobile component's developer docs only render correctly once `@equinor/eds-mobile-components/docs/<Component>.mdx` exists and is imported into the matching web `.docs.mdx` — an easy step to forget, and there's nothing yet that fails a build if it's missed.
+- Bad: mobile developer docs are static markdown with no live preview — the `mobile` slot never renders `<Controls />` or `<Canvas />`, unlike the web tab on the same page. Moving them into Storybook doesn't change that; it only changes where the static content sits.
+- Bad: a mobile component's developer docs only render correctly once `@equinor/eds-mobile-components/docs/<Component>.mdx` exists and is imported into the matching web `.docs.mdx`. This is currently the exception, not the rule: of the 11 shipped mobile components with a comparable web component, only `Button`, `Checkbox`, `Input`, `Radio`, and `Switch` have that import wired up. `Badge`, `Divider`, `Link`, `Search`, `TextArea`, and `TextField` don't. If it's left out, `PlatformTabs` silently falls back to `if (!mobile) return <>{children}</>` — a web-only page with no mobile tab and no error.
 - Bad: no mobile-only component (no web equivalent at all) has shipped yet, so the "write a design doc directly in `apps/design-system-docs/docs/components/`" path above is this ADR's stated intent, not something verified working end to end.
 
 ### Confirmation
 
 - A new mobile component that also exists on web gets its developer docs added as `@equinor/eds-mobile-components/docs/<Component>.mdx` and imported into the equivalent web component's `.docs.mdx` via `PlatformTabs`'s `mobile` prop, following the `Button.docs.mdx` pattern.
 - A proposal to add a new web-facing Storybook instance, or a separate documentation site, dedicated to mobile gets rejected in review — `apps/mobile-storybook` stays a native testing app distributed via TestFlight, not a documentation site.
+- A mobile-only component's design doc gets a manual entry in `apps/design-system-docs/sidebars.ts`, the same as every other component doc — the page existing on disk isn't enough for a consumer to find it.
 
 ## Related
 
