@@ -10,7 +10,7 @@ This is a **read-only** workflow. The agent must not edit, create, or delete fil
 
 **In scope** — these are the only harnesses the team currently supports. Audit them, and only them:
 
-- **Claude Code** — `.claude/CLAUDE.md`, `.claude/rules/*.md`, `.claude/commands/*.md`, `.claude/hooks/`, `.claude/settings.json`
+- **Claude Code** — `.claude/CLAUDE.md`, `.claude/rules/*.md`, `.claude/commands/*.md`, `.claude/skills/*/SKILL.md`, `.claude/hooks/`, `.claude/settings.json`
 - **GitHub Copilot** (both CLI and IDE)
   - Copilot in general: `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `.github/prompts/**/*.prompt.md`
   - Copilot CLI specifically: `.github/hooks/*.{json,js}`
@@ -34,7 +34,8 @@ documentation/agent-instructions/<TOPIC>.md   ← single source of truth
         │          │          │
 .claude/    .github/      .opencode/        ← thin entry points,
 commands/   prompts/      agent/              each ~20-50 lines,
-<topic>.md  <topic>.md    <topic>.md          referencing the canonical
+or skills/  <topic>.md    <topic>.md          referencing the canonical
+<topic>.md
 ```
 
 A correct harness entry point is a thin wrapper that:
@@ -59,7 +60,7 @@ List every file in scope (see § Scope) with one-line descriptions. Include `git
 
 ### Step 2 — Verify canonical source
 
-Confirm `AGENTS.md` still declares itself canonical (look for an explicit statement like "this is the canonical conventions file"). Confirm each harness primary instruction file (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, the three OpenCode agents' opening sections) defers to `AGENTS.md` rather than restating content. Any harness file that doesn't defer is a finding.
+Confirm `AGENTS.md` still declares itself canonical (look for an explicit statement like "this is the canonical conventions file"). Confirm each harness primary instruction file (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, each OpenCode agent's opening section) defers to `AGENTS.md` rather than restating content. Any harness file that doesn't defer is a finding.
 
 ### Step 3 — Content drift
 
@@ -83,6 +84,8 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 | Accessibility audit          | `/accessibility-audit` | `accessibility-audit` prompt             | `accessibility-audit` agent |
 | Structure component doc      | `/create-component-doc`| `structure_components_prompt`            | `component-doc` agent |
 | Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |
+| Write PR description         | `write-pr-description` skill | `write-pr-description` prompt      | `write-pr-description` agent |
+| Write issue                  | `write-issue` skill    | `write-issue` prompt                     | `write-issue` agent |
 | Re-sync harnesses (this audit) | `/audit-harnesses`   | `audit-harnesses` prompt                 | `audit-harnesses` agent |
 | Tokens Studio pipeline       | `/tokens-studio`       | `tokens-studio` prompt                   | `tokens-studio` agent |
 | Read-only advisor            | `.claude/rules/advisor.md` (general scope) | (none) | `advisor` primary agent |

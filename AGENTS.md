@@ -453,6 +453,10 @@ For non-publishable changes (config, Storybook, tests, README, docs), use hidden
 
 See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
+## PR and Issue Descriptions
+
+PR descriptions have a limit of 300 words and issues a limit of 400 words. For what counts towards the limit, the rules for each, the writing restrictions, examples and the checklist before posting, see [`documentation/agent-instructions/PR_AND_ISSUE_WRITING.md`](./documentation/agent-instructions/PR_AND_ISSUE_WRITING.md). Harness entry points (the `write-pr-description` and `write-issue` skills in Claude Code, the matching prompts in Copilot and the matching agents in OpenCode) all reference that doc.
+
 ## Git Workflow
 
 ⚠️ **CRITICAL: Always ask the user for permission before:**
@@ -460,7 +464,7 @@ See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 - Creating commits
 - Pushing to remote
 - Creating branches
-- Creating PRs with `gh`
+- Creating PRs or issues with `gh`
 
 **Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
 
@@ -484,11 +488,14 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 
 | File                              | Purpose                                                    |
 | --------------------------------- | ---------------------------------------------------------- |
-| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, skills, settings       |
+| `.claude/commands/*.md`           | Claude Code: slash-command entry points                    |
 | `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring  |
 | `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
+| `.claude/skills/*/SKILL.md`       | Claude Code: skills, applied automatically when their task comes up |
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
+| `.github/prompts/**/*.prompt.md`  | GitHub Copilot: prompt entry points                        |
 | `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access |
 | `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
 | `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
