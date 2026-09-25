@@ -60,31 +60,9 @@ Picking stable's API as the target would mean migrating mobile once now and agai
 
 **Adopt Option 2.** Where EDS web has published a newer-generation version of a component (currently `next/`), mobile's API follows that generation, not stable. Where the newest generation doesn't yet cover a component, mobile follows stable's API instead. Where neither API translates to React Native (CSS-specific patterns, DOM attribute pass-through, `asChild`/`Slot` polymorphism), the mobile team adapts the pattern rather than forcing a literal port.
 
-This is a standing rule, not a one-time snapshot of `next/`'s current shape: if `next/` itself is superseded by a later generation (the in-progress token-foundation revision, or whatever comes after it), mobile re-targets that later generation under this same decision. No new ADR is needed to keep pointing at the destination — only the table below gets new rows as further migrations happen.
+This is a standing rule, not a one-time snapshot of `next/`'s current shape: if `next/` itself is superseded by a later generation (the in-progress token-foundation revision, or whatever comes after it), mobile re-targets that later generation under this same decision. No new ADR is needed to keep pointing at the destination.
 
-### Applied so far (snapshot — will grow and can go stale)
-
-The following mobile components have already been rebuilt against this principle, each verified against the corresponding `next/` web component's actual props as of this ADR's writing (2026-09):
-
-| Component                                                                             | Change         | Old (stable-shaped) API                                    | New mobile API                                                                                                |
-| ------------------------------------------------------------------------------------- | -------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Button ([mobile PR #109](https://github.com/equinor/design-system-mobile/pull/109))   | Label prop     | `title`                                                    | `label` (RN-specific — `next/` Button takes `children`, not a `label` prop)                                   |
-| Button                                                                                | Color theming  | `color="primary \| secondary \| danger"`                   | `tone="accent \| neutral \| danger"`                                                                          |
-| Button                                                                                | Variant values | `contained \| outlined \| ghost`                           | `primary \| secondary \| ghost`                                                                               |
-| Button                                                                                | Sizes          | Not available                                              | `size="small \| default"`                                                                                     |
-| Button                                                                                | Icons          | `iconName` / `iconPosition`                                | `leadingIcon` / `trailingIcon` (RN-specific — `next/` Button composes `<Icon>` children, no equivalent props) |
-| Button                                                                                | Removed        | `loading`, `fullWidth`, `Button.Group`, `Button.Toggle`    | —                                                                                                             |
-| Switch ([mobile PR #103](https://github.com/equinor/design-system-mobile/pull/103))   | Label          | Not available                                              | `label` prop, optional (`next/` Switch requires it)                                                           |
-| Switch                                                                                | Removed        | `color` prop, `Switch.Small`, `switchSize` on `SwitchCell` | —                                                                                                             |
-| Radio ([mobile PR #108](https://github.com/equinor/design-system-mobile/pull/108))    | Label          | Not available                                              | `label` prop (optional inline text)                                                                           |
-| Radio                                                                                 | Removed        | `color` prop, `size` prop                                  | Uses the `sizing.selectable.lg` token instead                                                                 |
-| Checkbox ([mobile PR #110](https://github.com/equinor/design-system-mobile/pull/110)) | Label          | Not available                                              | `label` prop (optional inline text)                                                                           |
-| Checkbox                                                                              | Indeterminate  | Not available                                              | `indeterminate` prop                                                                                          |
-| Input ([mobile PR #111](https://github.com/equinor/design-system-mobile/pull/111))    | Validation     | `variant?: "danger"`                                       | `invalid?: boolean`                                                                                           |
-| Input                                                                                 | Error icon     | Not built in                                               | Built in, with `hideErrorIcon` to suppress it                                                                 |
-| Input                                                                                 | Adornments     | `leftAdornments` / `rightAdornments`                       | `startText` / `startAdornment` / `endText` / `endAdornment`                                                   |
-
-All five PRs above are merged. Every new-API prop in this table that is marked as `next/`-aligned (`tone`, `variant`, `size` on Button; `label` on Radio and Checkbox; `indeterminate` on Checkbox; `invalid`, `hideErrorIcon`, `startText`/`startAdornment`/`endText`/`endAdornment` on Input) is confirmed present in both `packages/eds-mobile-components` and the corresponding `packages/eds-core-react/src/components/next/` component as of this ADR, with matching value sets. Button's `size` is `small | default` on both platforms — there is no `large` size on either. Button's `label`/`leadingIcon`/`trailingIcon` are called out above as RN-specific adaptations, not literal ports of `next/`'s `children`-based composition. Switch's `label` diverges by design: `next/` requires it (a switch needs an accessible label), while mobile currently keeps it optional.
+The historical record of which components have been migrated under this rule, and exactly what changed, lives in [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md). This file is generated automatically from each migration PR's conventional commit and it grows with every component added.
 
 ### Consequences
 
@@ -98,9 +76,9 @@ All five PRs above are merged. Every new-API prop in this table that is marked a
 
 ### Confirmation
 
-- New or redesigned mobile components are checked against the corresponding newest-generation component's actual props (not just its documentation) before the mobile API is finalized, the same way Button, Switch, Radio, Checkbox and Input were verified for this ADR.
-- Where a mobile component's API is adapted rather than copied (for platform reasons), the PR description states what changed and why, so the deviation is traceable instead of silent.
-- When EDS web's newest generation moves again (for example, once the in-progress token-foundation revision produces its own component APIs), mobile re-targets it under this same rule; the "Applied so far" table gets updated or extended, not this Decision.
+- New or redesigned mobile components are checked against the corresponding newest-generation component's actual props (not just its documentation) before the mobile API is finalized.
+- Where a mobile component's API is adapted rather than copied (for platform reasons), the PR's conventional commit is marked `!` with a `BREAKING CHANGES` footer describing what changed and why, so it lands in `CHANGELOG.md` automatically and the deviation is traceable instead of silent.
+- When EDS web's newest generation moves again (for example, once the in-progress token-foundation revision produces its own component APIs), mobile re-targets it under this same rule — no new ADR needed, only future migration PRs change.
 
 ## Related
 
@@ -108,4 +86,5 @@ All five PRs above are merged. Every new-API prop in this table that is marked a
 - Parent discussion: [design-system-internal#255](https://github.com/equinor/design-system-internal/discussions/255)
 - [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md) — the migration this API-alignment principle applies to
 - [ADR-0020](./0020-mobile-component-scope-exclusions-and-renames.md) — which components are in scope for this migration in the first place
+- [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md) — the record of which components have migrated under this rule and what changed
 - Tracking issue for this ADR batch: [#5515](https://github.com/equinor/design-system/issues/5515)
