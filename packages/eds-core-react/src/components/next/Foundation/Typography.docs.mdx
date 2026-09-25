@@ -231,3 +231,9 @@ The scale uses equal-ratio steps of `pow(2, n/5)` — five steps per octave — 
     </tr>
   </tbody>
 </table>
+
+## Spacing between text elements
+
+EDS 2.0 sets `margin: 0` on heading and paragraph elements. Adjacent headings and paragraphs sit flush unless you add space deliberately.
+
+**A base element stylesheet is in progress** ([#5477](https://github.com/equinor/design-system/issues/5477)) that will give `h1`–`h6` and `p` default sizes and flow spacing on the new tokens. Until it ships, use a `gap` on a flex or grid container to control the spacing between text elements yourself.

@@ -23,6 +23,13 @@ const getHeadingSize = (as: HeadingProps['as']): FontSize => {
 }
 
 /**
+ * @deprecated Avoid new adoption. Supported for the 2.x line, so if you already use this
+ * component you can stay where you are — there is no need to migrate until the replacement
+ * is ready. A CSS-first replacement is in progress: a base element stylesheet (#5477) gives
+ * `h1`–`h6` default sizes and flow spacing, and utility classes (#5501) handle cases where
+ * the visual size should differ from the heading level. New code that needs typography now
+ * should use plain `h1`–`h6`, which is the markup #5477 will style.
+ *
  * Heading component for semantic headings (h1-h6).
  * Uses the design system's typography styles for headings.
  */

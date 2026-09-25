@@ -15,52 +15,27 @@ import MobileDocs from '@equinor/eds-mobile-components/docs/Typography.mdx'
   <MobileDocs />
 </>}>
 
-The next generation of the Typography component system. It will replace the existing Typography component in the next major version.
+> **Deprecated — avoid new adoption.** These components are supported for the 2.x line. A CSS-first replacement is in progress: a base element stylesheet ([#5477](https://github.com/equinor/design-system/issues/5477)) and utility classes per text style ([#5501](https://github.com/equinor/design-system/issues/5501)).
+>
+> **Already using these (or 1.0 `Typography`)?** Stay where you are — there is no need to migrate until the replacement is ready.
+>
+> **Writing new code that needs typography?** Use plain `h1`–`h6` and `p`. That is the markup the base stylesheet will style, so there is nothing to undo when it ships. They keep the browser's default margins until #5477 lands. Applying the `--eds-typography-*` tokens in a class of your own is still fine, as long as that class is easy to delete later — the token names differ between stable (`ui-body-md-*`) and beta (`ui-md-*`).
 
-## Features
+## What is coming
 
-The new typography system provides baseline grid alignment for consistent vertical rhythm.
+The EDS 2.0 direction ([ADR-0018](https://github.com/equinor/design-system/blob/main/documentation/adr/0018-typography-approach-for-eds-2.md)) replaces this component with two pieces:
 
-## Usage
+1. **Base element stylesheet** — `h1`–`h6` and `p` get their default size and flow spacing from the stylesheet automatically, so developers do not have to annotate every element.
+2. **Utility classes per text style** — one class per Figma text style for cases where the design needs a heading-level element at a different visual size.
 
-Import the TypographyNext component with alias for a seamless experience:
+This mirrors how Figma works today: the team dropped the typography component and applies text styles to the text element directly. The CSS classes correspond to the same list so designer and developer choose from the same vocabulary.
 
-```tsx
-import { TypographyNext as Typography, Heading, Paragraph } from '@equinor/eds-core-react'
-
-<Heading as="h1">Welcome</Heading>
-<Paragraph size="lg">This is a paragraph with the new typography system.</Paragraph>
-<Typography family="ui" size="md" lineHeight="default" baseline="grid" weight="normal" tracking="normal">
-  Flexible inline text
-</Typography>
-```
-
-## Proposed migration timeline
-
-1. **Now**: Use the new components with aliasing ( `TypographyNext as Typography` )
-2. **Parallel support**: 6-12 months of both systems supported
-
-## Key Differences from current typography
-
-- **Component names**: Two opinionated semantic components -  `Heading` , and  `Paragraph`
-- **Baseline alignment**: Built-in support for baseline grid alignment
-- **Props**: More explicit control over typography properties
-- **Semantic HTML**: `Heading` renders proper heading tags, `Paragraph` renders `<p>` tags
+## Examples
 
 <Primary />
 <Controls />
 
-## Stories
-
-### Playground
-
-The TypographyNext component provides full control over typography properties. Use it for inline text with specific styling needs.
-
-<Canvas of={TypographyNewStories.Playground} />
-
 ### As Link
-
-TypographyNext can be used as a link by setting `as="a"` and providing an `href` prop. All standard anchor attributes are supported, such as `target` and `rel` for external links.
 
 <Canvas of={TypographyNewStories.AsLink} />
 
