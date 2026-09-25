@@ -68,10 +68,15 @@ function App() {
 
 ### EDS 2.0 components
 
-New components are available under the `/next` export. They use vanilla CSS with design tokens instead of styled-components:
+New components live under the `/next` export, published on the `beta` dist-tag. They use vanilla CSS with design tokens instead of styled-components:
+
+```bash
+npm install @equinor/eds-core-react@beta
+```
 
 ```tsx
 import { Button } from '@equinor/eds-core-react/next'
+import '@equinor/eds-core-react/next/index.css'
 import '@equinor/eds-tokens/css/variables'
 
 function App() {
@@ -81,9 +86,15 @@ function App() {
 
 See the [component overview](/docs/Next/components) for what's available in each set.
 
+:::note
+`/next` ships only on the `beta` dist-tag, so the plain `npm install @equinor/eds-core-react` above does not include it. Browsing the components in Storybook does not enable them either.
+
+Beta here means safe to adopt alongside EDS 1.0, not "wait and see": EDS 1.0 stays supported until EDS 2.0 becomes stable, and mixing both in one application is expected. The API may still change in small ways, and the token setup for `/next` is being reworked. See [About EDS 2.0](https://storybook.eds.equinor.com/?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+:::
+
 ### Versioning
 
-"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, alongside the stable EDS 1 components. The package itself is on version `2.x` today, so an installed `eds-core-react@2.x` matching "EDS 2.0" is also a coincidence.
+"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, published on the `beta` dist-tag rather than in the default `latest` install. The package itself is on version `2.x` today, so an installed `eds-core-react@2.x` matching "EDS 2.0" is also a coincidence.
 
 When EDS 2.0 stabilises, the components move out of `/next` and EDS 1 is deprecated. Because removing EDS 1 is a breaking change, the package bumps to `eds-core-react@3.0.0`.
 
@@ -104,8 +115,8 @@ For custom styling, use EDS design tokens to stay consistent with the system.
 
 .my-card {
   color: var(--eds-color-text-neutral-strong);
-  padding: var(--eds-spacing-md);
-  border-radius: var(--eds-corner-radius-rounded);
+  padding: var(--eds-spacing-vertical-md) var(--eds-spacing-horizontal-md);
+  border-radius: var(--eds-spacing-border-radius-rounded);
 }
 ```
 
