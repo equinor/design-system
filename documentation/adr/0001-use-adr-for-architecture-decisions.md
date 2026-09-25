@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-02-02
 - **Decision makers:** EDS Core Team
+- **Scope:** All
 
 ## Context
 

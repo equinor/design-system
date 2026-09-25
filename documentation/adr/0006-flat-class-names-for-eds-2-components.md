@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-06-29
 - **Decision makers:** EDS Core Team
+- **Scope:** Web
 
 ## Context
 
@@ -93,12 +94,24 @@ CUBE CSS blocks allow targeting native elements directly within the block scope 
 /* radio.css */
 @layer eds-components {
   .eds-radio {
-    & .icon-wrapper { /* … */ }
-    & .input { /* … */ }
-    & .icon-checked { display: none; }
-    & .icon-unchecked { display: block; }
-    &:has(.input:checked) .icon-checked { display: block; }
-    &:has(.input:checked) .icon-unchecked { display: none; }
+    & .icon-wrapper {
+      /* … */
+    }
+    & .input {
+      /* … */
+    }
+    & .icon-checked {
+      display: none;
+    }
+    & .icon-unchecked {
+      display: block;
+    }
+    &:has(.input:checked) .icon-checked {
+      display: block;
+    }
+    &:has(.input:checked) .icon-unchecked {
+      display: none;
+    }
   }
 }
 ```
@@ -121,6 +134,6 @@ CUBE CSS blocks allow targeting native elements directly within the block scope 
 
 - [Discussion #4639 — Designing with CSS, not around it](https://github.com/equinor/design-system/discussions/4639) — architectural direction that established "one root selector, nesting for everything else" and removed BEM from the Stylelint config
 - [CUBE CSS — Block: No formal element syntax](https://cube.fyi/block.html#no-formal-element-syntax) — the methodology whose block convention this approach is inspired by
-- [ADR 0002](0002-use-vanilla-css-with-design-tokens-for-eds-2.md) — establishes vanilla CSS; this ADR supersedes the BEM-naming section
+- Supersedes [ADR 0002](0002-use-vanilla-css-with-design-tokens-for-eds-2.md)'s BEM-naming section — this ADR replaces it with flat class names; ADR 0002's vanilla-CSS decision itself still stands
 - [ADR 0004](0004-component-conventions-for-eds-2.md) — `data-*` attributes for variants and density
 - [GitHub issue #5104](https://github.com/equinor/design-system/issues/5104) — migration of existing BEM components

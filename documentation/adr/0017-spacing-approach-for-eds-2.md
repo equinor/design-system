@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-04-23
 - **Decision makers:** EDS core team
+- **Scope:** Web
 
 ## Context
 
@@ -70,7 +71,9 @@ For elements with text-box trimming, padding must be combined with the baseline 
 
 ```css
 @supports (text-box: trim-both ex alphabetic) {
-  padding-top: calc(var(--eds-spacing-vertical-sm) + var(--padding-top-baseline));
+  padding-top: calc(
+    var(--eds-spacing-vertical-sm) + var(--padding-top-baseline)
+  );
   padding-bottom: 0;
   text-box: trim-both ex alphabetic;
 }

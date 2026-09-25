@@ -3,6 +3,7 @@
 - **Status:** Approved
 - **Date:** 2026-08-27
 - **Decision makers:** EDS core team
+- **Scope:** Tokens
 
 ## Context
 
@@ -120,7 +121,7 @@ input/palette + input/scale → foundation/gaussian + foundation/anchor
     → color/{light,dark} → scheme/{light,dark} → semantic
 ```
 
-`primitives/default` is first in `tokenSetOrder` but holds no colour at all (font families, line-height scale, spacing), so the colour chain begins at `input/*`. The `font` and `density` sets are likewise outside it. `elevation/default` carries shadow geometry and is outside the chain too — the shadow *colours* it composes with live in the scheme layer (see D4). Note that the repo mirror's `$metadata.json` has no `elevation` entry at all; Studio's does, and Studio is canonical (see Context).
+`primitives/default` is first in `tokenSetOrder` but holds no colour at all (font families, line-height scale, spacing), so the colour chain begins at `input/*`. The `font` and `density` sets are likewise outside it. `elevation/default` carries shadow geometry and is outside the chain too — the shadow _colours_ it composes with live in the scheme layer (see D4). Note that the repo mirror's `$metadata.json` has no `elevation` entry at all; Studio's does, and Studio is canonical (see Context).
 
 Each scale value is generated, never typed:
 
@@ -140,10 +141,10 @@ References resolve in one direction only. A semantic token must not reference an
 
 The values in Tokens Studio as of 2026-08-27:
 
-| Scheme | 1    | 2    | 3   | 4   | 5   | 6    | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14† | 15† |
-| ------ | ---- | ---- | --- | --- | --- | ---- | --- | --- | --- | --- | --- | --- | --- | ---- | ---- |
-| light  | .98  | .94  | .91 | .87 | .82 | .77  | .72 | .62 | .52 | .47 | .42 | .37 | .32 | .90  | 1.00 |
-| dark   | .215 | .226 | .47 | .30 | .45 | .595 | .61 | .76 | .82 | .88 | .93 | .96 | .99 | .33  | .10  |
+| Scheme | 1    | 2    | 3   | 4   | 5   | 6    | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14† | 15†  |
+| ------ | ---- | ---- | --- | --- | --- | ---- | --- | --- | --- | --- | --- | --- | --- | --- | ---- |
+| light  | .98  | .94  | .91 | .87 | .82 | .77  | .72 | .62 | .52 | .47 | .42 | .37 | .32 | .90 | 1.00 |
+| dark   | .215 | .226 | .47 | .30 | .45 | .595 | .61 | .76 | .82 | .88 | .93 | .96 | .99 | .33 | .10  |
 
 † Steps 14 and 15 are inverse-polarity and sit outside the ladder; see below.
 
