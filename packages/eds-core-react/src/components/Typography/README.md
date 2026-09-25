@@ -4,14 +4,18 @@ Typography components used to help render typography in <abbr title="Equinor Des
 
 ## EDS 2.0 typography — replacement in progress
 
-`TypographyNext`, `Heading`, and `Paragraph` are deprecated. They still work, but avoid new adoption — every new use has to be undone when the replacement lands.
+`TypographyNext`, `Heading`, and `Paragraph` are deprecated, but supported for the 2.x line. Avoid new adoption.
 
-**What is coming ([ADR-0005](../../../../../documentation/adr/0005-typography-approach-for-eds-2.md)):**
+**What is coming ([ADR-0018](../../../../../documentation/adr/0018-typography-approach-for-eds-2.md)):**
 
 - A base element stylesheet giving `h1`–`h6` and `p` their default size and flow spacing ([#5477](https://github.com/equinor/design-system/issues/5477))
 - Utility classes per text style for exceptions, mirroring Figma text styles ([#5501](https://github.com/equinor/design-system/issues/5501))
 
-**In the meantime:** stay on EDS 1.0, or use plain `gap` on a flex/grid container to control spacing yourself.
+**In the meantime:**
+
+- **Already using these components (or 1.0 `Typography`)?** Stay where you are. There is no need to migrate until the replacement is ready.
+- **Writing new code that needs typography?** Use plain `h1`–`h6` and `p`. That is the markup the base stylesheet will style, so there is nothing to undo when it ships. They keep the browser's default margins until #5477 lands.
+- Applying the `--eds-typography-*` tokens in a class of your own is still fine, as long as that class is easy to delete later — the token names differ between stable (`ui-body-md-*`) and beta (`ui-md-*`).
 
 ---
 

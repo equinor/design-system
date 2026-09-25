@@ -15,18 +15,22 @@ import MobileDocs from '@equinor/eds-mobile-components/docs/Typography.mdx'
   <MobileDocs />
 </>}>
 
-> **Deprecated — avoid new adoption.** These components still work, but every new use has to be undone when the replacement lands. A CSS-first replacement is in progress: a base element stylesheet ([#5477](https://github.com/equinor/design-system/issues/5477)) and utility classes per text style ([#5501](https://github.com/equinor/design-system/issues/5501)). Until those ship, consumers who need typography should **stay on EDS 1.0** or apply `--eds-typography-*` tokens directly with their own spacing.
+> **Deprecated — avoid new adoption.** These components are supported for the 2.x line. A CSS-first replacement is in progress: a base element stylesheet ([#5477](https://github.com/equinor/design-system/issues/5477)) and utility classes per text style ([#5501](https://github.com/equinor/design-system/issues/5501)).
+>
+> **Already using these (or 1.0 `Typography`)?** Stay where you are — there is no need to migrate until the replacement is ready.
+>
+> **Writing new code that needs typography?** Use plain `h1`–`h6` and `p`. That is the markup the base stylesheet will style, so there is nothing to undo when it ships. They keep the browser's default margins until #5477 lands. Applying the `--eds-typography-*` tokens in a class of your own is still fine, as long as that class is easy to delete later — the token names differ between stable (`ui-body-md-*`) and beta (`ui-md-*`).
 
 ## What is coming
 
-The EDS 2.0 direction ([ADR-0005](https://github.com/equinor/design-system/blob/main/documentation/adr/0005-typography-approach-for-eds-2.md)) replaces this component with two pieces:
+The EDS 2.0 direction ([ADR-0018](https://github.com/equinor/design-system/blob/main/documentation/adr/0018-typography-approach-for-eds-2.md)) replaces this component with two pieces:
 
 1. **Base element stylesheet** — `h1`–`h6` and `p` get their default size and flow spacing from the stylesheet automatically, so developers do not have to annotate every element.
 2. **Utility classes per text style** — one class per Figma text style for cases where the design needs a heading-level element at a different visual size.
 
 This mirrors how Figma works today: the team dropped the typography component and applies text styles to the text element directly. The CSS classes correspond to the same list so designer and developer choose from the same vocabulary.
 
-## Playground
+## Examples
 
 <Primary />
 <Controls />
