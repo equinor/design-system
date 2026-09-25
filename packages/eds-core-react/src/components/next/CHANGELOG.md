@@ -4,6 +4,21 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.1...eds-core-react-next@v3.0.0-beta.2) (2026-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* `className` and `style` now land on the root element of Input, TextField, Select, TextArea, Autocomplete and Search. They previously landed on the native `<input>` or `<textarea>`, and in Select on the inner `div.eds-select` wrapper. `Input.containerClassName` is removed; use `className`, which now targets that same container. To reach the native element, use a descendant selector, e.g. `.my-field input { ... }` (`.my-field select` in Select, `.my-field textarea` in TextArea).
+* default Tooltip (next) placement to bottom, matching EDS 1.0 ([#5509](https://github.com/equinor/design-system/issues/5509))
+
+### 🐛 Fixed
+
+* default Tooltip (next) placement to bottom, matching EDS 1.0 ([#5509](https://github.com/equinor/design-system/issues/5509)) ([1c553ac](https://github.com/equinor/design-system/commit/1c553ac57c27f4d821f7a5f48000fee51416224b))
+* make Tooltip (next) fall back to a free side instead of shifting ([#5479](https://github.com/equinor/design-system/issues/5479)) ([e85c7d7](https://github.com/equinor/design-system/commit/e85c7d7cc6d26360ed56c11b71321e39e5815104))
+* reflect inherited disabled state in Checkbox, Radio and Switch in /next ([#5406](https://github.com/equinor/design-system/issues/5406)) ([cdbd403](https://github.com/equinor/design-system/commit/cdbd4035a024aad539890b900729f4c53302b728))
+* route className and style to root element in next text input components ([#5409](https://github.com/equinor/design-system/issues/5409)) ([8bcaf63](https://github.com/equinor/design-system/commit/8bcaf6368e801ed6ee1d6befcd94ebd96e36c087))
+
 ## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.8.0-beta.1...eds-core-react-next@v3.0.0-beta.1) (2026-07-20)
 
 

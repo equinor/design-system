@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.4](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.3...eds-core-react@v2.6.4) (2026-09-25)
+
+
+### 🐛 Fixed
+
+* make Tooltip (next) fall back to a free side instead of shifting ([#5479](https://github.com/equinor/design-system/issues/5479)) ([e85c7d7](https://github.com/equinor/design-system/commit/e85c7d7cc6d26360ed56c11b71321e39e5815104))
+
 ## [2.6.3](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.2...eds-core-react@v2.6.3) (2026-09-08)
 
 
