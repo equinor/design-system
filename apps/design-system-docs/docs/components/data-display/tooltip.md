@@ -34,8 +34,8 @@ Tooltips support flexible positioning relative to their trigger element:
 
 | Placement | Use Case                                     |
 | --------- | -------------------------------------------- |
-| Top       | Default position, suitable for most contexts |
-| Bottom    | When space above the trigger is limited      |
+| Bottom    | Default position, suitable for most contexts |
+| Top       | When space below the trigger is limited      |
 | Left      | Useful beside right-aligned elements         |
 | Right     | Useful beside left-aligned elements          |
 

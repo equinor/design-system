@@ -6,10 +6,11 @@ export type TooltipProps = {
   /** Text displayed inside the tooltip bubble */
   title?: string
   /** Preferred placement of the tooltip relative to the anchor element.
+   * Named after the side the tooltip sits on, not the side the arrow points from.
    * If that side does not fit in the viewport, the tooltip falls back to the
    * opposite side, then to the perpendicular sides. Pick `left` or `right`
    * explicitly for triggers in corners if you want to control which side is used.
-   * @default 'top'
+   * @default 'bottom'
    */
   placement?: TooltipPlacement
   /** Disable the tooltip */

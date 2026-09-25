@@ -92,6 +92,14 @@ describe('Tooltip (next)', () => {
       )
     })
 
+    it('defaults to bottom placement, matching EDS 1.0', () => {
+      render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
+      expect(screen.getByRole('tooltip', { hidden: true })).toHaveAttribute(
+        'data-placement',
+        'bottom',
+      )
+    })
+
     it('exposes anchor names for the trigger and the tooltip body as CSS variables', () => {
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       const tooltip = screen.getByRole('tooltip', { hidden: true })

@@ -60,7 +60,7 @@ export const Introduction: StoryFn<TooltipProps> = (args) => (
 
 Introduction.args = {
   title: 'Tooltip text',
-  placement: 'top',
+  placement: 'bottom',
 }
 
 export const Placements: StoryFn<TooltipProps> = () => (
@@ -109,7 +109,7 @@ ViewportEdges.parameters = {
   docs: {
     description: {
       story:
-        'Triggers in the corners of the viewport. The default `top` placement does not fit centred, so the tooltip falls back to a free side instead of being shifted sideways. The arrow keeps pointing at the trigger. Note: `tests/visual/Tooltip.next.spec.ts` asserts the geometry of this story; changing the labels or positions will affect those tests.',
+        'Triggers in the corners of the viewport. The default `bottom` placement does not fit centred, so the tooltip falls back to a free side instead of being shifted sideways. The arrow keeps pointing at the trigger. Note: `tests/visual/Tooltip.next.spec.ts` asserts the geometry of this story; changing the labels or positions will affect those tests.',
     },
   },
 }
