@@ -9,7 +9,7 @@
 
 [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md) brought the whole `mad-components` tree into `eds-mobile-components` as a starting point, including components with no counterpart in EDS web and components that only made sense inside MAD's own apps. Migrating that inherited tree toward a library that matches EDS web means going through every component and deciding, one at a time, whether it stays under its existing name, is renamed to fit a mobile idiom, or is excluded for a stated reason — most commonly because the platform already covers the need natively, or because the pattern only makes sense in a pointer/desktop context.
 
-Left undecided, this becomes a question asked once per consuming team: "why doesn't mobile have a date picker / toolbar / bottom sheet?" A gap or a rename with no written reason reads as an oversight instead of a decision. This ADR is the answer, written down once.
+Left undecided, this becomes a question asked once per consuming team: "why doesn't mobile have a date picker / toolbar / bottom sheet?" A gap or a rename with no written reason reads as an oversight instead of a decision. This ADR, and the reference doc it governs, is the answer.
 
 Two related notes came out of the same discussion and are recorded here for completeness, though neither is a scope decision in itself:
 
@@ -87,7 +87,7 @@ The current, maintained list of exactly which components are renamed, replaced, 
 
 ### Confirmation
 
-- New component proposals for mobile are checked against [`MOBILE_COMPONENT_SCOPE.md`](../MOBILE_COMPONENT_SCOPE.md)'s exclusion list before implementation starts.
+- New component proposals for mobile are checked against [`MOBILE_COMPONENT_SCOPE.md`](../MOBILE_COMPONENT_SCOPE.md)'s exclusion and rename lists before implementation starts.
 - A rename in that doc is the target name for the corresponding migration slice; a slice should not ship a renamed component under its old MAD name.
 
 ## Related
