@@ -1,21 +1,11 @@
 ---
 title: Input
 sidebar_position: 4
+hide_title: true
+description: 'Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation - serving as a building block for higher-level components like TextField.'
 ---
 
-# Input
-
-Input is a foundational form element for collecting user data. It offers basic functionality and is ideal when you need full control over layout and validation - serving as a building block for higher-level components like TextField.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--introduction"
-  width="100%"
-  height="70"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--introduction)
+<StoryCanvas of="Input/Introduction" showLink />
 
 ## When to Use
 
@@ -32,29 +22,13 @@ Use Input when you need a basic input field without additional functionality, or
 
 Input supports a variety of native HTML input types for different data entry needs.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--types"
-  width="100%"
-  height="175"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--types)
+<StoryCanvas of="Input/Types" showLink />
 
 ### Validation States
 
 Use the `invalid` prop to indicate validation errors. The input displays a red border and adornments inherit the error colour.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--validation-states"
-  width="100%"
-  height="120"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--validation-states)
+<StoryCanvas of="Input/ValidationStates" showLink />
 
 ### Disabled & Read Only
 
@@ -63,15 +37,7 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead - it ke
 - **Disabled**: The input is non-interactive and visually dimmed
 - **Read Only**: The value is visible but not editable, maintaining better accessibility
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--states"
-  width="100%"
-  height="225"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--states)
+<StoryCanvas of="Input/States" showLink />
 
 ### Using with Labels
 
@@ -79,15 +45,7 @@ For a complete form field with label, description, helper message, and required/
 
 When using Input with a visible label, use the Field component for proper spacing.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--with-label"
-  width="100%"
-  height="160"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--with-label)
+<StoryCanvas of="Input/WithLabel" showLink />
 
 ### Density
 
@@ -96,15 +54,7 @@ Input supports two density modes to fit different UI contexts:
 - **Spacious**: The default density with comfortable padding
 - **Comfortable**: A more compact option for dense UIs like data tables
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--compact"
-  width="100%"
-  height="115"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--compact)
+<StoryCanvas of="Input/Compact" showLink />
 
 ### Adornments
 
@@ -112,29 +62,11 @@ Use `startText` and `endText` for prefix/suffix text (e.g., "$", "USD", "km"). T
 
 Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colours - turning red when invalid.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--with-adornments"
-  width="100%"
-  height="380"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--with-adornments)
+<StoryCanvas of="Input/WithAdornments" showLink />
 
 ### Textarea Mode
 
 Input can render as a multi-line textarea by setting `as="textarea"`.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-input--casted"
-  width="100%"
-  height="90"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-input--casted)
 
 ## Accessibility
 

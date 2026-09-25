@@ -29,6 +29,6 @@ Token-system references (colours, typography, end-to-end token lifecycle) are li
 Two hooks ship in `.github/hooks/`, picked up automatically by Copilot CLI:
 
 - `block-secrets.{json,js}` — `preToolUse` hook that denies reads of `.env*`, `id_rsa*`, `*.pem`, `*.key`, `credentials.json`, `secrets.json`, and anything under `secrets/`. See `AGENTS.md` § Secrets & Credentials.
-- `format-on-edit.{json,js}` — `postToolUse` hook that runs `eslint --fix` on edited `.ts`/`.tsx` and `stylelint --fix` on edited `/components/next/**/*.css` files, mirroring the Claude Code formatter. See `AGENTS.md` § Code Formatting.
+- `format-on-edit.{json,js}` — `postToolUse` hook that runs `eslint --fix` on edited `.ts`/`.tsx`, `stylelint --fix` on edited `/components/next/**/*.css`, and `prettier --write` on edited `.css`/`.md` files, mirroring the Claude Code formatter. See `AGENTS.md` § Code Formatting.
 
 IDE Copilot does not execute these hooks; refer to the same AGENTS.md sections for the cross-harness rules.

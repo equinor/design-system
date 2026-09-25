@@ -11,7 +11,7 @@ The spacers `XX Small` and `X Small` are only to be used inside of component
 :::info Guideline
 Always make sure to follow the guideline by having 8px of spacing between each clickbound.
 :::
-    
+
 ### Variants
 
 There are eight spacers to choose between: `XX Small`, `X Small`,  `Small`, `Medium`, `Large`, `X Large`, `XX Large` and `XXX Large`. The spacers `XX Small` and `X Small` are only to be used inside components, while the other spacers are to be used in layouts.
@@ -21,20 +21,19 @@ There are eight spacers to choose between: `XX Small`, `X Small`,  `Small`, 
 ### How to add
 
 1.  Locate the **Assets** tab in the **Layers Panel**.
-    
+
 2.  There are two ways to locate the `Spacing` component needed:
-    
+
     1.  Use the search bar to search for a component grouping name or variation name.
-        
+
     2.  Scroll through the folders list and open the relevant grouping.
-        
+
 3.  Once the component needed is located, click and drag it into the frame/artboard.
-    
 
 ### How to use
 
 1.  Select the `Spacing` in the frame/artboard.
-    
+
 2.  Resize the component by dragging the component from one end while _not_ holding shift.
-    
+
     1.  `Horizontal` components will only be resizable horizontally and `Vertical` components will only be resizable vertically.

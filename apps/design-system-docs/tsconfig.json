@@ -3,7 +3,23 @@
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      // "paths" replaces (not merges with) the inherited @docusaurus/tsconfig
+      // mapping, so @site/* must be restated here.
+      "@site/*": ["./*"],
+      // Mirrors the eds-resolver webpack alias (portable-stories pilot).
+      "@eds-core-react-src/*": ["../../packages/eds-core-react/src/*"]
+    }
   },
+  "include": [
+    "**/*",
+    // Portable stories reach legacy eds-core-react components (via the shared
+    // `.storybook` helpers and barrel imports in some story files), which read
+    // token values off styled-components' `DefaultTheme`. That interface is
+    // augmented here; without it every legacy `theme.entities.…` access is a
+    // type error in this project.
+    "../../packages/eds-core-react/src/components/styled.d.ts"
+  ],
   "exclude": [".docusaurus", "build"]
 }
