@@ -213,12 +213,14 @@ const meta: Meta<typeof Autocomplete> = {
     // Styling
     className: {
       control: 'text',
-      description: 'CSS class applied to the input element.',
+      description:
+        'CSS class names applied to the root element (the outer wrapper). Use this to control layout, width, or margin of the entire autocomplete field.',
       table: { category: 'Styling' },
     },
-    containerClassName: {
-      control: 'text',
-      description: 'CSS class applied to the input container wrapper.',
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the root element (the outer wrapper).',
       table: { category: 'Styling' },
     },
 
@@ -248,7 +250,6 @@ const meta: Meta<typeof Autocomplete> = {
     },
 
     // Hide standard HTML attributes that add noise without value
-    style: { table: { disable: true } },
     autoFocus: { table: { disable: true } },
     tabIndex: { table: { disable: true } },
     form: { table: { disable: true } },

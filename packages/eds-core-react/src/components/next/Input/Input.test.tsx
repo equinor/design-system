@@ -52,21 +52,21 @@ describe('Input (Next EDS 2.0)', () => {
       expect(input).toHaveAttribute('type', 'password')
     })
 
-    it('Can be extended with containerClassName', () => {
+    it('applies className and style to the root container element', () => {
       render(
-        <Input value="textfield" containerClassName="custom-class" readOnly />,
+        <Input
+          value="textfield"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+          readOnly
+        />,
       )
       const input = screen.getByDisplayValue('textfield')
-      expect(input).toBeInTheDocument()
       // eslint-disable-next-line testing-library/no-node-access
-      expect(input.parentElement).toHaveClass('custom-class')
-    })
-
-    it('Can be extended with className on input element', () => {
-      render(<Input value="textfield" className="input-class" readOnly />)
-      const input = screen.getByDisplayValue('textfield')
-      expect(input).toHaveClass('eds-input')
-      expect(input).toHaveClass('input-class')
+      const container = input.parentElement
+      expect(container).toHaveClass('custom-class')
+      expect(container).toHaveStyle({ marginTop: '8px' })
+      expect(input).not.toHaveClass('custom-class')
     })
   })
 
@@ -271,14 +271,14 @@ describe('Input (Next EDS 2.0)', () => {
     })
 
     describe('CSS classes', () => {
-      it('Applies base class and custom containerClassName', () => {
-        render(<Input containerClassName="test-class" />)
+      it('Applies base class and custom className to the root container', () => {
+        render(<Input className="test-class" />)
         const wrapper = getInputWrapper()
         expect(wrapper).toHaveClass('eds-input-container')
         expect(wrapper).toHaveClass('test-class')
       })
 
-      it('Applies input class to input element', () => {
+      it('Applies input class to the inner input element', () => {
         render(<Input value="test" readOnly />)
         const input = screen.getByDisplayValue('test')
         expect(input).toHaveClass('eds-input')

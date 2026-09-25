@@ -21,6 +21,8 @@ export const TextField = forwardRef<
     id: providedId,
     invalid = false,
     disabled = false,
+    className,
+    style,
     ...inputProps
   },
   ref,
@@ -29,7 +31,7 @@ export const TextField = forwardRef<
     useFieldIds(providedId)
 
   return (
-    <Field disabled={disabled}>
+    <Field disabled={disabled} className={className} style={style}>
       {label && (
         <div className="eds-text-field__header">
           <Field.Label htmlFor={inputId} indicator={indicator}>

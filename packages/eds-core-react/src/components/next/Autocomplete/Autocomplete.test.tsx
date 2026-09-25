@@ -102,6 +102,25 @@ describe('Autocomplete (next)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root wrapper element', () => {
+      const { container } = render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('eds-autocomplete')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Dropdown behavior', () => {
     it('calls showPopover on focus', async () => {
       const user = userEvent.setup()
