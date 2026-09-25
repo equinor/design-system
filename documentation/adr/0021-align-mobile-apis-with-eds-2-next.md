@@ -62,7 +62,7 @@ Picking stable's API as the target would mean migrating mobile once now and agai
 
 This is a standing rule, not a one-time snapshot of `next/`'s current shape: if `next/` itself is superseded by a later generation (the in-progress token-foundation revision, or whatever comes after it), mobile re-targets that later generation under this same decision. No new ADR is needed to keep pointing at the destination.
 
-The historical record of which components have migrated under this rule lives in [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md), generated automatically from each migration PR's conventional commit and growing with every component. The changelog names the component and links its PR; the prop-level detail of what changed lives in that PR, not the changelog entry itself.
+The historical record of which components have migrated under this rule lives in [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md) — generated from each migration PR's conventional commit, naming the component and linking the PR for the actual prop-level detail.
 
 ### Consequences
 
@@ -86,5 +86,5 @@ The historical record of which components have migrated under this rule lives in
 - Parent discussion: [design-system-internal#255](https://github.com/equinor/design-system-internal/discussions/255)
 - [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md) — the migration this API-alignment principle applies to
 - [ADR-0020](./0020-mobile-component-scope-exclusions-and-renames.md) — which components are in scope for this migration in the first place
-- [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md) — the record of which components have migrated under this rule; each entry links the PR with the actual prop-level detail
+- [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md) — where migrations under this rule are recorded
 - Tracking issue for this ADR batch: [#5515](https://github.com/equinor/design-system/issues/5515)
