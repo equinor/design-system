@@ -22,7 +22,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         id={inputId}
         // Merge so a consumer className can't clobber the 'input' class the
         // component CSS keys its :has(.input:...) state selectors on
-        className={['input', className].filter(Boolean).join(' ')}
+        className="input"
         disabled={disabled}
         ref={ref}
         {...rest}
