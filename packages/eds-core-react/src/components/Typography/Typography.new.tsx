@@ -2,10 +2,11 @@ import { forwardRef } from 'react'
 import { TypographyNextProps } from './Typography.new.types'
 
 /**
- * @deprecated Avoid new adoption — every new use has to be undone when the replacement
- * lands. The component still works. A CSS-first replacement is in progress: a base element
- * stylesheet (#5477) and utility classes per text style (#5501). Until those ship,
- * stay on EDS 1.0.
+ * @deprecated Avoid new adoption. Supported for the 2.x line, so if you already use this
+ * component you can stay where you are — there is no need to migrate until the replacement
+ * is ready. A CSS-first replacement is in progress: a base element stylesheet (#5477) and
+ * utility classes per text style (#5501). New code that needs typography now should use
+ * plain `h1`–`h6`/`p`, which is the markup #5477 will style.
  *
  * TypographyNext component for flexible typography with baseline grid support.
  *
