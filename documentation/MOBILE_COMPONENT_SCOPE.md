@@ -1,6 +1,6 @@
 # Mobile component scope: current exclusions and renames
 
-The current, maintained list of which EDS web components `eds-mobile-components` renames, replaces, or explicitly excludes. For why mobile targets a subset of web rather than full parity, and why this list lives here rather than inside an ADR, see [ADR-0020](./adr/0020-mobile-component-scope-exclusions-and-renames.md).
+The current, maintained list of which components — from EDS web or common mobile patterns — `eds-mobile-components` renames, replaces, or explicitly excludes. For why mobile targets a subset of web rather than full parity, and why this list lives here rather than inside an ADR, see [ADR-0020](./adr/0020-mobile-component-scope-exclusions-and-renames.md).
 
 This is a living document, not a frozen decision. Individual rows get revisited as consuming teams make the case for an exception — update the relevant row directly via a normal PR, reviewed like any other doc change. That doesn't need a new ADR: ADR-0020 already decided the _policy_ of case-by-case scoping; only the _application_ of it to one component is changing.
 
@@ -9,7 +9,7 @@ This is a living document, not a frozen decision. Individual rows get revisited 
 | Component (old)      | Decision                          | Reason                                                                                                                                                                                                                                                                                                                      |
 | -------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `OfflineBanner`      | Removed — replaced by `Banner`    | `Banner` is a generic component that covers offline and other use cases, so a dedicated offline variant is unnecessary                                                                                                                                                                                                      |
-| `Snackbar` (EDS web) | Renamed to `Toast` on mobile      | Mobile-standard naming for the same pattern                                                                                                                                                                                                                                                                                 |
+| `Snackbar` (EDS web) | Renamed to `Toast` on mobile      | Mobile-standard naming for the same pattern — the Material Design and React Native ecosystems both call it a toast                                                                                                                                                                                                          |
 | `Environment`        | Removed, no replacement           | It is a `Banner` with fixed text; consuming teams can compose that themselves                                                                                                                                                                                                                                               |
 | `PressableHighlight` | Removed — replaced by `Pressable` | `Pressable` is used across all component migrations going forward, so a second pressable primitive is redundant                                                                                                                                                                                                             |
 | `Multiselect`        | Removed — replaced by `Combobox`  | The multiselect pattern as previously built is scrapped; multi-select support becomes a dedicated `Combobox` component instead of a variant                                                                                                                                                                                 |
@@ -21,7 +21,7 @@ None of these renames have shipped yet — `Banner`, `Toast`, `Combobox` and `Pr
 
 ## Explicit exclusions
 
-The following EDS web components are not offered as public components on mobile:
+The following components, from EDS web or common mobile patterns, are not offered as public components on mobile:
 
 | Component     | Reason                                                                                                                                                                                          |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

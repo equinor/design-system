@@ -73,7 +73,7 @@ Take no upfront position; answer each "can we get X" question as it comes in.
 
 ## Decision
 
-**Adopt Option 2.** `eds-mobile-components` targets a mobile-idiomatic subset of the EDS web component library. Every component in the inherited `mad-components` tree, and every EDS web component, falls into one of three categories: kept under its existing name, renamed or replaced, or explicitly excluded with a reason.
+**Adopt Option 2.** `eds-mobile-components` targets a mobile-idiomatic subset of the EDS web component library. Every EDS web component, and every inherited `mad-components` component that has an EDS web counterpart, falls into one of three categories: kept under its existing name, renamed or replaced, or explicitly excluded with a reason.
 
 The current, maintained list of exactly which components are renamed, replaced, or excluded — and why — lives in [`documentation/MOBILE_COMPONENT_SCOPE.md`](../MOBILE_COMPONENT_SCOPE.md), not in this ADR. That list isn't one decision: it's dozens of independent, component-by-component facts that get revisited individually as consuming teams make the case for an exception. An ADR is meant to be immutable once accepted, so a document that's expected to change row by row over years doesn't belong inside one — this ADR decides the _policy_ (scope to a mobile-idiomatic subset, case-by-case, with a stated reason for every gap); the reference doc tracks the _current application_ of that policy, updated through ordinary PRs. Components with no EDS web equivalent at all were never subject to this categorization in the first place; they're scoped by the migration slices instead.
 
