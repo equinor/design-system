@@ -1,21 +1,11 @@
 ---
 title: Field
 sidebar_position: 5
+hide_title: true
+description: 'Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes - ensuring a consistent and accessible experience.'
 ---
 
-# Field
-
-Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes - ensuring a consistent and accessible experience.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--default"
-  width="100%"
-  height="125"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--default)
+<StoryCanvas of="Field/Default" showLink />
 
 ## When to Use
 
@@ -39,7 +29,8 @@ Field is composed of several sub-components that work together:
 Use the `useFieldIds` hook to generate IDs and wire up accessibility attributes:
 
 ```tsx
-const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds()
+const { inputId, descriptionId, helperMessageId, getDescribedBy } =
+  useFieldIds()
 ```
 
 ## Guidelines
@@ -48,29 +39,13 @@ const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds(
 
 Use the `indicator` prop on Field.Label to show required or optional status. This is a visual indicator only - remember to also set `aria-required` on the input for accessibility.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--with-indicator"
-  width="100%"
-  height="200"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--with-indicator)
+<StoryCanvas of="Field/WithIndicator" showLink />
 
 ### Descriptions
 
 Use Field.Description to provide additional context below the label. Connect it to the input using `aria-describedby` for screen reader support.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--with-description"
-  width="100%"
-  height="105"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--with-description)
+<StoryCanvas of="Field/WithDescription" showLink />
 
 ### Live Validation
 
@@ -78,29 +53,13 @@ For accessible live validation, wrap conditional content in a container with `ro
 
 Pass IDs to `getDescribedBy()` conditionally based on what's rendered.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--live-validation"
-  width="100%"
-  height="125"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--live-validation)
+<StoryCanvas of="Field/LiveValidation" showLink />
 
 ### Disabled State
 
 Set `disabled` on Field to apply disabled styling to all sub-components. The disabled state is passed down via the `data-disabled` attribute.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-inputs-field--disabled"
-  width="100%"
-  height="105"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-field--disabled)
+<StoryCanvas of="Field/Disabled" showLink />
 
 ### Label Position
 
@@ -117,6 +76,7 @@ Field automatically manages ARIA relationships between form elements:
 **Using the useFieldIds hook:**
 
 The hook provides:
+
 - `inputId`: ID for the form control
 - `descriptionId`: ID for the description element
 - `helperMessageId`: ID for helper/error messages

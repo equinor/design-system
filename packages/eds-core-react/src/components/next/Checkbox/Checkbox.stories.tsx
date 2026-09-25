@@ -203,6 +203,31 @@ export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
 )
 GroupedCheckbox.storyName = 'Grouped'
 
+export const InheritedDisabled: StoryFn<CheckboxProps> = () => (
+  <fieldset disabled>
+    <legend>Disabled fieldset</legend>
+    <Wrapper gap={8}>
+      <Checkbox label="Unchecked" name="inherited" value="1" />
+      <Checkbox label="Checked" name="inherited" value="2" defaultChecked />
+      <Checkbox
+        label="Indeterminate"
+        name="inherited"
+        value="3"
+        indeterminate
+      />
+    </Wrapper>
+  </fieldset>
+)
+InheritedDisabled.storyName = 'Inherited disabled'
+InheritedDisabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Checkboxes inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input’s `:disabled` state, so it covers this inherited disabling too.',
+    },
+  },
+}
+
 export const WithoutVisibleLabel: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
     <div data-density="spacious">

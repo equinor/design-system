@@ -185,17 +185,18 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 
 ### When Adding New Components
 
-1. Create component in `src/components/YourComponent/`
+1. Check [`documentation/MOBILE_COMPONENT_SCOPE.md`](../../documentation/MOBILE_COMPONENT_SCOPE.md) first — the component may already be excluded or renamed.
+2. Create component in `src/components/YourComponent/`
     - Main component file: `YourComponent.tsx`
     - Types file: `YourComponent.types.ts` (if complex)
     - Styles using `EDSStyleSheet.create`
     - Test file: `YourComponent.test.tsx` — write it alongside the component, not as a follow-up. See `Divider.test.tsx` for the minimal shape: render via `test-utils` (wraps `@testing-library/react-native` with `EDSProvider`) and assert it renders plus any accessibility basics.
-2. Export from `src/index.ts`
-3. Add a storybook screen in `../../apps/mobile-storybook/app/(tabs)/components/yourcomponent.tsx`
+3. Export from `src/index.ts`
+4. Add a storybook screen in `../../apps/mobile-storybook/app/(tabs)/components/yourcomponent.tsx`
    (lowercase filename — Expo Router derives the route from it), then register it in that
    directory's `_layout.tsx` and `index.tsx`
-4. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
-5. Follow existing patterns for prop naming and component structure
+5. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
+6. Follow existing patterns for prop naming and component structure
 
 **MDX handoff to EDS Storybook:** Files in `docs/` are consumed by `packages/eds-core-react` via a `workspace:^` link in this monorepo, which wraps each one with source/npm `<Links>` inside `<PlatformTabs>` — changes appear as soon as both packages are built, no release needed. Mobile MDX should not import `<Links>` or `<PlatformTabs>` itself — write component-focused content only. The consumer-side wrapping pattern (in `packages/eds-core-react/src/components/<Component>/<Component>.docs.mdx` — most under `next/`, but `EdsProvider` and `Typography.new` sit outside it) is:
 

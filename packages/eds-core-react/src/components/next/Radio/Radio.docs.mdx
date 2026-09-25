@@ -72,6 +72,12 @@ Radio buttons with the same `name` form a group. Use arrow keys (↑↓ or ←�
 
 <Canvas of={ComponentStories.GroupedRadio} />
 
+### Inherited disabled
+
+Radio buttons inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input's `:disabled` state, so it covers this inherited disabling too.
+
+<Canvas of={ComponentStories.InheritedDisabled} />
+
 ### Without visible label
 
 When no visible label is needed, use `aria-label` to provide an accessible name for screen readers.
