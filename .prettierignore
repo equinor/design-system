@@ -6,7 +6,6 @@ packages/eds-tokens/build/*
 # never hand-formatted (a prettier --write would be reverted by the
 # next export run anyway)
 packages/eds-tokens/src/tokens/*
-packages/eds-icons/src/data.ts
 packages/eds-core-react/src/components/Select/NativeSelect.tsx
 # These packages are written in their own (pre-migration) style —
 # double quotes, semicolons — and are linted by their own eslint.config.js,
@@ -14,3 +13,8 @@ packages/eds-core-react/src/components/Select/NativeSelect.tsx
 # root's Prettier style (see eslint.config.mjs's matching ignores entry).
 packages/eds-mobile-components/**
 apps/mobile-storybook/**
+
+# The frozen 1.1.0 docs archive. The format hooks run prettier --write on any
+# edited .md/.css, which would reformat the archive as a side effect of an
+# unrelated edit; 25 of its files are Prettier-unclean and deliberately left so.
+apps/design-system-docs/versioned_docs/**

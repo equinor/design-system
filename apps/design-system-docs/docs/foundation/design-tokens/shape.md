@@ -9,4 +9,3 @@ To reflect the round corners of the Equinor logo, our shapes have a default roun
 ## Variations
 
 There are many different shapes to choose between when you are building a component such as: `Button`, `Icon button`,  `Corners`,  `Straight`,  `Field`  and `Circle`.
-
