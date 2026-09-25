@@ -17,6 +17,10 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 
 Before scaffolding a new component, check [`documentation/AI-COMPONENT-INDEX.md`](./documentation/AI-COMPONENT-INDEX.md) — a generated list of every `/next` component with its props and sub-components. It is regenerated on `pnpm run build` (or run `pnpm run generate:component-index` ad-hoc). Don't edit it by hand.
 
+### Mobile component scope
+
+Before scaffolding a new `eds-mobile-components` component, check [`documentation/MOBILE_COMPONENT_SCOPE.md`](./documentation/MOBILE_COMPONENT_SCOPE.md) — the maintained list of EDS web components mobile renames, replaces, or explicitly excludes, and why. The component you're about to build may already be decided against.
+
 ## Secrets & Credentials
 
 Never read, search, copy, or print the contents of secret files. The rule applies to **every** harness (Claude Code, Copilot, OpenCode) regardless of whether the harness enforces it.
