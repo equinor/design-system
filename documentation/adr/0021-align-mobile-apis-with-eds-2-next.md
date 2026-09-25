@@ -62,7 +62,7 @@ Picking stable's API as the target would mean migrating mobile once now and agai
 
 This is a standing rule, not a one-time snapshot of `next/`'s current shape: if `next/` itself is superseded by a later generation (the in-progress token-foundation revision, or whatever comes after it), mobile re-targets that later generation under this same decision. No new ADR is needed to keep pointing at the destination.
 
-The historical record of which components have been migrated under this rule, and exactly what changed, lives in [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md). This file is generated automatically from each migration PR's conventional commit and it grows with every component added.
+The historical record of which components have migrated under this rule lives in [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md), generated automatically from each migration PR's conventional commit and growing with every component. The changelog names the component and links its PR; the prop-level detail of what changed lives in that PR, not the changelog entry itself.
 
 ### Consequences
 
@@ -77,7 +77,7 @@ The historical record of which components have been migrated under this rule, an
 ### Confirmation
 
 - New or redesigned mobile components are checked against the corresponding newest-generation component's actual props (not just its documentation) before the mobile API is finalized.
-- Where a mobile component's API is adapted rather than copied (for platform reasons), the PR's conventional commit is marked `!` with a `BREAKING CHANGES` footer describing what changed and why, so it lands in `CHANGELOG.md` automatically and the deviation is traceable instead of silent.
+- A migration that changes an already-published mobile API marks its conventional commit `!` with a `BREAKING CHANGES` footer naming the props that changed, so it lands in `CHANGELOG.md`. A platform-driven adaptation (RN can't take the same shape as `next/`) is recorded in the PR description or the component's own docs instead, whether or not it's breaking — adaptation and breaking-ness are independent, and marking a non-breaking adaptation `!` would misrepresent it.
 - When EDS web's newest generation moves again (for example, once the in-progress token-foundation revision produces its own component APIs), mobile re-targets it under this same rule — no new ADR needed, only future migration PRs change.
 
 ## Related
@@ -86,5 +86,5 @@ The historical record of which components have been migrated under this rule, an
 - Parent discussion: [design-system-internal#255](https://github.com/equinor/design-system-internal/discussions/255)
 - [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md) — the migration this API-alignment principle applies to
 - [ADR-0020](./0020-mobile-component-scope-exclusions-and-renames.md) — which components are in scope for this migration in the first place
-- [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md) — the record of which components have migrated under this rule and what changed
+- [`packages/eds-mobile-components/CHANGELOG.md`](../../packages/eds-mobile-components/CHANGELOG.md) — the record of which components have migrated under this rule; each entry links the PR with the actual prop-level detail
 - Tracking issue for this ADR batch: [#5515](https://github.com/equinor/design-system/issues/5515)
