@@ -19,6 +19,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       helperMessage,
       className,
       id: providedId,
+      style,
       ...rest
     },
     ref,
@@ -44,7 +45,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           aria-describedby={helperMessage ? helperMessageId : undefined}
           // Merge so a consumer className can't clobber the 'input' class the
           // component CSS keys its :has(.input:...) state selectors on
-          className={['input', className].filter(Boolean).join(' ')}
+          className="input"
           disabled={disabled}
           ref={inputRef}
           data-indeterminate={indeterminate}
@@ -66,13 +67,16 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </>
     )
 
+    const rootClassName = ['eds-checkbox', className].filter(Boolean).join(' ')
+
     // Use Field for layout when label is provided
     if (label) {
       return (
         <Field
           position="start"
           disabled={disabled}
-          className="eds-checkbox"
+          className={rootClassName}
+          style={style}
           data-color-appearance="accent"
           data-selectable-space="md"
           data-space-proportions="squished"
@@ -92,7 +96,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className="eds-checkbox"
+        className={rootClassName}
+        style={style}
         data-standalone={true}
         data-color-appearance="accent"
       >
