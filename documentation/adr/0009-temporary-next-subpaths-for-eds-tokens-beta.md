@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-07-20
 - **Decision makers:** Frida Erdal, EDS Core Team
+- **Scope:** Tokens
 
 ## Context
 

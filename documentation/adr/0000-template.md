@@ -12,6 +12,28 @@
 - **Status:** Proposed | Accepted | Rejected | Deprecated | Superseded by [ADR-NNNN]
 - **Date:** YYYY-MM-DD
 - **Decision makers:** [List the people involved in making this decision]
+- **Scope:** Web | Mobile | Tokens | All
+
+<!--
+  Status: if a later ADR changes or reverses this decision, mark this line
+  "Superseded by [ADR-NNNN](NNNN-slug.md)" for a full supersession. For a
+  partial one, name the specific part that's now stale — not what's newly
+  accepted — right before "superseded by", e.g.
+  "Accepted (CSS naming convention superseded by [ADR-0006](path))".
+  The new ADR's own Related section links back: "Supersedes [ADR-NNNN](path)".
+  Accepted ADRs are immutable: only the Status line and a forward pointer
+  change, never the recorded reasoning itself.
+
+  Scope: which product surface this decision governs.
+  - Web: eds-core-react (including /next)
+  - Mobile: eds-mobile-components, apps/mobile-storybook
+  - Tokens: eds-tokens / the Tokens Studio pipeline — consumed by both Web and Mobile
+  - All: process/governance decisions not tied to one product surface (e.g. ADR-0001)
+  Use a comma-separated combination when the decision genuinely spans more than
+  one — e.g. one beta-versioning scheme adopted for both a web package and
+  eds-tokens (ADR-0012), or a naming convention for the Figma component library
+  both platforms design from (ADR-0015).
+-->
 
 ## Context
 
