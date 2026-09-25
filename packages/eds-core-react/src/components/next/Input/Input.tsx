@@ -29,7 +29,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
     const hasStartAdornment = startText || startAdornment
     const hasEndAdornment = endText || endAdornment
 
-    const containerClasses = ['eds-input-container', containerClassName]
+    const containerClasses = ['eds-input', containerClassName]
       .filter(Boolean)
       .join(' ')
 
@@ -46,7 +46,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       >
         {displayErrorIcon && (
           <span
-            className="eds-error-icon"
+            className="error-icon"
             data-font-size="xs"
             data-font-family="ui"
             data-baseline="center"
@@ -55,10 +55,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           </span>
         )}
         {hasStartAdornment && (
-          <div className="eds-adornment" data-color-appearance="neutral">
+          <div className="adornment" data-color-appearance="neutral">
             {startText && (
               <span
-                className="eds-adornment__text"
+                className="text"
                 data-font-family="ui"
                 data-font-size="xs"
                 data-baseline="center"
@@ -67,7 +67,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
               </span>
             )}
             {startAdornment && (
-              <span className="eds-adornment__adornment" data-font-size="xs">
+              <span className="item" data-font-size="xs">
                 {startAdornment}
               </span>
             )}
@@ -78,7 +78,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           type={Component === 'textarea' ? undefined : type}
           disabled={disabled}
           readOnly={readOnly}
-          className={['eds-input', className].filter(Boolean).join(' ')}
+          className={['control', className].filter(Boolean).join(' ')}
           data-color-appearance="neutral"
           data-font-family="ui"
           data-font-size="md"
@@ -89,10 +89,10 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           aria-invalid={invalid || undefined}
         />
         {hasEndAdornment && (
-          <div className="eds-adornment" data-color-appearance="neutral">
+          <div className="adornment" data-color-appearance="neutral">
             {endText && (
               <span
-                className="eds-adornment__text"
+                className="text"
                 data-font-family="ui"
                 data-font-size="xs"
                 data-baseline="center"
@@ -101,7 +101,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
               </span>
             )}
             {endAdornment && (
-              <span className="eds-adornment__adornment" data-font-size="xs">
+              <span className="item" data-font-size="xs">
                 {endAdornment}
               </span>
             )}
