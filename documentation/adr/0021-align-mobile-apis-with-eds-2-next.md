@@ -77,7 +77,7 @@ The historical record of which components have migrated under this rule lives in
 ### Confirmation
 
 - New or redesigned mobile components are checked against the corresponding newest-generation component's actual props (not just its documentation) before the mobile API is finalized.
-- A migration that changes an already-published mobile API marks its conventional commit `!` with a `BREAKING CHANGES` footer naming the props that changed, so it lands in `CHANGELOG.md`. A platform-driven adaptation (RN can't take the same shape as `next/`) is recorded in the PR description or the component's own docs instead, whether or not it's breaking — adaptation and breaking-ness are independent, and marking a non-breaking adaptation `!` would misrepresent it.
+- A migration that changes an already-published mobile API marks its conventional commit `!` and adds a `BREAKING CHANGE:` footer naming the props that changed, so it lands in `CHANGELOG.md`. A platform-driven adaptation (RN can't take the same shape as `next/`) is recorded in the PR description or the component's own docs instead, whether or not it's breaking — adaptation and breaking-ness are independent, and marking a non-breaking adaptation `!` would misrepresent it.
 - When EDS web's newest generation moves again (for example, once the in-progress token-foundation revision produces its own component APIs), mobile re-targets it under this same rule — no new ADR needed, only future migration PRs change.
 
 ## Related
