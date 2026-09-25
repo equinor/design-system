@@ -86,6 +86,15 @@ export type {
   BadgeVariant,
 } from './Badge'
 
+export { Avatar, AvatarNameLabel } from './Avatar'
+export type {
+  AvatarProps,
+  AvatarSize,
+  AvatarEmphasis,
+  AvatarNameLabelProps,
+  AvatarNameLabelLayout,
+} from './Avatar'
+
 export { Dialog } from './Dialog'
 export type {
   DialogActionsProps,
