@@ -100,6 +100,20 @@ describe('Tooltip (next)', () => {
       )
     })
 
+    it('exposes anchor names for the trigger and the tooltip body as CSS variables', () => {
+      render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
+      const tooltip = screen.getByRole('tooltip', { hidden: true })
+      // The anchor wrapper is a plain span with no role or text to query by
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = tooltip.parentElement as HTMLElement
+      expect(wrapper.style.getPropertyValue('--tooltip-anchor-name')).toBe(
+        `--${tooltip.id}`,
+      )
+      expect(wrapper.style.getPropertyValue('--tooltip-body-name')).toBe(
+        `--${tooltip.id}-body`,
+      )
+    })
+
     it('adds aria-describedby on trigger pointing to tooltip id', () => {
       render(<Tooltip title="Tooltip text">{trigger}</Tooltip>)
       const btn = screen.getByRole('button')
