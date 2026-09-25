@@ -1,20 +1,10 @@
 ---
 title: Icon
+hide_title: true
+description: 'Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to scale automatically with typography, adapt to density modes, and meet accessibility standards out of the box.'
 ---
 
-# Icon
-
-Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to scale automatically with typography, adapt to density modes, and meet accessibility standards out of the box.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--introduction"
-  width="100%"
-  height="88"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--introduction)
+<StoryCanvas of="Icon/Introduction" showLink />
 
 ## When to Use
 
@@ -52,29 +42,13 @@ Use the `size` prop for explicit sizing. Each size maps to an EDS design token, 
 | 5xl  | 48px               | 42px                  |
 | 6xl  | 56px               | 48px                  |
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--explicit-sizes"
-  width="100%"
-  height="136"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--explicit-sizes)
+<StoryCanvas of="Icon/ExplicitSizes" showLink />
 
 ### Auto-sizing with Typography
 
 When placed inside a Typography component, icons automatically inherit the correct size via the `--eds-typography-icon-size` CSS variable. This is the recommended approach for icons inline with text.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--auto-size-from-typography"
-  width="100%"
-  height="308"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--auto-size-from-typography)
+<StoryCanvas of="Icon/AutoSizeFromTypography" showLink />
 
 ### Density modes
 
@@ -83,64 +57,32 @@ Icons respect the `data-density` attribute for density-aware sizing. The same `s
 - **Spacious** (default) - larger icons for more breathing room
 - **Comfortable** - smaller icons for compact UIs
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--density-modes"
-  width="100%"
-  height="162"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--density-modes)
+<StoryCanvas of="Icon/DensityModes" showLink />
 
 ### Default sizing
 
 When no `size` prop is set and the icon is outside a Typography component, it scales to 1.5× the surrounding font size. This provides a sensible default in any context.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--dynamic-fallback"
-  width="100%"
-  height="251"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--dynamic-fallback)
+<StoryCanvas of="Icon/DynamicFallback" showLink />
 
 ### Color
 
 Icons inherit `currentColor` by default, making them adapt to text color automatically. You can also set a custom color using the `color` prop.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--color"
-  width="100%"
-  height="88"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--color)
+<StoryCanvas of="Icon/Color" showLink />
 
 ### Inline text vs flex layout
 
 How you use Icon depends on the layout context:
 
-| Context     | Usage                          | Why                                                             |
-| ----------- | ------------------------------ | --------------------------------------------------------------- |
-| Inline text | `<Icon data={save} />`         | Auto-sizes to 1.5em, negative margins for optical alignment     |
+| Context     | Usage                          | Why                                                                |
+| ----------- | ------------------------------ | ------------------------------------------------------------------ |
+| Inline text | `<Icon data={save} />`         | Auto-sizes to 1.5em, negative margins for optical alignment        |
 | Flex/Button | `<Icon data={save} size="md">` | Fixed size from tokens, no margins - layout controlled by flex gap |
 
 The `size` prop removes negative margins, giving full control to your layout system.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--inline-with-text"
-  width="100%"
-  height="257"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--inline-with-text)
+<StoryCanvas of="Icon/InlineWithText" showLink />
 
 ## Usage in Figma
 
@@ -152,11 +94,11 @@ There is no dedicated Icon component in Figma. Instead, icons are imported direc
 
 The container exposes variables for controlling size and negative padding:
 
-| Variable                                 | Purpose                                      |
-| ---------------------------------------- | -------------------------------------------- |
-| `Selectable/Icon size`                   | Controls the icon dimensions                 |
-| `Selectable/Icon container padding ↕︎`  | Negative vertical padding for optical alignment |
-| `Selectable/Icon container padding ↔︎`  | Negative horizontal padding (square containers only) |
+| Variable                              | Purpose                                              |
+| ------------------------------------- | ---------------------------------------------------- |
+| `Selectable/Icon size`                | Controls the icon dimensions                         |
+| `Selectable/Icon container padding ↕︎` | Negative vertical padding for optical alignment      |
+| `Selectable/Icon container padding ↔︎` | Negative horizontal padding (square containers only) |
 
 **Which padding variables to use depends on the container shape:**
 
@@ -179,15 +121,7 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Announced by screen readers using the title text
 - Use when the icon conveys meaning that is not available through surrounding text
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-icon--accessibility"
-  width="100%"
-  height="197"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-icon--accessibility)
+<StoryCanvas of="Icon/Accessibility" showLink />
 
 ## Do's and Don'ts
 
@@ -197,11 +131,11 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Let icons inherit size from Typography when used inline with text
 - Use the `size` prop in flex layouts where you control spacing with gap
 - Rely on `currentColor` for icons that should match surrounding text color
-:::
+  :::
 
 :::danger **Don't**
 
 - Don't use icons without a `title` when there is no accompanying text to convey the meaning
 - Don't combine the `size` prop with Typography auto-sizing. The `size` prop takes priority and overrides the inherited size, so the Typography context has no effect
 - Don't use custom pixel values for sizing - use the `size` prop or let tokens handle it
-:::
+  :::
