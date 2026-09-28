@@ -1,0 +1,200 @@
+/*
+ * Documentation-site design variables and layout utilities.
+ * These fill the gaps where no EDS/Infima token exists (section rhythm, prose
+ * measure, grid gap). Component-level styling lives colocated with each
+ * component in src/components/.
+ */
+
+:root {
+  /* ------------------------------------------------------------------
+   * Site typography scale — the single source of truth for every text
+   * role on the site. Each role maps to a Tokens Studio typography
+   * token; the two --docs-font-display-* values and the prose
+   * line-height are documented site-local exceptions: the token set is
+   * a product-UI scale whose largest header step (header-4xl) is 32px
+   * and whose line-heights are UI-tuned, so the marketing hero size and
+   * long-form prose leading live here instead.
+   * ------------------------------------------------------------------ */
+  /* Display — hero/page titles on landing pages and doc-page hero bands */
+  --docs-font-display-size: 2.75rem; /* site-local: above header-4xl */
+  --docs-font-display-line-height: 1.15; /* site-local */
+
+  /* Hero — the homepage brand title only. Capped at 96px; the Figma header
+     specifies 112px, but that overpowered the page at the 1440px design
+     width. Scales down from the cap on narrower viewports. */
+  --docs-font-hero-size: clamp(2.75rem, 7.78vw, 6rem); /* site-local */
+
+  /* All roles reference the SEMANTIC token layer only. The header-*
+     font-size names collide with the legacy bundle; the semantic typography
+     bridge in theme-variables.css pins them to the Tokens Studio values. */
+  /* Section headings (h2 role) */
+  --docs-font-section-size: var(--eds-typography-header-3xl-font-size);
+  --docs-font-section-line-height: var(--eds-typography-header-3xl-line-height);
+
+  /* Sub-section headings (h3 role) */
+  --docs-font-subsection-size: var(--eds-typography-header-xl-font-size);
+  --docs-font-subsection-line-height: var(
+    --eds-typography-header-xl-line-height
+  );
+
+  /* Card titles */
+  --docs-font-card-title-size: var(--eds-typography-header-lg-font-size);
+  --docs-font-card-title-line-height: var(
+    --eds-typography-header-lg-line-height
+  );
+
+  /* Lead / subtitle paragraphs */
+  --docs-font-lead-size: var(--eds-typography-ui-xl-font-size);
+
+  /* Body prose */
+  --docs-font-body-size: var(--eds-typography-ui-lg-font-size);
+
+  /* Secondary text — card descriptions, UI labels */
+  --docs-font-body-sm-size: var(--eds-typography-ui-md-font-size);
+  --docs-font-body-sm-line-height: var(--eds-typography-ui-md-line-height);
+
+  /* Caption — badges, footnotes, copyright */
+  --docs-font-caption-size: var(--eds-typography-ui-sm-font-size);
+  --docs-font-caption-line-height: var(--eds-typography-ui-sm-line-height);
+
+  /* Long-form prose leading (site-local: token line-heights are UI-tuned) */
+  --docs-prose-line-height: 1.6;
+
+  /* Emphasis weight — headings, buttons, labels */
+  --docs-font-weight-emphasis: var(--eds-font-weight-bolder);
+
+  /* ------------------------------------------------------------------
+   * Card recipe — from the EDS IllustrativeCard spec (Figma Core
+   * Components, node 4663-25088). Every site card consumes these:
+   * floating surface, interactive-neutral border, no shadow at rest,
+   * elevation-low on hover (no lift, no border change), focus ring via
+   * outline, ui/bolder/md title + ui/sm secondary content.
+   * ------------------------------------------------------------------ */
+  --docs-card-bg: var(--eds-background-floating);
+  --docs-card-border: 1px solid
+    var(--eds-border-interactive-neutral-muted-default);
+  --docs-card-radius: var(--eds-corner-radius-rounded);
+  --docs-card-padding: var(--eds-spacing-sm);
+  --docs-card-gap: var(--eds-spacing-4xs);
+  --docs-card-hover-shadow: var(--eds-elevation-low);
+  --docs-card-title-size: var(--eds-typography-ui-md-font-size);
+  --docs-card-title-line-height: var(--eds-typography-ui-md-line-height);
+  --docs-card-text-size: var(--eds-typography-ui-sm-font-size);
+  --docs-card-text-line-height: var(--eds-typography-ui-sm-line-height);
+  --docs-hero-space-block: 5rem;
+  --docs-hero-min-height: 27rem;
+  --docs-section-space-block: 3rem;
+  --docs-measure: 35rem;
+  --docs-grid-gap: 1.5rem;
+
+  /* Centred content column + the responsive gutter that flanks it. */
+  --docs-content-max: var(--ifm-container-width);
+  --docs-gutter: max(2rem, calc((100% - var(--docs-content-max)) / 2));
+
+  /* Hero band background. Uses Infima's --ifm-color-primary-lightest, which is a
+     light accent tint in light mode and is recomputed to a dark accent shade in
+     dark mode by Infima's primary-palette scale — the same switch .about-hero
+     uses. No manual [data-theme='dark'] override needed. */
+  --docs-hero-bg: var(--ifm-color-primary-lightest);
+
+  /* Hero dot grid — 2px dots with 16px between them, per the Figma header
+     pattern. Consumed by <DotField> (dot-field.css) and, for the markdown
+     hero bands that cannot host an element, directly in doc-layouts.css.
+
+     The gradients resolve here rather than per band: the pattern is the same
+     everywhere, and a gradient held in a custom property takes the colour it
+     had where the property was declared, so a per-band override of
+     --docs-dot-size or the accent token would not reach it. Both bundles key
+     their theme blocks off <html>, which is this element, so the dot colour
+     still flips with the colour scheme.
+
+     The spotlight grows the dots as well as brightening them, so there are
+     three dot sizes on one shared pitch: the resting size, and two larger lit
+     steps that <DotField> stacks in rings around the pointer. Only the resting
+     size feeds the pitch — the lit dots grow inside their existing cell, which
+     is what keeps all three layers registered on the same grid. */
+  --docs-dot-size: 2px;
+  --docs-dot-size-lit: 3px;
+  --docs-dot-size-lit-near: 4.5px;
+  --docs-dot-gap: 16px;
+  --docs-dot-pitch: calc(var(--docs-dot-size) + var(--docs-dot-gap));
+  --docs-dot-spotlight-radius: 15rem;
+
+  /* Fraction of the spotlight radius covered by the largest dots. */
+  --docs-dot-spotlight-core: 0.42;
+  --docs-dot-grid: radial-gradient(
+    circle at center,
+    color-mix(
+        in srgb,
+        var(--eds-icon-interactive-accent-default) 20%,
+        transparent
+      )
+      calc(var(--docs-dot-size) / 2),
+    transparent calc(var(--docs-dot-size) / 2)
+  );
+
+  /* The lit dots feather over the last half pixel. The resting dot is small
+     enough that a hard stop still reads as round, but at these radii the
+     un-antialiased edge of a hard stop turns the dot into a square. */
+  --docs-dot-grid-lit: radial-gradient(
+    circle at center,
+    var(--eds-icon-interactive-accent-default)
+      calc(var(--docs-dot-size-lit) / 2 - 0.5px),
+    transparent calc(var(--docs-dot-size-lit) / 2)
+  );
+  --docs-dot-grid-lit-near: radial-gradient(
+    circle at center,
+    var(--eds-icon-interactive-accent-default)
+      calc(var(--docs-dot-size-lit-near) / 2 - 0.5px),
+    transparent calc(var(--docs-dot-size-lit-near) / 2)
+  );
+}
+
+/* ----------------------------------------------------------------------
+ * Breakpoint convention: the site uses exactly two breakpoints —
+ *   996px  Infima's layout flip (sidebar drawer, doc columns)
+ *   600px  phone
+ * Custom properties can't be used in media queries, so the values are a
+ * documented convention, not tokens. Grids should prefer
+ * repeat(auto-fill|auto-fit, minmax(…)) over breakpoints where possible.
+ * ---------------------------------------------------------------------- */
+
+/* Phone — one override block; every component consumes these vars, so the
+   mobile scale lives here rather than per component. */
+@media (width <= 600px) {
+  :root {
+    /* Display steps down to the token scale's top step (header-4xl, 32px);
+       the desktop 44px is the documented above-token exception. */
+    --docs-font-display-size: var(--eds-typography-header-4xl-font-size);
+    --docs-hero-space-block: 3rem;
+    --docs-hero-min-height: auto;
+    --docs-section-space-block: 3rem;
+
+    /* Match Infima's 1rem container padding on phones. */
+    --docs-gutter: max(1rem, calc((100% - var(--docs-content-max)) / 2));
+  }
+}
+
+.docs-section {
+  padding-block: var(--docs-section-space-block);
+}
+
+.docs-section--muted {
+  /* Infima surface colour flips reliably in dark mode (see --docs-hero-bg note). */
+  background-color: var(--ifm-background-surface-color);
+}
+
+.docs-about-motto {
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* Label used by the TypeSpecimen component (src/components/TypeSpecimen.tsx). */
+.specimen-label {
+  font-size: var(--docs-font-caption-size);
+  opacity: 0.6;
+}
+
+.pagination-nav a {
+  color: var(--ifm-color-primary);
+}

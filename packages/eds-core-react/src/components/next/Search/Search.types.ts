@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { InputProps } from '../Input/Input.types'
 
 export type SearchProps = {
@@ -14,6 +14,13 @@ export type SearchProps = {
   onClear?: () => void
   /** Accessible label for the clear button. Defaults to "Clear search". Override for localisation. */
   clearLabel?: string
+  /**
+   * CSS class names applied to the root element (the `<search>` wrapper).
+   * Use this to control layout, width, or margin of the entire search field.
+   */
+  className?: string
+  /** Inline styles applied to the root element (the `<search>` wrapper). */
+  style?: CSSProperties
 } & Omit<
   InputProps,
   | 'startAdornment'
@@ -23,4 +30,6 @@ export type SearchProps = {
   | 'as'
   | 'hideErrorIcon'
   | 'type'
+  | 'className'
+  | 'style'
 >

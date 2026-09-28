@@ -32,11 +32,21 @@ ENV NODE_ENV=production \
     UID=12345 \
     NEXT_TELEMETRY_DISABLED=1
 
+# pnpm 11 changed the verify-deps-before-run default from false to "install", so
+# every `pnpm <script>` re-installs when the deps check thinks node_modules is
+# stale. The --prod install below leaves devDependencies-only workspace packages
+# (eds-tokens) without a node_modules directory, which that check always reads as
+# out of sync, so `pnpm start` ran `pnpm install --prod` at boot and crash-looped
+# on EACCES writing its temp lockfile into root-owned /app. A runtime container
+# must never re-install.
+ENV pnpm_config_verify_deps_before_run=false
+
 # Install pnpm and create non-root user
 RUN npm install -g pnpm@11.27.0 && \
     addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
-    apk add --no-cache tini
+    apk add --no-cache tini && \
+    chown "$USER":"$USER" /app
 
 # Copy package files for production install
 COPY --chown="$USER":"$USER" package.json pnpm-workspace.yaml pnpm-lock.yaml ./
