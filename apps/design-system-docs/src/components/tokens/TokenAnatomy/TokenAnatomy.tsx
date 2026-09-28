@@ -196,10 +196,11 @@ export function TokenAnatomy({
   }
 
   return (
+    // Block padding only, so the specimen starts on the text edge rather than inset from it.
     <figure
       className="token-anatomy"
       data-mode={mode}
-      style={{ margin: '1.5rem 0', overflowX: 'auto', padding: '0.5rem' }}
+      style={{ margin: '1.5rem 0', overflowX: 'auto', paddingBlock: '0.5rem' }}
     >
       <div
         className="token-anatomy__frame"

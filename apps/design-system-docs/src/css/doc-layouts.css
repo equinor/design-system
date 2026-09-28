@@ -411,7 +411,11 @@ html[class*='docs-doc-id-foundation/']:is(
   background-size: var(--docs-dot-pitch) var(--docs-dot-pitch);
 }
 
-/* ---- Body content — constrained and centred via the shared gutter ---- */
+/* ---- Body content — constrained and centred via the shared gutter ----
+ * A margin, so an element's own padding and background stay inside the column: as padding, the
+ * gutter stretched code block and link backgrounds across the full width, and any inline padding
+ * on an example replaced it. `!important` because MDX examples and doc components set inline
+ * `margin` shorthands, which would otherwise zero the gutter. */
 [class*='docs-doc-id-foundation/']:is(
     [class*='docs-version-current'],
     [class*='docs-version-2.0.0-beta']
@@ -425,8 +429,8 @@ html[class*='docs-doc-id-foundation/']:is(
     .docs-landing,
     .sb-iframe
   ) {
-  padding-right: var(--docs-gutter);
-  padding-left: var(--docs-gutter);
+  margin-right: var(--docs-gutter) !important;
+  margin-left: var(--docs-gutter) !important;
 }
 
 /* Admonitions: use margins so their background/border renders correctly */
