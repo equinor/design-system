@@ -71,6 +71,9 @@ describe('Radio (next)', () => {
       const radio = screen.getByLabelText('radio-test')
       expect(radio).toBeInTheDocument()
       expect(radio).toHaveClass('custom-radio')
+      // The 'input' class must survive a consumer className — the component
+      // CSS keys its :has(.input:...) state selectors on it
+      expect(radio).toHaveClass('input')
     })
 
     it('applies data-* attributes to input element', () => {
@@ -143,6 +146,18 @@ describe('Radio (next)', () => {
       await userEvent.click(one)
       expect(one).not.toBeChecked()
     })
+
+    it('is disabled when inherited from a disabled fieldset', async () => {
+      render(
+        <fieldset disabled>
+          <Radio label="Radio one" name="test" />
+        </fieldset>,
+      )
+      const one = screen.getByLabelText('Radio one')
+      expect(one).toBeDisabled()
+      await userEvent.click(one)
+      expect(one).not.toBeChecked()
+    })
   })
 
   describe('States', () => {
@@ -152,6 +167,26 @@ describe('Radio (next)', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const label = radio.closest('.eds-radio')
       expect(label).toHaveAttribute('data-disabled', 'true')
+    })
+
+    it('does not set data-disabled on the standalone wrapper', () => {
+      // Disabled styling is keyed off :has(.input:disabled) in CSS, so the
+      // wrapper must not depend on a prop-set attribute
+      render(<Radio aria-label="Standalone disabled" name="test" disabled />)
+      const radio = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).not.toHaveAttribute('data-disabled')
+    })
+
+    it('keeps accent color appearance when disabled', () => {
+      // The disabled greys are appearance-independent in CSS, so the
+      // appearance no longer flips to neutral on the disabled prop
+      render(<Radio label="Disabled radio" name="test" disabled />)
+      const radio = screen.getByLabelText('Disabled radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
     })
   })
 

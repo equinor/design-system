@@ -74,6 +74,12 @@ Use `data-density="comfortable"` on a parent element for a more compact size.
 
 <Canvas of={ComponentStories.GroupedCheckbox} />
 
+### Inherited disabled
+
+Checkboxes inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input's `:disabled` state, so it covers this inherited disabling too.
+
+<Canvas of={ComponentStories.InheritedDisabled} />
+
 ### Without visible label
 
 When no visible label is needed, use `aria-label` to provide an accessible name for screen readers. This is common in tables or compact UIs.

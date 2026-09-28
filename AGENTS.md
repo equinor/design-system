@@ -17,6 +17,10 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 
 Before scaffolding a new component, check [`documentation/AI-COMPONENT-INDEX.md`](./documentation/AI-COMPONENT-INDEX.md) — a generated list of every `/next` component with its props and sub-components. It is regenerated on `pnpm run build` (or run `pnpm run generate:component-index` ad-hoc). Don't edit it by hand.
 
+### Mobile component scope
+
+Before scaffolding a new `eds-mobile-components` component, check [`documentation/MOBILE_COMPONENT_SCOPE.md`](./documentation/MOBILE_COMPONENT_SCOPE.md) — the maintained list of EDS web components mobile renames, replaces, or explicitly excludes, and why. The component you're about to build may already be decided against.
+
 ## Secrets & Credentials
 
 Never read, search, copy, or print the contents of secret files. The rule applies to **every** harness (Claude Code, Copilot, OpenCode) regardless of whether the harness enforces it.
@@ -32,35 +36,39 @@ If you need to verify a secret file's shape, report length + first/last few char
 
 **Enforcement matrix:**
 
-| Harness        | Enforcement                                                                                |
-| -------------- | ------------------------------------------------------------------------------------------ |
-| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js`|
-| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`    |
-| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually    |
-| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                   |
+| Harness        | Enforcement                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js` |
+| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`     |
+| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually     |
+| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                    |
 
 ## Code Formatting
 
 When an agent edits a file, the result must end up formatted and lint-fixed, regardless of which harness made the edit. Otherwise the same change lands as a clean diff in one harness and a noisy one in another.
 
-The expected behaviour after any edit to a `.ts`, `.tsx`, or `/components/next/**/*.css` file:
+The expected behaviour after any edit to a `.ts`, `.tsx`, `.css`, or `.md` file:
 
-- ESLint `--fix` runs on `.ts` / `.tsx`
+- ESLint `--fix` runs on `.ts` / `.tsx`, which also applies Prettier through `eslint-plugin-prettier`
 - Stylelint `--fix` runs on `.css` files inside `packages/eds-core-react/src/components/next/`
-- Prettier formatting is applied (covered by Prettier itself via VS Code `editor.formatOnSave` or by the lint --fix passes)
+- Prettier `--write` runs on `.css` and `.md`, after Stylelint. Stylelint only fixes ordering and notation, not Prettier's whitespace, so CSS needs both. The two converge in one pass — verified — so the order is stable and neither undoes the other. Prettier reads `.prettierignore` itself, which is why `*.mdx` stays untouched.
+
+`.md` and `.css` outside `components/next/` were unformatted for a long time because nothing ran Prettier on them: ESLint's Prettier integration only covers JS/TS, and the hooks only called Stylelint inside `components/next/`. **100 `.css`/`.md` files repo-wide are still Prettier-unclean** — run `pnpm run format:check` to see them. 25 of those are `apps/design-system-docs/versioned_docs/version-1.1.0/`, the frozen docs archive, which is deliberately left alone; the rest of that app is clean and gated in CI by `pnpm run format:check:docs`.
 
 **Enforcement matrix:**
 
-| Harness        | Enforcement                                                                                              |
-| -------------- | -------------------------------------------------------------------------------------------------------- |
-| Claude Code    | `.claude/hooks/format_hook.js` runs eslint/stylelint --fix after every Edit/Write                        |
-| Copilot CLI    | `.github/hooks/format-on-edit.{json,js}` runs the same eslint/stylelint --fix as a `postToolUse` hook    |
-| Copilot in IDE | `.vscode/settings.json` `editor.formatOnSave: true` (Prettier) — does NOT run eslint/stylelint auto-fix  |
-| OpenCode       | No enforced hook — run `pnpm run lint <file>` manually after edits, or configure an equivalent post-hook |
+| Harness        | Enforcement                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Claude Code    | `.claude/hooks/format_hook.js` runs eslint/stylelint --fix and prettier --write after every Edit/Write            |
+| Copilot CLI    | `.github/hooks/format-on-edit.{json,js}` runs the same eslint/stylelint --fix + prettier --write as `postToolUse` |
+| Copilot in IDE | `.vscode/settings.json` `editor.formatOnSave: true` (Prettier) — does NOT run eslint/stylelint auto-fix           |
+| OpenCode       | No enforced hook — run `pnpm run lint <file>` manually after edits, or configure an equivalent post-hook          |
 
 If you edit code in a harness without enforced auto-fix, run `pnpm run lint <file>` before considering the change done.
 
 **Exception:** `packages/eds-mobile-components` and `apps/mobile-storybook` are excluded from root's ESLint config — root's `lint` command exits 0 on their files (with an easy-to-miss "File ignored" warning) without actually checking anything. Use the per-package commands below instead.
+
+Do not set `prettier.prettierPath` in `.vscode/settings.json`. It is an explicit override for where the extension loads Prettier from; it was once set to an empty string, which is not a valid path. Prettier is a root devDependency, so the extension resolves the workspace copy on its own and stays on the same version as the hooks.
 
 ## Build/Lint/Test Commands
 
@@ -425,6 +433,10 @@ Component docs live in `apps/design-system-docs/docs/components/{category}/{comp
 
 EDS is adopting the Tokens Studio platform as the source for a new token pipeline, replacing the legacy Figma-REST sync over time. For platform concepts (organizations, projects, branches, releases), `studio` CLI setup and commands, the `.studio.json` configuration model, the safety rubric for CLI commands, and how to verify against live sources instead of answering from memory, see [`documentation/agent-instructions/TOKENS_STUDIO.md`](./documentation/agent-instructions/TOKENS_STUDIO.md). Harness entry points (`/tokens-studio` in Claude Code, the `tokens-studio` prompt in Copilot, the `tokens-studio` agent in OpenCode) all reference that doc. The legacy pipeline remains documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md).
 
+## Dependabot Duty
+
+The weekly Dependabot rotation covers three things: the open Dependabot PRs, the Dependabot alerts on the Security tab that did not get a PR (usually transitive dependencies fixed via `pnpm.overrides` in the root `package.json`), and the code scanning alerts CodeQL raises against our own source. For the triage steps, the duplicate-PR pattern, the decision table for majors, the override recipe, the code scanning dismissal reasons, the report format, and the boundaries (report first, never approve/merge/close/dismiss without a go-ahead), see [`documentation/agent-instructions/DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md). Harness entry points (`/dependabot-duty` in Claude Code, the `dependabot-duty` prompt in Copilot, the `dependabot-duty` agent in OpenCode) all reference that doc. The short human runbook is [`documentation/how-to/DEPENDABOT_GUIDE.md`](./documentation/how-to/DEPENDABOT_GUIDE.md).
+
 ## Conventional Commits
 
 ```
@@ -435,7 +447,7 @@ type: description
 
 **Breaking**: `feat!: remove deprecated prop`
 
-**Scope is optional and usually omitted in this repo.** Most monorepos using release-please *do* use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
+**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
 
 **When to add a scope:**
 
@@ -482,17 +494,24 @@ Those are the ones that come up most while building `/next` components. For the 
 
 This file is the canonical source. Tool-specific configs add only what's unique to that tool:
 
-| File                              | Purpose                                                    |
-| --------------------------------- | ---------------------------------------------------------- |
-| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings               |
-| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring  |
-| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)    |
-| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions |
-| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                |
-| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access |
-| `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix on edits |
-| `.opencode/agent/*.md`            | OpenCode: agent definitions                                |
-| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here         |
+| File                              | Purpose                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, settings                                               |
+| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring                                  |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                                    |
+| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions                                 |
+| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                                                |
+| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access                                 |
+| `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix + prettier --write on edits |
+| `.opencode/agent/*.md`            | OpenCode: agent definitions                                                                |
+| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here                                         |
+
+Directory-scoped conventions live next to the code they describe and take precedence there:
+
+| File                                | Scope                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `apps/design-system-docs/AGENTS.md` | Docs site: global CSS architecture, token bundles, typography scale, version scoping, StoryCanvas |
+| `apps/design-system-docs/CLAUDE.md` | Claude Code pointer to the above                                                                  |
 
 When adding new conventions, update **this file** and let the tool-specific files reference it.
 

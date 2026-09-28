@@ -59,7 +59,7 @@ List every file in scope (see § Scope) with one-line descriptions. Include `git
 
 ### Step 2 — Verify canonical source
 
-Confirm `AGENTS.md` still declares itself canonical (look for an explicit statement like "this is the canonical conventions file"). Confirm each harness primary instruction file (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, the three OpenCode agents' opening sections) defers to `AGENTS.md` rather than restating content. Any harness file that doesn't defer is a finding.
+Confirm `AGENTS.md` still declares itself canonical (look for an explicit statement like "this is the canonical conventions file"). Confirm each harness primary instruction file (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, the OpenCode primary agents' opening sections) defers to `AGENTS.md` rather than restating content. Any harness file that doesn't defer is a finding.
 
 ### Step 3 — Content drift
 
@@ -85,6 +85,7 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 | Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |
 | Re-sync harnesses (this audit) | `/audit-harnesses`   | `audit-harnesses` prompt                 | `audit-harnesses` agent |
 | Tokens Studio pipeline       | `/tokens-studio`       | `tokens-studio` prompt                   | `tokens-studio` agent |
+| Dependabot duty              | `/dependabot-duty`     | `dependabot-duty` prompt                 | `dependabot-duty` agent |
 | Read-only advisor            | `.claude/rules/advisor.md` (general scope) | (none) | `advisor` primary agent |
 
 Rows are *intent*, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
@@ -110,6 +111,8 @@ These controls must not vary by harness:
 - **Secret-file blocking.** `.claude/settings.json` `permissions.deny` and `.claude/hooks/read_hook.js` enforce in Claude Code; `.github/hooks/block-secrets.{json,js}` enforces in Copilot CLI; `AGENTS.md` § Secrets & Credentials documents the rule for IDE Copilot and OpenCode. If any of these is missing, **Critical** finding.
 - **Auto-format on edit.** `.claude/hooks/format_hook.js` and `.github/hooks/format-on-edit.{json,js}` should run equivalent eslint/stylelint --fix. `AGENTS.md` § Code Formatting documents the matrix. **Medium** if missing.
 - **Git workflow rules** (no AI attribution in commits, conventional commits, branch protection). These live in `AGENTS.md` § Git Workflow + § Conventional Commits; every harness file should defer to those sections, not redefine. Divergent restatements are findings.
+
+**Known asymmetry, not a finding:** the OpenCode agents carry `permission.bash` ask-lists (e.g. `.opencode/agent/dependabot-duty.md`) with no counterpart in `.claude/settings.json`. That is deliberate — Claude Code prompts on `Bash` by default, so the guardrail is the default rather than a config entry. The case worth checking is a developer who allowlists a broad pattern such as `Bash(gh:*)` in their gitignored `settings.local.json`: they silently lose what OpenCode still enforces. That is a per-machine check, not a repo one.
 
 ### Step 7 — MCP server parity
 

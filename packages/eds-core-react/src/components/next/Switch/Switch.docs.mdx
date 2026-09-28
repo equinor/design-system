@@ -52,6 +52,12 @@ import { Switch } from '@equinor/eds-core-react/next'
 
 <Canvas of={ComponentStories.States} />
 
+### Inherited disabled
+
+Switches inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input's `:disabled` state, so it covers this inherited disabling too.
+
+<Canvas of={ComponentStories.InheritedDisabled} />
+
 ### Dark mode
 
 <Canvas of={ComponentStories.DarkMode} />
