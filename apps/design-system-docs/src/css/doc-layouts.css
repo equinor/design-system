@@ -8,6 +8,8 @@
  *    only).
  * 4. Colour foundation pages: the generated token reference tables and the
  *    usage-page links, written straight into the colour MDX.
+ * 5. Scrollable tables: edge shadows on tables wider than the content column
+ *    (redesigned versions and unversioned pages only).
  *
  * These rules target `main`/`.col`/docItem* ancestors of the doc content, so
  * they cannot be colocated with a component. Variables live in
@@ -250,4 +252,67 @@ main[class*='docMainContainer']:has([class*='docHero']) {
 .markdown a.colour-usage-link:focus-visible {
   outline: 2px solid var(--eds-border-interactive-focus);
   outline-offset: 1px;
+}
+
+/* ======================================
+ * 5. SCROLLABLE TABLES
+ * A table wider than the content column scrolls sideways, but nothing showed
+ * that there was more of it. Each gets a shadow on any edge with content left
+ * to scroll to.
+ *
+ * Pure CSS: the two covers are attached to the scrolled content (`local`) and
+ * the two shadows to the box (`scroll`). Scrolled all the way to one side, that
+ * side's cover lines up with its shadow and hides it, so a table that fits
+ * shows no shadow at all. The covers are painted in the doc card's surface
+ * colour, so this only works on that backdrop; no table sits on another one
+ * today. Table rows are transparent or lightly tinted, so the shadows show
+ * through them.
+ *
+ * The shadows are linear rather than the usual radial: a radial gradient is
+ * centred on the table's height, so on a tall table it thinned to nothing
+ * towards the top and bottom. The colour is mixed from the text colour, so it
+ * darkens the edge in light mode and lightens it in dark mode, where the
+ * surface is too close to black for a dark shadow to show.
+ *
+ * Infima makes each markdown table its own scroll container, hence
+ * `.markdown > table`. The colour reference and migration tables scroll in a
+ * wrapper instead, so the wrapper carries the shadows. Scoped to the
+ * redesigned versions and unversioned pages; 1.1.0 keeps its stock rendering.
+ * ====================================== */
+html:where(
+    [class*='docs-version-current'],
+    [class*='docs-version-2.0.0-beta'],
+    :not([class*='docs-version-'])
+  )
+  :is(.markdown > table, .colour-reference, .migration-map) {
+  --_cover: var(--eds-background-surface);
+  --_shadow: color-mix(in srgb, var(--eds-text-primary) 18%, transparent);
+
+  background:
+    linear-gradient(to right, var(--_cover) 30%, transparent) left center /
+      2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--_cover) 30%, transparent) right center /
+      2.5rem 100% no-repeat local,
+    linear-gradient(to right, var(--_shadow), transparent) left center / 1rem
+      100% no-repeat scroll,
+    linear-gradient(to left, var(--_shadow), transparent) right center / 1rem
+      100% no-repeat scroll;
+}
+
+/* Inline code chips paint above the shadows. Infima's light-mode chip
+   background is opaque, so a chip at the edge covered the shadow and stood out
+   as an unshaded box; its dark-mode background is already translucent. Swap
+   the light one for a translucent tint that composites to the same grey on the
+   surface and lets the shadow through. */
+html:where(
+    [class*='docs-version-current'],
+    [class*='docs-version-2.0.0-beta'],
+    :not([class*='docs-version-'])
+  ):not([data-theme='dark'])
+  :is(.markdown > table, .colour-reference, .migration-map) {
+  --ifm-code-background: color-mix(
+    in srgb,
+    var(--eds-text-primary) 4%,
+    transparent
+  );
 }
