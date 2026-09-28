@@ -1,8 +1,10 @@
+---
+title: Typography
+hide_title: true
+description: 'Typography presents hierarchy and organises information as clearly and efficiently as possible. In EDS 2.0 it does more than that — type is also the minimum spacing unit the rest of the system is built on. Padding, gap, line-height and component height all derive from the active text size.'
+---
+
 import { TypeSpecimen } from '@site/src/components/TypeSpecimen'
-
-# Typography
-
-Typography presents hierarchy and organises information as clearly and efficiently as possible. In EDS 2.0 it does more than that — type is also the **minimum spacing unit** the rest of the system is built on. Padding, gap, line-height and component height all derive from the active text size.
 
 ## Principles
 

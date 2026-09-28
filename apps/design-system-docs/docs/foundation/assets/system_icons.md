@@ -1,8 +1,8 @@
 ---
 title: System Icons
+hide_title: true
+description: 'System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.'
 ---
-
-System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
 
 ## Usage Guidelines
 

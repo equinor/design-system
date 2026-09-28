@@ -1,4 +1,4 @@
-/* Swizzled from @docusaurus/theme-classic — adds the component-doc hero band. */
+/* Swizzled from @docusaurus/theme-classic — adds the hero band for component and foundation docs. */
 
 .docItemContainer header + *,
 .docItemContainer article > *:first-child {
@@ -13,7 +13,7 @@
 }
 
 /* ======================================
- * Component-doc hero band
+ * Component and foundation doc hero band
  * Full-bleed banner (title + lead) that fills the main area to the right of the
  * sidebar, sitting above the standard content + TOC row. The horizontal
  * breakout escapes the centred 1140px `.container`: `100%` is the container
