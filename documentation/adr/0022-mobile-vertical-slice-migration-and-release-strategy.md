@@ -52,21 +52,7 @@ Group components into slices ordered by dependency and priority. Publish each sl
 - Multiple slices still mean multiple opportunities for the API to keep moving before the final stable release, so early adopters tolerate churn across more than one release
 - Consumers who only track the `latest` npm tag see nothing from a slice until the eventual stable cut
 
-### Option 3: Ship each component independently the moment it's ready, with no dependency ordering and no beta gate
-
-Release every component to `latest` the moment it's individually done, with no grouping, priority, or pre-stable staging.
-
-**Pros:**
-
-- Fastest possible per-component availability, no batching delay
-
-**Cons:**
-
-- Drops the dependency reasoning entirely, so there's no signal steering effort toward the components others are waiting on
-- Shipping straight to `latest` with no beta signal presents still-maturing components as stable, repeating the version-number-versus-maturity mismatch [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md) already flags as a cost of the fork
-- No natural point to validate the library as a whole before calling it done
-
-### Option 4: Loose dependency-priority order, individual per-component beta releases, one stable cutover once everything ships (chosen)
+### Option 3: Loose dependency-priority order, individual per-component beta releases, one stable cutover once everything ships (chosen)
 
 Keep the same dependency-ordered priority groups as Option 2, but treat group membership as a planning signal rather than a release gate: each component ships to beta on its own as soon as it's ready, and work moves to a different ready component (in any group) when one is blocked, rather than stalling. The single validated stable cutover from Option 2 is unchanged.
 
@@ -84,7 +70,7 @@ Keep the same dependency-ordered priority groups as Option 2, but treat group me
 
 ## Decision
 
-**Adopt Option 4.** This supersedes the batching half of Option 2 — the original Q1 2026 decision — while keeping its dependency-ordering intent and its stable-release bar unchanged.
+**Adopt Option 3.** This supersedes the batching half of Option 2 — the original Q1 2026 decision — while keeping its dependency-ordering intent and its stable-release bar unchanged.
 
 Components are grouped by rough dependency priority into four groups: core controls that other components compose; form and basic UI elements built from those controls; layout and feedback components that arrange or wrap other components; and data and navigation components. Exact group membership isn't enumerated here — it shifts as component scope decisions land (see [ADR-0020](./0020-mobile-component-scope-exclusions-and-renames.md), [ADR-0021](./0021-align-mobile-apis-with-eds-2-next.md)), and pinning specific component names to a group in this ADR would need updating every time scope moves, defeating the point of dropping the hard batching in the first place.
 
@@ -101,7 +87,7 @@ Priority order is a guideline, not a release gate. If a component's design isn't
 ### Confirmation
 
 - A new mobile component is assigned a rough priority group based on dependency (does it compose other not-yet-built components, or is it composed by them) before implementation starts, but starting a different, ready component out of group order when one is blocked is expected, not an exception requiring sign-off.
-- Per-component beta releases publish exactly as `eds-mobile-components` releases do today: an ordinary `0.x` semver bump straight to the `latest` npm tag (`.github/workflows/trigger_publish.yml`'s mobile job hardcodes `npm-tag=latest`). No dedicated beta dist-tag is introduced — the `0.x` version number is the pre-stable signal. This is a deliberate difference from [ADR-0012](./0012-pinned-prerelease-versioning-for-beta-lines.md)'s `eds-core-react`/`eds-tokens` lines, which pin a beta series ahead of a known major behind a separate `beta` tag: mobile has no known future major to pin ahead of, and keeping every release on `latest` is what lets consumers get each component the moment it ships, instead of needing to opt into a separate tag.
+- Per-component beta releases publish exactly as `eds-mobile-components` releases do today: an ordinary `0.x` semver bump straight to the `latest` npm tag (`.github/workflows/trigger_publish.yml`'s mobile job hardcodes `npm-tag=latest`). No dedicated beta dist-tag is introduced — the `0.x` version number is the pre-stable signal. This is a deliberate difference from [ADR-0012](./0012-pinned-prerelease-versioning-for-beta-lines.md)'s `eds-core-react-next`/`eds-tokens` lines, which pin a beta series ahead of a known major behind a separate `beta` tag: mobile has no known future major to pin ahead of, and keeping every release on `latest` is what lets consumers get each component the moment it ships, instead of needing to opt into a separate tag.
 - The stable release does not ship until every planned component, across all priority groups, is complete and validated by consuming teams, and it ships with a migration guide.
 - A component counts as migrated, and safe to build on, once it is removed from `tsconfig.json`'s `exclude` list and exported from `src/index.ts` (see `packages/eds-mobile-components/CLAUDE.md`) — that's the checkable signal behind "ready" throughout this ADR.
 
