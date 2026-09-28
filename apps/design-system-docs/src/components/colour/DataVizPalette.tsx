@@ -15,7 +15,7 @@ const DIV = Array.from({ length: 9 }, (_, i) => i + 1)
 const label: React.CSSProperties = {
   fontFamily: 'var(--ifm-font-family-monospace)',
   fontSize: '0.6875rem',
-  color: 'var(--ifm-color-emphasis-700)',
+  color: 'var(--eds-text-secondary)',
 }
 
 function Swatch({
@@ -32,7 +32,7 @@ function Swatch({
         background: `var(--eds-${token.replaceAll('.', '-')})`,
         height,
         borderRadius: '3px',
-        border: '1px solid var(--ifm-color-emphasis-200)',
+        border: '1px solid var(--eds-border-non-interactive-neutral-muted)',
         display: 'block',
       }}
     />

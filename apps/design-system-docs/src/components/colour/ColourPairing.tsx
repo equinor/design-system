@@ -276,7 +276,7 @@ function Group({ pairing }: { pairing: Pairing }) {
         style={{
           marginTop: 0,
           marginBottom: '0.75rem',
-          color: 'var(--ifm-color-emphasis-700)',
+          color: 'var(--eds-text-secondary)',
           fontSize: '0.875rem',
         }}
       >

@@ -13,7 +13,7 @@ type BorderLevel = (typeof BORDER_LEVELS)[number]
 type Surface = 'background' | 'border'
 
 const label: CSSProperties = {
-  color: 'var(--ifm-color-emphasis-700)',
+  color: 'var(--eds-text-secondary)',
   fontFamily: 'var(--ifm-font-family-monospace)',
   fontSize: '0.75rem',
 }
@@ -45,7 +45,7 @@ function StateSwatch({ surface, token }: { surface: Surface; token: string }) {
   const border =
     surface === 'border'
       ? `0.25rem solid ${cssVar(token)}`
-      : '1px solid var(--ifm-color-emphasis-300)'
+      : '1px solid var(--eds-border-non-interactive-neutral-default)'
 
   return (
     <>
@@ -91,7 +91,7 @@ function StateTable({
       <caption
         style={{
           captionSide: 'top',
-          color: 'var(--ifm-font-color-base)',
+          color: 'var(--eds-text-primary)',
           fontSize: '1rem',
           fontWeight: 700,
           padding: '0 0.5rem 0.25rem',
@@ -274,7 +274,7 @@ function Chip({ token, caption }: { token: string; caption: string }) {
         aria-hidden="true"
         style={{
           background: cssVar(token),
-          border: '1px solid var(--ifm-color-emphasis-300)',
+          border: '1px solid var(--eds-border-non-interactive-neutral-default)',
           borderRadius: '4px',
           height: '2.75rem',
         }}
@@ -314,7 +314,8 @@ export function BehaviourComparison() {
         <div
           key={branch}
           style={{
-            border: '1px solid var(--ifm-color-emphasis-300)',
+            border:
+              '1px solid var(--eds-border-non-interactive-neutral-default)',
             borderRadius: '6px',
             minWidth: 0,
             padding: '1rem',

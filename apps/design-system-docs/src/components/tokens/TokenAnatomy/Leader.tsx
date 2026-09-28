@@ -14,7 +14,7 @@ export const FIRST_X = 26
 /** Diameter of the dot */
 export const DOT = 9
 
-const LINE = 'var(--ifm-color-emphasis-400)'
+const LINE = 'var(--eds-border-non-interactive-neutral-default)'
 
 /** Lengths arrive either as numbers of pixels or as a CSS length, so both are normalised here. */
 const len = (value: number | string) =>
@@ -61,7 +61,7 @@ export function Leader({
   dotColor,
   hidden,
 }: LeaderProps) {
-  const dotColour = dotColor ?? 'var(--ifm-color-emphasis-600)'
+  const dotColour = dotColor ?? 'var(--eds-icon-tertiary)'
   const visibility = hidden ? ('hidden' as const) : undefined
   const inset = len(dotInset)
   // The dot is `inset` in from the edge, so the line starts `inset` short of the edge and runs
@@ -118,7 +118,7 @@ export function Leader({
           boxSizing: 'border-box',
           background: dotColour,
           // A halo in the page colour, so the dot reads on a dark fill and over glyphs alike.
-          boxShadow: '0 0 0 1.5px var(--ifm-background-color)',
+          boxShadow: '0 0 0 1.5px var(--eds-background-surface)',
         }}
       />
       {/* the label */}
@@ -146,8 +146,8 @@ export function Leader({
           <span
             className="token-anatomy__label-part"
             style={{
-              fontFamily: 'var(--ifm-font-family-base)',
-              color: 'var(--ifm-color-emphasis-700)',
+              fontFamily: 'var(--eds-font-family-ui)',
+              color: 'var(--eds-text-secondary)',
               marginLeft: '0.5rem',
             }}
           >
@@ -158,7 +158,7 @@ export function Leader({
           <span
             className="token-anatomy__label-value"
             style={{
-              color: 'var(--ifm-color-emphasis-600)',
+              color: 'var(--eds-text-tertiary)',
               marginLeft: '0.5rem',
             }}
           >

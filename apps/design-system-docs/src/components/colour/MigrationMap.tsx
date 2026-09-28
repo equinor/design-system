@@ -46,13 +46,13 @@ function Swatch({ value, muted = false }: { value: string; muted?: boolean }) {
       style={{
         background: muted ? 'transparent' : paint(value),
         backgroundImage: muted
-          ? 'repeating-linear-gradient(45deg, var(--ifm-color-emphasis-200) 0 6px, transparent 6px 12px)'
+          ? 'repeating-linear-gradient(45deg, var(--eds-background-non-interactive-neutral-muted) 0 6px, transparent 6px 12px)'
           : undefined,
         width: '2.5rem',
         height: '2.5rem',
         flex: 'none',
         borderRadius: '4px',
-        border: '1px solid var(--ifm-color-emphasis-300)',
+        border: '1px solid var(--eds-border-non-interactive-neutral-default)',
       }}
     />
   )
@@ -87,7 +87,7 @@ function Row({ pair }: { pair: Pair }) {
           <Swatch value={pair.to ? cssVar(pair.to) : ''} muted={!pair.to} />
           <span style={name}>
             {pair.to ?? (
-              <em style={{ color: 'var(--ifm-color-emphasis-700)' }}>
+              <em style={{ color: 'var(--eds-text-secondary)' }}>
                 no equivalent
               </em>
             )}
@@ -95,9 +95,9 @@ function Row({ pair }: { pair: Pair }) {
               <span
                 style={{
                   display: 'block',
-                  fontFamily: 'var(--ifm-font-family-base)',
+                  fontFamily: 'var(--eds-font-family-ui)',
                   fontSize: '0.75rem',
-                  color: 'var(--ifm-color-emphasis-700)',
+                  color: 'var(--eds-text-secondary)',
                   marginTop: '0.125rem',
                 }}
               >

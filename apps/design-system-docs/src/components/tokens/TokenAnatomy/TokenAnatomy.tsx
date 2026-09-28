@@ -234,7 +234,7 @@ export function TokenAnatomy({
           className="token-anatomy__caption"
           style={{
             fontSize: '0.8125rem',
-            color: 'var(--ifm-color-emphasis-700)',
+            color: 'var(--eds-text-secondary)',
             marginTop: '0.25rem',
           }}
         >
