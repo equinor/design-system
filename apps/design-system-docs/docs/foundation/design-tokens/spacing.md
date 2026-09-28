@@ -1,6 +1,8 @@
-# Spacing
-
-Every part of your interface should be intentional, this also includes spacing. While spacing is invisible, it gives air and readability to your interface.
+---
+title: Spacing
+description: Every part of your interface should be intentional, this also includes spacing. While spacing is invisible, it gives air and readability to your interface.
+hide_title: true
+---
 
 ## Guidelines
 

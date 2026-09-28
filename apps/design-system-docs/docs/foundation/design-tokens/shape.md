@@ -1,6 +1,8 @@
-# Shape
-
-Components can have many different shapes. Establishing a common shape keeps consistency.
+---
+title: Shape
+description: Components can have many different shapes. Establishing a common shape keeps consistency.
+hide_title: true
+---
 
 ## Guidelines
 

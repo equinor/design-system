@@ -87,9 +87,8 @@
   --docs-measure: 35rem;
   --docs-grid-gap: 1.5rem;
 
-  /* Centred content column + the responsive gutter that flanks it. */
+  /* Centred content column. */
   --docs-content-max: var(--ifm-container-width);
-  --docs-gutter: max(2rem, calc((100% - var(--docs-content-max)) / 2));
 
   /* Hero band background. Uses Infima's --ifm-color-primary-lightest, which is a
      light accent tint in light mode and is recomputed to a dark accent shade in
@@ -98,8 +97,7 @@
   --docs-hero-bg: var(--ifm-color-primary-lightest);
 
   /* Hero dot grid — 2px dots with 16px between them, per the Figma header
-     pattern. Consumed by <DotField> (dot-field.css) and, for the markdown
-     hero bands that cannot host an element, directly in doc-layouts.css.
+     pattern. Consumed by <DotField> (dot-field.css).
 
      The gradients resolve here rather than per band: the pattern is the same
      everywhere, and a gradient held in a custom property takes the colour it
@@ -169,9 +167,6 @@
     --docs-hero-space-block: 3rem;
     --docs-hero-min-height: auto;
     --docs-section-space-block: 3rem;
-
-    /* Match Infima's 1rem container padding on phones. */
-    --docs-gutter: max(1rem, calc((100% - var(--docs-content-max)) / 2));
   }
 }
 

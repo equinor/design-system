@@ -1,6 +1,8 @@
-# Image placeholder
-
-An image placeholder shows an image in a specific aspect ratio.
+---
+title: Image placeholder
+description: An image placeholder shows an image in a specific aspect ratio.
+hide_title: true
+---
 
 ## Guidelines
 
