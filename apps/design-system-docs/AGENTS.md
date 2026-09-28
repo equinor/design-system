@@ -8,30 +8,37 @@ specific to this app.
 
 ## What this app is
 
-A versioned Docusaurus site documenting EDS 2.0. Two doc versions exist:
+A versioned Docusaurus site documenting EDS. Three doc versions exist:
 
-| Version                             | Content dir                     | URL path                                            | Status                                                   |
-| ----------------------------------- | ------------------------------- | --------------------------------------------------- | -------------------------------------------------------- |
-| `current` (labelled **2.0.0-beta**) | `docs/`                         | `/docs/Next/…` (capital N, baked into footer links) | the active redesign                                      |
-| `1.1.0`                             | `versioned_docs/version-1.1.0/` | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+| Version                             | Content dir                          | URL path                                            | Status                                                   |
+| ----------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
+| `current` (labelled **3.0.0-beta**) | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
+| `2.0.0-beta`                        | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
+| `1.1.0`                             | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
 
 **Version scoping is the #1 footgun.** Anything that styles doc _content_
-must be scoped so 1.1.0 keeps its stock rendering:
+must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
+2.0.0-beta both render with the redesign, so every scope names both:
 
-- CSS: pair `html[class*='docs-version-current']` (current docs) with
-  `html:not([class*='docs-version-'])` (unversioned pages — landing,
-  /foundation, /getting-started, /about). Per-element rules use
-  `html:where(…)` to keep specificity at 0,0,2 so single-class component
-  rules still win.
-- React: the DocItem hero gate checks `metadata.version === 'current'`.
+- CSS: pair `html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])`
+  (the redesigned versions) with `html:not([class*='docs-version-'])`
+  (unversioned pages: landing, /foundation, /getting-started, /about).
+  Per-element rules use `html:where(…)` to keep specificity at 0,0,2 so
+  single-class component rules still win. The one exception is the version
+  badge in `site-chrome.css`, hidden on current only so frozen pages still
+  say which version they are.
+- React: the DocItem hero gate checks `REDESIGN_VERSIONS` (`'current'` and
+  `'2.0.0-beta'`).
+- Freezing another version means adding its `docs-version-*` class and name
+  to both lists.
 - Chrome (navbar, sidebar, TOC, footer) is deliberately version-independent.
 
-**Both version paths are pinned explicitly, and both must stay that way.**
+**The current and 1.1.0 paths are pinned explicitly, and both must stay that way.**
 `docusaurus.config.ts` sets `lastVersion: 'current'` plus
 `'1.1.0': { path: '' }`. Neither is decoration:
 
 - Without `lastVersion`, Docusaurus defaults it to the newest entry in
-  `versions.json` (`1.1.0`), which silently makes the frozen archive the target
+  `versions.json` (`2.0.0-beta`), which silently makes a frozen snapshot the target
   of every `type: 'docSidebar'` navbar item and of the version dropdown — while
   the footer and landing pages link to `/docs/Next/…`. The site then
   contradicts its own chrome and the redesign is unreachable from the primary
@@ -57,6 +64,7 @@ Anything else that changes how 1.1.0 renders is a bug.
 ```
 docs/                      current-version content (md/mdx)
 versioned_docs/1.1.0/      frozen archive — do not touch
+versioned_docs/version-2.0.0-beta/  frozen snapshot — content not edited
 src/css/                   the five global stylesheets (see below)
 src/components/            shared site components (docs- prefixed CSS)
 src/theme/                 Docusaurus swizzles + MDXComponents registry
