@@ -128,31 +128,37 @@ A `data-color-appearance` attribute alone has no effect — the element also nee
 
 Figma specifies exact disabled color tokens. Use them.
 
-```tsx
-// If icon is accent when enabled, change to neutral when disabled
-{
-  icon && (
-    <span
-      className="eds-component__icon"
-      data-color-appearance={disabled ? 'neutral' : 'accent'}
-    >
-      {icon}
-    </span>
-  )
-}
-```
+Key disabled styling off the native `:disabled` state in CSS. Bare
+`:disabled` applies only when the component's root element **is** the form
+control (see `next/Button`); for a wrapper root, use `:has(:disabled)` /
+`:has(.input:disabled)`. Do **not** derive it from the React prop at render
+time (a prop-keyed `data-disabled` attribute or a
+`data-color-appearance={disabled ? 'neutral' : 'accent'}` flip): an input
+disabled by an ancestor `<fieldset disabled>` then stays visually enabled.
+See `next/Checkbox`, `next/Radio` and `next/Switch` for the pattern.
+
+Exception: a component with no native form control in its subtree has nothing
+for `:disabled` to match, so a prop-set `data-disabled` is the right tool
+there — this is why `next/Field` sets it.
 
 ```css
-.eds-component[data-disabled] {
+.eds-component {
+  --_component-icon-color: var(--eds-color-bg-fill-emphasis-default);
+
+  /* Not --eds-color-text-disabled: that token is switched by
+     data-color-appearance and renders tinted, not grey, under non-neutral
+     appearances (and the token CSS is unlayered, so it can't be re-pinned
+     from @layer eds-components). TODO: semantic token, see the same TODO in
+     checkbox.css/radio.css/switch.css */
+  --_component-disabled-color: var(--eds-color-neutral-7);
+}
+
+/* Matches both the disabled prop and disabling inherited from an ancestor —
+   override the pseudo-private variables, never the properties directly */
+.eds-component:has(.input:disabled) {
+  --_component-icon-color: var(--_component-disabled-color);
+
   cursor: not-allowed;
-}
-
-.eds-component[data-disabled] .eds-component__text {
-  color: var(--eds-color-text-disabled);
-}
-
-.eds-component[data-disabled] .eds-component__icon {
-  color: var(--eds-color-text-disabled);
 }
 ```
 
@@ -259,7 +265,8 @@ export const ComponentName = forwardRef<HTMLDivElement, ComponentNameProps>(
         data-font-family={/* from Figma */}
         data-font-size={/* from Figma */}
         data-line-height={/* from Figma */}
-        data-disabled={disabled || undefined}
+        // No data-disabled: key disabled styling off :disabled / :has(:disabled)
+        // in CSS — see § Disabled state above
         {...rest}
       />
     )
@@ -301,7 +308,11 @@ Use `@layer eds-components` and data-attribute selectors. Use EXACT `--eds-*` to
         var(--eds-color-border-focus);
   }
 
-  .eds-componentname[data-disabled] {
+  /* This scaffold's root is a <div>, so key disabled styling off a form
+     control in the subtree with :has() — bare `.eds-componentname:disabled`
+     would never match. It also covers disabling inherited from an ancestor
+     fieldset[disabled] — see § Disabled state */
+  .eds-componentname:has(:disabled) {
     cursor: not-allowed;
   }
 

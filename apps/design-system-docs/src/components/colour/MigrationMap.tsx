@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './migration-map.css'
+
 /**
  * Previous-generation token beside its 3.0.0-beta replacement, both painted.
  *

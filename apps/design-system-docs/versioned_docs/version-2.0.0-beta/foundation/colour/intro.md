@@ -14,7 +14,6 @@ Accessibility is a core principle of the system, ensuring readable and inclusive
 
 [Link to introduction video](https://statoilsrm.sharepoint.com/:v:/r/sites/Designsystem/Open%20library/Tutorials/Colour%20foundation%20intro.mp4?csf=1&web=1&e=Yfjhui&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
-
 ## Colour scheme
 
 The colour foundation supports both **light** and **dark** schemes, helping you create clear hierarchy and accessible interfaces in any mode.

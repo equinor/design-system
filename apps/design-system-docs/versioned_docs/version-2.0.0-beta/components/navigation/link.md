@@ -1,21 +1,11 @@
 ---
 title: Link
 sidebar_position: 4
+hide_title: true
+description: 'Links are clickable text elements that take users to other pages, documents, or locations within a page. They are essential for navigation and help users discover and move between content. Links should always have clear, descriptive text so users understand where they will be taken.'
 ---
 
-# Link
-
-Links are clickable text elements that take users to other pages, documents, or locations within a page. They are essential for navigation and help users discover and move between content. Links should always have clear, descriptive text so users understand where they will be taken.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--introduction"
-  width="100%"
-  height="83"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--introduction)
+<StoryCanvas of="Link/Introduction" showLink />
 
 ## When to Use
 
@@ -45,29 +35,13 @@ Link has two definitions:
 
 Inline links sit within body text and inherit the surrounding typography. Use them when linking to related content or references within a sentence.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--inline"
-  width="100%"
-  height="115"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--inline)
+<StoryCanvas of="Link/Inline" showLink />
 
 #### Standalone
 
 Standalone links are used outside of body text, such as in navigation areas, card footers, or call-to-action sections. They use the UI font family.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--standalone"
-  width="100%"
-  height="83"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--standalone)
+<StoryCanvas of="Link/Standalone" showLink />
 
 ### External Links
 
@@ -75,15 +49,7 @@ When a link takes the user outside the current application context, use the exte
 
 Use `target="_blank"` with `rel="noreferrer"` to open external links in a new tab.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-navigation-link--external-link"
-  width="100%"
-  height="83"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-navigation-link--external-link)
+<StoryCanvas of="Link/ExternalLink" showLink />
 
 ### Link Text
 

@@ -1,11 +1,9 @@
 ---
 title: Inputs
 sidebar_position: 0
+hide_title: true
+description: 'Input components allow users to enter and edit data in forms and interfaces. They provide various ways for users to input information, from simple text to complex selections.'
 ---
-
-# Component group - Inputs
-
-Input components allow users to enter and edit data in forms and interfaces. They provide various ways for users to input information, from simple text to complex selections.
 
 ## When to use
 

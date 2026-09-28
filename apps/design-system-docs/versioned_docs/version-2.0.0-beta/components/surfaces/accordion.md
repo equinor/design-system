@@ -1,21 +1,11 @@
 ---
 title: Accordion
 sidebar_position: 1
+hide_title: true
+description: 'Accordion lets readers reveal and collapse sections of content on demand. It helps manage information density on long pages while keeping the layout scannable, so people can focus on what matters to them without losing the rest of the structure.'
 ---
 
-# Accordion
-
-Accordion lets readers reveal and collapse sections of content on demand. It helps manage information density on long pages while keeping the layout scannable, so people can focus on what matters to them without losing the rest of the structure.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--introduction"
-  width="100%"
-  height="258"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--introduction)
+<StoryCanvas of="Accordion/Introduction" showLink />
 
 ## When to Use
 
@@ -52,43 +42,19 @@ By default, accordion items open and close independently of one another. This is
 
 Switch to an exclusive group when the content is mutually exclusive, when keeping multiple panels open would confuse the layout, or when the surrounding container is short on vertical space.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--exclusive"
-  width="100%"
-  height="198"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--exclusive)
+<StoryCanvas of="Accordion/Exclusive" showLink />
 
 ### Controlled and Uncontrolled
 
 Accordion items work uncontrolled out of the box – the component remembers its own open state and you only need to set the initial value. Reach for a controlled item when the open state is part of broader UI logic: syncing with a URL parameter, restoring layout from saved preferences, or co-ordinating with another panel on the page.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--controlled"
-  width="100%"
-  height="169"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--controlled)
+<StoryCanvas of="Accordion/Controlled" showLink />
 
 ### Density
 
 Accordion follows the active density on its ancestor, so spacing and sizing stay coordinated with the rest of the layout. Use the spacious default in standalone or content-led views, and switch to comfortable density inside dense surfaces like tools, settings panes, or side panels.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-surface-accordion--density"
-  width="100%"
-  height="444"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-surface-accordion--density)
+<StoryCanvas of="Accordion/Density" showLink />
 
 ## Accessibility
 
