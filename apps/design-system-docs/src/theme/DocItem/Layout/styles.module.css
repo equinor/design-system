@@ -89,10 +89,17 @@
       margin-inline var(--ifm-transition-fast) ease;
   }
 
-  [class*='docMainContainerEnhanced'] .docHero {
+  /* The restore attribute marks a stored collapsed sidebar before React has
+   * applied the enhanced class (see src/utils/sidebarPreference.ts). */
+  [class*='docMainContainerEnhanced'] .docHero,
+  html[data-docs-sidebar-restore] .docHero {
     width: calc(100vw - var(--doc-sidebar-hidden-width, 30px));
     margin-inline: calc(
       (100% - (100vw - var(--doc-sidebar-hidden-width, 30px))) / 2
     );
+  }
+
+  html[data-docs-sidebar-restore] .docHero {
+    transition: none;
   }
 }

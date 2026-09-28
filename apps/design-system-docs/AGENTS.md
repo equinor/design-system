@@ -283,6 +283,15 @@ the 1.1.0 archive imports it).
   for component and foundation docs (gated on `hide_title` + a `components/`
   or `foundation/` id + a redesigned version). Re-diff against upstream on
   Docusaurus upgrades.
+- `DocRoot/Layout/Sidebar` — eject tracking upstream 3.10.2 + two changes: it
+  seeds `hiddenSidebar` from the container flag so a remount cannot strand the
+  sidebar half-collapsed, and it remembers the collapsed state across page
+  loads in `localStorage` (`src/utils/sidebarPreference.ts`). A `headTags`
+  script in `docusaurus.config.ts` marks `<html>` with
+  `data-docs-sidebar-restore` before first paint, so the sidebar starts
+  collapsed instead of opening and animating shut on hydration; the sidebar and
+  hero stylesheets draw the collapsed width while it is set. Re-diff against
+  upstream on Docusaurus upgrades.
 - `Footer` — full custom footer; styled via Infima `footer__*` classes in
   `site-chrome.css`.
 - `MDXComponents` — the global registry (wrap).
