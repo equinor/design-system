@@ -80,13 +80,13 @@ docusaurus.config.ts       aliases + webpack rules (see Config)
 
 ## Global CSS — five files, strict responsibilities
 
-| File                           | Owns                                                                                                                                         |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                   |
-| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, breakpoint convention) + tiny utilities (`.docs-section`)                         |
-| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                   |
-| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, hero-band chrome for component and foundation docs, colour reference tables        |
-| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts` |
+| File                           | Owns                                                                                                                                                        |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                                  |
+| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, breakpoint convention) + tiny utilities (`.docs-section`)                                        |
+| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                                  |
+| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, hero-band chrome for component and foundation docs, colour reference tables, table scroll shadows |
+| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts`                |
 
 The exception in `theme-variables.css`: the per-level heading line-heights at
 the end of the file set `line-height` on `h1`–`h6` directly, not through a
