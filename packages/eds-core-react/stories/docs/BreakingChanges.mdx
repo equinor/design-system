@@ -54,7 +54,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.1` (September 2026). If a c
 <Unstyled>
   <nav aria-label="Jump to a component" data-color-scheme="light" className="eds-breaking-changes-jump-links">
     {components.map((name) => (
-      <a key={name} href={`#${name.toLowerCase()}`}>
+      <a key={name} href={`#${name.toLowerCase()}`} target="_self">
         {name}
       </a>
     ))}

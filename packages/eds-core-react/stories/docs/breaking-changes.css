@@ -33,7 +33,10 @@
 }
 
 .eds-breaking-changes-jump-links a:focus-visible {
-  outline: none;
+  /* Transparent outline instead of none: forced-colors mode drops
+     box-shadow but paints the outline, so focus stays visible there. */
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow:
     0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
     0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
