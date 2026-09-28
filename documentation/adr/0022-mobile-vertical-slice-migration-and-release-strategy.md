@@ -1,7 +1,7 @@
 # Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover
 
 - **Status:** Accepted (recorded retrospectively 2026-09-23)
-- **Date:** 2026-09-10 (individual per-component releases adopted at the Q4 planning meeting, superseding the batched-slice approach; ordered vertical slices were originally adopted end of Q1 2026 (2026-03), following an unstructured Q4 2025 attempt — both tracked in design-system-internal#255)
+- **Date:** 2026-09-10 (individual per-component releases adopted at the planning meeting for Q4, superseding the batched-slice approach; ordered vertical slices were originally adopted end of Q1 2026 (2026-03), following an unstructured Q4 2025 attempt — both tracked in design-system-internal#255)
 - **Decision makers:** Chibuzor Nwemambu, EDS Core Team
 - **Scope:** Mobile
 
@@ -92,7 +92,7 @@ Priority order is a guideline, not a release gate. If a component's design isn't
 
 ### Consequences
 
-- Good: a component that's ready, ships to beta immediately instead of waiting on slower group-mates; this is exactly the friction that motivated the change.
+- Good: a component that's ready ships to beta immediately instead of waiting on slower group-mates; this is exactly the friction that motivated the change.
 - Good: dependency-informed priority is preserved as guidance, so build effort still generally lands on foundational components first, without a hard gate that stalls the whole group on one blocked design.
 - Good: the stable-release bar is unchanged; one validated release, once every component is complete, same as originally decided.
 - Bad: without a slice-level release, there's no single visible checkpoint for consumers to gauge overall progress — it's now a rolling list of individual component releases rather than four clearly labeled milestones.
@@ -103,6 +103,7 @@ Priority order is a guideline, not a release gate. If a component's design isn't
 - A new mobile component is assigned a rough priority group based on dependency (does it compose other not-yet-built components, or is it composed by them) before implementation starts, but starting a different, ready component out of group order when one is blocked is expected, not an exception requiring sign-off.
 - Per-component beta releases publish exactly as `eds-mobile-components` releases do today: an ordinary `0.x` semver bump straight to the `latest` npm tag (`.github/workflows/trigger_publish.yml`'s mobile job hardcodes `npm-tag=latest`). No dedicated beta dist-tag is introduced — the `0.x` version number is the pre-stable signal. This is a deliberate difference from [ADR-0012](./0012-pinned-prerelease-versioning-for-beta-lines.md)'s `eds-core-react`/`eds-tokens` lines, which pin a beta series ahead of a known major behind a separate `beta` tag: mobile has no known future major to pin ahead of, and keeping every release on `latest` is what lets consumers get each component the moment it ships, instead of needing to opt into a separate tag.
 - The stable release does not ship until every planned component, across all priority groups, is complete and validated by consuming teams, and it ships with a migration guide.
+- A component counts as migrated, and safe to build on, once it is removed from `tsconfig.json`'s `exclude` list and exported from `src/index.ts` (see `packages/eds-mobile-components/CLAUDE.md`) — that's the checkable signal behind "ready" throughout this ADR.
 
 ## Related
 
