@@ -61,9 +61,16 @@ const config: Config = {
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
           versions: {
             current: {
-              label: '2.0.0-beta', // Current version label
+              label: '3.0.0-beta', // Current version label
               path: 'Next', // URL path for the current version
               banner: 'none',
+            },
+            '2.0.0-beta': {
+              // Frozen at the point the colour foundation was redefined. Kept
+              // because consumers are still on it; new work goes to current.
+              // It keeps Docusaurus's "unmaintained" banner, which points at
+              // lastVersion, so a 2.0.0-beta reader is sent on to 3.0.0-beta.
+              path: '2.0.0-beta',
             },
             // A non-lastVersion normally gets its version name as its path, so
             // pinning lastVersion to 'current' below would silently move the
@@ -74,11 +81,11 @@ const config: Config = {
             },
           },
           // Without this, Docusaurus defaults lastVersion to the newest entry
-          // in versions.json (1.1.0), which makes the frozen archive the
+          // in versions.json (2.0.0-beta), which makes a frozen snapshot the
           // target of every `type: 'docSidebar'` navbar item and of the version
           // dropdown — while the footer and the landing pages link to
           // /docs/Next/…. The site then contradicts its own chrome. Pinning it
-          // to 'current' points the default at the 2.0.0-beta redesign;
+          // to 'current' points the default at the current 3.0.0-beta docs;
           // `path: 'Next'` above keeps the beta's URLs unchanged and leaves
           // 1.1.0 served at /docs/.
           lastVersion: 'current',

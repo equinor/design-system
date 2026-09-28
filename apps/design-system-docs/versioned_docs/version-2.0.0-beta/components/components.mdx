@@ -1,0 +1,171 @@
+---
+title: Components
+hide_table_of_contents: true
+---
+
+import '@equinor/eds-core-react/next/index.css'
+import { Button, Search, Checkbox, Radio, Input, Field, Link, Banner, Chip, Icon, Switch, Divider, Autocomplete, Accordion } from '@equinor/eds-core-react/next'
+import { favorite_filled, check, time, remove, check_circle_outlined, info_circle, warning_outlined } from '@equinor/eds-icons'
+
+<DocsLanding>
+
+<Hero dots title="Components" lead={<p>Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.</p>} />
+
+<DocsSection title="Data Display" subtitle="Present information, status, structure, or relationships.">
+
+<GalleryGrid>
+
+<GalleryCard href="data-display/chip" title="Chip" subtitle="Compact interactive elements for filtering, tagging, and selections." mock="row">
+  <Chip tone="accent" selected>Design</Chip>
+  <Chip tone="accent">Development</Chip>
+  <Chip tone="accent">Accessibility</Chip>
+  <Chip tone="accent" selected>Tokens</Chip>
+</GalleryCard>
+
+<GalleryCard href="data-display/icon" title="Icon" subtitle="Visual symbols communicating meaning at a glance with auto-sizing." mock="icon">
+  <Icon data={favorite_filled} />
+  <Icon data={check} />
+  <Icon data={time} />
+  <Icon data={remove} />
+  <Icon data={check_circle_outlined} />
+</GalleryCard>
+
+<GalleryCard href="data-display/tooltip" title="Tooltip" subtitle="Brief information shown on hover or focus without cluttering the interface." mock="center">
+  <TooltipMock title="Explore more actions" />
+</GalleryCard>
+
+</GalleryGrid>
+
+</DocsSection>
+
+<DocsSection title="Feedback" subtitle="Communicate progress, results, validation, or system state." tone="muted">
+
+<GalleryGrid>
+
+<GalleryCard href="feedback/banner" title="Banner" subtitle="Important messages with optional actions for informing, warning, or alerting." mock="full">
+  <Banner tone="info">
+    <Banner.Icon><Icon data={info_circle} /></Banner.Icon>
+    <Banner.Message>Changes saved successfully.</Banner.Message>
+  </Banner>
+  <Banner tone="warning">
+    <Banner.Icon><Icon data={warning_outlined} /></Banner.Icon>
+    <Banner.Message>This action cannot be undone.</Banner.Message>
+  </Banner>
+</GalleryCard>
+
+</GalleryGrid>
+
+</DocsSection>
+
+<DocsSection title="Inputs" subtitle="Capture and validate user data or choices.">
+
+<GalleryGrid>
+
+<GalleryCard href="inputs/button" title="Button" subtitle="Trigger actions with hierarchy variants and intent-driven tones." mock="row">
+  <Button variant="primary">Submit</Button>
+  <Button variant="secondary">Cancel</Button>
+  <Button variant="ghost">Learn more</Button>
+</GalleryCard>
+
+<GalleryCard href="inputs/textfield" title="TextField" subtitle="Complete form field combining label, description, input, and validation." mock="stack">
+  <Field>
+    <Field.Label htmlFor="preview-email">Email address</Field.Label>
+    <Input id="preview-email" placeholder="name@equinor.com" readOnly />
+  </Field>
+</GalleryCard>
+
+<GalleryCard href="inputs/textarea" title="TextArea" subtitle="Multiline text input with auto-growing height and full accessibility." mock="stack">
+  <Field>
+    <Field.Label htmlFor="preview-desc">Description</Field.Label>
+    <Input as="textarea" id="preview-desc" placeholder="Enter a detailed description…" rows={2} readOnly />
+  </Field>
+</GalleryCard>
+
+<GalleryCard href="inputs/search" title="Search" subtitle="Quickly locate content with a search input and clear button." mock="stack">
+  <Search placeholder="Search components…" aria-label="Search" readOnly />
+</GalleryCard>
+
+<GalleryCard href="inputs/selection_controls" title="Selection Controls" subtitle="Checkboxes, radios, and switches for toggling options and making selections." mock="selection">
+  <Checkbox label="Accept terms" defaultChecked readOnly />
+  <Radio label="Standard delivery" name="preview-delivery" defaultChecked readOnly />
+  <Switch label="Enable notifications" defaultChecked readOnly />
+</GalleryCard>
+
+<GalleryCard href="inputs/input" title="Input" subtitle="Foundational form element for collecting user data with full control." mock="stack">
+  <Input placeholder="Enter value…" readOnly />
+  <Input placeholder="Amount" startText="$" readOnly />
+</GalleryCard>
+
+<GalleryCard href="inputs/field" title="Field" subtitle="Layout primitive connecting labels and helpers accessibly to controls." mock="stack">
+  <Field>
+    <Field.Label htmlFor="preview-account">Account type</Field.Label>
+    <Input id="preview-account" placeholder="Choose a value" invalid readOnly />
+    <Field.HelperMessage>Please fill in this field</Field.HelperMessage>
+  </Field>
+</GalleryCard>
+
+<GalleryCard href="inputs/autocomplete" title="Autocomplete" subtitle="Searchable dropdown for selecting a value from a filtered list of options." mock="stack">
+  <Autocomplete label="Country" options={['Norway', 'Brazil', 'United Kingdom']} />
+</GalleryCard>
+
+</GalleryGrid>
+
+</DocsSection>
+
+<DocsSection title="Navigation" subtitle="Help users move through content and hierarchies." tone="muted">
+
+<GalleryGrid>
+
+<GalleryCard href="navigation/link" title="Link" subtitle="Clickable text navigating users to pages, documents, or locations." mock="links">
+  <span className="eds-link" style={{color: 'var(--eds-text-interactive-link-default)', textDecoration: 'underline'}}>Getting started</span>
+  <span className="eds-link" style={{color: 'var(--eds-text-interactive-link-default)', textDecoration: 'underline'}}>View documentation</span>
+  <span className="eds-link" style={{color: 'var(--eds-text-interactive-link-default)', textDecoration: 'underline'}}>Back to overview</span>
+</GalleryCard>
+
+</GalleryGrid>
+
+</DocsSection>
+
+<DocsSection title="Surfaces" subtitle="Structural or container elements that organise and layer content.">
+
+<GalleryGrid>
+
+<GalleryCard href="surfaces/accordion" title="Accordion" subtitle="Expandable sections that reveal content on demand to keep pages compact." mock="full">
+  <Accordion>
+    <Accordion.Item defaultOpen>
+      <Accordion.Header>What is EDS?</Accordion.Header>
+      <Accordion.Panel>Equinor's official design system.</Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>How do I get access?</Accordion.Header>
+      <Accordion.Panel>See the getting-started guides.</Accordion.Panel>
+    </Accordion.Item>
+  </Accordion>
+</GalleryCard>
+
+<GalleryCard href="surfaces/divider" title="Divider" subtitle="Thin horizontal rule separating related content into distinct sections." mock="stack" mockStyle={{gap: '0.75rem', width: '100%'}}>
+  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+    <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-800)'}}>Section A</span>
+    <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-600)'}}>Details</span>
+  </div>
+  <Divider />
+  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+    <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-800)'}}>Section B</span>
+    <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-600)'}}>Details</span>
+  </div>
+  <Divider />
+  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+    <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-800)'}}>Section C</span>
+    <span style={{fontSize: '14px', color: 'var(--ifm-color-emphasis-600)'}}>Details</span>
+  </div>
+</GalleryCard>
+
+</GalleryGrid>
+
+</DocsSection>
+
+<CtaSection title="Explore in Storybook" cta={{ label: 'Open Storybook', to: 'https://storybook.eds.equinor.com' }} tone="muted">
+An interactive Storybook is available for all developed components — explore variants, props, accessibility notes, and usage examples. If you cannot find a component or need to propose a new one, <a href="https://github.com/equinor/design-system/issues/new">open an issue</a> describing the use case.
+</CtaSection>
+
+</DocsLanding>
