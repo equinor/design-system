@@ -1,6 +1,8 @@
-# Grid
-
-A grid adapts to screen size and orientation to help keep layouts consistent.
+---
+title: Grid
+hide_title: true
+description: 'A grid adapts to screen size and orientation to help keep layouts consistent.'
+---
 
 ## Guidelines
 

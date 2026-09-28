@@ -88,7 +88,6 @@ const sidebars: SidebarsConfig = {
         id: 'foundation/colour/intro',
       },
       items: [
-        'foundation/colour/intro',
         'foundation/colour/getting_started',
         'foundation/colour/usage',
         'foundation/colour/palette',

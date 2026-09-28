@@ -1,6 +1,8 @@
-# Elevation
-
-Elevation is a visual effect using shadows to make an element appear to float above the surface. It is reserved for UI that is truly floating — elements that appear temporarily above the main content.
+---
+title: Elevation
+hide_title: true
+description: 'Elevation is a visual effect using shadows to make an element appear to float above the surface. It is reserved for UI that is truly floating — elements that appear temporarily above the main content.'
+---
 
 ## Levels
 
