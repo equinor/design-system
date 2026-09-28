@@ -476,7 +476,7 @@ PR descriptions have a limit of 300 words and issues a limit of 400 words. For w
 - Creating commits
 - Pushing to remote
 - Creating branches
-- Creating PRs or issues with `gh`
+- Creating or editing PRs or issues with `gh`
 
 **Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
 

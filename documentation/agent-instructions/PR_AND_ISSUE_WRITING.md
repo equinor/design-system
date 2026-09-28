@@ -8,10 +8,10 @@ PR titles follow the conventional commits format in [`AGENTS.md`](../../AGENTS.m
 
 ## Length
 
-| Body | Maximum |
-| ---- | ------- |
+| Body           | Maximum   |
+| -------------- | --------- |
 | PR description | 300 words |
-| Issue | 400 words |
+| Issue          | 400 words |
 
 Count the prose only. Tables, code blocks, reproduction steps and link lists do not count towards the limit.
 
@@ -90,4 +90,4 @@ When one of the templates in `.github/ISSUE_TEMPLATE/` applies (bug, feature req
 - No sentence restates the diff or the linked issue.
 - The last paragraph adds information instead of summarising.
 - The draft passes § Writing restrictions.
-- The user has seen the draft and approved it. Creating a PR or an issue publishes it, so ask first, as § Git Workflow in `AGENTS.md` requires.
+- The user has seen the draft and approved it. Creating or editing a PR or an issue publishes the text, so ask first, as § Git Workflow in `AGENTS.md` requires.

@@ -11,7 +11,7 @@ Explain a problem or proposed change clearly enough for someone to investigate i
 
 ## Steps
 
-1. Gather the input: the notes, screenshots or conversation in `$ARGUMENTS`, plus any code or issues they point to. Check `gh issue list --search` for an existing issue on the same problem.
+1. Gather the input: the notes, screenshots or conversation in `$ARGUMENTS`, plus any code or issues they point to. If `$ARGUMENTS` is empty, as when the skill is applied from a request in the conversation, take the input from the conversation instead. Check `gh issue list --search` for an existing issue on the same problem.
 2. Separate what was observed from what is assumed. Ask the user about gaps instead of guessing.
 3. Pick the matching template in `.github/ISSUE_TEMPLATE/`, if any, and draft per § Issues in the canonical doc.
 4. Check the draft against § Before posting. Count the prose and cut until it is within 400 words.
