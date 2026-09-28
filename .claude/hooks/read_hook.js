@@ -4,12 +4,15 @@ const isEnvBasename = (basename) =>
   basename === '.env' || basename.startsWith('.env.')
 
 const credentialPatterns = [
-  /^id_rsa(\.pub)?$/,
+  /^id_(rsa|ed25519|ecdsa|dsa)/,
   /\.pem$/,
-  /\.key$/,
   /^\.?credentials\.json$/,
   /^\.?secrets\.json$/,
 ]
+
+// Only checked on file paths, not in Bash (settings.json skips it too): in
+// shell commands `.key` is usually a property (`jq '.key'`, `obj.key`).
+const keyFilePattern = /\.key$/
 
 const secretDir = /(^|\/)secrets\//
 
@@ -45,10 +48,6 @@ async function main() {
     }
     for (const token of commandTokens(command)) {
       const tokenBasename = token.split('/').pop() || ''
-      if (isEnvBasename(tokenBasename)) {
-        console.error('Blocked: shell command references .env file')
-        process.exit(2)
-      }
       if (credentialPatterns.some((p) => p.test(tokenBasename))) {
         console.error(
           'Blocked: shell command references credential/certificate file',
@@ -73,8 +72,19 @@ async function main() {
     process.exit(2)
   }
 
+  // Unlike secretDir, also match a path that ends in `secrets`, since Grep and
+  // Glob pass directories without a trailing slash. Bash can't do this, or
+  // `grep -r secrets src` would be blocked.
+  if (/(^|\/)secrets(\/|$)/.test(filePath)) {
+    console.error('Blocked: cannot access secrets/ directory')
+    process.exit(2)
+  }
+
   // Block common credential/certificate file patterns
-  if (credentialPatterns.some((p) => p.test(basename))) {
+  if (
+    keyFilePattern.test(basename) ||
+    credentialPatterns.some((p) => p.test(basename))
+  ) {
     console.error('Blocked: cannot access credential/certificate files')
     process.exit(2)
   }
