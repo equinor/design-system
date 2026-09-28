@@ -7,7 +7,7 @@
 
 ## Context
 
-EDS web currently publishes two component generations side by side: the stable library and `next/` (the EDS 2.0 beta, built on the new token foundation). As mobile components are migrated off their inherited `mad-components` shape (see [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md)), each one needs a target API to migrate toward, and the two generations don't always agree — `next/` Button, for example, uses `tone`/`variant` naming that stable's Button doesn't have.
+EDS web currently publishes two component generations side by side: the stable library and `next/` (the EDS 2.0 beta, built on the new token foundation). As mobile components are migrated off their inherited `mad-components` shape (see [ADR-0019](./0019-adopt-only-the-component-library-from-mad.md)), each one needs a target API to migrate toward, and the two generations don't always agree — `next/` Button, for example, uses `tone` (`accent`/`neutral`/`danger`) and `variant` values (`primary`/`secondary`/`ghost`) that don't match stable's Button, which calls the same distinction `color` (`primary`/`secondary`/`danger`) and gives `variant` a different value set (`contained`/`outlined`/`ghost_icon`, among others).
 
 Picking stable's API as the target would mean migrating mobile once now and again later, whenever a component's newer web generation eventually replaces stable's. That second migration is exactly the kind of churn this decision exists to avoid — and it isn't a one-time problem: EDS web itself is expected to keep advancing generations (a further token-foundation revision is already in progress as of this writing), so the principle below has to outlive any one generation, `next/` included.
 
@@ -59,6 +59,8 @@ Picking stable's API as the target would mean migrating mobile once now and agai
 ## Decision
 
 **Adopt Option 2.** Where EDS web has published a newer-generation version of a component (currently `next/`), mobile's API follows that generation, not stable. Where the newest generation doesn't yet cover a component, mobile follows stable's API instead. Where neither API translates to React Native (CSS-specific patterns, DOM attribute pass-through, `asChild`/`Slot` polymorphism), the mobile team adapts the pattern rather than forcing a literal port.
+
+A component's name is part of the API this rule aligns. Where [ADR-0020](./0020-mobile-component-scope-exclusions-and-renames.md) renames a component to a mobile-standard term (for example `Snackbar` → `Toast`, `Progress` → `Stepper`, tracked in [`MOBILE_COMPONENT_SCOPE.md`](../MOBILE_COMPONENT_SCOPE.md)), that rename takes precedence over this ADR's naming — mobile isn't expected to carry a web generation's component name once ADR-0020 has already renamed it. Icon is the most visible instance of the React Native adaptation clause: `next/Icon` takes a `data` prop sourced from `@equinor/eds-icons`, while mobile's already-shipped `Icon` takes a `name` string from MaterialCommunityIcons and doesn't depend on `@equinor/eds-icons` at all. ADR-0020 leaves the long-term icon set undecided, so this divergence is expected to be revisited there, not here.
 
 This is a standing rule, not a one-time snapshot of `next/`'s current shape: if `next/` itself is superseded by a later generation (the in-progress token-foundation revision, or whatever comes after it), mobile re-targets that later generation under this same decision. No new ADR is needed to keep pointing at the destination.
 
