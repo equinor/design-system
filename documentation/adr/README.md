@@ -36,7 +36,7 @@ Records: 19
 | [0016](./0016-colour-approach-for-eds-2.md) | Colour approach for EDS 2.0 | Approved | 2026-08-27 |  |
 | [0017](./0017-spacing-approach-for-eds-2.md) | Spacing approach for EDS 2.0 | Accepted | 2026-04-23 |  |
 | [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Accepted | 2026-04-23 |  |
-| [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Accepted | 2026-04 | recorded retrospectively 2026-09-24 |
+| [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Accepted | 2026-04-09 | recorded retrospectively 2026-09-24 |
 
 ## Statuses outside the template
 
