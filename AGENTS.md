@@ -28,11 +28,13 @@ Never read, search, copy, or print the contents of secret files. The rule applie
 Treat these patterns as off-limits:
 
 - `.env`, `.env.*` (real `.env` lives at `packages/eds-tokens-sync/bin/.env` — see `packages/eds-tokens-sync/CLAUDE.md`)
-- `id_rsa*`, `*.pem`, `*.key`
+- `id_rsa*`, `id_ed25519*`, `id_ecdsa*`, `id_dsa*`, `*.pem`, `*.key`
 - `credentials.json`, `secrets.json`
 - `secrets/**`, `config/credentials.json`
 
 If you need to verify a secret file's shape, report length + first/last few characters only — never the body. If a tool blocks access (e.g. Claude Code's `read_hook.js`), do not try to work around it; the block is the intended behaviour.
+
+The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention `.env` or a `secrets/` path.
 
 **Enforcement matrix:**
 
