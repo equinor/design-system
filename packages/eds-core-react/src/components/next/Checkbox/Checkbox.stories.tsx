@@ -12,6 +12,7 @@ import type { CheckboxProps } from './Checkbox.types'
 const meta: Meta<typeof Checkbox> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Checkbox',
   component: Checkbox,
+  tags: ['beta'],
   args: {
     label: 'Label',
     disabled: false,
