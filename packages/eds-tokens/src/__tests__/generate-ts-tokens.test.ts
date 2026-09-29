@@ -267,6 +267,90 @@ describe('generate-ts-tokens', () => {
     })
   })
 
+  describe('CSS math functions', () => {
+    it('folds a top-level pow() call', () => {
+      // the Gaussian weights behind the colour scales, which the CSS
+      // export emits unevaluated: e^(-25/2 * (0.7 - 0.88)^2)
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(2.718281828459045, calc(-25 / 2 * pow(calc(0.7 - 0.88), 2)));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.stderr).toBe('')
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 0.66698,',
+      )
+    })
+
+    it('folds pow() as a factor, keeping the unit of the other operand', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(var(--eds-primitives-spacing-25) * pow(2, 3));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'inline: 32,',
+      )
+    })
+
+    it('rejects a math function it does not fold, by name', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(sqrt(16) * 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('unsupported function sqrt()')
+      expect(result.stderr).toContain('folds pow()')
+    })
+
+    it('rejects a dimension argument', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: pow(var(--eds-primitives-spacing-25), 2);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('cannot apply pow() to a dimension')
+    })
+
+    it('rejects the wrong number of arguments', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(pow(2) + 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('pow() takes 2 argument(s), got 1')
+    })
+  })
+
   describe('invalid values fail loudly', () => {
     it('rejects mismatched units in a sum', () => {
       const result = run(

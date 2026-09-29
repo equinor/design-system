@@ -11,11 +11,12 @@
  *    values (the platform's formula engine only runs for CSS), joined
  *    across files by `var(--eds-*)` chains
  *
- * The platform's formula engine folds colour formulas but not dimension
+ * The platform's formula engine folds colour formulas but not numeric
  * arithmetic — token math arrives in the CSS export as an unevaluated
- * `calc(var(--a) + var(--b))`. This script substitutes the references
- * and folds the arithmetic locally, because the TS modules need plain
- * numbers.
+ * `calc(var(--a) + var(--b))`, or as a math function such as the `pow()`
+ * behind the Gaussian colour-scale weights. This script substitutes the
+ * references and folds the arithmetic locally, because the TS modules
+ * need plain numbers.
  *
  * For every DTCG leaf the script derives the CSS custom property name
  * (`eds-` + path joined with `-`), dereferences the `var()` chain in the
@@ -398,6 +399,29 @@ function rgbToHex(value, cssName) {
 
 const NUMERIC_TERM = /^(-?(?:\d+\.?\d*|\.\d+))([a-z%]*)/i
 
+/** `pow(` — a math function call, as opposed to a bare `(` group. */
+const FUNCTION_NAME = /^([a-z][\w-]*)\(/i
+
+/**
+ * The CSS math functions this script folds. CSS has a dozen more, but
+ * an entry here has to be reachable from a real export: `pow()` is what
+ * the platform emits for the Gaussian weights the colour scales are
+ * derived from, where the formula engine leaves numeric maths for CSS
+ * to compute at runtime. Anything else fails by name, so the next one
+ * to appear is a one-line addition rather than a debugging session.
+ *
+ * CSS only allows `<number>` arguments in these, so every operand and
+ * the result are unitless.
+ */
+const MATH_FUNCTIONS = {
+  pow: { arity: 2, apply: (base, exponent) => base ** exponent },
+}
+
+/** `pow(2, 3)` is arithmetic; `rgb(0 0 0 / 0.5)` is not. */
+const MATH_FUNCTION_CALL = new RegExp(
+  `^(?:${Object.keys(MATH_FUNCTIONS).join('|')})\\(`,
+)
+
 /**
  * Split a resolved expression into number / operator / paren tokens.
  * `calc(` is treated as a plain group so nested and inlined calls need no
@@ -418,7 +442,16 @@ function tokenizeExpression(expression, cssName) {
       index += 'calc('.length
       continue
     }
-    if (character === '(' || character === ')') {
+    // Any other `name(` is a math function. Unknown names are rejected
+    // in parseTerm, where the message can say which one it was.
+    const call = FUNCTION_NAME.exec(expression.slice(index))
+    if (call) {
+      tokens.push({ kind: 'function', name: call[1].toLowerCase() })
+      tokens.push({ kind: '(' })
+      index += call[0].length
+      continue
+    }
+    if (character === '(' || character === ')' || character === ',') {
       tokens.push({ kind: character })
       index += 1
       continue
@@ -445,7 +478,7 @@ function tokenizeExpression(expression, cssName) {
   return tokens
 }
 
-/** `<number>`, `( … )`. */
+/** `<number>`, `( … )`, `pow( … , … )`. */
 function parseTerm(tokens, cssName) {
   const token = tokens.shift()
   if (!token) tokenFail(`unexpected end of expression for --${cssName}`)
@@ -456,7 +489,48 @@ function parseTerm(tokens, cssName) {
       tokenFail(`unbalanced parentheses for --${cssName}`)
     return inner
   }
+  if (token.kind === 'function') return parseCall(token.name, tokens, cssName)
   return tokenFail(`unexpected "${token.kind}" for --${cssName}`)
+}
+
+/** `name` is consumed; `tokens` starts at the opening parenthesis. */
+function parseCall(name, tokens, cssName) {
+  const math = MATH_FUNCTIONS[name]
+  if (!math)
+    tokenFail(
+      `unsupported function ${name}() for --${cssName} — this script folds ${Object.keys(
+        MATH_FUNCTIONS,
+      )
+        .map((supported) => `${supported}()`)
+        .join(', ')}`,
+    )
+  if (tokens.shift()?.kind !== '(')
+    tokenFail(`expected "(" after ${name} for --${cssName}`)
+
+  const args = []
+  if (tokens[0]?.kind !== ')') {
+    args.push(parseSum(tokens, cssName))
+    while (tokens[0]?.kind === ',') {
+      tokens.shift()
+      args.push(parseSum(tokens, cssName))
+    }
+  }
+  if (tokens.shift()?.kind !== ')')
+    tokenFail(`unbalanced parentheses in ${name}() for --${cssName}`)
+
+  if (args.length !== math.arity)
+    tokenFail(
+      `${name}() takes ${math.arity} argument(s), got ${args.length} for --${cssName}`,
+    )
+  const dimension = args.find((argument) => argument.unit !== '')
+  if (dimension)
+    tokenFail(
+      `cannot apply ${name}() to a dimension for --${cssName}: "${dimension.unit}"`,
+    )
+  return {
+    value: math.apply(...args.map((argument) => argument.value)),
+    unit: '',
+  }
 }
 
 /** `term (('*' | '/') term)*` — CSS allows a unit on at most one factor. */
@@ -620,6 +694,7 @@ function convertShadow(rawValue, cssName) {
 const isExpression = (value) =>
   value.startsWith('calc(') ||
   value.startsWith('(') ||
+  MATH_FUNCTION_CALL.test(value) ||
   hasTopLevelOperator(value)
 
 function convertValue(rawValue, type, cssName) {
