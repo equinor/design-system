@@ -335,6 +335,41 @@ describe('generate-ts-tokens', () => {
       expect(result.stderr).toContain('cannot apply pow() to a dimension')
     })
 
+    it('rejects a result that is not a finite number', () => {
+      // the cube root of a negative number is NaN in CSS too, and `NaN`
+      // is a valid TypeScript identifier, so it would otherwise compile
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(-8, calc(1 / 3));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('is not a finite number')
+      expect(result.stderr).toContain('--eds-gaussian-weight')
+    })
+
+    it('folds an uppercase function name, as CSS is case-insensitive', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: POW(2, 3);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 8,',
+      )
+    })
+
     it('rejects the wrong number of arguments', () => {
       const result = run(
         cssFixture({

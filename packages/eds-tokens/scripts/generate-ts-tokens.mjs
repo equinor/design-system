@@ -420,6 +420,7 @@ const MATH_FUNCTIONS = {
 /** `pow(2, 3)` is arithmetic; `rgb(0 0 0 / 0.5)` is not. */
 const MATH_FUNCTION_CALL = new RegExp(
   `^(?:${Object.keys(MATH_FUNCTIONS).join('|')})\\(`,
+  'i',
 )
 
 /**
@@ -589,6 +590,14 @@ function evaluateExpression(expression, cssName) {
     tokenFail(
       `unexpected "${tokens[0].kind}" after expression for --${cssName}`,
     )
+  // `pow(-8, 1/3)` is NaN and `pow(0, -1)` is Infinity. Both are valid
+  // TypeScript identifiers, so without this the module would compile
+  // and ship the junk — the script's rule is that an unconvertible
+  // value fails the run
+  if (!Number.isFinite(result.value))
+    tokenFail(
+      `expression is not a finite number for --${cssName}: ${expression} (${result.value})`,
+    )
   return { value: Number(result.value.toFixed(5)), unit: result.unit }
 }
 
@@ -713,7 +722,8 @@ function convertValue(rawValue, type, cssName) {
     if (numeric) return Number(numeric[1])
     if (!isExpression(rawValue))
       tokenFail(`non-numeric ${type} for --${cssName}: ${rawValue}`)
-    // Token math from Tokens Studio arrives as an unevaluated calc()
+    // Token math from Tokens Studio arrives unevaluated, as a calc()
+    // or a math function such as pow()
     const { value, unit } = evaluateExpression(rawValue, cssName)
     if (unit !== '' && unit !== 'px')
       tokenFail(

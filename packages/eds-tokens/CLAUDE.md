@@ -4,7 +4,7 @@ Design tokens package — CSS variables, JSON, and JS/TS outputs consumed by EDS
 
 ## Two pipelines coexist
 
-The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns everything in the published `exports` map (`build/`). The **new Tokens Studio pipeline** writes generated output to `src/tokens/{raw,css,dtcg,ts}` via `.github/workflows/tokens_studio_release.yaml` — those directories are **generated, never edit them by hand**. During the Tokens Studio rewrite the **whole package is in beta**: every release is a pinned `3.0.0-beta.N` on the npm `beta` dist-tag (no stable releases until the rework graduates as `3.0.0`; `latest` stays on the last 2.x). The version is release-please-managed in `version.txt` at the package root — `package.json` stays on the last stable version so pnpm's `workspace:^` rewriting keeps other packages' stable releases depending on stable tokens — and `publish_tokens.yaml` sets the beta version and injects the generated `src/tokens` directories into `files`/`exports` at publish time. The TS modules are produced by `pnpm run generate:ts-tokens` (`scripts/generate-ts-tokens.mjs` — DTCG export for structure + CSS export for evaluated values; the script header documents the mechanics). The platform's formula engine folds colour formulas but **not** dimension arithmetic, so token math arrives in the CSS export as an unevaluated `calc(var(--a) + var(--b))` — the script substitutes the references and folds the arithmetic locally, because the TS modules need plain numbers (see `src/__tests__/generate-ts-tokens.test.ts`). A token value it cannot convert fails the run and, deliberately, the whole release workflow: a PR with a fresh CSS/DTCG export next to stale `src/tokens/ts/` would silently disagree with itself. The set of CSS files that make up a resolution context is **discovered, not listed** — v0.0.6 added an `elevation/` export folder and a hard-coded list silently dropped every `--eds-shadow-*` primitive it declares — with one exclusion: the committed `variables.css` bundle concatenates every dimension variant, so it must never join a context. Because discovery reads whatever is on disk, the release workflow clears `src/tokens/{css,dtcg}` before each export run — `studio exports run` overwrites but never prunes, so a folder renamed upstream would otherwise leave both copies behind. `$type: shadow` tokens emit a `boxShadow` string plus per-layer React Native properties (`shadowColor`/`shadowOffset`/`shadowOpacity`/`shadowRadius`), mirroring the legacy `build/ts/elevation/elevation.ts` shape. Canonical pipeline doc: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../documentation/agent-instructions/TOKENS_STUDIO.md).
+The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns everything in the published `exports` map (`build/`). The **new Tokens Studio pipeline** writes generated output to `src/tokens/{raw,css,dtcg,ts}` via `.github/workflows/tokens_studio_release.yaml` — those directories are **generated, never edit them by hand**. During the Tokens Studio rewrite the **whole package is in beta**: every release is a pinned `3.0.0-beta.N` on the npm `beta` dist-tag (no stable releases until the rework graduates as `3.0.0`; `latest` stays on the last 2.x). The version is release-please-managed in `version.txt` at the package root — `package.json` stays on the last stable version so pnpm's `workspace:^` rewriting keeps other packages' stable releases depending on stable tokens — and `publish_tokens.yaml` sets the beta version and injects the generated `src/tokens` directories into `files`/`exports` at publish time. The TS modules are produced by `pnpm run generate:ts-tokens` (`scripts/generate-ts-tokens.mjs` — DTCG export for structure + CSS export for evaluated values; the script header documents the mechanics). The platform's formula engine folds colour formulas but **not** numeric arithmetic, so token math arrives in the CSS export unevaluated — as `calc(var(--a) + var(--b))`, or as a math function such as the `pow()` behind the Gaussian colour-scale weights — and the script substitutes the references and folds the arithmetic locally, because the TS modules need plain numbers (see `src/__tests__/generate-ts-tokens.test.ts`). A token value it cannot convert fails the run and, deliberately, the whole release workflow: a PR with a fresh CSS/DTCG export next to stale `src/tokens/ts/` would silently disagree with itself. The set of CSS files that make up a resolution context is **discovered, not listed** — v0.0.6 added an `elevation/` export folder and a hard-coded list silently dropped every `--eds-shadow-*` primitive it declares — with one exclusion: the committed `variables.css` bundle concatenates every dimension variant, so it must never join a context. Because discovery reads whatever is on disk, the release workflow clears `src/tokens/{css,dtcg}` before each export run — `studio exports run` overwrites but never prunes, so a folder renamed upstream would otherwise leave both copies behind. `$type: shadow` tokens emit a `boxShadow` string plus per-layer React Native properties (`shadowColor`/`shadowOffset`/`shadowOpacity`/`shadowRadius`), mirroring the legacy `build/ts/elevation/elevation.ts` shape. Canonical pipeline doc: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../documentation/agent-instructions/TOKENS_STUDIO.md).
 
 ## Build Pipeline (3 steps)
 
@@ -33,6 +33,7 @@ The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns ev
 ### Step 1: Get token JSON files
 
 **Option A — Sync from Figma** (requires `.env` with `PERSONAL_ACCESS_TOKEN` in `eds-tokens-sync/bin/`):
+
 ```bash
 pnpm run update-tokens              # All tokens
 pnpm run update-tokens:foundations   # Foundation palette + color scheme
@@ -41,6 +42,7 @@ pnpm run update-tokens:color-dynamic # Dynamic appearance + concept
 ```
 
 **Option B — Generate from config** (no Figma access needed):
+
 ```bash
 pnpm run generate:tokens:all-color  # All color tokens
 pnpm run generate:tokens:static     # Color scheme + semantic + concept
@@ -70,19 +72,25 @@ Note: The minify step reads from the already-bundled `variables.css` (not from `
 ## Pitfalls
 
 ### Why `light-dark()` is removed from published CSS
+
 The transform in `eds-tokens-build` emits `light-dark(L, D)` in source CSS. After lightningcss bundles, the `build-dark-scope` step rewrites these into explicit `[data-color-scheme="light"|"dark"]` rules with a `prefers-color-scheme` media fallback. Reason: Vite 8 (Rolldown) and other downstream bundlers run their own lightningcss pass; without explicit `targets`, that pass polyfills `light-dark()` into a `var(--lightningcss-light, …)` pattern that resolves at the `:root` declaration site and breaks subtree-scoped dark mode. Emitting explicit scope rules instead means there is no `light-dark()` for downstream tools to polyfill incorrectly. The build asserts the final output contains no `light-dark(` literals.
 
 ### Missing step 3
+
 Running only `build:variables:color` compiles individual CSS files but does NOT update `variables.min.css`. Tokens will exist in `build/css/color/*/` but not reach the browser. Always run `_build:css` after.
 
 ### Generate scripts overwrite Figma sync
+
 The generate scripts write to the **same files** as the Figma sync. If you add tokens via Figma sync, you must also update the generate scripts and `token-config.json`, otherwise running `generate:tokens:all-color` will silently remove the new tokens.
 
 ### Build output is git-tracked
+
 The `build/` directory is in `.gitignore` but files are tracked. Use `git add -f` when staging build output changes.
 
 ### Generate scripts run from compiled dist
+
 The generate scripts in `eds-tokens-build` run from `dist/`, not `src/`. After editing a generate script, you must rebuild `eds-tokens-build` first:
+
 ```bash
 cd ../eds-tokens-build && pnpm run build
 ```
@@ -167,6 +175,7 @@ pnpm run build:variables:elevation  # Compose elevation CSS + inject into variab
 ```
 
 Output:
+
 - CSS: `build/css/elevation/elevation.css` (bare properties, for reference)
 - CSS: Injected into `build/css/variables.css` `:root` block
 - TypeScript: `build/ts/elevation/elevation.ts` (structured object with `boxShadow` string + per-layer React Native shadow properties)
