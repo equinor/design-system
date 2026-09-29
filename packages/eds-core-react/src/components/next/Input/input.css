@@ -183,14 +183,14 @@
        Applied to wrapper to avoid [data-font-family] margin override */
 
     /* End adornment */
-    & .control ~ .adornment .item:has(button) {
+    & > .control ~ .adornment > .item:has(button) {
       margin-inline-end: calc(
         (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
       );
     }
 
     /* Start adornment */
-    & .adornment:has(~ .control) .item:has(button) {
+    & > .adornment:has(~ .control) > .item:has(button) {
       margin-inline-start: calc(
         (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
       );
