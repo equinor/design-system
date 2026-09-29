@@ -2959,58 +2959,18 @@
       "$type": "shadow",
       "$value": [
         {
-          "blur": {
-            "unit": "px",
-            "value": 12
-          },
-          "color": {
-            "alpha": 0.2,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 0
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 4
-          }
+          "blur": "{shadow.high.key.blur}",
+          "color": "{shadow.high.key.color}",
+          "spread": "{shadow.high.key.spread}",
+          "x": "{shadow.high.key.x}",
+          "y": "{shadow.high.key.y}"
         },
         {
-          "blur": {
-            "unit": "px",
-            "value": 16
-          },
-          "color": {
-            "alpha": 0.12,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 6
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 12
-          }
+          "blur": "{shadow.high.ambient.blur}",
+          "color": "{shadow.high.ambient.color}",
+          "spread": "{shadow.high.ambient.spread}",
+          "x": "{shadow.high.ambient.x}",
+          "y": "{shadow.high.ambient.y}"
         }
       ]
     },
@@ -3019,58 +2979,18 @@
       "$type": "shadow",
       "$value": [
         {
-          "blur": {
-            "unit": "px",
-            "value": 8
-          },
-          "color": {
-            "alpha": 0.2,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 0
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 1
-          }
+          "blur": "{shadow.low.key.blur}",
+          "color": "{shadow.low.key.color}",
+          "spread": "{shadow.low.key.spread}",
+          "x": "{shadow.low.key.x}",
+          "y": "{shadow.low.key.y}"
         },
         {
-          "blur": {
-            "unit": "px",
-            "value": 8
-          },
-          "color": {
-            "alpha": 0.12,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 3
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 4
-          }
+          "blur": "{shadow.low.ambient.blur}",
+          "color": "{shadow.low.ambient.color}",
+          "spread": "{shadow.low.ambient.spread}",
+          "x": "{shadow.low.ambient.x}",
+          "y": "{shadow.low.ambient.y}"
         }
       ]
     }
@@ -3808,6 +3728,22 @@
       "$type": "dimension",
       "$value": "{density.spacing.3xs}"
     },
+    "4xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-4xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.4xl}"
+    },
     "4xs": {
       "$extensions": {
         "com.figma": {
@@ -3823,6 +3759,86 @@
       },
       "$type": "dimension",
       "$value": "{density.spacing.4xs}"
+    },
+    "5xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-5xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.5xl}"
+    },
+    "6xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-6xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.6xl}"
+    },
+    "7xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-7xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.7xl}"
+    },
+    "8xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-8xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.8xl}"
+    },
+    "9xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-9xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.9xl}"
     },
     "lg": {
       "$extensions": {

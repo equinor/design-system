@@ -133,6 +133,22 @@
         "$type": "dimension",
         "$value": "{primitives.spacing.37}"
       },
+      "4xl": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-4xl)"
+            },
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
+          }
+        },
+        "$type": "dimension",
+        "$value": "{primitives.spacing.275}"
+      },
       "4xs": {
         "$extensions": {
           "com.figma": {
@@ -148,6 +164,86 @@
         },
         "$type": "dimension",
         "$value": "{primitives.spacing.25}"
+      },
+      "5xl": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-5xl)"
+            },
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
+          }
+        },
+        "$type": "dimension",
+        "$value": "{primitives.spacing.325}"
+      },
+      "6xl": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-6xl)"
+            },
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
+          }
+        },
+        "$type": "dimension",
+        "$value": "{primitives.spacing.450}"
+      },
+      "7xl": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-7xl)"
+            },
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
+          }
+        },
+        "$type": "dimension",
+        "$value": "{primitives.spacing.550}"
+      },
+      "8xl": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-8xl)"
+            },
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
+          }
+        },
+        "$type": "dimension",
+        "$value": "{primitives.spacing.700}"
+      },
+      "9xl": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-9xl)"
+            },
+            "hiddenFromPublishing": true,
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ]
+          }
+        },
+        "$type": "dimension",
+        "$value": "{primitives.spacing.900}"
       },
       "lg": {
         "$extensions": {

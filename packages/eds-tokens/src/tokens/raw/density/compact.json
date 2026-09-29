@@ -127,6 +127,22 @@
           }
         }
       },
+      "4xl": {
+        "$value": "{primitives.spacing.225}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-4xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
       "4xs": {
         "$value": "{primitives.spacing.6}",
         "$type": "dimension",
@@ -138,6 +154,86 @@
             ],
             "codeSyntax": {
               "WEB": "var(--eds-density-spacing-4xs)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "5xl": {
+        "$value": "{primitives.spacing.275}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-5xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "6xl": {
+        "$value": "{primitives.spacing.375}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-6xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "7xl": {
+        "$value": "{primitives.spacing.450}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-7xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "8xl": {
+        "$value": "{primitives.spacing.550}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-8xl)"
+            },
+            "hiddenFromPublishing": true
+          }
+        }
+      },
+      "9xl": {
+        "$value": "{primitives.spacing.700}",
+        "$type": "dimension",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "WIDTH_HEIGHT",
+              "GAP"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--eds-density-spacing-9xl)"
             },
             "hiddenFromPublishing": true
           }

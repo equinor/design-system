@@ -3,7 +3,7 @@
 # Commit this file to version control.
 
 version = 2
-generated_at = "2026-09-01T07:54:16Z"
+generated_at = "2026-09-29T12:39:33Z"
 cli_version = "dev"
 
 [[dependencies]]
@@ -11,135 +11,135 @@ cli_version = "dev"
   project = "4952a007-699a-4124-a043-124e80cc28d6"
   ref_type = "branch"
   ref_name = "main"
-  content_hash = "sha256:15c63fa2c317dd12107c7ba222af97801a3d77fecf9f6b72cb50ae9bb1435a10"
-  updated_at = "2026-09-01T07:54:16Z"
+  content_hash = "sha256:f7adc6d2af650da2b73ca23c68e26677c3e1adc56495e6c8d7fbc451c822c8f8"
+  updated_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "$metadata.json"
     hash = "sha256:0547960b1abbe34611be3dbb2c29c40bc2a45ca970f8eff027952bba3c733994"
     size = 379
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "$themes.json"
-    hash = "sha256:a7bff0744a319fbd97ae9e261123bd3cd51099a85ac44a6e28b8df5eedef86df"
-    size = 27328
+    hash = "sha256:a8e725be69218deb6afaa1529ca90133e5f159194dbc23b11010ede4dd465c6d"
+    size = 28163
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "color/dark.json"
     hash = "sha256:e104c32e0c0a7f30bfa22cb091737df372d6482d4491db3b3a9005683026b21f"
     size = 66502
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "color/light.json"
     hash = "sha256:a7796234c4a12281a78685c1e4567c0897266b0fb195a08fe0306e8205176c84"
     size = 66884
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "density/comfortable.json"
-    hash = "sha256:44031dcba5f1e111e2346bbd8a974601a704a1383cc74cfff6a86337888a4f14"
-    size = 22868
+    hash = "sha256:a17835636250776e4960870c493cd316e654c1e0d7ee3a32410308174e0f4e3e"
+    size = 25262
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "density/compact.json"
-    hash = "sha256:287f4fb10c82c2e0e12ed0f6b76aac9fc4ca5eef427ed97bd063783a6a6efec1"
-    size = 22863
+    hash = "sha256:796914d36980d18334a8bc3b58246e207d6a7811f4a9cf33fd1c2e26d934f459"
+    size = 25257
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "density/relaxed.json"
-    hash = "sha256:f12898e32c650f41cbc2670244a25a3e0744f798a401ac7d825e344521c7d917"
-    size = 22873
+    hash = "sha256:69614cf32ed5277f78232cf410c721747454695355473b74a0acad5973d538ad"
+    size = 25267
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "elevation/default.json"
     hash = "sha256:d03bcc820760af2f16decd3772fd864f4f8b18d1bd045fd9fa8d7f15602aef84"
     size = 3324
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "font/default.json"
     hash = "sha256:acf9807bc8b7fac1fa53e2bb64f6e005f391b59beb378d308c5edb1e19d8fde5"
     size = 1796
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "foundation/anchor.json"
     hash = "sha256:65797fd6431330b7d06db2c99f1094e298f13708893653b37774840100e57762"
     size = 4012
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "foundation/gaussian.json"
     hash = "sha256:f0e9fe5f857e9bd5bb775ac50338b1a779545f53cc94bf93e707507aa4e56f27"
     size = 10216
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "input/palette.json"
     hash = "sha256:46abf3262dbf15fbb6fc2a1f78f245f098c0cc01b62cfe123f9d4b3aa383a87a"
     size = 1867
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "input/scale.json"
     hash = "sha256:03829a2673f1bae09b323db07b19e4917bdb8177b7f3df0fbce4e3a3f9594049"
     size = 8611
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "primitives/default.json"
     hash = "sha256:6abf9f066c67e06748e1643d2f75a83c02c7d1922a43d22333552d7164b97c8a"
     size = 27516
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "scheme/dark.json"
     hash = "sha256:8eef151aff17d4bef5cb0b55e00ab2e5e9c6484b9be60aa35de0f7283fe23be1"
     size = 45423
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "scheme/light.json"
     hash = "sha256:d2d9496487df090df6131b1fcdbbb4c08b9ea04dfbea90469a42ad0d7bf10925"
     size = 45334
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "semantic.json"
     hash = "sha256:e9c4d6d61d1f13a8b75f41f037f5426e056c7052daef0753ce38e5bf44f06c80"
     size = 103299
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
   [[dependencies.files]]
     path = "semantic/default.json"
-    hash = "sha256:81f811d9eb6c22d432b0f3600769e1ceb57af0215fb923a9dfd35835cfee74d4"
-    size = 24026
+    hash = "sha256:4915a121ce4bcfd62a654ec787b310d496ec6f192eb1e2b504201925b28ac09b"
+    size = 26168
     tokens = 0
-    modified_at = "2026-09-01T07:54:16Z"
+    modified_at = "2026-09-29T12:39:33Z"
 
 [integrity]
-  lockfile_hash = "sha256:0d73977e30b6d2508e7bde5b3e03f905831c05ce282ea2f46bc61499f057c90b"
+  lockfile_hash = "sha256:3a4b2066eb3243e9e2131c87e68275fe13ed5af63011d18ec658ca64ec177b7e"
   algorithm = "sha256"
