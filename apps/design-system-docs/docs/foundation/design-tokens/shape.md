@@ -1,6 +1,8 @@
-# Shape
-
-Components can have many different shapes. Establishing a common shape keeps consistency.
+---
+title: Shape
+hide_title: true
+description: 'Components can have many different shapes. Establishing a common shape keeps consistency.'
+---
 
 ## Guidelines
 
@@ -9,4 +11,3 @@ To reflect the round corners of the Equinor logo, our shapes have a default roun
 ## Variations
 
 There are many different shapes to choose between when you are building a component such as: `Button`, `Icon button`,  `Corners`,  `Straight`,  `Field`  and `Circle`.
-
