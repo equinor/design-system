@@ -39,7 +39,7 @@ Records: 22
 | [0019](./0019-adopt-only-the-component-library-from-mad.md) | Adopt only the component library from the MAD monorepo | Accepted | 2025-06 | recorded retrospectively 2026-09-11 |
 | [0020](./0020-mobile-component-scope-exclusions-and-renames.md) | Mobile component scope: exclusions and renames relative to EDS web | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
-| [0022](./0022-mobile-vertical-slice-migration-and-release-strategy.md) | Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover | Accepted | 2026-09-10 | recorded retrospectively 2026-09-23 |
+| [0022](./0022-mobile-migration-priority-and-release-strategy.md) | Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover | Accepted | 2026-09-10 | recorded retrospectively 2026-09-23 |
 
 ## Statuses outside the template
 
