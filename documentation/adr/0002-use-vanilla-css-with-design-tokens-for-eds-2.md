@@ -1,6 +1,6 @@
 # Use vanilla CSS with design tokens for EDS 2.0 styling
 
-- **Status:** Accepted
+- **Status:** Accepted (CSS naming convention superseded by [ADR 0006](0006-flat-class-names-for-eds-2-components.md))
 - **Date:** 2026-02-02
 - **Decision makers:** EDS Core Team
 

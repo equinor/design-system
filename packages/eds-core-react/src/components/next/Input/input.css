@@ -93,8 +93,8 @@
         }
       }
 
-      & > .text,
-      & > .item,
+      & > .adornment > .text,
+      & > .adornment > .item,
       & > .error-icon {
         color: var(--eds-color-text-disabled);
       }
@@ -111,8 +111,8 @@
         -webkit-text-fill-color: var(--_readonly-text-color);
       }
 
-      & > .text,
-      & > .item {
+      & > .adornment > .text,
+      & > .adornment > .item {
         color: var(--_readonly-text-color);
       }
     }
