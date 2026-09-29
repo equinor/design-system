@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 22
+Records: 23
 
 | ADR | Title | Status | Date | Note |
 | --- | ----- | ------ | ---- | ---- |
@@ -40,6 +40,7 @@ Records: 22
 | [0020](./0020-mobile-component-scope-exclusions-and-renames.md) | Mobile component scope: exclusions and renames relative to EDS web | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0022](./0022-mobile-migration-priority-and-release-strategy.md) | Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover | Accepted | 2026-09-10 | recorded retrospectively 2026-09-23 |
+| [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Accepted | 2026-04-09 | recorded retrospectively 2026-09-24 |
 
 ## Statuses outside the template
 
