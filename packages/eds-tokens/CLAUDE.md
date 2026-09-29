@@ -33,7 +33,6 @@ The **legacy pipeline** below (Figma REST sync + Style Dictionary) still owns ev
 ### Step 1: Get token JSON files
 
 **Option A — Sync from Figma** (requires `.env` with `PERSONAL_ACCESS_TOKEN` in `eds-tokens-sync/bin/`):
-
 ```bash
 pnpm run update-tokens              # All tokens
 pnpm run update-tokens:foundations   # Foundation palette + color scheme
@@ -42,7 +41,6 @@ pnpm run update-tokens:color-dynamic # Dynamic appearance + concept
 ```
 
 **Option B — Generate from config** (no Figma access needed):
-
 ```bash
 pnpm run generate:tokens:all-color  # All color tokens
 pnpm run generate:tokens:static     # Color scheme + semantic + concept
@@ -72,25 +70,19 @@ Note: The minify step reads from the already-bundled `variables.css` (not from `
 ## Pitfalls
 
 ### Why `light-dark()` is removed from published CSS
-
 The transform in `eds-tokens-build` emits `light-dark(L, D)` in source CSS. After lightningcss bundles, the `build-dark-scope` step rewrites these into explicit `[data-color-scheme="light"|"dark"]` rules with a `prefers-color-scheme` media fallback. Reason: Vite 8 (Rolldown) and other downstream bundlers run their own lightningcss pass; without explicit `targets`, that pass polyfills `light-dark()` into a `var(--lightningcss-light, …)` pattern that resolves at the `:root` declaration site and breaks subtree-scoped dark mode. Emitting explicit scope rules instead means there is no `light-dark()` for downstream tools to polyfill incorrectly. The build asserts the final output contains no `light-dark(` literals.
 
 ### Missing step 3
-
 Running only `build:variables:color` compiles individual CSS files but does NOT update `variables.min.css`. Tokens will exist in `build/css/color/*/` but not reach the browser. Always run `_build:css` after.
 
 ### Generate scripts overwrite Figma sync
-
 The generate scripts write to the **same files** as the Figma sync. If you add tokens via Figma sync, you must also update the generate scripts and `token-config.json`, otherwise running `generate:tokens:all-color` will silently remove the new tokens.
 
 ### Build output is git-tracked
-
 The `build/` directory is in `.gitignore` but files are tracked. Use `git add -f` when staging build output changes.
 
 ### Generate scripts run from compiled dist
-
 The generate scripts in `eds-tokens-build` run from `dist/`, not `src/`. After editing a generate script, you must rebuild `eds-tokens-build` first:
-
 ```bash
 cd ../eds-tokens-build && pnpm run build
 ```
@@ -175,7 +167,6 @@ pnpm run build:variables:elevation  # Compose elevation CSS + inject into variab
 ```
 
 Output:
-
 - CSS: `build/css/elevation/elevation.css` (bare properties, for reference)
 - CSS: Injected into `build/css/variables.css` `:root` block
 - TypeScript: `build/ts/elevation/elevation.ts` (structured object with `boxShadow` string + per-layer React Native shadow properties)
