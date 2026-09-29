@@ -80,13 +80,13 @@ docusaurus.config.ts       aliases + webpack rules (see Config)
 
 ## Global CSS — five files, strict responsibilities
 
-| File                           | Owns                                                                                                                                         |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                   |
-| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`)                 |
-| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                   |
-| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block                             |
-| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts` |
+| File                           | Owns                                                                                                                                                        |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                                  |
+| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, breakpoint convention) + tiny utilities (`.docs-section`)                                        |
+| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                                  |
+| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, hero-band chrome for component and foundation docs, colour reference tables, table scroll shadows |
+| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts`                |
 
 The exception in `theme-variables.css`: the per-level heading line-heights at
 the end of the file set `line-height` on `h1`–`h6` directly, not through a
@@ -259,11 +259,11 @@ registry itself gives no such guarantee — `of` is a plain `string`.
   a pointer-following spotlight that both brightens and enlarges the dots it
   passes over. Render it as a child of the band and add
   `docs-dot-host` to the band, which becomes its positioning context and drives
-  the hover. `Hero` wires this up behind its `dots` prop; the component-doc hero
-  band does it directly in the `DocItem/Layout` swizzle. Bands that come from
-  markdown and cannot host an element set
+  the hover. `Hero` wires this up behind its `dots` prop; the component and
+  foundation doc hero band does it directly in the `DocItem/Layout` swizzle. A
+  band that comes from markdown and cannot host an element can set
   `background-image: var(--docs-dot-grid)` instead (resting grid, no
-  spotlight) — the foundation hero band in `doc-layouts.css` is the one case.
+  spotlight); no band on the site does this today.
   All the geometry lives in `--docs-dot-*` in `docs-components.css`; the three
   gradients resolve at `:root`, so overriding `--docs-dot-size` per band has no
   effect by design. The size falloff is two stacked lit layers (`::before` at
@@ -279,9 +279,19 @@ the 1.1.0 archive imports it).
 
 ## Swizzled theme components (`src/theme/`)
 
-- `DocItem/Layout` — eject tracking upstream 3.10.2 verbatim + the
-  component-doc hero band (gated on `hide_title` + `components/` id +
-  current version). Re-diff against upstream on Docusaurus upgrades.
+- `DocItem/Layout` — eject tracking upstream 3.10.2 verbatim + the hero band
+  for component and foundation docs (gated on `hide_title` + a `components/`
+  or `foundation/` id + a redesigned version). Re-diff against upstream on
+  Docusaurus upgrades.
+- `DocRoot/Layout/Sidebar` — eject tracking upstream 3.10.2 + two changes: it
+  seeds `hiddenSidebar` from the container flag so a remount cannot strand the
+  sidebar half-collapsed, and it remembers the collapsed state across page
+  loads in `localStorage` (`src/utils/sidebarPreference.ts`). A `headTags`
+  script in `docusaurus.config.ts` marks `<html>` with
+  `data-docs-sidebar-restore` before first paint, so the sidebar starts
+  collapsed instead of opening and animating shut on hydration; the sidebar and
+  hero stylesheets draw the collapsed width while it is set. Re-diff against
+  upstream on Docusaurus upgrades.
 - `Footer` — full custom footer; styled via Infima `footer__*` classes in
   `site-chrome.css`.
 - `MDXComponents` — the global registry (wrap).
@@ -398,9 +408,13 @@ Not in CI (both need a running server):
 
 - Doc writing style: `documentation/agent-instructions/COMPONENT_DOC_STYLE.md`
   (British English, no em-dashes, section order).
-- Component reference docs use frontmatter `hide_title: true` +
-  `description` — the swizzled DocItem hero renders both.
-- Foundation doc pages get their full-width hero from their first `# h1` and
-  first paragraph via CSS (`doc-layouts.css`) — no frontmatter mechanism.
+- Component and foundation docs use frontmatter `hide_title: true` +
+  `description`, and the swizzled DocItem hero renders both. The body has no
+  `# h1` and starts after the lead. Always set `description` explicitly:
+  without it Docusaurus takes the first paragraph, which then shows in the hero
+  and again in the body. It is plain text, so a lead that needs a link or
+  inline markup keeps that sentence in the body.
+- The frozen 2.0.0-beta foundation pages still carry their title in a
+  markdown `# h1`, so they render with the default doc card and no hero.
 - Never hand-write Storybook URLs in content; use `showLink` /
   `StoryCanvas`.
