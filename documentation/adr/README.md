@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 22
+Records: 23
 
 | ADR | Title | Status | Date | Note |
 | --- | ----- | ------ | ---- | ---- |
@@ -29,7 +29,7 @@ Records: 22
 | [0009](./0009-temporary-next-subpaths-for-eds-tokens-beta.md) | Publish Tokens Studio output under temporary `next/*` subpaths during the eds-tokens beta | Accepted | 2026-07-20 |  |
 | [0010](./0010-single-bundled-css-entry-for-eds-tokens-3.md) | Mirror the 2.x CSS export surface in eds-tokens 3.0.0: one bundled `./css/variables` entry | Accepted | 2026-07-20 | 2026-09-04; proposed 2026-07-20 — the bundle has shipped and been exercised on the beta… |
 | [0011](./0011-adopt-tokens-studio-platform-pipeline.md) | Adopt the Tokens Studio platform as the source and pipeline for design tokens | Accepted | 2026-07-20 |  |
-| [0012](./0012-pinned-prerelease-versioning-for-beta-lines.md) | Pin beta release lines to a fixed 3.0.0-beta.N series with release-please prerelease versioning | Accepted | 2026-07-20 |  |
+| [0012](./0012-pinned-prerelease-versioning-for-beta-lines.md) | Pin beta release lines to a fixed 3.0.0-beta.N series with release-please prerelease versioning | Accepted | 2026-07-20 | graduation step superseded by ADR 0025 |
 | [0013](./0013-attribute-scoped-custom-properties-not-light-dark.md) | Use attribute-scoped custom properties, not `light-dark()`, for colour-scheme switching in token CSS | Accepted | 2026-07-20 |  |
 | [0014](./0014-token-code-output-architecture.md) | Token code / output architecture for the redefined token system | Accepted | 2026-07-15 |  |
 | [0015](./0015-figma-component-property-naming.md) | Name Figma component properties by one internally consistent convention | Accepted | 2026-08-19 |  |
@@ -40,6 +40,7 @@ Records: 22
 | [0020](./0020-mobile-component-scope-exclusions-and-renames.md) | Mobile component scope: exclusions and renames relative to EDS web | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0022](./0022-mobile-migration-priority-and-release-strategy.md) | Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover | Accepted | 2026-09-10 | recorded retrospectively 2026-09-23 |
+| [0025](./0025-batch-graduation-with-release-candidate.md) | Graduate EDS 2.0 as one batch, through a release candidate, to stable 3.0.0 | Accepted | 2026-09-17 |  |
 
 ## Statuses outside the template
 
