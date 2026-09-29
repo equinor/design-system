@@ -1,8 +1,8 @@
 ---
 title: Patterns
+hide_title: true
+description: 'Effective design patterns help you create consistent, user-friendly interfaces by providing proven solutions to common design challenges. These patterns ensure your components work harmoniously together whilst maintaining visual structure throughout your product.'
 ---
-
-Effective design patterns help you create consistent, user-friendly interfaces by providing proven solutions to common design challenges. These patterns ensure your components work harmoniously together whilst maintaining visual structure throughout your product.
 
 ## Grid System and Spacing
 

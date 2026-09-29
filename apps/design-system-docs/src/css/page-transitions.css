@@ -24,6 +24,17 @@
     view-transition-name: site-navbar;
   }
 
+  /* The browser stacks the snapshots in the order it captured them, and a name
+     that only exists on the new page goes on top of everything from the old
+     one. Arriving at a doc from a page without a sidebar (/foundation, say)
+     therefore painted the sidebar over the navbar. The sidebar runs up under
+     the navbar (negative top margin), so that normally hidden strip covered
+     the navbar until the transition finished. Keep the navbar on top, as it is
+     on the live page. */
+  ::view-transition-group(site-navbar) {
+    z-index: 1;
+  }
+
   .theme-doc-sidebar-container {
     view-transition-name: site-sidebar;
   }
