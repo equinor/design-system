@@ -20,8 +20,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <input
         type="radio"
         id={inputId}
-        // Merge so a consumer className can't clobber the 'input' class the
-        // component CSS keys its :has(.input:...) state selectors on
+        // Component CSS keys its :has(.input:...) state selectors on this class
         className="input"
         disabled={disabled}
         ref={ref}
