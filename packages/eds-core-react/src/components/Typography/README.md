@@ -2,7 +2,7 @@
 
 Typography components used to help render typography in <abbr title="Equinor Design System">EDS</abbr>.
 
-## EDS 2.0 typography — replacement in progress
+## `TypographyNext`, `Heading` and `Paragraph`: replacement in progress
 
 `TypographyNext`, `Heading`, and `Paragraph` are deprecated, but supported for the 2.x line. Avoid new adoption.
 
@@ -14,7 +14,7 @@ Typography components used to help render typography in <abbr title="Equinor Des
 **In the meantime:**
 
 - **Already using these components (or 1.0 `Typography`)?** Stay where you are. There is no need to migrate until the replacement is ready.
-- **Writing new code that needs typography?** Use plain `h1`–`h6` and `p`. That is the markup the base stylesheet will style, so there is nothing to undo when it ships. They keep the browser's default margins until #5477 lands.
+- **Writing new code that needs typography?** Use plain `h1`–`h6` and `p`. That is the markup the base stylesheet will style, so there is nothing to undo when it ships. Set the spacing between them yourself until #5477 lands.
 - Applying the `--eds-typography-*` tokens in a class of your own is still fine, as long as that class is easy to delete later — the token names differ between stable (`ui-body-md-*`) and beta (`ui-md-*`).
 
 ---
