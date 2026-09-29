@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 19
+Records: 22
 
 | ADR | Title | Status | Date | Note |
 | --- | ----- | ------ | ---- | ---- |
@@ -36,6 +36,9 @@ Records: 19
 | [0016](./0016-colour-approach-for-eds-2.md) | Colour approach for EDS 2.0 | Approved | 2026-08-27 |  |
 | [0017](./0017-spacing-approach-for-eds-2.md) | Spacing approach for EDS 2.0 | Accepted | 2026-04-23 |  |
 | [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Accepted | 2026-04-23 |  |
+| [0019](./0019-adopt-only-the-component-library-from-mad.md) | Adopt only the component library from the MAD monorepo | Accepted | 2025-06 | recorded retrospectively 2026-09-11 |
+| [0020](./0020-mobile-component-scope-exclusions-and-renames.md) | Mobile component scope: exclusions and renames relative to EDS web | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
+| [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0024](./0024-mobile-touch-targets-are-a-fixed-constant-not-a-token.md) | Touch targets are a fixed platform constant in mobile components, not a density-scaled token | Accepted | 2026-09-16 | recorded retrospectively 2026-09-24 |
 
 ## Statuses outside the template

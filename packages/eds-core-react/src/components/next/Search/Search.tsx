@@ -21,6 +21,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
     onChange,
     onClear,
     clearLabel = 'Clear search',
+    className,
+    style,
     ...inputProps
   },
   forwardedRef,
@@ -72,7 +74,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   return (
     <search
-      className="eds-search"
+      className={['eds-search', className].filter(Boolean).join(' ')}
+      style={style}
       aria-labelledby={label ? labelId : undefined}
     >
       <Field disabled={disabled}>
