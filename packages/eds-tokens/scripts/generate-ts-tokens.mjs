@@ -232,6 +232,14 @@ function hasTopLevelOperator(value) {
 }
 
 /**
+ * CSS function names are case-insensitive, and `calc(` is matched by
+ * hand in three places rather than through MATH_FUNCTIONS, so it needs
+ * saying once here.
+ */
+const startsWithCalc = (value, index = 0) =>
+  value.slice(index, index + 'calc('.length).toLowerCase() === 'calc('
+
+/**
  * Parenthesise a substituted value when it is itself arithmetic, so
  * inlining cannot change operator association: `var(--a) * 2` with
  * `--a: calc(1px + 2px)` must not fold as `1px + 2px * 2`. Values that
@@ -239,7 +247,7 @@ function hasTopLevelOperator(value) {
  * keep their exact form — the operator there is not at top level.
  */
 function asOperand(value) {
-  return value.startsWith('calc(') || hasTopLevelOperator(value)
+  return startsWithCalc(value) || hasTopLevelOperator(value)
     ? `(${value})`
     : value
 }
@@ -408,10 +416,14 @@ const FUNCTION_NAME = /^([a-z][\w-]*)\(/i
  * the platform emits for the Gaussian weights the colour scales are
  * derived from, where the formula engine leaves numeric maths for CSS
  * to compute at runtime. Anything else fails by name, so the next one
- * to appear is a one-line addition rather than a debugging session.
+ * to appear is named rather than left to a debugging session.
  *
- * CSS only allows `<number>` arguments in these, so every operand and
- * the result are unitless.
+ * Adding one is only a new entry here when it takes a fixed number of
+ * unitless arguments, as `pow()` does. `round()` — the type-scale
+ * pattern in AGENTS.md, so the likeliest next arrival — takes a
+ * dimension and an optional strategy keyword, and `min()` / `max()`
+ * take any number of dimensions. Those need the unit check and the
+ * fixed arity below to give way first.
  */
 const MATH_FUNCTIONS = {
   pow: { arity: 2, apply: (base, exponent) => base ** exponent },
@@ -438,7 +450,7 @@ function tokenizeExpression(expression, cssName) {
       index += 1
       continue
     }
-    if (expression.startsWith('calc(', index)) {
+    if (startsWithCalc(expression, index)) {
       tokens.push({ kind: '(' })
       index += 'calc('.length
       continue
@@ -496,7 +508,7 @@ function parseTerm(tokens, cssName) {
 
 /** `name` is consumed; `tokens` starts at the opening parenthesis. */
 function parseCall(name, tokens, cssName) {
-  const math = MATH_FUNCTIONS[name]
+  const math = Object.hasOwn(MATH_FUNCTIONS, name) && MATH_FUNCTIONS[name]
   if (!math)
     tokenFail(
       `unsupported function ${name}() for --${cssName} — this script folds ${Object.keys(
@@ -701,7 +713,7 @@ function convertShadow(rawValue, cssName) {
 
 /** A resolved value that still needs arithmetic folding. */
 const isExpression = (value) =>
-  value.startsWith('calc(') ||
+  startsWithCalc(value) ||
   value.startsWith('(') ||
   MATH_FUNCTION_CALL.test(value) ||
   hasTopLevelOperator(value)

@@ -304,6 +304,73 @@ describe('generate-ts-tokens', () => {
       )
     })
 
+    it('folds a signed operand straight after the comma', () => {
+      // the modular type scale shape: pow(2, -1/5)
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(2, calc(-1 / 5));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 0.87055,',
+      )
+    })
+
+    it('folds a var() reference inside the arguments', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(var(--eds-primitives-scale-double), 3);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 8,',
+      )
+    })
+
+    it('names an unsupported function inherited from Object.prototype', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(constructor(1) * 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('unsupported function constructor()')
+    })
+
+    it('matches calc() case-insensitively, like any other function', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: CALC(var(--eds-primitives-spacing-25) + 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'inline: 5,',
+      )
+    })
+
     it('rejects a math function it does not fold, by name', () => {
       const result = run(
         cssFixture({
