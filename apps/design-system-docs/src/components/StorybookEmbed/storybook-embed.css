@@ -11,3 +11,17 @@
 
   background-color: var(--eds-background-surface);
 }
+
+/* The `width="100%"` attribute sizes the content box, so the padding and border
+   pushed the frame 2rem + 2px past its container and out of the doc card.
+   Subtract them here rather than switching to border-box, which would take them
+   out of the `height` prop instead. Scoped so the 1.1.0 archive keeps its stock
+   rendering. */
+html:where(
+    [class*='docs-version-current'],
+    [class*='docs-version-2.0.0-beta'],
+    :not([class*='docs-version-'])
+  )
+  .sb-iframe {
+  width: calc(100% - 2rem - 2px);
+}

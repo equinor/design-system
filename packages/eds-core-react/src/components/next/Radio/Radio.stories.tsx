@@ -8,6 +8,7 @@ import type { RadioProps } from './Radio.types'
 const meta: Meta<typeof Radio> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Radio',
   component: Radio,
+  tags: ['beta'],
   args: {
     label: 'Option',
     disabled: false,
@@ -51,7 +52,16 @@ const meta: Meta<typeof Radio> = {
     },
     className: {
       control: 'text',
-      description: 'Additional CSS class names for the input element',
+      description:
+        'Additional CSS class names applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the outer wrapper element, not the hidden input',
       table: {
         category: 'Styling',
       },

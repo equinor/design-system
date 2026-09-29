@@ -1,6 +1,7 @@
 /**
  * Swizzled from @docusaurus/theme-classic 3.10.2 — verbatim except for the
- * `hiddenSidebar` initial state, marked FIX below.
+ * `hiddenSidebar` initial state, marked FIX below, and the stored collapsed
+ * preference, marked PERSIST below (see src/utils/sidebarPreference.ts).
  *
  * Upstream splits the collapsed sidebar into two pieces of state:
  *
@@ -24,13 +25,19 @@
  * against upstream on Docusaurus upgrades.
  */
 
-import { Fragment, useCallback, useState } from 'react'
+import { Fragment, useCallback, useLayoutEffect, useState } from 'react'
 import clsx from 'clsx'
 import { prefersReducedMotion, ThemeClassNames } from '@docusaurus/theme-common'
 import { useDocsSidebar } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
 import DocSidebar from '@theme/DocSidebar'
 import ExpandButton from '@theme/DocRoot/Layout/Sidebar/ExpandButton'
+
+import {
+  RESTORE_ATTRIBUTE,
+  readSidebarCollapsed,
+  storeSidebarCollapsed,
+} from '@site/src/utils/sidebarPreference'
 
 import type { ReactNode } from 'react'
 import type { Props } from '@theme/DocRoot/Layout/Sidebar'
@@ -55,6 +62,32 @@ export default function DocRootLayoutSidebar({
   // remount (see the file header) from landing in the clipped, unrecoverable
   // half-collapsed state.
   const [hiddenSidebar, setHiddenSidebar] = useState(hiddenSidebarContainer)
+
+  // PERSIST: restore a stored collapsed preference on mount. It runs as a
+  // layout effect so the collapsed classes land before the browser paints, and
+  // it sets `hiddenSidebar` directly because the container starts at the
+  // collapsed width, so there is no transition for `onTransitionEnd` to report.
+  // The restore attribute (set by the <head> script on a full load, or here on
+  // a client-side remount) keeps the container from transitioning from its
+  // expanded width, and comes off two frames later, once the classes have been
+  // styled. Mount only: later toggles store the preference themselves.
+  useLayoutEffect(() => {
+    const root = document.documentElement
+    if (readSidebarCollapsed() && !hiddenSidebarContainer) {
+      root.setAttribute(RESTORE_ATTRIBUTE, '')
+      setHiddenSidebar(true)
+      setHiddenSidebarContainer(true)
+    }
+    if (!root.hasAttribute(RESTORE_ATTRIBUTE)) return
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() =>
+        root.removeAttribute(RESTORE_ATTRIBUTE),
+      )
+    })
+    return () => cancelAnimationFrame(frame)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const toggleSidebar = useCallback(() => {
     if (hiddenSidebar) {
       setHiddenSidebar(false)
@@ -64,8 +97,10 @@ export default function DocRootLayoutSidebar({
     if (!hiddenSidebar && prefersReducedMotion()) {
       setHiddenSidebar(true)
     }
+    // PERSIST
+    storeSidebarCollapsed(!hiddenSidebarContainer)
     setHiddenSidebarContainer((value) => !value)
-  }, [setHiddenSidebarContainer, hiddenSidebar])
+  }, [setHiddenSidebarContainer, hiddenSidebar, hiddenSidebarContainer])
   return (
     <aside
       className={clsx(

@@ -3,6 +3,8 @@ import { themes as prismThemes } from 'prism-react-renderer'
 import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
 
+import { restoreScript as sidebarRestoreScript } from './src/utils/sidebarPreference'
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
@@ -31,6 +33,12 @@ const config: Config = {
   clientModules: [
     './src/clientModules/syncColorScheme.ts',
     './src/clientModules/pageTransitions.ts',
+  ],
+
+  // Runs before first paint so a collapsed doc sidebar stays collapsed across
+  // page loads instead of opening and animating shut. See sidebarPreference.ts.
+  headTags: [
+    { tagName: 'script', attributes: {}, innerHTML: sidebarRestoreScript },
   ],
 
   i18n: {

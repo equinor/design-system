@@ -1,6 +1,8 @@
-# Illustration
-
-Guidelines for illustration and photography styles used throughout the Equinor Design System help you create visually consistent experiences.
+---
+title: Illustration
+hide_title: true
+description: 'Guidelines for illustration and photography styles used throughout the Equinor Design System help you create visually consistent experiences.'
+---
 
 Brand and technical illustrations should follow Equinor's visual identity guidelines to ensure consistency across all your design work.
 

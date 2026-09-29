@@ -1,4 +1,4 @@
-/* Swizzled from @docusaurus/theme-classic — adds the component-doc hero band. */
+/* Swizzled from @docusaurus/theme-classic — adds the hero band for component and foundation docs. */
 
 .docItemContainer header + *,
 .docItemContainer article > *:first-child {
@@ -13,7 +13,7 @@
 }
 
 /* ======================================
- * Component-doc hero band
+ * Component and foundation doc hero band
  * Full-bleed banner (title + lead) that fills the main area to the right of the
  * sidebar, sitting above the standard content + TOC row. The horizontal
  * breakout escapes the centred 1140px `.container`: `100%` is the container
@@ -89,10 +89,17 @@
       margin-inline var(--ifm-transition-fast) ease;
   }
 
-  [class*='docMainContainerEnhanced'] .docHero {
+  /* The restore attribute marks a stored collapsed sidebar before React has
+   * applied the enhanced class (see src/utils/sidebarPreference.ts). */
+  [class*='docMainContainerEnhanced'] .docHero,
+  html[data-docs-sidebar-restore] .docHero {
     width: calc(100vw - var(--doc-sidebar-hidden-width, 30px));
     margin-inline: calc(
       (100% - (100vw - var(--doc-sidebar-hidden-width, 30px))) / 2
     );
+  }
+
+  html[data-docs-sidebar-restore] .docHero {
+    transition: none;
   }
 }
