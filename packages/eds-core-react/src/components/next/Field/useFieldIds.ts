@@ -69,13 +69,15 @@ export interface FieldIds {
  */
 export function useFieldIds(providedId?: string): FieldIds {
   const generatedId = useId()
-  const baseId = providedId ?? generatedId
+  // `||`, not `??`: an empty string is treated as no id. It would otherwise
+  // produce id="" on the control and an htmlFor pointing at nothing.
+  const baseId = providedId || generatedId
 
   return {
     // A consumer-supplied id is applied verbatim to the form control, since
     // that is what an external htmlFor or aria-describedby points at. Only the
     // generated fallback gets the -input suffix.
-    inputId: providedId ?? `${generatedId}-input`,
+    inputId: providedId || `${generatedId}-input`,
     labelId: `${baseId}-label`,
     descriptionId: `${baseId}-description`,
     helperMessageId: `${baseId}-helper-message`,

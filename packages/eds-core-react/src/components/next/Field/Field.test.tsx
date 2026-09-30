@@ -22,6 +22,14 @@ describe('useFieldIds', () => {
     expect(result.current.helperMessageId).toBe('custom-id-helper-message')
   })
 
+  test('falls back to a generated id when given an empty string', () => {
+    const { result } = renderHook(() => useFieldIds(''))
+    const { inputId, labelId } = result.current
+    expect(inputId).not.toBe('')
+    expect(inputId).toMatch(/-input$/)
+    expect(labelId).toBe(`${inputId.replace('-input', '')}-label`)
+  })
+
   test('getDescribedBy returns only descriptionId by default', () => {
     const { result } = renderHook(() => useFieldIds('test'))
     expect(result.current.getDescribedBy()).toBe('test-description')
