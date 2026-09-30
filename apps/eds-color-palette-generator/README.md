@@ -1,129 +1,85 @@
-# EDS Color Palette Generator
+# EDS Colour Palette Generator
 
-Internal tooling for building accessible colour themes and palettes for the Equinor Design System.
+Internal tool for proposing and checking colour palettes for the Equinor Design System.
 
-The project hosts two tools in one Next.js App Router app:
+**Tokens Studio is the source of truth for EDS colour** ([ADR 0011](../../documentation/adr/0011-adopt-tokens-studio-platform-pipeline.md), [ADR 0016](../../documentation/adr/0016-colour-approach-for-eds-2.md)). The generator reads its defaults from the Tokens Studio pull committed in `packages/eds-tokens/src/tokens/`, and a unit test fails if its output drifts from what Tokens Studio exports. Palettes you build here are proposals: to change EDS colour, change it in Tokens Studio.
 
-- **Theme Builder** (`/`, the primary tool) — build accessible colour themes and palettes, preview them on example components, and check contrast. Palette state is shareable via the URL.
-- **Colour Palette Generator** (`/old`, archived) — the original Gaussian colour-scale generator. It creates harmonious colour scales using Gaussian distribution and the OKLCH colour space, ensuring consistent, accessible colours across different lightness levels. Still fully functional but no longer the default entry point.
+## Routes
 
-> The `/themebuilder` route now redirects to `/`.
+| Route | Tool |
+| --- | --- |
+| `/` | **Theme Builder**. Edit palettes, see every step with its Tokens Studio roles, check contrast, and preview components through the Tokens Studio semantic mapping. State is shareable through the URL. |
+| `/dataviz` | **Data visualisation**. Generate categorical, sequential and diverging palettes and audit them for colour vision deficiency and contrast. |
+| `/palette` | **Palette editor**. Start from the archived generator's saved palettes and edit the hex value of each step. The edited palettes are also offered on the Examples page. |
+| `/contrast` | **Contrast**. Every step of a Tokens Studio palette against its best text colour, and a combined view of Tokens Studio token pairs across tones. |
+| `/example` | **Examples**. Tokens Studio token pairs and nested surfaces on example layouts, for the Tokens Studio palettes and your edited ones. |
+| `/about` | How the generator works: OKLCH, the gaussian chroma curve, step roles and contrast requirements. |
+| `/old` | The archived Gaussian colour-scale generator. Still works, no longer the entry point. |
 
-## Features
+`/themebuilder` redirects to `/` for links shared before the Theme Builder moved.
 
-* **Gaussian-based chroma distribution**: Colors maintain visual harmony using mathematical bell curves
-* **OKLCH color space**: Perceptually uniform color generation
-* **Multiple color anchors**: Support for interpolation between colors at specific steps for gradient-like scales
-* **Accessibility-focused**: Built-in contrast checking with APCA and WCAG methods
-* **Light and dark mode support**: Separate configurations for optimal contrast in each mode
-* **Interactive configuration**: Adjust lightness values and Gaussian parameters in real-time
-* **Export/Import**: Save and share color palette configurations
-* **CLI tool**: Generate color tokens from configuration files (supports both single value and multiple anchors)
-* **About page**: Comprehensive documentation with interactive demos explaining how the generator works
+## Where the values come from
 
-## Getting Started
+| What | Source |
+| --- | --- |
+| Seven hue anchors (moss-green, gray, north-sea, blue, green, orange, red) | Tokens Studio `input/palette` |
+| 15 lightness values per scheme, gaussian mean and standard deviation | Tokens Studio `input/scale` |
+| Tone → hue per scheme (neutral is gray in light, north-sea in dark) | Tokens Studio `scheme/light`, `scheme/dark` |
+| Semantic roles per step (`text.primary` → step 13, `background.surface` → step 15, …) | Tokens Studio `semantic` |
+| Contrast requirements | ADR 0016, Confirmation 5 (in `src/config/config.ts`) |
 
-### Web Interface
+`src/config/tokensStudio.ts` reads these from `packages/eds-tokens/src/tokens/raw/`, which the Tokens Studio release workflow keeps up to date. Nothing in the app types a colour value by hand. `src/config/tokensStudio.test.ts` generates all seven hues in both schemes and compares them with the resolved values in `packages/eds-tokens/src/tokens/css/colors/default.css` (largest difference today: ΔE 0.0005).
 
-First, run the development server:
+The generation formula is the one Tokens Studio uses (ADR 0016 D2): every step takes its lightness from the scale, and the anchor supplies hue and chroma, with chroma shaped by a gaussian curve over lightness:
 
-```bash
-pnpm dev
+```
+chroma = gaussian(lightness, mean, stdDev) × anchorChroma
+gaussian(x, mean, stdDev) = exp((-25 / stdDev) × (mean - x)²)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the Theme Builder (the primary tool).
+## Getting started
 
-The archived Gaussian colour-scale generator is available at [http://localhost:3000/old](http://localhost:3000/old). To learn how that generator works internally, visit the About page at [http://localhost:3000/about](http://localhost:3000/about).
+```bash
+pnpm dev                 # Next dev server on :3000
+pnpm dev --port 3001     # if the docs dev server already uses :3000
+```
 
-### CLI Tool
+## Styling
 
-Generate color tokens from a configuration file:
+The UI uses the Tokens Studio CSS bundle (`packages/eds-tokens/src/tokens/css/variables.css`) and maps Tailwind utilities onto its semantic variables in `src/app/globals.css`. Class names follow the token names: `bg-canvas` is `background.canvas`, `text-secondary` is `text.secondary`, `border-muted` is `border.non-interactive.neutral.muted`. Tailwind's own colour palette is removed, so a class like `bg-gray-100` does not compile. Fonts are Inter and Equinor from the EDS CDN, and icons come from `@equinor/eds-icons`.
+
+The scheme is set with `data-color-scheme` on `<html>`. An inline script applies the saved choice (or `?mode=`, or the system preference) before first paint.
+
+## CLI
 
 ```bash
 generate-colors [configPath] [outputDir]
 ```
 
-See [src/cli/README.md](./src/cli/README.md) for detailed CLI documentation and examples.
+Writes light and dark token files from a palette configuration. **The CLI defaults to the frozen 2.x lightness scale**, because `packages/eds-tokens` generates the 2.x palette with it (`generate:tokens:color-core`) and ADR 0016 freezes that scale. Pass `lightModeValues` and `darkModeValues` in the configuration to use other values; the configuration you download from the Theme Builder includes the Tokens Studio values. See [src/cli/README.md](./src/cli/README.md).
 
-**Example:**
-
-```bash
-generate-colors examples/palette-config.json output/
-```
-
-This will generate `color.tokens.light.json` and `color.tokens.dark.json` files in the output directory.
-
-## How It Works
-
-The generator uses a three-step process:
-
-1. **Define lightness values**: Each color step has predefined lightness values optimized for specific use cases (backgrounds, borders, text, etc.)
-2. **Apply Gaussian distribution**: Chroma (color intensity) varies using a bell curve, creating natural color progression
-3. **Generate color scale**: Colors are created in OKLCH space, maintaining hue while varying lightness and chroma
-
-### Single Value vs. Multiple Anchors
-
-* **Single value**: Provide one base color, and the generator applies Gaussian distribution across all steps
-* **Multiple anchors**: Define colors at specific steps (e.g., step 6 and step 9), and the generator interpolates smoothly between them in OKLCH space while still applying Gaussian chroma distribution
-
-For detailed explanations and interactive demonstrations showing the difference, see the [About page](http://localhost:3000/about) or read [ABOUT_PAGE.md](./ABOUT_PAGE.md).
-
-## Key Concepts
-
-* **Mean**: The lightness value where chroma is at maximum (center of the bell curve)
-* **Standard deviation**: Controls how quickly chroma decreases away from the mean
-* **Lightness**: Predefined values for each step based on accessibility requirements
-* **Chroma**: Calculated as `gaussian(lightness, mean, stdDev) × baseChroma`
-
-## Configuration
-
-Color palettes can be configured through:
-
-* **Display options panel**: Toggle contrast checking, lightness inputs, and Gaussian parameters
-* **Quick actions menu**: Import/export configurations, change color format
-* **Individual color controls**: Rename colors, adjust base colors, add or remove colors
-
-## Testing
-
-Run unit tests with:
+## Tests
 
 ```bash
-pnpm test
+pnpm test:run            # Vitest: colour maths, Tokens Studio parity, utilities, CLI
+pnpm test:e2e            # Playwright against a running dev server
+PLAYWRIGHT_URL=http://localhost:3001/old pnpm test:e2e   # when the server runs on :3001
 ```
 
-Run end-to-end tests:
+The CLI tests run the built CLI in `dist/`, so run `pnpm build:cli` first after changing the generator.
+
+## Reports
+
+`PALETTE_OVERVIEW.md` and `PALETTE_CONTRAST_REPORT.md` are generated; regenerate them rather than editing:
 
 ```bash
-pnpm test:e2e
+pnpm generate:palette-config-in-markdown
+pnpm generate:palette-contrast-report
 ```
 
-## Building
+## Learn more
 
-Build the CLI tool:
-
-```bash
-pnpm build:cli
-```
-
-This will compile the TypeScript CLI script into a distributable JavaScript file in the `dist/` directory.
-
-## Documentation
-
-* **[ABOUT_PAGE.md](./ABOUT_PAGE.md)**: Documentation for the About page and interactive components
-* **[PALETTE_OVERVIEW.md](./PALETTE_OVERVIEW.md)**: Overview of the color palette structure
-* **[PALETTE_CONTRAST_REPORT.md](./PALETTE_CONTRAST_REPORT.md)**: Contrast compliance report
-
-## Built With
-
-* [Next.js](https://nextjs.org) -- React framework
-* [colorjs.io](https://colorjs.io) -- Color manipulation in OKLCH space
-* [Tailwind CSS](https://tailwindcss.com) -- Styling
-* [Lucide React](https://lucide.dev) -- Icons
-* [EDS Tokens](https://github.com/equinor/design-system) -- Equinor Design System tokens
-
-## Learn More
-
-* [Oklab color space specification](https://bottosson.github.io/posts/oklab/)
-* [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/Understanding/)
+* [Oklab colour space](https://bottosson.github.io/posts/oklab/)
 * [APCA contrast algorithm](https://github.com/Myndex/SAPC-APCA)
-* [OKLCH color picker](https://oklch.com/)
+* [WCAG 2.1](https://www.w3.org/WAI/WCAG21/Understanding/)
+* [OKLCH colour picker](https://oklch.com/)

@@ -1,5 +1,14 @@
 # Light / Dark Parity — Color Generator vs Figma
 
+> **Superseded (2026-09-30).** This analysis compared the generator with the Figma `Test` file. Since then ADR 0016 (colour approach for EDS 2.0) made **Tokens Studio** the source of truth, and the generator reads its values from the Tokens Studio pull in `packages/eds-tokens/src/tokens/`. Several decisions below no longer apply:
+>
+> - Dark neutral is **north-sea** in Tokens Studio, not the pure Gray ramp (§4a).
+> - `background.surface` is **step 15** (neutral.15), which is darker than the canvas in dark on purpose. The `#222222` "brighter than canvas" surface in §4a is not used.
+> - The hard-coded `semanticColors.ts` maps are gone. Previews resolve Tokens Studio semantic tokens against the generated ramps (`src/utils/semanticTokens.ts`).
+> - Light accent emphasis follows the Tokens Studio scale (`#21767e`), with no pinned `#206f77`.
+>
+> The tonal-inversion idea itself (light emphasis fills with dark on-emphasis text in dark mode) matches what Tokens Studio produces. Kept for history.
+
 Comparison of the color palette generator's light and dark themes against the variables in the
 Figma file [`Test` (6KTCpIisRSBfWnQBvW1poE)](https://www.figma.com/design/6KTCpIisRSBfWnQBvW1poE/Test).
 

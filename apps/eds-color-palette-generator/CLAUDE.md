@@ -4,68 +4,79 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`@equinor/eds-color-palette-generator` — a Next.js (App Router) tool that generates accessible color scales for the Equinor Design System. Each scale has 15 semantic steps (backgrounds, fills, borders, text). Colors are generated in **OKLCH space** with chroma shaped by a **Gaussian curve** across lightness, and validated against **APCA** and **WCAG 2.1** contrast targets.
+`@equinor/eds-color-palette-generator` is a Next.js (App Router) internal tool for proposing and checking EDS colour palettes. Each palette has 15 steps generated in **OKLCH**, with chroma shaped by a **gaussian curve** over lightness, and contrast is checked with **APCA** (WCAG 2.1 ratios are shown for reference).
 
-This is a standalone app inside the `design-system` monorepo. The repo-wide component conventions in `../../AGENTS.md` are about EDS 2.0 components and largely **do not** apply here — this is an application, not a component package. It consumes the published workspace packages `@equinor/eds-tokens`, `@equinor/eds-tailwind`, and `@equinor/eds-utils`.
+**Tokens Studio is the source of truth for EDS colour** (ADR 0011, ADR 0016 in `documentation/adr/`). The generator reads its defaults from the Tokens Studio pull in `packages/eds-tokens/src/tokens/` and must reproduce what Tokens Studio exports. Generated palettes are proposals, never a token source.
+
+This is a standalone app inside the `design-system` monorepo. The repo-wide component conventions in `../../AGENTS.md` are about EDS 2.0 components and largely do not apply here; this is an application, not a component package.
 
 ## Commands
 
-Use `pnpm` (monorepo uses pnpm workspaces).
+Use `pnpm`.
 
 ```bash
-pnpm dev                       # Next dev server (Turbopack) on :3000
+pnpm dev                       # Next dev server (Turbopack) on :3000; add --port 3001 if :3000 is taken
 pnpm build                     # Next production build
 pnpm lint                      # ESLint
-pnpm types                     # tsc --noEmit type check
+pnpm types                     # tsc --noEmit
 
-pnpm test                      # Vitest watch (unit tests)
 pnpm test:run                  # Vitest single run
-pnpm test:run src/utils/color.test.ts   # run one unit test file
-pnpm test:e2e                  # Playwright e2e (start `pnpm dev` first — no webServer configured)
-pnpm test:e2e:ui               # Playwright UI mode
+pnpm test:run src/config/tokensStudio.test.ts   # one file
+pnpm test:e2e                  # Playwright; start the dev server first (no webServer block)
+PLAYWRIGHT_URL=http://localhost:3001/old pnpm test:e2e   # server on another port
 
-pnpm build:cli                 # Build the CLI to dist/ via Vite (rolldown)
+pnpm build:cli                 # Build the CLI to dist/ (the CLI tests run dist/, so build first)
 
 pnpm generate:palette-config-in-markdown   # regenerate PALETTE_OVERVIEW.md
 pnpm generate:palette-contrast-report      # regenerate PALETTE_CONTRAST_REPORT.md
 ```
 
-**Two test runners, separate scopes:** Vitest covers `src/**/*.{test,spec}.ts` in a Node environment (color math, utils, CLI). Playwright covers `tests/e2e/**` against the running dev server. `vitest.config.ts` excludes `tests/**`, so the two never overlap. Playwright has no `webServer` block — start the dev server manually before `pnpm test:e2e`.
+`next.config.ts` sets `agentRules: false` so `next dev` does not write agent files into this folder.
 
 ## Architecture
 
-### Generation pipeline (the core)
+### Tokens Studio inputs (`src/config/tokensStudio.ts`)
 
-`src/utils/color.ts` is the heart. `generateColorScale(baseColor, lightnessValues, mean, stdDev, format)` is the single entry point used by both the web UI and the CLI:
+Reads the raw Tokens Studio sets from `packages/eds-tokens/src/tokens/raw/` by relative path and exports:
 
-- A color is either a **single value** (`{ name, value }`) or **multiple anchors** (`{ name, anchors: [{ value, step }] }`). `generateColorScale` branches on `Array.isArray(baseColor)`; the anchor path calls `generateColorScaleWithInterpolation`, which interpolates between anchors in OKLCH space (shorter-hue) per step.
-- For every step, hue + base chroma are extracted, then `createColorWithGaussianChroma` sets the step's target lightness and multiplies chroma by `gaussian(lightness, mean, stdDev)`. So **lightness is fixed per step; chroma follows the bell curve**.
-- All functions fail soft: on any error they fall back to a gray (`getFallbackColor`) rather than throwing, so the UI never crashes on bad input.
+- `TS_HUES`: the seven anchors from `input/palette`, accent and neutral first
+- `TS_SCALE`, `TS_GAUSSIAN`: the hand-set lightness per step and scheme, and the gaussian parameters (`input/scale`)
+- `TS_TONE_HUE`: tone → hue per scheme (`scheme/*`); neutral is gray in light and north-sea in dark
+- `TS_SEMANTIC`, `rolesForStep()`: the semantic layer's alias table (`text.primary` → `neutral.13`, …)
+- `TS_DATAVIZ`: the hand-picked data visualisation colours
 
-### Step definitions (`src/config/`)
+Do not type colour values into the app. `tokensStudio.test.ts` compares the generator's output for every hue and scheme with the resolved values in `packages/eds-tokens/src/tokens/css/colors/default.css`.
 
-The 15 semantic steps live in `config.ts` as individual exported `StepDefinition` constants (`BG_CANVAS`, `TEXT_STRONG`, …) collected into `PALETTE_STEPS`. Each carries a `lightValue`, `darkValue`, and a `contrastWith` list of contrast requirements (target step + APCA `lc` + WCAG level). This config is the source of truth for both lightness arrays (`getLightnessValues` in `helpers.ts`) and the contrast report. `palette.ts` holds the default color set (`paletteConfig`).
+### Steps (`src/config/config.ts`)
 
-To change which steps exist, their lightness, or their contrast targets, edit `config.ts` — not the components.
+`PALETTE_STEPS` builds the 15 steps from Tokens Studio: `id` (`step-N`), lightness per scheme, `roles` (all Tokens Studio roles on that step), and a `label`/`primaryRole` naming the step after its main role (ADR 0016 D5). The primary roles are the only hand-written part; `config.test.ts` fails if Tokens Studio repoints one. Contrast requirements follow ADR 0016 Confirmation 5 (APCA against `background.surface`, on-emphasis against the emphasis fill; borders out of scope). `stepLabel()`, `stepCategoryRuns()` and `stepsWithRole()` are the helpers the UI uses.
 
-### Web app (`src/app`, `src/components`)
+`palette-config.ts` holds the default palettes (the Tokens Studio anchors).
 
-- `src/app/page.tsx` is a `'use client'` component holding all state: Gaussian params (separate mean/stdDev for light vs dark), lightness value arrays, the colors array, and display toggles. Every piece of state is mirrored to `localStorage` via `src/utils/localStorage.ts` (keys prefixed `colorPalette_`).
-- Scales are computed in `useMemo` keyed on a `valueKey` (color values only) so renaming a color doesn't recompute the (expensive) scales.
-- Light/dark scheme comes from `ColorSchemeContext`; the page generates both light and dark scales and picks one. Mounting is gated on `useIsMounted()` to avoid hydration mismatches from localStorage.
-- `~13` presentational components in `src/components` (`ColorScale`, `DisplayOptionsPanel`, `GaussianParametersPanel`, `QuickActionsPopover`, etc.). Import/export of full configs (`ConfigFile`) flows through `QuickActionsPopover` → `handleConfigUpload`.
+### Generation (`src/utils/color.ts`)
+
+`generateColorScale(baseColor, lightnessValues, mean, stdDev, format)` is the single entry point for the UI, the scripts and the CLI. A colour is a single value or a list of anchors at steps; anchors are interpolated in OKLCH. Every step takes its lightness from the scale and its chroma from `gaussian(lightness) × anchor chroma`, as in Tokens Studio's `set_chroma(set_lightness(anchor, L), …)`. Functions fail soft and return a grey rather than throwing.
+
+### Semantic tokens (`src/utils/semanticTokens.ts`)
+
+Resolves any Tokens Studio semantic token against generated ramps: token → tone and step → hue for the scheme → colour. `toneRamps(scheme, palettes, overrides)` uses a palette whose name matches the tone's hue and otherwise the Tokens Studio default. The component previews and contrast views use this, so they show the user's palettes through the design system's own mapping.
+
+### Web app
+
+- `src/app/page.tsx`: the Theme Builder (tabs: Colour system, Examples, Contrast). State lives in the URL (`src/utils/urlState.ts`: palettes, tab, mode).
+- Other routes: `/dataviz`, `/palette`, `/contrast`, `/example`, `/about`, and the archived generator at `/old`.
+- Components: `components/themebuilder/`, `components/contrast/`, `components/example/`, `components/palette/`, `components/docs/`, `components/old/` (archived).
+- Shared primitives in `components/shared/`, modelled on EDS 2.0: `AppHeader` (one header and navigation for every route), `Button` (primary, secondary, ghost; icon-only requires `aria-label`), `SegmentedControl` (tab or radio semantics with arrow-key navigation, plus `TabPanel`), `Card`, `Icon` (wraps `@equinor/eds-icons`), `Badge` and `ThemeToggle`. Use these before hand-building controls.
+- Colour scheme: `ColorSchemeProvider` plus the pre-paint script in `src/context/colorSchemeScript.ts`. Only an explicit toggle is saved.
 
 ### CLI (`src/cli/generate-colors.ts`)
 
-Standalone Node script (shebang banner added at build time). Reads a palette config JSON, reuses `generateColorScale` + `PALETTE_STEPS`, and writes two W3C-design-token files (light + dark). Same single-value/anchor formats as the UI. Built separately via `vite.config.ts` (lib build, externals: node builtins + `colorjs.io`), output to `dist/`, exposed as the `generate-colors` bin. See `src/cli/README.md` for config format.
-
-### Types
-
-`src/types.ts` holds app-level types (`ColorDefinition`, `ColorAnchor`, `ConfigFile`, `ColorFormat`, `ContrastMethod`). `src/config/types.ts` holds the step/contrast config types. The `@/*` path alias maps to `src/*` (set in both `tsconfig.json` and `vitest.config.ts`).
+Reads a palette config and writes light and dark token files. It defaults to the frozen 2.x lightness values in `src/config/legacy2x.ts`, because `packages/eds-tokens` generates the 2.x palette with it (`generate:tokens:color-core`) and ADR 0016 freezes that scale. `lightModeValues`/`darkModeValues` in the config override them.
 
 ## Conventions
 
-- ESLint enforces `@typescript-eslint/no-explicit-any: error` and `ban-ts-comment: error` — no `any`, no unexplained ts-comments.
-- New color math goes in `src/utils/color.ts` with a colocated `*.test.ts`; keep the fail-soft (return fallback, don't throw) pattern.
-- Styling is Tailwind v4 (PostCSS) using EDS token classes (`bg-canvas`, `text-default`, `bg-surface`, `border-neutral-medium`, …) from `@equinor/eds-tailwind` — prefer these over raw color utilities.
-- The generated reports (`PALETTE_OVERVIEW.md`, `PALETTE_CONTRAST_REPORT.md`) are build artifacts from `scripts/` — regenerate them, don't hand-edit.
+- ESLint enforces `@typescript-eslint/no-explicit-any: error` and `ban-ts-comment: error`.
+- New colour maths goes in `src/utils/color.ts` with a colocated test; keep the fail-soft pattern.
+- Styling: Tailwind v4 mapped onto the Tokens Studio semantic variables in `src/app/globals.css`. Class names follow token names (`bg-surface`, `text-secondary`, `border-muted`, `bg-accent-emphasis-hover`, …). Tailwind's own colour palette is removed. Add a mapping in `globals.css` rather than using a raw colour.
+- User-facing text is British English. The product is "EDS Colour Palette Generator".
+- The generated reports (`PALETTE_OVERVIEW.md`, `PALETTE_CONTRAST_REPORT.md`) come from `scripts/`; regenerate, don't hand-edit.
