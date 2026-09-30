@@ -1,18 +1,19 @@
 'use client'
 
-import type { SemanticColors } from '@/config/semanticColors'
+import type { SemanticColors } from '@/utils/semanticTokens'
 
 type CardPreviewProps = {
   colors: SemanticColors
 }
 
 /**
- * Wired to canonical EDS semantic tokens (Figma Color Map):
- *   card      → bg-neutral-surface + border-neutral-subtle
- *   accent bar→ bg-accent-fill-emphasis-default
- *   tag       → bg-{concept}-fill-muted-default + text-{concept}-subtle + border-{concept}-subtle
- *   title/body→ text-neutral-strong / text-neutral-subtle
- *   link      → text-link
+ * Wired to Tokens Studio semantic tokens:
+ *   card       → background.surface + border.non-interactive.neutral.muted
+ *   accent bar → background.interactive.accent.emphasis.default
+ *   tag        → background.interactive.<tone>.muted.default
+ *                + text.on-muted.<tone> + border.non-interactive.<tone>.muted
+ *   title/body → text.primary / text.secondary
+ *   link       → text.interactive.link.default
  */
 export function CardPreview({ colors: c }: CardPreviewProps) {
   const cards = [
@@ -48,9 +49,9 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
         <div
           key={card.title}
           style={{
-            backgroundColor: c['bg-neutral-surface'],
+            backgroundColor: c['background.surface'],
             borderRadius: '8px',
-            border: `1px solid ${c['border-neutral-subtle']}`,
+            border: `1px solid ${c['border.non-interactive.neutral.muted']}`,
             overflow: 'hidden',
           }}
         >
@@ -58,23 +59,25 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
           <div
             style={{
               height: '3px',
-              backgroundColor: c['bg-accent-fill-emphasis-default'],
+              backgroundColor:
+                c['background.interactive.accent.emphasis.default'],
             }}
           />
 
           <div style={{ padding: '16px' }}>
-            {/* Tag — concept muted fill */}
+            {/* Tag — the tone's muted fill */}
             <span
               style={{
                 display: 'inline-block',
-                backgroundColor: c[`bg-${card.concept}-fill-muted-default`],
-                color: c[`text-${card.concept}-subtle`],
+                backgroundColor:
+                  c[`background.interactive.${card.concept}.muted.default`],
+                color: c[`text.on-muted.${card.concept}`],
                 fontSize: '10px',
                 fontWeight: 600,
                 padding: '2px 8px',
                 borderRadius: '4px',
                 marginBottom: '10px',
-                border: `1px solid ${c[`border-${card.concept}-subtle`]}`,
+                border: `1px solid ${c[`border.non-interactive.${card.concept}.muted`]}`,
               }}
             >
               {card.tag}
@@ -85,7 +88,7 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
               style={{
                 fontSize: '14px',
                 fontWeight: 700,
-                color: c['text-neutral-strong'],
+                color: c['text.primary'],
                 marginBottom: '6px',
                 lineHeight: 1.3,
               }}
@@ -97,7 +100,7 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
             <div
               style={{
                 fontSize: '12px',
-                color: c['text-neutral-subtle'],
+                color: c['text.secondary'],
                 lineHeight: 1.5,
                 marginBottom: '12px',
               }}
@@ -110,7 +113,7 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
               style={{
                 fontSize: '12px',
                 fontWeight: 600,
-                color: c['text-link'],
+                color: c['text.interactive.link.default'],
                 textDecoration: 'underline',
               }}
             >

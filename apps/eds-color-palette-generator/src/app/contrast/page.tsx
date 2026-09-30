@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { PALETTES } from '@/utils/palette'
+import { useColorScheme } from '@/context/ColorSchemeContext'
+import { tokensStudioPalettes } from '@/utils/semanticTokens'
 import {
   buildPatternGroups,
   buildStepData,
@@ -12,10 +13,16 @@ import {
 import { CombinedPatternView, SinglePaletteView } from '@/components/contrast'
 
 export default function ContrastPage() {
+  const { colorScheme } = useColorScheme()
   const [activePalette, setActivePalette] = useState(0)
   const [viewMode, setViewMode] = useState<ViewMode>('semantic')
 
-  const palette = PALETTES[activePalette]
+  // The seven Tokens Studio hues, generated for the current scheme
+  const palettes = useMemo(
+    () => tokensStudioPalettes(colorScheme),
+    [colorScheme],
+  )
+  const palette = palettes[activePalette] ?? palettes[0]
 
   const displayData = useMemo(() => {
     if (viewMode === 'combined') return []
@@ -34,11 +41,14 @@ export default function ContrastPage() {
 
   const patternGroups = useMemo(() => {
     if (viewMode !== 'combined') return []
-    return buildPatternGroups()
-  }, [viewMode])
+    return buildPatternGroups(colorScheme)
+  }, [viewMode, colorScheme])
 
   return (
-    <div className="min-h-screen" style={{ background: '#fafafa', color: '#111' }}>
+    <div
+      className="min-h-screen"
+      style={{ background: '#fafafa', color: '#111' }}
+    >
       {/* ---- Header ---- */}
       <header
         className="sticky top-0 z-10"
@@ -56,7 +66,7 @@ export default function ContrastPage() {
             {/* Palette selector — hidden in combined */}
             {viewMode !== 'combined' && (
               <div className="flex items-center gap-2">
-                {PALETTES.map((p, i) => (
+                {palettes.map((p, i) => (
                   <button
                     key={p.name}
                     type="button"

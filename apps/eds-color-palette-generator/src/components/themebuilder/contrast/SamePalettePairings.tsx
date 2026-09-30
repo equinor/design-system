@@ -1,38 +1,40 @@
 'use client'
 
 import { useState } from 'react'
-import { STEP_ROLES } from '@/utils/palette'
+import { stepLabel } from '@/config/config'
 import { ContrastCard } from './ContrastCard'
 import { StepSelect } from './StepSelect'
 
 type Palette = { name: string; steps: string[] }
 
+// 0-based step indices, one palette at a time, named after the Tokens Studio
+// roles each pair stands for.
 const DEFAULT_PAIRINGS = [
-  { fg: 11, bg: 0, label: 'Text on canvas' },
-  { fg: 11, bg: 1, label: 'Text on surface' },
-  { fg: 14, bg: 8, label: 'White on emphasis' },
-  { fg: 6, bg: 0, label: 'Border on canvas' },
+  { fg: 12, bg: 0, label: 'text.primary (13) on background.canvas (1)' },
+  { fg: 12, bg: 14, label: 'text.primary (13) on background.surface (15)' },
+  {
+    fg: 14,
+    bg: 8,
+    label: 'text.on-emphasis (15) on the emphasis default fill (9)',
+  },
+  {
+    fg: 6,
+    bg: 0,
+    label: 'border.non-interactive.default (7) on background.canvas (1)',
+  },
 ]
 
-export function SamePalettePairings({
-  palettes,
-}: {
-  palettes: Palette[]
-}) {
+export function SamePalettePairings({ palettes }: { palettes: Palette[] }) {
   const [pairings, setPairings] = useState(DEFAULT_PAIRINGS)
 
-  const update = (
-    idx: number,
-    field: 'fg' | 'bg',
-    value: number,
-  ) => {
+  const update = (idx: number, field: 'fg' | 'bg', value: number) => {
     setPairings((prev) =>
       prev.map((p, i) => (i === idx ? { ...p, [field]: value } : p)),
     )
   }
 
   const addPairing = () => {
-    setPairings((prev) => [...prev, { fg: 11, bg: 0, label: '' }])
+    setPairings((prev) => [...prev, { fg: 12, bg: 0, label: '' }])
   }
 
   const removePairing = (idx: number) => {
@@ -86,8 +88,8 @@ export function SamePalettePairings({
                 key={p.name}
                 fgHex={p.steps[fg]}
                 bgHex={p.steps[bg]}
-                fgLabel={STEP_ROLES[fg]}
-                bgLabel={STEP_ROLES[bg]}
+                fgLabel={stepLabel(fg + 1)}
+                bgLabel={stepLabel(bg + 1)}
                 paletteName={p.name}
               />
             ))}

@@ -20,9 +20,7 @@ function ContrastPair({
   return (
     <div className="flex items-center gap-2 text-[11px]">
       <span className="text-subtle">{label}</span>
-      <span className="font-mono font-semibold text-strong">
-        {result.wcag}
-      </span>
+      <span className="font-mono font-semibold text-strong">{result.wcag}</span>
       <Badge pass={result.aa} label="AA" />
       <Badge pass={result.aaa} label="AAA" />
     </div>
@@ -30,19 +28,21 @@ function ContrastPair({
 }
 
 export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
+  // 0-based step indices. Defaults follow the Tokens Studio roles:
+  // background.canvas (1) → background.surface (15)
+  // → background.non-interactive.<tone>.default (3) → background.surface (15),
+  // border.non-interactive.<tone>.muted (4) and text.primary (13).
   const [page, setPage] = useState(0)
-  const [panel, setPanel] = useState(1)
+  const [panel, setPanel] = useState(14)
   const [cardRow, setCardRow] = useState(2)
-  const [card, setCard] = useState(0)
-  const [border, setBorder] = useState(6)
-  const [text, setText] = useState(11)
+  const [card, setCard] = useState(14)
+  const [border, setBorder] = useState(3)
+  const [text, setText] = useState(12)
 
   return (
     <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
       <div>
-        <h2 className="text-base font-bold text-strong m-0">
-          Surface preview
-        </h2>
+        <h2 className="text-base font-bold text-strong m-0">Surface preview</h2>
         <p className="text-sm text-subtle m-0 mt-1">
           Visualize nested surface layers per palette — adjust roles to test
           combinations
@@ -51,21 +51,44 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
 
       {/* Dropdowns */}
       <div className="flex flex-wrap gap-x-4 gap-y-2">
-        <StepSelect label="Page" value={page} onChange={setPage} only={['bg/']} />
-        <StepSelect label="Panel" value={panel} onChange={setPanel} only={['bg/']} />
-        <StepSelect label="Card row" value={cardRow} onChange={setCardRow} only={['bg/']} />
-        <StepSelect label="Card" value={card} onChange={setCard} only={['bg/']} />
-        <StepSelect label="Border" value={border} onChange={setBorder} only={['border/']} />
-        <StepSelect label="Text" value={text} onChange={setText} only={['fg/']} />
+        <StepSelect
+          label="Page"
+          value={page}
+          onChange={setPage}
+          only="background"
+        />
+        <StepSelect
+          label="Panel"
+          value={panel}
+          onChange={setPanel}
+          only="background"
+        />
+        <StepSelect
+          label="Card row"
+          value={cardRow}
+          onChange={setCardRow}
+          only="background"
+        />
+        <StepSelect
+          label="Card"
+          value={card}
+          onChange={setCard}
+          only="background"
+        />
+        <StepSelect
+          label="Border"
+          value={border}
+          onChange={setBorder}
+          only="border"
+        />
+        <StepSelect label="Text" value={text} onChange={setText} only="text" />
       </div>
 
       {/* Per-palette preview */}
       <div className="flex flex-col gap-6">
         {palettes.map((p) => (
           <div key={p.name} className="flex flex-col gap-2">
-            <h3 className="text-xs font-semibold text-strong m-0">
-              {p.name}
-            </h3>
+            <h3 className="text-xs font-semibold text-strong m-0">{p.name}</h3>
 
             {/* Nested box layout */}
             <div

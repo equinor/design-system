@@ -1,7 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { STEP_ROLES, calcContrast } from '@/utils/palette'
+import { calcContrast } from '@/utils/palette'
+import { stepLabel } from '@/config/config'
+import { useColorScheme } from '@/context/ColorSchemeContext'
+import { paletteForTone } from '@/utils/semanticTokens'
 import { Badge } from '@/components/shared/Badge'
 import { CVDFilter, cvdFilterStyle } from '@/components/shared/CVDFilter'
 import { CVD_OPTIONS, type CVDType } from '@/utils/cvd'
@@ -37,15 +40,6 @@ function bestTextColor(bg: string): string {
   const onBlack = Math.abs(parseFloat(calcContrast('#000000', bg).apca))
   const onWhite = Math.abs(parseFloat(calcContrast('#ffffff', bg).apca))
   return onBlack >= onWhite ? '#000000' : '#ffffff'
-}
-
-function findGrayIndex(palettes: Palette[]) {
-  const idx = palettes.findIndex(
-    (p) =>
-      p.name.toLowerCase().includes('gray') ||
-      p.name.toLowerCase().includes('grey'),
-  )
-  return idx >= 0 ? idx : 0
 }
 
 /** Monochromatic ordering following PatternFly: base(300→step8), 100, 500, 200, 400 */
@@ -143,7 +137,7 @@ function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
             style={{ height: '100%', justifyContent: 'flex-end' }}
           >
             {colors.map((pc, ci) => {
-              const val = (20 + ((gi * 13 + ci * 17) % 30))
+              const val = 20 + ((gi * 13 + ci * 17) % 30)
               return (
                 <div
                   key={pc.name}
@@ -179,7 +173,10 @@ function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
 }
 
 function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
-  const total = DONUT_SEGMENTS.slice(0, colors.length).reduce((a, b) => a + b, 0)
+  const total = DONUT_SEGMENTS.slice(0, colors.length).reduce(
+    (a, b) => a + b,
+    0,
+  )
   const pcts = colors.map(
     (_, i) => (DONUT_SEGMENTS[i % DONUT_SEGMENTS.length] / total) * 100,
   )
@@ -259,7 +256,9 @@ function Marker({
 }) {
   const s = 3
   if (shape === 'square')
-    return <rect x={cx - s} y={cy - s} width={s * 2} height={s * 2} fill={color} />
+    return (
+      <rect x={cx - s} y={cy - s} width={s * 2} height={s * 2} fill={color} />
+    )
   if (shape === 'triangle')
     return (
       <polygon
@@ -282,8 +281,7 @@ function LineChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   const w = 280
   const h = 120
   const px = (i: number) => (i / (points.length - 1)) * w
-  const py = (v: number, offset: number) =>
-    h - ((v + offset) / 100) * h
+  const py = (v: number, offset: number) => h - ((v + offset) / 100) * h
 
   return (
     <div className="rounded-lg p-4" style={{ backgroundColor: bgHex }}>
@@ -394,7 +392,7 @@ function Legend({ colors, bgHex }: { colors: ChartColor[]; bgHex: string }) {
               <>
                 {' '}
                 <span className="font-mono text-[10px]">
-                  ({STEP_ROLES[pc.step]})
+                  ({stepLabel(pc.step + 1)})
                 </span>
               </>
             )}
@@ -432,8 +430,10 @@ export function DataColorChart({
   textHex: externalText,
   pairwiseCheck = true,
 }: DataColorChartProps) {
+  const { colorScheme } = useColorScheme()
+  // 0-based: step 1 (background.canvas) and step 13 (text.primary)
   const [bgStep, setBgStep] = useState(0)
-  const [textStep, setTextStep] = useState(11)
+  const [textStep, setTextStep] = useState(12)
   const [chartType, setChartType] = useState<ChartType>('bar')
   const [mono, setMono] = useState(false)
   const [monoPaletteIdx, setMonoPaletteIdx] = useState(0)
@@ -444,20 +444,19 @@ export function DataColorChart({
   // the passed colours and hides the palette-only controls.
   const paletteMode = !externalColors
   const safePalettes = useMemo(() => palettes ?? [], [palettes])
-  const neutralIdx = findGrayIndex(safePalettes)
-  const paletteBg = safePalettes.length
-    ? safePalettes[neutralIdx].steps[bgStep]
-    : '#ffffff'
-  const paletteText = safePalettes.length
-    ? safePalettes[neutralIdx].steps[textStep]
-    : '#1a1a1a'
+  // The neutral palette follows Tokens Studio (Gray in light, North Sea in
+  // dark), falling back to the Tokens Studio default when there is none.
+  const neutral = paletteForTone(safePalettes, 'neutral', colorScheme)
+  const paletteBg = neutral.steps[bgStep]
+  const paletteText = neutral.steps[textStep]
   const bgHex = externalBg ?? paletteBg
   const textHex = externalText ?? paletteText
 
   /**
    * Multi-chromatic with lightness spread: each palette uses a different step
    * so colors are distinguishable by lightness alone (achromatopsia-friendly).
-   * Center step is 8 (fill/emphasis), then spreads ±1 per palette.
+   * Centred on step 9 (index 8, background.interactive.<tone>.emphasis.default),
+   * then spreads ±1 per palette.
    */
   const multiColors = useMemo<ChartColor[]>(() => {
     const center = 8
@@ -560,13 +559,13 @@ export function DataColorChart({
               label="Chart bg"
               value={bgStep}
               onChange={setBgStep}
-              only={['bg/']}
+              only="background"
             />
             <StepSelect
               label="Text"
               value={textStep}
               onChange={setTextStep}
-              only={['fg/']}
+              only="text"
             />
           </>
         )}
@@ -696,7 +695,10 @@ export function DataColorChart({
                 <tr>
                   <th />
                   {colors.map((pc) => (
-                    <th key={pc.name} className="px-2 py-1 font-medium text-subtle">
+                    <th
+                      key={pc.name}
+                      className="px-2 py-1 font-medium text-subtle"
+                    >
                       <div className="flex items-center gap-1">
                         <span
                           className="inline-block rounded-sm"

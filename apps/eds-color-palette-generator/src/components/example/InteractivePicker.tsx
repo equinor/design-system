@@ -1,21 +1,34 @@
 'use client'
 
 import { useState } from 'react'
-import { STEP_ROLES, roleIndex, type StepRole, type TokenPalette } from '@/utils/palette'
+import {
+  PALETTE_STEPS,
+  stepLabel,
+  stepRolesText,
+  stepsWithRole,
+} from '@/config/config'
+import type { TokenPalette } from '@/utils/palette'
 import { PairingCard } from './PairingCard'
 
-const FG_ROLES = STEP_ROLES.filter(
-  (r) => r.startsWith('text-') || r.startsWith('border-'),
-)
-const BG_ROLES = STEP_ROLES.filter((r) => r.startsWith('bg-'))
+// Steps some Tokens Studio text, icon or border role uses, and steps some
+// background role uses (1-based)
+const FG_STEPS = PALETTE_STEPS.filter((step) =>
+  [...stepsWithRole('text'), ...stepsWithRole('border')].includes(step),
+).map((step) => step.step)
+const BG_STEPS = stepsWithRole('background').map((step) => step.step)
+
+/** Preview a step as a border when its main Tokens Studio role is a border. */
+const previewType = (step: number): 'text' | 'border' =>
+  PALETTE_STEPS[step - 1]?.category === 'border' ? 'border' : 'text'
 
 export function InteractivePicker({
   allPalettes,
 }: {
   allPalettes: TokenPalette[]
 }) {
-  const [fgRole, setFgRole] = useState<StepRole>('12 · fg/strong')
-  const [bgRole, setBgRole] = useState<StepRole>('1 · bg/canvas')
+  // text.primary (13) on background.canvas (1)
+  const [fgStep, setFgStep] = useState(13)
+  const [bgStep, setBgStep] = useState(1)
 
   return (
     <section style={{ marginTop: '48px' }}>
@@ -44,11 +57,16 @@ export function InteractivePicker({
             borderBottom: '1px solid #f3f4f6',
           }}
         >
-          <label className="flex items-center gap-2" style={{ fontSize: '13px' }}>
-            <span style={{ color: '#6b7280', fontWeight: 500 }}>Foreground</span>
+          <label
+            className="flex items-center gap-2"
+            style={{ fontSize: '13px' }}
+          >
+            <span style={{ color: '#6b7280', fontWeight: 500 }}>
+              Foreground
+            </span>
             <select
-              value={fgRole}
-              onChange={(e) => setFgRole(e.target.value as StepRole)}
+              value={fgStep}
+              onChange={(e) => setFgStep(Number(e.target.value))}
               style={{
                 padding: '6px 10px',
                 fontSize: '13px',
@@ -58,9 +76,9 @@ export function InteractivePicker({
                 fontFamily: 'var(--font-geist-mono, monospace)',
               }}
             >
-              {FG_ROLES.map((r) => (
-                <option key={r} value={r}>
-                  {r}
+              {FG_STEPS.map((step) => (
+                <option key={step} value={step} title={stepRolesText(step)}>
+                  {stepLabel(step)}
                 </option>
               ))}
             </select>
@@ -68,11 +86,16 @@ export function InteractivePicker({
 
           <span style={{ color: '#d1d5db', fontSize: '18px' }}>on</span>
 
-          <label className="flex items-center gap-2" style={{ fontSize: '13px' }}>
-            <span style={{ color: '#6b7280', fontWeight: 500 }}>Background</span>
+          <label
+            className="flex items-center gap-2"
+            style={{ fontSize: '13px' }}
+          >
+            <span style={{ color: '#6b7280', fontWeight: 500 }}>
+              Background
+            </span>
             <select
-              value={bgRole}
-              onChange={(e) => setBgRole(e.target.value as StepRole)}
+              value={bgStep}
+              onChange={(e) => setBgStep(Number(e.target.value))}
               style={{
                 padding: '6px 10px',
                 fontSize: '13px',
@@ -82,9 +105,9 @@ export function InteractivePicker({
                 fontFamily: 'var(--font-geist-mono, monospace)',
               }}
             >
-              {BG_ROLES.map((r) => (
-                <option key={r} value={r}>
-                  {r}
+              {BG_STEPS.map((step) => (
+                <option key={step} value={step} title={stepRolesText(step)}>
+                  {stepLabel(step)}
                 </option>
               ))}
             </select>
@@ -101,8 +124,8 @@ export function InteractivePicker({
           }}
         >
           {allPalettes.map((pal, i) => {
-            const fgHex = pal.steps[roleIndex(fgRole)]
-            const bgHex = pal.steps[roleIndex(bgRole)]
+            const fgHex = pal.steps[fgStep - 1]
+            const bgHex = pal.steps[bgStep - 1]
 
             return (
               <div
@@ -120,11 +143,11 @@ export function InteractivePicker({
                   {pal.name}
                 </div>
                 <PairingCard
-                  fgRole={fgRole}
-                  bgRole={bgRole}
+                  fgRole={stepLabel(fgStep)}
+                  bgRole={stepLabel(bgStep)}
                   fgHex={fgHex}
                   bgHex={bgHex}
-                  type={fgRole.startsWith('border-') ? 'border' : 'text'}
+                  type={previewType(fgStep)}
                 />
               </div>
             )

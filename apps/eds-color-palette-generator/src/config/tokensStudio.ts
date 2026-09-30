@@ -12,6 +12,8 @@
  */
 import paletteJson from '../../../../packages/eds-tokens/src/tokens/raw/input/palette.json'
 import scaleJson from '../../../../packages/eds-tokens/src/tokens/raw/input/scale.json'
+import colorLightJson from '../../../../packages/eds-tokens/src/tokens/raw/color/light.json'
+import colorDarkJson from '../../../../packages/eds-tokens/src/tokens/raw/color/dark.json'
 import schemeLightJson from '../../../../packages/eds-tokens/src/tokens/raw/scheme/light.json'
 import schemeDarkJson from '../../../../packages/eds-tokens/src/tokens/raw/scheme/dark.json'
 import semanticJson from '../../../../packages/eds-tokens/src/tokens/raw/semantic.json'
@@ -183,6 +185,32 @@ export const TS_HUES: TsHue[] = hueKeys
   .sort(
     (a, b) => toneOrder(a.key) - toneOrder(b.key) || a.key.localeCompare(b.key),
   )
+
+/* ------------------------------------------------------------------ */
+/*  Data visualisation (color/light, color/dark)                       */
+/* ------------------------------------------------------------------ */
+
+function datavizValues(
+  colorJson: unknown,
+  scheme: Scheme,
+): Record<string, string> {
+  const tree = subtree(colorJson as TokenTree, [scheme, 'dataviz'])
+  return Object.fromEntries(
+    flatten(tree, ['dataviz']).map(([path, leaf]) => [
+      path,
+      String(leaf.$value),
+    ]),
+  )
+}
+
+/**
+ * The hand-picked data visualisation colours, keyed `dataviz.cat.1.1`. They
+ * sit outside the OKLCH generator in Tokens Studio (ADR 0016, Unresolved).
+ */
+export const TS_DATAVIZ: Record<Scheme, Record<string, string>> = {
+  light: datavizValues(colorLightJson, 'light'),
+  dark: datavizValues(colorDarkJson, 'dark'),
+}
 
 /* ------------------------------------------------------------------ */
 /*  Semantic layer (semantic.json)                                     */

@@ -52,25 +52,33 @@ export function AboutContrastRequirements() {
         <h3 className="mb-2 font-semibold">Key insights</h3>
         <ul className="space-y-1 list-disc list-inside text-neutral-subtle">
           <li>
-            <strong>Background steps</strong> (Canvas, Surface) need minimal
-            contrast between each other but high contrast with text elements
+            <strong>Text and icons</strong> are measured against{' '}
+            <code>background.surface</code> (neutral step 15): Lc 90 for{' '}
+            <code>text.primary</code> (step 13), and Lc 60 for{' '}
+            <code>text.secondary</code> (step 8) and interactive icons (steps
+            11–13)
           </li>
           <li>
-            <strong>Fill elements</strong> have progressive contrast
-            requirements based on emphasis level (muted vs. emphasis)
+            <strong>Text on emphasis fills</strong>,{' '}
+            <code>text.on-emphasis.&lt;tone&gt;</code> (step 15), is measured
+            against the tone&apos;s default emphasis fill,{' '}
+            <code>background.interactive.&lt;tone&gt;.emphasis.default</code>{' '}
+            (step 9), at Lc 60
           </li>
           <li>
-            <strong>Border steps</strong> maintain visual hierarchy through
-            three levels (subtle, medium, strong)
+            <strong>Fills</strong> step through default, hover and pressed by
+            lightness: the muted fills at steps 1–3 and the emphasis fills at
+            steps 9–11
           </li>
           <li>
-            <strong>Text elements</strong> have the strictest requirements —
-            different levels for subtle text, strong text, and text on emphasis
-            backgrounds
+            <strong>Borders</strong>,{' '}
+            <code>border.non-interactive.&lt;tone&gt;</code> muted, default and
+            emphasis (steps 4, 7 and 9), have no contrast requirement in ADR
+            0016
           </li>
           <li>
-            <strong>Interactive states</strong> (default, hover, active) are
-            differentiated through lightness and contrast requirements
+            <strong>Steps 6 and 14</strong> have no semantic role in Tokens
+            Studio
           </li>
         </ul>
       </div>

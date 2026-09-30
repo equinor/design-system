@@ -1,19 +1,22 @@
 'use client'
 
 import { useId } from 'react'
-import type { SemanticColors } from '@/config/semanticColors'
+import type { SemanticColors } from '@/utils/semanticTokens'
 
 type LoginFormPreviewProps = {
   colors: SemanticColors
 }
 
 /**
- * Wired to canonical EDS semantic tokens (Figma Color Map):
- *   card       → bg-neutral-surface + border-neutral-subtle
- *   input      → bg-neutral-canvas + border-neutral-{subtle,medium}, focus border-focus
- *   text       → text-neutral-{strong,subtle}
- *   link       → text-link
- *   button     → bg-accent-fill-emphasis-{default,hover,active} + text-accent-strong-on-emphasis
+ * Wired to Tokens Studio semantic tokens:
+ *   card   → background.surface + border.non-interactive.neutral.muted
+ *   input  → background.input
+ *            + border.interactive.neutral.muted.{default,hover},
+ *            focus border.interactive.focus
+ *   text   → text.primary / text.secondary
+ *   link   → text.interactive.link.default
+ *   button → background.interactive.accent.emphasis.{default,hover,pressed}
+ *            + text.on-emphasis.accent
  */
 export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
   const uid = useId().replace(/:/g, '')
@@ -23,21 +26,21 @@ export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
       data-lf={uid}
       style={
         {
-          backgroundColor: c['bg-neutral-surface'],
+          backgroundColor: c['background.surface'],
           borderRadius: '8px',
           padding: '28px',
-          border: `1px solid ${c['border-neutral-subtle']}`,
+          border: `1px solid ${c['border.non-interactive.neutral.muted']}`,
           maxWidth: '420px',
-          '--_bg-input': c['bg-neutral-canvas'],
-          '--_border': c['border-neutral-subtle'],
-          '--_border-hover': c['border-neutral-medium'],
-          '--_border-focus': c['border-focus'],
-          '--_text': c['text-neutral-strong'],
-          '--_placeholder': c['text-neutral-subtle'],
-          '--_btn-bg': c['bg-accent-fill-emphasis-default'],
-          '--_btn-hover': c['bg-accent-fill-emphasis-hover'],
-          '--_btn-pressed': c['bg-accent-fill-emphasis-active'],
-          '--_btn-text': c['text-accent-strong-on-emphasis'],
+          '--_bg-input': c['background.input'],
+          '--_border': c['border.interactive.neutral.muted.default'],
+          '--_border-hover': c['border.interactive.neutral.muted.hover'],
+          '--_border-focus': c['border.interactive.focus'],
+          '--_text': c['text.primary'],
+          '--_placeholder': c['text.secondary'],
+          '--_btn-bg': c['background.interactive.accent.emphasis.default'],
+          '--_btn-hover': c['background.interactive.accent.emphasis.hover'],
+          '--_btn-pressed': c['background.interactive.accent.emphasis.pressed'],
+          '--_btn-text': c['text.on-emphasis.accent'],
         } as React.CSSProperties
       }
     >
@@ -97,7 +100,7 @@ export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
         style={{
           fontSize: '18px',
           fontWeight: 700,
-          color: c['text-neutral-strong'],
+          color: c['text.primary'],
           marginBottom: '4px',
         }}
       >
@@ -106,7 +109,7 @@ export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
       <div
         style={{
           fontSize: '13px',
-          color: c['text-neutral-subtle'],
+          color: c['text.secondary'],
           marginBottom: '24px',
         }}
       >
@@ -118,7 +121,7 @@ export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
           display: 'block',
           fontSize: '12px',
           fontWeight: 500,
-          color: c['text-neutral-strong'],
+          color: c['text.primary'],
           marginBottom: '4px',
         }}
       >
@@ -135,7 +138,7 @@ export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
           display: 'block',
           fontSize: '12px',
           fontWeight: 500,
-          color: c['text-neutral-strong'],
+          color: c['text.primary'],
           marginBottom: '4px',
         }}
       >
@@ -151,7 +154,7 @@ export function LoginFormPreview({ colors: c }: LoginFormPreviewProps) {
         data-link=""
         style={{
           fontSize: '12px',
-          color: c['text-link'],
+          color: c['text.interactive.link.default'],
           marginBottom: '20px',
           textDecoration: 'underline',
         }}

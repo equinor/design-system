@@ -2,8 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { contrast } from '@/utils/color'
-import { STEP_ROLES } from '@/utils/palette'
-import { STEP_TOKENS, TOKEN_CATEGORY_GROUPS } from '@/config/categories'
+import {
+  PALETTE_STEPS,
+  categoryLabel,
+  stepCategoryRuns,
+  stepLabel,
+  stepRolesText,
+} from '@/config/config'
 
 type GeneratedPalette = {
   name: string
@@ -13,6 +18,9 @@ type GeneratedPalette = {
 type TokenMatrixProps = {
   palettes: GeneratedPalette[]
 }
+
+// Grouped header runs, e.g. Background (1–3), Border (4), …
+const CATEGORY_RUNS = stepCategoryRuns()
 
 function getTextColor(bgHex: string): string {
   const whiteContrast = parseFloat(
@@ -40,24 +48,25 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(100px, auto) repeat(15, minmax(58px, 1fr))',
+            gridTemplateColumns:
+              'minmax(100px, auto) repeat(15, minmax(58px, 1fr))',
             gap: '2px',
           }}
         >
           {/* Spacer for row label column */}
           <div />
-          {TOKEN_CATEGORY_GROUPS.map((group) => (
+          {CATEGORY_RUNS.map((run, i) => (
             <div
-              key={group.label}
+              key={`${run.category}-${i}`}
               className="text-center text-subtle"
               style={{
-                gridColumn: `span ${group.span}`,
+                gridColumn: `span ${run.span}`,
                 paddingBottom: '4px',
                 fontSize: '10px',
                 whiteSpace: 'nowrap',
               }}
             >
-              {group.label}
+              {categoryLabel(run.category)}
               <div
                 className="border-t border-neutral-subtle"
                 style={{ marginTop: '2px' }}
@@ -65,22 +74,21 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
             </div>
           ))}
 
-          {/* Token name + step number headers */}
+          {/* Step number + label headers */}
           <div />
-          {STEP_TOKENS.map((token, i) => (
+          {PALETTE_STEPS.map((step) => (
             <div
-              key={`${token.name}-${token.sub ?? ''}-${i}`}
+              key={step.id}
               className="text-center text-subtle"
               style={{
                 fontSize: '8px',
                 lineHeight: 1.2,
                 paddingBottom: '4px',
               }}
-              title={`Step ${i + 1} · ${STEP_ROLES[i]}`}
+              title={`Step ${step.step}: ${stepRolesText(step.step)}`}
             >
-              <div style={{ fontWeight: 600 }}>{token.name}</div>
-              {token.sub ? <div>{token.sub}</div> : null}
-              <div style={{ opacity: 0.5 }}>{i + 1}</div>
+              <div style={{ fontWeight: 600 }}>{step.label}</div>
+              <div style={{ opacity: 0.5 }}>{step.step}</div>
             </div>
           ))}
 
@@ -156,8 +164,8 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
               whiteSpace: 'nowrap',
               cursor: 'pointer',
             }}
-            title={`${i + 1}. ${STEP_ROLES[i]}: ${hex} — click to copy`}
-            aria-label={`Copy ${palette.name} step ${i + 1} (${STEP_ROLES[i]}): ${hex}`}
+            title={`${stepLabel(i + 1)}: ${hex} — click to copy`}
+            aria-label={`Copy ${palette.name} step ${stepLabel(i + 1)}: ${hex}`}
           >
             {isCopied ? 'Copied!' : hex}
           </button>

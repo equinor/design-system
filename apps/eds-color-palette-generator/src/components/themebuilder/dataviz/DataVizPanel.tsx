@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { useColorScheme } from '@/context/ColorSchemeContext'
-import { getSemanticColors } from '@/config/semanticColors'
+import { resolveToken, toneRamps } from '@/utils/semanticTokens'
 import {
   generateCategoricalPalette,
   generateSequentialScale,
@@ -78,9 +78,11 @@ export function DataVizPanel() {
     [kind, colors, count],
   )
 
-  const semantic = getSemanticColors(mode)
-  const chartBg = semantic['bg-neutral-surface']
-  const chartText = semantic['text-neutral-strong']
+  // The chart sits on background.surface with text.primary labels, resolved
+  // from the Tokens Studio palettes for the current scheme.
+  const ramps = toneRamps(mode)
+  const chartBg = resolveToken('background.surface', ramps, mode)
+  const chartText = resolveToken('text.primary', ramps, mode)
 
   const hint = DATAVIZ_HINTS[kind]
 
@@ -233,12 +235,18 @@ export function DataVizPanel() {
           <div className="flex flex-wrap items-center gap-3 text-[11px]">
             <span className="flex items-center gap-1.5 text-subtle">
               Distinctness (ΔE {audit.minDeltaE.toFixed(3)})
-              <Badge pass={audit.passesDeltaE} label={audit.passesDeltaE ? 'OK' : 'LOW'} />
+              <Badge
+                pass={audit.passesDeltaE}
+                label={audit.passesDeltaE ? 'OK' : 'LOW'}
+              />
             </span>
             {audit.cvd.map((s) => {
               const floor = categoricalCfg.minDeltaE * 0.6
               return (
-                <span key={s.type} className="flex items-center gap-1.5 text-subtle">
+                <span
+                  key={s.type}
+                  className="flex items-center gap-1.5 text-subtle"
+                >
                   {s.type} (ΔE {s.minDeltaE.toFixed(3)})
                   <Badge
                     pass={s.minDeltaE >= floor}

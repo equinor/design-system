@@ -118,6 +118,45 @@ export const PALETTE_STEPS: StepDefinition[] = Array.from(
 export const stepLabel = (step: number) =>
   `${step} · ${PALETTE_STEPS[step - 1]?.label ?? ''}`
 
+/** `background` → `Background`, for grouped step headers. */
+export const categoryLabel = (category: StepCategory) =>
+  category.charAt(0).toUpperCase() + category.slice(1)
+
+/**
+ * A step's Tokens Studio roles for tooltips, or "no semantic role" for the
+ * steps no semantic token references (6 and 14).
+ */
+export function stepRolesText(step: number): string {
+  const roles = PALETTE_STEPS[step - 1]?.roles ?? []
+  return roles.length > 0 ? roles.join(', ') : 'no semantic role'
+}
+
+/** Runs of consecutive steps with the same category, for grouped headers. */
+export function stepCategoryRuns(): { category: StepCategory; span: number }[] {
+  return PALETTE_STEPS.reduce<{ category: StepCategory; span: number }[]>(
+    (runs, step) => {
+      const last = runs[runs.length - 1]
+      if (last && last.category === step.category) last.span += 1
+      else runs.push({ category: step.category, span: 1 })
+      return runs
+    },
+    [],
+  )
+}
+
+/**
+ * Steps that some Tokens Studio role of the given group uses, for example
+ * every step a `text.*` or `icon.*` token points at.
+ */
+export function stepsWithRole(
+  group: 'background' | 'border' | 'text',
+): StepDefinition[] {
+  const prefixes = group === 'text' ? ['text.', 'icon.'] : [`${group}.`]
+  return PALETTE_STEPS.filter((step) =>
+    step.roles.some((role) => prefixes.some((p) => role.startsWith(p))),
+  )
+}
+
 export const lightnessValuesInLightMode =
   getLightnessValues('light')(PALETTE_STEPS)
 export const darknessValuesInDarkMode =

@@ -2,17 +2,19 @@
 
 import Color from 'colorjs.io'
 import { contrast } from '@/utils/color'
-import { STEP_ROLES, type TokenPalette } from '@/utils/palette'
+import {
+  PALETTE_STEPS,
+  categoryLabel,
+  stepCategoryRuns,
+  stepLabel,
+  stepRolesText,
+} from '@/config/config'
+import type { TokenPalette } from '@/utils/palette'
 
 export type PaletteViewMode = 'curve' | 'gradient'
 
-const CATEGORY_GROUPS = [
-  { label: 'Background', span: 2 },
-  { label: 'Background Fill Muted', span: 3 },
-  { label: 'Border', span: 3 },
-  { label: 'Background Fill Emphasis', span: 3 },
-  { label: 'Text', span: 4 },
-] as const
+// Grouped header runs, e.g. Background (1–3), Border (4), …
+const CATEGORY_RUNS = stepCategoryRuns()
 
 function getLightness(hex: string): number {
   try {
@@ -124,17 +126,17 @@ export function PaletteCard({
         >
           {/* Category group headers (curve mode only) */}
           {viewMode === 'curve' &&
-            CATEGORY_GROUPS.map((group) => (
+            CATEGORY_RUNS.map((run, i) => (
               <div
-                key={group.label}
+                key={`${run.category}-${i}`}
                 className="text-center"
                 style={{
-                  gridColumn: `span ${group.span}`,
+                  gridColumn: `span ${run.span}`,
                   paddingBottom: '6px',
                 }}
               >
                 <span style={{ fontSize: '10px', color: '#6b7280' }}>
-                  {group.label}
+                  {categoryLabel(run.category)}
                 </span>
                 <div
                   style={{
@@ -162,7 +164,7 @@ export function PaletteCard({
                       ? '0 10px 10px 0'
                       : undefined,
               }}
-              title={`${origIdx + 1}. ${STEP_ROLES[origIdx]}: ${hex}`}
+              title={`${stepLabel(origIdx + 1)}: ${hex}\n${stepRolesText(origIdx + 1)}`}
             >
               <span
                 className="font-bold"
@@ -200,7 +202,7 @@ export function PaletteCard({
               }}
             >
               <strong style={{ color: '#374151' }}>{origIdx + 1}</strong>{' '}
-              {STEP_ROLES[origIdx]}
+              {PALETTE_STEPS[origIdx]?.label}
             </label>
             <div className="flex items-center gap-1">
               <span

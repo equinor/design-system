@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { STEP_ROLES, type TokenPalette } from '@/utils/palette'
+import type { TokenPalette } from '@/utils/palette'
 import {
-  BORDER_ROLES,
+  BORDER_STEPS,
   DEFAULT_SURFACE,
   RECOMMENDED,
-  SURFACE_ROLES,
+  SURFACE_STEPS,
+  TEXT_STEPS,
   SurfacePreview,
   SurfaceSelect,
   type SurfaceConfig,
@@ -51,42 +52,42 @@ export function SurfacePreviewSection({
             label="Page"
             value={surfaceConfig.page}
             onChange={(v) => setSurfaceConfig((c) => ({ ...c, page: v }))}
-            options={SURFACE_ROLES}
+            options={SURFACE_STEPS}
             recommended={RECOMMENDED.page}
           />
           <SurfaceSelect
             label="Panel"
             value={surfaceConfig.panel}
             onChange={(v) => setSurfaceConfig((c) => ({ ...c, panel: v }))}
-            options={SURFACE_ROLES}
+            options={SURFACE_STEPS}
             recommended={RECOMMENDED.panel}
           />
           <SurfaceSelect
             label="Card row"
             value={surfaceConfig.cardRow}
             onChange={(v) => setSurfaceConfig((c) => ({ ...c, cardRow: v }))}
-            options={SURFACE_ROLES}
+            options={SURFACE_STEPS}
             recommended={RECOMMENDED.cardRow}
           />
           <SurfaceSelect
             label="Card"
             value={surfaceConfig.card}
             onChange={(v) => setSurfaceConfig((c) => ({ ...c, card: v }))}
-            options={SURFACE_ROLES}
+            options={SURFACE_STEPS}
             recommended={RECOMMENDED.card}
           />
           <SurfaceSelect
             label="Border"
             value={surfaceConfig.border}
             onChange={(v) => setSurfaceConfig((c) => ({ ...c, border: v }))}
-            options={BORDER_ROLES}
+            options={BORDER_STEPS}
             recommended={RECOMMENDED.border}
           />
           <SurfaceSelect
             label="Text"
             value={surfaceConfig.text}
             onChange={(v) => setSurfaceConfig((c) => ({ ...c, text: v }))}
-            options={STEP_ROLES.filter((r) => r.startsWith('text-'))}
+            options={TEXT_STEPS}
             recommended={RECOMMENDED.text}
           />
           <button

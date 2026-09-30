@@ -8,26 +8,31 @@ export function AboutHowItWorks() {
             1. Define lightness values
           </h3>
           <p className="mb-4 text-neutral-subtle">
-            Each colour scale step has a predefined lightness value chosen to
-            meet contrast requirements:
+            Each colour scale step has a predefined lightness value, set in
+            Tokens Studio, chosen for the semantic roles that use the step:
           </p>
           <ul className="space-y-2 text-sm list-disc list-inside">
             <li>
-              <strong>Background colours:</strong> High lightness in light mode
-              (0.97–0.999), low in dark mode (0.15–0.25)
+              <strong>Backgrounds:</strong> the muted fills at steps 1–3, with{' '}
+              <code>background.canvas</code> at neutral step 1 and{' '}
+              <code>background.surface</code> at neutral step 15
             </li>
             <li>
-              <strong>Border colours:</strong> Mid-range values for subtle to
-              strong emphasis
+              <strong>Borders:</strong>{' '}
+              <code>border.non-interactive.&lt;tone&gt;</code> muted, default
+              and emphasis at steps 4, 7 and 9
             </li>
             <li>
-              <strong>Fill colours:</strong> Values optimised for interactive
-              elements
+              <strong>Emphasis fills:</strong> steps 9–11 for interactive
+              elements in their default, hover and pressed states
             </li>
             <li>
-              <strong>Text colours:</strong> Values ensuring{' '}
-              <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>{' '}
-              AA/AAA compliance
+              <strong>Text:</strong> <code>text.primary</code> at step 13,{' '}
+              <code>text.secondary</code> at step 8, <code>text.tertiary</code>{' '}
+              at step 7 and <code>text.on-emphasis.&lt;tone&gt;</code> at step
+              15, chosen to meet the{' '}
+              <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>{' '}
+              targets
             </li>
           </ul>
           <p className="mt-4 text-sm text-neutral-subtle">
@@ -87,31 +92,33 @@ export function AboutHowItWorks() {
         </div>
 
         <div className="p-6 rounded-lg bg-surface">
-          <h3 className="mb-3 text-xl font-semibold">4. Generate colour scale</h3>
+          <h3 className="mb-3 text-xl font-semibold">
+            4. Generate colour scale
+          </h3>
           <p className="mb-4 text-neutral-subtle">For each step:</p>
           <ol className="space-y-2 text-sm list-decimal list-inside">
             <li>Convert the base colour(s) to OKLCH colour space</li>
             <li>Set the lightness to the predefined value for that step</li>
             <li>
-              If using multiple anchors, interpolate between them to get the base
-              colour for this step
+              If using multiple anchors, interpolate between them to get the
+              base colour for this step
             </li>
             <li>
               Calculate the chroma multiplier using the Gaussian function with
               the step&apos;s lightness
             </li>
             <li>
-              Apply the multiplier to the base colour&apos;s chroma: new_chroma =
-              base_chroma × multiplier
+              Apply the multiplier to the base colour&apos;s chroma: new_chroma
+              = base_chroma × multiplier
             </li>
             <li>
-              For single value: Keep the hue unchanged. For multiple anchors: Hue
-              shifts naturally through interpolation
+              For single value: Keep the hue unchanged. For multiple anchors:
+              Hue shifts naturally through interpolation
             </li>
           </ol>
           <p className="mt-4 text-sm text-neutral-subtle">
-            This ensures colours maintain visual harmony while adapting intensity
-            to suit different lightness levels.
+            This ensures colours maintain visual harmony while adapting
+            intensity to suit different lightness levels.
           </p>
         </div>
 
@@ -274,8 +281,8 @@ export function AboutHowItWorks() {
                 </div>
               </div>
               <p className="mb-3 text-xs text-neutral-subtle">
-                Colours smoothly interpolate between anchors in OKLCH space, with
-                Gaussian chroma distribution applied:
+                Colours smoothly interpolate between anchors in OKLCH space,
+                with Gaussian chroma distribution applied:
               </p>
               <div className="flex gap-1">
                 <div

@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { PALETTES } from '@/utils/palette'
+import { useColorScheme } from '@/context/ColorSchemeContext'
+import { tokensStudioPalettes } from '@/utils/semanticTokens'
 import {
   refreshCustomPalettes,
   useCustomPalettes,
@@ -14,18 +15,24 @@ import {
 } from '@/components/example'
 
 export default function ExamplePage() {
+  const { colorScheme } = useColorScheme()
   const [activePalette, setActivePalette] = useState(0)
   const customPalettes = useCustomPalettes()
 
+  // The seven Tokens Studio hues for the current scheme, then the palettes
+  // saved in the Palette Editor
   const allPalettes = useMemo(
-    () => [...PALETTES, ...customPalettes],
-    [customPalettes],
+    () => [...tokensStudioPalettes(colorScheme), ...customPalettes],
+    [colorScheme, customPalettes],
   )
 
   const palette = allPalettes[activePalette] ?? allPalettes[0]
 
   return (
-    <div className="min-h-screen" style={{ background: '#fafafa', color: '#111' }}>
+    <div
+      className="min-h-screen"
+      style={{ background: '#fafafa', color: '#111' }}
+    >
       {/* ---- Header ---- */}
       <header
         className="sticky top-0 z-10"

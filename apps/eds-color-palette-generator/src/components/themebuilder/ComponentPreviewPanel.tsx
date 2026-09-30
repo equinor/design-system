@@ -6,7 +6,13 @@ import { DataTablePreview } from './DataTablePreview'
 import { CardPreview } from './CardPreview'
 import { ButtonPreview } from './ButtonPreview'
 import { useColorScheme } from '@/context/ColorSchemeContext'
-import { getSemanticColors } from '@/config/semanticColors'
+import type { Scheme } from '@/config/tokensStudio'
+import {
+  findPaletteForTone,
+  paletteForTone,
+  resolveSemanticColors,
+  toneRamps,
+} from '@/utils/semanticTokens'
 
 type GeneratedPalette = {
   name: string
@@ -17,46 +23,56 @@ type ComponentPreviewPanelProps = {
   palettes: GeneratedPalette[]
 }
 
-// Gray is always the neutral — find it by name
-function findNeutralIndex(palettes: GeneratedPalette[]): number {
-  const grayIdx = palettes.findIndex(
-    (p) =>
-      p.name.toLowerCase().includes('gray') ||
-      p.name.toLowerCase().includes('grey'),
-  )
-  return grayIdx >= 0 ? grayIdx : 0
-}
-
-// Default accent: first non-gray palette, else the neutral itself
-function defaultAccentIndex(palettes: GeneratedPalette[]): number {
-  if (palettes.length === 0) return 0
-  const neutralIdx = findNeutralIndex(palettes)
-  const firstNonNeutral = palettes.findIndex((_, i) => i !== neutralIdx)
-  return firstNonNeutral >= 0 ? firstNonNeutral : neutralIdx
+// Default accent: the palette that plays the accent tone in Tokens Studio
+// (Moss Green), else the first palette that is not the neutral one.
+function defaultAccentIndex(
+  palettes: GeneratedPalette[],
+  scheme: Scheme,
+): number {
+  const accent = findPaletteForTone(palettes, 'accent', scheme)
+  if (accent) return palettes.indexOf(accent)
+  const neutral = findPaletteForTone(palettes, 'neutral', scheme)
+  const firstOther = palettes.findIndex((p) => p !== neutral)
+  return firstOther >= 0 ? firstOther : 0
 }
 
 export function ComponentPreviewPanel({
   palettes,
 }: ComponentPreviewPanelProps) {
-  const [accentIdx, setAccentIdx] = useState(() => defaultAccentIndex(palettes))
   const { colorScheme } = useColorScheme()
-  // Canonical EDS semantic colours (from Figma Color Map) — the previews use
-  // these directly so they render like real EDS variable usage.
-  const colors = getSemanticColors(colorScheme)
+  const [accentIdx, setAccentIdx] = useState(() =>
+    defaultAccentIndex(palettes, colorScheme),
+  )
 
   if (palettes.length === 0) return null
 
-  const neutralIdx = findNeutralIndex(palettes)
-  const neutral = palettes[neutralIdx].steps
+  // Neutral follows Tokens Studio: Gray in light, North Sea in dark. When the
+  // user has no palette with that name, the Tokens Studio default is used.
+  const neutralPalette = paletteForTone(palettes, 'neutral', colorScheme)
+  const neutralIsDefault = !palettes.includes(neutralPalette)
+  const neutral = neutralPalette.steps
 
-  // Non-gray palettes are candidates for accent
-  const accentCandidates = palettes
-    .map((p, i) => ({ ...p, idx: i }))
-    .filter((_, i) => i !== neutralIdx)
+  const safeAccentIdx =
+    accentIdx < palettes.length
+      ? accentIdx
+      : defaultAccentIndex(palettes, colorScheme)
+  const chosen = palettes[safeAccentIdx]
 
-  // All palettes except Gray and the selected accent are data colors
+  // The previews read Tokens Studio semantic tokens, resolved against the
+  // user's palettes: the chosen palette plays the accent tone, the neutral
+  // palette plays neutral, and the status tones use the palettes named after
+  // their Tokens Studio hues (or the Tokens Studio defaults).
+  const colors = resolveSemanticColors(
+    toneRamps(colorScheme, palettes, {
+      accent: chosen.steps,
+      neutral,
+    }),
+    colorScheme,
+  )
+
+  // All palettes except the neutral and the chosen accent are data colours
   const dataColors = palettes.filter(
-    (_, i) => i !== neutralIdx && i !== accentIdx,
+    (p, i) => p !== neutralPalette && i !== safeAccentIdx,
   )
 
   return (
@@ -84,19 +100,20 @@ export function ComponentPreviewPanel({
                   backgroundColor: neutral[8],
                 }}
               />
-              {palettes[neutralIdx].name}
+              {neutralPalette.name}
+              {neutralIsDefault ? ' (Tokens Studio default)' : ''}
             </span>
           </div>
 
           <label className="flex items-center gap-2 text-xs">
             <span className="text-subtle font-medium">Accent</span>
             <select
-              value={accentIdx}
+              value={safeAccentIdx}
               onChange={(e) => setAccentIdx(Number(e.target.value))}
               className="px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-default font-mono"
             >
-              {accentCandidates.map((p) => (
-                <option key={p.idx} value={p.idx}>
+              {palettes.map((p, i) => (
+                <option key={i} value={i}>
                   {p.name}
                 </option>
               ))}

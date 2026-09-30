@@ -9,7 +9,7 @@ import {
   darknessValuesInDarkMode,
 } from '@/config/config'
 import { paletteConfig } from '@/config/palette-config'
-import { getSemanticColors } from '@/config/semanticColors'
+import { resolveToken, toneRamps } from '@/utils/semanticTokens'
 import { deserializeState, updateURL } from '@/utils/urlState'
 import type { PaletteInput } from '@/utils/urlState'
 import { downloadConfiguration } from '@/utils/configurationUtils'
@@ -140,12 +140,15 @@ function ThemeBuilderContent() {
     )
   }, [palettes])
 
-  // Page background = the EDS neutral *canvas* (the "main application
-  // background" per the EDS colour roles). Content cards sit on top using
-  // *surface* ("placed on canvas to create depth"), so cards read as elevated
-  // above the page in both modes — in dark that means #202223 cards lifting off
-  // a #0b0b0b page, rather than near-black cards sinking into it.
-  const canvasBg = getSemanticColors(colorScheme)['bg-neutral-canvas']
+  // Page background = background.canvas (neutral.1), resolved from the
+  // Tokens Studio palettes. Content cards use background.surface
+  // (neutral.15), which is lighter than the canvas in light and darker than
+  // it in dark.
+  const canvasBg = resolveToken(
+    'background.canvas',
+    toneRamps(colorScheme),
+    colorScheme,
+  )
 
   return (
     <div

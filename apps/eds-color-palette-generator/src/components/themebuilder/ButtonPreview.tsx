@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment } from 'react'
-import type { SemanticColors } from '@/config/semanticColors'
+import type { SemanticColors } from '@/utils/semanticTokens'
 
 type ButtonPreviewProps = {
   colors: SemanticColors
@@ -12,46 +12,43 @@ type StateStyle = { bg: string; text: string; border: string }
 const STATES = ['default', 'hover', 'pressed'] as const
 
 /**
- * Button variants × interaction states, following the Figma dark button spec.
- * Ghost/outlined use the accent colour for text (and outlined border), with
- * subtle accent-tinted fills on hover/pressed:
+ * Button variants × interaction states, in Tokens Studio semantic tokens:
  *
- *   Solid    bg = bg-accent-fill-emphasis-{default,hover,active}   text = text-accent-strong-on-emphasis
- *   Outlined transparent → bg-accent-surface → bg-accent-fill-muted-default
- *            border = accent   text = accent
- *   Ghost    transparent → bg-accent-surface → bg-accent-fill-muted-default
- *            text = accent
- *
- * Figma binds ghost/outlined label to `text/accent` and the outlined border to
- * `background/surface/accent/default/default` — both resolve to the accent
- * emphasis colour, so we use `bg-accent-fill-emphasis-default` as `accent`.
- * The hover/pressed fills are Figma's `.../selected/hover` and `.../selected/pressed`.
+ *   Solid    background.interactive.accent.emphasis.{default,hover,pressed}
+ *            text.on-emphasis.accent
+ *   Outlined transparent → background.interactive.accent.muted.hover
+ *                        → background.interactive.accent.muted.pressed
+ *            border.interactive.accent.emphasis.default
+ *            text.on-default.accent
+ *   Ghost    the same fills as Outlined, no border
+ *            text.on-default.accent
  */
 function buildVariants(c: SemanticColors): Array<{
   name: string
   states: Record<(typeof STATES)[number], StateStyle>
 }> {
-  const onEmphasis = c['text-accent-strong-on-emphasis']
-  const accent = c['bg-accent-fill-emphasis-default']
-  const subtleHover = c['bg-accent-surface']
-  const subtlePressed = c['bg-accent-fill-muted-default']
+  const onEmphasis = c['text.on-emphasis.accent']
+  const label = c['text.on-default.accent']
+  const outline = c['border.interactive.accent.emphasis.default']
+  const mutedHover = c['background.interactive.accent.muted.hover']
+  const mutedPressed = c['background.interactive.accent.muted.pressed']
 
   return [
     {
       name: 'Solid',
       states: {
         default: {
-          bg: c['bg-accent-fill-emphasis-default'],
+          bg: c['background.interactive.accent.emphasis.default'],
           text: onEmphasis,
           border: 'transparent',
         },
         hover: {
-          bg: c['bg-accent-fill-emphasis-hover'],
+          bg: c['background.interactive.accent.emphasis.hover'],
           text: onEmphasis,
           border: 'transparent',
         },
         pressed: {
-          bg: c['bg-accent-fill-emphasis-active'],
+          bg: c['background.interactive.accent.emphasis.pressed'],
           text: onEmphasis,
           border: 'transparent',
         },
@@ -60,19 +57,19 @@ function buildVariants(c: SemanticColors): Array<{
     {
       name: 'Outlined',
       states: {
-        default: { bg: 'transparent', text: accent, border: accent },
-        hover: { bg: subtleHover, text: accent, border: accent },
-        pressed: { bg: subtlePressed, text: accent, border: accent },
+        default: { bg: 'transparent', text: label, border: outline },
+        hover: { bg: mutedHover, text: label, border: outline },
+        pressed: { bg: mutedPressed, text: label, border: outline },
       },
     },
     {
       name: 'Ghost',
       states: {
-        default: { bg: 'transparent', text: accent, border: 'transparent' },
-        hover: { bg: subtleHover, text: accent, border: 'transparent' },
+        default: { bg: 'transparent', text: label, border: 'transparent' },
+        hover: { bg: mutedHover, text: label, border: 'transparent' },
         pressed: {
-          bg: subtlePressed,
-          text: accent,
+          bg: mutedPressed,
+          text: label,
           border: 'transparent',
         },
       },
@@ -82,7 +79,7 @@ function buildVariants(c: SemanticColors): Array<{
 
 export function ButtonPreview({ colors }: ButtonPreviewProps) {
   const variants = buildVariants(colors)
-  const labelColor = colors['text-neutral-strong']
+  const labelColor = colors['text.primary']
 
   return (
     <div

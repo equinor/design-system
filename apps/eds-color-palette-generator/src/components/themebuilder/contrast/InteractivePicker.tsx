@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { STEP_ROLES } from '@/utils/palette'
+import { PALETTE_STEPS, stepLabel, stepRolesText } from '@/config/config'
 import { ContrastCard } from './ContrastCard'
 
 type Palette = { name: string; steps: string[] }
 
 export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
+  // 0-based: step 13 (text.primary) on step 1 (background.canvas)
   const [fgStep, setFgStep] = useState(12)
   const [bgStep, setBgStep] = useState(0)
 
@@ -30,9 +31,9 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
             onChange={(e) => setFgStep(Number(e.target.value))}
             className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
           >
-            {STEP_ROLES.map((role, i) => (
-              <option key={i} value={i}>
-                {role}
+            {PALETTE_STEPS.map((step, i) => (
+              <option key={step.id} value={i} title={stepRolesText(step.step)}>
+                {stepLabel(step.step)}
               </option>
             ))}
           </select>
@@ -45,9 +46,9 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
             onChange={(e) => setBgStep(Number(e.target.value))}
             className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
           >
-            {STEP_ROLES.map((role, i) => (
-              <option key={i} value={i}>
-                {role}
+            {PALETTE_STEPS.map((step, i) => (
+              <option key={step.id} value={i} title={stepRolesText(step.step)}>
+                {stepLabel(step.step)}
               </option>
             ))}
           </select>
@@ -65,8 +66,8 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
             key={p.name}
             fgHex={p.steps[fgStep]}
             bgHex={p.steps[bgStep]}
-            fgLabel={STEP_ROLES[fgStep]}
-            bgLabel={STEP_ROLES[bgStep]}
+            fgLabel={stepLabel(fgStep + 1)}
+            bgLabel={stepLabel(bgStep + 1)}
             paletteName={p.name}
           />
         ))}

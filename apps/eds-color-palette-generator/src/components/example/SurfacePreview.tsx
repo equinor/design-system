@@ -1,71 +1,54 @@
-import {
-  STEP_ROLES,
-  calcContrast,
-  roleIndex,
-  type StepRole,
-} from '@/utils/palette'
+import { stepLabel, stepRolesText, stepsWithRole } from '@/config/config'
+import { calcContrast } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
 
 /* ------------------------------------------------------------------ */
-/*  Surface layer roles for the layout preview                         */
+/*  Surface layer steps for the layout preview                         */
 /* ------------------------------------------------------------------ */
 
-export const SURFACE_ROLES = STEP_ROLES.filter((r) => r.startsWith('bg-'))
-export const BORDER_ROLES = STEP_ROLES.filter((r) => r.startsWith('border-'))
+/** 1-based steps that some Tokens Studio role of each group uses. */
+export const SURFACE_STEPS = stepsWithRole('background').map((s) => s.step)
+export const BORDER_STEPS = stepsWithRole('border').map((s) => s.step)
+export const TEXT_STEPS = stepsWithRole('text').map((s) => s.step)
 
+/** 1-based step per surface layer. */
 export type SurfaceConfig = {
-  page: StepRole
-  panel: StepRole
-  cardRow: StepRole
-  card: StepRole
-  border: StepRole
-  text: StepRole
+  page: number
+  panel: number
+  cardRow: number
+  card: number
+  border: number
+  text: number
 }
 
+/**
+ * background.canvas (1) → background.surface (15)
+ * → background.non-interactive.<tone>.default (3) → background.surface (15),
+ * with border.non-interactive.<tone>.muted (4) and text.primary (13).
+ */
 export const DEFAULT_SURFACE: SurfaceConfig = {
-  page: '1 · bg/canvas',
-  panel: '2 · bg/surface',
-  cardRow: '3 · bg/surface-hover',
-  card: '1 · bg/canvas',
-  border: '5 · bg/interactive',
-  text: '12 · fg/strong',
+  page: 1,
+  panel: 15,
+  cardRow: 3,
+  card: 15,
+  border: 4,
+  text: 13,
 }
 
-/** Recommended roles per surface layer — options outside this set still work
- *  but are flagged as atypical in the dropdown. */
-export const RECOMMENDED: Record<keyof SurfaceConfig, ReadonlySet<StepRole>> = {
-  page: new Set<StepRole>([
-    '1 · bg/canvas',
-    '2 · bg/surface',
-    '15 · bg/card, sheet, popover',
-  ]),
-  panel: new Set<StepRole>([
-    '1 · bg/canvas',
-    '2 · bg/surface',
-    '15 · bg/card, sheet, popover',
-  ]),
-  cardRow: new Set<StepRole>([
-    '1 · bg/canvas',
-    '2 · bg/surface',
-    '3 · bg/surface-hover',
-    '4 · bg/surface-pressed',
-  ]),
-  card: new Set<StepRole>([
-    '1 · bg/canvas',
-    '2 · bg/surface',
-    '15 · bg/card, sheet, popover',
-  ]),
-  border: new Set<StepRole>([
-    '4 · bg/surface-pressed',
-    '5 · bg/interactive',
-    '7 · border/subtle',
-    '8 · border/default',
-  ]),
-  text: new Set<StepRole>([
-    '12 · fg/strong',
-    '7 · border/subtle',
-    '8 · border/default',
-  ]),
+/** Recommended steps per surface layer, by Tokens Studio role — options
+ *  outside this set still work but are flagged as atypical in the dropdown. */
+export const RECOMMENDED: Record<keyof SurfaceConfig, ReadonlySet<number>> = {
+  // background.canvas, background.surface
+  page: new Set([1, 15]),
+  panel: new Set([1, 15]),
+  // background.non-interactive.<tone>.muted (1) and .default (3), and the
+  // muted hover fill (2)
+  cardRow: new Set([1, 2, 3]),
+  card: new Set([1, 15]),
+  // border.non-interactive.<tone>.muted / .default / .emphasis
+  border: new Set([4, 7, 9]),
+  // text.primary, text.secondary, text.tertiary
+  text: new Set([13, 8, 7]),
 }
 
 function SurfaceLabel({
@@ -119,10 +102,10 @@ export function SurfaceSelect({
   recommended,
 }: {
   label: string
-  value: StepRole
-  onChange: (v: StepRole) => void
-  options: readonly StepRole[]
-  recommended?: ReadonlySet<StepRole>
+  value: number
+  onChange: (v: number) => void
+  options: readonly number[]
+  recommended?: ReadonlySet<number>
 }) {
   return (
     <label className="flex items-center gap-2" style={{ fontSize: '12px' }}>
@@ -131,7 +114,7 @@ export function SurfaceSelect({
       </span>
       <select
         value={value}
-        onChange={(e) => onChange(e.target.value as StepRole)}
+        onChange={(e) => onChange(Number(e.target.value))}
         style={{
           padding: '4px 8px',
           fontSize: '12px',
@@ -141,11 +124,12 @@ export function SurfaceSelect({
           fontFamily: 'var(--font-geist-mono, monospace)',
         }}
       >
-        {options.map((r) => {
-          const isRecommended = recommended ? recommended.has(r) : true
+        {options.map((step) => {
+          const isRecommended = recommended ? recommended.has(step) : true
+          const label = stepLabel(step)
           return (
-            <option key={r} value={r}>
-              {isRecommended ? `● ${r}` : `  ${r}`}
+            <option key={step} value={step} title={stepRolesText(step)}>
+              {isRecommended ? `● ${label}` : `  ${label}`}
             </option>
           )
         })}
@@ -161,12 +145,12 @@ export function SurfacePreview({
   config: SurfaceConfig
   steps: string[]
 }) {
-  const pageHex = steps[roleIndex(config.page)]
-  const panelHex = steps[roleIndex(config.panel)]
-  const cardRowHex = steps[roleIndex(config.cardRow)]
-  const cardHex = steps[roleIndex(config.card)]
-  const borderHex = steps[roleIndex(config.border)]
-  const textHex = steps[roleIndex(config.text)]
+  const pageHex = steps[config.page - 1]
+  const panelHex = steps[config.panel - 1]
+  const cardRowHex = steps[config.cardRow - 1]
+  const cardHex = steps[config.card - 1]
+  const borderHex = steps[config.border - 1]
+  const textHex = steps[config.text - 1]
 
   const contrastPagePanel = calcContrast(panelHex, pageHex)
   const contrastPanelCardRow = calcContrast(cardRowHex, panelHex)
@@ -186,7 +170,11 @@ export function SurfacePreview({
           border: '1px solid rgba(0,0,0,0.06)',
         }}
       >
-        <SurfaceLabel label="Page" role={config.page} hex={pageHex} />
+        <SurfaceLabel
+          label="Page"
+          role={stepLabel(config.page)}
+          hex={pageHex}
+        />
 
         {/* Panel */}
         <div
@@ -198,7 +186,11 @@ export function SurfacePreview({
             marginTop: '12px',
           }}
         >
-          <SurfaceLabel label="Panel" role={config.panel} hex={panelHex} />
+          <SurfaceLabel
+            label="Panel"
+            role={stepLabel(config.panel)}
+            hex={panelHex}
+          />
 
           {/* Card row */}
           <div
@@ -212,7 +204,7 @@ export function SurfacePreview({
           >
             <SurfaceLabel
               label="Card row"
-              role={config.cardRow}
+              role={stepLabel(config.cardRow)}
               hex={cardRowHex}
             />
 

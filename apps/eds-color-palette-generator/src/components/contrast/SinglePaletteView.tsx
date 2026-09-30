@@ -1,8 +1,16 @@
 import { contrast } from '@/utils/color'
-import { CATEGORY_GROUPS } from '@/config/categories'
+import {
+  categoryLabel,
+  stepCategoryRuns,
+  stepLabel,
+  stepRolesText,
+} from '@/config/config'
 import type { SortOrder, StepData } from '@/utils/contrastPageData'
 import { ContrastCell } from './ContrastCell'
 import { CopyButton } from './CopyButton'
+
+// Grouped header runs, e.g. Background (1–3), Border (4), …
+const CATEGORY_RUNS = stepCategoryRuns()
 
 export function SinglePaletteView({
   displayData,
@@ -23,17 +31,17 @@ export function SinglePaletteView({
         }}
       >
         {mode === 'semantic' &&
-          CATEGORY_GROUPS.map((group) => (
+          CATEGORY_RUNS.map((run, i) => (
             <div
-              key={group.label}
+              key={`${run.category}-${i}`}
               className="text-center"
               style={{
-                gridColumn: `span ${group.span}`,
+                gridColumn: `span ${run.span}`,
                 paddingBottom: '6px',
               }}
             >
               <span style={{ fontSize: '12px', color: '#6b7280' }}>
-                {group.label}
+                {categoryLabel(run.category)}
               </span>
               <div
                 style={{
@@ -74,7 +82,7 @@ export function SinglePaletteView({
                       ? '0 12px 12px 0'
                       : undefined,
               }}
-              title={`${s.step}${s.role ? `. ${s.role}` : ''}: ${s.hex}`}
+              title={`${stepLabel(s.step)}: ${s.hex}\n${stepRolesText(s.step)}`}
             >
               <span
                 className="font-bold"

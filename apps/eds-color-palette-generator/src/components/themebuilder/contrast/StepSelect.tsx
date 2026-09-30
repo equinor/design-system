@@ -1,16 +1,35 @@
 'use client'
 
 import { useMemo } from 'react'
-import { STEP_ROLES } from '@/utils/palette'
+import {
+  PALETTE_STEPS,
+  stepLabel,
+  stepRolesText,
+  stepsWithRole,
+} from '@/config/config'
 
 type StepSelectProps = {
   label: string
+  /** 0-based step index */
   value: number
   onChange: (v: number) => void
   /** Step indices to show as "Recommended" at the top */
   recommended?: number[]
-  /** When set, only show steps matching this category prefix (e.g. 'bg/', 'fg/', 'text/') */
-  only?: string[]
+  /**
+   * When set, only offer steps that a Tokens Studio role of this group uses,
+   * e.g. `text` for every step a `text.*` or `icon.*` token points at.
+   */
+  only?: 'background' | 'border' | 'text'
+}
+
+const ALL_STEP_INDICES = PALETTE_STEPS.map((_, i) => i)
+
+function StepOption({ index }: { index: number }) {
+  return (
+    <option value={index} title={stepRolesText(index + 1)}>
+      {stepLabel(index + 1)}
+    </option>
+  )
 }
 
 export function StepSelect({
@@ -20,13 +39,13 @@ export function StepSelect({
   recommended,
   only,
 }: StepSelectProps) {
-  const allSteps = useMemo(() => {
-    if (!only || only.length === 0) return STEP_ROLES.map((_, i) => i)
-    return STEP_ROLES
-      .map((role, i) => ({ role, i }))
-      .filter(({ role }) => only.some((prefix) => role.includes(`· ${prefix}`)))
-      .map(({ i }) => i)
-  }, [only])
+  const allSteps = useMemo(
+    () =>
+      only
+        ? stepsWithRole(only).map((step) => step.step - 1)
+        : ALL_STEP_INDICES,
+    [only],
+  )
 
   const { recSteps, otherSteps } = useMemo(() => {
     if (!recommended || recommended.length === 0) {
@@ -53,25 +72,17 @@ export function StepSelect({
           <>
             <optgroup label="Recommended">
               {recSteps.map((i) => (
-                <option key={i} value={i}>
-                  {STEP_ROLES[i]}
-                </option>
+                <StepOption key={i} index={i} />
               ))}
             </optgroup>
             <optgroup label="Other">
               {otherSteps.map((i) => (
-                <option key={i} value={i}>
-                  {STEP_ROLES[i]}
-                </option>
+                <StepOption key={i} index={i} />
               ))}
             </optgroup>
           </>
         ) : (
-          allSteps.map((i) => (
-            <option key={i} value={i}>
-              {STEP_ROLES[i]}
-            </option>
-          ))
+          allSteps.map((i) => <StepOption key={i} index={i} />)
         )}
       </select>
     </label>

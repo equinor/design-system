@@ -1,10 +1,8 @@
 import Color from 'colorjs.io'
-import {
-  STEP_ROLES,
-  PALETTES,
-  calcContrast,
-  type ContrastResult,
-} from '@/utils/palette'
+import { PALETTE_STEPS, stepLabel, stepsWithRole } from '@/config/config'
+import type { Scheme } from '@/config/tokensStudio'
+import { calcContrast, type ContrastResult } from '@/utils/palette'
+import { resolveToken, tokenTarget, toneRamps } from '@/utils/semanticTokens'
 
 export function getLightness(hex: string): number {
   try {
@@ -33,12 +31,14 @@ export type SortOrder = 'semantic' | 'gradient'
 export type ViewMode = 'semantic' | 'gradient' | 'combined'
 
 /* ------------------------------------------------------------------ */
-/*  Combined view — real cross-palette interaction patterns            */
+/*  Combined view — Tokens Studio token pairs across tones             */
 /* ------------------------------------------------------------------ */
+
+export type PairingType = 'text' | 'border' | 'fill'
 
 export type Pairing = {
   state: string
-  type: 'text' | 'border' | 'fill'
+  type: PairingType
   fg: { label: string; hex: string }
   bg: { label: string; hex: string }
   contrast: ContrastResult
@@ -50,91 +50,171 @@ export type PatternGroup = {
   pairings: Pairing[]
 }
 
-export function buildPatternGroups(): PatternGroup[] {
-  const g = PALETTES[1].steps // Gray
-  const a = PALETTES[0].steps // Moss Green (Accent)
+/** A pair of Tokens Studio semantic tokens, foreground on background. */
+type TokenPair = { state: string; fg: string; bg: string; type?: PairingType }
 
-  function p(
-    state: string,
-    fgLabel: string,
-    fgHex: string,
-    bgLabel: string,
-    bgHex: string,
-    type: 'text' | 'border' | 'fill' = 'text',
-  ): Pairing {
-    return {
-      state,
-      type,
-      fg: { label: fgLabel, hex: fgHex },
-      bg: { label: bgLabel, hex: bgHex },
-      contrast: calcContrast(fgHex, bgHex),
-    }
-  }
+type PatternGroupSpec = {
+  title: string
+  description: string
+  pairs: TokenPair[]
+}
 
-  return [
-    {
-      title: 'Border: Neutral → Accent on selection',
-      description: 'Border starts Gray, switches to Accent on focus/selected',
-      pairings: [
-        p('Default', `Gray/6 border-subtle`, g[5], `Gray/1 bg-canvas`, g[0], 'border'),
-        p('Hover', `Gray/7 border-medium`, g[6], `Gray/1 bg-canvas`, g[0], 'border'),
-        p('Selected', `Accent/8 border-strong`, a[7], `Gray/1 bg-canvas`, g[0], 'border'),
-        p('Default', `Gray/6 border-subtle`, g[5], `Gray/2 bg-surface`, g[1], 'border'),
-        p('Hover', `Gray/7 border-medium`, g[6], `Gray/2 bg-surface`, g[1], 'border'),
-        p('Selected', `Accent/8 border-strong`, a[7], `Gray/2 bg-surface`, g[1], 'border'),
+const onEach = (
+  fgs: { state: string; path: string }[],
+  bgs: string[],
+  type?: PairingType,
+): TokenPair[] =>
+  bgs.flatMap((bg) =>
+    fgs.map(({ state, path }) => ({ state, fg: path, bg, type })),
+  )
+
+const CANVAS_AND_SURFACE = ['background.canvas', 'background.surface']
+
+const STATUS_TONES = ['success', 'info', 'warning', 'danger'] as const
+
+/**
+ * The token pairs the combined view checks. Every pair is two Tokens Studio
+ * semantic tokens, so the view shows the same combinations the design system
+ * uses. Borders are shown for reference only: ADR 0016 leaves border contrast
+ * out of scope.
+ */
+export const PATTERN_GROUP_SPECS: PatternGroupSpec[] = [
+  {
+    title: 'Text on canvas and surface',
+    description:
+      'text.primary, text.secondary and text.tertiary on background.canvas and background.surface. ADR 0016 measures text against background.surface.',
+    pairs: onEach(
+      [
+        { state: 'Primary', path: 'text.primary' },
+        { state: 'Secondary', path: 'text.secondary' },
+        { state: 'Tertiary', path: 'text.tertiary' },
       ],
-    },
-    {
-      title: 'Accent text on Neutral backgrounds',
-      description: 'Accent-colored text and icons on Gray surfaces',
-      pairings: [
-        p('Subtle', `Accent/12 text-subtle`, a[11], `Gray/1 bg-canvas`, g[0]),
-        p('Strong', `Accent/13 text-strong`, a[12], `Gray/1 bg-canvas`, g[0]),
-        p('Subtle', `Accent/12 text-subtle`, a[11], `Gray/2 bg-surface`, g[1]),
-        p('Strong', `Accent/13 text-strong`, a[12], `Gray/2 bg-surface`, g[1]),
-        p('Subtle', `Accent/12 text-subtle`, a[11], `Gray/3 bg-fill-muted`, g[2]),
-        p('Strong', `Accent/13 text-strong`, a[12], `Gray/3 bg-fill-muted`, g[2]),
+      CANVAS_AND_SURFACE,
+    ),
+  },
+  {
+    title: 'Neutral borders on canvas and surface',
+    description:
+      'border.non-interactive.neutral muted, default and emphasis. For reference: ADR 0016 has no contrast requirement for borders.',
+    pairs: onEach(
+      [
+        { state: 'Muted', path: 'border.non-interactive.neutral.muted' },
+        { state: 'Default', path: 'border.non-interactive.neutral.default' },
+        { state: 'Emphasis', path: 'border.non-interactive.neutral.emphasis' },
       ],
-    },
-    {
-      title: 'Accent fills on Neutral canvas',
-      description: 'Accent muted/emphasis fills visible on Gray backgrounds',
-      pairings: [
-        p('Muted', `Accent/3 fill-muted`, a[2], `Gray/1 bg-canvas`, g[0], 'fill'),
-        p('Muted', `Accent/3 fill-muted`, a[2], `Gray/2 bg-surface`, g[1], 'fill'),
-        p('Emphasis', `Accent/9 fill-emphasis`, a[8], `Gray/1 bg-canvas`, g[0], 'fill'),
-        p('Emphasis', `Accent/9 fill-emphasis`, a[8], `Gray/2 bg-surface`, g[1], 'fill'),
+      CANVAS_AND_SURFACE,
+      'border',
+    ),
+  },
+  {
+    title: 'Accent fills on canvas and surface',
+    description:
+      'The accent muted and emphasis default fills against the neutral backgrounds they sit on.',
+    pairs: onEach(
+      [
+        { state: 'Muted', path: 'background.interactive.accent.muted.default' },
+        {
+          state: 'Emphasis',
+          path: 'background.interactive.accent.emphasis.default',
+        },
       ],
-    },
-    {
-      title: 'Text on Accent emphasis fills',
-      description: 'Readable text on Accent dark backgrounds',
-      pairings: [
-        p('White', `White`, '#ffffff', `Accent/9 emphasis-default`, a[8]),
-        p('On-emphasis', `Accent/15 strong-on-emphasis`, a[14], `Accent/9 emphasis-default`, a[8]),
-        p('On-emphasis', `Accent/14 subtle-on-emphasis`, a[13], `Accent/9 emphasis-default`, a[8]),
-        p('Gray strong', `Gray/13 text-strong`, g[12], `Accent/9 emphasis-default`, a[8]),
-      ],
-    },
-    {
-      title: 'Neutral text on Accent muted fills',
-      description: 'Text readability on light Accent backgrounds',
-      pairings: [
-        p('Gray strong', `Gray/13 text-strong`, g[12], `Accent/3 fill-muted-default`, a[2]),
-        p('Accent strong', `Accent/13 text-strong`, a[12], `Accent/3 fill-muted-default`, a[2]),
-        p('Gray strong', `Gray/13 text-strong`, g[12], `Accent/5 fill-muted-active`, a[4]),
-        p('Accent strong', `Accent/13 text-strong`, a[12], `Accent/5 fill-muted-active`, a[4]),
-      ],
-    },
-  ]
+      CANVAS_AND_SURFACE,
+      'fill',
+    ),
+  },
+  {
+    title: 'text.on-emphasis on accent emphasis fills',
+    description:
+      'text.on-emphasis.accent on the accent emphasis fill in each state. ADR 0016 requires Lc 60 on the default fill.',
+    pairs: (['default', 'hover', 'pressed'] as const).map((state) => ({
+      state: state.charAt(0).toUpperCase() + state.slice(1),
+      fg: 'text.on-emphasis.accent',
+      bg: `background.interactive.accent.emphasis.${state}`,
+    })),
+  },
+  {
+    title: 'Text on accent muted fills',
+    description:
+      'text.on-muted.accent and text.primary on the accent muted fill in each state.',
+    pairs: (['default', 'hover', 'pressed'] as const).flatMap((state) => {
+      const bg = `background.interactive.accent.muted.${state}`
+      const label = state.charAt(0).toUpperCase() + state.slice(1)
+      return [
+        { state: `${label} · on-muted`, fg: 'text.on-muted.accent', bg },
+        { state: `${label} · primary`, fg: 'text.primary', bg },
+      ]
+    }),
+  },
+  {
+    title: 'Links and focus on surface',
+    description:
+      'text.interactive.link in each state and border.interactive.focus on background.surface.',
+    pairs: [
+      ...(['default', 'hover', 'pressed'] as const).map((state) => ({
+        state: `Link ${state}`,
+        fg: `text.interactive.link.${state}`,
+        bg: 'background.surface',
+      })),
+      {
+        state: 'Focus',
+        fg: 'border.interactive.focus',
+        bg: 'background.surface',
+        type: 'border' as const,
+      },
+    ],
+  },
+  {
+    title: 'text.on-emphasis on status emphasis fills',
+    description:
+      'text.on-emphasis on the default emphasis fill of each status tone.',
+    pairs: STATUS_TONES.map((tone) => ({
+      state: tone.charAt(0).toUpperCase() + tone.slice(1),
+      fg: `text.on-emphasis.${tone}`,
+      bg: `background.interactive.${tone}.emphasis.default`,
+    })),
+  },
+]
+
+/** `text.primary · neutral.13` */
+export const tokenLabel = (path: string) => `${path} · ${tokenTarget(path)}`
+
+/**
+ * Resolve the pattern groups against the Tokens Studio palettes of a scheme.
+ * A pair whose token is missing from Tokens Studio is left out.
+ */
+export function buildPatternGroups(scheme: Scheme): PatternGroup[] {
+  const ramps = toneRamps(scheme)
+  return PATTERN_GROUP_SPECS.map(({ title, description, pairs }) => ({
+    title,
+    description,
+    pairings: pairs.flatMap(({ state, fg, bg, type = 'text' }) => {
+      const fgHex = resolveToken(fg, ramps, scheme)
+      const bgHex = resolveToken(bg, ramps, scheme)
+      if (!fgHex || !bgHex) return []
+      return [
+        {
+          state,
+          type,
+          fg: { label: tokenLabel(fg), hex: fgHex },
+          bg: { label: tokenLabel(bg), hex: bgHex },
+          contrast: calcContrast(fgHex, bgHex),
+        },
+      ]
+    }),
+  }))
 }
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-export function findBestPaletteText(bgIndex: number, steps: string[]): TextChoice {
-  const textStepIndices = [11, 12, 13, 14]
+/** 0-based indices of the steps a Tokens Studio `text.*` or `icon.*` role uses. */
+const TEXT_STEP_INDICES = stepsWithRole('text').map((step) => step.step - 1)
+
+export function findBestPaletteText(
+  bgIndex: number,
+  steps: string[],
+): TextChoice {
   const candidates = steps
     .map((hex, idx) => {
       if (idx === bgIndex) return null
@@ -144,7 +224,7 @@ export function findBestPaletteText(bgIndex: number, steps: string[]): TextChoic
         hex,
         result,
         wcagNum: parseFloat(result.wcag),
-        isTextStep: textStepIndices.includes(idx),
+        isTextStep: TEXT_STEP_INDICES.includes(idx),
       }
     })
     .filter((c): c is NonNullable<typeof c> => c !== null)
@@ -162,7 +242,7 @@ export function findBestPaletteText(bgIndex: number, steps: string[]): TextChoic
   return {
     ...pick.result,
     color: pick.hex,
-    label: `Step ${pick.idx + 1} · ${STEP_ROLES[pick.idx]} (${pick.hex})`,
+    label: `Step ${stepLabel(pick.idx + 1)} (${pick.hex})`,
   }
 }
 
@@ -184,7 +264,7 @@ export function buildStepData(
 
     return {
       step: stepNumber,
-      role: mode === 'semantic' ? STEP_ROLES[index] : '',
+      role: mode === 'semantic' ? (PALETTE_STEPS[index]?.label ?? '') : '',
       hex,
       recommended,
       paletteText,

@@ -1,8 +1,10 @@
-import type { StepRole } from '@/utils/palette'
-
+/**
+ * Step pairings inside one palette, named after the Tokens Studio roles they
+ * stand for (ADR 0016 D5). Steps are 1-based, as in `accent.9`.
+ */
 export type ExamplePairing = {
-  fg: StepRole
-  bg: StepRole
+  fg: number
+  bg: number
   type?: 'text' | 'border'
 }
 
@@ -14,35 +16,36 @@ export type ExampleGroup = {
 
 export const EXAMPLE_GROUPS: ExampleGroup[] = [
   {
-    title: 'Text on interactive fills',
+    title: 'text.on-muted on muted fills',
     description:
-      'Text on muted fill backgrounds across default/hover/active states',
+      'text.on-muted.<tone> (step 12) on background.interactive.<tone>.muted default, hover and pressed (steps 1, 2 and 3)',
     pairings: [
-      { fg: '12 · fg/strong', bg: '3 · bg/surface-hover' },
-      { fg: '12 · fg/strong', bg: '4 · bg/surface-pressed' },
-      { fg: '12 · fg/strong', bg: '5 · bg/interactive' },
+      { fg: 12, bg: 1 },
+      { fg: 12, bg: 2 },
+      { fg: 12, bg: 3 },
     ],
   },
   {
-    title: 'Text on emphasis fills',
-    description: 'Light text on dark emphasis backgrounds',
+    title: 'text.on-emphasis on emphasis fills',
+    description:
+      'text.on-emphasis.<tone> (step 15) on background.interactive.<tone>.emphasis default, hover and pressed (steps 9, 10 and 11)',
     pairings: [
-      { fg: '15 · bg/card, sheet, popover', bg: '9 · fill/emphasis' },
-      { fg: '15 · bg/card, sheet, popover', bg: '10 · fill/emphasis-hover' },
-      { fg: '15 · bg/card, sheet, popover', bg: '11 · fill/emphasis-pressed' },
-      { fg: '14 · fg/on-emphasis', bg: '9 · fill/emphasis' },
+      { fg: 15, bg: 9 },
+      { fg: 15, bg: 10 },
+      { fg: 15, bg: 11 },
     ],
   },
   {
-    title: 'Borders on backgrounds',
-    description: 'Border visibility on different surfaces',
+    title: 'border.non-interactive on canvas and surface',
+    description:
+      'border.non-interactive.<tone> muted, default and emphasis (steps 4, 7 and 9) on steps 1 and 15, which are background.canvas and background.surface in the neutral palette. ADR 0016 has no contrast requirement for borders.',
     pairings: [
-      { fg: '5 · bg/interactive', bg: '1 · bg/canvas', type: 'border' },
-      { fg: '7 · border/subtle', bg: '1 · bg/canvas', type: 'border' },
-      { fg: '8 · border/default', bg: '1 · bg/canvas', type: 'border' },
-      { fg: '5 · bg/interactive', bg: '2 · bg/surface', type: 'border' },
-      { fg: '7 · border/subtle', bg: '2 · bg/surface', type: 'border' },
-      { fg: '8 · border/default', bg: '2 · bg/surface', type: 'border' },
+      { fg: 4, bg: 1, type: 'border' },
+      { fg: 7, bg: 1, type: 'border' },
+      { fg: 9, bg: 1, type: 'border' },
+      { fg: 4, bg: 15, type: 'border' },
+      { fg: 7, bg: 15, type: 'border' },
+      { fg: 9, bg: 15, type: 'border' },
     ],
   },
 ]

@@ -1,58 +1,18 @@
 import { contrast } from '@/utils/color'
 
 /* ------------------------------------------------------------------ */
-/*  EDS token palettes — Primitive values from Figma                   */
+/*  Palettes                                                           */
 /* ------------------------------------------------------------------ */
 
 /**
- * Primitive step labels (1-indexed in Figma, 0-indexed here).
- *
- * Named after primary Figma semantic usage — a single step can serve
- * multiple roles depending on context (palette, mode, component).
+ * A named 15-step ramp, step 1 first. The default ramps come from
+ * `tokensStudioPalettes(scheme)` in `@/utils/semanticTokens`; step names
+ * and roles come from `PALETTE_STEPS` in `@/config/config`.
  */
-export const STEP_ROLES = [
-  '1 · bg/canvas',
-  '2 · bg/surface',
-  '3 · bg/surface-hover',
-  '4 · bg/surface-pressed',
-  '5 · bg/interactive',
-  '6 · bg/interactive-hover',
-  '7 · border/subtle',
-  '8 · border/default',
-  '9 · fill/emphasis',
-  '10 · fill/emphasis-hover',
-  '11 · fill/emphasis-pressed',
-  '12 · fg/strong',
-  '13 · fg/stronger',
-  '14 · fg/on-emphasis',
-  '15 · bg/card, sheet, popover',
-] as const
-
-export type StepRole = (typeof STEP_ROLES)[number]
-
 export type TokenPalette = {
   name: string
   steps: string[]
 }
-
-export const PALETTES: TokenPalette[] = [
-  {
-    name: 'Moss Green',
-    steps: [
-      '#ffffff', '#f8ffff', '#f4feff', '#f0fbfc', '#daecee',
-      '#cde3e5', '#bedade', '#bedade', '#84b9bf', '#30747c',
-      '#2d6e75', '#2b6167', '#2a5b61', '#28555a', '#254346',
-    ],
-  },
-  {
-    name: 'Gray',
-    steps: [
-      '#f5f5f5', '#ebebeb', '#e1e1e1', '#d4d4d4', '#c4c4c4',
-      '#b4b4b4', '#a4a4a4', '#868686', '#696969', '#5b5b5b',
-      '#4d4d4d', '#404040', '#333333', '#dedede', '#ffffff',
-    ],
-  },
-]
 
 /* ------------------------------------------------------------------ */
 /*  APCA font lookup table                                             */
@@ -132,17 +92,23 @@ export type ContrastResult = {
 
 export function calcContrast(fg: string, bg: string): ContrastResult {
   const wcag = String(
-    contrast({ foreground: fg, background: bg, algorithm: 'WCAG21', silent: true }),
+    contrast({
+      foreground: fg,
+      background: bg,
+      algorithm: 'WCAG21',
+      silent: true,
+    }),
   )
   const apca = String(
-    contrast({ foreground: fg, background: bg, algorithm: 'APCA', silent: true }),
+    contrast({
+      foreground: fg,
+      background: bg,
+      algorithm: 'APCA',
+      silent: true,
+    }),
   )
   const wn = parseFloat(wcag)
   return { wcag, apca, aa: wn >= 4.5, aaa: wn >= 7 }
-}
-
-export function roleIndex(role: StepRole): number {
-  return STEP_ROLES.indexOf(role)
 }
 
 /* ------------------------------------------------------------------ */

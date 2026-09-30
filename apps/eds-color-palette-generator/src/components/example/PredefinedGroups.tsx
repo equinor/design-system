@@ -1,4 +1,5 @@
-import { roleIndex, type TokenPalette } from '@/utils/palette'
+import { stepLabel } from '@/config/config'
+import type { TokenPalette } from '@/utils/palette'
 import { EXAMPLE_GROUPS } from './exampleGroups'
 import { PairingCard } from './PairingCard'
 
@@ -33,10 +34,10 @@ export function PredefinedGroups({ palette }: { palette: TokenPalette }) {
             {group.pairings.map((p, i) => (
               <PairingCard
                 key={`${group.title}-${i}`}
-                fgRole={p.fg}
-                bgRole={p.bg}
-                fgHex={palette.steps[roleIndex(p.fg)]}
-                bgHex={palette.steps[roleIndex(p.bg)]}
+                fgRole={stepLabel(p.fg)}
+                bgRole={stepLabel(p.bg)}
+                fgHex={palette.steps[p.fg - 1]}
+                bgHex={palette.steps[p.bg - 1]}
                 type={p.type ?? 'text'}
               />
             ))}

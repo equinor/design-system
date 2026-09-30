@@ -1,30 +1,61 @@
 'use client'
 
 import { useId, useState } from 'react'
-import type { SemanticColors } from '@/config/semanticColors'
+import type { SemanticColors } from '@/utils/semanticTokens'
 
 type DataTablePreviewProps = {
   colors: SemanticColors
 }
 
 /**
- * Wired to canonical EDS semantic tokens (Figma Color Map):
- *   row hover / pressed → bg-neutral-fill-muted-{default,hover}
- *   selected row        → bg-accent-fill-muted-default + solid-accent left bar
- *   separator           → border-neutral-subtle
- *   name / value        → text-neutral-strong / text-neutral-subtle
- *   status              → text-{success,warning,danger}-subtle
+ * Wired to Tokens Studio semantic tokens:
+ *   row hover / pressed → background.interactive.neutral.muted.{default,hover}
+ *   selected row        → background.interactive.accent.muted.default
+ *                         + a background.interactive.accent.emphasis.default bar
+ *   separator           → border.non-interactive.neutral.muted
+ *   name, value / time  → text.primary / text.secondary
+ *   status              → text.on-default.{success,warning,danger}
  */
 export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
   const uid = useId().replace(/:/g, '')
   const [activeRow, setActiveRow] = useState<number | null>(null)
 
   const rows = [
-    { name: 'Hywind Scotland', status: 'Online', statusColor: c['text-success-subtle'], value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Online', statusColor: c['text-success-subtle'], value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Pending', statusColor: c['text-warning-subtle'], value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Offline', statusColor: c['text-danger-subtle'], value: '124 MW', time: '2 min ago' },
-    { name: 'Hywind Scotland', status: 'Online', statusColor: c['text-success-subtle'], value: '124 MW', time: '2 min ago' },
+    {
+      name: 'Hywind Scotland',
+      status: 'Online',
+      statusColor: c['text.on-default.success'],
+      value: '124 MW',
+      time: '2 min ago',
+    },
+    {
+      name: 'Hywind Scotland',
+      status: 'Online',
+      statusColor: c['text.on-default.success'],
+      value: '124 MW',
+      time: '2 min ago',
+    },
+    {
+      name: 'Hywind Scotland',
+      status: 'Pending',
+      statusColor: c['text.on-default.warning'],
+      value: '124 MW',
+      time: '2 min ago',
+    },
+    {
+      name: 'Hywind Scotland',
+      status: 'Offline',
+      statusColor: c['text.on-default.danger'],
+      value: '124 MW',
+      time: '2 min ago',
+    },
+    {
+      name: 'Hywind Scotland',
+      status: 'Online',
+      statusColor: c['text.on-default.success'],
+      value: '124 MW',
+      time: '2 min ago',
+    },
   ]
 
   return (
@@ -33,11 +64,12 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
       style={
         {
           overflow: 'hidden',
-          '--_hover': c['bg-neutral-fill-muted-default'],
-          '--_pressed': c['bg-neutral-fill-muted-hover'],
-          '--_selected': c['bg-accent-fill-muted-default'],
-          '--_selected-bar': c['bg-accent-fill-emphasis-default'],
-          '--_border': c['border-neutral-subtle'],
+          '--_hover': c['background.interactive.neutral.muted.default'],
+          '--_pressed': c['background.interactive.neutral.muted.hover'],
+          '--_selected': c['background.interactive.accent.muted.default'],
+          '--_selected-bar':
+            c['background.interactive.accent.emphasis.default'],
+          '--_border': c['border.non-interactive.neutral.muted'],
         } as React.CSSProperties
       }
     >
@@ -68,7 +100,7 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
             display: 'flex',
             alignItems: 'center',
             padding: '10px 0',
-            borderTop: `0.5px solid ${c['border-neutral-subtle']}`,
+            borderTop: `0.5px solid ${c['border.non-interactive.neutral.muted']}`,
           }}
         >
           <div
@@ -77,7 +109,7 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
               padding: '0 16px',
               fontSize: '14px',
               lineHeight: '20px',
-              color: c['text-neutral-strong'],
+              color: c['text.primary'],
               flexShrink: 0,
             }}
           >
@@ -99,7 +131,7 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
               padding: '0 16px',
               fontSize: '14px',
               lineHeight: '20px',
-              color: c['text-neutral-strong'],
+              color: c['text.primary'],
               flexShrink: 0,
             }}
           >
@@ -111,7 +143,7 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
               padding: '0 16px',
               fontSize: '12px',
               lineHeight: '16px',
-              color: c['text-neutral-subtle'],
+              color: c['text.secondary'],
               flexShrink: 0,
             }}
           >

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PALETTE_STEPS, stepId } from './config'
+import { PALETTE_STEPS, categoryLabel, stepId, stepRolesText } from './config'
 import { LEGACY_2X_LIGHTNESS } from './legacy2x'
 import { STEP_COUNT, TS_SCALE } from './tokensStudio'
 
@@ -35,6 +35,19 @@ describe('PALETTE_STEPS', () => {
         expect(ids.has(requirement.targetStep)).toBe(true)
       }
     }
+  })
+})
+
+describe('step display helpers', () => {
+  it('capitalises categories for grouped headers', () => {
+    expect(categoryLabel('background')).toBe('Background')
+    expect(categoryLabel('unused')).toBe('Unused')
+  })
+
+  it('lists the roles of a step, or says it has none', () => {
+    expect(stepRolesText(13)).toContain('text.primary')
+    expect(stepRolesText(6)).toBe('no semantic role')
+    expect(stepRolesText(14)).toBe('no semantic role')
   })
 })
 
