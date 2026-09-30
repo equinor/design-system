@@ -104,6 +104,22 @@ jobs:
       # the ./next/css/* wildcard publish_tokens.yaml already injects.
       - name: Widen semantic scope and bundle CSS into variables.css
         run: pnpm --filter @equinor/eds-tokens run generate:css-bundle
+      # The CSS name transform is not injective (`.` and `-` both
+      # flatten to `-`), so two distinct tokens can land on the same
+      # custom property and, where one aliases the other, emit a
+      # self-referential declaration that resolves to nothing — this is
+      # what dropped the beta focus ring on Button and Chip (#5407,
+      # ADR-0014). Tokens Studio resolves by token name, where the two
+      # are distinct, so the platform preview looks healthy and only the
+      # built CSS shows it.
+      # Deliberately placed before Create Pull Request: a failure here
+      # opens no PR at all, so a colliding export cannot be merged by
+      # someone reading a green-looking diff. The run fails, the
+      # log-errors-to-slack step below fires, and the offending names
+      # are listed in the Actions log — which is the only diagnostic
+      # surface this workflow has, since the PR it creates gets no CI.
+      - name: Check for colliding custom-property names
+        run: pnpm --filter @equinor/eds-tokens run check:css:names
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
