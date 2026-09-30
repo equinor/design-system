@@ -136,15 +136,15 @@
     }
 
     &[data-layout='vertical'] {
+      /* Both blocks stay shrinkable (flex: initial keeps flex-shrink at 1) so a
+         long name or email truncates instead of pushing past the container. */
       & .content {
         flex: initial;
-        flex-shrink: 0;
       }
 
       & .names {
         flex: initial;
         flex-direction: row;
-        flex-shrink: 0;
 
         /* Row layout: use horizontal spacing between inline name and email */
         gap: var(--eds-selectable-space-horizontal);
@@ -156,7 +156,21 @@
 
     & .full-name,
     & .meta {
+      /* Ellipsis requires a non-visible overflow. `clip` rather than `hidden`
+         so overflow-clip-margin can widen the paint region — see @supports. */
+      overflow: clip;
+      min-width: 0;
+      text-overflow: ellipsis;
+
       @supports (text-box: trim-both cap alphabetic) {
+        /* Trimming to the alphabetic baseline ends the content box at the
+           baseline, leaving descenders (g, y, p) outside it — overflow would
+           shear them. Widening the clip region keeps them painted. This is a
+           paint-only property, so it does not change layout or height.
+           0.3em clears the font's full declared descent (0.286em in Inter at
+           10.5px); 0.25em left under half a pixel of headroom. */
+        overflow-clip-margin: 0.3em;
+
         text-box: trim-both cap alphabetic;
       }
     }
