@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-08-19
 - **Decision makers:** Edvard Pires Bjørgen, EDS Core Team
+- **Scope:** Web, Mobile
 
 ## Context
 
