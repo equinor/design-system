@@ -1,4 +1,4 @@
-import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { AnchorMdx, Meta, Unstyled } from '@storybook/addon-docs/blocks'
 import { Badge, Banner, Button, Icon } from '../../src/components/next'
 import { info_circle } from '@equinor/eds-icons'
 import './breaking-changes.css'
@@ -54,9 +54,9 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.2` (September 2026). If a c
 <Unstyled>
   <nav aria-label="Jump to a component" data-color-scheme="light" className="eds-breaking-changes-jump-links">
     {components.map((name) => (
-      <a key={name} href={`#${name.toLowerCase()}`} target="_self">
+      <AnchorMdx key={name} href={`#${name.toLowerCase()}`}>
         {name}
-      </a>
+      </AnchorMdx>
     ))}
   </nav>
 </Unstyled>
