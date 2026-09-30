@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-04-23
 - **Decision makers:** EDS core team
+- **Scope:** Web
 
 ## Context
 

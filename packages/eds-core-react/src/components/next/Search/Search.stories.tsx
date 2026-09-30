@@ -79,13 +79,24 @@ const meta: Meta<typeof Search> = {
         'Unique identifier for the field (auto-generated if not provided)',
       table: { category: 'Other' },
     },
-    containerClassName: { table: { disable: true } },
+    className: {
+      control: 'text',
+      description:
+        'CSS class names applied to the root element (the `<search>` wrapper). Use this to control layout, width, or margin of the entire search field.',
+      table: { category: 'Styling' },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the root element (the `<search>` wrapper).',
+      table: { category: 'Styling' },
+    },
   },
   parameters: {
     docs: {
       description: {
         component: `
-⚠️ **Beta Component** - This component is under active development.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
 \`\`\`tsx
 import { Search } from '@equinor/eds-core-react/next'

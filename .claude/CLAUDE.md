@@ -23,22 +23,23 @@ The path-scoped rules are intentionally short — they reference [`AGENTS.md`](.
 
 User-invokable prompts triggered with `/command-name`.
 
-| Command                 | Usage                                 | Description                                              |
-| ----------------------- | ------------------------------------- | -------------------------------------------------------- |
-| `/new-component`        | `/new-component Button`               | Scaffold a new EDS 2.0 component with all required files |
-| `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation     |
-| `/accessibility-audit`  | `/accessibility-audit <url>`          | Audit a page or Storybook story against WCAG 2.1 AA      |
-| `/audit-harnesses`      | `/audit-harnesses`                    | Audit AI harness configs for drift across tools          |
-| `/tokens-studio`        | `/tokens-studio <task>`               | Tokens Studio platform / studio CLI pipeline assistant   |
+| Command                 | Usage                                 | Description                                                        |
+| ----------------------- | ------------------------------------- | ------------------------------------------------------------------ |
+| `/new-component`        | `/new-component Button`               | Scaffold a new EDS 2.0 component with all required files           |
+| `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation               |
+| `/accessibility-audit`  | `/accessibility-audit <url>`          | Audit a page or Storybook story against WCAG 2.1 AA                |
+| `/audit-harnesses`      | `/audit-harnesses`                    | Audit AI harness configs for drift across tools                    |
+| `/tokens-studio`        | `/tokens-studio <task>`               | Tokens Studio platform / studio CLI pipeline assistant             |
+| `/dependabot-duty`      | `/dependabot-duty [scope]`            | Triage Dependabot PRs, Dependabot alerts and code scanning, report |
 
 ## Hooks
 
 Configured in `.claude/settings.json`. Scripts live in `.claude/hooks/`.
 
-| Hook             | Event         | Matcher                                             | Purpose                                        |
-| ---------------- | ------------- | --------------------------------------------------- | ---------------------------------------------- |
-| `read_hook.js`   | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files |
-| `format_hook.js` | `PostToolUse` | `Edit\|Write`                                       | Runs ESLint+Prettier auto-fix on edited files  |
+| Hook             | Event         | Matcher                                             | Purpose                                                                                                                          |
+| ---------------- | ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `read_hook.js`   | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files                                                                                   |
+| `format_hook.js` | `PostToolUse` | `Edit\|Write`                                       | Runs `eslint --fix` on edited `.ts`/`.tsx`, `stylelint --fix` on `/components/next/` CSS, and `prettier --write` on `.css`/`.md` |
 
 See [`.claude/README.md`](./README.md) for hook authoring details.
 

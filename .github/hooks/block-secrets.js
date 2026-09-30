@@ -32,7 +32,7 @@ async function main() {
 
   const credentialBasename = [
     /^\.env(\..+)?$/,
-    /^id_rsa(\.pub)?$/,
+    /^id_(rsa|ed25519|ecdsa|dsa)/,
     /\.pem$/,
     /\.key$/,
     /^\.?credentials\.json$/,

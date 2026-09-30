@@ -1,8 +1,8 @@
 ---
 title: System Icons
+hide_title: true
+description: 'System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.'
 ---
-
-System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.
 
 ## Usage Guidelines
 
@@ -72,6 +72,5 @@ Extremely complex shapes sometimes require complex details. The guidelines allow
 
 - Pick a category for the icon to live under. Reference the library for current categories
 - Supply a list of alternative names that people might associate with your icon. This will help when searching
-
 
 Get in touch with the EDS core team designers for further assistance.

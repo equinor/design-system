@@ -3,10 +3,10 @@
 exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
 <div>
   <div
-    class="eds-field"
+    class="eds-field eds-text-field"
   >
     <div
-      class="eds-text-field__header"
+      class="header"
     >
       <label
         class="label"
@@ -24,7 +24,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       Description text
     </p>
     <div
-      class="eds-input-container"
+      class="eds-input"
       data-color-appearance="neutral"
       data-font-size="md"
       data-selectable-space="sm"
@@ -32,7 +32,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     >
       <input
         aria-describedby="test-id-description test-id-helper-message"
-        class="eds-input"
+        class="control"
         data-color-appearance="neutral"
         data-font-family="ui"
         data-font-size="md"
