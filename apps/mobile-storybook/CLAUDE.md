@@ -173,8 +173,10 @@ The Components list and the screen's header title are both built from this entry
 - a component folder exported from the library has no registry entry
 - a registry entry has no screen file
 - a screen file has no registry entry
+- a route appears more than once in the registry
+- a component in `NO_DEMO_SCREEN` is no longer exported, or already has a registry entry
 
-CI runs it on any change to the mobile library or this app. Components that are exported but should not have a demo screen (providers, infrastructure) are listed, with a reason, in `NO_DEMO_SCREEN` in `scripts/check-mobile-demo-screens.js`.
+CI runs it on any change to the mobile library, this app or the root `package.json`. Components that are exported but should not have a demo screen (providers, infrastructure) are listed, with a reason, in `NO_DEMO_SCREEN` in `scripts/check-mobile-demo-screens.js`.
 
 ### Component Screen Best Practices
 

@@ -9,11 +9,15 @@
  * lowercased name of the component's folder in `eds-mobile-components`.
  */
 
-export type ComponentGroup =
-    | "Actions"
-    | "Data Display"
-    | "Data Entry"
-    | "Navigation";
+/** Groups in the order they appear in the Components list. */
+const groupOrder = [
+    "Actions",
+    "Data Display",
+    "Data Entry",
+    "Navigation",
+] as const;
+
+export type ComponentGroup = (typeof groupOrder)[number];
 
 export type ComponentEntry = {
     /** Label in the Components list and title in the screen header. */
@@ -40,18 +44,13 @@ export const componentRegistry: ComponentEntry[] = [
     { name: "Link", route: "link", group: "Navigation" },
 ];
 
-const groupOrder: ComponentGroup[] = [
-    "Actions",
-    "Data Display",
-    "Data Entry",
-    "Navigation",
-];
-
 /** Registry entries grouped for the Components list, in display order. */
-export const componentSections = groupOrder.map((title) => ({
-    title,
-    data: componentRegistry.filter((entry) => entry.group === title),
-}));
+export const componentSections = groupOrder
+    .map((title) => ({
+        title,
+        data: componentRegistry.filter((entry) => entry.group === title),
+    }))
+    .filter((section) => section.data.length > 0);
 
 /** Screen header title for a route, or undefined for unregistered routes. */
 export function getComponentTitle(route: string): string | undefined {

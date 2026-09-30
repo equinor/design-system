@@ -14,7 +14,9 @@
  *      entry (and is not in NO_DEMO_SCREEN).
  *   2. A registry entry has no screen file.
  *   3. A screen file has no registry entry.
- *   4. A NO_DEMO_SCREEN entry is no longer exported, so the list stays honest.
+ *   4. A route appears more than once in the registry.
+ *   5. A NO_DEMO_SCREEN entry is no longer exported, or already has a registry
+ *      entry, so the list stays honest.
  *
  * The registry `route` must be the lowercased component folder name.
  *
@@ -50,12 +52,26 @@ const NO_DEMO_SCREEN = {
 // Files in the screens folder that are routes' plumbing, not demo screens.
 const NON_SCREEN_FILES = new Set(['index', '_layout'])
 
-const barrel = fs.readFileSync(barrelPath, 'utf8')
-const exportedFolders = [
-  ...barrel.matchAll(/export \* from ['"]\.\/components\/([^'"/]+)['"]/g),
-].map((match) => match[1])
+// Comments are stripped before parsing so commented-out exports or example
+// routes are not counted. Neither file contains `//` inside a string.
+const stripComments = (source) =>
+  source.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '')
 
-const registry = fs.readFileSync(registryPath, 'utf8')
+// Any `from './components/X'` counts, whatever the export form (`export *`,
+// `export { A } from`, multi-line, `export type`). A deeper path such as
+// `./components/X/Y` still resolves to the folder X.
+const barrel = stripComments(fs.readFileSync(barrelPath, 'utf8'))
+const exportedFolders = [
+  ...new Set(
+    [
+      ...barrel.matchAll(
+        /from\s+['"]\.\/components\/([^'"/]+)(?:\/[^'"]*)?['"]/g,
+      ),
+    ].map((match) => match[1]),
+  ),
+]
+
+const registry = stripComments(fs.readFileSync(registryPath, 'utf8'))
 const registeredRoutes = [
   ...registry.matchAll(/route:\s*['"]([^'"]+)['"]/g),
 ].map((match) => match[1])
@@ -67,18 +83,6 @@ const screenFiles = fs
   .filter((name) => !NON_SCREEN_FILES.has(name))
 
 const errors = []
-
-// The parser above only understands `export * from './components/X'`. Fail
-// loudly on any other export form from components/ rather than silently
-// skipping that component.
-const componentExportLines = barrel
-  .split('\n')
-  .filter((line) => /^\s*export\b.*from\s+['"]\.\/components\//.test(line))
-if (componentExportLines.length !== exportedFolders.length) {
-  errors.push(
-    `src/index.ts has ${componentExportLines.length} export lines from ./components/ but only ${exportedFolders.length} use the supported form \`export * from "./components/X"\`. Use that form, or update scripts/check-mobile-demo-screens.js to parse the new one.`,
-  )
-}
 
 for (const folder of exportedFolders) {
   if (folder in NO_DEMO_SCREEN) continue
