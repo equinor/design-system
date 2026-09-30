@@ -1,109 +1,78 @@
 # EDS Documentation Website
 
-This documentation website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator. It provides comprehensive documentation, guidelines, and resources for the Equinor Design System.
+The public Equinor Design System documentation site — [eds.equinor.com](https://eds.equinor.com) — built with [Docusaurus](https://docusaurus.io/).
+
+It is versioned. `docs/` is the current version, labelled **3.0.0-beta** and served at `/docs/Next/…`. `versioned_docs/version-2.0.0-beta/` is a frozen snapshot served at `/docs/2.0.0-beta/…`, rendered with the redesign. `versioned_docs/version-1.1.0/` is a **frozen archive** served at `/docs/…` that must not be restyled or edited.
+
+## Conventions
+
+**[`AGENTS.md`](./AGENTS.md) is the canonical reference for this app** — directory map, the five global stylesheets, the two token bundles and their typography collision, the Inter subset rule, version scoping, the shared MDX component registry, StoryCanvas, the webpack aliases, which dependencies this app may declare, and the full verification workflow. Read it before changing anything here; this README only covers getting the site running.
+
+Repo-wide conventions (commits, secrets, formatting) are in the root [`AGENTS.md`](../../AGENTS.md).
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+- **Node.js** — the version in [`.nvmrc`](../../.nvmrc) (`nvm use` from the repo root). Note the production image pins its own version in `DockerfileEdsDocs`.
+- **pnpm** — the version in the root `package.json` `packageManager` field.
 
-* **Node.js** -- Version 16.15 or compatible
-* **pnpm** -- Version 10.15.0 or higher (install globally with `npm install -g pnpm`)
+## Setup
 
-## Important Note
-
-This documentation site is part of the EDS monorepo. All commands should be run from the **root directory** of the monorepo, not from this directory.
-
-If you haven't already, start by setting up the monorepo:
-- First navigate to the root directory
-- Then install dependencies and build packages by running `pnpm run init`
-
-## Available Commands
-
-Run these commands from the **root directory** of the monorepo:
-
-### Local Development
+This app is part of the EDS monorepo, and **all commands run from the repo root**, not from this directory.
 
 ```bash
-pnpm docu:start
+pnpm install
+pnpm run build          # required — see below
 ```
 
-This command starts a local development server at `http://localhost:3000` and opens your browser. Most changes are reflected live without needing to restart the server.
+`pnpm run build` is not optional. The site resolves `@equinor/eds-core-react/next` and `/next/index.css` through webpack aliases that point straight at eds-core-react's **built** artifacts (`/next` is deliberately absent from the committed `exports` map — beta-only, issue #4395). Without that build the site fails to compile, or components silently go missing.
 
-### Build
+If components disappear after a change to eds-core-react, rebuild in order:
 
 ```bash
-pnpm docu:build
+pnpm --filter @equinor/eds-utils run build
+pnpm run build:core-react
 ```
 
-This command extracts prerequisites and generates static content into the `build` directory. You can serve this content using any static hosting service.
+## Commands
 
-### Serve Built Site
+Run from the repo root.
 
-```bash
-pnpm docu:serve
-```
+| Command                       | What it does                                                     |
+| ----------------------------- | ---------------------------------------------------------------- |
+| `pnpm docu:start`             | Dev server on `http://localhost:3000`, with hot reload            |
+| `pnpm docu:build`             | Extract prerequisites, then build the static site into `build/`   |
+| `pnpm docu:serve`             | Serve the built site locally (add `--port N` to avoid a clash)    |
+| `pnpm docu:clear`             | Clear the Docusaurus cache                                        |
+| `pnpm run build:docs`         | Build only — what CI and `DockerfileEdsDocs` run                  |
 
-Use this command to preview the production build locally before deploying.
+Webpack/config changes need a dev-server restart; content and CSS hot-reload.
 
-### Clear Cache
+### Checks
 
-```bash
-pnpm docu:clear
-```
+CI splits these across three jobs in `.github/workflows/checks.yaml`: `docs` runs `format:check:docs`, `lint:css:docs`, `check:docs-stories` and `build:docs`; `tsc` runs in `types`; `lint:docs` runs in `lint` via `lint:all`. The root `pnpm run build` does **not** include this app, which is why the `docs` job exists.
 
-If you encounter issues, clear the Docusaurus cache with this command.
+| Command                        | What it checks                                        |
+| ------------------------------ | ----------------------------------------------------- |
+| `pnpm run types`               | Type-checks every package, this app included          |
+| `pnpm run lint:docs`           | ESLint                                                |
+| `pnpm run lint:css:docs`       | Stylelint                                             |
+| `pnpm run format:check:docs`   | Prettier (excludes the frozen 1.1.0 archive)          |
+| `pnpm run check:docs-stories`  | Every StoryCanvas / StorybookEmbed reference resolves |
+| `pnpm --filter design-system-docs run check:colour-docs` | The colour pages and components match the token source |
 
-### Extract Prerequisites
+Two checks need a running server and are not in CI — the viewport-overflow gate (`node scripts/check-viewport-overflow.mjs [baseUrl]`) and a manual light/dark browser pass. See the verification workflow in [`AGENTS.md`](./AGENTS.md#verification-workflow).
 
-```bash
-pnpm docu:prerequisites
-```
+## Writing documentation
 
-This command extracts prerequisite information from package files. It runs automatically during the build process.
+Content lives in `docs/` as Markdown and MDX. For tone of voice, section order and the component-doc template, see [`COMPONENT_DOC_STYLE.md`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md).
 
-### Lint
+Three tone guides are available, and are excluded from the build:
 
-```bash
-pnpm lint:docs
-```
+- [Friendly Professional](./docs/tone-guide/friendly-professional.md) — the default
+- [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) — concise but approachable
+- [Minimalist](./docs/tone-guide/minimalist.md) — essential information only
 
-Run ESLint to check for code quality issues in the documentation site.
-
-### Colour docs
-
-```bash
-pnpm generate:colour-reference
-pnpm check:colour-docs
-```
-
-Regenerate the colour token reference from `packages/eds-tokens`, and verify the colour pages and
-components against it. See [Colour docs generation](#colour-docs-generation).
-
-## Project Structure
-
-The documentation site includes:
-
-* **docs/** -- Documentation content in Markdown and MDX format
-* **src/** -- Custom React components and pages
-* **static/** -- Static assets like images and files
-* **docusaurus.config.ts** -- Docusaurus configuration
-
-## Writing Documentation
-
-When adding or updating documentation:
-
-1. Create or edit Markdown/MDX files in the `docs/` directory
-2. Use clear headings and structure for easy navigation
-3. Test your changes locally with `pnpm docu:start`
-4. Ensure all links work correctly
-
-## Writing Tone Guides
-
-When creating content for the documentation site, choose the appropriate tone guide:
-
-* [Friendly Professional](./docs/tone-guide/friendly-professional.md) -- Default for most documentation
-* [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) -- Concise but approachable
-* [Minimalist](./docs/tone-guide/minimalist.md) -- Essential information only
+Unwritten component docs are parked as `_name.md`. Docusaurus skips `_`-prefixed files, so they stay out of the build, the sidebar and the search index; drop the underscore, add a `description`, and add the doc id to `componentsSidebar` in `sidebars.ts` to publish one.
 
 ## Colour docs generation
 
@@ -112,8 +81,8 @@ token source, and both read only from `packages/eds-tokens/src/tokens` - no exte
 authentication, no separate export step.
 
 ```bash
-pnpm generate:colour-reference   # rewrite the reference table
-pnpm check:colour-docs           # verify the pages and components against the tokens
+pnpm --filter design-system-docs run generate:colour-reference   # rewrite the reference table
+pnpm --filter design-system-docs run check:colour-docs           # verify the pages and components against the tokens
 ```
 
 Run the generator after any token release, and the checker before opening a PR that touches the
@@ -124,7 +93,7 @@ colour docs.
 | | |
 |---|---|
 | **Generated** | `docs/foundation/colour/reference.mdx`, the region between the `GENERATED` markers: 263 tokens in 9 groups, each with its CSS custom property and its resolved light and dark values |
-| **Hand-written** | everything else. All prose on `intro`, `getting_started`, `palette` and `migration`, and the frontmatter and introduction above the markers on `reference` |
+| **Hand-written** | everything else. All prose on `intro`, `getting_started`, `usage`, `palette` and `migration`, and the frontmatter and introduction above the markers on `reference` |
 
 Do not edit inside the markers. The next run overwrites it.
 
@@ -193,79 +162,18 @@ stale count renders as a smaller grid. Neither raises an error.
 2.x names are accepted where the migration page quotes them deliberately, read from the legacy build
 rather than allowed by prefix, so a typo in a legacy name still fails.
 
-## Design token CSS
-
-`src/css/custom.css` imports **two** token bundles, on purpose:
-
-```css
-@import '@equinor/eds-tokens/css/variables';                        /* 2.x */
-@import '../../../../packages/eds-tokens/src/tokens/css/variables.css';  /* 3.x */
-```
-
-The first is the legacy build (603 variables, `--eds-color-*`). Most of the site still reads those
-names, so it stays.
-
-The second is the Tokens Studio output (975 variables, `--eds-background-*`, `--eds-text-on-*`, …),
-which the colour foundation docs document and which the colour components paint with. Without it,
-every `var(--eds-background-*)` on the site resolves to nothing.
-
-**Why the relative path.** The package exposes the Tokens Studio output as `./next/css/*`, but that
-export is injected at publish time and only on the beta dist-tag, per
-[ADR-0009](../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md). A workspace
-app resolves against the checked-in `package.json`, where the specifier does not exist, so it cannot
-be imported by name.
-
-**When to remove it.** ADR-0009's exit plan is that once the last `/next` component has migrated, a
-beta release drops the legacy `build/` output and moves the Tokens Studio output onto the final
-specifiers. At that point both imports collapse into a single
-`@import '@equinor/eds-tokens/css/variables';` and the relative path goes. Until then it will break
-if the tokens package moves that file, so it is worth checking after any change to the tokens build.
-
-## Technology Stack
-
-The documentation site uses:
-
-* **Docusaurus** -- Static site generator
-* **React** -- UI framework
-* **TypeScript** -- Type-safe JavaScript
-* **MDX** -- Markdown with React components
-* **EDS Tokens & Components** -- Equinor Design System packages
-
 ## Troubleshooting
 
-### Port Already in Use
+**Components missing or the build fails on `@equinor/eds-core-react/next`** — eds-core-react is not built. See [Setup](#setup).
 
-If port 3000 is already in use, either stop the conflicting process or Docusaurus will automatically use the next available port.
+**Port 3000 in use** — Docusaurus offers the next free port. For `docu:serve`, pass `--port` explicitly.
 
-### Build Fails
+**Stale or strange build output** — `pnpm docu:clear`, then rebuild.
 
-Try clearing the cache, rebuilding and then restarting:
+**Module not found** — `pnpm install` from the root.
 
-```bash
-pnpm docu:clear
-pnpm docu:build
-pnpm docu:start
-```
+## Help
 
-### Module Not Found Errors
-
-Ensure all dependencies are installed by running from the root:
-
-```bash
-pnpm install
-```
-
-## Contributing
-
-When contributing to the documentation:
-
-1. Follow the [contribution guidelines](../../README.md#contributions)
-2. Use the appropriate [tone guide](#writing-tone-guides) for your content
-3. Test locally before submitting a pull request
-4. Ensure all links and images work correctly
-
-## Need Help?
-
-* Check the main [project README](../../README.md) for more information about the monorepo
-* Visit the [Docusaurus documentation](https://docusaurus.io/docs) for site-specific questions
-* Join the conversation on Slack: [#eds-design-system](https://equinor.slack.com/archives/CJT20H1B9)
+- Main [project README](../../README.md)
+- [Docusaurus documentation](https://docusaurus.io/docs)
+- Slack: [#eds-design-system](https://equinor.slack.com/archives/CJT20H1B9)

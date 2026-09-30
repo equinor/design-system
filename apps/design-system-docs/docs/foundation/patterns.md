@@ -1,8 +1,8 @@
 ---
 title: Patterns
+hide_title: true
+description: 'Effective design patterns help you create consistent, user-friendly interfaces by providing proven solutions to common design challenges. These patterns ensure your components work harmoniously together whilst maintaining visual structure throughout your product.'
 ---
-
-Effective design patterns help you create consistent, user-friendly interfaces by providing proven solutions to common design challenges. These patterns ensure your components work harmoniously together whilst maintaining visual structure throughout your product.
 
 ## Grid System and Spacing
 
@@ -19,14 +19,14 @@ For comprehensive guidelines on implementing our grid system, please refer to th
 - Use the 8px minimum spacing between all components
 - Align objects within grid columns for consistency
 - Apply appropriate grid sizes based on your component dimensions
-:::
+  :::
 
 :::danger **Don't**
 
 - Use spacing less than 8px between components
 - Mix on-grid and off-grid object placement without purpose
 - Ignore the grid system when positioning elements
-:::
+  :::
 
 ## Reading Patterns and Layout
 

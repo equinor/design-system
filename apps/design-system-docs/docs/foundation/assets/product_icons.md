@@ -1,8 +1,8 @@
 ---
 title: Product Icons
+hide_title: true
+description: "Product icons represent key themes and business areas with Equinor's visual identity. They help users identify and navigate between different products and services whilst maintaining consistent brand recognition."
 ---
-
-Product icons represent key themes and business areas with Equinor's visual identity. They help users identify and navigate between different products and services whilst maintaining consistent brand recognition.
 
 ## When to Use Product Icons
 

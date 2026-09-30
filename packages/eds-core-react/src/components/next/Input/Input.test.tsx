@@ -52,21 +52,23 @@ describe('Input (Next EDS 2.0)', () => {
       expect(input).toHaveAttribute('type', 'password')
     })
 
-    it('Can be extended with containerClassName', () => {
+    it('applies className and style to the root container element', () => {
       render(
-        <Input value="textfield" containerClassName="custom-class" readOnly />,
+        <Input
+          value="textfield"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+          readOnly
+        />,
       )
       const input = screen.getByDisplayValue('textfield')
-      expect(input).toBeInTheDocument()
       // eslint-disable-next-line testing-library/no-node-access
-      expect(input.parentElement).toHaveClass('custom-class')
-    })
-
-    it('Can be extended with className on input element', () => {
-      render(<Input value="textfield" className="input-class" readOnly />)
-      const input = screen.getByDisplayValue('textfield')
-      expect(input).toHaveClass('eds-input')
-      expect(input).toHaveClass('input-class')
+      const container = input.parentElement
+      expect(container).toHaveClass('eds-input')
+      expect(container).toHaveClass('custom-class')
+      expect(container).toHaveStyle({ marginTop: '8px' })
+      expect(input).toHaveClass('control')
+      expect(input).not.toHaveClass('custom-class')
     })
   })
 
@@ -100,7 +102,7 @@ describe('Input (Next EDS 2.0)', () => {
     it('Shows error icon when invalid by default', () => {
       const { container } = render(<Input invalid aria-label="Invalid input" />)
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).toBeInTheDocument()
     })
 
@@ -109,7 +111,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid hideErrorIcon aria-label="Invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
 
@@ -118,7 +120,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid disabled aria-label="Disabled invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
 
@@ -127,7 +129,7 @@ describe('Input (Next EDS 2.0)', () => {
         <Input invalid readOnly aria-label="ReadOnly invalid input" />,
       )
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const errorIcon = container.querySelector('.eds-error-icon')
+      const errorIcon = container.querySelector('.error-icon')
       expect(errorIcon).not.toBeInTheDocument()
     })
   })
@@ -164,8 +166,8 @@ describe('Input (Next EDS 2.0)', () => {
     it('Text has text class', () => {
       const { container } = render(<Input startText="NOK" endText="kg" />)
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      const startText = container.querySelector('.eds-adornment__text')
-      const endText = container.querySelectorAll('.eds-adornment__text')[1]
+      const startText = container.querySelector('.text')
+      const endText = container.querySelectorAll('.text')[1]
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
       expect(startText).toBeInTheDocument()
       expect(endText).toBeInTheDocument()
@@ -179,12 +181,8 @@ describe('Input (Next EDS 2.0)', () => {
         />,
       )
       /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-      const startAdornment = container.querySelector(
-        '.eds-adornment__adornment',
-      )
-      const endAdornment = container.querySelectorAll(
-        '.eds-adornment__adornment',
-      )[1]
+      const startAdornment = container.querySelector('.item')
+      const endAdornment = container.querySelectorAll('.item')[1]
       /* eslint-enable testing-library/no-container, testing-library/no-node-access */
       expect(startAdornment).toBeInTheDocument()
       expect(endAdornment).toBeInTheDocument()
@@ -271,17 +269,17 @@ describe('Input (Next EDS 2.0)', () => {
     })
 
     describe('CSS classes', () => {
-      it('Applies base class and custom containerClassName', () => {
-        render(<Input containerClassName="test-class" />)
+      it('Applies base class and custom className to the root container', () => {
+        render(<Input className="test-class" />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveClass('eds-input-container')
+        expect(wrapper).toHaveClass('eds-input')
         expect(wrapper).toHaveClass('test-class')
       })
 
-      it('Applies input class to input element', () => {
+      it('Applies input class to the inner input element', () => {
         render(<Input value="test" readOnly />)
         const input = screen.getByDisplayValue('test')
-        expect(input).toHaveClass('eds-input')
+        expect(input).toHaveClass('control')
       })
 
       it('Applies disabled data attribute when disabled', () => {

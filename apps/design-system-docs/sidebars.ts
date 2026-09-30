@@ -7,45 +7,25 @@ const sidebars: SidebarsConfig = {
 
   //About Section
   aboutSidebar: [
-    'about/about_eds',
     {
       type: 'category',
-      label: 'Basics',
+      label: 'Design',
       link: {
         type: 'doc',
-        id: 'about/getting-started/getting_started',
+        id: 'about/getting-started/design/getting_started_design',
       },
-      items: [
-        'about/getting-started/getting_started',
-        {
-          type: 'category',
-          label: 'Design',
-          link: {
-            type: 'doc',
-            id: 'about/getting-started/design/getting_started_design',
-          },
-          items: [
-            'about/getting-started/design/getting_started_design',
-            'about/getting-started/design/figma',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Develop',
-          link: {
-            type: 'doc',
-            id: 'about/getting-started/develop/getting_started_development',
-          },
-          items: [
-            'about/getting-started/develop/getting_started_development',
-            'about/getting-started/develop/citizen_developers',
-          ],
-        },
-
-        'about/getting-started/team_roles',
-      ],
+      items: ['about/getting-started/design/figma'],
     },
-    'about/team/team',
+    {
+      type: 'category',
+      label: 'Develop',
+      link: {
+        type: 'doc',
+        id: 'about/getting-started/develop/getting_started_development',
+      },
+      items: ['about/getting-started/develop/citizen_developers'],
+    },
+    'about/getting-started/team_roles',
   ],
   //Components Section
   componentsSidebar: [
@@ -108,8 +88,8 @@ const sidebars: SidebarsConfig = {
         id: 'foundation/colour/intro',
       },
       items: [
-        'foundation/colour/intro',
         'foundation/colour/getting_started',
+        'foundation/colour/usage',
         'foundation/colour/palette',
         'foundation/colour/migration',
         'foundation/colour/reference',
@@ -123,7 +103,6 @@ const sidebars: SidebarsConfig = {
         id: 'foundation/design-tokens/grid',
       },
       items: [
-        'foundation/design-tokens/grid',
         'foundation/design-tokens/elevation',
         'foundation/design-tokens/shape',
         {
@@ -134,7 +113,6 @@ const sidebars: SidebarsConfig = {
             id: 'foundation/design-tokens/spacing',
           },
           items: [
-            'foundation/design-tokens/spacing',
             'foundation/design-tokens/spacing-scale',
             'foundation/design-tokens/spacing-usage',
             'foundation/design-tokens/spacing-reference',
@@ -153,7 +131,6 @@ const sidebars: SidebarsConfig = {
         id: 'foundation/assets/image_placeholder',
       },
       items: [
-        'foundation/assets/image_placeholder',
         'foundation/assets/logos',
         'foundation/assets/illustration',
         'foundation/assets/product_icons',

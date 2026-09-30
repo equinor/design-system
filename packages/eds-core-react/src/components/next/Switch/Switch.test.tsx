@@ -40,19 +40,21 @@ describe('Switch (next)', () => {
       expect(screen.getByRole('switch')).toBeInTheDocument()
     })
 
-    it('can extend the css for the component', () => {
+    it('applies className and style to the outer wrapper, not the hidden input', () => {
       render(
         <Switch
           label="switch-test"
           className="custom-switch"
-          style={{ clipPath: 'unset' }}
+          style={{ marginTop: '8px' }}
         />,
       )
-      const switchEl = screen.getByLabelText('switch-test')
-      expect(switchEl).toBeInTheDocument()
+      const input = screen.getByLabelText('switch-test')
       // eslint-disable-next-line testing-library/no-node-access
-      const wrapper = switchEl.closest('.eds-switch')
+      const wrapper = input.closest('.eds-switch')
       expect(wrapper).toHaveClass('custom-switch')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+      expect(input).not.toHaveClass('custom-switch')
+      expect(input).toHaveClass('input')
     })
   })
 
@@ -122,6 +124,18 @@ describe('Switch (next)', () => {
       expect(switchEl).toHaveFocus()
     })
 
+    it('is disabled when inherited from a disabled fieldset', async () => {
+      render(
+        <fieldset disabled>
+          <Switch label="Inherited disabled" />
+        </fieldset>,
+      )
+      const switchEl = screen.getByLabelText('Inherited disabled')
+      expect(switchEl).toBeDisabled()
+      await userEvent.click(switchEl)
+      expect(switchEl).not.toBeChecked()
+    })
+
     it('disabled switch is not focusable via Tab', async () => {
       render(<Switch label="Disabled focus" disabled />)
       const switchEl = screen.getByLabelText('Disabled focus')
@@ -146,6 +160,16 @@ describe('Switch (next)', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = switchEl.closest('.eds-switch')
       expect(wrapper).toHaveAttribute('data-disabled', 'true')
+    })
+
+    it('keeps accent color appearance when disabled', () => {
+      // The disabled greys are appearance-independent in CSS, so the
+      // appearance no longer flips to neutral on the disabled prop
+      render(<Switch label="Disabled switch" disabled />)
+      const switchEl = screen.getByLabelText('Disabled switch')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = switchEl.closest('.eds-switch')
+      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
     })
 
     it('applies data-* attributes to input element', () => {

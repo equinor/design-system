@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { InputProps } from '../Input/Input.types'
 
 export type TextFieldProps = {
@@ -14,4 +14,8 @@ export type TextFieldProps = {
   helperMessage?: ReactNode
   /** Unique identifier for the field */
   id?: string
-} & InputProps
+  /** CSS class names applied to the root element (the outer labeled field wrapper). */
+  className?: string
+  /** Inline styles applied to the root element (the outer labeled field wrapper). */
+  style?: CSSProperties
+} & Omit<InputProps, 'className' | 'style'>

@@ -93,11 +93,12 @@ export function DensitySwitch({
                 fontFamily: 'inherit',
                 cursor: 'pointer',
                 borderRadius: 4,
-                border: '1px solid var(--ifm-color-emphasis-300)',
+                border:
+                  '1px solid var(--eds-border-interactive-neutral-muted-default)',
                 background: selected
-                  ? 'var(--ifm-color-emphasis-200)'
+                  ? 'var(--eds-background-interactive-neutral-selected-default)'
                   : 'transparent',
-                color: 'var(--ifm-font-color-base)',
+                color: 'var(--eds-text-primary)',
                 fontWeight: selected ? 600 : 400,
               }}
             >

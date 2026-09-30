@@ -1,5 +1,6 @@
 ---
 title: The palette
+hide_title: true
 description: How the colour scale is built, why the same token names work in both light and dark, and what each step does.
 ---
 
@@ -88,9 +89,9 @@ lighter than the canvas in light and darker in dark.
 
 ## The steps jump on purpose
 
-The scale is not a smooth gradient. Lightness values are chosen per step so that the pairings that
-matter, such as text against surface and fill against canvas, meet the contrast target exactly rather
-than approximately.
+The scale is not a smooth gradient. Lightness values are chosen per step for intended pairings,
+such as text against surface and fill against canvas. Check contrast against the actual background
+for every state rather than assuming that all combinations meet the same target.
 
 Notice that the middle of the scale is evenly spaced while the run from borders into fills jumps
 roughly twice as far. That gap is where strokes stop and fills begin, and it needs to be visible.

@@ -41,7 +41,7 @@ const STEPS = Array.from({ length: 15 }, (_, i) => i + 1)
 const label: React.CSSProperties = {
   fontFamily: 'var(--ifm-font-family-monospace)',
   fontSize: '0.6875rem',
-  color: 'var(--ifm-color-emphasis-700)',
+  color: 'var(--eds-text-secondary)',
   whiteSpace: 'nowrap',
 }
 
@@ -76,7 +76,8 @@ export function ColourScale() {
                   background: `var(--eds-${tone}-${step})`,
                   height: '2rem',
                   borderRadius: '3px',
-                  border: '1px solid var(--ifm-color-emphasis-200)',
+                  border:
+                    '1px solid var(--eds-border-non-interactive-neutral-muted)',
                 }}
               />
             ))}

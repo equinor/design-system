@@ -1,0 +1,339 @@
+/**
+ * Doc-page layouts — the layout treatments applied to docs-plugin pages.
+ *
+ * 1. Default doc card (.theme-doc-markdown) — all versions.
+ * 2. Landing layout (.docs-landing) — MDX docs that opt in via <DocsLanding>.
+ * 3. Hero-band docs: container chrome around the hero band the DocItem/Layout
+ *    swizzle renders on component and foundation docs (redesigned versions
+ *    only).
+ * 4. Colour foundation pages: the generated token reference tables and the
+ *    usage-page links, written straight into the colour MDX.
+ * 5. Scrollable tables: edge shadows on tables wider than the content column
+ *    (redesigned versions and unversioned pages only).
+ *
+ * These rules target `main`/`.col`/docItem* ancestors of the doc content, so
+ * they cannot be colocated with a component. Variables live in
+ * theme-variables.css; navbar/sidebar/footer chrome in site-chrome.css.
+ */
+
+/* ======================================
+ * 1. DEFAULT DOC CARD
+ * ====================================== */
+.theme-doc-markdown {
+  padding: 1.5rem;
+  border: var(--eds-border-non-interactive-neutral-muted) 1px solid;
+  border-radius: var(--ifm-global-radius);
+  background-color: var(--eds-background-surface);
+}
+
+/* Collapsing the desktop sidebar must not widen the content column.
+   Docusaurus puts `.docItemWrapperEnhanced` on `main > .container` and raises
+   its cap to `--ifm-container-width + --doc-sidebar-width` (1440px) so the doc
+   spends the reclaimed space. That makes component/foundation reference pages
+   the only place on the site where the content measure changes, and it breaks
+   the alignment `--ifm-container-width-xl` in theme-variables.css exists to
+   keep. Pin it back to `--ifm-container-width` (1140px cap, 1108px content box
+   after the container's horizontal padding) so every page reads at one measure
+   and collapsing the sidebar only re-centres the column. The attribute
+   selector matches Docusaurus's hashed CSS-module class; the `!important` and
+   the extra specificity are needed to beat its own `!important` rule.
+
+   `.docs-landing` (section 2) is excluded, because it deliberately drops the
+   cap and its own `main:has(.docs-landing) > .container` rule is less specific
+   than this one and would lose.
+
+   Scoped to the redesigned versions (current and the frozen 2.0.0-beta).
+   The 1.1.0 archive keeps stock behaviour. */
+@media (width >= 997px) {
+  html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+    main:not(:has(.docs-landing))
+    > .container[class*='docItemWrapperEnhanced'] {
+    max-width: var(--ifm-container-width) !important;
+  }
+}
+
+/* Size `main` from flex alone, so it always fills exactly the space the
+   sidebar `aside` leaves. Docusaurus instead caps `main` with a `max-width`
+   that it swaps between `100% - --doc-sidebar-width` and
+   `100% - --doc-sidebar-hidden-width` when the sidebar collapses. That swap
+   happens in one frame while the aside animates its width over 200ms, so
+   expanding the sidebar made the content jerk ~240px left and slide back.
+
+   Transitioning `max-width` fixed the collapse, but it also fired on route
+   changes: going between a page with a sidebar and one without (the
+   DocsLanding pages) changes `main`'s cap too, and the
+   content slid sideways on every such navigation. With a zero flex basis
+   there is no cap to animate. `main` follows the aside frame by frame when it
+   collapses, and takes the full width at once when the aside is hidden.
+   `min-width: 0` stops wide content (code blocks, tables) from pushing
+   `main` past the space it has. */
+@media (width >= 997px) {
+  main[class*='docMainContainer'] {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+  }
+}
+
+/* ======================================
+ * 2. LANDING LAYOUT (.docs-landing)
+ * The "landing" layout for MDX docs (Components, Resources, Support, and the
+ * getting-started guides). A doc opts in by wrapping its content in the
+ * <DocsLanding> component (src/components/DocsLanding). It strips the width
+ * caps and padding off the Docusaurus docs wrapper chain so the content fills
+ * the main column edge to edge, matching the React landing pages (/foundation,
+ * /getting-started, /about) that use @theme/Layout. Docs WITHOUT this wrapper
+ * use the default doc layout.
+ * ====================================== */
+
+/* The wrapper chain below (main, `main > .container`, `.row`, `.col`,
+   `.docItemContainer`, `article`) is already stripped of its width caps and
+   padding, so this element's containing block IS the main column. `width: 100%`
+   therefore already spans it edge to edge — no viewport-unit breakout needed.
+   A `100vw` breakout would be wrong on any landing that renders a doc sidebar
+   (/components does): the main column is `100vw - sidebar`, so `100vw` would
+   overflow and paint over the sidebar. */
+.docs-landing {
+  position: relative;
+  width: 100%;
+}
+
+.theme-doc-markdown:has(.docs-landing) {
+  overflow: visible;
+
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+
+  background: none;
+}
+
+/* Hide Docusaurus's auto-generated doc-title header — the <Hero> inside
+   <DocsLanding> provides the title. */
+.theme-doc-markdown:has(.docs-landing) > header {
+  display: none;
+}
+
+/* Hide all docs chrome (version badges, edit link, pagination) on full-width pages */
+article:has(.docs-landing) > [class*='docVersion'],
+article:has(.docs-landing) > footer {
+  display: none;
+}
+
+[class*='docItemContainer']:has(.docs-landing) .pagination-nav,
+[class*='docItemContainer']:has(.docs-landing) > nav {
+  display: none;
+}
+
+/* main — remove all constraints. */
+main:has(.docs-landing) {
+  max-width: 100% !important;
+  margin: 0;
+  padding: 0;
+  border-top: none;
+
+  box-shadow: none;
+}
+
+/* Docusaurus's OUTER container only (direct child of main) — strip its width
+   cap/padding so the content fills the main column. Scoped to `> .container`
+   so it does NOT hit the inner `.container`s that our sections use to centre
+   content at 1140px (same as the React landing pages). */
+main:has(.docs-landing) > .container {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* .row — remove negative margins */
+main:has(.docs-landing) .row {
+  margin: 0 !important;
+}
+
+/* .col (Infima) / docItemCol (hashed theme class) — remove padding and width cap */
+main:has(.docs-landing) .col,
+main:has(.docs-landing) [class*='docItemCol'] {
+  flex: 0 0 100%;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* .docItemContainer — remove all spacing */
+main:has(.docs-landing) [class*='docItemContainer'] {
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+}
+
+/* article — remove spacing */
+main:has(.docs-landing) article {
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+}
+
+/* .markdown (Infima) — disable vertical rhythm on docs-landing */
+main:has(.docs-landing) .markdown > .docs-landing {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ======================================
+ * 3. HERO-BAND DOCS (components and foundation)
+ * Standard three-column layout (left sidebar + content + right TOC) plus the
+ * full-width hero band the DocItem/Layout swizzle renders on component and
+ * foundation docs. Only the container chrome is adjusted here; the band itself
+ * is styled in theme/DocItem/Layout/styles.module.css. The rules key on the
+ * band being present rather than on the doc id, so a page the swizzle renders
+ * without it (the /components landing, the frozen 2.0.0-beta foundation pages,
+ * the 1.1.0 archive) keeps the default spacing. The attribute selectors match
+ * the swizzle's hashed CSS-module class.
+ * ====================================== */
+
+/* Let the hero band sit flush under the navbar — it owns its own top padding. */
+main > .container:has(> [class*='docHero']) {
+  padding-top: 0 !important;
+}
+
+/* Clip any sub-pixel/scrollbar overflow from the hero's 100vw breakout. */
+main[class*='docMainContainer']:has([class*='docHero']) {
+  overflow-x: clip;
+}
+
+/* ======================================
+ * 4. COLOUR AND SPACING FOUNDATION PAGES
+ * Markup written straight into the colour and spacing MDX pages (the generated
+ * reference tables, the links on the colour usage page and the primitive
+ * spacing scale), so there is no component to colocate these rules with.
+ * ====================================== */
+
+/* Generated by scripts/generate-colour-reference.mjs. Token names and custom properties are long
+ * enough that the default wrapping broke them mid-word and stacked them vertically, which made the
+ * swatch fall onto its own line. Keep each cell on one line and let the table scroll instead. */
+.colour-reference {
+  overflow-x: auto;
+}
+
+.colour-reference table {
+  display: table;
+  width: 100%;
+  font-size: 12px;
+}
+
+/* Inherit rather than keep Infima's own code sizing, which would otherwise stay larger. */
+.colour-reference table code {
+  font-size: inherit;
+  white-space: nowrap;
+}
+
+.colour-reference table td,
+.colour-reference table th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.markdown a.colour-usage-link {
+  color: var(--eds-text-interactive-link-default);
+  text-decoration: underline;
+  text-decoration-color: var(--eds-border-interactive-link-default);
+}
+
+.markdown a.colour-usage-link:hover {
+  color: var(--eds-text-interactive-link-hover);
+  text-decoration-color: var(--eds-border-interactive-link-hover);
+}
+
+.markdown a.colour-usage-link:active {
+  color: var(--eds-text-interactive-link-pressed);
+  text-decoration-color: var(--eds-border-interactive-link-pressed);
+}
+
+.markdown a.colour-usage-link:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+}
+
+/* Keep the primitive spacing scale in index order instead of splitting it across columns. */
+.spacing-primitive-scale {
+  overflow: auto;
+  max-height: 1000px;
+}
+
+.spacing-primitive-scale table {
+  display: table;
+  width: 100%;
+}
+
+.spacing-primitive-scale tr:has(.spacing-primitive-scale__base) {
+  background: var(--eds-background-non-interactive-neutral-muted);
+  box-shadow: inset 4px 0 0 var(--eds-border-non-interactive-accent-emphasis);
+}
+
+.spacing-primitive-scale__base {
+  font-weight: 700;
+  color: var(--eds-text-on-default-accent);
+}
+
+/* ======================================
+ * 5. SCROLLABLE TABLES
+ * A table wider than the content column scrolls sideways, but nothing showed
+ * that there was more of it. Each gets a shadow on any edge with content left
+ * to scroll to.
+ *
+ * Pure CSS: the two covers are attached to the scrolled content (`local`) and
+ * the two shadows to the box (`scroll`). Scrolled all the way to one side, that
+ * side's cover lines up with its shadow and hides it, so a table that fits
+ * shows no shadow at all. The covers are painted in the doc card's surface
+ * colour, so this only works on that backdrop; no table sits on another one
+ * today. Table rows are transparent or lightly tinted, so the shadows show
+ * through them.
+ *
+ * The shadows are linear rather than the usual radial: a radial gradient is
+ * centred on the table's height, so on a tall table it thinned to nothing
+ * towards the top and bottom. The colour is mixed from the text colour, so it
+ * darkens the edge in light mode and lightens it in dark mode, where the
+ * surface is too close to black for a dark shadow to show.
+ *
+ * Infima makes each markdown table its own scroll container, hence
+ * `.markdown > table`. The colour reference and migration tables scroll in a
+ * wrapper instead, so the wrapper carries the shadows. Scoped to the
+ * redesigned versions and unversioned pages; 1.1.0 keeps its stock rendering.
+ * ====================================== */
+html:where(
+    [class*='docs-version-current'],
+    [class*='docs-version-2.0.0-beta'],
+    :not([class*='docs-version-'])
+  )
+  :is(.markdown > table, .colour-reference, .migration-map) {
+  --_cover: var(--eds-background-surface);
+  --_shadow: color-mix(in srgb, var(--eds-text-primary) 18%, transparent);
+
+  background:
+    linear-gradient(to right, var(--_cover) 30%, transparent) left center /
+      2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--_cover) 30%, transparent) right center /
+      2.5rem 100% no-repeat local,
+    linear-gradient(to right, var(--_shadow), transparent) left center / 1rem
+      100% no-repeat scroll,
+    linear-gradient(to left, var(--_shadow), transparent) right center / 1rem
+      100% no-repeat scroll;
+}
+
+/* Inline code chips paint above the shadows. Infima's light-mode chip
+   background is opaque, so a chip at the edge covered the shadow and stood out
+   as an unshaded box; its dark-mode background is already translucent. Swap
+   the light one for a translucent tint that composites to the same grey on the
+   surface and lets the shadow through. */
+html:where(
+    [class*='docs-version-current'],
+    [class*='docs-version-2.0.0-beta'],
+    :not([class*='docs-version-'])
+  ):not([data-theme='dark'])
+  :is(.markdown > table, .colour-reference, .migration-map) {
+  --ifm-code-background: color-mix(
+    in srgb,
+    var(--eds-text-primary) 4%,
+    transparent
+  );
+}

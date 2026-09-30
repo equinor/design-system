@@ -1,0 +1,57 @@
+/**
+ * Page-transition choreography for client-side route changes.
+ *
+ * The transition itself is started by src/clientModules/pageTransitions.ts
+ * (View Transitions API); this file only tunes what animates. The stable site
+ * chrome — navbar, doc sidebar, footer — gets its own view-transition-name so
+ * it is snapshotted separately and stays visually static, while the rest of
+ * the page (the content pane) cross-fades.
+ *
+ * Browsers without the View Transitions API never match these pseudos and
+ * navigate instantly; reduced motion is also guarded in the client module.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: 150ms ease-out both page-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 150ms ease-in both page-fade-in;
+  }
+
+  .navbar {
+    view-transition-name: site-navbar;
+  }
+
+  /* The browser stacks the snapshots in the order it captured them, and a name
+     that only exists on the new page goes on top of everything from the old
+     one. Arriving at a doc from a page without a sidebar (/foundation, say)
+     therefore painted the sidebar over the navbar. The sidebar runs up under
+     the navbar (negative top margin), so that normally hidden strip covered
+     the navbar until the transition finished. Keep the navbar on top, as it is
+     on the live page. */
+  ::view-transition-group(site-navbar) {
+    z-index: 1;
+  }
+
+  .theme-doc-sidebar-container {
+    view-transition-name: site-sidebar;
+  }
+
+  .footer {
+    view-transition-name: site-footer;
+  }
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}

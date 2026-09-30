@@ -59,18 +59,40 @@ describe('Radio (next)', () => {
       expect(radio).toBeInTheDocument()
     })
 
-    it('extends css with custom className and style', () => {
+    it('applies className and style to the outer wrapper, not the hidden input', () => {
       render(
         <Radio
           label="radio-test"
           name="test"
           className="custom-radio"
-          style={{ clipPath: 'unset' }}
+          style={{ marginTop: '8px' }}
         />,
       )
-      const radio = screen.getByLabelText('radio-test')
-      expect(radio).toBeInTheDocument()
-      expect(radio).toHaveClass('custom-radio')
+      const input = screen.getByLabelText('radio-test')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-radio')
+      expect(wrapper).toHaveClass('custom-radio')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-radio')
+    })
+
+    it('applies className and style to the wrapper when standalone (no label)', () => {
+      render(
+        <Radio
+          aria-label="standalone"
+          name="test"
+          className="custom-radio"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      const input = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-radio')
+      expect(wrapper).toHaveClass('custom-radio')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-radio')
     })
 
     it('applies data-* attributes to input element', () => {
@@ -143,6 +165,18 @@ describe('Radio (next)', () => {
       await userEvent.click(one)
       expect(one).not.toBeChecked()
     })
+
+    it('is disabled when inherited from a disabled fieldset', async () => {
+      render(
+        <fieldset disabled>
+          <Radio label="Radio one" name="test" />
+        </fieldset>,
+      )
+      const one = screen.getByLabelText('Radio one')
+      expect(one).toBeDisabled()
+      await userEvent.click(one)
+      expect(one).not.toBeChecked()
+    })
   })
 
   describe('States', () => {
@@ -152,6 +186,26 @@ describe('Radio (next)', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const label = radio.closest('.eds-radio')
       expect(label).toHaveAttribute('data-disabled', 'true')
+    })
+
+    it('does not set data-disabled on the standalone wrapper', () => {
+      // Disabled styling is keyed off :has(.input:disabled) in CSS, so the
+      // wrapper must not depend on a prop-set attribute
+      render(<Radio aria-label="Standalone disabled" name="test" disabled />)
+      const radio = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).not.toHaveAttribute('data-disabled')
+    })
+
+    it('keeps accent color appearance when disabled', () => {
+      // The disabled greys are appearance-independent in CSS, so the
+      // appearance no longer flips to neutral on the disabled prop
+      render(<Radio label="Disabled radio" name="test" disabled />)
+      const radio = screen.getByLabelText('Disabled radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
     })
   })
 

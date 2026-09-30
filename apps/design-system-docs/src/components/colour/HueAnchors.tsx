@@ -2,6 +2,8 @@ import React from 'react'
 import { ANCHORS, SCHEMES } from './scaleSource'
 import type { Scheme } from './scaleSource'
 
+import './hue-anchors.css'
+
 /**
  * The seven hue anchors, each painted across all 15 steps.
  *

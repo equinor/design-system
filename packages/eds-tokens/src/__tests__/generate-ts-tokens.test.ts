@@ -267,6 +267,192 @@ describe('generate-ts-tokens', () => {
     })
   })
 
+  describe('CSS math functions', () => {
+    it('folds a top-level pow() call', () => {
+      // the Gaussian weights behind the colour scales, which the CSS
+      // export emits unevaluated: e^(-25/2 * (0.7 - 0.88)^2)
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(2.718281828459045, calc(-25 / 2 * pow(calc(0.7 - 0.88), 2)));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.stderr).toBe('')
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 0.66698,',
+      )
+    })
+
+    it('folds pow() as a factor, keeping the unit of the other operand', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(var(--eds-primitives-spacing-25) * pow(2, 3));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'inline: 32,',
+      )
+    })
+
+    it('folds a signed operand straight after the comma', () => {
+      // the modular type scale shape: pow(2, -1/5)
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(2, calc(-1 / 5));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 0.87055,',
+      )
+    })
+
+    it('folds a var() reference inside the arguments', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(var(--eds-primitives-scale-double), 3);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 8,',
+      )
+    })
+
+    it('names an unsupported function inherited from Object.prototype', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(constructor(1) * 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('unsupported function constructor()')
+    })
+
+    it('matches calc() case-insensitively, like any other function', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: CALC(var(--eds-primitives-spacing-25) + 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'inline: 5,',
+      )
+    })
+
+    it('rejects a math function it does not fold, by name', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(sqrt(16) * 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('unsupported function sqrt()')
+      expect(result.stderr).toContain('folds pow()')
+    })
+
+    it('rejects a dimension argument', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: pow(var(--eds-primitives-spacing-25), 2);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('cannot apply pow() to a dimension')
+    })
+
+    it('rejects a result that is not a finite number', () => {
+      // the cube root of a negative number is NaN in CSS too, and `NaN`
+      // is a valid TypeScript identifier, so it would otherwise compile
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: pow(-8, calc(1 / 3));
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('is not a finite number')
+      expect(result.stderr).toContain('--eds-gaussian-weight')
+    })
+
+    it('folds an uppercase function name, as CSS is case-insensitive', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-gaussian-weight: POW(2, 3);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { gaussian: { weight: leaf('number') } },
+        }),
+      )
+      expect(result.status).toBe(0)
+      expect(readModule(result.outDir, 'semantic/default.ts')).toContain(
+        'weight: 8,',
+      )
+    })
+
+    it('rejects the wrong number of arguments', () => {
+      const result = run(
+        cssFixture({
+          'semantic/default.css': `:root {
+  --eds-space-inline: calc(pow(2) + 1px);
+}`,
+        }),
+        dtcgFixture({
+          'semantic/default.json': { space: { inline: leaf('dimension') } },
+        }),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('pow() takes 2 argument(s), got 1')
+    })
+  })
+
   describe('invalid values fail loudly', () => {
     it('rejects mismatched units in a sum', () => {
       const result = run(

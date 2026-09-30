@@ -21,14 +21,14 @@ export function ColourSwatch({ t }: { t: string }) {
         width: '1.25rem',
         height: '1.25rem',
         borderRadius: '3px',
-        border: '1px solid var(--ifm-color-emphasis-300)',
+        border: '1px solid var(--eds-border-non-interactive-neutral-default)',
         backgroundColor: `var(--eds-${t})`,
         backgroundImage:
           'linear-gradient(var(--eds-' +
           t +
           '), var(--eds-' +
           t +
-          ')), repeating-conic-gradient(var(--ifm-color-emphasis-200) 0% 25%, transparent 0% 50%)',
+          ')), repeating-conic-gradient(var(--eds-background-non-interactive-neutral-muted) 0% 25%, transparent 0% 50%)',
         backgroundSize: '100% 100%, 8px 8px',
       }}
     />

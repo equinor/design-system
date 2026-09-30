@@ -1,6 +1,5 @@
 import React from 'react'
 import type { BindableProperty } from './bindings'
-import { cssName } from './bindings'
 
 /** Vertical distance between one leader row and the next */
 export const ROW = 30
@@ -22,7 +21,10 @@ const len = (value: number | string) =>
 export type LeaderProps = {
   /** The bound property this leader belongs to. Exposed as `data-property` on every part. */
   property: BindableProperty
-  /** Dotted token name, shown as the custom property. */
+  /**
+   * Dotted token name, shown as written. The diagram shows where a token is applied, not how a
+   * framework binds it, so the CSS custom property is not repeated here.
+   */
   token: string
   /** What the token does here. */
   label?: string
@@ -57,7 +59,7 @@ export function Leader({
   dotColor,
   hidden,
 }: LeaderProps) {
-  const dotColour = dotColor ?? 'var(--ifm-color-emphasis-600)'
+  const dotColour = dotColor ?? 'var(--eds-icon-tertiary)'
   const visibility = hidden ? ('hidden' as const) : undefined
   const inset = len(dotInset)
   // The dot is `inset` in from the edge, so the line starts `inset` short of the edge and runs
@@ -114,7 +116,7 @@ export function Leader({
           boxSizing: 'border-box',
           background: dotColour,
           // A halo in the page colour, so the dot reads on a dark fill and over glyphs alike.
-          boxShadow: '0 0 0 1.5px var(--ifm-background-color)',
+          boxShadow: '0 0 0 1.5px var(--eds-background-surface)',
         }}
       />
       {/* the label */}
@@ -137,13 +139,13 @@ export function Leader({
           color: 'var(--eds-text-primary)',
         }}
       >
-        <span className="token-anatomy__label-name">{cssName(token)}</span>
+        <span className="token-anatomy__label-name">{token}</span>
         {label ? (
           <span
             className="token-anatomy__label-part"
             style={{
-              fontFamily: 'var(--ifm-font-family-base)',
-              color: 'var(--ifm-color-emphasis-700)',
+              fontFamily: 'var(--eds-font-family-ui)',
+              color: 'var(--eds-text-secondary)',
               marginLeft: '0.5rem',
             }}
           >
@@ -154,7 +156,7 @@ export function Leader({
           <span
             className="token-anatomy__label-value"
             style={{
-              color: 'var(--ifm-color-emphasis-600)',
+              color: 'var(--eds-text-tertiary)',
               marginLeft: '0.5rem',
             }}
           >

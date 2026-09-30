@@ -12,6 +12,7 @@ import type { CheckboxProps } from './Checkbox.types'
 const meta: Meta<typeof Checkbox> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Checkbox',
   component: Checkbox,
+  tags: ['beta'],
   args: {
     label: 'Label',
     disabled: false,
@@ -70,7 +71,16 @@ const meta: Meta<typeof Checkbox> = {
     // Styling
     className: {
       control: 'text',
-      description: 'Additional CSS class names for the input element',
+      description:
+        'Additional CSS class names applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the outer wrapper element, not the hidden input',
       table: {
         category: 'Styling',
       },
@@ -202,6 +212,31 @@ export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
   </fieldset>
 )
 GroupedCheckbox.storyName = 'Grouped'
+
+export const InheritedDisabled: StoryFn<CheckboxProps> = () => (
+  <fieldset disabled>
+    <legend>Disabled fieldset</legend>
+    <Wrapper gap={8}>
+      <Checkbox label="Unchecked" name="inherited" value="1" />
+      <Checkbox label="Checked" name="inherited" value="2" defaultChecked />
+      <Checkbox
+        label="Indeterminate"
+        name="inherited"
+        value="3"
+        indeterminate
+      />
+    </Wrapper>
+  </fieldset>
+)
+InheritedDisabled.storyName = 'Inherited disabled'
+InheritedDisabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Checkboxes inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input’s `:disabled` state, so it covers this inherited disabling too.',
+    },
+  },
+}
 
 export const WithoutVisibleLabel: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>

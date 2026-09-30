@@ -5,7 +5,6 @@ import {
   DEFAULT_EDGE,
   DOT_TINT,
   boundProperties,
-  cssName,
   cssVar,
   impliedStyle,
 } from './bindings'
@@ -81,7 +80,7 @@ function unwrapParagraphs(children: ReactNode): ReactNode[] {
 function figureWidth(rows: Row[]): number {
   const longest = rows.reduce(
     (widest, row) =>
-      Math.max(widest, cssName(row.token).length + (row.label?.length ?? 0)),
+      Math.max(widest, row.token.length + (row.label?.length ?? 0)),
     36,
   )
   return Math.round(LABEL_X + 16 + (longest + 24) * 7.3)
@@ -197,10 +196,11 @@ export function TokenAnatomy({
   }
 
   return (
+    // Block padding only, so the specimen starts on the text edge rather than inset from it.
     <figure
       className="token-anatomy"
       data-mode={mode}
-      style={{ margin: '1.5rem 0', overflowX: 'auto', padding: '0.5rem' }}
+      style={{ margin: '1.5rem 0', overflowX: 'auto', paddingBlock: '0.5rem' }}
     >
       <div
         className="token-anatomy__frame"
@@ -235,7 +235,7 @@ export function TokenAnatomy({
           className="token-anatomy__caption"
           style={{
             fontSize: '0.8125rem',
-            color: 'var(--ifm-color-emphasis-700)',
+            color: 'var(--eds-text-secondary)',
             marginTop: '0.25rem',
           }}
         >
