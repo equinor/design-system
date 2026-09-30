@@ -14,9 +14,9 @@ describe('useFieldIds', () => {
     expect(helperMessageId).toBe(`${prefix}-helper-message`)
   })
 
-  test('uses provided id as prefix', () => {
+  test('applies provided id verbatim and uses it as prefix for the rest', () => {
     const { result } = renderHook(() => useFieldIds('custom-id'))
-    expect(result.current.inputId).toBe('custom-id-input')
+    expect(result.current.inputId).toBe('custom-id')
     expect(result.current.labelId).toBe('custom-id-label')
     expect(result.current.descriptionId).toBe('custom-id-description')
     expect(result.current.helperMessageId).toBe('custom-id-helper-message')
