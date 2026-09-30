@@ -33,13 +33,15 @@ const StyledTableCell = styled.th((props: BaseProps) => {
       font-size: inherit;
       font-weight: inherit;
     }
-    ${$sticky
-      ? css`
-          position: sticky;
-          bottom: 0;
-          z-index: 2;
-        `
-      : ''}
+    ${
+      $sticky
+        ? css`
+            position: sticky;
+            bottom: 0;
+            z-index: 2;
+          `
+        : ''
+    }
   `
 })
 

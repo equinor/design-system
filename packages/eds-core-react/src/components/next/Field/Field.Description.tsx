@@ -9,9 +9,7 @@ export const FieldDescription = forwardRef<
     <p
       ref={ref}
       data-baseline="center"
-      className={['eds-field__description', className]
-        .filter(Boolean)
-        .join(' ')}
+      className={['description', className].filter(Boolean).join(' ')}
       {...rest}
     >
       {children}

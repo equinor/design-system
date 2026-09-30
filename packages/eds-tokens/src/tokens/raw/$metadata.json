@@ -1,0 +1,20 @@
+{
+  "tokenSetOrder": [
+    "primitives/default",
+    "input/palette",
+    "input/scale",
+    "foundation/gaussian",
+    "foundation/anchor",
+    "color/light",
+    "color/dark",
+    "scheme/light",
+    "scheme/dark",
+    "semantic",
+    "semantic/default",
+    "font/default",
+    "density/comfortable",
+    "density/compact",
+    "density/relaxed",
+    "elevation/default"
+  ]
+}

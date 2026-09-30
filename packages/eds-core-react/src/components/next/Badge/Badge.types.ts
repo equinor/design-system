@@ -10,12 +10,7 @@ import type { HTMLAttributes, ReactNode } from 'react'
  * - `danger`: Destructive/error
  */
 export type BadgeTone =
-  | 'neutral'
-  | 'accent'
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'danger'
+  'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'danger'
 
 /**
  * Visual emphasis level.

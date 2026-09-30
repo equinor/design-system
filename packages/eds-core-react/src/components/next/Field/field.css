@@ -1,6 +1,8 @@
 @layer eds-components {
   .eds-field {
-    /* Private color variables */
+    /* Private color variables. The --_eds-field-* colour variables are
+       intended override points for Field-based components (Checkbox, Radio
+       and Switch set them from their own CSS) — keep the names stable */
     --_eds-field-label-color: var(--eds-color-text-strong);
     --_eds-field-description-color: var(--eds-color-text-subtle);
     --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
@@ -16,65 +18,74 @@
 
     /* Shared font-family — inherits to all text children */
     font-family: var(--eds-typography-ui-body-font-family);
-  }
 
-  /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
-  .eds-field:is([data-position='start'], [data-position='end']) {
-    flex-flow: row wrap;
-    gap: var(--eds-generic-gap-horizontal);
-    align-items: center;
-  }
+    /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
+    &:is([data-position='start'], [data-position='end']) {
+      flex-flow: row wrap;
+      gap: var(--eds-generic-gap-horizontal);
+      align-items: center;
+    }
 
-  .eds-field[data-position='end'] {
-    flex-direction: row-reverse;
-  }
+    &[data-position='end'] {
+      flex-direction: row-reverse;
+    }
 
-  /* Description and helper message span full width below in horizontal layout */
-  .eds-field:is([data-position='start'], [data-position='end'])
-    :is(.eds-field__description, .eds-field__helper-message, [role='alert']) {
-    flex-basis: 100%;
-  }
+    /* Description and helper message span full width below in horizontal layout */
+    &:is([data-position='start'], [data-position='end'])
+      :is(.description, .helper-message, [role='alert']) {
+      flex-basis: 100%;
+    }
 
-  /* Label uses data-baseline="center" for text-box trim + grid-snap padding —
-     see [data-baseline='center'] rule in eds-tokens/src/css/typography.css */
-  .eds-field__label {
-    display: block;
+    /* Label uses data-baseline="center" for text-box trim + grid-snap padding —
+       see [data-baseline='center'] rule in eds-tokens/src/css/typography.css */
+    & .label {
+      display: block;
 
-    font-size: var(--eds-typography-ui-body-md-font-size);
-    font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
-    line-height: var(--eds-typography-ui-body-md-line-height-default);
-    color: var(--_eds-field-label-color);
-  }
+      font-size: var(--eds-typography-ui-body-md-font-size);
+      font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
+      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      color: var(--_eds-field-label-color);
+    }
 
-  .eds-field__indicator {
-    margin-inline-start: var(--eds-selectable-space-horizontal);
+    & .indicator {
+      margin-inline-start: var(--eds-selectable-space-horizontal);
 
-    font-size: var(--eds-typography-ui-body-sm-font-size);
-    line-height: var(--eds-typography-ui-body-sm-line-height-default);
-    color: var(--_eds-field-indicator-color);
-    vertical-align: middle;
-  }
+      font-size: var(--eds-typography-ui-body-sm-font-size);
+      line-height: var(--eds-typography-ui-body-sm-line-height-default);
+      color: var(--_eds-field-indicator-color);
+      vertical-align: middle;
+    }
 
-  .eds-field__description {
-    margin: 0;
-    color: var(--_eds-field-description-color);
-  }
+    & .description {
+      margin: 0;
+      color: var(--_eds-field-description-color);
+    }
 
-  .eds-field__helper-message {
-    margin: 0;
-    color: var(--_eds-field-helper-color);
-  }
+    & .helper-message {
+      margin: 0;
+      color: var(--_eds-field-helper-color);
+    }
 
-  /* data-baseline="grid" on these elements handles text-box trim via
-     [data-baseline='grid'] in eds-tokens/src/css/typography.css */
-  .eds-field__description,
-  .eds-field__helper-message {
-    font-size: var(--eds-typography-ui-body-sm-font-size);
-    line-height: var(--eds-typography-ui-body-sm-line-height-default);
-  }
+    /* data-baseline="grid" on these elements handles text-box trim via
+       [data-baseline='grid'] in eds-tokens/src/css/typography.css */
+    & .description,
+    & .helper-message {
+      font-size: var(--eds-typography-ui-body-sm-font-size);
+      line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    }
 
-  /* Only helper message changes color when disabled */
-  .eds-field[data-disabled='true'] {
-    --_eds-field-helper-color: var(--eds-color-text-disabled);
+    /* Only helper message changes color when disabled. The :has() arm covers
+       disabling inherited from an ancestor, e.g. fieldset[disabled], and is
+       scoped to the form controls a Field labels — a bare :has(:disabled)
+       would also match a placeholder <option disabled> inside an enabled
+       select. Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance and renders tinted, not grey, under non-neutral
+       appearances. TODO: Replace with semantic token when available */
+    &:is(
+        [data-disabled='true'],
+        :has(input:disabled, select:disabled, textarea:disabled)
+      ) {
+      --_eds-field-helper-color: var(--eds-color-neutral-7);
+    }
   }
 }

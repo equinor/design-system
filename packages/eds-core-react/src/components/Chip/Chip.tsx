@@ -90,8 +90,9 @@ const StyledChips = styled.div.attrs<StyleProps>(
           ${bordersTemplate(error.border)};
           @media (hover: hover) and (pointer: fine) {
             &:hover {
-              border-color: ${$clickable &&
-              error.states.hover.typography.color};
+              border-color: ${
+                $clickable && error.states.hover.typography.color
+              };
               color: ${$clickable && error.states.hover.typography.color};
 
               svg {
@@ -178,8 +179,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(function Chip(
 
   const handleKeyPress = (
     event:
-      | React.KeyboardEvent<HTMLDivElement>
-      | React.MouseEvent<HTMLDivElement>,
+      React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
   ) => {
     const { key } = event as React.KeyboardEvent<HTMLDivElement>
     if (key === 'Enter') {

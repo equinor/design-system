@@ -7,11 +7,11 @@ export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
       <label
         ref={ref}
         data-baseline="center"
-        className={['eds-field__label', className].filter(Boolean).join(' ')}
+        className={['label', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
-        {indicator && <span className="eds-field__indicator">{indicator}</span>}
+        {indicator && <span className="indicator">{indicator}</span>}
       </label>
     )
   },

@@ -23,18 +23,22 @@ const StyledCardMedia = styled.div<StyledCardMediaProps>`
           }
           &:first-child {
             img {
-              border-top-right-radius: ${border.type === 'border' &&
-              border.radius};
-              border-top-left-radius: ${border.type === 'border' &&
-              border.radius};
+              border-top-right-radius: ${
+                border.type === 'border' && border.radius
+              };
+              border-top-left-radius: ${
+                border.type === 'border' && border.radius
+              };
             }
           }
           &:last-child {
             img {
-              border-bottom-right-radius: ${border.type === 'border' &&
-              border.radius};
-              border-bottom-left-radius: ${border.type === 'border' &&
-              border.radius};
+              border-bottom-right-radius: ${
+                border.type === 'border' && border.radius
+              };
+              border-bottom-left-radius: ${
+                border.type === 'border' && border.radius
+              };
             }
           }
         `

@@ -6,12 +6,10 @@ import {
   typographyTemplate,
 } from '@equinor/eds-utils'
 
-const StyledTabPanel = styled.div.attrs(
-  (): HTMLAttributes<HTMLDivElement> => ({
-    tabIndex: 0,
-    role: 'tabpanel',
-  }),
-)(({ theme }) => {
+const StyledTabPanel = styled.div.attrs((): HTMLAttributes<HTMLDivElement> => ({
+  tabIndex: 0,
+  role: 'tabpanel',
+}))(({ theme }) => {
   const {
     entities: { panel },
   } = theme

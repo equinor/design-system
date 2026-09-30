@@ -14,7 +14,7 @@ export const BaseInputWrapper = styled.span(
 export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
   type,
 }))(
-  ({ disabled, theme }) => css`
+  ({ theme }) => css`
     appearance: none;
     width: 100%;
     height: 100%;
@@ -22,7 +22,10 @@ export const BaseInput = styled.input.attrs(({ type = 'checkbox' }) => ({
     margin: 0;
     position: relative;
     z-index: 1;
-    cursor: ${disabled ? 'not-allowed' : 'pointer'};
+    cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
     &:focus {
       outline: none;
     }

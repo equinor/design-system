@@ -9,9 +9,6 @@ import { Field } from '../Field'
 import { Icon } from '../Icon'
 import type { CheckboxProps } from './Checkbox.types'
 
-const classNames = (...classes: (string | boolean | undefined)[]) =>
-  classes.filter(Boolean).join(' ')
-
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
     {
@@ -20,7 +17,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       indicator,
       helperMessage,
+      className,
       id: providedId,
+      style,
       ...rest
     },
     ref,
@@ -44,31 +43,30 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={inputId}
           aria-checked={indeterminate ? 'mixed' : undefined}
           aria-describedby={helperMessage ? helperMessageId : undefined}
-          className="eds-checkbox__input"
+          // Component CSS keys its :has(.input:...) state selectors on this class
+          className="input"
           disabled={disabled}
           ref={inputRef}
           data-indeterminate={indeterminate}
           {...rest}
         />
-        <span className="eds-checkbox__icon-wrapper">
-          <Icon
-            data={checkbox}
-            size="lg"
-            className="eds-checkbox__icon eds-checkbox__icon--checked"
-          />
+        <span className="icon-wrapper">
+          <Icon data={checkbox} size="lg" className="icon icon-checked" />
           <Icon
             data={checkbox_outline}
             size="lg"
-            className="eds-checkbox__icon eds-checkbox__icon--unchecked"
+            className="icon icon-unchecked"
           />
           <Icon
             data={checkbox_indeterminate}
             size="lg"
-            className="eds-checkbox__icon eds-checkbox__icon--indeterminate"
+            className="icon icon-indeterminate"
           />
         </span>
       </>
     )
+
+    const rootClassName = ['eds-checkbox', className].filter(Boolean).join(' ')
 
     // Use Field for layout when label is provided
     if (label) {
@@ -76,8 +74,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         <Field
           position="start"
           disabled={disabled}
-          className="eds-checkbox"
-          data-color-appearance={disabled ? 'neutral' : 'accent'}
+          className={rootClassName}
+          style={style}
+          data-color-appearance="accent"
           data-selectable-space="md"
           data-space-proportions="squished"
         >
@@ -96,9 +95,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className={classNames('eds-checkbox', 'eds-checkbox--standalone')}
-        data-color-appearance={disabled ? 'neutral' : 'accent'}
-        data-disabled={disabled || undefined}
+        className={rootClassName}
+        style={style}
+        data-standalone={true}
+        data-color-appearance="accent"
       >
         {checkboxInput}
       </span>

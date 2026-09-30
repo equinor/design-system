@@ -171,8 +171,7 @@ export function typescriptNestedFormat({
 }: FormatFnArguments): string {
   const rootName = (options?.rootName as string) ?? 'tokens'
   const splitLeafPrefixes = options?.splitLeafPrefixes as
-    | readonly string[]
-    | undefined
+    readonly string[] | undefined
   const nested = buildNestedObject(dictionary.allTokens, { splitLeafPrefixes })
 
   const header = `/**\n * Do not edit directly, this file was auto-generated.\n */\n`

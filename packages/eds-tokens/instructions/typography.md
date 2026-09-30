@@ -36,7 +36,7 @@ The token shape is `--eds-typography-{role}-{size}-{property}` where:
 
 Reach for these tokens whenever the component's typography is fixed by design -- which is the common case. Do not add `data-font-*` attributes to the component's own elements for this; the tokens above already encode the size + role combination.
 
-For the underlying decision, including font-weight handling with `--_font-weight-{bolder,lighter}` for inline `strong`/`em` inheritance, see [ADR-0005: Typography approach for EDS 2.0](../../../documentation/adr/0005-typography-approach-for-eds-2.md).
+For the underlying decision, including font-weight handling with `--_font-weight-{bolder,lighter}` for inline `strong`/`em` inheritance, see [ADR-0018: Typography approach for EDS 2.0](../../../documentation/adr/0018-typography-approach-for-eds-2.md).
 
 ## Runtime data-attribute switching
 

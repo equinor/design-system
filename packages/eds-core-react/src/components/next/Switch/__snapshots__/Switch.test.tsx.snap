@@ -11,25 +11,25 @@ exports[`Switch (next) matches snapshot 1`] = `
     data-space-proportions="squished"
   >
     <span
-      class="eds-switch__control"
+      class="control"
       data-color-appearance="neutral"
     >
       <input
-        class="eds-switch__input"
+        class="input"
         id="test-id"
         role="switch"
         type="checkbox"
       />
       <span
-        class="eds-switch__track"
+        class="track"
       >
         <span
-          class="eds-switch__handle"
+          class="handle"
         />
       </span>
     </span>
     <label
-      class="eds-field__label"
+      class="label"
       data-baseline="center"
       for="test-id"
     >

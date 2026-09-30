@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { HeaderMdx } from '@storybook/addon-docs/blocks'
 import styled from 'styled-components'
 import { Icon, Button, Typography, Search } from '../../src'
 import { download, IconData } from '@equinor/eds-icons'
@@ -115,9 +114,12 @@ export const Preview: StoryFn = () => {
       {Object.keys(iconsByGroup).map((key) => {
         return (
           <div key={key}>
-            <HeaderMdx id={key} as="h2">
+            {/* Docs-blocks components (HeaderMdx) must not render in the
+                canvas iframe — they read the Storybook manager theme, which
+                is undefined here (crashed with Storybook 10.5, #5213). */}
+            <Typography variant="h2" id={key}>
               {key}
-            </HeaderMdx>
+            </Typography>
             <Group>
               {iconsByGroup[key].map((icon: IconType) => {
                 const { name } = icon

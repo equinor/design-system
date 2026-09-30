@@ -155,7 +155,7 @@ Before you begin, ensure you have the following installed:
 -->
 
 * **Node.js** — Version 24.16.0 or compatible
-* **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm@10.15.0`)
+* **pnpm** — Version 11.27.0, pinned via the `packageManager` field (install globally with `npm install -g pnpm@11.27.0`)
 * **Git** — For version control
 
 
@@ -180,7 +180,7 @@ git clone git@github.com:your-github-username/design-system
 We use [pnpm][] as the package manager, because it's fast, space efficient, and has some very useful commands when working with a monorepo.
 
 ```bash
-npm install -g pnpm@10.15.0
+npm install -g pnpm@11.27.0
 ```
 
 Install dependencies and build all packages using our `init` script:
@@ -201,8 +201,11 @@ pnpm build
 # Run all tests
 pnpm test
 
-# Lint entire codebase
+# Lint entire codebase, except packages/eds-mobile-components and
+# apps/mobile-storybook (they ship their own eslint.config.js)
 pnpm lint:all
+pnpm --filter @equinor/eds-mobile-components run lint
+pnpm --filter @equinor/mobile-storybook run lint
 
 # Start Storybook for component development
 pnpm storybook
@@ -277,6 +280,8 @@ See our [storybook](https://storybook.eds.equinor.com/) for more examples.
 
 We're developing the next generation of EDS components under the `/next` entry point. These components are available as **beta releases** for early testing and feedback.
 
+> **Note on naming:** "EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are separate; the numbers line up by coincidence. See [Versioning](https://eds.equinor.com/docs/about/about_eds#versioning) for the full explanation.
+
 #### Installation
 
 ```sh
@@ -296,8 +301,8 @@ import '@equinor/eds-core-react/next/index.css'
 
 #### Important Notes
 
-- **Beta components are under active development** and may have breaking changes
-- **Not production-ready** until they graduate to the stable package
+- **Safe to adopt alongside EDS 1.0** - the API may still change in small ways before EDS 2.0 becomes stable, and every such change is listed in the changelog below
+- **EDS 1.0 stays supported** until EDS 2.0 becomes stable (published as `eds-core-react@3.0.0`), and mixing EDS 1.0 and `/next` components in one application is expected
 - **Visible in Storybook** - browse components at [storybook.eds.equinor.com](https://storybook.eds.equinor.com/) under "EDS 2.0"
 - **Requires beta installation** - viewing in Storybook doesn't enable usage, you must install `@beta`
 - **Separate changelog** - see `src/components/next/CHANGELOG.md` for beta changes
@@ -483,7 +488,7 @@ If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports
 If you encounter build failures:
 1. Ensure all dependencies are up to date: `pnpm install`
 2. Clean and rebuild: `pnpm clean && pnpm build`
-3. Make sure you're using the correct Node.js version (22.12.0)
+3. Make sure you're using the correct Node.js version (24.16.0, see `.nvmrc`)
 
 ### Module not found errors
 

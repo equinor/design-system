@@ -202,7 +202,7 @@ describe('Field.HelperMessage', () => {
       </Field.HelperMessage>,
     )
     const helper = screen.getByTestId('helper')
-    expect(helper).toHaveClass('eds-field__helper-message')
+    expect(helper).toHaveClass('helper-message')
   })
 
   test('accepts role prop for accessibility', () => {

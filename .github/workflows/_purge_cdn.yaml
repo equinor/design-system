@@ -25,8 +25,8 @@ jobs:
       - name: Az CLI login 🔑 # Using federated credential
         uses: azure/login@v3
         with:
-          client-id: d58b2e85-2d34-4cdb-ad70-5f2b767dd8e2
-          tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
           allow-no-subscriptions: true
       - name: Ensure Front Door CLI extension
         run: |

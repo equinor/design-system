@@ -4,6 +4,8 @@ This is the canonical reference for the patterns that go into an EDS 2.0 compone
 
 For the project-wide conventions (file structure, code style, CSS layering, testing, accessibility, conventional commits), see [`AGENTS.md`](../../AGENTS.md). This guide adds the component-building specifics that are not covered there.
 
+**Before building anything, check [`documentation/AI-COMPONENT-INDEX.md`](../AI-COMPONENT-INDEX.md)** — a generated, CI-verified list of every existing `/next` component with its props and sub-components. The component you are about to build may already exist, or an existing one may compose into what you need. One file read replaces walking the whole `/next` tree.
+
 ## Table of Contents
 
 - [Foundation Data-Attribute Reference](#foundation-data-attribute-reference)
@@ -126,31 +128,37 @@ A `data-color-appearance` attribute alone has no effect — the element also nee
 
 Figma specifies exact disabled color tokens. Use them.
 
-```tsx
-// If icon is accent when enabled, change to neutral when disabled
-{
-  icon && (
-    <span
-      className="eds-component__icon"
-      data-color-appearance={disabled ? 'neutral' : 'accent'}
-    >
-      {icon}
-    </span>
-  )
-}
-```
+Key disabled styling off the native `:disabled` state in CSS. Bare
+`:disabled` applies only when the component's root element **is** the form
+control (see `next/Button`); for a wrapper root, use `:has(:disabled)` /
+`:has(.input:disabled)`. Do **not** derive it from the React prop at render
+time (a prop-keyed `data-disabled` attribute or a
+`data-color-appearance={disabled ? 'neutral' : 'accent'}` flip): an input
+disabled by an ancestor `<fieldset disabled>` then stays visually enabled.
+See `next/Checkbox`, `next/Radio` and `next/Switch` for the pattern.
+
+Exception: a component with no native form control in its subtree has nothing
+for `:disabled` to match, so a prop-set `data-disabled` is the right tool
+there — this is why `next/Field` sets it.
 
 ```css
-.eds-component[data-disabled] {
+.eds-component {
+  --_component-icon-color: var(--eds-color-bg-fill-emphasis-default);
+
+  /* Not --eds-color-text-disabled: that token is switched by
+     data-color-appearance and renders tinted, not grey, under non-neutral
+     appearances (and the token CSS is unlayered, so it can't be re-pinned
+     from @layer eds-components). TODO: semantic token, see the same TODO in
+     checkbox.css/radio.css/switch.css */
+  --_component-disabled-color: var(--eds-color-neutral-7);
+}
+
+/* Matches both the disabled prop and disabling inherited from an ancestor —
+   override the pseudo-private variables, never the properties directly */
+.eds-component:has(.input:disabled) {
+  --_component-icon-color: var(--_component-disabled-color);
+
   cursor: not-allowed;
-}
-
-.eds-component[data-disabled] .eds-component__text {
-  color: var(--eds-color-text-disabled);
-}
-
-.eds-component[data-disabled] .eds-component__icon {
-  color: var(--eds-color-text-disabled);
 }
 ```
 
@@ -257,7 +265,8 @@ export const ComponentName = forwardRef<HTMLDivElement, ComponentNameProps>(
         data-font-family={/* from Figma */}
         data-font-size={/* from Figma */}
         data-line-height={/* from Figma */}
-        data-disabled={disabled || undefined}
+        // No data-disabled: key disabled styling off :disabled / :has(:disabled)
+        // in CSS — see § Disabled state above
         {...rest}
       />
     )
@@ -299,7 +308,11 @@ Use `@layer eds-components` and data-attribute selectors. Use EXACT `--eds-*` to
         var(--eds-color-border-focus);
   }
 
-  .eds-componentname[data-disabled] {
+  /* This scaffold's root is a <div>, so key disabled styling off a form
+     control in the subtree with :has() — bare `.eds-componentname:disabled`
+     would never match. It also covers disabling inherited from an ancestor
+     fieldset[disabled] — see § Disabled state */
+  .eds-componentname:has(:disabled) {
     cursor: not-allowed;
   }
 
@@ -391,7 +404,7 @@ const meta: Meta<typeof ComponentName> = {
     docs: {
       description: {
         component: `
-⚠️ **Beta Component** — this component is under active development.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
 \`\`\`tsx
 import { ComponentName } from '@equinor/eds-core-react/next'
@@ -573,6 +586,7 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
+- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx`
 
 ## Implementation Status Report
 

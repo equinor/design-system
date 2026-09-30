@@ -1,0 +1,81 @@
+{
+  "family": {
+    "header": {
+      "$value": "{primitives.font-family.equinor}",
+      "$type": "fontFamily",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-family-header)"
+          },
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "ui": {
+      "$value": "{primitives.font-family.inter}",
+      "$type": "fontFamily",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-family-ui)"
+          },
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  },
+  "weight": {
+    "bolder": {
+      "$value": "{primitives.weight-scale.bolder}",
+      "$type": "fontWeight",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-bolder)"
+          },
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "lighter": {
+      "$value": "{primitives.weight-scale.lighter}",
+      "$type": "fontWeight",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-lighter)"
+          },
+          "hiddenFromPublishing": true
+        }
+      }
+    },
+    "normal": {
+      "$value": "{primitives.weight-scale.normal}",
+      "$type": "fontWeight",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-weight-normal)"
+          },
+          "hiddenFromPublishing": true
+        }
+      }
+    }
+  }
+}

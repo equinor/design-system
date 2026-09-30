@@ -25,9 +25,11 @@ const StyledAccordionHeaderTitle = styled.span<StyledAccordionHeaderTitleProps>(
       flex-grow: 1;
       overflow: hidden;
       text-align: left;
-      color: ${$isExpanded && !$disabled
-        ? header.states.active.typography?.color
-        : 'inherit'};
+      color: ${
+        $isExpanded && !$disabled
+          ? header.states.active.typography?.color
+          : 'inherit'
+      };
     `
   },
 )

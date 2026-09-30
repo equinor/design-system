@@ -10,17 +10,17 @@ exports[`Radio (next) matches snapshot 1`] = `
     data-space-proportions="squished"
   >
     <input
-      class="eds-radio__input"
+      class="input"
       id="test-id"
       name="test"
       type="radio"
     />
     <span
-      class="eds-radio__icon-wrapper"
+      class="icon-wrapper"
     >
       <svg
         aria-hidden="true"
-        class="eds-icon eds-radio__icon eds-radio__icon--checked"
+        class="eds-icon icon icon-checked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -35,7 +35,7 @@ exports[`Radio (next) matches snapshot 1`] = `
       </svg>
       <svg
         aria-hidden="true"
-        class="eds-icon eds-radio__icon eds-radio__icon--unchecked"
+        class="eds-icon icon icon-unchecked"
         data-icon-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
@@ -50,7 +50,7 @@ exports[`Radio (next) matches snapshot 1`] = `
       </svg>
     </span>
     <label
-      class="eds-field__label"
+      class="label"
       data-baseline="center"
       for="test-id"
     >

@@ -8,6 +8,7 @@ import type { RadioProps } from './Radio.types'
 const meta: Meta<typeof Radio> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Radio',
   component: Radio,
+  tags: ['beta'],
   args: {
     label: 'Option',
     disabled: false,
@@ -51,7 +52,16 @@ const meta: Meta<typeof Radio> = {
     },
     className: {
       control: 'text',
-      description: 'Additional CSS class names for the input element',
+      description:
+        'Additional CSS class names applied to the outer wrapper element, not the hidden input',
+      table: {
+        category: 'Styling',
+      },
+    },
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the outer wrapper element, not the hidden input',
       table: {
         category: 'Styling',
       },
@@ -202,6 +212,25 @@ GroupedRadio.parameters = {
     description: {
       story:
         'Radio buttons with the same `name` form a group. Use arrow keys (↑↓ or ←→) to navigate and select within the group.',
+    },
+  },
+}
+
+export const InheritedDisabled: StoryFn<RadioProps> = () => (
+  <fieldset disabled>
+    <legend>Disabled fieldset</legend>
+    <Wrapper gap={8}>
+      <Radio label="Unchecked" name="inherited" value="1" />
+      <Radio label="Checked" name="inherited" value="2" defaultChecked />
+    </Wrapper>
+  </fieldset>
+)
+InheritedDisabled.storyName = 'Inherited disabled'
+InheritedDisabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Radio buttons inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input’s `:disabled` state, so it covers this inherited disabling too.',
     },
   },
 }
