@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { localStorageUtils } from '@/utils/localStorage'
 
 type ColorScheme = 'light' | 'dark'
@@ -14,54 +20,47 @@ const ColorSchemeContext = createContext<ColorSchemeContextType | undefined>(
   undefined,
 )
 
+function applyToDocument(scheme: ColorScheme) {
+  document.documentElement.setAttribute('data-color-scheme', scheme)
+}
+
 export function ColorSchemeProvider({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // Always initialise to 'light' so the server-rendered HTML and the first
-  // client render agree — reading localStorage/system preference in the
-  // useState initializer runs only on the client and causes a hydration
-  // mismatch (server 'light' vs client 'dark'), which can throw a hydration
-  // error and leave the page in a broken state. The saved / system preference
-  // is applied on mount in the effect below instead.
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
+  // The server and the first client render both use 'light', so hydration
+  // matches. The inline script in layout.tsx has already set the scheme the
+  // page should use on <html> (URL, then saved choice, then system), and the
+  // effect below adopts it.
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme>('light')
 
   useEffect(() => {
-    // Apply the saved preference, or fall back to the system preference. This
-    // runs once on the client after hydration, so the first render still
-    // matches the server ('light') and there is no hydration mismatch.
-    const savedScheme = localStorageUtils.getColorScheme('light')
-    const next: ColorScheme = savedScheme
-      ? savedScheme
-      : window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light'
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional client-only preference sync on mount; server renders 'light' to avoid a hydration mismatch
-    setColorScheme(next)
+    const applied = document.documentElement.getAttribute('data-color-scheme')
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only sync with the scheme the pre-paint script applied
+    setColorSchemeState(applied === 'dark' ? 'dark' : 'light')
   }, [])
 
   useEffect(() => {
-    // Listen for system changes (but don't override saved preference automatically)
+    // Follow system changes only while the user has not chosen a scheme.
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handler = (e: MediaQueryListEvent) => {
-      // Only update if no preference is saved
-      const currentSaved = localStorageUtils.getColorScheme('light')
-      if (!currentSaved) {
-        setColorScheme(e.matches ? 'dark' : 'light')
-      }
+      if (localStorageUtils.getColorScheme(null)) return
+      const next: ColorScheme = e.matches ? 'dark' : 'light'
+      applyToDocument(next)
+      setColorSchemeState(next)
     }
-
     mediaQuery.addEventListener('change', handler)
     return () => mediaQuery.removeEventListener('change', handler)
   }, [])
 
-  useEffect(() => {
-    // Update document class when color scheme changes
-    document.documentElement.setAttribute('data-color-scheme', colorScheme)
-    // Save to localStorage
-    localStorageUtils.setColorScheme(colorScheme)
-  }, [colorScheme])
+  // Only an explicit choice is saved. Saving from an effect on every state
+  // change used to write the initial 'light' over a saved 'dark' on reload.
+  const setColorScheme = useCallback((scheme: ColorScheme) => {
+    applyToDocument(scheme)
+    localStorageUtils.setColorScheme(scheme)
+    setColorSchemeState(scheme)
+  }, [])
 
   return (
     <ColorSchemeContext.Provider value={{ colorScheme, setColorScheme }}>

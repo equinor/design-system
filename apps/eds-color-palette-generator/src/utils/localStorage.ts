@@ -1,7 +1,7 @@
 import { ColorDefinition, ContrastMethod, ColorFormat } from '@/types'
 
 // Keys for localStorage
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   MEAN_LIGHT: 'colorPalette_meanLight',
   STD_DEV_LIGHT: 'colorPalette_stdDevLight',
   MEAN_DARK: 'colorPalette_meanDark',
@@ -76,8 +76,8 @@ export const localStorageUtils = {
   setColors: (value: ColorDefinition[]) => setItem(STORAGE_KEYS.COLORS, value),
 
   // Color scheme
-  getColorScheme: (defaultValue: 'light' | 'dark') =>
-    getItem(STORAGE_KEYS.COLOR_SCHEME, defaultValue),
+  getColorScheme: <T extends 'light' | 'dark' | null>(defaultValue: T) =>
+    getItem<'light' | 'dark' | T>(STORAGE_KEYS.COLOR_SCHEME, defaultValue),
   setColorScheme: (value: 'light' | 'dark') =>
     setItem(STORAGE_KEYS.COLOR_SCHEME, value),
 

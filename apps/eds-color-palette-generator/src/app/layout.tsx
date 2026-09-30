@@ -5,6 +5,7 @@ import './globals.css'
 import '@/styles/dialog.css' // Import dialog styles globally
 import '@/styles/print.css' // Import print styles globally
 import { ColorSchemeProvider } from '@/context/ColorSchemeContext'
+import { COLOR_SCHEME_SCRIPT } from '@/context/colorSchemeScript'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,7 +29,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    // The pre-paint script may change data-color-scheme before hydration.
+    <html lang="en" data-color-scheme="light" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: COLOR_SCHEME_SCRIPT }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
