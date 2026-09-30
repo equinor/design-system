@@ -4,8 +4,7 @@ import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { Link2, Check, Download, BarChart3 } from 'lucide-react'
-
-type Tab = 'fargesystem' | 'eksempler' | 'kontrast'
+import type { ThemeBuilderTab as Tab } from '@/utils/urlState'
 
 type ThemeBuilderHeaderProps = {
   activeTab: Tab
@@ -32,9 +31,9 @@ export function ThemeBuilderHeader({
   }, [])
 
   const tabs: { key: Tab; label: string }[] = [
-    { key: 'fargesystem', label: 'Fargesystem' },
-    { key: 'eksempler', label: 'Eksempler' },
-    { key: 'kontrast', label: 'Kontrast' },
+    { key: 'system', label: 'Colour system' },
+    { key: 'examples', label: 'Examples' },
+    { key: 'contrast', label: 'Contrast' },
   ]
 
   return (
@@ -58,7 +57,7 @@ export function ThemeBuilderHeader({
               onClick={() => onTabChange(tab.key)}
               className={[
                 'cursor-pointer px-4 py-1.5 text-sm border-none',
-                tab.key !== 'fargesystem' ? 'border-l border-neutral-subtle' : '',
+                tab.key !== 'system' ? 'border-l border-neutral-subtle' : '',
                 activeTab === tab.key
                   ? 'bg-neutral-fill-emphasis-default text-strong-on-emphasis font-semibold'
                   : 'bg-default text-subtle font-normal',

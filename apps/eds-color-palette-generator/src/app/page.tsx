@@ -11,7 +11,7 @@ import {
 import { paletteConfig } from '@/config/palette-config'
 import { resolveToken, toneRamps } from '@/utils/semanticTokens'
 import { deserializeState, updateURL } from '@/utils/urlState'
-import type { PaletteInput } from '@/utils/urlState'
+import type { PaletteInput, ThemeBuilderTab } from '@/utils/urlState'
 import { downloadConfiguration } from '@/utils/configurationUtils'
 import type { ColorDefinition } from '@/types'
 import { ThemeBuilderHeader } from '@/components/themebuilder/ThemeBuilderHeader'
@@ -20,8 +20,6 @@ import { TokenMatrix } from '@/components/themebuilder/TokenMatrix'
 import { ContrastTable } from '@/components/themebuilder/ContrastTable'
 import { ComponentPreviewPanel } from '@/components/themebuilder/ComponentPreviewPanel'
 import { ContrastTestPanel } from '@/components/themebuilder/ContrastTestPanel'
-
-type Tab = 'fargesystem' | 'eksempler' | 'kontrast'
 
 /** Convert paletteConfig.colors to PaletteInput[] for defaults */
 const DEFAULT_PALETTES: PaletteInput[] = (paletteConfig.colors ?? []).map(
@@ -55,8 +53,8 @@ function ThemeBuilderContent() {
   const [palettes, setPalettes] = useState<PaletteInput[]>(
     initialState.palettes ?? DEFAULT_PALETTES,
   )
-  const [activeTab, setActiveTab] = useState<Tab>(
-    initialState.activeTab ?? 'fargesystem',
+  const [activeTab, setActiveTab] = useState<ThemeBuilderTab>(
+    initialState.activeTab ?? 'system',
   )
   const [contrastPaletteIndex, setContrastPaletteIndex] = useState(0)
 
@@ -162,7 +160,7 @@ function ThemeBuilderContent() {
       />
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {activeTab === 'fargesystem' ? (
+        {activeTab === 'system' ? (
           <div className="flex flex-col" style={{ gap: '24px' }}>
             <PaletteInputPanel
               palettes={palettes}
@@ -177,7 +175,7 @@ function ThemeBuilderContent() {
               onActivePaletteChange={setContrastPaletteIndex}
             />
           </div>
-        ) : activeTab === 'kontrast' ? (
+        ) : activeTab === 'contrast' ? (
           <ContrastTestPanel palettes={generatedPalettes} />
         ) : (
           <ComponentPreviewPanel palettes={generatedPalettes} />

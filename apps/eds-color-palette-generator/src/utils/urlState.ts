@@ -6,9 +6,28 @@ export type PaletteInput = {
   anchors?: ColorAnchor[]
 }
 
+export const THEME_BUILDER_TABS = ['system', 'examples', 'contrast'] as const
+
+export type ThemeBuilderTab = (typeof THEME_BUILDER_TABS)[number]
+
+/** Tab keys from before the UI was translated, still found in shared links. */
+const LEGACY_TABS: Record<string, ThemeBuilderTab> = {
+  fargesystem: 'system',
+  eksempler: 'examples',
+  kontrast: 'contrast',
+}
+
+function parseTab(value: string | null): ThemeBuilderTab | undefined {
+  if (!value) return undefined
+  if ((THEME_BUILDER_TABS as readonly string[]).includes(value)) {
+    return value as ThemeBuilderTab
+  }
+  return LEGACY_TABS[value]
+}
+
 type ThemeBuilderState = {
   palettes: PaletteInput[]
-  activeTab: 'fargesystem' | 'eksempler' | 'kontrast'
+  activeTab: ThemeBuilderTab
   mode: 'light' | 'dark'
   advancedMode: boolean
 }
@@ -80,7 +99,7 @@ export function serializeState(state: Partial<ThemeBuilderState>): string {
     params.set('p', encoded)
   }
 
-  if (state.activeTab && state.activeTab !== 'fargesystem') {
+  if (state.activeTab && state.activeTab !== 'system') {
     params.set('tab', state.activeTab)
   }
 
@@ -108,8 +127,8 @@ export function deserializeState(
     }
   }
 
-  const tab = searchParams.get('tab')
-  if (tab === 'fargesystem' || tab === 'eksempler' || tab === 'kontrast') {
+  const tab = parseTab(searchParams.get('tab'))
+  if (tab) {
     result.activeTab = tab
   }
 
