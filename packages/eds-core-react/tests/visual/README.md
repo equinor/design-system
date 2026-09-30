@@ -63,7 +63,7 @@ pnpm test:visual:ui
 pnpm test:visual:update
 
 # Run a single spec, e.g. the Tooltip geometry tests
-pnpm exec playwright test tests/visual/Tooltip.next.spec.ts
+pnpm test:visual Tooltip.next
 
 # Use another port if a Storybook from a different checkout already runs on 9000
 STORYBOOK_PORT=9010 pnpm test:visual
