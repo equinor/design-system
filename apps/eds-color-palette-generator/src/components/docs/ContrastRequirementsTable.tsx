@@ -15,11 +15,14 @@ export const ContrastRequirementsTable = () => {
       {stepsWithContrast.map((step) => (
         <div key={step.id} className="bg-surface rounded-lg p-6">
           <div className="mb-4">
-            <h4 className="text-lg font-semibold">{step.name}</h4>
-            <p className="text-sm text-neutral-subtle">
-              Category: {step.category}
-              {step.variant && ` • Variant: ${step.variant}`}
-            </p>
+            <h4 className="text-lg font-semibold">
+              {step.name} · {step.label}
+            </h4>
+            {step.primaryRole && (
+              <p className="text-sm text-neutral-subtle">
+                <code>{step.primaryRole}</code>
+              </p>
+            )}
             <div className="flex gap-4 mt-2 text-sm">
               <span className="text-neutral-subtle">
                 Light mode: L = {step.lightValue.toFixed(3)}
@@ -49,7 +52,12 @@ export const ContrastRequirementsTable = () => {
                   className="border-l-2 border-blue-500 pl-4 py-2 border border-neutral-subtle rounded"
                 >
                   <p className="text-sm font-medium mb-2">
-                    {targetStep?.name || contrast.targetStep}
+                    {targetStep
+                      ? `${targetStep.name} · ${targetStep.label}`
+                      : contrast.targetStep}
+                  </p>
+                  <p className="text-xs text-neutral-subtle mb-2">
+                    <code>{contrast.pairing}</code>
                   </p>
 
                   <div className="space-y-2">

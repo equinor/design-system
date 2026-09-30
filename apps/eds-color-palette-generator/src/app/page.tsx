@@ -79,9 +79,7 @@ function ThemeBuilderContent() {
       : darknessValuesInDarkMode
 
   const mean =
-    colorScheme === 'light'
-      ? paletteConfig.meanLight
-      : paletteConfig.meanDark
+    colorScheme === 'light' ? paletteConfig.meanLight : paletteConfig.meanDark
   const stdDev =
     colorScheme === 'light'
       ? paletteConfig.stdDevLight
@@ -101,28 +99,17 @@ function ThemeBuilderContent() {
           'HEX',
         )
       } else {
-        // Simple hex color. In light mode, step 9 is the dark emphasis fill, so
-        // we pin the exact input color there — the brand color appears in the
-        // scale. In dark mode the emphasis fill inverts to a light tint (Model 1
-        // / canonical EDS: light fill + dark on-emphasis label), so we let step
-        // 9 follow the dark lightness curve instead of pinning.
+        // Single colour: it supplies hue and chroma, and every step takes its
+        // lightness from the Tokens Studio scale, as Tokens Studio does. The
+        // input colour itself does not have to appear in the scale.
         const hex = p.baseColor.startsWith('#')
           ? p.baseColor
           : `#${p.baseColor}`
-        steps =
-          colorScheme === 'light'
-            ? generateColorScale(
-                [{ value: hex, step: 9 }],
-                lightnessValues,
-                mean,
-                stdDev,
-                'HEX',
-              )
-            : generateColorScale(hex, lightnessValues, mean, stdDev, 'HEX')
+        steps = generateColorScale(hex, lightnessValues, mean, stdDev, 'HEX')
       }
       return { name: p.name, steps }
     })
-  }, [palettes, lightnessValues, mean, stdDev, colorScheme])
+  }, [palettes, lightnessValues, mean, stdDev])
 
   const handlePalettesChange = useCallback((next: PaletteInput[]) => {
     setPalettes(next)

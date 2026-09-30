@@ -1,363 +1,123 @@
-// Configuration for color palette generator
-// Converted from JSON to TS to allow comments and prettier-ignore directives.
+// The 15 steps of every colour scale, derived from Tokens Studio.
+//
+// Lightness comes from `input/scale` and the role names come from the
+// semantic layer (see tokensStudio.ts). The step roles follow ADR 0016 D5.
 
 import { APCA_CONTRAST_LEVELS } from './APCA_CONTRAST_LEVELS'
 import { WCAG_CONTRAST_LEVELS } from './WCAG_CONTRAST_LEVELS'
-import { StepDefinition } from './types'
+import { ContrastRequirement, StepCategory, StepDefinition } from './types'
 import { getLightnessValues } from './helpers'
+import { STEP_COUNT, TS_SCALE, rolesForStep } from './tokensStudio'
 
 /**
- * Contrast requirements for a step pairing
+ * The role each step is named after in the UI, as a Tokens Studio semantic
+ * path. A step usually serves several roles (`rolesForStep` lists them all);
+ * this picks the one that best explains the step. `config.test.ts` checks
+ * that every path still references its step, so a Tokens Studio change that
+ * repoints a role fails the test instead of leaving a stale label.
  */
-
-/**
- * Individual step definitions using semantic IDs as constant names
- */
-
-export const BG_CANVAS: StepDefinition = {
-  id: 'bg-canvas',
-  name: 'Background Canvas',
-  category: 'Background',
-  // Light: lighter than surface (0.94) for clear separation, below the
-  // pure-white card step (1.0). Dark: 0.19 → #141414 (canvas), per the Figma
-  // "surfaces" artboard (node 136:26170). Chroma still follows the gaussian
-  // bell curve.
-  lightValue: 0.98,
-  darkValue: 0.19,
-}
-
-export const BG_SURFACE: StepDefinition = {
-  id: 'bg-surface',
-  name: 'Background Surface',
-  category: 'Background',
-  variant: 'surface',
-  // Dark: 0.226 → #1c1c1c, the elevated card surface from the Figma "surfaces"
-  // artboard (node 136:26170), lifting subtly off the #141414 canvas.
-  lightValue: 0.94,
-  darkValue: 0.226,
-}
-
-export const BG_FILL_MUTED_DEFAULT: StepDefinition = {
-  id: 'bg-fill-muted-default',
-  name: 'Background Fill Muted Default',
-  category: 'Background Fill Muted',
-  variant: 'default',
-  lightValue: 0.91,
-  darkValue: 0.47,
-  contrastWith: [
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BG_FILL_MUTED_HOVER: StepDefinition = {
-  id: 'bg-fill-muted-hover',
-  name: 'Background Fill Muted Hover',
-  category: 'Background Fill Muted',
-  variant: 'hover',
-  lightValue: 0.87,
-  darkValue: 0.52,
-  contrastWith: [
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BG_FILL_MUTED_ACTIVE: StepDefinition = {
-  id: 'bg-fill-muted-active',
-  name: 'Background Fill Muted Active',
-  category: 'Background Fill Muted',
-  variant: 'active',
-  lightValue: 0.82,
-  darkValue: 0.58,
-  contrastWith: [
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BORDER_SUBTLE: StepDefinition = {
-  id: 'border-subtle',
-  name: 'Border Subtle',
-  category: 'Border',
-  variant: 'subtle',
-  lightValue: 0.77,
-  darkValue: 0.47,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BORDER_MEDIUM: StepDefinition = {
-  id: 'border-medium',
-  name: 'Border Medium',
-  category: 'Border',
-  variant: 'medium',
-  lightValue: 0.72,
-  darkValue: 0.61,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-fill-muted-default',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BORDER_STRONG: StepDefinition = {
-  id: 'border-strong',
-  name: 'Border Strong',
-  category: 'Border',
-  variant: 'strong',
-  lightValue: 0.62,
-  darkValue: 0.76,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-fill-muted-default',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-fill-muted-hover',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'border-medium',
-      lc: APCA_CONTRAST_LEVELS.LC_15,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BG_FILL_EMPHASIS_DEFAULT: StepDefinition = {
-  id: 'bg-fill-emphasis-default',
-  name: 'Background Fill Emphasis Default',
-  category: 'Background Fill Emphasis',
-  variant: 'default',
-  lightValue: 0.52,
-  darkValue: 0.82,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BG_FILL_EMPHASIS_HOVER: StepDefinition = {
-  id: 'bg-fill-emphasis-hover',
-  name: 'Background Fill Emphasis Hover',
-  category: 'Background Fill Emphasis',
-  variant: 'hover',
-  lightValue: 0.47,
-  darkValue: 0.88,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const BG_FILL_EMPHASIS_ACTIVE: StepDefinition = {
-  id: 'bg-fill-emphasis-active',
-  name: 'Background Fill Emphasis Active',
-  category: 'Background Fill Emphasis',
-  variant: 'active',
-  lightValue: 0.42,
-  darkValue: 0.93,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_30,
-      wcag: WCAG_CONTRAST_LEVELS.UI_COMPONENTS,
-    },
-  ],
-}
-
-export const TEXT_SUBTLE: StepDefinition = {
-  id: 'text-subtle',
-  name: 'Text Subtle',
-  category: 'Text',
-  variant: 'subtle',
-  lightValue: 0.37,
-  darkValue: 0.91,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-    {
-      targetStep: 'bg-fill-muted-default',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-  ],
-}
-
-export const TEXT_STRONG: StepDefinition = {
-  id: 'text-strong',
-  name: 'Text Strong',
-  category: 'Text',
-  variant: 'strong',
-  lightValue: 0.32,
-  darkValue: 0.99,
-  contrastWith: [
-    {
-      targetStep: 'bg-canvas',
-      lc: APCA_CONTRAST_LEVELS.LC_90,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
-    },
-    {
-      targetStep: 'bg-surface',
-      lc: APCA_CONTRAST_LEVELS.LC_90,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
-    },
-    {
-      targetStep: 'bg-fill-muted-default',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-  ],
-}
-
-export const TEXT_SUBTLE_ON_EMPHASIS: StepDefinition = {
-  id: 'text-subtle-on-emphasis',
-  name: 'Text Subtle on Emphasis',
-  category: 'Text',
-  variant: 'subtle-on-emphasis',
-  lightValue: 0.9,
-  darkValue: 0.33,
-  contrastWith: [
-    {
-      targetStep: 'bg-fill-emphasis-default',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-    {
-      targetStep: 'bg-fill-emphasis-hover',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-    {
-      targetStep: 'bg-fill-emphasis-active',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
-    },
-  ],
-}
-
-export const TEXT_STRONG_ON_EMPHASIS: StepDefinition = {
-  id: 'text-strong-on-emphasis',
-  name: 'Text Strong on Emphasis',
-  category: 'Text',
-  variant: 'strong-on-emphasis',
-  lightValue: 1,
-  darkValue: 0.1,
-  contrastWith: [
-    {
-      targetStep: 'bg-fill-emphasis-default',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
-    },
-    {
-      targetStep: 'bg-fill-emphasis-hover',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
-    },
-    {
-      targetStep: 'bg-fill-emphasis-active',
-      lc: APCA_CONTRAST_LEVELS.LC_60,
-      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
-    },
-  ],
-}
-
-/**
- * Color palette step definitions array combining all individual step constants
- */
-// prettier-ignore
-export const PALETTE_STEPS: StepDefinition[] = [
-  BG_CANVAS,
-  BG_SURFACE,
-  BG_FILL_MUTED_DEFAULT,
-  BG_FILL_MUTED_HOVER,
-  BG_FILL_MUTED_ACTIVE,
-  BORDER_SUBTLE,
-  BORDER_MEDIUM,
-  BORDER_STRONG,
-  BG_FILL_EMPHASIS_DEFAULT,
-  BG_FILL_EMPHASIS_HOVER,
-  BG_FILL_EMPHASIS_ACTIVE,
-  TEXT_SUBTLE,
-  TEXT_STRONG,
-  TEXT_SUBTLE_ON_EMPHASIS,
-  TEXT_STRONG_ON_EMPHASIS,
+const PRIMARY_ROLES: ReadonlyArray<{ role: string | null; label: string }> = [
+  { role: 'background.interactive.<tone>.muted.default', label: 'muted' },
+  { role: 'background.interactive.<tone>.muted.hover', label: 'muted hover' },
+  {
+    role: 'background.interactive.<tone>.muted.pressed',
+    label: 'muted pressed',
+  },
+  { role: 'border.non-interactive.<tone>.muted', label: 'border muted' },
+  { role: 'background.interactive.accent.selected.default', label: 'selected' },
+  { role: null, label: 'unused' },
+  { role: 'border.non-interactive.<tone>.default', label: 'border' },
+  { role: 'text.secondary', label: 'text secondary' },
+  { role: 'background.interactive.<tone>.emphasis.default', label: 'emphasis' },
+  {
+    role: 'background.interactive.<tone>.emphasis.hover',
+    label: 'emphasis hover',
+  },
+  {
+    role: 'background.interactive.<tone>.emphasis.pressed',
+    label: 'emphasis pressed',
+  },
+  { role: 'text.on-muted.<tone>', label: 'on-muted' },
+  { role: 'text.primary', label: 'text primary' },
+  { role: null, label: 'unused' },
+  { role: 'text.on-emphasis.<tone>', label: 'on-emphasis' },
 ]
 
-// Generated exports for backward compatibility and UI
+export const stepId = (step: number) => `step-${step}`
+
+/**
+ * Contrast requirements from ADR 0016 Confirmation 5. Text and icon roles are
+ * measured with APCA against `background.surface`: Lc 90 for `text.primary`,
+ * Lc 60 for secondary text and interactive elements. `on-emphasis` is measured
+ * against the tone's emphasis fill. Borders are deliberately out of scope.
+ *
+ * The generator checks each pair inside every hue. For hues other than the
+ * neutral one, that hue's step 15 stands in for `background.surface`
+ * (`neutral.15`); both sit at the same lightness.
+ */
+const surface = stepId(15)
+const lc60OnSurface = (pairing: string): ContrastRequirement => ({
+  targetStep: surface,
+  lc: APCA_CONTRAST_LEVELS.LC_60,
+  wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
+  pairing,
+})
+
+const CONTRAST_REQUIREMENTS: Partial<Record<number, ContrastRequirement[]>> = {
+  8: [lc60OnSurface('text.secondary on background.surface')],
+  11: [lc60OnSurface('icon.interactive.<tone>.default on background.surface')],
+  12: [lc60OnSurface('icon.interactive.<tone>.hover on background.surface')],
+  13: [
+    {
+      targetStep: surface,
+      lc: APCA_CONTRAST_LEVELS.LC_90,
+      wcag: WCAG_CONTRAST_LEVELS.AAA_NORMAL,
+      pairing: 'text.primary on background.surface',
+    },
+  ],
+  15: [
+    {
+      targetStep: stepId(9),
+      lc: APCA_CONTRAST_LEVELS.LC_60,
+      wcag: WCAG_CONTRAST_LEVELS.AA_NORMAL,
+      pairing:
+        'text.on-emphasis.<tone> on background.interactive.<tone>.emphasis.default',
+    },
+  ],
+}
+
+function categoryOf(role: string | null): StepCategory {
+  const group = role?.split('.')[0]
+  return group === 'background' || group === 'border' || group === 'text'
+    ? group
+    : 'unused'
+}
+
+/** The 15 steps, in order. */
+export const PALETTE_STEPS: StepDefinition[] = Array.from(
+  { length: STEP_COUNT },
+  (_, i) => {
+    const step = i + 1
+    const { role, label } = PRIMARY_ROLES[i]
+    return {
+      step,
+      id: stepId(step),
+      name: `Step ${step}`,
+      label,
+      primaryRole: role,
+      roles: rolesForStep(step),
+      category: categoryOf(role),
+      lightValue: TS_SCALE.light[i],
+      darkValue: TS_SCALE.dark[i],
+      contrastWith: CONTRAST_REQUIREMENTS[step],
+    }
+  },
+)
+
+/** `"9 · emphasis"`, the short name used in selects and tooltips. */
+export const stepLabel = (step: number) =>
+  `${step} · ${PALETTE_STEPS[step - 1]?.label ?? ''}`
+
 export const lightnessValuesInLightMode =
   getLightnessValues('light')(PALETTE_STEPS)
 export const darknessValuesInDarkMode =

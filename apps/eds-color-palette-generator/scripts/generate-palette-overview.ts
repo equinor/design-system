@@ -34,14 +34,15 @@ function formatNumber(n: number, digits = 2) {
 }
 
 function buildStepsTable() {
-  const header = '| ID | Name | Category | Variant | Light (L) | Dark (L) |'
-  const sep = '| --- | ---- | -------- | ------- | --------- | -------- |'
+  const header =
+    '| Step | Label | Main role (Tokens Studio) | Light (L) | Dark (L) |'
+  const sep =
+    '| ---- | ----- | ------------------------- | --------- | -------- |'
   const rows = PALETTE_STEPS.map((s) =>
     [
-      s.id,
-      s.name,
-      s.category,
-      s.variant,
+      s.step,
+      s.label,
+      s.primaryRole ?? '(none)',
       formatNumber(s.lightValue, 2),
       formatNumber(s.darkValue, 2),
     ]
