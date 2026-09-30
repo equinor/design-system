@@ -4,6 +4,11 @@ import { useMemo } from 'react'
 import { calcContrast, getApcaFontBreakdown } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
 
+// Tokens Studio status roles for the similarity warning. EDS has no orange
+// or amber tone, so both "Very low" and "Low" use warning.
+const SIMILARITY_DANGER = 'bg-danger-muted text-danger-on-muted'
+const SIMILARITY_WARNING = 'bg-warning-muted text-warning-on-muted'
+
 type ContrastCardProps = {
   fgHex: string
   bgHex: string
@@ -29,89 +34,64 @@ export function ContrastCard({
 
   const similarity = useMemo(() => {
     if (fgHex.toLowerCase() === bgHex.toLowerCase())
-      return { label: 'Same colour', bg: '#fef2f2', color: '#991b1b' }
+      return { label: 'Same colour', tone: SIMILARITY_DANGER }
     if (wcagNum < 1.2)
-      return { label: 'Near identical', bg: '#fef2f2', color: '#991b1b' }
-    if (wcagNum < 2)
-      return { label: 'Very low', bg: '#fff7ed', color: '#9a3412' }
-    if (wcagNum < 3) return { label: 'Low', bg: '#fffbeb', color: '#92400e' }
+      return { label: 'Near identical', tone: SIMILARITY_DANGER }
+    if (wcagNum < 2) return { label: 'Very low', tone: SIMILARITY_WARNING }
+    if (wcagNum < 3) return { label: 'Low', tone: SIMILARITY_WARNING }
     return null
   }, [fgHex, bgHex, wcagNum])
 
   return (
-    <div
-      className="rounded-lg border border-neutral-subtle overflow-hidden"
-      style={{ minWidth: 200 }}
-    >
-      {/* Preview area */}
+    <div className="min-w-[200px] overflow-hidden rounded border border-muted">
+      {/* Preview area: the colours under test */}
       <div
-        className="flex items-center justify-center"
-        style={{
-          backgroundColor: bgHex,
-          height: 72,
-          padding: '8px 12px',
-        }}
+        className="flex h-[72px] items-center justify-center px-3 py-2"
+        style={{ backgroundColor: bgHex }}
       >
         {previewType === 'text' ? (
           <span
-            style={{
-              color: fgHex,
-              fontSize: 28,
-              fontWeight: 700,
-              lineHeight: 1,
-            }}
+            className="text-[28px] leading-none font-medium"
+            style={{ color: fgHex }}
           >
             Aa
           </span>
         ) : (
           <div
-            className="rounded"
-            style={{
-              border: `2px solid ${fgHex}`,
-              backgroundColor: bgHex,
-              width: 80,
-              height: 36,
-            }}
+            className="h-9 w-20 rounded border-2"
+            style={{ borderColor: fgHex, backgroundColor: bgHex }}
           />
         )}
       </div>
 
       {/* Info area */}
-      <div className="p-3 flex flex-col gap-2 bg-default">
+      <div className="flex flex-col gap-2 bg-surface p-3">
         <div
-          className="text-xs font-semibold text-strong truncate"
+          className="truncate text-sm font-medium text-primary"
           title={paletteName}
         >
           {paletteName}
         </div>
 
-        <div className="flex flex-col gap-0.5 text-[11px] text-subtle">
+        <div className="flex flex-col gap-0.5 text-xs text-secondary">
           <span>
-            fg: <span className="font-medium text-strong">{fgLabel}</span>
+            fg: <span className="font-medium text-primary">{fgLabel}</span>
           </span>
           <span>
-            bg: <span className="font-medium text-strong">{bgLabel}</span>
+            bg: <span className="font-medium text-primary">{bgLabel}</span>
           </span>
         </div>
 
         {/* WCAG */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-xs font-mono font-semibold text-strong">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="font-mono text-sm font-medium text-primary">
             {result.wcag}
           </span>
           <Badge pass={result.aa} label="AA" />
           <Badge pass={result.aaa} label="AAA" />
           {similarity && (
             <span
-              className="inline-flex items-center rounded font-semibold"
-              style={{
-                padding: '1px 6px',
-                fontSize: '10px',
-                lineHeight: '18px',
-                letterSpacing: '0.02em',
-                backgroundColor: similarity.bg,
-                color: similarity.color,
-              }}
+              className={`inline-flex items-center rounded px-1.5 text-xs leading-[18px] font-medium tracking-[0.02em] ${similarity.tone}`}
             >
               {similarity.label}
             </span>
@@ -119,26 +99,26 @@ export function ContrastCard({
         </div>
 
         {/* APCA */}
-        <div className="text-[11px] text-subtle">
+        <div className="text-xs text-secondary">
           APCA{' '}
-          <span className="font-mono font-semibold text-strong">
+          <span className="font-mono font-medium text-primary">
             Lc {result.apca}
           </span>
         </div>
 
         {/* Font size pills */}
-        <div className="flex gap-1 flex-wrap">
+        <div className="flex flex-wrap gap-1">
           {fontBreakdown.map(({ size, minWeight }) => {
             const passes = minWeight !== null
             return (
               <span
                 key={size}
-                className="rounded text-[10px] font-medium"
-                style={{
-                  padding: '1px 5px',
-                  backgroundColor: passes ? '#dcfce7' : '#f3f4f6',
-                  color: passes ? '#166534' : '#9ca3af',
-                }}
+                className={[
+                  'rounded px-[5px] py-px text-xs font-medium',
+                  passes
+                    ? 'bg-success-muted text-success-on-muted'
+                    : 'bg-neutral-muted text-tertiary',
+                ].join(' ')}
                 title={
                   passes
                     ? `${size}px: min weight ${minWeight}`

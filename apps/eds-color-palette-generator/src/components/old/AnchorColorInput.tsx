@@ -1,6 +1,8 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { Pipette, X } from 'lucide-react'
+import { close, dropper } from '@equinor/eds-icons'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
 import { isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { ColorAnchor } from '@/types'
 
@@ -96,7 +98,7 @@ export function AnchorColorInput({
           onChange={(e) =>
             onUpdateAnchor(index, 'step', parseInt(e.target.value))
           }
-          className="px-2 py-1.5 text-sm rounded-md border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong bg-input"
+          className="px-2 py-1.5 text-sm text-primary rounded border border-input hover:border-input-hover focus:border-emphasis bg-input"
           aria-label={`Step for anchor ${index + 1}`}
           data-testid={testId ? `${testId}-anchor-${index}-step` : undefined}
         >
@@ -127,10 +129,10 @@ export function AnchorColorInput({
           onChange={(e) => handleColorInputChange(e.target.value)}
           onBlur={handleColorInputBlur}
           placeholder="Color value"
-          className={`px-3 py-1.5 text-sm rounded-md ${
+          className={`px-3 py-1.5 text-sm text-primary rounded ${
             !isValidColor
-              ? 'border-2 border-danger-fill-emphasis-default'
-              : 'border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong'
+              ? 'border-2 border-danger'
+              : 'border border-input hover:border-input-hover focus:border-emphasis'
           } bg-input`}
           aria-label={`Color value for anchor ${index + 1}`}
           aria-invalid={!isValidColor}
@@ -138,7 +140,7 @@ export function AnchorColorInput({
         />
         {!isValidColor && (
           <span
-            className="text-xs text-danger-subtle"
+            className="text-sm text-danger"
             data-testid={
               testId ? `${testId}-anchor-${index}-format-error` : undefined
             }
@@ -162,27 +164,31 @@ export function AnchorColorInput({
         aria-label={`Pick color for anchor ${index + 1}`}
         tabIndex={-1}
       />
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
+        iconOnly
         onClick={() => colorInputRef.current?.click()}
-        className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
+        className="print-hide"
         title="Pick color"
         aria-label={`Pick color for anchor ${index + 1}`}
         data-testid={testId ? `${testId}-anchor-${index}-picker` : undefined}
       >
-        <Pipette className="w-4 h-4" />
-      </button>
+        <Icon data={dropper} size={16} />
+      </Button>
       {anchors.length > 1 && (
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
+          iconOnly
           onClick={() => onRemoveAnchor(index)}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
+          className="print-hide"
           title="Remove anchor"
           aria-label={`Remove anchor ${index + 1}`}
           data-testid={testId ? `${testId}-anchor-${index}-remove` : undefined}
         >
-          <X className="w-4 h-4" />
-        </button>
+          <Icon data={close} size={16} />
+        </Button>
       )}
     </div>
   )

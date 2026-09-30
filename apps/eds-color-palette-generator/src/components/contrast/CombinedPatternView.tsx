@@ -1,6 +1,7 @@
 import { getApcaFontBreakdown } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
 import type { PatternGroup } from '@/utils/contrastPageData'
+import { FontSizeChip } from './FontSizeChip'
 
 export function CombinedPatternView({
   patternGroups,
@@ -8,30 +9,18 @@ export function CombinedPatternView({
   patternGroups: PatternGroup[]
 }) {
   return (
-    <div className="flex flex-col" style={{ gap: '32px' }}>
+    <div className="flex flex-col gap-8">
       {patternGroups.map((group) => (
         <section key={group.title}>
-          <h2
-            className="font-bold"
-            style={{ fontSize: '15px', margin: '0 0 4px' }}
-          >
+          <h2 className="m-0 mb-1 text-header-md font-medium text-primary">
             {group.title}
           </h2>
-          <p
-            style={{
-              fontSize: '12px',
-              color: '#6b7280',
-              margin: '0 0 16px',
-            }}
-          >
-            {group.description}
-          </p>
+          <p className="m-0 mb-4 text-sm text-secondary">{group.description}</p>
 
           <div
-            className="grid"
+            className="grid gap-3"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '12px',
             }}
           >
             {group.pairings.map((p, i) => {
@@ -41,41 +30,24 @@ export function CombinedPatternView({
               return (
                 <div
                   key={`${group.title}-${i}`}
-                  className="rounded-xl overflow-hidden"
-                  style={{
-                    border: '1px solid #e5e7eb',
-                    background: '#fff',
-                  }}
+                  className="overflow-hidden rounded border border-muted bg-surface"
                 >
                   {/* State label */}
-                  <div
-                    style={{
-                      padding: '6px 12px',
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      color: '#6b7280',
-                      borderBottom: '1px solid #f3f4f6',
-                    }}
-                  >
+                  <div className="border-b border-muted px-3 py-1.5 text-sm font-medium text-secondary">
                     {p.state}
                   </div>
 
-                  {/* Visual preview — adapts to pairing type */}
+                  {/* Visual preview in the pairing's own colours */}
                   <div
-                    style={{
-                      backgroundColor: p.bg.hex,
-                      padding: p.type === 'border' ? '16px 20px' : '16px 12px',
-                    }}
+                    className={p.type === 'border' ? 'px-5 py-4' : 'px-3 py-4'}
+                    style={{ backgroundColor: p.bg.hex }}
                   >
                     {p.type === 'border' ? (
                       /* Border: show an input-like box */
                       <div
+                        className="rounded px-3 py-2.5 text-base text-tertiary"
                         style={{
                           border: `2px solid ${p.fg.hex}`,
-                          borderRadius: '8px',
-                          padding: '10px 12px',
-                          fontSize: '13px',
-                          color: '#9ca3af',
                           backgroundColor: p.bg.hex,
                         }}
                       >
@@ -84,22 +56,15 @@ export function CombinedPatternView({
                     ) : p.type === 'fill' ? (
                       /* Fill: show a filled rectangle on the canvas */
                       <div
-                        style={{
-                          backgroundColor: p.fg.hex,
-                          borderRadius: '8px',
-                          height: '44px',
-                        }}
+                        className="h-11 rounded"
+                        style={{ backgroundColor: p.fg.hex }}
                       />
                     ) : (
                       /* Text: show Aa */
                       <div className="text-center">
                         <span
-                          style={{
-                            fontSize: '24px',
-                            fontWeight: 700,
-                            fontFamily: 'Georgia, serif',
-                            color: p.fg.hex,
-                          }}
+                          className="text-2xl font-bold"
+                          style={{ color: p.fg.hex }}
                         >
                           Aa
                         </span>
@@ -108,38 +73,26 @@ export function CombinedPatternView({
                   </div>
 
                   {/* Info */}
-                  <div
-                    style={{
-                      padding: '10px 12px',
-                      fontSize: '10px',
-                      color: '#6b7280',
-                    }}
-                  >
+                  <div className="px-3 py-2.5 text-xs text-secondary">
                     {/* Variable labels */}
-                    <div style={{ marginBottom: '6px', lineHeight: 1.5 }}>
+                    <div className="mb-1.5 leading-normal">
                       <div>
                         fg:{' '}
-                        <strong style={{ color: '#111' }}>{p.fg.label}</strong>
+                        <strong className="font-medium text-primary">
+                          {p.fg.label}
+                        </strong>
                       </div>
                       <div>
                         bg:{' '}
-                        <strong style={{ color: '#111' }}>{p.bg.label}</strong>
+                        <strong className="font-medium text-primary">
+                          {p.bg.label}
+                        </strong>
                       </div>
                     </div>
 
                     {/* WCAG */}
-                    <div
-                      className="flex items-center gap-1 flex-wrap"
-                      style={{ marginBottom: '4px' }}
-                    >
-                      <span
-                        className="font-semibold"
-                        style={{
-                          fontFamily: 'var(--font-geist-mono, monospace)',
-                          fontSize: '12px',
-                          color: '#111',
-                        }}
-                      >
+                    <div className="mb-1 flex flex-wrap items-center gap-1">
+                      <span className="font-mono text-sm font-medium text-primary">
                         {p.contrast.wcag}:1
                       </span>
                       <Badge pass={p.contrast.aa} label="AA" />
@@ -147,19 +100,9 @@ export function CombinedPatternView({
                     </div>
 
                     {/* APCA */}
-                    <div
-                      className="flex items-center gap-1"
-                      style={{ marginBottom: '4px' }}
-                    >
-                      <span style={{ color: '#9ca3af' }}>APCA</span>
-                      <span
-                        className="font-semibold"
-                        style={{
-                          fontFamily: 'var(--font-geist-mono, monospace)',
-                          fontSize: '12px',
-                          color: '#111',
-                        }}
-                      >
+                    <div className="mb-1 flex items-center gap-1">
+                      <span className="text-tertiary">APCA</span>
+                      <span className="font-mono text-sm font-medium text-primary">
                         Lc&nbsp;{p.contrast.apca}
                       </span>
                     </div>
@@ -167,21 +110,11 @@ export function CombinedPatternView({
                     {/* Font sizes */}
                     <div className="flex flex-wrap gap-1">
                       {fontBreakdown.map(({ size, minWeightName }) => (
-                        <span
+                        <FontSizeChip
                           key={size}
-                          className="inline-flex items-center rounded font-medium"
-                          style={{
-                            padding: '1px 4px',
-                            fontSize: '9px',
-                            lineHeight: '14px',
-                            fontFamily: 'var(--font-geist-mono, monospace)',
-                            backgroundColor: minWeightName ? '#dbeafe' : '#f3f4f6',
-                            color: minWeightName ? '#1e40af' : '#c0c0c0',
-                            textDecoration: minWeightName ? 'none' : 'line-through',
-                          }}
-                        >
-                          {size}px{minWeightName ? ` ${minWeightName}` : ''}
-                        </span>
+                          size={size}
+                          minWeightName={minWeightName}
+                        />
                       ))}
                     </div>
                   </div>

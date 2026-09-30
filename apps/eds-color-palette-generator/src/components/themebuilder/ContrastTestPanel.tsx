@@ -1,6 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import {
+  SegmentedControl,
+  TabPanel,
+} from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 import { SemanticPairings } from './contrast/SemanticPairings'
 import { SurfacePreview } from './contrast/SurfacePreview'
 import { InteractivePicker } from './contrast/InteractivePicker'
@@ -18,6 +23,13 @@ type ContrastTestPanelProps = {
 
 type SubTab = 'eds' | 'custom'
 
+const SUB_TABS: SegmentedOption<SubTab>[] = [
+  { value: 'eds', label: 'EDS' },
+  { value: 'custom', label: 'Custom' },
+]
+
+const ID_PREFIX = 'contrast-sub'
+
 export function ContrastTestPanel({ palettes }: ContrastTestPanelProps) {
   const [subTab, setSubTab] = useState<SubTab>('eds')
 
@@ -25,46 +37,34 @@ export function ContrastTestPanel({ palettes }: ContrastTestPanelProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Sub-tab toggle */}
-      <div className="flex rounded-lg overflow-hidden border border-neutral-subtle self-start">
-        <button
-          type="button"
-          onClick={() => setSubTab('eds')}
-          className={[
-            'cursor-pointer px-4 py-1.5 text-sm border-none',
-            subTab === 'eds'
-              ? 'bg-neutral-fill-emphasis-default text-strong-on-emphasis font-semibold'
-              : 'bg-default text-subtle font-normal',
-          ].join(' ')}
-        >
-          EDS
-        </button>
-        <button
-          type="button"
-          onClick={() => setSubTab('custom')}
-          className={[
-            'cursor-pointer px-4 py-1.5 text-sm border-none border-l border-neutral-subtle',
-            subTab === 'custom'
-              ? 'bg-neutral-fill-emphasis-default text-strong-on-emphasis font-semibold'
-              : 'bg-default text-subtle font-normal',
-          ].join(' ')}
-        >
-          Custom
-        </button>
-      </div>
+      <SegmentedControl
+        mode="tabs"
+        idPrefix={ID_PREFIX}
+        aria-label="Contrast checks"
+        options={SUB_TABS}
+        value={subTab}
+        onChange={setSubTab}
+        className="self-start"
+      />
 
-      {subTab === 'eds' ? (
-        <div className="flex flex-col gap-6">
-          <SemanticPairings palettes={palettes} />
-          <SurfacePreview palettes={palettes} />
-        </div>
-      ) : (
-        <div className="flex flex-col gap-6">
-          <DataColorChart palettes={palettes} />
-          <SamePalettePairings palettes={palettes} />
-          <InteractivePicker palettes={palettes} />
-        </div>
-      )}
+      <TabPanel
+        idPrefix={ID_PREFIX}
+        value={subTab}
+        className="flex flex-col gap-6"
+      >
+        {subTab === 'eds' ? (
+          <>
+            <SemanticPairings palettes={palettes} />
+            <SurfacePreview palettes={palettes} />
+          </>
+        ) : (
+          <>
+            <DataColorChart palettes={palettes} />
+            <SamePalettePairings palettes={palettes} />
+            <InteractivePicker palettes={palettes} />
+          </>
+        )}
+      </TabPanel>
     </div>
   )
 }

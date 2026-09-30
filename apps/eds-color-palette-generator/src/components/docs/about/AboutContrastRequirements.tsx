@@ -3,10 +3,10 @@ import { ContrastRequirementsTable } from '@/components/docs/ContrastRequirement
 export function AboutContrastRequirements() {
   return (
     <section id="contrast-requirements" className="scroll-mt-8">
-      <h2 className="mb-4 text-2xl font-bold">
+      <h2 className="mb-4 text-header-xl font-medium">
         Colour step pairings and contrast requirements
       </h2>
-      <div className="mb-6 prose prose-neutral dark:prose-invert max-w-none">
+      <div className="mb-6 space-y-4">
         <p>
           Each colour step is designed to work with specific other steps to
           ensure accessibility. The configuration defines contrast requirements
@@ -24,9 +24,9 @@ export function AboutContrastRequirements() {
         </p>
       </div>
 
-      <div className="p-4 mb-6 text-sm border rounded-lg border-neutral-subtle">
+      <div className="p-4 mb-6 text-sm border rounded border-muted">
         <p className="mb-2 font-medium">Understanding the levels:</p>
-        <ul className="space-y-1 text-neutral-subtle">
+        <ul className="space-y-1 text-secondary">
           <li>
             <strong>
               <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>{' '}
@@ -48,9 +48,9 @@ export function AboutContrastRequirements() {
 
       <ContrastRequirementsTable />
 
-      <div className="p-4 mt-6 text-sm rounded-lg bg-surface">
-        <h3 className="mb-2 font-semibold">Key insights</h3>
-        <ul className="space-y-1 list-disc list-inside text-neutral-subtle">
+      <div className="p-4 mt-6 text-sm rounded border border-muted bg-surface">
+        <h3 className="mb-2 font-medium">Key insights</h3>
+        <ul className="space-y-1 list-disc list-inside text-secondary">
           <li>
             <strong>Text and icons</strong> are measured against{' '}
             <code>background.surface</code> (neutral step 15): Lc 90 for{' '}

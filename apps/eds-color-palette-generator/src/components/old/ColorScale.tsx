@@ -6,6 +6,8 @@ import Color from 'colorjs.io'
 import React, { useState, useRef, useMemo, useEffect, useCallback } from 'react'
 import { useIsMounted } from '@equinor/eds-utils'
 import { ColorAnchor } from '@/types'
+import { check, close, copy } from '@equinor/eds-icons'
+import { Icon } from '@/components/shared/Icon'
 import { NameAndControls } from './NameAndControls'
 
 type ColorScaleProps = {
@@ -40,6 +42,14 @@ function getTextColorForStep(colors: string[], stepIndex: number): string {
   return colors[12] // text strong
 }
 
+const STATUS_TEXT = {
+  success: {
+    onDefault: 'text-success',
+    onEmphasis: 'text-success-on-emphasis',
+  },
+  danger: { onDefault: 'text-danger', onEmphasis: 'text-danger-on-emphasis' },
+} as const
+
 function getSystemTextColorClassNameForStep({
   stepIndex,
   status,
@@ -47,10 +57,11 @@ function getSystemTextColorClassNameForStep({
   stepIndex: number
   status: 'success' | 'danger'
 }): string {
-  if (stepIndex >= 9 && stepIndex <= 13) {
-    return `text-${status}-subtle-on-emphasis`
-  }
-  return `text-${status}-subtle`
+  // Steps 9–13 are emphasis fills, so status text uses the on-emphasis role
+  // there (Tokens Studio: text.on-emphasis.<tone>). Full class names, so
+  // Tailwind finds them.
+  const onEmphasis = stepIndex >= 9 && stepIndex <= 13
+  return STATUS_TEXT[status][onEmphasis ? 'onEmphasis' : 'onDefault']
 }
 
 // Convert color string to OKLCH format
@@ -62,7 +73,9 @@ function getOklchInfo(colorValue: string, index: number): OklchInfo {
     return {
       l: parseFloat((oklch.l ?? 0).toFixed(3)),
       c: parseFloat((oklch.c ?? 0).toFixed(3)),
-      h: parseFloat((oklch.h == null || isNaN(oklch.h) ? 0 : oklch.h).toFixed(1)),
+      h: parseFloat(
+        (oklch.h == null || isNaN(oklch.h) ? 0 : oklch.h).toFixed(1),
+      ),
       value: colorValue,
       index: index,
     }
@@ -256,7 +269,7 @@ function ColorScaleBase({
             <div
               data-testid={stepTestId}
               key={`color-step-${i}`}
-              className={`color-scale-item rounded-lg p-3 transition-transform hover:scale-105 relative cursor-pointer print:rounded-none ${
+              className={`color-scale-item rounded p-3 transition-transform hover:scale-105 relative cursor-pointer print:rounded-none ${
                 !showContrast ? 'aspect-square' : 'min-h-[130px]'
               }`}
               style={{ backgroundColor: color, color: textColor }}
@@ -279,7 +292,7 @@ function ColorScaleBase({
                   dialogRefs.current[i] = el
                 }}
                 id={`color-dialog-${i}`}
-                className="min-w-[320px] backdrop:bg-black/20 cursor-default"
+                className="min-w-[320px] cursor-default"
                 style={{
                   backgroundColor: colors[0],
                   color: colors[12],
@@ -311,28 +324,25 @@ function ColorScaleBase({
                   </h4>
                   <button
                     type="button"
-                    className="flex items-center justify-center rounded-full w-7 h-7 hover:bg-black/10 focus:outline-none focus:ring-2"
+                    className="flex items-center justify-center rounded-full w-7 h-7 cursor-pointer hover:bg-black/10"
                     onClick={() => closeDialog(i)}
                     aria-label="Close details"
                   >
-                    ✕
+                    <Icon data={close} size={18} />
                   </button>
                 </div>
 
                 {/* Color sample */}
                 <div className="flex gap-4 mb-4">
                   <div
-                    className="w-16 h-16 border rounded-lg"
-                    style={{
-                      backgroundColor: oklchInfo.value,
-                      borderColor: 'rgba(0,0,0,0.1)',
-                    }}
+                    className="w-16 h-16 border border-black/10 rounded"
+                    style={{ backgroundColor: oklchInfo.value }}
                     aria-label={`Color sample: ${oklchInfo.value}`}
                   />
 
                   <div className="flex flex-col justify-center">
                     <button
-                      className="flex items-center gap-2 px-2 py-1 mb-2 -mx-2 font-mono text-base text-left rounded hover:bg-black/10 dark:hover:bg-white/10 group"
+                      className="flex items-center gap-2 px-2 py-1 mb-2 -mx-2 font-mono text-base text-left rounded cursor-pointer hover:bg-black/10 dark:hover:bg-white/10 group"
                       onClick={(e) => {
                         e.stopPropagation()
                         copyToClipboard(oklchInfo.value, i)
@@ -341,35 +351,13 @@ function ColorScaleBase({
                     >
                       <span>{oklchInfo.value}</span>
                       {copiedColorIndex === i ? (
-                        <svg
-                          className="w-4 h-4 transition-opacity"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
+                        <Icon data={check} size={16} />
                       ) : (
-                        <svg
-                          className="w-4 h-4 transition-opacity opacity-0 group-hover:opacity-100"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                          />
-                        </svg>
+                        <Icon
+                          data={copy}
+                          size={16}
+                          className="opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                        />
                       )}
                     </button>
                   </div>
@@ -380,7 +368,7 @@ function ColorScaleBase({
                   <div className="pt-3 mt-3 border-t">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-neutral-subtle">
+                        <tr className="border-b border-muted">
                           <th scope="col" className="py-1 pr-2 text-left">
                             Pairs with
                           </th>
@@ -416,17 +404,17 @@ function ColorScaleBase({
                           }
 
                           const scoreColor = isContrastValid
-                            ? 'text-success-subtle'
-                            : 'text-danger-subtle'
+                            ? 'text-success'
+                            : 'text-danger'
 
                           return (
                             <tr
                               key={`dialog-contrast-${targetStepIndex}`}
-                              className="border-b border-neutral-subtle"
+                              className="border-b border-muted"
                             >
                               <td className="flex items-center gap-2 py-1 pr-2">
                                 <div
-                                  className="w-3 h-3 border rounded-full border-neutral-subtle"
+                                  className="w-3 h-3 border rounded-full border-muted"
                                   style={{
                                     backgroundColor: colors[targetStepIndex],
                                   }}

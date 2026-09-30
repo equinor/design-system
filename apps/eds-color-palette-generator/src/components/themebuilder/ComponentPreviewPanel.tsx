@@ -5,6 +5,7 @@ import { LoginFormPreview } from './LoginFormPreview'
 import { DataTablePreview } from './DataTablePreview'
 import { CardPreview } from './CardPreview'
 import { ButtonPreview } from './ButtonPreview'
+import { Card } from '@/components/shared/Card'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import type { Scheme } from '@/config/tokensStudio'
 import {
@@ -18,6 +19,9 @@ type GeneratedPalette = {
   name: string
   steps: string[]
 }
+
+const SELECT_CLASS =
+  'rounded border border-input bg-input px-2 py-1 text-sm text-primary hover:border-input-hover'
 
 type ComponentPreviewPanelProps = {
   palettes: GeneratedPalette[]
@@ -76,41 +80,35 @@ export function ComponentPreviewPanel({
   )
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {/* Role selector */}
-      <section className="rounded-xl border border-neutral-subtle bg-default p-5">
-        <h2 className="font-semibold text-sm mb-3">Palette Roles</h2>
-        <div className="flex flex-wrap gap-x-6 gap-y-3 items-center">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-subtle font-medium">Neutral</span>
+      <Card title="Palette roles">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="flex items-center gap-2 text-sm">
+            <span className="font-medium text-secondary">Neutral</span>
             <span
-              className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-mono"
+              className="inline-flex items-center gap-1.5 rounded border px-2 py-1 text-sm"
               style={{
                 backgroundColor: neutral[2],
                 color: neutral[12],
-                border: `1px solid ${neutral[5]}`,
+                borderColor: neutral[5],
               }}
             >
               <span
-                style={{
-                  display: 'inline-block',
-                  width: '10px',
-                  height: '10px',
-                  borderRadius: '3px',
-                  backgroundColor: neutral[8],
-                }}
+                className="inline-block size-2.5 rounded-sm"
+                style={{ backgroundColor: neutral[8] }}
               />
               {neutralPalette.name}
               {neutralIsDefault ? ' (Tokens Studio default)' : ''}
             </span>
           </div>
 
-          <label className="flex items-center gap-2 text-xs">
-            <span className="text-subtle font-medium">Accent</span>
+          <label className="flex items-center gap-2 text-sm">
+            <span className="font-medium text-secondary">Accent</span>
             <select
               value={safeAccentIdx}
               onChange={(e) => setAccentIdx(Number(e.target.value))}
-              className="px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-default font-mono"
+              className={SELECT_CLASS}
             >
               {palettes.map((p, i) => (
                 <option key={i} value={i}>
@@ -121,16 +119,16 @@ export function ComponentPreviewPanel({
           </label>
 
           {dataColors.length > 0 && (
-            <div className="flex items-center gap-1.5 text-xs text-subtle">
+            <div className="flex flex-wrap items-center gap-1.5 text-sm text-secondary">
               <span className="font-medium">Data colours:</span>
               {dataColors.map((p) => (
                 <span
                   key={p.name}
-                  className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs"
+                  className="inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-sm"
                   style={{
                     backgroundColor: p.steps[2],
                     color: p.steps[12],
-                    border: `1px solid ${p.steps[5]}`,
+                    borderColor: p.steps[5],
                   }}
                 >
                   {p.name}
@@ -139,31 +137,23 @@ export function ComponentPreviewPanel({
             </div>
           )}
         </div>
-      </section>
+      </Card>
 
-      {/* Buttons */}
-      <section>
-        <h2 className="font-semibold text-sm mb-3">Buttons</h2>
+      <Card title="Buttons">
         <ButtonPreview colors={colors} />
-      </section>
+      </Card>
 
-      {/* Login Form */}
-      <section>
-        <h2 className="font-semibold text-sm mb-3">Login Form</h2>
+      <Card title="Login form">
         <LoginFormPreview colors={colors} />
-      </section>
+      </Card>
 
-      {/* Data Table */}
-      <section>
-        <h2 className="font-semibold text-sm mb-3">Data Table</h2>
+      <Card title="Data table">
         <DataTablePreview colors={colors} />
-      </section>
+      </Card>
 
-      {/* Cards */}
-      <section>
-        <h2 className="font-semibold text-sm mb-3">Article Cards</h2>
+      <Card title="Article cards">
         <CardPreview colors={colors} />
-      </section>
+      </Card>
     </div>
   )
 }

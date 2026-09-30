@@ -39,8 +39,7 @@ export const LightnessValueInputs = ({
             onChange={(e) =>
               updateLightnessValue(index, Number(e.target.value))
             }
-            className="w-full p-1 text-xs text-center bg-input border border-input rounded"
-            style={{ maxWidth: '90%' }}
+            className="w-full max-w-[90%] p-1 text-sm text-center text-primary bg-input border border-input hover:border-input-hover rounded"
             aria-label={`Lightness value ${index + 1}`}
             inputMode="decimal"
           />

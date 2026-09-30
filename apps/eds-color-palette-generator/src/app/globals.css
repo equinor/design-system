@@ -1,20 +1,234 @@
 @import 'tailwindcss';
-@import '@equinor/eds-tailwind';
+/*
+ * The Tokens Studio CSS bundle: colours, font families, density (type sizes,
+ * spacing, corner radius) and elevation. Tokens Studio is the source of truth
+ * (ADR 0011, 0016); the docs app and Storybook load the same file.
+ */
+@import '../../../../packages/eds-tokens/src/tokens/css/variables.css';
 
+@custom-variant dark (&:where([data-color-scheme=dark], [data-color-scheme=dark] *));
+
+/*
+ * Tailwind utilities mapped onto the Tokens Studio semantic layer. Class
+ * names follow the token names: bg-canvas → background.canvas,
+ * text-secondary → text.secondary, border-muted →
+ * border.non-interactive.neutral.muted, bg-accent-emphasis-hover →
+ * background.interactive.accent.emphasis.hover, and so on.
+ */
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Only EDS colours. Tailwind's own palette is removed so classes such as
+     bg-gray-100 or text-blue-600 no longer compile. Black and white stay for
+     overlays on colour swatches, which sit on arbitrary colours. */
+  --color-*: initial;
+  --color-black: #000;
+  --color-white: #fff;
+
+  --font-sans: var(--eds-family-ui), system-ui, sans-serif;
+  --font-heading: var(--eds-family-header), var(--eds-family-ui), sans-serif;
+  /* EDS has no monospace family; code and hex values use the system one. */
+  --font-mono:
+    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* EDS type sizes (comfortable density by default) */
+  --text-xs: var(--eds-density-typography-ui-xs-font-size);
+  --text-xs--line-height: var(--eds-density-typography-ui-xs-line-height);
+  --text-sm: var(--eds-density-typography-ui-sm-font-size);
+  --text-sm--line-height: var(--eds-density-typography-ui-sm-line-height);
+  --text-base: var(--eds-density-typography-ui-md-font-size);
+  --text-base--line-height: var(--eds-density-typography-ui-md-line-height);
+  --text-lg: var(--eds-density-typography-ui-lg-font-size);
+  --text-lg--line-height: var(--eds-density-typography-ui-lg-line-height);
+  --text-xl: var(--eds-density-typography-ui-xl-font-size);
+  --text-xl--line-height: var(--eds-density-typography-ui-xl-line-height);
+
+  /* EDS header sizes (Equinor font), for page and section headings:
+     text-header-md → typography.header.md, and so on. */
+  --text-header-sm: var(--eds-density-typography-header-sm-font-size);
+  --text-header-sm--line-height: var(
+    --eds-density-typography-header-sm-line-height
+  );
+  --text-header-md: var(--eds-density-typography-header-md-font-size);
+  --text-header-md--line-height: var(
+    --eds-density-typography-header-md-line-height
+  );
+  --text-header-lg: var(--eds-density-typography-header-lg-font-size);
+  --text-header-lg--line-height: var(
+    --eds-density-typography-header-lg-line-height
+  );
+  --text-header-xl: var(--eds-density-typography-header-xl-font-size);
+  --text-header-xl--line-height: var(
+    --eds-density-typography-header-xl-line-height
+  );
+  --text-header-2xl: var(--eds-density-typography-header-2xl-font-size);
+  --text-header-2xl--line-height: var(
+    --eds-density-typography-header-2xl-line-height
+  );
+  --text-header-3xl: var(--eds-density-typography-header-3xl-font-size);
+  --text-header-3xl--line-height: var(
+    --eds-density-typography-header-3xl-line-height
+  );
+
+  /* EDS has three weights: lighter (300), normal (400) and bolder (500).
+     Tailwind's semibold and bold also map to bolder, so emphasis stays
+     within the EDS scale. */
+  --font-weight-light: var(--eds-font-weight-lighter);
+  --font-weight-normal: var(--eds-font-weight-normal);
+  --font-weight-medium: var(--eds-font-weight-bolder);
+  --font-weight-semibold: var(--eds-font-weight-bolder);
+  --font-weight-bold: var(--eds-font-weight-bolder);
+
+  /* One EDS corner radius. rounded-full stays a pill. */
+  --radius-xs: var(--eds-density-corner-radius-rounded);
+  --radius-sm: var(--eds-density-corner-radius-rounded);
+  --radius-md: var(--eds-density-corner-radius-rounded);
+  --radius-lg: var(--eds-density-corner-radius-rounded);
+  --radius-xl: var(--eds-density-corner-radius-rounded);
+  --radius-2xl: var(--eds-density-corner-radius-rounded);
+
+  /* Backgrounds */
+  --background-color-canvas: var(--eds-background-canvas);
+  --background-color-surface: var(--eds-background-surface);
+  --background-color-floating: var(--eds-background-floating);
+  --background-color-input: var(--eds-background-input);
+  --background-color-backdrop: var(--eds-background-backdrop);
+  --background-color-inverted: var(--eds-background-inverted);
+  --background-color-disabled: var(--eds-background-interactive-disabled);
+
+  --background-color-neutral-muted: var(
+    --eds-background-interactive-neutral-muted-default
+  );
+  --background-color-neutral-muted-hover: var(
+    --eds-background-interactive-neutral-muted-hover
+  );
+  --background-color-neutral-muted-pressed: var(
+    --eds-background-interactive-neutral-muted-pressed
+  );
+  --background-color-neutral-emphasis: var(
+    --eds-background-interactive-neutral-emphasis-default
+  );
+  --background-color-neutral-emphasis-hover: var(
+    --eds-background-interactive-neutral-emphasis-hover
+  );
+  --background-color-neutral-emphasis-pressed: var(
+    --eds-background-interactive-neutral-emphasis-pressed
+  );
+
+  --background-color-accent-muted: var(
+    --eds-background-interactive-accent-muted-default
+  );
+  --background-color-accent-muted-hover: var(
+    --eds-background-interactive-accent-muted-hover
+  );
+  --background-color-accent-muted-pressed: var(
+    --eds-background-interactive-accent-muted-pressed
+  );
+  --background-color-accent-emphasis: var(
+    --eds-background-interactive-accent-emphasis-default
+  );
+  --background-color-accent-emphasis-hover: var(
+    --eds-background-interactive-accent-emphasis-hover
+  );
+  --background-color-accent-emphasis-pressed: var(
+    --eds-background-interactive-accent-emphasis-pressed
+  );
+  --background-color-accent-selected: var(
+    --eds-background-interactive-accent-selected-default
+  );
+  --background-color-accent-selected-hover: var(
+    --eds-background-interactive-accent-selected-hover
+  );
+
+  /* Status backgrounds (non-interactive: badges, banners) */
+  --background-color-info-muted: var(
+    --eds-background-non-interactive-info-muted
+  );
+  --background-color-info: var(--eds-background-non-interactive-info-default);
+  --background-color-info-emphasis: var(
+    --eds-background-non-interactive-info-emphasis
+  );
+  --background-color-success-muted: var(
+    --eds-background-non-interactive-success-muted
+  );
+  --background-color-success: var(
+    --eds-background-non-interactive-success-default
+  );
+  --background-color-success-emphasis: var(
+    --eds-background-non-interactive-success-emphasis
+  );
+  --background-color-warning-muted: var(
+    --eds-background-non-interactive-warning-muted
+  );
+  --background-color-warning: var(
+    --eds-background-non-interactive-warning-default
+  );
+  --background-color-warning-emphasis: var(
+    --eds-background-non-interactive-warning-emphasis
+  );
+  --background-color-danger-muted: var(
+    --eds-background-non-interactive-danger-muted
+  );
+  --background-color-danger: var(
+    --eds-background-non-interactive-danger-default
+  );
+  --background-color-danger-emphasis: var(
+    --eds-background-non-interactive-danger-emphasis
+  );
+
+  /* Text */
+  --text-color-primary: var(--eds-text-primary);
+  --text-color-secondary: var(--eds-text-secondary);
+  --text-color-tertiary: var(--eds-text-tertiary);
+  --text-color-inverted: var(--eds-text-inverted);
+  --text-color-disabled: var(--eds-text-interactive-disabled);
+  --text-color-link: var(--eds-text-interactive-link-default);
+  --text-color-link-hover: var(--eds-text-interactive-link-hover);
+  --text-color-neutral-on-emphasis: var(--eds-text-on-emphasis-neutral);
+  --text-color-accent: var(--eds-text-on-default-accent);
+  --text-color-accent-on-muted: var(--eds-text-on-muted-accent);
+  --text-color-accent-on-emphasis: var(--eds-text-on-emphasis-accent);
+  --text-color-info: var(--eds-text-on-default-info);
+  --text-color-info-on-muted: var(--eds-text-on-muted-info);
+  --text-color-info-on-emphasis: var(--eds-text-on-emphasis-info);
+  --text-color-success: var(--eds-text-on-default-success);
+  --text-color-success-on-muted: var(--eds-text-on-muted-success);
+  --text-color-success-on-emphasis: var(--eds-text-on-emphasis-success);
+  --text-color-warning: var(--eds-text-on-default-warning);
+  --text-color-warning-on-muted: var(--eds-text-on-muted-warning);
+  --text-color-warning-on-emphasis: var(--eds-text-on-emphasis-warning);
+  --text-color-danger: var(--eds-text-on-default-danger);
+  --text-color-danger-on-muted: var(--eds-text-on-muted-danger);
+  --text-color-danger-on-emphasis: var(--eds-text-on-emphasis-danger);
+
+  /* Borders */
+  --border-color-muted: var(--eds-border-non-interactive-neutral-muted);
+  --border-color-default: var(--eds-border-non-interactive-neutral-default);
+  --border-color-emphasis: var(--eds-border-non-interactive-neutral-emphasis);
+  --border-color-input: var(--eds-border-interactive-neutral-muted-default);
+  --border-color-input-hover: var(--eds-border-interactive-neutral-muted-hover);
+  --border-color-focus: var(--eds-border-interactive-focus);
+  --border-color-disabled: var(--eds-border-interactive-disabled);
+  --border-color-selected: var(--eds-border-interactive-selected-indicator);
+  --border-color-accent: var(--eds-border-non-interactive-accent-default);
+  --border-color-accent-emphasis: var(
+    --eds-border-non-interactive-accent-emphasis
+  );
+  --border-color-info-muted: var(--eds-border-non-interactive-info-muted);
+  --border-color-success-muted: var(--eds-border-non-interactive-success-muted);
+  --border-color-warning-muted: var(--eds-border-non-interactive-warning-muted);
+  --border-color-danger-muted: var(--eds-border-non-interactive-danger-muted);
+  --border-color-danger: var(--eds-border-non-interactive-danger-emphasis);
+
+  /* Elevation */
+  --shadow-sm: var(--eds-elevation-low);
+  --shadow-md: var(--eds-elevation-low);
+  --shadow-lg: var(--eds-elevation-high);
+  --shadow-xl: var(--eds-elevation-high);
 }
 
 :root {
-  /* Default page background. Light = EDS neutral *canvas* (#f5f5f5). */
-  --background: var(--eds-color-bg-neutral-canvas);
-}
-
-/* Dark: page backdrop = #0b0b0b = tonal-inversion neutral canvas (Gray/1).
-   See plan/light-dark-parity-comparison.md §4a. */
-[data-color-scheme='dark'] {
-  --background: #0b0b0b;
+  /* Page colours, also used by headers that blend with the page. */
+  --background: var(--eds-background-canvas);
+  --text: var(--eds-text-primary);
 }
 
 html,
@@ -22,5 +236,32 @@ body {
   min-height: 100vh;
   background: var(--background);
   color: var(--text);
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-sans);
+}
+
+/* Native controls (selects, scrollbars, colour inputs) follow the scheme. */
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+/* Native checkboxes, radios and sliders in the EDS accent colour. */
+input[type='checkbox'],
+input[type='radio'],
+input[type='range'] {
+  accent-color: var(--eds-background-interactive-accent-emphasis-default);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+/* EDS 2.0 focus ring, as on the /next Button: keyboard focus only. */
+:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 2px;
 }

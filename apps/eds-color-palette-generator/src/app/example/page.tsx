@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import Link from 'next/link'
+import { refresh } from '@equinor/eds-icons'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 import {
@@ -13,6 +13,11 @@ import {
   PredefinedGroups,
   SurfacePreviewSection,
 } from '@/components/example'
+import { AppHeader } from '@/components/shared/AppHeader'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 
 export default function ExamplePage() {
   const { colorScheme } = useColorScheme()
@@ -28,93 +33,39 @@ export default function ExamplePage() {
 
   const palette = allPalettes[activePalette] ?? allPalettes[0]
 
+  // Custom palettes may repeat a name, so the index is the value
+  const paletteOptions: SegmentedOption<string>[] = allPalettes.map((p, i) => ({
+    value: String(i),
+    label: p.name,
+  }))
+
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: '#fafafa', color: '#111' }}
-    >
-      {/* ---- Header ---- */}
-      <header
-        className="sticky top-0 z-10"
-        style={{
-          background: 'rgba(250,250,250,0.85)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: '1px solid #e5e7eb',
-        }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-4">
-          <h1 className="text-lg font-bold m-0">Examples</h1>
-
-          <div className="ml-auto flex items-center gap-4">
-            {/* Palette selector */}
-            <div className="flex items-center gap-2">
-              {allPalettes.map((p, i) => (
-                <button
-                  key={`${p.name}-${i}`}
-                  type="button"
-                  onClick={() => setActivePalette(i)}
-                  className="cursor-pointer"
-                  style={{
-                    padding: '6px 14px',
-                    fontSize: '13px',
-                    fontWeight: activePalette === i ? 600 : 400,
-                    borderRadius: '8px',
-                    border:
-                      activePalette === i
-                        ? '1.5px solid #111'
-                        : '1.5px solid #d1d5db',
-                    background: activePalette === i ? '#111' : '#fff',
-                    color: activePalette === i ? '#fff' : '#111',
-                  }}
-                >
-                  {p.name}
-                </button>
-              ))}
-              <button
-                type="button"
-                onClick={refreshCustomPalettes}
-                className="cursor-pointer"
-                title="Refresh custom palettes from the Palette editor"
-                style={{
-                  padding: '6px 10px',
-                  fontSize: '12px',
-                  borderRadius: '8px',
-                  border: '1.5px solid #d1d5db',
-                  background: '#fff',
-                  color: '#6b7280',
-                }}
-              >
-                Refresh
-              </button>
-            </div>
-
-            {/* Nav links */}
-            <Link
-              href="/contrast"
-              style={{
-                fontSize: '13px',
-                color: '#6b7280',
-                textDecoration: 'none',
-              }}
-            >
-              Contrast
-            </Link>
-            <Link
-              href="/palette"
-              style={{
-                fontSize: '13px',
-                color: '#6b7280',
-                textDecoration: 'none',
-              }}
-            >
-              Palette editor
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-canvas text-primary">
+      <AppHeader />
 
       <main className="max-w-5xl mx-auto px-6 py-8">
+        <h1 className="m-0 text-header-2xl font-medium">Examples</h1>
+
+        {/* Palette picker */}
+        <div className="mt-4 mb-6 flex flex-wrap items-center gap-3">
+          <SegmentedControl
+            mode="radio"
+            aria-label="Palette"
+            layout="wrap"
+            options={paletteOptions}
+            value={String(activePalette)}
+            onChange={(v) => setActivePalette(Number(v))}
+          />
+          <Button
+            variant="ghost"
+            onClick={refreshCustomPalettes}
+            title="Refresh custom palettes from the Palette editor"
+          >
+            <Icon data={refresh} size={18} />
+            Refresh
+          </Button>
+        </div>
+
         <PredefinedGroups palette={palette} />
         <SurfacePreviewSection allPalettes={allPalettes} />
         <InteractivePicker allPalettes={allPalettes} />

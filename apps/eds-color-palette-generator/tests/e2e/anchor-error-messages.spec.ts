@@ -36,8 +36,8 @@ test('should show inline error when trying to add anchor when all 15 steps are u
   )
 
   // Verify the error message has proper styling
-  await expect(errorMessage).toHaveClass(/text-danger-subtle/)
-  await expect(errorMessage).toHaveClass(/bg-danger-fill-muted/)
+  await expect(errorMessage).toHaveClass(/(^|\s)text-danger-on-muted(\s|$)/)
+  await expect(errorMessage).toHaveClass(/(^|\s)bg-danger-muted(\s|$)/)
 })
 
 test('should clear max anchors error when removing an anchor', async ({

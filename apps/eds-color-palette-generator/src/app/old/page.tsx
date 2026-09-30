@@ -26,7 +26,10 @@ import {
 } from '@/config/config'
 import { computeContrastSummary } from '@/utils/contrastSummary'
 import { QuickActionsPopover } from '@/components/old/QuickActionsPopover'
-import { RotateCcw } from 'lucide-react'
+import { restore } from '@equinor/eds-icons'
+import { AppHeader } from '@/components/shared/AppHeader'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -307,7 +310,9 @@ export default function App() {
   }, [currentScalesOnly, contrastMethod, showContrast, isMounted])
 
   return (
-    <div className="min-h-screen bg-canvas text-default">
+    <div className="min-h-screen bg-canvas text-primary">
+      {/* Not sticky here: the step header below sticks to the top instead */}
+      <AppHeader sticky={false} />
       <header className="mx-auto max-w-7xl px-6 py-8 print-hide">
         <HeaderPanel
           showConfigPanel={showConfigPanel}
@@ -321,9 +326,9 @@ export default function App() {
           <section className="mb-8 print:mb-0">
             <div
               id="display-options-panel"
-              className="mx-auto max-w-7xl p-6 rounded-xl"
+              className="mx-auto max-w-7xl p-6 rounded"
             >
-              <div className="bg-surface px-4 py-6 rounded-xl print-hide">
+              <div className="bg-surface border border-muted px-4 py-6 rounded print-hide">
                 <DisplayOptionsPanel
                   showContrast={showContrast}
                   showLightnessInputs={showLightnessInputs}
@@ -380,7 +385,7 @@ export default function App() {
                 return (
                   <div
                     key={`scale-wrap-${index}`}
-                    className="rounded-xl bg-surface p-4 print:p-0 print:bg-transparent"
+                    className="rounded border border-muted bg-surface p-4 print:p-0 print:bg-transparent print:border-0"
                   >
                     <ColorScale
                       colors={colorData.scale}
@@ -406,16 +411,14 @@ export default function App() {
 
             {/* Add new color button */}
             <div className="my-8 mx-auto max-w-7xl px-6 print-hide">
-              <button
-                type="button"
+              <Button
                 onClick={() =>
                   addColor({ name: 'New colour', value: '#888888' })
                 }
-                className="px-4 py-2 text-sm border border-neutral-medium hover:bg-neutral-fill-muted-hover active:bg-neutral-fill-muted-active rounded-md cursor-pointer"
                 data-testid="add-color-button"
               >
                 Add colour
-              </button>
+              </Button>
             </div>
           </>
         )}
@@ -440,7 +443,7 @@ export default function App() {
             <div
               role="status"
               aria-live="polite"
-              className="px-4 py-2 rounded-md shadow-md bg-elevated text-sm font-medium border border-neutral-subtle"
+              className="px-4 py-2 rounded shadow-md bg-floating text-base font-medium border border-muted"
             >
               {`${contrastSummary.passed}/${contrastSummary.total} checks (${contrastSummary.percentage.toFixed(1)}%)`}
             </div>
@@ -450,11 +453,11 @@ export default function App() {
           <button
             type="button"
             onClick={resetConfiguration}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs bg-danger-fill-muted-default hover:bg-danger-fill-muted-hover border-none rounded-md"
+            className="inline-flex min-h-9 items-center gap-2 px-4 text-base font-medium text-danger-on-muted bg-danger-muted hover:bg-danger-muted/80 rounded cursor-pointer transition-colors"
             aria-label="Reset configuration changes"
             title="Reset configuration changes"
           >
-            <RotateCcw className="w-4 h-4" />
+            <Icon data={restore} size={18} />
             <span>Reset</span>
           </button>
         )}

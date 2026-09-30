@@ -1,15 +1,15 @@
 export function AboutLearnMore() {
   return (
     <section id="learn-more" className="pb-12 scroll-mt-8">
-      <h2 className="mb-4 text-2xl font-bold">Learn more</h2>
-      <div className="p-6 rounded-lg bg-surface">
+      <h2 className="mb-4 text-header-xl font-medium">Learn more</h2>
+      <div className="p-6 rounded border border-muted bg-surface">
         <ul className="space-y-3 text-sm">
           <li>
             <a
               href="https://developer.chrome.com/docs/css-ui/high-definition-css-color-guide"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               High definition CSS color guide
             </a>
@@ -19,7 +19,7 @@ export function AboutLearnMore() {
               href="https://lea.verou.me/blog/2020/04/lch-colors-in-css-what-why-and-how/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               LCH colors in CSS: what, why, and how?
             </a>
@@ -29,7 +29,7 @@ export function AboutLearnMore() {
               href="https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               OKLCH in CSS: why we moved from{' '}
               <abbr title="Red Green Blue">RGB</abbr> and{' '}
@@ -41,7 +41,7 @@ export function AboutLearnMore() {
               href="https://git.apcacontrast.com/documentation/APCAeasyIntro"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>{' '}
               contrast algorithm
@@ -52,7 +52,7 @@ export function AboutLearnMore() {
               href="https://www.radix-ui.com/colors"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               Radix UI: A gorgeous, accessible color system for user interfaces
             </a>
@@ -62,7 +62,7 @@ export function AboutLearnMore() {
               href="https://www.figma.com/proto/YQNlL2nGozvROuz8G2XnQU/Presentations?node-id=29732-29814&p=f&t=PTYP4InT4YxjKvbq-1&scaling=contain&content-scaling=fixed&page-id=29732%3A29813"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               EDS APCA presentation Global Accessibility Awareness Day 2024
             </a>
@@ -72,7 +72,7 @@ export function AboutLearnMore() {
               href="https://oklch.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               OKLCH color picker and converter
             </a>

@@ -15,14 +15,14 @@ const SECTIONS = [
 
 export function AboutTableOfContents() {
   return (
-    <nav className="p-6 rounded-lg bg-surface">
-      <h2 className="mb-4 text-xl font-bold">Table of contents</h2>
+    <nav className="p-6 rounded border border-muted bg-surface">
+      <h2 className="mb-4 text-header-lg font-medium">Table of contents</h2>
       <ol className="space-y-2 text-sm">
         {SECTIONS.map(({ href, label }) => (
           <li key={href}>
             <a
               href={href}
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-link underline hover:text-link-hover"
             >
               {label}
             </a>

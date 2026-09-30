@@ -1,6 +1,8 @@
 'use client'
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
-import { Trash, Pipette, Plus } from 'lucide-react'
+import { add, delete_to_trash, dropper } from '@equinor/eds-icons'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
 import { isValidColorFormat, parseColorToHex } from '@/utils/color'
 import { DEFAULT_ANCHOR_COLOR } from '@/utils/constants'
 import { findAvailableStep } from '@/utils/stepSelection'
@@ -166,21 +168,23 @@ function NameAndControlsBase({
           value={name ?? ''}
           onChange={(e) => onRename?.(e.target.value)}
           placeholder="Color name"
-          className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded-md border border-transparent hover:border-neutral-subtle focus:border-neutral-strong focus:bg-canvas bg-surface text-strong font-medium"
+          className="min-w-0 max-w-40 flex-1 px-3 py-1.5 rounded border border-transparent hover:border-input-hover focus:border-emphasis focus:bg-canvas bg-surface text-primary font-medium"
           style={{ color: headingColor }}
           aria-label="Color name"
           data-testid={testId ? `${testId}-input-name` : undefined}
         />
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
+          iconOnly
           onClick={() => onRemove?.()}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-md border-neutral-subtle hover:bg-neutral-fill-muted-hover print-hide"
+          className="print-hide"
           title="Remove color"
           aria-label="Remove color"
           data-testid={testId ? `${testId}-remove-button` : undefined}
         >
-          <Trash className="w-4 h-4" />
-        </button>
+          <Icon data={delete_to_trash} size={16} />
+        </Button>
       </div>
 
       {/* Single color mode (legacy) */}
@@ -193,10 +197,10 @@ function NameAndControlsBase({
               onChange={(e) => handleColorInputChange(e.target.value)}
               onBlur={handleColorInputBlur}
               placeholder="Any color format"
-              className={`px-3 py-1.5 text-sm rounded-md ${
+              className={`px-3 py-1.5 text-sm text-primary rounded ${
                 !isValidColor
-                  ? 'border-2 border-danger-fill-emphasis-default'
-                  : 'border border-neutral-subtle hover:border-neutral-medium focus:border-neutral-strong'
+                  ? 'border-2 border-danger'
+                  : 'border border-input hover:border-input-hover focus:border-emphasis'
               } bg-input`}
               aria-label={`Base color for ${name ?? 'color'}`}
               aria-invalid={!isValidColor}
@@ -204,7 +208,7 @@ function NameAndControlsBase({
             />
             {!isValidColor && (
               <span
-                className="text-xs text-danger-subtle"
+                className="text-sm text-danger"
                 data-testid={testId ? `${testId}-format-error` : undefined}
               >
                 Color format is not valid
@@ -220,26 +224,29 @@ function NameAndControlsBase({
             aria-label={`Pick base color for ${name ?? 'color'}`}
             tabIndex={-1}
           />
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
+            iconOnly
             onClick={() => colorInputRef.current?.click()}
-            className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover print-hide"
+            className="print-hide"
             title="Pick color"
             aria-label="Pick color"
             data-testid={testId ? `${testId}-color-picker` : undefined}
           >
-            <Pipette className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
+            <Icon data={dropper} size={16} />
+          </Button>
+          <Button
+            size="sm"
+            iconOnly
             onClick={handleAddSecondColor}
-            className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-neutral-fill-muted-hover border border-neutral-subtle print-hide"
+            className="print-hide"
             title="Add second color"
             aria-label="Add second color"
             data-testid={testId ? `${testId}-add-second-color` : undefined}
           >
-            <Plus className="w-4 h-4" />
-          </button>
+            <Icon data={add} size={16} />
+          </Button>
         </div>
       )}
 
@@ -259,24 +266,24 @@ function NameAndControlsBase({
           ))}
           {maxAnchorsError && (
             <div
-              className="text-xs text-danger-subtle px-2 py-1 bg-danger-fill-muted rounded-md"
+              className="text-sm text-danger-on-muted px-2 py-1 bg-danger-muted rounded"
               role="alert"
               data-testid={testId ? `${testId}-max-anchors-error` : undefined}
             >
               {maxAnchorsError}
             </div>
           )}
-          <button
-            type="button"
+          <Button
+            size="sm"
             onClick={handleAddAnchor}
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md hover:bg-neutral-fill-muted-hover border border-neutral-subtle print-hide"
+            className="print-hide"
             title="Add anchor"
             aria-label="Add anchor"
             data-testid={testId ? `${testId}-add-anchor` : undefined}
           >
-            <Plus className="w-4 h-4" />
+            <Icon data={add} size={16} />
             Add anchor
-          </button>
+          </Button>
         </div>
       )}
     </div>

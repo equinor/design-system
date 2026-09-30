@@ -29,17 +29,13 @@ export function SimpleColorPicker({
         }}
         maxLength={7}
         aria-label={`${label} hex value`}
-        className="w-[80px] px-2 py-1 text-sm font-mono rounded-md border border-neutral-subtle bg-default"
+        className="w-[80px] rounded border border-input bg-input px-2 py-1 font-mono text-sm text-primary hover:border-input-hover"
       />
       <button
         type="button"
         onClick={() => nativeRef.current?.click()}
-        className="cursor-pointer rounded-md border border-neutral-subtle p-0 relative overflow-hidden shrink-0"
-        style={{
-          width: '28px',
-          height: '28px',
-          backgroundColor: displayValue,
-        }}
+        className="relative size-7 shrink-0 cursor-pointer overflow-hidden rounded border border-input p-0"
+        style={{ backgroundColor: displayValue }}
         title="Pick colour"
         aria-label={`Pick ${label} colour`}
       >

@@ -40,8 +40,10 @@ export const BellCurveVisualization = ({
 
     const path = points
       .map((point, index) => {
-        const x = scaleX(point.x)
-        const y = scaleY(point.y)
+        // Rounded so the server and the browser serialise the same string;
+        // Math.exp can differ in the last digits, which breaks hydration.
+        const x = scaleX(point.x).toFixed(2)
+        const y = scaleY(point.y).toFixed(2)
         return `${index === 0 ? 'M' : 'L'} ${x} ${y}`
       })
       .join(' ')
@@ -51,7 +53,7 @@ export const BellCurveVisualization = ({
 
   return (
     <div className="space-y-4">
-      <div className="bg-surface rounded-lg p-6">
+      <div className="rounded border border-muted bg-surface p-6">
         <svg
           viewBox={`0 0 ${pathData.width} ${pathData.height}`}
           className="w-full h-auto"
@@ -147,7 +149,7 @@ export const BellCurveVisualization = ({
             fill="none"
             stroke="currentColor"
             strokeWidth="3"
-            className="text-blue-600 dark:text-blue-400"
+            className="text-accent"
           />
 
           {/* Mean indicator */}
@@ -159,7 +161,7 @@ export const BellCurveVisualization = ({
             stroke="currentColor"
             strokeWidth="2"
             strokeDasharray="5,5"
-            className="text-red-500"
+            className="text-danger"
           />
           <text
             x={pathData.scaleX(mean)}
@@ -167,7 +169,7 @@ export const BellCurveVisualization = ({
             textAnchor="middle"
             fontSize="12"
             fill="currentColor"
-            className="text-red-500"
+            className="text-danger"
           >
             Mean: {mean.toFixed(1)}
           </text>
@@ -186,9 +188,9 @@ export const BellCurveVisualization = ({
             step="0.05"
             value={mean}
             onChange={(e) => setMean(Number(e.target.value))}
-            className="w-full accent-current"
+            className="w-full"
           />
-          <span className="text-sm text-neutral-subtle">
+          <span className="text-sm text-secondary">
             Current value: {mean.toFixed(2)}
           </span>
         </label>
@@ -204,21 +206,21 @@ export const BellCurveVisualization = ({
             step="0.1"
             value={stdDev}
             onChange={(e) => setStdDev(Number(e.target.value))}
-            className="w-full accent-current"
+            className="w-full"
           />
-          <span className="text-sm text-neutral-subtle">
+          <span className="text-sm text-secondary">
             Current value: {stdDev.toFixed(2)}
           </span>
         </label>
       </div>
 
-      <div className="bg-surface rounded-lg p-4 text-sm">
+      <div className="rounded border border-muted bg-surface p-4 text-sm">
         <p className="mb-2">
           <strong>How it works:</strong> The bell curve (Gaussian function)
           determines how much chroma (colour intensity) is applied at different
           lightness levels.
         </p>
-        <ul className="list-disc list-inside space-y-1 text-neutral-subtle">
+        <ul className="list-disc list-inside space-y-1 text-secondary">
           <li>
             <strong>Mean:</strong> The lightness value where chroma is at its
             maximum

@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import { calcContrast, getApcaFontBreakdown } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
+import { FontSizeChip } from '@/components/contrast/FontSizeChip'
 
 export function PairingCard({
   fgRole,
@@ -22,25 +23,17 @@ export function PairingCard({
   const fontBreakdown = useMemo(() => getApcaFontBreakdown(lc), [lc])
 
   return (
-    <div
-      className="rounded-xl overflow-hidden"
-      style={{ border: '1px solid #e5e7eb', background: '#fff' }}
-    >
-      {/* Visual preview */}
+    <div className="overflow-hidden rounded border border-muted bg-surface">
+      {/* Visual preview in the pairing's own colours */}
       <div
-        style={{
-          backgroundColor: bgHex,
-          padding: type === 'border' ? '16px 20px' : '16px 12px',
-        }}
+        className={type === 'border' ? 'px-5 py-4' : 'px-3 py-4'}
+        style={{ backgroundColor: bgHex }}
       >
         {type === 'border' ? (
           <div
+            className="rounded px-3 py-2.5 text-base text-tertiary"
             style={{
               border: `2px solid ${fgHex}`,
-              borderRadius: '8px',
-              padding: '10px 12px',
-              fontSize: '13px',
-              color: '#9ca3af',
               backgroundColor: bgHex,
             }}
           >
@@ -48,14 +41,7 @@ export function PairingCard({
           </div>
         ) : (
           <div className="text-center">
-            <span
-              style={{
-                fontSize: '24px',
-                fontWeight: 700,
-                fontFamily: 'Georgia, serif',
-                color: fgHex,
-              }}
-            >
+            <span className="text-2xl font-bold" style={{ color: fgHex }}>
               Aa
             </span>
           </div>
@@ -63,36 +49,20 @@ export function PairingCard({
       </div>
 
       {/* Info */}
-      <div
-        style={{
-          padding: '10px 12px',
-          fontSize: '10px',
-          color: '#6b7280',
-        }}
-      >
+      <div className="px-3 py-2.5 text-xs text-secondary">
         {/* Variable labels */}
-        <div style={{ marginBottom: '6px', lineHeight: 1.5 }}>
+        <div className="mb-1.5 leading-normal">
           <div>
-            fg: <strong style={{ color: '#111' }}>{fgRole}</strong>
+            fg: <strong className="font-medium text-primary">{fgRole}</strong>
           </div>
           <div>
-            bg: <strong style={{ color: '#111' }}>{bgRole}</strong>
+            bg: <strong className="font-medium text-primary">{bgRole}</strong>
           </div>
         </div>
 
         {/* WCAG */}
-        <div
-          className="flex items-center gap-1 flex-wrap"
-          style={{ marginBottom: '4px' }}
-        >
-          <span
-            className="font-semibold"
-            style={{
-              fontFamily: 'var(--font-geist-mono, monospace)',
-              fontSize: '12px',
-              color: '#111',
-            }}
-          >
+        <div className="mb-1 flex flex-wrap items-center gap-1">
+          <span className="font-mono text-sm font-medium text-primary">
             {result.wcag}:1
           </span>
           <Badge pass={result.aa} label="AA" />
@@ -100,16 +70,9 @@ export function PairingCard({
         </div>
 
         {/* APCA */}
-        <div className="flex items-center gap-1" style={{ marginBottom: '4px' }}>
-          <span style={{ color: '#9ca3af' }}>APCA</span>
-          <span
-            className="font-semibold"
-            style={{
-              fontFamily: 'var(--font-geist-mono, monospace)',
-              fontSize: '12px',
-              color: '#111',
-            }}
-          >
+        <div className="mb-1 flex items-center gap-1">
+          <span className="text-tertiary">APCA</span>
+          <span className="font-mono text-sm font-medium text-primary">
             Lc&nbsp;{result.apca}
           </span>
         </div>
@@ -117,21 +80,11 @@ export function PairingCard({
         {/* Font sizes */}
         <div className="flex flex-wrap gap-1">
           {fontBreakdown.map(({ size, minWeightName }) => (
-            <span
+            <FontSizeChip
               key={size}
-              className="inline-flex items-center rounded font-medium"
-              style={{
-                padding: '1px 4px',
-                fontSize: '9px',
-                lineHeight: '14px',
-                fontFamily: 'var(--font-geist-mono, monospace)',
-                backgroundColor: minWeightName ? '#dbeafe' : '#f3f4f6',
-                color: minWeightName ? '#1e40af' : '#c0c0c0',
-                textDecoration: minWeightName ? 'none' : 'line-through',
-              }}
-            >
-              {size}px{minWeightName ? ` ${minWeightName}` : ''}
-            </span>
+              size={size}
+              minWeightName={minWeightName}
+            />
           ))}
         </div>
       </div>

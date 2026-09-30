@@ -8,6 +8,7 @@ import {
   stepsWithRole,
 } from '@/config/config'
 import type { TokenPalette } from '@/utils/palette'
+import { Card } from '@/components/shared/Card'
 import { PairingCard } from './PairingCard'
 
 // Steps some Tokens Studio text, icon or border role uses, and steps some
@@ -21,6 +22,9 @@ const BG_STEPS = stepsWithRole('background').map((step) => step.step)
 const previewType = (step: number): 'text' | 'border' =>
   PALETTE_STEPS[step - 1]?.category === 'border' ? 'border' : 'text'
 
+const SELECT_CLASS =
+  'rounded border border-input bg-input px-2 py-1 font-mono text-sm text-primary hover:border-input-hover'
+
 export function InteractivePicker({
   allPalettes,
 }: {
@@ -31,129 +35,74 @@ export function InteractivePicker({
   const [bgStep, setBgStep] = useState(1)
 
   return (
-    <section style={{ marginTop: '48px' }}>
-      <h2 className="font-bold" style={{ fontSize: '15px', margin: '0 0 4px' }}>
-        Interactive Picker
-      </h2>
-      <p
+    <Card
+      title="Interactive picker"
+      description="Select any foreground and background variable to test contrast"
+      className="mt-12"
+      padded={false}
+    >
+      {/* Selector row */}
+      <div className="flex flex-wrap items-center gap-4 border-y border-muted px-5 py-4">
+        <label className="flex items-center gap-2 text-base">
+          <span className="font-medium text-secondary">Foreground</span>
+          <select
+            value={fgStep}
+            onChange={(e) => setFgStep(Number(e.target.value))}
+            className={SELECT_CLASS}
+          >
+            {FG_STEPS.map((step) => (
+              <option key={step} value={step} title={stepRolesText(step)}>
+                {stepLabel(step)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <span className="text-lg text-tertiary">on</span>
+
+        <label className="flex items-center gap-2 text-base">
+          <span className="font-medium text-secondary">Background</span>
+          <select
+            value={bgStep}
+            onChange={(e) => setBgStep(Number(e.target.value))}
+            className={SELECT_CLASS}
+          >
+            {BG_STEPS.map((step) => (
+              <option key={step} value={step} title={stepRolesText(step)}>
+                {stepLabel(step)}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {/* Results for each palette */}
+      <div
+        className="grid divide-x divide-muted"
         style={{
-          fontSize: '12px',
-          color: '#6b7280',
-          margin: '0 0 16px',
+          gridTemplateColumns: `repeat(${allPalettes.length}, 1fr)`,
         }}
       >
-        Select any foreground and background variable to test contrast
-      </p>
+        {allPalettes.map((pal, i) => {
+          const fgHex = pal.steps[fgStep - 1]
+          const bgHex = pal.steps[bgStep - 1]
 
-      <div
-        className="rounded-xl overflow-hidden"
-        style={{ border: '1px solid #e5e7eb', background: '#fff' }}
-      >
-        {/* Selector row */}
-        <div
-          className="flex items-center gap-4 flex-wrap"
-          style={{
-            padding: '16px 20px',
-            borderBottom: '1px solid #f3f4f6',
-          }}
-        >
-          <label
-            className="flex items-center gap-2"
-            style={{ fontSize: '13px' }}
-          >
-            <span style={{ color: '#6b7280', fontWeight: 500 }}>
-              Foreground
-            </span>
-            <select
-              value={fgStep}
-              onChange={(e) => setFgStep(Number(e.target.value))}
-              style={{
-                padding: '6px 10px',
-                fontSize: '13px',
-                borderRadius: '6px',
-                border: '1.5px solid #d1d5db',
-                background: '#fff',
-                fontFamily: 'var(--font-geist-mono, monospace)',
-              }}
-            >
-              {FG_STEPS.map((step) => (
-                <option key={step} value={step} title={stepRolesText(step)}>
-                  {stepLabel(step)}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <span style={{ color: '#d1d5db', fontSize: '18px' }}>on</span>
-
-          <label
-            className="flex items-center gap-2"
-            style={{ fontSize: '13px' }}
-          >
-            <span style={{ color: '#6b7280', fontWeight: 500 }}>
-              Background
-            </span>
-            <select
-              value={bgStep}
-              onChange={(e) => setBgStep(Number(e.target.value))}
-              style={{
-                padding: '6px 10px',
-                fontSize: '13px',
-                borderRadius: '6px',
-                border: '1.5px solid #d1d5db',
-                background: '#fff',
-                fontFamily: 'var(--font-geist-mono, monospace)',
-              }}
-            >
-              {BG_STEPS.map((step) => (
-                <option key={step} value={step} title={stepRolesText(step)}>
-                  {stepLabel(step)}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        {/* Results for each palette */}
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: `repeat(${allPalettes.length}, 1fr)`,
-            gap: '1px',
-            background: '#f3f4f6',
-          }}
-        >
-          {allPalettes.map((pal, i) => {
-            const fgHex = pal.steps[fgStep - 1]
-            const bgHex = pal.steps[bgStep - 1]
-
-            return (
-              <div
-                key={`${pal.name}-${i}`}
-                style={{ background: '#fff', padding: '16px 20px' }}
-              >
-                <div
-                  className="font-semibold"
-                  style={{
-                    fontSize: '12px',
-                    color: '#6b7280',
-                    marginBottom: '12px',
-                  }}
-                >
-                  {pal.name}
-                </div>
-                <PairingCard
-                  fgRole={stepLabel(fgStep)}
-                  bgRole={stepLabel(bgStep)}
-                  fgHex={fgHex}
-                  bgHex={bgHex}
-                  type={previewType(fgStep)}
-                />
+          return (
+            <div key={`${pal.name}-${i}`} className="px-5 py-4">
+              <div className="mb-3 text-sm font-medium text-secondary">
+                {pal.name}
               </div>
-            )
-          })}
-        </div>
+              <PairingCard
+                fgRole={stepLabel(fgStep)}
+                bgRole={stepLabel(bgStep)}
+                fgHex={fgHex}
+                bgHex={bgHex}
+                type={previewType(fgStep)}
+              />
+            </div>
+          )
+        })}
       </div>
-    </section>
+    </Card>
   )
 }

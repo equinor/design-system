@@ -38,46 +38,34 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
   ]
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '16px',
-      }}
-    >
+    <div className="grid grid-cols-3 gap-4">
       {cards.map((card) => (
         <div
           key={card.title}
+          className="overflow-hidden rounded border"
           style={{
             backgroundColor: c['background.surface'],
-            borderRadius: '8px',
-            border: `1px solid ${c['border.non-interactive.neutral.muted']}`,
-            overflow: 'hidden',
+            borderColor: c['border.non-interactive.neutral.muted'],
           }}
         >
           {/* Accent bar */}
           <div
+            className="h-[3px]"
             style={{
-              height: '3px',
               backgroundColor:
                 c['background.interactive.accent.emphasis.default'],
             }}
           />
 
-          <div style={{ padding: '16px' }}>
+          <div className="p-4">
             {/* Tag — the tone's muted fill */}
             <span
+              className="mb-2.5 inline-block rounded border px-2 py-0.5 text-xs font-medium"
               style={{
-                display: 'inline-block',
                 backgroundColor:
                   c[`background.interactive.${card.concept}.muted.default`],
                 color: c[`text.on-muted.${card.concept}`],
-                fontSize: '10px',
-                fontWeight: 600,
-                padding: '2px 8px',
-                borderRadius: '4px',
-                marginBottom: '10px',
-                border: `1px solid ${c[`border.non-interactive.${card.concept}.muted`]}`,
+                borderColor: c[`border.non-interactive.${card.concept}.muted`],
               }}
             >
               {card.tag}
@@ -85,37 +73,24 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
 
             {/* Title */}
             <div
-              style={{
-                fontSize: '14px',
-                fontWeight: 700,
-                color: c['text.primary'],
-                marginBottom: '6px',
-                lineHeight: 1.3,
-              }}
+              className="mb-1.5 text-base leading-[1.3] font-medium"
+              style={{ color: c['text.primary'] }}
             >
               {card.title}
             </div>
 
             {/* Body */}
             <div
-              style={{
-                fontSize: '12px',
-                color: c['text.secondary'],
-                lineHeight: 1.5,
-                marginBottom: '12px',
-              }}
+              className="mb-3 text-sm leading-normal"
+              style={{ color: c['text.secondary'] }}
             >
               {card.body}
             </div>
 
             {/* Link */}
             <div
-              style={{
-                fontSize: '12px',
-                fontWeight: 600,
-                color: c['text.interactive.link.default'],
-                textDecoration: 'underline',
-              }}
+              className="text-sm font-medium underline"
+              style={{ color: c['text.interactive.link.default'] }}
             >
               Read more
             </div>

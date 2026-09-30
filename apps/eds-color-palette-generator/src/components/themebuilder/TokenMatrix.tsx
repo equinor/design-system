@@ -9,6 +9,7 @@ import {
   stepLabel,
   stepRolesText,
 } from '@/config/config'
+import { Card } from '@/components/shared/Card'
 
 type GeneratedPalette = {
   name: string
@@ -40,37 +41,21 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
   if (palettes.length === 0) return null
 
   return (
-    <section className="rounded-xl overflow-hidden border border-neutral-subtle bg-default">
-      <h2 className="font-semibold text-sm px-5 pt-4">Token Matrix</h2>
-
-      <div className="px-5 pb-5 pt-3 overflow-x-auto">
-        {/* Category group headers */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns:
-              'minmax(100px, auto) repeat(15, minmax(58px, 1fr))',
-            gap: '2px',
-          }}
-        >
+    <Card title="Token matrix">
+      {/* Padding keeps the swatches' focus ring inside the scroll area */}
+      <div className="overflow-x-auto p-1">
+        <div className="grid grid-cols-[minmax(100px,auto)_repeat(15,minmax(58px,1fr))] gap-0.5">
+          {/* Category group headers */}
           {/* Spacer for row label column */}
           <div />
           {CATEGORY_RUNS.map((run, i) => (
             <div
               key={`${run.category}-${i}`}
-              className="text-center text-subtle"
-              style={{
-                gridColumn: `span ${run.span}`,
-                paddingBottom: '4px',
-                fontSize: '10px',
-                whiteSpace: 'nowrap',
-              }}
+              className="pb-1 text-center text-xs whitespace-nowrap text-secondary"
+              style={{ gridColumn: `span ${run.span}` }}
             >
               {categoryLabel(run.category)}
-              <div
-                className="border-t border-neutral-subtle"
-                style={{ marginTop: '2px' }}
-              />
+              <div className="mt-0.5 border-t border-muted" />
             </div>
           ))}
 
@@ -79,16 +64,11 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
           {PALETTE_STEPS.map((step) => (
             <div
               key={step.id}
-              className="text-center text-subtle"
-              style={{
-                fontSize: '8px',
-                lineHeight: 1.2,
-                paddingBottom: '4px',
-              }}
+              className="pb-1 text-center text-[8px] leading-[1.2] text-secondary"
               title={`Step ${step.step}: ${stepRolesText(step.step)}`}
             >
-              <div style={{ fontWeight: 600 }}>{step.label}</div>
-              <div style={{ opacity: 0.5 }}>{step.step}</div>
+              <div className="font-medium">{step.label}</div>
+              <div className="opacity-50">{step.step}</div>
             </div>
           ))}
 
@@ -98,7 +78,7 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
           ))}
         </div>
       </div>
-    </section>
+    </Card>
   )
 }
 
@@ -131,10 +111,7 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
 
   return (
     <>
-      <div
-        className="flex items-center text-xs font-semibold"
-        style={{ paddingRight: '8px', whiteSpace: 'nowrap' }}
-      >
+      <div className="flex items-center pr-2 text-sm font-medium whitespace-nowrap">
         {palette.name}
       </div>
       {palette.steps.map((hex, i) => {
@@ -144,26 +121,12 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
             type="button"
             key={`${palette.name}-${i}`}
             onClick={() => handleCopy(hex, i)}
-            className="flex items-center justify-center"
-            style={{
-              backgroundColor: hex,
-              color: textColors[i],
-              height: '44px',
-              border: 'none',
-              padding: '0 2px',
-              appearance: 'none',
-              borderRadius:
-                i === 0
-                  ? '8px 0 0 8px'
-                  : i === palette.steps.length - 1
-                    ? '0 8px 8px 0'
-                    : undefined,
-              fontSize: '9px',
-              fontWeight: 600,
-              fontVariantNumeric: 'tabular-nums',
-              whiteSpace: 'nowrap',
-              cursor: 'pointer',
-            }}
+            className={[
+              'flex h-11 cursor-pointer appearance-none items-center justify-center border-0 px-0.5 font-mono text-[9px] font-medium whitespace-nowrap tabular-nums focus-visible:relative focus-visible:z-10',
+              i === 0 ? 'rounded-l' : '',
+              i === palette.steps.length - 1 ? 'rounded-r' : '',
+            ].join(' ')}
+            style={{ backgroundColor: hex, color: textColors[i] }}
             title={`${stepLabel(i + 1)}: ${hex} — click to copy`}
             aria-label={`Copy ${palette.name} step ${stepLabel(i + 1)}: ${hex}`}
           >

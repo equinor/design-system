@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import Link from 'next/link'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 import {
@@ -11,6 +10,15 @@ import {
   type ViewMode,
 } from '@/utils/contrastPageData'
 import { CombinedPatternView, SinglePaletteView } from '@/components/contrast'
+import { AppHeader } from '@/components/shared/AppHeader'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+
+const VIEW_MODES: SegmentedOption<ViewMode>[] = [
+  { value: 'semantic', label: 'Curve' },
+  { value: 'gradient', label: 'Gradient' },
+  { value: 'combined', label: 'Combined' },
+]
 
 export default function ContrastPage() {
   const { colorScheme } = useColorScheme()
@@ -44,110 +52,40 @@ export default function ContrastPage() {
     return buildPatternGroups(colorScheme)
   }, [viewMode, colorScheme])
 
+  const paletteOptions: SegmentedOption<string>[] = palettes.map((p, i) => ({
+    value: String(i),
+    label: p.name,
+  }))
+
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: '#fafafa', color: '#111' }}
-    >
-      {/* ---- Header ---- */}
-      <header
-        className="sticky top-0 z-10"
-        style={{
-          background: 'rgba(250,250,250,0.85)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: '1px solid #e5e7eb',
-        }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-4">
-          <h1 className="text-lg font-bold m-0">Contrast</h1>
-
-          <div className="ml-auto flex items-center gap-4">
-            {/* Palette selector — hidden in combined */}
-            {viewMode !== 'combined' && (
-              <div className="flex items-center gap-2">
-                {palettes.map((p, i) => (
-                  <button
-                    key={p.name}
-                    type="button"
-                    onClick={() => setActivePalette(i)}
-                    className="cursor-pointer"
-                    style={{
-                      padding: '6px 14px',
-                      fontSize: '13px',
-                      fontWeight: activePalette === i ? 600 : 400,
-                      borderRadius: '8px',
-                      border:
-                        activePalette === i
-                          ? '1.5px solid #111'
-                          : '1.5px solid #d1d5db',
-                      background: activePalette === i ? '#111' : '#fff',
-                      color: activePalette === i ? '#fff' : '#111',
-                    }}
-                  >
-                    {p.name}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* View mode toggle */}
-            <div
-              className="flex rounded-lg overflow-hidden"
-              style={{ border: '1.5px solid #d1d5db' }}
-            >
-              {(['semantic', 'gradient', 'combined'] as const).map((mode) => (
-                <button
-                  key={mode}
-                  type="button"
-                  onClick={() => setViewMode(mode)}
-                  className="cursor-pointer"
-                  style={{
-                    padding: '6px 12px',
-                    fontSize: '12px',
-                    fontWeight: viewMode === mode ? 600 : 400,
-                    border: 'none',
-                    borderLeft:
-                      mode !== 'semantic' ? '1px solid #d1d5db' : 'none',
-                    background: viewMode === mode ? '#111' : '#fff',
-                    color: viewMode === mode ? '#fff' : '#666',
-                  }}
-                >
-                  {mode === 'semantic'
-                    ? 'Curve'
-                    : mode === 'gradient'
-                      ? 'Gradient'
-                      : 'Combined'}
-                </button>
-              ))}
-            </div>
-
-            {/* Nav links */}
-            <Link
-              href="/example"
-              style={{
-                fontSize: '13px',
-                color: '#6b7280',
-                textDecoration: 'none',
-              }}
-            >
-              Examples
-            </Link>
-            <Link
-              href="/palette"
-              style={{
-                fontSize: '13px',
-                color: '#6b7280',
-                textDecoration: 'none',
-              }}
-            >
-              Palette editor
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-canvas text-primary">
+      <AppHeader />
 
       <main className="max-w-5xl mx-auto px-6 py-8">
+        <h1 className="m-0 text-header-2xl font-medium">Contrast</h1>
+
+        <div className="mt-4 mb-6 flex flex-wrap items-center gap-3">
+          {/* Palette picker, hidden in the combined view */}
+          {viewMode !== 'combined' && (
+            <SegmentedControl
+              mode="radio"
+              aria-label="Palette"
+              options={paletteOptions}
+              value={String(activePalette)}
+              onChange={(v) => setActivePalette(Number(v))}
+            />
+          )}
+
+          <SegmentedControl
+            mode="radio"
+            aria-label="View"
+            className="ml-auto"
+            options={VIEW_MODES}
+            value={viewMode}
+            onChange={setViewMode}
+          />
+        </div>
+
         {viewMode === 'combined' && (
           <CombinedPatternView patternGroups={patternGroups} />
         )}

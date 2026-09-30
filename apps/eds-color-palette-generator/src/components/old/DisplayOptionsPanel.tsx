@@ -40,7 +40,6 @@ export const DisplayOptionsPanel = ({
             type="checkbox"
             checked={showLightnessInputs}
             onChange={(e) => setShowLightnessInputs(e.target.checked)}
-            className="accent-current"
           />
           <span>Lightness value inputs</span>
         </label>
@@ -50,7 +49,6 @@ export const DisplayOptionsPanel = ({
           type="checkbox"
           checked={showContrast}
           onChange={(e) => setShowContrast(e.target.checked)}
-          className="accent-current"
         />
         <span>Contrast score</span>
       </label>
@@ -65,7 +63,6 @@ export const DisplayOptionsPanel = ({
                 value="WCAG21"
                 checked={contrastMethod === 'WCAG21'}
                 onChange={() => setContrastMethod('WCAG21')}
-                className="accent-current"
               />
               <span>WCAG 2.1</span>
             </label>
@@ -76,7 +73,6 @@ export const DisplayOptionsPanel = ({
                 value="APCA"
                 checked={contrastMethod === 'APCA'}
                 onChange={() => setContrastMethod('APCA')}
-                className="accent-current"
               />
               <span>APCA</span>
             </label>
@@ -88,7 +84,6 @@ export const DisplayOptionsPanel = ({
           type="checkbox"
           checked={showGaussianParameters}
           onChange={(e) => setShowGaussianParameters(e.target.checked)}
-          className="accent-current"
         />
         <span>Gaussian parameters</span>
       </label>

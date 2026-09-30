@@ -61,9 +61,9 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
   return (
     <div
       data-dt={uid}
+      className="overflow-hidden"
       style={
         {
-          overflow: 'hidden',
           '--_hover': c['background.interactive.neutral.muted.default'],
           '--_pressed': c['background.interactive.neutral.muted.hover'],
           '--_selected': c['background.interactive.accent.muted.default'],
@@ -96,56 +96,32 @@ export function DataTablePreview({ colors: c }: DataTablePreviewProps) {
           data-row=""
           data-active={activeRow === i ? '' : undefined}
           onClick={() => setActiveRow(activeRow === i ? null : i)}
+          className="flex items-center py-2.5"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '10px 0',
             borderTop: `0.5px solid ${c['border.non-interactive.neutral.muted']}`,
           }}
         >
           <div
-            style={{
-              width: '180px',
-              padding: '0 16px',
-              fontSize: '14px',
-              lineHeight: '20px',
-              color: c['text.primary'],
-              flexShrink: 0,
-            }}
+            className="w-[180px] shrink-0 px-4 text-base"
+            style={{ color: c['text.primary'] }}
           >
             {row.name}
           </div>
           <div
-            style={{
-              padding: '0 16px',
-              fontSize: '14px',
-              lineHeight: '20px',
-              color: row.statusColor,
-              flexShrink: 0,
-            }}
+            className="shrink-0 px-4 text-base"
+            style={{ color: row.statusColor }}
           >
             {row.status}
           </div>
           <div
-            style={{
-              padding: '0 16px',
-              fontSize: '14px',
-              lineHeight: '20px',
-              color: c['text.primary'],
-              flexShrink: 0,
-            }}
+            className="shrink-0 px-4 text-base"
+            style={{ color: c['text.primary'] }}
           >
             {row.value}
           </div>
           <div
-            style={{
-              width: '120px',
-              padding: '0 16px',
-              fontSize: '12px',
-              lineHeight: '16px',
-              color: c['text.secondary'],
-              flexShrink: 0,
-            }}
+            className="w-[120px] shrink-0 px-4 text-sm"
+            style={{ color: c['text.secondary'] }}
           >
             {row.time}
           </div>

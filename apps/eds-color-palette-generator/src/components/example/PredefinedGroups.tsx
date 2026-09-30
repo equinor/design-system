@@ -5,30 +5,18 @@ import { PairingCard } from './PairingCard'
 
 export function PredefinedGroups({ palette }: { palette: TokenPalette }) {
   return (
-    <div className="flex flex-col" style={{ gap: '32px' }}>
+    <div className="flex flex-col gap-8">
       {EXAMPLE_GROUPS.map((group) => (
         <section key={group.title}>
-          <h2
-            className="font-bold"
-            style={{ fontSize: '15px', margin: '0 0 4px' }}
-          >
+          <h2 className="m-0 mb-1 text-header-md font-medium text-primary">
             {group.title}
           </h2>
-          <p
-            style={{
-              fontSize: '12px',
-              color: '#6b7280',
-              margin: '0 0 16px',
-            }}
-          >
-            {group.description}
-          </p>
+          <p className="m-0 mb-4 text-sm text-secondary">{group.description}</p>
 
           <div
-            className="grid"
+            className="grid gap-3"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '12px',
             }}
           >
             {group.pairings.map((p, i) => (

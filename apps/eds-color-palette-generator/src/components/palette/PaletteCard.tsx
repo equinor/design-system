@@ -1,6 +1,8 @@
 'use client'
 
+import { useId } from 'react'
 import Color from 'colorjs.io'
+import { delete_to_trash } from '@equinor/eds-icons'
 import { contrast } from '@/utils/color'
 import {
   PALETTE_STEPS,
@@ -10,6 +12,9 @@ import {
   stepRolesText,
 } from '@/config/config'
 import type { TokenPalette } from '@/utils/palette'
+import { Button } from '@/components/shared/Button'
+import { Card } from '@/components/shared/Card'
+import { Icon } from '@/components/shared/Icon'
 
 export type PaletteViewMode = 'curve' | 'gradient'
 
@@ -61,6 +66,7 @@ export function PaletteCard({
   onRemove: (index: number) => void
   onStepChange: (paletteIndex: number, stepIndex: number, hex: string) => void
 }) {
+  const inputId = useId()
   const sorted =
     viewMode === 'curve'
       ? palette.steps.map((hex, i) => ({ hex, i }))
@@ -69,82 +75,43 @@ export function PaletteCard({
           .sort((a, b) => getLightness(b.hex) - getLightness(a.hex))
 
   return (
-    <section
-      className="rounded-xl overflow-hidden"
-      style={{
-        border: '1px solid #e5e7eb',
-        background: '#fff',
-      }}
-    >
+    <Card padded={false} className="overflow-hidden">
       {/* Palette header */}
-      <div
-        className="flex items-center gap-3"
-        style={{
-          padding: '12px 20px',
-          borderBottom: '1px solid #f3f4f6',
-        }}
-      >
+      <div className="flex items-center gap-3 border-b border-muted px-5 py-3">
         <input
           type="text"
           value={palette.name}
           onChange={(e) => onNameChange(index, e.target.value)}
-          style={{
-            fontSize: '15px',
-            fontWeight: 600,
-            border: 'none',
-            background: 'transparent',
-            outline: 'none',
-            padding: '4px 0',
-            width: '200px',
-          }}
+          aria-label="Palette name"
+          className="w-52 rounded border border-transparent bg-transparent px-1 py-1 text-lg font-medium text-primary hover:border-input"
         />
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => onRemove(index)}
-          className="ml-auto cursor-pointer"
-          style={{
-            padding: '4px 10px',
-            fontSize: '11px',
-            borderRadius: '6px',
-            border: '1.5px solid #fecaca',
-            background: '#fff',
-            color: '#dc2626',
-          }}
+          aria-label={`Remove ${palette.name || 'palette'}`}
+          className="ml-auto"
         >
+          <Icon data={delete_to_trash} size={16} />
           Remove
-        </button>
+        </Button>
       </div>
 
       {/* Color strip */}
-      <div style={{ padding: '16px 20px 0' }}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(15, 1fr)',
-            gap: '2px',
-          }}
-        >
+      <div className="px-5 pt-4">
+        <div className="grid grid-cols-15 gap-0.5">
           {/* Category group headers (curve mode only) */}
           {viewMode === 'curve' &&
             CATEGORY_RUNS.map((run, i) => (
               <div
                 key={`${run.category}-${i}`}
-                className="text-center"
-                style={{
-                  gridColumn: `span ${run.span}`,
-                  paddingBottom: '6px',
-                }}
+                className="pb-1.5 text-center"
+                style={{ gridColumn: `span ${run.span}` }}
               >
-                <span style={{ fontSize: '10px', color: '#6b7280' }}>
+                <span className="text-xs text-secondary">
                   {categoryLabel(run.category)}
                 </span>
-                <div
-                  style={{
-                    height: '1px',
-                    background: '#d1d5db',
-                    marginTop: '3px',
-                  }}
-                />
+                <div className="mt-0.5 border-t border-default" />
               </div>
             ))}
 
@@ -152,27 +119,18 @@ export function PaletteCard({
           {sorted.map(({ hex, i: origIdx }, displayIdx) => (
             <div
               key={`strip-${origIdx}`}
-              className="flex flex-col items-center justify-end"
-              style={{
-                height: '64px',
-                backgroundColor: hex,
-                paddingBottom: '4px',
-                borderRadius:
-                  displayIdx === 0
-                    ? '10px 0 0 10px'
-                    : displayIdx === 14
-                      ? '0 10px 10px 0'
-                      : undefined,
-              }}
+              className={[
+                'flex h-16 flex-col items-center justify-end pb-1',
+                displayIdx === 0 ? 'rounded-l' : '',
+                displayIdx === 14 ? 'rounded-r' : '',
+              ].join(' ')}
+              style={{ backgroundColor: hex }}
               title={`${stepLabel(origIdx + 1)}: ${hex}\n${stepRolesText(origIdx + 1)}`}
             >
+              {/* Label colour picked for contrast with the swatch */}
               <span
-                className="font-bold"
-                style={{
-                  fontSize: '10px',
-                  color: labelColor(hex),
-                  opacity: 0.9,
-                }}
+                className="text-xs font-medium opacity-90"
+                style={{ color: labelColor(hex) }}
               >
                 {origIdx + 1}
               </span>
@@ -182,62 +140,46 @@ export function PaletteCard({
       </div>
 
       {/* Hex input grid */}
-      <div
-        style={{
-          padding: '16px 20px 20px',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: '8px',
-        }}
-      >
-        {sorted.map(({ hex, i: origIdx }) => (
-          <div key={`input-${origIdx}`}>
-            <label
-              style={{
-                display: 'block',
-                fontSize: '10px',
-                color: '#6b7280',
-                marginBottom: '3px',
-                lineHeight: 1.3,
-              }}
-            >
-              <strong style={{ color: '#374151' }}>{origIdx + 1}</strong>{' '}
-              {PALETTE_STEPS[origIdx]?.label}
-            </label>
-            <div className="flex items-center gap-1">
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '16px',
-                  height: '16px',
-                  borderRadius: '4px',
-                  backgroundColor: hex,
-                  border: '1px solid rgba(0,0,0,0.1)',
-                  flexShrink: 0,
-                }}
-              />
-              <input
-                type="text"
-                value={hex}
-                onChange={(e) => {
-                  const v = e.target.value
-                  onStepChange(index, origIdx, v)
-                }}
-                style={{
-                  fontSize: '12px',
-                  fontFamily: 'var(--font-geist-mono, monospace)',
-                  padding: '4px 6px',
-                  borderRadius: '4px',
-                  border: `1.5px solid ${isValidHex(hex) ? '#d1d5db' : '#fca5a5'}`,
-                  background: '#fff',
-                  width: '100%',
-                  minWidth: 0,
-                }}
-              />
+      <div className="grid grid-cols-5 gap-2 px-5 pt-4 pb-5">
+        {sorted.map(({ hex, i: origIdx }) => {
+          const valid = isValidHex(hex)
+          return (
+            <div key={`input-${origIdx}`}>
+              <label
+                htmlFor={`${inputId}-${origIdx}`}
+                className="mb-0.5 block text-xs leading-snug text-secondary"
+              >
+                <strong className="font-medium text-primary">
+                  {origIdx + 1}
+                </strong>{' '}
+                {PALETTE_STEPS[origIdx]?.label}
+              </label>
+              <div className="flex items-center gap-1">
+                <span
+                  className="inline-block size-4 shrink-0 rounded border border-muted"
+                  style={{ backgroundColor: hex }}
+                />
+                <input
+                  id={`${inputId}-${origIdx}`}
+                  type="text"
+                  value={hex}
+                  onChange={(e) => {
+                    const v = e.target.value
+                    onStepChange(index, origIdx, v)
+                  }}
+                  aria-invalid={!valid}
+                  className={[
+                    'w-full min-w-0 rounded border bg-input px-1.5 py-1 font-mono text-sm text-primary',
+                    valid
+                      ? 'border-input hover:border-input-hover'
+                      : 'border-danger',
+                  ].join(' ')}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
-    </section>
+    </Card>
   )
 }

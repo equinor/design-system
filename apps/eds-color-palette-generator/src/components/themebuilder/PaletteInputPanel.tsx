@@ -1,11 +1,23 @@
 'use client'
 
 import { useState, useRef, useCallback } from 'react'
-import { Plus, X, Pipette, ChevronDown, ChevronUp } from 'lucide-react'
+import {
+  add,
+  chevron_down,
+  chevron_up,
+  close,
+  dropper,
+} from '@equinor/eds-icons'
+import { Button } from '@/components/shared/Button'
+import { Card } from '@/components/shared/Card'
+import { Icon } from '@/components/shared/Icon'
 import { SimpleColorPicker } from './SimpleColorPicker'
 import { isValidColorFormat, parseColorToHex } from '@/utils/color'
 import type { ColorAnchor } from '@/types'
 import { newPaletteId, type PaletteInput } from '@/utils/urlState'
+
+const FIELD =
+  'rounded border bg-input px-2 py-1 text-sm text-primary border-input hover:border-input-hover'
 
 type PaletteInputPanelProps = {
   palettes: PaletteInput[]
@@ -130,9 +142,7 @@ export function PaletteInputPanel({
   const hasAnchors = (p: PaletteInput) => p.anchors && p.anchors.length > 0
 
   return (
-    <section className="rounded-xl border border-neutral-subtle bg-default p-5">
-      <h2 className="font-semibold text-sm mb-4">Palettes</h2>
-
+    <Card title="Palettes">
       <div className="flex flex-col gap-3">
         {palettes.map((p, i) => {
           const rowId = p.id ?? String(i)
@@ -145,7 +155,7 @@ export function PaletteInputPanel({
                   type="text"
                   value={p.name}
                   onChange={(e) => updateName(i, e.target.value)}
-                  className="w-[140px] px-2 py-1 text-sm rounded-md border border-neutral-subtle bg-default"
+                  className={`w-[140px] ${FIELD}`}
                   placeholder="Palette name"
                   aria-label={`Name of palette ${i + 1}`}
                 />
@@ -159,18 +169,12 @@ export function PaletteInputPanel({
                         <span
                           key={ai}
                           title={`Step ${a.step}: ${a.value}`}
-                          style={{
-                            display: 'inline-block',
-                            width: '20px',
-                            height: '20px',
-                            borderRadius: '4px',
-                            backgroundColor: hex ?? '#808080',
-                            border: '1px solid rgba(128,128,128,0.3)',
-                          }}
+                          className="inline-block size-5 rounded border border-muted"
+                          style={{ backgroundColor: hex ?? '#808080' }}
                         />
                       )
                     })}
-                    <span className="text-xs text-subtle ml-1">
+                    <span className="ml-1 text-sm text-secondary">
                       {p.anchors!.length} anchor
                       {p.anchors!.length > 1 ? 's' : ''}
                     </span>
@@ -183,42 +187,34 @@ export function PaletteInputPanel({
                   />
                 )}
 
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  iconOnly
                   onClick={() => setExpandedId(expanded ? null : rowId)}
-                  className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
                   title={expanded ? 'Collapse' : 'Edit anchors'}
                   aria-label={`${expanded ? 'Collapse' : 'Edit anchors for'} ${p.name || `palette ${i + 1}`}`}
                   aria-expanded={expanded}
                 >
-                  {expanded ? (
-                    <ChevronUp className="w-4 h-4" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4" />
-                  )}
-                </button>
+                  <Icon data={expanded ? chevron_up : chevron_down} size={16} />
+                </Button>
 
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  iconOnly
                   onClick={() => removePalette(i)}
                   disabled={palettes.length <= 1}
-                  className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle disabled:opacity-30"
                   title="Remove palette"
                   aria-label={`Remove ${p.name || `palette ${i + 1}`}`}
                 >
-                  <X className="w-4 h-4" />
-                </button>
+                  <Icon data={close} size={16} />
+                </Button>
               </div>
 
               {/* Expanded: anchor editing */}
               {expanded && (
-                <div
-                  className="ml-4 pl-4 flex flex-col gap-2"
-                  style={{
-                    borderLeft:
-                      '2px solid var(--border-color-neutral-subtle, #e5e7eb)',
-                  }}
-                >
+                <div className="ml-4 flex flex-col gap-2 border-l-2 border-muted pl-4">
                   {hasAnchors(p) ? (
                     <>
                       {p.anchors!.map((anchor, ai) => (
@@ -237,35 +233,31 @@ export function PaletteInputPanel({
                         />
                       ))}
                       <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => addAnchor(i)}
-                          className="flex items-center gap-1 cursor-pointer px-2 py-1 text-xs rounded-md border border-dashed border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
-                        >
-                          <Plus className="w-3 h-3" />
+                        <Button size="sm" onClick={() => addAnchor(i)}>
+                          <Icon data={add} size={16} />
                           Add anchor
-                        </button>
-                        <button
-                          type="button"
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => convertToSimple(i)}
-                          className="cursor-pointer px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
                         >
                           Switch to simple
-                        </button>
+                        </Button>
                       </div>
                     </>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-subtle">
+                      <span className="text-sm text-secondary">
                         Single colour mode
                       </span>
-                      <button
-                        type="button"
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         onClick={() => convertToAnchors(i)}
-                        className="cursor-pointer px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
                       >
                         Switch to anchors
-                      </button>
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -275,15 +267,11 @@ export function PaletteInputPanel({
         })}
       </div>
 
-      <button
-        type="button"
-        onClick={addPalette}
-        className="flex items-center gap-1.5 cursor-pointer mt-3 px-3 py-1.5 text-xs font-medium rounded-lg border border-dashed border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
-      >
-        <Plus className="w-3.5 h-3.5" />
+      <Button size="sm" onClick={addPalette} className="mt-3">
+        <Icon data={add} size={16} />
         Add palette
-      </button>
-    </section>
+      </Button>
+    </Card>
   )
 }
 
@@ -342,7 +330,7 @@ function AnchorRow({
       <select
         value={anchor.step}
         onChange={(e) => onUpdate('step', parseInt(e.target.value))}
-        className="px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-default"
+        className={FIELD}
         aria-label={`Step for anchor ${index + 1}`}
       >
         {Array.from({ length: 15 }, (_, i) => i + 1).map((step) => {
@@ -364,11 +352,10 @@ function AnchorRow({
         onChange={(e) => handleValueChange(e.target.value)}
         onBlur={handleBlur}
         className={[
-          'flex-1 min-w-0 px-2 py-1 text-xs font-mono rounded-md',
+          'min-w-0 flex-1 rounded bg-input px-2 py-1 font-mono text-sm text-primary',
           isValid
-            ? 'border border-neutral-subtle'
-            : 'border-2 border-danger-fill-emphasis-default',
-          'bg-default',
+            ? 'border border-input hover:border-input-hover'
+            : 'border-2 border-danger',
         ].join(' ')}
         aria-label={`Colour value for anchor ${index + 1}`}
         aria-invalid={!isValid}
@@ -386,26 +373,28 @@ function AnchorRow({
         className="sr-only"
         tabIndex={-1}
       />
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
+        iconOnly
         onClick={() => colorInputRef.current?.click()}
-        className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
         title="Pick colour"
         aria-label={`Pick colour for anchor ${index + 1}`}
       >
-        <Pipette className="w-3.5 h-3.5" />
-      </button>
+        <Icon data={dropper} size={16} />
+      </Button>
 
       {canRemove && (
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
+          iconOnly
           onClick={onRemove}
-          className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
           title="Remove anchor"
           aria-label={`Remove anchor ${index + 1}`}
         >
-          <X className="w-3.5 h-3.5" />
-        </button>
+          <Icon data={close} size={16} />
+        </Button>
       )}
     </div>
   )

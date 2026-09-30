@@ -6,6 +6,9 @@ import { stepLabel } from '@/config/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { paletteForTone } from '@/utils/semanticTokens'
 import { Badge } from '@/components/shared/Badge'
+import { Card } from '@/components/shared/Card'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 import { CVDFilter, cvdFilterStyle } from '@/components/shared/CVDFilter'
 import { CVD_OPTIONS, type CVDType } from '@/utils/cvd'
 import { StepSelect } from './StepSelect'
@@ -17,12 +20,19 @@ type ChartColor = { name: string; hex: string; step?: number }
 
 type ChartType = 'bar' | 'stacked-bar' | 'donut' | 'line'
 
-const CHART_TYPES: { key: ChartType; label: string }[] = [
-  { key: 'bar', label: 'Bar' },
-  { key: 'stacked-bar', label: 'Stacked bar' },
-  { key: 'donut', label: 'Donut' },
-  { key: 'line', label: 'Line' },
+const CHART_TYPES: SegmentedOption<ChartType>[] = [
+  { value: 'bar', label: 'Bar' },
+  { value: 'stacked-bar', label: 'Stacked bar' },
+  { value: 'donut', label: 'Donut' },
+  { value: 'line', label: 'Line' },
 ]
+
+const SELECT_CLASS =
+  'rounded border border-input bg-input px-2 py-1 text-sm text-primary hover:border-input-hover'
+
+const CONTROL_LABEL = 'flex items-center gap-1.5 text-sm text-primary'
+
+const SUBHEADING = 'm-0 text-base font-medium text-primary'
 
 const BAR_DATA = [
   [82, 65, 48, 71, 55, 39, 60],
@@ -91,18 +101,17 @@ type ChartProps = {
 
 function BarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   return (
-    <div className="rounded-lg p-4" style={{ backgroundColor: bgHex }}>
-      <div className="flex items-end gap-2" style={{ height: 160 }}>
+    <div className="rounded p-4" style={{ backgroundColor: bgHex }}>
+      <div className="flex h-40 items-end gap-2">
         {colors.map((pc, i) => {
           const h = BAR_DATA[0][i % BAR_DATA[0].length]
           return (
             <div
               key={pc.name}
-              className="flex-1 flex flex-col items-center gap-1"
-              style={{ height: '100%', justifyContent: 'flex-end' }}
+              className="flex h-full flex-1 flex-col items-center justify-end gap-1"
             >
               <span
-                className="text-[10px] font-mono font-semibold"
+                className="font-mono text-xs font-medium"
                 style={{ color: textHex }}
               >
                 {h}
@@ -128,14 +137,10 @@ function BarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
 function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   const groups = ['Q1', 'Q2', 'Q3', 'Q4']
   return (
-    <div className="rounded-lg p-4" style={{ backgroundColor: bgHex }}>
-      <div className="flex items-end gap-3" style={{ height: 160 }}>
+    <div className="rounded p-4" style={{ backgroundColor: bgHex }}>
+      <div className="flex h-40 items-end gap-3">
         {groups.map((label, gi) => (
-          <div
-            key={label}
-            className="flex-1 flex flex-col"
-            style={{ height: '100%', justifyContent: 'flex-end' }}
-          >
+          <div key={label} className="flex h-full flex-1 flex-col justify-end">
             {colors.map((pc, ci) => {
               const val = 20 + ((gi * 13 + ci * 17) % 30)
               return (
@@ -161,7 +166,7 @@ function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
         {groups.map((g) => (
           <div
             key={g}
-            className="flex-1 text-center text-[10px]"
+            className="flex-1 text-center text-xs"
             style={{ color: textHex }}
           >
             {g}
@@ -189,11 +194,11 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
 
   return (
     <div
-      className="rounded-lg p-4 flex items-center justify-center"
+      className="flex items-center justify-center rounded p-4"
       style={{ backgroundColor: bgHex }}
     >
-      <div style={{ position: 'relative', width: 160, height: 160 }}>
-        <svg viewBox="0 0 42 42" style={{ width: '100%', height: '100%' }}>
+      <div className="relative size-40">
+        <svg viewBox="0 0 42 42" className="size-full">
           {showPatterns && (
             <defs>
               {segments.map(({ name, hex }, i) => (
@@ -233,7 +238,7 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
           ))}
         </svg>
         <div
-          className="absolute inset-0 flex items-center justify-center text-sm font-bold"
+          className="absolute inset-0 flex items-center justify-center text-base font-medium"
           style={{ color: textHex }}
         >
           {total}%
@@ -284,10 +289,10 @@ function LineChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   const py = (v: number, offset: number) => h - ((v + offset) / 100) * h
 
   return (
-    <div className="rounded-lg p-4" style={{ backgroundColor: bgHex }}>
+    <div className="rounded p-4" style={{ backgroundColor: bgHex }}>
       <svg
         viewBox={`0 0 ${w} ${h}`}
-        style={{ width: '100%', height: 160 }}
+        className="h-40 w-full"
         preserveAspectRatio="none"
       >
         {colors.map((pc, ci) => {
@@ -330,7 +335,7 @@ function LineChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
         {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
           <div
             key={d}
-            className="flex-1 text-center text-[10px]"
+            className="flex-1 text-center text-xs"
             style={{ color: textHex }}
           >
             {d}
@@ -356,7 +361,7 @@ function XAxis({
       {colors.map((pc) => (
         <div
           key={pc.name}
-          className="flex-1 text-center text-[10px] truncate"
+          className="flex-1 truncate text-center text-xs"
           style={{ color: textHex }}
         >
           {pc.name}
@@ -370,28 +375,34 @@ function XAxis({
 /*  Legend                                                                  */
 /* ---------------------------------------------------------------------- */
 
-function Legend({ colors, bgHex }: { colors: ChartColor[]; bgHex: string }) {
+// The legend sits on the chart background, so its text uses the chart's text
+// colour rather than the app's.
+function Legend({
+  colors,
+  bgHex,
+  textHex,
+}: {
+  colors: ChartColor[]
+  bgHex: string
+  textHex: string
+}) {
   return (
     <div
-      className="rounded-lg p-3 flex flex-wrap gap-x-4 gap-y-1"
+      className="flex flex-wrap gap-x-4 gap-y-1 rounded p-3"
       style={{ backgroundColor: bgHex }}
     >
       {colors.map((pc) => (
-        <div key={pc.name} className="flex items-center gap-1.5 text-[11px]">
+        <div key={pc.name} className="flex items-center gap-1.5 text-xs">
           <span
-            className="inline-block rounded-sm"
-            style={{
-              width: 10,
-              height: 10,
-              backgroundColor: pc.hex,
-            }}
+            className="inline-block size-2.5 rounded-sm"
+            style={{ backgroundColor: pc.hex }}
           />
-          <span className="text-subtle">
+          <span style={{ color: textHex }}>
             {pc.name}
             {pc.step != null && (
               <>
                 {' '}
-                <span className="font-mono text-[10px]">
+                <span className="font-mono text-xs opacity-80">
                   ({stepLabel(pc.step + 1)})
                 </span>
               </>
@@ -490,289 +501,250 @@ export function DataColorChart({
   }[chartType]
 
   return (
-    <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
-      <div>
-        <h2 className="text-base font-bold text-strong m-0">
-          Data colour chart
-        </h2>
-        <p className="text-sm text-subtle m-0 mt-1">
-          {paletteMode
-            ? 'Preview palette colours in chart contexts — multi-chromatic (one colour per palette) or monochromatic (shades from a single palette)'
-            : 'Preview the generated data-viz palette in chart contexts, then check it under colour-vision-deficiency simulation.'}
-        </p>
-      </div>
+    <Card
+      title="Data colour chart"
+      description={
+        paletteMode
+          ? 'Preview palette colours in chart contexts — multi-chromatic (one colour per palette) or monochromatic (shades from a single palette)'
+          : 'Preview the generated data-viz palette in chart contexts, then check it under colour-vision-deficiency simulation.'
+      }
+    >
+      <div className="flex flex-col gap-4">
+        {/* Controls row 1: chart type + mode */}
+        <div className="flex flex-wrap items-center gap-4">
+          <SegmentedControl
+            mode="radio"
+            aria-label="Chart type"
+            size="sm"
+            options={CHART_TYPES}
+            value={chartType}
+            onChange={setChartType}
+          />
 
-      {/* Controls row 1: chart type + mode */}
-      <div className="flex flex-wrap gap-4 items-center">
-        <div className="flex rounded-lg overflow-hidden border border-neutral-subtle">
-          {CHART_TYPES.map((ct) => (
-            <button
-              key={ct.key}
-              type="button"
-              onClick={() => setChartType(ct.key)}
-              className={[
-                'cursor-pointer px-3 py-1 text-xs border-none',
-                chartType === ct.key
-                  ? 'bg-neutral-fill-emphasis-default text-strong-on-emphasis font-semibold'
-                  : 'bg-default text-subtle font-normal',
-              ].join(' ')}
-            >
-              {ct.label}
-            </button>
-          ))}
+          {paletteMode && (
+            <label className={CONTROL_LABEL}>
+              <input
+                type="checkbox"
+                checked={mono}
+                onChange={(e) => setMono(e.target.checked)}
+              />
+              <span className="font-medium">Monochromatic</span>
+            </label>
+          )}
+
+          {paletteMode && mono && (
+            <label className={CONTROL_LABEL}>
+              <span className="font-medium">Palette</span>
+              <select
+                value={monoPaletteIdx}
+                onChange={(e) => setMonoPaletteIdx(Number(e.target.value))}
+                className={SELECT_CLASS}
+              >
+                {safePalettes.map((p, i) => (
+                  <option key={i} value={i}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
         </div>
 
-        {paletteMode && (
-          <label className="flex items-center gap-1.5 text-xs text-strong">
-            <input
-              type="checkbox"
-              checked={mono}
-              onChange={(e) => setMono(e.target.checked)}
-            />
-            <span className="font-medium">Monochromatic</span>
-          </label>
-        )}
+        {/* Controls row 2: bg + text + accessibility */}
+        <div className="flex flex-wrap items-center gap-4">
+          {paletteMode && (
+            <>
+              <StepSelect
+                label="Chart bg"
+                value={bgStep}
+                onChange={setBgStep}
+                only="background"
+              />
+              <StepSelect
+                label="Text"
+                value={textStep}
+                onChange={setTextStep}
+                only="text"
+              />
+            </>
+          )}
 
-        {paletteMode && mono && (
-          <label className="flex items-center gap-1.5 text-xs text-strong">
-            <span className="font-medium">Palette</span>
+          <label className={CONTROL_LABEL}>
+            <span className="font-medium">Vision</span>
             <select
-              value={monoPaletteIdx}
-              onChange={(e) => setMonoPaletteIdx(Number(e.target.value))}
-              className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
+              value={cvd}
+              onChange={(e) => {
+                setCvd(e.target.value as CVDType)
+              }}
+              className={SELECT_CLASS}
             >
-              {safePalettes.map((p, i) => (
-                <option key={i} value={i}>
-                  {p.name}
+              {CVD_OPTIONS.map((opt) => (
+                <option key={opt.key} value={opt.key}>
+                  {opt.label}
                 </option>
               ))}
             </select>
           </label>
-        )}
-      </div>
 
-      {/* Controls row 2: bg + text + accessibility */}
-      <div className="flex flex-wrap gap-4 items-center">
-        {paletteMode && (
-          <>
-            <StepSelect
-              label="Chart bg"
-              value={bgStep}
-              onChange={setBgStep}
-              only="background"
+          <label className={CONTROL_LABEL}>
+            <input
+              type="checkbox"
+              checked={showPatterns}
+              onChange={(e) => setShowPatterns(e.target.checked)}
             />
-            <StepSelect
-              label="Text"
-              value={textStep}
-              onChange={setTextStep}
-              only="text"
-            />
-          </>
-        )}
+            <span className="font-medium">Show patterns</span>
+          </label>
+        </div>
 
-        <label className="flex items-center gap-1.5 text-xs text-strong">
-          <span className="font-medium">Vision</span>
-          <select
-            value={cvd}
-            onChange={(e) => {
-              setCvd(e.target.value as CVDType)
-            }}
-            className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
-          >
-            {CVD_OPTIONS.map((opt) => (
-              <option key={opt.key} value={opt.key}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        {/* SVG filter definitions */}
+        <CVDFilter type={cvd} />
 
-        <label className="flex items-center gap-1.5 text-xs text-strong">
-          <input
-            type="checkbox"
-            checked={showPatterns}
-            onChange={(e) => setShowPatterns(e.target.checked)}
+        {/* Filtered preview area */}
+        <div style={cvdFilterStyle(cvd)}>
+          {/* Chart */}
+          <ChartComponent
+            colors={colors}
+            bgHex={bgHex}
+            textHex={textHex}
+            showPatterns={showPatterns}
           />
-          <span className="font-medium">Show patterns</span>
-        </label>
-      </div>
 
-      {/* SVG filter definitions */}
-      <CVDFilter type={cvd} />
-
-      {/* Filtered preview area */}
-      <div style={cvdFilterStyle(cvd)}>
-        {/* Chart */}
-        <ChartComponent
-          colors={colors}
-          bgHex={bgHex}
-          textHex={textHex}
-          showPatterns={showPatterns}
-        />
-
-        {/* Legend */}
-        <div className="mt-4">
-          <Legend colors={colors} bgHex={bgHex} />
-        </div>
-
-        {/* Chips / Badges */}
-        <div className="flex flex-col gap-2 mt-4">
-          <h3 className="text-xs font-semibold text-strong m-0">
-            Chips &amp; badges
-          </h3>
-          <div
-            className="rounded-lg p-4 flex flex-wrap gap-2"
-            style={{ backgroundColor: bgHex }}
-          >
-            {colors.map((pc, i) => (
-              <span
-                key={pc.name}
-                className="inline-flex items-center rounded-full font-semibold"
-                style={{
-                  padding: '4px 12px',
-                  fontSize: 12,
-                  backgroundColor: pc.hex,
-                  backgroundImage: overlayFor(i, showPatterns),
-                  color: bestTextColor(pc.hex),
-                }}
-              >
-                {pc.name}
-              </span>
-            ))}
+          {/* Legend */}
+          <div className="mt-4">
+            <Legend colors={colors} bgHex={bgHex} textHex={textHex} />
           </div>
-        </div>
-      </div>
 
-      {/* Contrast table (outside filter — shows real values) */}
-      <div className="flex flex-col gap-2">
-        <h3 className="text-xs font-semibold text-strong m-0">
-          Contrast on chart background
-        </h3>
-        <div className="flex flex-wrap gap-3">
-          {colors.map((pc) => {
-            const result = calcContrast(pc.hex, bgHex)
-            return (
-              <div
-                key={pc.name}
-                className="flex items-center gap-2 text-[11px]"
-              >
+          {/* Chips / Badges */}
+          <div className="mt-4 flex flex-col gap-2">
+            <h3 className={SUBHEADING}>Chips &amp; badges</h3>
+            <div
+              className="flex flex-wrap gap-2 rounded p-4"
+              style={{ backgroundColor: bgHex }}
+            >
+              {colors.map((pc, i) => (
                 <span
-                  className="inline-block rounded"
+                  key={pc.name}
+                  className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium"
                   style={{
-                    width: 12,
-                    height: 12,
                     backgroundColor: pc.hex,
-                    border: '1px solid rgba(0,0,0,0.1)',
+                    backgroundImage: overlayFor(i, showPatterns),
+                    color: bestTextColor(pc.hex),
                   }}
-                />
-                <span className="text-subtle truncate" style={{ maxWidth: 80 }}>
+                >
                   {pc.name}
                 </span>
-                <span className="font-mono font-semibold text-strong">
-                  {result.wcag}
-                </span>
-                <Badge pass={result.aa} label="AA" />
-                <Badge pass={result.aaa} label="AAA" />
-              </div>
-            )
-          })}
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Inter-color contrast matrix */}
-      {pairwiseCheck && colors.length > 1 && (
+        {/* Contrast table (outside filter — shows real values) */}
         <div className="flex flex-col gap-2">
-          <h3 className="text-xs font-semibold text-strong m-0">
-            Colour-to-colour contrast
-          </h3>
-          <p className="text-[11px] text-subtle m-0">
-            Each pair of data colours must be distinguishable — 3:1 minimum for
-            adjacent chart elements
-          </p>
-          <div className="overflow-x-auto">
-            <table className="text-[11px] border-collapse">
-              <thead>
-                <tr>
-                  <th />
-                  {colors.map((pc) => (
-                    <th
-                      key={pc.name}
-                      className="px-2 py-1 font-medium text-subtle"
-                    >
-                      <div className="flex items-center gap-1">
-                        <span
-                          className="inline-block rounded-sm"
-                          style={{
-                            width: 8,
-                            height: 8,
-                            backgroundColor: pc.hex,
-                          }}
-                        />
-                        <span className="truncate" style={{ maxWidth: 60 }}>
-                          {pc.name}
-                        </span>
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {colors.map((row, ri) => (
-                  <tr key={row.name}>
-                    <td className="px-2 py-1 font-medium text-subtle whitespace-nowrap">
-                      <div className="flex items-center gap-1">
-                        <span
-                          className="inline-block rounded-sm"
-                          style={{
-                            width: 8,
-                            height: 8,
-                            backgroundColor: row.hex,
-                          }}
-                        />
-                        <span className="truncate" style={{ maxWidth: 60 }}>
-                          {row.name}
-                        </span>
-                      </div>
-                    </td>
-                    {colors.map((col, ci) => {
-                      if (ci <= ri) {
+          <h3 className={SUBHEADING}>Contrast on chart background</h3>
+          <div className="flex flex-wrap gap-3">
+            {colors.map((pc) => {
+              const result = calcContrast(pc.hex, bgHex)
+              return (
+                <div key={pc.name} className="flex items-center gap-2 text-xs">
+                  <span
+                    className="inline-block size-3 rounded border border-muted"
+                    style={{ backgroundColor: pc.hex }}
+                  />
+                  <span className="max-w-20 truncate text-secondary">
+                    {pc.name}
+                  </span>
+                  <span className="font-mono font-medium text-primary">
+                    {result.wcag}
+                  </span>
+                  <Badge pass={result.aa} label="AA" />
+                  <Badge pass={result.aaa} label="AAA" />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Inter-color contrast matrix */}
+        {pairwiseCheck && colors.length > 1 && (
+          <div className="flex flex-col gap-2">
+            <h3 className={SUBHEADING}>Colour-to-colour contrast</h3>
+            <p className="m-0 text-xs text-secondary">
+              Each pair of data colours must be distinguishable — 3:1 minimum
+              for adjacent chart elements
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse text-xs">
+                <thead>
+                  <tr>
+                    <th />
+                    {colors.map((pc) => (
+                      <th
+                        key={pc.name}
+                        className="px-2 py-1 font-medium text-secondary"
+                      >
+                        <div className="flex items-center gap-1">
+                          <span
+                            className="inline-block size-2 rounded-sm"
+                            style={{ backgroundColor: pc.hex }}
+                          />
+                          <span className="max-w-[60px] truncate">
+                            {pc.name}
+                          </span>
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {colors.map((row, ri) => (
+                    <tr key={row.name}>
+                      <td className="px-2 py-1 font-medium whitespace-nowrap text-secondary">
+                        <div className="flex items-center gap-1">
+                          <span
+                            className="inline-block size-2 rounded-sm"
+                            style={{ backgroundColor: row.hex }}
+                          />
+                          <span className="max-w-[60px] truncate">
+                            {row.name}
+                          </span>
+                        </div>
+                      </td>
+                      {colors.map((col, ci) => {
+                        if (ci <= ri) {
+                          return (
+                            <td
+                              key={col.name}
+                              className="px-2 py-1 text-center"
+                            >
+                              {ci === ri ? '—' : ''}
+                            </td>
+                          )
+                        }
+                        const result = calcContrast(row.hex, col.hex)
+                        const ratio = parseFloat(result.wcag)
+                        const pass3 = ratio >= 3
                         return (
                           <td
                             key={col.name}
-                            className="px-2 py-1 text-center"
-                            style={{ backgroundColor: 'transparent' }}
+                            className={[
+                              'px-2 py-1 text-center font-mono',
+                              pass3
+                                ? 'bg-success-muted text-success-on-muted'
+                                : 'bg-danger-muted text-danger-on-muted',
+                            ].join(' ')}
                           >
-                            {ci === ri ? '—' : ''}
+                            {result.wcag}
                           </td>
                         )
-                      }
-                      const result = calcContrast(row.hex, col.hex)
-                      const ratio = parseFloat(result.wcag)
-                      const pass3 = ratio >= 3
-                      return (
-                        <td
-                          key={col.name}
-                          className="px-2 py-1 text-center font-mono"
-                          style={{
-                            backgroundColor: pass3
-                              ? 'var(--eds-color-bg-success-fill-muted-default)'
-                              : 'var(--eds-color-bg-danger-fill-muted-default)',
-                            color: pass3
-                              ? 'var(--eds-color-text-success-subtle)'
-                              : 'var(--eds-color-text-danger-subtle)',
-                          }}
-                        >
-                          {result.wcag}
-                        </td>
-                      )
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      )}
-    </section>
+        )}
+      </div>
+    </Card>
   )
 }

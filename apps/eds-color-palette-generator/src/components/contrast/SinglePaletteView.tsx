@@ -22,34 +22,18 @@ export function SinglePaletteView({
   return (
     <>
       {/* ---- Category legend + palette strip (shared 15-col grid) ---- */}
-      <div
-        className="mb-8"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(15, 1fr)',
-          gap: '2px',
-        }}
-      >
+      <div className="mb-8 grid grid-cols-15 gap-0.5">
         {mode === 'semantic' &&
           CATEGORY_RUNS.map((run, i) => (
             <div
               key={`${run.category}-${i}`}
-              className="text-center"
-              style={{
-                gridColumn: `span ${run.span}`,
-                paddingBottom: '6px',
-              }}
+              className="pb-1.5 text-center"
+              style={{ gridColumn: `span ${run.span}` }}
             >
-              <span style={{ fontSize: '12px', color: '#6b7280' }}>
+              <span className="text-sm text-secondary">
                 {categoryLabel(run.category)}
               </span>
-              <div
-                style={{
-                  height: '1px',
-                  background: '#d1d5db',
-                  marginTop: '4px',
-                }}
-              />
+              <div className="mt-1 border-t border-default" />
             </div>
           ))}
 
@@ -70,23 +54,18 @@ export function SinglePaletteView({
           return (
             <div
               key={`strip-${s.step}`}
-              className="flex flex-col items-center justify-end cursor-default"
-              style={{
-                height: '72px',
-                backgroundColor: s.hex,
-                paddingBottom: '4px',
-                borderRadius:
-                  i === 0
-                    ? '12px 0 0 12px'
-                    : i === displayData.length - 1
-                      ? '0 12px 12px 0'
-                      : undefined,
-              }}
+              className={[
+                'flex h-18 cursor-default flex-col items-center justify-end pb-1',
+                i === 0 ? 'rounded-l' : '',
+                i === displayData.length - 1 ? 'rounded-r' : '',
+              ].join(' ')}
+              style={{ backgroundColor: s.hex }}
               title={`${stepLabel(s.step)}: ${s.hex}\n${stepRolesText(s.step)}`}
             >
+              {/* Label colour picked for contrast with the swatch */}
               <span
-                className="font-bold"
-                style={{ fontSize: '11px', color: labelColor, opacity: 0.9 }}
+                className="text-sm font-medium opacity-90"
+                style={{ color: labelColor }}
               >
                 {s.step}
               </span>
@@ -96,51 +75,31 @@ export function SinglePaletteView({
       </div>
 
       {/* ---- Step detail cards ---- */}
-      <div className="flex flex-col" style={{ gap: '12px' }}>
+      <div className="flex flex-col gap-3">
         {displayData.map((s) => {
           const labelColor = s.recommended.color
 
           return (
             <div
               key={s.step}
-              className="rounded-xl overflow-hidden group"
-              style={{
-                border: '1px solid #e5e7eb',
-                background: '#fff',
-              }}
+              className="group overflow-hidden rounded border border-muted bg-surface"
             >
+              {/* Header in the step's own colour */}
               <div
-                className="flex items-center justify-between"
-                style={{
-                  backgroundColor: s.hex,
-                  color: labelColor,
-                  padding: '12px 20px',
-                }}
+                className="flex items-center justify-between px-5 py-3"
+                style={{ backgroundColor: s.hex, color: labelColor }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-base font-bold">{s.step}</span>
+                  <span className="text-base font-medium">{s.step}</span>
                   {s.role && (
-                    <span style={{ fontSize: '13px', opacity: 0.85 }}>
-                      {s.role}
-                    </span>
+                    <span className="text-base opacity-85">{s.role}</span>
                   )}
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-geist-mono, monospace)',
-                      fontSize: '12px',
-                      opacity: 0.65,
-                    }}
-                  >
-                    {s.hex}
-                  </span>
+                  <span className="font-mono text-sm opacity-65">{s.hex}</span>
                   <CopyButton text={s.hex} />
                 </div>
               </div>
 
-              <div
-                className="grid grid-cols-2"
-                style={{ padding: '16px 20px', gap: '16px' }}
-              >
+              <div className="grid grid-cols-2 gap-4 px-5 py-4">
                 <ContrastCell
                   data={s.recommended}
                   fgColor={s.recommended.color}

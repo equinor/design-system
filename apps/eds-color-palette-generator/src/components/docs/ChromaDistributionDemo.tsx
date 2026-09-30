@@ -61,13 +61,14 @@ export const ChromaDistributionDemo = ({
                 type="color"
                 value={baseColor}
                 onChange={(e) => setBaseColor(e.target.value)}
-                className="w-16 h-10 rounded cursor-pointer"
+                className="h-10 w-16 cursor-pointer rounded border border-input bg-input"
               />
               <input
                 type="text"
                 value={baseColor}
                 onChange={(e) => setBaseColor(e.target.value)}
-                className="flex-1 px-3 py-2 border border-neutral-subtle rounded bg-surface"
+                className="flex-1 rounded border border-input bg-input px-3 py-2 font-mono text-sm text-primary hover:border-input-hover"
+                aria-label="Base colour value"
                 placeholder="#FF6B6B"
               />
             </div>
@@ -82,11 +83,9 @@ export const ChromaDistributionDemo = ({
               step="0.05"
               value={mean}
               onChange={(e) => setMean(Number(e.target.value))}
-              className="w-full accent-current"
+              className="w-full"
             />
-            <span className="text-sm text-neutral-subtle">
-              {mean.toFixed(2)}
-            </span>
+            <span className="text-sm text-secondary">{mean.toFixed(2)}</span>
           </label>
 
           <label className="block">
@@ -100,17 +99,15 @@ export const ChromaDistributionDemo = ({
               step="0.1"
               value={stdDev}
               onChange={(e) => setStdDev(Number(e.target.value))}
-              className="w-full accent-current"
+              className="w-full"
             />
-            <span className="text-sm text-neutral-subtle">
-              {stdDev.toFixed(2)}
-            </span>
+            <span className="text-sm text-secondary">{stdDev.toFixed(2)}</span>
           </label>
 
           {chromaData.length > 0 && (
-            <div className="bg-surface rounded-lg p-4 text-sm">
+            <div className="rounded border border-muted bg-surface p-4 text-sm">
               <p className="font-medium mb-2">Base colour properties:</p>
-              <ul className="space-y-1 text-neutral-subtle">
+              <ul className="space-y-1 text-secondary">
                 <li>Base chroma: {chromaData[0].baseChroma.toFixed(3)}</li>
                 <li>Max chroma in scale: {maxChroma.toFixed(3)}</li>
                 <li>
@@ -125,7 +122,7 @@ export const ChromaDistributionDemo = ({
         </div>
 
         {/* Chroma distribution chart */}
-        <div className="bg-surface rounded-lg p-6">
+        <div className="rounded border border-muted bg-surface p-6">
           <h4 className="text-sm font-medium mb-4">Chroma distribution</h4>
           <svg
             viewBox="0 0 400 300"
@@ -197,7 +194,7 @@ export const ChromaDistributionDemo = ({
                     width={barWidth - 2}
                     height={height}
                     fill="currentColor"
-                    className="text-blue-500"
+                    className="text-accent"
                     opacity="0.7"
                   />
                   <title>{`Lightness: ${data.lightness.toFixed(2)}, Chroma: ${data.chroma.toFixed(3)}`}</title>
@@ -225,7 +222,7 @@ export const ChromaDistributionDemo = ({
       {/* Generated color scale */}
       <div>
         <h4 className="text-sm font-medium mb-3">Generated colour scale</h4>
-        <div className="flex gap-1 rounded-lg overflow-hidden">
+        <div className="flex gap-1 rounded overflow-hidden">
           {colorScale.map((color, index) => (
             <div
               key={index}
@@ -239,20 +236,20 @@ export const ChromaDistributionDemo = ({
             </div>
           ))}
         </div>
-        <p className="text-xs text-neutral-subtle mt-2">
+        <p className="text-xs text-secondary mt-2">
           Hover over each step to see its index. Notice how chroma (colour
           intensity) peaks near the mean lightness value.
         </p>
       </div>
 
-      <div className="bg-surface rounded-lg p-4 text-sm">
+      <div className="rounded border border-muted bg-surface p-4 text-sm">
         <p className="mb-2">
           <strong>Chroma calculation formula:</strong>
         </p>
-        <code className="block border border-neutral-subtle p-2 rounded font-mono text-xs">
+        <code className="block border border-muted p-2 rounded font-mono text-xs">
           chroma = gaussian(lightness, mean, stdDev) × baseChroma
         </code>
-        <p className="mt-2 text-neutral-subtle">
+        <p className="mt-2 text-secondary">
           Where the Gaussian function outputs a multiplier between 0 and 1,
           which scales the base colour&apos;s chroma based on the lightness
           value&apos;s distance from the mean.

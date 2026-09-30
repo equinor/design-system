@@ -73,7 +73,7 @@ test('should show error for invalid color format', async ({ page }) => {
   )
 
   // Verify that the input has error styling (red border)
-  await expect(colorInput).toHaveClass(/border-danger-fill-emphasis-default/)
+  await expect(colorInput).toHaveClass(/(^|\s)border-danger(\s|$)/)
 })
 
 test('should reset to valid color on blur when invalid', async ({ page }) => {

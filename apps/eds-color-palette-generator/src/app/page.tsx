@@ -9,7 +9,6 @@ import {
   darknessValuesInDarkMode,
 } from '@/config/config'
 import { paletteConfig } from '@/config/palette-config'
-import { resolveToken, toneRamps } from '@/utils/semanticTokens'
 import {
   cancelURLUpdate,
   deserializeState,
@@ -19,7 +18,15 @@ import {
 import type { PaletteInput, ThemeBuilderTab } from '@/utils/urlState'
 import { downloadConfiguration } from '@/utils/configurationUtils'
 import type { ColorDefinition } from '@/types'
-import { ThemeBuilderHeader } from '@/components/themebuilder/ThemeBuilderHeader'
+import { check, download, link } from '@equinor/eds-icons'
+import { AppHeader } from '@/components/shared/AppHeader'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
+import {
+  SegmentedControl,
+  TabPanel,
+} from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 import { PaletteInputPanel } from '@/components/themebuilder/PaletteInputPanel'
 import { TokenMatrix } from '@/components/themebuilder/TokenMatrix'
 import { ContrastTable } from '@/components/themebuilder/ContrastTable'
@@ -45,6 +52,17 @@ const DEFAULT_PALETTES: PaletteInput[] = (paletteConfig.colors ?? []).map(
   },
 )
 
+const TABS: SegmentedOption<ThemeBuilderTab>[] = [
+  { value: 'system', label: 'Colour system' },
+  { value: 'examples', label: 'Examples' },
+  { value: 'contrast', label: 'Contrast' },
+]
+
+const TABS_ID = 'theme-builder'
+
+const ADR_0016_URL =
+  'https://github.com/equinor/design-system/blob/main/documentation/adr/0016-colour-approach-for-eds-2.md'
+
 function ThemeBuilderContent() {
   const searchParams = useSearchParams()
   const { colorScheme } = useColorScheme()
@@ -62,6 +80,7 @@ function ThemeBuilderContent() {
     initialState.activeTab ?? 'system',
   )
   const [contrastPaletteIndex, setContrastPaletteIndex] = useState(0)
+  const [copied, setCopied] = useState(false)
 
   // Sync state to URL
   useEffect(() => {
@@ -145,48 +164,90 @@ function ThemeBuilderContent() {
     )
   }, [palettes])
 
-  // Page background = background.canvas (neutral.1), resolved from the
-  // Tokens Studio palettes. Content cards use background.surface
-  // (neutral.15), which is lighter than the canvas in light and darker than
-  // it in dark.
-  const canvasBg = resolveToken(
-    'background.canvas',
-    toneRamps(colorScheme),
-    colorScheme,
-  )
+  // Copy the current URL, which holds the palettes, tab and scheme
+  const copyURL = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      /* ignore */
+    }
+  }, [])
 
+  // The page is background.canvas; cards are background.surface, which is
+  // lighter than the canvas in light and darker than it in dark (ADR 0016).
   return (
-    <div
-      className="min-h-screen"
-      style={{ color: 'inherit', backgroundColor: canvasBg }}
-    >
-      <ThemeBuilderHeader
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        onDownloadConfig={handleDownloadConfig}
+    <div className="min-h-screen bg-canvas text-primary">
+      <AppHeader
+        actions={
+          <>
+            <Button
+              size="sm"
+              onClick={handleDownloadConfig}
+              title="Download palette configuration (JSON)"
+            >
+              <Icon data={download} size={16} />
+              Config
+            </Button>
+            <Button size="sm" onClick={copyURL} title="Copy shareable URL">
+              <Icon data={copied ? check : link} size={16} />
+              {copied ? 'Copied' : 'Share'}
+            </Button>
+          </>
+        }
       />
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {activeTab === 'system' ? (
-          <div className="flex flex-col" style={{ gap: '24px' }}>
-            <PaletteInputPanel
-              palettes={palettes}
-              onChange={handlePalettesChange}
-            />
-
-            <TokenMatrix palettes={generatedPalettes} />
-
-            <ContrastTable
-              palettes={generatedPalettes}
-              activePaletteIndex={safeContrastIndex}
-              onActivePaletteChange={setContrastPaletteIndex}
-            />
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-3xl">
+            <h1 className="m-0 text-header-2xl font-medium">Theme Builder</h1>
+            <p className="m-0 mt-2 text-sm text-secondary">
+              Palettes here are proposals for checking ideas. Tokens Studio is
+              the source of truth for EDS colour, and the defaults are its seven
+              hue anchors (
+              <a
+                href={ADR_0016_URL}
+                className="text-link underline hover:text-link-hover"
+              >
+                ADR 0016
+              </a>
+              ).
+            </p>
           </div>
-        ) : activeTab === 'contrast' ? (
-          <ContrastTestPanel palettes={generatedPalettes} />
-        ) : (
-          <ComponentPreviewPanel palettes={generatedPalettes} />
-        )}
+
+          <SegmentedControl
+            mode="tabs"
+            idPrefix={TABS_ID}
+            aria-label="Theme Builder views"
+            options={TABS}
+            value={activeTab}
+            onChange={setActiveTab}
+          />
+        </div>
+
+        <TabPanel idPrefix={TABS_ID} value={activeTab}>
+          {activeTab === 'system' ? (
+            <div className="flex flex-col gap-6">
+              <PaletteInputPanel
+                palettes={palettes}
+                onChange={handlePalettesChange}
+              />
+
+              <TokenMatrix palettes={generatedPalettes} />
+
+              <ContrastTable
+                palettes={generatedPalettes}
+                activePaletteIndex={safeContrastIndex}
+                onActivePaletteChange={setContrastPaletteIndex}
+              />
+            </div>
+          ) : activeTab === 'contrast' ? (
+            <ContrastTestPanel palettes={generatedPalettes} />
+          ) : (
+            <ComponentPreviewPanel palettes={generatedPalettes} />
+          )}
+        </TabPanel>
       </main>
     </div>
   )

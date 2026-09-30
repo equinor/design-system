@@ -61,34 +61,14 @@ function SurfaceLabel({
   hex: string
 }) {
   return (
-    <div
-      className="flex items-center gap-2"
-      style={{
-        position: 'absolute',
-        top: '8px',
-        left: '10px',
-        fontSize: '10px',
-        lineHeight: '14px',
-        color: '#6b7280',
-        pointerEvents: 'none',
-      }}
-    >
+    <div className="pointer-events-none absolute top-2 left-2.5 flex items-center gap-2 text-xs text-secondary">
       <span
-        style={{
-          display: 'inline-block',
-          width: '8px',
-          height: '8px',
-          borderRadius: '2px',
-          backgroundColor: hex,
-          border: '1px solid rgba(0,0,0,0.1)',
-          flexShrink: 0,
-        }}
+        className="inline-block size-2 shrink-0 rounded-xs border border-muted"
+        style={{ backgroundColor: hex }}
       />
       <span>
-        <strong style={{ color: '#374151' }}>{label}</strong>{' '}
-        <span style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}>
-          {role}
-        </span>
+        <strong className="font-medium text-primary">{label}</strong>{' '}
+        <span className="font-mono">{role}</span>
       </span>
     </div>
   )
@@ -108,21 +88,12 @@ export function SurfaceSelect({
   recommended?: ReadonlySet<number>
 }) {
   return (
-    <label className="flex items-center gap-2" style={{ fontSize: '12px' }}>
-      <span style={{ color: '#6b7280', fontWeight: 500, minWidth: '56px' }}>
-        {label}
-      </span>
+    <label className="flex items-center gap-2 text-sm">
+      <span className="min-w-14 font-medium text-secondary">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        style={{
-          padding: '4px 8px',
-          fontSize: '12px',
-          borderRadius: '6px',
-          border: '1.5px solid #d1d5db',
-          background: '#fff',
-          fontFamily: 'var(--font-geist-mono, monospace)',
-        }}
+        className="rounded border border-input bg-input px-2 py-1 font-mono text-sm text-primary hover:border-input-hover"
       >
         {options.map((step) => {
           const isRecommended = recommended ? recommended.has(step) : true
@@ -162,13 +133,8 @@ export function SurfacePreview({
     <div>
       {/* Live layout wireframe */}
       <div
-        style={{
-          backgroundColor: pageHex,
-          borderRadius: '16px',
-          padding: '32px 24px',
-          position: 'relative',
-          border: '1px solid rgba(0,0,0,0.06)',
-        }}
+        className="relative rounded border border-muted px-6 py-8"
+        style={{ backgroundColor: pageHex }}
       >
         <SurfaceLabel
           label="Page"
@@ -178,13 +144,8 @@ export function SurfacePreview({
 
         {/* Panel */}
         <div
-          style={{
-            backgroundColor: panelHex,
-            borderRadius: '12px',
-            padding: '28px 20px 20px',
-            position: 'relative',
-            marginTop: '12px',
-          }}
+          className="relative mt-3 rounded px-5 pt-7 pb-5"
+          style={{ backgroundColor: panelHex }}
         >
           <SurfaceLabel
             label="Panel"
@@ -194,13 +155,8 @@ export function SurfacePreview({
 
           {/* Card row */}
           <div
-            style={{
-              backgroundColor: cardRowHex,
-              borderRadius: '10px',
-              padding: '24px 16px 16px',
-              position: 'relative',
-              marginTop: '8px',
-            }}
+            className="relative mt-2 rounded px-4 pt-6 pb-4"
+            style={{ backgroundColor: cardRowHex }}
           >
             <SurfaceLabel
               label="Card row"
@@ -209,43 +165,25 @@ export function SurfacePreview({
             />
 
             {/* Cards */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '12px',
-                marginTop: '8px',
-              }}
-            >
+            <div className="mt-2 grid grid-cols-3 gap-3">
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
+                  className="flex min-h-20 flex-col gap-1.5 rounded px-3.5 py-4"
                   style={{
                     backgroundColor: cardHex,
                     border: `1px solid ${borderHex}`,
-                    borderRadius: '8px',
-                    padding: '16px 14px',
-                    minHeight: '80px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '6px',
                   }}
                 >
                   <div
-                    style={{
-                      color: textHex,
-                      fontSize: '13px',
-                      fontWeight: 600,
-                    }}
+                    className="text-base font-medium"
+                    style={{ color: textHex }}
                   >
                     Card title
                   </div>
                   <div
-                    style={{
-                      color: textHex,
-                      fontSize: '11px',
-                      opacity: 0.7,
-                    }}
+                    className="text-sm opacity-70"
+                    style={{ color: textHex }}
                   >
                     Body text content
                   </div>
@@ -258,11 +196,9 @@ export function SurfacePreview({
 
       {/* Contrast ratios between adjacent layers */}
       <div
+        className="mt-4 grid gap-2"
         style={{
-          marginTop: '16px',
-          display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-          gap: '8px',
         }}
       >
         {[
@@ -299,56 +235,21 @@ export function SurfacePreview({
         ].map(({ label, result, a, b }) => (
           <div
             key={label}
-            className="rounded-lg"
-            style={{
-              border: '1px solid #e5e7eb',
-              background: '#fff',
-              padding: '10px 12px',
-            }}
+            className="rounded border border-muted bg-surface px-3 py-2.5"
           >
-            <div
-              className="flex items-center gap-2"
-              style={{ marginBottom: '6px' }}
-            >
+            <div className="mb-1.5 flex items-center gap-2">
               <span
-                style={{
-                  display: 'inline-block',
-                  width: '10px',
-                  height: '10px',
-                  borderRadius: '2px',
-                  backgroundColor: a,
-                  border: '1px solid rgba(0,0,0,0.1)',
-                }}
+                className="inline-block size-2.5 rounded-xs border border-muted"
+                style={{ backgroundColor: a }}
               />
               <span
-                style={{
-                  display: 'inline-block',
-                  width: '10px',
-                  height: '10px',
-                  borderRadius: '2px',
-                  backgroundColor: b,
-                  border: '1px solid rgba(0,0,0,0.1)',
-                }}
+                className="inline-block size-2.5 rounded-xs border border-muted"
+                style={{ backgroundColor: b }}
               />
-              <span
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  color: '#374151',
-                }}
-              >
-                {label}
-              </span>
+              <span className="text-sm font-medium text-primary">{label}</span>
             </div>
-            <div className="flex items-center gap-1 flex-wrap">
-              <span
-                className="font-semibold"
-                style={{
-                  fontFamily: 'var(--font-geist-mono, monospace)',
-                  fontSize: '12px',
-                  color: '#111',
-                }}
-              >
+            <div className="flex flex-wrap items-center gap-1">
+              <span className="font-mono text-sm font-medium text-primary">
                 {result.wcag}:1
               </span>
               <Badge pass={result.aa} label="AA" />

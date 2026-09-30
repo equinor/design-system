@@ -25,16 +25,15 @@
     "types": "tsc"
   },
   "dependencies": {
-    "@equinor/eds-tailwind": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "colorjs.io": "^0.7.0",
-    "lucide-react": "^1.25.0",
     "next": "16.3.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@equinor/eds-icons": "workspace:^",
     "@eslint/eslintrc": "^3.3.7",
     "@microsoft/api-extractor": "^7.58.12",
     "@next/eslint-plugin-next": "16.2.11",

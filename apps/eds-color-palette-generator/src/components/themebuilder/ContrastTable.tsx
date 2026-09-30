@@ -2,6 +2,9 @@
 
 import { useMemo } from 'react'
 import { Badge } from '@/components/shared/Badge'
+import { Card } from '@/components/shared/Card'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import {
   CONTRAST_COLUMN_GROUPS,
@@ -27,8 +30,19 @@ function stepSource(entry: ResolvedEntry): string {
     : `${entry.paletteName}/${entry.step}`
 }
 
-const GROUP_SEPARATOR =
-  '1px solid var(--eds-color-border-neutral-subtle, #e5e7eb)'
+/** A left border that separates the background-role groups. */
+function groupSeparator(firstInGroup: boolean): string {
+  return firstInGroup ? 'border-l border-muted' : ''
+}
+
+/** Palette picker options; the value is the palette index. */
+function paletteOptions(
+  palettes: GeneratedPalette[],
+): SegmentedOption<string>[] {
+  return palettes.map((p, i) => ({ value: String(i), label: p.name }))
+}
+
+const SWATCH = 'inline-block size-3.5 shrink-0 rounded-sm border border-muted'
 
 /**
  * APCA contrast (ADR 0016) of Tokens Studio text roles on the background
@@ -52,58 +66,34 @@ export function ContrastTable({
   if (!palette || !grid) return null
 
   return (
-    <section className="rounded-xl overflow-hidden border border-neutral-subtle bg-default">
-      <div className="flex items-center justify-between px-5 pt-4">
-        <h2 className="font-semibold text-sm m-0">Contrast Table</h2>
-
-        {palettes.length > 1 && (
-          <div className="flex items-center gap-2">
-            {palettes.map((p, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => onActivePaletteChange(i)}
-                className={[
-                  'cursor-pointer px-2.5 py-1 text-xs rounded-md border',
-                  activePaletteIndex === i
-                    ? 'bg-neutral-fill-emphasis-default text-strong-on-emphasis font-semibold border-transparent'
-                    : 'bg-default text-strong font-normal border-neutral-subtle',
-                ].join(' ')}
-              >
-                {p.name}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="px-5 pb-5 pt-3 overflow-x-auto">
-        <table
-          style={{
-            width: '100%',
-            borderCollapse: 'collapse',
-            fontSize: '11px',
-          }}
-        >
+    <Card
+      title="Contrast table"
+      actions={
+        palettes.length > 1 && (
+          <SegmentedControl
+            mode="radio"
+            aria-label="Palette"
+            size="sm"
+            options={paletteOptions(palettes)}
+            value={String(activePaletteIndex)}
+            onChange={(v) => onActivePaletteChange(Number(v))}
+          />
+        )
+      }
+    >
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse text-sm">
           <thead>
             {/* Group headers — Tokens Studio background roles */}
             <tr>
-              <th
-                className="border-b border-neutral-subtle"
-                style={{ padding: '6px 8px' }}
-              />
+              <th className="border-b border-muted px-2 py-1.5" />
               {CONTRAST_COLUMN_GROUPS.map((group) => (
                 <th
                   key={group.group}
                   colSpan={
                     grid.columns.filter((c) => c.group === group.group).length
                   }
-                  className="text-center text-subtle font-semibold border-b border-l border-neutral-subtle"
-                  style={{
-                    padding: '6px 4px',
-                    whiteSpace: 'nowrap',
-                    fontSize: '9px',
-                  }}
+                  className="border-b border-l border-muted px-1 py-1.5 text-center text-xs font-medium whitespace-nowrap text-secondary"
                 >
                   {group.group}
                 </th>
@@ -111,37 +101,25 @@ export function ContrastTable({
             </tr>
             {/* State + swatch + step per background column */}
             <tr>
-              <th
-                className="text-left text-subtle font-semibold border-b border-neutral-subtle"
-                style={{ padding: '6px 8px' }}
-              >
+              <th className="border-b border-muted px-2 py-1.5 text-left text-xs font-medium text-secondary">
                 text \ background
               </th>
               {grid.columns.map((col) => (
                 <th
                   key={col.path}
-                  className="text-center text-subtle font-medium border-b border-neutral-subtle"
-                  style={{
-                    padding: '6px 4px',
-                    whiteSpace: 'nowrap',
-                    fontSize: '9px',
-                    borderLeft: col.firstInGroup ? GROUP_SEPARATOR : undefined,
-                  }}
+                  className={[
+                    'border-b border-muted px-1 py-1.5 text-center text-xs font-normal whitespace-nowrap text-secondary',
+                    groupSeparator(col.firstInGroup),
+                  ].join(' ')}
                   title={`${col.role} · ${col.paletteName} step ${col.step} (${col.hex})`}
                 >
                   <div className="flex flex-col items-center gap-0.5">
                     <span
-                      style={{
-                        display: 'inline-block',
-                        width: '14px',
-                        height: '14px',
-                        borderRadius: '3px',
-                        backgroundColor: col.hex,
-                        border: '1px solid rgba(128,128,128,0.2)',
-                      }}
+                      className={SWATCH}
+                      style={{ backgroundColor: col.hex }}
                     />
                     <span>{col.label}</span>
-                    <span style={{ opacity: 0.6 }}>{stepSource(col)}</span>
+                    <span className="opacity-60">{stepSource(col)}</span>
                   </div>
                 </th>
               ))}
@@ -151,29 +129,16 @@ export function ContrastTable({
             {grid.rows.map((row) => (
               <tr key={row.path}>
                 <td
-                  className="font-medium border-b border-neutral-subtle/50"
-                  style={{
-                    padding: '6px 8px',
-                    whiteSpace: 'nowrap',
-                  }}
+                  className="border-b border-muted px-2 py-1.5 font-medium whitespace-nowrap"
                   title={`${row.role} · ${row.paletteName} step ${row.step} (${row.hex})`}
                 >
                   <div className="flex items-center gap-1.5">
                     <span
-                      style={{
-                        display: 'inline-block',
-                        width: '14px',
-                        height: '14px',
-                        borderRadius: '3px',
-                        backgroundColor: row.hex,
-                        border: '1px solid rgba(128,128,128,0.2)',
-                        flexShrink: 0,
-                      }}
+                      className={SWATCH}
+                      style={{ backgroundColor: row.hex }}
                     />
-                    <span className="text-strong" style={{ fontSize: '11px' }}>
-                      {row.role}
-                    </span>
-                    <span className="text-subtle" style={{ fontSize: '9px' }}>
+                    <span className="text-sm text-primary">{row.role}</span>
+                    <span className="text-xs font-normal text-secondary">
                       {stepSource(row)}
                     </span>
                   </div>
@@ -181,12 +146,11 @@ export function ContrastTable({
                 {row.cells.map((cell) => (
                   <td
                     key={cell.column.path}
-                    className="text-center border-b border-neutral-subtle/50"
+                    className={[
+                      'border-b border-muted p-1 text-center',
+                      groupSeparator(cell.column.firstInGroup),
+                    ].join(' ')}
                     style={{
-                      padding: '4px',
-                      borderLeft: cell.column.firstInGroup
-                        ? GROUP_SEPARATOR
-                        : undefined,
                       // ADR 0016 checks this pair: outline it
                       outline: cell.check
                         ? '2px solid currentColor'
@@ -205,10 +169,7 @@ export function ContrastTable({
                       .join(' · ')}
                   >
                     <div className="flex flex-col items-center gap-0.5">
-                      <span
-                        className="text-strong font-mono font-semibold"
-                        style={{ fontSize: '11px' }}
-                      >
+                      <span className="font-mono text-sm font-medium text-primary">
                         Lc {cell.lc}
                       </span>
                       <Badge
@@ -218,17 +179,11 @@ export function ContrastTable({
                           cell.level.kind === 'level' ? 'level' : 'pass-fail'
                         }
                       />
-                      <span
-                        className="text-subtle font-mono"
-                        style={{ fontSize: '9px' }}
-                      >
+                      <span className="font-mono text-xs text-secondary">
                         {cell.wcag}:1
                       </span>
                       {cell.check && (
-                        <span
-                          className="text-strong font-semibold"
-                          style={{ fontSize: '9px', whiteSpace: 'nowrap' }}
-                        >
+                        <span className="text-xs font-medium whitespace-nowrap text-primary">
                           target {cell.check.target}:{' '}
                           {cell.check.pass ? 'pass' : 'fail'}
                         </span>
@@ -241,6 +196,6 @@ export function ContrastTable({
           </tbody>
         </table>
       </div>
-    </section>
+    </Card>
   )
 }

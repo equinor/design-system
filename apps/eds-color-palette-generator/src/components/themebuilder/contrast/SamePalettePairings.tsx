@@ -1,7 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { add } from '@equinor/eds-icons'
 import { stepLabel } from '@/config/config'
+import { Button } from '@/components/shared/Button'
+import { Card } from '@/components/shared/Card'
+import { Icon } from '@/components/shared/Icon'
 import { ContrastCard } from './ContrastCard'
 import { StepSelect } from './StepSelect'
 
@@ -43,67 +47,54 @@ export function SamePalettePairings({ palettes }: { palettes: Palette[] }) {
   }
 
   return (
-    <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
-      <div>
-        <h2 className="text-base font-bold text-strong m-0">
-          Same-palette pairings
-        </h2>
-        <p className="text-sm text-subtle m-0 mt-1">
-          Test text &amp; background from the same palette — useful for
-          components where accent colours carry both roles
-        </p>
-      </div>
-
-      {pairings.map(({ fg, bg }, idx) => (
-        <div key={idx} className="flex flex-col gap-2">
-          <div className="flex items-center gap-3 flex-wrap">
-            <StepSelect
-              label="fg"
-              value={fg}
-              onChange={(v) => update(idx, 'fg', v)}
-            />
-            <StepSelect
-              label="bg"
-              value={bg}
-              onChange={(v) => update(idx, 'bg', v)}
-            />
-            {pairings.length > 1 && (
-              <button
-                type="button"
-                onClick={() => removePairing(idx)}
-                className="cursor-pointer px-2 py-1 text-xs rounded border border-neutral-subtle bg-transparent text-subtle hover:text-strong"
-              >
-                Remove
-              </button>
-            )}
-          </div>
-          <div
-            className="grid gap-3"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            }}
-          >
-            {palettes.map((p) => (
-              <ContrastCard
-                key={p.name}
-                fgHex={p.steps[fg]}
-                bgHex={p.steps[bg]}
-                fgLabel={stepLabel(fg + 1)}
-                bgLabel={stepLabel(bg + 1)}
-                paletteName={p.name}
+    <Card
+      title="Same-palette pairings"
+      description="Test text & background from the same palette — useful for components where accent colours carry both roles"
+    >
+      <div className="flex flex-col gap-4">
+        {pairings.map(({ fg, bg }, idx) => (
+          <div key={idx} className="flex flex-col gap-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <StepSelect
+                label="fg"
+                value={fg}
+                onChange={(v) => update(idx, 'fg', v)}
               />
-            ))}
+              <StepSelect
+                label="bg"
+                value={bg}
+                onChange={(v) => update(idx, 'bg', v)}
+              />
+              {pairings.length > 1 && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => removePairing(idx)}
+                >
+                  Remove
+                </Button>
+              )}
+            </div>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3">
+              {palettes.map((p) => (
+                <ContrastCard
+                  key={p.name}
+                  fgHex={p.steps[fg]}
+                  bgHex={p.steps[bg]}
+                  fgLabel={stepLabel(fg + 1)}
+                  bgLabel={stepLabel(bg + 1)}
+                  paletteName={p.name}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-      <button
-        type="button"
-        onClick={addPairing}
-        className="self-start cursor-pointer px-3 py-1.5 text-xs font-medium rounded-lg border border-dashed border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
-      >
-        + Add pairing
-      </button>
-    </section>
+        <Button size="sm" onClick={addPairing} className="self-start">
+          <Icon data={add} size={16} />
+          Add pairing
+        </Button>
+      </div>
+    </Card>
   )
 }

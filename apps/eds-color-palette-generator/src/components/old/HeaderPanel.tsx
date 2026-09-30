@@ -1,81 +1,40 @@
 import React from 'react'
-import { ThemeToggle } from '@/components/shared/ThemeToggle'
-import { Settings, Info, BarChart3, Palette, Layers, Paintbrush } from 'lucide-react'
-import Link from 'next/link'
+import { gear } from '@equinor/eds-icons'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
 
 type HeaderPanelProps = {
   showConfigPanel: boolean
   setShowConfigPanel: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+// Navigation and the theme toggle live in the AppHeader above this panel.
 export const HeaderPanel = ({
   showConfigPanel,
   setShowConfigPanel,
 }: HeaderPanelProps) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-wrap items-center justify-between gap-4">
       <div>
-        <h1 className="text-xl sm:text-2xl">Accessible Colour Palette</h1>
-        <p className="text-sm sm:text-md text-subtle">
+        <h1 className="m-0 text-header-xl sm:text-header-2xl font-medium">
+          Accessible Colour Palette
+        </h1>
+        <p className="mt-1 text-sm sm:text-base text-secondary">
           Colours are generated using an algorithm for chroma with predefined
           lightness values and hues.
         </p>
       </div>
-      <div className="flex items-center gap-3">
-        <Link
-          href="/"
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
-          title="Theme builder"
-        >
-          <Paintbrush className="w-4 h-4" />
-          <span>Theme Builder</span>
-        </Link>
-        <Link
-          href="/contrast"
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
-          title="Contrast checker"
-        >
-          <BarChart3 className="w-4 h-4" />
-          <span>Contrast</span>
-        </Link>
-        <Link
-          href="/example"
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
-          title="Example colour combinations"
-        >
-          <Palette className="w-4 h-4" />
-          <span>Example</span>
-        </Link>
-        <Link
-          href="/palette"
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
-          title="Palette editor"
-        >
-          <Layers className="w-4 h-4" />
-          <span>Palette</span>
-        </Link>
-        <Link
-          href="/about"
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
-          title="Learn how the generator works"
-        >
-          <Info className="w-4 h-4" />
-          <span>About</span>
-        </Link>
-        <button
-          type="button"
-          onClick={() => setShowConfigPanel(!showConfigPanel)}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm border border-neutral-subtle hover:bg-neutral-fill-muted-hover transition-colors rounded-md"
-          title="Open configuration panel"
-          data-testid="config-button"
-          aria-expanded={showConfigPanel}
-          aria-controls="display-options-panel"
-        >
-          <Settings className="w-4 h-4" />
-          <span>Display</span>
-        </button>
-        <ThemeToggle />
-      </div>
+      <Button
+        size="sm"
+        onClick={() => setShowConfigPanel(!showConfigPanel)}
+        title="Open configuration panel"
+        data-testid="config-button"
+        aria-expanded={showConfigPanel}
+        aria-controls="display-options-panel"
+      >
+        <Icon data={gear} size={16} />
+        <span>Display</span>
+      </Button>
     </div>
   )
 }

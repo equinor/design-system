@@ -1,8 +1,8 @@
 export function AboutOverview() {
   return (
     <section id="overview" className="scroll-mt-8">
-      <h2 className="mb-4 text-2xl font-bold">Overview</h2>
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
+      <h2 className="mb-4 text-header-xl font-medium">Overview</h2>
+      <div className="space-y-4">
         <p>
           The <abbr title="Equinor Design System">EDS</abbr> Colour Palette
           Generator creates consistent, accessible colour scales for design

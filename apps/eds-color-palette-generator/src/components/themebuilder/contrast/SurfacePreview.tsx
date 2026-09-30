@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { calcContrast } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
+import { Card } from '@/components/shared/Card'
 import { StepSelect } from './StepSelect'
 
 type Palette = { name: string; steps: string[] }
@@ -18,9 +19,9 @@ function ContrastPair({
 }) {
   const result = useMemo(() => calcContrast(fgHex, bgHex), [fgHex, bgHex])
   return (
-    <div className="flex items-center gap-2 text-[11px]">
-      <span className="text-subtle">{label}</span>
-      <span className="font-mono font-semibold text-strong">{result.wcag}</span>
+    <div className="flex items-center gap-2 text-xs">
+      <span className="text-secondary">{label}</span>
+      <span className="font-mono font-medium text-primary">{result.wcag}</span>
       <Badge pass={result.aa} label="AA" />
       <Badge pass={result.aaa} label="AAA" />
     </div>
@@ -40,17 +41,12 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
   const [text, setText] = useState(12)
 
   return (
-    <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
-      <div>
-        <h2 className="text-base font-bold text-strong m-0">Surface preview</h2>
-        <p className="text-sm text-subtle m-0 mt-1">
-          Visualise nested surface layers per palette — adjust roles to test
-          combinations
-        </p>
-      </div>
-
+    <Card
+      title="Surface preview"
+      description="Visualise nested surface layers per palette — adjust roles to test combinations"
+    >
       {/* Dropdowns */}
-      <div className="flex flex-wrap gap-x-4 gap-y-2">
+      <div className="mb-4 flex flex-wrap gap-x-4 gap-y-2">
         <StepSelect
           label="Page"
           value={page}
@@ -88,32 +84,29 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
       <div className="flex flex-col gap-6">
         {palettes.map((p) => (
           <div key={p.name} className="flex flex-col gap-2">
-            <h3 className="text-xs font-semibold text-strong m-0">{p.name}</h3>
+            <h3 className="m-0 text-base font-medium text-primary">{p.name}</h3>
 
             {/* Nested box layout */}
             <div
-              className="rounded-lg p-4"
+              className="rounded p-4"
               style={{ backgroundColor: p.steps[page] }}
             >
               <div
-                className="rounded-lg p-3"
+                className="rounded p-3"
                 style={{ backgroundColor: p.steps[panel] }}
               >
                 <div
-                  className="rounded-lg p-3 flex gap-3"
+                  className="flex gap-3 rounded p-3"
                   style={{ backgroundColor: p.steps[cardRow] }}
                 >
                   {[0, 1, 2].map((i) => (
                     <div
                       key={i}
-                      className="flex-1 rounded-md p-3 flex items-center justify-center"
+                      className="flex min-h-12 flex-1 items-center justify-center rounded border-[1.5px] p-3 text-base font-medium"
                       style={{
                         backgroundColor: p.steps[card],
-                        border: `1.5px solid ${p.steps[border]}`,
+                        borderColor: p.steps[border],
                         color: p.steps[text],
-                        fontSize: 13,
-                        fontWeight: 600,
-                        minHeight: 48,
                       }}
                     >
                       Card {i + 1}
@@ -124,7 +117,7 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
             </div>
 
             {/* Contrast ratios between adjacent layers */}
-            <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
+            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
               <ContrastPair
                 label="Page / Panel"
                 fgHex={p.steps[panel]}
@@ -154,6 +147,6 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
           </div>
         ))}
       </div>
-    </section>
+    </Card>
   )
 }

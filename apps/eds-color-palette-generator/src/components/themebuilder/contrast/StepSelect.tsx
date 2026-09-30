@@ -24,6 +24,9 @@ type StepSelectProps = {
 
 const ALL_STEP_INDICES = PALETTE_STEPS.map((_, i) => i)
 
+const SELECT_CLASS =
+  'rounded border border-input bg-input px-2 py-1 text-sm text-primary hover:border-input-hover'
+
 function StepOption({ index }: { index: number }) {
   return (
     <option value={index} title={stepRolesText(index + 1)}>
@@ -61,12 +64,12 @@ export function StepSelect({
   const hasGroups = recSteps.length > 0
 
   return (
-    <label className="flex items-center gap-1.5 text-xs text-strong">
+    <label className="flex items-center gap-1.5 text-sm text-primary">
       <span className="font-medium whitespace-nowrap">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
+        className={SELECT_CLASS}
       >
         {hasGroups ? (
           <>

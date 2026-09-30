@@ -22,10 +22,10 @@ test.describe('Data visualisation palettes', () => {
   })
 
   test('switches families and updates the swatch count', async ({ page }) => {
-    await page.getByRole('button', { name: 'Sequential' }).click()
+    await page.getByRole('radio', { name: 'Sequential' }).click()
     await expect(page.getByTestId('dataviz-swatch')).toHaveCount(7)
 
-    await page.getByRole('button', { name: 'Diverging' }).click()
+    await page.getByRole('radio', { name: 'Diverging' }).click()
     await expect(page.getByTestId('dataviz-swatch')).toHaveCount(9)
   })
 

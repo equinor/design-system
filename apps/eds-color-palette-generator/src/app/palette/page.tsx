@@ -1,10 +1,20 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import Link from 'next/link'
+import { add } from '@equinor/eds-icons'
 import { setSimulationPalettes, type TokenPalette } from '@/utils/palette'
 import { generatePalettesFromGenerator } from '@/utils/generatorImport'
 import { PaletteCard, type PaletteViewMode } from '@/components/palette'
+import { AppHeader } from '@/components/shared/AppHeader'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+
+const VIEW_MODES: SegmentedOption<PaletteViewMode>[] = [
+  { value: 'curve', label: 'Curve' },
+  { value: 'gradient', label: 'Gradient' },
+]
 
 export default function PalettePage() {
   const [palettes, setPalettes] = useState<TokenPalette[]>([])
@@ -66,124 +76,41 @@ export default function PalettePage() {
   }, [])
 
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: '#fafafa', color: '#111' }}
-    >
-      {/* ---- Header ---- */}
-      <header
-        className="sticky top-0 z-10"
-        style={{
-          background: 'rgba(250,250,250,0.85)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: '1px solid #e5e7eb',
-        }}
-      >
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-4">
-          <h1 className="text-lg font-bold m-0">Palette editor</h1>
-
-          <div className="ml-auto flex items-center gap-4">
-            {/* View mode toggle */}
-            <div
-              className="flex rounded-lg overflow-hidden"
-              style={{ border: '1.5px solid #d1d5db' }}
-            >
-              {(['curve', 'gradient'] as const).map((mode) => (
-                <button
-                  key={mode}
-                  type="button"
-                  onClick={() => setViewMode(mode)}
-                  className="cursor-pointer"
-                  style={{
-                    padding: '6px 12px',
-                    fontSize: '12px',
-                    fontWeight: viewMode === mode ? 600 : 400,
-                    border: 'none',
-                    borderLeft: mode !== 'curve' ? '1px solid #d1d5db' : 'none',
-                    background: viewMode === mode ? '#111' : '#fff',
-                    color: viewMode === mode ? '#fff' : '#666',
-                  }}
-                >
-                  {mode === 'curve' ? 'Curve' : 'Gradient'}
-                </button>
-              ))}
-            </div>
-
-            {/* Nav links */}
-            <Link
-              href="/contrast"
-              style={{
-                fontSize: '13px',
-                color: '#6b7280',
-                textDecoration: 'none',
-              }}
-            >
-              Contrast
-            </Link>
-            <Link
-              href="/example"
-              style={{
-                fontSize: '13px',
-                color: '#6b7280',
-                textDecoration: 'none',
-              }}
-            >
-              Examples
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-canvas text-primary">
+      <AppHeader />
 
       <main className="max-w-5xl mx-auto px-6 py-8">
+        <h1 className="m-0 text-header-2xl font-medium">Palette editor</h1>
+
         {/* ---- Actions ---- */}
-        <div
-          className="flex items-center gap-3 flex-wrap"
-          style={{ marginBottom: '24px' }}
-        >
-          <button
-            type="button"
+        <div className="mt-4 mb-6 flex flex-wrap items-center gap-3">
+          <Button
             onClick={() =>
               addPalette({
                 name: 'Custom',
                 steps: Array(15).fill('#888888'),
               })
             }
-            className="cursor-pointer"
-            style={{
-              padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: 500,
-              borderRadius: '8px',
-              border: '1.5px solid #d1d5db',
-              background: '#fff',
-              color: '#111',
-            }}
           >
-            + Custom HEX
-          </button>
-          <button
-            type="button"
-            onClick={reimportFromGenerator}
-            className="cursor-pointer"
-            style={{
-              padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: 400,
-              borderRadius: '8px',
-              border: 'none',
-              background: 'transparent',
-              color: '#6b7280',
-              textDecoration: 'underline',
-              textUnderlineOffset: '2px',
-            }}
-          >
+            <Icon data={add} size={18} />
+            Custom HEX
+          </Button>
+          <Button variant="ghost" onClick={reimportFromGenerator}>
             Re-import from generator
-          </button>
+          </Button>
+
+          <SegmentedControl
+            mode="radio"
+            aria-label="View"
+            className="ml-auto"
+            options={VIEW_MODES}
+            value={viewMode}
+            onChange={setViewMode}
+          />
         </div>
 
         {/* ---- Palette list ---- */}
-        <div className="flex flex-col" style={{ gap: '32px' }}>
+        <div className="flex flex-col gap-8">
           {palettes.map((pal, palIdx) => (
             <PaletteCard
               key={palIdx}

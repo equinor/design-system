@@ -51,7 +51,7 @@ export const ColorScalesHeader = () => {
   return (
     <>
       <div
-        className="grid gap-3 mb-2 text-center text-subtle"
+        className="grid gap-3 mb-2 text-center text-sm text-secondary"
         style={{
           gridTemplateColumns: `repeat(${PALETTE_STEPS.length}, minmax(0, 1fr))`,
         }}
@@ -59,7 +59,7 @@ export const ColorScalesHeader = () => {
         {categoryGroups.map((group, index) => (
           <div
             key={index}
-            className="border-b border-neutral-subtle pb-2"
+            className="border-b border-muted pb-2"
             style={{
               gridColumn: `span ${group.span}`,
             }}
@@ -70,7 +70,7 @@ export const ColorScalesHeader = () => {
       </div>
 
       <div
-        className="grid gap-3 mb-1 px-4"
+        className="grid gap-3 mb-1 px-4 text-sm text-secondary"
         style={{
           gridTemplateColumns: `repeat(${PALETTE_STEPS.length}, minmax(0, 1fr))`,
         }}

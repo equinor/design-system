@@ -82,27 +82,14 @@ export function ButtonPreview({ colors }: ButtonPreviewProps) {
   const labelColor = colors['text.primary']
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'minmax(72px, auto) repeat(3, 1fr)',
-        gap: '14px',
-        alignItems: 'center',
-        maxWidth: '560px',
-      }}
-    >
+    <div className="grid max-w-[560px] grid-cols-[minmax(72px,auto)_repeat(3,1fr)] items-center gap-3.5">
       {/* Header row: interaction states */}
       <div />
       {STATES.map((state) => (
         <div
           key={state}
-          style={{
-            fontSize: '11px',
-            textAlign: 'center',
-            textTransform: 'capitalize',
-            color: labelColor,
-            opacity: 0.7,
-          }}
+          className="text-center text-xs capitalize opacity-70"
+          style={{ color: labelColor }}
         >
           {state}
         </div>
@@ -111,25 +98,19 @@ export function ButtonPreview({ colors }: ButtonPreviewProps) {
       {/* One row per variant */}
       {variants.map((variant) => (
         <Fragment key={variant.name}>
-          <div style={{ fontSize: '12px', fontWeight: 600, color: labelColor }}>
+          <div className="text-sm font-medium" style={{ color: labelColor }}>
             {variant.name}
           </div>
           {STATES.map((state) => {
             const s = variant.states[state]
             return (
-              <div key={state} style={{ textAlign: 'center' }}>
+              <div key={state} className="text-center">
                 <span
+                  className="inline-block whitespace-nowrap rounded border px-5 py-2.5 text-base font-medium"
                   style={{
-                    display: 'inline-block',
-                    padding: '10px 22px',
-                    borderRadius: '8px',
                     backgroundColor: s.bg,
                     color: s.text,
-                    border: `1px solid ${s.border}`,
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    fontFamily: 'inherit',
-                    whiteSpace: 'nowrap',
+                    borderColor: s.border,
                   }}
                 >
                   Label

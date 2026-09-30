@@ -2,7 +2,11 @@
 
 import { useState } from 'react'
 import { PALETTE_STEPS, stepLabel, stepRolesText } from '@/config/config'
+import { Card } from '@/components/shared/Card'
 import { ContrastCard } from './ContrastCard'
+
+const SELECT_CLASS =
+  'rounded border border-input bg-input px-2 py-1 text-sm text-primary hover:border-input-hover'
 
 type Palette = { name: string; steps: string[] }
 
@@ -12,24 +16,17 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
   const [bgStep, setBgStep] = useState(0)
 
   return (
-    <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
-      <div>
-        <h2 className="text-base font-bold text-strong m-0">
-          Data colour picker
-        </h2>
-        <p className="text-sm text-subtle m-0 mt-1">
-          Test any fg/bg combination for chips, badges, graphs — all palettes
-          side by side
-        </p>
-      </div>
-
-      <div className="flex flex-wrap gap-4">
-        <label className="flex items-center gap-2 text-xs text-strong">
+    <Card
+      title="Data colour picker"
+      description="Test any fg/bg combination for chips, badges, graphs — all palettes side by side"
+    >
+      <div className="mb-4 flex flex-wrap gap-4">
+        <label className="flex items-center gap-2 text-sm text-primary">
           <span className="font-medium">Foreground</span>
           <select
             value={fgStep}
             onChange={(e) => setFgStep(Number(e.target.value))}
-            className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
+            className={SELECT_CLASS}
           >
             {PALETTE_STEPS.map((step, i) => (
               <option key={step.id} value={i} title={stepRolesText(step.step)}>
@@ -39,12 +36,12 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
           </select>
         </label>
 
-        <label className="flex items-center gap-2 text-xs text-strong">
+        <label className="flex items-center gap-2 text-sm text-primary">
           <span className="font-medium">Background</span>
           <select
             value={bgStep}
             onChange={(e) => setBgStep(Number(e.target.value))}
-            className="rounded border border-neutral-subtle bg-default text-xs px-2 py-1"
+            className={SELECT_CLASS}
           >
             {PALETTE_STEPS.map((step, i) => (
               <option key={step.id} value={i} title={stepRolesText(step.step)}>
@@ -55,12 +52,7 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
         </label>
       </div>
 
-      <div
-        className="grid gap-3"
-        style={{
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        }}
-      >
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3">
         {palettes.map((p) => (
           <ContrastCard
             key={p.name}
@@ -72,6 +64,6 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
           />
         ))}
       </div>
-    </section>
+    </Card>
   )
 }

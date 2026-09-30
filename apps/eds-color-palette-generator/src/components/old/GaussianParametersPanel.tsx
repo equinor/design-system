@@ -22,7 +22,7 @@ export const GaussianParametersPanel = ({
   setStdDevDark,
 }: GaussianParametersPanelProps) => {
   return (
-    <fieldset className="p-6 space-y-4 border border-neutral-subtle rounded-lg">
+    <fieldset className="p-6 space-y-4 border border-muted rounded">
       <legend className="mb-2 font-medium">Gaussian Parameters</legend>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -36,7 +36,7 @@ export const GaussianParametersPanel = ({
               step="0.1"
               value={meanLight}
               onChange={(e) => setMeanLight(Number(e.target.value))}
-              className="w-full accent-current"
+              className="w-full"
             />
             <span className="text-sm">{meanLight}</span>
           </label>
@@ -49,7 +49,7 @@ export const GaussianParametersPanel = ({
               step="0.1"
               value={stdDevLight}
               onChange={(e) => setStdDevLight(Number(e.target.value))}
-              className="w-full accent-current"
+              className="w-full"
             />
             <span className="text-sm">{stdDevLight}</span>
           </label>
@@ -65,7 +65,7 @@ export const GaussianParametersPanel = ({
               step="0.1"
               value={meanDark}
               onChange={(e) => setMeanDark(Number(e.target.value))}
-              className="w-full accent-current"
+              className="w-full"
             />
             <span className="text-sm">{meanDark}</span>
           </label>
@@ -78,7 +78,7 @@ export const GaussianParametersPanel = ({
               step="0.1"
               value={stdDevDark}
               onChange={(e) => setStdDevDark(Number(e.target.value))}
-              className="w-full accent-current"
+              className="w-full"
             />
             <span className="text-sm">{stdDevDark}</span>
           </label>

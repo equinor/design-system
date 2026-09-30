@@ -1,13 +1,27 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { Download, Upload, FileJson, FileCode } from 'lucide-react'
+import { cloud_upload, code, download, file } from '@equinor/eds-icons'
 import { ColorDefinition, ColorFormat, ConfigFile } from '@/types'
 import {
   downloadColorTokens,
   downloadConfiguration,
   downloadDesignSystemCSS,
 } from '@/utils/configurationUtils'
+import { Button } from '@/components/shared/Button'
+import { Icon } from '@/components/shared/Icon'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+
+const FORMAT_OPTIONS: SegmentedOption<ColorFormat>[] = [
+  { value: 'OKLCH', label: 'OKLCH' },
+  { value: 'HEX', label: 'HEX' },
+]
+
+const MENU_ITEM =
+  'w-full flex items-center gap-2 px-3 py-2 text-left text-base text-primary hover:bg-neutral-muted active:bg-neutral-muted-hover rounded cursor-pointer'
+
+const MENU_LABEL = 'px-3 py-2 text-sm text-secondary'
 
 type Props = {
   lightModeValues: number[]
@@ -68,35 +82,34 @@ export function QuickActionsPopover(props: Props) {
     }
   }, [open])
 
-  const triggerClass =
-    'inline-flex items-center justify-center p-2 rounded-md bg-neutral-fill-emphasis-default hover:bg-neutral-fill-emphasis-hover transition-colors shadow-sm text-strong-on-emphasis'
-
   return (
     <div ref={rootRef} className="relative">
-      <button
-        type="button"
+      <Button
+        variant="primary"
+        iconOnly
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className={triggerClass}
+        className="shadow-sm"
         title="Import / Export"
         aria-label="Import and export options"
         aria-controls="quick-actions-popover"
         ref={triggerRef}
       >
-        <Download className="w-4 h-4" />
-      </button>
+        <Icon data={download} size={18} />
+      </Button>
 
       {open && (
         <div
           id="quick-actions-popover"
-          className="absolute bottom-12 right-0 w-64 rounded-lg border border-neutral-subtle bg-elevated shadow-lg overflow-hidden py-4 px-2"
+          className="absolute bottom-12 right-0 w-64 rounded border border-muted bg-floating text-primary shadow-lg py-4 px-2"
           role="region"
           aria-label="Quick actions"
         >
-          <div className="px-3 py-2 text-sm text-subtle">Export</div>
+          <div className={MENU_LABEL}>Export</div>
           <button
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
+            type="button"
+            className={MENU_ITEM}
             onClick={() =>
               downloadConfiguration(
                 lightModeValues,
@@ -109,11 +122,12 @@ export function QuickActionsPopover(props: Props) {
               )
             }
           >
-            <FileCode className="w-4 h-4" />
+            <Icon data={code} size={16} />
             <span>Palette config</span>
           </button>
           <button
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
+            type="button"
+            className={MENU_ITEM}
             onClick={() =>
               downloadDesignSystemCSS(
                 colors,
@@ -125,11 +139,12 @@ export function QuickActionsPopover(props: Props) {
               )
             }
           >
-            <FileCode className="w-4 h-4" />
+            <Icon data={code} size={16} />
             <span>CSS variables</span>
           </button>
           <button
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
+            type="button"
+            className={MENU_ITEM}
             onClick={() =>
               downloadColorTokens(
                 colors,
@@ -143,47 +158,30 @@ export function QuickActionsPopover(props: Props) {
               )
             }
           >
-            <FileJson className="w-4 h-4" />
+            <Icon data={file} size={16} />
             <span>JSON config</span>
           </button>
-          <div className="px-3 py-2 text-sm text-subtle">Import</div>
+          <div className={MENU_LABEL}>Import</div>
           <button
             ref={firstActionRef}
-            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-neutral-fill-muted-hover rounded-md"
+            type="button"
+            className={MENU_ITEM}
             onClick={() => fileInputRef.current?.click()}
           >
-            <Upload className="w-4 h-4" />
+            <Icon data={cloud_upload} size={16} />
             <span>Upload config</span>
           </button>
-          <div className="h-px bg-neutral-fill-muted-default my-1" />
-          <div className="px-3 py-2 text-sm text-subtle">Format</div>
+          <div className="h-px bg-neutral-muted my-1" />
+          <div className={MENU_LABEL}>Format</div>
           <div className="px-2 pb-2">
-            <div className="inline-flex items-center rounded-md  bg-neutral-fill-muted-default/40">
-              <button
-                type="button"
-                aria-pressed={colorFormat === 'OKLCH'}
-                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
-                  colorFormat === 'OKLCH'
-                    ? 'bg-default text-strong border border-neutral-subtle'
-                    : 'text-default hover:text-strong'
-                }`}
-                onClick={() => setColorFormat('OKLCH')}
-              >
-                OKLCH
-              </button>
-              <button
-                type="button"
-                aria-pressed={colorFormat === 'HEX'}
-                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
-                  colorFormat === 'HEX'
-                    ? 'bg-default text-strong border border-neutral-subtle'
-                    : 'text-default hover:text-strong'
-                }`}
-                onClick={() => setColorFormat('HEX')}
-              >
-                HEX
-              </button>
-            </div>
+            <SegmentedControl
+              mode="radio"
+              aria-label="Colour format"
+              size="sm"
+              options={FORMAT_OPTIONS}
+              value={colorFormat}
+              onChange={setColorFormat}
+            />
           </div>
         </div>
       )}
