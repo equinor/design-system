@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { Avatar } from './Avatar'
 import { AvatarNameLabel } from './AvatarNameLabel'
@@ -185,9 +185,9 @@ describe('AvatarNameLabel (next)', () => {
           <span data-testid="slot-content">icon</span>
         </AvatarNameLabel>,
       )
-      const slotContent = screen.getByTestId('slot-content')
-      expect(slotContent).toBeInTheDocument()
-      expect(slotContent.closest('.slot-right')).toBeInTheDocument()
+      const slot = screen.getByTestId('eds-avatar-slot-right')
+      expect(slot).toHaveClass('slot-right')
+      expect(within(slot).getByTestId('slot-content')).toBeInTheDocument()
     })
 
     it('does not render slot right when no children', () => {
@@ -210,14 +210,18 @@ describe('AvatarNameLabel (next)', () => {
 
     it('passes size to the inner Avatar', () => {
       render(<AvatarNameLabel name="Ada Lovelace" size="sm" />)
-      const avatar = screen.getByText('AL').closest('.eds-avatar')
-      expect(avatar).toHaveAttribute('data-avatar-size', 'sm')
+      expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
+        'data-avatar-size',
+        'sm',
+      )
     })
 
     it('passes emphasis to the inner Avatar', () => {
       render(<AvatarNameLabel name="Ada Lovelace" emphasis="high" />)
-      const avatar = screen.getByText('AL').closest('.eds-avatar')
-      expect(avatar).toHaveAttribute('data-emphasis', 'high')
+      expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
+        'data-emphasis',
+        'high',
+      )
     })
   })
 
