@@ -11,8 +11,8 @@ The steps up to `xl` are for components, and the eight from `2xl` up are for pag
 
 We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
 
-These pages cover the EDS 2.0 spacing tokens. Both the names and the values are new, so if
-you are working in EDS 1.x or an earlier 2.0 version, please start with
+These pages document the **3.0.0-beta** spacing tokens. If you are on EDS 1.x or on 2.0.0-beta,
+both the names and the values have changed, so please start with
 [coming from an earlier version](#coming-from-an-earlier-version).
 
 Here is a card, with its whole geometry described by three tokens:
@@ -176,7 +176,7 @@ Comfortable is emitted at `:root` rather than behind a selector, so setting noth
 Comfortable. Writing `data-density="comfortable"` is allowed and does no harm.
 
 :::warning `spacious` no longer exists
-2.x had a `spacious` density, and **Relaxed** replaces it. `data-density="spacious"` fails
+2.0.0-beta had a `spacious` density, and **Relaxed** replaces it. `data-density="spacious"` fails
 silently: no error, and you get Comfortable. It is worth a search through your codebase.
 :::
 
@@ -200,7 +200,7 @@ spacing is gone for the same reason colour lost its component tokens: a card and
 happen to share a value should not have to share a name.
 
 :::note The mapping table is still to come
-Mapping the old names onto the new ones needs the 2.x families resolved against the current steps
+Mapping the old names onto the new ones needs the 2.0.0-beta families resolved against the current steps
 first, which is tracked in
 [equinor/design-system#5121](https://github.com/equinor/design-system/issues/5121). Until it is
 ready, please re-pick with the two questions above rather than by matching the old value.
