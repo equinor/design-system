@@ -3,6 +3,7 @@
 - **Status:** Accepted (graduation step superseded by [ADR 0025](0025-batch-graduation-with-release-candidate.md))
 - **Date:** 2026-07-20
 - **Decision makers:** Frida Erdal, EDS Core Team
+- **Scope:** Web, Tokens
 
 ## Context
 
