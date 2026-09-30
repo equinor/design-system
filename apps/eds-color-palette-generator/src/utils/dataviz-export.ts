@@ -16,11 +16,18 @@ export function toHexArray(colors: SwatchColor[]): string {
   )
 }
 
-/** CSS custom properties, e.g. `--eds-dataviz-cat-1: #...;`. */
+/**
+ * CSS custom properties, e.g. `--dataviz-cat-1: #...;`.
+ *
+ * The names deliberately have no `--eds-` prefix. Generated palettes are
+ * proposals, and Tokens Studio already owns `--eds-dataviz-seq-N`,
+ * `--eds-dataviz-div-N` and `--eds-data-visualization-*`, so pasting an
+ * export with those names would silently override the shipped values.
+ */
 export function toCssVars(colors: SwatchColor[], kind: DatavizKind): string {
   const prefix = KIND_PREFIX[kind]
   const lines = colors.map(
-    (c, i) => `  --eds-dataviz-${prefix}-${i + 1}: ${c.hex};`,
+    (c, i) => `  --dataviz-${prefix}-${i + 1}: ${c.hex};`,
   )
   return `:root {\n${lines.join('\n')}\n}\n`
 }

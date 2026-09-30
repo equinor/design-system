@@ -1,23 +1,32 @@
+import Color from 'colorjs.io'
+import { TS_HUES, hueDisplayName } from './tokensStudio'
 import type {
   CategoricalConfig,
   SequentialConfig,
   DivergingConfig,
 } from './dataviz-types'
 
+/** OKLCH hue (deg) of a Tokens Studio anchor, to one decimal. */
+function tokensStudioHue(key: string): number {
+  const hue = TS_HUES.find((h) => h.key === key)
+  const h = hue ? new Color(hue.anchor).to('oklch').h : NaN
+  return h != null && Number.isFinite(h) ? Math.round(h * 10) / 10 : 0
+}
+
 /**
- * OKLCH hues (deg) of the EDS seed colours, so categorical output starts
- * EDS-branded before the generator extends past them to reach the target
- * count. Achromatic Gray is excluded (it has no hue). Values are the OKLCH
- * hue of each seed in src/config/palette.ts (verified via colorjs.io).
+ * Seed hues for categorical output, so small palettes start from the EDS
+ * hues before the generator extends past them to reach the target count.
+ * They are the Tokens Studio hues of the non-neutral tones (accent, danger,
+ * warning, success, info); gray and north-sea are left out because they are
+ * the neutral hues. North-sea would also sit 2 degrees from blue.
  */
 export const EDS_CATEGORICAL_SEEDS: { name: string; hue: number }[] = [
-  { name: 'Moss Green', hue: 204.9 },
-  { name: 'Red', hue: 21.1 },
-  { name: 'Orange', hue: 58.7 },
-  { name: 'Green', hue: 143.0 },
-  { name: 'Blue', hue: 240.7 },
-  { name: 'North sea', hue: 252.5 },
-]
+  'moss-green',
+  'red',
+  'orange',
+  'green',
+  'blue',
+].map((key) => ({ name: hueDisplayName(key), hue: tokensStudioHue(key) }))
 
 export const DEFAULT_CATEGORICAL: CategoricalConfig = {
   kind: 'categorical',
@@ -33,7 +42,7 @@ export const DEFAULT_CATEGORICAL: CategoricalConfig = {
 export const DEFAULT_SEQUENTIAL: SequentialConfig = {
   kind: 'sequential',
   steps: 7,
-  hue: 204.9, // Moss Green — the brand hue
+  hue: tokensStudioHue('moss-green'), // the accent hue
   lightnessRange: [0.96, 0.34],
   chromaPeak: 0.13,
 }
@@ -42,9 +51,9 @@ export const DEFAULT_DIVERGING: DivergingConfig = {
   kind: 'diverging',
   steps: 9,
   // Blue ↔ Orange: a CVD-safe pair (never red↔green, which protan/deuteranopia
-  // collapse). Blue anchors to North sea, orange to the Orange seed.
-  hueLow: 252.5,
-  hueHigh: 58.7,
+  // collapse), on the Tokens Studio info and warning hues.
+  hueLow: tokensStudioHue('blue'),
+  hueHigh: tokensStudioHue('orange'),
   neutralLightness: 0.95,
   endLightness: 0.5,
   chroma: 0.14,
