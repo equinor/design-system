@@ -37,6 +37,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       data-color-appearance="accent"
       data-avatar-size={size}
       data-emphasis={emphasis}
+      data-testid="eds-avatar"
       {...a11yProps}
       {...rest}
     >

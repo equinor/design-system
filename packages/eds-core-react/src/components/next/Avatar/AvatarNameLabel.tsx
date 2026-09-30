@@ -43,7 +43,11 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
             {meta && <span className="meta">{meta}</span>}
           </div>
         </div>
-        {children && <div className="slot-right">{children}</div>}
+        {children && (
+          <div className="slot-right" data-testid="eds-avatar-slot-right">
+            {children}
+          </div>
+        )}
       </div>
     )
   },
