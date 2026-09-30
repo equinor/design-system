@@ -7,8 +7,7 @@ description: Spacing in EDS consists of seventeen named steps. You apply them st
 
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
 
-Eleven of the steps are sized for the inside of components, and the widest six are for page
-layout.
+The steps up to `xl` are for components, and the eight from `2xl` up are for page layout.
 
 We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
 
@@ -61,13 +60,13 @@ Here is a card, with its whole geometry described by three tokens:
 | `spacing.sm`   | 12px        | the default gap between related items in a group                                 |
 | `spacing.md`   | 16px        | **the default container padding. Start here**                                    |
 | `spacing.lg`   | 20px        | separating groups inside a container                                             |
-| `spacing.xl`   | 24px        | separating sections                                                              |
+| `spacing.xl`   | 24px        | separating sections inside a container, such as a card or dialog                 |
 | `spacing.2xl`  | 28px        | page-level rhythm, in layouts rather than components                             |
 | `spacing.3xl`  | 32px        | page-level rhythm, wider than a component has a use for                          |
 | `spacing.4xl`  | 40px        | layout: row height, and the size of an icon button                               |
 | `spacing.5xl`  | 48px        | layout: the 48px touch target, and the gap between major regions of a page       |
 | `spacing.6xl`  | 64px        | layout: card gutters, and the space between grouped blocks                       |
-| `spacing.7xl`  | 80px        | layout: the gap between one section and the next                                 |
+| `spacing.7xl`  | 80px        | layout: the gap between one section of a page and the next                       |
 | `spacing.8xl`  | 96px        | layout: separating whole sections of a long page                                 |
 | `spacing.9xl`  | 128px       | layout: the widest step, for full-page composition                               |
 
@@ -82,24 +81,30 @@ density changes and the names stay put, so you can pick a name once and trust it
 Two questions, in this order. The second one is what keeps a layout consistent from page to page,
 so it is worth answering even when the first feels obvious.
 
-### 1. Is this inside a component, or between components?
+### 1. Is this inside one control, between components, or page layout?
 
-- **Inside** a component: `4xs` through `xs`. A control's own interior, such as the gap between an
-  icon and its label, the padding in a chip, or a checkbox's offset from its text.
-- **Between** components: `sm` and up. Layout space, such as the gaps in a list, the padding on a
-  card, or the separation between two sections.
+- **Inside one control**: `4xs` through `xs`. The gaps between a control's own parts, such as an
+  icon and its label, or a checkbox and its text.
+- **Between components**: `sm` through `xl`. The gaps in a list, between the fields of a form, or
+  between groups and sections inside a container.
+- **Page layout**: `2xl` and up. Gutters, and the space between the regions and sections of a page.
+
+Padding does not follow these bands, because it depends on the component: a chip uses `3xs`, a
+button `xs` and `md`, a card `md`. The [decision table](./spacing-usage.mdx#decision-table) has a
+row for each.
 
 ### 2. How closely related are the two things?
 
 Space is our main signal of grouping, so let distance track relatedness:
 
-| Relationship                                            | Step |
-| ------------------------------------------------------- | ---- |
-| two parts of one control, such as an icon and its label | `xs` |
-| two labels in the same field                            | `xs` |
-| two fields in the same fieldset                         | `sm` |
-| two fieldsets in the same form                          | `lg` |
-| two sections on a page                                  | `xl` |
+| Relationship                                            | Step  |
+| ------------------------------------------------------- | ----- |
+| two parts of one control, such as an icon and its label | `xs`  |
+| two labels in the same field                            | `xs`  |
+| two fields in the same fieldset                         | `sm`  |
+| two fieldsets in the same form                          | `lg`  |
+| two sections in the same card or dialog                 | `xl`  |
+| two sections on a page                                  | `7xl` |
 
 Choosing by relationship, rather than by how the gap looks on the screen in front of you, is what
 keeps two sections the same distance apart on every page in a product. It also makes a design

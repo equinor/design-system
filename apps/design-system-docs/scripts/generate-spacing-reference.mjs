@@ -163,14 +163,14 @@ const ROLES = {
   sm: 'the default gap between related items in a group',
   md: '**the default container padding. Start here**',
   lg: 'separating groups inside a container',
-  xl: 'separating sections',
+  xl: 'separating sections inside a container, such as a card or dialog',
   '2xl': 'page-level rhythm, in layouts rather than components',
   '3xl': 'page-level rhythm, wider than a component has a use for',
   '4xl': 'layout: row height, and the size of an icon button',
   '5xl':
     'layout: the 48px touch target, and the gap between major regions of a page',
   '6xl': 'layout: card gutters, and the space between grouped blocks',
-  '7xl': 'layout: the gap between one section and the next',
+  '7xl': 'layout: the gap between one section of a page and the next',
   '8xl': 'layout: separating whole sections of a long page',
   '9xl': 'layout: the widest step, for full-page composition',
 }
