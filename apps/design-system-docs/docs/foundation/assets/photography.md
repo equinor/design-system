@@ -1,10 +1,8 @@
 ---
 title: Photography
+hide_title: true
+description: 'Our photography style is modern and authentic with a clear Nordic touch that reflects our brand character.'
 ---
-
-# Photography
-
-Our photography style is modern and authentic with a clear Nordic touch that reflects our brand character.
 
 Photography works best when you need to show real people, environments, or products in context. It adds authenticity and human connection to your interface design whilst maintaining visual consistency with our brand identity.
 

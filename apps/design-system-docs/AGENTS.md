@@ -8,30 +8,37 @@ specific to this app.
 
 ## What this app is
 
-A versioned Docusaurus site documenting EDS 2.0. Two doc versions exist:
+A versioned Docusaurus site documenting EDS. Three doc versions exist:
 
-| Version                             | Content dir                     | URL path                                            | Status                                                   |
-| ----------------------------------- | ------------------------------- | --------------------------------------------------- | -------------------------------------------------------- |
-| `current` (labelled **2.0.0-beta**) | `docs/`                         | `/docs/Next/…` (capital N, baked into footer links) | the active redesign                                      |
-| `1.1.0`                             | `versioned_docs/version-1.1.0/` | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+| Version                             | Content dir                          | URL path                                            | Status                                                   |
+| ----------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
+| `current` (labelled **3.0.0-beta**) | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
+| `2.0.0-beta`                        | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
+| `1.1.0`                             | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
 
 **Version scoping is the #1 footgun.** Anything that styles doc _content_
-must be scoped so 1.1.0 keeps its stock rendering:
+must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
+2.0.0-beta both render with the redesign, so every scope names both:
 
-- CSS: pair `html[class*='docs-version-current']` (current docs) with
-  `html:not([class*='docs-version-'])` (unversioned pages — landing,
-  /foundation, /getting-started, /about). Per-element rules use
-  `html:where(…)` to keep specificity at 0,0,2 so single-class component
-  rules still win.
-- React: the DocItem hero gate checks `metadata.version === 'current'`.
+- CSS: pair `html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])`
+  (the redesigned versions) with `html:not([class*='docs-version-'])`
+  (unversioned pages: landing, /foundation, /getting-started, /about).
+  Per-element rules use `html:where(…)` to keep specificity at 0,0,2 so
+  single-class component rules still win. The one exception is the version
+  badge in `site-chrome.css`, hidden on current only so frozen pages still
+  say which version they are.
+- React: the DocItem hero gate checks `REDESIGN_VERSIONS` (`'current'` and
+  `'2.0.0-beta'`).
+- Freezing another version means adding its `docs-version-*` class and name
+  to both lists.
 - Chrome (navbar, sidebar, TOC, footer) is deliberately version-independent.
 
-**Both version paths are pinned explicitly, and both must stay that way.**
+**The current and 1.1.0 paths are pinned explicitly, and both must stay that way.**
 `docusaurus.config.ts` sets `lastVersion: 'current'` plus
 `'1.1.0': { path: '' }`. Neither is decoration:
 
 - Without `lastVersion`, Docusaurus defaults it to the newest entry in
-  `versions.json` (`1.1.0`), which silently makes the frozen archive the target
+  `versions.json` (`2.0.0-beta`), which silently makes a frozen snapshot the target
   of every `type: 'docSidebar'` navbar item and of the version dropdown — while
   the footer and landing pages link to `/docs/Next/…`. The site then
   contradicts its own chrome and the redesign is unreachable from the primary
@@ -57,6 +64,7 @@ Anything else that changes how 1.1.0 renders is a bug.
 ```
 docs/                      current-version content (md/mdx)
 versioned_docs/1.1.0/      frozen archive — do not touch
+versioned_docs/version-2.0.0-beta/  frozen snapshot — content not edited
 src/css/                   the five global stylesheets (see below)
 src/components/            shared site components (docs- prefixed CSS)
 src/theme/                 Docusaurus swizzles + MDXComponents registry
@@ -72,13 +80,13 @@ docusaurus.config.ts       aliases + webpack rules (see Config)
 
 ## Global CSS — five files, strict responsibilities
 
-| File                           | Owns                                                                                                                                         |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                   |
-| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, gutter, breakpoint convention) + tiny utilities (`.docs-section`)                 |
-| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                   |
-| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, component-doc hero chrome, foundation full-width block                             |
-| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts` |
+| File                           | Owns                                                                                                                                                        |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/css/theme-variables.css`  | token/font imports, every `--ifm-*` override, the site typography scale. Variables, with one deliberate exception (below).                                  |
+| `src/css/docs-components.css`  | the `--docs-*` design variables (typography roles, rhythm, breakpoint convention) + tiny utilities (`.docs-section`)                                        |
+| `src/css/site-chrome.css`      | navbar, sidebar, TOC, footer rules (no breadcrumbs — `breadcrumbs: false`)                                                                                  |
+| `src/css/doc-layouts.css`      | doc-page layouts: default card, `.docs-landing` breakout, hero-band chrome for component and foundation docs, colour reference tables, table scroll shadows |
+| `src/css/page-transitions.css` | route-change cross-fade tuning (View Transitions pseudos + chrome `view-transition-name`s); driven by `src/clientModules/pageTransitions.ts`                |
 
 The exception in `theme-variables.css`: the per-level heading line-heights at
 the end of the file set `line-height` on `h1`–`h6` directly, not through a
@@ -251,11 +259,11 @@ registry itself gives no such guarantee — `of` is a plain `string`.
   a pointer-following spotlight that both brightens and enlarges the dots it
   passes over. Render it as a child of the band and add
   `docs-dot-host` to the band, which becomes its positioning context and drives
-  the hover. `Hero` wires this up behind its `dots` prop; the component-doc hero
-  band does it directly in the `DocItem/Layout` swizzle. Bands that come from
-  markdown and cannot host an element set
+  the hover. `Hero` wires this up behind its `dots` prop; the component and
+  foundation doc hero band does it directly in the `DocItem/Layout` swizzle. A
+  band that comes from markdown and cannot host an element can set
   `background-image: var(--docs-dot-grid)` instead (resting grid, no
-  spotlight) — the foundation hero band in `doc-layouts.css` is the one case.
+  spotlight); no band on the site does this today.
   All the geometry lives in `--docs-dot-*` in `docs-components.css`; the three
   gradients resolve at `:root`, so overriding `--docs-dot-size` per band has no
   effect by design. The size falloff is two stacked lit layers (`::before` at
@@ -271,9 +279,19 @@ the 1.1.0 archive imports it).
 
 ## Swizzled theme components (`src/theme/`)
 
-- `DocItem/Layout` — eject tracking upstream 3.10.2 verbatim + the
-  component-doc hero band (gated on `hide_title` + `components/` id +
-  current version). Re-diff against upstream on Docusaurus upgrades.
+- `DocItem/Layout` — eject tracking upstream 3.10.2 verbatim + the hero band
+  for component and foundation docs (gated on `hide_title` + a `components/`
+  or `foundation/` id + a redesigned version). Re-diff against upstream on
+  Docusaurus upgrades.
+- `DocRoot/Layout/Sidebar` — eject tracking upstream 3.10.2 + two changes: it
+  seeds `hiddenSidebar` from the container flag so a remount cannot strand the
+  sidebar half-collapsed, and it remembers the collapsed state across page
+  loads in `localStorage` (`src/utils/sidebarPreference.ts`). A `headTags`
+  script in `docusaurus.config.ts` marks `<html>` with
+  `data-docs-sidebar-restore` before first paint, so the sidebar starts
+  collapsed instead of opening and animating shut on hydration; the sidebar and
+  hero stylesheets draw the collapsed width while it is set. Re-diff against
+  upstream on Docusaurus upgrades.
 - `Footer` — full custom footer; styled via Infima `footer__*` classes in
   `site-chrome.css`.
 - `MDXComponents` — the global registry (wrap).
@@ -390,9 +408,13 @@ Not in CI (both need a running server):
 
 - Doc writing style: `documentation/agent-instructions/COMPONENT_DOC_STYLE.md`
   (British English, no em-dashes, section order).
-- Component reference docs use frontmatter `hide_title: true` +
-  `description` — the swizzled DocItem hero renders both.
-- Foundation doc pages get their full-width hero from their first `# h1` and
-  first paragraph via CSS (`doc-layouts.css`) — no frontmatter mechanism.
+- Component and foundation docs use frontmatter `hide_title: true` +
+  `description`, and the swizzled DocItem hero renders both. The body has no
+  `# h1` and starts after the lead. Always set `description` explicitly:
+  without it Docusaurus takes the first paragraph, which then shows in the hero
+  and again in the body. It is plain text, so a lead that needs a link or
+  inline markup keeps that sentence in the body.
+- The frozen 2.0.0-beta foundation pages still carry their title in a
+  markdown `# h1`, so they render with the default doc card and no hero.
 - Never hand-write Storybook URLs in content; use `showLink` /
   `StoryCanvas`.

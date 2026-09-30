@@ -293,7 +293,7 @@ html[class*='docs-doc-id-resources/'] .navbar__link[href*='/resources'] {
 
 /* Hide the in-page version badge on the redesign — the version is already in
    the navbar dropdown. Scoped to the current version so the badge still marks
-   archived 1.1.0 pages, where it matters most. */
+   the frozen 2.0.0-beta and archived 1.1.0 pages, where it matters most. */
 html[class*='docs-version-current'] .theme-doc-version-badge {
   display: none;
 }

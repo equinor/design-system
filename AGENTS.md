@@ -17,6 +17,10 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 
 Before scaffolding a new component, check [`documentation/AI-COMPONENT-INDEX.md`](./documentation/AI-COMPONENT-INDEX.md) — a generated list of every `/next` component with its props and sub-components. It is regenerated on `pnpm run build` (or run `pnpm run generate:component-index` ad-hoc). Don't edit it by hand.
 
+### Mobile component scope
+
+Before scaffolding a new `eds-mobile-components` component, check [`documentation/MOBILE_COMPONENT_SCOPE.md`](./documentation/MOBILE_COMPONENT_SCOPE.md) — the maintained list of EDS web components mobile renames, replaces, or explicitly excludes, and why. The component you're about to build may already be decided against.
+
 ## Secrets & Credentials
 
 Never read, search, copy, or print the contents of secret files. The rule applies to **every** harness (Claude Code, Copilot, OpenCode) regardless of whether the harness enforces it.
@@ -24,11 +28,13 @@ Never read, search, copy, or print the contents of secret files. The rule applie
 Treat these patterns as off-limits:
 
 - `.env`, `.env.*` (real `.env` lives at `packages/eds-tokens-sync/bin/.env` — see `packages/eds-tokens-sync/CLAUDE.md`)
-- `id_rsa*`, `*.pem`, `*.key`
+- `id_rsa*`, `id_ed25519*`, `id_ecdsa*`, `id_dsa*`, `*.pem`, `*.key`
 - `credentials.json`, `secrets.json`
 - `secrets/**`, `config/credentials.json`
 
 If you need to verify a secret file's shape, report length + first/last few characters only — never the body. If a tool blocks access (e.g. Claude Code's `read_hook.js`), do not try to work around it; the block is the intended behaviour.
+
+The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention `.env` or a `secrets/` path.
 
 **Enforcement matrix:**
 

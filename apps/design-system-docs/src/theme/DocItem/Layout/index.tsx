@@ -17,6 +17,12 @@ import type { Props } from '@theme/DocItem/Layout'
 
 import styles from './styles.module.css'
 
+/** Doc versions that render with the redesign: current and the frozen 2.0.0-beta. */
+const REDESIGN_VERSIONS = new Set(['current', '2.0.0-beta'])
+
+/** Doc sections whose pages can render the hero band. */
+const HERO_SECTIONS = ['components/', 'foundation/']
+
 /** Decide whether the TOC should render, on mobile or desktop viewports. */
 function useDocTOC() {
   const { frontMatter, toc } = useDoc()
@@ -35,14 +41,15 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   const docTOC = useDocTOC()
   const { metadata, frontMatter } = useDoc()
 
-  // Component reference docs render a full-width hero band (title + lead) above
-  // the standard three-column doc body. Gated on `hide_title` so foundation
-  // pages and the /components landing keep their own layouts, and on the
-  // current version so archived docs can never opt in via frontmatter.
+  // Component and foundation docs render a full-width hero band (title + lead)
+  // above the standard three-column doc body. Gated on `hide_title` so the
+  // /components landing and the frozen 2.0.0-beta foundation pages, which still
+  // carry their title in the markdown, keep their own layouts, and on the
+  // redesigned versions so the 1.1.0 archive can never opt in via frontmatter.
   const showHero =
     frontMatter.hide_title === true &&
-    metadata.id.startsWith('components/') &&
-    metadata.version === 'current'
+    HERO_SECTIONS.some((section) => metadata.id.startsWith(section)) &&
+    REDESIGN_VERSIONS.has(metadata.version)
 
   return (
     <>

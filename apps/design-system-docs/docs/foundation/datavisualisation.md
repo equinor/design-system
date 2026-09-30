@@ -1,6 +1,8 @@
-# Data Visualisation
-
-A graphical presentation of information in a way that makes it easier to understand and process. It is usually interactive and allows for the user to draw their own conclusions about the data.
+---
+title: Data Visualisation
+hide_title: true
+description: 'A graphical presentation of information in a way that makes it easier to understand and process. It is usually interactive and allows for the user to draw their own conclusions about the data.'
+---
 
 ## Infographics
 

@@ -183,12 +183,12 @@
  * One token-driven scale for headings and body text (defined as --docs-font-*
  * in docs-components.css). Scoped to unversioned pages (landing, /foundation,
  * /getting-started, /about — no docs-version-* class on <html>) and to
- * current-version docs; the archived 1.1.0 docs keep the stock Infima
- * typography.
+ * the redesigned doc versions (current and the frozen 2.0.0-beta); the
+ * archived 1.1.0 docs keep the stock Infima typography.
  * ====================================== */
 
 html:not([class*='docs-version-']),
-html[class*='docs-version-current'] {
+html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta']) {
   --ifm-heading-font-weight: var(--docs-font-weight-emphasis);
   --ifm-h1-font-size: var(--eds-typography-header-4xl-font-size);
   --ifm-h2-font-size: var(--docs-font-section-size);
@@ -207,36 +207,57 @@ html[class*='docs-version-current'] {
    .markdown > h2 → 2rem, .markdown > h3 → 1.5rem), so the scale must be
    restated at those exact scopes. */
 html:not([class*='docs-version-']) .markdown h1:first-child,
-html[class*='docs-version-current'] .markdown h1:first-child {
+html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  .markdown
+  h1:first-child {
   --ifm-h1-font-size: var(--eds-typography-header-4xl-font-size);
 }
 
 html:not([class*='docs-version-']) .markdown > h2,
-html[class*='docs-version-current'] .markdown > h2 {
+html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  .markdown
+  > h2 {
   --ifm-h2-font-size: var(--docs-font-section-size);
 }
 
 html:not([class*='docs-version-']) .markdown > h3,
-html[class*='docs-version-current'] .markdown > h3 {
+html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  .markdown
+  > h3 {
   --ifm-h3-font-size: var(--docs-font-subsection-size);
 }
 
 /* Per-level line-heights (the token scale ships absolute values; Infima only
    has one shared --ifm-heading-line-height). :where() keeps specificity at
    0,0,2 so any single-class rule (hero titles, card titles) still wins. */
-html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h1 {
+html:where(
+    :not([class*='docs-version-']),
+    :is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  )
+  h1 {
   line-height: var(--eds-typography-header-4xl-line-height);
 }
 
-html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h2 {
+html:where(
+    :not([class*='docs-version-']),
+    :is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  )
+  h2 {
   line-height: var(--docs-font-section-line-height);
 }
 
-html:where(:not([class*='docs-version-']), [class*='docs-version-current']) h3 {
+html:where(
+    :not([class*='docs-version-']),
+    :is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  )
+  h3 {
   line-height: var(--docs-font-subsection-line-height);
 }
 
-html:where(:not([class*='docs-version-']), [class*='docs-version-current'])
+html:where(
+    :not([class*='docs-version-']),
+    :is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])
+  )
   :is(h4, h5, h6) {
   line-height: var(--docs-font-card-title-line-height);
 }

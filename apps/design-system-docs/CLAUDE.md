@@ -3,8 +3,9 @@
 > The conventions for this app live in [`AGENTS.md`](./AGENTS.md) — directory
 > map, the five-file global CSS architecture, the two token bundles (and their
 > header-typography collision), the self-hosted Inter subset rule, the
-> `--docs-font-*` typography scale, version scoping between the 2.0.0-beta docs
-> and the frozen 1.1.0 archive (including the pinned `lastVersion` /
+> `--docs-font-*` typography scale, version scoping between the redesigned
+> versions (current 3.0.0-beta and the frozen 2.0.0-beta) and the frozen 1.1.0
+> archive (including the pinned `lastVersion` /
 > `'1.1.0': { path: '' }` pair), the shared MDX component registry, StoryCanvas
 > portable stories, config aliases, which dependencies this app may declare,
 > and the verification workflow.
