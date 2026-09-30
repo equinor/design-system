@@ -52,6 +52,9 @@ jobs:
     outputs:
       # Manual runs are an explicit request for the complete suite.
       code: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.code == 'true' }}
+      # Narrower than `code`: only the mobile library, the demo app and the
+      # demo-screens check itself can change what that check compares.
+      mobile: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.mobile == 'true' }}
     steps:
       # fetch-depth: 2 so dorny/paths-filter can diff against the previous
       # commit on push events (the default depth of 1 omits it).
@@ -82,6 +85,10 @@ jobs:
               - 'tsconfig*.json'
               - 'babel.config.cjs'
               - 'eslint.config.mjs'
+            mobile:
+              - 'packages/eds-mobile-components/**'
+              - 'apps/mobile-storybook/**'
+              - 'scripts/check-mobile-demo-screens.js'
 
   # ─── Build (required before test/lint/types) ─────────────────────
   build:
@@ -122,6 +129,11 @@ jobs:
       # numbers, which is the condition it mainly exists to catch.
       - name: Check ADR index freshness
         run: pnpm run generate:adr-index --check
+      # Only reads files, so it runs before the build and fails fast. Scoped
+      # to mobile changes so web-only PRs never run it.
+      - name: Check mobile demo screens
+        if: needs.changes.outputs.mobile == 'true'
+        run: pnpm run check-screens:mobile
       - name: Build packages
         run: pnpm run build
       # Separate step, not folded into the `build` aggregate above: that

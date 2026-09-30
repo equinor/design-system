@@ -67,8 +67,8 @@ app/
 │   ├── index.tsx           # Home screen
 │   ├── about.tsx           # About screen
 │   └── components/         # Component showcase screens
-│       ├── _layout.tsx     # Components stack navigator
-│       ├── index.tsx       # Components list (only Slice 1 components shown)
+│       ├── _layout.tsx     # Components stack navigator (titles come from lib/registry.ts)
+│       ├── index.tsx       # Components list (built from lib/registry.ts)
 │       ├── button.tsx      # Button showcase
 │       ├── input.tsx       # Input showcase
 │       ├── selectioncontrols.tsx  # Radio / Switch / Checkbox showcase
@@ -82,6 +82,7 @@ components/                 # Storybook-specific utility components
 └── SettingsControls.tsx   # Theme and density controls in the header
 
 lib/
+├── registry.ts            # The one list of component screens (name, route, group)
 └── store.ts               # Zustand store for app state (theme)
 ```
 
@@ -157,9 +158,23 @@ export default function MyComponentScreen() {
 }
 ```
 
-2. **Add to components list** in `app/(tabs)/components/index.tsx` under the appropriate section.
+2. **Register the screen** by adding one entry to `componentRegistry` in `lib/registry.ts`:
+```ts
+{ name: "My Component", route: "mycomponent", group: "Data Entry" },
+```
+The Components list and the screen's header title are both built from this entry, so there is nothing else to edit. `route` is the screen file name without extension and must be the lowercased name of the component's folder in `eds-mobile-components` (`SelectionControls` becomes `selectioncontrols`).
 
 3. **Export the component** from `packages/eds-mobile-components/src/index.ts` if not already exported.
+
+### Keeping Screens and Exports in Sync
+
+`pnpm run check-screens:mobile` (from the repo root) fails when:
+
+- a component folder exported from the library has no registry entry
+- a registry entry has no screen file
+- a screen file has no registry entry
+
+CI runs it on any change to the mobile library or this app. Components that are exported but should not have a demo screen (providers, infrastructure) are listed, with a reason, in `NO_DEMO_SCREEN` in `scripts/check-mobile-demo-screens.js`.
 
 ### Component Screen Best Practices
 
