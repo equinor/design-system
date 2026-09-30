@@ -4,6 +4,7 @@
   shipped and been exercised on the beta line, see validation below)
 - **Date:** 2026-07-20
 - **Decision makers:** Frida Erdal, EDS Core Team
+- **Scope:** Tokens
 
 ## Context
 
@@ -84,8 +85,8 @@ the same thing.
 Mirror 2.x: publish a single generated bundle as `./css/variables`; the
 granular files remain committed pipeline artifacts that are not exported.
 
-**Pros:** identical consumer surface to 2.x (the variable *names* change,
-the *shape* of the package does not); internal file layout stays free to
+**Pros:** identical consumer surface to 2.x (the variable _names_ change,
+the _shape_ of the package does not); internal file layout stays free to
 change; no subset footgun; shortest possible setup docs.
 
 **Cons:** consumers cannot skip unused modes (costs < 1 kB); a blind 2.x →
@@ -173,7 +174,7 @@ the flip. That has happened:
 
 The original acceptance criterion ("at least one beta has exposed the
 exact 3.0.0 surface") tied this ADR's status to ADR-0009's flip. The
-decision made *here* — one bundled entry, granular files internal — is
+decision made _here_ — one bundled entry, granular files internal — is
 validated by the shipped, consumed bundle; the specifier mapping at the
 flip adds no information about it. The criterion was therefore dropped
 when the ADR was marked Accepted.

@@ -6,8 +6,9 @@
  */
 
 /* Swizzled from @docusaurus/theme-classic 3.10.2. Same rules and values as
- * upstream; only the property order and the media-query range notation were
- * normalised by this repo's stylelint config. It comes along because ejecting
+ * upstream, plus the restore rules at the end, which are marked; only the
+ * property order and the media-query range notation were normalised by this
+ * repo's stylelint config. It comes along because ejecting
  * the sibling index.tsx (see its header) also detaches this module from the
  * bundle, and `--doc-sidebar-width` plus the collapse transition are declared
  * here. `--doc-sidebar-hidden-width` is overridden to 56px in
@@ -47,5 +48,18 @@
     top: 0;
     height: 100%;
     max-height: 100vh;
+  }
+
+  /* Not upstream: restoring a stored collapsed preference (see
+     src/utils/sidebarPreference.ts). Start at the collapsed width with no
+     transition, and hide the menu, which would otherwise show clipped to the
+     rail until React swaps in the expand button. */
+  html[data-docs-sidebar-restore] .docSidebarContainer {
+    width: var(--doc-sidebar-hidden-width);
+    transition: none;
+  }
+
+  html[data-docs-sidebar-restore] .sidebarViewport {
+    visibility: hidden;
   }
 }

@@ -1,19 +1,21 @@
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import type { CSSProperties, InputHTMLAttributes, ReactNode } from 'react'
 
 export type CheckboxProps = {
   /** Label for the checkbox */
   label?: ReactNode
   /** If true, the checkbox will be disabled */
   disabled?: boolean
-  /** If true, the checkbox appears indeterminate. Note: You must also set
-   * the native element's indeterminate property via ref if needed.
+  /** If true, the checkbox appears indeterminate. The component sets the
+   * native element's `indeterminate` property for you when you pass an
+   * object ref or no ref. With a callback ref, set the property yourself.
    */
   indeterminate?: boolean
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
   /** Helper message shown below the checkbox, useful for additional context */
   helperMessage?: ReactNode
-  /** Custom class name, merged onto the native input element together with
-   * the internal 'input' class */
+  /** CSS class names applied to the outer wrapper element, not the hidden input */
   className?: string
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>
+  /** Inline styles applied to the outer wrapper element, not the hidden input */
+  style?: CSSProperties
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'className' | 'style'>
