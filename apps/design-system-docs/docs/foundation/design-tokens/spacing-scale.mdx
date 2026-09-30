@@ -127,6 +127,16 @@ table shows those assignments directly:
 Some primitive values are not assigned to a spacing name. The difference between densities grows
 with the scale, from a few pixels for smaller steps to as much as 16px for larger steps.
 
+In the layout band, `4xl` to `9xl`, each step sits on three adjacent positions of the primitive
+grid, the way `3xl` does. Two consequences of that are deliberate:
+
+- **Primitive `350` (56px) is skipped.** `5xl` ends at `325` (52px) and `6xl` starts at `375`
+  (60px). Every other pair of neighbouring steps from `3xl` up shares a primitive, so this is the
+  only gap in the band.
+- **`6xl` and `8xl` are uneven.** `6xl` is 4px smaller in Compact and 8px larger in Relaxed, and
+  `8xl` is 8px smaller and 16px larger. The grid moves in 4px increments up to 64px, 8px up to
+  96px and 16px above that, so a step that straddles one of those changes is wider on one side.
+
 ### Corner radius
 
 Same collection, same one-position-per-density behaviour:

@@ -67,34 +67,35 @@ for (const [name, token] of walk(dtcg)) {
 const css = readFileSync(join(tokens, 'css', 'variables.css'), 'utf8')
 
 /**
- * Every `:root` block merged, then the density block layered on top. Comfortable is emitted at
- * `:root` with no selector of its own, so it is the base rather than a case.
+ * Every block whose selector list names `selector`, merged in source order. The list is split
+ * rather than matched as text, because the bundle widens some layers to several selectors: the
+ * semantic layer, where every spacing name is declared, is `:root, [data-color-scheme]`, and after
+ * #5247 also `[data-density]`.
  */
 function declarationsOf(selector) {
-  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const merged = {}
-  for (const block of css.matchAll(
-    new RegExp(escaped + '\\s*\\{([\\s\\S]*?)\\n\\}', 'g'),
-  )) {
-    for (const m of block[1].matchAll(/(--eds-[a-z0-9-]+)\s*:\s*([^;]+);/g)) {
+  const blocks = css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .matchAll(/([^{}]+)\{([^}]*)\}/g)
+  for (const [, selectors, body] of blocks) {
+    if (!selectors.split(',').some((part) => part.trim() === selector)) continue
+    for (const m of body.matchAll(/(--eds-[a-z0-9-]+)\s*:\s*([^;]+);/g)) {
       merged[m[1]] = m[2].trim()
     }
   }
   return merged
 }
 
+// What an element sees at each density: everything declared at `:root`, with the density block
+// on top. Comfortable is the density at `:root`, so it is the base rather than a case.
 const base = declarationsOf(':root')
 const DENSITIES = ['compact', 'comfortable', 'relaxed']
 const SCOPES = Object.fromEntries(
   DENSITIES.map((density) => [
     density,
-    {
-      ...base,
-      ...declarationsOf(`[data-color-scheme]`),
-      ...(density === 'comfortable'
-        ? {}
-        : declarationsOf(`[data-density="${density}"]`)),
-    },
+    density === 'comfortable'
+      ? base
+      : { ...base, ...declarationsOf(`[data-density="${density}"]`) },
   ]),
 )
 
@@ -454,6 +455,46 @@ if (problems.length) {
 
 // --- write, between the markers ----------------------------------------------------------------
 
+/**
+ * Pads every markdown table to aligned columns, the way Prettier writes them. Prettier skips
+ * `*.mdx` (see .prettierignore), so without this every run left the tables unaligned and the
+ * pages with a whitespace-only diff.
+ */
+function alignTables(lines) {
+  const out = []
+  let inFence = false
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].startsWith('```')) inFence = !inFence
+    if (inFence || !lines[i].startsWith('|')) {
+      out.push(lines[i])
+      continue
+    }
+    let end = i
+    while (end < lines.length && lines[end].startsWith('|')) end++
+    const rows = lines.slice(i, end).map((line) =>
+      line
+        .slice(1, -1)
+        .split('|')
+        .map((cell) => cell.trim()),
+    )
+    // Row 1 is the `| --- |` separator, which takes the width rather than setting it
+    const widths = rows[0].map((_, col) =>
+      Math.max(
+        3,
+        ...rows.filter((_, r) => r !== 1).map((row) => row[col].length),
+      ),
+    )
+    for (const [r, row] of rows.entries()) {
+      const cells = row.map((cell, col) =>
+        r === 1 ? '-'.repeat(widths[col]) : cell.padEnd(widths[col]),
+      )
+      out.push(`| ${cells.join(' | ')} |`)
+    }
+    i = end - 1
+  }
+  return out
+}
+
 const TARGETS = {
   'spacing.mdx': ['spacing-steps', 'radius-steps'],
   'spacing-scale.mdx': ['primitive-scale', 'density-spacing', 'density-radius'],
@@ -489,7 +530,7 @@ for (const [file, blocks] of Object.entries(TARGETS)) {
     const generated = [
       `{/* GEN:${block} BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}`,
       '',
-      tables[block].join('\n'),
+      alignTables(tables[block]).join('\n'),
       '',
       `{/* GEN:${block} END */}`,
     ].join('\n')

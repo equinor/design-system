@@ -99,7 +99,7 @@ Worth including because it is the one place `corner-radius.rounded-outer` shows 
 code and the Figma file get there differently.
 
 In code, a focus ring is an `outline` with an `outline-offset`. The browser follows the element's
-own `border-radius` and widens it by the offset, so the outer curve comes out right without naming
+own `border-radius` and widens it by the offset, so the ring's curve comes out right without naming
 a second radius:
 
 ```css
@@ -108,7 +108,7 @@ a second radius:
 }
 .button:focus-visible {
   outline: 2px solid var(--eds-border-interactive-focus);
-  outline-offset: 1px; /* the outer curve comes out at 5px on its own */
+  outline-offset: 1px; /* the ring's inner edge comes out at 5px on its own */
 }
 ```
 
@@ -117,7 +117,7 @@ its radius set explicitly, one step larger than the element it surrounds. `corne
 is that value, which is why it is `rounded` plus 1px: the same 1px the CSS offset adds.
 
 So the token is a workaround for one tool, rather than a radius with a design meaning. Do not use
-for it in code, and do not use it for nested containers. If a container around a rounded child needs
+it in code, and do not use it for nested containers. If a container around a rounded child needs
 a particular corner, set that corner.
 
 ### A compact table
@@ -198,7 +198,7 @@ a normal thing to want. Two cautions:
 - Pick by relationship, so the same pairing gets the same step on every page
 - Let density resize things, with one attribute on a wrapper
 - Use different steps on the block and inline axes when the optics need it
-- Let a focus ring's `outline-offset` produce the outer curve, rather than naming a second radius
+- Let a focus ring's `outline-offset` produce its curve, rather than naming a second radius
 
 :::
 
@@ -214,7 +214,6 @@ a normal thing to want. Two cautions:
 - Space everything equally. If every gap is `md`, nothing is grouped
 
 :::
-
 
 ## Where to go next
 

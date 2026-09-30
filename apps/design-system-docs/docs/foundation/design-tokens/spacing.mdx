@@ -138,8 +138,9 @@ Figma needs an explicit radius one step larger than the element it surrounds. `r
 supplies that number, and the Figma components use it for exactly that.
 
 In code you do not need it. A focus ring is an `outline` with an `outline-offset`, and the browser
-derives the outer curve from the element's own `border-radius` plus the offset. A 4px corner with a
-1px offset already paints a 5px outer curve, which is the same number `rounded-outer` holds.
+derives the ring's curve from the element's own `border-radius` plus the offset. A 4px corner with
+a 1px offset already gives the ring a 5px inner edge, which is the same number `rounded-outer`
+holds.
 
 ```css
 .button:focus-visible {
