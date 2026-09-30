@@ -26,14 +26,14 @@ export function CardPreview({ colors: c }: CardPreviewProps) {
     {
       concept: 'accent',
       tag: 'Design',
-      title: 'Color Theory in UI',
-      body: 'How perceptual color spaces like OKLCH improve accessibility.',
+      title: 'Colour Theory in UI',
+      body: 'How perceptual colour spaces like OKLCH improve accessibility.',
     },
     {
       concept: 'success',
       tag: 'Engineering',
       title: 'Accessible Palettes',
-      body: 'Using Gaussian chroma distribution for balanced color scales.',
+      body: 'Using Gaussian chroma distribution for balanced colour scales.',
     },
   ]
 

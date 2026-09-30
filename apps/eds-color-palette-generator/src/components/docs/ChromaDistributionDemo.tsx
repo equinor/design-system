@@ -55,7 +55,7 @@ export const ChromaDistributionDemo = ({
         {/* Controls */}
         <div className="space-y-4">
           <label className="block">
-            <span className="block mb-2 text-sm font-medium">Base color</span>
+            <span className="block mb-2 text-sm font-medium">Base colour</span>
             <div className="flex gap-2">
               <input
                 type="color"
@@ -109,7 +109,7 @@ export const ChromaDistributionDemo = ({
 
           {chromaData.length > 0 && (
             <div className="bg-surface rounded-lg p-4 text-sm">
-              <p className="font-medium mb-2">Base color properties:</p>
+              <p className="font-medium mb-2">Base colour properties:</p>
               <ul className="space-y-1 text-neutral-subtle">
                 <li>Base chroma: {chromaData[0].baseChroma.toFixed(3)}</li>
                 <li>Max chroma in scale: {maxChroma.toFixed(3)}</li>
@@ -224,7 +224,7 @@ export const ChromaDistributionDemo = ({
 
       {/* Generated color scale */}
       <div>
-        <h4 className="text-sm font-medium mb-3">Generated color scale</h4>
+        <h4 className="text-sm font-medium mb-3">Generated colour scale</h4>
         <div className="flex gap-1 rounded-lg overflow-hidden">
           {colorScale.map((color, index) => (
             <div
@@ -240,7 +240,7 @@ export const ChromaDistributionDemo = ({
           ))}
         </div>
         <p className="text-xs text-neutral-subtle mt-2">
-          Hover over each step to see its index. Notice how chroma (color
+          Hover over each step to see its index. Notice how chroma (colour
           intensity) peaks near the mean lightness value.
         </p>
       </div>
@@ -254,7 +254,7 @@ export const ChromaDistributionDemo = ({
         </code>
         <p className="mt-2 text-neutral-subtle">
           Where the Gaussian function outputs a multiplier between 0 and 1,
-          which scales the base color&apos;s chroma based on the lightness
+          which scales the base colour&apos;s chroma based on the lightness
           value&apos;s distance from the mean.
         </p>
       </div>

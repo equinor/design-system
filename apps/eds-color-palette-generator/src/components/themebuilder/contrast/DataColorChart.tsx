@@ -493,11 +493,11 @@ export function DataColorChart({
     <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
       <div>
         <h2 className="text-base font-bold text-strong m-0">
-          Data color chart
+          Data colour chart
         </h2>
         <p className="text-sm text-subtle m-0 mt-1">
           {paletteMode
-            ? 'Preview palette colors in chart contexts — multi-chromatic (one color per palette) or monochromatic (shades from a single palette)'
+            ? 'Preview palette colours in chart contexts — multi-chromatic (one colour per palette) or monochromatic (shades from a single palette)'
             : 'Preview the generated data-viz palette in chart contexts, then check it under colour-vision-deficiency simulation.'}
         </p>
       </div>
@@ -683,10 +683,10 @@ export function DataColorChart({
       {pairwiseCheck && colors.length > 1 && (
         <div className="flex flex-col gap-2">
           <h3 className="text-xs font-semibold text-strong m-0">
-            Color-to-color contrast
+            Colour-to-colour contrast
           </h3>
           <p className="text-[11px] text-subtle m-0">
-            Each pair of data colors must be distinguishable — 3:1 minimum for
+            Each pair of data colours must be distinguishable — 3:1 minimum for
             adjacent chart elements
           </p>
           <div className="overflow-x-auto">

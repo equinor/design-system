@@ -16,7 +16,7 @@ export default function DataVizPage() {
       >
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center gap-4">
           <h1 className="text-lg font-bold m-0 whitespace-nowrap">
-            EDS Data Visualisation Palettes
+            Data visualisation
           </h1>
           <div className="ml-auto flex items-center gap-3">
             <ThemeToggle />
@@ -25,7 +25,7 @@ export default function DataVizPage() {
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-neutral-subtle bg-default text-subtle hover:text-strong transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              Theme builder
+              Theme Builder
             </Link>
           </div>
         </div>
@@ -33,10 +33,10 @@ export default function DataVizPage() {
 
       <main className="max-w-6xl mx-auto px-6 py-6">
         <p className="text-sm text-subtle mt-0 mb-6 max-w-3xl">
-          Generate accessible colour palettes for charts and data
-          visualisation: distinct categorical series, ordered sequential
-          scales, and diverging scales around a midpoint. Everything is checked
-          for colour-vision-deficiency safety and adapts to light and dark mode.
+          Generate accessible colour palettes for charts and data visualisation:
+          distinct categorical series, ordered sequential scales, and diverging
+          scales around a midpoint. Everything is checked for
+          colour-vision-deficiency safety and adapts to light and dark mode.
         </p>
         <DataVizPanel />
       </main>

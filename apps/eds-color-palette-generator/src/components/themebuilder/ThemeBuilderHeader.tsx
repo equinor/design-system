@@ -45,7 +45,7 @@ export function ThemeBuilderHeader({
     >
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center gap-4">
         <h1 className="text-lg font-bold m-0 whitespace-nowrap">
-          EDS Theme Builder
+          Theme Builder
         </h1>
 
         {/* Tab buttons */}

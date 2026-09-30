@@ -122,7 +122,7 @@ export function ComponentPreviewPanel({
 
           {dataColors.length > 0 && (
             <div className="flex items-center gap-1.5 text-xs text-subtle">
-              <span className="font-medium">Data colors:</span>
+              <span className="font-medium">Data colours:</span>
               {dataColors.map((p) => (
                 <span
                   key={p.name}

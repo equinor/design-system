@@ -50,7 +50,7 @@ export function SamePalettePairings({ palettes }: { palettes: Palette[] }) {
         </h2>
         <p className="text-sm text-subtle m-0 mt-1">
           Test text &amp; background from the same palette — useful for
-          components where accent colors carry both roles
+          components where accent colours carry both roles
         </p>
       </div>
 

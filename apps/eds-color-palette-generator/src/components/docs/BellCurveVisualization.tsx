@@ -56,7 +56,7 @@ export const BellCurveVisualization = ({
           viewBox={`0 0 ${pathData.width} ${pathData.height}`}
           className="w-full h-auto"
           role="img"
-          aria-label="Bell curve visualization showing Gaussian distribution"
+          aria-label="Bell curve visualisation showing Gaussian distribution"
         >
           {/* Grid lines */}
           <g stroke="currentColor" strokeOpacity="0.1" strokeWidth="1">
@@ -177,7 +177,7 @@ export const BellCurveVisualization = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <label className="block">
           <span className="block mb-2 text-sm font-medium">
-            Mean (center of the curve)
+            Mean (centre of the curve)
           </span>
           <input
             type="range"
@@ -215,7 +215,7 @@ export const BellCurveVisualization = ({
       <div className="bg-surface rounded-lg p-4 text-sm">
         <p className="mb-2">
           <strong>How it works:</strong> The bell curve (Gaussian function)
-          determines how much chroma (color intensity) is applied at different
+          determines how much chroma (colour intensity) is applied at different
           lightness levels.
         </p>
         <ul className="list-disc list-inside space-y-1 text-neutral-subtle">
@@ -227,8 +227,8 @@ export const BellCurveVisualization = ({
             <strong>Standard deviation:</strong> How quickly chroma decreases
             away from the mean
           </li>
-          <li>Higher values near the mean = more vibrant colors</li>
-          <li>Lower values away from the mean = more muted colors</li>
+          <li>Higher values near the mean = more vibrant colours</li>
+          <li>Lower values away from the mean = more muted colours</li>
         </ul>
       </div>
     </div>

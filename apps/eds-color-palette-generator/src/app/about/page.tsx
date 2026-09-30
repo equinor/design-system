@@ -28,7 +28,7 @@ export default function AboutPage() {
             Back to generator
           </Link>
           <h1 className="text-3xl font-bold">
-            About the Colour Palette Generator
+            About the EDS Colour Palette Generator
           </h1>
           <p className="mt-2 text-neutral-subtle">
             Learn how this tool creates harmonious, accessible colour scales

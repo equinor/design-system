@@ -1,18 +1,14 @@
 import Color from 'colorjs.io'
 
 export type CVDType =
-  | 'none'
-  | 'protanopia'
-  | 'deuteranopia'
-  | 'tritanopia'
-  | 'achromatopsia'
+  'none' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'achromatopsia'
 
 export const CVD_OPTIONS: { key: CVDType; label: string }[] = [
   { key: 'none', label: 'Normal vision' },
   { key: 'protanopia', label: 'Protanopia (no red)' },
   { key: 'deuteranopia', label: 'Deuteranopia (no green)' },
   { key: 'tritanopia', label: 'Tritanopia (no blue)' },
-  { key: 'achromatopsia', label: 'Achromatopsia (grayscale)' },
+  { key: 'achromatopsia', label: 'Achromatopsia (greyscale)' },
 ]
 
 /** The three dichromacies used for generation-time distinctness scoring. */
@@ -31,8 +27,7 @@ export const CVD_DICHROMACIES = [
 export const CVD_MATRICES: Record<Exclude<CVDType, 'none'>, string> = {
   protanopia:
     '0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0',
-  deuteranopia:
-    '0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0',
+  deuteranopia: '0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0',
   tritanopia:
     '0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0',
   achromatopsia:
@@ -64,7 +59,10 @@ export function simulateCVD(input: string, type: CVDType): string {
     // Alpha is fixed at 1, so the alpha column (index 3) drops out.
     const apply = (row: number) =>
       clamp01(
-        m[row * 5] * r + m[row * 5 + 1] * g + m[row * 5 + 2] * b + m[row * 5 + 4],
+        m[row * 5] * r +
+          m[row * 5 + 1] * g +
+          m[row * 5 + 2] * b +
+          m[row * 5 + 4],
       )
     const out = new Color('srgb', [apply(0), apply(1), apply(2)])
     out.alpha = 1

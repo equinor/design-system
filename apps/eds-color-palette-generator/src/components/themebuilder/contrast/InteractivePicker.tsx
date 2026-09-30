@@ -15,7 +15,7 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
     <section className="rounded-xl border border-neutral-subtle bg-default p-5 flex flex-col gap-4">
       <div>
         <h2 className="text-base font-bold text-strong m-0">
-          Data color picker
+          Data colour picker
         </h2>
         <p className="text-sm text-subtle m-0 mt-1">
           Test any fg/bg combination for chips, badges, graphs — all palettes

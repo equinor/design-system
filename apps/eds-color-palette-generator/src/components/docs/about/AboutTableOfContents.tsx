@@ -3,11 +3,11 @@ const SECTIONS = [
   { href: '#how-it-works', label: '2. How it works' },
   { href: '#gaussian-bell-curve', label: '3. The Gaussian bell curve' },
   { href: '#chroma-distribution', label: '4. Interactive chroma distribution' },
-  { href: '#oklch-color-space', label: '5. Why OKLCH color space?' },
+  { href: '#oklch-color-space', label: '5. Why OKLCH colour space?' },
   { href: '#configuration', label: '6. Configuration options' },
   {
     href: '#contrast-requirements',
-    label: '7. Color step pairings and contrast requirements',
+    label: '7. Colour step pairings and contrast requirements',
   },
   { href: '#best-practices', label: '8. Best practices' },
   { href: '#learn-more', label: '9. Learn more' },

@@ -44,7 +44,7 @@ export default function ExamplePage() {
         }}
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-4">
-          <h1 className="text-lg font-bold m-0">EDS Palette Examples</h1>
+          <h1 className="text-lg font-bold m-0">Examples</h1>
 
           <div className="ml-auto flex items-center gap-4">
             {/* Palette selector */}
@@ -75,7 +75,7 @@ export default function ExamplePage() {
                 type="button"
                 onClick={refreshCustomPalettes}
                 className="cursor-pointer"
-                title="Refresh custom palettes from Palette Editor"
+                title="Refresh custom palettes from the Palette editor"
                 style={{
                   padding: '6px 10px',
                   fontSize: '12px',
@@ -108,7 +108,7 @@ export default function ExamplePage() {
                 textDecoration: 'none',
               }}
             >
-              Palette
+              Palette editor
             </Link>
           </div>
         </div>

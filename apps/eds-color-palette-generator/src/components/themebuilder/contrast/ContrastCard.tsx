@@ -29,13 +29,12 @@ export function ContrastCard({
 
   const similarity = useMemo(() => {
     if (fgHex.toLowerCase() === bgHex.toLowerCase())
-      return { label: 'Same color', bg: '#fef2f2', color: '#991b1b' }
+      return { label: 'Same colour', bg: '#fef2f2', color: '#991b1b' }
     if (wcagNum < 1.2)
       return { label: 'Near identical', bg: '#fef2f2', color: '#991b1b' }
     if (wcagNum < 2)
       return { label: 'Very low', bg: '#fff7ed', color: '#9a3412' }
-    if (wcagNum < 3)
-      return { label: 'Low', bg: '#fffbeb', color: '#92400e' }
+    if (wcagNum < 3) return { label: 'Low', bg: '#fffbeb', color: '#92400e' }
     return null
   }, [fgHex, bgHex, wcagNum])
 

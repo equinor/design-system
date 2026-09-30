@@ -66,7 +66,10 @@ export default function PalettePage() {
   }, [])
 
   return (
-    <div className="min-h-screen" style={{ background: '#fafafa', color: '#111' }}>
+    <div
+      className="min-h-screen"
+      style={{ background: '#fafafa', color: '#111' }}
+    >
       {/* ---- Header ---- */}
       <header
         className="sticky top-0 z-10"
@@ -78,7 +81,7 @@ export default function PalettePage() {
         }}
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-4">
-          <h1 className="text-lg font-bold m-0">Palette Editor</h1>
+          <h1 className="text-lg font-bold m-0">Palette editor</h1>
 
           <div className="ml-auto flex items-center gap-4">
             {/* View mode toggle */}
@@ -126,7 +129,7 @@ export default function PalettePage() {
                 textDecoration: 'none',
               }}
             >
-              Example
+              Examples
             </Link>
           </div>
         </div>

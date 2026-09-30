@@ -60,7 +60,7 @@ export default function ContrastPage() {
         }}
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center gap-4">
-          <h1 className="text-lg font-bold m-0">EDS Palette Contrast</h1>
+          <h1 className="text-lg font-bold m-0">Contrast</h1>
 
           <div className="ml-auto flex items-center gap-4">
             {/* Palette selector — hidden in combined */}
@@ -131,7 +131,7 @@ export default function ContrastPage() {
                 textDecoration: 'none',
               }}
             >
-              Example
+              Examples
             </Link>
             <Link
               href="/palette"
@@ -141,7 +141,7 @@ export default function ContrastPage() {
                 textDecoration: 'none',
               }}
             >
-              Palette
+              Palette editor
             </Link>
           </div>
         </div>

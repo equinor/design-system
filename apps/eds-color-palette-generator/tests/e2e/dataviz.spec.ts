@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test'
 import 'dotenv/config'
 
-const BASE = process.env.PLAYWRIGHT_URL?.replace(/\/old$/, '') || 'http://localhost:3000'
+const BASE =
+  process.env.PLAYWRIGHT_URL?.replace(/\/old$/, '') || 'http://localhost:3000'
 
 test.beforeEach(async ({ page }) => {
   await page.goto(`${BASE}/dataviz`)
@@ -12,7 +13,7 @@ test.describe('Data visualisation palettes', () => {
     page,
   }) => {
     await expect(
-      page.getByRole('heading', { name: 'EDS Data Visualisation Palettes' }),
+      page.getByRole('heading', { name: 'Data visualisation', exact: true }),
     ).toBeVisible()
     await expect(page.getByTestId('dataviz-swatch')).toHaveCount(8)
     await expect(
@@ -37,13 +38,15 @@ test.describe('Data visualisation palettes', () => {
   test('applies a CVD simulation and shows the patterns toggle', async ({
     page,
   }) => {
-    await page.getByLabel('Vision').selectOption({ label: 'Deuteranopia (no green)' })
+    await page
+      .getByLabel('Vision')
+      .selectOption({ label: 'Deuteranopia (no green)' })
     const patterns = page.getByRole('checkbox', { name: 'Show patterns' })
     await patterns.check()
     await expect(patterns).toBeChecked()
     // the pairwise distinguishability matrix is shown for categorical
     await expect(
-      page.getByRole('heading', { name: 'Color-to-color contrast' }),
+      page.getByRole('heading', { name: 'Colour-to-colour contrast' }),
     ).toBeVisible()
   })
 

@@ -44,7 +44,7 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
       <div>
         <h2 className="text-base font-bold text-strong m-0">Surface preview</h2>
         <p className="text-sm text-subtle m-0 mt-1">
-          Visualize nested surface layers per palette — adjust roles to test
+          Visualise nested surface layers per palette — adjust roles to test
           combinations
         </p>
       </div>
