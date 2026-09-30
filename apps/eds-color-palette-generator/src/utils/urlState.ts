@@ -1,9 +1,42 @@
 import type { ColorAnchor } from '@/types'
 
 export type PaletteInput = {
+  /** Client-side identity for React keys; not written to the URL */
+  id?: string
   name: string
   baseColor: string
   anchors?: ColorAnchor[]
+}
+
+let nextPaletteId = 0
+
+/** A fresh id for a palette row. */
+export function newPaletteId(): string {
+  nextPaletteId += 1
+  return `palette-${nextPaletteId}`
+}
+
+/** Give every palette an id, keeping the ones it already has. */
+export function withPaletteIds(palettes: PaletteInput[]): PaletteInput[] {
+  return palettes.map((p) => (p.id ? p : { ...p, id: newPaletteId() }))
+}
+
+// `,` separates palettes, `:` the name, `@` anchors and `=` an anchor's step,
+// so those (and `%`) are percent-encoded inside names and values.
+function escapeSegment(value: string): string {
+  return value.replace(
+    /[%,:@=]/g,
+    (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`,
+  )
+}
+
+function unescapeSegment(value: string): string {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    // Links from before escaping may contain a bare `%`.
+    return value
+  }
 }
 
 export const THEME_BUILDER_TABS = ['system', 'examples', 'contrast'] as const
@@ -48,22 +81,23 @@ type ThemeBuilderState = {
  */
 
 function serializePalette(p: PaletteInput): string {
+  const name = escapeSegment(p.name)
   if (p.anchors && p.anchors.length > 0) {
     const anchorParts = p.anchors
-      .map((a) => `${a.step}=${a.value.replace(/ /g, '+')}`)
+      .map((a) => `${a.step}=${escapeSegment(a.value).replace(/ /g, '+')}`)
       .join('@')
-    return `${p.name}:a@${anchorParts}`
+    return `${name}:a@${anchorParts}`
   }
-  return `${p.name}:${p.baseColor.replace('#', '')}`
+  return `${name}:${escapeSegment(p.baseColor.replace('#', ''))}`
 }
 
 function deserializePalette(entry: string): PaletteInput {
   const firstColon = entry.indexOf(':')
   if (firstColon === -1) {
-    return { name: entry, baseColor: '808080' }
+    return { name: unescapeSegment(entry), baseColor: '808080' }
   }
 
-  const name = decodeURIComponent(entry.slice(0, firstColon))
+  const name = unescapeSegment(entry.slice(0, firstColon))
   const rest = entry.slice(firstColon + 1)
 
   // Check for anchor format: starts with "a@"
@@ -75,7 +109,7 @@ function deserializePalette(entry: string): PaletteInput {
         const eqIdx = part.indexOf('=')
         if (eqIdx === -1) return null
         const step = parseInt(part.slice(0, eqIdx), 10)
-        const value = part.slice(eqIdx + 1).replace(/\+/g, ' ')
+        const value = unescapeSegment(part.slice(eqIdx + 1).replace(/\+/g, ' '))
         if (isNaN(step)) return null
         return { step, value }
       })
@@ -88,7 +122,7 @@ function deserializePalette(entry: string): PaletteInput {
   }
 
   // Simple hex format
-  return { name, baseColor: rest }
+  return { name, baseColor: unescapeSegment(rest) }
 }
 
 export function serializeState(state: Partial<ThemeBuilderState>): string {
@@ -145,6 +179,12 @@ export function deserializeState(
 }
 
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
+
+/** Drop a pending URL update, e.g. when the page unmounts. */
+export function cancelURLUpdate(): void {
+  if (debounceTimer) clearTimeout(debounceTimer)
+  debounceTimer = null
+}
 
 export function updateURL(state: Partial<ThemeBuilderState>): void {
   if (typeof window === 'undefined') return

@@ -5,9 +5,15 @@ import { useRef } from 'react'
 type SimpleColorPickerProps = {
   value: string
   onChange: (hex: string) => void
+  /** Used in the accessible names, e.g. the palette name */
+  label?: string
 }
 
-export function SimpleColorPicker({ value, onChange }: SimpleColorPickerProps) {
+export function SimpleColorPicker({
+  value,
+  onChange,
+  label = 'Colour',
+}: SimpleColorPickerProps) {
   const nativeRef = useRef<HTMLInputElement>(null)
 
   const displayValue = value.startsWith('#') ? value : `#${value}`
@@ -22,6 +28,7 @@ export function SimpleColorPicker({ value, onChange }: SimpleColorPickerProps) {
           onChange(v.startsWith('#') ? v.slice(1) : v)
         }}
         maxLength={7}
+        aria-label={`${label} hex value`}
         className="w-[80px] px-2 py-1 text-sm font-mono rounded-md border border-neutral-subtle bg-default"
       />
       <button
@@ -33,7 +40,8 @@ export function SimpleColorPicker({ value, onChange }: SimpleColorPickerProps) {
           height: '28px',
           backgroundColor: displayValue,
         }}
-        title="Pick color"
+        title="Pick colour"
+        aria-label={`Pick ${label} colour`}
       >
         <input
           ref={nativeRef}

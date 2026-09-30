@@ -24,3 +24,42 @@ describe('urlState tabs', () => {
     expect(parse('tab=nope').activeTab).toBeUndefined()
   })
 })
+
+describe('urlState palettes', () => {
+  it('round-trips names that contain the delimiters', () => {
+    const palettes = [
+      { name: 'Blue, Green: 50% @ night = cool', baseColor: '0070a9' },
+      { name: 'Moss Green', baseColor: '21767e' },
+    ]
+    expect(parse(serializeState({ palettes })).palettes).toEqual(palettes)
+  })
+
+  it('round-trips anchor values written with commas', () => {
+    const palettes = [
+      {
+        name: 'Teal',
+        baseColor: '',
+        anchors: [
+          { step: 6, value: 'oklch(0.59, 0.07, 184.6)' },
+          { step: 9, value: 'oklch(0.4973 0.084851 204.553)' },
+        ],
+      },
+    ]
+    expect(parse(serializeState({ palettes })).palettes).toEqual(palettes)
+  })
+
+  it('does not write client ids to the URL', () => {
+    expect(
+      serializeState({
+        palettes: [{ id: 'x', name: 'Red', baseColor: 'f00' }],
+      }),
+    ).not.toContain('x')
+  })
+
+  it('reads links from before escaping', () => {
+    expect(parse('p=Moss+Green:206f77,Gray:696969').palettes).toEqual([
+      { name: 'Moss Green', baseColor: '206f77' },
+      { name: 'Gray', baseColor: '696969' },
+    ])
+  })
+})

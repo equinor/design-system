@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { SemanticPairings } from './contrast/SemanticPairings'
 import { SurfacePreview } from './contrast/SurfacePreview'
 import { InteractivePicker } from './contrast/InteractivePicker'
@@ -19,10 +19,9 @@ type ContrastTestPanelProps = {
 type SubTab = 'eds' | 'custom'
 
 export function ContrastTestPanel({ palettes }: ContrastTestPanelProps) {
-  const stablePalettes = useMemo(() => palettes, [palettes])
   const [subTab, setSubTab] = useState<SubTab>('eds')
 
-  if (stablePalettes.length === 0) return null
+  if (palettes.length === 0) return null
 
   return (
     <div className="flex flex-col gap-6">
@@ -56,14 +55,14 @@ export function ContrastTestPanel({ palettes }: ContrastTestPanelProps) {
 
       {subTab === 'eds' ? (
         <div className="flex flex-col gap-6">
-          <SemanticPairings palettes={stablePalettes} />
-          <SurfacePreview palettes={stablePalettes} />
+          <SemanticPairings palettes={palettes} />
+          <SurfacePreview palettes={palettes} />
         </div>
       ) : (
         <div className="flex flex-col gap-6">
-          <DataColorChart palettes={stablePalettes} />
-          <SamePalettePairings palettes={stablePalettes} />
-          <InteractivePicker palettes={stablePalettes} />
+          <DataColorChart palettes={palettes} />
+          <SamePalettePairings palettes={palettes} />
+          <InteractivePicker palettes={palettes} />
         </div>
       )}
     </div>

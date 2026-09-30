@@ -5,7 +5,7 @@ import { Plus, X, Pipette, ChevronDown, ChevronUp } from 'lucide-react'
 import { SimpleColorPicker } from './SimpleColorPicker'
 import { isValidColorFormat, parseColorToHex } from '@/utils/color'
 import type { ColorAnchor } from '@/types'
-import type { PaletteInput } from '@/utils/urlState'
+import { newPaletteId, type PaletteInput } from '@/utils/urlState'
 
 type PaletteInputPanelProps = {
   palettes: PaletteInput[]
@@ -16,7 +16,9 @@ export function PaletteInputPanel({
   palettes,
   onChange,
 }: PaletteInputPanelProps) {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  // Track the expanded row by id, so removing a row above it does not move
+  // the expansion to another palette.
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   const updateName = (index: number, name: string) => {
     const next = [...palettes]
@@ -41,9 +43,15 @@ export function PaletteInputPanel({
     if (!p.anchors) return
     const anchors = [...p.anchors]
     if (field === 'value') {
-      anchors[anchorIndex] = { ...anchors[anchorIndex], value: newValue as string }
+      anchors[anchorIndex] = {
+        ...anchors[anchorIndex],
+        value: newValue as string,
+      }
     } else {
-      anchors[anchorIndex] = { ...anchors[anchorIndex], step: newValue as number }
+      anchors[anchorIndex] = {
+        ...anchors[anchorIndex],
+        step: newValue as number,
+      }
     }
     next[paletteIndex] = { ...p, anchors }
     onChange(next)
@@ -71,7 +79,10 @@ export function PaletteInputPanel({
         break
       }
     }
-    const newAnchor: ColorAnchor = { value: 'oklch(0.5 0.05 180)', step: freeStep }
+    const newAnchor: ColorAnchor = {
+      value: 'oklch(0.5 0.05 180)',
+      step: freeStep,
+    }
     next[paletteIndex] = { ...p, anchors: [...existingAnchors, newAnchor] }
     onChange(next)
   }
@@ -108,7 +119,11 @@ export function PaletteInputPanel({
   const addPalette = () => {
     onChange([
       ...palettes,
-      { name: `Color ${palettes.length + 1}`, baseColor: '808080' },
+      {
+        id: newPaletteId(),
+        name: `Colour ${palettes.length + 1}`,
+        baseColor: '808080',
+      },
     ])
   }
 
@@ -119,132 +134,145 @@ export function PaletteInputPanel({
       <h2 className="font-semibold text-sm mb-4">Palettes</h2>
 
       <div className="flex flex-col gap-3">
-        {palettes.map((p, i) => (
-          <div key={i} className="flex flex-col gap-2">
-            {/* Main row: name + color preview + expand/collapse + remove */}
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                value={p.name}
-                onChange={(e) => updateName(i, e.target.value)}
-                className="w-[140px] px-2 py-1 text-sm rounded-md border border-neutral-subtle bg-default"
-                placeholder="Palette name"
-              />
-
-              {hasAnchors(p) ? (
-                // Multi-anchor: show colored dots for each anchor
-                <div className="flex items-center gap-1">
-                  {p.anchors!.map((a, ai) => {
-                    const hex = parseColorToHex(a.value)
-                    return (
-                      <span
-                        key={ai}
-                        title={`Step ${a.step}: ${a.value}`}
-                        style={{
-                          display: 'inline-block',
-                          width: '20px',
-                          height: '20px',
-                          borderRadius: '4px',
-                          backgroundColor: hex ?? '#808080',
-                          border: '1px solid rgba(128,128,128,0.3)',
-                        }}
-                      />
-                    )
-                  })}
-                  <span className="text-xs text-subtle ml-1">
-                    {p.anchors!.length} anchor{p.anchors!.length > 1 ? 's' : ''}
-                  </span>
-                </div>
-              ) : (
-                <SimpleColorPicker
-                  value={p.baseColor}
-                  onChange={(hex) => updateBaseColor(i, hex)}
+        {palettes.map((p, i) => {
+          const rowId = p.id ?? String(i)
+          const expanded = expandedId === rowId
+          return (
+            <div key={rowId} className="flex flex-col gap-2">
+              {/* Main row: name + color preview + expand/collapse + remove */}
+              <div className="flex items-center gap-3">
+                <input
+                  type="text"
+                  value={p.name}
+                  onChange={(e) => updateName(i, e.target.value)}
+                  className="w-[140px] px-2 py-1 text-sm rounded-md border border-neutral-subtle bg-default"
+                  placeholder="Palette name"
+                  aria-label={`Name of palette ${i + 1}`}
                 />
-              )}
 
-              <button
-                type="button"
-                onClick={() =>
-                  setExpandedIndex(expandedIndex === i ? null : i)
-                }
-                className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
-                title={expandedIndex === i ? 'Collapse' : 'Edit anchors'}
-              >
-                {expandedIndex === i ? (
-                  <ChevronUp className="w-4 h-4" />
-                ) : (
-                  <ChevronDown className="w-4 h-4" />
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => removePalette(i)}
-                disabled={palettes.length <= 1}
-                className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle disabled:opacity-30"
-                title="Remove palette"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Expanded: anchor editing */}
-            {expandedIndex === i && (
-              <div
-                className="ml-4 pl-4 flex flex-col gap-2"
-                style={{ borderLeft: '2px solid var(--border-color-neutral-subtle, #e5e7eb)' }}
-              >
                 {hasAnchors(p) ? (
-                  <>
-                    {p.anchors!.map((anchor, ai) => (
-                      <AnchorRow
-                        key={ai}
-                        anchor={anchor}
-                        allAnchors={p.anchors!}
-                        index={ai}
-                        onUpdate={(field, val) =>
-                          updateAnchor(i, ai, field, val)
-                        }
-                        onRemove={() => removeAnchor(i, ai)}
-                        canRemove={p.anchors!.length > 1}
-                      />
-                    ))}
+                  // Multi-anchor: show colored dots for each anchor
+                  <div className="flex items-center gap-1">
+                    {p.anchors!.map((a, ai) => {
+                      const hex = parseColorToHex(a.value)
+                      return (
+                        <span
+                          key={ai}
+                          title={`Step ${a.step}: ${a.value}`}
+                          style={{
+                            display: 'inline-block',
+                            width: '20px',
+                            height: '20px',
+                            borderRadius: '4px',
+                            backgroundColor: hex ?? '#808080',
+                            border: '1px solid rgba(128,128,128,0.3)',
+                          }}
+                        />
+                      )
+                    })}
+                    <span className="text-xs text-subtle ml-1">
+                      {p.anchors!.length} anchor
+                      {p.anchors!.length > 1 ? 's' : ''}
+                    </span>
+                  </div>
+                ) : (
+                  <SimpleColorPicker
+                    value={p.baseColor}
+                    onChange={(hex) => updateBaseColor(i, hex)}
+                    label={p.name || `Palette ${i + 1}`}
+                  />
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => setExpandedId(expanded ? null : rowId)}
+                  className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
+                  title={expanded ? 'Collapse' : 'Edit anchors'}
+                  aria-label={`${expanded ? 'Collapse' : 'Edit anchors for'} ${p.name || `palette ${i + 1}`}`}
+                  aria-expanded={expanded}
+                >
+                  {expanded ? (
+                    <ChevronUp className="w-4 h-4" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4" />
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => removePalette(i)}
+                  disabled={palettes.length <= 1}
+                  className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle disabled:opacity-30"
+                  title="Remove palette"
+                  aria-label={`Remove ${p.name || `palette ${i + 1}`}`}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Expanded: anchor editing */}
+              {expanded && (
+                <div
+                  className="ml-4 pl-4 flex flex-col gap-2"
+                  style={{
+                    borderLeft:
+                      '2px solid var(--border-color-neutral-subtle, #e5e7eb)',
+                  }}
+                >
+                  {hasAnchors(p) ? (
+                    <>
+                      {p.anchors!.map((anchor, ai) => (
+                        <AnchorRow
+                          // Steps are unique within a palette, so the step
+                          // keeps each row's local input state with its anchor.
+                          key={anchor.step}
+                          anchor={anchor}
+                          allAnchors={p.anchors!}
+                          index={ai}
+                          onUpdate={(field, val) =>
+                            updateAnchor(i, ai, field, val)
+                          }
+                          onRemove={() => removeAnchor(i, ai)}
+                          canRemove={p.anchors!.length > 1}
+                        />
+                      ))}
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => addAnchor(i)}
+                          className="flex items-center gap-1 cursor-pointer px-2 py-1 text-xs rounded-md border border-dashed border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
+                        >
+                          <Plus className="w-3 h-3" />
+                          Add anchor
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => convertToSimple(i)}
+                          className="cursor-pointer px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
+                        >
+                          Switch to simple
+                        </button>
+                      </div>
+                    </>
+                  ) : (
                     <div className="flex items-center gap-2">
+                      <span className="text-xs text-subtle">
+                        Single colour mode
+                      </span>
                       <button
                         type="button"
-                        onClick={() => addAnchor(i)}
-                        className="flex items-center gap-1 cursor-pointer px-2 py-1 text-xs rounded-md border border-dashed border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
-                      >
-                        <Plus className="w-3 h-3" />
-                        Add anchor
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => convertToSimple(i)}
+                        onClick={() => convertToAnchors(i)}
                         className="cursor-pointer px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
                       >
-                        Switch to simple
+                        Switch to anchors
                       </button>
                     </div>
-                  </>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-subtle">
-                      Single color mode
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => convertToAnchors(i)}
-                      className="cursor-pointer px-2 py-1 text-xs rounded-md border border-neutral-subtle bg-transparent text-subtle hover:text-strong transition-colors"
-                    >
-                      Switch to anchors
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+                  )}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
 
       <button
@@ -342,7 +370,7 @@ function AnchorRow({
             : 'border-2 border-danger-fill-emphasis-default',
           'bg-default',
         ].join(' ')}
-        aria-label={`Color value for anchor ${index + 1}`}
+        aria-label={`Colour value for anchor ${index + 1}`}
         aria-invalid={!isValid}
       />
 
@@ -362,7 +390,8 @@ function AnchorRow({
         type="button"
         onClick={() => colorInputRef.current?.click()}
         className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
-        title="Pick color"
+        title="Pick colour"
+        aria-label={`Pick colour for anchor ${index + 1}`}
       >
         <Pipette className="w-3.5 h-3.5" />
       </button>
@@ -373,6 +402,7 @@ function AnchorRow({
           onClick={onRemove}
           className="cursor-pointer p-1 rounded-md border-none bg-transparent text-subtle hover:text-strong"
           title="Remove anchor"
+          aria-label={`Remove anchor ${index + 1}`}
         >
           <X className="w-3.5 h-3.5" />
         </button>

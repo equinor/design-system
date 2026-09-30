@@ -10,7 +10,12 @@ import {
 } from '@/config/config'
 import { paletteConfig } from '@/config/palette-config'
 import { resolveToken, toneRamps } from '@/utils/semanticTokens'
-import { deserializeState, updateURL } from '@/utils/urlState'
+import {
+  cancelURLUpdate,
+  deserializeState,
+  updateURL,
+  withPaletteIds,
+} from '@/utils/urlState'
 import type { PaletteInput, ThemeBuilderTab } from '@/utils/urlState'
 import { downloadConfiguration } from '@/utils/configurationUtils'
 import type { ColorDefinition } from '@/types'
@@ -50,8 +55,8 @@ function ThemeBuilderContent() {
     return deserializeState(searchParams)
   }, [searchParams])
 
-  const [palettes, setPalettes] = useState<PaletteInput[]>(
-    initialState.palettes ?? DEFAULT_PALETTES,
+  const [palettes, setPalettes] = useState<PaletteInput[]>(() =>
+    withPaletteIds(initialState.palettes ?? DEFAULT_PALETTES),
   )
   const [activeTab, setActiveTab] = useState<ThemeBuilderTab>(
     initialState.activeTab ?? 'system',
@@ -65,6 +70,8 @@ function ThemeBuilderContent() {
       activeTab,
       mode: colorScheme,
     })
+    // Drop a pending update if the page unmounts before the debounce fires.
+    return cancelURLUpdate
   }, [palettes, activeTab, colorScheme])
 
   // Clamp during render if the palette list shrinks (avoids setState-in-effect)
