@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 23
+Records: 24
 
 | ADR | Title | Status | Date | Note |
 | --- | ----- | ------ | ---- | ---- |
@@ -41,6 +41,7 @@ Records: 23
 | [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0022](./0022-mobile-migration-priority-and-release-strategy.md) | Migrate mobile components by loose dependency priority, releasing each individually until one stable cutover | Accepted | 2026-09-10 | recorded retrospectively 2026-09-23 |
 | [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Accepted | 2026-04-09 | recorded retrospectively 2026-09-24 |
+| [0024](./0024-mobile-touch-targets-are-a-fixed-constant-not-a-token.md) | Touch targets are a fixed platform constant in mobile components, not a density-scaled token | Accepted | 2026-09-16 | recorded retrospectively 2026-09-24 |
 
 ## Statuses outside the template
 
