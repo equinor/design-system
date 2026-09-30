@@ -1,12 +1,18 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { generateColorScale } from '../utils/color'
-import { PALETTE_STEPS } from '../config/config'
-import { getLightnessValues } from '../config/helpers'
+import { LEGACY_2X_LIGHTNESS } from '../config/legacy2x'
 import { ColorDefinition, ColorFormat, ColorAnchor } from '../types'
 
 interface PaletteConfigFile {
   colors: ColorDefinition[]
+  /**
+   * 15 OKLCH lightness values per scheme. Defaults to the frozen 2.x scale,
+   * which packages/eds-tokens generates with this CLI. Configs downloaded
+   * from the web app include the Tokens Studio values.
+   */
+  lightModeValues?: number[]
+  darkModeValues?: number[]
   meanLight?: number
   stdDevLight?: number
   meanDark?: number
@@ -105,6 +111,29 @@ function getColorInput(colorDef: ColorDefinition): ColorAnchor[] | string {
   return 'anchors' in colorDef ? colorDef.anchors : colorDef.value
 }
 
+/**
+ * Lightness values from the config file, or the fallback when the file has
+ * none. Exits on a malformed array rather than generating a wrong scale.
+ */
+function readLightness(
+  values: unknown,
+  fallback: readonly number[],
+  key: string,
+): number[] {
+  if (values === undefined) return [...fallback]
+  if (
+    !Array.isArray(values) ||
+    values.length !== fallback.length ||
+    values.some((v) => typeof v !== 'number' || v < 0 || v > 1)
+  ) {
+    console.error(
+      `"${key}" must be an array of ${fallback.length} numbers between 0 and 1`,
+    )
+    process.exit(1)
+  }
+  return values
+}
+
 function generateColors(configPath: string, outputDir: string) {
   // Read palette config
   let config: PaletteConfigFile
@@ -126,9 +155,16 @@ function generateColors(configPath: string, outputDir: string) {
   const outputFileLight = config.outputFileLight ?? 'Color Light.Mode 1.json'
   const outputFileDark = config.outputFileDark ?? 'Color Dark.Mode 1.json'
 
-  // Get lightness values from PALETTE_STEPS
-  const lightModeValues = getLightnessValues('light')(PALETTE_STEPS)
-  const darkModeValues = getLightnessValues('dark')(PALETTE_STEPS)
+  const lightModeValues = readLightness(
+    config.lightModeValues,
+    LEGACY_2X_LIGHTNESS.light,
+    'lightModeValues',
+  )
+  const darkModeValues = readLightness(
+    config.darkModeValues,
+    LEGACY_2X_LIGHTNESS.dark,
+    'darkModeValues',
+  )
 
   // Validate all color definitions
   config.colors.forEach((colorDef) => {

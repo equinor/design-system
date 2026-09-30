@@ -208,25 +208,21 @@ export function generateColorScaleWithInterpolation(
         interpolatedColor = range(t)
       }
 
-      let finalColor: Color
+      // Anchors supply hue and chroma only. Lightness always comes from the
+      // scale, also at an anchor's own step, as in Tokens Studio's
+      // set_chroma(set_lightness(anchor, L), gaussian × C) (ADR 0016 D2).
+      const oklchColor = interpolatedColor.to('oklch')
+      const interpolatedHue =
+        oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
+      const baseChroma = oklchColor.c ?? 0
 
-      if (exactAnchor) {
-        // Exact anchor step — preserve the anchor color as-is
-        finalColor = interpolatedColor.to('oklch')
-      } else {
-        // Interpolated step — apply Gaussian chroma and target lightness
-        const oklchColor = interpolatedColor.to('oklch')
-        const interpolatedHue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
-        const baseChroma = oklchColor.c ?? 0
-
-        finalColor = createColorWithGaussianChroma(
-          targetLightness,
-          baseChroma,
-          interpolatedHue,
-          mean,
-          stdDev,
-        )
-      }
+      const finalColor = createColorWithGaussianChroma(
+        targetLightness,
+        baseChroma,
+        interpolatedHue,
+        mean,
+        stdDev,
+      )
 
       // Format and add to array
       colors.push(formatColorAsString(finalColor, format))
@@ -275,7 +271,8 @@ export function generateColorScale(
         // Convert to OKLCH to get the chroma and hue values
         const oklchColor = color.to('oklch')
         const baseChroma = oklchColor.c ?? 0
-        const hue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
+        const hue =
+          oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
 
         // Create the final color with Gaussian-adjusted chroma
         const finalColor = createColorWithGaussianChroma(
