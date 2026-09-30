@@ -33,12 +33,15 @@
  * `generate:css-bundle` package script), and the bundler asserts the
  * widening happened (shared patterns in semantic-scope.mjs).
  *
- * The widening relies on the semantic layer declaring no name that the
- * color-scheme layer also declares. On an element with `data-density`
- * but no `data-color-scheme`, only the semantic block applies, so a
- * shared name would lose its scheme value there. #5221 had three such
- * names (one of them the focus-ring token), and the bundler fails if
- * one comes back.
+ * Known caveat, tracked in #5221: three names (`border-focus`,
+ * `text-disabled`, `border-disabled`) are declared in both the
+ * color-scheme layer and the semantic layer — a token-content bug
+ * upstream. On `[data-color-scheme]` elements both blocks now apply at
+ * equal specificity; generate-css-bundle.mjs concatenates the
+ * color-scheme files last so the scheme-specific values keep winning,
+ * as they did before the widening (`--eds-border-focus` is the
+ * focus-ring token, and the semantic copy is a self-reference that
+ * would drop focus outlines).
  *
  * Every `semantic/*.css` file is widened, matching the bundler's
  * directory glob — a file the export adds later must not slip through

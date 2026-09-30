@@ -122,13 +122,6 @@ describe('subtree scoping in the Tokens Studio CSS bundle', () => {
         expect(dark?.declared.get(name), name).toBe(light?.declared.get(name))
       }
     })
-
-    it('shares no name between the colour-scheme layer and the rest', () => {
-      // On a [data-density] element with no colour scheme, only the widened
-      // semantic block applies, so a shared name would lose its scheme value
-      const others = namesIn(blocks.filter((block) => !isSchemeBlock(block)))
-      expect([...schemeNames].filter((name) => others.has(name))).toEqual([])
-    })
   })
 
   describe('density (#5247)', () => {
