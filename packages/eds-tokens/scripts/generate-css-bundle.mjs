@@ -10,15 +10,16 @@
  * artifact deterministic.
  *
  * One caveat to "concatenation is conflict-free": the semantic layer is
- * widened to `:root, [data-color-scheme]` before bundling (see
- * widen-semantic-scope.mjs, chained in the `generate:css-bundle`
- * script), so on `[data-color-scheme]` elements it overlaps the
- * color-scheme layer at equal specificity for the few names declared in
- * both — there, source order decides. The color-scheme files are
- * therefore concatenated last (see the sort below), so the
- * scheme-specific values win and the resolved values match the
- * pre-widening state. The duplicate names themselves are a
- * token-content bug tracked in #5221.
+ * widened to `:root, [data-color-scheme], [data-density]` before
+ * bundling (see widen-semantic-scope.mjs, chained in the
+ * `generate:css-bundle` script), so on `[data-color-scheme]` elements it
+ * overlaps the color-scheme layer at equal specificity. That is only
+ * safe while the two layers declare no name in common, so the bundler
+ * fails if they do. #5221 had three such names; source order made the
+ * scheme values win on `[data-color-scheme]` elements, but on a
+ * `[data-density]` element without a colour scheme nothing would. The
+ * color-scheme files are still concatenated last (see the sort below)
+ * as a second line of defence.
  *
  * The bundle is deliberately NOT minified: the committed file stays a
  * pure function of the source files (no toolchain-version churn in
@@ -41,7 +42,7 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { WIDE_RE } from './semantic-scope.mjs'
+import { DENSITY_BASE_WIDE_RE, WIDE_RE } from './semantic-scope.mjs'
 
 const args = parseArgs(process.argv.slice(2))
 const CSS_DIR = args.css ?? 'src/tokens/css'
@@ -56,14 +57,14 @@ const HEADER =
 // Colour-scheme scope rules are concatenated after everything else:
 // they must win same-name collisions with the widened semantic block on
 // the same [data-color-scheme] element (equal specificity, so source
-// order is the only cascade lever), preserving the resolved values from
-// before the widening. Three such duplicate names exist today —
-// tracked as token-content bugs in #5221, and one of them
-// (--eds-border-focus, a self-reference in the semantic layer) is the
-// focus-ring token, so letting the semantic block win would drop focus
-// outlines inside scoped subtrees.
-const layerRank = (file) =>
-  relative(CSS_DIR, file).split(sep)[0] === 'color-scheme' ? 1 : 0
+// order is the only cascade lever). The assertion below rules such
+// collisions out, so this ordering is a fallback. It mattered for
+// #5221, where one of the duplicates (--eds-border-focus, a
+// self-reference in the semantic layer) was the focus-ring token and
+// letting the semantic block win dropped focus outlines inside scoped
+// subtrees.
+const layerOf = (file) => relative(CSS_DIR, file).split(sep)[0]
+const layerRank = (file) => (layerOf(file) === 'color-scheme' ? 1 : 0)
 const files = (await readdir(CSS_DIR, { recursive: true }))
   .filter((file) => file.endsWith('.css'))
   .map((file) => join(CSS_DIR, file))
@@ -77,17 +78,50 @@ const contents = await Promise.all(
 )
 
 // The widen-semantic-scope.mjs step must have run first (it is chained
-// before this script in the `generate:css-bundle` package script) —
-// bundling an unwidened semantic layer would silently regress subtree
-// colour-scheme switching (#5226). Checked for every semantic/*.css
-// file, mirroring the widen script's own glob.
+// before this script in the `generate:css-bundle` package script).
+// Bundling an unwidened file would silently regress subtree
+// colour-scheme switching (#5226) or density switching (#5247). Checked
+// for every semantic/*.css file, mirroring the widen script's own glob,
+// and for the density base.
+const RUN_WIDEN =
+  'Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)'
+const isDensityBase = (file) =>
+  relative(CSS_DIR, file) === join('density', 'comfortable.css')
+if (!contents.some(([file]) => isDensityBase(file)))
+  fail(
+    `no density/comfortable.css under ${CSS_DIR}, so the export layout changed. Review #5247 before proceeding`,
+  )
 for (const [file, css] of contents) {
-  if (relative(CSS_DIR, file).split(sep)[0] !== 'semantic') continue
-  if (!WIDE_RE.test(css))
+  if (layerOf(file) === 'semantic' && !WIDE_RE.test(css))
     fail(
-      `${file} is not widened to ":root, [data-color-scheme]" — run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+      `${file} is not widened to ":root, [data-color-scheme], [data-density]". ${RUN_WIDEN}`,
+    )
+  if (isDensityBase(file) && !DENSITY_BASE_WIDE_RE.test(css))
+    fail(
+      `${file} is not widened to ':root, [data-density="comfortable"]'. ${RUN_WIDEN}`,
     )
 }
+
+// The widened semantic block also applies on [data-density] elements
+// that carry no colour scheme, where the color-scheme rules do not
+// match. A name declared in both layers would lose its scheme value
+// there, so none may be (#5221).
+const declaredIn = (layer) =>
+  new Set(
+    contents
+      .filter(([file]) => layerOf(file) === layer)
+      .flatMap(([, css]) =>
+        [...css.matchAll(/^\s*(--[\w-]+)\s*:/gm)].map((match) => match[1]),
+      ),
+  )
+const schemeNames = declaredIn('color-scheme')
+const shared = [...declaredIn('semantic')].filter((name) =>
+  schemeNames.has(name),
+)
+if (shared.length > 0)
+  fail(
+    `declared in both the semantic and the color-scheme layer: ${shared.join(', ')}. See #5221`,
+  )
 
 const concatenated = contents.map(([, css]) => css).join('\n')
 
