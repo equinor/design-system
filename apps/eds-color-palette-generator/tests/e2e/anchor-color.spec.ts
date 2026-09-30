@@ -6,13 +6,18 @@ test.beforeEach(async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/old')
   await page.evaluate(() => localStorage.clear())
   await page.reload()
+  // The defaults are the Tokens Studio anchors, which are single colours, so
+  // put the first colour (Moss Green) into anchor mode through the UI:
+  // "Add second colour" creates anchors at steps 1 and 15.
+  await page.getByTestId('color-scale-0-add-second-color').click()
+  await expect(page.getByTestId('color-scale-0-anchor-1-value')).toBeVisible()
 })
 
 test.describe('Anchor Color Mode', () => {
-  test('should display first color (Moss Green) in anchor mode by default', async ({
+  test('should show two anchors after adding a second colour', async ({
     page,
   }) => {
-    // First color (Moss Green) starts in anchor mode with 2 anchors
+    // Moss Green is in anchor mode with 2 anchors (see beforeEach)
     const firstAnchorValue = page.getByTestId('color-scale-0-anchor-0-value')
     const secondAnchorValue = page.getByTestId('color-scale-0-anchor-1-value')
 
@@ -208,7 +213,8 @@ test.describe('Anchor Color Mode', () => {
   }) => {
     const firstAnchorValue = page.getByTestId('color-scale-0-anchor-0-value')
 
-    // Get initial step-6 color (the anchor is on step 6 by default)
+    // Step 6 is interpolated between the anchors at steps 1 and 15, so it
+    // changes when the first anchor changes
     const step6 = page.getByTestId('color-scale-0-step-5') // index 5 = step 6
 
     // Get initial aria-label to compare later

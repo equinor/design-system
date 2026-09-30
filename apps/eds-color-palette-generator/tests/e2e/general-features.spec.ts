@@ -8,6 +8,9 @@ test.beforeEach(async ({ page }) => {
   await page.goto(process.env.PLAYWRIGHT_URL || 'http://localhost:3000/old')
   await page.evaluate(() => localStorage.clear())
   await page.reload()
+  // The colour rows render after mount; tests that count them must not run
+  // before they exist.
+  await expect(page.getByTestId('color-scale-0-input-name')).toBeVisible()
 })
 
 test.describe('Reset Feature', () => {
@@ -199,7 +202,7 @@ test.describe('Delete Color Feature', () => {
     const newColorAtIndex1 = page.getByTestId('color-scale-1-input-name')
     const nameValue = await newColorAtIndex1.inputValue()
 
-    // The name should not be 'Gray' anymore (it should be 'North sea' which was at index 2)
+    // The name should not be 'Gray' anymore (the next palette moved up)
     expect(nameValue).not.toBe('Gray')
   })
 
