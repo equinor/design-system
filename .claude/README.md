@@ -10,9 +10,10 @@ Claude Code reads this directory automatically. The shared EDS conventions live 
 ├── CLAUDE.md           # Claude-specific entry point (points to AGENTS.md)
 ├── settings.json       # Shared settings (permission denies, hooks)
 ├── settings.local.json # Personal settings (gitignored)
-├── commands/           # Slash commands (/new-component, /create-component-doc)
+├── commands/           # Slash commands (see § Slash Commands)
 ├── hooks/              # Hook scripts (read_hook.js, format_hook.js)
-└── rules/              # Path-scoped rules
+├── rules/              # Path-scoped rules
+└── skills/             # Skills (write-pr-description, write-issue)
 ```
 
 ## Instruction Pipeline
@@ -25,6 +26,8 @@ AGENTS.md                → canonical EDS conventions (project root)
 .claude/CLAUDE.md        → Claude-specific config + pointer to AGENTS.md
         ↓
 .claude/rules/*.md       → path-scoped rules (loaded automatically)
+        ↓
+.claude/skills/*/SKILL.md → skills (loaded when the task matches)
 ```
 
 ## Path-Scoped Rules
@@ -47,6 +50,18 @@ Commands are user-invokable prompts triggered with `/command-name`.
 |---------|-------|-------------|
 | `/new-component` | `/new-component Button` | Scaffold a new EDS 2.0 component with all files |
 | `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation |
+| `/accessibility-audit` | `/accessibility-audit <url>` | Audit a page or Storybook story against WCAG 2.1 AA |
+| `/audit-harnesses` | `/audit-harnesses` | Audit AI harness configs for drift across tools |
+| `/tokens-studio` | `/tokens-studio <task>` | Tokens Studio platform / studio CLI pipeline assistant |
+
+## Skills
+
+Skills live in `skills/<name>/SKILL.md`. Claude Code applies a skill on its own when the task matches the skill's `description`, and you can also invoke it as `/name`.
+
+| Skill | Applied when | Description |
+|-------|--------------|-------------|
+| `write-pr-description` | Opening or editing a PR | Short PR description per [`PR_AND_ISSUE_WRITING.md`](../documentation/agent-instructions/PR_AND_ISSUE_WRITING.md) |
+| `write-issue` | Opening or editing an issue | Issue from notes, screenshots or a conversation, per the same doc |
 
 ## Hooks
 
