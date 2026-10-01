@@ -37,12 +37,22 @@ export function Dialog({
 }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null)
   const titleId = useId()
+  // Set while the effect closes the dialog because `open` became false. The
+  // parent already knows, so that close must not call onClose again.
+  const closingFromProp = useRef(false)
+  // Whether the current press started on the backdrop. A press that starts
+  // in the content (selecting text, say) and ends on the backdrop must not
+  // close the dialog.
+  const pressedOnBackdrop = useRef(false)
 
   useEffect(() => {
     const dialog = ref.current
     if (!dialog) return
     if (open && !dialog.open) dialog.showModal()
-    if (!open && dialog.open) dialog.close()
+    if (!open && dialog.open) {
+      closingFromProp.current = true
+      dialog.close()
+    }
   }, [open])
 
   return (
@@ -50,10 +60,22 @@ export function Dialog({
       ref={ref}
       aria-labelledby={titleId}
       // Fires for Escape as well as for dialog.close()
-      onClose={onClose}
-      onClick={(event) => {
+      onClose={() => {
+        if (closingFromProp.current) {
+          closingFromProp.current = false
+          return
+        }
+        onClose()
+      }}
+      onMouseDown={(event) => {
         // The content fills the dialog, so only the backdrop hits it directly
-        if (event.target === event.currentTarget) onClose()
+        pressedOnBackdrop.current = event.target === event.currentTarget
+      }}
+      onClick={(event) => {
+        if (pressedOnBackdrop.current && event.target === event.currentTarget) {
+          onClose()
+        }
+        pressedOnBackdrop.current = false
       }}
       className={[
         'm-auto w-[min(480px,calc(100vw-2rem))] max-h-[calc(100vh-2rem)] overflow-auto rounded border-0 bg-dialog p-0 text-primary shadow-lg backdrop:bg-[var(--eds-overlay-scrim)]',

@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
-import { act, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { Button } from './Button'
 import { Dialog } from './Dialog'
@@ -134,6 +135,42 @@ describe('Dialog', () => {
       })
 
       expect(onClose).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls onClose once when the parent closes it in response', async () => {
+      const user = userEvent.setup()
+      const onClose = vi.fn()
+      function Parent() {
+        const [open, setOpen] = useState(true)
+        return (
+          <Dialog
+            open={open}
+            onClose={() => {
+              onClose()
+              setOpen(false)
+            }}
+            title="Export"
+          >
+            Content
+          </Dialog>
+        )
+      }
+      render(<Parent />)
+
+      await user.click(screen.getByRole('button', { name: 'Close' }))
+
+      expect(onClose).toHaveBeenCalledTimes(1)
+      expect(screen.queryByRole('dialog')).toBeNull()
+    })
+
+    it('stays open when a press starts in the content and ends on the backdrop', () => {
+      const { onClose } = renderDialog()
+
+      // For example selecting text and releasing outside the content
+      fireEvent.mouseDown(screen.getByText('Pick a file format.'))
+      fireEvent.click(screen.getByRole('dialog'))
+
+      expect(onClose).not.toHaveBeenCalled()
     })
   })
 })
