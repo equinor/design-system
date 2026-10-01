@@ -3,9 +3,11 @@ import path from 'path'
 
 export default defineConfig({
   test: {
+    // Component tests opt into jsdom with `// @vitest-environment jsdom`
     environment: 'node',
     globals: true,
-    include: ['src/**/*.{test,spec}.{js,ts}'],
+    include: ['src/**/*.{test,spec}.{js,ts,tsx}'],
+    setupFiles: ['./src/test/setup.ts'],
     exclude: ['node_modules/**/*'],
     silent: false,
     reporters: ['verbose'],
