@@ -233,6 +233,13 @@ describe('simulation palettes', () => {
     expect(getSimulationPalettes()).toEqual([])
   })
 
+  it('returns an empty list when the stored value is not a list', () => {
+    localStorage.setItem('colorPalette_simulationPalettes', 'null')
+    expect(getSimulationPalettes()).toEqual([])
+    localStorage.setItem('colorPalette_simulationPalettes', '{"name":"x"}')
+    expect(getSimulationPalettes()).toEqual([])
+  })
+
   it('does not throw when writing fails', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('quota exceeded')

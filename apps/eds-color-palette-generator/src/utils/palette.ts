@@ -148,7 +148,10 @@ export function getSimulationPalettes(): TokenPalette[] {
   if (typeof window === 'undefined') return []
   try {
     const item = localStorage.getItem(SIMULATION_PALETTES_KEY)
-    return item ? JSON.parse(item) : []
+    const parsed: unknown = item ? JSON.parse(item) : []
+    // Anything but a list (null, an object from an older version) would
+    // crash the pages that map over the palettes
+    return Array.isArray(parsed) ? parsed : []
   } catch {
     return []
   }
