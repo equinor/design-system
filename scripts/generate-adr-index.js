@@ -2,12 +2,13 @@
 
 /**
  * Generates documentation/adr/README.md, an index of every ADR with its
- * title, status and decision date, so readers can find the relevant decision
- * without opening twenty files named by number.
+ * title, scope, status and decision date, so readers can find the relevant
+ * decision without opening twenty files named by number.
  *
  * Source of truth: the ADR files themselves (documentation/adr/NNNN-*.md).
- * Title comes from the first `# ` heading, status and date from the
- * `- **Status:**` / `- **Date:**` lines defined by 0000-template.md.
+ * Title comes from the first `# ` heading, scope, status and date from the
+ * `- **Scope:**` / `- **Status:**` / `- **Date:**` lines defined by
+ * 0000-template.md.
  *
  * Re-run via `pnpm run generate:adr-index`. Also runs as part of `prebuild`,
  * so a root `pnpm run build` keeps the file fresh.
@@ -79,6 +80,7 @@ const parseAdr = (filename) => {
   const titleMatch = body.match(/^#\s+(.+)$/m)
   const rawStatus = fieldValue(body, 'Status')
   const rawDate = fieldValue(body, 'Date')
+  const rawScope = fieldValue(body, 'Scope')
 
   // Statuses carry trailing detail ("Accepted (superseded by ADR 0006)"), so
   // keep the keyword for the column and the detail for the note. Matching is
@@ -115,6 +117,7 @@ const parseAdr = (filename) => {
     // part worth reading, such as the date a proposal was actually accepted.
     note: truncate(note),
     date: dateMatch ? dateMatch[0] : 'not recorded',
+    scope: rawScope || 'not recorded',
   }
 }
 
@@ -155,7 +158,7 @@ const escapeCell = (text) => text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
 
 const rows = adrs.map((adr) => {
   const link = `[${adr.number}](./${adr.filename})`
-  return `| ${link} | ${escapeCell(adr.title)} | ${adr.status} | ${adr.date} | ${escapeCell(adr.note)} |`
+  return `| ${link} | ${escapeCell(adr.title)} | ${escapeCell(adr.scope)} | ${adr.status} | ${adr.date} | ${escapeCell(adr.note)} |`
 })
 
 const offTemplate = adrs.filter((adr) => adr.offTemplateStatus)
@@ -178,8 +181,8 @@ keeping the original reasoning readable and dated.
 
 Records: ${adrs.length}
 
-| ADR | Title | Status | Date | Note |
-| --- | ----- | ------ | ---- | ---- |
+| ADR | Title | Scope | Status | Date | Note |
+| --- | ----- | ----- | ------ | ---- | ---- |
 ${rows.join('\n')}
 ${
   offTemplate.length > 0
