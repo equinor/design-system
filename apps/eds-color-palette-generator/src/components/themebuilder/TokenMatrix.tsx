@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { contrast, toOklchString } from '@/utils/color'
+import type { ColorFormat } from '@/types'
 import {
   PALETTE_STEPS,
   categoryLabel,
@@ -10,8 +11,7 @@ import {
   stepRolesText,
 } from '@/config/config'
 import { Card } from '@/components/shared/Card'
-import { SegmentedControl } from '@/components/shared/SegmentedControl'
-import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+import { useColorFormat } from '@/context/ColorFormatContext'
 
 type GeneratedPalette = {
   name: string
@@ -20,14 +20,6 @@ type GeneratedPalette = {
   /** The same steps in OKLCH, for display */
   oklch?: string[]
 }
-
-type ValueFormat = 'OKLCH' | 'HEX'
-
-// OKLCH is the canonical form (ADR 0016 D9); hex is offered for copying.
-const FORMAT_OPTIONS: SegmentedOption<ValueFormat>[] = [
-  { value: 'OKLCH', label: 'OKLCH' },
-  { value: 'HEX', label: 'HEX' },
-]
 
 /** `oklch(0.980 0.014 204.6)` → `['0.980', '0.014', '204.6']` */
 function oklchParts(value: string): string[] {
@@ -56,24 +48,13 @@ function getTextColor(bgHex: string): string {
 }
 
 export function TokenMatrix({ palettes }: TokenMatrixProps) {
-  const [format, setFormat] = useState<ValueFormat>('OKLCH')
+  // Values follow the page's colour format, set in the Palettes card
+  const { format } = useColorFormat()
 
   if (palettes.length === 0) return null
 
   return (
-    <Card
-      title="Token matrix"
-      actions={
-        <SegmentedControl
-          mode="radio"
-          aria-label="Value format"
-          size="sm"
-          options={FORMAT_OPTIONS}
-          value={format}
-          onChange={setFormat}
-        />
-      }
-    >
+    <Card title="Token matrix">
       {/* Padding keeps the swatches' focus ring inside the scroll area */}
       <div className="overflow-x-auto p-1">
         <div className="grid grid-cols-[minmax(100px,auto)_repeat(15,minmax(58px,1fr))] gap-0.5">
@@ -119,7 +100,7 @@ function PaletteRow({
   format,
 }: {
   palette: GeneratedPalette
-  format: ValueFormat
+  format: ColorFormat
 }) {
   const textColors = useMemo(
     () => palette.steps.map(getTextColor),

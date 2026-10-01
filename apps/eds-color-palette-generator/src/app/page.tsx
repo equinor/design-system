@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { generateColorScale, toCssColor } from '@/utils/color'
 import { withOklchColours } from '@/utils/paletteConfigFile'
 import { useColorScheme } from '@/context/ColorSchemeContext'
+import { ColorFormatProvider } from '@/context/ColorFormatContext'
 import {
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
@@ -230,7 +231,9 @@ function ThemeBuilderContent() {
 export default function ThemeBuilderPage() {
   return (
     <Suspense>
-      <ThemeBuilderContent />
+      <ColorFormatProvider>
+        <ThemeBuilderContent />
+      </ColorFormatProvider>
     </Suspense>
   )
 }

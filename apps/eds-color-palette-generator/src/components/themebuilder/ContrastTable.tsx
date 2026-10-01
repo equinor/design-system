@@ -5,6 +5,7 @@ import { Badge } from '@/components/shared/Badge'
 import { Card } from '@/components/shared/Card'
 import { SegmentedControl } from '@/components/shared/SegmentedControl'
 import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+import { useColorFormat } from '@/context/ColorFormatContext'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import {
   CONTRAST_COLUMN_GROUPS,
@@ -55,6 +56,7 @@ export function ContrastTable({
   onActivePaletteChange,
 }: ContrastTableProps) {
   const { colorScheme } = useColorScheme()
+  const { formatColour } = useColorFormat()
   const palette = palettes[activePaletteIndex]
 
   const grid = useMemo(
@@ -111,7 +113,7 @@ export function ContrastTable({
                     'border-b border-muted px-1 py-1.5 text-center text-xs font-normal whitespace-nowrap text-secondary',
                     groupSeparator(col.firstInGroup),
                   ].join(' ')}
-                  title={`${col.role} · ${col.paletteName} step ${col.step} (${col.hex})`}
+                  title={`${col.role} · ${col.paletteName} step ${col.step} (${formatColour(col.hex)})`}
                 >
                   <div className="flex flex-col items-center gap-0.5">
                     <span
@@ -130,7 +132,7 @@ export function ContrastTable({
               <tr key={row.path}>
                 <td
                   className="border-b border-muted px-2 py-1.5 font-medium whitespace-nowrap"
-                  title={`${row.role} · ${row.paletteName} step ${row.step} (${row.hex})`}
+                  title={`${row.role} · ${row.paletteName} step ${row.step} (${formatColour(row.hex)})`}
                 >
                   <div className="flex items-center gap-1.5">
                     <span

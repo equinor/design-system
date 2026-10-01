@@ -18,11 +18,21 @@ import {
   toCssColor,
   toOklchString,
 } from '@/utils/color'
-import type { ColorAnchor } from '@/types'
+import type { ColorAnchor, ColorFormat } from '@/types'
 import { newPaletteId, type PaletteInput } from '@/utils/urlState'
+import { useColorFormat } from '@/context/ColorFormatContext'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 
 /** A mid grey, for new palettes */
 const DEFAULT_COLOUR = 'oklch(0.6 0 0)'
+
+// How colour values are shown on the whole Theme Builder page. OKLCH is the
+// canonical form (ADR 0016 D9); palettes are stored in OKLCH either way.
+const FORMAT_OPTIONS: SegmentedOption<ColorFormat>[] = [
+  { value: 'OKLCH', label: 'OKLCH' },
+  { value: 'HEX', label: 'HEX' },
+]
 
 const FIELD =
   'rounded border bg-input px-2 py-1 text-sm text-primary border-input hover:border-input-hover'
@@ -36,6 +46,7 @@ export function PaletteInputPanel({
   palettes,
   onChange,
 }: PaletteInputPanelProps) {
+  const { format, setFormat } = useColorFormat()
   // Track the expanded row by id, so removing a row above it does not move
   // the expansion to another palette.
   const [expandedId, setExpandedId] = useState<string | null>(null)
@@ -146,7 +157,19 @@ export function PaletteInputPanel({
   const hasAnchors = (p: PaletteInput) => p.anchors && p.anchors.length > 0
 
   return (
-    <Card title="Palettes">
+    <Card
+      title="Palettes"
+      actions={
+        <SegmentedControl
+          mode="radio"
+          aria-label="Colour format"
+          size="sm"
+          options={FORMAT_OPTIONS}
+          value={format}
+          onChange={setFormat}
+        />
+      }
+    >
       <div className="flex flex-col gap-3">
         {palettes.map((p, i) => {
           const rowId = p.id ?? String(i)
@@ -299,35 +322,23 @@ function AnchorRow({
   canRemove: boolean
 }) {
   const colorInputRef = useRef<HTMLInputElement>(null)
-  const [localValue, setLocalValue] = useState(anchor.value)
-  const [isValid, setIsValid] = useState(true)
+  const { format, formatColour } = useColorFormat()
+  // What the user is typing; only valid colours reach the anchor, and leaving
+  // the field shows the stored anchor again in the page's format.
+  const [draft, setDraft] = useState<string | null>(null)
+  const shown = draft ?? formatColour(anchor.value)
+  const isValid = isValidColorFormat(shown)
+  const anchorHex = parseColorToHex(toCssColor(anchor.value)) ?? '#808080'
 
-  const localHex = (() => {
-    try {
-      return parseColorToHex(anchor.value) ?? '#808080'
-    } catch {
-      return '#808080'
-    }
-  })()
-
-  const handleValueChange = useCallback(
-    (val: string) => {
-      setLocalValue(val)
-      const valid = isValidColorFormat(val)
-      setIsValid(valid)
-      if (valid) {
-        onUpdate('value', val.trim())
-      }
-    },
-    [onUpdate],
+  // Anchors are stored in OKLCH; a colour typed as hex is converted.
+  const store = useCallback(
+    (colour: string) =>
+      onUpdate(
+        'value',
+        format === 'HEX' ? (toOklchString(colour) ?? colour) : colour.trim(),
+      ),
+    [format, onUpdate],
   )
-
-  const handleBlur = useCallback(() => {
-    if (!isValid) {
-      setLocalValue(anchor.value)
-      setIsValid(true)
-    }
-  }, [isValid, anchor.value])
 
   return (
     <div className="flex items-center gap-2">
@@ -352,9 +363,13 @@ function AnchorRow({
 
       <input
         type="text"
-        value={localValue}
-        onChange={(e) => handleValueChange(e.target.value)}
-        onBlur={handleBlur}
+        value={shown}
+        onChange={(e) => {
+          setDraft(e.target.value)
+          if (isValidColorFormat(e.target.value)) store(e.target.value)
+        }}
+        onBlur={() => setDraft(null)}
+        spellCheck={false}
         className={[
           'min-w-0 flex-1 rounded bg-input px-2 py-1 font-mono text-sm text-primary',
           isValid
@@ -368,13 +383,11 @@ function AnchorRow({
       <input
         ref={colorInputRef}
         type="color"
-        value={localHex}
+        value={anchorHex}
         onChange={(e) => {
           // The native picker works in hex; keep anchors in OKLCH
-          const oklch = toOklchString(e.target.value) ?? e.target.value
-          setLocalValue(oklch)
-          setIsValid(true)
-          onUpdate('value', oklch)
+          setDraft(null)
+          onUpdate('value', toOklchString(e.target.value) ?? e.target.value)
         }}
         className="sr-only"
         tabIndex={-1}
