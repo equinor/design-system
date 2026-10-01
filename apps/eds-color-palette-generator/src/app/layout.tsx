@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import '@/styles/dialog.css' // Import dialog styles globally
 import '@/styles/print.css' // Import print styles globally
 import { ColorSchemeProvider } from '@/context/ColorSchemeContext'
 import { DensityProvider } from '@/context/DensityContext'

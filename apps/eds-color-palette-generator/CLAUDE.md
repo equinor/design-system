@@ -63,8 +63,8 @@ Resolves any Tokens Studio semantic token against generated ramps: token → ton
 
 - `src/app/page.tsx`: the Theme Builder (tabs: Colour system, Examples, Contrast). State lives in the URL (`src/utils/urlState.ts`: palettes, tab, mode). Palette colours are stored and shown in OKLCH; old links with bare hex values still work (`toCssColor`).
 - The Config button opens `ExportDialog`: Tokens Studio anchors (changed or new anchors in the `input/palette` shape) or a palettes file, plus import. The file logic is in `src/utils/paletteConfigFile.ts`.
-- Other routes: `/dataviz`, `/palette`, `/contrast`, `/example`, `/about`, and the archived generator at `/old`.
-- Components: `components/themebuilder/`, `components/contrast/`, `components/example/`, `components/palette/`, `components/docs/`, `components/old/` (archived).
+- Other routes: `/dataviz`, `/palette`, `/contrast`, `/example` and `/about`.
+- Components: `components/themebuilder/`, `components/contrast/`, `components/example/`, `components/palette/`, `components/docs/`.
 - Shared primitives in `components/shared/`, modelled on EDS 2.0: `AppHeader` (one header and navigation for every route), `Button` (primary, secondary, ghost; icon-only requires `aria-label`), `SegmentedControl` (tab or radio semantics with arrow-key navigation, plus `TabPanel`), `Card`, `Icon` (wraps `@equinor/eds-icons`), `Badge`, `Dialog` (native `<dialog>`), `Main` (sets `data-density` and `data-color-scheme`) and `SettingsDialog` (theme and density, opened from the header). Use these before hand-building controls.
 - Colour scheme: `ColorSchemeProvider` plus the pre-paint script in `src/context/colorSchemeScript.ts`. Only an explicit choice in the settings dialog is saved. Density lives in `DensityContext` and is set on `<main>`.
 

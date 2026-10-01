@@ -48,7 +48,6 @@ export function Dialog({
   return (
     <dialog
       ref={ref}
-      data-eds-dialog
       aria-labelledby={titleId}
       // Fires for Escape as well as for dialog.close()
       onClose={onClose}

@@ -2,8 +2,11 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { add } from '@equinor/eds-icons'
-import { setSimulationPalettes, type TokenPalette } from '@/utils/palette'
-import { generatePalettesFromGenerator } from '@/utils/generatorImport'
+import {
+  editablePalettesFromTokensStudio,
+  setSimulationPalettes,
+  type TokenPalette,
+} from '@/utils/palette'
 import { PaletteCard, type PaletteViewMode } from '@/components/palette'
 import { AppHeader } from '@/components/shared/AppHeader'
 import { Button } from '@/components/shared/Button'
@@ -22,12 +25,12 @@ export default function PalettePage() {
   const [viewMode, setViewMode] = useState<PaletteViewMode>('curve')
   const [hasAutoImported, setHasAutoImported] = useState(false)
 
-  /* ---- Auto-import primitives from generator on first load ---- */
+  /* ---- Start from the Tokens Studio hues on first load ---- */
   useEffect(() => {
     if (hasAutoImported) return
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only hydration from localStorage; a lazy initializer would run during SSR and cause a hydration mismatch
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only start; saving to localStorage below must not run during SSR
     setHasAutoImported(true)
-    setPalettes(generatePalettesFromGenerator())
+    setPalettes(editablePalettesFromTokensStudio())
   }, [hasAutoImported])
 
   /* ---- Auto-save to localStorage ---- */
@@ -71,9 +74,9 @@ export default function PalettePage() {
     [],
   )
 
-  /* ---- Re-import from generator (replaces all) ---- */
-  const reimportFromGenerator = useCallback(() => {
-    setPalettes(generatePalettesFromGenerator())
+  /* ---- Back to the Tokens Studio hues (replaces all) ---- */
+  const resetToTokensStudio = useCallback(() => {
+    setPalettes(editablePalettesFromTokensStudio())
   }, [])
 
   return (
@@ -96,8 +99,8 @@ export default function PalettePage() {
             <Icon data={add} size={18} />
             Custom HEX
           </Button>
-          <Button variant="ghost" onClick={reimportFromGenerator}>
-            Re-import from generator
+          <Button variant="ghost" onClick={resetToTokensStudio}>
+            Reset to Tokens Studio
           </Button>
 
           <SegmentedControl

@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   TONES,
   TS_GAUSSIAN,
@@ -78,15 +77,8 @@ export function AboutLightAndDark() {
         </dl>
         <p>
           All of these come from Tokens Studio, so the Theme Builder has no
-          settings for them. To try other lightness values or curve settings,
-          use the{' '}
-          <Link
-            href="/old"
-            className="text-link underline hover:text-link-hover"
-          >
-            original generator
-          </Link>
-          , which still has those controls.
+          settings for them. The curve and the Try it demo above show what
+          other curve settings would do.
         </p>
       </div>
     </section>

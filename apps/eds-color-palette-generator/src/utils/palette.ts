@@ -1,4 +1,5 @@
 import { contrast } from '@/utils/color'
+import { tokensStudioPalettes } from '@/utils/semanticTokens'
 
 /* ------------------------------------------------------------------ */
 /*  Palettes                                                           */
@@ -12,6 +13,18 @@ import { contrast } from '@/utils/color'
 export type TokenPalette = {
   name: string
   steps: string[]
+}
+
+/**
+ * The seven Tokens Studio hues in light mode as editable palettes, the
+ * Palette editor's starting point. Copies, so editing a step never changes
+ * the cached Tokens Studio ramps.
+ */
+export function editablePalettesFromTokensStudio(): TokenPalette[] {
+  return tokensStudioPalettes('light').map((palette) => ({
+    name: palette.name,
+    steps: [...palette.steps],
+  }))
 }
 
 /* ------------------------------------------------------------------ */

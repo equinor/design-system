@@ -10,11 +10,10 @@ Internal tool for proposing and checking colour palettes for the Equinor Design 
 | --- | --- |
 | `/` | **Theme Builder**. Edit palettes, see every step with its Tokens Studio roles, check contrast, and preview components through the Tokens Studio semantic mapping. State is shareable through the URL. |
 | `/dataviz` | **Data visualisation**. Generate categorical, sequential and diverging palettes and audit them for colour vision deficiency and contrast. |
-| `/palette` | **Palette editor**. Start from the archived generator's saved palettes and edit the hex value of each step. The edited palettes are also offered on the Examples page. |
+| `/palette` | **Palette editor**. Start from the seven Tokens Studio hues in light mode and edit the hex value of each step. The edited palettes are also offered on the Examples page. |
 | `/contrast` | **Contrast**. Every step of a Tokens Studio palette against its best text colour, and a combined view of Tokens Studio token pairs across tones. |
 | `/example` | **Examples**. Tokens Studio token pairs and nested surfaces on example layouts, for the Tokens Studio palettes and your edited ones. |
 | `/about` | How the generator works: OKLCH, the gaussian chroma curve, step roles and contrast requirements. |
-| `/old` | The archived Gaussian colour-scale generator. Still works, no longer the entry point. |
 
 `/themebuilder` redirects to `/` for links shared before the Theme Builder moved.
 

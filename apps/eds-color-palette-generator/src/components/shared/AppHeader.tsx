@@ -28,13 +28,8 @@ function isActive(pathname: string | null, href: string): boolean {
 }
 
 type AppHeaderProps = {
-  /** Page actions, shown before the theme toggle */
+  /** Page actions, shown before the settings button */
   actions?: ReactNode
-  /**
-   * Stick to the top while scrolling. Defaults to true; /old turns it off
-   * because it has its own sticky step header.
-   */
-  sticky?: boolean
 }
 
 /**
@@ -43,17 +38,12 @@ type AppHeaderProps = {
  * on the header's bottom edge. One line from 1280px; below that the
  * navigation moves to its own row.
  */
-export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
+export function AppHeader({ actions }: AppHeaderProps) {
   const pathname = usePathname()
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   return (
-    <header
-      className={[
-        'border-b border-muted bg-surface text-primary print-hide min-h-12 flex',
-        sticky ? 'sticky top-0 z-30' : '',
-      ].join(' ')}
-    >
+    <header className="sticky top-0 z-30 flex min-h-12 border-b border-muted bg-surface text-primary print-hide">
       <Link
         href="/"
         className="whitespace-nowrap absolute left-6 top-3 my-auto border-b-2 border-transparent text-ali text-base font-medium text-primary no-underline"

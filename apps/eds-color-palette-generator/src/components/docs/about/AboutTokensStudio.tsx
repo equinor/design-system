@@ -48,8 +48,8 @@ export function AboutTokensStudio() {
         <p>
           To keep your work without proposing it, use Share, which copies a link
           with your palettes in it, or Config and Palettes file, which downloads
-          the palettes as a file. Config can also import a palettes file, and
-          palette configs from the original generator work too.
+          the palettes as a file. Config can also import a palettes file or an
+          older palette config.
         </p>
       </div>
     </section>
