@@ -50,24 +50,23 @@ export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
   return (
     <header
       className={[
-        'border-b border-muted bg-surface text-primary print-hide',
+        'border-b border-muted bg-surface text-primary print-hide min-h-12 flex',
         sticky ? 'sticky top-0 z-30' : '',
       ].join(' ')}
     >
-      <div className="flex flex-wrap items-end gap-x-4 px-6">
-        <Link
-          href="/"
-          className="whitespace-nowrap border-b-2 border-transparent py-[var(--eds-spacing-xs)] text-base font-medium text-primary no-underline"
-        >
-          EDS Colour Palette Generator
-        </Link>
-
+      <Link
+        href="/"
+        className="whitespace-nowrap absolute left-6 top-3 my-auto border-b-2 border-transparent text-ali text-base font-medium text-primary no-underline"
+      >
+        EDS Colour Palette Generator
+      </Link>
+      <div className="flex flex-wrap justify-between gap-x-4 max-w-6xl w-full mx-auto">
         <nav
           aria-label="Main"
           // Below xl the nav gets its own scrolling row; the top padding leaves
           // room for the focus ring inside the scroller. The negative bottom
           // margin puts the tab borders on the header's own bottom border.
-          className="order-last -mx-2 -mb-px w-full overflow-x-auto pt-1 xl:order-none xl:mx-0 xl:w-auto xl:overflow-visible xl:pt-0"
+          className="order-last flex flex-1 -mx-2 -mb-px w-full overflow-x-auto pt-1 xl:order-none xl:mx-0 xl:w-auto xl:overflow-visible xl:pt-0"
         >
           <ul className="m-0 flex list-none items-end p-0 px-2 xl:px-0">
             {NAV_ITEMS.map((item) => {

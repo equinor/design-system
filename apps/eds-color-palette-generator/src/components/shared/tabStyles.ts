@@ -12,7 +12,7 @@
  */
 
 export const TAB_BASE =
-  'inline-flex items-center justify-center gap-[var(--eds-spacing-3xs)] whitespace-nowrap cursor-pointer rounded-none border-b-2 border-solid px-[var(--eds-spacing-sm)] py-[var(--eds-spacing-xs)] font-sans text-base font-normal no-underline transition-colors duration-150 focus-visible:relative focus-visible:z-10 focus-visible:outline-1 disabled:cursor-not-allowed disabled:text-disabled'
+  'inline-flex items-center justify-center gap-[var(--eds-spacing-3xs)] whitespace-nowrap cursor-pointer rounded-none border-b-2 border-solid px-[var(--eds-spacing-md)] py-[var(--eds-spacing-sm)] font-sans text-base font-normal no-underline transition-colors duration-150 focus-visible:relative focus-visible:z-10 focus-visible:outline-1 disabled:cursor-not-allowed disabled:text-disabled'
 
 export const TAB_INACTIVE =
   'border-interactive-neutral-muted text-primary hover:bg-neutral-muted-hover focus-visible:bg-neutral-muted-hover'

@@ -44,7 +44,7 @@ export default function ExamplePage() {
     <div className="min-h-screen bg-canvas text-primary">
       <AppHeader />
 
-      <Main className="max-w-5xl mx-auto px-6 py-8">
+      <Main className="max-w-6xl mx-auto py-8">
         <h1 className="m-0 text-header-2xl font-medium">Examples</h1>
 
         {/* Palette picker */}

@@ -9,7 +9,7 @@ export default function DataVizPage() {
     <div className="min-h-screen bg-canvas text-primary">
       <AppHeader />
 
-      <Main className="max-w-6xl mx-auto px-6 py-8">
+      <Main className="max-w-6xl mx-auto py-8">
         <h1 className="m-0 text-header-2xl font-medium">Data visualisation</h1>
         <p className="mt-2 mb-6 max-w-3xl text-sm text-secondary">
           Generate accessible colour palettes for charts and data visualisation:
