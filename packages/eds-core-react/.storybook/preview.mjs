@@ -74,7 +74,7 @@ const preview = {
           'Introduction',
           'EdsProvider',
           'EDS 2.0 (beta)',
-          ['About', 'Icon', 'Inputs'],
+          ['About', 'Breaking changes', 'Icon', 'Inputs'],
           'Mobile',
           ['About', 'Components'],
           'Data Display',
