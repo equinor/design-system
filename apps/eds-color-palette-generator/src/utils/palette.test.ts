@@ -166,6 +166,18 @@ describe('calcContrast', () => {
     expect(result.aaa).toBe(false)
   })
 
+  it('judges AA and AAA on the unrounded ratio', () => {
+    // #777777 on white is 4.48:1, shown rounded as 4.5
+    const aa = calcContrast('#777777', '#ffffff')
+    expect(aa.wcag).toBe('4.5')
+    expect(aa.wcagRatio).toBeLessThan(4.5)
+    expect(aa.aa).toBe(false)
+
+    // #595959 on white is 7.00:1 and passes AAA; #5a5a5a is 6.9
+    expect(calcContrast('#595959', '#ffffff').aaa).toBe(true)
+    expect(calcContrast('#5a5a5a', '#ffffff').aaa).toBe(false)
+  })
+
   it('gives the same WCAG ratio in either direction', () => {
     expect(calcContrast('#767676', '#ffffff').wcag).toBe(
       calcContrast('#ffffff', '#767676').wcag,
@@ -184,7 +196,13 @@ describe('calcContrast', () => {
   it('returns zero and fails both levels for a colour it cannot parse, without logging', () => {
     const error = vi.spyOn(console, 'error').mockImplementation(() => {})
     const result = calcContrast('not a colour', '#ffffff')
-    expect(result).toEqual({ wcag: '0', apca: '0', aa: false, aaa: false })
+    expect(result).toEqual({
+      wcag: '0',
+      apca: '0',
+      wcagRatio: 0,
+      aa: false,
+      aaa: false,
+    })
     expect(error).not.toHaveBeenCalled()
   })
 })

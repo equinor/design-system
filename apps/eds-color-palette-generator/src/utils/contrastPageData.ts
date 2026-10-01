@@ -223,7 +223,7 @@ export function findBestPaletteText(
         idx,
         hex,
         result,
-        wcagNum: parseFloat(result.wcag),
+        wcagNum: result.wcagRatio,
         isTextStep: TEXT_STEP_INDICES.includes(idx),
       }
     })
