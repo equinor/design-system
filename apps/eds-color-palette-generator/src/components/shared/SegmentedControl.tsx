@@ -32,10 +32,12 @@ export type SegmentedControlProps<T extends string> = {
    * control with `<TabPanel idPrefix={…} value={…}>`.
    */
   idPrefix?: string
+  /** Radio mode only; tabs always use the EDS Tab size. */
   size?: 'sm' | 'md'
   /**
-   * `joined` (default) draws one bordered strip. `wrap` draws separate pills
-   * that wrap onto more lines, for long option lists such as palette names.
+   * Radio mode only. `joined` (default) draws one bordered strip. `wrap`
+   * draws separate pills that wrap onto more lines, for long option lists
+   * such as palette names.
    */
   layout?: 'joined' | 'wrap'
   disabled?: boolean
@@ -82,6 +84,28 @@ const SELECTED =
 
 const UNSELECTED =
   'bg-surface text-secondary hover:bg-neutral-muted hover:text-primary active:bg-neutral-muted-hover disabled:bg-surface disabled:text-disabled'
+
+/*
+ * Tabs follow the EDS Tab in the Core Components Figma file (node 4240:243515,
+ * "Composition=Simple"): a 2px bottom border, no corner radius, 12/8px padding
+ * and ui/md text. Inactive tabs use the neutral muted border and primary text,
+ * the active tab the accent emphasis border and accent text. Hover and focus
+ * add the muted fill (accent for the active tab) and focus a 1px focus ring.
+ *
+ * Figma binds the active label to `text/accent` (#20474b), a variable Tokens
+ * Studio no longer has. It resolves to accent step 12, which is
+ * `text.on-muted.accent` in Tokens Studio, hence `text-accent-on-muted`.
+ */
+const TAB_GROUP = 'inline-flex max-w-full flex-wrap'
+
+const TAB_BASE =
+  'inline-flex items-center justify-center gap-[var(--eds-spacing-3xs)] whitespace-nowrap cursor-pointer rounded-none border-b-2 border-solid px-[var(--eds-spacing-sm)] py-[var(--eds-spacing-xs)] font-sans text-base font-normal transition-colors duration-150 focus-visible:relative focus-visible:z-10 focus-visible:outline-1 disabled:cursor-not-allowed disabled:text-disabled'
+
+const TAB_INACTIVE =
+  'border-interactive-neutral-muted text-primary hover:bg-neutral-muted-hover focus-visible:bg-neutral-muted-hover'
+
+const TAB_ACTIVE =
+  'border-interactive-accent-emphasis text-accent-on-muted hover:border-interactive-accent-emphasis-hover hover:bg-accent-muted-hover focus-visible:border-interactive-accent-emphasis-hover focus-visible:bg-accent-muted-hover'
 
 // A horizontal tablist uses Left/Right only; a radio group also Up/Down.
 const NEXT_KEYS = { tabs: ['ArrowRight'], radio: ['ArrowRight', 'ArrowDown'] }
@@ -139,7 +163,9 @@ export function SegmentedControl<T extends string>({
       role={isTabs ? 'tablist' : 'radiogroup'}
       aria-label={ariaLabel}
       onKeyDown={onKeyDown}
-      className={[LAYOUT[layout].group, className].filter(Boolean).join(' ')}
+      className={[isTabs ? TAB_GROUP : LAYOUT[layout].group, className]
+        .filter(Boolean)
+        .join(' ')}
     >
       {options.map((option, index) => {
         const selected = index === selectedIndex
@@ -173,15 +199,22 @@ export function SegmentedControl<T extends string>({
             tabIndex={index === focusIndex ? 0 : -1}
             disabled={disabled}
             onClick={() => onChange(option.value)}
-            className={[
-              SEGMENT_BASE,
-              LAYOUT[layout].segment,
-              iconOnly ? ICON_ONLY_SIZES[size] : SEGMENT_SIZES[size],
-              selected ? SELECTED : UNSELECTED,
-            ].join(' ')}
+            className={
+              isTabs
+                ? [TAB_BASE, selected ? TAB_ACTIVE : TAB_INACTIVE].join(' ')
+                : [
+                    SEGMENT_BASE,
+                    LAYOUT[layout].segment,
+                    iconOnly ? ICON_ONLY_SIZES[size] : SEGMENT_SIZES[size],
+                    selected ? SELECTED : UNSELECTED,
+                  ].join(' ')
+            }
           >
             {option.icon && (
-              <Icon data={option.icon} size={size === 'sm' ? 16 : 18} />
+              <Icon
+                data={option.icon}
+                size={isTabs || size === 'md' ? 18 : 16}
+              />
             )}
             {option.label}
           </button>

@@ -206,6 +206,16 @@
   --border-color-input: var(--eds-border-interactive-neutral-muted-default);
   --border-color-input-hover: var(--eds-border-interactive-neutral-muted-hover);
   --border-color-focus: var(--eds-border-interactive-focus);
+  /* Interactive borders, as on the EDS Tab */
+  --border-color-interactive-neutral-muted: var(
+    --eds-border-interactive-neutral-muted-default
+  );
+  --border-color-interactive-accent-emphasis: var(
+    --eds-border-interactive-accent-emphasis-default
+  );
+  --border-color-interactive-accent-emphasis-hover: var(
+    --eds-border-interactive-accent-emphasis-hover
+  );
   --border-color-disabled: var(--eds-border-interactive-disabled);
   --border-color-selected: var(--eds-border-interactive-selected-indicator);
   --border-color-accent: var(--eds-border-non-interactive-accent-default);
