@@ -19,6 +19,12 @@
  * one appears (#5407), so the ordering guards a class of bug rather
  * than a list of names.
  *
+ * The sort reaches `[data-color-scheme]` elements only. Once #5568
+ * widens the semantic layer to `[data-density]` too, an element
+ * carrying only `data-density` matches the semantic block and not the
+ * color-scheme one, leaving the assertion as the sole guard against an
+ * overlapping name.
+ *
  * The bundle is deliberately NOT minified: the committed file stays a
  * pure function of the source files (no toolchain-version churn in
  * release-PR diffs, no third-party minifier in the pipeline) and diffs
