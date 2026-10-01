@@ -7,13 +7,9 @@ description: Spacing in EDS consists of seventeen named steps. You apply them st
 
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
 
-The steps up to `xl` are for components, and the eight from `2xl` up are for page layout.
-
-We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
-
 These pages document the **3.0.0-beta** spacing tokens. If you are on EDS 1.x or on 2.0.0-beta,
-both the names and the values have changed, so please start with
-[coming from an earlier version](#coming-from-an-earlier-version).
+the token names have changed, and coming from 2.0.0-beta the density names have shifted as well,
+so please start with [coming from an earlier version](#coming-from-an-earlier-version).
 
 Here is a card, with its whole geometry described by three tokens:
 
@@ -47,6 +43,11 @@ Here is a card, with its whole geometry described by three tokens:
 ```
 
 ## The spacing steps
+
+The steps up to `xl` are for components, and the eight from `2xl` up are for page layout.
+
+We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
+
 
 {/* GEN:spacing-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
@@ -174,11 +175,21 @@ position each, so the proportions you designed hold:
 | **Relaxed**     | `data-density="relaxed"`      | touch and mobile, and reading-heavy pages where targets need to be larger               |
 
 Comfortable is emitted at `:root` rather than behind a selector, so setting nothing gives you
-Comfortable. Writing `data-density="comfortable"` is allowed and does no harm.
+Comfortable. Writing `data-density="comfortable"` gives the same result.
 
-:::warning `spacious` no longer exists
-2.0.0-beta had a `spacious` density, and **Relaxed** replaces it. `data-density="spacious"` fails
-silently: no error, and you get Comfortable. It is worth a search through your codebase.
+:::warning Two density names shifted after 2.0.0-beta
+In 2.0.0-beta the default density was `spacious`, and `comfortable` was the denser option. Each
+set of values now goes by a different name:
+
+- **`spacious` is now Comfortable.** `data-density="spacious"` fails silently and gives you
+  Comfortable, which has the spacing values `spacious` had. You can delete the attribute.
+- **`comfortable` is now Compact.** `data-density="comfortable"` is still valid, so nothing warns
+  you, but it now gives the larger values that `spacious` used to. Replace it with
+  `data-density="compact"`.
+
+Relaxed has no 2.0.0-beta counterpart: every step above `none` is larger than it was in
+`spacious`. Both attributes are worth a search through your codebase, and
+[the 2.0.0-beta table](#from-200-beta) lists the two values that differ in Compact.
 :::
 
 Density is not a multiplier, and not a `transform: scale()`.
@@ -187,11 +198,10 @@ Compact is not Comfortable × 0.75.
 
 ## Coming from an earlier version
 
-Both earlier generations used a different set of names, and neither maps cleanly onto the current
-steps:
+Both earlier generations used a different set of names:
 
-- **EDS 1.x** had eight t-shirt spacers on an 8px grid, with `XX Small` and `X Small` kept for
-  component interiors.
+- **EDS 1.x** had t-shirt spacers from `xx_small` at 2px to `xxx_large` at 48px, with the two
+  smallest kept for component interiors.
 - **2.0.0-beta** split spacing by direction and by component role, with families such as
   `generic-space-*`, `generic-gap-*` and `selectable-space-*`.
 
@@ -200,12 +210,45 @@ Direction is a CSS property now rather than part of the token name, so `Space ve
 spacing is gone for the same reason colour lost its component tokens: a card and a table row that
 happen to share a value should not have to share a name.
 
-:::note The mapping table is still to come
-Mapping the old names onto the new ones needs the 2.0.0-beta families resolved against the current steps
-first, which is tracked in
-[equinor/design-system#5121](https://github.com/equinor/design-system/issues/5121). Until it is
-ready, please re-pick with the two questions above rather than by matching the old value.
-:::
+### From EDS 1.x
+
+Re-pick each spacer with the two questions in [choosing a step](#choosing-a-step) instead of
+looking for its old value on the new scale. The questions ask how two things relate, so they give
+the same answer on every page, whatever the old layout used.
+
+### From 2.0.0-beta
+
+Every 2.0.0-beta spacing token except the icon gaps resolves to a value one of the current steps
+has, when you compare each version at its default density: `spacious` then, Comfortable now. The
+steps `none` and `4xs` to `3xl` also keep their names. Following the table below keeps a layout
+looking as it does today.
+
+In the table, `{step}` stands for `none` or `4xs` to `3xl`, and `{size}` for `xs` to `xl`.
+
+| 2.0.0-beta                                                                                                              | 3.0.0-beta                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `--eds-spacing-horizontal-{step}`, `--eds-spacing-vertical-{step}`                                                      | `--eds-spacing-{step}`                                                                                               |
+| `--eds-generic-space-*`, set by `data-horizontal-space` or `data-vertical-space`                                        | `--eds-spacing-{step}` on `padding`, using the step the attribute named, or `xs` where none was set                  |
+| `--eds-generic-gap-*`, set by `data-horizontal-gap` or `data-vertical-gap`                                              | `--eds-spacing-{step}` on `gap`, using the step the attribute named, or `xs` where none was set                      |
+| `--eds-selectable-space-horizontal`, set by `data-selectable-space`                                                     | `--eds-spacing-{size}`, using the size the attribute named, or `xs` where none was set                               |
+| `--eds-spacing-inset-{size}-horizontal`, `--eds-spacing-proportions-{size}-horizontal`                                  | `--eds-spacing-{size}`                                                                                               |
+| `--eds-selectable-space-vertical`, `--eds-spacing-inset-{size}-vertical-*`, `--eds-spacing-proportions-{size}-vertical` | `--eds-spacing-{size}` when squared, one step down when squished, one step up when stretched                         |
+| `--eds-container-space-*`, `--eds-container-gap-*`                                                                      | `--eds-spacing-md`                                                                                                   |
+| `--eds-page-space-*`, `--eds-page-gap-*`                                                                                | `--eds-spacing-xl`                                                                                                   |
+| `--eds-selectable-gap-*`                                                                                                | `--eds-spacing-xs`                                                                                                   |
+| `--eds-spacing-icon-{size}-gap-*`                                                                                       | `--eds-spacing-xs`. No current token grows with the icon the way these did, from 6.5px at `xs` to 23px at `6xl`      |
+| `--eds-spacing-border-radius-{none,rounded,pill}`                                                                       | `--eds-corner-radius-{none,rounded,pill}`                                                                            |
+| `data-density="spacious"`, or no attribute                                                                              | no attribute, which gives Comfortable                                                                                |
+| `data-density="comfortable"`                                                                                            | `data-density="compact"`. The values match except `spacing.sm`, 8px to 10px, and `corner-radius.rounded`, 3px to 2px |
+
+`data-space-proportions` set the vertical padding against the horizontal. `squared`, the default,
+used the same step on both axes. `squished` took the vertical one step down, so an `md` horizontal
+sat over an `sm` vertical, and `stretched` took it one step up, to `lg`. Under `squished` and
+`stretched` the vertical side of `container-space` and `page-space` moves the same way.
+
+A role token such as `container-gap` put the same step between any two children of a container,
+whatever they were. So once a layout is on the new names, check its gaps against the two questions
+as well.
 
 ## Where to go next
 
