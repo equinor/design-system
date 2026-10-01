@@ -225,6 +225,26 @@ describe('assert-no-duplicate-names', () => {
       expect(result.status).toBe(0)
     })
 
+    it('catches a shadowed declaration with another block in between', () => {
+      const result = run(
+        {
+          'semantic/default.css': `:root {
+  --eds-text-default: #000000;
+}
+[data-color-scheme='dark'] {
+  --eds-text-default: #ffffff;
+}
+:root {
+  --eds-text-default: #111111;
+}`,
+        },
+        ':root{--eds-unrelated:1px}',
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('shadowed declaration')
+      expect(result.stderr).toContain('--eds-text-default')
+    })
+
     it('reads the last declaration of a minified block', () => {
       // No trailing semicolon before `}` — the legacy bundle is minified
       const result = run(
@@ -237,6 +257,22 @@ describe('assert-no-duplicate-names', () => {
       )
       expect(result.status).toBe(1)
       expect(result.stderr).toContain('--eds-text-default')
+    })
+
+    it('warns when the overlap is cleared in the new export, not in legacy', () => {
+      // The realistic direction: legacy 2.x is frozen, so a collision
+      // goes away by renaming on our side and legacy still declares it
+      const result = run(
+        {
+          'semantic/default.css': `:root {
+  --eds-text-default: #000000;
+}`,
+        },
+        ':root{--eds-elevation-high:0 4px 8px #0003}',
+      )
+      expect(result.status).toBe(0)
+      expect(result.stderr).toContain('KNOWN_LEGACY_OVERLAP')
+      expect(result.stderr).toContain('--eds-elevation-high')
     })
 
     it('warns instead of failing when a known overlap is cleared', () => {

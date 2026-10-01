@@ -102,7 +102,10 @@ const byLayer = new Map()
 for (const file of files) {
   const layer = relative(CSS_DIR, file).split(sep)[0]
   const declarations = parseDeclarations(await readFile(file, 'utf8'))
-  /** name -> `block` it was last seen in, to catch rule 2 */
+  /** name -> block -> line it was first declared on, to catch rule 2.
+   * Keyed per block rather than holding only the last one: with one
+   * entry per name, `:root { --eds-a } .x { --eds-a } :root { --eds-a }`
+   * compares the third against `.x` and misses the shadowing. */
   const seenInBlock = new Map()
 
   for (const { name, value, block, line } of declarations) {
@@ -111,12 +114,14 @@ for (const file of files) {
         `self-reference: ${file}:${line} declares ${name}: ${value} — resolves to nothing`,
       )
 
-    const previous = seenInBlock.get(name)
-    if (previous?.block === block)
+    if (!seenInBlock.has(name)) seenInBlock.set(name, new Map())
+    const blocks = seenInBlock.get(name)
+    const previous = blocks.get(block)
+    if (previous !== undefined)
       violations.push(
-        `shadowed declaration: ${file}:${line} redeclares ${name} inside "${block}" (first at line ${previous.line}) — one value wins silently`,
+        `shadowed declaration: ${file}:${line} redeclares ${name} inside "${block}" (first at line ${previous}) — one value wins silently`,
       )
-    seenInBlock.set(name, { block, line })
+    else blocks.set(block, line)
 
     if (!byLayer.has(name)) byLayer.set(name, new Map())
     const layers = byLayer.get(name)
@@ -149,7 +154,12 @@ if (LEGACY_FILE !== 'none') {
       `shared with the legacy bundle: ${name} is declared by both ${LEGACY_FILE} and the new export — an app loading both resolves it to whichever it imported last`,
     )
 
-  const cleared = KNOWN_LEGACY_OVERLAP.filter((name) => !legacy.has(name))
+  // Filtered against the overlap, not against the legacy side of it:
+  // the legacy 2.x bundle is frozen, so in practice a collision is
+  // cleared by renaming in the new export, where `legacy` still has
+  // the name and a legacy-only test would never fire
+  const stillShared = new Set(shared)
+  const cleared = KNOWN_LEGACY_OVERLAP.filter((name) => !stillShared.has(name))
   if (cleared.length > 0)
     console.warn(
       `assert-no-duplicate-names: ${cleared.length} name(s) in KNOWN_LEGACY_OVERLAP no longer overlap and can be removed from the list: ${cleared.join(', ')}`,
