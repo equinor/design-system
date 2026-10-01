@@ -1,23 +1,28 @@
 const SECTIONS = [
-  { href: '#overview', label: '1. Overview' },
-  { href: '#how-it-works', label: '2. How it works' },
-  { href: '#gaussian-bell-curve', label: '3. The Gaussian bell curve' },
-  { href: '#chroma-distribution', label: '4. Interactive chroma distribution' },
-  { href: '#oklch-color-space', label: '5. Why OKLCH colour space?' },
-  { href: '#configuration', label: '6. Configuration options' },
-  {
-    href: '#contrast-requirements',
-    label: '7. Colour step pairings and contrast requirements',
-  },
-  { href: '#best-practices', label: '8. Best practices' },
-  { href: '#learn-more', label: '9. Learn more' },
+  { href: '#overview', label: 'Overview' },
+  { href: '#how-it-works', label: 'How a scale is made' },
+  { href: '#steps', label: 'The 15 steps' },
+  { href: '#gaussian-bell-curve', label: 'The Gaussian chroma curve' },
+  { href: '#chroma-distribution', label: 'Try it' },
+  { href: '#multiple-anchors', label: 'Palettes with several anchors' },
+  { href: '#oklch-color-space', label: 'Why OKLCH' },
+  { href: '#light-and-dark', label: 'Light and dark mode' },
+  { href: '#contrast-requirements', label: 'Contrast requirements' },
+  { href: '#proposing-a-change', label: 'Proposing a change to Tokens Studio' },
+  { href: '#tips', label: 'Tips' },
+  { href: '#learn-more', label: 'Learn more' },
 ]
 
 export function AboutTableOfContents() {
   return (
-    <nav className="p-6 rounded border border-muted bg-surface">
-      <h2 className="mb-4 text-header-lg font-medium">Table of contents</h2>
-      <ol className="space-y-2 text-sm">
+    <nav
+      aria-labelledby="about-contents"
+      className="p-6 rounded border border-muted bg-surface"
+    >
+      <h2 id="about-contents" className="m-0 mb-4 text-header-lg font-medium">
+        Contents
+      </h2>
+      <ol className="m-0 space-y-2 pl-5 text-sm list-decimal">
         {SECTIONS.map(({ href, label }) => (
           <li key={href}>
             <a

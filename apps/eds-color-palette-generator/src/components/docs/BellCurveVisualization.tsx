@@ -6,11 +6,14 @@ import { gaussian } from '@/utils/color'
 type BellCurveVisualizationProps = {
   initialMean?: number
   initialStdDev?: number
+  /** Lightness values to mark on the curve, e.g. the 15 steps of a scale */
+  markers?: number[]
 }
 
 export const BellCurveVisualization = ({
   initialMean = 0.6,
   initialStdDev = 2,
+  markers = [],
 }: BellCurveVisualizationProps) => {
   const [mean, setMean] = useState(initialMean)
   const [stdDev, setStdDev] = useState(initialStdDev)
@@ -33,7 +36,7 @@ export const BellCurveVisualization = ({
   const pathData = useMemo(() => {
     const width = 600
     const height = 300
-    const padding = 40
+    const padding = 52
 
     const scaleX = (x: number) => padding + x * (width - 2 * padding)
     const scaleY = (y: number) => height - padding - y * (height - 2 * padding)
@@ -108,10 +111,10 @@ export const BellCurveVisualization = ({
               Lightness (0 to 1)
             </text>
             <text
-              x={pathData.padding - 25}
+              x={pathData.padding - 40}
               y={pathData.height / 2}
               textAnchor="middle"
-              transform={`rotate(-90 ${pathData.padding - 25} ${pathData.height / 2})`}
+              transform={`rotate(-90 ${pathData.padding - 40} ${pathData.height / 2})`}
             >
               Chroma multiplier
             </text>
@@ -152,6 +155,22 @@ export const BellCurveVisualization = ({
             className="text-accent"
           />
 
+          {/* One dot per step, where its lightness meets the curve */}
+          <g className="text-accent" fill="currentColor">
+            {markers.map((lightness, i) => (
+              <circle
+                key={i}
+                cx={pathData.scaleX(lightness).toFixed(2)}
+                cy={pathData
+                  .scaleY(gaussian(lightness, mean, stdDev))
+                  .toFixed(2)}
+                r="4"
+              >
+                <title>{`Step ${i + 1}: L ${lightness}, multiplier ${gaussian(lightness, mean, stdDev).toFixed(3)}`}</title>
+              </circle>
+            ))}
+          </g>
+
           {/* Mean indicator */}
           <line
             x1={pathData.scaleX(mean)}
@@ -171,7 +190,7 @@ export const BellCurveVisualization = ({
             fill="currentColor"
             className="text-danger"
           >
-            Mean: {mean.toFixed(1)}
+            Mean: {mean.toFixed(2)}
           </text>
         </svg>
       </div>
@@ -215,22 +234,25 @@ export const BellCurveVisualization = ({
       </div>
 
       <div className="rounded border border-muted bg-surface p-4 text-sm">
-        <p className="mb-2">
-          <strong>How it works:</strong> The bell curve (Gaussian function)
-          determines how much chroma (colour intensity) is applied at different
-          lightness levels.
+        <p className="m-0 mb-2">
+          The curve gives the share of the anchor&apos;s chroma that a step
+          keeps at each lightness:
         </p>
-        <ul className="list-disc list-inside space-y-1 text-secondary">
+        <ul className="m-0 list-disc space-y-1 pl-5 text-secondary">
           <li>
-            <strong>Mean:</strong> The lightness value where chroma is at its
-            maximum
+            <strong>Mean</strong> is the lightness where the multiplier is 1, so
+            a step there keeps all of the anchor&apos;s chroma.
           </li>
           <li>
-            <strong>Standard deviation:</strong> How quickly chroma decreases
-            away from the mean
+            <strong>Standard deviation</strong> sets how wide the curve is. A
+            lower value narrows it, so chroma drops quickly away from the mean;
+            a higher value widens it, so more steps keep their colour.
           </li>
-          <li>Higher values near the mean = more vibrant colours</li>
-          <li>Lower values away from the mean = more muted colours</li>
+          <li>
+            The dots are the 15 steps of the scale. Steps 1 and 15, the canvas
+            and the surface, are furthest from the mean in both modes, so they
+            keep the least chroma.
+          </li>
         </ul>
       </div>
     </div>

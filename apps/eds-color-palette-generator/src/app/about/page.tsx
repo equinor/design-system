@@ -1,16 +1,19 @@
 'use client'
 
 import {
-  AboutBestPractices,
   AboutChromaDistribution,
-  AboutConfiguration,
   AboutContrastRequirements,
   AboutGaussianBellCurve,
   AboutHowItWorks,
   AboutLearnMore,
+  AboutLightAndDark,
+  AboutMultipleAnchors,
   AboutOklchColorSpace,
   AboutOverview,
+  AboutStepRoles,
   AboutTableOfContents,
+  AboutTips,
+  AboutTokensStudio,
 } from '@/components/docs/about'
 import Link from 'next/link'
 import { AppHeader } from '@/components/shared/AppHeader'
@@ -27,9 +30,9 @@ export default function AboutPage() {
             About the EDS Colour Palette Generator
           </h1>
           <p className="mt-2 text-base text-secondary">
-            Learn how this tool creates harmonious, accessible colour scales
-            using Gaussian distribution and the{' '}
-            <abbr title="Oklab Lightness Chroma Hue">OKLCH</abbr> colour space.
+            How the tool generates the 15-step EDS colour scales from Tokens
+            Studio, what each step is for, how contrast is checked, and how to
+            propose a change.
           </p>
           {/* The header nav has no /old entry, so the old "Back to
               generator" link lives on here. */}
@@ -45,12 +48,15 @@ export default function AboutPage() {
         <AboutTableOfContents />
         <AboutOverview />
         <AboutHowItWorks />
+        <AboutStepRoles />
         <AboutGaussianBellCurve />
         <AboutChromaDistribution />
+        <AboutMultipleAnchors />
         <AboutOklchColorSpace />
-        <AboutConfiguration />
+        <AboutLightAndDark />
         <AboutContrastRequirements />
-        <AboutBestPractices />
+        <AboutTokensStudio />
+        <AboutTips />
         <AboutLearnMore />
       </Main>
     </div>

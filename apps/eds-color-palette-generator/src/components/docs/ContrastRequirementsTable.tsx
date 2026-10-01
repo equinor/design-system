@@ -18,9 +18,9 @@ export const ContrastRequirementsTable = () => {
           className="rounded border border-muted bg-surface p-6"
         >
           <div className="mb-4">
-            <h4 className="text-lg font-medium">
+            <h3 className="m-0 text-header-md font-medium">
               {step.name} · {step.label}
-            </h4>
+            </h3>
             {step.primaryRole && (
               <p className="text-sm text-secondary">
                 <code>{step.primaryRole}</code>

@@ -3,85 +3,49 @@ import { ContrastRequirementsTable } from '@/components/docs/ContrastRequirement
 export function AboutContrastRequirements() {
   return (
     <section id="contrast-requirements" className="scroll-mt-8">
-      <h2 className="mb-4 text-header-xl font-medium">
-        Colour step pairings and contrast requirements
-      </h2>
+      <h2 className="mb-4 text-header-xl font-medium">Contrast requirements</h2>
       <div className="mb-6 space-y-4">
         <p>
-          Each colour step is designed to work with specific other steps to
-          ensure accessibility. The configuration defines contrast requirements
-          using both{' '}
-          <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>{' '}
-          (Accessible Perceptual Contrast Algorithm) and{' '}
-          <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1
-          standards.
+          Contrast is checked with{' '}
+          <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>,
+          the Accessible Perceptual Contrast Algorithm, as ADR 0016 sets out in
+          Confirmation 5. APCA gives a contrast value called Lc, where a higher
+          value means more contrast, and it takes into account whether the text
+          is darker or lighter than its background. Lc 90 is the level APCA
+          prefers for body text, and Lc 60 is its minimum for content text that
+          is not body text, such as labels and helper text.
         </p>
-        <p>
-          These requirements come directly from the configuration file, keeping
-          documentation in sync with implementation. Each pairing specifies
-          minimum contrast levels for different use cases — from subtle UI
-          components to body text.
-        </p>
-      </div>
-
-      <div className="p-4 mb-6 text-sm border rounded border-muted">
-        <p className="mb-2 font-medium">Understanding the levels:</p>
-        <ul className="space-y-1 text-secondary">
-          <li>
-            <strong>
-              <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>{' '}
-              Lc values:
-            </strong>{' '}
-            Range from 15 (decorative elements) to 90 (body text). Higher values
-            mean stronger contrast requirements.
-          </li>
-          <li>
-            <strong>
-              <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>{' '}
-              ratios:
-            </strong>{' '}
-            Traditional contrast ratios (3:1, 4.5:1, 7:1) for UI components,
-            normal text, and large text at AA/AAA levels.
-          </li>
-        </ul>
-      </div>
-
-      <ContrastRequirementsTable />
-
-      <div className="p-4 mt-6 text-sm rounded border border-muted bg-surface">
-        <h3 className="mb-2 font-medium">Key insights</h3>
-        <ul className="space-y-1 list-disc list-inside text-secondary">
+        <ul className="space-y-2 pl-5 list-disc">
           <li>
             <strong>Text and icons</strong> are measured against{' '}
             <code>background.surface</code> (neutral step 15): Lc 90 for{' '}
             <code>text.primary</code> (step 13), and Lc 60 for{' '}
-            <code>text.secondary</code> (step 8) and interactive icons (steps
-            11–13)
+            <code>text.secondary</code> (step 8) and the interactive icons
+            (steps 11 and 12).
           </li>
           <li>
             <strong>Text on emphasis fills</strong>,{' '}
             <code>text.on-emphasis.&lt;tone&gt;</code> (step 15), is measured
             against the tone&apos;s default emphasis fill,{' '}
             <code>background.interactive.&lt;tone&gt;.emphasis.default</code>{' '}
-            (step 9), at Lc 60
+            (step 9), at Lc 60.
           </li>
           <li>
-            <strong>Fills</strong> step through default, hover and pressed by
-            lightness: the muted fills at steps 1–3 and the emphasis fills at
-            steps 9–11
-          </li>
-          <li>
-            <strong>Borders</strong>,{' '}
-            <code>border.non-interactive.&lt;tone&gt;</code> muted, default and
-            emphasis (steps 4, 7 and 9), have no contrast requirement in ADR
-            0016
-          </li>
-          <li>
-            <strong>Steps 6 and 14</strong> have no semantic role in Tokens
-            Studio
+            <strong>Borders</strong> have no contrast requirement yet. ADR 0016
+            leaves them out because APCA has no agreed target for borders.
           </li>
         </ul>
+        <p>
+          The Theme Builder checks each pair inside every palette. For palettes
+          other than the neutral one, the palette&apos;s own step 15 stands in
+          for <code>background.surface</code>; both have the same lightness. The{' '}
+          <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1
+          ratio is shown next to each requirement for reference, but the check
+          is based on APCA.
+        </p>
       </div>
+
+      <ContrastRequirementsTable />
     </section>
   )
 }

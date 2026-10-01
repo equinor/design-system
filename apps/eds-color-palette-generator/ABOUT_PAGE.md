@@ -1,200 +1,39 @@
-# About Page Documentation
+# About page
 
-## Overview
+The About page (`/about`, `src/app/about/page.tsx`) explains how the EDS Colour Palette Generator makes a colour scale, what each step is for, how contrast is checked and how to propose a change to Tokens Studio.
 
-The About page explains how the EDS Colour Palette Generator works internally, with interactive demonstrations of the key concepts. The values it shows (lightness per step, step roles, contrast requirements) come from Tokens Studio through `src/config/tokensStudio.ts` and `src/config/config.ts`, so the page follows Tokens Studio without edits.
+Every number and colour on the page comes from Tokens Studio through `src/config/tokensStudio.ts` and `src/config/config.ts`, and the example scales are generated with `generateColorScale` when the page renders. Nothing is typed by hand, so when a Tokens Studio pull changes an anchor, a lightness value or a step role, the page follows without edits. The examples use the colour scheme chosen in settings, and the components that depend on it remount on a scheme change so their sliders start at that scheme's values.
 
-## Location
+## Sections
 
-- **Route:** `/about`
-- **File:** `src/app/about/page.tsx`
+Each section is a component in `src/components/docs/about/`, rendered in this order:
 
-## Features
+| Section                             | Component                   | What it shows                                                                                                                              |
+| ----------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Contents                            | `AboutTableOfContents`      | Links to the sections below                                                                                                                |
+| Overview                            | `AboutOverview`             | What the tool is for, Tokens Studio as the source of truth, the parity test, and what each page does                                       |
+| How a scale is made                 | `AboutHowItWorks`           | `set_chroma(set_lightness(anchor, L), gaussian(L) × C)` step by step, with the accent hue generated live and step 9 worked through         |
+| The 15 steps                        | `AboutStepRoles`            | Why the lightness is hand-set (ADR 0016 D3), the dark dip and the inverse steps 14 and 15, and a table of every step's lightness and roles |
+| The Gaussian chroma curve           | `AboutGaussianBellCurve`    | The formula, the Tokens Studio mean and standard deviation, and `BellCurveVisualization` with the 15 steps marked on the curve             |
+| Try it                              | `AboutChromaDistribution`   | `ChromaDistributionDemo`: pick an anchor and curve, see the chroma per step and the generated scale                                        |
+| Palettes with several anchors       | `AboutMultipleAnchors`      | How anchors are interpolated, why they cannot be proposed to Tokens Studio, and a live two-anchor example                                  |
+| Why OKLCH                           | `AboutOklchColorSpace`      | L, C and H, OKLCH as the canonical form (ADR 0016 D9), the OKLCH/HEX switch and the sRGB gamut                                             |
+| Light and dark mode                 | `AboutLightAndDark`         | What differs between the modes: lightness, the curve's mean and the neutral hue                                                            |
+| Contrast requirements               | `AboutContrastRequirements` | The APCA targets from ADR 0016 Confirmation 5 and `ContrastRequirementsTable`                                                              |
+| Proposing a change to Tokens Studio | `AboutTokensStudio`         | How palette names map to hues, the Tokens Studio anchors download, Share and the palettes file                                             |
+| Tips                                | `AboutTips`                 | Practical advice on anchors, modes and proposals                                                                                           |
+| Learn more                          | `AboutLearnMore`            | ADR 0016, ADR 0011 and external reading on OKLCH and APCA                                                                                  |
 
-### 1. Comprehensive Explanations
+`ScaleStrip` renders a generated scale as 15 numbered swatches and is shared by the examples. `links.ts` holds the ADR 0016 link.
 
-The page explains:
+## Interactive components
 
-- How the colour generation algorithm works
-- The role of the Gaussian (bell curve) distribution
-- How lightness values are configured for each step
-- Why OKLCH colour space is used
-- Configuration options for light and dark modes
+- **`BellCurveVisualization`** (`src/components/docs/`): the Gaussian curve with sliders for mean and standard deviation. `markers` takes lightness values and draws a dot for each step on the curve.
+- **`ChromaDistributionDemo`** (`src/components/docs/`): takes an anchor, the 15 lightness values and the curve parameters. It accepts any CSS colour, shows the chroma of each step as a bar chart in the step's colour, and renders the scale with `ScaleStrip`.
+- **`ContrastRequirementsTable`** (`src/components/docs/`): lists every step with a contrast requirement from `PALETTE_STEPS`, with its APCA level and, for reference, the WCAG 2.1 ratio.
 
-### 2. Interactive Bell Curve Visualisation
-
-The `BellCurveVisualization` component (`src/components/docs/BellCurveVisualization.tsx`) provides:
-
-- Visual representation of the Gaussian function
-- Interactive controls for mean and standard deviation
-- Real-time updates showing how parameters affect the curve shape
-- Grid and axis labels for clarity
-- Mean indicator showing the peak of the curve
-
-### 3. Interactive Chroma Distribution Demo
-
-The `ChromaDistributionDemo` component (`src/components/docs/ChromaDistributionDemo.tsx`) provides:
-
-- Colour picker to select any base colour
-- Interactive controls for Gaussian parameters (mean and standard deviation)
-- Visual chart showing chroma distribution across lightness values
-- Generated colour scale preview
-- Real-time property calculations (base chroma, max chroma, peak lightness)
-
-### 4. Colour Step Pairings and Contrast Requirements
-
-The `ContrastRequirementsTable` component (`src/components/docs/ContrastRequirementsTable.tsx`) provides:
-
-- Comprehensive list of all colour steps with contrast requirements
-- Direct reference to configuration file for always up-to-date information
-- Detailed APCA (Accessible Perceptual Contrast Algorithm) levels and rules
-- WCAG 2.1 contrast ratios and requirements
-- Lightness values for both light and dark modes
-- Each step named after its Tokens Studio role (ADR 0016 D5)
-
-### 5. Best Practices and Resources
-
-- Guidelines for using the generator effectively
-- Links to relevant specifications and tools:
-  - Oklab colour space specification
-  - <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 guidelines
-  - <abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr> contrast algorithm
-  - OKLCH colour picker and converter
-
-## Components Created
-
-### BellCurveVisualization
-
-**File:** `src/components/docs/BellCurveVisualization.tsx`
-
-A client-side component that visualises the Gaussian function used to calculate chroma multipliers.
-
-**Props:**
-
-- `initialMean?: number` -- Initial mean value (default: 0.6)
-- `initialStdDev?: number` -- Initial standard deviation (default: 2)
-
-**Features:**
-
-- SVG-based bell curve visualisation
-- Interactive sliders for mean and standard deviation
-- Grid lines and axis labels
-- Mean indicator line
-- Responsive design
-
-### ChromaDistributionDemo
-
-**File:** `src/components/docs/ChromaDistributionDemo.tsx`
-
-A client-side component that demonstrates how chroma varies across a colour scale.
-
-**Props:**
-
-- `initialBaseColor?: string` -- Initial base colour (default: '#FF6B6B')
-- `initialMean?: number` -- Initial mean value (default: 0.6)
-- `initialStdDev?: number` -- Initial standard deviation (default: 2)
-
-**Features:**
-
-- Colour picker for base colour selection
-- Interactive Gaussian parameter controls
-- Bar chart showing chroma distribution
-- Colour scale preview with hover states
-- Real-time property calculations
-
-### ContrastRequirementsTable
-
-**File:** `src/components/docs/ContrastRequirementsTable.tsx`
-
-A client-side component that displays colour step pairings and their contrast requirements, directly referencing the configuration file.
-
-**Features:**
-
-- Dynamically reads from `PALETTE_STEPS` configuration
-- Displays APCA Lc levels with descriptions and rules
-- Shows WCAG contrast ratios with requirements
-- Lists all steps with their contrast pairings
-- Lightness values for both light and dark modes
-- Each requirement names the Tokens Studio pairing it checks (ADR 0016 Confirmation 5)
-- Always stays in sync with the configuration
-
-## Navigation
-
-The About page is linked from the header navigation (`AppHeader`) on every route, and is available at `/about`. An "Open the original generator" link on the page points at the archived Gaussian generator at `/old`.
-
-## Technical Implementation
-
-### Colour Space
-
-The demos use the OKLCH colour space via the `colorjs.io` library, which provides:
-
-- Perceptually uniform colour representation
-- Independent manipulation of lightness, chroma, and hue
-- Consistent behaviour across different colours
-
-### Gaussian Function
-
-The mathematical formula used:
-
-```typescript
-gaussian(x, mean, stdDev) = exp((-25 / stdDev) × (mean - x)²)
-```
-
-This function produces a bell curve where:
-
-- `x` is the lightness value (0 to 1)
-- `mean` is the centre of the curve (where chroma is maximum)
-- `stdDev` controls the width (how quickly chroma decreases)
-
-### Chroma Calculation
-
-For each colour step:
-
-```typescript
-chroma = gaussian(lightness, mean, stdDev) × baseChroma
-```
-
-The Gaussian function outputs a multiplier (0 to 1) that scales the base colour's chroma.
-
-### Configuration References
-
-The About page directly references the configuration files to ensure documentation stays synchronized:
-
-- **PALETTE_STEPS** from `src/config/config.ts` -- All steps with their Tokens Studio lightness values, roles and contrast requirements
-- **APCA_CONTRAST_LEVELS** from `src/config/APCA_CONTRAST_LEVELS.ts` -- APCA Lc levels with descriptions and rules
-- **WCAG_CONTRAST_LEVELS** from `src/config/WCAG_CONTRAST_LEVELS.ts` -- WCAG contrast ratios and requirements
-
-This approach eliminates the need to manually update documentation when configuration changes, as the page reads directly from the source of truth.
+The sliders in both demos only change the demo. The Theme Builder always uses the Tokens Studio curve.
 
 ## Styling
 
-The page uses the app's Tailwind classes, which map onto Tokens Studio semantic variables in `src/app/globals.css`:
-
-- `bg-canvas` -- `background.canvas`, the page background
-- `bg-surface` -- `background.surface`, cards and panels
-- `text-primary` -- `text.primary`
-- `text-secondary` -- `text.secondary`
-- `border-muted` -- `border.non-interactive.neutral.muted`
-
-The page is responsive and follows the light and dark colour schemes.
-
-## Accessibility
-
-The page follows accessibility best practices:
-
-- Semantic HTML structure with proper heading hierarchy
-- ARIA labels on interactive SVG elements
-- Keyboard-navigable controls
-- High contrast colours
-- Descriptive link text and labels
-- Proper use of `<abbr>` tags for abbreviations
-
-## Future Enhancements
-
-Potential improvements:
-
-- Add more interactive demos (e.g., side-by-side light/dark mode comparison)
-- Include examples of common use cases
-- Add a tutorial mode with step-by-step guidance
-- Export visualisation as images
-- Add comparison with other colour generation methods
+The page uses the app's Tailwind classes, which map onto Tokens Studio semantic variables in `src/app/globals.css` (`bg-canvas`, `bg-surface`, `text-secondary`, `border-muted` and so on). SVG coordinates are rounded with `toFixed(2)` so the server and browser render the same markup.
