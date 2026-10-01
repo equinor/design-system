@@ -1,5 +1,11 @@
 {
   "permissions": {
+    "ask": [
+      "Bash(gh pr create:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue edit:*)"
+    ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
