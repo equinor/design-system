@@ -93,6 +93,12 @@ describe('Checkbox (next)', () => {
   })
 
   describe('Accessibility', () => {
+    it('falls back to a generated id when id is an empty string', () => {
+      render(<Checkbox label="checkbox-test" id="" />)
+      const input = screen.getByRole('checkbox', { name: 'checkbox-test' })
+      expect(input.id).not.toBe('')
+    })
+
     it('passes axe accessibility test', async () => {
       const { container } = render(<Checkbox label="checkbox-test" />)
       expect(await axe(container)).toHaveNoViolations()

@@ -59,6 +59,12 @@ describe('Switch (next)', () => {
   })
 
   describe('Accessibility', () => {
+    it('falls back to a generated id when id is an empty string', () => {
+      render(<Switch label="switch-test" id="" />)
+      const input = screen.getByRole('switch', { name: 'switch-test' })
+      expect(input.id).not.toBe('')
+    })
+
     it('should pass a11y test with label', async () => {
       const { container } = render(<Switch label="switch-test" />)
       expect(await axe(container)).toHaveNoViolations()

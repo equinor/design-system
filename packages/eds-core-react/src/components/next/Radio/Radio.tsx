@@ -13,7 +13,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   ref,
 ) {
   const generatedId = useId()
-  const inputId = providedId ?? generatedId
+  // `||`, not `??`: an empty string is treated as no id
+  const inputId = providedId || generatedId
 
   const radioInput = (
     <>
