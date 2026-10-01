@@ -94,19 +94,24 @@ export function ExportDialog({
   const readUpload = (file: File) => {
     const reader = new FileReader()
     reader.onload = () => {
+      // Only the parsing is caught, so an error further on is not reported
+      // as invalid JSON
+      let data: unknown
       try {
-        const imported = palettesFromConfig(JSON.parse(String(reader.result)))
-        if (!imported) {
-          setImportError(
-            'This file has no palettes. Choose a palettes file downloaded from this tool.',
-          )
-          return
-        }
-        onImport(imported)
-        close()
+        data = JSON.parse(String(reader.result))
       } catch {
         setImportError('The file is not valid JSON.')
+        return
       }
+      const imported = palettesFromConfig(data)
+      if (!imported) {
+        setImportError(
+          'This file has no palettes. Choose a palettes file downloaded from this tool.',
+        )
+        return
+      }
+      onImport(imported)
+      close()
     }
     reader.readAsText(file)
   }
