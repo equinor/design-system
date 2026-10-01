@@ -137,6 +137,10 @@
   --background-color-accent-selected-hover: var(
     --eds-background-interactive-accent-selected-hover
   );
+  /* EDS Button secondary hover fill (accent step 3) */
+  --background-color-neutral-selected: var(
+    --eds-background-interactive-neutral-selected-default
+  );
 
   /* Status backgrounds (non-interactive: badges, banners) */
   --background-color-info-muted: var(
@@ -186,6 +190,10 @@
   --text-color-accent: var(--eds-text-on-default-accent);
   --text-color-accent-on-muted: var(--eds-text-on-muted-accent);
   --text-color-accent-on-emphasis: var(--eds-text-on-emphasis-accent);
+  /* The EDS Button's secondary label. Figma binds it to
+     text/interactive/accent/default (accent step 11), which Tokens Studio
+     does not have; icon.interactive.accent.default is the same step. */
+  --text-color-interactive-accent: var(--eds-icon-interactive-accent-default);
   --text-color-info: var(--eds-text-on-default-info);
   --text-color-info-on-muted: var(--eds-text-on-muted-info);
   --text-color-info-on-emphasis: var(--eds-text-on-emphasis-info);

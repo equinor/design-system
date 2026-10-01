@@ -4,7 +4,6 @@ import { useRef } from 'react'
 import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react'
 import type { IconData } from '@equinor/eds-icons'
 import { Icon } from './Icon'
-import { tabClassName } from './tabStyles'
 
 export type SegmentedOption<T extends string> = {
   value: T
@@ -33,12 +32,12 @@ export type SegmentedControlProps<T extends string> = {
    * control with `<TabPanel idPrefix={…} value={…}>`.
    */
   idPrefix?: string
-  /** Radio mode only; tabs always use the EDS Tab size. */
+  /** EDS Button size: `md` (default, 36px) or `sm` (24px) */
   size?: 'sm' | 'md'
   /**
-   * Radio mode only. `joined` (default) draws one bordered strip. `wrap`
-   * draws separate pills that wrap onto more lines, for long option lists
-   * such as palette names.
+   * `joined` (default) draws the buttons as one EDS Toggle. `wrap` draws
+   * separate buttons that wrap onto more lines, for long option lists such
+   * as palette names.
    */
   layout?: 'joined' | 'wrap'
   disabled?: boolean
@@ -55,39 +54,50 @@ export function segmentPanelId(idPrefix: string, value: string): string {
   return `${idPrefix}-panel-${value}`
 }
 
+/*
+ * Every segment is an EDS Button (Core Components Figma, "Button [EDS]",
+ * 5823:7549, Tone=Accent), laid out as the EDS Toggle (11832:3639): the
+ * selected segment is the Primary button, the others the Secondary button.
+ * States follow the button: hover, pressed (active) and focus, which shows
+ * the hover fill plus a 1px focus ring.
+ *
+ * Figma's button has its stroke inside the frame, so the padding here is one
+ * pixel smaller on each side to keep its 36px (default) and 24px (small)
+ * height with a 1px CSS border.
+ */
 const SEGMENT_SIZES = {
-  sm: 'min-h-7 gap-1.5 px-2.5 text-sm',
-  md: 'min-h-9 gap-2 px-4 text-base',
+  sm: 'gap-[var(--eds-spacing-3xs)] px-[calc(var(--eds-spacing-xs)-1px)] py-[calc(var(--eds-spacing-3xs)-1px)] text-sm',
+  md: 'gap-[var(--eds-spacing-xs)] px-[calc(var(--eds-spacing-sm)-1px)] py-[calc(var(--eds-spacing-xs)-1px)] text-base',
 } as const
 
 const ICON_ONLY_SIZES = {
-  sm: 'size-7',
+  sm: 'size-6',
   md: 'size-9',
 } as const
 
 const SEGMENT_BASE =
-  'inline-flex items-center justify-center whitespace-nowrap cursor-pointer transition-colors duration-150 focus-visible:relative focus-visible:z-10 disabled:cursor-not-allowed'
+  'inline-flex items-center justify-center whitespace-nowrap cursor-pointer border border-solid font-sans font-medium transition-colors duration-150 focus-visible:relative focus-visible:z-10 focus-visible:outline-1 disabled:cursor-not-allowed'
 
 const LAYOUT = {
   joined: {
-    group: 'inline-flex max-w-full rounded border border-muted bg-surface',
-    segment:
-      'border-l border-muted first:border-l-0 first:rounded-l last:rounded-r',
+    group: 'inline-flex max-w-full',
+    // Neighbours overlap by the border width so two borders read as one.
+    segment: '-ml-px first:ml-0 rounded-none first:rounded-l last:rounded-r',
   },
   wrap: {
-    group: 'flex flex-wrap gap-1',
-    segment: 'rounded border border-muted',
+    group: 'flex flex-wrap gap-[var(--eds-spacing-3xs)]',
+    segment: 'rounded',
   },
 } as const
 
+// Primary button. The transparent border keeps it the same size as its
+// Secondary neighbours.
 const SELECTED =
-  'bg-neutral-emphasis text-neutral-on-emphasis font-medium hover:bg-neutral-emphasis-hover active:bg-neutral-emphasis-pressed'
+  'border-transparent bg-accent-emphasis text-accent-on-emphasis hover:bg-accent-emphasis-hover active:bg-accent-emphasis-pressed focus-visible:bg-accent-emphasis-hover focus-visible:outline-offset-0 disabled:bg-disabled disabled:text-disabled'
 
+// Secondary button.
 const UNSELECTED =
-  'bg-surface text-secondary hover:bg-neutral-muted hover:text-primary active:bg-neutral-muted-hover disabled:bg-surface disabled:text-disabled'
-
-// Tabs use the EDS Tab (see tabStyles.ts).
-const TAB_GROUP = 'inline-flex max-w-full flex-wrap'
+  'border-interactive-accent-emphasis-hover bg-transparent text-interactive-accent hover:bg-neutral-selected active:bg-accent-muted-hover focus-visible:bg-neutral-selected focus-visible:outline-offset-1 disabled:border-disabled disabled:bg-transparent disabled:text-disabled'
 
 // A horizontal tablist uses Left/Right only; a radio group also Up/Down.
 const NEXT_KEYS = { tabs: ['ArrowRight'], radio: ['ArrowRight', 'ArrowDown'] }
@@ -145,9 +155,7 @@ export function SegmentedControl<T extends string>({
       role={isTabs ? 'tablist' : 'radiogroup'}
       aria-label={ariaLabel}
       onKeyDown={onKeyDown}
-      className={[isTabs ? TAB_GROUP : LAYOUT[layout].group, className]
-        .filter(Boolean)
-        .join(' ')}
+      className={[LAYOUT[layout].group, className].filter(Boolean).join(' ')}
     >
       {options.map((option, index) => {
         const selected = index === selectedIndex
@@ -181,22 +189,15 @@ export function SegmentedControl<T extends string>({
             tabIndex={index === focusIndex ? 0 : -1}
             disabled={disabled}
             onClick={() => onChange(option.value)}
-            className={
-              isTabs
-                ? tabClassName(selected)
-                : [
-                    SEGMENT_BASE,
-                    LAYOUT[layout].segment,
-                    iconOnly ? ICON_ONLY_SIZES[size] : SEGMENT_SIZES[size],
-                    selected ? SELECTED : UNSELECTED,
-                  ].join(' ')
-            }
+            className={[
+              SEGMENT_BASE,
+              LAYOUT[layout].segment,
+              iconOnly ? ICON_ONLY_SIZES[size] : SEGMENT_SIZES[size],
+              selected ? SELECTED : UNSELECTED,
+            ].join(' ')}
           >
             {option.icon && (
-              <Icon
-                data={option.icon}
-                size={isTabs || size === 'md' ? 18 : 16}
-              />
+              <Icon data={option.icon} size={size === 'sm' ? 16 : 18} />
             )}
             {option.label}
           </button>

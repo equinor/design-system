@@ -1,8 +1,8 @@
 /*
  * The EDS Tab from the Core Components Figma file (node 4240:243515,
- * "Composition=Simple"), shared by SegmentedControl's tabs and the AppHeader
- * navigation: a 2px bottom border, no corner radius, 12/8px padding and ui/md
- * text. Inactive tabs use the neutral muted border and primary text, the
+ * "Composition=Simple"), used by the AppHeader navigation: a 2px bottom
+ * border, no corner radius, 12/8px padding and ui/md text. Inactive tabs use
+ * the neutral muted border and primary text, the
  * active tab the accent emphasis border and accent text. Hover and focus add
  * the muted fill (accent for the active tab) and focus a 1px focus ring.
  *
