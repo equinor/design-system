@@ -87,6 +87,10 @@ const refersOnlyToElevationAliases = (block: Block) =>
   )
 
 describe('subtree scoping in the Tokens Studio CSS bundle', () => {
+  it('has only flat rules, which the block parser relies on', () => {
+    expect(css).not.toMatch(/@[\w-]+/)
+  })
+
   it('has one block per colour scheme and one per density', () => {
     expect(schemeBlocks).toHaveLength(2)
     expect(densityBlocks.map((block) => block.selectors)).toEqual([
