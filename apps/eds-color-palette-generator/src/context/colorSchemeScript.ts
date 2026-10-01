@@ -12,7 +12,8 @@ export const COLOR_SCHEME_SCRIPT = `(function () {
     var mode = new URLSearchParams(location.search).get('mode')
     if (!ok(mode)) {
       var saved = localStorage.getItem(${JSON.stringify(STORAGE_KEYS.COLOR_SCHEME)})
-      mode = saved ? JSON.parse(saved) : null
+      // A value that is not JSON counts as no choice
+      try { mode = saved ? JSON.parse(saved) : null } catch (e) { mode = null }
     }
     if (!ok(mode)) {
       mode = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'

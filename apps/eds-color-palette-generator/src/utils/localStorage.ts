@@ -1,7 +1,11 @@
 import type { ColorFormat } from '@/types'
 
 /** The Tokens Studio density modes */
-export type Density = 'relaxed' | 'comfortable' | 'compact'
+export const DENSITIES = ['relaxed', 'comfortable', 'compact'] as const
+export type Density = (typeof DENSITIES)[number]
+
+const COLOR_SCHEMES = ['light', 'dark'] as const
+const COLOR_FORMATS: readonly ColorFormat[] = ['OKLCH', 'HEX']
 
 // Keys for localStorage
 export const STORAGE_KEYS = {
@@ -33,19 +37,34 @@ function setItem<T>(key: string, value: T): void {
   }
 }
 
+/**
+ * A stored choice, or the default when the stored value is not one of the
+ * allowed values (an older version's value, or one edited by hand).
+ */
+function getOneOf<T extends string, D>(
+  key: string,
+  allowed: readonly T[],
+  defaultValue: D,
+): T | D {
+  const value = getItem<unknown>(key, defaultValue)
+  return (allowed as readonly unknown[]).includes(value)
+    ? (value as T)
+    : defaultValue
+}
+
 // The saved choices from the settings dialog and the Theme Builder
 export const localStorageUtils = {
   getColorScheme: <T extends 'light' | 'dark' | null>(defaultValue: T) =>
-    getItem<'light' | 'dark' | T>(STORAGE_KEYS.COLOR_SCHEME, defaultValue),
+    getOneOf(STORAGE_KEYS.COLOR_SCHEME, COLOR_SCHEMES, defaultValue),
   setColorScheme: (value: 'light' | 'dark') =>
     setItem(STORAGE_KEYS.COLOR_SCHEME, value),
 
   getColorFormat: (defaultValue: ColorFormat) =>
-    getItem(STORAGE_KEYS.COLOR_FORMAT, defaultValue),
+    getOneOf(STORAGE_KEYS.COLOR_FORMAT, COLOR_FORMATS, defaultValue),
   setColorFormat: (value: ColorFormat) =>
     setItem(STORAGE_KEYS.COLOR_FORMAT, value),
 
   getDensity: (defaultValue: Density) =>
-    getItem(STORAGE_KEYS.DENSITY, defaultValue),
+    getOneOf(STORAGE_KEYS.DENSITY, DENSITIES, defaultValue),
   setDensity: (value: Density) => setItem(STORAGE_KEYS.DENSITY, value),
 }

@@ -58,6 +58,22 @@ describe('localStorageUtils', () => {
     })
   })
 
+  describe('values that are not a valid choice', () => {
+    it('falls back to the default', () => {
+      localStorage.setItem(STORAGE_KEYS.COLOR_SCHEME, JSON.stringify('sepia'))
+      localStorage.setItem(STORAGE_KEYS.COLOR_FORMAT, JSON.stringify('RGB'))
+      localStorage.setItem(STORAGE_KEYS.DENSITY, JSON.stringify('spacious'))
+      expect(localStorageUtils.getColorScheme(null)).toBeNull()
+      expect(localStorageUtils.getColorFormat('OKLCH')).toBe('OKLCH')
+      expect(localStorageUtils.getDensity('comfortable')).toBe('comfortable')
+    })
+
+    it('falls back to the default for a value of the wrong type', () => {
+      localStorage.setItem(STORAGE_KEYS.DENSITY, JSON.stringify(3))
+      expect(localStorageUtils.getDensity('compact')).toBe('compact')
+    })
+  })
+
   describe('failures', () => {
     it('falls back to the default when the stored value is not JSON', () => {
       const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})

@@ -58,11 +58,10 @@ describe('COLOR_SCHEME_SCRIPT', () => {
     expect(runScript()).toBe('dark')
   })
 
-  it('leaves <html> as it was when the saved value cannot be read', () => {
-    document.documentElement.setAttribute('data-color-scheme', 'light')
+  it('uses the system preference when the saved value is not JSON', () => {
     localStorage.setItem(STORAGE_KEYS.COLOR_SCHEME, 'not json')
     systemDark = true
 
-    expect(runScript()).toBe('light')
+    expect(runScript()).toBe('dark')
   })
 })
