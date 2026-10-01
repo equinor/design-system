@@ -343,7 +343,8 @@
   --eds-light-red-8: oklch(0.62 0.2302 21.12);
   --eds-light-red-9: oklch(0.52 0.2136 21.12);
 }
-:root {
+:root,
+[data-density="comfortable"] {
   --eds-density-corner-radius-none: var(--eds-primitives-spacing-0);
   --eds-density-corner-radius-pill: 9999px;
   --eds-density-corner-radius-rounded: var(--eds-primitives-spacing-25);
@@ -610,7 +611,8 @@
   --eds-primitives-weight-scale-normal: 400;
 }
 :root,
-[data-color-scheme] {
+[data-color-scheme],
+[data-density] {
   --eds-background-backdrop: var(--eds-neutral-7);
   --eds-background-canvas: var(--eds-neutral-1);
   --eds-background-dialog: var(--eds-neutral-15);
