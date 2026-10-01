@@ -10,7 +10,7 @@ This is a **read-only** workflow. The agent must not edit, create, or delete fil
 
 **In scope** — these are the only harnesses the team currently supports. Audit them, and only them:
 
-- **Claude Code** — `.claude/CLAUDE.md`, `.claude/README.md`, `.claude/rules/*.md`, `.claude/commands/*.md`, `.claude/hooks/`, `.claude/settings.json`
+- **Claude Code** — `.claude/CLAUDE.md`, `.claude/README.md`, `.claude/rules/*.md`, `.claude/commands/*.md`, `.claude/skills/*/SKILL.md`, `.claude/hooks/`, `.claude/settings.json`
 - **GitHub Copilot** (both CLI and IDE)
   - Copilot in general: `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `.github/prompts/**/*.prompt.md`
   - Copilot CLI specifically: `.github/hooks/*.{json,js}`
@@ -34,7 +34,8 @@ documentation/agent-instructions/<TOPIC>.md   ← single source of truth
         │          │          │
 .claude/    .github/      .opencode/        ← thin entry points,
 commands/   prompts/      agent/              each ~20-50 lines,
-<topic>.md  <topic>.md    <topic>.md          referencing the canonical
+or skills/  <topic>.md    <topic>.md          referencing the canonical
+<topic>.md
 ```
 
 A correct harness entry point is a thin wrapper that:
@@ -83,6 +84,8 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 | Accessibility audit          | `/accessibility-audit` | `accessibility-audit` prompt             | `accessibility-audit` agent |
 | Structure component doc      | `/create-component-doc`| `structure_components_prompt`            | `component-doc` agent |
 | Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |
+| Write PR description         | `write-pr-description` skill | `write-pr-description` prompt      | `write-pr-description` agent |
+| Write issue                  | `write-issue` skill    | `write-issue` prompt                     | `write-issue` agent |
 | Re-sync harnesses (this audit) | `/audit-harnesses`   | `audit-harnesses` prompt                 | `audit-harnesses` agent |
 | Tokens Studio pipeline       | `/tokens-studio`       | `tokens-studio` prompt                   | `tokens-studio` agent |
 | Dependabot duty              | `/dependabot-duty`     | `dependabot-duty` prompt                 | `dependabot-duty` agent |
@@ -112,7 +115,7 @@ These controls must not vary by harness:
 - **Auto-format on edit.** `.claude/hooks/format_hook.js` and `.github/hooks/format-on-edit.{json,js}` should run equivalent eslint/stylelint --fix and prettier --write. `AGENTS.md` § Code Formatting documents the matrix. **Medium** if missing. The descriptions of `format_hook.js` in `.claude/CLAUDE.md` § Hooks and `.claude/README.md` should name the same tools and file types as the script. A description that doesn't is a Stale finding.
 - **Git workflow rules** (no AI attribution in commits, conventional commits, branch protection). These live in `AGENTS.md` § Git Workflow + § Conventional Commits; every harness file should defer to those sections, not redefine. Divergent restatements are findings.
 
-**Known asymmetry, not a finding:** the OpenCode agents carry `permission.bash` ask-lists (e.g. `.opencode/agent/dependabot-duty.md`) with no counterpart in `.claude/settings.json`. That is deliberate — Claude Code prompts on `Bash` by default, so the guardrail is the default rather than a config entry. The case worth checking is a developer who allowlists a broad pattern such as `Bash(gh:*)` in their gitignored `settings.local.json`: they silently lose what OpenCode still enforces. That is a per-machine check, not a repo one.
+**Known asymmetry, not a finding:** the OpenCode agents carry `permission.bash` ask-lists (e.g. `.opencode/agent/dependabot-duty.md`) that `.claude/settings.json` mirrors only in part. That is deliberate — Claude Code prompts on `Bash` by default, so the guardrail is the default rather than a config entry. The exception is the `permissions.ask` list for `gh pr create`, `gh pr edit`, `gh issue create` and `gh issue edit`: those commands publish text, so they prompt even when a broader pattern is allowed. The case worth checking is a developer who allowlists a broad pattern such as `Bash(gh:*)` in their gitignored `settings.local.json`: they silently lose what OpenCode still enforces for every other `gh` command. That is a per-machine check, not a repo one.
 
 **Known asymmetry, not a finding:** Claude Code checks `*.key` only on file paths, in `read_hook.js` and in `settings.json`, and not in Bash commands. In a shell command `.key` is almost always a property, as in `jq '.key' package.json` or `obj.key`, and blocking it there stopped ordinary commands. When the Copilot hook checks each word of a Bash command, it should make the same exception.
 
