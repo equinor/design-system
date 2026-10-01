@@ -64,10 +64,6 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
           value={density}
           onChange={setDensity}
         />
-        <span className="text-sm text-tertiary">
-          Spacing, type sizes and corner radius of the page content, from the
-          Tokens Studio density modes.
-        </span>
       </div>
     </Dialog>
   )
