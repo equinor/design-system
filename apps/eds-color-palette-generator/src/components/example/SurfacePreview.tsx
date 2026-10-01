@@ -133,7 +133,7 @@ export function SurfacePreview({
     <div>
       {/* Live layout wireframe */}
       <div
-        className="relative rounded border border-muted px-6 py-8"
+        className="relative min-w-[512px] rounded border border-muted px-6 py-8"
         style={{ backgroundColor: pageHex }}
       >
         <SurfaceLabel

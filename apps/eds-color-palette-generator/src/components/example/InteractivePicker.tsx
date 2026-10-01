@@ -77,18 +77,13 @@ export function InteractivePicker({
       </div>
 
       {/* Results for each palette */}
-      <div
-        className="grid divide-x divide-muted"
-        style={{
-          gridTemplateColumns: `repeat(${allPalettes.length}, 1fr)`,
-        }}
-      >
+      <div className="flex overflow-x-auto">
         {allPalettes.map((pal, i) => {
           const fgHex = pal.steps[fgStep - 1]
           const bgHex = pal.steps[bgStep - 1]
 
           return (
-            <div key={`${pal.name}-${i}`} className="px-5 py-4">
+            <div key={`${pal.name}-${i}`} className="px-2 py-4 min-w-[256px]">
               <div className="mb-3 text-sm font-medium text-secondary">
                 {pal.name}
               </div>

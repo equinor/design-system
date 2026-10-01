@@ -86,12 +86,7 @@ export function SurfacePreviewSection({
       {/* Preview area — one per palette. It scrolls inside the card when
           many palettes (custom ones included) do not fit. */}
       <div className="overflow-x-auto">
-        <div
-          className="grid divide-x divide-muted"
-          style={{
-            gridTemplateColumns: `repeat(${allPalettes.length}, 1fr)`,
-          }}
-        >
+        <div className="flex">
           {allPalettes.map((pal, palIdx) => (
             <div key={`${pal.name}-${palIdx}`} className="px-5 py-4">
               <div className="mb-3 text-sm font-medium text-secondary">
