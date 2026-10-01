@@ -53,7 +53,6 @@
     "palette:start": "pnpm --filter @equinor/eds-color-palette-generator start",
     "palette:lint": "pnpm --filter @equinor/eds-color-palette-generator lint",
     "palette:test": "pnpm --filter @equinor/eds-color-palette-generator test:run",
-    "palette:test:e2e": "pnpm --filter @equinor/eds-color-palette-generator test:e2e",
     "build:mobile": "pnpm --filter @equinor/eds-mobile-components run build",
     "watch:mobile": "pnpm --filter @equinor/eds-mobile-components run dev",
     "check-types:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run check-types",

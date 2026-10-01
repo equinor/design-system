@@ -71,8 +71,6 @@ Writes light and dark token files from a palette configuration. **The CLI defaul
 
 ```bash
 pnpm test:run            # Vitest: colour maths, Tokens Studio parity, utilities, CLI
-pnpm test:e2e            # Playwright against a running dev server
-PLAYWRIGHT_URL=http://localhost:3001/old pnpm test:e2e   # when the server runs on :3001
 ```
 
 The CLI tests run the built CLI in `dist/`, so run `pnpm build:cli` first after changing the generator.

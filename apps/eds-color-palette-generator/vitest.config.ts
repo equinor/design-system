@@ -6,7 +6,7 @@ export default defineConfig({
     environment: 'node',
     globals: true,
     include: ['src/**/*.{test,spec}.{js,ts}'],
-    exclude: ['tests/**/*', 'node_modules/**/*'],
+    exclude: ['node_modules/**/*'],
     silent: false,
     reporters: ['verbose'],
     onConsoleLog(log, type) {

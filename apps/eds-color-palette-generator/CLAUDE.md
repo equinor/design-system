@@ -22,8 +22,6 @@ pnpm types                     # tsc --noEmit
 
 pnpm test:run                  # Vitest single run
 pnpm test:run src/config/tokensStudio.test.ts   # one file
-pnpm test:e2e                  # Playwright; start the dev server first (no webServer block)
-PLAYWRIGHT_URL=http://localhost:3001/old pnpm test:e2e   # server on another port
 
 pnpm build:cli                 # Build the CLI to dist/ (the CLI tests run dist/, so build first)
 
