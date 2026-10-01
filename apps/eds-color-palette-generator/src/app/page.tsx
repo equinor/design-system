@@ -16,8 +16,6 @@ import {
   withPaletteIds,
 } from '@/utils/urlState'
 import type { PaletteInput, ThemeBuilderTab } from '@/utils/urlState'
-import { downloadConfiguration } from '@/utils/configurationUtils'
-import type { ColorDefinition } from '@/types'
 import { check, download, link } from '@equinor/eds-icons'
 import { AppHeader } from '@/components/shared/AppHeader'
 import { Button } from '@/components/shared/Button'
@@ -32,6 +30,7 @@ import { TokenMatrix } from '@/components/themebuilder/TokenMatrix'
 import { ContrastTable } from '@/components/themebuilder/ContrastTable'
 import { ComponentPreviewPanel } from '@/components/themebuilder/ComponentPreviewPanel'
 import { ContrastTestPanel } from '@/components/themebuilder/ContrastTestPanel'
+import { ExportDialog } from '@/components/themebuilder/ExportDialog'
 
 /** Convert paletteConfig.colors to PaletteInput[] for defaults */
 const DEFAULT_PALETTES: PaletteInput[] = (paletteConfig.colors ?? []).map(
@@ -139,30 +138,12 @@ function ThemeBuilderContent() {
     setPalettes(next)
   }, [])
 
-  // Download the current palette configuration as JSON (color-palette-config.json).
-  // Includes both light/dark lightness ramps + Gaussian params so the config can
-  // be re-imported or fed to the CLI to regenerate the exact palette.
-  const handleDownloadConfig = useCallback(() => {
-    const colors: ColorDefinition[] = palettes.map((p) =>
-      p.anchors && p.anchors.length > 0
-        ? { name: p.name, anchors: p.anchors }
-        : {
-            name: p.name,
-            value: p.baseColor.startsWith('#')
-              ? p.baseColor
-              : `#${p.baseColor}`,
-          },
-    )
-    downloadConfiguration(
-      lightnessValuesInLightMode,
-      darknessValuesInDarkMode,
-      paletteConfig.meanLight,
-      paletteConfig.stdDevLight,
-      paletteConfig.meanDark,
-      paletteConfig.stdDevDark,
-      colors,
-    )
-  }, [palettes])
+  // The Config button opens the download dialog: palette config, design
+  // tokens or CSS variables, or an uploaded config that replaces the palettes.
+  const [exportOpen, setExportOpen] = useState(false)
+  const handleImport = useCallback((imported: PaletteInput[]) => {
+    setPalettes(withPaletteIds(imported))
+  }, [])
 
   // Copy the current URL, which holds the palettes, tab and scheme
   const copyURL = useCallback(async () => {
@@ -179,13 +160,21 @@ function ThemeBuilderContent() {
   // lighter than the canvas in light and darker than it in dark (ADR 0016).
   return (
     <div className="min-h-screen bg-canvas text-primary">
+      <ExportDialog
+        open={exportOpen}
+        onClose={() => setExportOpen(false)}
+        palettes={palettes}
+        onImport={handleImport}
+      />
+
       <AppHeader
         actions={
           <>
             <Button
               size="sm"
-              onClick={handleDownloadConfig}
-              title="Download palette configuration (JSON)"
+              onClick={() => setExportOpen(true)}
+              aria-haspopup="dialog"
+              title="Download or import a palette configuration"
             >
               <Icon data={download} size={16} />
               Config

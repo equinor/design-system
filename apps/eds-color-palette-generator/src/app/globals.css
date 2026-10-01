@@ -91,6 +91,7 @@
   --background-color-floating: var(--eds-background-floating);
   --background-color-input: var(--eds-background-input);
   --background-color-backdrop: var(--eds-background-backdrop);
+  --background-color-dialog: var(--eds-background-dialog);
   --background-color-inverted: var(--eds-background-inverted);
   --background-color-disabled: var(--eds-background-interactive-disabled);
 

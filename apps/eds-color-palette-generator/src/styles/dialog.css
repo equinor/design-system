@@ -1,10 +1,11 @@
-/* Dialog styling, from Tokens Studio roles */
-dialog::backdrop {
+/* Styling for the archived generator's dialog (/old), from Tokens Studio
+   roles. The shared Dialog component (data-eds-dialog) styles itself. */
+dialog:not([data-eds-dialog])::backdrop {
   background: var(--eds-overlay-scrim);
   backdrop-filter: blur(1px);
 }
 
-dialog {
+dialog:not([data-eds-dialog]) {
   max-width: 90vw;
   border-radius: var(--eds-density-corner-radius-rounded);
   opacity: 0;
@@ -25,13 +26,13 @@ dialog {
   margin: 0;
 }
 
-dialog[open] {
+dialog:not([data-eds-dialog])[open] {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
 /* Focus state for accessibility, as the global :focus-visible ring */
-dialog:focus-visible {
+dialog:not([data-eds-dialog]):focus-visible {
   outline: 2px solid var(--eds-border-interactive-focus);
   outline-offset: 2px;
 }
