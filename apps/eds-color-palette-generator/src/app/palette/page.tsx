@@ -10,6 +10,7 @@ import { Button } from '@/components/shared/Button'
 import { Icon } from '@/components/shared/Icon'
 import { SegmentedControl } from '@/components/shared/SegmentedControl'
 import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+import { Main } from '@/components/shared/Main'
 
 const VIEW_MODES: SegmentedOption<PaletteViewMode>[] = [
   { value: 'curve', label: 'Curve' },
@@ -79,7 +80,7 @@ export default function PalettePage() {
     <div className="min-h-screen bg-canvas text-primary">
       <AppHeader />
 
-      <main className="max-w-5xl mx-auto px-6 py-8">
+      <Main className="max-w-5xl mx-auto px-6 py-8">
         <h1 className="m-0 text-header-2xl font-medium">Palette editor</h1>
 
         {/* ---- Actions ---- */}
@@ -123,7 +124,7 @@ export default function PalettePage() {
             />
           ))}
         </div>
-      </main>
+      </Main>
     </div>
   )
 }

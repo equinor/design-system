@@ -1,5 +1,8 @@
 import { ColorDefinition, ContrastMethod, ColorFormat } from '@/types'
 
+/** The Tokens Studio density modes */
+export type Density = 'relaxed' | 'comfortable' | 'compact'
+
 // Keys for localStorage
 export const STORAGE_KEYS = {
   MEAN_LIGHT: 'colorPalette_meanLight',
@@ -15,6 +18,7 @@ export const STORAGE_KEYS = {
   SHOW_GAUSSIAN_PARAMETERS: 'colorPalette_showGaussianParameters',
   CONTRAST_METHOD: 'colorPalette_contrastMethod',
   COLOR_FORMAT: 'colorPalette_colorFormat',
+  DENSITY: 'colorPalette_density',
 } as const
 
 // Generic localStorage utility functions
@@ -106,6 +110,10 @@ export const localStorageUtils = {
     getItem(STORAGE_KEYS.COLOR_FORMAT, defaultValue),
   setColorFormat: (value: ColorFormat) =>
     setItem(STORAGE_KEYS.COLOR_FORMAT, value),
+
+  getDensity: (defaultValue: Density) =>
+    getItem(STORAGE_KEYS.DENSITY, defaultValue),
+  setDensity: (value: Density) => setItem(STORAGE_KEYS.DENSITY, value),
 
   // Clear only configuration-related data (colors, Gaussian parameters, lightness values)
   clearConfiguration: () => {

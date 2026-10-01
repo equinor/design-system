@@ -3,6 +3,7 @@ import './globals.css'
 import '@/styles/dialog.css' // Import dialog styles globally
 import '@/styles/print.css' // Import print styles globally
 import { ColorSchemeProvider } from '@/context/ColorSchemeContext'
+import { DensityProvider } from '@/context/DensityContext'
 import { COLOR_SCHEME_SCRIPT } from '@/context/colorSchemeScript'
 
 export const metadata: Metadata = {
@@ -28,7 +29,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <ColorSchemeProvider>{children}</ColorSchemeProvider>
+        <ColorSchemeProvider>
+          <DensityProvider>{children}</DensityProvider>
+        </ColorSchemeProvider>
       </body>
     </html>
   )

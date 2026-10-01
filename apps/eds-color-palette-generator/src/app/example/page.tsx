@@ -18,6 +18,7 @@ import { Button } from '@/components/shared/Button'
 import { Icon } from '@/components/shared/Icon'
 import { SegmentedControl } from '@/components/shared/SegmentedControl'
 import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+import { Main } from '@/components/shared/Main'
 
 export default function ExamplePage() {
   const { colorScheme } = useColorScheme()
@@ -43,7 +44,7 @@ export default function ExamplePage() {
     <div className="min-h-screen bg-canvas text-primary">
       <AppHeader />
 
-      <main className="max-w-5xl mx-auto px-6 py-8">
+      <Main className="max-w-5xl mx-auto px-6 py-8">
         <h1 className="m-0 text-header-2xl font-medium">Examples</h1>
 
         {/* Palette picker */}
@@ -69,7 +70,7 @@ export default function ExamplePage() {
         <PredefinedGroups palette={palette} />
         <SurfacePreviewSection allPalettes={allPalettes} />
         <InteractivePicker allPalettes={allPalettes} />
-      </main>
+      </Main>
     </div>
   )
 }

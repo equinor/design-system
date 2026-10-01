@@ -2,8 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import type { ReactNode } from 'react'
-import { ThemeToggle } from './ThemeToggle'
+import { settings } from '@equinor/eds-icons'
+import { Button } from './Button'
+import { Icon } from './Icon'
+import { SettingsDialog } from './SettingsDialog'
 import { tabClassName } from './tabStyles'
 
 type NavItem = { href: string; label: string }
@@ -35,12 +39,13 @@ type AppHeaderProps = {
 
 /**
  * The sticky header on every route: product name, navigation, page actions
- * and the theme toggle. The navigation links are styled as EDS Tabs and sit
+ * and the settings button. The navigation links are styled as EDS Tabs and sit
  * on the header's bottom edge. One line from 1280px; below that the
  * navigation moves to its own row.
  */
 export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
   const pathname = usePathname()
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   return (
     <header
@@ -84,9 +89,22 @@ export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
 
         <div className="ml-auto flex items-center gap-2 self-center py-2">
           {actions}
-          <ThemeToggle />
+          <Button
+            size="sm"
+            iconOnly
+            aria-label="Settings"
+            aria-haspopup="dialog"
+            title="Settings: theme and density"
+            onClick={() => setSettingsOpen(true)}
+          >
+            <Icon data={settings} size={16} />
+          </Button>
         </div>
       </div>
+      <SettingsDialog
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+      />
     </header>
   )
 }

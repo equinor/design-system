@@ -33,6 +33,7 @@ import { ContrastTable } from '@/components/themebuilder/ContrastTable'
 import { ComponentPreviewPanel } from '@/components/themebuilder/ComponentPreviewPanel'
 import { ContrastTestPanel } from '@/components/themebuilder/ContrastTestPanel'
 import { ExportDialog } from '@/components/themebuilder/ExportDialog'
+import { Main } from '@/components/shared/Main'
 
 /**
  * Default palettes: the Tokens Studio anchors, kept in OKLCH as Tokens Studio
@@ -173,7 +174,7 @@ function ThemeBuilderContent() {
         }
       />
 
-      <main className="max-w-6xl mx-auto px-6 py-8">
+      <Main className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-3xl">
             <h1 className="m-0 text-header-2xl font-medium">Theme Builder</h1>
@@ -223,7 +224,7 @@ function ThemeBuilderContent() {
             <ComponentPreviewPanel palettes={generatedPalettes} />
           )}
         </TabPanel>
-      </main>
+      </Main>
     </div>
   )
 }

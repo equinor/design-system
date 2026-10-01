@@ -30,6 +30,7 @@ import { restore } from '@equinor/eds-icons'
 import { AppHeader } from '@/components/shared/AppHeader'
 import { Button } from '@/components/shared/Button'
 import { Icon } from '@/components/shared/Icon'
+import { Main } from '@/components/shared/Main'
 
 export default function App() {
   // Initialize state with values from localStorage or defaults
@@ -320,7 +321,7 @@ export default function App() {
         />
       </header>
 
-      <main className="py-6">
+      <Main className="py-6">
         {/* Config Panel */}
         {showConfigPanel && (
           <section className="mb-8 print:mb-0">
@@ -422,7 +423,7 @@ export default function App() {
             </div>
           </>
         )}
-      </main>
+      </Main>
 
       <div className="fixed bottom-4 right-4 z-30 flex items-center gap-3 print-hide">
         <QuickActionsPopover

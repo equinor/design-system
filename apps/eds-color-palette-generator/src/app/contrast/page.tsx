@@ -13,6 +13,7 @@ import { CombinedPatternView, SinglePaletteView } from '@/components/contrast'
 import { AppHeader } from '@/components/shared/AppHeader'
 import { SegmentedControl } from '@/components/shared/SegmentedControl'
 import type { SegmentedOption } from '@/components/shared/SegmentedControl'
+import { Main } from '@/components/shared/Main'
 
 const VIEW_MODES: SegmentedOption<ViewMode>[] = [
   { value: 'semantic', label: 'Curve' },
@@ -61,7 +62,7 @@ export default function ContrastPage() {
     <div className="min-h-screen bg-canvas text-primary">
       <AppHeader />
 
-      <main className="max-w-5xl mx-auto px-6 py-8">
+      <Main className="max-w-5xl mx-auto px-6 py-8">
         <h1 className="m-0 text-header-2xl font-medium">Contrast</h1>
 
         <div className="mt-4 mb-6 flex flex-wrap items-center gap-3">
@@ -93,7 +94,7 @@ export default function ContrastPage() {
         {viewMode !== 'combined' && (
           <SinglePaletteView displayData={displayData} mode={viewMode} />
         )}
-      </main>
+      </Main>
     </div>
   )
 }

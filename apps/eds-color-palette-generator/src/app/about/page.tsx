@@ -14,13 +14,14 @@ import {
 } from '@/components/docs/about'
 import Link from 'next/link'
 import { AppHeader } from '@/components/shared/AppHeader'
+import { Main } from '@/components/shared/Main'
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-canvas text-primary scroll-smooth">
       <AppHeader />
 
-      <main className="max-w-4xl px-6 py-8 mx-auto space-y-16">
+      <Main className="max-w-4xl px-6 py-8 mx-auto space-y-16">
         <div>
           <h1 className="m-0 text-header-3xl font-medium">
             About the EDS Colour Palette Generator
@@ -51,7 +52,7 @@ export default function AboutPage() {
         <AboutContrastRequirements />
         <AboutBestPractices />
         <AboutLearnMore />
-      </main>
+      </Main>
     </div>
   )
 }

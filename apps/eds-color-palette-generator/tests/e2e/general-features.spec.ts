@@ -236,7 +236,8 @@ test.describe('Light/Dark Color Scheme Toggle', () => {
   test('should toggle between light and dark color schemes', async ({
     page,
   }) => {
-    // Find the theme toggle buttons
+    // The theme switch lives in the settings dialog
+    await page.getByRole('button', { name: 'Settings' }).click()
     const lightThemeButton = page.getByRole('radio', { name: 'Light theme' })
     const darkThemeButton = page.getByRole('radio', { name: 'Dark theme' })
 
@@ -272,9 +273,11 @@ test.describe('Light/Dark Color Scheme Toggle', () => {
   test('should persist color scheme preference in localStorage', async ({
     page,
   }) => {
+    const settingsButton = page.getByRole('button', { name: 'Settings' })
     const darkThemeButton = page.getByRole('radio', { name: 'Dark theme' })
 
-    // Switch to dark theme
+    // Switch to dark theme in the settings dialog
+    await settingsButton.click()
     await darkThemeButton.click()
     await page.waitForTimeout(300)
 
@@ -288,7 +291,32 @@ test.describe('Light/Dark Color Scheme Toggle', () => {
     await page.reload()
 
     // Dark theme should still be active
+    await settingsButton.click()
     await expect(darkThemeButton).toBeChecked()
+  })
+})
+
+test.describe('Density', () => {
+  test('should set the chosen density on <main> and keep it', async ({
+    page,
+  }) => {
+    const settingsButton = page.getByRole('button', { name: 'Settings' })
+    const compact = page.getByRole('radio', { name: 'Compact' })
+
+    await settingsButton.click()
+    await compact.click()
+    await expect(page.locator('main')).toHaveAttribute(
+      'data-density',
+      'compact',
+    )
+
+    await page.reload()
+    await expect(page.locator('main')).toHaveAttribute(
+      'data-density',
+      'compact',
+    )
+    await settingsButton.click()
+    await expect(compact).toBeChecked()
   })
 })
 
