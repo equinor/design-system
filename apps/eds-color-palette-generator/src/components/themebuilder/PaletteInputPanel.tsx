@@ -27,6 +27,19 @@ import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 /** A mid grey, for new palettes */
 const DEFAULT_COLOUR = 'oklch(0.6 0 0)'
 
+const STEPS = 15
+
+/**
+ * "Colour N" for a new palette, with N past any name already taken. Several
+ * views and the Tokens Studio download tell palettes apart by name.
+ */
+function newPaletteName(palettes: PaletteInput[]): string {
+  const taken = new Set(palettes.map((p) => p.name))
+  let n = palettes.length + 1
+  while (taken.has(`Colour ${n}`)) n++
+  return `Colour ${n}`
+}
+
 // How colour values are shown on the whole Theme Builder page. OKLCH is the
 // canonical form (ADR 0016 D9); palettes are stored in OKLCH either way.
 const FORMAT_OPTIONS: SegmentedOption<ColorFormat>[] = [
@@ -102,14 +115,11 @@ export function PaletteInputPanel({
     const p = next[paletteIndex]
     const existingAnchors = p.anchors ?? []
     const usedSteps = new Set(existingAnchors.map((a) => a.step))
-    // Find first unused step
-    let freeStep = 1
-    for (let s = 1; s <= 15; s++) {
-      if (!usedSteps.has(s)) {
-        freeStep = s
-        break
-      }
-    }
+    const freeStep = Array.from({ length: STEPS }, (_, i) => i + 1).find(
+      (step) => !usedSteps.has(step),
+    )
+    // Every step has an anchor; the button is disabled then
+    if (freeStep === undefined) return
     const newAnchor: ColorAnchor = {
       value: 'oklch(0.5 0.05 180)',
       step: freeStep,
@@ -148,7 +158,7 @@ export function PaletteInputPanel({
       ...palettes,
       {
         id: newPaletteId(),
-        name: `Colour ${palettes.length + 1}`,
+        name: newPaletteName(palettes),
         baseColor: DEFAULT_COLOUR,
       },
     ])
@@ -260,7 +270,11 @@ export function PaletteInputPanel({
                         />
                       ))}
                       <div className="flex items-center gap-2">
-                        <Button size="sm" onClick={() => addAnchor(i)}>
+                        <Button
+                          size="sm"
+                          onClick={() => addAnchor(i)}
+                          disabled={p.anchors!.length >= STEPS}
+                        >
                           <Icon data={add} size={16} />
                           Add anchor
                         </Button>

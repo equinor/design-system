@@ -177,6 +177,20 @@ describe('PaletteInputPanel', () => {
       })
     })
 
+    it('never repeats a palette name when adding after a removal', async () => {
+      const user = userEvent.setup()
+      const { onChange, initial } = renderPanel()
+
+      await user.click(screen.getByRole('button', { name: 'Add palette' }))
+      await user.click(
+        screen.getByRole('button', { name: `Remove ${initial[1].name}` }),
+      )
+      await user.click(screen.getByRole('button', { name: 'Add palette' }))
+
+      const names = lastPalettes(onChange).map((p) => p.name)
+      expect(new Set(names).size).toBe(names.length)
+    })
+
     it('removes a palette', async () => {
       const user = userEvent.setup()
       const { onChange, initial } = renderPanel()
@@ -260,6 +274,27 @@ describe('PaletteInputPanel', () => {
       expect(lastPalettes(onChange)[0].anchors).toEqual([
         { step: 1, value: first.baseColor },
       ])
+    })
+
+    it('disables Add anchor when every step has an anchor', async () => {
+      const user = userEvent.setup()
+      const [first, ...rest] = tokensStudioInputs()
+      renderPanel([
+        {
+          ...first,
+          baseColor: '',
+          anchors: Array.from({ length: 15 }, (_, i) => ({
+            step: i + 1,
+            value: first.baseColor,
+          })),
+        },
+        ...rest,
+      ])
+      await user.click(
+        screen.getByRole('button', { name: `Edit anchors for ${first.name}` }),
+      )
+
+      expect(screen.getByRole('button', { name: 'Add anchor' })).toBeDisabled()
     })
 
     it('marks a step used by another anchor as unavailable', async () => {
