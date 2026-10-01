@@ -2,7 +2,8 @@
 
 import { Suspense, useState, useMemo, useEffect, useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { generateColorScale, parseColorToHex } from '@/utils/color'
+import { generateColorScale, toCssColor } from '@/utils/color'
+import { withOklchColours } from '@/utils/paletteConfigFile'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import {
   lightnessValuesInLightMode,
@@ -32,23 +33,15 @@ import { ComponentPreviewPanel } from '@/components/themebuilder/ComponentPrevie
 import { ContrastTestPanel } from '@/components/themebuilder/ContrastTestPanel'
 import { ExportDialog } from '@/components/themebuilder/ExportDialog'
 
-/** Convert paletteConfig.colors to PaletteInput[] for defaults */
+/**
+ * Default palettes: the Tokens Studio anchors, kept in OKLCH as Tokens Studio
+ * writes them (ADR 0016 D9).
+ */
 const DEFAULT_PALETTES: PaletteInput[] = (paletteConfig.colors ?? []).map(
-  (color) => {
-    if ('anchors' in color) {
-      return {
-        name: color.name,
-        baseColor: '',
-        anchors: color.anchors,
-      }
-    }
-    // Single value color — store as baseColor
-    const hex = parseColorToHex(color.value)
-    return {
-      name: color.name,
-      baseColor: hex?.replace('#', '') ?? '808080',
-    }
-  },
+  (color) =>
+    'anchors' in color
+      ? { name: color.name, baseColor: '', anchors: color.anchors }
+      : { name: color.name, baseColor: color.value },
 )
 
 const TABS: SegmentedOption<ThemeBuilderTab>[] = [
@@ -73,7 +66,11 @@ function ThemeBuilderContent() {
   }, [searchParams])
 
   const [palettes, setPalettes] = useState<PaletteInput[]>(() =>
-    withPaletteIds(initialState.palettes ?? DEFAULT_PALETTES),
+    withPaletteIds(
+      initialState.palettes
+        ? withOklchColours(initialState.palettes)
+        : DEFAULT_PALETTES,
+    ),
   )
   const [activeTab, setActiveTab] = useState<ThemeBuilderTab>(
     initialState.activeTab ?? 'system',
@@ -108,29 +105,17 @@ function ThemeBuilderContent() {
       ? paletteConfig.stdDevLight
       : paletteConfig.stdDevDark
 
-  // Generate color scales — pass anchors when available
+  // Generate the scales. Single colours and anchors supply hue and chroma;
+  // every step takes its lightness from the Tokens Studio scale, as Tokens
+  // Studio does, so the input colour itself need not appear in the scale.
+  // `steps` (hex) drives swatches and contrast; `oklch` is for display.
   const generatedPalettes = useMemo(() => {
     return palettes.map((p) => {
-      let steps: string[]
-      if (p.anchors && p.anchors.length > 0) {
-        // Multi-anchor: pass ColorAnchor[] directly
-        steps = generateColorScale(
-          p.anchors,
-          lightnessValues,
-          mean,
-          stdDev,
-          'HEX',
-        )
-      } else {
-        // Single colour: it supplies hue and chroma, and every step takes its
-        // lightness from the Tokens Studio scale, as Tokens Studio does. The
-        // input colour itself does not have to appear in the scale.
-        const hex = p.baseColor.startsWith('#')
-          ? p.baseColor
-          : `#${p.baseColor}`
-        steps = generateColorScale(hex, lightnessValues, mean, stdDev, 'HEX')
-      }
-      return { name: p.name, steps }
+      const input =
+        p.anchors && p.anchors.length > 0 ? p.anchors : toCssColor(p.baseColor)
+      const scale = (format: 'HEX' | 'OKLCH') =>
+        generateColorScale(input, lightnessValues, mean, stdDev, format)
+      return { name: p.name, steps: scale('HEX'), oklch: scale('OKLCH') }
     })
   }, [palettes, lightnessValues, mean, stdDev])
 

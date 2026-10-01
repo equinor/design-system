@@ -1,54 +1,53 @@
 'use client'
 
-import { useId, useRef, useState } from 'react'
+import { useId, useMemo, useRef, useState } from 'react'
 import { cloud_upload } from '@equinor/eds-icons'
+import { downloadText } from '@/utils/dataviz-export'
 import {
-  darknessValuesInDarkMode,
-  lightnessValuesInLightMode,
-} from '@/config/config'
-import { paletteConfig } from '@/config/palette-config'
-import type { ColorFormat } from '@/types'
-import {
-  downloadColorTokens,
-  downloadConfiguration,
-  downloadDesignSystemCSS,
-} from '@/utils/configurationUtils'
+  anchorProposals,
+  palettesFile,
+  palettesFromConfig,
+  tokensStudioAnchorsFile,
+} from '@/utils/paletteConfigFile'
+import type { AnchorProposal, AnchorStatus } from '@/utils/paletteConfigFile'
 import type { PaletteInput } from '@/utils/urlState'
-import { palettesFromConfig, palettesToColors } from '@/utils/paletteConfigFile'
 import { Button } from '@/components/shared/Button'
 import { Dialog } from '@/components/shared/Dialog'
 import { Icon } from '@/components/shared/Icon'
-import { SegmentedControl } from '@/components/shared/SegmentedControl'
-import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 
-type ExportKind = 'config' | 'tokens' | 'css'
+type ExportKind = 'tokens-studio' | 'palettes'
 
-/** The export options from the archived generator's download popover. */
 const EXPORTS: { value: ExportKind; label: string; description: string }[] = [
   {
-    value: 'config',
-    label: 'Palette config',
+    value: 'tokens-studio',
+    label: 'Tokens Studio anchors',
     description:
-      'A JSON file with your palettes and the Tokens Studio lightness and chroma settings. Import it here again, or pass it to the generate-colors CLI.',
+      'The anchors you changed or added, in OKLCH, in the format of the Tokens Studio set input/palette. Tokens Studio generates the 15 steps from them.',
   },
   {
-    value: 'tokens',
-    label: 'Design tokens',
+    value: 'palettes',
+    label: 'Palettes file',
     description:
-      'Two JSON files, light and dark, in the W3C design token format, with 15 steps per palette.',
-  },
-  {
-    value: 'css',
-    label: 'CSS variables',
-    description:
-      'One stylesheet with a custom property per step that switches between light and dark with light-dark().',
+      'Your palettes in OKLCH, to import here again later. The Share link holds the same palettes.',
   },
 ]
 
-const FORMAT_OPTIONS: SegmentedOption<ColorFormat>[] = [
-  { value: 'OKLCH', label: 'OKLCH' },
-  { value: 'HEX', label: 'HEX' },
-]
+// Tokens Studio status roles: muted fill with on-muted text
+const STATUS_TAG: Record<AnchorStatus, { label: string; tone: string }> = {
+  changed: { label: 'Changed', tone: 'bg-info-muted text-info-on-muted' },
+  new: { label: 'New hue', tone: 'bg-info-muted text-info-on-muted' },
+  unchanged: {
+    label: 'Same as Tokens Studio',
+    tone: 'bg-neutral-muted text-secondary',
+  },
+  'several-anchors': {
+    label: 'Several anchors',
+    tone: 'bg-warning-muted text-warning-on-muted',
+  },
+}
+
+const isProposed = (p: AnchorProposal) =>
+  p.status === 'changed' || p.status === 'new'
 
 type ExportDialogProps = {
   open: boolean
@@ -59,9 +58,9 @@ type ExportDialogProps = {
 }
 
 /**
- * Download the palettes as a palette config, design tokens or CSS
- * variables, in OKLCH or HEX, or import a palette config. The same options
- * as the archived generator's download popover.
+ * Export the palettes as a proposal for Tokens Studio or as a palettes file,
+ * or import a palettes file. Everything is OKLCH, the canonical form
+ * (ADR 0016 D9).
  */
 export function ExportDialog({
   open,
@@ -69,11 +68,14 @@ export function ExportDialog({
   palettes,
   onImport,
 }: ExportDialogProps) {
-  const [kind, setKind] = useState<ExportKind>('config')
-  const [format, setFormat] = useState<ColorFormat>('OKLCH')
+  const [kind, setKind] = useState<ExportKind>('tokens-studio')
   const [importError, setImportError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const idPrefix = useId()
+
+  const proposals = useMemo(() => anchorProposals(palettes), [palettes])
+  const proposedCount = proposals.filter(isProposed).length
+  const canDownload = kind === 'palettes' || proposedCount > 0
 
   const close = () => {
     setImportError(null)
@@ -81,39 +83,11 @@ export function ExportDialog({
   }
 
   const download = () => {
-    const colors = palettesToColors(palettes)
-    const { meanLight, stdDevLight, meanDark, stdDevDark } = paletteConfig
-    if (kind === 'config') {
-      downloadConfiguration(
-        lightnessValuesInLightMode,
-        darknessValuesInDarkMode,
-        meanLight,
-        stdDevLight,
-        meanDark,
-        stdDevDark,
-        colors,
-      )
-    } else if (kind === 'tokens') {
-      downloadColorTokens(
-        colors,
-        lightnessValuesInLightMode,
-        darknessValuesInDarkMode,
-        meanLight,
-        stdDevLight,
-        meanDark,
-        stdDevDark,
-        format,
-      )
-    } else {
-      downloadDesignSystemCSS(
-        colors,
-        meanLight,
-        stdDevLight,
-        meanDark,
-        stdDevDark,
-        format,
-      )
-    }
+    const [filename, data] =
+      kind === 'tokens-studio'
+        ? ['tokens-studio-anchors.json', tokensStudioAnchorsFile(proposals)]
+        : ['palettes.json', palettesFile(palettes)]
+    downloadText(filename, JSON.stringify(data, null, 2), 'application/json')
     close()
   }
 
@@ -124,7 +98,7 @@ export function ExportDialog({
         const imported = palettesFromConfig(JSON.parse(String(reader.result)))
         if (!imported) {
           setImportError(
-            'This file has no palettes. Choose a palette config downloaded from this tool.',
+            'This file has no palettes. Choose a palettes file downloaded from this tool.',
           )
           return
         }
@@ -145,7 +119,7 @@ export function ExportDialog({
       actions={
         <>
           <Button onClick={close}>Cancel</Button>
-          <Button variant="primary" onClick={download}>
+          <Button variant="primary" onClick={download} disabled={!canDownload}>
             Download
           </Button>
         </>
@@ -178,38 +152,59 @@ export function ExportDialog({
         ))}
       </fieldset>
 
-      <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-secondary">
-          Colour format
-        </span>
-        <div className="flex flex-wrap items-center gap-3">
-          <SegmentedControl
-            mode="radio"
-            aria-label="Colour format"
-            size="sm"
-            options={FORMAT_OPTIONS}
-            value={format}
-            onChange={setFormat}
-            disabled={kind === 'config'}
-          />
-          {kind === 'config' && (
-            <span className="text-sm text-tertiary">
-              The palette config keeps the colours as you entered them.
-            </span>
+      {kind === 'tokens-studio' && (
+        <div className="flex flex-col gap-2">
+          <span className="text-sm font-medium text-secondary">
+            Compared with Tokens Studio
+          </span>
+          <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
+            {proposals.map((p, i) => (
+              <li key={`${p.key}-${i}`} className="flex flex-col gap-0.5">
+                <span className="flex flex-wrap items-center gap-2 text-sm">
+                  <span className="font-medium text-primary">{p.name}</span>
+                  <span
+                    className={`inline-flex items-center rounded px-1.5 text-xs leading-[18px] font-medium ${STATUS_TAG[p.status].tone}`}
+                  >
+                    {STATUS_TAG[p.status].label}
+                  </span>
+                </span>
+                {p.status === 'changed' && (
+                  <span className="font-mono text-xs text-secondary">
+                    {p.tokensStudioValue} → {p.value}
+                  </span>
+                )}
+                {p.status === 'new' && (
+                  <span className="font-mono text-xs text-secondary">
+                    input.palette.{p.key}.anchor = {p.value}
+                  </span>
+                )}
+                {p.status === 'several-anchors' && (
+                  <span className="text-xs text-secondary">
+                    Tokens Studio takes one anchor per hue, so this palette is
+                    left out.
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          {proposedCount === 0 && (
+            <p className="m-0 text-sm text-tertiary">
+              No anchor differs from Tokens Studio, so there is nothing to
+              download.
+            </p>
           )}
         </div>
-      </div>
+      )}
 
       <div className="flex flex-col gap-2 border-t border-muted pt-4">
         <span className="text-sm font-medium text-secondary">Import</span>
         <div className="flex flex-wrap items-center gap-3">
           <Button size="sm" onClick={() => fileInputRef.current?.click()}>
             <Icon data={cloud_upload} size={16} />
-            Upload config
+            Upload palettes file
           </Button>
           <span className="text-sm text-tertiary">
-            Replaces your palettes. Lightness and chroma always come from Tokens
-            Studio.
+            Replaces your palettes. Older palette configs work too.
           </span>
         </div>
         {importError && (

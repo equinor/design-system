@@ -361,3 +361,36 @@ export function deltaE(
     return 0
   }
 }
+
+/**
+ * A stored palette colour as CSS. Links from before OKLCH display hold bare
+ * hex digits (`206f77`), which get their `#`; anything else is used as is.
+ */
+export function toCssColor(value: string): string {
+  const v = value.trim()
+  return /^[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(v) ? `#${v}` : v
+}
+
+const trimNumber = (n: number, digits: number) =>
+  String(Number(n.toFixed(digits)))
+
+/**
+ * A colour as OKLCH, or null if it cannot be parsed. `separator` is `' '` for
+ * CSS (`oklch(0.4973 0.084851 204.553)`) and `', '` for the Tokens Studio
+ * anchor format (`oklch(0.4973, 0.084851, 204.553)`). Precision follows the
+ * Tokens Studio anchors: L to 4 decimals, C to 6 and H to 3; an achromatic
+ * colour gets hue 0.
+ */
+export function toOklchString(value: string, separator = ' '): string | null {
+  try {
+    const [l, c, h] = new Color(toCssColor(value)).to('oklch').coords
+    const hue = h == null || Number.isNaN(h) ? 0 : h
+    return `oklch(${[
+      trimNumber(l ?? 0, 4),
+      trimNumber(c ?? 0, 6),
+      trimNumber(hue, 3),
+    ].join(separator)})`
+  } catch {
+    return null
+  }
+}

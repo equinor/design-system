@@ -12,9 +12,17 @@ import { Button } from '@/components/shared/Button'
 import { Card } from '@/components/shared/Card'
 import { Icon } from '@/components/shared/Icon'
 import { SimpleColorPicker } from './SimpleColorPicker'
-import { isValidColorFormat, parseColorToHex } from '@/utils/color'
+import {
+  isValidColorFormat,
+  parseColorToHex,
+  toCssColor,
+  toOklchString,
+} from '@/utils/color'
 import type { ColorAnchor } from '@/types'
 import { newPaletteId, type PaletteInput } from '@/utils/urlState'
+
+/** A mid grey, for new palettes */
+const DEFAULT_COLOUR = 'oklch(0.6 0 0)'
 
 const FIELD =
   'rounded border bg-input px-2 py-1 text-sm text-primary border-input hover:border-input-hover'
@@ -102,10 +110,9 @@ export function PaletteInputPanel({
   const convertToAnchors = (paletteIndex: number) => {
     const next = [...palettes]
     const p = next[paletteIndex]
-    const hex = p.baseColor.startsWith('#') ? p.baseColor : `#${p.baseColor}`
     next[paletteIndex] = {
       ...p,
-      anchors: [{ value: hex, step: 9 }],
+      anchors: [{ value: toCssColor(p.baseColor), step: 9 }],
     }
     onChange(next)
   }
@@ -113,13 +120,10 @@ export function PaletteInputPanel({
   const convertToSimple = (paletteIndex: number) => {
     const next = [...palettes]
     const p = next[paletteIndex]
-    // Try to get hex from first anchor
-    let hex = '808080'
-    if (p.anchors && p.anchors.length > 0) {
-      const parsed = parseColorToHex(p.anchors[0].value)
-      if (parsed) hex = parsed.replace('#', '')
-    }
-    next[paletteIndex] = { ...p, baseColor: hex, anchors: undefined }
+    // Keep the first anchor, in OKLCH
+    const first = p.anchors?.[0]?.value
+    const baseColor = (first && toOklchString(first)) ?? DEFAULT_COLOUR
+    next[paletteIndex] = { ...p, baseColor, anchors: undefined }
     onChange(next)
   }
 
@@ -134,7 +138,7 @@ export function PaletteInputPanel({
       {
         id: newPaletteId(),
         name: `Colour ${palettes.length + 1}`,
-        baseColor: '808080',
+        baseColor: DEFAULT_COLOUR,
       },
     ])
   }
@@ -366,9 +370,11 @@ function AnchorRow({
         type="color"
         value={localHex}
         onChange={(e) => {
-          setLocalValue(e.target.value)
+          // The native picker works in hex; keep anchors in OKLCH
+          const oklch = toOklchString(e.target.value) ?? e.target.value
+          setLocalValue(oklch)
           setIsValid(true)
-          onUpdate('value', e.target.value)
+          onUpdate('value', oklch)
         }}
         className="sr-only"
         tabIndex={-1}

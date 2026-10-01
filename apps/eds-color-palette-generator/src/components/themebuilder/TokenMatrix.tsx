@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { contrast } from '@/utils/color'
+import { contrast, toOklchString } from '@/utils/color'
 import {
   PALETTE_STEPS,
   categoryLabel,
@@ -10,10 +10,28 @@ import {
   stepRolesText,
 } from '@/config/config'
 import { Card } from '@/components/shared/Card'
+import { SegmentedControl } from '@/components/shared/SegmentedControl'
+import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 
 type GeneratedPalette = {
   name: string
+  /** Hex, for the swatch colours */
   steps: string[]
+  /** The same steps in OKLCH, for display */
+  oklch?: string[]
+}
+
+type ValueFormat = 'OKLCH' | 'HEX'
+
+// OKLCH is the canonical form (ADR 0016 D9); hex is offered for copying.
+const FORMAT_OPTIONS: SegmentedOption<ValueFormat>[] = [
+  { value: 'OKLCH', label: 'OKLCH' },
+  { value: 'HEX', label: 'HEX' },
+]
+
+/** `oklch(0.980 0.014 204.6)` → `['0.980', '0.014', '204.6']` */
+function oklchParts(value: string): string[] {
+  return value.replace(/^oklch\(|\)$/g, '').split(/[\s,]+/)
 }
 
 type TokenMatrixProps = {
@@ -38,10 +56,24 @@ function getTextColor(bgHex: string): string {
 }
 
 export function TokenMatrix({ palettes }: TokenMatrixProps) {
+  const [format, setFormat] = useState<ValueFormat>('OKLCH')
+
   if (palettes.length === 0) return null
 
   return (
-    <Card title="Token matrix">
+    <Card
+      title="Token matrix"
+      actions={
+        <SegmentedControl
+          mode="radio"
+          aria-label="Value format"
+          size="sm"
+          options={FORMAT_OPTIONS}
+          value={format}
+          onChange={setFormat}
+        />
+      }
+    >
       {/* Padding keeps the swatches' focus ring inside the scroll area */}
       <div className="overflow-x-auto p-1">
         <div className="grid grid-cols-[minmax(100px,auto)_repeat(15,minmax(58px,1fr))] gap-0.5">
@@ -74,7 +106,7 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
 
           {/* Palette rows */}
           {palettes.map((palette) => (
-            <PaletteRow key={palette.name} palette={palette} />
+            <PaletteRow key={palette.name} palette={palette} format={format} />
           ))}
         </div>
       </div>
@@ -82,7 +114,13 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
   )
 }
 
-function PaletteRow({ palette }: { palette: GeneratedPalette }) {
+function PaletteRow({
+  palette,
+  format,
+}: {
+  palette: GeneratedPalette
+  format: ValueFormat
+}) {
   const textColors = useMemo(
     () => palette.steps.map(getTextColor),
     [palette.steps],
@@ -97,9 +135,19 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
     }
   }, [])
 
-  const handleCopy = useCallback(async (hex: string, i: number) => {
+  const values = useMemo(
+    () =>
+      palette.steps.map((hex, i) =>
+        format === 'HEX'
+          ? hex
+          : (palette.oklch?.[i] ?? toOklchString(hex) ?? hex),
+      ),
+    [palette.steps, palette.oklch, format],
+  )
+
+  const handleCopy = useCallback(async (value: string, i: number) => {
     try {
-      await navigator.clipboard.writeText(hex)
+      await navigator.clipboard.writeText(value)
     } catch {
       // Clipboard unavailable (e.g. non-secure context) — nothing to show
       return
@@ -116,21 +164,29 @@ function PaletteRow({ palette }: { palette: GeneratedPalette }) {
       </div>
       {palette.steps.map((hex, i) => {
         const isCopied = copiedIndex === i
+        const value = values[i]
         return (
           <button
             type="button"
             key={`${palette.name}-${i}`}
-            onClick={() => handleCopy(hex, i)}
+            onClick={() => handleCopy(value, i)}
             className={[
-              'flex h-11 cursor-pointer appearance-none items-center justify-center border-0 px-0.5 font-mono text-[9px] font-medium whitespace-nowrap tabular-nums focus-visible:relative focus-visible:z-10',
+              'flex h-11 cursor-pointer appearance-none flex-col items-center justify-center border-0 px-0.5 font-mono text-[9px] leading-[1.2] font-medium whitespace-nowrap tabular-nums focus-visible:relative focus-visible:z-10',
               i === 0 ? 'rounded-l' : '',
               i === palette.steps.length - 1 ? 'rounded-r' : '',
             ].join(' ')}
             style={{ backgroundColor: hex, color: textColors[i] }}
-            title={`${stepLabel(i + 1)}: ${hex} — click to copy`}
-            aria-label={`Copy ${palette.name} step ${stepLabel(i + 1)}: ${hex}`}
+            title={`${stepLabel(i + 1)}: ${value} — click to copy`}
+            aria-label={`Copy ${palette.name} step ${stepLabel(i + 1)}: ${value}`}
           >
-            {isCopied ? 'Copied!' : hex}
+            {isCopied
+              ? 'Copied!'
+              : format === 'HEX'
+                ? value
+                : // L, C and H on three lines to fit the narrow cell
+                  oklchParts(value).map((part, j) => (
+                    <span key={j}>{part}</span>
+                  ))}
           </button>
         )
       })}

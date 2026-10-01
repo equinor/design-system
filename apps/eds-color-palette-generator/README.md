@@ -50,13 +50,22 @@ The UI uses the Tokens Studio CSS bundle (`packages/eds-tokens/src/tokens/css/va
 
 The scheme is set with `data-color-scheme` on `<html>`. An inline script applies the saved choice (or `?mode=`, or the system preference) before first paint.
 
+## Download and import
+
+The Theme Builder's **Config** button opens a dialog with two exports, both in OKLCH:
+
+- **Tokens Studio anchors**: the anchors you changed or added, compared with Tokens Studio, as a token set in the shape of `input/palette` (`input.palette.<hue>.anchor`). This is the handoff for proposing a colour change; Tokens Studio generates the steps from the anchors.
+- **Palettes file**: your palettes only (`{ "colors": [...] }`), to import again later.
+
+Uploading a palettes file (or an older palette config) replaces the palettes. Lightness and chroma always come from Tokens Studio, so only the palettes are read.
+
 ## CLI
 
 ```bash
 generate-colors [configPath] [outputDir]
 ```
 
-Writes light and dark token files from a palette configuration. **The CLI defaults to the frozen 2.x lightness scale**, because `packages/eds-tokens` generates the 2.x palette with it (`generate:tokens:color-core`) and ADR 0016 freezes that scale. Pass `lightModeValues` and `darkModeValues` in the configuration to use other values; the configuration you download from the Theme Builder includes the Tokens Studio values. See [src/cli/README.md](./src/cli/README.md).
+Writes light and dark token files from a palette configuration. **The CLI defaults to the frozen 2.x lightness scale**, because `packages/eds-tokens` generates the 2.x palette with it (`generate:tokens:color-core`) and ADR 0016 freezes that scale. Pass `lightModeValues` and `darkModeValues` in the configuration to use other values. The CLI has no role in the 3.0 scale: Tokens Studio generates it. See [src/cli/README.md](./src/cli/README.md).
 
 ## Tests
 
