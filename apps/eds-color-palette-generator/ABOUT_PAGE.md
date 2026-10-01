@@ -2,7 +2,7 @@
 
 The About page (`/about`, `src/app/about/page.tsx`) explains how the EDS Colour Palette Generator makes a colour scale, what each step is for, how contrast is checked and how to propose a change to Tokens Studio.
 
-Every number and colour on the page comes from Tokens Studio through `src/config/tokensStudio.ts` and `src/config/config.ts`, and the example scales are generated with `generateColorScale` when the page renders. Nothing is typed by hand, so when a Tokens Studio pull changes an anchor, a lightness value or a step role, the page follows without edits. The examples use the colour scheme chosen in settings, and the components that depend on it remount on a scheme change so their sliders start at that scheme's values.
+The numbers, colours and tables on the page come from Tokens Studio through `src/config/tokensStudio.ts` and `src/config/config.ts`, and the example scales are generated with `generateColorScale` when the page renders. When a Tokens Studio pull changes an anchor, a lightness value, the curve or a step role, those follow without edits, and so do the lists of unused steps and of dark steps that dip. The prose that explains ADR 0016 still names steps by number (the muted and emphasis ladders, the borders, the contrast targets), so check it when ADR 0016 changes. The examples use the colour scheme chosen in settings, and the components that depend on it remount on a scheme change so their sliders start at that scheme's values.
 
 ## Sections
 

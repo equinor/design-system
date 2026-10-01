@@ -108,5 +108,31 @@ describe('AboutStepRoles', () => {
       ).toBeInTheDocument()
       expect(screen.getAllByRole('rowheader')).toHaveLength(STEP_COUNT)
     })
+
+    it('names the steps without a role from Tokens Studio, not from typed text', () => {
+      render(<AboutStepRoles />)
+      const unused = PALETTE_STEPS.filter((s) => s.roles.length === 0)
+
+      for (const step of unused) {
+        expect(
+          screen.getByText(/no semantic token in Tokens Studio today/),
+        ).toHaveTextContent(new RegExp(`\\b${step.step}\\b`))
+      }
+    })
+
+    it('names the dark steps that are darker than a step before them', () => {
+      render(<AboutStepRoles />)
+      const ladder = PALETTE_STEPS.slice(0, 13)
+      const dips = ladder.filter((step, i) =>
+        ladder.slice(0, i).some((e) => e.darkValue > step.darkValue),
+      )
+
+      const sentence = screen.getByText(/The values do not run/)
+      for (const step of dips) {
+        expect(sentence).toHaveTextContent(
+          new RegExp(`dips at steps? .*\\b${step.step}\\b`),
+        )
+      }
+    })
   })
 })

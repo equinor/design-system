@@ -1,5 +1,23 @@
 import { PALETTE_STEPS } from '@/config/config'
 
+/** `[4, 5]` → "4 and 5", `[1, 2, 3]` → "1, 2 and 3" */
+function stepList(steps: number[]): string {
+  return steps.length < 2
+    ? steps.join('')
+    : `${steps.slice(0, -1).join(', ')} and ${steps[steps.length - 1]}`
+}
+
+// Steps 1 to 13 form the ladder; 14 and 15 run the other way (ADR 0016 D3).
+// A dark step dips when it is darker than a step before it in the ladder.
+const LADDER = PALETTE_STEPS.slice(0, 13)
+const DARK_DIPS = LADDER.filter((step, i) =>
+  LADDER.slice(0, i).some((earlier) => earlier.darkValue > step.darkValue),
+).map((step) => step.step)
+
+const UNUSED_STEPS = PALETTE_STEPS.filter(
+  (step) => step.roles.length === 0,
+).map((step) => step.step)
+
 export function AboutStepRoles() {
   return (
     <section id="steps" className="scroll-mt-8">
@@ -16,21 +34,28 @@ export function AboutStepRoles() {
           after them, chroma and hue, is generated.
         </p>
         <p>
-          The values do not run in one straight line. In dark mode the ladder
-          dips at steps 4 and 5, because a strictly increasing ramp could not
-          give every role on those steps the contrast it needs. Steps 14 and 15
-          run in the opposite direction to steps 1 to 13: step 15 is both the
-          text on emphasis fills and <code>background.surface</code>, which
-          makes the panel surface lighter than the canvas (step 1) in light mode
-          and darker in dark mode.
+          The values do not run in one straight line.{' '}
+          {DARK_DIPS.length > 0 && (
+            <>
+              In dark mode the ladder dips at{' '}
+              {DARK_DIPS.length > 1 ? 'steps' : 'step'} {stepList(DARK_DIPS)},
+              because a strictly increasing ramp could not give every role on
+              those steps the contrast it needs.{' '}
+            </>
+          )}
+          Steps 14 and 15 run in the opposite direction to steps 1 to 13: step
+          15 is both the text on emphasis fills and{' '}
+          <code>background.surface</code>, which makes the panel surface lighter
+          than the canvas (step 1) in light mode and darker in dark mode.
         </p>
         <p>
           Each step exists for the semantic tokens that point at it. The table
           lists them as Tokens Studio names them, with <code>&lt;tone&gt;</code>{' '}
           standing for accent, neutral, info, success, warning or danger. The
           muted fills sit at steps 1 to 3, the emphasis fills at 9 to 11 and the
-          non-interactive borders at 4, 7 and 9. Steps 6 and 14 have no semantic
-          token in Tokens Studio today.
+          non-interactive borders at 4, 7 and 9.
+          {UNUSED_STEPS.length > 0 &&
+            ` ${UNUSED_STEPS.length > 1 ? 'Steps' : 'Step'} ${stepList(UNUSED_STEPS)} ${UNUSED_STEPS.length > 1 ? 'have' : 'has'} no semantic token in Tokens Studio today.`}
         </p>
       </div>
 
