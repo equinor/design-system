@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 import { ThemeToggle } from './ThemeToggle'
+import { tabClassName } from './tabStyles'
 
 type NavItem = { href: string; label: string }
 
@@ -22,12 +23,6 @@ function isActive(pathname: string | null, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
-const NAV_LINK =
-  'inline-flex min-h-7 items-center whitespace-nowrap rounded px-2 text-sm transition-colors duration-150'
-const NAV_LINK_ACTIVE = 'bg-accent-selected text-primary font-medium'
-const NAV_LINK_IDLE =
-  'text-secondary hover:bg-neutral-muted hover:text-primary active:bg-neutral-muted-hover'
-
 type AppHeaderProps = {
   /** Page actions, shown before the theme toggle */
   actions?: ReactNode
@@ -40,8 +35,9 @@ type AppHeaderProps = {
 
 /**
  * The sticky header on every route: product name, navigation, page actions
- * and the theme toggle. One line from 1024px; below that the navigation
- * moves to its own row.
+ * and the theme toggle. The navigation links are styled as EDS Tabs and sit
+ * on the header's bottom edge. One line from 1280px; below that the
+ * navigation moves to its own row.
  */
 export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
   const pathname = usePathname()
@@ -53,20 +49,22 @@ export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
         sticky ? 'sticky top-0 z-30' : '',
       ].join(' ')}
     >
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-6 py-2">
+      <div className="flex flex-wrap items-end gap-x-4 px-6">
         <Link
           href="/"
-          className="whitespace-nowrap text-base font-medium text-primary no-underline"
+          className="whitespace-nowrap border-b-2 border-transparent py-[var(--eds-spacing-xs)] text-base font-medium text-primary no-underline"
         >
           EDS Colour Palette Generator
         </Link>
 
         <nav
           aria-label="Main"
-          // Vertical padding leaves room for the focus ring inside the scroller
-          className="order-last -mx-2 w-full overflow-x-auto py-1 lg:order-none lg:mx-0 lg:w-auto lg:overflow-visible lg:py-0"
+          // Below xl the nav gets its own scrolling row; the top padding leaves
+          // room for the focus ring inside the scroller. The negative bottom
+          // margin puts the tab borders on the header's own bottom border.
+          className="order-last -mx-2 -mb-px w-full overflow-x-auto pt-1 xl:order-none xl:mx-0 xl:w-auto xl:overflow-visible xl:pt-0"
         >
-          <ul className="m-0 flex list-none items-center gap-0.5 p-0 px-2 lg:px-0">
+          <ul className="m-0 flex list-none items-end p-0 px-2 xl:px-0">
             {NAV_ITEMS.map((item) => {
               const active = isActive(pathname, item.href)
               return (
@@ -74,10 +72,7 @@ export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
                   <Link
                     href={item.href}
                     aria-current={active ? 'page' : undefined}
-                    className={[
-                      NAV_LINK,
-                      active ? NAV_LINK_ACTIVE : NAV_LINK_IDLE,
-                    ].join(' ')}
+                    className={tabClassName(active)}
                   >
                     {item.label}
                   </Link>
@@ -87,7 +82,7 @@ export function AppHeader({ actions, sticky = true }: AppHeaderProps) {
           </ul>
         </nav>
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 self-center py-2">
           {actions}
           <ThemeToggle />
         </div>

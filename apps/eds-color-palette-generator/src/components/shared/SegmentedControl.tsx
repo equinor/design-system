@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react'
 import type { IconData } from '@equinor/eds-icons'
 import { Icon } from './Icon'
+import { tabClassName } from './tabStyles'
 
 export type SegmentedOption<T extends string> = {
   value: T
@@ -85,27 +86,8 @@ const SELECTED =
 const UNSELECTED =
   'bg-surface text-secondary hover:bg-neutral-muted hover:text-primary active:bg-neutral-muted-hover disabled:bg-surface disabled:text-disabled'
 
-/*
- * Tabs follow the EDS Tab in the Core Components Figma file (node 4240:243515,
- * "Composition=Simple"): a 2px bottom border, no corner radius, 12/8px padding
- * and ui/md text. Inactive tabs use the neutral muted border and primary text,
- * the active tab the accent emphasis border and accent text. Hover and focus
- * add the muted fill (accent for the active tab) and focus a 1px focus ring.
- *
- * Figma binds the active label to `text/accent` (#20474b), a variable Tokens
- * Studio no longer has. It resolves to accent step 12, which is
- * `text.on-muted.accent` in Tokens Studio, hence `text-accent-on-muted`.
- */
+// Tabs use the EDS Tab (see tabStyles.ts).
 const TAB_GROUP = 'inline-flex max-w-full flex-wrap'
-
-const TAB_BASE =
-  'inline-flex items-center justify-center gap-[var(--eds-spacing-3xs)] whitespace-nowrap cursor-pointer rounded-none border-b-2 border-solid px-[var(--eds-spacing-sm)] py-[var(--eds-spacing-xs)] font-sans text-base font-normal transition-colors duration-150 focus-visible:relative focus-visible:z-10 focus-visible:outline-1 disabled:cursor-not-allowed disabled:text-disabled'
-
-const TAB_INACTIVE =
-  'border-interactive-neutral-muted text-primary hover:bg-neutral-muted-hover focus-visible:bg-neutral-muted-hover'
-
-const TAB_ACTIVE =
-  'border-interactive-accent-emphasis text-accent-on-muted hover:border-interactive-accent-emphasis-hover hover:bg-accent-muted-hover focus-visible:border-interactive-accent-emphasis-hover focus-visible:bg-accent-muted-hover'
 
 // A horizontal tablist uses Left/Right only; a radio group also Up/Down.
 const NEXT_KEYS = { tabs: ['ArrowRight'], radio: ['ArrowRight', 'ArrowDown'] }
@@ -201,7 +183,7 @@ export function SegmentedControl<T extends string>({
             onClick={() => onChange(option.value)}
             className={
               isTabs
-                ? [TAB_BASE, selected ? TAB_ACTIVE : TAB_INACTIVE].join(' ')
+                ? tabClassName(selected)
                 : [
                     SEGMENT_BASE,
                     LAYOUT[layout].segment,
