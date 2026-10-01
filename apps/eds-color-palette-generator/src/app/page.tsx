@@ -11,6 +11,7 @@ import {
   darknessValuesInDarkMode,
 } from '@/config/config'
 import { paletteConfig } from '@/config/palette-config'
+import { TS_HUES } from '@/config/tokensStudio'
 import {
   cancelURLUpdate,
   deserializeState,
@@ -39,12 +40,10 @@ import { Main } from '@/components/shared/Main'
  * Default palettes: the Tokens Studio anchors, kept in OKLCH as Tokens Studio
  * writes them (ADR 0016 D9).
  */
-const DEFAULT_PALETTES: PaletteInput[] = (paletteConfig.colors ?? []).map(
-  (color) =>
-    'anchors' in color
-      ? { name: color.name, baseColor: '', anchors: color.anchors }
-      : { name: color.name, baseColor: color.value },
-)
+const DEFAULT_PALETTES: PaletteInput[] = TS_HUES.map((hue) => ({
+  name: hue.name,
+  baseColor: hue.anchor,
+}))
 
 const TABS: SegmentedOption<ThemeBuilderTab>[] = [
   { value: 'system', label: 'Colour system' },
@@ -107,14 +106,13 @@ function ThemeBuilderContent() {
       ? paletteConfig.stdDevLight
       : paletteConfig.stdDevDark
 
-  // Generate the scales. Single colours and anchors supply hue and chroma;
-  // every step takes its lightness from the Tokens Studio scale, as Tokens
-  // Studio does, so the input colour itself need not appear in the scale.
+  // Generate the scales. A palette's colour supplies hue and chroma; every
+  // step takes its lightness from the Tokens Studio scale, as Tokens Studio
+  // does, so the colour itself need not appear in the scale.
   // `steps` (hex) drives swatches and contrast; `oklch` is for display.
   const generatedPalettes = useMemo(() => {
     return palettes.map((p) => {
-      const input =
-        p.anchors && p.anchors.length > 0 ? p.anchors : toCssColor(p.baseColor)
+      const input = toCssColor(p.baseColor)
       const scale = (format: 'HEX' | 'OKLCH') =>
         generateColorScale(input, lightnessValues, mean, stdDev, format)
       return { name: p.name, steps: scale('HEX'), oklch: scale('OKLCH') }

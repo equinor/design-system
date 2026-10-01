@@ -4,8 +4,19 @@ export type PaletteInput = {
   /** Client-side identity for React keys; not written to the URL */
   id?: string
   name: string
+  /** The palette's one colour, its anchor, usually OKLCH */
   baseColor: string
-  anchors?: ColorAnchor[]
+}
+
+/**
+ * One colour for a palette from an older link or file that had several
+ * anchors: the anchor nearest step 9, the emphasis fill. Tokens Studio kept
+ * the step 9 anchors when it took over the 2.x hues.
+ */
+export function colourFromAnchors(anchors: ColorAnchor[]): string {
+  return anchors.reduce((nearest, anchor) =>
+    Math.abs(anchor.step - 9) < Math.abs(nearest.step - 9) ? anchor : nearest,
+  ).value
 }
 
 let nextPaletteId = 0
@@ -21,8 +32,9 @@ export function withPaletteIds(palettes: PaletteInput[]): PaletteInput[] {
   return palettes.map((p) => (p.id ? p : { ...p, id: newPaletteId() }))
 }
 
-// `,` separates palettes, `:` the name, `@` anchors and `=` an anchor's step,
-// so those (and `%`) are percent-encoded inside names and values.
+// `,` separates palettes and `:` the name. Older links also used `@` for
+// anchors and `=` for an anchor's step, so all four (and `%`) are
+// percent-encoded inside names and values.
 function escapeSegment(value: string): string {
   return value.replace(
     /[%,:@=]/g,
@@ -66,28 +78,19 @@ type ThemeBuilderState = {
 }
 
 /**
- * URL format:
+ * URL format, one entry per palette:
  *
- * Simple palette (single color):
- *   Name:hex
- *   e.g. Gray:4a4a4a
+ *   Name:colour
+ *   e.g. Moss+Green:oklch(0.4973+0.084851+204.553), or Gray:4a4a4a in older
+ *   links
  *
- * Anchor palette (OKLCH anchors):
- *   Name:a@step1=oklch(...)@step2=oklch(...)
- *   e.g. Moss+Green:a@6=oklch(0.5915+0.0731+184.63)@9=oklch(0.4973+0.084851+204.553)
- *
- * The "a" after the first colon signals anchor mode.
+ * Older links could also hold several anchors, `Name:a@6=oklch(…)@9=oklch(…)`.
+ * Those are read as one colour (see `colourFromAnchors`).
  * Spaces in OKLCH are encoded as "+" (URLSearchParams handles this).
  */
 
 function serializePalette(p: PaletteInput): string {
   const name = escapeSegment(p.name)
-  if (p.anchors && p.anchors.length > 0) {
-    const anchorParts = p.anchors
-      .map((a) => `${a.step}=${escapeSegment(a.value).replace(/ /g, '+')}`)
-      .join('@')
-    return `${name}:a@${anchorParts}`
-  }
   return `${name}:${escapeSegment(p.baseColor.replace('#', ''))}`
 }
 
@@ -100,7 +103,7 @@ function deserializePalette(entry: string): PaletteInput {
   const name = unescapeSegment(entry.slice(0, firstColon))
   const rest = entry.slice(firstColon + 1)
 
-  // Check for anchor format: starts with "a@"
+  // Older links with several anchors: "a@6=oklch(…)@9=oklch(…)"
   if (rest.startsWith('a@')) {
     const anchorStr = rest.slice(2) // strip "a@"
     const parts = anchorStr.split('@')
@@ -116,7 +119,7 @@ function deserializePalette(entry: string): PaletteInput {
       .filter((a): a is ColorAnchor => a !== null)
 
     if (anchors.length > 0) {
-      return { name, baseColor: '', anchors }
+      return { name, baseColor: colourFromAnchors(anchors) }
     }
     return { name, baseColor: '808080' }
   }

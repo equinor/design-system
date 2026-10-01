@@ -6,7 +6,7 @@ import {
   toCssColor,
   toOklchString,
 } from '@/utils/color'
-import type { PaletteInput } from '@/utils/urlState'
+import { colourFromAnchors, type PaletteInput } from '@/utils/urlState'
 
 /** A palette's single colour as OKLCH (old hex values are converted). */
 function singleColour(p: PaletteInput): string {
@@ -20,19 +20,15 @@ function singleColour(p: PaletteInput): string {
  */
 export function withOklchColours(palettes: PaletteInput[]): PaletteInput[] {
   return palettes.map((p) =>
-    p.anchors?.length || p.baseColor.trim().startsWith('oklch(')
+    p.baseColor.trim().startsWith('oklch(')
       ? p
       : { ...p, baseColor: singleColour(p) },
   )
 }
 
-/** Theme Builder palettes as colour definitions, single colours in OKLCH. */
+/** Theme Builder palettes as colour definitions, in OKLCH. */
 export function palettesToColors(palettes: PaletteInput[]): ColorDefinition[] {
-  return palettes.map((p) =>
-    p.anchors && p.anchors.length > 0
-      ? { name: p.name, anchors: p.anchors }
-      : { name: p.name, value: singleColour(p) },
-  )
+  return palettes.map((p) => ({ name: p.name, value: singleColour(p) }))
 }
 
 /**
@@ -45,7 +41,8 @@ export function palettesFile(palettes: PaletteInput[]) {
 
 /**
  * The palettes in an uploaded file, or null if it has none. Reads the
- * palettes file and older palette configs; only `colors` is used.
+ * palettes file and older palette configs; only `colors` is used. An older
+ * palette with several anchors becomes one colour (see `colourFromAnchors`).
  */
 export function palettesFromConfig(config: unknown): PaletteInput[] | null {
   if (typeof config !== 'object' || config === null) return null
@@ -75,7 +72,8 @@ export function palettesFromConfig(config: unknown): PaletteInput[] | null {
           a.step <= 15,
       )
       if (!valid) return null
-      palettes.push({ name, baseColor: '', anchors })
+      const colour = colourFromAnchors(anchors)
+      palettes.push({ name, baseColor: toOklchString(colour) ?? colour })
     } else {
       return null
     }
@@ -83,7 +81,7 @@ export function palettesFromConfig(config: unknown): PaletteInput[] | null {
   return palettes
 }
 
-export type AnchorStatus = 'changed' | 'new' | 'unchanged' | 'several-anchors'
+export type AnchorStatus = 'changed' | 'new' | 'unchanged'
 
 export type AnchorProposal = {
   name: string
@@ -91,7 +89,7 @@ export type AnchorProposal = {
   key: string
   status: AnchorStatus
   /** The palette's anchor in the Tokens Studio format */
-  value?: string
+  value: string
   /** The current Tokens Studio anchor, for changed hues */
   tokensStudioValue?: string
 }
@@ -101,18 +99,13 @@ const SAME_ANCHOR = 0.0001
 
 /**
  * How each palette relates to the Tokens Studio anchors (`input/palette`).
- * A palette is matched to a hue by name. Tokens Studio takes one anchor per
- * hue, so palettes with several anchors cannot be proposed.
+ * A palette is matched to a hue by name, and its colour is the anchor.
  */
 export function anchorProposals(palettes: PaletteInput[]): AnchorProposal[] {
   return palettes.map((p) => {
     const key = hueKey(p.name)
     const existing = TS_HUES.find((hue) => hue.key === key)
-    const anchors = p.anchors ?? []
-    if (anchors.length > 1) {
-      return { name: p.name, key, status: 'several-anchors' }
-    }
-    const colour = anchors.length === 1 ? anchors[0].value : singleColour(p)
+    const colour = singleColour(p)
     const value = toOklchString(colour, ', ') ?? colour
     if (!existing) return { name: p.name, key, status: 'new', value }
     const same = deltaE(colour, existing.anchor, 'OK', true) < SAME_ANCHOR
@@ -134,7 +127,7 @@ export function anchorProposals(palettes: PaletteInput[]): AnchorProposal[] {
 export function tokensStudioAnchorsFile(proposals: AnchorProposal[]) {
   const palette = Object.fromEntries(
     proposals
-      .filter((p) => (p.status === 'changed' || p.status === 'new') && p.value)
+      .filter((p) => p.status === 'changed' || p.status === 'new')
       .map((p) => [
         p.key,
         {

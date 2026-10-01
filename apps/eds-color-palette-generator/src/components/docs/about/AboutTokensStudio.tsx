@@ -30,8 +30,7 @@ export function AboutTokensStudio() {
           <li>
             Select Config and choose Tokens Studio anchors. The dialog compares
             each palette with Tokens Studio and marks it as changed, a new hue,
-            the same as Tokens Studio, or left out because it has several
-            anchors.
+            or the same as Tokens Studio.
           </li>
           <li>
             Download the file. It holds only the changed and new anchors, in the

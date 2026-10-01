@@ -7,7 +7,6 @@ import {
   AboutHowItWorks,
   AboutLearnMore,
   AboutLightAndDark,
-  AboutMultipleAnchors,
   AboutOklchColorSpace,
   AboutOverview,
   AboutStepRoles,
@@ -40,7 +39,6 @@ export default function AboutPage() {
         <AboutStepRoles />
         <AboutGaussianBellCurve />
         <AboutChromaDistribution />
-        <AboutMultipleAnchors />
         <AboutOklchColorSpace />
         <AboutLightAndDark />
         <AboutContrastRequirements />

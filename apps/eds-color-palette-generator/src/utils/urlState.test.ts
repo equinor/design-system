@@ -34,18 +34,17 @@ describe('urlState palettes', () => {
     expect(parse(serializeState({ palettes })).palettes).toEqual(palettes)
   })
 
-  it('round-trips anchor values written with commas', () => {
-    const palettes = [
-      {
-        name: 'Teal',
-        baseColor: '',
-        anchors: [
-          { step: 6, value: 'oklch(0.59, 0.07, 184.6)' },
-          { step: 9, value: 'oklch(0.4973 0.084851 204.553)' },
-        ],
-      },
-    ]
+  it('round-trips OKLCH values written with commas', () => {
+    const palettes = [{ name: 'Teal', baseColor: 'oklch(0.59, 0.07, 184.6)' }]
     expect(parse(serializeState({ palettes })).palettes).toEqual(palettes)
+  })
+
+  it('reads an older link with several anchors as the anchor nearest step 9', () => {
+    const link =
+      'p=Moss+Green:a@6=oklch(0.5915+0.0731+184.63)@9=oklch(0.4973+0.084851+204.553)'
+    expect(parse(link).palettes).toEqual([
+      { name: 'Moss Green', baseColor: 'oklch(0.4973 0.084851 204.553)' },
+    ])
   })
 
   it('does not write client ids to the URL', () => {

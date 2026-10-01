@@ -4,7 +4,6 @@ const SECTIONS = [
   { href: '#steps', label: 'The 15 steps' },
   { href: '#gaussian-bell-curve', label: 'The Gaussian chroma curve' },
   { href: '#chroma-distribution', label: 'Try it' },
-  { href: '#multiple-anchors', label: 'Palettes with several anchors' },
   { href: '#oklch-color-space', label: 'Why OKLCH' },
   { href: '#light-and-dark', label: 'Light and dark mode' },
   { href: '#contrast-requirements', label: 'Contrast requirements' },

@@ -54,7 +54,7 @@ Do not type colour values into the app. `tokensStudio.test.ts` compares the gene
 
 ### Generation (`src/utils/color.ts`)
 
-`generateColorScale(baseColor, lightnessValues, mean, stdDev, format)` is the single entry point for the UI, the scripts and the CLI. A colour is a single value or a list of anchors at steps; anchors are interpolated in OKLCH. Every step takes its lightness from the scale and its chroma from `gaussian(lightness) × anchor chroma`, as in Tokens Studio's `set_chroma(set_lightness(anchor, L), …)`. Functions fail soft and return a grey rather than throwing.
+`generateColorScale(baseColor, lightnessValues, mean, stdDev, format)` is the single entry point for the UI, the scripts and the CLI. The web app passes one colour per palette, as Tokens Studio has one anchor per hue. Only the CLI passes a list of anchors at steps (the frozen 2.x Moss Green and North Sea have two), which are interpolated in OKLCH; older links and palette files with anchors are read as the anchor nearest step 9 (`colourFromAnchors` in `src/utils/urlState.ts`). Every step takes its lightness from the scale and its chroma from `gaussian(lightness) × anchor chroma`, as in Tokens Studio's `set_chroma(set_lightness(anchor, L), …)`. Functions fail soft and return a grey rather than throwing.
 
 ### Semantic tokens (`src/utils/semanticTokens.ts`)
 

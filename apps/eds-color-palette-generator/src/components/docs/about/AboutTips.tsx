@@ -12,10 +12,6 @@ const TIPS = [
     text: 'Light and dark mode have different lightness values and a different curve, so an anchor that works in one can fail a contrast requirement in the other. Switch mode in settings and look at the contrast results again.',
   },
   {
-    title: 'Use one anchor for a proposal',
-    text: 'Tokens Studio has one anchor per hue. Several anchors are fine for exploring, but only a palette with one colour or one anchor can go into the Tokens Studio download.',
-  },
-  {
     title: 'Keep the hue’s name',
     text: 'A palette named after a Tokens Studio hue, such as Moss Green, replaces that hue in the semantic tokens, the previews and the download. Renaming it makes it a new hue.',
   },

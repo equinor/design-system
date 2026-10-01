@@ -140,38 +140,6 @@ describe('ExportDialog', () => {
       ).toBeInTheDocument()
       expect(downloadButton()).toBeEnabled()
     })
-
-    it('leaves out a palette with several anchors', () => {
-      renderDialog(
-        withFirst({
-          baseColor: '',
-          anchors: [
-            { step: 4, value: TS_HUES[0].anchor },
-            { step: 12, value: OTHER_COLOUR },
-          ],
-        }),
-      )
-
-      expect(screen.getByText('Several anchors')).toBeInTheDocument()
-      expect(
-        screen.getByText(
-          /takes one anchor per hue, so this palette is left out/,
-        ),
-      ).toBeInTheDocument()
-      expect(downloadButton()).toBeDisabled()
-    })
-
-    it('counts a palette with a single changed anchor as changed', () => {
-      renderDialog(
-        withFirst({
-          baseColor: '',
-          anchors: [{ step: 9, value: OTHER_COLOUR }],
-        }),
-      )
-
-      expect(screen.getByText('Changed')).toBeInTheDocument()
-      expect(downloadButton()).toBeEnabled()
-    })
   })
 
   describe('Behaviour', () => {

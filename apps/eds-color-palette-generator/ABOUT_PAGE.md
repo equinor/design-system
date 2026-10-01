@@ -16,7 +16,6 @@ Each section is a component in `src/components/docs/about/`, rendered in this or
 | The 15 steps                        | `AboutStepRoles`            | Why the lightness is hand-set (ADR 0016 D3), the dark dip and the inverse steps 14 and 15, and a table of every step's lightness and roles |
 | The Gaussian chroma curve           | `AboutGaussianBellCurve`    | The formula, the Tokens Studio mean and standard deviation, and `BellCurveVisualization` with the 15 steps marked on the curve             |
 | Try it                              | `AboutChromaDistribution`   | `ChromaDistributionDemo`: pick an anchor and curve, see the chroma per step and the generated scale                                        |
-| Palettes with several anchors       | `AboutMultipleAnchors`      | How anchors are interpolated, why they cannot be proposed to Tokens Studio, and a live two-anchor example                                  |
 | Why OKLCH                           | `AboutOklchColorSpace`      | L, C and H, OKLCH as the canonical form (ADR 0016 D9), the OKLCH/HEX switch and the sRGB gamut                                             |
 | Light and dark mode                 | `AboutLightAndDark`         | What differs between the modes: lightness, the curve's mean and the neutral hue                                                            |
 | Contrast requirements               | `AboutContrastRequirements` | The APCA targets from ADR 0016 Confirmation 5 and `ContrastRequirementsTable`                                                              |

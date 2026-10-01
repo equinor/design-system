@@ -40,10 +40,6 @@ const STATUS_TAG: Record<AnchorStatus, { label: string; tone: string }> = {
     label: 'Same as Tokens Studio',
     tone: 'bg-neutral-muted text-secondary',
   },
-  'several-anchors': {
-    label: 'Several anchors',
-    tone: 'bg-warning-muted text-warning-on-muted',
-  },
 }
 
 const isProposed = (p: AnchorProposal) =>
@@ -181,12 +177,6 @@ export function ExportDialog({
                 {p.status === 'new' && (
                   <span className="font-mono text-xs text-secondary">
                     input.palette.{p.key}.anchor = {p.value}
-                  </span>
-                )}
-                {p.status === 'several-anchors' && (
-                  <span className="text-xs text-secondary">
-                    Tokens Studio takes one anchor per hue, so this palette is
-                    left out.
                   </span>
                 )}
               </li>

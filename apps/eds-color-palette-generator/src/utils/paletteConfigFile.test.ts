@@ -23,13 +23,6 @@ describe('palettesToColors', () => {
       { name: 'Old', value: 'oklch(1 0 0)' },
     ])
   })
-
-  it('keeps anchors', () => {
-    const anchors = [{ step: 6, value: 'oklch(0.59 0.07 184.6)' }]
-    expect(
-      palettesToColors([{ name: 'Teal', baseColor: '', anchors }]),
-    ).toEqual([{ name: 'Teal', anchors }])
-  })
 })
 
 describe('palettesFile and palettesFromConfig', () => {
@@ -50,6 +43,26 @@ describe('palettesFile and palettesFromConfig', () => {
       colors: [{ name: 'Gray', value: '#ffffff' }],
     })
     expect(palettes).toEqual([{ name: 'Gray', baseColor: 'oklch(1 0 0)' }])
+  })
+
+  it('reads an older palette with several anchors as one OKLCH colour', () => {
+    // The frozen 2.x Moss Green; Tokens Studio kept its step 9 anchor
+    const palettes = palettesFromConfig({
+      colors: [
+        {
+          name: 'Moss Green',
+          anchors: [
+            { value: 'oklch(0.5915 0.0731 184.63)', step: 6 },
+            { value: 'oklch(0.4973 0.084851 204.553)', step: 9 },
+          ],
+        },
+        { name: 'Light', anchors: [{ value: '#ffffff', step: 2 }] },
+      ],
+    })
+    expect(palettes).toEqual([
+      { name: 'Moss Green', baseColor: moss.anchor },
+      { name: 'Light', baseColor: 'oklch(1 0 0)' },
+    ])
   })
 
   it('rejects files without valid palettes', () => {
@@ -73,20 +86,11 @@ describe('anchorProposals', () => {
       { name: 'Moss Green', baseColor: moss.anchor },
       { name: 'Red', baseColor: 'oklch(0.6 0.2 25)' },
       { name: 'Brand Purple', baseColor: 'oklch(0.5 0.15 300)' },
-      {
-        name: 'Gradient',
-        baseColor: '',
-        anchors: [
-          { step: 6, value: '#3c959e' },
-          { step: 9, value: '#21767e' },
-        ],
-      },
     ])
     expect(proposals.map((p) => [p.key, p.status])).toEqual([
       ['moss-green', 'unchanged'],
       ['red', 'changed'],
       ['brand-purple', 'new'],
-      ['gradient', 'several-anchors'],
     ])
     expect(proposals[1].value).toBe('oklch(0.6, 0.2, 25)')
     expect(proposals[1].tokensStudioValue).toBe('oklch(0.5776, 0.2314, 21.12)')

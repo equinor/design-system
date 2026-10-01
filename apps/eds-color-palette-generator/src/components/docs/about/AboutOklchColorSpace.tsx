@@ -42,8 +42,8 @@ export function AboutOklchColorSpace() {
           <div>
             <dt className="font-medium">Hue (H)</dt>
             <dd className="m-0 text-sm text-secondary">
-              The angle on the colour wheel, from 0 to 360 degrees. A scale with
-              one anchor keeps the anchor&apos;s hue on every step.
+              The angle on the colour wheel, from 0 to 360 degrees. A scale
+              keeps the anchor&apos;s hue on every step.
             </dd>
           </div>
         </dl>
