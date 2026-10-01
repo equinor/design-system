@@ -69,10 +69,10 @@ Writes light and dark token files from a palette configuration. **The CLI defaul
 ## Tests
 
 ```bash
-pnpm test:run            # Vitest: colour maths, Tokens Studio parity, utilities, CLI
+pnpm test:run            # Vitest: colour maths, Tokens Studio parity, utilities, components, CLI
 ```
 
-The CLI tests run the built CLI in `dist/`, so run `pnpm build:cli` first after changing the generator.
+Tests sit next to the code they test. Component tests use Testing Library and opt into jsdom with `// @vitest-environment jsdom` on their first line; the other tests run in node. The CLI tests run the built CLI in `dist/`, so run `pnpm build:cli` first after changing the generator.
 
 ## Reports
 

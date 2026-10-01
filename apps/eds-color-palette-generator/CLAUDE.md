@@ -22,6 +22,7 @@ pnpm types                     # tsc --noEmit
 
 pnpm test:run                  # Vitest single run
 pnpm test:run src/config/tokensStudio.test.ts   # one file
+# Component tests: Testing Library, `// @vitest-environment jsdom` on line 1
 
 pnpm build:cli                 # Build the CLI to dist/ (the CLI tests run dist/, so build first)
 
