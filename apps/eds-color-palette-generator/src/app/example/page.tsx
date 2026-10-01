@@ -32,7 +32,10 @@ export default function ExamplePage() {
     [colorScheme, customPalettes],
   )
 
-  const palette = allPalettes[activePalette] ?? allPalettes[0]
+  // A saved palette can disappear on refresh; fall back to the first one so
+  // the picker and the previews agree
+  const selected = activePalette < allPalettes.length ? activePalette : 0
+  const palette = allPalettes[selected]
 
   // Custom palettes may repeat a name, so the index is the value
   const paletteOptions: SegmentedOption<string>[] = allPalettes.map((p, i) => ({
@@ -54,7 +57,7 @@ export default function ExamplePage() {
             aria-label="Palette"
             layout="wrap"
             options={paletteOptions}
-            value={String(activePalette)}
+            value={String(selected)}
             onChange={(v) => setActivePalette(Number(v))}
           />
           <Button

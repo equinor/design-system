@@ -123,6 +123,22 @@ describe('Examples page', () => {
     })
   })
 
+  it('falls back to the first palette when the selected saved palette is gone', async () => {
+    const user = userEvent.setup()
+    setSimulationPalettes([CUSTOM])
+    renderWithProviders(<ExamplePage />)
+    await user.click(within(picker()).getByRole('radio', { name: CUSTOM.name }))
+
+    setSimulationPalettes([])
+    await user.click(screen.getByRole('button', { name: 'Refresh' }))
+
+    const first = tokensStudioPalettes('light')[0]
+    expect(
+      within(picker()).getByRole('radio', { name: first.name }),
+    ).toHaveAttribute('aria-checked', 'true')
+    expectPairingFrom(first.steps)
+  })
+
   describe('Colour scheme', () => {
     it('uses the dark Tokens Studio palettes in dark mode', () => {
       renderWithProviders(<ExamplePage />, { scheme: 'dark' })
