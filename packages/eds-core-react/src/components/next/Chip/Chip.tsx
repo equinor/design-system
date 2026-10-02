@@ -7,7 +7,6 @@ import {
 } from '@equinor/eds-icons'
 import type { ChipProps } from './Chip.types'
 import { Icon } from '../Icon'
-import { TypographyNext } from '../../Typography'
 
 export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
   {
@@ -51,10 +50,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
       className={classes}
       data-variant={variant}
       data-color-appearance={tone}
-      data-font-family="ui"
-      data-font-size="md"
       data-selectable-space="sm"
-      data-space-proportions="squished"
       data-selected={selected || undefined}
       aria-pressed={toggleable ? selected : undefined}
       aria-expanded={dropdown ? selected : undefined}
@@ -65,16 +61,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
       {selected && !dropdown && !deletable && (
         <Icon data={check} aria-hidden className="icon" />
       )}
-      <TypographyNext
-        as="span"
-        className="label"
-        family="ui"
-        size="md"
-        lineHeight="squished"
-        baseline="center"
-      >
-        {children}
-      </TypographyNext>
+      <span className="label">{children}</span>
       {deletable && <Icon data={close} title="Remove" className="icon" />}
       {!deletable && dropdown && (
         <Icon

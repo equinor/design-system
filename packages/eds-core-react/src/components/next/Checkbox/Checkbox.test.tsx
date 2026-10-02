@@ -43,17 +43,38 @@ describe('Checkbox (next)', () => {
       expect(checkbox).toBeInTheDocument()
     })
 
-    it('extends css with custom className and style', () => {
+    it('applies className and style to the outer wrapper, not the hidden input', () => {
       render(
         <Checkbox
           label="checkbox-test"
           className="custom-checkbox"
-          style={{ clipPath: 'unset' }}
+          style={{ marginTop: '8px' }}
         />,
       )
-      const checkbox = screen.getByLabelText('checkbox-test')
-      expect(checkbox).toBeInTheDocument()
-      expect(checkbox).toHaveClass('custom-checkbox')
+      const input = screen.getByLabelText('checkbox-test')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-checkbox')
+      expect(wrapper).toHaveClass('custom-checkbox')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-checkbox')
+    })
+
+    it('applies className and style to the wrapper when standalone (no label)', () => {
+      render(
+        <Checkbox
+          aria-label="standalone"
+          className="custom-checkbox"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      const input = screen.getByRole('checkbox')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-checkbox')
+      expect(wrapper).toHaveClass('custom-checkbox')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+      expect(input).toHaveClass('input')
+      expect(input).not.toHaveClass('custom-checkbox')
     })
 
     it('applies data-* attributes to input element', () => {
@@ -72,6 +93,15 @@ describe('Checkbox (next)', () => {
   })
 
   describe('Accessibility', () => {
+    // The empty string is deliberate invalid input: it is what distinguishes
+    // the component's `||` fallback from `??`, which would let it through and
+    // render a non-conforming id="" on the input.
+    it('falls back to a generated id when id is an empty string', () => {
+      render(<Checkbox label="checkbox-test" id="" />)
+      const input = screen.getByRole('checkbox', { name: 'checkbox-test' })
+      expect(input.id).not.toBe('')
+    })
+
     it('passes axe accessibility test', async () => {
       const { container } = render(<Checkbox label="checkbox-test" />)
       expect(await axe(container)).toHaveNoViolations()
@@ -133,6 +163,18 @@ describe('Checkbox (next)', () => {
       await userEvent.click(one)
       expect(one).not.toBeChecked()
     })
+
+    it('is disabled when inherited from a disabled fieldset', async () => {
+      render(
+        <fieldset disabled>
+          <Checkbox label="Checkbox one" />
+        </fieldset>,
+      )
+      const one = screen.getByLabelText('Checkbox one')
+      expect(one).toBeDisabled()
+      await userEvent.click(one)
+      expect(one).not.toBeChecked()
+    })
   })
 
   describe('States', () => {
@@ -150,6 +192,16 @@ describe('Checkbox (next)', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const label = checkbox.closest('.eds-checkbox')
       expect(label).toHaveAttribute('data-disabled', 'true')
+    })
+
+    it('does not set data-disabled on the standalone wrapper', () => {
+      // Disabled styling is keyed off :has(.input:disabled) in CSS, so the
+      // wrapper must not depend on a prop-set attribute
+      render(<Checkbox aria-label="Standalone disabled" disabled />)
+      const checkbox = screen.getByRole('checkbox')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = checkbox.closest('.eds-checkbox')
+      expect(wrapper).not.toHaveAttribute('data-disabled')
     })
   })
 
@@ -175,6 +227,17 @@ describe('Checkbox (next)', () => {
   describe('Color appearance', () => {
     it('defaults to accent color appearance', () => {
       render(<Checkbox label="Test Label" />)
+
+      const checkbox = screen.getByRole('checkbox')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = checkbox.closest('.eds-checkbox')
+      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
+    })
+
+    it('keeps accent color appearance when disabled', () => {
+      // The disabled greys are appearance-independent in CSS, so the
+      // appearance no longer flips to neutral on the disabled prop
+      render(<Checkbox label="Test Label" disabled />)
 
       const checkbox = screen.getByRole('checkbox')
       // eslint-disable-next-line testing-library/no-node-access

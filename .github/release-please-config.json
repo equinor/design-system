@@ -1,36 +1,27 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
-  "last-release-sha": "0ef704b8671ea72a129e6d81aa0870511659aa38",
   "tag-separator": "@",
   "packages": {
+    "apps/mobile-storybook": {
+      "release-type": "expo",
+      "component": "mobile-storybook"
+    },
     "packages/eds-core-react": {
       "release-type": "node",
       "package-name": "@equinor/eds-core-react",
       "component": "eds-core-react",
       "exclude-paths": [
-        "src/components/next",
-        ".storybook",
-        "stories",
-        "tests",
-        ".gitignore",
-        ".cachebust",
-        "rollup.config.js",
-        "jest.config.cjs",
-        "jest.setup.ts",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "tsconfig.test.json",
-        "playwright.config.ts",
-        "Dockerfile.storybook",
-        "nginx.conf",
-        "README.md",
-        "FIGMA_CODE_CONNECT.md",
-        "figma.config.json"
+        "packages/eds-core-react/src/components/next",
+        "packages/eds-core-react/.storybook",
+        "packages/eds-core-react/stories",
+        "packages/eds-core-react/tests"
       ]
     },
     "packages/eds-core-react/src/components/next": {
       "release-type": "simple",
       "component": "eds-core-react-next",
+      "versioning": "prerelease",
+      "prerelease": true,
       "prerelease-type": "beta"
     },
     "packages/eds-data-grid-react": {
@@ -38,61 +29,49 @@
       "package-name": "@equinor/eds-data-grid-react",
       "component": "eds-data-grid-react",
       "exclude-paths": [
-        ".storybook",
-        "src/tests",
-        "src/stories",
-        "src/EdsDataGrid.stories.tsx",
-        "jest.config.ts",
-        "jest.setup.ts",
-        "rollup.config.js",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "tsconfig.test.json",
-        "README.md"
+        "packages/eds-data-grid-react/.storybook",
+        "packages/eds-data-grid-react/src/tests",
+        "packages/eds-data-grid-react/src/stories"
       ]
     },
     "packages/eds-icons": {
       "release-type": "node",
       "package-name": "@equinor/eds-icons",
-      "component": "eds-icons",
-      "exclude-paths": [
-        "rollup.config.js",
-        "tsconfig.json",
-        "README.md"
-      ]
+      "component": "eds-icons"
     },
     "packages/eds-lab-react": {
       "release-type": "node",
       "package-name": "@equinor/eds-lab-react",
       "component": "eds-lab-react",
       "exclude-paths": [
-        ".storybook",
-        "stories",
-        "src/stories",
-        "babel.config.cjs",
-        "jest.config.cjs",
-        "jest.setup.ts",
-        "rollup.config.js",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "tsconfig.test.json",
-        "Dockerfile.storybook",
-        "nginx.conf",
-        "README.md"
+        "packages/eds-lab-react/.storybook",
+        "packages/eds-lab-react/stories",
+        "packages/eds-lab-react/src/stories"
+      ]
+    },
+    "packages/eds-mobile-components": {
+      "release-type": "node",
+      "package-name": "@equinor/eds-mobile-components",
+      "component": "eds-mobile-components"
+    },
+    "packages/eds-tokens": {
+      "release-type": "simple",
+      "package-name": "@equinor/eds-tokens",
+      "component": "eds-tokens",
+      "versioning": "prerelease",
+      "prerelease": true,
+      "prerelease-type": "beta",
+      "exclude-paths": [
+        "packages/eds-tokens/tokens",
+        "packages/eds-tokens/build-generate-variables",
+        "packages/eds-tokens/scripts",
+        "packages/eds-tokens/.vscode"
       ]
     },
     "packages/eds-utils": {
       "release-type": "node",
       "package-name": "@equinor/eds-utils",
-      "component": "eds-utils",
-      "exclude-paths": [
-        "rollup.config.js",
-        "tsconfig.json",
-        "tsconfig.build.json",
-        "vitest.config.ts",
-        "vitest.setup.ts",
-        "README.md"
-      ]
+      "component": "eds-utils"
     }
   },
   "separate-pull-requests": false,
@@ -139,7 +118,6 @@
       "hidden": true
     }
   ],
-
   "release-search-depth": 500,
   "changelog-path": "CHANGELOG.md",
   "bump-minor-pre-major": true,

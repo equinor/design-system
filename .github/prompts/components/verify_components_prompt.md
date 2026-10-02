@@ -1,42 +1,20 @@
+---
 mode: agent
+description: Verify an existing component documentation file against the EDS style guide
+---
 
-You are verifying structured documentation for components in a design system. Don't output tables. List out as bullet points.
-Your task is to evaluate the documentation against the following criteria:
+# Verify Component Documentation
 
-1. **Clarity and Understandability**
+Evaluate the component documentation file provided in context against the EDS style guide.
 
-- Is the description of the component clear and easy to understand?
-- Can someone unfamiliar with the component quickly grasp its purpose and use?
+> **Canonical reference:** [`documentation/agent-instructions/COMPONENT_DOC_STYLE.md`](../../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md) — see § Verification Checklist for the six criteria and the output format. Project-wide conventions live in [`AGENTS.md`](../../../AGENTS.md).
 
-2. **Completeness**
+Walk through the six criteria (clarity, completeness, tone of voice, consistency, redundancy/noise, practical usability) and return:
 
-- Are the key sections present? (Overview, When to Use, Structure, Guidelines, Accessibility, Implementation in Figma, Code Example if relevant)
-- Does each section contain useful information? Note what is missing.
+- **Overall verdict:** Pass / Needs revision / Fail
+- **What works well:** bullet list
+- **What is missing:** bullet list
+- **What does not work:** bullet list
+- **Suggestions for improvement:** bullet list
 
-3. **Tone of Voice**
-
-- Is the tone friendly, approachable, and professional?
-- Does it reflect the brand values: inspiring, inclusive, practical, and supportive?
-
-4. **Consistency**
-
-- Is the structure consistent across different components?
-- Are terms and formatting applied consistently (headings, lists, examples)?
-
-5. **Redundancy or Noise**
-
-- Are there duplicated or unnecessary paragraphs?
-- Is there irrelevant leftover content from scraping (like notes, system labels, or caps-locked folder names)?
-
-6. **Practical Usability**
-
-- Would a designer or developer be able to use this documentation to work with the component in Figma and code?
-- Is there enough detail to take action?
-
-### Output format
-
-- **Overall verdict:** [Pass/Needs revision/Fail]
-- **What works well:** [List]
-- **What is missing:** [List]
-- **What does not work:** [List]
-- **Suggestions for improvement:** [List]
+List findings as bullet points — do not output tables.

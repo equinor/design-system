@@ -5,7 +5,7 @@ This package is a collection of the `system icons` from the Equinor Design Syste
 ## Installation
 
 ```sh
-npm install @equinor/eds-icons 
+npm install @equinor/eds-icons
 ```
 If you use Typescript, make sure you have typescript >= 3.8 as a devDependency:
 ```sh

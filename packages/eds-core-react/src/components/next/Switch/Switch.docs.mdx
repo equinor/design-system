@@ -1,12 +1,21 @@
-import { Links } from './../../../../.storybook/components'
+import { Links, PlatformTabs } from './../../../../.storybook/components'
 import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './Switch.stories'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Switch.mdx'
 
 <Meta of={ComponentStories} />
 
 # Switch
 
-**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system/blob/main/packages/eds-mobile-components/src/components/SelectionControls/Switch.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>}>
 
 ```bash
 npm install @equinor/eds-core-react@beta
@@ -20,7 +29,7 @@ Use switches to instantly toggle a single setting on or off, applying changes im
 
 <Links
   ariaUrl="https://www.w3.org/WAI/ARIA/apg/patterns/switch/"
-  sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/next/Switch/Switch.tsx"
+  sourceUrl="https://github.com/equinor/design-system/blob/main/packages/eds-core-react/src/components/next/Switch/Switch.tsx"
   npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
@@ -42,6 +51,12 @@ import { Switch } from '@equinor/eds-core-react/next'
 ### States
 
 <Canvas of={ComponentStories.States} />
+
+### Inherited disabled
+
+Switches inside a `<fieldset disabled>` are disabled by the browser without a `disabled` prop. The disabled styling is keyed off the input's `:disabled` state, so it covers this inherited disabling too.
+
+<Canvas of={ComponentStories.InheritedDisabled} />
 
 ### Dark mode
 
@@ -73,3 +88,5 @@ If toggling triggers an important status change, announce it with an `aria-live`
   {status}
 </div>
 ```
+
+</PlatformTabs>

@@ -5,8 +5,7 @@ import type { TextAreaProps } from './TextArea.types'
 import { Field, useFieldIds } from '../Field'
 import { Input } from '../Input'
 import { Button } from '../Button'
-// TODO: swap to next/Tooltip when available
-import { Tooltip } from '../../Tooltip'
+import { Tooltip } from '../Tooltip'
 import { Icon } from '../Icon'
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -22,6 +21,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       disabled,
       maxRows,
       showCharacterCount,
+      className,
+      style,
       ...textareaProps
     },
     ref,
@@ -100,7 +101,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const showHelperRow = helperMessage || showCharacterCount
 
     return (
-      <Field className="eds-text-area" disabled={disabled}>
+      <Field
+        className={['eds-text-area', className].filter(Boolean).join(' ')}
+        style={style}
+        disabled={disabled}
+      >
         {label && (
           <div className="label-row">
             <Field.Label htmlFor={inputId} indicator={indicator}>

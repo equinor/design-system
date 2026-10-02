@@ -15,12 +15,7 @@ import type {
  * - `danger`: Destructive/error
  */
 export type ChipTone =
-  | 'neutral'
-  | 'accent'
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'danger'
+  'neutral' | 'accent' | 'success' | 'info' | 'warning' | 'danger'
 
 /**
  * Chip visual style variants

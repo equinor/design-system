@@ -207,4 +207,22 @@ describe('DateRangePicker', () => {
     const disabledDate = screen.getByLabelText('Thursday, May 30, 2024')
     expect(disabledDate).toHaveAttribute('aria-disabled', 'true')
   })
+
+  it('Today button stays enabled for navigation when maxValue is in the past', async () => {
+    // DateRangePicker never passes onSelectToday — Today is navigation-only.
+    // It must not be disabled even when today falls outside maxValue.
+    const lastYear = new Date()
+    lastYear.setFullYear(lastYear.getFullYear() - 1)
+
+    render(
+      <RangeContainer>
+        <DateRangePicker label={'DateRangePicker'} maxValue={lastYear} />
+      </RangeContainer>,
+    )
+
+    const picker = screen.getByLabelText(/^Change date.*/)
+    await userEvent.click(picker)
+
+    expect(screen.getByText('Today').closest('button')).not.toBeDisabled()
+  })
 })

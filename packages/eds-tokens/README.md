@@ -13,16 +13,54 @@ pnpm add @equinor/eds-tokens
 
 ## Usage
 
+> **⚠️ Transition notice.** The token structure in this package is being
+> replaced. The replacement is developed on the beta line
+> (`@equinor/eds-tokens@beta`) and ships as the next major release.
+>
+> * **Need tokens today?** Use the CSS variables — they are the supported
+>   option for production and keep working throughout 2.x. Expect the
+>   variable names to change in the next major release; keeping direct
+>   variable references few and centralised will make that migration cheap.
+> * **Do not** adopt the legacy `tokens` JavaScript object in new code — it
+>   is deprecated and will be removed in the next major release.
+> * The beta line is for testing and feedback, not production use.
+
 The package provides two token systems:
 
-* **CSS Variables (Recommended)** -- Modern, theme-aware design tokens synced from Figma
-* **Legacy Tokens** -- Original token format, still supported for backward compatibility
+* **CSS Variables** -- Theme-aware design tokens synced from Figma. Supported for production; the variable names will change in the next major release.
+* **Legacy Tokens** -- Original token format. Deprecated: do not use in new code.
 
 ---
 
-## CSS Variables (Recommended)
+## CSS Variables
 
-The new token system uses CSS custom properties that automatically adapt to light and dark color schemes using the modern `light-dark()` function. These tokens are directly synced from Figma variables.
+> These `--eds-*` variables will be replaced by the new token structure in
+> the next major release. They remain the supported way to consume EDS
+> tokens today (`@equinor/eds-core-react` 2.x requires `css/variables`) —
+> just keep direct variable references organised so the rename in the next
+> major is easy to absorb.
+
+The new token system uses CSS custom properties that automatically adapt to light and dark color schemes via explicit `[data-color-scheme]` scope rules with a `prefers-color-scheme` media-query fallback. These tokens are directly synced from Figma variables.
+
+### Dark mode
+
+Dual-mode color tokens are emitted as explicit scope rules in the published `variables.min.css`:
+
+```css
+:root              { --eds-color-bg-floating: #fff; }
+[data-color-scheme="light"] { --eds-color-bg-floating: #fff; }
+[data-color-scheme="dark"]  { --eds-color-bg-floating: #202223; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme="light"]) {
+    --eds-color-bg-floating: #202223;
+  }
+}
+```
+
+The published CSS does **not** use the `light-dark()` CSS function. This is deliberate: `light-dark()` is correct in source CSS, but downstream bundlers (Vite 8 + Rolldown + lightningcss, esbuild with legacy targets, postcss with certain presets) may polyfill it into a `var()` pattern that does not work for subtree-scoped dark mode. Emitting explicit scope rules is robust against any downstream CSS pipeline regardless of how it is configured.
+
+To enable dark mode for a subtree, set `data-color-scheme="dark"` on a wrapper element. To opt out of system dark mode for a subtree, set `data-color-scheme="light"`.
 
 ### Using CSS Variables in CSS
 
@@ -94,6 +132,37 @@ const padding = comfortableSpacing.SPACING_INLINE_MD
 const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
 ```
 
+#### Typography (non-CSS targets)
+
+Typography is composed at runtime from five orthogonal axes. The CSS bundle resolves them via `data-*` attributes; non-CSS consumers (React Native, SSR, design tooling) import the family-keyed matrix directly:
+
+```typescript
+import { typography as ui } from '@equinor/eds-tokens/ts/typography/font-family-ui'
+import { typography as header } from '@equinor/eds-tokens/ts/typography/font-family-header'
+
+const md = ui.fontFamilySize.md
+
+const style = {
+  fontFamily: ui.typography.fontFamily,
+  fontSize: md.fontSize,
+  fontWeight: md.fontWeight.normal,
+  lineHeight: md.lineHeight.default,
+  letterSpacing: md.tracking.normal,
+}
+// { fontFamily: 'Inter', fontSize: 14, fontWeight: 400,
+//   lineHeight: 20, letterSpacing: 0 }
+```
+
+Each size cell exposes `fontSize`, nested `fontWeight` / `tracking` / `lineHeight` objects, and inlined `iconSize` / `gapHorizontal` / `gapVertical` extras for chip- and button-like layouts. Variant names can be derived with `keyof`:
+
+```typescript
+type Weight = keyof typeof ui.fontFamilySize.md.fontWeight // 'lighter' | 'normal' | 'bolder'
+```
+
+For React Native, coerce `fontWeight` to a string at the call site (`String(md.fontWeight.normal)`) so it slots into `<Text style>`.
+
+See [`instructions/typography.md`](./instructions/typography.md) for the full axis model.
+
 ### Importing variables as JSON
 
 The variables are available in two formats:
@@ -147,7 +216,7 @@ The typography system requires two font families: **Equinor** (headings) and **I
 
 ### Typography variables that adapt to data-attributes
   * Font family setup (UI and Header fonts)
-  * Font size data attributes (`[data-text-size='xs']`, `[data-text-size='sm']`, etc.)
+  * Font size data attributes (`[data-font-size='xs']`, `[data-font-size='sm']`, etc.)
   * Line height data attributes (`[data-line-height='default']`, `[data-line-height='squished']`)
   * Font weight data attributes (`[data-font-weight='lighter']`, `[data-font-weight='normal']`, `[data-font-weight='bolder']`)
   * Letter spacing data attributes (`[data-tracking='tight']`, `[data-tracking='normal']`, `[data-tracking='wide']`)
@@ -174,17 +243,17 @@ Set typography properties using data attributes:
 
 ```html
 <!-- UI font with medium size -->
-<p data-font-family="ui" data-text-size="md" data-line-height="default">
+<p data-font-family="ui" data-font-size="md" data-line-height="default">
   UI font text
 </p>
 
 <!-- Header font with extra large size and bolder weight -->
-<h1 data-font-family="header" data-text-size="xl" data-font-weight="bolder">
+<h1 data-font-family="header" data-font-size="xl" data-font-weight="bolder">
   Header font text
 </h1>
 
 <!-- Baseline grid alignment -->
-<p data-font-family="ui" data-text-size="md" data-baseline="grid">
+<p data-font-family="ui" data-font-size="md" data-baseline="grid">
   Aligned to 4px baseline grid
 </p>
 ```
@@ -249,7 +318,7 @@ The foundation CSS includes baseline grid alignment for consistent vertical rhyt
 * `data-baseline="center"` -- Centers text vertically while maintaining 4px grid alignment
 
 ```html
-<p data-font-family="ui" data-text-size="md" data-baseline="grid">
+<p data-font-family="ui" data-font-size="md" data-baseline="grid">
   Text aligned to baseline grid
 </p>
 ```
@@ -258,9 +327,9 @@ These utilities use modern CSS features (`text-box-trim`) and gracefully degrade
 
 ---
 
-## Legacy Tokens (Backward Compatible)
+## Legacy Tokens (deprecated — do not use)
 
-The original token format is still available for existing applications. These tokens use a structured JavaScript object format.
+**Deprecated.** The original token format remains published only so existing applications keep working, and will be removed in the next major release. These tokens use a structured JavaScript object format.
 
 ### Using Legacy Tokens in JavaScript/TypeScript
 
@@ -283,7 +352,7 @@ const typography = tokens.typography.heading.h1
 * Interaction states
 * Typography (`ot`, `woff` or `woff2` font required)
 
-> We recommend migrating to CSS Variables for new projects to benefit from automatic theme support and better performance.
+> Do not adopt these legacy tokens in new projects. If you need tokens today, use the CSS variables above; the long-term replacement is the new token structure currently on the beta line (`@equinor/eds-tokens@beta`).
 
 [design tokens]: https://css-tricks.com/what-are-design-tokens/
 

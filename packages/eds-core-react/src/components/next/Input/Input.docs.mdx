@@ -1,12 +1,22 @@
-import { Links } from './../../../../.storybook/components'
+import { Links, PlatformTabs } from './../../../../.storybook/components'
 import { Primary, Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as ComponentStories from './Input.stories'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Input.mdx'
 
 <Meta of={ComponentStories} />
 
 # Input
 
-**⚠️ Beta Component** - This component is under active development and may have breaking changes.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+
+<PlatformTabs mobile={<>
+  <Links
+    sourceUrl="https://github.com/equinor/design-system/blob/main/packages/eds-mobile-components/src/components/Input/Input.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>}>
+
 
 ```bash
 npm install @equinor/eds-core-react@beta
@@ -20,7 +30,7 @@ Text input and textarea component for forms and user input. Intended to be used 
 
 <Links
   ariaUrl="https://www.w3.org/TR/wai-aria-1.1/#input"
-  sourceUrl="https://github.com/equinor/design-system/blob/develop/packages/eds-core-react/src/components/next/Input/Input.tsx"
+  sourceUrl="https://github.com/equinor/design-system/blob/main/packages/eds-core-react/src/components/next/Input/Input.tsx"
   npmUrl="https://www.npmjs.com/package/@equinor/eds-core-react"
 />
 
@@ -82,3 +92,5 @@ Use `startAdornment` and `endAdornment` for elements (icons, buttons, etc.).
 Wrap the Input in a container that sets the `--eds-color-neutral-1` CSS variable to customize the background color. This overrides the base color token that the Input's background references.
 
 <Canvas of={ComponentStories.OverrideBackground} />
+
+</PlatformTabs>

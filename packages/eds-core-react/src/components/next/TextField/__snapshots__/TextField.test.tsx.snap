@@ -3,37 +3,28 @@
 exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
 <div>
   <div
-    class="eds-field"
+    class="eds-field eds-text-field"
   >
     <div
-      class="eds-text-field__header"
+      class="header"
     >
       <label
-        class="eds-field__label"
+        class="label"
         data-baseline="center"
-        data-font-family="ui"
-        data-font-size="md"
-        data-font-weight="normal"
-        data-line-height="default"
-        data-tracking="normal"
         for="test-id-input"
       >
         Label
       </label>
     </div>
     <p
-      class="eds-field__description"
+      class="description"
       data-baseline="center"
-      data-font-family="ui"
-      data-font-size="sm"
-      data-line-height="default"
-      data-tracking="normal"
       id="test-id-description"
     >
       Description text
     </p>
     <div
-      class="eds-input-container"
+      class="eds-input"
       data-color-appearance="neutral"
       data-font-size="md"
       data-selectable-space="sm"
@@ -41,7 +32,7 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     >
       <input
         aria-describedby="test-id-description test-id-helper-message"
-        class="eds-input"
+        class="control"
         data-color-appearance="neutral"
         data-font-family="ui"
         data-font-size="md"
@@ -52,12 +43,8 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
       />
     </div>
     <p
-      class="eds-field__helper-message"
+      class="helper-message"
       data-baseline="grid"
-      data-font-family="ui"
-      data-font-size="sm"
-      data-line-height="default"
-      data-tracking="normal"
       id="test-id-helper-message"
     >
       Helper message

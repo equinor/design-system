@@ -2,43 +2,42 @@
   .eds-text-area {
     & .label-row {
       display: flex;
+      gap: var(--eds-typography-gap-horizontal);
       align-items: center;
       justify-content: space-between;
-      gap: var(--eds-typography-gap-horizontal);
+
       inline-size: 100%;
 
-      & > button {
+      & > button,
+      & > .eds-tooltip-anchor {
         flex-shrink: 0;
         margin-block: calc(var(--eds-sizing-icon-xs) / -2);
       }
     }
 
-    & .eds-input-container {
+    & .eds-input {
+      overflow: hidden;
       align-items: flex-start;
       padding-block: var(--eds-container-space-vertical);
-      overflow: hidden;
 
-      & textarea.eds-input {
-        box-sizing: border-box;
-        overflow: auto;
-        white-space: pre-wrap;
-        text-overflow: clip;
+      & textarea.control {
         resize: vertical;
+
+        overflow: auto;
+
+        box-sizing: border-box;
         padding-block-end: var(--eds-container-space-vertical);
         padding-inline-end: var(--eds-selectable-space-horizontal);
-      }
 
-      &:has(+ .helper-row) {
-        margin-block-end: calc(
-          var(--eds-spacing-vertical-3xs) - var(--eds-generic-gap-vertical)
-        );
+        text-overflow: clip;
+        white-space: pre-wrap;
       }
     }
 
     & .helper-row {
       display: flex;
-      align-items: baseline;
       gap: var(--eds-typography-gap-horizontal);
+      align-items: baseline;
       inline-size: 100%;
     }
 
@@ -52,7 +51,7 @@
 /* Must be outside @layer: [data-font-family] { margin: 0 } in variables.css
    is unlayered and overrides any margin inside @layer eds-components. */
 .eds-text-area {
-  & .eds-error-icon {
+  & .error-icon {
     margin-block-start: var(--eds-spacing-vertical-2xs);
   }
 
@@ -61,7 +60,7 @@
   }
 
   /* Extend textarea to bottom-right corner so the resize handle sits flush. */
-  & textarea.eds-input {
+  & textarea.control {
     margin-block-end: calc(-1 * var(--eds-container-space-vertical));
     margin-inline-end: calc(-1 * var(--eds-selectable-space-horizontal));
   }

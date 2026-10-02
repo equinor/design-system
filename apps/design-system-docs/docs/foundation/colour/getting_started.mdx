@@ -1,0 +1,171 @@
+---
+title: Getting Started
+hide_title: true
+description: Load the 3.0.0-beta colour tokens and use the same semantic names in Figma, CSS and TypeScript.
+---
+
+Colour tokens have one semantic name across design and code. Start by loading the beta token bundle,
+then bind components to the names documented here.
+
+## Load the CSS tokens
+
+Install the beta package:
+
+```sh
+pnpm add @equinor/eds-tokens@beta
+```
+
+Import the bundled variables once in your application:
+
+```css
+@import '@equinor/eds-tokens/next/css/variables.css';
+```
+
+The bundle includes the semantic colours for both light and dark. Components then use CSS custom
+properties:
+
+```css
+.button--primary {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+}
+```
+
+:::note The `next` path is temporary
+
+The 3.0.0 beta publishes the new output under `next/*` while legacy and new components coexist. The
+prefix will be removed before the stable release. The token names remain the same.
+
+:::
+
+## Reading a token name
+
+A name answers five questions, from left to right:
+
+
+| Surface | Behaviour | Tone | Level | State |
+|---------|-----------|------|-------|-------|
+| background | interactive | accent | emphasis | hover |
+
+| Segment | Question | Example |
+| --- | --- | --- |
+| Surface | What am I colouring? | `background`, `border`, `text`, `icon` |
+| Behaviour | Can the user act on it? | `interactive`, `non-interactive` |
+| Tone | What does it mean? | `accent`, `neutral`, `danger` |
+| Level | How visually strong is it? | `muted`, `emphasis`, and either `default` or `selected`, depending on surface and behaviour |
+| State | What is happening now? | `default`, `hover`, `pressed` |
+
+Not every name contains all five segments. Non-interactive colours have no state, and families such
+as `text.primary` and `background.surface` name a specific role directly.
+
+[Usage](./usage.mdx) explains how to choose the branch, tone, level and state.
+
+## One name in Figma, CSS and TypeScript
+
+Each colour token has one name in Figma, one CSS custom property and one TypeScript path:
+
+| Where | How it is written |
+| --- | --- |
+| Figma | `background.non-interactive.accent.muted` |
+| CSS | `--eds-background-non-interactive-accent-muted` |
+| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+
+CSS is `--eds-` followed by the dotted name with hyphens for dots. TypeScript uses the dotted name
+with each segment camel-cased.
+
+The [token reference](./reference.mdx) is the authority for CSS names. The CSS name and Figma name
+are carried by the token definition rather than derived from each other, so if the pattern and
+reference ever disagree, the reference is right.
+
+:::tip Need a colour value?
+
+Look up the token instead of copying a hex value. A hardcoded value will not follow the colour
+scheme, and nothing will tell you when it stops matching the token it came from.
+
+:::
+
+## Switching colour scheme
+
+The system reads the `data-color-scheme` attribute:
+
+```html
+<!-- Light, the default -->
+<html data-color-scheme="light"></html>
+
+<!-- Dark -->
+<html data-color-scheme="dark"></html>
+```
+
+Set it once, at the top of the page or application, so the whole interface switches together.
+
+The attribute can be set on any ancestor and it cascades, so scoping a single panel to dark inside a
+light page is technically possible. We do not recommend it. A colour scheme describes the
+interface, not a region inside it.
+
+## Using the tokens in TypeScript
+
+The tokens also ship as TypeScript objects for places a CSS custom property cannot reach, such as a
+chart library, canvas, email template or React Native surface.
+
+```ts
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+
+semantic.background.interactive.accent.emphasis.default // '#21767e'
+```
+
+Each module is imported directly; there is no barrel. The objects are `as const`, and each one also
+exports its type, so `Semantic` gives you autocompletion and a compile error on a name that does not
+exist.
+
+:::warning The colour scheme does not switch for you
+
+In CSS you write one name and the `data-color-scheme` attribute decides the value. In TypeScript
+there is no attribute to read: `semantic/light` and `semantic/dark` are separate objects, and you
+choose which one to use.
+
+```ts
+import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
+
+const tokens = prefersDark ? dark : light
+```
+
+Prefer CSS custom properties wherever they work. Reach for the TypeScript objects only where they
+do not, and expect to handle the scheme yourself.
+
+:::
+
+Values are hex rather than the OKLCH used by the CSS output. They are generated from the same source,
+so they agree, but a value copied from TypeScript does not carry the CSS output's wide-gamut
+precision.
+
+Beyond `semantic`, the other modules under `next/ts/` expose the layers underneath: `colorScheme`
+for the tone scales, `colors` for hue primitives, and `density`, `font`, `elevation` and `primitives`
+for the non-colour axes. [The palette](./palette.mdx) explains those layers. Only `semantic` is
+intended for everyday use.
+
+## For designers
+
+Add the EDS colour library to your Figma file and choose variables by semantic name. The names are
+identical to the ones above, so a design and its implementation refer to the same role.
+
+Only the semantic layer is published to the variable picker. The numbered scale underneath it is
+hidden, so a raw palette value cannot be bound to a component by accident.
+
+### Tokens are scoped to the property they belong on
+
+The variable picker is filtered by what you are colouring. Open the fill picker and you get fill
+tokens; open the stroke picker and you get border tokens. Text and icon tokens do not appear where a
+background belongs, and vice versa.
+
+This scoping is part of each token's definition:
+
+- The list is already limited to tokens relevant to the selected property.
+- You cannot bind `text.primary` to a rectangle's fill or apply a background token to a stroke.
+
+If a token is missing from a picker, it usually belongs on a different property.
+
+## Next step
+
+[Usage](./usage.mdx) shows how to choose levels and states, pair foregrounds and apply the tokens to
+common interface patterns.

@@ -11,7 +11,7 @@ import {
   isValidElement,
 } from 'react'
 import styled from 'styled-components'
-import { mergeRefs } from '@equinor/eds-utils'
+import { mergeRefs, getElementRef } from '@equinor/eds-utils'
 import { TabsContext } from './Tabs.context'
 import { Variants } from './Tabs.types'
 
@@ -30,11 +30,9 @@ type StyledProps = {
   $scrollable?: boolean
 }
 
-const StyledTabList = styled.div.attrs(
-  (): HTMLAttributes<HTMLDivElement> => ({
-    role: 'tablist',
-  }),
-)<StyledProps>`
+const StyledTabList = styled.div.attrs((): HTMLAttributes<HTMLDivElement> => ({
+  role: 'tablist',
+}))<StyledProps>`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: ${({ $variant }) => variants[$variant] as VariantsRecord};
@@ -96,7 +94,6 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
       type ChildPropsWithRef = {
         value?: string | number
         disabled?: boolean
-        ref?: React.Ref<HTMLButtonElement>
         [key: string]: unknown
       }
 
@@ -106,7 +103,7 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(function TabsList(
         ? controlledActive === activeTab
         : $index === activeTab
 
-      const childRef = childProps?.ref || null
+      const childRef = getElementRef<HTMLButtonElement>(child)
       const tabRef =
         isActive && childRef
           ? mergeRefs<HTMLButtonElement>(childRef, selectedTabRef)

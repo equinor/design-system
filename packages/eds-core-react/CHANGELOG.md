@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.3](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.2...eds-core-react@v2.6.3) (2026-09-08)
+
+
+### 🐛 Fixed
+
+* reflect inherited disabled state in Checkbox, Radio and Switch ([#5392](https://github.com/equinor/design-system/issues/5392)) ([cfa17df](https://github.com/equinor/design-system/commit/cfa17df1f03f45dcced33ef32c69932cc37b984e))
+
+## [2.6.2](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.1...eds-core-react@v2.6.2) (2026-09-01)
+
+
+### 🐛 Fixed
+
+* align and prevent shrinking of Datepicker toggle buttons ([#5372](https://github.com/equinor/design-system/issues/5372)) ([9c18bab](https://github.com/equinor/design-system/commit/9c18babae68d8dc6aa62a033fd04c0423a7f5272))
+* Today button in Datepicker now selects and navigates correctly ([#5340](https://github.com/equinor/design-system/issues/5340)) ([160f178](https://github.com/equinor/design-system/commit/160f178e32295e957e14a3cb3b351f71295a648e))
+
+## [2.6.1](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.0...eds-core-react@v2.6.1) (2026-05-20)
+
+
+### 🐛 Fixed
+
+* publish with correct workspace dependencies — 2.6.0 had unresolved `workspace:^` references to `@equinor/eds-icons`, `@equinor/eds-tokens`, and `@equinor/eds-utils` that prevented installation via npm (CI workflow issue, no code changes)
+
+## [2.6.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.5.0...eds-core-react@v2.6.0) (2026-05-20)
+
+
+### 🐛 Fixed
+
+* forward child refs in Tooltip and TabList on React 18 ([#4904](https://github.com/equinor/design-system/issues/4904)) ([d095239](https://github.com/equinor/design-system/commit/d0952399a167ec5a54e7b99353007d6649191d02))
+
 ## [2.5.0](https://github.com/equinor/design-system/compare/eds-core-react@v2.4.1...eds-core-react@v2.5.0) (2026-04-14)
 
 

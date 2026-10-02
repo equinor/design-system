@@ -1,0 +1,132 @@
+name: Publish core-react storybook
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment for the core-react storybook'
+        required: false
+        type: choice
+        options:
+          - production
+          - development
+        default: 'production'
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/eds-core-react/**'
+      - 'packages/eds-tokens/**'
+      - 'packages/eds-icons/**'
+      - 'packages/eds-mobile-components/docs/**'
+permissions:
+  contents: read
+  id-token: write
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  setup:
+    uses: ./.github/workflows/_setup.yml
+    secrets: inherit
+    with:
+      cacheKey: ${{ github.sha }}-publish-storybook
+  packages:
+    name: Process packages
+    runs-on: ubuntu-latest
+    needs: [setup]
+    steps:
+      - name: Use "setup" cache
+        id: get-setup-cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ github.sha }}-publish-storybook
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24.16.0'
+          package-manager-cache: false
+      - name: Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      - name: Build packages
+        id: build-packages
+        run: pnpm run build
+      - name: Build Storybook
+        id: build-storybook
+        run: |
+          echo Running build:storybook!
+          pnpm build:storybook
+      - name: Upload storybook build
+        uses: actions/upload-artifact@v7
+        with:
+          name: storybook-build
+          path: packages/eds-core-react/storybook-build
+          retention-days: 1
+  publish-storybook:
+    needs: [setup, packages]
+    name: Build & Deploy Website
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment || 'development' }}
+    steps:
+      # This job does not restore the workspace cache (it only needs the
+      # storybook-build artifact), so `.github/actions/deploy-storybook`
+      # isn't present unless checked out here. Must stay the first step:
+      # checkout cleans the workspace and would wipe the downloaded
+      # storybook build otherwise.
+      - name: Checkout deploy action
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github
+
+      - name: Download storybook build
+        uses: actions/download-artifact@v8
+        with:
+          name: storybook-build
+          path: packages/eds-core-react/storybook-build
+
+      - name: Debug - List downloaded files
+        run: |
+          echo "=== Downloaded files ==="
+          ls -la packages/eds-core-react/storybook-build/
+          echo ""
+          echo "=== Checking index.json for Foundation/Spacing ==="
+          if grep -q "foundation-spacing--selectable-padding" packages/eds-core-react/storybook-build/index.json; then
+            echo "✅ Foundation/Spacing SelectablePadding FOUND in index.json"
+          else
+            echo "❌ Foundation/Spacing SelectablePadding NOT FOUND in index.json"
+          fi
+          echo ""
+          echo "=== All Foundation/Spacing entries ==="
+          grep -o '"foundation-spacing--[^"]*"' packages/eds-core-react/storybook-build/index.json || echo "No Foundation/Spacing entries found"
+
+      - name: Deploy the website
+        id: deploy-website
+        uses: ./.github/actions/deploy-storybook
+        with:
+          folder: packages/eds-core-react/storybook-build
+          connection-string: ${{ secrets.AZ_STORYBOOK_CONNECTION_STRING }}
+
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
+
+  purge-cdn:
+    needs: [publish-storybook]
+    # Only purge CDN for production. On push to main, environment is undefined,
+    # which correctly skips this job since dev storybook has no CDN.
+    if: github.event.inputs.environment == 'production'
+    name: Purge cdn
+    uses: ./.github/workflows/_purge_cdn.yaml
+    secrets: inherit
+    with:
+      environment: production
+      endpoint: storybook

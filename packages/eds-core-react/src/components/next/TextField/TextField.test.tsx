@@ -3,6 +3,28 @@ import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { TextField } from './TextField'
 
+// jsdom does not implement the Popover API (used by next/Tooltip)
+beforeAll(() => {
+  HTMLElement.prototype.showPopover = function (this: HTMLElement) {
+    this.setAttribute('data-popover-open', '')
+  }
+  HTMLElement.prototype.hidePopover = function (this: HTMLElement) {
+    this.removeAttribute('data-popover-open')
+  }
+  HTMLElement.prototype.matches = function (
+    this: HTMLElement,
+    selector: string,
+  ) {
+    if (selector === ':popover-open')
+      return this.hasAttribute('data-popover-open')
+    return Element.prototype.matches.call(this, selector)
+  }
+})
+afterAll(() => {
+  // Remove the own-property override — prototype chain falls back to Element.prototype.matches
+  Reflect.deleteProperty(HTMLElement.prototype, 'matches')
+})
+
 describe('TextField (Next EDS 2.0)', () => {
   it('Matches snapshot', () => {
     const { container } = render(
@@ -55,6 +77,22 @@ describe('TextField (Next EDS 2.0)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <TextField
+          label="Name"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Basic functionality', () => {
     it('Renders label correctly', () => {
       render(<TextField label="Test Label" />)
@@ -99,7 +137,7 @@ describe('TextField (Next EDS 2.0)', () => {
       render(<TextField label="Label" id="test-id" />)
       // getByRole with name verifies label is properly connected to input
       const input = screen.getByRole('textbox', { name: 'Label' })
-      expect(input).toHaveAttribute('id', 'test-id-input')
+      expect(input).toHaveAttribute('id', 'test-id')
     })
 
     it('Generates id when not provided', () => {

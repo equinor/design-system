@@ -6,6 +6,8 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 Welcome to the next generation of the Equinor Design System! 🎉
 
+> **Note on naming:** "EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are separate; the numbers line up by coincidence. See [Versioning](https://eds.equinor.com/docs/Next/about/getting-started/develop/getting_started_development/#versioning) for the full explanation.
+
 ## What is EDS 2.0?
 
 EDS 2.0 is a complete redesign of our component library, bringing:
@@ -18,14 +20,14 @@ EDS 2.0 is a complete redesign of our component library, bringing:
 - 🔧 **Refined APIs** - Cleaner, more intuitive component interfaces
 
 <br />
-## Current Status: Beta
+## What Beta Means
 
-All components in the **"EDS 2.0"** section are currently in **beta testing**. This means:
+All components in the **"EDS 2.0"** section are in **beta**. Beta is not a warning against using them:
 
-- ⚠️ **Breaking changes may occur** - APIs are not yet finalized
-- 🧪 **Testing phase** - We're gathering feedback and iterating
-- 📝 **Documentation evolving** - Stories and examples are being refined
-- 🎨 **Design alignment ongoing** - Ensuring perfect match with Figma
+- ✅ **Safe to adopt** - The components are published on the `beta` tag so that teams can start using them now. Expect small API changes before EDS 2.0 becomes stable, all listed in the [beta changelog](https://github.com/equinor/design-system/blob/main/packages/eds-core-react/src/components/next/CHANGELOG.md) with breaking ones marked. Beta is followed by a release candidate before the stable release, so there is a step between the API you see today and the final one. The theming layer (design tokens and the `data-*` attributes for density and colour scheme) is being reworked, so keep those references few and centralised
+- 🤝 **EDS 1.0 is still supported** - The current components in `@equinor/eds-core-react` are maintained until EDS 2.0 becomes stable (published as `eds-core-react@3.0.0`). There is no need to stop using them
+- 🧩 **Mixing is expected** - Use EDS 1.0 and `/next` components side by side in the same application, and adopt the new ones as they fit your work
+- 🛠️ **Tooling for the EDS 1.0 to EDS 2.0 migration** - We plan to provide codemods and AI-assisted rewrites so that moving from EDS 1.0 to EDS 2.0 is not a manual job
 
 <br />
 ## How to Use Beta Components
@@ -85,7 +87,15 @@ function MyApp() {
 
 ## When Will EDS 2.0 Be Stable?
 
-EDS 2.0 components will graduate to stable in a **single major release (v3.0.0)** when:
+EDS 2.0 components will graduate to stable in a **single major release (v3.0.0)**, through a release candidate:
+
+1. **Beta** (`3.0.0-beta.N`, today) - Components live under `/next`. Small breaking changes can still happen, and each one is listed in the changelog.
+2. **Release candidate** (`3.0.0-rc.N`) - The components move out of `/next` and the EDS 1.0 components are removed, so the RC is exactly what will ship. The API is frozen and only fixes land. This is the time to test EDS 2.0 in your application. RC versions are published on the `rc` tag, and `beta` points to the same version.
+3. **Stable** (`3.0.0`) - The last release candidate is released as stable, with no further code changes.
+
+The design tokens (`@equinor/eds-tokens`) go through the same phases at the same time.
+
+The release candidate starts when:
 
 - ✅ All components are implemented and tested
 - ✅ Design team has approved final implementations
@@ -99,17 +109,19 @@ This approach ensures:
 <br />
 ## Migration Path
 
-When EDS 2.0 graduates to stable:
+From the release candidate onwards:
 
 ```typescript
-// Before (beta testing):
+// Before (beta):
 import { Button } from '@equinor/eds-core-react/next'
 
-// After (v3.0.0 stable):
+// After (release candidate and v3.0.0 stable):
 import { Button } from '@equinor/eds-core-react'
 ```
 
 That's it! No component name changes, just update the import path.
+
+Applications still on EDS 1.0 components get a migration guide when EDS 2.0 becomes stable, and we plan to ship codemods and AI-assisted rewrites so the move is not a manual job. Until then, EDS 1.0 stays supported and you can adopt `/next` components at your own pace.
 
 <br />
 ## Provide Feedback
@@ -121,6 +133,7 @@ We'd love to hear your thoughts on EDS 2.0! Your feedback helps us create better
 <br />
 ## Learn More
 
+- ⚠️ [Breaking changes in EDS 2.0](?path=/docs/eds-2-0-beta-breaking-changes--docs) - what changed per component compared to EDS 1.0
 - 📚 [Beta Release Guide](https://github.com/equinor/design-system/blob/main/documentation/how-to/BETA_RELEASE_GUIDE.md)
 - 🔄 [Release Process](https://github.com/equinor/design-system/blob/main/documentation/how-to/AUTOMATED_RELEASE.md)
 - 🎨 [Figma Designs](https://www.figma.com/files/682286909510540417/team/590517879490131675/EDS---Equinor-Design-System)

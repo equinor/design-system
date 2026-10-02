@@ -7,7 +7,7 @@ While the design system itself lives in [Figma][], this repository contains impl
 ## Quick links
 
 - [Storybook (prod)](https://storybook.eds.equinor.com/)
-- [Storybook (dev)](https://storybook-eds-dev.radix.equinor.com/) – latest from `main`
+- [Storybook (dev)](https://s478stedsstorybookdev.z16.web.core.windows.net/) – latest from `main`
 - [Figma](https://www.figma.com/files/682286909510540417/team/590517879490131675/EDS---Equinor-Design-System?fuid=677437722215124736)
 - [Storefront](https://eds.equinor.com)
 - [Slack](https://equinor.slack.com/archives/CJT20H1B9)
@@ -32,12 +32,57 @@ packages/                # Published npm packages
   eds-tailwind/          # Tailwind CSS plugin
 ```
   
+## Architecture
+
+### System Context
+
+EDS serves three personas and delivers through four channels: Figma assets for designers, npm packages for developers, a documentation hub for both, and a CDN that provides fonts and CSS to all Equinor web applications utilizing EDS. The system is built as a monorepo with CI/CD pipelines that automate testing, building and publishing to npm and the CDN.
+
+```mermaid
+C4Context
+  title System Context diagram for Equinor Design System
+
+  Person(designer, "Designer", "Creates and maintains UI designs following the Equinor design language")
+  Person(developer, "Developer", "Builds web applications using EDS components and tokens")
+  Person(enduser, "End User", "Uses Equinor web applications built with EDS")
+
+  System_Ext(figma, "Figma", "Source of truth for design tokens, components and assets")
+  System(eds, "Equinor Design System", "Documentation hub, GitHub monorepo and CI/CD pipelines delivering reusable UI components, design tokens, icons and typography")
+  System_Ext(app, "Equinor Web Applications", "Internal web apps built with EDS")
+
+  System_Ext(npm, "npm Registry", "Distributes EDS packages: eds-core-react, eds-tokens, eds-icons, etc.")
+  System_Ext(cdn, "CDN", "Serves font files, icons and logo for Equinor web applications")
+
+  Rel(designer, eds, "Uses design assets and documentation")
+  Rel(developer, eds, "Uses documentation and developer tools")
+  Rel(designer, figma, "Uses EDS components in", "Figma")
+
+  BiRel(eds, figma, "Syncs assets and tokens with")
+  Rel(eds, npm, "Publishes packages to")
+  Rel(eds, cdn, "Publishes fonts and static assets to")
+
+  Rel(developer, npm, "Installs EDS packages from")
+  Rel(developer, app, "Builds")
+  Rel(enduser, app, "Uses")
+  Rel(app, cdn, "Loads fonts from", "HTTPS")
+
+  UpdateRelStyle(app, cdn, $offsetX="250", $offsetY="0")
+  UpdateRelStyle(eds, figma, $offsetX="0", $offsetY="30")
+  UpdateRelStyle(developer, npm, $offsetX="0", $offsetY="-60")
+  UpdateRelStyle(designer, eds, $offsetX="-150", $offsetY="0")
+  UpdateRelStyle(developer, eds, $offsetX="-80", $offsetY="-30")
+  UpdateRelStyle(eds, cdn, $offsetX="-100", $offsetY="0")
+
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="2")
+```
+
 ## Table of contents
 
 - [Equinor Design System](#equinor-design-system)
   - [Quick links](#quick-links)
   - [Table of contents](#table-of-contents)
   - [Repository structure](#repository-structure)
+  - [Architecture](#architecture)
   - [Status](#status)
   - [Applications](#applications)
   - [Prerequisites](#prerequisites)
@@ -80,8 +125,6 @@ packages/                # Published npm packages
 
 ## Status
 
-
-
 | Package | Status | Version |
 |--|--|--|
 | [Core React](https://github.com/equinor/design-system/tree/main/packages/eds-core-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-core-react)](https://www.npmjs.com/package/@equinor/eds-core-react) |
@@ -111,8 +154,8 @@ Before you begin, ensure you have the following installed:
   Source: prerequisites.json (generated from .nvmrc and package.json)
 -->
 
-* **Node.js** — Version 22.12.0 or compatible
-* **pnpm** — Version 10.15.0 or higher (install globally with `npm install -g pnpm@10.15.0`)
+* **Node.js** — Version 24.16.0 or compatible
+* **pnpm** — Version 11.27.0, pinned via the `packageManager` field (install globally with `npm install -g pnpm@11.27.0`)
 * **Git** — For version control
 
 
@@ -137,7 +180,7 @@ git clone git@github.com:your-github-username/design-system
 We use [pnpm][] as the package manager, because it's fast, space efficient, and has some very useful commands when working with a monorepo.
 
 ```bash
-npm install -g pnpm@10.15.0
+npm install -g pnpm@11.27.0
 ```
 
 Install dependencies and build all packages using our `init` script:
@@ -158,8 +201,11 @@ pnpm build
 # Run all tests
 pnpm test
 
-# Lint entire codebase
+# Lint entire codebase, except packages/eds-mobile-components and
+# apps/mobile-storybook (they ship their own eslint.config.js)
 pnpm lint:all
+pnpm --filter @equinor/eds-mobile-components run lint
+pnpm --filter @equinor/mobile-storybook run lint
 
 # Start Storybook for component development
 pnpm storybook
@@ -234,6 +280,8 @@ See our [storybook](https://storybook.eds.equinor.com/) for more examples.
 
 We're developing the next generation of EDS components under the `/next` entry point. These components are available as **beta releases** for early testing and feedback.
 
+> **Note on naming:** "EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are separate; the numbers line up by coincidence. See [Versioning](https://eds.equinor.com/docs/about/about_eds#versioning) for the full explanation.
+
 #### Installation
 
 ```sh
@@ -253,8 +301,8 @@ import '@equinor/eds-core-react/next/index.css'
 
 #### Important Notes
 
-- **Beta components are under active development** and may have breaking changes
-- **Not production-ready** until they graduate to the stable package
+- **Safe to adopt alongside EDS 1.0** - the API may still change in small ways before EDS 2.0 becomes stable, and every such change is listed in the changelog below
+- **EDS 1.0 stays supported** until EDS 2.0 becomes stable (published as `eds-core-react@3.0.0`), and mixing EDS 1.0 and `/next` components in one application is expected
 - **Visible in Storybook** - browse components at [storybook.eds.equinor.com](https://storybook.eds.equinor.com/) under "EDS 2.0"
 - **Requires beta installation** - viewing in Storybook doesn't enable usage, you must install `@beta`
 - **Separate changelog** - see `src/components/next/CHANGELOG.md` for beta changes
@@ -440,7 +488,7 @@ If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports
 If you encounter build failures:
 1. Ensure all dependencies are up to date: `pnpm install`
 2. Clean and rebuild: `pnpm clean && pnpm build`
-3. Make sure you're using the correct Node.js version (22.12.0)
+3. Make sure you're using the correct Node.js version (24.16.0, see `.nvmrc`)
 
 ### Module not found errors
 

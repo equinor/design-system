@@ -8,40 +8,41 @@ import { Field } from '../Field'
 import { Icon } from '../Icon'
 import type { RadioProps } from './Radio.types'
 
-const classNames = (...classes: (string | boolean | undefined)[]) =>
-  classes.filter(Boolean).join(' ')
-
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { label, disabled = false, id: providedId, ...rest },
+  { label, disabled = false, className, id: providedId, style, ...rest },
   ref,
 ) {
   const generatedId = useId()
-  const inputId = providedId ?? generatedId
+  // `||`, not `??`: an empty string is treated as no id
+  const inputId = providedId || generatedId
 
   const radioInput = (
     <>
       <input
         type="radio"
         id={inputId}
-        className="eds-radio__input"
+        // Component CSS keys its :has(.input:...) state selectors on this class
+        className="input"
         disabled={disabled}
         ref={ref}
         {...rest}
       />
-      <span className="eds-radio__icon-wrapper">
+      <span className="icon-wrapper">
         <Icon
           data={radio_button_selected}
           size="lg"
-          className="eds-radio__icon eds-radio__icon--checked"
+          className="icon icon-checked"
         />
         <Icon
           data={radio_button_unselected}
           size="lg"
-          className="eds-radio__icon eds-radio__icon--unchecked"
+          className="icon icon-unchecked"
         />
       </span>
     </>
   )
+
+  const rootClassName = ['eds-radio', className].filter(Boolean).join(' ')
 
   // Use Field for layout when label is provided
   if (label) {
@@ -49,8 +50,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <Field
         position="start"
         disabled={disabled}
-        className="eds-radio"
-        data-color-appearance={disabled ? 'neutral' : 'accent'}
+        className={rootClassName}
+        style={style}
+        data-color-appearance="accent"
         data-selectable-space="md"
         data-space-proportions="squished"
       >
@@ -62,9 +64,10 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
 
   return (
     <span
-      className={classNames('eds-radio', 'eds-radio--standalone')}
-      data-color-appearance={disabled ? 'neutral' : 'accent'}
-      data-disabled={disabled || undefined}
+      className={rootClassName}
+      style={style}
+      data-standalone={true}
+      data-color-appearance="accent"
     >
       {radioInput}
     </span>

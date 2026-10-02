@@ -34,4 +34,10 @@
 @import './Banner/banner.css';
 @import './Chip/chip.css';
 @import './Divider/divider.css';
+@import './Accordion/accordion.css';
+@import './Menu/menu.css';
+@import './Autocomplete/autocomplete.css';
+@import './Select/select.css';
+@import './Badge/badge.css';
+@import './Dialog/dialog.css';
 

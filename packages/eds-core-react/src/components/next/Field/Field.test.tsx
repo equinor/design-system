@@ -14,12 +14,20 @@ describe('useFieldIds', () => {
     expect(helperMessageId).toBe(`${prefix}-helper-message`)
   })
 
-  test('uses provided id as prefix', () => {
+  test('applies provided id verbatim and uses it as prefix for the rest', () => {
     const { result } = renderHook(() => useFieldIds('custom-id'))
-    expect(result.current.inputId).toBe('custom-id-input')
+    expect(result.current.inputId).toBe('custom-id')
     expect(result.current.labelId).toBe('custom-id-label')
     expect(result.current.descriptionId).toBe('custom-id-description')
     expect(result.current.helperMessageId).toBe('custom-id-helper-message')
+  })
+
+  test('falls back to a generated id when given an empty string', () => {
+    const { result } = renderHook(() => useFieldIds(''))
+    const { inputId, labelId } = result.current
+    expect(inputId).not.toBe('')
+    expect(inputId).toMatch(/-input$/)
+    expect(labelId).toBe(`${inputId.replace('-input', '')}-label`)
   })
 
   test('getDescribedBy returns only descriptionId by default', () => {
@@ -202,7 +210,7 @@ describe('Field.HelperMessage', () => {
       </Field.HelperMessage>,
     )
     const helper = screen.getByTestId('helper')
-    expect(helper).toHaveClass('eds-field__helper-message')
+    expect(helper).toHaveClass('helper-message')
   })
 
   test('accepts role prop for accessibility', () => {

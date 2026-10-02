@@ -5,6 +5,7 @@ import { StyleDictionary } from 'style-dictionary-utils'
 import type { TransformedToken } from 'style-dictionary/types'
 import {
   includeTokenFilter,
+  toCamelCase,
   typescriptNestedFormat,
 } from '@equinor/eds-tokens-build'
 
@@ -30,6 +31,12 @@ interface BuildTokenOptions extends BaseOptions {
   outputReferences?: boolean
   rootName?: string
   tsBuildPath?: string
+  /**
+   * Hyphenated prefixes that are split into nested keys when found at the
+   * start of a token-path leaf. See `BuildNestedObjectOptions` in
+   * `@equinor/eds-tokens-build`. Only affects the TS output.
+   */
+  splitLeafPrefixes?: readonly string[]
 }
 
 // TODO: To generate JS and JSON output for all spacing/typography tokens (not just density),
@@ -47,6 +54,7 @@ async function buildTokenDictionary({
   outputReferences = true,
   rootName,
   tsBuildPath,
+  splitLeafPrefixes,
 }: BuildTokenOptions) {
   const platforms: Record<string, unknown> = {
     css: {
@@ -77,7 +85,7 @@ async function buildTokenDictionary({
           filter,
           destination: tsDestination,
           format: 'typescript/nested',
-          options: { rootName },
+          options: { rootName, splitLeafPrefixes },
         },
       ],
     }
@@ -123,8 +131,40 @@ async function buildDensityDictionary({
   selector,
   rootName,
 }: BuildDensityOptions) {
-  // Aggregated tokens should only appear in the nested TS output.
-  // CSS, JS, and JSON have their own dedicated builds for these tokens.
+  // Most aggregated tokens are size-nested (e.g. generic.gap.xs.horizontal →
+  // eds-generic-gap-xs-horizontal) and have dedicated per-size CSS builds, so
+  // they're excluded from CSS/JS/JSON to avoid duplicate output. They still
+  // flow into the nested TS output.
+  //
+  // The exception: bare aliases (e.g. generic-gap-vertical, selectable-space-vertical,
+  // spacing-proportions-xs-vertical). These exist *only* in the aggregated
+  // source and need to appear in CSS density blocks so density values
+  // propagate through the alias chain — see #5090.
+  // Top-level aggregated keys whose tokens are size-suffixed (and have their
+  // own dedicated per-size CSS builds) — exclude them from density CSS. The
+  // top-level keys `container-space` and `page-space` are NOT in this set:
+  // their JSON nesting (`{horizontal, vertical}`) is just shape, the produced
+  // variable names (`eds-container-space-horizontal` etc.) are already bare
+  // aliases that need to participate in density CSS output.
+  const NESTED_AGGREGATED_ROOTS = new Set([
+    'generic',
+    'spacing-proportions',
+    'selectable-space',
+  ])
+  const isBareAliasFromAggregated = (token: TransformedToken): boolean =>
+    token.filePath.includes('eds-aggregated-spacing') &&
+    token.path.length >= 1 &&
+    !NESTED_AGGREGATED_ROOTS.has(token.path[0])
+
+  // For CSS: include non-aggregated tokens + bare aliases.
+  const cssFilter = (token: TransformedToken): boolean => {
+    if (!filter(token)) return false
+    if (!token.filePath.includes('eds-aggregated-spacing')) return true
+    return isBareAliasFromAggregated(token)
+  }
+
+  // For JS/JSON: keep the original behaviour (no aggregated tokens — they have
+  // their own dedicated builds for these consumers).
   const nonAggregatedFilter = (token: TransformedToken): boolean =>
     filter(token) && !token.filePath.includes('eds-aggregated-spacing')
 
@@ -168,7 +208,7 @@ async function buildDensityDictionary({
       transforms,
       files: [
         {
-          filter: nonAggregatedFilter,
+          filter: cssFilter,
           destination: `${name}.css`,
           format: 'css/variables',
           options: {
@@ -278,6 +318,35 @@ function createAggregatedSpacingJson() {
       ]),
     )
 
+  // Bare-named aliases — these mirror the aliases otherwise declared at :root
+  // in per-axis CSS files (e.g. generic-gap-vertical-xs.css, container-space.css,
+  // semantic-spacing-gap.css, space-proportions-squared.css). When fed through
+  // buildDensityDictionary they are re-emitted with resolved values inside the
+  // [data-density="comfortable"] / [data-density="spacious"] blocks, which is
+  // what makes density propagate through the alias chain. Fixes #5090.
+  //
+  // Defaults match the :root selector of each per-axis file:
+  //   generic-{gap,space}    → XS
+  //   selectable-space       → XS (squared)
+  //   spacing-proportions    → squared variant (used directly by Chip/Input/Select)
+  //   container-space        → MD-squared
+  //   page-space             → XL-squared
+  //   selectable-gap         → XS  (from semantic-spacing-gap.css)
+  //   container-gap          → MD
+  //   page-gap               → XL
+  const spacingProportionsFlat = Object.fromEntries(
+    insetSizes.flatMap((s) => [
+      [
+        `spacing-proportions-${s}-horizontal`,
+        numToken(`{spacing.inset.${s}.horizontal}`),
+      ],
+      [
+        `spacing-proportions-${s}-vertical`,
+        numToken(`{spacing.inset.${s}.vertical-squared}`),
+      ],
+    ]),
+  )
+
   return {
     generic: {
       gap: buildGenericScale(),
@@ -293,6 +362,23 @@ function createAggregatedSpacingJson() {
       horizontal: numToken('{spacing.inset.xl.horizontal}'),
       vertical: numToken('{spacing.inset.xl.vertical-squared}'),
     },
+    // Bare aliases (see comment above) — included in CSS density output via
+    // `isBareAliasFromAggregated` in buildDensityDictionary.
+    'generic-gap-horizontal': numToken('{spacing.horizontal.xs}'),
+    'generic-gap-vertical': numToken('{spacing.vertical.xs}'),
+    'generic-space-horizontal': numToken('{spacing.horizontal.xs}'),
+    'generic-space-vertical': numToken('{spacing.vertical.xs}'),
+    'selectable-space-horizontal': numToken('{spacing.inset.xs.horizontal}'),
+    'selectable-space-vertical': numToken(
+      '{spacing.inset.xs.vertical-squared}',
+    ),
+    ...spacingProportionsFlat,
+    'selectable-gap-horizontal': numToken('{spacing.horizontal.xs}'),
+    'selectable-gap-vertical': numToken('{spacing.vertical.xs}'),
+    'container-gap-horizontal': numToken('{spacing.horizontal.md}'),
+    'container-gap-vertical': numToken('{spacing.vertical.md}'),
+    'page-gap-horizontal': numToken('{spacing.horizontal.xl}'),
+    'page-gap-vertical': numToken('{spacing.vertical.xl}'),
   }
 }
 
@@ -351,6 +437,26 @@ export async function createSpacingAndTypographyVariables({
     }
   }
 
+  // Clean up stale typography TS files. Only font-family-* is emitted today;
+  // font-size-*, font-weight-*, line-height-*, tracking-*, and the older
+  // size-extras.ts all used to be emitted but were removed. Style Dictionary
+  // collapses non-family axes to a single arbitrary cell of the family
+  // matrix, and the family-independent size extras (icon-size etc.) are now
+  // spliced directly into each size cell of the font-family files.
+  const existingTypographyTsFiles: string[] = await fs.promises
+    .readdir(tsBuildPath)
+    .catch((): string[] => [])
+  const KEPT_TYPOGRAPHY_TS = (file: string) => file.startsWith('font-family-')
+  for (const file of existingTypographyTsFiles) {
+    if (
+      file.endsWith('.ts') &&
+      file !== 'index.ts' &&
+      !KEPT_TYPOGRAPHY_TS(file)
+    ) {
+      await fs.promises.unlink(path.join(tsBuildPath, file))
+    }
+  }
+
   // Write aggregated spacing JSON for derived tokens
   const aggregatedJson = createAggregatedSpacingJson()
   const aggregatedPath = path.join(os.tmpdir(), 'eds-aggregated-spacing.json')
@@ -374,9 +480,14 @@ export async function createSpacingAndTypographyVariables({
     (token: TransformedToken): boolean => {
       const name = token.name.toLowerCase()
       if (DENSITY_EXCLUSIONS.some((ex) => name.includes(ex))) return false
-      // Exclude icon container sizing (e.g. sizing-icon-xs-container) but NOT container-space
-      if (name.includes('-container') && !name.startsWith('container-space'))
-        return false
+      // Exclude icon container sizing tokens (named like
+      // `*-icon-{size}-container`). Earlier this used `includes('-container')`
+      // with a `startsWith('container-space')` allow-list, but `token.name`
+      // carries the `eds-` prefix at filter time, so the allow-list never
+      // matched and container-space / container-gap tokens were silently
+      // dropped from density CSS output. `endsWith` matches the intended
+      // pattern precisely without affecting tokens that start with container-.
+      if (name.endsWith('-container')) return false
       // Include tokens from density file OR aggregated file
       return (
         token.filePath.includes(densitySegment) ||
@@ -828,9 +939,20 @@ export async function createSpacingAndTypographyVariables({
       filter: (token: TransformedToken) => includeTokenFilter(token, [mode]),
       rootName: 'typography',
       tsBuildPath,
+      // Source JSON encodes axis variants as hyphenated leaf keys
+      // (font-weight-lighter, tracking-tight, line-height-default). Splitting
+      // them produces nested TS output (fontWeight.lighter etc.) so consumers
+      // can derive variant types directly via `keyof`. CSS output is
+      // unaffected — its format uses the unsplit path for variable naming.
+      splitLeafPrefixes: ['font-weight', 'tracking', 'line-height'],
     }),
   )
 
+  // Font-size builds emit CSS plus a temporary per-size TS file. The TS is
+  // consumed by the post-step below to extract the three family-independent
+  // values (icon-size, gap-horizontal, gap-vertical) which then get spliced
+  // into each size cell of the family TS files. The temporary per-size files
+  // are deleted before this build finishes.
   const fontSizePromises = fontSizeConfig.map((size) =>
     buildTokenDictionary({
       include: [
@@ -850,6 +972,15 @@ export async function createSpacingAndTypographyVariables({
     }),
   )
 
+  // Font-weight, line-height, and tracking axes do NOT emit TS output. In
+  // CSS these axis files work as runtime selectors via the data-* cascade
+  // (e.g. [data-tracking="wide"] picks --tracking-wide from the active size).
+  // Style Dictionary cannot represent runtime mode switching, so a static TS
+  // export for one of these axes can only contain a single arbitrary cell
+  // from the family matrix — silently wrong for every other combination.
+  // Non-CSS consumers should import the family file directly and read the
+  // nested axis values off the size cell (e.g.
+  // `typography.fontFamilySize.md.fontWeight.bolder`).
   const fontWeightPromises = fontWeightConfig.map(({ mode, slug }) =>
     buildTokenDictionary({
       include: [
@@ -866,8 +997,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-font-weight="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'font-weight'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -887,8 +1016,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-line-height="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'line-height'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -908,8 +1035,6 @@ export async function createSpacingAndTypographyVariables({
       selector: `[data-tracking="${slug}"]`,
       filter: (token: TransformedToken) =>
         !!(token.path && token.path[1] === 'tracking'),
-      rootName: 'typography',
-      tsBuildPath,
     }),
   )
 
@@ -920,4 +1045,79 @@ export async function createSpacingAndTypographyVariables({
     ...lineHeightPromises,
     ...trackingPromises,
   ])
+
+  // Splice the family-independent size-axis extras (icon-size, gap-horizontal,
+  // gap-vertical) into each size cell of the font-family TS files. Style
+  // Dictionary cannot ergonomically aggregate values across sources, but the
+  // per-size CSS builds also emit a temporary TS file with already-resolved
+  // numeric values for those three properties. We parse those files, inject
+  // the values into the matching size cell of each family file, then delete
+  // the temp files.
+  //
+  // This is a build-time string-injection over content this same script just
+  // emitted, so the structure is predictable. The injection throws if a size
+  // cell can't be located, so failures are loud.
+  const sizeExtras: Record<
+    string,
+    { iconSize: number; gapHorizontal: number; gapVertical: number }
+  > = {}
+
+  const numberFor = (text: string, key: string): number => {
+    const m = new RegExp(`${key}:\\s*(-?[\\d.]+)`).exec(text)
+    if (!m) {
+      throw new Error(`size-extras: ${key} not found while parsing per-size TS`)
+    }
+    return parseFloat(m[1])
+  }
+
+  for (const size of fontSizeConfig) {
+    const sizeKey = size.toLowerCase()
+    const tsPath = path.join(tsBuildPath, `font-size-${sizeKey}.ts`)
+    const text = await fs.promises.readFile(tsPath, 'utf-8')
+    sizeExtras[sizeKey] = {
+      iconSize: numberFor(text, 'iconSize'),
+      gapHorizontal: numberFor(text, 'gapHorizontal'),
+      gapVertical: numberFor(text, 'gapVertical'),
+    }
+  }
+
+  for (const { slug: familySlug } of fontFamilyConfig) {
+    const filePath = path.join(tsBuildPath, `font-family-${familySlug}.ts`)
+    let content = await fs.promises.readFile(filePath, 'utf-8')
+    for (const size of fontSizeConfig) {
+      const sizeKey = size.toLowerCase()
+      const camelKey = toCamelCase(sizeKey)
+      const extras = sizeExtras[sizeKey]
+      const injection =
+        `      iconSize: ${extras.iconSize},\n` +
+        `      gapHorizontal: ${extras.gapHorizontal},\n` +
+        `      gapVertical: ${extras.gapVertical},\n`
+      // Match the size cell's opening line (4-space indent at line start) and
+      // its closing `},` (also 4-space indent at line start). Nested axis
+      // blocks close at 6-space indent, so the line-anchored 4-space close is
+      // unambiguous. Insert the extras before the closing `},`.
+      const pattern = new RegExp(
+        `(^    ${camelKey}: \\{\\n[\\s\\S]*?)(^    \\},)`,
+        'm',
+      )
+      const next = content.replace(pattern, `$1${injection}$2`)
+      if (next === content) {
+        throw new Error(
+          `size-extras inject: size cell "${camelKey}" not found in ${filePath}`,
+        )
+      }
+      content = next
+    }
+    await fs.promises.writeFile(filePath, content, 'utf-8')
+  }
+
+  // Delete the temporary per-size TS files. The cleanup pass at the top of
+  // this function would also remove them on next run, but doing it here
+  // means a single build leaves the directory in its final state.
+  for (const size of fontSizeConfig) {
+    const sizeKey = size.toLowerCase()
+    await fs.promises
+      .unlink(path.join(tsBuildPath, `font-size-${sizeKey}.ts`))
+      .catch(() => {})
+  }
 }

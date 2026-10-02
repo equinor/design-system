@@ -1273,7 +1273,7 @@
       },
       "tracking-wide": {
         "$type": "number",
-        "$value": "{typography.ui-body.5xl.font-weight-lighter}",
+        "$value": "{typography.ui-body.5xl.tracking-wide}",
         "$description": "",
         "$extensions": {
           "com.figma": {

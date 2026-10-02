@@ -3,12 +3,21 @@
   .eds-switch {
     --_switch-hover-color: var(--eds-color-bg-fill-muted-default);
     --_icon-size: var(--eds-sizing-icon-lg);
+
     /* Track: 22x8px, Handle: 12px (spacious density with 24px icon size) */
     --_handle-size: calc(var(--_icon-size) / 2);
     --_track-width: calc(var(--_icon-size) * 11 / 12);
     --_track-height: calc(var(--_icon-size) / 3);
+
     /* TODO: Replace with semantic token when available */
     --_track-hover-bg: var(--eds-color-neutral-2);
+
+    /* Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance (tinted, not grey, under 'accent') and the wrapper
+       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled].
+       TODO: Replace with semantic token when available */
+    --_switch-disabled-color: var(--eds-color-neutral-7);
+
     /*
      * Gap compensation for label alignment with Checkbox and Radio.
      * Checkbox/Radio icons have ~3px internal SVG padding, but the Switch
@@ -17,115 +26,145 @@
      */
     --_switch-gap-compensation: 0.1rem;
 
+    cursor: pointer;
+
     position: relative;
+
     gap: calc(
       var(--eds-generic-gap-horizontal) + var(--_switch-gap-compensation)
     );
-    padding-inline: var(--eds-selectable-space-horizontal);
-    padding-block: var(--eds-selectable-space-vertical);
-    width: auto;
-    border-radius: var(--eds-spacing-border-radius-rounded);
-    cursor: pointer;
-    transition: background-color 150ms;
-  }
 
-  .eds-switch {
-    &:has(.eds-switch__input:focus-visible) {
+    width: auto;
+    padding-block: var(--eds-selectable-space-vertical);
+    padding-inline: var(--eds-selectable-space-horizontal);
+    border-radius: var(--eds-spacing-border-radius-rounded);
+
+    transition: background-color 150ms;
+
+    &:has(.input:focus-visible) {
       outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
       outline-offset: var(--eds-sizing-stroke-thick);
     }
 
-    &[data-disabled='true'] {
-      cursor: not-allowed;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover:not([data-disabled='true']) {
-        background-color: var(--_switch-hover-color);
-      }
-    }
-
-    & .eds-field__label {
+    & label {
       cursor: pointer;
     }
 
-    &[data-disabled='true'] .eds-field__label {
-      color: var(--eds-color-text-disabled);
+    /* :has(.input:disabled) instead of a prop-set attribute so the styling
+       also covers disabling inherited from an ancestor, e.g. fieldset[disabled].
+       The variable overrides outrank the :hover rules below on specificity,
+       so hover needs no :not() guard */
+    &:has(.input:disabled) {
+      --_eds-field-label-color: var(--_switch-disabled-color);
+      --_switch-hover-color: transparent;
+
       cursor: not-allowed;
-    }
-  }
 
-  .eds-switch__control {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    min-block-size: var(--_icon-size);
-    /* Negative margin for alignment with Checkbox/Radio icons */
-    margin-block: -6px;
-    margin-inline: -1.9px;
-  }
+      & label {
+        cursor: not-allowed;
+      }
 
-  [data-density='comfortable'] .eds-switch__control {
-    margin-inline: -2.1px;
-  }
+      & .track {
+        --_track-bg: var(--eds-color-bg-disabled);
+      }
 
-  .eds-switch__input {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    margin: 0;
-    appearance: none;
-    cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-
-  .eds-switch__track {
-    position: relative;
-    display: inline-block;
-    inline-size: var(--_track-width);
-    block-size: var(--_track-height);
-    border-radius: var(--eds-spacing-border-radius-pill);
-    background-color: var(--eds-color-bg-fill-muted-default);
-    transition: background-color 150ms;
-    pointer-events: none;
-
-    @media (hover: hover) and (pointer: fine) {
-      .eds-switch:hover:not([data-disabled='true']) & {
-        background-color: var(--_track-hover-bg);
+      & .handle {
+        --_handle-bg: var(--eds-color-bg-disabled);
       }
     }
-  }
 
-  .eds-switch__handle {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: 0;
-    translate: 0 -50%;
-    inline-size: var(--_handle-size);
-    block-size: var(--_handle-size);
-    border-radius: var(--eds-spacing-border-radius-pill);
-    background-color: var(--eds-color-bg-fill-emphasis-default);
-    box-shadow: var(--eds-elevation-raised);
-    transition:
-      inset-inline-start 150ms,
-      background-color 150ms;
-    pointer-events: none;
-
-    .eds-switch:has(.eds-switch__input:checked) & {
+    &:has(.input:checked) .handle {
       inset-inline-start: calc(100% - var(--_handle-size));
     }
 
-    .eds-switch:has(.eds-switch__input:disabled) & {
-      background-color: var(--eds-color-bg-disabled);
-      box-shadow: none;
+    & .control {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
+      min-block-size: var(--_icon-size);
+
+      /* Negative margin for alignment with Checkbox/Radio icons */
+      margin-block: -6px;
+      margin-inline: -1.9px;
+
+      [data-density='comfortable'] & {
+        margin-inline: -2.1px;
+      }
+    }
+
+    & .input {
+      cursor: pointer;
+
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+
+      margin: 0;
+
+      appearance: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    & .track {
+      /* Declared on the element, not the root: the appearance-switched token
+         must resolve under .control's data-color-appearance */
+      --_track-bg: var(--eds-color-bg-fill-muted-default);
+
+      pointer-events: none;
+
+      position: relative;
+
+      display: inline-block;
+
+      inline-size: var(--_track-width);
+      block-size: var(--_track-height);
+      border-radius: var(--eds-spacing-border-radius-pill);
+
+      background-color: var(--_track-bg);
+
+      transition: background-color 150ms;
+    }
+
+    & .handle {
+      /* Declared on the element, not the root: the appearance-switched token
+         must resolve under .control's data-color-appearance */
+      --_handle-bg: var(--eds-color-bg-fill-emphasis-default);
+
+      pointer-events: none;
+
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 0;
+      translate: 0 -50%;
+
+      inline-size: var(--_handle-size);
+      block-size: var(--_handle-size);
+      border-radius: var(--eds-spacing-border-radius-pill);
+
+      background-color: var(--_handle-bg);
+
+      transition:
+        inset-inline-start 150ms,
+        background-color 150ms;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--_switch-hover-color);
+      }
+
+      &:hover .track {
+        --_track-bg: var(--_track-hover-bg);
+      }
     }
   }
 }

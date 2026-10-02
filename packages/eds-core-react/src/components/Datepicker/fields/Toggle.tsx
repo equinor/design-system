@@ -11,6 +11,12 @@ const StyledButton = styled(Button)`
   width: 24px;
 `
 
+const StyledToggle = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+`
+
 /**
  * Toggle component encapsulates the reset and open calendar buttons
  */
@@ -36,7 +42,9 @@ export const Toggle = ({
   showClearButton: boolean
 }) => {
   return (
-    <div style={{ visibility: readonly || disabled ? 'hidden' : 'visible' }}>
+    <StyledToggle
+      style={{ visibility: readonly || disabled ? 'hidden' : 'visible' }}
+    >
       {showClearButton && (
         <StyledButton
           disabled={disabled}
@@ -69,6 +77,6 @@ export const Toggle = ({
       >
         <Icon data={icon} />
       </StyledButton>
-    </div>
+    </StyledToggle>
   )
 }

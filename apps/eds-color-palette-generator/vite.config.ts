@@ -12,10 +12,12 @@ export default defineConfig({
     },
     rolldownOptions: {
       external: [
-        'node:fs',
-        'node:fs/promises',
-        'node:path',
-        'node:process',
+        /^node:/,
+        'fs',
+        'path',
+        'os',
+        'crypto',
+        'process',
         'colorjs.io',
         'colorjs.io/fn',
       ],
@@ -30,5 +32,5 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
-  plugins: [dts({ rollupTypes: true })],
+  plugins: [dts({ bundleTypes: true })],
 })

@@ -4,7 +4,7 @@ This directory contains custom AI agent configurations for OpenCode in the EDS r
 
 ## Global Configuration
 
-The root `AGENTS.md` file provides **global instructions** for all AI coding tools (OpenCode, Claude Code, Cursor, GitHub Copilot). It contains repository-wide conventions that apply regardless of which agent or tool is used.
+The root `AGENTS.md` file provides **global instructions** for all AI coding tools (OpenCode, Claude Code, GitHub Copilot). It contains repository-wide conventions that apply regardless of which agent or tool is used.
 
 The `.opencode/` directory contains **OpenCode-specific** agent definitions that build on top of the global instructions.
 
@@ -34,17 +34,14 @@ OpenCode agents receive instructions from multiple sources, applied in this orde
                   │
 ┌─────────────────▼───────────────────┐
 │     .opencode/agent/<name>.md       │  ← Agent-specific behavior
-└─────────────────┬───────────────────┘
-                  │
-┌─────────────────▼───────────────────┐
-│   .github/instructions/*.md         │  ← File-pattern instructions
 └─────────────────────────────────────┘
 ```
 
 1. **Global instructions** - Built into OpenCode (base capabilities)
 2. **AGENTS.md** - Repository-level guidance for all AI tools
 3. **Agent-specific instructions** - `.opencode/agent/*.md` files define agent behavior
-4. **GitHub instructions** - `.github/instructions/*.md` applied by file pattern (e.g., `*.tsx` files get React instructions)
+
+> **Note:** `.github/instructions/*.md` files are **not** loaded by OpenCode — they apply only to GitHub Copilot via `applyTo:` frontmatter globs. If an OpenCode agent needs file-pattern-specific guidance, put it in the agent body or reference the canonical doc in `documentation/agent-instructions/`.
 
 ## Agent Types
 
@@ -56,6 +53,10 @@ Primary agents are selectable by the user and run as the main conversation agent
 |-------|-------------|-------|
 | `build` | Development agent with EDS conventions | All (asks for git commit/push/branch) |
 | `advisor` | Read-only architectural advice and code reviews | Read-only (no write/edit/bash) |
+| `tokens-studio` | Tokens Studio pipeline assistant (studio CLI, pull, exports, config) | All (asks for git commit/push/branch, gh, and remote-mutating studio commands) |
+| `dependabot-duty` | Triages Dependabot PRs, Dependabot alerts and code scanning alerts, proposes pnpm overrides, reports | All (asks for git commit/push/branch and `gh`) |
+| `write-pr-description` | Writes a short PR description | All (asks for git commit/push/branch and any `gh` command except read-only `view`/`diff`/`list`) |
+| `write-issue` | Writes a GitHub issue from notes, screenshots or a conversation | All (asks for git commit/push/branch and any `gh` command except read-only `view`/`list`) |
 
 ### Sub-Agents
 
@@ -65,6 +66,9 @@ Sub-agents are invoked by primary agents to perform specialized tasks. They cann
 |-------|-------------|-------|
 | `eds-component` | Builds EDS 2.0 React components following conventions | write, edit, bash |
 | `figma-component` | Builds components from Figma designs with MCP token extraction | write, edit, bash |
+| `accessibility-audit` | Audits components against WCAG 2.1 AA checklist | read-only (no write/edit/bash) |
+| `component-doc` | Creates and verifies component documentation | write, edit |
+| `audit-harnesses` | Audits AI harness configuration consistency | read-only (no write/edit/bash) |
 
 ## Agent Configuration
 
@@ -211,7 +215,14 @@ Refer to AGENTS.md for full conventions.
 │   ├── build.md        # Primary: Development agent
 │   ├── advisor.md      # Primary: Read-only advisor
 │   ├── eds-component.md    # Sub-agent: Component builder
-│   └── figma-component.md  # Sub-agent: Figma-to-code
+│   ├── figma-component.md  # Sub-agent: Figma-to-code
+│   ├── accessibility-audit.md  # Sub-agent: A11y auditor
+│   ├── component-doc.md    # Sub-agent: Documentation
+│   ├── audit-harnesses.md  # Sub-agent: Harness auditor
+│   ├── tokens-studio.md    # Primary: Tokens Studio pipeline assistant
+│   ├── dependabot-duty.md  # Primary: Dependabot PR + security alerts triage
+│   ├── write-pr-description.md  # Primary: PR description writer
+│   └── write-issue.md      # Primary: Issue writer
 ```
 
 ## Best Practices

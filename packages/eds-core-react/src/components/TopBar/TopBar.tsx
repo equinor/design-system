@@ -35,12 +35,14 @@ const StyledTopBar = styled(Paper)<StyledTopbarProps>(({ theme, $sticky }) => {
     ${spacingsTemplate(theme.spacings)};
     ${typographyTemplate(theme.typography)}
 
-    ${$sticky &&
-    css`
-      position: sticky;
-      top: 0;
-      z-index: 1100;
-    `}
+    ${
+      $sticky &&
+      css`
+        position: sticky;
+        top: 0;
+        z-index: 1100;
+      `
+    }
   `
 })
 

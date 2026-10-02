@@ -1,0 +1,119 @@
+## Features
+
+- Two components: `Typography` for body and UI text, `Typography.Header` for headings and titles.
+- `Typography` uses the Inter typeface. `Typography.Header` uses the Equinor typeface.
+- Both share the same size scale (`xs` through `sixXl`) and support `weight`, `lineHeight`, and `tracking` modifiers.
+- Default color is `text.neutral.strong`, which adapts to light and dark mode automatically.
+
+## Usage
+
+```tsx
+import { Typography } from '@equinor/eds-mobile-components'
+
+<Typography>Body text</Typography>
+<Typography.Header>Heading text</Typography.Header>
+```
+
+`Typography` defaults to size `lg`. `Typography.Header` defaults to size `xl`.
+
+## Examples
+
+### Choosing a size
+
+```tsx
+<Typography.Header size="twoXl">Screen title</Typography.Header>
+<Typography.Header size="lg">Section heading</Typography.Header>
+<Typography size="sm">Supporting copy</Typography>
+```
+
+### Adjusting weight
+
+```tsx
+<Typography weight="bolder">Highlighted value</Typography>
+<Typography.Header size="lg" weight="lighter">Subtle heading</Typography.Header>
+```
+
+### Adjusting tracking
+
+```tsx
+<Typography tracking="wide">Spaced out label</Typography>
+<Typography.Header size="xl" tracking="tight">Compact title</Typography.Header>
+```
+
+### Overriding color
+
+Use `style={{ color }}` with the color tokens for semantic coloring.
+
+```tsx
+import { Typography, useToken } from '@equinor/eds-mobile-components'
+
+const { colors } = useToken()
+
+<Typography style={{ color: colors.text.danger.strong }}>
+  Something went wrong.
+</Typography>
+```
+
+### Inheriting Text props
+
+`Typography` and `Typography.Header` extend React Native's `Text`, so all native props pass through.
+
+```tsx
+<Typography numberOfLines={2} onPress={handlePress}>
+    A tappable, truncating paragraph.
+</Typography>
+```
+
+## Sizes
+
+Font sizes and line heights are fixed — they do not change with the `density` prop. Only spacing tokens respond to density.
+
+### Typography.Header — Equinor typeface
+
+| Size | Font size | Line height |
+|---|---|---|
+| `xs` | 12 | 16 |
+| `sm` | 14 | 16 |
+| `md` | 16 | 20 |
+| `lg` | 18 | 24 |
+| `xl` | 21 | 24 |
+| `twoXl` | 24 | 28 |
+| `threeXl` | 27.5 | 32 |
+| `fourXl` | 31.5 | 32 |
+| `fiveXl` | 36.5 | 36 |
+| `sixXl` | 42 | 40 |
+
+### Typography — Inter typeface
+
+| Size | Font size | Line height |
+|---|---|---|
+| `xs` | 10.5 | 16 |
+| `sm` | 12 | 16 |
+| `md` | 14 | 20 |
+| `lg` | 16 | 24 |
+| `xl` | 18.5 | 24 |
+| `twoXl` | 21 | 28 |
+| `threeXl` | 24.5 | 32 |
+| `fourXl` | 28 | 32 |
+| `fiveXl` | 32 | 36 |
+| `sixXl` | 37 | 40 |
+
+## Props
+
+Both `Typography` and `Typography.Header` accept the following props.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'twoXl' \| 'threeXl' \| 'fourXl' \| 'fiveXl' \| 'sixXl'` | `'lg'` (Typography) / `'xl'` (Typography.Header) | Size variant |
+| `weight` | `'lighter' \| 'normal' \| 'bolder'` | `'normal'` | Font weight |
+| `lineHeight` | `'default' \| 'squished'` | `'default'` | `squished` reduces line height for denser layouts |
+| `tracking` | `'normal' \| 'tight' \| 'wide'` | `'normal'` | Letter spacing — `tight` contracts letters, `wide` spreads them |
+
+Both components also accept all React Native [`TextProps`](https://reactnative.dev/docs/text#props).
+
+## Accessibility
+
+- Does not set an `accessibilityRole` — inherits React Native's `Text` defaults.
+- For structural headings (such as screen titles), supply `accessibilityRole="header"` on the element.
+- All native `Text` accessibility props (`accessibilityLabel`, `accessibilityHint`, etc.) pass through.
+- Font scaling follows the OS text-size setting by default; override with `allowFontScaling={false}` if needed.

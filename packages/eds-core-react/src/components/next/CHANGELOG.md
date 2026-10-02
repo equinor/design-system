@@ -4,6 +4,92 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.1...eds-core-react-next@v3.0.0-beta.2) (2026-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* `.eds-input` changes meaning — it is now the Input root container, while the native `<input>`/`<textarea>` carries `.control`. Any existing rule targeting `.eds-input` will silently match the wrong element. Consumers targeting any of the renamed classes in their own CSS must update. See ADR 0006 for the flat class name convention.
+* `className` and `style` now land on the outer wrapper element of `Checkbox`, `Radio` and `Switch`, not on the hidden native `<input>`. For `Checkbox` and `Radio` both props move; for `Switch` only `style` moves, as its `className` already targeted the root. To reach the native input, use a descendant selector, e.g. `.my-checkbox input { ... }`.
+* `className` and `style` now land on the root element of Input, TextField, Select, TextArea, Autocomplete and Search. They previously landed on the native `<input>` or `<textarea>`, and in Select on the inner `div.eds-select` wrapper. `Input.containerClassName` is removed; use `className`, which now targets that same container. To reach the native element, use a descendant selector, e.g. `.my-field input { ... }` (`.my-field select` in Select, `.my-field textarea` in TextArea).
+* default Tooltip (next) placement to bottom, matching EDS 1.0 ([#5509](https://github.com/equinor/design-system/issues/5509))
+
+### 🐛 Fixed
+
+* convert Input and TextField BEM classes to flat class names ([#5127](https://github.com/equinor/design-system/issues/5127)) ([e329f5a](https://github.com/equinor/design-system/commit/e329f5affc39fc5170412913e5eb67a05ca98d5f))
+* default Tooltip (next) placement to bottom, matching EDS 1.0 ([#5509](https://github.com/equinor/design-system/issues/5509)) ([1c553ac](https://github.com/equinor/design-system/commit/1c553ac57c27f4d821f7a5f48000fee51416224b))
+* make Tooltip (next) fall back to a free side instead of shifting ([#5479](https://github.com/equinor/design-system/issues/5479)) ([e85c7d7](https://github.com/equinor/design-system/commit/e85c7d7cc6d26360ed56c11b71321e39e5815104))
+* reflect inherited disabled state in Checkbox, Radio and Switch in /next ([#5406](https://github.com/equinor/design-system/issues/5406)) ([cdbd403](https://github.com/equinor/design-system/commit/cdbd4035a024aad539890b900729f4c53302b728))
+* route className and style to outer wrapper in Checkbox, Radio and Switch ([#5410](https://github.com/equinor/design-system/issues/5410)) ([fe45fb3](https://github.com/equinor/design-system/commit/fe45fb332443e7e21bf8fb704b98da78c9bc8cbb))
+* route className and style to root element in next text input components ([#5409](https://github.com/equinor/design-system/issues/5409)) ([8bcaf63](https://github.com/equinor/design-system/commit/8bcaf6368e801ed6ee1d6befcd94ebd96e36c087))
+
+## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.8.0-beta.1...eds-core-react-next@v3.0.0-beta.1) (2026-07-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* consumers targeting these class names directly in their own CSS must update to the new flat names.
+
+### 🐛 Fixed
+
+* convert Banner BEM classes to flat class names ([#5114](https://github.com/equinor/design-system/issues/5114)) ([778515c](https://github.com/equinor/design-system/commit/778515ca9e2eb6144fcf96f57b483d6afdaae25d))
+* convert Field, Switch, Radio, Checkbox BEM classes to flat class names ([#5115](https://github.com/equinor/design-system/issues/5115)) ([84906f3](https://github.com/equinor/design-system/commit/84906f3932d6049190ca91859c7b9a03968ab7d3))
+
+## [2.8.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.7.0-beta.1...eds-core-react-next@v2.8.0-beta.1) (2026-06-23)
+
+
+### ✨ Added
+
+* Badge EDS 2.0 ([#4999](https://github.com/equinor/design-system/issues/4999)) ([2235377](https://github.com/equinor/design-system/commit/2235377b318cb4c75712d6b2380d16caa3aef721))
+* Dialog EDS 2.0 ([#4956](https://github.com/equinor/design-system/issues/4956)) ([e2f6df2](https://github.com/equinor/design-system/commit/e2f6df2f62991d3f5a0205b416ffcf5d880a3d17))
+* Select EDS 2.0 ([#4918](https://github.com/equinor/design-system/issues/4918)) ([0be44ad](https://github.com/equinor/design-system/commit/0be44adfbf0a45ad27b6b6b5f3a0cfb7337c4ec9))
+
+
+### 🐛 Fixed
+
+* correct TextArea helper message spacing in both density modes ([#4986](https://github.com/equinor/design-system/issues/4986)) ([f1a3b4d](https://github.com/equinor/design-system/commit/f1a3b4dcab016f4236e0d10ffcf63af4e25d6486))
+* remove box-shadow from Switch handle ([#4980](https://github.com/equinor/design-system/issues/4980)) ([2f0dd96](https://github.com/equinor/design-system/commit/2f0dd96d685107e5d770bbfb00b8dde8cf80869a)), closes [#4838](https://github.com/equinor/design-system/issues/4838)
+* replace styled-components Progress with spinning icon in Autocomplete ([#4982](https://github.com/equinor/design-system/issues/4982)) ([9581f89](https://github.com/equinor/design-system/commit/9581f892ef28d8d4fa1195ef05818c5fadf34f4c))
+* rely on parent flex gap for Field helper-message spacing ([#5080](https://github.com/equinor/design-system/issues/5080)) ([8a18fb6](https://github.com/equinor/design-system/commit/8a18fb697aaeab3bdab6f14bd3a47160377b58a7))
+* replace styled-components Tooltip with next/Tooltip in TextField and TextArea ([#4981](https://github.com/equinor/design-system/issues/4981)) ([e3ea724](https://github.com/equinor/design-system/commit/e3ea724eb99e9a3511686c07a2d7b9232f38cb10))
+
+
+### ♻️ Refactoring
+
+* migrate Banner.Message and Chip label off TypographyNext ([#4984](https://github.com/equinor/design-system/issues/4984)) ([ea19590](https://github.com/equinor/design-system/commit/ea195904f5321e89930f3d0247025ac4deeb9283)), closes [#4835](https://github.com/equinor/design-system/issues/4835) [#4836](https://github.com/equinor/design-system/issues/4836)
+
+## [2.7.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.6.0-beta.1...eds-core-react-next@v2.7.0-beta.1) (2026-05-27)
+
+
+### ✨ Added
+
+* Add Accordion component ([#4912](https://github.com/equinor/design-system/issues/4912)) ([fbe6874](https://github.com/equinor/design-system/commit/fbe6874a31249ada38656cd1444f770cf4004554))
+* Add Autocomplete component ([#4808](https://github.com/equinor/design-system/issues/4808)) ([10e0217](https://github.com/equinor/design-system/commit/10e0217f266a97ef09f6972f6e4824d83ff29049))
+
+## [2.6.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.6.0-beta.0...eds-core-react-next@v2.6.0-beta.1) (2026-05-20)
+
+
+### 🐛 Fixed
+
+* publish with correct workspace dependencies — 2.6.0-beta.0 had unresolved `workspace:^` references that prevented installation via npm (CI workflow issue, no code changes in /next)
+
+## [2.6.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.5.0-beta.0...eds-core-react-next@v2.6.0-beta.0) (2026-05-20)
+
+
+### ✨ Added
+
+* add Divider component to next/ ([#4844](https://github.com/equinor/design-system/issues/4844)) ([b5706db](https://github.com/equinor/design-system/commit/b5706dbb3dbb8e3617660e99bfa98a384feb3ed1))
+
+
+### 🐛 Fixed
+
+* correct Chip height to match Figma design spec ([#4871](https://github.com/equinor/design-system/issues/4871)) ([3364526](https://github.com/equinor/design-system/commit/3364526b79b697bdd33019eab6d7c8d25d53294e))
+
+
+### ♻️ Refactoring
+
+* migrate Field off TypographyNext ([#4843](https://github.com/equinor/design-system/issues/4843)) ([6cbc34d](https://github.com/equinor/design-system/commit/6cbc34d791eb4c7219a523826c26cf08e8d3dce2))
+
 ## [2.5.0-beta.0](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.4.1-beta.0...eds-core-react-next@v2.5.0-beta.0) (2026-04-23)
 
 

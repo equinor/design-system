@@ -5,6 +5,92 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.6...eds-tokens@v3.0.0-beta.7) (2026-09-01)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5362](https://github.com/equinor/design-system/issues/5362)) ([916f867](https://github.com/equinor/design-system/commit/916f867e96977c4a15bf6c46ec1f98e54da0b6ee))
+
+## [3.0.0-beta.6](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.5...eds-tokens@v3.0.0-beta.6) (2026-08-13)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5331](https://github.com/equinor/design-system/issues/5331)) ([9120256](https://github.com/equinor/design-system/commit/91202564625a776bbe3a10e7b1374b575c740b84))
+
+## [3.0.0-beta.5](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.4...eds-tokens@v3.0.0-beta.5) (2026-08-11)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5284](https://github.com/equinor/design-system/issues/5284)) ([4be182a](https://github.com/equinor/design-system/commit/4be182af039471e9b06001b8a8537c6aa95ae35d))
+
+## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.3...eds-tokens@v3.0.0-beta.4) (2026-08-05)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5275](https://github.com/equinor/design-system/issues/5275)) ([7bff44b](https://github.com/equinor/design-system/commit/7bff44b292a215a74d467ee2c303e7bbc0802e0c))
+* update tokens from Tokens Studio release ([#5280](https://github.com/equinor/design-system/issues/5280)) ([6ebf5b6](https://github.com/equinor/design-system/commit/6ebf5b65f9b97cd404e7447b2d36c8c92677ea1e))
+
+## [3.0.0-beta.3](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.2...eds-tokens@v3.0.0-beta.3) (2026-07-30)
+
+
+### 🐛 Fixed
+
+* emit the beta semantic token layer under the color-scheme scopes ([#5239](https://github.com/equinor/design-system/issues/5239)) ([470a35e](https://github.com/equinor/design-system/commit/470a35e8c97dc3b6dee6235b4d809cf9fe5d894e))
+
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.1...eds-tokens@v3.0.0-beta.2) (2026-07-22)
+
+
+### ✨ Added
+
+* add bundled variables.css to the Tokens Studio release pipeline ([#5209](https://github.com/equinor/design-system/issues/5209)) ([1243030](https://github.com/equinor/design-system/commit/1243030ac8175465241c4e9ea288393f00693010))
+
+## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.0...eds-tokens@v3.0.0-beta.1) (2026-07-20)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5182](https://github.com/equinor/design-system/issues/5182)) ([6074f72](https://github.com/equinor/design-system/commit/6074f721b4072741c50498d63c10ab3ebe45185e))
+
+## [2.3.2](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.1...eds-tokens@v2.3.2) (2026-07-20)
+
+Documentation-only release — no token changes.
+
+### 📝 Documentation
+
+* mark the legacy `tokens` JavaScript object as deprecated (do not use in new code) and flag the CSS variables as transitional: still the supported option for production, but the variable names will be replaced by the new token structure (currently on `@equinor/eds-tokens@beta`) in the next major release ([#5120](https://github.com/equinor/design-system/issues/5120))
+
+## [2.3.1](https://github.com/equinor/design-system/compare/eds-tokens@v2.3.0...eds-tokens@v2.3.1) (2026-06-23)
+
+
+### 🐛 Fixed
+
+* propagate density-aware spacing aliases to comfortable mode ([#5091](https://github.com/equinor/design-system/issues/5091)) ([331477d](https://github.com/equinor/design-system/commit/331477decf681fce4db1a385c8533e2574f38ca4))
+
+## [2.3.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.2.0...eds-tokens@v2.3.0) (2026-05-21)
+
+> **Heads-up for downstream bundler setups:** Dark mode tokens are now emitted as explicit `[data-color-scheme="dark"]` scope rules instead of `light-dark()`. This fixes dark mode in bundlers that use lightningcss (including Vite 8+). No action required for most consumers — if you process the tokens CSS through your own build pipeline, the output no longer contains `light-dark()`.
+
+### ✨ Added
+
+* Add elevation shadow tokens ([#4783](https://github.com/equinor/design-system/issues/4783)) ([f775560](https://github.com/equinor/design-system/commit/f775560a46aba2207f175405639c248675b30116))
+* Add nested TypeScript token output for typography and spacing ([#4538](https://github.com/equinor/design-system/issues/4538)) ([6100738](https://github.com/equinor/design-system/commit/6100738f24a677a3adeebbbae0b079e3c3e7d644))
+* Add spacing tokens to all build outputs (CSS, TS, JSON) ([#4587](https://github.com/equinor/design-system/issues/4587)) ([5a5b1f0](https://github.com/equinor/design-system/commit/5a5b1f049b899095034b9fe66fde040d6e2d4ee7))
+* Include concept tokens in semantic TS, CSS, and JSON outputs ([#4641](https://github.com/equinor/design-system/issues/4641)) ([adb74eb](https://github.com/equinor/design-system/commit/adb74eb9b9ed3c28b77a7b264b272debec176a79))
+
+
+### 🐛 Fixed
+
+* Strip concept token self-references from generated static CSS ([#4806](https://github.com/equinor/design-system/issues/4806)) ([61ba4b5](https://github.com/equinor/design-system/commit/61ba4b5d3c61dd4625cd481866e261246f3c9e05))
+* Correct `5xl` tracking-wide alias in UI Body mode ([#4885](https://github.com/equinor/design-system/issues/4885)) ([4c4af83](https://github.com/equinor/design-system/commit/4c4af8365801e794b64b4b636a87f6db36a395a5)), closes [#4876](https://github.com/equinor/design-system/issues/4876)
+* Inline size extras in nested typography TypeScript output ([#4915](https://github.com/equinor/design-system/issues/4915)) ([ea9cae3](https://github.com/equinor/design-system/commit/ea9cae3ca7feb84615012d52aa7b8b92d82b5b5a))
+* Emit explicit dark-scope rules instead of `light-dark()` for broader browser support ([#4864](https://github.com/equinor/design-system/issues/4864)) ([e519ff2](https://github.com/equinor/design-system/commit/e519ff2113e13f7a826772cebc9abeda2f04cee7))
+* Re-declare semantic color tokens on `data-color-scheme` scopes ([#4873](https://github.com/equinor/design-system/issues/4873)) ([a43fd38](https://github.com/equinor/design-system/commit/a43fd38c1af791404a9da6db792f90ffec39e712))
+* Register typography length properties as proper CSS custom properties ([#4831](https://github.com/equinor/design-system/issues/4831)) ([34095a8](https://github.com/equinor/design-system/commit/34095a8bb5cc448c7866235bdfde2ea689232b7e))
+
 ## [2.2.0](https://github.com/equinor/design-system/compare/eds-tokens@v2.1.1...eds-tokens@v2.2.0) (2026-02-17)
 
 

@@ -1,29 +1,18 @@
 ---
-applyTo: '**'
+applyTo: 'packages/eds-core-react/src/components/next/**/*.figma.tsx'
 ---
 
 # Figma Component Creation
 
-## Workflow
+> The canonical Figma-to-code workflow lives in [`AGENTS.md`](../../AGENTS.md) — sub-component prefixes (`⌘` / `.` / `↳`), critical rules (exact variable names, no hex values, all states), and the Code Connect `figma.nestedProps()` example.
 
-When creating a component from Figma design:
-
-1. **Start fresh** - Do NOT reference existing components. Implement only what Figma specifies.
-2. **Exact specifications** - Use all explicit properties and values from the design
-3. **Deviation justification** - Only deviate if you have strong technical reasons; document why
-4. **File structure** - Follow React guidelines: Component.tsx, Component.types.ts, component.css, Component.test.tsx, Component.stories.tsx
-
-## Anti-patterns
-
-- ❌ Combining Figma design with patterns from similar existing components
-- ❌ Adding props or features not in the design
-- ❌ Using CSS-in-JS or styled-components (use vanilla CSS)
-- ❌ Importing from other components without explicit design requirement
+This file is intentionally short — it lists only the Copilot-facing checklist.
 
 ## Checklist
 
 - [ ] Figma design specifications documented
 - [ ] Component implements only what's designed
+- [ ] All states (default, hover, focus, disabled, error) verified against Figma
 - [ ] Storybook story includes all design variations
 - [ ] Tests cover interaction and edge cases
 - [ ] CSS follows component conventions (eds-prefixed root class, nesting, data attributes)

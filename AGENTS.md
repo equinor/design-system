@@ -1,6 +1,6 @@
-# AGENTS.md - Equinor Design System
+# AGENTS.md — Equinor Design System
 
-This file provides guidance for AI coding agents working in this repository.
+This is the **canonical conventions file** for AI coding agents working in this repository. Tool-specific configs (`.claude/CLAUDE.md`, `.github/copilot-instructions.md`, `.opencode/`) reference this file rather than duplicating its content.
 
 ## Overview
 
@@ -8,20 +8,82 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 
 ### Key Packages
 
-- `@equinor/eds-core-react` - Main React component library
-- `@equinor/eds-core-react/next` - New EDS 2.0 components (active development)
-- `@equinor/eds-tokens` - Design tokens, CSS variables, and theming
-- `@equinor/eds-icons` - Icon library
+- `@equinor/eds-core-react` — Main React component library
+- `@equinor/eds-core-react/next` — New EDS 2.0 components (active development)
+- `@equinor/eds-tokens` — Design tokens, CSS variables, and theming
+- `@equinor/eds-icons` — Icon library
+
+### Existing /next components
+
+Before scaffolding a new component, check [`documentation/AI-COMPONENT-INDEX.md`](./documentation/AI-COMPONENT-INDEX.md) — a generated list of every `/next` component with its props and sub-components. It is regenerated on `pnpm run build` (or run `pnpm run generate:component-index` ad-hoc). Don't edit it by hand.
+
+### Mobile component scope
+
+Before scaffolding a new `eds-mobile-components` component, check [`documentation/MOBILE_COMPONENT_SCOPE.md`](./documentation/MOBILE_COMPONENT_SCOPE.md) — the maintained list of EDS web components mobile renames, replaces, or explicitly excludes, and why. The component you're about to build may already be decided against.
+
+## Secrets & Credentials
+
+Never read, search, copy, or print the contents of secret files. The rule applies to **every** harness (Claude Code, Copilot, OpenCode) regardless of whether the harness enforces it.
+
+Treat these patterns as off-limits:
+
+- `.env`, `.env.*` (real `.env` lives at `packages/eds-tokens-sync/bin/.env` — see `packages/eds-tokens-sync/CLAUDE.md`)
+- `id_rsa*`, `id_ed25519*`, `id_ecdsa*`, `id_dsa*`, `*.pem`, `*.key`
+- `credentials.json`, `secrets.json`
+- `secrets/**`, `config/credentials.json`
+
+If you need to verify a secret file's shape, report length + first/last few characters only — never the body. If a tool blocks access (e.g. Claude Code's `read_hook.js`), do not try to work around it; the block is the intended behaviour.
+
+The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention `.env` or a `secrets/` path.
+
+**Enforcement matrix:**
+
+| Harness        | Enforcement                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| Claude Code    | Hard-enforced via `.claude/settings.json` `permissions.deny` + `.claude/hooks/read_hook.js` |
+| Copilot CLI    | Hard-enforced via `.github/hooks/block-secrets.json` + `.github/hooks/block-secrets.js`     |
+| Copilot in IDE | Agent-respected only — IDE Copilot does not run the CLI hook; follow this rule manually     |
+| OpenCode       | Agent-respected only — `permission.bash` covers commands, not file reads                    |
+
+## Code Formatting
+
+When an agent edits a file, the result must end up formatted and lint-fixed, regardless of which harness made the edit. Otherwise the same change lands as a clean diff in one harness and a noisy one in another.
+
+The expected behaviour after any edit to a `.ts`, `.tsx`, `.css`, or `.md` file:
+
+- ESLint `--fix` runs on `.ts` / `.tsx`, which also applies Prettier through `eslint-plugin-prettier`
+- Stylelint `--fix` runs on `.css` files inside `packages/eds-core-react/src/components/next/`
+- Prettier `--write` runs on `.css` and `.md`, after Stylelint. Stylelint only fixes ordering and notation, not Prettier's whitespace, so CSS needs both. The two converge in one pass — verified — so the order is stable and neither undoes the other. Prettier reads `.prettierignore` itself, which is why `*.mdx` stays untouched.
+
+`.md` and `.css` outside `components/next/` were unformatted for a long time because nothing ran Prettier on them: ESLint's Prettier integration only covers JS/TS, and the hooks only called Stylelint inside `components/next/`. **100 `.css`/`.md` files repo-wide are still Prettier-unclean** — run `pnpm run format:check` to see them. 25 of those are `apps/design-system-docs/versioned_docs/version-1.1.0/`, the frozen docs archive, which is deliberately left alone; the rest of that app is clean and gated in CI by `pnpm run format:check:docs`.
+
+**Enforcement matrix:**
+
+| Harness        | Enforcement                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Claude Code    | `.claude/hooks/format_hook.js` runs eslint/stylelint --fix and prettier --write after every Edit/Write            |
+| Copilot CLI    | `.github/hooks/format-on-edit.{json,js}` runs the same eslint/stylelint --fix + prettier --write as `postToolUse` |
+| Copilot in IDE | `.vscode/settings.json` `editor.formatOnSave: true` (Prettier) — does NOT run eslint/stylelint auto-fix           |
+| OpenCode       | No enforced hook — run `pnpm run lint <file>` manually after edits, or configure an equivalent post-hook          |
+
+If you edit code in a harness without enforced auto-fix, run `pnpm run lint <file>` before considering the change done.
+
+**Exception:** `packages/eds-mobile-components` and `apps/mobile-storybook` are excluded from root's ESLint config — root's `lint` command exits 0 on their files (with an easy-to-miss "File ignored" warning) without actually checking anything. Use the per-package commands below instead.
+
+Do not set `prettier.prettierPath` in `.vscode/settings.json`. It is an explicit override for where the extension loads Prettier from; it was once set to an empty string, which is not a valid path. Prettier is a root devDependency, so the extension resolves the workspace copy on its own and stays on the same version as the hooks.
 
 ## Build/Lint/Test Commands
 
-Package manager: `pnpm@10.15.0`
+Package manager: `pnpm@11.27.0`
 
 ```bash
 pnpm run build                    # Build all packages
 pnpm run build:core-react         # Build eds-core-react only
-pnpm run lint:all                 # Lint entire codebase
+pnpm run lint:all                 # Lint entire codebase, except packages/eds-mobile-components and apps/mobile-storybook (they ship their own eslint.config.js — see below)
 pnpm run lint ./path/to/file.tsx  # Lint specific file
+
+pnpm --filter @equinor/eds-mobile-components run lint  # Lint eds-mobile-components with its own config
+pnpm --filter @equinor/mobile-storybook run lint       # Lint mobile-storybook with its own config
 
 pnpm run test:core-react          # Run eds-core-react tests
 pnpm run test:watch:core-react    # Watch mode
@@ -39,14 +101,16 @@ New components go in `packages/eds-core-react/src/components/next/`:
 
 ```
 ComponentName/
-  index.ts               # Named exports only
-  ComponentName.tsx      # Main component with forwardRef
-  ComponentName.types.ts # TypeScript types with JSDoc
-  componentname.css      # Vanilla CSS with design tokens
-  componentName.figma.tsx # Figma Code Connect file for mapping code to Figma props
-  ComponentName.test.tsx # Jest + Testing Library + jest-axe
+  index.ts                # Named exports only
+  ComponentName.tsx       # Main component with forwardRef
+  ComponentName.types.ts  # TypeScript types with JSDoc
+  componentname.css       # Vanilla CSS with design tokens
+  ComponentName.figma.tsx # Figma Code Connect (when a Figma design exists)
+  ComponentName.test.tsx  # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
 ```
+
+For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
 
 ## Code Style
 
@@ -105,11 +169,25 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
     </svg>
   )
 })
+
+Icon.displayName = 'Icon'
 ```
+
+Set `Component.displayName` after every `forwardRef` definition so React DevTools and snapshot output show the component name (sub-components use dotted names, e.g. `Field.Label`).
+
+Place helper functions and constants at module scope, not inside the component body — they should not be recreated on every render.
 
 ### CSS (Vanilla + Tokens + Nesting)
 
-One `eds-`-prefixed root class per component. Internal elements use simple class names scoped by CSS nesting. Variants and state use data attributes.
+Vanilla CSS only — no CSS-in-JS (`styled-components`, `emotion`), no Tailwind utility classes. One `.css` file per component (single responsibility), with an `eds-`-prefixed root class. Internal elements use simple class names scoped by CSS nesting. Variants and state use data attributes.
+
+For the underlying token system — colour categories, static vs dynamic tokens, typography — see the package-local instruction files (frontmatter `applyTo: '**'` for Copilot users who configure their instruction-file location to include this path; Claude / OpenCode users read these on demand):
+
+- [`packages/eds-tokens/instructions/colors.md`](./packages/eds-tokens/instructions/colors.md) — colour system overview
+- [`packages/eds-tokens/instructions/colors-static.md`](./packages/eds-tokens/instructions/colors-static.md) — static semantic + concept tokens
+- [`packages/eds-tokens/instructions/colors-dynamic.md`](./packages/eds-tokens/instructions/colors-dynamic.md) — dynamic appearance tokens (the `data-color-appearance` pattern)
+- [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) — typography tokens, modes, baseline trimming
+- [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md) — end-to-end token lifecycle (Figma → JSON → CSS bundle)
 
 ```css
 @layer eds-components {
@@ -127,6 +205,112 @@ One `eds-`-prefixed root class per component. Internal elements use simple class
   }
 }
 ```
+
+#### Dynamic tokens
+
+Prefer dynamic tokens (e.g. `--eds-selectable-space-vertical`, `--eds-typography-icon-size`) over hard-coded values. They adapt to density, typography, and accessibility settings without per-component overrides.
+
+#### Typography in component CSS
+
+Set `font-family`, `font-size`, and `line-height` directly in the component CSS using the per-role semantic typography tokens — do **not** add `data-font-family` / `data-font-size` / `data-line-height` attributes to the component's own elements:
+
+```css
+.eds-button {
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+}
+```
+
+Token shape: `--eds-typography-{ui-body|header}-{xs..6xl}-{font-size,line-height-default,line-height-squished,font-weight-{lighter,normal,bolder}}`. `font-family` is set once per role (`--eds-typography-{ui-body,header}-font-family`).
+
+The `data-font-*` runtime-switching pattern still exists for `elements.css` defaults and ad-hoc consumer markup, but inside a component's own CSS the size and role are part of the design and should be expressed as tokens. See [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) for both paths.
+
+#### Pseudo-private custom properties
+
+Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0018-typography-approach-for-eds-2.md`) and is now applied broadly across components.
+
+```css
+/* CORRECT */
+.eds-button {
+  --_color: var(--eds-color-text-strong-on-emphasis);
+  --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+  color: var(--_color);
+  background-color: var(--_bg-color);
+}
+.eds-button[data-variant='ghost']:disabled {
+  --_color: var(--eds-color-text-disabled); /* override the variable */
+}
+
+/* WRONG — never override the property directly */
+.eds-button[data-variant='ghost']:disabled {
+  color: var(--eds-color-text-disabled);
+}
+```
+
+#### CSS layers
+
+Wrap all component styles in `@layer eds-components { }`. Rules outside the layer (e.g. display overrides) must be placed after the layer block with a comment explaining why they are outside.
+
+#### Data attributes for variants and states
+
+Use `data-*` attributes for all variants, sizes, and boolean states — not modifier classes.
+
+```css
+.eds-button[data-variant='primary'] {
+}
+.eds-button[data-selectable-space='lg'] {
+}
+.eds-button[data-icon-only] {
+}
+.eds-button[data-round] {
+}
+.eds-button[data-multiline] {
+}
+```
+
+#### Density via ancestor attribute
+
+Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor. See `documentation/adr/0004-component-conventions-for-eds-2.md` and `documentation/adr/0017-spacing-approach-for-eds-2.md` for the rationale.
+
+```css
+[data-density='comfortable'] .eds-button[data-selectable-space='md'] {
+  --_min-height: 1.5rem;
+}
+```
+
+#### Modular type scale
+
+Font sizes follow a mathematical scale based on a `--_base` value:
+
+```css
+:root,
+[data-density='spacious'] {
+  --_base: 16px;
+  --font-size-md: round(calc(var(--_base) * pow(2, -1/5)), 0.5px);
+}
+[data-density='comfortable'] {
+  --_base: 14px; /* only the base changes; all derived values update automatically */
+}
+```
+
+#### Progressive enhancement with `@supports`
+
+Use `@supports` to layer in advanced CSS features. The base styles work everywhere; the `@supports` block adds what only supported browsers can handle:
+
+```css
+/* Base — all browsers: symmetric padding keeps text vertically centred */
+padding-block: var(--eds-selectable-space-vertical);
+
+/* Enhancement — trims whitespace above/below the cap-height */
+@supports (text-box: trim-both ex alphabetic) {
+  padding-top: var(--padding-top-baseline);
+  padding-bottom: 0;
+  text-box: trim-both ex alphabetic;
+}
+```
+
+CSS `@function` (Chrome/Edge 128+) is a future enhancement — define it and comment it in once Safari ships support.
 
 ### Testing
 
@@ -165,26 +349,179 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 
 - **Components/Types**: PascalCase (`Button`, `ButtonProps`)
 - **Variables/Functions**: camelCase (`isDisabled`, `useToken`)
-- **CSS classes**: `eds-` prefix on root class (`eds-button`, `eds-text-area`); simple nested names for internal elements; variants via data attributes
+- **CSS classes**: `eds-` prefix on root class (`eds-button`, `eds-text-area`); simple nested names for internal elements (`.label-row`, `.icon`); variants via data attributes
 - **Files**: Match export (`Icon.tsx`, `Icon.types.ts`, `icon.css`)
+
+## Polymorphism (`asChild` + `Slot`)
+
+EDS 2.0 uses the `asChild` pattern for components that need polymorphic rendering (e.g. Link, Button). This lets consumers swap the underlying element for router links, custom components, etc. See `documentation/adr/0005-use-aschild-slot-for-polymorphism.md` for the rationale.
+
+- **`Slot`** utility in `packages/eds-core-react/src/components/next/Slot/` merges parent props onto the child element
+- Add `asChild?: boolean` to the component's props type
+- When `asChild` is true, render `<Slot>` instead of the default element
+- Extract shared props into a `sharedProps` object to avoid duplication
+- See `Slot/README.md` for merge behavior details and usage examples
+
+Components that should support `asChild`: **Link**, **Button**, and any component rendering an interactive element that consumers may want to swap.
+
+## Figma-to-Code Workflow
+
+When implementing a component from a Figma design:
+
+1. **Start fresh** — implement only what the design specifies. Do not borrow props or patterns from similar components without verifying them in Figma.
+2. **Use exact variable names from the design.** Never assume tokens based on semantics ("looks like accent blue → `--eds-color-accent-*`"). Verify the actual variable name.
+3. **Never hardcode hex values** — always use `--eds-*` CSS variables from `@equinor/eds-tokens`.
+4. **Check every state** — Default, Hover, Focus, Disabled, Error. Tokens often change between states (especially `data-color-appearance` on disabled icons).
+
+### Sub-component convention
+
+Figma layers prefixed with `⌘`, `.`, or `↳` represent nested sub-components. In React, model them as composable sub-components or map their props with Code Connect's `figma.nestedProps()`:
+
+```tsx
+figma.connect(Component, 'figma-url', {
+  props: {
+    disabled: figma.enum('State', { Disabled: true }),
+    inner: figma.nestedProps('⌘ InnerComponent', {
+      open: figma.enum('Open', { true: true }),
+    }),
+  },
+  example: ({ disabled, inner }) => (
+    <Component disabled={disabled} open={inner.open} />
+  ),
+})
+```
+
+### Anti-patterns
+
+- Combining Figma design with patterns from similar existing components
+- Adding props or features not in the design
+- Importing from other components without explicit design requirement
+- Ignoring `⌘` / `.` / `↳` prefixed layers
+
+### Figma MCP workflow
+
+When the Figma MCP server is available (Claude Code, OpenCode):
+
+1. **Analyze structure**: `figma_get_design_context` with the Figma URL to understand the component layers.
+2. **See the design**: `figma_get_screenshot` for visual reference.
+3. **Extract tokens for EACH state**: `figma_get_variable_defs` for Default, Hover, Focus, Disabled, Error (and any other states visible in the design).
+
+**Do not skip step 3 per state.** A single `figma_get_variable_defs` call on the default state will miss state-specific tokens (especially `data-color-appearance` on disabled icons).
+
+#### MCP anti-patterns
+
+- Calling `figma_get_design_context` alone without `figma_get_variable_defs` for each state
+- Reusing tokens extracted for a different state
+- Generating Code Connect from intuition instead of from the actual MCP response
+
+In Claude Code, `.claude/rules/figma-component.md` loads this section automatically when editing `*.figma.tsx`.
 
 ## Accessibility
 
 - WCAG 2.1 AA compliance required
 - Decorative elements: `aria-hidden="true"`
 - Semantic elements: `role="img"` with `aria-labelledby`
+- Proper ARIA attributes (roles, labels, states) and keyboard support (Tab, Enter, Escape, Arrow keys where relevant)
+- Manage focus correctly: trap focus in modals/dialogs, restore focus on close, use `:focus-visible` for keyboard-only outlines
 - Test with `jest-axe` in every component
+
+For running an accessibility audit on a deployed page or Storybook story, see [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](./documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
+
+## Component Documentation
+
+Component docs live in `apps/design-system-docs/docs/components/{category}/{component}.md`. For writing or reviewing them — tone of voice, formatting (British English, no em-dashes, admonitions), section order, output template, Storybook iframes workflow, sidebar registration, verification checklist — see [`documentation/agent-instructions/COMPONENT_DOC_STYLE.md`](./documentation/agent-instructions/COMPONENT_DOC_STYLE.md). Harness entry points (`/create-component-doc` in Claude Code, the `structure_components_prompt` / `verify_components_prompt` in Copilot, the `component-doc` agent in OpenCode) all reference that doc.
+
+## Tokens Studio Pipeline
+
+EDS is adopting the Tokens Studio platform as the source for a new token pipeline, replacing the legacy Figma-REST sync over time. For platform concepts (organizations, projects, branches, releases), `studio` CLI setup and commands, the `.studio.json` configuration model, the safety rubric for CLI commands, and how to verify against live sources instead of answering from memory, see [`documentation/agent-instructions/TOKENS_STUDIO.md`](./documentation/agent-instructions/TOKENS_STUDIO.md). Harness entry points (`/tokens-studio` in Claude Code, the `tokens-studio` prompt in Copilot, the `tokens-studio` agent in OpenCode) all reference that doc. The legacy pipeline remains documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md).
+
+## Dependabot Duty
+
+The weekly Dependabot rotation covers three things: the open Dependabot PRs, the Dependabot alerts on the Security tab that did not get a PR (usually transitive dependencies fixed via `pnpm.overrides` in the root `package.json`), and the code scanning alerts CodeQL raises against our own source. For the triage steps, the duplicate-PR pattern, the decision table for majors, the override recipe, the code scanning dismissal reasons, the report format, and the boundaries (report first, never approve/merge/close/dismiss without a go-ahead), see [`documentation/agent-instructions/DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md). Harness entry points (`/dependabot-duty` in Claude Code, the `dependabot-duty` prompt in Copilot, the `dependabot-duty` agent in OpenCode) all reference that doc. The short human runbook is [`documentation/how-to/DEPENDABOT_GUIDE.md`](./documentation/how-to/DEPENDABOT_GUIDE.md).
 
 ## Conventional Commits
 
 ```
-type(scope): description
+type: description
 ```
 
-**Types**: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
-**Scopes**: `eds-core-react`, `eds-tokens`, `eds-icons`
-**Breaking**: `feat(eds-core-react)!: remove deprecated prop`
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
-## Additional Guidelines
+**Breaking**: `feat!: remove deprecated prop`
 
-See `.github/copilot-instructions.md` and `.github/instructions/` for detailed guidelines.
+**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, test and other non-publishable directories are excluded from triggering releases based on file path (directories only — single-file entries never match, so package-root files like `README.md` or `tsconfig.json` always count; keep edits to them in `chore`/`build`/`docs` commits). Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
+
+**When to add a scope:**
+
+- The commit touches a single package and the file paths don't make that obvious from the diff (rare — usually the path makes it clear).
+- It's an infrastructure scope (`config`, `github`, `build`, `deps`, `docs`, `devcontainer`) for changes that don't belong to any package.
+
+**Available scopes (when needed):**
+
+- Packages: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+- Infrastructure: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
+
+For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
+
+**PR titles** must also follow the conventional commits format — they appear in changelogs and merge history.
+
+See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
+
+## PR and Issue Descriptions
+
+PR descriptions have a limit of 300 words and issues a limit of 400 words. For what counts towards the limit, the rules for each, the writing restrictions, examples and the checklist before posting, see [`documentation/agent-instructions/PR_AND_ISSUE_WRITING.md`](./documentation/agent-instructions/PR_AND_ISSUE_WRITING.md). Harness entry points (the `write-pr-description` and `write-issue` skills in Claude Code, the matching prompts in Copilot and the matching agents in OpenCode) all reference that doc.
+
+## Git Workflow
+
+⚠️ **CRITICAL: Always ask the user for permission before:**
+
+- Creating commits
+- Pushing to remote
+- Creating branches
+- Creating or editing PRs or issues with `gh`
+
+**Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
+
+NEVER attribute AI, or add to the commit message "Co-authored by Claude" or similar.
+
+## Architecture Decision Records (ADRs)
+
+Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the relevant ADR before changing or extending these patterns:
+
+- `0002-use-vanilla-css-with-design-tokens-for-eds-2.md` — why vanilla CSS over CSS-in-JS
+- `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density
+- `0005-use-aschild-slot-for-polymorphism.md` — `asChild` + `Slot` for polymorphic components
+- `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
+- `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
+
+Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
+
+## Tool-Specific Configurations
+
+This file is the canonical source. Tool-specific configs add only what's unique to that tool:
+
+| File                              | Purpose                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, skills, settings                                       |
+| `.claude/commands/*.md`           | Claude Code: slash-command entry points                                                    |
+| `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring                                  |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                                    |
+| `.claude/skills/*/SKILL.md`       | Claude Code: skills, applied automatically when their task comes up                        |
+| `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions                                 |
+| `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                                                |
+| `.github/prompts/**/*.prompt.md`  | GitHub Copilot: prompt entry points                                                        |
+| `.github/hooks/block-secrets.*`   | Copilot CLI: `preToolUse` hook blocking secret-file access                                 |
+| `.github/hooks/format-on-edit.*`  | Copilot CLI: `postToolUse` hook running eslint/stylelint --fix + prettier --write on edits |
+| `.opencode/agent/*.md`            | OpenCode: agent definitions                                                                |
+| `.github/workflows/claude.yml`    | `@claude` GitHub Action: system prompt points here                                         |
+
+Directory-scoped conventions live next to the code they describe and take precedence there:
+
+| File                                | Scope                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `apps/design-system-docs/AGENTS.md` | Docs site: global CSS architecture, token bundles, typography scale, version scoping, StoryCanvas |
+| `apps/design-system-docs/CLAUDE.md` | Claude Code pointer to the above                                                                  |
+
+When adding new conventions, update **this file** and let the tool-specific files reference it.
+
+To verify the harness configs haven't drifted, run the cross-harness audit: [`documentation/agent-instructions/HARNESS_AUDIT.md`](./documentation/agent-instructions/HARNESS_AUDIT.md) is the canonical read-only playbook. Harness entry points: `/audit-harnesses` in Claude Code, the `audit-harnesses` prompt in Copilot, the `audit-harnesses` agent in OpenCode.

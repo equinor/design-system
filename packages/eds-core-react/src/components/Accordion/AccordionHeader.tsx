@@ -43,20 +43,22 @@ const StyledAccordionHeader = styled.div<StyledAccordionHeaderButtonProps>(
       background-color: ${header.background};
       ${bordersTemplate(border)}
       border-top: ${$parentIndex === 0 ? null : 'none'};
-      ${disabled
-        ? css`
-            color: ${header.states.disabled.typography.color};
-            cursor: not-allowed;
-          `
-        : css`
-            color: ${header.typography.color};
-            cursor: pointer;
-            @media (hover: hover) and (pointer: fine) {
-              &:hover {
-                background: ${header.states.hover.background};
+      ${
+        disabled
+          ? css`
+              color: ${header.states.disabled.typography.color};
+              cursor: not-allowed;
+            `
+          : css`
+              color: ${header.typography.color};
+              cursor: pointer;
+              @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                  background: ${header.states.hover.background};
+                }
               }
-            }
-          `}
+            `
+      }
     `
   },
 )
@@ -100,15 +102,17 @@ const StyledAccordionHeaderButton =
       display: flex;
       align-items: center;
       flex-grow: 1;
-      ${disabled
-        ? css({
-            color: header.states.disabled.typography.color,
-            cursor: 'not-allowed',
-          })
-        : css({
-            color: header.typography.color,
-            cursor: 'pointer',
-          })}
+      ${
+        disabled
+          ? css({
+              color: header.states.disabled.typography.color,
+              cursor: 'not-allowed',
+            })
+          : css({
+              color: header.typography.color,
+              cursor: 'pointer',
+            })
+      }
       > svg {
         color: ${iconToken.typography.color};
       }
@@ -120,9 +124,11 @@ const StyledIcon = styled(Icon)<{ $chevronPosition: 'left' | 'right' }>(({
 }) => {
   return css`
     flex-shrink: 0;
-    ${$chevronPosition === 'left'
-      ? css({ marginRight: '32px' })
-      : css({ marginLeft: '16px' })}
+    ${
+      $chevronPosition === 'left'
+        ? css({ marginRight: '32px' })
+        : css({ marginLeft: '16px' })
+    }
   `
 })
 

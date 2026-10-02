@@ -1,0 +1,50 @@
+@layer eds-components {
+  .eds-badge {
+    /* Pseudo-private vars — override these in variants, never the property directly */
+    --_bg: transparent;
+    --_outline-color: transparent;
+
+    display: inline-block;
+
+    padding-block: var(--eds-spacing-vertical-2xs);
+    padding-inline: var(--eds-spacing-horizontal-2xs);
+    border-radius: var(--eds-spacing-border-radius-rounded);
+
+    font-family: var(--eds-typography-ui-body-font-family);
+    font-size: var(--eds-typography-ui-body-sm-font-size);
+    font-feature-settings: 'lnum', 'tnum';
+    font-weight: var(--eds-typography-ui-body-sm-font-weight-bolder);
+    line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    color: var(--eds-color-text-subtle);
+    white-space: nowrap;
+
+    background-color: var(--_bg);
+    outline: var(--eds-sizing-stroke-thin) solid var(--_outline-color);
+    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+
+    @supports (text-box: trim-both cap alphabetic) {
+      text-box: trim-both cap alphabetic;
+    }
+
+    /* ===== LOW EMPHASIS ===== */
+
+    &[data-emphasis='low'][data-variant='solid'] {
+      --_bg: var(--eds-color-bg-canvas);
+    }
+
+    &[data-emphasis='low'][data-variant='outlined'] {
+      --_outline-color: var(--eds-color-border-subtle);
+    }
+
+    /* ===== MEDIUM EMPHASIS ===== */
+
+    &[data-emphasis='medium'][data-variant='solid'] {
+      --_bg: var(--eds-color-bg-fill-muted-default);
+    }
+
+    &[data-emphasis='medium'][data-variant='outlined'] {
+      --_bg: var(--eds-color-bg-canvas);
+      --_outline-color: var(--eds-color-border-medium);
+    }
+  }
+}

@@ -16,8 +16,13 @@
     }
   }
 
-  :where(h1, h2, h3, h4, h5, h6) {
-    font-family: Equinor, sans-serif;
+  /* Wrapped in @layer so component CSS in @layer eds-components wins
+     naturally (unlayered styles outrank any layer). The layer name is
+     declared here first, so it is the lowest-priority layer in the cascade. */
+  @layer storybook {
+    :where(h1, h2, h3, h4, h5, h6) {
+      font-family: Equinor, sans-serif;
+    }
   }
 
   .sbdocs.sbdocs-a {
