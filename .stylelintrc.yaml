@@ -28,6 +28,31 @@ rules:
           - '/--[\w-]+\(\)/'
 
 overrides:
+  # EDS 2.0 components use one eds- prefixed root class and short flat names
+  # for inner elements, scoped by CSS nesting — not BEM. See ADR 0006, whose
+  # context notes BEM was meant to be "explicitly removed from the Stylelint
+  # config"; this is that removal. Two shapes are allowed:
+  #
+  #   eds-<kebab>          root class, mirrors the component name
+  #                        (eds-field, eds-text-field)
+  #   <one or two words>   inner element (label, icon-wrapper)
+  #
+  # Inner names are capped at two words on purpose. Nesting already supplies
+  # the context, so an inner element never needs to restate its ancestors —
+  # .label inside .eds-field, not .field-label (and certainly not the old
+  # .eds-field__label). Current /next CSS has 28 one-word and 14 two-word
+  # inner names and no three-word ones, so this codifies existing practice
+  # rather than changing it.
+  #
+  # Roots are deliberately not capped: they track component names, which are
+  # occasionally longer than two words, and renaming the class alone would
+  # break that correspondence.
+  - files: ['packages/eds-core-react/src/components/next/**/*.css']
+    rules:
+      selector-class-pattern:
+        - '^(eds-[a-z0-9]+(-[a-z0-9]+)*|[a-z][a-z0-9]*(-[a-z0-9]+)?)$'
+        - message: "Expected class '%s' to be an eds- prefixed root or a one- or two-word inner name, not BEM (ADR 0006) (selector-class-pattern)"
+
   # The docs site is not the component library, so the eds- BEM pattern above
   # does not apply to it and cannot be made to. Its own classes are docs-
   # prefixed (see apps/design-system-docs/AGENTS.md); it must also select

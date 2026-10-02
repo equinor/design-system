@@ -9,7 +9,7 @@
  * artifact deterministic.
  *
  * One caveat to "concatenation is conflict-free": the semantic layer is
- * widened to `:root, [data-color-scheme]` before bundling (see
+ * widened to `:root, [data-color-scheme], [data-density]` before bundling (see
  * widen-semantic-scope.mjs, chained in the `generate:css-bundle`
  * script), so on `[data-color-scheme]` elements it overlaps the
  * color-scheme layer at equal specificity — and there, source order is
@@ -46,7 +46,7 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { WIDE_RE } from './semantic-scope.mjs'
+import { DENSITY_BASE_WIDE_RE, WIDE_RE } from './semantic-scope.mjs'
 
 const args = parseArgs(process.argv.slice(2))
 const CSS_DIR = args.css ?? 'src/tokens/css'
@@ -86,15 +86,31 @@ const contents = await Promise.all(
 // The widen-semantic-scope.mjs step must have run first (it is chained
 // before this script in the `generate:css-bundle` package script) —
 // bundling an unwidened semantic layer would silently regress subtree
-// colour-scheme switching (#5226). Checked for every semantic/*.css
-// file, mirroring the widen script's own glob.
+// colour-scheme switching (#5226) and density switching (#5247).
+// Checked for every semantic/*.css file, mirroring the widen script's
+// own glob.
 for (const [file, css] of contents) {
   if (relative(CSS_DIR, file).split(sep)[0] !== 'semantic') continue
   if (!WIDE_RE.test(css))
     fail(
-      `${file} is not widened to ":root, [data-color-scheme]" — run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+      `${file} is not widened to ":root, [data-color-scheme], [data-density]" — run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
     )
 }
+
+// The same step widens the density base. Without it,
+// data-density="comfortable" inside a Compact or Relaxed subtree keeps
+// the ancestor's values (#5247).
+const densityBase = contents.find(
+  ([file]) => relative(CSS_DIR, file) === join('density', 'comfortable.css'),
+)
+if (!densityBase)
+  fail(
+    `no density/comfortable.css under ${CSS_DIR}, so the export layout changed. Review #5247 before proceeding`,
+  )
+if (!DENSITY_BASE_WIDE_RE.test(densityBase[1]))
+  fail(
+    `${densityBase[0]} is not widened to ':root, [data-density="comfortable"]'. Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+  )
 
 const concatenated = contents.map(([, css]) => css).join('\n')
 
