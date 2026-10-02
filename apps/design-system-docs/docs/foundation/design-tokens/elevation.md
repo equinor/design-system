@@ -46,7 +46,7 @@ box-shadow: var(--eds-elevation-high);
 
 ## Implementation in Figma
 
-Elevation effect styles are available in both the **Semantic** and **Dynamic** libraries.
+Elevation effect styles are in the **EDS Foundation** library, together with the other EDS foundations.
 
 ### How to add
 
