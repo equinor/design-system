@@ -1,5 +1,6 @@
 :root,
-[data-color-scheme] {
+[data-color-scheme],
+[data-density] {
   --eds-background-backdrop: var(--eds-neutral-7);
   --eds-background-canvas: var(--eds-neutral-1);
   --eds-background-dialog: var(--eds-neutral-15);
