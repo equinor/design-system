@@ -21,10 +21,11 @@
  *
  * 1. Self-reference — `--eds-x: var(--eds-x)`. Resolves to nothing; the
  *    shape the beta focus-ring bug actually took.
- * 2. Shadowed inside one block — the same name declared twice under the
- *    same selector. This is the flattening collision when both tokens
- *    come from the same export set: one value silently wins and rule 3
- *    sees nothing, because both live in the same layer directory.
+ * 2. Shadowed inside one scope — the same name declared twice under the
+ *    same selector in the same layer directory, whether in one file or
+ *    across two. This is the flattening collision when both tokens come
+ *    from the same export set: one value silently wins and rule 3 sees
+ *    nothing, because both live in the same layer directory.
  * 3. Declared in more than one layer directory — e.g. `semantic/` and
  *    `color-scheme/`. Repeats *within* a directory are expected and
  *    ignored (light/dark, the three density modes): those are the same
@@ -57,11 +58,17 @@ const BUNDLE_FILE = join(CSS_DIR, 'variables.css')
 
 /**
  * Names declared by both the legacy 2.x bundle and the new export, as
- * measured on `main` 2026-09-07 (#5407). None of them is referenced by
- * a `/next` component yet, so nothing is visibly broken today, but a
- * mixed app resolves all of them to one bundle's value silently. The
- * header sizes differ slightly between the two (3xl: 27.5px legacy vs
- * 28px new; 4xl: 31.5px vs 32px).
+ * measured on `main` 2026-09-07 (#5407). A mixed app resolves all of
+ * them to one bundle's value silently.
+ *
+ * Nothing is visibly broken today, for two different reasons. The
+ * header sizes have no `/next` consumer at all (and differ slightly
+ * between the two anyway — 3xl: 27.5px legacy vs 28px new; 4xl: 31.5px
+ * vs 32px). `--eds-elevation-low` does have one — Dialog's
+ * `box-shadow` (`next/Dialog/dialog.css`) — but both bundles resolve it
+ * to the same two-layer geometry at the same alphas (the legacy hex
+ * quantises the 0.12 ambient to 0.1216), so whichever wins looks
+ * identical.
  *
  * The list may shrink, never grow. A cleared entry is reported as a
  * warning rather than a failure on purpose: a release must not be
@@ -98,15 +105,28 @@ if (files.length === 0) fail(`no CSS files found under ${CSS_DIR}`)
 const violations = []
 /** name -> Map<layer directory, first `file:line` seen in it> */
 const byLayer = new Map()
+/**
+ * name -> scope (layer directory + selector) -> first `file:line` in it,
+ * to catch rule 2.
+ *
+ * Keyed per scope rather than holding only the last declaration: with
+ * one entry per name, `:root { --eds-a } .x { --eds-a } :root
+ * { --eds-a }` compares the third against `.x` and misses the
+ * shadowing.
+ *
+ * Spans files instead of resetting per file, because two files in the
+ * same layer directory under the same selector shadow each other
+ * exactly like two blocks in one file — and rule 3 cannot see it, since
+ * repeats within a directory are expected there. No two files in a
+ * directory share a selector in today's export (light/dark and the
+ * three density modes all differ), but widen-semantic-scope.mjs expects
+ * the export to add files to `semantic/` later.
+ */
+const seenInScope = new Map()
 
 for (const file of files) {
   const layer = relative(CSS_DIR, file).split(sep)[0]
   const declarations = parseDeclarations(await readFile(file, 'utf8'))
-  /** name -> block -> line it was first declared on, to catch rule 2.
-   * Keyed per block rather than holding only the last one: with one
-   * entry per name, `:root { --eds-a } .x { --eds-a } :root { --eds-a }`
-   * compares the third against `.x` and misses the shadowing. */
-  const seenInBlock = new Map()
 
   for (const { name, value, block, line } of declarations) {
     if (selfReferences(name, value))
@@ -114,14 +134,17 @@ for (const file of files) {
         `self-reference: ${file}:${line} declares ${name}: ${value} — resolves to nothing`,
       )
 
-    if (!seenInBlock.has(name)) seenInBlock.set(name, new Map())
-    const blocks = seenInBlock.get(name)
-    const previous = blocks.get(block)
+    // \u0000 cannot occur in a path or a selector, so it cannot make two
+    // different scopes collide into one key
+    const scope = `${layer}\u0000${block}`
+    if (!seenInScope.has(name)) seenInScope.set(name, new Map())
+    const scopes = seenInScope.get(name)
+    const previous = scopes.get(scope)
     if (previous !== undefined)
       violations.push(
-        `shadowed declaration: ${file}:${line} redeclares ${name} inside "${block}" (first at line ${previous}) — one value wins silently`,
+        `shadowed declaration: ${file}:${line} redeclares ${name} inside "${block}" (first at ${previous}) — one value wins silently`,
       )
-    else blocks.set(block, line)
+    else scopes.set(scope, `${file}:${line}`)
 
     if (!byLayer.has(name)) byLayer.set(name, new Map())
     const layers = byLayer.get(name)

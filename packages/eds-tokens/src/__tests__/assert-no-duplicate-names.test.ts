@@ -143,7 +143,7 @@ describe('assert-no-duplicate-names', () => {
     })
   })
 
-  describe('shadowed declaration inside one block', () => {
+  describe('shadowed declaration inside one scope', () => {
     // Both halves of a flattening collision landing in the same export
     // set: the layer-directory rule cannot see this one
     const result = run({
@@ -160,7 +160,27 @@ describe('assert-no-duplicate-names', () => {
     it('reports both lines', () => {
       expect(result.stderr).toContain('shadowed declaration')
       expect(result.stderr).toMatch(/semantic\/default\.css:3/)
-      expect(result.stderr).toContain('first at line 2')
+      expect(result.stderr).toContain('first at')
+      expect(result.stderr).toMatch(/semantic\/default\.css:2/)
+    })
+
+    it('fires across two files in one layer directory', () => {
+      // The export may add files to semantic/ later, and two of them
+      // under the same selector shadow each other exactly like two
+      // blocks in one file — with rule 3 blind to it, since repeats
+      // within a directory are expected there
+      const result = run({
+        'semantic/default.css': `:root {
+  --eds-border-focus: #0000ff;
+}`,
+        'semantic/typography.css': `:root {
+  --eds-border-focus: #ff0000;
+}`,
+      })
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain('shadowed declaration')
+      expect(result.stderr).toMatch(/semantic\/typography\.css:2/)
+      expect(result.stderr).toMatch(/semantic\/default\.css:2/)
     })
 
     it('does not fire for the same name in two blocks of one file', () => {
@@ -170,6 +190,20 @@ describe('assert-no-duplicate-names', () => {
 }
 [data-density='relaxed'] {
   --eds-space-md: 8px;
+}`,
+      })
+      expect(result.status).toBe(0)
+    })
+
+    it('does not fire for two files in one directory with different selectors', () => {
+      // The shape the real export has: light/dark and the three density
+      // modes repeat names under distinct selectors
+      const result = run({
+        'color-scheme/light.css': `[data-color-scheme='light'] {
+  --eds-bg-default: #ffffff;
+}`,
+        'color-scheme/dark.css': `[data-color-scheme='dark'] {
+  --eds-bg-default: #000000;
 }`,
       })
       expect(result.status).toBe(0)
