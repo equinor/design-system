@@ -193,8 +193,10 @@ If the finding needs real work, open a dedicated issue and link it next to the c
     - Test file: `YourComponent.test.tsx` — write it alongside the component, not as a follow-up. See `Divider.test.tsx` for the minimal shape: render via `test-utils` (wraps `@testing-library/react-native` with `EDSProvider`) and assert it renders plus any accessibility basics.
 3. Export from `src/index.ts`
 4. Add a storybook screen in `../../apps/mobile-storybook/app/(tabs)/components/yourcomponent.tsx`
-   (lowercase filename — Expo Router derives the route from it), then register it in that
-   directory's `_layout.tsx` and `index.tsx`
+   (the lowercased component folder name, because Expo Router derives the route from it), then
+   add one entry to `componentRegistry` in `../../apps/mobile-storybook/lib/registry.ts`. The
+   list and the header title are built from that entry. CI runs `pnpm run check-screens:mobile`
+   and fails if an exported component has no screen or registry entry.
 5. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
 6. Follow existing patterns for prop naming and component structure
 
