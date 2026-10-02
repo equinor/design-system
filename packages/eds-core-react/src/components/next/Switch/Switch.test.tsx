@@ -59,6 +59,9 @@ describe('Switch (next)', () => {
   })
 
   describe('Accessibility', () => {
+    // The empty string is deliberate invalid input: it is what distinguishes
+    // the component's `||` fallback from `??`, which would let it through and
+    // render a non-conforming id="" on the input.
     it('falls back to a generated id when id is an empty string', () => {
       render(<Switch label="switch-test" id="" />)
       const input = screen.getByRole('switch', { name: 'switch-test' })
