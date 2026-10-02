@@ -8,7 +8,13 @@
   --eds-density-spacing-2xs: var(--eds-primitives-spacing-37);
   --eds-density-spacing-3xl: var(--eds-primitives-spacing-200);
   --eds-density-spacing-3xs: var(--eds-primitives-spacing-25);
+  --eds-density-spacing-4xl: var(--eds-primitives-spacing-250);
   --eds-density-spacing-4xs: var(--eds-primitives-spacing-12);
+  --eds-density-spacing-5xl: var(--eds-primitives-spacing-300);
+  --eds-density-spacing-6xl: var(--eds-primitives-spacing-400);
+  --eds-density-spacing-7xl: var(--eds-primitives-spacing-500);
+  --eds-density-spacing-8xl: var(--eds-primitives-spacing-600);
+  --eds-density-spacing-9xl: var(--eds-primitives-spacing-800);
   --eds-density-spacing-lg: var(--eds-primitives-spacing-125);
   --eds-density-spacing-md: var(--eds-primitives-spacing-100);
   --eds-density-spacing-none: var(--eds-primitives-spacing-0);
