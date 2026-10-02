@@ -1,0 +1,257 @@
+---
+title: Spacing
+hide_title: true
+sidebar_label: Overview
+description: Spacing in EDS consists of seventeen named steps. You apply them straight to padding, gap and margin, and the value you get follows the density the element sits in.
+---
+
+import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
+
+These pages document the **3.0.0-beta** spacing tokens. If you are on EDS 1.x or on 2.0.0-beta,
+the token names have changed, and coming from 2.0.0-beta the density names have shifted as well,
+so please start with [coming from an earlier version](#coming-from-an-earlier-version).
+
+Here is a card, with its whole geometry described by three tokens:
+
+<TokenAnatomy
+  mode="spacing"
+  caption="Comfortable density. Every value on this diagram is read back from the browser, so it follows the density it is rendered in."
+  bindings={{
+    paddingBlock: { token: 'spacing.md', label: 'padding, block axis' },
+    paddingInline: { token: 'spacing.md', label: 'padding, inline axis' },
+    gap: { token: 'spacing.sm', label: 'between children' },
+    borderRadius: { token: 'corner-radius.rounded', label: 'corners' },
+  }}
+  style={{
+    background: 'var(--eds-background-surface)',
+    border: '1px solid var(--eds-border-non-interactive-neutral-default)',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  }}
+  maxWidth={260}
+>
+  <strong>Card title</strong>
+  <span>Body text</span>
+</TokenAnatomy>
+
+```css
+.card {
+  padding: var(--eds-spacing-md);
+  gap: var(--eds-spacing-sm);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+```
+
+## The spacing steps
+
+The steps up to `xl` are for components, and the eight from `2xl` up are for page layout.
+
+We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
+
+{/* GEN:spacing-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Step           | Comfortable | Use it when                                                                      |
+| -------------- | ----------- | -------------------------------------------------------------------------------- |
+| `spacing.none` | 0px         | removing space on purpose. Better than `0`, because it survives a density change |
+| `spacing.4xs`  | 2px         | hairline separation, and nudging an icon off its text                            |
+| `spacing.3xs`  | 4px         | padding inside dense controls: chips, badges, tags                               |
+| `spacing.2xs`  | 6px         | tight control padding                                                            |
+| `spacing.xs`   | 8px         | the default gap between a control's own parts, such as an icon and its label     |
+| `spacing.sm`   | 12px        | the default gap between related items in a group                                 |
+| `spacing.md`   | 16px        | **the default container padding. Start here**                                    |
+| `spacing.lg`   | 20px        | separating groups inside a container                                             |
+| `spacing.xl`   | 24px        | separating sections inside a container, such as a card or dialog                 |
+| `spacing.2xl`  | 28px        | page-level rhythm, in layouts rather than components                             |
+| `spacing.3xl`  | 32px        | page-level rhythm, wider than a component has a use for                          |
+| `spacing.4xl`  | 40px        | layout: the gap between blocks inside one region of a page                       |
+| `spacing.5xl`  | 48px        | layout: the gap between major regions of a page                                  |
+| `spacing.6xl`  | 64px        | layout: card gutters, and the space between grouped blocks                       |
+| `spacing.7xl`  | 80px        | layout: the gap between one section of a page and the next                       |
+| `spacing.8xl`  | 96px        | layout: separating whole sections of a long page                                 |
+| `spacing.9xl`  | 128px       | layout: the widest step, for full-page composition                               |
+
+{/* GEN:spacing-steps END */}
+
+Every value in the table is Comfortable, our default density. The steps move together when the
+density changes and the names stay put, so you can pick a name once and trust it to behave.
+[The scale](./spacing-scale.mdx) lists every value.
+
+## Choosing a step
+
+Two questions, in this order. The second one is what keeps a layout consistent from page to page,
+so it is worth answering even when the first feels obvious.
+
+### 1. Is this inside one control, between components, or page layout?
+
+- **Inside one control**: `4xs` through `xs`. The gaps between a control's own parts, such as an
+  icon and its label, or a checkbox and its text.
+- **Between components**: `sm` through `xl`. The gaps in a list, between the fields of a form, or
+  between groups and sections inside a container.
+- **Page layout**: `2xl` and up. Gutters, and the space between the regions and sections of a page.
+
+Padding does not follow these bands, because it depends on the component: a chip uses `3xs`, a
+button `xs` and `md`, a card `md`. The [decision table](./spacing-usage.mdx#decision-table) has a
+row for each.
+
+### 2. How closely related are the two things?
+
+Space is our main signal of grouping, so let distance track relatedness:
+
+| Relationship                                            | Step  |
+| ------------------------------------------------------- | ----- |
+| two parts of one control, such as an icon and its label | `xs`  |
+| two labels in the same field                            | `xs`  |
+| two fields in the same fieldset                         | `sm`  |
+| two fieldsets in the same form                          | `lg`  |
+| two sections in the same card or dialog                 | `xl`  |
+| two sections on a page                                  | `7xl` |
+
+Choosing by relationship, rather than by how the gap looks on the screen in front of you, is what
+keeps two sections the same distance apart on every page in a product. It also makes a design
+easier to hand over, because the next person can read the intent in the token name.
+
+[Using spacing](./spacing-usage.mdx) has worked examples, a per-case decision table, and the
+mistakes that tend to survive review.
+
+## Corner radius travels with spacing
+
+Corner radius sits in the same density collection as spacing, so a compact component gets tighter
+corners without anyone having to ask for it.
+
+{/* GEN:radius-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Token                         | Comfortable | Use for                                                                                               |
+| ----------------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
+| `corner-radius.none`          | 0px         | full-bleed edges and table cells                                                                      |
+| `corner-radius.rounded`       | 4px         | the default: buttons, inputs, chips                                                                   |
+| `corner-radius.rounded-outer` | 5px         | nothing, in code. It exists so Figma can draw the focus ring, which CSS derives from `outline-offset` |
+| `corner-radius.pill`          | 9999px      | fully round ends: pills, avatars, toggles                                                             |
+
+{/* GEN:radius-steps END */}
+
+`pill` is a sentinel rather than a measurement. It is large enough that the browser clamps it to
+half the element's height, which is what "fully round" means at any size.
+
+:::warning `rounded-outer` is not a token to use
+It exists for one reason. Figma has no equivalent of `outline-offset`, so a focus ring drawn in
+Figma needs an explicit radius one step larger than the element it surrounds. `rounded-outer`
+supplies that number, and the Figma components use it for exactly that.
+
+In code you do not need it. A focus ring is an `outline` with an `outline-offset`, and the browser
+derives the ring's curve from the element's own `border-radius` plus the offset. A 4px corner with
+a 1px offset already gives the ring a 5px inner edge, which is the same number `rounded-outer`
+holds.
+
+```css
+.button:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 1px;
+  /* no radius needed: the outline follows border-radius and the offset widens it */
+}
+```
+
+The widths above are literals because the redefined set has no stroke-width token.
+`border.interactive.focus` carries the colour and nothing yet carries the thickness, so that is a
+good one to raise with us if your work depends on it.
+
+No EDS component binds `--eds-corner-radius-rounded-outer`, and we have not found a case that needs
+it. If you want it for nested containers, set the radius you mean on each element instead.
+:::
+
+## Density
+
+One attribute resizes the interface. It moves spacing, corner radius and type size together, by one
+position each, so the proportions you designed hold:
+
+```html
+<div data-density="compact">…</div>
+```
+
+| Density         | Attribute                     | Use it for                                                                              |
+| --------------- | ----------------------------- | --------------------------------------------------------------------------------------- |
+| **Compact**     | `data-density="compact"`      | dense data: tables, monitoring, dashboards, anywhere more rows on screen beats more air |
+| **Comfortable** | _(none, this is the default)_ | ordinary application UI. If you are unsure, this is the answer                          |
+| **Relaxed**     | `data-density="relaxed"`      | touch and mobile, and reading-heavy pages where targets need to be larger               |
+
+Comfortable is emitted at `:root` rather than behind a selector, so setting nothing gives you
+Comfortable. Writing `data-density="comfortable"` gives the same result.
+
+:::warning Two density names shifted after 2.0.0-beta
+In 2.0.0-beta the default density was `spacious`, and `comfortable` was the denser option. Each
+set of values now goes by a different name:
+
+- **`spacious` is now Comfortable.** `data-density="spacious"` fails silently and gives you
+  Comfortable, which has the spacing values `spacious` had. You can delete the attribute.
+- **`comfortable` is now Compact.** `data-density="comfortable"` is still valid, so nothing warns
+  you, but it now gives the larger values that `spacious` used to. Replace it with
+  `data-density="compact"`.
+
+Relaxed has no 2.0.0-beta counterpart: every step above `none` is larger than it was in
+`spacious`. Both attributes are worth a search through your codebase, and
+[the 2.0.0-beta table](#from-200-beta) lists the two values that differ in Compact.
+:::
+
+Density is not a multiplier, and not a `transform: scale()`.
+[How density works](./spacing-scale.mdx#how-density-works) covers what it does instead, and why
+Compact is not Comfortable × 0.75.
+
+## Coming from an earlier version
+
+Both earlier generations used a different set of names:
+
+- **EDS 1.x** had t-shirt spacers from `xx_small` at 2px to `xxx_large` at 48px, with the two
+  smallest kept for component interiors.
+- **2.0.0-beta** split spacing by direction and by component role, with families such as
+  `generic-space-*`, `generic-gap-*` and `selectable-space-*`.
+
+Direction is a CSS property now rather than part of the token name, so `Space vertical` and
+`Space horizontal` both become one step applied to the property you mean. Component-specific
+spacing is gone for the same reason colour lost its component tokens: a card and a table row that
+happen to share a value should not have to share a name.
+
+### From EDS 1.x
+
+Re-pick each spacer with the two questions in [choosing a step](#choosing-a-step) instead of
+looking for its old value on the new scale. The questions ask how two things relate, so they give
+the same answer on every page, whatever the old layout used.
+
+### From 2.0.0-beta
+
+Every 2.0.0-beta spacing token except the icon gaps resolves to a value one of the current steps
+has, when you compare each version at its default density: `spacious` then, Comfortable now. The
+steps `none` and `4xs` to `3xl` also keep their names. Following the table below keeps a layout
+looking as it does today.
+
+In the table, `{step}` stands for `none` or `4xs` to `3xl`, and `{size}` for `xs` to `xl`.
+
+| 2.0.0-beta                                                                                                              | 3.0.0-beta                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `--eds-spacing-horizontal-{step}`, `--eds-spacing-vertical-{step}`                                                      | `--eds-spacing-{step}`                                                                                               |
+| `--eds-generic-space-*`, set by `data-horizontal-space` or `data-vertical-space`                                        | `--eds-spacing-{step}` on `padding`, using the step the attribute named, or `xs` where none was set                  |
+| `--eds-generic-gap-*`, set by `data-horizontal-gap` or `data-vertical-gap`                                              | `--eds-spacing-{step}` on `gap`, using the step the attribute named, or `xs` where none was set                      |
+| `--eds-selectable-space-horizontal`, set by `data-selectable-space`                                                     | `--eds-spacing-{size}`, using the size the attribute named, or `xs` where none was set                               |
+| `--eds-spacing-inset-{size}-horizontal`, `--eds-spacing-proportions-{size}-horizontal`                                  | `--eds-spacing-{size}`                                                                                               |
+| `--eds-selectable-space-vertical`, `--eds-spacing-inset-{size}-vertical-*`, `--eds-spacing-proportions-{size}-vertical` | `--eds-spacing-{size}` when squared, one step down when squished, one step up when stretched                         |
+| `--eds-container-space-*`, `--eds-container-gap-*`                                                                      | `--eds-spacing-md`                                                                                                   |
+| `--eds-page-space-*`, `--eds-page-gap-*`                                                                                | `--eds-spacing-xl`                                                                                                   |
+| `--eds-selectable-gap-*`                                                                                                | `--eds-spacing-xs`                                                                                                   |
+| `--eds-spacing-icon-{size}-gap-*`                                                                                       | `--eds-spacing-xs`. No current token grows with the icon the way these did, from 6.5px at `xs` to 23px at `6xl`      |
+| `--eds-spacing-border-radius-{none,rounded,pill}`                                                                       | `--eds-corner-radius-{none,rounded,pill}`                                                                            |
+| `data-density="spacious"`, or no attribute                                                                              | no attribute, which gives Comfortable                                                                                |
+| `data-density="comfortable"`                                                                                            | `data-density="compact"`. The values match except `spacing.sm`, 8px to 10px, and `corner-radius.rounded`, 3px to 2px |
+
+`data-space-proportions` set the vertical padding against the horizontal. `squared`, the default,
+used the same step on both axes. `squished` took the vertical one step down, so an `md` horizontal
+sat over an `sm` vertical, and `stretched` took it one step up, to `lg`. Under `squished` and
+`stretched` the vertical side of `container-space` and `page-space` moves the same way.
+
+A role token such as `container-gap` put the same step between any two children of a container,
+whatever they were. So once a layout is on the new names, check its gaps against the two questions
+as well.
+
+## Where to go next
+
+- [The scale](./spacing-scale.mdx): the primitive scale under the names and how density maps onto it.
+- [Using spacing](./spacing-usage.mdx): worked examples, what our components use today, and the
+  mistakes to avoid.
+- [Token reference](./spacing-reference.mdx): every token and every value, in all three densities.
