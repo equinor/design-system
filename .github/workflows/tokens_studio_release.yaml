@@ -119,6 +119,10 @@ jobs:
       # log-errors-to-slack step below fires, and the offending names
       # are listed in the Actions log — which is the only diagnostic
       # surface this workflow has, since the PR it creates gets no CI.
+      # generate:css-bundle chains the same check, so a local pipeline
+      # run gets the same guard. Keeping the step anyway: it is the name
+      # that appears in the Slack failure payload, where "Widen semantic
+      # scope and bundle CSS" would not say what actually went wrong.
       - name: Check for colliding custom-property names
         run: pnpm --filter @equinor/eds-tokens run check:css:names
       - name: Create Pull Request
@@ -132,7 +136,7 @@ jobs:
           # "Added" in the changelog, which is what a token update is.
           commit-message: 'feat: update tokens from Tokens Studio release'
           title: 'feat: update tokens from Tokens Studio release'
-          body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`), generated CSS (EDS-CSS export) into `packages/eds-tokens/src/tokens/css/`, DTCG (EDS-DTCG export) into `src/tokens/dtcg/`, TypeScript modules generated from the two into `src/tokens/ts/`, and the bundled `src/tokens/css/variables.css` (concatenation of the CSS export, per ADR-0010). The `semantic/*.css` files are widened to `:root, [data-color-scheme], [data-density]` and `density/comfortable.css` to `:root, [data-density="comfortable"]` by `scripts/widen-semantic-scope.mjs` before bundling (#5226, #5247), so those selector diffs against the raw export are expected.'
+          body: 'Automated pull of the token state after a Tokens Studio release: raw token sets via `studio tokens pull` (sources in `packages/eds-tokens/.studio.json`), generated CSS (EDS-CSS export) into `packages/eds-tokens/src/tokens/css/`, DTCG (EDS-DTCG export) into `src/tokens/dtcg/`, TypeScript modules generated from the two into `src/tokens/ts/`, and the bundled `src/tokens/css/variables.css` (concatenation of the CSS export, per ADR-0010). The `semantic/*.css` files are widened to `:root, [data-color-scheme], [data-density]` and `density/comfortable.css` to `:root, [data-density="comfortable"]` by `scripts/widen-semantic-scope.mjs` before bundling (#5226, #5247), so those selector diffs against the raw export are expected. `scripts/assert-no-duplicate-names.mjs` passed on this export before the PR was opened (#5407): no `--eds-*` name is self-referential, shadowed inside one scope, declared in two layer directories, or newly shared with the legacy bundle.'
           branch: tokens-studio-release
       # This workflow runs unattended (release-triggered) and the PR it
       # creates gets no CI runs, so a failed pull must not be silent
