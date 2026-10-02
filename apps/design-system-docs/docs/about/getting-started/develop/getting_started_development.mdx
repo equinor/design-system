@@ -30,7 +30,7 @@ pnpm add @equinor/eds-core-react styled-components
 `styled-components@6` is a peer dependency of `eds-core-react`.
 
 :::note
-"EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are not the same — see [Versioning](#versioning) for the relationship.
+"EDS 2.0" is the design system name; `eds-core-react` is the package version (semver). They are not the same. See [Versioning](#versioning) for the relationship.
 :::
 
 ### Load fonts
@@ -42,7 +42,7 @@ Add the EDS variable font stylesheet to your HTML `<head>`:
 ```
 
 :::tip
-This stylesheet loads both **Equinor** and **Inter**. If you use EDS 2.0 (`next`) components, it is required — the older `equinor-font.css` only includes Equinor and will cause fallback fonts. See [Typography](../../../foundation/design-tokens/typography.md) for details.
+This stylesheet loads both **Equinor** and **Inter**. If you use EDS 2.0 (`next`) components, it is required, because the older `equinor-font.css` only includes Equinor and will cause fallback fonts. See [Typography](../../../foundation/design-tokens/typography.md) for details.
 :::
 
 </DocsSection>
@@ -94,12 +94,18 @@ Beta here means safe to adopt alongside EDS 1.0, not "wait and see": EDS 1.0 sta
 
 ### Versioning
 
-"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package, published on the `beta` dist-tag rather than in the default `latest` install. The package itself is on version `2.x` today, so an installed `eds-core-react@2.x` matching "EDS 2.0" is also a coincidence.
+"EDS 2.0" is the name of the next generation of the design system. Its components currently live in beta under the `/next` entry point of the `eds-core-react` package. The default `latest` install is on version `2.x`, so an installed `eds-core-react@2.x` matching "EDS 2.0" is a coincidence. The beta that contains `/next` is published as `3.0.0-beta.N` on the `beta` dist-tag.
 
-When EDS 2.0 stabilises, the components move out of `/next` and EDS 1 is deprecated. Because removing EDS 1 is a breaking change, the package bumps to `eds-core-react@3.0.0`.
+Because removing EDS 1 is a breaking change, EDS 2.0 becomes stable in `eds-core-react@3.0.0`, in three steps:
+
+1. **Beta** (`3.0.0-beta.N`, today): the components live under `/next`. Small breaking changes can still happen, and each one is listed in the changelog.
+2. **Release candidate** (`3.0.0-rc.N`): the components move out of `/next` and the EDS 1 components are removed. The API is frozen and only fixes land, so this is the time to test EDS 2.0 in your application. Release candidates are published on the `rc` dist-tag.
+3. **Stable** (`3.0.0`): the last release candidate is released as stable.
+
+`@equinor/eds-tokens` goes through the same steps at the same time.
 
 :::info
-The numbers line up by coincidence: "2.0" is the design system name, and "3.0.0" is the semver consequence of removing EDS 1. There is no "EDS 3.0" — the package version and the design system name are separate things.
+The numbers line up by coincidence: "2.0" is the design system name, and "3.0.0" is the semver consequence of removing EDS 1. There is no "EDS 3.0". The package version and the design system name are separate things.
 :::
 
 </DocsSection>
@@ -132,11 +138,11 @@ The token structure is being replaced. The CSS variables are the supported optio
 
 <DocsSection title="Troubleshooting">
 
-**Missing fonts** — If components render in a generic sans-serif, check that the `eds-uprights-vf.css` stylesheet is loaded. EDS 2.0 components require Inter, which is only in the variable font stylesheet.
+**Missing fonts**: if components render in a generic sans-serif, check that the `eds-uprights-vf.css` stylesheet is loaded. EDS 2.0 components require Inter, which is only in the variable font stylesheet.
 
-**Peer dependency warnings** — `eds-core-react` expects `react@^18 || ^19`, `react-dom@^18 || ^19`, and `styled-components@^6`. Check versions with `npm ls react styled-components`.
+**Peer dependency warnings**: `eds-core-react` expects `react@^18 || ^19`, `react-dom@^18 || ^19`, and `styled-components@^6`. Check versions with `npm ls react styled-components`.
 
-**TypeScript version** — EDS requires <Prerequisites />. If you see type errors, check your `tsconfig.json` targets a compatible version.
+**TypeScript version**: EDS requires <Prerequisites />. If you see type errors, check your `tsconfig.json` targets a compatible version.
 
 </DocsSection>
 
