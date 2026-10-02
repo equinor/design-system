@@ -4,11 +4,11 @@ hide_title: true
 description: "Product icons represent key themes and business areas with Equinor's visual identity. They help users identify and navigate between different products and services whilst maintaining consistent brand recognition."
 ---
 
-## When to Use Product Icons
+## When to use product icons
 
 Use product icons in app launchers, splash screens, and product identification contexts. Always pair them with the product name they represent to ensure clear communication and brand consistency.
 
-## Technical Specifications
+## Technical specifications
 
 - **Grid system**: Built on a 48x48px grid for consistency
 - **Scaling**: Can scale up but not down from the base grid
@@ -16,7 +16,7 @@ Use product icons in app launchers, splash screens, and product identification c
 - **Stroke weight**: Consistent 1px throughout all elements
 - **Corners**: 1px rounded corners to reflect brand identity
 
-## Usage Guidelines
+## Usage guidelines
 
 :::info **Do**
 
@@ -38,7 +38,7 @@ Use product icons in app launchers, splash screens, and product identification c
 Optical corrections are not allowed in product icons.
 :::
 
-## Using Product Icons in Figma
+## Using product icons in Figma
 
 1. Open the **Assets** tab in the Layers Panel
 2. Search for specific icons using the search bar or browse through organised folders
@@ -56,17 +56,17 @@ Placeholder product icon
 
 ![mobility icons](mobility.jpeg)
 
-## Contributing New Product Icons
+## Contributing new product icons
 
 Missing a product icon for your project? You can contribute new icons following our brand guidelines.
 
-### Before You Start
+### Before you start
 
 - Search thoroughly using all relevant keywords to ensure the icon doesn't already exist
 - Consider reusing existing icons when appropriate
 - Ensure your icon will be universally understandable across languages and cultures
 
-### Design Requirements
+### Design requirements
 
 **Visual Style**
 
@@ -83,7 +83,7 @@ Missing a product icon for your project? You can contribute new icons following 
 - No hands holding objects or overly complex details
 - Maintain bold, geometric, and symmetrical designs
 
-### Creating Your Icon
+### Creating your icon
 
 1. **Set up your workspace**
    - Create a 48x48px artboard
@@ -101,10 +101,10 @@ Missing a product icon for your project? You can contribute new icons following 
    - Name all layers logically
    - Use descriptive, searchable names for your icon
 
-### Submitting Your Icon
+### Submitting your icon
 
 When your icon is ready:
 
 - Choose an appropriate category from existing library categories
 - Provide alternative names people might search for
-- Contact the EDS core team designers for guidance and submission
+- Contact the EDS core team in the #eds-design-system Slack channel, or through the [support page](/docs/Next/support), for guidance and submission
