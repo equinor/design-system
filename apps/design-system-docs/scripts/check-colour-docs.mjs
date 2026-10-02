@@ -119,6 +119,8 @@ for (const name of pendingNames()) {
 
 const problems = []
 const isPrefix = (name) => [...canon].some((c) => c.startsWith(name + '.'))
+const isCssPrefix = (prefix) =>
+  [...cssCanon, ...declared].some((c) => c.startsWith(prefix))
 
 // --- 1 and 2: names in prose -------------------------------------------------------------------
 
@@ -157,6 +159,10 @@ for (const file of PROSE) {
 
   for (const m of src.matchAll(/--eds-[a-z0-9-]+/g)) {
     if (cssCanon.has(m[0]) || declared.has(m[0])) continue
+    // A family written as a template, such as `--eds-spacing-{step}` or `--eds-page-gap-*`, is
+    // matched up to the placeholder. It passes when a shipped or legacy name starts with it.
+    const next = src[m.index + m[0].length]
+    if ((next === '{' || next === '*') && isCssPrefix(m[0])) continue
     problems.push({
       file,
       line: src.slice(0, m.index).split('\n').length,

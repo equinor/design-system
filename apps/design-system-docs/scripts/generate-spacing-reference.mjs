@@ -193,8 +193,7 @@ for (const step of STEPS) {
 
 // A pending step that has arrived in the package is checked against what this file claimed its
 // value would be, and then has to be taken off the pending list. Without this, a wrong index
-// would publish as a correct-looking value, and a shipped step would keep rendering the
-// "not in the package yet" note forever.
+// would publish as a correct-looking value, and the pending list would outlive the release.
 for (const [step, densities] of Object.entries(PENDING_STEPS)) {
   const name = `spacing.${step}`
   if (!named.has(name)) continue
@@ -210,7 +209,7 @@ for (const [step, densities] of Object.entries(PENDING_STEPS)) {
   }
   problems.push(
     `${name} is in the package now: remove it from scripts/pending-spacing-steps.mjs, ` +
-      `drop the pending note from the pages, and delete the file once it is empty`,
+      `and delete the file once it is empty`,
   )
 }
 for (const name of named.keys()) {

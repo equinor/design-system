@@ -19,6 +19,9 @@
  * Both `generate-spacing-reference.mjs` and `check-colour-docs.mjs` read this file, so the pages
  * and the name checker cannot disagree about which steps are allowed to be absent from source.
  *
+ * The pages list these steps like every other step, with no marker. The eds-tokens release the
+ * pages document has not been published, and it will carry them.
+ *
  * TO REMOVE: once the release merges, delete this file and its two imports. The generator
  * verifies each step against the source as soon as it appears there and tells you to do this, so
  * a stale entry cannot sit here silently claiming a shipped token is still pending.
@@ -40,12 +43,6 @@ export const PENDING_STEPS = {
   '8xl': { compact: 550, comfortable: 600, relaxed: 700 },
   '9xl': { compact: 700, comfortable: 800, relaxed: 900 },
 }
-
-/** Where they already exist, for the note the pages render. */
-export const PENDING_SOURCE = 'Tokens Studio, awaiting merge'
-
-/** The issue tracking the release that brings them into the package. */
-export const PENDING_ISSUE = 5487
 
 /** Dotted names, e.g. `spacing.4xl`. */
 export const pendingNames = () =>
