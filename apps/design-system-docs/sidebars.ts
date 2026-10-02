@@ -104,7 +104,6 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'foundation/design-tokens/elevation',
-        'foundation/design-tokens/shape',
         {
           type: 'category',
           label: 'Spacing',
