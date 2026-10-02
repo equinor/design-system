@@ -126,9 +126,13 @@ Unlike core-react, `eds-tokens` has **no stable/beta split** — the entire pack
 
 ### Exclude Paths
 
-All packages use `exclude-paths` to prevent non-publishable files from triggering version bumps. This includes config files, test files, Storybook, documentation, and build tooling.
+Packages use `exclude-paths` to keep non-publishable directories (tests, Storybook, stories, token sources, scripts) from triggering version bumps.
 
 **Paths are resolved relative to the repository root**, not to the package directory, and matched as directory prefixes (release-please checks that a file path starts with `<exclude-path>/`). Always write the full path including the package prefix — e.g. `packages/eds-core-react/src/components/next`, **not** `src/components/next`. A package-relative entry silently matches nothing, which previously let `/next`-only commits leak into the stable `eds-core-react` release.
+
+**Only directories can be excluded.** Because of the trailing `/` in that check, an entry naming a single file (e.g. `packages/eds-core-react/README.md`) never matches anything. Files at a package root — `package.json`, `README.md`, `tsconfig*.json`, `rollup.config.js`, `jest.config.*` and so on — therefore always count towards that package's release. Edits to them belong in their own commit with a hidden type (`chore`, `build`, `docs`, `test`), never in a `fix:`/`feat:` commit. Files outside the package directory (e.g. the docs app) are ignored for that package. A config file that `/next` work touches often and that can live elsewhere should move into an excluded directory — that is why the Playwright config lives in `packages/eds-core-react/tests/visual/`. It used to sit at the package root, where a `fix:` for Tooltip (next) that edited it (#5479) leaked a spurious `eds-core-react` 2.6.4 into release PRs #5519 and #5559.
+
+To drop an already-merged commit from a release, add a `BEGIN_COMMIT_OVERRIDE` / `END_COMMIT_OVERRIDE` block to the merged PR's description with a hidden type, then re-run the Release Please workflow. The override applies to every package the commit touches. Editing the release PR by hand only lasts until the next push to `main`.
 
 **Important limitation:** `exclude-paths` only filters file-path-based detection. If a commit has a **scope that matches a package's `component` name** (e.g. `feat(eds-core-react): ...`), it will trigger a release for that package regardless of `exclude-paths`. To avoid this, use non-release-triggering types (`chore`, `build`, `ci`, `test`) for commits that only touch excluded files. See `documentation/how-to/CONVENTIONAL_COMMITS.md` for guidance.
 
