@@ -449,7 +449,7 @@ type: description
 
 **Breaking**: `feat!: remove deprecated prop`
 
-**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
+**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, test and other non-publishable directories are excluded from triggering releases based on file path (directories only — single-file entries never match, so package-root files like `README.md` or `tsconfig.json` always count; keep edits to them in `chore`/`build`/`docs` commits). Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
 
 **When to add a scope:**
 
@@ -494,7 +494,7 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 - `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
 - `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
 
-Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
+Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 
 ## Tool-Specific Configurations
 

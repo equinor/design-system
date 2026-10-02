@@ -239,6 +239,12 @@ describe('Select (next)', () => {
   })
 
   describe('Accessibility', () => {
+    it('applies a provided id verbatim to the select', () => {
+      render(<Select id="my-select" label="Element" options={elements} />)
+      const select = screen.getByRole('combobox', { name: 'Element' })
+      expect(select).toHaveAttribute('id', 'my-select')
+    })
+
     it('associates description and helperMessage via aria-describedby', () => {
       render(
         <Select

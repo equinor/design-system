@@ -33,15 +33,24 @@
  * `generate:css-bundle` package script), and the bundler asserts the
  * widening happened (shared patterns in semantic-scope.mjs).
  *
- * Known caveat, tracked in #5221: three names (`border-focus`,
- * `text-disabled`, `border-disabled`) are declared in both the
- * color-scheme layer and the semantic layer — a token-content bug
- * upstream. On `[data-color-scheme]` elements both blocks now apply at
- * equal specificity; generate-css-bundle.mjs concatenates the
- * color-scheme files last so the scheme-specific values keep winning,
- * as they did before the widening (`--eds-border-focus` is the
- * focus-ring token, and the semantic copy is a self-reference that
- * would drop focus outlines).
+ * Standing caveat of the widening: a name declared in both the
+ * color-scheme layer and the semantic layer now applies from both
+ * blocks at equal specificity on `[data-color-scheme]` elements, so
+ * only source order decides. generate-css-bundle.mjs concatenates the
+ * color-scheme files last for that reason, keeping the scheme-specific
+ * values winning as they did before the widening. No name overlaps
+ * today — `border-focus`, `text-disabled` and `border-disabled` were
+ * cleared by #5280 — and assert-no-duplicate-names.mjs fails the
+ * release if one reappears (#5407). The stake is real: the semantic
+ * copy of `--eds-border-focus` was a self-reference, so the semantic
+ * block winning dropped focus outlines in scoped subtrees.
+ *
+ * Source order is a lever only where both blocks match, and since the
+ * semantic layer also widened to `[data-density]` (#5247) that is no
+ * longer everywhere: an element carrying only `data-density` matches
+ * the semantic block and not the color-scheme one, so concatenating the
+ * scheme files last protects nothing there and the assertion is the
+ * only guard left.
  *
  * Every `semantic/*.css` file is widened, matching the bundler's
  * directory glob — a file the export adds later must not slip through

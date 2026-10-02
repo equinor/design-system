@@ -603,6 +603,14 @@ describe('Autocomplete (next)', () => {
       rules: { 'aria-valid-attr-value': { enabled: false } },
     }
 
+    it('applies a provided id verbatim to the input', () => {
+      render(
+        <Autocomplete label="Fruit" options={options} id="my-autocomplete" />,
+      )
+      const input = screen.getByRole('combobox', { name: 'Fruit' })
+      expect(input).toHaveAttribute('id', 'my-autocomplete')
+    })
+
     it('has no accessibility violations', async () => {
       const { container } = render(
         <Autocomplete label="Fruit" options={options} />,
