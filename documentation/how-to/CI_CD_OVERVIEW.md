@@ -33,7 +33,6 @@ This document provides a high-level overview of all GitHub Actions workflows in 
 | **Sync tokens to Figma** (`sync-tokens-to-figma.yml`)    | Push tokens back to a Figma file                            |
 | **Set up Azure environment** (`setup_azure.yaml`)        | Deploy Azure infrastructure (Bicep)                         |
 | **Purge CDN** (`purge_cdn.yaml`)                         | Manually purge CDN cache                                    |
-| **Playwright tests** (`playwright.yml`)                  | Run E2E tests for Color Palette Generator                   |
 
 ### Reusable (called by other workflows)
 
