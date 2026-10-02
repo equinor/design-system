@@ -45,11 +45,12 @@
  * copy of `--eds-border-focus` was a self-reference, so the semantic
  * block winning dropped focus outlines in scoped subtrees.
  *
- * Source order is a lever only where both blocks match. Once #5568
- * widens the semantic layer to `[data-density]` as well, an element
- * carrying only `data-density` matches the semantic block and not the
- * color-scheme one, so concatenating the scheme files last protects
- * nothing there and the assertion is the only guard left.
+ * Source order is a lever only where both blocks match, and since the
+ * semantic layer also widened to `[data-density]` (#5247) that is no
+ * longer everywhere: an element carrying only `data-density` matches
+ * the semantic block and not the color-scheme one, so concatenating the
+ * scheme files last protects nothing there and the assertion is the
+ * only guard left.
  *
  * Every `semantic/*.css` file is widened, matching the bundler's
  * directory glob — a file the export adds later must not slip through

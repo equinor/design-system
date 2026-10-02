@@ -9,21 +9,22 @@
  * artifact deterministic.
  *
  * One caveat to "concatenation is conflict-free": the semantic layer is
- * widened to `:root, [data-color-scheme], [data-density]` before bundling (see
- * widen-semantic-scope.mjs, chained in the `generate:css-bundle`
- * script), so on `[data-color-scheme]` elements it overlaps the
- * color-scheme layer at equal specificity — and there, source order is
- * the only cascade lever. The color-scheme files are therefore
- * concatenated last (see the sort below). No name is declared in both
- * layers today and assert-no-duplicate-names.mjs fails the release if
- * one appears (#5407), so the ordering guards a class of bug rather
- * than a list of names.
+ * widened to `:root, [data-color-scheme], [data-density]` before
+ * bundling (see widen-semantic-scope.mjs, chained in the
+ * `generate:css-bundle` script), so on `[data-color-scheme]` elements
+ * it overlaps the color-scheme layer at equal specificity — and there,
+ * source order is the only cascade lever. The color-scheme files are
+ * therefore concatenated last (see the sort below). No name is declared
+ * in both layers today and assert-no-duplicate-names.mjs fails the
+ * release if one appears (#5407), so the ordering guards a class of bug
+ * rather than a list of names.
  *
- * The sort reaches `[data-color-scheme]` elements only. Once #5568
- * widens the semantic layer to `[data-density]` too, an element
- * carrying only `data-density` matches the semantic block and not the
- * color-scheme one, leaving the assertion as the sole guard against an
- * overlapping name.
+ * The sort reaches `[data-color-scheme]` elements only, and since
+ * #5247 widened the semantic layer to `[data-density]` as well, that is
+ * no longer everywhere the two can meet: an element carrying only
+ * `data-density` matches the semantic block and not the color-scheme
+ * one, so concatenating the scheme files last protects nothing there
+ * and the assertion is the sole guard against an overlapping name.
  *
  * The bundle is deliberately NOT minified: the committed file stays a
  * pure function of the source files (no toolchain-version churn in

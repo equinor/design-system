@@ -51,6 +51,10 @@ import process from 'node:process'
 
 const args = parseArgs(process.argv.slice(2))
 const CSS_DIR = args.css ?? 'src/tokens/css'
+// The one legacy file that declares custom properties. The package also
+// publishes `tokens.css` and `elements.css`, but those only *consume*
+// `--eds-*` (verified: zero declarations in either), so a name can
+// collide with the new export through this bundle alone.
 const LEGACY_FILE = args.legacy ?? 'build/css/variables.min.css'
 // The bundle is a concatenation of the other files (ADR-0010), so
 // scanning it too would report every name as its own duplicate
