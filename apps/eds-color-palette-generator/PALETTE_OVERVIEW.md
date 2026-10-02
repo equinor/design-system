@@ -1,66 +1,40 @@
-# EDS Color Palette Configuration Overview
+# EDS colour palette configuration overview
 
-_Generated overview of the current palette configuration (step values, contrast requirements, and reference contrast levels)._
+_Generated overview of the palette configuration: step values and roles from Tokens Studio, contrast requirements from ADR 0016, and reference contrast levels._
 
-Generated: 2025-11-24
+Generated: 2026-09-30
 
 ## Step Definitions
 
-| ID | Name | Category | Variant | Light (L) | Dark (L) |
-| --- | ---- | -------- | ------- | --------- | -------- |
-| bg-canvas | Background Canvas | Background | undefined | 0.97 | 0.15 |
-| bg-surface | Background Surface | Background | surface | 1.00 | 0.25 |
-| bg-fill-muted-default | Background Fill Muted Default | Background Fill Muted | default | 0.91 | 0.47 |
-| bg-fill-muted-hover | Background Fill Muted Hover | Background Fill Muted | hover | 0.87 | 0.52 |
-| bg-fill-muted-active | Background Fill Muted Active | Background Fill Muted | active | 0.82 | 0.58 |
-| border-subtle | Border Subtle | Border | subtle | 0.87 | 0.47 |
-| border-medium | Border Medium | Border | medium | 0.75 | 0.61 |
-| border-strong | Border Strong | Border | strong | 0.52 | 0.76 |
-| bg-fill-emphasis-default | Background Fill Emphasis Default | Background Fill Emphasis | default | 0.50 | 0.82 |
-| bg-fill-emphasis-hover | Background Fill Emphasis Hover | Background Fill Emphasis | hover | 0.44 | 0.88 |
-| bg-fill-emphasis-active | Background Fill Emphasis Active | Background Fill Emphasis | active | 0.42 | 0.93 |
-| text-subtle | Text Subtle | Text | subtle | 0.46 | 0.91 |
-| text-strong | Text Strong | Text | strong | 0.23 | 0.99 |
-| text-subtle-on-emphasis | Text Subtle on Emphasis | Text | subtle-on-emphasis | 0.90 | 0.33 |
-| text-strong-on-emphasis | Text Strong on Emphasis | Text | strong-on-emphasis | 1.00 | 0.10 |
+| Step | Label | Main role (Tokens Studio) | Light (L) | Dark (L) |
+| ---- | ----- | ------------------------- | --------- | -------- |
+| 1 | muted | background.interactive.<tone>.muted.default | 0.98 | 0.21 |
+| 2 | muted hover | background.interactive.<tone>.muted.hover | 0.94 | 0.23 |
+| 3 | muted pressed | background.interactive.<tone>.muted.pressed | 0.91 | 0.47 |
+| 4 | border muted | border.non-interactive.<tone>.muted | 0.87 | 0.30 |
+| 5 | selected | background.interactive.accent.selected.default | 0.82 | 0.45 |
+| 6 | unused | (none) | 0.77 | 0.59 |
+| 7 | border | border.non-interactive.<tone>.default | 0.72 | 0.61 |
+| 8 | text secondary | text.secondary | 0.62 | 0.76 |
+| 9 | emphasis | background.interactive.<tone>.emphasis.default | 0.52 | 0.82 |
+| 10 | emphasis hover | background.interactive.<tone>.emphasis.hover | 0.47 | 0.88 |
+| 11 | emphasis pressed | background.interactive.<tone>.emphasis.pressed | 0.42 | 0.93 |
+| 12 | on-muted | text.on-muted.<tone> | 0.37 | 0.96 |
+| 13 | text primary | text.primary | 0.32 | 0.99 |
+| 14 | unused | (none) | 0.90 | 0.33 |
+| 15 | on-emphasis | text.on-emphasis.<tone> | 1.00 | 0.10 |
 
-## Contrast Requirements (Foreground → Background)
+## Contrast requirements (foreground → background)
 
-_APCA LC value shown is the required Lightness Contrast. WCAG column shows level key and numeric ratio._
+_APCA Lc is the required lightness contrast (ADR 0016 Confirmation 5). The WCAG column shows the reference level and ratio._
 
-| Foreground | Background | APCA | WCAG |
-| --------------- | --------------- | ------- | ----------- |
-| bg-fill-muted-default | bg-surface | 15 | AA_LARGE (3) |
-| bg-fill-muted-hover | bg-surface | 15 | AA_LARGE (3) |
-| bg-fill-muted-active | bg-surface | 15 | AA_LARGE (3) |
-| border-subtle | bg-canvas | 15 | AA_LARGE (3) |
-| border-subtle | bg-surface | 15 | AA_LARGE (3) |
-| border-medium | bg-canvas | 30 | AA_LARGE (3) |
-| border-medium | bg-surface | 30 | AA_LARGE (3) |
-| border-medium | bg-fill-muted-default | 15 | AA_LARGE (3) |
-| border-strong | bg-canvas | 30 | AA_LARGE (3) |
-| border-strong | bg-surface | 30 | AA_LARGE (3) |
-| border-strong | bg-fill-muted-default | 30 | AA_LARGE (3) |
-| border-strong | bg-fill-muted-hover | 30 | AA_LARGE (3) |
-| border-strong | border-medium | 15 | AA_LARGE (3) |
-| bg-fill-emphasis-default | bg-canvas | 30 | AA_LARGE (3) |
-| bg-fill-emphasis-default | bg-surface | 30 | AA_LARGE (3) |
-| bg-fill-emphasis-hover | bg-canvas | 30 | AA_LARGE (3) |
-| bg-fill-emphasis-hover | bg-surface | 30 | AA_LARGE (3) |
-| bg-fill-emphasis-active | bg-canvas | 30 | AA_LARGE (3) |
-| bg-fill-emphasis-active | bg-surface | 30 | AA_LARGE (3) |
-| text-subtle | bg-canvas | 60 | AAA_LARGE (4.5) |
-| text-subtle | bg-surface | 60 | AAA_LARGE (4.5) |
-| text-subtle | bg-fill-muted-default | 60 | AAA_LARGE (4.5) |
-| text-strong | bg-canvas | 90 | AAA_NORMAL (7) |
-| text-strong | bg-surface | 90 | AAA_NORMAL (7) |
-| text-strong | bg-fill-muted-default | 60 | AAA_LARGE (4.5) |
-| text-subtle-on-emphasis | bg-fill-emphasis-default | 60 | AAA_LARGE (4.5) |
-| text-subtle-on-emphasis | bg-fill-emphasis-hover | 60 | AAA_LARGE (4.5) |
-| text-subtle-on-emphasis | bg-fill-emphasis-active | 60 | AAA_LARGE (4.5) |
-| text-strong-on-emphasis | bg-fill-emphasis-default | 60 | AAA_NORMAL (7) |
-| text-strong-on-emphasis | bg-fill-emphasis-hover | 60 | AAA_NORMAL (7) |
-| text-strong-on-emphasis | bg-fill-emphasis-active | 60 | AAA_NORMAL (7) |
+| Pairing (Tokens Studio) | Foreground | Background | APCA | WCAG |
+| ----------------------- | ---------- | ---------- | ---- | ---- |
+| `text.secondary on background.surface` | step-8 | step-15 | 60 | AA_NORMAL (4.5) |
+| `icon.interactive.<tone>.default on background.surface` | step-11 | step-15 | 60 | AA_NORMAL (4.5) |
+| `icon.interactive.<tone>.hover on background.surface` | step-12 | step-15 | 60 | AA_NORMAL (4.5) |
+| `text.primary on background.surface` | step-13 | step-15 | 90 | AAA_NORMAL (7) |
+| `text.on-emphasis.<tone> on background.interactive.<tone>.emphasis.default` | step-15 | step-9 | 60 | AA_NORMAL (4.5) |
 
 ## APCA Contrast Levels Reference
 
@@ -85,4 +59,4 @@ _APCA LC value shown is the required Lightness Contrast. WCAG column shows level
 
 ---
 
-_This document is auto-generated; update `config.ts` to change source values._
+_This document is generated by `pnpm generate:palette-config-in-markdown`. Lightness and roles come from Tokens Studio (`src/config/tokensStudio.ts`); change them there. The step labels and contrast requirements are in `src/config/config.ts`._

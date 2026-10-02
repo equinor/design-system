@@ -208,14 +208,14 @@ export function generateColorScaleWithInterpolation(
         interpolatedColor = range(t)
       }
 
-      // Convert to OKLCH to extract and modify values
+      // Anchors supply hue and chroma only. Lightness always comes from the
+      // scale, also at an anchor's own step, as in Tokens Studio's
+      // set_chroma(set_lightness(anchor, L), gaussian × C) (ADR 0016 D2).
       const oklchColor = interpolatedColor.to('oklch')
-
-      // Get the interpolated hue and base chroma
-      const interpolatedHue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
+      const interpolatedHue =
+        oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
       const baseChroma = oklchColor.c ?? 0
 
-      // Create the final color with Gaussian-adjusted chroma
       const finalColor = createColorWithGaussianChroma(
         targetLightness,
         baseChroma,
@@ -271,7 +271,8 @@ export function generateColorScale(
         // Convert to OKLCH to get the chroma and hue values
         const oklchColor = color.to('oklch')
         const baseChroma = oklchColor.c ?? 0
-        const hue = oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
+        const hue =
+          oklchColor.h == null || isNaN(oklchColor.h) ? 0 : oklchColor.h
 
         // Create the final color with Gaussian-adjusted chroma
         const finalColor = createColorWithGaussianChroma(
@@ -333,5 +334,63 @@ export function contrast({
     }
     // Return default values in case of error
     return '0'
+  }
+}
+
+/**
+ * Perceptual colour difference between two colours. Used to keep categorical
+ * data-viz series visually distinct (not just contrasty).
+ * @param a - First colour (any colorjs.io-supported format)
+ * @param b - Second colour
+ * @param method - 'OK' (OKLab ΔE, ~0-1 scale) or '2000' (CIEDE2000)
+ * @param silent - Whether to suppress error logging (useful for tests)
+ * @returns ΔE as a number (0 = identical), or 0 on error
+ */
+export function deltaE(
+  a: string,
+  b: string,
+  method: '2000' | 'OK' = 'OK',
+  silent = false,
+): number {
+  try {
+    return new Color(a).deltaE(new Color(b), method)
+  } catch (error) {
+    if (!silent) {
+      console.error('Error calculating deltaE:', error)
+    }
+    return 0
+  }
+}
+
+/**
+ * A stored palette colour as CSS. Links from before OKLCH display hold bare
+ * hex digits (`206f77`), which get their `#`; anything else is used as is.
+ */
+export function toCssColor(value: string): string {
+  const v = value.trim()
+  return /^[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(v) ? `#${v}` : v
+}
+
+const trimNumber = (n: number, digits: number) =>
+  String(Number(n.toFixed(digits)))
+
+/**
+ * A colour as OKLCH, or null if it cannot be parsed. `separator` is `' '` for
+ * CSS (`oklch(0.4973 0.084851 204.553)`) and `', '` for the Tokens Studio
+ * anchor format (`oklch(0.4973, 0.084851, 204.553)`). Precision follows the
+ * Tokens Studio anchors: L to 4 decimals, C to 6 and H to 3; an achromatic
+ * colour gets hue 0.
+ */
+export function toOklchString(value: string, separator = ' '): string | null {
+  try {
+    const [l, c, h] = new Color(toCssColor(value)).to('oklch').coords
+    const hue = h == null || Number.isNaN(h) ? 0 : h
+    return `oklch(${[
+      trimNumber(l ?? 0, 4),
+      trimNumber(c ?? 0, 6),
+      trimNumber(hue, 3),
+    ].join(separator)})`
+  } catch {
+    return null
   }
 }

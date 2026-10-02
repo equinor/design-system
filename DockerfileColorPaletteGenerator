@@ -21,6 +21,7 @@ RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
     pnpm --filter @equinor/eds-tokens run build && \
     pnpm --filter @equinor/eds-utils run build && \
+    pnpm --filter @equinor/eds-icons run build && \
     pnpm --filter @equinor/eds-color-palette-generator run build
 
 FROM node:22.23-alpine AS runner
@@ -60,7 +61,6 @@ RUN pnpm install --prod --frozen-lockfile
 # Copy built files
 COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator/.next ./apps/eds-color-palette-generator/.next
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
-COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tailwind/theme.css ./packages/eds-tailwind/theme.css
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-utils/dist ./packages/eds-utils/dist
 
 USER "$UID"
