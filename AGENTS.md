@@ -494,7 +494,7 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 - `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
 - `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
 
-Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
+Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 
 ## Tool-Specific Configurations
 

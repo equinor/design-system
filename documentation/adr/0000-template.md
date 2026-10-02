@@ -44,6 +44,20 @@
   one — e.g. one beta-versioning scheme adopted for both a web package and
   eds-tokens (ADR-0012), or a naming convention for the Figma component library
   both platforms design from (ADR-0015).
+
+  A decision scoped to one surface, Web, Mobile, or Tokens, names that
+  surface in both the title and the filename (ADR-0020 through ADR-0024 do
+  this for Mobile: "Mobile component scope..." filed as
+  `0020-mobile-component-scope-...`). This is a deliberate choice, not an
+  automatic one, and the two aren't derived from each other: do it
+  explicitly in both when writing a new single-surface ADR.
+
+  A multi-scope decision, or one scoped to All, is usually about a shared
+  mechanism or a process concern rather than one product surface, so
+  neither its title nor its filename should try to name a surface: "Pin
+  beta release lines to a fixed 3.0.0-beta.N series..." (ADR-0012, Web and
+  Tokens) and "Use ADR for Architecture Decisions" (ADR-0001, All) both
+  skip it.
 -->
 
 ## Context
