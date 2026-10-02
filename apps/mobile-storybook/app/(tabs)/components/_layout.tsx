@@ -1,4 +1,5 @@
 import { SettingsControls } from "@/components/SettingsControls";
+import { getComponentTitle } from "@/lib/registry";
 import { useToken } from "@equinor/eds-mobile-components";
 import { Stack } from "expo-router";
 
@@ -7,7 +8,13 @@ export default function ComponentsLayout() {
 
     return (
         <Stack
-            screenOptions={{
+            screenOptions={({ route }) => ({
+                // Titles come from the registry, so a screen is titled as
+                // soon as it is registered.
+                title:
+                    route.name === "index"
+                        ? "Components"
+                        : getComponentTitle(route.name),
                 headerTransparent: true,
                 headerBlurEffect: "none",
                 headerLargeTitle: true,
@@ -21,32 +28,7 @@ export default function ComponentsLayout() {
                     color: token.colors.text.neutral.strong,
                 },
                 headerRight: () => <SettingsControls />,
-            }}
-        >
-            <Stack.Screen
-                name="index"
-                options={{
-                    title: "Components",
-                }}
-            />
-            <Stack.Screen name="badge" options={{ title: "Badge" }} />
-            <Stack.Screen name="button" options={{ title: "Button" }} />
-            <Stack.Screen name="divider" options={{ title: "Divider" }} />
-            <Stack.Screen name="input" options={{ title: "Input" }} />
-            <Stack.Screen name="link" options={{ title: "Link" }} />
-            <Stack.Screen
-                name="selectioncontrols"
-                options={{ title: "Selection Controls" }}
-            />
-            <Stack.Screen
-                name="typography"
-                options={{ title: "Typography" }}
-            />
-            <Stack.Screen
-                name="textfield"
-                options={{ title: "TextField" }}
-            />
-            <Stack.Screen name="search" options={{ title: "Search" }} />
-        </Stack>
+            })}
+        />
     );
 }

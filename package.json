@@ -56,6 +56,7 @@
     "palette:test:e2e": "pnpm --filter @equinor/eds-color-palette-generator test:e2e",
     "build:mobile": "pnpm --filter @equinor/eds-mobile-components run build",
     "watch:mobile": "pnpm --filter @equinor/eds-mobile-components run dev",
+    "check-screens:mobile": "node scripts/check-mobile-demo-screens.js",
     "check-types:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run check-types",
     "dev:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run dev",
     "start:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run start",
