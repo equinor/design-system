@@ -38,3 +38,13 @@ spec:
       ports:
         - name: http
           port: 3000
+    - name: storybook
+      dockerfileName: DockerfileStorybook
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
+      environmentConfig:
+        # Disabled in prod until DockerfileStorybook lands on main; dev builds it from feat/*
+        - environment: prod
+          enabled: false
