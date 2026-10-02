@@ -84,7 +84,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.2` (September 2026). If a c
 | `NativeSelect`           | [Select](#select)             | <Tag tone="danger">Known issues</Tag>                                      | `<option>` children → `options` prop; ref points at `<select>`                                          |
 | `Switch`                 | [Switch](#switch)             | <Tag tone="danger">Known issues</Tag>                                      | `label` required; `size` removed; `role="switch"`                                                       |
 | `Textarea`               | [TextArea](#textarea)         |                                                                            | Renamed export; `rowsMax` → `maxRows`; `helperText` → `helperMessage`; auto-grows by default            |
-| `TextField`              | [TextField](#textfield)       |                                                                            | `helperText` → `helperMessage`; `meta` → `indicator`; `variant` → `invalid`; `id` gets `-input` suffix  |
+| `TextField`              | [TextField](#textfield)       |                                                                            | `helperText` → `helperMessage`; `meta` → `indicator`; `variant` → `invalid`                             |
 | `Tooltip`                | [Tooltip](#tooltip)           | <Tag tone="danger">Known issues</Tag>                                      | `placement` reduced to four values; rendered inline, arrow is a CSS pseudo-element                      |
 | `Typography`             | [Typography](#typography)     |                                                                            | No component; semantic HTML with `.eds-elements` and typography tokens. `Heading`/`Paragraph` are transitional |
 
@@ -92,8 +92,9 @@ Shared changes across the form components:
 
 - On Input, TextField and TextArea the `variant` prop with `error` / `warning` / `success` is replaced by a boolean `invalid`. Select and Search gain `invalid`. Checkbox, Radio and Switch have no invalid state. There is no `warning` or `success` state anywhere.
 - On TextField, TextArea and Autocomplete `helperText` becomes `helperMessage` and accepts a ReactNode. On TextField, TextArea and Select `meta` becomes `indicator`, typed `string` instead of ReactNode and meant for `(Required)` / `(Optional)`. Autocomplete drops `meta` without a replacement.
-- TextField, TextArea, Search, Select and Autocomplete derive their ids through `useFieldIds`: `id="name"` puts `name-input` on the input, `name-description` on the description and `name-helper-message` on the helper message. `name-label` is only set on Search's label. Checkbox, Radio and Switch do not derive ids, so `id="name"` stays `name` on the input, and Checkbox's helper message id is `name-helper`. The inconsistency is tracked in [#5456](https://github.com/equinor/design-system/issues/5456).
-- In TextField, TextArea, Search and Select the helper message gets `role="alert"` when `invalid` is set. Checkbox's helper message never gets a role.
+- TextField, TextArea, Search, Select and Autocomplete derive extra ids from `id` through `useFieldIds`, where EDS 1.0 derived none: `id="name"` puts `name-description` on the description and `name-helper-message` on the helper message, and wires them into the input's `aria-describedby`. `name-label` is only set on Search's label. Checkbox's helper message id is `name-helper`, not `name-helper-message`. Up to `3.0.0-beta.2` a consumer `id` was suffixed, putting `name-input` on the input; it is now applied verbatim, so CSS or tests targeting `#name-input`, and any external `htmlFor` or `aria-describedby` pointing at it, must use `#name`.
+- TextField, TextArea, Search, Select, Autocomplete, Checkbox, Radio and Switch now always render an `id` on the control, derived from React's `useId` when you pass none. EDS 1.0 left the attribute off unless you supplied one, so a snapshot test or an `[id]` selector can pick up an id that was not there before. The generated value is opaque and shifts with tree position, so pass your own `id` when you need something stable to target.
+- In TextField, TextArea, Search, Select and Autocomplete the helper message gets `role="alert"` when `invalid` is set. Checkbox's helper message never gets a role.
 - `className` and `style` land on each component's root element and are merged with the component's own root class, as in EDS 1.0. Up to `3.0.0-beta.1` they landed on the native `<input>` or `<textarea>` instead, and in Select on the inner `div.eds-select`; `3.0.0-beta.2` moved them to the root on Input, TextField, TextArea, Search, Select, Autocomplete, Checkbox, Radio and Switch, and removed Input's beta-only `containerClassName`. Reach the native element with a descendant selector: `.my-field input`, `.my-field select` in Select, `.my-field textarea` in TextArea. One difference from EDS 1.0: a Checkbox without a label now renders a wrapper `<span>` and `className` lands there, where EDS 1.0 had no wrapper and put it on the input.
 - `.eds-field` still defaults to `width: 100%`, but as plain CSS (`width: var(--eds-field-width, 100%)`) instead of the inline style EDS 1.0 put on the container, so it can be overridden. Checkbox, Radio and Switch set `width: auto`.
 
@@ -376,7 +377,7 @@ EDS 1.0: `Textarea`.
 
 **Behaviour**: the field auto-grows by default. `rows` sets the initial height and `maxRows` caps it.
 
-**Markup**: built on [Field](#field), so ids are derived (`${id}-input` on the textarea) and the helper message gets `role="alert"` when invalid. The root is `div.eds-field.eds-text-area` with new `div.label-row` and `div.helper-row` wrappers, so the helper message is no longer a direct child of the field. `className` and `style` land on that root and are merged with `eds-text-area`; use `.your-class textarea` for the native element, which is now `resize: vertical`.
+**Markup**: built on [Field](#field), so the helper message gets `role="alert"` when invalid. The root is `div.eds-field.eds-text-area` with new `div.label-row` and `div.helper-row` wrappers, so the helper message is no longer a direct child of the field. `className` and `style` land on that root and are merged with `eds-text-area`; use `.your-class textarea` for the native element, which is now `resize: vertical`.
 
 ## TextField
 
@@ -390,7 +391,7 @@ EDS 1.0: `TextField`.
 
 **Composition**: built on [Field](#field). For layouts TextField does not cover, compose `Field` yourself.
 
-**Markup**: the root is `div.eds-field.eds-text-field`, with a new `div.header` around the label and info button and `.info` on the info button. Ids are derived (`${id}-input` on the input). `className` and `style` land on the root and are merged with `eds-text-field`; use `.your-class input` for the native element. The helper message is a single `<p class="helper-message">` with `role="alert"` when invalid.
+**Markup**: the root is `div.eds-field.eds-text-field`, with a new `div.header` around the label and info button and `.info` on the info button. `className` and `style` land on the root and are merged with `eds-text-field`; use `.your-class input` for the native element. The helper message is a single `<p class="helper-message">` with `role="alert"` when invalid.
 
 ## Tooltip
 
@@ -443,7 +444,6 @@ Behaviour described above that we consider a bug. It stays on this page until th
 - **Select**: native `multiple` not blocked ([#5460](https://github.com/equinor/design-system/issues/5460)).
 - **Switch**: native numeric `size` attribute accepted ([#5457](https://github.com/equinor/design-system/issues/5457)).
 - **Tooltip**: no open delay; `aria-describedby` on the trigger is overwritten ([#5459](https://github.com/equinor/design-system/issues/5459)).
-- **TextField, TextArea, Search, Select, Autocomplete, Checkbox, Radio, Switch**: where a consumer `id` lands differs between these components, the field components deriving `${id}-input` and the selection controls keeping `id` as given ([#5456](https://github.com/equinor/design-system/issues/5456)). `className` and `style` were part of the same inconsistency and are now consistent on all of them.
 
 ## Under review
 
