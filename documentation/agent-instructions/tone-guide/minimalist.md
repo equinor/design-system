@@ -3,15 +3,15 @@
 ## Prompt
 
 - Rewrite/ write the (following) content in a Minimalist style.
-- Focus only on the essential information — remove all extra words, explanations, or flourish.
+- Focus only on the essential information. Remove all extra words, explanations, or flourish.
 - Use short, clear and concise sentences or bullet points.
-- Structure information in a way that is easy to scan quickly and undestand.
+- Structure information in a way that is easy to scan quickly and understand.
 - Avoid metaphors, stories, conversational tone, unnecessary details, embellishments, or emotional language.
 - Keep language neutral and direct.
-- Organize content with clear headings and lists.
+- Organise content with clear headings and lists.
 - Ensure consistency and precision in terminology.
 - Focus on usability and efficiency.
-- Always use Oxford English spelling (e.g., organise, recognise, analyse).
+- Always use British English spelling (e.g., organise, recognise, analyse).
 - Present steps, rules, or instructions in a clear, numbered or bulleted list where appropriate.
 - Provide the documentation content only.
 
@@ -36,12 +36,12 @@
 
 - Use consistent terminology (no synonyms that create confusion).
 - Keep formatting uniform across lists and steps.
-- Focus on what readers must do/know — nothing more.
+- Focus on what readers must do or know, nothing more.
 - Review for clarity and accuracy. Ensure every word adds value.
 
 ### Spelling & Grammar
 
-- Always use Oxford English spelling (e.g., organise, recognise, analyse).
+- Always use British English spelling (e.g., organise, recognise, analyse).
 - Ensure correct punctuation, but avoid complex structures.
 
 ### Avoid
@@ -56,4 +56,4 @@
 - Can this be read and understood at a glance?
 - Did I strip out every non-essential word?
 - Are steps or rules written in bullet points or short lines?
-- Am I following Oxford English spelling?
+- Am I following British English spelling?
