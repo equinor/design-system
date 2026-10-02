@@ -100,7 +100,7 @@ const sidebars: SidebarsConfig = {
       label: 'Design Tokens',
       link: {
         type: 'doc',
-        id: 'foundation/design-tokens/grid',
+        id: 'foundation/design-tokens/design-tokens',
       },
       items: [
         'foundation/design-tokens/elevation',
@@ -116,14 +116,12 @@ const sidebars: SidebarsConfig = {
       label: 'Assets',
       link: {
         type: 'doc',
-        id: 'foundation/assets/image_placeholder',
+        id: 'foundation/assets/assets',
       },
       items: [
         'foundation/assets/logos',
-        'foundation/assets/illustration',
         'foundation/assets/product_icons',
         'foundation/assets/system_icons',
-        'foundation/assets/photography',
       ],
     },
   ],

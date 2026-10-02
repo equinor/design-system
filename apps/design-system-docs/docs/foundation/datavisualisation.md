@@ -19,7 +19,7 @@ Data accuracy is the top priority. Data must be displayed correctly and in a way
 - Be careful how missing, null and zero data are displayed
 - Use visual techniques to effectively highlight and draw the user’s attention to the most important data
 - Focus on presenting the information needed in the most simple and clear way
-- Provide adequate context in the form of labels, data values or units to aide in interpretation of the data
+- Provide adequate context in the form of labels, data values or units to aid in interpretation of the data
 - Add supplemental data when necessary to provide the correct context to understand the data. Examples are targets, trends, budgets, YTD, averages, etc.
 - Enable users to drill-down with context to perform further analysis away from the dashboard
 - Sort data for easier comparisons
@@ -32,12 +32,12 @@ To help draw the user's attention to the most important information, the informa
 
 Put thought into how the information is grouped on the dashboard based on the relationships of the data and the desired flow for the user. Keep in mind that users naturally assume that elements located near each other are related. They will also perceive that elements that visually look similar (size, shape, colour) are related even if they are not located near each other.
 
-- Use the Equinor typeface when possible, otherwise use Arial
+- Use the EDS typefaces: Equinor for titles and headings, Inter for labels, values and other text
 - Use a screen size ratio of 16:9
 - The dashboard should be confined to a single screen without scrolling
 - Distribute content evenly over the width and height of the dashboard. This enables the user to see the whole picture at once
 - There should always be an overall dashboard title located at the top
-- Tabs can be used to guide the user to relevant views or pages. These should placed at the top, and no more than six should be used
+- Tabs can be used to guide the user to relevant views or pages. These should be placed at the top, and no more than six should be used
 - Use whitespace to help group information and to declutter the page
 
 :::tip For example
@@ -52,11 +52,23 @@ When colour is used appropriately, it can draw the user’s attention to somethi
 
 It is not recommended to rely on colour alone, since some users can have trouble distinguishing certain colours (colour blindness).
 
-- Follow the [Colour guidelines](../foundation/accessibility.md#colour) given by the EDS
+- Follow the [colour guidance](./accessibility.md#colour) in the accessibility foundation
 - Keep bright and saturated colours to a minimum, only using them to highlight data requiring attention
-- Make sure that colours used on a dashboard consist of one palette of colours, do not mix from different palettes
-- Visuals can have a white or light background colour but use a non-white background colour for the overall dashboard
-- Be aware that changes in data can occur after the initial creation of a visual, and that this might affect colouring.
+- Use one palette per dashboard, and do not mix colours from different palettes
+- Place visuals on `background.surface` and the overall dashboard on `background.canvas`, so the visuals stand out from the page in both colour schemes
+- Be aware that changes in data can occur after the initial creation of a visual, and that this might affect colouring
+
+#### Chart colour tokens
+
+EDS has a separate group of colour tokens for charts, `data-visualization.*`. They are tuned for telling series apart, not for contrast against a background, and no EDS component uses them. The [palette page](./colour/palette.mdx#data-visualisation) shows every value.
+
+| Group           | Tokens                                                             | Use for                                                                         |
+| --------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Categorical** | `data-visualization.cat.1` to `cat.10`, each with steps `1` to `5` | Categories with no order between them, such as assets, regions or products      |
+| **Sequential**  | `data-visualization.seq.1` to `seq.7`                              | Ordered values that run from low to high                                        |
+| **Diverging**   | `data-visualization.div.1` to `div.9`                              | Values that run in two directions from a midpoint, such as above and below plan |
+
+Most of the values differ between light and dark. Each categorical ramp runs from light to dark in one colour scheme and from dark to light in the other, so the same step does not have the same lightness in both. Check your charts in both colour schemes.
 
 ### Data visualisation types
 
@@ -76,5 +88,5 @@ Visualisations should include the data and context necessary to communicate the 
 
 :::info Recommended further reading
 Explore the books, blogs and articles written by data visualisation experts:  
-Edward R. Tufte, Colin Ware, Wayne W. Eckerson, Stephen Few and Albert Cairo.
+Edward R. Tufte, Colin Ware, Wayne W. Eckerson, Stephen Few and Alberto Cairo.
 :::

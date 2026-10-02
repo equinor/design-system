@@ -4,7 +4,7 @@ hide_title: true
 description: 'All digital interfaces should be inclusive and accessible for everyone, regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.'
 ---
 
-The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [uutilsynet](https://www.uutilsynet.no/) AA level requirements. While the components built are accessible, as a customer of the EDS there are things you need to remember when creating layouts and prototypes, and combining components
+The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [Uutilsynet](https://www.uutilsynet.no/) AA level requirements. The components are accessible on their own, but how you lay them out, combine them and write their content decides whether the finished interface is. This page covers what to keep in mind when you do that.
 
 ## What is accessibility?
 
@@ -36,13 +36,11 @@ There are also different types of situations that need consideration:
 
 ## Guidelines
 
-### Spacing
+### Target size
 
-To comply with accessibility guidelines, all interactive components must have at least 8px between them. This is to prevent users from accidentally clicking the wrong place.
+Small or tightly packed targets are easy to miss, especially on a touch screen. WCAG 2.1 has no target size requirement at level AA, but WCAG 2.2 adds one, [2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html): a target should be at least 24 by 24 CSS pixels, or have enough space around it that a 24px circle centred on it does not overlap another target. For touch, aim for 44 by 44, which is the WCAG AAA level (2.5.5).
 
-### Clickbound
-
-In accordance with the WCAG guidelines for touch targets, we use a 48px clickbound layer for some of our components, such as buttons. This is to ensure that users do not click on a wrong element.
+EDS controls are smaller at Compact density than at Comfortable or Relaxed, so check target sizes at the density you ship. Relaxed density is intended for touch and mobile, where targets need to be larger.
 
 ### Consistent headings
 
@@ -50,15 +48,15 @@ Strive to make your menus and hierarchies consistent. Use H1, H2, H3, etc., in t
 
 ### Form validating inline
 
-Make sure to use the `helper text` when validation fails. Keep the `helper text` short and to the point.
+When validation fails, say what went wrong in the field's helper message, next to the field itself. Keep the message short and to the point, and tell the user how to fix the problem.
 
 ### Text and its meaning
 
 Remember that text can be both visible and invisible `alt text`. Make sure all text is meaningful in its context.
 
-### Call to actions
+### Calls to action
 
-Provide descriptive labels, action verbs are good.
+Provide descriptive labels. Action verbs work well.
 
 :::tip Here is an example
 Acceptable: **See all platforms** _Indicates what will happen_  
@@ -73,15 +71,15 @@ Important information should not be in or over images. Make sure to always capti
 
 ### Colour
 
-Use the colours provided in the EDS. They have been tested to make sure your work will be WCAG 2.1 compliant.
+Use the EDS colour tokens. Their contrast is measured with APCA, with targets of Lc 90 for body text and Lc 60 for interactive elements against `background.surface`. A token name alone does not guarantee contrast: on any other fill, check the foreground and background you use, in both colour schemes and every state. [Contrast](./colour/intro.mdx#contrast) explains the method and the targets.
 
 Many users have trouble distinguishing colours from each other, so make sure colour is not the only way you convey certain information. For example, danger should not be indicated by red colour alone.
 
 #### Exceptions
 
-If you need to use additional colours for domain-specific requirements, charts or graphs, make sure to test your colours for contrast. Use high contrast, as this both increases readability in general and assists users with impaired sight.
+If you need additional colours for domain-specific requirements, test them for contrast the same way. Charts and graphs have their own [data visualisation palettes](./colour/palette.mdx#data-visualisation). Those are tuned for telling series apart, not for text contrast, so do not use them for text or for the only cue that carries meaning.
 
-### Navigation Order
+### Navigation order
 
 Place components on the page in order of importance. The order in which the element receives focus should be logical and predictable. Try to keep navigation to a minimum of steps and make all steps clear.
 
@@ -89,9 +87,9 @@ Try navigating your own solution by only using a keyboard. Can you navigate? Can
 
 ### Validating your work
 
-The EDS is only a foundation for accessible design and development. Accessibility is the responsibility of the entire team, designers and developers have specific responsibilities listed in the related sections.
+The EDS is only a foundation for accessible design and development. The components handle their own semantics, keyboard support and states. The layout, the content, the focus order across components and any colours outside the tokens are the responsibility of the team building the interface, designers and developers alike.
 
-Please familiarise yourself with the guidelines from [WCAG 2.1][WCAG] and [Difi](https://www.digdir.no/) to verify your interfaces meet the AA level requirements.
+Please familiarise yourself with the guidelines from [WCAG 2.1][WCAG] and [Uutilsynet](https://www.uutilsynet.no/) to verify your interfaces meet the AA level requirements.
 
 #### Tools and resources
 
@@ -108,9 +106,9 @@ icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.1
 />
 
 <IconCard
-to="https://aremycolorsaccessible.com/"
-title="Are my colours accessible?"
-description="Check colour contrast ratios for WCAG compliance"
+to="https://apcacontrast.com/"
+title="APCA Contrast Calculator"
+description="Check the Lc contrast of a text and background pair"
 badge={{ label: 'External' }}
 icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
 />

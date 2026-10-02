@@ -41,10 +41,10 @@ export const foundationTopics: FoundationTopic[] = [
   },
   {
     label: 'Design Tokens',
-    docId: 'foundation/design-tokens/grid',
-    to: 'docs/Next/foundation/design-tokens/grid',
+    docId: 'foundation/design-tokens/design-tokens',
+    to: 'docs/Next/foundation/design-tokens',
     description:
-      'Spacing, typography, elevation, shape, and grid tokens that power EDS components.',
+      'Colour, spacing, typography, shape, and elevation tokens that power EDS components.',
     icon: tune,
   },
   {
@@ -65,8 +65,8 @@ export const foundationTopics: FoundationTopic[] = [
   },
   {
     label: 'Assets',
-    docId: 'foundation/assets/image_placeholder',
-    to: 'docs/Next/foundation/assets/image_placeholder',
+    docId: 'foundation/assets/assets',
+    to: 'docs/Next/foundation/assets',
     description:
       'Icons, logos, illustrations, photography, and other visual resources.',
     icon: image,

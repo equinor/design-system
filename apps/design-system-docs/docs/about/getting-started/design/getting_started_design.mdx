@@ -19,9 +19,9 @@ displayed_sidebar: null
 
 <DocsSection title="Set up Figma" tone="muted">
 
-1. **Get Figma access** — apply through AccessIT or contact your team administrator
-2. **Join your design team** — search for your team in Figma and request access, or ask your team admin to add you
-3. **Enable the EDS library** — open your file's Assets panel and enable the EDS component library
+1. **Get Figma access**: apply through AccessIT or contact your team administrator
+2. **Join your design team**: search for your team in Figma and request access, or ask your team admin to add you
+3. **Enable the EDS library**: open your file's Assets panel and enable the EDS component library
 
 For detailed permissions guidance and workspace setup, see the [Figma guide](figma.md).
 
@@ -31,8 +31,8 @@ For detailed permissions guidance and workspace setup, see the [Figma guide](fig
 
 Before you start designing, adjust a few Figma settings:
 
-- Change nudge amount to **8px** in Figma preferences (matches the EDS spacing grid)
-- Create frames using standard screen sizes — **1440px** width for desktop
+- Set the colour scheme and density with variable modes on your top-level frame. Colours, spacing and typography in the EDS library are variables, so everything inside the frame follows the modes you set
+- Create frames using standard screen sizes, for example **1440px** width for desktop
 - Familiarise yourself with the EDS component naming in the Assets panel
 
 </DocsSection>
@@ -41,16 +41,16 @@ Before you start designing, adjust a few Figma settings:
 
 Start simple and layer in complexity:
 
-1. Add a layout structure — use `TopBar` or `SideSheet` for navigation
-2. Add content — use `Typography` components for headings and body text
-3. Add interactive elements — `Button`, `TextField`, or `Checkbox`
+1. Check the [components](/docs/Next/components) that are available in EDS 2.0 before you build your own
+2. Add content: use the EDS text styles for headings and body text
+3. Add interactive elements: `Button`, `TextField`, or `Checkbox`
 4. Add icons from the EDS icon library where needed
 
 ### Accessibility checklist
 
-- Use EDS colour combinations to meet **4.5:1** contrast for normal text and **3:1** for large text (WCAG 2.1 AA)
+- Use the EDS colour tokens in the pairings they are made for. Text and interactive colours are tuned for APCA contrast against `background.surface`, so check any other combination (see [Contrast](/docs/Next/foundation/colour/intro#contrast))
 - Set focus states for all interactive elements
-- Ensure touch targets are at minimum **44px**
+- Check target sizes at the density you ship (see [Target size](/docs/Next/foundation/accessibility#target-size))
 
 </DocsSection>
 

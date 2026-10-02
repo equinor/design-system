@@ -49,8 +49,8 @@ export default function About(): JSX.Element {
           cta={{ label: 'Reach us on Slack', to: slackUrl }}
           tone="muted"
         >
-          Visit our Support page for office hours, community channels, and
-          direct contact information.
+          Visit our Support page for the #eds-design-system Slack channel, the
+          other community channels and direct contact information.
         </CtaSection>
       </main>
     </Layout>

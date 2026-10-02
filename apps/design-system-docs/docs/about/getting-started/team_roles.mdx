@@ -12,7 +12,7 @@ import { brush, code, apps } from '@equinor/eds-icons'
 <Hero
   dots
   title="Team Leads"
-  lead={<p>A guide for team leads adopting EDS — from initial setup to scaling across projects.</p>}
+  lead={<p>A guide for team leads adopting EDS, from initial setup to scaling across projects.</p>}
 />
 
 <DocsSection title="Getting your team started" tone="muted">
@@ -54,16 +54,20 @@ Adopt EDS on a new project rather than migrating an existing one. This lets the 
 
 You don't need to adopt everything at once. A practical approach:
 
-1. **Pick a pilot project** — one new project where the team uses EDS from day one
-2. **Replace components incrementally** — when you touch existing code, swap custom components for EDS equivalents
-3. **Add EDS checks to reviews** — include EDS usage as a review criterion in design and code reviews
-4. **Track what matters** — accessibility compliance, component reuse rate, and design consistency are useful signals
+1. **Pick a pilot project**: one new project where the team uses EDS from day one
+2. **Replace components incrementally**: when you touch existing code, swap custom components for EDS equivalents
+3. **Add EDS checks to reviews**: include EDS usage as a review criterion in design and code reviews
+4. **Track what matters**: accessibility compliance, component reuse rate, and design consistency are useful signals
 
 </DocsSection>
 
 <DocsSection title="Common questions & challenges" tone="muted">
 
 <div className="about-accordion">
+  <details>
+    <summary>Should we use EDS 1 or EDS 2.0?</summary>
+    <div>EDS 2.0 components are in beta under the `/next` entry point and can be used alongside EDS 1 in the same application. EDS 1 stays supported until EDS 2.0 is stable. At that point it is removed, in `eds-core-react@3.0.0`. Use the EDS 2.0 component where one exists and EDS 1 for the rest. The release candidate is the time to test your application without EDS 1. See [Versioning](/docs/Next/about/getting-started/develop/getting_started_development#versioning) for the steps.</div>
+  </details>
   <details>
     <summary>What if we already have our own components?</summary>
     <div>You don't need to replace everything. Use EDS for new work and evaluate migration for existing components based on maintenance cost vs. benefit.</div>
@@ -82,11 +86,11 @@ You don't need to adopt everything at once. A practical approach:
   </details>
   <details>
     <summary>Do we need to migrate existing projects?</summary>
-    <div>No. New projects should use EDS from the start. Existing projects can migrate gradually — or not at all, if the cost doesn't justify it.</div>
+    <div>No. New projects should use EDS from the start. Existing projects can migrate gradually, or not at all if the cost doesn't justify it.</div>
   </details>
   <details>
     <summary>How do we get training?</summary>
-    <div>Contact the EDS team to schedule role-specific workshops. There are also regular office hours and Slack channels for ongoing questions.</div>
+    <div>Contact the EDS team to schedule role-specific workshops. For ongoing questions, use the #eds-design-system Slack channel.</div>
   </details>
 </div>
 
@@ -97,7 +101,7 @@ You don't need to adopt everything at once. A practical approach:
   cta={{ label: 'Visit support', to: '/docs/Next/support' }}
   tone="muted"
 >
-  The support page has Slack channels, office hours, and direct contact.
+  The support page has the #eds-design-system Slack channel, email and other contact details.
 </CtaSection>
 
 </DocsLanding>

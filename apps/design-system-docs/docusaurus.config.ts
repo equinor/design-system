@@ -62,6 +62,8 @@ const config: Config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
+            // The tone guide moved to documentation/agent-instructions/, but the
+            // frozen versioned_docs still carry a copy that must stay unbuilt.
             '**/tone-guide/**',
           ],
           breadcrumbs: false,

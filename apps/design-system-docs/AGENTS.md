@@ -374,12 +374,13 @@ All five run in CI, but they are spread across three jobs of
 3. `pnpm run lint:css:docs` and `pnpm run lint:docs`
 4. `pnpm run check:docs-stories` — StoryCanvas / StorybookEmbed references.
 5. `pnpm run build:docs` — `onBrokenLinks: 'throw'` is the link gate.
-   Known-acceptable warnings: two broken anchors on the **photography** pages
-   (`foundation/assets/photography` links to the resources page). The
-   current-version one is a false positive — `SectionHeading` slugifies its
-   `title`, so `#external-references` does resolve at runtime, invisibly to the
-   checker. The 1.1.0 one is a **real** broken link (`#external-resources` vs
-   the archive's `#external-references`), left unfixed because the archive is
+   Known-acceptable warnings: two broken anchors on the frozen **photography**
+   pages (`foundation/assets/photography` links to the resources page; the
+   current version folded that page into `foundation/assets/assets`). The
+   2.0.0-beta one is a false positive: `SectionHeading` slugifies its `title`,
+   so `#external-references` does resolve at runtime, invisibly to the
+   checker. The 1.1.0 one is a broken link (`#external-resources` vs the
+   archive's `#external-references`), left unfixed because the archive is
    frozen. Also css-minimizer warnings on modern CSS functions
    (`tan(atan2())`) in compiled component source.
 

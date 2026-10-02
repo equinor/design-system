@@ -1,0 +1,13 @@
+---
+title: EDS documentation
+slug: /
+displayed_sidebar: null
+---
+
+{/* Intentional redirect: the doc with slug '/' is this version's home. The version dropdown
+    and the unmaintained-version banner send readers here when a page has no counterpart in
+    this version. It forwards to the Components overview, which keeps its own URL so existing
+    links to /docs/Next/components still work. */}
+import {Redirect} from '@docusaurus/router'
+
+<Redirect to="/docs/Next/components" />
