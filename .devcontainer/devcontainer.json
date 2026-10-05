@@ -3,7 +3,7 @@
   "name": "Node.js & TypeScript",
   "runArgs": ["--init"],
   // https://github.com/devcontainers/images/tree/main/src/typescript-node
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
   "customizations": {
     "vscode": {
       "settings": {
@@ -69,9 +69,9 @@
   // rename fails with "EXDEV: cross-device link not permitted". Pointing TMPDIR at a dir on the SAME
   // filesystem as node_modules makes the rename intra-device. The dir must be created first: other
   // install scripts assume os.tmpdir() already exists and throw ENOENT if it doesn't (setting TMPDIR
-  // without mkdir -p is why the earlier attempt failed with a different error). .tmp/ is gitignored.
+  // without mkdir -p is why the earlier attempt failed with a different error). node_modules/ is gitignored.
   // Remove the TMPDIR workaround once tokens-studio/studio-cli-releases#1 is resolved.
-  "onCreateCommand": "npm install -g pnpm@11.27.0 gitmoji-cli && mkdir -p /workspaces/design-system/.tmp && TMPDIR=/workspaces/design-system/.tmp pnpm install && pnpm recursive install --filter ./packages",
+  "onCreateCommand": "npm install -g pnpm@11.27.0 gitmoji-cli && mkdir -p /workspaces/design-system/node_modules/.tmp && TMPDIR=/workspaces/design-system/node_modules/.tmp pnpm install && pnpm recursive install --filter ./packages",
   // Install additional dependencies:
   // - libc6:amd64 / libstdc++6:amd64 + the ld-linux symlink are for the axe linter on ARM-based hosts (e.g., MacBook M1+).
   // - bubblewrap (bwrap) and socat provide process-level sandboxing for running untrusted/agent-driven commands with least privilege inside the container.
@@ -84,4 +84,4 @@
       "version": "24.16.0"
     }
   }
-} 
+}
