@@ -1,7 +1,7 @@
 apiVersion: radix.equinor.com/v1
 kind: RadixApplication
 metadata:
-  name: eds
+  name: design-system-test
 spec:
   build:
     useBuildKit: true
