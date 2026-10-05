@@ -7,23 +7,20 @@ spec:
     useBuildKit: true
     useBuildCache: true
   environments:
-    - name: prod
-      build:
-        from: main
     - name: dev
       build:
         from: feat/*
   dnsAppAlias:
-    environment: prod
+    environment: dev
     component: docs
   dnsAlias:
-    - alias: eds
-      environment: prod
-      component: docs
+    - alias: design-system-test-storybook
+      environment: dev
+      component: storybook
   dnsExternalAlias:
-    - alias: eds.equinor.com
-      environment: prod
-      component: docs
+    - alias: storybook.eds.equinor.com
+      environment: dev
+      component: storybook
       useCertificateAutomation: true
   components:
     - name: color-palette-generator
@@ -32,24 +29,15 @@ spec:
       ports:
         - name: http
           port: 3000
-      environmentConfig:
-        - environment: prod
-          enabled: false
     - name: docs
       dockerfileName: DockerfileEdsDocs
       publicPort: http
       ports:
         - name: http
           port: 3000
-      environmentConfig:
-        - environment: prod
-          enabled: false
     - name: storybook
       dockerfileName: DockerfileStorybook
       publicPort: http
       ports:
         - name: http
           port: 3000
-      environmentConfig:
-        - environment: prod
-          enabled: false
