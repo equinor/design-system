@@ -1,0 +1,309 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Text trim spike (web)</title>
+<style>
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    src: url('../../../packages/eds-mobile-components/src/assets/fonts/Inter-Medium.otf');
+  }
+  @font-face {
+    font-family: 'Equinor';
+    font-weight: 700;
+    src: url('../../../packages/eds-mobile-components/src/assets/fonts/Equinor-Bold.otf');
+  }
+  body {
+    font: 14px/1.4 system-ui, sans-serif;
+    margin: 24px;
+    color: #222;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 16px;
+    margin-top: 32px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 8px 0 16px;
+  }
+  td,
+  th {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    text-align: left;
+    font-variant-numeric: tabular-nums;
+  }
+  .btn {
+    display: inline-block;
+    box-sizing: border-box;
+    background: #21767e;
+    color: #fff;
+    font-family: 'Inter';
+    font-weight: 500;
+  }
+  .btn .label {
+    display: block;
+    white-space: nowrap;
+  }
+  .btn.trim .label {
+    text-box: trim-both cap alphabetic;
+  }
+  .probe {
+    display: inline-block;
+    width: 0;
+    height: 0;
+  }
+  .good {
+    color: #0a7a2f;
+  }
+  .bad {
+    color: #b00020;
+  }
+  .sample {
+    position: relative;
+    display: inline-block;
+    margin-right: 40px;
+    background: #fff3c4;
+    font-size: 56px;
+    line-height: 80px;
+  }
+  .sample .line {
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    height: 0;
+    border-top: 1px solid;
+  }
+  .note {
+    max-width: 760px;
+    color: #555;
+  }
+</style>
+
+<h1>Text trim spike: web</h1>
+<p class="note">
+  Values are the live Tokens Studio density sets (project Equinor Design System, read
+  2026-10-05), resolved to px. Heights are measured in this browser. Gaps are measured from the
+  button edge to the top of a capital letter and to the baseline. Figma expected = 2 x vertical
+  padding + line height (the untrimmed Button in the Button [EDS] file).
+</p>
+<p id="env" class="note"></p>
+<div id="out"></div>
+
+<h2>Instrument check</h2>
+<p class="note">
+  Red lines are measured (browser baseline probe and canvas cap height). Blue lines are the
+  prediction from the font file tables. If both sit on the bottom of the letters and the top of
+  the capitals, the numbers above can be trusted.
+</p>
+<div id="check"></div>
+
+<script>
+  const TOKENS = {
+    comfortable: { uiSm: [12, 16], uiMd: [14, 20], s3xs: 4, xs: 8, sm: 12, radius: 4 },
+    compact: { uiSm: [10, 12], uiMd: [12, 16], s3xs: 2, xs: 6, sm: 10, radius: 2 },
+    relaxed: { uiSm: [14, 20], uiMd: [16, 24], s3xs: 6, xs: 10, sm: 16, radius: 6 },
+  }
+  // Parsed from the OTF tables: cap height, ascent, descent as a share of the font size.
+  const FONTS = {
+    Inter: { weight: 500, cap: 0.728, asc: 0.969, desc: 0.241 },
+    Equinor: { weight: 700, cap: 0.7, asc: 0.788, desc: 0.212 },
+  }
+
+  function geometry(t, size) {
+    return size === 'default'
+      ? { fs: t.uiMd[0], lh: t.uiMd[1], padV: t.xs, padH: t.sm }
+      : { fs: t.uiSm[0], lh: t.uiSm[1], padV: t.s3xs, padH: t.xs }
+  }
+
+  const ctx = document.createElement('canvas').getContext('2d')
+  function capPx(family, weight, fs) {
+    ctx.font = `${weight} ${fs}px ${family}`
+    return ctx.measureText('H').actualBoundingBoxAscent
+  }
+
+  function makeButton(g, radius, trim, opts = {}) {
+    const b = document.createElement('span')
+    b.className = 'btn' + (trim ? ' trim' : '')
+    b.style.padding = `${g.padV}px ${g.padH}px`
+    b.style.borderRadius = radius + 'px'
+    if (opts.family) {
+      b.style.fontFamily = opts.family
+      b.style.fontWeight = opts.weight
+    }
+    const l = document.createElement('span')
+    l.className = 'label'
+    l.style.fontSize = g.fs + 'px'
+    l.style.lineHeight = g.lh + 'px'
+    l.append(opts.text || 'Label')
+    const p = document.createElement('span')
+    p.className = 'probe'
+    l.append(p)
+    b.append(l)
+    return { b, p }
+  }
+
+  function measure(b, p, family, weight, g) {
+    const r = b.getBoundingClientRect()
+    const baseline = p.getBoundingClientRect().bottom
+    const cap = capPx(family, weight, g.fs)
+    return {
+      height: r.height,
+      gapTop: baseline - cap - r.top,
+      gapBottom: r.bottom - baseline,
+      cap,
+    }
+  }
+
+  const f = (n) => n.toFixed(2)
+
+  async function run() {
+    await Promise.all([
+      document.fonts.load('500 14px Inter'),
+      document.fonts.load('700 14px Equinor'),
+    ])
+    document.getElementById('env').textContent =
+      `${navigator.userAgent} | devicePixelRatio ${devicePixelRatio} | ` +
+      `text-box supported: ${CSS.supports('text-box', 'trim-both cap alphabetic')}`
+
+    const out = document.getElementById('out')
+    for (const [density, t] of Object.entries(TOKENS)) {
+      const h = document.createElement('h2')
+      h.textContent = `Density: ${density}`
+      const table = document.createElement('table')
+      table.innerHTML =
+        '<tr><th>Size</th><th>Method</th><th>Button</th><th>Height</th><th>Figma expected</th>' +
+        '<th>Difference</th><th>Gap above capitals</th><th>Gap below baseline</th></tr>'
+      // Attach before measuring: detached elements report a height of 0.
+      out.append(h, table)
+      for (const size of ['default', 'small']) {
+        const g = geometry(t, size)
+        const expected = 2 * g.padV + g.lh
+        for (const [name, trim] of [
+          ['A. Untrimmed', false],
+          ['C. Trimmed to cap height', true],
+        ]) {
+          const { b, p } = makeButton(g, t.radius, trim)
+          const row = document.createElement('tr')
+          const cell = document.createElement('td')
+          cell.append(b)
+          row.innerHTML = `<td>${size} (${g.fs}/${g.lh}, pad ${g.padV}/${g.padH})</td><td>${name}</td>`
+          row.append(cell)
+          table.append(row)
+          const m = measure(b, p, 'Inter', 500, g)
+          const diff = m.height - expected
+          row.insertAdjacentHTML(
+            'beforeend',
+            `<td>${f(m.height)}</td><td>${f(expected)}</td>` +
+              `<td class="${Math.abs(diff) < 0.5 ? 'good' : 'bad'}">${f(diff)}</td>` +
+              `<td>${f(m.gapTop)}</td><td>${f(m.gapBottom)}</td>`,
+          )
+        }
+      }
+    }
+
+    // Equinor Bold, uppercase (overline-style label), header xs, sm and md tokens
+    const HEADER = {
+      comfortable: { xs: [12, 16], sm: [14, 16], md: [16, 20] },
+      compact: { xs: [10, 12], sm: [12, 16], md: [14, 16] },
+      relaxed: { xs: [14, 16], sm: [16, 20], md: [18, 24] },
+    }
+    const eq = FONTS.Equinor
+    const eh = document.createElement('h2')
+    eh.textContent = 'Equinor Bold, uppercase (overline-style label)'
+    const en = document.createElement('p')
+    en.className = 'note'
+    en.textContent =
+      'Sizes are the header xs, sm and md tokens. Padding is the same as the default Button. ' +
+      'Predicted and intended gaps come from the font file tables.'
+    out.append(eh, en)
+    for (const [density, t] of Object.entries(TOKENS)) {
+      const h = document.createElement('h2')
+      h.textContent = `Density: ${density}`
+      const table = document.createElement('table')
+      table.innerHTML =
+        '<tr><th>Size</th><th>Method</th><th>Button</th><th>Height</th><th>Expected</th>' +
+        '<th>Difference</th><th>Gap above capitals</th><th>Gap below baseline</th>' +
+        '<th>Predicted or intended gaps</th></tr>'
+      out.append(h, table)
+      for (const size of ['xs', 'sm', 'md']) {
+        const [fs, lh] = HEADER[density][size]
+        const g = { fs, lh, padV: t.xs, padH: t.sm }
+        const hl = (lh - (eq.asc + eq.desc) * fs) / 2
+        const above = hl + (eq.asc - eq.cap) * fs
+        const below = hl + eq.desc * fs
+        for (const [name, trim] of [
+          ['A. Untrimmed', false],
+          ['C. Trimmed to cap height', true],
+        ]) {
+          const { b, p } = makeButton(g, t.radius, trim, {
+            family: 'Equinor',
+            weight: 700,
+            text: 'OVERLINE',
+          })
+          const row = document.createElement('tr')
+          const cell = document.createElement('td')
+          cell.append(b)
+          row.innerHTML = `<td>header ${size} (${fs}/${lh}, pad ${g.padV}/${g.padH})</td><td>${name}</td>`
+          row.append(cell)
+          table.append(row)
+          const m = measure(b, p, 'Equinor', 700, g)
+          const expected = trim ? 2 * g.padV + m.cap : 2 * g.padV + lh
+          const diff = m.height - expected
+          const predicted = trim
+            ? `${f(g.padV)} / ${f(g.padV)}`
+            : `${f(g.padV + above)} / ${f(g.padV + below)}`
+          row.insertAdjacentHTML(
+            'beforeend',
+            `<td>${f(m.height)}</td><td>${f(expected)}</td>` +
+              `<td class="${Math.abs(diff) < 0.5 ? 'good' : 'bad'}">${f(diff)}</td>` +
+              `<td>${f(m.gapTop)}</td><td>${f(m.gapBottom)}</td><td>${predicted}</td>`,
+          )
+        }
+      }
+    }
+
+    // Instrument check
+    const check = document.getElementById('check')
+    for (const [family, spec] of Object.entries(FONTS)) {
+      const fs = 56
+      const lh = 80
+      const s = document.createElement('span')
+      s.className = 'sample'
+      s.style.fontFamily = family
+      s.style.fontWeight = spec.weight
+      const text = document.createElement('span')
+      text.textContent = 'HEH'
+      const probe = document.createElement('span')
+      probe.className = 'probe'
+      s.append(text, probe)
+      check.append(s)
+      const r = s.getBoundingClientRect()
+      const baseline = probe.getBoundingClientRect().bottom - r.top
+      const cap = capPx(family, spec.weight, fs)
+      const hl = (lh - (spec.asc + spec.desc) * fs) / 2
+      const predBaseline = hl + spec.asc * fs
+      const predCapTop = predBaseline - spec.cap * fs
+      const line = (y, color) => {
+        const d = document.createElement('span')
+        d.className = 'line'
+        d.style.top = y + 'px'
+        d.style.borderColor = color
+        s.append(d)
+      }
+      line(baseline, 'red')
+      line(baseline - cap, 'red')
+      line(predBaseline, 'blue')
+      line(predCapTop, 'blue')
+      const caption = document.createElement('div')
+      caption.className = 'note'
+      caption.textContent =
+        `${family}: measured baseline ${f(baseline)}, cap top ${f(baseline - cap)}; ` +
+        `predicted baseline ${f(predBaseline)}, cap top ${f(predCapTop)}`
+      check.append(caption)
+    }
+  }
+  run()
+</script>

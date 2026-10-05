@@ -29,6 +29,8 @@ export type ComponentEntry = {
 
 export const componentRegistry: ComponentEntry[] = [
     { name: "Button", route: "button", group: "Actions" },
+    // SPIKE, DO NOT MERGE: text trim investigation.
+    { name: "Text trim spike", route: "texttrimspike", group: "Actions" },
     { name: "Badge", route: "badge", group: "Data Display" },
     { name: "Divider", route: "divider", group: "Data Display" },
     { name: "Typography", route: "typography", group: "Data Display" },
