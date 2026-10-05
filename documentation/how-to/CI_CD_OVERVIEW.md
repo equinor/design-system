@@ -6,18 +6,19 @@ This document provides a high-level overview of all GitHub Actions workflows in 
 
 ### Automated (triggered by events)
 
-| Workflow                                                    | Trigger                          | Purpose                                               |
-| ----------------------------------------------------------- | -------------------------------- | ----------------------------------------------------- |
-| **Checks** (`checks.yaml`)                                  | PR to `main`, push to `main`     | Build, test, lint, and type-check in parallel         |
-| **React 18 compatibility** (`react18-compat.yaml`)          | PR to `main` (packages changes)  | Verify compatibility with React 18                    |
-| **PR Title Check** (`pr-title-check.yml`)                   | PR opened/edited                 | Validate conventional commit format                   |
-| **Release Please** (`release_please.yml`)                   | Push to `main`                   | Create/update release PR with changelogs              |
-| **Trigger Package Publishing** (`trigger_publish.yml`)      | Release PR merged                | Detect changed packages and trigger publish workflows |
-| **Publish core-react storybook** (`publish_storybook.yaml`) | Push to `main` (package changes) | Deploy Storybook to Azure                             |
-| **Claude Code** (`claude.yml`)                              | `@claude` mentions in issues/PRs | AI-powered code assistance                            |
-| **Issue triage** (`issue-triage.yml`)                       | Issue opened                     | Auto-triage new issues with Claude                    |
-| **Close stale issues** (`stale-issues.yml`)                 | Daily (06:00 UTC)                | Close issues labelled `issue needs work` after 3 days |
-| **Dependabot rotation** (`dependabot-rotation.yml`)         | Weekly (Monday 05:00 UTC)        | Slack reminder for Dependabot duty                    |
+| Workflow                                                           | Trigger                          | Purpose                                                            |
+| ------------------------------------------------------------------ | -------------------------------- | ------------------------------------------------------------------ |
+| **Checks** (`checks.yaml`)                                         | PR to `main`, push to `main`     | Build, test, lint, and type-check in parallel                      |
+| **React 18 compatibility** (`react18-compat.yaml`)                 | PR to `main` (packages changes)  | Verify compatibility with React 18                                 |
+| **PR Title Check** (`pr-title-check.yml`)                          | PR opened/edited                 | Validate conventional commit format                                |
+| **Breaking Changes Page Check** (`breaking-changes-doc-check.yml`) | PR opened/edited/labelled        | Require a breaking changes page entry for breaking `/next` changes |
+| **Release Please** (`release_please.yml`)                          | Push to `main`                   | Create/update release PR with changelogs                           |
+| **Trigger Package Publishing** (`trigger_publish.yml`)             | Release PR merged                | Detect changed packages and trigger publish workflows              |
+| **Publish core-react storybook** (`publish_storybook.yaml`)        | Push to `main` (package changes) | Deploy Storybook to Azure                                          |
+| **Claude Code** (`claude.yml`)                                     | `@claude` mentions in issues/PRs | AI-powered code assistance                                         |
+| **Issue triage** (`issue-triage.yml`)                              | Issue opened                     | Auto-triage new issues with Claude                                 |
+| **Close stale issues** (`stale-issues.yml`)                        | Daily (06:00 UTC)                | Close issues labelled `issue needs work` after 3 days              |
+| **Dependabot rotation** (`dependabot-rotation.yml`)                | Weekly (Monday 05:00 UTC)        | Slack reminder for Dependabot duty                                 |
 
 ### Manual (workflow_dispatch)
 
@@ -69,6 +70,7 @@ When a pull request targets `main`, the following happens:
 ```mermaid
 graph LR
     PR[PR opened/updated] --> TC[PR Title Check]
+    PR --> BC[Breaking Changes Page Check]
     PR --> CH[Checks workflow]
     PR --> R18[React 18 compat]
 
@@ -88,6 +90,8 @@ graph LR
 **Path filtering:** Every pull request starts the workflow so the aggregate status check is always reported. Code and tooling configuration changes run the full suite. Other non-code changes run the build-and-lint path, where the build provides the type declarations required by type-aware linting. Manual dispatch always runs the full suite.
 
 New commits cancel older Checks runs for the same pull request or ref so superseded work does not continue consuming runners.
+
+**Breaking changes page:** a PR marked breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) that changes `packages/eds-core-react/src/components/next/**` must also touch `packages/eds-core-react/stories/docs/BreakingChanges.mdx`. Tests, stories, docs and snapshots do not count as a change. The `skip-breaking-changes-doc` label waives the requirement for changes with no consumer-visible surface, and the job logs that it was used. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
 
 ## Release Pipeline
 

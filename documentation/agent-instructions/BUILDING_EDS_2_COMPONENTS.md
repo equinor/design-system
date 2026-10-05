@@ -586,7 +586,7 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
-- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx`
+- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx` — CI fails a PR marked breaking that changes `/next` without touching that page (`.github/workflows/breaking-changes-doc-check.yml`); the `skip-breaking-changes-doc` label is for the rare change with no consumer-visible surface
 
 ## Implementation Status Report
 

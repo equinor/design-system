@@ -15,6 +15,7 @@
     "format:check": "prettier --check .",
     "format:check:docs": "prettier --check \"./apps/design-system-docs/*.{ts,md}\" \"./apps/design-system-docs/{src,docs,scripts}/**/*.{css,md,ts,tsx}\"",
     "check:docs-stories": "node apps/design-system-docs/scripts/check-story-references.mjs",
+    "check:breaking-changes-doc": "node scripts/check-breaking-changes-doc.js",
     "init": "pnpm install --force && pnpm run build",
     "extract-prerequisites": "node scripts/extract-prerequisites.js",
     "generate:component-index": "node scripts/generate-component-index.js",

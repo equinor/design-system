@@ -1,0 +1,52 @@
+# Breaking Changes Page Check
+#
+# Fails a PR that makes a breaking change to a /next component without adding
+# anything to packages/eds-core-react/stories/docs/BreakingChanges.mdx.
+# The rules, the escape hatch and the reasoning live in
+# scripts/check-breaking-changes-doc.js.
+#
+# Its own workflow rather than a job in checks.yaml, for the triggers: this has
+# to re-run when the title is edited or the skip label is added, and giving
+# checks.yaml those triggers would rerun the whole build/test/lint suite every
+# time someone touches a label.
+#
+# Addresses: https://github.com/equinor/design-system/issues/5572
+
+name: Breaking Changes Page Check
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled]
+
+env:
+  NODE_VERSION: '24.16.0'
+
+jobs:
+  breaking-changes-doc:
+    name: Breaking changes page entry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # The script reads the PR's changed-file list from the REST API.
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
+      # No install step: the script uses only Node builtins and the gh CLI,
+      # which is preinstalled on the runner.
+      - name: Check for a breaking changes page entry
+        env:
+          # GITHUB_REPOSITORY is already set by the runner; the script reads it.
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          # Passed as environment, not interpolated into the run script: a PR
+          # title or body must never be able to become shell.
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: node scripts/check-breaking-changes-doc.js
