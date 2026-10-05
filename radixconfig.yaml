@@ -32,12 +32,18 @@ spec:
       ports:
         - name: http
           port: 3000
+      environmentConfig:
+        - environment: prod
+          enabled: false
     - name: docs
       dockerfileName: DockerfileEdsDocs
       publicPort: http
       ports:
         - name: http
           port: 3000
+      environmentConfig:
+        - environment: prod
+          enabled: false
     - name: storybook
       dockerfileName: DockerfileStorybook
       publicPort: http
@@ -45,6 +51,5 @@ spec:
         - name: http
           port: 3000
       environmentConfig:
-        # Disabled in prod until DockerfileStorybook lands on main; dev builds it from feat/*
         - environment: prod
           enabled: false
