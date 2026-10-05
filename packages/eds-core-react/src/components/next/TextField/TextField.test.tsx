@@ -77,6 +77,22 @@ describe('TextField (Next EDS 2.0)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <TextField
+          label="Name"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Basic functionality', () => {
     it('Renders label correctly', () => {
       render(<TextField label="Test Label" />)
@@ -121,7 +137,7 @@ describe('TextField (Next EDS 2.0)', () => {
       render(<TextField label="Label" id="test-id" />)
       // getByRole with name verifies label is properly connected to input
       const input = screen.getByRole('textbox', { name: 'Label' })
-      expect(input).toHaveAttribute('id', 'test-id-input')
+      expect(input).toHaveAttribute('id', 'test-id')
     })
 
     it('Generates id when not provided', () => {

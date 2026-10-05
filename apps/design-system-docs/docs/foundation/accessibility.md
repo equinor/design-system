@@ -1,6 +1,8 @@
-# Accessibility
-
-All digital interfaces should be inclusive and accessible for everyone, regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.
+---
+title: Accessibility
+hide_title: true
+description: 'All digital interfaces should be inclusive and accessible for everyone, regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.'
+---
 
 The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [uutilsynet](https://www.uutilsynet.no/) AA level requirements. While the components built are accessible, as a customer of the EDS there are things you need to remember when creating layouts and prototypes, and combining components
 
@@ -8,32 +10,30 @@ The UI components for all Equinor's internal digital interfaces are built to mee
 
 Accessibility ensures that users of different abilities can understand, navigate, interact with and contribute to the digital interface in a meaningful way. This means:
 
--   Keyboard interaction alternatives for all mouse-based actions are provided
--   All button and input fields are properly identified 
--   Images, SVGs and videos have text-based alternatives
--   All components are built to convey their identity, operation model and state to assistive technologies
-    
+- Keyboard interaction alternatives for all mouse-based actions are provided
+- All button and input fields are properly identified
+- Images, SVGs and videos have text-based alternatives
+- All components are built to convey their identity, operation model and state to assistive technologies
 
 ## What are different abilities
 
 There are many different types of abilities that need consideration:
 
--   Age
--   Blindness
--   Low vision
--   Colour-blindness
--   Hearing disabilities
--   Physical disabilities
--   Cognitive disabilities
--   Situational disabilities (such as a broken arm)
-    
+- Age
+- Blindness
+- Low vision
+- Colour-blindness
+- Hearing disabilities
+- Physical disabilities
+- Cognitive disabilities
+- Situational disabilities (such as a broken arm)
 
 There are also different types of situations that need consideration:
 
--   Physical location
--   Limited screen size
--   Lighting issues
-    
+- Physical location
+- Limited screen size
+- Lighting issues
+
 ## Guidelines
 
 ### Spacing
@@ -97,10 +97,32 @@ Please familiarise yourself with the guidelines from [WCAG 2.1][WCAG] and [Di
 
 Here are some resources to help validate your work:
 
-[WebAIM](https://webaim.org/)  
+<IconCardGrid columns={3}>
 
-[Are my colours accessible?](https://aremycolorsaccessible.com/)  
+<IconCard
+to="https://webaim.org/"
+title="WebAIM"
+description="Web accessibility evaluation tools and resources"
+badge={{ label: 'External' }}
+icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
+/>
 
-[The A11Y Project](https://a11yproject.com/)  
+<IconCard
+to="https://aremycolorsaccessible.com/"
+title="Are my colours accessible?"
+description="Check colour contrast ratios for WCAG compliance"
+badge={{ label: 'External' }}
+icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
+/>
 
-[WCAG]: <https://www.w3.org/TR/WCAG21/> "WCAG 2.1"  
+<IconCard
+to="https://a11yproject.com/"
+title="The A11Y Project"
+description="Community-driven accessibility knowledge base"
+badge={{ label: 'External' }}
+icon={<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" /></svg>}
+/>
+
+</IconCardGrid>
+
+[WCAG]: https://www.w3.org/TR/WCAG21/ 'WCAG 2.1'

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/equinor/design-system/compare/eds-mobile-components@v0.3.1...eds-mobile-components@v0.3.2) (2026-09-08)
+
+
+### 🐛 Fixed
+
+* keep component styles when a style prop is passed ([#5414](https://github.com/equinor/design-system/issues/5414)) ([733ae91](https://github.com/equinor/design-system/commit/733ae91bff59242b2d8a908ae8b43caf9ed7ed07))
+
 ## [0.3.1](https://github.com/equinor/design-system-mobile/compare/eds-mobile-components-v0.3.0...eds-mobile-components-v0.3.1) (2026-07-09)
 
 

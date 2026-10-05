@@ -54,6 +54,9 @@ Primary agents are selectable by the user and run as the main conversation agent
 | `build` | Development agent with EDS conventions | All (asks for git commit/push/branch) |
 | `advisor` | Read-only architectural advice and code reviews | Read-only (no write/edit/bash) |
 | `tokens-studio` | Tokens Studio pipeline assistant (studio CLI, pull, exports, config) | All (asks for git commit/push/branch, gh, and remote-mutating studio commands) |
+| `dependabot-duty` | Triages Dependabot PRs, Dependabot alerts and code scanning alerts, proposes pnpm overrides, reports | All (asks for git commit/push/branch and `gh`) |
+| `write-pr-description` | Writes a short PR description | All (asks for git commit/push/branch and any `gh` command except read-only `view`/`diff`/`list`) |
+| `write-issue` | Writes a GitHub issue from notes, screenshots or a conversation | All (asks for git commit/push/branch and any `gh` command except read-only `view`/`list`) |
 
 ### Sub-Agents
 
@@ -216,7 +219,10 @@ Refer to AGENTS.md for full conventions.
 │   ├── accessibility-audit.md  # Sub-agent: A11y auditor
 │   ├── component-doc.md    # Sub-agent: Documentation
 │   ├── audit-harnesses.md  # Sub-agent: Harness auditor
-│   └── tokens-studio.md    # Primary: Tokens Studio pipeline assistant
+│   ├── tokens-studio.md    # Primary: Tokens Studio pipeline assistant
+│   ├── dependabot-duty.md  # Primary: Dependabot PR + security alerts triage
+│   ├── write-pr-description.md  # Primary: PR description writer
+│   └── write-issue.md      # Primary: Issue writer
 ```
 
 ## Best Practices

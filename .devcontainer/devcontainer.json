@@ -71,7 +71,7 @@
   // install scripts assume os.tmpdir() already exists and throw ENOENT if it doesn't (setting TMPDIR
   // without mkdir -p is why the earlier attempt failed with a different error). .tmp/ is gitignored.
   // Remove the TMPDIR workaround once tokens-studio/studio-cli-releases#1 is resolved.
-  "onCreateCommand": "npm install -g pnpm gitmoji-cli && mkdir -p /workspaces/design-system/.tmp && TMPDIR=/workspaces/design-system/.tmp pnpm install && pnpm recursive install --filter ./packages",
+  "onCreateCommand": "npm install -g pnpm@11.27.0 gitmoji-cli && mkdir -p /workspaces/design-system/.tmp && TMPDIR=/workspaces/design-system/.tmp pnpm install && pnpm recursive install --filter ./packages",
   // Install additional dependencies:
   // - libc6:amd64 / libstdc++6:amd64 + the ld-linux symlink are for the axe linter on ARM-based hosts (e.g., MacBook M1+).
   // - bubblewrap (bwrap) and socat provide process-level sandboxing for running untrusted/agent-driven commands with least privilege inside the container.
@@ -81,7 +81,7 @@
     "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {},
     "github-cli": "latest",
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "22.12.0"
+      "version": "24.16.0"
     }
   }
 } 

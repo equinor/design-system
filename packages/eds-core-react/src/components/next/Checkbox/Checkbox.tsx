@@ -17,7 +17,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       indeterminate = false,
       indicator,
       helperMessage,
+      className,
       id: providedId,
+      style,
       ...rest
     },
     ref,
@@ -25,7 +27,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const internalRef = useRef<HTMLInputElement>(null)
     const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
     const generatedId = useId()
-    const inputId = providedId ?? generatedId
+    // `||`, not `??`: an empty string is treated as no id
+    const inputId = providedId || generatedId
     const helperMessageId = `${inputId}-helper`
 
     useEffect(() => {
@@ -41,6 +44,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={inputId}
           aria-checked={indeterminate ? 'mixed' : undefined}
           aria-describedby={helperMessage ? helperMessageId : undefined}
+          // Component CSS keys its :has(.input:...) state selectors on this class
           className="input"
           disabled={disabled}
           ref={inputRef}
@@ -63,14 +67,17 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </>
     )
 
+    const rootClassName = ['eds-checkbox', className].filter(Boolean).join(' ')
+
     // Use Field for layout when label is provided
     if (label) {
       return (
         <Field
           position="start"
           disabled={disabled}
-          className="eds-checkbox"
-          data-color-appearance={disabled ? 'neutral' : 'accent'}
+          className={rootClassName}
+          style={style}
+          data-color-appearance="accent"
           data-selectable-space="md"
           data-space-proportions="squished"
         >
@@ -89,10 +96,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className="eds-checkbox"
+        className={rootClassName}
+        style={style}
         data-standalone={true}
-        data-color-appearance={disabled ? 'neutral' : 'accent'}
-        data-disabled={disabled || undefined}
+        data-color-appearance="accent"
       >
         {checkboxInput}
       </span>

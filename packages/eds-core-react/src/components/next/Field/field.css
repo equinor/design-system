@@ -1,6 +1,8 @@
 @layer eds-components {
   .eds-field {
-    /* Private color variables */
+    /* Private color variables. The --_eds-field-* colour variables are
+       intended override points for Field-based components (Checkbox, Radio
+       and Switch set them from their own CSS) — keep the names stable */
     --_eds-field-label-color: var(--eds-color-text-strong);
     --_eds-field-description-color: var(--eds-color-text-subtle);
     --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
@@ -72,9 +74,18 @@
       line-height: var(--eds-typography-ui-body-sm-line-height-default);
     }
 
-    /* Only helper message changes color when disabled */
-    &[data-disabled='true'] {
-      --_eds-field-helper-color: var(--eds-color-text-disabled);
+    /* Only helper message changes color when disabled. The :has() arm covers
+       disabling inherited from an ancestor, e.g. fieldset[disabled], and is
+       scoped to the form controls a Field labels — a bare :has(:disabled)
+       would also match a placeholder <option disabled> inside an enabled
+       select. Not --eds-color-text-disabled: that token is switched by
+       data-color-appearance and renders tinted, not grey, under non-neutral
+       appearances. TODO: Replace with semantic token when available */
+    &:is(
+        [data-disabled='true'],
+        :has(input:disabled, select:disabled, textarea:disabled)
+      ) {
+      --_eds-field-helper-color: var(--eds-color-neutral-7);
     }
   }
 }

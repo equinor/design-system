@@ -21,6 +21,10 @@ exports[`Switch Matches snapshot 1`] = `
   cursor: pointer;
 }
 
+.c2:disabled {
+  cursor: not-allowed;
+}
+
 .c2:focus {
   outline: none;
 }
@@ -57,12 +61,16 @@ exports[`Switch Matches snapshot 1`] = `
   background-color: var(--eds_interactive_primary__resting, rgba(0, 112, 121, 1));
 }
 
-.c3:hover+span {
+.c3:hover:not(:disabled)+span {
   background-color: var(--eds_interactive_primary__hover_alt, rgba(222, 237, 238, 1));
 }
 
-.c3:hover+span>span:last-child {
+.c3:hover:not(:disabled)+span>span:last-child {
   background-color: var(--eds_interactive_primary__hover, rgba(0, 79, 85, 1));
+}
+
+.c3:disabled+span>span:is(:first-child,:last-child) {
+  background-color: var(--eds_interactive__disabled__fill, rgba(234, 234, 234, 1));
 }
 
 .c5 {
@@ -101,6 +109,10 @@ exports[`Switch Matches snapshot 1`] = `
   align-items: center;
   position: relative;
   gap: 8px;
+}
+
+.c0:has(input:disabled) {
+  cursor: not-allowed;
 }
 
 .c7 {

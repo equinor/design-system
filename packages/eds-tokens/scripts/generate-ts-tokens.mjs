@@ -11,11 +11,12 @@
  *    values (the platform's formula engine only runs for CSS), joined
  *    across files by `var(--eds-*)` chains
  *
- * The platform's formula engine folds colour formulas but not dimension
+ * The platform's formula engine folds colour formulas but not numeric
  * arithmetic — token math arrives in the CSS export as an unevaluated
- * `calc(var(--a) + var(--b))`. This script substitutes the references
- * and folds the arithmetic locally, because the TS modules need plain
- * numbers.
+ * `calc(var(--a) + var(--b))`, or as a math function such as the `pow()`
+ * behind the Gaussian colour-scale weights. This script substitutes the
+ * references and folds the arithmetic locally, because the TS modules
+ * need plain numbers.
  *
  * For every DTCG leaf the script derives the CSS custom property name
  * (`eds-` + path joined with `-`), dereferences the `var()` chain in the
@@ -174,7 +175,9 @@ function buildContext(cssFiles, scheme, density) {
     for (const [name, value] of variables) {
       // Among the base files precedence is alphabetical, which is no
       // basis for deciding a value — so a conflict there is an error. The
-      // dimension files that follow are meant to override (#5221).
+      // dimension files that follow are meant to override. The CSS side
+      // of the same duplicate-name problem is gated by
+      // assert-no-duplicate-names.mjs (#5407).
       const previous = declaredIn.get(name)
       if (baseFiles.has(part) && previous && context.get(name) !== value)
         fail(
@@ -231,6 +234,14 @@ function hasTopLevelOperator(value) {
 }
 
 /**
+ * CSS function names are case-insensitive, and `calc(` is matched by
+ * hand in three places rather than through MATH_FUNCTIONS, so it needs
+ * saying once here.
+ */
+const startsWithCalc = (value, index = 0) =>
+  value.slice(index, index + 'calc('.length).toLowerCase() === 'calc('
+
+/**
  * Parenthesise a substituted value when it is itself arithmetic, so
  * inlining cannot change operator association: `var(--a) * 2` with
  * `--a: calc(1px + 2px)` must not fold as `1px + 2px * 2`. Values that
@@ -238,7 +249,7 @@ function hasTopLevelOperator(value) {
  * keep their exact form — the operator there is not at top level.
  */
 function asOperand(value) {
-  return value.startsWith('calc(') || hasTopLevelOperator(value)
+  return startsWithCalc(value) || hasTopLevelOperator(value)
     ? `(${value})`
     : value
 }
@@ -398,6 +409,34 @@ function rgbToHex(value, cssName) {
 
 const NUMERIC_TERM = /^(-?(?:\d+\.?\d*|\.\d+))([a-z%]*)/i
 
+/** `pow(` — a math function call, as opposed to a bare `(` group. */
+const FUNCTION_NAME = /^([a-z][\w-]*)\(/i
+
+/**
+ * The CSS math functions this script folds. CSS has a dozen more, but
+ * an entry here has to be reachable from a real export: `pow()` is what
+ * the platform emits for the Gaussian weights the colour scales are
+ * derived from, where the formula engine leaves numeric maths for CSS
+ * to compute at runtime. Anything else fails by name, so the next one
+ * to appear is named rather than left to a debugging session.
+ *
+ * Adding one is only a new entry here when it takes a fixed number of
+ * unitless arguments, as `pow()` does. `round()` — the type-scale
+ * pattern in AGENTS.md, so the likeliest next arrival — takes a
+ * dimension and an optional strategy keyword, and `min()` / `max()`
+ * take any number of dimensions. Those need the unit check and the
+ * fixed arity below to give way first.
+ */
+const MATH_FUNCTIONS = {
+  pow: { arity: 2, apply: (base, exponent) => base ** exponent },
+}
+
+/** `pow(2, 3)` is arithmetic; `rgb(0 0 0 / 0.5)` is not. */
+const MATH_FUNCTION_CALL = new RegExp(
+  `^(?:${Object.keys(MATH_FUNCTIONS).join('|')})\\(`,
+  'i',
+)
+
 /**
  * Split a resolved expression into number / operator / paren tokens.
  * `calc(` is treated as a plain group so nested and inlined calls need no
@@ -413,12 +452,21 @@ function tokenizeExpression(expression, cssName) {
       index += 1
       continue
     }
-    if (expression.startsWith('calc(', index)) {
+    if (startsWithCalc(expression, index)) {
       tokens.push({ kind: '(' })
       index += 'calc('.length
       continue
     }
-    if (character === '(' || character === ')') {
+    // Any other `name(` is a math function. Unknown names are rejected
+    // in parseTerm, where the message can say which one it was.
+    const call = FUNCTION_NAME.exec(expression.slice(index))
+    if (call) {
+      tokens.push({ kind: 'function', name: call[1].toLowerCase() })
+      tokens.push({ kind: '(' })
+      index += call[0].length
+      continue
+    }
+    if (character === '(' || character === ')' || character === ',') {
       tokens.push({ kind: character })
       index += 1
       continue
@@ -445,7 +493,7 @@ function tokenizeExpression(expression, cssName) {
   return tokens
 }
 
-/** `<number>`, `( … )`. */
+/** `<number>`, `( … )`, `pow( … , … )`. */
 function parseTerm(tokens, cssName) {
   const token = tokens.shift()
   if (!token) tokenFail(`unexpected end of expression for --${cssName}`)
@@ -456,7 +504,48 @@ function parseTerm(tokens, cssName) {
       tokenFail(`unbalanced parentheses for --${cssName}`)
     return inner
   }
+  if (token.kind === 'function') return parseCall(token.name, tokens, cssName)
   return tokenFail(`unexpected "${token.kind}" for --${cssName}`)
+}
+
+/** `name` is consumed; `tokens` starts at the opening parenthesis. */
+function parseCall(name, tokens, cssName) {
+  const math = Object.hasOwn(MATH_FUNCTIONS, name) && MATH_FUNCTIONS[name]
+  if (!math)
+    tokenFail(
+      `unsupported function ${name}() for --${cssName} — this script folds ${Object.keys(
+        MATH_FUNCTIONS,
+      )
+        .map((supported) => `${supported}()`)
+        .join(', ')}`,
+    )
+  if (tokens.shift()?.kind !== '(')
+    tokenFail(`expected "(" after ${name} for --${cssName}`)
+
+  const args = []
+  if (tokens[0]?.kind !== ')') {
+    args.push(parseSum(tokens, cssName))
+    while (tokens[0]?.kind === ',') {
+      tokens.shift()
+      args.push(parseSum(tokens, cssName))
+    }
+  }
+  if (tokens.shift()?.kind !== ')')
+    tokenFail(`unbalanced parentheses in ${name}() for --${cssName}`)
+
+  if (args.length !== math.arity)
+    tokenFail(
+      `${name}() takes ${math.arity} argument(s), got ${args.length} for --${cssName}`,
+    )
+  const dimension = args.find((argument) => argument.unit !== '')
+  if (dimension)
+    tokenFail(
+      `cannot apply ${name}() to a dimension for --${cssName}: "${dimension.unit}"`,
+    )
+  return {
+    value: math.apply(...args.map((argument) => argument.value)),
+    unit: '',
+  }
 }
 
 /** `term (('*' | '/') term)*` — CSS allows a unit on at most one factor. */
@@ -514,6 +603,14 @@ function evaluateExpression(expression, cssName) {
   if (tokens.length > 0)
     tokenFail(
       `unexpected "${tokens[0].kind}" after expression for --${cssName}`,
+    )
+  // `pow(-8, 1/3)` is NaN and `pow(0, -1)` is Infinity. Both are valid
+  // TypeScript identifiers, so without this the module would compile
+  // and ship the junk — the script's rule is that an unconvertible
+  // value fails the run
+  if (!Number.isFinite(result.value))
+    tokenFail(
+      `expression is not a finite number for --${cssName}: ${expression} (${result.value})`,
     )
   return { value: Number(result.value.toFixed(5)), unit: result.unit }
 }
@@ -618,8 +715,9 @@ function convertShadow(rawValue, cssName) {
 
 /** A resolved value that still needs arithmetic folding. */
 const isExpression = (value) =>
-  value.startsWith('calc(') ||
+  startsWithCalc(value) ||
   value.startsWith('(') ||
+  MATH_FUNCTION_CALL.test(value) ||
   hasTopLevelOperator(value)
 
 function convertValue(rawValue, type, cssName) {
@@ -638,7 +736,8 @@ function convertValue(rawValue, type, cssName) {
     if (numeric) return Number(numeric[1])
     if (!isExpression(rawValue))
       tokenFail(`non-numeric ${type} for --${cssName}: ${rawValue}`)
-    // Token math from Tokens Studio arrives as an unevaluated calc()
+    // Token math from Tokens Studio arrives unevaluated, as a calc()
+    // or a math function such as pow()
     const { value, unit } = evaluateExpression(rawValue, cssName)
     if (unit !== '' && unit !== 'px')
       tokenFail(

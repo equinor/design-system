@@ -96,6 +96,46 @@ const meta: Meta<typeof Icon> = {
       ],
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component: `
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+
+\`\`\`bash
+npm install @equinor/eds-core-react@beta
+\`\`\`
+
+\`\`\`tsx
+import { Icon } from '@equinor/eds-core-react/next'
+import { TypographyNext as Typography } from '@equinor/eds-core-react'
+import { save } from '@equinor/eds-icons'
+
+// Auto-sized from Typography
+<Typography size="md">
+  Click <Icon data={save} /> to save
+</Typography>
+
+// Explicit size for standalone usage
+<Icon data={save} size="lg" />
+\`\`\`
+
+## Sizing Priority
+
+1. **Explicit \`size\` prop** - Highest priority, uses \`--eds-sizing-icon-{size}\` tokens
+2. **Parent Typography** - Inherits \`--eds-typography-icon-size\` from Typography component
+3. **Dynamic fallback** - Uses \`1.5em\` for automatic scaling with font-size
+
+## Key Features
+
+- **Token-based sizing** - Uses EDS design tokens for consistent sizing
+- **Automatic sizing** - Scales with parent Typography component
+- **Dynamic fallback** - Scales with font-size (1.5em) when no tokens are set
+- **Accessible** - WCAG 2.1 AA compliant with proper ARIA attributes
+        `,
+      },
+    },
+  },
 }
 
 export default meta

@@ -27,7 +27,7 @@ export const Badge = ({
     const styles = useStyles(badgeThemeStyles, { tone, emphasis, variant });
 
     return (
-        <View style={styles.container} {...rest}>
+        <View {...rest} style={[styles.container, rest.style]}>
             <Typography size="sm" weight="bolder" numberOfLines={1} style={styles.label}>
                 {children}
             </Typography>

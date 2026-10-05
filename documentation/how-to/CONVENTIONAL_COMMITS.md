@@ -52,19 +52,19 @@ type(scope): description
 
 ## Supported Types
 
-| Type       | Description                           | Example                                       |
-| ---------- | ------------------------------------- | --------------------------------------------- |
-| `feat`     | New feature                           | `feat: add button variants`                   |
-| `fix`      | Bug fix                               | `fix: resolve icon alignment issues`          |
-| `docs`     | Documentation changes                 | `docs: update installation guide`             |
-| `style`    | Code style changes (formatting, etc.) | `style: improve token naming consistency`     |
-| `refactor` | Code refactoring                      | `refactor: simplify component structure`      |
-| `perf`     | Performance improvements              | `perf: optimize data grid rendering`          |
-| `test`     | Adding or updating tests              | `test: add utility validation tests`          |
-| `build`    | Build system changes                  | `build: update webpack configuration`         |
-| `ci`       | CI/CD changes                         | `ci: add automated release workflow`          |
-| `chore`    | Maintenance tasks                     | `chore: update dependencies`                  |
-| `revert`   | Revert previous changes               | `revert: undo button color changes`           |
+| Type       | Description                           | Example                                   |
+| ---------- | ------------------------------------- | ----------------------------------------- |
+| `feat`     | New feature                           | `feat: add button variants`               |
+| `fix`      | Bug fix                               | `fix: resolve icon alignment issues`      |
+| `docs`     | Documentation changes                 | `docs: update installation guide`         |
+| `style`    | Code style changes (formatting, etc.) | `style: improve token naming consistency` |
+| `refactor` | Code refactoring                      | `refactor: simplify component structure`  |
+| `perf`     | Performance improvements              | `perf: optimize data grid rendering`      |
+| `test`     | Adding or updating tests              | `test: add utility validation tests`      |
+| `build`    | Build system changes                  | `build: update webpack configuration`     |
+| `ci`       | CI/CD changes                         | `ci: add automated release workflow`      |
+| `chore`    | Maintenance tasks                     | `chore: update dependencies`              |
+| `revert`   | Revert previous changes               | `revert: undo button color changes`       |
 
 ## Supported Scopes
 
@@ -138,7 +138,7 @@ Release-please detects which packages are affected based on **file paths** — y
 
 ### When to use a scope
 
-- **No scope** (default): Use this for most commits — release-please figures out the affected package from file paths, and `exclude-paths` keeps non-publishable files (Storybook, tests, README, config) from triggering releases.
+- **No scope** (default): Use this for most commits — release-please figures out the affected package from file paths, and `exclude-paths` keeps non-publishable directories (Storybook, tests) from triggering releases. It only matches directories, so package-root files such as `README.md` and `tsconfig.json` still count — keep edits to them in hidden-type commits.
 - **Package scope** (`eds-core-react`, `eds-tokens`, etc.): Only when the commit message alone doesn't make the package clear, or for changelog readability. Be aware this forces a bump regardless of `exclude-paths` when combined with a visible type (`feat`, `fix`).
 - **Infrastructure scope** (`config`, `github`, `build`, `deps`): For changes that don't belong to a specific package.
 
@@ -146,12 +146,12 @@ Release-please detects which packages are affected based on **file paths** — y
 
 For commits that only touch **non-publishable files** (config, docs, Storybook, tests), use a hidden type:
 
-| Scenario | Recommended | Avoid |
-| --- | --- | --- |
-| Storybook-only changes | `chore: ...` or `build(config): ...` | `feat(eds-core-react): ...` |
-| Config file updates | `chore(config): ...` or `build: ...` | `feat(eds-core-react): ...` |
-| Test-only changes | `test: ...` | `feat(eds-core-react): ...` |
-| README/docs in packages | `docs: ...` or `chore: ...` | `feat(eds-core-react): ...` |
+| Scenario                | Recommended                          | Avoid                       |
+| ----------------------- | ------------------------------------ | --------------------------- |
+| Storybook-only changes  | `chore: ...` or `build(config): ...` | `feat(eds-core-react): ...` |
+| Config file updates     | `chore(config): ...` or `build: ...` | `feat(eds-core-react): ...` |
+| Test-only changes       | `test: ...`                          | `feat(eds-core-react): ...` |
+| README/docs in packages | `docs: ...` or `chore: ...`          | `feat(eds-core-react): ...` |
 
 The types `chore`, `ci`, `build`, `docs`, and `test` are hidden in release-please and will not trigger version bumps.
 

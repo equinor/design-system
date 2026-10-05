@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { InputProps } from '../Input/Input.types'
 import type { SelectOptionProps } from '../utils/SelectOption.types'
 
@@ -51,6 +51,13 @@ export type AutocompleteProps<T = string> = {
    * or return `true` for all options when filtering is server-side.
    */
   optionsFilter?: (option: T, inputValue: string) => boolean
+  /**
+   * CSS class names applied to the root element (the outer `<div>` wrapper).
+   * Use this to control layout, width, or margin of the entire autocomplete field.
+   */
+  className?: string
+  /** Inline styles applied to the root element (the outer `<div>` wrapper). */
+  style?: CSSProperties
 } & SelectOptionProps<T> &
   Omit<
     InputProps,
@@ -63,6 +70,8 @@ export type AutocompleteProps<T = string> = {
     | 'type'
     | 'value'
     | 'defaultValue'
+    | 'className'
+    | 'style'
     // Internal combobox handlers — not configurable by consumers
     | 'onMouseDown'
     | 'onClick'

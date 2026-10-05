@@ -25,6 +25,19 @@ describe('Search (next)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root search element', () => {
+      const { container } = render(
+        <Search className="custom-class" style={{ marginTop: '8px' }} />,
+      )
+      /* eslint-disable testing-library/no-node-access */
+      expect(container.firstChild).toHaveClass('eds-search')
+      expect(container.firstChild).toHaveClass('custom-class')
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      /* eslint-enable testing-library/no-node-access */
+    })
+  })
+
   describe('Clear button', () => {
     it('is hidden when input is empty', () => {
       render(<Search />)
@@ -81,6 +94,12 @@ describe('Search (next)', () => {
   })
 
   describe('Accessibility', () => {
+    it('applies a provided id verbatim to the input', () => {
+      render(<Search label="Search" id="my-search" />)
+      const input = screen.getByRole('searchbox', { name: 'Search' })
+      expect(input).toHaveAttribute('id', 'my-search')
+    })
+
     it('has no violations with a label', async () => {
       const { container } = render(<Search label="Search" />)
       expect(await axe(container)).toHaveNoViolations()

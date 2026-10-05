@@ -3,6 +3,7 @@
 - **Status:** Approved
 - **Date:** 2026-04-01
 - **Decision makers:** EDS Core Team
+- **Scope:** Web
 
 ## Context
 
@@ -27,7 +28,9 @@ While building the Link component (#4601), we discovered the need for this patte
 The component accepts an `as` prop that specifies which element or component to render:
 
 ```tsx
-<Link as={RouterLink} to="/about">About</Link>
+<Link as={RouterLink} to="/about">
+  About
+</Link>
 ```
 
 **Pros:**
@@ -70,9 +73,7 @@ The component accepts an `asChild` boolean. When true, it renders a `Slot` that 
 The component exposes a render prop or expects consumers to wrap it:
 
 ```tsx
-<Link renderAs={(props) => <RouterLink {...props} to="/about" />}>
-  About
-</Link>
+<Link renderAs={(props) => <RouterLink {...props} to="/about" />}>About</Link>
 ```
 
 **Pros:**

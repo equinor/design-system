@@ -1,5 +1,11 @@
 {
   "permissions": {
+    "ask": [
+      "Bash(gh pr create:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue edit:*)"
+    ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
@@ -11,7 +17,18 @@
       "Write(./.env)",
       "Write(./.env.*)",
       "Bash(*.env*)",
+      "Bash(*id_rsa*)",
+      "Bash(*id_ed25519*)",
+      "Bash(*id_ecdsa*)",
+      "Bash(*id_dsa*)",
+      "Bash(*.pem*)",
+      "Bash(*credentials.json*)",
+      "Bash(*secrets.json*)",
+      "Bash(*secrets/*)",
       "Read(./id_rsa*)",
+      "Read(./id_ed25519*)",
+      "Read(./id_ecdsa*)",
+      "Read(./id_dsa*)",
       "Read(./**/*.pem)",
       "Read(./**/*.key)",
       "Read(./secrets/**)",
