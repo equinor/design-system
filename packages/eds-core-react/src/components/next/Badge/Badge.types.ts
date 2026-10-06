@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 
 /**
- * Color tone for theming — maps to `data-color-appearance`.
+ * Color tone for theming, which maps to `data-color-appearance`.
  * - `neutral`: Neutral gray tones (default)
  * - `accent`: Brand/action color
  * - `success`: Positive/confirmation
