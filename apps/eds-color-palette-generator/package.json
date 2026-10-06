@@ -37,7 +37,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.7",
     "@microsoft/api-extractor": "^7.58.12",
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^25.5.2",
     "@types/react": "^19.3.0",
