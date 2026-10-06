@@ -174,11 +174,18 @@ function AutocompleteInner<T = string>(
     [allItems, isFiltering, inputValue, matchesFilter],
   )
 
+  // Case-insensitive, matching how customOptions are deduplicated above
+  const hasExactMatch = (items: OptionItem<T>[], text: string) =>
+    items.some(
+      (item) =>
+        getLabelFn(item.value).toLowerCase() === text.trim().toLowerCase(),
+    )
+
   const customValueTyped =
     allowCustomValue &&
     isFiltering &&
     inputValue.trim() !== '' &&
-    filteredItems.length === 0
+    !hasExactMatch(filteredItems, inputValue)
 
   const totalOptions = filteredItems.length + (allowCustomValue ? 1 : 0)
 
@@ -371,8 +378,10 @@ function AutocompleteInner<T = string>(
         e.preventDefault()
         if (!listboxRef.current?.matches(':popover-open')) break
         if (activeIndex < 0) {
-          // No keyboard navigation yet — confirm custom value directly if available
-          if (customValueTyped) handleCustomOptionSelect(inputValue.trim())
+          // No keyboard navigation yet — confirm custom value directly if it's
+          // the only option, so Enter doesn't add a value while matches are shown
+          if (customValueTyped && filteredItems.length === 0)
+            handleCustomOptionSelect(inputValue.trim())
           break
         }
         if (allowCustomValue && activeIndex === 0) {
