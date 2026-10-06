@@ -10,6 +10,7 @@ allowBuilds:
   lightningcss-cli: true
   core-js: false
   esbuild: false
+  '@parcel/watcher': false
   unrs-resolver: false
 
 # Settings moved here from .npmrc: pnpm 11+ only reads auth/registry from .npmrc.
