@@ -4,7 +4,8 @@ packages:
   - apps/**
 
 # pnpm 11 replaced onlyBuiltDependencies with allowBuilds. Unlisted packages
-# with build scripts are skipped with a warning; set false to silence explicitly.
+# with build scripts fail the install (ERR_PNPM_IGNORED_BUILDS); set false to skip
+# the build explicitly.
 allowBuilds:
   '@tokens-studio/studio-cli': true
   lightningcss-cli: true
