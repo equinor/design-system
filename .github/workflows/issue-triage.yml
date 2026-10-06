@@ -25,6 +25,34 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Collect already-linked issues
+        id: linked
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number || inputs.issue_number }}
+        run: |
+          set -o pipefail
+          query='query($owner:String!,$repo:String!,$number:Int!){ repository(owner:$owner,name:$repo){ issue(number:$number){ body parent { number } subIssues(first:100){ nodes { number } } } } }'
+          if ! gh api graphql -f query="$query" \
+               -F owner="${GITHUB_REPOSITORY%/*}" \
+               -F repo="${GITHUB_REPOSITORY#*/}" \
+               -F number="$ISSUE" > "$RUNNER_TEMP/relations.json"; then
+            # A lookup failure must not fail triage — fall back to an empty list.
+            echo "numbers=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          numbers=$(
+            {
+              jq -r '[.data.repository.issue.parent.number]
+                     + [.data.repository.issue.subIssues.nodes[].number]
+                     | map(select(. != null)) | .[]' "$RUNNER_TEMP/relations.json"
+              jq -r '.data.repository.issue.body // ""' "$RUNNER_TEMP/relations.json" |
+                grep -oE '#[0-9]+' | tr -d '#' || true
+            } | sort -un | paste -sd, -
+          )
+          echo "Already linked: ${numbers:-(none)}"
+          echo "numbers=$numbers" >> "$GITHUB_OUTPUT"
+
       - name: Triage with Claude
         uses: anthropics/claude-code-action@v1
         env:
@@ -75,16 +103,28 @@ jobs:
             Search for related issues in BOTH open and closed state — a closed issue may contain the resolution.
 
             Derive 2-4 keyword searches from the issue title and body, then run them:
-              gh search issues --repo ${{ github.repository }} --state all --limit 20 <keywords>
+              gh search issues --repo ${{ github.repository }} --limit 20 '<keywords> -type:Epic -type:Objective'
+            (gh search issues covers both open and closed by default — it has no --state all.)
             You may also use:
-              gh issue list --repo ${{ github.repository }} --state all --search "<keywords>" --limit 20
+              gh issue list --repo ${{ github.repository }} --state all --search "<keywords> -type:Epic -type:Objective" --limit 20
 
-            Exclude the current issue (#${{ github.event.issue.number || inputs.issue_number }}) from results.
+            Never link an epic or an objective. They are tracking containers, not related
+            work. If the new issue looks like it belongs under one, leave that for a human
+            to wire up as a sub-issue — do not mention the container.
+
+            Exclude from your results:
+              - The current issue (#${{ github.event.issue.number || inputs.issue_number }})
+              - These issues, already connected to it as parent, sub-issue, or a reference
+                in the body (the list may be empty): ${{ steps.linked.outputs.numbers }}
+            GitHub already shows those relationships on the issue, so repeating them adds
+            nothing but a cross-reference in the other issue's timeline.
 
             Apply a HIGH threshold for "related": the issue must clearly overlap in symptom, component, or feature — not just share a common word. Prefer quality over quantity. If unsure, do not comment.
 
             If you find 1-5 strong matches, post a SINGLE comment that:
-              - Starts with a brief sentence explaining these may be related
+              - Starts with a brief sentence explaining these may be related. Do not
+                qualify it with what you left out (e.g. "in addition to the ones already
+                linked") — the exclusions above are not the reader's problem.
               - Lists each match as: "- #NUMBER — TITLE (open/closed): one-sentence reason it's relevant"
               - For closed matches with a resolution, call it out explicitly (e.g. "closed as fixed in #XYZ")
               - Ends with this disclaimer (exact text):
