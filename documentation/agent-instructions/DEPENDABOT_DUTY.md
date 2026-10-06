@@ -71,7 +71,7 @@ Merge one PR at a time so CI runs on `main` between merges.
 
 ### `ERR_PNPM_IGNORED_BUILDS`
 
-pnpm 11 fails `setup` when a newly added package has an install script that is not listed in `allowBuilds` in `pnpm-workspace.yaml`. The error names the package. Find which dependency pulls it in, then check the package's `scripts.install` (`npm view <pkg>@<ver> scripts`). If the script only builds from source as a fallback, because prebuilt binaries ship as optional per-platform packages, add it as `false`, as with `esbuild`. Use `true` only when the package does not work without its script. Example: jest 30 pulls in `@parcel/watcher` through `jest-haste-map` (#5591).
+pnpm 11 fails `setup` when a newly added package has an install script (`preinstall`, `install` or `postinstall`) that is not listed in `allowBuilds` in `pnpm-workspace.yaml`. The error names the package. Find which dependency pulls it in, then check those scripts (`npm view <pkg>@<ver> scripts`). If the script only builds from source as a fallback, because prebuilt binaries ship as optional per-platform packages, add it as `false`, as with `esbuild`. Use `true` only when the package does not work without its script. Example: jest 30 pulls in `@parcel/watcher` through `jest-haste-map` (#5591).
 
 ### Grouped PRs with one bad major
 
@@ -176,7 +176,7 @@ A pile that keeps growing, or an entry whose comment no longer matches reality, 
 
 ## Step 3 — Fix transitive alerts with pnpm overrides
 
-The repo already uses `overrides` in `pnpm-workspace.yaml` for this (see PRs #5177, #5368, #5472). Follow the same shape. Those PRs predate pnpm 11 and edit `pnpm.overrides` in the root `package.json`. pnpm 11 no longer reads that field, so the overrides moved to `pnpm-workspace.yaml` in #5485.
+The repo already uses `overrides` in `pnpm-workspace.yaml` for this. PRs #5177, #5368 and #5472 show the keys and ranges to use, but they predate pnpm 11 and edit `pnpm.overrides` in the root `package.json`. pnpm 11 no longer reads that field, so the overrides moved to `pnpm-workspace.yaml` in #5485, and new entries go there.
 
 ### 3a. Establish what is actually installed
 
