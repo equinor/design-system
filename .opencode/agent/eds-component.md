@@ -19,7 +19,7 @@ When invoked to create a new component, follow this flow:
 
 3. **If an old component exists** at `packages/eds-core-react/src/components/<name>/`, read it for behavioural awareness only — do not copy implementation. Use modern patterns (`:focus-visible`, CSS tokens, simple state).
 
-4. **Scaffold the component folder** using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#file-templates): `index.ts`, `<Name>.tsx`, `<Name>.types.ts`, `<lowercase>.css`, `<Name>.figma.tsx` (only if Figma URL), `<Name>.test.tsx`, `<Name>.stories.tsx`. CSS filename and class root must be lowercase.
+4. **Scaffold the component folder** using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#file-templates): `index.ts`, `<Name>.tsx`, `<Name>.types.ts`, `<lowercase>.css`, `<Name>.figma.tsx` (only if Figma URL), `<Name>.test.tsx`, `<Name>.stories.tsx`, `<Name>.docs.md`. Then run `pnpm run generate:component-docs <Name>` to create the docs page, following [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md). CSS filename and class root must be lowercase.
 
 5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package): export from `next/index.ts`, `@import` the CSS in `next/index.css`.
 
