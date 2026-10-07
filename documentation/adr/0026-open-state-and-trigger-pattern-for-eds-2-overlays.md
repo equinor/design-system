@@ -14,7 +14,7 @@ Dialog, Menu and Popover all need a way for a consumer to open and close them. E
 | `Dialog` (next)         | Fully controlled. `open` and `onOpenChange` are both required, and the consumer builds and wires its own trigger                             |
 | `Menu` (next)           | A bare `<ul>` with no open state, focus management, keyboard handling or positioning ([#5324]). Anchoring is wired by hand from JS ([#5102]) |
 | `Popover`               | Not built for EDS 2.0 yet ([#5008])                                                                                                          |
-| `Tooltip` (next)        | Clones its child with `cloneElement` to attach trigger behaviour                                                                             |
+| `Tooltip` (next)        | Already wraps its child to attach trigger behaviour, with `cloneElement` rather than `Slot`                                                  |
 | `Accordion.Item` (next) | Controlled and uncontrolled in one API: `defaultOpen`, `open` and `onOpenChange`                                                             |
 
 [#5228] proposes a compound API for Dialog and is the immediate trigger for writing this down. The same decisions reach Menu and Popover, which are built at different times by different people, so they need an answer that outlives one pull request.
@@ -129,7 +129,11 @@ The component also has to know why it is closing, since [#5461] treats Escape di
 </Dialog.Trigger>
 ```
 
+`Dialog.Close` and its equivalents work the same way, so the two sides of the pattern match. The close button that `Dialog.Header` renders stays as it is, since that one is ours rather than the consumer's.
+
 The child has to forward its ref and spread the props it is given, which every EDS component already does. A string, a fragment or several children is an error rather than a silent no-op.
+
+The child also has to be interactive. A wrapper makes `<Dialog.Trigger><div>Open</div></Dialog.Trigger>` easy to write, and it would produce a clickable element with no role, no keyboard support and nothing for a screen reader to announce, which a trigger that rendered its own `<button>` could never do. The component warns in development when the child is neither a button nor an element carrying a role and keyboard handling.
 
 This is the shape the styled design systems use. React Spectrum's `DialogTrigger` wraps an `ActionButton`, and Mantine's `Menu.Target` renders nothing and clones a single child with the same two requirements. MUI ships no trigger at all and leaves the consumer holding state, which is where our Dialog is today. Only the headless libraries, Radix and Base UI, render an element from the trigger itself, and they can because everything they render is unstyled.
 
