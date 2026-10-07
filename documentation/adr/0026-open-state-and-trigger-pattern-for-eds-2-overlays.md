@@ -115,27 +115,15 @@ The component also has to know why it is closing, since [#5461] treats Escape di
 
 **Refs.** The element ref lives in `Popup`, not in the context. One `Popup` per root.
 
-**`asChild`.** A trigger supports `asChild`, and the child has to forward its ref and spread the props it is given. Whether the trigger also passes its own styling to that child is the open question below.
+**`asChild`.** A trigger follows the rule `Button` and `Link` already use: the component's `className` and `data-*` attributes pass through the `Slot`, so the child keeps the design system styling and `asChild` means one thing everywhere in the library. The child has to forward its ref and spread the props it is given.
+
+The cost is that a child which is itself an EDS component wears two sets of classes, so `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` would come out as `class="eds-chip eds-button"`. A trigger that must not look like a button is the trigger hook's job instead, which is what that hook is for. The alternative, passing behaviour and no styling, would make `asChild` mean one thing on `Button` and `Link` and another on a trigger, and that ambiguity is worse than the one case it solves. Radix and Base UI are not precedent either way here: their triggers are unstyled, so the question never arises for them.
 
 **ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
 
-**Hooks.** Two of them, both internal to `/next` for now: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands.
+**Hooks.** Two of them, both internal to `/next`: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands. Exporting either is additive, so it waits until a consumer has a case the components cannot serve, such as a trigger that must not look like a button.
 
 Implementation mechanics are deliberately not fixed here: the signatures of those hooks, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
-
-### Open questions
-
-Two points are unresolved, and the implementation should not treat either as decided.
-
-**What `asChild` passes to the child.** Three answers are on the table:
-
-1. The same as `Button` and `Link`: the trigger's `className` and `data-*` go through the `Slot`, so `asChild` keeps one meaning across the library. A child that is itself an EDS component then wears two sets of classes, so `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` comes out as `class="eds-chip eds-button"`.
-2. Behaviour only: the handler, the ARIA and the ref, with styling left to the child. A chip trigger works, at the cost of `asChild` meaning one thing on `Button` and `Link` and another on a trigger, and of `<Button asChild>` nesting for a child that should look like a button.
-3. Keep answer 1, and treat a trigger that cannot look like a button as the trigger hook's job, which is what that hook exists for.
-
-Radix and Base UI are not precedent here. Their triggers are unstyled, so the question never arises for them.
-
-**When either hook becomes public.** Both are internal here, which is a decision we can revisit cheaply once a consumer has a case the trigger component cannot serve.
 
 ### Consequences
 
