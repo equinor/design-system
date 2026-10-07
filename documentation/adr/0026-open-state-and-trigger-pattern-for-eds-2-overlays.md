@@ -61,9 +61,10 @@ Keep the current component shape and add `useDialog()`, which returns `open`, `s
 
 **Cons:**
 
-- Wiring the trigger stays the consumer's job, so the ARIA and the anchor ref are still theirs to get right
+- Wiring the trigger stays the consumer's job, so the ARIA and the anchor ref are still theirs to get right, and nothing warns them when they forget
 - Two APIs to document and keep consistent
 - Does not help Menu, where the missing piece is a component that owns the anchoring
+- Reads awkwardly in the places that are markup only, such as documentation examples and Code Connect snippets
 
 ### Option 3: Compound provider, with popup, trigger and close
 
@@ -82,10 +83,23 @@ The root becomes a context provider, the element moves into a `Popup` sub-compon
 - The root renders no DOM of its own, which is surprising when debugging
 - One more concept, `Popup`, sitting next to the existing `Content`
 - The two sources of truth still have to be reconciled, now across two components
+- The provider has to wrap both the trigger and the popup, so a trigger far from its overlay in the React tree means wrapping a large subtree
 
 ## Decision
 
 Adopt **option 3** for overlay components in `/next`, with this contract.
+
+### Why a trigger component rather than a hook
+
+The choice between option 2 and option 3 is not symmetric. A hook can be added on top of a trigger component later, as a pure addition for the cases the component cannot reach. A trigger component added after a hook leaves two ways to do the same thing for good, and every documentation page and example then has to pick a side. Option 3 keeps the later decision open, option 2 closes it.
+
+The case for the hook is that a trigger can live anywhere: in a toolbar above an overlay rendered at the bottom of the page, in a table row, in a command palette, or nowhere at all when the overlay opens from an effect after a network call. All of those are already served by `open` and `onOpenChange`, which this decision keeps. The controlled props are the escape hatch. What a hook adds beyond them is the ARIA wiring on a trigger that sits outside the provider, and for a modal dialog that is a small gain.
+
+For Menu and Popover it is a larger gain in the opposite direction. Their trigger and popup are joined by CSS anchor positioning, which needs a generated `anchor-name` on one element and `position-anchor` on the other. That is not something a consumer should write by hand, and [#5102] says exactly that. A trigger far from its own menu is also close to meaningless, since a menu is anchored to whatever opened it. Where the component is most needed, the argument for the hook is weakest.
+
+The libraries point the same way. Radix, Base UI and Headless UI ship a trigger component and no hook. React Aria is hook-first, and still ships `DialogTrigger` as a component on top of those hooks. The component is the default surface in all four; the hook, where it exists, is underneath it.
+
+One implementation consequence follows: the provider must render no DOM and memoise its context value, so that wrapping a large subtree stays free. [#5601] covers that.
 
 **State.** Each overlay accepts `defaultOpen`, `open` and `onOpenChange`. The prop wins whenever it is defined, internal state covers the rest, and `onOpenChange` fires on every change so a consumer can observe without taking over. `Accordion.Item` already works this way and is the second consumer of the shared hook that implements it.
 
