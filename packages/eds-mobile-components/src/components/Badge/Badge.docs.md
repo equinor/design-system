@@ -1,9 +1,3 @@
-## Summary
-
-Badge labels content with status, category, or a numeric value. Use it in table cells, list rows, and card headers to communicate information at a glance.
-
-Badge is a non-interactive component. For selectable or dismissible labels, use Chip. A notification badge (dot or count indicator on top of an icon or avatar) is planned as a separate component.
-
 ## Usage
 
 ```tsx

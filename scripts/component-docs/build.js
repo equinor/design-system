@@ -43,6 +43,7 @@ function buildPages(project, component) {
     const { dir, file } = found[platform]
     const { sections: sidecar, links } = readSidecar(
       path.join(dir, `${component}.docs.md`),
+      cfg,
     )
     const ctx = {
       relDir: path.relative(rootDir, dir),

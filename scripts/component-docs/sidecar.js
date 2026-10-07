@@ -1,33 +1,38 @@
 const fs = require('fs')
-const {
-  SIDECAR_SECTIONS,
-  OPTIONAL_SIDECAR_SECTIONS,
-  SIDECAR_METADATA_KEYS,
-} = require('./config')
+const { OPTIONAL_SIDECAR_SECTIONS, SIDECAR_METADATA_KEYS } = require('./config')
 const { fail } = require('./errors')
 
 // Reads {Component}.docs.md: the hand-written part of the page. An optional
 // metadata block at the top (`aria`, `docs`) feeds the Links row. The rest is
 // split at its `## ` headings, and the required and optional sections are fixed.
 // Returns { sections, links }.
-function readSidecar(file) {
+function readSidecar(file, cfg) {
   if (!fs.existsSync(file)) fail(`missing hand-written sidecar: ${file}`)
   const text = fs.readFileSync(file, 'utf8')
   const frontmatter = text.match(/^---\n([\s\S]*?)\n---\n/)
   const links = parseMetadata(file, frontmatter?.[1])
-  const body = frontmatter ? text.slice(frontmatter[0].length) : text
+  // HTML comments are notes to the author and never reach the page.
+  const body = (frontmatter ? text.slice(frontmatter[0].length) : text).replace(
+    /<!--[\s\S]*?-->/g,
+    '',
+  )
 
   const parts = body.split(/^## (.+)$/m)
   const sections = {}
   for (let i = 1; i < parts.length; i += 2) {
     sections[parts[i].trim()] = parts[i + 1].trim()
   }
-  const missing = SIDECAR_SECTIONS.filter((s) => !sections[s])
-  const allowed = [...SIDECAR_SECTIONS, ...OPTIONAL_SIDECAR_SECTIONS]
+  if (sections.Summary && !cfg.requiredSections.includes('Summary')) {
+    fail(
+      `${file}: remove the Summary. It is written once, in the web sidecar, and shown above both tabs.`,
+    )
+  }
+  const missing = cfg.requiredSections.filter((s) => !sections[s])
+  const allowed = [...cfg.requiredSections, ...OPTIONAL_SIDECAR_SECTIONS]
   const extra = Object.keys(sections).filter((s) => !allowed.includes(s))
   if (missing.length || extra.length) {
     fail(
-      `${file}: sections must be ${SIDECAR_SECTIONS.join(', ')}, plus optionally ${OPTIONAL_SIDECAR_SECTIONS.join(', ')} ` +
+      `${file}: sections must be ${cfg.requiredSections.join(', ')}, plus optionally ${OPTIONAL_SIDECAR_SECTIONS.join(', ')} ` +
         `(missing: ${missing.join(', ') || 'none'}, unexpected: ${extra.join(', ') || 'none'})`,
     )
   }

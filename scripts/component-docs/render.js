@@ -117,7 +117,6 @@ function renderMobile(component, ctx) {
   )
   return joinBlocks([
     generatedNote(component, ctx.relDir),
-    ctx.sidecar.Summary,
     featuresSection(component, ctx),
     usageSection(component, 'mobile', ctx),
     section(
@@ -159,6 +158,7 @@ function renderWeb(component, ctx) {
   const mobileLinks = renderLinks(
     {
       figmaUrl: ctx.figmaUrl,
+      documentationUrl: ctx.docsUrl,
       sourceUrl: ctx.mobileSourceUrl,
       npmUrl: PLATFORMS.mobile.npmUrl,
     },

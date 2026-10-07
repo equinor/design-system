@@ -14,10 +14,11 @@
  *   {Component}Props        a `type` or `interface` in any file of that folder:
  *                           props, types, defaults, descriptions (JSDoc)
  *   {Component}.stories.tsx example code and captions
- *   {Component}.docs.md     the hand-written part: Summary, Usage,
- *                           Accessibility, optional Features and Related
- *                           components. An optional block at the top
- *                           (`aria:`, `docs:`) adds links to the Links row.
+ *   {Component}.docs.md     the hand-written part: Usage, Accessibility,
+ *                           optional Features and Related components, and on
+ *                           web the Summary, which is shown above both tabs.
+ *                           An optional block at the top (`aria:`, `docs:`)
+ *                           adds links to the Links row.
  *   {Component}.figma.tsx   Figma URL (web folder only, optional)
  *
  * Outputs:

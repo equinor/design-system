@@ -5,8 +5,6 @@ const rootDir = path.resolve(__dirname, '../..')
 const BETA_CALLOUT =
   '**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.'
 
-const SIDECAR_SECTIONS = ['Summary', 'Usage', 'Accessibility']
-
 // Features: hand-written bullets added after the ones generated from the props
 // (required when the component has no props). Related components: omitted from
 // the page when absent.
@@ -43,6 +41,8 @@ const PLATFORMS = {
     installLine: 'npm install @equinor/eds-core-react@beta',
     npmUrl: 'https://www.npmjs.com/package/@equinor/eds-core-react',
     skipStories: new Set(['Introduction']),
+    // The summary is written once, here, and shown above both tabs.
+    requiredSections: ['Summary', 'Usage', 'Accessibility'],
   },
   mobile: {
     componentsRoot: 'packages/eds-mobile-components/src/components',
@@ -51,13 +51,14 @@ const PLATFORMS = {
     installLine: 'npm install @equinor/eds-mobile-components',
     npmUrl: 'https://www.npmjs.com/package/@equinor/eds-mobile-components',
     skipStories: new Set(),
+    // No Summary: the web sidecar's summary sits above the React Native tab.
+    requiredSections: ['Usage', 'Accessibility'],
   },
 }
 
 module.exports = {
   rootDir,
   BETA_CALLOUT,
-  SIDECAR_SECTIONS,
   OPTIONAL_SIDECAR_SECTIONS,
   SIDECAR_METADATA_KEYS,
   DOCS_SITE,
