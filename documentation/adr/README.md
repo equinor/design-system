@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 25
+Records: 26
 
 | ADR | Title | Scope | Status | Date | Note |
 | --- | ----- | ----- | ------ | ---- | ---- |
@@ -24,7 +24,7 @@ Records: 25
 | [0004](./0004-component-conventions-for-eds-2.md) | Component conventions for EDS 2.0 | Web | Accepted | 2026-03-20 |  |
 | [0005](./0005-use-aschild-slot-for-polymorphism.md) | Use `asChild` + `Slot` for polymorphic rendering in EDS 2.0 | Web | Approved | 2026-04-01 |  |
 | [0006](./0006-flat-class-names-for-eds-2-components.md) | Flat CSS class names for EDS 2.0 components | Web | Accepted | 2026-06-29 |  |
-| [0007](./0007-token-variable-architecture-spacing-typography.md) | Token variable architecture (typography & spacing) for the redefined token system | Tokens | Accepted | 2026-06-26 |  |
+| [0007](./0007-token-variable-architecture-spacing-typography.md) | Token variable architecture (typography & spacing) for the redefined token system | Tokens | Superseded | 2026-06-26 | by ADR-0027 |
 | [0008](./0008-generate-ts-tokens-from-studio-exports.md) | Generate TypeScript tokens by combining the Tokens Studio DTCG and CSS exports | Tokens | Accepted | 2026-07-13 |  |
 | [0009](./0009-temporary-next-subpaths-for-eds-tokens-beta.md) | Publish Tokens Studio output under temporary `next/*` subpaths during the eds-tokens beta | Tokens | Accepted | 2026-07-20 |  |
 | [0010](./0010-single-bundled-css-entry-for-eds-tokens-3.md) | Mirror the 2.x CSS export surface in eds-tokens 3.0.0: one bundled `./css/variables` entry | Tokens | Accepted | 2026-07-20 | 2026-09-04; proposed 2026-07-20 — the bundle has shipped and been exercised on the beta… |
@@ -43,6 +43,7 @@ Records: 25
 | [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Mobile | Accepted | 2026-04-09 | recorded retrospectively 2026-09-24 |
 | [0024](./0024-mobile-touch-targets-are-a-fixed-constant-not-a-token.md) | Touch targets are a fixed platform constant in mobile components, not a density-scaled token | Mobile | Accepted | 2026-09-16 | recorded retrospectively 2026-09-24 |
 | [0025](./0025-batch-graduation-with-release-candidate.md) | Graduate EDS 2.0 as one batch, through a release candidate, to stable 3.0.0 | Web, Tokens | Accepted | 2026-09-17 |  |
+| [0027](./0027-token-variable-architecture-typography-roles.md) | Token variable architecture for typography and spacing, with header, label and body roles | Tokens | Proposed | 2026-10-07 |  |
 
 ## Statuses outside the template
 
