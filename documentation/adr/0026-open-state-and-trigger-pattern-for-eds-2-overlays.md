@@ -81,7 +81,7 @@ The root becomes a context provider, the element moves into a `Popup` sub-compon
 
 - Breaking for everyone using Dialog on the beta line
 - The root renders no DOM of its own, which is surprising when debugging
-- One more concept, `Popup`, sitting next to the existing `Content`
+- One more concept, `Popup` for the overlay surface itself, sitting next to the existing `Content` for the body text inside it
 - The two sources of truth still have to be reconciled, now across two components
 - The provider has to wrap both the trigger and the popup, so a trigger far from its overlay in the React tree means wrapping a large subtree
 
@@ -93,7 +93,7 @@ Adopt **option 3** for overlay components in `/next`, with this contract.
 
 The choice between option 2 and option 3 is not symmetric. A hook can be added on top of a trigger component later, as a pure addition for the cases the component cannot reach. A trigger component added after a hook leaves two ways to do the same thing for good, and every documentation page and example then has to pick a side. Option 3 keeps the later decision open, option 2 closes it.
 
-The case for the hook is that a trigger can live anywhere: in a toolbar above an overlay rendered at the bottom of the page, in a table row, in a command palette, or nowhere at all when the overlay opens from an effect after a network call. All of those are already served by `open` and `onOpenChange`, which this decision keeps. The controlled props are the escape hatch. What a hook adds beyond them is the ARIA wiring on a trigger that sits outside the provider, and for a modal dialog that is a small gain.
+The case for the hook is that a trigger can live anywhere: in a toolbar above an overlay rendered at the bottom of the page, in a table row, in a menu item that unmounts the moment the dialog opens, in a command palette, or nowhere at all when the overlay opens from an effect after a network call. All of those are already served by `open` and `onOpenChange`, which this decision keeps. The controlled props are the escape hatch. What a hook adds beyond them is the ARIA wiring on a trigger that sits outside the provider, and for a modal dialog that is a small gain.
 
 For Menu and Popover it is a larger gain in the opposite direction. Their trigger and popup are joined by CSS anchor positioning, which needs a generated `anchor-name` on one element and `position-anchor` on the other. That is not something a consumer should write by hand, and [#5102] says exactly that. A trigger far from its own menu is also close to meaningless, since a menu is anchored to whatever opened it. Where the component is most needed, the argument for the hook is weakest.
 
@@ -107,11 +107,11 @@ One implementation consequence follows: the provider must render no DOM and memo
 
 **State.** Each overlay accepts `defaultOpen`, `open` and `onOpenChange`. The prop wins whenever it is defined, internal state covers the rest, and `onOpenChange` fires on every change so a consumer can observe without taking over. `Accordion.Item` already works this way and is the second consumer of the shared hook that implements it.
 
-**One owner.** Every intent, from the trigger, the close button or the backdrop, calls `onOpenChange`. The effect inside `Popup` is the only code that calls `showModal()` or `close()`. The browser can still close a native dialog on Escape, so mapping the native `close` and `cancel` events back to state is part of the contract rather than an optimisation.
+**One owner.** Every intent, from the trigger, the close button or the backdrop, calls `onOpenChange`. The effect inside `Popup` is the only code that calls `showModal()` or `close()`. Escape is the one path the browser starts on its own, and the `cancel` event is cancellable, so the contract is intent first rather than echo: prevent the default close, report the intent, and let the element close only once state agrees. A consumer who refuses the close, as an unsaved-changes prompt does, would otherwise find the dialog already shut. The callback also carries why the overlay is closing, because [#5461] has to tell Escape apart from a press on the backdrop.
 
 **Refs.** The element ref lives in `Popup`, not in the context. One `Popup` per root.
 
-**`asChild`.** A trigger follows the rule `Button` and `Link` already use: the component's own `className` and `data-*` attributes pass through the `Slot` to the child, so the child keeps the design system styling.
+**`asChild`.** A trigger passes behaviour to its child and nothing else: the handler that opens the overlay, the ARIA attributes and the ref. It does not pass its own styling. This differs from `Button` and `Link`, where `asChild` keeps the component's look and swaps only the element, and the difference is deliberate: those two are styled components you re-element, while a trigger is a behaviour wrapper whose default happens to be a `Button`. Passing the styling on would make `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` render a chip wearing button classes, while behaviour alone composes, since a child that should look like a button can still be wrapped in `<Button asChild>`. A child of any `asChild` trigger has to forward its ref and spread the props it is given.
 
 **ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
 
@@ -119,12 +119,9 @@ One implementation consequence follows: the provider must render no DOM and memo
 
 Implementation mechanics are deliberately not fixed here: the signatures of those hooks, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
 
-### Open questions
+### Open question
 
-Two points are unresolved, and the implementation should not treat either as decided:
-
-1. What `asChild` means when the child is another EDS component. `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` would produce `class="eds-chip eds-button"` under the rule above. The rule works for raw elements such as `<a>` and `<button>`; for component children it needs an answer.
-2. When either hook becomes public. Both are internal here, which is a decision we can revisit cheaply once a consumer has a case the trigger component cannot serve.
+One point is unresolved, and the implementation should not treat it as decided: when either hook becomes public. Both are internal here, which is a decision we can revisit cheaply once a consumer has a case the trigger component cannot serve.
 
 ### Consequences
 
