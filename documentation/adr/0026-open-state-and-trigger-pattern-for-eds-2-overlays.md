@@ -28,7 +28,7 @@ One property shapes everything below: a native `<dialog>` owns an open state of 
 - A consumer should be able to open an overlay without holding state, and should still be able to hold it when routing or a confirm-before-close flow needs it.
 - The pattern has to fit both a native element that owns its state (`<dialog>`) and a popup positioned from JS (Menu, Popover).
 - Whatever renders the trigger should own the trigger's ARIA, and for Menu and Popover the anchor wiring that [#5102] asks for.
-- It has to sit inside [ADR-0004](./0004-component-conventions-for-eds-2.md), which allows the compound pattern for containers and asks for it to be justified per component, and [ADR-0005](./0005-use-aschild-slot-for-polymorphism.md) for `asChild`.
+- It has to sit inside [ADR-0004](./0004-component-conventions-for-eds-2.md), which allows the compound pattern for containers and asks for it to be justified per component, and leave [ADR-0005](./0005-use-aschild-slot-for-polymorphism.md), which defines `asChild`, as it is.
 - Breaking changes are free on the beta line until the release candidate ([ADR-0025](./0025-batch-graduation-with-release-candidate.md)), and expensive after it.
 
 ## Options Considered
@@ -121,13 +121,23 @@ The component also has to know why it is closing, since [#5461] treats Escape di
 
 **Refs.** The element ref lives in `Popup`, not in the context. One `Popup` per root.
 
-**`asChild`.** A trigger follows the rule `Button` and `Link` already use: the component's `className` and `data-*` attributes pass through the `Slot`, so the child keeps the design system styling and `asChild` means one thing everywhere in the library. The child has to forward its ref and spread the props it is given.
+**Trigger.** A trigger renders no element of its own. It takes exactly one child, merges the open behaviour, the ARIA and the ref into it, and leaves the look to the child:
 
-The cost is that a child which is itself an EDS component wears two sets of classes, so `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` would come out as `class="eds-chip eds-button"`. A trigger that must not look like a button is the trigger hook's job instead, which is what that hook is for. The alternative, passing behaviour and no styling, would make `asChild` mean one thing on `Button` and `Link` and another on a trigger, and that ambiguity is worse than the one case it solves. Radix and Base UI are not precedent either way here: their triggers are unstyled, so the question never arises for them.
+```tsx
+<Dialog.Trigger>
+  <Button>Open dialog</Button>
+</Dialog.Trigger>
+```
+
+The child has to forward its ref and spread the props it is given, which every EDS component already does. A string, a fragment or several children is an error rather than a silent no-op.
+
+This is the shape the styled design systems use. React Spectrum's `DialogTrigger` wraps an `ActionButton`, and Mantine's `Menu.Target` renders nothing and clones a single child with the same two requirements. MUI ships no trigger at all and leaves the consumer holding state, which is where our Dialog is today. Only the headless libraries, Radix and Base UI, render an element from the trigger itself, and they can because everything they render is unstyled.
+
+Two things follow. `asChild` does not appear on a trigger, so [ADR-0005](./0005-use-aschild-slot-for-polymorphism.md) keeps its single meaning and is untouched by this decision. And a trigger that must not look like a button needs nothing special, since any child works.
 
 **ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
 
-**Hooks.** Two of them, both internal to `/next`: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands. The trigger hook cannot assume a button or a click: Autocomplete's trigger is the text input itself, focus stays in it, and it opens on typing. Exporting either hook is additive, so it waits until a consumer has a case the components cannot serve, such as a trigger that must not look like a button.
+**Hooks.** Two of them, both internal to `/next`: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands. The trigger hook cannot assume a button or a click: Autocomplete's trigger is the text input itself, focus stays in it, and it opens on typing. Exporting either hook is additive, so it waits until a consumer has a case that neither the components nor the controlled props serve.
 
 Implementation mechanics are deliberately not fixed here: the signatures of those hooks, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
 
