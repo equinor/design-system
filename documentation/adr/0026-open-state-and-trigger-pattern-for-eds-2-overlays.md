@@ -107,11 +107,15 @@ One implementation consequence follows: the provider must render no DOM and memo
 
 **State.** Each overlay accepts `defaultOpen`, `open` and `onOpenChange`. The prop wins whenever it is defined, internal state covers the rest, and `onOpenChange` fires on every change so a consumer can observe without taking over. `Accordion.Item` already works this way and is the second consumer of the shared hook that implements it.
 
-**One owner.** Every intent, from the trigger, the close button or the backdrop, calls `onOpenChange`. The effect inside `Popup` is the only code that calls `showModal()` or `close()`. Escape is the one path the browser starts on its own, and the `cancel` event is cancellable, so the contract is intent first rather than echo: prevent the default close, report the intent, and let the element close only once state agrees. A consumer who refuses the close, as an unsaved-changes prompt does, would otherwise find the dialog already shut. The callback also carries why the overlay is closing, because [#5461] has to tell Escape apart from a press on the backdrop.
+**One owner.** Every intent, from the trigger, the close button or the backdrop, calls `onOpenChange`. The effect inside `Popup` is the only code that calls `showModal()` or `close()`.
+
+Escape is the one path the browser starts on its own. The `cancel` event is cancellable, so where the component must be able to refuse a close, as a non-dismissable dialog or an unsaved-changes prompt does, it prevents the default, reports the intent and lets the element close only once state agrees. Doing that unconditionally would be wrong: if the state update fails or a consumer's handler stalls, the dialog can no longer be left by keyboard, which is a trap under WCAG 2.1.2. So the native close stays the default path, and intent first applies where a refusal is possible.
+
+The component also has to know why it is closing, since [#5461] treats Escape differently from a press on the backdrop. Whether that reaches the public callback is for [#5601].
 
 **Refs.** The element ref lives in `Popup`, not in the context. One `Popup` per root.
 
-**`asChild`.** A trigger passes behaviour to its child and nothing else: the handler that opens the overlay, the ARIA attributes and the ref. It does not pass its own styling. This differs from `Button` and `Link`, where `asChild` keeps the component's look and swaps only the element, and the difference is deliberate: those two are styled components you re-element, while a trigger is a behaviour wrapper whose default happens to be a `Button`. Passing the styling on would make `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` render a chip wearing button classes, while behaviour alone composes, since a child that should look like a button can still be wrapped in `<Button asChild>`. A child of any `asChild` trigger has to forward its ref and spread the props it is given.
+**`asChild`.** A trigger supports `asChild`, and the child has to forward its ref and spread the props it is given. Whether the trigger also passes its own styling to that child is the open question below.
 
 **ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
 
@@ -119,9 +123,19 @@ One implementation consequence follows: the provider must render no DOM and memo
 
 Implementation mechanics are deliberately not fixed here: the signatures of those hooks, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
 
-### Open question
+### Open questions
 
-One point is unresolved, and the implementation should not treat it as decided: when either hook becomes public. Both are internal here, which is a decision we can revisit cheaply once a consumer has a case the trigger component cannot serve.
+Two points are unresolved, and the implementation should not treat either as decided.
+
+**What `asChild` passes to the child.** Three answers are on the table:
+
+1. The same as `Button` and `Link`: the trigger's `className` and `data-*` go through the `Slot`, so `asChild` keeps one meaning across the library. A child that is itself an EDS component then wears two sets of classes, so `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` comes out as `class="eds-chip eds-button"`.
+2. Behaviour only: the handler, the ARIA and the ref, with styling left to the child. A chip trigger works, at the cost of `asChild` meaning one thing on `Button` and `Link` and another on a trigger, and of `<Button asChild>` nesting for a child that should look like a button.
+3. Keep answer 1, and treat a trigger that cannot look like a button as the trigger hook's job, which is what that hook exists for.
+
+Radix and Base UI are not precedent here. Their triggers are unstyled, so the question never arises for them.
+
+**When either hook becomes public.** Both are internal here, which is a decision we can revisit cheaply once a consumer has a case the trigger component cannot serve.
 
 ### Consequences
 
