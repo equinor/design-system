@@ -99,6 +99,10 @@ For Menu and Popover it is a larger gain in the opposite direction. Their trigge
 
 The libraries point the same way. Radix, Base UI and Headless UI ship a trigger component and no hook. React Aria is hook-first, and still ships `DialogTrigger` as a component on top of those hooks. The component is the default surface in all four; the hook, where it exists, is underneath it.
 
+This is not a choice between the two shapes, though. The trigger component is a thin layer over a trigger hook, so the hook gets built either way. What this decision settles is which of them is public: the component is the API, the hook is the implementation, and exporting the hook later costs a line and a documentation page rather than a redesign.
+
+The hook stays honest in the meantime because it has an internal consumer. Autocomplete builds a combobox out of an `Input` and the internal `Menu`, generates its own anchor name (`Autocomplete.tsx:75`), and sets `aria-expanded` and `aria-controls` by hand. Its trigger is a text field, so it can never be a `Menu.Trigger`, and it is exactly the case a trigger hook exists for. Once the real Menu lands it should consume the hook rather than keep its own wiring.
+
 One implementation consequence follows: the provider must render no DOM and memoise its context value, so that wrapping a large subtree stays free. [#5601] covers that.
 
 **State.** Each overlay accepts `defaultOpen`, `open` and `onOpenChange`. The prop wins whenever it is defined, internal state covers the rest, and `onOpenChange` fires on every change so a consumer can observe without taking over. `Accordion.Item` already works this way and is the second consumer of the shared hook that implements it.
@@ -111,14 +115,16 @@ One implementation consequence follows: the provider must render no DOM and memo
 
 **ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
 
-Implementation mechanics are deliberately not fixed here: the signature of the shared hook, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
+**Hooks.** Two of them, both internal to `/next` for now: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands.
+
+Implementation mechanics are deliberately not fixed here: the signatures of those hooks, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
 
 ### Open questions
 
 Two points are unresolved, and the implementation should not treat either as decided:
 
 1. What `asChild` means when the child is another EDS component. `<Dialog.Trigger asChild><Chip /></Dialog.Trigger>` would produce `class="eds-chip eds-button"` under the rule above. The rule works for raw elements such as `<a>` and `<button>`; for component children it needs an answer.
-2. Whether the shared state hook is exported for consumers or stays internal to `/next`.
+2. When either hook becomes public. Both are internal here, which is a decision we can revisit cheaply once a consumer has a case the trigger component cannot serve.
 
 ### Consequences
 
