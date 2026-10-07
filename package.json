@@ -18,6 +18,7 @@
     "init": "pnpm install --force && pnpm run build",
     "extract-prerequisites": "node scripts/extract-prerequisites.js",
     "generate:component-index": "node scripts/generate-component-index.js",
+    "generate:component-docs": "node scripts/generate-component-docs.js",
     "generate:adr-index": "node scripts/generate-adr-index.js",
     "prebuild": "pnpm run extract-prerequisites && pnpm run generate:component-index && pnpm run generate:adr-index",
     "build": "pnpm run build:token-sync && pnpm run build:tokens-build && pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab && pnpm run build:color-palette-generator:cli",

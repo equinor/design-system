@@ -65,7 +65,7 @@
         "dev": "tsup-node --watch --clean=false",
         "lint": "eslint .",
         "test": "jest --passWithNoTests",
-        "types": "tsc --noEmit"
+        "types": "tsc --noEmit && tsc --noEmit -p tsconfig.docs.json"
     },
     "type": "module",
     "types": "./dist/index.d.ts"
