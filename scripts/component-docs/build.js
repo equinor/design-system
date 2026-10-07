@@ -25,6 +25,16 @@ function assertNoDashes({ file, content }) {
   }
 }
 
+// A prop without a description would print as an empty bullet.
+function assertPropsDocumented(component, props) {
+  const missing = props.filter((p) => !p.description).map((p) => p.name)
+  if (missing.length) {
+    fail(
+      `${component}: add a JSDoc description to ${missing.map((n) => `\`${n}\``).join(', ')} in ${component}Props.`,
+    )
+  }
+}
+
 // The pages to write for one component: always the web page, plus the React
 // Native one when the mobile folder has a sidecar.
 function buildPages(project, component) {
@@ -41,13 +51,15 @@ function buildPages(project, component) {
   for (const [platform, cfg] of Object.entries(PLATFORMS)) {
     if (platform === 'mobile' && !hasMobile) continue
     const { dir, file } = found[platform]
+    const props = extractProps(findPropsDeclaration(project, dir, component))
+    assertPropsDocumented(component, props)
     const { sections: sidecar, links } = readSidecar(
       path.join(dir, `${component}.docs.md`),
       cfg,
     )
     const ctx = {
       relDir: path.relative(rootDir, dir),
-      props: extractProps(findPropsDeclaration(project, dir, component)),
+      props,
       stories: extractStories(
         project,
         path.join(dir, `${component}.stories.tsx`),
