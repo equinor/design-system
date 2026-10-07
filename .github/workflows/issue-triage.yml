@@ -27,6 +27,8 @@ jobs:
 
       - name: Collect already-linked issues
         id: linked
+        # An empty list is a valid result, so triage still runs if this step dies.
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number || inputs.issue_number }}
@@ -46,8 +48,15 @@ jobs:
               jq -r '[.data.repository.issue.parent.number]
                      + [.data.repository.issue.subIssues.nodes[].number]
                      | map(select(. != null)) | .[]' "$RUNNER_TEMP/relations.json"
+              # Both #1234 and a pasted URL create a cross-reference, so catch both.
+              # The URL form is tied to this repository: a link to another repository's
+              # issue says nothing about ours. The last filter drops hex colours, which
+              # this repository's bodies are full of; issue numbers never carry a
+              # leading zero and the repository is nowhere near six digits.
               jq -r '.data.repository.issue.body // ""' "$RUNNER_TEMP/relations.json" |
-                grep -oE '#[0-9]+' | tr -d '#' || true
+                grep -oE "(#|github\.com/$GITHUB_REPOSITORY/(issues|pull)/)[0-9]+" |
+                grep -oE '[0-9]+$' |
+                grep -E '^[1-9][0-9]{0,4}$' || true
             } | sort -un | paste -sd, -
           )
           echo "Already linked: ${numbers:-(none)}"
