@@ -9,8 +9,12 @@ const SIDECAR_SECTIONS = ['Summary', 'Usage', 'Accessibility']
 
 // Features: hand-written bullets added after the ones generated from the props
 // (required when the component has no props). Related components: omitted from
-// the page when absent. Links: `- ARIA: <url>` and `- Docs: <page>` lines.
-const OPTIONAL_SIDECAR_SECTIONS = ['Features', 'Related components', 'Links']
+// the page when absent.
+const OPTIONAL_SIDECAR_SECTIONS = ['Features', 'Related components']
+
+// Optional metadata block at the top of a sidecar. These become buttons in the
+// Links row; they are not content, so they never render as a section.
+const SIDECAR_METADATA_KEYS = ['aria', 'docs']
 
 const DOCS_SITE = 'https://eds.equinor.com/docs/Next/components'
 const DOCS_SITE_DIR = 'apps/design-system-docs/docs/components'
@@ -55,6 +59,7 @@ module.exports = {
   BETA_CALLOUT,
   SIDECAR_SECTIONS,
   OPTIONAL_SIDECAR_SECTIONS,
+  SIDECAR_METADATA_KEYS,
   DOCS_SITE,
   DOCS_SITE_DIR,
   GITHUB_BLOB,

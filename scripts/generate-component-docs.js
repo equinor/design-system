@@ -15,8 +15,9 @@
  *                           props, types, defaults, descriptions (JSDoc)
  *   {Component}.stories.tsx example code and captions
  *   {Component}.docs.md     the hand-written part: Summary, Usage,
- *                           Accessibility, Related components, and an optional
- *                           Links section (WAI-ARIA pattern, shared docs page)
+ *                           Accessibility, optional Features and Related
+ *                           components. An optional block at the top
+ *                           (`aria:`, `docs:`) adds links to the Links row.
  *   {Component}.figma.tsx   Figma URL (web folder only, optional)
  *
  * Outputs:

@@ -9,7 +9,7 @@ const {
   readFigmaUrl,
   docsPageUrl,
 } = require('./locate')
-const { readSidecar, parseLinks } = require('./sidecar')
+const { readSidecar } = require('./sidecar')
 const { extractProps } = require('./props')
 const { extractStories } = require('./stories')
 const { renderWeb, renderMobile } = require('./render')
@@ -41,8 +41,9 @@ function buildPages(project, component) {
   for (const [platform, cfg] of Object.entries(PLATFORMS)) {
     if (platform === 'mobile' && !hasMobile) continue
     const { dir, file } = found[platform]
-    const sidecar = readSidecar(path.join(dir, `${component}.docs.md`))
-    const sidecarLinks = parseLinks(sidecar.Links)
+    const { sections: sidecar, links } = readSidecar(
+      path.join(dir, `${component}.docs.md`),
+    )
     const ctx = {
       relDir: path.relative(rootDir, dir),
       props: extractProps(findPropsDeclaration(project, dir, component)),
@@ -53,8 +54,8 @@ function buildPages(project, component) {
       ),
       sidecar,
       figmaUrl: readFigmaUrl(found.web.dir, component),
-      docsUrl: docsPageUrl(component, sidecarLinks.Docs),
-      ariaUrl: sidecarLinks.ARIA,
+      docsUrl: docsPageUrl(component, links.docs),
+      ariaUrl: links.aria,
       sourceUrl: githubUrl(file),
       mobileSourceUrl: hasMobile ? githubUrl(found.mobile.file) : undefined,
       hasMobile,
