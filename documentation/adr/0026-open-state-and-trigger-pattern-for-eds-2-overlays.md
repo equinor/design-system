@@ -109,7 +109,13 @@ One implementation consequence follows: the provider must render no DOM and memo
 
 **One owner.** Every intent, from the trigger, the close button or the backdrop, calls `onOpenChange`. The effect inside `Popup` is the only code that calls `showModal()` or `close()`.
 
-Escape is the one path the browser starts on its own. The `cancel` event is cancellable, so where the component must be able to refuse a close, as a non-dismissable dialog or an unsaved-changes prompt does, it prevents the default, reports the intent and lets the element close only once state agrees. Doing that unconditionally would be wrong: if the state update fails or a consumer's handler stalls, the dialog can no longer be left by keyboard, which is a trap under WCAG 2.1.2. So the native close stays the default path, and intent first applies where a refusal is possible.
+`<dialog>` is not the only element that closes itself. Menu, Popover and Tooltip will use the Popover API, where the browser light-dismisses and closes on Escape without asking React either, so this part of the contract covers both.
+
+How far a component can go depends on which element it is, and the two are not equal. A dialog gets the `cancel` event, which is cancellable, so where a component must be able to refuse a close, as a non-dismissable dialog or an unsaved-changes prompt does, it prevents the default, reports the intent, and lets the element close only once state agrees. A popover has no equivalent: `beforetoggle` is cancellable when it opens but not when it closes, so light dismiss cannot be refused and a popover-backed overlay can only follow the element and report what happened.
+
+Even for a dialog, refusing unconditionally would be wrong. If the state update fails or a consumer's handler stalls, the dialog can no longer be left by keyboard, which is a trap under WCAG 2.1.2. So the native close stays the default path, and intent first applies only where a refusal is both possible and wanted.
+
+Overlays also have to tolerate each other. A tooltip shown over an open menu must not dismiss it, which is what `popover="hint"` is for, so the popover type each overlay uses is part of this contract rather than a detail of each component.
 
 The component also has to know why it is closing, since [#5461] treats Escape differently from a press on the backdrop. Whether that reaches the public callback is for [#5601].
 
@@ -121,7 +127,7 @@ The cost is that a child which is itself an EDS component wears two sets of clas
 
 **ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
 
-**Hooks.** Two of them, both internal to `/next`: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands. Exporting either is additive, so it waits until a consumer has a case the components cannot serve, such as a trigger that must not look like a button.
+**Hooks.** Two of them, both internal to `/next`: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands. The trigger hook cannot assume a button or a click: Autocomplete's trigger is the text input itself, focus stays in it, and it opens on typing. Exporting either hook is additive, so it waits until a consumer has a case the components cannot serve, such as a trigger that must not look like a button.
 
 Implementation mechanics are deliberately not fixed here: the signatures of those hooks, how `cancel` is handled for a non-dismissable dialog ([#5461]), and how a `Popup` registers itself are for the first implementation ([#5601]) to settle.
 
@@ -137,6 +143,8 @@ Implementation mechanics are deliberately not fixed here: the signatures of thos
 ### Confirmation
 
 New overlay components in `/next` follow this contract, and code review checks it. Dialog is the first implementation ([#5601]), followed by Menu ([#4437]) and Popover ([#5008]).
+
+Tooltip is partly in scope. Its trigger follows the rule above, replacing the `cloneElement` it uses today, and it is covered by the clause on overlays tolerating each other. It does not take `open`, `defaultOpen` or `onOpenChange`, because a tooltip opens on hover and focus rather than on consumer intent. That change is for whenever Tooltip is next worked on, not a task of its own.
 
 ## Related
 
