@@ -16,16 +16,19 @@
  *      `BREAKING CHANGE:` footer in the body.
  *   2. The diff touches a file under packages/eds-core-react/src/components/
  *      next/ that can change what a consumer sees (so not tests, stories,
- *      docs or snapshots).
+ *      docs, snapshots or Code Connect files).
  *   3. The breaking changes page is not in the diff.
  *
  * Escape hatch: the `skip-breaking-changes-doc` label. Some breaking changes
  * genuinely need no entry - an internal rename with no consumer-visible
- * surface, say. The label is logged when used so it shows up in review.
+ * surface, say. Using it leaves a warning annotation on the check, so it shows
+ * up in review rather than only in the job log.
  *
- * Blind spot, by design: a plain `fix:` that retires a known issue rather than
- * introducing a breaking change does not trip this. #5571 covers that
- * direction.
+ * Blind spots. A plain `fix:` that retires a known issue rather than
+ * introducing a breaking change does not trip this - #5571 covers that
+ * direction. And the title read here is the pull request title, while the
+ * squash merge dialog lets that title be edited on the way in: a `!` typed
+ * there lands in the commit without retriggering this workflow.
  *
  * Run in CI by .github/workflows/breaking-changes-doc-check.yml, which passes
  * the PR title, body and labels through the environment. Run it by hand
@@ -43,9 +46,11 @@ const SKIP_LABEL = 'skip-breaking-changes-doc'
 const REPO = process.env.GITHUB_REPOSITORY || 'equinor/design-system'
 
 // Files under NEXT_SRC that cannot change the API or markup a consumer sees.
-// Keeps the check off PRs that only touch stories, tests or docs.
+// Keeps the check off PRs that only touch stories, tests, docs or the Figma
+// Code Connect mappings, which nothing in the package exports.
 // `.mdx?` covers both the component `.docs.mdx` files and any plain `.md`.
-const NON_API_FILE = /(\.test\.tsx?|\.stories\.tsx|\.mdx?|\.snap)$/
+const NON_API_FILE =
+  /(\.test\.tsx?|\.stories\.tsx?|\.figma\.tsx|\.mdx?|\.snap)$/
 const SNAPSHOT_DIR = '__snapshots__/'
 
 // `type!: desc` or `type(scope)!: desc`. The title is the reliable signal:
@@ -76,7 +81,11 @@ const splitLines = (raw) =>
     .filter(Boolean)
 
 /** The REST endpoint rather than `gh pr view --json files`: that one stops at
- * the first 100 files, this one paginates. */
+ * the first 100 files, this one paginates.
+ *
+ * `previous_filename` is read too, because a rename reports only the new path.
+ * A component moved out of /next - what graduation looks like - would
+ * otherwise not register as a /next change at all. */
 const fetchChangedFiles = (prNumber) =>
   splitLines(
     gh([
@@ -84,7 +93,7 @@ const fetchChangedFiles = (prNumber) =>
       '--paginate',
       `repos/${REPO}/pulls/${prNumber}/files`,
       '--jq',
-      '.[].filename',
+      '.[] | .filename, (.previous_filename // empty)',
     ]),
   )
 
@@ -92,6 +101,14 @@ const readInputs = () => {
   const prArgIndex = process.argv.indexOf('--pr')
   const prArg = prArgIndex === -1 ? null : process.argv[prArgIndex + 1]
   const prNumber = prArg || process.env.PR_NUMBER
+  const filesOverride = process.env.CHANGED_FILES
+
+  // Said here rather than failing later on a request for pulls/undefined/files.
+  if (!prNumber && !filesOverride) {
+    throw new Error(
+      'no pull request to check - pass `--pr <number>`, or set PR_NUMBER (CI does) or CHANGED_FILES',
+    )
+  }
 
   // `--pr` reads everything from the API so any past PR can be replayed. In
   // CI the event payload is the source of truth for title, body and labels -
@@ -112,8 +129,8 @@ const readInputs = () => {
 
   // CHANGED_FILES is an override for driving the script by hand; CI leaves it
   // unset and the list is fetched from the PR.
-  const files = process.env.CHANGED_FILES
-    ? splitLines(process.env.CHANGED_FILES)
+  const files = filesOverride
+    ? splitLines(filesOverride)
     : fetchChangedFiles(prNumber)
 
   return { prNumber, title, body, labels, files }
@@ -149,8 +166,9 @@ const main = () => {
 
   const breaking = BREAKING_TITLE.test(title) || BREAKING_FOOTER.test(body)
   if (!breaking) {
+    const subject = prNumber ? `PR #${prNumber}` : 'This change'
     report([
-      `✅ PR #${prNumber} is not marked breaking (no \`!\` in the title, no \`BREAKING CHANGE:\` footer) - nothing to check.`,
+      `✅ ${subject} is not marked breaking (no \`!\` in the title, no \`BREAKING CHANGE:\` footer) - nothing to check.`,
     ])
     return
   }
@@ -158,7 +176,7 @@ const main = () => {
   const apiFiles = files.filter(isApiFile)
   if (apiFiles.length === 0) {
     report([
-      '✅ Breaking, but no `/next` source file changed (tests, stories, docs and snapshots do not count) - nothing to check.',
+      '✅ Breaking, but no `/next` source file changed (tests, stories, docs, snapshots and Code Connect files do not count) - nothing to check.',
     ])
     return
   }
@@ -178,6 +196,11 @@ const main = () => {
       '',
       'Worth a second look in review: the label says this change has no consumer-visible surface.',
     ])
+    // An annotation as well as the summary: the check goes green either way,
+    // and a green check nobody opens is how the label turns into a habit.
+    console.log(
+      `::warning::Breaking change to /next with no entry on the breaking changes page, skipped by the ${SKIP_LABEL} label`,
+    )
     return
   }
 

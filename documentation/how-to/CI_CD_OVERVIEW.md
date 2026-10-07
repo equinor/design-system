@@ -91,7 +91,7 @@ graph LR
 
 New commits cancel older Checks runs for the same pull request or ref so superseded work does not continue consuming runners.
 
-**Breaking changes page:** a PR marked breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) that changes `packages/eds-core-react/src/components/next/**` must also touch `packages/eds-core-react/stories/docs/BreakingChanges.mdx`. Tests, stories, docs and snapshots do not count as a change. The `skip-breaking-changes-doc` label waives the requirement for changes with no consumer-visible surface, and the job logs that it was used. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
+**Breaking changes page:** a PR marked breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) that changes `packages/eds-core-react/src/components/next/**` must also touch `packages/eds-core-react/stories/docs/BreakingChanges.mdx`. Tests, stories, docs, snapshots and Code Connect files do not count as a change. The `skip-breaking-changes-doc` label waives the requirement for changes with no consumer-visible surface, and using it leaves a warning annotation on the check so a reviewer sees it. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
 
 ## Release Pipeline
 
