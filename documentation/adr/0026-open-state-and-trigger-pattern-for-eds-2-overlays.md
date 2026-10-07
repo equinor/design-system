@@ -21,6 +21,8 @@ Dialog, Menu and Popover all need a way for a consumer to open and close them. E
 
 One property shapes everything below: a native `<dialog>` owns an open state of its own. The browser closes it on Escape without telling React. There are always two sources of truth, and the only question is who reconciles them.
 
+[ADR-0004](./0004-component-conventions-for-eds-2.md) allows the compound pattern when a component is a container for consumer-defined content. Dialog meets that test, but `Trigger` and `Close` do not: they exist for behaviour and ARIA wiring rather than for content. This ADR therefore widens the criterion for overlay components, and that widening is part of what it asks the team to accept.
+
 ## Decision Drivers
 
 - A consumer should be able to open an overlay without holding state, and should still be able to hold it when routing or a confirm-before-close flow needs it.
