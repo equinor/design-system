@@ -1,17 +1,22 @@
 #!/usr/bin/env node
 
 /**
- * SPIKE: generates the Storybook docs page for one component on both
- * platforms from the same inputs.
+ * Generates the Storybook docs page for a component on both platforms from
+ * the same inputs. With no component name it processes every component that
+ * has a web sidecar.
  *
- *   node scripts/generate-component-docs.js Badge [--check]
+ *   node scripts/generate-component-docs.js [Component...] [--check]
  *
- * Inputs, per platform (web = eds-core-react /next, mobile = eds-mobile-components):
- *   {Component}.types.ts    props, types, defaults, descriptions (JSDoc)
+ * Inputs, per platform (web = eds-core-react /next, mobile = eds-mobile-components).
+ * They live in the folder that holds {Component}.tsx, which is not always a
+ * folder of the same name (mobile Checkbox, Radio and Switch share
+ * SelectionControls/):
+ *   {Component}Props        a `type` or `interface` in any file of that folder:
+ *                           props, types, defaults, descriptions (JSDoc)
  *   {Component}.stories.tsx example code and captions
  *   {Component}.docs.md     the hand-written part: Summary, Usage,
  *                           Accessibility, Related components
- *   {Component}.figma.tsx   Figma URL (web only, optional)
+ *   {Component}.figma.tsx   Figma URL (web folder only, optional)
  *
  * Outputs:
  *   web:    next/{Component}/{Component}.docs.mdx  (attached MDX, both tabs)
@@ -52,26 +57,24 @@ const NUMBER_WORDS = [
   'Ten',
 ]
 
+const GITHUB_BLOB = 'https://github.com/equinor/design-system/blob/main'
+
 const PLATFORMS = {
   web: {
-    dir: (c) => `packages/eds-core-react/src/components/next/${c}`,
+    componentsRoot: 'packages/eds-core-react/src/components/next',
     out: (c) =>
       `packages/eds-core-react/src/components/next/${c}/${c}.docs.mdx`,
     importLine: (c) => `import { ${c} } from '@equinor/eds-core-react/next'`,
     installLine: 'npm install @equinor/eds-core-react@beta',
     npmUrl: 'https://www.npmjs.com/package/@equinor/eds-core-react',
-    sourceUrl: (c) =>
-      `https://github.com/equinor/design-system/blob/main/packages/eds-core-react/src/components/next/${c}/${c}.tsx`,
     skipStories: new Set(['Introduction']),
   },
   mobile: {
-    dir: (c) => `packages/eds-mobile-components/src/components/${c}`,
+    componentsRoot: 'packages/eds-mobile-components/src/components',
     out: (c) => `packages/eds-mobile-components/docs/${c}.mdx`,
     importLine: (c) => `import { ${c} } from '@equinor/eds-mobile-components'`,
     installLine: 'npm install @equinor/eds-mobile-components',
     npmUrl: 'https://www.npmjs.com/package/@equinor/eds-mobile-components',
-    sourceUrl: (c) =>
-      `https://github.com/equinor/design-system/blob/main/packages/eds-mobile-components/src/components/${c}/${c}.tsx`,
     skipStories: new Set(),
   },
 }
@@ -98,11 +101,45 @@ const dedent = (text) => {
   return lines.map((l) => l.slice(indent)).join('\n')
 }
 
+// Finds the folder that holds {Component}.tsx, in the components root or one
+// level below it.
+function locate(cfg, component) {
+  const root = path.join(rootDir, cfg.componentsRoot)
+  const folders = fs
+    .readdirSync(root, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && d.name !== 'node_modules')
+    .map((d) => path.join(root, d.name))
+  for (const dir of [root, ...folders]) {
+    const file = path.join(dir, `${component}.tsx`)
+    if (fs.existsSync(file)) return { dir, file }
+  }
+  return null
+}
+
+const githubUrl = (file) => `${GITHUB_BLOB}/${path.relative(rootDir, file)}`
+
+// {Component}Props may be a type alias or an interface, in any non-test file of
+// the component's folder (a shared types.ts, or the component file itself).
+function findPropsDeclaration(project, dir, component) {
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => /\.tsx?$/.test(f) && !/\.(test|stories)\.tsx?$/.test(f))
+  for (const f of files) {
+    const sf = project.addSourceFileAtPath(path.join(dir, f))
+    const decl =
+      sf.getTypeAlias(`${component}Props`) ??
+      sf.getInterface(`${component}Props`)
+    if (decl) return decl
+  }
+  return fail(
+    `no ${component}Props type or interface in ${path.relative(rootDir, dir)}`,
+  )
+}
+
 // One Figma component serves both platforms, so the web Code Connect file is
 // the source for both pages.
-function readFigmaUrl(component) {
-  const web = PLATFORMS.web.dir(component)
-  const file = path.join(rootDir, web, `${component}.figma.tsx`)
+function readFigmaUrl(webDir, component) {
+  const file = path.join(webDir, `${component}.figma.tsx`)
   if (!fs.existsSync(file)) return undefined
   return fs
     .readFileSync(file, 'utf8')
@@ -127,16 +164,16 @@ function readSidecar(file) {
   return found
 }
 
-// Props declared in the component's own types file. Props inherited from
-// HTMLAttributes / ViewProps live in other files and are skipped.
-function extractProps(project, file, component) {
-  const sf = project.addSourceFileAtPath(file)
-  const alias = sf.getTypeAliasOrThrow(`${component}Props`)
+const fromLibrary = (node) =>
+  node.getSourceFile().getFilePath().includes('/node_modules/')
+
+// Props declared in this repo. Props inherited from HTMLAttributes / ViewProps
+// live in node_modules and are skipped.
+function extractProps(declaration) {
   const props = []
-  for (const symbol of alias.getType().getProperties()) {
+  for (const symbol of declaration.getType().getProperties()) {
     const decl = symbol.getDeclarations()[0]
-    if (!decl || decl.getSourceFile() !== sf || !Node.isPropertySignature(decl))
-      continue
+    if (!decl || !Node.isPropertySignature(decl) || fromLibrary(decl)) continue
 
     const jsDoc = decl.getJsDocs()[0]
     const description = (jsDoc?.getDescription() ?? '')
@@ -151,7 +188,13 @@ function extractProps(project, file, component) {
     let resolved = typeNode
     const valueNotes = {}
     if (Node.isTypeReference(typeNode)) {
-      const local = sf.getTypeAlias(typeNode.getTypeName().getText())
+      const name = typeNode.getTypeName()
+      const local = Node.isIdentifier(name)
+        ? name
+            .getSymbol()
+            ?.getDeclarations()
+            .find((d) => Node.isTypeAliasDeclaration(d) && !fromLibrary(d))
+        : undefined
       if (local) {
         resolved = local.getTypeNode()
         // The alias JSDoc lists what each value means, as `- \`value\`: text`.
@@ -302,9 +345,8 @@ const fencedCode = (md) =>
   md.match(/```tsx\n([\s\S]*?)\n```/)?.[1] ??
   fail('sidecar Usage needs a ```tsx block')
 
-function generatedNote(component, platform) {
-  const dir = PLATFORMS[platform].dir(component)
-  return `{/* Generated by scripts/generate-component-docs.js. Do not edit. Edit ${dir}/${component}.docs.md, ${component}.types.ts or ${component}.stories.tsx instead. */}`
+function generatedNote(component, relDir) {
+  return `{/* Generated by scripts/generate-component-docs.js. Do not edit. Edit ${relDir}/${component}.docs.md, the ${component}Props type or ${component}.stories.tsx instead. */}`
 }
 
 function renderMobile(component, ctx) {
@@ -315,7 +357,7 @@ function renderMobile(component, ctx) {
         `### ${s.title}\n\n${s.caption ? `${s.caption}\n\n` : ''}\`\`\`tsx\n${s.code}\n\`\`\``,
     )
     .join('\n\n')
-  return `${generatedNote(component, 'mobile')}
+  return `${generatedNote(component, ctx.relDir)}
 
 ${ctx.sidecar.Summary}
 
@@ -367,7 +409,7 @@ function renderWeb(component, ctx) {
   const tabsOpen = ctx.hasMobile
     ? `<PlatformTabs mobile={<>
   <Links${figma}
-    sourceUrl="${mobile.sourceUrl(component)}"
+    sourceUrl="${ctx.mobileSourceUrl}"
     npmUrl="${mobile.npmUrl}"
   />
   <MobileDocs />
@@ -380,7 +422,7 @@ function renderWeb(component, ctx) {
     ? `import { Links, PlatformTabs } from './../../../../.storybook/components'
 import MobileDocs from '@equinor/eds-mobile-components/docs/${component}.mdx'`
     : `import { Links } from './../../../../.storybook/components'`
-  return `${generatedNote(component, 'web')}
+  return `${generatedNote(component, ctx.relDir)}
 
 import { Meta, Primary, Controls, Canvas } from '@storybook/addon-docs/blocks'
 import * as Stories from './${component}.stories'
@@ -395,7 +437,7 @@ ${ctx.sidecar.Summary}
 ${BETA_CALLOUT}
 
 ${tabsOpen}<Links${figma}
-  sourceUrl="${p.sourceUrl(component)}"
+  sourceUrl="${ctx.sourceUrl}"
   npmUrl="${p.npmUrl}"
 />
 
@@ -448,29 +490,31 @@ function discoverComponents() {
 }
 
 function buildPages(project, component) {
-  const hasSidecar = (cfg) =>
-    fs.existsSync(
-      path.join(rootDir, cfg.dir(component), `${component}.docs.md`),
-    )
-  const hasMobile = hasSidecar(PLATFORMS.mobile)
+  const found = {
+    web: locate(PLATFORMS.web, component),
+    mobile: locate(PLATFORMS.mobile, component),
+  }
+  if (!found.web) fail(`${component}: no web component found`)
+  const hasMobile =
+    found.mobile !== null &&
+    fs.existsSync(path.join(found.mobile.dir, `${component}.docs.md`))
 
   const pages = []
   for (const [platform, cfg] of Object.entries(PLATFORMS)) {
     if (platform === 'mobile' && !hasMobile) continue
-    const dir = path.join(rootDir, cfg.dir(component))
+    const { dir, file } = found[platform]
     const ctx = {
-      props: extractProps(
-        project,
-        path.join(dir, `${component}.types.ts`),
-        component,
-      ),
+      relDir: path.relative(rootDir, dir),
+      props: extractProps(findPropsDeclaration(project, dir, component)),
       stories: extractStories(
         project,
         path.join(dir, `${component}.stories.tsx`),
         cfg.skipStories,
       ),
       sidecar: readSidecar(path.join(dir, `${component}.docs.md`)),
-      figmaUrl: readFigmaUrl(component),
+      figmaUrl: readFigmaUrl(found.web.dir, component),
+      sourceUrl: githubUrl(file),
+      mobileSourceUrl: hasMobile ? githubUrl(found.mobile.file) : undefined,
       hasMobile,
     }
     const content =
@@ -515,4 +559,6 @@ function main() {
   console.log(`${components.join(', ')}: ${check ? 'up to date' : 'generated'}`)
 }
 
-main()
+if (require.main === module) main()
+
+module.exports = { locate, findPropsDeclaration, extractProps }
