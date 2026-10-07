@@ -43,6 +43,12 @@ const SIDECAR_SECTIONS = [
   'Related components',
 ]
 
+// Optional sidecar section with `- ARIA: <url>` and `- Docs: <page>` lines.
+const OPTIONAL_SIDECAR_SECTIONS = ['Links']
+
+const DOCS_SITE = 'https://eds.equinor.com/docs/Next/components'
+const DOCS_SITE_DIR = 'apps/design-system-docs/docs/components'
+
 const NUMBER_WORDS = [
   'Zero',
   'One',
@@ -146,6 +152,53 @@ function readFigmaUrl(webDir, component) {
     .match(/https:\/\/www\.figma\.com\/[^'"\s]+/)?.[0]
 }
 
+// The docs-site page for a component. Pages are named after the lowercased
+// component (inputs/textfield.md), except where one page covers several
+// components (inputs/selection_controls.md), which the sidecar names with
+// `- Docs: inputs/selection_controls`.
+function docsPageUrl(component, override) {
+  const root = path.join(rootDir, DOCS_SITE_DIR)
+  if (override) {
+    if (!fs.existsSync(path.join(root, `${override}.md`))) {
+      fail(`${component}: Docs page ${override} not found in ${DOCS_SITE_DIR}`)
+    }
+    return `${DOCS_SITE}/${override}`
+  }
+  const file = `${component.toLowerCase()}.md`
+  const category = fs
+    .readdirSync(root, { withFileTypes: true })
+    .find(
+      (d) => d.isDirectory() && fs.existsSync(path.join(root, d.name, file)),
+    )
+  return category
+    ? `${DOCS_SITE}/${category.name}/${file.replace(/\.md$/, '')}`
+    : undefined
+}
+
+function parseLinks(markdown) {
+  const links = {}
+  for (const line of (markdown ?? '').split('\n')) {
+    const match = line.match(/^-\s+(ARIA|Docs):\s+(\S+)\s*$/)
+    if (match) links[match[1]] = match[2]
+    else if (line.trim()) fail(`Links section: unrecognised line "${line}"`)
+  }
+  if (links.ARIA && !links.ARIA.startsWith('https://www.w3.org/')) {
+    fail(
+      `Links section: ARIA must be a https://www.w3.org/ URL, got ${links.ARIA}`,
+    )
+  }
+  return links
+}
+
+// One Links row. `urls` is in display order, `indent` is for nesting.
+function renderLinks(urls, indent = '') {
+  const attrs = Object.entries(urls)
+    .filter(([, value]) => value)
+    .map(([name, value]) => `${indent}  ${name}="${value}"`)
+    .join('\n')
+  return `${indent}<Links\n${attrs}\n${indent}/>`
+}
+
 function readSidecar(file) {
   if (!fs.existsSync(file)) fail(`missing hand-written sidecar: ${file}`)
   const parts = fs.readFileSync(file, 'utf8').split(/^## (.+)$/m)
@@ -154,10 +207,11 @@ function readSidecar(file) {
     found[parts[i].trim()] = parts[i + 1].trim()
   }
   const missing = SIDECAR_SECTIONS.filter((s) => !found[s])
-  const extra = Object.keys(found).filter((s) => !SIDECAR_SECTIONS.includes(s))
+  const allowed = [...SIDECAR_SECTIONS, ...OPTIONAL_SIDECAR_SECTIONS]
+  const extra = Object.keys(found).filter((s) => !allowed.includes(s))
   if (missing.length || extra.length) {
     fail(
-      `${file}: sections must be exactly ${SIDECAR_SECTIONS.join(', ')} ` +
+      `${file}: sections must be ${SIDECAR_SECTIONS.join(', ')}, plus optionally ${OPTIONAL_SIDECAR_SECTIONS.join(', ')} ` +
         `(missing: ${missing.join(', ') || 'none'}, unexpected: ${extra.join(', ') || 'none'})`,
     )
   }
@@ -398,7 +452,21 @@ ${ctx.sidecar['Related components']}
 function renderWeb(component, ctx) {
   const p = PLATFORMS.web
   const mobile = PLATFORMS.mobile
-  const figma = ctx.figmaUrl ? `\n  figmaUrl="${ctx.figmaUrl}"` : ''
+  const links = renderLinks({
+    figmaUrl: ctx.figmaUrl,
+    documentationUrl: ctx.docsUrl,
+    ariaUrl: ctx.ariaUrl,
+    sourceUrl: ctx.sourceUrl,
+    npmUrl: p.npmUrl,
+  })
+  const mobileLinks = renderLinks(
+    {
+      figmaUrl: ctx.figmaUrl,
+      sourceUrl: ctx.mobileSourceUrl,
+      npmUrl: mobile.npmUrl,
+    },
+    '  ',
+  )
   const examples = ctx.stories
     .map(
       (s) =>
@@ -408,10 +476,7 @@ function renderWeb(component, ctx) {
   // The React Native tab only exists for components that have a mobile sidecar.
   const tabsOpen = ctx.hasMobile
     ? `<PlatformTabs mobile={<>
-  <Links${figma}
-    sourceUrl="${ctx.mobileSourceUrl}"
-    npmUrl="${mobile.npmUrl}"
-  />
+${mobileLinks}
   <MobileDocs />
 </>}>
 
@@ -436,10 +501,7 @@ ${ctx.sidecar.Summary}
 
 ${BETA_CALLOUT}
 
-${tabsOpen}<Links${figma}
-  sourceUrl="${ctx.sourceUrl}"
-  npmUrl="${p.npmUrl}"
-/>
+${tabsOpen}${links}
 
 ## Features
 
@@ -503,6 +565,8 @@ function buildPages(project, component) {
   for (const [platform, cfg] of Object.entries(PLATFORMS)) {
     if (platform === 'mobile' && !hasMobile) continue
     const { dir, file } = found[platform]
+    const sidecar = readSidecar(path.join(dir, `${component}.docs.md`))
+    const sidecarLinks = parseLinks(sidecar.Links)
     const ctx = {
       relDir: path.relative(rootDir, dir),
       props: extractProps(findPropsDeclaration(project, dir, component)),
@@ -511,8 +575,10 @@ function buildPages(project, component) {
         path.join(dir, `${component}.stories.tsx`),
         cfg.skipStories,
       ),
-      sidecar: readSidecar(path.join(dir, `${component}.docs.md`)),
+      sidecar,
       figmaUrl: readFigmaUrl(found.web.dir, component),
+      docsUrl: docsPageUrl(component, sidecarLinks.Docs),
+      ariaUrl: sidecarLinks.ARIA,
       sourceUrl: githubUrl(file),
       mobileSourceUrl: hasMobile ? githubUrl(found.mobile.file) : undefined,
       hasMobile,
@@ -561,4 +627,10 @@ function main() {
 
 if (require.main === module) main()
 
-module.exports = { locate, findPropsDeclaration, extractProps }
+module.exports = {
+  locate,
+  findPropsDeclaration,
+  extractProps,
+  docsPageUrl,
+  parseLinks,
+}
