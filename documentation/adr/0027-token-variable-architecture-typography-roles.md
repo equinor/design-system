@@ -1,8 +1,8 @@
 # Token variable architecture for typography and spacing, with header, label and body roles
 
 - **Status:** Accepted
-- **Date:** 2026-10-07
-- **Decision makers:** Edvard Bjørgen (Design Lead), Alex (Designer), EDS core team
+- **Date:** 2026-10-08
+- **Decision makers:** Edvard Bjørgen (Design Lead), Alex (Designer), EDS Core Team
 - **Scope:** Tokens
 
 ## Context
@@ -18,7 +18,7 @@ Four things made the typography in ADR-0007 out of date:
 
 The typography decisions were made on 7 and 8 October 2026 in [#5530](https://github.com/equinor/design-system/issues/5530), from Alex's spec for the new line-heights, with Edvard's corrections recorded in the issue's decision comments. The spacing steps come from #5487.
 
-Out of scope, as in ADR-0007: colour ([ADR-0016](./0016-colour-approach-for-eds-2.md)), the code and output layer ([ADR-0014](./0014-token-code-output-architecture.md)) and elevation.
+Out of scope, as in ADR-0007: colour ([ADR-0016](./0016-colour-approach-for-eds-2.md)), the code and output layer ([ADR-0028](./0028-token-code-output-architecture-typography-roles.md)) and elevation.
 
 ### Decisions carried over from sibling tracks
 
@@ -119,7 +119,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
   │   spacing/{none, 4xs … 9xl}                                         │
   │   corner-radius/{none, rounded, rounded-outer, pill}                │
   │   typography/{header,label,body}/{size}/{font-size,line-height}     │
-  │   font-family/{header,ui} · font-weight/{lighter,normal,medium,bold}│
+  │   font-family/{header,ui} · font-weight/{normal,medium,bold}        │
   │   (colour and elevation: separate records)                          │
   │   flat 1:1 aliases, no logic                                        │
   └───────────────┬────────────────────────────────────────────────────┘
@@ -146,9 +146,9 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 
 4. **Mapping collections (mode-bearing, hidden):**
    - **Density** [`Compact` · `Comfortable` · `Relaxed`]: `density/spacing/*`, `density/corner-radius/*`, `density/typography/{header,label,body}/{size}/{font-size,line-height}`. Density is set once per surface. Each mode shifts which primitive a token references: `Compact` uses the font-size/line-height pair of the next smaller size on the comfortable scale, `Relaxed` the pair of the next larger size. As a result one px font size has the same line-height in every mode for `header` and `body` (21px is 21/28 wherever it appears). `label` keeps the former `ui` ramp unchanged, which has one exception: compact `label/sm` is 10/12, while comfortable `label/xs` is 10/16. Spacing and corner-radius shift one step on the spacing primitives. The three domain groups never reference each other, and each aliases only primitives, with two exceptions in corner-radius: `rounded-outer` is `density/corner-radius/rounded` plus `primitives/spacing/6`, and `pill` is a raw 9999px.
-   - **Font** [single mode]: `family/header` → Equinor, `family/ui` → Inter, `weight/{lighter,normal,medium,bold}`.
+   - **Font** [single mode]: `family/header` → Equinor, `family/ui` → Inter, `weight/{normal,medium,bold}`.
 
-5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest relaxed sizes), the weight scale (`weight-scale`: lighter 300, normal 400, medium 500, bold 700) and the font families. No modes.
+5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest relaxed sizes), the weight scale (`weight-scale`: normal 400, medium 500, bold 700) and the font families. No modes.
 
 6. **Three typography roles.** Comfortable values below; compact and relaxed follow the step-shift in point 4. Tokens Studio has the values for all three modes.
    - **`header`**, Equinor, `xs`–`4xl`, for titles. Line-heights are looser than the shared ladder's Inter pairing, so Equinor does not clip:
@@ -172,7 +172,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
    - `body/*` → `default` (400) and `bold` (700).
    - No `label-bold` or per-step weight group exists, and adding one is the anti-pattern this rule forbids.
 
-8. **Text styles.** 47 styles: `header/{xs…4xl}` (8), `label/{xs…5xl}/{default,medium,bold}` (27), `body/{sm…3xl}/{default,bold}` (12). Tokens Studio has no typography composites, so the text styles are maintained in the Figma file and bind only semantic variables: font size, line-height, weight and family (`font-family/header` or `font-family/ui`). Variables are synced from Tokens Studio, which stays canonical for every value.
+8. **Text styles.** 47 styles: `header/{xs…4xl}` (8), `label/{xs…5xl}/{default,medium,bold}` (27), `body/{sm…3xl}/{default,bold}` (12). Tokens Studio has no typography composites, so the text styles are maintained in the Figma file and bind only semantic variables: font size, line-height, weight and family (`font-family/header` or `font-family/ui`). Variables are synced from Tokens Studio, which stays canonical for every value. The Figma text styles, composed as point 7 describes, are the reference for typography on every platform: the web implements them in its element and component CSS ([ADR-0029](./0029-typography-approach-for-eds-2-web.md)), and React Native in the Typography component in `packages/eds-mobile-components`.
 
 9. **Ownership.** Design owns the variable structure (primitive, mapping, semantic) and the text-style layer, including body leading, which is now a token. This replaces ADR-0007's statement that the body 1.5 leading is code-owned.
 
@@ -184,10 +184,10 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - `lineheight-scale` has one `default` value per step. Header line-heights deliberately use a higher step than their font-size step in five of eight sizes (comfortable `header/xl` = `type-scale/equinor/600` with `lineheight-scale/700`). Do not "restore" matching step numbers: that brings back the tight ratios from #5373.
 - `corner-radius/*` aliases spacing primitives, except `rounded-outer` and `pill` (point 4).
 - **Full reference chains for the font axis:**
-  - **Weight:** `primitives/weight-scale/medium` (500) → `font/weight/medium` → `font-weight/medium`. Likewise `lighter` (300), `normal` (400) and `bold` (700). Only the semantic token carries the `font-weight/*` spelling.
+  - **Weight:** `primitives/weight-scale/medium` (500) → `font/weight/medium` → `font-weight/medium`. Likewise `normal` (400) and `bold` (700). Only the semantic token carries the `font-weight/*` spelling.
   - **Family:** `primitives/font-family/equinor` → `font/family/header` → `font-family/header`, and `primitives/font-family/inter` → `font/family/ui` → `font-family/ui`. `ui` names the Inter family, which both `label` and `body` use; it is no longer a role.
 - **One spelling per concept.** The Equinor role is `header` everywhere: `typography/header/*`, `density/typography/header/*`, `font-family/header` and the `header/*` text styles. `heading` is not used.
-- **Colour paths use US spelling** (`color/*`, `--eds-color-*`) in the variable set and the output.
+- **Colour uses US spelling** (`color`) in every variable path and output name.
 
 ### Consequences
 
@@ -200,21 +200,22 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - Neutral: the Tokens Studio → Figma sync, an open risk in ADR-0007, is now in use. One behaviour to plan for: the sync matches variables by name, so a renamed token arrives in Figma as a new variable and the old one stays, still bound to its text styles. Every rename needs a Figma pass that rebinds and then removes the old variables (observed when this change was synced on 7 October 2026).
 - Open: `label/xs` is 9px in compact density. This change does not touch it; it is to be decided with the documentation pass ([#5517](https://github.com/equinor/design-system/issues/5517)).
 - **Two accepted records are out of step and get their own successor records, in separate PRs:**
-  - [ADR-0014](./0014-token-code-output-architecture.md) point 5 derives body as `ui` font-size × 1.5 in the generator ("decided, implementation pending"), and point 8 makes the body leading code-owned. Body is now a token, so point 5 should not be implemented, and the per-role composition it describes uses `header`, `label` and `body`. [ADR-0028](./0028-token-code-output-architecture-per-role-typography.md) supersedes ADR-0014.
+  - [ADR-0014](./0014-token-code-output-architecture.md) point 5 derives body as `ui` font-size × 1.5 in the generator ("decided, implementation pending"), and point 8 makes the body leading code-owned. Body is now a token, so point 5 should not be implemented. [ADR-0028](./0028-token-code-output-architecture-typography-roles.md) supersedes ADR-0014 and drops the per-role composition point 5 describes: the output carries the role tokens, and each platform's components compose the text styles.
   - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record weights no longer vary by size and `bolder` no longer exists. ADR-0018 also defines the utility classes `.eds-heading-bold` and `.eds-heading-light` and a `text-box` trim pattern. [ADR-0029](./0029-typography-approach-for-eds-2-web.md) supersedes ADR-0018: it records how `<strong>` and `<b>` resolve on the web, and drops the utility classes and the trim.
 
 ### Confirmation
 
 - Code review checks that new references obey the one-way rule and never cross siblings; a pipeline lint should take this over as the colour set grows.
 - After each Tokens Studio → Figma sync, the Figma typography variables are compared with Tokens Studio, and every text style is checked to bind only semantic variables and to resolve to the expected values in all three density modes.
-- The duplicate-name check on the built CSS ([ADR-0014](./0014-token-code-output-architecture.md), Confirmation) runs on each release, so the new `label` and `body` names cannot collide.
+- Tests or code review check that the web element CSS (ADR-0029) and the React Native Typography component use the weight point 7 prescribes for each role, so the implementations stay in step with the Figma text styles.
+- The duplicate-name check on the built CSS ([ADR-0028](./0028-token-code-output-architecture-typography-roles.md), Confirmation) runs on each release and fails it if a new `label` or `body` name collides with an existing one.
 
 ## Related
 
 - Supersedes [ADR-0007](./0007-token-variable-architecture-spacing-typography.md)
 - Decision issue: [#5530](https://github.com/equinor/design-system/issues/5530) (decision comments of 7 and 8 October 2026); spacing steps: [#5487](https://github.com/equinor/design-system/issues/5487)
 - Evidence: [#5360](https://github.com/equinor/design-system/issues/5360) (design validation), [#5373](https://github.com/equinor/design-system/issues/5373) (header line-heights and clipping)
-- [ADR-0014](./0014-token-code-output-architecture.md) and [ADR-0018](./0018-typography-approach-for-eds-2.md): out of step, superseded by [ADR-0028](./0028-token-code-output-architecture-per-role-typography.md) and [ADR-0029](./0029-typography-approach-for-eds-2-web.md) in separate PRs
+- [ADR-0014](./0014-token-code-output-architecture.md) and [ADR-0018](./0018-typography-approach-for-eds-2.md): out of step, superseded by [ADR-0028](./0028-token-code-output-architecture-typography-roles.md) and [ADR-0029](./0029-typography-approach-for-eds-2-web.md) in separate PRs
 - [ADR-0016](./0016-colour-approach-for-eds-2.md): colour
 - Epic [#4740](https://github.com/equinor/design-system/issues/4740); architecture issue [#4963](https://github.com/equinor/design-system/issues/4963); typography documentation [#5517](https://github.com/equinor/design-system/issues/5517)
 - Tokens Studio, _Equinor Design System_ project (canonical): `primitives/default`, `density/{compact,comfortable,relaxed}`, `font/default`, `semantic/default`. Figma: _EDS Redefined Foundation_ (`mZ7SefYcGCfiT1XYbaEbi7`).
