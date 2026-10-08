@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 25
+Records: 26
 
 | ADR | Title | Scope | Status | Date | Note |
 | --- | ----- | ----- | ------ | ---- | ---- |
@@ -35,7 +35,7 @@ Records: 25
 | [0015](./0015-figma-component-property-naming.md) | Name Figma component properties by one internally consistent convention | Web, Mobile | Accepted | 2026-08-19 |  |
 | [0016](./0016-colour-approach-for-eds-2.md) | Colour approach for EDS 2.0 | Tokens | Approved | 2026-08-27 |  |
 | [0017](./0017-spacing-approach-for-eds-2.md) | Spacing approach for EDS 2.0 | Web | Accepted | 2026-04-23 |  |
-| [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Web | Accepted | 2026-04-23 |  |
+| [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Web | Superseded | 2026-04-23 | by ADR-0029 |
 | [0019](./0019-adopt-only-the-component-library-from-mad.md) | Adopt only the component library from the MAD monorepo | Mobile | Accepted | 2025-06 | recorded retrospectively 2026-09-11 |
 | [0020](./0020-mobile-component-scope-exclusions-and-renames.md) | Mobile component scope: exclusions and renames relative to EDS web | Mobile | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Mobile | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
@@ -43,6 +43,7 @@ Records: 25
 | [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Mobile | Accepted | 2026-04-09 | recorded retrospectively 2026-09-24 |
 | [0024](./0024-mobile-touch-targets-are-a-fixed-constant-not-a-token.md) | Touch targets are a fixed platform constant in mobile components, not a density-scaled token | Mobile | Accepted | 2026-09-16 | recorded retrospectively 2026-09-24 |
 | [0025](./0025-batch-graduation-with-release-candidate.md) | Graduate EDS 2.0 as one batch, through a release candidate, to stable 3.0.0 | Web, Tokens | Accepted | 2026-09-17 |  |
+| [0029](./0029-typography-approach-for-eds-2-web.md) | Typography approach for EDS 2.0 web, with one font weight per role | Web | Proposed | 2026-10-08 |  |
 
 ## Statuses outside the template
 
