@@ -43,7 +43,7 @@ function renderFeatures(props) {
 
 function renderPropsTable(props) {
   const rows = props.map((p) => {
-    const type = p.type.replace(/\|/g, '\\|')
+    const type = p.type.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
     const description = p.optional
       ? p.description
       : `${p.description} Required.`

@@ -11,10 +11,9 @@ function readSidecar(file, cfg) {
   const text = fs.readFileSync(file, 'utf8')
   const frontmatter = text.match(/^---\n([\s\S]*?)\n---\n/)
   const links = parseMetadata(file, frontmatter?.[1])
-  // HTML comments are notes to the author and never reach the page.
-  const body = (frontmatter ? text.slice(frontmatter[0].length) : text).replace(
-    /<!--[\s\S]*?-->/g,
-    '',
+  const body = stripComments(
+    file,
+    frontmatter ? text.slice(frontmatter[0].length) : text,
   )
 
   const parts = body.split(/^## (.+)$/m)
@@ -37,6 +36,20 @@ function readSidecar(file, cfg) {
     )
   }
   return { sections, links }
+}
+
+// HTML comments are notes to the author and never reach the page. Repeat until
+// none are left, because removing one can join the pieces around it into
+// another, and stop on a comment that is never closed.
+function stripComments(file, text) {
+  let previous
+  let result = text
+  do {
+    previous = result
+    result = result.replace(/<!--[\s\S]*?-->/g, '')
+  } while (result !== previous)
+  if (result.includes('<!--')) fail(`${file}: a comment is never closed`)
+  return result
 }
 
 // The metadata block: `aria: <W3C URL>` and `docs: <docs-site page>` lines.

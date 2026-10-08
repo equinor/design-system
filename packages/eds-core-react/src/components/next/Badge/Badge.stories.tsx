@@ -434,7 +434,8 @@ export const AllCombinations: StoryFn<BadgeProps> = () => {
 AllCombinations.parameters = {
   docs: {
     description: {
-      story: 'Every combination of tone, emphasis and variant, so you can see the full range at once.',
+      story:
+        'Every combination of tone, emphasis and variant, so you can see the full range at once.',
     },
   },
 }
