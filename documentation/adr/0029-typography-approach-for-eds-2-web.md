@@ -1,6 +1,6 @@
 # Typography approach for EDS 2.0 web, with one font weight per role
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-08
 - **Decision makers:** Frida Erdal, EDS core team
 - **Scope:** Web
