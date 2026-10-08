@@ -1,6 +1,6 @@
 # Token code / output architecture for the redefined token system, with per-role typography output
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-08
 - **Decision makers:** Frida Erdal, EDS Core Team
 - **Scope:** Tokens
