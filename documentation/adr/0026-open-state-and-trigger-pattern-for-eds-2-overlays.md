@@ -105,7 +105,7 @@ The hook stays honest in the meantime because it has an internal consumer. Autoc
 
 One implementation consequence follows: the provider must render no DOM and memoise its context value, so that wrapping a large subtree stays free. [#5601] covers that.
 
-**State.** Each overlay accepts `defaultOpen`, `open` and `onOpenChange`. The prop wins whenever it is defined, internal state covers the rest, and `onOpenChange` fires on every change so a consumer can observe without taking over. `Accordion.Item` already works this way and is the second consumer of the shared hook that implements it.
+**State.** Each overlay accepts `defaultOpen`, `open` and `onOpenChange`. When `open` is defined it decides every open, and every close the component is able to refuse. Internal state covers the rest. `onOpenChange` fires on every change the user or the browser starts, never as an echo of a prop update, so a consumer can observe without taking over and without loops. `Accordion.Item` already works this way and is the second consumer of the shared hook that implements it.
 
 **One owner.** Every intent, from the trigger, the close button or the backdrop, calls `onOpenChange`. The effect inside `Popup` is the only code that calls `showModal()` or `close()`.
 
@@ -114,6 +114,8 @@ One implementation consequence follows: the provider must render no DOM and memo
 How far a component can go depends on which element it is, and the two are not equal. A dialog gets the `cancel` event, which is cancellable, so where a component must be able to refuse a close, as a non-dismissable dialog or an unsaved-changes prompt does, it prevents the default, reports the intent, and lets the element close only once state agrees. A popover has no equivalent: `beforetoggle` is cancellable when it opens but not when it closes, so light dismiss cannot be refused and a popover-backed overlay can only follow the element and report what happened.
 
 Even for a dialog, refusing unconditionally would be wrong. If the state update fails or a consumer's handler stalls, the dialog can no longer be left by keyboard, which is a trap under WCAG 2.1.2. So the native close stays the default path, and intent first applies only where a refusal is both possible and wanted.
+
+A close the browser has already carried out is final. The component reports it through `onOpenChange` and does not reopen the element to match the prop, even when a controlled consumer ignores the report.
 
 Overlays also have to tolerate each other. A tooltip shown over an open menu must not dismiss it, which is what `popover="hint"` is for, so the popover type each overlay uses is part of this contract rather than a detail of each component.
 
@@ -129,17 +131,17 @@ The component also has to know why it is closing, since [#5461] treats Escape di
 </Dialog.Trigger>
 ```
 
-`Dialog.Close` and its equivalents work the same way, so the two sides of the pattern match. The close button that `Dialog.Header` renders stays as it is, since that one is ours rather than the consumer's.
+`Dialog.Close` and its equivalents work the same way, so the two sides of the pattern match. The close button that `Dialog.Header` renders keeps rendering as it does today, since that one is ours rather than the consumer's, but its click goes through `onOpenChange` like every other intent instead of calling `close()` on the element.
 
 The child has to forward its ref and spread the props it is given, which every EDS component already does. A string, a fragment or several children is an error rather than a silent no-op.
 
-The child also has to be interactive. A wrapper makes `<Dialog.Trigger><div>Open</div></Dialog.Trigger>` easy to write, and it would produce a clickable element with no role, no keyboard support and nothing for a screen reader to announce, which a trigger that rendered its own `<button>` could never do. The component warns in development when the child is neither a button nor an element carrying a role and keyboard handling.
+The child also has to be interactive. A wrapper makes `<Dialog.Trigger><div>Open</div></Dialog.Trigger>` easy to write, and it would produce a clickable element with no role, no keyboard support and nothing for a screen reader to announce, which a trigger that rendered its own `<button>` could never do. The component warns in development when the child is not a native interactive element, such as `button`, `a[href]` or `input`, and has no interactive `role`. It cannot see whether keyboard handling is attached, so the warning stays with what it can check.
 
 This is the shape the styled design systems use. React Spectrum's `DialogTrigger` wraps an `ActionButton`, and Mantine's `Menu.Target` renders nothing and clones a single child with the same two requirements. MUI ships no trigger at all and leaves the consumer holding state, which is where our Dialog is today. Only the headless libraries, Radix and Base UI, render an element from the trigger itself, and they can because everything they render is unstyled.
 
 Two things follow. `asChild` does not appear on a trigger, so [ADR-0005](./0005-use-aschild-slot-for-polymorphism.md) keeps its single meaning and is untouched by this decision. And a trigger that must not look like a button needs nothing special, since any child works.
 
-**ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring.
+**ARIA.** The trigger owns `aria-haspopup`, and for Menu and Popover the anchor wiring. It also tells the browser which element invoked the popup (`popovertarget`, or the `source` option on `showPopover()` where supported), so that two `auto` popovers that are not DOM descendants, such as a Menu opened from inside a Popover, do not close each other.
 
 **Hooks.** Two of them, both internal to `/next`: one for controlled and uncontrolled state, shared with `Accordion.Item`, and one for the trigger, which the trigger component is built on and which Autocomplete should move onto when the real Menu lands. The trigger hook cannot assume a button or a click: Autocomplete's trigger is the text input itself, focus stays in it, and it opens on typing. Exporting either hook is additive, so it waits until a consumer has a case that neither the components nor the controlled props serve.
 
@@ -162,11 +164,11 @@ Tooltip is partly in scope. Its trigger follows the rule above, replacing the `c
 
 ## Related
 
-- [ADR-0004](./0004-component-conventions-for-eds-2.md) — compound components for containers with consumer-defined content
-- [ADR-0005](./0005-use-aschild-slot-for-polymorphism.md) — `asChild` and `Slot`
-- [ADR-0025](./0025-batch-graduation-with-release-candidate.md) — the release candidate that closes the window for breaking changes
-- [#5600] — the issue this ADR answers
-- [#5228] — the Dialog proposal that prompted it
+- [ADR-0004](./0004-component-conventions-for-eds-2.md): compound components for containers with consumer-defined content
+- [ADR-0005](./0005-use-aschild-slot-for-polymorphism.md): `asChild` and `Slot`
+- [ADR-0025](./0025-batch-graduation-with-release-candidate.md): the release candidate that closes the window for breaking changes
+- [#5600]: the issue this ADR answers
+- [#5228]: the Dialog proposal that prompted it
 
 [#5102]: https://github.com/equinor/design-system/issues/5102
 [#5228]: https://github.com/equinor/design-system/pull/5228
