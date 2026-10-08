@@ -22,7 +22,9 @@
  * what the section describes. It fails when both hold:
  *
  *   1. The diff changes a `.tsx` or `.types.ts` file belonging to a component
- *      the /next barrel exports. That is the API and markup a consumer sees.
+ *      the /next barrel exports - including one this very PR exports for the
+ *      first time, which is how a new component gets its first section. That
+ *      is the API and markup a consumer sees.
  *      Tests, stories, docs, snapshots and Code Connect files are not, and
  *      neither is CSS on its own: the page does not track colour, spacing or
  *      the type scale, and a class rename has to pass through the `.tsx` that
@@ -195,9 +197,15 @@ const isApiFile = (file) =>
   !file.includes(SNAPSHOT_DIR) &&
   !NON_API_FILE.test(file)
 
-/** Narrower than isApiFile, and limited to components the barrel exports: a
- * change to Foundation or to an unexported work in progress has no section to
- * update, so demanding one would be noise. */
+/** Narrower than isApiFile, and limited to components the barrel exports.
+ *
+ * The barrel is read from the checkout, which on a pull request is its head:
+ * a PR that adds a component and exports it in one go is caught by the same
+ * run. Before that export the component reaches nobody and its API is still
+ * moving, so a section written then would only go stale - and it cannot slip
+ * past, because check-breaking-changes-coverage.js fails the moment an export
+ * has no section. Foundation and the other unexported directories stay out
+ * for the same reason. */
 const isSurfaceFile = (file, published) =>
   isApiFile(file) && SURFACE_FILE.test(file) && published.has(componentOf(file))
 
@@ -236,7 +244,7 @@ const main = () => {
     report([
       breaking
         ? '✅ Breaking, but no `/next` source file changed (tests, stories, docs, snapshots and Code Connect files do not count) - nothing to check.'
-        : `✅ ${subject} does not change the props or markup of a published \`/next\` component - nothing to check.`,
+        : `✅ ${subject} changes no props or markup of a component the \`/next\` barrel exports - nothing to check. A component still being built is covered from the commit that exports it.`,
     ])
     return
   }
