@@ -91,7 +91,15 @@ graph LR
 
 New commits cancel older Checks runs for the same pull request or ref so superseded work does not continue consuming runners.
 
-**Breaking changes page:** a PR marked breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) that changes `packages/eds-core-react/src/components/next/**` must also touch `packages/eds-core-react/stories/docs/BreakingChanges.mdx`. Tests, stories, docs, snapshots and Code Connect files do not count as a change. The `skip-breaking-changes-doc` label waives the requirement for changes with no consumer-visible surface, and using it leaves a warning annotation on the check so a reviewer sees it. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
+**Breaking changes page:** two checks keep `packages/eds-core-react/stories/docs/BreakingChanges.mdx` honest.
+
+The first asks whether a change reached the page. A PR that edits a `.tsx` or `.types.ts` file belonging to a component the `/next` barrel exports must also touch the page — that is the API and markup a consumer sees. Tests, stories, docs, snapshots, Code Connect files and CSS on its own do not count, because the page does not track colour, spacing or the type scale, and a class rename has to pass through the `.tsx` that applies it. A PR that marks itself breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) is held to the wider rule, every `/next` file bar the excluded ones. Dependabot is exempt: a bump drags lint fixes through component files and cannot label its own PR. The `skip-breaking-changes-doc` label waives the requirement, and using it leaves a warning annotation so a reviewer sees the claim. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
+
+The rule deliberately does not key on `!`. The larger half of the page's job is the EDS 1.0 → 2.0 difference per component, and that arrives as a plain `feat: add <Component>` — nothing in `/next` is formally breaking until graduation.
+
+The second check asks whether the page covers what `/next` publishes at all: every component exported from `packages/eds-core-react/src/components/next/index.ts` has a `## <Component>` section, every section still matches an export, and no section is just a heading. It reads two files, needs no token, and runs in the Checks workflow with `pnpm run check:breaking-changes-coverage`.
+
+Neither check reads the content. Whether a section is accurate and complete against EDS 1.0 stays a review job.
 
 ## Release Pipeline
 

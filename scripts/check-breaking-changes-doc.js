@@ -1,34 +1,54 @@
 #!/usr/bin/env node
 
 /**
- * Checks that a pull request making a breaking change to a /next component
- * also adds something to the breaking changes page.
+ * Checks that a pull request moving a published /next component's surface also
+ * says what changed on the breaking changes page.
  *
  * The page (packages/eds-core-react/stories/docs/BreakingChanges.mdx) is the
- * single living list consumers use to tell an intended change from a bug. Four
- * `fix!` PRs changed a published /next API without touching it (#5410, #5409,
- * #5127, #5509), so the page described beta.1 behaviour well into beta.2 and
- * #5455 had to correct nine entries at once. Nothing failed when they merged,
- * so this script does. See #5572.
+ * single living list consumers use to tell an intended change from a bug. Two
+ * things have to reach it, and only one of them is ever marked breaking:
  *
- * It fails when all three hold:
- *   1. The PR is marked breaking - a `!` before the colon in the title, or a
- *      `BREAKING CHANGE:` footer in the body.
- *   2. The diff touches a file under packages/eds-core-react/src/components/
- *      next/ that can change what a consumer sees (so not tests, stories,
- *      docs, snapshots or Code Connect files).
- *   3. The breaking changes page is not in the diff.
+ *   - The EDS 1.0 to 2.0 difference. Every /next component replaces a 1.0
+ *     component, and that arrives as a plain `feat:` - nothing in /next is
+ *     formally breaking until graduation.
+ *   - What changes during the beta. Four `fix!` PRs moved a published API
+ *     without touching the page (#5410, #5409, #5127, #5509), and two more did
+ *     it without even the `!` (#5479, #5406). The page described beta.1
+ *     behaviour well into beta.2, and #5455 had to correct nine entries at
+ *     once. See #5572.
  *
- * Escape hatch: the `skip-breaking-changes-doc` label. Some breaking changes
- * genuinely need no entry - an internal rename with no consumer-visible
- * surface, say. Using it leaves a warning annotation on the check, so it shows
- * up in review rather than only in the job log.
+ * So the question is not whether the PR is marked breaking. It is whether the
+ * PR moved a published component's surface. It fails when both hold:
  *
- * Blind spots. A plain `fix:` that retires a known issue rather than
- * introducing a breaking change does not trip this - #5571 covers that
- * direction. And the title read here is the pull request title, while the
- * squash merge dialog lets that title be edited on the way in: a `!` typed
- * there lands in the commit without retriggering this workflow.
+ *   1. The diff changes a `.tsx` or `.types.ts` file belonging to a component
+ *      the /next barrel exports. That is the API and markup a consumer sees.
+ *      Tests, stories, docs, snapshots and Code Connect files are not, and
+ *      neither is CSS on its own: the page does not track colour, spacing or
+ *      the type scale, and a class rename has to pass through the `.tsx` that
+ *      applies it.
+ *   2. The breaking changes page is not in the diff.
+ *
+ * A PR that does mark itself breaking is held to a wider rule - every /next
+ * file bar the excluded ones, CSS included - because it has already said that
+ * something consumers can see moved.
+ *
+ * Escape hatch: the `skip-breaking-changes-doc` label. Some changes genuinely
+ * need no entry - an internal refactor with no consumer-visible surface, say.
+ * Using it leaves a warning annotation on the check, so the claim shows up in
+ * review rather than only in the job log.
+ *
+ * Blind spots. It checks that the page is in the diff, not that the right
+ * section is: a PR touching Button and editing the Tooltip section passes. A
+ * plain `fix:` that retires a known issue still leaves the stale entry behind
+ * - #5571 covers that direction. And the title read here is the pull request
+ * title, while the squash merge dialog lets that title be edited on the way
+ * in: a `!` typed there lands in the commit without retriggering this
+ * workflow. That one costs little now - since `!` only widens the net rather
+ * than switching the check on, a late `!` cannot let a surface change through
+ * unseen.
+ *
+ * Companion: check-breaking-changes-coverage.js asks whether the page covers
+ * every published component at all. This one asks whether a change reached it.
  *
  * Run in CI by .github/workflows/breaking-changes-doc-check.yml, which passes
  * the PR title, body and labels through the environment. Run it by hand
@@ -37,6 +57,7 @@
  */
 
 const { execFileSync } = require('child_process')
+const { publishedComponents } = require('./check-breaking-changes-coverage')
 
 const NEXT_SRC = 'packages/eds-core-react/src/components/next/'
 const PAGE = 'packages/eds-core-react/stories/docs/BreakingChanges.mdx'
@@ -52,6 +73,19 @@ const REPO = process.env.GITHUB_REPOSITORY || 'equinor/design-system'
 const NON_API_FILE =
   /(\.test\.tsx?|\.stories\.tsx?|\.figma\.tsx|\.mdx?|\.snap)$/
 const SNAPSHOT_DIR = '__snapshots__/'
+
+// The narrower set used when the PR has not marked itself breaking: the files
+// that carry the props and the markup. CSS is deliberately out - the page says
+// it does not track colour, spacing or the type scale, and the class names it
+// does track are applied in the `.tsx`.
+const SURFACE_FILE = /(\.tsx|\.types\.ts)$/
+
+// A dependency bump never changes an API on purpose, but it does drag lint
+// fixes through component files: #5163 reformatted four of them. Dependabot
+// cannot label its own pull request, so without this the weekly rotation pays
+// for it. A bump that does change behaviour is a review problem, not a page
+// entry.
+const BOT_AUTHORS = new Set(['dependabot[bot]', 'github-actions[bot]'])
 
 // `type!: desc` or `type(scope)!: desc`. The title is the reliable signal:
 // squash merges use it and leave the body empty (#5388). The footer is
@@ -113,18 +147,28 @@ const readInputs = () => {
   // `--pr` reads everything from the API so any past PR can be replayed. In
   // CI the event payload is the source of truth for title, body and labels -
   // it is what triggered the run, and it costs no API call.
-  let title, body, labels
+  let title, body, labels, author
   if (prArg) {
     const pr = JSON.parse(
-      gh(['pr', 'view', prArg, '--repo', REPO, '--json', 'title,body,labels']),
+      gh([
+        'pr',
+        'view',
+        prArg,
+        '--repo',
+        REPO,
+        '--json',
+        'title,body,labels,author',
+      ]),
     )
     title = pr.title || ''
     body = pr.body || ''
     labels = pr.labels.map((label) => label.name)
+    author = pr.author?.login || ''
   } else {
     title = process.env.PR_TITLE || ''
     body = process.env.PR_BODY || ''
     labels = parseLabels(process.env.PR_LABELS)
+    author = process.env.PR_AUTHOR || ''
   }
 
   // CHANGED_FILES is an override for driving the script by hand; CI leaves it
@@ -133,7 +177,7 @@ const readInputs = () => {
     ? splitLines(filesOverride)
     : fetchChangedFiles(prNumber)
 
-  return { prNumber, title, body, labels, files }
+  return { prNumber, title, body, labels, author, files }
 }
 
 /** The component directory a /next path belongs to, or the file name for the
@@ -149,6 +193,12 @@ const isApiFile = (file) =>
   !file.includes(SNAPSHOT_DIR) &&
   !NON_API_FILE.test(file)
 
+/** Narrower than isApiFile, and limited to components the barrel exports: a
+ * change to Foundation or to an unexported work in progress has no section to
+ * update, so demanding one would be noise. */
+const isSurfaceFile = (file, published) =>
+  isApiFile(file) && SURFACE_FILE.test(file) && published.has(componentOf(file))
+
 /** Written to the job summary as well as the log, so a reviewer sees the
  * reason without opening the run. */
 const report = (lines) => {
@@ -162,60 +212,69 @@ const report = (lines) => {
 }
 
 const main = () => {
-  const { prNumber, title, body, labels, files } = readInputs()
+  const { prNumber, title, body, labels, author, files } = readInputs()
+
+  if (BOT_AUTHORS.has(author)) {
+    report([`✅ Opened by ${author} - not a deliberate API change.`])
+    return
+  }
 
   const breaking = BREAKING_TITLE.test(title) || BREAKING_FOOTER.test(body)
-  if (!breaking) {
+  const published = publishedComponents()
+
+  // Marking the PR breaking widens the net rather than switching the check on:
+  // the author has already said something consumers can see moved, so CSS and
+  // the barrel count too.
+  const changed = breaking
+    ? files.filter(isApiFile)
+    : files.filter((file) => isSurfaceFile(file, published))
+
+  if (changed.length === 0) {
     const subject = prNumber ? `PR #${prNumber}` : 'This change'
     report([
-      `✅ ${subject} is not marked breaking (no \`!\` in the title, no \`BREAKING CHANGE:\` footer) - nothing to check.`,
+      breaking
+        ? '✅ Breaking, but no `/next` source file changed (tests, stories, docs, snapshots and Code Connect files do not count) - nothing to check.'
+        : `✅ ${subject} does not change the props or markup of a published \`/next\` component - nothing to check.`,
     ])
     return
   }
 
-  const apiFiles = files.filter(isApiFile)
-  if (apiFiles.length === 0) {
-    report([
-      '✅ Breaking, but no `/next` source file changed (tests, stories, docs, snapshots and Code Connect files do not count) - nothing to check.',
-    ])
-    return
-  }
-
-  const components = [...new Set(apiFiles.map(componentOf))].sort()
+  const components = [...new Set(changed.map(componentOf))].sort()
+  const what = breaking
+    ? `Breaking change to ${components.join(', ')}`
+    : `${components.join(', ')} changed under \`/next\``
 
   if (files.includes(PAGE)) {
-    report([
-      `✅ Breaking change to ${components.join(', ')}, and the breaking changes page was updated.`,
-    ])
+    report([`✅ ${what}, and the breaking changes page was updated.`])
     return
   }
 
   if (labels.includes(SKIP_LABEL)) {
     report([
-      `⚠️ Breaking change to ${components.join(', ')} with no entry on the breaking changes page, skipped by the \`${SKIP_LABEL}\` label.`,
+      `⚠️ ${what} with nothing added to the breaking changes page, skipped by the \`${SKIP_LABEL}\` label.`,
       '',
       'Worth a second look in review: the label says this change has no consumer-visible surface.',
     ])
     // An annotation as well as the summary: the check goes green either way,
     // and a green check nobody opens is how the label turns into a habit.
     console.log(
-      `::warning::Breaking change to /next with no entry on the breaking changes page, skipped by the ${SKIP_LABEL} label`,
+      `::warning::/next changed with no entry on the breaking changes page, skipped by the ${SKIP_LABEL} label`,
     )
     return
   }
 
   report([
-    `❌ This PR is marked breaking and changes ${components.join(', ')} under \`/next\`, but does not touch the breaking changes page.`,
+    `❌ ${what}, but the breaking changes page is not in this diff.`,
     '',
-    `Add or update the component's entry in \`${PAGE}\` - the Storybook page "${PAGE_TITLE}". It is the list consumers read to tell an intended change from a bug, and it has to say what changed, before and after.`,
+    `Update ${components.length > 1 ? 'each' : "the component's"} \`## <Component>\` section in \`${PAGE}\` - the Storybook page "${PAGE_TITLE}". It is the list consumers read to tell an intended change from a bug, so it has to say what changed, before and after. A /next component replaces an EDS 1.0 component, so the difference from 1.0 belongs there too, whether or not this PR is marked breaking.`,
     '',
     `If this change has no consumer-visible surface, add the \`${SKIP_LABEL}\` label and say why in the PR description.`,
     '',
     'Changed `/next` files:',
-    ...apiFiles.map((file) => `- \`${file}\``),
+    ...changed.map((file) => `- \`${file}\``),
   ])
   console.log(
-    '::error::Breaking change to /next without an entry on the breaking changes page',
+    '::error::A published /next component changed without an entry on the breaking changes page',
   )
   process.exitCode = 1
 }

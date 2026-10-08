@@ -437,6 +437,8 @@ Add the CSS to `packages/eds-core-react/src/components/next/index.css`:
 @import './ComponentName/componentname.css';
 ```
 
+Add a `## ComponentName` section to `packages/eds-core-react/stories/docs/BreakingChanges.mdx`, in the same pull request. A 2.0 component is a rewrite of its EDS 1.0 predecessor, and that difference is what the page exists to spell out — props removed or renamed, composition changed, markup and behaviour that can break consumer CSS or tests. Write it now, while you have both versions in front of you. CI fails the moment a component is exported from the barrel without a section (`pnpm run check:breaking-changes-coverage`). If 2.0 drops the component with no successor, the section still goes in, describing what to use instead.
+
 ## Real-World References
 
 Read the source — it's the reference, not a snapshot in this file.
@@ -586,7 +588,8 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
-- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx` — CI fails a PR marked breaking that changes `/next` without touching that page (`.github/workflows/breaking-changes-doc-check.yml`); the `skip-breaking-changes-doc` label is for the rare change with no consumer-visible surface
+- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx` — CI fails any PR that edits a published component's `.tsx` or `.types.ts` and leaves that page alone, marked breaking or not (`.github/workflows/breaking-changes-doc-check.yml`); the `skip-breaking-changes-doc` label is for the rare change with no consumer-visible surface
+- Exporting a new `/next` component from the barrel without giving it a section on that page — the EDS 1.0 → 2.0 difference arrives as a plain `feat:`, never marked breaking, so the coverage check in `checks.yaml` is what catches it
 
 ## Implementation Status Report
 
