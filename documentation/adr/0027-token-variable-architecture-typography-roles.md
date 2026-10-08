@@ -1,6 +1,6 @@
 # Token variable architecture for typography and spacing, with header, label and body roles
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-07
 - **Decision makers:** Edvard Bjørgen (Design Lead), Alex (Designer), EDS core team
 - **Scope:** Tokens
