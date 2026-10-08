@@ -588,7 +588,7 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
-- Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx` — CI fails any PR that edits a published component's `.tsx` or `.types.ts` and leaves that page alone, marked breaking or not (`.github/workflows/breaking-changes-doc-check.yml`); the `skip-breaking-changes-doc` label is for the rare change with no consumer-visible surface
+- Changing a published `/next` prop, value, sub-component or markup contract without bringing `packages/eds-core-react/stories/docs/BreakingChanges.mdx` up to date — that page describes what an EDS 1.0 consumer meets in 2.0, so it goes stale the moment 2.0 moves. CI fails any PR that edits a published component's `.tsx` or `.types.ts` and leaves the page alone, marked breaking or not (`.github/workflows/breaking-changes-doc-check.yml`); the `skip-breaking-changes-doc` label is for a change that leaves the EDS 1.0 to 2.0 answer as it was
 - Exporting a new `/next` component from the barrel without giving it a section on that page — the EDS 1.0 → 2.0 difference arrives as a plain `feat:`, never marked breaking, so the coverage check in `checks.yaml` is what catches it
 
 ## Implementation Status Report

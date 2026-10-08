@@ -4,21 +4,22 @@
  * Checks that a pull request moving a published /next component's surface also
  * says what changed on the breaking changes page.
  *
- * The page (packages/eds-core-react/stories/docs/BreakingChanges.mdx) is the
- * single living list consumers use to tell an intended change from a bug. Two
- * things have to reach it, and only one of them is ever marked breaking:
+ * The page (packages/eds-core-react/stories/docs/BreakingChanges.mdx) answers
+ * one question per component: what does an EDS 1.0 consumer meet in 2.0? It is
+ * what the migration guide grows out of at graduation (#5387). It is not a
+ * changelog - a change from one beta to the next is recorded in the commit and
+ * the pull request, not on the page.
  *
- *   - The EDS 1.0 to 2.0 difference. Every /next component replaces a 1.0
- *     component, and that arrives as a plain `feat:` - nothing in /next is
- *     formally breaking until graduation.
- *   - What changes during the beta. Four `fix!` PRs moved a published API
- *     without touching the page (#5410, #5409, #5127, #5509), and two more did
- *     it without even the `!` (#5479, #5406). The page described beta.1
- *     behaviour well into beta.2, and #5455 had to correct nine entries at
- *     once. See #5572.
+ * What the page cannot survive is going stale about 2.0. The answer it gives
+ * has a before and an after, and every beta changes the after. Four `fix!` PRs
+ * moved a published API without revisiting it (#5410, #5409, #5127, #5509) and
+ * two more did it without even the `!` (#5479, #5406), so the page described
+ * beta.1 behaviour well into beta.2 and #5455 had to correct nine entries at
+ * once. See #5572.
  *
- * So the question is not whether the PR is marked breaking. It is whether the
- * PR moved a published component's surface. It fails when both hold:
+ * Marking a PR breaking is therefore the wrong thing to key on. What matters
+ * is whether the PR moved a published component's surface, because that is
+ * what the section describes. It fails when both hold:
  *
  *   1. The diff changes a `.tsx` or `.types.ts` file belonging to a component
  *      the /next barrel exports. That is the API and markup a consumer sees.
@@ -32,10 +33,11 @@
  * file bar the excluded ones, CSS included - because it has already said that
  * something consumers can see moved.
  *
- * Escape hatch: the `skip-breaking-changes-doc` label. Some changes genuinely
- * need no entry - an internal refactor with no consumer-visible surface, say.
- * Using it leaves a warning annotation on the check, so the claim shows up in
- * review rather than only in the job log.
+ * Escape hatch: the `skip-breaking-changes-doc` label, for a change that moves
+ * the component without changing the answer - an internal refactor, or undoing
+ * something the beta introduced and 1.0 never had. Using it leaves a warning
+ * annotation on the check, so the claim shows up in review rather than only in
+ * the job log.
  *
  * Blind spots. It checks that the page is in the diff, not that the right
  * section is: a PR touching Button and editing the Tooltip section passes. A
@@ -253,7 +255,7 @@ const main = () => {
     report([
       `⚠️ ${what} with nothing added to the breaking changes page, skipped by the \`${SKIP_LABEL}\` label.`,
       '',
-      'Worth a second look in review: the label says this change has no consumer-visible surface.',
+      'Worth a second look in review: the label says this PR leaves the EDS 1.0 to 2.0 answer unchanged.',
     ])
     // An annotation as well as the summary: the check goes green either way,
     // and a green check nobody opens is how the label turns into a habit.
@@ -266,9 +268,11 @@ const main = () => {
   report([
     `❌ ${what}, but the breaking changes page is not in this diff.`,
     '',
-    `Update ${components.length > 1 ? 'each' : "the component's"} \`## <Component>\` section in \`${PAGE}\` - the Storybook page "${PAGE_TITLE}". It is the list consumers read to tell an intended change from a bug, so it has to say what changed, before and after. A /next component replaces an EDS 1.0 component, so the difference from 1.0 belongs there too, whether or not this PR is marked breaking.`,
+    `The page answers one question per component - what an EDS 1.0 consumer meets in 2.0 - and becomes the migration guide at graduation. Update the \`## <Component>\` section in \`${PAGE}\`, the Storybook page "${PAGE_TITLE}", so it describes 2.0 as it now stands: props, composition, markup, behaviour.`,
     '',
-    `If this change has no consumer-visible surface, add the \`${SKIP_LABEL}\` label and say why in the PR description.`,
+    'Describe the component, not the beta. Going from one beta to the next is not what the page is for - say that in this PR description and the commit message instead.',
+    '',
+    `If the EDS 1.0 to 2.0 answer is unchanged by this PR, add the \`${SKIP_LABEL}\` label and say why.`,
     '',
     'Changed `/next` files:',
     ...changed.map((file) => `- \`${file}\``),
