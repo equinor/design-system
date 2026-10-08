@@ -11,12 +11,12 @@
 
 Four things made the typography in ADR-0007 out of date:
 
-1. **The role names confused designers.** The design-side validation in [#5360](https://github.com/equinor/design-system/issues/5360) (7 testers, August–September 2026) found the typography roles to be the joint-biggest source of confusion: 5 of 7 testers hesitated over which role to use. `ui` read as "text inside a component" rather than "all functional text", and testers said the emphasis weight (`bolder`, Inter Medium 500) was not bold enough. Testers chose text by whether it wraps, not by an abstract role.
-2. **Header leading was too tight for Equinor.** One line-height ladder serves both typefaces and was tuned for Inter. At the same step Equinor is set about 2px larger, so headers got tight ratios, and since text-trim was removed a line box shorter than the glyphs cuts off descenders ([#5373](https://github.com/equinor/design-system/issues/5373)). The header ratios were also uneven: `xl` at 1.14 sat between `lg` at 1.33 and `2xl` at 1.17.
+1. **The role names confused designers.** The design-side validation in [#5360](https://github.com/equinor/design-system/issues/5360) (7 testers, August–September 2026) found the typography roles to be the joint-biggest source of confusion: 5 of 7 testers hesitated over which role to use. `ui` read as "text inside a component" rather than "all functional text", and two testers said the emphasis weight (`bolder`, Inter Medium 500) was not bold enough. Alex's summary of the testing in #5530 adds that testers choose text by whether it wraps, not by an abstract role.
+2. **Header leading was too tight for Equinor.** One line-height ladder serves both typefaces and was tuned for Inter. At the same step Equinor is set about 2px larger, so headers got tight ratios, and since text-trim was removed a line box shorter than the glyphs cuts off descenders ([#5373](https://github.com/equinor/design-system/issues/5373)). Alex's [review on #5530](https://github.com/equinor/design-system/issues/5530#issuecomment-5829775438) (25 September) also found the header ratios uneven: `xl` at 1.14 sat between `lg` at 1.33 and `2xl` at 1.17.
 3. **Body text was not a token.** ADR-0007 point 6 kept body out of the variable set: three text styles (`sm`, `md`, `lg`) reused the `ui` font sizes with a literal 150% line-height. Figma had nothing to bind for the leading, the generator that was to derive it in code ([ADR-0014](./0014-token-code-output-architecture.md) point 5) was never built, and 1.5 × the font size is not always a multiple of 4px (14px gives 21px).
-4. **Spacing stopped at 3xl (32px).** Testers in #5360 needed larger steps for layout, such as 48px.
+4. **Spacing stopped at 3xl (32px).** Two testers in #5360 hit that ceiling: one needed 48px between fieldsets, the other 48px for a button. Alex's proposal in [#5487](https://github.com/equinor/design-system/issues/5487) added six steps, `4xl` to `9xl` (40 to 128px in comfortable).
 
-The typography decisions were made on 7 October 2026 in [#5530](https://github.com/equinor/design-system/issues/5530), from Alex's spec for the new line-heights, with Edvard's corrections recorded in the issue.
+The typography decisions were made on 7 and 8 October 2026 in [#5530](https://github.com/equinor/design-system/issues/5530), from Alex's spec for the new line-heights, with Edvard's corrections recorded in the issue's decision comments. The spacing steps come from #5487.
 
 Out of scope, as in ADR-0007: colour ([ADR-0016](./0016-colour-approach-for-eds-2.md)), the code and output layer ([ADR-0014](./0014-token-code-output-architecture.md)) and elevation.
 
@@ -138,14 +138,14 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
   └────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **Three layers, one-way references.** Primitive → mapping → semantic → text styles and components. No sibling, cross-collection, semantic → semantic or mapping → mapping references.
+1. **Three layers, one-way references.** Primitive → mapping → semantic → text styles and components. No sibling, cross-collection, semantic → semantic or mapping → mapping references, with one exception in corner-radius (point 4).
 
 2. **The semantic layer is a flat 1:1 alias layer with no logic.** Each semantic token aliases exactly one mapping token, or a primitive directly for a value that must not vary. Density step-shifting resolves in the mapping collection, through the mode set on the consuming surface. The semantic token itself carries no mode.
 
 3. **Semantic is the only published, consumable layer,** together with the text styles. Primitives, density and font collections are hidden from publishing. Code consumes every token from this one layer: `--eds-typography-label-md-font-size` and `--eds-font-weight-medium` sit next to `--eds-spacing-md`. In Figma, designers use typography through text styles.
 
 4. **Mapping collections (mode-bearing, hidden):**
-   - **Density** [`Compact` · `Comfortable` · `Relaxed`]: `density/spacing/*`, `density/corner-radius/*`, `density/typography/{header,label,body}/{size}/{font-size,line-height}`. Density is set once per surface. Each mode shifts which primitive a token references: `Compact` uses the font-size/line-height pair of the next smaller size on the comfortable scale, `Relaxed` the pair of the next larger size. As a result one px font size has the same line-height in every mode (21px is 21/28 wherever it appears). The three domain groups never reference each other; each aliases only primitives.
+   - **Density** [`Compact` · `Comfortable` · `Relaxed`]: `density/spacing/*`, `density/corner-radius/*`, `density/typography/{header,label,body}/{size}/{font-size,line-height}`. Density is set once per surface. Each mode shifts which primitive a token references: `Compact` uses the font-size/line-height pair of the next smaller size on the comfortable scale, `Relaxed` the pair of the next larger size. As a result one px font size has the same line-height in every mode for `header` and `body` (21px is 21/28 wherever it appears). `label` keeps the former `ui` ramp unchanged, which has one exception: compact `label/sm` is 10/12, while comfortable `label/xs` is 10/16. Spacing and corner-radius shift one step on the spacing primitives. The three domain groups never reference each other, and each aliases only primitives, with two exceptions in corner-radius: `rounded-outer` is `density/corner-radius/rounded` plus `primitives/spacing/6`, and `pill` is a raw 9999px.
    - **Font** [single mode]: `family/header` → Equinor, `family/ui` → Inter, `weight/{lighter,normal,medium,bold}`.
 
 5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest relaxed sizes), the weight scale (`weight-scale`: lighter 300, normal 400, medium 500, bold 700) and the font families. No modes.
@@ -183,7 +183,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - **Mapping layers are namespaced by where they live** (`density/…`, `font/…`), so a reference shows whether it is density-dependent.
 - **Semantic:** `<domain>/<tier>`, lowercase and hyphenated (`4xs … 9xl`, `rounded-outer`).
 - `lineheight-scale` has one `default` value per step. Header line-heights deliberately use a higher step than their font-size step in five of eight sizes (comfortable `header/xl` = `type-scale/equinor/600` with `lineheight-scale/700`). Do not "restore" matching step numbers: that brings back the tight ratios from #5373.
-- `corner-radius/*` aliases spacing primitives. `rounded-outer` is `rounded` plus `primitives/spacing/6`, and `pill` is a raw 9999px.
+- `corner-radius/*` aliases spacing primitives, except `rounded-outer` and `pill` (point 4).
 - **Full reference chains for the font axis:**
   - **Weight:** `primitives/weight-scale/medium` (500) → `font/weight/medium` → `font-weight/medium`. Likewise `lighter` (300), `normal` (400) and `bold` (700). Only the semantic token carries the `font-weight/*` spelling.
   - **Family:** `primitives/font-family/equinor` → `font/family/header` → `font-family/header`, and `primitives/font-family/inter` → `font/family/ui` → `font-family/ui`. `ui` names the Inter family, which both `label` and `body` use; it is no longer a role.
@@ -195,15 +195,15 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - Good, because the role names follow how designers choose text, which is what #5360 found missing.
 - Good, because body leading is a token on the 4px grid that Figma and code bind identically, and there is no ratio for code to re-derive.
 - Good, because Equinor headers get room for descenders at every size and density, and the header ratio no longer dips at `sm` and `xl`.
-- Good, because one font size keeps one line-height across all density modes.
+- Good, because in `header` and `body` one font size keeps one line-height across all density modes.
 - Good, because `strong` resolves to one weight, without per-size inheritance.
-- Bad, because the renames break code: `--eds-typography-ui-*` becomes `--eds-typography-label-*` and `--eds-font-weight-bolder` becomes `--eds-font-weight-medium`. Known consumers on `main`: `apps/design-system-docs` (49 references in 7 files), the mobile Storybook typography page, `generate-ts-tokens.test.ts` and `assert-no-duplicate-names.mjs`. The `next` components read the 2.x namespace and are not affected.
+- Bad, because the renames break code: `--eds-typography-ui-*` becomes `--eds-typography-label-*` and `--eds-font-weight-bolder` becomes `--eds-font-weight-medium`. Known consumers on `main`: `apps/design-system-docs`, with 27 references in 4 files (`docs-components.css`, `colour/usage.mdx`, `site-chrome.css` and `docs-search-bar.css`). The `next` components and the mobile packages read the 2.x token namespace and are not affected.
 - Bad, because header line-heights no longer follow matching step numbers, so the scale is correct by choice rather than by construction, and only the note in Naming guards it.
 - Neutral: the Tokens Studio → Figma sync, an open risk in ADR-0007, is now in use. One behaviour to plan for: the sync matches variables by name, so a renamed token arrives in Figma as a new variable and the old one stays, still bound to its text styles. Every rename needs a Figma pass that rebinds and then removes the old variables (observed when this change was synced on 7 October 2026).
 - Open: `label/xs` is 9px in compact density. This change does not touch it; it is to be decided with the documentation pass ([#5517](https://github.com/equinor/design-system/issues/5517)).
-- **Two accepted records are now out of step and need successors from their owners:**
-  - [ADR-0014](./0014-token-code-output-architecture.md) point 5 derives body as `ui` font-size × 1.5 in the generator ("decided, implementation pending"), and point 8 makes the body leading code-owned. Body is now a token, so point 5 should not be implemented, and the per-role composition it describes uses `header`, `label` and `body`.
-  - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record `strong` is `font-weight/bold` (700) in every role, and `bolder` no longer exists. ADR-0018 also names its utility classes `.eds-heading-bold` and `.eds-heading-light`.
+- **Two accepted records are out of step and get their own successor records, in separate PRs:**
+  - [ADR-0014](./0014-token-code-output-architecture.md) point 5 derives body as `ui` font-size × 1.5 in the generator ("decided, implementation pending"), and point 8 makes the body leading code-owned. Body is now a token, so point 5 should not be implemented, and the per-role composition it describes uses `header`, `label` and `body`. [ADR-0028](./0028-token-code-output-architecture-per-role-typography.md) supersedes ADR-0014.
+  - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record `strong` is `font-weight/bold` (700) in every role, and `bolder` no longer exists. ADR-0018 also names its utility classes `.eds-heading-bold` and `.eds-heading-light`. [ADR-0029](./0029-typography-approach-for-eds-2-web.md) supersedes ADR-0018.
 
 ### Confirmation
 
@@ -214,9 +214,9 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 ## Related
 
 - Supersedes [ADR-0007](./0007-token-variable-architecture-spacing-typography.md)
-- Decision issue: [#5530](https://github.com/equinor/design-system/issues/5530) (decision comments of 7 October 2026)
+- Decision issue: [#5530](https://github.com/equinor/design-system/issues/5530) (decision comments of 7 and 8 October 2026); spacing steps: [#5487](https://github.com/equinor/design-system/issues/5487)
 - Evidence: [#5360](https://github.com/equinor/design-system/issues/5360) (design validation), [#5373](https://github.com/equinor/design-system/issues/5373) (header line-heights and clipping)
-- [ADR-0014](./0014-token-code-output-architecture.md) and [ADR-0018](./0018-typography-approach-for-eds-2.md): out of step, see Consequences
+- [ADR-0014](./0014-token-code-output-architecture.md) and [ADR-0018](./0018-typography-approach-for-eds-2.md): out of step, superseded by [ADR-0028](./0028-token-code-output-architecture-per-role-typography.md) and [ADR-0029](./0029-typography-approach-for-eds-2-web.md) in separate PRs
 - [ADR-0016](./0016-colour-approach-for-eds-2.md): colour
 - Epic [#4740](https://github.com/equinor/design-system/issues/4740); architecture issue [#4963](https://github.com/equinor/design-system/issues/4963); typography documentation [#5517](https://github.com/equinor/design-system/issues/5517)
 - Tokens Studio, _Equinor Design System_ project (canonical): `primitives/default`, `density/{compact,comfortable,relaxed}`, `font/default`, `semantic/default`. Figma: _EDS Redefined Foundation_ (`mZ7SefYcGCfiT1XYbaEbi7`).
