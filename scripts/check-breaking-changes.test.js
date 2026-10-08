@@ -15,6 +15,8 @@
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const { execFileSync } = require('node:child_process')
+const { readFileSync, writeFileSync, rmSync } = require('node:fs')
+const { tmpdir } = require('node:os')
 const { join } = require('node:path')
 
 const {
@@ -27,11 +29,21 @@ const DOC_CHECK = join(__dirname, 'check-breaking-changes-doc.js')
 const NEXT = 'packages/eds-core-react/src/components/next'
 const PAGE = 'packages/eds-core-react/stories/docs/BreakingChanges.mdx'
 
+/** The subprocess inherits this environment, and the script appends its report
+ * to GITHUB_STEP_SUMMARY when CI sets it. Left in, the fixtures below would
+ * write ten "Button changed under /next" blocks into the summary of whichever
+ * job ran the tests, where they read as real failures. */
+const envWithoutSummary = () => {
+  const copy = { ...process.env }
+  delete copy.GITHUB_STEP_SUMMARY
+  return copy
+}
+
 /** Runs the doc check and returns its exit code and output. A non-zero exit is
  * the point of several cases, so the failure is captured rather than thrown. */
 const run = ({ title = 'fix: something', files = [], ...rest }) => {
   const env = {
-    ...process.env,
+    ...envWithoutSummary(),
     PR_NUMBER: '1',
     PR_TITLE: title,
     PR_BODY: rest.body || '',
@@ -98,7 +110,7 @@ describe('breaking changes page entry', () => {
       // coverage check closes that door.
       [
         'a component the barrel does not export',
-        [`${NEXT}/Placeholder/Placeholder.tsx`],
+        [`${NEXT}/NotExported/NotExported.tsx`],
       ],
       ['the /next barrel on its own', [`${NEXT}/index.ts`]],
       [
@@ -153,6 +165,17 @@ describe('breaking changes page entry', () => {
       assert.equal(code, 0)
     })
 
+    // `gh pr view` names a GitHub App `app/dependabot`, the event payload
+    // names it `dependabot[bot]`. A replay by hand has to reach the same
+    // verdict as CI.
+    test('Dependabot is exempt under the name `gh` reports too', () => {
+      const { code } = run({
+        files: [`${NEXT}/Button/Button.tsx`],
+        author: 'app/dependabot',
+      })
+      assert.equal(code, 0)
+    })
+
     test('no other bot is exempt', () => {
       const { code } = run({
         files: [`${NEXT}/Button/Button.tsx`],
@@ -160,10 +183,27 @@ describe('breaking changes page entry', () => {
       })
       assert.equal(code, 1)
     })
+
+    // Every fixture above is written to look like a failure, and `pnpm run
+    // test` runs this suite inside the same job that writes a step summary.
+    test('a run leaves the job summary CI set untouched', () => {
+      const summary = join(tmpdir(), `eds-step-summary-${process.pid}`)
+      writeFileSync(summary, '')
+      const previous = process.env.GITHUB_STEP_SUMMARY
+      process.env.GITHUB_STEP_SUMMARY = summary
+      try {
+        run({ files: [`${NEXT}/Button/Button.tsx`] })
+        assert.equal(readFileSync(summary, 'utf8'), '')
+      } finally {
+        if (previous === undefined) delete process.env.GITHUB_STEP_SUMMARY
+        else process.env.GITHUB_STEP_SUMMARY = previous
+        rmSync(summary)
+      }
+    })
   })
 
   test('says which input is missing when there is no pull request', () => {
-    const env = { ...process.env }
+    const env = envWithoutSummary()
     delete env.PR_NUMBER
     delete env.CHANGED_FILES
     try {

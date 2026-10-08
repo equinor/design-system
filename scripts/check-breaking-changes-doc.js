@@ -93,7 +93,13 @@ const SURFACE_FILE = /\.tsx?$/
 // for it. A bump that does change behaviour is a review problem, not a page
 // entry. Nothing else is exempt - release pull requests touch only CHANGELOG
 // and version files, which these rules already leave alone.
-const BOT_AUTHORS = new Set(['dependabot[bot]'])
+//
+// Matched on the bare name: the event payload calls the app `dependabot[bot]`
+// and `gh pr view` calls it `app/dependabot`, so without this a replay by hand
+// would reach a different verdict from CI.
+const BOT_AUTHORS = new Set(['dependabot'])
+const bareName = (author) =>
+  author.replace(/^app\//, '').replace(/\[bot\]$/, '')
 
 // `type!: desc` or `type(scope)!: desc`. The title is the reliable signal:
 // squash merges use it and leave the body empty (#5388). The footer is
@@ -239,7 +245,7 @@ const report = (lines) => {
 const main = () => {
   const { prNumber, title, body, labels, author, files } = readInputs()
 
-  if (BOT_AUTHORS.has(author)) {
+  if (BOT_AUTHORS.has(bareName(author))) {
     report([`✅ Opened by ${author} - not a deliberate API change.`])
     return
   }
