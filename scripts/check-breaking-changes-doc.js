@@ -244,7 +244,7 @@ const main = () => {
     report([
       breaking
         ? '✅ Breaking, but no `/next` source file changed (tests, stories, docs, snapshots and Code Connect files do not count) - nothing to check.'
-        : `✅ ${subject} changes no props or markup of a component the \`/next\` barrel exports - nothing to check. A component still being built is covered from the commit that exports it.`,
+        : `✅ ${subject} changes no props or markup of a \`/next\` component the package exports - nothing to check.`,
     ])
     return
   }
