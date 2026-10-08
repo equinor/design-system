@@ -164,7 +164,9 @@ const main = () => {
  * working tree, so replaying an old PR by hand uses today's barrel. */
 const publishedComponents = () => new Set(exportedComponents(read(BARREL)))
 
-module.exports = { publishedComponents }
+// `exportedComponents`, `sections` and `isEmpty` are exported for the tests:
+// they are the parsing, which is where a quiet mistake would hide.
+module.exports = { publishedComponents, exportedComponents, sections, isEmpty }
 
 if (require.main === module) {
   try {
