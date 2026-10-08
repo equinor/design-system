@@ -170,7 +170,6 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
    - `header/*` → `font-weight/medium` (500) at every size. One weight per role replaces ADR-0007's header weight that varied by step.
    - `label/*` → `default` (`font-weight/normal`, 400), `medium` (`font-weight/medium`, 500, the former `bolder`) and `bold` (`font-weight/bold`, 700).
    - `body/*` → `default` (400) and `bold` (700).
-   - **Inline emphasis (`strong`) uses `font-weight/bold` (700) in every role.** With one weight per role there is nothing context-dependent left to resolve.
    - No `label-bold` or per-step weight group exists, and adding one is the anti-pattern this rule forbids.
 
 8. **Text styles.** 47 styles: `header/{xs…4xl}` (8), `label/{xs…5xl}/{default,medium,bold}` (27), `body/{sm…3xl}/{default,bold}` (12). Tokens Studio has no typography composites, so the text styles are maintained in the Figma file and bind only semantic variables: font size, line-height, weight and family (`font-family/header` or `font-family/ui`). Variables are synced from Tokens Studio, which stays canonical for every value.
@@ -196,14 +195,13 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - Good, because body leading is a token on the 4px grid that Figma and code bind identically, and there is no ratio for code to re-derive.
 - Good, because Equinor headers get room for descenders at every size and density, and the header ratio no longer dips at `sm` and `xl`.
 - Good, because in `header` and `body` one font size keeps one line-height across all density modes.
-- Good, because `strong` resolves to one weight, without per-size inheritance.
 - Bad, because the renames break code: `--eds-typography-ui-*` becomes `--eds-typography-label-*` and `--eds-font-weight-bolder` becomes `--eds-font-weight-medium`. Known consumers on `main`: `apps/design-system-docs`, with 27 references in 4 files (`docs-components.css`, `colour/usage.mdx`, `site-chrome.css` and `docs-search-bar.css`). The `next` components and the mobile packages read the 2.x token namespace and are not affected.
 - Bad, because header line-heights no longer follow matching step numbers, so the scale is correct by choice rather than by construction, and only the note in Naming guards it.
 - Neutral: the Tokens Studio → Figma sync, an open risk in ADR-0007, is now in use. One behaviour to plan for: the sync matches variables by name, so a renamed token arrives in Figma as a new variable and the old one stays, still bound to its text styles. Every rename needs a Figma pass that rebinds and then removes the old variables (observed when this change was synced on 7 October 2026).
 - Open: `label/xs` is 9px in compact density. This change does not touch it; it is to be decided with the documentation pass ([#5517](https://github.com/equinor/design-system/issues/5517)).
 - **Two accepted records are out of step and get their own successor records, in separate PRs:**
   - [ADR-0014](./0014-token-code-output-architecture.md) point 5 derives body as `ui` font-size × 1.5 in the generator ("decided, implementation pending"), and point 8 makes the body leading code-owned. Body is now a token, so point 5 should not be implemented, and the per-role composition it describes uses `header`, `label` and `body`. [ADR-0028](./0028-token-code-output-architecture-per-role-typography.md) supersedes ADR-0014.
-  - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record `strong` is `font-weight/bold` (700) in every role, and `bolder` no longer exists. ADR-0018 also names its utility classes `.eds-heading-bold` and `.eds-heading-light`. [ADR-0029](./0029-typography-approach-for-eds-2-web.md) supersedes ADR-0018.
+  - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record weights are fixed per role, and `bolder` no longer exists. ADR-0018 also names its utility classes `.eds-heading-bold` and `.eds-heading-light`. [ADR-0029](./0029-typography-approach-for-eds-2-web.md) supersedes ADR-0018 and decides how the `<strong>` element renders on the web.
 
 ### Confirmation
 
