@@ -41,13 +41,17 @@ function renderFeatures(props) {
     .join('\n')
 }
 
+// Backslashes first, then pipes, so a pipe cannot end the cell early.
+const escapeCell = (text) => text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
+
 function renderPropsTable(props) {
   const rows = props.map((p) => {
-    const type = p.type.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
-    const description = p.optional
-      ? p.description
-      : `${p.description} Required.`
-    return `| \`${p.name}\` | \`${type}\` | ${p.default ? `\`${p.default}\`` : 'None'} | ${description} |`
+    const type = escapeCell(p.type)
+    const description = escapeCell(
+      p.optional ? p.description : `${p.description} Required.`,
+    )
+    const fallback = p.default ? `\`${escapeCell(p.default)}\`` : 'None'
+    return `| \`${p.name}\` | \`${type}\` | ${fallback} | ${description} |`
   })
   return [
     '| Prop | Type | Default | Description |',
@@ -110,6 +114,12 @@ const closingSections = (ctx) => [
 
 // The React Native tab: plain markdown, no live demos.
 function renderMobile(component, ctx) {
+  const missing = ctx.stories.find((s) => s.code === undefined)
+  if (missing) {
+    fail(
+      `${component}: no code to show for the example ${missing.name}. On mobile, write each example as a function that returns JSX, or an object with a render function.`,
+    )
+  }
   const examples = ctx.stories.map((s) =>
     [s.title && `### ${s.title}`, s.caption, `\`\`\`tsx\n${s.code}\n\`\`\``]
       .filter(Boolean)

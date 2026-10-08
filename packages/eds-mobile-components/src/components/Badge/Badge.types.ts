@@ -1,9 +1,9 @@
 import { ViewProps } from "react-native";
 
 /**
- * Semantic color tone.
- * - `neutral`: Neutral gray tones (default)
- * - `accent`: Brand or action color
+ * Semantic colour tone.
+ * - `neutral`: Neutral grey tones (default)
+ * - `accent`: Brand or action colour
  * - `success`: Positive or confirmation
  * - `info`: Informational
  * - `warning`: Caution or alerts
@@ -35,7 +35,7 @@ export type BadgeProps = {
     /** The label text or number displayed inside the badge. */
     children: string | number;
     /**
-     * Semantic color tone.
+     * Semantic colour tone.
      * @default 'neutral'
      */
     tone?: BadgeTone;

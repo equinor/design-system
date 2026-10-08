@@ -29,9 +29,41 @@ function getStoryCaption(sf, declaration) {
     : undefined
 }
 
+// Strips `as`, `satisfies` and parentheses around a story.
+function unwrap(node) {
+  let current = node
+  while (
+    Node.isParenthesizedExpression(current) ||
+    Node.isAsExpression(current) ||
+    Node.isSatisfiesExpression(current)
+  ) {
+    current = current.getExpression()
+  }
+  return current
+}
+
+// A story is a function that returns JSX, or an object (CSF3). Other exports
+// in a stories file, such as helper constants, are not examples.
+const isStory = (init) =>
+  Node.isArrowFunction(init) ||
+  Node.isFunctionExpression(init) ||
+  Node.isObjectLiteralExpression(init)
+
+// The body of a function story, or of the `render` function of an object story.
+function getStoryBody(declaration) {
+  const init = unwrap(declaration.getInitializer())
+  if (!Node.isObjectLiteralExpression(init)) return init?.getBody?.()
+  const render = init.getProperty('render')
+  if (Node.isMethodDeclaration(render)) return render.getBody()
+  if (Node.isPropertyAssignment(render)) {
+    return unwrap(render.getInitializer())?.getBody?.()
+  }
+  return undefined
+}
+
 // The JSX a story returns, as source text. A fragment contributes its children.
 function getStoryCode(sf, declaration) {
-  let body = declaration.getInitializer()?.getBody?.()
+  let body = getStoryBody(declaration)
   if (Node.isBlock(body)) {
     body = body
       .getFirstDescendantByKind(SyntaxKind.ReturnStatement)
@@ -61,6 +93,7 @@ function extractStories(project, file, skip) {
     for (const declaration of statement.getDeclarations()) {
       const name = declaration.getName()
       if (skip.has(name)) continue
+      if (!isStory(unwrap(declaration.getInitializer()))) continue
       stories.push({
         name,
         title: humanise(name),
