@@ -110,7 +110,7 @@ Add hand-written bullets only for behaviour the props do not show, such as "Hidd
 
 **Props.** Generated from `NameProps`. Every prop needs a JSDoc description, or the generator fails, and a `@default` tag where it has a default. Props declared in `node_modules`, such as HTML attributes and `ViewProps`, are not listed. Props from a base type in this repo are. With no props of its own, mobile prints "Name has no props of its own" and the Features come from the hand-written file.
 
-**Examples.** At least one besides the playground, which is web's `Introduction` story. Every other export is an example, titled from its name (`InlineWithText` becomes "Inline with text"). Add a caption with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
+**Examples.** At least one besides the playground, which is web's `Introduction` story. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). Add a caption with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
 
 **Accessibility.** Cover each topic that applies, with as many bullets as needed:
 
@@ -139,6 +139,7 @@ A component has one design doc across platforms. Add `aria:` only where a W3C pa
 
 - Use British English.
 - Never use en or em dashes. The generator stops if one reaches a page. This is stricter than `COMPONENT_DOC_STYLE.md`, which allows en dashes on the Docusaurus site.
+- Put `<` and `{` inside code spans. Sidecar text, prop descriptions and story captions all end up in an MDX page, so a tag such as `<Chip>` or a brace expression in running text breaks the Storybook build.
 - Write full sentences. Use a table or list for findings and comparisons.
 - State only what the code or a test shows, and check claims copied from older docs.
 - Keep `tags: ['beta']` in the story meta. The beta callout is generated.
