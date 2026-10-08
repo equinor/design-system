@@ -1,29 +1,26 @@
-# Typography approach for EDS 2.0 web, with one font weight per role
+# Typography approach for EDS 2.0 web, with weights that do not vary by size
 
 - **Status:** Accepted
 - **Date:** 2026-10-08
-- **Decision makers:** Frida Erdal, EDS core team
+- **Decision makers:** Frida Erdal, Edvard Bjørgen, EDS core team
 - **Scope:** Web
-
-> **Draft: two questions to settle before acceptance.**
->
-> 1. **Text-box trim.** ADR-0018 decided an `@supports` trim pattern for the web. [ADR-0027](./0027-token-variable-architecture-typography-roles.md), like ADR-0007 before it, keeps trim out of the token set, and every Figma text style has trim set to None. This draft carries ADR-0018's pattern over so the question stays visible. Should the implementation trim on the web when the Figma styles do not?
-> 2. **`.eds-heading-bold` and `.eds-heading-light`.** ADR-0018 defined these utilities to resolve to a heading's per-size bolder and lighter weights. Headers now have one weight, Medium (500). Should the utilities map to `font-weight/bold` (700) and `font-weight/lighter` (300), be renamed, or be dropped?
 
 ## Context
 
-This record supersedes [ADR-0018](./0018-typography-approach-for-eds-2.md). [ADR-0027](./0027-token-variable-architecture-typography-roles.md) restructured the typography tokens into three roles, `header` (Equinor), `label` and `body` (Inter), and gave each role a fixed set of weights instead of weights that vary by size: header is Medium (500) at every size, label has normal (400), medium (500) and bold (700), body has normal and bold. ADR-0018's weight model, size-matched weight tokens with an inherited `--_font-weight-bolder`, has nothing left to resolve. Accepted records are not edited, and the template asks for a full replacement, so this record restates what ADR-0018 decided that still applies and replaces the weight model.
+This record supersedes [ADR-0018](./0018-typography-approach-for-eds-2.md). [ADR-0027](./0027-token-variable-architecture-typography-roles.md) restructured the typography tokens into three roles, `header` (Equinor), `label` and `body` (Inter), and gave each role a fixed set of weights instead of weights that vary by size: header is Medium (500) at every size, label has normal (400), medium (500) and bold (700), body has normal and bold. ADR-0018's weight model, size-matched weight tokens with an inherited `--_font-weight-bolder`, has nothing left to resolve. Accepted records are not edited, and the template asks for a full replacement, so this record restates what ADR-0018 decided that still applies, replaces the weight model, and drops two things ADR-0018 decided: text-box trimming and the `.eds-heading-bold` / `.eds-heading-light` utility classes.
 
-As in ADR-0018: EDS 2.0 needs a coherent typography system covering font families, type scale, font weights, line-height, and text-box trimming. The system must work for both heading and body text, support density modes, and align text to a 4px baseline grid.
+As in ADR-0018, with text-box trimming taken out: EDS 2.0 needs a coherent typography system covering font families, type scale, font weights and line-height. The system must work for both heading and body text, support density modes, and keep text on a 4px grid.
 
-ADR-0018 also aimed for optically correct weights, lighter numbers at larger sizes. ADR-0027 drops that: a `4xl` header uses the same Medium as an `md` header. That is a design decision recorded there; this record implements it.
+ADR-0018 also aimed for optically correct weights, lighter numbers at larger sizes. ADR-0027 drops that by giving each role one weight: a `4xl` header uses the same Medium as an `md` header. The weight decision is ADR-0027's and this record implements it. ADR-0027 does not discuss optical compensation, so the trade-off is stated here, under Consequences.
 
-No implementation follows the redefined typography tokens yet. The current `/next` typography CSS, `elements.css` and the component styles, still uses the 2.x token names and ADR-0018's per-size weight model. It is out of date and is not a reference for this record. This record describes the target that the typography implementation builds to.
+ADR-0018 trimmed text to the cap height and alphabetic baseline with `text-box`, behind `@supports`. ADR-0027, like ADR-0007 before it, keeps trim out of the token set: every Figma text style has trim set to None, and line-height is never adjusted to compensate. ADR-0007 also expected component padding to be redone without trim (the "repad" work in [#5119](https://github.com/equinor/design-system/issues/5119)).
+
+Nothing in `/next` follows the redefined typography tokens yet. Its typography CSS, `elements.css` and the component styles, still uses the 2.x token names and ADR-0018's per-size weight model. It is out of date and is not a reference for this record. This record describes the target that the typography implementation builds to.
 
 ## Decision Drivers
 
-- Text must align to a 4px baseline grid across all elements
-- Inline emphasis (`strong`) must be visibly heavier than the text around it, in every role, without per-context targeting
+- Line boxes must sit on a 4px grid across all elements
+- Text in `<strong>` and `<b>` must be heavier than normal (400) and medium (500) text, without per-context targeting
 - Weights, sizes and line-heights must come from the semantic tokens, not browser defaults or literal numbers
 - Typography must be drop-in via the element defaults stylesheet (`elements.css`), with no extra markup required
 
@@ -51,86 +48,74 @@ Use size-matched font-weight tokens at each heading/body level (`--eds-typograph
 
 **Cons:**
 
-- The redefined token set has no per-size weights to point at: weight is one token per role (ADR-0027)
+- The redefined token set has no per-size weights to point at: each role uses a fixed set of the shared `font-weight/*` tokens (ADR-0027)
 - Requires setting font-weight tokens on every heading and body level individually, and the pseudo-private pattern is non-obvious to contributors
 
 ### Option 3: CSS `font-weight: bolder/lighter` keywords
 
-Use the relative `bolder`/`lighter` keywords, which step up/down the weight relative to the inherited value.
+Use the relative `bolder`/`lighter` keywords, which step up/down the weight relative to the inherited value. This is what browsers do when no rule is set: the HTML rendering rules give `b, strong { font-weight: bolder; }`.
 
 **Pros:**
 
 - Simple, no tokens needed
+- From the normal (400) and medium (500) defaults it steps to 700, the same weight as bold
 
 **Cons:**
 
-- Steps are browser-defined and do not map to the EDS token scale
-- No control over the specific numeric weight at each size
+- The steps come from a fixed table in CSS Fonts 4, not from the tokens, so a weight change in Tokens Studio would not reach `<strong>` or `<b>`
+- Inside bold text it steps to 900, a weight the token scale does not have
 
-### Option 4: One semantic weight token per role, `strong` = bold (chosen)
+### Option 4: Shared semantic weight tokens, `<strong>` and `<b>` = bold (chosen)
 
-Each element sets the weight token its role prescribes, and `strong` uses `font-weight/bold` everywhere.
+Each element sets the weight tokens its role prescribes, and text in `<strong>` or `<b>` resolves to `font-weight/bold` (700).
 
 **Pros:**
 
 - Matches the token structure in ADR-0027 one to one
-- `strong` needs no context: bold (700) is heavier than every role's default weight
+- `<strong>` and `<b>` need no context: bold (700) is heavier than normal (400) and medium (500)
 
 **Cons:**
 
-- Inside text that is already bold (`label/*/bold`, `body/*/bold`), `strong` shows no difference
+- Inside text that is already bold (`label/*/bold`, `body/*/bold`), `<strong>` and `<b>` show no difference
 
 ## Decision
 
 Use **Option 4**.
 
 1. **Each element sets its role's weight from the semantic tokens.** Heading elements use `--eds-font-weight-medium`. Body and label elements use `--eds-font-weight-normal` by default, and `--eds-font-weight-medium` or `--eds-font-weight-bold` where a medium or bold variant applies.
-2. **Inline emphasis uses bold in every role:**
+2. **Text wrapped in the `<strong>` or `<b>` HTML element resolves to `font-weight: 700`,** through the `font-weight/bold` token, whatever text surrounds it. The `<strong>` rule was decided in [#5530](https://github.com/equinor/design-system/issues/5530#issuecomment-6036525225), and `<b>` was [decided](https://github.com/equinor/design-system/issues/5530#issuecomment-6059203328) to resolve the same way:
 
    ```css
-   :where(strong) {
+   :where(strong, b) {
      font-weight: var(--eds-font-weight-bold, 700);
    }
    ```
 
-   Equinor and Inter are both loaded as variable fonts covering weights 1–999, so 700 renders without synthesised bold, in headers too.
+   The EDS variable font stylesheet (`eds-uprights-vf.css`) loads both typefaces as variable fonts. Equinor's weight axis runs from 300 to 700 and Inter's from 100 to 900, so 700 renders as each font's own Bold without synthesised bold, in headers too.
 
 3. **No per-size weight tokens and no `--_font-weight-bolder` / `--_font-weight-lighter` pseudo-private variables.** The implementation sets weights only from the semantic weight tokens.
-4. **Utility classes** `.eds-heading-bold` and `.eds-heading-light`: open, see the questions at the top.
+4. **No `.eds-heading-bold` or `.eds-heading-light` utility classes.** ADR-0018 defined them to resolve to a heading's per-size bolder and lighter weights. Headers now have one weight, Medium (500), and ADR-0027 treats CSS utility classes as a post-v1 nice-to-have, so the two classes are dropped.
 
 ### Extension: font-family, font-size, line-height
 
-The CSS-first principle from ADR-0018 is unchanged. Components in `/next` set `font-family`, `font-size`, `line-height` and `font-weight` directly in their CSS using per-role semantic tokens. With the redefined tokens these are `--eds-typography-{header,label,body}-{size}-{font-size,line-height}`, `--eds-font-family-{header,ui}` and `--eds-font-weight-{normal,medium,bold}`. Nothing uses these names yet: the current `/next` CSS is on the 2.x token names, and the implementation that follows this record replaces it ([#5119](https://github.com/equinor/design-system/issues/5119)). The `data-font-family` / `data-font-size` / `data-line-height` runtime-switching mechanism is reserved for `elements.css` defaults and ad-hoc consumer markup — a component's own elements should not carry these attributes, because the size and role are part of the component's design and are encoded in the token name. [`packages/eds-tokens/instructions/typography.md`](../../packages/eds-tokens/instructions/typography.md) describes both paths for the 2.x token shape and needs to follow this record.
+The CSS-first principle from ADR-0018 is unchanged. Components in `/next` set `font-family`, `font-size`, `line-height` and `font-weight` directly in their CSS using per-role semantic tokens. With the redefined tokens these are `--eds-typography-{header,label,body}-{size}-{font-size,line-height}`, `--eds-font-family-{header,ui}` and `--eds-font-weight-{normal,medium,bold}`. No `/next` code uses these names yet: the current `/next` CSS is on the 2.x token names, and the implementation that follows this record replaces it ([#5119](https://github.com/equinor/design-system/issues/5119)). The `data-font-family` / `data-font-size` / `data-line-height` runtime-switching mechanism is reserved for `elements.css` defaults and ad-hoc consumer markup — a component's own elements should not carry these attributes, because the size and role are part of the component's design and are encoded in the token name. [`packages/eds-tokens/instructions/typography.md`](../../packages/eds-tokens/instructions/typography.md) describes both paths for the 2.x token shape and needs to follow this record.
 
-Which role to use: `header` for titles, `label` for single-line functional text (buttons, navigation, table cells, form labels, captions), `body` for running text that wraps.
+Two typefaces are used: **Equinor** for the `header` role, **Inter** for `label` and `body`. Which role to use for which text is defined in [ADR-0027](./0027-token-variable-architecture-typography-roles.md), point 6.
 
 ### Text-box trimming
 
-Carried over from ADR-0018 unchanged, pending question 1 at the top. For text-box trimming, the `@supports` progressive enhancement pattern is used:
-
-```css
-/* Base — all browsers */
-padding-block: var(--eds-selectable-space-vertical);
-
-/* Enhancement — trims whitespace to cap-height/alphabetic baseline */
-@supports (text-box: trim-both ex alphabetic) {
-  padding-top: var(--padding-top-baseline);
-  padding-bottom: 0;
-  text-box: trim-both ex alphabetic;
-}
-```
-
-CSS `@function` (Chrome/Edge 128+) can replace the custom property approach once Safari ships support — the logic is identical but computed at the CSS layer rather than pre-calculated.
-
-Two typefaces are used: **Equinor** for the `header` role, **Inter** for `label` and `body`.
+ADR-0018's `@supports` trim pattern is dropped, and the web does not trim text. The Figma text styles have trim set to None (ADR-0027), and the web renders the same line box: no `text-box` trim, and no line-height or padding adjusted to compensate for trimming. Text stays on the 4px grid through the line-height tokens, which are all multiples of 4px. Component padding is set for untrimmed text, as part of the repad work in [#5119](https://github.com/equinor/design-system/issues/5119).
 
 ### Consequences
 
 - Good, because the web weights map one to one onto the semantic weight tokens, so a weight change in Tokens Studio reaches the CSS without per-size bookkeeping.
-- Good, because `strong` has one rule and no inheritance chain to understand.
+- Good, because `<strong>` and `<b>` share one rule, with no inheritance chain to understand.
 - Good, because the pseudo-private variable pattern, which ADR-0018 noted was non-obvious to contributors, goes away.
-- Bad, because weights are no longer optically compensated: a large header looks heavier than a small one at the same Medium (ADR-0027 accepts this).
-- Bad, because `strong` inside already-bold text has no visible effect.
+- Good, because web text has the same line box as the Figma text styles.
+- Bad, because weights are no longer optically compensated: a large header looks heavier than a small one at the same Medium. This follows from ADR-0027's one weight per role, which does not discuss the trade-off.
+- Bad, because `<strong>` and `<b>` inside already-bold text have no visible effect.
+- Bad, because components that were padded for trimmed text need new padding for the full line box (#5119).
+- Bad, because markup that uses `.eds-heading-bold` or `.eds-heading-light` no longer changes the heading's weight.
 - Bad, because the existing `/next` typography CSS is built on the 2.x token names and ADR-0018's per-size weights, so the implementation replaces it rather than adjusting it.
 
 ## Related
@@ -139,4 +124,4 @@ Two typefaces are used: **Equinor** for the `header` role, **Inter** for `label`
 - [ADR-0027](./0027-token-variable-architecture-typography-roles.md): the typography roles and weights this record implements on the web
 - [ADR-0002: Use vanilla CSS with design tokens for EDS 2.0](0002-use-vanilla-css-with-design-tokens-for-eds-2.md)
 - [ADR-0017: Spacing approach for EDS 2.0](0017-spacing-approach-for-eds-2.md)
-- [#5530](https://github.com/equinor/design-system/issues/5530): typography restructure; [#5119](https://github.com/equinor/design-system/issues/5119): component migration
+- [#5530](https://github.com/equinor/design-system/issues/5530): typography restructure, with the `<strong>` decision in [its decision comment](https://github.com/equinor/design-system/issues/5530#issuecomment-6036525225) and the `<b>`, trim and utility-class decisions in [the web decisions comment](https://github.com/equinor/design-system/issues/5530#issuecomment-6059203328); [#5119](https://github.com/equinor/design-system/issues/5119): component migration
