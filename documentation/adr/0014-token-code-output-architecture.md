@@ -1,6 +1,6 @@
 # Token code / output architecture for the redefined token system
 
-- **Status:** Superseded by [ADR-0028](0028-token-code-output-architecture-per-role-typography.md)
+- **Status:** Superseded by [ADR-0028](0028-token-code-output-architecture-typography-roles.md)
 - **Date:** 2026-07-15
 - **Decision makers:** Frida Erdal, EDS Core Team
 - **Scope:** Tokens

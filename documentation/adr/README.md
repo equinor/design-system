@@ -43,7 +43,7 @@ Records: 26
 | [0023](./0023-mobile-documentation-lives-alongside-web.md) | Mobile documentation lives alongside web's — Docusaurus for design docs, web Storybook for developer docs | Mobile | Accepted | 2026-04-09 | recorded retrospectively 2026-09-24 |
 | [0024](./0024-mobile-touch-targets-are-a-fixed-constant-not-a-token.md) | Touch targets are a fixed platform constant in mobile components, not a density-scaled token | Mobile | Accepted | 2026-09-16 | recorded retrospectively 2026-09-24 |
 | [0025](./0025-batch-graduation-with-release-candidate.md) | Graduate EDS 2.0 as one batch, through a release candidate, to stable 3.0.0 | Web, Tokens | Accepted | 2026-09-17 |  |
-| [0028](./0028-token-code-output-architecture-per-role-typography.md) | Token code / output architecture for the redefined token system, with per-role typography output | Tokens | Accepted | 2026-10-08 |  |
+| [0028](./0028-token-code-output-architecture-typography-roles.md) | Token code / output architecture for the redefined token system, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
 
 ## Statuses outside the template
 
