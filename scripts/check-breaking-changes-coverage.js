@@ -9,10 +9,13 @@
  * successor (#5387). That difference does not arrive marked breaking: a whole
  * component is a rewrite of its 1.0 predecessor, and it lands as a plain
  * `feat: add <Component>`. Nothing in /next is formally breaking until
- * graduation, so check-breaking-changes-doc.js - which keys on `!` in the
- * title - cannot see the larger half of what the page is for.
+ * graduation.
  *
- * So this one does not read the pull request at all. It asks a question about
+ * check-breaking-changes-doc.js covers the other side of this: it asks whether
+ * a pull request that moves a component brought the page with it. What it
+ * cannot see is a component that never had a section to begin with, because it
+ * only looks at what a diff touched. So this one does not read the pull
+ * request at all. It asks a question about
  * the tree, which holds at any commit: is the page complete?
  *
  *   1. Every component exported from the /next barrel has a `## <Name>`

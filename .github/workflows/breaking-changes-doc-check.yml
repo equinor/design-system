@@ -1,7 +1,9 @@
 # Breaking Changes Page Check
 #
-# Fails a PR that makes a breaking change to a /next component without adding
-# anything to packages/eds-core-react/stories/docs/BreakingChanges.mdx.
+# Fails a PR that changes a published /next component without bringing
+# packages/eds-core-react/stories/docs/BreakingChanges.mdx with it. Not only a
+# PR marked breaking: the EDS 1.0 to 2.0 difference the page describes arrives
+# as a plain feat or fix, since nothing in /next is breaking until graduation.
 # The rules, the escape hatch and the reasoning live in
 # scripts/check-breaking-changes-doc.js.
 #

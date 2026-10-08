@@ -21,7 +21,7 @@
  * is whether the PR moved a published component's surface, because that is
  * what the section describes. It fails when both hold:
  *
- *   1. The diff changes a `.tsx` or `.types.ts` file belonging to a component
+ *   1. The diff changes a `.ts` or `.tsx` file belonging to a component
  *      the /next barrel exports - including one this very PR exports for the
  *      first time, which is how a new component gets its first section. That
  *      is the API and markup a consumer sees.
@@ -78,18 +78,22 @@ const NON_API_FILE =
   /(\.test\.tsx?|\.stories\.tsx?|\.figma\.tsx|\.mdx?|\.snap)$/
 const SNAPSHOT_DIR = '__snapshots__/'
 
-// The narrower set used when the PR has not marked itself breaking: the files
-// that carry the props and the markup. CSS is deliberately out - the page says
-// it does not track colour, spacing or the type scale, and the class names it
-// does track are applied in the `.tsx`.
-const SURFACE_FILE = /(\.tsx|\.types\.ts)$/
+// The narrower set used when the PR has not marked itself breaking: the code,
+// as opposed to the look of it. Every `.ts` and `.tsx` left after NON_API_FILE
+// counts, which means the per-component `index.ts` barrels and hooks such as
+// `Field/useFieldIds.ts` - that one sets the ids on five components and is the
+// contract the page's id bullet describes (#5564). CSS is deliberately out:
+// the page does not track colour, spacing or the type scale, and the class
+// names it does track are applied in the `.tsx`.
+const SURFACE_FILE = /\.tsx?$/
 
 // A dependency bump never changes an API on purpose, but it does drag lint
 // fixes through component files: #5163 reformatted four of them. Dependabot
 // cannot label its own pull request, so without this the weekly rotation pays
 // for it. A bump that does change behaviour is a review problem, not a page
-// entry.
-const BOT_AUTHORS = new Set(['dependabot[bot]', 'github-actions[bot]'])
+// entry. Nothing else is exempt - release pull requests touch only CHANGELOG
+// and version files, which these rules already leave alone.
+const BOT_AUTHORS = new Set(['dependabot[bot]'])
 
 // `type!: desc` or `type(scope)!: desc`. The title is the reliable signal:
 // squash merges use it and leave the body empty (#5388). The footer is
@@ -192,6 +196,15 @@ const componentOf = (file) => {
   return slash === -1 ? rest : rest.slice(0, slash)
 }
 
+/** Shared code under /next rather than a component: `utils/selectOptions.ts`
+ * is Select's and Autocomplete's option handling. Components are PascalCase by
+ * the naming convention in AGENTS.md, so a lower-case directory is shared, and
+ * a new one counts without anyone remembering to list it here. */
+const isSharedDir = (file) => {
+  const dir = componentOf(file)
+  return dir !== file.slice(NEXT_SRC.length) && /^[a-z]/.test(dir)
+}
+
 const isApiFile = (file) =>
   file.startsWith(NEXT_SRC) &&
   !file.includes(SNAPSHOT_DIR) &&
@@ -207,7 +220,9 @@ const isApiFile = (file) =>
  * has no section. Foundation and the other unexported directories stay out
  * for the same reason. */
 const isSurfaceFile = (file, published) =>
-  isApiFile(file) && SURFACE_FILE.test(file) && published.has(componentOf(file))
+  isApiFile(file) &&
+  SURFACE_FILE.test(file) &&
+  (published.has(componentOf(file)) || isSharedDir(file))
 
 /** Written to the job summary as well as the log, so a reviewer sees the
  * reason without opening the run. */
@@ -249,10 +264,18 @@ const main = () => {
     return
   }
 
-  const components = [...new Set(changed.map(componentOf))].sort()
+  // Shared code names its directory, not a component, so it is listed apart:
+  // the author is the one who knows which sections it reaches.
+  const named = changed.filter((file) => !isSharedDir(file))
+  const shared = [...new Set(changed.filter(isSharedDir).map(componentOf))]
+  const components = [...new Set(named.map(componentOf))].sort()
+  const subjects = [
+    ...components,
+    ...shared.map((dir) => `shared \`${dir}/\``),
+  ].join(', ')
   const what = breaking
-    ? `Breaking change to ${components.join(', ')}`
-    : `${components.join(', ')} changed under \`/next\``
+    ? `Breaking change to ${subjects}`
+    : `${subjects} changed under \`/next\``
 
   if (files.includes(PAGE)) {
     report([`✅ ${what}, and the breaking changes page was updated.`])
@@ -279,6 +302,12 @@ const main = () => {
     `The page answers one question per component - what an EDS 1.0 consumer meets in 2.0 - and becomes the migration guide at graduation. Update the \`## <Component>\` section in \`${PAGE}\`, the Storybook page "${PAGE_TITLE}", so it describes 2.0 as it now stands: props, composition, markup, behaviour.`,
     '',
     'Describe the component, not the beta. Going from one beta to the next is not what the page is for - say that in this PR description and the commit message instead.',
+    ...(shared.length
+      ? [
+          '',
+          `Shared code changed too. Update the section of every component that uses ${shared.map((dir) => `\`${dir}/\``).join(', ')}.`,
+        ]
+      : []),
     '',
     `If the EDS 1.0 to 2.0 answer is unchanged by this PR, add the \`${SKIP_LABEL}\` label and say why.`,
     '',
