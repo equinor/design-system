@@ -167,7 +167,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
    The 1.5 is a readability choice, not a WCAG requirement. WCAG SC 1.4.12 (AA) asks that components survive a user forcing 1.5 × line-height, which is a component concern; SC 1.4.8's 1.5 leading is Level AAA.
 
 7. **Weight is an orthogonal axis composed at the text-style layer, never a per-step or per-role variable.** The semantic `typography/{role}/{size}` groups carry only `font-size` and `line-height`. Each text style composes `{size ramp} × font-weight × font-family`:
-   - `header/*` → `font-weight/medium` (500) at every size. One weight per role replaces ADR-0007's header weight that varied by step.
+   - `header/*` → `font-weight/medium` (500) at every size. One weight at every size replaces ADR-0007's header weight that varied by step.
    - `label/*` → `default` (`font-weight/normal`, 400), `medium` (`font-weight/medium`, 500, the former `bolder`) and `bold` (`font-weight/bold`, 700).
    - `body/*` → `default` (400) and `bold` (700).
    - No `label-bold` or per-step weight group exists, and adding one is the anti-pattern this rule forbids.
@@ -201,7 +201,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - Open: `label/xs` is 9px in compact density. This change does not touch it; it is to be decided with the documentation pass ([#5517](https://github.com/equinor/design-system/issues/5517)).
 - **Two accepted records are out of step and get their own successor records, in separate PRs:**
   - [ADR-0014](./0014-token-code-output-architecture.md) point 5 derives body as `ui` font-size × 1.5 in the generator ("decided, implementation pending"), and point 8 makes the body leading code-owned. Body is now a token, so point 5 should not be implemented, and the per-role composition it describes uses `header`, `label` and `body`. [ADR-0028](./0028-token-code-output-architecture-per-role-typography.md) supersedes ADR-0014.
-  - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record weights are fixed per role, and `bolder` no longer exists. ADR-0018 also names its utility classes `.eds-heading-bold` and `.eds-heading-light`. [ADR-0029](./0029-typography-approach-for-eds-2-web.md) supersedes ADR-0018 and decides how the `<strong>` element renders on the web.
+  - [ADR-0018](./0018-typography-approach-for-eds-2.md) resolves weight per size and gives `strong` an inherited `--_font-weight-bolder` with a 500 fallback. Under this record weights no longer vary by size and `bolder` no longer exists. ADR-0018 also defines the utility classes `.eds-heading-bold` and `.eds-heading-light` and a `text-box` trim pattern. [ADR-0029](./0029-typography-approach-for-eds-2-web.md) supersedes ADR-0018: it records how `<strong>` and `<b>` resolve on the web, and drops the utility classes and the trim.
 
 ### Confirmation
 
