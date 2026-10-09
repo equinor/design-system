@@ -14,72 +14,72 @@ describe('Slot (next)', () => {
       expect(screen.getByRole('button')).toBeInTheDocument()
     })
 
-    it.each([
-      ['null', null],
-      ['undefined', undefined],
-      ['false', false],
-    ])('renders nothing without an error when children is %s', (_, value) => {
-      const consoleError = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-      const { container } = render(<Slot>{value}</Slot>)
-      expect(container.innerHTML).toBe('')
-      expect(consoleError).not.toHaveBeenCalled()
-      consoleError.mockRestore()
-    })
+    describe('Invalid children', () => {
+      let consoleError: jest.SpyInstance
 
-    it('logs an error naming Slot for a text child', () => {
-      const consoleError = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-      const { container } = render(<Slot>plain text</Slot>)
-      expect(container.innerHTML).toBe('')
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringMatching(/^Slot: .*got text/),
-      )
-      consoleError.mockRestore()
-    })
+      beforeEach(() => {
+        consoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
+      })
 
-    it('logs an error for multiple children', () => {
-      const consoleError = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-      render(
-        <Slot>
-          <span>One</span>
-          <span>Two</span>
-        </Slot>,
-      )
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringMatching(/^Slot: .*got multiple children/),
-      )
-      consoleError.mockRestore()
-    })
+      afterEach(() => {
+        consoleError.mockRestore()
+      })
 
-    it('logs an error for a Fragment child instead of cloning onto it', () => {
-      const consoleError = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-      const { container } = render(
-        <Slot className="slot-class">
-          <>
+      it.each([
+        ['null', null],
+        ['undefined', undefined],
+        ['false', false],
+        ['an empty string', ''],
+      ])('renders nothing without an error when children is %s', (_, value) => {
+        const { container } = render(<Slot>{value}</Slot>)
+        expect(container.innerHTML).toBe('')
+        expect(consoleError).not.toHaveBeenCalled()
+      })
+
+      it('logs an error naming Slot for a text child', () => {
+        const { container } = render(<Slot>plain text</Slot>)
+        expect(container.innerHTML).toBe('')
+        expect(consoleError).toHaveBeenCalledWith(
+          expect.stringMatching(/^Slot: .*got text/),
+        )
+      })
+
+      it('logs an error for 0, which React would render as text', () => {
+        render(<Slot>{0}</Slot>)
+        expect(consoleError).toHaveBeenCalledWith(
+          expect.stringMatching(/^Slot: .*got text/),
+        )
+      })
+
+      it('logs an error for multiple children', () => {
+        render(
+          <Slot>
             <span>One</span>
-          </>
-        </Slot>,
-      )
-      expect(container.innerHTML).toBe('')
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringMatching(/^Slot: .*got a Fragment/),
-      )
-      consoleError.mockRestore()
-    })
+            <span>Two</span>
+          </Slot>,
+        )
+        expect(consoleError).toHaveBeenCalledWith(
+          expect.stringMatching(/^Slot: .*got multiple children/),
+        )
+      })
 
-    it('does not throw for invalid children', () => {
-      const consoleError = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
-      expect(() => render(<Slot>plain text</Slot>)).not.toThrow()
-      consoleError.mockRestore()
+      it('logs an error for a Fragment child instead of cloning onto it', () => {
+        const { container } = render(
+          <Slot className="slot-class">
+            <>
+              <span>One</span>
+            </>
+          </Slot>,
+        )
+        expect(container.innerHTML).toBe('')
+        expect(consoleError).toHaveBeenCalledWith(
+          expect.stringMatching(/^Slot: .*got a Fragment/),
+        )
+      })
+
+      it('does not throw for invalid children', () => {
+        expect(() => render(<Slot>plain text</Slot>)).not.toThrow()
+      })
     })
   })
 

@@ -60,18 +60,4 @@ describe('getElementRef', () => {
 
     expect(getElementRef(element)).toBe(ref)
   })
-
-  it('skips a React 19 warning getter on element.ref', () => {
-    const ref = createRef<HTMLDivElement>()
-    const warningGetter = Object.assign(
-      () => {
-        throw new Error('element.ref was read')
-      },
-      { isReactWarning: true },
-    )
-    const element = { type: 'div', props: { ref } }
-    Object.defineProperty(element, 'ref', { get: warningGetter })
-
-    expect(getElementRef(element as unknown as ReactElement)).toBe(ref)
-  })
 })

@@ -105,6 +105,7 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(function Slot(
       : null
   const childRef = child ? getElementRef<HTMLElement>(child) : null
 
+  // An inline callback ref on the child rebuilds this every render, as React itself would
   const mergedRef = useMemo(
     () => (childRef ? composeRefs<HTMLElement>(ref, childRef) : ref),
     [ref, childRef],
@@ -112,7 +113,12 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(function Slot(
 
   if (!child) {
     // Rendering nothing is intended for conditional children like {flag && <a />}
-    if (children !== null && children !== undefined && children !== false) {
+    const isConditional =
+      children === null ||
+      children === undefined ||
+      children === false ||
+      children === ''
+    if (!isConditional) {
       console.error(
         `Slot: asChild needs a single React element as its child, got ${describeInvalidChild(children)}. Wrap the content in an element, for example <a href="…">Save</a>.`,
       )
