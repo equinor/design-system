@@ -151,21 +151,6 @@
         }
       }
     },
-    "lighter": {
-      "$value": "{weight.lighter}",
-      "$type": "number",
-      "$extensions": {
-        "com.figma": {
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-font-weight-lighter)"
-          },
-          "hiddenFromPublishing": false
-        }
-      }
-    },
     "medium": {
       "$value": "{weight.medium}",
       "$type": "number",

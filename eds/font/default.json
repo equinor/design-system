@@ -47,21 +47,6 @@
         }
       }
     },
-    "lighter": {
-      "$value": "{primitives.weight-scale.lighter}",
-      "$type": "fontWeight",
-      "$extensions": {
-        "com.figma": {
-          "scopes": [
-            "FONT_WEIGHT"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-weight-lighter)"
-          },
-          "hiddenFromPublishing": true
-        }
-      }
-    },
     "medium": {
       "$value": "{primitives.weight-scale.medium}",
       "$type": "fontWeight",

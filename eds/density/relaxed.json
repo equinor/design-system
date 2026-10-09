@@ -549,7 +549,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.1000.default}",
+            "$value": "{primitives.lineheight-scale.1100.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
@@ -581,7 +581,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.1100.default}",
+            "$value": "{primitives.lineheight-scale.1200.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
@@ -645,7 +645,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.700.default}",
+            "$value": "{primitives.lineheight-scale.800.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
@@ -677,7 +677,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.500.default}",
+            "$value": "{primitives.lineheight-scale.700.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
@@ -709,7 +709,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.400.default}",
+            "$value": "{primitives.lineheight-scale.500.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
@@ -741,7 +741,7 @@
             }
           },
           "line-height": {
-            "$value": "{primitives.lineheight-scale.800.default}",
+            "$value": "{primitives.lineheight-scale.1000.default}",
             "$type": "lineHeight",
             "$extensions": {
               "com.figma": {
