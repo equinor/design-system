@@ -1,51 +1,43 @@
-# Create New EDS 2.0 Component
+# Create New EDS Component
 
-Create a new EDS 2.0 component named **$ARGUMENTS** in `packages/eds-core-react/src/components/next/`.
+Create a new EDS component. **$ARGUMENTS** is the component name, optionally followed by the platform: `web`, `mobile` or `both`, for example `Avatar mobile`. If no platform is given, ask which one: web, mobile or both.
 
-> **Canonical reference:** [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) — foundation data-attributes, critical patterns, file templates, common mistakes, advanced patterns, and the anti-patterns checklist. Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md).
+> **Canonical references:** web components follow [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) (foundation data-attributes, file templates, common mistakes, anti-patterns checklist). Mobile components follow [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md). Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md). Read the doc for the chosen platform before writing any file, and both for `both`.
 
-@../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md
-
-This command focuses on the per-component scaffolding flow. The patterns and code templates referenced below all live in the canonical doc above — read them there rather than inferring from memory.
+This command holds the flow the two platforms share. The patterns and code templates live in the canonical docs, so read them there rather than inferring from memory.
 
 ## Workflow
 
-1. **Ask for a Figma URL** for the component design. If provided, run the Figma MCP tools per [`AGENTS.md`](../../AGENTS.md) § Figma MCP workflow:
+1. **Choose the platform** from `$ARGUMENTS`, or ask: web (`packages/eds-core-react/src/components/next/`), mobile (`packages/eds-mobile-components/src/components/`) or both. For `both`, build web first and then mobile, from the same Figma extraction.
+
+2. **Ask for a Figma URL** for the component design. The design is shared by both platforms. If provided, run the Figma MCP tools per [`AGENTS.md`](../../AGENTS.md) § Figma MCP workflow:
    - `figma_get_design_context` — component structure
    - `figma_get_screenshot` — visual reference
    - `figma_get_variable_defs` — tokens **per state** (Default, Hover, Focus, Disabled, and any other state in the design). Use the EXACT variable names returned.
 
-2. **Check the component index first** — [`documentation/AI-COMPONENT-INDEX.md`](../../documentation/AI-COMPONENT-INDEX.md) lists every existing `/next` component with its props and sub-components (generated, CI-verified). Confirm `$ARGUMENTS` doesn't already exist, and prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography` over reinventing. The underlying source of truth is `packages/eds-core-react/src/components/next/index.ts`.
+3. **Check what already exists.**
+   - Web: [`documentation/AI-COMPONENT-INDEX.md`](../../documentation/AI-COMPONENT-INDEX.md) lists every existing `/next` component with its props and sub-components (generated, CI-verified). Confirm the component doesn't already exist, and prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography` over reinventing. The source of truth is `packages/eds-core-react/src/components/next/index.ts`.
+   - Mobile: [`documentation/MOBILE_COMPONENT_SCOPE.md`](../../documentation/MOBILE_COMPONENT_SCOPE.md) lists the components mobile excludes or renames. Then look in `packages/eds-mobile-components/src/components/` and build from what is there. Read the web component's API too, and mirror it where it makes sense for React Native.
 
-3. **If an old component exists** at `packages/eds-core-react/src/components/$ARGUMENTS/`, read it for behavioural awareness (keyboard nav, focus management) only — do not copy implementation. Use modern patterns: `:focus-visible`, CSS tokens, simple state.
+4. **If an old component exists** (on web at `packages/eds-core-react/src/components/<Name>/`, on mobile as a folder that `tsconfig.json` still excludes), read it for behavioural awareness (keyboard nav, focus management) only, and rebuild from the Figma design instead of editing it. Use modern patterns: web `:focus-visible`, CSS tokens and simple state, mobile tokens through `EDSStyleSheet`.
 
-4. **Create the component folder** with all required files using the templates in [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#file-templates):
+5. **Create the component folder** using the file templates in the canonical doc for the platform:
+   - Web: `index.ts`, `<Name>.tsx`, `<Name>.types.ts`, `<lowercase>.css` (for example `avatar.css`), `<Name>.figma.tsx` (only if a Figma URL was provided), `<Name>.test.tsx`, `<Name>.stories.tsx`, `<Name>.docs.md`. Use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
+   - Mobile: `index.ts`, `<Name>.tsx`, `<Name>.types.ts`, `<Name>.test.tsx`, `<Name>.stories.tsx`, `<Name>.docs.md`.
 
-   ```
-   $ARGUMENTS/
-     index.ts
-     $ARGUMENTS.tsx
-     $ARGUMENTS.types.ts
-     <lowercase>.css                (e.g. avatar.css)
-     $ARGUMENTS.figma.tsx           (only if a Figma URL was provided)
-     $ARGUMENTS.test.tsx
-     $ARGUMENTS.stories.tsx
-     $ARGUMENTS.docs.md
-   ```
+6. **Wire into the package.**
+   - Web, per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package): export from `next/index.ts`, and `@import` the CSS in `next/index.css`.
+   - Mobile, per [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md#wiring): export from `src/index.ts`, add a demo screen in `apps/mobile-storybook`, and add its `componentRegistry` entry. If the component was excluded as unmigrated, remove it from the exclusion lists in `tsconfig.json`, `eslint.config.js` and `jest.config.cjs`.
 
-   Write `$ARGUMENTS.docs.md` per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md), then run `pnpm run generate:component-docs $ARGUMENTS` to create the docs page. Never write the beta callout or import snippet in the stories file.
+7. **Write the docs** per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md): the stories file and `<Name>.docs.md` on each platform, then run `pnpm run generate:component-docs <Name>`. Never write the beta callout or import snippet in the stories file. The Summary is written once, in the web file, and shown above both tabs.
 
-   Substitute `$ARGUMENTS` for the component name and use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
-
-5. **Wire into the package** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package):
-   - Export from `next/index.ts`
-   - `@import` the CSS in `next/index.css`
-
-6. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report) — a short `## Implementation notes` section summarising what came from Figma, what was inherited, what was assumed, what was skipped, and any TODOs.
+8. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report) — a short `## Implementation notes` section summarising what came from Figma, what was inherited, what was assumed, what was skipped, and any TODOs.
 
 ## Easy-to-miss reminders
 
-These are the patterns most often forgotten — full rationale in the canonical doc:
+These are the patterns most often forgotten. The full rationale is in the canonical docs.
+
+**If web:**
 
 - `data-color-appearance` goes on the **smallest element** that uses that colour, not the root.
 - Elements with `data-color-appearance` must set a `color` (or `background-color`) using a dynamic token.
@@ -54,3 +46,11 @@ These are the patterns most often forgotten — full rationale in the canonical 
 - `data-baseline="center"` enables text-box-trim so component height matches Figma.
 - Use EXACT `--eds-*` tokens from `figma_get_variable_defs` — never hardcode hex or pixel values.
 - Never put `data-font-family` on a flex container — it sets `display: block` and breaks layout.
+
+**If mobile:**
+
+- Style through `EDSStyleSheet.create` and `useStyles` with tokens, and never hardcode colours or sizes.
+- Merge the caller's `style` after the component's own, and never replace it.
+- A press is the Figma hover state. Use `Pressable`, not `PressableHighlight`.
+- Keep touch targets at least 44 by 44 points.
+- Every exported component needs a demo screen and a registry entry, or CI fails.
