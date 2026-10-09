@@ -1,7 +1,7 @@
 :root {
-  --eds-family-header: Equinor;
-  --eds-family-ui: Inter;
-  --eds-weight-bolder: var(--eds-primitives-weight-scale-bolder);
-  --eds-weight-lighter: var(--eds-primitives-weight-scale-lighter);
+  --eds-family-header: var(--eds-primitives-font-family-equinor);
+  --eds-family-ui: var(--eds-primitives-font-family-inter);
+  --eds-weight-bold: var(--eds-primitives-weight-scale-bold);
+  --eds-weight-medium: var(--eds-primitives-weight-scale-medium);
   --eds-weight-normal: var(--eds-primitives-weight-scale-normal);
 }

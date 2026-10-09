@@ -69,6 +69,20 @@
           "$value": "{primitives.spacing.250}"
         }
       },
+      "1200": {
+        "default": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-primitives-lineheight-scale-1200-default)"
+              },
+              "hiddenFromPublishing": true
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{primitives.spacing.275}"
+        }
+      },
       "200": {
         "default": {
           "$extensions": {
@@ -1222,29 +1236,29 @@
       }
     },
     "weight-scale": {
-      "bolder": {
+      "bold": {
         "$extensions": {
           "com.figma": {
             "codeSyntax": {
-              "WEB": "var(--eds-primitives-weight-scale-bolder)"
+              "WEB": "var(--eds-primitives-weight-scale-bold)"
+            },
+            "hiddenFromPublishing": true
+          }
+        },
+        "$type": "fontWeight",
+        "$value": 700
+      },
+      "medium": {
+        "$extensions": {
+          "com.figma": {
+            "codeSyntax": {
+              "WEB": "var(--eds-primitives-weight-scale-medium)"
             },
             "hiddenFromPublishing": true
           }
         },
         "$type": "fontWeight",
         "$value": 500
-      },
-      "lighter": {
-        "$extensions": {
-          "com.figma": {
-            "codeSyntax": {
-              "WEB": "var(--eds-primitives-weight-scale-lighter)"
-            },
-            "hiddenFromPublishing": true
-          }
-        },
-        "$type": "fontWeight",
-        "$value": 300
       },
       "normal": {
         "$extensions": {
