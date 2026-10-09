@@ -9,7 +9,7 @@
 
 This record supersedes [ADR-0018](./0018-typography-approach-for-eds-2.md). [ADR-0027](./0027-token-variable-architecture-typography-roles.md) restructured the typography tokens into three roles, `header` (Equinor), `label` and `body` (Inter), and gave each role a fixed set of weights instead of weights that vary by size: header is Medium (500) at every size, label has normal (400), medium (500) and bold (700), body has normal and bold. ADR-0018's weight model, size-matched weight tokens with an inherited `--_font-weight-bolder`, has nothing left to resolve. Accepted records are not edited, and the template asks for a full replacement, so this record restates what ADR-0018 decided that still applies, replaces the weight model, and drops two things ADR-0018 decided: text-box trimming and the `.eds-heading-bold` / `.eds-heading-light` utility classes.
 
-As in ADR-0018, with text-box trimming taken out: EDS 2.0 needs a coherent typography system covering font families, type scale, font weights and line-height. The system must work for both heading and body text, support density modes, and keep text on a 4px grid.
+The problem is the same as in ADR-0018, except for trimming: EDS 2.0 needs a coherent typography system covering font families, type scale, font weights and line-height. The system must work for both heading and body text, support density modes, and keep text on a 4px grid.
 
 ADR-0018 also aimed for optically correct weights, with lower weight numbers at larger sizes. ADR-0027 drops that: a text style keeps one weight at every size, so a `4xl` header uses the same Medium as an `md` header. The weight decision is ADR-0027's and this record implements it. ADR-0027 does not discuss optical compensation, so the trade-off is stated here, under Consequences.
 
@@ -82,7 +82,7 @@ Each element sets the weight tokens its role prescribes, and text in `<strong>` 
 
 Use **Option 4**.
 
-1. **Each element sets its role's weight from the semantic tokens.** Heading elements use `--eds-font-weight-medium`. Label elements use `--eds-font-weight-normal` by default, and `--eds-font-weight-medium` or `--eds-font-weight-bold` for the medium and bold text styles. Body elements use `--eds-font-weight-normal` by default and `--eds-font-weight-bold` for the bold text style.
+1. **Each element sets its role's weight from the semantic tokens.** Heading elements use `--eds-font-weight-medium`. Label elements use `--eds-font-weight-normal` by default, and `--eds-font-weight-medium` or `--eds-font-weight-bold` for the medium and bold text styles. Body elements use `--eds-font-weight-normal` by default and `--eds-font-weight-bold` for the bold text style. Which HTML element takes which role follows the definitions in ADR-0027 point 6 and is set in `elements.css` as part of [#5119](https://github.com/equinor/design-system/issues/5119).
 2. **Text wrapped in the `<strong>` or `<b>` HTML element resolves to `font-weight: 700`,** through the `font-weight/bold` token, whatever text surrounds it. The `<strong>` rule was decided in [#5530](https://github.com/equinor/design-system/issues/5530#issuecomment-6036525225), and `<b>` was [decided](https://github.com/equinor/design-system/issues/5530#issuecomment-6059203328) to resolve the same way:
 
    ```css
@@ -92,6 +92,8 @@ Use **Option 4**.
    ```
 
    The EDS variable font stylesheet (`eds-uprights-vf.css`) loads both typefaces as variable fonts. Equinor's weight axis runs from 300 to 700 and Inter's from 100 to 900, so 700 renders as each font's own Bold without synthesised bold, in headers too.
+
+   `<em>` and `<i>` set no weight: they keep the browser's italic and the weight of the surrounding text.
 
 3. **No per-size weight tokens and no pseudo-private weight variables such as `--_font-weight-bolder`.** The implementation sets weights only from the semantic weight tokens.
 4. **No `.eds-heading-bold` or `.eds-heading-light` utility classes.** ADR-0018 defined them to resolve to a heading's per-size alternative weights. Headers now have one weight, Medium (500), and ADR-0027 treats CSS utility classes as a post-v1 nice-to-have, so the two classes are dropped.
