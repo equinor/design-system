@@ -133,7 +133,9 @@ All npm publishes use [npm trusted publishing](https://docs.npmjs.com/trusted-pu
 - `actions/setup-node` sets `registry-url: 'https://registry.npmjs.org'` so npm authenticates through the OIDC exchange
 - Packages are published with `--provenance`, which attaches a signed provenance attestation visible on npmjs.com
 - Trusted publishing must be configured per package on npmjs.com (Settings → Trusted publishers) for the exchange to succeed
-- npm permits one trusted publisher workflow per package, so each package must have one publishing owner
+- A package can hold up to 10 trusted publishing configurations. npm lifted the previous one-configuration limit on 2026-09-03, and a publish is authorised when the incoming OIDC identity matches any configured entry
+- Configurations created after 2026-09-03 are allowed to stage only. Direct publishing has to be opted into per configuration under **Allowed actions**, so a newly added entry will stage instead of publish until that is set
+- EDS still gives each package a single publishing workflow, so `@equinor/eds-utils` is published from `publish_core_react.yaml` only (see #4932)
 
 ## Storybook Deployment
 
