@@ -5,21 +5,6 @@ const meta: Meta<typeof Badge> = {
   title: 'EDS 2.0 (beta)/Data Display/Badge',
   component: Badge,
   tags: ['beta'],
-  parameters: {
-    docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-\`\`\`tsx
-import { Badge } from '@equinor/eds-core-react/next'
-\`\`\`
-
-Compact, non-interactive labels for conveying status, category, or metadata. For selectable labels, use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead.
-        `,
-      },
-    },
-  },
   argTypes: {
     tone: {
       control: 'select',
@@ -83,7 +68,7 @@ Emphasis.parameters = {
   docs: {
     description: {
       story:
-        '`low` (default) uses a subtle background fill — appropriate for most inline use. `medium` increases the fill density for stronger contrast, useful when the badge needs to stand out on its own.',
+        '`low` (default) uses a subtle background fill, which suits most inline use. `medium` increases the fill density for stronger contrast, useful when the badge needs to stand out on its own.',
     },
   },
 }
@@ -103,7 +88,7 @@ Variants.parameters = {
   docs: {
     description: {
       story:
-        'Solid (default) suits most contexts. Outlined uses a border instead of a fill — useful when the background is already coloured or when a lighter visual weight is preferable.',
+        'Solid (default) suits most contexts. Outlined uses a border instead of a fill, which is useful when the background is already coloured or when a lighter visual weight is preferable.',
     },
   },
 }
@@ -352,7 +337,7 @@ MultipleLabels.parameters = {
   docs: {
     description: {
       story:
-        'Multiple badges per item communicate orthogonal properties — location type, operational status, and technical classification — without cluttering the layout.',
+        'Multiple badges per item communicate separate properties without cluttering the layout, for example location type, operational status and technical classification.',
     },
   },
 }
@@ -449,7 +434,8 @@ export const AllCombinations: StoryFn<BadgeProps> = () => {
 AllCombinations.parameters = {
   docs: {
     description: {
-      story: 'All combinations of tone × emphasis × variant for visual QA.',
+      story:
+        'Every combination of tone, emphasis and variant, so you can see the full range at once.',
     },
   },
 }

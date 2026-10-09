@@ -30,7 +30,10 @@ This command focuses on the per-component scaffolding flow. The patterns and cod
      $ARGUMENTS.figma.tsx           (only if a Figma URL was provided)
      $ARGUMENTS.test.tsx
      $ARGUMENTS.stories.tsx
+     $ARGUMENTS.docs.md
    ```
+
+   Write `$ARGUMENTS.docs.md` per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md), then run `pnpm run generate:component-docs $ARGUMENTS` to create the docs page. Never write the beta callout or import snippet in the stories file.
 
    Substitute `$ARGUMENTS` for the component name and use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
 

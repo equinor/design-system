@@ -123,7 +123,7 @@ export const Links = ({
   sourceUrl,
 }: LinksProps) => (
   <Unstyled>
-    <Stack style={{ justifyContent: 'flex-start' }}>
+    <Stack style={{ justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
       {ariaUrl && (
         <Button variant="ghost" as="a" href={ariaUrl}>
           <W3cIcon />

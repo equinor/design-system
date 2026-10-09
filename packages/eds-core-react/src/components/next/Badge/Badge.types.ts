@@ -1,9 +1,9 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 
 /**
- * Color tone for theming — maps to `data-color-appearance`.
- * - `neutral`: Neutral gray tones (default)
- * - `accent`: Brand/action color
+ * Colour tone for theming, which maps to `data-color-appearance`.
+ * - `neutral`: Neutral grey tones (default)
+ * - `accent`: Brand or action colour
  * - `success`: Positive/confirmation
  * - `info`: Informational
  * - `warning`: Caution/alerts
@@ -14,7 +14,7 @@ export type BadgeTone =
 
 /**
  * Visual emphasis level.
- * - `low`: Subtle background (canvas) or light border
+ * - `low`: Canvas background or light border
  * - `medium`: More prominent fill or medium border
  */
 export type BadgeEmphasis = 'low' | 'medium'
@@ -28,7 +28,7 @@ export type BadgeVariant = 'solid' | 'outlined'
 
 export type BadgeProps = {
   /**
-   * Color tone for theming.
+   * Colour tone for theming.
    * @default 'neutral'
    */
   tone?: BadgeTone

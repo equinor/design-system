@@ -108,9 +108,12 @@ ComponentName/
   ComponentName.figma.tsx # Figma Code Connect (when a Figma design exists)
   ComponentName.test.tsx  # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
+  ComponentName.docs.md   # Hand-written docs; the page ComponentName.docs.mdx is generated from it
 ```
 
 For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
+
+The Storybook docs page is generated from the types, the stories and `ComponentName.docs.md`, never written by hand. See [`documentation/agent-instructions/STORYBOOK_DOC_STYLE.md`](./documentation/agent-instructions/STORYBOOK_DOC_STYLE.md).
 
 ## Code Style
 

@@ -197,8 +197,10 @@ If the finding needs real work, open a dedicated issue and link it next to the c
    add one entry to `componentRegistry` in `../../apps/mobile-storybook/lib/registry.ts`. The
    list and the header title are built from that entry. CI runs `pnpm run check-screens:mobile`
    and fails if an exported component has no screen or registry entry.
-5. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
+5. Create the developer documentation: write `YourComponent.stories.tsx` (example code only, never rendered) and `YourComponent.docs.md` next to the component, then run `pnpm run generate:component-docs YourComponent` from the repo root to create `docs/YourComponent.mdx`. Never edit that file. The rules are in [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md). This needs a web component of the same name to host the page, because mobile-only components are not supported yet.
 6. Follow existing patterns for prop naming and component structure
+
+**Generated docs:** `docs/YourComponent.mdx` is generated for every component that has a `YourComponent.docs.md`, and `--check` fails in CI if it is stale. The hand-written files in `docs/` stay as they are until their component moves to the generator.
 
 **MDX handoff to EDS Storybook:** Files in `docs/` are consumed by `packages/eds-core-react` via a `workspace:^` link in this monorepo, which wraps each one with source/npm `<Links>` inside `<PlatformTabs>` — changes appear as soon as both packages are built, no release needed. Mobile MDX should not import `<Links>` or `<PlatformTabs>` itself — write component-focused content only. The consumer-side wrapping pattern (in `packages/eds-core-react/src/components/<Component>/<Component>.docs.mdx` — most under `next/`, but `EdsProvider` and `Typography.new` sit outside it) is:
 
@@ -226,9 +228,9 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 - [ ] Uses `theme.colors.*`, `theme.spacing.*`, and `theme.typography.*` tokens
 - [ ] Exports TypeScript types for all props
 - [ ] Follows existing component patterns (prop naming, structure)
-- [ ] Has corresponding storybook story for visual testing
+- [ ] Has a demo screen in `apps/mobile-storybook` for visual testing
 - [ ] Has a `YourComponent.test.tsx` covering rendering and accessibility basics
-- [ ] Has developer MDX doc in `docs/` (Features → Usage → Examples → Props → Accessibility → Related components)
+- [ ] Has `YourComponent.stories.tsx` and `YourComponent.docs.md`, and `pnpm run generate:component-docs --check` passes
 
 ## Important Patterns
 

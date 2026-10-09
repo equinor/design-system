@@ -1,0 +1,8 @@
+{
+    // Type-checks the example files that scripts/generate-component-docs.js
+    // copies into the docs. They are excluded from tsconfig.json so they are
+    // not bundled or published; this keeps the snippets honest.
+    "extends": "./tsconfig.json",
+    "include": ["src/**/*.stories.tsx"],
+    "exclude": ["dist", "node_modules"]
+}

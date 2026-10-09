@@ -23,6 +23,7 @@ For the project-wide conventions (file structure, code style, CSS layering, test
   - [`ComponentName.figma.tsx`](#componentnamefigmatsx)
   - [`ComponentName.test.tsx`](#componentnametesttsx)
   - [`ComponentName.stories.tsx`](#componentnamestoriestsx)
+  - [`ComponentName.docs.md`](#componentnamedocsmd)
   - [Wiring into the package](#wiring-into-the-package)
 - [Real-World References](#real-world-references)
 - [Common Mistakes](#common-mistakes)
@@ -240,6 +241,8 @@ export type ComponentNameProps = {
 
 Use foundation `data-*` values directly (see [the reference table](#foundation-data-attribute-reference)) unless the component has a true variant axis like Button's `primary | secondary | ghost`.
 
+Every prop needs a JSDoc description, and a `@default` tag where it has a default. The docs generator fails on a prop without a description. For a prop with a fixed set of values, give the value type a JSDoc that lists each value as ``- `value`: meaning``.
+
 ### `ComponentName.tsx`
 
 Use the forwardRef pattern with a named function (matches Button, Checkbox, Input). Set foundation `data-*` attributes from the Figma design. **Do not import CSS in the component file** — CSS is imported globally via `next/index.css`.
@@ -392,6 +395,8 @@ describe('ComponentName (next)', () => {
 
 ### `ComponentName.stories.tsx`
 
+The docs page is generated from the types, the stories and `ComponentName.docs.md`, see [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md). Do not write a beta callout, an import snippet or a description in the story file, because the page generates them. The component needs at least one example besides `Introduction`.
+
 ```typescript
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentName, type ComponentNameProps } from '.'
@@ -400,27 +405,35 @@ const meta: Meta<typeof ComponentName> = {
   title: 'EDS 2.0 (beta)/ComponentName',
   component: ComponentName,
   tags: ['beta'],
-  parameters: {
-    docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-\`\`\`tsx
-import { ComponentName } from '@equinor/eds-core-react/next'
-\`\`\`
-        `,
-      },
-    },
-  },
 }
 
 export default meta
 
+// The playground. The docs page shows it with live controls.
 export const Introduction: StoryFn<ComponentNameProps> = (args) => {
   return <ComponentName {...args} />
 }
+
+// Every other export becomes an example on the docs page.
+export const Variants: StoryFn<ComponentNameProps> = () => (
+  <>
+    <ComponentName>Primary</ComponentName>
+    <ComponentName>Secondary</ComponentName>
+  </>
+)
+
+Variants.parameters = {
+  docs: {
+    description: {
+      story: 'One sentence saying what the reader gets from this example.',
+    },
+  },
+}
 ```
+
+### `ComponentName.docs.md`
+
+The hand-written part of the docs page, next to the component. Its format and rules are in [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md#the-hand-written-file). Run `pnpm run generate:component-docs ComponentName` to create `ComponentName.docs.mdx`, and never edit that file.
 
 ### Wiring into the package
 
@@ -586,6 +599,7 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
+- Writing a beta callout, import snippet or description in the story file, or editing the generated `ComponentName.docs.mdx`
 - Changing a published `/next` prop, value, sub-component or markup contract without updating `packages/eds-core-react/stories/docs/BreakingChanges.mdx`
 
 ## Implementation Status Report

@@ -7,6 +7,7 @@
         "**/*.spec.ts",
         "**/*.test.ts",
         "**/*.test.tsx",
+        "**/*.stories.tsx",
         // Unmigrated Slice 2–4 components, excluded from tsc during the migration window.
         // Remove each entry as the component is migrated.
         // Keep in sync with eslint.config.js's files list and the testPathIgnorePatterns list in jest.config.cjs.

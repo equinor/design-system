@@ -33,7 +33,10 @@ This prompt focuses on the per-component scaffolding flow. The patterns and code
      ${input:componentName}.figma.tsx   (only if a Figma URL was provided)
      ${input:componentName}.test.tsx
      ${input:componentName}.stories.tsx
+     ${input:componentName}.docs.md
    ```
+
+   Write `${input:componentName}.docs.md` per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md), then run `pnpm run generate:component-docs ${input:componentName}` to create the docs page. Never write the beta callout or import snippet in the stories file.
 
    Use the lowercase form for the CSS filename and class root (`eds-avatar`, not `eds-Avatar`).
 
