@@ -492,7 +492,7 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 - `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density
 - `0005-use-aschild-slot-for-polymorphism.md` — `asChild` + `Slot` for polymorphic components
 - `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
-- `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
+- `0029-typography-approach-for-eds-2-web.md` — typography roles and weights on the web, `<strong>` and `<b>` resolve to bold, no `text-box` trim
 
 Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 
