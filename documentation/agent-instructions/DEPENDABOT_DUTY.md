@@ -7,7 +7,7 @@ The short human runbook lives in [`documentation/how-to/DEPENDABOT_GUIDE.md`](..
 Dependabot duty has three parts, and all three are part of the job:
 
 1. **Open Dependabot PRs** — review, merge, or close.
-2. **Dependabot alerts** on the repo's Security tab — vulnerabilities that did not get a PR, usually transitive dependencies that need a `pnpm.overrides` entry.
+2. **Dependabot alerts** on the repo's Security tab — vulnerabilities that did not get a PR, usually transitive dependencies that need an `overrides` entry in `pnpm-workspace.yaml`.
 3. **Code scanning alerts** on the same tab — CodeQL findings in our own source, which are either fixed or dismissed with a reason.
 
 Historically only the first part got done. The alerts pages are where the critical and high findings accumulate.
@@ -59,6 +59,7 @@ Dependabot closes its own superseded PRs, so a `--state open` listing will not s
 | CI green, patch or minor, any group           | Recommend approve + squash-merge                                                                                                     |
 | CI green, major                               | Read the release notes for the `.0` release (see below) before recommending anything. Check the coverage gap in the next subsection. |
 | CI red, lockfile out of date on a security PR | Recommend closing as a duplicate of the passing version PR                                                                           |
+| CI red, `ERR_PNPM_IGNORED_BUILDS` in `setup`  | A new dependency has an install script. Propose adding it to `allowBuilds` in `pnpm-workspace.yaml` (see below)                      |
 | CI red, real breakage                         | Follow "When CI fails" in the runbook: flaky → recommend a rerun, easy → propose the fix, complex → recommend closing with a comment |
 | Merge conflict / `BEHIND`                     | Recommend `@dependabot rebase`, or closing and letting Monday's run recreate it                                                      |
 
@@ -67,6 +68,14 @@ Every cell is a recommendation for the report, not an action to take. The user r
 One caveat on the "easy → propose the fix" path: pushing a commit to a Dependabot branch makes Dependabot stop updating that PR, so a later rebase or recreate has to be done by hand. Say so when proposing it, and ask before pushing.
 
 Merge one PR at a time so CI runs on `main` between merges.
+
+### `ERR_PNPM_IGNORED_BUILDS`
+
+pnpm 11 fails `setup` when a newly added package has an install script (`preinstall`, `install` or `postinstall`) that is not listed in `allowBuilds` in `pnpm-workspace.yaml`. The error names the package. Find which dependency pulls it in, then check those scripts (`npm view <pkg>@<ver> scripts`). If the script only builds from source as a fallback, because prebuilt binaries ship as optional per-platform packages, add it as `false`, as with `esbuild`. Use `true` only when the package does not work without its script. Example: jest 30 pulls in `@parcel/watcher` through `jest-haste-map` (#5591).
+
+### Grouped PRs with one bad major
+
+A group PR (`testing`, `storybook`, …) can bundle one major we cannot take yet with several we can. Do not close the whole group for one package. Propose a commit on the Dependabot branch that keeps the incompatible package on its previous range in the affected `package.json`, re-resolves the lockfile, and says why in the commit body. Packages that must move with something else (for example `jest-expo`, which follows the Expo SDK, and the `jest` major it depends on) go to the issue for that upgrade. The caveat above about Dependabot no longer updating the branch applies.
 
 ### Majors: release notes and coverage
 
@@ -78,12 +87,14 @@ gh api repos/<owner>/<repo>/releases/tags/v<major>.0.0 --jq .body
 
 Read it against **our** usage: which packages depend on it (`grep -rn '"<pkg>"' apps/*/package.json packages/*/package.json`), their config files, and whether any `@<pkg>/*` companion packages must move to the same major.
 
-Then verify the tests that would catch a break actually ran. The root `pnpm run test` script does **not** run every package — as of September 2026, `packages/eds-tokens` and `packages/eds-tokens-build` have vitest suites that are not in the root script and therefore never run in the `Test` CI job. Check the job log:
+Then verify the tests that would catch a break actually ran. The root `pnpm run test` script does **not** run every package. As of October 2026, `packages/eds-tokens-build` has a vitest suite that is not in the root script and therefore never runs in the `Test` CI job. (`packages/eds-tokens` was added in #5558.) Check the job log:
 
 ```bash
 gh pr checks <n>                         # find the Test job URL / id
 gh run view --job <job-id> --log | grep -E 'pnpm --filter @equinor/|Test (Files|Suites)'
 ```
+
+If `gh run view --job … --log` prints nothing, fetch the same log through the API: `gh api repos/equinor/design-system/actions/jobs/<job-id>/logs`.
 
 Three things that make the obvious grep miss everything:
 
@@ -91,7 +102,7 @@ Three things that make the obvious grep miss everything:
 - The package headers are `$ pnpm --filter @equinor/<pkg> run test`, not the `> @equinor/<pkg>` you would expect from a local `pnpm run`.
 - The two runners print different summaries: vitest says `Test Files`, jest says `Test Suites`. Matching only one silently drops half the packages.
 
-The result reads as one line per package followed by its summary, which is what makes the gap visible. On a September 2026 run it lists `eds-utils`, `eds-core-react`, `eds-lab-react`, `eds-data-grid-react`, `eds-color-palette-generator` and `eds-mobile-components` — and not `eds-tokens` or `eds-tokens-build`.
+The result reads as one line per package followed by its summary, which is what makes the gap visible. On an October 2026 run it lists `eds-utils`, `eds-core-react`, `eds-lab-react`, `eds-data-grid-react`, `eds-color-palette-generator`, `eds-mobile-components` and `eds-tokens`, and not `eds-tokens-build`.
 
 If an affected package is missing from the log, run its tests locally against the PR's version before recommending a merge. Say in the report which suites CI covered and which you ran yourself.
 
@@ -163,9 +174,9 @@ Read the two reasons differently, because they were parked for different causes:
 
 A pile that keeps growing, or an entry whose comment no longer matches reality, is worth raising with the team rather than re-dismissing.
 
-## Step 3 — Fix transitive alerts with `pnpm.overrides`
+## Step 3 — Fix transitive alerts with pnpm overrides
 
-The repo already uses `pnpm.overrides` in the root `package.json` for this (see PRs #5177, #5368, #5472). Follow the same shape.
+The repo already uses `overrides` in `pnpm-workspace.yaml` for this. PRs #5177, #5368 and #5472 show the keys and ranges to use, but they predate pnpm 11 and edit `pnpm.overrides` in the root `package.json`. pnpm 11 no longer reads that field, so the overrides moved to `pnpm-workspace.yaml` in #5485, and new entries go there.
 
 ### 3a. Establish what is actually installed
 
@@ -203,11 +214,11 @@ Do **not** override when:
 
 ### 3c. Write the override
 
-Edit `pnpm.overrides` in the root `package.json`:
+Edit `overrides` in `pnpm-workspace.yaml`:
 
 - Raise an existing key in place rather than adding a second key for the same package.
-- When several majors of a package coexist, key per major (`"js-yaml@^3"`, `"js-yaml@^4"`) so one override cannot pull a parent onto the wrong major.
-- Use `>=<fix>` for a floor, or `>=<fix> <next-major` when the next major is known to break parents (`"undici": ">=8.9.0 <9"`).
+- When several majors of a package coexist, key per major (`'js-yaml@^3'`, `'js-yaml@^4'`) so one override cannot pull a parent onto the wrong major.
+- Use `>=<fix>` for a floor, or `>=<fix> <next-major` when the next major is known to break parents (`undici: '>=8.9.0 <9'`).
 
 ### 3d. Re-resolve and verify
 
@@ -355,5 +366,6 @@ If you find yourself wanting to write the reasoning down somewhere else, the dis
 
 ## Follow-ups this playbook knows about
 
-- `packages/eds-tokens` and `packages/eds-tokens-build` tests are not in the root `test` script (September 2026). Until that is fixed, run them locally for any vitest or vite major.
-- `image-size` (high, via `metro` and `@docusaurus/mdx-loader`) has no patched version. Dismiss as `tolerable_risk`; the § Step 2 re-check picks it up if upstream ever patches.
+- `packages/eds-tokens-build` tests are not in the root `test` script (October 2026). Until that is fixed, run them locally for any vitest or vite major.
+- `image-size` 1.x (high, via `metro`) has no patched release on its major line. Alerts #602 and #603 are dismissed as `tolerable_risk`, and the Expo and React Native upgrade in #5580 removes it.
+- `eds-mobile-components` stays on `jest` 29, `jest-expo` 55 and `@testing-library/react-native` 13 until the Expo upgrade in #5580. Dependabot will keep proposing these majors in the `testing` group. Hold them back as in #5591.
