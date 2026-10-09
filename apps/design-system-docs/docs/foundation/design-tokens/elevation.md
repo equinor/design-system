@@ -1,7 +1,7 @@
 ---
 title: Elevation
 hide_title: true
-description: 'Elevation is a visual effect using shadows to make an element appear to float above the surface. It is reserved for UI that is truly floating — elements that appear temporarily above the main content.'
+description: 'Elevation is a visual effect using shadows to make an element appear to float above the surface. It is reserved for UI that floats: elements that appear temporarily above the main content.'
 ---
 
 ## Levels
@@ -13,17 +13,17 @@ There are two elevation levels:
 | **Low**  | `--eds-elevation-low`  | Tooltips, menus, popovers, autocomplete lists, snackbars |
 | **High** | `--eds-elevation-high` | Dialogs, modals, drawers                                 |
 
-Each level is composed of two shadow layers — a **key shadow** (directional, sharper) and an **ambient shadow** (diffuse, softer) — for a natural, grounded appearance.
+Each level combines two shadow layers: a **key shadow**, which is directional and sharper, and an **ambient shadow**, which is diffuse and softer. Together they give a natural, grounded appearance.
 
 <div style={{display: 'flex', gap: '2rem', padding: '2rem 0'}}>
   <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 4, background: 'var(--eds-color-bg-neutral-surface, white)', boxShadow: 'var(--eds-elevation-low, 0px 1px 8px 0px rgba(0,0,0,0.2), 0px 4px 8px 3px rgba(0,0,0,0.12))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: 'var(--eds-color-text-neutral-subtle, #585858)'}}>
+    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 'var(--eds-corner-radius-rounded)', background: 'var(--eds-background-surface)', boxShadow: 'var(--eds-elevation-low)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--eds-typography-ui-md-font-size)', color: 'var(--eds-text-secondary)'}}>
       Low elevation
     </div>
     <code>--eds-elevation-low</code>
   </div>
   <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 4, background: 'var(--eds-color-bg-neutral-surface, white)', boxShadow: 'var(--eds-elevation-high, 0px 4px 12px 0px rgba(0,0,0,0.2), 0px 12px 16px 6px rgba(0,0,0,0.12))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: 'var(--eds-color-text-neutral-subtle, #585858)'}}>
+    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 'var(--eds-corner-radius-rounded)', background: 'var(--eds-background-surface)', boxShadow: 'var(--eds-elevation-high)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--eds-typography-ui-md-font-size)', color: 'var(--eds-text-secondary)'}}>
       High elevation
     </div>
     <code>--eds-elevation-high</code>
@@ -46,7 +46,7 @@ box-shadow: var(--eds-elevation-high);
 
 ## Implementation in Figma
 
-Elevation effect styles are available in both the **Semantic** and **Dynamic** libraries.
+Elevation effect styles are in the **EDS Foundation** library, together with the other EDS foundations.
 
 ### How to add
 
@@ -67,8 +67,8 @@ Elevation effect styles are available in both the **Semantic** and **Dynamic** l
 
 :::danger **Don't**
 
-- Add shadows to cards, banners, or navigation bars — use borders instead
+- Add shadows to cards, banners, or navigation bars. Use borders instead
 - Use elevation on elements that are part of the normal document flow
 - Mix elevation levels within the same layer of UI
-- Use custom shadow values — always use the elevation tokens
+- Use custom shadow values. Always use the elevation tokens
   :::

@@ -4,27 +4,27 @@ hide_title: true
 description: 'The Equinor logo represents our brand identity and should be used thoughtfully across all interfaces to maintain visual consistency and brand recognition.'
 ---
 
-## When to Use Logos
+## When to use logos
 
 For internal interfaces, use the Equinor logo sparingly since users have already logged into the Equinor network. The logo works best on splash screens and key branding moments where brand reinforcement adds value to the user experience.
 
-## Available Variations
+## Available variations
 
-You can use the logo, star symbol, and favicon in **Energy Red** or **White** depending on your interface needs. Always maintain the built-in spacing that comes with each component—this preserves the logo's visual integrity and ensures consistent application.
+You can use the logo, star symbol, and favicon in **Energy Red** or **White** depending on your interface needs. Always keep the built-in spacing that comes with each logo component. It preserves the logo's visual integrity and keeps it consistent. You can download the logo files from the [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) (internal Equinor site).
 
-### Main Logo
+### Main logo
 
 Use the horizontal logo for interface branding, particularly on splash screens. The logo must maintain a minimum height of 48px to ensure legibility and proper brand representation across different screen sizes.
 
-### Star Symbol
+### Star symbol
 
-The Equinor star works well on splash screens and in animations where you need a simplified brand element. However, avoid using the star as an app icon since it's reserved for the main Equinor app—each application should have its own unique icon for clear identification.
+The Equinor star works well on splash screens and in animations where you need a simplified brand element. However, avoid using the star as an app icon since it's reserved for the main Equinor app. Each application should have its own icon, so users can tell the applications apart.
 
 ### Favicon
 
 Use the favicon at 16px or 32px sizes specifically for browser tabs and bookmarks. This variation is designed exclusively for favicon purposes and shouldn't be used in other contexts.
 
-## Usage Guidelines
+## Usage guidelines
 
 :::info **Do**
 
@@ -44,6 +44,6 @@ Use the favicon at 16px or 32px sizes specifically for browser tabs and bookmark
 - Use the star symbol as an app icon (reserved for the main Equinor app)
   :::
 
-## External Usage
+## External usage
 
-For comprehensive guidelines about using the Equinor logo in external contexts, please refer to the official Equinor brand guidelines. These provide detailed specifications for marketing materials, partnerships, and public-facing applications.
+For comprehensive guidelines about using the Equinor logo in external contexts, please refer to the official Equinor brand guidelines in the [Equinor Brand Center](https://communicationtoolbox.equinor.com/point/en/equinor/) (internal Equinor site) and on the public [Our brand](https://www.equinor.com/about-us/our-brand) page. These provide detailed specifications for marketing materials, partnerships, and public-facing applications.
