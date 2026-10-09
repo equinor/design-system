@@ -77,7 +77,7 @@ Keep `header`, rename `ui` to `label`, and add `body` as tokenised sizes with ex
 **Cons:**
 
 - Breaking rename for every `ui` token.
-- Twelve more semantic tokens and 36 more density tokens.
+- Twelve more semantic tokens, and twelve more density tokens in each of the three density sets.
 
 ### Option 4: Weight as `bold` (700) replacing `bolder` (500)
 
@@ -145,17 +145,17 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 3. **Semantic is the only published, consumable layer,** together with the text styles. Primitives, density and font collections are hidden from publishing. Code consumes every token from this one layer: `--eds-typography-label-md-font-size` and `--eds-font-weight-medium` sit next to `--eds-spacing-md`. In Figma, designers use typography through text styles.
 
 4. **Mapping collections (mode-bearing, hidden):**
-   - **Density** [`Compact` · `Comfortable` · `Relaxed`]: `density/spacing/*`, `density/corner-radius/*`, `density/typography/{header,label,body}/{size}/{font-size,line-height}`. Density is set once per surface. Each mode shifts which primitive a token references: `Compact` uses the font-size/line-height pair of the next smaller size on the comfortable scale, `Relaxed` the pair of the next larger size. As a result one px font size has the same line-height in every mode for `header` and `body` (21px is 21/28 wherever it appears). `label` keeps the former `ui` ramp unchanged, which has one exception: compact `label/sm` is 10/12, while comfortable `label/xs` is 10/16. Spacing and corner-radius shift one step on the spacing primitives. The three domain groups never reference each other, and each aliases only primitives, with two exceptions in corner-radius: `rounded-outer` is `density/corner-radius/rounded` plus `primitives/spacing/6`, and `pill` is a raw 9999px.
+   - **Density** [`Compact` · `Comfortable` · `Relaxed`]: `density/spacing/*`, `density/corner-radius/*`, `density/typography/{header,label,body}/{size}/{font-size,line-height}`. Density is set once per surface. Each mode shifts which primitive a token references: `Compact` uses the font-size/line-height pair of the next smaller size on the comfortable scale, `Relaxed` the pair of the next larger size. At the ends of a role's range the pair comes from the primitive steps just beyond it: compact `header/xs` is 10/12. The line-height is clamped only at the top, where relaxed `header/4xl` stays at 44px (36/44), the largest `lineheight-scale` step. As a result one px font size has the same line-height in every mode for `header` and `body` (in `header`, 16px is 16/24 in every mode; in `body`, 16/28). `label` keeps the former `ui` ramp unchanged, which has one exception: compact `label/sm` is 10/12, while comfortable `label/xs` is 10/16. Spacing and corner-radius shift one step on the spacing primitives. The three domain groups never reference each other, and each aliases only primitives, with two exceptions in corner-radius: `rounded-outer` references `density/corner-radius/rounded` plus `primitives/spacing/6`, the one reference exception in point 1, and `pill` is a raw 9999px instead of an alias.
    - **Font** [single mode]: `family/header` → Equinor, `family/ui` → Inter, `weight/{normal,medium,bold}`.
 
-5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest relaxed sizes), the weight scale (`weight-scale`: normal 400, medium 500, bold 700) and the font families. No modes.
+5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest sizes), the weight scale (`weight-scale`: normal 400, medium 500, bold 700) and the font families. No modes.
 
 6. **Three typography roles.** Comfortable values below; compact and relaxed follow the step-shift in point 4. Tokens Studio has the values for all three modes.
    - **`header`**, Equinor, `xs`–`4xl`, for titles. Line-heights are looser than the shared ladder's Inter pairing, so Equinor does not clip:
 
      | size             | xs    | sm    | md    | lg    | xl    | 2xl   | 3xl   | 4xl   |
      | ---------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-     | font / line (px) | 12/16 | 14/20 | 16/20 | 18/24 | 21/28 | 24/32 | 28/36 | 32/40 |
+     | font / line (px) | 12/16 | 14/20 | 16/24 | 18/28 | 21/32 | 24/36 | 28/40 | 32/44 |
 
    - **`label`**, Inter, `xs`–`5xl`, for single-line functional text: buttons, navigation, table cells, form labels, captions. Sizes and line-heights are the former `ui` ramp, unchanged.
    - **`body`**, Inter, `sm`–`3xl`, for running text that wraps. Line-heights are explicit tokens of at least 1.5 × the font size, on the 4px grid:
@@ -181,7 +181,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - **Primitives:** `primitives/<domain>/<step|key>`. Spacing uses the rem-relative hundredths convention, `name = round(px / 16 × 100)` with ties resolving down (spacing `100` = 16px, `25` = 4px). The type scale uses a separate 100-step index, `type-scale/{inter,equinor}/{100…1100}`, rounded to whole px (`type-scale/inter/500` = 16px).
 - **Mapping layers are namespaced by where they live** (`density/…`, `font/…`), so a reference shows whether it is density-dependent.
 - **Semantic:** `<domain>/<tier>`, lowercase and hyphenated (`4xs … 9xl`, `rounded-outer`).
-- `lineheight-scale` has one `default` value per step. Header line-heights deliberately use a higher step than their font-size step in five of eight sizes (comfortable `header/xl` = `type-scale/equinor/600` with `lineheight-scale/700`). Do not "restore" matching step numbers: that brings back the tight ratios from #5373.
+- `lineheight-scale` has one `default` value per step. Header line-heights deliberately use a higher step than their font-size step in seven of eight sizes (comfortable `header/xl` = `type-scale/equinor/600` with `lineheight-scale/800`). Do not "restore" matching step numbers: that brings back the tight ratios from #5373.
 - `corner-radius/*` aliases spacing primitives, except `rounded-outer` and `pill` (point 4).
 - **Full reference chains for the font axis:**
   - **Weight:** `primitives/weight-scale/medium` (500) → `font/weight/medium` → `font-weight/medium`. Likewise `normal` (400) and `bold` (700). Only the semantic token carries the `font-weight/*` spelling.
@@ -193,7 +193,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 
 - Good, because the role names follow how designers choose text, which is what #5360 found missing.
 - Good, because body leading is a token on the 4px grid that Figma and code bind identically, and there is no ratio for code to re-derive.
-- Good, because Equinor headers get room for descenders at every size and density, and the header ratio no longer dips at `sm` and `xl`.
+- Good, because Equinor headers get room for descenders at every size and density, and the header ratio rises from `xs` to `lg` and then falls steadily, with no dips.
 - Good, because in `header` and `body` one font size keeps one line-height across all density modes.
 - Bad, because the renames break code: `--eds-typography-ui-*` becomes `--eds-typography-label-*` and `--eds-font-weight-bolder` becomes `--eds-font-weight-medium`. Known consumers on `main`: `apps/design-system-docs`, with 27 references in 4 files (`docs-components.css`, `colour/usage.mdx`, `site-chrome.css` and `docs-search-bar.css`). The `next` components and the mobile packages read the 2.x token namespace and are not affected.
 - Bad, because header line-heights no longer follow matching step numbers, so the scale is correct by choice rather than by construction, and only the note in Naming guards it.
