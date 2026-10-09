@@ -12,7 +12,8 @@ export const getElementRef = <T = unknown>(
   const elementWithRef = element as unknown as { ref?: Ref<T> }
 
   const propsDescriptor = props
-    ? (Object.getOwnPropertyDescriptor(props, 'ref') as RefDescriptor | undefined)
+    ? (Object.getOwnPropertyDescriptor(props, 'ref') as
+        RefDescriptor | undefined)
     : undefined
   if (propsDescriptor?.get?.isReactWarning) return elementWithRef.ref ?? null
 
