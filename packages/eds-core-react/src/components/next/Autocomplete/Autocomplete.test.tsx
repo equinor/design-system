@@ -424,6 +424,49 @@ describe('Autocomplete (next)', () => {
       ).toHaveAttribute('aria-disabled', 'true')
     })
 
+    it('treats an exact match the filter drops as an existing option', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      // The trailing space makes the default filter drop 'Apple'
+      await user.type(screen.getByRole('combobox'), 'Apple ')
+      expect(
+        screen.getByRole('option', { name: 'Type to add new option' }),
+      ).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('confirms a custom value on Enter without navigation when no options match', async () => {
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          allowCustomValue
+          onCustomValueConfirm={onCustomValueConfirm}
+        />,
+      )
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      await user.keyboard('{Enter}')
+      expect(onCustomValueConfirm).toHaveBeenCalledWith('Mango')
+    })
+
+    it('does not add a custom value on Enter when matching options arrive after typing', async () => {
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      const props = {
+        label: 'Fruit',
+        allowCustomValue: true,
+        optionsFilter: () => true,
+        onCustomValueConfirm,
+      }
+      const { rerender } = render(<Autocomplete {...props} options={[]} />)
+      await user.type(screen.getByRole('combobox'), 'App')
+      // Simulates async search results landing after the keystroke
+      rerender(<Autocomplete {...props} options={['Apple']} />)
+      await user.keyboard('{Enter}')
+      expect(onCustomValueConfirm).not.toHaveBeenCalled()
+    })
+
     it('confirms a partially matching custom value via the Add option', async () => {
       const onCustomValueConfirm = jest.fn()
       const user = userEvent.setup()

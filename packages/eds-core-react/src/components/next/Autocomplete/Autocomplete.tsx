@@ -34,6 +34,20 @@ import { Menu, MenuItem } from '../Menu'
 type OptionItem<T> =
   { type: 'list'; value: T } | { type: 'custom'; value: string }
 
+// Case-insensitive, matching how customOptions are deduplicated
+function hasExactMatch<T>(
+  items: OptionItem<T>[],
+  text: string,
+  getOptionLabel?: (option: T) => string,
+) {
+  const normalized = text.trim().toLowerCase()
+  return items.some(
+    (item) =>
+      resolveOptionLabel(item.value, getOptionLabel).toLowerCase() ===
+      normalized,
+  )
+}
+
 function AutocompleteInner<T = string>(
   {
     label,
@@ -174,18 +188,13 @@ function AutocompleteInner<T = string>(
     [allItems, isFiltering, inputValue, matchesFilter],
   )
 
-  // Case-insensitive, matching how customOptions are deduplicated above
-  const hasExactMatch = (items: OptionItem<T>[], text: string) =>
-    items.some(
-      (item) =>
-        getLabelFn(item.value).toLowerCase() === text.trim().toLowerCase(),
-    )
-
+  // Checks allItems, not filteredItems: a filter can drop an exact match
+  // (e.g. a trailing space, or a custom optionsFilter)
   const customValueTyped =
     allowCustomValue &&
     isFiltering &&
     inputValue.trim() !== '' &&
-    !hasExactMatch(filteredItems, inputValue)
+    !hasExactMatch(allItems, inputValue, getOptionLabel)
 
   const totalOptions = filteredItems.length + (allowCustomValue ? 1 : 0)
 
@@ -215,12 +224,12 @@ function AutocompleteInner<T = string>(
 
     // Can't use filteredItems here — inputValue state hasn't updated yet
     const newFiltered = allItems.filter((item) => matchesFilter(item, newValue))
-    const willHaveCustomValue =
+    const customValueIsOnlyOption =
       allowCustomValue && newValue.trim() !== '' && newFiltered.length === 0
 
     if (newFiltered.length === 1) {
       setActiveIndex(allowCustomValue ? 1 : 0)
-    } else if (willHaveCustomValue) {
+    } else if (customValueIsOnlyOption) {
       setActiveIndex(0)
     } else {
       setActiveIndex(-1)
@@ -408,8 +417,13 @@ function AutocompleteInner<T = string>(
 
   // Clamp activeIndex when options shrink (e.g. async search returning fewer results)
   useEffect(() => {
-    setActiveIndex((prev) => (prev >= totalOptions ? -1 : prev))
-  }, [totalOptions])
+    setActiveIndex((prev) => {
+      if (prev >= totalOptions) return -1
+      // Add was auto-highlighted while it was the only option; results have arrived since
+      if (prev === 0 && allowCustomValue && totalOptions > 1) return -1
+      return prev
+    })
+  }, [totalOptions, allowCustomValue])
 
   // Sync isOpen from popover toggle event (covers light-dismiss too)
   const handleToggle = (e: React.SyntheticEvent<HTMLUListElement>) => {
