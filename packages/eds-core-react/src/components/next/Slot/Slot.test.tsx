@@ -14,18 +14,54 @@ describe('Slot (next)', () => {
       expect(screen.getByRole('button')).toBeInTheDocument()
     })
 
-    it('returns null for invalid children', () => {
-      const { container } = render(<Slot>plain text</Slot>)
+    it.each([
+      ['null', null],
+      ['undefined', undefined],
+      ['false', false],
+    ])('renders nothing without an error when children is %s', (_, value) => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      const { container } = render(<Slot>{value}</Slot>)
       expect(container.innerHTML).toBe('')
+      expect(consoleError).not.toHaveBeenCalled()
+      consoleError.mockRestore()
     })
 
-    it('returns null when children is null', () => {
-      const { container } = render(<Slot>{null}</Slot>)
+    it('logs an error naming Slot for a text child', () => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      const { container } = render(<Slot>plain text</Slot>)
       expect(container.innerHTML).toBe('')
+      expect(consoleError).toHaveBeenCalledWith(
+        expect.stringMatching(/^Slot: .*got text/),
+      )
+      consoleError.mockRestore()
+    })
+
+    it('logs an error for multiple children', () => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      render(
+        <Slot>
+          <span>One</span>
+          <span>Two</span>
+        </Slot>,
+      )
+      expect(consoleError).toHaveBeenCalledWith(
+        expect.stringMatching(/^Slot: .*got multiple children/),
+      )
+      consoleError.mockRestore()
     })
 
     it('does not throw for invalid children', () => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
       expect(() => render(<Slot>plain text</Slot>)).not.toThrow()
+      consoleError.mockRestore()
     })
   })
 
@@ -78,6 +114,22 @@ describe('Slot (next)', () => {
       expect(callOrder).toEqual(['child', 'slot'])
     })
 
+    it('skips the slot handler when the child handler calls preventDefault', async () => {
+      const user = userEvent.setup()
+      const slotClick = jest.fn()
+
+      render(
+        <Slot onClick={slotClick}>
+          <button type="button" onClick={(event) => event.preventDefault()}>
+            Click
+          </button>
+        </Slot>,
+      )
+
+      await user.click(screen.getByRole('button'))
+      expect(slotClick).not.toHaveBeenCalled()
+    })
+
     it('slot prop wins for non-special props', () => {
       render(
         <Slot data-variant="from-slot">
@@ -127,6 +179,32 @@ describe('Slot (next)', () => {
         </Slot>,
       )
       expect(ref.current).toBeInstanceOf(HTMLButtonElement)
+    })
+
+    it('keeps the child ref when the slot also has one', () => {
+      const slotRef = { current: null as HTMLElement | null }
+      const childRef = { current: null as HTMLButtonElement | null }
+      render(
+        <Slot ref={slotRef}>
+          <button type="button" ref={childRef}>
+            Click
+          </button>
+        </Slot>,
+      )
+      expect(slotRef.current).toBeInstanceOf(HTMLButtonElement)
+      expect(childRef.current).toBe(slotRef.current)
+    })
+
+    it('calls a callback ref on the child', () => {
+      const childRef = jest.fn()
+      render(
+        <Slot>
+          <button type="button" ref={childRef}>
+            Click
+          </button>
+        </Slot>,
+      )
+      expect(childRef).toHaveBeenCalledWith(expect.any(HTMLButtonElement))
     })
   })
 
