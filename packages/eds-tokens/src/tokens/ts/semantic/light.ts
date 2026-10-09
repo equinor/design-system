@@ -404,8 +404,8 @@ export const semantic = {
     ui: 'Inter',
   },
   fontWeight: {
-    bolder: 500,
-    lighter: 300,
+    bold: 700,
+    medium: 500,
     normal: 400,
   },
   icon: {
@@ -479,7 +479,13 @@ export const semantic = {
     twoXs: 6,
     threeXl: 32,
     threeXs: 4,
+    fourXl: 40,
     fourXs: 2,
+    fiveXl: 48,
+    sixXl: 64,
+    sevenXl: 80,
+    eightXl: 96,
+    nineXl: 128,
     lg: 20,
     md: 16,
     none: 0,
@@ -526,18 +532,44 @@ export const semantic = {
     tertiary: '#a4a4a4',
   },
   typography: {
+    body: {
+      twoXl: {
+        fontSize: 21,
+        lineHeight: 32,
+      },
+      threeXl: {
+        fontSize: 24,
+        lineHeight: 36,
+      },
+      lg: {
+        fontSize: 16,
+        lineHeight: 28,
+      },
+      md: {
+        fontSize: 14,
+        lineHeight: 24,
+      },
+      sm: {
+        fontSize: 12,
+        lineHeight: 20,
+      },
+      xl: {
+        fontSize: 18,
+        lineHeight: 28,
+      },
+    },
     header: {
       twoXl: {
         fontSize: 24,
-        lineHeight: 28,
+        lineHeight: 32,
       },
       threeXl: {
         fontSize: 28,
-        lineHeight: 32,
+        lineHeight: 36,
       },
       fourXl: {
         fontSize: 32,
-        lineHeight: 36,
+        lineHeight: 40,
       },
       lg: {
         fontSize: 18,
@@ -549,18 +581,18 @@ export const semantic = {
       },
       sm: {
         fontSize: 14,
-        lineHeight: 16,
+        lineHeight: 20,
       },
       xl: {
         fontSize: 21,
-        lineHeight: 24,
+        lineHeight: 28,
       },
       xs: {
         fontSize: 12,
         lineHeight: 16,
       },
     },
-    ui: {
+    label: {
       twoXl: {
         fontSize: 21,
         lineHeight: 28,

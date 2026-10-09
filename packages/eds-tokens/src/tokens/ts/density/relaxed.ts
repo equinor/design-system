@@ -15,7 +15,13 @@ export const density = {
     twoXs: 8,
     threeXl: 36,
     threeXs: 6,
+    fourXl: 44,
     fourXs: 4,
+    fiveXl: 52,
+    sixXl: 72,
+    sevenXl: 88,
+    eightXl: 112,
+    nineXl: 144,
     lg: 24,
     md: 20,
     none: 0,
@@ -24,22 +30,48 @@ export const density = {
     xs: 10,
   },
   typography: {
+    body: {
+      twoXl: {
+        fontSize: 24,
+        lineHeight: 36,
+      },
+      threeXl: {
+        fontSize: 28,
+        lineHeight: 44,
+      },
+      lg: {
+        fontSize: 18,
+        lineHeight: 28,
+      },
+      md: {
+        fontSize: 16,
+        lineHeight: 28,
+      },
+      sm: {
+        fontSize: 14,
+        lineHeight: 24,
+      },
+      xl: {
+        fontSize: 21,
+        lineHeight: 32,
+      },
+    },
     header: {
       twoXl: {
         fontSize: 28,
-        lineHeight: 32,
+        lineHeight: 36,
       },
       threeXl: {
         fontSize: 32,
-        lineHeight: 36,
+        lineHeight: 40,
       },
       fourXl: {
         fontSize: 36,
-        lineHeight: 40,
+        lineHeight: 44,
       },
       lg: {
         fontSize: 21,
-        lineHeight: 24,
+        lineHeight: 28,
       },
       md: {
         fontSize: 18,
@@ -51,14 +83,14 @@ export const density = {
       },
       xl: {
         fontSize: 24,
-        lineHeight: 28,
+        lineHeight: 32,
       },
       xs: {
         fontSize: 14,
-        lineHeight: 16,
+        lineHeight: 20,
       },
     },
-    ui: {
+    label: {
       twoXl: {
         fontSize: 24,
         lineHeight: 32,

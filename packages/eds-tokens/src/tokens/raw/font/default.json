@@ -32,8 +32,8 @@
     }
   },
   "weight": {
-    "bolder": {
-      "$value": "{primitives.weight-scale.bolder}",
+    "bold": {
+      "$value": "{primitives.weight-scale.bold}",
       "$type": "fontWeight",
       "$extensions": {
         "com.figma": {
@@ -41,14 +41,14 @@
             "FONT_WEIGHT"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-weight-bolder)"
+            "WEB": "var(--eds-weight-bold)"
           },
           "hiddenFromPublishing": true
         }
       }
     },
-    "lighter": {
-      "$value": "{primitives.weight-scale.lighter}",
+    "medium": {
+      "$value": "{primitives.weight-scale.medium}",
       "$type": "fontWeight",
       "$extensions": {
         "com.figma": {
@@ -56,7 +56,7 @@
             "FONT_WEIGHT"
           ],
           "codeSyntax": {
-            "WEB": "var(--eds-weight-lighter)"
+            "WEB": "var(--eds-weight-medium)"
           },
           "hiddenFromPublishing": true
         }

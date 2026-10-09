@@ -2959,58 +2959,18 @@
       "$type": "shadow",
       "$value": [
         {
-          "blur": {
-            "unit": "px",
-            "value": 12
-          },
-          "color": {
-            "alpha": 0.2,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 0
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 4
-          }
+          "blur": "{shadow.high.key.blur}",
+          "color": "{shadow.high.key.color}",
+          "offsetX": "{shadow.high.key.x}",
+          "offsetY": "{shadow.high.key.y}",
+          "spread": "{shadow.high.key.spread}"
         },
         {
-          "blur": {
-            "unit": "px",
-            "value": 16
-          },
-          "color": {
-            "alpha": 0.12,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 6
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 12
-          }
+          "blur": "{shadow.high.ambient.blur}",
+          "color": "{shadow.high.ambient.color}",
+          "offsetX": "{shadow.high.ambient.x}",
+          "offsetY": "{shadow.high.ambient.y}",
+          "spread": "{shadow.high.ambient.spread}"
         }
       ]
     },
@@ -3019,58 +2979,18 @@
       "$type": "shadow",
       "$value": [
         {
-          "blur": {
-            "unit": "px",
-            "value": 8
-          },
-          "color": {
-            "alpha": 0.2,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 0
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 1
-          }
+          "blur": "{shadow.low.key.blur}",
+          "color": "{shadow.low.key.color}",
+          "offsetX": "{shadow.low.key.x}",
+          "offsetY": "{shadow.low.key.y}",
+          "spread": "{shadow.low.key.spread}"
         },
         {
-          "blur": {
-            "unit": "px",
-            "value": 8
-          },
-          "color": {
-            "alpha": 0.12,
-            "colorSpace": "rgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
-          },
-          "spread": {
-            "unit": "px",
-            "value": 3
-          },
-          "x": {
-            "unit": "px",
-            "value": 0
-          },
-          "y": {
-            "unit": "px",
-            "value": 4
-          }
+          "blur": "{shadow.low.ambient.blur}",
+          "color": "{shadow.low.ambient.color}",
+          "offsetX": "{shadow.low.ambient.x}",
+          "offsetY": "{shadow.low.ambient.y}",
+          "spread": "{shadow.low.ambient.spread}"
         }
       ]
     }
@@ -3108,11 +3028,11 @@
     }
   },
   "font-weight": {
-    "bolder": {
+    "bold": {
       "$extensions": {
         "com.figma": {
           "codeSyntax": {
-            "WEB": "var(--eds-font-weight-bolder)"
+            "WEB": "var(--eds-font-weight-bold)"
           },
           "hiddenFromPublishing": false,
           "scopes": [
@@ -3121,13 +3041,13 @@
         }
       },
       "$type": "number",
-      "$value": "{weight.bolder}"
+      "$value": "{weight.bold}"
     },
-    "lighter": {
+    "medium": {
       "$extensions": {
         "com.figma": {
           "codeSyntax": {
-            "WEB": "var(--eds-font-weight-lighter)"
+            "WEB": "var(--eds-font-weight-medium)"
           },
           "hiddenFromPublishing": false,
           "scopes": [
@@ -3136,7 +3056,7 @@
         }
       },
       "$type": "number",
-      "$value": "{weight.lighter}"
+      "$value": "{weight.medium}"
     },
     "normal": {
       "$extensions": {
@@ -3808,6 +3728,22 @@
       "$type": "dimension",
       "$value": "{density.spacing.3xs}"
     },
+    "4xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-4xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.4xl}"
+    },
     "4xs": {
       "$extensions": {
         "com.figma": {
@@ -3823,6 +3759,86 @@
       },
       "$type": "dimension",
       "$value": "{density.spacing.4xs}"
+    },
+    "5xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-5xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.5xl}"
+    },
+    "6xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-6xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.6xl}"
+    },
+    "7xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-7xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.7xl}"
+    },
+    "8xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-8xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.8xl}"
+    },
+    "9xl": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-spacing-9xl)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ]
+        }
+      },
+      "$type": "dimension",
+      "$value": "{density.spacing.9xl}"
     },
     "lg": {
       "$extensions": {
@@ -4256,6 +4272,200 @@
     }
   },
   "typography": {
+    "body": {
+      "2xl": {
+        "font-size": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-2xl-font-size)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "FONT_SIZE"
+              ]
+            }
+          },
+          "$type": "fontSize",
+          "$value": "{density.typography.body.2xl.font-size}"
+        },
+        "line-height": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-2xl-line-height)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "LINE_HEIGHT"
+              ]
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{density.typography.body.2xl.line-height}"
+        }
+      },
+      "3xl": {
+        "font-size": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-3xl-font-size)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "FONT_SIZE"
+              ]
+            }
+          },
+          "$type": "fontSize",
+          "$value": "{density.typography.body.3xl.font-size}"
+        },
+        "line-height": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-3xl-line-height)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "LINE_HEIGHT"
+              ]
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{density.typography.body.3xl.line-height}"
+        }
+      },
+      "lg": {
+        "font-size": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-lg-font-size)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "FONT_SIZE"
+              ]
+            }
+          },
+          "$type": "fontSize",
+          "$value": "{density.typography.body.lg.font-size}"
+        },
+        "line-height": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-lg-line-height)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "LINE_HEIGHT"
+              ]
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{density.typography.body.lg.line-height}"
+        }
+      },
+      "md": {
+        "font-size": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-md-font-size)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "FONT_SIZE"
+              ]
+            }
+          },
+          "$type": "fontSize",
+          "$value": "{density.typography.body.md.font-size}"
+        },
+        "line-height": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-md-line-height)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "LINE_HEIGHT"
+              ]
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{density.typography.body.md.line-height}"
+        }
+      },
+      "sm": {
+        "font-size": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-sm-font-size)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "FONT_SIZE"
+              ]
+            }
+          },
+          "$type": "fontSize",
+          "$value": "{density.typography.body.sm.font-size}"
+        },
+        "line-height": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-sm-line-height)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "LINE_HEIGHT"
+              ]
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{density.typography.body.sm.line-height}"
+        }
+      },
+      "xl": {
+        "font-size": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-xl-font-size)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "FONT_SIZE"
+              ]
+            }
+          },
+          "$type": "fontSize",
+          "$value": "{density.typography.body.xl.font-size}"
+        },
+        "line-height": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-typography-body-xl-line-height)"
+              },
+              "hiddenFromPublishing": false,
+              "scopes": [
+                "LINE_HEIGHT"
+              ]
+            }
+          },
+          "$type": "lineHeight",
+          "$value": "{density.typography.body.xl.line-height}"
+        }
+      }
+    },
     "header": {
       "2xl": {
         "font-size": {
@@ -4514,13 +4724,13 @@
         }
       }
     },
-    "ui": {
+    "label": {
       "2xl": {
         "font-size": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-2xl-font-size)"
+                "WEB": "var(--eds-typography-label-2xl-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4529,13 +4739,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.2xl.font-size}"
+          "$value": "{density.typography.label.2xl.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-2xl-line-height)"
+                "WEB": "var(--eds-typography-label-2xl-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4544,7 +4754,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.2xl.line-height}"
+          "$value": "{density.typography.label.2xl.line-height}"
         }
       },
       "3xl": {
@@ -4552,7 +4762,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-3xl-font-size)"
+                "WEB": "var(--eds-typography-label-3xl-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4561,13 +4771,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.3xl.font-size}"
+          "$value": "{density.typography.label.3xl.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-3xl-line-height)"
+                "WEB": "var(--eds-typography-label-3xl-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4576,7 +4786,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.3xl.line-height}"
+          "$value": "{density.typography.label.3xl.line-height}"
         }
       },
       "4xl": {
@@ -4584,7 +4794,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-4xl-font-size)"
+                "WEB": "var(--eds-typography-label-4xl-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4593,13 +4803,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.4xl.font-size}"
+          "$value": "{density.typography.label.4xl.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-4xl-line-height)"
+                "WEB": "var(--eds-typography-label-4xl-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4608,7 +4818,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.4xl.line-height}"
+          "$value": "{density.typography.label.4xl.line-height}"
         }
       },
       "5xl": {
@@ -4616,7 +4826,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-5xl-font-size)"
+                "WEB": "var(--eds-typography-label-5xl-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4625,13 +4835,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.5xl.font-size}"
+          "$value": "{density.typography.label.5xl.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-5xl-line-height)"
+                "WEB": "var(--eds-typography-label-5xl-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4640,7 +4850,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.5xl.line-height}"
+          "$value": "{density.typography.label.5xl.line-height}"
         }
       },
       "lg": {
@@ -4648,7 +4858,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-lg-font-size)"
+                "WEB": "var(--eds-typography-label-lg-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4657,13 +4867,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.lg.font-size}"
+          "$value": "{density.typography.label.lg.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-lg-line-height)"
+                "WEB": "var(--eds-typography-label-lg-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4672,7 +4882,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.lg.line-height}"
+          "$value": "{density.typography.label.lg.line-height}"
         }
       },
       "md": {
@@ -4680,7 +4890,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-md-font-size)"
+                "WEB": "var(--eds-typography-label-md-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4689,13 +4899,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.md.font-size}"
+          "$value": "{density.typography.label.md.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-md-line-height)"
+                "WEB": "var(--eds-typography-label-md-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4704,7 +4914,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.md.line-height}"
+          "$value": "{density.typography.label.md.line-height}"
         }
       },
       "sm": {
@@ -4712,7 +4922,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-sm-font-size)"
+                "WEB": "var(--eds-typography-label-sm-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4721,13 +4931,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.sm.font-size}"
+          "$value": "{density.typography.label.sm.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-sm-line-height)"
+                "WEB": "var(--eds-typography-label-sm-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4736,7 +4946,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.sm.line-height}"
+          "$value": "{density.typography.label.sm.line-height}"
         }
       },
       "xl": {
@@ -4744,7 +4954,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-xl-font-size)"
+                "WEB": "var(--eds-typography-label-xl-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4753,13 +4963,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.xl.font-size}"
+          "$value": "{density.typography.label.xl.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-xl-line-height)"
+                "WEB": "var(--eds-typography-label-xl-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4768,7 +4978,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.xl.line-height}"
+          "$value": "{density.typography.label.xl.line-height}"
         }
       },
       "xs": {
@@ -4776,7 +4986,7 @@
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-xs-font-size)"
+                "WEB": "var(--eds-typography-label-xs-font-size)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4785,13 +4995,13 @@
             }
           },
           "$type": "fontSize",
-          "$value": "{density.typography.ui.xs.font-size}"
+          "$value": "{density.typography.label.xs.font-size}"
         },
         "line-height": {
           "$extensions": {
             "com.figma": {
               "codeSyntax": {
-                "WEB": "var(--eds-typography-ui-xs-line-height)"
+                "WEB": "var(--eds-typography-label-xs-line-height)"
               },
               "hiddenFromPublishing": false,
               "scopes": [
@@ -4800,7 +5010,7 @@
             }
           },
           "$type": "lineHeight",
-          "$value": "{density.typography.ui.xs.line-height}"
+          "$value": "{density.typography.label.xs.line-height}"
         }
       }
     }
