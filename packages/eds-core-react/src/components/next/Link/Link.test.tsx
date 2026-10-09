@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
 import { Link } from '.'
 
@@ -193,6 +194,45 @@ describe('Link (next)', () => {
         </Link>,
       )
       expect(ref.current).toBeInstanceOf(HTMLAnchorElement)
+    })
+
+    it('keeps a ref on the child alongside its own ref', () => {
+      const ref = { current: null as HTMLAnchorElement | null }
+      const childRef = { current: null as HTMLAnchorElement | null }
+      render(
+        <Link asChild ref={ref}>
+          <a href="/" ref={childRef}>
+            Link
+          </a>
+        </Link>,
+      )
+      expect(childRef.current).toBeInstanceOf(HTMLAnchorElement)
+      expect(ref.current).toBe(childRef.current)
+    })
+
+    it('skips its onClick when the child calls preventDefault', async () => {
+      const user = userEvent.setup()
+      const onClick = jest.fn()
+      render(
+        <Link asChild onClick={onClick}>
+          <a href="/" onClick={(event) => event.preventDefault()}>
+            Link
+          </a>
+        </Link>,
+      )
+      await user.click(screen.getByRole('link'))
+      expect(onClick).not.toHaveBeenCalled()
+    })
+
+    it('logs an error naming Slot for a text child', () => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      render(<Link asChild>Read more</Link>)
+      expect(consoleError).toHaveBeenCalledWith(
+        expect.stringMatching(/^Slot: .*got text/),
+      )
+      consoleError.mockRestore()
     })
   })
 
