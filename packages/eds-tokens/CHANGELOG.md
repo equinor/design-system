@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.8](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.7...eds-tokens@v3.0.0-beta.8) (2026-10-09)
+
+
+### 🐛 Fixed
+
+* re-resolve semantic tokens inside data-density subtrees ([#5568](https://github.com/equinor/design-system/issues/5568)) ([dcae9ff](https://github.com/equinor/design-system/commit/dcae9ffe50918162c16dda6421ec499ff971e643))
+
 ## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.6...eds-tokens@v3.0.0-beta.7) (2026-09-01)
 
 

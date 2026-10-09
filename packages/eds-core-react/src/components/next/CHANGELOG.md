@@ -4,6 +4,18 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.3](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.2...eds-core-react-next@v3.0.0-beta.3) (2026-10-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* a consumer-supplied `id` is now applied verbatim to the input in TextField, TextArea, Search, Autocomplete and Select. It was previously suffixed with `-input`. Code that targeted `#my-id-input`, or pointed an external `htmlFor`/`aria-describedby` at it, must use `#my-id`. The same applies to the public `useFieldIds` hook: `useFieldIds(id)` now returns `id` itself as `inputId`, previously `${id}-input`. The derived ids (`my-id-label`, `my-id-description`, `my-id-helper-message`) are unchanged.
+
+### 🐛 Fixed
+
+* apply consumer id verbatim to input in next Field-based components ([#5564](https://github.com/equinor/design-system/issues/5564)) ([17e6647](https://github.com/equinor/design-system/commit/17e66471180ee165882eb792b84a7463903d4772))
+* enable the Autocomplete Add option when no option matches exactly ([#5605](https://github.com/equinor/design-system/issues/5605)) ([73d423c](https://github.com/equinor/design-system/commit/73d423c2f140c2ee37768963f0c1a8e732d4b83b))
+
 ## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.1...eds-core-react-next@v3.0.0-beta.2) (2026-09-30)
 
 
