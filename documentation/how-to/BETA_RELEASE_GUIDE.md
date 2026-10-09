@@ -4,13 +4,13 @@ This guide explains how beta releases work for EDS 2.0 components under the `/ne
 
 ## Quick Reference
 
-| Action                | Command                                                    |
-| --------------------- | ---------------------------------------------------------- |
-| Install beta          | `npm install @equinor/eds-core-react@beta`                 |
-| Import beta component | `import { Button } from '@equinor/eds-core-react/next'`    |
-| Import CSS            | `import '@equinor/eds-core-react/next/index.css'`          |
-| Commit for beta       | `feat(next): add new component`                            |
-| View beta versions    | `npm view @equinor/eds-core-react versions \| grep beta`   |
+| Action                | Command                                                  |
+| --------------------- | -------------------------------------------------------- |
+| Install beta          | `npm install @equinor/eds-core-react@beta`               |
+| Import beta component | `import { Button } from '@equinor/eds-core-react/next'`  |
+| Import CSS            | `import '@equinor/eds-core-react/next/index.css'`        |
+| Commit for beta       | `feat(next): add new component`                          |
+| View beta versions    | `npm view @equinor/eds-core-react versions \| grep beta` |
 
 ## Overview
 
@@ -149,7 +149,7 @@ The tokens package works differently from core-react's dual model: while the tok
 | View beta versions  | `npm view @equinor/eds-tokens versions \| grep beta` |
 
 - **Version scheme**: pinned `3.0.0-beta.N` — the base never moves. The entry uses release-please's `prerelease` versioning strategy (`versioning: "prerelease"`, `prerelease: true`), which at a `x.0.0` base increments only the counter for every commit type (`fix`, `feat`, even `feat!`). See `.github/release-please-config.md` for details, including why the version lives in `version.txt` rather than `package.json`.
-- **Automatic cadence**: each release in Tokens Studio triggers `tokens_studio_release.yaml`, which opens a `feat: update tokens from Tokens Studio release` PR. Merging it makes release-please add an `eds-tokens` bump to the release PR; merging *that* publishes `3.0.0-beta.N` to the `beta` dist-tag via `publish_tokens.yaml`. Any other `fix`/`feat` commit touching the package cuts a beta the same way.
+- **Automatic cadence**: each release in Tokens Studio triggers `tokens_studio_release.yaml`, which opens a `feat: update tokens from Tokens Studio release` PR. Merging it makes release-please add an `eds-tokens` bump to the release PR; merging _that_ publishes `3.0.0-beta.N` to the `beta` dist-tag via `publish_tokens.yaml`. Any other `fix`/`feat` commit touching the package cuts a beta the same way.
 - **Package contents**: the beta ships everything 2.x ships **plus** the Tokens Studio output under temporary additive subpaths (`@equinor/eds-tokens/next/css/*`, `/next/dtcg/*`, `/next/ts/*`), injected at publish time. Repointing the stable specifiers (`./css/variables` etc.) to the new output is planned before graduation so consumers won't need to change imports.
 - **Urgent stable patch**: if a critical 2.x fix is needed during the transition, it's a manual publish from the `eds-tokens@v2.3.1` tag — the automated channel only produces betas.
 - **Graduation**: tokens graduate together with the components as part of the single `3.0.0` major — flip `prerelease` to `false` and switch the dist-tag in `trigger_publish.yml` back to `latest`.
@@ -282,7 +282,8 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 
 - ✅ Breaking changes are allowed and expected
 - ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix(next)!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
-- ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page is the single living list consumers use to tell intended changes from bugs (#5387)
+- ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it is what the migration guide grows out of at graduation (#5387). Keep the answer current: when a PR moves a component's props, composition, markup or behaviour, the section has to describe 2.0 as it then stands. It is not a changelog, so leave beta-to-beta wording out of it and put that in the commit message and the PR description. CI enforces this, and not only when the PR is marked breaking: editing any `.ts` or `.tsx` file of a published component without touching the page fails the "Breaking changes page entry" check. If the EDS 1.0 to 2.0 answer is unchanged, add the `skip-breaking-changes-doc` label and say why in the description
+- ✅ A new `/next` component needs its section on that page in the same PR that exports it. The component is a rewrite of its EDS 1.0 predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. CI fails on a component exported from the `/next` barrel with no section
 - ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
 
 **After graduation (stable releases):**
