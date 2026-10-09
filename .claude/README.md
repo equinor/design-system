@@ -48,7 +48,7 @@ Commands are user-invokable prompts triggered with `/command-name`.
 
 | Command | Usage | Description |
 |---------|-------|-------------|
-| `/new-component` | `/new-component Button [web\|mobile\|both]` | Scaffold a new EDS component for web, mobile or both |
+| `/new-component` | `/new-component Button [web\|mobile]` | Scaffold a new EDS component for web or mobile |
 | `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation |
 | `/accessibility-audit` | `/accessibility-audit <url>` | Audit a page or Storybook story against WCAG 2.1 AA |
 | `/audit-harnesses` | `/audit-harnesses` | Audit AI harness configs for drift across tools |

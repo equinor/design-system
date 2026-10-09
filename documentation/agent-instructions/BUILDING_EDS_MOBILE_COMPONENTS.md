@@ -68,7 +68,7 @@ Put the test next to the component and render through `test-utils`, which wraps 
 1. If the component was excluded as unmigrated, remove it from the exclusion lists in `tsconfig.json`, `eslint.config.js` and `jest.config.cjs`.
 2. Export the component from `packages/eds-mobile-components/src/index.ts`.
 3. Add a demo screen at `apps/mobile-storybook/app/(tabs)/components/yourcomponent.tsx`, named after the lowercased folder, and one entry in `componentRegistry` in `apps/mobile-storybook/lib/registry.ts`. CI runs `pnpm run check-screens:mobile` and fails if an exported component has neither.
-4. Write the docs: the stories file and `YourComponent.docs.md`, then run `pnpm run generate:component-docs YourComponent`. The generator needs a web component of the same name, because mobile-only components are not supported yet. The rules are in [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md).
+4. Write the docs: the stories file and `YourComponent.docs.md`, then run `pnpm run generate:component-docs YourComponent`. The generator builds a mobile page only for a component that also has a web sidecar, and the Summary is written in the web file. If there is none yet, or the component has no web counterpart, skip the generator and list the missing docs under TODOs in the status report. Mobile-only support is tracked in [#5626](https://github.com/equinor/design-system/issues/5626). The rules are in [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md).
 
 ## Log what you find
 

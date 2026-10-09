@@ -80,7 +80,7 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 
 | Capability (intent)          | Claude Code            | Copilot                                  | OpenCode             |
 | ---------------------------- | ---------------------- | ---------------------------------------- | -------------------- |
-| Scaffold new EDS component (web, mobile or both) | `/new-component`     | `new-component` prompt                   | `eds-component` agent |
+| Scaffold new EDS component (web or mobile) | `/new-component`     | `new-component` prompt                   | `eds-component` agent |
 | Accessibility audit          | `/accessibility-audit` | `accessibility-audit` prompt             | `accessibility-audit` agent |
 | Structure component doc      | `/create-component-doc`| `structure_components_prompt`            | `component-doc` agent |
 | Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |

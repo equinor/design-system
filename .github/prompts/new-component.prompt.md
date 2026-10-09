@@ -1,19 +1,19 @@
 ---
 mode: agent
-description: Scaffold a new EDS component for web, mobile or both, with all required files
+description: Scaffold a new EDS component for web or mobile, with all required files
 ---
 
 # Create New EDS Component
 
-Scaffold a new EDS component named `${input:componentName}`. The platform is `${input:platform:web, mobile or both}`. If it is empty, ask which one: web, mobile or both.
+Scaffold a new EDS component named `${input:componentName}`. The platform is `${input:platform:web or mobile}`. If it is empty, ask which one: web or mobile.
 
-> **Canonical references:** web components follow [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) (foundation data-attributes, file templates, common mistakes, anti-patterns checklist). Mobile components follow [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md). Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md). Read the doc for the chosen platform before writing any file, and both for `both`.
+> **Canonical references:** web components follow [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) (foundation data-attributes, file templates, common mistakes, anti-patterns checklist). Mobile components follow [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md). Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md). Read the doc for the chosen platform before writing any file.
 
 This prompt holds the flow the two platforms share. The patterns and code templates live in the canonical docs, so read them there rather than inferring from memory.
 
 ## Workflow
 
-1. **Choose the platform**, or ask: web (`packages/eds-core-react/src/components/next/`), mobile (`packages/eds-mobile-components/src/components/`) or both. For `both`, build web first and then mobile, from the same Figma extraction.
+1. **Choose the platform**, or ask: web (`packages/eds-core-react/src/components/next/`) or mobile (`packages/eds-mobile-components/src/components/`).
 
 2. **Ask for a Figma URL** for the component design. The design is shared by both platforms. If provided, run the Figma MCP tools per [`AGENTS.md`](../../AGENTS.md) § Figma MCP workflow:
    - `figma_get_design_context` — component structure
@@ -34,7 +34,7 @@ This prompt holds the flow the two platforms share. The patterns and code templa
    - Web, per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package): export from `next/index.ts`, and `@import` the CSS in `next/index.css`.
    - Mobile, per [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md#wiring): export from `src/index.ts`, add a demo screen in `apps/mobile-storybook`, and add its `componentRegistry` entry. If the component was excluded as unmigrated, remove it from the exclusion lists in `tsconfig.json`, `eslint.config.js` and `jest.config.cjs`.
 
-7. **Write the docs** per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md): the stories file and `${input:componentName}.docs.md` on each platform, then run `pnpm run generate:component-docs ${input:componentName}`. Never write the beta callout or import snippet in the stories file. The Summary is written once, in the web file, and shown above both tabs.
+7. **Write the docs** per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md): the stories file and `${input:componentName}.docs.md` on each platform, then run `pnpm run generate:component-docs ${input:componentName}`. Never write the beta callout or import snippet in the stories file. The Summary is written once, in the web file, and shown above both tabs. The generator builds a mobile page only for a component that also has a web sidecar. If there is none yet, or the component has no web counterpart, skip the generator and list the missing docs under TODOs in the status report (mobile-only support is tracked in #5626).
 
 8. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report) — a short `## Implementation notes` section summarising what came from Figma, what was inherited, what was assumed, what was skipped, and any TODOs.
 

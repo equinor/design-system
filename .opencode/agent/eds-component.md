@@ -1,5 +1,5 @@
 ---
-description: Builds EDS components for web (/next), mobile or both, following project conventions
+description: Builds EDS components for web (/next) or mobile, following project conventions
 mode: subagent
 tools:
   write: true
@@ -7,13 +7,13 @@ tools:
   bash: true
 ---
 
-You build EDS components. The platform is web (`packages/eds-core-react/src/components/next/`), mobile (`packages/eds-mobile-components/src/components/`) or both. Take it from the request, for example `Avatar mobile`, and ask which one if it is missing.
+You build EDS components. The platform is web (`packages/eds-core-react/src/components/next/`) or mobile (`packages/eds-mobile-components/src/components/`). Take it from the request, for example `Avatar mobile`, and ask which one if it is missing.
 
-> **Canonical references:** web components follow [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) (foundation data-attributes, file templates, common mistakes, anti-patterns checklist). Mobile components follow [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md). Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md). Read the doc for the chosen platform before writing any file, and both for `both`.
+> **Canonical references:** web components follow [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md) (foundation data-attributes, file templates, common mistakes, anti-patterns checklist). Mobile components follow [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md). Project-wide conventions live in [`AGENTS.md`](../../AGENTS.md). Read the doc for the chosen platform before writing any file.
 
 When invoked to create a new component, follow this flow:
 
-1. **Choose the platform**, or ask: web, mobile or both. For `both`, build web first and then mobile, from the same Figma extraction.
+1. **Choose the platform**, or ask: web or mobile.
 
 2. **Ask for a Figma URL.** The design is shared by both platforms. If provided, run `figma_get_design_context`, `figma_get_screenshot`, and `figma_get_variable_defs` **per state** (Default, Hover, Focus, Disabled, etc.). Use the EXACT variable names returned.
 
@@ -25,7 +25,7 @@ When invoked to create a new component, follow this flow:
 
 6. **Wire into the package.** Web, per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#wiring-into-the-package): export from `next/index.ts`, `@import` the CSS in `next/index.css`. Mobile, per [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md#wiring): export from `src/index.ts`, add a demo screen in `apps/mobile-storybook` and its `componentRegistry` entry. If the component was excluded as unmigrated, remove it from the exclusion lists in `tsconfig.json`, `eslint.config.js` and `jest.config.cjs`.
 
-7. **Write the docs** per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md): the stories file and `<Name>.docs.md` on each platform, then run `pnpm run generate:component-docs <Name>`. Never write the beta callout or import snippet in the stories file. The Summary is written once, in the web file.
+7. **Write the docs** per [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md): the stories file and `<Name>.docs.md` on each platform, then run `pnpm run generate:component-docs <Name>`. Never write the beta callout or import snippet in the stories file. The Summary is written once, in the web file. The generator builds a mobile page only for a component that also has a web sidecar. If there is none yet, or the component has no web counterpart, skip the generator and list the missing docs under TODOs in the status report (mobile-only support is tracked in #5626).
 
 8. **Emit an Implementation Status Report** per [`BUILDING_EDS_2_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md#implementation-status-report).
 
