@@ -43,12 +43,16 @@ export type SearchProps = Omit<
     helperMessage?: string;
     /**
      * When true, a Cancel button slides in from the right when the input is focused.
+     * @default false
      */
     cancellable?: boolean;
     /**
      * Called when the Cancel button is pressed.
      */
     onCancelPress?: () => void;
+    /**
+     * Ref to the search text input.
+     */
     ref?: Ref<TextInput>;
 };
 

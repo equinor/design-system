@@ -10,18 +10,46 @@ import { Typography } from "../Typography";
 const ICON_BASELINE_OFFSET = 3;
 
 export type TextAreaProps = {
+    /**
+     * Label displayed above the field.
+     */
     label?: string;
+    /**
+     * Inline text after the label, e.g. "(Optional)".
+     */
     indicator?: string;
+    /**
+     * Descriptive text below the label.
+     */
     description?: string;
+    /**
+     * Message shown below the field.
+     */
     helperMessage?: string;
+    /**
+     * Error state, shown with a red border and background.
+     * @default false
+     */
     invalid?: boolean;
+    /**
+     * Disables all interaction.
+     * @default false
+     */
     disabled?: boolean;
+    /**
+     * Prevents editing. The value can still be selected and copied.
+     * @default false
+     */
     readOnly?: boolean;
     /**
      * Shows a character count below the TextArea.
      * Displays "n / maxLength" when maxLength is set, otherwise just "n".
+     * @default false
      */
     showCharacterCount?: boolean;
+    /**
+     * Ref to the text input.
+     */
     ref?: Ref<TextInput>;
 } & Omit<TextInputProps, "multiline" | "editable" | "readOnly" | "scrollEnabled">;
 
