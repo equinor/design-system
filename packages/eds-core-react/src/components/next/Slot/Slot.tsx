@@ -3,11 +3,12 @@ import {
   isValidElement,
   cloneElement,
   useMemo,
+  Fragment,
   type ReactElement,
   type ReactNode,
   type Ref,
 } from 'react'
-import { mergeRefs } from '@equinor/eds-utils'
+import { getElementRef } from '@equinor/eds-utils'
 import type { SlotProps } from './Slot.types'
 
 function mergeClassNames(...classNames: (string | undefined)[]) {
@@ -45,8 +46,9 @@ function mergeProps(
     ) {
       // Child first; calling preventDefault() there skips the slot's handler
       merged[key] = (...args: unknown[]) => {
+        const wasPrevented = isPrevented(args[0])
         ;(childValue as (...a: unknown[]) => void)(...args)
-        if (isPrevented(args[0])) return
+        if (!wasPrevented && isPrevented(args[0])) return
         ;(slotValue as (...a: unknown[]) => void)(...args)
       }
     } else if (slotValue !== undefined) {
@@ -57,32 +59,39 @@ function mergeProps(
   return merged
 }
 
-type RefDescriptor = { get?: { isReactWarning?: boolean } }
+type RefCleanup = void | (() => void)
 
-function isWarningGetter(target: object) {
-  const descriptor = Object.getOwnPropertyDescriptor(target, 'ref') as
-    RefDescriptor | undefined
-  return descriptor?.get?.isReactWarning === true
+function setRef<T>(ref: Ref<T> | undefined, node: T | null): RefCleanup {
+  if (typeof ref === 'function') return ref(node) as RefCleanup
+  if (ref) (ref as { current: T | null }).current = node
 }
 
-// React 19 reads the ref from props and React 18 from the element, and each
-// warns when the other location is read, so check which one is the real ref
-function getChildRef(
-  child: ReactElement<{ ref?: Ref<HTMLElement> }>,
-): Ref<HTMLElement> | undefined {
-  const elementWithRef = child as typeof child & { ref?: Ref<HTMLElement> }
+// Like mergeRefs, but passes on React 19 callback-ref cleanups
+function composeRefs<T>(...refs: (Ref<T> | undefined)[]) {
+  return (node: T | null): RefCleanup => {
+    const cleanups = refs.map((ref) => setRef(ref, node))
+    if (!cleanups.some((cleanup) => typeof cleanup === 'function')) return
 
-  if (isWarningGetter(child.props)) return elementWithRef.ref
-  if (isWarningGetter(child)) return child.props.ref
-
-  return child.props.ref ?? elementWithRef.ref
+    // React 19 calls a returned cleanup instead of calling the ref with null
+    return () =>
+      refs.forEach((ref, index) => {
+        const cleanup = cleanups[index]
+        if (typeof cleanup === 'function') cleanup()
+        else setRef(ref, null)
+      })
+  }
 }
 
 function describeInvalidChild(children: ReactNode) {
   if (typeof children === 'string' || typeof children === 'number') {
     return 'text'
   }
-  if (Array.isArray(children)) return 'multiple children'
+  if (Array.isArray(children)) {
+    return children.length > 1 ? 'multiple children' : 'an array'
+  }
+  if (isValidElement(children) && children.type === Fragment) {
+    return 'a Fragment'
+  }
   return typeof children
 }
 
@@ -90,13 +99,14 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(function Slot(
   { children, ...slotProps },
   ref,
 ) {
-  const child = isValidElement(children)
-    ? (children as ReactElement<Record<string, unknown>>)
-    : null
-  const childRef = child ? getChildRef(child) : undefined
+  const child =
+    isValidElement(children) && children.type !== Fragment
+      ? (children as ReactElement<Record<string, unknown>>)
+      : null
+  const childRef = child ? getElementRef<HTMLElement>(child) : null
 
   const mergedRef = useMemo(
-    () => (childRef ? mergeRefs<HTMLElement>(ref, childRef) : ref),
+    () => (childRef ? composeRefs<HTMLElement>(ref, childRef) : ref),
     [ref, childRef],
   )
 

@@ -56,6 +56,24 @@ describe('Slot (next)', () => {
       consoleError.mockRestore()
     })
 
+    it('logs an error for a Fragment child instead of cloning onto it', () => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      const { container } = render(
+        <Slot className="slot-class">
+          <>
+            <span>One</span>
+          </>
+        </Slot>,
+      )
+      expect(container.innerHTML).toBe('')
+      expect(consoleError).toHaveBeenCalledWith(
+        expect.stringMatching(/^Slot: .*got a Fragment/),
+      )
+      consoleError.mockRestore()
+    })
+
     it('does not throw for invalid children', () => {
       const consoleError = jest
         .spyOn(console, 'error')
@@ -128,6 +146,26 @@ describe('Slot (next)', () => {
 
       await user.click(screen.getByRole('button'))
       expect(slotClick).not.toHaveBeenCalled()
+    })
+
+    it('still calls the slot handler when the event was prevented before the child handler', async () => {
+      const user = userEvent.setup()
+      const slotClick = jest.fn()
+
+      render(
+        <Slot onClick={slotClick}>
+          <button
+            type="button"
+            onClickCapture={(event) => event.preventDefault()}
+            onClick={() => {}}
+          >
+            Click
+          </button>
+        </Slot>,
+      )
+
+      await user.click(screen.getByRole('button'))
+      expect(slotClick).toHaveBeenCalledTimes(1)
     })
 
     it('slot prop wins for non-special props', () => {
@@ -205,6 +243,21 @@ describe('Slot (next)', () => {
         </Slot>,
       )
       expect(childRef).toHaveBeenCalledWith(expect.any(HTMLButtonElement))
+    })
+
+    it('runs callback ref cleanups when both refs are set', () => {
+      const slotCleanup = jest.fn()
+      const childCleanup = jest.fn()
+      const { unmount } = render(
+        <Slot ref={() => slotCleanup}>
+          <button type="button" ref={() => childCleanup}>
+            Click
+          </button>
+        </Slot>,
+      )
+      unmount()
+      expect(slotCleanup).toHaveBeenCalledTimes(1)
+      expect(childCleanup).toHaveBeenCalledTimes(1)
     })
   })
 
