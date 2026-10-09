@@ -51,11 +51,12 @@ We currently track these packages for releases:
 
 1. `@equinor/eds-core-react` - Core React component library (stable)
 2. `@equinor/eds-core-react` (`/next` entry) - Beta components (published with `@beta` tag)
-3. `@equinor/eds-data-grid-react` - Data grid component
-4. `@equinor/eds-icons` - Icon library
-5. `@equinor/eds-lab-react` - Experimental components
-6. `@equinor/eds-tokens` - Design tokens and variables (**entirely in beta** during the Tokens Studio rewrite — published with the `@beta` tag as a pinned `3.0.0-beta.N` series; `latest` stays on the last stable 2.x)
-7. `@equinor/eds-utils` - Shared utilities
+3. `@equinor/eds-icons` - Icon library
+4. `@equinor/eds-lab-react` - Experimental components
+5. `@equinor/eds-tokens` - Design tokens and variables (**entirely in beta** during the Tokens Studio rewrite — published with the `@beta` tag as a pinned `3.0.0-beta.N` series; `latest` stays on the last stable 2.x)
+6. `@equinor/eds-utils` - Shared utilities
+
+`@equinor/eds-data-grid-react` is deliberately **not** in this list. The package is deprecated (see [#5390](https://github.com/equinor/design-system/issues/5390)), so its entry was removed from `release-please-config.json` and release-please no longer opens release PRs for it. Its last released version, `1.3.0`, stays in `release-please-manifest.json` as a record. `publish_data_grid.yaml` is still dispatchable by hand if a final publish is ever needed.
 
 ### Dual Release Strategy for `@equinor/eds-core-react`
 
