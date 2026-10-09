@@ -14,7 +14,11 @@ nav.menu {
   padding: 0;
   border-right: var(--eds-border-non-interactive-neutral-muted) 1px solid;
 
-  font-size: var(--eds-typography-ui-md-font-size);
+  /* The fallbacks to ui-* names: see the typography comment in docs-components.css. */
+  font-size: var(
+    --eds-typography-label-md-font-size,
+    var(--eds-typography-ui-md-font-size)
+  );
 
   /* Deliberately below the ui-md line-height token (20px) — single-line menu
      items are centred by padding, not leading. */
@@ -205,7 +209,10 @@ nav.menu li a {
 .navbar__item {
   padding: 1.75rem 1.5rem;
 
-  font-size: var(--eds-typography-ui-md-font-size);
+  font-size: var(
+    --eds-typography-label-md-font-size,
+    var(--eds-typography-ui-md-font-size)
+  );
 
   /* Deliberately below the ui-md line-height token (20px) — single-line navbar
      items are centred by padding, not leading. */
@@ -318,7 +325,10 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 
 .theme-doc-toc-mobile > button {
   padding: 0.5rem 1rem;
-  line-height: var(--eds-typography-ui-md-line-height);
+  line-height: var(
+    --eds-typography-label-md-line-height,
+    var(--eds-typography-ui-md-line-height)
+  );
   transition: background-color 150ms ease-in-out;
 
   &::after {
@@ -427,7 +437,10 @@ html[class*='docs-version-current'] .theme-doc-version-badge {
 }
 
 .footer__column-link {
-  font-size: var(--eds-typography-ui-md-font-size);
+  font-size: var(
+    --eds-typography-label-md-font-size,
+    var(--eds-typography-ui-md-font-size)
+  );
   color: var(--eds-text-on-emphasis-accent);
   text-decoration: none;
   transition: color 150ms ease;
