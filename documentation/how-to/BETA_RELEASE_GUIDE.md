@@ -9,7 +9,7 @@ This guide explains how beta releases work for EDS 2.0 components under the `/ne
 | Install beta          | `npm install @equinor/eds-core-react@beta`               |
 | Import beta component | `import { Button } from '@equinor/eds-core-react/next'`  |
 | Import CSS            | `import '@equinor/eds-core-react/next/index.css'`        |
-| Commit for beta       | `feat(next): add new component`                          |
+| Commit for beta       | `feat: add new component` (no scope)                     |
 | View beta versions    | `npm view @equinor/eds-core-react versions \| grep beta` |
 
 ## Overview
@@ -23,19 +23,21 @@ Both use the same package `@equinor/eds-core-react` but with different dist-tags
 
 ## Commit Convention
 
-To trigger the correct release, use specific commit scopes:
+Which line a commit lands in is decided by the files it touches, not by its scope. `packages/eds-core-react/src/components/next` is its own entry in `release-please-config.json`, and the same path is in `exclude-paths` on `eds-core-react`. So a commit touching only `/next` cuts a beta release, and one touching the rest of the package cuts a stable one.
+
+Leave the scope off. There is no `next` scope: `pr-title-check.yml` rejects it, and on a `feat` or `fix` any package scope overrides `exclude-paths` and forces a stable bump no matter which files changed.
 
 ### Beta Release (for `/next` components)
 
 ```bash
 # Features
-feat(next): add new TextInput component
+feat: add new TextInput component
 
 # Bug fixes
-fix(next): correct Placeholder styling
+fix: correct Placeholder styling
 
-# Breaking changes — use ! and a BREAKING CHANGE footer
-feat(next)!: change Button API
+# Breaking changes, use ! and a BREAKING CHANGE footer
+feat!: change Button API
 ```
 
 > **Note:** Use the conventional-commit `!` marker for breaking changes in beta components. The version base is pinned at `3.0.0` (`versioning: "prerelease"` in `release-please-config.json`), so `!` does not bump the major — it only increments the beta counter — while giving consumers a "⚠ BREAKING CHANGES" section in the changelog and release notes.
@@ -44,15 +46,15 @@ feat(next)!: change Button API
 
 ```bash
 # Features
-feat(eds-core-react): add new prop to Button
+feat: add new prop to Button
 
 # Bug fixes
-fix(eds-core-react): correct positioning logic
+fix: correct positioning logic
 ```
 
 ## How It Works
 
-1. **Commit with scope** -- Use `(next)` scope for beta components
+1. **Commit without a scope** -- the paths in the diff decide the release line
 2. **Release Please creates PR** -- One combined PR that may include both stable and beta changes
 3. **Merge PR** -- Triggers automated publishing
 4. **NPM publish** -- Beta goes to `@equinor/eds-core-react@beta`, stable to `@equinor/eds-core-react@latest`
@@ -281,9 +283,9 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 **Within `/next` (beta releases):**
 
 - ✅ Breaking changes are allowed and expected
-- ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix(next)!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
+- ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
 - ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it is what the migration guide grows out of at graduation (#5387). Keep the answer current: when a PR moves a component's props, composition, markup or behaviour, the section has to describe 2.0 as it then stands. It is not a changelog, so leave beta-to-beta wording out of it and put that in the commit message and the PR description. CI enforces this, and not only when the PR is marked breaking: editing any `.ts` or `.tsx` file of a published component without touching the page fails the "Breaking changes page entry" check. If the EDS 1.0 to 2.0 answer is unchanged, add the `skip-breaking-changes-doc` label and say why in the description
-- ✅ A new `/next` component needs its section on that page in the same PR that exports it. The component is a rewrite of its EDS 1.0 predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. CI fails on a component exported from the `/next` barrel with no section
+- ✅ A new `/next` component needs its section on that page in the same PR that exports it. Most 2.0 components rewrite a 1.0 predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. Where there is no 1.0 counterpart, follow `## Badge` and `## Link` on the page; where the component splits a 1.0 one, as Combobox splits `Autocomplete` with `multiple`, name that component and the usage this half comes from and link the two sections. CI fails on a component exported from the `/next` barrel with no section
 - ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
 
 **After graduation (stable releases):**
@@ -295,8 +297,8 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 ## CI/CD Flow
 
 1. **Release Please detects commits**
-   - `(next)` scope → Beta release PR
-   - Other scopes → Stable release PR
+   - Only `/next` paths touched → Beta release PR
+   - Other paths in the package → Stable release PR
 
 2. **Merge release PR**
    - Updates `src/components/next/CHANGELOG.md` (beta) or `CHANGELOG.md` (stable)
@@ -315,9 +317,9 @@ git checkout -b feat/add-new-input
 mkdir -p src/components/next/Input
 # ... create component files
 
-# 2. Commit with (next) scope
+# 2. Commit, no scope: the /next path is what routes it
 git add .
-git commit -m "feat(next): add new Input component with validation"
+git commit -m "feat: add new Input component with validation"
 
 # 3. Push and create PR
 git push
@@ -347,8 +349,8 @@ npm view @equinor/eds-core-react@beta version
 
 ### Beta release not triggered
 
-- Ensure commits use `(next)` scope
 - Check that files are in `src/components/next/` folder
+- Check that no package scope was added to the commit, which would route it to the stable line
 - Verify Release Please config includes `/next` path
 
 ### Wrong dist-tag applied
