@@ -136,6 +136,8 @@ EDS 1.0: `Autocomplete`.
 - `options` no longer accepts `readonly` arrays. `label` is optional. New: `inputValue` and `defaultInputValue` for controlling the text, `description`, `clearLabel`, `loadingText`.
 - `className` and `style` land on the root `<div>` and are merged with `eds-autocomplete`; use `.your-class input` to reach the native input. Event handlers already went to the input in EDS 1.0, but `onMouseDown`, `onClick`, `onFocus`, `onBlur`, `onKeyDown` and `onKeyUp` are now blocked, as are `value`, `defaultValue`, `type`, `as`, `hideErrorIcon` and the adornment props. The remaining input props go to the `<input>`.
 
+**Custom values**: the Add option's accessible name changes from `Add new option: {value}` to `Add: {value}`. The option is disabled when the typed text matches an existing option, ignoring case. After confirming, the value stays in the input and is selected, where EDS 1.0 cleared the input.
+
 **Markup**: `data-testid="add-item"` and `data-testid="select-all"` are gone. Listbox and option ids are generated as `eds-autocomplete-listbox-*`. `aria-multiselectable` is gone. Options are no longer virtualised, so every option is in the DOM. The list uses the Popover API with CSS anchor positioning instead of a floating-ui positioned element.
 
 ## Badge

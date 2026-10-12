@@ -21,6 +21,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import { pendingNames } from './pending-spacing-steps.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const app = join(here, '..')
@@ -36,6 +37,9 @@ const PROSE = [
   'foundation/colour/palette.mdx',
   'foundation/colour/migration.mdx',
   'foundation/colour/token-anatomy.mdx',
+  'foundation/design-tokens/spacing.mdx',
+  'foundation/design-tokens/spacing-scale.mdx',
+  'foundation/design-tokens/spacing-usage.mdx',
   'foundation/design-tokens/spacing-anatomy.mdx',
   'foundation/design-tokens/typography-anatomy.mdx',
 ]
@@ -105,8 +109,18 @@ if (existsSync(legacyBuild)) {
   }
 }
 
+// Steps that are merged in Tokens Studio but not in the package yet. The pages document them on
+// purpose, so their names are accepted here rather than reported as typos. This list shrinks to
+// nothing when the release merges, and the generator is what tells you to empty it.
+for (const name of pendingNames()) {
+  canon.add(name)
+  cssCanon.add(`--eds-${name.replaceAll('.', '-')}`)
+}
+
 const problems = []
 const isPrefix = (name) => [...canon].some((c) => c.startsWith(name + '.'))
+const isCssPrefix = (prefix) =>
+  [...cssCanon, ...declared].some((c) => c.startsWith(prefix))
 
 // --- 1 and 2: names in prose -------------------------------------------------------------------
 
@@ -145,6 +159,10 @@ for (const file of PROSE) {
 
   for (const m of src.matchAll(/--eds-[a-z0-9-]+/g)) {
     if (cssCanon.has(m[0]) || declared.has(m[0])) continue
+    // A family written as a template, such as `--eds-spacing-{step}` or `--eds-page-gap-*`, is
+    // matched up to the placeholder. It passes when a shipped or legacy name starts with it.
+    const next = src[m.index + m[0].length]
+    if ((next === '{' || next === '*') && isCssPrefix(m[0])) continue
     problems.push({
       file,
       line: src.slice(0, m.index).split('\n').length,
