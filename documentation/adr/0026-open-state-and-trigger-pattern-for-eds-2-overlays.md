@@ -135,6 +135,8 @@ The component also has to know why it is closing, since [#5461] treats Escape di
 
 The child has to forward its ref and spread the props it is given, which every EDS component already does. A string, a fragment or several children is an error rather than a silent no-op.
 
+Where the child already has a list-valued attribute, the trigger adds to it rather than replacing it. `aria-describedby` and `aria-labelledby` are joined with a space, and `anchor-name` with a comma, so a helper text stays announced under a Tooltip ([#5459]) and a Tooltip and a Menu can share one button without breaking each other.
+
 The child also has to be interactive. A wrapper makes `<Dialog.Trigger><div>Open</div></Dialog.Trigger>` easy to write, and it would produce a clickable element with no role, no keyboard support and nothing for a screen reader to announce, which a trigger that rendered its own `<button>` could never do. The component warns in development when the child is not a native interactive element, such as `button`, `a[href]` or `input`, and has no interactive `role`. It cannot see whether keyboard handling is attached, so the warning stays with what it can check.
 
 This is the shape the styled design systems use. React Spectrum's `DialogTrigger` wraps an `ActionButton`, and Mantine's `Menu.Target` renders nothing and clones a single child with the same two requirements. MUI ships no trigger at all and leaves the consumer holding state, which is where our Dialog is today. Only the headless libraries, Radix and Base UI, render an element from the trigger itself, and they can because everything they render is unstyled.
@@ -175,6 +177,7 @@ Tooltip is partly in scope. Its trigger follows the rule above, replacing the `c
 [#5324]: https://github.com/equinor/design-system/issues/5324
 [#4437]: https://github.com/equinor/design-system/issues/4437
 [#5008]: https://github.com/equinor/design-system/issues/5008
+[#5459]: https://github.com/equinor/design-system/issues/5459
 [#5461]: https://github.com/equinor/design-system/issues/5461
 [#5600]: https://github.com/equinor/design-system/issues/5600
 [#5601]: https://github.com/equinor/design-system/issues/5601
