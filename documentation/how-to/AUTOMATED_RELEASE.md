@@ -42,9 +42,10 @@ Guide for the automated release process in Equinor Design System using Release P
 
 For components under development in the `/next` entry point:
 
-1. **Use `(next)` scope** in commits:
-   - `feat(next): add new Input component` → beta version bump
-   - `fix(next): correct Placeholder styling` → beta patch bump
+1. **Commit without a scope.** The paths in the diff route the commit, not the scope: `/next` is its own release-please entry and is in `exclude-paths` on `eds-core-react`.
+   - `feat: add new Input component`, touching only `/next` → beta version bump
+   - `fix: correct Placeholder styling`, touching only `/next` → beta patch bump
+   - There is no `next` scope, and any package scope on a `feat` or `fix` overrides `exclude-paths` and forces a stable bump
 
 2. **Merge PR to `main`** → Release Please creates/updates a release PR
    - May contain both stable and beta changes in one PR
