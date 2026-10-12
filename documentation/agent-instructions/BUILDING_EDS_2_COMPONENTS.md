@@ -241,7 +241,7 @@ export type ComponentNameProps = {
 
 Use foundation `data-*` values directly (see [the reference table](#foundation-data-attribute-reference)) unless the component has a true variant axis like Button's `primary | secondary | ghost`.
 
-Every prop needs a JSDoc description, and a `@default` tag where it has a default. The docs generator fails on a prop without a description. For a prop with a fixed set of values, give the value type a JSDoc that lists each value as ``- `value`: meaning``.
+Every prop needs a JSDoc description, and a `@default` tag where it has a default. The docs generator fails on a prop without a description.
 
 ### `ComponentName.tsx`
 
