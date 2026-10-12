@@ -437,7 +437,14 @@ Add the CSS to `packages/eds-core-react/src/components/next/index.css`:
 @import './ComponentName/componentname.css';
 ```
 
-Add a `## ComponentName` section to `packages/eds-core-react/stories/docs/BreakingChanges.mdx`, in the same pull request. A 2.0 component is a rewrite of its EDS 1.0 predecessor, and that difference is what the page exists to spell out — props removed or renamed, composition changed, markup and behaviour that can break consumer CSS or tests. Write it now, while you have both versions in front of you. CI fails the moment a component is exported from the barrel without a section (`pnpm run check:breaking-changes-coverage`). If 2.0 drops the component with no successor, the section still goes in, describing what to use instead.
+Add a `## ComponentName` section to `packages/eds-core-react/stories/docs/BreakingChanges.mdx`, in the same pull request. The page exists to spell out what an EDS 1.0 consumer meets in 2.0. Write the section now, while you have both versions in front of you. CI fails the moment a component is exported from the barrel without a section (`pnpm run check:breaking-changes-coverage`).
+
+Most 2.0 components rewrite a 1.0 predecessor, but not all. The section says which case it is:
+
+- **A rewrite of one 1.0 component.** Name it, then list what moved: props removed or renamed, composition changed, markup and behaviour that can break consumer CSS or tests.
+- **No 1.0 counterpart.** Follow `## Badge` and `## Link` on the page: the `New` tag, the sentence "New component, no EDS 1.0 counterpart", and what a consumer reached for instead.
+- **A split of one 1.0 component.** Name the 1.0 component and the usage this half comes from, and link to it from that component's section so the reader arrives from either side. Combobox is the case: in 1.0 it was `Autocomplete` with `multiple`.
+- **Dropped with no successor.** The section still goes in, describing what to use instead.
 
 ## Real-World References
 

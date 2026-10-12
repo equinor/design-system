@@ -5,11 +5,10 @@
  * changes page, and that no section describes a component that is gone.
  *
  * The page (packages/eds-core-react/stories/docs/BreakingChanges.mdx) exists
- * to spell out the difference between an EDS 1.0 component and its EDS 2.0
- * successor (#5387). That difference does not arrive marked breaking: a whole
- * component is a rewrite of its 1.0 predecessor, and it lands as a plain
- * `feat: add <Component>`. Nothing in /next is formally breaking until
- * graduation.
+ * to spell out what an EDS 1.0 consumer meets in 2.0 (#5387). That difference
+ * does not arrive marked breaking: a 2.0 component usually rewrites a 1.0
+ * predecessor, and it lands as a plain `feat: add <Component>`. Nothing in
+ * /next is formally breaking until graduation.
  *
  * check-breaking-changes-doc.js covers the other side of this: it asks whether
  * a pull request that moves a component brought the page with it. What it
@@ -118,7 +117,7 @@ const main = () => {
   for (const component of components) {
     if (!names.has(component)) {
       problems.push(
-        `- \`${component}\` is exported from \`${BARREL}\` but has no \`## ${component}\` section. Say what changed from the EDS 1.0 component: props, composition, markup and behaviour.`,
+        `- \`${component}\` is exported from \`${BARREL}\` but has no \`## ${component}\` section. If it rewrites a 1.0 component, name it and say what changed: props, composition, markup and behaviour. If it has no 1.0 counterpart, follow \`## Badge\` and \`## Link\` on the page. If it splits a 1.0 component, name that component and the usage this half comes from.`,
       )
     }
   }
@@ -151,7 +150,7 @@ const main = () => {
     '',
     ...problems,
     '',
-    `The page is the Storybook page "${PAGE_TITLE}" (\`${PAGE}\`). It is what consumers read to tell an intended change from a bug, and a component with no section reads as an oversight. A new \`/next\` component is a rewrite of its EDS 1.0 predecessor, so it needs its section in the same pull request that adds it - that is when the difference is known.`,
+    `The page is the Storybook page "${PAGE_TITLE}" (\`${PAGE}\`). It is what consumers read to tell an intended change from a bug, and a component with no section reads as an oversight. A new \`/next\` component needs its section in the same pull request that adds it - that is when the difference from EDS 1.0 is known.`,
   ])
   console.log(
     '::error::The breaking changes page does not match what /next publishes',
