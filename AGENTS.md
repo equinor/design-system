@@ -116,8 +116,6 @@ For the per-component patterns that don't fit in this overview — foundation `d
 
 The Storybook docs page is generated from the types, the stories and `ComponentName.docs.md`, never written by hand. See [`documentation/agent-instructions/STORYBOOK_DOC_STYLE.md`](./documentation/agent-instructions/STORYBOOK_DOC_STYLE.md).
 
-The Storybook docs page is generated from the types, the stories and `ComponentName.docs.md`, never written by hand. See [`documentation/agent-instructions/STORYBOOK_DOC_STYLE.md`](./documentation/agent-instructions/STORYBOOK_DOC_STYLE.md).
-
 ## Code Style
 
 ### Formatting (Prettier)

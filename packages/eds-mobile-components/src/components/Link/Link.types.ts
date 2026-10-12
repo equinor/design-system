@@ -4,11 +4,6 @@ import { TypographyToken } from "../../styling/tokens";
 
 export type LinkSize = keyof TypographyToken["ui"]["fontFamilySize"];
 
-/**
- * Visual variant of the link.
- * - `standalone`: Used as a standalone element with a separate underline and a proper touch target (default)
- * - `inline`: Used inside a sentence alongside other text, renders as a Text element
- */
 export type LinkVariant = "standalone" | "inline";
 
 export type LinkProps = {
