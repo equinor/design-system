@@ -127,6 +127,10 @@ jobs:
       # workspace, which would mask a stale committed file.
       - name: Check AI component index freshness
         run: pnpm run generate:component-index --check
+      # Same ordering reason as above. Fails when a generated Storybook docs
+      # page no longer matches its types, stories or sidecar.
+      - name: Check component docs freshness
+        run: pnpm run generate:component-docs --check
       # Same ordering reason as above. This step also fails on duplicate ADR
       # numbers, which is the condition it mainly exists to catch.
       - name: Check ADR index freshness
