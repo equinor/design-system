@@ -131,6 +131,13 @@ jobs:
       # numbers, which is the condition it mainly exists to catch.
       - name: Check ADR index freshness
         run: pnpm run generate:adr-index --check
+      # Reads two files, so it runs before the build and fails in seconds.
+      # Only in this job: both its inputs, the /next barrel and the page, sit
+      # under `packages/**` and so are inside the `code` filter. Its companion
+      # breaking-changes-doc-check.yml reads the pull request itself and needs
+      # triggers this workflow does not have, which is why it lives apart.
+      - name: Check breaking changes page coverage
+        run: pnpm run check:breaking-changes-coverage
       # Only reads files, so it runs before the build and fails fast. Scoped
       # by the `mobile` filter, so PRs that touch no mobile files and not the
       # root package.json skip it.
