@@ -24,16 +24,6 @@
       "prerelease": true,
       "prerelease-type": "beta"
     },
-    "packages/eds-data-grid-react": {
-      "release-type": "node",
-      "package-name": "@equinor/eds-data-grid-react",
-      "component": "eds-data-grid-react",
-      "exclude-paths": [
-        "packages/eds-data-grid-react/.storybook",
-        "packages/eds-data-grid-react/src/tests",
-        "packages/eds-data-grid-react/src/stories"
-      ]
-    },
     "packages/eds-icons": {
       "release-type": "node",
       "package-name": "@equinor/eds-icons",
