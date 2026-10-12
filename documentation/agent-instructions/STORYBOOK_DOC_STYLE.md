@@ -6,7 +6,7 @@ It is for anyone writing or changing a component's docs: developers, AI agents a
 
 ## Adding docs to a component
 
-1. Document the `NameProps` type. Give every prop a JSDoc description, add `@default` where it has a default, and list what each fixed value means in the JSDoc of its type.
+1. Document the `NameProps` type. Give every prop a JSDoc description, and add `@default` where it has a default.
 2. Write `Name.stories.tsx`. On web, name the playground story `Introduction`. Add one export for each example, with a caption in `parameters.docs.description.story`. On mobile the stories are example code only.
 3. Create `Name.docs.md` next to the component, on each platform it exists on. The web file has the Summary. Add `aria:` or `docs:` metadata if the component has them.
 4. Run `pnpm run generate:component-docs Name`.
@@ -19,7 +19,7 @@ Everything for a component sits in the folder that holds `Name.tsx`. On mobile t
 
 | File                                                                       | Written by                              | Gives the page                      |
 | -------------------------------------------------------------------------- | --------------------------------------- | ----------------------------------- |
-| `NameProps` type or interface, in any non-test file of the folder          | The developer, along with the component | Features and props                  |
+| `NameProps` type or interface, in any non-test file of the folder          | The developer, along with the component | Props                               |
 | `Name.stories.tsx`                                                         | The developer                           | Examples and captions               |
 | `Name.docs.md`                                                             | A person                                | What code cannot tell us, see below |
 | `Name.figma.tsx` (web)                                                     | The developer                           | The Figma link                      |
@@ -29,19 +29,20 @@ Mobile story files only supply example code. They are excluded from the build an
 
 ## Page structure
 
-Both platforms use the same sections in the same order, and the React Native tab sits on the same page as the React tab.
+Both platforms use the same sections in the same order, and the React Native tab sits on the same page as the React tab. The web tab also shows the first example right after Features.
 
-| Section            | Web                                        | Mobile           | Source                                                       |
-| ------------------ | ------------------------------------------ | ---------------- | ------------------------------------------------------------ |
-| Summary            | Above the tabs, shared                     | Not in the tab   | Hand-written, web file only                                  |
-| Beta callout       | Above the tabs                             | Not in the tab   | Generated                                                    |
-| Links row          | In the tab                                 | In the tab       | Generated                                                    |
-| Features           | Required                                   | Required         | Generated from the props, plus optional hand-written bullets |
-| Usage              | Required                                   | Required         | Install and import generated, snippet hand-written           |
-| Props              | `Props and playground`, with live controls | `Props`, a table | Generated                                                    |
-| Examples           | Required                                   | Required         | The stories file                                             |
-| Accessibility      | Required                                   | Required         | Hand-written                                                 |
-| Related components | Optional                                   | Optional         | Hand-written                                                 |
+| Section            | Web                                        | Mobile           | Source                                             |
+| ------------------ | ------------------------------------------ | ---------------- | -------------------------------------------------- |
+| Summary            | Above the tabs, shared                     | Not in the tab   | Hand-written, web file only                        |
+| Beta callout       | Above the tabs                             | Not in the tab   | Generated                                          |
+| Links row          | In the tab                                 | In the tab       | Generated                                          |
+| Features           | Required                                   | Required         | Hand-written                                       |
+| First example      | After Features                             | Not shown        | The first example in the stories file              |
+| Usage              | Required                                   | Required         | Install and import generated, snippet hand-written |
+| Props              | `Props and playground`, with live controls | `Props`, a table | Generated                                          |
+| Examples           | Required                                   | Required         | The stories file                                   |
+| Accessibility      | Required                                   | Required         | Hand-written                                       |
+| Related components | Optional                                   | Optional         | Hand-written                                       |
 
 ## The hand-written file
 
@@ -57,11 +58,11 @@ docs: inputs/selection_controls
 
 <!-- Notes to the author. Comments never reach the page. -->
 
-What the component is, where it is used, and what to use instead when it does not fit.
+What the component is and where it is used, in at most two sentences.
 
 ## Features
 
-- One bullet for behaviour the props do not show.
+- Three to five short lines on what the component does for you.
 
 ## Usage
 
@@ -78,39 +79,28 @@ What the component is, where it is used, and what to use instead when it does no
 - [`Chip`](…) is the selectable counterpart.
 ````
 
-| Part                                                  | Web                            | Mobile                                       |
-| ----------------------------------------------------- | ------------------------------ | -------------------------------------------- |
-| `aria:`, a W3C URL                                    | Optional                       | Not used                                     |
-| `docs:`, for a docs page shared by several components | Optional                       | Not used                                     |
-| Summary                                               | Required                       | Rejected, it is written once in the web file |
-| Features                                              | Optional, required if no props | Same                                         |
-| Usage, Accessibility                                  | Required                       | Required                                     |
-| Related components                                    | Optional                       | Optional                                     |
+| Part                                                  | Web      | Mobile                                       |
+| ----------------------------------------------------- | -------- | -------------------------------------------- |
+| `aria:`, a W3C URL                                    | Optional | Not used                                     |
+| `docs:`, for a docs page shared by several components | Optional | Not used                                     |
+| Summary                                               | Required | Rejected, it is written once in the web file |
+| Features                                              | Required | Required                                     |
+| Usage, Accessibility                                  | Required | Required                                     |
+| Related components                                    | Optional | Optional                                     |
 
 Any other heading or metadata key fails the generator. Metadata is not content and never renders as a section.
 
 ## Section rules
 
-**Summary.** What the component is, where it is used, and what to use instead when it does not fit. It sits above both tabs, so it must be true on both platforms. Put platform differences in Features or Usage. Required, with no length limit.
+**Summary.** What the component is, where it is used and, if it does not fit every case, what to use instead, in at most two sentences. It sits above both tabs, so it must be true on both platforms. Put anything that differs by platform in Features or Usage. Required.
 
-**Features.** An inventory of the API, not guidance. The generator writes one bullet per prop: fixed values with the default, `children` with its type, and other props with their JSDoc description. Describe each fixed value in the type's JSDoc, one line per value:
-
-```ts
-/**
- * Visual emphasis level.
- * - `low`: Subtle background (canvas) or light border
- * - `medium`: More prominent fill or medium border
- */
-export type BadgeEmphasis = 'low' | 'medium'
-```
-
-Add hand-written bullets only for behaviour the props do not show, such as "Hidden from screen readers by default". At least one bullet is required.
+**Features.** Three to five short lines on what the component does for you, which a reader cannot get from the controls or the props table. Write behaviour and benefits, such as "Follows the density of its parent element", and do not list props or values, and do not explain what a value means. Hand-written and required on both platforms, because the generator cannot know it. Only claim what the code, a story or a test shows.
 
 **Usage.** The smallest correct snippet, without the import. The generator adds the install command and the import.
 
-**Props.** Generated from `NameProps`. Every prop needs a JSDoc description, or the generator fails, and a `@default` tag where it has a default. Props declared in `node_modules`, such as HTML attributes and `ViewProps`, are not listed. Props from a base type in this repo are. With no props of its own, mobile prints "Name has no props of its own" and the Features come from the hand-written file.
+**Props.** Generated from `NameProps`. Every prop needs a JSDoc description, or the generator fails, and a `@default` tag where it has a default. Props declared in `node_modules`, such as HTML attributes and `ViewProps`, are not listed. Props from a base type in this repo are. With no props of its own, mobile prints "Name has no props of its own".
 
-**Examples.** At least one besides the playground, which is web's `Introduction` story. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). Add a caption with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
+**Examples.** At least one besides the playground, which is web's `Introduction` story. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). The first example in the file also appears right after Features, so put the one that shows the component best first. It can show two to four instances, and it has no caption of its own because the Summary and Features lead into it. Add a caption to the examples below with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
 
 **Accessibility.** Cover each topic that applies, with as many bullets as needed:
 
@@ -151,7 +141,7 @@ A component has one design doc across platforms. Add `aria:` only where a W3C pa
 | Required sections present, no unknown sections or metadata keys | Yes                       |                |
 | No Summary in a mobile file                                     | Yes                       |                |
 | `aria:` is a W3C URL, and a `docs:` page exists                 | Yes                       |                |
-| At least one Feature and one Example                            | Yes                       |                |
+| At least one Example                                            | Yes                       |                |
 | Every prop has a JSDoc description                              | Yes                       |                |
 | No en or em dashes in a page                                    | Yes                       |                |
 | Generated pages are up to date                                  | Yes, with `--check` in CI |                |

@@ -1,5 +1,4 @@
 const { Node } = require('ts-morph')
-const { stripQuotes } = require('./text')
 
 const fromLibrary = (node) =>
   node.getSourceFile().getFilePath().includes('/node_modules/')
@@ -21,9 +20,9 @@ function extractProps(declaration) {
       .find((t) => t.getTagName() === 'default')
     const typeNode = decl.getTypeNode()
 
-    // Expand a reference to a local alias (e.g. BadgeTone) into its members.
+    // Expand a reference to a local alias (e.g. BadgeTone) into its members, so
+    // the type column lists the allowed values.
     let resolved = typeNode
-    const valueNotes = {}
     if (Node.isTypeReference(typeNode)) {
       const name = typeNode.getTypeName()
       const local = Node.isIdentifier(name)
@@ -32,21 +31,11 @@ function extractProps(declaration) {
             ?.getDeclarations()
             .find((d) => Node.isTypeAliasDeclaration(d) && !fromLibrary(d))
         : undefined
-      if (local) {
-        resolved = local.getTypeNode()
-        // The alias JSDoc lists what each value means, as `- \`value\`: text`.
-        const aliasDoc = local.getJsDocs()[0]?.getDescription() ?? ''
-        for (const line of aliasDoc.split('\n')) {
-          const note = line.match(/^\s*-\s+`([^`]+)`:\s*(.+)$/)
-          if (note) valueNotes[note[1]] = note[2].trim()
-        }
-      }
+      if (local) resolved = local.getTypeNode()
     }
     const members = Node.isUnionTypeNode(resolved)
       ? resolved.getTypeNodes().map((n) => n.getText().replace(/"/g, "'"))
       : null
-    const allLiterals =
-      members && resolved.getTypeNodes().every((n) => Node.isLiteralTypeNode(n))
 
     props.push({
       name: symbol.getName(),
@@ -54,8 +43,6 @@ function extractProps(declaration) {
       type: members
         ? members.join(' | ')
         : typeNode.getText().replace(/\s+/g, ' '),
-      literals: allLiterals ? members.map(stripQuotes) : null,
-      valueNotes,
       default: defaultTag?.getCommentText()?.trim(),
       description,
     })

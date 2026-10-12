@@ -9,9 +9,7 @@ import MobileDocs from '@equinor/eds-mobile-components/docs/Badge.mdx'
 
 # Badge
 
-Badge labels content with a status, a category or a piece of metadata. Place a badge next to a heading, in a table, or on a list row or card, so readers can see at a glance what the item is.
-
-Badge is non-interactive: it cannot be selected, focused or dismissed. For labels that users select, use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead.
+Badge labels content with a status, a category or a piece of metadata, so readers can see at a glance what an item is. Badge is non-interactive, so use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead for labels that users select.
 
 **Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
@@ -32,10 +30,13 @@ Badge is non-interactive: it cannot be selected, focused or dismissed. For label
 
 ## Features
 
-- Six `tone` values: `neutral` (neutral grey tones), `accent` (brand or action colour), `success` (positive/confirmation), `info` (informational), `warning` (caution/alerts), `danger` (destructive/error). The default is `neutral`.
-- Two `emphasis` values: `low` (canvas background or light border), `medium` (more prominent fill or medium border). The default is `low`.
-- Two `variant` values: `solid` (filled background, no border), `outlined` (border, transparent or canvas background). The default is `solid`.
-- Accepts `ReactNode` as children.
+- Short text for indicating status or priority.
+- Can go before or after other content, as a prefix or a suffix.
+- Can be paired with other components.
+- Several can sit together on one item.
+- Follows the density of its parent element.
+
+<Canvas of={Stories.Tones} />
 
 ## Usage
 
