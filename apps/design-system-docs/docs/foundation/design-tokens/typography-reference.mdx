@@ -1,0 +1,134 @@
+---
+title: Typography token reference
+hide_title: true
+sidebar_label: Token reference
+description: Every typography token, with its CSS custom property and its resolved value in all three densities.
+---
+
+A complete list. If you are choosing a role or a step rather than looking one up, start with
+[Using typography](./typography-usage.mdx). This page is for checking a name or a value.
+
+:::info Generated page
+These tables are generated from the token source. If a value here disagrees with what you see in
+Figma or in the browser, the page is stale, so please say so rather than working around it.
+:::
+
+{/* GEN:token-reference BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+**51 tokens.** 46 size and line-height tokens, which have one value per
+density, and 5 family and weight tokens, which have one value everywhere. The
+**Token** column is the name you pick in Figma and the **CSS custom property** column is the same
+token in code. Both come from the token definition itself, so they cannot drift apart. The
+**Comfortable** column is what you get with no `data-density` attribute set.
+
+## Header
+
+8 steps, `xs` to `4xl`, set in Equinor. Values in px.
+
+| Token                               | CSS custom property                       | Compact | Comfortable | Relaxed |
+| ----------------------------------- | ----------------------------------------- | ------- | ----------- | ------- |
+| `typography.header.xs.font-size`    | `--eds-typography-header-xs-font-size`    | 10      | 12          | 14      |
+| `typography.header.xs.line-height`  | `--eds-typography-header-xs-line-height`  | 12      | 16          | 20      |
+| `typography.header.sm.font-size`    | `--eds-typography-header-sm-font-size`    | 12      | 14          | 16      |
+| `typography.header.sm.line-height`  | `--eds-typography-header-sm-line-height`  | 16      | 20          | 20      |
+| `typography.header.md.font-size`    | `--eds-typography-header-md-font-size`    | 14      | 16          | 18      |
+| `typography.header.md.line-height`  | `--eds-typography-header-md-line-height`  | 20      | 20          | 24      |
+| `typography.header.lg.font-size`    | `--eds-typography-header-lg-font-size`    | 16      | 18          | 21      |
+| `typography.header.lg.line-height`  | `--eds-typography-header-lg-line-height`  | 20      | 24          | 28      |
+| `typography.header.xl.font-size`    | `--eds-typography-header-xl-font-size`    | 18      | 21          | 24      |
+| `typography.header.xl.line-height`  | `--eds-typography-header-xl-line-height`  | 24      | 28          | 32      |
+| `typography.header.2xl.font-size`   | `--eds-typography-header-2xl-font-size`   | 21      | 24          | 28      |
+| `typography.header.2xl.line-height` | `--eds-typography-header-2xl-line-height` | 28      | 32          | 36      |
+| `typography.header.3xl.font-size`   | `--eds-typography-header-3xl-font-size`   | 24      | 28          | 32      |
+| `typography.header.3xl.line-height` | `--eds-typography-header-3xl-line-height` | 32      | 36          | 40      |
+| `typography.header.4xl.font-size`   | `--eds-typography-header-4xl-font-size`   | 28      | 32          | 36      |
+| `typography.header.4xl.line-height` | `--eds-typography-header-4xl-line-height` | 36      | 40          | 44      |
+
+## Label
+
+9 steps, `xs` to `5xl`, set in Inter. Values in px.
+
+| Token                              | CSS custom property                      | Compact | Comfortable | Relaxed |
+| ---------------------------------- | ---------------------------------------- | ------- | ----------- | ------- |
+| `typography.label.xs.font-size`    | `--eds-typography-label-xs-font-size`    | 9       | 10          | 12      |
+| `typography.label.xs.line-height`  | `--eds-typography-label-xs-line-height`  | 12      | 16          | 16      |
+| `typography.label.sm.font-size`    | `--eds-typography-label-sm-font-size`    | 10      | 12          | 14      |
+| `typography.label.sm.line-height`  | `--eds-typography-label-sm-line-height`  | 12      | 16          | 20      |
+| `typography.label.md.font-size`    | `--eds-typography-label-md-font-size`    | 12      | 14          | 16      |
+| `typography.label.md.line-height`  | `--eds-typography-label-md-line-height`  | 16      | 20          | 24      |
+| `typography.label.lg.font-size`    | `--eds-typography-label-lg-font-size`    | 14      | 16          | 18      |
+| `typography.label.lg.line-height`  | `--eds-typography-label-lg-line-height`  | 20      | 24          | 24      |
+| `typography.label.xl.font-size`    | `--eds-typography-label-xl-font-size`    | 16      | 18          | 21      |
+| `typography.label.xl.line-height`  | `--eds-typography-label-xl-line-height`  | 24      | 24          | 28      |
+| `typography.label.2xl.font-size`   | `--eds-typography-label-2xl-font-size`   | 18      | 21          | 24      |
+| `typography.label.2xl.line-height` | `--eds-typography-label-2xl-line-height` | 24      | 28          | 32      |
+| `typography.label.3xl.font-size`   | `--eds-typography-label-3xl-font-size`   | 21      | 24          | 28      |
+| `typography.label.3xl.line-height` | `--eds-typography-label-3xl-line-height` | 28      | 32          | 32      |
+| `typography.label.4xl.font-size`   | `--eds-typography-label-4xl-font-size`   | 24      | 28          | 32      |
+| `typography.label.4xl.line-height` | `--eds-typography-label-4xl-line-height` | 32      | 32          | 36      |
+| `typography.label.5xl.font-size`   | `--eds-typography-label-5xl-font-size`   | 28      | 32          | 37      |
+| `typography.label.5xl.line-height` | `--eds-typography-label-5xl-line-height` | 32      | 36          | 40      |
+
+## Body
+
+6 steps, `sm` to `3xl`, set in Inter. Values in px.
+
+| Token                             | CSS custom property                     | Compact | Comfortable | Relaxed |
+| --------------------------------- | --------------------------------------- | ------- | ----------- | ------- |
+| `typography.body.sm.font-size`    | `--eds-typography-body-sm-font-size`    | 10      | 12          | 14      |
+| `typography.body.sm.line-height`  | `--eds-typography-body-sm-line-height`  | 16      | 20          | 24      |
+| `typography.body.md.font-size`    | `--eds-typography-body-md-font-size`    | 12      | 14          | 16      |
+| `typography.body.md.line-height`  | `--eds-typography-body-md-line-height`  | 20      | 24          | 28      |
+| `typography.body.lg.font-size`    | `--eds-typography-body-lg-font-size`    | 14      | 16          | 18      |
+| `typography.body.lg.line-height`  | `--eds-typography-body-lg-line-height`  | 24      | 28          | 28      |
+| `typography.body.xl.font-size`    | `--eds-typography-body-xl-font-size`    | 16      | 18          | 21      |
+| `typography.body.xl.line-height`  | `--eds-typography-body-xl-line-height`  | 28      | 28          | 32      |
+| `typography.body.2xl.font-size`   | `--eds-typography-body-2xl-font-size`   | 18      | 21          | 24      |
+| `typography.body.2xl.line-height` | `--eds-typography-body-2xl-line-height` | 28      | 32          | 36      |
+| `typography.body.3xl.font-size`   | `--eds-typography-body-3xl-font-size`   | 21      | 24          | 28      |
+| `typography.body.3xl.line-height` | `--eds-typography-body-3xl-line-height` | 32      | 36          | 44      |
+
+## Family and weight
+
+These do not change with density.
+
+| Token                | CSS custom property        | Value   |
+| -------------------- | -------------------------- | ------- |
+| `font-family.header` | `--eds-font-family-header` | Equinor |
+| `font-family.ui`     | `--eds-font-family-ui`     | Inter   |
+| `font-weight.normal` | `--eds-font-weight-normal` | 400     |
+| `font-weight.medium` | `--eds-font-weight-medium` | 500     |
+| `font-weight.bold`   | `--eds-font-weight-bold`   | 700     |
+
+## In TypeScript
+
+The tokens also ship as TypeScript objects, for the places a CSS custom property cannot reach. A
+name segment that starts with a digit becomes a word, and a hyphenated segment is camel-cased, so
+`typography.header.2xl.line-height` is `typography.header.twoXl.lineHeight`.
+
+```ts
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
+
+semantic.typography.label.md.fontSize // 14
+semantic.typography.header.twoXl.lineHeight // 32
+semantic.fontWeight.medium // 500
+```
+
+Three differences from the CSS form, all easy to miss:
+
+- **The specifier carries the file extension.** `./next/*` is a wildcard onto the source tree, so
+  `next/ts/semantic/light` does not resolve and `next/ts/semantic/light.ts` does. The `next/`
+  paths are temporary for the beta line.
+- **The values are unitless numbers, not lengths.** `14`, not `14px`. Add the unit yourself.
+- **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the
+  densities are separate modules and you pick one:
+
+```ts
+import { density } from '@equinor/eds-tokens/next/ts/density/compact.ts'
+
+density.typography.label.md.fontSize // 12
+```
+
+The family and weight tokens are only in `semantic`, because they do not change with density.
+
+{/* GEN:token-reference END */}

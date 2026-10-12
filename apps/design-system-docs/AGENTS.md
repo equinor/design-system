@@ -115,9 +115,21 @@ Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
 `--eds-corner-radius-*`, `--eds-elevation-*`. Never reference primitives
 (`--eds-primitives-*`, `--eds-light-*`/`--eds-dark-*`, palette steps like
 `--eds-accent-9`), the density layer (`--eds-density-*`), or legacy
-`--eds-color-*` names. There is one sanctioned exception: the semantic
+`--eds-color-*` names. There are two sanctioned exceptions: the semantic
 typography bridge in `theme-variables.css` (`:root:root` re-declarations
-resolving the header-* font-size collision below).
+resolving the header-* font-size collision below), and the generated
+`src/css/pending-typography-tokens.css`.
+
+**Pending typography tokens.** The typography pages document the next token
+release, which is decided in Tokens Studio but not in `packages/eds-tokens`
+yet. `scripts/pending-typography-tokens.mjs` records which primitive each
+typography token picks in that release, and `pnpm generate:typography-reference`
+reads it for the tables and writes `src/css/pending-typography-tokens.css`,
+which declares the `label`, `body` and new weight tokens, and the new header
+line heights, the way the bundle will. That sheet references primitives and the
+density layer because it stands in for the bundle; site CSS still uses only
+the semantic names. Never edit the sheet by hand. When the release merges, the
+generator fails until both files and the sheet's import are deleted.
 
 **Elevation is a composite token — use it as one.** `--eds-elevation-low` and
 `--eds-elevation-high` are `boxShadow` composites in the Tokens Studio
@@ -134,9 +146,11 @@ Both token bundles load (see imports in `theme-variables.css`):
    `@equinor/eds-tokens/next/css/variables.css` via a webpack alias to the
    committed `packages/eds-tokens/src/tokens/css/variables.css`. Names:
    `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
-   `--eds-corner-radius-*`, `--eds-typography-{ui,header}-*`,
-   `--eds-font-family-*`, `--eds-font-weight-*` (max weight `bolder` = 500),
-   `--eds-elevation-{low,high}`.
+   `--eds-corner-radius-*`, `--eds-typography-{header,label,body}-*`,
+   `--eds-font-family-*`, `--eds-font-weight-{normal,medium,bold}`,
+   `--eds-elevation-{low,high}`. Until the next token release merges, the
+   `label`, `body`, `medium` and `bold` names come from the pending sheet
+   described above.
 2. **Legacy bundle** (`@equinor/eds-tokens/css/variables`) — retained ONLY for
    `--eds-container-space-*` and the embedded `/next` component previews,
    which consume legacy names. Do not use legacy `--eds-color-*` names in
@@ -167,7 +181,7 @@ emoji — are absent from _all_ of Inter's subsets, so they render from a
 fallback font either way.
 
 Weights 400, 500, 600 and 700 are all loaded. 400 and 500 are the site's own
-(`--docs-font-weight-emphasis` is `bolder` = 500); 600 and 700 back Infima's
+(`--docs-font-weight-emphasis` is `medium` = 500); 600 and 700 back Infima's
 `--ifm-font-weight-{semibold,bold}`, and `<strong>` really does compute to 700.
 Do not trim to 400+500 on the strength of the "never 600/700" rule in the root
 AGENTS.md — that rule is about EDS component CSS, and dropping them here would
@@ -178,6 +192,9 @@ with different values, and webpack CSS ordering lets the legacy bundle win.
 The semantic typography bridge in `theme-variables.css` (`:root:root`
 specificity 0,2,0) pins the semantic names to the Tokens Studio values, so
 site CSS consumes the semantic `--eds-typography-header-*` names normally.
+The bridge also covers `.density-switch__scope[data-density]`, because the
+legacy bundle declares the same names under `[data-density='comfortable']`,
+which would otherwise win inside a `DensitySwitch` set to Comfortable.
 Do not remove the bridge and do not reference `--eds-density-*` directly.
 
 Dark mode: `src/clientModules/syncColorScheme.ts` mirrors Docusaurus's
@@ -196,11 +213,11 @@ them. Never hardcode font sizes/weights/line-heights in component CSS.
 | h2 / sections     | `--docs-font-section-*`                              | `header-3xl` 24/32                                                                 |
 | h3 / sub-sections | `--docs-font-subsection-*`                           | `header-xl` 21/24                                                                  |
 | Card titles / h4  | `--docs-font-card-title-*`                           | `header-lg` 18/24                                                                  |
-| Lead paragraphs   | `--docs-font-lead-size`                              | `ui-xl` 18px                                                                       |
-| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `ui-lg` 16px, lh 1.6 (site-local)                                                  |
-| Secondary text    | `--docs-font-body-sm-*`                              | `ui-md` 14/20                                                                      |
-| Captions/badges   | `--docs-font-caption-*`                              | `ui-sm` 12/16                                                                      |
-| Emphasis weight   | `--docs-font-weight-emphasis`                        | `bolder` = 500 (never 600/700)                                                     |
+| Lead paragraphs   | `--docs-font-lead-size`                              | `body-xl` 18px                                                                     |
+| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `body-lg` 16px, lh 1.6 (site-local)                                                |
+| Secondary text    | `--docs-font-body-sm-*`                              | `label-md` 14/20                                                                   |
+| Captions/badges   | `--docs-font-caption-*`                              | `label-sm` 12/16                                                                   |
+| Emphasis weight   | `--docs-font-weight-emphasis`                        | `medium` = 500 (never 600/700)                                                     |
 
 Docusaurus re-declares heading size vars **on the markdown heading elements**
 (`.markdown h1:first-child`, `.markdown > h2/h3`), so overrides must be
@@ -231,8 +248,8 @@ MDX docs use these without imports; React pages import them from
   (previews import real components from `@equinor/eds-core-react/next`)
 - `StorybookEmbed` — iframe of the deployed Storybook; `showLink` derives
   the View-in-Storybook link from the `id` (never hand-write those links).
-  Now only used for Foundation stories that have no registry entry
-  (`foundation/design-tokens/typography.md`); component docs use StoryCanvas.
+  No current-version page uses it any more; the frozen 2.0.0-beta typography
+  page still does. Component docs use StoryCanvas.
 - `StoryCanvas` — **what every component doc uses**: renders actual CSF story
   files natively via `composeStories()` (`src/components/StoryCanvas/`).
   Registry in `stories.ts` (one namespace import + one `composeStories` entry

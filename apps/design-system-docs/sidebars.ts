@@ -117,7 +117,19 @@ const sidebars: SidebarsConfig = {
             'foundation/design-tokens/spacing-reference',
           ],
         },
-        'foundation/design-tokens/typography',
+        {
+          type: 'category',
+          label: 'Typography',
+          link: {
+            type: 'doc',
+            id: 'foundation/design-tokens/typography',
+          },
+          items: [
+            'foundation/design-tokens/typography-scale',
+            'foundation/design-tokens/typography-usage',
+            'foundation/design-tokens/typography-reference',
+          ],
+        },
       ],
     },
     'foundation/datavisualisation',

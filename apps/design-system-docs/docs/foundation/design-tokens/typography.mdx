@@ -1,0 +1,294 @@
+---
+title: Typography
+hide_title: true
+sidebar_label: Overview
+description: Typography in EDS has three roles on two typefaces. You pick a role by what the text does and a step by how large it should be, and density adjusts the size for you.
+---
+
+import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
+import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
+
+These pages document the **EDS 2.0** typography tokens. If you are on EDS 1.x or on 2.0.0-beta,
+the token names have changed, and so has the way line-height and weight work, so please start with
+[coming from an earlier version](#coming-from-an-earlier-version).
+
+Here is one line of interface text, with every property set by a token:
+
+<TokenAnatomy
+  mode="typography"
+  caption="Comfortable density. Every value on this diagram is read back from the browser, so it follows the density it is rendered in."
+  maxWidth={320}
+  bindings={{
+    fontFamily: { token: 'font-family.ui', label: 'family' },
+    fontWeight: { token: 'font-weight.normal', label: 'weight' },
+    fontSize: { token: 'typography.label.md.font-size', label: 'size' },
+    lineHeight: {
+      token: 'typography.label.md.line-height',
+      label: 'line height',
+    },
+  }}
+  style={{ color: 'var(--eds-text-primary)' }}
+>
+  Pipeline pressure
+</TokenAnatomy>
+
+```css
+.label {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  font-weight: var(--eds-font-weight-normal);
+}
+```
+
+A step is always a pair: a font size and the line height that goes with it. Set both, every time.
+Text that gets a font size without its line height inherits whatever line height was set above it,
+and the rhythm of everything below it breaks.
+
+## Three roles
+
+Every piece of text takes one of three roles. Two typefaces cover them: Equinor for headers, and
+Inter for everything else.
+
+{/* GEN:typography-roles BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Role                | Typeface | Steps         | Weights                    | Use it for                                                                           |
+| ------------------- | -------- | ------------- | -------------------------- | ------------------------------------------------------------------------------------ |
+| `typography.header` | Equinor  | `xs` to `4xl` | `medium`                   | titles: the headings of pages and sections                                           |
+| `typography.label`  | Inter    | `xs` to `5xl` | `normal`, `medium`, `bold` | single-line functional text: buttons, navigation, table cells, form labels, captions |
+| `typography.body`   | Inter    | `sm` to `3xl` | `normal`, `bold`           | running text that wraps: paragraphs and descriptions                                 |
+
+{/* GEN:typography-roles END */}
+
+### Which role?
+
+Ask what the text is, and whether it wraps:
+
+- **It is a title**: `header`. The heading of a page or a section.
+- **It stays on one line**: `label`. A button, a menu item, a table cell, a form label.
+- **It wraps, or could**: `body`. A paragraph, a description, a message that runs to sentences.
+
+We name the two Inter roles by what the text does because that is how people choose text. When we
+tested the earlier names with designers, most of them hesitated over which role to use, and `ui`
+was read as "text inside a component" rather than as all functional text. Asking whether the text
+wraps settles it.
+
+`body` uses the same font sizes as `label`. What it adds is line height: at least one and a half
+times the font size, so the eye can find the next line in a block of text.
+
+## The steps
+
+Each role has its own range of steps. Comfortable values, as font size / line height in px:
+
+{/* GEN:typography-steps BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Step  | `header` | `label` | `body`  |
+| ----- | -------- | ------- | ------- |
+| `xs`  | 12 / 16  | 10 / 16 | –       |
+| `sm`  | 14 / 20  | 12 / 16 | 12 / 20 |
+| `md`  | 16 / 20  | 14 / 20 | 14 / 24 |
+| `lg`  | 18 / 24  | 16 / 24 | 16 / 28 |
+| `xl`  | 21 / 28  | 18 / 24 | 18 / 28 |
+| `2xl` | 24 / 32  | 21 / 28 | 21 / 32 |
+| `3xl` | 28 / 36  | 24 / 32 | 24 / 36 |
+| `4xl` | 32 / 40  | 28 / 32 | –       |
+| `5xl` | –        | 32 / 36 | –       |
+
+{/* GEN:typography-steps END */}
+
+A dash means the role has no such step. Every value moves with [density](#density) and the names
+stay put, so you can pick a name once and trust it to behave. [The type scale](./typography-scale.mdx)
+lists every value in all three densities. In running text we shorten the names, so
+`typography.label.md` becomes `label.md`.
+
+Equinor's scale runs one step ahead of Inter's, so a header is larger than the label with the same
+step name. [The type scale](./typography-scale.mdx#two-typefaces-one-step-apart) shows the two
+side by side.
+
+## Weight
+
+Weight is set separately from size. A text style combines a step with one of three weights:
+
+{/* GEN:typography-weights BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Token                | CSS custom property        | Value | Use it for                                                                  |
+| -------------------- | -------------------------- | ----- | --------------------------------------------------------------------------- |
+| `font-weight.normal` | `--eds-font-weight-normal` | 400   | the default for label and body text                                         |
+| `font-weight.medium` | `--eds-font-weight-medium` | 500   | every header, and label text that needs emphasis                            |
+| `font-weight.bold`   | `--eds-font-weight-bold`   | 700   | strong emphasis in label and body text, and `<strong>` and `<b>` on the web |
+
+{/* GEN:typography-weights END */}
+
+Which weights a role uses is fixed:
+
+- **Header**: always `medium`, at every size.
+- **Label**: `normal` by default, `medium` for emphasis, `bold` for strong emphasis.
+- **Body**: `normal` by default, `bold` for emphasis.
+
+On the web, text in `<strong>` or `<b>` is set in `bold` wherever it appears. `<em>` and `<i>` set
+no weight: they keep the weight of the text around them and turn italic.
+
+:::note Weight 400 has three names
+They all mean the same weight. The token is `font-weight.normal`, which is what you write in code.
+The Figma text styles call it `default`, as in `label/md/default`, and Figma's font picker shows the
+Inter weight as Regular.
+:::
+
+## Typefaces
+
+{/* GEN:typography-families BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Token                | CSS custom property        | Typeface | Used by            |
+| -------------------- | -------------------------- | -------- | ------------------ |
+| `font-family.header` | `--eds-font-family-header` | Equinor  | `header`           |
+| `font-family.ui`     | `--eds-font-family-ui`     | Inter    | `label` and `body` |
+
+{/* GEN:typography-families END */}
+
+`font-family.ui` names the Inter family rather than a role. Both `label` and `body` use it.
+
+### Loading the fonts
+
+Load both families, or text falls back to a generic sans-serif. The EDS variable font stylesheet
+includes Equinor and Inter:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css"
+/>
+```
+
+:::warning `equinor-font.css` is not enough
+The older `equinor-font.css` stylesheet only includes Equinor. With it alone, every `label` and
+`body` style, which is most of an interface, falls back to a generic sans-serif without any error.
+:::
+
+## Density
+
+One attribute resizes the interface. It moves type size and line height together, along with
+spacing, so the proportions you designed are kept:
+
+```html
+<div data-density="compact">…</div>
+```
+
+Compact takes the size and line height of the next smaller step, and Relaxed the next larger. So a
+`label.md` in Compact is set like a `label.sm` in Comfortable. Switch the density below and watch
+the values change while the token names stay the same:
+
+<DensitySwitch>
+
+<TokenAnatomy
+  mode="typography"
+  caption="The same four tokens at the density selected above."
+  maxWidth={320}
+  bindings={{
+    fontFamily: { token: 'font-family.ui', label: 'family' },
+    fontWeight: { token: 'font-weight.normal', label: 'weight' },
+    fontSize: { token: 'typography.label.md.font-size', label: 'size' },
+    lineHeight: {
+      token: 'typography.label.md.line-height',
+      label: 'line height',
+    },
+  }}
+  style={{ color: 'var(--eds-text-primary)' }}
+>
+  Pipeline pressure
+</TokenAnatomy>
+
+</DensitySwitch>
+
+Comfortable is the default, so setting nothing gives you Comfortable.
+[Density on the spacing page](./spacing.mdx#density) explains which density to use where, and
+[how density works](./typography-scale.mdx#how-density-works) has the full mapping for type.
+
+:::note No EDS component uses these tokens yet
+The EDS 2.0 (`/next`) components, and the element styles in `elements.css`, still use the
+2.0.0-beta typography names. They will be replaced as the components move to these tokens. Until
+then, the text in a component will not always match these pages. In the Figma component library,
+almost all text uses `label` styles, and no component uses `header` or `body` yet.
+:::
+
+## Principles
+
+Four principles sit underneath every decision about size, weight and line height.
+
+### Legibility comes first
+
+When it comes to typography, ensuring safety is our main goal, and we make sure of it through
+legibility. Anything that compromises a user's ability to read accurately and quickly is a
+regression, no matter how much it improves on other axes.
+
+### We build from the inside out
+
+We build from our minimal unit, the text, and from there we define the proportions for padding,
+line height and gaps. Line heights come from the same scale as spacing, so text and layout share
+one rhythm, and a component's height follows from its text and padding rather than being set on its
+own.
+
+### Visual alignment over metric alignment
+
+Our metrics serve visual harmony. A consistent visual rhythm makes an interface easier to use, and
+when the numbers and the eye disagree, the eye wins.
+
+### A balance between flexibility and rigidity
+
+We aim for a set of options that avoids decision paralysis but still gives teams enough freedom to
+express their specific needs. The system is opinionated where consistency matters, and open where
+context varies.
+
+## Coming from an earlier version
+
+### From EDS 1.x
+
+Re-pick each piece of text with [which role](#which-role) instead of looking for its old size on
+the new scale. The question asks what the text does, so it gives the same answer on every page,
+whatever the old layout used.
+
+### From 2.0.0-beta
+
+The 2.0.0-beta typography had one Inter role, `ui-body`, with two line heights per step, and weight,
+tracking and baseline trim per step as well. EDS 2.0 splits that role in two and moves weight out of
+the size tokens:
+
+| 2.0.0-beta                                                                            | EDS 2.0                                                             |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `--eds-typography-ui-body-{size}-font-size` with `-line-height-squished`, for UI text | `--eds-typography-label-{step}-font-size` and `-line-height`        |
+| `--eds-typography-ui-body-{size}-font-size` with `-line-height-default`, for prose    | `--eds-typography-body-{step}-font-size` and `-line-height`         |
+| `--eds-typography-header-{size}-font-size` and `-line-height-*`                       | `--eds-typography-header-{step}-font-size` and `-line-height`       |
+| `--eds-typography-header-font-family`, `--eds-typography-ui-body-font-family`         | `--eds-font-family-header`, `--eds-font-family-ui`                  |
+| `--eds-typography-{family}-{size}-font-weight-normal`                                 | `--eds-font-weight-normal`                                          |
+| `--eds-typography-{family}-{size}-font-weight-bolder`                                 | `--eds-font-weight-medium`, the same weight                         |
+| `--eds-typography-{family}-{size}-font-weight-lighter`                                | none. The lighter weight is gone, so use `--eds-font-weight-normal` |
+| `--eds-typography-{family}-{size}-tracking-*`                                         | none. Letter spacing is the typeface's own, with no token           |
+| `.eds-heading-bold`, `.eds-heading-light`                                             | none. Headers have one weight                                       |
+| `data-density="spacious"`, or no attribute                                            | no attribute, which gives Comfortable                               |
+| `data-density="comfortable"`                                                          | `data-density="compact"`                                            |
+
+For `ui-body`, the step names carry over, and the Comfortable sizes are the 2.0.0-beta spacious
+sizes rounded to whole pixels, up to `5xl`. There is no `6xl`. The density names shifted the same
+way for spacing, so [the warning on the spacing page](./spacing.mdx#density) applies here too.
+
+Three other things changed that no token mapping shows:
+
+- **There is no baseline trim.** 2.0.0-beta trimmed multi-line text to the baseline with
+  `text-box`. EDS 2.0 does not trim: a line of text is as tall as its line height, in Figma and in
+  code. [Text trimming](./typography-scale.mdx#no-text-trimming) explains why.
+- **Weight no longer changes with size.** In 2.0.0-beta each step had its own weights. Now a role
+  has a fixed set, and a large header uses the same `medium` as a small one.
+- **The Figma Typography component is gone.** Text is set with text styles, such as
+  `label/md/default`, which you can find with their sizes in the Figma style list.
+
+Earlier builds of these tokens, before the EDS 2.0 roles, named the Inter role `ui` and had
+`bolder` and `lighter` weights. `ui` is now `label`, with the same values, or `body` for text that
+wraps. `bolder` is now `medium`, at the same weight, and `lighter` is removed.
+
+## Where to go next
+
+- [The type scale](./typography-scale.mdx): the scales under the names, where line heights come
+  from, and how density maps onto them.
+- [Using typography](./typography-usage.mdx): which role and step to use, worked examples, and the
+  mistakes to avoid.
+- [Token reference](./typography-reference.mdx): every token and every value, in all three
+  densities.

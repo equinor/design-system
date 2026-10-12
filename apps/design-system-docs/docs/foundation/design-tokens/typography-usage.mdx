@@ -1,0 +1,207 @@
+---
+title: Using typography
+hide_title: true
+sidebar_label: Using typography
+description: Which role to use per case, how to build hierarchy, a worked example with the tokens annotated, and the mistakes that survive review.
+---
+
+import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
+
+[Overview](./typography.mdx) gives you the question to pick a role with. This page turns it into
+specific answers, shows the tokens on a worked example, and lists what tends to go wrong.
+
+## Decision table
+
+If your case is not here, ask whether the text wraps, and the nearest row is usually right.
+
+| You are setting                                          | Use      | Why                                                               |
+| -------------------------------------------------------- | -------- | ----------------------------------------------------------------- |
+| the text in a button, tab or menu item                   | `label`  | one line, and it does a job                                       |
+| a form label                                             | `label`  | one line, naming the field below it                               |
+| a table cell                                             | `label`  | and Compact density for a dense table, rather than a smaller step |
+| a caption or a chart label                               | `label`  | short and functional, even when it sits under running text        |
+| metadata, such as a date or a count                      | `label`  | with `text.secondary` for colour, rather than a smaller step      |
+| a paragraph                                              | `body`   | it wraps                                                          |
+| a description in a dialog or a panel                     | `body`   | it can wrap, even when it is short today                          |
+| a message that runs to sentences, such as an empty state | `body`   | it is read rather than scanned                                    |
+| the title of a page or a section                         | `header` | it names what follows, and it owns its line                       |
+
+{/* PENDING equinor/design-system#5517 open question: titles inside components, such as a card
+title. A medium label step, or a header step? The Figma library sets the Cards title in the small
+medium label style today. Add a row once decided. */}
+
+## Always set the pair
+
+A step is two tokens, and they go together. Take the font size and the line height from the same
+role and the same step:
+
+```css
+.caption {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+}
+```
+
+Leave out the line height and the text inherits one from its parent. Inside a paragraph, that is
+the paragraph's line height, so a caption ends up with the leading of running text. Mixing steps,
+such as a `label.sm` size with a `label.md` line height, breaks the rhythm in the same way, just less
+visibly.
+
+## Building hierarchy
+
+Reach for size first, then weight, then colour, and change as little as you need to:
+
+1. **Size**, one step at a time. Neighbouring steps are close on purpose.
+2. **Weight**, with `medium` in a label. `bold` is for strong emphasis, so keep it rare.
+3. **Colour**, with `text.secondary` for text that matters less.
+
+Here is a row in a list of wells, with three levels of text:
+
+<DensitySwitch>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--eds-spacing-xs)',
+    maxWidth: 420,
+    padding: 'var(--eds-spacing-md)',
+    border: '1px solid var(--eds-border-non-interactive-neutral-default)',
+    borderRadius: 'var(--eds-corner-radius-rounded)',
+    background: 'var(--eds-background-surface)',
+    color: 'var(--eds-text-primary)',
+    fontFamily: 'var(--eds-font-family-ui)',
+  }}
+>
+  <span
+    style={{
+      fontSize: 'var(--eds-typography-label-lg-font-size)',
+      lineHeight: 'var(--eds-typography-label-lg-line-height)',
+      fontWeight: 'var(--eds-font-weight-medium)',
+    }}
+  >
+    31/2-A-14
+  </span>
+  <span
+    style={{
+      fontSize: 'var(--eds-typography-body-md-font-size)',
+      lineHeight: 'var(--eds-typography-body-md-line-height)',
+      fontWeight: 'var(--eds-font-weight-normal)',
+    }}
+  >
+    Producing. Pressure has been within range since the valve on the north manifold was
+    replaced.
+  </span>
+  <span
+    style={{
+      fontSize: 'var(--eds-typography-label-sm-font-size)',
+      lineHeight: 'var(--eds-typography-label-sm-line-height)',
+      fontWeight: 'var(--eds-font-weight-normal)',
+      color: 'var(--eds-text-secondary)',
+    }}
+  >
+    Inspected two weeks ago
+  </span>
+</div>
+
+</DensitySwitch>
+
+```css
+.well-name {
+  font-size: var(--eds-typography-label-lg-font-size);
+  line-height: var(--eds-typography-label-lg-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+.well-status {
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+}
+.well-inspected {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+```
+
+The name and the date stay on one line, so they are `label`. The status can wrap, so it is `body`,
+even though it is the middle level. Role follows what the text does, and hierarchy follows from
+size, weight and colour.
+
+{/* PENDING equinor/design-system#5502: the h1 to h6 mapping, and the spacing steps for flow
+spacing above headings and paragraphs. Candidate in Figma (Foundation, node 54:808):
+h1 header.4xl, h2 header.3xl, h3 header.2xl, h4 header.xl, h5 header.lg, h6 header.md;
+ingress body.xl, body text body.lg. Add a Headings section here once decided. */}
+
+## Running text
+
+Anything that wraps is `body`, and its line height is set for reading. Keep each line between 55
+and 80 characters, including spaces. Shorter lines make the eye jump back too often, and longer
+lines make it hard to find the start of the next one.
+
+## What our components use
+
+In the Figma component library, almost all text uses `label` styles, mostly `label.md` and
+`label.sm`. No component uses `header` or `body`: those are for the page around the components,
+which is where most of the scale above `label.lg` belongs.
+
+In code, no EDS 2.0 component reads these tokens yet. The `/next` components still use the
+2.0.0-beta typography names, and they will move to these tokens.
+
+## Mistakes that survive review
+
+These look right on screen, which is why they get through.
+
+- **Binding the family one layer too low.** In Figma, bind `font-family.ui` or
+  `font-family.header`, not `family/ui` from the hidden font collection. The value is the same
+  today, but the hidden layer is internal and can change without notice.
+- **Binding line height to a spacing token.** Line heights resolve to the same values as spacing, so
+  a spacing token in the line-height field looks correct. It stops being correct the day either
+  scale changes. Use the line height of the step you set the size from.
+- **Skipping a library update after a rename.** When a style or variable is renamed, Figma brings
+  in the new one and keeps the old one bound where it was used. Text on an old name still renders,
+  but it no longer follows the system. Accept the update and rebind.
+- **Setting a font size alone in code.** The text inherits a line height from its parent and looks
+  close enough until it wraps, or sits next to something that set the pair.
+
+## Accessibility
+
+- **The smallest step is for supplementary text.** `label.xs` is the smallest step, and Compact
+  makes it smaller still. Use it for text a user does not need in order to complete a task, never
+  for primary content.
+- **Text must survive the user's own spacing.** WCAG 2.1 success criterion 1.4.12 asks that content
+  still works when someone increases line height and the spacing between letters, words and
+  paragraphs. Components
+  must not clip or overlap text when that happens, whichever role the text uses.
+- **Offer a way back from Compact.** If you use Compact for a whole product, give users a way to
+  switch to Comfortable. Smaller default text should not be a one-way door.
+- **Do not rely on weight alone.** Pair a change of weight with size, position or colour, so the
+  hierarchy is clear to someone who cannot see the difference in weight.
+
+## Do's and Don'ts
+
+:::info **Do**
+
+- Ask whether the text wraps, and pick `label` or `body` from the answer
+- Take the font size and line height from the same step
+- Use sentence case for headers and labels, capitalising only the first word
+- Let density resize text, with one attribute on a wrapper
+- Use `text.secondary` to make text matter less, before making it smaller
+
+:::
+
+:::danger **Don't**
+
+- Wrap the text of a button or a chip over several lines. Shorten it instead
+- Use `header` for a label that happens to be large. A header names what follows it
+- Pick a smaller step to fit a dense view. That reimplements Compact and drifts from every other
+  dense view in the product
+- Mix typefaces within one piece of UI. Equinor is for headers, Inter for everything else
+- Set font weights by number. Use the three weight tokens
+
+:::
+
+## Where to go next
+
+- [Token reference](./typography-reference.mdx): every token and every value, in all three densities.
+- [The type scale](./typography-scale.mdx): why the steps are these sizes, and how density maps onto
+  them.
