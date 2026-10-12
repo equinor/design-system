@@ -44,24 +44,24 @@
   );
 
   /* Lead / subtitle paragraphs */
-  --docs-font-lead-size: var(--eds-typography-ui-xl-font-size);
+  --docs-font-lead-size: var(--eds-typography-label-xl-font-size);
 
   /* Body prose */
-  --docs-font-body-size: var(--eds-typography-ui-lg-font-size);
+  --docs-font-body-size: var(--eds-typography-label-lg-font-size);
 
   /* Secondary text — card descriptions, UI labels */
-  --docs-font-body-sm-size: var(--eds-typography-ui-md-font-size);
-  --docs-font-body-sm-line-height: var(--eds-typography-ui-md-line-height);
+  --docs-font-body-sm-size: var(--eds-typography-label-md-font-size);
+  --docs-font-body-sm-line-height: var(--eds-typography-label-md-line-height);
 
   /* Caption — badges, footnotes, copyright */
-  --docs-font-caption-size: var(--eds-typography-ui-sm-font-size);
-  --docs-font-caption-line-height: var(--eds-typography-ui-sm-line-height);
+  --docs-font-caption-size: var(--eds-typography-label-sm-font-size);
+  --docs-font-caption-line-height: var(--eds-typography-label-sm-line-height);
 
   /* Long-form prose leading (site-local: token line-heights are UI-tuned) */
   --docs-prose-line-height: 1.6;
 
   /* Emphasis weight — headings, buttons, labels */
-  --docs-font-weight-emphasis: var(--eds-font-weight-bolder);
+  --docs-font-weight-emphasis: var(--eds-font-weight-medium);
 
   /* ------------------------------------------------------------------
    * Card recipe — from the EDS IllustrativeCard spec (Figma Core
@@ -77,10 +77,10 @@
   --docs-card-padding: var(--eds-spacing-sm);
   --docs-card-gap: var(--eds-spacing-4xs);
   --docs-card-hover-shadow: var(--eds-elevation-low);
-  --docs-card-title-size: var(--eds-typography-ui-md-font-size);
-  --docs-card-title-line-height: var(--eds-typography-ui-md-line-height);
-  --docs-card-text-size: var(--eds-typography-ui-sm-font-size);
-  --docs-card-text-line-height: var(--eds-typography-ui-sm-line-height);
+  --docs-card-title-size: var(--eds-typography-label-md-font-size);
+  --docs-card-title-line-height: var(--eds-typography-label-md-line-height);
+  --docs-card-text-size: var(--eds-typography-label-sm-font-size);
+  --docs-card-text-line-height: var(--eds-typography-label-sm-line-height);
   --docs-hero-space-block: 5rem;
   --docs-hero-min-height: 27rem;
   --docs-section-space-block: 3rem;
