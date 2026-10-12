@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 26
+Records: 27
 
 | ADR | Title | Scope | Status | Date | Note |
 | --- | ----- | ----- | ------ | ---- | ---- |
