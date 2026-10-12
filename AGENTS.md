@@ -86,6 +86,7 @@ pnpm --filter @equinor/eds-mobile-components run lint  # Lint eds-mobile-compone
 pnpm --filter @equinor/mobile-storybook run lint       # Lint mobile-storybook with its own config
 
 pnpm run test:core-react          # Run eds-core-react tests
+pnpm run test:scripts             # Run the root scripts/ tests (node --test, no jest)
 pnpm run test:watch:core-react    # Watch mode
 
 # Run a single test file (from package directory)
