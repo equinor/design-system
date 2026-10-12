@@ -2,9 +2,16 @@
 
 <!-- This summary is shown above both the React and React Native tabs. Write it so it is true on both platforms, and put anything that differs by platform in Features or Usage. -->
 
-Badge labels content with a status, a category or a piece of metadata. Place a badge next to a heading, in a table, or on a list row or card, so readers can see at a glance what the item is.
+Badge labels content with a status, a category or a piece of metadata, so readers can see at a glance what an item is. Badge is non-interactive, so use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead for labels that users select.
 
-Badge is non-interactive: it cannot be selected, focused or dismissed. For labels that users select, use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead.
+## Features
+
+<!-- Three to five short lines on what the component does for you. Do not repeat the controls. -->
+
+- Six tones cover the status range, from neutral to danger.
+- Solid or outlined, so a badge stays readable on plain and coloured backgrounds.
+- Sits inline with text, in table columns and in groups on one item.
+- Follows the density of its parent element.
 
 ## Usage
 

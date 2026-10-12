@@ -1,3 +1,12 @@
+## Features
+
+<!-- Three to five short lines on what the component does for you. Do not repeat the props table. -->
+
+- Six tones cover the status range, from neutral to danger.
+- Solid or outlined, so a badge stays readable on plain and coloured backgrounds.
+- Accepts text or a number, which suits status labels and counts.
+- Truncates to a single line.
+
 ## Usage
 
 ```tsx

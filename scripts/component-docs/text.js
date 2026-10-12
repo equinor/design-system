@@ -1,5 +1,3 @@
-const stripQuotes = (s) => s.replace(/^['"]|['"]$/g, '')
-
 // "InlineWithText" becomes "Inline with text".
 const humanise = (name) => {
   const words = name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase()
@@ -17,4 +15,4 @@ const dedent = (text) => {
   return lines.map((l) => l.slice(indent)).join('\n')
 }
 
-module.exports = { stripQuotes, humanise, dedent }
+module.exports = { humanise, dedent }
