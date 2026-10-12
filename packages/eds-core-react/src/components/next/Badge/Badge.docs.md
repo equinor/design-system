@@ -8,9 +8,10 @@ Badge labels content with a status, a category or a piece of metadata, so reader
 
 <!-- Three to five short lines on what the component does for you. Do not repeat the controls. -->
 
-- Six tones cover the status range, from neutral to danger.
-- Solid or outlined, so a badge stays readable on plain and coloured backgrounds.
-- Sits inline with text, in table columns and in groups on one item.
+- Short text for indicating status or priority.
+- Can go before or after other content, as a prefix or a suffix.
+- Can be paired with other components.
+- Several can sit together on one item.
 - Follows the density of its parent element.
 
 ## Usage

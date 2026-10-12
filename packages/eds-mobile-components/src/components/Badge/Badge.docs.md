@@ -2,10 +2,10 @@
 
 <!-- Three to five short lines on what the component does for you. Do not repeat the props table. -->
 
-- Six tones cover the status range, from neutral to danger.
-- Solid or outlined, so a badge stays readable on plain and coloured backgrounds.
-- Accepts text or a number, which suits status labels and counts.
+- Short text or a number for indicating status or a count.
+- Can sit on the trailing edge of a row or card, next to other components.
 - Truncates to a single line.
+- Solid and outlined badges are the same size, so switching between them does not shift the layout.
 
 ## Usage
 
