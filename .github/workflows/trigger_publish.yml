@@ -295,8 +295,9 @@ jobs:
   # dependency pointing at a version that is not on npm.
   #
   # Skipped when a stable core-react release is already dispatching the same
-  # workflow above, so the two never race. publish-core is a no-op in that
-  # case regardless: pnpm publish skips a version the registry already has.
+  # workflow above, so the two never race. In the utils-only case,
+  # publish-core is a no-op because pnpm publish skips a version the registry
+  # already has.
   # Running with environment=production means a utils-only release also
   # redeploys the production Storybook and purges the CDN. That is the same
   # content main would deploy anyway, and keeping the inputs identical to the
@@ -610,4 +611,4 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "💡 **Note:** This workflow triggers publish workflows for changed packages. Check individual publish workflow runs for actual publishing status." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📝 **eds-utils** is published by the publish-utils job in publish_core_react.yaml and has no publish workflow of its own, because that is the only workflow registered as its trusted publisher. A release bumping only eds-utils dispatches publish_core_react with npm-tag=latest." >> $GITHUB_STEP_SUMMARY
+          echo "📝 **eds-utils** is published only by publish_core_react.yaml (see #4932)." >> $GITHUB_STEP_SUMMARY
