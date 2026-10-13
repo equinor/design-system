@@ -6,18 +6,19 @@ This document provides a high-level overview of all GitHub Actions workflows in 
 
 ### Automated (triggered by events)
 
-| Workflow                                                    | Trigger                          | Purpose                                               |
-| ----------------------------------------------------------- | -------------------------------- | ----------------------------------------------------- |
-| **Checks** (`checks.yaml`)                                  | PR to `main`, push to `main`     | Build, test, lint, and type-check in parallel         |
-| **React 18 compatibility** (`react18-compat.yaml`)          | PR to `main` (packages changes)  | Verify compatibility with React 18                    |
-| **PR Title Check** (`pr-title-check.yml`)                   | PR opened/edited                 | Validate conventional commit format                   |
-| **Release Please** (`release_please.yml`)                   | Push to `main`                   | Create/update release PR with changelogs              |
-| **Trigger Package Publishing** (`trigger_publish.yml`)      | Release PR merged                | Detect changed packages and trigger publish workflows |
-| **Publish core-react storybook** (`publish_storybook.yaml`) | Push to `main` (package changes) | Deploy Storybook to Azure                             |
-| **Claude Code** (`claude.yml`)                              | `@claude` mentions in issues/PRs | AI-powered code assistance                            |
-| **Issue triage** (`issue-triage.yml`)                       | Issue opened                     | Auto-triage new issues with Claude                    |
-| **Close stale issues** (`stale-issues.yml`)                 | Daily (06:00 UTC)                | Close issues labelled `issue needs work` after 3 days |
-| **Dependabot rotation** (`dependabot-rotation.yml`)         | Weekly (Monday 05:00 UTC)        | Slack reminder for Dependabot duty                    |
+| Workflow                                                           | Trigger                          | Purpose                                                                          |
+| ------------------------------------------------------------------ | -------------------------------- | -------------------------------------------------------------------------------- |
+| **Checks** (`checks.yaml`)                                         | PR to `main`, push to `main`     | Build, test, lint, and type-check in parallel                                    |
+| **React 18 compatibility** (`react18-compat.yaml`)                 | PR to `main` (packages changes)  | Verify compatibility with React 18                                               |
+| **PR Title Check** (`pr-title-check.yml`)                          | PR opened/edited                 | Validate conventional commit format                                              |
+| **Breaking Changes Page Check** (`breaking-changes-doc-check.yml`) | PR opened/edited/labelled        | Require a breaking changes page entry when a published `/next` component changes |
+| **Release Please** (`release_please.yml`)                          | Push to `main`                   | Create/update release PR with changelogs                                         |
+| **Trigger Package Publishing** (`trigger_publish.yml`)             | Release PR merged                | Detect changed packages and trigger publish workflows                            |
+| **Publish core-react storybook** (`publish_storybook.yaml`)        | Push to `main` (package changes) | Deploy Storybook to Azure                                                        |
+| **Claude Code** (`claude.yml`)                                     | `@claude` mentions in issues/PRs | AI-powered code assistance                                                       |
+| **Issue triage** (`issue-triage.yml`)                              | Issue opened                     | Auto-triage new issues with Claude                                               |
+| **Close stale issues** (`stale-issues.yml`)                        | Daily (06:00 UTC)                | Close issues labelled `issue needs work` after 3 days                            |
+| **Dependabot rotation** (`dependabot-rotation.yml`)                | Weekly (Monday 05:00 UTC)        | Slack reminder for Dependabot duty                                               |
 
 ### Manual (workflow_dispatch)
 
@@ -69,6 +70,7 @@ When a pull request targets `main`, the following happens:
 ```mermaid
 graph LR
     PR[PR opened/updated] --> TC[PR Title Check]
+    PR --> BC[Breaking Changes Page Check]
     PR --> CH[Checks workflow]
     PR --> R18[React 18 compat]
 
@@ -88,6 +90,16 @@ graph LR
 **Path filtering:** Every pull request starts the workflow so the aggregate status check is always reported. Code and tooling configuration changes run the full suite. Other non-code changes run the build-and-lint path, where the build provides the type declarations required by type-aware linting. Manual dispatch always runs the full suite.
 
 New commits cancel older Checks runs for the same pull request or ref so superseded work does not continue consuming runners.
+
+**Breaking changes page:** two checks keep `packages/eds-core-react/stories/docs/BreakingChanges.mdx` honest.
+
+The first asks whether a change reached the page. A PR that edits a `.ts` or `.tsx` file belonging to a component the `/next` barrel exports must also touch the page — that is the API and markup a consumer sees, down to the per-component `index.ts` barrels and hooks such as `Field/useFieldIds.ts`. Shared code under `/next`, currently `utils/`, counts as well, and the failure names it separately because the author is the one who knows which sections it reaches. Tests, stories, docs, snapshots, Code Connect files and CSS on its own do not count, because the page does not track colour, spacing or the type scale, and a class rename has to pass through the `.tsx` that applies it. A PR that marks itself breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) is held to the wider rule, every `/next` file bar the excluded ones. Dependabot is exempt: a bump drags lint fixes through component files and cannot label its own PR. The `skip-breaking-changes-doc` label waives the requirement, and using it leaves a warning annotation so a reviewer sees the claim. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
+
+The rule deliberately does not key on `!`. The page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it becomes the migration guide at graduation. Every beta changes the after side of that answer, and most of those changes are not marked breaking: nothing in `/next` is formally breaking until graduation, and a new component arrives as a plain `feat: add <Component>`. The page is not a changelog, though — going from one beta to the next belongs in the commit message and the PR description, not in a section.
+
+The second check asks whether the page covers what `/next` publishes at all: every component exported from `packages/eds-core-react/src/components/next/index.ts` has a `## <Component>` section, every section still matches an export, and no section is just a heading. It reads two files, needs no token, and runs in the Checks workflow with `pnpm run check:breaking-changes-coverage`.
+
+Neither check reads the content. Whether a section is accurate and complete against EDS 1.0 stays a review job.
 
 ## Release Pipeline
 
@@ -133,7 +145,9 @@ All npm publishes use [npm trusted publishing](https://docs.npmjs.com/trusted-pu
 - `actions/setup-node` sets `registry-url: 'https://registry.npmjs.org'` so npm authenticates through the OIDC exchange
 - Packages are published with `--provenance`, which attaches a signed provenance attestation visible on npmjs.com
 - Trusted publishing must be configured per package on npmjs.com (Settings → Trusted publishers) for the exchange to succeed
-- npm permits one trusted publisher workflow per package, so each package must have one publishing owner
+- A package can hold up to 10 trusted publishing configurations. npm lifted the previous one-configuration limit on 2026-09-03, and a publish is authorised when the incoming OIDC identity matches any configured entry
+- Configurations created after 2026-09-03 are allowed to stage only. Direct publishing has to be opted into per configuration under **Allowed actions**, so a newly added entry will stage instead of publish until that is set
+- EDS still gives each package a single publishing workflow, so `@equinor/eds-utils` is published from `publish_core_react.yaml` only (see #4932)
 
 ## Storybook Deployment
 

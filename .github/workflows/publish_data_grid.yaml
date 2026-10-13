@@ -94,6 +94,27 @@ jobs:
           package-manager-cache: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
+      # eds-data-grid-react depends on @equinor/eds-utils with workspace:^, which
+      # pnpm publish rewrites to a concrete range. If that version never
+      # reached npm, the published package carries a dependency nobody can
+      # install. trigger_publish.yml dispatches publish_core_react.yaml (which
+      # publishes eds-utils) in parallel with this workflow, and its build is
+      # slower, so wait up to 20 minutes before failing (#4932).
+      - name: Wait for eds-utils on npm
+        run: |
+          UTILS_VERSION=$(node -p "require('./packages/eds-utils/package.json').version")
+          for i in $(seq 1 40); do
+            if NPM_ERROR=$(npm view "@equinor/eds-utils@$UTILS_VERSION" version 2>&1 >/dev/null); then
+              echo "@equinor/eds-utils@$UTILS_VERSION is on npm"
+              exit 0
+            fi
+            echo "Waiting for @equinor/eds-utils@$UTILS_VERSION to reach npm ($i/40)"
+            sleep 30
+          done
+          echo "Last npm view output:"
+          echo "$NPM_ERROR"
+          echo "::error title=eds-utils not published::@equinor/eds-utils@$UTILS_VERSION is still missing from npm after 20 minutes. eds-data-grid-react depends on it via workspace:^ and would publish an unresolvable range. Check the publish_core_react.yaml run, or run it with npm-tag=latest, then re-run this workflow (see #4932)."
+          exit 1
       - name: Publish to npm
         run: pnpm --filter @equinor/eds-data-grid-react publish --access public --provenance --tag ${{ github.event.inputs.npm-tag }} --no-git-checks
       - name: log-errors-to-slack

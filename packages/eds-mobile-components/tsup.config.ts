@@ -7,6 +7,7 @@ export default defineConfig((options) => ({
         "!./src/types.d.ts",
         "!./src/__tests__/*",
         "!./src/**/*.test.ts?(x)",
+        "!./src/**/*.stories.ts?(x)",
     ],
     splitting: true,
     clean: true,
