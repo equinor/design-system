@@ -33,6 +33,29 @@ Introduction.args = {
   variant: 'solid',
 }
 
+const overviewRows = [
+  { variant: 'solid', emphasis: 'low' },
+  { variant: 'solid', emphasis: 'medium' },
+  { variant: 'outlined', emphasis: 'low' },
+] as const
+
+export const Overview: StoryFn<BadgeProps> = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    {overviewRows.map(({ variant, emphasis }) => (
+      <div
+        key={`${variant}-${emphasis}`}
+        style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}
+      >
+        {(['neutral', 'accent', 'success', 'danger'] as const).map((tone) => (
+          <Badge key={tone} tone={tone} variant={variant} emphasis={emphasis}>
+            {tone.charAt(0).toUpperCase() + tone.slice(1)}
+          </Badge>
+        ))}
+      </div>
+    ))}
+  </div>
+)
+
 export const Tones: StoryFn<BadgeProps> = () => (
   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
     <Badge tone="neutral">Neutral</Badge>
