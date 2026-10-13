@@ -11,7 +11,9 @@ export function CVDFilter({ type }: { type: CVDType }) {
   return (
     <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden>
       <defs>
-        <filter id={`cvd-${type}`}>
+        {/* SVG filters run in linearRGB by default; simulateCVD applies the
+            matrix to gamma-encoded sRGB, so the preview must do the same */}
+        <filter id={`cvd-${type}`} colorInterpolationFilters="sRGB">
           <feColorMatrix type="matrix" values={CVD_MATRICES[type]} />
         </filter>
       </defs>

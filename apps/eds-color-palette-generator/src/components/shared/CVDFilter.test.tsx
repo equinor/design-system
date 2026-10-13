@@ -25,6 +25,15 @@ describe('CVDFilter', () => {
         CVD_MATRICES[type],
       )
     })
+
+    it('filters in sRGB, the colour space simulateCVD uses', () => {
+      const { container } = render(<CVDFilter type="deuteranopia" />)
+
+      expect(container.querySelector('filter')).toHaveAttribute(
+        'color-interpolation-filters',
+        'sRGB',
+      )
+    })
   })
 
   describe('Accessibility', () => {
