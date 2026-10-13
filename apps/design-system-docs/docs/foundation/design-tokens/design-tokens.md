@@ -23,10 +23,10 @@ Set the attribute on a container, and everything inside it follows. In Figma, se
 
 ## Token groups
 
-| Group                                                        | What it covers                                                              |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| [Colour](/docs/Next/foundation/colour/intro)                 | Backgrounds, text, borders, icons and data visualisation, in light and dark |
-| [Spacing](/docs/Next/foundation/design-tokens/spacing)       | Padding and gaps, inside and between components                             |
-| [Typography](/docs/Next/foundation/design-tokens/typography) | Font families, sizes, line heights and weights                              |
-| [Shape](/docs/Next/foundation/design-tokens/shape)           | Corner radius                                                               |
-| [Elevation](/docs/Next/foundation/design-tokens/elevation)   | Shadows for UI that floats above the page                                   |
+| Group                                                                                           | What it covers                                                              |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [Colour](/docs/Next/foundation/colour/intro)                                                    | Backgrounds, text, borders, icons and data visualisation, in light and dark |
+| [Spacing](/docs/Next/foundation/design-tokens/spacing)                                          | Padding and gaps, inside and between components                             |
+| [Typography](/docs/Next/foundation/design-tokens/typography)                                    | Font families, sizes, line heights and weights                              |
+| [Corner radius](/docs/Next/foundation/design-tokens/spacing#corner-radius-travels-with-spacing) | Rounded corners, which follow the density like spacing does                 |
+| [Elevation](/docs/Next/foundation/design-tokens/elevation)                                      | Shadows for UI that floats above the page                                   |
