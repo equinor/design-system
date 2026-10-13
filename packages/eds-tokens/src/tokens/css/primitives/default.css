@@ -4,6 +4,7 @@
   --eds-primitives-lineheight-scale-100-default: var(--eds-primitives-spacing-75);
   --eds-primitives-lineheight-scale-1000-default: var(--eds-primitives-spacing-225);
   --eds-primitives-lineheight-scale-1100-default: var(--eds-primitives-spacing-250);
+  --eds-primitives-lineheight-scale-1200-default: var(--eds-primitives-spacing-275);
   --eds-primitives-lineheight-scale-200-default: var(--eds-primitives-spacing-100);
   --eds-primitives-lineheight-scale-300-default: var(--eds-primitives-spacing-100);
   --eds-primitives-lineheight-scale-400-default: var(--eds-primitives-spacing-125);
@@ -78,7 +79,7 @@
   --eds-primitives-type-scale-inter-800-font-size: 24px;
   --eds-primitives-type-scale-inter-900-font-size: 28px;
   --eds-primitives-type-scale-tracking-normal: 0;
-  --eds-primitives-weight-scale-bolder: 500;
-  --eds-primitives-weight-scale-lighter: 300;
+  --eds-primitives-weight-scale-bold: 700;
+  --eds-primitives-weight-scale-medium: 500;
   --eds-primitives-weight-scale-normal: 400;
 }
