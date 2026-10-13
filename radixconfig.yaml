@@ -20,10 +20,17 @@ spec:
     - alias: eds
       environment: prod
       component: docs
+    - alias: eds-storybook
+      environment: prod
+      component: storybook
   dnsExternalAlias:
     - alias: eds.equinor.com
       environment: prod
       component: docs
+      useCertificateAutomation: true
+    - alias: storybook.eds.equinor.com
+      environment: prod
+      component: storybook
       useCertificateAutomation: true
   components:
     - name: color-palette-generator
@@ -34,6 +41,12 @@ spec:
           port: 3000
     - name: docs
       dockerfileName: DockerfileEdsDocs
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
+    - name: storybook
+      dockerfileName: DockerfileStorybook
       publicPort: http
       ports:
         - name: http

@@ -32,11 +32,11 @@
     }
   },
   "weight": {
-    "bolder": {
+    "bold": {
       "$extensions": {
         "com.figma": {
           "codeSyntax": {
-            "WEB": "var(--eds-weight-bolder)"
+            "WEB": "var(--eds-weight-bold)"
           },
           "hiddenFromPublishing": true,
           "scopes": [
@@ -45,13 +45,13 @@
         }
       },
       "$type": "fontWeight",
-      "$value": "{primitives.weight-scale.bolder}"
+      "$value": "{primitives.weight-scale.bold}"
     },
-    "lighter": {
+    "medium": {
       "$extensions": {
         "com.figma": {
           "codeSyntax": {
-            "WEB": "var(--eds-weight-lighter)"
+            "WEB": "var(--eds-weight-medium)"
           },
           "hiddenFromPublishing": true,
           "scopes": [
@@ -60,7 +60,7 @@
         }
       },
       "$type": "fontWeight",
-      "$value": "{primitives.weight-scale.lighter}"
+      "$value": "{primitives.weight-scale.medium}"
     },
     "normal": {
       "$extensions": {
