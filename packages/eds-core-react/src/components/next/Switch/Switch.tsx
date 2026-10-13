@@ -17,7 +17,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   ref,
 ) {
   const generatedId = useId()
-  const inputId = id ?? generatedId
+  // `||`, not `??`: an empty string is treated as no id
+  const inputId = id || generatedId
 
   // Track checked state for dynamic color appearance
   const isControlled = controlledChecked !== undefined

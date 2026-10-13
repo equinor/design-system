@@ -112,6 +112,15 @@ describe('Radio (next)', () => {
   })
 
   describe('Accessibility', () => {
+    // The empty string is deliberate invalid input: it is what distinguishes
+    // the component's `||` fallback from `??`, which would let it through and
+    // render a non-conforming id="" on the input.
+    it('falls back to a generated id when id is an empty string', () => {
+      render(<Radio label="radio-test" name="test" id="" />)
+      const input = screen.getByRole('radio', { name: 'radio-test' })
+      expect(input.id).not.toBe('')
+    })
+
     it('passes axe accessibility test', async () => {
       const { container } = render(<Radio label="radio-test" name="test" />)
       expect(await axe(container)).toHaveNoViolations()

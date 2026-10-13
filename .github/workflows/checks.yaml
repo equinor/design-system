@@ -52,6 +52,10 @@ jobs:
     outputs:
       # Manual runs are an explicit request for the complete suite.
       code: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.code == 'true' }}
+      # Narrower than `code`: only the mobile library, the demo app, the
+      # demo-screens script and the root package.json (which defines how it
+      # runs) can change what that check compares or whether it runs.
+      mobile: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.mobile == 'true' }}
     steps:
       # fetch-depth: 2 so dorny/paths-filter can diff against the previous
       # commit on push events (the default depth of 1 omits it).
@@ -82,6 +86,11 @@ jobs:
               - 'tsconfig*.json'
               - 'babel.config.cjs'
               - 'eslint.config.mjs'
+            mobile:
+              - 'packages/eds-mobile-components/**'
+              - 'apps/mobile-storybook/**'
+              - 'scripts/check-mobile-demo-screens.js'
+              - 'package.json'
 
   # ─── Build (required before test/lint/types) ─────────────────────
   build:
@@ -118,10 +127,27 @@ jobs:
       # workspace, which would mask a stale committed file.
       - name: Check AI component index freshness
         run: pnpm run generate:component-index --check
+      # Same ordering reason as above. Fails when a generated Storybook docs
+      # page no longer matches its types, stories or sidecar.
+      - name: Check component docs freshness
+        run: pnpm run generate:component-docs --check
       # Same ordering reason as above. This step also fails on duplicate ADR
       # numbers, which is the condition it mainly exists to catch.
       - name: Check ADR index freshness
         run: pnpm run generate:adr-index --check
+      # Reads two files, so it runs before the build and fails in seconds.
+      # Only in this job: both its inputs, the /next barrel and the page, sit
+      # under `packages/**` and so are inside the `code` filter. Its companion
+      # breaking-changes-doc-check.yml reads the pull request itself and needs
+      # triggers this workflow does not have, which is why it lives apart.
+      - name: Check breaking changes page coverage
+        run: pnpm run check:breaking-changes-coverage
+      # Only reads files, so it runs before the build and fails fast. Scoped
+      # by the `mobile` filter, so PRs that touch no mobile files and not the
+      # root package.json skip it.
+      - name: Check mobile demo screens
+        if: needs.changes.outputs.mobile == 'true'
+        run: pnpm run check-screens:mobile
       - name: Build packages
         run: pnpm run build
       # Separate step, not folded into the `build` aggregate above: that

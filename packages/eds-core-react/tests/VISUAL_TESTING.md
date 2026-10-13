@@ -8,7 +8,7 @@ I've created a comprehensive Playwright-based visual regression testing suite fo
 
 ### Configuration
 
-- **`playwright.config.ts`** - Playwright configuration for visual testing
+- **`tests/visual/playwright.config.ts`** - Playwright configuration for visual testing
   - Runs tests against Storybook on `localhost:9000`
   - Configured for Chromium browser
   - Auto-starts Storybook server

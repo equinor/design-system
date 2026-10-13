@@ -82,6 +82,8 @@ The hook provides:
 - `helperMessageId`: ID for helper/error messages
 - `getDescribedBy()`: Helper to build the `aria-describedby` attribute
 
+Pass your own ID to the hook and it is applied verbatim to the form control, so an external `htmlFor` or `aria-describedby` still points at the right element. The other three IDs are derived from it (`my-id-label`, `my-id-description`, `my-id-helper-message`). Without one, all four are derived from a generated ID.
+
 **Screen reader considerations:**
 
 Screen readers won't automatically announce prefix/suffix text (like currency symbols or units). Ensure this information is also present in the label text for full accessibility.

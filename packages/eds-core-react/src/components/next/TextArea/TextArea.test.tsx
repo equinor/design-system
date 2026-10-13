@@ -145,6 +145,12 @@ describe('TextArea (next)', () => {
       expect(label).toHaveAttribute('for', textarea.id)
     })
 
+    it('applies a provided id verbatim to the textarea', () => {
+      render(<TextArea label="Description" id="my-textarea" />)
+      const textarea = screen.getByRole('textbox', { name: 'Description' })
+      expect(textarea).toHaveAttribute('id', 'my-textarea')
+    })
+
     it('has no accessibility violations with label', async () => {
       const { container } = render(
         <TextArea label="Description" placeholder="Enter text" />,

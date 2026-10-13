@@ -123,15 +123,15 @@ Not all vulnerabilities auto-create a PR. Most of the leftovers are **transitive
 
 ### Fixing a transitive alert
 
-The repo uses `pnpm.overrides` in the root `package.json` for this (examples: #5177, #5368, #5472). The short version:
+The repo uses `overrides` in `pnpm-workspace.yaml` for this (examples: #5177, #5368, #5472, from before pnpm 11 moved them out of `package.json`). The short version:
 
 1. Find the installed version(s) and which package pulls each one in, using `main`'s `pnpm-lock.yaml`.
 2. Check the patched version exists for that major line and does not change module format (ESM-only) or Node floor in a way the parent cannot take.
-3. Add or raise the override. Key per major when several coexist (`"js-yaml@^3"`, `"js-yaml@^4"`); use `>=<fix>` or `>=<fix> <next-major`.
+3. Add or raise the override. Key per major when several coexist (`'js-yaml@^3'`, `'js-yaml@^4'`); use `>=<fix>` or `>=<fix> <next-major`.
 4. `pnpm install --no-frozen-lockfile`, then check the lockfile diff only touches the target packages, then `pnpm install --frozen-lockfile` must pass.
 5. One PR: `chore: bump pnpm overrides to resolve transitive dependabot alerts`, with a before/after table and a "deliberately left out" list.
 
-Full procedure with commands: [`DEPENDABOT_DUTY.md` § Step 3](../agent-instructions/DEPENDABOT_DUTY.md#step-3--fix-transitive-alerts-with-pnpmoverrides).
+Full procedure with commands: [`DEPENDABOT_DUTY.md` § Step 3](../agent-instructions/DEPENDABOT_DUTY.md#step-3--fix-transitive-alerts-with-pnpm-overrides).
 
 ## Code scanning alerts
 

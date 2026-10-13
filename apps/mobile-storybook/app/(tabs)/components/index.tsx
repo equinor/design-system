@@ -1,3 +1,4 @@
+import { componentSections, type ComponentEntry } from "@/lib/registry";
 import {
     EDSStyleSheet,
     Icon,
@@ -7,37 +8,6 @@ import {
 import { useRouter } from "expo-router";
 import { Pressable, SectionList, View } from "react-native";
 
-type ComponentItem = { name: string; route: string };
-
-const sections = [
-    {
-        title: "Actions",
-        data: [{ name: "Button", route: "button" }],
-    },
-    {
-        title: "Data Display",
-        data: [
-            { name: "Badge", route: "badge" },
-            { name: "Divider", route: "divider" },
-            { name: "Typography", route: "typography" },
-        ],
-    },
-    {
-        title: "Data Entry",
-        data: [
-            { name: "Input", route: "input" },
-            { name: "Search", route: "search" },
-            { name: "Selection Controls", route: "selectioncontrols" },
-            { name: "TextArea", route: "textarea" },
-            { name: "TextField", route: "textfield" },
-        ],
-    },
-    {
-        title: "Navigation",
-        data: [{ name: "Link", route: "link" }],
-    },
-];
-
 export default function ComponentsIndex() {
     const router = useRouter();
     const styles = useStyles(tokenStyles);
@@ -46,7 +16,7 @@ export default function ComponentsIndex() {
         router.push(`/(tabs)/components/${route}` as any);
     };
 
-    const renderItem = ({ item }: { item: ComponentItem }) => (
+    const renderItem = ({ item }: { item: ComponentEntry }) => (
         <Pressable onPress={() => navigateTo(item.route)} style={styles.row}>
             <Typography>{item.name}</Typography>
             <Icon name="chevron-right" size={20} color={styles.chevron.color} />
@@ -66,7 +36,7 @@ export default function ComponentsIndex() {
     return (
         <SectionList
             contentContainerStyle={styles.contentContainer}
-            sections={sections}
+            sections={componentSections}
             keyExtractor={(item) => item.route}
             renderItem={renderItem}
             renderSectionHeader={renderSectionHeader}

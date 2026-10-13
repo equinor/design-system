@@ -94,6 +94,12 @@ describe('Search (next)', () => {
   })
 
   describe('Accessibility', () => {
+    it('applies a provided id verbatim to the input', () => {
+      render(<Search label="Search" id="my-search" />)
+      const input = screen.getByRole('searchbox', { name: 'Search' })
+      expect(input).toHaveAttribute('id', 'my-search')
+    })
+
     it('has no violations with a label', async () => {
       const { container } = render(<Search label="Search" />)
       expect(await axe(container)).toHaveNoViolations()

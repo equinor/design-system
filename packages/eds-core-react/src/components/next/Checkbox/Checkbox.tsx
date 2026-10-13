@@ -27,7 +27,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const internalRef = useRef<HTMLInputElement>(null)
     const inputRef = (ref as React.RefObject<HTMLInputElement>) || internalRef
     const generatedId = useId()
-    const inputId = providedId ?? generatedId
+    // `||`, not `??`: an empty string is treated as no id
+    const inputId = providedId || generatedId
     const helperMessageId = `${inputId}-helper`
 
     useEffect(() => {

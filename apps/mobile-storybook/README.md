@@ -74,9 +74,9 @@ apps/mobile-storybook/
 ## Adding a New Component Screen
 
 1. Create a new file in `app/(tabs)/components/` (e.g., `mycomponent.tsx`)
-2. Register the screen in `app/(tabs)/components/_layout.tsx`
-3. Add it to the component list in `app/(tabs)/components/index.tsx`
-4. Export the component from `packages/eds-mobile-components/src/index.ts` if not already exported
+2. Register the screen by adding one entry to `componentRegistry` in `lib/registry.ts`. The Components list and the screen's header title are both built from it, so there is nothing else to edit. `route` is the screen file name without extension and must be the lowercased name of the component's folder in `eds-mobile-components` (`SelectionControls` becomes `selectioncontrols`).
+3. Export the component from `packages/eds-mobile-components/src/index.ts` if not already exported
+4. Run `pnpm run check-screens:mobile` from the repo root to confirm the screens, registry and library exports are in sync (CI runs it too)
 
 ## Troubleshooting
 

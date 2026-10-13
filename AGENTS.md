@@ -86,6 +86,7 @@ pnpm --filter @equinor/eds-mobile-components run lint  # Lint eds-mobile-compone
 pnpm --filter @equinor/mobile-storybook run lint       # Lint mobile-storybook with its own config
 
 pnpm run test:core-react          # Run eds-core-react tests
+pnpm run test:scripts             # Run the root scripts/ tests (node --test, no jest)
 pnpm run test:watch:core-react    # Watch mode
 
 # Run a single test file (from package directory)
@@ -108,9 +109,12 @@ ComponentName/
   ComponentName.figma.tsx # Figma Code Connect (when a Figma design exists)
   ComponentName.test.tsx  # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
+  ComponentName.docs.md   # Hand-written docs; the page ComponentName.docs.mdx is generated from it
 ```
 
 For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
+
+The Storybook docs page is generated from the types, the stories and `ComponentName.docs.md`, never written by hand. See [`documentation/agent-instructions/STORYBOOK_DOC_STYLE.md`](./documentation/agent-instructions/STORYBOOK_DOC_STYLE.md).
 
 ## Code Style
 
@@ -437,7 +441,7 @@ EDS is adopting the Tokens Studio platform as the source for a new token pipelin
 
 ## Dependabot Duty
 
-The weekly Dependabot rotation covers three things: the open Dependabot PRs, the Dependabot alerts on the Security tab that did not get a PR (usually transitive dependencies fixed via `pnpm.overrides` in the root `package.json`), and the code scanning alerts CodeQL raises against our own source. For the triage steps, the duplicate-PR pattern, the decision table for majors, the override recipe, the code scanning dismissal reasons, the report format, and the boundaries (report first, never approve/merge/close/dismiss without a go-ahead), see [`documentation/agent-instructions/DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md). Harness entry points (`/dependabot-duty` in Claude Code, the `dependabot-duty` prompt in Copilot, the `dependabot-duty` agent in OpenCode) all reference that doc. The short human runbook is [`documentation/how-to/DEPENDABOT_GUIDE.md`](./documentation/how-to/DEPENDABOT_GUIDE.md).
+The weekly Dependabot rotation covers three things: the open Dependabot PRs, the Dependabot alerts on the Security tab that did not get a PR (usually transitive dependencies fixed via `overrides` in `pnpm-workspace.yaml`), and the code scanning alerts CodeQL raises against our own source. For the triage steps, the duplicate-PR pattern, the decision table for majors, the override recipe, the code scanning dismissal reasons, the report format, and the boundaries (report first, never approve/merge/close/dismiss without a go-ahead), see [`documentation/agent-instructions/DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md). Harness entry points (`/dependabot-duty` in Claude Code, the `dependabot-duty` prompt in Copilot, the `dependabot-duty` agent in OpenCode) all reference that doc. The short human runbook is [`documentation/how-to/DEPENDABOT_GUIDE.md`](./documentation/how-to/DEPENDABOT_GUIDE.md).
 
 ## Conventional Commits
 
@@ -449,7 +453,7 @@ type: description
 
 **Breaking**: `feat!: remove deprecated prop`
 
-**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, tests, README, config, and other non-publishable files are excluded from triggering releases based on file path. Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
+**Scope is optional and usually omitted in this repo.** Most monorepos using release-please _do_ use scopes — this repo is a deliberate exception because of the `exclude-paths` configuration in `release-please-config.json`. Storybook, test and other non-publishable directories are excluded from triggering releases based on file path (directories only — single-file entries never match, so package-root files like `README.md` or `tsconfig.json` always count; keep edits to them in `chore`/`build`/`docs` commits). Adding a package scope to a visible type (`feat`, `fix`) bypasses that exclusion and forces a bump regardless of which files changed. Hidden types (`chore`, `build`, `ci`, `docs`, `test`) don't trigger releases either way, so a scope on those is harmless. Default to no scope unless one of the exceptions below applies.
 
 **When to add a scope:**
 
@@ -494,7 +498,7 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 - `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
 - `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
 
-Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
+Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 
 ## Tool-Specific Configurations
 

@@ -14,8 +14,6 @@ export const FIRST_X = 26
 /** Diameter of the dot */
 export const DOT = 9
 
-const LINE = 'var(--eds-border-non-interactive-neutral-default)'
-
 /** Lengths arrive either as numbers of pixels or as a CSS length, so both are normalised here. */
 const len = (value: number | string) =>
   typeof value === 'number' ? `${value}px` : value
@@ -83,7 +81,7 @@ export function Leader({
           ...(isTop ? { bottom: lineStart } : { top: lineStart }),
           left: len(x),
           height: lineLength,
-          borderLeft: `1.5px solid ${LINE}`,
+          borderLeft: `1.5px solid ${dotColour}`,
         }}
       />
       {/* horizontal, along the row to the label */}
@@ -99,7 +97,7 @@ export function Leader({
             : { top: `calc(100% + ${depth}px)` }),
           left: len(x),
           width: `calc(${LABEL_X}px - ${len(x)} - 12px)`,
-          borderTop: `1.5px solid ${LINE}`,
+          borderTop: `1.5px solid ${dotColour}`,
         }}
       />
       {/* the dot, on the thing the token paints */}

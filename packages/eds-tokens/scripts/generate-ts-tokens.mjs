@@ -175,7 +175,9 @@ function buildContext(cssFiles, scheme, density) {
     for (const [name, value] of variables) {
       // Among the base files precedence is alphabetical, which is no
       // basis for deciding a value — so a conflict there is an error. The
-      // dimension files that follow are meant to override (#5221).
+      // dimension files that follow are meant to override. The CSS side
+      // of the same duplicate-name problem is gated by
+      // assert-no-duplicate-names.mjs (#5407).
       const previous = declaredIn.get(name)
       if (baseFiles.has(part) && previous && context.get(name) !== value)
         fail(

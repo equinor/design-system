@@ -137,7 +137,7 @@ describe('TextField (Next EDS 2.0)', () => {
       render(<TextField label="Label" id="test-id" />)
       // getByRole with name verifies label is properly connected to input
       const input = screen.getByRole('textbox', { name: 'Label' })
-      expect(input).toHaveAttribute('id', 'test-id-input')
+      expect(input).toHaveAttribute('id', 'test-id')
     })
 
     it('Generates id when not provided', () => {
