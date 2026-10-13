@@ -82,11 +82,12 @@ const LAYOUT = {
   joined: {
     group: 'inline-flex max-w-full',
     // Neighbours overlap by the border width so two borders read as one.
-    segment: '-ml-px first:ml-0 rounded-none first:rounded-l last:rounded-r',
+    segment:
+      '-ml-px first:ml-0 rounded-none first:rounded-l-sm last:rounded-r-sm',
   },
   wrap: {
     group: 'flex flex-wrap gap-[var(--eds-spacing-3xs)]',
-    segment: 'rounded',
+    segment: 'rounded-sm',
   },
 } as const
 
