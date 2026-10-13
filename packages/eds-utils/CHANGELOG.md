@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🐛 Fixed
 
-* keep the child's ref and honour preventDefault in Slot (next) ([#5627](https://github.com/equinor/design-system/issues/5627)) ([4bebe6c](https://github.com/equinor/design-system/commit/4bebe6c51094e21c5f101338449a3bc97bb22a07))
+* keep the child's ref when reading it from a React 18 element ([#5627](https://github.com/equinor/design-system/issues/5627)) ([4bebe6c](https://github.com/equinor/design-system/commit/4bebe6c51094e21c5f101338449a3bc97bb22a07))
 
 ## [2.2.1](https://github.com/equinor/design-system/compare/eds-utils@v2.2.0...eds-utils@v2.2.1) (2026-05-20)
 
