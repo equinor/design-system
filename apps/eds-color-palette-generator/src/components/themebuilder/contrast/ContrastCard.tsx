@@ -27,8 +27,10 @@ export function ContrastCard({
   previewType = 'text',
 }: ContrastCardProps) {
   const result = useMemo(() => calcContrast(fgHex, bgHex), [fgHex, bgHex])
-  const wcagNum = parseFloat(result.wcag)
-  const absLc = Math.abs(parseFloat(result.apca))
+  // Thresholds use the unrounded values; result.wcag and result.apca are
+  // rounded for display
+  const wcagNum = result.wcagRatio
+  const absLc = result.apcaLc
 
   const fontBreakdown = useMemo(() => getApcaFontBreakdown(absLc), [absLc])
 

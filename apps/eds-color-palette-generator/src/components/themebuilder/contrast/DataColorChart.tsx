@@ -47,8 +47,8 @@ const DONUT_SEGMENTS = [35, 25, 20, 12, 8]
  * stay legible on both light and dark fills instead of a fixed colour.
  */
 function bestTextColor(bg: string): string {
-  const onBlack = Math.abs(parseFloat(calcContrast('#000000', bg).apca))
-  const onWhite = Math.abs(parseFloat(calcContrast('#ffffff', bg).apca))
+  const onBlack = calcContrast('#000000', bg).apcaLc
+  const onWhite = calcContrast('#ffffff', bg).apcaLc
   return onBlack >= onWhite ? '#000000' : '#ffffff'
 }
 
@@ -721,8 +721,8 @@ export function DataColorChart({
                           )
                         }
                         const result = calcContrast(row.hex, col.hex)
-                        const ratio = parseFloat(result.wcag)
-                        const pass3 = ratio >= 3
+                        // 2.96:1 shows as 3.0 but does not reach 3:1
+                        const pass3 = result.wcagRatio >= 3
                         return (
                           <td
                             key={col.name}

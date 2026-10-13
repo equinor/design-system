@@ -70,7 +70,8 @@ function PairingCard({
   previewType?: 'text' | 'border'
 }) {
   const result = useMemo(() => calcContrast(fgHex, bgHex), [fgHex, bgHex])
-  const absLc = Math.abs(parseFloat(result.apca))
+  // The unrounded Lc: result.apca is rounded for display
+  const absLc = result.apcaLc
   const fontBreakdown = useMemo(() => getApcaFontBreakdown(absLc), [absLc])
 
   return (

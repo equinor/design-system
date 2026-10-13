@@ -32,6 +32,22 @@ describe('ContrastCard', () => {
       expect(screen.getByText('Aa')).toBeInTheDocument()
     })
 
+    it('judges the font sizes on the unrounded Lc', () => {
+      // #8f8f8f on white is Lc 59.6, shown as 60; 14px bold needs Lc 60
+      render(
+        <ContrastCard
+          fgHex="#8f8f8f"
+          bgHex="#ffffff"
+          fgLabel="grey"
+          bgLabel="white"
+          paletteName="Custom"
+        />,
+      )
+
+      expect(screen.getByText('Lc 60')).toBeInTheDocument()
+      expect(screen.getByTitle('14px: fails')).toBeInTheDocument()
+    })
+
     it('warns when both colours are the same', () => {
       render(
         <ContrastCard
