@@ -111,14 +111,25 @@ const parseAdr = (filename) => {
       ) || rawStatus.split(/[\s(]/)[0]
     : null
 
-  const note =
+  const detail =
     rawStatus && statusKeyword
       ? rawStatus
           .slice(statusKeyword.length)
-          // Keep link text, drop the target, so "superseded by ADR 0006" fits.
+          // Keep link text, drop the target, so "superseded by ADR-0006" fits.
           .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+          // Older records cite "ADR 0006", the template and newer records
+          // "ADR-0006". One form keeps the column consistent.
+          .replace(/\bADR (\d{4})\b/g, 'ADR-$1')
           .replace(/^[\s(]+|[\s)]+$/g, '')
       : ''
+
+  // The template's "Superseded by [ADR-NNNN]" leaves only "by ADR-NNNN" once
+  // the keyword moves to the Status column. Putting the keyword back makes a
+  // full supersede read like a partial one ("graduation step superseded by
+  // ADR-0025").
+  const note = /^by\b/i.test(detail)
+    ? `${statusKeyword.toLowerCase()} ${detail}`
+    : detail
 
   // Dates range from "2026-03-20" to "2025-06 (recorded retrospectively...)".
   const dateMatch = rawDate ? rawDate.match(/\d{4}(?:-\d{2}){0,2}/) : null
