@@ -16,7 +16,8 @@ export function ContrastCell({
   bgColor: string
   label: string
 }) {
-  const lc = parseFloat(data.apca)
+  // The unrounded Lc: data.apca is rounded for display
+  const lc = data.apcaLc
   const fontBreakdown = useMemo(() => getApcaFontBreakdown(lc), [lc])
 
   return (

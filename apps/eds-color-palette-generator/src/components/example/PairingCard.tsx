@@ -19,7 +19,8 @@ export function PairingCard({
   type?: 'text' | 'border'
 }) {
   const result = useMemo(() => calcContrast(fgHex, bgHex), [fgHex, bgHex])
-  const lc = parseFloat(result.apca)
+  // The unrounded Lc: result.apca is rounded for display
+  const lc = result.apcaLc
   const fontBreakdown = useMemo(() => getApcaFontBreakdown(lc), [lc])
 
   return (

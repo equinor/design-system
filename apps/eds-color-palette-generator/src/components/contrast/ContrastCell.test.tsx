@@ -41,7 +41,7 @@ describe('ContrastCell', () => {
     it('shows the lightest passing weight for every font size', () => {
       renderCell()
 
-      const breakdown = getApcaFontBreakdown(parseFloat(DATA.apca))
+      const breakdown = getApcaFontBreakdown(DATA.apcaLc)
       expect(breakdown).toHaveLength(APCA_FONT_ROWS.length)
       for (const { size, minWeightName } of breakdown) {
         expect(
@@ -50,6 +50,23 @@ describe('ContrastCell', () => {
           ),
         ).toBeInTheDocument()
       }
+    })
+
+    it('judges the font sizes on the unrounded Lc', () => {
+      // #8f8f8f on white is Lc 59.6, shown as 60; 14px bold needs Lc 60
+      const data = calcContrast('#8f8f8f', '#ffffff')
+      render(
+        <ContrastCell
+          data={data}
+          fgColor="#8f8f8f"
+          bgColor="#ffffff"
+          label="Grey"
+        />,
+      )
+
+      expect(screen.getByText('Lc 60')).toBeInTheDocument()
+      expect(screen.getByText('14px')).toBeInTheDocument()
+      expect(screen.queryByText('14px Bold')).toBeNull()
     })
 
     it('shows a sample in the pair’s own colours', () => {

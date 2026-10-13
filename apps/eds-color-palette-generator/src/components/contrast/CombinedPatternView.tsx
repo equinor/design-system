@@ -24,7 +24,8 @@ export function CombinedPatternView({
             }}
           >
             {group.pairings.map((p, i) => {
-              const lc = parseFloat(p.contrast.apca)
+              // The unrounded Lc: contrast.apca is rounded for display
+              const lc = p.contrast.apcaLc
               const fontBreakdown = getApcaFontBreakdown(lc)
 
               return (
