@@ -172,6 +172,12 @@ jobs:
     name: Deploy Storybook
     runs-on: ubuntu-latest
     needs: build
+    # A release that bumps eds-utils and the /next beta, but not stable
+    # core-react, dispatches this workflow twice at once (beta + latest). Queue
+    # the deploys per environment so they don't overwrite each other mid-upload.
+    concurrency:
+      group: deploy-core-react-storybook-${{ github.event.inputs.environment || 'development' }}
+      cancel-in-progress: false
     environment:
       name: ${{ github.event.inputs.environment || 'development' }}
     steps:
