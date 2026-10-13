@@ -40,7 +40,7 @@ There are also different types of situations that need consideration:
 
 Small or tightly packed targets are easy to miss, especially on a touch screen. WCAG 2.1 has no target size requirement at level AA, but WCAG 2.2 adds one, [2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html): a target should be at least 24 by 24 CSS pixels, or have enough space around it that a 24px circle centred on it does not overlap another target. For touch, aim for 44 by 44, which is the WCAG AAA level (2.5.5).
 
-EDS controls are smaller at Compact density than at Comfortable or Relaxed, so check target sizes at the density you ship. Relaxed density is intended for touch and mobile, where targets need to be larger.
+EDS controls are smaller at Compact density than at Comfortable or Relaxed, so check target sizes at the density you ship.
 
 ### Consistent headings
 
