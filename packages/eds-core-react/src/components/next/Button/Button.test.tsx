@@ -535,6 +535,45 @@ describe('Button (next)', () => {
       expect(ref.current).toBeInstanceOf(HTMLAnchorElement)
     })
 
+    it('keeps a ref on the child alongside its own ref', () => {
+      const ref = { current: null as HTMLElement | null }
+      const childRef = { current: null as HTMLAnchorElement | null }
+      render(
+        <Button asChild ref={ref as React.Ref<HTMLButtonElement>}>
+          <a href="/" ref={childRef}>
+            Link
+          </a>
+        </Button>,
+      )
+      expect(childRef.current).toBeInstanceOf(HTMLAnchorElement)
+      expect(ref.current).toBe(childRef.current)
+    })
+
+    it('skips its onClick when the child calls preventDefault', async () => {
+      const user = userEvent.setup()
+      const onClick = jest.fn()
+      render(
+        <Button asChild onClick={onClick}>
+          <a href="/" onClick={(event) => event.preventDefault()}>
+            Link
+          </a>
+        </Button>,
+      )
+      await user.click(screen.getByRole('link'))
+      expect(onClick).not.toHaveBeenCalled()
+    })
+
+    it('logs an error naming Slot for a text child', () => {
+      const consoleError = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      render(<Button asChild>Save</Button>)
+      expect(consoleError).toHaveBeenCalledWith(
+        expect.stringMatching(/^Slot: .*got text/),
+      )
+      consoleError.mockRestore()
+    })
+
     it('has no accessibility violations', async () => {
       const { container } = render(
         <Button asChild>
