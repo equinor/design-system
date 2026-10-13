@@ -313,7 +313,7 @@ EDS 1.0: `Menu` with `Menu.Item` and `Menu.Section`.
 
 EDS 1.0: `Radio`.
 
-**Props**: `label` accepts a ReactNode. `type` cannot be passed. Unlike Checkbox, Radio has no `indicator` or `helperMessage`.
+**Props**: `label` accepts a ReactNode. `type` cannot be passed. Unlike Checkbox, Radio has no `indicator`.
 
 **Markup**: with a `label`, the root changes from `<label>` to `<div class="eds-field eds-radio">`; without a label it is `<span class="eds-radio" data-standalone>`. `className` and `style` land on that root and are merged with `eds-radio`, so `.your-class input` reaches the native radio. The inline SVG with `path[name="selected"]` and `path[name="unselected"]` is replaced by two icons with the classes `icon-checked` and `icon-unchecked`. Density comes from `data-density` on an ancestor, not from `EdsProvider`.
 
