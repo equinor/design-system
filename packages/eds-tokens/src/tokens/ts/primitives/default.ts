@@ -42,6 +42,9 @@ export const primitives = {
     '1100': {
       default: 40,
     },
+    '1200': {
+      default: 44,
+    },
   },
   spacing: {
     '0': 0,
@@ -162,8 +165,8 @@ export const primitives = {
     trackingNormal: 0,
   },
   weightScale: {
-    bolder: 500,
-    lighter: 300,
+    bold: 700,
+    medium: 500,
     normal: 400,
   },
 } as const
