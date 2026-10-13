@@ -61,7 +61,7 @@ export const Search = ({
     indicator,
     description,
     helperMessage,
-    cancellable,
+    cancellable = false,
     value,
     defaultValue,
     disabled = false,

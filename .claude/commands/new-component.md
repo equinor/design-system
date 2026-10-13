@@ -10,7 +10,7 @@ This command holds the flow the two platforms share. The patterns and code templ
 
 1. **Choose the platform** from `$ARGUMENTS`, or ask: web (`packages/eds-core-react/src/components/next/`) or mobile (`packages/eds-mobile-components/src/components/`).
 
-2. **Ask for a Figma URL** for the component design. The design is shared by both platforms. If provided, run the Figma MCP tools per [`AGENTS.md`](../../AGENTS.md) § Figma MCP workflow:
+2. **Ask for a Figma URL** for the component design. The design is shared by both platforms, so for a mobile component check the web `<Name>.figma.tsx` first if the component has a web version, because it holds the URL. If provided, run the Figma MCP tools per [`AGENTS.md`](../../AGENTS.md) § Figma MCP workflow:
    - `figma_get_design_context` — component structure
    - `figma_get_screenshot` — visual reference
    - `figma_get_variable_defs` — tokens **per state** (Default, Hover, Focus, Disabled, and any other state in the design). Use the EXACT variable names returned.

@@ -27,7 +27,7 @@ export type TextAreaProps = {
      */
     helperMessage?: string;
     /**
-     * Error state, shown with a red border and background.
+     * Error state, shown with danger colours on the border and background.
      * @default false
      */
     invalid?: boolean;

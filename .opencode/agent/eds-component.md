@@ -15,7 +15,7 @@ When invoked to create a new component, follow this flow:
 
 1. **Choose the platform**, or ask: web or mobile.
 
-2. **Ask for a Figma URL.** The design is shared by both platforms. If provided, run `figma_get_design_context`, `figma_get_screenshot`, and `figma_get_variable_defs` **per state** (Default, Hover, Focus, Disabled, etc.). Use the EXACT variable names returned.
+2. **Ask for a Figma URL.** The design is shared by both platforms, so for a mobile component check the web `<Name>.figma.tsx` first if the component has a web version, because it holds the URL. If provided, run `figma_get_design_context`, `figma_get_screenshot`, and `figma_get_variable_defs` **per state** (Default, Hover, Focus, Disabled, etc.). Use the EXACT variable names returned.
 
 3. **Check what already exists.** Web: [`documentation/AI-COMPONENT-INDEX.md`](../../documentation/AI-COMPONENT-INDEX.md) lists every existing `/next` component with its props and sub-components (generated, CI-verified). Confirm the component doesn't already exist, and prefer composing `Field`, `Icon`, `Input`, `Button`, `Typography`. The source of truth is `packages/eds-core-react/src/components/next/index.ts`. Mobile: [`documentation/MOBILE_COMPONENT_SCOPE.md`](../../documentation/MOBILE_COMPONENT_SCOPE.md) lists the components mobile excludes or renames, and the existing ones are in `packages/eds-mobile-components/src/components/`. Read the web component's API too, and mirror it where it makes sense for React Native.
 
