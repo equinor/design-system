@@ -55,7 +55,7 @@ function usageSection(component, platform, ctx) {
 function examplesSection(component, examples) {
   if (!examples.length) {
     fail(
-      `${component}: no Examples. ${component}.stories.tsx exports none besides the skipped playground story.`,
+      `${component}: no Examples. ${component}.stories.tsx exports none. On web, the Introduction and Overview stories are not examples.`,
     )
   }
   return section('Examples', examples.join('\n\n'))
@@ -95,6 +95,9 @@ function renderMobile(component, ctx) {
   ])
 }
 
+// The web story shown right after Features, with no heading and no caption.
+const OVERVIEW_STORY = 'Overview'
+
 // The Storybook page: the web docs, with the React Native tab when a mobile
 // sidecar exists.
 function renderWeb(component, ctx) {
@@ -106,11 +109,20 @@ function renderWeb(component, ctx) {
     sourceUrl: ctx.sourceUrl,
     npmUrl: p.npmUrl,
   })
-  const examples = ctx.stories.map((s) =>
-    [`### ${s.title}`, s.caption, `<Canvas of={Stories.${s.name}} />`]
-      .filter(Boolean)
-      .join('\n\n'),
-  )
+  // The Overview story is the display right after Features. It is not an example.
+  const overview = ctx.stories.find((s) => s.name === OVERVIEW_STORY)
+  if (!overview) {
+    fail(
+      `${component}: add an ${OVERVIEW_STORY} story to ${component}.stories.tsx. It is the display shown right after Features.`,
+    )
+  }
+  const examples = ctx.stories
+    .filter((s) => s !== overview)
+    .map((s) =>
+      [`### ${s.title}`, s.caption, `<Canvas of={Stories.${s.name}} />`]
+        .filter(Boolean)
+        .join('\n\n'),
+    )
   const storybookImports = [
     "import { Meta, Primary, Controls, Canvas } from '@storybook/addon-docs/blocks'",
     `import * as Stories from './${component}.stories'`,
@@ -140,8 +152,7 @@ function renderWeb(component, ctx) {
       `<PlatformTabs mobile={<>\n${mobileLinks}\n  <MobileDocs />\n</>}>`,
     links,
     featuresSection(ctx),
-    // The first example in the stories file, shown again below with the rest.
-    ctx.stories.length && `<Canvas of={Stories.${ctx.stories[0].name}} />`,
+    `<Canvas of={Stories.${overview.name}} />`,
     usageSection(component, 'web', ctx),
     section('Props and playground', '<Primary />\n<Controls />'),
     examplesSection(component, examples),

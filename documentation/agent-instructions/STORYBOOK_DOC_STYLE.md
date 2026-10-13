@@ -7,7 +7,7 @@ It is for anyone writing or changing a component's docs: developers, AI agents a
 ## Adding docs to a component
 
 1. Document the `NameProps` type. Give every prop a JSDoc description, and add `@default` where it has a default.
-2. Write `Name.stories.tsx`. On web, name the playground story `Introduction`. Add one export for each example, with a caption in `parameters.docs.description.story`. On mobile the stories are example code only.
+2. Write `Name.stories.tsx`. On web, name the playground story `Introduction` and add an `Overview` story, which is the display shown right after Features. Add one export for each example, with a caption in `parameters.docs.description.story`. On mobile the stories are example code only.
 3. Create `Name.docs.md` next to the component, on each platform it exists on. The web file has the Summary. Add `aria:` or `docs:` metadata if the component has them.
 4. Run `pnpm run generate:component-docs Name`.
 5. Open the page in Storybook and read it, including the React Native tab.
@@ -20,7 +20,7 @@ Everything for a component sits in the folder that holds `Name.tsx`. On mobile t
 | File                                                                       | Written by                              | Gives the page                      |
 | -------------------------------------------------------------------------- | --------------------------------------- | ----------------------------------- |
 | `NameProps` type or interface, in any non-test file of the folder          | The developer, along with the component | Props                               |
-| `Name.stories.tsx`                                                         | The developer                           | Examples and captions               |
+| `Name.stories.tsx`                                                         | The developer                           | Examples, captions and the overview |
 | `Name.docs.md`                                                             | A person                                | What code cannot tell us, see below |
 | `Name.figma.tsx` (web)                                                     | The developer                           | The Figma link                      |
 | `Name.docs.mdx` (web), `docs/Name.mdx` in `eds-mobile-components` (mobile) | The generator                           | The pages. Never edit them          |
@@ -29,7 +29,7 @@ Mobile story files only supply example code. They are excluded from the build an
 
 ## Page structure
 
-Both platforms use the same sections in the same order, and the React Native tab sits on the same page as the React tab. The web tab also shows the first example right after Features.
+Both platforms use the same sections in the same order, and the React Native tab sits on the same page as the React tab. The web tab also shows an `Overview` right after Features.
 
 | Section            | Web                                        | Mobile           | Source                                             |
 | ------------------ | ------------------------------------------ | ---------------- | -------------------------------------------------- |
@@ -37,7 +37,7 @@ Both platforms use the same sections in the same order, and the React Native tab
 | Beta callout       | Above the tabs                             | Not in the tab   | Generated                                          |
 | Links row          | In the tab                                 | In the tab       | Generated                                          |
 | Features           | Required                                   | Required         | Hand-written                                       |
-| First example      | After Features                             | Not shown        | The first example in the stories file              |
+| Overview           | After Features                             | Not shown        | The `Overview` story in the stories file           |
 | Usage              | Required                                   | Required         | Install and import generated, snippet hand-written |
 | Props              | `Props and playground`, with live controls | `Props`, a table | Generated                                          |
 | Examples           | Required                                   | Required         | The stories file                                   |
@@ -100,7 +100,9 @@ Any other heading or metadata key fails the generator. Metadata is not content a
 
 **Props.** Generated from `NameProps`. Every prop needs a JSDoc description, or the generator fails, and a `@default` tag where it has a default. Props declared in `node_modules`, such as HTML attributes and `ViewProps`, are not listed. Props from a base type in this repo are. With no props of its own, mobile prints "Name has no props of its own".
 
-**Examples.** At least one besides the playground, which is web's `Introduction` story. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). The first example in the file also appears right after Features, so put the one that shows the component best first. It can show two to four instances, and it has no caption of its own because the Summary and Features lead into it. Add a caption to the examples below with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
+**Overview.** Web only, and required. Written by the developer, in the stories file. The display shown right after Features, with no heading and no caption, because the Summary and Features lead into it. It shows a few instances that give a feel for the component, not every variant. Choose what suits the component: for a Badge a few tones in solid and outlined, for a Checkbox its main states. It is not listed under Examples, so it may overlap with them.
+
+**Examples.** At least one besides the playground and the overview, which are web's `Introduction` and `Overview` stories. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). Add a caption to each example with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
 
 **Accessibility.** Cover each topic that applies, with as many bullets as needed:
 
@@ -142,6 +144,7 @@ A component has one design doc across platforms. Add `aria:` only where a W3C pa
 | No Summary in a mobile file                                     | Yes                       |                |
 | `aria:` is a W3C URL, and a `docs:` page exists                 | Yes                       |                |
 | At least one Example                                            | Yes                       |                |
+| An `Overview` story on web                                      | Yes                       |                |
 | Every prop has a JSDoc description                              | Yes                       |                |
 | No en or em dashes in a page                                    | Yes                       |                |
 | Generated pages are up to date                                  | Yes, with `--check` in CI |                |
