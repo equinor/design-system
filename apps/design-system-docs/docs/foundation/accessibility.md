@@ -4,7 +4,7 @@ hide_title: true
 description: 'All digital interfaces should be inclusive and accessible for everyone, regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.'
 ---
 
-The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [Uutilsynet](https://www.uutilsynet.no/) AA level requirements. The components are accessible on their own, but how you lay them out, combine them and write their content decides whether the finished interface is. This page covers what to keep in mind when you do that.
+The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [Uutilsynet](https://www.uutilsynet.no/) AA level requirements, with one exception: colour contrast is measured with APCA instead of the WCAG 2.1 contrast ratio, as explained under [Colour](#colour). The components are accessible on their own, but how you lay them out, combine them and write their content decides whether the finished interface is. This page covers what to keep in mind when you do that.
 
 ## What is accessibility?
 
@@ -38,7 +38,7 @@ There are also different types of situations that need consideration:
 
 ### Target size
 
-Small or tightly packed targets are easy to miss, especially on a touch screen. WCAG 2.1 has no target size requirement at level AA, but WCAG 2.2 adds one, [2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html): a target should be at least 24 by 24 CSS pixels, or have enough space around it that a 24px circle centred on it does not overlap another target. For touch, aim for 44 by 44, which is the WCAG AAA level (2.5.5).
+Small or tightly packed targets are easy to miss, especially on a touch screen. WCAG 2.1 sets no target size requirement at level AA. Its level AAA criterion, [2.5.5 Target Size](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html), asks for targets of at least 44 by 44 CSS pixels. EDS does not require level AAA, but we recommend 44 by 44 for anything used on a touch screen, and enough space between smaller targets that users do not hit the wrong one.
 
 EDS controls are smaller at Compact density than at Comfortable or Relaxed, so check target sizes at the density you ship.
 
@@ -71,7 +71,9 @@ Important information should not be in or over images. Make sure to always capti
 
 ### Colour
 
-Use the EDS colour tokens. Their contrast is measured with APCA, with targets of Lc 90 for body text and Lc 60 for interactive elements against `background.surface`. A token name alone does not guarantee contrast: on any other fill, check the foreground and background you use, in both colour schemes and every state. [Contrast](./colour/intro.mdx#contrast) explains the method and the targets.
+Use the EDS colour tokens. Their contrast is measured with APCA, with targets of Lc 90 for body text and Lc 60 for interactive elements against `background.surface`. We use APCA instead of the WCAG 2.1 contrast ratio because it accounts for font size, weight and whether the text is lighter or darker than its background, which the ratio does not. APCA has been proposed as the contrast method for WCAG 3, which is still a draft. If your interface has to document conformance with WCAG 2.1, also check the ratio (4.5:1 for text, 3:1 for large text and interface components), because a pair can pass APCA and still fail it.
+
+A token name alone does not guarantee contrast: on any other fill, check the foreground and background you use, in both colour schemes and every state. [Contrast](./colour/intro.mdx#contrast) explains the method and the targets.
 
 Many users have trouble distinguishing colours from each other, so make sure colour is not the only way you convey certain information. For example, danger should not be indicated by red colour alone.
 
