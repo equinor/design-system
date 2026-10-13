@@ -254,7 +254,8 @@ export function buildStepData(
   return steps.map((hex, index) => {
     const white = calcContrast('#ffffff', hex)
     const black = calcContrast('#000000', hex)
-    const useWhite = parseFloat(white.wcag) >= parseFloat(black.wcag)
+    // Compare the unrounded ratios: both can round to the same value
+    const useWhite = white.wcagRatio >= black.wcagRatio
     const recommended: TextChoice = useWhite
       ? { ...white, color: '#ffffff', label: 'White (#ffffff)' }
       : { ...black, color: '#000000', label: 'Black (#000000)' }

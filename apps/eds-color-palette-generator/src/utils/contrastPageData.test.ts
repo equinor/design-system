@@ -85,4 +85,11 @@ describe('buildStepData', () => {
     expect(data.map((d) => d.step)).toEqual([15, 1])
     expect(data.every((d) => d.role === '')).toBe(true)
   })
+
+  it('recommends the text colour with the higher unrounded ratio', () => {
+    // #006cff is 4.58:1 against white and 4.59:1 against black, both shown
+    // as 4.6
+    const [data] = buildStepData(['#006cff', '#ffffff'], 'gradient', [1, 2])
+    expect(data.recommended.color).toBe('#000000')
+  })
 })
