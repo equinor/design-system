@@ -24,6 +24,12 @@ function applyToDocument(scheme: ColorScheme) {
   document.documentElement.setAttribute('data-color-scheme', scheme)
 }
 
+/** Whether the URL asks for a scheme with `?mode=`, as shared links do. */
+function urlSetsScheme(): boolean {
+  const mode = new URLSearchParams(window.location.search).get('mode')
+  return mode === 'light' || mode === 'dark'
+}
+
 export function ColorSchemeProvider({
   children,
 }: {
@@ -42,10 +48,11 @@ export function ColorSchemeProvider({
   }, [])
 
   useEffect(() => {
-    // Follow system changes only while the user has not chosen a scheme.
+    // Follow system changes only while neither the user nor the link has
+    // chosen a scheme.
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handler = (e: MediaQueryListEvent) => {
-      if (localStorageUtils.getColorScheme(null)) return
+      if (localStorageUtils.getColorScheme(null) || urlSetsScheme()) return
       const next: ColorScheme = e.matches ? 'dark' : 'light'
       applyToDocument(next)
       setColorSchemeState(next)

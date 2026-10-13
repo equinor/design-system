@@ -7,6 +7,7 @@ import {
   apcaLevel,
   buildContrastGrid,
 } from './contrastTable'
+import { calcContrast } from './palette'
 import { tokensStudioPalettes } from './semanticTokens'
 
 const HEX = /^#[0-9a-f]{6}$/i
@@ -102,7 +103,53 @@ describe('buildContrastGrid', () => {
         (c) => c.fg === row.path && c.bg === cell.column.path,
       )
       expect(cell.check?.target).toBe(adr?.lc)
-      expect(cell.check?.pass).toBe(cell.lc >= (adr?.lc ?? Infinity))
     }
+  })
+
+  // ADR 0016 Confirmation 5: text roles against background.surface, and
+  // on-emphasis against the emphasis fill of every tone. The active palette
+  // plays the tone, so each hue takes a turn.
+  it.each(SCHEMES)(
+    'meets every ADR 0016 target with the Tokens Studio palettes in %s',
+    (scheme) => {
+      const palettes = tokensStudioPalettes(scheme)
+      for (const active of palettes) {
+        const grid = buildContrastGrid(palettes, active, scheme)
+        for (const adr of ADR_CHECKS) {
+          const row = grid.rows.find((r) => r.path === adr.fg)
+          const cell = row?.cells.find((c) => c.column.path === adr.bg)
+          const lc = calcContrast(row?.hex ?? '', cell?.column.hex ?? '').apcaLc
+          expect(
+            lc,
+            `${active.name}: ${adr.fg} on ${adr.bg} is Lc ${lc.toFixed(2)}`,
+          ).toBeGreaterThanOrEqual(adr.lc)
+          expect(cell?.check?.pass).toBe(true)
+        }
+      }
+    },
+  )
+
+  it('judges the level and the ADR 0016 check on the unrounded Lc', () => {
+    // A neutral where text.secondary is #8f8f8f and everything else is
+    // white: Lc 59.6 on background.surface, shown rounded as 60
+    const defaults = buildContrastGrid(
+      tokensStudioPalettes('light'),
+      byName('light', 'Gray'),
+      'light',
+    )
+    const secondaryStep =
+      defaults.rows.find((r) => r.path === 'text.secondary')?.step ?? 0
+    const steps = Array.from({ length: 15 }, (_, i) =>
+      i === secondaryStep - 1 ? '#8f8f8f' : '#ffffff',
+    )
+    const gray = { name: 'Gray', steps }
+    const grid = buildContrastGrid([gray], gray, 'light')
+    const cell = grid.rows
+      .find((r) => r.path === 'text.secondary')
+      ?.cells.find((c) => c.column.path === 'background.surface')
+
+    expect(cell?.lc).toBe(60)
+    expect(cell?.level).toEqual({ label: '45+', kind: 'level' })
+    expect(cell?.check).toEqual({ target: 60, pass: false })
   })
 })

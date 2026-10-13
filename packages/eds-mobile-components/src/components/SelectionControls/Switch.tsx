@@ -11,10 +11,27 @@ import { EDSStyleSheet } from "../../styling";
 import { ANIMATION_DURATION } from "../../utils/animation";
 
 export type SwitchProps = {
+    /**
+     * Called when the switch is toggled.
+     */
     onChange?: (isActive: boolean) => void;
+    /**
+     * Whether the switch is on or off.
+     * @default false
+     */
     active?: boolean;
+    /**
+     * Disables interaction.
+     * @default false
+     */
     disabled?: boolean;
+    /**
+     * Text label displayed next to the switch.
+     */
     label?: string;
+    /**
+     * Ref to the switch.
+     */
     ref?: React.Ref<View>;
 } & ViewProps;
 

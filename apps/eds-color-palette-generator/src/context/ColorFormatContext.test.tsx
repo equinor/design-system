@@ -1,11 +1,13 @@
 // @vitest-environment jsdom
-// `colourInFormat` itself is covered in ColorFormatContext.test.ts; this file
-// covers the provider and the hook.
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { STORAGE_KEYS } from '@/utils/localStorage'
-import { ColorFormatProvider, useColorFormat } from './ColorFormatContext'
+import {
+  ColorFormatProvider,
+  colourInFormat,
+  useColorFormat,
+} from './ColorFormatContext'
 
 const WHITE_OKLCH = 'oklch(1 0 0)'
 
@@ -96,5 +98,22 @@ describe('useColorFormat', () => {
       'useColorFormat must be used within a ColorFormatProvider',
     )
     error.mockRestore()
+  })
+})
+
+describe('colourInFormat', () => {
+  it('keeps OKLCH text as written', () => {
+    expect(colourInFormat('oklch(0.4973 0.084851 204.553)', 'OKLCH')).toBe(
+      'oklch(0.4973 0.084851 204.553)',
+    )
+  })
+
+  it('converts hex and bare hex digits to OKLCH', () => {
+    expect(colourInFormat('#ffffff', 'OKLCH')).toBe('oklch(1 0 0)')
+    expect(colourInFormat('ffffff', 'OKLCH')).toBe('oklch(1 0 0)')
+  })
+
+  it('shows any colour as hex in HEX mode', () => {
+    expect(colourInFormat('oklch(1 0 0)', 'HEX')).toBe('#ffffff')
   })
 })

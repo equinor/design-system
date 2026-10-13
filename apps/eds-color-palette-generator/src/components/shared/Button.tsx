@@ -16,7 +16,7 @@ type ButtonStyleOptions = {
  * :focus-visible ring from globals.css.
  */
 const BASE =
-  'inline-flex items-center justify-center shrink-0 rounded font-medium whitespace-nowrap cursor-pointer transition-colors duration-150 disabled:cursor-not-allowed'
+  'inline-flex items-center justify-center shrink-0 rounded-sm font-medium whitespace-nowrap cursor-pointer transition-colors duration-150 disabled:cursor-not-allowed'
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:

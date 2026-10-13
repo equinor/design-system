@@ -9,8 +9,8 @@ export const font = {
     ui: 'Inter',
   },
   weight: {
-    bolder: 500,
-    lighter: 300,
+    bold: 700,
+    medium: 500,
     normal: 400,
   },
 } as const

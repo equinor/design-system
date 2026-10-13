@@ -11,7 +11,6 @@ import type { SegmentedOption } from './SegmentedControl'
 
 type Scheme = 'light' | 'dark'
 
-// The aria-labels are what the e2e tests look for.
 const SCHEME_OPTIONS: SegmentedOption<Scheme>[] = [
   { value: 'light', label: 'Light', icon: light, 'aria-label': 'Light theme' },
   { value: 'dark', label: 'Dark', icon: dark_mode, 'aria-label': 'Dark theme' },
