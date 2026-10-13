@@ -78,13 +78,16 @@ export function Dialog({
         pressedOnBackdrop.current = false
       }}
       className={[
-        'm-auto w-[min(480px,calc(100vw-2rem))] max-h-[calc(100vh-2rem)] overflow-auto rounded border-0 bg-dialog p-0 text-primary shadow-lg backdrop:bg-[var(--eds-overlay-scrim)]',
+        'm-auto w-[min(480px,calc(100vw-2rem))] max-h-[calc(100vh-2rem)] overflow-hidden rounded border-0 bg-dialog p-0 text-primary shadow-lg backdrop:bg-[var(--eds-overlay-scrim)]',
         className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
-      <div className="flex flex-col">
+      {/* This wrapper scrolls. A press on a scrollbar of the <dialog> itself
+          would count as a backdrop press and close it, so overflow-hidden on
+          the <dialog> overrides the browser's overflow: auto. */}
+      <div className="flex max-h-[calc(100vh-2rem)] flex-col overflow-auto">
         <div className={`flex items-center gap-2 ${SECTION}`}>
           <h2
             id={titleId}

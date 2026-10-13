@@ -163,6 +163,16 @@ describe('Dialog', () => {
       expect(screen.queryByRole('dialog')).toBeNull()
     })
 
+    it('scrolls inside the content, so a press on the scrollbar is not a backdrop press', () => {
+      renderDialog()
+      const dialog = screen.getByRole('dialog')
+      const content = dialog.firstElementChild
+
+      expect(dialog).toHaveClass('overflow-hidden')
+      expect(dialog).not.toHaveClass('overflow-auto')
+      expect(content).toHaveClass('overflow-auto')
+    })
+
     it('stays open when a press starts in the content and ends on the backdrop', () => {
       const { onClose } = renderDialog()
 
