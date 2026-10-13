@@ -185,7 +185,7 @@ EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 
 EDS 1.0: `Checkbox`.
 
-**Props**: `label` accepts a ReactNode. `type` cannot be passed. New: `indicator`, `helperMessage`. `helperMessage` is planned for removal again, since helper text on selection controls is not an intended use case ([#5183](https://github.com/equinor/design-system/issues/5183)).
+**Props**: `label` accepts a ReactNode. `type` cannot be passed. New: `indicator`.
 
 **Markup**: with a `label`, the root changes from `<label>` to `<div class="eds-field eds-checkbox">`; without a label it is `<span class="eds-checkbox" data-standalone>`, where EDS 1.0 rendered the bare `<input>`. `className` and `style` land on that root and are merged with `eds-checkbox`, so `.your-class input` reaches the native checkbox. The icon is three SVGs with the classes `icon-checked`, `icon-unchecked` and `icon-indeterminate` instead of one swapped SVG. Indeterminate state sets `aria-checked="mixed"`, and the component also sets the native `indeterminate` property when `ref` is an object ref or omitted. With a callback ref, set the property yourself.
 
