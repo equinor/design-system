@@ -1059,3 +1059,49 @@ describe('Autocomplete: Density mode', () => {
     expect(inputContainer).toBeInTheDocument()
   })
 })
+
+describe('Autocomplete: Multiple input click area', () => {
+  const renderWithChips = () =>
+    render(
+      <Autocomplete
+        label={labelText}
+        options={items}
+        multiple
+        selectionDisplay="chips"
+        initialSelectedOptions={['One']}
+      />,
+    )
+
+  it('Opens the menu and focuses the input when clicking the padding beside a chip', () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = input.parentElement?.parentElement as HTMLElement
+
+    fireEvent.mouseDown(wrapper)
+    fireEvent.click(wrapper)
+
+    expect(input).toHaveFocus()
+    expect(input).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('Opens the menu when clicking the gap between chips', () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const chipContainer = input.parentElement as HTMLElement
+
+    fireEvent.click(chipContainer)
+
+    expect(input).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('Does not open the menu when clicking a chip', () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+
+    fireEvent.click(screen.getByText('One'))
+
+    expect(input).toHaveAttribute('aria-expanded', 'false')
+  })
+})
