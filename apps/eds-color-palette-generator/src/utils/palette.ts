@@ -156,14 +156,25 @@ export function calcContrast(fg: string, bg: string): ContrastResult {
 
 const SIMULATION_PALETTES_KEY = 'colorPalette_simulationPalettes'
 
+function isTokenPalette(value: unknown): value is TokenPalette {
+  if (typeof value !== 'object' || value === null) return false
+  const { name, steps } = value as Record<string, unknown>
+  return (
+    typeof name === 'string' &&
+    Array.isArray(steps) &&
+    steps.every((step) => typeof step === 'string')
+  )
+}
+
 export function getSimulationPalettes(): TokenPalette[] {
   if (typeof window === 'undefined') return []
   try {
     const item = localStorage.getItem(SIMULATION_PALETTES_KEY)
     const parsed: unknown = item ? JSON.parse(item) : []
-    // Anything but a list (null, an object from an older version) would
-    // crash the pages that map over the palettes
-    return Array.isArray(parsed) ? parsed : []
+    // Anything but a list of palettes (null, an object from an older
+    // version, a palette without steps) would crash the pages that map over
+    // the palettes, and it stays stored across reloads
+    return Array.isArray(parsed) ? parsed.filter(isTokenPalette) : []
   } catch {
     return []
   }

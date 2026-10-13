@@ -254,6 +254,21 @@ describe('simulation palettes', () => {
     expect(getSimulationPalettes()).toEqual([])
   })
 
+  it('drops stored entries that are not palettes', () => {
+    localStorage.setItem(
+      'colorPalette_simulationPalettes',
+      JSON.stringify([
+        { name: 'x' },
+        { name: 'Bad steps', steps: [1, 2] },
+        { steps: ['#111111'] },
+        null,
+        'Custom',
+        palettes[0],
+      ]),
+    )
+    expect(getSimulationPalettes()).toEqual([palettes[0]])
+  })
+
   it('does not throw when writing fails', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('quota exceeded')
