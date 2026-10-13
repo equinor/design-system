@@ -2,7 +2,8 @@
 /*
  * Script: generate-palette-contrast-report.ts
  * Purpose: Generate color scales for each base color and compute current contrast values
- * Uses helper functions from src/utils/color.ts (generateColorScale, contrast)
+ * Uses helper functions from src/utils/color.ts (generateColorScale, contrast,
+ *   contrastValue)
  * Output: PALETTE_CONTRAST_REPORT.md
  */
 
@@ -15,7 +16,7 @@ import {
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
 } from '../src/config/config'
-import { generateColorScale, contrast } from '../src/utils/color'
+import { generateColorScale, contrast, contrastValue } from '../src/utils/color'
 import { ColorDefinition, ColorAnchor } from '../src/types'
 import Color from 'colorjs.io'
 
@@ -127,10 +128,14 @@ function computeContrasts() {
         background: bgDark,
         algorithm: 'WCAG21',
       })
-      const lightApcaNum = Number(lightApca)
-      const lightWcagNum = Number(lightWcag)
-      const darkApcaNum = Number(darkApca)
-      const darkWcagNum = Number(darkWcag)
+      // Pass flags use the unrounded values; the strings above are rounded
+      // for display
+      const exact = (fg: string, bg: string, algorithm: 'APCA' | 'WCAG21') =>
+        contrastValue({ foreground: fg, background: bg, algorithm })
+      const lightApcaNum = exact(fgLight, bgLight, 'APCA')
+      const lightWcagNum = exact(fgLight, bgLight, 'WCAG21')
+      const darkApcaNum = exact(fgDark, bgDark, 'APCA')
+      const darkWcagNum = exact(fgDark, bgDark, 'WCAG21')
       return {
         ...req,
         lightApca: String(lightApca),

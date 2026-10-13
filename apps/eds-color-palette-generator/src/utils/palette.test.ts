@@ -178,6 +178,19 @@ describe('calcContrast', () => {
     expect(calcContrast('#5a5a5a', '#ffffff').aaa).toBe(false)
   })
 
+  it('gives the unrounded APCA Lc next to the rounded one', () => {
+    // #8f8f8f on white is Lc 59.6, shown rounded as 60
+    const result = calcContrast('#8f8f8f', '#ffffff')
+    expect(result.apca).toBe('60')
+    expect(result.apcaLc).toBeGreaterThan(59.5)
+    expect(result.apcaLc).toBeLessThan(60)
+  })
+
+  it('gives the APCA Lc as a positive value for both polarities', () => {
+    expect(calcContrast('#ffffff', '#000000').apcaLc).toBeGreaterThan(0)
+    expect(calcContrast('#000000', '#ffffff').apcaLc).toBeGreaterThan(0)
+  })
+
   it('gives the same WCAG ratio in either direction', () => {
     expect(calcContrast('#767676', '#ffffff').wcag).toBe(
       calcContrast('#ffffff', '#767676').wcag,
@@ -200,6 +213,7 @@ describe('calcContrast', () => {
       wcag: '0',
       apca: '0',
       wcagRatio: 0,
+      apcaLc: 0,
       aa: false,
       aaa: false,
     })

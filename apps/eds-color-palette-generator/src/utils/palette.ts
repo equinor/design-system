@@ -1,5 +1,4 @@
-import Color from 'colorjs.io'
-import { contrast } from '@/utils/color'
+import { contrast, contrastValue } from '@/utils/color'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 
 /* ------------------------------------------------------------------ */
@@ -96,9 +95,12 @@ export function getApcaFontBreakdown(lc: number) {
 export type ContrastResult = {
   /** The WCAG 2.1 ratio rounded to one decimal, for display */
   wcag: string
+  /** The APCA Lc as a whole number, for display */
   apca: string
   /** The unrounded WCAG 2.1 ratio, which the AA and AAA checks use */
   wcagRatio: number
+  /** The unrounded APCA Lc as an absolute value, which APCA checks use */
+  apcaLc: number
   aa: boolean
   aaa: boolean
 }
@@ -124,17 +126,27 @@ export function calcContrast(fg: string, bg: string): ContrastResult {
       silent: true,
     }),
   )
-  // WCAG thresholds apply to the unrounded ratio: 4.48:1 shows as 4.5 but
-  // does not pass AA
-  const wcagRatio = unroundedWcagRatio(fg, bg)
-  return { wcag, apca, wcagRatio, aa: wcagRatio >= 4.5, aaa: wcagRatio >= 7 }
-}
-
-function unroundedWcagRatio(fg: string, bg: string): number {
-  try {
-    return new Color(bg).contrast(new Color(fg), 'WCAG21')
-  } catch {
-    return 0
+  // Thresholds apply to the unrounded values: 4.48:1 shows as 4.5 but does
+  // not pass AA, and Lc 59.6 shows as 60 but does not reach Lc 60
+  const wcagRatio = contrastValue({
+    foreground: fg,
+    background: bg,
+    algorithm: 'WCAG21',
+    silent: true,
+  })
+  const apcaLc = contrastValue({
+    foreground: fg,
+    background: bg,
+    algorithm: 'APCA',
+    silent: true,
+  })
+  return {
+    wcag,
+    apca,
+    wcagRatio,
+    apcaLc,
+    aa: wcagRatio >= 4.5,
+    aaa: wcagRatio >= 7,
   }
 }
 

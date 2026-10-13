@@ -105,4 +105,28 @@ describe('buildContrastGrid', () => {
       expect(cell.check?.pass).toBe(cell.lc >= (adr?.lc ?? Infinity))
     }
   })
+
+  it('judges the level and the ADR 0016 check on the unrounded Lc', () => {
+    // A neutral where text.secondary is #8f8f8f and everything else is
+    // white: Lc 59.6 on background.surface, shown rounded as 60
+    const defaults = buildContrastGrid(
+      tokensStudioPalettes('light'),
+      byName('light', 'Gray'),
+      'light',
+    )
+    const secondaryStep =
+      defaults.rows.find((r) => r.path === 'text.secondary')?.step ?? 0
+    const steps = Array.from({ length: 15 }, (_, i) =>
+      i === secondaryStep - 1 ? '#8f8f8f' : '#ffffff',
+    )
+    const gray = { name: 'Gray', steps }
+    const grid = buildContrastGrid([gray], gray, 'light')
+    const cell = grid.rows
+      .find((r) => r.path === 'text.secondary')
+      ?.cells.find((c) => c.column.path === 'background.surface')
+
+    expect(cell?.lc).toBe(60)
+    expect(cell?.level).toEqual({ label: '45+', kind: 'level' })
+    expect(cell?.check).toEqual({ target: 60, pass: false })
+  })
 })

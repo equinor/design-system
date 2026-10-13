@@ -142,6 +142,7 @@ export type ResolvedColumn = ResolvedEntry & {
 
 export type ContrastGridCell = {
   column: ResolvedColumn
+  /** The APCA Lc as a whole number, for display */
   lc: number
   wcag: string
   level: ApcaLevel
@@ -198,16 +199,19 @@ export function buildContrastGrid(
     if (!row) return []
     const cells = columns.map((column): ContrastGridCell => {
       const result = calcContrast(row.hex, column.hex)
-      const lc = parseFloat(result.apca)
       const adr = ADR_CHECKS.find(
         (c) => c.fg === row.path && c.bg === column.path,
       )
+      // The level and the check use the unrounded Lc, so a pair at Lc 59.6
+      // shows as 60 but does not pass an Lc 60 target
       return {
         column,
-        lc,
+        lc: parseFloat(result.apca),
         wcag: result.wcag,
-        level: apcaLevel(lc),
-        check: adr ? { target: adr.lc, pass: lc >= adr.lc } : undefined,
+        level: apcaLevel(result.apcaLc),
+        check: adr
+          ? { target: adr.lc, pass: result.apcaLc >= adr.lc }
+          : undefined,
       }
     })
     return [{ ...row, label: row.role, cells }]

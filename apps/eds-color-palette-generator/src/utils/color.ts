@@ -338,6 +338,35 @@ export function contrast({
 }
 
 /**
+ * The unrounded contrast between two colours, as an absolute value. Pass and
+ * fail checks must use this rather than `contrast()`, which rounds for
+ * display: Lc 59.6 shows as 60 but does not reach an Lc 60 target.
+ * @returns The WCAG 2.1 ratio or the APCA Lc, or 0 if a colour cannot be parsed
+ */
+export function contrastValue({
+  foreground,
+  background,
+  algorithm,
+  silent = false,
+}: {
+  foreground: string
+  background: string
+  algorithm: Algorithms
+  silent?: boolean
+}): number {
+  try {
+    return Math.abs(
+      new Color(background).contrast(new Color(foreground), algorithm),
+    )
+  } catch (error) {
+    if (!silent) {
+      console.error('Error calculating contrast:', error)
+    }
+    return 0
+  }
+}
+
+/**
  * Perceptual colour difference between two colours. Used to keep categorical
  * data-viz series visually distinct (not just contrasty).
  * @param a - First colour (any colorjs.io-supported format)
