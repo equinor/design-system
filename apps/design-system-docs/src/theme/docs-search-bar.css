@@ -26,9 +26,9 @@
   border-radius: var(--eds-corner-radius-rounded);
 
   font-family: var(--eds-font-family-ui);
-  font-size: var(--eds-typography-ui-md-font-size);
+  font-size: var(--eds-typography-label-md-font-size);
   font-weight: var(--eds-font-weight-normal);
-  line-height: var(--eds-typography-ui-md-line-height);
+  line-height: var(--eds-typography-label-md-line-height);
   color: var(--eds-text-primary);
 
   /* Shorthand, so it also clears Infima's built-in magnifying-glass
@@ -89,9 +89,9 @@
   border: unset;
 
   font-family: var(--eds-font-family-ui);
-  font-size: var(--eds-typography-ui-xs-font-size);
+  font-size: var(--eds-typography-label-xs-font-size);
   font-weight: var(--eds-font-weight-normal);
-  line-height: var(--eds-typography-ui-xs-line-height);
+  line-height: var(--eds-typography-label-xs-line-height);
   color: var(--eds-text-secondary);
 
   background-color: unset;

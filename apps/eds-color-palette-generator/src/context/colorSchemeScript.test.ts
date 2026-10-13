@@ -14,6 +14,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
+  vi.restoreAllMocks()
   vi.unstubAllGlobals()
   window.history.replaceState(null, '', '/')
   document.documentElement.removeAttribute('data-color-scheme')
@@ -60,6 +61,15 @@ describe('COLOR_SCHEME_SCRIPT', () => {
 
   it('uses the system preference when the saved value is not JSON', () => {
     localStorage.setItem(STORAGE_KEYS.COLOR_SCHEME, 'not json')
+    systemDark = true
+
+    expect(runScript()).toBe('dark')
+  })
+
+  it('uses the system preference when reading storage throws', () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new DOMException('The operation is insecure.', 'SecurityError')
+    })
     systemDark = true
 
     expect(runScript()).toBe('dark')

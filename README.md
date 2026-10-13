@@ -27,7 +27,7 @@ packages/                # Published npm packages
   eds-tokens/            # Design tokens
   eds-icons/             # Icon library
   eds-lab-react/         # Experimental components
-  eds-data-grid-react/   # Data grid component
+  eds-data-grid-react/   # Data grid component (deprecated)
   eds-utils/             # Utility functions
   eds-tailwind/          # Tailwind CSS plugin
 ```
@@ -131,7 +131,7 @@ C4Context
 | [Tokens](https://github.com/equinor/design-system/tree/main/packages/eds-tokens) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-tokens)](https://www.npmjs.com/package/@equinor/eds-tokens)|
 | [Icons](https://github.com/equinor/design-system/tree/main/packages/eds-icons) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml)| [![Version](https://img.shields.io/npm/v/@equinor/eds-icons)](https://www.npmjs.com/package/@equinor/eds-icons)|
 | [Lab React](https://github.com/equinor/design-system/tree/main/packages/eds-lab-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-lab-react)](https://www.npmjs.com/package/@equinor/eds-lab-react) |
-| [Data Grid React](https://github.com/equinor/design-system/tree/main/packages/eds-data-grid-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-data-grid-react)](https://www.npmjs.com/package/@equinor/eds-data-grid-react) |
+| [Data Grid React](https://github.com/equinor/design-system/tree/main/packages/eds-data-grid-react) **(deprecated)** | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-data-grid-react)](https://www.npmjs.com/package/@equinor/eds-data-grid-react) |
 | [Utils](https://github.com/equinor/design-system/tree/main/packages/eds-utils) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-utils)](https://www.npmjs.com/package/@equinor/eds-utils) |
 
 ## Applications
@@ -401,6 +401,13 @@ import { Stepper } from '@equinor/eds-lab-react'
 See our [Storybook](https://storybook.eds.equinor.com/) for more examples and available components.
 
 ## Data Grid
+
+> **⚠️ Deprecated: no longer maintained.** `@equinor/eds-data-grid-react` stays on npm and
+> keeps working, but it receives no bug fixes, new features or security updates. We do not
+> have the resources to maintain a component of this size. A recommendation for what to use
+> instead is being worked out, see
+> [#4656](https://github.com/equinor/design-system/issues/4656). Background:
+> [#5390](https://github.com/equinor/design-system/issues/5390).
 
 A powerful data grid component built with [TanStack Table](https://tanstack.com/table), providing sorting, filtering, and other advanced table features.
 

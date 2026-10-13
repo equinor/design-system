@@ -22,7 +22,8 @@ export const CVD_DICHROMACIES = [
  * SVG feColorMatrix values (4×5) for colour-vision-deficiency simulation.
  * Shared by the on-screen SVG filter (CVDFilter) and the numeric simulateCVD
  * below, so the preview and the headless accessibility scoring use identical
- * maths.
+ * maths. Both apply the matrix to gamma-encoded sRGB, which is why the
+ * filter sets color-interpolation-filters="sRGB".
  */
 export const CVD_MATRICES: Record<Exclude<CVDType, 'none'>, string> = {
   protanopia:

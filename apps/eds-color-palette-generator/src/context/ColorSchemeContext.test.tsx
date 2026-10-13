@@ -43,6 +43,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.unstubAllGlobals()
+  window.history.replaceState(null, '', '/')
   document.documentElement.removeAttribute('data-color-scheme')
 })
 
@@ -184,6 +185,28 @@ describe('ColorSchemeProvider', () => {
         'data-color-scheme',
         'light',
       )
+    })
+
+    it('ignores a system change while the URL sets the scheme', () => {
+      window.history.replaceState(null, '', '/?mode=light')
+      renderProvider()
+
+      media.systemChange(true)
+
+      expect(scheme()).toHaveTextContent('light')
+      expect(document.documentElement).not.toHaveAttribute(
+        'data-color-scheme',
+        'dark',
+      )
+    })
+
+    it('follows a system change when ?mode= is not a scheme', () => {
+      window.history.replaceState(null, '', '/?mode=sepia')
+      renderProvider()
+
+      media.systemChange(true)
+
+      expect(scheme()).toHaveTextContent('dark')
     })
 
     it('stops listening on unmount', () => {

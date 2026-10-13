@@ -279,8 +279,12 @@ h3 {
   font-family: var(--font-heading);
 }
 
-/* EDS 2.0 focus ring, as on the /next Button: keyboard focus only. */
-:focus-visible {
-  outline: 2px solid var(--eds-border-interactive-focus);
-  outline-offset: 2px;
+/* EDS 2.0 focus ring, as on the /next Button: keyboard focus only. In the
+   base layer so that focus-visible: utilities, which sit in the utilities
+   layer, can change it per component. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: 2px;
+  }
 }

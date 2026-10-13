@@ -19,7 +19,7 @@ export function Badge({ pass, label, variant = 'pass-fail' }: BadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center rounded px-1.5 text-xs leading-[18px] font-medium tracking-[0.02em] ${tone}`}
+      className={`inline-flex items-center rounded-sm px-1.5 text-xs leading-[18px] font-medium tracking-[0.02em] ${tone}`}
     >
       {label}
     </span>

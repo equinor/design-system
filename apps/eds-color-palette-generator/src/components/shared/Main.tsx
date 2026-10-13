@@ -1,9 +1,20 @@
 'use client'
 
+import { useSyncExternalStore } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
-import { useIsMounted } from '@equinor/eds-utils'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { useDensity } from '@/context/DensityContext'
+
+const subscribeToNothing = () => () => {}
+
+/** False on the server and while hydrating, true after that. */
+function useIsMounted(): boolean {
+  return useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false,
+  )
+}
 
 /**
  * The page's <main>, carrying the chosen Tokens Studio density.

@@ -1,6 +1,6 @@
 # Token variable architecture (typography & spacing) for the redefined token system
 
-- **Status:** Accepted
+- **Status:** Superseded by [ADR-0027](0027-token-variable-architecture-typography-roles.md)
 - **Date:** 2026-06-26 (revised 2026-07-01 — mode-free semantic consumption layer; revised 2026-07-13 — aligned to ADR template, unified `header`/`color` naming; revised 2026-08-19 — status set to Accepted)
 - **Decision makers:** EDS core team (design + engineering)
 - **Scope:** Tokens

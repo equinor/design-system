@@ -36,7 +36,7 @@ export function Card({
       aria-labelledby={title ? headingId : undefined}
       data-testid={testId}
       className={[
-        'rounded border border-muted bg-surface text-primary',
+        'rounded-sm border border-muted bg-surface text-primary',
         padded ? 'p-5' : '',
         className,
       ]
