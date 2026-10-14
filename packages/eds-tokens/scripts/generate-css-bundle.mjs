@@ -30,10 +30,10 @@
  * wants the new values has to put the legacy one in a lower layer
  * itself: `@import '@equinor/eds-tokens/css/variables'
  * layer(eds-tokens-legacy)`, with `eds-tokens-legacy` ahead of
- * `eds-tokens` in the order statement. The docs site does exactly that
- * (`apps/design-system-docs/src/css/theme-variables.css`); Storybook
- * deliberately leaves legacy unlayered, so it keeps winning there for
- * the 1.0 components. Emitting the published legacy bundle inside a
+ * `eds-tokens` in the order statement. Every stylesheet in this
+ * repository that puts legacy on a Tokens Studio page does that, and
+ * `src/__tests__/legacy-token-layer.test.ts` fails if one stops.
+ * Emitting the published legacy bundle inside a
  * layer was rejected — it would change the cascade under every 2.x
  * consumer mid-major, to fix a problem only mixed apps have.
  *

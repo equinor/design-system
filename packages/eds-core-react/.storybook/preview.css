@@ -1,18 +1,21 @@
+/* Layer order for a canvas that loads both token bundles. The Tokens
+   Studio bundle ships inside @layer eds-tokens (ADR-0014 § 6) and an
+   unlayered stylesheet beats any layer, so the legacy bundle has to be
+   imported into a lower layer or it wins the ten names the two share.
+   This statement must precede the @import rules; a layer statement is
+   one of the few things allowed to. */
+@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;
+
 /* Tokens Studio beta bundle (ADR-0009: published consumers import
    @equinor/eds-tokens/next/css/variables.css; the ./next/* exports are
-   injected at publish time only, hence the relative path locally).
-
-   Legacy wins the ten shared names (--eds-elevation-low/high and the
-   eight --eds-typography-header-*-font-size), which is what this
-   Storybook wants during the mixed period: the 1.0 components on the
-   same canvas are built against those values. That no longer rides on
-   import order — the beta bundle ships inside @layer eds-tokens
-   (ADR-0014 § 6) and the legacy bundle is left unlayered here on
-   purpose, so it beats the layer whichever way the two are ordered.
-   The docs site makes the opposite choice and imports legacy with
-   layer(eds-tokens-legacy). */
+   injected at publish time only, hence the relative path locally). */
 @import '../../eds-tokens/src/tokens/css/variables.css';
-@import '@equinor/eds-tokens/css/variables';
+
+/* Legacy bundle, for the 1.0 components sharing this canvas. They read
+   tokens through styled-components, not through these custom
+   properties, so none of the ten shared names reaches them and the
+   layer costs this Storybook nothing. */
+@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);
 
 /* Ensure form elements inherit EDS typography */
 fieldset,
