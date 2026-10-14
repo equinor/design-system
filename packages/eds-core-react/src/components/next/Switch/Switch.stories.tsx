@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { useArgs } from 'storybook/preview-api'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Switch } from './Switch'
 import type { SwitchProps } from './Switch.types'
 
@@ -161,7 +161,6 @@ export const InheritedDisabled: StoryFn<SwitchProps> = () => (
     </UnstyledList>
   </fieldset>
 )
-InheritedDisabled.storyName = 'Inherited disabled'
 InheritedDisabled.parameters = {
   docs: {
     description: {
@@ -177,9 +176,7 @@ export const LightAndDarkMode: StoryFn<SwitchProps> = () => (
       data-color-scheme="light"
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
-      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
-        Light Mode
-      </p>
+      <ExampleLabel>Light Mode</ExampleLabel>
       <UnstyledList>
         <li>
           <Switch label="Email notifications" />
@@ -199,16 +196,9 @@ export const LightAndDarkMode: StoryFn<SwitchProps> = () => (
       data-color-scheme="dark"
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
-      <p
-        style={{
-          margin: '0 0 8px',
-          fontWeight: 600,
-          fontSize: '14px',
-          color: 'var(--eds-color-text-strong)',
-        }}
-      >
+      <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
         Dark Mode
-      </p>
+      </ExampleLabel>
       <UnstyledList>
         <li>
           <Switch label="Email notifications" />
@@ -240,9 +230,9 @@ export const Density: StoryFn<SwitchProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
     {(['spacious', 'comfortable'] as const).map((density) => (
       <div key={density} data-density={density}>
-        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
-        </p>
+        </ExampleLabel>
         <UnstyledList>
           <li>
             <Switch label="Email" defaultChecked />
@@ -301,7 +291,6 @@ export const StatusAnnouncement: StoryFn<SwitchProps> = () => {
   )
 }
 
-StatusAnnouncement.storyName = 'Status announcement'
 StatusAnnouncement.parameters = {
   docs: {
     description: {

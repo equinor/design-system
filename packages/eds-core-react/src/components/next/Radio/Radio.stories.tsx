@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { ChangeEvent, ReactNode } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Radio } from './Radio'
 import { TextField } from '../TextField'
 import type { RadioProps } from './Radio.types'
@@ -230,9 +230,9 @@ export const Density: StoryFn<RadioProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
     {(['spacious', 'comfortable'] as const).map((density) => (
       <div key={density} data-density={density}>
-        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
-        </p>
+        </ExampleLabel>
         <Wrapper gap={8}>
           <Radio
             label="Email"
@@ -264,9 +264,7 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
-          Light Mode
-        </p>
+        <ExampleLabel>Light Mode</ExampleLabel>
         <Radio label="Unchecked" name="light" value="unchecked" />
         <Radio label="Checked" name="light" value="checked" defaultChecked />
         <Radio label="Disabled" name="light-disabled" disabled />
@@ -283,16 +281,9 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <p
-          style={{
-            margin: '0 0 8px',
-            fontWeight: 600,
-            fontSize: '14px',
-            color: 'var(--eds-color-text-strong)',
-          }}
-        >
+        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
           Dark Mode
-        </p>
+        </ExampleLabel>
         <Radio label="Unchecked" name="dark" value="unchecked" />
         <Radio label="Checked" name="dark" value="checked" defaultChecked />
         <Radio label="Disabled" name="dark-disabled" disabled />
@@ -344,7 +335,6 @@ export const InheritedDisabled: StoryFn<RadioProps> = () => (
     </Wrapper>
   </fieldset>
 )
-InheritedDisabled.storyName = 'Inherited disabled'
 InheritedDisabled.parameters = {
   docs: {
     description: {
