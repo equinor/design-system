@@ -164,7 +164,10 @@ const concatenated = contents.map(([, css]) => css).join('\n')
 // layer's closing brace needs one of its own to land on its own line
 const body = concatenated.endsWith('\n') ? concatenated : `${concatenated}\n`
 
-await writeFile(OUT_FILE, HEADER + LAYER_ORDER + LAYER_OPEN + body + LAYER_CLOSE)
+await writeFile(
+  OUT_FILE,
+  HEADER + LAYER_ORDER + LAYER_OPEN + body + LAYER_CLOSE,
+)
 
 // Regression guard reused from the 2.x build: the bundle must contain no
 // light-dark() literals or lightningcss polyfill markers, and both
