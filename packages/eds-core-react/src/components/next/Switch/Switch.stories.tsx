@@ -2,10 +2,8 @@ import { useState, ChangeEvent } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { useArgs } from 'storybook/preview-api'
 import { Stack } from './../../../../.storybook/components'
-import { Typography } from '../../..'
 import { Switch } from './Switch'
 import type { SwitchProps } from './Switch.types'
-import mdx from './Switch.docs.mdx'
 
 const meta: Meta<typeof Switch> = {
   title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Switch',
@@ -51,7 +49,6 @@ const meta: Meta<typeof Switch> = {
   },
   parameters: {
     docs: {
-      page: mdx,
       source: {
         excludeDecorators: true,
       },
@@ -101,26 +98,37 @@ export const Introduction: StoryFn<SwitchProps> = (args) => {
   return <Switch {...args} onChange={handleChange} />
 }
 
+export const Overview: StoryFn<SwitchProps> = () => (
+  <UnstyledList>
+    <li>
+      <Switch label="Auto-save" defaultChecked />
+    </li>
+    <li>
+      <Switch label="Location access" />
+    </li>
+  </UnstyledList>
+)
+
 export const States: StoryFn<SwitchProps> = () => {
   const [checked, setChecked] = useState(false)
 
   return (
     <UnstyledList>
       <li>
-        <Switch label="Default unchecked" />
+        <Switch label="Email notifications" />
       </li>
       <li>
-        <Switch label="Default checked" defaultChecked />
+        <Switch label="Push notifications" defaultChecked />
       </li>
       <li>
-        <Switch label="Disabled unchecked" disabled />
+        <Switch label="Biometric login" disabled />
       </li>
       <li>
-        <Switch label="Disabled checked" disabled defaultChecked />
+        <Switch label="Two-factor authentication" disabled defaultChecked />
       </li>
       <li>
         <Switch
-          label="Controlled"
+          label="Marketing emails"
           checked={checked}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setChecked(e.target.checked)
@@ -131,15 +139,24 @@ export const States: StoryFn<SwitchProps> = () => {
   )
 }
 
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'A switch is either on or off, and can be disabled while in either state. The last one is controlled, reacting to clicks through `checked` and `onChange` rather than tracking its own state.',
+    },
+  },
+}
+
 export const InheritedDisabled: StoryFn<SwitchProps> = () => (
   <fieldset disabled>
     <legend>Disabled fieldset</legend>
     <UnstyledList>
       <li>
-        <Switch label="Unchecked" />
+        <Switch label="Email notifications" />
       </li>
       <li>
-        <Switch label="Checked" defaultChecked />
+        <Switch label="Push notifications" defaultChecked />
       </li>
     </UnstyledList>
   </fieldset>
@@ -154,74 +171,142 @@ InheritedDisabled.parameters = {
   },
 }
 
-export const DarkMode: StoryFn<SwitchProps> = () => {
-  return (
+export const LightAndDarkMode: StoryFn<SwitchProps> = () => (
+  <div style={{ display: 'flex', gap: '32px' }}>
     <div
-      data-color-scheme="dark"
-      style={{ padding: '2rem', background: '#0b0b0b' }}
+      data-color-scheme="light"
+      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
+      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        Light Mode
+      </p>
       <UnstyledList>
         <li>
-          <Switch label="Dark mode switch" />
+          <Switch label="Email notifications" />
         </li>
         <li>
-          <Switch label="Checked in dark mode" defaultChecked />
+          <Switch label="Push notifications" defaultChecked />
         </li>
         <li>
-          <Switch label="Disabled in dark mode" disabled />
+          <Switch label="Biometric login" disabled />
         </li>
         <li>
-          <Switch label="Disabled checked" disabled defaultChecked />
+          <Switch label="Two-factor authentication" disabled defaultChecked />
         </li>
       </UnstyledList>
     </div>
-  )
-}
-DarkMode.storyName = 'Dark mode'
-
-export const Density: StoryFn<SwitchProps> = () => {
-  return (
-    <div style={{ display: 'flex', gap: '4rem' }}>
-      <div>
-        <Typography variant="h6" style={{ marginBottom: '1rem' }}>
-          Spacious (default)
-        </Typography>
-        <UnstyledList>
-          <li>
-            <Switch label="Unchecked" />
-          </li>
-          <li>
-            <Switch label="Checked" defaultChecked />
-          </li>
-          <li>
-            <Switch label="Disabled" disabled />
-          </li>
-        </UnstyledList>
-      </div>
-      <div data-density="comfortable">
-        <Typography variant="h6" style={{ marginBottom: '1rem' }}>
-          Comfortable
-        </Typography>
-        <UnstyledList>
-          <li>
-            <Switch label="Unchecked" />
-          </li>
-          <li>
-            <Switch label="Checked" defaultChecked />
-          </li>
-          <li>
-            <Switch label="Disabled" disabled />
-          </li>
-        </UnstyledList>
-      </div>
+    <div
+      data-color-scheme="dark"
+      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+    >
+      <p
+        style={{
+          margin: '0 0 8px',
+          fontWeight: 600,
+          fontSize: '14px',
+          color: 'var(--eds-color-text-strong)',
+        }}
+      >
+        Dark Mode
+      </p>
+      <UnstyledList>
+        <li>
+          <Switch label="Email notifications" />
+        </li>
+        <li>
+          <Switch label="Push notifications" defaultChecked />
+        </li>
+        <li>
+          <Switch label="Biometric login" disabled />
+        </li>
+        <li>
+          <Switch label="Two-factor authentication" disabled defaultChecked />
+        </li>
+      </UnstyledList>
     </div>
-  )
+  </div>
+)
+
+LightAndDarkMode.parameters = {
+  docs: {
+    description: {
+      story:
+        'Switch follows the colour scheme set with `data-color-scheme` on a parent element.',
+    },
+  },
 }
+
+export const Density: StoryFn<SwitchProps> = () => (
+  <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
+    {(['spacious', 'comfortable'] as const).map((density) => (
+      <div key={density} data-density={density}>
+        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+          {density.charAt(0).toUpperCase() + density.slice(1)}
+        </p>
+        <UnstyledList>
+          <li>
+            <Switch label="Email" defaultChecked />
+          </li>
+          <li>
+            <Switch label="SMS" />
+          </li>
+          <li>
+            <Switch label="Push" />
+          </li>
+        </UnstyledList>
+      </div>
+    ))}
+  </div>
+)
+
 Density.parameters = {
   docs: {
     description: {
       story:
-        'Use `data-density="comfortable"` on a parent element to render switches in a more compact size. Spacious is the default density.',
+        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
+    },
+  },
+}
+
+export const StatusAnnouncement: StoryFn<SwitchProps> = () => {
+  const [autoSave, setAutoSave] = useState(false)
+  const [status, setStatus] = useState('')
+
+  return (
+    <div>
+      <Switch
+        label="Auto-save"
+        checked={autoSave}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setAutoSave(e.target.checked)
+          setStatus(
+            e.target.checked ? 'Auto-save enabled' : 'Auto-save disabled',
+          )
+        }}
+      />
+      <div
+        aria-live="polite"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          overflow: 'hidden',
+          clip: 'rect(0 0 0 0)',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {status}
+      </div>
+    </div>
+  )
+}
+
+StatusAnnouncement.storyName = 'Status announcement'
+StatusAnnouncement.parameters = {
+  docs: {
+    description: {
+      story:
+        'If toggling a switch causes an important change elsewhere on the page, announce it with a separate `aria-live` region.',
     },
   },
 }
