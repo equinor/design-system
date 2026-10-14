@@ -406,7 +406,7 @@ See our [Storybook](https://storybook.eds.equinor.com/) for more examples and av
 > keeps working, but it receives no bug fixes, new features or security updates. We do not
 > have the resources to maintain a component of this size. A recommendation for what to use
 > instead is being worked out, see
-> [#4656](https://github.com/equinor/design-system/issues/4656). Background:
+> [#5649](https://github.com/equinor/design-system/issues/5649). Background:
 > [#5390](https://github.com/equinor/design-system/issues/5390).
 
 A powerful data grid component built with [TanStack Table](https://tanstack.com/table), providing sorting, filtering, and other advanced table features.
