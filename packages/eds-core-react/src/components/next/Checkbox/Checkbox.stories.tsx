@@ -203,7 +203,9 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <h3 style={{ margin: 0 }}>Light Mode</h3>
+        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+          Light Mode
+        </p>
         <Checkbox label="Unchecked" />
         <Checkbox label="Checked" defaultChecked />
         <Checkbox label="Indeterminate" indeterminate />
@@ -216,9 +218,16 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <h3 style={{ margin: 0, color: 'var(--eds-color-text-strong)' }}>
+        <p
+          style={{
+            margin: '0 0 8px',
+            fontWeight: 600,
+            fontSize: '14px',
+            color: 'var(--eds-color-text-strong)',
+          }}
+        >
           Dark Mode
-        </h3>
+        </p>
         <Checkbox label="Unchecked" />
         <Checkbox label="Checked" defaultChecked />
         <Checkbox label="Indeterminate" indeterminate />
