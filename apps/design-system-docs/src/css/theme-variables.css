@@ -15,8 +15,8 @@
    --eds-typography-header-*-font-size) at equal specificity, so something
    has to decide the winner. Layers do, rather than import order.
 
-   The Tokens Studio bundle ships wrapped in @layer eds-tokens (ADR-0014
-   § 6), and an unlayered stylesheet beats any layer — so left alone, the
+   The Tokens Studio bundle ships wrapped in @layer eds-tokens (ADR-0028
+   point 6), and an unlayered stylesheet beats any layer — so left alone, the
    legacy bundle would win all ten and silently pin the site to the legacy
    flat shadow, which does not flip with the colour scheme. Putting legacy
    in a lower layer restores the intended winner and makes it independent

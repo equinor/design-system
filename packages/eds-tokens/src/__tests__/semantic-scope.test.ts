@@ -61,7 +61,7 @@ const ELEVATION_ALIASES = ['--eds-elevation-key', '--eds-elevation-ambient']
 
 /**
  * The bundle ships wrapped in `@layer eds-tokens`, opened by the layer order
- * statement (ADR-0014 § 6, #5423). Unwrap it before parsing: the block parser
+ * statement (ADR-0028 point 6, #5423). Unwrap it before parsing: the block parser
  * below is flat, so the wrap would otherwise swallow the first rule into a
  * block whose selector is `@layer eds-tokens`. The structure is asserted in
  * its own test, so a bundle that lost the wrap fails loudly there instead of

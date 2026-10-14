@@ -1,9 +1,9 @@
 /* EDS 2.0 Next Components - CSS */
 /* Define layer order - every EDS layer sits below unlayered author CSS,
    so a consumer overrides tokens and components without a specificity
-   fight. The eds-tokens bundle opens with the same statement (ADR-0014
-   § 6): the first order declaration the browser sees wins and repeats
-   are harmless, so neither file has to load first. */
+   fight. The eds-tokens bundle opens with the same statement (ADR-0028
+   point 6): the first order declaration the browser sees wins and
+   repeats are harmless, so neither file has to load first. */
 @layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;
 
 /*
@@ -27,7 +27,7 @@
  * --eds-typography-header-*-font-size), and unlayered CSS beats any
  * layer. Left unlayered here it would win those ten inside every app
  * that loads this file alongside @equinor/eds-tokens/next/css/variables
- * (which ships in @layer eds-tokens, ADR-0014 § 6) — silently, since the
+ * (which ships in @layer eds-tokens, ADR-0028 point 6) — silently, since the
  * values are close enough not to look broken. Scaffolding: it goes away
  * when ./css/variables repoints to the new output at 3.0.0.
  */

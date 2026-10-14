@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, it, expect } from 'vitest'
 
 /**
- * Guards the one rule that makes the `@layer eds-tokens` wrap (ADR-0014 § 6)
+ * Guards the one rule that makes the `@layer eds-tokens` wrap (ADR-0028 point 6)
  * do anything in a repository that still ships both token bundles.
  *
  * Unlayered CSS beats any layer whatever the import order, so a page that has

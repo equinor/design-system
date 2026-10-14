@@ -1,6 +1,6 @@
 /**
  * Guard the Tokens Studio CSS export against colliding custom-property
- * names (#5407, ADR-0014 § Confirmation).
+ * names (#5407, ADR-0028 § Confirmation).
  *
  * The CSS name transform is not injective: both `.` and `-` in a token
  * path flatten to `-`, so `border.focus` and `border-focus` land on the
@@ -37,7 +37,7 @@
  *    anywhere. The new bundle ships inside `@layer eds-tokens` and the
  *    legacy one is unlayered, and unlayered CSS beats any layer
  *    whatever the import order, so the only way out is for the app to
- *    import legacy with `layer(eds-tokens-legacy)` (ADR-0014 § 6).
+ *    import legacy with `layer(eds-tokens-legacy)` (ADR-0028 point 6).
  *    KNOWN_LEGACY_OVERLAP below is the list that has to be cleared
  *    before the `next/*` → `css/*` flip; anything outside it fails.
  *

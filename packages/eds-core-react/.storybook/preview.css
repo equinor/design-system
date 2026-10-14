@@ -1,5 +1,5 @@
 /* Layer order for a canvas that loads both token bundles. The Tokens
-   Studio bundle ships inside @layer eds-tokens (ADR-0014 § 6) and an
+   Studio bundle ships inside @layer eds-tokens (ADR-0028 point 6) and an
    unlayered stylesheet beats any layer, so the legacy bundle has to be
    imported into a lower layer or it wins the ten names the two share.
    This statement must precede the @import rules; a layer statement is

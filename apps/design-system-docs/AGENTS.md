@@ -158,7 +158,7 @@ Both token bundles load (see imports in `theme-variables.css`):
    site CSS. **It must stay inside `layer(eds-tokens-legacy)`:** it declares
    ten names the Tokens Studio bundle also declares — `--eds-elevation-low/high`
    and the eight `--eds-typography-header-*-font-size` — and the Tokens Studio
-   bundle ships wrapped in `@layer eds-tokens` (ADR-0014 § 6), which an
+   bundle ships wrapped in `@layer eds-tokens` (ADR-0028 point 6), which an
    unlayered stylesheet beats outright. Dropping the `layer()` would silently
    pin the site to the legacy values: the legacy flat shadow, which does not
    flip with the colour scheme, and the legacy header sizes (3xl 27.5px

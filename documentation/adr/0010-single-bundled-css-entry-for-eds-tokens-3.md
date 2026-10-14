@@ -118,8 +118,8 @@ granular files stay internal.
   the size gap (4.8 vs 4.6 kB); consumers that bundle minify with
   their own tooling. The bundle's only added behaviour is the
   `@layer eds-tokens` wrap decided in
-  [ADR-0014](./0014-token-code-output-architecture.md) decision point 6
-  and implemented in
+  [ADR-0028](./0028-token-code-output-architecture-typography-roles.md)
+  decision point 6 and implemented in
   [#5423](https://github.com/equinor/design-system/issues/5423): the
   output opens with
   `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
@@ -207,10 +207,9 @@ when the ADR was marked Accepted.
 - [ADR-0013](./0013-attribute-scoped-custom-properties-not-light-dark.md)
   — why the token CSS uses attribute-scoped rules and never
   `light-dark()`
-- [ADR-0014](./0014-token-code-output-architecture.md) (Accepted) — the
-  output architecture; decides the `@layer eds-tokens` wrap this
-  bundle step applies, and how the layer coexists with the unlayered
-  legacy bundle
+- [ADR-0028](./0028-token-code-output-architecture-typography-roles.md)
+  (Accepted, superseding ADR-0014) — the output architecture; decides
+  the `@layer eds-tokens` wrap this bundle step applies
 - PR [#4864](https://github.com/equinor/design-system/pull/4864) — why the
   2.x bundle has explicit dark scopes + the `prefers-color-scheme`
   fallback (`build-dark-scope`)
