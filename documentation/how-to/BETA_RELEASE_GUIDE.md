@@ -96,7 +96,7 @@ fix: correct positioning logic
 # Install beta version
 npm install @equinor/eds-core-react@beta
 
-# Or use specific beta version
+# Or use a specific beta version (replace N with the beta number)
 npm install @equinor/eds-core-react@3.0.0-beta.N
 ```
 
@@ -383,7 +383,7 @@ npm view @equinor/eds-core-react@beta version
 
 - Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `src/components/next/CHANGELOG.md` for beta)
 - Review `trigger_publish.yml` workflow logs (look for `detect-release` step output to see which changelog was detected)
-- Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@3.0.0-beta.N beta`
+- Manually retag if needed, replacing `N` with the beta number: `npm dist-tag add @equinor/eds-core-react@3.0.0-beta.N beta`
 
 ### Components not found in `/next` import
 
