@@ -4,7 +4,7 @@ hide_title: true
 description: 'All digital interfaces should be inclusive and accessible for everyone, regardless of impairments or abilities. Improving accessibility is not only the responsible thing to do, it also enhances the usability for all users. Please use this section as a guide to help ensure your experiences meet or exceed the standards for accessibility.'
 ---
 
-The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [Uutilsynet](https://www.uutilsynet.no/) AA level requirements, with one exception: colour contrast is measured with APCA instead of the WCAG 2.1 contrast ratio, as explained under [Colour](#colour). The components are accessible on their own, but how you lay them out, combine them and write their content decides whether the finished interface is. This page covers what to keep in mind when you do that.
+The UI components for all Equinor's internal digital interfaces are built to meet the [WCAG 2.1][WCAG] and [Uutilsynet](https://www.uutilsynet.no/) AA level requirements. The components are accessible on their own, but how you lay them out, combine them and write their content decides whether the finished interface is. This page covers what to keep in mind when you do that.
 
 ## What is accessibility?
 
@@ -71,9 +71,9 @@ Important information should not be in or over images. Make sure to always capti
 
 ### Colour
 
-Use the EDS colour tokens. Their contrast is measured with APCA, with targets of Lc 90 for body text and Lc 60 for interactive elements against `background.surface`. We use APCA instead of the WCAG 2.1 contrast ratio because it accounts for font size, weight and whether the text is lighter or darker than its background, which the ratio does not. APCA has been proposed as the contrast method for WCAG 3, which is still a draft. If your interface has to document conformance with WCAG 2.1, also check the ratio (4.5:1 for text, 3:1 for large text and interface components), because a pair can pass APCA and still fail it.
+Use the EDS colour tokens. On the backgrounds they are made for, the text and icon tokens meet the WCAG 2.1 AA contrast ratios in both colour schemes and every state: 4.5:1 for text, and 3:1 for large text and interface components. The exception is `text.tertiary` and `icon.tertiary`, which fall below the ratios in the light scheme. Use them only where WCAG 2.1 does not require contrast, such as disabled controls, and never for text people need to read.
 
-A token name alone does not guarantee contrast: on any other fill, check the foreground and background you use, in both colour schemes and every state. [Contrast](./colour/intro.mdx#contrast) explains the method and the targets.
+A token name alone does not guarantee contrast: on any other fill, check the foreground and background you use against the same ratios, in both colour schemes and every state. The colour scales themselves were built with APCA, as [Contrast](./colour/intro.mdx#contrast) describes.
 
 Many users have trouble distinguishing colours from each other, so make sure colour is not the only way you convey certain information. For example, danger should not be indicated by red colour alone.
 
