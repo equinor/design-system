@@ -12,15 +12,23 @@ export type LinkProps = {
     /** Called when the link is pressed. */
     onPress?: TextProps["onPress"];
     /**
-     * Visual variant.
-     * - `standalone` (default): used as a standalone element with a separate underline View and proper touch target.
-     * - `inline`: used inside a sentence alongside other text, renders as a Text element.
+     * Visual variant. `standalone` has its own underline and a proper touch target. `inline` sits inside a sentence of text and renders as a Text element.
+     * @default 'standalone'
      */
     variant?: LinkVariant;
-    /** Font size, matching the Typography UI size scale. Defaults to md. */
+    /**
+     * Font size, matching the Typography UI size scale.
+     * @default 'md'
+     */
     size?: LinkSize;
-    /** Shows an external link icon alongside the text. */
+    /**
+     * Shows an external link icon alongside the text.
+     * @default false
+     */
     external?: boolean;
-    /** Marks the link as previously visited. Consumer is responsible for tracking this state. */
+    /**
+     * Marks the link as previously visited. Consumer is responsible for tracking this state.
+     * @default false
+     */
     visited?: boolean;
 };

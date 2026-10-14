@@ -5,7 +5,7 @@ A React Native component library implementing the [Equinor Design System](https:
 ## Installation
 
 ```bash
-pnpm add @equinor/eds-mobile-components
+npm install @equinor/eds-mobile-components
 ```
 
 ### Peer dependencies
@@ -13,7 +13,7 @@ pnpm add @equinor/eds-mobile-components
 This library requires the following peer dependencies:
 
 ```bash
-pnpm add expo-font react-native-gesture-handler react-native-reanimated react-native-svg
+npm install expo-font react-native-gesture-handler react-native-reanimated react-native-svg
 ```
 
 Make sure to follow the installation instructions for each:

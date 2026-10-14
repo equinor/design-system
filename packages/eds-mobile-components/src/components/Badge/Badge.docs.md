@@ -1,0 +1,28 @@
+## Features
+
+<!-- Three to five short lines on what the component does for you. Do not repeat the props table. -->
+
+- Short text or a number for indicating status or a count.
+- Can sit on the trailing edge of a row or card, next to other components.
+- Truncates to a single line.
+- Solid and outlined badges are the same size, so switching between them does not shift the layout.
+
+## Usage
+
+```tsx
+<Badge tone="success">Approved</Badge>
+```
+
+## Accessibility
+
+- Screen readers read the badge text automatically, so no extra setup is needed for basic use.
+- Tone is not announced by screen readers. Avoid relying on colour alone to convey meaning, and pair the badge with a visible text label where possible.
+- When additional context is needed beyond the badge text, pass `accessibilityLabel` directly to the Badge component:
+
+```tsx
+<Badge tone="success" variant="solid" accessibilityLabel="Status: Approved">Approved</Badge>
+```
+
+## Related components
+
+- [`Typography`](/components/typography) is for plain text labels that do not need a coloured badge.
