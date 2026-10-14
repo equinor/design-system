@@ -16,7 +16,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       disabled = false,
       indeterminate = false,
       indicator,
-      helperMessage,
       className,
       id: providedId,
       style,
@@ -29,7 +28,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const generatedId = useId()
     // `||`, not `??`: an empty string is treated as no id
     const inputId = providedId || generatedId
-    const helperMessageId = `${inputId}-helper`
 
     useEffect(() => {
       if (inputRef.current) {
@@ -43,7 +41,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           id={inputId}
           aria-checked={indeterminate ? 'mixed' : undefined}
-          aria-describedby={helperMessage ? helperMessageId : undefined}
           // Component CSS keys its :has(.input:...) state selectors on this class
           className="input"
           disabled={disabled}
@@ -85,11 +82,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <Field.Label htmlFor={inputId} indicator={indicator}>
             {label}
           </Field.Label>
-          {helperMessage && (
-            <Field.HelperMessage id={helperMessageId}>
-              {helperMessage}
-            </Field.HelperMessage>
-          )}
         </Field>
       )
     }
