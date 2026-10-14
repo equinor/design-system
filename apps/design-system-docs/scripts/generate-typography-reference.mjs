@@ -14,12 +14,6 @@
  *   ts/semantic/light.ts and ts/density/<density>.ts
  *                                  the TypeScript names the reference page quotes
  *
- * While the next token release is pending, scripts/pending-typography-tokens.mjs records which
- * primitive each typography token picks in that release, and the package supplies the primitives.
- * The generator then also writes src/css/pending-typography-tokens.css, which declares the pending
- * tokens on the docs site so the specimens render. Once the release is in the package, the
- * generator checks the pending file against it and asks for both files to be deleted.
- *
  * No typography value is ever typed into a page by hand. A text style is two tokens at three
  * densities, so one hand-written row is six chances to be wrong, and nothing in the build would
  * notice.
@@ -36,7 +30,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -113,42 +107,23 @@ const WEIGHTS = {
 
 const FAMILIES = ['font-family.header', 'font-family.ui']
 
-// --- the pending release ------------------------------------------------------------------------
-
-// Typography decided in Tokens Studio but not in the package yet. Loaded only if the file exists, so
-// deleting it once the release merges is the whole change: the generator then reads the package.
-const pendingPath = join(here, 'pending-typography-tokens.mjs')
-const pending = existsSync(pendingPath)
-  ? await import(pathToFileURL(pendingPath).href)
-  : null
-const pendingCssPath = join(app, 'src', 'css', 'pending-typography-tokens.css')
-
-const isRemoved = (name) => pending?.REMOVED.some((re) => re.test(name))
-
 // --- what the package carries -------------------------------------------------------------------
 
 const semantic = readJson('dtcg', 'semantic', 'default.json')
 
-/** `role.step.prop` -> its CSS custom property, as the package has it. */
-const packageTypography = new Map()
+/** `role.step.prop` -> its CSS custom property. */
+const typography = new Map()
 /** Dotted name -> CSS custom property, for the family and weight tokens. */
-const packageFont = new Map()
-/** The package's `typography.ui` names, which the release renames to `label`. */
-const packageUi = new Set()
+const fontTokens = new Map()
 
 for (const [name, token] of walk(semantic)) {
   const web = webName(token)
   if (/^(font-family|font-weight)\./.test(name)) {
-    if (isRemoved(name)) continue
-    packageFont.set(name, web)
+    fontTokens.set(name, web)
     if (!web) problems.push(`${name} has no codeSyntax.WEB`)
     continue
   }
   if (!name.startsWith('typography.')) continue
-  if (isRemoved(name)) {
-    packageUi.add(name)
-    continue
-  }
   const [, role, step, prop, ...rest] = name.split('.')
   if (
     rest.length ||
@@ -166,7 +141,7 @@ for (const [name, token] of walk(semantic)) {
   if (token.$value !== `{density.${name}}`) {
     problems.push(`${name} aliases ${token.$value}, not {density.${name}}`)
   }
-  packageTypography.set(`${role}.${step}.${prop}`, web)
+  typography.set(`${role}.${step}.${prop}`, web)
 }
 
 const css = readFileSync(join(tokens, 'css', 'variables.css'), 'utf8')
@@ -255,9 +230,9 @@ for (const [index, node] of Object.entries(
 }
 
 /** `density -> role.step.prop -> { face, index }` for font sizes, `{ index }` for line heights. */
-const packagePicks = {}
+const picks = {}
 for (const density of DENSITIES) {
-  packagePicks[density] = {}
+  picks[density] = {}
   const set = readJson('dtcg', 'density', `${density}.json`)
   for (const [name, token] of walk(set.density?.typography ?? {})) {
     const font = token.$value.match(
@@ -266,9 +241,8 @@ for (const density of DENSITIES) {
     const line = token.$value.match(
       /^\{primitives\.lineheight-scale\.(\d+)\.default\}$/,
     )
-    if (font)
-      packagePicks[density][name] = { face: font[1], index: Number(font[2]) }
-    else if (line) packagePicks[density][name] = { index: Number(line[1]) }
+    if (font) picks[density][name] = { face: font[1], index: Number(font[2]) }
+    else if (line) picks[density][name] = { index: Number(line[1]) }
     else
       problems.push(
         `density.typography.${name} at ${density} is ${token.$value}, not a primitive`,
@@ -279,73 +253,6 @@ for (const density of DENSITIES) {
 const FACE = { header: 'equinor', label: 'inter', body: 'inter' }
 
 // --- the model these pages describe -------------------------------------------------------------
-
-// The release has reached the package once `label` is there. Until then the pending file is the
-// source, and the package supplies the primitives it points at.
-const arrived = [...packageTypography.keys()].some((key) =>
-  key.startsWith('label.'),
-)
-const usePending = Boolean(pending) && !arrived
-
-/** `role.step.prop` -> its CSS custom property. */
-const typography = new Map()
-/** Dotted name -> CSS custom property, for the family and weight tokens. */
-const fontTokens = new Map()
-/** `density -> role.step.prop -> pick`. */
-const picks = {}
-
-if (usePending) {
-  for (const [role, steps] of Object.entries(pending.PENDING_STYLES)) {
-    if (!ROLES[role])
-      problems.push(`pending role ${role} has no entry in ROLES`)
-    for (const step of Object.keys(steps)) {
-      if (!STEPS.includes(step))
-        problems.push(`pending step ${role}.${step} is not in STEPS`)
-      for (const prop of PROPS) {
-        const name = `typography.${role}.${step}.${prop}`
-        typography.set(
-          `${role}.${step}.${prop}`,
-          pending.pendingNames().get(name),
-        )
-      }
-    }
-  }
-  for (const density of DENSITIES) {
-    picks[density] = {}
-    for (const [role, steps] of Object.entries(pending.PENDING_STYLES)) {
-      for (const [step, byDensity] of Object.entries(steps)) {
-        const [font, line] = byDensity[density] ?? []
-        picks[density][`${role}.${step}.font-size`] = {
-          face: FACE[role],
-          index: font,
-        }
-        picks[density][`${role}.${step}.line-height`] = { index: line }
-      }
-    }
-  }
-  for (const name of FAMILIES) fontTokens.set(name, packageFont.get(name))
-  fontTokens.set('font-weight.normal', packageFont.get('font-weight.normal'))
-  for (const weight of Object.keys(pending.PENDING_WEIGHTS)) {
-    fontTokens.set(`font-weight.${weight}`, `--eds-font-weight-${weight}`)
-  }
-  for (const [index, spacing] of Object.entries(
-    pending.PENDING_LINE_HEIGHT_STEPS,
-  )) {
-    if (lineHeightScale[index]) {
-      problems.push(
-        `lineheight-scale.${index} is in the package now: remove it from pending-typography-tokens.mjs`,
-      )
-    }
-    lineHeightScale[index] = {
-      spacing: String(spacing),
-      px: pxOf(primitives.spacing?.[spacing]?.$value),
-    }
-  }
-} else {
-  for (const [key, cssName] of packageTypography) typography.set(key, cssName)
-  for (const [name, cssName] of packageFont) fontTokens.set(name, cssName)
-  for (const density of DENSITIES) picks[density] = packagePicks[density]
-}
 
 /** The steps a role has, in scale order. */
 const stepsOf = (role) =>
@@ -360,16 +267,9 @@ const pick = (density, key) => {
 
 /** A typography value in px, as a number. */
 function px(role, step, prop, density) {
-  let value
-  if (usePending) {
-    const found = pick(density, `${role}.${step}.${prop}`)
-    value =
-      prop === 'font-size'
-        ? typeScale[found.face]?.[found.index]
-        : lineHeightScale[found.index]?.px
-  } else {
-    value = pxOfCss(resolve(density, typography.get(`${role}.${step}.${prop}`)))
-  }
+  const value = pxOfCss(
+    resolve(density, typography.get(`${role}.${step}.${prop}`)),
+  )
   if (typeof value !== 'number') {
     problems.push(
       `typography.${role}.${step}.${prop} does not resolve to px at ${density}`,
@@ -380,19 +280,7 @@ function px(role, step, prop, density) {
 }
 
 const fontValue = (name) => {
-  let value
-  const pendingWeight =
-    usePending && pending.PENDING_WEIGHTS[name.replace(/^font-weight\./, '')]
-  if (pendingWeight?.primitive) {
-    value = resolve(
-      'comfortable',
-      `--eds-primitives-weight-scale-${pendingWeight.primitive}`,
-    )
-  } else if (pendingWeight) {
-    value = String(pendingWeight.value)
-  } else {
-    value = resolve('comfortable', fontTokens.get(name))
-  }
+  const value = resolve('comfortable', fontTokens.get(name))
   if (!value) problems.push(`${name} does not resolve`)
   return value
 }
@@ -450,106 +338,26 @@ for (const role of Object.keys(ROLES)) {
   }
 }
 
-if (usePending) {
-  // Checked against the package wherever the release keeps something the package already has, so a
-  // mistyped entry in the pending file fails here instead of publishing as a plausible value.
-  for (const density of DENSITIES) {
-    for (const step of stepsOf('header')) {
-      // The release changes header line heights and keeps every header font size.
-      const key = `header.${step}.font-size`
-      const had = packagePicks[density][key]
-      const has = picks[density][key]
-      if (had && (had.face !== has.face || had.index !== has.index)) {
+// The CSS bundle and the DTCG chain are two exports of one evaluation. A disagreement between
+// them means one of the two files is stale, and these pages would be quoting the wrong one.
+for (const role of Object.keys(ROLES)) {
+  for (const step of stepsOf(role)) {
+    for (const density of DENSITIES) {
+      const font = pick(density, `${role}.${step}.font-size`)
+      const line = pick(density, `${role}.${step}.line-height`)
+      const fromChain = [
+        typeScale[font.face]?.[font.index],
+        lineHeightScale[line.index]?.px,
+      ]
+      const fromCss = [
+        px(role, step, 'font-size', density),
+        px(role, step, 'line-height', density),
+      ]
+      if (fromChain.join() !== fromCss.join()) {
         problems.push(
-          `pending ${key} at ${density} picks ${has.face}.${has.index}, the package has ${had.face}.${had.index}`,
+          `typography.${role}.${step} at ${density} is ${fromCss.join('/')} in the CSS bundle but ` +
+            `${fromChain.join('/')} through the DTCG chain`,
         )
-      }
-    }
-    for (const step of stepsOf('label')) {
-      // `label` is the former `ui` ramp unchanged (ADR-0027).
-      for (const prop of PROPS) {
-        const had = packagePicks[density][`ui.${step}.${prop}`]
-        const has = picks[density][`label.${step}.${prop}`]
-        if (had && had.index !== has.index) {
-          problems.push(
-            `pending label.${step}.${prop} at ${density} picks ${has.index}, the package ui ramp has ${had.index}`,
-          )
-        }
-      }
-    }
-  }
-  // The pending CSS names are derived, because the package has no codeSyntax for them yet. The
-  // header names it does have show whether the derivation still matches the codeSyntax rule.
-  for (const [key, cssName] of packageTypography) {
-    if (cssName !== `--eds-typography-${key.replaceAll('.', '-')}`) {
-      problems.push(
-        `typography.${key} compiles to ${cssName}, so deriving pending CSS names is no longer safe`,
-      )
-    }
-  }
-} else if (pending && arrived) {
-  // The release is here. Every pending entry is checked against what the package now says, then the
-  // pending files have to go: they would otherwise go on overriding the package on the site.
-  for (const [role, steps] of Object.entries(pending.PENDING_STYLES)) {
-    for (const [step, byDensity] of Object.entries(steps)) {
-      for (const density of DENSITIES) {
-        const [font, line] = byDensity[density]
-        const hasFont = packagePicks[density][`${role}.${step}.font-size`]
-        const hasLine = packagePicks[density][`${role}.${step}.line-height`]
-        if (hasFont?.index !== font || hasLine?.index !== line) {
-          problems.push(
-            `${role}.${step} at ${density} is ${hasFont?.index}/${hasLine?.index} in the package but ` +
-              `pending-typography-tokens.mjs claims ${font}/${line}`,
-          )
-        }
-      }
-    }
-  }
-  for (const [name, cssName] of pending.pendingNames()) {
-    const has = name.startsWith('font-weight.')
-      ? packageFont.get(name)
-      : packageTypography.get(name.replace(/^typography\./, ''))
-    if (has !== cssName)
-      problems.push(`${name} compiles to ${has} in the package, not ${cssName}`)
-  }
-  problems.push(
-    'The token release is in the package: delete scripts/pending-typography-tokens.mjs, ' +
-      'src/css/pending-typography-tokens.css and its import in src/css/theme-variables.css',
-  )
-}
-if (!pending && existsSync(pendingCssPath)) {
-  problems.push(
-    'src/css/pending-typography-tokens.css outlived its pending file: delete it and its import ' +
-      'in src/css/theme-variables.css',
-  )
-}
-if (!usePending) {
-  for (const name of packageUi) {
-    problems.push(
-      `${name} is still in the package, though the release removes it`,
-    )
-  }
-  // The CSS bundle and the DTCG chain are two exports of one evaluation. A disagreement between
-  // them means one of the two files is stale, and these pages would be quoting the wrong one.
-  for (const role of Object.keys(ROLES)) {
-    for (const step of stepsOf(role)) {
-      for (const density of DENSITIES) {
-        const font = pick(density, `${role}.${step}.font-size`)
-        const line = pick(density, `${role}.${step}.line-height`)
-        const fromChain = [
-          typeScale[font.face]?.[font.index],
-          lineHeightScale[line.index]?.px,
-        ]
-        const fromCss = [
-          px(role, step, 'font-size', density),
-          px(role, step, 'line-height', density),
-        ]
-        if (fromChain.join() !== fromCss.join()) {
-          problems.push(
-            `typography.${role}.${step} at ${density} is ${fromCss.join('/')} in the CSS bundle but ` +
-              `${fromChain.join('/')} through the DTCG chain`,
-          )
-        }
       }
     }
   }
@@ -798,53 +606,33 @@ const tsDensity = Object.fromEntries(
   DENSITIES.map((d) => [d, tsLeaves(join(tokens, 'ts', 'density', `${d}.ts`))]),
 )
 
-if (usePending) {
-  // The pending tokens are not in the TypeScript output yet, so their paths come from the naming
-  // rule. The rule is checked on the header font sizes, which the package already carries with the
-  // values the release keeps.
-  for (const step of stepsOf('header')) {
-    const path = tsPath(`typography.header.${step}.font-size`)
-    for (const [module, density] of [
-      [tsSemantic, 'comfortable'],
-      ...DENSITIES.map((d) => [tsDensity[d], d]),
-    ]) {
-      if (module.get(path) !== px('header', step, 'font-size', density)) {
+for (const role of Object.keys(ROLES)) {
+  for (const step of stepsOf(role)) {
+    for (const prop of PROPS) {
+      const path = tsPath(`typography.${role}.${step}.${prop}`)
+      if (tsSemantic.get(path) !== px(role, step, prop, 'comfortable')) {
         problems.push(
-          `TypeScript has ${path} = ${module.get(path)} at ${density}, so the naming rule the ` +
-            'reference page uses for pending tokens has changed',
+          `semantic TypeScript has ${path} = ${tsSemantic.get(path)}, not the Comfortable value`,
         )
       }
-    }
-  }
-} else {
-  for (const role of Object.keys(ROLES)) {
-    for (const step of stepsOf(role)) {
-      for (const prop of PROPS) {
-        const path = tsPath(`typography.${role}.${step}.${prop}`)
-        if (tsSemantic.get(path) !== px(role, step, prop, 'comfortable')) {
+      for (const density of DENSITIES) {
+        if (tsDensity[density].get(path) !== px(role, step, prop, density)) {
           problems.push(
-            `semantic TypeScript has ${path} = ${tsSemantic.get(path)}, not the Comfortable value`,
+            `${density} TypeScript has ${path} = ${tsDensity[density].get(path)}`,
           )
-        }
-        for (const density of DENSITIES) {
-          if (tsDensity[density].get(path) !== px(role, step, prop, density)) {
-            problems.push(
-              `${density} TypeScript has ${path} = ${tsDensity[density].get(path)}`,
-            )
-          }
         }
       }
     }
   }
-  for (const name of fontTokens.keys()) {
-    const path = tsPath(name)
-    const expected = fontValue(name)
-    const found = tsSemantic.get(path)
-    if (String(found) !== String(expected)) {
-      problems.push(
-        `semantic TypeScript has ${path} = ${found}, the CSS bundle has ${expected}`,
-      )
-    }
+}
+for (const name of fontTokens.keys()) {
+  const path = tsPath(name)
+  const expected = fontValue(name)
+  const found = tsSemantic.get(path)
+  if (String(found) !== String(expected)) {
+    problems.push(
+      `semantic TypeScript has ${path} = ${found}, the CSS bundle has ${expected}`,
+    )
   }
 }
 
@@ -1237,96 +1025,9 @@ for (const [file, blocks] of Object.entries(TARGETS)) {
   console.log(`wrote ${file} (${blocks.join(', ')})`)
 }
 
-// --- the stand-in stylesheet for the pending tokens ---------------------------------------------
-
-// The specimens on these pages read the tokens back from the browser, so while the release is
-// pending the site has to declare them itself. The sheet mirrors how the bundle declares them: the
-// density layer per density, and the semantic aliases on the selectors that re-resolve them inside
-// a density scope.
-if (usePending) {
-  const densityVar = (key) =>
-    `--eds-density-typography-${key.replaceAll('.', '-')}`
-  const primitiveVar = (key, found) =>
-    key.endsWith('.font-size')
-      ? `var(--eds-primitives-type-scale-${found.face}-${found.index}-font-size)`
-      : `var(--eds-primitives-lineheight-scale-${found.index}-default)`
-  const block = (selectors, lines) =>
-    `${selectors.join(',\n')} {\n${lines.map((l) => `  ${l}`).join('\n')}\n}`
-  const densityLines = (density) =>
-    [...typography.keys()].map(
-      (key) => `${densityVar(key)}: ${primitiveVar(key, picks[density][key])};`,
-    )
-
-  const sheet = [
-    `/*
- * Generated by scripts/generate-typography-reference.mjs from scripts/pending-typography-tokens.mjs.
- * Do not edit by hand.
- *
- * A stand-in for the typography tokens of the next token release, which are decided in Tokens
- * Studio but not in packages/eds-tokens yet. It declares them the way the token bundle will, so
- * the specimens on the typography pages, and the site CSS that uses the label and body names,
- * render with the values the pages document.
- *
- * The density blocks use doubled selectors (0,2,0) because the release also replaces the header
- * line heights the bundle declares today, and these have to win whatever order the stylesheets
- * are emitted in.
- *
- * Delete this file, its import in theme-variables.css and the pending file once the release
- * merges. The generator says when.
- */`,
-    block(
-      [':root:root'],
-      Object.entries(pending.PENDING_LINE_HEIGHT_STEPS).map(
-        ([index, spacing]) =>
-          `--eds-primitives-lineheight-scale-${index}-default: var(--eds-primitives-spacing-${spacing});`,
-      ),
-    ),
-    block(
-      [
-        ':root:root',
-        "[data-density='comfortable'][data-density='comfortable']",
-      ],
-      densityLines('comfortable'),
-    ),
-    block(
-      ["[data-density='compact'][data-density='compact']"],
-      densityLines('compact'),
-    ),
-    block(
-      ["[data-density='relaxed'][data-density='relaxed']"],
-      densityLines('relaxed'),
-    ),
-    block(
-      [':root', '[data-color-scheme]', '[data-density]'],
-      [
-        ...[...typography]
-          .filter(([key]) => !packageTypography.has(key))
-          .map(([key, cssName]) => `${cssName}: var(${densityVar(key)});`),
-        ...Object.entries(pending.PENDING_WEIGHTS).map(
-          ([weight, definition]) =>
-            `--eds-font-weight-${weight}: ${
-              definition.primitive
-                ? `var(--eds-primitives-weight-scale-${definition.primitive})`
-                : definition.value
-            };`,
-        ),
-      ],
-    ),
-  ].join('\n\n')
-
-  // Formatted the way the format gate expects, so a regeneration never leaves a whitespace diff.
-  const prettier = await import('prettier')
-  const options = (await prettier.resolveConfig(pendingCssPath)) ?? {}
-  writeFileSync(
-    pendingCssPath,
-    await prettier.format(sheet, { ...options, filepath: pendingCssPath }),
-  )
-  console.log('wrote src/css/pending-typography-tokens.css')
-}
-
 console.log(
   `ok - ${written} blocks across ${Object.keys(TARGETS).length} pages` +
-    (usePending ? ', from the pending release: ' : ': ') +
+    ': ' +
     `${typography.size} typography tokens resolved at ${DENSITIES.length} densities, ` +
     `${fontTokens.size} family and weight tokens, ` +
     `${pairExceptions.length} density exception(s), ` +

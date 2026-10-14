@@ -19,7 +19,7 @@
  */
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { pendingNames } from './pending-spacing-steps.mjs'
 
@@ -136,21 +136,6 @@ for (const [name] of walk(
 const isPrimitive = (name) =>
   primitiveNames.has(name) ||
   [...primitiveNames].some((n) => n.startsWith(name + '.'))
-
-// Typography tokens from the pending token release, which the typography pages document like every
-// other token. Read only while the file exists: deleting it once the release merges is the change.
-const pendingTypography = join(here, 'pending-typography-tokens.mjs')
-if (existsSync(pendingTypography)) {
-  const { pendingNames: pendingTypographyNames, PENDING_LINE_HEIGHT_STEPS } =
-    await import(pathToFileURL(pendingTypography).href)
-  for (const [name, cssName] of pendingTypographyNames()) {
-    canon.add(name)
-    cssCanon.add(cssName)
-  }
-  for (const index of Object.keys(PENDING_LINE_HEIGHT_STEPS)) {
-    primitiveNames.add(`lineheight-scale.${index}.default`)
-  }
-}
 
 const problems = []
 const isPrefix = (name) => [...canon].some((c) => c.startsWith(name + '.'))

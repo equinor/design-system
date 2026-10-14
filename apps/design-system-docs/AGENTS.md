@@ -115,21 +115,9 @@ Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
 `--eds-corner-radius-*`, `--eds-elevation-*`. Never reference primitives
 (`--eds-primitives-*`, `--eds-light-*`/`--eds-dark-*`, palette steps like
 `--eds-accent-9`), the density layer (`--eds-density-*`), or legacy
-`--eds-color-*` names. There are two sanctioned exceptions: the semantic
+`--eds-color-*` names. The one sanctioned exception is the semantic
 typography bridge in `theme-variables.css` (`:root:root` re-declarations
-resolving the header-* font-size collision below), and the generated
-`src/css/pending-typography-tokens.css`.
-
-**Pending typography tokens.** The typography pages document the next token
-release, which is decided in Tokens Studio but not in `packages/eds-tokens`
-yet. `scripts/pending-typography-tokens.mjs` records which primitive each
-typography token picks in that release, and `pnpm generate:typography-reference`
-reads it for the tables and writes `src/css/pending-typography-tokens.css`,
-which declares the `label`, `body` and new weight tokens, and the new header
-line heights, the way the bundle will. That sheet references primitives and the
-density layer because it stands in for the bundle; site CSS still uses only
-the semantic names. Never edit the sheet by hand. When the release merges, the
-generator fails until both files and the sheet's import are deleted.
+resolving the header-* font-size collision below).
 
 **Elevation is a composite token — use it as one.** `--eds-elevation-low` and
 `--eds-elevation-high` are `boxShadow` composites in the Tokens Studio
@@ -148,9 +136,7 @@ Both token bundles load (see imports in `theme-variables.css`):
    `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
    `--eds-corner-radius-*`, `--eds-typography-{header,label,body}-*`,
    `--eds-font-family-*`, `--eds-font-weight-{normal,medium,bold}`,
-   `--eds-elevation-{low,high}`. Until the next token release merges, the
-   `label`, `body`, `medium` and `bold` names come from the pending sheet
-   described above.
+   `--eds-elevation-{low,high}`.
 2. **Legacy bundle** (`@equinor/eds-tokens/css/variables`) — retained ONLY for
    `--eds-container-space-*` and the embedded `/next` component previews,
    which consume legacy names. Do not use legacy `--eds-color-*` names in
