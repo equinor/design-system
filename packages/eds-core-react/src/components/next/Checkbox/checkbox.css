@@ -160,7 +160,6 @@
      * since the icons have different internal padding (Checkbox: 3px, Radio: 2px).
      */
     --_checkbox-gap-compensation: 0.2375rem;
-    --_eds-field-helper-color: var(--eds-color-text-neutral-subtle);
 
     gap: calc(
       var(--eds-generic-gap-horizontal) + var(--_checkbox-gap-compensation)

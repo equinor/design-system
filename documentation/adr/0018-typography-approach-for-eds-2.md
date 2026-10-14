@@ -1,6 +1,6 @@
 # Typography approach for EDS 2.0
 
-- **Status:** Accepted
+- **Status:** Superseded by [ADR-0029](0029-typography-approach-for-eds-2-web.md)
 - **Date:** 2026-04-23
 - **Decision makers:** EDS core team
 - **Scope:** Web

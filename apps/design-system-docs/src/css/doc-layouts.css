@@ -179,6 +179,13 @@ main:has(.docs-landing) .markdown > .docs-landing {
   margin-bottom: 0;
 }
 
+/* A landing that opens with a version note (the beta note on /components)
+   reads as one block: note, then the first section. The full section rhythm
+   between them is meant to separate two sections, so halve it here. */
+.docs-landing > .alert[role='note'] + .docs-section {
+  padding-top: calc(var(--docs-section-space-block) / 2);
+}
+
 /* ======================================
  * 3. HERO-BAND DOCS (components and foundation)
  * Standard three-column layout (left sidebar + content + right TOC) plus the

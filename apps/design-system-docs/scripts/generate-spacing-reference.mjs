@@ -24,7 +24,6 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import { PENDING_STEPS } from './pending-spacing-steps.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const app = join(here, '..')
@@ -144,10 +143,6 @@ const STEPS = [
   '9xl',
 ]
 
-/** Steps the package does not carry yet. Their values come from the primitives they point at. */
-const isPending = (step) =>
-  step in PENDING_STEPS && !named.has(`spacing.${step}`)
-
 const RADII = ['none', 'rounded', 'rounded-outer', 'pill']
 
 /**
@@ -186,32 +181,11 @@ const RADIUS_ROLES = {
 const problems = []
 
 for (const step of STEPS) {
-  if (!named.has(`spacing.${step}`) && !(step in PENDING_STEPS))
+  if (!named.has(`spacing.${step}`))
     problems.push(`spacing.${step} is not in the token source`)
   if (!ROLES[step]) problems.push(`spacing.${step} has no wording in ROLES`)
 }
 
-// A pending step that has arrived in the package is checked against what this file claimed its
-// value would be, and then has to be taken off the pending list. Without this, a wrong index
-// would publish as a correct-looking value, and the pending list would outlive the release.
-for (const [step, densities] of Object.entries(PENDING_STEPS)) {
-  const name = `spacing.${step}`
-  if (!named.has(name)) continue
-  for (const [density, index] of Object.entries(densities)) {
-    const fromSource = resolve(density, named.get(name))
-    const fromPending = base[`--eds-primitives-spacing-${index}`]
-    if (fromSource !== fromPending) {
-      problems.push(
-        `${name} at ${density} is ${fromSource} in the package but pending-spacing-steps.mjs ` +
-          `claims primitive ${index} (${fromPending})`,
-      )
-    }
-  }
-  problems.push(
-    `${name} is in the package now: remove it from scripts/pending-spacing-steps.mjs, ` +
-      `and delete the file once it is empty`,
-  )
-}
 for (const name of named.keys()) {
   const step = name.replace(/^spacing\.|^corner-radius\./, '')
   const known = name.startsWith('spacing.')
@@ -228,27 +202,11 @@ for (const radius of RADII) {
 }
 
 const value = (name, density) => {
-  // A pending step has no token in the source to resolve, but the primitive it points at ships,
-  // so the measurement still comes from the package rather than from a number typed in a page.
-  const step = name.replace(/^spacing\./, '')
-  if (isPending(step)) {
-    const index = PENDING_STEPS[step][density]
-    const resolved = base[`--eds-primitives-spacing-${index}`]
-    if (!resolved)
-      problems.push(
-        `primitive ${index} for pending ${name} is not in the package`,
-      )
-    return resolved
-  }
   const cssName = named.get(name)
   const resolved = cssName ? resolve(density, cssName) : null
   if (!resolved) problems.push(`${name} does not resolve at ${density}`)
   return resolved
 }
-
-/** The custom property a step compiles to. Pending steps have no codeSyntax to read yet. */
-const cssNameOf = (name) =>
-  named.get(name) ?? `--eds-${name.replaceAll('.', '-')}`
 
 // --- the primitive scale -----------------------------------------------------------------------
 
@@ -276,7 +234,16 @@ for (const { index, px: value } of primitives) {
 const tsSemantic = join(tokens, 'ts', 'semantic', 'light.ts')
 const tsDensity = join(tokens, 'ts', 'density', 'compact.ts')
 
-const DIGIT_WORD = { 2: 'two', 3: 'three', 4: 'four' }
+const DIGIT_WORD = {
+  2: 'two',
+  3: 'three',
+  4: 'four',
+  5: 'five',
+  6: 'six',
+  7: 'seven',
+  8: 'eight',
+  9: 'nine',
+}
 
 /** The identifier a dotted segment compiles to, as the generator writes it. */
 const tsSegment = (segment) =>
@@ -329,8 +296,6 @@ for (const [file, prefix] of [
 // --- tables ------------------------------------------------------------------------------------
 
 const tables = {}
-
-const pendingNow = STEPS.filter(isPending)
 
 tables['spacing-steps'] = [
   '| Step | Comfortable | Use it when |',
@@ -398,7 +363,7 @@ tables['token-reference'] = [
   '| --- | --- | --- | --- | --- |',
   ...STEPS.map((step) => {
     const name = `spacing.${step}`
-    return `| \`${name}\` | \`${cssNameOf(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
+    return `| \`${name}\` | \`${named.get(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
   }),
   '',
   '## Corner radius',
@@ -409,7 +374,7 @@ tables['token-reference'] = [
   '| --- | --- | --- | --- | --- |',
   ...RADII.map((radius) => {
     const name = `corner-radius.${radius}`
-    return `| \`${name}\` | \`${cssNameOf(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
+    return `| \`${name}\` | \`${named.get(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
   }),
   '',
   '## In TypeScript',
@@ -546,7 +511,6 @@ for (const [file, blocks] of Object.entries(TARGETS)) {
 
 console.log(
   `ok - ${written} tables across ${Object.keys(TARGETS).length} pages: ` +
-    `${STEPS.length + RADII.length} named tokens resolved at ${DENSITIES.length} densities ` +
-    `(${pendingNow.length} not in the package yet), ` +
+    `${STEPS.length + RADII.length} named tokens resolved at ${DENSITIES.length} densities, ` +
     `${primitives.length} primitive steps`,
 )

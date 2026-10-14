@@ -183,7 +183,10 @@ export function Resources(): ReactNode {
           </span>
           <div>
             <h3>Support</h3>
-            <p>Get help through Slack, Teams, or other channels.</p>
+            <p>
+              Get help in #eds-design-system on Slack, or through the other
+              channels.
+            </p>
           </div>
         </Link>
       </div>

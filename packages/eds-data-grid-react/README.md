@@ -6,7 +6,7 @@
 >
 > A recommendation for what to use instead is being worked out: the EDS Table for everyday
 > cases, and a third-party grid for advanced ones, with EDS tokens and guidance on when to
-> use what. Follow [equinor/design-system#4656](https://github.com/equinor/design-system/issues/4656)
+> use what. Follow [equinor/design-system#5649](https://github.com/equinor/design-system/issues/5649)
 > for that work. In the meantime, note that this package is a wrapper around
 > [TanStack Table](https://tanstack.com/table), so using `@tanstack/react-table` directly
 > is the smallest step away from it.
