@@ -145,6 +145,35 @@ describe('breaking changes page entry', () => {
     })
   })
 
+  // Reminders only: the verdicts above stay the same with or without them.
+  describe('hints', () => {
+    const MARKER = /add `!` to the PR title/
+    const FOOTER = /paste it into the body field of the squash-merge dialog/
+
+    test('a breaking PR is reminded that the squash merge drops the footer', () => {
+      const { code, out } = run({
+        title: 'fix!: change the Button API',
+        files: [`${NEXT}/Button/Button.tsx`, PAGE],
+      })
+      assert.equal(code, 0)
+      assert.match(out, FOOTER)
+      assert.doesNotMatch(out, MARKER)
+    })
+
+    test('an unmarked surface change is reminded of `!`', () => {
+      const { code, out } = run({ files: [`${NEXT}/Button/Button.tsx`] })
+      assert.equal(code, 1)
+      assert.match(out, MARKER)
+      assert.doesNotMatch(out, FOOTER)
+    })
+
+    test('a change with nothing to check gets neither', () => {
+      const { out } = run({ files: [`${NEXT}/Button/button.css`] })
+      assert.doesNotMatch(out, MARKER)
+      assert.doesNotMatch(out, FOOTER)
+    })
+  })
+
   describe('escape hatches', () => {
     test('the skip label passes and leaves a warning annotation', () => {
       const { code, out } = run({

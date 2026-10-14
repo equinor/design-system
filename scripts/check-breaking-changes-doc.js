@@ -107,6 +107,13 @@ const bareName = (author) =>
 const BREAKING_TITLE = /^[a-z]+(\([^)]*\))?!:/
 const BREAKING_FOOTER = /^BREAKING[ -]CHANGE:/m
 
+// Reminders, not rules: neither changes the verdict. They sit on the report of
+// every PR that touched a published component's surface, which is where the
+// people who need them already look (#5388).
+const GUIDE = 'documentation/how-to/BETA_RELEASE_GUIDE.md'
+const MARKER_HINT = `If this changes props, markup or behaviour someone on an earlier beta relies on, add \`!\` to the PR title. See "Marking breaking changes" in \`${GUIDE}\`.`
+const FOOTER_HINT = `The squash merge keeps only the PR title. To keep a \`BREAKING CHANGE:\` footer, such as a migration hint, paste it into the body field of the squash-merge dialog. See "Marking breaking changes" in \`${GUIDE}\`.`
+
 const gh = (args) =>
   execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 })
 
@@ -283,8 +290,10 @@ const main = () => {
     ? `Breaking change to ${subjects}`
     : `${subjects} changed under \`/next\``
 
+  const hint = breaking ? FOOTER_HINT : MARKER_HINT
+
   if (files.includes(PAGE)) {
-    report([`✅ ${what}, and the breaking changes page was updated.`])
+    report([`✅ ${what}, and the breaking changes page was updated.`, '', hint])
     return
   }
 
@@ -293,6 +302,8 @@ const main = () => {
       `⚠️ ${what} with nothing added to the breaking changes page, skipped by the \`${SKIP_LABEL}\` label.`,
       '',
       'Worth a second look in review: the label says this PR leaves the EDS 1.0 to 2.0 answer unchanged.',
+      '',
+      hint,
     ])
     // An annotation as well as the summary: the check goes green either way,
     // and a green check nobody opens is how the label turns into a habit.
@@ -316,6 +327,8 @@ const main = () => {
       : []),
     '',
     `If the EDS 1.0 to 2.0 answer is unchanged by this PR, add the \`${SKIP_LABEL}\` label and say why.`,
+    '',
+    hint,
     '',
     'Changed `/next` files:',
     ...changed.map((file) => `- \`${file}\``),
