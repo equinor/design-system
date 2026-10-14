@@ -148,15 +148,25 @@ describe('breaking changes page entry', () => {
   // Reminders only: the verdicts above stay the same with or without them.
   describe('hints', () => {
     const MARKER = /add `!` to the PR title/
-    const FOOTER = /paste it into the body field of the squash-merge dialog/
+    const FOOTER = /Add a `BREAKING CHANGE:` line/
 
-    test('a breaking PR is reminded that the squash merge drops the footer', () => {
+    test('a breaking PR without a footer is asked for one', () => {
       const { code, out } = run({
         title: 'fix!: change the Button API',
         files: [`${NEXT}/Button/Button.tsx`, PAGE],
       })
       assert.equal(code, 0)
       assert.match(out, FOOTER)
+      assert.doesNotMatch(out, MARKER)
+    })
+
+    test('a breaking PR with a footer gets no reminder', () => {
+      const { out } = run({
+        title: 'fix!: change the Button API',
+        body: 'Text\n\nBREAKING CHANGE: the size prop is gone',
+        files: [`${NEXT}/Button/Button.tsx`, PAGE],
+      })
+      assert.doesNotMatch(out, FOOTER)
       assert.doesNotMatch(out, MARKER)
     })
 

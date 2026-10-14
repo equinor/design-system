@@ -101,9 +101,9 @@ const BOT_AUTHORS = new Set(['dependabot'])
 const bareName = (author) =>
   author.replace(/^app\//, '').replace(/\[bot\]$/, '')
 
-// `type!: desc` or `type(scope)!: desc`. The title is the reliable signal:
-// squash merges use it and leave the body empty (#5388). The footer is
-// checked too because the beta guide asks for both.
+// `type!: desc` or `type(scope)!: desc`, or a footer in the description.
+// Squash merges use the PR title and description as the commit message, so
+// either one reaches release-please (#5388).
 const BREAKING_TITLE = /^[a-z]+(\([^)]*\))?!:/
 const BREAKING_FOOTER = /^BREAKING[ -]CHANGE:/m
 
@@ -112,7 +112,7 @@ const BREAKING_FOOTER = /^BREAKING[ -]CHANGE:/m
 // people who need them already look (#5388).
 const GUIDE = 'documentation/how-to/BETA_RELEASE_GUIDE.md'
 const MARKER_HINT = `If this changes props, markup or behaviour someone on an earlier beta relies on, add \`!\` to the PR title. See "Marking breaking changes" in \`${GUIDE}\`.`
-const FOOTER_HINT = `The squash merge keeps only the PR title. To keep a \`BREAKING CHANGE:\` footer, such as a migration hint, paste it into the body field of the squash-merge dialog. See "Marking breaking changes" in \`${GUIDE}\`.`
+const FOOTER_HINT = `Add a \`BREAKING CHANGE:\` line with a migration hint to the PR description. The squash merge puts the description in the commit, so the hint reaches the changelog. See "Marking breaking changes" in \`${GUIDE}\`.`
 
 const gh = (args) =>
   execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 })
@@ -290,10 +290,15 @@ const main = () => {
     ? `Breaking change to ${subjects}`
     : `${subjects} changed under \`/next\``
 
+  // A breaking PR that already has the footer needs no reminder.
   const hint = breaking ? FOOTER_HINT : MARKER_HINT
+  const hintLines = breaking && BREAKING_FOOTER.test(body) ? [] : ['', hint]
 
   if (files.includes(PAGE)) {
-    report([`✅ ${what}, and the breaking changes page was updated.`, '', hint])
+    report([
+      `✅ ${what}, and the breaking changes page was updated.`,
+      ...hintLines,
+    ])
     return
   }
 
@@ -302,8 +307,7 @@ const main = () => {
       `⚠️ ${what} with nothing added to the breaking changes page, skipped by the \`${SKIP_LABEL}\` label.`,
       '',
       'Worth a second look in review: the label says this PR leaves the EDS 1.0 to 2.0 answer unchanged.',
-      '',
-      hint,
+      ...hintLines,
     ])
     // An annotation as well as the summary: the check goes green either way,
     // and a green check nobody opens is how the label turns into a habit.
@@ -327,8 +331,7 @@ const main = () => {
       : []),
     '',
     `If the EDS 1.0 to 2.0 answer is unchanged by this PR, add the \`${SKIP_LABEL}\` label and say why.`,
-    '',
-    hint,
+    ...hintLines,
     '',
     'Changed `/next` files:',
     ...changed.map((file) => `- \`${file}\``),
