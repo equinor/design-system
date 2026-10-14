@@ -4,13 +4,13 @@ hide_title: true
 description: 'System icons enhance interfaces by adding visual communication to actions, status and feedback while reducing cognitive load. They are to provide meaning at a glance.'
 ---
 
-## Usage Guidelines
+## Usage guidelines
 
-The EDS system icons are built on a copy of the [outlined GMD icons](https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined) provided open-source by Google. The icons have been customised and renamed for Equinor's use and are available in EDS Storybook.
+The EDS system icons are built on a copy of the [outlined Google Material Design icons](https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined) provided open-source by Google. The icons have been customised and renamed for Equinor's use and are available in EDS Storybook.
 
-There are over 600 icons available divided in logical categories to make them easy to find.
+There are more than 700 icons, divided into categories to make them easy to find.
 
-Simple and clear icons require a strict underlying grid. The EDS icons are built on a 24x24px grid. System icons can be used in 24px and 16px sizes. However, when using compact mode the size of icons is 18px.
+Simple and clear icons require a strict underlying grid. The EDS icons are built on a 24x24px grid. In code, the [Icon component](../../components/data-display/icon.md) sets the size you render them at: its `size` prop has ten sizes from `xs` to `6xl`, and each size changes with density.
 
 :::danger Don't
 
@@ -20,19 +20,20 @@ Simple and clear icons require a strict underlying grid. The EDS icons are built
 
 ## Design
 
-### Using Product Icons in Figma
+### Using system icons in Figma
 
-1.  Locate the **Assets** tab in the **Layers Panel**.
-2.  There are two ways to locate the `System icon` component needed:
-    1.  Use the search bar to search for a component grouping name or variation name.
-    2.  Scroll through the folders list and open the relevant grouping.
+In the Assets panel, the system icons are grouped under the **System icons** page of the [EDS Assets](https://www.figma.com/design/BQjYMxdSdgRkdhKTDDU7L4KU/EDS-Assets?node-id=2-3) file (internal Equinor Figma access). Each icon is its own component, named after what it shows.
 
-3.  Once the component needed is located, click and drag it into the frame/artboard.
-4.  Hold `Shift` when resizing the `System icon` to retain its aspect ratio.
+1.  Locate the **Assets** tab in the **Layers Panel**.
+2.  Find the icon you need in one of two ways:
+    1.  Search for the icon's name.
+    2.  Open the **System icons** page and browse its folders.
+3.  Drag the icon into your frame.
+4.  Hold `Shift` when resizing the icon to keep its aspect ratio.
 
 ## Library
 
-All icons are available on EDS Storybook and can also be installed from NPM.
+All icons are published in the [`@equinor/eds-icons`](https://www.npmjs.com/package/@equinor/eds-icons) package, and you can browse them in Storybook. Render them with the [Icon component](../../components/data-display/icon.md), which takes the icon through its `data` prop.
 
 ## Contribution
 
@@ -54,7 +55,7 @@ Extremely complex shapes sometimes require complex details. The guidelines allow
 ### Making a new icon
 
 - Create an artboard that is 24x24px
-  - Place the `System icon grid` from the **Utilities** page in **Assets File** as the bottom layer and lock it
+  - Place the `System icon grid` from the **Utilities** page in the [EDS Assets](https://www.figma.com/design/BQjYMxdSdgRkdhKTDDU7L4KU/EDS-Assets) file as the bottom layer and lock it
   - Choose the grid shape: circle, square, vertical rectangle or horizontal rectangle
   - Make sure to align all artwork to the pixel grid
 
@@ -73,4 +74,4 @@ Extremely complex shapes sometimes require complex details. The guidelines allow
 - Pick a category for the icon to live under. Reference the library for current categories
 - Supply a list of alternative names that people might associate with your icon. This will help when searching
 
-Get in touch with the EDS core team designers for further assistance.
+Get in touch with the EDS core team through the [support page](/docs/Next/support) for further assistance.

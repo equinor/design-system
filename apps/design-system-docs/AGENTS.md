@@ -10,11 +10,18 @@ specific to this app.
 
 A versioned Docusaurus site documenting EDS. Three doc versions exist:
 
-| Version                             | Content dir                          | URL path                                            | Status                                                   |
-| ----------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
-| `current` (labelled **3.0.0-beta**) | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
-| `2.0.0-beta`                        | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
-| `1.1.0`                             | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+| Version                                   | Content dir                          | URL path                                            | Status                                                   |
+| ----------------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
+| `current` (labelled **EDS 2.0 (beta)**)   | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
+| `2.0.0-beta` (**EDS 2.0 (earlier beta)**) | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
+| `1.1.0` (labelled **EDS 1**)              | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+
+Labels name the design system generation, not a package version: the site
+documents several packages whose versions do not move together, and its main
+readers are designers who do not track them (#4942). The `2.0.0-beta` archive is
+left out of the version dropdown with `versions: ['current', '1.1.0']` on the
+navbar item — it stays built and linkable, but it was never updated past the old
+colour foundation, so it should not be offered as a destination.
 
 **Version scoping is the #1 footgun.** Anything that styles doc _content_
 must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
@@ -28,7 +35,7 @@ must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
   badge in `site-chrome.css`, hidden on current only so frozen pages still
   say which version they are.
 - React: the DocItem hero gate checks `REDESIGN_VERSIONS` (`'current'` and
-  `'2.0.0-beta'`).
+  `'2.0.0-beta'`), and its version notes check `EDS_1_VERSION` / `EDS_2_VERSION`.
 - Freezing another version means adding its `docs-version-*` class and name
   to both lists.
 - Chrome (navbar, sidebar, TOC, footer) is deliberately version-independent.
@@ -49,9 +56,17 @@ must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
 
 Two sanctioned changes to the archive's rendering, and only these two:
 
-1. It carries Docusaurus's standard "no longer actively maintained" banner,
-   because it genuinely is not the latest version. Suppress with
-   `banner: 'none'` on the `1.1.0` entry if that is ever unwanted.
+1. It carries a version note, but not Docusaurus's. The upstream banner for a
+   pre-`lastVersion` version says the docs are "no longer actively maintained",
+   and EDS 1 is maintained until EDS 2.0 becomes stable, so the entry sets
+   `banner: 'none'` and `DocItem/Layout` renders its own note instead (#4942).
+   The current version gets the same treatment for the opposite reason: upstream
+   renders nothing there, which left the beta pages with no sign that they are
+   beta. Both notes live in `DocItem/Layout`; the EDS 2.0 one is `BetaNotice`,
+   scoped to `components/` because it states `eds-core-react`'s path to 3.0.0,
+   which is not every package's (`eds-tokens` beta is a separate story — #5242).
+   The `2.0.0-beta` archive keeps the upstream banner, where "unmaintained" is
+   true.
 2. It has no breadcrumbs. `breadcrumbs: false` is a docs-**plugin** option,
    not a per-version one, so the redesign's choice to drop them necessarily
    applies to the archive too. There is no way to scope it; re-enabling for
@@ -225,6 +240,15 @@ MDX docs use these without imports; React pages import them from
 
 - `DocsSection` — section + container + SectionHeading boilerplate
   (`title`, `subtitle`, `tone="muted"`, `as`, `id`)
+- `BetaNotice` — the EDS 2.0 beta note. `DocItem/Layout` renders it on every
+  component page it draws the hero band for, which puts it under the title. A
+  page that writes its own title inside the MDX has to place it itself, after
+  its `<Hero>`, and be listed in `EDS_2_NOTICE_SELF_PLACED` in the layout so the
+  note is not rendered twice; `docs/components/components.mdx` is the one such
+  page, and it passes `className` to replace the default spacing with what its
+  own rhythm needs (Infima utilities, because the hero band's container chain
+  zeroes `margin-top` on what follows it). The note belongs directly under the
+  title, never above it.
 - `Hero`, `SectionHeading`, `IconCard`/`IconCardGrid`, `CtaSection`,
   `TeamCard`, `Icon` — landing-page building blocks
 - `GalleryCard`/`GalleryGrid` — live-preview cards on `/components`
@@ -374,12 +398,13 @@ All five run in CI, but they are spread across three jobs of
 3. `pnpm run lint:css:docs` and `pnpm run lint:docs`
 4. `pnpm run check:docs-stories` — StoryCanvas / StorybookEmbed references.
 5. `pnpm run build:docs` — `onBrokenLinks: 'throw'` is the link gate.
-   Known-acceptable warnings: two broken anchors on the **photography** pages
-   (`foundation/assets/photography` links to the resources page). The
-   current-version one is a false positive — `SectionHeading` slugifies its
-   `title`, so `#external-references` does resolve at runtime, invisibly to the
-   checker. The 1.1.0 one is a **real** broken link (`#external-resources` vs
-   the archive's `#external-references`), left unfixed because the archive is
+   Known-acceptable warnings: two broken anchors on the frozen **photography**
+   pages (`foundation/assets/photography` links to the resources page; the
+   current version folded that page into `foundation/assets/assets`). The
+   2.0.0-beta one is a false positive: `SectionHeading` slugifies its `title`,
+   so `#external-references` does resolve at runtime, invisibly to the
+   checker. The 1.1.0 one is a broken link (`#external-resources` vs the
+   archive's `#external-references`), left unfixed because the archive is
    frozen. Also css-minimizer warnings on modern CSS functions
    (`tan(atan2())`) in compiled component source.
 

@@ -11,6 +11,14 @@ import { favorite_filled, check, time, remove, check_circle_outlined, info_circl
 
 <Hero dots title="Components" lead={<p>Components are interactive building blocks for creating a user interface. Browse by category below, or use the sidebar to jump directly to a component.</p>} />
 
+{/* This page builds its own title, so DocItem/Layout cannot place the beta
+    note under it the way it does on the individual component pages. It spaces
+    itself: above, because the layout's chrome is what does that elsewhere, and
+    not below, because the first section already has its own padding. An Infima
+    utility because the hero band's container chain zeroes `margin-top` on what
+    follows it. */}
+<BetaNotice className="margin-top--md" />
+
 <DocsSection title="Data Display" subtitle="Present information, status, structure, or relationships.">
 
 <GalleryGrid>
