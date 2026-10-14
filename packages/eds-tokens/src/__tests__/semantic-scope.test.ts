@@ -46,7 +46,26 @@ type Block = {
 // below). Tracked in #5567; remove this once the elevation layer is widened.
 const ELEVATION_ALIASES = ['--eds-elevation-key', '--eds-elevation-ambient']
 
-const css = fs.readFileSync(bundle, 'utf-8').replace(/\/\*[\s\S]*?\*\//g, '')
+/**
+ * The bundle ships wrapped in `@layer eds-tokens`, opened by the layer order
+ * statement (ADR-0014 § 6, #5423). Unwrap it before parsing: the block parser
+ * below is flat, so the wrap would otherwise swallow the first rule into a
+ * block whose selector is `@layer eds-tokens`. The structure is asserted in
+ * its own test, so a bundle that lost the wrap fails loudly there instead of
+ * silently parsing as something else.
+ *
+ * The order statement is pinned verbatim, including `eds-tokens-legacy`,
+ * which this bundle never emits into. Layer order is fixed by first
+ * declaration and an unnamed layer is appended last, so a statement that
+ * disagrees with the one in `eds-core-react/src/components/next/index.css`
+ * puts the legacy bundle on top in whichever app loads this file first.
+ */
+const LAYER_ORDER =
+  '@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;'
+const LAYER_WRAP = /^\s*@layer [^;]+;\s*@layer eds-tokens \{([\s\S]*)\}\s*$/
+
+const raw = fs.readFileSync(bundle, 'utf-8').replace(/\/\*[\s\S]*?\*\//g, '')
+const css = raw.match(LAYER_WRAP)?.[1] ?? raw
 
 const blocks: Block[] = [...css.matchAll(/([^{}]+)\{([^}]*)\}/g)].map(
   ([, selector, body]) => ({
@@ -87,7 +106,12 @@ const refersOnlyToElevationAliases = (block: Block) =>
   )
 
 describe('subtree scoping in the Tokens Studio CSS bundle', () => {
-  it('has only flat rules, which the block parser relies on', () => {
+  it('opens with the layer order statement and wraps the rest in @layer eds-tokens', () => {
+    expect(raw.trimStart().startsWith(LAYER_ORDER)).toBe(true)
+    expect(raw).toMatch(LAYER_WRAP)
+  })
+
+  it('has only flat rules inside the layer, which the block parser relies on', () => {
     expect(css).not.toMatch(/@[\w-]+/)
   })
 

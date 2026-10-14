@@ -118,12 +118,15 @@ granular files stay internal.
   the size gap (4.8 vs 4.6 kB); consumers that bundle minify with
   their own tooling. The bundle's only added behaviour is the
   `@layer eds-tokens` wrap decided in
-  [ADR-0014](./0014-token-code-output-architecture.md) (proposed in
-  [#5178](https://github.com/equinor/design-system/pull/5178), decision
-  point 6; not yet implemented — the shipped bundle is unlayered until
-  then). The wrap is deterministic, so the bundle stays a pure function
-  of the source files; beyond it the step adds nothing on top of the
-  generated files (see the colour-scheme note below).
+  [ADR-0014](./0014-token-code-output-architecture.md) decision point 6
+  and implemented in
+  [#5423](https://github.com/equinor/design-system/issues/5423): the
+  output opens with
+  `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
+  and holds the whole concatenation in one `@layer eds-tokens` block.
+  The wrap is deterministic, so the bundle stays a pure function of the
+  source files; beyond it the step adds nothing on top of the generated
+  files (see the colour-scheme note below).
 - **Beta validation costs nothing extra:** the existing `./next/css/*`
   wildcard maps to `src/tokens/css/*`, so the committed bundle is
   importable as `@equinor/eds-tokens/next/css/variables.css` in the next
@@ -204,10 +207,10 @@ when the ADR was marked Accepted.
 - [ADR-0013](./0013-attribute-scoped-custom-properties-not-light-dark.md)
   — why the token CSS uses attribute-scoped rules and never
   `light-dark()`
-- [ADR-0014](./0014-token-code-output-architecture.md) (proposed in
-  [#5178](https://github.com/equinor/design-system/pull/5178)) — the
+- [ADR-0014](./0014-token-code-output-architecture.md) (Accepted) — the
   output architecture; decides the `@layer eds-tokens` wrap this
-  bundle step applies
+  bundle step applies, and how the layer coexists with the unlayered
+  legacy bundle
 - PR [#4864](https://github.com/equinor/design-system/pull/4864) — why the
   2.x bundle has explicit dark scopes + the `prefers-color-scheme`
   fallback (`build-dark-scope`)

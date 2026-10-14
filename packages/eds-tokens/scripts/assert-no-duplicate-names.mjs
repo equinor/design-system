@@ -204,8 +204,8 @@ console.log(
 
 /**
  * Lightweight declaration scanner. Tracks the selector stack so nesting
- * (`@layer eds-tokens { :root { … } }`, proposed in #5423) keeps
- * declarations attributed to the block they are actually in, and
+ * (`@layer eds-tokens { :root { … } }`, how the bundle ships since
+ * #5423) keeps declarations attributed to the block they are in, and
  * flushes on `}` as well as `;` so the last declaration of a minified
  * block is not dropped — the legacy bundle is minified.
  *

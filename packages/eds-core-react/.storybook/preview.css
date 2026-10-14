@@ -1,8 +1,16 @@
 /* Tokens Studio beta bundle (ADR-0009: published consumers import
    @equinor/eds-tokens/next/css/variables.css; the ./next/* exports are
    injected at publish time only, hence the relative path locally).
-   Imported BEFORE the legacy bundle so legacy wins the name collisions
-   (--eds-typography-header-*-font-size) during the mixed period. */
+
+   Legacy wins the ten shared names (--eds-elevation-low/high and the
+   eight --eds-typography-header-*-font-size), which is what this
+   Storybook wants during the mixed period: the 1.0 components on the
+   same canvas are built against those values. That no longer rides on
+   import order — the beta bundle ships inside @layer eds-tokens
+   (ADR-0014 § 6) and the legacy bundle is left unlayered here on
+   purpose, so it beats the layer whichever way the two are ordered.
+   The docs site makes the opposite choice and imports legacy with
+   layer(eds-tokens-legacy). */
 @import '../../eds-tokens/src/tokens/css/variables.css';
 @import '@equinor/eds-tokens/css/variables';
 
@@ -30,7 +38,8 @@ body.eds-debug-grid::before {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  background-image: repeating-linear-gradient(
+  background-image:
+    repeating-linear-gradient(
       to left,
       transparent var(--_padding-inline, 0px),
       #f005 var(--_padding-inline, 0px),
