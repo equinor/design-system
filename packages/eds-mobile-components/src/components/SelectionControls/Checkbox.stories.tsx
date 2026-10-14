@@ -63,7 +63,7 @@ export const IndeterminateParent = () => (
 IndeterminateParent.parameters = {
     docs: {
         description: {
-            story: "Use `indeterminate` on a parent checkbox when only some of its children are selected. Screen readers hear it as mixed.",
+            story: "Use `indeterminate` on a parent checkbox when only some of its children are selected. Screen readers hear it as mixed. `allChecked` and `setSelected` are `useState` values kept in the parent screen.",
         },
     },
 };

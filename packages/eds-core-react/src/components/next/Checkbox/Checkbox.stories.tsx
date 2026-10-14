@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { Button, Table } from '../../..'
 import { data } from '../../../stories/data'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Checkbox } from './Checkbox'
 import type { CheckboxProps } from './Checkbox.types'
 
@@ -169,13 +169,22 @@ export const States: StoryFn<CheckboxProps> = () => (
   </Wrapper>
 )
 
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'A checkbox is unchecked, checked or indeterminate, and can be disabled in any of those states.',
+    },
+  },
+}
+
 export const Density: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
     {(['spacious', 'comfortable'] as const).map((density) => (
       <div key={density} data-density={density}>
-        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+        <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
-        </p>
+        </ExampleLabel>
         <Wrapper gap={8}>
           <Checkbox label="Email" defaultChecked />
           <Checkbox label="SMS" />
@@ -203,9 +212,7 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
-          Light Mode
-        </p>
+        <ExampleLabel>Light Mode</ExampleLabel>
         <Checkbox label="Unchecked" />
         <Checkbox label="Checked" defaultChecked />
         <Checkbox label="Indeterminate" indeterminate />
@@ -218,16 +225,9 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <p
-          style={{
-            margin: '0 0 8px',
-            fontWeight: 600,
-            fontSize: '14px',
-            color: 'var(--eds-color-text-strong)',
-          }}
-        >
+        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
           Dark Mode
-        </p>
+        </ExampleLabel>
         <Checkbox label="Unchecked" />
         <Checkbox label="Checked" defaultChecked />
         <Checkbox label="Indeterminate" indeterminate />
@@ -237,7 +237,6 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
     </div>
   </div>
 )
-LightAndDarkMode.storyName = 'Light & Dark Mode'
 
 LightAndDarkMode.parameters = {
   docs: {
@@ -258,7 +257,6 @@ export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
     </Wrapper>
   </fieldset>
 )
-GroupedCheckbox.storyName = 'Grouped'
 
 GroupedCheckbox.parameters = {
   docs: {
@@ -290,7 +288,11 @@ export const Subgroup: StoryFn<CheckboxProps> = () => {
         indeterminate={someChecked}
         onChange={() => setSelected(allChecked ? [] : options)}
       />
-      <div style={{ paddingLeft: '24px' }}>
+      <div
+        role="group"
+        aria-label="Notification options"
+        style={{ paddingLeft: '24px' }}
+      >
         <Wrapper gap={8}>
           {options.map((option) => (
             <Checkbox
@@ -330,7 +332,6 @@ export const InheritedDisabled: StoryFn<CheckboxProps> = () => (
     </Wrapper>
   </fieldset>
 )
-InheritedDisabled.storyName = 'Inherited disabled'
 InheritedDisabled.parameters = {
   docs: {
     description: {

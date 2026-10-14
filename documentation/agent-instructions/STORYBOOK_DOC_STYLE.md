@@ -102,7 +102,7 @@ Any other heading or metadata key fails the generator. Metadata is not content a
 
 **Overview.** Web only, and required. Written by the developer, in the stories file. The display shown right after Features, with no heading and no caption, because the Summary and Features lead into it. It shows a few instances that give a feel for the component, not every variant. Choose what suits the component: for a Badge a few tones in solid and outlined, for a Checkbox its main states. It is not listed under Examples, so it may overlap with them.
 
-**Examples.** At least one besides the playground and the overview, which are web's `Introduction` and `Overview` stories. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). Add a caption to each example with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
+**Examples.** At least one besides the playground and the overview, which are web's `Introduction` and `Overview` stories. Every other export that is a function or an object is an example, titled from its name (`InlineWithText` becomes "Inline with text"). The generator ignores `storyName`, so do not set it, if the humanised name is wrong, rename the export instead. Add a caption to each example with `parameters.docs.description.story`, worded for the reader and true on that platform. A story showing every combination is welcome, but do not describe it as being for testing.
 
 **Accessibility.** Cover each topic that applies, with as many bullets as needed:
 
