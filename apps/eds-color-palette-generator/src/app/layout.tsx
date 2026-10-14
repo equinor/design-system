@@ -1,24 +1,14 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import '@equinor/eds-tokens/css/variables'
 import './globals.css'
-import '@/styles/dialog.css' // Import dialog styles globally
 import '@/styles/print.css' // Import print styles globally
 import { ColorSchemeProvider } from '@/context/ColorSchemeContext'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import { DensityProvider } from '@/context/DensityContext'
+import { COLOR_SCHEME_SCRIPT } from '@/context/colorSchemeScript'
 
 export const metadata: Metadata = {
-  title: 'Color Generator',
-  description: 'Generate color scales with gaussian distribution',
+  title: 'EDS Colour Palette Generator',
+  description:
+    'Internal tool for proposing and checking colour palettes for the Equinor Design System. Tokens Studio is the source of truth.',
 }
 
 export default function RootLayout({
@@ -27,11 +17,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ColorSchemeProvider>{children}</ColorSchemeProvider>
+    // The pre-paint script may change data-color-scheme before hydration.
+    <html lang="en" data-color-scheme="light" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: COLOR_SCHEME_SCRIPT }} />
+        {/* EDS fonts: Inter for UI text, Equinor for headings */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css"
+        />
+      </head>
+      <body className="antialiased">
+        <ColorSchemeProvider>
+          <DensityProvider>{children}</DensityProvider>
+        </ColorSchemeProvider>
       </body>
     </html>
   )
