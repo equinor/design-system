@@ -40,7 +40,21 @@ fix: correct Placeholder styling
 feat!: change Button API
 ```
 
-> **Note:** Use the conventional-commit `!` marker for breaking changes in beta components. The version base is pinned at `3.0.0` (`versioning: "prerelease"` in `release-please-config.json`), so `!` does not bump the major — it only increments the beta counter — while giving consumers a "⚠ BREAKING CHANGES" section in the changelog and release notes.
+> **Note:** Use the conventional-commit `!` marker for breaking changes in beta components. The version base is pinned at `3.0.0` (`versioning: "prerelease"` in `release-please-config.json`), so `!` does not bump the major. It only increments the beta counter, while giving consumers a "⚠ BREAKING CHANGES" section in the changelog and release notes.
+
+### Marking breaking changes
+
+**What `!` covers.** A change within the beta line: props, markup or behaviour that someone on an earlier beta relies on. How a component differs from EDS 1.0 belongs on the Storybook page "EDS 2.0 (beta) / Breaking changes" (see [Breaking Changes Policy](#breaking-changes-policy)), not in a `!`. A new component is a plain `feat:`, even when it replaces a 1.0 one.
+
+**Keep `!` commits inside `/next`.** Release-please judges a commit against every package whose files it touches. Inside `/next` a `!` only bumps the beta counter, but if the same commit also touches the rest of `packages/eds-core-react`, `package.json` included, it cuts a major of the stable 2.x line. Only `stories/`, `.storybook/` and `tests/` are excluded. Split a mixed change into separate PRs.
+
+**Put `!` in the PR title.** The repo squash-merges with the PR title as the commit message and an empty body, so the title is all release-please sees. A `BREAKING CHANGE:` footer in the branch commits is dropped. To keep one, for example a migration hint, paste it into the body field of the squash-merge dialog:
+
+```
+BREAKING CHANGE: `className` and `style` now land on the root element. To reach the native input, use a descendant selector, e.g. `.my-field input { ... }`.
+```
+
+Without the footer the changelog only repeats the title, as it did for #5509. With it, the hint lands in the "⚠ BREAKING CHANGES" section, as for #5409.
 
 ### Stable Release (for existing components)
 
@@ -283,7 +297,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 **Within `/next` (beta releases):**
 
 - ✅ Breaking changes are allowed and expected
-- ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
+- ✅ Mark them with `!` in the PR title so they appear under "⚠ BREAKING CHANGES" in the changelog. See [Marking breaking changes](#marking-breaking-changes) for what counts, the path rule and how to keep a `BREAKING CHANGE:` footer through the squash merge
 - ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it is what the migration guide grows out of at graduation (#5387). Keep the answer current: when a PR moves a component's props, composition, markup or behaviour, the section has to describe 2.0 as it then stands. It is not a changelog, so leave beta-to-beta wording out of it and put that in the commit message and the PR description. CI enforces this, and not only when the PR is marked breaking: editing any `.ts` or `.tsx` file of a published component without touching the page fails the "Breaking changes page entry" check. If the EDS 1.0 to 2.0 answer is unchanged, add the `skip-breaking-changes-doc` label and say why in the description
 - ✅ A new `/next` component needs its section on that page in the same PR that exports it. Most 2.0 components rewrite a 1.0 predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. Where there is no 1.0 counterpart, follow `## Badge` and `## Link` on the page; where the component splits a 1.0 one, as Combobox splits `Autocomplete` with `multiple`, name that component and the usage this half comes from and link the two sections. CI fails on a component exported from the `/next` barrel with no section
 - ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
