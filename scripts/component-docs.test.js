@@ -75,7 +75,10 @@ describe('web page: Overview story', () => {
 
   test('has no heading and no caption of its own', () => {
     const overview = story('Overview', { caption: 'Never shown.' })
-    const withCaption = renderWeb('Thing', context([overview, story('Sizes')]))
+    const withCaption = renderWeb(
+      'Thing',
+      context([overview, story('Sizes', { caption: 'Two sizes.' })]),
+    )
     assert.ok(!withCaption.includes('### Overview'))
     assert.ok(!withCaption.includes('Never shown.'))
   })
@@ -83,7 +86,7 @@ describe('web page: Overview story', () => {
   test('does not have to be the first story in the file', () => {
     const reordered = renderWeb(
       'Thing',
-      context([story('Sizes'), story('Overview')]),
+      context([story('Sizes', { caption: 'Two sizes.' }), story('Overview')]),
     )
     assert.ok(
       indexOfText(reordered, '<Canvas of={Stories.Overview} />') <
@@ -118,9 +121,49 @@ describe('mobile page: Overview is not special', () => {
   test('a story called Overview is listed as an ordinary example', () => {
     const page = renderMobile(
       'Thing',
-      context([story('Overview'), story('Sizes')]),
+      context([
+        story('Overview', { caption: 'An overview.' }),
+        story('Sizes', { caption: 'Two sizes.' }),
+      ]),
     )
     assert.ok(page.includes('### Overview'))
     assert.ok(page.includes('### Sizes'))
+  })
+})
+
+describe('every example needs a caption', () => {
+  test('web fails with a clear message, listing every example missing one', () => {
+    assert.throws(
+      () =>
+        renderWeb(
+          'Thing',
+          context([
+            story('Overview'),
+            story('Sizes'),
+            story('Tones', { caption: 'Two tones.' }),
+            story('Colours'),
+          ]),
+        ),
+      (error) =>
+        error instanceof DocsError &&
+        error.message.includes('add a caption to `Sizes`, `Colours`'),
+    )
+  })
+
+  test('web does not require a caption on Overview itself', () => {
+    const page = renderWeb(
+      'Thing',
+      context([story('Overview'), story('Sizes', { caption: 'Two sizes.' })]),
+    )
+    assert.ok(page.includes('### Sizes'))
+  })
+
+  test('mobile fails with the same message when an example has none', () => {
+    assert.throws(
+      () => renderMobile('Thing', context([story('Sizes')])),
+      (error) =>
+        error instanceof DocsError &&
+        error.message.includes('add a caption to `Sizes`'),
+    )
   })
 })
