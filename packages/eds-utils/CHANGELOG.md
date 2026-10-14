@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.2](https://github.com/equinor/design-system/compare/eds-utils@v2.2.1...eds-utils@v2.2.2) (2026-10-13)
+
+
+### 🐛 Fixed
+
+* keep the child's ref when reading it from a React 18 element ([#5627](https://github.com/equinor/design-system/issues/5627)) ([4bebe6c](https://github.com/equinor/design-system/commit/4bebe6c51094e21c5f101338449a3bc97bb22a07))
+
 ## [2.2.1](https://github.com/equinor/design-system/compare/eds-utils@v2.2.0...eds-utils@v2.2.1) (2026-05-20)
 
 

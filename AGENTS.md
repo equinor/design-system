@@ -86,6 +86,7 @@ pnpm --filter @equinor/eds-mobile-components run lint  # Lint eds-mobile-compone
 pnpm --filter @equinor/mobile-storybook run lint       # Lint mobile-storybook with its own config
 
 pnpm run test:core-react          # Run eds-core-react tests
+pnpm run test:scripts             # Run the root scripts/ tests (node --test, no jest)
 pnpm run test:watch:core-react    # Watch mode
 
 # Run a single test file (from package directory)
@@ -108,9 +109,12 @@ ComponentName/
   ComponentName.figma.tsx # Figma Code Connect (when a Figma design exists)
   ComponentName.test.tsx  # Jest + Testing Library + jest-axe
   ComponentName.stories.tsx
+  ComponentName.docs.md   # Hand-written docs; the page ComponentName.docs.mdx is generated from it
 ```
 
-For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file.
+For the per-component patterns that don't fit in this overview — foundation `data-*` attribute values, the `data-color-appearance` smallest-element rule, `data-space-proportions` calculation, disabled-state tokens, `data-baseline` for exact height, common mistakes, advanced patterns, and the anti-patterns checklist — see [`documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md). Harness scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) all reference that file. They take a platform, `web` or `mobile`, and ask for it when it is missing. Mobile components follow [`documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md`](./documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md).
+
+The Storybook docs page is generated from the types, the stories and `ComponentName.docs.md`, never written by hand. See [`documentation/agent-instructions/STORYBOOK_DOC_STYLE.md`](./documentation/agent-instructions/STORYBOOK_DOC_STYLE.md).
 
 ## Code Style
 
@@ -492,7 +496,7 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 - `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density
 - `0005-use-aschild-slot-for-polymorphism.md` — `asChild` + `Slot` for polymorphic components
 - `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
-- `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
+- `0029-typography-approach-for-eds-2-web.md` — typography roles and weights on the web, `<strong>` and `<b>` resolve to bold, no `text-box` trim
 
 Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 

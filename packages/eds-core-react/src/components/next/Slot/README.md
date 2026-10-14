@@ -12,7 +12,8 @@ Utility component that enables the `asChild` pattern for polymorphic rendering. 
 |---|---|
 | `className` | Concatenated (both parent and child classes kept) |
 | `style` | Shallow merged (child overrides parent) |
-| Event handlers | Composed (both called — child first, then parent) |
+| Event handlers | Composed: child first, then parent. If the child calls `preventDefault()`, the parent handler is skipped |
+| `ref` | Merged: both the child's ref and the Slot's ref receive the node |
 | Other props | Parent (Slot) wins if defined |
 
 ## How to use in a component
@@ -54,7 +55,7 @@ Consumer usage:
 ## Known limitations
 
 - Requires exactly one valid React element child when `asChild` is used
-- Returns `null` silently if the child is invalid
-- Does not support multiple children or text-only children
+- Renders nothing when the child is `null`, `undefined`, `false` or an empty string, so conditional children like `{isAdmin && <a href="/admin">Admin</a>}` work. A `0` child still logs an error, since React would render it as text
+- Does not support multiple children, text-only children or a Fragment: it renders nothing and logs a `Slot:` error to the console
 - **`disabled` on non-form elements**: The `disabled` HTML attribute and `:disabled` CSS pseudo-class only apply to form elements (`<button>`, `<input>`, etc.). When using `asChild` with e.g. `<a>`, `disabled` will be forwarded as an attribute but `:disabled` styles won't trigger. Data-attribute styles (like `data-color-appearance="neutral"`) still apply.
 - **`ref` type mismatch**: Components are typed with a specific ref type (e.g. `forwardRef<HTMLButtonElement>`), but with `asChild` the ref actually points to the child element (e.g. `HTMLAnchorElement`). This is a known TypeScript limitation with the `asChild` pattern.

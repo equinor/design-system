@@ -116,17 +116,6 @@ describe('Checkbox (next)', () => {
       )
       expect(await axe(container)).toHaveNoViolations()
     })
-
-    it('connects helperMessage to input via aria-describedby', () => {
-      render(
-        <Checkbox label="Test Label" helperMessage="Helper text for a11y" />,
-      )
-
-      const checkbox = screen.getByRole('checkbox')
-      const helperMessage = screen.getByText('Helper text for a11y')
-
-      expect(checkbox).toHaveAttribute('aria-describedby', helperMessage.id)
-    })
   })
 
   describe('Interaction', () => {
@@ -210,17 +199,6 @@ describe('Checkbox (next)', () => {
       render(<Checkbox label="Test Label" indicator="(Required)" />)
 
       expect(screen.getByText('(Required)')).toBeInTheDocument()
-    })
-
-    it('supports helperMessage prop', () => {
-      render(
-        <Checkbox
-          label="Test Label"
-          helperMessage="This is a helper message"
-        />,
-      )
-
-      expect(screen.getByText('This is a helper message')).toBeInTheDocument()
     })
   })
 

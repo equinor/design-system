@@ -13,10 +13,8 @@ applyTo: 'packages/eds-core-react/src/components/next/**/*.{ts,tsx}'
 
 ## Storybook stories
 
-Aspirational template for every `.stories.tsx`:
+Stories feed the generated docs page. Follow [`STORYBOOK_DOC_STYLE.md`](../../documentation/agent-instructions/STORYBOOK_DOC_STYLE.md):
 
-- Default/primary variant
-- All design variations (size, color, state)
-- Interactive examples
-- Props documentation
-- Accessibility info
+- An `Introduction` playground story, then one captioned export for each example
+- At least one example besides `Introduction`
+- No beta callout, import snippet or description in the story file, because the page generates them

@@ -185,20 +185,9 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 
 ### When Adding New Components
 
-1. Check [`documentation/MOBILE_COMPONENT_SCOPE.md`](../../documentation/MOBILE_COMPONENT_SCOPE.md) first — the component may already be excluded or renamed.
-2. Create component in `src/components/YourComponent/`
-    - Main component file: `YourComponent.tsx`
-    - Types file: `YourComponent.types.ts` (if complex)
-    - Styles using `EDSStyleSheet.create`
-    - Test file: `YourComponent.test.tsx` — write it alongside the component, not as a follow-up. See `Divider.test.tsx` for the minimal shape: render via `test-utils` (wraps `@testing-library/react-native` with `EDSProvider`) and assert it renders plus any accessibility basics.
-3. Export from `src/index.ts`
-4. Add a storybook screen in `../../apps/mobile-storybook/app/(tabs)/components/yourcomponent.tsx`
-   (the lowercased component folder name, because Expo Router derives the route from it), then
-   add one entry to `componentRegistry` in `../../apps/mobile-storybook/lib/registry.ts`. The
-   list and the header title are built from that entry. CI runs `pnpm run check-screens:mobile`
-   and fails if an exported component has no screen or registry entry.
-5. Create developer documentation in `docs/YourComponent.mdx` — run `/document-component` for the full workflow and structure
-6. Follow existing patterns for prop naming and component structure
+Follow [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md), or run `/new-component <Name> mobile`. It covers the Figma lookup, the scope check, the files, styling with tokens, tests, wiring (export, demo screen and registry entry) and the docs step.
+
+**Generated docs:** `docs/YourComponent.mdx` is generated for every component that has a `YourComponent.docs.md`, and `--check` fails in CI if it is stale. The hand-written files in `docs/` stay as they are until their component moves to the generator.
 
 **MDX handoff to EDS Storybook:** Files in `docs/` are consumed by `packages/eds-core-react` via a `workspace:^` link in this monorepo, which wraps each one with source/npm `<Links>` inside `<PlatformTabs>` — changes appear as soon as both packages are built, no release needed. Mobile MDX should not import `<Links>` or `<PlatformTabs>` itself — write component-focused content only. The consumer-side wrapping pattern (in `packages/eds-core-react/src/components/<Component>/<Component>.docs.mdx` — most under `next/`, but `EdsProvider` and `Typography.new` sit outside it) is:
 
@@ -220,15 +209,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 
 ### Component Development Checklist
 
-- [ ] Uses `EDSStyleSheet.create` for all theming
-- [ ] Supports both light and dark modes automatically via tokens
-- [ ] Supports both comfortable and spacious density modes
-- [ ] Uses `theme.colors.*`, `theme.spacing.*`, and `theme.typography.*` tokens
-- [ ] Exports TypeScript types for all props
-- [ ] Follows existing component patterns (prop naming, structure)
-- [ ] Has corresponding storybook story for visual testing
-- [ ] Has a `YourComponent.test.tsx` covering rendering and accessibility basics
-- [ ] Has developer MDX doc in `docs/` (Features → Usage → Examples → Props → Accessibility → Related components)
+The checks to run before finishing, and the anti-patterns to avoid, are in [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md#checks-before-you-finish).
 
 ## Important Patterns
 
@@ -262,15 +243,7 @@ If the finding needs real work, open a dedicated issue and link it next to the c
 
 ## Component Migration (Figma → Mobile)
 
-All components are being redesigned to match the EDS Figma design. Follow these principles:
-
-- **Match Figma as closely as possible** — use the Figma MCP tools to extract design context, variables, and screenshots
-- **Scale for mobile** — Figma designs are web-first; determine an appropriate scale factor per component for mobile touch targets (minimum 44×44pt recommended by Apple)
-- **Use semantic tokens** — never hardcode spacing or colors; map Figma CSS variables to `theme.spacing.*` and `theme.colors.*` token paths
-- **Use typography tokens** — map fontSize, fontWeight, lineHeight, letterSpacing to `theme.typography.*` token paths
-- **Pressed = Figma hover** — mobile has no hover state; use the Figma hover background as the pressed state
-- **Use `Pressable` not `PressableHighlight`** — Figma doesn't show a gray overlay on press
-- **Run `/migrate-component`** to follow the full step-by-step migration workflow
+All components are being redesigned to match the EDS Figma design. The design is shared with web, and the principles for matching it on mobile (tokens, pressed state, touch targets, scale) are in [`BUILDING_EDS_MOBILE_COMPONENTS.md`](../../documentation/agent-instructions/BUILDING_EDS_MOBILE_COMPONENTS.md). Run `/new-component <Name> mobile` to follow the flow.
 
 ## Migration Notes
 
