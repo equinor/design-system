@@ -204,10 +204,16 @@ console.log(
 
 /**
  * Lightweight declaration scanner. Tracks the selector stack so nesting
- * (`@layer eds-tokens { :root { … } }`, how the bundle ships since
- * #5423) keeps declarations attributed to the block they are in, and
+ * (`@layer eds-tokens { :root { … } }`) keeps declarations attributed to
+ * the block they are in, and
  * flushes on `}` as well as `;` so the last declaration of a minified
  * block is not dropped — the legacy bundle is minified.
+ *
+ * Nothing it reads today is layered: the bundle that ships inside
+ * `@layer eds-tokens` (#5423) is excluded above, and the legacy file is
+ * unlayered. The nesting support is there for the day the export itself
+ * emits a layer, so a wrapped file does not silently parse as one block
+ * whose selector is `@layer eds-tokens`.
  *
  * Tuned to the generated export: no strings containing braces or
  * semicolons, which a full CSS parser would be needed for.

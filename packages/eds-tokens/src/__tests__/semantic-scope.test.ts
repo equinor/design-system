@@ -32,6 +32,19 @@ const bundle = path.resolve(
   '../tokens/css/variables.css',
 )
 
+/**
+ * The components CSS entry, read from the neighbouring package so the two
+ * order statements are checked against each other rather than each against
+ * a literal. Pinning only this side would leave the invariant half guarded:
+ * editing `index.css` alone is enough to reintroduce the inversion the
+ * statement exists to prevent, and nothing in eds-core-react parses the
+ * tokens bundle.
+ */
+const componentsEntry = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../../eds-core-react/src/components/next/index.css',
+)
+
 type Block = {
   selectors: string[]
   declared: Map<string, string>
@@ -109,6 +122,14 @@ describe('subtree scoping in the Tokens Studio CSS bundle', () => {
   it('opens with the layer order statement and wraps the rest in @layer eds-tokens', () => {
     expect(raw.trimStart().startsWith(LAYER_ORDER)).toBe(true)
     expect(raw).toMatch(LAYER_WRAP)
+  })
+
+  it('declares the same layer order as the components CSS entry', () => {
+    const components = fs
+      .readFileSync(componentsEntry, 'utf-8')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+
+    expect(components.match(/@layer [^{;]+;/)?.[0]).toBe(LAYER_ORDER)
   })
 
   it('has only flat rules inside the layer, which the block parser relies on', () => {
