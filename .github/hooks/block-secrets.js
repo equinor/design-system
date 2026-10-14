@@ -1,8 +1,9 @@
 // Secret-file patterns. Keep in sync with .claude/hooks/read_hook.js and
 // AGENTS.md § Secrets & Credentials.
-// `.env`, `.env.*`, and shell globs like `.env*`. Not `process.env`, which is
+// `.env` followed by nothing or a non-word character: `.env.local`,
+// `.env-local`, `.env~`, `.env*`. Not `.envrc`, and not `process.env`, which is
 // an environment variable, not a file.
-const envBasename = /^\.env($|[.*?[])/
+const envBasename = /^\.env($|\W)/
 
 const credentialPatterns = [
   envBasename,
@@ -19,11 +20,11 @@ const keyFilePattern = /\.key$/
 
 const secretDir = /(^|\/)secrets\//
 
-// Split a value into path-like tokens. Whitespace, shell operators, quotes and
-// `=` (as in `--file=foo.pem`) separate tokens, so the basename of each token
-// can be checked against the same patterns as a file path. Same split as
-// commandTokens in .claude/hooks/read_hook.js.
-const tokens = (value) => value.split(/[\s;|&<>()`'"=]+/).filter(Boolean)
+// Split a value into path-like tokens. Whitespace, shell operators, quotes, `=`
+// (as in `--file=foo.pem`) and brace expansion (`{.env,x}`) separate tokens, so
+// the basename of each token can be checked against the same patterns as a
+// file path. Same split as commandTokens in .claude/hooks/read_hook.js.
+const tokens = (value) => value.split(/[\s;|&<>()`'"={},]+/).filter(Boolean)
 
 const basenameOf = (value) => value.split('/').pop() || ''
 

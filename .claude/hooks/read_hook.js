@@ -1,8 +1,9 @@
 // Secret-file patterns, shared by the Bash and file-path checks below.
 // Keep in sync with .github/hooks/block-secrets.js and AGENTS.md § Secrets & Credentials.
-// `.env`, `.env.*`, and shell globs like `.env*`. Not `process.env`, which is
+// `.env` followed by nothing or a non-word character: `.env.local`,
+// `.env-local`, `.env~`, `.env*`. Not `.envrc`, and not `process.env`, which is
 // an environment variable, not a file.
-const isEnvBasename = (basename) => /^\.env($|[.*?[])/.test(basename)
+const isEnvBasename = (basename) => /^\.env($|\W)/.test(basename)
 
 const credentialPatterns = [
   /^id_(rsa|ed25519|ecdsa|dsa)/,
@@ -18,10 +19,11 @@ const keyFilePattern = /\.key$/
 const secretDir = /(^|\/)secrets\//
 
 // Split a shell command into path-like tokens. Whitespace, shell operators,
-// quotes and `=` (as in `--file=foo.pem`) separate tokens, so the basename of
-// each token can be checked against the same patterns as a file path.
+// quotes, `=` (as in `--file=foo.pem`) and brace expansion (`{.env,x}`)
+// separate tokens, so the basename of each token can be checked against the
+// same patterns as a file path.
 const commandTokens = (command) =>
-  command.split(/[\s;|&<>()`'"=]+/).filter(Boolean)
+  command.split(/[\s;|&<>()`'"={},]+/).filter(Boolean)
 
 async function main() {
   const chunks = []
@@ -99,8 +101,8 @@ async function main() {
     }
   }
 
-  // For Grep, check the glob filter, which decides which files are read. The
-  // pattern is the text being searched for, so `process.env` there is fine.
+  // For Grep, check the glob filter as well as the path above. The pattern is
+  // the text being searched for, so `process.env` there is fine.
   if (toolName === 'Grep') {
     const glob = toolInput.glob || ''
     if (glob.split(/[/{},]/).some(isEnvBasename)) {
