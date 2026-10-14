@@ -21,7 +21,8 @@ Guide for the automated release process in Equinor Design System using Release P
 1. **Use conventional commits** during development (see [CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md))
    - `feat(eds-core-react): add new button variant` → minor version bump
    - `fix(eds-icons): correct icon alignment` → patch version bump
-   - `feat(eds-tokens)!: breaking change` → major version bump
+   - `feat(eds-icons)!: breaking change` → major version bump
+   - `eds-tokens` is the exception: it is pinned to `3.0.0-beta.N` during the beta, so every commit type, `!` included, only bumps the beta counter (see [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md))
 
 2. **Merge PR to `main`** → Release Please automatically creates/updates a release PR
 
@@ -44,7 +45,7 @@ For components under development in the `/next` entry point:
 
 1. **Commit without a scope.** The paths in the diff route the commit, not the scope: `/next` is its own release-please entry and is in `exclude-paths` on `eds-core-react`.
    - `feat: add new Input component`, touching only `/next` → beta version bump
-   - `fix: correct Placeholder styling`, touching only `/next` → beta patch bump
+   - `fix: correct Placeholder styling`, touching only `/next` → beta counter bump
    - There is no `next` scope, and any package scope on a `feat` or `fix` overrides `exclude-paths` and forces a stable bump
 
 2. **Merge PR to `main`** → Release Please creates/updates a release PR

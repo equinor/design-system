@@ -97,7 +97,7 @@ fix: correct positioning logic
 npm install @equinor/eds-core-react@beta
 
 # Or use specific beta version
-npm install @equinor/eds-core-react@2.0.0-beta.1
+npm install @equinor/eds-core-react@3.0.0-beta.N
 ```
 
 ```typescript
@@ -165,7 +165,7 @@ pnpm storybook
 
 Beta versions follow a fixed series pinned at the upcoming major: `3.0.0-beta.1`, `3.0.0-beta.2`, etc.
 
-The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`.
+The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`. See [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md) for the reasoning.
 
 ## `@equinor/eds-tokens`: Whole Package in Beta
 
@@ -383,7 +383,7 @@ npm view @equinor/eds-core-react@beta version
 
 - Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `src/components/next/CHANGELOG.md` for beta)
 - Review `trigger_publish.yml` workflow logs (look for `detect-release` step output to see which changelog was detected)
-- Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@2.0.0-beta.1 beta`
+- Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@3.0.0-beta.N beta`
 
 ### Components not found in `/next` import
 
