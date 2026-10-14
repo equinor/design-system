@@ -1,7 +1,8 @@
 // Secret-file patterns, shared by the Bash and file-path checks below.
 // Keep in sync with .github/hooks/block-secrets.js and AGENTS.md § Secrets & Credentials.
-const isEnvBasename = (basename) =>
-  basename === '.env' || basename.startsWith('.env.')
+// `.env`, `.env.*`, and shell globs like `.env*`. Not `process.env`, which is
+// an environment variable, not a file.
+const isEnvBasename = (basename) => /^\.env($|[.*?[])/.test(basename)
 
 const credentialPatterns = [
   /^id_(rsa|ed25519|ecdsa|dsa)/,
@@ -42,12 +43,12 @@ async function main() {
   // Check Bash commands for references to any secret-file pattern
   if (toolName === 'Bash') {
     const command = toolInput.command || ''
-    if (/\.\benv\b/.test(command)) {
-      console.error('Blocked: shell command references .env file')
-      process.exit(2)
-    }
     for (const token of commandTokens(command)) {
       const tokenBasename = token.split('/').pop() || ''
+      if (isEnvBasename(tokenBasename)) {
+        console.error('Blocked: shell command references .env file')
+        process.exit(2)
+      }
       if (credentialPatterns.some((p) => p.test(tokenBasename))) {
         console.error(
           'Blocked: shell command references credential/certificate file',
@@ -98,11 +99,12 @@ async function main() {
     }
   }
 
-  // For Grep, also check the glob/pattern for .env targeting
+  // For Grep, check the glob filter, which decides which files are read. The
+  // pattern is the text being searched for, so `process.env` there is fine.
   if (toolName === 'Grep') {
-    const pattern = toolInput.pattern || ''
-    if (/\.\benv\b/.test(pattern)) {
-      console.error('Blocked: grep pattern targets .env files')
+    const glob = toolInput.glob || ''
+    if (glob.split(/[/{},]/).some(isEnvBasename)) {
+      console.error('Blocked: grep glob targets .env files')
       process.exit(2)
     }
   }
