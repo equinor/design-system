@@ -14,24 +14,24 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 27
+Records: 28
 
 | ADR | Title | Scope | Status | Date | Note |
 | --- | ----- | ----- | ------ | ---- | ---- |
 | [0001](./0001-use-adr-for-architecture-decisions.md) | Use ADR for Architecture Decisions | All | Accepted | 2026-02-02 |  |
-| [0002](./0002-use-vanilla-css-with-design-tokens-for-eds-2.md) | Use vanilla CSS with design tokens for EDS 2.0 styling | Web | Accepted | 2026-02-02 | CSS naming convention superseded by ADR 0006 |
+| [0002](./0002-use-vanilla-css-with-design-tokens-for-eds-2.md) | Use vanilla CSS with design tokens for EDS 2.0 styling | Web | Accepted | 2026-02-02 | CSS naming convention superseded by ADR-0006 |
 | [0003](./0003-use-js-not-mjs-for-esm-builds.md) | Use .js (not .mjs) for ESM builds in packages using styled-components | Web | Accepted | 2026-02-11 |  |
 | [0004](./0004-component-conventions-for-eds-2.md) | Component conventions for EDS 2.0 | Web | Accepted | 2026-03-20 |  |
 | [0005](./0005-use-aschild-slot-for-polymorphism.md) | Use `asChild` + `Slot` for polymorphic rendering in EDS 2.0 | Web | Approved | 2026-04-01 |  |
 | [0006](./0006-flat-class-names-for-eds-2-components.md) | Flat CSS class names for EDS 2.0 components | Web | Accepted | 2026-06-29 |  |
-| [0007](./0007-token-variable-architecture-spacing-typography.md) | Token variable architecture (typography & spacing) for the redefined token system | Tokens | Superseded | 2026-06-26 | by ADR-0027 |
+| [0007](./0007-token-variable-architecture-spacing-typography.md) | Token variable architecture (typography & spacing) for the redefined token system | Tokens | Superseded | 2026-06-26 | superseded by ADR-0027 |
 | [0008](./0008-generate-ts-tokens-from-studio-exports.md) | Generate TypeScript tokens by combining the Tokens Studio DTCG and CSS exports | Tokens | Accepted | 2026-07-13 |  |
 | [0009](./0009-temporary-next-subpaths-for-eds-tokens-beta.md) | Publish Tokens Studio output under temporary `next/*` subpaths during the eds-tokens beta | Tokens | Accepted | 2026-07-20 |  |
 | [0010](./0010-single-bundled-css-entry-for-eds-tokens-3.md) | Mirror the 2.x CSS export surface in eds-tokens 3.0.0: one bundled `./css/variables` entry | Tokens | Accepted | 2026-07-20 | 2026-09-04; proposed 2026-07-20 — the bundle has shipped and been exercised on the beta… |
 | [0011](./0011-adopt-tokens-studio-platform-pipeline.md) | Adopt the Tokens Studio platform as the source and pipeline for design tokens | Tokens | Accepted | 2026-07-20 |  |
-| [0012](./0012-pinned-prerelease-versioning-for-beta-lines.md) | Pin beta release lines to a fixed 3.0.0-beta.N series with release-please prerelease versioning | Web, Tokens | Accepted | 2026-07-20 | graduation step superseded by ADR 0025 |
+| [0012](./0012-pinned-prerelease-versioning-for-beta-lines.md) | Pin beta release lines to a fixed 3.0.0-beta.N series with release-please prerelease versioning | Web, Tokens | Accepted | 2026-07-20 | graduation step superseded by ADR-0025 |
 | [0013](./0013-attribute-scoped-custom-properties-not-light-dark.md) | Use attribute-scoped custom properties, not `light-dark()`, for colour-scheme switching in token CSS | Tokens | Accepted | 2026-07-20 |  |
-| [0014](./0014-token-code-output-architecture.md) | Token code / output architecture for the redefined token system | Tokens | Accepted | 2026-07-15 |  |
+| [0014](./0014-token-code-output-architecture.md) | Token code / output architecture for the redefined token system | Tokens | Superseded | 2026-07-15 | superseded by ADR-0028 |
 | [0015](./0015-figma-component-property-naming.md) | Name Figma component properties by one internally consistent convention | Web, Mobile | Accepted | 2026-08-19 |  |
 | [0016](./0016-colour-approach-for-eds-2.md) | Colour approach for EDS 2.0 | Tokens | Approved | 2026-08-27 |  |
 | [0017](./0017-spacing-approach-for-eds-2.md) | Spacing approach for EDS 2.0 | Web | Accepted | 2026-04-23 |  |
@@ -45,6 +45,7 @@ Records: 27
 | [0025](./0025-batch-graduation-with-release-candidate.md) | Graduate EDS 2.0 as one batch, through a release candidate, to stable 3.0.0 | Web, Tokens | Accepted | 2026-09-17 |  |
 | [0026](./0026-open-state-and-trigger-pattern-for-eds-2-overlays.md) | Open-state and trigger pattern for EDS 2.0 overlay components | Web | Accepted | 2026-10-06 |  |
 | [0027](./0027-token-variable-architecture-typography-roles.md) | Token variable architecture for typography and spacing, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
+| [0028](./0028-token-code-output-architecture-typography-roles.md) | Token code / output architecture for the redefined token system, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
 
 ## Statuses outside the template
 
