@@ -48,13 +48,25 @@ feat!: change Button API
 
 **Keep `!` commits inside `/next`.** Release-please judges a commit against every package whose files it touches. Inside `/next` a `!` only bumps the beta counter, but if the same commit also touches the rest of `packages/eds-core-react`, `package.json` included, it cuts a major of the stable 2.x line. Only `stories/`, `.storybook/` and `tests/` are excluded. Split a mixed change into separate PRs.
 
-**Put `!` in the PR title.** The repo squash-merges with the PR title as the commit message and an empty body, so the title is all release-please sees. A `BREAKING CHANGE:` footer in the branch commits is dropped. To keep one, for example a migration hint, paste it into the body field of the squash-merge dialog:
+**Put `!` in the PR title and the footer in the PR description.** The repo squash-merges with the PR title as the commit title and the PR description as its body, so those two are what release-please reads. The branch commits are dropped. Write the footer, for example a migration hint, on its own line in the PR description, where reviewers see it before it reaches the changelog:
 
 ```
 BREAKING CHANGE: `className` and `style` now land on the root element. To reach the native input, use a descendant selector, e.g. `.my-field input { ... }`.
 ```
 
 Without the footer the changelog only repeats the title, as it did for #5509. With it, the hint lands in the "⚠ BREAKING CHANGES" section, as for #5409.
+
+**Forgot the `!` or the footer?** It can still be fixed after the merge, as long as the release PR that picks the commit up has not been merged. Add this block to the description of the merged PR:
+
+```
+BEGIN_COMMIT_OVERRIDE
+fix!: default Tooltip (next) placement to bottom, matching EDS 1.0
+
+BREAKING CHANGE: Tooltip opens below its trigger by default. Pass `placement="top"` to keep the old position.
+END_COMMIT_OVERRIDE
+```
+
+Release-please reads the block in place of the commit message. Run `release_please.yml` from the Actions tab so the release PR is regenerated straight away, rather than at the next push to `main`. Editing the release PR by hand does not last: it is overwritten on the next push.
 
 ### Stable Release (for existing components)
 
