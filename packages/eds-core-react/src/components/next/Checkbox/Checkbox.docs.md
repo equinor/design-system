@@ -5,7 +5,7 @@ docs: inputs/selection_controls
 
 ## Summary
 
-Checkbox lets users select one or more options from a set, or switch a single option on or off. To choose exactly one option from a set, use [Radio](?path=/docs/eds-2-0-beta-inputs-selection-controls-radio--docs) instead.
+Checkbox lets users select one or more options from a set, or switch a single option on or off.
 
 ## Features
 
@@ -13,7 +13,7 @@ Checkbox lets users select one or more options from a set, or switch a single op
 - Supports a subgroup, where a parent checkbox shows the indeterminate state while only some of its child checkboxes are checked.
 - Can show a required or optional indicator with the label.
 - Is disabled along with the rest of a disabled fieldset.
-- Related checkboxes can be grouped under one shared heading.
+- Can sit inside a `fieldset` with a shared `legend`, for grouping related options.
 
 ## Usage
 

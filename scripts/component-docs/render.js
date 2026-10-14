@@ -52,10 +52,22 @@ function usageSection(component, platform, ctx) {
   )
 }
 
-function examplesSection(component, examples) {
+// Every example needs a caption, so a reader knows what they are looking at.
+// Checked here, on the story objects, before they are mapped to markdown and
+// the caption field is lost.
+function assertCaptioned(component, stories) {
+  const missing = stories.filter((s) => !s.caption).map((s) => s.name)
+  if (missing.length) {
+    fail(
+      `${component}: add a caption to ${missing.map((n) => `\`${n}\``).join(', ')} with parameters.docs.description.story.`,
+    )
+  }
+}
+
+function examplesSection(component, platform, examples) {
   if (!examples.length) {
     fail(
-      `${component}: no Examples. ${component}.stories.tsx exports none. On web, the Introduction and Overview stories are not examples.`,
+      `${component}: no Examples. ${component}.stories.tsx exports none${platform === 'web' ? '. On web, the Introduction and Overview stories are not examples.' : '.'}`,
     )
   }
   return section('Examples', examples.join('\n\n'))
@@ -75,6 +87,7 @@ function renderMobile(component, ctx) {
       `${component}: no code to show for the example ${missing.name}. On mobile, write each example as a function that returns JSX, or an object with a render function.`,
     )
   }
+  assertCaptioned(component, ctx.stories)
   const examples = ctx.stories.map((s) =>
     [s.title && `### ${s.title}`, s.caption, `\`\`\`tsx\n${s.code}\n\`\`\``]
       .filter(Boolean)
@@ -90,7 +103,7 @@ function renderMobile(component, ctx) {
         ? renderPropsTable(ctx.props)
         : `${component} has no props of its own.`,
     ),
-    examplesSection(component, examples),
+    examplesSection(component, 'mobile', examples),
     ...closingSections(ctx),
   ])
 }
@@ -116,13 +129,13 @@ function renderWeb(component, ctx) {
       `${component}: add an ${OVERVIEW_STORY} story to ${component}.stories.tsx. It is the display shown right after Features.`,
     )
   }
-  const examples = ctx.stories
-    .filter((s) => s !== overview)
-    .map((s) =>
-      [`### ${s.title}`, s.caption, `<Canvas of={Stories.${s.name}} />`]
-        .filter(Boolean)
-        .join('\n\n'),
-    )
+  const exampleStories = ctx.stories.filter((s) => s !== overview)
+  assertCaptioned(component, exampleStories)
+  const examples = exampleStories.map((s) =>
+    [`### ${s.title}`, s.caption, `<Canvas of={Stories.${s.name}} />`]
+      .filter(Boolean)
+      .join('\n\n'),
+  )
   const storybookImports = [
     "import { Meta, Primary, Controls, Canvas } from '@storybook/addon-docs/blocks'",
     `import * as Stories from './${component}.stories'`,
@@ -155,7 +168,7 @@ function renderWeb(component, ctx) {
     `<Canvas of={Stories.${overview.name}} />`,
     usageSection(component, 'web', ctx),
     section('Props and playground', '<Primary />\n<Controls />'),
-    examplesSection(component, examples),
+    examplesSection(component, 'web', examples),
     ...closingSections(ctx),
     ctx.hasMobile && '</PlatformTabs>',
   ])
