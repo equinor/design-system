@@ -5,7 +5,7 @@ docs: inputs/selection_controls
 
 ## Summary
 
-Radio lets users choose exactly one option from a group of mutually exclusive choices. To let users choose any number of options, use [Checkbox](?path=/docs/eds-2-0-beta-inputs-selection-controls-checkbox--docs) instead.
+Radio lets users choose exactly one option from a group of mutually exclusive choices.
 
 ## Features
 
