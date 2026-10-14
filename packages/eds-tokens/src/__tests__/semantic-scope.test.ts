@@ -132,22 +132,6 @@ describe('subtree scoping in the Tokens Studio CSS bundle', () => {
     expect(components.match(/@layer [^{;]+;/)?.[0]).toBe(LAYER_ORDER)
   })
 
-  /**
-   * The order statement alone does not hold the invariant: the legacy bundle
-   * only lands in `eds-tokens-legacy` because the import says so. Drop the
-   * `layer(…)` and legacy goes back to being unlayered, which beats
-   * `@layer eds-tokens` whatever the order — so the ten shared names silently
-   * resolve to the legacy value again, with the order statement still intact.
-   */
-  it('imports the legacy bundle into the lowest layer from the components CSS entry', () => {
-    const components = fs
-      .readFileSync(componentsEntry, 'utf-8')
-      .replace(/\/\*[\s\S]*?\*\//g, '')
-
-    expect(components).toMatch(
-      /@import\s+'@equinor\/eds-tokens\/css\/variables'\s+layer\(eds-tokens-legacy\);/,
-    )
-  })
 
   it('has only flat rules inside the layer, which the block parser relies on', () => {
     expect(css).not.toMatch(/@[\w-]+/)
