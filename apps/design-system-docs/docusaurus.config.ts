@@ -67,17 +67,28 @@ const config: Config = {
           breadcrumbs: false,
           editUrl:
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
+          // Labels name the design system generation, not a package version.
+          // The site documents several packages whose versions move
+          // independently, and its main readers are designers who do not track
+          // them, so a number in the version picker cannot be correct for the
+          // whole site and would need updating on every release. See #4942.
           versions: {
             current: {
-              label: '3.0.0-beta', // Current version label
+              label: 'EDS 2.0 (beta)', // Matches the Storybook section name
               path: 'Next', // URL path for the current version
+              // Upstream has no banner for the current version, and
+              // 'unreleased' would frame the beta as not ready. DocItem/Layout
+              // renders the beta note for this version instead.
               banner: 'none',
             },
             '2.0.0-beta': {
               // Frozen at the point the colour foundation was redefined. Kept
               // because consumers are still on it; new work goes to current.
-              // It keeps Docusaurus's "unmaintained" banner, which points at
-              // lastVersion, so a 2.0.0-beta reader is sent on to 3.0.0-beta.
+              // Hidden from the version dropdown (see `versions` on the navbar
+              // item below) so nobody lands here by accident, but it keeps
+              // Docusaurus's "unmaintained" banner, which points at
+              // lastVersion, for anyone arriving on an existing link.
+              label: 'EDS 2.0 (earlier beta)',
               path: '2.0.0-beta',
             },
             // A non-lastVersion normally gets its version name as its path, so
@@ -85,7 +96,13 @@ const config: Config = {
             // whole archive from /docs/… to /docs/1.1.0/… and break every
             // existing link to it. An empty path keeps it exactly where it is.
             '1.1.0': {
+              label: 'EDS 1',
               path: '',
+              // EDS 1 is maintained until EDS 2.0 becomes stable, so
+              // Docusaurus's "no longer actively maintained" banner says the
+              // opposite of what we mean. DocItem/Layout renders our own note
+              // for this version instead.
+              banner: 'none',
             },
           },
           // Without this, Docusaurus defaults lastVersion to the newest entry
@@ -316,6 +333,10 @@ const config: Config = {
           type: 'docsVersionDropdown',
           position: 'left',
           dropdownActiveClassDisabled: true,
+          // Only the two live generations. The frozen 2.0.0-beta archive stays
+          // built and linkable, but listing it invites readers into a snapshot
+          // that was never updated past the old colour foundation.
+          versions: ['current', '1.1.0'],
         },
       ],
     },
