@@ -5,7 +5,7 @@ docs: inputs/selection_controls
 
 ## Summary
 
-Checkbox lets users select one or more options from a set, or switch a single option on or off. To choose exactly one option from a set, use [Radio](?path=/docs/eds-2-0-beta-inputs-selection-controls-radio--docs) instead.
+Checkbox lets users select one or more options from a set, or switch a single option on or off.
 
 ## Features
 

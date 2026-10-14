@@ -92,7 +92,7 @@ Any other heading or metadata key fails the generator. Metadata is not content a
 
 ## Section rules
 
-**Summary.** What the component is, where it is used and, if it does not fit every case, what to use instead, in at most two sentences. It sits above both tabs, so it must be true on both platforms. Put anything that differs by platform in Features or Usage. Required.
+**Summary.** What the component is and where it is used, in at most two sentences. Add what to use instead only when a reader could genuinely land on the wrong page, such as Badge versus Chip, where one is non-interactive and the other is not. Do not add it for components in the same family that a reader would not actually confuse, such as Checkbox, Radio and Switch; their differences belong in Related components instead. It sits above both tabs, so it must be true on both platforms. Put anything that differs by platform in Features or Usage. Required.
 
 **Features.** Three to five short lines on what the component does for you, which a reader cannot get from the controls or the props table. Write behaviour and benefits, such as "Follows the density of its parent element", and do not list props or values, and do not explain what a value means. Hand-written and required on both platforms, because the generator cannot know it. Only claim what the code, a story or a test shows.
 
