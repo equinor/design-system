@@ -139,10 +139,15 @@ Values are hex rather than the OKLCH used by the CSS output. They are generated 
 so they agree, but a value copied from TypeScript does not carry the CSS output's wide-gamut
 precision.
 
-Beyond `semantic`, the other modules under `next/ts/` expose the layers underneath: `colorScheme`
-for the tone scales, `colors` for hue primitives, and `density`, `font`, `elevation` and `primitives`
-for the non-colour axes. [The palette](./palette.mdx) explains those layers. Only `semantic` is
-intended for everyday use.
+From `next/ts/`, import `semantic`. The other modules (`colorScheme`, `colors`, `font`, `elevation`
+and `primitives`) hold the layers that `semantic` is resolved from. They are internal and can be
+renamed or restructured in any release. [The palette](./palette.mdx) explains the colour layers as
+concepts.
+
+`density` is a temporary exception. `semantic` carries the Comfortable values for spacing, corner
+radius and typography, so an app in another density imports those groups from `density/compact` or
+`density/relaxed` instead. The exception lasts until the TypeScript output ships one file per colour
+scheme and density.
 
 ## For designers
 

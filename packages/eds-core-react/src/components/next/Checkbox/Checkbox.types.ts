@@ -12,8 +12,6 @@ export type CheckboxProps = {
   indeterminate?: boolean
   /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
   indicator?: string
-  /** Helper message shown below the checkbox, useful for additional context */
-  helperMessage?: ReactNode
   /** CSS class names applied to the outer wrapper element, not the hidden input */
   className?: string
   /** Inline styles applied to the outer wrapper element, not the hidden input */
