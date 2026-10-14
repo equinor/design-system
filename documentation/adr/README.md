@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 28
+Records: 29
 
 | ADR | Title | Scope | Status | Date | Note |
 | --- | ----- | ----- | ------ | ---- | ---- |
@@ -35,7 +35,7 @@ Records: 28
 | [0015](./0015-figma-component-property-naming.md) | Name Figma component properties by one internally consistent convention | Web, Mobile | Accepted | 2026-08-19 |  |
 | [0016](./0016-colour-approach-for-eds-2.md) | Colour approach for EDS 2.0 | Tokens | Approved | 2026-08-27 |  |
 | [0017](./0017-spacing-approach-for-eds-2.md) | Spacing approach for EDS 2.0 | Web | Accepted | 2026-04-23 |  |
-| [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Web | Accepted | 2026-04-23 |  |
+| [0018](./0018-typography-approach-for-eds-2.md) | Typography approach for EDS 2.0 | Web | Superseded | 2026-04-23 | superseded by ADR-0029 |
 | [0019](./0019-adopt-only-the-component-library-from-mad.md) | Adopt only the component library from the MAD monorepo | Mobile | Accepted | 2025-06 | recorded retrospectively 2026-09-11 |
 | [0020](./0020-mobile-component-scope-exclusions-and-renames.md) | Mobile component scope: exclusions and renames relative to EDS web | Mobile | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
 | [0021](./0021-align-mobile-apis-with-eds-2-next.md) | Mobile component APIs target the newest EDS web generation, not stable | Mobile | Accepted | 2026-04 | recorded retrospectively 2026-09-23 |
@@ -46,6 +46,7 @@ Records: 28
 | [0026](./0026-open-state-and-trigger-pattern-for-eds-2-overlays.md) | Open-state and trigger pattern for EDS 2.0 overlay components | Web | Accepted | 2026-10-06 |  |
 | [0027](./0027-token-variable-architecture-typography-roles.md) | Token variable architecture for typography and spacing, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
 | [0028](./0028-token-code-output-architecture-typography-roles.md) | Token code / output architecture for the redefined token system, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
+| [0029](./0029-typography-approach-for-eds-2-web.md) | Typography approach for EDS 2.0 web, with weights that do not vary by size | Web | Accepted | 2026-10-08 |  |
 
 ## Statuses outside the template
 
