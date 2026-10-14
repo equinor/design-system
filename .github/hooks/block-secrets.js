@@ -2,8 +2,9 @@
 // AGENTS.md § Secrets & Credentials.
 // `.env` followed by nothing or a non-word character: `.env.local`,
 // `.env-local`, `.env~`, `.env*`. Not `.envrc`, and not `process.env`, which is
-// an environment variable, not a file.
-const envBasename = /^\.env($|\W)/
+// an environment variable, not a file. Leading `*` is allowed because a glob
+// `*` can match an empty string, so `*.env` reaches `.env` in ripgrep.
+const envBasename = /^\**\.env($|\W)/
 
 const credentialPatterns = [
   envBasename,
@@ -11,6 +12,8 @@ const credentialPatterns = [
   /\.pem$/,
   /^\.?credentials\.json$/,
   /^\.?secrets\.json$/,
+  // Shell history keeps tokens typed on the command line.
+  /^\.(zsh|bash)_history$/,
 ]
 
 // Only checked on a whole value without whitespace (a file path), not on each
@@ -20,11 +23,21 @@ const keyFilePattern = /\.key$/
 
 const secretDir = /(^|\/)secrets\//
 
-// Split a value into path-like tokens. Whitespace, shell operators, quotes, `=`
-// (as in `--file=foo.pem`) and brace expansion (`{.env,x}`) separate tokens, so
-// the basename of each token can be checked against the same patterns as a
-// file path. Same split as commandTokens in .claude/hooks/read_hook.js.
-const tokens = (value) => value.split(/[\s;|&<>()`'"={},]+/).filter(Boolean)
+// Zsh session history, and VS Code's local history, which keeps a copy of
+// every saved file, `.env` included, under names that don't look like `.env`.
+const historyDir = /(^|\/)(\.zsh_sessions|User\/History)(\/|$)/
+
+// Split a value into path-like tokens. Quotes and backslashes are removed
+// first, as the shell does, so `\.env`, `".env"` and `.en''v` all become
+// `.env`. Whitespace, shell operators, `=` (as in `--file=foo.pem`) and brace
+// expansion (`{.env,x}`) then separate tokens, so the basename of each token
+// can be checked against the same patterns as a file path. Same split as
+// commandTokens in .claude/hooks/read_hook.js.
+const tokens = (value) =>
+  value
+    .replace(/[\\'"]/g, '')
+    .split(/[\s;|&<>()`={},]+/)
+    .filter(Boolean)
 
 const basenameOf = (value) => value.split('/').pop() || ''
 
@@ -85,6 +98,11 @@ async function main() {
       if (secretDir.test(token)) {
         deny(
           'Blocked: access to secrets/ directory is not permitted. See AGENTS.md § Secrets & Credentials.',
+        )
+      }
+      if (historyDir.test(token)) {
+        deny(
+          'Blocked: access to shell or editor history is not permitted. See AGENTS.md § Secrets & Credentials.',
         )
       }
     }

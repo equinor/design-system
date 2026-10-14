@@ -2,8 +2,9 @@
 // Keep in sync with .github/hooks/block-secrets.js and AGENTS.md § Secrets & Credentials.
 // `.env` followed by nothing or a non-word character: `.env.local`,
 // `.env-local`, `.env~`, `.env*`. Not `.envrc`, and not `process.env`, which is
-// an environment variable, not a file.
-const isEnvBasename = (basename) => /^\.env($|\W)/.test(basename)
+// an environment variable, not a file. Leading `*` is allowed because a glob
+// `*` can match an empty string, so `*.env` reaches `.env` in ripgrep.
+const isEnvBasename = (basename) => /^\**\.env($|\W)/.test(basename)
 
 const credentialPatterns = [
   /^id_(rsa|ed25519|ecdsa|dsa)/,
@@ -18,12 +19,37 @@ const keyFilePattern = /\.key$/
 
 const secretDir = /(^|\/)secrets\//
 
-// Split a shell command into path-like tokens. Whitespace, shell operators,
-// quotes, `=` (as in `--file=foo.pem`) and brace expansion (`{.env,x}`)
-// separate tokens, so the basename of each token can be checked against the
-// same patterns as a file path.
+// Places a secret ends up after it has been used: shell history keeps tokens
+// typed on the command line, and VS Code's local history keeps a copy of every
+// saved file, `.env` included, under names that don't look like `.env`.
+const historyBasename = /^\.(zsh|bash)_history$/
+const historyDir = /(^|\/)(\.zsh_sessions|User\/History)(\/|$)/
+
+// Split a shell command into path-like tokens. Quotes and backslashes are
+// removed first, as the shell does, so `\.env`, `".env"` and `.en''v` all
+// become `.env`. Whitespace, shell operators, `=` (as in `--file=foo.pem`) and
+// brace expansion (`{.env,x}`) then separate tokens, so the basename of each
+// token can be checked against the same patterns as a file path.
 const commandTokens = (command) =>
-  command.split(/[\s;|&<>()`'"={},]+/).filter(Boolean)
+  command
+    .replace(/[\\'"]/g, '')
+    .split(/[\s;|&<>()`={},]+/)
+    .filter(Boolean)
+
+// Split a Glob pattern or Grep glob filter into segments, so `**/*.pem` and
+// `{.env,*.ts}` are checked segment by segment.
+const globSegments = (glob) => glob.split(/[/{},]/).filter(Boolean)
+
+const isSecretGlob = (glob) =>
+  historyDir.test(glob) ||
+  /(^|\/)secrets(\/|$)/.test(glob) ||
+  globSegments(glob).some(
+    (segment) =>
+      isEnvBasename(segment) ||
+      keyFilePattern.test(segment) ||
+      historyBasename.test(segment) ||
+      credentialPatterns.some((p) => p.test(segment)),
+  )
 
 async function main() {
   const chunks = []
@@ -61,6 +87,12 @@ async function main() {
         console.error('Blocked: shell command references secrets/ directory')
         process.exit(2)
       }
+      if (historyBasename.test(tokenBasename) || historyDir.test(token)) {
+        console.error(
+          'Blocked: shell command references shell or editor history',
+        )
+        process.exit(2)
+      }
     }
     return
   }
@@ -92,11 +124,17 @@ async function main() {
     process.exit(2)
   }
 
-  // For Glob, check the pattern field
+  if (historyBasename.test(basename) || historyDir.test(filePath)) {
+    console.error('Blocked: cannot access shell or editor history')
+    process.exit(2)
+  }
+
+  // For Glob, check the pattern. Keep the broad `.env` substring check, since
+  // a glob is never search text.
   if (toolName === 'Glob') {
     const pattern = toolInput.pattern || ''
-    if (/\.env/.test(pattern)) {
-      console.error('Blocked: glob pattern targets .env files')
+    if (/\.env/.test(pattern) || isSecretGlob(pattern)) {
+      console.error('Blocked: glob pattern targets secret files')
       process.exit(2)
     }
   }
@@ -105,8 +143,8 @@ async function main() {
   // the text being searched for, so `process.env` there is fine.
   if (toolName === 'Grep') {
     const glob = toolInput.glob || ''
-    if (glob.split(/[/{},]/).some(isEnvBasename)) {
-      console.error('Blocked: grep glob targets .env files')
+    if (isSecretGlob(glob)) {
+      console.error('Blocked: grep glob targets secret files')
       process.exit(2)
     }
   }
