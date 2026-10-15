@@ -9,12 +9,18 @@ import { Switch } from "./Switch";
 const isEnabled = false;
 const setIsEnabled = (active: boolean) => active;
 
-export const Default = () => <Switch label="Enable notifications" />;
+export const Default = () => (
+    <Switch
+        label="Enable notifications"
+        active={isEnabled}
+        onChange={setIsEnabled}
+    />
+);
 
 Default.parameters = {
     docs: {
         description: {
-            story: "Without `active`, Switch starts off.",
+            story: "Pass `active` and `onChange` to control the switch yourself, the pattern every real usage needs.",
         },
     },
 };

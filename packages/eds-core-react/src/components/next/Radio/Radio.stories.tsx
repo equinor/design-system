@@ -265,11 +265,11 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
     >
       <Wrapper>
         <ExampleLabel>Light Mode</ExampleLabel>
-        <Radio label="Unchecked" name="light" value="unchecked" />
-        <Radio label="Checked" name="light" value="checked" defaultChecked />
-        <Radio label="Disabled" name="light-disabled" disabled />
+        <Radio label="Email" name="light" value="email" />
+        <Radio label="SMS" name="light" value="sms" defaultChecked />
+        <Radio label="Push" name="light-disabled" disabled />
         <Radio
-          label="Disabled checked"
+          label="Postal mail"
           name="light-disabled-checked"
           disabled
           defaultChecked
@@ -284,11 +284,11 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
         <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
           Dark Mode
         </ExampleLabel>
-        <Radio label="Unchecked" name="dark" value="unchecked" />
-        <Radio label="Checked" name="dark" value="checked" defaultChecked />
-        <Radio label="Disabled" name="dark-disabled" disabled />
+        <Radio label="Email" name="dark" value="email" />
+        <Radio label="SMS" name="dark" value="sms" defaultChecked />
+        <Radio label="Push" name="dark-disabled" disabled />
         <Radio
-          label="Disabled checked"
+          label="Postal mail"
           name="dark-disabled-checked"
           disabled
           defaultChecked
@@ -330,8 +330,8 @@ export const InheritedDisabled: StoryFn<RadioProps> = () => (
   <fieldset disabled>
     <legend>Disabled fieldset</legend>
     <Wrapper gap={8}>
-      <Radio label="Unchecked" name="inherited" value="1" />
-      <Radio label="Checked" name="inherited" value="2" defaultChecked />
+      <Radio label="Email" name="inherited" value="email" />
+      <Radio label="SMS" name="inherited" value="sms" defaultChecked />
     </Wrapper>
   </fieldset>
 )

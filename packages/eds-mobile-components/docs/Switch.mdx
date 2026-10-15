@@ -40,10 +40,14 @@ const [active, setActive] = useState(false)
 
 ### Default
 
-Without `active`, Switch starts off.
+Pass `active` and `onChange` to control the switch yourself, the pattern every real usage needs.
 
 ```tsx
-<Switch label="Enable notifications" />
+<Switch
+    label="Enable notifications"
+    active={isEnabled}
+    onChange={setIsEnabled}
+/>
 ```
 
 ### Without label

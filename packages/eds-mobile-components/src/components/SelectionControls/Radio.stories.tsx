@@ -11,6 +11,8 @@ import { Typography } from "../Typography";
 const options = ["Apples", "Oranges", "Pears"];
 const selected = "Apples" as string;
 const setSelected = (option: string) => option;
+const preselected = "Standard delivery" as string;
+const setPreselected = (option: string) => option;
 const isSelected = false;
 const setIsSelected = (checked: boolean) => checked;
 
@@ -39,13 +41,13 @@ export const Preselected = () => (
     <>
         <Radio
             label="Standard delivery"
-            checked={selected === "Standard delivery"}
-            onPress={() => setSelected("Standard delivery")}
+            checked={preselected === "Standard delivery"}
+            onPress={() => setPreselected("Standard delivery")}
         />
         <Radio
             label="Express delivery"
-            checked={selected === "Express delivery"}
-            onPress={() => setSelected("Express delivery")}
+            checked={preselected === "Express delivery"}
+            onPress={() => setPreselected("Express delivery")}
         />
     </>
 );
@@ -62,8 +64,8 @@ export const ListRow = () => (
     <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
         <Radio
             label="Standard delivery"
-            checked={selected === "Standard delivery"}
-            onPress={() => setSelected("Standard delivery")}
+            checked={preselected === "Standard delivery"}
+            onPress={() => setPreselected("Standard delivery")}
         />
         <Typography>3 to 5 working days</Typography>
     </View>

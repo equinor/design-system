@@ -10,8 +10,7 @@ Switch turns a single setting on or off immediately, with no separate confirmati
 ## Features
 
 - Always shows a visible label. There is no label-less variant.
-- Turns a setting on or off immediately, with no separate confirmation step.
-- Can be toggled with the Space key once it has focus.
+- Works as a controlled or an uncontrolled component, using `checked` or `defaultChecked`.
 - Is disabled along with the rest of a disabled fieldset.
 
 ## Usage
