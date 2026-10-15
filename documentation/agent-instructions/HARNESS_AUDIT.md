@@ -16,7 +16,7 @@ This is a **read-only** workflow. The agent must not edit, create, or delete fil
   - Copilot CLI specifically: `.github/hooks/*.{json,js}`
 - **OpenCode** — `.opencode/agent/*.md`, `.opencode/README.md`
 
-**Out of scope** — do not audit configs for Cursor, Cline, Aider, Continue, Windsurf, Zed, Gemini CLI, Codex, or any other harness. If a stray `.cursorrules` / `.clinerules` / `.windsurfrules` / `GEMINI.md` etc. exists, note it under *Open questions* ("found a config for an out-of-scope harness — confirm intent or delete") — do not write findings against it.
+**Out of scope** — do not audit configs for Cursor, Cline, Aider, Continue, Windsurf, Zed, Gemini CLI, Codex, or any other harness. If a stray `.cursorrules` / `.clinerules` / `.windsurfrules` / `GEMINI.md` etc. exists, note it under _Open questions_ ("found a config for an out-of-scope harness — confirm intent or delete") — do not write findings against it.
 
 **Cross-harness surfaces** (canonical, shared by all three in-scope harnesses):
 
@@ -78,30 +78,30 @@ For each finding, quote offending lines with `path:line` references.
 
 A developer must not lose access to a workflow by switching harnesses. Build a matrix:
 
-| Capability (intent)          | Claude Code            | Copilot                                  | OpenCode             |
-| ---------------------------- | ---------------------- | ---------------------------------------- | -------------------- |
-| Scaffold new EDS component (web or mobile) | `/new-component`     | `new-component` prompt                   | `eds-component` agent |
-| Accessibility audit          | `/accessibility-audit` | `accessibility-audit` prompt             | `accessibility-audit` agent |
-| Structure component doc      | `/create-component-doc`| `structure_components_prompt`            | `component-doc` agent |
-| Verify component doc         | (covered by the same)  | `verify_components_prompt`               | (covered by the same) |
-| Write PR description         | `write-pr-description` skill | `write-pr-description` prompt      | `write-pr-description` agent |
-| Write issue                  | `write-issue` skill    | `write-issue` prompt                     | `write-issue` agent |
-| Re-sync harnesses (this audit) | `/audit-harnesses`   | `audit-harnesses` prompt                 | `audit-harnesses` agent |
-| Tokens Studio pipeline       | `/tokens-studio`       | `tokens-studio` prompt                   | `tokens-studio` agent |
-| Dependabot duty              | `/dependabot-duty`     | `dependabot-duty` prompt                 | `dependabot-duty` agent |
-| Read-only advisor            | `.claude/rules/advisor.md` (general scope) | `advisor` prompt | `advisor` primary agent |
+| Capability (intent)                        | Claude Code                                | Copilot                       | OpenCode                     |
+| ------------------------------------------ | ------------------------------------------ | ----------------------------- | ---------------------------- |
+| Scaffold new EDS component (web or mobile) | `/new-component`                           | `new-component` prompt        | `eds-component` agent        |
+| Accessibility audit                        | `/accessibility-audit`                     | `accessibility-audit` prompt  | `accessibility-audit` agent  |
+| Structure component doc                    | `/create-component-doc`                    | `structure_components_prompt` | `component-doc` agent        |
+| Verify component doc                       | (covered by the same)                      | `verify_components_prompt`    | (covered by the same)        |
+| Write PR description                       | `write-pr-description` skill               | `write-pr-description` prompt | `write-pr-description` agent |
+| Write issue                                | `write-issue` skill                        | `write-issue` prompt          | `write-issue` agent          |
+| Re-sync harnesses (this audit)             | `/audit-harnesses`                         | `audit-harnesses` prompt      | `audit-harnesses` agent      |
+| Tokens Studio pipeline                     | `/tokens-studio`                           | `tokens-studio` prompt        | `tokens-studio` agent        |
+| Dependabot duty                            | `/dependabot-duty`                         | `dependabot-duty` prompt      | `dependabot-duty` agent      |
+| Read-only advisor                          | `.claude/rules/advisor.md` (general scope) | `advisor` prompt              | `advisor` primary agent      |
 
-Rows are *intent*, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
+Rows are _intent_, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
 
 ### Step 5 — Path-scoped rule consistency
 
 Check that path-scoped rules covering the same intent in different harnesses target the **same glob/path set**.
 
-| Intent           | Claude Code (`.claude/rules/`)            | Copilot (`.github/instructions/`) |
-| ---------------- | ----------------------------------------- | --------------------------------- |
-| EDS 2.0 component code | `eds-component.md` paths frontmatter | `react.instructions.md` + `ts.instructions.md` + `styling.instructions.md` `applyTo` |
-| Figma Code Connect files | `figma-component.md` paths           | `figma.instructions.md` `applyTo` |
-| Global / markdown / TS | (none)                                 | `global-coding`, `markdown`, `ts` `applyTo` |
+| Intent                   | Claude Code (`.claude/rules/`)       | Copilot (`.github/instructions/`)                                                    |
+| ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------ |
+| EDS 2.0 component code   | `eds-component.md` paths frontmatter | `react.instructions.md` + `ts.instructions.md` + `styling.instructions.md` `applyTo` |
+| Figma Code Connect files | `figma-component.md` paths           | `figma.instructions.md` `applyTo`                                                    |
+| Global / markdown / TS   | (none)                               | `global-coding`, `markdown`, `ts` `applyTo`                                          |
 
 Mismatched globs are findings. Each rule's documented scope should also still hit real files (`find` returns results).
 
@@ -111,13 +111,13 @@ OpenCode has no native path-scoping mechanism — that's expected, not a finding
 
 These controls must not vary by harness:
 
-- **Secret-file blocking.** `.claude/settings.json` `permissions.deny` and `.claude/hooks/read_hook.js` enforce in Claude Code; `.github/hooks/block-secrets.{json,js}` enforces in Copilot CLI; `AGENTS.md` § Secrets & Credentials documents the rule for IDE Copilot and OpenCode. If any of these is missing, **Critical** finding. Then compare what they cover: the two hooks, the `settings.json` deny rules and the list in `AGENTS.md` should name the same file patterns, and both hooks should check file paths, Glob and Grep patterns, and each word of a Bash command. A pattern or input that one harness does not check is a Safety gap finding.
+- **Secret-file blocking.** `.claude/settings.json` `permissions.deny` and `.claude/hooks/read_hook.js` enforce in Claude Code; `.github/hooks/block-secrets.{json,js}` enforces in Copilot CLI; `AGENTS.md` § Secrets & Credentials documents the rule for IDE Copilot and OpenCode. If any of these is missing, **Critical** finding. Then compare what they cover: the two hooks, the `settings.json` deny rules and the list in `AGENTS.md` should name the same file patterns, and both hooks should check file paths, Glob patterns, the Grep `glob` filter, and each word of a Bash command. The Grep search pattern is the text being searched for, not a file, so a hook that does not check it is not a gap. A pattern or input that one harness does not check is a Safety gap finding.
 - **Auto-format on edit.** `.claude/hooks/format_hook.js` and `.github/hooks/format-on-edit.{json,js}` should run equivalent eslint/stylelint --fix and prettier --write. `AGENTS.md` § Code Formatting documents the matrix. **Medium** if missing. The descriptions of `format_hook.js` in `.claude/CLAUDE.md` § Hooks and `.claude/README.md` should name the same tools and file types as the script. A description that doesn't is a Stale finding.
 - **Git workflow rules** (no AI attribution in commits, conventional commits, branch protection). These live in `AGENTS.md` § Git Workflow + § Conventional Commits; every harness file should defer to those sections, not redefine. Divergent restatements are findings.
 
 **Known asymmetry, not a finding:** the OpenCode agents carry `permission.bash` ask-lists (e.g. `.opencode/agent/dependabot-duty.md`) that `.claude/settings.json` mirrors only in part. That is deliberate — Claude Code prompts on `Bash` by default, so the guardrail is the default rather than a config entry. The exception is the `permissions.ask` list for `gh pr create`, `gh pr edit`, `gh issue create` and `gh issue edit`: those commands publish text, so they prompt even when a broader pattern is allowed. The case worth checking is a developer who allowlists a broad pattern such as `Bash(gh:*)` in their gitignored `settings.local.json`: they silently lose what OpenCode still enforces for every other `gh` command. That is a per-machine check, not a repo one.
 
-**Known asymmetry, not a finding:** Claude Code checks `*.key` only on file paths, in `read_hook.js` and in `settings.json`, and not in Bash commands. In a shell command `.key` is almost always a property, as in `jq '.key' package.json` or `obj.key`, and blocking it there stopped ordinary commands. When the Copilot hook checks each word of a Bash command, it should make the same exception.
+**Known asymmetry, not a finding:** Claude Code checks `*.key` only on file paths, in `read_hook.js` and in `settings.json`, and not in Bash commands. In a shell command `.key` is almost always a property, as in `jq '.key' package.json` or `obj.key`, and blocking it there stopped ordinary commands. The Copilot hook makes the same exception: it checks `.key` only on a value without whitespace, which is a file path, and not on each word.
 
 ### Step 7 — MCP server parity
 
@@ -186,6 +186,6 @@ _Canonical source:_ <path or "none declared">
 
 - **Read-only.** Do not edit, create, or delete files. Do not run formatters, linters, or tests. Do not commit anything.
 - **Cite, don't paraphrase.** Every finding must have a `path:line` reference and a short quote.
-- **No speculation.** If you are unsure whether something is a real divergence (e.g. you can't tell whether a harness surface is in use), put it in *Open questions*, not *Findings*.
-- **Stay in scope.** Only audit Claude Code, GitHub Copilot, and OpenCode. Other harness configs go to *Open questions*.
+- **No speculation.** If you are unsure whether something is a real divergence (e.g. you can't tell whether a harness surface is in use), put it in _Open questions_, not _Findings_.
+- **Stay in scope.** Only audit Claude Code, GitHub Copilot, and OpenCode. Other harness configs go to _Open questions_.
 - **Single output file.** Print the report to chat (or write to the path the user specifies). Do not scatter notes across multiple files.
