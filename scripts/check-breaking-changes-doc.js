@@ -113,6 +113,18 @@ const BREAKING_FOOTER = /^BREAKING[ -]CHANGE:/m
 const GUIDE = 'documentation/how-to/BETA_RELEASE_GUIDE.md'
 const MARKER_HINT = `If this changes props, markup or behaviour someone on an earlier beta relies on, add \`!\` to the PR title. See "Marking breaking changes" in \`${GUIDE}\`.`
 const FOOTER_HINT = `Add a \`BREAKING CHANGE:\` line with a migration hint to the PR description. The squash merge puts the description in the commit, so the hint reaches the changelog. See "Marking breaking changes" in \`${GUIDE}\`.`
+const TITLE_HINT = `The description has a \`BREAKING CHANGE:\` footer, so add \`!\` to the PR title as well. The title is what shows in the PR list and \`git log\`. See "Marking breaking changes" in \`${GUIDE}\`.`
+
+/** The one reminder this PR still needs, or none: the guide asks for `!` in
+ * the title and a footer in the description, so name whichever is missing. */
+const reminderFor = ({ title, body }) => {
+  const marked = BREAKING_TITLE.test(title)
+  const footed = BREAKING_FOOTER.test(body)
+  if (!marked && !footed) return MARKER_HINT
+  if (!footed) return FOOTER_HINT
+  if (!marked) return TITLE_HINT
+  return null
+}
 
 const gh = (args) =>
   execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 })
@@ -291,8 +303,8 @@ const main = () => {
     : `${subjects} changed under \`/next\``
 
   // A breaking PR that already has the footer needs no reminder.
-  const hint = breaking ? FOOTER_HINT : MARKER_HINT
-  const hintLines = breaking && BREAKING_FOOTER.test(body) ? [] : ['', hint]
+  const hint = reminderFor({ title, body })
+  const hintLines = hint ? ['', hint] : []
 
   if (files.includes(PAGE)) {
     report([

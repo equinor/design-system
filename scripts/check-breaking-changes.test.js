@@ -149,6 +149,7 @@ describe('breaking changes page entry', () => {
   describe('hints', () => {
     const MARKER = /add `!` to the PR title/
     const FOOTER = /Add a `BREAKING CHANGE:` line/
+    const TITLE = /add `!` to the PR title as well/
 
     test('a breaking PR without a footer is asked for one', () => {
       const { code, out } = run({
@@ -175,6 +176,31 @@ describe('breaking changes page entry', () => {
       assert.equal(code, 1)
       assert.match(out, MARKER)
       assert.doesNotMatch(out, FOOTER)
+    })
+
+    test('a footer without `!` in the title is asked for the `!`', () => {
+      const { out } = run({
+        title: 'fix: change the Button API',
+        body: 'Text\n\nBREAKING CHANGE: the size prop is gone',
+        files: [`${NEXT}/Button/Button.tsx`, PAGE],
+      })
+      assert.match(out, TITLE)
+      assert.doesNotMatch(out, FOOTER)
+    })
+
+    test('an unmarked change that updated the page is reminded of `!`', () => {
+      const { code, out } = run({ files: [`${NEXT}/Button/Button.tsx`, PAGE] })
+      assert.equal(code, 0)
+      assert.match(out, MARKER)
+    })
+
+    test('a change skipped by the label is reminded too', () => {
+      const { code, out } = run({
+        files: [`${NEXT}/Button/Button.tsx`],
+        labels: '["skip-breaking-changes-doc"]',
+      })
+      assert.equal(code, 0)
+      assert.match(out, MARKER)
     })
 
     test('a change with nothing to check gets neither', () => {
