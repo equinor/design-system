@@ -45,11 +45,17 @@ pnpm add @equinor/eds-tokens@beta
 
 Three subpaths are published API:
 
-| Import                                                              | What it is                                                               |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `@equinor/eds-tokens/next/css/variables.css`                        | The CSS custom properties, every mode in one bundle                      |
-| `@equinor/eds-tokens/next/ts/semantic/{light,dark}`                 | TypeScript twins of the semantic CSS names, one module per colour scheme |
-| `@equinor/eds-tokens/next/ts/density/{compact,comfortable,relaxed}` | Spacing, corner radius and typography per density mode                   |
+| Import                                               | Siblings                      | What it is                                                               |
+| ---------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------ |
+| `@equinor/eds-tokens/next/css/variables.css`         |                               | The CSS custom properties, every mode in one bundle                      |
+| `@equinor/eds-tokens/next/ts/semantic/light.ts`      | `dark.ts`                     | TypeScript twins of the semantic CSS names, one module per colour scheme |
+| `@equinor/eds-tokens/next/ts/density/comfortable.ts` | `compact.ts`, `relaxed.ts`    | Spacing, corner radius and typography per density mode                   |
+
+Write the `.ts` extension. The `next/*` patterns map `*` straight onto a file
+path (`"./next/ts/*": "./src/tokens/ts/*"`), so the extension has to be in the
+specifier. This is the opposite of the 2.x specifiers below, where the pattern
+supplies it (`"./ts/typography/*": "./build/ts/typography/*.ts"`) and you write
+`ts/typography/font-family-ui` without one.
 
 Everything else under `next/*` (the primitive, colour-scheme and font layers,
 the granular CSS files and the DTCG export) is resolution plumbing, not API. It
@@ -67,14 +73,25 @@ Import the bundle once in your application:
 @import '@equinor/eds-tokens/next/css/variables.css';
 ```
 
-The bundle resolves nothing on its own. Each semantic name aliases a
-colour-scheme and a density variable that exist only under an attribute, and
-there is no `prefers-color-scheme` fallback and no default density. Set both on
-the root element, or on any ancestor of the subtree you are styling:
+Most semantic names need an attribute to resolve. They are declared on `:root`,
+but the values they alias are not, and there is no `prefers-color-scheme`
+fallback and no default density. Set both attributes on the root element, or on
+any ancestor of the subtree you are styling:
 
 ```html
 <html data-color-scheme="light" data-density="comfortable">
 ```
+
+Which attribute a name needs:
+
+| Names                                                                       | Resolve under       |
+| --------------------------------------------------------------------------- | ------------------- |
+| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-elevation-*` | `data-color-scheme` |
+| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`            | `data-density`      |
+| `--eds-family-*`, `--eds-weight-*`                                          | neither             |
+
+A name whose attribute is missing falls back to the inherited or initial value
+for the property, so the symptom is unstyled output rather than an error.
 
 Components then bind to the semantic names:
 
@@ -93,15 +110,19 @@ For places a CSS custom property cannot reach, such as a chart library, canvas,
 email template or React Native surface:
 
 ```typescript
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
 
 semantic.background.interactive.accent.emphasis.default // '#21767e'
 ```
 
 Each module is imported directly, there is no barrel. The objects are `as const`
 and export their own type (`Semantic`, `Density`), so a name that does not exist
-is a compile error. The subpath serves raw `.ts` modules rather than compiled
-`.js` plus `.d.ts`, so the consumer needs a TypeScript-aware build.
+is a compile error.
+
+The subpath serves raw `.ts` modules rather than compiled `.js` plus `.d.ts`, so
+they have to be compiled by the consumer: a bundler (Vite, webpack, esbuild) or
+`tsc`. Running them under Node directly does not work even with type stripping,
+which Node refuses inside `node_modules`.
 
 Two things differ from the CSS bundle:
 
@@ -115,7 +136,7 @@ Two things differ from the CSS bundle:
   published surface ([#5552](https://github.com/equinor/design-system/issues/5552)).
 
 ```typescript
-import { density } from '@equinor/eds-tokens/next/ts/density/compact'
+import { density } from '@equinor/eds-tokens/next/ts/density/compact.ts'
 
 density.spacing.md // 12
 ```
