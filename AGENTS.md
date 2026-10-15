@@ -31,10 +31,13 @@ Treat these patterns as off-limits:
 - `id_rsa*`, `id_ed25519*`, `id_ecdsa*`, `id_dsa*`, `*.pem`, `*.key`
 - `credentials.json`, `secrets.json`
 - `secrets/**`, `config/credentials.json`
+- Shell history (`.zsh_history`, `.bash_history`, `~/.zsh_sessions/`) and VS Code's local history (`User/History/`), where tokens typed on the command line and copies of saved `.env` files end up
+
+The hooks stop accidental reads of these files by name. They do not protect a secret once it has been typed into a command, saved by an editor or printed in a session transcript, and a broad search such as `grep -r` over a folder can still find it. Keep tokens off the command line: let the script read them from its env file.
 
 If you need to verify a secret file's shape, report length + first/last few characters only — never the body. If a tool blocks access (e.g. Claude Code's `read_hook.js`), do not try to work around it; the block is the intended behaviour.
 
-The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention `.env` or a `secrets/` path.
+The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention any of the secret-file patterns above.
 
 **Enforcement matrix:**
 
