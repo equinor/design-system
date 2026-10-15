@@ -14,9 +14,10 @@
  * colour: one step has three values, so a hand-written table is three chances to be wrong and
  * nothing in the build would notice.
  *
- * Prose columns are the exception, and they live in ROLES below rather than in the page, so the
- * generator can refuse to write a table with a step it has no wording for. That is the failure a
- * generated table would otherwise hide: a new step appears with an empty cell beside it.
+ * Prose columns are the exception, and they live in ROLES and GROUPS below rather than in the page,
+ * so the generator can refuse to write a table with a step it has no wording or group for. That is
+ * the failure a generated table would otherwise hide: a new step appears with an empty cell beside
+ * it, or in no group at all.
  *
  * Only the regions between markers are rewritten. Prose outside them is preserved.
  */
@@ -170,6 +171,70 @@ const ROLES = {
   '9xl': 'layout: the widest step, for full-page composition',
 }
 
+/**
+ * The groups the pages present the steps in, named by what the space sits inside or separates.
+ * Like ROLES, the grouping is a design decision with no machine-readable source. What can be
+ * checked is that every step is in exactly one group, in scale order, so a new step cannot be left
+ * out of the grouped tables while still showing up in the flat ones.
+ *
+ * `description` goes under the group's heading, and `uses` goes in the summary table.
+ */
+const GROUPS = [
+  {
+    name: 'Zero',
+    steps: ['none'],
+    description: 'One step, for an element that should have no space at all.',
+    uses: 'removing space on purpose',
+  },
+  {
+    name: 'Inside a control',
+    steps: ['4xs', '3xs', '2xs', 'xs'],
+    description:
+      'The space inside one control, such as a button or a checkbox: the gaps between its own ' +
+      'parts, and the padding of dense controls like chips and tags.',
+    uses: "the gaps between a control's own parts, and padding in dense controls",
+  },
+  {
+    name: 'Inside a container',
+    steps: ['sm', 'md', 'lg', 'xl'],
+    description:
+      "The space inside a card, dialog, list or form: the container's padding, and the gaps " +
+      'between the items, groups and sections it holds.',
+    uses: 'container padding, and the gaps between items, groups and sections in a container',
+  },
+  {
+    name: 'Page frame',
+    steps: ['2xl', '3xl'],
+    description:
+      'The outer frame of a page: its gutters, and the rhythm of the layout that the ' +
+      'components sit in.',
+    uses: 'page gutters and page-level rhythm',
+  },
+  {
+    name: 'Page regions',
+    steps: ['4xl', '5xl', '6xl'],
+    description:
+      'The space between the parts of a page: blocks inside one region, whole regions such as a ' +
+      'sidebar and its content, and the gutters in a grid of cards.',
+    uses: 'the gaps between blocks and regions of a page, and card gutters',
+  },
+  {
+    name: 'Page sections',
+    steps: ['7xl', '8xl', '9xl'],
+    description:
+      'The widest steps, for the space between one section of a page and the next, and around a ' +
+      'whole page of content.',
+    uses: 'the gaps between sections of a page, and the space around a whole page',
+  },
+]
+
+/** The anchor Docusaurus gives a heading, for the plain-word headings GROUPS uses. */
+const slug = (heading) =>
+  heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+
 const RADIUS_ROLES = {
   none: 'full-bleed edges and table cells',
   rounded: 'the default: buttons, inputs, chips',
@@ -184,6 +249,13 @@ for (const step of STEPS) {
   if (!named.has(`spacing.${step}`))
     problems.push(`spacing.${step} is not in the token source`)
   if (!ROLES[step]) problems.push(`spacing.${step} has no wording in ROLES`)
+}
+
+const grouped = GROUPS.flatMap((group) => group.steps)
+if (grouped.join() !== STEPS.join()) {
+  problems.push(
+    `GROUPS has to list every step once, in scale order. It lists ${grouped.join(', ')}`,
+  )
 }
 
 for (const name of named.keys()) {
@@ -297,12 +369,26 @@ for (const [file, prefix] of [
 
 const tables = {}
 
-tables['spacing-steps'] = [
+tables['spacing-steps'] = GROUPS.flatMap((group, index) => [
+  ...(index ? [''] : []),
+  `### ${group.name}`,
+  '',
+  group.description,
+  '',
   '| Step | Comfortable | Use it when |',
   '| --- | --- | --- |',
-  ...STEPS.map(
+  ...group.steps.map(
     (step) =>
       `| \`spacing.${step}\` | ${value(`spacing.${step}`, 'comfortable')} | ${ROLES[step]} |`,
+  ),
+])
+
+tables['spacing-groups'] = [
+  '| Group | Steps | Use it for |',
+  '| --- | --- | --- |',
+  ...GROUPS.map(
+    (group) =>
+      `| [${group.name}](#${slug(group.name)}) | ${group.steps.map((step) => `\`${step}\``).join(', ')} | ${group.uses} |`,
   ),
 ]
 
@@ -357,15 +443,22 @@ tables['token-reference'] = [
   '',
   '## Spacing',
   '',
-  `${STEPS.length} steps, applied to \`padding\`, \`gap\` and \`margin\`.`,
+  `${STEPS.length} steps, applied to \`padding\`, \`gap\` and \`margin\`, in the same groups as`,
+  '[the overview](./spacing.mdx#the-spacing-steps).',
   '',
-  '| Token | CSS custom property | Compact | Comfortable | Relaxed |',
-  '| --- | --- | --- | --- | --- |',
-  ...STEPS.map((step) => {
-    const name = `spacing.${step}`
-    return `| \`${name}\` | \`${named.get(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
-  }),
-  '',
+  ...GROUPS.flatMap((group) => [
+    `### ${group.name}`,
+    '',
+    group.description,
+    '',
+    '| Token | CSS custom property | Compact | Comfortable | Relaxed |',
+    '| --- | --- | --- | --- | --- |',
+    ...group.steps.map((step) => {
+      const name = `spacing.${step}`
+      return `| \`${name}\` | \`${named.get(name)}\` | ${DENSITIES.map((d) => value(name, d)).join(' | ')} |`
+    }),
+    '',
+  ]),
   '## Corner radius',
   '',
   `${RADII.length} tokens, in the same density collection as spacing.`,
@@ -460,7 +553,7 @@ function alignTables(lines) {
 }
 
 const TARGETS = {
-  'spacing.mdx': ['spacing-steps', 'radius-steps'],
+  'spacing.mdx': ['spacing-steps', 'spacing-groups', 'radius-steps'],
   'spacing-scale.mdx': ['primitive-scale', 'density-spacing', 'density-radius'],
   'spacing-reference.mdx': ['token-reference'],
 }

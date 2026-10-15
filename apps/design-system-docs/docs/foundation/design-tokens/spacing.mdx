@@ -44,35 +44,76 @@ Here is a card, with its whole geometry described by three tokens:
 
 ## The spacing steps
 
-The steps up to `xl` are for components, and the eight from `2xl` up are for page layout.
+The seventeen steps fall into six groups, named by what the space sits inside or separates.
+`none` and the two groups up to `xl` are for components. The three page groups share the eight
+steps from `2xl` up, and are for page layout.
 
 We keep the set deliberately small. A small shared set keeps spacing consistent across screens and teams.
 
 {/* GEN:spacing-steps BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
 
+### Zero
+
+One step, for an element that should have no space at all.
+
 | Step           | Comfortable | Use it when                                                                      |
 | -------------- | ----------- | -------------------------------------------------------------------------------- |
 | `spacing.none` | 0px         | removing space on purpose. Better than `0`, because it survives a density change |
-| `spacing.4xs`  | 2px         | hairline separation, and nudging an icon off its text                            |
-| `spacing.3xs`  | 4px         | padding inside dense controls: chips, badges, tags                               |
-| `spacing.2xs`  | 6px         | tight control padding                                                            |
-| `spacing.xs`   | 8px         | the default gap between a control's own parts, such as an icon and its label     |
-| `spacing.sm`   | 12px        | the default gap between related items in a group                                 |
-| `spacing.md`   | 16px        | **the default container padding. Start here**                                    |
-| `spacing.lg`   | 20px        | separating groups inside a container                                             |
-| `spacing.xl`   | 24px        | separating sections inside a container, such as a card or dialog                 |
-| `spacing.2xl`  | 28px        | page-level rhythm, in layouts rather than components                             |
-| `spacing.3xl`  | 32px        | page-level rhythm, wider than a component has a use for                          |
-| `spacing.4xl`  | 40px        | layout: the gap between blocks inside one region of a page                       |
-| `spacing.5xl`  | 48px        | layout: the gap between major regions of a page                                  |
-| `spacing.6xl`  | 64px        | layout: card gutters, and the space between grouped blocks                       |
-| `spacing.7xl`  | 80px        | layout: the gap between one section of a page and the next                       |
-| `spacing.8xl`  | 96px        | layout: separating whole sections of a long page                                 |
-| `spacing.9xl`  | 128px       | layout: the widest step, for full-page composition                               |
+
+### Inside a control
+
+The space inside one control, such as a button or a checkbox: the gaps between its own parts, and the padding of dense controls like chips and tags.
+
+| Step          | Comfortable | Use it when                                                                  |
+| ------------- | ----------- | ---------------------------------------------------------------------------- |
+| `spacing.4xs` | 2px         | hairline separation, and nudging an icon off its text                        |
+| `spacing.3xs` | 4px         | padding inside dense controls: chips, badges, tags                           |
+| `spacing.2xs` | 6px         | tight control padding                                                        |
+| `spacing.xs`  | 8px         | the default gap between a control's own parts, such as an icon and its label |
+
+### Inside a container
+
+The space inside a card, dialog, list or form: the container's padding, and the gaps between the items, groups and sections it holds.
+
+| Step         | Comfortable | Use it when                                                      |
+| ------------ | ----------- | ---------------------------------------------------------------- |
+| `spacing.sm` | 12px        | the default gap between related items in a group                 |
+| `spacing.md` | 16px        | **the default container padding. Start here**                    |
+| `spacing.lg` | 20px        | separating groups inside a container                             |
+| `spacing.xl` | 24px        | separating sections inside a container, such as a card or dialog |
+
+### Page frame
+
+The outer frame of a page: its gutters, and the rhythm of the layout that the components sit in.
+
+| Step          | Comfortable | Use it when                                             |
+| ------------- | ----------- | ------------------------------------------------------- |
+| `spacing.2xl` | 28px        | page-level rhythm, in layouts rather than components    |
+| `spacing.3xl` | 32px        | page-level rhythm, wider than a component has a use for |
+
+### Page regions
+
+The space between the parts of a page: blocks inside one region, whole regions such as a sidebar and its content, and the gutters in a grid of cards.
+
+| Step          | Comfortable | Use it when                                                |
+| ------------- | ----------- | ---------------------------------------------------------- |
+| `spacing.4xl` | 40px        | layout: the gap between blocks inside one region of a page |
+| `spacing.5xl` | 48px        | layout: the gap between major regions of a page            |
+| `spacing.6xl` | 64px        | layout: card gutters, and the space between grouped blocks |
+
+### Page sections
+
+The widest steps, for the space between one section of a page and the next, and around a whole page of content.
+
+| Step          | Comfortable | Use it when                                                |
+| ------------- | ----------- | ---------------------------------------------------------- |
+| `spacing.7xl` | 80px        | layout: the gap between one section of a page and the next |
+| `spacing.8xl` | 96px        | layout: separating whole sections of a long page           |
+| `spacing.9xl` | 128px       | layout: the widest step, for full-page composition         |
 
 {/* GEN:spacing-steps END */}
 
-Every value in the table is Comfortable, our default density. The steps move together when the
+Every value in the tables is Comfortable, our default density. The steps move together when the
 density changes and the names stay put, so you can pick a name once and trust it to behave.
 [The scale](./spacing-scale.mdx) lists every value.
 
@@ -81,17 +122,26 @@ density changes and the names stay put, so you can pick a name once and trust it
 Two questions, in this order. The second one is what keeps a layout consistent from page to page,
 so it is worth answering even when the first feels obvious.
 
-### 1. Is this inside one control, between components, or page layout?
+### 1. Which group is it in?
 
-- **Inside one control**: `4xs` through `xs`. The gaps between a control's own parts, such as an
-  icon and its label, or a checkbox and its text.
-- **Between components**: `sm` through `xl`. The gaps in a list, between the fields of a form, or
-  between groups and sections inside a container.
-- **Page layout**: `2xl` and up. Gutters, and the space between the regions and sections of a page.
+Find the group by what the space sits inside or separates:
 
-Padding does not follow these bands, because it depends on the component: a chip uses `3xs`, a
-button `xs` and `md`, a card `md`. The [decision table](./spacing-usage.mdx#decision-table) has a
-row for each.
+{/* GEN:spacing-groups BEGIN - regenerate with pnpm generate:spacing-reference. Do not edit by hand. */}
+
+| Group                                     | Steps                     | Use it for                                                                        |
+| ----------------------------------------- | ------------------------- | --------------------------------------------------------------------------------- |
+| [Zero](#zero)                             | `none`                    | removing space on purpose                                                         |
+| [Inside a control](#inside-a-control)     | `4xs`, `3xs`, `2xs`, `xs` | the gaps between a control's own parts, and padding in dense controls             |
+| [Inside a container](#inside-a-container) | `sm`, `md`, `lg`, `xl`    | container padding, and the gaps between items, groups and sections in a container |
+| [Page frame](#page-frame)                 | `2xl`, `3xl`              | page gutters and page-level rhythm                                                |
+| [Page regions](#page-regions)             | `4xl`, `5xl`, `6xl`       | the gaps between blocks and regions of a page, and card gutters                   |
+| [Page sections](#page-sections)           | `7xl`, `8xl`, `9xl`       | the gaps between sections of a page, and the space around a whole page            |
+
+{/* GEN:spacing-groups END */}
+
+Padding does not always follow the groups, because it depends on the component: a chip uses `3xs`,
+a button `xs` and `md`, a card `md`. The button is a control, but its inline padding comes from the
+container group. The [decision table](./spacing-usage.mdx#decision-table) has a row for each.
 
 ### 2. How closely related are the two things?
 

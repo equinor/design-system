@@ -22,27 +22,67 @@ column is what you get with no `data-density` attribute set.
 
 ## Spacing
 
-17 steps, applied to `padding`, `gap` and `margin`.
+17 steps, applied to `padding`, `gap` and `margin`, in the same groups as
+[the overview](./spacing.mdx#the-spacing-steps).
+
+### Zero
+
+One step, for an element that should have no space at all.
 
 | Token          | CSS custom property  | Compact | Comfortable | Relaxed |
 | -------------- | -------------------- | ------- | ----------- | ------- |
 | `spacing.none` | `--eds-spacing-none` | 0px     | 0px         | 0px     |
-| `spacing.4xs`  | `--eds-spacing-4xs`  | 1px     | 2px         | 4px     |
-| `spacing.3xs`  | `--eds-spacing-3xs`  | 2px     | 4px         | 6px     |
-| `spacing.2xs`  | `--eds-spacing-2xs`  | 4px     | 6px         | 8px     |
-| `spacing.xs`   | `--eds-spacing-xs`   | 6px     | 8px         | 10px    |
-| `spacing.sm`   | `--eds-spacing-sm`   | 10px    | 12px        | 16px    |
-| `spacing.md`   | `--eds-spacing-md`   | 12px    | 16px        | 20px    |
-| `spacing.lg`   | `--eds-spacing-lg`   | 16px    | 20px        | 24px    |
-| `spacing.xl`   | `--eds-spacing-xl`   | 20px    | 24px        | 28px    |
-| `spacing.2xl`  | `--eds-spacing-2xl`  | 24px    | 28px        | 32px    |
-| `spacing.3xl`  | `--eds-spacing-3xl`  | 28px    | 32px        | 36px    |
-| `spacing.4xl`  | `--eds-spacing-4xl`  | 36px    | 40px        | 44px    |
-| `spacing.5xl`  | `--eds-spacing-5xl`  | 44px    | 48px        | 52px    |
-| `spacing.6xl`  | `--eds-spacing-6xl`  | 60px    | 64px        | 72px    |
-| `spacing.7xl`  | `--eds-spacing-7xl`  | 72px    | 80px        | 88px    |
-| `spacing.8xl`  | `--eds-spacing-8xl`  | 88px    | 96px        | 112px   |
-| `spacing.9xl`  | `--eds-spacing-9xl`  | 112px   | 128px       | 144px   |
+
+### Inside a control
+
+The space inside one control, such as a button or a checkbox: the gaps between its own parts, and the padding of dense controls like chips and tags.
+
+| Token         | CSS custom property | Compact | Comfortable | Relaxed |
+| ------------- | ------------------- | ------- | ----------- | ------- |
+| `spacing.4xs` | `--eds-spacing-4xs` | 1px     | 2px         | 4px     |
+| `spacing.3xs` | `--eds-spacing-3xs` | 2px     | 4px         | 6px     |
+| `spacing.2xs` | `--eds-spacing-2xs` | 4px     | 6px         | 8px     |
+| `spacing.xs`  | `--eds-spacing-xs`  | 6px     | 8px         | 10px    |
+
+### Inside a container
+
+The space inside a card, dialog, list or form: the container's padding, and the gaps between the items, groups and sections it holds.
+
+| Token        | CSS custom property | Compact | Comfortable | Relaxed |
+| ------------ | ------------------- | ------- | ----------- | ------- |
+| `spacing.sm` | `--eds-spacing-sm`  | 10px    | 12px        | 16px    |
+| `spacing.md` | `--eds-spacing-md`  | 12px    | 16px        | 20px    |
+| `spacing.lg` | `--eds-spacing-lg`  | 16px    | 20px        | 24px    |
+| `spacing.xl` | `--eds-spacing-xl`  | 20px    | 24px        | 28px    |
+
+### Page frame
+
+The outer frame of a page: its gutters, and the rhythm of the layout that the components sit in.
+
+| Token         | CSS custom property | Compact | Comfortable | Relaxed |
+| ------------- | ------------------- | ------- | ----------- | ------- |
+| `spacing.2xl` | `--eds-spacing-2xl` | 24px    | 28px        | 32px    |
+| `spacing.3xl` | `--eds-spacing-3xl` | 28px    | 32px        | 36px    |
+
+### Page regions
+
+The space between the parts of a page: blocks inside one region, whole regions such as a sidebar and its content, and the gutters in a grid of cards.
+
+| Token         | CSS custom property | Compact | Comfortable | Relaxed |
+| ------------- | ------------------- | ------- | ----------- | ------- |
+| `spacing.4xl` | `--eds-spacing-4xl` | 36px    | 40px        | 44px    |
+| `spacing.5xl` | `--eds-spacing-5xl` | 44px    | 48px        | 52px    |
+| `spacing.6xl` | `--eds-spacing-6xl` | 60px    | 64px        | 72px    |
+
+### Page sections
+
+The widest steps, for the space between one section of a page and the next, and around a whole page of content.
+
+| Token         | CSS custom property | Compact | Comfortable | Relaxed |
+| ------------- | ------------------- | ------- | ----------- | ------- |
+| `spacing.7xl` | `--eds-spacing-7xl` | 72px    | 80px        | 88px    |
+| `spacing.8xl` | `--eds-spacing-8xl` | 88px    | 96px        | 112px   |
+| `spacing.9xl` | `--eds-spacing-9xl` | 112px   | 128px       | 144px   |
 
 ## Corner radius
 
