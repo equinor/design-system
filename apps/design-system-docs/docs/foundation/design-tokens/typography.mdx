@@ -68,6 +68,9 @@ Ask what the text is, and whether it wraps:
 - **It stays on one line**: `label`. A button, a menu item, a table cell, a form label.
 - **It wraps, or could**: `body`. A paragraph, a description, a message that runs to sentences.
 
+Size does not change the role. A key figure, such as the headline value "312 bar" on a dashboard,
+is `label`, because it is a value on one line, even when it is set larger than the page title.
+
 We name the two Inter roles by what the text does because that is how people choose text. When we
 tested the earlier names with designers, most of them hesitated over which role to use, and `ui`
 was read as "text inside a component" rather than as all functional text. Asking whether the text
@@ -104,6 +107,26 @@ lists every value in all three densities. In running text we shorten the names, 
 Equinor's scale runs one step ahead of Inter's, so a header is larger than the label with the same
 step name. [The type scale](./typography-scale.mdx#two-typefaces-one-step-apart) shows the two
 side by side.
+
+### Groups of steps
+
+Within each role, the steps fall into groups by where the text sits. Components use the smaller
+steps, and the page around the components uses the larger ones:
+
+| Role     | Group                            | Steps            | Use                                                                   |
+| -------- | -------------------------------- | ---------------- | --------------------------------------------------------------------- |
+| `header` | Page title                       | `4xl`            | the `h1`, which names the page                                        |
+|          | Sections                         | `3xl`, `2xl`     | `h2` and `h3`                                                         |
+|          | Subsections                      | `xl`, `lg`, `md` | `h4`, `h5` and `h6`                                                   |
+|          | Headings with no default element | `sm`, `xs`       | page-chrome headings that must look smaller than an `h6`              |
+| `label`  | Inside components                | `xs` to `lg`     | single-line component text, with `md` as the default                  |
+|          | Page layout                      | `xl` to `5xl`    | top-level navigation, the app name, and key figures                   |
+| `body`   | Inside components                | `sm`, `md`       | helper text under a field, and text that wraps inside a component     |
+|          | Page                             | `lg`, `xl`       | running text, and the ingress: the introduction under the page title  |
+|          | Page layout                      | `2xl`, `3xl`     | intro text on front pages, pull quotes, and text read from a distance |
+
+[Choosing a step](./typography-usage.mdx#choosing-a-step) lists the uses of each step in a group,
+and [heading levels](./typography-usage.mdx#heading-levels) gives the header step for `h1` to `h6`.
 
 ## Weight
 
@@ -203,11 +226,12 @@ Comfortable is the default, so setting nothing gives you Comfortable.
 [Density on the spacing page](./spacing.mdx#density) explains which density to use where, and
 [how density works](./typography-scale.mdx#how-density-works) has the full mapping for type.
 
-:::note No EDS component uses these tokens yet
+:::note No EDS code component uses these tokens yet
 The EDS 2.0 (`/next`) components, and the element styles in `elements.css`, still use the
 2.0.0-beta typography names. They will be replaced as the components move to these tokens. Until
 then, the text in a component will not always match these pages. In the Figma component library,
-almost all text uses `label` styles, and no component uses `header` or `body` yet.
+components use `label` for single-line text, and `body` for text that wraps and for the helper
+text under a field. No component uses `header`.
 :::
 
 ## Principles
@@ -242,9 +266,10 @@ context varies.
 
 ### From EDS 1.x
 
-Re-pick each piece of text with [which role](#which-role) instead of looking for its old size on
-the new scale. The question asks what the text does, so it gives the same answer on every page,
-whatever the old layout used.
+Re-pick each piece of text with [which role](#which-role) and [the groups of steps](#groups-of-steps)
+instead of looking for its old size on the new scale. They ask what the text does and where it
+sits, so they give the same answer on every page, whatever the old layout used. Component text does
+not always keep its EDS 1.x size either: a field label was 12px in EDS 1.x and is `label.md` now.
 
 ### From 2.0.0-beta
 
@@ -288,7 +313,7 @@ wraps. `bolder` is now `medium`, at the same weight, and `lighter` is removed.
 
 - [The type scale](./typography-scale.mdx): the scales under the names, where line heights come
   from, and how density maps onto them.
-- [Using typography](./typography-usage.mdx): which role and step to use, worked examples, and the
-  mistakes to avoid.
+- [Using typography](./typography-usage.mdx): which role and step to use, the header step for each
+  heading level, worked examples, and the mistakes to avoid.
 - [Token reference](./typography-reference.mdx): every token and every value, in all three
   densities.
