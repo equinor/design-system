@@ -1,6 +1,5 @@
 import { useState, ChangeEvent } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { useArgs } from 'storybook/preview-api'
 import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Switch } from './Switch'
 import type { SwitchProps } from './Switch.types'
@@ -45,7 +44,6 @@ const meta: Meta<typeof Switch> = {
   args: {
     label: 'Enable notifications',
     disabled: false,
-    checked: false,
   },
   parameters: {
     docs: {
@@ -89,13 +87,7 @@ const UnstyledList = ({
 )
 
 export const Introduction: StoryFn<SwitchProps> = (args) => {
-  const [, setArgs] = useArgs()
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setArgs({ checked: e.target.checked })
-  }
-
-  return <Switch {...args} onChange={handleChange} />
+  return <Switch {...args} />
 }
 
 export const Overview: StoryFn<SwitchProps> = () => (
