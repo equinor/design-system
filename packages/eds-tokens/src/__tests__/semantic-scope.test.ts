@@ -132,7 +132,6 @@ describe('subtree scoping in the Tokens Studio CSS bundle', () => {
     expect(components.match(/@layer [^{;]+;/)?.[0]).toBe(LAYER_ORDER)
   })
 
-
   it('has only flat rules inside the layer, which the block parser relies on', () => {
     expect(css).not.toMatch(/@[\w-]+/)
   })
