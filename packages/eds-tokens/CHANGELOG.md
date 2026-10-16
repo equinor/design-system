@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.9](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.8...eds-tokens@v3.0.0-beta.9) (2026-10-16)
+
+
+### ✨ Added
+
+* wrap the published eds-tokens CSS bundle in [@layer](https://github.com/layer) eds-tokens ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
+
 ## [3.0.0-beta.8](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.7...eds-tokens@v3.0.0-beta.8) (2026-10-13)
 
 
