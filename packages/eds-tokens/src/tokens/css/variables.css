@@ -915,7 +915,7 @@
   --eds-icon-on-muted-success: var(--eds-success-12);
   --eds-icon-on-muted-warning: var(--eds-warning-12);
   --eds-icon-primary: var(--eds-neutral-13);
-  --eds-icon-secondary: var(--eds-neutral-8);
+  --eds-icon-secondary: var(--eds-neutral-9);
   --eds-icon-tertiary: var(--eds-neutral-7);
   --eds-overlay-scrim: #1d1d1d1a;
   --eds-spacing-2xl: var(--eds-density-spacing-2xl);
@@ -936,9 +936,9 @@
   --eds-spacing-xl: var(--eds-density-spacing-xl);
   --eds-spacing-xs: var(--eds-density-spacing-xs);
   --eds-text-interactive-disabled: var(--eds-neutral-7);
-  --eds-text-interactive-link-default: var(--eds-info-8);
-  --eds-text-interactive-link-hover: var(--eds-info-9);
-  --eds-text-interactive-link-pressed: var(--eds-info-10);
+  --eds-text-interactive-link-default: var(--eds-info-9);
+  --eds-text-interactive-link-hover: var(--eds-info-10);
+  --eds-text-interactive-link-pressed: var(--eds-info-11);
   --eds-text-inverted: var(--eds-neutral-1);
   --eds-text-on-default-accent: var(--eds-accent-10);
   --eds-text-on-default-danger: var(--eds-danger-10);
@@ -959,7 +959,7 @@
   --eds-text-on-muted-success: var(--eds-success-12);
   --eds-text-on-muted-warning: var(--eds-warning-12);
   --eds-text-primary: var(--eds-neutral-13);
-  --eds-text-secondary: var(--eds-neutral-8);
+  --eds-text-secondary: var(--eds-neutral-9);
   --eds-text-tertiary: var(--eds-neutral-7);
   --eds-typography-body-2xl-font-size: var(--eds-density-typography-body-2xl-font-size);
   --eds-typography-body-2xl-line-height: var(--eds-density-typography-body-2xl-line-height);
