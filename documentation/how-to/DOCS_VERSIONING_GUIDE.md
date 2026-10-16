@@ -8,10 +8,15 @@ The EDS documentation site uses [Docusaurus versioning](https://docusaurus.io/do
 
 ### Current Version Structure
 
-| Version   | Description                            | Location                        | URL Path      |
-| --------- | -------------------------------------- | ------------------------------- | ------------- |
-| 2.0.0-beta| Work in progress (current development) | `docs/`                         | `/docs/Next/` |
-| 1.1.0     | Latest stable release                  | `versioned_docs/version-1.1.0/` | `/docs/`      |
+| Version      | Label in the version picker | Description                                                  | Location                             | URL Path            |
+| ------------ | --------------------------- | ------------------------------------------------------------ | ------------------------------------ | ------------------- |
+| `current`    | EDS 2.0 (beta)              | Where new work goes                                          | `docs/`                              | `/docs/Next/`       |
+| `2.0.0-beta` | EDS 2.0 (earlier beta)      | Frozen snapshot, hidden from the version picker but linkable | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/` |
+| `1.1.0`      | EDS 1                       | Frozen archive, supported until EDS 2.0 becomes stable       | `versioned_docs/version-1.1.0/`      | `/docs/`            |
+
+The labels name the design system generation, not a package version. The site documents several packages whose versions do not move together, and its main readers are designers who do not track them ([#4942](https://github.com/equinor/design-system/issues/4942)). The version names (`2.0.0-beta`, `1.1.0`) only appear in folder names, `versions.json` and the config.
+
+For the rules on scoping CSS to a version, the pinned paths and the version notes, see [`apps/design-system-docs/AGENTS.md`](../../apps/design-system-docs/AGENTS.md).
 
 ## How Versioning Works
 
@@ -21,9 +26,11 @@ The EDS documentation site uses [Docusaurus versioning](https://docusaurus.io/do
 apps/design-system-docs/
 ├── docs/                           # Current (next) version -- work in progress
 ├── versioned_docs/
-│   └── version-1.1.0/              # Snapshot of docs at version 1.1.0
+│   ├── version-2.0.0-beta/         # Frozen EDS 2.0 snapshot
+│   └── version-1.1.0/              # Frozen EDS 1 archive
 ├── versioned_sidebars/
-│   └── version-1.1.0-sidebars.json # Sidebar config for version 1.1.0
+│   ├── version-2.0.0-beta-sidebars.json
+│   └── version-1.1.0-sidebars.json
 ├── versions.json                   # List of all versions
 └── docusaurus.config.ts            # Version configuration
 ```
@@ -31,7 +38,7 @@ apps/design-system-docs/
 ### Key Files
 
 - **`versions.json`** -- Contains an array of all released versions (newest first)
-- **`docusaurus.config.ts`** -- Configures the current version label and path
+- **`docusaurus.config.ts`** -- Configures the label, path and banner of each version, `lastVersion`, and which versions the version picker lists
 - **`versioned_docs/`** -- Contains snapshots of documentation for each released version
 - **`versioned_sidebars/`** -- Contains sidebar configurations for each released version
 
@@ -69,33 +76,50 @@ From the `apps/design-system-docs` directory, run:
 pnpm run docusaurus docs:version <version-number>
 ```
 
-For example, to create version 1.2.0:
+For example, to freeze the EDS 2.0 docs when EDS 2.0 becomes stable and `eds-core-react` ships 3.0.0:
 
 ```bash
-pnpm run docusaurus docs:version 1.2.0
+pnpm run docusaurus docs:version 3.0.0
 ```
 
 This command will:
 
-1. Copy the current `docs/` folder to `versioned_docs/version-1.2.0/`
-2. Copy the current `sidebars.ts` to `versioned_sidebars/version-1.2.0-sidebars.json`
-3. Add `1.2.0` to the beginning of `versions.json`
+1. Copy the current `docs/` folder to `versioned_docs/version-3.0.0/`
+2. Copy the current `sidebars.ts` to `versioned_sidebars/version-3.0.0-sidebars.json`
+3. Add `3.0.0` to the beginning of `versions.json`
 
-### Step 3: Update the Current Version Label
+### Step 3: Configure the New Version
 
-After creating a new version, update the current (next) version label in `docusaurus.config.ts`:
+The current version's label names the generation, so it does not change when you snapshot. Instead, add an entry for the new version in `docusaurus.config.ts` with a generation label, next to the existing entries:
 
 ```typescript
 docs: {
   // ... other config
   versions: {
     current: {
-      label: '2.1.0-beta', // Update this to reflect the next planned version
+      label: 'EDS 2.0 (beta)', // Names the generation, not a package version
       path: 'Next',
+      banner: 'none',
     },
+    '3.0.0': {
+      label: 'EDS 2.0', // The generation this snapshot documents
+    },
+    // ... keep the existing '2.0.0-beta' and '1.1.0' entries. Dropping
+    // '1.1.0' and its path: '' moves the EDS 1 archive to /docs/1.1.0/
   },
+  lastVersion: 'current',
 },
 ```
+
+Keep `lastVersion: 'current'`. Without it, Docusaurus treats the newest entry in `versions.json` as the default, so the navbar and the version picker would point at the snapshot instead of current. With it, a version that is not `lastVersion` takes its version name as its path, so the example above is served at `/docs/3.0.0/`. That is also why `1.1.0` sets `path: ''`: it keeps the archive at `/docs/`.
+
+Then decide three things for the new version:
+
+- **Banner.** A version that is not `lastVersion` gets Docusaurus's "no longer actively maintained" banner by default. That is right for a version nobody supports, but wrong for one that is still supported. For those, set `banner: 'none'` and add a version note in `DocItem/Layout`, as `1.1.0` and `current` do.
+- **Version picker.** Whether to list it in the `versions` list on the `docsVersionDropdown` navbar item.
+- **Version scoping.** Whether it renders with the redesign, which means adding it to the scoping lists.
+
+[`apps/design-system-docs/AGENTS.md`](../../apps/design-system-docs/AGENTS.md) describes the version notes and the scoping lists.
 
 ### Step 4: Verify the Changes
 
@@ -122,9 +146,11 @@ docs: {
   sidebarPath: './sidebars.ts',
   versions: {
     current: {
-      label: '2.0.0-beta',  // Display label for the current version
-      path: 'Next',        // URL path segment
+      label: 'EDS 2.0 (beta)', // Display label for the current version
+      path: 'Next', // URL path segment
+      banner: 'none', // DocItem/Layout renders the beta note instead
     },
+    // ... the entries for the frozen versions
   },
 },
 ```
@@ -141,6 +167,9 @@ navbar: {
       type: 'docsVersionDropdown',
       position: 'left',
       dropdownActiveClassDisabled: true,
+      // Only the versions readers should be offered. Versions left out stay
+      // built and linkable.
+      versions: ['current', '1.1.0'],
     },
   ],
 },
@@ -150,7 +179,7 @@ navbar: {
 
 ### Editing the Current Version
 
-Simply edit files in the `docs/` directory. Changes will appear in the "Next" (2.0.0-wip) version.
+Simply edit files in the `docs/` directory. Changes will appear in the EDS 2.0 (beta) version, at `/docs/Next/`.
 
 ### Editing a Released Version
 
@@ -176,11 +205,7 @@ Be cautious when editing released versions. Only make corrections for errors or 
 
 ### Version Naming Convention
 
-Follow semantic versioning for documentation:
-
-- `X.0.0` -- Major releases with breaking changes
-- `X.Y.0` -- Minor releases with new features
-- `X.Y.Z-wip` -- Work in progress for the next release
+Name a snapshot after the version it freezes, such as `1.1.0` or `2.0.0-beta`. Readers never see this name: give the version a label that names the design system generation, such as `EDS 1` or `EDS 2.0 (beta)`.
 
 ### Maintaining Multiple Versions
 
@@ -195,6 +220,8 @@ To remove an old version:
 1. Delete the folder from `versioned_docs/`
 2. Delete the corresponding sidebar from `versioned_sidebars/`
 3. Remove the version from `versions.json`
+4. In `docusaurus.config.ts`, remove its entry from `docs.versions` and from the `versions` list on the `docsVersionDropdown` navbar item. The build fails if the config names a version that is not in `versions.json`.
+5. Remove it from the version scoping lists described in [`apps/design-system-docs/AGENTS.md`](../../apps/design-system-docs/AGENTS.md), if it is in them
 
 ```bash
 # Example: Remove version 1.0.0
@@ -202,13 +229,11 @@ rm -rf versioned_docs/version-1.0.0
 rm versioned_sidebars/version-1.0.0-sidebars.json
 ```
 
-Then edit `versions.json` to remove the version from the array.
-
 ## Troubleshooting
 
 ### Version Not Appearing in Dropdown
 
-Ensure the version is listed in `versions.json` and the corresponding folders exist in `versioned_docs/` and `versioned_sidebars/`.
+Ensure the version is listed in `versions.json`, the corresponding folders exist in `versioned_docs/` and `versioned_sidebars/`, and the version is in the `versions` list on the `docsVersionDropdown` navbar item.
 
 ### Broken Links After Versioning
 
