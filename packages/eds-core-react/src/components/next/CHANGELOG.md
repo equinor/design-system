@@ -4,6 +4,22 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.3...eds-core-react-next@v3.0.0-beta.4) (2026-10-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* Checkbox no longer accepts `helperMessage`. Helper messages are not part of the Checkbox design.
+
+### ✨ Added
+
+* wrap the published eds-tokens CSS bundle in [@layer](https://github.com/layer) eds-tokens ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
+
+
+### 🐛 Fixed
+
+* remove helperMessage prop from Checkbox ([#5644](https://github.com/equinor/design-system/issues/5644)) ([586c057](https://github.com/equinor/design-system/commit/586c057f517a19d1066725b57c070db3c531d0ad))
+
 ## [3.0.0-beta.3](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.2...eds-core-react-next@v3.0.0-beta.3) (2026-10-13)
 
 
