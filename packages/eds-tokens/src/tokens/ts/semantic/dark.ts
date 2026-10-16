@@ -468,7 +468,7 @@ export const semantic = {
       warning: '#ffeddb',
     },
     primary: '#f8fcff',
-    secondary: '#9fb4c6',
+    secondary: '#b4c7d7',
     tertiary: '#738696',
   },
   overlay: {
@@ -497,9 +497,9 @@ export const semantic = {
     interactive: {
       disabled: '#738696',
       link: {
-        default: '#5abbfb',
-        hover: '#82cdff',
-        pressed: '#b0deff',
+        default: '#82cdff',
+        hover: '#b0deff',
+        pressed: '#c9edff',
       },
     },
     inverted: '#191a1a',
@@ -528,7 +528,7 @@ export const semantic = {
       warning: '#ffeddb',
     },
     primary: '#f8fcff',
-    secondary: '#9fb4c6',
+    secondary: '#b4c7d7',
     tertiary: '#738696',
   },
   typography: {
