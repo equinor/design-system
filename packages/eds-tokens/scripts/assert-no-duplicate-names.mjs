@@ -1,6 +1,6 @@
 /**
  * Guard the Tokens Studio CSS export against colliding custom-property
- * names (#5407, ADR-0014 § Confirmation).
+ * names (#5407, ADR-0028 § Confirmation).
  *
  * The CSS name transform is not injective: both `.` and `-` in a token
  * path flatten to `-`, so `border.focus` and `border-focus` land on the
@@ -33,10 +33,13 @@
  *    order is the only cascade lever, which is a collision waiting to
  *    be reordered.
  * 4. Shared with the legacy bundle — an app that loads both packages
- *    resolves a shared name to whichever bundle it imported last, with
- *    no warning anywhere. KNOWN_LEGACY_OVERLAP below is the list that
- *    has to be cleared before the `next/*` → `css/*` flip; anything
- *    outside it fails.
+ *    resolves a shared name to the legacy value, with no warning
+ *    anywhere. The new bundle ships inside `@layer eds-tokens` and the
+ *    legacy one is unlayered, and unlayered CSS beats any layer
+ *    whatever the import order, so the only way out is for the app to
+ *    import legacy with `layer(eds-tokens-legacy)` (ADR-0028 point 6).
+ *    KNOWN_LEGACY_OVERLAP below is the list that has to be cleared
+ *    before the `next/*` → `css/*` flip; anything outside it fails.
  *
  * Every rule collects all its violations before reporting: this runs
  * unattended in `tokens_studio_release.yaml`, where the Actions log is
@@ -178,7 +181,7 @@ if (LEGACY_FILE !== 'none') {
 
   for (const name of shared.filter((name) => !known.has(name)))
     violations.push(
-      `shared with the legacy bundle: ${name} is declared by both ${LEGACY_FILE} and the new export — an app loading both resolves it to whichever it imported last`,
+      `shared with the legacy bundle: ${name} is declared by both ${LEGACY_FILE} and the new export — an app loading both resolves it to the unlayered legacy value, which beats @layer eds-tokens whatever the import order, unless the app imports legacy with layer(eds-tokens-legacy)`,
     )
 
   // Filtered against the overlap, not against the legacy side of it:
@@ -204,10 +207,16 @@ console.log(
 
 /**
  * Lightweight declaration scanner. Tracks the selector stack so nesting
- * (`@layer eds-tokens { :root { … } }`, proposed in #5423) keeps
- * declarations attributed to the block they are actually in, and
+ * (`@layer eds-tokens { :root { … } }`) keeps declarations attributed to
+ * the block they are in, and
  * flushes on `}` as well as `;` so the last declaration of a minified
  * block is not dropped — the legacy bundle is minified.
+ *
+ * Nothing it reads today is layered: the bundle that ships inside
+ * `@layer eds-tokens` (#5423) is excluded above, and the legacy file is
+ * unlayered. The nesting support is there for the day the export itself
+ * emits a layer, so a wrapped file does not silently parse as one block
+ * whose selector is `@layer eds-tokens`.
  *
  * Tuned to the generated export: no strings containing braces or
  * semicolons, which a full CSS parser would be needed for.
