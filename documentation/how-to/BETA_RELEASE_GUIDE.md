@@ -266,7 +266,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 4. **Create release with detailed migration guide**:
 
    ```bash
-   git commit -m "feat(eds-core-react)!: graduate all EDS 2.0 components
+   git commit -m "feat!: graduate all EDS 2.0 components
 
    BREAKING CHANGE: All components replaced with EDS 2.0 implementations.
 

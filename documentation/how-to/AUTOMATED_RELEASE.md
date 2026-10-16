@@ -18,10 +18,10 @@ Guide for the automated release process in Equinor Design System using Release P
 
 ### Stable Releases
 
-1. **Use conventional commits** during development (see [CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md))
-   - `feat(eds-core-react): add new button variant` → minor version bump
-   - `fix(eds-icons): correct icon alignment` → patch version bump
-   - `feat(eds-icons)!: breaking change` → major version bump
+1. **Use conventional commits without a scope** during development (see [CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md)). The files a commit touches decide which package it releases, and a package scope on a `feat` or `fix` forces a bump for that package no matter which files changed.
+   - `feat: add new button variant`, touching `eds-core-react` → minor version bump
+   - `fix: correct icon alignment`, touching `eds-icons` → patch version bump
+   - `feat!: breaking change`, touching `eds-icons` → major version bump
    - `eds-tokens` is the exception: it is pinned to `3.0.0-beta.N` during the beta, so every commit type, `!` included, only bumps the beta counter (see [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md))
 
 2. **Merge PR to `main`** → Release Please automatically creates/updates a release PR
@@ -89,7 +89,7 @@ When Release Please detects releasable changes, it creates a special PR with the
 
 1. **Check version bumps** - Ensure semantic versioning is correct (especially important if there's breaking changes)
 2. **Review CHANGELOGs** - Verify all important changes are captured
-3. **Validate scope** - Confirm all affected packages are included
+3. **Check the packages** - Confirm all affected packages are included
 4. **Test if needed** - Run tests or verify builds if uncertain
 
 ### When to Merge
@@ -196,7 +196,7 @@ If you need to edit a release after it's created:
 **No release PR created?**
 
 - Check commit format follows conventional commits
-- Verify commits on `main` with package scope
+- Verify that the commits on `main` touch files in the package
 
 **Wrong version bump?**
 
