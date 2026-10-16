@@ -108,7 +108,7 @@ The tokens also ship as TypeScript objects for places a CSS custom property cann
 chart library, canvas, email template or React Native surface.
 
 ```ts
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
 
 semantic.background.interactive.accent.emphasis.default // '#21767e'
 ```
@@ -124,8 +124,8 @@ there is no attribute to read: `semantic/light` and `semantic/dark` are separate
 choose which one to use.
 
 ```ts
-import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
-import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
+import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
+import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark.ts'
 
 const tokens = prefersDark ? dark : light
 ```

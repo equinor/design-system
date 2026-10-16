@@ -23,12 +23,133 @@ pnpm add @equinor/eds-tokens
 >   variable references few and centralised will make that migration cheap.
 > * **Do not** adopt the legacy `tokens` JavaScript object in new code — it
 >   is deprecated and will be removed in the next major release.
-> * The beta line is for testing and feedback, not production use.
+> * The beta line is for testing and feedback, not production use. For what it
+>   ships and what to import from it, see
+>   [Beta: the redefined token structure](#beta-the-redefined-token-structure).
 
 The package provides two token systems:
 
 * **CSS Variables** -- Theme-aware design tokens synced from Figma. Supported for production; the variable names will change in the next major release.
 * **Legacy Tokens** -- Original token format. Deprecated: do not use in new code.
+
+---
+
+## Beta: the redefined token structure
+
+The redefined token structure ships on the beta line, additively, alongside
+everything 2.x ships:
+
+```sh
+pnpm add @equinor/eds-tokens@beta
+```
+
+Three subpaths are published API:
+
+| Import                                               | Siblings                      | What it is                                                               |
+| ---------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------ |
+| `@equinor/eds-tokens/next/css/variables.css`         |                               | The CSS custom properties, every mode in one bundle                      |
+| `@equinor/eds-tokens/next/ts/semantic/light.ts`      | `dark.ts`                     | TypeScript twins of the semantic CSS names, one module per colour scheme |
+| `@equinor/eds-tokens/next/ts/density/comfortable.ts` | `compact.ts`, `relaxed.ts`    | Spacing, corner radius and typography per density mode                   |
+
+Write the `.ts` extension. The `next/*` patterns map `*` straight onto a file
+path (`"./next/ts/*": "./src/tokens/ts/*"`), so the extension has to be in the
+specifier. This is the opposite of the 2.x specifiers below, where the pattern
+supplies it (`"./ts/typography/*": "./build/ts/typography/*.ts"`) and you write
+`ts/typography/font-family-ui` without one.
+
+Everything else under `next/*` (the primitive, colour-scheme and font layers,
+the granular CSS files and the DTCG export) is resolution plumbing, not API. It
+is physically present in the package because `var()` resolution is late-bound,
+but it can be renamed or restructured in any beta without notice. Do not import
+it, and do not reference its variable names. See
+[ADR-0028](../../documentation/adr/0028-token-code-output-architecture-typography-roles.md)
+point 7 for the full boundary.
+
+### CSS
+
+Import the bundle once in your application:
+
+```css
+@import '@equinor/eds-tokens/next/css/variables.css';
+```
+
+Most semantic names need an attribute to resolve. They are declared on `:root`,
+but the values they alias are not, and there is no `prefers-color-scheme`
+fallback and no default density. Set both attributes on the root element, or on
+any ancestor of the subtree you are styling:
+
+```html
+<html data-color-scheme="light" data-density="comfortable">
+```
+
+Which attribute a name needs:
+
+| Names                                                                       | Resolve under       |
+| --------------------------------------------------------------------------- | ------------------- |
+| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-elevation-*` | `data-color-scheme` |
+| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`            | `data-density`      |
+| `--eds-family-*`, `--eds-weight-*`                                          | neither             |
+
+A name whose attribute is missing falls back to the inherited or initial value
+for the property, so the symptom is unstyled output rather than an error.
+
+Components then bind to the semantic names:
+
+```css
+.button {
+  background: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
+  padding: var(--eds-spacing-xs) var(--eds-spacing-md);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+```
+
+### TypeScript
+
+For places a CSS custom property cannot reach, such as a chart library, canvas,
+email template or React Native surface:
+
+```typescript
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
+
+semantic.background.interactive.accent.emphasis.default // '#21767e'
+```
+
+Each module is imported directly, there is no barrel. The objects are `as const`
+and export their own type (`Semantic`, `Density`), so a name that does not exist
+is a compile error.
+
+The subpath serves raw `.ts` modules rather than compiled `.js` plus `.d.ts`, so
+they have to be compiled by the consumer: a bundler (Vite, webpack, esbuild) or
+`tsc`. Running them under Node directly does not work even with type stripping,
+which Node refuses inside `node_modules`.
+
+Two things differ from the CSS bundle:
+
+* **The colour scheme does not switch for you.** `semantic/light` and
+  `semantic/dark` are separate objects, and you choose which one to read. There
+  is no attribute to resolve against.
+* **Density is a separate module for now.** `semantic/*` carries the
+  `comfortable` values for spacing, corner radius and typography. For another
+  density, read the matching density module. This is a temporary exception: once
+  `semantic/*` carries the right value per density, `ts/density/*` leaves the
+  published surface ([#5552](https://github.com/equinor/design-system/issues/5552)).
+
+```typescript
+import { density } from '@equinor/eds-tokens/next/ts/density/compact.ts'
+
+density.spacing.md // 12
+```
+
+### The `next` prefix is temporary
+
+`next/*` exists only while the legacy build and the redefined output coexist in
+one package. Before the next major graduates, this output moves to the stable
+specifiers and the prefix disappears. The token names do not change. Until then
+`@equinor/eds-tokens/css/variables` still serves the legacy 2.x build, even on
+the `beta` dist-tag. See
+[ADR-0009](../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)
+for the lifecycle.
 
 ---
 
