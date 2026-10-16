@@ -51,12 +51,12 @@ export type InputProps = {
     /**
      * When true, the value cannot be edited but can be selected and copied.
      * Unlike disabled, the field remains interactive and is not visually dimmed.
-     * Note: on iOS, text selection requires multiline mode — single-line read-only
+     * Note: on iOS, text selection requires multiline mode, since single-line read-only
      * inputs are not selectable due to a platform constraint.
      */
     readOnly?: boolean;
     /**
-     * When true, the input is fully non-interactive — no editing, selection, or focus.
+     * When true, the input is fully non-interactive, with no editing, selection, or focus.
      */
     disabled?: boolean;
 } & Omit<TextInputProps, "onChange" | "onChangeText" | "readOnly">;
