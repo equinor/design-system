@@ -7,8 +7,26 @@
     --_label-height: round(1cap, 4px);
     --captured-size-2: var(--_label-height); /* capture cap-height before SVG overrides font-size */
     --_font-family: var(--eds-typography-ui-body-font-family);
-    --_color: var(--eds-color-text-strong-on-emphasis);
-    --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+
+    /* Colours from the eds-tokens beta (Tokens Studio) semantic interactive
+     * group. The --_ indirection only exists so data-color-appearance can
+     * switch the accent/neutral/danger token set — states read these vars.
+     * The text-interactive group deliberately has no neutral variant:
+     * neutral interactive text uses --eds-text-primary by design (#5283). */
+    --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
+    --_bg-emphasis-hover: var(--eds-background-interactive-accent-emphasis-hover);
+    --_bg-emphasis-pressed: var(
+      --eds-background-interactive-accent-emphasis-pressed
+    );
+    --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
+    --_bg-muted-pressed: var(--eds-background-interactive-accent-muted-pressed);
+    --_text-interactive: var(--eds-text-interactive-accent-default);
+    --_border-interactive: var(--eds-border-interactive-accent-emphasis-default);
+
+    /* Flat white across tones per the Figma design (Button [EDS] primary),
+     * same as Chip — the per-tone on-emphasis tokens are not used. */
+    --_color: var(--eds-text-on-emphasis-neutral);
+    --_bg-color: var(--_bg-emphasis);
     --_padding-block: var(--eds-selectable-space-vertical);
 
     cursor: pointer;
@@ -85,6 +103,43 @@
     }
   }
 
+  /* ===== TONES ===== */
+  /* The tone prop sets data-color-appearance on the button itself */
+
+  .eds-button[data-color-appearance='neutral'] {
+    --_bg-emphasis: var(--eds-background-interactive-neutral-emphasis-default);
+    --_bg-emphasis-hover: var(
+      --eds-background-interactive-neutral-emphasis-hover
+    );
+    --_bg-emphasis-pressed: var(
+      --eds-background-interactive-neutral-emphasis-pressed
+    );
+    --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
+    --_bg-muted-pressed: var(
+      --eds-background-interactive-neutral-muted-pressed
+    );
+    --_text-interactive: var(--eds-text-primary);
+    --_border-interactive: var(
+      --eds-border-interactive-neutral-emphasis-default
+    );
+  }
+
+  .eds-button[data-color-appearance='danger'] {
+    --_bg-emphasis: var(--eds-background-interactive-danger-emphasis-default);
+    --_bg-emphasis-hover: var(
+      --eds-background-interactive-danger-emphasis-hover
+    );
+    --_bg-emphasis-pressed: var(
+      --eds-background-interactive-danger-emphasis-pressed
+    );
+    --_bg-muted-hover: var(--eds-background-interactive-danger-muted-hover);
+    --_bg-muted-pressed: var(--eds-background-interactive-danger-muted-pressed);
+    --_text-interactive: var(--eds-text-interactive-danger-default);
+    --_border-interactive: var(
+      --eds-border-interactive-danger-emphasis-default
+    );
+  }
+
   /* ===== SIZE VARIANTS ===== */
   /* Font size and line-height scale with data-selectable-space.
    * Button height is derived from padding-block + line-height.
@@ -113,42 +168,42 @@
   /* ===== PRIMARY VARIANT ===== */
 
   .eds-button[data-variant='primary'] {
-    --_color: var(--eds-color-text-strong-on-emphasis);
-    --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+    --_color: var(--eds-text-on-emphasis-neutral);
+    --_bg-color: var(--_bg-emphasis);
   }
 
   .eds-button[data-variant='primary']:disabled {
-    --_bg-color: var(--eds-color-bg-fill-emphasis-disabled);
-    --_color: var(--eds-color-text-disabled);
+    --_bg-color: var(--eds-background-interactive-disabled);
+    --_color: var(--eds-text-interactive-disabled);
 
     cursor: not-allowed;
   }
 
   .eds-button[data-variant='primary']:hover:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-emphasis-hover);
+    --_bg-color: var(--_bg-emphasis-hover);
   }
 
   .eds-button[data-variant='primary']:active:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-emphasis-active);
+    --_bg-color: var(--_bg-emphasis-pressed);
   }
 
   /* ===== SECONDARY VARIANT ===== */
 
   .eds-button[data-variant='secondary'] {
-    --_color: var(--eds-color-text-subtle);
+    --_color: var(--_text-interactive);
     --_bg-color: transparent;
 
     outline: var(--eds-border-width-default, 1px) solid
-      var(--eds-color-border-strong);
+      var(--_border-interactive);
     outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
   }
 
   .eds-button[data-variant='secondary']:disabled {
-    --_color: var(--eds-color-text-disabled);
+    --_color: var(--eds-text-interactive-disabled);
 
     cursor: not-allowed;
     outline: var(--eds-border-width-default, 1px) solid
-      var(--eds-color-border-disabled);
+      var(--eds-border-interactive-disabled);
     outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
   }
 
@@ -157,38 +212,39 @@
   }
 
   .eds-button[data-variant='secondary']:hover:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-default);
+    --_bg-color: var(--_bg-muted-hover);
   }
 
   .eds-button[data-variant='secondary']:active:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-hover);
+    --_bg-color: var(--_bg-muted-pressed);
   }
 
   /* ===== GHOST VARIANT ===== */
 
   .eds-button[data-variant='ghost'] {
-    --_color: var(--eds-color-text-subtle);
+    --_color: var(--_text-interactive);
     --_bg-color: transparent;
   }
 
   .eds-button[data-variant='ghost']:disabled {
-    --_color: var(--eds-color-text-disabled);
+    --_color: var(--eds-text-interactive-disabled);
 
     cursor: not-allowed;
   }
 
   .eds-button[data-variant='ghost']:hover:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-default);
+    --_bg-color: var(--_bg-muted-hover);
   }
 
   .eds-button[data-variant='ghost']:active:not(:disabled) {
-    --_bg-color: var(--eds-color-bg-fill-muted-hover);
+    --_bg-color: var(--_bg-muted-pressed);
   }
 
   /* ===== FOCUS STATE ===== */
 
   .eds-button:focus-visible {
-    outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
+    outline: var(--eds-sizing-stroke-thick) solid
+      var(--eds-border-interactive-focus);
     outline-offset: var(--eds-sizing-stroke-thin);
   }
 
