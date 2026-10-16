@@ -19,10 +19,12 @@ export type RadioProps = {
     onPress?: (checked: boolean) => void;
     /**
      * Whether the radio button is in its disabled state.
+     * @default false
      */
     disabled?: boolean;
     /**
      * Whether the radio button should be in its checked state.
+     * @default false
      */
     checked?: boolean;
     /**
