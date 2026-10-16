@@ -8,6 +8,7 @@ import {
   waitFor,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 import { Autocomplete } from '.'
 import { EdsProvider } from '../EdsProvider'
@@ -1057,5 +1058,65 @@ describe('Autocomplete: Density mode', () => {
     )
 
     expect(inputContainer).toBeInTheDocument()
+  })
+})
+
+describe('Autocomplete: Multiple input click area', () => {
+  const renderWithChips = () =>
+    render(
+      <Autocomplete
+        label={labelText}
+        options={items}
+        multiple
+        selectionDisplay="chips"
+        initialSelectedOptions={['One']}
+      />,
+    )
+
+  it('Opens the menu and focuses the input when clicking the padding beside a chip', async () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = input.parentElement?.parentElement as HTMLElement
+
+    await userEvent.click(wrapper)
+
+    expect(input).toHaveFocus()
+    expect(input).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('Keeps the menu open when clicking the padding while it is open', async () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const wrapper = input.parentElement?.parentElement as HTMLElement
+
+    await userEvent.click(wrapper)
+    await userEvent.click(wrapper)
+
+    expect(input).toHaveFocus()
+    expect(input).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('Opens the menu and focuses the input when clicking the gap between chips', async () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+    // eslint-disable-next-line testing-library/no-node-access
+    const chipContainer = input.parentElement as HTMLElement
+
+    await userEvent.click(chipContainer)
+
+    expect(input).toHaveFocus()
+    expect(input).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('Removes a chip without opening the menu when clicking it', async () => {
+    renderWithChips()
+    const input = screen.getByRole('combobox')
+
+    await userEvent.click(screen.getByText('One'))
+
+    expect(screen.queryByText('One')).not.toBeInTheDocument()
+    expect(input).toHaveAttribute('aria-expanded', 'false')
   })
 })
