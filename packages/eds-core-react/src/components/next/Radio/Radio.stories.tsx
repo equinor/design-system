@@ -204,12 +204,8 @@ export const ControlledAndUncontrolled: StoryFn<RadioProps> = () => {
               setSelected(e.target.value)
             }
           />
-          <div
-            style={{
-              visibility: selected === 'delivery' ? 'visible' : 'hidden',
-            }}
-          >
-            <TextField label="Delivery address" />
+          <div style={{ minHeight: '4.5rem' }}>
+            {selected === 'delivery' && <TextField label="Delivery address" />}
           </div>
         </Wrapper>
       </fieldset>
@@ -263,37 +259,55 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
       data-color-scheme="light"
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
-      <Wrapper>
-        <ExampleLabel>Light Mode</ExampleLabel>
-        <Radio label="Email" name="light" value="email" />
-        <Radio label="SMS" name="light" value="sms" defaultChecked />
-        <Radio label="Push" name="light-disabled" disabled />
-        <Radio
-          label="Postal mail"
-          name="light-disabled-checked"
-          disabled
-          defaultChecked
-        />
-      </Wrapper>
+      <ExampleLabel>Light Mode</ExampleLabel>
+      <fieldset>
+        <legend>Selectable</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="light-selectable" value="email" />
+          <Radio
+            label="SMS"
+            name="light-selectable"
+            value="sms"
+            defaultChecked
+          />
+        </Wrapper>
+      </fieldset>
+      <fieldset disabled>
+        <legend>Disabled</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="light-disabled" value="email" />
+          <Radio label="SMS" name="light-disabled" value="sms" defaultChecked />
+        </Wrapper>
+      </fieldset>
     </div>
     <div
       data-color-scheme="dark"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      style={{
+        padding: '24px',
+        background: 'var(--eds-color-bg-canvas)',
+        color: 'var(--eds-color-text-strong)',
+      }}
     >
-      <Wrapper>
-        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
-          Dark Mode
-        </ExampleLabel>
-        <Radio label="Email" name="dark" value="email" />
-        <Radio label="SMS" name="dark" value="sms" defaultChecked />
-        <Radio label="Push" name="dark-disabled" disabled />
-        <Radio
-          label="Postal mail"
-          name="dark-disabled-checked"
-          disabled
-          defaultChecked
-        />
-      </Wrapper>
+      <ExampleLabel>Dark Mode</ExampleLabel>
+      <fieldset>
+        <legend>Selectable</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="dark-selectable" value="email" />
+          <Radio
+            label="SMS"
+            name="dark-selectable"
+            value="sms"
+            defaultChecked
+          />
+        </Wrapper>
+      </fieldset>
+      <fieldset disabled>
+        <legend>Disabled</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="dark-disabled" value="email" />
+          <Radio label="SMS" name="dark-disabled" value="sms" defaultChecked />
+        </Wrapper>
+      </fieldset>
     </div>
   </div>
 )

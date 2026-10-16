@@ -262,7 +262,9 @@ export const StatusAnnouncement: StoryFn<SwitchProps> = () => {
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setAutoSave(e.target.checked)
           setStatus(
-            e.target.checked ? 'Auto-save enabled' : 'Auto-save disabled',
+            e.target.checked
+              ? 'Changes are now saved automatically'
+              : 'Changes are no longer saved automatically',
           )
         }}
       />

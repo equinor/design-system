@@ -55,7 +55,7 @@ export const Preselected = () => (
 Preselected.parameters = {
     docs: {
         description: {
-            story: "Set the initial state to the option that should be selected when the screen first appears, rather than leaving the group unselected.",
+            story: "Start the state at the option that should be selected when the screen first appears, for example `useState(\"Standard delivery\")`, rather than leaving the group unselected.",
         },
     },
 };
@@ -90,7 +90,7 @@ export const WithoutLabel = () => (
 WithoutLabel.parameters = {
     docs: {
         description: {
-            story: "Use this in multi-select lists and bulk selection headers, where the row or the column title already says what is being selected. Give it an `accessibilityLabel`, and it renders as a round touch target.",
+            story: "Use this in lists of options where the row already says what is being selected. Give it an `accessibilityLabel`, and it renders as a round touch target.",
         },
     },
 };
