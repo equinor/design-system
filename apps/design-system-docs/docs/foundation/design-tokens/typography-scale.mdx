@@ -8,11 +8,11 @@ description: The two type scales under the named steps, where line heights come 
 import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
 import { TypeScale } from '@site/src/components/tokens/TypeScale'
 
-Background for the named steps in [Overview](./typography.mdx). You do not use the primitive scales
-directly, and they are hidden from the Figma variable picker, but they explain why the steps are
-the sizes they are.
+This page explains why the named steps in [Overview](./typography.mdx) are the sizes they are,
+using the primitive scales underneath them. You do not use those scales directly, and they are
+hidden from the Figma variable picker.
 
-## Every step, set in its own style
+## The steps in each density
 
 Each row is set with the tokens it names, and the size and line height beside it are read back
 from the browser. Switch the density to see every step move while the names stay put.
@@ -45,7 +45,7 @@ from the browser. Switch the density to see every step move while the names stay
 
 </DensitySwitch>
 
-## Two typefaces, one step apart
+## The Equinor and Inter scales
 
 Each typeface has its own type scale, indexed in hundreds. The table lists the steps the named
 steps use:
@@ -80,8 +80,8 @@ scale in the earlier beta was calculated, and several of its steps fell between 
 
 ## Line height comes from spacing
 
-A line height is not a ratio applied to the font size. Each one is a step on a line-height scale,
-and each step on that scale is an alias of a spacing primitive:
+Each line height is a step on a line-height scale, and each step on that scale is an alias of a
+spacing primitive:
 
 {/* GEN:line-height-chain BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
@@ -112,14 +112,15 @@ typography.label.md.line-height                 what you use
 
 So every line height is a multiple of 4px, and text sits on the same rhythm as the layout around
 it: a line box and a gap of the same size are the same value. It also makes line heights absolute
-px rather than unitless ratios, which is why neighbouring sizes can share a line box. In a row of
-mixed label sizes, changing one size does not always change the row's height.
+px rather than unitless ratios, which is why neighbouring sizes can share a line box.
 
 ## How density works
 
-Each density picks different positions on the same scales. Compact uses the font size and line
-height of the next smaller step, and Relaxed the next larger. At the ends of a role's range, the
-pair comes from the primitive steps just beyond it.
+Each density picks different positions on the same scales, so every value stays on a whole pixel
+and every line height on the 4px grid. [The token reference](./typography-reference.mdx) has the
+values for every step in all three densities, and they follow one rule: Compact uses the font size
+and line height of the next smaller step, and Relaxed the next larger. At the ends of a role's
+range, the pair comes from the primitive steps just beyond it.
 
 {/* GEN:density-exceptions BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
@@ -127,66 +128,12 @@ The rule has one exception: Compact `label.sm` is 10/12, where Comfortable `labe
 
 {/* GEN:density-exceptions END */}
 
-### Header
-
-{/* GEN:density-header BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
-
-| Step                    | Compact | Comfortable | Relaxed |
-| ----------------------- | ------- | ----------- | ------- |
-| `typography.header.xs`  | 10 / 12 | 12 / 16     | 14 / 20 |
-| `typography.header.sm`  | 12 / 16 | 14 / 20     | 16 / 20 |
-| `typography.header.md`  | 14 / 20 | 16 / 20     | 18 / 24 |
-| `typography.header.lg`  | 16 / 20 | 18 / 24     | 21 / 28 |
-| `typography.header.xl`  | 18 / 24 | 21 / 28     | 24 / 32 |
-| `typography.header.2xl` | 21 / 28 | 24 / 32     | 28 / 36 |
-| `typography.header.3xl` | 24 / 32 | 28 / 36     | 32 / 40 |
-| `typography.header.4xl` | 28 / 36 | 32 / 40     | 36 / 44 |
-
-{/* GEN:density-header END */}
-
-### Label
-
-{/* GEN:density-label BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
-
-| Step                   | Compact | Comfortable | Relaxed |
-| ---------------------- | ------- | ----------- | ------- |
-| `typography.label.xs`  | 9 / 12  | 10 / 16     | 12 / 16 |
-| `typography.label.sm`  | 10 / 12 | 12 / 16     | 14 / 20 |
-| `typography.label.md`  | 12 / 16 | 14 / 20     | 16 / 24 |
-| `typography.label.lg`  | 14 / 20 | 16 / 24     | 18 / 24 |
-| `typography.label.xl`  | 16 / 24 | 18 / 24     | 21 / 28 |
-| `typography.label.2xl` | 18 / 24 | 21 / 28     | 24 / 32 |
-| `typography.label.3xl` | 21 / 28 | 24 / 32     | 28 / 32 |
-| `typography.label.4xl` | 24 / 32 | 28 / 32     | 32 / 36 |
-| `typography.label.5xl` | 28 / 32 | 32 / 36     | 37 / 40 |
-
-{/* GEN:density-label END */}
-
-### Body
-
-{/* GEN:density-body BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
-
-| Step                  | Compact | Comfortable | Relaxed |
-| --------------------- | ------- | ----------- | ------- |
-| `typography.body.sm`  | 10 / 16 | 12 / 20     | 14 / 24 |
-| `typography.body.md`  | 12 / 20 | 14 / 24     | 16 / 28 |
-| `typography.body.lg`  | 14 / 24 | 16 / 28     | 18 / 28 |
-| `typography.body.xl`  | 16 / 28 | 18 / 28     | 21 / 32 |
-| `typography.body.2xl` | 18 / 28 | 21 / 32     | 24 / 36 |
-| `typography.body.3xl` | 21 / 32 | 24 / 36     | 28 / 44 |
-
-{/* GEN:density-body END */}
-
 Because density moves whole pairs, a font size mostly keeps its line height wherever it appears.
 {/* GEN:shared-line-height BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
 In `header` and `body`, a font size has the same line height in every density. In `label`, 10px has two: 12px and 16px.
 
 {/* GEN:shared-line-height END */}
-
-Density is not a multiplier, and Compact is not Comfortable scaled down. Each density is its own
-assignment of names to steps, which is what keeps every value on a whole pixel and every line height
-on the 4px grid.
 
 ## Line height per role
 
@@ -249,23 +196,9 @@ height when the text in it changes size.
 size at every step and every density, on the 4px grid. That keeps lines of running text easy to
 follow.
 
-The one and a half is a readability choice, not a WCAG requirement. WCAG 2.1 success criterion
-1.4.12, Text Spacing, asks that content still works when a user sets line height to one and a half
-times the font size themselves. That is a requirement on components, which must not clip or
-overlap text when someone does it, whichever role the text uses.
-
-## No text trimming
-
-Text set with these tokens is not trimmed. A line of text is as tall as its line height, in Figma,
-where every text style has trimming set to None, and in code, with no `text-box` trim and no
-padding adjusted to make up for it.
-
-We removed trimming for three reasons. It made the declared line height misleading, because the
-rendered box no longer matched it. It has no counterpart on mobile. And web and mobile share one
-set of tokens, so a token that only one platform can use does not belong in it.
-
-The current `/next` CSS still trims text. It will be replaced as the components move to these
-tokens, and component padding is being reworked for untrimmed text at the same time.
+The one and a half is a readability choice. WCAG 2.1 success criterion 1.4.12 uses the same ratio
+for a different purpose: components must keep working when users set it themselves, as
+[accessibility](./typography-usage.mdx#accessibility) on the usage page describes.
 
 ## Adding a step
 

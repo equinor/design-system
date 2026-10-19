@@ -749,17 +749,6 @@ tables['lineheight-scale'] = [
     ),
 ]
 
-for (const role of Object.keys(ROLES)) {
-  tables[`density-${role}`] = [
-    '| Step | Compact | Comfortable | Relaxed |',
-    '| --- | --- | --- | --- |',
-    ...stepsOf(role).map(
-      (step) =>
-        `| ${code(`typography.${role}.${step}`)} | ${DENSITIES.map((d) => cell(role, step, d)).join(' | ')} |`,
-    ),
-  ]
-}
-
 const describeException = (e) =>
   `${e.density[0].toUpperCase()}${e.density.slice(1)} ${code(`${e.role}.${e.step}`)} is ${e.shifted.join('/')}, where Comfortable ` +
   `${code(`${e.role}.${e.neighbour}`)} is ${e.expected.join('/')}`
@@ -969,9 +958,6 @@ const TARGETS = {
     'type-scale',
     'type-scale-offset',
     'lineheight-scale',
-    'density-header',
-    'density-label',
-    'density-body',
     'density-exceptions',
     'shared-line-height',
     'line-height-chain',

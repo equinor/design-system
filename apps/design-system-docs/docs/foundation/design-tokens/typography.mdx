@@ -41,9 +41,8 @@ Here is one line of interface text, with every property set by a token:
 }
 ```
 
-A step is always a pair: a font size and the line height that goes with it. Set the line height
-wherever you set the font size, because text that gets a font size without its line height
-inherits whatever line height was set above it, and the rhythm of everything below it breaks.
+A step is a font size and the line height that goes with it. Set the line height wherever you set
+the font size, because text without its own line height inherits one from its parent.
 
 ## Three roles
 
@@ -60,7 +59,7 @@ Inter for everything else.
 
 {/* GEN:typography-roles END */}
 
-### Which role?
+### Choosing a role
 
 Ask what the text is, and whether it wraps:
 
@@ -68,16 +67,12 @@ Ask what the text is, and whether it wraps:
 - **It stays on one line**: `label`. A button, a menu item, a table cell, a form label.
 - **It wraps, or could**: `body`. A paragraph, a description, a message that runs to sentences.
 
-Size does not change the role. A key figure, such as the headline value "312 bar" on a dashboard,
-is `label`, because it is a value on one line, even when it is set larger than the page title.
+The size of the text does not change its role. A key figure, such as the headline value "312 bar"
+on a dashboard, is `label` because it is a value on one line, even when it is set larger than the
+page title.
 
-We name the two Inter roles by what the text does because that is how people choose text. When we
-tested the earlier names with designers, most of them hesitated over which role to use, and `ui`
-was read as "text inside a component" rather than as all functional text. With `label` and `body`,
-the choice comes down to whether the text wraps.
-
-`body` uses the same font sizes as `label`. What it adds is line height: at least one and a half
-times the font size, so the eye can find the next line in a block of text.
+`body` uses the same font sizes as `label`, with a line height of at least one and a half times the
+font size, so the eye can find the next line in a block of text.
 
 ## The steps
 
@@ -99,13 +94,12 @@ Each role has its own range of steps. Comfortable values, as font size / line he
 
 {/* GEN:typography-steps END */}
 
-A dash means the role has no such step. Every value moves with [density](#density) and the names
-stay put, so you can pick a name once and trust it to behave. [The type scale](./typography-scale.mdx)
-lists every value in all three densities. In running text we shorten the names, so
-`typography.label.md` becomes `label.md`.
+A dash means the role has no such step. The values change with [density](#density), and
+[the token reference](./typography-reference.mdx) lists them in all three densities. In running
+text we shorten the names, so `typography.label.md` becomes `label.md`.
 
 Equinor's scale runs one step ahead of Inter's, so a header is larger than the label with the same
-step name. [The type scale](./typography-scale.mdx#two-typefaces-one-step-apart) shows the two
+step name. [The type scale](./typography-scale.mdx#the-equinor-and-inter-scales) shows the two
 side by side.
 
 ### Groups of steps
@@ -142,14 +136,8 @@ Weight is set separately from size. A text style combines a step with one of thr
 
 {/* GEN:typography-weights END */}
 
-Which weights a role uses is fixed:
-
-- **Header**: always `medium`, at every size.
-- **Label**: `normal` by default, `medium` for emphasis, `bold` for strong emphasis.
-- **Body**: `normal` by default, `bold` for emphasis.
-
-On the web, text in `<strong>` or `<b>` is set in `bold` wherever it appears. `<em>` and `<i>` set
-no weight: they keep the weight of the text around them and turn italic.
+Each role has a fixed set of weights, listed in [the roles table](#three-roles). On the web,
+`<em>` and `<i>` set no weight: they keep the weight of the text around them and turn italic.
 
 :::note Weight 400 has three names
 They all mean the same weight. The token is `font-weight.normal`, which is what you write in code.
@@ -168,12 +156,9 @@ Inter weight as Regular.
 
 {/* GEN:typography-families END */}
 
-`font-family.ui` names the Inter family rather than a role. Both `label` and `body` use it.
-
 ### Loading the fonts
 
-Load both families, or text falls back to a generic sans-serif. The EDS variable font stylesheet
-includes Equinor and Inter:
+The EDS variable font stylesheet loads both Equinor and Inter:
 
 ```html
 <link
@@ -182,15 +167,15 @@ includes Equinor and Inter:
 />
 ```
 
-:::warning `equinor-font.css` is not enough
+:::warning `equinor-font.css` does not include Inter
 The older `equinor-font.css` stylesheet only includes Equinor. With it alone, every `label` and
 `body` style, which is most of an interface, falls back to a generic sans-serif without any error.
 :::
 
 ## Density
 
-One attribute resizes the interface. It moves type size and line height together, along with
-spacing, so the proportions you designed are kept:
+The `data-density` attribute resizes the interface. It moves type size and line height together,
+along with spacing, so the proportions you designed are kept:
 
 ```html
 <div data-density="compact">…</div>
@@ -222,62 +207,54 @@ the values change while the token names stay the same:
 
 </DensitySwitch>
 
-Comfortable is the default, so setting nothing gives you Comfortable.
+Comfortable is the default, used where no `data-density` is set.
 [Density on the spacing page](./spacing.mdx#density) explains which density to use where, and
-[how density works](./typography-scale.mdx#how-density-works) has the full mapping for type.
-
-:::note No EDS code component uses these tokens yet
-The `/next` components, and the element styles in `elements.css`, still use the typography tokens
-of the earlier beta. Those will be replaced as the components move to these tokens. Until
-then, the text in a component will not always match these pages. In the Figma component library,
-components use `label` for single-line text, and `body` for text that wraps and for the helper
-text under a field. No component uses `header`.
-:::
+[how density works](./typography-scale.mdx#how-density-works) explains the rule for type.
 
 ## Principles
 
 The decisions about size, weight and line height on these pages follow four principles.
 
-### Legibility comes first
+### Safety through legibility
 
 Our main goal in typography is safety, and we reach it through legibility. A change that makes text
 harder to read accurately and quickly counts as a regression, even when it improves something else.
 
-### We build from the inside out
+### Text sets the proportions
 
 We build from our minimal unit, the text, and from there we define the proportions for padding,
 line height and gaps. Line heights come from the same scale as spacing, so text and layout share
 one rhythm, and a component's height follows from its text and padding rather than being set on its
 own.
 
-### Visual alignment over metric alignment
+### Values are adjusted by eye
 
 A consistent visual rhythm makes an interface easier to use, so when a value that follows the
 scales looks wrong on screen, we change the value. The header line heights are one example: they
 are chosen for how Equinor looks, and most of them sit above the step their font size would give.
 [Header line heights](./typography-scale.mdx#header-line-heights) lists them.
 
-### A balance between flexibility and rigidity
+### Fixed choices and guidance
 
-We aim for a set of options that avoids decision paralysis but still gives teams enough freedom to
-express their specific needs. Where consistency matters, the choice is fixed: each role has a set
-of weights, and a header is always `medium`. Where the context varies, the choice is guidance: the
-[header step for each heading level](./typography-usage.mdx#heading-levels) is a starting point that
-a layout can depart from.
+We keep the options few enough to choose between quickly, and leave room where teams' needs
+differ. Some choices are fixed: each role has a set of weights, and a header is always `medium`.
+Others are guidance: the [header step for each heading level](./typography-usage.mdx#heading-levels)
+is a starting point that a layout can depart from.
 
 ## Coming from an earlier version
 
 Latest is the version most products use today, with the components and the Figma library in
 production. The earlier beta is the beta typography from before these tokens, which used the Figma
 Typography component. For developers, Latest is `eds-core-react` and `eds-tokens` 2.x, and the
-earlier beta is the `ui-body` tokens that the `/next` components still use.
+earlier beta is the `ui-body` tokens.
 
 ### From Latest
 
-Re-pick each piece of text with [which role](#which-role) and [the groups of steps](#groups-of-steps)
-instead of looking for its old size on the new scale. They ask what the text does and where it
-sits, so they give the same answer on every page, whatever the old layout used. Component text does
-not always keep its old size either: a field label is 12px in Latest, and `label.md` in the Beta.
+Re-pick each piece of text with the question in [choosing a role](#choosing-a-role) and
+[the groups of steps](#groups-of-steps), instead of looking for its old size on the new scale. They
+ask what the text does and where it sits, so they give the same answer on every page, whatever the
+old layout used. Component text does not always keep its old size either: a field label is 12px in
+Latest, and `label.md` in the Beta.
 
 ### From the earlier beta
 
@@ -307,7 +284,7 @@ Three other things changed that no token mapping shows:
 
 - **There is no baseline trim.** The earlier beta trimmed multi-line text to the baseline with
   `text-box`. The Beta does not trim: a line of text is as tall as its line height, in Figma and in
-  code. [Text trimming](./typography-scale.mdx#no-text-trimming) explains why.
+  code.
 - **Weight no longer changes with size.** In the earlier beta, each step had its own weights. Now a
   role has a fixed set, and a large header uses the same `medium` as a small one.
 - **The Figma Typography component is gone.** Text is set with text styles, such as

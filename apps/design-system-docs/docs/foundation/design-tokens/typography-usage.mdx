@@ -2,7 +2,7 @@
 title: Using typography
 hide_title: true
 sidebar_label: Using typography
-description: Which role and step to use for each case, how to build hierarchy, which header step each heading level takes, and the mistakes that survive review.
+description: Which role and step to use for each case, how to build hierarchy, which header step each heading level takes, and common mistakes.
 ---
 
 import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
@@ -68,7 +68,7 @@ and a `label` or `body` row without a weight uses `normal`.
 Key figures can use Inter's tabular figures, where every digit has the same width, so a value that
 updates does not shift sideways.
 
-## Always set the pair
+## Setting font size and line height together
 
 Take the font size and the line height from the same role and step:
 
@@ -91,7 +91,8 @@ Reach for size first, then weight, then colour, and change as little as you need
 1. **Size**, one step at a time. Neighbouring steps are close together, so one step is often
    enough to set two pieces of text apart.
 2. **Weight**, with `medium` in a label. `bold` is for strong emphasis, so keep it rare.
-3. **Colour**, with `text.secondary` for text that matters less.
+3. **Colour**, with `text.secondary` for supporting text, such as the inspection date in the example
+   below.
 
 Here is a row in a list of wells, with three levels of text:
 
@@ -203,7 +204,7 @@ headings and paragraphs, are still open. Add them to this section once decided. 
 Keep each line of running text between 55 and 80 characters, including spaces. Shorter lines make
 the eye jump back too often, and longer lines make it hard to find the start of the next one.
 
-## Mistakes that survive review
+## Common mistakes
 
 These look right on screen, which is why they get through.
 
