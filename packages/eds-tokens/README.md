@@ -70,10 +70,7 @@ Import the bundle once in your application:
 The bundle is wrapped in `@layer eds-tokens` and opens with the layer order
 statement `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
 (ADR-0028 point 6). Unlayered CSS beats any layer, so your own
-`:root { --eds-spacing-md: 20px }` retunes a token with no specificity fight. An
-app that also loads the legacy `css/variables` bundle has to put it in the
-`eds-tokens-legacy` layer, otherwise it wins the ten names the two bundles
-share. The recipe is in `documentation/how-to/BETA_RELEASE_GUIDE.md`.
+`:root { --eds-spacing-md: 20px }` retunes a token with no specificity fight.
 
 The colour names need an attribute to resolve. They are declared on `:root`, but
 the values they alias are not. Set `data-color-scheme` on the root element, or
@@ -86,11 +83,11 @@ on any ancestor of the subtree you are styling. Density defaults to
 
 What each group of names needs:
 
-| Names                                                                       | Needs                                                                  |
-| --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-elevation-*` | `data-color-scheme`, which has no default                              |
-| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`            | `data-density` to pick `compact` or `relaxed`, `comfortable` otherwise |
-| `--eds-family-*`, `--eds-weight-*`                                          | nothing                                                                |
+| Names                                                                                                                     | Needs                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-icon-*`, `--eds-elevation-*`, `--eds-data-visualization-*` | `data-color-scheme`, which has no default                              |
+| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`                                                          | `data-density` to pick `compact` or `relaxed`, `comfortable` otherwise |
+| `--eds-font-family-*`, `--eds-font-weight-*`, `--eds-overlay-*`                                                           | nothing                                                                |
 
 A colour name used without `data-color-scheme` falls back to the inherited or
 initial value for the property, so the symptom is unstyled output rather than an
@@ -101,6 +98,29 @@ There is deliberately no `prefers-color-scheme` fallback
 The bundle provides the switch and your app decides the policy, whether that is
 a user setting, a `matchMedia` listener on the OS preference, or a fixed value.
 The 2.x bundle follows the OS on its own; that behaviour does not carry over.
+
+#### Loading the legacy bundle alongside
+
+`@equinor/eds-core-react` 2.x requires `@equinor/eds-tokens/css/variables`, so
+an app adopting `next/*` loads both bundles. Ten names exist in both with
+different values, `--eds-elevation-low` / `--eds-elevation-high` and the eight
+`--eds-typography-header-*-font-size`. The legacy bundle is unlayered, and
+unlayered CSS beats any layer, so it wins all ten whatever the import order.
+Import it into the layer the token bundle already declares:
+
+```css
+@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);
+```
+
+That is the whole recipe. Because the token bundle declares the order, the
+layer is already positioned below `eds-tokens`, so neither import order nor
+your bundler's emit order matters. The overlap disappears when the stable
+`./css/variables` specifier is repointed at the new output.
+
+If your app declares its own `@layer` statement, quote the bundle's four names
+in full and put yours after them. Layer order is fixed by first declaration and
+any name a statement leaves out is appended last, so a shorter statement would
+place `eds-elements` and `eds-components` above your own layers.
 
 Components then bind to the semantic names:
 
