@@ -183,12 +183,14 @@ State progression is expressed by **moving along the scale**, never by layering 
 | `border.interactive.<tone>.emphasis`      | 9          | 10         | 11         |
 | `border.interactive.<tone>.muted`         | 4          | 5          | 7          |
 | `icon.interactive.<tone>`\*               | 11         | 12         | 13         |
-| `text`/`icon`/`border.interactive.link`   | `info` 8   | `info` 9   | `info` 10  |
+| `text`/`icon`/`border.interactive.link`   | `info` 9   | `info` 10  | `info` 11  |
+
+The link ladder and `secondary` each moved one shade further from the background in [#5643](https://github.com/equinor/design-system/issues/5643), released in [#5650](https://github.com/equinor/design-system/pull/5650): at `info` 8 and `neutral` 8 they measured 3.57:1 and 3.64:1 on white, under the WCAG 2.1 AA minimum of 4.5:1 for text. The link row stays one row because all three roles moved together.
 
 Roles with no state ladder:
 
 - `background.non-interactive.<tone>.{muted,default,emphasis}` = **1 / 3 / 9**, and `border.non-interactive.<tone>.{muted,default,emphasis}` = **4 / 7 / 9**, both for all six tones
-- `text`/`icon`: `primary` = 13, `secondary` = 8, `tertiary` = 7, `inverted` = 1
+- `text`/`icon`: `primary` = 13, `secondary` = 9, `tertiary` = 7, `inverted` = 1
 - Per-context foregrounds, per tone: `text`/`icon.on-default.<tone>` = 10, `on-muted.<tone>` = 12, `on-emphasis.<tone>` = 15
 - Surfaces: `background.canvas` = `neutral.1`, `background.input` = `neutral.1`, `background.{surface,dialog,floating}` = `neutral.15`, `background.inverted` = `neutral.12`, `background.backdrop` = `neutral.7`
 - Stateless roles under `interactive`: `background.interactive.disabled` = `neutral.2`, `background.interactive.read-only` = `neutral.2`, `border.interactive.disabled` = `neutral.4`, `text`/`icon.interactive.disabled` = `neutral.7`, `border.interactive.focus` = `info.7`, `border.interactive.selected-indicator` = `accent.13`
