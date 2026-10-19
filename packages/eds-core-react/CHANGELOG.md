@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.4](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.3...eds-core-react@v2.6.4) (2026-10-19)
+
+
+### 🐛 Fixed
+
+* open multiple Autocomplete when clicking beside chips ([#5648](https://github.com/equinor/design-system/issues/5648)) ([7a0ed15](https://github.com/equinor/design-system/commit/7a0ed158e5de6547b955dc209846b59318a11904))
+
 ## [2.6.3](https://github.com/equinor/design-system/compare/eds-core-react@v2.6.2...eds-core-react@v2.6.3) (2026-09-08)
 
 
