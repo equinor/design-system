@@ -13,7 +13,7 @@ These are experimental components available under the `/next` entry point. They 
 
 ### ✨ Added
 
-* wrap the published eds-tokens CSS bundle in [@layer](https://github.com/layer) eds-tokens ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
+* import the legacy token bundle into `@layer eds-tokens-legacy` and declare the full EDS layer order, so consumer CSS without a layer overrides tokens without a specificity fight ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
 
 
 ### 🐛 Fixed

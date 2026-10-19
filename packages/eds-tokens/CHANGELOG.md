@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * stop publishing the foundation and input token sets in eds-tokens ([#5660](https://github.com/equinor/design-system/issues/5660)) ([ff712d8](https://github.com/equinor/design-system/commit/ff712d8cd657cd778daf4a5940aa92e61a76b72a)), closes [#5657](https://github.com/equinor/design-system/issues/5657)
 * update tokens from Tokens Studio release ([#5650](https://github.com/equinor/design-system/issues/5650)) ([2b93619](https://github.com/equinor/design-system/commit/2b936199080c8cbb85f170de979a4cf73fc234ee))
-* wrap the published eds-tokens CSS bundle in [@layer](https://github.com/layer) eds-tokens ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
+* wrap the published eds-tokens CSS bundle in `@layer eds-tokens` ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
 
 
 ### 🐛 Fixed
