@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import type { ChangeEvent, ReactNode } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Radio } from './Radio'
+import { TextField } from '../TextField'
 import type { RadioProps } from './Radio.types'
 
 const meta: Meta<typeof Radio> = {
@@ -120,82 +121,205 @@ const Wrapper = ({
   </div>
 )
 
-const AllVariants = ({ prefix = 'default' }: { prefix?: string }) => (
-  <>
-    <Radio label="Unchecked" name={`${prefix}-unchecked`} value="unchecked" />
-    <Radio
-      label="Checked"
-      name={`${prefix}-checked`}
-      value="checked"
-      defaultChecked
-    />
-    <Radio label="Disabled" name={`${prefix}-disabled`} disabled />
-    <Radio
-      label="Disabled checked"
-      name={`${prefix}-disabled-checked`}
-      disabled
-      defaultChecked
-    />
-  </>
-)
-
 export const Introduction: StoryFn<RadioProps> = (args) => {
   return <Radio {...args} />
 }
 
-export const Spacious: StoryFn<RadioProps> = () => (
-  <Wrapper data-density="spacious">
-    <AllVariants prefix="spacious" />
+export const Overview: StoryFn<RadioProps> = () => (
+  <Wrapper gap={8}>
+    <Radio label="Laptop" name="overview" value="laptop" defaultChecked />
+    <Radio label="Tablet" name="overview" value="tablet" />
   </Wrapper>
 )
 
-export const Comfortable: StoryFn<RadioProps> = () => (
-  <Wrapper data-density="comfortable">
-    <AllVariants prefix="comfortable" />
-  </Wrapper>
+export const States: StoryFn<RadioProps> = () => (
+  <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
+    <fieldset>
+      <legend>Selectable</legend>
+      <Wrapper gap={8}>
+        <Radio label="Option 1" name="selectable" value="1" defaultChecked />
+        <Radio label="Option 2" name="selectable" value="2" />
+      </Wrapper>
+    </fieldset>
+    <fieldset disabled>
+      <legend>Disabled</legend>
+      <Wrapper gap={8}>
+        <Radio label="Option 1" name="disabled" value="1" defaultChecked />
+        <Radio label="Option 2" name="disabled" value="2" />
+      </Wrapper>
+    </fieldset>
+  </div>
 )
 
-export const ColorSchemes: StoryFn<RadioProps> = () => (
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'A radio is either selected or not, and only one option in its group can be selected. Use the disabled state for a choice that is not available yet, such as an option that depends on an earlier step.',
+    },
+  },
+}
+
+export const ControlledAndUncontrolled: StoryFn<RadioProps> = () => {
+  const [selected, setSelected] = useState('pickup')
+  return (
+    <div
+      style={{
+        display: 'flex',
+        gap: '48px',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+      }}
+    >
+      <fieldset style={{ width: '220px' }}>
+        <legend>Uncontrolled</legend>
+        <Wrapper gap={8}>
+          <Radio
+            label="Option 1"
+            name="uncontrolled"
+            value="1"
+            defaultChecked
+          />
+          <Radio label="Option 2" name="uncontrolled" value="2" />
+        </Wrapper>
+      </fieldset>
+      <fieldset style={{ width: '220px' }}>
+        <legend>Controlled</legend>
+        <Wrapper gap={8}>
+          <Radio
+            label="Pickup"
+            name="controlled"
+            value="pickup"
+            checked={selected === 'pickup'}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSelected(e.target.value)
+            }
+          />
+          <Radio
+            label="Delivery"
+            name="controlled"
+            value="delivery"
+            checked={selected === 'delivery'}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSelected(e.target.value)
+            }
+          />
+          <div style={{ minHeight: '4.5rem' }}>
+            {selected === 'delivery' && <TextField label="Delivery address" />}
+          </div>
+        </Wrapper>
+      </fieldset>
+    </div>
+  )
+}
+
+ControlledAndUncontrolled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Uncontrolled suits a simple form, where only the submitted value matters. Controlled suits a screen that reacts to the choice as it changes, such as showing the delivery address field only once Delivery is chosen.',
+    },
+  },
+}
+
+export const Density: StoryFn<RadioProps> = () => (
+  <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
+    {(['spacious', 'comfortable'] as const).map((density) => (
+      <div key={density} data-density={density}>
+        <ExampleLabel>
+          {density.charAt(0).toUpperCase() + density.slice(1)}
+        </ExampleLabel>
+        <Wrapper gap={8}>
+          <Radio
+            label="Email"
+            name={`density-${density}`}
+            value="email"
+            defaultChecked
+          />
+          <Radio label="SMS" name={`density-${density}`} value="sms" />
+          <Radio label="Push" name={`density-${density}`} value="push" />
+        </Wrapper>
+      </div>
+    ))}
+  </div>
+)
+
+Density.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
+    },
+  },
+}
+
+export const LightAndDarkMode: StoryFn<RadioProps> = () => (
   <div style={{ display: 'flex', gap: '32px' }}>
     <div
       data-color-scheme="light"
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
-      <Wrapper>
-        <h3 style={{ margin: 0 }}>Light Mode</h3>
-        <Radio label="Unchecked" name="light" value="unchecked" />
-        <Radio label="Checked" name="light" value="checked" defaultChecked />
-        <Radio label="Disabled" name="light-disabled" disabled />
-        <Radio
-          label="Disabled checked"
-          name="light-disabled-checked"
-          disabled
-          defaultChecked
-        />
-      </Wrapper>
+      <ExampleLabel>Light Mode</ExampleLabel>
+      <fieldset>
+        <legend>Selectable</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="light-selectable" value="email" />
+          <Radio
+            label="SMS"
+            name="light-selectable"
+            value="sms"
+            defaultChecked
+          />
+        </Wrapper>
+      </fieldset>
+      <fieldset disabled>
+        <legend>Disabled</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="light-disabled" value="email" />
+          <Radio label="SMS" name="light-disabled" value="sms" defaultChecked />
+        </Wrapper>
+      </fieldset>
     </div>
     <div
       data-color-scheme="dark"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      style={{
+        padding: '24px',
+        background: 'var(--eds-color-bg-canvas)',
+        color: 'var(--eds-color-text-strong)',
+      }}
     >
-      <Wrapper>
-        <h3 style={{ margin: 0, color: 'var(--eds-color-text-strong)' }}>
-          Dark Mode
-        </h3>
-        <Radio label="Unchecked" name="dark" value="unchecked" />
-        <Radio label="Checked" name="dark" value="checked" defaultChecked />
-        <Radio label="Disabled" name="dark-disabled" disabled />
-        <Radio
-          label="Disabled checked"
-          name="dark-disabled-checked"
-          disabled
-          defaultChecked
-        />
-      </Wrapper>
+      <ExampleLabel>Dark Mode</ExampleLabel>
+      <fieldset>
+        <legend>Selectable</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="dark-selectable" value="email" />
+          <Radio
+            label="SMS"
+            name="dark-selectable"
+            value="sms"
+            defaultChecked
+          />
+        </Wrapper>
+      </fieldset>
+      <fieldset disabled>
+        <legend>Disabled</legend>
+        <Wrapper gap={8}>
+          <Radio label="Email" name="dark-disabled" value="email" />
+          <Radio label="SMS" name="dark-disabled" value="sms" defaultChecked />
+        </Wrapper>
+      </fieldset>
     </div>
   </div>
 )
-ColorSchemes.storyName = 'Light & Dark Mode'
+
+LightAndDarkMode.parameters = {
+  docs: {
+    description: {
+      story:
+        'Radio follows the colour scheme set with `data-color-scheme` on a parent element.',
+    },
+  },
+}
 
 export const GroupedRadio: StoryFn<RadioProps> = () => (
   <fieldset>
@@ -211,7 +335,7 @@ GroupedRadio.parameters = {
   docs: {
     description: {
       story:
-        'Radio buttons with the same `name` form a group. Use arrow keys (↑↓ or ←→) to navigate and select within the group.',
+        'Radio buttons with the same `name` form a group. Use arrow keys to navigate and select within the group.',
     },
   },
 }
@@ -220,12 +344,11 @@ export const InheritedDisabled: StoryFn<RadioProps> = () => (
   <fieldset disabled>
     <legend>Disabled fieldset</legend>
     <Wrapper gap={8}>
-      <Radio label="Unchecked" name="inherited" value="1" />
-      <Radio label="Checked" name="inherited" value="2" defaultChecked />
+      <Radio label="Email" name="inherited" value="email" />
+      <Radio label="SMS" name="inherited" value="sms" defaultChecked />
     </Wrapper>
   </fieldset>
 )
-InheritedDisabled.storyName = 'Inherited disabled'
 InheritedDisabled.parameters = {
   docs: {
     description: {
@@ -236,17 +359,9 @@ InheritedDisabled.parameters = {
 }
 
 export const WithoutVisibleLabel: StoryFn<RadioProps> = () => (
-  <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
-    <div data-density="spacious">
-      <p style={{ margin: '0 0 8px' }}>Spacious</p>
-      <Radio aria-label="Spacious radio" name="standalone-spacious" />
-    </div>
-    <div data-density="comfortable">
-      <p style={{ margin: '0 0 8px' }}>Comfortable</p>
-      <Radio aria-label="Comfortable radio" name="standalone-comfortable" />
-    </div>
-  </div>
+  <Radio aria-label="Select option" name="standalone" />
 )
+
 WithoutVisibleLabel.parameters = {
   docs: {
     description: {
@@ -254,31 +369,4 @@ WithoutVisibleLabel.parameters = {
         'When no visible label is needed, use `aria-label` to provide an accessible name for screen readers.',
     },
   },
-}
-
-export const Controlled: StoryFn<RadioProps> = () => {
-  const [selected, setSelected] = useState('option1')
-  return (
-    <Wrapper>
-      <Radio
-        label="Option 1"
-        name="controlled"
-        value="option1"
-        checked={selected === 'option1'}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setSelected(e.target.value)
-        }
-      />
-      <Radio
-        label="Option 2"
-        name="controlled"
-        value="option2"
-        checked={selected === 'option2'}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setSelected(e.target.value)
-        }
-      />
-      <p>Selected: {selected}</p>
-    </Wrapper>
-  )
 }
