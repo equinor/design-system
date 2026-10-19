@@ -45,21 +45,11 @@ pnpm add @equinor/eds-tokens@beta
 
 Three subpaths are published API:
 
-| Import                                               | Siblings                      | What it is                                                               |
-| ---------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------ |
-| `@equinor/eds-tokens/next/css/variables.css`         |                               | The CSS custom properties, every mode in one bundle                      |
-| `@equinor/eds-tokens/next/ts/semantic/light.ts`      | `dark.ts`                     | TypeScript twins of the semantic CSS names, one module per colour scheme |
-| `@equinor/eds-tokens/next/ts/density/comfortable.ts` | `compact.ts`, `relaxed.ts`    | Spacing, corner radius and typography per density mode                   |
-
-Write the `.ts` extension. The `next/*` patterns map `*` straight onto a file
-path (`"./next/ts/*": "./src/tokens/ts/*"`), so the extension has to be in the
-specifier. This is the opposite of the 2.x specifiers below, where the pattern
-supplies it (`"./ts/typography/*": "./build/ts/typography/*.ts"`) and you write
-`ts/typography/font-family-ui` without one. The asymmetry is a packaging
-oversight rather than a convention:
-[#5671](https://github.com/equinor/design-system/issues/5671) moves the
-extension into the pattern, and the specifiers lose it again in the beta that
-follows.
+| Import                                            | Siblings               | What it is                                                               |
+| ------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------ |
+| `@equinor/eds-tokens/next/css/variables.css`      |                        | The CSS custom properties, every mode in one bundle                      |
+| `@equinor/eds-tokens/next/ts/semantic/light`      | `dark`                 | TypeScript twins of the semantic CSS names, one module per colour scheme |
+| `@equinor/eds-tokens/next/ts/density/comfortable` | `compact`, `relaxed`   | Spacing, corner radius and typography per density mode                   |
 
 Everything else under `next/*` (the primitive, colour-scheme and font layers,
 the granular CSS files and the DTCG export) is resolution plumbing, not API. It
@@ -129,7 +119,7 @@ For places a CSS custom property cannot reach, such as a chart library, canvas,
 email template or React Native surface:
 
 ```typescript
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
 
 semantic.background.interactive.accent.emphasis.default // '#21767e'
 ```
@@ -155,7 +145,7 @@ Two things differ from the CSS bundle:
   published surface ([#5552](https://github.com/equinor/design-system/issues/5552)).
 
 ```typescript
-import { density } from '@equinor/eds-tokens/next/ts/density/compact.ts'
+import { density } from '@equinor/eds-tokens/next/ts/density/compact'
 
 density.spacing.md // 12
 ```
