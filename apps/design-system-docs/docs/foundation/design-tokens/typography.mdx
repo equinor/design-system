@@ -8,9 +8,9 @@ description: Typography in EDS has three roles on two typefaces. You pick a role
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
 import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
 
-These pages document the **EDS 2.0** typography tokens. If you are on EDS 1.x or on 2.0.0-beta,
-the token names have changed, and so has the way line-height and weight work, so please start with
-[coming from an earlier version](#coming-from-an-earlier-version).
+These pages document the typography in the Beta. If you are coming from Latest, or from the earlier
+beta, the token names have changed, and so has the way line height and weight work, so please start
+with [coming from an earlier version](#coming-from-an-earlier-version).
 
 Here is one line of interface text, with every property set by a token:
 
@@ -41,9 +41,9 @@ Here is one line of interface text, with every property set by a token:
 }
 ```
 
-A step is always a pair: a font size and the line height that goes with it. Set both, every time.
-Text that gets a font size without its line height inherits whatever line height was set above it,
-and the rhythm of everything below it breaks.
+A step is always a pair: a font size and the line height that goes with it. Set the line height
+wherever you set the font size, because text that gets a font size without its line height
+inherits whatever line height was set above it, and the rhythm of everything below it breaks.
 
 ## Three roles
 
@@ -73,8 +73,8 @@ is `label`, because it is a value on one line, even when it is set larger than t
 
 We name the two Inter roles by what the text does because that is how people choose text. When we
 tested the earlier names with designers, most of them hesitated over which role to use, and `ui`
-was read as "text inside a component" rather than as all functional text. Asking whether the text
-wraps settles it.
+was read as "text inside a component" rather than as all functional text. With `label` and `body`,
+the choice comes down to whether the text wraps.
 
 `body` uses the same font sizes as `label`. What it adds is line height: at least one and a half
 times the font size, so the eye can find the next line in a block of text.
@@ -125,8 +125,8 @@ steps, and the page around the components uses the larger ones:
 |          | Page                             | `lg`, `xl`       | running text, and the ingress: the introduction under the page title  |
 |          | Page layout                      | `2xl`, `3xl`     | intro text on front pages, pull quotes, and text read from a distance |
 
-[Choosing a step](./typography-usage.mdx#choosing-a-step) lists the uses of each step in a group,
-and [heading levels](./typography-usage.mdx#heading-levels) gives the header step for `h1` to `h6`.
+[The decision table](./typography-usage.mdx#decision-table) gives the step for each use, and
+[heading levels](./typography-usage.mdx#heading-levels) gives the header step for `h1` to `h6`.
 
 ## Weight
 
@@ -227,8 +227,8 @@ Comfortable is the default, so setting nothing gives you Comfortable.
 [how density works](./typography-scale.mdx#how-density-works) has the full mapping for type.
 
 :::note No EDS code component uses these tokens yet
-The EDS 2.0 (`/next`) components, and the element styles in `elements.css`, still use the
-2.0.0-beta typography names. They will be replaced as the components move to these tokens. Until
+The `/next` components, and the element styles in `elements.css`, still use the typography tokens
+of the earlier beta. Those will be replaced as the components move to these tokens. Until
 then, the text in a component will not always match these pages. In the Figma component library,
 components use `label` for single-line text, and `body` for text that wraps and for the helper
 text under a field. No component uses `header`.
@@ -236,13 +236,12 @@ text under a field. No component uses `header`.
 
 ## Principles
 
-Four principles sit underneath every decision about size, weight and line height.
+The decisions about size, weight and line height on these pages follow four principles.
 
 ### Legibility comes first
 
-When it comes to typography, ensuring safety is our main goal, and we make sure of it through
-legibility. Anything that compromises a user's ability to read accurately and quickly is a
-regression, no matter how much it improves on other axes.
+Our main goal in typography is safety, and we reach it through legibility. A change that makes text
+harder to read accurately and quickly counts as a regression, even when it improves something else.
 
 ### We build from the inside out
 
@@ -253,31 +252,40 @@ own.
 
 ### Visual alignment over metric alignment
 
-Our metrics serve visual harmony. A consistent visual rhythm makes an interface easier to use, and
-when the numbers and the eye disagree, the eye wins.
+A consistent visual rhythm makes an interface easier to use, so when a value that follows the
+scales looks wrong on screen, we change the value. The header line heights are one example: they
+are chosen for how Equinor looks, and most of them sit above the step their font size would give.
+[Header line heights](./typography-scale.mdx#header-line-heights) lists them.
 
 ### A balance between flexibility and rigidity
 
 We aim for a set of options that avoids decision paralysis but still gives teams enough freedom to
-express their specific needs. The system is opinionated where consistency matters, and open where
-context varies.
+express their specific needs. Where consistency matters, the choice is fixed: each role has a set
+of weights, and a header is always `medium`. Where the context varies, the choice is guidance: the
+[header step for each heading level](./typography-usage.mdx#heading-levels) is a starting point that
+a layout can depart from.
 
 ## Coming from an earlier version
 
-### From EDS 1.x
+Latest is the version most products use today, with the components and the Figma library in
+production. The earlier beta is the beta typography from before these tokens, which used the Figma
+Typography component. For developers, Latest is `eds-core-react` and `eds-tokens` 2.x, and the
+earlier beta is the `ui-body` tokens that the `/next` components still use.
+
+### From Latest
 
 Re-pick each piece of text with [which role](#which-role) and [the groups of steps](#groups-of-steps)
 instead of looking for its old size on the new scale. They ask what the text does and where it
 sits, so they give the same answer on every page, whatever the old layout used. Component text does
-not always keep its EDS 1.x size either: a field label was 12px in EDS 1.x and is `label.md` now.
+not always keep its old size either: a field label is 12px in Latest, and `label.md` in the Beta.
 
-### From 2.0.0-beta
+### From the earlier beta
 
-The 2.0.0-beta typography had one Inter role, `ui-body`, with two line heights per step, and weight,
-tracking and baseline trim per step as well. EDS 2.0 splits that role in two and moves weight out of
-the size tokens:
+The earlier beta had one Inter role, `ui-body`, with two line heights per step, and weight, tracking
+and baseline trim per step as well. The Beta splits that role in two and moves weight out of the
+size tokens:
 
-| 2.0.0-beta                                                                            | EDS 2.0                                                             |
+| Earlier beta                                                                          | Beta                                                                |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `--eds-typography-ui-body-{size}-font-size` with `-line-height-squished`, for UI text | `--eds-typography-label-{step}-font-size` and `-line-height`        |
 | `--eds-typography-ui-body-{size}-font-size` with `-line-height-default`, for prose    | `--eds-typography-body-{step}-font-size` and `-line-height`         |
@@ -291,23 +299,23 @@ the size tokens:
 | `data-density="spacious"`, or no attribute                                            | no attribute, which gives Comfortable                               |
 | `data-density="comfortable"`                                                          | `data-density="compact"`                                            |
 
-For `ui-body`, the step names carry over, and the Comfortable sizes are the 2.0.0-beta spacious
-sizes rounded to whole pixels, up to `5xl`. There is no `6xl`. The density names shifted the same
-way for spacing, so [the warning on the spacing page](./spacing.mdx#density) applies here too.
+For `ui-body`, the step names carry over, and the Comfortable sizes are the `spacious` sizes of the
+earlier beta, rounded to whole pixels, up to `5xl`. There is no `6xl`. Spacing renamed its
+densities in the same way, as [the warning on the spacing page](./spacing.mdx#density) describes.
 
 Three other things changed that no token mapping shows:
 
-- **There is no baseline trim.** 2.0.0-beta trimmed multi-line text to the baseline with
-  `text-box`. EDS 2.0 does not trim: a line of text is as tall as its line height, in Figma and in
+- **There is no baseline trim.** The earlier beta trimmed multi-line text to the baseline with
+  `text-box`. The Beta does not trim: a line of text is as tall as its line height, in Figma and in
   code. [Text trimming](./typography-scale.mdx#no-text-trimming) explains why.
-- **Weight no longer changes with size.** In 2.0.0-beta each step had its own weights. Now a role
-  has a fixed set, and a large header uses the same `medium` as a small one.
+- **Weight no longer changes with size.** In the earlier beta, each step had its own weights. Now a
+  role has a fixed set, and a large header uses the same `medium` as a small one.
 - **The Figma Typography component is gone.** Text is set with text styles, such as
   `label/md/default`, which you can find with their sizes in the Figma style list.
 
-Earlier builds of these tokens, before the EDS 2.0 roles, named the Inter role `ui` and had
-`bolder` and `lighter` weights. `ui` is now `label`, with the same values, or `body` for text that
-wraps. `bolder` is now `medium`, at the same weight, and `lighter` is removed.
+The first Beta releases (`eds-tokens` 3.0.0-beta.1 to 3.0.0-beta.7) named the Inter role `ui` and
+had `bolder` and `lighter` weights. `ui` is now `label`, with the same values, or `body` for text
+that wraps. `bolder` is now `medium`, at the same weight, and `lighter` is removed.
 
 ## Where to go next
 

@@ -76,7 +76,7 @@ Of the 10 Equinor steps in use, 9 are the same size as the Inter step one index 
 
 That offset is why a header is larger than the label with the same step name. It is part of the
 scale itself rather than a multiplier applied on top, so every size is a whole pixel. The
-2.0.0-beta scale was calculated, and several of its steps fell between pixels.
+scale in the earlier beta was calculated, and several of its steps fell between pixels.
 
 ## Line height comes from spacing
 
@@ -231,8 +231,7 @@ In 5 of the 8 header steps, the line-height step is above the font-size step:
 
 {/* GEN:header-pairs END */}
 
-Those higher steps are deliberate. Matching the step numbers again would bring back the tight
-headers we had before.
+Matching the step numbers instead would bring back the tight headers we had before.
 
 `header.sm` and `header.md` share a line height on purpose. Line heights sit on a 4px grid, which
 leaves few choices at these sizes: `header.sm` needs that line height to have enough leading, and
@@ -257,9 +256,9 @@ overlap text when someone does it, whichever role the text uses.
 
 ## No text trimming
 
-EDS 2.0 does not trim text. A line of text is as tall as its line height, in Figma, where every
-text style has trimming set to None, and in code, with no `text-box` trim and no padding adjusted
-to make up for it.
+Text set with these tokens is not trimmed. A line of text is as tall as its line height, in Figma,
+where every text style has trimming set to None, and in code, with no `text-box` trim and no
+padding adjusted to make up for it.
 
 We removed trimming for three reasons. It made the declared line height misleading, because the
 rendered box no longer matched it. It has no counterpart on mobile. And web and mobile share one
