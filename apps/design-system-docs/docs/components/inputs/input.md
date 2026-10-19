@@ -44,7 +44,7 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead - it ke
 
 For a complete form field with label, description, helper message, and required/optional indicators, use the TextField component instead - it handles all the composition and accessibility for you.
 
-The `required` prop has no visual effect on its own. Pair it with the `indicator` prop on Field.Label for a visible marker, and set `aria-required` so screen readers announce it too.
+The `required` prop tells assistive technology and native form validation that the field is required, but it shows no visible marker. Pair it with the `indicator` prop on Field.Label.
 
 <StoryCanvas of="Input/RequiredIndicator" showLink />
 

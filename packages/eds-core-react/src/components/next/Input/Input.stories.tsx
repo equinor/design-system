@@ -252,12 +252,7 @@ export const RequiredIndicator: StoryFn<InputProps> = () => (
       <Field.Label htmlFor="required-example" indicator="(Required)">
         Email
       </Field.Label>
-      <Input
-        id="required-example"
-        required
-        aria-required="true"
-        placeholder="name@example.com"
-      />
+      <Input id="required-example" required placeholder="name@example.com" />
     </Field>
   </>
 )
@@ -265,7 +260,7 @@ RequiredIndicator.parameters = {
   docs: {
     description: {
       story:
-        'The `required` prop has no visual effect on its own. Pair it with the `indicator` prop on `Field.Label` for a visible marker, and set `aria-required` so screen readers announce it too.',
+        'The `required` prop tells assistive technology and native form validation that the field is required, but it shows no visible marker. Pair it with the `indicator` prop on `Field.Label`.',
     },
   },
 }
