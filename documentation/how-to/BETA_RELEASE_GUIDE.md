@@ -96,8 +96,8 @@ fix: correct positioning logic
 # Install beta version
 npm install @equinor/eds-core-react@beta
 
-# Or use specific beta version
-npm install @equinor/eds-core-react@2.0.0-beta.1
+# Or use a specific beta version (replace N with the beta number)
+npm install @equinor/eds-core-react@3.0.0-beta.N
 ```
 
 ```typescript
@@ -165,7 +165,7 @@ pnpm storybook
 
 Beta versions follow a fixed series pinned at the upcoming major: `3.0.0-beta.1`, `3.0.0-beta.2`, etc.
 
-The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`.
+The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`. See [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md) for the reasoning.
 
 ## `@equinor/eds-tokens`: Whole Package in Beta
 
@@ -179,6 +179,7 @@ The tokens package works differently from core-react's dual model: while the tok
 - **Version scheme**: pinned `3.0.0-beta.N` — the base never moves. The entry uses release-please's `prerelease` versioning strategy (`versioning: "prerelease"`, `prerelease: true`), which at a `x.0.0` base increments only the counter for every commit type (`fix`, `feat`, even `feat!`). See `.github/release-please-config.md` for details, including why the version lives in `version.txt` rather than `package.json`.
 - **Automatic cadence**: each release in Tokens Studio triggers `tokens_studio_release.yaml`, which opens a `feat: update tokens from Tokens Studio release` PR. Merging it makes release-please add an `eds-tokens` bump to the release PR; merging _that_ publishes `3.0.0-beta.N` to the `beta` dist-tag via `publish_tokens.yaml`. Any other `fix`/`feat` commit touching the package cuts a beta the same way.
 - **Package contents**: the beta ships everything 2.x ships **plus** the Tokens Studio output under temporary additive subpaths (`@equinor/eds-tokens/next/css/*`, `/next/dtcg/*`, `/next/ts/*`), injected at publish time. Repointing the stable specifiers (`./css/variables` etc.) to the new output is planned before graduation so consumers won't need to change imports.
+- **Loading both bundles**: `next/css/variables.css` is wrapped in `@layer eds-tokens` (ADR-0028 point 6); the legacy `css/variables` is unlayered and therefore wins the ten names both declare (`--eds-elevation-low/high`, the eight `--eds-typography-header-*-font-size`). An app that loads both and wants the new values puts legacy in a lower layer: `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;` followed by `@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);`. Quote the statement in full, including the two component layers: layer order is fixed by first declaration and any name it leaves out is appended last, so a shorter statement puts `eds-elements` and `eds-components` above the app's own layers rather than below them. The overlap disappears at the `./css/variables` repoint.
 - **Urgent stable patch**: if a critical 2.x fix is needed during the transition, it's a manual publish from the `eds-tokens@v2.3.1` tag — the automated channel only produces betas.
 - **Graduation**: tokens graduate together with the components as part of the single `3.0.0` major — flip `prerelease` to `false` and switch the dist-tag in `trigger_publish.yml` back to `latest`.
 
@@ -266,7 +267,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 4. **Create release with detailed migration guide**:
 
    ```bash
-   git commit -m "feat(eds-core-react)!: graduate all EDS 2.0 components
+   git commit -m "feat!: graduate all EDS 2.0 components
 
    BREAKING CHANGE: All components replaced with EDS 2.0 implementations.
 
@@ -383,7 +384,7 @@ npm view @equinor/eds-core-react@beta version
 
 - Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `src/components/next/CHANGELOG.md` for beta)
 - Review `trigger_publish.yml` workflow logs (look for `detect-release` step output to see which changelog was detected)
-- Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@2.0.0-beta.1 beta`
+- Manually retag if needed, replacing `N` with the beta number: `npm dist-tag add @equinor/eds-core-react@3.0.0-beta.N beta`
 
 ### Components not found in `/next` import
 

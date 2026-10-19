@@ -47,6 +47,23 @@ export const MultipleInput = () => {
   } = useAutocompleteContext()
 
   const chipRefs = useRef<Map<string, HTMLDivElement>>(new Map())
+  const chipContainerRef = useRef<HTMLDivElement>(null)
+
+  // The wrapper's padding and the gaps between chips are not part of the
+  // input, so clicks there would otherwise do nothing
+  const isDeadZone = (e: React.MouseEvent) =>
+    e.target === e.currentTarget || e.target === chipContainerRef.current
+
+  const handleWrapperMouseDown = (e: React.MouseEvent) => {
+    // Keep focus in the input so the menu isn't closed by a blur
+    if (isDeadZone(e)) e.preventDefault()
+  }
+
+  const handleWrapperClick = (e: React.MouseEvent) => {
+    if (!isDeadZone(e)) return
+    inputRef.current?.focus()
+    inputRef.current?.click()
+  }
 
   const handleChipRemove = (
     item: unknown,
@@ -93,8 +110,10 @@ export const MultipleInput = () => {
         selectionDisplay === 'chips' ? { height: 'auto', minHeight } : undefined
       }
       data-density={density}
+      onMouseDown={handleWrapperMouseDown}
+      onClick={handleWrapperClick}
     >
-      <ChipContainer $density={density}>
+      <ChipContainer ref={chipContainerRef} $density={density}>
         {selectionDisplay === 'chips' &&
           selectedItems
             .slice(0, chipCount > 0 ? chipCount : undefined)

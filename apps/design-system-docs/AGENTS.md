@@ -122,7 +122,7 @@ does not own) and `no-descending-specificity` (the version-scoping strategy
 above deliberately relies on specificity order). Every other rule applies —
 `pnpm run lint:css:docs`.
 
-## Tokens — two bundles, one collision
+## Tokens — two bundles, two layers
 
 **RULE: site styling derives ONLY from the semantic layer of the Tokens
 Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
@@ -130,9 +130,9 @@ Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
 `--eds-corner-radius-*`, `--eds-elevation-*`. Never reference primitives
 (`--eds-primitives-*`, `--eds-light-*`/`--eds-dark-*`, palette steps like
 `--eds-accent-9`), the density layer (`--eds-density-*`), or legacy
-`--eds-color-*` names. There is one sanctioned exception: the semantic
-typography bridge in `theme-variables.css` (`:root:root` re-declarations
-resolving the header-* font-size collision below).
+`--eds-color-*` names. There are no sanctioned exceptions: the `:root:root`
+typography bridge that used to be one is gone, replaced by the layer
+statement below.
 
 **Elevation is a composite token — use it as one.** `--eds-elevation-low` and
 `--eds-elevation-high` are `boxShadow` composites in the Tokens Studio
@@ -155,12 +155,16 @@ Both token bundles load (see imports in `theme-variables.css`):
 2. **Legacy bundle** (`@equinor/eds-tokens/css/variables`) — retained ONLY for
    `--eds-container-space-*` and the embedded `/next` component previews,
    which consume legacy names. Do not use legacy `--eds-color-*` names in
-   site CSS. **It must stay the first of the two imports:** it also declares
-   `--eds-elevation-low/high`, at the same specificity as the Tokens Studio
-   pair (both 0,1,0), so import order is the only thing making the Tokens
-   Studio composite win. The values agree today, so a reordering would not
-   show up visually — it would just silently pin the site to the legacy flat
-   shadow, which does not flip with the colour scheme.
+   site CSS. **It must stay inside `layer(eds-tokens-legacy)`:** it declares
+   ten names the Tokens Studio bundle also declares — `--eds-elevation-low/high`
+   and the eight `--eds-typography-header-*-font-size` — and the Tokens Studio
+   bundle ships wrapped in `@layer eds-tokens` (ADR-0028 point 6), which an
+   unlayered stylesheet beats outright. Dropping the `layer()` would silently
+   pin the site to the legacy values: the legacy flat shadow, which does not
+   flip with the colour scheme, and the legacy header sizes (3xl 27.5px
+   instead of 28px, 4xl 31.5px instead of 32px). The order statement at the
+   top of `theme-variables.css` puts `eds-tokens-legacy` below `eds-tokens`,
+   so neither import order nor webpack's emit order matters any more.
 
 ## Fonts
 
@@ -189,11 +193,12 @@ AGENTS.md — that rule is about EDS component CSS, and dropping them here would
 lighten every bold run of prose on the site.
 
 **Collision gotcha:** both bundles define `--eds-typography-header-*-font-size`
-with different values, and webpack CSS ordering lets the legacy bundle win.
-The semantic typography bridge in `theme-variables.css` (`:root:root`
-specificity 0,2,0) pins the semantic names to the Tokens Studio values, so
-site CSS consumes the semantic `--eds-typography-header-*` names normally.
-Do not remove the bridge and do not reference `--eds-density-*` directly.
+with different values. The layer statement at the top of `theme-variables.css`
+settles it — legacy sits in `eds-tokens-legacy`, below the Tokens Studio
+bundle's own `eds-tokens` — so site CSS consumes the semantic
+`--eds-typography-header-*` names normally and gets the Tokens Studio values.
+The `:root:root` bridge this used to need is gone. Do not reference
+`--eds-density-*` directly.
 
 Dark mode: `src/clientModules/syncColorScheme.ts` mirrors Docusaurus's
 `data-theme` to `data-color-scheme` on `<html>`, which is what both token

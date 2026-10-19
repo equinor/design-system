@@ -259,6 +259,8 @@ Define component-scoped variables with a `--_` prefix at the component root. Use
 
 Wrap all component styles in `@layer eds-components { }`. Rules outside the layer (e.g. display overrides) must be placed after the layer block with a comment explaining why they are outside.
 
+The full order is `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`, declared in both `components/next/index.css` and the published `@equinor/eds-tokens` CSS bundle, which ships wrapped in `@layer eds-tokens` (ADR-0028 point 6). `eds-tokens-legacy` holds the 2.x token bundle for as long as `/next` still needs its names. Everything EDS therefore sits below unlayered consumer CSS, which is what makes an override a plain `:root { --eds-*: … }`.
+
 #### Data attributes for variants and states
 
 Use `data-*` attributes for all variants, sizes, and boolean states — not modifier classes.

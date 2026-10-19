@@ -32,6 +32,19 @@ const bundle = path.resolve(
   '../tokens/css/variables.css',
 )
 
+/**
+ * The components CSS entry, read from the neighbouring package so the two
+ * order statements are checked against each other rather than each against
+ * a literal. Pinning only this side would leave the invariant half guarded:
+ * editing `index.css` alone is enough to reintroduce the inversion the
+ * statement exists to prevent, and nothing in eds-core-react parses the
+ * tokens bundle.
+ */
+const componentsEntry = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../../eds-core-react/src/components/next/index.css',
+)
+
 type Block = {
   selectors: string[]
   declared: Map<string, string>
@@ -46,7 +59,26 @@ type Block = {
 // below). Tracked in #5567; remove this once the elevation layer is widened.
 const ELEVATION_ALIASES = ['--eds-elevation-key', '--eds-elevation-ambient']
 
-const css = fs.readFileSync(bundle, 'utf-8').replace(/\/\*[\s\S]*?\*\//g, '')
+/**
+ * The bundle ships wrapped in `@layer eds-tokens`, opened by the layer order
+ * statement (ADR-0028 point 6, #5423). Unwrap it before parsing: the block parser
+ * below is flat, so the wrap would otherwise swallow the first rule into a
+ * block whose selector is `@layer eds-tokens`. The structure is asserted in
+ * its own test, so a bundle that lost the wrap fails loudly there instead of
+ * silently parsing as something else.
+ *
+ * The order statement is pinned verbatim, including `eds-tokens-legacy`,
+ * which this bundle never emits into. Layer order is fixed by first
+ * declaration and an unnamed layer is appended last, so a statement that
+ * disagrees with the one in `eds-core-react/src/components/next/index.css`
+ * puts the legacy bundle on top in whichever app loads this file first.
+ */
+const LAYER_ORDER =
+  '@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;'
+const LAYER_WRAP = /^\s*@layer [^;]+;\s*@layer eds-tokens \{([\s\S]*)\}\s*$/
+
+const raw = fs.readFileSync(bundle, 'utf-8').replace(/\/\*[\s\S]*?\*\//g, '')
+const css = raw.match(LAYER_WRAP)?.[1] ?? raw
 
 const blocks: Block[] = [...css.matchAll(/([^{}]+)\{([^}]*)\}/g)].map(
   ([, selector, body]) => ({
@@ -87,7 +119,20 @@ const refersOnlyToElevationAliases = (block: Block) =>
   )
 
 describe('subtree scoping in the Tokens Studio CSS bundle', () => {
-  it('has only flat rules, which the block parser relies on', () => {
+  it('opens with the layer order statement and wraps the rest in @layer eds-tokens', () => {
+    expect(raw.trimStart().startsWith(LAYER_ORDER)).toBe(true)
+    expect(raw).toMatch(LAYER_WRAP)
+  })
+
+  it('declares the same layer order as the components CSS entry', () => {
+    const components = fs
+      .readFileSync(componentsEntry, 'utf-8')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+
+    expect(components.match(/@layer [^{;]+;/)?.[0]).toBe(LAYER_ORDER)
+  })
+
+  it('has only flat rules inside the layer, which the block parser relies on', () => {
     expect(css).not.toMatch(/@[\w-]+/)
   })
 
