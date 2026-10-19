@@ -40,7 +40,33 @@ fix: correct Placeholder styling
 feat!: change Button API
 ```
 
-> **Note:** Use the conventional-commit `!` marker for breaking changes in beta components. The version base is pinned at `3.0.0` (`versioning: "prerelease"` in `release-please-config.json`), so `!` does not bump the major — it only increments the beta counter — while giving consumers a "⚠ BREAKING CHANGES" section in the changelog and release notes.
+> **Note:** Use the conventional-commit `!` marker for breaking changes in beta components. The version base is pinned at `3.0.0` (`versioning: "prerelease"` in `release-please-config.json`), so `!` does not bump the major. It only increments the beta counter, while giving consumers a "⚠ BREAKING CHANGES" section in the changelog and release notes.
+
+### Marking breaking changes
+
+**What `!` covers.** A change within the beta line: props, markup or behaviour that someone on an earlier beta relies on. How a component differs from EDS 1.0 belongs on the Storybook page "EDS 2.0 (beta) / Breaking changes" (see [Breaking Changes Policy](#breaking-changes-policy)), not in a `!`. A new component is a plain `feat:`, even when it replaces a 1.0 one.
+
+**Keep `!` commits inside `/next`.** Release-please judges a commit against every package whose files it touches. Inside `/next` a `!` only bumps the beta counter, but if the same commit also touches the rest of `packages/eds-core-react`, `package.json` included, it cuts a major of the stable 2.x line. Only `stories/`, `.storybook/` and `tests/` are excluded. Split a mixed change into separate PRs.
+
+**Put `!` in the PR title and the footer in the PR description.** The repo squash-merges with the PR title as the commit title and the PR description as its body, so those two are what release-please reads. The branch commits are dropped. Write the footer, for example a migration hint, on its own line in the PR description, where reviewers see it before it reaches the changelog:
+
+```
+BREAKING CHANGE: `className` and `style` now land on the root element. To reach the native input, use a descendant selector, e.g. `.my-field input { ... }`.
+```
+
+Without the footer the changelog only repeats the title, as it did for #5509. With it, the hint lands in the "⚠ BREAKING CHANGES" section, as for #5409.
+
+**Forgot the `!` or the footer?** It can still be fixed after the merge, as long as the release PR that picks the commit up has not been merged. Add this block to the description of the merged PR:
+
+```
+BEGIN_COMMIT_OVERRIDE
+fix!: default Tooltip (next) placement to bottom, matching EDS 1.0
+
+BREAKING CHANGE: Tooltip opens below its trigger by default. Pass `placement="top"` to keep the old position.
+END_COMMIT_OVERRIDE
+```
+
+Release-please reads the block in place of the commit message. Run `release_please.yml` from the Actions tab so the release PR is regenerated straight away, rather than at the next push to `main`. Editing the release PR by hand does not last: it is overwritten on the next push.
 
 ### Stable Release (for existing components)
 
@@ -70,8 +96,8 @@ fix: correct positioning logic
 # Install beta version
 npm install @equinor/eds-core-react@beta
 
-# Or use specific beta version
-npm install @equinor/eds-core-react@2.0.0-beta.1
+# Or use a specific beta version (replace N with the beta number)
+npm install @equinor/eds-core-react@3.0.0-beta.N
 ```
 
 ```typescript
@@ -139,7 +165,7 @@ pnpm storybook
 
 Beta versions follow a fixed series pinned at the upcoming major: `3.0.0-beta.1`, `3.0.0-beta.2`, etc.
 
-The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`.
+The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`. See [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md) for the reasoning.
 
 ## `@equinor/eds-tokens`: Whole Package in Beta
 
@@ -153,6 +179,7 @@ The tokens package works differently from core-react's dual model: while the tok
 - **Version scheme**: pinned `3.0.0-beta.N` — the base never moves. The entry uses release-please's `prerelease` versioning strategy (`versioning: "prerelease"`, `prerelease: true`), which at a `x.0.0` base increments only the counter for every commit type (`fix`, `feat`, even `feat!`). See `.github/release-please-config.md` for details, including why the version lives in `version.txt` rather than `package.json`.
 - **Automatic cadence**: each release in Tokens Studio triggers `tokens_studio_release.yaml`, which opens a `feat: update tokens from Tokens Studio release` PR. Merging it makes release-please add an `eds-tokens` bump to the release PR; merging _that_ publishes `3.0.0-beta.N` to the `beta` dist-tag via `publish_tokens.yaml`. Any other `fix`/`feat` commit touching the package cuts a beta the same way.
 - **Package contents**: the beta ships everything 2.x ships **plus** the Tokens Studio output, injected at publish time as three temporary additive `exports` wildcards (`./next/css/*`, `./next/dtcg/*`, `./next/ts/*`). The wildcards are a publishing mechanic, not the consumer contract: only `next/css/variables.css`, `next/ts/semantic/*` and `next/ts/density/*` are published API, everything else they serve is internal (ADR-0028 point 7). The consumer-facing version is in [the package README](../../packages/eds-tokens/README.md#beta-the-redefined-token-structure). Repointing the stable specifiers (`./css/variables` etc.) to the new output is planned before graduation so consumers won't need to change imports.
+- **Loading both bundles**: `next/css/variables.css` is wrapped in `@layer eds-tokens` (ADR-0028 point 6); the legacy `css/variables` is unlayered and therefore wins the ten names both declare (`--eds-elevation-low/high`, the eight `--eds-typography-header-*-font-size`). An app that loads both and wants the new values puts legacy in a lower layer: `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;` followed by `@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);`. Quote the statement in full, including the two component layers: layer order is fixed by first declaration and any name it leaves out is appended last, so a shorter statement puts `eds-elements` and `eds-components` above the app's own layers rather than below them. The overlap disappears at the `./css/variables` repoint.
 - **Urgent stable patch**: if a critical 2.x fix is needed during the transition, it's a manual publish from the `eds-tokens@v2.3.1` tag — the automated channel only produces betas.
 - **Graduation**: tokens graduate together with the components as part of the single `3.0.0` major — flip `prerelease` to `false` and switch the dist-tag in `trigger_publish.yml` back to `latest`.
 
@@ -240,7 +267,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 4. **Create release with detailed migration guide**:
 
    ```bash
-   git commit -m "feat(eds-core-react)!: graduate all EDS 2.0 components
+   git commit -m "feat!: graduate all EDS 2.0 components
 
    BREAKING CHANGE: All components replaced with EDS 2.0 implementations.
 
@@ -283,7 +310,7 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 **Within `/next` (beta releases):**
 
 - ✅ Breaking changes are allowed and expected
-- ✅ Mark them with `!` and a `BREAKING CHANGE:` footer (e.g. `fix!: ...`) so they appear under "⚠ BREAKING CHANGES" in the changelog
+- ✅ Mark them with `!` in the PR title so they appear under "⚠ BREAKING CHANGES" in the changelog. See [Marking breaking changes](#marking-breaking-changes) for what counts, the path rule and how to keep a `BREAKING CHANGE:` footer through the squash merge
 - ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it is what the migration guide grows out of at graduation (#5387). Keep the answer current: when a PR moves a component's props, composition, markup or behaviour, the section has to describe 2.0 as it then stands. It is not a changelog, so leave beta-to-beta wording out of it and put that in the commit message and the PR description. CI enforces this, and not only when the PR is marked breaking: editing any `.ts` or `.tsx` file of a published component without touching the page fails the "Breaking changes page entry" check. If the EDS 1.0 to 2.0 answer is unchanged, add the `skip-breaking-changes-doc` label and say why in the description
 - ✅ A new `/next` component needs its section on that page in the same PR that exports it. Most 2.0 components rewrite a 1.0 predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. Where there is no 1.0 counterpart, follow `## Badge` and `## Link` on the page; where the component splits a 1.0 one, as Combobox splits `Autocomplete` with `multiple`, name that component and the usage this half comes from and link the two sections. CI fails on a component exported from the `/next` barrel with no section
 - ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
@@ -357,7 +384,7 @@ npm view @equinor/eds-core-react@beta version
 
 - Confirm the release PR updated the correct changelog (`CHANGELOG.md` for stable, `src/components/next/CHANGELOG.md` for beta)
 - Review `trigger_publish.yml` workflow logs (look for `detect-release` step output to see which changelog was detected)
-- Manually retag if needed: `npm dist-tag add @equinor/eds-core-react@2.0.0-beta.1 beta`
+- Manually retag if needed, replacing `N` with the beta number: `npm dist-tag add @equinor/eds-core-react@3.0.0-beta.N beta`
 
 ### Components not found in `/next` import
 

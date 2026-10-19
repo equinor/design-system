@@ -19,15 +19,18 @@ export type CheckboxProps = {
     onPress?: (checked: boolean) => void;
     /**
      * Whether the checkbox is in its disabled state.
+     * @default false
      */
     disabled?: boolean;
     /**
      * Whether the checkbox should be in its checked state.
+     * @default false
      */
     checked?: boolean;
     /**
      * Whether the checkbox should be in its indeterminate state.
      * Takes precedence over `checked`.
+     * @default false
      */
     indeterminate?: boolean;
     /**
