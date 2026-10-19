@@ -117,6 +117,14 @@ Each module is imported directly; there is no barrel. The objects are `as const`
 exports its type, so `Semantic` gives you autocompletion and a compile error on a name that does not
 exist.
 
+:::note The `.ts` extension is temporary
+
+The `next/ts/*` export pattern does not supply a file extension today, so the specifier has to carry
+one. [Issue #5671](https://github.com/equinor/design-system/issues/5671) moves the extension into
+the pattern, and these imports lose it again in the beta that follows.
+
+:::
+
 :::warning The colour scheme does not switch for you
 
 In CSS you write one name and the `data-color-scheme` attribute decides the value. In TypeScript

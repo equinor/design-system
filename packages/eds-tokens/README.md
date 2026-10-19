@@ -55,7 +55,11 @@ Write the `.ts` extension. The `next/*` patterns map `*` straight onto a file
 path (`"./next/ts/*": "./src/tokens/ts/*"`), so the extension has to be in the
 specifier. This is the opposite of the 2.x specifiers below, where the pattern
 supplies it (`"./ts/typography/*": "./build/ts/typography/*.ts"`) and you write
-`ts/typography/font-family-ui` without one.
+`ts/typography/font-family-ui` without one. The asymmetry is a packaging
+oversight rather than a convention:
+[#5671](https://github.com/equinor/design-system/issues/5671) moves the
+extension into the pattern, and the specifiers lose it again in the beta that
+follows.
 
 Everything else under `next/*` (the primitive, colour-scheme and font layers,
 the granular CSS files and the DTCG export) is resolution plumbing, not API. It
@@ -82,10 +86,9 @@ app that also loads the legacy `css/variables` bundle has to put it in the
 share. The recipe is in `documentation/how-to/BETA_RELEASE_GUIDE.md`.
 
 The colour names need an attribute to resolve. They are declared on `:root`, but
-the values they alias are not, and there is no `prefers-color-scheme` fallback.
-Set `data-color-scheme` on the root element, or on any ancestor of the subtree
-you are styling. Density defaults to `comfortable`, so `data-density` is only
-needed to switch away from it:
+the values they alias are not. Set `data-color-scheme` on the root element, or
+on any ancestor of the subtree you are styling. Density defaults to
+`comfortable`, so `data-density` is only needed to switch away from it:
 
 ```html
 <html data-color-scheme="light" data-density="comfortable">
@@ -102,6 +105,12 @@ What each group of names needs:
 A colour name used without `data-color-scheme` falls back to the inherited or
 initial value for the property, so the symptom is unstyled output rather than an
 error.
+
+There is deliberately no `prefers-color-scheme` fallback
+([ADR-0010](../../documentation/adr/0010-single-bundled-css-entry-for-eds-tokens-3.md)).
+The bundle provides the switch and your app decides the policy, whether that is
+a user setting, a `matchMedia` listener on the OS preference, or a fixed value.
+The 2.x bundle follows the OS on its own; that behaviour does not carry over.
 
 Components then bind to the semantic names:
 
