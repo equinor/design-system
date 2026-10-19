@@ -21,7 +21,17 @@ the legacy Style Dictionary build in `build/`. The `next/*` subpaths last
 only until the `/next` components finish migrating to the new variable
 names; the output then moves to the final specifiers within the beta line —
 see [ADR-0009](../../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)
-for the full lifecycle. Note that `./next/ts/*` ships raw `.ts` modules
-(no compiled `.js`/`.d.ts`), so it requires a TypeScript-aware consumer.
+for the full lifecycle.
+
+The `./next/ts/*` pattern supplies the `.ts` extension, so the specifier
+carries none: `@equinor/eds-tokens/next/ts/semantic/light`, matching the
+2.x `./ts/*` patterns that `eds-mobile-components` already imports from.
+Betas up to `3.0.0-beta.8` behaved the other way round and needed
+`light.ts` spelled out; that is fixed from the next beta
+([#5671](https://github.com/equinor/design-system/issues/5671)). The `css`
+and `dtcg` patterns stay bare, because their specifiers name a file
+(`next/css/variables.css`). Note that `./next/ts/*` ships raw `.ts`
+modules (no compiled `.js`/`.d.ts`), so it requires a TypeScript-aware
+consumer.
 
 Pipeline documentation: [`documentation/agent-instructions/TOKENS_STUDIO.md`](../../../../documentation/agent-instructions/TOKENS_STUDIO.md).
