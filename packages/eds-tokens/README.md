@@ -73,25 +73,35 @@ Import the bundle once in your application:
 @import '@equinor/eds-tokens/next/css/variables.css';
 ```
 
-Most semantic names need an attribute to resolve. They are declared on `:root`,
-but the values they alias are not, and there is no `prefers-color-scheme`
-fallback and no default density. Set both attributes on the root element, or on
-any ancestor of the subtree you are styling:
+The bundle is wrapped in `@layer eds-tokens` and opens with the layer order
+statement `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
+(ADR-0028 point 6). Unlayered CSS beats any layer, so your own
+`:root { --eds-spacing-md: 20px }` retunes a token with no specificity fight. An
+app that also loads the legacy `css/variables` bundle has to put it in the
+`eds-tokens-legacy` layer, otherwise it wins the ten names the two bundles
+share. The recipe is in `documentation/how-to/BETA_RELEASE_GUIDE.md`.
+
+The colour names need an attribute to resolve. They are declared on `:root`, but
+the values they alias are not, and there is no `prefers-color-scheme` fallback.
+Set `data-color-scheme` on the root element, or on any ancestor of the subtree
+you are styling. Density defaults to `comfortable`, so `data-density` is only
+needed to switch away from it:
 
 ```html
 <html data-color-scheme="light" data-density="comfortable">
 ```
 
-Which attribute a name needs:
+What each group of names needs:
 
-| Names                                                                       | Resolve under       |
-| --------------------------------------------------------------------------- | ------------------- |
-| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-elevation-*` | `data-color-scheme` |
-| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`            | `data-density`      |
-| `--eds-family-*`, `--eds-weight-*`                                          | neither             |
+| Names                                                                       | Needs                                                                  |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-elevation-*` | `data-color-scheme`, which has no default                              |
+| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`            | `data-density` to pick `compact` or `relaxed`, `comfortable` otherwise |
+| `--eds-family-*`, `--eds-weight-*`                                          | nothing                                                                |
 
-A name whose attribute is missing falls back to the inherited or initial value
-for the property, so the symptom is unstyled output rather than an error.
+A colour name used without `data-color-scheme` falls back to the inherited or
+initial value for the property, so the symptom is unstyled output rather than an
+error.
 
 Components then bind to the semantic names:
 
