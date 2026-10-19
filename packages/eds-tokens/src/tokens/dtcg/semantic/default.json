@@ -1439,7 +1439,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.8}"
+          "$value": "{info.9}"
         },
         "hover": {
           "$extensions": {
@@ -1450,7 +1450,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.9}"
+          "$value": "{info.10}"
         },
         "pressed": {
           "$extensions": {
@@ -1461,7 +1461,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.10}"
+          "$value": "{info.11}"
         }
       },
       "neutral": {
@@ -3246,7 +3246,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.8}"
+          "$value": "{info.9}"
         },
         "hover": {
           "$extensions": {
@@ -3261,7 +3261,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.9}"
+          "$value": "{info.10}"
         },
         "pressed": {
           "$extensions": {
@@ -3276,7 +3276,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.10}"
+          "$value": "{info.11}"
         }
       },
       "success": {
@@ -3620,7 +3620,7 @@
         }
       },
       "$type": "color",
-      "$value": "{neutral.8}"
+      "$value": "{neutral.9}"
     },
     "tertiary": {
       "$extensions": {
@@ -3968,7 +3968,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.8}"
+          "$value": "{info.9}"
         },
         "hover": {
           "$extensions": {
@@ -3983,7 +3983,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.9}"
+          "$value": "{info.10}"
         },
         "pressed": {
           "$extensions": {
@@ -3998,7 +3998,7 @@
             }
           },
           "$type": "color",
-          "$value": "{info.10}"
+          "$value": "{info.11}"
         }
       }
     },
@@ -4253,7 +4253,7 @@
         }
       },
       "$type": "color",
-      "$value": "{neutral.8}"
+      "$value": "{neutral.9}"
     },
     "tertiary": {
       "$extensions": {
