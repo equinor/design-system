@@ -98,7 +98,7 @@ Any other heading or metadata key fails the generator. Metadata is not content a
 
 **Usage.** The smallest correct snippet, without the import. The generator adds the install command and the import.
 
-**Props.** Generated from `NameProps`. Every prop needs a JSDoc description, or the generator fails, and a `@default` tag where it has a default. Props declared in `node_modules`, such as HTML attributes and `ViewProps`, are not listed. Props from a base type in this repo are. With no props of its own, mobile prints "Name has no props of its own".
+**Props.** Generated from `NameProps`. Every prop needs a JSDoc description, or the generator fails, and a `@default` tag where it has a default. Props declared in `node_modules`, such as HTML attributes and `ViewProps`, are not listed. Props from a base type in this repo are. With no props of its own, mobile prints "Name has no props of its own". A mobile sub-component named in `MOBILE_SUB_COMPONENTS` in `scripts/component-docs/config.js`, such as `Button.Icon`, gets its own table under Props, read from its `{Name}Props` type.
 
 **Overview.** Web only, and required. Written by the developer, in the stories file. The display shown right after Features, with no heading and no caption, because the Summary and Features lead into it. It shows a few instances that give a feel for the component, not every variant. Choose what suits the component: for a Badge a few tones in solid and outlined, for a Checkbox its main states. It is not listed under Examples, so it may overlap with them.
 

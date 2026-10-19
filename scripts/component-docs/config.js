@@ -9,6 +9,13 @@ const BETA_CALLOUT =
 // is required, see requiredSections per platform below.
 const OPTIONAL_SIDECAR_SECTIONS = ['Related components']
 
+// Mobile sub-components that share their parent's page and get their own props
+// table under Props, keyed by the parent. `component` is the name whose
+// `{component}Props` type lists the props, so Button.Icon reads IconButtonProps.
+const MOBILE_SUB_COMPONENTS = {
+  Button: [{ name: 'Button.Icon', component: 'IconButton' }],
+}
+
 // Optional metadata block at the top of a sidecar. These become buttons in the
 // Links row; they are not content, so they never render as a section.
 const SIDECAR_METADATA_KEYS = ['aria', 'docs']
@@ -45,6 +52,7 @@ module.exports = {
   rootDir,
   BETA_CALLOUT,
   OPTIONAL_SIDECAR_SECTIONS,
+  MOBILE_SUB_COMPONENTS,
   SIDECAR_METADATA_KEYS,
   DOCS_SITE,
   DOCS_SITE_DIR,

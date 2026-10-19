@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { rootDir, PLATFORMS } = require('./config')
+const { rootDir, PLATFORMS, MOBILE_SUB_COMPONENTS } = require('./config')
 const { fail } = require('./errors')
 const {
   locate,
@@ -53,6 +53,16 @@ function buildPages(project, component) {
     const { dir, file } = found[platform]
     const props = extractProps(findPropsDeclaration(project, dir, component))
     assertPropsDocumented(component, props)
+    const subComponents =
+      platform === 'mobile'
+        ? (MOBILE_SUB_COMPONENTS[component] ?? []).map((sub) => {
+            const subProps = extractProps(
+              findPropsDeclaration(project, dir, sub.component),
+            )
+            assertPropsDocumented(sub.component, subProps)
+            return { name: sub.name, props: subProps }
+          })
+        : []
     const { sections: sidecar, links } = readSidecar(
       path.join(dir, `${component}.docs.md`),
       cfg,
@@ -60,6 +70,7 @@ function buildPages(project, component) {
     const ctx = {
       relDir: path.relative(rootDir, dir),
       props,
+      subComponents,
       stories: extractStories(
         project,
         path.join(dir, `${component}.stories.tsx`),

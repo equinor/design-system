@@ -99,9 +99,14 @@ function renderMobile(component, ctx) {
     usageSection(component, 'mobile', ctx),
     section(
       'Props',
-      ctx.props.length
-        ? renderPropsTable(ctx.props)
-        : `${component} has no props of its own.`,
+      [
+        ctx.props.length
+          ? renderPropsTable(ctx.props)
+          : `${component} has no props of its own.`,
+        ...(ctx.subComponents ?? []).map(
+          (sub) => `### ${sub.name}\n\n${renderPropsTable(sub.props)}`,
+        ),
+      ].join('\n\n'),
     ),
     examplesSection(component, 'mobile', examples),
     ...closingSections(ctx),

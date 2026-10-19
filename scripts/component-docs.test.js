@@ -131,6 +131,40 @@ describe('mobile page: Overview is not special', () => {
   })
 })
 
+describe('mobile page: sub-components', () => {
+  const sub = {
+    name: 'Thing.Icon',
+    props: [
+      {
+        name: 'name',
+        optional: false,
+        type: 'string',
+        default: undefined,
+        description: 'Name of the icon.',
+      },
+    ],
+  }
+
+  test('each gets its own props table under Props, before Examples', () => {
+    const page = renderMobile(
+      'Thing',
+      context([story('Sizes', { caption: 'Two sizes.' })], {
+        subComponents: [sub],
+      }),
+    )
+    assert.ok(page.includes('### Thing.Icon\n\n| Prop | Type |'))
+    assert.ok(page.indexOf('### Thing.Icon') < page.indexOf('## Examples'))
+  })
+
+  test('a page without sub-components has no extra heading', () => {
+    const page = renderMobile(
+      'Thing',
+      context([story('Sizes', { caption: 'Two sizes.' })]),
+    )
+    assert.ok(!page.includes('### Thing.Icon'))
+  })
+})
+
 describe('every example needs a caption', () => {
   test('web fails with a clear message, listing every example missing one', () => {
     assert.throws(
