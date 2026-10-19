@@ -21,7 +21,6 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import { pendingNames } from './pending-spacing-steps.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const app = join(here, '..')
@@ -111,14 +110,6 @@ if (existsSync(legacyBuild)) {
   )) {
     declared.add(m[1])
   }
-}
-
-// Steps that are merged in Tokens Studio but not in the package yet. The pages document them on
-// purpose, so their names are accepted here rather than reported as typos. This list shrinks to
-// nothing when the release merges, and the generator is what tells you to empty it.
-for (const name of pendingNames()) {
-  canon.add(name)
-  cssCanon.add(`--eds-${name.replaceAll('.', '-')}`)
 }
 
 // The typography scale page names primitive steps, such as `lineheight-scale.1200`, to explain the

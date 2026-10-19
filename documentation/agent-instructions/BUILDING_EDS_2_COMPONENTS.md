@@ -395,7 +395,7 @@ describe('ComponentName (next)', () => {
 
 ### `ComponentName.stories.tsx`
 
-The docs page is generated from the types, the stories and `ComponentName.docs.md`, see [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md). Do not write a beta callout, an import snippet or a description in the story file, because the page generates them. The component needs at least one example besides `Introduction`.
+The docs page is generated from the types, the stories and `ComponentName.docs.md`, see [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md). Do not write a beta callout, an import snippet or a description in the story file, because the page generates them. The component needs an `Overview` story, shown right after Features with no heading and no caption, and at least one other example besides `Introduction` and `Overview`. Give every example a caption, the generator fails without one.
 
 ```typescript
 import type { Meta, StoryFn } from '@storybook/react-vite'
@@ -413,6 +413,15 @@ export default meta
 export const Introduction: StoryFn<ComponentNameProps> = (args) => {
   return <ComponentName {...args} />
 }
+
+// Required. A few instances that give a feel for the component, shown right
+// after Features. No heading, no caption.
+export const Overview: StoryFn<ComponentNameProps> = () => (
+  <>
+    <ComponentName>Primary</ComponentName>
+    <ComponentName>Secondary</ComponentName>
+  </>
+)
 
 // Every other export becomes an example on the docs page.
 export const Variants: StoryFn<ComponentNameProps> = () => (

@@ -66,11 +66,11 @@ Two checks need a running server and are not in CI — the viewport-overflow gat
 
 Content lives in `docs/` as Markdown and MDX. For tone of voice, section order and the component-doc template, see [`COMPONENT_DOC_STYLE.md`](../../documentation/agent-instructions/COMPONENT_DOC_STYLE.md).
 
-Three tone guides are available, and are excluded from the build:
+Three tone guides live in [`documentation/agent-instructions/tone-guide/`](../../documentation/agent-instructions/tone-guide/index.md):
 
-- [Friendly Professional](./docs/tone-guide/friendly-professional.md) — the default
-- [Friendly Minimalist Blend](./docs/tone-guide/friendly-minimalist-blend.md) — concise but approachable
-- [Minimalist](./docs/tone-guide/minimalist.md) — essential information only
+- [Friendly Professional](../../documentation/agent-instructions/tone-guide/friendly-professional.md): the default
+- [Friendly Minimalist Blend](../../documentation/agent-instructions/tone-guide/friendly-minimalist-blend.md): concise but approachable
+- [Minimalist](../../documentation/agent-instructions/tone-guide/minimalist.md): essential information only
 
 Unwritten component docs are parked as `_name.md`. Docusaurus skips `_`-prefixed files, so they stay out of the build, the sidebar and the search index; drop the underscore, add a `description`, and add the doc id to `componentsSidebar` in `sidebars.ts` to publish one.
 

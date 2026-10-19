@@ -25,8 +25,10 @@
   --docs-font-hero-size: clamp(2.75rem, 7.78vw, 6rem); /* site-local */
 
   /* All roles reference the SEMANTIC token layer only. The header-*
-     font-size names collide with the legacy bundle; the semantic typography
-     bridge in theme-variables.css pins them to the Tokens Studio values.
+     font-size names collide with the legacy bundle; the layer statement in
+     theme-variables.css puts legacy in eds-tokens-legacy, below the Tokens
+     Studio bundle's own eds-tokens, so these resolve to the Tokens Studio
+     values.
 
      Running text (lead, prose) takes the body role and everything else the
      label role. */
