@@ -50,7 +50,7 @@ Use selection controls when users need to:
 
 Checkboxes allow users to select one or more options from a set, or toggle a single option on/off. They are ideal for accepting terms and conditions or selecting multiple items from a list.
 
-<StoryCanvas of="Checkbox/Spacious" showLink />
+<StoryCanvas of="Checkbox/States" showLink />
 
 ### Radio
 
