@@ -415,15 +415,14 @@ export const AsChild: Story = {
   },
   decorators: [
     (Story) => (
-      // The example links go nowhere. A click scrolls to the top instead of
-      // following the link, so the page does not reload. Decorators are left
-      // out of the code shown on the docs page.
+      // The example links go nowhere. A click is stopped before it follows
+      // the link, so the page does not reload. Decorators are left out of the
+      // code shown on the docs page.
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div
         onClick={(event) => {
           if ((event.target as HTMLElement).closest('a')) {
             event.preventDefault()
-            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
       >

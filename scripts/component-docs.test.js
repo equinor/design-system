@@ -156,6 +156,17 @@ describe('mobile page: sub-components', () => {
     assert.ok(page.indexOf('### Thing.Icon') < page.indexOf('## Examples'))
   })
 
+  test('a sub-component without props says so instead of printing an empty table', () => {
+    const page = renderMobile(
+      'Thing',
+      context([story('Sizes', { caption: 'Two sizes.' })], {
+        subComponents: [{ name: 'Thing.Icon', props: [] }],
+      }),
+    )
+    assert.ok(page.includes('Thing.Icon has no props of its own.'))
+    assert.ok(!page.includes('| Prop | Type |'))
+  })
+
   test('a page without sub-components has no extra heading', () => {
     const page = renderMobile(
       'Thing',

@@ -104,7 +104,12 @@ function renderMobile(component, ctx) {
           ? renderPropsTable(ctx.props)
           : `${component} has no props of its own.`,
         ...(ctx.subComponents ?? []).map(
-          (sub) => `### ${sub.name}\n\n${renderPropsTable(sub.props)}`,
+          (sub) =>
+            `### ${sub.name}\n\n${
+              sub.props.length
+                ? renderPropsTable(sub.props)
+                : `${sub.name} has no props of its own.`
+            }`,
         ),
       ].join('\n\n'),
     ),

@@ -4,7 +4,7 @@
 
 - Can have an icon before the label, after it, or both.
 - Changes its background while it is pressed.
-- Looks greyed out when disabled, whatever its tone is.
+- Dims its label and icons when disabled.
 - Has an icon-only variant, `Button.Icon`, for compact actions. It takes the same `tone`, `size` and `variant`, and its own props are listed under Props.
 
 ## Usage
