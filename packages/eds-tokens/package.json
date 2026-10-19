@@ -52,6 +52,7 @@
     "types": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
+    "strip:internal-token-sets": "node scripts/strip-internal-token-sets.mjs",
     "generate:ts-tokens": "node scripts/generate-ts-tokens.mjs",
     "generate:css-bundle": "node scripts/widen-semantic-scope.mjs && node scripts/generate-css-bundle.mjs && node scripts/assert-no-duplicate-names.mjs",
     "check:css:names": "node scripts/assert-no-duplicate-names.mjs",

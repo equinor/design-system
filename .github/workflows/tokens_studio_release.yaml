@@ -88,6 +88,14 @@ jobs:
         run: pnpm --filter @equinor/eds-tokens exec studio exports run 39d37416-632b-4f04-b49b-cfaec63e3baa --ci --verbose --out src/tokens/css
       - name: Run DTCG export from Tokens Studio (EDS-DTCG)
         run: pnpm --filter @equinor/eds-tokens exec studio exports run 019463d4-9bef-4e37-9425-6de80eec87c8 --ci --verbose --out src/tokens/dtcg
+      # The foundation and input sets are the palette maths. They stay
+      # Enabled in Studio (#5551), which cannot yet leave them out of an
+      # export, so they land in every colour-scheme file. Nothing
+      # published references them, so strip them before the TS modules
+      # and the bundle are built (#5657). Warns, without failing, once
+      # there is nothing left to strip.
+      - name: Strip internal token sets (foundation, input)
+        run: pnpm --filter @equinor/eds-tokens run strip:internal-token-sets
       # TypeScript token modules are generated locally from the DTCG
       # export (structure) + CSS export (evaluated values) — the platform
       # has no TS export format. See the script header for details.
