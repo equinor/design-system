@@ -1,5 +1,6 @@
 import { useState, type ReactNode, type ComponentProps } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useArgs } from 'storybook/preview-api'
 import { Chip } from './Chip'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
@@ -87,13 +88,11 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
 export const Default: Story = {
   render: (args) => {
-    const [selected, setSelected] = useState(false)
+    // Clicking updates the `selected` arg, so the control and the chip
+    // stay in step
+    const [, updateArgs] = useArgs()
     return (
-      <Chip
-        {...args}
-        selected={selected}
-        onClick={() => setSelected(!selected)}
-      >
+      <Chip {...args} onClick={() => updateArgs({ selected: !args.selected })}>
         Chip
       </Chip>
     )
