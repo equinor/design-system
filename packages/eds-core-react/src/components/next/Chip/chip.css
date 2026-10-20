@@ -1,30 +1,19 @@
 @layer eds-components {
   .eds-chip {
-    /* Replaces data-space-proportions="squished" — squished vertical spacing for sm selectable space */
-    --eds-spacing-proportions-sm-vertical: var(
-      --eds-spacing-inset-sm-vertical-squished
-    );
+    /* Spacing and typography, per the Chip Figma component. The label is
+     * label.md and is not trimmed (ADR-0029), so the line box carries its
+     * own vertical space and the padding needs no compensation: 4px + 20px
+     * line height + 4px gives 28px at Comfortable. All values follow the
+     * density the chip sits in. */
+    --_font-size: var(--eds-typography-label-md-font-size);
+    --_line-height: var(--eds-typography-label-md-line-height);
+    --_padding-block: var(--eds-spacing-3xs);
+    --_padding-inline: var(--eds-spacing-sm);
+    --_gap: var(--eds-spacing-3xs);
 
-    /* Replaces data-font-size="md" — sets icon size and gap tokens for md context */
-    --eds-typography-icon-size: var(--eds-sizing-icon-md);
-    --eds-typography-gap-horizontal: var(--eds-spacing-icon-md-gap-horizontal);
-
-    /* Typography metrics — same compensation pattern as Button */
-    --_label-font-size: var(--eds-typography-ui-body-md-font-size);
-    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
-    --_label-height: round(1cap, 4px); /* Figma has a cap-rounded value but it is not exposed as a CSS token; 1cap gives the same result (Inter metrics + 4px grid) */
-    --_font-family: var(--eds-typography-ui-body-font-family);
-    --_padding-block: var(--eds-selectable-space-vertical);
-
-    /*
-     * Reduce block padding by half the line-height overflow so the visual
-     * height equals (padding × 2 + cap-height) instead of (padding × 2 + line-height).
-     * e.g. 8px − (16px − 12px) / 2 = 6px → total 28px
-     */
-    --_padding-adjusted: calc(
-      var(--_padding-block) -
-        (var(--_label-line-height) - var(--_label-height)) / 2
-    );
+    /* Figma binds the icon size to spacing.md. The redefined tokens have no
+     * size tokens. */
+    --_icon-size: var(--eds-spacing-md);
 
     /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
      * selects the tone (Chip always sets it, default tone is neutral). Neutral
@@ -56,9 +45,7 @@
      * not use them. */
     --_text-emphasis: var(--eds-text-on-emphasis-neutral);
     --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
-    --_border: var(
-      --eds-border-interactive-neutral-emphasis-default
-    );
+    --_border: var(--eds-border-interactive-neutral-emphasis-default);
     --_border-hover: var(--eds-border-interactive-neutral-emphasis-hover);
     --_border-pressed: var(--eds-border-interactive-neutral-emphasis-pressed);
 
@@ -66,19 +53,19 @@
     user-select: none;
 
     display: inline-flex;
-    gap: var(--eds-typography-gap-horizontal);
+    gap: var(--_gap);
     align-items: center;
 
     box-sizing: border-box;
-    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
-    padding-block: var(--_padding-adjusted);
-    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--_padding-block);
+    padding-inline: var(--_padding-inline);
     border: none;
-    border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
+    border-radius: var(--eds-corner-radius-pill);
 
-    font-family: var(--_font-family);
-    font-size: var(--_label-font-size);
-    line-height: var(--_label-line-height);
+    font-family: var(--eds-font-family-ui);
+    font-size: var(--_font-size);
+    font-weight: var(--eds-font-weight-normal);
+    line-height: var(--_line-height);
     color: var(--_text);
 
     /* Fill and (on outlined) the box-shadow border change between states —
@@ -108,9 +95,7 @@
       );
       --_text: var(--eds-text-on-muted-accent);
       --_icon: var(--eds-icon-on-default-accent);
-      --_border: var(
-        --eds-border-interactive-accent-emphasis-default
-      );
+      --_border: var(--eds-border-interactive-accent-emphasis-default);
       --_border-hover: var(--eds-border-interactive-accent-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-accent-emphasis-pressed);
     }
@@ -132,13 +117,9 @@
       );
       --_text: var(--eds-text-on-muted-success);
       --_icon: var(--eds-icon-on-default-success);
-      --_border: var(
-        --eds-border-interactive-success-emphasis-default
-      );
+      --_border: var(--eds-border-interactive-success-emphasis-default);
       --_border-hover: var(--eds-border-interactive-success-emphasis-hover);
-      --_border-pressed: var(
-        --eds-border-interactive-success-emphasis-pressed
-      );
+      --_border-pressed: var(--eds-border-interactive-success-emphasis-pressed);
     }
 
     &[data-color-appearance='info'] {
@@ -154,9 +135,7 @@
       );
       --_text: var(--eds-text-on-muted-info);
       --_icon: var(--eds-icon-on-default-info);
-      --_border: var(
-        --eds-border-interactive-info-emphasis-default
-      );
+      --_border: var(--eds-border-interactive-info-emphasis-default);
       --_border-hover: var(--eds-border-interactive-info-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-info-emphasis-pressed);
     }
@@ -178,13 +157,9 @@
       );
       --_text: var(--eds-text-on-muted-warning);
       --_icon: var(--eds-icon-on-default-warning);
-      --_border: var(
-        --eds-border-interactive-warning-emphasis-default
-      );
+      --_border: var(--eds-border-interactive-warning-emphasis-default);
       --_border-hover: var(--eds-border-interactive-warning-emphasis-hover);
-      --_border-pressed: var(
-        --eds-border-interactive-warning-emphasis-pressed
-      );
+      --_border-pressed: var(--eds-border-interactive-warning-emphasis-pressed);
     }
 
     &[data-color-appearance='danger'] {
@@ -202,9 +177,7 @@
       );
       --_text: var(--eds-text-on-muted-danger);
       --_icon: var(--eds-icon-on-default-danger);
-      --_border: var(
-        --eds-border-interactive-danger-emphasis-default
-      );
+      --_border: var(--eds-border-interactive-danger-emphasis-default);
       --_border-hover: var(--eds-border-interactive-danger-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-danger-emphasis-pressed);
     }
@@ -277,10 +250,16 @@
 
     /* ===== ICONS ===== */
 
+    /* The icon fits inside the 20px line box, so flex centring places it
+     * and it needs none of Icon's optical margins: the gap is the only
+     * space between icon and label, as in Figma. */
     & .eds-icon {
       flex-shrink: 0;
-      margin-block: calc(-1 * var(--_padding-adjusted));
-      margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
+
+      width: var(--_icon-size);
+      height: var(--_icon-size);
+      margin: 0;
+
       color: var(--_icon);
     }
 
@@ -299,12 +278,12 @@
 
 /*
  * Label needs inline-flex to center custom icons with text.
- * text-box: normal disables baseline trimming — chip handles sizing via
- * padding + flexbox centering.
+ * text-box: normal makes sure nothing trims the label (ADR-0029) — chip
+ * handles sizing via padding + flexbox centering.
  */
 .eds-chip > .label {
   display: inline-flex;
-  gap: var(--eds-typography-gap-horizontal);
+  gap: var(--_gap);
   align-items: center;
 
   padding-block: 0;

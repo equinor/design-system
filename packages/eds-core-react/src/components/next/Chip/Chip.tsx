@@ -50,7 +50,6 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
       className={classes}
       data-variant={variant}
       data-color-appearance={tone}
-      data-selectable-space="sm"
       data-selected={selected || undefined}
       aria-pressed={toggleable ? selected : undefined}
       aria-expanded={dropdown ? selected : undefined}
