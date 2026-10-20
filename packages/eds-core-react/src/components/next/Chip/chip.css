@@ -22,12 +22,9 @@
     /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
      * selects the tone (Chip always sets it, default tone is neutral). Neutral
      * maps text to --eds-text-primary by design (#5283). Non-neutral tones use
-     * --eds-text-on-muted-{tone} (shade 12) for label text and
-     * --eds-icon-on-default-{tone} (shade 10) for icons. The steps follow the
-     * documented readability targets (#5330): text aims for APCA Lc 90 (first
-     * step that clears it is 12), icons aim for Lc 60 (step 10 clears it) —
-     * the split is target-driven, not surface-driven. Surfaces use
-     * --eds-background-interactive-{tone}-*. */
+     * --eds-text-on-muted-{tone} for label text and --eds-icon-on-muted-{tone}
+     * for icons, as in the Chip Figma component, so text and icon share one
+     * shade. Surfaces use --eds-background-interactive-{tone}-*. */
     --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
     --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
     --_bg-muted-pressed: var(
@@ -98,7 +95,7 @@
         --eds-background-interactive-accent-emphasis-pressed
       );
       --_text: var(--eds-text-on-muted-accent);
-      --_icon: var(--eds-icon-on-default-accent);
+      --_icon: var(--eds-icon-on-muted-accent);
       --_border: var(--eds-border-interactive-accent-emphasis-default);
       --_border-hover: var(--eds-border-interactive-accent-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-accent-emphasis-pressed);
@@ -120,7 +117,7 @@
         --eds-background-interactive-success-emphasis-pressed
       );
       --_text: var(--eds-text-on-muted-success);
-      --_icon: var(--eds-icon-on-default-success);
+      --_icon: var(--eds-icon-on-muted-success);
       --_border: var(--eds-border-interactive-success-emphasis-default);
       --_border-hover: var(--eds-border-interactive-success-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-success-emphasis-pressed);
@@ -138,7 +135,7 @@
         --eds-background-interactive-info-emphasis-pressed
       );
       --_text: var(--eds-text-on-muted-info);
-      --_icon: var(--eds-icon-on-default-info);
+      --_icon: var(--eds-icon-on-muted-info);
       --_border: var(--eds-border-interactive-info-emphasis-default);
       --_border-hover: var(--eds-border-interactive-info-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-info-emphasis-pressed);
@@ -160,7 +157,7 @@
         --eds-background-interactive-warning-emphasis-pressed
       );
       --_text: var(--eds-text-on-muted-warning);
-      --_icon: var(--eds-icon-on-default-warning);
+      --_icon: var(--eds-icon-on-muted-warning);
       --_border: var(--eds-border-interactive-warning-emphasis-default);
       --_border-hover: var(--eds-border-interactive-warning-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-warning-emphasis-pressed);
@@ -180,7 +177,7 @@
         --eds-background-interactive-danger-emphasis-pressed
       );
       --_text: var(--eds-text-on-muted-danger);
-      --_icon: var(--eds-icon-on-default-danger);
+      --_icon: var(--eds-icon-on-muted-danger);
       --_border: var(--eds-border-interactive-danger-emphasis-default);
       --_border-hover: var(--eds-border-interactive-danger-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-danger-emphasis-pressed);
