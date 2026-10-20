@@ -15,6 +15,10 @@
      * size tokens. */
     --_icon-size: var(--eds-spacing-md);
 
+    /* Border and focus ring width. There is no width token: the design uses
+     * 1px for every stroke, so the team agreed on a plain value (#5692). */
+    --_stroke-width: 1px;
+
     /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
      * selects the tone (Chip always sets it, default tone is neutral). Neutral
      * maps text to --eds-text-primary by design (#5283). Non-neutral tones use
@@ -203,8 +207,7 @@
 
       /* Inset box-shadow rather than outline, so outline stays free for the
        * focus ring (with a truly transparent offset gap, like Button). */
-      box-shadow: inset 0 0 0 var(--eds-border-width-default, 1px)
-        var(--_border);
+      box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border);
     }
 
     /* The border follows the state ladder (9 → 10 → 11), per the Figma
@@ -243,9 +246,8 @@
     /* ===== FOCUS STATE ===== */
 
     &:focus-visible {
-      outline: var(--eds-sizing-stroke-thin) solid
-        var(--eds-border-interactive-focus);
-      outline-offset: var(--eds-sizing-stroke-thin);
+      outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
+      outline-offset: var(--_stroke-width);
     }
 
     /* ===== ICONS ===== */
@@ -269,8 +271,8 @@
      * :not(:focus-visible) keeps that handover independent of source order. */
     @media (forced-colors: active) {
       &[data-variant='outlined']:not(:focus-visible) {
-        outline: var(--eds-border-width-default, 1px) solid;
-        outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+        outline: var(--_stroke-width) solid;
+        outline-offset: calc(-1 * var(--_stroke-width));
       }
     }
   }
