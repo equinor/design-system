@@ -1,14 +1,22 @@
-@import '../Foundation/registered-properties.css';
-
 @layer eds-components {
   .eds-button {
-    --_label-font-size: var(--eds-typography-ui-body-md-font-size);
-    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
-    --_label-height: round(1cap, 4px);
+    /* Spacing and typography, per the Button [EDS] Figma component. The label
+     * is label.md and is not trimmed (ADR-0029), so the line box carries its
+     * own vertical space and the padding needs no compensation: 8px + 20px
+     * line height + 8px gives 36px at Comfortable. All values follow the
+     * density the button sits in. */
+    --_font-size: var(--eds-typography-label-md-font-size);
+    --_line-height: var(--eds-typography-label-md-line-height);
+    --_padding-block: var(--eds-spacing-xs);
+    --_padding-inline: var(--eds-spacing-sm);
 
-    /* capture cap-height before SVG overrides font-size */
-    --captured-size-2: var(--_label-height);
-    --_font-family: var(--eds-typography-ui-body-font-family);
+    /* Figma binds the icon size to spacing.lg. The redefined tokens have no
+     * size tokens. */
+    --_icon-size: var(--eds-spacing-lg);
+
+    /* Border and focus ring width. There is no width token: the design uses
+     * 1px for every stroke, so the team agreed on a plain value (#5692). */
+    --_stroke-width: 1px;
 
     /* Colours from the eds-tokens beta (Tokens Studio) semantic layer.
      * The --_ indirection only exists so data-color-appearance can switch
@@ -30,32 +38,28 @@
     );
     --_color: var(--_text-emphasis);
     --_bg-color: var(--_bg-emphasis);
-    --_padding-block: var(--eds-selectable-space-vertical);
 
     cursor: pointer;
 
     /* Layout */
     display: inline-flex;
-    gap: round(0.618em, 1px);
+    gap: var(--eds-spacing-xs);
     align-items: center;
     justify-content: center;
 
     box-sizing: border-box;
-    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
-    padding-block: calc(
-      var(--_padding-block) -
-        (var(--_label-line-height) - var(--_label-height)) / 2
-    );
-    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--_padding-block);
+    padding-inline: var(--_padding-inline);
 
     /* Appearance */
     border: none;
-    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
+    border-radius: var(--eds-corner-radius-rounded);
 
-    /* Typography — ensures correct font for asChild elements */
-    font-family: var(--eds-typography-ui-body-font-family);
-    font-size: var(--_label-font-size);
-    line-height: var(--_label-line-height);
+    /* Typography, set here so asChild elements get the right font too */
+    font-family: var(--eds-font-family-ui);
+    font-size: var(--_font-size);
+    font-weight: var(--eds-font-weight-medium);
+    line-height: var(--_line-height);
     color: var(--_color);
     text-align: start;
     text-decoration: none;
@@ -71,38 +75,35 @@
       color 150ms ease-in-out;
 
     /* ===== LABEL ===== */
+    /* text-box: normal makes sure nothing trims the label (ADR-0029) */
     & .label {
-      font-family: var(--_font-family);
-      font-size: var(--_label-font-size);
-      line-height: var(--_label-line-height);
+      font-family: var(--eds-font-family-ui);
+      font-size: var(--_font-size);
+      font-weight: var(--eds-font-weight-medium);
+      line-height: var(--_line-height);
       color: var(--_color);
+
+      text-box: normal;
     }
 
-    &[data-multiline] {
-      padding-block: var(--eds-selectable-space-vertical);
-
-      .label {
-        white-space: normal;
-
-        @supports (text-box: trim-both ex alphabetic) {
-          padding-top: var(--eds-padding-top-baseline);
-          padding-bottom: 0;
-
-          text-box: trim-both ex alphabetic;
-        }
-      }
+    &[data-multiline] .label {
+      white-space: normal;
     }
 
-    & > svg {
-      --captured-size-1: var(--_label-font-size);
-      --_icon-size: calc(24px * tan(atan2(var(--captured-size-1), 1px)) / 16);
-
+    /* ===== ICONS ===== */
+    /* The icon is no taller than the label's line box, so flex centring
+     * places it and it needs none of Icon's optical margins: the gap is the
+     * only space between icon and label, as in Figma. The second selector
+     * outranks Icon's own [data-icon-size] rule, so Icon's size prop has no
+     * effect inside a button. Icons inherit the label colour: Figma binds
+     * --eds-icon-on-{emphasis,default}-{tone}, which resolve to the same
+     * shades as the text tokens. */
+    & > svg,
+    & > .eds-icon[data-icon-size] {
+      flex-shrink: 0;
       width: var(--_icon-size);
       height: var(--_icon-size);
-      margin-block: calc((var(--captured-size-2) - var(--_icon-size)) / 2);
-      margin-inline: -0.2em;
-
-      font-size: var(--_icon-size);
+      margin: 0;
     }
   }
 
@@ -146,28 +147,30 @@
   }
 
   /* ===== SIZE VARIANTS ===== */
-  /* Font size and line-height scale with data-selectable-space.
-   * Button height is derived from padding-block + line-height.
-   * min-height, gap, and padding-inline adapt automatically via the
-   * --eds-selectable-space-* tokens which are density-aware. */
+  /* The size prop sets data-selectable-space. Default (md) is set on the
+   * root; small uses label.sm: 4px + 16px line height + 4px gives 24px at
+   * Comfortable. */
 
   .eds-button[data-selectable-space='sm'] {
-    --_label-font-size: var(--eds-typography-ui-body-sm-font-size);
-    --_label-line-height: var(--eds-typography-ui-body-sm-line-height-squished);
+    --_font-size: var(--eds-typography-label-sm-font-size);
+    --_line-height: var(--eds-typography-label-sm-line-height);
+    --_padding-block: var(--eds-spacing-3xs);
+    --_padding-inline: var(--eds-spacing-xs);
+    --_icon-size: var(--eds-spacing-md);
   }
 
   /* ===== ICON-ONLY BUTTON ===== */
-  /* Height from size variant, aspect-ratio makes it square, flexbox centers icon */
+  /* Same padding on every side around the icon gives a square button the
+   * height of a text button: 8px + 20px + 8px, or 4px + 16px + 4px small */
 
   .eds-button[data-icon-only] {
-    aspect-ratio: 1;
-    padding: 0;
+    --_padding-inline: var(--_padding-block);
   }
 
   /* ===== ROUND ICON-ONLY BUTTON ===== */
 
   .eds-button[data-round] {
-    border-radius: 50%;
+    border-radius: var(--eds-corner-radius-pill);
   }
 
   /* ===== PRIMARY VARIANT ===== */
@@ -198,22 +201,20 @@
     --_color: var(--_text-interactive);
     --_bg-color: transparent;
 
-    outline: var(--eds-border-width-default, 1px) solid
-      var(--_border-interactive);
-    outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+    outline: var(--_stroke-width) solid var(--_border-interactive);
+    outline-offset: calc(-1 * var(--_stroke-width));
   }
 
   .eds-button[data-variant='secondary']:disabled {
     --_color: var(--eds-text-interactive-disabled);
 
     cursor: not-allowed;
-    outline: var(--eds-border-width-default, 1px) solid
-      var(--eds-border-interactive-disabled);
-    outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+    outline: var(--_stroke-width) solid var(--eds-border-interactive-disabled);
+    outline-offset: calc(-1 * var(--_stroke-width));
   }
 
   .eds-button[data-variant='secondary']:focus-visible {
-    outline-offset: var(--eds-sizing-stroke-thin);
+    outline-offset: var(--_stroke-width);
   }
 
   .eds-button[data-variant='secondary']:hover:not(:disabled) {
@@ -247,22 +248,10 @@
 
   /* ===== FOCUS STATE ===== */
 
+  /* A 1px ring with a 1px gap, as in Figma. The ring's outer corner follows
+   * the button radius, which matches corner-radius.rounded-outer. */
   .eds-button:focus-visible {
-    outline: var(--eds-sizing-stroke-thick) solid
-      var(--eds-border-interactive-focus);
-    outline-offset: var(--eds-sizing-stroke-thin);
-  }
-
-  /* ===== ICON STYLING ===== */
-  /* Icons inherit size from Typography via --eds-typography-icon-size */
-  /* Icons use em-based negative margins from icon.css for optical alignment */
-
-  .eds-button .eds-icon {
-    flex-shrink: 0;
-  }
-
-  /* Icon-only buttons: remove negative margins since flexbox handles centering */
-  .eds-button[data-icon-only] .eds-icon {
-    margin: 0;
+    outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
+    outline-offset: var(--_stroke-width);
   }
 }
