@@ -5,27 +5,30 @@
     --_label-font-size: var(--eds-typography-ui-body-md-font-size);
     --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
     --_label-height: round(1cap, 4px);
-    --captured-size-2: var(--_label-height); /* capture cap-height before SVG overrides font-size */
+
+    /* capture cap-height before SVG overrides font-size */
+    --captured-size-2: var(--_label-height);
     --_font-family: var(--eds-typography-ui-body-font-family);
 
     /* Colours from the eds-tokens beta (Tokens Studio) semantic interactive
      * group. The --_ indirection only exists so data-color-appearance can
      * switch the accent/neutral/danger token set — states read these vars.
-     * The text-interactive group deliberately has no neutral variant:
-     * neutral interactive text uses --eds-text-primary by design (#5283). */
+     * Token choices follow the variable bindings on Button [EDS] in Figma. */
     --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
-    --_bg-emphasis-hover: var(--eds-background-interactive-accent-emphasis-hover);
+    --_bg-emphasis-hover: var(
+      --eds-background-interactive-accent-emphasis-hover
+    );
     --_bg-emphasis-pressed: var(
       --eds-background-interactive-accent-emphasis-pressed
     );
     --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
     --_bg-muted-pressed: var(--eds-background-interactive-accent-muted-pressed);
-    --_text-interactive: var(--eds-text-interactive-accent-default);
-    --_border-interactive: var(--eds-border-interactive-accent-emphasis-default);
-
-    /* Flat white across tones per the Figma design (Button [EDS] primary),
-     * same as Chip — the per-tone on-emphasis tokens are not used. */
-    --_color: var(--eds-text-on-emphasis-neutral);
+    --_text-emphasis: var(--eds-text-on-emphasis-accent);
+    --_text-interactive: var(--eds-text-on-default-accent);
+    --_border-interactive: var(
+      --eds-border-interactive-accent-emphasis-default
+    );
+    --_color: var(--_text-emphasis);
     --_bg-color: var(--_bg-emphasis);
     --_padding-block: var(--eds-selectable-space-vertical);
 
@@ -118,7 +121,8 @@
     --_bg-muted-pressed: var(
       --eds-background-interactive-neutral-muted-pressed
     );
-    --_text-interactive: var(--eds-text-primary);
+    --_text-emphasis: var(--eds-text-on-emphasis-neutral);
+    --_text-interactive: var(--eds-text-on-default-neutral);
     --_border-interactive: var(
       --eds-border-interactive-neutral-emphasis-default
     );
@@ -134,7 +138,8 @@
     );
     --_bg-muted-hover: var(--eds-background-interactive-danger-muted-hover);
     --_bg-muted-pressed: var(--eds-background-interactive-danger-muted-pressed);
-    --_text-interactive: var(--eds-text-interactive-danger-default);
+    --_text-emphasis: var(--eds-text-on-emphasis-danger);
+    --_text-interactive: var(--eds-text-on-default-danger);
     --_border-interactive: var(
       --eds-border-interactive-danger-emphasis-default
     );
@@ -168,7 +173,7 @@
   /* ===== PRIMARY VARIANT ===== */
 
   .eds-button[data-variant='primary'] {
-    --_color: var(--eds-text-on-emphasis-neutral);
+    --_color: var(--_text-emphasis);
     --_bg-color: var(--_bg-emphasis);
   }
 
