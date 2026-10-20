@@ -10,9 +10,9 @@
     --captured-size-2: var(--_label-height);
     --_font-family: var(--eds-typography-ui-body-font-family);
 
-    /* Colours from the eds-tokens beta (Tokens Studio) semantic interactive
-     * group. The --_ indirection only exists so data-color-appearance can
-     * switch the accent/neutral/danger token set — states read these vars.
+    /* Colours from the eds-tokens beta (Tokens Studio) semantic layer.
+     * The --_ indirection only exists so data-color-appearance can switch
+     * the accent/neutral/danger token set; states read these vars.
      * Token choices follow the variable bindings on Button [EDS] in Figma. */
     --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
     --_bg-emphasis-hover: var(
