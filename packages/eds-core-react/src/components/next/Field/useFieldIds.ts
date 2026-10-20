@@ -31,13 +31,21 @@ export interface FieldIds {
 /**
  * Hook for generating consistent, accessible IDs for form field elements.
  *
+ * A provided ID is applied verbatim to the form control — that is what an
+ * external `htmlFor` or `aria-describedby` points at — and the label,
+ * description, and helper message IDs are derived from it. Without one, all
+ * four IDs are derived from a generated `useId()` base.
+ *
  * @param providedId - Optional custom ID. If not provided, a unique ID will be generated.
  * @returns Object containing IDs for input, label, description, and helper message,
  *          plus a helper function to generate aria-describedby.
  *
  * @example
  * ```tsx
+ * // Without a provided id: inputId is ':r0:-input', labelId ':r0:-label', …
  * const ids = useFieldIds()
+ * // With one: inputId is 'username', labelId 'username-label', …
+ * const ids = useFieldIds('username')
  *
  * <Field>
  *   <Field.Label htmlFor={ids.inputId}>Username</Field.Label>
@@ -61,10 +69,15 @@ export interface FieldIds {
  */
 export function useFieldIds(providedId?: string): FieldIds {
   const generatedId = useId()
-  const baseId = providedId ?? generatedId
+  // `||`, not `??`: an empty string is treated as no id. It would otherwise
+  // produce id="" on the control and an htmlFor pointing at nothing.
+  const baseId = providedId || generatedId
 
   return {
-    inputId: `${baseId}-input`,
+    // A consumer-supplied id is applied verbatim to the form control, since
+    // that is what an external htmlFor or aria-describedby points at. Only the
+    // generated fallback gets the -input suffix.
+    inputId: providedId || `${generatedId}-input`,
     labelId: `${baseId}-label`,
     descriptionId: `${baseId}-description`,
     helperMessageId: `${baseId}-helper-message`,

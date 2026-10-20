@@ -1,5 +1,5 @@
-# Use Node.js 22.12 with Alpine - allows patch updates while maintaining reproducibility
-FROM docker.io/node:22.12-alpine AS build
+# Use Node.js 22.23 with Alpine (pnpm 11 requires Node >= 22.13) - allows patch updates while maintaining reproducibility
+FROM docker.io/node:22.23-alpine AS build
 
 LABEL org.opencontainers.image.title="EDS Color Palette Generator"
 LABEL org.opencontainers.image.description="Equinor Design System Color Palette Generator"
@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.source="https://github.com/equinor/design-system"
 WORKDIR /app
 
 # Install pnpm globally
-RUN npm install -g pnpm@10.15.0
+RUN npm install -g pnpm@11.27.0
 
 # Copy everything
 COPY . ./
@@ -20,10 +20,10 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @equinor/eds-tokens-sync run build && \
     pnpm --filter @equinor/eds-tokens-build run build && \
     pnpm --filter @equinor/eds-tokens run build && \
-    pnpm --filter @equinor/eds-utils run build && \
+    pnpm --filter @equinor/eds-icons run build && \
     pnpm --filter @equinor/eds-color-palette-generator run build
 
-FROM node:22.12-alpine AS runner
+FROM node:22.23-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \
@@ -32,17 +32,26 @@ ENV NODE_ENV=production \
     UID=12345 \
     NEXT_TELEMETRY_DISABLED=1
 
+# pnpm 11 changed the verify-deps-before-run default from false to "install", so
+# every `pnpm <script>` re-installs when the deps check thinks node_modules is
+# stale. The --prod install below leaves devDependencies-only workspace packages
+# (eds-tokens) without a node_modules directory, which that check always reads as
+# out of sync, so `pnpm start` ran `pnpm install --prod` at boot and crash-looped
+# on EACCES writing its temp lockfile into root-owned /app. A runtime container
+# must never re-install.
+ENV pnpm_config_verify_deps_before_run=false
+
 # Install pnpm and create non-root user
-RUN npm install -g pnpm@10.15.0 && \
+RUN npm install -g pnpm@11.27.0 && \
     addgroup -S "$USER" && \
     adduser -S --uid "$UID" "$USER" && \
-    apk add --no-cache tini
+    apk add --no-cache tini && \
+    chown "$USER":"$USER" /app
 
 # Copy package files for production install
 COPY --chown="$USER":"$USER" package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY --chown="$USER":"$USER" apps/eds-color-palette-generator/package.json ./apps/eds-color-palette-generator/
 COPY --chown="$USER":"$USER" packages/eds-tokens/package.json ./packages/eds-tokens/
-COPY --chown="$USER":"$USER" packages/eds-utils/package.json ./packages/eds-utils/
 
 # Install only production dependencies
 RUN pnpm install --prod --frozen-lockfile
@@ -50,8 +59,6 @@ RUN pnpm install --prod --frozen-lockfile
 # Copy built files
 COPY --chown="$USER":"$USER" --from=build /app/apps/eds-color-palette-generator/.next ./apps/eds-color-palette-generator/.next
 COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tokens/dist ./packages/eds-tokens/dist
-COPY --chown="$USER":"$USER" --from=build /app/packages/eds-tailwind/theme.css ./packages/eds-tailwind/theme.css
-COPY --chown="$USER":"$USER" --from=build /app/packages/eds-utils/dist ./packages/eds-utils/dist
 
 USER "$UID"
 

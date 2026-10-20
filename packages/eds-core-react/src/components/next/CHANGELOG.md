@@ -4,6 +4,54 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.3...eds-core-react-next@v3.0.0-beta.4) (2026-10-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Checkbox no longer accepts `helperMessage`. Helper messages are not part of the Checkbox design.
+
+### ✨ Added
+
+* import the legacy token bundle into `@layer eds-tokens-legacy` and declare the full EDS layer order, so consumer CSS without a layer overrides tokens without a specificity fight ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
+
+
+### 🐛 Fixed
+
+* remove helperMessage prop from Checkbox ([#5644](https://github.com/equinor/design-system/issues/5644)) ([586c057](https://github.com/equinor/design-system/commit/586c057f517a19d1066725b57c070db3c531d0ad))
+
+## [3.0.0-beta.3](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.2...eds-core-react-next@v3.0.0-beta.3) (2026-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* a consumer-supplied `id` is now applied verbatim to the input in TextField, TextArea, Search, Autocomplete and Select. It was previously suffixed with `-input`. Code that targeted `#my-id-input`, or pointed an external `htmlFor`/`aria-describedby` at it, must use `#my-id`. The same applies to the public `useFieldIds` hook: `useFieldIds(id)` now returns `id` itself as `inputId`, previously `${id}-input`. The derived ids (`my-id-label`, `my-id-description`, `my-id-helper-message`) are unchanged.
+
+### 🐛 Fixed
+
+* apply consumer id verbatim to input in next Field-based components ([#5564](https://github.com/equinor/design-system/issues/5564)) ([17e6647](https://github.com/equinor/design-system/commit/17e66471180ee165882eb792b84a7463903d4772))
+* enable the Autocomplete Add option when no option matches exactly ([#5605](https://github.com/equinor/design-system/issues/5605)) ([73d423c](https://github.com/equinor/design-system/commit/73d423c2f140c2ee37768963f0c1a8e732d4b83b))
+* keep the child's ref and honour preventDefault in Slot (next) ([#5627](https://github.com/equinor/design-system/issues/5627)) ([4bebe6c](https://github.com/equinor/design-system/commit/4bebe6c51094e21c5f101338449a3bc97bb22a07))
+
+## [3.0.0-beta.2](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.1...eds-core-react-next@v3.0.0-beta.2) (2026-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* `.eds-input` changes meaning — it is now the Input root container, while the native `<input>`/`<textarea>` carries `.control`. Any existing rule targeting `.eds-input` will silently match the wrong element. Consumers targeting any of the renamed classes in their own CSS must update. See ADR 0006 for the flat class name convention.
+* `className` and `style` now land on the outer wrapper element of `Checkbox`, `Radio` and `Switch`, not on the hidden native `<input>`. For `Checkbox` and `Radio` both props move; for `Switch` only `style` moves, as its `className` already targeted the root. To reach the native input, use a descendant selector, e.g. `.my-checkbox input { ... }`.
+* `className` and `style` now land on the root element of Input, TextField, Select, TextArea, Autocomplete and Search. They previously landed on the native `<input>` or `<textarea>`, and in Select on the inner `div.eds-select` wrapper. `Input.containerClassName` is removed; use `className`, which now targets that same container. To reach the native element, use a descendant selector, e.g. `.my-field input { ... }` (`.my-field select` in Select, `.my-field textarea` in TextArea).
+* default Tooltip (next) placement to bottom, matching EDS 1.0 ([#5509](https://github.com/equinor/design-system/issues/5509))
+
+### 🐛 Fixed
+
+* convert Input and TextField BEM classes to flat class names ([#5127](https://github.com/equinor/design-system/issues/5127)) ([e329f5a](https://github.com/equinor/design-system/commit/e329f5affc39fc5170412913e5eb67a05ca98d5f))
+* default Tooltip (next) placement to bottom, matching EDS 1.0 ([#5509](https://github.com/equinor/design-system/issues/5509)) ([1c553ac](https://github.com/equinor/design-system/commit/1c553ac57c27f4d821f7a5f48000fee51416224b))
+* make Tooltip (next) fall back to a free side instead of shifting ([#5479](https://github.com/equinor/design-system/issues/5479)) ([e85c7d7](https://github.com/equinor/design-system/commit/e85c7d7cc6d26360ed56c11b71321e39e5815104))
+* reflect inherited disabled state in Checkbox, Radio and Switch in /next ([#5406](https://github.com/equinor/design-system/issues/5406)) ([cdbd403](https://github.com/equinor/design-system/commit/cdbd4035a024aad539890b900729f4c53302b728))
+* route className and style to outer wrapper in Checkbox, Radio and Switch ([#5410](https://github.com/equinor/design-system/issues/5410)) ([fe45fb3](https://github.com/equinor/design-system/commit/fe45fb332443e7e21bf8fb704b98da78c9bc8cbb))
+* route className and style to root element in next text input components ([#5409](https://github.com/equinor/design-system/issues/5409)) ([8bcaf63](https://github.com/equinor/design-system/commit/8bcaf6368e801ed6ee1d6befcd94ebd96e36c087))
+
 ## [3.0.0-beta.1](https://github.com/equinor/design-system/compare/eds-core-react-next@v2.8.0-beta.1...eds-core-react-next@v3.0.0-beta.1) (2026-07-20)
 
 

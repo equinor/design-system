@@ -17,7 +17,7 @@ A clear and concise description of what the bug is.
 3.
 4.
 
-**Expected behavior**
+**Expected behaviour**
 
 A clear and concise description of what you expected to happen.
 

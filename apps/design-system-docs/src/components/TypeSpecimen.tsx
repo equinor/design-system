@@ -103,5 +103,3 @@ export function TypeSpecimen() {
     </div>
   )
 }
-
-export default TypeSpecimen

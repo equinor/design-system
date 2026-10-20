@@ -1,21 +1,11 @@
 ---
 title: Banner
 sidebar_position: 1
+hide_title: true
+description: 'Banners display important, brief messages and provide optional actions for users to respond to. They are designed to inform, warn, or alert users about something relevant to their current context - such as a system change, an error, or a required action. Banners are interruptive by nature, so their level of interruption should match the significance of the information they carry.'
 ---
 
-# Banner
-
-Banners display important, brief messages and provide optional actions for users to respond to. They are designed to inform, warn, or alert users about something relevant to their current context - such as a system change, an error, or a required action. Banners are interruptive by nature, so their level of interruption should match the significance of the information they carry.
-
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--introduction"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--introduction)
+<StoryCanvas of="Banner/Introduction" showLink />
 
 ## When to Use
 
@@ -49,15 +39,7 @@ Tones communicate the intent or severity of the banner message. Each tone uses a
 | Danger  | Errors, critical alerts, or destructive consequences          |
 | Success | Positive confirmations or successful completions              |
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--all-variants"
-  width="100%"
-  height="600"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--all-variants)
+<StoryCanvas of="Banner/AllVariants" showLink />
 
 ### Actions
 
@@ -66,57 +48,25 @@ Actions allow users to respond directly to the banner message. They can contain 
 - Action buttons should directly relate to the banner's message and clearly represent the intended action
 - Actions can be placed **inline** (beside the text) when space allows, or **stacked** (below the text) when the message is longer
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--with-actions"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--with-actions)
+<StoryCanvas of="Banner/WithActions" showLink />
 
 **Stacked actions**
 
 Use `placement="bottom"` on `Banner.Actions` when the message is long and action buttons need more room.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--actions-bottom"
-  width="100%"
-  height="160"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--actions-bottom)
+<StoryCanvas of="Banner/ActionsBottom" showLink />
 
 **Links as actions**
 
 Banners can also use links as actions for navigating to more information.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--with-link"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--with-link)
+<StoryCanvas of="Banner/WithLink" showLink />
 
 ### Dismissible
 
 When the `onDismiss` callback is provided, a close button is rendered in the top-right corner. Use this when the user should be able to acknowledge and remove the banner.
 
-<iframe
-  class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-feedback-banner--dismissible"
-  width="100%"
-  height="128"
-  frameborder="1"
-></iframe>
-
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-feedback-banner--dismissible)
+<StoryCanvas of="Banner/Dismissible" showLink />
 
 ## Accessibility
 

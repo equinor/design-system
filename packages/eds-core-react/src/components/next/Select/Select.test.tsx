@@ -43,6 +43,25 @@ describe('Select (next)', () => {
       expect(screen.getByLabelText('Element')).toBeInTheDocument()
     })
 
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <Select
+          label="Element"
+          options={elements}
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      expect(container.querySelector('.eds-select')).not.toHaveClass(
+        'custom-class',
+      )
+    })
+
     it('renders helper message', () => {
       render(
         <Select label="Element" options={elements} helperMessage="Pick one" />,
@@ -220,6 +239,12 @@ describe('Select (next)', () => {
   })
 
   describe('Accessibility', () => {
+    it('applies a provided id verbatim to the select', () => {
+      render(<Select id="my-select" label="Element" options={elements} />)
+      const select = screen.getByRole('combobox', { name: 'Element' })
+      expect(select).toHaveAttribute('id', 'my-select')
+    })
+
     it('associates description and helperMessage via aria-describedby', () => {
       render(
         <Select

@@ -23,6 +23,7 @@ For the project-wide conventions (file structure, code style, CSS layering, test
   - [`ComponentName.figma.tsx`](#componentnamefigmatsx)
   - [`ComponentName.test.tsx`](#componentnametesttsx)
   - [`ComponentName.stories.tsx`](#componentnamestoriestsx)
+  - [`ComponentName.docs.md`](#componentnamedocsmd)
   - [Wiring into the package](#wiring-into-the-package)
 - [Real-World References](#real-world-references)
 - [Common Mistakes](#common-mistakes)
@@ -128,31 +129,37 @@ A `data-color-appearance` attribute alone has no effect — the element also nee
 
 Figma specifies exact disabled color tokens. Use them.
 
-```tsx
-// If icon is accent when enabled, change to neutral when disabled
-{
-  icon && (
-    <span
-      className="eds-component__icon"
-      data-color-appearance={disabled ? 'neutral' : 'accent'}
-    >
-      {icon}
-    </span>
-  )
-}
-```
+Key disabled styling off the native `:disabled` state in CSS. Bare
+`:disabled` applies only when the component's root element **is** the form
+control (see `next/Button`); for a wrapper root, use `:has(:disabled)` /
+`:has(.input:disabled)`. Do **not** derive it from the React prop at render
+time (a prop-keyed `data-disabled` attribute or a
+`data-color-appearance={disabled ? 'neutral' : 'accent'}` flip): an input
+disabled by an ancestor `<fieldset disabled>` then stays visually enabled.
+See `next/Checkbox`, `next/Radio` and `next/Switch` for the pattern.
+
+Exception: a component with no native form control in its subtree has nothing
+for `:disabled` to match, so a prop-set `data-disabled` is the right tool
+there — this is why `next/Field` sets it.
 
 ```css
-.eds-component[data-disabled] {
+.eds-component {
+  --_component-icon-color: var(--eds-color-bg-fill-emphasis-default);
+
+  /* Not --eds-color-text-disabled: that token is switched by
+     data-color-appearance and renders tinted, not grey, under non-neutral
+     appearances (and the token CSS is unlayered, so it can't be re-pinned
+     from @layer eds-components). TODO: semantic token, see the same TODO in
+     checkbox.css/radio.css/switch.css */
+  --_component-disabled-color: var(--eds-color-neutral-7);
+}
+
+/* Matches both the disabled prop and disabling inherited from an ancestor —
+   override the pseudo-private variables, never the properties directly */
+.eds-component:has(.input:disabled) {
+  --_component-icon-color: var(--_component-disabled-color);
+
   cursor: not-allowed;
-}
-
-.eds-component[data-disabled] .eds-component__text {
-  color: var(--eds-color-text-disabled);
-}
-
-.eds-component[data-disabled] .eds-component__icon {
-  color: var(--eds-color-text-disabled);
 }
 ```
 
@@ -234,6 +241,8 @@ export type ComponentNameProps = {
 
 Use foundation `data-*` values directly (see [the reference table](#foundation-data-attribute-reference)) unless the component has a true variant axis like Button's `primary | secondary | ghost`.
 
+Every prop needs a JSDoc description, and a `@default` tag where it has a default. The docs generator fails on a prop without a description.
+
 ### `ComponentName.tsx`
 
 Use the forwardRef pattern with a named function (matches Button, Checkbox, Input). Set foundation `data-*` attributes from the Figma design. **Do not import CSS in the component file** — CSS is imported globally via `next/index.css`.
@@ -259,7 +268,8 @@ export const ComponentName = forwardRef<HTMLDivElement, ComponentNameProps>(
         data-font-family={/* from Figma */}
         data-font-size={/* from Figma */}
         data-line-height={/* from Figma */}
-        data-disabled={disabled || undefined}
+        // No data-disabled: key disabled styling off :disabled / :has(:disabled)
+        // in CSS — see § Disabled state above
         {...rest}
       />
     )
@@ -301,7 +311,11 @@ Use `@layer eds-components` and data-attribute selectors. Use EXACT `--eds-*` to
         var(--eds-color-border-focus);
   }
 
-  .eds-componentname[data-disabled] {
+  /* This scaffold's root is a <div>, so key disabled styling off a form
+     control in the subtree with :has() — bare `.eds-componentname:disabled`
+     would never match. It also covers disabling inherited from an ancestor
+     fieldset[disabled] — see § Disabled state */
+  .eds-componentname:has(:disabled) {
     cursor: not-allowed;
   }
 
@@ -381,6 +395,8 @@ describe('ComponentName (next)', () => {
 
 ### `ComponentName.stories.tsx`
 
+The docs page is generated from the types, the stories and `ComponentName.docs.md`, see [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md). Do not write a beta callout, an import snippet or a description in the story file, because the page generates them. The component needs an `Overview` story, shown right after Features with no heading and no caption, and at least one other example besides `Introduction` and `Overview`. Give every example a caption, the generator fails without one.
+
 ```typescript
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentName, type ComponentNameProps } from '.'
@@ -389,27 +405,44 @@ const meta: Meta<typeof ComponentName> = {
   title: 'EDS 2.0 (beta)/ComponentName',
   component: ComponentName,
   tags: ['beta'],
-  parameters: {
-    docs: {
-      description: {
-        component: `
-⚠️ **Beta Component** — this component is under active development.
-
-\`\`\`tsx
-import { ComponentName } from '@equinor/eds-core-react/next'
-\`\`\`
-        `,
-      },
-    },
-  },
 }
 
 export default meta
 
+// The playground. The docs page shows it with live controls.
 export const Introduction: StoryFn<ComponentNameProps> = (args) => {
   return <ComponentName {...args} />
 }
+
+// Required. A few instances that give a feel for the component, shown right
+// after Features. No heading, no caption.
+export const Overview: StoryFn<ComponentNameProps> = () => (
+  <>
+    <ComponentName>Primary</ComponentName>
+    <ComponentName>Secondary</ComponentName>
+  </>
+)
+
+// Every other export becomes an example on the docs page.
+export const Variants: StoryFn<ComponentNameProps> = () => (
+  <>
+    <ComponentName>Primary</ComponentName>
+    <ComponentName>Secondary</ComponentName>
+  </>
+)
+
+Variants.parameters = {
+  docs: {
+    description: {
+      story: 'One sentence saying what the reader gets from this example.',
+    },
+  },
+}
 ```
+
+### `ComponentName.docs.md`
+
+The hand-written part of the docs page, next to the component. Its format and rules are in [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md#the-hand-written-file). Run `pnpm run generate:component-docs ComponentName` to create `ComponentName.docs.mdx`, and never edit that file.
 
 ### Wiring into the package
 
@@ -425,6 +458,15 @@ Add the CSS to `packages/eds-core-react/src/components/next/index.css`:
 ```css
 @import './ComponentName/componentname.css';
 ```
+
+Add a `## ComponentName` section to `packages/eds-core-react/stories/docs/BreakingChanges.mdx`, in the same pull request. The page exists to spell out what an EDS 1.0 consumer meets in 2.0. Write the section now, while you have both versions in front of you. CI fails the moment a component is exported from the barrel without a section (`pnpm run check:breaking-changes-coverage`).
+
+Most 2.0 components rewrite a 1.0 predecessor, but not all. The section says which case it is:
+
+- **A rewrite of one 1.0 component.** Name it, then list what moved: props removed or renamed, composition changed, markup and behaviour that can break consumer CSS or tests.
+- **No 1.0 counterpart.** Follow `## Badge` and `## Link` on the page: the `New` tag, the sentence "New component, no EDS 1.0 counterpart", and what a consumer reached for instead.
+- **A split of one 1.0 component.** Name the 1.0 component and the usage this half comes from, and link to it from that component's section so the reader arrives from either side. Combobox is the case: in 1.0 it was `Autocomplete` with `multiple`.
+- **Dropped with no successor.** The section still goes in, describing what to use instead.
 
 ## Real-World References
 
@@ -575,6 +617,9 @@ A quick checklist to scan before considering a component done:
 - Copying data-attribute values from a similar component without verifying Figma
 - EDS 1.0 tokens (`--eds-color-interactive-primary`, `--eds-color-text-error`)
 - Re-implementing from scratch instead of composing `Field.Label`, `Icon`, `Input`, `Button`
+- Writing a beta callout, import snippet or description in the story file, or editing the generated `ComponentName.docs.mdx`
+- Changing a published `/next` prop, value, sub-component or markup contract without bringing `packages/eds-core-react/stories/docs/BreakingChanges.mdx` up to date — that page describes what an EDS 1.0 consumer meets in 2.0, so it goes stale the moment 2.0 moves. CI fails any PR that edits a `.ts` or `.tsx` file of a published component and leaves the page alone, marked breaking or not (`.github/workflows/breaking-changes-doc-check.yml`); the `skip-breaking-changes-doc` label is for a change that leaves the EDS 1.0 to 2.0 answer as it was
+- Exporting a new `/next` component from the barrel without giving it a section on that page — the EDS 1.0 → 2.0 difference arrives as a plain `feat:`, never marked breaking, so the coverage check in `checks.yaml` is what catches it
 
 ## Implementation Status Report
 

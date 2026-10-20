@@ -213,12 +213,14 @@ const meta: Meta<typeof Autocomplete> = {
     // Styling
     className: {
       control: 'text',
-      description: 'CSS class applied to the input element.',
+      description:
+        'CSS class names applied to the root element (the outer wrapper). Use this to control layout, width, or margin of the entire autocomplete field.',
       table: { category: 'Styling' },
     },
-    containerClassName: {
-      control: 'text',
-      description: 'CSS class applied to the input container wrapper.',
+    style: {
+      control: 'object',
+      description:
+        'Inline styles applied to the root element (the outer wrapper).',
       table: { category: 'Styling' },
     },
 
@@ -248,7 +250,6 @@ const meta: Meta<typeof Autocomplete> = {
     },
 
     // Hide standard HTML attributes that add noise without value
-    style: { table: { disable: true } },
     autoFocus: { table: { disable: true } },
     tabIndex: { table: { disable: true } },
     form: { table: { disable: true } },
@@ -259,7 +260,7 @@ const meta: Meta<typeof Autocomplete> = {
     docs: {
       description: {
         component: `
-⚠️ **Beta Component** - This component is under active development.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
 
 An Autocomplete input that filters a list of options as the user types. Supports string arrays, object arrays, custom option rendering, and async search.
 

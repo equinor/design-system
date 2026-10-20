@@ -1,0 +1,79 @@
+import React, { PropsWithChildren, useMemo } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+    ColorToken,
+    MasterToken,
+    SpacingToken,
+    comfortableSpacingToken,
+    darkColorToken,
+    geometryToken,
+    lightColorToken,
+    spaciousSpacingToken,
+    timingToken,
+    typographyToken,
+} from "../../styling/tokens";
+import { ColorScheme, Density } from "../../styling/types";
+import { Portal, PortalProvider } from "../Portal";
+import { EDSContext } from "./EDSContext";
+
+export type EDSProviderProps = {
+    /**
+     * The color scheme to use for the components. You can fetch the system scheme using the
+     * `useColorScheme` hook provided by react native.
+     * @see https://reactnative.dev/docs/usecolorscheme
+     */
+    colorScheme: ColorScheme;
+    /**
+     * The density value to use for the components. You can configure the conditional for these yourself,
+     * but an advised approach is to treat all screen widths below 576 as `comfortable`.
+     */
+    density: Density;
+};
+
+export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
+    const spacingToken: SpacingToken = useMemo(() => {
+        if (props.density === "comfortable") {
+            return comfortableSpacingToken;
+        }
+        return spaciousSpacingToken;
+    }, [props.density]);
+
+    const colorToken: ColorToken = useMemo(() => {
+        if (props.colorScheme === "light") {
+            return lightColorToken;
+        }
+        return darkColorToken;
+    }, [props.colorScheme]);
+
+    const masterToken = useMemo(
+        () =>
+            ({
+                colors: colorToken,
+                spacing: spacingToken,
+                typography: typographyToken,
+                geometry: geometryToken,
+                timing: timingToken,
+            }) satisfies MasterToken,
+        [colorToken, spacingToken]
+    );
+
+    return (
+        <EDSContext.Provider
+            value={{
+                colorScheme: props.colorScheme,
+                density: props.density,
+                token: masterToken,
+            }}
+        >
+            <GestureHandlerRootView style={{ flex: 1 }}>
+                <PortalProvider>
+                    <Portal.Host style={{ flex: 1 }} name="root">
+                        {props.children}
+                    </Portal.Host>
+                </PortalProvider>
+            </GestureHandlerRootView>
+        </EDSContext.Provider>
+    );
+};
+
+EDSProvider.displayName = "EDSProvider";

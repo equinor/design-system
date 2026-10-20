@@ -14,6 +14,7 @@ import { Link } from '../Link'
 const meta: Meta<typeof Banner> = {
   title: 'EDS 2.0 (beta)/Feedback/Banner',
   component: Banner,
+  tags: ['beta'],
   decorators: [
     (Story) => (
       <div style={{ maxWidth: '640px', margin: '0 auto' }}>
@@ -24,8 +25,11 @@ const meta: Meta<typeof Banner> = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Banner displays important, succinct messages. It can also provide actions for the user to address or dismiss.',
+        component: `
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+
+Banner displays important, succinct messages. It can also provide actions for the user to address or dismiss.
+        `,
       },
     },
   },

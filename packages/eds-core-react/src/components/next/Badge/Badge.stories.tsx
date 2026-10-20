@@ -5,21 +5,6 @@ const meta: Meta<typeof Badge> = {
   title: 'EDS 2.0 (beta)/Data Display/Badge',
   component: Badge,
   tags: ['beta'],
-  parameters: {
-    docs: {
-      description: {
-        component: `
-⚠️ **Beta Component** — this component is under active development.
-
-\`\`\`tsx
-import { Badge } from '@equinor/eds-core-react/next'
-\`\`\`
-
-Compact, non-interactive labels for conveying status, category, or metadata. For selectable labels, use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead.
-        `,
-      },
-    },
-  },
   argTypes: {
     tone: {
       control: 'select',
@@ -47,6 +32,29 @@ Introduction.args = {
   emphasis: 'low',
   variant: 'solid',
 }
+
+const overviewRows = [
+  { variant: 'solid', emphasis: 'low' },
+  { variant: 'solid', emphasis: 'medium' },
+  { variant: 'outlined', emphasis: 'low' },
+] as const
+
+export const Overview: StoryFn<BadgeProps> = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    {overviewRows.map(({ variant, emphasis }) => (
+      <div
+        key={`${variant}-${emphasis}`}
+        style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}
+      >
+        {(['neutral', 'accent', 'success', 'danger'] as const).map((tone) => (
+          <Badge key={tone} tone={tone} variant={variant} emphasis={emphasis}>
+            {tone.charAt(0).toUpperCase() + tone.slice(1)}
+          </Badge>
+        ))}
+      </div>
+    ))}
+  </div>
+)
 
 export const Tones: StoryFn<BadgeProps> = () => (
   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -83,7 +91,7 @@ Emphasis.parameters = {
   docs: {
     description: {
       story:
-        '`low` (default) uses a subtle background fill — appropriate for most inline use. `medium` increases the fill density for stronger contrast, useful when the badge needs to stand out on its own.',
+        '`low` (default) uses a subtle background fill, which suits most inline use. `medium` increases the fill density for stronger contrast, useful when the badge needs to stand out on its own.',
     },
   },
 }
@@ -103,7 +111,7 @@ Variants.parameters = {
   docs: {
     description: {
       story:
-        'Solid (default) suits most contexts. Outlined uses a border instead of a fill — useful when the background is already coloured or when a lighter visual weight is preferable.',
+        'Solid (default) suits most contexts. Outlined uses a border instead of a fill, which is useful when the background is already coloured or when a lighter visual weight is preferable.',
     },
   },
 }
@@ -352,7 +360,7 @@ MultipleLabels.parameters = {
   docs: {
     description: {
       story:
-        'Multiple badges per item communicate orthogonal properties — location type, operational status, and technical classification — without cluttering the layout.',
+        'Multiple badges per item communicate separate properties without cluttering the layout, for example location type, operational status and technical classification.',
     },
   },
 }
@@ -449,7 +457,8 @@ export const AllCombinations: StoryFn<BadgeProps> = () => {
 AllCombinations.parameters = {
   docs: {
     description: {
-      story: 'All combinations of tone × emphasis × variant for visual QA.',
+      story:
+        'Every combination of tone, emphasis and variant, so you can see the full range at once.',
     },
   },
 }

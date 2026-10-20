@@ -172,9 +172,9 @@ export const semantic = {
         },
       },
       link: {
-        default: '#5abbfb',
-        hover: '#82cdff',
-        pressed: '#b0deff',
+        default: '#82cdff',
+        hover: '#b0deff',
+        pressed: '#c9edff',
       },
       neutral: {
         emphasis: {
@@ -404,8 +404,8 @@ export const semantic = {
     ui: 'Inter',
   },
   fontWeight: {
-    bolder: 500,
-    lighter: 300,
+    bold: 700,
+    medium: 500,
     normal: 400,
   },
   icon: {
@@ -427,9 +427,9 @@ export const semantic = {
         pressed: '#eefeff',
       },
       link: {
-        default: '#5abbfb',
-        hover: '#82cdff',
-        pressed: '#b0deff',
+        default: '#82cdff',
+        hover: '#b0deff',
+        pressed: '#c9edff',
       },
       success: {
         default: '#c7f7c3',
@@ -468,7 +468,7 @@ export const semantic = {
       warning: '#ffeddb',
     },
     primary: '#f8fcff',
-    secondary: '#9fb4c6',
+    secondary: '#b4c7d7',
     tertiary: '#738696',
   },
   overlay: {
@@ -479,7 +479,13 @@ export const semantic = {
     twoXs: 6,
     threeXl: 32,
     threeXs: 4,
+    fourXl: 40,
     fourXs: 2,
+    fiveXl: 48,
+    sixXl: 64,
+    sevenXl: 80,
+    eightXl: 96,
+    nineXl: 128,
     lg: 20,
     md: 16,
     none: 0,
@@ -491,9 +497,9 @@ export const semantic = {
     interactive: {
       disabled: '#738696',
       link: {
-        default: '#5abbfb',
-        hover: '#82cdff',
-        pressed: '#b0deff',
+        default: '#82cdff',
+        hover: '#b0deff',
+        pressed: '#c9edff',
       },
     },
     inverted: '#191a1a',
@@ -522,22 +528,48 @@ export const semantic = {
       warning: '#ffeddb',
     },
     primary: '#f8fcff',
-    secondary: '#9fb4c6',
+    secondary: '#b4c7d7',
     tertiary: '#738696',
   },
   typography: {
+    body: {
+      twoXl: {
+        fontSize: 21,
+        lineHeight: 32,
+      },
+      threeXl: {
+        fontSize: 24,
+        lineHeight: 36,
+      },
+      lg: {
+        fontSize: 16,
+        lineHeight: 28,
+      },
+      md: {
+        fontSize: 14,
+        lineHeight: 24,
+      },
+      sm: {
+        fontSize: 12,
+        lineHeight: 20,
+      },
+      xl: {
+        fontSize: 18,
+        lineHeight: 28,
+      },
+    },
     header: {
       twoXl: {
         fontSize: 24,
-        lineHeight: 28,
+        lineHeight: 32,
       },
       threeXl: {
         fontSize: 28,
-        lineHeight: 32,
+        lineHeight: 36,
       },
       fourXl: {
         fontSize: 32,
-        lineHeight: 36,
+        lineHeight: 40,
       },
       lg: {
         fontSize: 18,
@@ -549,18 +581,18 @@ export const semantic = {
       },
       sm: {
         fontSize: 14,
-        lineHeight: 16,
+        lineHeight: 20,
       },
       xl: {
         fontSize: 21,
-        lineHeight: 24,
+        lineHeight: 28,
       },
       xs: {
         fontSize: 12,
         lineHeight: 16,
       },
     },
-    ui: {
+    label: {
       twoXl: {
         fontSize: 21,
         lineHeight: 28,

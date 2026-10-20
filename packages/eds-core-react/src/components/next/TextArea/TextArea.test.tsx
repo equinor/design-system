@@ -54,6 +54,22 @@ describe('TextArea (next)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root field element', () => {
+      const { container } = render(
+        <TextArea
+          label="Description"
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Character count', () => {
     it('shows character count when showCharacterCount is true', () => {
       render(<TextArea showCharacterCount defaultValue="hello" />)
@@ -127,6 +143,12 @@ describe('TextArea (next)', () => {
       const textarea = screen.getByRole('textbox')
       const label = screen.getByText('Description')
       expect(label).toHaveAttribute('for', textarea.id)
+    })
+
+    it('applies a provided id verbatim to the textarea', () => {
+      render(<TextArea label="Description" id="my-textarea" />)
+      const textarea = screen.getByRole('textbox', { name: 'Description' })
+      expect(textarea).toHaveAttribute('id', 'my-textarea')
     })
 
     it('has no accessibility violations with label', async () => {

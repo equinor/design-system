@@ -1,0 +1,88 @@
+---
+title: Introduction
+hide_title: true
+description: How EDS colour works. Semantic names, six tones, and one set of tokens that is correct in both light and dark.
+---
+
+In <abbr title="Equinor Design System">EDS</abbr> you describe what you are colouring, and the
+system supplies a value for both light and dark.
+
+These pages document the **3.0.0-beta** colour tokens. If you are on EDS 1.x or on 2.0.0-beta, both
+the names and the values have changed, and [Migration](./migration.mdx) has the route across.
+
+## Semantic colour
+
+A semantic token describes a job rather than a colour value:
+
+```
+background.interactive.accent.emphasis.hover
+```
+
+The value can change between schemes or releases without changing what the token means.
+[Getting Started](./getting_started.mdx#reading-a-token-name) breaks the name down segment by
+segment.
+
+The numbered palette underneath the semantic layer is hidden from the public token set. Components
+bind to stable roles instead of raw scale values, so a palette adjustment does not turn into an
+application-wide migration.
+
+## Interactive and non-interactive colour
+
+The first decision is whether the user can act on the element. `interactive` colours respond to
+input and have `default`, `hover` and `pressed` values; `non-interactive` colours have one value.
+A tinted banner and a tinted button can look identical at rest, but only the button needs hover and
+pressed values. Choose by **behaviour**, not by appearance.
+
+## Six tones
+
+Tone carries meaning, so choosing one is a content decision rather than a styling decision.
+
+| Tone | Means | Not for |
+| --- | --- | --- |
+| `accent` | The primary action, brand emphasis, the current selection | Decoration |
+| `neutral` | Structure and default UI: surfaces, borders, secondary actions | Conveying state |
+| `info` | Neutral information worth noticing | Success |
+| `success` | A completed or valid state | "On" or "enabled" generally |
+| `warning` | Proceed with care; reversible risk | Errors |
+| `danger` | Destructive actions and errors | Emphasis |
+
+Each tone comes in levels of visual strength. [Usage](./usage.mdx#choose-a-level) shows which levels
+each branch has.
+
+## One system for light and dark
+
+The same token names work in both schemes. There is no scheme-specific token and no
+scheme-specific component CSS to write. `text.primary`, for example, is a dark grey in light mode
+and a pale blue-white in dark mode under one name.
+
+[Getting Started](./getting_started.mdx#switching-colour-scheme) shows how to select the scheme.
+[The palette](./palette.mdx) explains how the underlying scale makes the same semantic roles work in
+both.
+
+## Contrast
+
+Contrast is measured with
+<abbr title="Accessible Perceptual Contrast Algorithm">APCA</abbr>. It scores the readability of a
+text colour on a background colour and accounts for font size, weight and polarity. Scores are given
+in Lc, running from 0 to about 106. Higher is more readable. You can read the full method in the
+[APCA documentation](https://git.apcacontrast.com/).
+
+Our targets are **Lc 90 for body text** and **Lc 60 for interactive elements** against
+`background.surface`. A token name alone is not a contrast guarantee: on any other fill, check the
+actual foreground and background in both schemes and every state, with the intended text size and
+weight. [Usage](./usage.mdx#foreground-pairing) covers the common pairings and their exceptions.
+
+:::info Pairings use opaque colours
+
+The fill and foreground tokens in these pairings are opaque. Overlays are a separate case: a
+translucent colour has no contrast number until what sits behind it is known.
+
+:::
+
+## Where to go next
+
+- **[Getting Started](./getting_started.mdx)**: load the tokens and use the same name in design and code
+- **[Usage](./usage.mdx)**: choose levels and states, pair foregrounds and see worked examples
+- **[The palette](./palette.mdx)**: understand how the scale is built
+- **[Migration](./migration.mdx)**: move from EDS 1.x or 2.0.0-beta
+- **[Token reference](./reference.mdx)**: look up every token and resolved value

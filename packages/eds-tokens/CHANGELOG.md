@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.9](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.8...eds-tokens@v3.0.0-beta.9) (2026-10-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* stop publishing the foundation and input token sets in eds-tokens ([#5660](https://github.com/equinor/design-system/issues/5660))
+
+### ✨ Added
+
+* stop publishing the foundation and input token sets in eds-tokens ([#5660](https://github.com/equinor/design-system/issues/5660)) ([ff712d8](https://github.com/equinor/design-system/commit/ff712d8cd657cd778daf4a5940aa92e61a76b72a)), closes [#5657](https://github.com/equinor/design-system/issues/5657)
+* update tokens from Tokens Studio release ([#5650](https://github.com/equinor/design-system/issues/5650)) ([2b93619](https://github.com/equinor/design-system/commit/2b936199080c8cbb85f170de979a4cf73fc234ee))
+* wrap the published eds-tokens CSS bundle in `@layer eds-tokens` ([#5653](https://github.com/equinor/design-system/issues/5653)) ([5352fbe](https://github.com/equinor/design-system/commit/5352fbee3b9750f822d408a2be9f8c631abfd96e)), closes [#5423](https://github.com/equinor/design-system/issues/5423)
+
+
+### 🐛 Fixed
+
+* next/ts/* specifiers no longer take a .ts extension ([#5678](https://github.com/equinor/design-system/issues/5678)) ([bef91ec](https://github.com/equinor/design-system/commit/bef91ec06ee70cdd02c1c0d8d6f340ad27907b99)), closes [#5671](https://github.com/equinor/design-system/issues/5671)
+
+## [3.0.0-beta.8](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.7...eds-tokens@v3.0.0-beta.8) (2026-10-13)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5555](https://github.com/equinor/design-system/issues/5555)) ([b97f080](https://github.com/equinor/design-system/commit/b97f0800e0aa96c27b6ef76e6da7534c6ff98989))
+
+
+### 🐛 Fixed
+
+* re-resolve semantic tokens inside data-density subtrees ([#5568](https://github.com/equinor/design-system/issues/5568)) ([dcae9ff](https://github.com/equinor/design-system/commit/dcae9ffe50918162c16dda6421ec499ff971e643))
+
 ## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.6...eds-tokens@v3.0.0-beta.7) (2026-09-01)
 
 

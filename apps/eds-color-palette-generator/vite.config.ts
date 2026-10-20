@@ -32,5 +32,17 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
-  plugins: [dts({ bundleTypes: true })],
+  plugins: [
+    dts({
+      bundleTypes: true,
+      // The CLI's types need no tests; test helpers do not even emit cleanly
+      exclude: [
+        'node_modules/**',
+        'dist/**',
+        'src/**/*.test.ts',
+        'src/**/*.test.tsx',
+        'src/test/**',
+      ],
+    }),
+  ],
 })

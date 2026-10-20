@@ -21,13 +21,14 @@ The icon broker automates the process of syncing icons from Figma to the codebas
 
 - Node.js 18+
 - pnpm
-- Edit access to the [EDS Assets Figma file](https://www.figma.com/design/BQjYMxdSdgRkdhKTDDU7L4KU/Assets)
+- View access to the [EDS Assets Figma file](https://www.figma.com/design/BQjYMxdSdgRkdhKTDDU7L4KU/Assets) -- the script only reads, so view is enough (a token cannot grant access your account doesn't already have)
 
 ### Configuration
 
 1. **Generate a Figma Personal Access Token:**
-   - Go to Figma → Account Settings → Personal Access Tokens
-   - Generate a new token with read access
+   - Go to Figma → Settings → Security → Personal access tokens
+   - Grant the **`file_content:read`** scope -- nothing else is needed. It covers both endpoints the script calls: `GET /v1/files/{fileId}` (file structure) and `GET /v1/images/{fileId}?format=svg` (SVG renders)
+   - Pick an expiry you'll remember. Tokens expire silently and the resulting error looks like a permissions problem -- see [Troubleshooting](#403-forbidden--token-expired)
 
 2. **Create `.env` file:**
 
@@ -430,12 +431,38 @@ When testing locally, use the cache. Only use `--force` when you need to pull ne
 
 ### "FIGMA_TOKEN required" Error
 
-Make sure your `.env` file exists and contains a valid token:
+Make sure your `.env` file exists and defines the variable. Check the shape without dumping the token:
 
 ```sh
-cat scripts/figma-broker/.env
-# Should output: FIGMA_TOKEN=figd_...
+grep -c '^FIGMA_TOKEN=' scripts/figma-broker/.env   # should print 1
 ```
+
+`--debug` also confirms the token loaded, printing only its length and first few characters:
+
+```
+[DEBUG] Token: ✓ loaded (45 chars, starts with "figd_ZyU8...")
+```
+
+Never paste the token into a shell command, a commit, or an issue -- treat `.env` as write-only.
+
+### 403 Forbidden / Token expired
+
+A bare `403` on the file fetch reads like a permissions problem, but the usual cause is an **expired token**:
+
+```
+[DEBUG] API: GET https://api.figma.com/v1/files/BQjYMxdSdgRkdhKTDDU7L4KU
+[DEBUG] API: Response 403 Forbidden
+❌ Error: Failed to fetch Figma file: 403
+```
+
+To tell expiry apart from a genuine access problem, check the token against `/v1/me`:
+
+| Response from `/v1/me`             | Meaning                                                                 |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| `401 {"err":"Token has expired"}`  | Expired -- generate a new token and replace it in `.env`                |
+| `200` with your user JSON          | Token is fine; the `403` is real -- your account lacks file access, or the token is missing the `file_content:read` scope |
+
+Note that `--force` does **not** help here. It bypasses the local cache, which means it *must* reach the API -- so an expired token fails faster with `--force` than without it. A cached run can still fail later, at the SVG-render step.
 
 ### "No icons found matching the filter" Error
 

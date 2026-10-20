@@ -12,6 +12,53 @@
 - **Status:** Proposed | Accepted | Rejected | Deprecated | Superseded by [ADR-NNNN]
 - **Date:** YYYY-MM-DD
 - **Decision makers:** [List the people involved in making this decision]
+- **Scope:** Web | Mobile | Tokens | All
+
+<!--
+  Status: if a later ADR changes or reverses this decision, write a new,
+  self-contained ADR (restate what's still true, plus what's new) and mark
+  this line "Superseded by [ADR-NNNN](NNNN-slug.md)". The new ADR's own
+  Related section links back: "Supersedes [ADR-NNNN](path)".
+
+  Always supersede fully, never partially. A reader should get the complete
+  current answer from one document, not by holding this one's still-valid
+  parts and the new one's replacement in their head at once. ADR-0002's
+  "Accepted (CSS naming convention superseded by [ADR-0006](path))" wording
+  is a legacy pattern from before this rule — don't reproduce it.
+
+  If part of what you're writing will keep changing one row at a time (an
+  exception list, a migration log) — that isn't a decision, it's a
+  registry. Move it to a separate, ordinarily maintained doc instead of
+  putting it in this ADR (see ADR-0020 and ADR-0021, both restructured for
+  exactly this).
+
+  Accepted ADRs are immutable: only the Status line and a forward pointer
+  change, never the recorded reasoning itself.
+
+  Scope: which product surface this decision governs.
+  - Web: eds-core-react (including /next)
+  - Mobile: eds-mobile-components, apps/mobile-storybook
+  - Tokens: eds-tokens / the Tokens Studio pipeline — consumed by both Web and Mobile
+  - All: process/governance decisions not tied to one product surface (e.g. ADR-0001)
+  Use a comma-separated combination when the decision genuinely spans more than
+  one — e.g. one beta-versioning scheme adopted for both a web package and
+  eds-tokens (ADR-0012), or a naming convention for the Figma component library
+  both platforms design from (ADR-0015).
+
+  A decision scoped to one surface, Web, Mobile, or Tokens, names that
+  surface in both the title and the filename (ADR-0020 through ADR-0024 do
+  this for Mobile: "Mobile component scope..." filed as
+  `0020-mobile-component-scope-...`). This is a deliberate choice, not an
+  automatic one, and the two aren't derived from each other: do it
+  explicitly in both when writing a new single-surface ADR.
+
+  A multi-scope decision, or one scoped to All, is usually about a shared
+  mechanism or a process concern rather than one product surface, so
+  neither its title nor its filename should try to name a surface: "Pin
+  beta release lines to a fixed 3.0.0-beta.N series..." (ADR-0012, Web and
+  Tokens) and "Use ADR for Architecture Decisions" (ADR-0001, All) both
+  skip it.
+-->
 
 ## Context
 

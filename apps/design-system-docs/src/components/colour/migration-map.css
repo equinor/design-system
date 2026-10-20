@@ -1,0 +1,44 @@
+/* MigrationMap is a real table so the mapping direction survives a screen reader, but Infima's
+ * table styling paints a border around every cell, which turned a two-column mapping into a grid
+ * of boxes. Strip the cell borders back to a single rule per row, which is what the figure had
+ * when it was built from divs. */
+.migration-map {
+  overflow-x: auto;
+  margin: 1rem 0 2rem;
+}
+
+.migration-map table {
+  display: table;
+  width: 100%;
+  margin: 0;
+}
+
+.migration-map th,
+.migration-map td {
+  padding: 0.5rem 0.625rem 0.5rem 0;
+  border: none;
+  border-top: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  vertical-align: middle;
+}
+
+.migration-map thead th {
+  padding-top: 0;
+  border-top: none;
+
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--eds-text-secondary);
+  text-align: left;
+}
+
+/* The arrow column is chrome: narrow enough not to take width from the names it sits between. */
+.migration-map .direction {
+  width: 1.25rem;
+  padding-right: 0;
+  color: var(--eds-text-tertiary);
+  text-align: center;
+}
+
+.migration-map tbody tr:hover {
+  background: none;
+}

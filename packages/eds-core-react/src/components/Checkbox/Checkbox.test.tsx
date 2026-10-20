@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event'
 import styled from 'styled-components'
 
 import { Checkbox } from './Checkbox'
+import { checkbox as tokens } from './Checkbox.tokens'
 
 const StyledCheckbox = styled(Checkbox)`
   clip-path: unset;
@@ -88,5 +89,28 @@ describe('Checkbox', () => {
     expect(one).not.toBeChecked()
     await userEvent.click(one)
     expect(one).not.toBeChecked()
+    // disabled must stay on the input, not leak onto the wrapper span
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(one.parentElement).not.toHaveAttribute('disabled')
+  })
+  it('Gets disabled styling when disabled is inherited from a fieldset', () => {
+    render(
+      <fieldset disabled>
+        <Checkbox label="Checkbox one" />
+      </fieldset>,
+    )
+    const one = screen.getByLabelText('Checkbox one')
+    expect(one).toBeDisabled()
+    expect(one).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':disabled',
+    })
+    expect(one).toHaveStyleRule('fill', tokens.states.disabled.background, {
+      modifier: ':disabled ~ svg',
+    })
+    // eslint-disable-next-line testing-library/no-node-access
+    const label = one.closest('label')
+    expect(label).toHaveStyleRule('cursor', 'not-allowed', {
+      modifier: ':has(input:disabled)',
+    })
   })
 })

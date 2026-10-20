@@ -102,6 +102,25 @@ describe('Autocomplete (next)', () => {
     })
   })
 
+  describe('Styling', () => {
+    it('applies className and style to the root wrapper element', () => {
+      const { container } = render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          className="custom-class"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('eds-autocomplete')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveClass('custom-class')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.firstChild).toHaveStyle({ marginTop: '8px' })
+    })
+  })
+
   describe('Dropdown behavior', () => {
     it('calls showPopover on focus', async () => {
       const user = userEvent.setup()
@@ -385,6 +404,102 @@ describe('Autocomplete (next)', () => {
       expect(addOption).toHaveAttribute('aria-disabled', 'true')
     })
 
+    it('shows enabled Add option when typed value only partially matches an option', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      await user.type(screen.getByRole('combobox'), 'App')
+      expect(screen.getByRole('option', { name: 'Apple' })).toBeInTheDocument()
+      expect(screen.getByRole('option', { name: 'Add: App' })).toHaveAttribute(
+        'aria-disabled',
+        'false',
+      )
+    })
+
+    it('treats a case-insensitive match as an existing option', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      await user.type(screen.getByRole('combobox'), 'apple')
+      expect(
+        screen.getByRole('option', { name: 'Type to add new option' }),
+      ).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('treats an exact match the filter drops as an existing option', async () => {
+      const user = userEvent.setup()
+      render(<Autocomplete label="Fruit" options={options} allowCustomValue />)
+      // The trailing space makes the default filter drop 'Apple'
+      await user.type(screen.getByRole('combobox'), 'Apple ')
+      expect(
+        screen.getByRole('option', { name: 'Type to add new option' }),
+      ).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('confirms a custom value on Enter without navigation when no options match', async () => {
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          allowCustomValue
+          onCustomValueConfirm={onCustomValueConfirm}
+        />,
+      )
+      await user.type(screen.getByRole('combobox'), 'Mango')
+      await user.keyboard('{Enter}')
+      expect(onCustomValueConfirm).toHaveBeenCalledWith('Mango')
+    })
+
+    it('does not add a custom value on Enter when matching options arrive after typing', async () => {
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      const props = {
+        label: 'Fruit',
+        allowCustomValue: true,
+        optionsFilter: () => true,
+        onCustomValueConfirm,
+      }
+      const { rerender } = render(<Autocomplete {...props} options={[]} />)
+      await user.type(screen.getByRole('combobox'), 'App')
+      // Simulates async search results landing after the keystroke
+      rerender(<Autocomplete {...props} options={['Apple']} />)
+      await user.keyboard('{Enter}')
+      expect(onCustomValueConfirm).not.toHaveBeenCalled()
+    })
+
+    it('confirms a partially matching custom value via the Add option', async () => {
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          allowCustomValue
+          onCustomValueConfirm={onCustomValueConfirm}
+        />,
+      )
+      await user.type(screen.getByRole('combobox'), 'App')
+      await user.click(screen.getByRole('option', { name: 'Add: App' }))
+      expect(onCustomValueConfirm).toHaveBeenCalledWith('App')
+    })
+
+    it('does not add a custom value on Enter without navigation while matches are shown', async () => {
+      const onCustomValueConfirm = jest.fn()
+      const user = userEvent.setup()
+      render(
+        <Autocomplete
+          label="Fruit"
+          options={options}
+          allowCustomValue
+          onCustomValueConfirm={onCustomValueConfirm}
+        />,
+      )
+      // 'e' matches several options, so nothing is active
+      await user.type(screen.getByRole('combobox'), 'e')
+      await user.keyboard('{Enter}')
+      expect(onCustomValueConfirm).not.toHaveBeenCalled()
+    })
+
     it('does not show Add option without allowCustomValue prop', async () => {
       const user = userEvent.setup()
       render(<Autocomplete label="Fruit" options={options} />)
@@ -583,6 +698,14 @@ describe('Autocomplete (next)', () => {
     const axeOptions = {
       rules: { 'aria-valid-attr-value': { enabled: false } },
     }
+
+    it('applies a provided id verbatim to the input', () => {
+      render(
+        <Autocomplete label="Fruit" options={options} id="my-autocomplete" />,
+      )
+      const input = screen.getByRole('combobox', { name: 'Fruit' })
+      expect(input).toHaveAttribute('id', 'my-autocomplete')
+    })
 
     it('has no accessibility violations', async () => {
       const { container } = render(

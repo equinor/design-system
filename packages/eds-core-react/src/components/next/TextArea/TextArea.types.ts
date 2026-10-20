@@ -1,4 +1,4 @@
-import type { ReactNode, TextareaHTMLAttributes } from 'react'
+import type { CSSProperties, ReactNode, TextareaHTMLAttributes } from 'react'
 
 export type TextAreaProps = {
   /** Label for the field */
@@ -19,4 +19,11 @@ export type TextAreaProps = {
   maxRows?: number
   /** Show a character count below the textarea. Displays "n / max" when `maxLength` is set, otherwise just "n" */
   showCharacterCount?: boolean
-} & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id'>
+  /** CSS class names applied to the root element (the outer labeled field wrapper). */
+  className?: string
+  /** Inline styles applied to the root element (the outer labeled field wrapper). */
+  style?: CSSProperties
+} & Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'id' | 'className' | 'style'
+>

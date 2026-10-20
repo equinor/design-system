@@ -1,13 +1,9 @@
 import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
-import eslintNextPlugin from '@next/eslint-plugin-next'
 
 const eslintConfig = defineConfig([
   {
-    plugins: {
-      next: eslintNextPlugin,
-    },
     settings: {
       next: {
         rootDir: '.',

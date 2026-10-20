@@ -17,6 +17,7 @@ on:
       - 'packages/eds-core-react/**'
       - 'packages/eds-tokens/**'
       - 'packages/eds-icons/**'
+      - 'packages/eds-mobile-components/docs/**'
 permissions:
   contents: read
   id-token: write

@@ -26,3 +26,48 @@ rules:
         '/.*/':
           - '/round/'
           - '/--[\w-]+\(\)/'
+
+overrides:
+  # EDS 2.0 components use one eds- prefixed root class and short flat names
+  # for inner elements, scoped by CSS nesting — not BEM. See ADR 0006, whose
+  # context notes BEM was meant to be "explicitly removed from the Stylelint
+  # config"; this is that removal. Two shapes are allowed:
+  #
+  #   eds-<kebab>          root class, mirrors the component name
+  #                        (eds-field, eds-text-field)
+  #   <one or two words>   inner element (label, icon-wrapper)
+  #
+  # Inner names are capped at two words on purpose. Nesting already supplies
+  # the context, so an inner element never needs to restate its ancestors —
+  # .label inside .eds-field, not .field-label (and certainly not the old
+  # .eds-field__label). Current /next CSS has 28 one-word and 14 two-word
+  # inner names and no three-word ones, so this codifies existing practice
+  # rather than changing it.
+  #
+  # Roots are deliberately not capped: they track component names, which are
+  # occasionally longer than two words, and renaming the class alone would
+  # break that correspondence.
+  - files: ['packages/eds-core-react/src/components/next/**/*.css']
+    rules:
+      selector-class-pattern:
+        - '^(eds-[a-z0-9]+(-[a-z0-9]+)*|[a-z][a-z0-9]*(-[a-z0-9]+)?)$'
+        - message: "Expected class '%s' to be an eds- prefixed root or a one- or two-word inner name, not BEM (ADR 0006) (selector-class-pattern)"
+
+  # The docs site is not the component library, so the eds- BEM pattern above
+  # does not apply to it and cannot be made to. Its own classes are docs-
+  # prefixed (see apps/design-system-docs/AGENTS.md); it must also select
+  # Infima and Docusaurus classes it does not own (.container, .admonition,
+  # .breadcrumbs__link, .menu__caret, .navbar__item); and the swizzled theme
+  # CSS modules keep upstream Docusaurus' camelCase names verbatim so they can
+  # be re-diffed on upgrade (.docHero, .docItemContainer). Every other rule
+  # still applies here — only the class-name pattern is switched off.
+  - files: ['apps/design-system-docs/**/*.css']
+    rules:
+      selector-class-pattern: null
+      # Descending specificity is the deliberate strategy here, not an
+      # accident. The site overrides a third-party theme, so rule order is
+      # chosen to land on top of Infima; and per-element rules intentionally
+      # use `html:where(…)` to sit at specificity 0,0,2 so single-class
+      # component rules still win (apps/design-system-docs/AGENTS.md
+      # § Version scoping). This rule flags exactly that pattern.
+      no-descending-specificity: null

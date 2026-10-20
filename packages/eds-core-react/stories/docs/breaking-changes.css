@@ -1,0 +1,48 @@
+/* Pill-shaped in-page links on the Breaking changes page. Anchors, not Chips,
+   so focus moves to the target and nothing gets aria-pressed (Chip has no
+   asChild and renders a <button>, see #5458). Storybook's AnchorMdx rather
+   than a raw <a>, because only it emits NAVIGATE_URL on the channel, which is
+   what updates the address bar outside the docs iframe.
+   Visuals mirror the default Chip variant.
+   The :any-link is load-bearing: AnchorMdx renders Storybook's styled anchor,
+   and .sbdocs.sbdocs-a { font-size: inherit } (0,2,0) outranks a plain
+   descendant selector (0,1,1), so the pills would lose the token font size. */
+.eds-breaking-changes-jump-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.5rem 1.5rem;
+}
+
+.eds-breaking-changes-jump-links a:any-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding-inline: var(--eds-selectable-space-horizontal, 0.75rem);
+  border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
+  font-family: var(--eds-typography-ui-body-font-family);
+  font-size: var(--eds-typography-ui-body-md-font-size);
+  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+  color: var(--eds-color-text-subtle);
+  text-decoration: none;
+  background-color: var(--eds-color-bg-fill-muted-default);
+  transition: background-color 150ms ease-in-out;
+}
+
+.eds-breaking-changes-jump-links a:any-link:hover {
+  background-color: var(--eds-color-bg-fill-muted-hover);
+}
+
+.eds-breaking-changes-jump-links a:any-link:active {
+  background-color: var(--eds-color-bg-fill-muted-active);
+}
+
+.eds-breaking-changes-jump-links a:any-link:focus-visible {
+  /* Transparent outline instead of none: forced-colors mode drops
+     box-shadow but paints the outline, so focus stays visible there. */
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
+    0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
+}

@@ -1,4 +1,4 @@
-import type { ReactNode, SelectHTMLAttributes } from 'react'
+import type { CSSProperties, ReactNode, SelectHTMLAttributes } from 'react'
 import type { SelectOptionProps } from '../utils/SelectOption.types'
 
 /**
@@ -37,5 +37,15 @@ export type SelectProps<T = string> = {
   placeholder?: string
   /** Options to display — either flat or grouped via `SelectOptionGroup` */
   options?: (T | SelectOptionGroup<T>)[]
+  /**
+   * CSS class names applied to the root element (the outer labeled field wrapper).
+   * Use this to control layout, width, or margin of the entire field.
+   */
+  className?: string
+  /** Inline styles applied to the root element (the outer labeled field wrapper). */
+  style?: CSSProperties
 } & Omit<SelectOptionProps<T>, 'renderOption' | 'options'> &
-  Omit<SelectHTMLAttributes<HTMLSelectElement>, 'children'>
+  Omit<
+    SelectHTMLAttributes<HTMLSelectElement>,
+    'children' | 'className' | 'style'
+  >

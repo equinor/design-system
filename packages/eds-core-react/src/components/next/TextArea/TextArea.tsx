@@ -21,6 +21,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       disabled,
       maxRows,
       showCharacterCount,
+      className,
+      style,
       ...textareaProps
     },
     ref,
@@ -99,7 +101,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const showHelperRow = helperMessage || showCharacterCount
 
     return (
-      <Field className="eds-text-area" disabled={disabled}>
+      <Field
+        className={['eds-text-area', className].filter(Boolean).join(' ')}
+        style={style}
+        disabled={disabled}
+      >
         {label && (
           <div className="label-row">
             <Field.Label htmlFor={inputId} indicator={indicator}>

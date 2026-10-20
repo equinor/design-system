@@ -44,7 +44,7 @@ function extractPrerequisites() {
   }
 
   // Extract pnpm version from root package.json packageManager field
-  let pnpmVersion = '10.0.0'
+  let pnpmVersion = '11.0.0'
   if (rootPkg?.packageManager) {
     const pnpmMatch = rootPkg.packageManager.match(/pnpm@([\d.]+)/)
     if (pnpmMatch) {
@@ -93,7 +93,7 @@ function generatePrerequisitesDoc(prerequisites) {
 
 function generateReadmePrerequisites(prerequisites) {
   return `* **Node.js** — Version ${prerequisites.nodejs} or compatible
-* **pnpm** — Version ${prerequisites.pnpm} or higher (install globally with \`npm install -g pnpm@${prerequisites.pnpm}\`)
+* **pnpm** — Version ${prerequisites.pnpm}, pinned via the \`packageManager\` field (install globally with \`npm install -g pnpm@${prerequisites.pnpm}\`)
 * **Git** — For version control`
 }
 

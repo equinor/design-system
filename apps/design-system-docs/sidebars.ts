@@ -7,45 +7,25 @@ const sidebars: SidebarsConfig = {
 
   //About Section
   aboutSidebar: [
-    'about/about_eds',
     {
       type: 'category',
-      label: 'Basics',
+      label: 'Design',
       link: {
         type: 'doc',
-        id: 'about/getting-started/getting_started',
+        id: 'about/getting-started/design/getting_started_design',
       },
-      items: [
-        'about/getting-started/getting_started',
-        {
-          type: 'category',
-          label: 'Design',
-          link: {
-            type: 'doc',
-            id: 'about/getting-started/design/getting_started_design',
-          },
-          items: [
-            'about/getting-started/design/getting_started_design',
-            'about/getting-started/design/figma',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Develop',
-          link: {
-            type: 'doc',
-            id: 'about/getting-started/develop/getting_started_development',
-          },
-          items: [
-            'about/getting-started/develop/getting_started_development',
-            'about/getting-started/develop/citizen_developers',
-          ],
-        },
-
-        'about/getting-started/team_roles',
-      ],
+      items: ['about/getting-started/design/figma'],
     },
-    'about/team/team',
+    {
+      type: 'category',
+      label: 'Develop',
+      link: {
+        type: 'doc',
+        id: 'about/getting-started/develop/getting_started_development',
+      },
+      items: ['about/getting-started/develop/citizen_developers'],
+    },
+    'about/getting-started/team_roles',
   ],
   //Components Section
   componentsSidebar: [
@@ -107,20 +87,36 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'foundation/colour/intro',
       },
-      items: ['foundation/colour/intro', 'foundation/colour/getting_started'],
+      items: [
+        'foundation/colour/getting_started',
+        'foundation/colour/usage',
+        'foundation/colour/palette',
+        'foundation/colour/migration',
+        'foundation/colour/reference',
+      ],
     },
     {
       type: 'category',
       label: 'Design Tokens',
       link: {
         type: 'doc',
-        id: 'foundation/design-tokens/grid',
+        id: 'foundation/design-tokens/design-tokens',
       },
       items: [
-        'foundation/design-tokens/grid',
         'foundation/design-tokens/elevation',
-        'foundation/design-tokens/shape',
-        'foundation/design-tokens/spacing',
+        {
+          type: 'category',
+          label: 'Spacing',
+          link: {
+            type: 'doc',
+            id: 'foundation/design-tokens/spacing',
+          },
+          items: [
+            'foundation/design-tokens/spacing-scale',
+            'foundation/design-tokens/spacing-usage',
+            'foundation/design-tokens/spacing-reference',
+          ],
+        },
         'foundation/design-tokens/typography',
       ],
     },
@@ -131,15 +127,12 @@ const sidebars: SidebarsConfig = {
       label: 'Assets',
       link: {
         type: 'doc',
-        id: 'foundation/assets/image_placeholder',
+        id: 'foundation/assets/assets',
       },
       items: [
-        'foundation/assets/image_placeholder',
         'foundation/assets/logos',
-        'foundation/assets/illustration',
         'foundation/assets/product_icons',
         'foundation/assets/system_icons',
-        'foundation/assets/photography',
       ],
     },
   ],
