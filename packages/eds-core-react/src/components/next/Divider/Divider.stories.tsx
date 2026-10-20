@@ -1,6 +1,9 @@
+import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { TypographyNext } from '../../Typography'
+import { Button } from '../Button'
 import { Divider } from '.'
+import page from './Divider.docs.mdx'
 
 const meta: Meta<typeof Divider> = {
   title: 'EDS 2.0 (beta)/Surface/Divider',
@@ -8,18 +11,7 @@ const meta: Meta<typeof Divider> = {
   tags: ['beta'],
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-\`\`\`tsx
-import { Divider } from '@equinor/eds-core-react/next'
-\`\`\`
-
-A thin horizontal rule that separates related content. Renders as a native
-\`<hr>\` with \`role="separator"\`.
-        `,
-      },
+      page,
     },
   },
 }
@@ -28,27 +20,48 @@ export default meta
 
 type Story = StoryObj<typeof Divider>
 
-const Row = ({ label, value }: { label: string; value: string }) => (
+const Line = ({
+  children,
+  strong = false,
+}: {
+  children: ReactNode
+  strong?: boolean
+}) => (
+  <TypographyNext
+    as="span"
+    family="ui"
+    size="md"
+    baseline="center"
+    style={{
+      display: 'block',
+      paddingBlock: 'var(--eds-spacing-vertical-md)',
+      fontWeight: strong
+        ? 'var(--eds-typography-ui-body-md-font-weight-bolder)'
+        : undefined,
+    }}
+  >
+    {children}
+  </TypographyNext>
+)
+
+const Row = ({
+  label,
+  value,
+  strong = false,
+}: {
+  label: string
+  value: string
+  strong?: boolean
+}) => (
   <div
     style={{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingBlock: 'var(--eds-spacing-vertical-md)',
     }}
   >
-    <TypographyNext as="span" family="ui" size="md" baseline="center">
-      {label}
-    </TypographyNext>
-    <TypographyNext
-      as="span"
-      family="ui"
-      size="md"
-      baseline="center"
-      style={{ color: 'var(--eds-color-text-subtle)' }}
-    >
-      {value}
-    </TypographyNext>
+    <Line strong={strong}>{label}</Line>
+    <Line strong={strong}>{value}</Line>
   </div>
 )
 
@@ -69,4 +82,86 @@ export const Introduction: Story = {
       <Row label="Time zone" value="Europe/Oslo" />
     </div>
   ),
+}
+
+export const Overview: Story = {
+  render: () => (
+    <div style={{ width: 360 }}>
+      <Line>Above the divider</Line>
+      <Divider />
+      <Line>Below the divider</Line>
+    </div>
+  ),
+}
+
+export const BetweenSections: Story = {
+  render: () => (
+    <div style={{ width: 360 }}>
+      <Line strong>Delivery</Line>
+      <Line>Orders placed before 14:00 ship the same day.</Line>
+      <Divider />
+      <Line strong>Returns</Line>
+      <Line>You can return an item within 30 days.</Line>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use a Divider to separate sections of a page when the headings alone do not make the break clear enough.',
+      },
+    },
+  },
+}
+
+export const GroupedActions: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        gap: 8,
+        width: 200,
+      }}
+    >
+      <Button variant="ghost" tone="neutral">
+        Edit
+      </Button>
+      <Button variant="ghost" tone="neutral">
+        Duplicate
+      </Button>
+      <Divider />
+      <Button variant="ghost" tone="danger">
+        Delete
+      </Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'In a list of actions, a Divider keeps a destructive action apart from the everyday ones, so it is harder to press by mistake.',
+      },
+    },
+  },
+}
+
+export const BeforeTheTotal: Story = {
+  render: () => (
+    <div style={{ width: 360 }}>
+      <Row label="Coffee beans" value="120 NOK" />
+      <Row label="Filter papers" value="45 NOK" />
+      <Divider />
+      <Row label="Total" value="165 NOK" strong />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A Divider before a total shows that the last row sums up the ones above it.',
+      },
+    },
+  },
 }
