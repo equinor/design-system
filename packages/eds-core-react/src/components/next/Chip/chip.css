@@ -20,11 +20,12 @@
     --_stroke-width: 1px;
 
     /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
-     * selects the tone (Chip always sets it, default tone is neutral). Neutral
-     * maps text to --eds-text-primary by design (#5283). Non-neutral tones use
-     * --eds-text-on-muted-{tone} for label text and --eds-icon-on-muted-{tone}
-     * for icons, as in the Chip Figma component, so text and icon share one
-     * shade. Surfaces use --eds-background-interactive-{tone}-*. */
+     * selects the tone (Chip always sets it, default tone is neutral). All
+     * text and icon colours follow the Chip Figma component. Neutral uses
+     * --eds-text-primary and --eds-icon-primary, which is what Figma binds,
+     * rather than the on-muted-neutral tokens. Non-neutral tones use
+     * --eds-text-on-muted-{tone} and --eds-icon-on-muted-{tone}, so text and
+     * icon share one shade. Surfaces use --eds-background-interactive-{tone}-*. */
     --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
     --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
     --_bg-muted-pressed: var(
@@ -249,9 +250,11 @@
 
     /* ===== ICONS ===== */
 
-    /* The icon fits inside the 20px line box, so flex centring places it
-     * and it needs none of Icon's optical margins: the gap is the only
-     * space between icon and label, as in Figma. */
+    /* The icon is smaller than the label's line box at every density, so
+     * flex centring places it and it needs none of Icon's optical margins:
+     * the gap is the only space between icon and label, as in Figma. This
+     * also sizes icons passed as children, so Icon's size prop has no effect
+     * inside a chip. */
     & .eds-icon {
       flex-shrink: 0;
 
@@ -260,6 +263,21 @@
       margin: 0;
 
       color: var(--_icon);
+    }
+
+    /* ===== LABEL ===== */
+
+    /* Label needs inline-flex to center custom icons with text.
+     * text-box: normal makes sure nothing trims the label (ADR-0029) — chip
+     * handles sizing via padding + flexbox centering. */
+    & > .label {
+      display: inline-flex;
+      gap: var(--_gap);
+      align-items: center;
+
+      padding-block: 0;
+
+      text-box: normal;
     }
 
     /* Forced colors (Windows High Contrast) strips box-shadow, so the
@@ -273,19 +291,4 @@
       }
     }
   }
-}
-
-/*
- * Label needs inline-flex to center custom icons with text.
- * text-box: normal makes sure nothing trims the label (ADR-0029) — chip
- * handles sizing via padding + flexbox centering.
- */
-.eds-chip > .label {
-  display: inline-flex;
-  gap: var(--_gap);
-  align-items: center;
-
-  padding-block: 0;
-
-  text-box: normal;
 }
