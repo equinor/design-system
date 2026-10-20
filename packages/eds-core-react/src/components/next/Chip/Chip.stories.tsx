@@ -61,13 +61,11 @@ const Wrapper = ({
   gap = 16,
   direction = 'row',
   align = 'center',
-  wrap = false,
 }: {
   children: ReactNode
   gap?: number
   direction?: 'row' | 'column'
   align?: 'flex-start' | 'center' | 'flex-end' | 'stretch'
-  wrap?: boolean
 }) => (
   <div
     style={{
@@ -75,7 +73,8 @@ const Wrapper = ({
       flexDirection: direction,
       gap: `${gap}px`,
       alignItems: align,
-      flexWrap: wrap ? 'wrap' : undefined,
+      // Wrap rather than overflow the narrow docs canvas
+      flexWrap: 'wrap',
     }}
   >
     {children}
@@ -238,7 +237,7 @@ export const Deletable: Story = {
     const remove = (filter: string) =>
       setFilters((f) => f.filter((item) => item !== filter))
     return (
-      <Wrapper wrap>
+      <Wrapper>
         {filters.map((filter) => (
           <Chip key={filter} onDelete={() => remove(filter)}>
             {filter}
@@ -340,7 +339,7 @@ export const CustomIcons: Story = {
         </div>
         <div>
           <h3 style={{ marginBottom: '12px' }}>Recipients</h3>
-          <Wrapper wrap>
+          <Wrapper>
             {recipients.map((name) => (
               <Chip key={name} tone="accent" onDelete={() => remove(name)}>
                 <Icon data={person} aria-hidden />
@@ -443,7 +442,7 @@ export const ToneVariantMatrix: Story = {
             <h3 style={{ marginBottom: '12px', textTransform: 'capitalize' }}>
               {variant}
             </h3>
-            <Wrapper wrap>
+            <Wrapper>
               {tones.map((tone) => {
                 const key = `${variant}-${tone}`
                 return (
