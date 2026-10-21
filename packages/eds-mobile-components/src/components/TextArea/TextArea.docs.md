@@ -19,7 +19,7 @@
 - The `label` is the accessible name, unless you pass your own `accessibilityLabel`.
 - The description and helper message are joined into the accessibility hint, unless you pass your own `accessibilityHint`, so a screen reader reads them with the field.
 - While `invalid` is set, the error icon is hidden from screen readers, so the helper message is the only place that says what is wrong. Write it to say what to fix.
-- A disabled field is reported to screen readers as disabled. A read only field cannot be edited, but it is not reported as read only.
+- A disabled field is reported to screen readers as disabled. A read only field cannot be edited.
 - With `showCharacterCount` and `maxLength`, a screen reader announces "n of N characters" when the count reaches 80% and 100% of the limit.
 - A field with no label needs an `accessibilityLabel`.
 

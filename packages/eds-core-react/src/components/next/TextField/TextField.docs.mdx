@@ -56,9 +56,15 @@ import { TextField } from '@equinor/eds-core-react/next'
 
 ## Examples
 
+### Required
+
+The `required` prop is what makes a field required: a form cannot be submitted while it is empty, and assistive technology announces it. It shows no marker on its own, so add an `indicator` such as "(Required)" to show it.
+
+<Canvas of={Stories.Required} />
+
 ### With indicator
 
-Use `indicator` to show text such as "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation, and the two are separate.
+The `indicator` is plain text next to the label, so it can say anything, such as "(Optional)" or "(Recommended)". It does not make the field required, use `required` for that.
 
 <Canvas of={Stories.WithIndicator} />
 
@@ -76,7 +82,7 @@ Use `helperMessage` for a hint below the field. When the field is invalid, it ex
 
 ### Invalid state
 
-Set `invalid` to show the error border and icon. The helper message is announced as an alert, so use it to say what is wrong.
+Set `invalid` to show the error border and icon. The helper message is announced as an alert, so use it to say what is wrong. `hideErrorIcon` removes the icon and keeps the border, for when the surrounding component shows its own error indication.
 
 <Canvas of={Stories.InvalidState} />
 
@@ -92,12 +98,6 @@ A read only field keeps its value visible and focusable, but it cannot be edited
 
 <Canvas of={Stories.ReadOnlyState} />
 
-### Full example
-
-A field that combines a label, an indicator, a description, a helper message, a label tooltip, start text and an end icon.
-
-<Canvas of={Stories.FullExample} />
-
 ### With label info
 
 Use `labelInfo` to give extra context in a tooltip next to the label. Hover or focus the info icon to read the tooltip.
@@ -109,6 +109,12 @@ Use `labelInfo` to give extra context in a tooltip next to the label. Hover or f
 TextField adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout. Try typing in the password fields to see live validation.
 
 <Canvas of={Stories.DensityModes} />
+
+### Full example
+
+A field that combines a label, an indicator, a description, a helper message, a label tooltip, start text and an end icon.
+
+<Canvas of={Stories.FullExample} />
 
 ## Accessibility
 
@@ -122,6 +128,7 @@ TextField adapts to density modes via `data-density` attribute. Spacious mode is
 
 ## Related components
 
+- [`Field`](?path=/docs/eds-2-0-beta-inputs-field--docs) provides the label, description and helper message that TextField is built from, for building a custom field.
 - [`Input`](?path=/docs/eds-2-0-beta-inputs-input--docs) is the single line input on its own, without a label or helper message.
 - [`TextArea`](?path=/docs/eds-2-0-beta-inputs-textarea--docs) is the complete field for text over several lines.
 

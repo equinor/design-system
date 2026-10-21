@@ -4,7 +4,7 @@ aria: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/search.html
 
 ## Summary
 
-Search is a field for searching, with a label, a description, a helper message and a clear button that appears when the field has a value.
+Search is a text field where users type a query to find and retrieve data, such as an item in a list or a page on a site.
 
 ## Features
 

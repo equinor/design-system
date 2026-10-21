@@ -27,5 +27,6 @@ TextField is a complete form field for one line of text, with a label, a descrip
 
 ## Related components
 
+- [`Field`](?path=/docs/eds-2-0-beta-inputs-field--docs) provides the label, description and helper message that TextField is built from, for building a custom field.
 - [`Input`](?path=/docs/eds-2-0-beta-inputs-input--docs) is the single line input on its own, without a label or helper message.
 - [`TextArea`](?path=/docs/eds-2-0-beta-inputs-textarea--docs) is the complete field for text over several lines.

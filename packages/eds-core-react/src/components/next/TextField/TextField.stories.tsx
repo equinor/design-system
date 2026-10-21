@@ -234,19 +234,42 @@ export const Overview: StoryFn<TextFieldProps> = () => (
   </>
 )
 
-export const WithIndicator: StoryFn<TextFieldProps> = () => (
+export const Required: StoryFn<TextFieldProps> = () => (
   <>
-    <TextField label="Default field" placeholder="No indicator" />
+    <TextField label="Name" required placeholder="Required, no marker" />
     <TextField
       label="Email"
-      indicator="(Required)"
       required
-      placeholder="Required field"
+      indicator="(Required)"
+      placeholder="Required, with a marker"
     />
+  </>
+)
+Required.parameters = {
+  docs: {
+    description: {
+      story:
+        'The `required` prop is what makes a field required: a form cannot be submitted while it is empty, and assistive technology announces it. It shows no marker on its own, so add an `indicator` such as "(Required)" to show it.',
+    },
+  },
+}
+
+export const WithIndicator: StoryFn<TextFieldProps> = () => (
+  <>
     <TextField
       label="Nickname"
       indicator="(Optional)"
       placeholder="Optional field"
+    />
+    <TextField
+      label="Username"
+      indicator="(Recommended)"
+      placeholder="Recommended field"
+    />
+    <TextField
+      label="Bio"
+      indicator="(Max 200 characters)"
+      placeholder="Short description"
     />
   </>
 )
@@ -254,7 +277,7 @@ WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Use `indicator` to show text such as "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation, and the two are separate.',
+        'The `indicator` is plain text next to the label, so it can say anything, such as "(Optional)" or "(Recommended)". It does not make the field required, use `required` for that.',
     },
   },
 }
@@ -292,19 +315,29 @@ WithHelperMessage.parameters = {
 }
 
 export const InvalidState: StoryFn<TextFieldProps> = () => (
-  <TextField
-    label="Label"
-    placeholder="Placeholder"
-    defaultValue="Invalid value"
-    invalid
-    helperMessage="This field has an error"
-  />
+  <>
+    <TextField
+      label="Label"
+      placeholder="Placeholder"
+      defaultValue="Invalid value"
+      invalid
+      helperMessage="This field has an error"
+    />
+    <TextField
+      label="Label"
+      placeholder="Placeholder"
+      defaultValue="Invalid value"
+      invalid
+      hideErrorIcon
+      helperMessage="This field has an error"
+    />
+  </>
 )
 InvalidState.parameters = {
   docs: {
     description: {
       story:
-        'Set `invalid` to show the error border and icon. The helper message is announced as an alert, so use it to say what is wrong.',
+        'Set `invalid` to show the error border and icon. The helper message is announced as an alert, so use it to say what is wrong. `hideErrorIcon` removes the icon and keeps the border, for when the surrounding component shows its own error indication.',
     },
   },
 }
@@ -347,28 +380,6 @@ ReadOnlyState.parameters = {
     description: {
       story:
         'A read only field keeps its value visible and focusable, but it cannot be edited. Its value is still submitted with a form.',
-    },
-  },
-}
-
-export const FullExample: StoryFn<TextFieldProps> = () => (
-  <TextField
-    label="Amount"
-    indicator="(Optional)"
-    description="Enter the transaction amount"
-    placeholder="0.00"
-    type="number"
-    helperMessage="Helper Message"
-    labelInfo="This field accepts decimal values for currency amounts."
-    startText="NOK"
-    endAdornment={<Icon data={money} />}
-  />
-)
-FullExample.parameters = {
-  docs: {
-    description: {
-      story:
-        'A field that combines a label, an indicator, a description, a helper message, a label tooltip, start text and an end icon.',
     },
   },
 }
@@ -470,6 +481,28 @@ DensityModes.parameters = {
     description: {
       story:
         'TextField adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout. Try typing in the password fields to see live validation.',
+    },
+  },
+}
+
+export const FullExample: StoryFn<TextFieldProps> = () => (
+  <TextField
+    label="Amount"
+    indicator="(Optional)"
+    description="Enter the transaction amount"
+    placeholder="0.00"
+    type="number"
+    helperMessage="Helper Message"
+    labelInfo="This field accepts decimal values for currency amounts."
+    startText="NOK"
+    endAdornment={<Icon data={money} />}
+  />
+)
+FullExample.parameters = {
+  docs: {
+    description: {
+      story:
+        'A field that combines a label, an indicator, a description, a helper message, a label tooltip, start text and an end icon.',
     },
   },
 }

@@ -81,13 +81,3 @@ WithStartText.parameters = {
         },
     },
 };
-
-export const Multiline = () => <TextField label="Notes" multiline />;
-
-Multiline.parameters = {
-    docs: {
-        description: {
-            story: "Set `multiline` to allow text over several lines. TextArea is the complete field built for longer text.",
-        },
-    },
-};
