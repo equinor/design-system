@@ -24,12 +24,12 @@ import { Search } from '@equinor/eds-mobile-components'
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `onChange` | `(contents: string) => void` | None | A callback method invoked when the input component registers a change of text content. |
-| `readOnly` | `boolean` | None | When true, the value cannot be edited but can be selected and copied. Unlike disabled, the field remains interactive and is not visually dimmed. Note: on iOS, text selection requires multiline mode, since single-line read-only inputs are not selectable due to a platform constraint. |
+| `readOnly` | `boolean` | `false` | When true, the value cannot be edited but can be selected and copied. Unlike disabled, the field remains interactive and is not visually dimmed. Note: on iOS, text selection requires multiline mode, since single-line read-only inputs are not selectable due to a platform constraint. |
 | `placeholder` | `string` | None | The text to display when the input component is empty. |
 | `startText` | `string` | None | Prefix text displayed at the start of the input (e.g., "https://", "NOK", "€"). |
 | `endText` | `string` | None | Suffix text displayed at the end of the input (e.g., "EUR", "kg", ".com"). |
-| `invalid` | `boolean` | None | Whether the input is in an invalid/error state. |
-| `disabled` | `boolean` | None | When true, the input is fully non-interactive, with no editing, selection, or focus. |
+| `invalid` | `boolean` | `false` | Whether the input is in an invalid/error state. |
+| `disabled` | `boolean` | `false` | When true, the input is fully non-interactive, with no editing, selection, or focus. |
 | `label` | `string` | None | The label displayed above the search input. |
 | `indicator` | `string` | None | Indicator text shown inline after the label, e.g. "(Required)" or "(Optional)". |
 | `description` | `string` | None | A description shown below the label, above the search input. |

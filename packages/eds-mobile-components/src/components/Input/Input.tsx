@@ -18,6 +18,7 @@ export type InputProps = {
     onChange?: (contents: string) => void;
     /**
      * A boolean value indicating whether or not the input component should span across multiple lines of text or wrapped to one line.
+     * @default false
      */
     multiline?: boolean;
     /**
@@ -42,10 +43,12 @@ export type InputProps = {
     endAdornment?: ReactNode;
     /**
      * Whether the input is in an invalid/error state.
+     * @default false
      */
     invalid?: boolean;
     /**
      * Whether to hide the built-in error icon shown when invalid is true.
+     * @default false
      */
     hideErrorIcon?: boolean;
     /**
@@ -53,10 +56,12 @@ export type InputProps = {
      * Unlike disabled, the field remains interactive and is not visually dimmed.
      * Note: on iOS, text selection requires multiline mode, since single-line read-only
      * inputs are not selectable due to a platform constraint.
+     * @default false
      */
     readOnly?: boolean;
     /**
      * When true, the input is fully non-interactive, with no editing, selection, or focus.
+     * @default false
      */
     disabled?: boolean;
 } & Omit<TextInputProps, "onChange" | "onChangeText" | "readOnly">;
