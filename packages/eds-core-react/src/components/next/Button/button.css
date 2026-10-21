@@ -36,6 +36,12 @@
     --_border-interactive: var(
       --eds-border-interactive-accent-emphasis-default
     );
+    --_border-interactive-hover: var(
+      --eds-border-interactive-accent-emphasis-hover
+    );
+    --_border-interactive-pressed: var(
+      --eds-border-interactive-accent-emphasis-pressed
+    );
     --_color: var(--_text-emphasis);
     --_bg-color: var(--_bg-emphasis);
 
@@ -71,7 +77,7 @@
     /* Transitions */
     transition:
       background-color 150ms ease-in-out,
-      border-color 150ms ease-in-out,
+      box-shadow 150ms ease-in-out,
       color 150ms ease-in-out;
 
     /* ===== LABEL ===== */
@@ -127,6 +133,12 @@
     --_border-interactive: var(
       --eds-border-interactive-neutral-emphasis-default
     );
+    --_border-interactive-hover: var(
+      --eds-border-interactive-neutral-emphasis-hover
+    );
+    --_border-interactive-pressed: var(
+      --eds-border-interactive-neutral-emphasis-pressed
+    );
   }
 
   .eds-button[data-color-appearance='danger'] {
@@ -143,6 +155,12 @@
     --_text-interactive: var(--eds-text-on-default-danger);
     --_border-interactive: var(
       --eds-border-interactive-danger-emphasis-default
+    );
+    --_border-interactive-hover: var(
+      --eds-border-interactive-danger-emphasis-hover
+    );
+    --_border-interactive-pressed: var(
+      --eds-border-interactive-danger-emphasis-pressed
     );
   }
 
@@ -187,7 +205,9 @@
     cursor: not-allowed;
   }
 
-  .eds-button[data-variant='primary']:hover:not(:disabled) {
+  .eds-button[data-variant='primary']:is(:hover, :focus-visible):not(
+      :disabled
+    ) {
     --_bg-color: var(--_bg-emphasis-hover);
   }
 
@@ -197,32 +217,33 @@
 
   /* ===== SECONDARY VARIANT ===== */
 
+  /* The border is an inset box-shadow, not an outline, so the focus ring
+   * (outline) can show outside it with the 1px gap from Figma. */
   .eds-button[data-variant='secondary'] {
     --_color: var(--_text-interactive);
     --_bg-color: transparent;
+    --_border-color: var(--_border-interactive);
 
-    outline: var(--_stroke-width) solid var(--_border-interactive);
-    outline-offset: calc(-1 * var(--_stroke-width));
+    box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border-color);
   }
 
   .eds-button[data-variant='secondary']:disabled {
     --_color: var(--eds-text-interactive-disabled);
+    --_border-color: var(--eds-border-interactive-disabled);
 
     cursor: not-allowed;
-    outline: var(--_stroke-width) solid var(--eds-border-interactive-disabled);
-    outline-offset: calc(-1 * var(--_stroke-width));
   }
 
-  .eds-button[data-variant='secondary']:focus-visible {
-    outline-offset: var(--_stroke-width);
-  }
-
-  .eds-button[data-variant='secondary']:hover:not(:disabled) {
+  .eds-button[data-variant='secondary']:is(:hover, :focus-visible):not(
+      :disabled
+    ) {
     --_bg-color: var(--_bg-muted-hover);
+    --_border-color: var(--_border-interactive-hover);
   }
 
   .eds-button[data-variant='secondary']:active:not(:disabled) {
     --_bg-color: var(--_bg-muted-pressed);
+    --_border-color: var(--_border-interactive-pressed);
   }
 
   /* ===== GHOST VARIANT ===== */
@@ -238,7 +259,7 @@
     cursor: not-allowed;
   }
 
-  .eds-button[data-variant='ghost']:hover:not(:disabled) {
+  .eds-button[data-variant='ghost']:is(:hover, :focus-visible):not(:disabled) {
     --_bg-color: var(--_bg-muted-hover);
   }
 
@@ -249,9 +270,21 @@
   /* ===== FOCUS STATE ===== */
 
   /* A 1px ring with a 1px gap, as in Figma. The ring's outer corner follows
-   * the button radius, which matches corner-radius.rounded-outer. */
+   * the button radius, which matches corner-radius.rounded-outer. Focus
+   * also takes the hover fill and border (see the variant rules above), so
+   * the focused button stands out more, as in Figma. */
   .eds-button:focus-visible {
     outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
     outline-offset: var(--_stroke-width);
+  }
+
+  /* Forced colors (Windows High Contrast) strips box-shadow, so the
+   * secondary border needs outline there. While focused, the focus ring
+   * takes over outline and communicates the boundary instead. */
+  @media (forced-colors: active) {
+    .eds-button[data-variant='secondary']:not(:focus-visible) {
+      outline: var(--_stroke-width) solid;
+      outline-offset: calc(-1 * var(--_stroke-width));
+    }
   }
 }
