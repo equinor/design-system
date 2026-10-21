@@ -141,7 +141,7 @@ ADRs are public by default. Decisions about components, tokens, APIs, tooling, a
 
 ## Amendments
 
-- 2026-10-21: Replaced "immutable once accepted" with editorial changes, amendments and changed decisions, so small corrections no longer need a new ADR ([#5679](https://github.com/equinor/design-system/issues/5679)).
+- 2026-10-21: Replaced "immutable once accepted" with editorial changes, amendments and changed decisions, so small corrections no longer need a new ADR ([#5707](https://github.com/equinor/design-system/pull/5707)).
 
 ## Related
 
