@@ -5,7 +5,7 @@ hide_title: true
 description: 'Field is a layout primitive for building accessible form fields. It automatically associates labels, descriptions, and helper messages with form controls using the correct ARIA attributes - ensuring a consistent and accessible experience.'
 ---
 
-<StoryCanvas of="Field/Default" showLink />
+<StoryCanvas of="Field/Introduction" showLink />
 
 ## When to Use
 

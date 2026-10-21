@@ -10,6 +10,7 @@ import { Banner } from '.'
 import { Button } from '../Button'
 import { Icon } from '../Icon'
 import { Link } from '../Link'
+import page from './Banner.docs.mdx'
 
 const meta: Meta<typeof Banner> = {
   title: 'EDS 2.0 (beta)/Feedback/Banner',
@@ -24,12 +25,9 @@ const meta: Meta<typeof Banner> = {
   ],
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-Banner displays important, succinct messages. It can also provide actions for the user to address or dismiss.
-        `,
+      page,
+      source: {
+        excludeDecorators: true,
       },
     },
   },
@@ -46,6 +44,26 @@ export const Introduction: StoryFn<typeof Banner> = (args) => (
   </Banner>
 )
 
+export const Overview: StoryFn<typeof Banner> = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <Banner>
+      <Banner.Icon>
+        <Icon data={info_circle} />
+      </Banner.Icon>
+      <Banner.Message>Your changes have been saved.</Banner.Message>
+    </Banner>
+    <Banner tone="warning">
+      <Banner.Icon>
+        <Icon data={warning_outlined} />
+      </Banner.Icon>
+      <Banner.Message>Your session ends in 5 minutes.</Banner.Message>
+      <Banner.Actions>
+        <Button>Stay signed in</Button>
+      </Banner.Actions>
+    </Banner>
+  </div>
+)
+
 export const WithIcon: StoryFn<typeof Banner> = () => (
   <Banner>
     <Banner.Icon>
@@ -54,6 +72,14 @@ export const WithIcon: StoryFn<typeof Banner> = () => (
     <Banner.Message>{exampleMessage}</Banner.Message>
   </Banner>
 )
+WithIcon.parameters = {
+  docs: {
+    description: {
+      story:
+        'Add `Banner.Icon` to show an icon before the message. The icon is yours to choose, because Banner does not add one for the tone.',
+    },
+  },
+}
 
 export const WithActions: StoryFn<typeof Banner> = () => (
   <Banner>
@@ -63,6 +89,14 @@ export const WithActions: StoryFn<typeof Banner> = () => (
     </Banner.Actions>
   </Banner>
 )
+WithActions.parameters = {
+  docs: {
+    description: {
+      story:
+        'Put buttons in `Banner.Actions`. By default they sit beside the message.',
+    },
+  },
+}
 
 export const ActionsBottom: StoryFn<typeof Banner> = () => (
   <Banner>
@@ -73,18 +107,42 @@ export const ActionsBottom: StoryFn<typeof Banner> = () => (
     </Banner.Actions>
   </Banner>
 )
+ActionsBottom.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `placement="bottom"` on `Banner.Actions` to put the actions below the message, across the full width.',
+    },
+  },
+}
 
 export const Warning: StoryFn<typeof Banner> = () => (
   <Banner tone="warning">
     <Banner.Message>{exampleMessage}</Banner.Message>
   </Banner>
 )
+Warning.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `tone="warning"` for a message about something that may need attention.',
+    },
+  },
+}
 
 export const Danger: StoryFn<typeof Banner> = () => (
   <Banner tone="danger">
     <Banner.Message>{exampleMessage}</Banner.Message>
   </Banner>
 )
+Danger.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `tone="danger"` for a message about an error or something that has gone wrong.',
+    },
+  },
+}
 
 export const Success: StoryFn<typeof Banner> = () => (
   <Banner tone="success">
@@ -94,6 +152,13 @@ export const Success: StoryFn<typeof Banner> = () => (
     <Banner.Message>{exampleMessage}</Banner.Message>
   </Banner>
 )
+Success.parameters = {
+  docs: {
+    description: {
+      story: 'Use `tone="success"` to confirm that something went well.',
+    },
+  },
+}
 
 export const WithLink: StoryFn<typeof Banner> = () => (
   <Banner>
@@ -106,6 +171,14 @@ export const WithLink: StoryFn<typeof Banner> = () => (
     </Banner.Actions>
   </Banner>
 )
+WithLink.parameters = {
+  docs: {
+    description: {
+      story:
+        'A link in `Banner.Actions` sits beside the message, like a button does.',
+    },
+  },
+}
 
 export const WithLinkBottom: StoryFn<typeof Banner> = () => (
   <Banner>
@@ -118,6 +191,13 @@ export const WithLinkBottom: StoryFn<typeof Banner> = () => (
     </Banner.Actions>
   </Banner>
 )
+WithLinkBottom.parameters = {
+  docs: {
+    description: {
+      story: 'With `placement="bottom"`, the link sits below the message.',
+    },
+  },
+}
 
 export const Dismissible: StoryFn<typeof Banner> = () => {
   const [visible, setVisible] = useState(true)
@@ -134,6 +214,14 @@ export const Dismissible: StoryFn<typeof Banner> = () => {
       <Banner.Message>{exampleMessage}</Banner.Message>
     </Banner>
   )
+}
+Dismissible.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `onDismiss` to show a close button. Banner only calls it, so your code removes the banner, as this example does with state.',
+    },
+  },
 }
 
 export const AllVariants: StoryFn<typeof Banner> = () => (
@@ -199,3 +287,11 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
     </Banner>
   </div>
 )
+AllVariants.parameters = {
+  docs: {
+    description: {
+      story:
+        'Every tone, with actions beside the message and below it, a link and a close button.',
+    },
+  },
+}

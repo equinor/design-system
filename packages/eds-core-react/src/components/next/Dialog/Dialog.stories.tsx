@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Dialog } from '.'
 import { Button } from '../Button'
+import page from './Dialog.docs.mdx'
 
 const meta: Meta<typeof Dialog> = {
   title: 'EDS 2.0 (beta)/Feedback/Dialog',
@@ -9,23 +10,7 @@ const meta: Meta<typeof Dialog> = {
   tags: ['beta'],
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-Built on the native \`<dialog>\` element with \`showModal()\` for free focus
-trapping, Escape-key handling and inert background. Backdrop clicks close
-the dialog.
-
-### Import
-
-\`\`\`tsx
-import { Dialog } from '@equinor/eds-core-react/next'
-\`\`\`
-
-See the stories below for usage patterns.
-        `,
-      },
+      page,
     },
   },
 }
@@ -55,6 +40,29 @@ export const Introduction: StoryFn = () => {
   )
 }
 
+export const Overview: StoryFn = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Sign out</Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Header>
+          <Dialog.Title>Sign out?</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Content>
+          You will need to sign in again to continue.
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => setOpen(false)}>Sign out</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  )
+}
+
 export const Passive: StoryFn = () => {
   const [open, setOpen] = useState(false)
   return (
@@ -65,12 +73,20 @@ export const Passive: StoryFn = () => {
           <Dialog.Title>You are now offline</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
-          A passive dialog — no action row. Dismiss via the close icon, Escape,
-          or backdrop click.
+          A passive dialog has no action row. Dismiss it with the close icon,
+          Escape, or a click on the backdrop.
         </Dialog.Content>
       </Dialog>
     </>
   )
+}
+Passive.parameters = {
+  docs: {
+    description: {
+      story:
+        'A dialog without `Dialog.Actions`. The user dismisses it with the close icon, Escape or a click on the backdrop.',
+    },
+  },
 }
 
 export const DangerAction: StoryFn = () => {
@@ -100,6 +116,14 @@ export const DangerAction: StoryFn = () => {
     </>
   )
 }
+DangerAction.parameters = {
+  docs: {
+    description: {
+      story:
+        'For a destructive action, use `tone="danger"` on the button that confirms it, and say in the content what will be lost.',
+    },
+  },
+}
 
 export const SingleAction: StoryFn = () => {
   const [open, setOpen] = useState(false)
@@ -120,6 +144,14 @@ export const SingleAction: StoryFn = () => {
     </>
   )
 }
+SingleAction.parameters = {
+  docs: {
+    description: {
+      story:
+        'A dialog with one action, for a message the user only needs to acknowledge.',
+    },
+  },
+}
 
 export const WithoutScrim: StoryFn = () => {
   const [open, setOpen] = useState(false)
@@ -133,8 +165,8 @@ export const WithoutScrim: StoryFn = () => {
         <Dialog.Content>
           <p style={{ margin: 0 }}>
             With <code>scrim={'{false}'}</code> the backdrop is fully
-            transparent — useful when the dialog is part of a flow that already
-            dims the background, or when a standalone Scrim component is
+            transparent. This is useful when the dialog is part of a flow that
+            already dims the background, or when a standalone Scrim component is
             composed externally.
           </p>
         </Dialog.Content>
@@ -147,6 +179,14 @@ export const WithoutScrim: StoryFn = () => {
       </Dialog>
     </>
   )
+}
+WithoutScrim.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `scrim={false}` to make the backdrop fully transparent, for a flow that already dims the background.',
+    },
+  },
 }
 
 export const SpecificWidth: StoryFn = () => {
@@ -183,4 +223,12 @@ export const SpecificWidth: StoryFn = () => {
       </Dialog>
     </>
   )
+}
+SpecificWidth.parameters = {
+  docs: {
+    description: {
+      story:
+        'By default the dialog is at least 300px wide and grows with its content. Set `inlineSize` through `style` or a `className` for a wider dialog, such as one that holds a form or a table.',
+    },
+  },
 }
