@@ -145,7 +145,7 @@ for (const file of PROSE) {
     const name = m[1]
     if (canon.has(name)) continue
     // A file name such as `elements.css` has the same shape as a dotted token name.
-    if (/\.(css|js|mjs|ts|tsx|md|mdx|json)$/.test(name)) continue
+    if (/\.(css|js|mjs|ts|tsx|mdx|json)$/.test(name)) continue
     if (isPrimitive(name)) continue
     // The typography pages shorten `typography.label.md` to `label.md` in running text.
     if (/^(header|label|body)\./.test(name) && isPrefix(`typography.${name}`))
