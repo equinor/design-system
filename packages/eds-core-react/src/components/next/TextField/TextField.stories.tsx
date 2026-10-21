@@ -227,6 +227,7 @@ export const Overview: StoryFn<TextFieldProps> = () => (
     <TextField
       label="Password"
       type="password"
+      required
       indicator="(Required)"
       description="Use at least 8 characters"
       helperMessage="You can change it later in settings"

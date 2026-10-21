@@ -215,20 +215,50 @@ AutoGrow.parameters = {
   },
 }
 
-export const WithIndicator: StoryFn<TextAreaProps> = () => (
+export const Required: StoryFn<TextAreaProps> = () => (
   <>
-    <TextArea label="Notes" placeholder="No indicator" rows={3} />
     <TextArea
-      label="Comments"
-      indicator="(Required)"
+      label="Message"
       required
-      placeholder="Required field"
+      placeholder="Required, no marker"
       rows={3}
     />
+    <TextArea
+      label="Feedback"
+      required
+      indicator="(Required)"
+      placeholder="Required, with a marker"
+      rows={3}
+    />
+  </>
+)
+Required.parameters = {
+  docs: {
+    description: {
+      story:
+        'The `required` prop is what makes a field required: a form cannot be submitted while it is empty, and assistive technology announces it. It shows no marker on its own, so add an `indicator` such as "(Required)" to show it.',
+    },
+  },
+}
+
+export const WithIndicator: StoryFn<TextAreaProps> = () => (
+  <>
     <TextArea
       label="Additional info"
       indicator="(Optional)"
       placeholder="Optional field"
+      rows={3}
+    />
+    <TextArea
+      label="Comments"
+      indicator="(Recommended)"
+      placeholder="Recommended field"
+      rows={3}
+    />
+    <TextArea
+      label="Summary"
+      indicator="(Max 500 characters)"
+      placeholder="Short summary"
       rows={3}
     />
   </>
@@ -237,7 +267,7 @@ WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Use `indicator` to show text such as "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation, and the two are separate.',
+        'The `indicator` is plain text next to the label, so it can say anything, such as "(Optional)" or "(Recommended)". It does not make the field required, use `required` for that.',
     },
   },
 }

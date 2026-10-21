@@ -70,9 +70,15 @@ TextArea grows as the user types. `rows` sets the starting height, which is also
 
 <Canvas of={Stories.AutoGrow} />
 
+### Required
+
+The `required` prop is what makes a field required: a form cannot be submitted while it is empty, and assistive technology announces it. It shows no marker on its own, so add an `indicator` such as "(Required)" to show it.
+
+<Canvas of={Stories.Required} />
+
 ### With indicator
 
-Use `indicator` to show text such as "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation, and the two are separate.
+The `indicator` is plain text next to the label, so it can say anything, such as "(Optional)" or "(Recommended)". It does not make the field required, use `required` for that.
 
 <Canvas of={Stories.WithIndicator} />
 

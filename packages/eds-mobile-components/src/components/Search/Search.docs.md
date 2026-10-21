@@ -21,3 +21,7 @@
 - The search, error and clear icons are hidden from screen readers.
 - While `invalid` is set, the error icon is hidden from screen readers, so the helper message is the only place that says what is wrong. Write it to say what to fix.
 - A disabled field is reported to screen readers as disabled. A read only field cannot be edited.
+
+## Related components
+
+- [`TextField`](?path=/docs/eds-2-0-beta-inputs-textfield--docs) is the complete field for other single line text.
