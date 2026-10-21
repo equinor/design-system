@@ -86,15 +86,12 @@
       color 150ms ease-in-out;
 
     /* ===== LABEL ===== */
-    /* text-box: normal makes sure nothing trims the label (ADR-0029) */
     & .label {
       font-family: var(--_font-family);
       font-size: var(--_font-size);
       font-weight: var(--eds-font-weight-medium);
       line-height: var(--_line-height);
       color: var(--_color);
-
-      text-box: normal;
     }
 
     &[data-multiline] .label {
