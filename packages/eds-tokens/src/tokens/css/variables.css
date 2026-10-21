@@ -768,7 +768,6 @@
   --eds-border-interactive-neutral-muted-default: var(--eds-neutral-4);
   --eds-border-interactive-neutral-muted-hover: var(--eds-neutral-5);
   --eds-border-interactive-neutral-muted-pressed: var(--eds-neutral-7);
-  --eds-border-interactive-selected-indicator: var(--eds-accent-13);
   --eds-border-interactive-success-emphasis-default: var(--eds-success-9);
   --eds-border-interactive-success-emphasis-hover: var(--eds-success-10);
   --eds-border-interactive-success-emphasis-pressed: var(--eds-success-11);
