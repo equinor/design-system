@@ -88,13 +88,13 @@ Build both now, on one data source.
 
 We will build a CLI first, for the EDS 2.0 beta components in `/next`.
 
-**Package.** The CLI lives in this monorepo and is published as its own package, `@equinor/eds-cli`. A separate package gets its own release-please entry and keeps CLI dependencies out of the component library.
+**Package.** The CLI lives in this monorepo and is published as its own package (working name `@equinor/eds-cli`). A separate package can be released on its own and keeps CLI dependencies out of the component library.
 
-**Data source.** The CLI does not carry its own copy of the EDS data. A machine-readable data file is generated from the same sources as the component index and the Storybook docs pages (component types, stories and `.docs.md`) and published inside `@equinor/eds-core-react`. The CLI reads that file from the consumer's installed package. Its answers therefore always match the installed version, and the CLI does not need a release for every beta. The exact file format and path are left to the MVP ([#4736](https://github.com/equinor/design-system/issues/4736)).
+**Data source.** The CLI does not carry its own copy of the EDS data. Machine-readable data is generated from the component source, the same way as the component index and the Storybook docs pages, and ships with the installed component package. The CLI reads the data from the consumer's installed package. Its answers therefore always match the installed version, and the CLI does not need a release for every beta. The format and location of the data are left to the MVP ([#4736](https://github.com/equinor/design-system/issues/4736)).
 
 **Migration.** Because the installed beta contains both the current components and `/next`, the CLI can answer migration questions: what replaces a current component, and what changed in its API. The mapping from current to beta components changes one component at a time, so it lives in an ordinarily maintained document, not in this record. It builds on the breaking changes page ([#5387](https://github.com/equinor/design-system/issues/5387)) and the migration guide ([#5389](https://github.com/equinor/design-system/issues/5389)).
 
-**MCP later.** Choosing a CLI now does not mean we will not need an MCP server. Whether designers need one is assessed in [#4731](https://github.com/equinor/design-system/issues/4731). If we build it, it reads the same data file as the CLI, so the two never give different answers.
+**MCP later.** Choosing a CLI now does not mean we will not need an MCP server. Whether designers need one is assessed in [#4731](https://github.com/equinor/design-system/issues/4731). If we build it, it reads the same data as the CLI, so the two never give different answers.
 
 This satisfies the drivers: the CLI reaches consumers' repositories, supports the migration, matches the installed version, is cheap to build, runs in CI and every harness, and the shared data source keeps the MCP option open.
 
@@ -105,14 +105,13 @@ This satisfies the drivers: the CLI reaches consumers' repositories, supports th
 - Good, because answers follow the installed version without a CLI release per beta.
 - Good, because the same CLI can power design system checks in CI.
 - Bad, because the CLI is only as good as the source data. Every prop in `/next` except `children` has JSDoc, but of the 23 exported components only Icon has a component-level description, and the rest need writing.
-- Bad, because `@equinor/eds-core-react` gets a new generated file to keep in its published contents.
-- Bad, because a new package needs its own publish workflow and its own npm trusted publisher entry, which cannot be shared with an existing workflow.
+- Bad, because the component package gets generated data to keep in its published contents.
+- Bad, because a new package needs its own release setup.
 - Bad, because designers working with AI in Figma get nothing from this until the MCP need is assessed.
 
 ### Confirmation
 
-- The MVP adds a CI check that fails if the generated data file is missing from the `@equinor/eds-core-react` build.
-- The CLI's commands are covered by tests that run against the generated data.
+- The MVP decides how the generated data and the CLI are tested in CI.
 
 ## Related
 
