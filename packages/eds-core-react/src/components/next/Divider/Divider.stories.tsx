@@ -23,21 +23,22 @@ type Story = StoryObj<typeof Divider>
 const Line = ({
   children,
   strong = false,
+  subtle = false,
 }: {
   children: ReactNode
   strong?: boolean
+  subtle?: boolean
 }) => (
   <TypographyNext
     as="span"
     family="ui"
     size="md"
     baseline="center"
+    weight={strong ? 'bolder' : undefined}
     style={{
       display: 'block',
       paddingBlock: 'var(--eds-spacing-vertical-md)',
-      fontWeight: strong
-        ? 'var(--eds-typography-ui-body-md-font-weight-bolder)'
-        : undefined,
+      color: subtle ? 'var(--eds-color-text-subtle)' : undefined,
     }}
   >
     {children}
@@ -61,7 +62,9 @@ const Row = ({
     }}
   >
     <Line strong={strong}>{label}</Line>
-    <Line strong={strong}>{value}</Line>
+    <Line strong={strong} subtle={!strong}>
+      {value}
+    </Line>
   </div>
 )
 

@@ -18,7 +18,7 @@ export const Standalone = () => (
 Standalone.parameters = {
     docs: {
         description: {
-            story: "A standalone link is a button-sized touch target with its own underline. It is the default.",
+            story: "A standalone link sits on its own, with its own underline. It is the default.",
         },
     },
 };

@@ -2,7 +2,7 @@
 
 ## Features
 
-- Comes as a standalone link with its own touch target, or as an inline link that sits inside a sentence.
+- Comes as a standalone link that sits on its own, or as an inline link that sits inside a sentence.
 - Follows the Typography size scale, so a link can match the text around it.
 - Changes colour while it is pressed.
 - Can show an icon that marks a link opening outside the app.
@@ -26,7 +26,7 @@ import { Link } from '@equinor/eds-mobile-components'
 |---|---|---|---|
 | `children` | `ReactNode` | None | The link label. Required. |
 | `onPress` | `TextProps["onPress"]` | None | Called when the link is pressed. |
-| `variant` | `'standalone' \| 'inline'` | `'standalone'` | Visual variant. `standalone` has its own underline and a proper touch target. `inline` sits inside a sentence of text and renders as a Text element. |
+| `variant` | `'standalone' \| 'inline'` | `'standalone'` | Visual variant. `standalone` sits on its own, with its own underline. `inline` sits inside a sentence of text and renders as a Text element. |
 | `size` | `LinkSize` | `'md'` | Font size, matching the Typography UI size scale. |
 | `external` | `boolean` | `false` | Shows an external link icon alongside the text. |
 | `visited` | `boolean` | `false` | Marks the link as previously visited. Consumer is responsible for tracking this state. |
@@ -35,7 +35,7 @@ import { Link } from '@equinor/eds-mobile-components'
 
 ### Standalone
 
-A standalone link is a button-sized touch target with its own underline. It is the default.
+A standalone link sits on its own, with its own underline. It is the default.
 
 ```tsx
 <Link onPress={handlePress}>Open documentation</Link>

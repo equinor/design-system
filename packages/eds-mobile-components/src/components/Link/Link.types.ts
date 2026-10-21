@@ -12,7 +12,7 @@ export type LinkProps = {
     /** Called when the link is pressed. */
     onPress?: TextProps["onPress"];
     /**
-     * Visual variant. `standalone` has its own underline and a proper touch target. `inline` sits inside a sentence of text and renders as a Text element.
+     * Visual variant. `standalone` sits on its own, with its own underline. `inline` sits inside a sentence of text and renders as a Text element.
      * @default 'standalone'
      */
     variant?: LinkVariant;

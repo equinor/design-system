@@ -2,7 +2,7 @@
 
 <!-- Three to five short lines on what the component does for you. Do not repeat the props table. -->
 
-- Comes as a standalone link with its own touch target, or as an inline link that sits inside a sentence.
+- Comes as a standalone link that sits on its own, or as an inline link that sits inside a sentence.
 - Follows the Typography size scale, so a link can match the text around it.
 - Changes colour while it is pressed.
 - Can show an icon that marks a link opening outside the app.
