@@ -26,16 +26,16 @@ const [value, setValue] = useState('')
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `onChange` | `(contents: string) => void` | None | A callback method invoked when the input component registers a change of text content. |
-| `multiline` | `boolean` | None | A boolean value indicating whether or not the input component should span across multiple lines of text or wrapped to one line. |
+| `multiline` | `boolean` | `false` | A boolean value indicating whether or not the input component should span across multiple lines of text or wrapped to one line. |
 | `placeholder` | `string` | None | The text to display when the input component is empty. |
 | `startText` | `string` | None | Prefix text displayed at the start of the input (e.g., "https://", "NOK", "€"). |
 | `endText` | `string` | None | Suffix text displayed at the end of the input (e.g., "EUR", "kg", ".com"). |
 | `startAdornment` | `ReactNode` | None | An element displayed at the start of the input (e.g., an icon or button). |
 | `endAdornment` | `ReactNode` | None | An element displayed at the end of the input (e.g., an icon or button). |
-| `invalid` | `boolean` | None | Whether the input is in an invalid/error state. |
-| `hideErrorIcon` | `boolean` | None | Whether to hide the built-in error icon shown when invalid is true. |
-| `readOnly` | `boolean` | None | When true, the value cannot be edited but can be selected and copied. Unlike disabled, the field remains interactive and is not visually dimmed. Note: on iOS, text selection requires multiline mode, since single-line read-only inputs are not selectable due to a platform constraint. |
-| `disabled` | `boolean` | None | When true, the input is fully non-interactive, with no editing, selection, or focus. |
+| `invalid` | `boolean` | `false` | Whether the input is in an invalid/error state. |
+| `hideErrorIcon` | `boolean` | `false` | Whether to hide the built-in error icon shown when invalid is true. |
+| `readOnly` | `boolean` | `false` | When true, the value cannot be edited but can be selected and copied. Unlike disabled, the field remains interactive and is not visually dimmed. Note: on iOS, text selection requires multiline mode, since single-line read-only inputs are not selectable due to a platform constraint. |
+| `disabled` | `boolean` | `false` | When true, the input is fully non-interactive, with no editing, selection, or focus. |
 
 ## Examples
 
