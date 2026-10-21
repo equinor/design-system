@@ -107,24 +107,22 @@ name segment that starts with a digit becomes a word, and a hyphenated segment i
 `typography.header.2xl.line-height` is `typography.header.twoXl.lineHeight`.
 
 ```ts
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light.ts'
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
 
 semantic.typography.label.md.fontSize // 14
 semantic.typography.header.twoXl.lineHeight // 32
 semantic.fontWeight.medium // 500
 ```
 
-Three differences from the CSS form, all easy to miss:
+The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy
+to miss:
 
-- **The specifier carries the file extension.** `./next/*` is a wildcard onto the source tree, so
-  `next/ts/semantic/light` does not resolve and `next/ts/semantic/light.ts` does. The `next/`
-  paths are temporary for the beta line.
 - **The values are unitless numbers, not lengths.** `14`, not `14px`. Add the unit yourself.
 - **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the
   densities are separate modules and you pick one:
 
 ```ts
-import { density } from '@equinor/eds-tokens/next/ts/density/compact.ts'
+import { density } from '@equinor/eds-tokens/next/ts/density/compact'
 
 density.typography.label.md.fontSize // 12
 ```
