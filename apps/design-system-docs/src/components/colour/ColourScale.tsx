@@ -31,7 +31,7 @@ const ROLES: Record<number, string> = {
   10: 'solid fill on hover; on-default foregrounds',
   11: 'solid fill when pressed; interactive foregrounds',
   12: 'on-muted foregrounds; the inverted surface',
-  13: 'primary foreground; the selected indicator',
+  13: 'primary foreground',
   14: 'not used',
   15: 'the content plane; on-emphasis foregrounds',
 }
