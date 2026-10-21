@@ -14,7 +14,7 @@ the order records were written rather than the order decisions were made. A
 record whose context has changed should be superseded rather than rewritten,
 keeping the original reasoning readable and dated.
 
-Records: 29
+Records: 30
 
 | ADR | Title | Scope | Status | Date | Note |
 | --- | ----- | ----- | ------ | ---- | ---- |
@@ -47,6 +47,7 @@ Records: 29
 | [0027](./0027-token-variable-architecture-typography-roles.md) | Token variable architecture for typography and spacing, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
 | [0028](./0028-token-code-output-architecture-typography-roles.md) | Token code / output architecture for the redefined token system, with header, label and body roles | Tokens | Accepted | 2026-10-08 |  |
 | [0029](./0029-typography-approach-for-eds-2-web.md) | Typography approach for EDS 2.0 web, with weights that do not vary by size | Web | Accepted | 2026-10-08 |  |
+| [0030](./0030-cli-first-for-ai-agents-on-eds-2-web.md) | Expose EDS 2.0 web to AI agents through a CLI first | Web | Accepted | 2026-10-21 |  |
 
 ## Statuses outside the template
 
