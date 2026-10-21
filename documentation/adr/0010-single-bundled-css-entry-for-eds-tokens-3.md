@@ -116,24 +116,21 @@ granular files stay internal.
   minifier-version churn in release-PR diffs, no extra toolchain
   dependency in the pipeline) and diffs stay reviewable. Gzip closes
   the size gap (4.8 vs 4.6 kB); consumers that bundle minify with
-  their own tooling. The bundle adds two things of its own. The first is
-  the `@layer eds-tokens` wrap decided in
+  their own tooling. The behaviour the bundle adds of its own is the
+  `@layer eds-tokens` wrap decided in
   [ADR-0028](./0028-token-code-output-architecture-typography-roles.md)
   decision point 6 and implemented in
   [#5423](https://github.com/equinor/design-system/issues/5423): the
   output opens with
   `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
   and holds the whole concatenation in one `@layer eds-tokens` block.
-  The second is the generic `sans-serif` appended to every
-  `--eds-family-*` declaration
-  ([#5701](https://github.com/equinor/design-system/issues/5701)): the
-  export names a single typeface, so an app that does not load the font
-  gets the browser default, a serif in every major browser. It is
-  appended at bundle time and not in the export files because
-  `generate-ts-tokens.mjs` reads its values from those files, and the
-  React Native `fontFamily` they feed takes one family name. Both
-  additions are deterministic, so the bundle stays a pure function of
-  the source files; beyond them the step adds nothing on top of the
+  The step also appends a generic family to the `--eds-family-*`
+  declarations, so text does not land on the browser's default serif in
+  an app that has not loaded the font
+  ([#5701](https://github.com/equinor/design-system/issues/5701)). Which
+  generic family that is belongs to the script, not to this ADR. Both
+  touches are deterministic, so the bundle stays a pure function of the
+  source files; beyond them the step adds nothing on top of the
   generated files (see the colour-scheme note below).
 - **Beta validation costs nothing extra:** the existing `./next/css/*`
   wildcard maps to `src/tokens/css/*`, so the committed bundle is
