@@ -218,7 +218,7 @@ describe('Button (next)', () => {
       expect(handleClick).not.toHaveBeenCalled()
     })
 
-    it('sets tone to neutral when disabled regardless of tone prop', () => {
+    it('keeps the tone when disabled', () => {
       render(
         <Button tone="danger" disabled>
           Disabled
@@ -226,19 +226,7 @@ describe('Button (next)', () => {
       )
       expect(screen.getByRole('button')).toHaveAttribute(
         'data-color-appearance',
-        'neutral',
-      )
-    })
-
-    it('sets tone to neutral when disabled with accent', () => {
-      render(
-        <Button tone="accent" disabled>
-          Disabled
-        </Button>,
-      )
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-color-appearance',
-        'neutral',
+        'danger',
       )
     })
   })

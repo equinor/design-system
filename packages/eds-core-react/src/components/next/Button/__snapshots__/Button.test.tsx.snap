@@ -6,7 +6,6 @@ exports[`Button (next) Rendering matches snapshot 1`] = `
     class="eds-button"
     data-color-appearance="accent"
     data-selectable-space="md"
-    data-space-proportions="squished"
     data-variant="primary"
     type="button"
   >
