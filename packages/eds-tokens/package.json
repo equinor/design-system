@@ -115,7 +115,7 @@
     "style-dictionary": "^5.5.0",
     "style-dictionary-utils": "^6.0.1",
     "typescript": "^5.9.3",
-    "vite": "^8.1.5",
+    "vite": "^8.1.6",
     "vitest": "^4.1.11"
   }
 }
