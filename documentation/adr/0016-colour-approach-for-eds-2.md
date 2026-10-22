@@ -193,7 +193,9 @@ Roles with no state ladder:
 - `text`/`icon`: `primary` = 13, `secondary` = 9, `tertiary` = 7, `inverted` = 1
 - Per-context foregrounds, per tone: `text`/`icon.on-default.<tone>` = 10, `on-muted.<tone>` = 12, `on-emphasis.<tone>` = 15
 - Surfaces: `background.canvas` = `neutral.1`, `background.input` = `neutral.1`, `background.{surface,dialog,floating}` = `neutral.15`, `background.inverted` = `neutral.12`, `background.backdrop` = `neutral.7`
-- Stateless roles under `interactive`: `background.interactive.disabled` = `neutral.2`, `background.interactive.read-only` = `neutral.2`, `border.interactive.disabled` = `neutral.4`, `text`/`icon.interactive.disabled` = `neutral.7`, `border.interactive.focus` = `info.7`, `border.interactive.selected-indicator` = `accent.13`
+- Stateless roles under `interactive`: `background.interactive.disabled` = `neutral.2`, `background.interactive.read-only` = `neutral.2`, `border.interactive.disabled` = `neutral.4`, `text`/`icon.interactive.disabled` = `neutral.7`, `border.interactive.focus` = `info.7`
+
+`border.interactive.selected-indicator` (`accent.13`) was listed as a stateless role until it was deleted from Tokens Studio as obsolete on 21 October 2026 ([#5699](https://github.com/equinor/design-system/pull/5699)).
 
 \* `icon.interactive.<tone>` is the one per-tone pattern that is **not** defined for all six tones: `accent`, `info`, `success`, `warning` and `danger` exist, `neutral` does not (verified 2026-08-27). Every other per-tone role group in this table and the list below is complete at six. See _Unresolved_.
 
@@ -207,7 +209,7 @@ The `$description` fields in `input/scale.json` are **legacy intent labels** and
 
 The colour semantic layer lives in `packages/eds-tokens/src/tokens/raw/semantic.json`, grouped as `background.*`, `border.*`, `text.*`, `icon.*`, `overlay.*` and `data-visualization.*`. The token count is not part of the contract; the set grows as roles are added.
 
-Interactive states live under an explicit `interactive` segment (`background.interactive.<tone>.<emphasis|muted|selected>.<default|hover|pressed>`), so that non-interactive roles (`background.canvas`, `border.non-interactive.neutral.default`) are distinguishable from stateful ones by name alone. Some roles under `interactive` carry no ladder at all (`disabled`, `read-only`, `focus`, `selected-indicator`): the segment marks that a role belongs to an interactive element, not that it has states. Components bind to this layer only; binding to `scheme/*` or `color/*` is not supported.
+Interactive states live under an explicit `interactive` segment (`background.interactive.<tone>.<emphasis|muted|selected>.<default|hover|pressed>`), so that non-interactive roles (`background.canvas`, `border.non-interactive.neutral.default`) are distinguishable from stateful ones by name alone. Some roles under `interactive` carry no ladder at all (`disabled`, `read-only`, `focus`): the segment marks that a role belongs to an interactive element, not that it has states. Components bind to this layer only; binding to `scheme/*` or `color/*` is not supported.
 
 Six tones: `accent`, `neutral`, `info`, `success`, `warning`, `danger`.
 
