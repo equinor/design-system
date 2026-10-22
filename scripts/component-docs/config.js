@@ -16,6 +16,16 @@ const MOBILE_SUB_COMPONENTS = {
   Button: [{ name: 'Button.Icon', component: 'IconButton' }],
 }
 
+// Where each React Native props type is documented, for the "Also accepts all
+// React Native ..." line under a mobile props table. A type missing here is
+// named without a link.
+const REACT_NATIVE_DOCS = {
+  PressableProps: 'pressable',
+  TextInputProps: 'textinput',
+  TextProps: 'text',
+  ViewProps: 'view',
+}
+
 // Optional metadata block at the top of a sidecar. These become buttons in the
 // Links row; they are not content, so they never render as a section.
 const SIDECAR_METADATA_KEYS = ['aria', 'docs']
@@ -53,6 +63,7 @@ module.exports = {
   BETA_CALLOUT,
   OPTIONAL_SIDECAR_SECTIONS,
   MOBILE_SUB_COMPONENTS,
+  REACT_NATIVE_DOCS,
   SIDECAR_METADATA_KEYS,
   DOCS_SITE,
   DOCS_SITE_DIR,

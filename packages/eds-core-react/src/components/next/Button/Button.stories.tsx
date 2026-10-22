@@ -38,9 +38,13 @@ const meta: Meta<StoryArgs> = {
     },
     round: {
       control: 'boolean',
-      // Only shown once `icon` is on, because it has no effect on a text button.
-      if: { arg: 'icon' },
-      description: 'Makes an icon-only button circular instead of square',
+      description:
+        'Makes an icon-only button circular instead of square. It only works when `icon` is true.',
+    },
+    multiline: {
+      control: 'boolean',
+      description:
+        'Sets the padding and the baseline alignment for a label on several lines. A long label wraps with or without it, so keep labels short.',
     },
     icon: {
       control: 'boolean',
@@ -51,9 +55,12 @@ const meta: Meta<StoryArgs> = {
       description: 'The label. Ignored in icon-only mode, which shows an icon.',
     },
     // asChild needs a single element as its child, and the playground passes
-    // text, so switching it on would render nothing.
+    // text, so switching it on would render nothing. The row stays in the table
+    // without a control.
     asChild: {
-      table: { disable: true },
+      control: false,
+      description:
+        'Renders the Button styles on the child element instead of a `<button>`, such as a link. It cannot be switched on here, because the playground label is text and `asChild` needs an element. See the As child example.',
     },
     disabled: {
       control: 'boolean',

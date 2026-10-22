@@ -176,6 +176,72 @@ describe('mobile page: sub-components', () => {
   })
 })
 
+describe('mobile page: React Native base types', () => {
+  const render = (overrides) =>
+    renderMobile(
+      'Thing',
+      context([story('Sizes', { caption: 'Two sizes.' })], overrides),
+    )
+
+  const base = (name, omitted = []) => ({ name, omitted })
+
+  test('names the type under the props table, linked to its docs', () => {
+    const page = render({ baseTypes: [base('PressableProps')] })
+    assert.ok(
+      page.includes(
+        'Also accepts all React Native [`PressableProps`](https://reactnative.dev/docs/pressable#props).',
+      ),
+    )
+    assert.ok(page.indexOf('Also accepts') < page.indexOf('## Examples'))
+  })
+
+  test('joins two types with "and"', () => {
+    const page = render({ baseTypes: [base('ViewProps'), base('TextProps')] })
+    assert.ok(
+      page.includes(
+        '[`ViewProps`](https://reactnative.dev/docs/view#props) and [`TextProps`](https://reactnative.dev/docs/text#props).',
+      ),
+    )
+  })
+
+  test('names a type that has no docs entry without a link', () => {
+    const page = render({ baseTypes: [base('ScrollViewProps')] })
+    assert.ok(page.includes('Also accepts all React Native `ScrollViewProps`.'))
+  })
+
+  test('says which props an Omit took out, so it does not claim all of them', () => {
+    const page = render({
+      baseTypes: [
+        base('TextInputProps', ['onChange', 'onChangeText', 'readOnly']),
+      ],
+    })
+    assert.ok(
+      page.includes(
+        '[`TextInputProps`](https://reactnative.dev/docs/textinput#props), except `onChange`, `onChangeText` and `readOnly`.',
+      ),
+    )
+  })
+
+  test('names a single omitted prop without "and"', () => {
+    const page = render({ baseTypes: [base('ViewProps', ['style'])] })
+    assert.ok(page.includes(', except `style`.'))
+  })
+
+  test('says nothing when every prop is listed', () => {
+    assert.ok(!render({}).includes('Also accepts'))
+  })
+
+  test('a sub-component gets its own line under its own table', () => {
+    const page = render({
+      subComponents: [
+        { name: 'Thing.Icon', props: [], baseTypes: [base('PressableProps')] },
+      ],
+    })
+    assert.strictEqual(page.split('Also accepts').length - 1, 1)
+    assert.ok(page.indexOf('### Thing.Icon') < page.indexOf('Also accepts'))
+  })
+})
+
 describe('every example needs a caption', () => {
   test('web fails with a clear message, listing every example missing one', () => {
     assert.throws(
