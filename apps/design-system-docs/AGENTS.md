@@ -342,8 +342,8 @@ exact-match so subpath imports still resolve through package `exports`:
   `pnpm --filter @equinor/eds-utils run build` → `pnpm run build:core-react`.
   A stale build can also make a `/next` component look visibly wrong in a
   `StoryCanvas` preview (broken layout, missing colours) while Storybook
-  looks fine, since `StoryCanvas` renders from source but gets its CSS from
-  this same build, rebuild before suspecting a component bug.
+  looks fine. `StoryCanvas` renders from source but gets its CSS from this
+  same build, so rebuild before suspecting a component bug.
 - `@equinor/eds-tokens/next/css/variables.css$` → committed Tokens Studio
   bundle.
 - `@eds-core-react-src` → `packages/eds-core-react/src` (portable stories).
