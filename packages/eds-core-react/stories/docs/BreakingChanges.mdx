@@ -204,7 +204,7 @@ EDS 1.0: `Chip`.
 
 **Behaviour**: `onDelete` fires on a click anywhere on the chip and on Backspace or Delete, not only on the close icon and Enter. `onClick` is ignored when `onDelete` is set.
 
-**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. Use `Badge` for non-interactive labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` and `Avatar` elements are no longer resized automatically. The close icon title changes from `close` to `Remove`.
+**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. Use `Badge` for non-interactive labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` elements are sized by the chip, so an `Icon`'s own `size` prop has no effect there. Child `Avatar` elements are not resized. The close icon title changes from `close` to `Remove`.
 
 **Known issues**
 
