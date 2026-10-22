@@ -10,8 +10,8 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 
 /**
  * Button size options
- * - `small`: Compact size (24px height)
- * - `default`: Standard size (36px height)
+ * - `small`: Compact size (24px height at comfortable density)
+ * - `default`: Standard size (36px height at comfortable density)
  */
 export type ButtonSize = 'small' | 'default'
 
@@ -66,9 +66,8 @@ export type ButtonProps = {
   round?: boolean
   /**
    * Allows the button label to wrap across multiple lines.
-   * When enabled, the text is aligned to the baseline grid.
-   * When used with `asChild`, padding adjusts correctly but baseline trimming
-   * does not apply — the child element's text is not wrapped in a `.label` span.
+   * When used with `asChild`, the child element's text is not wrapped in a
+   * `.label` span, so the child has to allow wrapping itself.
    * @default false
    */
   multiline?: boolean

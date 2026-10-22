@@ -75,11 +75,11 @@
  * INFIMA VARIABLE OVERRIDES
  * ====================================== */
 :root {
-  /* Typography — families come from the Tokens Studio font tokens */
-  --ifm-font-family-base:
-    var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
-  --ifm-heading-font-family:
-    var(--eds-font-family-header, 'Equinor'), system-ui, sans-serif;
+  /* Typography — families come from the Tokens Studio font tokens, which
+     carry the generic sans-serif fallback themselves since #5701, so the
+     site does not repeat one */
+  --ifm-font-family-base: var(--eds-font-family-ui);
+  --ifm-heading-font-family: var(--eds-font-family-header);
 
   /* Base text colour is left to Infima so it flips correctly in dark mode.
      (The EDS neutral-strong token resolves to a fixed dark value regardless of
