@@ -23,6 +23,10 @@
      * 1px for every stroke, so the team agreed on a plain value (#5692). */
     --_stroke-width: 1px;
 
+    /* TODO: replace 150ms with a motion token once one exists. Same duration
+     * as Chip. */
+    --_transition-duration: 150ms;
+
     /* Colours from the eds-tokens beta (Tokens Studio) semantic layer.
      * The --_ indirection only exists so data-tone can switch
      * the accent/neutral/danger token set; states read these vars.
@@ -81,9 +85,9 @@
 
     /* Transitions */
     transition:
-      background-color 150ms ease-in-out,
-      box-shadow 150ms ease-in-out,
-      color 150ms ease-in-out;
+      background-color var(--_transition-duration) ease-in-out,
+      box-shadow var(--_transition-duration) ease-in-out,
+      color var(--_transition-duration) ease-in-out;
 
     /* ===== LABEL ===== */
     & .label {
@@ -279,13 +283,19 @@
     outline-offset: var(--_stroke-width);
   }
 
-  /* Forced colors (Windows High Contrast) strips box-shadow, so the
-   * secondary border needs outline there. While focused, the focus ring
-   * takes over outline and communicates the boundary instead. */
+  /* Forced colors (Windows High Contrast) strips box-shadow and fills, so
+   * every variant needs an outline there to show its boundary. While
+   * focused, the focus ring takes over outline instead. */
   @media (forced-colors: active) {
-    .eds-button[data-variant='secondary']:not(:focus-visible) {
+    .eds-button:not(:focus-visible) {
       outline: var(--_stroke-width) solid;
       outline-offset: calc(-1 * var(--_stroke-width));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eds-button {
+      --_transition-duration: 0s;
     }
   }
 }
