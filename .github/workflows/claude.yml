@@ -77,6 +77,12 @@ jobs:
             Run pnpm install --frozen-lockfile only when you need to install dependencies or run scripts.
             Run pnpm run build:core-react before tests if you've changed types that other packages depend on.
             Useful commands: pnpm run test:core-react, pnpm run lint ./path/to/file.tsx,
-            cd packages/eds-core-react && pnpm test -- --testPathPattern=ComponentName."
+            cd packages/eds-core-react && pnpm test -- --testPathPattern=ComponentName.
+            Colour contrast has two levels. WCAG 2.1 AA is the minimum every pair must meet: 4.5:1 for text, 3:1 for icons and other non-text.
+            The APCA targets are what EDS aims for: Lc 90 for body text and Lc 60 for secondary text and interactive elements, against background.surface.
+            When you assess a colour pair, give both the ratio and the Lc, in light and dark and in every state (default, hover, pressed).
+            Check each foreground on the background it is made for: text.on-LEVEL.TONE and icon.on-LEVEL.TONE on the fill of the same level and tone,
+            and text.primary, text.secondary and text.tertiary on background.surface and background.canvas. text.tertiary is below the minimum in light by design and is only for disabled controls.
+            You have no browser: run node packages/eds-tokens/scripts/check-contrast.mjs to measure the documented pairs on the generated tokens. AGENTS.md § Accessibility has the full rules."
             --allowed-tools
             "Bash(pnpm:*),Bash(npm:*),Bash(node:*),Bash(git:*),Bash(gh pr:*),Bash(gh issue:*),Bash(ls:*),Bash(cd:*),Bash(cat:*),Bash(find:*),Bash(grep:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(diff:*),Bash(echo:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*)"

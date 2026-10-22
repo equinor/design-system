@@ -15,6 +15,7 @@ Claude Code automatically loads rules in `.claude/rules/` when working on matchi
 | -------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
 | `eds-component.md`   | `packages/eds-core-react/src/components/next/**/*.{tsx,ts,css}` | EDS 2.0 component conventions (short reference) |
 | `figma-component.md` | `packages/eds-core-react/src/components/next/**/*.figma.tsx`    | Figma-to-code workflow with MCP tools           |
+| `colour-contrast.md` | `packages/eds-tokens/**`, `/next` component CSS                 | Contrast levels and foreground pairing          |
 | `advisor.md`         | General                                                         | Read-only code review guidelines                |
 
 The path-scoped rules are intentionally short — they reference [`AGENTS.md`](../AGENTS.md) rather than duplicating it.
@@ -25,7 +26,7 @@ User-invokable prompts triggered with `/command-name`.
 
 | Command                 | Usage                                 | Description                                                        |
 | ----------------------- | ------------------------------------- | ------------------------------------------------------------------ |
-| `/new-component`        | `/new-component Button [web\|mobile]` | Scaffold a new EDS component for web or mobile                      |
+| `/new-component`        | `/new-component Button [web\|mobile]` | Scaffold a new EDS component for web or mobile                     |
 | `/create-component-doc` | `/create-component-doc <raw content>` | Restructure raw content into component documentation               |
 | `/accessibility-audit`  | `/accessibility-audit <url>`          | Audit a page or Storybook story against WCAG 2.1 AA                |
 | `/audit-harnesses`      | `/audit-harnesses`                    | Audit AI harness configs for drift across tools                    |
@@ -36,10 +37,10 @@ User-invokable prompts triggered with `/command-name`.
 
 Skills in `.claude/skills/<name>/SKILL.md` are applied automatically when the task matches, and can also be invoked as `/name`.
 
-| Skill                  | Applied when                | Description                                                            |
-| ---------------------- | --------------------------- | ---------------------------------------------------------------------- |
+| Skill                  | Applied when                | Description                                                                         |
+| ---------------------- | --------------------------- | ----------------------------------------------------------------------------------- |
 | `write-pr-description` | Opening or editing a PR     | Short PR description per `documentation/agent-instructions/PR_AND_ISSUE_WRITING.md` |
-| `write-issue`          | Opening or editing an issue | Issue from notes, screenshots or a conversation, per the same doc      |
+| `write-issue`          | Opening or editing an issue | Issue from notes, screenshots or a conversation, per the same doc                   |
 
 ## Hooks
 
