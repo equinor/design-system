@@ -40,7 +40,10 @@ const PROSE = [
   'foundation/design-tokens/spacing-scale.mdx',
   'foundation/design-tokens/spacing-usage.mdx',
   'foundation/design-tokens/spacing-anatomy.mdx',
-  'foundation/design-tokens/typography-anatomy.mdx',
+  'foundation/design-tokens/typography.mdx',
+  'foundation/design-tokens/typography-scale.mdx',
+  'foundation/design-tokens/typography-usage.mdx',
+  'foundation/design-tokens/typography-reference.mdx',
 ]
 
 // Paths relative to src/components/, grouped by docs area. TokenAnatomy is a folder, and every
@@ -58,6 +61,7 @@ const COMPONENTS = [
   'colour/ColourScale.tsx',
   'colour/DataVizPalette.tsx',
   'tokens/DensitySwitch.tsx',
+  'tokens/TypeScale/TypeScale.tsx',
   ...anatomyFiles,
 ]
 
@@ -108,6 +112,22 @@ if (existsSync(legacyBuild)) {
   }
 }
 
+// The typography scale page names primitive steps, such as `lineheight-scale.1200`, to explain the
+// scale under the named steps. They are read from the primitive export, without the `primitives.`
+// root that every one of them shares, so a mistyped step still fails.
+const primitiveNames = new Set()
+for (const [name] of walk(
+  JSON.parse(
+    readFileSync(join(tokens, 'dtcg', 'primitives', 'default.json'), 'utf8'),
+  ),
+)) {
+  primitiveNames.add(name.replace(/^primitives\./, ''))
+}
+
+const isPrimitive = (name) =>
+  primitiveNames.has(name) ||
+  [...primitiveNames].some((n) => n.startsWith(name + '.'))
+
 const problems = []
 const isPrefix = (name) => [...canon].some((c) => c.startsWith(name + '.'))
 const isCssPrefix = (prefix) =>
@@ -124,6 +144,12 @@ for (const file of PROSE) {
   for (const m of body.matchAll(/`([a-z][a-z0-9-]*(?:\.[a-z0-9*<>-]+)+)`/g)) {
     const name = m[1]
     if (canon.has(name)) continue
+    // A file name such as `elements.css` has the same shape as a dotted token name.
+    if (/\.(css|js|mjs|ts|tsx|mdx|json)$/.test(name)) continue
+    if (isPrimitive(name)) continue
+    // The typography pages shorten `typography.label.md` to `label.md` in running text.
+    if (/^(header|label|body)\./.test(name) && isPrefix(`typography.${name}`))
+      continue
     const probe = name.replaceAll('<tone>', 'accent').replace(/\.\*$/, '')
     if (canon.has(probe) || isPrefix(probe)) continue
     const dv = 'data-visualization.' + probe
