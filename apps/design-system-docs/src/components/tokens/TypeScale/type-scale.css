@@ -1,0 +1,55 @@
+.docs-type-scale {
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+  border-top: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.docs-type-scale__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.docs-type-scale__meta {
+  display: flex;
+  flex: 0 0 12rem;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+/* Inline code is restyled by Infima; the name here is a label, so it drops the chip. */
+.docs-type-scale__name {
+  padding: 0;
+  border: 0;
+
+  font-size: var(--docs-font-caption-size);
+  line-height: var(--docs-font-caption-line-height);
+
+  background: none;
+}
+
+.docs-type-scale__value {
+  font-size: var(--docs-font-caption-size);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--docs-font-caption-line-height);
+  color: var(--eds-text-secondary);
+}
+
+/* Wraps under the name on a narrow screen rather than squeezing beside it, so the component needs
+ * no breakpoint of its own. */
+.docs-type-scale__sample {
+  display: block;
+  flex: 1 1 18rem;
+  min-width: 0;
+  color: var(--eds-text-primary);
+}
+
+/* Body text is running text, so it gets a measure. Without one the sample is a single line on a
+ * wide screen and the line-height has nothing to show. */
+.docs-type-scale[data-role='body'] .docs-type-scale__sample {
+  max-width: 36ch;
+}
