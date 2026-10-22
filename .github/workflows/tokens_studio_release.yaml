@@ -106,9 +106,15 @@ jobs:
       # scripts/widen-semantic-scope.mjs rewrites the generated
       # src/tokens/css/semantic/*.css and density/comfortable.css in place,
       # so those selector changes are expected in this PR's diff), then
-      # concatenate the generated CSS into one committed bundle (the
-      # bundler itself adds no behaviour, deliberately not minified —
-      # ADR-0010). Importable on
+      # concatenate the generated CSS into one committed bundle
+      # (deliberately not minified — ADR-0010). The bundler adds two
+      # things of its own: the @layer eds-tokens wrap (ADR-0028 point 6,
+      # #5423) and a generic sans-serif on every --eds-family-*
+      # declaration (#5701), which is why those two lines differ from
+      # the export files in this PR's diff. It is appended here rather
+      # than in the export because generate-ts-tokens.mjs above reads
+      # the same files, and React Native's fontFamily takes one family
+      # name. Importable on
       # the beta line as @equinor/eds-tokens/next/css/variables.css via
       # the ./next/css/* wildcard publish_tokens.yaml already injects.
       - name: Widen semantic scope and bundle CSS into variables.css
