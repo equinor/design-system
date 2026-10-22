@@ -1,0 +1,266 @@
+---
+title: Using typography
+hide_title: true
+sidebar_label: Using typography
+description: Which role and step to use for each case, how to build hierarchy, which header step each heading level takes, and common mistakes.
+---
+
+import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
+
+[Overview](./typography.mdx) explains how to choose a role, and which groups each role's steps fall
+into. This page gives the role and step to use in specific cases.
+
+## Decision table
+
+The rows are sorted by role, and within a role by
+[the groups of steps](./typography.mdx#groups-of-steps) on the overview. Use the page-layout groups
+on dashboards, overview pages and front pages. If your case is not here, ask whether the text wraps
+to find the role, and the nearest row in that role is usually right. Headers are always `medium`,
+and a `label` or `body` row without a weight uses `normal`.
+
+| You are setting                                                                                                   | Use                                   | Why                                                                    |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------- |
+| **Headers for the page title**                                                                                    |                                       |                                                                        |
+| the title of the page, its `h1`                                                                                   | `header.4xl`                          | it names the whole page, so it takes the largest header step           |
+| **Headers for sections**                                                                                          |                                       |                                                                        |
+| a section heading, `h2`                                                                                           | `header.3xl`                          | it names what follows, one level below the page title                  |
+| a heading within a section, `h3`                                                                                  | `header.2xl`                          | one step down for each level                                           |
+| **Headers for subsections**                                                                                       |                                       |                                                                        |
+| a subsection heading, `h4` to `h6`                                                                                | `header.xl`, `header.lg`, `header.md` | one step down for each level, in that order                            |
+| **Headers with no default element**                                                                               |                                       |                                                                        |
+| a footer column heading, an "On this page" heading, or a section heading in a filter or side panel                | `header.sm` or `header.xs`            | page chrome that has to look smaller than an `h6`                      |
+| **Labels inside components**                                                                                      |                                       |                                                                        |
+| the text in a button                                                                                              | `label.md`, `medium`                  | one line, and it does a job                                            |
+| the text in a small button                                                                                        | `label.sm`, `medium`                  | a smaller button takes the next step down                              |
+| a field's label, placeholder and value                                                                            | `label.md`                            | one line each, at the default step for component text                  |
+| a checkbox, radio or switch label, a tab, a menu item or a chip                                                   | `label.md`                            | one line of component text, at the default step                        |
+| a link, a breadcrumb or a tooltip                                                                                 | `label.md`                            | the same default. A link inside a paragraph takes the paragraph's step |
+| an Optional or Required indicator, or an input adornment such as a unit                                           | `label.xs`                            | short text that sits beside a larger label and adds to it              |
+| a menu group title                                                                                                | `label.xs`                            | a short title for the menu items under it, smaller than they are       |
+| a badge                                                                                                           | `label.sm`, `medium`                  | a short tag beside other text, set apart by its weight                 |
+| a card or accordion title                                                                                         | `label.md`, `medium`                  | a title inside a component is a label, set apart by its weight         |
+| a card's content and metadata                                                                                     | `label.sm`                            | short lines under the card title, one step below it                    |
+| the name beside an avatar                                                                                         | `label.sm`                            | one line beside a small element, one step below the default            |
+| an avatar's metadata                                                                                              | `label.xs`                            | one step below the name beside the avatar                              |
+| a dialog title                                                                                                    | `label.lg`, `medium`                  | the largest step inside components, for the one title a dialog has     |
+| a table cell                                                                                                      | `label.md`                            | and Compact density for a dense table, rather than a smaller step      |
+| a chart label, or a caption of one line                                                                           | `label.sm`                            | short and functional, even when it sits under running text             |
+| metadata, such as a date or a count                                                                               | `label.sm`                            | with `text.secondary` for colour, rather than a smaller step           |
+| **Labels in the page layout**                                                                                     |                                       |                                                                        |
+| the top-level navigation, or the app or product name in the page header                                           | `label.xl`                            | one line that has to read as the top of the page                       |
+| a prominent call to action on an overview page                                                                    | `label.xl`                            | one line, set larger so it stands out in the page layout               |
+| the main value in a row of stat tiles                                                                             | `label.3xl`                           | a value on one line, so it is `label` at any size                      |
+| the values beside the main value                                                                                  | `label.2xl`                           | one step below the main value                                          |
+| the one figure a page is about, such as a large readout, a timer, or a value on a control-room or wall display    | `label.4xl` or `label.5xl`            | the page is about this value, so it may look larger than the `h1`      |
+| the label of a key figure, such as "Production rate"                                                              | `label.sm` or `label.md`              | it names the value, at a much smaller step                             |
+| **Body text inside components**                                                                                   |                                       |                                                                        |
+| helper or error text under a field                                                                                | `body.sm`                             | it can run to a sentence, so it wraps                                  |
+| text that wraps inside a component: dialog content, a banner, accordion content or a snackbar                     | `body.md`                             | it can wrap, even when it is short today                               |
+| a description in a side panel                                                                                     | `body.md`                             | the same step as other text that wraps inside a component              |
+| a footnote, a source note under a chart or a table, or a disclaimer                                               | `body.sm`                             | supplementary text that runs to sentences                              |
+| **Body text on the page**                                                                                         |                                       |                                                                        |
+| running text on a page                                                                                            | `body.lg`                             | it wraps, and it is read rather than scanned                           |
+| the ingress, the introductory paragraph under a page title                                                        | `body.xl`                             | one step above the running text it introduces                          |
+| **Body text in the page layout**                                                                                  |                                       |                                                                        |
+| intro text on a front page or an overview page, a pull quote, or a short statement on an onboarding or empty page | `body.2xl` or `body.3xl`              | text that opens a page, set large in the page layout                   |
+| running text on a display read from a distance                                                                    | `body.2xl` or `body.3xl`              | it wraps, and it is read from further away than a desk screen          |
+
+Key figures can use Inter's tabular figures, where every digit has the same width, so a value that
+updates does not shift sideways.
+
+## Setting font size and line height together
+
+Take the font size and the line height from the same role and step:
+
+```css
+.caption {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+}
+```
+
+Leave out the line height and the text inherits one from its parent. Inside a paragraph, that is
+the paragraph's line height, so a caption ends up with the leading of running text. Mixing steps,
+such as a `label.sm` size with a `label.md` line height, breaks the rhythm in the same way, just less
+visibly.
+
+## Building hierarchy
+
+Reach for size first, then weight, then colour, and change as little as you need to:
+
+1. **Size**, one step at a time. Neighbouring steps are close together, so one step is often
+   enough to set two pieces of text apart.
+2. **Weight**, with `medium` in a label. `bold` is for strong emphasis, so keep it rare.
+3. **Colour**, with `text.secondary` for supporting text, such as the inspection date in the example
+   below.
+
+Here is a row in a list of wells, with three levels of text:
+
+<DensitySwitch>
+
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--eds-spacing-xs)',
+    maxWidth: 420,
+    padding: 'var(--eds-spacing-md)',
+    border: '1px solid var(--eds-border-non-interactive-neutral-default)',
+    borderRadius: 'var(--eds-corner-radius-rounded)',
+    background: 'var(--eds-background-surface)',
+    color: 'var(--eds-text-primary)',
+    fontFamily: 'var(--eds-font-family-ui)',
+  }}
+>
+  <span
+    style={{
+      fontSize: 'var(--eds-typography-label-lg-font-size)',
+      lineHeight: 'var(--eds-typography-label-lg-line-height)',
+      fontWeight: 'var(--eds-font-weight-medium)',
+    }}
+  >
+    31/2-A-14
+  </span>
+  <span
+    style={{
+      fontSize: 'var(--eds-typography-body-md-font-size)',
+      lineHeight: 'var(--eds-typography-body-md-line-height)',
+      fontWeight: 'var(--eds-font-weight-normal)',
+    }}
+  >
+    Producing. Pressure has been within range since the valve on the north manifold was
+    replaced.
+  </span>
+  <span
+    style={{
+      fontSize: 'var(--eds-typography-label-sm-font-size)',
+      lineHeight: 'var(--eds-typography-label-sm-line-height)',
+      fontWeight: 'var(--eds-font-weight-normal)',
+      color: 'var(--eds-text-secondary)',
+    }}
+  >
+    Inspected two weeks ago
+  </span>
+</div>
+
+</DensitySwitch>
+
+```css
+.well-name {
+  font-size: var(--eds-typography-label-lg-font-size);
+  line-height: var(--eds-typography-label-lg-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+.well-status {
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+}
+.well-inspected {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+```
+
+The name and the date stay on one line, so they are `label`. The status can wrap, so it is `body`,
+even though it sits between them in the hierarchy.
+
+## Heading levels
+
+Each heading level has a header step that goes with it:
+
+| Element | Step         |
+| ------- | ------------ |
+| `h1`    | `header.4xl` |
+| `h2`    | `header.3xl` |
+| `h3`    | `header.2xl` |
+| `h4`    | `header.xl`  |
+| `h5`    | `header.lg`  |
+| `h6`    | `header.md`  |
+
+`header.sm` and `header.xs` have no level, and are for page-chrome headings that must look smaller
+than an `h6`.
+
+Treat the mapping as a starting point. Designers pick a text style by its size, so when a layout
+needs large text, the `h1` style is often the one that fits, and the page ends up with a second
+`h1`. Choose the element by the structure of the page, and the header step by how it should look.
+Here a section heading on an overview page is set at the size of a page title, and it stays an
+`h2`:
+
+```css
+.overview-page h2 {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-4xl-font-size);
+  line-height: var(--eds-typography-header-4xl-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+```
+
+## Line length
+
+Keep each line of running text between 55 and 80 characters, including spaces. Shorter lines make
+the eye jump back too often, and longer lines make it hard to find the start of the next one.
+
+## Common mistakes
+
+These look right on screen, which is why they get through.
+
+- **Binding the family one layer too low.** In Figma, bind `font-family.ui` or
+  `font-family.header`, not `family/ui` from the hidden font collection. The value is the same
+  today, but the hidden layer is internal and can change without notice.
+- **Binding line height to a spacing token.** Line heights resolve to the same values as spacing, so
+  a spacing token in the line-height field looks correct, but it gives the wrong line height as
+  soon as either scale changes. Use the line height of the step you set the size from.
+- **Skipping a library update after a rename.** When a style or variable is renamed, Figma brings
+  in the new one and keeps the old one bound where it was used. Text on an old name still renders,
+  but it no longer follows the system. Accept the update and rebind.
+
+## Accessibility
+
+- **The smallest step supports a larger label.** `label.xs` is the smallest step, and Compact makes
+  it smaller still. Use it for short text that sits beside a larger label and adds to it, such as
+  an Optional indicator or the unit after a value, and never for primary content or for text that
+  has to be read on its own.
+- **Check small headings in Compact.** Compact sets `header.xs` one step smaller, so check that a
+  heading in it is still easy to read.
+- **Keep heading levels in order.** Screen reader users move through a page by its headings, so the
+  heading elements must follow the structure of the page, whatever header step each one is set at.
+- **Text must survive the user's own spacing.** WCAG 2.1 success criterion 1.4.12 asks that content
+  still works when someone increases line height and the spacing between letters, words and
+  paragraphs. Components must not clip or overlap text when that happens, whichever role the text
+  uses.
+- **Offer a way back from Compact.** If you use Compact for a whole product, give users a way to
+  switch to Comfortable, so that someone who needs larger text can get it back.
+- **Do not rely on weight alone.** Pair a change of weight with size, position or colour, so the
+  hierarchy is clear to someone who cannot see the difference in weight.
+
+## Do's and Don'ts
+
+:::info **Do**
+
+- Ask whether the text wraps, and pick `label` or `body` from the answer
+- Pick the heading element by the structure of the page, and its header step by how it should look
+- Take the font size and line height from the same step
+- Use sentence case for headers and labels, capitalising only the first word
+- Let density resize text, with one attribute on a wrapper
+- Use `text.secondary` to make text matter less, before making it smaller
+
+:::
+
+:::danger **Don't**
+
+- Wrap the text of a button or a chip over several lines. Shorten it instead
+- Use `header` for text that does not name what follows it, such as a large key figure or an
+  eyebrow (the small category text above a title). There is no overline style
+- Pick a smaller step to fit a dense view. That reimplements Compact and drifts from every other
+  dense view in the product
+- Mix typefaces within one piece of UI. Equinor is for headers, Inter for everything else
+- Set font weights by number. Use the three weight tokens
+
+:::
+
+## Where to go next
+
+- [Token reference](./typography-reference.mdx): every token and every value, in all three densities.
+- [The type scale](./typography-scale.mdx): why the steps are these sizes, and how density maps onto
+  them.
