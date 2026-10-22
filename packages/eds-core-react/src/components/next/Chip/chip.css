@@ -2,6 +2,10 @@
   .eds-chip {
     /* label.md, not trimmed (ADR-0029), so the padding needs no
      * compensation. Every value follows the density the chip sits in. */
+    /* TODO: drop sans-serif once the font-family token carries a generic
+     * fallback (#5701). Without it, a page that doesn't load Inter falls
+     * back to the browser default, often a serif. */
+    --_font-family: var(--eds-font-family-ui), sans-serif;
     --_font-size: var(--eds-typography-label-md-font-size);
     --_line-height: var(--eds-typography-label-md-line-height);
     --_padding-block: var(--eds-spacing-3xs);
@@ -64,7 +68,7 @@
     border: none;
     border-radius: var(--eds-corner-radius-pill);
 
-    font-family: var(--eds-font-family-ui);
+    font-family: var(--_font-family);
     font-size: var(--_font-size);
     font-weight: var(--eds-font-weight-normal);
     line-height: var(--_line-height);
