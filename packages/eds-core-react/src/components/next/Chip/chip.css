@@ -50,6 +50,11 @@
     --_border: var(--eds-border-interactive-neutral-emphasis-default);
     --_border-hover: var(--eds-border-interactive-neutral-emphasis-hover);
     --_border-pressed: var(--eds-border-interactive-neutral-emphasis-pressed);
+    --_border-muted: var(--eds-border-interactive-neutral-muted-default);
+    --_border-muted-hover: var(--eds-border-interactive-neutral-muted-hover);
+    --_border-muted-pressed: var(
+      --eds-border-interactive-neutral-muted-pressed
+    );
 
     cursor: pointer;
     user-select: none;
@@ -100,6 +105,11 @@
       --_border: var(--eds-border-interactive-accent-emphasis-default);
       --_border-hover: var(--eds-border-interactive-accent-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-accent-emphasis-pressed);
+      --_border-muted: var(--eds-border-interactive-accent-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-accent-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-accent-muted-pressed
+      );
     }
 
     &[data-color-appearance='success'] {
@@ -122,6 +132,11 @@
       --_border: var(--eds-border-interactive-success-emphasis-default);
       --_border-hover: var(--eds-border-interactive-success-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-success-emphasis-pressed);
+      --_border-muted: var(--eds-border-interactive-success-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-success-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-success-muted-pressed
+      );
     }
 
     &[data-color-appearance='info'] {
@@ -140,6 +155,9 @@
       --_border: var(--eds-border-interactive-info-emphasis-default);
       --_border-hover: var(--eds-border-interactive-info-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-info-emphasis-pressed);
+      --_border-muted: var(--eds-border-interactive-info-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-info-muted-hover);
+      --_border-muted-pressed: var(--eds-border-interactive-info-muted-pressed);
     }
 
     &[data-color-appearance='warning'] {
@@ -162,6 +180,11 @@
       --_border: var(--eds-border-interactive-warning-emphasis-default);
       --_border-hover: var(--eds-border-interactive-warning-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-warning-emphasis-pressed);
+      --_border-muted: var(--eds-border-interactive-warning-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-warning-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-warning-muted-pressed
+      );
     }
 
     &[data-color-appearance='danger'] {
@@ -182,19 +205,32 @@
       --_border: var(--eds-border-interactive-danger-emphasis-default);
       --_border-hover: var(--eds-border-interactive-danger-emphasis-hover);
       --_border-pressed: var(--eds-border-interactive-danger-emphasis-pressed);
+      --_border-muted: var(--eds-border-interactive-danger-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-danger-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-danger-muted-pressed
+      );
     }
 
-    /* ===== DEFAULT VARIANT (solid muted fill) ===== */
+    /* ===== DEFAULT VARIANT (solid muted fill + muted border) ===== */
 
+    /* The muted border keeps the chip visible where the muted fill is close
+     * to the background, per the Chip Figma component. Inset box-shadow, as
+     * on the outlined variant, so outline stays free for the focus ring. */
     &[data-variant='default'] {
       background-color: var(--_bg-muted);
+      box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border-muted);
     }
 
     &[data-variant='default']:hover {
+      --_border-muted: var(--_border-muted-hover);
+
       background-color: var(--_bg-muted-hover);
     }
 
     &[data-variant='default']:active {
+      --_border-muted: var(--_border-muted-pressed);
+
       background-color: var(--_bg-muted-pressed);
     }
 
@@ -281,11 +317,13 @@
     }
 
     /* Forced colors (Windows High Contrast) strips box-shadow, so the
-     * outlined border needs outline there. While focused, the focus ring
-     * takes over outline and communicates the boundary instead —
+     * default and outlined borders need outline there. While focused, the
+     * focus ring takes over outline and communicates the boundary instead —
      * :not(:focus-visible) keeps that handover independent of source order. */
     @media (forced-colors: active) {
-      &[data-variant='outlined']:not(:focus-visible) {
+      &:is([data-variant='default'], [data-variant='outlined']):not(
+          :focus-visible
+        ) {
         outline: var(--_stroke-width) solid;
         outline-offset: calc(-1 * var(--_stroke-width));
       }
