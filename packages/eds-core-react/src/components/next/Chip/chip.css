@@ -236,7 +236,6 @@
     }
 
     /* ===== VARIANTS ===== */
-    /* Focus looks like hover, plus the focus ring, as in Figma */
 
     &[data-variant='default'] {
       --_bg: var(--_bg-muted);
@@ -281,8 +280,10 @@
       --_bg: var(--_bg-emphasis-pressed);
     }
 
-    /* ===== FOCUS RING ===== */
+    /* ===== FOCUS ===== */
 
+    /* Focus looks like hover plus this ring, as in Figma. The hover look comes
+     * from :is(:hover, :focus-visible) on each variant above. */
     &:focus-visible {
       outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
       outline-offset: var(--_stroke-width);
