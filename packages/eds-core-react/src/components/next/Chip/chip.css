@@ -1,31 +1,21 @@
 @layer eds-components {
   .eds-chip {
-    /* Spacing and typography, per the Chip Figma component. The label is
-     * label.md and is not trimmed (ADR-0029), so the line box carries its
-     * own vertical space and the padding needs no compensation: 4px + 20px
-     * line height + 4px gives 28px at Comfortable. All values follow the
-     * density the chip sits in. */
+    /* label.md, not trimmed (ADR-0029), so the padding needs no
+     * compensation. Every value follows the density the chip sits in. */
     --_font-size: var(--eds-typography-label-md-font-size);
     --_line-height: var(--eds-typography-label-md-line-height);
     --_padding-block: var(--eds-spacing-3xs);
     --_padding-inline: var(--eds-spacing-sm);
     --_gap: var(--eds-spacing-3xs);
 
-    /* Figma binds the icon size to spacing.md. The redefined tokens have no
-     * size tokens. */
+    /* Figma binds the icon size to spacing.md; there are no size tokens */
     --_icon-size: var(--eds-spacing-md);
 
-    /* Border and focus ring width. There is no width token: the design uses
-     * 1px for every stroke, so the team agreed on a plain value (#5692). */
+    /* No width token: the design uses 1px for every stroke (#5692) */
     --_stroke-width: 1px;
 
-    /* Colours from the eds-tokens beta (Tokens Studio) — data-color-appearance
-     * selects the tone (Chip always sets it, default tone is neutral). All
-     * text and icon colours follow the Chip Figma component. Neutral uses
-     * --eds-text-primary and --eds-icon-primary, which is what Figma binds,
-     * rather than the on-muted-neutral tokens. Non-neutral tones use
-     * --eds-text-on-muted-{tone} and --eds-icon-on-muted-{tone}, so text and
-     * icon share one shade. Surfaces use --eds-background-interactive-{tone}-*. */
+    /* Tone slots, neutral by default. Neutral uses text and icon primary, as
+     * Figma binds them; the other tones use on-muted for both. */
     --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
     --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
     --_bg-muted-pressed: var(
@@ -38,23 +28,29 @@
     --_bg-emphasis-pressed: var(
       --eds-background-interactive-neutral-emphasis-pressed
     );
-    --_text: var(--eds-text-primary);
-    --_icon: var(--eds-icon-primary);
-
-    /* All tones share the neutral on-emphasis colour per the Figma design:
-     * high-contrast text is flat white (neutral.15) across all six tones.
-     * The per-tone --eds-*-on-emphasis-{tone} tokens exist but Chip does
-     * not use them. */
-    --_text-emphasis: var(--eds-text-on-emphasis-neutral);
-    --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
-    --_border: var(--eds-border-interactive-neutral-emphasis-default);
-    --_border-hover: var(--eds-border-interactive-neutral-emphasis-hover);
-    --_border-pressed: var(--eds-border-interactive-neutral-emphasis-pressed);
     --_border-muted: var(--eds-border-interactive-neutral-muted-default);
     --_border-muted-hover: var(--eds-border-interactive-neutral-muted-hover);
     --_border-muted-pressed: var(
       --eds-border-interactive-neutral-muted-pressed
     );
+    --_border-emphasis: var(--eds-border-interactive-neutral-emphasis-default);
+    --_border-emphasis-hover: var(
+      --eds-border-interactive-neutral-emphasis-hover
+    );
+    --_border-emphasis-pressed: var(
+      --eds-border-interactive-neutral-emphasis-pressed
+    );
+    --_text: var(--eds-text-primary);
+    --_icon: var(--eds-icon-primary);
+
+    /* High contrast uses the neutral on-emphasis colour for every tone, as
+     * in Figma */
+    --_text-emphasis: var(--eds-text-on-emphasis-neutral);
+    --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
+
+    /* Set by the variants and their states */
+    --_bg: transparent;
+    --_border-color: transparent;
 
     cursor: pointer;
     user-select: none;
@@ -75,17 +71,20 @@
     line-height: var(--_line-height);
     color: var(--_text);
 
-    /* Fill and (on outlined) the box-shadow border change between states —
-     * text/icon are static per tone, and outline is the focus ring, which
-     * must appear instantly. */
+    background-color: var(--_bg);
+
+    /* The border is an inset box-shadow, so outline stays free for the focus
+     * ring */
+    box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border-color);
+
+    /* outline is left out, so the focus ring appears instantly */
     transition:
       background-color 150ms ease-in-out,
       box-shadow 150ms ease-in-out;
 
     /* ===== TONES ===== */
-    /* NOTE: the variant blocks further down override --_text / --_icon at the
-     * same specificity (0,2,0) — they win by source order alone. Keep the
-     * tone blocks BEFORE the variant blocks. */
+    /* Keep before the variants: high contrast overrides --_text and --_icon
+     * at the same specificity and wins by source order */
 
     &[data-color-appearance='accent'] {
       --_bg-muted: var(--eds-background-interactive-accent-muted-default);
@@ -100,16 +99,20 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-accent-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-accent);
-      --_icon: var(--eds-icon-on-muted-accent);
-      --_border: var(--eds-border-interactive-accent-emphasis-default);
-      --_border-hover: var(--eds-border-interactive-accent-emphasis-hover);
-      --_border-pressed: var(--eds-border-interactive-accent-emphasis-pressed);
       --_border-muted: var(--eds-border-interactive-accent-muted-default);
       --_border-muted-hover: var(--eds-border-interactive-accent-muted-hover);
       --_border-muted-pressed: var(
         --eds-border-interactive-accent-muted-pressed
       );
+      --_border-emphasis: var(--eds-border-interactive-accent-emphasis-default);
+      --_border-emphasis-hover: var(
+        --eds-border-interactive-accent-emphasis-hover
+      );
+      --_border-emphasis-pressed: var(
+        --eds-border-interactive-accent-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-accent);
+      --_icon: var(--eds-icon-on-muted-accent);
     }
 
     &[data-color-appearance='success'] {
@@ -127,16 +130,22 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-success-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-success);
-      --_icon: var(--eds-icon-on-muted-success);
-      --_border: var(--eds-border-interactive-success-emphasis-default);
-      --_border-hover: var(--eds-border-interactive-success-emphasis-hover);
-      --_border-pressed: var(--eds-border-interactive-success-emphasis-pressed);
       --_border-muted: var(--eds-border-interactive-success-muted-default);
       --_border-muted-hover: var(--eds-border-interactive-success-muted-hover);
       --_border-muted-pressed: var(
         --eds-border-interactive-success-muted-pressed
       );
+      --_border-emphasis: var(
+        --eds-border-interactive-success-emphasis-default
+      );
+      --_border-emphasis-hover: var(
+        --eds-border-interactive-success-emphasis-hover
+      );
+      --_border-emphasis-pressed: var(
+        --eds-border-interactive-success-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-success);
+      --_icon: var(--eds-icon-on-muted-success);
     }
 
     &[data-color-appearance='info'] {
@@ -150,14 +159,18 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-info-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-info);
-      --_icon: var(--eds-icon-on-muted-info);
-      --_border: var(--eds-border-interactive-info-emphasis-default);
-      --_border-hover: var(--eds-border-interactive-info-emphasis-hover);
-      --_border-pressed: var(--eds-border-interactive-info-emphasis-pressed);
       --_border-muted: var(--eds-border-interactive-info-muted-default);
       --_border-muted-hover: var(--eds-border-interactive-info-muted-hover);
       --_border-muted-pressed: var(--eds-border-interactive-info-muted-pressed);
+      --_border-emphasis: var(--eds-border-interactive-info-emphasis-default);
+      --_border-emphasis-hover: var(
+        --eds-border-interactive-info-emphasis-hover
+      );
+      --_border-emphasis-pressed: var(
+        --eds-border-interactive-info-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-info);
+      --_icon: var(--eds-icon-on-muted-info);
     }
 
     &[data-color-appearance='warning'] {
@@ -175,16 +188,22 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-warning-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-warning);
-      --_icon: var(--eds-icon-on-muted-warning);
-      --_border: var(--eds-border-interactive-warning-emphasis-default);
-      --_border-hover: var(--eds-border-interactive-warning-emphasis-hover);
-      --_border-pressed: var(--eds-border-interactive-warning-emphasis-pressed);
       --_border-muted: var(--eds-border-interactive-warning-muted-default);
       --_border-muted-hover: var(--eds-border-interactive-warning-muted-hover);
       --_border-muted-pressed: var(
         --eds-border-interactive-warning-muted-pressed
       );
+      --_border-emphasis: var(
+        --eds-border-interactive-warning-emphasis-default
+      );
+      --_border-emphasis-hover: var(
+        --eds-border-interactive-warning-emphasis-hover
+      );
+      --_border-emphasis-pressed: var(
+        --eds-border-interactive-warning-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-warning);
+      --_icon: var(--eds-icon-on-muted-warning);
     }
 
     &[data-color-appearance='danger'] {
@@ -200,84 +219,69 @@
       --_bg-emphasis-pressed: var(
         --eds-background-interactive-danger-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-danger);
-      --_icon: var(--eds-icon-on-muted-danger);
-      --_border: var(--eds-border-interactive-danger-emphasis-default);
-      --_border-hover: var(--eds-border-interactive-danger-emphasis-hover);
-      --_border-pressed: var(--eds-border-interactive-danger-emphasis-pressed);
       --_border-muted: var(--eds-border-interactive-danger-muted-default);
       --_border-muted-hover: var(--eds-border-interactive-danger-muted-hover);
       --_border-muted-pressed: var(
         --eds-border-interactive-danger-muted-pressed
       );
+      --_border-emphasis: var(--eds-border-interactive-danger-emphasis-default);
+      --_border-emphasis-hover: var(
+        --eds-border-interactive-danger-emphasis-hover
+      );
+      --_border-emphasis-pressed: var(
+        --eds-border-interactive-danger-emphasis-pressed
+      );
+      --_text: var(--eds-text-on-muted-danger);
+      --_icon: var(--eds-icon-on-muted-danger);
     }
 
-    /* ===== DEFAULT VARIANT (solid muted fill + muted border) ===== */
+    /* ===== VARIANTS ===== */
+    /* Focus looks like hover, plus the focus ring, as in Figma */
 
-    /* The muted border keeps the chip visible where the muted fill is close
-     * to the background, per the Chip Figma component. Inset box-shadow, as
-     * on the outlined variant, so outline stays free for the focus ring. */
     &[data-variant='default'] {
-      background-color: var(--_bg-muted);
-      box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border-muted);
+      --_bg: var(--_bg-muted);
+      --_border-color: var(--_border-muted);
     }
 
-    &[data-variant='default']:hover {
-      --_border-muted: var(--_border-muted-hover);
-
-      background-color: var(--_bg-muted-hover);
+    &[data-variant='default']:is(:hover, :focus-visible) {
+      --_bg: var(--_bg-muted-hover);
+      --_border-color: var(--_border-muted-hover);
     }
 
     &[data-variant='default']:active {
-      --_border-muted: var(--_border-muted-pressed);
-
-      background-color: var(--_bg-muted-pressed);
+      --_bg: var(--_bg-muted-pressed);
+      --_border-color: var(--_border-muted-pressed);
     }
-
-    /* ===== OUTLINED VARIANT (border + transparent bg) ===== */
 
     &[data-variant='outlined'] {
-      background-color: transparent;
-
-      /* Inset box-shadow rather than outline, so outline stays free for the
-       * focus ring (with a truly transparent offset gap, like Button). */
-      box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border);
+      --_border-color: var(--_border-emphasis);
     }
 
-    /* The border follows the state ladder (9 → 10 → 11), per the Figma
-     * design and the ADR-0016 rule that states move along the scale. */
-    &[data-variant='outlined']:hover {
-      --_border: var(--_border-hover);
-
-      background-color: var(--_bg-muted-hover);
+    &[data-variant='outlined']:is(:hover, :focus-visible) {
+      --_bg: var(--_bg-muted-hover);
+      --_border-color: var(--_border-emphasis-hover);
     }
 
     &[data-variant='outlined']:active {
-      --_border: var(--_border-pressed);
-
-      background-color: var(--_bg-muted-pressed);
+      --_bg: var(--_bg-muted-pressed);
+      --_border-color: var(--_border-emphasis-pressed);
     }
-
-    /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
-    /* Must stay AFTER the tone blocks: the --_text / --_icon overrides here
-     * have the same specificity and win by source order only. */
 
     &[data-variant='high-contrast'] {
       --_text: var(--_text-emphasis);
       --_icon: var(--_icon-emphasis);
-
-      background-color: var(--_bg-emphasis);
+      --_bg: var(--_bg-emphasis);
     }
 
-    &[data-variant='high-contrast']:hover {
-      background-color: var(--_bg-emphasis-hover);
+    &[data-variant='high-contrast']:is(:hover, :focus-visible) {
+      --_bg: var(--_bg-emphasis-hover);
     }
 
     &[data-variant='high-contrast']:active {
-      background-color: var(--_bg-emphasis-pressed);
+      --_bg: var(--_bg-emphasis-pressed);
     }
 
-    /* ===== FOCUS STATE ===== */
+    /* ===== FOCUS RING ===== */
 
     &:focus-visible {
       outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
@@ -286,11 +290,9 @@
 
     /* ===== ICONS ===== */
 
-    /* The icon is smaller than the label's line box at every density, so
-     * flex centring places it and it needs none of Icon's optical margins:
-     * the gap is the only space between icon and label, as in Figma. This
-     * also sizes icons passed as children, so Icon's size prop has no effect
-     * inside a chip. */
+    /* Smaller than the line box at every density, so flex centring places
+     * the icon without Icon's optical margins. This also sizes icons passed
+     * as children, so Icon's size prop has no effect inside a chip. */
     & .eds-icon {
       flex-shrink: 0;
 
@@ -303,9 +305,8 @@
 
     /* ===== LABEL ===== */
 
-    /* Label needs inline-flex to center custom icons with text.
-     * text-box: normal makes sure nothing trims the label (ADR-0029) — chip
-     * handles sizing via padding + flexbox centering. */
+    /* inline-flex centres custom icons with the text; text-box: normal keeps
+     * the label untrimmed (ADR-0029) */
     & > .label {
       display: inline-flex;
       gap: var(--_gap);
@@ -316,9 +317,8 @@
       text-box: normal;
     }
 
-    /* Forced colors (Windows High Contrast) strips box-shadow, so the
-     * default and outlined borders need outline there. While focused, the
-     * focus ring takes over outline and communicates the boundary instead —
+    /* Forced colours strip box-shadow, so the default and outlined borders
+     * use outline there. While focused, the focus ring takes over outline;
      * :not(:focus-visible) keeps that handover independent of source order. */
     @media (forced-colors: active) {
       &:is([data-variant='default'], [data-variant='outlined']):not(
