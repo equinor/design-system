@@ -8,6 +8,7 @@
     "build": "docusaurus build",
     "generate:colour-reference": "node scripts/generate-colour-reference.mjs",
     "generate:spacing-reference": "node scripts/generate-spacing-reference.mjs",
+    "generate:typography-reference": "node scripts/generate-typography-reference.mjs",
     "check:colour-docs": "node scripts/check-colour-docs.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
