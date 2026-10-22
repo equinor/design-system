@@ -14,6 +14,9 @@
     /* No width token: the design uses 1px for every stroke (#5692) */
     --_stroke-width: 1px;
 
+    /* No motion token yet; the same duration as Button */
+    --_transition-duration: 150ms;
+
     /* Tone slots, neutral by default. Neutral uses text and icon primary, as
      * Figma binds them; the other tones use on-muted for both. */
     --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
@@ -79,8 +82,8 @@
 
     /* outline is left out, so the focus ring appears instantly */
     transition:
-      background-color 150ms ease-in-out,
-      box-shadow 150ms ease-in-out;
+      background-color var(--_transition-duration) ease-in-out,
+      box-shadow var(--_transition-duration) ease-in-out;
 
     /* ===== TONES ===== */
     /* Keep before the variants: high contrast overrides --_text and --_icon
@@ -328,6 +331,10 @@
         outline: var(--_stroke-width) solid;
         outline-offset: calc(-1 * var(--_stroke-width));
       }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      --_transition-duration: 0s;
     }
   }
 }
