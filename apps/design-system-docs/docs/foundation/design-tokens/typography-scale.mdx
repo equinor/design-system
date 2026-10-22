@@ -1,0 +1,214 @@
+---
+title: The type scale
+hide_title: true
+sidebar_label: The scale
+description: The two type scales under the named steps, where line heights come from, and how each density maps onto them.
+---
+
+import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
+import { TypeScale } from '@site/src/components/tokens/TypeScale'
+
+This page explains why the named steps in [Overview](./typography.mdx) are the sizes they are,
+using the primitive scales underneath them. You do not use those scales directly, and they are
+hidden from the Figma variable picker.
+
+## The steps in each density
+
+Each row is set with the tokens it names, and the size and line height beside it are read back
+from the browser. Switch the density to see every step move while the names stay put.
+
+<DensitySwitch>
+
+**Header**
+
+{/* GEN:specimen-header BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+<TypeScale role="header" steps={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']} />
+
+{/* GEN:specimen-header END */}
+
+**Label**
+
+{/* GEN:specimen-label BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+<TypeScale role="label" steps={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl']} />
+
+{/* GEN:specimen-label END */}
+
+**Body**
+
+{/* GEN:specimen-body BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+<TypeScale role="body" steps={['sm', 'md', 'lg', 'xl', '2xl', '3xl']} />
+
+{/* GEN:specimen-body END */}
+
+</DensitySwitch>
+
+## The Equinor and Inter scales
+
+Each typeface has its own type scale, indexed in hundreds. The table lists the steps the named
+steps use:
+
+{/* GEN:type-scale BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Index  | `inter` | `equinor` |
+| ------ | ------- | --------- |
+| `100`  | 9px     | 10px      |
+| `200`  | 10px    | 12px      |
+| `300`  | 12px    | 14px      |
+| `400`  | 14px    | 16px      |
+| `500`  | 16px    | 18px      |
+| `600`  | 18px    | 21px      |
+| `700`  | 21px    | 24px      |
+| `800`  | 24px    | 28px      |
+| `900`  | 28px    | 32px      |
+| `1000` | 32px    | 36px      |
+| `1100` | 37px    | –         |
+
+{/* GEN:type-scale END */}
+
+{/* GEN:type-scale-offset BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+Of the 10 Equinor steps in use, 9 are the same size as the Inter step one index up. The exception is `1000`, where Equinor is 36px and Inter `1100` is 37px.
+
+{/* GEN:type-scale-offset END */}
+
+That offset is why a header is larger than the label with the same step name. It is part of the
+scale itself rather than a multiplier applied on top, so every size is a whole pixel. The
+scale in the earlier beta was calculated, and several of its steps fell between pixels.
+
+## Line height comes from spacing
+
+Each line height is a step on a line-height scale, and each step on that scale is an alias of a
+spacing primitive:
+
+{/* GEN:line-height-chain BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+```
+typography.label.md.line-height                 what you use
+  → density.typography.label.md.line-height     a different step per density
+    → primitives.lineheight-scale.400.default
+      → primitives.spacing.125
+```
+
+{/* GEN:line-height-chain END */}
+
+{/* GEN:lineheight-scale BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Line-height step | Spacing primitive | px   |
+| ---------------- | ----------------- | ---- |
+| `100`            | `spacing.75`      | 12px |
+| `200`            | `spacing.100`     | 16px |
+| `400`            | `spacing.125`     | 20px |
+| `500`            | `spacing.150`     | 24px |
+| `700`            | `spacing.175`     | 28px |
+| `800`            | `spacing.200`     | 32px |
+| `1000`           | `spacing.225`     | 36px |
+| `1100`           | `spacing.250`     | 40px |
+| `1200`           | `spacing.275`     | 44px |
+
+{/* GEN:lineheight-scale END */}
+
+So every line height is a multiple of 4px, and text sits on the same rhythm as the layout around
+it: a line box and a gap of the same size are the same value. It also makes line heights absolute
+px rather than unitless ratios, which is why neighbouring sizes can share a line box.
+
+## How density works
+
+Each density picks different positions on the same scales, so every value stays on a whole pixel
+and every line height on the 4px grid. [The token reference](./typography-reference.mdx) has the
+values for every step in all three densities, and they follow one rule: Compact uses the font size
+and line height of the next smaller step, and Relaxed the next larger. At the ends of a role's
+range, the pair comes from the primitive steps just beyond it.
+
+{/* GEN:density-exceptions BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+The rule has one exception: Compact `label.sm` is 10/12, where Comfortable `label.xs` is 10/16.
+
+{/* GEN:density-exceptions END */}
+
+Because density moves whole pairs, a font size mostly keeps its line height wherever it appears.
+{/* GEN:shared-line-height BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+In `header` and `body`, a font size has the same line height in every density. In `label`, 10px has two: 12px and 16px.
+
+{/* GEN:shared-line-height END */}
+
+## Line height per role
+
+Line height divided by font size, at Comfortable:
+
+{/* GEN:line-height-ratios BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Step  | `header` | `label` | `body` |
+| ----- | -------- | ------- | ------ |
+| `xs`  | 1.33     | 1.60    | –      |
+| `sm`  | 1.43     | 1.33    | 1.67   |
+| `md`  | 1.25     | 1.43    | 1.71   |
+| `lg`  | 1.33     | 1.50    | 1.75   |
+| `xl`  | 1.33     | 1.33    | 1.56   |
+| `2xl` | 1.33     | 1.33    | 1.52   |
+| `3xl` | 1.29     | 1.33    | 1.50   |
+| `4xl` | 1.25     | 1.14    | –      |
+| `5xl` | –        | 1.13    | –      |
+
+{/* GEN:line-height-ratios END */}
+
+### Header line heights
+
+Equinor is larger than Inter at the same step, and without trimming, a line box that is too short
+for the glyphs cuts off Equinor's descenders. So header line heights are chosen for Equinor rather
+than following the font-size step.
+
+{/* GEN:header-pairs BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+In 5 of the 8 header steps, the line-height step is above the font-size step:
+
+| Step         | Font size | Type-scale step | Line height | Line-height step |
+| ------------ | --------- | --------------- | ----------- | ---------------- |
+| `header.xs`  | 12px      | `200`           | 16px        | `200`            |
+| `header.sm`  | 14px      | `300`           | 20px        | **`400`**        |
+| `header.md`  | 16px      | `400`           | 20px        | `400`            |
+| `header.lg`  | 18px      | `500`           | 24px        | `500`            |
+| `header.xl`  | 21px      | `600`           | 28px        | **`700`**        |
+| `header.2xl` | 24px      | `700`           | 32px        | **`800`**        |
+| `header.3xl` | 28px      | `800`           | 36px        | **`1000`**       |
+| `header.4xl` | 32px      | `900`           | 40px        | **`1100`**       |
+
+{/* GEN:header-pairs END */}
+
+Matching the step numbers instead would bring back the tight headers we had before.
+
+`header.sm` and `header.md` share a line height on purpose. Line heights sit on a 4px grid, which
+leaves few choices at these sizes: `header.sm` needs that line height to have enough leading, and
+the next value up would make `header.md` looser than a heading should be.
+
+### Label line heights
+
+`label` is single-line text, so it can be tighter than running text, and it is tightest at the top
+of its range. Neighbouring label sizes sometimes share a line height, which keeps a row the same
+height when the text in it changes size.
+
+### Body line heights
+
+`body` repeats the label font sizes with more line height: at least one and a half times the font
+size at every step and every density, on the 4px grid. That keeps lines of running text easy to
+follow.
+
+The one and a half is a readability choice. WCAG 2.1 success criterion 1.4.12 uses the same ratio
+for a different purpose: components must keep working when users set it themselves, as
+[accessibility](./typography-usage.mdx#accessibility) on the usage page describes.
+
+## Adding a step
+
+- **Check density first.** If a size is missing, a different density may already give it to you.
+- **A new step needs a value in all three densities**, and the font sizes need to be one position
+  apart on the type scale, or density stops moving one step at a time.
+- **Line height comes from the spacing scale.** A new step needs a line-height step that resolves to
+  a spacing primitive. `lineheight-scale.1200` was added this way, for the largest sizes in Relaxed.
+
+## Where to go next
+
+- [Using typography](./typography-usage.mdx): which role and step to use, with worked examples.
+- [Token reference](./typography-reference.mdx): every token and value in all three densities.

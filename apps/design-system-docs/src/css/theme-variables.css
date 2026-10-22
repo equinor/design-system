@@ -40,7 +40,7 @@
 @import 'https://cdn.eds.equinor.com/font/equinor-font.css';
 
 /* Inter is self-hosted (the Equinor CDN only serves the Equinor font).
-   Static weights register as family 'Inter', matching --eds-family-ui.
+   Static weights register as family 'Inter', matching --eds-font-family-ui.
 
    Latin subset only. The unsuffixed `NNN.css` entrypoints pull seven subsets
    each (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext,
