@@ -281,7 +281,7 @@ Recorded so that they are not mistaken for oversights:
 
 ## Amendments
 
-- 2026-10-22: Confirmation 5 now fails the build on the WCAG 2.1 AA minimum and only reports the APCA targets, as decided in [#5382](https://github.com/equinor/design-system/issues/5382). It takes its pairs from the foreground pairing that the colour usage page now documents, so the Unresolved entry on surface pairing is narrowed to borders. `packages/eds-tokens/scripts/check-contrast.mjs` implements the check.
+- 2026-10-22: Confirmation 5 now fails the build on the WCAG 2.1 AA minimum and only reports the APCA targets, as decided in [#5382](https://github.com/equinor/design-system/issues/5382). It takes its pairs from the foreground pairing that the colour usage page now documents, so the Unresolved entry on surface pairing is narrowed to borders. `packages/eds-tokens/scripts/check-contrast.mjs` implements the check ([#5721](https://github.com/equinor/design-system/pull/5721)).
 
 ## Related
 
