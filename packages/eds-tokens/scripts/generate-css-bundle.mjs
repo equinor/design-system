@@ -3,8 +3,9 @@
  *
  * Concatenates every generated CSS file under `src/tokens/css/` into
  * `src/tokens/css/variables.css` (ADR-0010) and wraps the result in
- * `@layer eds-tokens` (ADR-0028 point 6, #5423). The wrap is the bundle's
- * only added behaviour: inside the layer the generated files resolve
+ * `@layer eds-tokens` (ADR-0028 point 6, #5423). The wrap is one of the
+ * two things the bundle adds, the other being the font fallback below:
+ * inside the layer the generated files resolve
  * exactly as they do unlayered — every mode file is `:root`- or
  * attribute-scoped, `var()` references are late-bound, and `@layer`
  * changes neither. Files are concatenated in sorted path order to keep
@@ -40,6 +41,25 @@
  * The body is not re-indented inside the layer block. Indenting would
  * rewrite every line on the first run and leave each later release PR
  * diffing against a shifted file, for no effect on the CSS.
+ *
+ * The second addition: every `--eds-family-*` declaration gets a
+ * generic `sans-serif` appended (#5701). The export names a single
+ * typeface, `Inter` for UI and `Equinor` for headers, so an app that
+ * does not load the font falls back to the browser default, which is a
+ * serif in Chrome, Firefox, Safari and Edge. Every label and body
+ * style, which is most of an interface, then renders in Times. Design
+ * agreed on `sans-serif`.
+ *
+ * It happens here, in memory, and not in the committed export files,
+ * because generate-ts-tokens.mjs takes its values from the same CSS
+ * export: a fallback written into `css/font/default.css` would land in
+ * the TypeScript modules, whose `fontFamily` feeds React Native and
+ * takes a single family name (mobile moves onto that export in #5495).
+ * Setting it in the Tokens Studio export configuration fails for the
+ * same reason, and the Figma variable behind the token has to stay one
+ * font name as well. The cost of keeping it here is that the granular
+ * files published under `./next/css/*` keep the bare family; the
+ * bundle is the documented entry point (ADR-0010).
  *
  * One caveat to "concatenation is conflict-free": the semantic layer is
  * widened to `:root, [data-color-scheme], [data-density]` before
@@ -104,6 +124,35 @@ const LAYER_ORDER =
 const LAYER_OPEN = '@layer eds-tokens {\n'
 const LAYER_CLOSE = '}\n'
 
+// The generic family appended to the font-family tokens, and the names
+// that must be there for that to have happened (#5701). The prefix is
+// matched rather than the two names themselves, so a family added
+// upstream is covered on its own; the required list turns a rename or a
+// move into a failed run rather than a bundle that quietly ships
+// without a fallback.
+const FONT_FALLBACK = 'sans-serif'
+const REQUIRED_FAMILY_NAMES = ['--eds-family-header', '--eds-family-ui']
+const FAMILY_DECLARATION = /(--eds-family-[\w-]+):\s*([^;]+);/g
+
+// The CSS generic families, so a stack that already ends in one, should
+// the export ever ship its own fallback, is left alone instead of
+// doubled
+const GENERIC_FAMILIES = new Set([
+  'serif',
+  'sans-serif',
+  'monospace',
+  'cursive',
+  'fantasy',
+  'system-ui',
+  'ui-serif',
+  'ui-sans-serif',
+  'ui-monospace',
+  'ui-rounded',
+  'math',
+  'fangsong',
+  'emoji',
+])
+
 // Colour-scheme scope rules are concatenated after everything else:
 // should a name ever be declared in both layers, the scheme value must
 // win on a [data-color-scheme] element (equal specificity, so source
@@ -158,7 +207,26 @@ if (!DENSITY_BASE_WIDE_RE.test(densityBase[1]))
     `${densityBase[0]} is not widened to ':root, [data-density="comfortable"]'. Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
   )
 
-const concatenated = contents.map(([, css]) => css).join('\n')
+const seenFamilies = new Set()
+const withFallback = contents.map(([, css]) =>
+  css.replace(FAMILY_DECLARATION, (declaration, name, value) => {
+    seenFamilies.add(name)
+    const stack = value.trim()
+    return GENERIC_FAMILIES.has(lastFamily(stack))
+      ? declaration
+      : `${name}: ${stack}, ${FONT_FALLBACK};`
+  }),
+)
+
+const missingFamilies = REQUIRED_FAMILY_NAMES.filter(
+  (name) => !seenFamilies.has(name),
+)
+if (missingFamilies.length > 0)
+  fail(
+    `no ${missingFamilies.join(' or ')} declaration under ${CSS_DIR}, so the font tokens were renamed or moved. Review #5701 before proceeding: the bundle would ship a bare typeface name, and text falls back to the browser's serif wherever the font is not loaded`,
+  )
+
+const concatenated = withFallback.join('\n')
 
 // The export's last file ends without a trailing newline, so the
 // layer's closing brace needs one of its own to land on its own line
@@ -188,6 +256,26 @@ console.log(
     .map((file) => relative(CSS_DIR, file))
     .join(', ')})`,
 )
+
+/**
+ * The last comma-separated part of a value, at nesting depth 0, which
+ * is the generic family of a font stack when it has one. Depth matters
+ * because a `var()` fallback arm carries commas of its own.
+ */
+function lastFamily(value) {
+  let depth = 0
+  let start = 0
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index]
+    if (character === '(') depth += 1
+    else if (character === ')') depth -= 1
+    else if (character === ',' && depth === 0) start = index + 1
+  }
+  return value
+    .slice(start)
+    .trim()
+    .replace(/^["']|["']$/g, '')
+}
 
 function parseArgs(argv) {
   const out = {}
