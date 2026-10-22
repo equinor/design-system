@@ -35,7 +35,7 @@ export const States = () => {
 States.parameters = {
     docs: {
         description: {
-            story: "An input is either at its default, disabled, or read only. Both disabled and read only stop editing, but only disabled dims the input and marks it disabled for screen readers. On iOS, selecting text in a read only input needs `multiline`, since single-line fields are not selectable there. `value` and `setValue` are a `useState` pair kept in the parent screen.",
+            story: "An input is either at its default, disabled, or read only. Both disabled and read only stop editing, but only disabled dims the input and marks it disabled for screen readers. `value` and `setValue` are a `useState` pair kept in the parent screen.",
         },
     },
 };
@@ -50,7 +50,7 @@ export const ValidationStates = () => (
 ValidationStates.parameters = {
     docs: {
         description: {
-            story: "Set `invalid` to show error styling and an error icon. Pair it with an accessible description of what needs fixing.",
+            story: "Set `invalid` to show error styling and an error icon. To say what needs fixing, use TextField, whose `helperMessage` is read with the field.",
         },
     },
 };

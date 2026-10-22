@@ -229,8 +229,8 @@ ValidationStates.parameters = {
 export const States: StoryFn<InputProps> = () => (
   <>
     <Input aria-label="Default" placeholder="Default" />
-    <Input aria-label="Disabled" placeholder="Disabled" disabled />
-    <Input aria-label="Read only" placeholder="Read only" readOnly />
+    <Input aria-label="Disabled" defaultValue="Disabled value" disabled />
+    <Input aria-label="Read only" defaultValue="Read only value" readOnly />
   </>
 )
 States.parameters = {
