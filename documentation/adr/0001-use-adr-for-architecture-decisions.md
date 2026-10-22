@@ -98,7 +98,7 @@ Each ADR will:
 - Be stored in `documentation/adr/` as a Markdown file
 - Follow the MADR (Markdown Any Decision Records) format
 - Be numbered sequentially (0001, 0002, etc.)
-- Be immutable once accepted (new decisions supersede old ones rather than editing)
+- Keep its decision fixed once accepted (a changed decision gets a new ADR, see [Changing an accepted ADR](#changing-an-accepted-adr))
 
 We will write an ADR when:
 
@@ -107,6 +107,18 @@ We will write an ADR when:
 - Establishing patterns that affect multiple components
 - Deciding on breaking changes
 - Making security or accessibility architecture decisions
+
+### Changing an accepted ADR
+
+Git history keeps every earlier version of an ADR, so editing one does not lose the original reasoning. What matters is whether the decision itself has changed:
+
+| Change           | Example                                                                                                              | What to do                                                               |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Editorial        | Typos, broken links, moved file paths, clearer wording                                                               | Edit in place                                                            |
+| Amendment        | A detail has changed, a consequence turned out wrong, an option was added; the decision and its reasoning still hold | Edit in place and add a dated entry under `## Amendments` linking the PR |
+| Changed decision | The core choice is reversed, or its reasoning no longer holds                                                        | New ADR that supersedes the old one in full                              |
+
+The boundary test: would someone who read the old version make a different architectural choice? If yes, write a new ADR.
 
 ### Public vs Internal ADRs
 
@@ -126,6 +138,10 @@ ADRs are public by default. Decisions about components, tokens, APIs, tooling, a
 
 - PR reviews will check that significant architecture decisions have an accompanying ADR
 - The `documentation/adr/` folder is referenced in onboarding documentation
+
+## Amendments
+
+- 2026-10-21: Replaced "immutable once accepted" with editorial changes, amendments and changed decisions, so small corrections no longer need a new ADR ([#5707](https://github.com/equinor/design-system/pull/5707)).
 
 ## Related
 

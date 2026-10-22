@@ -30,10 +30,23 @@
   exception list, a migration log) — that isn't a decision, it's a
   registry. Move it to a separate, ordinarily maintained doc instead of
   putting it in this ADR (see ADR-0020 and ADR-0021, both restructured for
-  exactly this).
+  exactly this). The same goes for details that change often, such as
+  token names, collection and mode names, and file paths: keep them in a
+  maintained doc (e.g. documentation/how-to/TOKEN_SYSTEM_GUIDE.md) and link
+  to it from the ADR. ADR-0007 shows the cost of not doing this: it ended
+  up marking two of its own options as superseded inside the document.
 
-  Accepted ADRs are immutable: only the Status line and a forward pointer
-  change, never the recorded reasoning itself.
+  Once accepted, an ADR's decision is fixed, but the text around it can
+  change (see ADR-0001, "Changing an accepted ADR"):
+  - Editorial (typos, broken links, moved file paths, clearer wording):
+    edit in place.
+  - Amendment (a detail has changed, a consequence turned out wrong, an
+    option was added, but the decision and its reasoning still hold):
+    edit in place and add a dated entry under ## Amendments.
+  - Changed decision (the core choice is reversed, or its reasoning no
+    longer holds): write a new ADR that supersedes this one in full.
+  Boundary test: would someone who read the old version make a different
+  architectural choice? If yes, write a new ADR.
 
   Scope: which product surface this decision governs.
   - Web: eds-core-react (including /next)
@@ -183,6 +196,16 @@
   - "ESLint rule warns if styled-components is imported in /next"
   - "CI validates all CSS files use design tokens"
 -->
+
+## Amendments
+
+<!--
+  Optional: leave this section out until the ADR is first amended after
+  acceptance. One entry per amendment, newest last: the date, what changed
+  and why, and a link to the PR. Editorial changes don't need an entry.
+-->
+
+- YYYY-MM-DD: [What changed and why] ([#NNNN](https://github.com/equinor/design-system/pull/NNNN))
 
 ## Related
 
