@@ -149,7 +149,7 @@ export const Tones: Story = {
     docs: {
       description: {
         story:
-          'The `tone` prop controls the color scheme using `data-color-appearance`.',
+          'The `tone` prop sets the colours: `accent` (default), `neutral` or `danger`.',
       },
     },
   },
@@ -430,8 +430,8 @@ export const DensityComparison: Story = {
           </Button>
         </Wrapper>
       </div>
-      <div data-density="spacious">
-        <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
+      <div data-density="comfortable">
+        <h3 style={{ marginBottom: '12px' }}>Comfortable (default)</h3>
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
@@ -443,8 +443,8 @@ export const DensityComparison: Story = {
           </Button>
         </Wrapper>
       </div>
-      <div data-density="comfortable">
-        <h3 style={{ marginBottom: '12px' }}>Comfortable</h3>
+      <div data-density="compact">
+        <h3 style={{ marginBottom: '12px' }}>Compact</h3>
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
@@ -487,8 +487,8 @@ export const MultilineAntiPattern: Story = {
           </Button>
         </Wrapper>
       </div>
-      <div data-density="spacious">
-        <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
+      <div data-density="comfortable">
+        <h3 style={{ marginBottom: '12px' }}>Comfortable (default)</h3>
         <Wrapper direction="row" align="flex-start" gap={12}>
           <Button multiline size="small">
             Short label
@@ -502,8 +502,8 @@ export const MultilineAntiPattern: Story = {
           </Button>
         </Wrapper>
       </div>
-      <div data-density="comfortable">
-        <h3 style={{ marginBottom: '12px' }}>Comfortable</h3>
+      <div data-density="compact">
+        <h3 style={{ marginBottom: '12px' }}>Compact</h3>
         <Wrapper direction="row" align="flex-start" gap={12}>
           <Button multiline size="small">
             Short label
