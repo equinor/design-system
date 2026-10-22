@@ -41,18 +41,21 @@
     --_border-muted-pressed: var(
       --eds-border-interactive-neutral-muted-pressed
     );
-    --_border-emphasis: var(--eds-border-interactive-neutral-emphasis-default);
-    --_border-emphasis-hover: var(
+    --_border-interactive: var(
+      --eds-border-interactive-neutral-emphasis-default
+    );
+    --_border-interactive-hover: var(
       --eds-border-interactive-neutral-emphasis-hover
     );
-    --_border-emphasis-pressed: var(
+    --_border-interactive-pressed: var(
       --eds-border-interactive-neutral-emphasis-pressed
     );
-    --_text: var(--eds-text-primary);
+    --_text-muted: var(--eds-text-primary);
     --_icon: var(--eds-icon-primary);
+    --_color: var(--_text-muted);
 
-    /* Set by the variants and their states */
-    --_bg: transparent;
+    /* Set by the variants and their states. Slot names match Button (#5711) */
+    --_bg-color: transparent;
     --_border-color: transparent;
 
     cursor: pointer;
@@ -72,9 +75,9 @@
     font-size: var(--_font-size);
     font-weight: var(--eds-font-weight-normal);
     line-height: var(--_line-height);
-    color: var(--_text);
+    color: var(--_color);
 
-    background-color: var(--_bg);
+    background-color: var(--_bg-color);
 
     /* The border is an inset box-shadow, so outline stays free for the focus
      * ring */
@@ -86,10 +89,10 @@
       box-shadow var(--_transition-duration) ease-in-out;
 
     /* ===== TONES ===== */
-    /* Keep before the variants: high contrast overrides --_text and --_icon
-     * at the same specificity and wins by source order */
+    /* Keep before the variants: high contrast overrides --_icon at the same
+     * specificity and wins by source order */
 
-    &[data-color-appearance='accent'] {
+    &[data-tone='accent'] {
       --_bg-muted: var(--eds-background-interactive-accent-muted-default);
       --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
       --_bg-muted-pressed: var(
@@ -107,18 +110,20 @@
       --_border-muted-pressed: var(
         --eds-border-interactive-accent-muted-pressed
       );
-      --_border-emphasis: var(--eds-border-interactive-accent-emphasis-default);
-      --_border-emphasis-hover: var(
+      --_border-interactive: var(
+        --eds-border-interactive-accent-emphasis-default
+      );
+      --_border-interactive-hover: var(
         --eds-border-interactive-accent-emphasis-hover
       );
-      --_border-emphasis-pressed: var(
+      --_border-interactive-pressed: var(
         --eds-border-interactive-accent-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-accent);
+      --_text-muted: var(--eds-text-on-muted-accent);
       --_icon: var(--eds-icon-on-muted-accent);
     }
 
-    &[data-color-appearance='success'] {
+    &[data-tone='success'] {
       --_bg-muted: var(--eds-background-interactive-success-muted-default);
       --_bg-muted-hover: var(--eds-background-interactive-success-muted-hover);
       --_bg-muted-pressed: var(
@@ -138,20 +143,20 @@
       --_border-muted-pressed: var(
         --eds-border-interactive-success-muted-pressed
       );
-      --_border-emphasis: var(
+      --_border-interactive: var(
         --eds-border-interactive-success-emphasis-default
       );
-      --_border-emphasis-hover: var(
+      --_border-interactive-hover: var(
         --eds-border-interactive-success-emphasis-hover
       );
-      --_border-emphasis-pressed: var(
+      --_border-interactive-pressed: var(
         --eds-border-interactive-success-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-success);
+      --_text-muted: var(--eds-text-on-muted-success);
       --_icon: var(--eds-icon-on-muted-success);
     }
 
-    &[data-color-appearance='info'] {
+    &[data-tone='info'] {
       --_bg-muted: var(--eds-background-interactive-info-muted-default);
       --_bg-muted-hover: var(--eds-background-interactive-info-muted-hover);
       --_bg-muted-pressed: var(--eds-background-interactive-info-muted-pressed);
@@ -165,18 +170,20 @@
       --_border-muted: var(--eds-border-interactive-info-muted-default);
       --_border-muted-hover: var(--eds-border-interactive-info-muted-hover);
       --_border-muted-pressed: var(--eds-border-interactive-info-muted-pressed);
-      --_border-emphasis: var(--eds-border-interactive-info-emphasis-default);
-      --_border-emphasis-hover: var(
+      --_border-interactive: var(
+        --eds-border-interactive-info-emphasis-default
+      );
+      --_border-interactive-hover: var(
         --eds-border-interactive-info-emphasis-hover
       );
-      --_border-emphasis-pressed: var(
+      --_border-interactive-pressed: var(
         --eds-border-interactive-info-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-info);
+      --_text-muted: var(--eds-text-on-muted-info);
       --_icon: var(--eds-icon-on-muted-info);
     }
 
-    &[data-color-appearance='warning'] {
+    &[data-tone='warning'] {
       --_bg-muted: var(--eds-background-interactive-warning-muted-default);
       --_bg-muted-hover: var(--eds-background-interactive-warning-muted-hover);
       --_bg-muted-pressed: var(
@@ -196,20 +203,20 @@
       --_border-muted-pressed: var(
         --eds-border-interactive-warning-muted-pressed
       );
-      --_border-emphasis: var(
+      --_border-interactive: var(
         --eds-border-interactive-warning-emphasis-default
       );
-      --_border-emphasis-hover: var(
+      --_border-interactive-hover: var(
         --eds-border-interactive-warning-emphasis-hover
       );
-      --_border-emphasis-pressed: var(
+      --_border-interactive-pressed: var(
         --eds-border-interactive-warning-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-warning);
+      --_text-muted: var(--eds-text-on-muted-warning);
       --_icon: var(--eds-icon-on-muted-warning);
     }
 
-    &[data-color-appearance='danger'] {
+    &[data-tone='danger'] {
       --_bg-muted: var(--eds-background-interactive-danger-muted-default);
       --_bg-muted-hover: var(--eds-background-interactive-danger-muted-hover);
       --_bg-muted-pressed: var(
@@ -227,61 +234,63 @@
       --_border-muted-pressed: var(
         --eds-border-interactive-danger-muted-pressed
       );
-      --_border-emphasis: var(--eds-border-interactive-danger-emphasis-default);
-      --_border-emphasis-hover: var(
+      --_border-interactive: var(
+        --eds-border-interactive-danger-emphasis-default
+      );
+      --_border-interactive-hover: var(
         --eds-border-interactive-danger-emphasis-hover
       );
-      --_border-emphasis-pressed: var(
+      --_border-interactive-pressed: var(
         --eds-border-interactive-danger-emphasis-pressed
       );
-      --_text: var(--eds-text-on-muted-danger);
+      --_text-muted: var(--eds-text-on-muted-danger);
       --_icon: var(--eds-icon-on-muted-danger);
     }
 
     /* ===== VARIANTS ===== */
 
     &[data-variant='default'] {
-      --_bg: var(--_bg-muted);
+      --_bg-color: var(--_bg-muted);
       --_border-color: var(--_border-muted);
     }
 
     &[data-variant='default']:is(:hover, :focus-visible) {
-      --_bg: var(--_bg-muted-hover);
+      --_bg-color: var(--_bg-muted-hover);
       --_border-color: var(--_border-muted-hover);
     }
 
     &[data-variant='default']:active {
-      --_bg: var(--_bg-muted-pressed);
+      --_bg-color: var(--_bg-muted-pressed);
       --_border-color: var(--_border-muted-pressed);
     }
 
     &[data-variant='outlined'] {
-      --_border-color: var(--_border-emphasis);
+      --_border-color: var(--_border-interactive);
     }
 
     &[data-variant='outlined']:is(:hover, :focus-visible) {
-      --_bg: var(--_bg-muted-hover);
-      --_border-color: var(--_border-emphasis-hover);
+      --_bg-color: var(--_bg-muted-hover);
+      --_border-color: var(--_border-interactive-hover);
     }
 
     &[data-variant='outlined']:active {
-      --_bg: var(--_bg-muted-pressed);
-      --_border-color: var(--_border-emphasis-pressed);
+      --_bg-color: var(--_bg-muted-pressed);
+      --_border-color: var(--_border-interactive-pressed);
     }
 
     &[data-variant='high-contrast'] {
       /* The neutral on-emphasis colour for every tone, as in Figma */
-      --_text: var(--eds-text-on-emphasis-neutral);
+      --_color: var(--eds-text-on-emphasis-neutral);
       --_icon: var(--eds-icon-on-emphasis-neutral);
-      --_bg: var(--_bg-emphasis);
+      --_bg-color: var(--_bg-emphasis);
     }
 
     &[data-variant='high-contrast']:is(:hover, :focus-visible) {
-      --_bg: var(--_bg-emphasis-hover);
+      --_bg-color: var(--_bg-emphasis-hover);
     }
 
     &[data-variant='high-contrast']:active {
-      --_bg: var(--_bg-emphasis-pressed);
+      --_bg-color: var(--_bg-emphasis-pressed);
     }
 
     /* ===== FOCUS ===== */
