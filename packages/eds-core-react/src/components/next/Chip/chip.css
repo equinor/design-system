@@ -14,7 +14,8 @@
     /* No width token: the design uses 1px for every stroke (#5692) */
     --_stroke-width: 1px;
 
-    /* No motion token yet; the same duration as Button */
+    /* TODO: replace 150ms with a motion token once one exists. Same duration
+     * as Button for now. */
     --_transition-duration: 150ms;
 
     /* Tone slots, neutral by default. Neutral uses text and icon primary, as
