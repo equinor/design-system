@@ -47,11 +47,6 @@
     --_text: var(--eds-text-primary);
     --_icon: var(--eds-icon-primary);
 
-    /* High contrast uses the neutral on-emphasis colour for every tone, as
-     * in Figma */
-    --_text-emphasis: var(--eds-text-on-emphasis-neutral);
-    --_icon-emphasis: var(--eds-icon-on-emphasis-neutral);
-
     /* Set by the variants and their states */
     --_bg: transparent;
     --_border-color: transparent;
@@ -271,8 +266,9 @@
     }
 
     &[data-variant='high-contrast'] {
-      --_text: var(--_text-emphasis);
-      --_icon: var(--_icon-emphasis);
+      /* The neutral on-emphasis colour for every tone, as in Figma */
+      --_text: var(--eds-text-on-emphasis-neutral);
+      --_icon: var(--eds-icon-on-emphasis-neutral);
       --_bg: var(--_bg-emphasis);
     }
 
@@ -322,13 +318,12 @@
       text-box: normal;
     }
 
-    /* Forced colours strip box-shadow, so the default and outlined borders
-     * use outline there. While focused, the focus ring takes over outline;
-     * :not(:focus-visible) keeps that handover independent of source order. */
+    /* Forced colours strip box-shadow and fills, so the border is an outline
+     * there, on every variant. While focused, the focus ring takes over
+     * outline; :not(:focus-visible) keeps that handover independent of
+     * source order. */
     @media (forced-colors: active) {
-      &:is([data-variant='default'], [data-variant='outlined']):not(
-          :focus-visible
-        ) {
+      &:not(:focus-visible) {
         outline: var(--_stroke-width) solid;
         outline-offset: calc(-1 * var(--_stroke-width));
       }
