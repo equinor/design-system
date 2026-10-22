@@ -179,7 +179,7 @@ EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 
 **Composition**: `Button.Group` and `Button.Toggle` have no EDS 2.0 counterpart yet. The toggle button is coming as its own component, not as a Button sub-component ([#5342](https://github.com/equinor/design-system/issues/5342), [#5343](https://github.com/equinor/design-system/issues/5343), [#5344](https://github.com/equinor/design-system/issues/5344), [#5345](https://github.com/equinor/design-system/issues/5345)). Whether `Button.Group` is in scope at all is still open ([#5503](https://github.com/equinor/design-system/issues/5503)).
 
-**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element.
+**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element. Icons that are direct children of the button are sized by it: `size` and the density set the icon size, and an `Icon`'s own `size` prop has no effect there.
 
 ## Checkbox
 
