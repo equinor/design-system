@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 
-export type Density = 'comfortable' | 'compact' | 'relaxed'
+export type Density = 'compact' | 'comfortable' | 'relaxed'
 
-const DENSITIES: Density[] = ['comfortable', 'compact', 'relaxed']
+/** Scale order, tightest first. */
+const DENSITIES: Density[] = ['compact', 'comfortable', 'relaxed']
 
 export type DensitySwitchProps = {
   /** Which density the examples start at. */
