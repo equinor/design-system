@@ -149,7 +149,7 @@ export const Tones: Story = {
     docs: {
       description: {
         story:
-          'The `tone` prop controls the color scheme using `data-color-appearance`.',
+          'The `tone` prop sets the colours: `accent` (default), `neutral` or `danger`.',
       },
     },
   },

@@ -24,7 +24,7 @@
     --_stroke-width: 1px;
 
     /* Colours from the eds-tokens beta (Tokens Studio) semantic layer.
-     * The --_ indirection only exists so data-color-appearance can switch
+     * The --_ indirection only exists so data-tone can switch
      * the accent/neutral/danger token set; states read these vars.
      * Token choices follow the variable bindings on Button [EDS] in Figma. */
     --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
@@ -116,9 +116,9 @@
   }
 
   /* ===== TONES ===== */
-  /* The tone prop sets data-color-appearance on the button itself */
+  /* The tone prop sets data-tone */
 
-  .eds-button[data-color-appearance='neutral'] {
+  .eds-button[data-tone='neutral'] {
     --_bg-emphasis: var(--eds-background-interactive-neutral-emphasis-default);
     --_bg-emphasis-hover: var(
       --eds-background-interactive-neutral-emphasis-hover
@@ -143,7 +143,7 @@
     );
   }
 
-  .eds-button[data-color-appearance='danger'] {
+  .eds-button[data-tone='danger'] {
     --_bg-emphasis: var(--eds-background-interactive-danger-emphasis-default);
     --_bg-emphasis-hover: var(
       --eds-background-interactive-danger-emphasis-hover
@@ -167,11 +167,10 @@
   }
 
   /* ===== SIZE VARIANTS ===== */
-  /* The size prop sets data-selectable-space. Default (md) is set on the
-   * root; small uses label.sm: 4px + 16px line height + 4px gives 24px at
-   * Comfortable. */
+  /* The size prop sets data-size. Default is set on the root; small uses
+   * label.sm: 4px + 16px line height + 4px gives 24px at Comfortable. */
 
-  .eds-button[data-selectable-space='sm'] {
+  .eds-button[data-size='small'] {
     --_font-size: var(--eds-typography-label-sm-font-size);
     --_line-height: var(--eds-typography-label-sm-line-height);
     --_padding-block: var(--eds-spacing-3xs);
