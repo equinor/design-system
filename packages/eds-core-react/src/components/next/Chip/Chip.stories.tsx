@@ -1,10 +1,10 @@
-import { useState, type ReactNode, type ComponentProps } from 'react'
+import { useEffect, useState, type ReactNode, type ComponentProps } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useArgs } from 'storybook/preview-api'
 import { Chip } from './Chip'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
 import { bookmark_filled, person } from '@equinor/eds-icons'
+import page from './Chip.docs.mdx'
 
 type StoryArgs = ComponentProps<typeof Chip>
 
@@ -14,15 +14,7 @@ const meta: Meta<StoryArgs> = {
   tags: ['beta'],
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-\`\`\`tsx
-import { Chip } from '@equinor/eds-core-react/next'
-\`\`\`
-        `,
-      },
+      page,
     },
   },
   argTypes: {
@@ -39,7 +31,7 @@ import { Chip } from '@equinor/eds-core-react/next'
     selected: {
       control: 'boolean',
       description:
-        'Selected state — leading check icon (default) or flipped dropdown arrow.',
+        'Selected state. Shows a leading check icon, or a flipped dropdown arrow on a dropdown chip.',
     },
     dropdown: {
       control: 'boolean',
@@ -85,15 +77,38 @@ type Story = StoryObj<StoryArgs>
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
-export const Default: Story = {
+export const Introduction: Story = {
   render: (args) => {
-    // Clicking updates the `selected` arg, so the control and the chip
-    // stay in step
-    const [, updateArgs] = useArgs()
+    const [selected, setSelected] = useState(args.selected ?? false)
+    // Keep the chip in step with the `selected` control
+    useEffect(() => setSelected(args.selected ?? false), [args.selected])
     return (
-      <Chip {...args} onClick={() => updateArgs({ selected: !args.selected })}>
+      <Chip
+        {...args}
+        selected={selected}
+        onClick={() => setSelected(!selected)}
+      >
         Chip
       </Chip>
+    )
+  },
+}
+
+export const Overview: Story = {
+  render: () => {
+    const [selected, setSelected] = useState(true)
+    return (
+      <Wrapper>
+        <Chip selected={selected} onClick={() => setSelected(!selected)}>
+          Selectable
+        </Chip>
+        <Chip tone="accent" onDelete={() => {}}>
+          Deletable
+        </Chip>
+        <Chip variant="outlined" dropdown>
+          Dropdown
+        </Chip>
+      </Wrapper>
     )
   },
 }
@@ -162,6 +177,14 @@ export const Tones: Story = {
       </Wrapper>
     )
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Six tones set the colours: neutral (the default), accent, success, info, warning and danger. Every tone works with every variant.',
+      },
+    },
+  },
 }
 
 export const Variants: Story = {
@@ -182,6 +205,14 @@ export const Variants: Story = {
         </Chip>
       </Wrapper>
     )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `variant` to change the visual weight. Default has a muted fill, outlined has a border and no fill, and high-contrast has a dark fill with light text.',
+      },
+    },
   },
 }
 
@@ -265,7 +296,7 @@ export const Deletable: Story = {
     docs: {
       description: {
         story:
-          'Deletable chips are typically used as filter tags. The consumer handles removal — here the chip is filtered out of state on click.',
+          'Deletable chips are typically used as filter tags. The consumer handles removal. Here the chip is filtered out of state on click.',
       },
     },
   },
@@ -308,7 +339,7 @@ export const Dropdown: Story = {
     docs: {
       description: {
         story:
-          'Dropdown chips trigger a menu. Pass `selected` while the menu is open — the arrow flips from down to up. The consumer owns the actual menu and open/close state.',
+          'Dropdown chips trigger a menu. Pass `selected` while the menu is open, and the arrow flips from down to up. The consumer owns the actual menu and open/close state.',
       },
     },
   },
