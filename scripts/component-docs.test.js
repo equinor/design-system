@@ -131,6 +131,42 @@ describe('mobile page: Overview is not special', () => {
   })
 })
 
+describe('web page: sub-components', () => {
+  const part = (name, props) => ({ name, props })
+  const prop = {
+    name: 'indicator',
+    optional: true,
+    type: 'string',
+    default: undefined,
+    description: 'Text shown after the label.',
+  }
+  const render = (subComponents) =>
+    renderWeb(
+      'Thing',
+      context([story('Overview'), story('Sizes', { caption: 'Two sizes.' })], {
+        subComponents,
+      }),
+    )
+
+  test('each part gets its own props table after the playground, before Examples', () => {
+    const page = render([part('Thing.Label', [prop])])
+    assert.ok(page.includes('### Thing.Label\n\n| Prop | Type |'))
+    assert.ok(page.indexOf('<Controls />') < page.indexOf('### Thing.Label'))
+    assert.ok(page.indexOf('### Thing.Label') < page.indexOf('## Examples'))
+  })
+
+  test('a part with no props of its own is left out', () => {
+    const page = render([part('Thing.Body', []), part('Thing.Label', [prop])])
+    assert.ok(!page.includes('Thing.Body'))
+    assert.ok(page.includes('### Thing.Label'))
+  })
+
+  test('a page without parts has no extra heading', () => {
+    const page = render([])
+    assert.ok(!page.includes('### Thing'))
+  })
+})
+
 describe('mobile page: sub-components', () => {
   const sub = {
     name: 'Thing.Icon',
