@@ -23,9 +23,9 @@ Banner shows a short, important message to the user, with optional actions to re
 ## Features
 
 - Sets its colours from `tone`, so the message reads as information, a warning, an error or a success.
-- Is built from `Banner.Icon`, `Banner.Message` and `Banner.Actions`, so you include only the parts you need.
+- Comes in parts, `Banner.Icon`, `Banner.Message` and `Banner.Actions`, so you include only the ones you need.
 - Puts the actions beside the message, or below it across the full width with `placement="bottom"`.
-- Shows a close button when you pass `onDismiss`.
+- Shows a Dismiss button when you pass `onDismiss`.
 - Announces its message to screen readers as a status by default, or as an alert when you set the `role`.
 
 <Canvas of={Stories.Overview} />
@@ -69,35 +69,11 @@ Set `placement="bottom"` on `Banner.Actions` to put the actions below the messag
 
 <Canvas of={Stories.ActionsBottom} />
 
-### Warning
-
-Use `tone="warning"` for a message about something that may need attention.
-
-<Canvas of={Stories.Warning} />
-
-### Danger
-
-Use `tone="danger"` for a message about an error or something that has gone wrong.
-
-<Canvas of={Stories.Danger} />
-
-### Success
-
-Use `tone="success"` to confirm that something went well.
-
-<Canvas of={Stories.Success} />
-
 ### With link
 
-A link in `Banner.Actions` sits beside the message, like a button does.
+A link in `Banner.Actions` works like a button. It sits beside the message by default, or below it with `placement="bottom"`.
 
 <Canvas of={Stories.WithLink} />
-
-### With link bottom
-
-With `placement="bottom"`, the link sits below the message.
-
-<Canvas of={Stories.WithLinkBottom} />
 
 ### Dismissible
 
@@ -107,13 +83,13 @@ Pass `onDismiss` to show a close button. Banner only calls it, so your code remo
 
 ### All variants
 
-Every tone, with actions beside the message and below it, a link and a close button.
+Every tone, with the same message. Info is the default. Use warning for something that may need attention, danger for an error and success to confirm that something went well. Info and warning have two buttons, danger has a link and success has a Dismiss button.
 
 <Canvas of={Stories.AllVariants} />
 
 ## Accessibility
 
 - A banner has the `status` role by default, so a screen reader announces the message politely without interrupting. Set `role="alert"` for an urgent message that needs attention at once.
-- The tone is shown by colour, so the message itself should say what it means. Banner does not add an icon, and an icon helps.
+- The tone is shown by colour, so the message itself should say what it means. Banner does not add an icon by itself, so add a `Banner.Icon`.
 - The close button is named "Dismiss". Banner only calls `onDismiss`, so your code has to remove the banner and decide where focus goes next.
 - A banner is not focusable. The buttons and links in its actions keep their own keyboard behaviour.

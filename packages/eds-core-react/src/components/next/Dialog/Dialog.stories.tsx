@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Dialog } from '.'
+import type { DialogProps } from './Dialog.types'
 import { Button } from '../Button'
 import page from './Dialog.docs.mdx'
 
@@ -8,6 +9,14 @@ const meta: Meta<typeof Dialog> = {
   title: 'EDS 2.0 (beta)/Feedback/Dialog',
   component: Dialog,
   tags: ['beta'],
+  args: {
+    scrim: true,
+  },
+  argTypes: {
+    open: { control: false },
+    onOpenChange: { control: false },
+    scrim: { control: 'boolean' },
+  },
   parameters: {
     docs: {
       page,
@@ -17,12 +26,12 @@ const meta: Meta<typeof Dialog> = {
 
 export default meta
 
-export const Introduction: StoryFn = () => {
+export const Introduction: StoryFn<DialogProps> = (args) => {
   const [open, setOpen] = useState(false)
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog {...args} open={open} onOpenChange={setOpen}>
         <Dialog.Header>
           <Dialog.Title>Dialog title</Dialog.Title>
         </Dialog.Header>

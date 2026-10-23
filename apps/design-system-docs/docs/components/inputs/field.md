@@ -37,7 +37,7 @@ const { inputId, descriptionId, helperMessageId, getDescribedBy } =
 
 ### Required and Optional Indicators
 
-Use the `indicator` prop on Field.Label to show required or optional status. This is a visual indicator only - remember to also set `aria-required` on the input for accessibility.
+Use the `indicator` prop on Field.Label to show required or optional status. The indicator is shown, and read by a screen reader, as part of the label, but it does not mark the input as required. Also set `required` on the input, which tells assistive technology and native form validation that the field is required.
 
 <StoryCanvas of="Field/WithIndicator" showLink />
 
@@ -95,7 +95,7 @@ Screen readers won't automatically announce prefix/suffix text (like currency sy
 - Use the `useFieldIds` hook to manage accessibility attributes
 - Place labels and descriptions above the form control
 - Use `role="alert"` for live validation messages
-- Set `aria-required` on inputs when using the required indicator
+- Set `required` on inputs when using the required indicator
 - Use **TextField** for standard form fields
   :::
 
@@ -103,6 +103,6 @@ Screen readers won't automatically announce prefix/suffix text (like currency sy
 
 - Forget to connect descriptions with `aria-describedby`
 - Use Field when **TextField** would be simpler
-- Rely only on visual indicators for required/optional status
+- Rely only on the indicator text for required/optional status
 - Skip the `useFieldIds` hook - manual ID management is error-prone
   :::

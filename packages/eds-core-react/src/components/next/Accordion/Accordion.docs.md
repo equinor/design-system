@@ -11,7 +11,7 @@ Accordion shows a list of sections where each header opens and closes its panel,
 - Built on the native `<details>` and `<summary>` elements, so opening, closing and keyboard use come from the browser.
 - Allows only one open item at a time when you set `exclusive`, using the native `name` attribute and no JavaScript.
 - Lets each `Accordion.Item` keep its own open state, or be controlled with `open` and `onOpenChange`.
-- Animates opening and closing with CSS alone, and skips the animation when the user prefers reduced motion.
+- Animates opening and closing with CSS alone. The animation is off for users who have turned on reduced motion in their system settings.
 
 ## Usage
 

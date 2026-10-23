@@ -20,7 +20,6 @@ Field arranges a label, a description, a control and a helper message into one f
 
 ## Features
 
-- Provides `Field.Label`, `Field.Description` and `Field.HelperMessage`, which share the field's spacing and styles.
 - Works around any control, so you choose the input.
 - Styles the label, description and helper message as disabled together when you set `disabled`.
 - Shows an `indicator` such as "(Required)" next to the label.
@@ -55,7 +54,7 @@ const { inputId, descriptionId, getDescribedBy } = useFieldIds()
 
 ### With indicator
 
-Use the `indicator` prop on `Field.Label` for text such as "(Required)" or "(Optional)". It is only visible text, so set `required` on the input as well.
+Use the `indicator` prop on `Field.Label` for text such as "(Required)" or "(Optional)". It is shown, and read by a screen reader, as part of the label, but it does not mark the input as required. Set `required` on the input as well.
 
 <Canvas of={Stories.WithIndicator} />
 
@@ -79,11 +78,10 @@ Set `disabled` on Field to style the label, description and helper message as di
 
 ## Accessibility
 
-- Field is a plain container with no role of its own. The control inside it carries the semantics.
-- `Field.Label` renders a `<label>`, so connect it to the control with `htmlFor`, using the id from `useFieldIds`.
+- Field is a plain container with no role of its own, so the control inside it carries the semantics. Connect `Field.Label` to the control with `htmlFor`, using the id from `useFieldIds`.
 - Pass `aria-describedby={getDescribedBy()}` to the control, so a screen reader reads the description and the helper message after the label. Set `hasHelperMessage` only while a helper message is rendered.
 - Wrap a message that appears later in a container with `role="alert"`, so screen readers announce it.
-- `indicator` is only visible text. Set `required` on the control as well, so assistive technology and form validation know the field is required.
+- `indicator` is shown, and read by a screen reader, as part of the label, but it does not mark the control as required. Set `required` on the control as well, so assistive technology and form validation know the field is required.
 - `disabled` on Field only styles its parts. Set `disabled` on the control too.
 
 ## Related components

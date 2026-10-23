@@ -116,85 +116,33 @@ ActionsBottom.parameters = {
   },
 }
 
-export const Warning: StoryFn<typeof Banner> = () => (
-  <Banner tone="warning">
-    <Banner.Message>{exampleMessage}</Banner.Message>
-  </Banner>
-)
-Warning.parameters = {
-  docs: {
-    description: {
-      story:
-        'Use `tone="warning"` for a message about something that may need attention.',
-    },
-  },
-}
-
-export const Danger: StoryFn<typeof Banner> = () => (
-  <Banner tone="danger">
-    <Banner.Message>{exampleMessage}</Banner.Message>
-  </Banner>
-)
-Danger.parameters = {
-  docs: {
-    description: {
-      story:
-        'Use `tone="danger"` for a message about an error or something that has gone wrong.',
-    },
-  },
-}
-
-export const Success: StoryFn<typeof Banner> = () => (
-  <Banner tone="success">
-    <Banner.Icon>
-      <Icon data={check_circle_outlined} />
-    </Banner.Icon>
-    <Banner.Message>{exampleMessage}</Banner.Message>
-  </Banner>
-)
-Success.parameters = {
-  docs: {
-    description: {
-      story: 'Use `tone="success"` to confirm that something went well.',
-    },
-  },
-}
-
 export const WithLink: StoryFn<typeof Banner> = () => (
-  <Banner>
-    <Banner.Icon>
-      <Icon data={info_circle} />
-    </Banner.Icon>
-    <Banner.Message>{exampleMessage}</Banner.Message>
-    <Banner.Actions>
-      <Link href="https://eds.equinor.com">Link</Link>
-    </Banner.Actions>
-  </Banner>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <Banner>
+      <Banner.Icon>
+        <Icon data={info_circle} />
+      </Banner.Icon>
+      <Banner.Message>{exampleMessage}</Banner.Message>
+      <Banner.Actions>
+        <Link href="https://eds.equinor.com">Link</Link>
+      </Banner.Actions>
+    </Banner>
+    <Banner>
+      <Banner.Icon>
+        <Icon data={info_circle} />
+      </Banner.Icon>
+      <Banner.Message>{exampleMessage}</Banner.Message>
+      <Banner.Actions placement="bottom">
+        <Link href="https://eds.equinor.com">Link</Link>
+      </Banner.Actions>
+    </Banner>
+  </div>
 )
 WithLink.parameters = {
   docs: {
     description: {
       story:
-        'A link in `Banner.Actions` sits beside the message, like a button does.',
-    },
-  },
-}
-
-export const WithLinkBottom: StoryFn<typeof Banner> = () => (
-  <Banner>
-    <Banner.Icon>
-      <Icon data={info_circle} />
-    </Banner.Icon>
-    <Banner.Message>{exampleMessage}</Banner.Message>
-    <Banner.Actions placement="bottom">
-      <Link href="https://eds.equinor.com">Link</Link>
-    </Banner.Actions>
-  </Banner>
-)
-WithLinkBottom.parameters = {
-  docs: {
-    description: {
-      story: 'With `placement="bottom"`, the link sits below the message.',
+        'A link in `Banner.Actions` works like a button. It sits beside the message by default, or below it with `placement="bottom"`.',
     },
   },
 }
@@ -226,7 +174,7 @@ Dismissible.parameters = {
 
 export const AllVariants: StoryFn<typeof Banner> = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-    <Banner tone="info">
+    <Banner>
       <Banner.Icon>
         <Icon data={info_circle} />
       </Banner.Icon>
@@ -236,7 +184,6 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
         <Button variant="secondary">Cancel</Button>
       </Banner.Actions>
     </Banner>
-
     <Banner tone="warning">
       <Banner.Icon>
         <Icon data={warning_outlined} />
@@ -247,41 +194,18 @@ export const AllVariants: StoryFn<typeof Banner> = () => (
         <Button variant="secondary">Cancel</Button>
       </Banner.Actions>
     </Banner>
-
     <Banner tone="danger">
       <Banner.Icon>
         <Icon data={error_outlined} />
-      </Banner.Icon>
-      <Banner.Message>{exampleMessage}</Banner.Message>
-      <Banner.Actions placement="bottom">
-        <Button>Ok</Button>
-        <Button variant="secondary">Cancel</Button>
-      </Banner.Actions>
-    </Banner>
-
-    <Banner tone="success">
-      <Banner.Icon>
-        <Icon data={check_circle_outlined} />
-      </Banner.Icon>
-      <Banner.Message>{exampleMessage}</Banner.Message>
-      <Banner.Actions>
-        <Button>Ok</Button>
-      </Banner.Actions>
-    </Banner>
-
-    <Banner>
-      <Banner.Icon>
-        <Icon data={info_circle} />
       </Banner.Icon>
       <Banner.Message>{exampleMessage}</Banner.Message>
       <Banner.Actions>
         <Link href="https://eds.equinor.com">Link</Link>
       </Banner.Actions>
     </Banner>
-
-    <Banner onDismiss={() => {}}>
+    <Banner tone="success" onDismiss={() => {}}>
       <Banner.Icon>
-        <Icon data={info_circle} />
+        <Icon data={check_circle_outlined} />
       </Banner.Icon>
       <Banner.Message>{exampleMessage}</Banner.Message>
     </Banner>
@@ -291,7 +215,7 @@ AllVariants.parameters = {
   docs: {
     description: {
       story:
-        'Every tone, with actions beside the message and below it, a link and a close button.',
+        'Every tone, with the same message. Info is the default. Use warning for something that may need attention, danger for an error and success to confirm that something went well. Info and warning have two buttons, danger has a link and success has a Dismiss button.',
     },
   },
 }

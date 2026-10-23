@@ -136,7 +136,7 @@ WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Use the `indicator` prop on `Field.Label` for text such as "(Required)" or "(Optional)". It is only visible text, so set `required` on the input as well.',
+        'Use the `indicator` prop on `Field.Label` for text such as "(Required)" or "(Optional)". It is shown, and read by a screen reader, as part of the label, but it does not mark the input as required. Set `required` on the input as well.',
     },
   },
 }
