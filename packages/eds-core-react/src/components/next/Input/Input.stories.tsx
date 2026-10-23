@@ -3,10 +3,9 @@ import { anchor, search, close } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Field } from '../Field'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
-import page from './Input.docs.mdx'
 
 const meta: Meta<typeof Input> = {
   title: 'EDS 2.0 (beta)/Inputs/Input',
@@ -21,7 +20,6 @@ const meta: Meta<typeof Input> = {
   },
   parameters: {
     docs: {
-      page,
       source: {
         excludeDecorators: true,
       },
@@ -138,6 +136,9 @@ const meta: Meta<typeof Input> = {
         category: 'Styling',
       },
     },
+
+    // Internal escape hatch, not for consumer use. Use TextArea instead.
+    as: { table: { disable: true } },
   },
   decorators: [
     (Story) => {
@@ -164,6 +165,19 @@ Introduction.args = {
   hideErrorIcon: false,
 }
 
+export const Overview: StoryFn<InputProps> = () => (
+  <>
+    <Input aria-label="Default" placeholder="Default" autoComplete="off" />
+    <Input
+      aria-label="Invalid"
+      placeholder="Invalid"
+      invalid
+      autoComplete="off"
+    />
+    <Input aria-label="Disabled" placeholder="Disabled" disabled />
+  </>
+)
+
 export const Types: StoryFn<InputProps> = () => (
   <>
     <Input
@@ -179,6 +193,14 @@ export const Types: StoryFn<InputProps> = () => (
     />
   </>
 )
+Types.parameters = {
+  docs: {
+    description: {
+      story:
+        'Input accepts any native HTML input type, such as text, number or password, through the `type` prop.',
+    },
+  },
+}
 
 export const ValidationStates: StoryFn<InputProps> = () => (
   <>
@@ -195,73 +217,55 @@ export const ValidationStates: StoryFn<InputProps> = () => (
     />
   </>
 )
-
-export const States: StoryFn<InputProps> = () => (
-  <>
-    <Input
-      aria-label="Disabled with value"
-      defaultValue="Disabled value"
-      disabled
-    />
-    <Input
-      aria-label="Disabled with placeholder"
-      placeholder="Disabled placeholder"
-      disabled
-    />
-    <Input
-      aria-label="Read only with value"
-      defaultValue="Read only value"
-      readOnly
-    />
-    <Input
-      aria-label="Read only with placeholder"
-      placeholder="Read only placeholder"
-      readOnly
-    />
-  </>
-)
-States.storyName = 'Disabled & Read only'
-
-export const WithLabel: StoryFn<InputProps> = () => {
-  return (
-    <>
-      {/* Recommended: Use Field component */}
-      <Field>
-        <Field.Label htmlFor="field-example">
-          Using Field (recommended)
-        </Field.Label>
-        <Input id="field-example" placeholder="Field handles spacing" />
-      </Field>
-
-      {/* Alternative: Manual layout with CSS gap */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--eds-selectable-space-vertical)',
-        }}
-      >
-        <Field.Label htmlFor="manual-example">
-          Manual spacing with CSS gap
-        </Field.Label>
-        <Input id="manual-example" placeholder="Custom layout" />
-      </div>
-    </>
-  )
-}
-WithLabel.parameters = {
+ValidationStates.parameters = {
   docs: {
     description: {
-      story: `
-For a complete form field with label, description, helper message, and required/optional indicators, use the **TextField** component instead. It handles all the composition and accessibility for you.
-
-Input is a low-level building block for custom compositions.
-      `,
+      story:
+        'Set `invalid` to show error styling. Pair it with an accessible description of what needs fixing, such as a message linked through `aria-describedby`.',
     },
   },
 }
 
-export const Compact: StoryFn<InputProps> = () => (
+export const States: StoryFn<InputProps> = () => (
+  <>
+    <Input aria-label="Default" placeholder="Default" />
+    <Input aria-label="Disabled" defaultValue="Disabled value" disabled />
+    <Input aria-label="Read only" defaultValue="Read only value" readOnly />
+  </>
+)
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'An input is either at its default, disabled, or read only. Disabled inputs are not focusable and are left out of form submission. Read only inputs stay focusable and submit their value but cannot be edited.',
+    },
+  },
+}
+
+export const RequiredIndicator: StoryFn<InputProps> = () => (
+  <>
+    <Field>
+      <Field.Label htmlFor="optional-example">Email</Field.Label>
+      <Input id="optional-example" placeholder="name@example.com" />
+    </Field>
+    <Field>
+      <Field.Label htmlFor="required-example" indicator="(Required)">
+        Email
+      </Field.Label>
+      <Input id="required-example" required placeholder="name@example.com" />
+    </Field>
+  </>
+)
+RequiredIndicator.parameters = {
+  docs: {
+    description: {
+      story:
+        'The `required` prop tells assistive technology and native form validation that the field is required, but it shows no visible marker. Pair it with the `indicator` prop on `Field.Label`.',
+    },
+  },
+}
+
+export const Density: StoryFn<InputProps> = () => (
   <>
     <div data-density="spacious">
       <Input
@@ -279,7 +283,14 @@ export const Compact: StoryFn<InputProps> = () => (
     </div>
   </>
 )
-Compact.storyName = 'Density'
+Density.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `data-density="comfortable"` on a parent element to render a more compact input. Spacious is the default density.',
+    },
+  },
+}
 
 export const WithAdornments: StoryFn<InputProps> = () => {
   return (
@@ -354,83 +365,14 @@ export const WithAdornments: StoryFn<InputProps> = () => {
     </>
   )
 }
-
-export const DensityWithAdornments: StoryFn<InputProps> = () => {
-  return (
-    <div
-      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}
-    >
-      {/* Spacious density */}
-      <div
-        data-density="spacious"
-        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-      >
-        <h3 style={{ margin: 0 }}>Spacious (default)</h3>
-        <Input
-          aria-label="Default spacious"
-          placeholder="Default"
-          startText="https://"
-          startAdornment={<Icon data={anchor} />}
-          endText=".com"
-          endAdornment={<Icon data={search} />}
-        />
-        <Input
-          aria-label="Invalid spacious"
-          defaultValue="invalid-url"
-          invalid
-          startText="https://"
-          startAdornment={<Icon data={anchor} />}
-          endText=".com"
-          endAdornment={<Icon data={search} />}
-        />
-        <Input
-          aria-label="Disabled spacious"
-          value="disabled-url"
-          disabled
-          startText="https://"
-          startAdornment={<Icon data={anchor} />}
-          endText=".com"
-          endAdornment={<Icon data={search} />}
-        />
-      </div>
-
-      {/* Comfortable density */}
-      <div
-        data-density="comfortable"
-        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-      >
-        <h3 style={{ margin: 0 }}>Comfortable (compact)</h3>
-        <Input
-          aria-label="Default comfortable"
-          placeholder="Default"
-          startText="https://"
-          startAdornment={<Icon data={anchor} />}
-          endText=".com"
-          endAdornment={<Icon data={search} />}
-        />
-        <Input
-          aria-label="Invalid comfortable"
-          defaultValue="invalid-url"
-          invalid
-          startText="https://"
-          startAdornment={<Icon data={anchor} />}
-          endText=".com"
-          endAdornment={<Icon data={search} />}
-        />
-        <Input
-          aria-label="Disabled comfortable"
-          value="disabled-url"
-          disabled
-          startText="https://"
-          startAdornment={<Icon data={anchor} />}
-          endText=".com"
-          endAdornment={<Icon data={search} />}
-        />
-      </div>
-    </div>
-  )
+WithAdornments.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `startText` and `endText` for prefix or suffix text, such as a currency symbol or unit. Use `startAdornment` and `endAdornment` for elements such as icons or buttons.',
+    },
+  },
 }
-DensityWithAdornments.storyName = 'Density with Adornments'
 
 export const OverrideBackground: StoryFn<InputProps> = (args) => {
   return (
@@ -447,8 +389,16 @@ export const OverrideBackground: StoryFn<InputProps> = (args) => {
     </div>
   )
 }
+OverrideBackground.parameters = {
+  docs: {
+    description: {
+      story:
+        'Wrap the input in a container that sets the `--eds-color-neutral-1` CSS variable to customise its background colour. This overrides the base colour token the input reads for its background.',
+    },
+  },
+}
 
-export const ColorSchemes: StoryFn<InputProps> = () => {
+export const LightAndDarkMode: StoryFn<InputProps> = () => {
   return (
     <div
       style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}
@@ -464,7 +414,7 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
           gap: '16px',
         }}
       >
-        <h3 style={{ margin: 0 }}>Light Mode</h3>
+        <ExampleLabel>Light mode</ExampleLabel>
         <Input aria-label="Default" placeholder="Default" autoComplete="off" />
         <Input
           aria-label="With value"
@@ -492,9 +442,9 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
           gap: '16px',
         }}
       >
-        <h3 style={{ margin: 0, color: 'var(--eds-color-text-strong)' }}>
-          Dark Mode
-        </h3>
+        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
+          Dark mode
+        </ExampleLabel>
         <Input aria-label="Default" placeholder="Default" autoComplete="off" />
         <Input
           aria-label="With value"
@@ -513,13 +463,15 @@ export const ColorSchemes: StoryFn<InputProps> = () => {
     </div>
   )
 }
-ColorSchemes.storyName = 'Light & Dark Mode'
+LightAndDarkMode.parameters = {
+  docs: {
+    description: {
+      story:
+        'Input adapts automatically to light and dark `data-color-scheme`, with no extra props needed.',
+    },
+  },
+}
 
-/**
- * `className` and `style` land on the root element — the visual input container
- * with the border and focus ring. Use this to control width, border-radius, or layout.
- * Inner elements (the native `<input>`) are reached via CSS selectors.
- */
 export const CustomStyling: StoryFn<InputProps> = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
     <style>
@@ -532,8 +484,8 @@ export const CustomStyling: StoryFn<InputProps> = () => (
     </style>
     <div>
       <p style={{ marginBottom: '8px' }}>
-        <code>className</code> — applied to the root container (border-radius,
-        width)
+        <code>className</code> is applied to the root container, so it can set
+        border-radius and width.
       </p>
       <Input
         aria-label="Custom styled"
@@ -543,4 +495,11 @@ export const CustomStyling: StoryFn<InputProps> = () => (
     </div>
   </div>
 )
-CustomStyling.storyName = 'Custom Styling'
+CustomStyling.parameters = {
+  docs: {
+    description: {
+      story:
+        '`className` and `style` land on the root element, the visual input container with the border and focus ring. Use them to control width, border-radius, or layout. The native `<input>` inside is reached through CSS selectors.',
+    },
+  },
+}

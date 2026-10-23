@@ -8,7 +8,7 @@ description: 'Buttons are the primary action triggers in our design system. They
 {/* Portable-stories pilot: this story renders natively (no iframe) via
 composeStories — see src/components/StoryCanvas. */}
 
-<StoryCanvas of="Button/Default" showLink />
+<StoryCanvas of="Button/Introduction" showLink />
 
 ## When to Use
 

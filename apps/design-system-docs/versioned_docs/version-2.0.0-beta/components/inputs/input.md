@@ -45,7 +45,7 @@ For a complete form field with label, description, helper message, and required/
 
 When using Input with a visible label, use the Field component for proper spacing.
 
-<StoryCanvas of="Input/WithLabel" showLink />
+<StoryCanvas of="Input/RequiredIndicator" showLink />
 
 ### Density
 
@@ -54,7 +54,7 @@ Input supports two density modes to fit different UI contexts:
 - **Spacious**: The default density with comfortable padding
 - **Comfortable**: A more compact option for dense UIs like data tables
 
-<StoryCanvas of="Input/Compact" showLink />
+<StoryCanvas of="Input/Density" showLink />
 
 ### Adornments
 
