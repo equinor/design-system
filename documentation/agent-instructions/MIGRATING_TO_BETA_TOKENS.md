@@ -130,7 +130,7 @@ Three roles (ADR-0027):
 
 Weight is never per size (ADR-0029). `header` is `medium` at every size, `label` is `normal`, `medium` or `bold`, and `body` is `normal` or `bold`. Sizes above `label` `5xl`, `header` `4xl` and `body` `3xl` have no beta equivalent.
 
-The font family tokens carry a `sans-serif` fallback (#5701), so do not add one in the component.
+The font family tokens carry a `sans-serif` fallback from `eds-tokens` 3.0.0-beta.10 (#5701), so do not add one in the component.
 
 Set `font-family`, `font-size`, `line-height` and `font-weight` in the component CSS. Set them on the root as well as on inner text elements, so `asChild` elements get them too.
 
@@ -166,7 +166,7 @@ There is no motion token yet. Button and Chip use `150ms` with a `TODO` comment;
 2. `pnpm run lint <file>` and the component's tests pass. Update tests and snapshots for the renamed attributes.
 3. In Storybook, check every variant, tone, size and state against Figma, in light and dark mode, on `--eds-background-surface`, and in all three densities. Beta components are user-tested, so a known visible defect blocks the merge even when the cause is upstream.
 4. Typography: no clipped descenders, line boxes on the 4px grid, nothing that relies on trim. Check the smallest and largest size.
-5. Contrast: measure APCA for every text and fill pair that renders, from the resolved token values. Do not reuse numbers from earlier PRs or issues. Pairs below the target (Lc 60 for interactive elements and secondary text, Lc 90 for body text, ADR-0016) go in the internal discussion "APCA discrepancies in the beta colour tokens" (design-system-internal #317), in the format given there. They do not block the migration.
+5. Contrast: follow the contrast rules in `AGENTS.md` (the WCAG 2.1 AA minimum and the APCA targets, added in #5721). The token release already checks the documented foreground pairs, so measure only the pairs the component renders that are not on that list, from the resolved token values. Do not reuse numbers from earlier PRs or issues. Pairs below the target go in the internal discussion "APCA discrepancies in the beta colour tokens" (design-system-internal #317), in the format given there. They do not block the migration.
 6. Compare the resolved values with `main`, so the PR can say what changed visually: heights, padding, icon sizes, weights.
 
 ## 10. PR
