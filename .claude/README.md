@@ -53,6 +53,7 @@ Commands are user-invokable prompts triggered with `/command-name`.
 | `/accessibility-audit` | `/accessibility-audit <url>` | Audit a page or Storybook story against WCAG 2.1 AA |
 | `/audit-harnesses` | `/audit-harnesses` | Audit AI harness configs for drift across tools |
 | `/tokens-studio` | `/tokens-studio <task>` | Tokens Studio platform / studio CLI pipeline assistant |
+| `/token-migration` | `/token-migration <Component>` | Migrate a /next component to the beta tokens (colour, spacing, typography) |
 
 ## Skills
 
