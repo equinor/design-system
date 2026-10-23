@@ -263,6 +263,44 @@ describe('mobile page: React Native base types', () => {
     assert.ok(page.includes(', except `style`.'))
   })
 
+  test('does not name an omitted prop that the table declares itself', () => {
+    const declared = (name) => ({
+      name,
+      optional: true,
+      type: 'string',
+      default: undefined,
+      description: 'Declared by the component.',
+    })
+    const page = render({
+      props: [declared('onChange'), declared('readOnly')],
+      baseTypes: [
+        base('TextInputProps', ['onChange', 'onChangeText', 'readOnly']),
+      ],
+    })
+    assert.ok(page.includes(', except `onChangeText`.'))
+    assert.ok(!page.includes('except `onChange`'))
+  })
+
+  test('drops the except clause when every omitted prop is declared', () => {
+    const page = render({
+      props: [
+        {
+          name: 'onChange',
+          optional: true,
+          type: 'string',
+          default: undefined,
+          description: 'Declared by the component.',
+        },
+      ],
+      baseTypes: [base('TextInputProps', ['onChange'])],
+    })
+    assert.ok(
+      page.includes(
+        'Also accepts all React Native [`TextInputProps`](https://reactnative.dev/docs/textinput#props).',
+      ),
+    )
+  })
+
   test('says nothing when every prop is listed', () => {
     assert.ok(!render({}).includes('Also accepts'))
   })
