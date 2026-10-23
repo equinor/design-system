@@ -83,11 +83,11 @@ Prefer read-only over disabled when the value should remain visible and copyable
 
 #### Disabled
 
-<StoryCanvas of="Autocomplete/Disabled" showLink />
+<StoryCanvas of="Autocomplete/States" showLink />
 
 #### Read Only
 
-<StoryCanvas of="Autocomplete/ReadOnly" showLink />
+<StoryCanvas of="Autocomplete/States" showLink />
 
 ### Forms
 

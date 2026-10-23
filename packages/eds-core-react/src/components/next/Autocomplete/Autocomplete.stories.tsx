@@ -1,7 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import type { Meta, StoryFn } from '@storybook/react-vite'
+import { check_circle_outlined } from '@equinor/eds-icons'
 import { Autocomplete, type AutocompleteProps } from '.'
+import { Stack } from '../../../../.storybook/components'
+import { Banner } from '../Banner'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import page from './Autocomplete.docs.mdx'
 
 const elements = [
   'Aluminium',
@@ -76,7 +82,7 @@ const meta: Meta<typeof Autocomplete> = {
     },
     readOnly: {
       control: 'boolean',
-      description: 'Makes the field read-only — visible but not editable.',
+      description: 'Makes the field read-only, visible but not editable.',
       table: { category: 'States', defaultValue: { summary: 'false' } },
     },
     invalid: {
@@ -201,7 +207,7 @@ const meta: Meta<typeof Autocomplete> = {
     renderOption: {
       control: false,
       description:
-        'Custom rendering for each option row. `getOptionLabel` is still used for filtering and the input display — `renderOption` only affects the dropdown.',
+        'Custom rendering for each option row. `getOptionLabel` is still used for filtering and the input display, and `renderOption` only affects the dropdown.',
       table: {
         category: 'Advanced',
         type: {
@@ -234,7 +240,7 @@ const meta: Meta<typeof Autocomplete> = {
     name: {
       control: 'text',
       description:
-        'HTML name attribute — used when the field is part of a form.',
+        'HTML name attribute, used when the field is part of a form.',
       table: { category: 'Other' },
     },
     required: {
@@ -258,17 +264,7 @@ const meta: Meta<typeof Autocomplete> = {
   parameters: {
     layout: 'padded',
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-An Autocomplete input that filters a list of options as the user types. Supports string arrays, object arrays, custom option rendering, and async search.
-
-\`\`\`tsx
-import { Autocomplete } from '@equinor/eds-core-react/next'
-\`\`\`
-        `,
-      },
+      page,
     },
   },
 }
@@ -291,6 +287,23 @@ Introduction.parameters = {
     },
   },
 }
+
+export const Overview: StoryFn<AutocompleteProps> = () => (
+  <Stack align="stretch" direction="column">
+    <Autocomplete
+      label="Element"
+      options={elements}
+      placeholder="Search elements"
+    />
+    <Autocomplete
+      label="Element"
+      options={elements}
+      placeholder="Search elements"
+      invalid
+      helperMessage="Choose an element from the list"
+    />
+  </Stack>
+)
 
 export const Controlled: StoryFn = () => {
   const [value, setValue] = useState<string | undefined>()
@@ -325,24 +338,40 @@ export const Invalid: StoryFn<AutocompleteProps> = () => (
   />
 )
 
-export const Disabled: StoryFn<AutocompleteProps> = () => (
-  <Autocomplete
-    label="Element"
-    options={elements}
-    placeholder="Search elements"
-    disabled
-    helperMessage="Field is disabled"
-  />
+Invalid.parameters = {
+  docs: {
+    description: {
+      story:
+        '`invalid` applies error styling. Pair it with `helperMessage` to say what needs fixing, and it is announced as an alert when it appears.',
+    },
+  },
+}
+
+export const States: StoryFn<AutocompleteProps> = () => (
+  <Stack align="stretch" direction="column">
+    <Autocomplete
+      label="Default"
+      options={elements}
+      placeholder="Search elements"
+    />
+    <Autocomplete label="Disabled" options={elements} value="Copper" disabled />
+    <Autocomplete
+      label="Read only"
+      options={elements}
+      value="Copper"
+      readOnly
+    />
+  </Stack>
 )
 
-export const ReadOnly: StoryFn<AutocompleteProps> = () => (
-  <Autocomplete
-    label="Element"
-    options={elements}
-    defaultInputValue="Copper"
-    readOnly
-  />
-)
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'An autocomplete is either at its default, disabled, or read only. A disabled field cannot be focused or changed and is left out of form submission. A read only field keeps its value and can be focused, but cannot be changed and does not open its list.',
+    },
+  },
+}
 
 export const ObjectOptions: StoryFn = () => {
   type Well = { id: string; name: string }
@@ -371,11 +400,10 @@ export const ObjectOptions: StoryFn = () => {
   )
 }
 
-ObjectOptions.storyName = 'Object options'
 ObjectOptions.parameters = {
   docs: {
     description: {
-      story: `When your options are objects instead of strings, provide \`getOptionLabel\` to tell the component which field to display and search by. \`onValueChange\` returns the full object — notice the helper message shows both the name and the \`id\` field, which you would not have with a plain string list.`,
+      story: `When your options are objects instead of strings, provide \`getOptionLabel\` to tell the component which field to display and search by. \`onValueChange\` returns the full object. Notice the helper message shows both the name and the \`id\` field, which you would not have with a plain string list.`,
     },
   },
 }
@@ -417,15 +445,17 @@ export const CustomOptionRendering: StoryFn = () => {
       value={selected}
       onValueChange={setSelected}
       placeholder="Search wells"
+      helperMessage={
+        selected ? `Type: ${selected.type}` : 'Pick a well to see its type'
+      }
     />
   )
 }
 
-CustomOptionRendering.storyName = 'Custom option rendering'
 CustomOptionRendering.parameters = {
   docs: {
     description: {
-      story: `Use \`renderOption\` to show richer content per row — icons, subtitles, badges, etc. \`getOptionLabel\` controls what appears in the input field after selection. \`optionsFilter\` controls what is searchable — here it matches on both name and platform type, so try typing "fixed" or "semi".`,
+      story: `Use \`renderOption\` to show richer content per row, such as icons, subtitles and badges. \`getOptionLabel\` controls what appears in the input field after selection. \`optionsFilter\` controls what is searchable. Here it matches on both name and platform type, so try typing "fixed" or "semi".`,
     },
   },
 }
@@ -440,7 +470,6 @@ export const DisabledOptions: StoryFn = () => (
   />
 )
 
-DisabledOptions.storyName = 'Disabled options'
 DisabledOptions.parameters = {
   docs: {
     description: {
@@ -474,11 +503,10 @@ export const AllowCustomValue: StoryFn = () => {
   )
 }
 
-AllowCustomValue.storyName = 'Allow custom value'
 AllowCustomValue.parameters = {
   docs: {
     description: {
-      story: `Use \`allowCustomValue\` to let users type and confirm a value not in the list. \`onCustomValueConfirm\` fires with the typed string — use it to add the new value to your list and update the selection. Note: \`onValueChange\` is only called for existing list options; \`onCustomValueConfirm\` handles new values.`,
+      story: `Use \`allowCustomValue\` to let users type and confirm a value not in the list. \`onCustomValueConfirm\` fires with the typed string. Use it to add the new value to your list and update the selection. Note: \`onValueChange\` is only called for existing list options; \`onCustomValueConfirm\` handles new values.`,
     },
   },
 }
@@ -584,7 +612,6 @@ export const Async: StoryFn = () => {
   )
 }
 
-Async.storyName = 'Async search'
 Async.parameters = {
   docs: {
     description: {
@@ -619,18 +646,27 @@ export const WithReactHookForm: StoryFn = () => {
   const [submitted, setSubmitted] = useState<FormValues | null>(null)
 
   return submitted ? (
-    <div>
-      <pre style={{ marginBottom: '1rem' }}>
-        {JSON.stringify(submitted, null, 2)}
-      </pre>
-      <button
-        onClick={() => {
-          setSubmitted(null)
-          reset()
-        }}
-      >
-        Reset
-      </button>
+    <div style={{ maxWidth: '480px' }}>
+      <Banner tone="success">
+        <Banner.Icon>
+          <Icon data={check_circle_outlined} />
+        </Banner.Icon>
+        <Banner.Message>
+          🎉 All done! You picked {submitted.element}
+          {submitted.well ? ` at ${submitted.well.name}` : ''}.
+        </Banner.Message>
+        <Banner.Actions>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setSubmitted(null)
+              reset()
+            }}
+          >
+            Start over
+          </Button>
+        </Banner.Actions>
+      </Banner>
     </div>
   ) : (
     <form
@@ -675,7 +711,7 @@ export const WithReactHookForm: StoryFn = () => {
           />
         )}
       />
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
     </form>
   )
 }
@@ -683,7 +719,7 @@ export const WithReactHookForm: StoryFn = () => {
 WithReactHookForm.parameters = {
   docs: {
     description: {
-      story: `Use \`Controller\` from react-hook-form and wire \`value\` / \`onValueChange\` to \`field.value\` / \`field.onChange\`. Pass \`onClear={() => field.onChange(undefined)}\` so clearing the field also resets the form value. \`invalid\` and \`helperMessage\` connect validation errors.`,
+      story: `Use \`Controller\` from react-hook-form and wire \`value\` / \`onValueChange\` to \`field.value\` / \`field.onChange\`. Pass \`onClear={() => field.onChange(undefined)}\` so clearing the field also resets the form value. \`invalid\` and \`helperMessage\` connect validation errors. A valid submit shows a success banner with a button to start over.`,
     },
   },
 }
