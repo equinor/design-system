@@ -26,12 +26,20 @@ legend {
 /* Storybook color scheme wrapper. Uses the beta semantic tokens (not the
    legacy --eds-color-* ones): legacy declares no dark value for its
    surface token, while these re-resolve per [data-color-scheme] subtree
-   (#5226), so the canvas follows the colour-scheme toolbar toggle. */
+   (#5226), so the canvas follows the colour-scheme toolbar toggle.
+   The background is background-surface, because the components are designed
+   for it and every colour contrast is measured against it (ADR-0016).
+   The wrapper is at least as wide as the canvas and grows with a story that
+   is wider, so the background does not stop where a wide story starts to
+   scroll. */
 .eds-storybook-wrapper {
   color: var(--eds-text-primary);
+  box-sizing: border-box;
+  width: fit-content;
+  min-width: 100%;
   min-height: 100%;
   padding: 1rem;
-  background-color: var(--eds-background-canvas);
+  background-color: var(--eds-background-surface);
 }
 
 /* Debug grid */

@@ -1,4 +1,4 @@
-const { BETA_CALLOUT, PLATFORMS } = require('./config')
+const { BETA_CALLOUT, PLATFORMS, REACT_NATIVE_DOCS } = require('./config')
 const { fencedCode } = require('./sidecar')
 const { fail } = require('./errors')
 
@@ -25,6 +25,29 @@ function renderPropsTable(props) {
     '|---|---|---|---|',
     ...rows,
   ].join('\n')
+}
+
+// Props that come from a React Native type are not listed in the table, so a
+// line under it names the type, linked to its React Native docs.
+// A type that left some props out with Omit says which, so the line does not
+// claim more than the component takes.
+const listWithAnd = (items) =>
+  items.length > 1
+    ? `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`
+    : items[0]
+
+function alsoAccepts(bases = []) {
+  if (!bases.length) return undefined
+  const links = bases.map(({ name }) =>
+    REACT_NATIVE_DOCS[name]
+      ? `[\`${name}\`](https://reactnative.dev/docs/${REACT_NATIVE_DOCS[name]}#props)`
+      : `\`${name}\``,
+  )
+  const omitted = [...new Set(bases.flatMap((base) => base.omitted))]
+  const except = omitted.length
+    ? `, except ${listWithAnd(omitted.map((key) => `\`${key}\``))}`
+    : ''
+  return `Also accepts all React Native ${listWithAnd(links)}${except}.`
 }
 
 // One Links row. `urls` is in display order, `indent` is for nesting.
@@ -99,9 +122,25 @@ function renderMobile(component, ctx) {
     usageSection(component, 'mobile', ctx),
     section(
       'Props',
-      ctx.props.length
-        ? renderPropsTable(ctx.props)
-        : `${component} has no props of its own.`,
+      [
+        ctx.props.length
+          ? renderPropsTable(ctx.props)
+          : `${component} has no props of its own.`,
+        alsoAccepts(ctx.baseTypes),
+        ...(ctx.subComponents ?? []).map((sub) =>
+          [
+            `### ${sub.name}`,
+            sub.props.length
+              ? renderPropsTable(sub.props)
+              : `${sub.name} has no props of its own.`,
+            alsoAccepts(sub.baseTypes),
+          ]
+            .filter(Boolean)
+            .join('\n\n'),
+        ),
+      ]
+        .filter(Boolean)
+        .join('\n\n'),
     ),
     examplesSection(component, 'mobile', examples),
     ...closingSections(ctx),

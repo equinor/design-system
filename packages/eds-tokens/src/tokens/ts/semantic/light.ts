@@ -188,7 +188,6 @@ export const semantic = {
           pressed: '#a4a4a4',
         },
       },
-      selectedIndicator: '#1e383a',
       success: {
         emphasis: {
           default: '#227e22',

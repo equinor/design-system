@@ -40,7 +40,7 @@
 @import 'https://cdn.eds.equinor.com/font/equinor-font.css';
 
 /* Inter is self-hosted (the Equinor CDN only serves the Equinor font).
-   Static weights register as family 'Inter', matching --eds-family-ui.
+   Static weights register as family 'Inter', matching --eds-font-family-ui.
 
    Latin subset only. The unsuffixed `NNN.css` entrypoints pull seven subsets
    each (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext,
@@ -75,11 +75,11 @@
  * INFIMA VARIABLE OVERRIDES
  * ====================================== */
 :root {
-  /* Typography — families come from the Tokens Studio font tokens */
-  --ifm-font-family-base:
-    var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
-  --ifm-heading-font-family:
-    var(--eds-font-family-header, 'Equinor'), system-ui, sans-serif;
+  /* Typography — families come from the Tokens Studio font tokens, which
+     carry the generic sans-serif fallback themselves since #5701, so the
+     site does not repeat one */
+  --ifm-font-family-base: var(--eds-font-family-ui);
+  --ifm-heading-font-family: var(--eds-font-family-header);
 
   /* Base text colour is left to Infima so it flips correctly in dark mode.
      (The EDS neutral-strong token resolves to a fixed dark value regardless of

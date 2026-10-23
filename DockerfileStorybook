@@ -1,5 +1,5 @@
 # Match the Node.js version pinned in .nvmrc and .node-version
-FROM docker.io/node:24.16.0-alpine AS build
+FROM docker.io/node:24.22.1-alpine AS build
 
 LABEL org.opencontainers.image.title="EDS Storybook"
 LABEL org.opencontainers.image.description="Equinor Design System Storybook"

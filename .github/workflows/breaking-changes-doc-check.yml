@@ -20,7 +20,7 @@ on:
     types: [opened, edited, synchronize, reopened, labeled, unlabeled]
 
 env:
-  NODE_VERSION: '24.16.0'
+  NODE_VERSION: '24.22.1'
 
 jobs:
   breaking-changes-doc:
