@@ -206,9 +206,11 @@ changing or extending the pattern it describes.
 
 Write new records from [\`0000-template.md\`](./0000-template.md), taking the
 next free number. The number is a permanent handle for citation, so it reflects
-the order records were written rather than the order decisions were made. A
-record whose context has changed should be superseded rather than rewritten,
-keeping the original reasoning readable and dated.
+the order records were written rather than the order decisions were made. An
+accepted record can be edited in place for editorial fixes, or amended with a
+dated entry under \`## Amendments\` when a detail changes but the decision
+holds. A changed decision gets a new record that supersedes the old one in
+full. See [ADR-0001](./0001-use-adr-for-architecture-decisions.md#changing-an-accepted-adr).
 
 Records: ${adrs.length}
 
