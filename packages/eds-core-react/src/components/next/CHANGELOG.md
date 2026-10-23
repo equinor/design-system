@@ -4,6 +4,19 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.5](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.4...eds-core-react-next@v3.0.0-beta.5) (2026-10-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* Chip reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are children of a Chip take the chip's icon size, so an `Icon`'s `size` prop no longer changes them. Chip sets `data-tone` instead of `data-color-appearance`, so CSS that targets `.eds-chip[data-color-appearance]` no longer matches. Chip no longer sets `data-selectable-space`, and density follows `compact`, `comfortable` and `relaxed`.
+* Icons that are direct children of Button follow the button's size and density, so an `Icon`'s `size` prop no longer changes them.
+
+### ♻️ Refactoring
+
+* migrate Button (next) to beta tokens ([#5222](https://github.com/equinor/design-system/issues/5222)) ([d7ee02b](https://github.com/equinor/design-system/commit/d7ee02b1467b940217095b25aef1b519aea90f3d))
+* migrate Chip (next) to the redefined tokens ([#5225](https://github.com/equinor/design-system/issues/5225)) ([e34181a](https://github.com/equinor/design-system/commit/e34181a1bec007e5f1559b6a4c19c1d8a84bf493))
+
 ## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.3...eds-core-react-next@v3.0.0-beta.4) (2026-10-19)
 
 
