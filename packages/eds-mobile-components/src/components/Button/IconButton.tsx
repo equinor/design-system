@@ -19,7 +19,8 @@ export type IconButtonProps = BaseButtonProps & {
     name: IconName;
     /**
      * Boolean value indicating whether the button should be fully circular.
-     * When false (default), the button is square with rounded corners.
+     * When false, the button is square with rounded corners.
+     * @default false
      */
     round?: boolean;
 };

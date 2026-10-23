@@ -5,11 +5,7 @@
      * own vertical space and the padding needs no compensation: 8px + 20px
      * line height + 8px gives 36px at Comfortable. All values follow the
      * density the button sits in. */
-    /* --eds-font-family-ui resolves to a bare Inter with no generic family
-     * behind it, so a page that does not load Inter would fall back to the
-     * browser default (often a serif). sans-serif keeps the label sans.
-     * Remove this once the token carries the fallback (#5701). */
-    --_font-family: var(--eds-font-family-ui), sans-serif;
+    --_font-family: var(--eds-font-family-ui);
     --_font-size: var(--eds-typography-label-md-font-size);
     --_line-height: var(--eds-typography-label-md-line-height);
     --_padding-block: var(--eds-spacing-xs);

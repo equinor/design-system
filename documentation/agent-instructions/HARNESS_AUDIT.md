@@ -88,6 +88,7 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 | Write issue                                | `write-issue` skill                        | `write-issue` prompt          | `write-issue` agent          |
 | Re-sync harnesses (this audit)             | `/audit-harnesses`                         | `audit-harnesses` prompt      | `audit-harnesses` agent      |
 | Tokens Studio pipeline                     | `/tokens-studio`                           | `tokens-studio` prompt        | `tokens-studio` agent        |
+| Beta token migration                       | `/token-migration`                         | `token-migration` prompt      | `token-migration` agent      |
 | Dependabot duty                            | `/dependabot-duty`                         | `dependabot-duty` prompt      | `dependabot-duty` agent      |
 | Read-only advisor                          | `.claude/rules/advisor.md` (general scope) | `advisor` prompt              | `advisor` primary agent      |
 
