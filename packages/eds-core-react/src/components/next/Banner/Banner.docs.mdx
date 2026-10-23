@@ -49,6 +49,25 @@ import { Banner } from '@equinor/eds-core-react/next'
 <Primary />
 <Controls />
 
+### Banner.Icon
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `ReactNode` | None | The icon. Banner does not add one for the tone. Required. |
+
+### Banner.Message
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `ReactNode` | None | The message text. Required. |
+
+### Banner.Actions
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `placement` | `'left' \| 'bottom'` | `'left'` | Where to place the actions relative to the message. `left` puts them beside the message and `bottom` puts them below it, across the full width. |
+| `children` | `ReactNode` | None | The buttons or links the user can respond to the message with. Required. |
+
 ## Examples
 
 ### With icon

@@ -21,6 +21,7 @@ export type DialogProps = {
 } & Omit<DialogHTMLAttributes<HTMLDialogElement>, 'open' | 'onClose'>
 
 export type DialogHeaderProps = {
+  /** The header content, usually a `Dialog.Title`. */
   children?: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 

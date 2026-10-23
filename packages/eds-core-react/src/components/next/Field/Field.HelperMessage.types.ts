@@ -8,6 +8,6 @@ import type { HTMLAttributes, ReactNode } from 'react'
  * and may cause unexpected behavior with accessibility attributes.
  */
 export type HelperMessageProps = {
-  /** Helper message content */
+  /** Helper message content. */
   children: ReactNode
 } & HTMLAttributes<HTMLParagraphElement>
