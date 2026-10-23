@@ -73,7 +73,8 @@ export type ChipProps = {
    */
   dropdown?: boolean
   /**
-   * Chip content
+   * Chip content. An `Icon` passed here takes the chip's icon size, so its
+   * `size` prop has no effect inside a chip.
    */
   children?: ReactNode
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'type'>

@@ -116,7 +116,7 @@ granular files stay internal.
   minifier-version churn in release-PR diffs, no extra toolchain
   dependency in the pipeline) and diffs stay reviewable. Gzip closes
   the size gap (4.8 vs 4.6 kB); consumers that bundle minify with
-  their own tooling. The bundle's only added behaviour is the
+  their own tooling. The behaviour the bundle adds of its own is the
   `@layer eds-tokens` wrap decided in
   [ADR-0028](./0028-token-code-output-architecture-typography-roles.md)
   decision point 6 and implemented in
@@ -124,9 +124,14 @@ granular files stay internal.
   output opens with
   `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
   and holds the whole concatenation in one `@layer eds-tokens` block.
-  The wrap is deterministic, so the bundle stays a pure function of the
-  source files; beyond it the step adds nothing on top of the generated
-  files (see the colour-scheme note below).
+  The step also appends a generic family to the `--eds-family-*`
+  declarations, so text does not land on the browser's default serif in
+  an app that has not loaded the font
+  ([#5701](https://github.com/equinor/design-system/issues/5701)). Which
+  generic family that is belongs to the script, not to this ADR. Both
+  touches are deterministic, so the bundle stays a pure function of the
+  source files; beyond them the step adds nothing on top of the
+  generated files (see the colour-scheme note below).
 - **Beta validation costs nothing extra:** the existing `./next/css/*`
   wildcard maps to `src/tokens/css/*`, so the committed bundle is
   importable as `@equinor/eds-tokens/next/css/variables.css` in the next

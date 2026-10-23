@@ -1,135 +1,349 @@
 @layer eds-components {
   .eds-chip {
-    /* Replaces data-space-proportions="squished" — squished vertical spacing for sm selectable space */
-    --eds-spacing-proportions-sm-vertical: var(
-      --eds-spacing-inset-sm-vertical-squished
+    /* label.md, not trimmed (ADR-0029), so the padding needs no
+     * compensation. Every value follows the density the chip sits in. */
+    /* TODO: drop sans-serif once the font-family token carries a generic
+     * fallback (#5701). Without it, a page that doesn't load Inter falls
+     * back to the browser default, often a serif. */
+    --_font-family: var(--eds-font-family-ui), sans-serif;
+    --_font-size: var(--eds-typography-label-md-font-size);
+    --_line-height: var(--eds-typography-label-md-line-height);
+    --_padding-block: var(--eds-spacing-3xs);
+    --_padding-inline: var(--eds-spacing-sm);
+    --_gap: var(--eds-spacing-3xs);
+
+    /* Figma binds the icon size to spacing.md; there are no size tokens */
+    --_icon-size: var(--eds-spacing-md);
+
+    /* No width token: the design uses 1px for every stroke (#5692) */
+    --_stroke-width: 1px;
+
+    /* TODO: replace 150ms with a motion token once one exists. Same duration
+     * as Button for now. */
+    --_transition-duration: 150ms;
+
+    /* Tone slots, neutral by default. Neutral uses text and icon primary, as
+     * Figma binds them; the other tones use on-muted for both. */
+    --_bg-muted: var(--eds-background-interactive-neutral-muted-default);
+    --_bg-muted-hover: var(--eds-background-interactive-neutral-muted-hover);
+    --_bg-muted-pressed: var(
+      --eds-background-interactive-neutral-muted-pressed
     );
-
-    /* Replaces data-font-size="md" — sets icon size and gap tokens for md context */
-    --eds-typography-icon-size: var(--eds-sizing-icon-md);
-    --eds-typography-gap-horizontal: var(--eds-spacing-icon-md-gap-horizontal);
-
-    /* Typography metrics — same compensation pattern as Button */
-    --_label-font-size: var(--eds-typography-ui-body-md-font-size);
-    --_label-line-height: var(--eds-typography-ui-body-md-line-height-squished);
-    --_label-height: round(1cap, 4px); /* Figma has a cap-rounded value but it is not exposed as a CSS token; 1cap gives the same result (Inter metrics + 4px grid) */
-    --_font-family: var(--eds-typography-ui-body-font-family);
-    --_padding-block: var(--eds-selectable-space-vertical);
-
-    /*
-     * Reduce block padding by half the line-height overflow so the visual
-     * height equals (padding × 2 + cap-height) instead of (padding × 2 + line-height).
-     * e.g. 8px − (16px − 12px) / 2 = 6px → total 28px
-     */
-    --_padding-adjusted: calc(
-      var(--_padding-block) -
-        (var(--_label-line-height) - var(--_label-height)) / 2
+    --_bg-emphasis: var(--eds-background-interactive-neutral-emphasis-default);
+    --_bg-emphasis-hover: var(
+      --eds-background-interactive-neutral-emphasis-hover
     );
+    --_bg-emphasis-pressed: var(
+      --eds-background-interactive-neutral-emphasis-pressed
+    );
+    --_border-muted: var(--eds-border-interactive-neutral-muted-default);
+    --_border-muted-hover: var(--eds-border-interactive-neutral-muted-hover);
+    --_border-muted-pressed: var(
+      --eds-border-interactive-neutral-muted-pressed
+    );
+    --_border-interactive: var(
+      --eds-border-interactive-neutral-emphasis-default
+    );
+    --_border-interactive-hover: var(
+      --eds-border-interactive-neutral-emphasis-hover
+    );
+    --_border-interactive-pressed: var(
+      --eds-border-interactive-neutral-emphasis-pressed
+    );
+    --_text-muted: var(--eds-text-primary);
+    --_icon: var(--eds-icon-primary);
+    --_color: var(--_text-muted);
+
+    /* Set by the variants and their states. Slot names match Button (#5711) */
+    --_bg-color: transparent;
+    --_border-color: transparent;
 
     cursor: pointer;
     user-select: none;
 
     display: inline-flex;
-    gap: var(--eds-typography-gap-horizontal);
+    gap: var(--_gap);
     align-items: center;
 
     box-sizing: border-box;
-    min-height: calc(var(--_padding-block) * 2 + var(--_label-height));
-    padding-block: var(--_padding-adjusted);
-    padding-inline: var(--eds-selectable-space-horizontal);
+    padding-block: var(--_padding-block);
+    padding-inline: var(--_padding-inline);
     border: none;
-    border-radius: var(--eds-spacing-border-radius-pill, 100vmax);
+    border-radius: var(--eds-corner-radius-pill);
 
     font-family: var(--_font-family);
-    font-size: var(--_label-font-size);
-    line-height: var(--_label-line-height);
-    color: inherit;
+    font-size: var(--_font-size);
+    font-weight: var(--eds-font-weight-normal);
+    line-height: var(--_line-height);
+    color: var(--_color);
 
+    background-color: var(--_bg-color);
+
+    /* The border is an inset box-shadow, so outline stays free for the focus
+     * ring */
+    box-shadow: inset 0 0 0 var(--_stroke-width) var(--_border-color);
+
+    /* outline is left out, so the focus ring appears instantly */
     transition:
-      background-color 150ms ease-in-out,
-      outline-color 150ms ease-in-out,
-      color 150ms ease-in-out;
+      background-color var(--_transition-duration) ease-in-out,
+      box-shadow var(--_transition-duration) ease-in-out;
 
-    /* ===== DEFAULT VARIANT (solid muted fill) ===== */
+    /* ===== TONES ===== */
+    /* Keep before the variants: high contrast overrides --_icon at the same
+     * specificity and wins by source order */
 
-    &[data-variant='default'] {
-      color: var(--eds-color-text-subtle);
-      background-color: var(--eds-color-bg-fill-muted-default);
-      outline: none;
+    &[data-tone='accent'] {
+      --_bg-muted: var(--eds-background-interactive-accent-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-accent-muted-pressed
+      );
+      --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-accent-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-accent-emphasis-pressed
+      );
+      --_border-muted: var(--eds-border-interactive-accent-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-accent-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-accent-muted-pressed
+      );
+      --_border-interactive: var(
+        --eds-border-interactive-accent-emphasis-default
+      );
+      --_border-interactive-hover: var(
+        --eds-border-interactive-accent-emphasis-hover
+      );
+      --_border-interactive-pressed: var(
+        --eds-border-interactive-accent-emphasis-pressed
+      );
+      --_text-muted: var(--eds-text-on-muted-accent);
+      --_icon: var(--eds-icon-on-muted-accent);
     }
 
-    &[data-variant='default']:hover {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+    &[data-tone='success'] {
+      --_bg-muted: var(--eds-background-interactive-success-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-success-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-success-muted-pressed
+      );
+      --_bg-emphasis: var(
+        --eds-background-interactive-success-emphasis-default
+      );
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-success-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-success-emphasis-pressed
+      );
+      --_border-muted: var(--eds-border-interactive-success-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-success-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-success-muted-pressed
+      );
+      --_border-interactive: var(
+        --eds-border-interactive-success-emphasis-default
+      );
+      --_border-interactive-hover: var(
+        --eds-border-interactive-success-emphasis-hover
+      );
+      --_border-interactive-pressed: var(
+        --eds-border-interactive-success-emphasis-pressed
+      );
+      --_text-muted: var(--eds-text-on-muted-success);
+      --_icon: var(--eds-icon-on-muted-success);
+    }
+
+    &[data-tone='info'] {
+      --_bg-muted: var(--eds-background-interactive-info-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-info-muted-hover);
+      --_bg-muted-pressed: var(--eds-background-interactive-info-muted-pressed);
+      --_bg-emphasis: var(--eds-background-interactive-info-emphasis-default);
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-info-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-info-emphasis-pressed
+      );
+      --_border-muted: var(--eds-border-interactive-info-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-info-muted-hover);
+      --_border-muted-pressed: var(--eds-border-interactive-info-muted-pressed);
+      --_border-interactive: var(
+        --eds-border-interactive-info-emphasis-default
+      );
+      --_border-interactive-hover: var(
+        --eds-border-interactive-info-emphasis-hover
+      );
+      --_border-interactive-pressed: var(
+        --eds-border-interactive-info-emphasis-pressed
+      );
+      --_text-muted: var(--eds-text-on-muted-info);
+      --_icon: var(--eds-icon-on-muted-info);
+    }
+
+    &[data-tone='warning'] {
+      --_bg-muted: var(--eds-background-interactive-warning-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-warning-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-warning-muted-pressed
+      );
+      --_bg-emphasis: var(
+        --eds-background-interactive-warning-emphasis-default
+      );
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-warning-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-warning-emphasis-pressed
+      );
+      --_border-muted: var(--eds-border-interactive-warning-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-warning-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-warning-muted-pressed
+      );
+      --_border-interactive: var(
+        --eds-border-interactive-warning-emphasis-default
+      );
+      --_border-interactive-hover: var(
+        --eds-border-interactive-warning-emphasis-hover
+      );
+      --_border-interactive-pressed: var(
+        --eds-border-interactive-warning-emphasis-pressed
+      );
+      --_text-muted: var(--eds-text-on-muted-warning);
+      --_icon: var(--eds-icon-on-muted-warning);
+    }
+
+    &[data-tone='danger'] {
+      --_bg-muted: var(--eds-background-interactive-danger-muted-default);
+      --_bg-muted-hover: var(--eds-background-interactive-danger-muted-hover);
+      --_bg-muted-pressed: var(
+        --eds-background-interactive-danger-muted-pressed
+      );
+      --_bg-emphasis: var(--eds-background-interactive-danger-emphasis-default);
+      --_bg-emphasis-hover: var(
+        --eds-background-interactive-danger-emphasis-hover
+      );
+      --_bg-emphasis-pressed: var(
+        --eds-background-interactive-danger-emphasis-pressed
+      );
+      --_border-muted: var(--eds-border-interactive-danger-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-danger-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-danger-muted-pressed
+      );
+      --_border-interactive: var(
+        --eds-border-interactive-danger-emphasis-default
+      );
+      --_border-interactive-hover: var(
+        --eds-border-interactive-danger-emphasis-hover
+      );
+      --_border-interactive-pressed: var(
+        --eds-border-interactive-danger-emphasis-pressed
+      );
+      --_text-muted: var(--eds-text-on-muted-danger);
+      --_icon: var(--eds-icon-on-muted-danger);
+    }
+
+    /* ===== VARIANTS ===== */
+
+    &[data-variant='default'] {
+      --_bg-color: var(--_bg-muted);
+      --_border-color: var(--_border-muted);
+    }
+
+    &[data-variant='default']:is(:hover, :focus-visible) {
+      --_bg-color: var(--_bg-muted-hover);
+      --_border-color: var(--_border-muted-hover);
     }
 
     &[data-variant='default']:active {
-      background-color: var(--eds-color-bg-fill-muted-active);
+      --_bg-color: var(--_bg-muted-pressed);
+      --_border-color: var(--_border-muted-pressed);
     }
-
-    /* ===== OUTLINED VARIANT (border + transparent bg) ===== */
 
     &[data-variant='outlined'] {
-      color: var(--eds-color-text-subtle);
-      background-color: transparent;
-      outline: var(--eds-border-width-default, 1px) solid
-        var(--eds-color-border-strong);
-      outline-offset: calc(-1 * var(--eds-border-width-default, 1px));
+      --_border-color: var(--_border-interactive);
     }
 
-    &[data-variant='outlined']:hover {
-      background-color: var(--eds-color-bg-fill-muted-hover);
+    &[data-variant='outlined']:is(:hover, :focus-visible) {
+      --_bg-color: var(--_bg-muted-hover);
+      --_border-color: var(--_border-interactive-hover);
     }
 
     &[data-variant='outlined']:active {
-      background-color: var(--eds-color-bg-fill-muted-active);
+      --_bg-color: var(--_bg-muted-pressed);
+      --_border-color: var(--_border-interactive-pressed);
     }
-
-    /* ===== HIGH-CONTRAST VARIANT (emphasis fill + light text) ===== */
 
     &[data-variant='high-contrast'] {
-      color: var(--eds-color-text-strong-on-emphasis);
-      background-color: var(--eds-color-bg-fill-emphasis-default);
-      outline: none;
+      /* The neutral on-emphasis colour for every tone, as in Figma */
+      --_color: var(--eds-text-on-emphasis-neutral);
+      --_icon: var(--eds-icon-on-emphasis-neutral);
+      --_bg-color: var(--_bg-emphasis);
     }
 
-    &[data-variant='high-contrast']:hover {
-      background-color: var(--eds-color-bg-fill-emphasis-hover);
+    &[data-variant='high-contrast']:is(:hover, :focus-visible) {
+      --_bg-color: var(--_bg-emphasis-hover);
     }
 
     &[data-variant='high-contrast']:active {
-      background-color: var(--eds-color-bg-fill-emphasis-active);
+      --_bg-color: var(--_bg-emphasis-pressed);
     }
 
-    /* ===== FOCUS STATE ===== */
+    /* ===== FOCUS ===== */
 
+    /* Focus looks like hover plus this ring, as in Figma. The hover look comes
+     * from :is(:hover, :focus-visible) on each variant above. */
     &:focus-visible {
-      box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thin) var(--eds-color-bg-canvas),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2)
-          var(--eds-color-border-focus);
+      outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
+      outline-offset: var(--_stroke-width);
     }
 
     /* ===== ICONS ===== */
 
+    /* Smaller than the line box at every density, so flex centring places
+     * the icon without Icon's optical margins. This also sizes icons passed
+     * as children, so Icon's size prop has no effect inside a chip. */
     & .eds-icon {
       flex-shrink: 0;
-      margin-block: calc(-1 * var(--_padding-adjusted));
-      margin-inline: calc(-1 * var(--_padding-adjusted) / 2);
+
+      width: var(--_icon-size);
+      height: var(--_icon-size);
+      margin: 0;
+
+      color: var(--_icon);
+    }
+
+    /* ===== LABEL ===== */
+
+    /* inline-flex centres custom icons with the text; text-box: normal keeps
+     * the label untrimmed (ADR-0029) */
+    & > .label {
+      display: inline-flex;
+      gap: var(--_gap);
+      align-items: center;
+
+      padding-block: 0;
+
+      text-box: normal;
+    }
+
+    /* Forced colours strip box-shadow and fills, so the border is an outline
+     * there, on every variant. While focused, the focus ring takes over
+     * outline; :not(:focus-visible) keeps that handover independent of
+     * source order. */
+    @media (forced-colors: active) {
+      &:not(:focus-visible) {
+        outline: var(--_stroke-width) solid;
+        outline-offset: calc(-1 * var(--_stroke-width));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      --_transition-duration: 0s;
     }
   }
-}
-
-/*
- * Label needs inline-flex to center custom icons with text.
- * text-box: normal disables baseline trimming — chip handles sizing via
- * padding + flexbox centering.
- */
-.eds-chip > .label {
-  display: inline-flex;
-  gap: var(--eds-typography-gap-horizontal);
-  align-items: center;
-
-  padding-block: 0;
-
-  text-box: normal;
 }

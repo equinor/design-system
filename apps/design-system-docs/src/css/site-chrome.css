@@ -195,7 +195,7 @@ nav.menu li a {
 }
 
 .navbar__brand {
-  font-family: var(--eds-font-family-header, 'Equinor'), sans-serif;
+  font-family: var(--eds-font-family-header);
 }
 
 /* Navbar tabs follow the EDS Tabs colour spec (Figma Core Components, node
