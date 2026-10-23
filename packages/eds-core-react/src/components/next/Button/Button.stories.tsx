@@ -459,15 +459,15 @@ export const DensityComparison: Story = {
           <Button size="default">Default</Button>
         </Wrapper>
       </div>
-      <div data-density="spacious">
-        <ExampleLabel>Spacious (default)</ExampleLabel>
+      <div data-density="comfortable">
+        <ExampleLabel>Comfortable (default)</ExampleLabel>
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
         </Wrapper>
       </div>
-      <div data-density="comfortable">
-        <ExampleLabel>Comfortable</ExampleLabel>
+      <div data-density="compact">
+        <ExampleLabel>Compact</ExampleLabel>
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
@@ -500,8 +500,8 @@ export const MultilineAntiPattern: Story = {
           </Button>
         </Wrapper>
       </div>
-      <div data-density="spacious">
-        <ExampleLabel>Spacious (default)</ExampleLabel>
+      <div data-density="comfortable">
+        <ExampleLabel>Comfortable (default)</ExampleLabel>
         <Wrapper direction="row" align="flex-start" gap={12}>
           <Button multiline size="default">
             Short label
@@ -510,8 +510,8 @@ export const MultilineAntiPattern: Story = {
           </Button>
         </Wrapper>
       </div>
-      <div data-density="comfortable">
-        <ExampleLabel>Comfortable</ExampleLabel>
+      <div data-density="compact">
+        <ExampleLabel>Compact</ExampleLabel>
         <Wrapper direction="row" align="flex-start" gap={12}>
           <Button multiline size="default">
             Short label

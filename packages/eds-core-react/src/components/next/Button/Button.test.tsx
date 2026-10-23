@@ -28,8 +28,8 @@ describe('Button (next)', () => {
       const button = screen.getByRole('button')
 
       expect(button).toHaveAttribute('data-variant', 'primary')
-      expect(button).toHaveAttribute('data-color-appearance', 'accent')
-      expect(button).toHaveAttribute('data-selectable-space', 'md')
+      expect(button).toHaveAttribute('data-tone', 'accent')
+      expect(button).toHaveAttribute('data-size', 'default')
       expect(button).toHaveAttribute('type', 'button')
     })
 
@@ -51,26 +51,17 @@ describe('Button (next)', () => {
 
     it('renders with small size', () => {
       render(<Button size="small">Small</Button>)
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-selectable-space',
-        'sm',
-      )
+      expect(screen.getByRole('button')).toHaveAttribute('data-size', 'small')
     })
 
     it('renders with accent tone', () => {
       render(<Button tone="accent">Accent</Button>)
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-color-appearance',
-        'accent',
-      )
+      expect(screen.getByRole('button')).toHaveAttribute('data-tone', 'accent')
     })
 
     it('renders with danger tone', () => {
       render(<Button tone="danger">Danger</Button>)
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-color-appearance',
-        'danger',
-      )
+      expect(screen.getByRole('button')).toHaveAttribute('data-tone', 'danger')
     })
 
     it('applies custom className', () => {
@@ -218,28 +209,13 @@ describe('Button (next)', () => {
       expect(handleClick).not.toHaveBeenCalled()
     })
 
-    it('sets tone to neutral when disabled regardless of tone prop', () => {
+    it('keeps the tone when disabled', () => {
       render(
         <Button tone="danger" disabled>
           Disabled
         </Button>,
       )
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-color-appearance',
-        'neutral',
-      )
-    })
-
-    it('sets tone to neutral when disabled with accent', () => {
-      render(
-        <Button tone="accent" disabled>
-          Disabled
-        </Button>,
-      )
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'data-color-appearance',
-        'neutral',
-      )
+      expect(screen.getByRole('button')).toHaveAttribute('data-tone', 'danger')
     })
   })
 
@@ -335,30 +311,21 @@ describe('Button (next)', () => {
   })
 
   describe('Sizes', () => {
-    it.each([
-      ['small', 'sm'],
-      ['default', 'md'],
-    ] as const)(
-      'renders %s size with data-selectable-space=%s',
-      (size, expected) => {
+    it.each(['small', 'default'] as const)(
+      'renders %s size with data-size',
+      (size) => {
         render(<Button size={size}>{size}</Button>)
-        expect(screen.getByRole('button')).toHaveAttribute(
-          'data-selectable-space',
-          expected,
-        )
+        expect(screen.getByRole('button')).toHaveAttribute('data-size', size)
       },
     )
   })
 
-  describe('Color Appearances', () => {
+  describe('Tones', () => {
     it.each(['accent', 'neutral', 'danger'] as const)(
       'renders %s tone',
       (tone) => {
         render(<Button tone={tone}>{tone}</Button>)
-        expect(screen.getByRole('button')).toHaveAttribute(
-          'data-color-appearance',
-          tone,
-        )
+        expect(screen.getByRole('button')).toHaveAttribute('data-tone', tone)
       },
     )
   })
@@ -423,27 +390,27 @@ describe('Button (next)', () => {
       expect(button).toHaveAttribute('data-icon-only', 'true')
     })
 
-    it('uses selectable space tokens for icon-only (default size)', () => {
+    it('sets data-size for icon-only (default size)', () => {
       render(
         <Button icon aria-label="Add">
           <MockIcon />
         </Button>,
       )
       const button = screen.getByRole('button')
-      expect(button).toHaveAttribute('data-selectable-space', 'md')
+      expect(button).toHaveAttribute('data-size', 'default')
     })
 
-    it('uses selectable space tokens for icon-only (small size)', () => {
+    it('sets data-size for icon-only (small size)', () => {
       render(
         <Button icon aria-label="Add" size="small">
           <MockIcon />
         </Button>,
       )
       const button = screen.getByRole('button')
-      expect(button).toHaveAttribute('data-selectable-space', 'sm')
+      expect(button).toHaveAttribute('data-size', 'small')
     })
 
-    it('uses selectable space tokens for regular button', () => {
+    it('sets data-size for regular button', () => {
       render(
         <Button>
           <MockIcon />
@@ -451,7 +418,7 @@ describe('Button (next)', () => {
         </Button>,
       )
       const button = screen.getByRole('button')
-      expect(button).toHaveAttribute('data-selectable-space', 'md')
+      expect(button).toHaveAttribute('data-size', 'default')
     })
 
     it('renders icon child in icon-only mode', () => {
@@ -513,7 +480,7 @@ describe('Button (next)', () => {
       )
       const link = screen.getByRole('link')
       expect(link).toHaveAttribute('data-variant', 'secondary')
-      expect(link).toHaveAttribute('data-color-appearance', 'danger')
+      expect(link).toHaveAttribute('data-tone', 'danger')
     })
 
     it('preserves child href', () => {
