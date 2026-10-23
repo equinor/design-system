@@ -5,7 +5,7 @@
  *
  * Both reference styles fail *silently* at runtime, which is why this exists:
  *
- * - `<StoryCanvas of="Button/Default" />` — an unknown `of` logs to the console
+ * - `<StoryCanvas of="Button/Introduction" />` — an unknown `of` logs to the console
  *   and renders nothing (src/components/StoryCanvas/StoryCanvas.tsx). The
  *   registry in stories.ts is type-safe, but `of` is a plain string, so a typo
  *   or a renamed story is invisible until someone looks at the page.
