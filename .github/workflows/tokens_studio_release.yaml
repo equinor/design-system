@@ -46,7 +46,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: '24.22.1'
       - name: Use "setup" cache
         id: setup-cache
         uses: actions/cache@v6
