@@ -78,7 +78,7 @@ export function PaletteCard({
           type="text"
           value={palette.name}
           onChange={(e) => onNameChange(index, e.target.value)}
-          aria-label="Palette name"
+          aria-label={`Name of palette ${index + 1}`}
           className="w-52 rounded border border-transparent bg-transparent px-1 py-1 text-lg font-medium text-primary hover:border-input"
         />
         <Button

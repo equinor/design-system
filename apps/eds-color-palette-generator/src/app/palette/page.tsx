@@ -21,8 +21,31 @@ const VIEW_MODES: SegmentedOption<PaletteViewMode>[] = [
   { value: 'gradient', label: 'Gradient' },
 ]
 
+/**
+ * A palette in the editor with an id for its React key, so a card keeps its
+ * DOM and focus when a palette before it is removed. The id is not saved.
+ */
+type EditorPalette = { id: number; palette: TokenPalette }
+
+let nextPaletteId = 0
+
+function withIds(palettes: TokenPalette[]): EditorPalette[] {
+  return palettes.map((palette) => ({ id: nextPaletteId++, palette }))
+}
+
+/** The list with the palette at `index` changed and the others kept. */
+function changeAt(
+  entries: EditorPalette[],
+  index: number,
+  change: (palette: TokenPalette) => TokenPalette,
+): EditorPalette[] {
+  return entries.map((entry, i) =>
+    i === index ? { ...entry, palette: change(entry.palette) } : entry,
+  )
+}
+
 export default function PalettePage() {
-  const [palettes, setPalettes] = useState<TokenPalette[]>([])
+  const [entries, setEntries] = useState<EditorPalette[]>([])
   const [viewMode, setViewMode] = useState<PaletteViewMode>('curve')
   const [hasAutoImported, setHasAutoImported] = useState(false)
 
@@ -32,53 +55,48 @@ export default function PalettePage() {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only start; localStorage is not there during SSR, and saving below must not run before this
     setHasAutoImported(true)
     const saved = getSimulationPalettes()
-    setPalettes(saved.length > 0 ? saved : editablePalettesFromTokensStudio())
+    setEntries(
+      withIds(saved.length > 0 ? saved : editablePalettesFromTokensStudio()),
+    )
   }, [hasAutoImported])
 
   /* ---- Auto-save to localStorage ---- */
   useEffect(() => {
     if (!hasAutoImported) return
-    setSimulationPalettes(palettes)
-  }, [palettes, hasAutoImported])
+    setSimulationPalettes(entries.map((entry) => entry.palette))
+  }, [entries, hasAutoImported])
 
   /* ---- Palette CRUD ---- */
-  const addPalette = useCallback(
-    (p: TokenPalette) => setPalettes((prev) => [...prev, p]),
-    [],
-  )
+  const addPalette = useCallback((p: TokenPalette) => {
+    const added = withIds([p])
+    setEntries((prev) => [...prev, ...added])
+  }, [])
 
   const removePalette = useCallback(
-    (index: number) =>
-      setPalettes((prev) => prev.filter((_, i) => i !== index)),
+    (index: number) => setEntries((prev) => prev.filter((_, i) => i !== index)),
     [],
   )
 
   const updatePaletteName = useCallback(
     (index: number, name: string) =>
-      setPalettes((prev) =>
-        prev.map((p, i) => (i === index ? { ...p, name } : p)),
-      ),
+      setEntries((prev) => changeAt(prev, index, (p) => ({ ...p, name }))),
     [],
   )
 
   const updateStep = useCallback(
     (paletteIndex: number, stepIndex: number, hex: string) =>
-      setPalettes((prev) =>
-        prev.map((p, i) =>
-          i === paletteIndex
-            ? {
-                ...p,
-                steps: p.steps.map((s, j) => (j === stepIndex ? hex : s)),
-              }
-            : p,
-        ),
+      setEntries((prev) =>
+        changeAt(prev, paletteIndex, (p) => ({
+          ...p,
+          steps: p.steps.map((s, j) => (j === stepIndex ? hex : s)),
+        })),
       ),
     [],
   )
 
   /* ---- Back to the Tokens Studio hues (replaces all) ---- */
   const resetToTokensStudio = useCallback(() => {
-    setPalettes(editablePalettesFromTokensStudio())
+    setEntries(withIds(editablePalettesFromTokensStudio()))
   }, [])
 
   return (
@@ -123,11 +141,11 @@ export default function PalettePage() {
 
         {/* ---- Palette list ---- */}
         <div className="flex flex-col gap-8">
-          {palettes.map((pal, palIdx) => (
+          {entries.map(({ id, palette }, index) => (
             <PaletteCard
-              key={palIdx}
-              palette={pal}
-              index={palIdx}
+              key={id}
+              palette={palette}
+              index={index}
               viewMode={viewMode}
               onNameChange={updatePaletteName}
               onRemove={removePalette}

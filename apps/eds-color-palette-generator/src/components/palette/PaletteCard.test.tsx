@@ -50,11 +50,18 @@ function renderCard({
   return handlers
 }
 
+/** The name field of the card rendered at index 2, the default. */
+const nameInput = () =>
+  screen.getByRole('textbox', { name: 'Name of palette 3' })
+
 /** The step inputs in the order they are shown, by their visible step. */
 const stepInputs = () =>
   screen
     .getAllByRole('textbox')
-    .filter((input) => input.getAttribute('aria-label') !== 'Palette name')
+    .filter(
+      (input) =>
+        !input.getAttribute('aria-label')?.startsWith('Name of palette '),
+    )
 
 const stepInput = (step: number) =>
   screen.getByRole('textbox', {
@@ -66,9 +73,7 @@ describe('PaletteCard', () => {
     it('shows the palette name in an editable field', () => {
       renderCard()
 
-      expect(screen.getByRole('textbox', { name: 'Palette name' })).toHaveValue(
-        PALETTE.name,
-      )
+      expect(nameInput()).toHaveValue(PALETTE.name)
     })
 
     it('renders a swatch for every step with its label, value and roles', () => {
@@ -131,10 +136,7 @@ describe('PaletteCard', () => {
       const user = userEvent.setup()
       const { onNameChange } = renderCard({ index: 2 })
 
-      await user.type(
-        screen.getByRole('textbox', { name: 'Palette name' }),
-        'X',
-      )
+      await user.type(nameInput(), 'X')
 
       expect(onNameChange).toHaveBeenCalledWith(2, `${PALETTE.name}X`)
     })
@@ -182,6 +184,14 @@ describe('PaletteCard', () => {
 
       expect(stepInput(5)).toHaveAttribute('aria-invalid', 'true')
       expect(stepInput(4)).toHaveAttribute('aria-invalid', 'false')
+    })
+
+    it('names the name field after the position of the card', () => {
+      renderCard({ index: 0 })
+
+      expect(
+        screen.getByRole('textbox', { name: 'Name of palette 1' }),
+      ).toHaveValue(PALETTE.name)
     })
 
     it('names the remove button after the palette', () => {

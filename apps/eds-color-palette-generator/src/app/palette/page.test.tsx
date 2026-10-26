@@ -23,7 +23,7 @@ const TOKENS_STUDIO = editablePalettesFromTokensStudio()
 const nameInputs = () =>
   Array.from(
     document.querySelectorAll<HTMLInputElement>(
-      'input[aria-label="Palette name"]',
+      'input[aria-label^="Name of palette "]',
     ),
   )
 const paletteNames = () => nameInputs().map((input) => input.value)
@@ -119,6 +119,21 @@ describe('Palette editor page', () => {
       expect(
         screen.getByRole('button', { name: 'Remove Stone' }),
       ).toBeInTheDocument()
+    })
+
+    it('keeps the cards after a removed palette in place', async () => {
+      const user = userEvent.setup()
+      renderWithProviders(<PalettePage />)
+      const third = card(2)
+
+      await user.click(
+        screen.getByRole('button', { name: `Remove ${TOKENS_STUDIO[0].name}` }),
+      )
+
+      // The same element, now second, with its palette and position name
+      expect(card(1)).toBe(third)
+      expect(nameInputs()[1]).toHaveValue(TOKENS_STUDIO[2].name)
+      expect(nameInputs()[1]).toHaveAttribute('aria-label', 'Name of palette 2')
     })
 
     it('removes a palette', async () => {
@@ -255,6 +270,14 @@ describe('Palette editor page', () => {
   })
 
   describe('Accessibility', () => {
+    it('gives each name field its own name, by position', () => {
+      renderWithProviders(<PalettePage />)
+
+      expect(
+        nameInputs().map((input) => input.getAttribute('aria-label')),
+      ).toEqual(TOKENS_STUDIO.map((_, i) => `Name of palette ${i + 1}`))
+    })
+
     it('names the view switch and each remove button', () => {
       renderWithProviders(<PalettePage />)
 
