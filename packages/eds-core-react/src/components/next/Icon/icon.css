@@ -1,60 +1,57 @@
 @layer eds-components {
-  /* Inline with text: the icon is as tall as the line box it sits in, so it
-   * follows the role, size and density of the surrounding text without a
-   * token or a data attribute. Top alignment fills the line box exactly;
-   * on the baseline the icon would push the line taller. No optical
-   * margins are needed, since the icon is no taller than the line. */
+  /* Default: --eds-spacing-xl, the icon size in the EDS Assets Figma file.
+   * The size does not follow the surrounding text (decided 23 June 2026,
+   * design-system-internal#274). Components that need another size set it
+   * from the spacing scale, as .Icon Wrapper does in Figma. Middle alignment
+   * keeps an inline icon centred on the text instead of on the baseline. */
   .eds-icon {
-    --_size: 1lh;
+    --_size: var(--eds-spacing-xl);
 
     flex-shrink: 0;
     width: var(--_size);
     height: var(--_size);
-    vertical-align: top;
+    vertical-align: middle;
   }
 
-  /* Explicit size, for standalone icons: the spacing step one above the
-   * size's name, so md is --eds-spacing-lg. This follows the shift from the
-   * legacy spacious default to comfortable, so md to 2xl keep their sizes.
-   * Figma has no icon size scale; components pick icon sizes from the
-   * spacing scale, as .Icon Wrapper does with --eds-spacing-md. */
-  .eds-icon[data-size='xs'] {
+  /* Explicit size: the spacing token of the same name, so the size in code
+   * is the variable Figma binds */
+  .eds-icon[data-size='sm'] {
     --_size: var(--eds-spacing-sm);
   }
 
-  .eds-icon[data-size='sm'] {
+  .eds-icon[data-size='md'] {
     --_size: var(--eds-spacing-md);
   }
 
-  .eds-icon[data-size='md'] {
+  .eds-icon[data-size='lg'] {
     --_size: var(--eds-spacing-lg);
   }
 
-  .eds-icon[data-size='lg'] {
+  .eds-icon[data-size='xl'] {
     --_size: var(--eds-spacing-xl);
   }
 
-  .eds-icon[data-size='xl'] {
+  .eds-icon[data-size='2xl'] {
     --_size: var(--eds-spacing-2xl);
   }
 
-  .eds-icon[data-size='2xl'] {
+  .eds-icon[data-size='3xl'] {
     --_size: var(--eds-spacing-3xl);
   }
 
-  .eds-icon[data-size='3xl'] {
+  .eds-icon[data-size='4xl'] {
     --_size: var(--eds-spacing-4xl);
   }
 
-  .eds-icon[data-size='4xl'] {
+  .eds-icon[data-size='5xl'] {
     --_size: var(--eds-spacing-5xl);
   }
 
-  .eds-icon[data-size='5xl'] {
+  .eds-icon[data-size='6xl'] {
     --_size: var(--eds-spacing-6xl);
   }
 
-  .eds-icon[data-size='6xl'] {
+  .eds-icon[data-size='7xl'] {
     --_size: var(--eds-spacing-7xl);
   }
 }

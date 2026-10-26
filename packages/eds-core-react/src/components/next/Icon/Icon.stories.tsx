@@ -67,7 +67,6 @@ const IconDemo = ({
 )
 
 const SIZES = [
-  'xs',
   'sm',
   'md',
   'lg',
@@ -77,6 +76,7 @@ const SIZES = [
   '4xl',
   '5xl',
   '6xl',
+  '7xl',
 ] as const
 
 const DENSITIES = ['compact', 'comfortable', 'relaxed'] as const
@@ -108,20 +108,20 @@ npm install @equinor/eds-core-react@beta
 import { Icon } from '@equinor/eds-core-react/next'
 import { save } from '@equinor/eds-icons'
 
-// Follows the surrounding text
-<p>
-  Click <Icon data={save} /> to save
-</p>
+// Default size, --eds-spacing-xl
+<Icon data={save} />
 
-// Explicit size for standalone usage
-<Icon data={save} size="lg" />
+// Explicit size, --eds-spacing-md
+<Icon data={save} size="md" />
 \`\`\`
 
 ## Sizing
 
-- **No \`size\` prop**: the icon is as tall as the line box of the surrounding text (\`1lh\`), so it follows the text's size and density.
-- **\`size\` prop**: the spacing step one above its name, so \`size="md"\` is \`--eds-spacing-lg\`. It follows the density set on an ancestor.
+- **No \`size\` prop**: the icon is \`--eds-spacing-xl\` (24px at comfortable), the same as \`size="xl"\`. The size does not follow the surrounding text.
+- **\`size\` prop**: the spacing token of the same name, so \`size="md"\` is \`--eds-spacing-md\`, the variable Figma binds.
 - **Inside a component**, such as Button or Chip, the component sets the icon size and the \`size\` prop has no effect.
+
+Every size follows the density set on an ancestor.
         `,
       },
     },
@@ -136,7 +136,6 @@ export const Introduction: StoryFn<IconProps> = (args) => {
 Introduction.args = {
   data: save,
   title: 'Save document',
-  size: 'md',
 }
 
 export const ExplicitSizes: StoryFn<IconProps> = () => (
@@ -152,20 +151,20 @@ ExplicitSizes.parameters = {
   docs: {
     description: {
       story: `
-Use the \`size\` prop for standalone icons. Each size is the spacing step one above its name.
+Each size is the spacing token of the same name. Without \`size\`, the icon is \`xl\`.
 
 | Size  | Token               | Comfortable |
 |-------|---------------------|-------------|
-| xs    | \`--eds-spacing-sm\`  | 12px        |
-| sm    | \`--eds-spacing-md\`  | 16px        |
-| md    | \`--eds-spacing-lg\`  | 20px        |
-| lg    | \`--eds-spacing-xl\`  | 24px        |
-| xl    | \`--eds-spacing-2xl\` | 28px        |
-| 2xl   | \`--eds-spacing-3xl\` | 32px        |
-| 3xl   | \`--eds-spacing-4xl\` | 40px        |
-| 4xl   | \`--eds-spacing-5xl\` | 48px        |
-| 5xl   | \`--eds-spacing-6xl\` | 64px        |
-| 6xl   | \`--eds-spacing-7xl\` | 80px        |
+| sm    | \`--eds-spacing-sm\`  | 12px        |
+| md    | \`--eds-spacing-md\`  | 16px        |
+| lg    | \`--eds-spacing-lg\`  | 20px        |
+| xl    | \`--eds-spacing-xl\`  | 24px        |
+| 2xl   | \`--eds-spacing-2xl\` | 28px        |
+| 3xl   | \`--eds-spacing-3xl\` | 32px        |
+| 4xl   | \`--eds-spacing-4xl\` | 40px        |
+| 5xl   | \`--eds-spacing-5xl\` | 48px        |
+| 6xl   | \`--eds-spacing-6xl\` | 64px        |
+| 7xl   | \`--eds-spacing-7xl\` | 80px        |
       `,
     },
   },
@@ -173,19 +172,24 @@ Use the \`size\` prop for standalone icons. Each size is the spacing step one ab
 
 export const InlineWithText: StoryFn<IconProps> = () => (
   <Stack direction="column" gap={16}>
-    {(['sm', 'md', 'lg', 'xl', '2xl'] as const).map((size) => (
-      <Text key={size} size={size}>
-        <Icon data={warning_filled} /> Label {size}: the icon follows the line
-        height
-      </Text>
-    ))}
+    <Text size="lg">
+      <Icon data={warning_filled} /> Label lg with the default icon size
+    </Text>
+    <Text size="md">
+      <Icon data={warning_filled} size="lg" /> Label md with{' '}
+      <code>size=&quot;lg&quot;</code>
+    </Text>
+    <Text size="sm">
+      <Icon data={warning_filled} size="md" /> Label sm with{' '}
+      <code>size=&quot;md&quot;</code>
+    </Text>
   </Stack>
 )
 InlineWithText.parameters = {
   docs: {
     description: {
       story:
-        'Without a `size` prop the icon is as tall as the line box of the text around it, so it scales with the text size and needs no margins to sit on the line.',
+        'The icon size does not follow the text. Next to smaller text, set `size` to the spacing token the design uses. An inline icon is centred on the text.',
     },
   },
 }
@@ -197,17 +201,15 @@ export const Densities: StoryFn<IconProps> = () => (
         <Text size="sm" secondary>
           {density}
         </Text>
-        <Stack direction="column" gap={8}>
-          <Text>
-            <Icon data={add} /> Inline with label md
-          </Text>
-          <Stack gap={16} align="flex-end">
-            {(['md', 'lg', 'xl'] as const).map((size) => (
-              <IconDemo key={size} label={size}>
-                <Icon data={save} size={size} />
-              </IconDemo>
-            ))}
-          </Stack>
+        <Stack gap={16} align="flex-end">
+          {(['md', 'lg', 'xl'] as const).map((size) => (
+            <IconDemo key={size} label={size}>
+              <Icon data={save} size={size} />
+            </IconDemo>
+          ))}
+          <IconDemo label="default">
+            <Icon data={add} />
+          </IconDemo>
         </Stack>
       </div>
     ))}
@@ -217,7 +219,7 @@ Densities.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density` on an ancestor. Inline icons follow the line height and explicit sizes follow the spacing scale, so both change with the density.',
+        'Set `data-density` on an ancestor. Every size, including the default, follows the spacing scale and changes with the density.',
     },
   },
 }

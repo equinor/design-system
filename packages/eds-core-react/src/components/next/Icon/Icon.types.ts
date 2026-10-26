@@ -2,7 +2,7 @@ import type { IconData, IconName } from '@equinor/eds-icons'
 import type { SVGProps, Ref } from 'react'
 
 export type IconSize =
-  'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'
+  'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl'
 
 export type IconProps = {
   /** Icon data from @equinor/eds-icons */
@@ -12,8 +12,8 @@ export type IconProps = {
   /** Color of the icon. Defaults to currentColor for inheritance */
   color?: string
   /**
-   * Explicit size, from the spacing step one above its name (`md` is `--eds-spacing-lg`).
-   * When not set, the icon is as tall as the line box of the surrounding text.
+   * Explicit size, from the spacing token of the same name (`md` is `--eds-spacing-md`).
+   * When not set, the icon is `--eds-spacing-xl`, the same as `size="xl"`.
    */
   size?: IconSize
   /** @ignore */

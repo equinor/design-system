@@ -60,7 +60,6 @@ describe('Icon (next)', () => {
     })
 
     it.each([
-      'xs',
       'sm',
       'md',
       'lg',
@@ -70,6 +69,7 @@ describe('Icon (next)', () => {
       '4xl',
       '5xl',
       '6xl',
+      '7xl',
     ] as const)('accepts size prop value: %s', (size) => {
       render(<Icon data={save} size={size} />)
       expect(screen.getByTestId('eds-icon')).toHaveAttribute('data-size', size)

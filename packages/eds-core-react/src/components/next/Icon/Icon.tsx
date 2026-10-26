@@ -5,8 +5,8 @@ import type { IconProps } from './Icon.types'
  * Icon component for EDS 2.0
  *
  * Features:
- * - Inline sizing: as tall as the line box of the surrounding text (1lh)
- * - Explicit size prop for standalone usage, from the spacing scale
+ * - Default size --eds-spacing-xl, independent of the surrounding text
+ * - Explicit size prop from the spacing token of the same name
  * - WCAG 2.1 AA accessible with optional title for semantic icons
  *
  * @example
@@ -14,10 +14,8 @@ import type { IconProps } from './Icon.types'
  * import { Icon } from '@equinor/eds-core-react/next'
  * import { save } from '@equinor/eds-icons'
  *
- * // Follows the surrounding text
- * <p>
- *   <Icon data={warning} /> Error message
- * </p>
+ * // Default size (spacing-xl)
+ * <Icon data={warning} />
  *
  * // Explicit size for standalone usage
  * <Icon data={save} size="lg" />

@@ -19,40 +19,40 @@ Use Icon to reinforce meaning alongside text - in buttons, form fields, status m
 
 The Icon component renders an SVG element with a single `data` prop from `@equinor/eds-icons`. It is sized in one of three ways:
 
-- **Next to text** - without a `size` prop, the icon is as tall as the line it sits in
-- **Explicit `size` prop** - a fixed size from the spacing scale, for standalone icons
+- **Default** - without a `size` prop, the icon is `spacing-xl` (24px at Comfortable), the icon size used in the EDS Assets Figma file
+- **Explicit `size` prop** - the spacing token of the same name, so `size="md"` is `spacing-md`
 - **Inside a component** - components such as Button and Chip set the icon size themselves, and the `size` prop has no effect
 
 ## Guidelines
 
 ### Sizes
 
-Use the `size` prop for standalone icons. Each size uses the spacing token one step above its name, so the sizes follow the density set on a parent element.
+Each size is the spacing token of the same name, so the size you set in code is the variable bound in Figma. An icon without `size` is the same as `size="xl"`. The sizes follow the density set on a parent element.
 
 | Size | Token         | Comfortable (default) |
 | ---- | ------------- | --------------------- |
-| xs   | `spacing-sm`  | 12px                  |
-| sm   | `spacing-md`  | 16px                  |
-| md   | `spacing-lg`  | 20px                  |
-| lg   | `spacing-xl`  | 24px                  |
-| xl   | `spacing-2xl` | 28px                  |
-| 2xl  | `spacing-3xl` | 32px                  |
-| 3xl  | `spacing-4xl` | 40px                  |
-| 4xl  | `spacing-5xl` | 48px                  |
-| 5xl  | `spacing-6xl` | 64px                  |
-| 6xl  | `spacing-7xl` | 80px                  |
+| sm   | `spacing-sm`  | 12px                  |
+| md   | `spacing-md`  | 16px                  |
+| lg   | `spacing-lg`  | 20px                  |
+| xl   | `spacing-xl`  | 24px                  |
+| 2xl  | `spacing-2xl` | 28px                  |
+| 3xl  | `spacing-3xl` | 32px                  |
+| 4xl  | `spacing-4xl` | 40px                  |
+| 5xl  | `spacing-5xl` | 48px                  |
+| 6xl  | `spacing-6xl` | 64px                  |
+| 7xl  | `spacing-7xl` | 80px                  |
 
 <StoryCanvas of="Icon/ExplicitSizes" showLink />
 
 ### Icons next to text
 
-Without a `size` prop, the icon is as tall as the line of text it sits in, so it scales with the text size and density. It needs no extra margins to sit on the line. This is the recommended approach for icons inline with text.
+The icon size does not follow the size of the surrounding text. Next to smaller text, set `size` to the spacing token the design uses, for example `md` next to small labels. An inline icon is centred on the text.
 
 <StoryCanvas of="Icon/InlineWithText" showLink />
 
 ### Density
 
-Set `data-density` on a parent element to `compact`, `comfortable` or `relaxed`. Icons next to text follow the line height, and explicit sizes follow the spacing scale, so both change with the density.
+Set `data-density` on a parent element to `compact`, `comfortable` or `relaxed`. Every icon size, including the default, follows the spacing scale and changes with the density.
 
 <StoryCanvas of="Icon/Densities" showLink />
 
@@ -64,24 +64,9 @@ Icons inherit `currentColor` by default, making them adapt to text color automat
 
 ## Usage in Figma
 
-There is no dedicated Icon component in Figma. Instead, icons are imported directly from the **Assets** panel.
+There is no dedicated Icon component in Figma. Icons are imported directly from the **Assets** panel, where they are `spacing-xl` (24px at Comfortable), the same as an Icon without `size` in code.
 
-**Standalone icons** — Import the icon from Assets and place it directly in your design. The icon size is controlled by the asset itself.
-
-**Inline with Typography** — When placing an icon inline with text, wrap it in a container like "Leading Icon Item". This container applies negative padding to optically align the icon with the text baseline — matching how the code component behaves with negative margins for inline icons.
-
-The container exposes variables for controlling size and negative padding:
-
-| Variable                              | Purpose                                              |
-| ------------------------------------- | ---------------------------------------------------- |
-| `Selectable/Icon size`                | Controls the icon dimensions                         |
-| `Selectable/Icon container padding ↕︎` | Negative vertical padding for optical alignment      |
-| `Selectable/Icon container padding ↔︎` | Negative horizontal padding (square containers only) |
-
-**Which padding variables to use depends on the container shape:**
-
-- **Rectangular containers** (e.g., a button with text) — Only vertical padding (`↕︎`) is needed. Horizontal spacing is handled by the parent layout's gap.
-- **Square containers** (e.g., an icon-only button) — Both vertical (`↕︎`) and horizontal (`↔︎`) padding are needed, set to the same value, since the icon fills the container in both directions.
+To use another size, bind the icon's width and height to a spacing variable. The variable name is the `size` in code: an icon bound to `spacing-md` is `size="md"`. The icon size does not follow the size of the text next to it.
 
 ## Accessibility
 
@@ -106,7 +91,7 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 :::info **Do**
 
 - Use `title` prop when an icon is the only element conveying meaning (e.g., icon-only buttons)
-- Leave out the `size` prop for icons inline with text, so they follow the line height
+- Use the `size` that matches the spacing variable bound in Figma
 - Use the `size` prop in flex layouts where you control spacing with gap
 - Rely on `currentColor` for icons that should match surrounding text color
   :::

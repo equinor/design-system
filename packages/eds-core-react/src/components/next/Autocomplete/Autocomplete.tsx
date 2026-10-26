@@ -511,13 +511,15 @@ function AutocompleteInner<T = string>(
               hasDescription: !!description,
               hasHelperMessage: !!helperMessage,
             })}
-            startAdornment={<Icon data={searchIcon} className="search-icon" />}
+            startAdornment={
+              <Icon data={searchIcon} size="md" className="search-icon" />
+            }
             endAdornment={
               loading ? (
                 // TODO: replace with next/Progress when available
                 <Icon
                   data={refresh}
-                  size="xs"
+                  size="md"
                   className="loading-icon"
                   aria-label="Loading"
                 />
