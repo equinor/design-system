@@ -70,6 +70,12 @@ Import component styles separately in your application entry point (this is impo
 import '@equinor/eds-core-react/next/index.css'
 ```
 
+The components that have moved to the redefined design tokens read them from `@equinor/eds-tokens@beta`, which this stylesheet does not load. Install that package and import its bundle as well. [Using the tokens](?path=/docs/eds-2-0-beta-foundation-using-the-tokens--docs) explains the setup and the `data-color-scheme` attribute that the colours need.
+
+```tsx
+import '@equinor/eds-tokens/next/css/variables.css'
+```
+
 ### 5. Import from `/next` Entry Point
 
 ```typescript

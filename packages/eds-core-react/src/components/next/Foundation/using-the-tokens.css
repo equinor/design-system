@@ -1,0 +1,67 @@
+/* Demo styles for the Using the tokens page. The readout table is rendered
+   outside every data-color-scheme element on purpose, so that its first
+   column can show what resolves without the attribute. Its own lines and
+   outlines therefore use currentcolor instead of colour tokens, which
+   would resolve to nothing there. Spacing and typography tokens resolve
+   without an attribute, so the table uses them. */
+
+.tokens-readout {
+  overflow-x: auto;
+
+  margin-block: var(--eds-spacing-lg);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+
+  & table {
+    border-collapse: collapse;
+    inline-size: 100%;
+  }
+
+  & th,
+  & td {
+    padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+    border-block-end: 1px solid
+      color-mix(in srgb, currentcolor 20%, transparent);
+
+    text-align: start;
+    overflow-wrap: anywhere;
+    vertical-align: top;
+  }
+
+  & code {
+    font-family: monospace;
+  }
+
+  & .empty {
+    font-style: italic;
+  }
+
+  /* The sample reads the tokens directly, like consumer CSS would */
+  & .sample {
+    display: inline-block;
+
+    padding: var(--eds-spacing-md);
+    border-radius: var(--eds-corner-radius-rounded);
+
+    color: var(--eds-text-primary);
+
+    background-color: var(--eds-background-surface);
+    outline: 1px dashed currentcolor;
+    box-shadow: var(--eds-elevation-low);
+  }
+
+  & .action {
+    display: inline-block;
+
+    padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+    border-radius: var(--eds-corner-radius-rounded);
+
+    font-size: var(--eds-typography-label-md-font-size);
+    line-height: var(--eds-typography-label-md-line-height);
+    color: var(--eds-text-on-emphasis-accent);
+
+    background-color: var(--eds-background-interactive-accent-emphasis-default);
+  }
+}

@@ -1,0 +1,241 @@
+import { useEffect, useRef, useState } from 'react'
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import './using-the-tokens.css'
+
+<Meta title="EDS 2.0 (beta)/Foundation/Using the tokens" />
+
+export const probeTokens = [
+  '--eds-background-surface',
+  '--eds-text-primary',
+  '--eds-elevation-low',
+  '--eds-spacing-md',
+  '--eds-corner-radius-rounded',
+  '--eds-typography-body-md-font-size',
+  '--eds-font-family-ui',
+]
+
+export const probeContexts = [
+  { label: 'No attribute', attributes: {} },
+  { label: 'data-color-scheme="light"', attributes: { 'data-color-scheme': 'light' } },
+  { label: 'data-color-scheme="dark"', attributes: { 'data-color-scheme': 'dark' } },
+  { label: 'data-density="compact"', attributes: { 'data-density': 'compact' } },
+]
+
+export const ResolutionTable = () => {
+  const probes = useRef([])
+  const [values, setValues] = useState(null)
+  useEffect(() => {
+    setValues(
+      probes.current.map((probe) => {
+        const style = getComputedStyle(probe)
+        return probeTokens.map((name) => style.getPropertyValue(name).trim())
+      }),
+    )
+  }, [])
+  return (
+    <Unstyled>
+      <div className="tokens-readout">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Token</th>
+              {probeContexts.map((context) => (
+                <th scope="col" key={context.label}>
+                  <code>{context.label}</code>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Sample</th>
+              {probeContexts.map((context, column) => (
+                <td key={context.label}>
+                  <div
+                    className="sample"
+                    {...context.attributes}
+                    ref={(element) => {
+                      probes.current[column] = element
+                    }}
+                  >
+                    <span className="action">Button</span>
+                  </div>
+                </td>
+              ))}
+            </tr>
+            {probeTokens.map((name, row) => (
+              <tr key={name}>
+                <th scope="row">
+                  <code>{name}</code>
+                </th>
+                {probeContexts.map((context, column) => (
+                  <td key={context.label}>
+                    {values && (values[column][row] || <span className="empty">No value</span>)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Unstyled>
+  )
+}
+
+# Using the tokens
+
+The beta design tokens are CSS custom properties generated from Tokens Studio and published as `@equinor/eds-tokens@beta`. This page explains how to load them, which two attributes they depend on, which names are meant for your code, and how the token layer sits under the component styles. It does not list the tokens. The values, and the guidance on choosing a colour, a spacing step or a type size, are on the documentation site: [colour](https://eds.equinor.com/docs/Next/foundation/colour/getting_started), [spacing](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing), [typography](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography) and [elevation](https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation). The [package README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#beta-the-redefined-token-structure) has the same setup in a shorter form.
+
+## Loading the bundle
+
+Install the package on the `beta` tag and import the bundle once, at the root of your application:
+
+```sh
+pnpm add @equinor/eds-tokens@beta
+```
+
+```css
+@import '@equinor/eds-tokens/next/css/variables.css';
+```
+
+The bundle contains every mode in one file, both colour schemes and all three densities, and the attributes described below decide which values an element gets. The `next` segment of the path is temporary. It exists while the 2.x tokens and the new tokens share one package, and it is removed before the stable release without changing the token names ([ADR-0009](https://github.com/equinor/design-system/blob/main/documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)).
+
+If you use the EDS 2.0 components, import the bundle as well as `@equinor/eds-core-react/next/index.css`. That stylesheet contains the component styles and the 2.x token bundle, but not this bundle, and the components that have moved to the new token names ([#5119](https://github.com/equinor/design-system/issues/5119)) read their values from it. Installing `@equinor/eds-core-react@beta` does not add it either, because the components depend on the 2.x line of `@equinor/eds-tokens`, which has no `next/*` files.
+
+## The colour scheme and density attributes
+
+Two attributes decide which values the tokens resolve to:
+
+| Attribute | Values | What it governs | Without it |
+| --- | --- | --- | --- |
+| `data-color-scheme` | `light`, `dark` | The colour roles (`--eds-background-*`, `--eds-border-*`, `--eds-text-*`, `--eds-icon-*` and `--eds-data-visualization-*`) and the shadows `--eds-elevation-low` and `--eds-elevation-high` | No default: these names resolve to nothing |
+| `data-density` | `compact`, `comfortable`, `relaxed` | Spacing (`--eds-spacing-*`), corner radius (`--eds-corner-radius-*`) and the font sizes and line heights in `--eds-typography-*` | Comfortable |
+
+Set `data-color-scheme` once, on the root element, so that the whole interface switches together. `data-density` is needed only where you want Compact or Relaxed:
+
+```html
+<html data-color-scheme="light">
+  <body>
+    …
+    <section data-density="compact">…</section>
+  </body>
+</html>
+```
+
+The bundle has no `prefers-color-scheme` fallback, so the tokens do not follow the operating system by themselves. Your application decides the scheme, whether from a user setting, a fixed value or the operating system preference. Set the attribute before the page is first painted, on the server or in an inline script in `<head>`. If application code sets it later, the page is first rendered without any token colours. This script reads the operating system preference once, when the page loads:
+
+```html
+<script>
+  document.documentElement.dataset.colorScheme =
+    matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+</script>
+```
+
+### How the attributes reach an element
+
+Custom properties are inherited, and the bundle declares its semantic names again on every element that carries either attribute. An element therefore gets its values from the nearest ancestor with the attribute, and a subtree can switch. A dense table can use `data-density="compact"` inside a Comfortable page, and `data-density="comfortable"` inside that table brings the Comfortable values back. Colour works the same way: this Storybook sets `data-color-scheme` on a wrapper around every EDS 2.0 story, which is how the toolbar switches the scheme of each story. In an application, the [colour guidance](https://eds.equinor.com/docs/Next/foundation/colour/getting_started#switching-colour-scheme) recommends one colour scheme for the whole interface rather than dark regions inside a light page.
+
+The two shadows, `--eds-elevation-low` and `--eds-elevation-high`, do not follow a subtree yet. Their colour parts are resolved once, on the root element, so the shadows have a value only when `data-color-scheme` is set on the root element itself. An attribute on a wrapper further down gives the colour roles their values but leaves both shadows without one ([#5567](https://github.com/equinor/design-system/issues/5567)). With the attribute on `<html>`, both shadows resolve everywhere on the page.
+
+The bundle has rules for the values in the table and no others. An element with any other value gets the values of its nearest ancestor with a recognised value. Without such an ancestor, the colours resolve to nothing and the density falls back to Comfortable, so `data-color-scheme="auto"` on the root element leaves every colour unresolved, and `data-density="spacious"`, a 2.x name, gives Comfortable.
+
+### The 2.x density names
+
+The EDS 2.0 components move to these tokens one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). A component that has not moved yet reads the 2.x tokens, which use their own density names: `spacious`, the 2.x default, and `comfortable`, the denser 2.x mode. During the beta, the same attribute can therefore mean different things to the two bundles: `data-density="comfortable"` gives the new tokens their default values and gives the 2.x tokens their denser ones. The [spacing documentation](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing#density) describes how the names shifted.
+
+## What resolves without either attribute
+
+The semantic names are all declared on `:root`, but not all of them have a value there. The colour roles alias a colour-scheme layer that the bundle declares only under `[data-color-scheme="light"]` and `[data-color-scheme="dark"]`. A custom property resolves its `var()` references on the element where it is declared, so on an element with no colour-scheme ancestor the alias points at a name that does not exist, and the colour role is left without a value. The browser reports no error. A declaration such as `background-color: var(--eds-background-surface)` falls back to the property's inherited or initial value, which gives a transparent background and inherited text colour. Density behaves differently, because the bundle declares the Comfortable values on `:root` as well as under `[data-density="comfortable"]`.
+
+| Names | Without either attribute |
+| --- | --- |
+| `--eds-background-*`, `--eds-border-*`, `--eds-text-*`, `--eds-icon-*`, `--eds-data-visualization-*` | No value |
+| `--eds-elevation-low`, `--eds-elevation-high` | No value, because the shadow colours come from the colour scheme |
+| `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*` | The Comfortable values |
+| `--eds-font-family-*`, `--eds-font-weight-*`, `--eds-overlay-scrim` | Always resolve, since they have no mode |
+
+The table below is rendered directly on this page, outside the wrapper that gives every story a colour scheme. Each column is an element with the attribute named in its heading, and the values are read back from the browser with `getComputedStyle`. The last column sets only `data-density`, which shows that a density attribute does not make the colours resolve. The elevation row has no value in any column, including light and dark, because each column sets the attribute on its own element and the root element of this page has none, as described for the shadows above. The sample in each column uses the same CSS. Its dashed outline is drawn with `currentcolor` rather than a token, so that its padding stays visible when the token colours are missing.
+
+<ResolutionTable />
+
+## Published names and internal names
+
+The bundle contains more names than your code should use. `var()` is resolved in the browser, so every name that an alias points at has to be present in the published CSS, including the primitive scale and the per-mode layers under the semantic names. Only the semantic names are the published contract ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 7). The others can be renamed or restructured in any release without notice, so do not reference them in your code.
+
+| Published | What they are |
+| --- | --- |
+| `--eds-background-*`, `--eds-border-*`, `--eds-text-*`, `--eds-icon-*` | Colour roles |
+| `--eds-data-visualization-*` | Colours for charts |
+| `--eds-elevation-low`, `--eds-elevation-high` | Complete `box-shadow` values |
+| `--eds-overlay-scrim` | The dim behind a modal |
+| `--eds-spacing-*`, `--eds-corner-radius-*` | Spacing steps and corner radius |
+| `--eds-typography-header-*`, `--eds-typography-label-*`, `--eds-typography-body-*` | Font size and line height for each role and step |
+| `--eds-font-family-header`, `--eds-font-family-ui`, `--eds-font-weight-*` | Typefaces and weights |
+
+| Internal | What they are |
+| --- | --- |
+| `--eds-primitives-*` | The primitive scales for spacing, type size, line height, font family and weight |
+| `--eds-density-*` | The values for each density behind spacing, corner radius and typography |
+| `--eds-light-*`, `--eds-dark-*` | The raw colour ladders |
+| `--eds-accent-*`, `--eds-neutral-*`, `--eds-info-*`, `--eds-success-*`, `--eds-warning-*`, `--eds-danger-*`, `--eds-dataviz-*` | The colour-scheme layer that the colour roles alias |
+| `--eds-elevation-ambient`, `--eds-elevation-key`, `--eds-shadow-*` | The parts of a shadow |
+| `--eds-family-*`, `--eds-weight-*` | The font collection behind the font names |
+
+Three pairs of names are easy to mix up. `--eds-data-visualization-*` is published and `--eds-dataviz-*` is internal. `--eds-elevation-low` and `--eds-elevation-high` are published, and the other two `--eds-elevation-*` names are internal. `--eds-font-family-ui` is published and `--eds-family-ui` is internal.
+
+The same boundary applies to the other files in the package. Import `next/css/variables.css`, not the per-collection CSS files it is built from. In TypeScript, the published modules are `@equinor/eds-tokens/next/ts/semantic/light` and `@equinor/eds-tokens/next/ts/semantic/dark`, plus the `next/ts/density/*` modules, which stay published only until the semantic modules carry the right value for each density. The [README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#typescript) describes the TypeScript modules.
+
+## The token layer and the component layers
+
+The bundle is wrapped in `@layer eds-tokens` and opens with the statement `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`. The EDS 2.0 component stylesheet opens with the same statement. The order of layers is fixed the first time the browser meets each name, so both files name all four layers, and it does not matter which of them loads first ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 6). A later layer wins over an earlier one, and CSS outside any layer wins over all of them:
+
+| Layer | What it contains |
+| --- | --- |
+| `eds-tokens-legacy` | The 2.x token bundle, which the component stylesheet loads for the components that have not moved to the new names |
+| `eds-tokens` | This bundle |
+| `eds-elements` | Styles for plain HTML elements, such as those on the [Elements](?path=/docs/eds-2-0-beta-foundation-elements--docs) page |
+| `eds-components` | The EDS 2.0 component styles |
+| No layer | Your own CSS |
+
+Because the tokens sit below the component layers and below all unlayered CSS, you can override a token without having to match the specificity of the selectors in the bundle.
+
+If you load the 2.x bundle yourself, import it into the lowest layer, as the component stylesheet does. Ten names exist in both bundles, `--eds-elevation-low`, `--eds-elevation-high` and the eight `--eds-typography-header-*-font-size`, and an unlayered 2.x bundle wins all ten whatever the import order:
+
+```css
+@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);
+```
+
+If your application declares layers of its own, list the four EDS names first and yours after them. A layer statement that leaves out a name appends that name at the end, so a shorter statement would put `eds-elements` and `eds-components` above your own layers:
+
+```css
+@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components, app;
+```
+
+## Overriding a token
+
+Write the override as unlayered CSS, with the selector list that the bundle uses for its semantic names:
+
+```css
+:root,
+[data-color-scheme],
+[data-density] {
+  /* An alias of another published name keeps following the colour scheme */
+  --eds-background-canvas: var(--eds-background-surface);
+
+  /* A fixed value is the same in every colour scheme and density */
+  --eds-font-family-ui: Inter, system-ui, sans-serif;
+}
+```
+
+The selector list is needed because the bundle declares the semantic names again on every element with `data-color-scheme` or `data-density`, and a value declared on an element beats an inherited one, whatever layer it comes from. An override on `:root` alone therefore stops at the first such element. In this Storybook that is the wrapper around every story, and in an application it is any subtree that sets its own density.
+
+Override published names only. An internal name, such as a step in the colour-scheme layer, feeds several colour roles at once, and an override of it stops working when the internal layers are restructured.
+
+## Related pages
+
+- [Spacing](?path=/docs/eds-2-0-beta-foundation-spacing--docs): the spacing steps working in this Storybook, and how to use them in CSS
+- [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs): installing and importing the EDS 2.0 components
+- On the documentation site: [Getting started with colour](https://eds.equinor.com/docs/Next/foundation/colour/getting_started), [Spacing](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing), [Typography](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography) and [Elevation](https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation)
+- [The `@equinor/eds-tokens` README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#beta-the-redefined-token-structure), the package-level version of this setup
+- [ADR-0013](https://github.com/equinor/design-system/blob/main/documentation/adr/0013-attribute-scoped-custom-properties-not-light-dark.md): why the colour scheme is switched with an attribute
+- [ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md): the layer order, overrides and the publish boundary
