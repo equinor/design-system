@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   isValidColorFormat,
   parseColorToHex,
@@ -37,7 +37,6 @@ export function SimpleColorPicker({
   onChange,
   label = 'Colour',
 }: SimpleColorPickerProps) {
-  const nativeRef = useRef<HTMLInputElement>(null)
   const { format, formatColour } = useColorFormat()
   const css = toCssColor(value)
   // What the user is typing; only valid colours reach the palette.
@@ -66,26 +65,25 @@ export function SimpleColorPicker({
           valid ? 'border-input hover:border-input-hover' : 'border-danger',
         ].join(' ')}
       />
-      <button
-        type="button"
-        onClick={() => nativeRef.current?.click()}
-        className="relative size-7 shrink-0 cursor-pointer overflow-hidden rounded border border-input p-0"
+      {/* The swatch is the label of the native colour input, so a click
+          opens the picker once. The input is visually hidden but stays in
+          the tab order, and the swatch shows its focus ring. */}
+      <label
+        className="relative size-7 shrink-0 cursor-pointer rounded border border-input has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-solid has-focus-visible:outline-[color:var(--eds-border-interactive-focus)]"
         style={{ backgroundColor: css }}
         title="Pick colour"
-        aria-label={`Pick ${label} colour`}
       >
         <input
-          ref={nativeRef}
           type="color"
           value={parseColorToHex(css) ?? '#808080'}
           onChange={(e) => {
             setDraft(null)
             onChange(toOklchString(e.target.value) ?? e.target.value)
           }}
-          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-          tabIndex={-1}
+          aria-label={`Pick ${label} colour`}
+          className="sr-only"
         />
-      </button>
+      </label>
     </div>
   )
 }

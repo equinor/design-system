@@ -137,12 +137,48 @@ describe('SimpleColorPicker', () => {
   })
 
   describe('Accessibility', () => {
-    it('names the native picker button after the label', () => {
+    const nativePicker = () => screen.getByLabelText('Pick Moss colour')
+
+    it('names the native colour input after the label', () => {
       renderPicker()
 
-      expect(
-        screen.getByRole('button', { name: 'Pick Moss colour' }),
-      ).toBeInTheDocument()
+      expect(nativePicker()).toHaveAttribute('type', 'color')
+    })
+
+    it('puts the native colour input in a label, not in a button', () => {
+      renderPicker()
+
+      expect(screen.queryByRole('button')).not.toBeInTheDocument()
+      expect(nativePicker().closest('label')).toHaveAttribute(
+        'title',
+        'Pick colour',
+      )
+    })
+
+    it('reaches the native colour input with the keyboard', async () => {
+      const user = userEvent.setup()
+      renderPicker()
+
+      await user.click(textField())
+      await user.tab()
+
+      expect(nativePicker()).toHaveFocus()
+    })
+
+    it('opens the native picker once per click on the swatch', async () => {
+      const user = userEvent.setup()
+      renderPicker()
+      const native = nativePicker()
+      const swatch = native.closest('label')
+      if (!swatch) throw new Error('No swatch label')
+      const clicks = vi.fn()
+      native.addEventListener('click', clicks)
+
+      await user.click(swatch)
+      expect(clicks).toHaveBeenCalledTimes(1)
+
+      await user.click(native)
+      expect(clicks).toHaveBeenCalledTimes(2)
     })
 
     it('uses Colour as the default label', () => {
