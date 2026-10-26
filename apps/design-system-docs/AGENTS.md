@@ -149,8 +149,8 @@ Both token bundles load (see imports in `theme-variables.css`):
    `@equinor/eds-tokens/next/css/variables.css` via a webpack alias to the
    committed `packages/eds-tokens/src/tokens/css/variables.css`. Names:
    `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
-   `--eds-corner-radius-*`, `--eds-typography-{ui,header}-*`,
-   `--eds-font-family-*`, `--eds-font-weight-*` (max weight `bolder` = 500),
+   `--eds-corner-radius-*`, `--eds-typography-{header,label,body}-*`,
+   `--eds-font-family-*`, `--eds-font-weight-{normal,medium,bold}`,
    `--eds-elevation-{low,high}`.
 2. **Legacy bundle** (`@equinor/eds-tokens/css/variables`) — retained ONLY for
    `--eds-container-space-*` and the embedded `/next` component previews,
@@ -186,7 +186,7 @@ emoji — are absent from _all_ of Inter's subsets, so they render from a
 fallback font either way.
 
 Weights 400, 500, 600 and 700 are all loaded. 400 and 500 are the site's own
-(`--docs-font-weight-emphasis` is `bolder` = 500); 600 and 700 back Infima's
+(`--docs-font-weight-emphasis` is `medium` = 500); 600 and 700 back Infima's
 `--ifm-font-weight-{semibold,bold}`, and `<strong>` really does compute to 700.
 Do not trim to 400+500 on the strength of the "never 600/700" rule in the root
 AGENTS.md — that rule is about EDS component CSS, and dropping them here would
@@ -216,11 +216,11 @@ them. Never hardcode font sizes/weights/line-heights in component CSS.
 | h2 / sections     | `--docs-font-section-*`                              | `header-3xl` 24/32                                                                 |
 | h3 / sub-sections | `--docs-font-subsection-*`                           | `header-xl` 21/24                                                                  |
 | Card titles / h4  | `--docs-font-card-title-*`                           | `header-lg` 18/24                                                                  |
-| Lead paragraphs   | `--docs-font-lead-size`                              | `ui-xl` 18px                                                                       |
-| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `ui-lg` 16px, lh 1.6 (site-local)                                                  |
-| Secondary text    | `--docs-font-body-sm-*`                              | `ui-md` 14/20                                                                      |
-| Captions/badges   | `--docs-font-caption-*`                              | `ui-sm` 12/16                                                                      |
-| Emphasis weight   | `--docs-font-weight-emphasis`                        | `bolder` = 500 (never 600/700)                                                     |
+| Lead paragraphs   | `--docs-font-lead-size`                              | `body-xl` 18px                                                                     |
+| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `body-lg` 16px, lh 1.6 (site-local)                                                |
+| Secondary text    | `--docs-font-body-sm-*`                              | `label-md` 14/20                                                                   |
+| Captions/badges   | `--docs-font-caption-*`                              | `label-sm` 12/16                                                                   |
+| Emphasis weight   | `--docs-font-weight-emphasis`                        | `medium` = 500 (never 600/700)                                                     |
 
 Docusaurus re-declares heading size vars **on the markdown heading elements**
 (`.markdown h1:first-child`, `.markdown > h2/h3`), so overrides must be
@@ -260,17 +260,17 @@ MDX docs use these without imports; React pages import them from
   (previews import real components from `@equinor/eds-core-react/next`)
 - `StorybookEmbed` — iframe of the deployed Storybook; `showLink` derives
   the View-in-Storybook link from the `id` (never hand-write those links).
-  Now only used for Foundation stories that have no registry entry
-  (`foundation/design-tokens/typography.md`); component docs use StoryCanvas.
+  No current-version page uses it any more; the frozen 2.0.0-beta typography
+  page still does. Component docs use StoryCanvas.
 - `StoryCanvas` — **what every component doc uses**: renders actual CSF story
   files natively via `composeStories()` (`src/components/StoryCanvas/`).
   Registry in `stories.ts` (one namespace import + one `composeStories` entry
   per component, alphabetical); usage
-  `<StoryCanvas of="Button/Default" showLink />`. No `height` — canvases
+  `<StoryCanvas of="Button/Introduction" showLink />`. No `height` — canvases
   auto-size. Stories that drive their own state through Storybook's `useArgs()`
-  render but cannot be interacted with here (`Switch/Introduction` is the one
-  such case) — prefer a story with local `useState` when the doc needs
-  interactivity.
+  render but cannot be interacted with here — prefer a story with local
+  `useState`, or one that lets the component manage its own state, when the
+  doc needs interactivity.
 
 Both reference styles fail **silently** at runtime — an unknown StoryCanvas
 `of` logs to the console and renders nothing, and a wrong StorybookEmbed `id`
@@ -340,6 +340,10 @@ exact-match so subpath imports still resolve through package `exports`:
   in the committed exports map — beta-only, issue #4395). **Requires
   eds-core-react to be built**; if components are missing, rebuild in order:
   `pnpm --filter @equinor/eds-utils run build` → `pnpm run build:core-react`.
+  A stale build can also make a `/next` component look visibly wrong in a
+  `StoryCanvas` preview (broken layout, missing colours) while Storybook
+  looks fine. `StoryCanvas` renders from source but gets its CSS from this
+  same build, so rebuild before suspecting a component bug.
 - `@equinor/eds-tokens/next/css/variables.css$` → committed Tokens Studio
   bundle.
 - `@eds-core-react-src` → `packages/eds-core-react/src` (portable stories).

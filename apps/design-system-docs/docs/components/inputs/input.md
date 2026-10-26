@@ -15,6 +15,7 @@ Use Input when you need a basic input field without additional functionality, or
 
 - You need a complete form field with label, description, and validation message - use **TextField** instead
 - The field requires built-in accessibility features - use **TextField** which handles composition automatically
+- You need multi-line text entry - use [TextArea](./textarea) instead
 
 ## Guidelines
 
@@ -39,13 +40,13 @@ Avoid using `disabled` where possible. Consider using `readOnly` instead - it ke
 
 <StoryCanvas of="Input/States" showLink />
 
-### Using with Labels
+### Required and Optional Indicators
 
 For a complete form field with label, description, helper message, and required/optional indicators, use the TextField component instead - it handles all the composition and accessibility for you.
 
-When using Input with a visible label, use the Field component for proper spacing.
+The `required` prop tells assistive technology and native form validation that the field is required, but it shows no visible marker. Pair it with the `indicator` prop on Field.Label.
 
-<StoryCanvas of="Input/WithLabel" showLink />
+<StoryCanvas of="Input/RequiredIndicator" showLink />
 
 ### Density
 
@@ -54,7 +55,7 @@ Input supports two density modes to fit different UI contexts:
 - **Spacious**: The default density with comfortable padding
 - **Comfortable**: A more compact option for dense UIs like data tables
 
-<StoryCanvas of="Input/Compact" showLink />
+<StoryCanvas of="Input/Density" showLink />
 
 ### Adornments
 
@@ -63,10 +64,6 @@ Use `startText` and `endText` for prefix/suffix text (e.g., "$", "USD", "km"). T
 Use `startAdornment` and `endAdornment` for elements (icons, buttons) that should inherit state colours - turning red when invalid.
 
 <StoryCanvas of="Input/WithAdornments" showLink />
-
-### Textarea Mode
-
-Input can render as a multi-line textarea by setting `as="textarea"`.
 
 ## Accessibility
 

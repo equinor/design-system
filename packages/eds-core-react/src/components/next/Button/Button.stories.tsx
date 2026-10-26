@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { add, chevron_right, delete_forever } from '@equinor/eds-icons'
 import { Button } from './Button'
 import { Icon } from '../Icon'
+import { ExampleLabel } from './../../../../.storybook/components'
 import page from './Button.docs.mdx'
 
 type StoryArgs = React.ComponentProps<typeof Button>
@@ -38,11 +39,28 @@ const meta: Meta<StoryArgs> = {
     round: {
       control: 'boolean',
       description:
-        'Makes icon-only buttons circular (only applies to icon-only buttons)',
+        'Makes an icon-only button circular instead of square. It only works when `icon` is true.',
+    },
+    multiline: {
+      control: 'boolean',
+      description:
+        'Sets the padding and the baseline alignment for a label on several lines. A long label wraps with or without it, so keep labels short.',
     },
     icon: {
       control: 'boolean',
       description: 'Icon-only button mode (requires aria-label)',
+    },
+    children: {
+      control: 'text',
+      description: 'The label. Ignored in icon-only mode, which shows an icon.',
+    },
+    // asChild needs a single element as its child, and the playground passes
+    // text, so switching it on would render nothing. The row stays in the table
+    // without a control.
+    asChild: {
+      control: false,
+      description:
+        'Renders the Button styles on the child element instead of a `<button>`, such as a link. It cannot be switched on here, because the playground label is text and `asChild` needs an element. See the As child example.',
     },
     disabled: {
       control: 'boolean',
@@ -55,6 +73,7 @@ const meta: Meta<StoryArgs> = {
     tone: 'accent',
     icon: false,
     disabled: false,
+    children: 'Button',
   },
 }
 
@@ -92,11 +111,21 @@ type Story = StoryObj<StoryArgs>
 
 // ===== Basic Examples =====
 
-export const Default: Story = {
-  render: ({ icon, ...args }) => (
+export const Introduction: Story = {
+  render: ({ icon, children, ...args }) => (
     <Button icon={icon} aria-label={icon ? 'Button' : undefined} {...args}>
-      {icon ? <Icon data={add} aria-hidden /> : 'Button'}
+      {icon ? <Icon data={add} aria-hidden /> : children}
     </Button>
+  ),
+}
+
+export const Overview: Story = {
+  render: () => (
+    <Wrapper direction="row" align="center">
+      <Button>Save</Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button variant="ghost">Skip</Button>
+    </Wrapper>
   ),
 }
 
@@ -109,6 +138,14 @@ export const Sizes: Story = {
       <Button size="default">Default</Button>
     </Wrapper>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `size` to choose the small or the default button. Density is separate: set `data-density` on a parent element and both sizes scale with it.',
+      },
+    },
+  },
 }
 
 // ===== Color Appearances =====
@@ -149,7 +186,7 @@ export const Tones: Story = {
     docs: {
       description: {
         story:
-          'The `tone` prop controls the color scheme using `data-color-appearance`.',
+          'Use `tone` to signal the intent of an action. Every tone works with every variant.',
       },
     },
   },
@@ -157,7 +194,7 @@ export const Tones: Story = {
 
 // ===== With Icons =====
 
-export const WithIconBefore: Story = {
+export const IconBeforeLabel: Story = {
   render: () => (
     <Button>
       <Icon data={add} aria-hidden />
@@ -174,7 +211,7 @@ export const WithIconBefore: Story = {
   },
 }
 
-export const WithIconAfter: Story = {
+export const IconAfterLabel: Story = {
   render: () => (
     <Button>
       Next
@@ -193,13 +230,6 @@ export const WithIconAfter: Story = {
 
 // ===== States =====
 
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: 'Disabled',
-  },
-}
-
 export const DisabledVariants: Story = {
   render: () => (
     <Wrapper direction="row">
@@ -217,7 +247,8 @@ export const DisabledVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All variants support the disabled state.',
+        story:
+          'Every variant has a disabled state. A disabled button uses the neutral tone, whatever its initial tone was.',
       },
     },
   },
@@ -230,18 +261,16 @@ export const AllVariants: Story = {
     <Wrapper gap={24}>
       {(['primary', 'secondary', 'ghost'] as const).map((variant) => (
         <div key={variant}>
-          <h3 style={{ marginBottom: '12px', textTransform: 'capitalize' }}>
+          <ExampleLabel style={{ textTransform: 'capitalize' }}>
             {variant}
-          </h3>
+          </ExampleLabel>
           <Wrapper direction="row" wrap align="center">
             {(['accent', 'neutral', 'danger'] as const).map((color) => (
               <Wrapper key={color} direction="row" gap={8} align="center">
                 <Button variant={variant} tone={color} size="small">
-                  <Icon data={add} aria-hidden />
                   Small
                 </Button>
                 <Button variant={variant} tone={color} size="default">
-                  <Icon data={add} aria-hidden />
                   Default
                 </Button>
               </Wrapper>
@@ -254,8 +283,7 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Complete overview of all variants, sizes, and color appearances.',
+        story: 'Every variant in every tone and size.',
       },
     },
   },
@@ -269,7 +297,6 @@ export const DangerAction: Story = {
       <Button variant="primary" tone="danger">
         <Icon data={delete_forever} aria-hidden />
         Delete
-        <Icon data={delete_forever} aria-hidden />
       </Button>
       <Button variant="secondary" tone="danger">
         Cancel
@@ -337,7 +364,7 @@ export const IconOnlyVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Icon-only buttons support all variants and color appearances.',
+        story: 'Icon-only buttons support every variant and tone.',
       },
     },
   },
@@ -347,32 +374,23 @@ export const IconOnlyVariants: Story = {
 
 export const CircularIconOnly: Story = {
   render: () => (
-    <Wrapper>
-      <Wrapper direction="row" align="center">
-        <Button icon round aria-label="Add" size="small">
-          <Icon data={add} aria-hidden />
-        </Button>
-        <Button icon round aria-label="Add" size="default">
-          <Icon data={add} aria-hidden />
-        </Button>
-      </Wrapper>
-      <Wrapper direction="row" align="center">
-        <Button variant="primary" icon round aria-label="Add">
-          <Icon data={add} aria-hidden />
-        </Button>
-        <Button variant="secondary" icon round aria-label="Add">
-          <Icon data={add} aria-hidden />
-        </Button>
-        <Button variant="ghost" icon round aria-label="Add">
-          <Icon data={add} aria-hidden />
-        </Button>
-      </Wrapper>
+    <Wrapper direction="row" align="center">
+      <Button variant="primary" icon round aria-label="Add">
+        <Icon data={add} aria-hidden />
+      </Button>
+      <Button variant="secondary" icon round aria-label="Add">
+        <Icon data={add} aria-hidden />
+      </Button>
+      <Button variant="ghost" icon round aria-label="Add">
+        <Icon data={add} aria-hidden />
+      </Button>
     </Wrapper>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Use `round` on icon-only buttons to create circular buttons.',
+        story:
+          'Add `round` to an icon-only button to make it a circle instead of a square. It has no effect on a button with a label.',
       },
     },
   },
@@ -391,17 +409,34 @@ export const AsChild: Story = {
     return (
       <Wrapper direction="row">
         <Button asChild>
-          <a href="/page">Link as button</a>
+          <a href="https://example.com">Link as button</a>
         </Button>
         <Button asChild variant="secondary">
-          <CustomLink href="/page">Router link</CustomLink>
+          <CustomLink href="https://example.com">Router link</CustomLink>
         </Button>
         <Button asChild variant="ghost">
-          <a href="/page">Ghost link</a>
+          <a href="https://example.com">Ghost link</a>
         </Button>
       </Wrapper>
     )
   },
+  decorators: [
+    (Story) => (
+      // The example links go nowhere. A click is stopped before it follows
+      // the link, so the page does not reload. Decorators are left out of the
+      // code shown on the docs page.
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+      <div
+        onClick={(event) => {
+          if ((event.target as HTMLElement).closest('a')) {
+            event.preventDefault()
+          }
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       description: {
@@ -418,42 +453,24 @@ export const DensityComparison: Story = {
   render: () => (
     <Wrapper gap={32}>
       <div data-density="relaxed">
-        <h3 style={{ marginBottom: '12px' }}>Relaxed</h3>
+        <ExampleLabel>Relaxed</ExampleLabel>
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
-          <Button size="small" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-          <Button size="default" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-        </Wrapper>
-      </div>
-      <div data-density="spacious">
-        <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
-        <Wrapper direction="row" align="center" gap={12}>
-          <Button size="small">Small</Button>
-          <Button size="default">Default</Button>
-          <Button size="small" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-          <Button size="default" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
         </Wrapper>
       </div>
       <div data-density="comfortable">
-        <h3 style={{ marginBottom: '12px' }}>Comfortable</h3>
+        <ExampleLabel>Comfortable (default)</ExampleLabel>
         <Wrapper direction="row" align="center" gap={12}>
           <Button size="small">Small</Button>
           <Button size="default">Default</Button>
-          <Button size="small" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
-          <Button size="default" icon aria-label="Add">
-            <Icon data={add} aria-hidden />
-          </Button>
+        </Wrapper>
+      </div>
+      <div data-density="compact">
+        <ExampleLabel>Compact</ExampleLabel>
+        <Wrapper direction="row" align="center" gap={12}>
+          <Button size="small">Small</Button>
+          <Button size="default">Default</Button>
         </Wrapper>
       </div>
     </Wrapper>
@@ -474,27 +491,8 @@ export const MultilineAntiPattern: Story = {
   render: () => (
     <Wrapper gap={32}>
       <div data-density="relaxed">
-        <h3 style={{ marginBottom: '12px' }}>Relaxed</h3>
+        <ExampleLabel>Relaxed</ExampleLabel>
         <Wrapper direction="row" align="flex-start" gap={12}>
-          <Button multiline size="small">
-            Short label
-            <br /> that wraps
-          </Button>
-          <Button multiline size="default">
-            Short label
-            <br />
-            that wraps
-          </Button>
-        </Wrapper>
-      </div>
-      <div data-density="spacious">
-        <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
-        <Wrapper direction="row" align="flex-start" gap={12}>
-          <Button multiline size="small">
-            Short label
-            <br />
-            that wraps
-          </Button>
           <Button multiline size="default">
             Short label
             <br />
@@ -503,13 +501,18 @@ export const MultilineAntiPattern: Story = {
         </Wrapper>
       </div>
       <div data-density="comfortable">
-        <h3 style={{ marginBottom: '12px' }}>Comfortable</h3>
+        <ExampleLabel>Comfortable (default)</ExampleLabel>
         <Wrapper direction="row" align="flex-start" gap={12}>
-          <Button multiline size="small">
+          <Button multiline size="default">
             Short label
             <br />
             that wraps
           </Button>
+        </Wrapper>
+      </div>
+      <div data-density="compact">
+        <ExampleLabel>Compact</ExampleLabel>
+        <Wrapper direction="row" align="flex-start" gap={12}>
           <Button multiline size="default">
             Short label
             <br />
@@ -523,7 +526,7 @@ export const MultilineAntiPattern: Story = {
     docs: {
       description: {
         story:
-          '⚠️ **Anti-pattern.** Button labels should always fit on a single line. Use `multiline` only as a last resort — never as a design choice. The component will not break, but multi-line buttons are harder to scan and weaker as call-to-action elements. Shorten the label instead.',
+          'A label should fit on one line, so shorten it instead of wrapping it. Use `multiline` only as a last resort, never as a design choice. The button still works, but a label over several lines is harder to scan and a weaker call to action.',
       },
     },
   },

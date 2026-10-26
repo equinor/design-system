@@ -4,9 +4,8 @@ exports[`Button (next) Rendering matches snapshot 1`] = `
 <div>
   <button
     class="eds-button"
-    data-color-appearance="accent"
-    data-selectable-space="md"
-    data-space-proportions="squished"
+    data-size="default"
+    data-tone="accent"
     data-variant="primary"
     type="button"
   >
