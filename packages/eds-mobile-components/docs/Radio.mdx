@@ -5,7 +5,7 @@
 - Lets the user choose exactly one option from a group, unlike Checkbox, which allows any number.
 - The whole row is pressable, so pressing the label selects the radio as well as the circle.
 - Shows a brief coloured highlight while pressed, the only visual reaction to a press. Selecting itself has no separate animation.
-- Without a label it becomes a round touch target, for lists and bulk selection headers.
+- Without a label it becomes a round touch target, for lists of options where the row already says what is being selected.
 - Reduces the contrast of the icon and the label when disabled.
 
 ## Usage

@@ -266,11 +266,11 @@ MDX docs use these without imports; React pages import them from
   files natively via `composeStories()` (`src/components/StoryCanvas/`).
   Registry in `stories.ts` (one namespace import + one `composeStories` entry
   per component, alphabetical); usage
-  `<StoryCanvas of="Button/Default" showLink />`. No `height` — canvases
+  `<StoryCanvas of="Button/Introduction" showLink />`. No `height` — canvases
   auto-size. Stories that drive their own state through Storybook's `useArgs()`
-  render but cannot be interacted with here (`Switch/Introduction` is the one
-  such case) — prefer a story with local `useState` when the doc needs
-  interactivity.
+  render but cannot be interacted with here — prefer a story with local
+  `useState`, or one that lets the component manage its own state, when the
+  doc needs interactivity.
 
 Both reference styles fail **silently** at runtime — an unknown StoryCanvas
 `of` logs to the console and renders nothing, and a wrong StorybookEmbed `id`
@@ -340,6 +340,10 @@ exact-match so subpath imports still resolve through package `exports`:
   in the committed exports map — beta-only, issue #4395). **Requires
   eds-core-react to be built**; if components are missing, rebuild in order:
   `pnpm --filter @equinor/eds-utils run build` → `pnpm run build:core-react`.
+  A stale build can also make a `/next` component look visibly wrong in a
+  `StoryCanvas` preview (broken layout, missing colours) while Storybook
+  looks fine. `StoryCanvas` renders from source but gets its CSS from this
+  same build, so rebuild before suspecting a component bug.
 - `@equinor/eds-tokens/next/css/variables.css$` → committed Tokens Studio
   bundle.
 - `@eds-core-react-src` → `packages/eds-core-react/src` (portable stories).
