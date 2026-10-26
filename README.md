@@ -154,7 +154,7 @@ Before you begin, ensure you have the following installed:
   Source: prerequisites.json (generated from .nvmrc and package.json)
 -->
 
-* **Node.js** — Version 24.16.0 or compatible
+* **Node.js** — Version 24.22.1 or compatible
 * **pnpm** — Version 11.27.0, pinned via the `packageManager` field (install globally with `npm install -g pnpm@11.27.0`)
 * **Git** — For version control
 
@@ -406,7 +406,7 @@ See our [Storybook](https://storybook.eds.equinor.com/) for more examples and av
 > keeps working, but it receives no bug fixes, new features or security updates. We do not
 > have the resources to maintain a component of this size. A recommendation for what to use
 > instead is being worked out, see
-> [#4656](https://github.com/equinor/design-system/issues/4656). Background:
+> [#5649](https://github.com/equinor/design-system/issues/5649). Background:
 > [#5390](https://github.com/equinor/design-system/issues/5390).
 
 A powerful data grid component built with [TanStack Table](https://tanstack.com/table), providing sorting, filtering, and other advanced table features.
@@ -495,7 +495,7 @@ If you get an error that port 9000 (Storybook), 3000 (demo/docs), or other ports
 If you encounter build failures:
 1. Ensure all dependencies are up to date: `pnpm install`
 2. Clean and rebuild: `pnpm clean && pnpm build`
-3. Make sure you're using the correct Node.js version (24.16.0, see `.nvmrc`)
+3. Make sure you're using the correct Node.js version (24.22.1, see `.nvmrc`)
 
 ### Module not found errors
 

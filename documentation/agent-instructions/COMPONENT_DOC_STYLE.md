@@ -258,7 +258,7 @@ All [component] variants support:
 eds-2-0-beta-{category}-{component}--{story-name}
 ```
 
-Example: `eds-2-0-beta-inputs-button--default`.
+Example: `eds-2-0-beta-inputs-button--introduction`.
 
 ### Iframe template
 

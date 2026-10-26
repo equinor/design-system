@@ -175,7 +175,7 @@ export default function App() {
 
 While working on a component (migration, docs, bug fix, or review), you may notice gaps that aren't in scope for the current PR — things the Figma design doesn't account for, patterns missing from the EDS web Storybook, accessibility gaps, or API inconsistencies across components. Do not silently drop these.
 
-Append them as a checklist item to the tracking issue: **[#152 — Tracking: Findings from component migration](https://github.com/equinor/design-system-mobile/issues/152)** (this issue will be transferred to this repo once `design-system-mobile` is archived — see equinor/design-system#5138). Each item should include:
+Append them as a checklist item to the tracking issue: **[Tracking: Findings from component migration (#5442)](https://github.com/equinor/design-system/issues/5442)**. Each item should include:
 
 - **What** — one-line description of the gap
 - **Rationale** — why it matters (a11y, parity with web, dev ergonomics, etc.)
