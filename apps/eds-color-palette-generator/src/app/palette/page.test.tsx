@@ -7,6 +7,8 @@ import { STEP_COUNT, TS_HUES } from '@/config/tokensStudio'
 import {
   editablePalettesFromTokensStudio,
   getSimulationPalettes,
+  setSimulationPalettes,
+  type TokenPalette,
 } from '@/utils/palette'
 import { renderWithProviders } from '@/test/renderWithProviders'
 import PalettePage from './page'
@@ -168,10 +170,51 @@ describe('Palette editor page', () => {
   })
 
   describe('Saving', () => {
-    it('saves the Tokens Studio palettes on first load', () => {
+    it('saves the Tokens Studio palettes when nothing is saved yet', () => {
       renderWithProviders(<PalettePage />)
 
       expect(getSimulationPalettes()).toEqual(TOKENS_STUDIO)
+    })
+
+    it('opens with the saved palettes', () => {
+      const saved: TokenPalette[] = [
+        { ...TOKENS_STUDIO[2], name: 'Saved' },
+        { name: 'Custom', steps: Array(STEP_COUNT).fill('#888888') },
+      ]
+      setSimulationPalettes(saved)
+      renderWithProviders(<PalettePage />)
+
+      expect(paletteNames()).toEqual(['Saved', 'Custom'])
+      expect(stepInput(1, 9)).toHaveValue('#888888')
+      expect(getSimulationPalettes()).toEqual(saved)
+    })
+
+    it('starts from the Tokens Studio hues when the saved list is empty', () => {
+      setSimulationPalettes([])
+      renderWithProviders(<PalettePage />)
+
+      expect(paletteNames()).toEqual(TOKENS_STUDIO.map((p) => p.name))
+    })
+
+    it('keeps the edits when the page is opened again', async () => {
+      const user = userEvent.setup()
+      const { unmount } = renderWithProviders(<PalettePage />)
+      await replaceText(user, nameInputs()[0], 'Edited')
+      await replaceText(user, stepInput(0, 9), '#123456')
+      await user.click(
+        screen.getByRole('button', { name: `Remove ${TOKENS_STUDIO[1].name}` }),
+      )
+      await user.click(screen.getByRole('button', { name: 'Custom HEX' }))
+      unmount()
+
+      renderWithProviders(<PalettePage />)
+
+      expect(paletteNames()).toEqual([
+        'Edited',
+        ...TOKENS_STUDIO.slice(2).map((p) => p.name),
+        'Custom',
+      ])
+      expect(stepInput(0, 9)).toHaveValue('#123456')
     })
 
     it('saves every edit for the Examples page', async () => {

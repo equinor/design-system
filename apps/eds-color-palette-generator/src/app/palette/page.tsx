@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { add } from '@equinor/eds-icons'
 import {
   editablePalettesFromTokensStudio,
+  getSimulationPalettes,
   setSimulationPalettes,
   type TokenPalette,
 } from '@/utils/palette'
@@ -25,12 +26,13 @@ export default function PalettePage() {
   const [viewMode, setViewMode] = useState<PaletteViewMode>('curve')
   const [hasAutoImported, setHasAutoImported] = useState(false)
 
-  /* ---- Start from the Tokens Studio hues on first load ---- */
+  /* ---- Start from the saved palettes, or the Tokens Studio hues ---- */
   useEffect(() => {
     if (hasAutoImported) return
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only start; saving to localStorage below must not run during SSR
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only start; localStorage is not there during SSR, and saving below must not run before this
     setHasAutoImported(true)
-    setPalettes(editablePalettesFromTokensStudio())
+    const saved = getSimulationPalettes()
+    setPalettes(saved.length > 0 ? saved : editablePalettesFromTokensStudio())
   }, [hasAutoImported])
 
   /* ---- Auto-save to localStorage ---- */
