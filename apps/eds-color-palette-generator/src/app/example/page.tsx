@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { refresh } from '@equinor/eds-icons'
 import { useColorScheme } from '@/context/ColorSchemeContext'
-import { tokensStudioPalettes } from '@/utils/semanticTokens'
+import { examplePalettes } from '@/utils/palette'
 import {
   refreshCustomPalettes,
   useCustomPalettes,
@@ -25,10 +25,10 @@ export default function ExamplePage() {
   const [activePalette, setActivePalette] = useState(0)
   const customPalettes = useCustomPalettes()
 
-  // The seven Tokens Studio hues for the current scheme, then the palettes
-  // saved in the Palette Editor
+  // The seven Tokens Studio hues for the current scheme with the palettes
+  // saved in the Palette editor, which are light ramps
   const allPalettes = useMemo(
-    () => [...tokensStudioPalettes(colorScheme), ...customPalettes],
+    () => examplePalettes(colorScheme, customPalettes),
     [colorScheme, customPalettes],
   )
 

@@ -87,6 +87,12 @@ export default function PalettePage() {
 
       <Main className="max-w-6xl mx-auto py-8">
         <h1 className="m-0 text-header-2xl font-medium">Palette editor</h1>
+        <p className="m-0 mt-2 max-w-3xl text-sm text-secondary">
+          The palettes are light-mode ramps, saved in this browser. On the
+          Examples page, a palette named after a Tokens Studio hue replaces that
+          hue in light mode. In dark mode, edited and new palettes follow the
+          dark hues, marked &ldquo;(light)&rdquo;.
+        </p>
 
         {/* ---- Actions ---- */}
         <div className="mt-4 mb-6 flex flex-wrap items-center gap-3">

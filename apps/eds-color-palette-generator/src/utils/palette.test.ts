@@ -7,6 +7,7 @@ import {
   calcContrast,
   clearSimulationPalettes,
   editablePalettesFromTokensStudio,
+  examplePalettes,
   getApcaFontBreakdown,
   getSimulationPalettes,
   setSimulationPalettes,
@@ -293,5 +294,101 @@ describe('simulation palettes', () => {
     clearSimulationPalettes()
     expect(setItem).not.toHaveBeenCalled()
     expect(removeItem).not.toHaveBeenCalled()
+  })
+})
+
+describe('examplePalettes', () => {
+  const custom: TokenPalette = {
+    name: 'Custom',
+    steps: Array(STEP_COUNT).fill('#888888'),
+  }
+
+  /** The editor's starting list with step 9 of the first hue edited. */
+  function withEditedFirstHue(): TokenPalette[] {
+    const palettes = editablePalettesFromTokensStudio()
+    palettes[0].steps[8] = '#123456'
+    return palettes
+  }
+
+  it('gives the Tokens Studio hues when nothing is saved', () => {
+    expect(examplePalettes('light', [])).toEqual(tokensStudioPalettes('light'))
+    expect(examplePalettes('dark', [])).toEqual(tokensStudioPalettes('dark'))
+  })
+
+  it('lists each hue once when the editor saved the unedited hues', () => {
+    const saved = editablePalettesFromTokensStudio()
+
+    expect(examplePalettes('light', saved)).toEqual(
+      tokensStudioPalettes('light'),
+    )
+    expect(examplePalettes('dark', saved)).toEqual(tokensStudioPalettes('dark'))
+  })
+
+  it('counts a step typed in another letter case as unedited', () => {
+    const saved = editablePalettesFromTokensStudio()
+    saved[0].steps = saved[0].steps.map((step) => step.toUpperCase())
+
+    expect(examplePalettes('dark', saved)).toEqual(tokensStudioPalettes('dark'))
+  })
+
+  it('puts an edited hue in the place of the hue in light mode', () => {
+    const saved = withEditedFirstHue()
+    const result = examplePalettes('light', saved)
+
+    expect(result).toHaveLength(TS_HUES.length)
+    expect(result[0]).toEqual(saved[0])
+    expect(result.slice(1)).toEqual(tokensStudioPalettes('light').slice(1))
+  })
+
+  it('matches a saved palette to a hue by name, as toneRamps does', () => {
+    const saved = withEditedFirstHue()
+    saved[0].name = `  ${saved[0].name.toLowerCase()} `
+
+    const result = examplePalettes('light', saved.slice(0, 1))
+
+    expect(result).toHaveLength(TS_HUES.length)
+    expect(result[0]).toEqual(saved[0])
+  })
+
+  it('keeps a hue the editor removed', () => {
+    const saved = editablePalettesFromTokensStudio().slice(1)
+
+    expect(examplePalettes('light', saved)).toEqual(
+      tokensStudioPalettes('light'),
+    )
+  })
+
+  it('adds new palettes after the hues, in the saved order', () => {
+    const other = { ...custom, name: 'Other' }
+    const saved = [custom, ...editablePalettesFromTokensStudio(), other]
+
+    expect(examplePalettes('light', saved)).toEqual([
+      ...tokensStudioPalettes('light'),
+      custom,
+      other,
+    ])
+  })
+
+  it('never puts a light ramp in the place of a dark hue', () => {
+    const saved = [...withEditedFirstHue(), custom]
+    const result = examplePalettes('dark', saved)
+
+    expect(result.slice(0, TS_HUES.length)).toEqual(
+      tokensStudioPalettes('dark'),
+    )
+    expect(result.slice(TS_HUES.length)).toEqual([
+      { name: `${saved[0].name} (light)`, steps: saved[0].steps },
+      { name: 'Custom (light)', steps: custom.steps },
+    ])
+  })
+
+  it('does not change the saved palettes', () => {
+    const saved = [...withEditedFirstHue(), custom]
+    const copy = structuredClone(saved)
+
+    examplePalettes('light', saved)
+    examplePalettes('dark', saved)
+
+    expect(saved).toEqual(copy)
   })
 })

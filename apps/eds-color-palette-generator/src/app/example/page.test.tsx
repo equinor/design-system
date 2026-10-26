@@ -4,7 +4,11 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { EXAMPLE_GROUPS } from '@/components/example/exampleGroups'
 import type { Scheme } from '@/config/tokensStudio'
-import { setSimulationPalettes, type TokenPalette } from '@/utils/palette'
+import {
+  editablePalettesFromTokensStudio,
+  setSimulationPalettes,
+  type TokenPalette,
+} from '@/utils/palette'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 import { renderWithProviders } from '@/test/renderWithProviders'
 import ExamplePage from './page'
@@ -107,6 +111,28 @@ describe('Examples page', () => {
       expect(radioNames()).toEqual([...namesFor('light'), CUSTOM.name])
     })
 
+    it('lists each Tokens Studio hue once when the Palette editor saved them', () => {
+      setSimulationPalettes([...editablePalettesFromTokensStudio(), CUSTOM])
+      renderWithProviders(<ExamplePage />)
+
+      expect(radioNames()).toEqual([...namesFor('light'), CUSTOM.name])
+    })
+
+    it('previews an edited hue in the place of the Tokens Studio hue', async () => {
+      const user = userEvent.setup()
+      const saved = editablePalettesFromTokensStudio()
+      saved[1].steps = CUSTOM.steps
+      setSimulationPalettes(saved)
+      renderWithProviders(<ExamplePage />)
+
+      await user.click(
+        within(picker()).getByRole('radio', { name: saved[1].name }),
+      )
+
+      expect(radioNames()).toEqual(namesFor('light'))
+      expectPairingFrom(CUSTOM.steps)
+    })
+
     it('picks up newly saved palettes on Refresh', async () => {
       const user = userEvent.setup()
       renderWithProviders(<ExamplePage />)
@@ -156,6 +182,29 @@ describe('Examples page', () => {
 
       expect(radioNames()).toEqual(namesFor('dark'))
       expectPairingFrom(tokensStudioPalettes('dark')[0].steps)
+    })
+
+    it('marks the saved palettes as light ramps in dark mode', async () => {
+      const user = userEvent.setup()
+      const saved = editablePalettesFromTokensStudio()
+      saved[0].steps = CUSTOM.steps
+      setSimulationPalettes([...saved, CUSTOM])
+      renderWithProviders(<ExamplePage />, { scheme: 'dark' })
+
+      // The dark hues keep their place; the unedited hues are left out
+      expect(radioNames()).toEqual([
+        ...namesFor('dark'),
+        `${saved[0].name} (light)`,
+        `${CUSTOM.name} (light)`,
+      ])
+      expectPairingFrom(tokensStudioPalettes('dark')[0].steps)
+
+      await user.click(
+        within(picker()).getByRole('radio', {
+          name: `${saved[0].name} (light)`,
+        }),
+      )
+      expectPairingFrom(CUSTOM.steps)
     })
   })
 })

@@ -76,6 +76,14 @@ describe('Palette editor page', () => {
       })
     })
 
+    it('says the palettes are light-mode ramps', () => {
+      renderWithProviders(<PalettePage />)
+
+      expect(
+        screen.getByText(/The palettes are light-mode ramps/),
+      ).toBeInTheDocument()
+    })
+
     it('starts in the curve view', () => {
       renderWithProviders(<PalettePage />)
 

@@ -1,4 +1,4 @@
-import { STEP_COUNT } from '@/config/tokensStudio'
+import { STEP_COUNT, hueKey, type Scheme } from '@/config/tokensStudio'
 import { contrast, contrastValue } from '@/utils/color'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 
@@ -199,4 +199,53 @@ export function setSimulationPalettes(palettes: TokenPalette[]): void {
 export function clearSimulationPalettes(): void {
   if (typeof window === 'undefined') return
   localStorage.removeItem(SIMULATION_PALETTES_KEY)
+}
+
+/** The Tokens Studio hue a palette is named after, in light mode. */
+function lightHueFor(palette: TokenPalette): TokenPalette | undefined {
+  const key = hueKey(palette.name)
+  return tokensStudioPalettes('light').find((hue) => hueKey(hue.name) === key)
+}
+
+/** Whether a saved palette is a Tokens Studio hue that was not edited. */
+function isUnchangedHue(palette: TokenPalette): boolean {
+  const hue = lightHueFor(palette)
+  return (
+    hue !== undefined &&
+    hue.steps.every(
+      (step, i) => step.toLowerCase() === palette.steps[i].toLowerCase(),
+    )
+  )
+}
+
+/**
+ * The palettes the Examples page shows for a scheme: the seven Tokens Studio
+ * hues together with the palettes saved in the Palette editor.
+ *
+ * The editor saves its whole list, unedited hues included, and its ramps are
+ * light ramps, since it starts from `editablePalettesFromTokensStudio()`. In
+ * light mode a saved palette named after a hue takes that hue's place, as in
+ * `toneRamps`, so each hue is listed once, and the other saved palettes
+ * follow the hues. In dark mode a light ramp must not stand in for a dark
+ * hue: the dark hues stay, unedited copies are left out, and the edited and
+ * new palettes follow with "(light)" after the name.
+ */
+export function examplePalettes(
+  scheme: Scheme,
+  saved: TokenPalette[],
+): TokenPalette[] {
+  const hues = tokensStudioPalettes(scheme)
+  if (scheme === 'dark') {
+    const lightRamps = saved
+      .filter((palette) => !isUnchangedHue(palette))
+      .map((palette) => ({ ...palette, name: `${palette.name} (light)` }))
+    return [...hues, ...lightRamps]
+  }
+  const rest = [...saved]
+  const merged = hues.map((hue) => {
+    const key = hueKey(hue.name)
+    const index = rest.findIndex((palette) => hueKey(palette.name) === key)
+    return index === -1 ? hue : rest.splice(index, 1)[0]
+  })
+  return [...merged, ...rest]
 }
