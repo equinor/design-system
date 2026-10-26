@@ -1,70 +1,60 @@
 @layer eds-components {
-  /* Inline with text: uses token from parent's data-font-size, or 1.5em fallback */
+  /* Inline with text: the icon is as tall as the line box it sits in, so it
+   * follows the role, size and density of the surrounding text without a
+   * token or a data attribute. Top alignment fills the line box exactly;
+   * on the baseline the icon would push the line taller. No optical
+   * margins are needed, since the icon is no taller than the line. */
   .eds-icon {
+    --_size: 1lh;
+
     flex-shrink: 0;
-
-    width: 1em;
-    height: 1em;
-
-    /* Negative margins for optical alignment with text baseline */
-    margin-block: -0.25em;
-    margin-inline: -0.1em;
-
-    /*
-     * font-size establishes the icon's size context.
-     * width/height use 1em (relative to this computed font-size).
-     * This avoids compound scaling (1.5em × 1.5em = 2.25em would be wrong).
-     */
-    font-size: var(--eds-typography-icon-size, 1.5em);
+    width: var(--_size);
+    height: var(--_size);
+    vertical-align: top;
   }
 
-  /* Explicit size: fixed size from design tokens, no margins */
-  .eds-icon[data-size] {
-    --_explicit-size: var(--eds-sizing-icon-md); /* fallback */
-
-    width: var(--_explicit-size);
-    height: var(--_explicit-size);
-    margin: 0;
-    font-size: inherit;
-  }
-
+  /* Explicit size, for standalone icons: the spacing step one above the
+   * size's name, so md is --eds-spacing-lg. This follows the shift from the
+   * legacy spacious default to comfortable, so md to 2xl keep their sizes.
+   * Figma has no icon size scale; components pick icon sizes from the
+   * spacing scale, as .Icon Wrapper does with --eds-spacing-md. */
   .eds-icon[data-size='xs'] {
-    --_explicit-size: var(--eds-sizing-icon-xs);
+    --_size: var(--eds-spacing-sm);
   }
 
   .eds-icon[data-size='sm'] {
-    --_explicit-size: var(--eds-sizing-icon-sm);
+    --_size: var(--eds-spacing-md);
   }
 
   .eds-icon[data-size='md'] {
-    --_explicit-size: var(--eds-sizing-icon-md);
+    --_size: var(--eds-spacing-lg);
   }
 
   .eds-icon[data-size='lg'] {
-    --_explicit-size: var(--eds-sizing-icon-lg);
+    --_size: var(--eds-spacing-xl);
   }
 
   .eds-icon[data-size='xl'] {
-    --_explicit-size: var(--eds-sizing-icon-xl);
+    --_size: var(--eds-spacing-2xl);
   }
 
   .eds-icon[data-size='2xl'] {
-    --_explicit-size: var(--eds-sizing-icon-2xl);
+    --_size: var(--eds-spacing-3xl);
   }
 
   .eds-icon[data-size='3xl'] {
-    --_explicit-size: var(--eds-sizing-icon-3xl);
+    --_size: var(--eds-spacing-4xl);
   }
 
   .eds-icon[data-size='4xl'] {
-    --_explicit-size: var(--eds-sizing-icon-4xl);
+    --_size: var(--eds-spacing-5xl);
   }
 
   .eds-icon[data-size='5xl'] {
-    --_explicit-size: var(--eds-sizing-icon-5xl);
+    --_size: var(--eds-spacing-6xl);
   }
 
   .eds-icon[data-size='6xl'] {
-    --_explicit-size: var(--eds-sizing-icon-6xl);
+    --_size: var(--eds-spacing-7xl);
   }
 }

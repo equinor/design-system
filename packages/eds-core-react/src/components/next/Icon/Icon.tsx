@@ -5,9 +5,8 @@ import type { IconProps } from './Icon.types'
  * Icon component for EDS 2.0
  *
  * Features:
- * - Automatic sizing from parent's data-font-size via --eds-typography-icon-size
- * - Dynamic fallback sizing (1.5em) when no tokens are set
- * - Explicit size prop for standalone usage
+ * - Inline sizing: as tall as the line box of the surrounding text (1lh)
+ * - Explicit size prop for standalone usage, from the spacing scale
  * - WCAG 2.1 AA accessible with optional title for semantic icons
  *
  * @example
@@ -15,10 +14,10 @@ import type { IconProps } from './Icon.types'
  * import { Icon } from '@equinor/eds-core-react/next'
  * import { save } from '@equinor/eds-icons'
  *
- * // Auto-sized from parent's data-font-size
- * <div data-font-size="md">
+ * // Follows the surrounding text
+ * <p>
  *   <Icon data={warning} /> Error message
- * </div>
+ * </p>
  *
  * // Explicit size for standalone usage
  * <Icon data={save} size="lg" />

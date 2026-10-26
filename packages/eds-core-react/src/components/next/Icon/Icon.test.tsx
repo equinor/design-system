@@ -192,11 +192,11 @@ describe('Icon (next)', () => {
       expect(icons).toHaveLength(3)
     })
 
-    it('renders inside Typography-like context (data-font-size)', () => {
+    it('renders inline with text', () => {
       render(
-        <div data-font-size="md">
+        <p>
           <Icon data={warning_filled} title="warning" /> Alert message
-        </div>,
+        </p>,
       )
       expect(screen.getByLabelText('warning')).toBeInTheDocument()
     })

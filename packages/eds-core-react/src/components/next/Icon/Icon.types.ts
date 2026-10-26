@@ -12,8 +12,8 @@ export type IconProps = {
   /** Color of the icon. Defaults to currentColor for inheritance */
   color?: string
   /**
-   * Explicit size. Overrides automatic sizing from parent's data-font-size.
-   * When not set, icon inherits size from --eds-typography-icon-size or scales dynamically (1.5em).
+   * Explicit size, from the spacing step one above its name (`md` is `--eds-spacing-lg`).
+   * When not set, the icon is as tall as the line box of the surrounding text.
    */
   size?: IconSize
   /** @ignore */
