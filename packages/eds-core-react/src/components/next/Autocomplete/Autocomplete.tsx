@@ -587,7 +587,7 @@ function AutocompleteInner<T = string>(
                         handleCustomOptionSelect(inputValue.trim())
                     }}
                   >
-                    <Icon data={add_box} aria-hidden="true" />
+                    <Icon data={add_box} size="md" aria-hidden="true" />
                     {customValueTyped
                       ? `Add: ${inputValue.trim()}`
                       : 'Type to add new option'}
