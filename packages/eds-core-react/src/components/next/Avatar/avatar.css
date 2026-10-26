@@ -112,41 +112,41 @@
   }
 
   .eds-avatar-name-label {
-    display: flex;
+    /* label.*, not trimmed (ADR-0029) */
+    --_font-family: var(--eds-font-family-ui);
 
-    /* Gap between avatar+content block and slot-right — horizontal arrangement */
-    gap: var(--eds-container-gap-horizontal);
+    display: flex;
+    gap: var(--eds-spacing-md);
     align-items: center;
-    font-family: var(--eds-typography-ui-body-font-family);
+
+    font-family: var(--_font-family);
+    font-weight: var(--eds-font-weight-normal);
 
     & .content {
       display: flex;
       flex: 1 0 0;
-      gap: var(--eds-selectable-space-horizontal);
+      gap: var(--eds-spacing-xs);
       align-items: center;
 
       min-width: 0;
     }
 
+    /* Horizontal: name and meta stacked with no gap between them */
     & .names {
       display: flex;
       flex: 1 0 0;
       flex-direction: column;
-
-      /* Column layout: use vertical spacing between stacked name and email */
-      gap: var(--eds-selectable-space-vertical);
       justify-content: center;
 
       min-width: 0;
 
-      font-size: var(--eds-typography-ui-body-xs-font-size);
       font-feature-settings: 'lnum', 'tnum';
-      line-height: var(--eds-typography-ui-body-xs-line-height-default);
     }
 
+    /* Vertical: name and meta side by side on one line */
     &[data-layout='vertical'] {
       /* Both blocks stay shrinkable (flex: initial keeps flex-shrink at 1) so a
-         long name or email truncates instead of pushing past the container. */
+         long name or meta truncates instead of pushing past the container. */
       & .content {
         flex: initial;
       }
@@ -154,9 +154,7 @@
       & .names {
         flex: initial;
         flex-direction: row;
-
-        /* Row layout: use horizontal spacing between inline name and email */
-        gap: var(--eds-selectable-space-horizontal);
+        gap: var(--eds-spacing-xs);
         align-items: center;
 
         white-space: nowrap;
@@ -165,33 +163,22 @@
 
     & .full-name,
     & .meta {
-      /* Ellipsis requires a non-visible overflow. `clip` rather than `hidden`
-         so overflow-clip-margin can widen the paint region — see @supports. */
-      overflow: clip;
+      overflow: hidden;
       min-width: 0;
       text-overflow: ellipsis;
-
-      @supports (text-box: trim-both cap alphabetic) {
-        /* Trimming to the alphabetic baseline ends the content box at the
-           baseline, leaving descenders (g, y, p) outside it — overflow would
-           shear them. Widening the clip region keeps them painted. This is a
-           paint-only property, so it does not change layout or height.
-           0.3em clears the font's full declared descent (0.286em in Inter at
-           10.5px); 0.25em left under half a pixel of headroom. */
-        overflow-clip-margin: 0.3em;
-
-        text-box: trim-both cap alphabetic;
-      }
+      overflow-wrap: break-word;
     }
 
     & .full-name {
-      color: var(--eds-color-text-strong);
-      overflow-wrap: break-word;
+      font-size: var(--eds-typography-label-sm-font-size);
+      line-height: var(--eds-typography-label-sm-line-height);
+      color: var(--eds-text-primary);
     }
 
     & .meta {
-      color: var(--eds-color-text-subtle);
-      overflow-wrap: break-word;
+      font-size: var(--eds-typography-label-xs-font-size);
+      line-height: var(--eds-typography-label-xs-line-height);
+      color: var(--eds-text-secondary);
     }
 
     & .slot-right {
