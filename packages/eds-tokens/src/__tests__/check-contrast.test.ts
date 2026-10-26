@@ -3,7 +3,7 @@ import * as fs from 'node:fs'
 import * as os from 'node:os'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { describe, it, expect, afterAll } from 'vitest'
+import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { semantic as committedLight } from '../tokens/ts/semantic/light'
 import { semantic as committedDark } from '../tokens/ts/semantic/dark'
 
@@ -14,9 +14,13 @@ import { semantic as committedDark } from '../tokens/ts/semantic/dark'
  *
  * The first case runs the check over the committed TS modules, so a
  * hand edit or a merge that breaks the minimum fails CI without a
- * release run. The other cases change one value in a copy of the
- * committed modules, so each of them tests one rule against the full
- * pairing list.
+ * release run. It asserts nothing about the values themselves: the
+ * Tokens Studio release PR gets no CI, so a test that pinned today's
+ * colours would break every later PR after a release moved them.
+ *
+ * The other cases set the colours they test in a copy of the committed
+ * modules and assert on those, so each one tests one rule against the
+ * full pairing list.
  */
 
 const packageRoot = path.resolve(
@@ -87,6 +91,8 @@ const remove = (tree: Tree, keyPath: string) => {
   delete parent[last]
 }
 
+const accentSelected = 'background.interactive.accent.selected'
+
 describe('check-contrast', () => {
   afterAll(() => {
     for (const root of tempRoots)
@@ -94,10 +100,12 @@ describe('check-contrast', () => {
   })
 
   describe('the committed tokens', () => {
-    const result = run(path.join(packageRoot, 'src/tokens/ts'))
+    let result: RunResult
+    beforeAll(() => {
+      result = run(path.join(packageRoot, 'src/tokens/ts'))
+    })
 
     it('meet the minimum on every documented pair outside the exceptions', () => {
-      expect(result.stderr).toBe('')
       expect(result.status).toBe(0)
       expect(result.stdout).toContain('126 documented pairs')
     })
@@ -106,31 +114,19 @@ describe('check-contrast', () => {
       // ADR-0016 Confirmation 5: the canvas is not a reference backdrop
       expect(result.stdout).not.toContain('background.canvas')
     })
-
-    it('report the documented exceptions with their measured values', () => {
-      expect(result.stdout).toContain(
-        'dark   text.primary on background.interactive.accent.selected.hover  #f8fcff on #439199  3.54:1',
-      )
-      expect(result.stdout).toContain(
-        'light  text.tertiary on background.surface  #a4a4a4 on #ffffff  2.49:1',
-      )
-    })
-
-    it('mark the APCA targets that the docs do not give', () => {
-      expect(result.stdout).toContain(
-        'light  icon.primary on background.interactive.accent.selected.hover  #333333 on #6cb2b9  5.24:1 (minimum 3:1)  Lc 49.2 (target Lc 60, assumed)',
-      )
-    })
   })
 
   describe('a promised pair below the minimum', () => {
-    const result = runEdited(({ dark }) =>
-      set(
-        dark,
-        'text.onEmphasis.danger',
-        get(dark, 'background.interactive.danger.emphasis.default'),
-      ),
-    )
+    let result: RunResult
+    beforeAll(() => {
+      result = runEdited(({ dark }) =>
+        set(
+          dark,
+          'text.onEmphasis.danger',
+          get(dark, 'background.interactive.danger.emphasis.default'),
+        ),
+      )
+    })
 
     it('fails the run', () => {
       expect(result.status).toBe(1)
@@ -143,36 +139,95 @@ describe('check-contrast', () => {
     })
   })
 
-  it('fails on tertiary in dark, which the exception does not cover', () => {
-    const result = runEdited(({ dark }) =>
-      set(dark, 'text.tertiary', get(dark, 'background.surface')),
-    )
-    expect(result.status).toBe(1)
-    expect(result.stderr).toContain(
-      'dark   text.tertiary on background.surface',
-    )
+  describe('the documented exceptions', () => {
+    it('reports a listed pair below the minimum without failing', () => {
+      // Near-white text on #439199 is about 3.5:1: below 4.5:1 for text,
+      // above 3:1 for the unlisted icon.primary on the same fill
+      const result = runEdited(({ dark }) =>
+        set(dark, `${accentSelected}.hover`, '#439199'),
+      )
+      expect(result.status).toBe(0)
+      expect(result.stdout).toMatch(
+        /Documented exceptions below the minimum[\s\S]*dark {3}text\.primary on background\.interactive\.accent\.selected\.hover {2}#[0-9a-f]{6} on #439199 {2}\d\.\d{2}:1 \(minimum 4\.5:1\)[^\n]*\[primary on accent selected\]/,
+      )
+    })
+
+    it('fails on a state the docs do not list as an exception', () => {
+      // Light hover is not listed: dark text on #3c959e is about 3.6:1
+      const result = runEdited(({ light }) =>
+        set(light, `${accentSelected}.hover`, '#3c959e'),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        'light  text.primary on background.interactive.accent.selected.hover',
+      )
+    })
+
+    it('fails on tertiary in dark, which the exception does not cover', () => {
+      const result = runEdited(({ dark }) =>
+        set(dark, 'text.tertiary', get(dark, 'background.surface')),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        'dark   text.tertiary on background.surface',
+      )
+    })
+
+    it('fails on a selected fill that no exception lists', () => {
+      const result = runEdited(({ light }) =>
+        set(
+          light,
+          'background.interactive.neutral.selected.default',
+          '#333333',
+        ),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        'light  text.primary on background.interactive.neutral.selected.default',
+      )
+    })
+
+    it('warns for each listed pair that now meets the minimum, and still passes', () => {
+      const result = runEdited(({ light, dark }) => {
+        set(light, 'text.tertiary', '#595959')
+        set(dark, `${accentSelected}.hover`, '#1f2626')
+      })
+      expect(result.status).toBe(0)
+      expect(result.stderr).toContain('now meet the minimum')
+      expect(result.stderr).toMatch(
+        /light {2}text\.tertiary on background\.surface {2}#595959 on #[0-9a-f]{6}[^\n]*\[tertiary in light\]/,
+      )
+      expect(result.stderr).toMatch(
+        /dark {3}text\.primary on background\.interactive\.accent\.selected\.hover {2}#[0-9a-f]{6} on #1f2626[^\n]*\[primary on accent selected\]/,
+      )
+      // icon.tertiary was not changed, so it is still an exception
+      expect(result.stderr).not.toContain('icon.tertiary')
+    })
   })
 
-  it('fails on a selected fill outside accent hover and pressed', () => {
-    const result = runEdited(({ light }) =>
-      set(light, 'background.interactive.neutral.selected.default', '#333333'),
-    )
-    expect(result.status).toBe(1)
-    expect(result.stderr).toContain(
-      'light  text.primary on background.interactive.neutral.selected.default',
-    )
-  })
+  describe('a pair below its APCA target', () => {
+    let result: RunResult
+    beforeAll(() => {
+      // Light grey on the near-black dark surface is above 4.5:1 but far
+      // below Lc 60
+      result = runEdited(({ dark }) => {
+        set(dark, 'text.secondary', '#7a7a7a')
+        set(dark, 'icon.secondary', '#7a7a7a')
+      })
+    })
 
-  it('reports a pair below its APCA target without failing', () => {
-    // Light text on a dark fill can pass 4.5:1 well under Lc 60: dark
-    // tertiary measures 5.48:1 on the surface at Lc 36.5
-    const result = runEdited(({ dark }) =>
-      set(dark, 'text.secondary', get(dark, 'text.tertiary')),
-    )
-    expect(result.status).toBe(0)
-    expect(result.stdout).toMatch(
-      /Below the APCA target[\s\S]*dark {3}text\.secondary on background\.surface {2}#738696 on #030303 {2}5\.48:1 \(minimum 4\.5:1\) {2}Lc 36\.5 \(target Lc 60\)/,
-    )
+    it('is reported without failing', () => {
+      expect(result.status).toBe(0)
+      expect(result.stdout).toMatch(
+        /Below the APCA target[\s\S]*dark {3}text\.secondary on background\.surface {2}#7a7a7a on #[0-9a-f]{6} {2}\d+\.\d{2}:1 \(minimum 4\.5:1\) {2}Lc [\d.]+ \(target Lc 60\)/,
+      )
+    })
+
+    it('marks the targets that the docs do not give', () => {
+      expect(result.stdout).toMatch(
+        /dark {3}icon\.secondary on background\.surface {2}#7a7a7a on #[0-9a-f]{6}[^\n]*\(target Lc 60, assumed\)/,
+      )
+    })
   })
 
   it('fails when a documented token is missing', () => {
@@ -187,15 +242,6 @@ describe('check-contrast', () => {
     )
     expect(result.status).toBe(1)
     expect(result.stderr).toContain('not an opaque #rrggbb colour')
-  })
-
-  it('warns, and still passes, when an exception is no longer needed', () => {
-    const result = runEdited(({ light }) => {
-      set(light, 'text.tertiary', '#595959')
-      set(light, 'icon.tertiary', '#595959')
-    })
-    expect(result.status).toBe(0)
-    expect(result.stderr).toContain('"tertiary in light" exception')
   })
 
   it('fails with a hint when the TS modules are missing', () => {
