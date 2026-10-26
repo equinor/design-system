@@ -226,7 +226,6 @@
     --eds-border-interactive-accent-emphasis-hover
   );
   --border-color-disabled: var(--eds-border-interactive-disabled);
-  --border-color-selected: var(--eds-border-interactive-selected-indicator);
   --border-color-accent: var(--eds-border-non-interactive-accent-default);
   --border-color-accent-emphasis: var(
     --eds-border-non-interactive-accent-emphasis
