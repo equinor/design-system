@@ -1,129 +1,131 @@
-/* Demo-specific styles for Spacing stories */
+/* Demo styles for the Spacing stories. Every space and radius below reads a
+   beta token, so the demos follow data-density the way consumer CSS does.
+   The fixed rem sizes are demo dimensions that no token covers. */
 
-.spacing-demo-box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--eds-color-bg-accent-fill-muted-default);
-  border: 1px solid var(--eds-color-border-accent-medium);
-  color: var(--eds-color-text-accent-strong);
-  text-align: center;
-  white-space: nowrap;
-  width: fit-content;
-  min-width: 80px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
+.spacing-story {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
 
-.spacing-demo-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
+  & p,
+  & figure {
+    margin: 0;
+  }
 
-.spacing-demo-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
-}
+  & code {
+    font-family: monospace;
+    font-size: var(--eds-typography-label-sm-font-size);
+  }
 
-.spacing-demo-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+  & .value {
+    font-variant-numeric: tabular-nums;
+    color: var(--eds-text-secondary);
+  }
 
-.spacing-demo-label {
-  font-size: 0.875rem;
-  color: var(--eds-color-text-neutral-strong);
-  font-family: monospace;
-}
+  /* Steps: one row per step, with the bar as wide as the step */
+  & .steps {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    gap: var(--eds-spacing-xs) var(--eds-spacing-md);
+    align-items: center;
 
-.spacing-demo-section {
-  margin-bottom: 3rem;
-}
+    margin: 0;
+    padding: 0;
 
-/* Selectable space examples */
-.selectable-space-box {
-  padding: var(--eds-selectable-space-vertical)
-    var(--eds-selectable-space-horizontal);
-}
+    list-style: none;
+  }
 
-/* Container space examples */
-.container-space-box {
-  padding: var(--eds-container-space-vertical)
-    var(--eds-container-space-horizontal);
-}
+  & .step {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+  }
 
-/* Page space examples */
-.page-space-box {
-  padding: var(--eds-page-space-vertical) var(--eds-page-space-horizontal);
-}
+  & .bar {
+    block-size: var(--eds-spacing-sm);
+    background-color: var(--eds-background-non-interactive-accent-emphasis);
+  }
 
-/* Generic gap examples */
-.generic-gap-horizontal {
-  display: flex;
-  flex-direction: row;
-  gap: 0 var(--eds-generic-gap-horizontal);
-}
+  /* Densities: the same card under three density attributes */
+  &.densities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-spacing-xl);
+    align-items: flex-start;
+  }
 
-.generic-gap-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-generic-gap-vertical) 0;
-}
+  & .density {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-xs);
+    max-inline-size: 18rem;
+  }
 
-.generic-gap-both {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--eds-generic-gap-vertical) var(--eds-generic-gap-horizontal);
-}
+  /* The card used in the density and CSS examples */
+  & .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-sm);
 
-/* Generic space examples */
-.generic-space-horizontal {
-  padding-left: var(--eds-generic-space-horizontal);
-  padding-right: var(--eds-generic-space-horizontal);
-}
+    max-inline-size: 28rem;
+    padding: var(--eds-spacing-md);
+    border: 1px solid var(--eds-border-non-interactive-neutral-default);
+    border-radius: var(--eds-corner-radius-rounded);
 
-.generic-space-vertical {
-  padding-top: var(--eds-generic-space-vertical);
-  padding-bottom: var(--eds-generic-space-vertical);
-}
+    background-color: var(--eds-background-surface);
+  }
 
-.generic-space-both {
-  padding: var(--eds-generic-space-vertical) var(--eds-generic-space-horizontal);
-}
+  & .title {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-md-font-size);
+    line-height: var(--eds-typography-header-md-line-height);
+  }
 
-/* Fixed gap examples */
-.selectable-gap-example {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
-}
+  & .text {
+    color: var(--eds-text-secondary);
+  }
 
-.container-gap-example {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
-}
+  /* Direction is the property: a wider inline padding than block padding */
+  & .notice {
+    padding-block: var(--eds-spacing-xs);
+    padding-inline: var(--eds-spacing-sm);
+    border-radius: var(--eds-corner-radius-rounded);
 
-.page-gap-example {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-page-gap-vertical) var(--eds-page-gap-horizontal);
-}
+    color: var(--eds-text-on-muted-info);
 
-/* Small box for gap demonstrations */
-.spacing-demo-small-box {
-  width: 60px;
-  height: 40px;
-  background-color: var(--eds-color-bg-info-fill-muted-default);
-  border: 1px solid var(--eds-color-border-info-medium);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  color: var(--eds-color-text-info-strong);
+    background-color: var(--eds-background-non-interactive-info-muted);
+  }
+
+  & .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-spacing-sm);
+  }
+
+  /* Corner radius */
+  &.radii {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-spacing-xl);
+  }
+
+  & .radius {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-xs);
+  }
+
+  & .radius figcaption {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .shape {
+    inline-size: 6rem;
+    block-size: 3rem;
+    border: 1px solid var(--eds-border-non-interactive-accent-default);
+    background-color: var(--eds-background-non-interactive-accent-muted);
+  }
 }

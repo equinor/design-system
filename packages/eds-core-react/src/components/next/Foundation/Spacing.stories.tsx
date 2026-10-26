@@ -1,10 +1,10 @@
+import { useEffect, useRef, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from '../Button'
+import page from './Spacing.docs.mdx'
 import './Spacing.stories.css'
 
-const SELECTABLE_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
-const PROPORTIONS = ['squished', 'squared', 'stretched'] as const
-const DENSITIES = ['spacious', 'comfortable'] as const
-const GENERIC_SIZES = [
+const STEPS = [
   'none',
   '4xs',
   '3xs',
@@ -16,634 +16,181 @@ const GENERIC_SIZES = [
   'xl',
   '2xl',
   '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl',
+  '8xl',
+  '9xl',
 ] as const
 
-const meta: Meta = {
+// rounded-outer is left out on purpose: it exists for Figma focus rings,
+// and CSS derives the ring radius from border-radius and outline-offset.
+const RADII = ['none', 'rounded', 'pill'] as const
+
+const DENSITIES = ['compact', 'comfortable', 'relaxed'] as const
+
+type Density = (typeof DENSITIES)[number]
+
+type Args = {
+  density: Density
+}
+
+// Comfortable is the default in the beta bundle (declared on :root), so the
+// stories leave the attribute off for it instead of writing
+// data-density="comfortable". Both give the same values.
+const densityAttribute = (density: Density) =>
+  density === 'comfortable' ? undefined : density
+
+const densityLabel = (density: Density) =>
+  density === 'comfortable'
+    ? 'No attribute (Comfortable)'
+    : `data-density="${density}"`
+
+const densityArgTypes: Meta<Args>['argTypes'] = {
+  density: {
+    control: 'radio',
+    options: DENSITIES,
+    description:
+      'Sets `data-density` on the story wrapper. Comfortable is the default, so the story sets no attribute for it.',
+  },
+}
+
+type TokenValueProps = {
+  /** The custom property to read, such as `--eds-spacing-md` */
+  name: string
+  /** The density the value sits in. It is only used to read the value
+   * again when the density changes, because the attribute is set on an
+   * ancestor that React does not track for this element. */
+  density?: Density
+}
+
+/** Prints the value a custom property resolves to where this element sits. */
+const TokenValue = ({ name, density }: TokenValueProps) => {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (!ref.current) return
+    setValue(getComputedStyle(ref.current).getPropertyValue(name).trim())
+  }, [name, density])
+
+  return (
+    <span ref={ref} className="value">
+      {value}
+    </span>
+  )
+}
+
+const meta: Meta<Args> = {
   title: 'EDS 2.0 (beta)/Foundation/Spacing',
   parameters: {
-    docs: {
-      description: {
-        component: `
-
-The Equinor Design System provides a comprehensive spacing system using CSS custom properties (variables) controlled by data attributes.
-
-### Selectable Space
-
-Padding for interactive elements like buttons. Uses \`--eds-selectable-space-horizontal\` and \`--eds-selectable-space-vertical\`.
-
-**Controlled by:**
-- \`data-selectable-space\`: xs, sm, md, lg, xl (default: xs)
-- \`data-space-proportions\`: squished, squared, stretched (default: squared)
-- \`data-density\`: spacious, comfortable (default: spacious)
-
-\`\`\`css
-.my-button {
-  padding: var(--eds-selectable-space-vertical) var(--eds-selectable-space-horizontal);
-}
-\`\`\`
-
-\`\`\`html
-  <button class="my-button" data-selectable-space="md" data-space-proportions="squished">Button</button>
-\`\`\`
-
-### Container Space
-
-Padding for container elements. Uses \`--eds-container-space-horizontal\` and \`--eds-container-space-vertical\`.
-
-**Controlled by:**
-- \`data-space-proportions\`: squished, squared, stretched (default: squared)
-
-Fixed at md size (1rem horizontal in spacious mode).
-
-\`\`\`css
-.my-container {
-  padding: var(--eds-container-space-vertical) var(--eds-container-space-horizontal);
-}
-\`\`\`
-
-### Page Space
-
-Padding for page-level elements. Uses \`--eds-page-space-horizontal\` and \`--eds-page-space-vertical\`.
-
-**Controlled by:**
-- \`data-space-proportions\`: squished, squared, stretched (default: squared)
-
-Fixed at xl size (1.5rem horizontal in spacious mode).
-
-\`\`\`css
-.my-page {
-  padding: var(--eds-page-space-vertical) var(--eds-page-space-horizontal);
-}
-\`\`\`
-
-### Generic Space
-
-Flexible padding/margin spacing. Uses \`--eds-generic-space-horizontal\` and \`--eds-generic-space-vertical\`.
-
-**Controlled by:**
-- \`data-horizontal-space\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
-- \`data-vertical-space\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
-
-\`\`\`css
-.my-element {
-  padding: var(--eds-generic-space-vertical) var(--eds-generic-space-horizontal);
-}
-\`\`\`
-
-### Generic Gap
-
-Flexible gap spacing for layout containers. Uses \`--eds-generic-gap-horizontal\` and \`--eds-generic-gap-vertical\`.
-
-**Controlled by:**
-- \`data-horizontal-gap\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
-- \`data-vertical-gap\`: none, 4xs, 3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl (default: xs)
-
-\`\`\`css
-.my-flex-container {
-  display: flex;
-  gap: var(--eds-generic-gap-vertical) var(--eds-generic-gap-horizontal);
-}
-\`\`\`
-
-
-### Selectable, Container, and Page Gap
-
-Pre-configured gap values for selectable, container, and page level elements:
-
-- \`--eds-selectable-gap-horizontal/vertical\`: xs spacing (0.5rem)
-- \`--eds-container-gap-horizontal/vertical\`: md spacing (1rem)
-- \`--eds-page-gap-horizontal/vertical\`: xl spacing (1.5rem)
-
-\`\`\`css
-.button-group {
-  display: flex;
-  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
-}
-\`\`\`
-        `,
-      },
-    },
+    docs: { page },
   },
 }
 
 export default meta
 
-export const SelectableSpace: StoryObj = {
-  render: () => {
-    return (
-      <div>
-        <h2>Selectable Space</h2>
-        <p>
-          Padding that responds to size, proportions, and density. Use for
-          interactive elements like buttons and inputs.
-        </p>
+type Story = StoryObj<Args>
 
-        {DENSITIES.map((density) => (
-          <div key={density} className="spacing-demo-section">
-            <h3>Density: {density}</h3>
-            <div data-density={density}>
-              {SELECTABLE_SIZES.map((size) => (
-                <div key={size} className="spacing-demo-container">
-                  <h4>Size: {size.toUpperCase()}</h4>
-                  <div className="spacing-demo-row">
-                    {PROPORTIONS.map((proportion) => (
-                      <div key={proportion} className="spacing-demo-item">
-                        <div className="spacing-demo-label">{proportion}</div>
-                        <div
-                          data-selectable-space={size}
-                          data-space-proportions={proportion}
-                        >
-                          <div className="spacing-demo-box selectable-space-box">
-                            Content
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+export const Steps: Story = {
+  args: {
+    density: 'comfortable',
+  },
+  argTypes: densityArgTypes,
+  render: ({ density }) => (
+    <div className="spacing-story" data-density={densityAttribute(density)}>
+      <ul className="steps">
+        {STEPS.map((step) => (
+          <li key={step} className="step">
+            <code>--eds-spacing-{step}</code>
+            <span
+              className="bar"
+              aria-hidden="true"
+              style={{ inlineSize: `var(--eds-spacing-${step})` }}
+            />
+            <TokenValue name={`--eds-spacing-${step}`} density={density} />
+          </li>
         ))}
-      </div>
-    )
-  },
-}
-
-export const ContainerSpace: StoryObj = {
-  render: () => {
-    return (
-      <div>
-        <h2>Container Space</h2>
-        <p>
-          Fixed md-sized padding that responds to proportions. Use for general
-          containers.
-        </p>
-
-        <div className="spacing-demo-section">
-          <div className="spacing-demo-row">
-            {PROPORTIONS.map((proportion) => (
-              <div data-space-proportions={proportion} key={proportion}>
-                <div className="spacing-demo-item">
-                  <div className="spacing-demo-label">{proportion}</div>
-                  <div className="spacing-demo-box container-space-box">
-                    Container
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <details style={{ marginTop: '2rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS Example
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-              overflow: 'auto',
-            }}
-          >
-            {`.my-container {
-  padding: var(--eds-container-space-vertical) var(--eds-container-space-horizontal);
-}
-
-<div data-space-proportions="squished">
-  <div class="my-container">Content</div>
-</div>`}
-          </pre>
-        </details>
-      </div>
-    )
-  },
-}
-
-export const PageSpace: StoryObj = {
-  render: () => {
-    return (
-      <div>
-        <h2>Page Space</h2>
-        <p>
-          Fixed xl-sized padding that responds to proportions. Use for
-          page-level layouts.
-        </p>
-
-        <div className="spacing-demo-section">
-          <div className="spacing-demo-row">
-            {PROPORTIONS.map((proportion) => (
-              <div
-                key={proportion}
-                className="spacing-demo-item"
-                data-space-proportions={proportion}
-              >
-                <div className="spacing-demo-label">{proportion}</div>
-                <div className="spacing-demo-box page-space-box">Page</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <details style={{ marginTop: '2rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS Example
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-              overflow: 'auto',
-            }}
-          >
-            {`.my-page {
-  padding: var(--eds-page-space-vertical) var(--eds-page-space-horizontal);
-}
-
-<div data-space-proportions="squared">
-  <main class="my-page">Page content</main>
-</div>`}
-          </pre>
-        </details>
-      </div>
-    )
-  },
-}
-
-export const SelectableContainerPageGap: StoryObj = {
-  render: () => (
-    <div>
-      <h2>Selectable, Container, and Page Gap</h2>
-      <p>
-        Pre-configured gap values for selectable, container, and page level
-        elements. These are fixed values and don&apos;t require data attributes.
-      </p>
-
-      <div className="spacing-demo-section">
-        <h3>Selectable Gap (xs = 0.5rem)</h3>
-        <p>Use for groups of buttons or interactive elements.</p>
-        <div className="selectable-gap-example">
-          <div className="spacing-demo-small-box">Button 1</div>
-          <div className="spacing-demo-small-box">Button 2</div>
-          <div className="spacing-demo-small-box">Button 3</div>
-          <div className="spacing-demo-small-box">Button 4</div>
-        </div>
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-            }}
-          >
-            {`.button-group {
-  display: flex;
-  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
-}`}
-          </pre>
-        </details>
-      </div>
-
-      <div className="spacing-demo-section">
-        <h3>Container Gap (md = 1rem)</h3>
-        <p>Use for general container layouts.</p>
-        <div className="container-gap-example">
-          <div className="spacing-demo-box">Section 1</div>
-          <div className="spacing-demo-box">Section 2</div>
-          <div className="spacing-demo-box">Section 3</div>
-        </div>
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-            }}
-          >
-            {`.container-layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
-}`}
-          </pre>
-        </details>
-      </div>
-
-      <div className="spacing-demo-section">
-        <h3>Page Gap (xl = 1.5rem)</h3>
-        <p>Use for page-level layouts with larger spacing.</p>
-        <div className="page-gap-example">
-          <div className="spacing-demo-box">Page Section 1</div>
-          <div className="spacing-demo-box">Page Section 2</div>
-          <div className="spacing-demo-box">Page Section 3</div>
-        </div>
-        <details style={{ marginTop: '1rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-            }}
-          >
-            {`.page-layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-page-gap-vertical) var(--eds-page-gap-horizontal);
-}`}
-          </pre>
-        </details>
-      </div>
+      </ul>
     </div>
   ),
 }
 
-export const GenericGap: StoryObj = {
-  render: () => {
-    return (
-      <div>
-        <h2>Generic Gap</h2>
-        <p>
-          Flexible gap spacing controlled by data attributes. Use for layout
-          containers with CSS gap property.
-        </p>
-
-        <div className="spacing-demo-section">
-          <h3>Horizontal Gap</h3>
-          <div className="spacing-demo-container">
-            {GENERIC_SIZES.map((size) => (
-              <div key={size} className="spacing-demo-item">
-                <div className="spacing-demo-label">
-                  data-horizontal-gap=&quot;{size}&quot;
-                </div>
-                <div
-                  data-horizontal-gap={size}
-                  className="generic-gap-horizontal"
-                >
-                  <div className="spacing-demo-small-box">A</div>
-                  <div className="spacing-demo-small-box">B</div>
-                  <div className="spacing-demo-small-box">C</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="spacing-demo-section">
-          <h3>Vertical Gap</h3>
-          <div className="spacing-demo-row">
-            {GENERIC_SIZES.map((size) => (
-              <div key={size} className="spacing-demo-item">
-                <div className="spacing-demo-label">
-                  data-vertical-gap=&quot;{size}&quot;
-                </div>
-                <div data-vertical-gap={size} className="generic-gap-vertical">
-                  <div className="spacing-demo-small-box">A</div>
-                  <div className="spacing-demo-small-box">B</div>
-                  <div className="spacing-demo-small-box">C</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <details style={{ marginTop: '2rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS Example
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-              overflow: 'auto',
-            }}
-          >
-            {`.my-flex-container {
-  display: flex;
-  gap: var(--eds-generic-gap-vertical) var(--eds-generic-gap-horizontal);
-}
-
-<div data-horizontal-gap="md" data-vertical-gap="lg">
-  <div class="my-flex-container">
-    <div>Item 1</div>
-    <div>Item 2</div>
-  </div>
-</div>`}
-          </pre>
-        </details>
-      </div>
-    )
-  },
-}
-
-export const GenericSpace: StoryObj = {
-  render: () => {
-    return (
-      <div>
-        <h2>Generic Space</h2>
-        <p>
-          Flexible padding/margin spacing controlled by data attributes. Use for
-          custom spacing needs.
-        </p>
-
-        <div className="spacing-demo-section">
-          <h3>Horizontal Space</h3>
-          <div className="spacing-demo-container">
-            {GENERIC_SIZES.map((size) => (
-              <div key={size} className="spacing-demo-item">
-                <div className="spacing-demo-label">
-                  data-horizontal-space=&quot;{size}&quot;
-                </div>
-                <div data-horizontal-space={size}>
-                  <div className="spacing-demo-box generic-space-horizontal">
-                    Content
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="spacing-demo-section">
-          <h3>Vertical Space</h3>
-          <div className="spacing-demo-row">
-            {GENERIC_SIZES.map((size) => (
-              <div key={size} className="spacing-demo-item">
-                <div className="spacing-demo-label">
-                  data-vertical-space=&quot;{size}&quot;
-                </div>
-                <div data-vertical-space={size}>
-                  <div className="spacing-demo-box generic-space-vertical">
-                    Content
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <details style={{ marginTop: '2rem' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-            View CSS Example
-          </summary>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '1rem',
-              borderRadius: '4px',
-              overflow: 'auto',
-            }}
-          >
-            {`.my-element {
-  padding: var(--eds-generic-space-vertical) var(--eds-generic-space-horizontal);
-}
-
-<div data-horizontal-space="lg" data-vertical-space="md">
-  <div class="my-element">Content</div>
-</div>`}
-          </pre>
-        </details>
-      </div>
-    )
-  },
-}
-
-export const Example: StoryObj = {
+export const Densities: Story = {
   render: () => (
-    <div>
-      <h2>Example: Button with Card Layout</h2>
-      <p>
-        Combining different spacing concepts for a complete component example.
-      </p>
-
-      <div
-        data-space-proportions="squared"
-        style={{
-          maxWidth: '600px',
-          backgroundColor: 'var(--eds-color-bg-neutral-surface)',
-          border: '1px solid var(--eds-color-border-neutral-medium)',
-          borderRadius: '4px',
-        }}
-      >
-        <div
-          style={{
-            padding:
-              'var(--eds-container-space-vertical) var(--eds-container-space-horizontal)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal)',
-          }}
+    <div className="spacing-story densities">
+      {DENSITIES.map((density) => (
+        <figure
+          key={density}
+          className="density"
+          data-density={densityAttribute(density)}
         >
-          <div>
-            <h3 style={{ margin: 0, marginBottom: '0.5rem' }}>Card Title</h3>
-            <p
-              style={{
-                margin: 0,
-                color: 'var(--eds-color-text-neutral-subtle)',
-              }}
-            >
-              This card uses container space for padding and container gap for
-              vertical spacing between elements.
+          <figcaption>
+            <code>{densityLabel(density)}</code>
+          </figcaption>
+          <div className="card">
+            <p className="title">Pressure readings</p>
+            <p className="text">
+              Padding <code>--eds-spacing-md</code> is{' '}
+              <TokenValue name="--eds-spacing-md" density={density} />, and the
+              gap <code>--eds-spacing-sm</code> is{' '}
+              <TokenValue name="--eds-spacing-sm" density={density} />.
             </p>
+            <div className="actions">
+              <Button variant="primary">Open</Button>
+              <Button variant="secondary">Dismiss</Button>
+            </div>
           </div>
+        </figure>
+      ))}
+    </div>
+  ),
+}
 
-          <div
-            style={{
-              display: 'flex',
-              gap: 'var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal)',
-            }}
-            data-selectable-space="md"
-            data-space-proportions="squished"
-          >
-            <button
-              style={{
-                padding:
-                  'var(--eds-selectable-space-vertical) var(--eds-selectable-space-horizontal)',
-                backgroundColor:
-                  'var(--eds-color-bg-accent-fill-emphasis-default)',
-                color: 'var(--eds-color-text-accent-strong-on-emphasis)',
-                border: '1px solid var(--eds-color-border-accent-strong)',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontWeight: 500,
-              }}
-            >
-              Primary Action
-            </button>
-            <button
-              style={{
-                padding:
-                  'var(--eds-selectable-space-vertical) var(--eds-selectable-space-horizontal)',
-                backgroundColor: 'var(--eds-color-bg-neutral-surface)',
-                color: 'var(--eds-color-text-neutral-strong)',
-                border: '1px solid var(--eds-color-border-neutral-medium)',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
-            >
-              Cancel
-            </button>
-          </div>
+export const InCss: Story = {
+  name: 'Using the steps in CSS',
+  render: () => (
+    <div className="spacing-story">
+      <article className="card">
+        <p className="title">Pressure readings</p>
+        <p className="text">Updated twelve minutes ago from 48 sensors.</p>
+        <p className="notice">Two sensors have not reported since yesterday.</p>
+        <div className="actions">
+          <Button variant="primary">Open report</Button>
+          <Button variant="secondary">Dismiss</Button>
         </div>
-      </div>
-
-      <details style={{ marginTop: '2rem' }}>
-        <summary style={{ cursor: 'pointer', fontWeight: 500 }}>
-          View Complete Code
-        </summary>
-        <pre
-          style={{
-            background: '#f5f5f5',
-            padding: '1rem',
-            borderRadius: '4px',
-            overflow: 'auto',
-          }}
-        >
-          {`<div data-space-proportions="squared" class="card">
-  <div class="card-content">
-    <div>
-      <h3>Card Title</h3>
-      <p>Description text</p>
+      </article>
     </div>
-    
-    <div class="button-group" data-selectable-space="md" data-space-proportions="squished">
-      <button class="primary-button">Primary Action</button>
-      <button class="secondary-button">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<style>
-.card-content {
-  padding: var(--eds-container-space-vertical) var(--eds-container-space-horizontal);
-  display: flex;
-  flex-direction: column;
-  gap: var(--eds-container-gap-vertical) var(--eds-container-gap-horizontal);
+  ),
 }
 
-.button-group {
-  display: flex;
-  gap: var(--eds-selectable-gap-vertical) var(--eds-selectable-gap-horizontal);
-}
-
-.primary-button,
-.secondary-button {
-  padding: var(--eds-selectable-space-vertical) var(--eds-selectable-space-horizontal);
-}
-</style>`}
-        </pre>
-      </details>
+export const CornerRadius: Story = {
+  args: {
+    density: 'comfortable',
+  },
+  argTypes: densityArgTypes,
+  render: ({ density }) => (
+    <div
+      className="spacing-story radii"
+      data-density={densityAttribute(density)}
+    >
+      {RADII.map((radius) => (
+        <figure key={radius} className="radius">
+          <span
+            className="shape"
+            aria-hidden="true"
+            style={{ borderRadius: `var(--eds-corner-radius-${radius})` }}
+          />
+          <figcaption>
+            <code>--eds-corner-radius-{radius}</code>
+            <TokenValue
+              name={`--eds-corner-radius-${radius}`}
+              density={density}
+            />
+          </figcaption>
+        </figure>
+      ))}
     </div>
   ),
 }
