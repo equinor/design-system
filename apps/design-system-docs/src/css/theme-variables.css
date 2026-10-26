@@ -10,17 +10,26 @@
 /* ======================================
  * TOKEN + FONT IMPORTS
  * ====================================== */
+/* Cascade layers for the two token bundles. The site loads both, and they
+   share ten --eds-* names (--eds-elevation-low/high and the eight
+   --eds-typography-header-*-font-size) at equal specificity, so something
+   has to decide the winner. Layers do, rather than import order.
+
+   The Tokens Studio bundle ships wrapped in @layer eds-tokens (ADR-0028
+   point 6), and an unlayered stylesheet beats any layer — so left alone, the
+   legacy bundle would win all ten and silently pin the site to the legacy
+   flat shadow, which does not flip with the colour scheme. Putting legacy
+   in a lower layer restores the intended winner and makes it independent
+   of whatever order webpack emits the two imports in.
+
+   The statement must come before the @import rules: a layer statement is
+   one of the few things allowed to precede them. */
+@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;
+
 /* Legacy-pipeline token bundle — still required for --eds-container-space-*
    and for the embedded /next component previews, which consume legacy names.
-   Site styling must not reference legacy names directly.
-
-   It must stay FIRST: both bundles declare --eds-elevation-low/high at equal
-   specificity (legacy on `:root, [data-color-scheme="light"]`, Tokens Studio
-   on `[data-color-scheme]` — both 0,1,0), so the later import wins and the
-   Tokens Studio composite is what site CSS resolves. The two agree value for
-   value today, but only the Tokens Studio pair is composed from
-   --eds-shadow-* parts whose colours flip with the colour scheme. */
-@import '@equinor/eds-tokens/css/variables';
+   Site styling must not reference legacy names directly. */
+@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);
 
 /* Tokens Studio bundle (ADR-0011) — the source of truth for the site's own
    colour, typography and elevation tokens. Resolved via the eds-resolver
@@ -31,7 +40,7 @@
 @import 'https://cdn.eds.equinor.com/font/equinor-font.css';
 
 /* Inter is self-hosted (the Equinor CDN only serves the Equinor font).
-   Static weights register as family 'Inter', matching --eds-family-ui.
+   Static weights register as family 'Inter', matching --eds-font-family-ui.
 
    Latin subset only. The unsuffixed `NNN.css` entrypoints pull seven subsets
    each (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext,
@@ -57,52 +66,20 @@
   color-scheme: dark;
 }
 
-/* ======================================
- * SEMANTIC TYPOGRAPHY BRIDGE
- * Both token bundles declare the --eds-typography-header-*-font-size names
- * with different values, and webpack CSS ordering lets the legacy bundle's
- * :root declarations win. :root:root (specificity 0,2,0) outranks any single
- * :root, so these re-declarations pin the semantic names to the Tokens
- * Studio values (via the density layer, which still flips with
- * [data-density]). Site CSS must consume ONLY the semantic
- * --eds-typography-* names — never the density layer directly.
- * ====================================== */
-:root:root {
-  --eds-typography-header-xs-font-size: var(
-    --eds-density-typography-header-xs-font-size
-  );
-  --eds-typography-header-sm-font-size: var(
-    --eds-density-typography-header-sm-font-size
-  );
-  --eds-typography-header-md-font-size: var(
-    --eds-density-typography-header-md-font-size
-  );
-  --eds-typography-header-lg-font-size: var(
-    --eds-density-typography-header-lg-font-size
-  );
-  --eds-typography-header-xl-font-size: var(
-    --eds-density-typography-header-xl-font-size
-  );
-  --eds-typography-header-2xl-font-size: var(
-    --eds-density-typography-header-2xl-font-size
-  );
-  --eds-typography-header-3xl-font-size: var(
-    --eds-density-typography-header-3xl-font-size
-  );
-  --eds-typography-header-4xl-font-size: var(
-    --eds-density-typography-header-4xl-font-size
-  );
-}
+/* No typography bridge here: the layer statement above settles the
+   --eds-typography-header-*-font-size collision, so the Tokens Studio
+   semantic layer resolves. Site CSS consumes ONLY the semantic
+   --eds-typography-* names — never the density layer directly. */
 
 /* ======================================
  * INFIMA VARIABLE OVERRIDES
  * ====================================== */
 :root {
-  /* Typography — families come from the Tokens Studio font tokens */
-  --ifm-font-family-base:
-    var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
-  --ifm-heading-font-family:
-    var(--eds-font-family-header, 'Equinor'), system-ui, sans-serif;
+  /* Typography — families come from the Tokens Studio font tokens, which
+     carry the generic sans-serif fallback themselves since #5701, so the
+     site does not repeat one */
+  --ifm-font-family-base: var(--eds-font-family-ui);
+  --ifm-heading-font-family: var(--eds-font-family-header);
 
   /* Base text colour is left to Infima so it flips correctly in dark mode.
      (The EDS neutral-strong token resolves to a fixed dark value regardless of

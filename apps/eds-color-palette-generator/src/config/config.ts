@@ -27,7 +27,10 @@ const PRIMARY_ROLES: ReadonlyArray<{ role: string | null; label: string }> = [
   { role: 'background.interactive.accent.selected.default', label: 'selected' },
   { role: null, label: 'unused' },
   { role: 'border.non-interactive.<tone>.default', label: 'border' },
-  { role: 'text.secondary', label: 'text secondary' },
+  {
+    role: 'background.interactive.accent.selected.pressed',
+    label: 'selected pressed',
+  },
   { role: 'background.interactive.<tone>.emphasis.default', label: 'emphasis' },
   {
     role: 'background.interactive.<tone>.emphasis.hover',

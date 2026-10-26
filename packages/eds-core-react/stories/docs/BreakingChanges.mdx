@@ -179,13 +179,13 @@ EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 
 **Composition**: `Button.Group` and `Button.Toggle` have no EDS 2.0 counterpart yet. The toggle button is coming as its own component, not as a Button sub-component ([#5342](https://github.com/equinor/design-system/issues/5342), [#5343](https://github.com/equinor/design-system/issues/5343), [#5344](https://github.com/equinor/design-system/issues/5344), [#5345](https://github.com/equinor/design-system/issues/5345)). Whether `Button.Group` is in scope at all is still open ([#5503](https://github.com/equinor/design-system/issues/5503)).
 
-**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element.
+**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element. Icons that are direct children of the button are sized by it: `size` and the density set the icon size, and an `Icon`'s own `size` prop has no effect there.
 
 ## Checkbox
 
 EDS 1.0: `Checkbox`.
 
-**Props**: `label` accepts a ReactNode. `type` cannot be passed. New: `indicator`, `helperMessage`. `helperMessage` is planned for removal again, since helper text on selection controls is not an intended use case ([#5183](https://github.com/equinor/design-system/issues/5183)).
+**Props**: `label` accepts a ReactNode. `type` cannot be passed. New: `indicator`.
 
 **Markup**: with a `label`, the root changes from `<label>` to `<div class="eds-field eds-checkbox">`; without a label it is `<span class="eds-checkbox" data-standalone>`, where EDS 1.0 rendered the bare `<input>`. `className` and `style` land on that root and are merged with `eds-checkbox`, so `.your-class input` reaches the native checkbox. The icon is three SVGs with the classes `icon-checked`, `icon-unchecked` and `icon-indeterminate` instead of one swapped SVG. Indeterminate state sets `aria-checked="mixed"`, and the component also sets the native `indeterminate` property when `ref` is an object ref or omitted. With a callback ref, set the property yourself.
 
@@ -204,7 +204,7 @@ EDS 1.0: `Chip`.
 
 **Behaviour**: `onDelete` fires on a click anywhere on the chip and on Backspace or Delete, not only on the close icon and Enter. `onClick` is ignored when `onDelete` is set.
 
-**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. Use `Badge` for non-interactive labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` and `Avatar` elements are no longer resized automatically. The close icon title changes from `close` to `Remove`.
+**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. Use `Badge` for non-interactive labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` elements are sized by the chip, so an `Icon`'s own `size` prop has no effect there. Child `Avatar` elements are not resized. The close icon title changes from `close` to `Remove`.
 
 **Known issues**
 
@@ -313,7 +313,7 @@ EDS 1.0: `Menu` with `Menu.Item` and `Menu.Section`.
 
 EDS 1.0: `Radio`.
 
-**Props**: `label` accepts a ReactNode. `type` cannot be passed. Unlike Checkbox, Radio has no `indicator` or `helperMessage`.
+**Props**: `label` accepts a ReactNode. `type` cannot be passed. Unlike Checkbox, Radio has no `indicator`.
 
 **Markup**: with a `label`, the root changes from `<label>` to `<div class="eds-field eds-radio">`; without a label it is `<span class="eds-radio" data-standalone>`. `className` and `style` land on that root and are merged with `eds-radio`, so `.your-class input` reaches the native radio. The inline SVG with `path[name="selected"]` and `path[name="unselected"]` is replaced by two icons with the classes `icon-checked` and `icon-unchecked`. Density comes from `data-density` on an ancestor, not from `EdsProvider`.
 

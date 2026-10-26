@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { Button, Table } from '../../..'
 import { data } from '../../../stories/data'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import { Checkbox } from './Checkbox'
 import type { CheckboxProps } from './Checkbox.types'
 
@@ -47,7 +47,7 @@ const meta: Meta<typeof Checkbox> = {
     indeterminate: {
       control: 'boolean',
       description:
-        'Shows indeterminate state (partially checked). Useful for "select all" scenarios.',
+        'Shows the indeterminate state, for a parent checkbox whose children are only partly checked.',
       table: {
         category: 'States',
         defaultValue: { summary: 'false' },
@@ -155,26 +155,64 @@ export const Introduction: StoryFn<CheckboxProps> = (args) => {
   return <Checkbox {...args} />
 }
 
-export const Spacious: StoryFn<CheckboxProps> = () => (
-  <Wrapper data-density="spacious">
+export const Overview: StoryFn<CheckboxProps> = () => (
+  <Wrapper gap={8}>
+    <Checkbox label="Unchecked" />
+    <Checkbox label="Checked" defaultChecked />
+    <Checkbox label="Indeterminate" indeterminate />
+  </Wrapper>
+)
+
+export const States: StoryFn<CheckboxProps> = () => (
+  <Wrapper>
     <AllVariants />
   </Wrapper>
 )
 
-export const Comfortable: StoryFn<CheckboxProps> = () => (
-  <Wrapper data-density="comfortable">
-    <AllVariants />
-  </Wrapper>
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'A checkbox is unchecked, checked or indeterminate, and can be disabled in any of those states.',
+    },
+  },
+}
+
+export const Density: StoryFn<CheckboxProps> = () => (
+  <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
+    {(['spacious', 'comfortable'] as const).map((density) => (
+      <div key={density} data-density={density}>
+        <ExampleLabel>
+          {density.charAt(0).toUpperCase() + density.slice(1)}
+        </ExampleLabel>
+        <Wrapper gap={8}>
+          <Checkbox label="Email" defaultChecked />
+          <Checkbox label="SMS" />
+          <Checkbox label="Push" />
+          <Checkbox label="In-app" />
+        </Wrapper>
+      </div>
+    ))}
+  </div>
 )
 
-export const ColorSchemes: StoryFn<CheckboxProps> = () => (
+Density.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
+    },
+  },
+}
+
+export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '32px' }}>
     <div
       data-color-scheme="light"
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <h3 style={{ margin: 0 }}>Light Mode</h3>
+        <ExampleLabel>Light Mode</ExampleLabel>
         <Checkbox label="Unchecked" />
         <Checkbox label="Checked" defaultChecked />
         <Checkbox label="Indeterminate" indeterminate />
@@ -187,9 +225,9 @@ export const ColorSchemes: StoryFn<CheckboxProps> = () => (
       style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
     >
       <Wrapper>
-        <h3 style={{ margin: 0, color: 'var(--eds-color-text-strong)' }}>
+        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
           Dark Mode
-        </h3>
+        </ExampleLabel>
         <Checkbox label="Unchecked" />
         <Checkbox label="Checked" defaultChecked />
         <Checkbox label="Indeterminate" indeterminate />
@@ -199,7 +237,15 @@ export const ColorSchemes: StoryFn<CheckboxProps> = () => (
     </div>
   </div>
 )
-ColorSchemes.storyName = 'Light & Dark Mode'
+
+LightAndDarkMode.parameters = {
+  docs: {
+    description: {
+      story:
+        'Checkbox follows the colour scheme set with `data-color-scheme` on a parent element.',
+    },
+  },
+}
 
 export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
   <fieldset>
@@ -211,7 +257,65 @@ export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
     </Wrapper>
   </fieldset>
 )
-GroupedCheckbox.storyName = 'Grouped'
+
+GroupedCheckbox.parameters = {
+  docs: {
+    description: {
+      story:
+        'Wrap related checkboxes in a `fieldset` with a `legend` that names the group.',
+    },
+  },
+}
+
+export const Subgroup: StoryFn<CheckboxProps> = () => {
+  const options = ['Email', 'SMS', 'Push']
+  const [selected, setSelected] = useState<string[]>(['SMS'])
+  const allChecked = selected.length === options.length
+  const someChecked = selected.length > 0 && !allChecked
+
+  const toggle = (option: string) =>
+    setSelected((previous) =>
+      previous.includes(option)
+        ? previous.filter((o) => o !== option)
+        : [...previous, option],
+    )
+
+  return (
+    <Wrapper gap={8}>
+      <Checkbox
+        label="All notifications"
+        checked={allChecked}
+        indeterminate={someChecked}
+        onChange={() => setSelected(allChecked ? [] : options)}
+      />
+      <div
+        role="group"
+        aria-label="Notification options"
+        style={{ paddingLeft: '24px' }}
+      >
+        <Wrapper gap={8}>
+          {options.map((option) => (
+            <Checkbox
+              key={option}
+              label={option}
+              checked={selected.includes(option)}
+              onChange={() => toggle(option)}
+            />
+          ))}
+        </Wrapper>
+      </div>
+    </Wrapper>
+  )
+}
+
+Subgroup.parameters = {
+  docs: {
+    description: {
+      story:
+        'A parent checkbox can stand for a group of child checkboxes. It shows the indeterminate state when only some of the children are checked. Pressing it selects all of them, or clears them when all are already selected.',
+    },
+  },
+}
 
 export const InheritedDisabled: StoryFn<CheckboxProps> = () => (
   <fieldset disabled>
@@ -228,7 +332,6 @@ export const InheritedDisabled: StoryFn<CheckboxProps> = () => (
     </Wrapper>
   </fieldset>
 )
-InheritedDisabled.storyName = 'Inherited disabled'
 InheritedDisabled.parameters = {
   docs: {
     description: {
@@ -239,16 +342,7 @@ InheritedDisabled.parameters = {
 }
 
 export const WithoutVisibleLabel: StoryFn<CheckboxProps> = () => (
-  <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
-    <div data-density="spacious">
-      <p style={{ margin: '0 0 8px' }}>Spacious</p>
-      <Checkbox aria-label="Spacious checkbox" />
-    </div>
-    <div data-density="comfortable">
-      <p style={{ margin: '0 0 8px' }}>Comfortable</p>
-      <Checkbox aria-label="Comfortable checkbox" />
-    </div>
-  </div>
+  <Checkbox aria-label="Accept terms" />
 )
 
 WithoutVisibleLabel.parameters = {
@@ -273,7 +367,15 @@ export const Controlled: StoryFn<CheckboxProps> = () => {
   )
 }
 
-export const TableCheckbox: StoryFn<CheckboxProps> = () => (
+Controlled.parameters = {
+  docs: {
+    description: {
+      story: 'Pass `checked` and `onChange` to control the state yourself.',
+    },
+  },
+}
+
+export const InTable: StoryFn<CheckboxProps> = () => (
   <Table>
     <Table.Head>
       <Table.Row>
@@ -295,7 +397,15 @@ export const TableCheckbox: StoryFn<CheckboxProps> = () => (
     </Table.Body>
   </Table>
 )
-TableCheckbox.storyName = 'In Table'
+
+InTable.parameters = {
+  docs: {
+    description: {
+      story:
+        'In a table, give each checkbox an `aria-label` that names its row.',
+    },
+  },
+}
 
 type FormData = {
   favourites: string[]
@@ -364,4 +474,13 @@ export const WithReactHookForm: StoryFn<CheckboxProps> = () => {
       </div>
     </form>
   )
+}
+
+WithReactHookForm.parameters = {
+  docs: {
+    description: {
+      story:
+        'Checkboxes work with the `register` function from React Hook Form, as the form below shows.',
+    },
+  },
 }

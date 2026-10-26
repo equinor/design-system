@@ -1,5 +1,6 @@
 import { useState, type ReactNode, type ComponentProps } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useArgs } from 'storybook/preview-api'
 import { Chip } from './Chip'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
@@ -60,13 +61,11 @@ const Wrapper = ({
   gap = 16,
   direction = 'row',
   align = 'center',
-  wrap = false,
 }: {
   children: ReactNode
   gap?: number
   direction?: 'row' | 'column'
   align?: 'flex-start' | 'center' | 'flex-end' | 'stretch'
-  wrap?: boolean
 }) => (
   <div
     style={{
@@ -74,7 +73,8 @@ const Wrapper = ({
       flexDirection: direction,
       gap: `${gap}px`,
       alignItems: align,
-      flexWrap: wrap ? 'wrap' : undefined,
+      // Wrap rather than overflow the narrow docs canvas
+      flexWrap: 'wrap',
     }}
   >
     {children}
@@ -87,13 +87,11 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
 export const Default: Story = {
   render: (args) => {
-    const [selected, setSelected] = useState(false)
+    // Clicking updates the `selected` arg, so the control and the chip
+    // stay in step
+    const [, updateArgs] = useArgs()
     return (
-      <Chip
-        {...args}
-        selected={selected}
-        onClick={() => setSelected(!selected)}
-      >
+      <Chip {...args} onClick={() => updateArgs({ selected: !args.selected })}>
         Chip
       </Chip>
     )
@@ -239,7 +237,7 @@ export const Deletable: Story = {
     const remove = (filter: string) =>
       setFilters((f) => f.filter((item) => item !== filter))
     return (
-      <Wrapper wrap>
+      <Wrapper>
         {filters.map((filter) => (
           <Chip key={filter} onDelete={() => remove(filter)}>
             {filter}
@@ -341,7 +339,7 @@ export const CustomIcons: Story = {
         </div>
         <div>
           <h3 style={{ marginBottom: '12px' }}>Recipients</h3>
-          <Wrapper wrap>
+          <Wrapper>
             {recipients.map((name) => (
               <Chip key={name} tone="accent" onDelete={() => remove(name)}>
                 <Icon data={person} aria-hidden />
@@ -373,55 +371,46 @@ export const CustomIcons: Story = {
   },
 }
 
-export const Density: Story = {
-  render: () => {
-    const [s1, setS1] = useState(false)
-    const [s2, setS2] = useState(false)
-    const [d1, setD1] = useState(true)
-    const [d2, setD2] = useState(true)
-    const [o1, setO1] = useState(false)
-    const [o2, setO2] = useState(false)
-    return (
-      <Wrapper direction="column" gap={24} align="flex-start">
-        <div data-density="spacious">
-          <h3 style={{ marginBottom: '12px' }}>Spacious (default)</h3>
-          <Wrapper>
-            <Chip selected={s1} onClick={() => setS1(!s1)}>
-              Selectable
-            </Chip>
-            {d1 ? (
-              <Chip onDelete={() => setD1(false)}>Deletable</Chip>
-            ) : (
-              <Button variant="ghost" onClick={() => setD1(true)}>
-                Reset
-              </Button>
-            )}
-            <Chip dropdown selected={o1} onClick={() => setO1(!o1)}>
-              Dropdown
-            </Chip>
-          </Wrapper>
-        </div>
-        <div data-density="comfortable">
-          <h3 style={{ marginBottom: '12px' }}>Comfortable</h3>
-          <Wrapper>
-            <Chip selected={s2} onClick={() => setS2(!s2)}>
-              Selectable
-            </Chip>
-            {d2 ? (
-              <Chip onDelete={() => setD2(false)}>Deletable</Chip>
-            ) : (
-              <Button variant="ghost" onClick={() => setD2(true)}>
-                Reset
-              </Button>
-            )}
-            <Chip dropdown selected={o2} onClick={() => setO2(!o2)}>
-              Dropdown
-            </Chip>
-          </Wrapper>
-        </div>
+const DensityRow = ({
+  density,
+  title,
+}: {
+  density: 'compact' | 'comfortable' | 'relaxed'
+  title: string
+}) => {
+  const [selected, setSelected] = useState(false)
+  const [deletable, setDeletable] = useState(true)
+  const [open, setOpen] = useState(false)
+  return (
+    <div data-density={density}>
+      <h3 style={{ marginBottom: '12px' }}>{title}</h3>
+      <Wrapper>
+        <Chip selected={selected} onClick={() => setSelected(!selected)}>
+          Selectable
+        </Chip>
+        {deletable ? (
+          <Chip onDelete={() => setDeletable(false)}>Deletable</Chip>
+        ) : (
+          <Button variant="ghost" onClick={() => setDeletable(true)}>
+            Reset
+          </Button>
+        )}
+        <Chip dropdown selected={open} onClick={() => setOpen(!open)}>
+          Dropdown
+        </Chip>
       </Wrapper>
-    )
-  },
+    </div>
+  )
+}
+
+export const Density: Story = {
+  render: () => (
+    <Wrapper direction="column" gap={24} align="flex-start">
+      <DensityRow density="compact" title="Compact" />
+      <DensityRow density="comfortable" title="Comfortable (default)" />
+      <DensityRow density="relaxed" title="Relaxed" />
+    </Wrapper>
+  ),
   parameters: {
     docs: {
       description: {
@@ -453,7 +442,7 @@ export const ToneVariantMatrix: Story = {
             <h3 style={{ marginBottom: '12px', textTransform: 'capitalize' }}>
               {variant}
             </h3>
-            <Wrapper wrap>
+            <Wrapper>
               {tones.map((tone) => {
                 const key = `${variant}-${tone}`
                 return (

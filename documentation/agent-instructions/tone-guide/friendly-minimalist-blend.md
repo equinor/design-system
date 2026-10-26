@@ -10,7 +10,7 @@
 - Use the active voice and direct phrasing.
 - Avoid slang, sarcasm, or heavy humour.
 - Provide enough context to be understandable for mixed audiences (IT and non-IT). Avoid jargon unless explained.
-- Always use Oxford English spelling (e.g., organise, recognise, analyse).
+- Always use British English spelling (e.g., organise, recognise, analyse).
 - Ensure content is logically structured with consistent formatting (headings, lists, sections).
 - Provide the documentation content only.”
 
@@ -18,8 +18,8 @@
 
 ### Tone
 
-- Professional and approachable — warm, but not casual.
-- Inclusive — avoid jargon unless explained.
+- Professional and approachable: warm, but not casual.
+- Inclusive: avoid jargon unless explained.
 - No slang, sarcasm, or heavy humour.
 
 ### Clarity
@@ -42,7 +42,7 @@
 
 ### Spelling & Grammar
 
-- Always use Oxford English spelling (e.g., organise, recognise, analyse).
+- Always use British English spelling (e.g., organise, recognise, analyse).
 - Maintain correct grammar and punctuation.
 
 ### Avoid
@@ -57,4 +57,4 @@
 - Is this concise and approachable?
 - Could both IT and non-IT readers understand it quickly?
 - Does it use active voice, clear lists, and logical structure?
-- Am I following Oxford English spelling?
+- Am I following British English spelling?

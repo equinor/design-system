@@ -109,7 +109,7 @@ a.docs-icon-card:focus-visible {
 .docs-icon-card__title {
   margin-bottom: var(--docs-card-gap);
 
-  font-family: var(--eds-font-family-ui, 'Inter'), system-ui, sans-serif;
+  font-family: var(--eds-font-family-ui);
   font-size: var(--docs-card-title-size);
   font-weight: var(--docs-font-weight-emphasis);
   line-height: var(--docs-card-title-line-height);

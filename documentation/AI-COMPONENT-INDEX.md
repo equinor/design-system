@@ -9,7 +9,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 
 - Source path: `packages/eds-core-react/src/components/next/<Component>/`
 - Top-level barrel: `packages/eds-core-react/src/components/next/index.ts`
-- Components: 23 • Props documented: 95 • With JSDoc description: 1
+- Components: 23 • Props documented: 94 • With JSDoc description: 1
 
 ## Components
 
@@ -20,7 +20,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 | Badge | — | emphasis, tone, variant | — | — | active |
 | Banner | — | onDismiss, role, tone | Banner.Icon, Banner.Message, Banner.Actions | — | active |
 | Button | — | asChild, icon, multiline, round, size, tone, variant | — | ✓ | active |
-| Checkbox | — | disabled, helperMessage, indeterminate, indicator, label | — | — | active |
+| Checkbox | — | disabled, indeterminate, indicator, label | — | — | active |
 | Chip | — | dropdown, onDelete, selected, tone, variant | — | — | active |
 | Dialog | — | onOpenChange, open, scrim | Dialog.Header, Dialog.Title, Dialog.Content, Dialog.Actions | — | active |
 | Divider | — | — | — | — | active |

@@ -1,10 +1,21 @@
+/* Layer order for a canvas that loads both token bundles. The Tokens
+   Studio bundle ships inside @layer eds-tokens (ADR-0028 point 6) and an
+   unlayered stylesheet beats any layer, so the legacy bundle has to be
+   imported into a lower layer or it wins the ten names the two share.
+   This statement must precede the @import rules; a layer statement is
+   one of the few things allowed to. */
+@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;
+
 /* Tokens Studio beta bundle (ADR-0009: published consumers import
    @equinor/eds-tokens/next/css/variables.css; the ./next/* exports are
-   injected at publish time only, hence the relative path locally).
-   Imported BEFORE the legacy bundle so legacy wins the name collisions
-   (--eds-typography-header-*-font-size) during the mixed period. */
+   injected at publish time only, hence the relative path locally). */
 @import '../../eds-tokens/src/tokens/css/variables.css';
-@import '@equinor/eds-tokens/css/variables';
+
+/* Legacy bundle, for the 1.0 components sharing this canvas. They read
+   tokens through styled-components, not through these custom
+   properties, so none of the ten shared names reaches them and the
+   layer costs this Storybook nothing. */
+@import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);
 
 /* Ensure form elements inherit EDS typography */
 fieldset,
@@ -15,12 +26,20 @@ legend {
 /* Storybook color scheme wrapper. Uses the beta semantic tokens (not the
    legacy --eds-color-* ones): legacy declares no dark value for its
    surface token, while these re-resolve per [data-color-scheme] subtree
-   (#5226), so the canvas follows the colour-scheme toolbar toggle. */
+   (#5226), so the canvas follows the colour-scheme toolbar toggle.
+   The background is background-surface, because the components are designed
+   for it and every colour contrast is measured against it (ADR-0016).
+   The wrapper is at least as wide as the canvas and grows with a story that
+   is wider, so the background does not stop where a wide story starts to
+   scroll. */
 .eds-storybook-wrapper {
   color: var(--eds-text-primary);
+  box-sizing: border-box;
+  width: fit-content;
+  min-width: 100%;
   min-height: 100%;
   padding: 1rem;
-  background-color: var(--eds-background-canvas);
+  background-color: var(--eds-background-surface);
 }
 
 /* Debug grid */
@@ -30,7 +49,8 @@ body.eds-debug-grid::before {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  background-image: repeating-linear-gradient(
+  background-image:
+    repeating-linear-gradient(
       to left,
       transparent var(--_padding-inline, 0px),
       #f005 var(--_padding-inline, 0px),

@@ -1,5 +1,8 @@
 # Building EDS 2.0 Components
 
+> [!WARNING]
+> Parts of this guide still describe the legacy 2.x tokens: the foundation data attributes (`data-color-appearance`, `data-selectable-space`, `data-space-proportions`, `data-baseline`), text-box trim and the token names in the templates. Every `/next` component is moving to the beta tokens (#5119). For token names, tones, spacing, typography and data attributes, follow [`MIGRATING_TO_BETA_TOKENS.md`](./MIGRATING_TO_BETA_TOKENS.md) where the two disagree. The rewrite of this guide is tracked in #5719.
+
 This is the canonical reference for the patterns that go into an EDS 2.0 component. Harness-specific scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) read this guide rather than restating its content.
 
 For the project-wide conventions (file structure, code style, CSS layering, testing, accessibility, conventional commits), see [`AGENTS.md`](../../AGENTS.md). This guide adds the component-building specifics that are not covered there.
@@ -395,7 +398,7 @@ describe('ComponentName (next)', () => {
 
 ### `ComponentName.stories.tsx`
 
-The docs page is generated from the types, the stories and `ComponentName.docs.md`, see [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md). Do not write a beta callout, an import snippet or a description in the story file, because the page generates them. The component needs at least one example besides `Introduction`.
+The docs page is generated from the types, the stories and `ComponentName.docs.md`, see [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md). Do not write a beta callout, an import snippet or a description in the story file, because the page generates them. The component needs an `Overview` story, shown right after Features with no heading and no caption, and at least one other example besides `Introduction` and `Overview`. Give every example a caption, the generator fails without one.
 
 ```typescript
 import type { Meta, StoryFn } from '@storybook/react-vite'
@@ -413,6 +416,15 @@ export default meta
 export const Introduction: StoryFn<ComponentNameProps> = (args) => {
   return <ComponentName {...args} />
 }
+
+// Required. A few instances that give a feel for the component, shown right
+// after Features. No heading, no caption.
+export const Overview: StoryFn<ComponentNameProps> = () => (
+  <>
+    <ComponentName>Primary</ComponentName>
+    <ComponentName>Secondary</ComponentName>
+  </>
+)
 
 // Every other export becomes an example on the docs page.
 export const Variants: StoryFn<ComponentNameProps> = () => (
