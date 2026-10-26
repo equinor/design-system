@@ -12,10 +12,9 @@
  * their APCA target.
  *
  * The docs and the ADR give a target for some pairs only. The others
- * get the target of the closest documented pair (Lc 90 for
- * `text.primary` on the canvas, Lc 60 for the rest), marked "assumed"
- * in the output. Tertiary gets none, since it is meant for places where
- * WCAG does not require contrast.
+ * get Lc 60, the target for secondary text and interactive elements,
+ * marked "assumed" in the output. Tertiary gets none, since it is meant
+ * for places where WCAG does not require contrast.
  *
  * The pairs are the ones `foundation/colour/usage.mdx` § Foreground
  * pairing documents, for text and icons alike:
@@ -23,7 +22,9 @@
  * - `<text|icon>.on-<level>.<tone>` on the fill of the same level and
  *   tone, in every state of the interactive fills
  * - `<text|icon>.primary`, `.secondary` and `.tertiary` on
- *   `background.surface` and `background.canvas`
+ *   `background.surface`. The usage page also puts them on
+ *   `background.canvas`, but EDS measures against the surface only, as
+ *   Confirmation 5 says
  * - `<text|icon>.primary` on the selected fills, in every state
  *
  * Borders stay out of scope, as Confirmation 5 records: APCA has no
@@ -158,7 +159,7 @@ for (const scheme of SCHEMES) {
 
 const checks = pairs.length * SCHEMES.length
 console.log(
-  `check-contrast: ${pairs.length} documented pairs in ${SCHEMES.join(' and ')} (${checks} checks). Minimum: WCAG 2.1 AA, ${MINIMUM.text}:1 for text and ${MINIMUM.icon}:1 for icons. Target: APCA Lc ${BODY_TEXT_TARGET} for text.primary on surface and canvas, Lc ${TARGET} otherwise, none for tertiary; "assumed" marks a target the docs and ADR-0016 do not give.`,
+  `check-contrast: ${pairs.length} documented pairs in ${SCHEMES.join(' and ')} (${checks} checks). Minimum: WCAG 2.1 AA, ${MINIMUM.text}:1 for text and ${MINIMUM.icon}:1 for icons. Target: APCA Lc ${BODY_TEXT_TARGET} for text.primary on the surface, Lc ${TARGET} otherwise, none for tertiary; "assumed" marks a target the docs and ADR-0016 do not give.`,
 )
 
 if (excepted.length > 0) {
@@ -224,19 +225,16 @@ function documentedPairs() {
         )
     }
 
-    // The targets are given against the surface, not the canvas
-    for (const background of ['background.surface', 'background.canvas']) {
-      const onCanvas = background === 'background.canvas'
-      add(
-        kind,
-        'primary',
-        background,
-        kind === 'text' ? BODY_TEXT_TARGET : TARGET,
-        onCanvas,
-      )
-      add(kind, 'secondary', background, TARGET, onCanvas)
-      add(kind, 'tertiary', background, null, false)
-    }
+    // Measured against the surface only (ADR-0016 Confirmation 5)
+    add(
+      kind,
+      'primary',
+      'background.surface',
+      kind === 'text' ? BODY_TEXT_TARGET : TARGET,
+      false,
+    )
+    add(kind, 'secondary', 'background.surface', TARGET, false)
+    add(kind, 'tertiary', 'background.surface', null, false)
 
     // Selected fills exist for accent and neutral only. usage.mdx
     // § Selected backgrounds judges text.primary on them against Lc 60

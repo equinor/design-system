@@ -99,7 +99,12 @@ describe('check-contrast', () => {
     it('meet the minimum on every documented pair outside the exceptions', () => {
       expect(result.stderr).toBe('')
       expect(result.status).toBe(0)
-      expect(result.stdout).toContain('132 documented pairs')
+      expect(result.stdout).toContain('126 documented pairs')
+    })
+
+    it('measure primary, secondary and tertiary against the surface only', () => {
+      // ADR-0016 Confirmation 5: the canvas is not a reference backdrop
+      expect(result.stdout).not.toContain('background.canvas')
     })
 
     it('report the documented exceptions with their measured values', () => {
@@ -140,10 +145,12 @@ describe('check-contrast', () => {
 
   it('fails on tertiary in dark, which the exception does not cover', () => {
     const result = runEdited(({ dark }) =>
-      set(dark, 'text.tertiary', get(dark, 'background.canvas')),
+      set(dark, 'text.tertiary', get(dark, 'background.surface')),
     )
     expect(result.status).toBe(1)
-    expect(result.stderr).toContain('dark   text.tertiary on background.canvas')
+    expect(result.stderr).toContain(
+      'dark   text.tertiary on background.surface',
+    )
   })
 
   it('fails on a selected fill outside accent hover and pressed', () => {
@@ -165,9 +172,6 @@ describe('check-contrast', () => {
     expect(result.status).toBe(0)
     expect(result.stdout).toMatch(
       /Below the APCA target[\s\S]*dark {3}text\.secondary on background\.surface {2}#738696 on #030303 {2}5\.48:1 \(minimum 4\.5:1\) {2}Lc 36\.5 \(target Lc 60\)/,
-    )
-    expect(result.stdout).toContain(
-      'dark   text.secondary on background.canvas  #738696 on #191a1a  4.63:1 (minimum 4.5:1)  Lc 35.2 (target Lc 60, assumed)',
     )
   })
 
