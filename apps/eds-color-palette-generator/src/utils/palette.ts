@@ -17,6 +17,14 @@ export type TokenPalette = {
 }
 
 /**
+ * Whether a step is a colour the pages can use: a six-digit hex value, the
+ * format the Palette editor works in. While typing, a step can hold `#12`.
+ */
+export function isHexColour(value: string): boolean {
+  return /^#[0-9a-fA-F]{6}$/.test(value)
+}
+
+/**
  * The seven Tokens Studio hues in light mode as editable palettes, the
  * Palette editor's starting point. Copies, so editing a step never changes
  * the cached Tokens Studio ramps.
@@ -222,6 +230,9 @@ function isUnchangedHue(palette: TokenPalette): boolean {
  * The palettes the Examples page shows for a scheme: the seven Tokens Studio
  * hues together with the palettes saved in the Palette editor.
  *
+ * The editor saves what it shows, so a step can be half typed (`#12`); a
+ * palette with such a step is left out until the step is a colour again.
+ *
  * The editor saves its whole list, unedited hues included, and its ramps are
  * light ramps, since it starts from `editablePalettesFromTokensStudio()`. In
  * light mode a saved palette named after a hue takes that hue's place, as in
@@ -235,13 +246,14 @@ export function examplePalettes(
   saved: TokenPalette[],
 ): TokenPalette[] {
   const hues = tokensStudioPalettes(scheme)
+  const usable = saved.filter((palette) => palette.steps.every(isHexColour))
   if (scheme === 'dark') {
-    const lightRamps = saved
+    const lightRamps = usable
       .filter((palette) => !isUnchangedHue(palette))
       .map((palette) => ({ ...palette, name: `${palette.name} (light)` }))
     return [...hues, ...lightRamps]
   }
-  const rest = [...saved]
+  const rest = [...usable]
   const merged = hues.map((hue) => {
     const key = hueKey(hue.name)
     const index = rest.findIndex((palette) => hueKey(palette.name) === key)

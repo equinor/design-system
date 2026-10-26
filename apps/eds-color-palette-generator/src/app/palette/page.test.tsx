@@ -204,6 +204,18 @@ describe('Palette editor page', () => {
       expect(paletteNames()).toEqual(TOKENS_STUDIO.map((p) => p.name))
     })
 
+    it('keeps a half-typed step when the page is opened again', async () => {
+      const user = userEvent.setup()
+      const { unmount } = renderWithProviders(<PalettePage />)
+      await replaceText(user, stepInput(0, 9), '#12')
+      unmount()
+
+      renderWithProviders(<PalettePage />)
+
+      expect(stepInput(0, 9)).toHaveValue('#12')
+      expect(stepInput(0, 9)).toHaveAttribute('aria-invalid', 'true')
+    })
+
     it('keeps the edits when the page is opened again', async () => {
       const user = userEvent.setup()
       const { unmount } = renderWithProviders(<PalettePage />)

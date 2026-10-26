@@ -160,6 +160,15 @@ describe('Examples page', () => {
     expect(screen.queryByText('Short')).not.toBeInTheDocument()
   })
 
+  it('leaves out a saved palette while one of its steps is half typed', () => {
+    const halfTyped = { ...CUSTOM, steps: [...CUSTOM.steps] }
+    halfTyped.steps[8] = '#12'
+    setSimulationPalettes([halfTyped])
+    renderWithProviders(<ExamplePage />)
+
+    expect(radioNames()).toEqual(namesFor('light'))
+  })
+
   it('falls back to the first palette when the selected saved palette is gone', async () => {
     const user = userEvent.setup()
     setSimulationPalettes([CUSTOM])

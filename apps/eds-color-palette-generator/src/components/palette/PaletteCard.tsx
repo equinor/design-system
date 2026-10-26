@@ -11,7 +11,7 @@ import {
   stepLabel,
   stepRolesText,
 } from '@/config/config'
-import type { TokenPalette } from '@/utils/palette'
+import { isHexColour, type TokenPalette } from '@/utils/palette'
 import { Button } from '@/components/shared/Button'
 import { Card } from '@/components/shared/Card'
 import { Icon } from '@/components/shared/Icon'
@@ -45,10 +45,6 @@ function labelColor(hex: string): string {
   } catch {
     return '#000'
   }
-}
-
-function isValidHex(v: string): boolean {
-  return /^#[0-9a-fA-F]{6}$/.test(v)
 }
 
 export function PaletteCard({
@@ -142,7 +138,7 @@ export function PaletteCard({
       {/* Hex input grid */}
       <div className="grid grid-cols-5 gap-2 px-5 pt-4 pb-5">
         {sorted.map(({ hex, i: origIdx }) => {
-          const valid = isValidHex(hex)
+          const valid = isHexColour(hex)
           return (
             <div key={`input-${origIdx}`}>
               <label

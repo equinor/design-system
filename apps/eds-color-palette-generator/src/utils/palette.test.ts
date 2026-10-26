@@ -10,6 +10,7 @@ import {
   examplePalettes,
   getApcaFontBreakdown,
   getSimulationPalettes,
+  isHexColour,
   setSimulationPalettes,
   type TokenPalette,
 } from './palette'
@@ -297,6 +298,27 @@ describe('simulation palettes', () => {
   })
 })
 
+describe('isHexColour', () => {
+  it('accepts six-digit hex colours in either letter case', () => {
+    expect(isHexColour('#12abEF')).toBe(true)
+  })
+
+  it('rejects half-typed and other values', () => {
+    for (const value of [
+      '',
+      '#',
+      '#12',
+      '#12345',
+      '#1234567',
+      '123456',
+      '#12345g',
+      'red',
+    ]) {
+      expect(isHexColour(value)).toBe(false)
+    }
+  })
+})
+
 describe('examplePalettes', () => {
   const custom: TokenPalette = {
     name: 'Custom',
@@ -380,6 +402,19 @@ describe('examplePalettes', () => {
       { name: `${saved[0].name} (light)`, steps: saved[0].steps },
       { name: 'Custom (light)', steps: custom.steps },
     ])
+  })
+
+  it('leaves out a saved palette while a step is not a hex colour', () => {
+    const halfTyped = { ...custom, steps: [...custom.steps] }
+    halfTyped.steps[8] = '#12'
+    const saved = withEditedFirstHue()
+    saved[0].steps[3] = '#12345'
+
+    for (const scheme of ['light', 'dark'] as const) {
+      expect(examplePalettes(scheme, [...saved, halfTyped])).toEqual(
+        tokensStudioPalettes(scheme),
+      )
+    }
   })
 
   it('does not change the saved palettes', () => {
