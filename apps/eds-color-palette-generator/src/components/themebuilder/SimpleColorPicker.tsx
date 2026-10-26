@@ -18,9 +18,19 @@ type SimpleColorPickerProps = {
 }
 
 /**
+ * The colour as stored (ADR 0016 D9): an OKLCH value as typed, and any other
+ * notation (hex, rgb(), a colour name) converted to OKLCH, as
+ * `withOklchColours` does for links and files.
+ */
+function storedColour(input: string): string {
+  const value = input.trim()
+  return value.startsWith('oklch(') ? value : (toOklchString(value) ?? value)
+}
+
+/**
  * A palette's single colour, shown in the page's colour format (OKLCH or
- * HEX). It is stored in OKLCH (ADR 0016 D9): a colour typed as hex and the
- * native picker's choice are converted.
+ * HEX). It is stored in OKLCH whichever format is shown: a colour typed in
+ * another notation and the native picker's choice are converted.
  */
 export function SimpleColorPicker({
   value,
@@ -44,9 +54,7 @@ export function SimpleColorPicker({
           const next = e.target.value
           setDraft(next)
           if (!isValidColorFormat(next)) return
-          onChange(
-            format === 'HEX' ? (toOklchString(next) ?? next) : next.trim(),
-          )
+          onChange(storedColour(next))
         }}
         onBlur={() => setDraft(null)}
         spellCheck={false}

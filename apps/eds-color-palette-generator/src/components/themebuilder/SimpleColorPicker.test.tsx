@@ -77,6 +77,31 @@ describe('SimpleColorPicker', () => {
       expect(onChange).toHaveBeenCalledWith('oklch(0.5 0.1 200)')
     })
 
+    it.each(['#ff0000', 'red', 'rgb(255 0 0)'])(
+      'stores %s typed in OKLCH mode as OKLCH',
+      async (typed) => {
+        const user = userEvent.setup()
+        const { onChange } = renderPicker()
+
+        await user.clear(textField())
+        await user.paste(typed)
+
+        expect(onChange).toHaveBeenCalledTimes(1)
+        expect(onChange).toHaveBeenCalledWith(toOklchString('#ff0000'))
+      },
+    )
+
+    it('keeps an OKLCH value typed in HEX mode as typed', async () => {
+      localStorageUtils.setColorFormat('HEX')
+      const user = userEvent.setup()
+      const { onChange } = renderPicker()
+
+      await user.clear(textField())
+      await user.paste('oklch(0.5 0.1 200)')
+
+      expect(onChange).toHaveBeenCalledWith('oklch(0.5 0.1 200)')
+    })
+
     it('converts a hex value typed in HEX mode to OKLCH', async () => {
       localStorageUtils.setColorFormat('HEX')
       const user = userEvent.setup()
