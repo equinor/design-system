@@ -67,7 +67,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 2
-      # SHA-pinned (v3.0.2) — third-party action running on every PR; pin to an
+      # SHA-pinned (v4.0.3) — third-party action running on every PR; pin to an
       # immutable commit so a compromised tag can't inject code into CI.
       - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
         if: github.event_name != 'workflow_dispatch' && github.event_name != 'merge_group'
