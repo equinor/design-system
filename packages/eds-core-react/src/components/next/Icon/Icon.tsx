@@ -60,7 +60,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
       fill={color}
       className={classes}
       data-testid="eds-icon"
-      data-icon-size={size}
+      data-size={size}
       {...accessibilityProps}
       {...rest}
     >

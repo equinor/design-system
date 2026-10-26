@@ -272,7 +272,7 @@ EDS 1.0: `Icon`.
 
 **Behaviour**: missing `data` logs an error and renders nothing, where EDS 1.0 threw.
 
-**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-icon-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
+**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
 
 **Small icon variants**: the dedicated small icon dataset EDS 1.0 used below 24 px is removed, so `xs` and `sm` icons are the 24 px geometry scaled down. This is a design decision: after a usage audit the small variants are retired from `@equinor/eds-icons`, the Figma broker and Figma as well ([#5500](https://github.com/equinor/design-system/issues/5500)).
 

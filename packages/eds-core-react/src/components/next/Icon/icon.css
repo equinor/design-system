@@ -19,7 +19,7 @@
   }
 
   /* Explicit size: fixed size from design tokens, no margins */
-  .eds-icon[data-icon-size] {
+  .eds-icon[data-size] {
     --_explicit-size: var(--eds-sizing-icon-md); /* fallback */
 
     width: var(--_explicit-size);
@@ -28,43 +28,43 @@
     font-size: inherit;
   }
 
-  .eds-icon[data-icon-size='xs'] {
+  .eds-icon[data-size='xs'] {
     --_explicit-size: var(--eds-sizing-icon-xs);
   }
 
-  .eds-icon[data-icon-size='sm'] {
+  .eds-icon[data-size='sm'] {
     --_explicit-size: var(--eds-sizing-icon-sm);
   }
 
-  .eds-icon[data-icon-size='md'] {
+  .eds-icon[data-size='md'] {
     --_explicit-size: var(--eds-sizing-icon-md);
   }
 
-  .eds-icon[data-icon-size='lg'] {
+  .eds-icon[data-size='lg'] {
     --_explicit-size: var(--eds-sizing-icon-lg);
   }
 
-  .eds-icon[data-icon-size='xl'] {
+  .eds-icon[data-size='xl'] {
     --_explicit-size: var(--eds-sizing-icon-xl);
   }
 
-  .eds-icon[data-icon-size='2xl'] {
+  .eds-icon[data-size='2xl'] {
     --_explicit-size: var(--eds-sizing-icon-2xl);
   }
 
-  .eds-icon[data-icon-size='3xl'] {
+  .eds-icon[data-size='3xl'] {
     --_explicit-size: var(--eds-sizing-icon-3xl);
   }
 
-  .eds-icon[data-icon-size='4xl'] {
+  .eds-icon[data-size='4xl'] {
     --_explicit-size: var(--eds-sizing-icon-4xl);
   }
 
-  .eds-icon[data-icon-size='5xl'] {
+  .eds-icon[data-size='5xl'] {
     --_explicit-size: var(--eds-sizing-icon-5xl);
   }
 
-  .eds-icon[data-icon-size='6xl'] {
+  .eds-icon[data-size='6xl'] {
     --_explicit-size: var(--eds-sizing-icon-6xl);
   }
 }
