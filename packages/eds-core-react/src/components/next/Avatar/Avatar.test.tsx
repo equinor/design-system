@@ -73,14 +73,6 @@ describe('Avatar (next)', () => {
         'high',
       )
     })
-
-    it('always sets data-color-appearance to accent', () => {
-      render(<Avatar data-testid="eds-avatar" />)
-      expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
-        'data-color-appearance',
-        'accent',
-      )
-    })
   })
 
   describe('Notification', () => {

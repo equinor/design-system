@@ -56,7 +56,7 @@ const meta: Meta<typeof Avatar> = {
     },
     notification: {
       control: 'boolean',
-      description: 'Show a success-tone notification indicator dot.',
+      description: 'Show a danger-tone notification indicator dot.',
       table: { category: 'States', defaultValue: { summary: 'false' } },
     },
   },
@@ -137,7 +137,7 @@ WithNotification.parameters = {
   docs: {
     description: {
       story:
-        'The `notification` prop adds a success-tone indicator dot at the bottom-right corner.',
+        'The `notification` prop adds a danger-tone indicator dot at the bottom-right corner.',
     },
   },
 }

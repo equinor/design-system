@@ -4,7 +4,7 @@ export type AvatarSize = 'sm' | 'md' | 'lg'
 export type AvatarEmphasis = 'high' | 'low'
 
 export type AvatarProps = {
-  /** Size of the avatar — sm (16px), md (24px), lg (32px) */
+  /** Size of the avatar — sm (20px), md (24px), lg (32px) */
   size?: AvatarSize
   /** Colour emphasis — low uses muted background, high uses emphasis background */
   emphasis?: AvatarEmphasis
@@ -28,6 +28,6 @@ export type AvatarProps = {
   src?: string
   /** Alt text for the image. Falls back to `name` if not provided. Pass `""` explicitly for decorative images. */
   alt?: string
-  /** Show a success-tone notification indicator dot. When `name` is set, "notification" is appended to the avatar `aria-label` (e.g. `"Ada Lovelace, notification"`). The dot is `aria-hidden` and silent when no `name` is provided. */
+  /** Show a danger-tone notification indicator dot. When `name` is set, "notification" is appended to the avatar `aria-label` (e.g. `"Ada Lovelace, notification"`). The dot is `aria-hidden` and silent when no `name` is provided. */
   notification?: boolean
 } & HTMLAttributes<HTMLDivElement>

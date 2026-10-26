@@ -3,7 +3,7 @@ import type { AvatarProps } from './Avatar.types'
 import { deriveInitials } from './utils'
 
 const pixelSizeMap: Record<'sm' | 'md' | 'lg', number> = {
-  sm: 16,
+  sm: 20,
   md: 24,
   lg: 32,
 }
@@ -34,7 +34,6 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
     <div
       ref={ref}
       className={classes}
-      data-color-appearance="accent"
       data-avatar-size={size}
       data-emphasis={emphasis}
       data-testid="eds-avatar"
@@ -56,13 +55,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
           </span>
         )
       )}
-      {notification && (
-        <span
-          className="notification"
-          data-color-appearance="success"
-          aria-hidden="true"
-        />
-      )}
+      {notification && <span className="notification" aria-hidden="true" />}
       {/* Announce notification to screen readers when the div carries no aria-label */}
       {notification && !label && (
         <span className="notification-label">Notification</span>
