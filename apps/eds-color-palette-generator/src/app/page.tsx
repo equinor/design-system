@@ -124,7 +124,12 @@ function ThemeBuilderContent() {
       const input = toCssColor(p.baseColor)
       const scale = (format: 'HEX' | 'OKLCH') =>
         generateColorScale(input, lightnessValues, mean, stdDev, format)
-      return { name: p.name, steps: scale('HEX'), oklch: scale('OKLCH') }
+      return {
+        id: p.id,
+        name: p.name,
+        steps: scale('HEX'),
+        oklch: scale('OKLCH'),
+      }
     })
   }, [palettes, lightnessValues, mean, stdDev])
 

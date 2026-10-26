@@ -32,6 +32,15 @@ export function withPaletteIds(palettes: PaletteInput[]): PaletteInput[] {
   return palettes.map((p) => (p.id ? p : { ...p, id: newPaletteId() }))
 }
 
+/**
+ * A React key for a palette: its id, or its position when it has none (as in
+ * tests). Names are not unique while the user edits them, so they are never
+ * the key.
+ */
+export function paletteKey(palette: { id?: string }, index: number): string {
+  return palette.id ?? `index-${index}`
+}
+
 // `,` separates palettes and `:` the name. Older links also used `@` for
 // anchors and `=` for an anchor's step, so all four (and `%`) are
 // percent-encoded inside names and values.

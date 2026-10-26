@@ -13,6 +13,7 @@ import { DataColorChart } from './contrast/DataColorChart'
 import { SamePalettePairings } from './contrast/SamePalettePairings'
 
 type GeneratedPalette = {
+  id?: string
   name: string
   steps: string[]
 }

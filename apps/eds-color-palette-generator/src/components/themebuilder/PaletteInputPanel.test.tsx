@@ -170,6 +170,21 @@ describe('PaletteInputPanel', () => {
       expect(new Set(names).size).toBe(names.length)
     })
 
+    it('skips a Colour N name that is taken in another case', async () => {
+      const user = userEvent.setup()
+      const initial = tokensStudioInputs()
+      const { onChange } = renderPanel([
+        ...initial,
+        { name: `colour ${initial.length + 2}`, baseColor: 'oklch(0.6 0 0)' },
+      ])
+
+      await user.click(screen.getByRole('button', { name: 'Add palette' }))
+
+      expect(lastPalettes(onChange).at(-1)?.name).toBe(
+        `Colour ${initial.length + 3}`,
+      )
+    })
+
     it('removes a palette', async () => {
       const user = userEvent.setup()
       const { onChange, initial } = renderPanel()
@@ -179,6 +194,65 @@ describe('PaletteInputPanel', () => {
       )
 
       expect(lastPalettes(onChange)).toEqual(initial.filter((_, i) => i !== 1))
+    })
+  })
+
+  describe('Names', () => {
+    const nameField = (n: number) =>
+      screen.getByRole('textbox', { name: `Name of palette ${n}` })
+
+    it('accepts the Tokens Studio names', () => {
+      renderPanel()
+
+      TS_HUES.forEach((_, i) => {
+        expect(nameField(i + 1)).toHaveAttribute('aria-invalid', 'false')
+        expect(nameField(i + 1)).not.toHaveAccessibleDescription()
+      })
+    })
+
+    it('marks an empty name and says why', async () => {
+      const user = userEvent.setup()
+      renderPanel()
+
+      await user.clear(nameField(2))
+
+      expect(nameField(2)).toHaveAttribute('aria-invalid', 'true')
+      expect(nameField(2)).toHaveAccessibleDescription(
+        'Enter a name for the palette.',
+      )
+      expect(
+        screen.getByText('Enter a name for the palette.'),
+      ).toBeInTheDocument()
+    })
+
+    it('marks names that differ only in case or spacing', async () => {
+      const user = userEvent.setup()
+      renderPanel()
+      const first = TS_HUES[0].name
+
+      await user.clear(nameField(2))
+      await user.type(nameField(2), ` ${first.toLowerCase()} `)
+
+      expect(nameField(1)).toHaveAttribute('aria-invalid', 'true')
+      expect(nameField(1)).toHaveAccessibleDescription(
+        /^Palette 2 has the same name\./,
+      )
+      expect(nameField(2)).toHaveAttribute('aria-invalid', 'true')
+      expect(nameField(2)).toHaveAccessibleDescription(
+        /^Palette 1 has the same name\./,
+      )
+      expect(nameField(3)).toHaveAttribute('aria-invalid', 'false')
+    })
+
+    it('clears the mark once the names differ again', async () => {
+      const user = userEvent.setup()
+      renderPanel()
+
+      await user.clear(nameField(2))
+      await user.type(nameField(2), 'Sunset Orange')
+
+      expect(nameField(2)).toHaveAttribute('aria-invalid', 'false')
+      expect(nameField(2)).not.toHaveAccessibleDescription()
     })
   })
 })

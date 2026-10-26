@@ -11,12 +11,20 @@ import { SegmentedControl } from '@/components/shared/SegmentedControl'
 import type { SegmentedOption } from '@/components/shared/SegmentedControl'
 import { CVDFilter, cvdFilterStyle } from '@/components/shared/CVDFilter'
 import { CVD_OPTIONS, type CVDType } from '@/utils/cvd'
+import { paletteKey } from '@/utils/urlState'
 import { StepSelect } from './StepSelect'
 
-type Palette = { name: string; steps: string[] }
+type Palette = { id?: string; name: string; steps: string[] }
 
-/** A chart series colour. `step` is present only for palette-derived colours. */
-type ChartColor = { name: string; hex: string; step?: number }
+/**
+ * A chart series colour. `step` is present only for palette-derived colours,
+ * and `key` (the React key) only for those too: palette names can repeat
+ * while the user edits them.
+ */
+type ChartColor = { key?: string; name: string; hex: string; step?: number }
+
+/** A series colour with its React key settled */
+type KeyedColor = ChartColor & { key: string }
 
 type ChartType = 'bar' | 'stacked-bar' | 'donut' | 'line'
 
@@ -93,7 +101,7 @@ const MARKER_SHAPES = ['circle', 'square', 'triangle', 'diamond'] as const
 /* ---------------------------------------------------------------------- */
 
 type ChartProps = {
-  colors: { name: string; hex: string }[]
+  colors: KeyedColor[]
   bgHex: string
   textHex: string
   showPatterns?: boolean
@@ -107,7 +115,7 @@ function BarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
           const h = BAR_DATA[0][i % BAR_DATA[0].length]
           return (
             <div
-              key={pc.name}
+              key={pc.key}
               className="flex h-full flex-1 flex-col items-center justify-end gap-1"
             >
               <span
@@ -145,7 +153,7 @@ function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
               const val = 20 + ((gi * 13 + ci * 17) % 30)
               return (
                 <div
-                  key={pc.name}
+                  key={pc.key}
                   style={{
                     backgroundColor: pc.hex,
                     backgroundImage: overlayFor(ci, !!showPatterns),
@@ -186,7 +194,7 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
     (_, i) => (DONUT_SEGMENTS[i % DONUT_SEGMENTS.length] / total) * 100,
   )
   const segments = colors.map((pc, i) => ({
-    name: pc.name,
+    key: pc.key,
     hex: pc.hex,
     pct: pcts[i],
     offset: 25 - pcts.slice(0, i).reduce((a, b) => a + b, 0),
@@ -201,9 +209,9 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
         <svg viewBox="0 0 42 42" className="size-full">
           {showPatterns && (
             <defs>
-              {segments.map(({ name, hex }, i) => (
+              {segments.map(({ key, hex }, i) => (
                 <pattern
-                  key={name}
+                  key={key}
                   id={`donut-pat-${i}`}
                   width="4"
                   height="4"
@@ -223,9 +231,9 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
               ))}
             </defs>
           )}
-          {segments.map(({ name, hex, pct, offset }, i) => (
+          {segments.map(({ key, hex, pct, offset }, i) => (
             <circle
-              key={name}
+              key={key}
               cx="21"
               cy="21"
               r="15.915"
@@ -301,7 +309,7 @@ function LineChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
             .map((v, i) => `${i === 0 ? 'M' : 'L'}${px(i)},${py(v, offset)}`)
             .join(' ')
           return (
-            <g key={pc.name}>
+            <g key={pc.key}>
               <path
                 d={d}
                 fill="none"
@@ -346,13 +354,7 @@ function LineChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
   )
 }
 
-function XAxis({
-  colors,
-  textHex,
-}: {
-  colors: { name: string; hex: string }[]
-  textHex: string
-}) {
+function XAxis({ colors, textHex }: { colors: KeyedColor[]; textHex: string }) {
   return (
     <div
       className="flex gap-2 mt-2 pt-2"
@@ -360,7 +362,7 @@ function XAxis({
     >
       {colors.map((pc) => (
         <div
-          key={pc.name}
+          key={pc.key}
           className="flex-1 truncate text-center text-xs"
           style={{ color: textHex }}
         >
@@ -382,7 +384,7 @@ function Legend({
   bgHex,
   textHex,
 }: {
-  colors: ChartColor[]
+  colors: KeyedColor[]
   bgHex: string
   textHex: string
 }) {
@@ -392,7 +394,7 @@ function Legend({
       style={{ backgroundColor: bgHex }}
     >
       {colors.map((pc) => (
-        <div key={pc.name} className="flex items-center gap-1.5 text-xs">
+        <div key={pc.key} className="flex items-center gap-1.5 text-xs">
           <span
             className="inline-block size-2.5 rounded-sm"
             style={{ backgroundColor: pc.hex }}
@@ -475,7 +477,7 @@ export function DataColorChart({
     const startStep = Math.max(0, center - Math.floor((count - 1) / 2))
     return safePalettes.map((p, i) => {
       const step = Math.min(14, startStep + i)
-      return { name: p.name, hex: p.steps[step], step }
+      return { key: paletteKey(p, i), name: p.name, hex: p.steps[step], step }
     })
   }, [safePalettes])
 
@@ -484,6 +486,7 @@ export function DataColorChart({
     if (!safePalettes.length) return []
     const p = safePalettes[monoPaletteIdx] ?? safePalettes[0]
     return monochromaticSteps().map((step) => ({
+      key: `step-${step}`,
       name: `${p.name}/${step + 1}`,
       hex: p.steps[step],
       step,
@@ -491,7 +494,14 @@ export function DataColorChart({
   }, [safePalettes, monoPaletteIdx])
 
   const derivedColors = mono ? monoColors : multiColors
-  const colors: ChartColor[] = externalColors ?? derivedColors
+  const colors = useMemo<KeyedColor[]>(
+    () =>
+      (externalColors ?? derivedColors).map((c, i) => ({
+        ...c,
+        key: c.key ?? `index-${i}`,
+      })),
+    [externalColors, derivedColors],
+  )
 
   const ChartComponent = {
     bar: BarChart,
@@ -623,7 +633,7 @@ export function DataColorChart({
             >
               {colors.map((pc, i) => (
                 <span
-                  key={pc.name}
+                  key={pc.key}
                   className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium"
                   style={{
                     backgroundColor: pc.hex,
@@ -645,7 +655,7 @@ export function DataColorChart({
             {colors.map((pc) => {
               const result = calcContrast(pc.hex, bgHex)
               return (
-                <div key={pc.name} className="flex items-center gap-2 text-xs">
+                <div key={pc.key} className="flex items-center gap-2 text-xs">
                   <span
                     className="inline-block size-3 rounded border border-muted"
                     style={{ backgroundColor: pc.hex }}
@@ -679,7 +689,7 @@ export function DataColorChart({
                     <th />
                     {colors.map((pc) => (
                       <th
-                        key={pc.name}
+                        key={pc.key}
                         className="px-2 py-1 font-medium text-secondary"
                       >
                         <div className="flex items-center gap-1">
@@ -697,7 +707,7 @@ export function DataColorChart({
                 </thead>
                 <tbody>
                   {colors.map((row, ri) => (
-                    <tr key={row.name}>
+                    <tr key={row.key}>
                       <td className="px-2 py-1 font-medium whitespace-nowrap text-secondary">
                         <div className="flex items-center gap-1">
                           <span
@@ -712,10 +722,7 @@ export function DataColorChart({
                       {colors.map((col, ci) => {
                         if (ci <= ri) {
                           return (
-                            <td
-                              key={col.name}
-                              className="px-2 py-1 text-center"
-                            >
+                            <td key={col.key} className="px-2 py-1 text-center">
                               {ci === ri ? '—' : ''}
                             </td>
                           )
@@ -725,7 +732,7 @@ export function DataColorChart({
                         const pass3 = result.wcagRatio >= 3
                         return (
                           <td
-                            key={col.name}
+                            key={col.key}
                             className={[
                               'px-2 py-1 text-center font-mono',
                               pass3

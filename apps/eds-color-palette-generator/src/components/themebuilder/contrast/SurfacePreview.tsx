@@ -4,9 +4,10 @@ import { useState, useMemo } from 'react'
 import { calcContrast } from '@/utils/palette'
 import { Badge } from '@/components/shared/Badge'
 import { Card } from '@/components/shared/Card'
+import { paletteKey } from '@/utils/urlState'
 import { StepSelect } from './StepSelect'
 
-type Palette = { name: string; steps: string[] }
+type Palette = { id?: string; name: string; steps: string[] }
 
 function ContrastPair({
   label,
@@ -82,8 +83,11 @@ export function SurfacePreview({ palettes }: { palettes: Palette[] }) {
 
       {/* Per-palette preview */}
       <div className="flex flex-col gap-6">
-        {palettes.map((p) => (
-          <div key={p.name} className="flex flex-col gap-2">
+        {palettes.map((p, paletteIndex) => (
+          <div
+            key={paletteKey(p, paletteIndex)}
+            className="flex flex-col gap-2"
+          >
             <h3 className="m-0 text-base font-medium text-primary">{p.name}</h3>
 
             {/* Nested box layout */}

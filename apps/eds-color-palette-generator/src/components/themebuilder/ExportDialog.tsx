@@ -5,11 +5,16 @@ import { cloud_upload } from '@equinor/eds-icons'
 import { downloadText } from '@/utils/dataviz-export'
 import {
   anchorProposals,
+  nameProblems,
   palettesFile,
   palettesFromConfig,
   tokensStudioAnchorsFile,
 } from '@/utils/paletteConfigFile'
-import type { AnchorProposal, AnchorStatus } from '@/utils/paletteConfigFile'
+import type {
+  AnchorProposal,
+  AnchorStatus,
+  NameProblem,
+} from '@/utils/paletteConfigFile'
 import type { PaletteInput } from '@/utils/urlState'
 import { Button } from '@/components/shared/Button'
 import { Dialog } from '@/components/shared/Dialog'
@@ -45,6 +50,15 @@ const STATUS_TAG: Record<AnchorStatus, { label: string; tone: string }> = {
 const isProposed = (p: AnchorProposal) =>
   p.status === 'changed' || p.status === 'new'
 
+const TAG =
+  'inline-flex items-center rounded px-1.5 text-xs leading-[18px] font-medium'
+
+function nameProblemTag(problem: NameProblem): string {
+  return problem.kind === 'empty'
+    ? 'No name'
+    : `Same name as palette ${problem.otherIndex + 1}`
+}
+
 type ExportDialogProps = {
   open: boolean
   onClose: () => void
@@ -71,7 +85,13 @@ export function ExportDialog({
 
   const proposals = useMemo(() => anchorProposals(palettes), [palettes])
   const proposedCount = proposals.filter(isProposed).length
-  const canDownload = kind === 'palettes' || proposedCount > 0
+  // The Tokens Studio file has one anchor per hue key, so palettes with an
+  // empty or shared key would be dropped or merged without a word.
+  const problems = useMemo(() => nameProblems(palettes), [palettes])
+  const hasNameProblem = problems.some((problem) => problem !== null)
+  const canDownload =
+    kind === 'palettes' || (proposedCount > 0 && !hasNameProblem)
+  const nameMessageId = `${idPrefix}-names`
 
   const close = () => {
     setImportError(null)
@@ -120,7 +140,16 @@ export function ExportDialog({
       actions={
         <>
           <Button onClick={close}>Cancel</Button>
-          <Button variant="primary" onClick={download} disabled={!canDownload}>
+          <Button
+            variant="primary"
+            onClick={download}
+            disabled={!canDownload}
+            aria-describedby={
+              kind === 'tokens-studio' && hasNameProblem
+                ? nameMessageId
+                : undefined
+            }
+          >
             Download
           </Button>
         </>
@@ -162,12 +191,19 @@ export function ExportDialog({
             {proposals.map((p, i) => (
               <li key={`${p.key}-${i}`} className="flex flex-col gap-0.5">
                 <span className="flex flex-wrap items-center gap-2 text-sm">
-                  <span className="font-medium text-primary">{p.name}</span>
-                  <span
-                    className={`inline-flex items-center rounded px-1.5 text-xs leading-[18px] font-medium ${STATUS_TAG[p.status].tone}`}
-                  >
+                  <span className="font-medium text-primary">
+                    {p.name || `Palette ${i + 1}`}
+                  </span>
+                  <span className={`${TAG} ${STATUS_TAG[p.status].tone}`}>
                     {STATUS_TAG[p.status].label}
                   </span>
+                  {problems[i] && (
+                    <span
+                      className={`${TAG} bg-danger-muted text-danger-on-muted`}
+                    >
+                      {nameProblemTag(problems[i])}
+                    </span>
+                  )}
                 </span>
                 {p.status === 'changed' && (
                   <span className="font-mono text-xs text-secondary">
@@ -182,11 +218,19 @@ export function ExportDialog({
               </li>
             ))}
           </ul>
-          {proposedCount === 0 && (
-            <p className="m-0 text-sm text-tertiary">
-              No anchor differs from Tokens Studio, so there is nothing to
-              download.
+          {hasNameProblem ? (
+            <p id={nameMessageId} className="m-0 text-sm text-danger">
+              The file has one anchor per palette name, and names that differ
+              only in case or spacing count as the same. Give every palette its
+              own name in the Palettes card before you download.
             </p>
+          ) : (
+            proposedCount === 0 && (
+              <p className="m-0 text-sm text-tertiary">
+                No anchor differs from Tokens Studio, so there is nothing to
+                download.
+              </p>
+            )
           )}
         </div>
       )}

@@ -6,10 +6,11 @@ import { stepLabel } from '@/config/config'
 import { Button } from '@/components/shared/Button'
 import { Card } from '@/components/shared/Card'
 import { Icon } from '@/components/shared/Icon'
+import { paletteKey } from '@/utils/urlState'
 import { ContrastCard } from './ContrastCard'
 import { StepSelect } from './StepSelect'
 
-type Palette = { name: string; steps: string[] }
+type Palette = { id?: string; name: string; steps: string[] }
 
 // 0-based step indices, one palette at a time, named after the Tokens Studio
 // roles each pair stands for.
@@ -76,9 +77,9 @@ export function SamePalettePairings({ palettes }: { palettes: Palette[] }) {
               )}
             </div>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3">
-              {palettes.map((p) => (
+              {palettes.map((p, i) => (
                 <ContrastCard
-                  key={p.name}
+                  key={paletteKey(p, i)}
                   fgHex={p.steps[fg]}
                   bgHex={p.steps[bg]}
                   fgLabel={stepLabel(fg + 1)}

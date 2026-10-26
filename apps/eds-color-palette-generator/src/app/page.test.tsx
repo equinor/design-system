@@ -168,6 +168,33 @@ describe('Theme Builder page', () => {
     })
   })
 
+  describe('Palette names', () => {
+    it('renders every view without duplicate keys when two palettes share a name', async () => {
+      const user = userEvent.setup()
+      const consoleError = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {})
+      navigation.searchParams = new URLSearchParams(
+        'p=Sunset:ff8800,Sunset:ff8800,Gray:808080',
+      )
+      renderPage()
+
+      await user.click(tab('Examples'))
+      await user.click(tab('Contrast'))
+      await user.click(
+        within(
+          screen.getByRole('tablist', { name: 'Contrast checks' }),
+        ).getByRole('tab', { name: 'Custom' }),
+      )
+
+      const keyWarnings = consoleError.mock.calls.filter((args) =>
+        String(args[0]).includes('same key'),
+      )
+      expect(keyWarnings).toEqual([])
+      expect(screen.getAllByText('Sunset').length).toBeGreaterThan(1)
+    })
+  })
+
   describe('Timers', () => {
     beforeEach(() => {
       // Advancing with real time lets Testing Library's own setTimeout(0)

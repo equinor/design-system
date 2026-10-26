@@ -14,8 +14,10 @@ import {
   resolveSemanticColors,
   toneRamps,
 } from '@/utils/semanticTokens'
+import { paletteKey } from '@/utils/urlState'
 
 type GeneratedPalette = {
+  id?: string
   name: string
   steps: string[]
 }
@@ -121,9 +123,9 @@ export function ComponentPreviewPanel({
           {dataColors.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5 text-sm text-secondary">
               <span className="font-medium">Data colours:</span>
-              {dataColors.map((p) => (
+              {dataColors.map((p, i) => (
                 <span
-                  key={p.name}
+                  key={paletteKey(p, i)}
                   className="inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-sm"
                   style={{
                     backgroundColor: p.steps[2],

@@ -142,6 +142,48 @@ describe('ExportDialog', () => {
     })
   })
 
+  describe('Palette names', () => {
+    const NAME_MESSAGE = /Give every palette its own name/
+
+    it('blocks the Tokens Studio download while two names share a hue key', async () => {
+      const user = userEvent.setup()
+      const palettes = [
+        ...withFirst({ name: 'Sunset Orange', baseColor: OTHER_COLOUR }),
+        { name: 'sunset  orange', baseColor: 'oklch(0.6 0.1 60)' },
+      ]
+      renderDialog(palettes)
+
+      expect(screen.getByText(NAME_MESSAGE)).toBeInTheDocument()
+      expect(
+        screen.getByText(`Same name as palette ${palettes.length}`),
+      ).toBeInTheDocument()
+      expect(screen.getByText('Same name as palette 1')).toBeInTheDocument()
+      expect(downloadButton()).toBeDisabled()
+      expect(downloadButton()).toHaveAccessibleDescription(NAME_MESSAGE)
+
+      // The palettes file keeps every palette, so it can still be downloaded
+      await user.click(screen.getByRole('radio', { name: /Palettes file/ }))
+      expect(downloadButton()).toBeEnabled()
+      expect(downloadButton()).not.toHaveAccessibleDescription()
+    })
+
+    it('blocks the Tokens Studio download while a palette has no name', () => {
+      renderDialog(withFirst({ name: '' }))
+
+      expect(screen.getByText('Palette 1')).toBeInTheDocument()
+      expect(screen.getByText('No name')).toBeInTheDocument()
+      expect(screen.getByText(NAME_MESSAGE)).toBeInTheDocument()
+      expect(downloadButton()).toBeDisabled()
+    })
+
+    it('shows no name message when every name is its own', () => {
+      renderDialog(withFirst({ baseColor: OTHER_COLOUR }))
+
+      expect(screen.queryByText(NAME_MESSAGE)).not.toBeInTheDocument()
+      expect(downloadButton()).toBeEnabled()
+    })
+  })
+
   describe('Behaviour', () => {
     it('enables Download for the palettes file and hides the comparison', async () => {
       const user = userEvent.setup()

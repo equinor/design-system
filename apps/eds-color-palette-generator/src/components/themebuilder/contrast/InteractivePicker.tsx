@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import { PALETTE_STEPS, stepLabel, stepRolesText } from '@/config/config'
 import { Card } from '@/components/shared/Card'
+import { paletteKey } from '@/utils/urlState'
 import { ContrastCard } from './ContrastCard'
 
 const SELECT_CLASS =
   'rounded border border-input bg-input px-2 py-1 text-sm text-primary hover:border-input-hover'
 
-type Palette = { name: string; steps: string[] }
+type Palette = { id?: string; name: string; steps: string[] }
 
 export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
   // 0-based: step 13 (text.primary) on step 1 (background.canvas)
@@ -53,9 +54,9 @@ export function InteractivePicker({ palettes }: { palettes: Palette[] }) {
       </div>
 
       <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3">
-        {palettes.map((p) => (
+        {palettes.map((p, i) => (
           <ContrastCard
-            key={p.name}
+            key={paletteKey(p, i)}
             fgHex={p.steps[fgStep]}
             bgHex={p.steps[bgStep]}
             fgLabel={stepLabel(fgStep + 1)}

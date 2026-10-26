@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { TS_HUES } from '@/config/tokensStudio'
 import {
   anchorProposals,
+  nameProblems,
   withOklchColours,
   palettesFile,
   palettesFromConfig,
@@ -116,6 +117,35 @@ describe('anchorProposals', () => {
         },
       },
     })
+  })
+})
+
+describe('nameProblems', () => {
+  const named = (...names: string[]) =>
+    names.map((name) => ({ name, baseColor: moss.anchor }))
+
+  it('finds no problem when every name has its own hue key', () => {
+    expect(nameProblems(named('Moss Green', 'Gray', 'Colour 3'))).toEqual([
+      null,
+      null,
+      null,
+    ])
+  })
+
+  it('treats names that differ only in case or spacing as the same', () => {
+    expect(nameProblems(named('Moss green', 'Gray', ' moss  Green '))).toEqual([
+      { kind: 'duplicate', otherIndex: 2 },
+      null,
+      { kind: 'duplicate', otherIndex: 0 },
+    ])
+  })
+
+  it('reports an empty or blank name', () => {
+    expect(nameProblems(named('', 'Gray', '   '))).toEqual([
+      { kind: 'empty' },
+      null,
+      { kind: 'empty' },
+    ])
   })
 })
 

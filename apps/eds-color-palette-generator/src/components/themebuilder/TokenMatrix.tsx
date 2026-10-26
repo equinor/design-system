@@ -12,8 +12,11 @@ import {
 } from '@/config/config'
 import { Card } from '@/components/shared/Card'
 import { useColorFormat } from '@/context/ColorFormatContext'
+import { paletteKey } from '@/utils/urlState'
 
 type GeneratedPalette = {
+  /** The palette's id, for the React key; names can repeat while edited */
+  id?: string
   name: string
   /** Hex, for the swatch colours */
   steps: string[]
@@ -86,8 +89,12 @@ export function TokenMatrix({ palettes }: TokenMatrixProps) {
           ))}
 
           {/* Palette rows */}
-          {palettes.map((palette) => (
-            <PaletteRow key={palette.name} palette={palette} format={format} />
+          {palettes.map((palette, i) => (
+            <PaletteRow
+              key={paletteKey(palette, i)}
+              palette={palette}
+              format={format}
+            />
           ))}
         </div>
       </div>
