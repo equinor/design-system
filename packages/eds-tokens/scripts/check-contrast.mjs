@@ -31,11 +31,13 @@
  * agreed target for them, and the border-to-surface pairs are not
  * documented.
  *
- * EXCEPTIONS lists the documented pairs the docs exclude from the
- * minimum. They are reported with their values but do not fail the run.
- * An exception whose pairs all meet the minimum is reported as a
- * warning, so that it can be removed here and on the docs page; the run
- * must not fail because a pair got better.
+ * EXCEPTIONS lists the pairs the docs exclude from the minimum, each by
+ * scheme, foreground and background, exactly as the docs list them. They
+ * are reported with their values but do not fail the run. Any other state
+ * or scheme of the same foreground still fails, so the docs cannot go out
+ * of date without the run noticing. A listed pair that meets the minimum
+ * is reported as a warning, so that it can be removed here and on the
+ * docs page; the run must not fail because a pair got better.
  *
  * The values come from the generated TS modules
  * (`src/tokens/ts/semantic/{light,dark}.ts`), which hold every semantic
@@ -79,28 +81,36 @@ const BODY_TEXT_TARGET = 90
 const TARGET = 60
 
 /**
- * Documented pairs that do not have to meet the minimum. Each one names
- * the page that documents it; change the page and this list together.
+ * Documented pairs that do not have to meet the minimum, written as
+ * `<scheme> <foreground> on <background>`. Each group names the page that
+ * documents it; change the page and this list together.
  */
 const EXCEPTIONS = [
   {
     name: 'tertiary in light',
     reason:
       'foundation/accessibility.md § Colour: text.tertiary and icon.tertiary fall below the minimum in light and are only for places where WCAG 2.1 does not require contrast, such as disabled controls',
-    scheme: 'light',
-    covers: ({ foreground }) => /^(text|icon)\.tertiary$/.test(foreground),
+    pairs: [
+      'light text.tertiary on background.surface',
+      'light icon.tertiary on background.surface',
+    ],
   },
   {
-    name: 'primary on accent selected hover and pressed',
+    name: 'primary on accent selected',
     reason:
-      'foundation/accessibility.md § Colour and foundation/colour/usage.mdx § Selected backgrounds: selected fills have no foreground of their own, and text.primary and icon.primary on accent selected fall below the minimum in some hover and pressed states',
-    covers: ({ foreground, background }) =>
-      /^(text|icon)\.primary$/.test(foreground) &&
-      /^background\.interactive\.accent\.selected\.(hover|pressed)$/.test(
-        background,
-      ),
+      'foundation/accessibility.md § Colour and foundation/colour/usage.mdx § Selected backgrounds: selected fills have no foreground of their own, and these states of text.primary and icon.primary on accent selected fall below the minimum',
+    pairs: [
+      'light text.primary on background.interactive.accent.selected.pressed',
+      'dark text.primary on background.interactive.accent.selected.hover',
+      'dark text.primary on background.interactive.accent.selected.pressed',
+      'dark icon.primary on background.interactive.accent.selected.pressed',
+    ],
   },
 ]
+/** `<scheme> <foreground> on <background>` -> its exception group */
+const exceptionFor = new Map(
+  EXCEPTIONS.flatMap((group) => group.pairs.map((key) => [key, group])),
+)
 
 const semanticByScheme = Object.fromEntries(
   await Promise.all(
@@ -112,15 +122,18 @@ const pairs = documentedPairs()
 const failures = []
 const excepted = []
 const shortfalls = []
-/** exception name -> whether one of its pairs is below the minimum */
-const exceptionStillNeeded = new Map(
-  EXCEPTIONS.map(({ name }) => [name, false]),
-)
+/** Listed exceptions that now meet the minimum */
+const clearedExceptions = []
+/** Listed exceptions the loop has met, to catch a typo in EXCEPTIONS */
+const seenExceptions = new Set()
 
 for (const scheme of SCHEMES) {
   for (const pair of pairs) {
     const foreground = lookup(semanticByScheme[scheme], pair.foreground)
     const background = lookup(semanticByScheme[scheme], pair.background)
+    const key = `${scheme} ${pair.foreground} on ${pair.background}`
+    const exception = exceptionFor.get(key)
+    if (exception !== undefined) seenExceptions.add(key)
     const where = `${scheme.padEnd(5)}  ${pair.foreground} on ${pair.background}`
 
     const problem =
@@ -140,22 +153,21 @@ for (const scheme of SCHEMES) {
     const line = `${where}  ${foreground} on ${background}  ${ratio.toFixed(2)}:1 (minimum ${pair.minimum}:1)  Lc ${lc.toFixed(1)}${target}`
 
     if (ratio < pair.minimum) {
-      const exception = EXCEPTIONS.find(
-        (candidate) =>
-          (candidate.scheme === undefined || candidate.scheme === scheme) &&
-          candidate.covers(pair),
-      )
-      if (exception === undefined) {
-        failures.push(line)
-      } else {
-        exceptionStillNeeded.set(exception.name, true)
-        excepted.push(`${line}  [${exception.name}]`)
-      }
-    } else if (pair.target !== null && lc < pair.target) {
-      shortfalls.push(line)
+      if (exception === undefined) failures.push(line)
+      else excepted.push(`${line}  [${exception.name}]`)
+      continue
     }
+    if (exception !== undefined)
+      clearedExceptions.push(`${line}  [${exception.name}]`)
+    if (pair.target !== null && lc < pair.target) shortfalls.push(line)
   }
 }
+
+for (const key of exceptionFor.keys())
+  if (!seenExceptions.has(key))
+    failures.push(
+      `EXCEPTIONS lists "${key}", which is not a documented pair. Fix the entry in this script`,
+    )
 
 const checks = pairs.length * SCHEMES.length
 console.log(
@@ -175,11 +187,10 @@ if (shortfalls.length > 0)
     `\nBelow the APCA target (${shortfalls.length}, reported, not failed):\n  ${shortfalls.join('\n  ')}`,
   )
 
-for (const [name, stillNeeded] of exceptionStillNeeded)
-  if (!stillNeeded)
-    console.warn(
-      `check-contrast: every pair covered by the "${name}" exception now meets the minimum. Remove the exception here and on the page that documents it.`,
-    )
+if (clearedExceptions.length > 0)
+  console.warn(
+    `check-contrast: ${clearedExceptions.length} pair(s) listed in EXCEPTIONS now meet the minimum. Remove each one from EXCEPTIONS and from the page that documents it:\n  ${clearedExceptions.join('\n  ')}`,
+  )
 
 if (failures.length > 0)
   fail(
@@ -294,7 +305,12 @@ function channels(hex) {
   )
 }
 
-/** WCAG 2.1 relative luminance. */
+/**
+ * WCAG 2.1 relative luminance. The linearisation threshold is the sRGB
+ * standard's 0.04045, which WCAG 2.2 also uses. WCAG 2.1 prints 0.03928,
+ * a typo from an earlier sRGB draft. No 8-bit channel value lies between
+ * the two, so the result is the same; do not change it to "match" 2.1.
+ */
 function relativeLuminance(hex) {
   const [red, green, blue] = channels(hex).map((channel) =>
     channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4,
