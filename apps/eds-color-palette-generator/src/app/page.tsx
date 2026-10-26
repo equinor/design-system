@@ -15,6 +15,7 @@ import { TS_HUES } from '@/config/tokensStudio'
 import {
   cancelURLUpdate,
   deserializeState,
+  shareableURL,
   updateURL,
   withPaletteIds,
 } from '@/utils/urlState'
@@ -130,16 +131,19 @@ function ThemeBuilderContent() {
     setPalettes(withPaletteIds(imported))
   }, [])
 
-  // Copy the current URL, which holds the palettes, tab and scheme
+  // Copy a link to the palettes, tab and scheme. It is built from the state,
+  // as the address bar is only updated 300 ms after a change.
   const copyURL = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href)
+      await navigator.clipboard.writeText(
+        shareableURL({ palettes, activeTab, mode: colorScheme }),
+      )
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
       /* ignore */
     }
-  }, [])
+  }, [palettes, activeTab, colorScheme])
 
   // The page is background.canvas; cards are background.surface, which is
   // lighter than the canvas in light and darker than it in dark (ADR 0016).

@@ -181,6 +181,21 @@ export function deserializeState(
   return result
 }
 
+/** The current path with the state as its query, e.g. `/?p=…&tab=contrast`. */
+function pathForState(state: Partial<ThemeBuilderState>): string {
+  const qs = serializeState(state)
+  return qs ? `${window.location.pathname}?${qs}` : window.location.pathname
+}
+
+/**
+ * The full link to a state, for Share. It is built from the state itself,
+ * because the address bar is updated 300 ms after a change (`updateURL`) and
+ * can still hold the previous palettes.
+ */
+export function shareableURL(state: Partial<ThemeBuilderState>): string {
+  return `${window.location.origin}${pathForState(state)}`
+}
+
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
 /** Drop a pending URL update, e.g. when the page unmounts. */
@@ -195,10 +210,6 @@ export function updateURL(state: Partial<ThemeBuilderState>): void {
   if (debounceTimer) clearTimeout(debounceTimer)
 
   debounceTimer = setTimeout(() => {
-    const qs = serializeState(state)
-    const newURL = qs
-      ? `${window.location.pathname}?${qs}`
-      : window.location.pathname
-    window.history.replaceState(null, '', newURL)
+    window.history.replaceState(null, '', pathForState(state))
   }, 300)
 }

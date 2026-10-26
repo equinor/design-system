@@ -6,6 +6,8 @@ import ThemeBuilderPage from './page'
 import { ColorSchemeProvider } from '@/context/ColorSchemeContext'
 import { DensityProvider } from '@/context/DensityContext'
 import { TS_HUES } from '@/config/tokensStudio'
+import { tokensStudioInputs } from '@/test/fixtures'
+import { serializeState } from '@/utils/urlState'
 
 const navigation = vi.hoisted(() => ({
   searchParams: new URLSearchParams(),
@@ -130,17 +132,39 @@ describe('Theme Builder page', () => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     })
 
-    it('copies the page URL with Share', async () => {
+    it('copies a link to the palettes with Share', async () => {
       const user = userEvent.setup()
       const writeText = vi.spyOn(navigator.clipboard, 'writeText')
       renderPage()
 
       await user.click(screen.getByRole('button', { name: 'Share' }))
 
-      expect(writeText).toHaveBeenCalledWith(window.location.href)
+      expect(writeText).toHaveBeenCalledWith(
+        `${window.location.origin}/?${serializeState({ palettes: tokensStudioInputs() })}`,
+      )
       expect(
         await screen.findByRole('button', { name: 'Copied' }),
       ).toBeInTheDocument()
+    })
+
+    it('copies a change made just before Share, before the address bar is updated', async () => {
+      const user = userEvent.setup()
+      const writeText = vi.spyOn(navigator.clipboard, 'writeText')
+      renderPage()
+      const [first, ...rest] = tokensStudioInputs()
+
+      const name = screen.getByRole('textbox', { name: 'Name of palette 1' })
+      await user.clear(name)
+      await user.type(name, 'Sunset')
+      await user.click(tab('Contrast'))
+      await user.click(screen.getByRole('button', { name: 'Share' }))
+
+      expect(writeText).toHaveBeenCalledWith(
+        `${window.location.origin}/?${serializeState({
+          palettes: [{ ...first, name: 'Sunset' }, ...rest],
+          activeTab: 'contrast',
+        })}`,
+      )
     })
   })
 })
