@@ -31,7 +31,7 @@ permissions:
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  NODE_VERSION: '24.16.0'
+  NODE_VERSION: '24.22.1'
 
 jobs:
   setup:

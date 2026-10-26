@@ -1560,21 +1560,6 @@
           }
         }
       },
-      "selected-indicator": {
-        "$value": "{accent.13}",
-        "$type": "color",
-        "$extensions": {
-          "com.figma": {
-            "scopes": [
-              "STROKE_COLOR"
-            ],
-            "codeSyntax": {
-              "WEB": "var(--eds-border-interactive-selected-indicator)"
-            },
-            "hiddenFromPublishing": false
-          }
-        }
-      },
       "success": {
         "emphasis": {
           "default": {

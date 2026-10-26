@@ -1,5 +1,8 @@
 # Building EDS 2.0 Components
 
+> [!WARNING]
+> Parts of this guide still describe the legacy 2.x tokens: the foundation data attributes (`data-color-appearance`, `data-selectable-space`, `data-space-proportions`, `data-baseline`), text-box trim and the token names in the templates. Every `/next` component is moving to the beta tokens (#5119). For token names, tones, spacing, typography and data attributes, follow [`MIGRATING_TO_BETA_TOKENS.md`](./MIGRATING_TO_BETA_TOKENS.md) where the two disagree. The rewrite of this guide is tracked in #5719.
+
 This is the canonical reference for the patterns that go into an EDS 2.0 component. Harness-specific scaffolding commands (`/new-component` in Claude Code, the `new-component` prompt in Copilot, the `eds-component` sub-agent in OpenCode) read this guide rather than restating its content.
 
 For the project-wide conventions (file structure, code style, CSS layering, testing, accessibility, conventional commits), see [`AGENTS.md`](../../AGENTS.md). This guide adds the component-building specifics that are not covered there.

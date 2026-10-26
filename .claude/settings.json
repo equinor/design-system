@@ -41,8 +41,7 @@
       "Read(./**/*.pem)",
       "Read(./**/*.key)",
       "Read(./secrets/**)",
-      "Read(./config/credentials.json)",
-      "Read(./build)"
+      "Read(./config/credentials.json)"
     ]
   },
   "hooks": {

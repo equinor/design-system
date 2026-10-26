@@ -46,7 +46,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '24.16.0'
+          node-version: '24.22.1'
           package-manager-cache: false
       - name: Setup pnpm
         id: setup-pnpm
