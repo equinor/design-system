@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
       items: ['about/getting-started/develop/citizen_developers'],
     },
     'about/getting-started/team_roles',
+    'about/roadmap',
   ],
   //Components Section
   componentsSidebar: [

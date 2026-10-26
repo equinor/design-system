@@ -2,6 +2,8 @@ import Layout from '@theme/Layout'
 
 import type { JSX } from 'react'
 
+import { map } from '@equinor/eds-icons'
+
 import { Hero } from '@site/src/components/Hero'
 import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
@@ -41,6 +43,19 @@ export default function GettingStarted(): JSX.Element {
                 to={path.to}
               />
             ))}
+          </IconCardGrid>
+        </DocsSection>
+        <DocsSection
+          title="See what's coming"
+          subtitle="Follow the themes we're investing in and plan around what's ahead."
+        >
+          <IconCardGrid columns={3}>
+            <IconCard
+              icon={map}
+              title="Roadmap"
+              description="A high-level view of what the EDS team is working on now and where the design system is heading."
+              to="docs/Next/about/roadmap"
+            />
           </IconCardGrid>
         </DocsSection>
         <CtaSection
