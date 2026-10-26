@@ -2,12 +2,18 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
-import { stepLabel, stepsWithRole } from '@/config/config'
+import { PALETTE_STEPS, stepLabel, stepsWithRole } from '@/config/config'
 import { calcContrast } from '@/utils/palette'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 import { InteractivePicker } from './InteractivePicker'
 
 const PALETTES = tokensStudioPalettes('light').slice(0, 3)
+
+// The step text.secondary uses, a foreground step other than the default.
+// Looked up, since a Tokens Studio release can move it (#5650 moved it from
+// step 8 to step 9).
+const TEXT_SECONDARY =
+  PALETTE_STEPS.find((step) => step.roles.includes('text.secondary'))?.step ?? 0
 
 const region = () => screen.getByRole('region', { name: 'Interactive picker' })
 const foreground = () =>
@@ -64,13 +70,13 @@ describe('InteractivePicker', () => {
       const user = userEvent.setup()
       render(<InteractivePicker allPalettes={PALETTES} />)
 
-      await user.selectOptions(foreground(), '8')
+      await user.selectOptions(foreground(), String(TEXT_SECONDARY))
 
       for (const palette of PALETTES) {
         const col = column(palette.name)
-        expect(col).toHaveTextContent(`fg: ${stepLabel(8)}`)
+        expect(col).toHaveTextContent(`fg: ${stepLabel(TEXT_SECONDARY)}`)
         expect(col).toHaveTextContent(
-          `${calcContrast(palette.steps[7], palette.steps[0]).wcag}:1`,
+          `${calcContrast(palette.steps[TEXT_SECONDARY - 1], palette.steps[0]).wcag}:1`,
         )
       }
     })
