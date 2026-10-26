@@ -132,7 +132,7 @@ const GROUPS = [
   [
     'Interactive borders',
     (n) => n.startsWith('border.interactive.'),
-    'Strokes on actionable elements, plus the focus ring and the selected indicator.',
+    'Strokes on actionable elements, plus the focus ring.',
   ],
   [
     'Non-interactive borders',
