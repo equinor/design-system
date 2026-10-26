@@ -223,8 +223,8 @@ describe('calcContrast', () => {
 
 describe('simulation palettes', () => {
   const palettes: TokenPalette[] = [
-    { name: 'Custom', steps: ['#111111', '#222222'] },
-    { name: 'Other', steps: ['#333333'] },
+    { name: 'Custom', steps: Array(STEP_COUNT).fill('#111111') },
+    { name: 'Other', steps: Array(STEP_COUNT).fill('#333333') },
   ]
 
   it('returns an empty list when nothing is stored', () => {
@@ -259,7 +259,14 @@ describe('simulation palettes', () => {
       'colorPalette_simulationPalettes',
       JSON.stringify([
         { name: 'x' },
-        { name: 'Bad steps', steps: [1, 2] },
+        { name: 'Bad steps', steps: Array(STEP_COUNT).fill(1) },
+        { name: 'Too few steps', steps: ['#111111', '#222222'] },
+        {
+          name: 'Too many steps',
+          steps: Array(STEP_COUNT + 1).fill('#111111'),
+        },
+        { name: 'No steps', steps: [] },
+        { name: 42, steps: palettes[0].steps },
         { steps: ['#111111'] },
         null,
         'Custom',

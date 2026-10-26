@@ -1,3 +1,4 @@
+import { STEP_COUNT } from '@/config/tokensStudio'
 import { contrast, contrastValue } from '@/utils/color'
 import { tokensStudioPalettes } from '@/utils/semanticTokens'
 
@@ -156,12 +157,18 @@ export function calcContrast(fg: string, bg: string): ContrastResult {
 
 const SIMULATION_PALETTES_KEY = 'colorPalette_simulationPalettes'
 
+/**
+ * A stored palette the pages can use: a string name and one string per step.
+ * The pages read steps by index, so a palette with fewer steps would give
+ * them `undefined` colours.
+ */
 function isTokenPalette(value: unknown): value is TokenPalette {
   if (typeof value !== 'object' || value === null) return false
   const { name, steps } = value as Record<string, unknown>
   return (
     typeof name === 'string' &&
     Array.isArray(steps) &&
+    steps.length === STEP_COUNT &&
     steps.every((step) => typeof step === 'string')
   )
 }
@@ -172,8 +179,8 @@ export function getSimulationPalettes(): TokenPalette[] {
     const item = localStorage.getItem(SIMULATION_PALETTES_KEY)
     const parsed: unknown = item ? JSON.parse(item) : []
     // Anything but a list of palettes (null, an object from an older
-    // version, a palette without steps) would crash the pages that map over
-    // the palettes, and it stays stored across reloads
+    // version, a palette without 15 steps) would crash the pages that map
+    // over the palettes, and it stays stored across reloads
     return Array.isArray(parsed) ? parsed.filter(isTokenPalette) : []
   } catch {
     return []

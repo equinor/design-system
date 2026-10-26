@@ -123,6 +123,17 @@ describe('Examples page', () => {
     })
   })
 
+  it('leaves out a saved palette that does not have 15 steps', () => {
+    localStorage.setItem(
+      'colorPalette_simulationPalettes',
+      JSON.stringify([{ name: 'Short', steps: CUSTOM.steps.slice(0, 3) }]),
+    )
+    renderWithProviders(<ExamplePage />)
+
+    expect(radioNames()).toEqual(namesFor('light'))
+    expect(screen.queryByText('Short')).not.toBeInTheDocument()
+  })
+
   it('falls back to the first palette when the selected saved palette is gone', async () => {
     const user = userEvent.setup()
     setSimulationPalettes([CUSTOM])
