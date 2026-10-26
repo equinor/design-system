@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { TypographyNext } from '../../Typography'
 import { Button } from '../Button'
 import { Divider } from '.'
 import page from './Divider.docs.mdx'
@@ -29,20 +28,21 @@ const Line = ({
   strong?: boolean
   subtle?: boolean
 }) => (
-  <TypographyNext
-    as="span"
-    family="ui"
-    size="md"
-    baseline="center"
-    weight={strong ? 'bolder' : undefined}
+  <span
     style={{
       display: 'block',
       paddingBlock: 'var(--eds-spacing-vertical-md)',
+      fontFamily: 'var(--eds-font-family-ui)',
+      fontSize: 'var(--eds-typography-body-md-font-size)',
+      lineHeight: 'var(--eds-typography-body-md-line-height)',
+      fontWeight: strong
+        ? 'var(--eds-font-weight-bold)'
+        : 'var(--eds-font-weight-normal)',
       color: subtle ? 'var(--eds-color-text-subtle)' : undefined,
     }}
   >
     {children}
-  </TypographyNext>
+  </span>
 )
 
 const Row = ({
@@ -124,7 +124,7 @@ export const GroupedActions: Story = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
-        gap: 8,
+        gap: 'var(--eds-spacing-xs)',
         width: 200,
       }}
     >

@@ -15,4 +15,4 @@
 ## Accessibility
 
 - Divider is hidden from screen readers and is not focusable, because it only separates content visually.
-- It always stays hidden. Accessibility props that you pass to it are overridden.
+- It always stays hidden, even if you pass `accessible`.

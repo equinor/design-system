@@ -20,13 +20,19 @@ const meta: Meta<typeof Link> = {
     (Story) => (
       // A click on a link that would open in the same tab is stopped, so the
       // docs page does not reload. A link that opens a new tab leaves the page
-      // where it is, so it is left alone. Decorators are left out of the code
-      // shown on the docs page.
+      // where it is, so it is left alone, and so is a click with Cmd or Ctrl
+      // held, which the browser opens in a new tab. Decorators are left out of
+      // the code shown on the docs page.
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div
         onClick={(event) => {
           const link = (event.target as HTMLElement).closest('a')
-          if (link && link.target !== '_blank') {
+          if (
+            link &&
+            link.target !== '_blank' &&
+            !event.metaKey &&
+            !event.ctrlKey
+          ) {
             event.preventDefault()
           }
         }}
