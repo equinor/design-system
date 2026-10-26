@@ -73,6 +73,8 @@ Important information should not be in or over images. Make sure to always capti
 
 Use the EDS colour tokens. On the backgrounds they are made for, the text and icon tokens meet the WCAG 2.1 AA contrast ratios in both colour schemes and every state: 4.5:1 for text, and 3:1 for large text and interface components. The exception is `text.tertiary` and `icon.tertiary`, which fall below the ratios in the light scheme. Use them only where WCAG 2.1 does not require contrast, such as disabled controls, and never for text people need to read.
 
+The selected backgrounds have no foreground of their own, and `text.primary` on the accent ones is a second exception: it falls below 4.5:1 on `background.interactive.accent.selected.pressed` in light, and on `.hover` and `.pressed` in dark. [Usage § Selected backgrounds](./colour/usage.mdx#selected-backgrounds) gives the values for every state. The neutral selected backgrounds meet the ratios in every state.
+
 A token name alone does not guarantee contrast: on any other fill, check the foreground and background you use against the same ratios, in both colour schemes and every state. The colour scales themselves were built with APCA, as [Contrast](./colour/intro.mdx#contrast) describes.
 
 Many users have trouble distinguishing colours from each other, so make sure colour is not the only way you convey certain information. For example, danger should not be indicated by red colour alone.
