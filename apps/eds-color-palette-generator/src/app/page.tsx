@@ -1,6 +1,13 @@
 'use client'
 
-import { Suspense, useState, useMemo, useEffect, useCallback } from 'react'
+import {
+  Suspense,
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react'
 import { useSearchParams } from 'next/navigation'
 import { generateColorScale, toCssColor } from '@/utils/color'
 import { withOklchColours } from '@/utils/paletteConfigFile'
@@ -79,6 +86,7 @@ function ThemeBuilderContent() {
   )
   const [contrastPaletteIndex, setContrastPaletteIndex] = useState(0)
   const [copied, setCopied] = useState(false)
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Sync state to URL
   useEffect(() => {
@@ -131,6 +139,13 @@ function ThemeBuilderContent() {
     setPalettes(withPaletteIds(imported))
   }, [])
 
+  // Clear the pending "Copied" reset on unmount
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current)
+    }
+  }, [])
+
   // Copy a link to the palettes, tab and scheme. It is built from the state,
   // as the address bar is only updated 300 ms after a change.
   const copyURL = useCallback(async () => {
@@ -138,11 +153,13 @@ function ThemeBuilderContent() {
       await navigator.clipboard.writeText(
         shareableURL({ palettes, activeTab, mode: colorScheme }),
       )
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
     } catch {
-      /* ignore */
+      // Clipboard unavailable (e.g. non-secure context): nothing to show
+      return
     }
+    setCopied(true)
+    if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current)
+    copiedTimerRef.current = setTimeout(() => setCopied(false), 2000)
   }, [palettes, activeTab, colorScheme])
 
   // The page is background.canvas; cards are background.surface, which is

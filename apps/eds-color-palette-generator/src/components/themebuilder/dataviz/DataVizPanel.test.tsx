@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { DataVizPanel } from './DataVizPanel'
 import { renderWithProviders } from '@/test/renderWithProviders'
 import {
@@ -103,6 +103,36 @@ describe('DataVizPanel', () => {
         toW3CTokens(DEFAULT_COLOURS, 'categorical'),
         'application/json',
       )
+    })
+  })
+
+  describe('Timers', () => {
+    beforeEach(() => {
+      // Advancing with real time lets Testing Library's own setTimeout(0)
+      // waits finish; its fake timer support only recognises Jest.
+      vi.useFakeTimers({
+        toFake: ['setTimeout', 'clearTimeout'],
+        shouldAdvanceTime: true,
+      })
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('leaves no timer running after unmount', async () => {
+      const user = userEvent.setup()
+      const { unmount } = renderWithProviders(<DataVizPanel />)
+
+      await user.click(screen.getByRole('button', { name: 'Copy hex array' }))
+      expect(
+        await screen.findByRole('button', { name: 'Copied' }),
+      ).toBeInTheDocument()
+      expect(vi.getTimerCount()).toBe(1)
+
+      unmount()
+
+      expect(vi.getTimerCount()).toBe(0)
     })
   })
 })

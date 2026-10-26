@@ -167,4 +167,35 @@ describe('Theme Builder page', () => {
       )
     })
   })
+
+  describe('Timers', () => {
+    beforeEach(() => {
+      // Advancing with real time lets Testing Library's own setTimeout(0)
+      // waits finish; its fake timer support only recognises Jest.
+      vi.useFakeTimers({
+        toFake: ['setTimeout', 'clearTimeout'],
+        shouldAdvanceTime: true,
+      })
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('leaves no timer running after unmount', async () => {
+      const user = userEvent.setup()
+      const { unmount } = renderPage()
+
+      await user.click(screen.getByRole('button', { name: 'Share' }))
+      expect(
+        await screen.findByRole('button', { name: 'Copied' }),
+      ).toBeInTheDocument()
+      // The "Copied" reset is pending, and the address bar update may be
+      expect(vi.getTimerCount()).toBeGreaterThan(0)
+
+      unmount()
+
+      expect(vi.getTimerCount()).toBe(0)
+    })
+  })
 })

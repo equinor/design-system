@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import { resolveToken, toneRamps } from '@/utils/semanticTokens'
 import {
@@ -56,11 +56,21 @@ export function DataVizPanel() {
   const [divSteps, setDivSteps] = useState(DEFAULT_DIVERGING.steps)
 
   const [copied, setCopied] = useState<string | null>(null)
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Clear the pending "Copied" reset on unmount
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current)
+    }
+  }, [])
+
   const copy = (label: string, text: string) => {
     navigator.clipboard?.writeText(text).then(
       () => {
         setCopied(label)
-        setTimeout(() => setCopied(null), 2000)
+        if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current)
+        copiedTimerRef.current = setTimeout(() => setCopied(null), 2000)
       },
       () => {},
     )
