@@ -686,7 +686,8 @@ export function DataColorChart({
               <table className="border-collapse text-xs">
                 <thead>
                   <tr>
-                    <th />
+                    {/* Corner cell: a <td>, as a header cell needs a name */}
+                    <td />
                     {colors.map((pc) => (
                       <th
                         key={pc.key}

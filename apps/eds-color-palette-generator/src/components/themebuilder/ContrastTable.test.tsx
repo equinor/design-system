@@ -69,6 +69,17 @@ describe('ContrastTable', () => {
       )
     })
 
+    it('gives every column header a name', () => {
+      renderTable()
+
+      const table = within(
+        screen.getByRole('region', { name: 'Contrast table' }),
+      ).getByRole('table')
+      for (const header of within(table).getAllByRole('columnheader')) {
+        expect(header).toHaveAccessibleName()
+      }
+    })
+
     it('shows APCA Lc and the WCAG ratio for text.primary on the surface', () => {
       renderTable()
 

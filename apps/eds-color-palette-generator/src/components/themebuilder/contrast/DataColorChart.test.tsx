@@ -31,6 +31,15 @@ describe('DataColorChart', () => {
       ).toBeInTheDocument()
     })
 
+    it('gives every column header of the colour-to-colour table a name', () => {
+      renderWithProviders(<DataColorChart palettes={PALETTES} />)
+
+      const table = within(chart()).getByRole('table')
+      for (const header of within(table).getAllByRole('columnheader')) {
+        expect(header).toHaveAccessibleName()
+      }
+    })
+
     it('renders the given colours in direct mode without the palette controls', () => {
       const colors = [
         { name: 'First', hex: PALETTES[0].steps[8] },

@@ -88,7 +88,8 @@ export function ContrastTable({
           <thead>
             {/* Group headers — Tokens Studio background roles */}
             <tr>
-              <th className="border-b border-muted px-2 py-1.5" />
+              {/* Corner cell: a <td>, as a header cell needs a name */}
+              <td className="border-b border-muted px-2 py-1.5" />
               {CONTRAST_COLUMN_GROUPS.map((group) => (
                 <th
                   key={group.group}
