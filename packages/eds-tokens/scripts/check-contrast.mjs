@@ -93,7 +93,7 @@ const EXCEPTIONS = [
   {
     name: 'primary on accent selected hover and pressed',
     reason:
-      'foundation/colour/usage.mdx § Selected backgrounds: selected fills have no foreground of their own, and text.primary on accent selected is checked per state before use',
+      'foundation/accessibility.md § Colour and foundation/colour/usage.mdx § Selected backgrounds: selected fills have no foreground of their own, and text.primary and icon.primary on accent selected fall below the minimum in some hover and pressed states',
     covers: ({ foreground, background }) =>
       /^(text|icon)\.primary$/.test(foreground) &&
       /^background\.interactive\.accent\.selected\.(hover|pressed)$/.test(

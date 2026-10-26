@@ -442,7 +442,7 @@ Check each token on the background it is made for, as [the colour usage page § 
 
 - `text.on-<level>.<tone>` and `icon.on-<level>.<tone>` go on the fill of the same level and tone. `text.on-emphasis.danger` is checked on `background.interactive.danger.emphasis.default`, `.hover` and `.pressed`, and on `background.non-interactive.danger.emphasis`, not on the surface.
 - `text.primary`, `.secondary` and `.tertiary`, and the icon equivalents, are measured against `background.surface`, the reference backdrop for the targets. EDS does not measure them against `background.canvas`.
-- The selected fills have no foreground of their own. `text.primary` and `icon.primary` on them have to be checked per state before use, because on `accent` the hover and pressed states fall below the APCA target, the WCAG minimum or both, depending on the scheme.
+- The selected fills have no foreground of their own. `text.primary` and `icon.primary` on them have to be checked per state before use, because on `accent` the hover and pressed states fall below the APCA target, the WCAG minimum or both, depending on the scheme. The accessibility page records this as the second documented exception, and [the usage page § Selected backgrounds](./apps/design-system-docs/docs/foundation/colour/usage.mdx#selected-backgrounds) gives the values for every state.
 
 Two more rules from the docs decide what to flag:
 
