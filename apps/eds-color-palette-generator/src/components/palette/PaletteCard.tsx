@@ -67,8 +67,9 @@ export function PaletteCard({
     viewMode === 'curve'
       ? palette.steps.map((hex, i) => ({ hex, i }))
       : palette.steps
-          .map((hex, i) => ({ hex, i }))
-          .sort((a, b) => getLightness(b.hex) - getLightness(a.hex))
+          // Each colour is parsed once, not on every comparison
+          .map((hex, i) => ({ hex, i, lightness: getLightness(hex) }))
+          .sort((a, b) => b.lightness - a.lightness)
 
   return (
     <Card padded={false} className="overflow-hidden">

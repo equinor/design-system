@@ -39,8 +39,9 @@ export default function ContrastPage() {
       return buildStepData(palette.steps, 'semantic')
     }
     const sorted = palette.steps
-      .map((hex, i) => ({ hex, i }))
-      .sort((a, b) => getLightness(b.hex) - getLightness(a.hex))
+      // Each colour is parsed once, not on every comparison
+      .map((hex, i) => ({ hex, i, lightness: getLightness(hex) }))
+      .sort((a, b) => b.lightness - a.lightness)
     return buildStepData(
       sorted.map((s) => s.hex),
       'gradient',
