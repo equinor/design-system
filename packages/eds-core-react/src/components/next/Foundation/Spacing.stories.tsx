@@ -19,7 +19,7 @@ const GENERIC_SIZES = [
 ] as const
 
 const meta: Meta = {
-  title: 'Foundation/Spacing',
+  title: 'EDS 2.0 (beta)/Foundation/Spacing',
   parameters: {
     docs: {
       description: {
