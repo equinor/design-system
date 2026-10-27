@@ -54,7 +54,7 @@ export default function GettingStarted(): JSX.Element {
               icon={map}
               title="Roadmap"
               description="A high-level view of what the EDS team is working on now and where the design system is heading."
-              to="docs/Next/about/roadmap"
+              to="docs/Next/about/roadmap/what-were-doing"
             />
           </IconCardGrid>
         </DocsSection>

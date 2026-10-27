@@ -76,7 +76,7 @@ function VersionNotice({ version, docId }: { version: string; docId: string }) {
 }
 
 /** Doc sections whose pages can render the hero band. */
-const HERO_SECTIONS = ['components/', 'foundation/']
+const HERO_SECTIONS = ['components/', 'foundation/', 'about/roadmap/']
 
 /** Decide whether the TOC should render, on mobile or desktop viewports. */
 function useDocTOC() {
