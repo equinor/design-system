@@ -229,8 +229,8 @@ describe('simulation palettes', () => {
     { name: 'Other', steps: Array(STEP_COUNT).fill('#333333') },
   ]
 
-  it('returns an empty list when nothing is stored', () => {
-    expect(getSimulationPalettes()).toEqual([])
+  it('returns null when nothing is stored', () => {
+    expect(getSimulationPalettes()).toBeNull()
   })
 
   it('saves and reads the palettes', () => {
@@ -238,22 +238,27 @@ describe('simulation palettes', () => {
     expect(getSimulationPalettes()).toEqual(palettes)
   })
 
+  it('keeps an empty saved list apart from nothing stored', () => {
+    setSimulationPalettes([])
+    expect(getSimulationPalettes()).toEqual([])
+  })
+
   it('clears the saved palettes', () => {
     setSimulationPalettes(palettes)
     clearSimulationPalettes()
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
   })
 
-  it('returns an empty list when the stored value is not JSON', () => {
+  it('returns null when the stored value is not JSON', () => {
     localStorage.setItem('colorPalette_simulationPalettes', '[{oops')
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
   })
 
-  it('returns an empty list when the stored value is not a list', () => {
+  it('returns null when the stored value is not a list', () => {
     localStorage.setItem('colorPalette_simulationPalettes', 'null')
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
     localStorage.setItem('colorPalette_simulationPalettes', '{"name":"x"}')
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
   })
 
   it('drops stored entries that are not palettes', () => {
@@ -290,7 +295,7 @@ describe('simulation palettes', () => {
     const setItem = vi.spyOn(Storage.prototype, 'setItem')
     const removeItem = vi.spyOn(Storage.prototype, 'removeItem')
     vi.stubGlobal('window', undefined)
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
     setSimulationPalettes([])
     clearSimulationPalettes()
     expect(setItem).not.toHaveBeenCalled()

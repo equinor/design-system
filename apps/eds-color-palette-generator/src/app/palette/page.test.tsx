@@ -212,8 +212,23 @@ describe('Palette editor page', () => {
       expect(getSimulationPalettes()).toEqual(saved)
     })
 
-    it('starts from the Tokens Studio hues when the saved list is empty', () => {
-      setSimulationPalettes([])
+    it('stays empty when every palette was removed', async () => {
+      const user = userEvent.setup()
+      setSimulationPalettes([TOKENS_STUDIO[0]])
+      const { unmount } = renderWithProviders(<PalettePage />)
+      await user.click(
+        screen.getByRole('button', { name: `Remove ${TOKENS_STUDIO[0].name}` }),
+      )
+      unmount()
+
+      renderWithProviders(<PalettePage />)
+
+      expect(paletteNames()).toEqual([])
+      expect(getSimulationPalettes()).toEqual([])
+    })
+
+    it('starts from the Tokens Studio hues when the saved value is unreadable', () => {
+      localStorage.setItem('colorPalette_simulationPalettes', '[{oops')
       renderWithProviders(<PalettePage />)
 
       expect(paletteNames()).toEqual(TOKENS_STUDIO.map((p) => p.name))
@@ -259,7 +274,7 @@ describe('Palette editor page', () => {
       await replaceText(user, stepInput(0, 9), '#123456')
       await user.click(screen.getByRole('button', { name: 'Custom HEX' }))
 
-      const saved = getSimulationPalettes()
+      const saved = getSimulationPalettes() ?? []
       expect(saved).toHaveLength(TOKENS_STUDIO.length + 1)
       expect(saved[0].steps[8]).toBe('#123456')
       expect(saved[saved.length - 1]).toEqual({

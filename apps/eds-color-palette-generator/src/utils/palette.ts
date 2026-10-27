@@ -181,17 +181,23 @@ function isTokenPalette(value: unknown): value is TokenPalette {
   )
 }
 
-export function getSimulationPalettes(): TokenPalette[] {
-  if (typeof window === 'undefined') return []
+/**
+ * The palettes saved by the Palette editor, or `null` when nothing usable is
+ * saved. An empty list is a saved choice (every palette removed), so the
+ * editor can tell it from a first visit.
+ */
+export function getSimulationPalettes(): TokenPalette[] | null {
+  if (typeof window === 'undefined') return null
   try {
     const item = localStorage.getItem(SIMULATION_PALETTES_KEY)
-    const parsed: unknown = item ? JSON.parse(item) : []
+    if (item === null) return null
+    const parsed: unknown = JSON.parse(item)
     // Anything but a list of palettes (null, an object from an older
     // version, a palette without 15 steps) would crash the pages that map
     // over the palettes, and it stays stored across reloads
-    return Array.isArray(parsed) ? parsed.filter(isTokenPalette) : []
+    return Array.isArray(parsed) ? parsed.filter(isTokenPalette) : null
   } catch {
-    return []
+    return null
   }
 }
 

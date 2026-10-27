@@ -54,9 +54,10 @@ export default function PalettePage() {
     if (hasAutoImported) return
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot client-only start; localStorage is not there during SSR, and saving below must not run before this
     setHasAutoImported(true)
-    const saved = getSimulationPalettes()
+    // An empty saved list stays empty; "Reset to Tokens Studio" brings the
+    // hues back
     setEntries(
-      withIds(saved.length > 0 ? saved : editablePalettesFromTokensStudio()),
+      withIds(getSimulationPalettes() ?? editablePalettesFromTokensStudio()),
     )
   }, [hasAutoImported])
 
