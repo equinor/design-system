@@ -22,5 +22,5 @@ import { save } from '@equinor/eds-icons'
 
 - An icon without a `title` is decorative. It gets `aria-hidden`, so a screen reader skips it.
 - An icon with a `title` gets the `img` role and is named by that title. Use this when the icon carries meaning that the text beside it does not.
-- An icon alone in a button has no text, so the button needs its own `aria-label`, or the icon needs a `title`.
+- An icon alone in a button has no text, so give the button an `aria-label`.
 - The icon takes `currentColor`, so its contrast follows the text colour around it. A `color` you set yourself needs enough contrast against the background.
