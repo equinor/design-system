@@ -2,13 +2,14 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 import {
-  findComponent,
+  findComponents,
   loadComponents,
   searchComponents,
+  similarNames,
 } from './components.js'
 import { CliError, fail } from './errors.js'
 import {
-  formatComponent,
+  formatComponents,
   formatList,
   formatSearch,
   formatTokens,
@@ -30,7 +31,7 @@ const HELP = `eds: look up the Equinor Design System beta components and tokens 
 
 Usage
   eds list                  The components, with a one-line description
-  eds show <Component>      Import line, props, examples and guidance
+  eds show <Component>...   Import line, props, examples and guidance, for one or more components
   eds search <text>         Components whose name, description or props match
   eds tokens [text]         Semantic tokens whose name contains every word
 
@@ -128,25 +129,38 @@ export function main(argv: string[], io: Io): number {
         return 0
       }
       case 'show': {
-        if (!text) fail('Which component? For example: eds show Button')
+        if (!rest.length) fail('Which component? For example: eds show Button')
         const section =
           values.section === undefined
             ? undefined
             : oneOf<Section>('section', values.section, SECTIONS, 'props')
-        const component = findComponent(loadComponents(cwd, values.data), text)
-        print(component, () => formatComponent(component, section))
+        // Component names have no spaces, so each word is one component and an
+        // agent gets everything it needs for a form in one call.
+        const components = findComponents(
+          loadComponents(cwd, values.data),
+          rest,
+        )
+        print(components.length === 1 ? components[0] : components, () =>
+          formatComponents(components, section),
+        )
         return 0
       }
       case 'search': {
         if (!text) fail('Search for what? For example: eds search date')
-        const matches = searchComponents(loadComponents(cwd, values.data), text)
+        const data = loadComponents(cwd, values.data)
+        const matches = searchComponents(data, text)
         print(
           matches.map(({ name, description, status }) => ({
             name,
             description,
             status,
           })),
-          () => formatSearch(text, matches),
+          () =>
+            formatSearch(
+              text,
+              matches,
+              matches.length ? [] : rest.flatMap((w) => similarNames(data, w)),
+            ),
         )
         return 0
       }
