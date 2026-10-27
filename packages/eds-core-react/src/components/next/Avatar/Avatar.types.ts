@@ -28,6 +28,6 @@ export type AvatarProps = {
   src?: string
   /** Alt text for the image. Falls back to `name` if not provided. Pass `""` explicitly for decorative images. */
   alt?: string
-  /** Show a danger-tone notification indicator dot. When `name` is set, "notification" is appended to the avatar `aria-label` (e.g. `"Ada Lovelace, notification"`). The dot is `aria-hidden` and silent when no `name` is provided. */
+  /** Show a red notification dot at the bottom-right corner. With `name`, "notification" is added to the `aria-label` (e.g. `"Ada Lovelace, notification"`). Without `name`, a visually hidden "Notification" text is read out instead. */
   notification?: boolean
 } & HTMLAttributes<HTMLDivElement>
