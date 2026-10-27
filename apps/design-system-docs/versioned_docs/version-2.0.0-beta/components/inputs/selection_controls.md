@@ -56,7 +56,7 @@ Checkboxes allow users to select one or more options from a set, or toggle a sin
 
 Radio buttons allow users to select exactly one option from a group. They expose all available options, making it easy to compare choices at a glance.
 
-<StoryCanvas of="Radio/Spacious" showLink />
+<StoryCanvas of="Radio/States" showLink />
 
 ### Switch
 
