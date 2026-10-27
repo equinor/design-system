@@ -84,12 +84,13 @@ Introduction.parameters = {
 export const Overview: StoryFn = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-      <Avatar name="Ada Lovelace" size="sm" />
-      <Avatar name="Ada Lovelace" size="md" />
-      <Avatar name="Ada Lovelace" size="lg" />
+      <Avatar name="Ada Lovelace" />
       <Avatar name="Ada Lovelace" emphasis="high" />
-      <Avatar name="Ada Lovelace" notification />
-      <Avatar name="Ada Lovelace" src="https://i.pravatar.cc/150?img=47" />
+      <Avatar
+        name="Ada Lovelace"
+        src="https://i.pravatar.cc/150?img=47"
+        notification
+      />
     </div>
     <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
   </div>

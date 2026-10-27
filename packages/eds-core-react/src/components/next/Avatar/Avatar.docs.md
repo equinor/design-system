@@ -2,17 +2,16 @@
 
 <!-- This summary is shown above both the React and React Native tabs. Write it so it is true on both platforms, and put anything that differs by platform in Features or Usage. -->
 
-Avatar represents a person with their initials or a profile photo in a circle. Use `AvatarNameLabel` to show the avatar together with a name and secondary text, for example in lists and headers.
+Avatar represents a person in a small circle, for example in lists and headers. Use `AvatarNameLabel` to show it next to the person's name.
 
 ## Features
 
 <!-- Three to five short lines on what the component does for you. Do not repeat the controls. -->
 
-- Derives the initials from a name, using the first and last word.
-- Shows a profile photo instead of initials, cropped to the circle.
-- Can show a notification dot, which is also read out to screen readers.
-- `AvatarNameLabel` adds a name, secondary text and a trailing slot, and truncates long text in the vertical layout.
-- Follows the density of its parent element.
+- Shows a profile photo, or initials when there is no photo.
+- One `name` gives both the initials and the accessible name, so screen readers announce the person.
+- Can show a notification dot that screen readers also announce.
+- `AvatarNameLabel` has room for secondary text, such as a job title, and an open trailing slot that takes any content.
 
 ## Usage
 
