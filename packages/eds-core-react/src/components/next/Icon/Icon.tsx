@@ -2,7 +2,7 @@ import { forwardRef, useId } from 'react'
 import type { IconProps } from './Icon.types'
 
 /**
- * Icon component for EDS 2.0
+ * Icon component for the beta components (/next)
  *
  * Features:
  * - Automatic sizing from parent's data-font-size via --eds-typography-icon-size

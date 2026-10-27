@@ -11,7 +11,7 @@ const meta: Meta<typeof Dialog> = {
     docs: {
       description: {
         component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/beta-about--docs) for what beta means.
+**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.
 
 Built on the native \`<dialog>\` element with \`showModal()\` for free focus
 trapping, Escape-key handling and inert background. Backdrop clicks close
