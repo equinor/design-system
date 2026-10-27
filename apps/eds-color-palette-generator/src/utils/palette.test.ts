@@ -11,6 +11,8 @@ import {
   getApcaFontBreakdown,
   getSimulationPalettes,
   isHexColour,
+  pickAt,
+  pickIndex,
   setSimulationPalettes,
   type TokenPalette,
 } from './palette'
@@ -430,5 +432,38 @@ describe('examplePalettes', () => {
     examplePalettes('dark', saved)
 
     expect(saved).toEqual(copy)
+  })
+})
+
+describe('pickAt and pickIndex', () => {
+  const ramp = (name: string): TokenPalette => ({
+    name,
+    steps: Array(STEP_COUNT).fill('#888888'),
+  })
+  const light = [ramp('Blue'), ramp('Custom'), ramp('Custom')]
+  const dark = [
+    ramp('Blue'),
+    ramp('Red'),
+    ramp('Blue (light)'),
+    ramp('Custom (light)'),
+    ramp('Custom (light)'),
+  ]
+
+  it('finds the same palette after a scheme switch', () => {
+    expect(pickIndex(dark, pickAt(light, 2))).toBe(4)
+    expect(pickIndex(light, pickAt(dark, 3))).toBe(1)
+  })
+
+  it('tells palettes with the same name apart', () => {
+    expect(pickAt(light, 1)).toEqual({ name: 'Custom', nth: 0 })
+    expect(pickAt(light, 2)).toEqual({ name: 'Custom', nth: 1 })
+  })
+
+  it('uses the first palette with the name when there are fewer of them', () => {
+    expect(pickIndex(light, pickAt(dark, 2))).toBe(0)
+  })
+
+  it('falls back to the first palette when the name is gone', () => {
+    expect(pickIndex(light, { name: 'Removed', nth: 0 })).toBe(0)
   })
 })

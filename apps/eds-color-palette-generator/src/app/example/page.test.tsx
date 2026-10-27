@@ -215,5 +215,29 @@ describe('Examples page', () => {
       )
       expectPairingFrom(CUSTOM.steps)
     })
+
+    it('keeps the picked palette when the scheme changes', async () => {
+      const user = userEvent.setup()
+      const saved = editablePalettesFromTokensStudio()
+      saved[0].steps = tokensStudioPalettes('light')[5].steps
+      // Light lists the edited hue in its place and My palette eighth; dark
+      // adds the edited hue as a light ramp first, so My palette is ninth
+      setSimulationPalettes([...saved, CUSTOM])
+      const { setColorScheme } = renderWithProviders(<ExamplePage />)
+      await user.click(within(picker()).getByRole('radio', { name: CUSTOM.name }))
+
+      setColorScheme('dark')
+
+      expect(
+        within(picker()).getByRole('radio', { name: `${CUSTOM.name} (light)` }),
+      ).toHaveAttribute('aria-checked', 'true')
+      expectPairingFrom(CUSTOM.steps)
+
+      setColorScheme('light')
+
+      expect(
+        within(picker()).getByRole('radio', { name: CUSTOM.name }),
+      ).toHaveAttribute('aria-checked', 'true')
+    })
   })
 })

@@ -3,7 +3,12 @@
 import { useMemo, useState } from 'react'
 import { refresh } from '@equinor/eds-icons'
 import { useColorScheme } from '@/context/ColorSchemeContext'
-import { examplePalettes } from '@/utils/palette'
+import {
+  examplePalettes,
+  pickAt,
+  pickIndex,
+  type PalettePick,
+} from '@/utils/palette'
 import {
   refreshCustomPalettes,
   useCustomPalettes,
@@ -22,7 +27,8 @@ import { Main } from '@/components/shared/Main'
 
 export default function ExamplePage() {
   const { colorScheme } = useColorScheme()
-  const [activePalette, setActivePalette] = useState(0)
+  // null until a palette is picked, which shows the first one
+  const [pick, setPick] = useState<PalettePick | null>(null)
   const customPalettes = useCustomPalettes()
 
   // The seven Tokens Studio hues for the current scheme with the palettes
@@ -32,9 +38,9 @@ export default function ExamplePage() {
     [colorScheme, customPalettes],
   )
 
-  // A saved palette can disappear on refresh; fall back to the first one so
-  // the picker and the previews agree
-  const selected = activePalette < allPalettes.length ? activePalette : 0
+  // The pick is found by name, so it follows a scheme switch; a saved
+  // palette that disappeared on refresh falls back to the first one
+  const selected = pick ? pickIndex(allPalettes, pick) : 0
   const palette = allPalettes[selected]
 
   // Custom palettes may repeat a name, so the index is the value
@@ -58,7 +64,7 @@ export default function ExamplePage() {
             layout="wrap"
             options={paletteOptions}
             value={String(selected)}
-            onChange={(v) => setActivePalette(Number(v))}
+            onChange={(v) => setPick(pickAt(allPalettes, Number(v)))}
           />
           <Button
             variant="ghost"

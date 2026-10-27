@@ -232,6 +232,9 @@ function isUnchangedHue(palette: TokenPalette): boolean {
   )
 }
 
+/** What dark mode adds to the name of a saved palette in `examplePalettes`. */
+const LIGHT_RAMP_SUFFIX = ' (light)'
+
 /**
  * The palettes the Examples page shows for a scheme: the seven Tokens Studio
  * hues together with the palettes saved in the Palette editor.
@@ -256,7 +259,10 @@ export function examplePalettes(
   if (scheme === 'dark') {
     const lightRamps = usable
       .filter((palette) => !isUnchangedHue(palette))
-      .map((palette) => ({ ...palette, name: `${palette.name} (light)` }))
+      .map((palette) => ({
+        ...palette,
+        name: `${palette.name}${LIGHT_RAMP_SUFFIX}`,
+      }))
     return [...hues, ...lightRamps]
   }
   const rest = [...usable]
@@ -266,4 +272,40 @@ export function examplePalettes(
     return index === -1 ? hue : rest.splice(index, 1)[0]
   })
   return [...merged, ...rest]
+}
+
+/**
+ * A picked palette in `examplePalettes`, kept across a scheme switch. The
+ * index cannot be kept, because the light and dark lists differ in length
+ * and order, and the name alone is not enough, because saved palettes can
+ * share a name. So the pick is the name without " (light)" and which of the
+ * palettes with that name it is.
+ */
+export type PalettePick = { name: string; nth: number }
+
+function pickName(palette: TokenPalette): string {
+  return palette.name.endsWith(LIGHT_RAMP_SUFFIX)
+    ? palette.name.slice(0, -LIGHT_RAMP_SUFFIX.length)
+    : palette.name
+}
+
+/** The pick for the palette at `index`. */
+export function pickAt(palettes: TokenPalette[], index: number): PalettePick {
+  const name = pickName(palettes[index])
+  const nth = palettes
+    .slice(0, index)
+    .filter((palette) => pickName(palette) === name).length
+  return { name, nth }
+}
+
+/**
+ * Where the pick is in `palettes`. When there are fewer palettes with the
+ * name, the first of them is used; when the name is gone (a saved palette
+ * was removed), the first palette.
+ */
+export function pickIndex(palettes: TokenPalette[], pick: PalettePick): number {
+  const matches = palettes.flatMap((palette, i) =>
+    pickName(palette) === pick.name ? [i] : [],
+  )
+  return matches[pick.nth] ?? matches[0] ?? 0
 }
