@@ -3,6 +3,10 @@
  * The text rules set the beta custom properties directly and mirror the CSS on
  * the Using typography page of the docs site. The layout rules only frame the
  * examples, and are not spacing guidance.
+ *
+ * The rules are deliberately not in a layer, unlike component CSS. The docs
+ * site renders these stories inline, and its global heading and paragraph
+ * styles are unlayered, so layered rules here would lose to them.
  */
 
 .typography-demo {
@@ -11,6 +15,11 @@
 
   :is(h1, h2, p) {
     margin: 0;
+  }
+
+  /* The docs site sets a colour on headings, so they would not inherit */
+  :is(h1, h2) {
+    color: inherit;
   }
 
   /* Side-by-side comparisons */
