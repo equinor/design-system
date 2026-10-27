@@ -4,7 +4,7 @@ import { Dialog } from '.'
 import { Button } from '../Button'
 
 const meta: Meta<typeof Dialog> = {
-  title: 'EDS 2.0 (beta)/Feedback/Dialog',
+  title: 'Beta/Feedback/Dialog',
   component: Dialog,
   tags: ['beta'],
   parameters: {

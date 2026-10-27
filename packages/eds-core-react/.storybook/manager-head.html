@@ -8,3 +8,23 @@
     font-family: Equinor, sans-serif !important;
   }
 </style>
+
+<script>
+  // The beta section was called "EDS 2.0 (beta)" until #5749, so its story ids
+  // started with eds-2-0-beta-. Old links are rewritten to the beta- ids
+  // before Storybook reads the URL.
+  ;(function () {
+    var search = window.location.search
+    var next = search.replace(
+      /([?&]path=(?:\/|%2F)(?:docs|story)(?:\/|%2F))eds-2-0-beta-/i,
+      '$1beta-',
+    )
+    if (next !== search) {
+      window.history.replaceState(
+        null,
+        '',
+        window.location.pathname + next + window.location.hash,
+      )
+    }
+  })()
+</script>

@@ -9,7 +9,7 @@ type Args = {
 }
 
 const meta: Meta<Args> = {
-  title: 'EDS 2.0 (beta)/Foundation/Typography',
+  title: 'Beta/Foundation/Typography',
   parameters: {
     docs: { page },
     controls: { expanded: true },

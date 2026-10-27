@@ -7,7 +7,7 @@ import type { FieldProps } from './Field.types'
 import { useFieldIds } from './useFieldIds'
 
 const meta: Meta<typeof Field> = {
-  title: 'EDS 2.0 (beta)/Inputs/Field',
+  title: 'Beta/Inputs/Field',
   component: Field,
   tags: ['beta'],
   decorators: [

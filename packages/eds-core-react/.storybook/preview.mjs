@@ -39,7 +39,7 @@ const preview = {
 
   decorators: [
     (Story, context) => {
-      const isNext = context.title.startsWith('EDS 2.0')
+      const isNext = context.title.startsWith('Beta/')
       const debugGrid = context.globals.debugGrid === 'on'
 
       useEffect(() => {
@@ -73,7 +73,7 @@ const preview = {
         order: [
           'Introduction',
           'EdsProvider',
-          'EDS 2.0 (beta)',
+          'Beta',
           ['About', 'Breaking changes', 'Icon', 'Inputs'],
           'Mobile',
           ['About', 'Components'],

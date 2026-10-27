@@ -4,7 +4,7 @@ import { Accordion } from '.'
 import type { AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
-  title: 'EDS 2.0 (beta)/Surface/Accordion',
+  title: 'Beta/Surface/Accordion',
   component: Accordion,
   tags: ['beta'],
   parameters: {

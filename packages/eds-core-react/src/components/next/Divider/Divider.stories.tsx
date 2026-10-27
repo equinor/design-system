@@ -5,7 +5,7 @@ import { Divider } from '.'
 import page from './Divider.docs.mdx'
 
 const meta: Meta<typeof Divider> = {
-  title: 'EDS 2.0 (beta)/Surface/Divider',
+  title: 'Beta/Surface/Divider',
   component: Divider,
   tags: ['beta'],
   parameters: {

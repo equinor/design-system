@@ -12,7 +12,7 @@ import { Icon } from '../Icon'
 import { Link } from '../Link'
 
 const meta: Meta<typeof Banner> = {
-  title: 'EDS 2.0 (beta)/Feedback/Banner',
+  title: 'Beta/Feedback/Banner',
   component: Banner,
   tags: ['beta'],
   decorators: [
