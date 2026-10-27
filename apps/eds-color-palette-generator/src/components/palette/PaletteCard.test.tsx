@@ -186,6 +186,18 @@ describe('PaletteCard', () => {
       expect(stepInput(4)).toHaveAttribute('aria-invalid', 'false')
     })
 
+    it('says in text what is wrong with an invalid step', () => {
+      const steps = [...PALETTE.steps]
+      steps[4] = '#12'
+      renderCard({ palette: { ...PALETTE, steps } })
+
+      expect(stepInput(5)).toHaveAccessibleDescription(
+        'Use a six-digit hex value',
+      )
+      expect(screen.getAllByText('Use a six-digit hex value')).toHaveLength(1)
+      expect(stepInput(4)).not.toHaveAttribute('aria-describedby')
+    })
+
     it('names the name field after the position of the card', () => {
       renderCard({ index: 0 })
 

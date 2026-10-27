@@ -140,10 +140,12 @@ export function PaletteCard({
       <div className="grid grid-cols-5 gap-2 px-5 pt-4 pb-5">
         {sorted.map(({ hex, i: origIdx }) => {
           const valid = isHexColour(hex)
+          const fieldId = `${inputId}-${origIdx}`
+          const errorId = `${fieldId}-error`
           return (
             <div key={`input-${origIdx}`}>
               <label
-                htmlFor={`${inputId}-${origIdx}`}
+                htmlFor={fieldId}
                 className="mb-0.5 block text-xs leading-snug text-secondary"
               >
                 <strong className="font-medium text-primary">
@@ -157,7 +159,7 @@ export function PaletteCard({
                   style={{ backgroundColor: hex }}
                 />
                 <input
-                  id={`${inputId}-${origIdx}`}
+                  id={fieldId}
                   type="text"
                   value={hex}
                   onChange={(e) => {
@@ -165,6 +167,7 @@ export function PaletteCard({
                     onStepChange(index, origIdx, v)
                   }}
                   aria-invalid={!valid}
+                  aria-describedby={valid ? undefined : errorId}
                   className={[
                     'w-full min-w-0 rounded border bg-input px-1.5 py-1 font-mono text-sm text-primary',
                     valid
@@ -173,6 +176,15 @@ export function PaletteCard({
                   ].join(' ')}
                 />
               </div>
+              {/* The red border alone does not say what is wrong */}
+              {!valid && (
+                <p
+                  id={errorId}
+                  className="m-0 mt-0.5 text-xs leading-snug text-danger"
+                >
+                  Use a six-digit hex value
+                </p>
+              )}
             </div>
           )
         })}
