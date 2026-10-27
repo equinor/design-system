@@ -158,9 +158,9 @@ The table below is rendered directly on this page, outside the wrapper that give
 
 <ResolutionTable />
 
-## Published names and internal names
+## Published names
 
-The bundle contains more names than your code should use. `var()` is resolved in the browser, so every name that an alias points at has to be present in the published CSS, including the primitive scale and the per-mode layers under the semantic names. Only the semantic names are the published contract ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 7). The others can be renamed or restructured in any release without notice, so do not reference them in your code.
+The bundle contains more names than your code should use. Every name a semantic alias points at has to be present at runtime, because `var()` is resolved in the browser. Only the names in the table below are the published contract ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 7). Any other `--eds-*` name you see in devtools can be renamed or removed in any release without notice.
 
 | Published | What they are |
 | --- | --- |
@@ -171,17 +171,6 @@ The bundle contains more names than your code should use. `var()` is resolved in
 | `--eds-spacing-*`, `--eds-corner-radius-*` | Spacing steps and corner radius |
 | `--eds-typography-header-*`, `--eds-typography-label-*`, `--eds-typography-body-*` | Font size and line height for each role and step |
 | `--eds-font-family-header`, `--eds-font-family-ui`, `--eds-font-weight-*` | Typefaces and weights |
-
-| Internal | What they are |
-| --- | --- |
-| `--eds-primitives-*` | The primitive scales for spacing, type size, line height, font family and weight |
-| `--eds-density-*` | The values for each density behind spacing, corner radius and typography |
-| `--eds-light-*`, `--eds-dark-*` | The raw colour ladders |
-| `--eds-accent-*`, `--eds-neutral-*`, `--eds-info-*`, `--eds-success-*`, `--eds-warning-*`, `--eds-danger-*`, `--eds-dataviz-*` | The colour-scheme layer that the colour roles alias |
-| `--eds-elevation-ambient`, `--eds-elevation-key`, `--eds-shadow-*` | The parts of a shadow |
-| `--eds-family-*`, `--eds-weight-*` | The font collection behind the font names |
-
-Three pairs of names are easy to mix up. `--eds-data-visualization-*` is published and `--eds-dataviz-*` is internal. `--eds-elevation-low` and `--eds-elevation-high` are published, and the other two `--eds-elevation-*` names are internal. `--eds-font-family-ui` is published and `--eds-family-ui` is internal.
 
 The same boundary applies to the other files in the package. Import `next/css/variables.css`, not the per-collection CSS files it is built from. In TypeScript, the published modules are `@equinor/eds-tokens/next/ts/semantic/light` and `@equinor/eds-tokens/next/ts/semantic/dark`, plus the `next/ts/density/*` modules, which stay published only until the semantic modules carry the right value for each density. The [README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#typescript) describes the TypeScript modules.
 
