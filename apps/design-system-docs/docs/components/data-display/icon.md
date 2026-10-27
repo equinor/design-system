@@ -84,7 +84,7 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Announced by screen readers using the title text
 - Use when the icon conveys meaning that is not available through surrounding text
 
-<StoryCanvas of="Icon/Accessibility" showLink />
+<StoryCanvas of="Icon/DecorativeAndSemantic" showLink />
 
 ## Do's and Don'ts
 

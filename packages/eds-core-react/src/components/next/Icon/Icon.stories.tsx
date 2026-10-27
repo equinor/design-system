@@ -1,7 +1,17 @@
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { save, add, warning_filled } from '@equinor/eds-icons'
+import {
+  save,
+  add,
+  arrow_forward,
+  warning_filled,
+  delete_forever,
+} from '@equinor/eds-icons'
 import { Icon, IconProps } from '.'
+import { Button } from '../Button'
+import { Chip } from '../Chip'
+import { Link } from '../Link'
 import { CSSProperties, ReactNode } from 'react'
+import page from './Icon.docs.mdx'
 
 /* Story helper components - keeps code preview clean */
 const Stack = ({
@@ -96,34 +106,7 @@ const meta: Meta<typeof Icon> = {
   },
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-\`\`\`bash
-npm install @equinor/eds-core-react@beta
-\`\`\`
-
-\`\`\`tsx
-import { Icon } from '@equinor/eds-core-react/next'
-import { save } from '@equinor/eds-icons'
-
-// Default size, --eds-spacing-xl
-<Icon data={save} />
-
-// Explicit size, --eds-spacing-md
-<Icon data={save} size="md" />
-\`\`\`
-
-## Sizing
-
-- **No \`size\` prop**: the icon is \`--eds-spacing-xl\` (24px at comfortable), the same as \`size="xl"\`. The size does not follow the surrounding text.
-- **\`size\` prop**: the spacing token of the same name, so \`size="md"\` is \`--eds-spacing-md\`, the variable Figma binds.
-- **Inside a component**, such as Button or Chip, the component sets the icon size and the \`size\` prop has no effect.
-
-Every size follows the density set on an ancestor.
-        `,
-      },
+      page,
     },
   },
 }
@@ -138,6 +121,15 @@ Introduction.args = {
   title: 'Save document',
 }
 
+export const Overview: StoryFn<IconProps> = () => (
+  <Stack gap={16} align="center">
+    <Icon data={save} />
+    <Icon data={add} size="lg" />
+    <Icon data={warning_filled} size="md" />
+    <Icon data={delete_forever} color="var(--eds-icon-on-default-danger)" />
+  </Stack>
+)
+
 export const ExplicitSizes: StoryFn<IconProps> = () => (
   <Stack gap={16} align="flex-end">
     {SIZES.map((size) => (
@@ -151,7 +143,7 @@ ExplicitSizes.parameters = {
   docs: {
     description: {
       story: `
-Each size is the spacing token of the same name. Without \`size\`, the icon is \`xl\`.
+Each size is the spacing token of the same name. Without \`size\`, the icon is \`xl\`. To choose a size, use the spacing variable the icon is bound to in Figma. There is no fixed size per text size: Button pairs label md with \`lg\`, Chip and Link pair it with \`md\`.
 
 | Size  | Token               | Comfortable |
 |-------|---------------------|-------------|
@@ -225,49 +217,102 @@ Densities.parameters = {
 }
 
 export const Color: StoryFn<IconProps> = () => (
-  <Stack gap={16}>
-    <Icon data={save} size="lg" color="red" />
-    <Icon data={save} size="lg" color="green" />
-    <Icon data={save} size="lg" color="blue" />
-    <Icon data={save} size="lg" color="currentColor" />
+  <Stack direction="column" gap={16}>
+    <Stack gap={16}>
+      <Icon data={save} color="var(--eds-icon-primary)" />
+      <Icon data={save} color="var(--eds-icon-secondary)" />
+      <Icon data={save} color="var(--eds-icon-on-default-accent)" />
+      <Icon data={save} color="var(--eds-icon-on-default-danger)" />
+    </Stack>
+    <p
+      style={{
+        margin: 0,
+        fontFamily: 'var(--eds-font-family-ui)',
+        fontSize: 'var(--eds-typography-label-md-font-size)',
+        lineHeight: 'var(--eds-typography-label-md-line-height)',
+        color: 'var(--eds-text-on-default-success)',
+      }}
+    >
+      <Icon data={save} size="md" /> Inherits the text colour
+    </p>
   </Stack>
 )
 Color.parameters = {
   docs: {
     description: {
       story:
-        'Icons inherit `currentColor` by default, making them adapt to text color automatically.',
+        'Icons use `currentColor` by default, so they take the colour of the surrounding text. To set a colour, pass a semantic icon token such as `var(--eds-icon-secondary)` to `color`, never a raw colour value.',
     },
   },
 }
 
-export const Accessibility: StoryFn<IconProps> = () => (
-  <Stack gap={32}>
-    <div>
-      <p>
-        <strong>Decorative</strong> (hidden from screen readers):
-      </p>
-      <Icon data={save} size="lg" />
-      <pre style={{ fontSize: '12px', padding: '8px' }}>
-        {'<Icon data={save} />'}
-      </pre>
-    </div>
-    <div>
-      <p>
-        <strong>Semantic</strong> (announced by screen readers):
-      </p>
-      <Icon data={save} size="lg" title="Save document" />
-      <pre style={{ fontSize: '12px', padding: '8px' }}>
-        {'<Icon data={save} title="Save document" />'}
-      </pre>
-    </div>
+export const InsideComponents: StoryFn<IconProps> = () => (
+  <Stack gap={24} align="center">
+    <Button>
+      <Icon data={add} size="5xl" aria-hidden />
+      Add
+    </Button>
+    <Chip>
+      <Icon data={save} aria-hidden />
+      Saved
+    </Chip>
+    <Link href="#" variant="standalone">
+      Next page
+      <Icon data={arrow_forward} />
+    </Link>
   </Stack>
 )
-Accessibility.parameters = {
+InsideComponents.parameters = {
   docs: {
     description: {
       story:
-        'Icons without a `title` prop are decorative (`aria-hidden`). Icons with a `title` prop are semantic (`role="img"`).',
+        'Button, Chip and a standalone Link size the icons you pass them, so leave out `size`. The Button here sets `size="5xl"`, and the icon still follows the button.',
+    },
+  },
+}
+
+const Code = ({ children }: { children: string }) => (
+  <pre
+    style={{
+      margin: 0,
+      fontSize: 'var(--eds-typography-label-sm-font-size)',
+      lineHeight: 'var(--eds-typography-label-sm-line-height)',
+    }}
+  >
+    {children}
+  </pre>
+)
+
+export const DecorativeAndSemantic: StoryFn<IconProps> = () => (
+  <Stack direction="column" gap={24}>
+    <Stack gap={12} align="center">
+      <Icon data={save} />
+      <Text>Decorative: hidden from screen readers</Text>
+    </Stack>
+    <Code>{'<Icon data={save} />'}</Code>
+    <Stack gap={12} align="center">
+      <Icon data={save} title="Saved" />
+      <Text>Semantic: announced as an image named Saved</Text>
+    </Stack>
+    <Code>{'<Icon data={save} title="Saved" />'}</Code>
+    <Stack gap={12} align="center">
+      <Button icon aria-label="Delete">
+        <Icon data={delete_forever} aria-hidden />
+      </Button>
+      <Text>Icon-only button: the button carries the name</Text>
+    </Stack>
+    <Code>
+      {
+        '<Button icon aria-label="Delete">\n  <Icon data={delete_forever} aria-hidden />\n</Button>'
+      }
+    </Code>
+  </Stack>
+)
+DecorativeAndSemantic.parameters = {
+  docs: {
+    description: {
+      story:
+        'Without `title` an icon is decorative and gets `aria-hidden`. With `title` it gets the `img` role and the title as its name. In an icon-only button, put the name on the button with `aria-label` and keep the icon decorative, so it is not read twice.',
     },
   },
 }
