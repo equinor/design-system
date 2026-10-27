@@ -1,6 +1,11 @@
 const fs = require('fs')
 const path = require('path')
-const { rootDir, PLATFORMS, MOBILE_SUB_COMPONENTS } = require('./config')
+const {
+  rootDir,
+  PLATFORMS,
+  MOBILE_SUB_COMPONENTS,
+  WEB_SUB_COMPONENTS,
+} = require('./config')
 const { fail } = require('./errors')
 const {
   locate,
@@ -55,23 +60,19 @@ function buildPages(project, component) {
     const props = extractProps(declaration)
     assertPropsDocumented(component, props)
     const baseTypes = platform === 'mobile' ? extractBaseTypes(declaration) : []
-    const subComponents =
-      platform === 'mobile'
-        ? (MOBILE_SUB_COMPONENTS[component] ?? []).map((sub) => {
-            const subDeclaration = findPropsDeclaration(
-              project,
-              dir,
-              sub.component,
-            )
-            const subProps = extractProps(subDeclaration)
-            assertPropsDocumented(sub.component, subProps)
-            return {
-              name: sub.name,
-              props: subProps,
-              baseTypes: extractBaseTypes(subDeclaration),
-            }
-          })
-        : []
+    const subComponentList =
+      platform === 'mobile' ? MOBILE_SUB_COMPONENTS : WEB_SUB_COMPONENTS
+    const subComponents = (subComponentList[component] ?? []).map((sub) => {
+      const subDeclaration = findPropsDeclaration(project, dir, sub.component)
+      const subProps = extractProps(subDeclaration)
+      assertPropsDocumented(sub.component, subProps)
+      return {
+        name: sub.name,
+        props: subProps,
+        baseTypes:
+          platform === 'mobile' ? extractBaseTypes(subDeclaration) : [],
+      }
+    })
     const { sections: sidecar, links } = readSidecar(
       path.join(dir, `${component}.docs.md`),
       cfg,
