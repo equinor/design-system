@@ -153,10 +153,7 @@ test.describe('Tooltip (next) placement', () => {
       test(`trigger in the ${corner.toLowerCase()} corner gets the tooltip on the ${side}`, async ({
         page,
       }) => {
-        await openStory(
-          page,
-          'beta-data-display-tooltip--viewport-edges',
-        )
+        await openStory(page, 'beta-data-display-tooltip--viewport-edges')
         expectPlacement(await hoverAndMeasure(page, corner), side)
       })
     }
