@@ -34,7 +34,7 @@
     }
   },
   "scripts": {
-    "build": "rollup -c && tsc -p tsconfig.build.json",
+    "build": "rollup -c && tsc -p tsconfig.build.json && node ../../scripts/generate-agent-data.js",
     "prepublishOnly": "pnpm run build",
     "test": "tsc -p tsconfig.test.json && jest --ci",
     "test:watch": "tsc-watch -p tsconfig.test.json --onFirstSuccess  \"jest --watch\"",
