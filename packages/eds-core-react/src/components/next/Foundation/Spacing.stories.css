@@ -1,6 +1,11 @@
 /* Demo styles for the Spacing stories. Every space and radius below reads a
    beta token, so the demos follow data-density the way consumer CSS does.
-   The fixed rem sizes are demo dimensions that no token covers. */
+   The fixed rem sizes are demo dimensions that no token covers.
+
+   The rules are not in a layer, so inside .spacing-story they win over
+   component styles. The p, figure and code rules are meant for the demo's
+   own markup. The Button in the Densities story renders none of those
+   elements; a component that does needs a narrower selector here. */
 
 .spacing-story {
   font-family: var(--eds-font-family-ui);

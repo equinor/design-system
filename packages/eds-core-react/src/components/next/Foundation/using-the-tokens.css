@@ -3,7 +3,12 @@
    column can show what resolves without the attribute. Its own lines and
    outlines therefore use currentcolor instead of colour tokens, which
    would resolve to nothing there. Spacing and typography tokens resolve
-   without an attribute, so the table uses them. */
+   without an attribute, so the table uses them.
+
+   The rules are not in a layer, so inside .tokens-readout they win over
+   component styles. The table and code rules are meant for the readout's
+   own markup; a component placed in the readout needs a narrower selector
+   here. */
 
 .tokens-readout {
   overflow-x: auto;

@@ -154,7 +154,7 @@ The semantic names are all declared on `:root`, but not all of them have a value
 | `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*` | The Comfortable values |
 | `--eds-font-family-*`, `--eds-font-weight-*`, `--eds-overlay-scrim` | Always resolve, since they have no mode |
 
-The table below is rendered directly on this page, outside the wrapper that gives every story a colour scheme. Each column is an element with the attribute named in its heading, and the values are read back from the browser with `getComputedStyle`. The last column sets only `data-density`, which shows that a density attribute does not make the colours resolve. The elevation row has no value in any column, including light and dark, because each column sets the attribute on its own element and the root element of this page has none, as described for the shadows above. The sample in each column uses the same CSS. Its dashed outline is drawn with `currentcolor` rather than a token, so that its padding stays visible when the token colours are missing.
+The table below is rendered directly on this page, outside the wrapper that gives every story a colour scheme. Each column is an element with the attribute named in its heading, and the values are read back from the browser with `getComputedStyle`. The last column sets only `data-density`, which shows that a density attribute does not make the colours resolve. While [#5567](https://github.com/equinor/design-system/issues/5567) is open, the elevation row has no value in any column, including light and dark: each column sets the attribute on its own element, and the root element of this page has none, as described for the shadows above. The sample in each column uses the same CSS. Its dashed outline is drawn with `currentcolor` rather than a token, so that its padding stays visible when the token colours are missing.
 
 <ResolutionTable />
 
@@ -188,7 +188,7 @@ The bundle is wrapped in `@layer eds-tokens` and opens with the statement `@laye
 
 Because the tokens sit below the component layers and below all unlayered CSS, you can override a token without having to match the specificity of the selectors in the bundle.
 
-If you load the 2.x bundle yourself, import it into the lowest layer, as the component stylesheet does. Ten names exist in both bundles, `--eds-elevation-low`, `--eds-elevation-high` and the eight `--eds-typography-header-*-font-size`, and an unlayered 2.x bundle wins all ten whatever the import order:
+If you load the 2.x bundle yourself, import it into the lowest layer, as the component stylesheet does. Some names exist in both bundles, among them `--eds-elevation-low`, `--eds-elevation-high` and the `--eds-typography-header-*-font-size` names, and an unlayered 2.x bundle wins each of them whatever the import order:
 
 ```css
 @import '@equinor/eds-tokens/css/variables' layer(eds-tokens-legacy);
