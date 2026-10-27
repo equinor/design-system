@@ -23,14 +23,22 @@ export function CopyButton({ text }: { text: string }) {
   }, [text])
 
   return (
-    <button
-      type="button"
-      onClick={copy}
-      className="inline-flex cursor-pointer items-center gap-1 rounded border-none bg-transparent px-1.5 py-0.5 text-sm text-inherit opacity-0 transition-opacity group-hover:opacity-100 hover:bg-black/10 focus-visible:opacity-100"
-      title={`Copy ${text}`}
-    >
-      <Icon data={copied ? check : copyIcon} size={16} />
-      {copied ? 'Copied!' : 'Copy'}
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={copy}
+        className="inline-flex cursor-pointer items-center gap-1 rounded border-none bg-transparent px-1.5 py-0.5 text-sm text-inherit opacity-0 transition-opacity group-hover:opacity-100 hover:bg-black/10 focus-visible:opacity-100"
+        title={`Copy ${text}`}
+      >
+        <Icon data={copied ? check : copyIcon} size={16} />
+        {copied ? 'Copied!' : 'Copy'}
+      </button>
+      {/* A changed button label is not reliably announced. The live region
+          is always rendered, since screen readers only announce changes to
+          a region that was already there */}
+      <span role="status" className="sr-only">
+        {copied ? `Copied ${text}` : ''}
+      </span>
+    </>
   )
 }

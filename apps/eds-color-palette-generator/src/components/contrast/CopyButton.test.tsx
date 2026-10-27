@@ -83,6 +83,18 @@ describe('CopyButton', () => {
   })
 
   describe('Accessibility', () => {
+    it('announces the copy in a status region', async () => {
+      const { user } = setup()
+      render(<CopyButton text={HEX} />)
+      const status = screen.getByRole('status')
+      expect(status).toBeEmptyDOMElement()
+
+      await user.click(screen.getByRole('button', { name: 'Copy' }))
+
+      expect(screen.getByRole('status')).toBe(status)
+      expect(status).toHaveTextContent(`Copied ${HEX}`)
+    })
+
     it('hides the icon from assistive technology', () => {
       render(<CopyButton text={HEX} />)
 
