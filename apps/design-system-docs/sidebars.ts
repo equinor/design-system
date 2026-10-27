@@ -26,7 +26,15 @@ const sidebars: SidebarsConfig = {
       items: ['about/getting-started/develop/citizen_developers'],
     },
     'about/getting-started/team_roles',
-    'about/roadmap',
+  ],
+  //Roadmap Section
+  roadmapSidebar: [
+    {
+      type: 'category',
+      label: 'Roadmap',
+      collapsible: false,
+      items: ['about/roadmap/what-were-doing'],
+    },
   ],
   //Components Section
   componentsSidebar: [
