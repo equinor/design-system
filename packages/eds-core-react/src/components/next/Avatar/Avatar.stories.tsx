@@ -26,7 +26,7 @@ const meta: Meta<typeof Avatar> = {
     initial: {
       control: 'text',
       description:
-        'Override the auto-derived initial(s). 1–2 characters recommended.',
+        'Override the auto-derived initial(s). 1 or 2 characters recommended.',
       table: { category: 'Core' },
     },
     src: {
@@ -45,7 +45,7 @@ const meta: Meta<typeof Avatar> = {
       control: 'inline-radio',
       options: ['sm', 'md', 'lg'],
       description:
-        'Size of the avatar — sm (20px), md (24px), lg (32px) at comfortable density. Follows `data-density`.',
+        'Size of the avatar: sm (20px), md (24px), lg (32px) at comfortable density. Follows `data-density`.',
       table: { category: 'Appearance', defaultValue: { summary: 'lg' } },
     },
     emphasis: {
@@ -59,21 +59,6 @@ const meta: Meta<typeof Avatar> = {
       control: 'boolean',
       description: 'Show a red notification dot.',
       table: { category: 'States', defaultValue: { summary: 'false' } },
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: `
-⚠️ **Beta Component** — this component is under active development.
-
-Displays a user's initial(s) in a circular badge. Use \`AvatarNameLabel\` to pair it with a name and metadata.
-
-\`\`\`tsx
-import { Avatar, AvatarNameLabel } from '@equinor/eds-core-react/next'
-\`\`\`
-        `,
-      },
     },
   },
 }
@@ -91,10 +76,24 @@ Introduction.parameters = {
   docs: {
     description: {
       story:
-        'Pass `name` to make the avatar accessible — initials are derived automatically and the avatar is announced to screen readers as `role="img"`. Without `name`, the initial is purely decorative. Inside `AvatarNameLabel` this is handled automatically from `name`.',
+        'Pass `name` to make the avatar accessible. Initials are derived automatically and the avatar is announced to screen readers as `role="img"`. Without `name`, the initial is purely decorative. Inside `AvatarNameLabel` this is handled automatically from `name`.',
     },
   },
 }
+
+export const Overview: StoryFn = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <Avatar name="Ada Lovelace" size="sm" />
+      <Avatar name="Ada Lovelace" size="md" />
+      <Avatar name="Ada Lovelace" size="lg" />
+      <Avatar name="Ada Lovelace" emphasis="high" />
+      <Avatar name="Ada Lovelace" notification />
+      <Avatar name="Ada Lovelace" src="https://i.pravatar.cc/150?img=47" />
+    </div>
+    <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
+  </div>
+)
 
 export const Sizes: StoryFn = () => (
   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -173,7 +172,7 @@ Photo.parameters = {
   docs: {
     description: {
       story:
-        'Pass `src` to show a profile photo instead of initials. The image fills the circle with `object-fit: cover`. Use `name` for the accessible label — it becomes the `alt` text on the image.',
+        'Pass `src` to show a profile photo instead of initials. The image fills the circle with `object-fit: cover`. Use `name` for the accessible label. It becomes the `alt` text on the image.',
     },
   },
 }
@@ -194,7 +193,8 @@ NameLabelHorizontal.argTypes = {
   },
   meta: {
     control: 'text',
-    description: 'Secondary label — email, job title, or any short metadata.',
+    description:
+      'Secondary label, such as an email, a job title or any short metadata.',
     table: { category: 'Core' },
   },
   initial: {
@@ -262,7 +262,7 @@ NameLabelVertical.parameters = {
   docs: {
     description: {
       story:
-        'Vertical layout places the name and metadata on the same line — compact for use in wider contexts like headers or nav.',
+        'Vertical layout places the name and metadata on the same line, for wider contexts like headers or nav.',
     },
   },
 }
@@ -270,6 +270,14 @@ NameLabelVertical.parameters = {
 export const NameLabelWithNotification: StoryFn = () => (
   <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" notification />
 )
+NameLabelWithNotification.parameters = {
+  docs: {
+    description: {
+      story:
+        'The notification dot also works inside `AvatarNameLabel`. The avatar is decorative there, so the notification is read out through visually hidden text.',
+    },
+  },
+}
 
 export const NameLabelWithPhoto: StoryFn = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -324,7 +332,7 @@ export const NameLabelEdgeCases: StoryFn = () => (
     </div>
     <div>
       <p style={{ marginBottom: '8px', fontSize: '12px', color: '#6f6f6f' }}>
-        Vertical — designed for wider contexts (name + metadata on one line)
+        Vertical, for wider contexts (name and metadata on one line)
       </p>
       <ListWithDividers>
         {[
@@ -352,7 +360,7 @@ NameLabelEdgeCases.parameters = {
   docs: {
     description: {
       story:
-        'The component fills its container. In **horizontal** layout long names wrap and the row grows with the content. **Vertical** layout keeps name and metadata on one line, truncated with an ellipsis, and is intended for wider contexts like headers or nav. Initials are always derived from the **first and last word**, regardless of how many names — `"Mary Jane Elizabeth Watson"` → `"MW"`.',
+        'The component fills its container. In **horizontal** layout long names wrap and the row grows with the content. **Vertical** layout keeps name and metadata on one line, truncated with an ellipsis, and is intended for wider contexts like headers or nav. Initials are always derived from the **first and last word**, regardless of how many names: `"Mary Jane Elizabeth Watson"` gives `"MW"`.',
     },
   },
 }
@@ -514,7 +522,7 @@ NameLabelWithSlot.parameters = {
   docs: {
     description: {
       story:
-        'The `children` prop renders into a trailing slot to the right of the name. It is open — use it for anything contextual to that person, like an action button, a role badge, or a timestamp. The examples here are just starting points.',
+        'The `children` prop renders into a trailing slot to the right of the name. It is open, so use it for anything contextual to that person, like an action button, a role badge, or a timestamp. The examples here are just starting points.',
     },
   },
 }
