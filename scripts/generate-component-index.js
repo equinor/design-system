@@ -397,4 +397,7 @@ function main() {
   console.log(`Wrote ${relativePath} (${rows.length} components).`)
 }
 
-main()
+// The agent data generator reuses the discovery and per-component extraction.
+module.exports = { discoverPublicComponents, extractComponentData }
+
+if (require.main === module) main()
