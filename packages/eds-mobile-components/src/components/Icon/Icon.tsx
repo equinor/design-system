@@ -9,15 +9,15 @@ type MaterialCommunityIconProps = ComponentProps<typeof MaterialCommunityIcons>;
 
 export type IconProps = MaterialCommunityIconProps & {
     /**
-     * The name of the icon.
+     * The name of the icon, from the Material Community Icons set.
      */
     name: IconName;
     /**
-     * The size of the icon.
+     * The size of the icon, in points. Defaults to the EDS icon size.
      */
     size?: number;
     /**
-     * The color of the icon.
+     * The colour of the icon. Defaults to the strong neutral text colour.
      */
     color?: string;
 } & TextProps;
