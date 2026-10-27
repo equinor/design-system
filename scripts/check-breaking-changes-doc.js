@@ -5,7 +5,7 @@
  * says what changed on the breaking changes page.
  *
  * The page (packages/eds-core-react/stories/docs/BreakingChanges.mdx) answers
- * one question per component: what does an EDS 1.0 consumer meet in 2.0? It is
+ * one question per component: what does a 2.x consumer meet in 3.0.0? It is
  * what the migration guide grows out of at graduation (#5387). It is not a
  * changelog - a change from one beta to the next is recorded in the commit and
  * the pull request, not on the page.
@@ -37,7 +37,7 @@
  *
  * Escape hatch: the `skip-breaking-changes-doc` label, for a change that moves
  * the component without changing the answer - an internal refactor, or undoing
- * something the beta introduced and 1.0 never had. Using it leaves a warning
+ * something the beta introduced and 2.x never had. Using it leaves a warning
  * annotation on the check, so the claim shows up in review rather than only in
  * the job log.
  *
@@ -65,7 +65,7 @@ const { publishedComponents } = require('./check-breaking-changes-coverage')
 
 const NEXT_SRC = 'packages/eds-core-react/src/components/next/'
 const PAGE = 'packages/eds-core-react/stories/docs/BreakingChanges.mdx'
-const PAGE_TITLE = 'EDS 2.0 (beta) / Breaking changes'
+const PAGE_TITLE = 'Beta / Breaking changes'
 const SKIP_LABEL = 'skip-breaking-changes-doc'
 
 const REPO = process.env.GITHUB_REPOSITORY || 'equinor/design-system'
@@ -318,7 +318,7 @@ const main = () => {
     report([
       `⚠️ ${what} with nothing added to the breaking changes page, skipped by the \`${SKIP_LABEL}\` label.`,
       '',
-      'Worth a second look in review: the label says this PR leaves the EDS 1.0 to 2.0 answer unchanged.',
+      'Worth a second look in review: the label says this PR leaves the 2.x to 3.0.0 answer unchanged.',
       ...hintLines,
     ])
     // An annotation as well as the summary: the check goes green either way,
@@ -332,7 +332,7 @@ const main = () => {
   report([
     `❌ ${what}, but the breaking changes page is not in this diff.`,
     '',
-    `The page answers one question per component - what an EDS 1.0 consumer meets in 2.0 - and becomes the migration guide at graduation. Update the \`## <Component>\` section in \`${PAGE}\`, the Storybook page "${PAGE_TITLE}", so it describes 2.0 as it now stands: props, composition, markup, behaviour.`,
+    `The page answers one question per component - what a 2.x consumer meets in 3.0.0 - and becomes the migration guide at graduation. Update the \`## <Component>\` section in \`${PAGE}\`, the Storybook page "${PAGE_TITLE}", so it describes the beta as it now stands: props, composition, markup, behaviour.`,
     '',
     'Describe the component, not the beta. Going from one beta to the next is not what the page is for - say that in this PR description and the commit message instead.',
     ...(shared.length
@@ -342,7 +342,7 @@ const main = () => {
         ]
       : []),
     '',
-    `If the EDS 1.0 to 2.0 answer is unchanged by this PR, add the \`${SKIP_LABEL}\` label and say why.`,
+    `If the 2.x to 3.0.0 answer is unchanged by this PR, add the \`${SKIP_LABEL}\` label and say why.`,
     ...hintLines,
     '',
     'Changed `/next` files:',
