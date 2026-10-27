@@ -5,7 +5,7 @@ import * as SpacingStories from './Spacing.stories'
 
 # Spacing
 
-Spacing in EDS 2.0 is a set of seventeen named steps, from `--eds-spacing-none` to `--eds-spacing-9xl`. You apply a step directly to `padding`, `gap` or `margin`, and the value it resolves to follows the density the element sits in. This page shows the steps working with the beta tokens from `@equinor/eds-tokens@beta` and how to use them in CSS. The values printed in the examples are read back from the browser, so they change when you switch the density.
+Spacing in the beta tokens is a set of seventeen named steps, from `--eds-spacing-none` to `--eds-spacing-9xl`. You apply a step directly to `padding`, `gap` or `margin`, and the value it resolves to follows the density the element sits in. This page shows the steps working with the beta tokens from `@equinor/eds-tokens@beta` and how to use them in CSS. The values printed in the examples are read back from the browser, so they change when you switch the density.
 
 The tables of values and the guidance on choosing a step are on the documentation site, and this page does not repeat them:
 
@@ -26,7 +26,7 @@ The steps up to `xl` are for space inside and between components, and the eight 
 
 ## Density
 
-Density is set with `data-density` on an ancestor, and every step inside it follows. `compact` and `relaxed` select the other two sets of values, and without the attribute you get Comfortable, because the bundle declares the Comfortable values on `:root`. The card below is rendered three times with the same CSS, and only the attribute on its container differs. The buttons are the EDS 2.0 Button, which reads the same tokens.
+Density is set with `data-density` on an ancestor, and every step inside it follows. `compact` and `relaxed` select the other two sets of values, and without the attribute you get Comfortable, because the bundle declares the Comfortable values on `:root`. The card below is rendered three times with the same CSS, and only the attribute on its container differs. The buttons are the beta Button, which reads the same tokens.
 
 <Canvas of={SpacingStories.Densities} />
 
@@ -74,4 +74,4 @@ Each `--eds-spacing-*` name aliases a `--eds-density-spacing-*` name for the cur
 
 An earlier version of this page documented the 2.x spacing system: `--eds-selectable-space-*`, `--eds-container-space-*`, `--eds-page-space-*`, `--eds-generic-space-*` and their `-gap-` counterparts, chosen with attributes such as `data-selectable-space`, `data-space-proportions`, `data-horizontal-space` and `data-horizontal-gap`. None of these names or attributes exist in the beta bundle. The direction is now the CSS property you set, and a role such as container or page is now a step you choose. The [mapping table on the documentation site](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing#from-200-beta) gives the replacement for each 2.x name.
 
-Some EDS 2.0 components still read the 2.x names, and they move to the new ones one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). Until that is finished, the component stylesheet (`@equinor/eds-core-react/next/index.css`) also loads the 2.x bundle, in the `eds-tokens-legacy` layer below the beta tokens, so both sets of names resolve.
+Some beta components still read the 2.x names, and they move to the new ones one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). Until that is finished, the component stylesheet (`@equinor/eds-core-react/next/index.css`) also loads the 2.x bundle, in the `eds-tokens-legacy` layer below the beta tokens, so both sets of names resolve.

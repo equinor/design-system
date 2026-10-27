@@ -100,7 +100,7 @@ pnpm add @equinor/eds-tokens@beta
 
 The bundle contains every mode in one file, both colour schemes and all three densities, and the attributes described below decide which values an element gets. The `next` segment of the path is temporary. It exists while the 2.x tokens and the new tokens share one package, and it is removed before the stable release without changing the token names ([ADR-0009](https://github.com/equinor/design-system/blob/main/documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)).
 
-If you use the EDS 2.0 components, import the bundle as well as `@equinor/eds-core-react/next/index.css`. That stylesheet contains the component styles and the 2.x token bundle, but not this bundle, and the components that have moved to the new token names ([#5119](https://github.com/equinor/design-system/issues/5119)) read their values from it. Installing `@equinor/eds-core-react@beta` does not add it either, because the components depend on the 2.x line of `@equinor/eds-tokens`, which has no `next/*` files.
+If you use the beta components, import the bundle as well as `@equinor/eds-core-react/next/index.css`. That stylesheet contains the component styles and the 2.x token bundle, but not this bundle, and the components that have moved to the new token names ([#5119](https://github.com/equinor/design-system/issues/5119)) read their values from it. Installing `@equinor/eds-core-react@beta` does not add it either, because the components depend on the 2.x line of `@equinor/eds-tokens`, which has no `next/*` files.
 
 ## The colour scheme and density attributes
 
@@ -133,7 +133,7 @@ The bundle has no `prefers-color-scheme` fallback, so the tokens do not follow t
 
 ### How the attributes reach an element
 
-Custom properties are inherited, and the bundle declares its semantic names again on every element that carries either attribute. An element therefore gets its values from the nearest ancestor with the attribute, and a subtree can switch. A dense table can use `data-density="compact"` inside a Comfortable page, and `data-density="comfortable"` inside that table brings the Comfortable values back. Colour works the same way: this Storybook sets `data-color-scheme` on a wrapper around every EDS 2.0 story, which is how the toolbar switches the scheme of each story. In an application, the [colour guidance](https://eds.equinor.com/docs/Next/foundation/colour/getting_started#switching-colour-scheme) recommends one colour scheme for the whole interface rather than dark regions inside a light page.
+Custom properties are inherited, and the bundle declares its semantic names again on every element that carries either attribute. An element therefore gets its values from the nearest ancestor with the attribute, and a subtree can switch. A dense table can use `data-density="compact"` inside a Comfortable page, and `data-density="comfortable"` inside that table brings the Comfortable values back. Colour works the same way: this Storybook sets `data-color-scheme` on a wrapper around every story in the beta section, which is how the toolbar switches the scheme of each story. In an application, the [colour guidance](https://eds.equinor.com/docs/Next/foundation/colour/getting_started#switching-colour-scheme) recommends one colour scheme for the whole interface rather than dark regions inside a light page.
 
 The two shadows, `--eds-elevation-low` and `--eds-elevation-high`, do not follow a subtree yet. Their colour parts are resolved once, on the root element, so the shadows have a value only when `data-color-scheme` is set on the root element itself. An attribute on a wrapper further down gives the colour roles their values but leaves both shadows without one ([#5567](https://github.com/equinor/design-system/issues/5567)). With the attribute on `<html>`, both shadows resolve everywhere on the page.
 
@@ -141,7 +141,7 @@ The bundle has rules for the values in the table and no others. An element with 
 
 ### The 2.x density names
 
-The EDS 2.0 components move to these tokens one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). A component that has not moved yet reads the 2.x tokens, which use their own density names: `spacious`, the 2.x default, and `comfortable`, the denser 2.x mode. During the beta, the same attribute can therefore mean different things to the two bundles: `data-density="comfortable"` gives the new tokens their default values and gives the 2.x tokens their denser ones. The [spacing documentation](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing#density) describes how the names shifted.
+The beta components move to these tokens one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). A component that has not moved yet reads the 2.x tokens, which use their own density names: `spacious`, the 2.x default, and `comfortable`, the denser 2.x mode. During the beta, the same attribute can therefore mean different things to the two bundles: `data-density="comfortable"` gives the new tokens their default values and gives the 2.x tokens their denser ones. The [spacing documentation](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing#density) describes how the names shifted.
 
 ## What resolves without either attribute
 
@@ -187,14 +187,14 @@ The same boundary applies to the other files in the package. Import `next/css/va
 
 ## The token layer and the component layers
 
-The bundle is wrapped in `@layer eds-tokens` and opens with the statement `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`. The EDS 2.0 component stylesheet opens with the same statement. The order of layers is fixed the first time the browser meets each name, so both files name all four layers, and it does not matter which of them loads first ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 6). A later layer wins over an earlier one, and CSS outside any layer wins over all of them:
+The bundle is wrapped in `@layer eds-tokens` and opens with the statement `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`. The beta component stylesheet, `@equinor/eds-core-react/next/index.css`, opens with the same statement. The order of layers is fixed the first time the browser meets each name, so both files name all four layers, and it does not matter which of them loads first ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 6). A later layer wins over an earlier one, and CSS outside any layer wins over all of them:
 
 | Layer | What it contains |
 | --- | --- |
 | `eds-tokens-legacy` | The 2.x token bundle, which the component stylesheet loads for the components that have not moved to the new names |
 | `eds-tokens` | This bundle |
 | `eds-elements` | Styles for plain HTML elements, such as those on the [Elements](?path=/docs/eds-2-0-beta-foundation-elements--docs) page |
-| `eds-components` | The EDS 2.0 component styles |
+| `eds-components` | The beta component styles |
 | No layer | Your own CSS |
 
 Because the tokens sit below the component layers and below all unlayered CSS, you can override a token without having to match the specificity of the selectors in the bundle.
@@ -234,7 +234,7 @@ Override published names only. An internal name, such as a step in the colour-sc
 ## Related pages
 
 - [Spacing](?path=/docs/eds-2-0-beta-foundation-spacing--docs): the spacing steps working in this Storybook, and how to use them in CSS
-- [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs): installing and importing the EDS 2.0 components
+- [About the beta](?path=/docs/eds-2-0-beta-about--docs): installing and importing the beta components
 - On the documentation site: [Getting started with colour](https://eds.equinor.com/docs/Next/foundation/colour/getting_started), [Spacing](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing), [Typography](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography) and [Elevation](https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation)
 - [The `@equinor/eds-tokens` README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#beta-the-redefined-token-structure), the package-level version of this setup
 - [ADR-0013](https://github.com/equinor/design-system/blob/main/documentation/adr/0013-attribute-scoped-custom-properties-not-light-dark.md): why the colour scheme is switched with an attribute
