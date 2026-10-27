@@ -4,7 +4,8 @@ import type { Component, ComponentData, Guidance } from './types.js'
 /**
  * Plain-text output. It is kept short because an agent pays for every line it
  * reads: `show` prints three examples unless asked for all of them, and
- * nothing is decorated.
+ * nothing is decorated. Results end with the command to run next (`→ ...`),
+ * so an agent follows up instead of guessing or rereading the help.
  */
 
 export const SECTIONS = [
@@ -52,11 +53,38 @@ export function formatList(data: ComponentData): string {
   ].join('\n')
 }
 
-export function formatSearch(query: string, matches: Component[]): string {
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`
+
+export function formatSearch(
+  query: string,
+  matches: Component[],
+  similar: string[] = [],
+): string {
   if (matches.length === 0) {
-    return `No component matches "${query}". Run \`eds list\` to see them all.`
+    const hint = similar.length
+      ? ` Did you mean ${similar.join(', ')}?\n→ eds show ${similar[0]}`
+      : ' Run `eds list` to see them all.'
+    return `No component matches "${query}".${hint}`
   }
-  return componentLines(matches).join('\n')
+  const lines = matches.map((c) => {
+    const counts = `(${plural(c.props.length, 'prop')}, ${plural(c.examples.length, 'example')})`
+    const status = c.status === 'deprecated' ? ' deprecated' : ''
+    const description = firstSentence(c.description)
+    return [
+      `${c.name} ${counts}${status}`,
+      ...(description ? [`  ${description}`] : []),
+      `  → eds show ${c.name}`,
+    ].join('\n')
+  })
+  if (matches.length > 1) {
+    lines.push(
+      `→ Several at once: eds show ${matches
+        .slice(0, 3)
+        .map((c) => c.name)
+        .join(' ')}`,
+    )
+  }
+  return lines.join('\n')
 }
 
 function formatProps(component: Component): string[] {
@@ -114,6 +142,16 @@ function formatLinks(component: Component): string[] {
   return ['Links', ...links.map(([kind, url]) => `  ${kind}: ${url}`)]
 }
 
+/** Several components, separated by a rule */
+export function formatComponents(
+  components: Component[],
+  section?: Section,
+): string {
+  return components
+    .map((component) => formatComponent(component, section))
+    .join('\n\n---\n\n')
+}
+
 export function formatComponent(
   component: Component,
   section?: Section,
@@ -152,6 +190,11 @@ export function formatComponent(
     )
   }
   if (!section || section === 'links') blocks.push(formatLinks(component))
+  if (!section) {
+    blocks.push([
+      '→ Tokens for the layout around it: eds tokens <words>, such as eds tokens spacing',
+    ])
+  }
 
   return blocks
     .filter((b) => b.length)

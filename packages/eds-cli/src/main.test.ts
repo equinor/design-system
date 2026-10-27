@@ -81,6 +81,27 @@ describe('eds', () => {
       )
     })
 
+    it('shows several components in one call', () => {
+      const { code, stdout } = run(['show', 'Button', 'TextField'])
+      expect(code).toBe(0)
+      expect(stdout).toMatch(/^Button\n[\s\S]*\n---\n\nTextField\n/)
+    })
+
+    it('ends with the command for tokens', () => {
+      expect(run(['show', 'Button']).stdout).toContain(
+        '→ Tokens for the layout around it: eds tokens <words>',
+      )
+      expect(
+        run(['show', 'Button', '--section', 'props']).stdout,
+      ).not.toContain('→ Tokens')
+    })
+
+    it('prints an array for several components with --json', () => {
+      const { stdout } = run(['show', 'Button', 'Field', '--json'])
+      const components = JSON.parse(stdout) as Component[]
+      expect(components.map((c) => c.name)).toEqual(['Button', 'Field'])
+    })
+
     it('prints the whole component as JSON', () => {
       const { stdout } = run(['show', 'Button', '--json'])
       const component = JSON.parse(stdout) as Component
@@ -90,13 +111,33 @@ describe('eds', () => {
 
   describe('search', () => {
     it('matches names, descriptions and props, name matches first', () => {
-      expect(run(['search', 'field']).stdout).toMatch(/^Field .*\nTextField/)
-      expect(run(['search', 'label']).stdout).toMatch(/^Field.*\nTextField/)
+      expect(run(['search', 'field']).stdout).toMatch(
+        /^Field [^\n]*\n(?:.*\n)*?TextField /,
+      )
+      expect(run(['search', 'label']).stdout).toMatch(
+        /^Field [^\n]*\n(?:.*\n)*?TextField /,
+      )
     })
 
-    it('says when nothing matches', () => {
-      expect(run(['search', 'calendar']).stdout).toContain(
-        'No component matches "calendar"',
+    it('gives counts and the command to run next for each match', () => {
+      const { stdout } = run(['search', 'field'])
+      expect(stdout).toContain('Field (0 props, 0 examples) deprecated\n')
+      expect(stdout).toContain('TextField (1 prop, 0 examples)\n')
+      expect(stdout).toContain('  → eds show TextField\n')
+      expect(stdout).toContain('→ Several at once: eds show Field TextField')
+    })
+
+    it('allows one typo in longer words', () => {
+      expect(run(['search', 'buton']).stdout).toMatch(/^Button /)
+      expect(run(['search', 'variamt']).stdout).toMatch(/^Button /)
+    })
+
+    it('suggests close names when nothing matches', () => {
+      expect(run(['search', 'calendar']).stdout).toBe(
+        'No component matches "calendar". Run `eds list` to see them all.\n',
+      )
+      expect(run(['search', 'Buttn', 'xyz']).stdout).toContain(
+        'Did you mean Button?\n→ eds show Button',
       )
     })
   })

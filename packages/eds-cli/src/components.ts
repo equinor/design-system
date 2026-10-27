@@ -41,6 +41,14 @@ export function loadComponents(cwd: string, dataPath?: string): ComponentData {
   return data
 }
 
+/** Every named component, failing on the first unknown name */
+export function findComponents(
+  data: ComponentData,
+  names: string[],
+): Component[] {
+  return names.map((name) => findComponent(data, name))
+}
+
 /**
  * The component called `name`, ignoring case. An unknown name fails with the
  * closest matches, so an agent that guessed `Textfield` or `Card` learns what
@@ -51,16 +59,7 @@ export function findComponent(data: ComponentData, name: string): Component {
   const component = data.components.find((c) => c.name.toLowerCase() === wanted)
   if (component) return component
 
-  const similar = data.components
-    .filter((c) => {
-      const candidate = c.name.toLowerCase()
-      return (
-        candidate.includes(wanted) ||
-        wanted.includes(candidate) ||
-        distance(candidate, wanted) <= 2
-      )
-    })
-    .map((c) => c.name)
+  const similar = similarNames(data, name)
   const hint = similar.length
     ? ` Did you mean ${similar.join(', ')}?`
     : ' Run `eds list` to see the components.'
@@ -69,7 +68,8 @@ export function findComponent(data: ComponentData, name: string): Component {
 
 /**
  * Components where every word of `query` appears in the name, description,
- * sub-components or prop names. Matches on the name come first.
+ * sub-components or prop names, allowing one typo in words of four letters or
+ * more. Matches on the name come first.
  */
 export function searchComponents(
   data: ComponentData,
@@ -85,12 +85,34 @@ export function searchComponents(
     ]
       .join(' ')
       .toLowerCase()
+  const matches = (haystack: string, word: string) =>
+    haystack.includes(word) ||
+    (word.length >= 4 &&
+      haystack.split(/[^a-z0-9]+/).some((t) => distance(t, word) <= 1))
   const nameHit = (c: Component) =>
     words.some((w) => c.name.toLowerCase().includes(w)) ? 0 : 1
 
   return data.components
-    .filter((c) => words.every((w) => text(c).includes(w)))
+    .filter((c) => words.every((w) => matches(text(c), w)))
     .sort((a, b) => nameHit(a) - nameHit(b) || a.name.localeCompare(b.name))
+}
+
+/**
+ * Component names close to `name`: containing it, contained in it, or within
+ * two typos of it.
+ */
+export function similarNames(data: ComponentData, name: string): string[] {
+  const wanted = name.toLowerCase()
+  return data.components
+    .filter((c) => {
+      const candidate = c.name.toLowerCase()
+      return (
+        candidate.includes(wanted) ||
+        wanted.includes(candidate) ||
+        distance(candidate, wanted) <= 2
+      )
+    })
+    .map((c) => c.name)
 }
 
 // Levenshtein distance, for "did you mean" on short component names.

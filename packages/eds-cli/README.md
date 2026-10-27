@@ -15,21 +15,22 @@ The decision behind the CLI is [ADR-0030](https://github.com/equinor/design-syst
 npm install --save-dev @equinor/eds-cli
 ```
 
-Or run it without installing: `npx @equinor/eds-cli list`.
+Install it in the project rather than running `npx @equinor/eds-cli`: then `npx eds` starts the local copy at once, while `npx @equinor/eds-cli` without a local install can download the package again, which adds seconds to every lookup an agent makes.
 
 ## Usage
 
 ```sh
-eds list                          # the components, with a one-line description
-eds show Button                   # import line, props, examples and guidance
-eds show Button --section usage   # one section: props, examples, features, usage, accessibility, related, links
-eds search date                   # components whose name, description or props match
-eds tokens accent background      # semantic tokens whose name contains every word
+eds list                            # the components, with a one-line description
+eds show Button                     # import line, props, examples and guidance
+eds show TextField Checkbox Button  # several components in one call
+eds show Button --section usage     # one section: props, examples, features, usage, accessibility, related, links
+eds search date                     # components whose name, description or props match
+eds tokens accent background        # semantic tokens whose name contains every word
 eds tokens spacing --density compact --scheme dark
-eds --version                     # versions of the CLI and the installed EDS packages
+eds --version                       # versions of the CLI and the installed EDS packages
 ```
 
-Every command prints JSON with `--json`.
+Every command prints JSON with `--json`. Text output ends with the command to run next (`→ eds show Button`), so an agent can follow up without rereading the help. `search` allows one typo in longer words and suggests close component names when nothing matches.
 
 `eds tokens` lists the semantic tokens, the ones components and products should use, with their value for the colour scheme and density. `--all` adds the internal tokens (primitives, palettes, per-density values), which component CSS must not reference.
 
@@ -38,7 +39,7 @@ Every command prints JSON with `--json`.
 Add a line like this to the `AGENTS.md`, `CLAUDE.md` or Copilot instructions of your repository:
 
 ```md
-This project uses the Equinor Design System beta. Before writing UI code, run `npx @equinor/eds-cli show <Component>` for the import and props, and `npx @equinor/eds-cli tokens <words>` for design tokens. Do not guess props or token names.
+This project uses the Equinor Design System beta. Before writing UI code, run `npx eds show <Component>...` for the import and props of the components you need (several at once), and `npx eds tokens <words>` for design tokens. Do not guess props or token names.
 ```
 
 ## Development
