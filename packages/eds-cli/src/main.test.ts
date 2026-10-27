@@ -131,6 +131,16 @@ describe('eds', () => {
       expect(run(['tokens', 'link']).stdout).toMatch(/--eds-text-link +blue/)
     })
 
+    it('points a search with no match to the words tokens use', () => {
+      const { code, stdout } = run(['tokens', 'gap'])
+      expect(code).toBe(0)
+      expect(stdout).toContain('No token matches "gap".')
+      expect(stdout).toContain('Tokens do not use "gap": try spacing.')
+      expect(stdout).toContain(
+        'Semantic token names start with: background, spacing, text.',
+      )
+    })
+
     it('includes the internal tokens with --all', () => {
       expect(run(['tokens', 'primitives', '--all']).stdout).toContain(
         '--eds-primitives-spacing-75',
