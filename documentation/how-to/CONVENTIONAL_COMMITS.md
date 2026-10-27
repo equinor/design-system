@@ -71,6 +71,7 @@ type(scope): description
 Scopes correspond to the **packages in our design system** and infrastructure & tooling:
 
 - `design-system-docs`
+- `eds-cli`
 - `eds-color-palette-generator`
 - `eds-core-react`
 - `eds-data-grid-react`

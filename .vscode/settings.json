@@ -24,6 +24,7 @@
     "editor.defaultFormatter": "ms-azuretools.vscode-bicep"
   },
   "conventionalCommits.scopes": [
+    "eds-cli",
     "eds-core-react",
     "eds-data-grid-react",
     "eds-icons",
