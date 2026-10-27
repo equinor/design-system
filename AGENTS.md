@@ -12,6 +12,7 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 - `@equinor/eds-core-react/next` — New EDS 2.0 components (active development)
 - `@equinor/eds-tokens` — Design tokens, CSS variables, and theming
 - `@equinor/eds-icons` — Icon library
+- `@equinor/eds-cli`: command-line lookup of the installed beta components and tokens, for agents in product teams' repositories (ADR-0030)
 
 ### Existing /next components
 
@@ -475,7 +476,7 @@ type: description
 
 **Available scopes (when needed):**
 
-- Packages: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+- Packages: `eds-cli`, `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
 - Infrastructure: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
 
 For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.

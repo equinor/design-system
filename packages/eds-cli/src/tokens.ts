@@ -1,0 +1,143 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { fail } from './errors.js'
+import { findPackage } from './resolve.js'
+
+const PACKAGE = '@equinor/eds-tokens'
+// The beta CSS bundle, published under the ./next/css/* export (ADR-0009).
+const CSS_FILE = 'src/tokens/css/variables.css'
+const INSTALL = `npm install ${PACKAGE}@beta`
+
+export const SCHEMES = ['light', 'dark'] as const
+export const DENSITIES = ['compact', 'comfortable', 'relaxed'] as const
+export type Scheme = (typeof SCHEMES)[number]
+export type Density = (typeof DENSITIES)[number]
+
+type Declarations = Map<string, string>
+
+/**
+ * The custom properties of the token bundle, by the selector that sets them.
+ * The semantic tokens, the ones components and products use, are the ones set
+ * on `[data-density]`. The rest (primitives, palettes, the per-density and
+ * per-scheme values) are internal and only resolve the semantic values.
+ */
+export type TokenSheet = {
+  semantic: Declarations
+  root: Declarations
+  schemes: Map<string, Declarations>
+  densities: Map<string, Declarations>
+}
+
+export type Token = {
+  name: string
+  /** The value as written, often a reference such as var(--eds-accent-9) */
+  value: string
+  /** The value with every var() resolved for the scheme and density */
+  resolved: string
+}
+
+/** Reads the CSS from `cssPath`, or else from the installed eds-tokens */
+export function loadTokens(cwd: string, cssPath?: string): TokenSheet {
+  let file = cssPath
+  if (!file) {
+    const pkg = findPackage(PACKAGE, cwd)
+    if (!pkg) {
+      return fail(`${PACKAGE} is not installed in ${cwd}. Run: ${INSTALL}`)
+    }
+    file = join(pkg.root, CSS_FILE)
+    if (!existsSync(file)) {
+      return fail(
+        `${PACKAGE} ${pkg.version} has no beta tokens (${CSS_FILE}). Run: ${INSTALL}`,
+      )
+    }
+  }
+  if (!existsSync(file)) return fail(`No such file: ${file}`)
+  return parseTokens(readFileSync(file, 'utf8'))
+}
+
+export function parseTokens(css: string): TokenSheet {
+  const sheet: TokenSheet = {
+    semantic: new Map(),
+    root: new Map(),
+    schemes: new Map(),
+    densities: new Map(),
+  }
+  const scoped = (scopes: Map<string, Declarations>, key: string) => {
+    if (!scopes.has(key)) scopes.set(key, new Map())
+    return scopes.get(key)!
+  }
+
+  const withoutComments = css.replace(/\/\*[\s\S]*?\*\//g, '')
+  // Innermost rule blocks only, so the @layer wrapper is skipped.
+  for (const [, selectorList, body] of withoutComments.matchAll(
+    /([^{}]+)\{([^{}]*)\}/g,
+  )) {
+    const declarations = [...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);?/g)]
+    for (const selector of selectorList.split(',').map((s) => s.trim())) {
+      const density = selector.match(/^\[data-density="(\w+)"\]$/)?.[1]
+      const scheme = selector.match(/^\[data-color-scheme="(\w+)"\]$/)?.[1]
+      const target =
+        selector === '[data-density]'
+          ? sheet.semantic
+          : density
+            ? scoped(sheet.densities, density)
+            : scheme
+              ? scoped(sheet.schemes, scheme)
+              : selector === ':root'
+                ? sheet.root
+                : null
+      if (!target) continue
+      for (const [, name, value] of declarations) target.set(name, value.trim())
+    }
+  }
+  return sheet
+}
+
+/**
+ * Tokens whose name contains every word of `query`, resolved for the scheme
+ * and density. `all` includes the internal tokens.
+ */
+export function searchTokens(
+  sheet: TokenSheet,
+  query: string,
+  { scheme, density, all }: { scheme: Scheme; density: Density; all: boolean },
+): Token[] {
+  const scopes = [
+    sheet.semantic,
+    sheet.schemes.get(scheme) ?? new Map<string, string>(),
+    sheet.densities.get(density) ?? new Map<string, string>(),
+    sheet.root,
+  ]
+  const lookup = (name: string) =>
+    scopes.find((s) => s.has(name))?.get(name) ?? undefined
+
+  const names = all
+    ? new Set(scopes.flatMap((s) => [...s.keys()]))
+    : new Set(sheet.semantic.keys())
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean)
+
+  return [...names]
+    .filter((name) => words.every((w) => name.includes(w)))
+    .sort()
+    .map((name) => {
+      const value = lookup(name) ?? ''
+      return { name, value, resolved: resolve(value, lookup, new Set([name])) }
+    })
+}
+
+// Replaces each var(--x) with the value of --x, recursively. A missing token
+// keeps its fallback, or the var() itself if it has none.
+function resolve(
+  value: string,
+  lookup: (name: string) => string | undefined,
+  seen: Set<string>,
+): string {
+  return value.replace(
+    /var\((--[\w-]+)\s*(?:,\s*([^()]*))?\)/g,
+    (whole, name: string, fallback?: string) => {
+      const next = lookup(name)
+      if (next === undefined || seen.has(name)) return fallback ?? whole
+      return resolve(next, lookup, new Set([...seen, name]))
+    },
+  )
+}

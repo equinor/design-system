@@ -24,8 +24,9 @@
     "generate:agent-data": "node scripts/generate-agent-data.js",
     "generate:adr-index": "node scripts/generate-adr-index.js",
     "prebuild": "pnpm run extract-prerequisites && pnpm run generate:component-index && pnpm run generate:adr-index",
-    "build": "pnpm run build:token-sync && pnpm run build:tokens-build && pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab && pnpm run build:color-palette-generator:cli",
+    "build": "pnpm run build:token-sync && pnpm run build:tokens-build && pnpm run build:icons && pnpm run build:tokens && pnpm run build:utils && pnpm run build:core-react && pnpm run build:data-grid-react && pnpm run build:lab && pnpm run build:color-palette-generator:cli && pnpm run build:cli",
     "build:color-palette-generator:cli": "pnpm --filter @equinor/eds-color-palette-generator run build:cli",
+    "build:cli": "pnpm --filter @equinor/eds-cli run build",
     "build:core-react": "pnpm --filter @equinor/eds-core-react run build",
     "build:data-grid-react": "pnpm --filter ./packages/eds-data-grid-react run build",
     "build:docs": "pnpm --filter ./apps/design-system-docs run build",
@@ -63,7 +64,8 @@
     "check-types:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run check-types",
     "dev:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run dev",
     "start:mobile": "pnpm run build:mobile && pnpm --filter @equinor/mobile-storybook run start",
-    "test": "pnpm run test:scripts && pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab && pnpm run test:data-grid-react && pnpm run test:color-palette-generator && pnpm run test:mobile && pnpm run test:tokens",
+    "test": "pnpm run test:scripts && pnpm run test:utils && pnpm run test:core-react && pnpm run test:lab && pnpm run test:data-grid-react && pnpm run test:color-palette-generator && pnpm run test:mobile && pnpm run test:tokens && pnpm run test:cli",
+    "test:cli": "pnpm --filter @equinor/eds-cli run test",
     "test:color-palette-generator": "pnpm --filter @equinor/eds-color-palette-generator run test:run",
     "test:core-react": "pnpm --filter @equinor/eds-core-react run test",
     "test:data-grid-react": "pnpm --filter @equinor/eds-data-grid-react run test",
@@ -83,7 +85,7 @@
     "storybook:lab": "pnpm --filter @equinor/eds-lab-react run storybook",
     "storybook:data-grid": "pnpm --filter @equinor/eds-data-grid-react run storybook",
     "icons": "node scripts/figma-broker/icons.js",
-    "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types && pnpm --filter @equinor/eds-color-palette-generator types && pnpm --filter design-system-docs typecheck"
+    "types": "pnpm --filter @equinor/eds-tokens types && pnpm --filter @equinor/eds-utils types && pnpm --filter @equinor/eds-icons types && pnpm --filter @equinor/eds-core-react types && pnpm --filter @equinor/eds-lab-react types && pnpm --filter @equinor/eds-data-grid-react types && pnpm --filter @equinor/eds-color-palette-generator types && pnpm --filter @equinor/eds-cli types && pnpm --filter design-system-docs typecheck"
   },
   "devDependencies": {
     "@babel/core": "^7.29.6",
