@@ -10,9 +10,9 @@ There are two ways to apply typography:
 
 1. **Static, per-element tokens (preferred for EDS 2.0 components in `/next`)** -- set `font-family`, `font-size`, `font-weight` and `line-height` directly in the component CSS using semantic tokens such as `--eds-typography-label-md-font-size`. The size and family are part of the component's design; consumers do not switch them at runtime. See [Semantic typography tokens for component CSS](#semantic-typography-tokens-for-component-css).
 
-2. **Runtime data-attribute switching** -- set `data-font-family` / `data-font-size` / `data-line-height` etc. on an element to flip the active typography axis at runtime. Useful for `elements.css` (semantic HTML defaults) and ad-hoc consumer markup, but not the default choice inside a component's own CSS. See [Runtime data-attribute switching](#runtime-data-attribute-switching).
+2. **Runtime data-attribute switching (2.x, deprecated)** -- set `data-font-family` / `data-font-size` / `data-line-height` etc. on an element to flip the active typography axis at runtime. It comes from the 2.x bundle, which is removed before 3.0.0. See [Runtime data-attribute switching](#runtime-data-attribute-switching-2x-deprecated).
 
-If you are building a new component in `packages/eds-core-react/src/components/next/`, use approach 1. Approach 2 is documented for completeness and for cases where it is the right tool.
+Use approach 1 for new components in `packages/eds-core-react/src/components/next/` and when you migrate an existing one. Approach 2 is documented so that you can recognise it in components that have not been migrated yet.
 
 ## Semantic typography tokens for component CSS
 
@@ -41,32 +41,15 @@ Reach for these tokens whenever the component's typography is fixed by design, w
 
 ADR-0029 supersedes [ADR-0018](../../../documentation/adr/0018-typography-approach-for-eds-2.md), so the size-matched weights and the inherited `--_font-weight-bolder` from ADR-0018 no longer apply.
 
-### Legacy `ui-body` names and who declares them
+### Legacy `ui-body` names
 
-Component CSS written before the beta tokens uses `--eds-typography-ui-body-*` names. The beta bundle declares none of them. They still resolve inside `/next` because two other sources declare them:
+Component CSS written before the beta tokens uses `--eds-typography-ui-body-*` names, which the beta bundle does not declare. The 2.x bundle, `@equinor/eds-tokens/css/variables`, declares them, and `packages/eds-core-react/src/components/next/Foundation/typography.css` redeclares 30 of them (the font size and both line heights for every size) on its own modular scale, which overrides the 2.x values inside `/next`. The names share the `--eds-typography-` prefix with the beta tokens, so the prefix does not tell you which package declares a name. Do not use the `ui-body` names in new component CSS. [Migrating /next components to the beta tokens § 6](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#6-typography) maps each of them to its beta replacement.
 
-- **The 2.x bundle in `eds-tokens`**, imported as `@equinor/eds-tokens/css/variables`, declares 91 of them: `--eds-typography-ui-body-font-family`, and for every size from `xs` to `6xl` the font size, the `default` and `squished` line heights, three weights and three tracking values. `components/next/index.css` imports this bundle into the `eds-tokens-legacy` layer for as long as unmigrated components need its names.
-- **`eds-core-react`** redeclares 30 of them in `packages/eds-core-react/src/components/next/Foundation/typography.css`: the font size and the two line heights for every size, on its own `round()`-based modular scale. That file is not in a layer, so inside `/next` it overrides the 2.x values of these 30 names.
+## Runtime data-attribute switching (2.x, deprecated)
 
-The 2.x bundle declares `--eds-typography-header-*` names in the same old shape. Eight of them, the `header` font sizes from `xs` to `4xl`, have the same names as beta tokens. Where both bundles are loaded, the beta values win, because the 2.x bundle sits in the lower `eds-tokens-legacy` layer.
+This section and [CSS Variables](#css-variables) below describe the 2.x bundle, `@equinor/eds-tokens/css/variables`. The beta bundle has no runtime switching, and the 2.x bundle is removed from `eds-tokens` before 3.0.0 ([ADR-0009](../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)), so do not use these attributes or variables in new code. Unmigrated `/next` components such as Input, Link and Icon still set `data-font-*` on their own elements. When you migrate one of them, remove the attributes and set the typography in the component CSS, as [Migrating /next components to the beta tokens § 7](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#7-local-data-attributes) describes.
 
-All of these names share the `--eds-typography-` prefix with the beta tokens, so the prefix does not tell you which package declares a name. Do not use the old names in new component CSS. To migrate existing CSS, map them like this:
-
-| Legacy                                                                         | Beta                                                             |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| `--eds-typography-{ui-body,header}-font-family`                                | `--eds-font-family-ui` or `--eds-font-family-header`             |
-| `--eds-typography-ui-body-{size}-font-size`                                    | `--eds-typography-{header,label,body}-{size}-font-size`, by role |
-| `--eds-typography-{ui-body,header}-{size}-line-height-{default,squished}`      | `--eds-typography-{role}-{size}-line-height`, one per size       |
-| `--eds-typography-{ui-body,header}-{size}-font-weight-{lighter,normal,bolder}` | `--eds-font-weight-{normal,medium,bold}`                         |
-| `--eds-typography-{ui-body,header}-{size}-tracking-{tight,normal,wide}`        | Remove. The beta bundle has no tracking tokens.                  |
-
-Sizes above `label` `5xl`, `header` `4xl` and `body` `3xl` have no beta equivalent. The full migration recipe for a `/next` component, including spacing and colour, is in [Migrating /next components to the beta tokens § 6](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#6-typography).
-
-## Runtime data-attribute switching
-
-Typography in EDS is also broken into five independent axes. Each axis has its own set of generic CSS variables and can be switched at runtime using a `data-*` attribute. This is the mechanism that `elements.css` and other foundation-level styles use, and it is available for ad-hoc consumer markup.
-
-The attributes and the `--eds-typography-*` variables in this section come from the 2.x bundle, `@equinor/eds-tokens/css/variables`. The beta bundle has no runtime switching.
+The 2.x bundle breaks typography into five independent axes. Each axis has its own set of generic CSS variables and can be switched at runtime using a `data-*` attribute.
 
 | Axis            | Data attribute     | Modes                                                           |
 | --------------- | ------------------ | --------------------------------------------------------------- |
@@ -230,7 +213,7 @@ The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the pe
 
 ## Best Practices
 
-- **Prefer per-role semantic tokens in component CSS** -- inside `/next` components, set `font-family`, `font-size`, `font-weight` and `line-height` directly with `--eds-font-family-*`, `--eds-typography-{header,label,body}-{size}-{font-size,line-height}` and `--eds-font-weight-*` tokens; reach for `data-font-*` only for `elements.css` defaults and ad-hoc consumer markup
+- **Prefer per-role semantic tokens in component CSS** -- inside `/next` components, set `font-family`, `font-size`, `font-weight` and `line-height` directly with `--eds-font-family-*`, `--eds-typography-{header,label,body}-{size}-{font-size,line-height}` and `--eds-font-weight-*` tokens, and do not add `data-font-*` attributes
 - **Scale together** -- Font size, icon size, and gap are designed to work as a unit
 - **Combine axes freely** -- Each axis is independent; mix and match as needed
 - **Test across sizes** -- Verify layouts work at all font size modes
