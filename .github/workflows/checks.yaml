@@ -8,6 +8,7 @@
 # - code or tooling config -> full checks (build + test + lint + types + docs)
 # - other non-code changes -> build + lint only
 # - manual dispatch -> full checks
+# - merge queue -> full checks
 #
 # Addresses: https://github.com/equinor/design-system/issues/4624
 
@@ -16,6 +17,9 @@ permissions:
   contents: read
 on:
   workflow_dispatch:
+  # The merge queue waits for "All checks passed" on its temporary
+  # gh-readonly-queue/main/* branch, so the workflow must run there too.
+  merge_group:
   pull_request:
     branches:
       - main
@@ -50,22 +54,23 @@ jobs:
       contents: read
       pull-requests: read
     outputs:
-      # Manual runs are an explicit request for the complete suite.
-      code: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.code == 'true' }}
+      # Manual runs are an explicit request for the complete suite. The merge
+      # queue is the last gate before main, so it runs the complete suite too.
+      code: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'merge_group' || steps.filter.outputs.code == 'true' }}
       # Narrower than `code`: only the mobile library, the demo app, the
       # demo-screens script and the root package.json (which defines how it
       # runs) can change what that check compares or whether it runs.
-      mobile: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.mobile == 'true' }}
+      mobile: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'merge_group' || steps.filter.outputs.mobile == 'true' }}
     steps:
       # fetch-depth: 2 so dorny/paths-filter can diff against the previous
       # commit on push events (the default depth of 1 omits it).
       - uses: actions/checkout@v7
         with:
           fetch-depth: 2
-      # SHA-pinned (v3.0.2) — third-party action running on every PR; pin to an
+      # SHA-pinned (v4.0.3) — third-party action running on every PR; pin to an
       # immutable commit so a compromised tag can't inject code into CI.
       - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
-        if: github.event_name != 'workflow_dispatch'
+        if: github.event_name != 'workflow_dispatch' && github.event_name != 'merge_group'
         id: filter
         with:
           filters: |
