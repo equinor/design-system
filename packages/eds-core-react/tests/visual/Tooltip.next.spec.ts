@@ -135,7 +135,7 @@ test.describe('Tooltip (next) placement', () => {
       test(`placement="${side}" renders on the ${side} side`, async ({
         page,
       }) => {
-        await openStory(page, 'eds-2-0-beta-data-display-tooltip--placements')
+        await openStory(page, 'beta-data-display-tooltip--placements')
         expectPlacement(await hoverAndMeasure(page, side), side)
       })
     }
@@ -155,7 +155,7 @@ test.describe('Tooltip (next) placement', () => {
       }) => {
         await openStory(
           page,
-          'eds-2-0-beta-data-display-tooltip--viewport-edges',
+          'beta-data-display-tooltip--viewport-edges',
         )
         expectPlacement(await hoverAndMeasure(page, corner), side)
       })

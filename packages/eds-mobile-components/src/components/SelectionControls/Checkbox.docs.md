@@ -25,5 +25,5 @@ const [checked, setChecked] = useState(false)
 
 ## Related components
 
-- [`Radio`](?path=/docs/eds-2-0-beta-inputs-selection-controls-radio--docs) is for choosing one option from a mutually exclusive set.
-- [`Switch`](?path=/docs/eds-2-0-beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off.
+- [`Radio`](?path=/docs/beta-inputs-selection-controls-radio--docs) is for choosing one option from a mutually exclusive set.
+- [`Switch`](?path=/docs/beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off.

@@ -26,7 +26,7 @@ const meta: Meta<typeof Banner> = {
     docs: {
       description: {
         component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/beta-about--docs) for what beta means.
 
 Banner displays important, succinct messages. It can also provide actions for the user to address or dismiss.
         `,

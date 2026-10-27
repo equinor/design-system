@@ -29,5 +29,5 @@ const [selected, setSelected] = useState('apples')
 
 ## Related components
 
-- [`Checkbox`](?path=/docs/eds-2-0-beta-inputs-selection-controls-checkbox--docs) is for selecting one or more options from a set.
-- [`Switch`](?path=/docs/eds-2-0-beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off.
+- [`Checkbox`](?path=/docs/beta-inputs-selection-controls-checkbox--docs) is for selecting one or more options from a set.
+- [`Switch`](?path=/docs/beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off.

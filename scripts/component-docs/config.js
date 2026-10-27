@@ -3,7 +3,7 @@ const path = require('path')
 const rootDir = path.resolve(__dirname, '../..')
 
 const BETA_CALLOUT =
-  '**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.'
+  '**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/beta-about--docs) for what beta means.'
 
 // Related components: omitted from the page when absent. Every other section
 // is required, see requiredSections per platform below.

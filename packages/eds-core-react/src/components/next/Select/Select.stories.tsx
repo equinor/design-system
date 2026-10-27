@@ -195,7 +195,7 @@ const meta: Meta<typeof Select> = {
     docs: {
       description: {
         component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/beta-about--docs) for what beta means.
 
 \`\`\`bash
 npm install @equinor/eds-core-react@beta
@@ -207,7 +207,7 @@ import { Select } from '@equinor/eds-core-react/next'
 
 Select wraps a native \`<select>\` element with EDS styling and supports single selection only. In Chrome 135+ it uses \`appearance: base-select\` for a fully styled picker surface and options list. In other browsers the dropdown uses native OS styling.
 
-Need filtering or search? Use [**Autocomplete**](?path=/docs/eds-2-0-beta-inputs-autocomplete--docs) instead. Need multiple selection? **Combobox** with multi-select support is coming soon.
+Need filtering or search? Use [**Autocomplete**](?path=/docs/beta-inputs-autocomplete--docs) instead. Need multiple selection? **Combobox** with multi-select support is coming soon.
         `,
       },
     },
