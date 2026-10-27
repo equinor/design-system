@@ -70,11 +70,16 @@ jobs:
       # The cache post-step saves even when the job fails, so a partial
       # install (e.g. network blip during the binary download) would be
       # cached and poison every later run. Verify the binary and remove
-      # the directory on failure — no directory, nothing to cache
+      # the directory on failure — no directory, nothing to cache.
+      # The postinstall extracts the binary into os.tmpdir() and moves it
+      # with rename(), which fails with EXDEV because /tmp is a different
+      # filesystem than ~ on the runner. TMPDIR keeps both on one disk,
+      # outside ~/studio-cli so it is not cached
       - name: Install studio CLI
         if: steps.cache-cli.outputs.cache-hit != 'true'
         run: |
-          if ! npm install --prefix ~/studio-cli "@tokens-studio/studio-cli@${{ steps.cli-version.outputs.version }}" --no-audit --no-fund \
+          mkdir -p ~/studio-cli-tmp
+          if ! TMPDIR=~/studio-cli-tmp npm install --prefix ~/studio-cli "@tokens-studio/studio-cli@${{ steps.cli-version.outputs.version }}" --no-audit --no-fund \
             || ! ~/studio-cli/node_modules/.bin/studio --version; then
             rm -rf ~/studio-cli
             echo "::error::studio CLI install failed verification"
