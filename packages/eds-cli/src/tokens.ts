@@ -125,6 +125,47 @@ export function searchTokens(
     })
 }
 
+// Words people and agents search with that are not part of any token name,
+// mapped to the word the tokens use. An agent looking for a gap or a padding
+// otherwise gets no match and falls back on guessing.
+const SYNONYMS: Record<string, string> = {
+  gap: 'spacing',
+  padding: 'spacing',
+  margin: 'spacing',
+  space: 'spacing',
+  radius: 'corner-radius',
+  rounded: 'corner-radius',
+  colour: 'background, text, border or icon',
+  color: 'background, text, border or icon',
+  bg: 'background',
+  'font-size': 'typography',
+  'line-height': 'typography',
+  weight: 'font-weight',
+  family: 'font-family',
+}
+
+export type TokenHints = {
+  /** Words from the query that tokens name differently */
+  renamed: { word: string; use: string }[]
+  /** The first word of every semantic token name */
+  groups: string[]
+}
+
+/** Help for a search with no match: better words, and the groups that exist */
+export function tokenHints(sheet: TokenSheet, query: string): TokenHints {
+  const renamed = query
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((word) => SYNONYMS[word])
+    .map((word) => ({ word, use: SYNONYMS[word] }))
+  const groups = [
+    ...new Set(
+      [...sheet.semantic.keys()].map((name) => name.split('-')[3] ?? name),
+    ),
+  ].sort()
+  return { renamed, groups }
+}
+
 // Replaces each var(--x) with the value of --x, recursively. A missing token
 // keeps its fallback, or the var() itself if it has none.
 function resolve(

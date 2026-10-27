@@ -1,4 +1,4 @@
-import type { Token } from './tokens.js'
+import type { Token, TokenHints } from './tokens.js'
 import type { Component, ComponentData, Guidance } from './types.js'
 
 /**
@@ -159,13 +159,28 @@ export function formatComponent(
     .join('\n\n')
 }
 
+function formatNoTokens(query: string, hints: TokenHints): string {
+  const lines = [`No token matches "${query}".`]
+  for (const { word, use } of hints.renamed) {
+    lines.push(`Tokens do not use "${word}": try ${use}.`)
+  }
+  lines.push(
+    `Semantic token names start with: ${hints.groups.join(', ')}.`,
+    'Use fewer words, such as `eds tokens spacing` or `eds tokens background accent`.',
+  )
+  return lines.join('\n')
+}
+
 export function formatTokens(
   tokens: Token[],
-  { scheme, density }: { scheme: string; density: string },
+  {
+    scheme,
+    density,
+    query,
+    hints,
+  }: { scheme: string; density: string; query: string; hints: TokenHints },
 ): string {
-  if (tokens.length === 0) {
-    return 'No token matches. Try fewer words, such as `eds tokens background accent`.'
-  }
+  if (tokens.length === 0) return formatNoTokens(query, hints)
   const width = Math.max(...tokens.map((t) => t.name.length))
   return [
     ...tokens.map((t) => {

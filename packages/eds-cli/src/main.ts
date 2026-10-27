@@ -21,6 +21,7 @@ import {
   loadTokens,
   SCHEMES,
   searchTokens,
+  tokenHints,
   type Density,
   type Scheme,
 } from './tokens.js'
@@ -160,8 +161,15 @@ export function main(argv: string[], io: Io): number {
           ),
           all: values.all ?? false,
         }
-        const tokens = searchTokens(loadTokens(cwd, values.css), text, options)
-        print(tokens, () => formatTokens(tokens, options))
+        const sheet = loadTokens(cwd, values.css)
+        const tokens = searchTokens(sheet, text, options)
+        print(tokens, () =>
+          formatTokens(tokens, {
+            ...options,
+            query: text,
+            hints: tokenHints(sheet, text),
+          }),
+        )
         return 0
       }
       default:
