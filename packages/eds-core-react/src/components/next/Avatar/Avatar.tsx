@@ -2,6 +2,8 @@ import { forwardRef } from 'react'
 import type { AvatarProps } from './Avatar.types'
 import { deriveInitials } from './utils'
 
+// Size hints for <img> at comfortable density. The CSS sets the rendered size,
+// which follows data-density.
 const pixelSizeMap: Record<'sm' | 'md' | 'lg', number> = {
   sm: 20,
   md: 24,

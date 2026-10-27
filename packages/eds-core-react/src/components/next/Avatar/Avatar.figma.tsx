@@ -22,12 +22,14 @@ figma.connect(
     example: ({ size, emphasis, isPhoto, initial, notification }) =>
       isPhoto ? (
         <Avatar
+          name="Full Name"
           size={size}
           src="https://i.pravatar.cc/150"
           notification={notification}
         />
       ) : (
         <Avatar
+          name="Full Name"
           size={size}
           emphasis={emphasis}
           initial={initial}

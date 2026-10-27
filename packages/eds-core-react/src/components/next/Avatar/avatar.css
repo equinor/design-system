@@ -161,6 +161,8 @@
       }
     }
 
+    /* The ellipsis only applies in vertical, where .names sets nowrap. In
+       horizontal, overflow-wrap lets long names wrap onto more lines. */
     & .full-name,
     & .meta {
       overflow: hidden;

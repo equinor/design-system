@@ -4,7 +4,7 @@ export type AvatarSize = 'sm' | 'md' | 'lg'
 export type AvatarEmphasis = 'high' | 'low'
 
 export type AvatarProps = {
-  /** Size of the avatar — sm (20px), md (24px), lg (32px) */
+  /** Size of the avatar — sm (20px), md (24px), lg (32px) at comfortable density. Like other components, it follows `data-density` on an ancestor. */
   size?: AvatarSize
   /** Colour emphasis — low uses muted background, high uses emphasis background */
   emphasis?: AvatarEmphasis

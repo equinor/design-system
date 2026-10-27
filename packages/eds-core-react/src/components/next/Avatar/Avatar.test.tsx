@@ -78,7 +78,7 @@ describe('Avatar (next)', () => {
   describe('Notification', () => {
     it('renders notification dot when notification=true', () => {
       render(<Avatar data-testid="eds-avatar" notification />)
-      expect(screen.getByTestId('eds-avatar')).toBeInTheDocument()
+      expect(screen.getByTestId('eds-avatar')).not.toBeEmptyDOMElement()
     })
 
     it('does not render notification dot when notification=false', () => {

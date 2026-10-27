@@ -44,7 +44,8 @@ const meta: Meta<typeof Avatar> = {
     size: {
       control: 'inline-radio',
       options: ['sm', 'md', 'lg'],
-      description: 'Size of the avatar — sm (16px), md (24px), lg (32px).',
+      description:
+        'Size of the avatar — sm (20px), md (24px), lg (32px) at comfortable density. Follows `data-density`.',
       table: { category: 'Appearance', defaultValue: { summary: 'lg' } },
     },
     emphasis: {
@@ -105,7 +106,8 @@ export const Sizes: StoryFn = () => (
 Sizes.parameters = {
   docs: {
     description: {
-      story: 'Three sizes: `sm` (16px), `md` (24px), `lg` (32px).',
+      story:
+        'Three sizes: `sm` (20px), `md` (24px), `lg` (32px) at comfortable density. The sizes follow `data-density`, like other components; see the density story.',
     },
   },
 }
@@ -209,7 +211,7 @@ NameLabelHorizontal.argTypes = {
   alt: {
     control: 'text',
     description:
-      'Alt text for the photo. Falls back to `name` if not provided.',
+      'Alt text for the photo. Defaults to empty, so the photo is decorative and the visible name is not announced twice.',
     table: { category: 'Appearance' },
   },
   layout: {
@@ -350,10 +352,16 @@ NameLabelEdgeCases.parameters = {
   docs: {
     description: {
       story:
-        'The component fills its container. Long names wrap naturally — the row height grows with the content. **Vertical** layout keeps name and metadata on one line and is intended for wider contexts like headers or nav. Initials are always derived from the **first and last word**, regardless of how many names — `"Mary Jane Elizabeth Watson"` → `"MW"`.',
+        'The component fills its container. In **horizontal** layout long names wrap and the row grows with the content. **Vertical** layout keeps name and metadata on one line, truncated with an ellipsis, and is intended for wider contexts like headers or nav. Initials are always derived from the **first and last word**, regardless of how many names — `"Mary Jane Elizabeth Watson"` → `"MW"`.',
     },
   },
 }
+
+const densities = [
+  { value: 'compact', label: 'Compact' },
+  { value: 'comfortable', label: 'Comfortable (default)' },
+  { value: 'relaxed', label: 'Relaxed' },
+]
 
 export const NameLabelDensity: StoryFn = () => (
   <div
@@ -361,42 +369,36 @@ export const NameLabelDensity: StoryFn = () => (
       display: 'flex',
       flexDirection: 'column',
       gap: '24px',
-      fontFamily: 'var(--eds-typography-ui-body-font-family)',
+      fontFamily: 'var(--eds-font-family-ui)',
     }}
   >
-    <div data-density="spacious">
-      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
-        Spacious (default)
-      </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
-        <AvatarNameLabel
-          name="Ada Lovelace"
-          meta="Senior Engineer"
-          layout="vertical"
-        />
+    {densities.map(({ value, label }) => (
+      <div key={value} data-density={value}>
+        <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
+          {label}
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <Avatar initial="A" size="sm" />
+            <Avatar initial="A" size="md" />
+            <Avatar initial="A" size="lg" />
+          </div>
+          <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
+          <AvatarNameLabel
+            name="Ada Lovelace"
+            meta="Senior Engineer"
+            layout="vertical"
+          />
+        </div>
       </div>
-    </div>
-    <div data-density="comfortable">
-      <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>
-        Comfortable
-      </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <AvatarNameLabel name="Ada Lovelace" meta="Senior Engineer" />
-        <AvatarNameLabel
-          name="Ada Lovelace"
-          meta="Senior Engineer"
-          layout="vertical"
-        />
-      </div>
-    </div>
+    ))}
   </div>
 )
 NameLabelDensity.parameters = {
   docs: {
     description: {
       story:
-        '`AvatarNameLabel` responds to `data-density` on a parent element — spacing between the avatar and name/metadata adapts automatically via spacing tokens.',
+        'Avatar and `AvatarNameLabel` follow `data-density` on an ancestor, like other components. The avatar size, the gaps and the text size all come from tokens that change per density.',
     },
   },
 }
@@ -441,7 +443,7 @@ export const NameLabelWithSlot: StoryFn = () => (
           },
         ].map(({ name, meta, img }) => (
           <AvatarNameLabel key={name} name={name} meta={meta} src={img}>
-            <Button variant="ghost" size="sm" aria-label="More options">
+            <Button variant="ghost" size="small" icon aria-label="More options">
               <Icon data={more_vertical} />
             </Button>
           </AvatarNameLabel>
@@ -495,8 +497,8 @@ export const NameLabelWithSlot: StoryFn = () => (
           <AvatarNameLabel key={name} name={name} meta={meta} src={img}>
             <span
               style={{
-                fontSize: 'var(--eds-typography-ui-body-xs-font-size)',
-                color: 'var(--eds-color-text-subtle)',
+                fontSize: 'var(--eds-typography-label-xs-font-size)',
+                color: 'var(--eds-text-secondary)',
                 whiteSpace: 'nowrap',
               }}
             >
