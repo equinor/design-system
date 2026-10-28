@@ -1,6 +1,19 @@
 {
   "primitives": {
     "font-family": {
+      "commitmono": {
+        "$value": "CommitMono",
+        "$type": "fontFamily",
+        "$extensions": {
+          "com.figma": {
+            "scopes": [
+              "ALL_SCOPES"
+            ],
+            "codeSyntax": {},
+            "hiddenFromPublishing": false
+          }
+        }
+      },
       "equinor": {
         "$value": "Equinor",
         "$type": "fontFamily",
