@@ -7,8 +7,12 @@ import {
   calcContrast,
   clearSimulationPalettes,
   editablePalettesFromTokensStudio,
+  examplePalettes,
   getApcaFontBreakdown,
   getSimulationPalettes,
+  isHexColour,
+  pickAt,
+  pickIndex,
   setSimulationPalettes,
   type TokenPalette,
 } from './palette'
@@ -223,12 +227,12 @@ describe('calcContrast', () => {
 
 describe('simulation palettes', () => {
   const palettes: TokenPalette[] = [
-    { name: 'Custom', steps: ['#111111', '#222222'] },
-    { name: 'Other', steps: ['#333333'] },
+    { name: 'Custom', steps: Array(STEP_COUNT).fill('#111111') },
+    { name: 'Other', steps: Array(STEP_COUNT).fill('#333333') },
   ]
 
-  it('returns an empty list when nothing is stored', () => {
-    expect(getSimulationPalettes()).toEqual([])
+  it('returns null when nothing is stored', () => {
+    expect(getSimulationPalettes()).toBeNull()
   })
 
   it('saves and reads the palettes', () => {
@@ -236,22 +240,27 @@ describe('simulation palettes', () => {
     expect(getSimulationPalettes()).toEqual(palettes)
   })
 
+  it('keeps an empty saved list apart from nothing stored', () => {
+    setSimulationPalettes([])
+    expect(getSimulationPalettes()).toEqual([])
+  })
+
   it('clears the saved palettes', () => {
     setSimulationPalettes(palettes)
     clearSimulationPalettes()
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
   })
 
-  it('returns an empty list when the stored value is not JSON', () => {
+  it('returns null when the stored value is not JSON', () => {
     localStorage.setItem('colorPalette_simulationPalettes', '[{oops')
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
   })
 
-  it('returns an empty list when the stored value is not a list', () => {
+  it('returns null when the stored value is not a list', () => {
     localStorage.setItem('colorPalette_simulationPalettes', 'null')
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
     localStorage.setItem('colorPalette_simulationPalettes', '{"name":"x"}')
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
   })
 
   it('drops stored entries that are not palettes', () => {
@@ -259,7 +268,14 @@ describe('simulation palettes', () => {
       'colorPalette_simulationPalettes',
       JSON.stringify([
         { name: 'x' },
-        { name: 'Bad steps', steps: [1, 2] },
+        { name: 'Bad steps', steps: Array(STEP_COUNT).fill(1) },
+        { name: 'Too few steps', steps: ['#111111', '#222222'] },
+        {
+          name: 'Too many steps',
+          steps: Array(STEP_COUNT + 1).fill('#111111'),
+        },
+        { name: 'No steps', steps: [] },
+        { name: 42, steps: palettes[0].steps },
         { steps: ['#111111'] },
         null,
         'Custom',
@@ -281,10 +297,173 @@ describe('simulation palettes', () => {
     const setItem = vi.spyOn(Storage.prototype, 'setItem')
     const removeItem = vi.spyOn(Storage.prototype, 'removeItem')
     vi.stubGlobal('window', undefined)
-    expect(getSimulationPalettes()).toEqual([])
+    expect(getSimulationPalettes()).toBeNull()
     setSimulationPalettes([])
     clearSimulationPalettes()
     expect(setItem).not.toHaveBeenCalled()
     expect(removeItem).not.toHaveBeenCalled()
+  })
+})
+
+describe('isHexColour', () => {
+  it('accepts six-digit hex colours in either letter case', () => {
+    expect(isHexColour('#12abEF')).toBe(true)
+  })
+
+  it('rejects half-typed and other values', () => {
+    for (const value of [
+      '',
+      '#',
+      '#12',
+      '#12345',
+      '#1234567',
+      '123456',
+      '#12345g',
+      'red',
+    ]) {
+      expect(isHexColour(value)).toBe(false)
+    }
+  })
+})
+
+describe('examplePalettes', () => {
+  const custom: TokenPalette = {
+    name: 'Custom',
+    steps: Array(STEP_COUNT).fill('#888888'),
+  }
+
+  /** The editor's starting list with step 9 of the first hue edited. */
+  function withEditedFirstHue(): TokenPalette[] {
+    const palettes = editablePalettesFromTokensStudio()
+    palettes[0].steps[8] = '#123456'
+    return palettes
+  }
+
+  it('gives the Tokens Studio hues when nothing is saved', () => {
+    expect(examplePalettes('light', [])).toEqual(tokensStudioPalettes('light'))
+    expect(examplePalettes('dark', [])).toEqual(tokensStudioPalettes('dark'))
+  })
+
+  it('lists each hue once when the editor saved the unedited hues', () => {
+    const saved = editablePalettesFromTokensStudio()
+
+    expect(examplePalettes('light', saved)).toEqual(
+      tokensStudioPalettes('light'),
+    )
+    expect(examplePalettes('dark', saved)).toEqual(tokensStudioPalettes('dark'))
+  })
+
+  it('counts a step typed in another letter case as unedited', () => {
+    const saved = editablePalettesFromTokensStudio()
+    saved[0].steps = saved[0].steps.map((step) => step.toUpperCase())
+
+    expect(examplePalettes('dark', saved)).toEqual(tokensStudioPalettes('dark'))
+  })
+
+  it('puts an edited hue in the place of the hue in light mode', () => {
+    const saved = withEditedFirstHue()
+    const result = examplePalettes('light', saved)
+
+    expect(result).toHaveLength(TS_HUES.length)
+    expect(result[0]).toEqual(saved[0])
+    expect(result.slice(1)).toEqual(tokensStudioPalettes('light').slice(1))
+  })
+
+  it('matches a saved palette to a hue by name, as toneRamps does', () => {
+    const saved = withEditedFirstHue()
+    saved[0].name = `  ${saved[0].name.toLowerCase()} `
+
+    const result = examplePalettes('light', saved.slice(0, 1))
+
+    expect(result).toHaveLength(TS_HUES.length)
+    expect(result[0]).toEqual(saved[0])
+  })
+
+  it('keeps a hue the editor removed', () => {
+    const saved = editablePalettesFromTokensStudio().slice(1)
+
+    expect(examplePalettes('light', saved)).toEqual(
+      tokensStudioPalettes('light'),
+    )
+  })
+
+  it('adds new palettes after the hues, in the saved order', () => {
+    const other = { ...custom, name: 'Other' }
+    const saved = [custom, ...editablePalettesFromTokensStudio(), other]
+
+    expect(examplePalettes('light', saved)).toEqual([
+      ...tokensStudioPalettes('light'),
+      custom,
+      other,
+    ])
+  })
+
+  it('never puts a light ramp in the place of a dark hue', () => {
+    const saved = [...withEditedFirstHue(), custom]
+    const result = examplePalettes('dark', saved)
+
+    expect(result.slice(0, TS_HUES.length)).toEqual(
+      tokensStudioPalettes('dark'),
+    )
+    expect(result.slice(TS_HUES.length)).toEqual([
+      { name: `${saved[0].name} (light)`, steps: saved[0].steps },
+      { name: 'Custom (light)', steps: custom.steps },
+    ])
+  })
+
+  it('leaves out a saved palette while a step is not a hex colour', () => {
+    const halfTyped = { ...custom, steps: [...custom.steps] }
+    halfTyped.steps[8] = '#12'
+    const saved = withEditedFirstHue()
+    saved[0].steps[3] = '#12345'
+
+    for (const scheme of ['light', 'dark'] as const) {
+      expect(examplePalettes(scheme, [...saved, halfTyped])).toEqual(
+        tokensStudioPalettes(scheme),
+      )
+    }
+  })
+
+  it('does not change the saved palettes', () => {
+    const saved = [...withEditedFirstHue(), custom]
+    const copy = structuredClone(saved)
+
+    examplePalettes('light', saved)
+    examplePalettes('dark', saved)
+
+    expect(saved).toEqual(copy)
+  })
+})
+
+describe('pickAt and pickIndex', () => {
+  const ramp = (name: string): TokenPalette => ({
+    name,
+    steps: Array(STEP_COUNT).fill('#888888'),
+  })
+  const light = [ramp('Blue'), ramp('Custom'), ramp('Custom')]
+  const dark = [
+    ramp('Blue'),
+    ramp('Red'),
+    ramp('Blue (light)'),
+    ramp('Custom (light)'),
+    ramp('Custom (light)'),
+  ]
+
+  it('finds the same palette after a scheme switch', () => {
+    expect(pickIndex(dark, pickAt(light, 2))).toBe(4)
+    expect(pickIndex(light, pickAt(dark, 3))).toBe(1)
+  })
+
+  it('tells palettes with the same name apart', () => {
+    expect(pickAt(light, 1)).toEqual({ name: 'Custom', nth: 0 })
+    expect(pickAt(light, 2)).toEqual({ name: 'Custom', nth: 1 })
+  })
+
+  it('uses the first palette with the name when there are fewer of them', () => {
+    expect(pickIndex(light, pickAt(dark, 2))).toBe(0)
+  })
+
+  it('falls back to the first palette when the name is gone', () => {
+    expect(pickIndex(light, { name: 'Removed', nth: 0 })).toBe(0)
   })
 })

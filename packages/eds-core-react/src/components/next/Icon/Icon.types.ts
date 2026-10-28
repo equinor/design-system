@@ -16,7 +16,10 @@ export type IconProps = {
    * When not set, icon inherits size from --eds-typography-icon-size or scales dynamically (1.5em).
    */
   size?: IconSize
-  /** @ignore */
+  /**
+   * Ref to the SVG element.
+   * @ignore
+   */
   ref?: Ref<SVGSVGElement>
 } & Omit<SVGProps<SVGSVGElement>, 'color'>
 
