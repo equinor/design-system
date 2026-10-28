@@ -147,6 +147,19 @@ describe('nameProblems', () => {
       { kind: 'empty' },
     ])
   })
+
+  it('reports a name Tokens Studio would read as token syntax', () => {
+    expect(
+      nameProblems(named('Moss.Green', 'Gray {1}', '$value', 'US$', 'Red}')),
+    ).toEqual([
+      { kind: 'syntax', char: '.' },
+      { kind: 'syntax', char: '{' },
+      { kind: 'syntax', char: '$' },
+      // `$` is reserved only at the start of a name
+      null,
+      { kind: 'syntax', char: '}' },
+    ])
+  })
 })
 
 describe('withOklchColours', () => {

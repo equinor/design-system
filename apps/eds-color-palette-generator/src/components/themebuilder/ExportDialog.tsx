@@ -54,9 +54,17 @@ const TAG =
   'inline-flex items-center rounded px-1.5 text-xs leading-[18px] font-medium'
 
 function nameProblemTag(problem: NameProblem): string {
-  return problem.kind === 'empty'
-    ? 'No name'
-    : `Same name as palette ${problem.otherIndex + 1}`
+  switch (problem.kind) {
+    case 'empty':
+      return 'No name'
+    case 'syntax':
+      // `$` is only a problem at the start of a name
+      return problem.char === '$'
+        ? 'Name starts with "$"'
+        : `Name contains "${problem.char}"`
+    case 'duplicate':
+      return `Same name as palette ${problem.otherIndex + 1}`
+  }
 }
 
 type ExportDialogProps = {
@@ -221,8 +229,10 @@ export function ExportDialog({
           {hasNameProblem ? (
             <p id={nameMessageId} className="m-0 text-sm text-danger">
               The file has one anchor per palette name, and names that differ
-              only in case or spacing count as the same. Give every palette its
-              own name in the Palettes card before you download.
+              only in case or spacing count as the same. A name also cannot
+              contain {'".", "{" or "}"'} or start with {'"$"'}, as Tokens
+              Studio reads these as token syntax. Give every palette its own
+              name in the Palettes card before you download.
             </p>
           ) : (
             proposedCount === 0 && (

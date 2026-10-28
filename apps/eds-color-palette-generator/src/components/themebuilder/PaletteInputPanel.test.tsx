@@ -225,6 +225,19 @@ describe('PaletteInputPanel', () => {
       ).toBeInTheDocument()
     })
 
+    it('marks a name Tokens Studio would read as token syntax', async () => {
+      const user = userEvent.setup()
+      renderPanel()
+
+      await user.clear(nameField(2))
+      await user.type(nameField(2), 'Gray.Dark')
+
+      expect(nameField(2)).toHaveAttribute('aria-invalid', 'true')
+      expect(nameField(2)).toHaveAccessibleDescription(
+        /^Remove "\." from the name\./,
+      )
+    })
+
     it('marks names that differ only in case or spacing', async () => {
       const user = userEvent.setup()
       renderPanel()

@@ -81,9 +81,18 @@ export function palettesFromConfig(config: unknown): PaletteInput[] | null {
   return palettes
 }
 
-/** Why a palette's name cannot be told apart from the other palettes. */
+/**
+ * Characters a hue key cannot contain, as Tokens Studio would read them as
+ * token syntax: `.` separates a path and `{…}` is a reference. A leading `$`
+ * is reserved for properties such as `$value` (Design Tokens format).
+ */
+const TOKEN_SYNTAX = /^\$|[.{}]/
+
+/** Why a palette's name cannot be used as a Tokens Studio hue key. */
 export type NameProblem =
   | { kind: 'empty' }
+  /** `char` is the first character Tokens Studio would read as syntax */
+  | { kind: 'syntax'; char: string }
   /** `otherIndex` is the first other palette with the same hue key */
   | { kind: 'duplicate'; otherIndex: number }
 
@@ -99,6 +108,8 @@ export function nameProblems(
   const keys = palettes.map((p) => hueKey(p.name))
   return keys.map((key, i) => {
     if (!key) return { kind: 'empty' }
+    const syntax = key.match(TOKEN_SYNTAX)
+    if (syntax) return { kind: 'syntax', char: syntax[0] }
     const otherIndex = keys.findIndex((k, j) => j !== i && k === key)
     return otherIndex === -1 ? null : { kind: 'duplicate', otherIndex }
   })

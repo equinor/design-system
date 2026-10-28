@@ -176,6 +176,14 @@ describe('ExportDialog', () => {
       expect(downloadButton()).toBeDisabled()
     })
 
+    it('blocks the Tokens Studio download while a name has token syntax', () => {
+      renderDialog(withFirst({ name: 'Moss.Green', baseColor: OTHER_COLOUR }))
+
+      expect(screen.getByText('Name contains "."')).toBeInTheDocument()
+      expect(screen.getByText(NAME_MESSAGE)).toBeInTheDocument()
+      expect(downloadButton()).toBeDisabled()
+    })
+
     it('shows no name message when every name is its own', () => {
       renderDialog(withFirst({ baseColor: OTHER_COLOUR }))
 

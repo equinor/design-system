@@ -30,9 +30,14 @@ function newPaletteName(palettes: PaletteInput[]): string {
 }
 
 function nameProblemText(problem: NameProblem): string {
-  return problem.kind === 'empty'
-    ? 'Enter a name for the palette.'
-    : `Palette ${problem.otherIndex + 1} has the same name. Names that differ only in case or spacing count as the same.`
+  switch (problem.kind) {
+    case 'empty':
+      return 'Enter a name for the palette.'
+    case 'syntax':
+      return `Remove "${problem.char}" from the name. Tokens Studio reads ".", "{" and "}" in a name, and "$" at its start, as token syntax.`
+    case 'duplicate':
+      return `Palette ${problem.otherIndex + 1} has the same name. Names that differ only in case or spacing count as the same.`
+  }
 }
 
 // How colour values are shown on the whole Theme Builder page. OKLCH is the
