@@ -32,7 +32,7 @@
 
     background-color: var(--_bg-color);
 
-    &[data-avatar-size='md'] {
+    &[data-size='md'] {
       --_padding: var(--eds-spacing-4xs);
       --_inner-size: var(--eds-spacing-lg);
       --_font-size: var(--eds-typography-label-sm-font-size);
@@ -40,7 +40,7 @@
       --_dot-size: var(--eds-spacing-xs);
     }
 
-    &[data-avatar-size='sm'] {
+    &[data-size='sm'] {
       --_padding: var(--eds-spacing-4xs);
       --_inner-size: var(--eds-spacing-md);
       --_font-size: var(--eds-typography-label-xs-font-size);

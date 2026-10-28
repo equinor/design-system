@@ -61,7 +61,7 @@ describe('Avatar (next)', () => {
     it('applies size attribute', () => {
       render(<Avatar data-testid="eds-avatar" size="sm" />)
       expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
-        'data-avatar-size',
+        'data-size',
         'sm',
       )
     })
@@ -208,7 +208,7 @@ describe('AvatarNameLabel (next)', () => {
     it('passes size to the inner Avatar', () => {
       render(<AvatarNameLabel name="Ada Lovelace" size="sm" />)
       expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
-        'data-avatar-size',
+        'data-size',
         'sm',
       )
     })
