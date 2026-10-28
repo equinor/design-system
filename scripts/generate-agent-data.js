@@ -11,10 +11,10 @@
  * rollup empties build/ first.
  *
  * Nothing is parsed here that another generator already parses:
- * - discovery, description, sub-components, asChild and status come from the
+ * - discovery, description, sub-components and status come from the
  *   component index generator (scripts/generate-component-index.js)
- * - props, examples and guidance come from the Storybook docs generator
- *   (scripts/component-docs/)
+ * - props (and asChild, read from them), examples and guidance come from the
+ *   Storybook docs generator (scripts/component-docs/)
  *
  * A component without a `.docs.md` sidecar still gets props, sub-components and
  * examples, but no guidance and no summary. Its description falls back to the
@@ -115,14 +115,15 @@ function buildComponent(project, entry) {
   const { summary, guidance, links } = readGuidance(dir, name)
   const file = path.join(dir, `${name}.tsx`)
   const declaration = findPropsDeclaration(project, dir, name)
+  const props = extractProps(declaration)
 
   return {
     name,
     description: index.description ?? summary ?? null,
     status: index.status,
     importLine: web.importLine(name),
-    hasAsChild: index.hasAsChild,
-    props: extractProps(declaration),
+    hasAsChild: props.some((prop) => prop.name === 'asChild'),
+    props,
     baseTypes: webBaseTypes(declaration, name),
     subComponents: index.subComponents,
     examples: readExamples(project, dir, name),
