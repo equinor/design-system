@@ -50,12 +50,17 @@ and `'1.1.0': { path: '' }`. None of them is decoration:
   `versions.json` (`2.0.0-beta`), which silently makes a frozen snapshot the target
   of every `type: 'docSidebar'` navbar item and of the version dropdown.
 - With `lastVersion: '1.1.0'`, the `Components` and `Resources` navbar items, the
-  dropdown and the footer open Latest. The cards on the unversioned Foundation
-  and Get started landings open the version the dropdown shows, through
+  dropdown and the footer open Latest. The links on the unversioned home page,
+  Foundation and Get started open the version the dropdown shows, through
   `useShownVersionDocPath` (`src/utils/`): Latest by default, Beta once the
   reader picks it. A topic with no matching doc in a version names its
   replacement in `docIdByVersion`, as Foundation does for the design tokens and
-  assets overviews, which Latest does not have.
+  assets overviews, which Latest does not have. `useShownDocsVersion` is for
+  content that differs by version, such as the home page's "In progress" badge,
+  which only describes Beta.
+- Search builds one index per version (Latest at `/search-index.json`, Beta at
+  `/docs/Next/search-index.json`), and the search bar uses the index of the
+  version being read. Pages outside the docs search Latest.
 - `path: 'Next'` keeps the Beta URLs at `/docs/Next/…`, and `path: ''` keeps
   Latest at `/docs/…` if `lastVersion` moves again. Without them, existing links
   break.

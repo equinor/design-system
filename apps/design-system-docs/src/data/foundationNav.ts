@@ -23,7 +23,7 @@ export const foundationTopics: FoundationTopic[] = [
   {
     label: 'Accessibility',
     docId: 'foundation/accessibility',
-    to: 'docs/Next/foundation/accessibility',
+    to: 'docs/foundation/accessibility',
     description:
       'Guidelines for building inclusive digital interfaces that meet WCAG 2.1 AA requirements.',
     icon: accessible,
@@ -31,7 +31,7 @@ export const foundationTopics: FoundationTopic[] = [
   {
     label: 'Colour',
     docId: 'foundation/colour/intro',
-    to: 'docs/Next/foundation/colour/intro',
+    to: 'docs/foundation/colour/intro',
     description:
       'Colour palettes, semantic colour roles, and usage guidelines for consistent interfaces.',
     icon: color_palette,
@@ -40,7 +40,7 @@ export const foundationTopics: FoundationTopic[] = [
     label: 'Design Tokens',
     docId: 'foundation/design-tokens/design-tokens',
     docIdByVersion: { '1.1.0': 'foundation/design-tokens/grid' },
-    to: 'docs/Next/foundation/design-tokens',
+    to: 'docs/foundation/design-tokens/grid',
     description:
       'Colour, spacing, typography, shape, and elevation tokens that power EDS components.',
     icon: tune,
@@ -48,7 +48,7 @@ export const foundationTopics: FoundationTopic[] = [
   {
     label: 'Data Visualisation',
     docId: 'foundation/datavisualisation',
-    to: 'docs/Next/foundation/datavisualisation',
+    to: 'docs/foundation/datavisualisation',
     description:
       'Principles and guidelines for presenting data clearly through charts and graphs.',
     icon: bar_chart,
@@ -56,7 +56,7 @@ export const foundationTopics: FoundationTopic[] = [
   {
     label: 'Patterns',
     docId: 'foundation/patterns',
-    to: 'docs/Next/foundation/patterns',
+    to: 'docs/foundation/patterns',
     description:
       'Reusable design patterns and best practices for common UI scenarios.',
     icon: view_module,
@@ -65,7 +65,7 @@ export const foundationTopics: FoundationTopic[] = [
     label: 'Assets',
     docId: 'foundation/assets/assets',
     docIdByVersion: { '1.1.0': 'foundation/assets/image_placeholder' },
-    to: 'docs/Next/foundation/assets',
+    to: 'docs/foundation/assets/image_placeholder',
     description:
       'Icons, logos, illustrations, photography, and other visual resources.',
     icon: image,

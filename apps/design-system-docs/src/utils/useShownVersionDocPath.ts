@@ -25,9 +25,21 @@ export type VersionedDocTarget = {
 export function useShownVersionDocPath(): (
   target: VersionedDocTarget,
 ) => string {
-  const [version] = useDocsVersionCandidates()
+  const version = useShownDocsVersion()
   return ({ docId, docIdByVersion, to }) => {
     const id = docIdByVersion?.[version.name] ?? docId
     return version.docs.find((doc) => doc.id === id)?.path ?? to
   }
+}
+
+/**
+ * The docs version the navbar dropdown shows, for content that differs by
+ * version, such as a badge that only describes Beta. Same context rule as
+ * `useShownVersionDocPath`.
+ */
+export function useShownDocsVersion(): ReturnType<
+  typeof useDocsVersionCandidates
+>[number] {
+  const [version] = useDocsVersionCandidates()
+  return version
 }
