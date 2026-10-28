@@ -134,7 +134,7 @@ _Standard:_ WCAG 2.1 AA
 | Element             | Scheme, state | Colours            | Ratio  | APCA    | Result                                 |
 | ------------------- | ------------- | ------------------ | ------ | ------- | -------------------------------------- |
 | Button "Join Now"   | light, hover  | #ffffff on #00c6ff | 2.00:1 | Lc 42.3 | Fail: needs 4.5:1 (target Lc 60)       |
-| Caption under chart | dark, default | #738696 on #030303 | 5.48:1 | Lc 36.5 | Minor: meets 4.5:1, below Lc 60 target |
+| Caption under chart | dark, default | #8a8a8a on #202020 | 4.72:1 | Lc 37.5 | Minor: meets 4.5:1, below Lc 60 target |
 
 ### Focus issues
 
