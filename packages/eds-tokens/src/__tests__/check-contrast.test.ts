@@ -107,7 +107,7 @@ describe('check-contrast', () => {
 
     it('meet the minimum on every documented pair outside the exceptions', () => {
       expect(result.status).toBe(0)
-      expect(result.stdout).toContain('126 documented pairs')
+      expect(result.stdout).toContain('134 documented pairs')
     })
 
     it('measure primary, secondary and tertiary against the surface only', () => {
@@ -135,6 +135,33 @@ describe('check-contrast', () => {
     it('names the scheme, the pair and the measured values', () => {
       expect(result.stderr).toMatch(
         /dark {3}text\.on-emphasis\.danger on background\.interactive\.danger\.emphasis\.default {2}#[0-9a-f]{6} on #[0-9a-f]{6} {2}1\.00:1/,
+      )
+    })
+  })
+
+  describe('the dedicated roles', () => {
+    let result: RunResult
+    beforeAll(() => {
+      result = runEdited(({ light, dark }) => {
+        set(light, 'text.inverted', get(light, 'background.inverted'))
+        set(
+          dark,
+          'icon.interactive.link.hover',
+          get(dark, 'background.surface'),
+        )
+      })
+    })
+
+    it('fail the run when inverted drops below the minimum on background.inverted', () => {
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        'light  text.inverted on background.inverted',
+      )
+    })
+
+    it('fail the run when a link state drops below the minimum on the surface', () => {
+      expect(result.stderr).toContain(
+        'dark   icon.interactive.link.hover on background.surface',
       )
     })
   })

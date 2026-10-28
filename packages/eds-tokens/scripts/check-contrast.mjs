@@ -16,8 +16,9 @@
  * marked "assumed" in the output. Tertiary gets none, since it is meant
  * for places where WCAG does not require contrast.
  *
- * The pairs are the ones `foundation/colour/usage.mdx` § Foreground
- * pairing documents, for text and icons alike:
+ * The pairs are the ones `foundation/colour/usage.mdx` documents in
+ * § Foreground pairing and § Check for a dedicated role, for text and
+ * icons alike:
  *
  * - `<text|icon>.on-<level>.<tone>` on the fill of the same level and
  *   tone, in every state of the interactive fills
@@ -26,6 +27,10 @@
  *   `background.canvas`, but EDS measures against the surface only, as
  *   Confirmation 5 says
  * - `<text|icon>.primary` on the selected fills, in every state
+ * - `<text|icon>.inverted` on `background.inverted`
+ * - `<text|icon>.interactive.link.*` on `background.surface`, in every
+ *   state. The usage page gives links no background, so they are
+ *   measured against the surface like the text hierarchy
  *
  * Borders stay out of scope, as Confirmation 5 records: APCA has no
  * agreed target for them, and the border-to-surface pairs are not
@@ -201,7 +206,7 @@ console.log(
   `\ncheck-contrast: every documented pair meets the minimum, apart from the ${excepted.length} documented exception(s).`,
 )
 
-/** The pairs from usage.mdx § Foreground pairing, for text and icons. */
+/** The pairs the usage page documents, for text and icons. */
 function documentedPairs() {
   const list = []
   const add = (kind, role, background, target, assumed) =>
@@ -258,6 +263,19 @@ function documentedPairs() {
           TARGET,
           false,
         )
+
+    // No target is given for the inverted foregrounds
+    add(kind, 'inverted', 'background.inverted', TARGET, true)
+
+    // Links are interactive elements, which have Lc 60 as their target
+    for (const state of STATES)
+      add(
+        kind,
+        `interactive.link.${state}`,
+        'background.surface',
+        TARGET,
+        false,
+      )
   }
   return list
 }
