@@ -364,9 +364,9 @@ The typography system requires two font families: **Equinor** (headings) and **I
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
 ```
 
-> **Note:** The older `equinor-font.css` only includes the Equinor font. Components using `data-font-family="ui"` (Button, TextField, Input, etc.) will fall back to a generic sans-serif if Inter is not loaded.
+> **Note:** The older `equinor-font.css` only includes the Equinor font. Text set in the UI family, through `--eds-font-family-ui` in the beta bundle or `data-font-family="ui"` in 2.x, falls back to a generic sans-serif if Inter is not loaded.
 
-### Typography variables that adapt to data-attributes
+### Typography variables that adapt to data-attributes (2.x)
   * Font family setup (UI and Header fonts)
   * Font size data attributes (`[data-font-size='xs']`, `[data-font-size='sm']`, etc.)
   * Line height data attributes (`[data-line-height='default']`, `[data-line-height='squished']`)

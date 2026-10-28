@@ -4,11 +4,11 @@ applyTo: '**'
 
 # Typography System
 
-This guide introduces the EDS typography system -- how typographic properties are tokenised and consumed in CSS and TypeScript.
+This guide introduces the EDS typography system -- how typographic properties are tokenised and consumed in CSS, and in TypeScript for the 2.x output.
 
 There are two ways to apply typography:
 
-1. **Static, per-element tokens (preferred for EDS 2.0 components in `/next`)** -- set `font-family`, `font-size`, `font-weight` and `line-height` directly in the component CSS using semantic tokens such as `--eds-typography-label-md-font-size`. The size and family are part of the component's design; consumers do not switch them at runtime. See [Semantic typography tokens for component CSS](#semantic-typography-tokens-for-component-css).
+1. **Static, per-element tokens (for components in `/next`)** -- set `font-family`, `font-size`, `font-weight` and `line-height` directly in the component CSS using semantic tokens such as `--eds-typography-label-md-font-size`. The size and family are part of the component's design; consumers do not switch them at runtime. See [Semantic typography tokens for component CSS](#semantic-typography-tokens-for-component-css).
 
 2. **Runtime data-attribute switching (2.x, deprecated)** -- set `data-font-family` / `data-font-size` / `data-line-height` etc. on an element to flip the active typography axis at runtime. It comes from the 2.x bundle, which is removed before 3.0.0. See [Runtime data-attribute switching](#runtime-data-attribute-switching-2x-deprecated).
 
@@ -47,7 +47,7 @@ Component CSS written before the beta tokens uses `--eds-typography-ui-body-*` n
 
 ## Runtime data-attribute switching (2.x, deprecated)
 
-This section and [CSS Variables](#css-variables) below describe the 2.x bundle, `@equinor/eds-tokens/css/variables`. The beta bundle has no runtime switching, and the 2.x bundle is removed from `eds-tokens` before 3.0.0 ([ADR-0009](../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)), so do not use these attributes or variables in new code. Unmigrated `/next` components such as Input, Link and TextArea still set `data-font-*` on their own elements. When you migrate one of them, remove the attributes and set the typography in the component CSS, as [Migrating /next components to the beta tokens § 7](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#7-local-data-attributes) describes.
+This section and [CSS Variables](#css-variables-2x-deprecated) below describe the 2.x bundle, `@equinor/eds-tokens/css/variables`. The beta bundle has no runtime switching, and the 2.x bundle is removed from `eds-tokens` before 3.0.0 ([ADR-0009](../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)), so do not use these attributes or variables in new code. Unmigrated `/next` components such as Input, Link and TextArea still set `data-font-*` on their own elements. When you migrate one of them, remove the attributes and set the typography in the component CSS, as [Migrating /next components to the beta tokens § 7](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#7-local-data-attributes) describes.
 
 The 2.x bundle breaks typography into five independent axes. Each axis has its own set of generic CSS variables and can be switched at runtime using a `data-*` attribute.
 
@@ -71,7 +71,7 @@ Each axis resolves to a single active CSS variable:
 
 The data attributes switch which underlying mode is mapped to these variables. Font size also sets companion variables for icon sizing and gap spacing that scale with the text.
 
-## CSS Variables
+## CSS Variables (2.x, deprecated)
 
 ### Import
 
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
 
 ### What's not exported
 
-The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the per-size files (`font-size-{xs..6xl}`) intentionally do **not** ship as TypeScript. Their values depend on the active mode of another axis at runtime, so a static TypeScript export cannot represent them without silently picking one cell of the matrix. The two family files are the only TS surface — everything you need to compose a style lives on a single size cell within them.
+The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the per-size files (`font-size-{xs..6xl}`) intentionally do **not** ship as TypeScript. Their values depend on the active mode of another axis at runtime, so a static TypeScript export cannot represent them without silently picking one cell of the matrix. The two family files are the only TypeScript surface of the 2.x typography output, and everything you need to compose a style lives on a single size cell within them.
 
 ## Output Formats
 
