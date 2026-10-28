@@ -282,7 +282,9 @@ const padding = comfortableSpacing.SPACING_INLINE_MD
 const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
 ```
 
-#### Typography (non-CSS targets)
+#### Typography (non-CSS targets, 2.x)
+
+This is the 2.x TypeScript output. It is built into the legacy `build/` folder together with `css/variables` and is removed with it before 3.0.0. For the beta output, see [TypeScript](#typescript) under the beta section.
 
 Typography is composed at runtime from five orthogonal axes. The CSS bundle resolves them via `data-*` attributes; non-CSS consumers (React Native, SSR, design tooling) import the family-keyed matrix directly:
 

@@ -47,7 +47,7 @@ Component CSS written before the beta tokens uses `--eds-typography-ui-body-*` n
 
 ## Runtime data-attribute switching (2.x, deprecated)
 
-This section and [CSS Variables](#css-variables) below describe the 2.x bundle, `@equinor/eds-tokens/css/variables`. The beta bundle has no runtime switching, and the 2.x bundle is removed from `eds-tokens` before 3.0.0 ([ADR-0009](../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)), so do not use these attributes or variables in new code. Unmigrated `/next` components such as Input, Link and Icon still set `data-font-*` on their own elements. When you migrate one of them, remove the attributes and set the typography in the component CSS, as [Migrating /next components to the beta tokens § 7](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#7-local-data-attributes) describes.
+This section and [CSS Variables](#css-variables) below describe the 2.x bundle, `@equinor/eds-tokens/css/variables`. The beta bundle has no runtime switching, and the 2.x bundle is removed from `eds-tokens` before 3.0.0 ([ADR-0009](../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)), so do not use these attributes or variables in new code. Unmigrated `/next` components such as Input, Link and TextArea still set `data-font-*` on their own elements. When you migrate one of them, remove the attributes and set the typography in the component CSS, as [Migrating /next components to the beta tokens § 7](../../../documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md#7-local-data-attributes) describes.
 
 The 2.x bundle breaks typography into five independent axes. Each axis has its own set of generic CSS variables and can be switched at runtime using a `data-*` attribute.
 
@@ -132,7 +132,9 @@ Change typographic properties by updating data attributes -- no CSS changes need
 </small>
 ```
 
-## Using Typography in TypeScript / JavaScript
+## Using Typography in TypeScript / JavaScript (2.x, deprecated)
+
+This section describes the 2.x TypeScript output, `@equinor/eds-tokens/ts/typography/*`. It is built into the same legacy `build/` folder as the 2.x CSS bundle and is removed with it ([ADR-0009](../../../documentation/adr/0009-temporary-next-subpaths-for-eds-tokens-beta.md)). The beta bundle has its own TypeScript output, which this file does not document yet because its shape may still change ([#5495](https://github.com/equinor/design-system/issues/5495), [#5552](https://github.com/equinor/design-system/issues/5552)).
 
 The CSS cascade is what composes the five axes into a final style. Targets without a cascade -- React Native, server-side rendering, design tooling, plain JS -- read the family matrix directly and pick the variant they want.
 
@@ -205,15 +207,12 @@ The other axis files (`font-weight-*`, `line-height-*`, `tracking-*`) and the pe
 
 ## Output Formats
 
-| Format                  | Import path                                                 | Use case                                                                                         |
-| ----------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| **CSS variables, beta** | `@equinor/eds-tokens/next/css/variables.css`                | Component styling via the `header`, `label` and `body` semantic tokens                           |
-| **CSS variables, 2.x**  | `@equinor/eds-tokens/css/variables`                         | Runtime data-attribute switching, and the legacy `ui-body` names that unmigrated components read |
-| **TypeScript matrix**   | `@equinor/eds-tokens/ts/typography/font-family-{ui,header}` | Direct matrix access for non-CSS consumers (RN, SSR, design tooling)                             |
+| Format                     | Import path                                                 | Use case                                                                                         |
+| -------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **CSS variables, beta**    | `@equinor/eds-tokens/next/css/variables.css`                | Component styling via the `header`, `label` and `body` semantic tokens                           |
+| **CSS variables, 2.x**     | `@equinor/eds-tokens/css/variables`                         | Runtime data-attribute switching, and the legacy `ui-body` names that unmigrated components read |
+| **TypeScript matrix, 2.x** | `@equinor/eds-tokens/ts/typography/font-family-{ui,header}` | Direct matrix access for non-CSS consumers (RN, SSR, design tooling)                             |
 
 ## Best Practices
 
 - **Prefer per-role semantic tokens in component CSS** -- inside `/next` components, set `font-family`, `font-size`, `font-weight` and `line-height` directly with `--eds-font-family-*`, `--eds-typography-{header,label,body}-{size}-{font-size,line-height}` and `--eds-font-weight-*` tokens, and do not add `data-font-*` attributes
-- **Scale together** -- Font size, icon size, and gap are designed to work as a unit
-- **Combine axes freely** -- Each axis is independent; mix and match as needed
-- **Test across sizes** -- Verify layouts work at all font size modes
