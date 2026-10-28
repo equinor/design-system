@@ -6,6 +6,11 @@
       "release-type": "expo",
       "component": "mobile-storybook"
     },
+    "packages/eds-cli": {
+      "release-type": "node",
+      "package-name": "@equinor/eds-cli",
+      "component": "eds-cli"
+    },
     "packages/eds-core-react": {
       "release-type": "node",
       "package-name": "@equinor/eds-core-react",
