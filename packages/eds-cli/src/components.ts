@@ -24,9 +24,11 @@ export function loadComponents(cwd: string, dataPath?: string): ComponentData {
       return fail(`${PACKAGE} is not installed in ${cwd}. Run: ${INSTALL}`)
     }
     file = join(pkg.root, DATA_FILE)
+    // No install command here: the project may already have the latest beta,
+    // and an agent told to install it would repeat the same failing step.
     if (!existsSync(file)) {
       return fail(
-        `${PACKAGE} ${pkg.version} has no component data for agents. It ships with newer beta releases. Run: ${INSTALL}`,
+        `${PACKAGE} ${pkg.version} has no component data for agents. The data ships with a later beta. Check for one with \`npm view ${PACKAGE}@beta version\`, and update only if it is newer than ${pkg.version}.`,
       )
     }
   }

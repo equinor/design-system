@@ -257,7 +257,11 @@ describe('eds', () => {
       expect(stderr).toContain(
         '@equinor/eds-core-react 3.0.0-beta.9 has no component data for agents',
       )
-      expect(stderr).toContain('npm install @equinor/eds-core-react@beta')
+      // Installing @beta again would not help when it is already the latest.
+      expect(stderr).toContain(
+        'Check for one with `npm view @equinor/eds-core-react@beta version`, and update only if it is newer than 3.0.0-beta.9.',
+      )
+      expect(stderr).not.toContain('npm install')
     })
 
     it('refuses data with another schema version', () => {
