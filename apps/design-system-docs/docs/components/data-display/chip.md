@@ -18,12 +18,12 @@ Use a chip when you need a compact, interactive element for selection, filtering
 
 ## Structure
 
-A chip is always a button. Based on the props you pass, it takes on one of four behaviours:
+A chip is always a button, with one of four behaviours:
 
 - **Selectable** (default): toggles a selected state, showing a leading check icon when active
-- **Deletable**: shows a trailing close icon; clicking anywhere on the chip (or pressing Backspace / Delete while focused) fires `onDelete`
+- **Deletable**: shows a trailing close icon; clicking anywhere on the chip, or pressing Backspace or Delete while it has focus, removes it
 - **Dropdown**: shows a trailing arrow that flips up when the chip is selected, signalling an open menu
-- **Custom icons**: pass icons as children for full control over leading and/or trailing content
+- **Custom icons**: a leading icon, a trailing icon or both, chosen for the content of the chip
 
 <StoryCanvas of="Chip/Types" showLink />
 
@@ -56,34 +56,37 @@ Tones communicate the meaning or category behind a chip:
 
 ### Selectable chips
 
-Selectable chips are controlled components - manage `selected` in your own state and pass an `onClick` handler to flip it. When `selected` is true, the chip shows a leading check icon. Selection is ideal for filter chips, tag pickers, or any group where one or more options can be active at the same time.
+A selectable chip toggles between selected and not selected, and shows a leading check icon while it is selected. Selection is ideal for filter chips, tag pickers, or any group where one or more options can be active at the same time.
 
 <StoryCanvas of="Chip/Selectable" showLink />
 
 ### Deletable chips
 
-Pass `onDelete` to turn a chip into a removable tag. The entire chip becomes the delete target - clicking anywhere on it, or pressing Backspace / Delete while focused, fires the callback. Deletable chips are a great fit for active-filter summaries or recipient lists.
+A deletable chip is a removable tag. The entire chip is the delete target, so clicking anywhere on it, or pressing Backspace or Delete while it has focus, removes it. Deletable chips are a great fit for active-filter summaries or recipient lists.
 
 <StoryCanvas of="Chip/Deletable" showLink />
 
 ### Dropdown chips
 
-Use `dropdown` to add a trailing arrow that signals the chip opens a menu. Combine `dropdown` with `selected` while the menu is open - the arrow flips from down to up. The chip owns the trigger and visual state; you own the popover or menu behaviour.
+A dropdown chip has a trailing arrow that signals the chip opens a menu. While the menu is open, the chip is selected and the arrow flips from down to up. The chip is only the trigger, so the menu itself comes from another component.
 
 <StoryCanvas of="Chip/Dropdown" showLink />
 
 ### Custom icons
 
-For chips that need a leading icon, a different trailing icon, or both, pass icons directly as children. Two common patterns: a saved filter with a leading bookmark icon, and recipient chips that combine a leading person icon with the built-in `onDelete` close icon.
+Some chips need a leading icon, a different trailing icon, or both. Two common patterns: a saved filter with a leading bookmark icon, and recipient chips that combine a leading person icon with the close icon of a deletable chip.
 
 <StoryCanvas of="Chip/CustomIcons" showLink />
 
 ### Density
 
-Chips respond to a `data-density` attribute on a parent element, so they feel at home in both roomy and compact layouts:
+Chips follow the density set on a parent element, so their padding, label size and icon size change together with the rest of the layout. A chip is 20px high at Compact, 28px at Comfortable and 36px at Relaxed:
 
-- **Spacious** (default): Comfortable padding for general-purpose use
-- **Comfortable**: A denser option for toolbars, tables, and data-heavy views. As with other EDS components, provide a way to switch back to spacious mode for accessibility.
+- **Compact**: For dense views such as tables, toolbars and dashboards, where showing more on screen is worth smaller targets
+- **Comfortable**: The default, for ordinary application UI
+- **Relaxed**: For touch screens and pages where targets need to be larger
+
+The [density guidelines](/docs/Next/foundation/design-tokens/spacing#density) explain how to choose between them.
 
 <StoryCanvas of="Chip/Density" showLink />
 
@@ -103,7 +106,7 @@ Every tone works with every variant. Here's the full matrix for picking the righ
 
 **Selectable chips**
 
-- Rendered as a `<button>` with `aria-pressed` reflecting the `selected` state, so assistive tech announces the toggle state correctly
+- Implements the WAI-ARIA toggle button pattern, so assistive technology announces whether the chip is selected
 - **Keyboard**: Tab to focus, Enter or Space to toggle
 
 **Deletable chips**
@@ -114,12 +117,12 @@ Every tone works with every variant. Here's the full matrix for picking the righ
 
 **Dropdown chips**
 
-- The component automatically sets `aria-expanded` based on the `selected` prop - keep `selected` in sync with the actual open/closed state of the paired menu
+- Assistive technology announces whether the menu is open, based on the selected state, so keep the chip selected exactly while its menu is open
 - **Keyboard**: Tab to focus, Enter or Space to open or close the menu
 
-**Comfortable density**
+**Density and target size**
 
-Comfortable density should come with the option to switch to spacious mode for accessibility reasons.
+Chips are smaller at Compact density, where a chip is 20px high. Check that chips are large enough to hit at the density you ship, as described in the [target size guidelines](/docs/Next/foundation/accessibility#target-size).
 
 **Colour and contrast**
 
@@ -130,7 +133,7 @@ Comfortable density should come with the option to switch to spacious mode for a
 
 ### Components
 
-- **Chip [EDS]**: The chip component in Figma, covering all tones, variants, types, and states
+- **Chip [EDS Beta]**: The chip component in Figma, covering all tones, styles, behaviours and states
 
 ### Using the Chip in Figma
 
@@ -138,16 +141,20 @@ Comfortable density should come with the option to switch to spacious mode for a
 2. Drag the component into your frame
 3. Select the component to see its properties in the **Design Panel**
 
+Density is not a property of the component. Set the density with a variable mode on your top-level frame, and every chip inside it follows.
+
 ### Property Structure
 
 The Chip component exposes these properties:
 
-- **Tone** - Neutral, Accent, Success, Info, Warning, Danger
-- **Type** - Default (selectable), Deletable, Checked (selected), Dropdown
+- **Tone** - Neutral, Accent, Info, Success, Warning, Danger
+- **Variants** - Default (selectable), Checked (selected), Deletable, Dropdown, 💠 Custom
 - **Style** - Default, Outlined, High contrast
-- **State** - Default, Hover, Focus, etc.
+- **State** - Default, Hover, Focus, Active
 
-Switch **Type** to _Deletable_ for a trailing close icon, _Dropdown_ for a trailing arrow, or _Checked_ to preview the selected state with its leading check icon.
+The names differ from the ones on this page. What this page calls variants is the **Style** property in Figma, and the behaviours are the **Variants** property.
+
+Switch **Variants** to _Checked_ to show the selected state with its leading check icon, _Deletable_ for a trailing close icon, or _Dropdown_ for a trailing arrow. _💠 Custom_ shows a leading and a trailing icon, which you swap with **Leading Icon** and **Trailing Icon**.
 
 ## Do's and Don'ts
 
@@ -156,9 +163,8 @@ Switch **Type** to _Deletable_ for a trailing close icon, _Dropdown_ for a trail
 - Use chips in groups when users pick from a short, related set of options
 - Pick the variant that matches how much attention the chip should draw
 - Pair tone with a clear label so the meaning doesn't rely on colour alone
-- Use `onDelete` for chips that represent removable items like filters or recipients
-- Use `dropdown` when a chip triggers a menu, and keep `selected` in sync with the menu's open state
-- Allow switching from comfortable to spacious density for accessibility
+- Use deletable chips for removable items like filters or recipients
+- Use a dropdown chip when a chip opens a menu
   :::
 
 :::danger **Don't**
