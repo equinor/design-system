@@ -52,7 +52,7 @@ export const TextField = forwardRef<
                 className="info"
                 aria-label="More information"
               >
-                <Icon data={info_circle} size="xs" />
+                <Icon data={info_circle} size="md" />
               </Button>
             </Tooltip>
           )}

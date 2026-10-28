@@ -8,8 +8,13 @@ const fromLibrary = (node) =>
 function extractProps(declaration) {
   const props = []
   for (const symbol of declaration.getType().getProperties()) {
-    const decl = symbol.getDeclarations()[0]
-    if (!decl || !Node.isPropertySignature(decl) || fromLibrary(decl)) continue
+    // A prop redeclared in this repo is also declared in the library type it is
+    // intersected with, and which declaration comes first depends on the order
+    // of the intersection. Take the one from this repo wherever it sits.
+    const decl = symbol
+      .getDeclarations()
+      .find((d) => Node.isPropertySignature(d) && !fromLibrary(d))
+    if (!decl) continue
 
     const jsDoc = decl.getJsDocs()[0]
     const description = (jsDoc?.getDescription() ?? '')

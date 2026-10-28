@@ -16,24 +16,27 @@ export type BannerProps = {
   role?: HTMLAttributes<HTMLDivElement>['role']
   /** Callback when the dismiss button is clicked. When provided, a close button is rendered. */
   onDismiss?: () => void
+  /** The banner content, built from `Banner.Icon`, `Banner.Message` and `Banner.Actions`. */
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
 export type BannerIconProps = {
+  /** The icon. Banner does not add one for the tone. */
   children: ReactNode
 } & HTMLAttributes<HTMLSpanElement>
 
 export type BannerMessageProps = {
+  /** The message text. */
   children: ReactNode
 } & HTMLAttributes<HTMLParagraphElement>
 
 export type BannerActionsProps = {
   /**
-   * Where to place the actions relative to the message.
-   * - `left`: Actions appear inline to the right of the message
-   * - `bottom`: Actions appear below the message, spanning full width
+   * Where to place the actions relative to the message. `left` puts them
+   * beside the message and `bottom` puts them below it, across the full width.
    * @default 'left'
    */
   placement?: BannerActionsPlacement
+  /** The buttons or links the user can respond to the message with. */
   children: ReactNode
 } & HTMLAttributes<HTMLDivElement>

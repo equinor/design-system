@@ -2,7 +2,7 @@
   .eds-checkbox {
     --_checkbox-icon-color: var(--eds-color-bg-fill-emphasis-default);
     --_checkbox-hover-color: var(--eds-color-bg-fill-muted-default);
-    --_checkbox-icon-size: var(--eds-sizing-icon-lg);
+    --_checkbox-icon-size: var(--eds-spacing-lg);
 
     /* Not --eds-color-text-disabled: that token is switched by
        data-color-appearance (tinted, not grey, under 'accent') and the wrapper

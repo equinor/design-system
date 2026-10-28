@@ -15,6 +15,7 @@ Claude Code automatically loads rules in `.claude/rules/` when working on matchi
 | -------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
 | `eds-component.md`   | `packages/eds-core-react/src/components/next/**/*.{tsx,ts,css}` | EDS 2.0 component conventions (short reference) |
 | `figma-component.md` | `packages/eds-core-react/src/components/next/**/*.figma.tsx`    | Figma-to-code workflow with MCP tools           |
+| `colour-contrast.md` | `packages/eds-tokens/**`, `/next` component CSS                 | Contrast levels and foreground pairing          |
 | `advisor.md`         | General                                                         | Read-only code review guidelines                |
 
 The path-scoped rules are intentionally short — they reference [`AGENTS.md`](../AGENTS.md) rather than duplicating it.

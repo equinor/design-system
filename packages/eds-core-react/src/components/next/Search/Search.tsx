@@ -107,6 +107,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
           startAdornment={
             <Icon
               data={searchIcon}
+              size="md"
               className="search-icon"
               data-color-appearance={iconTone}
             />
