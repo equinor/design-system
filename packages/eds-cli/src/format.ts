@@ -172,28 +172,32 @@ export function formatComponent(
     }
     blocks.push(header)
   }
-  if (!section || section === 'props') blocks.push(formatProps(component))
-  if (!section || section === 'examples') {
-    blocks.push(formatExamples(component, section === 'examples'))
-  }
-  if (!section) blocks.push(formatGuidance(component))
-  else if (
-    section !== 'props' &&
-    section !== 'examples' &&
-    section !== 'links'
-  ) {
-    const lines = formatGuidance(component, section)
-    blocks.push(
-      lines.length
-        ? lines
-        : [`${component.name} has no ${section} guidance yet.`],
-    )
-  }
-  if (!section || section === 'links') blocks.push(formatLinks(component))
   if (!section) {
-    blocks.push([
-      '→ Tokens for the layout around it: eds tokens <words>, such as eds tokens spacing',
-    ])
+    blocks.push(
+      formatProps(component),
+      formatExamples(component, false),
+      formatGuidance(component),
+      formatLinks(component),
+      [
+        '→ Tokens for the layout around it: eds tokens <words>, such as eds tokens spacing',
+      ],
+    )
+  } else {
+    // One section is what the agent asked for, so say so when it is empty
+    // instead of printing nothing.
+    const lines =
+      section === 'props'
+        ? formatProps(component)
+        : section === 'examples'
+          ? formatExamples(component, true)
+          : section === 'links'
+            ? formatLinks(component)
+            : formatGuidance(component, section)
+    const empty =
+      section === 'examples' || section === 'links'
+        ? `${component.name} has no ${section} yet.`
+        : `${component.name} has no ${section} guidance yet.`
+    blocks.push(lines.length ? lines : [empty])
   }
 
   return blocks
@@ -231,6 +235,6 @@ export function formatTokens(
       return `${t.name.padEnd(width)}  ${t.resolved}${via}`
     }),
     '',
-    `${tokens.length} tokens, values for ${scheme} colour scheme and ${density} density. Use them as var(<name>).`,
+    `${plural(tokens.length, 'token')}, values for ${scheme} colour scheme and ${density} density. Use them as var(<name>).`,
   ].join('\n')
 }
