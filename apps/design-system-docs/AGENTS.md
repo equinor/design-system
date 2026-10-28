@@ -10,17 +10,18 @@ specific to this app.
 
 A versioned Docusaurus site documenting EDS. Three doc versions exist:
 
-| Version                                   | Content dir                          | URL path                                            | Status                                                   |
-| ----------------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
-| `current` (labelled **EDS 2.0 (beta)**)   | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
-| `2.0.0-beta` (**EDS 2.0 (earlier beta)**) | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
-| `1.1.0` (labelled **EDS 1**)              | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+| Version                         | Content dir                          | URL path                   | Status                                                                                |
+| ------------------------------- | ------------------------------------ | -------------------------- | ------------------------------------------------------------------------------------- |
+| `1.1.0` (labelled **Latest**)   | `versioned_docs/version-1.1.0/`      | `/docs/…`                  | the default (`lastVersion`); **frozen archive — never restyle or edit its rendering** |
+| `current` (labelled **Beta**)   | `docs/`                              | `/docs/Next/…` (capital N) | where new work goes                                                                   |
+| `2.0.0-beta` (**Earlier beta**) | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`       | frozen snapshot, rendered with the redesign                                           |
 
-Labels name the design system generation, not a package version: the site
-documents several packages whose versions do not move together, and its main
-readers are designers who do not track them (#4942). The `2.0.0-beta` archive is
-left out of the version dropdown with `versions: ['current', '1.1.0']` on the
-navbar item — it stays built and linkable, but it was never updated past the old
+Labels name the release status, which matches the `latest` and `beta`
+dist-tags of `eds-core-react` and `eds-tokens` on npm (#5667). They are not
+package numbers, because the site documents several packages whose versions do
+not move together, and its main readers are designers who do not track them.
+The `2.0.0-beta` archive is left out of the version dropdown with
+`versions: ['1.1.0', 'current']` on the navbar item — it stays built and linkable, but it was never updated past the old
 colour foundation, so it should not be offered as a destination.
 
 **Version scoping is the #1 footgun.** Anything that styles doc _content_
@@ -35,38 +36,41 @@ must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
   badge in `site-chrome.css`, hidden on current only so frozen pages still
   say which version they are.
 - React: the DocItem hero gate checks `REDESIGN_VERSIONS` (`'current'` and
-  `'2.0.0-beta'`), and its version notes check `EDS_1_VERSION` / `EDS_2_VERSION`.
+  `'2.0.0-beta'`), and its version notes check `LATEST_VERSION`, `BETA_VERSION` and
+  `EARLIER_BETA_VERSION`.
 - Freezing another version means adding its `docs-version-*` class and name
   to both lists.
 - Chrome (navbar, sidebar, TOC, footer) is deliberately version-independent.
 
-**The current and 1.1.0 paths are pinned explicitly, and both must stay that way.**
-`docusaurus.config.ts` sets `lastVersion: 'current'` plus
-`'1.1.0': { path: '' }`. Neither is decoration:
+**Latest is the default, and the paths are pinned explicitly.**
+`docusaurus.config.ts` sets `lastVersion: '1.1.0'`, `current: { path: 'Next' }`
+and `'1.1.0': { path: '' }`. None of them is decoration:
 
 - Without `lastVersion`, Docusaurus defaults it to the newest entry in
   `versions.json` (`2.0.0-beta`), which silently makes a frozen snapshot the target
-  of every `type: 'docSidebar'` navbar item and of the version dropdown — while
-  the footer and landing pages link to `/docs/Next/…`. The site then
-  contradicts its own chrome and the redesign is unreachable from the primary
-  navigation.
-- With `lastVersion: 'current'`, a non-last version takes its version _name_ as
-  its path, so `'1.1.0': { path: '' }` is what keeps the archive at `/docs/…`
-  instead of relocating it to `/docs/1.1.0/…` and breaking every existing link.
+  of every `type: 'docSidebar'` navbar item and of the version dropdown.
+- With `lastVersion: '1.1.0'`, the `Components` and `Resources` navbar items, the
+  dropdown, the footer and the Get started landing open Latest. Beta is reached
+  through the dropdown, the Foundation landing (two of its topics have no Latest
+  page) and links in the docs.
+- `path: 'Next'` keeps the Beta URLs at `/docs/Next/…`, and `path: ''` keeps
+  Latest at `/docs/…` if `lastVersion` moves again. Without them, existing links
+  break.
 
 Two sanctioned changes to the archive's rendering, and only these two:
 
-1. It carries a version note, but not Docusaurus's. The upstream banner for a
-   pre-`lastVersion` version says the docs are "no longer actively maintained",
-   and EDS 1 is maintained until EDS 2.0 becomes stable, so the entry sets
-   `banner: 'none'` and `DocItem/Layout` renders its own note instead (#4942).
-   The current version gets the same treatment for the opposite reason: upstream
-   renders nothing there, which left the beta pages with no sign that they are
-   beta. Both notes live in `DocItem/Layout`; the EDS 2.0 one is `BetaNotice`,
-   scoped to `components/` because it states `eds-core-react`'s path to 3.0.0,
-   which is not every package's (`eds-tokens` beta is a separate story — #5242).
-   The `2.0.0-beta` archive keeps the upstream banner, where "unmaintained" is
-   true.
+1. It carries a version note, but not Docusaurus's. Upstream renders nothing on
+   the `lastVersion`, so the Latest note says which package versions Latest is
+   (`eds-core-react` 2.x and `eds-tokens` 2.x) and links to the Versioning
+   section of the developer getting started page (#5667). The current version
+   gets a note for the same reason: upstream renders nothing there, which left
+   the beta pages with no sign that they are beta. The `2.0.0-beta` archive
+   would get upstream's "unreleased" banner, because `versions.json` lists it
+   before `lastVersion`, so it gets a note that points to Beta instead. All three
+   entries set `banner: 'none'`, and the notes live in `DocItem/Layout`. The
+   Beta one is `BetaNotice`, scoped to `components/` because it states
+   `eds-core-react`'s path to 3.0.0, which is not every package's (`eds-tokens`
+   beta is a separate story — #5242).
 2. It has no breadcrumbs. `breadcrumbs: false` is a docs-**plugin** option,
    not a per-version one, so the redesign's choice to drop them necessarily
    applies to the archive too. There is no way to scope it; re-enabling for
@@ -245,10 +249,10 @@ MDX docs use these without imports; React pages import them from
 
 - `DocsSection` — section + container + SectionHeading boilerplate
   (`title`, `subtitle`, `tone="muted"`, `as`, `id`)
-- `BetaNotice` — the EDS 2.0 beta note. `DocItem/Layout` renders it on every
+- `BetaNotice` — the Beta note. `DocItem/Layout` renders it on every
   component page it draws the hero band for, which puts it under the title. A
   page that writes its own title inside the MDX has to place it itself, after
-  its `<Hero>`, and be listed in `EDS_2_NOTICE_SELF_PLACED` in the layout so the
+  its `<Hero>`, and be listed in `BETA_NOTICE_SELF_PLACED` in the layout so the
   note is not rendered twice; `docs/components/components.mdx` is the one such
   page, and it passes `className` to replace the default spacing with what its
   own rhythm needs (Infima utilities, because the hero band's container chain
