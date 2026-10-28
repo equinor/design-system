@@ -1,6 +1,6 @@
-import { forwardRef } from 'react'
+import { forwardRef, useContext } from 'react'
 import type { AvatarProps } from './Avatar.types'
-import { deriveInitials } from './utils'
+import { AnnounceNotificationContext, deriveInitials } from './utils'
 
 // Size hints for <img> at comfortable density. The CSS sets the rendered size,
 // which follows data-density.
@@ -24,6 +24,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   },
   ref,
 ) {
+  const announceNotification = useContext(AnnounceNotificationContext)
   const classes = ['eds-avatar', className].filter(Boolean).join(' ')
   const resolvedInitial = initial ?? (name ? deriveInitials(name) : undefined)
   // When src is provided the <img> element carries the accessible name — skip role/aria-label on the div
@@ -59,7 +60,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       )}
       {notification && <span className="notification" aria-hidden="true" />}
       {/* Announce notification to screen readers when the div carries no aria-label */}
-      {notification && !label && (
+      {notification && !label && announceNotification && (
         <span className="notification-label">Notification</span>
       )}
     </div>

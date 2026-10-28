@@ -118,6 +118,11 @@ describe('Avatar (next)', () => {
       expect(screen.getByText('AL')).toBeInTheDocument()
     })
 
+    it('keeps a whole emoji when the name starts with one', () => {
+      render(<Avatar name="🦊 Fox" />)
+      expect(screen.getByText('🦊F')).toBeInTheDocument()
+    })
+
     it('name prop sets role="img" and aria-label', () => {
       render(
         <Avatar data-testid="eds-avatar" initial="AL" name="Ada Lovelace" />,
@@ -263,6 +268,22 @@ describe('AvatarNameLabel (next)', () => {
     it('announces notification via visually-hidden text', () => {
       render(<AvatarNameLabel name="Ada Lovelace" notification />)
       expect(screen.getByText('Notification')).toBeInTheDocument()
+    })
+
+    it('announces the notification once, after the name and meta', () => {
+      render(
+        <AvatarNameLabel
+          name="Ada Lovelace"
+          meta="Senior Engineer"
+          notification
+        />,
+      )
+      const notification = screen.getByText('Notification')
+      expect(
+        screen
+          .getByText('Senior Engineer')
+          .compareDocumentPosition(notification),
+      ).toBe(Node.DOCUMENT_POSITION_FOLLOWING)
     })
 
     it('has no accessibility violations with notification', async () => {

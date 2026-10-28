@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import type { AvatarNameLabelProps } from './AvatarNameLabel.types'
 import { Avatar } from './Avatar'
-import { deriveInitials } from './utils'
+import { AnnounceNotificationContext, deriveInitials } from './utils'
 
 export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
   function AvatarNameLabel(
@@ -30,17 +30,23 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
       <div ref={ref} className={classes} data-layout={layout} {...rest}>
         <div className="content">
           {/* alt forced to '' so Avatar's own name fallback doesn't announce the name twice — the visible label text already covers it */}
-          <Avatar
-            size={size}
-            emphasis={emphasis}
-            src={src}
-            alt={alt ?? ''}
-            initial={src ? undefined : derivedInitial}
-            notification={notification}
-          />
+          <AnnounceNotificationContext.Provider value={false}>
+            <Avatar
+              size={size}
+              emphasis={emphasis}
+              src={src}
+              alt={alt ?? ''}
+              initial={src ? undefined : derivedInitial}
+              notification={notification}
+            />
+          </AnnounceNotificationContext.Provider>
           <div className="names">
             <span className="full-name">{name}</span>
             {meta && <span className="meta">{meta}</span>}
+            {/* After the name and meta, so a screen reader reads the person first */}
+            {notification && (
+              <span className="notification-label">Notification</span>
+            )}
           </div>
         </div>
         {children && (

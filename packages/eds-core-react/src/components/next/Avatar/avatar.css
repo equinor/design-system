@@ -91,24 +91,25 @@
         --eds-background-interactive-danger-emphasis-default
       );
     }
+  }
 
-    /* Visually-hidden span announces notification when the div carries no aria-label */
-    & .notification-label {
-      position: absolute;
+  /* Visually hidden text that announces the notification. Avatar renders it
+     when it has no aria-label; AvatarNameLabel renders it after the name. */
+  :is(.eds-avatar, .eds-avatar-name-label) .notification-label {
+    position: absolute;
 
-      overflow: hidden;
+    overflow: hidden;
 
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      border: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
 
-      white-space: nowrap;
+    white-space: nowrap;
 
-      /* clip-path rather than the deprecated clip property */
-      clip-path: inset(50%);
-    }
+    /* clip-path rather than the deprecated clip property */
+    clip-path: inset(50%);
   }
 
   .eds-avatar-name-label {
