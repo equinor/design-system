@@ -4,7 +4,7 @@ import type { AvatarEmphasis, AvatarSize } from './Avatar.types'
 export type AvatarNameLabelLayout = 'horizontal' | 'vertical'
 
 export type AvatarNameLabelProps = {
-  /** Name of the person, displayed as the primary label. Also auto-derives the avatar initial. */
+  /** Name of the person, shown as the primary label. The avatar's initials are derived from it. */
   name: string
   /** Secondary label, such as an email, a job title or any short metadata */
   meta?: string
@@ -15,27 +15,27 @@ export type AvatarNameLabelProps = {
    * @default 'horizontal'
    */
   layout?: AvatarNameLabelLayout
-  /** Override the initials shown in the avatar, which are otherwise derived from the first and last word of `name` */
+  /** Initials for the avatar, instead of the ones derived from `name`. Passed to `Avatar`. */
   initial?: string
-  /** Profile photo URL. When provided, renders a circular photo instead of initials. */
+  /** Profile photo URL. Passed to `Avatar`. */
   src?: string
   /** Alt text for the photo. Defaults to `""` (decorative) so the visible name is not announced twice. Pass a value to override. */
   alt?: string
   /**
-   * Size of the avatar
+   * Size of the avatar. Passed to `Avatar`.
    * @default 'lg'
    */
   size?: AvatarSize
   /**
-   * Colour emphasis of the avatar
+   * Colour emphasis of the avatar. Passed to `Avatar`.
    * @default 'low'
    */
   emphasis?: AvatarEmphasis
   /**
-   * Show a red notification dot on the avatar
+   * Shows the notification dot on the avatar. Passed to `Avatar`.
    * @default false
    */
   notification?: boolean
-  /** Optional slot for content to the right (e.g. an icon or action button) */
+  /** Content for the trailing slot. It takes anything, for example an action button. */
   children?: ReactNode
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>

@@ -48,16 +48,16 @@ import { Avatar } from '@equinor/eds-core-react/next'
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `name` | `string` | None | Name of the person, displayed as the primary label. Also auto-derives the avatar initial. Required. |
+| `name` | `string` | None | Name of the person, shown as the primary label. The avatar's initials are derived from it. Required. |
 | `meta` | `string` | None | Secondary label, such as an email, a job title or any short metadata |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | `horizontal` stacks the name and meta, for lists with one person per row. `vertical` puts them on one line, for headers and other wide contexts. The names follow Figma and refer to the list the component sits in. |
-| `initial` | `string` | None | Override the initials shown in the avatar, which are otherwise derived from the first and last word of `name` |
-| `src` | `string` | None | Profile photo URL. When provided, renders a circular photo instead of initials. |
+| `initial` | `string` | None | Initials for the avatar, instead of the ones derived from `name`. Passed to `Avatar`. |
+| `src` | `string` | None | Profile photo URL. Passed to `Avatar`. |
 | `alt` | `string` | None | Alt text for the photo. Defaults to `""` (decorative) so the visible name is not announced twice. Pass a value to override. |
-| `size` | `AvatarSize` | `'lg'` | Size of the avatar |
-| `emphasis` | `AvatarEmphasis` | `'low'` | Colour emphasis of the avatar |
-| `notification` | `boolean` | `false` | Show a red notification dot on the avatar |
-| `children` | `ReactNode` | None | Optional slot for content to the right (e.g. an icon or action button) |
+| `size` | `AvatarSize` | `'lg'` | Size of the avatar. Passed to `Avatar`. |
+| `emphasis` | `AvatarEmphasis` | `'low'` | Colour emphasis of the avatar. Passed to `Avatar`. |
+| `notification` | `boolean` | `false` | Shows the notification dot on the avatar. Passed to `Avatar`. |
+| `children` | `ReactNode` | None | Content for the trailing slot. It takes anything, for example an action button. |
 
 ## Examples
 
