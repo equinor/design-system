@@ -56,17 +56,11 @@ Set `data-density` on a parent element to `compact`, `comfortable` or `relaxed`.
 
 <StoryCanvas of="Icon/Densities" showLink />
 
-### Color
+### Colour
 
-Icons inherit `currentColor` by default, making them adapt to text color automatically. You can also set a custom color using the `color` prop.
+Icons take the colour of the surrounding text by default, so an icon next to a label always matches it. When an icon needs a colour of its own, use one of the semantic icon colour tokens instead of a fixed colour value, so the icon still adapts to light and dark mode.
 
 <StoryCanvas of="Icon/Color" showLink />
-
-## Usage in Figma
-
-There is no dedicated Icon component in Figma. Icons are imported directly from the **Assets** panel, where they are `spacing-xl` (24px at Comfortable), the same as an Icon without `size` in code.
-
-To use another size, bind the icon's width and height to a spacing variable. The variable name is the `size` in code: an icon bound to `spacing-md` is `size="md"`. The icon size does not follow the size of the text next to it.
 
 ## Accessibility
 
@@ -74,17 +68,21 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 
 **Decorative icons** (no `title` prop)
 
-- Rendered with `aria-hidden="true"`
 - Hidden from screen readers entirely
 - Use when the icon is accompanied by visible text that conveys the same meaning
 
 **Semantic icons** (with `title` prop)
 
-- Rendered with `role="img"` and `aria-labelledby`
-- Announced by screen readers using the title text
+- Exposed as an image and announced by screen readers using the title text
 - Use when the icon conveys meaning that is not available through surrounding text
 
 <StoryCanvas of="Icon/DecorativeAndSemantic" showLink />
+
+## Figma
+
+There is no dedicated Icon component in Figma. Icons are imported directly from the **Assets** panel, where they are `spacing-xl` (24px at Comfortable), the same as an Icon without `size` in code.
+
+To use another size, bind the icon's width and height to a spacing variable. The variable name is the `size` in code: an icon bound to `spacing-md` is `size="md"`. The icon size does not follow the size of the text next to it.
 
 ## Do's and Don'ts
 
@@ -92,7 +90,7 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 
 - Use `title` prop when an icon is the only element conveying meaning (e.g., icon-only buttons)
 - Use the `size` that matches the spacing variable bound in Figma
-- Rely on `currentColor` for icons that should match surrounding text color
+- Let icons take the text colour when they should match the text around them
   :::
 
 :::danger **Don't**
