@@ -1,4 +1,14 @@
-import { useState, useRef, type ReactNode, type KeyboardEvent } from 'react'
+import {
+  useContext,
+  useRef,
+  useState,
+  type ReactNode,
+  type KeyboardEvent,
+} from 'react'
+import {
+  DocsContext,
+  type DocsContextProps,
+} from '@storybook/addon-docs/blocks'
 
 type Tab = 'react' | 'native'
 
@@ -7,13 +17,30 @@ type PlatformTabsProps = {
   children?: ReactNode
 }
 
+const isTab = (value: unknown): value is Tab =>
+  value === 'react' || value === 'native'
+
+// The `platform` global (`&globals=platform:native` in the URL) only decides
+// which tab a page opens on. Clicking a tab stays in local state: writing the
+// global back makes Storybook re-render the whole docs page, which remounts
+// every story canvas on the React tab. Storybook's `useGlobals` is not
+// available in a docs page block, so read it from the docs context.
+const getInitialTab = (docsContext: DocsContextProps): Tab => {
+  const story = docsContext.componentStories()[0]
+  const value = story && docsContext.getStoryContext(story).globals?.platform
+  return isTab(value) ? value : 'react'
+}
+
 const TABS: { id: Tab; label: string }[] = [
   { id: 'react', label: 'React' },
   { id: 'native', label: 'React Native' },
 ]
 
 export const PlatformTabs = ({ mobile, children }: PlatformTabsProps) => {
-  const [activeTab, setActiveTab] = useState<Tab>('react')
+  const docsContext = useContext(DocsContext)
+  const [activeTab, setActiveTab] = useState<Tab>(() =>
+    getInitialTab(docsContext),
+  )
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   if (!mobile) return <>{children}</>
