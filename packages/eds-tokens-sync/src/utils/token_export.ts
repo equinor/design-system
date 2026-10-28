@@ -32,7 +32,9 @@ function tokenValueFromVariable(
       return rgbToHex(value)
     }
 
-    throw new Error(`Format of variable value is invalid: ${value?.id}`)
+    throw new Error(
+      `Format of variable value is invalid: ${JSON.stringify(value)}`,
+    )
   } else {
     return value
   }
