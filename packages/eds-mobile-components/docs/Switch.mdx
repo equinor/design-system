@@ -28,7 +28,15 @@ const [active, setActive] = useState(false)
 
 ## Props
 
-Switch has no props of its own.
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `onChange` | `(isActive: boolean) => void` | None | Called when the switch is toggled. |
+| `active` | `boolean` | `false` | Whether the switch is on or off. |
+| `disabled` | `boolean` | `false` | Disables interaction. |
+| `label` | `string` | None | Text label displayed next to the switch. |
+| `ref` | `React.Ref<View>` | None | Ref to the switch. |
+
+Also accepts all React Native [`ViewProps`](https://reactnative.dev/docs/view#props).
 
 ## Examples
 
