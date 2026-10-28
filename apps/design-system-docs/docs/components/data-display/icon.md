@@ -1,7 +1,7 @@
 ---
 title: Icon
 hide_title: true
-description: 'Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to scale automatically with typography, adapt to density modes, and meet accessibility standards out of the box.'
+description: 'Icons are small visual symbols that communicate meaning at a glance. They support text labels, guide users through interactions, and add clarity to our interfaces. The Icon component is designed with care to adapt to density modes and meet accessibility standards out of the box.'
 ---
 
 <StoryCanvas of="Icon/Introduction" showLink />
@@ -88,14 +88,14 @@ To use another size, bind the icon's width and height to a spacing variable. The
 
 :::info **Do**
 
-- Use `title` prop when an icon is the only element conveying meaning (e.g., icon-only buttons)
+- Use the `title` prop when a standalone icon is the only element conveying meaning
+- Give an icon-only button its accessible name on the button, and keep the icon decorative
 - Use the `size` that matches the spacing variable bound in Figma
-- Let icons take the text colour when they should match the text around them
   :::
 
 :::danger **Don't**
 
-- Don't use icons without a `title` when there is no accompanying text to convey the meaning
+- Don't give the icon in an icon-only button a `title` as well, or screen readers read the name twice
 - Don't set the `size` prop on an icon inside a component such as Button or Chip. The component sets the icon size, so the prop has no effect
 - Don't use custom pixel values for sizing - use the `size` prop or let tokens handle it
   :::
