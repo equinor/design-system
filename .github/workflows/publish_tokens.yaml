@@ -15,7 +15,7 @@ on:
         default: 'next'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  NODE_VERSION: '24.16.0'
+  NODE_VERSION: '24.22.1'
   CACHE_KEY: ${{ github.sha }}-publish-tokens
 
 jobs:
@@ -109,6 +109,14 @@ jobs:
       # above) happen before `pnpm publish` runs prepublishOnly (the build) —
       # if a build step ever starts generating package.json, it would
       # silently overwrite them.
+      # The ./next/ts/* target carries the .ts extension so the consumer
+      # writes none, matching the 2.x ./ts/* patterns that mobile already
+      # imports from (#5671). Do not drop it back onto the bare directory:
+      # subpath patterns substitute literally, so the specifier would then
+      # have to spell the extension out, which is what this fixed. The css
+      # and dtcg targets stay bare on purpose: their specifiers name a file
+      # (next/css/variables.css), which is the documented form and what the
+      # docs-site webpack alias and the Storybook preview already import.
       - name: Add Tokens Studio output for beta release
         if: github.event.inputs.npm-tag == 'beta'
         run: |
@@ -125,7 +133,7 @@ jobs:
             pkg.files.push('src/tokens/css/*', 'src/tokens/dtcg/*', 'src/tokens/ts/*');
             pkg.exports['./next/css/*'] = './src/tokens/css/*';
             pkg.exports['./next/dtcg/*'] = './src/tokens/dtcg/*';
-            pkg.exports['./next/ts/*'] = './src/tokens/ts/*';
+            pkg.exports['./next/ts/*'] = './src/tokens/ts/*.ts';
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
             console.log('Added Tokens Studio output to files and exports');
           "

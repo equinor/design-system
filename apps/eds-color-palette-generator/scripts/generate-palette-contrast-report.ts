@@ -2,20 +2,21 @@
 /*
  * Script: generate-palette-contrast-report.ts
  * Purpose: Generate color scales for each base color and compute current contrast values
- * Uses helper functions from src/utils/color.ts (generateColorScale, contrast)
+ * Uses helper functions from src/utils/color.ts (generateColorScale, contrast,
+ *   contrastValue)
  * Output: PALETTE_CONTRAST_REPORT.md
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { paletteConfig as config } from '../src/config/palette'
+import { paletteConfig as config } from '../src/config/palette-config'
 import {
   PALETTE_STEPS,
   lightnessValuesInLightMode,
   darknessValuesInDarkMode,
 } from '../src/config/config'
-import { generateColorScale, contrast } from '../src/utils/color'
+import { generateColorScale, contrast, contrastValue } from '../src/utils/color'
 import { ColorDefinition, ColorAnchor } from '../src/types'
 import Color from 'colorjs.io'
 
@@ -25,6 +26,7 @@ const __dirname = path.dirname(__filename)
 interface RequirementRow {
   foreground: string
   background: string
+  pairing: string
   requiredApca: number
   requiredWcag: number
 }
@@ -49,6 +51,7 @@ function getRequirements(): RequirementRow[] {
       rows.push({
         foreground: step.id,
         background: req.targetStep,
+        pairing: req.pairing,
         requiredApca: req.lc.value,
         requiredWcag: req.wcag.value,
       })
@@ -125,10 +128,14 @@ function computeContrasts() {
         background: bgDark,
         algorithm: 'WCAG21',
       })
-      const lightApcaNum = Number(lightApca)
-      const lightWcagNum = Number(lightWcag)
-      const darkApcaNum = Number(darkApca)
-      const darkWcagNum = Number(darkWcag)
+      // Pass flags use the unrounded values; the strings above are rounded
+      // for display
+      const exact = (fg: string, bg: string, algorithm: 'APCA' | 'WCAG21') =>
+        contrastValue({ foreground: fg, background: bg, algorithm })
+      const lightApcaNum = exact(fgLight, bgLight, 'APCA')
+      const lightWcagNum = exact(fgLight, bgLight, 'WCAG21')
+      const darkApcaNum = exact(fgDark, bgDark, 'APCA')
+      const darkWcagNum = exact(fgDark, bgDark, 'WCAG21')
       return {
         ...req,
         lightApca: String(lightApca),
@@ -150,9 +157,9 @@ function buildContrastTables() {
   return datasets
     .map(({ scale, rows }) => {
       const header =
-        '| Foreground | Background | Fg Light HEX | Fg Dark HEX | Bg Light HEX | Bg Dark HEX | Light APCA | Light WCAG | Dark APCA | Dark WCAG | Required APCA | Required WCAG |'
+        '| Pairing (Tokens Studio) | Steps | Fg Light HEX | Fg Dark HEX | Bg Light HEX | Bg Dark HEX | Light APCA | Dark APCA | Required APCA | Light WCAG | Dark WCAG |'
       const sep =
-        '| ---------- | ---------- | ------------ | ----------- | ------------ | ----------- | ---------- | ----------- | --------- | --------- | ------------- | ------------- |'
+        '| ----------------------- | ----- | ------------ | ----------- | ------------ | ----------- | ---------- | --------- | ------------- | ---------- | --------- |'
       const toHex = (val: string): string => {
         try {
           return new Color(val).toString({ format: 'hex' })
@@ -160,21 +167,18 @@ function buildContrastTables() {
           return '#000000'
         }
       }
+      const steps = (id: string) => id.replace('step-', '')
       const lines = rows.map(
         (r) =>
-          `| ${r.foreground} | ${r.background} | ${toHex(scale.mapping[r.foreground].light)} | ${toHex(scale.mapping[r.foreground].dark)} | ${toHex(scale.mapping[r.background].light)} | ${toHex(scale.mapping[r.background].dark)} | ${r.lightApca}${r.lightApcaPass ? ' ✅' : ' ❌'} | ${r.lightWcag}${r.lightWcagPass ? ' ✅' : ' ❌'} | ${r.darkApca}${r.darkApcaPass ? ' ✅' : ' ❌'} | ${r.darkWcag}${r.darkWcagPass ? ' ✅' : ' ❌'} | ${r.requiredApca} | ${r.requiredWcag} |`,
+          `| \`${r.pairing}\` | ${steps(r.foreground)} on ${steps(r.background)} | ${toHex(scale.mapping[r.foreground].light)} | ${toHex(scale.mapping[r.foreground].dark)} | ${toHex(scale.mapping[r.background].light)} | ${toHex(scale.mapping[r.background].dark)} | ${r.lightApca}${r.lightApcaPass ? ' ✅' : ' ❌'} | ${r.darkApca}${r.darkApcaPass ? ' ✅' : ' ❌'} | ${r.requiredApca} | ${r.lightWcag} | ${r.darkWcag} |`,
       )
-      const total = rows.length * 4
+      // ADR 0016 Confirmation 5 asserts APCA only; WCAG is shown for reference.
+      const total = rows.length * 2
       const passed = rows.reduce(
-        (acc, r) =>
-          acc +
-          (r.lightApcaPass ? 1 : 0) +
-          (r.lightWcagPass ? 1 : 0) +
-          (r.darkApcaPass ? 1 : 0) +
-          (r.darkWcagPass ? 1 : 0),
+        (acc, r) => acc + (r.lightApcaPass ? 1 : 0) + (r.darkApcaPass ? 1 : 0),
         0,
       )
-      const summaryLine = `\n**Pass Summary:** ${passed}/${total} checks (${((passed / total) * 100).toFixed(1)}%)`
+      const summaryLine = `\n**APCA pass summary:** ${passed}/${total} checks (${((passed / total) * 100).toFixed(1)}%)`
       return `### ${scale.name} (${scale.value})\n\n${header}\n${sep}\n${lines.join('\n')}${summaryLine}`
     })
     .join('\n\n')
@@ -182,7 +186,7 @@ function buildContrastTables() {
 
 function generate() {
   const date = new Date().toISOString().split('T')[0]
-  const content = `# Palette Contrast Report\n\nGenerated: ${date}\n\n## Contrast Values\n\n${buildContrastTables()}\n\n---\n\n_This document is auto-generated; update \`config.ts\` or \`color.ts\` to change source values._\n`
+  const content = `# Palette contrast report\n\nGenerated: ${date}\n\nThe seven Tokens Studio hues generated with the Tokens Studio scale, checked against the APCA targets in ADR 0016 (Confirmation 5): text and icon roles against \`background.surface\`, \`on-emphasis\` against the emphasis fill. Each pair is checked inside every hue, so for hues other than the neutral one, step 15 of that hue stands in for \`background.surface\` (\`neutral.15\`). Borders are out of scope in the ADR and are not checked. WCAG 2.1 ratios are shown for reference only.\n\n## Contrast values\n\n${buildContrastTables()}\n\n---\n\n_This document is generated by \`pnpm generate:palette-contrast-report\`. The values come from Tokens Studio (\`src/config/tokensStudio.ts\`); the requirements are in \`src/config/config.ts\`._\n`
   fs.writeFileSync(outPath, content, 'utf8')
   console.log(
     `Contrast report generated -> ${path.relative(process.cwd(), outPath)}`,

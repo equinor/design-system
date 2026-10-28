@@ -8,8 +8,13 @@ const fromLibrary = (node) =>
 function extractProps(declaration) {
   const props = []
   for (const symbol of declaration.getType().getProperties()) {
-    const decl = symbol.getDeclarations()[0]
-    if (!decl || !Node.isPropertySignature(decl) || fromLibrary(decl)) continue
+    // A prop redeclared in this repo is also declared in the library type it is
+    // intersected with, and which declaration comes first depends on the order
+    // of the intersection. Take the one from this repo wherever it sits.
+    const decl = symbol
+      .getDeclarations()
+      .find((d) => Node.isPropertySignature(d) && !fromLibrary(d))
+    if (!decl) continue
 
     const jsDoc = decl.getJsDocs()[0]
     const description = (jsDoc?.getDescription() ?? '')
@@ -50,4 +55,80 @@ function extractProps(declaration) {
   return props
 }
 
-module.exports = { extractProps }
+const fromReactNative = (node) =>
+  node.getSourceFile().getFilePath().includes('/node_modules/react-native/')
+
+// Type helpers that pass a props type through, so `Omit<TextInputProps, 'x'>`
+// still builds on TextInputProps. Pick is left out on purpose: it keeps only a
+// few of the props, so the type does not accept all of them.
+const PASS_THROUGH = new Set(['Omit', 'Partial', 'Required'])
+
+// The string keys named in an Omit, such as `'a' | 'b'`, or none.
+function literalKeys(typeNode) {
+  if (!typeNode) return []
+  if (Node.isLiteralTypeNode(typeNode)) {
+    return [
+      typeNode
+        .getLiteral()
+        .getText()
+        .replace(/^['"]|['"]$/g, ''),
+    ]
+  }
+  if (Node.isUnionTypeNode(typeNode)) {
+    return typeNode.getTypeNodes().flatMap(literalKeys)
+  }
+  return []
+}
+
+// The React Native prop types that a props type is built from, such as
+// PressableProps or ViewProps, each with the keys an Omit removed from it. Their
+// props are not listed in the table, so the page names them instead. Only the
+// top level of the type counts, through `&`, local aliases and the helpers
+// above, so a type that merely borrows one prop, like `TextProps['onPress']`,
+// does not claim to accept all of TextProps.
+function extractBaseTypes(declaration) {
+  const bases = new Map()
+  const seen = new Set()
+
+  const visit = (typeNode, omitted = []) => {
+    if (!typeNode || seen.has(typeNode)) return
+    seen.add(typeNode)
+
+    if (Node.isIntersectionTypeNode(typeNode)) {
+      typeNode.getTypeNodes().forEach((node) => visit(node, omitted))
+    } else if (Node.isParenthesizedTypeNode(typeNode)) {
+      visit(typeNode.getTypeNode(), omitted)
+    } else if (Node.isTypeReference(typeNode)) {
+      const name = typeNode.getTypeName()
+      if (!Node.isIdentifier(name)) return
+      let symbol = name.getSymbol()
+      if (symbol?.isAlias()) symbol = symbol.getAliasedSymbol()
+      for (const decl of symbol?.getDeclarations() ?? []) {
+        if (fromReactNative(decl)) {
+          const base = name.getText()
+          if (/Props$/.test(base) && !bases.has(base)) bases.set(base, omitted)
+        } else if (fromLibrary(decl)) {
+          const helper = name.getText()
+          if (PASS_THROUGH.has(helper)) {
+            const [inner, keys] = typeNode.getTypeArguments()
+            visit(
+              inner,
+              helper === 'Omit' ? [...omitted, ...literalKeys(keys)] : omitted,
+            )
+          }
+        } else if (Node.isTypeAliasDeclaration(decl)) {
+          visit(decl.getTypeNode(), omitted)
+        }
+      }
+    }
+  }
+
+  visit(
+    Node.isTypeAliasDeclaration(declaration)
+      ? declaration.getTypeNode()
+      : undefined,
+  )
+  return [...bases].map(([name, omitted]) => ({ name, omitted }))
+}
+
+module.exports = { extractProps, extractBaseTypes }

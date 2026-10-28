@@ -121,7 +121,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                   tone="neutral"
                   aria-label="More information"
                 >
-                  <Icon data={info_circle} size="xs" />
+                  <Icon data={info_circle} size="md" />
                 </Button>
               </Tooltip>
             )}

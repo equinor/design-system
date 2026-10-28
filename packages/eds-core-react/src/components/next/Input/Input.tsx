@@ -48,7 +48,7 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
             data-font-family="ui"
             data-baseline="center"
           >
-            <Icon data={error_filled} />
+            <Icon data={error_filled} size="md" />
           </span>
         )}
         {hasStartAdornment && (

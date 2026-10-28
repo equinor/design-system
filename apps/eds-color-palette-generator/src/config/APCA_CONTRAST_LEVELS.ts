@@ -33,7 +33,7 @@ export const APCA_CONTRAST_LEVELS = {
       'Absolute minimum for spot-readable text and large, simple UI graphics.',
     rules: [
       'Applies to placeholders, disabled text, copyright/™ bugs.',
-      'Large, solid, easily recognizable UI graphics: Lc ≥ 30.',
+      'Large, solid, easily recognisable UI graphics: Lc ≥ 30.',
     ],
   },
   LC_15: {

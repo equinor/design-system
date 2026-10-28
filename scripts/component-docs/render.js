@@ -1,4 +1,4 @@
-const { BETA_CALLOUT, PLATFORMS } = require('./config')
+const { BETA_CALLOUT, PLATFORMS, REACT_NATIVE_DOCS } = require('./config')
 const { fencedCode } = require('./sidecar')
 const { fail } = require('./errors')
 
@@ -27,6 +27,34 @@ function renderPropsTable(props) {
   ].join('\n')
 }
 
+// Props that come from a React Native type are not listed in the table, so a
+// line under it names the type, linked to its React Native docs.
+// A type that left some props out with Omit says which, so the line does not
+// claim more than the component takes. A prop that was left out only to be
+// declared again, such as Input's `onChange`, is in the table, so it is not
+// named as missing.
+const listWithAnd = (items) =>
+  items.length > 1
+    ? `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`
+    : items[0]
+
+function alsoAccepts(bases = [], props = []) {
+  if (!bases.length) return undefined
+  const links = bases.map(({ name }) =>
+    REACT_NATIVE_DOCS[name]
+      ? `[\`${name}\`](https://reactnative.dev/docs/${REACT_NATIVE_DOCS[name]}#props)`
+      : `\`${name}\``,
+  )
+  const listed = new Set(props.map((prop) => prop.name))
+  const omitted = [...new Set(bases.flatMap((base) => base.omitted))].filter(
+    (key) => !listed.has(key),
+  )
+  const except = omitted.length
+    ? `, except ${listWithAnd(omitted.map((key) => `\`${key}\``))}`
+    : ''
+  return `Also accepts all React Native ${listWithAnd(links)}${except}.`
+}
+
 // One Links row. `urls` is in display order, `indent` is for nesting.
 function renderLinks(urls, indent = '') {
   const attrs = Object.entries(urls)
@@ -52,10 +80,22 @@ function usageSection(component, platform, ctx) {
   )
 }
 
-function examplesSection(component, examples) {
+// Every example needs a caption, so a reader knows what they are looking at.
+// Checked here, on the story objects, before they are mapped to markdown and
+// the caption field is lost.
+function assertCaptioned(component, stories) {
+  const missing = stories.filter((s) => !s.caption).map((s) => s.name)
+  if (missing.length) {
+    fail(
+      `${component}: add a caption to ${missing.map((n) => `\`${n}\``).join(', ')} with parameters.docs.description.story.`,
+    )
+  }
+}
+
+function examplesSection(component, platform, examples) {
   if (!examples.length) {
     fail(
-      `${component}: no Examples. ${component}.stories.tsx exports none besides the skipped playground story.`,
+      `${component}: no Examples. ${component}.stories.tsx exports none${platform === 'web' ? '. On web, the Introduction and Overview stories are not examples.' : '.'}`,
     )
   }
   return section('Examples', examples.join('\n\n'))
@@ -75,6 +115,7 @@ function renderMobile(component, ctx) {
       `${component}: no code to show for the example ${missing.name}. On mobile, write each example as a function that returns JSX, or an object with a render function.`,
     )
   }
+  assertCaptioned(component, ctx.stories)
   const examples = ctx.stories.map((s) =>
     [s.title && `### ${s.title}`, s.caption, `\`\`\`tsx\n${s.code}\n\`\`\``]
       .filter(Boolean)
@@ -86,14 +127,33 @@ function renderMobile(component, ctx) {
     usageSection(component, 'mobile', ctx),
     section(
       'Props',
-      ctx.props.length
-        ? renderPropsTable(ctx.props)
-        : `${component} has no props of its own.`,
+      [
+        ctx.props.length
+          ? renderPropsTable(ctx.props)
+          : `${component} has no props of its own.`,
+        alsoAccepts(ctx.baseTypes, ctx.props),
+        ...(ctx.subComponents ?? []).map((sub) =>
+          [
+            `### ${sub.name}`,
+            sub.props.length
+              ? renderPropsTable(sub.props)
+              : `${sub.name} has no props of its own.`,
+            alsoAccepts(sub.baseTypes, sub.props),
+          ]
+            .filter(Boolean)
+            .join('\n\n'),
+        ),
+      ]
+        .filter(Boolean)
+        .join('\n\n'),
     ),
-    examplesSection(component, examples),
+    examplesSection(component, 'mobile', examples),
     ...closingSections(ctx),
   ])
 }
+
+// The web story shown right after Features, with no heading and no caption.
+const OVERVIEW_STORY = 'Overview'
 
 // The Storybook page: the web docs, with the React Native tab when a mobile
 // sidecar exists.
@@ -106,7 +166,16 @@ function renderWeb(component, ctx) {
     sourceUrl: ctx.sourceUrl,
     npmUrl: p.npmUrl,
   })
-  const examples = ctx.stories.map((s) =>
+  // The Overview story is the display right after Features. It is not an example.
+  const overview = ctx.stories.find((s) => s.name === OVERVIEW_STORY)
+  if (!overview) {
+    fail(
+      `${component}: add an ${OVERVIEW_STORY} story to ${component}.stories.tsx. It is the display shown right after Features.`,
+    )
+  }
+  const exampleStories = ctx.stories.filter((s) => s !== overview)
+  assertCaptioned(component, exampleStories)
+  const examples = exampleStories.map((s) =>
     [`### ${s.title}`, s.caption, `<Canvas of={Stories.${s.name}} />`]
       .filter(Boolean)
       .join('\n\n'),
@@ -140,11 +209,18 @@ function renderWeb(component, ctx) {
       `<PlatformTabs mobile={<>\n${mobileLinks}\n  <MobileDocs />\n</>}>`,
     links,
     featuresSection(ctx),
-    // The first example in the stories file, shown again below with the rest.
-    ctx.stories.length && `<Canvas of={Stories.${ctx.stories[0].name}} />`,
+    `<Canvas of={Stories.${overview.name}} />`,
     usageSection(component, 'web', ctx),
-    section('Props and playground', '<Primary />\n<Controls />'),
-    examplesSection(component, examples),
+    section(
+      'Props and playground',
+      [
+        '<Primary />\n<Controls />',
+        ...(ctx.subComponents ?? [])
+          .filter((sub) => sub.props.length)
+          .map((sub) => `### ${sub.name}\n\n${renderPropsTable(sub.props)}`),
+      ].join('\n\n'),
+    ),
+    examplesSection(component, 'web', examples),
     ...closingSections(ctx),
     ctx.hasMobile && '</PlatformTabs>',
   ])

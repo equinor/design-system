@@ -29,6 +29,14 @@
     border-bottom: var(--eds-sizing-stroke-thin) solid currentcolor;
 
     text-decoration: none;
+
+    /* Figma binds the icon to --eds-spacing-md, smaller than Icon's
+     * default. This also sizes icons passed as children, so Icon's size
+     * prop has no effect inside a standalone link. */
+    & > .eds-icon {
+      width: var(--eds-spacing-md);
+      height: var(--eds-spacing-md);
+    }
   }
 
   /* Use pseudo-element for focus ring so it can have border-radius

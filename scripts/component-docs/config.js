@@ -9,6 +9,52 @@ const BETA_CALLOUT =
 // is required, see requiredSections per platform below.
 const OPTIONAL_SIDECAR_SECTIONS = ['Related components']
 
+// Mobile sub-components that share their parent's page and get their own props
+// table under Props, keyed by the parent. `component` is the name whose
+// `{component}Props` type lists the props, so Button.Icon reads IconButtonProps.
+const MOBILE_SUB_COMPONENTS = {
+  Button: [{ name: 'Button.Icon', component: 'IconButton' }],
+}
+
+// The parts of a web compound component, such as Field.Label. Storybook's props
+// table covers only the main component, so each part gets its own table under
+// Props and playground, keyed by the parent. `component` is the name whose
+// `{component}Props` type lists the props. A part with no props of its own is
+// left out of the page.
+const WEB_SUB_COMPONENTS = {
+  Accordion: [
+    { name: 'Accordion.Item', component: 'AccordionItem' },
+    { name: 'Accordion.Header', component: 'AccordionHeader' },
+    { name: 'Accordion.Panel', component: 'AccordionPanel' },
+  ],
+  Banner: [
+    { name: 'Banner.Icon', component: 'BannerIcon' },
+    { name: 'Banner.Message', component: 'BannerMessage' },
+    { name: 'Banner.Actions', component: 'BannerActions' },
+  ],
+  Dialog: [
+    { name: 'Dialog.Header', component: 'DialogHeader' },
+    { name: 'Dialog.Title', component: 'DialogTitle' },
+    { name: 'Dialog.Content', component: 'DialogContent' },
+    { name: 'Dialog.Actions', component: 'DialogActions' },
+  ],
+  Field: [
+    { name: 'Field.Label', component: 'FieldLabel' },
+    { name: 'Field.Description', component: 'FieldDescription' },
+    { name: 'Field.HelperMessage', component: 'HelperMessage' },
+  ],
+}
+
+// Where each React Native props type is documented, for the "Also accepts all
+// React Native ..." line under a mobile props table. A type missing here is
+// named without a link.
+const REACT_NATIVE_DOCS = {
+  PressableProps: 'pressable',
+  TextInputProps: 'textinput',
+  TextProps: 'text',
+  ViewProps: 'view',
+}
+
 // Optional metadata block at the top of a sidecar. These become buttons in the
 // Links row; they are not content, so they never render as a section.
 const SIDECAR_METADATA_KEYS = ['aria', 'docs']
@@ -45,6 +91,9 @@ module.exports = {
   rootDir,
   BETA_CALLOUT,
   OPTIONAL_SIDECAR_SECTIONS,
+  MOBILE_SUB_COMPONENTS,
+  WEB_SUB_COMPONENTS,
+  REACT_NATIVE_DOCS,
   SIDECAR_METADATA_KEYS,
   DOCS_SITE,
   DOCS_SITE_DIR,

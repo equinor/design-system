@@ -15,7 +15,7 @@ describe('Chip (next)', () => {
       render(<Chip data-testid="eds-chip">Label</Chip>)
       const chip = screen.getByTestId('eds-chip')
       expect(chip).toHaveAttribute('data-variant', 'default')
-      expect(chip).toHaveAttribute('data-color-appearance', 'neutral')
+      expect(chip).toHaveAttribute('data-tone', 'neutral')
     })
 
     it('applies custom className', () => {
@@ -74,7 +74,7 @@ describe('Chip (next)', () => {
           </Chip>,
         )
         expect(screen.getByTestId('eds-chip')).toHaveAttribute(
-          'data-color-appearance',
+          'data-tone',
           expected,
         )
       },

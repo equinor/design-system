@@ -10,7 +10,7 @@ Badge labels content with a status, a category or a piece of metadata, so reader
 
 - Short text for indicating status or priority.
 - Can go before or after other content, as a prefix or a suffix.
-- Can be paired with other components.
+- Uses colour to back up the status, so a label can be read at a glance.
 - Several can sit together on one item.
 - Follows the density of its parent element.
 

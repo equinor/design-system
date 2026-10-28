@@ -1,6 +1,11 @@
 const fs = require('fs')
 const path = require('path')
-const { rootDir, PLATFORMS } = require('./config')
+const {
+  rootDir,
+  PLATFORMS,
+  MOBILE_SUB_COMPONENTS,
+  WEB_SUB_COMPONENTS,
+} = require('./config')
 const { fail } = require('./errors')
 const {
   locate,
@@ -10,7 +15,7 @@ const {
   docsPageUrl,
 } = require('./locate')
 const { readSidecar } = require('./sidecar')
-const { extractProps } = require('./props')
+const { extractProps, extractBaseTypes } = require('./props')
 const { extractStories } = require('./stories')
 const { renderWeb, renderMobile } = require('./render')
 
@@ -51,8 +56,23 @@ function buildPages(project, component) {
   for (const [platform, cfg] of Object.entries(PLATFORMS)) {
     if (platform === 'mobile' && !hasMobile) continue
     const { dir, file } = found[platform]
-    const props = extractProps(findPropsDeclaration(project, dir, component))
+    const declaration = findPropsDeclaration(project, dir, component)
+    const props = extractProps(declaration)
     assertPropsDocumented(component, props)
+    const baseTypes = platform === 'mobile' ? extractBaseTypes(declaration) : []
+    const subComponentList =
+      platform === 'mobile' ? MOBILE_SUB_COMPONENTS : WEB_SUB_COMPONENTS
+    const subComponents = (subComponentList[component] ?? []).map((sub) => {
+      const subDeclaration = findPropsDeclaration(project, dir, sub.component)
+      const subProps = extractProps(subDeclaration)
+      assertPropsDocumented(sub.component, subProps)
+      return {
+        name: sub.name,
+        props: subProps,
+        baseTypes:
+          platform === 'mobile' ? extractBaseTypes(subDeclaration) : [],
+      }
+    })
     const { sections: sidecar, links } = readSidecar(
       path.join(dir, `${component}.docs.md`),
       cfg,
@@ -60,6 +80,8 @@ function buildPages(project, component) {
     const ctx = {
       relDir: path.relative(rootDir, dir),
       props,
+      baseTypes,
+      subComponents,
       stories: extractStories(
         project,
         path.join(dir, `${component}.stories.tsx`),

@@ -10,11 +10,18 @@ specific to this app.
 
 A versioned Docusaurus site documenting EDS. Three doc versions exist:
 
-| Version                             | Content dir                          | URL path                                            | Status                                                   |
-| ----------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
-| `current` (labelled **3.0.0-beta**) | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
-| `2.0.0-beta`                        | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
-| `1.1.0`                             | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+| Version                                   | Content dir                          | URL path                                            | Status                                                   |
+| ----------------------------------------- | ------------------------------------ | --------------------------------------------------- | -------------------------------------------------------- |
+| `current` (labelled **EDS 2.0 (beta)**)   | `docs/`                              | `/docs/Next/…` (capital N, baked into footer links) | where new work goes                                      |
+| `2.0.0-beta` (**EDS 2.0 (earlier beta)**) | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/…`                                | frozen snapshot, rendered with the redesign              |
+| `1.1.0` (labelled **EDS 1**)              | `versioned_docs/version-1.1.0/`      | `/docs/…`                                           | **frozen archive — never restyle or edit its rendering** |
+
+Labels name the design system generation, not a package version: the site
+documents several packages whose versions do not move together, and its main
+readers are designers who do not track them (#4942). The `2.0.0-beta` archive is
+left out of the version dropdown with `versions: ['current', '1.1.0']` on the
+navbar item — it stays built and linkable, but it was never updated past the old
+colour foundation, so it should not be offered as a destination.
 
 **Version scoping is the #1 footgun.** Anything that styles doc _content_
 must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
@@ -28,7 +35,7 @@ must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
   badge in `site-chrome.css`, hidden on current only so frozen pages still
   say which version they are.
 - React: the DocItem hero gate checks `REDESIGN_VERSIONS` (`'current'` and
-  `'2.0.0-beta'`).
+  `'2.0.0-beta'`), and its version notes check `EDS_1_VERSION` / `EDS_2_VERSION`.
 - Freezing another version means adding its `docs-version-*` class and name
   to both lists.
 - Chrome (navbar, sidebar, TOC, footer) is deliberately version-independent.
@@ -49,9 +56,17 @@ must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
 
 Two sanctioned changes to the archive's rendering, and only these two:
 
-1. It carries Docusaurus's standard "no longer actively maintained" banner,
-   because it genuinely is not the latest version. Suppress with
-   `banner: 'none'` on the `1.1.0` entry if that is ever unwanted.
+1. It carries a version note, but not Docusaurus's. The upstream banner for a
+   pre-`lastVersion` version says the docs are "no longer actively maintained",
+   and EDS 1 is maintained until EDS 2.0 becomes stable, so the entry sets
+   `banner: 'none'` and `DocItem/Layout` renders its own note instead (#4942).
+   The current version gets the same treatment for the opposite reason: upstream
+   renders nothing there, which left the beta pages with no sign that they are
+   beta. Both notes live in `DocItem/Layout`; the EDS 2.0 one is `BetaNotice`,
+   scoped to `components/` because it states `eds-core-react`'s path to 3.0.0,
+   which is not every package's (`eds-tokens` beta is a separate story — #5242).
+   The `2.0.0-beta` archive keeps the upstream banner, where "unmaintained" is
+   true.
 2. It has no breadcrumbs. `breadcrumbs: false` is a docs-**plugin** option,
    not a per-version one, so the redesign's choice to drop them necessarily
    applies to the archive too. There is no way to scope it; re-enabling for
@@ -107,7 +122,7 @@ does not own) and `no-descending-specificity` (the version-scoping strategy
 above deliberately relies on specificity order). Every other rule applies —
 `pnpm run lint:css:docs`.
 
-## Tokens — two bundles, one collision
+## Tokens — two bundles, two layers
 
 **RULE: site styling derives ONLY from the semantic layer of the Tokens
 Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
@@ -115,9 +130,9 @@ Studio bundle** — `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
 `--eds-corner-radius-*`, `--eds-elevation-*`. Never reference primitives
 (`--eds-primitives-*`, `--eds-light-*`/`--eds-dark-*`, palette steps like
 `--eds-accent-9`), the density layer (`--eds-density-*`), or legacy
-`--eds-color-*` names. There is one sanctioned exception: the semantic
-typography bridge in `theme-variables.css` (`:root:root` re-declarations
-resolving the header-* font-size collision below).
+`--eds-color-*` names. There are no sanctioned exceptions: the `:root:root`
+typography bridge that used to be one is gone, replaced by the layer
+statement below.
 
 **Elevation is a composite token — use it as one.** `--eds-elevation-low` and
 `--eds-elevation-high` are `boxShadow` composites in the Tokens Studio
@@ -134,18 +149,22 @@ Both token bundles load (see imports in `theme-variables.css`):
    `@equinor/eds-tokens/next/css/variables.css` via a webpack alias to the
    committed `packages/eds-tokens/src/tokens/css/variables.css`. Names:
    `--eds-background-*`, `--eds-text-*`, `--eds-border-*`,
-   `--eds-corner-radius-*`, `--eds-typography-{ui,header}-*`,
-   `--eds-font-family-*`, `--eds-font-weight-*` (max weight `bolder` = 500),
+   `--eds-corner-radius-*`, `--eds-typography-{header,label,body}-*`,
+   `--eds-font-family-*`, `--eds-font-weight-{normal,medium,bold}`,
    `--eds-elevation-{low,high}`.
 2. **Legacy bundle** (`@equinor/eds-tokens/css/variables`) — retained ONLY for
    `--eds-container-space-*` and the embedded `/next` component previews,
    which consume legacy names. Do not use legacy `--eds-color-*` names in
-   site CSS. **It must stay the first of the two imports:** it also declares
-   `--eds-elevation-low/high`, at the same specificity as the Tokens Studio
-   pair (both 0,1,0), so import order is the only thing making the Tokens
-   Studio composite win. The values agree today, so a reordering would not
-   show up visually — it would just silently pin the site to the legacy flat
-   shadow, which does not flip with the colour scheme.
+   site CSS. **It must stay inside `layer(eds-tokens-legacy)`:** it declares
+   ten names the Tokens Studio bundle also declares — `--eds-elevation-low/high`
+   and the eight `--eds-typography-header-*-font-size` — and the Tokens Studio
+   bundle ships wrapped in `@layer eds-tokens` (ADR-0028 point 6), which an
+   unlayered stylesheet beats outright. Dropping the `layer()` would silently
+   pin the site to the legacy values: the legacy flat shadow, which does not
+   flip with the colour scheme, and the legacy header sizes (3xl 27.5px
+   instead of 28px, 4xl 31.5px instead of 32px). The order statement at the
+   top of `theme-variables.css` puts `eds-tokens-legacy` below `eds-tokens`,
+   so neither import order nor webpack's emit order matters any more.
 
 ## Fonts
 
@@ -167,18 +186,19 @@ emoji — are absent from _all_ of Inter's subsets, so they render from a
 fallback font either way.
 
 Weights 400, 500, 600 and 700 are all loaded. 400 and 500 are the site's own
-(`--docs-font-weight-emphasis` is `bolder` = 500); 600 and 700 back Infima's
+(`--docs-font-weight-emphasis` is `medium` = 500); 600 and 700 back Infima's
 `--ifm-font-weight-{semibold,bold}`, and `<strong>` really does compute to 700.
 Do not trim to 400+500 on the strength of the "never 600/700" rule in the root
 AGENTS.md — that rule is about EDS component CSS, and dropping them here would
 lighten every bold run of prose on the site.
 
 **Collision gotcha:** both bundles define `--eds-typography-header-*-font-size`
-with different values, and webpack CSS ordering lets the legacy bundle win.
-The semantic typography bridge in `theme-variables.css` (`:root:root`
-specificity 0,2,0) pins the semantic names to the Tokens Studio values, so
-site CSS consumes the semantic `--eds-typography-header-*` names normally.
-Do not remove the bridge and do not reference `--eds-density-*` directly.
+with different values. The layer statement at the top of `theme-variables.css`
+settles it — legacy sits in `eds-tokens-legacy`, below the Tokens Studio
+bundle's own `eds-tokens` — so site CSS consumes the semantic
+`--eds-typography-header-*` names normally and gets the Tokens Studio values.
+The `:root:root` bridge this used to need is gone. Do not reference
+`--eds-density-*` directly.
 
 Dark mode: `src/clientModules/syncColorScheme.ts` mirrors Docusaurus's
 `data-theme` to `data-color-scheme` on `<html>`, which is what both token
@@ -196,11 +216,11 @@ them. Never hardcode font sizes/weights/line-heights in component CSS.
 | h2 / sections     | `--docs-font-section-*`                              | `header-3xl` 24/32                                                                 |
 | h3 / sub-sections | `--docs-font-subsection-*`                           | `header-xl` 21/24                                                                  |
 | Card titles / h4  | `--docs-font-card-title-*`                           | `header-lg` 18/24                                                                  |
-| Lead paragraphs   | `--docs-font-lead-size`                              | `ui-xl` 18px                                                                       |
-| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `ui-lg` 16px, lh 1.6 (site-local)                                                  |
-| Secondary text    | `--docs-font-body-sm-*`                              | `ui-md` 14/20                                                                      |
-| Captions/badges   | `--docs-font-caption-*`                              | `ui-sm` 12/16                                                                      |
-| Emphasis weight   | `--docs-font-weight-emphasis`                        | `bolder` = 500 (never 600/700)                                                     |
+| Lead paragraphs   | `--docs-font-lead-size`                              | `body-xl` 18px                                                                     |
+| Body prose        | `--docs-font-body-size` + `--docs-prose-line-height` | `body-lg` 16px, lh 1.6 (site-local)                                                |
+| Secondary text    | `--docs-font-body-sm-*`                              | `label-md` 14/20                                                                   |
+| Captions/badges   | `--docs-font-caption-*`                              | `label-sm` 12/16                                                                   |
+| Emphasis weight   | `--docs-font-weight-emphasis`                        | `medium` = 500 (never 600/700)                                                     |
 
 Docusaurus re-declares heading size vars **on the markdown heading elements**
 (`.markdown h1:first-child`, `.markdown > h2/h3`), so overrides must be
@@ -225,23 +245,32 @@ MDX docs use these without imports; React pages import them from
 
 - `DocsSection` — section + container + SectionHeading boilerplate
   (`title`, `subtitle`, `tone="muted"`, `as`, `id`)
+- `BetaNotice` — the EDS 2.0 beta note. `DocItem/Layout` renders it on every
+  component page it draws the hero band for, which puts it under the title. A
+  page that writes its own title inside the MDX has to place it itself, after
+  its `<Hero>`, and be listed in `EDS_2_NOTICE_SELF_PLACED` in the layout so the
+  note is not rendered twice; `docs/components/components.mdx` is the one such
+  page, and it passes `className` to replace the default spacing with what its
+  own rhythm needs (Infima utilities, because the hero band's container chain
+  zeroes `margin-top` on what follows it). The note belongs directly under the
+  title, never above it.
 - `Hero`, `SectionHeading`, `IconCard`/`IconCardGrid`, `CtaSection`,
   `TeamCard`, `Icon` — landing-page building blocks
 - `GalleryCard`/`GalleryGrid` — live-preview cards on `/components`
   (previews import real components from `@equinor/eds-core-react/next`)
 - `StorybookEmbed` — iframe of the deployed Storybook; `showLink` derives
   the View-in-Storybook link from the `id` (never hand-write those links).
-  Now only used for Foundation stories that have no registry entry
-  (`foundation/design-tokens/typography.md`); component docs use StoryCanvas.
+  No current-version page uses it any more; the frozen 2.0.0-beta typography
+  page still does. Component docs use StoryCanvas.
 - `StoryCanvas` — **what every component doc uses**: renders actual CSF story
   files natively via `composeStories()` (`src/components/StoryCanvas/`).
   Registry in `stories.ts` (one namespace import + one `composeStories` entry
   per component, alphabetical); usage
-  `<StoryCanvas of="Button/Default" showLink />`. No `height` — canvases
+  `<StoryCanvas of="Button/Introduction" showLink />`. No `height` — canvases
   auto-size. Stories that drive their own state through Storybook's `useArgs()`
-  render but cannot be interacted with here (`Switch/Introduction` is the one
-  such case) — prefer a story with local `useState` when the doc needs
-  interactivity.
+  render but cannot be interacted with here — prefer a story with local
+  `useState`, or one that lets the component manage its own state, when the
+  doc needs interactivity.
 
 Both reference styles fail **silently** at runtime — an unknown StoryCanvas
 `of` logs to the console and renders nothing, and a wrong StorybookEmbed `id`
@@ -311,6 +340,10 @@ exact-match so subpath imports still resolve through package `exports`:
   in the committed exports map — beta-only, issue #4395). **Requires
   eds-core-react to be built**; if components are missing, rebuild in order:
   `pnpm --filter @equinor/eds-utils run build` → `pnpm run build:core-react`.
+  A stale build can also make a `/next` component look visibly wrong in a
+  `StoryCanvas` preview (broken layout, missing colours) while Storybook
+  looks fine. `StoryCanvas` renders from source but gets its CSS from this
+  same build, so rebuild before suspecting a component bug.
 - `@equinor/eds-tokens/next/css/variables.css$` → committed Tokens Studio
   bundle.
 - `@eds-core-react-src` → `packages/eds-core-react/src` (portable stories).
@@ -374,12 +407,13 @@ All five run in CI, but they are spread across three jobs of
 3. `pnpm run lint:css:docs` and `pnpm run lint:docs`
 4. `pnpm run check:docs-stories` — StoryCanvas / StorybookEmbed references.
 5. `pnpm run build:docs` — `onBrokenLinks: 'throw'` is the link gate.
-   Known-acceptable warnings: two broken anchors on the **photography** pages
-   (`foundation/assets/photography` links to the resources page). The
-   current-version one is a false positive — `SectionHeading` slugifies its
-   `title`, so `#external-references` does resolve at runtime, invisibly to the
-   checker. The 1.1.0 one is a **real** broken link (`#external-resources` vs
-   the archive's `#external-references`), left unfixed because the archive is
+   Known-acceptable warnings: two broken anchors on the frozen **photography**
+   pages (`foundation/assets/photography` links to the resources page; the
+   current version folded that page into `foundation/assets/assets`). The
+   2.0.0-beta one is a false positive: `SectionHeading` slugifies its `title`,
+   so `#external-references` does resolve at runtime, invisibly to the
+   checker. The 1.1.0 one is a broken link (`#external-resources` vs the
+   archive's `#external-references`), left unfixed because the archive is
    frozen. Also css-minimizer warnings on modern CSS functions
    (`tan(atan2())`) in compiled component source.
 

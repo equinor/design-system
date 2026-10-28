@@ -7,6 +7,8 @@ import {
   formatColorAsString,
   getFallbackColor,
   createColorWithGaussianChroma,
+  toCssColor,
+  toOklchString,
 } from './color'
 import Color from 'colorjs.io'
 
@@ -891,5 +893,20 @@ describe('generateColorScaleWithInterpolation', () => {
         generateColorScale([], testLightnessValues, 0.6, 2, 'OKLCH')
       }).toThrow('At least one anchor is required')
     })
+  })
+})
+
+describe('toCssColor and toOklchString', () => {
+  test('adds # to bare hex digits only', () => {
+    expect(toCssColor('206f77')).toBe('#206f77')
+    expect(toCssColor('oklch(0.5 0.1 200)')).toBe('oklch(0.5 0.1 200)')
+  })
+
+  test('formats as OKLCH with Tokens Studio precision', () => {
+    expect(toOklchString('oklch(0.4973 0.084851 204.553)')).toBe(
+      'oklch(0.4973 0.084851 204.553)',
+    )
+    expect(toOklchString('oklch(0.4091 0 0)', ', ')).toBe('oklch(0.4091, 0, 0)')
+    expect(toOklchString('not a colour')).toBeNull()
   })
 })

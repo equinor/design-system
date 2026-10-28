@@ -31,10 +31,13 @@ Treat these patterns as off-limits:
 - `id_rsa*`, `id_ed25519*`, `id_ecdsa*`, `id_dsa*`, `*.pem`, `*.key`
 - `credentials.json`, `secrets.json`
 - `secrets/**`, `config/credentials.json`
+- Shell history (`.zsh_history`, `.bash_history`, `~/.zsh_sessions/`) and VS Code's local history (`User/History/`), where tokens typed on the command line and copies of saved `.env` files end up
+
+The hooks stop accidental reads of these files by name. They do not protect a secret once it has been typed into a command, saved by an editor or printed in a session transcript, and a broad search such as `grep -r` over a folder can still find it. Keep tokens off the command line: let the script read them from its env file.
 
 If you need to verify a secret file's shape, report length + first/last few characters only — never the body. If a tool blocks access (e.g. Claude Code's `read_hook.js`), do not try to work around it; the block is the intended behaviour.
 
-The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention `.env` or a `secrets/` path.
+The secret-file hooks match on the text of a shell command, so a commit message or PR body that names one of these files can be blocked even though no file is read. Write the text to a temp file outside the repo with the harness's file-writing tool (a shell heredoc is blocked the same way), then pass it with `git commit -F <file>` or `gh pr create --body-file <file>`. The Copilot CLI hook also checks the content that the file-writing tool writes, so in Copilot this only works when the text does not mention any of the secret-file patterns above.
 
 **Enforcement matrix:**
 
@@ -187,32 +190,32 @@ Vanilla CSS only — no CSS-in-JS (`styled-components`, `emotion`), no Tailwind 
 
 For the underlying token system — colour categories, static vs dynamic tokens, typography — see the package-local instruction files (frontmatter `applyTo: '**'` for Copilot users who configure their instruction-file location to include this path; Claude / OpenCode users read these on demand):
 
-- [`packages/eds-tokens/instructions/colors.md`](./packages/eds-tokens/instructions/colors.md) — colour system overview
-- [`packages/eds-tokens/instructions/colors-static.md`](./packages/eds-tokens/instructions/colors-static.md) — static semantic + concept tokens
-- [`packages/eds-tokens/instructions/colors-dynamic.md`](./packages/eds-tokens/instructions/colors-dynamic.md) — dynamic appearance tokens (the `data-color-appearance` pattern)
+- [`packages/eds-tokens/instructions/colors.md`](./packages/eds-tokens/instructions/colors.md) — colour system overview, with the 3.x token names
+- [`packages/eds-tokens/instructions/colors-static.md`](./packages/eds-tokens/instructions/colors-static.md) — 3.x colour token names in CSS and TypeScript
+- [`packages/eds-tokens/instructions/colors-dynamic.md`](./packages/eds-tokens/instructions/colors-dynamic.md) — deprecated: the 2.x `data-color-appearance` pattern, for `/next` components that have not moved to the 3.x names yet
 - [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) — typography tokens, modes, baseline trimming
 - [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md) — end-to-end token lifecycle (Figma → JSON → CSS bundle)
 
 ```css
 @layer eds-components {
-  .eds-icon {
-    font-size: var(--eds-typography-icon-size, 1.5em);
-    width: 1em;
-    height: 1em;
-    flex-shrink: 0;
+  .eds-button {
+    --_padding-inline: var(--eds-spacing-sm);
+    --_icon-size: var(--eds-spacing-lg);
 
-    &[data-icon-size='lg'] {
-      --_explicit-size: var(--eds-sizing-icon-lg);
-      width: var(--_explicit-size);
-      height: var(--_explicit-size);
+    padding-inline: var(--_padding-inline);
+    border-radius: var(--eds-corner-radius-rounded);
+
+    &[data-size='small'] {
+      --_padding-inline: var(--eds-spacing-xs);
+      --_icon-size: var(--eds-spacing-md);
     }
   }
 }
 ```
 
-#### Dynamic tokens
+#### Semantic tokens
 
-Prefer dynamic tokens (e.g. `--eds-selectable-space-vertical`, `--eds-typography-icon-size`) over hard-coded values. They adapt to density, typography, and accessibility settings without per-component overrides.
+Use the semantic tokens from the beta bundle (e.g. `--eds-spacing-sm`, `--eds-typography-label-md-font-size`, `--eds-background-interactive-accent-emphasis-default`) instead of hard-coded values. They follow the density and colour scheme set on an ancestor, so the component needs no per-density or per-scheme overrides. Never reference `--eds-primitives-*` or `--eds-density-*` in component CSS: they are internal and can change without notice (ADR-0028 point 7). Many `/next` components still read the legacy 2.x names while they migrate; see [Migrating /next components to the beta tokens](#migrating-next-components-to-the-beta-tokens).
 
 #### Typography in component CSS
 
@@ -220,35 +223,36 @@ Set `font-family`, `font-size`, and `line-height` directly in the component CSS 
 
 ```css
 .eds-button {
-  font-family: var(--eds-typography-ui-body-font-family);
-  font-size: var(--eds-typography-ui-body-md-font-size);
-  line-height: var(--eds-typography-ui-body-md-line-height-squished);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
 }
 ```
 
-Token shape: `--eds-typography-{ui-body|header}-{xs..6xl}-{font-size,line-height-default,line-height-squished,font-weight-{lighter,normal,bolder}}`. `font-family` is set once per role (`--eds-typography-{ui-body,header}-font-family`).
+Token shape: `--eds-typography-{header,label,body}-{size}-{font-size,line-height}`, with one line height per size. Use `label` for single-line functional text (buttons, form labels, table cells), `body` for text that wraps and `header` for titles (ADR-0027). The family is `--eds-font-family-ui` or `--eds-font-family-header`, and the weight is `--eds-font-weight-{normal,medium,bold}`, never per size (ADR-0029). Text is not trimmed with `text-box` (ADR-0029).
 
 The `data-font-*` runtime-switching pattern still exists for `elements.css` defaults and ad-hoc consumer markup, but inside a component's own CSS the size and role are part of the design and should be expressed as tokens. See [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) for both paths.
 
 #### Pseudo-private custom properties
 
-Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0018-typography-approach-for-eds-2.md`) and is now applied broadly across components.
+Define component-scoped variables with a `--_` prefix at the component root. Use these variables for all properties. In variants and states, **override only the variable — never the property directly**. The pattern was introduced for typography inheritance (see `documentation/adr/0018-typography-approach-for-eds-2.md`) and is now applied broadly across components. Tones use it too: each component maps its tones to shared `--_` slot names in its own CSS (#5711).
 
 ```css
 /* CORRECT */
 .eds-button {
-  --_color: var(--eds-color-text-strong-on-emphasis);
-  --_bg-color: var(--eds-color-bg-fill-emphasis-default);
+  --_color: var(--eds-text-on-emphasis-accent);
+  --_bg-color: var(--eds-background-interactive-accent-emphasis-default);
   color: var(--_color);
   background-color: var(--_bg-color);
 }
 .eds-button[data-variant='ghost']:disabled {
-  --_color: var(--eds-color-text-disabled); /* override the variable */
+  --_color: var(--eds-text-interactive-disabled); /* override the variable */
 }
 
 /* WRONG — never override the property directly */
 .eds-button[data-variant='ghost']:disabled {
-  color: var(--eds-color-text-disabled);
+  color: var(--eds-text-interactive-disabled);
 }
 ```
 
@@ -256,14 +260,18 @@ Define component-scoped variables with a `--_` prefix at the component root. Use
 
 Wrap all component styles in `@layer eds-components { }`. Rules outside the layer (e.g. display overrides) must be placed after the layer block with a comment explaining why they are outside.
 
+The full order is `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`, declared in both `components/next/index.css` and the published `@equinor/eds-tokens` CSS bundle, which ships wrapped in `@layer eds-tokens` (ADR-0028 point 6). `eds-tokens-legacy` holds the 2.x token bundle for as long as `/next` still needs its names. Everything EDS therefore sits below unlayered consumer CSS, which is what makes an override a plain `:root { --eds-*: … }`.
+
 #### Data attributes for variants and states
 
-Use `data-*` attributes for all variants, sizes, and boolean states — not modifier classes.
+Use `data-*` attributes for all variants, sizes, and boolean states — not modifier classes. Write them together with the component class, since several components share names such as `data-tone` and `data-size`, and never reuse the name of a global attribute such as `data-color-scheme` or `data-density` (#5711).
 
 ```css
 .eds-button[data-variant='primary'] {
 }
-.eds-button[data-selectable-space='lg'] {
+.eds-button[data-tone='danger'] {
+}
+.eds-button[data-size='small'] {
 }
 .eds-button[data-icon-only] {
 }
@@ -275,27 +283,12 @@ Use `data-*` attributes for all variants, sizes, and boolean states — not modi
 
 #### Density via ancestor attribute
 
-Density variants are applied by setting `data-density` on an ancestor element. Component CSS selects against this ancestor. See `documentation/adr/0004-component-conventions-for-eds-2.md` and `documentation/adr/0017-spacing-approach-for-eds-2.md` for the rationale.
+Density is set with `data-density` on an ancestor element: `compact`, `comfortable` (the default) or `relaxed`. The token bundle switches the values of the semantic spacing and typography names per density, so component CSS that uses them writes nothing per density. See ADR-0027 for the spacing scale and `documentation/adr/0004-component-conventions-for-eds-2.md` for the ancestor pattern.
 
-```css
-[data-density='comfortable'] .eds-button[data-selectable-space='md'] {
-  --_min-height: 1.5rem;
-}
-```
-
-#### Modular type scale
-
-Font sizes follow a mathematical scale based on a `--_base` value:
-
-```css
-:root,
-[data-density='spacious'] {
-  --_base: 16px;
-  --font-size-md: round(calc(var(--_base) * pow(2, -1/5)), 0.5px);
-}
-[data-density='comfortable'] {
-  --_base: 14px; /* only the base changes; all derived values update automatically */
-}
+```html
+<div data-density="compact">
+  <!-- every component inside uses the compact spacing and type sizes -->
+</div>
 ```
 
 #### Progressive enhancement with `@supports`
@@ -303,14 +296,12 @@ Font sizes follow a mathematical scale based on a `--_base` value:
 Use `@supports` to layer in advanced CSS features. The base styles work everywhere; the `@supports` block adds what only supported browsers can handle:
 
 ```css
-/* Base — all browsers: symmetric padding keeps text vertically centred */
-padding-block: var(--eds-selectable-space-vertical);
+/* Base, all browsers: a fixed minimum height of three lines */
+min-block-size: calc(var(--eds-typography-body-md-line-height) * 3);
 
-/* Enhancement — trims whitespace above/below the cap-height */
-@supports (text-box: trim-both ex alphabetic) {
-  padding-top: var(--padding-top-baseline);
-  padding-bottom: 0;
-  text-box: trim-both ex alphabetic;
+/* Enhancement: grow with the content where supported */
+@supports (field-sizing: content) {
+  field-sizing: content;
 }
 ```
 
@@ -429,6 +420,24 @@ In Claude Code, `.claude/rules/figma-component.md` loads this section automatica
 - Manage focus correctly: trap focus in modals/dialogs, restore focus on close, use `:focus-visible` for keyboard-only outlines
 - Test with `jest-axe` in every component
 
+### Colour contrast
+
+EDS measures a colour pair on two levels. The APCA targets are what EDS measures against and aims for: Lc 90 for body text (`text.primary`) and Lc 60 for secondary text and interactive elements, against `background.surface` ([colour introduction § Contrast](./apps/design-system-docs/docs/foundation/colour/intro.mdx#contrast), ADR-0016). WCAG 2.1 AA is the minimum every pair must meet: 4.5:1 for text, and 3:1 for large text and for non-text content such as icons. When you report on a pair, give both the Lc and the ratio, in both colour schemes and every state (`default`, `hover`, `pressed`).
+
+Check each token on the background it is made for, as [the colour usage page § Foreground pairing](./apps/design-system-docs/docs/foundation/colour/usage.mdx#foreground-pairing) documents:
+
+- `text.on-<level>.<tone>` and `icon.on-<level>.<tone>` go on the fill of the same level and tone. `text.on-emphasis.danger` is checked on `background.interactive.danger.emphasis.default`, `.hover` and `.pressed`, and on `background.non-interactive.danger.emphasis`, not on the surface.
+- `text.primary`, `.secondary` and `.tertiary`, and the icon equivalents, are measured against `background.surface`, the reference backdrop for the targets. They are used on `background.canvas` too, but EDS does not measure them against it.
+- `text.inverted` and `icon.inverted` go on `background.inverted`. The link tokens, `text.interactive.link.*` and `icon.interactive.link.*`, are measured against `background.surface` in every state.
+- The selected fills have no foreground of their own. `text.primary` and `icon.primary` on them have to be checked per state before use, because on `accent` the hover and pressed states fall below the APCA target, the WCAG minimum or both, depending on the scheme. The accessibility page records this as the second documented exception, and [the usage page § Selected backgrounds](./apps/design-system-docs/docs/foundation/colour/usage.mdx#selected-backgrounds) gives the values for every state.
+
+Two more rules from the docs decide what to flag:
+
+- `text.tertiary` and `icon.tertiary` fall below the minimum in light. They are only for places where WCAG 2.1 does not require contrast, such as disabled controls ([accessibility page § Colour](./apps/design-system-docs/docs/foundation/accessibility.md#colour)). Flag tertiary on body text or any other text people need to read, and leave it alone on a disabled control.
+- WCAG 1.4.11 asks for 3:1 only on what identifies a control or its state. `background.interactive.neutral.muted.default` resolves to the same colour as `background.canvas` in both schemes, because it is the resting state of a ghost control, which its label identifies. Do not flag that fill, and do not propose swapping `muted` for `emphasis` to raise its contrast.
+
+`pnpm --filter @equinor/eds-tokens run check:contrast` measures every documented pair on the generated 3.x tokens and prints the hex values, the ratio and the Lc. It fails when a pair is below the WCAG minimum and only reports pairs below their APCA target (ADR-0016 § Confirmation 5).
+
 For running an accessibility audit on a deployed page or Storybook story, see [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](./documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
 
 ## Component Documentation
@@ -438,6 +447,10 @@ Component docs live in `apps/design-system-docs/docs/components/{category}/{comp
 ## Tokens Studio Pipeline
 
 EDS is adopting the Tokens Studio platform as the source for a new token pipeline, replacing the legacy Figma-REST sync over time. For platform concepts (organizations, projects, branches, releases), `studio` CLI setup and commands, the `.studio.json` configuration model, the safety rubric for CLI commands, and how to verify against live sources instead of answering from memory, see [`documentation/agent-instructions/TOKENS_STUDIO.md`](./documentation/agent-instructions/TOKENS_STUDIO.md). Harness entry points (`/tokens-studio` in Claude Code, the `tokens-studio` prompt in Copilot, the `tokens-studio` agent in OpenCode) all reference that doc. The legacy pipeline remains documented in [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md).
+
+## Migrating /next components to the beta tokens
+
+Every `/next` component moves from the legacy 2.x tokens to the redefined tokens from Tokens Studio, on colour, spacing and typography in one pass (#5119). Button and Chip are migrated. For the lookup in the beta bundle, the legacy-to-beta mapping per domain, the tone slots, the local data attribute renames, what to do when a token is missing, and how to verify, see [`documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md`](./documentation/agent-instructions/MIGRATING_TO_BETA_TOKENS.md). Harness entry points (`/token-migration` in Claude Code, the `token-migration` prompt in Copilot, the `token-migration` agent in OpenCode) all reference that doc.
 
 ## Dependabot Duty
 
@@ -496,7 +509,9 @@ Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the re
 - `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density
 - `0005-use-aschild-slot-for-polymorphism.md` — `asChild` + `Slot` for polymorphic components
 - `0017-spacing-approach-for-eds-2.md` — spacing tokens, density modes, 4px baseline
-- `0018-typography-approach-for-eds-2.md` — type scale, `--_font-weight-*` pseudo-private vars
+- `0027-token-variable-architecture-typography-roles.md`: the redefined token structure, the `header`, `label` and `body` roles, the spacing scale
+- `0028-token-code-output-architecture-typography-roles.md`: token output, the `@layer eds-tokens` wrap, the publish boundary that keeps primitives and density names out of component CSS
+- `0029-typography-approach-for-eds-2-web.md` — typography roles and weights on the web, `<strong>` and `<b>` resolve to bold, no `text-box` trim
 
 Those are the ones that come up most while building `/next` components. For the full set, see [`documentation/adr/README.md`](./documentation/adr/README.md), a generated index of every ADR with its scope, status and date. It is regenerated on `pnpm run build` (or run `pnpm run generate:adr-index` ad-hoc), and it fails on duplicate ADR numbers, so take the next free number when adding one. Don't edit the index by hand.
 
@@ -509,7 +524,7 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, skills, settings                                       |
 | `.claude/commands/*.md`           | Claude Code: slash-command entry points                                                    |
 | `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring                                  |
-| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                                    |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`, colour contrast)                   |
 | `.claude/skills/*/SKILL.md`       | Claude Code: skills, applied automatically when their task comes up                        |
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions                                 |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                                                |

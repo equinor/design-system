@@ -179,7 +179,7 @@ EDS 1.0: `Button` with `Button.Group` and `Button.Toggle`.
 
 **Composition**: `Button.Group` and `Button.Toggle` have no EDS 2.0 counterpart yet. The toggle button is coming as its own component, not as a Button sub-component ([#5342](https://github.com/equinor/design-system/issues/5342), [#5343](https://github.com/equinor/design-system/issues/5343), [#5344](https://github.com/equinor/design-system/issues/5344), [#5345](https://github.com/equinor/design-system/issues/5345)). Whether `Button.Group` is in scope at all is still open ([#5503](https://github.com/equinor/design-system/issues/5503)).
 
-**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element.
+**Markup**: text children are wrapped in `<span class="label">`. The inner grid `<span>` that EDS 1.0 wrapped all children in is gone, so other children are direct children of the `<button>`. `tabIndex` is no longer forced on the element. Icons that are direct children of the button are sized by it: `size` and the density set the icon size, and an `Icon`'s own `size` prop has no effect there.
 
 ## Checkbox
 
@@ -204,7 +204,7 @@ EDS 1.0: `Chip`.
 
 **Behaviour**: `onDelete` fires on a click anywhere on the chip and on Backspace or Delete, not only on the close icon and Enter. `onClick` is ignored when `onDelete` is set.
 
-**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. Use `Badge` for non-interactive labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` and `Avatar` elements are no longer resized automatically. The close icon title changes from `close` to `Remove`.
+**Markup**: the root changes from a `<div>` (which only got `role="button"` and `tabIndex` when `onClick` or `onDelete` was passed) to a real `<button>`, so every chip is now focusable and matched by `getByRole('button')`. Selectable chips get `aria-pressed` and dropdown chips get `aria-expanded`. Use `Badge` for non-interactive labels. Children are wrapped in `<span class="label">` and the built-in icons carry `class="icon"`. Child `Icon` elements are sized by the chip, so an `Icon`'s own `size` prop has no effect there. Child `Avatar` elements are not resized. The close icon title changes from `close` to `Remove`.
 
 **Known issues**
 
@@ -267,14 +267,14 @@ EDS 1.0: `Icon`.
 
 **Props**
 
-- `size`: numeric `16 | 18 | 24 | 32 | 40 | 48` → semantic `xs` | `sm` | `md` | `lg` | `xl` | `2xl` | `3xl` | `4xl` | `5xl` | `6xl`, resolved through the `--eds-sizing-icon-*` tokens. See the Icon page for the size scale.
+- `size`: numeric `16 | 18 | 24 | 32 | 40 | 48` → semantic `sm` | `md` | `lg` | `xl` | `2xl` | `3xl` | `4xl` | `5xl` | `6xl` | `7xl`, each the `--eds-spacing-*` token of the same name, so `16` is `md` and `24` is `xl`. Without `size` the icon is `xl` and no longer follows the surrounding text. See the Icon page for the size scale.
 - Removed: `name` and the `Icon.add()` registry. `data` is required. `rotation` is removed.
 
 **Behaviour**: missing `data` logs an error and renders nothing, where EDS 1.0 threw.
 
-**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-icon-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
+**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
 
-**Small icon variants**: the dedicated small icon dataset EDS 1.0 used below 24 px is removed, so `xs` and `sm` icons are the 24 px geometry scaled down. This is a design decision: after a usage audit the small variants are retired from `@equinor/eds-icons`, the Figma broker and Figma as well ([#5500](https://github.com/equinor/design-system/issues/5500)).
+**Small icon variants**: the dedicated small icon dataset EDS 1.0 used below 24 px is removed, so icons below `xl` are the 24 px geometry scaled down. This is a design decision: after a usage audit the small variants are retired from `@equinor/eds-icons`, the Figma broker and Figma as well ([#5500](https://github.com/equinor/design-system/issues/5500)).
 
 ## Input
 

@@ -15,6 +15,10 @@ updates:
           - 'storybook'
           - '@storybook/*'
           - 'eslint-plugin-storybook'
+      # react-test-renderer must match react exactly, and is pinned in the
+      # pnpm-workspace.yaml overrides, which Dependabot does not update. When
+      # this group bumps react, bump the override and the eds-mobile-components
+      # devDependency by hand, or the mobile tests fail (#5490, #5731).
       react:
         patterns:
           - 'react'
