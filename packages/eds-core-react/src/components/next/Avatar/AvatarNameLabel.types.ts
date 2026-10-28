@@ -9,19 +9,13 @@ export type AvatarNameLabelProps = {
   /** Secondary label, such as an email, a job title or any short metadata */
   meta?: string
   /**
-   * Layout variant for the name/email block.
-   *
-   * - `'horizontal'`: name and email are **stacked** (column). Use in vertical
-   *   lists where each row shows one person.
-   * - `'vertical'`: name and email are **inline** (row). Use in horizontal
-   *   lists or compact contexts where a single line per person is needed.
-   *
-   * Note: the naming follows the Figma component naming convention and refers
-   * to the orientation of the containing list, not the internal text direction.
+   * `horizontal` stacks the name and meta, for lists with one person per row.
+   * `vertical` puts them on one line, for headers and other wide contexts. The
+   * names follow Figma and refer to the list the component sits in.
    * @default 'horizontal'
    */
   layout?: AvatarNameLabelLayout
-  /** Override the initial shown in the avatar (defaults to first letter of name) */
+  /** Override the initials shown in the avatar, which are otherwise derived from the first and last word of `name` */
   initial?: string
   /** Profile photo URL. When provided, renders a circular photo instead of initials. */
   src?: string
