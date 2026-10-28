@@ -5,6 +5,7 @@ import { Input } from '../Input'
 import { Field } from './Field'
 import type { FieldProps } from './Field.types'
 import { useFieldIds } from './useFieldIds'
+import page from './Field.docs.mdx'
 
 const meta: Meta<typeof Field> = {
   title: 'EDS 2.0 (beta)/Inputs/Field',
@@ -40,19 +41,9 @@ const meta: Meta<typeof Field> = {
   },
   parameters: {
     docs: {
-      description: {
-        component: `**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-A layout primitive for building accessible form fields with labels, descriptions, and helper messages.
-
-> **💡 For most use cases, use TextField instead.** Field is a low-level building block for creating custom form components.
-
-Use the \`useFieldIds\` hook to generate IDs and wire up accessibility attributes:
-
-\`\`\`tsx
-const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds()
-\`\`\`
-`,
+      page,
+      source: {
+        excludeDecorators: true,
       },
     },
   },
@@ -60,11 +51,7 @@ const { inputId, descriptionId, helperMessageId, getDescribedBy } = useFieldIds(
 
 export default meta
 
-/**
- * Basic usage with the `useFieldIds` hook for accessible form fields.
- * The hook generates consistent IDs and a `getDescribedBy` helper for `aria-describedby`.
- */
-export const Default: StoryFn<FieldProps> = ({ disabled, ...rest }) => {
+export const Introduction: StoryFn<FieldProps> = ({ disabled, ...rest }) => {
   const { inputId, descriptionId, helperMessageId, getDescribedBy } =
     useFieldIds()
 
@@ -76,7 +63,7 @@ export const Default: StoryFn<FieldProps> = ({ disabled, ...rest }) => {
       </Field.Description>
       <Input
         id={inputId}
-        aria-describedby={getDescribedBy()}
+        aria-describedby={getDescribedBy({ hasHelperMessage: true })}
         defaultValue="Smith Jones"
         disabled={disabled}
       />
@@ -87,10 +74,28 @@ export const Default: StoryFn<FieldProps> = ({ disabled, ...rest }) => {
   )
 }
 
-/**
- * Use the `indicator` prop to show required or optional status.
- * This is a visual indicator only — remember to also set `aria-required` on the input.
- */
+export const Overview: StoryFn<FieldProps> = () => {
+  const { inputId, descriptionId, helperMessageId, getDescribedBy } =
+    useFieldIds()
+
+  return (
+    <Field>
+      <Field.Label htmlFor={inputId}>Email</Field.Label>
+      <Field.Description id={descriptionId}>
+        We will send your receipt here.
+      </Field.Description>
+      <Input
+        id={inputId}
+        aria-describedby={getDescribedBy({ hasHelperMessage: true })}
+        placeholder="name@example.com"
+      />
+      <Field.HelperMessage id={helperMessageId}>
+        You can change it later in settings.
+      </Field.HelperMessage>
+    </Field>
+  )
+}
+
 export const WithIndicator: StoryFn<FieldProps> = () => {
   const required = useFieldIds()
   const optional = useFieldIds()
@@ -107,7 +112,7 @@ export const WithIndicator: StoryFn<FieldProps> = () => {
         <Input
           id={required.inputId}
           aria-describedby={required.getDescribedBy()}
-          aria-required="true"
+          required
           placeholder="John"
         />
       </Field>
@@ -127,14 +132,15 @@ export const WithIndicator: StoryFn<FieldProps> = () => {
     </div>
   )
 }
+WithIndicator.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use the `indicator` prop on `Field.Label` for text such as "(Required)" or "(Optional)". It is shown, and read by a screen reader, as part of the label, but it does not mark the input as required. Set `required` on the input as well.',
+    },
+  },
+}
 
-/**
- * For accessible live validation, wrap conditional content in a container
- * with `role="alert"`. The wrapper acts as an ARIA live region — screen
- * readers will announce changes when content appears inside it.
- *
- * Pass IDs to `getDescribedBy()` conditionally based on what's rendered.
- */
 export const LiveValidation: StoryFn<FieldProps> = () => {
   const [value, setValue] = useState('')
   const hasError = useMemo(() => value.trim().length < 4, [value])
@@ -168,11 +174,15 @@ export const LiveValidation: StoryFn<FieldProps> = () => {
     </Field>
   )
 }
+LiveValidation.parameters = {
+  docs: {
+    description: {
+      story:
+        'Wrap a message that appears later in a container with `role="alert"`, so screen readers announce it when it shows up. Pass `hasHelperMessage` to `getDescribedBy` only while the message is rendered.',
+    },
+  },
+}
 
-/**
- * Use `Field.Description` to provide additional context below the label.
- * Connect it to the input using `aria-describedby` for screen reader support.
- */
 export const WithDescription: StoryFn<FieldProps> = () => {
   const { inputId, descriptionId, getDescribedBy } = useFieldIds()
 
@@ -186,11 +196,15 @@ export const WithDescription: StoryFn<FieldProps> = () => {
     </Field>
   )
 }
+WithDescription.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `Field.Description` for extra context below the label, and connect it to the input with `aria-describedby` so a screen reader reads it.',
+    },
+  },
+}
 
-/**
- * Set `disabled` on Field to apply disabled styling to all sub-components.
- * The disabled state is passed down via the `data-disabled` attribute.
- */
 export const Disabled: StoryFn<FieldProps> = () => {
   const { inputId, descriptionId, getDescribedBy } = useFieldIds()
 
@@ -208,4 +222,12 @@ export const Disabled: StoryFn<FieldProps> = () => {
       />
     </Field>
   )
+}
+Disabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `disabled` on Field to style the label, description and helper message as disabled. Set `disabled` on the input as well, because Field only passes the state to its own parts.',
+    },
+  },
 }

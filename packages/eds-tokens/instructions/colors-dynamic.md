@@ -4,6 +4,12 @@ applyTo: '**'
 
 # Dynamic Color Approach
 
+:::warning Deprecated
+
+Dynamic colour belongs to the 2.x tokens (`--eds-color-*` with `data-color-appearance`) and is not part of 3.x: [ADR-0016](https://github.com/equinor/design-system/blob/main/documentation/adr/0016-colour-approach-for-eds-2.md) D1 dropped it in favour of tokens that carry their tone in the name. Do not use it for new work. This page stays for code that still uses the 2.x names, until it moves to the 3.x names in [colors-static.md](./colors-static.md).
+
+:::
+
 The dynamic approach uses abstraction with variable modes in Figma and data attributes in code to define the semantic category at runtime. The same component can work with different semantic meanings without changing code.
 
 :::tip

@@ -96,7 +96,7 @@ const AccordionHeader = forwardRef<HTMLElement, AccordionHeaderProps>(
           aria-hidden="true"
           data-color-appearance="accent"
         >
-          <Icon data={chevron_down} />
+          <Icon data={chevron_down} size="lg" />
         </span>
         <span
           className="title"

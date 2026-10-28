@@ -21,6 +21,7 @@ export type AccordionItemProps = {
 } & Omit<DetailsHTMLAttributes<HTMLDetailsElement>, 'onToggle' | 'open'>
 
 export type AccordionHeaderProps = {
+  /** The header text. It names the control, so say what the panel contains. */
   children: ReactNode
 } & HTMLAttributes<HTMLElement>
 

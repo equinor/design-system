@@ -2,157 +2,117 @@
 applyTo: '**'
 ---
 
-# Static Color Approach
+# Colour tokens in CSS and TypeScript
 
-The static approach uses a complete set of variables for each semantic category. Each variable explicitly specifies the semantic category in its name.
+Every 3.x colour token carries its tone in its name, so a component binds to the tone it needs directly. This is the only colour approach in 3.x: the 2.x dynamic approach, with `data-color-appearance`, was dropped ([ADR-0016](https://github.com/equinor/design-system/blob/main/documentation/adr/0016-colour-approach-for-eds-2.md) D1).
 
-> See [colors.md](./colors.md) for the core color system concepts.
+> See [colors.md](./colors.md) for how to choose a token, which foreground goes on which background, and the contrast rules.
 
-## Concept
+## One name in Figma, CSS and TypeScript
 
-In the static approach, each semantic category (accent, neutral, info, success, warning, danger) has its own variables. You choose the specific variable you need based on the semantic meaning required.
+| Where      | How it is written                                 |
+| ---------- | ------------------------------------------------- |
+| Figma      | `background.non-interactive.accent.muted`         |
+| CSS        | `--eds-background-non-interactive-accent-muted`   |
+| TypeScript | `semantic.background.nonInteractive.accent.muted` |
 
-## Naming Pattern
+CSS is `--eds-` followed by the dotted name, with hyphens for the dots. TypeScript uses the dotted name with each segment in camelCase. If the pattern and the [token reference](https://eds.equinor.com/docs/Next/foundation/colour/reference/) ever disagree, the reference is right.
 
-Static variable names follow this pattern:
-
-```
---eds-color-[role]-[semantic category]-[priority]-[state]
-```
-
-> **Note:** The `[state]` suffix (e.g., `-default`, `-hover`, `-active`) is only present for certain roles, such as background fill. For text and border variables, the state is typically omitted.
-
-- `--eds-color-bg-accent-fill-emphasis-default` -- Accent semantic category (background fill, with default state)
-- `--eds-color-bg-neutral-fill-muted-default` -- Neutral semantic category (background fill, with default state)
-- `--eds-color-border-danger-medium` -- Danger semantic category (border, no state)
-- `--eds-color-text-success-strong` -- Success semantic category (text, no state)
-
-## CSS Variables
+## CSS variables
 
 ### Import
 
+Import the bundle once in the application:
+
 ```css
-@import '@equinor/eds-tokens/css/variables';
+@import '@equinor/eds-tokens/next/css/variables.css';
 ```
 
-### Usage
+The bundle holds the semantic colours for light and dark, inside `@layer eds-tokens`, so an unlayered `:root { --eds-…: … }` in the application overrides a token.
 
-Use specific semantic variables in your styles:
+### Usage
 
 ```css
 .button-primary {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
-  color: var(--eds-color-text-accent-strong-on-emphasis);
-  border: 1px solid var(--eds-color-border-accent-strong);
+  background-color: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
 }
 
 .alert-warning {
-  background-color: var(--eds-color-bg-warning-fill-emphasis);
-  color: var(--eds-color-text-warning-strong-on-emphasis);
-  border-left: 4px solid var(--eds-color-border-warning-strong);
+  background-color: var(--eds-background-non-interactive-warning-muted);
+  color: var(--eds-text-on-muted-warning);
+  border-left: 4px solid var(--eds-border-non-interactive-warning-emphasis);
+}
+
+.card {
+  background-color: var(--eds-background-surface);
+  color: var(--eds-text-primary);
 }
 ```
 
-### Interactive States
+### Interactive states
 
-Background fill-muted and fill-emphasis include state variants for hover and active:
+Interactive levels come with a `default`, `hover` and `pressed` token. Use all three:
 
 ```css
-.button {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-default);
-  transition: background-color 0.2s;
-}
+.button-primary {
+  background-color: var(--eds-background-interactive-accent-emphasis-default);
+  color: var(--eds-text-on-emphasis-accent);
 
-.button:hover {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-hover);
-}
+  &:hover {
+    background-color: var(--eds-background-interactive-accent-emphasis-hover);
+  }
 
-.button:active {
-  background-color: var(--eds-color-bg-accent-fill-emphasis-active);
+  &:active {
+    background-color: var(--eds-background-interactive-accent-emphasis-pressed);
+  }
 }
 ```
 
-## TypeScript Tokens
+The foreground for an emphasis fill, `text.on-emphasis.<tone>`, is the same token in every state; check its contrast against all three fills.
 
-The static color tokens are also available as a nested TypeScript object with full type safety and autocomplete. The object mirrors the CSS variable hierarchy using camelCase keys and `as const` for literal type inference.
+## TypeScript tokens
+
+The tokens also ship as TypeScript objects for places a CSS custom property cannot reach, such as a chart library, a canvas, an email template or React Native. The values are hex, generated from the same source as the CSS.
 
 ### Import
 
 ```typescript
-import { color } from '@equinor/eds-tokens/ts/color/static/semantic'
+import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+
+semantic.background.interactive.accent.emphasis.default // '#21767e'
 ```
 
-### Usage
+Each module is imported directly; there is no barrel. The modules are raw `.ts`, so they need a TypeScript-aware consumer. The objects are `as const`, and each module also exports its type (`Semantic`), so a name that does not exist is a compile error.
 
-Access tokens through dot notation with full autocomplete:
+### Colour scheme
+
+In TypeScript there is no attribute to switch the scheme. `semantic/light` and `semantic/dark` are separate objects, and you choose which one to use:
 
 ```typescript
-// Background tokens
-color.bg.accent.canvas          // resolved color value
-color.bg.neutral.surface
-color.bg.accent.fillMuted.default
-color.bg.accent.fillMuted.hover
+import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
 
-// Text tokens
-color.text.accent.strong
-color.text.neutral.subtleOnEmphasis
-
-// Border tokens
-color.border.danger.medium
-color.border.accent.strong
+const tokens = prefersDark ? dark : light
 ```
 
-### Example: Styled components / CSS-in-JS
+Prefer CSS custom properties wherever they work.
 
-```typescript
-import { color } from '@equinor/eds-tokens/ts/color/static/semantic'
+### Naming conversion
 
-const styles = {
-  backgroundColor: color.bg.accent.fillEmphasis.default,
-  color: color.text.accent.strongOnEmphasis,
-  borderColor: color.border.accent.strong,
-}
-```
+| CSS variable                                       | TypeScript path                                       |
+| -------------------------------------------------- | ----------------------------------------------------- |
+| `--eds-background-canvas`                          | `semantic.background.canvas`                          |
+| `--eds-background-interactive-neutral-muted-hover` | `semantic.background.interactive.neutral.muted.hover` |
+| `--eds-background-non-interactive-danger-emphasis` | `semantic.background.nonInteractive.danger.emphasis`  |
+| `--eds-text-on-emphasis-success`                   | `semantic.text.onEmphasis.success`                    |
+| `--eds-border-interactive-focus`                   | `semantic.border.interactive.focus`                   |
 
-### Example: Runtime token lookup
+From `next/ts/`, import `semantic` only. The other modules hold the layers it is resolved from and can change in any release.
 
-```typescript
-import { color } from '@equinor/eds-tokens/ts/color/static/semantic'
+## Best practices
 
-// Type-safe access to semantic categories
-const categories = ['accent', 'neutral', 'danger'] as const
-
-for (const cat of categories) {
-  console.log(color.bg[cat].canvas)
-}
-```
-
-### Naming Conversion
-
-CSS variable segments are converted to camelCase:
-
-| CSS variable | TypeScript path |
-|---|---|
-| `--eds-color-bg-accent-canvas` | `color.bg.accent.canvas` |
-| `--eds-color-bg-neutral-fill-muted-default` | `color.bg.neutral.fillMuted.default` |
-| `--eds-color-text-success-strong-on-emphasis` | `color.text.success.strongOnEmphasis` |
-| `--eds-color-border-danger-medium` | `color.border.danger.medium` |
-
-## JavaScript Tokens (Flat)
-
-A flat ES6 export with `SCREAMING_SNAKE_CASE` constants is also available:
-
-```typescript
-import {
-  BG_ACCENT_CANVAS,
-  TEXT_NEUTRAL_STRONG,
-  BORDER_DANGER_MEDIUM,
-} from '@equinor/eds-tokens/js/color/static/semantic'
-```
-
-## Best Practices
-
-- **Be explicit** -- Choose the specific semantic category your element needs
-- **Pair carefully** -- Always use matching text and background variables for contrast
-- **Never mix approaches** -- Use static consistently, don't mix with dynamic
-- **Test contrast** -- Verify all color combinations meet accessibility standards
+- **Bind to the semantic names.** Never use the numbered palette (`--eds-accent-9`) or a copied hex value; neither follows the colour scheme.
+- **Pair by the background.** Take the foreground named after the fill's level and tone, or `text.primary` and its siblings on the surface and the canvas (see [colors.md](./colors.md#foreground-pairing)).
+- **Check contrast in both schemes and every state.** WCAG 2.1 AA is the minimum; the APCA targets are what EDS aims for. Report both the ratio and the Lc.
+- **Do not mix in 2.x names.** The `--eds-color-*` names in `@equinor/eds-tokens/css/variables` are frozen 2.x tokens.

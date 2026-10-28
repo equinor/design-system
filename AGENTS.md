@@ -190,9 +190,9 @@ Vanilla CSS only — no CSS-in-JS (`styled-components`, `emotion`), no Tailwind 
 
 For the underlying token system — colour categories, static vs dynamic tokens, typography — see the package-local instruction files (frontmatter `applyTo: '**'` for Copilot users who configure their instruction-file location to include this path; Claude / OpenCode users read these on demand):
 
-- [`packages/eds-tokens/instructions/colors.md`](./packages/eds-tokens/instructions/colors.md) — colour system overview
-- [`packages/eds-tokens/instructions/colors-static.md`](./packages/eds-tokens/instructions/colors-static.md) — static semantic + concept tokens
-- [`packages/eds-tokens/instructions/colors-dynamic.md`](./packages/eds-tokens/instructions/colors-dynamic.md) — dynamic appearance tokens (the `data-color-appearance` pattern)
+- [`packages/eds-tokens/instructions/colors.md`](./packages/eds-tokens/instructions/colors.md) — colour system overview, with the 3.x token names
+- [`packages/eds-tokens/instructions/colors-static.md`](./packages/eds-tokens/instructions/colors-static.md) — 3.x colour token names in CSS and TypeScript
+- [`packages/eds-tokens/instructions/colors-dynamic.md`](./packages/eds-tokens/instructions/colors-dynamic.md) — deprecated: the 2.x `data-color-appearance` pattern, for `/next` components that have not moved to the 3.x names yet
 - [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) — typography tokens, modes, baseline trimming
 - [`documentation/how-to/TOKEN_SYSTEM_GUIDE.md`](./documentation/how-to/TOKEN_SYSTEM_GUIDE.md) — end-to-end token lifecycle (Figma → JSON → CSS bundle)
 
@@ -420,6 +420,24 @@ In Claude Code, `.claude/rules/figma-component.md` loads this section automatica
 - Manage focus correctly: trap focus in modals/dialogs, restore focus on close, use `:focus-visible` for keyboard-only outlines
 - Test with `jest-axe` in every component
 
+### Colour contrast
+
+EDS measures a colour pair on two levels. The APCA targets are what EDS measures against and aims for: Lc 90 for body text (`text.primary`) and Lc 60 for secondary text and interactive elements, against `background.surface` ([colour introduction § Contrast](./apps/design-system-docs/docs/foundation/colour/intro.mdx#contrast), ADR-0016). WCAG 2.1 AA is the minimum every pair must meet: 4.5:1 for text, and 3:1 for large text and for non-text content such as icons. When you report on a pair, give both the Lc and the ratio, in both colour schemes and every state (`default`, `hover`, `pressed`).
+
+Check each token on the background it is made for, as [the colour usage page § Foreground pairing](./apps/design-system-docs/docs/foundation/colour/usage.mdx#foreground-pairing) documents:
+
+- `text.on-<level>.<tone>` and `icon.on-<level>.<tone>` go on the fill of the same level and tone. `text.on-emphasis.danger` is checked on `background.interactive.danger.emphasis.default`, `.hover` and `.pressed`, and on `background.non-interactive.danger.emphasis`, not on the surface.
+- `text.primary`, `.secondary` and `.tertiary`, and the icon equivalents, are measured against `background.surface`, the reference backdrop for the targets. They are used on `background.canvas` too, but EDS does not measure them against it.
+- `text.inverted` and `icon.inverted` go on `background.inverted`. The link tokens, `text.interactive.link.*` and `icon.interactive.link.*`, are measured against `background.surface` in every state.
+- The selected fills have no foreground of their own. `text.primary` and `icon.primary` on them have to be checked per state before use, because on `accent` the hover and pressed states fall below the APCA target, the WCAG minimum or both, depending on the scheme. The accessibility page records this as the second documented exception, and [the usage page § Selected backgrounds](./apps/design-system-docs/docs/foundation/colour/usage.mdx#selected-backgrounds) gives the values for every state.
+
+Two more rules from the docs decide what to flag:
+
+- `text.tertiary` and `icon.tertiary` fall below the minimum in light. They are only for places where WCAG 2.1 does not require contrast, such as disabled controls ([accessibility page § Colour](./apps/design-system-docs/docs/foundation/accessibility.md#colour)). Flag tertiary on body text or any other text people need to read, and leave it alone on a disabled control.
+- WCAG 1.4.11 asks for 3:1 only on what identifies a control or its state. `background.interactive.neutral.muted.default` resolves to the same colour as `background.canvas` in both schemes, because it is the resting state of a ghost control, which its label identifies. Do not flag that fill, and do not propose swapping `muted` for `emphasis` to raise its contrast.
+
+`pnpm --filter @equinor/eds-tokens run check:contrast` measures every documented pair on the generated 3.x tokens and prints the hex values, the ratio and the Lc. It fails when a pair is below the WCAG minimum and only reports pairs below their APCA target (ADR-0016 § Confirmation 5).
+
 For running an accessibility audit on a deployed page or Storybook story, see [`documentation/agent-instructions/ACCESSIBILITY_AUDIT.md`](./documentation/agent-instructions/ACCESSIBILITY_AUDIT.md) — checklist, output format, and severity rubric. Harness entry points (`/accessibility-audit` in Claude Code, the `accessibility-audit` prompt in Copilot, the `accessibility-audit` agent in OpenCode) all reference that doc.
 
 ## Component Documentation
@@ -506,7 +524,7 @@ This file is the canonical source. Tool-specific configs add only what's unique 
 | `.claude/CLAUDE.md`               | Claude Code: hooks, slash commands, skills, settings                                       |
 | `.claude/commands/*.md`           | Claude Code: slash-command entry points                                                    |
 | `.claude/settings.json`           | Claude Code: `permissions.deny` for secrets + hook wiring                                  |
-| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`)                                    |
+| `.claude/rules/*.md`              | Claude Code: path-scoped rules (`/next`, `*.figma.tsx`, colour contrast)                   |
 | `.claude/skills/*/SKILL.md`       | Claude Code: skills, applied automatically when their task comes up                        |
 | `.github/copilot-instructions.md` | GitHub Copilot: hub for path-scoped `applyTo` instructions                                 |
 | `.github/instructions/*.md`       | GitHub Copilot: file-pattern specific rules                                                |

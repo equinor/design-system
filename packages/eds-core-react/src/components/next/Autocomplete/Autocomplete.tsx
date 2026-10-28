@@ -511,13 +511,15 @@ function AutocompleteInner<T = string>(
               hasDescription: !!description,
               hasHelperMessage: !!helperMessage,
             })}
-            startAdornment={<Icon data={searchIcon} className="search-icon" />}
+            startAdornment={
+              <Icon data={searchIcon} size="md" className="search-icon" />
+            }
             endAdornment={
               loading ? (
                 // TODO: replace with next/Progress when available
                 <Icon
                   data={refresh}
-                  size="xs"
+                  size="md"
                   className="loading-icon"
                   aria-label="Loading"
                 />
@@ -585,7 +587,7 @@ function AutocompleteInner<T = string>(
                         handleCustomOptionSelect(inputValue.trim())
                     }}
                   >
-                    <Icon data={add_box} aria-hidden="true" />
+                    <Icon data={add_box} size="md" aria-hidden="true" />
                     {customValueTyped
                       ? `Add: ${inputValue.trim()}`
                       : 'Type to add new option'}
