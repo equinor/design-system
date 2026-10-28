@@ -46,9 +46,9 @@ export function ComponentPreviewPanel({
   palettes,
 }: ComponentPreviewPanelProps) {
   const { colorScheme } = useColorScheme()
-  const [accentIdx, setAccentIdx] = useState(() =>
-    defaultAccentIndex(palettes, colorScheme),
-  )
+  // The accent is stored by palette key, so a change to the palette list
+  // (an import, for example) cannot move it to another palette
+  const [accentKey, setAccentKey] = useState<string>()
 
   if (palettes.length === 0) return null
 
@@ -58,10 +58,11 @@ export function ComponentPreviewPanel({
   const neutralIsDefault = !palettes.includes(neutralPalette)
   const neutral = neutralPalette.steps
 
+  // With no choice yet, or after the chosen palette is gone, the default
+  // accent is used
+  const chosenIdx = palettes.findIndex((p, i) => paletteKey(p, i) === accentKey)
   const safeAccentIdx =
-    accentIdx < palettes.length
-      ? accentIdx
-      : defaultAccentIndex(palettes, colorScheme)
+    chosenIdx >= 0 ? chosenIdx : defaultAccentIndex(palettes, colorScheme)
   const chosen = palettes[safeAccentIdx]
 
   // The previews read Tokens Studio semantic tokens, resolved against the
@@ -108,12 +109,12 @@ export function ComponentPreviewPanel({
           <label className="flex items-center gap-2 text-sm">
             <span className="font-medium text-secondary">Accent</span>
             <select
-              value={safeAccentIdx}
-              onChange={(e) => setAccentIdx(Number(e.target.value))}
+              value={paletteKey(chosen, safeAccentIdx)}
+              onChange={(e) => setAccentKey(e.target.value)}
               className={SELECT_CLASS}
             >
               {palettes.map((p, i) => (
-                <option key={i} value={i}>
+                <option key={paletteKey(p, i)} value={paletteKey(p, i)}>
                   {p.name}
                 </option>
               ))}

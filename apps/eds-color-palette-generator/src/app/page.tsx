@@ -84,7 +84,9 @@ function ThemeBuilderContent() {
   const [activeTab, setActiveTab] = useState<ThemeBuilderTab>(
     initialState.activeTab ?? 'system',
   )
-  const [contrastPaletteIndex, setContrastPaletteIndex] = useState(0)
+  // The contrast table's palette is stored by id, so removing a palette above
+  // it keeps the same palette selected
+  const [contrastPaletteId, setContrastPaletteId] = useState<string>()
   const [copied, setCopied] = useState(false)
   const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -99,9 +101,16 @@ function ThemeBuilderContent() {
     return cancelURLUpdate
   }, [palettes, activeTab, colorScheme])
 
-  // Clamp during render if the palette list shrinks (avoids setState-in-effect)
-  const safeContrastIndex =
-    contrastPaletteIndex >= palettes.length ? 0 : contrastPaletteIndex
+  // Resolved during render (avoids setState-in-effect). With no choice yet, or
+  // after the chosen palette is removed, the table shows the first palette.
+  const safeContrastIndex = Math.max(
+    0,
+    palettes.findIndex((p) => p.id === contrastPaletteId),
+  )
+  const handleContrastPaletteChange = useCallback(
+    (index: number) => setContrastPaletteId(palettes[index]?.id),
+    [palettes],
+  )
 
   const lightnessValues =
     colorScheme === 'light'
@@ -239,7 +248,7 @@ function ThemeBuilderContent() {
               <ContrastTable
                 palettes={generatedPalettes}
                 activePaletteIndex={safeContrastIndex}
-                onActivePaletteChange={setContrastPaletteIndex}
+                onActivePaletteChange={handleContrastPaletteChange}
               />
             </div>
           ) : activeTab === 'contrast' ? (

@@ -82,5 +82,20 @@ describe('ComponentPreviewPanel', () => {
         within(dataColours()).queryByText(next.name),
       ).not.toBeInTheDocument()
     })
+
+    it('keeps the chosen accent when a palette before it is removed', async () => {
+      const user = userEvent.setup()
+      const palettes = PALETTES.map((p, i) => ({ ...p, id: `palette-${i}` }))
+      const { rerender } = renderWithProviders(
+        <ComponentPreviewPanel palettes={palettes} />,
+      )
+      const next = palettes.at(-1)
+      if (!next) throw new Error('Expected palettes')
+
+      await user.selectOptions(accentSelect(), next.name)
+      rerender(<ComponentPreviewPanel palettes={palettes.slice(1)} />)
+
+      expect(accentSelect()).toHaveDisplayValue(next.name)
+    })
   })
 })

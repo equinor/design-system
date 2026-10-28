@@ -116,6 +116,42 @@ describe('Theme Builder page', () => {
       ).toBeInTheDocument()
     })
 
+    it('keeps the contrast table on its palette when a palette above it is removed', async () => {
+      const user = userEvent.setup()
+      renderPage()
+      const picker = () =>
+        within(
+          screen.getByRole('region', { name: 'Contrast table' }),
+        ).getByRole('radiogroup', { name: 'Palette' })
+      const chosen = TS_HUES[2].name
+
+      await user.click(within(picker()).getByRole('radio', { name: chosen }))
+      await user.click(
+        screen.getByRole('button', { name: `Remove ${TS_HUES[0].name}` }),
+      )
+
+      expect(
+        within(picker()).getByRole('radio', { name: chosen }),
+      ).toBeChecked()
+    })
+
+    it('shows the first palette in the contrast table when its palette is removed', async () => {
+      const user = userEvent.setup()
+      renderPage()
+      const picker = () =>
+        within(
+          screen.getByRole('region', { name: 'Contrast table' }),
+        ).getByRole('radiogroup', { name: 'Palette' })
+      const chosen = TS_HUES[2].name
+
+      await user.click(within(picker()).getByRole('radio', { name: chosen }))
+      await user.click(screen.getByRole('button', { name: `Remove ${chosen}` }))
+
+      expect(
+        within(picker()).getByRole('radio', { name: TS_HUES[0].name }),
+      ).toBeChecked()
+    })
+
     it('opens the download dialog from the Config button', async () => {
       const user = userEvent.setup()
       renderPage()
