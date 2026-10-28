@@ -1,11 +1,13 @@
 import { existsSync, readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { fail } from './errors.js'
-import { findPackage } from './resolve.js'
+import { exportPath, findPackage } from './resolve.js'
 
 const PACKAGE = '@equinor/eds-tokens'
-// The beta CSS bundle, published under the ./next/css/* export (ADR-0009).
-const CSS_FILE = 'src/tokens/css/variables.css'
+// Where the beta CSS bundle is exported, in order. During the beta it sits
+// under the temporary ./next/css/* export; the exit plan of ADR-0009 moves it
+// onto ./css/variables.css, where 2.x has its legacy bundle (ADR-0010). A
+// file only counts if it sets semantic tokens, so the 2.x bundle is skipped.
+const CSS_EXPORTS = ['./next/css/variables.css', './css/variables.css']
 const INSTALL = `npm install ${PACKAGE}@beta`
 
 export const SCHEMES = ['light', 'dark'] as const
@@ -38,21 +40,23 @@ export type Token = {
 
 /** Reads the CSS from `cssPath`, or else from the installed eds-tokens */
 export function loadTokens(cwd: string, cssPath?: string): TokenSheet {
-  let file = cssPath
-  if (!file) {
-    const pkg = findPackage(PACKAGE, cwd)
-    if (!pkg) {
-      return fail(`${PACKAGE} is not installed in ${cwd}. Run: ${INSTALL}`)
-    }
-    file = join(pkg.root, CSS_FILE)
-    if (!existsSync(file)) {
-      return fail(
-        `${PACKAGE} ${pkg.version} has no beta tokens (${CSS_FILE}). Run: ${INSTALL}`,
-      )
-    }
+  if (cssPath) {
+    if (!existsSync(cssPath)) return fail(`No such file: ${cssPath}`)
+    return parseTokens(readFileSync(cssPath, 'utf8'))
   }
-  if (!existsSync(file)) return fail(`No such file: ${file}`)
-  return parseTokens(readFileSync(file, 'utf8'))
+  const pkg = findPackage(PACKAGE, cwd)
+  if (!pkg) {
+    return fail(`${PACKAGE} is not installed in ${cwd}. Run: ${INSTALL}`)
+  }
+  for (const specifier of CSS_EXPORTS) {
+    const file = exportPath(pkg, specifier)
+    if (!file || !existsSync(file)) continue
+    const sheet = parseTokens(readFileSync(file, 'utf8'))
+    if (sheet.semantic.size) return sheet
+  }
+  return fail(
+    `${PACKAGE} ${pkg.version} has no beta tokens (looked for ${CSS_EXPORTS.join(' and ')}). Run: ${INSTALL}`,
+  )
 }
 
 export function parseTokens(css: string): TokenSheet {

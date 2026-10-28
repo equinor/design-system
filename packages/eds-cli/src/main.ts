@@ -101,6 +101,9 @@ export function main(argv: string[], io: Io): number {
       allowPositionals: true,
     })
     const cwd = resolve(io.cwd, values.cwd ?? '.')
+    // --data and --css are relative to --cwd, like the packages are.
+    const dataPath = values.data && resolve(cwd, values.data)
+    const cssPath = values.css && resolve(cwd, values.css)
     const [command, ...rest] = positionals
     const text = rest.join(' ')
     const print = (json: unknown, plain: () => string) =>
@@ -117,7 +120,7 @@ export function main(argv: string[], io: Io): number {
 
     switch (command) {
       case 'list': {
-        const data = loadComponents(cwd, values.data)
+        const data = loadComponents(cwd, dataPath)
         print(
           data.components.map(({ name, description, status }) => ({
             name,
@@ -136,18 +139,14 @@ export function main(argv: string[], io: Io): number {
             : oneOf<Section>('section', values.section, SECTIONS, 'props')
         // Component names have no spaces, so each word is one component and an
         // agent gets everything it needs for a form in one call.
-        const components = findComponents(
-          loadComponents(cwd, values.data),
-          rest,
-        )
-        print(components.length === 1 ? components[0] : components, () =>
-          formatComponents(components, section),
-        )
+        const components = findComponents(loadComponents(cwd, dataPath), rest)
+        // Always an array, so a script parses one shape for any number of names.
+        print(components, () => formatComponents(components, section))
         return 0
       }
       case 'search': {
         if (!text) fail('Search for what? For example: eds search date')
-        const data = loadComponents(cwd, values.data)
+        const data = loadComponents(cwd, dataPath)
         const matches = searchComponents(data, text)
         print(
           matches.map(({ name, description, status }) => ({
@@ -159,7 +158,9 @@ export function main(argv: string[], io: Io): number {
             formatSearch(
               text,
               matches,
-              matches.length ? [] : rest.flatMap((w) => similarNames(data, w)),
+              matches.length
+                ? []
+                : [...new Set(rest.flatMap((w) => similarNames(data, w)))],
             ),
         )
         return 0
@@ -175,7 +176,7 @@ export function main(argv: string[], io: Io): number {
           ),
           all: values.all ?? false,
         }
-        const sheet = loadTokens(cwd, values.css)
+        const sheet = loadTokens(cwd, cssPath)
         const tokens = searchTokens(sheet, text, options)
         print(tokens, () =>
           formatTokens(tokens, {

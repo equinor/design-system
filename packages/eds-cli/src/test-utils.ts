@@ -111,14 +111,59 @@ function write(file: string, content: string) {
   writeFileSync(file, content)
 }
 
+// A 2.x bundle: tokens on :root only, none of them semantic beta tokens.
+const legacyCss = `:root {
+  --eds_interactive_primary__resting: #007079;
+}
+`
+
+/**
+ * How eds-tokens ships its CSS: `next` is the beta with the bundle under the
+ * temporary ./next/css/* export, `final` is after the ADR-0009 exit plan moves
+ * it onto ./css/variables.css, and `legacy` is 2.x.
+ */
+type TokenLayout = 'next' | 'final' | 'legacy' | 'none'
+
+const tokenPackages: Record<
+  TokenLayout,
+  { exports: Record<string, string>; files: Record<string, string> }
+> = {
+  next: {
+    exports: {
+      './css/variables.css': './build/css/variables.min.css',
+      './next/css/*': './src/tokens/css/*',
+    },
+    files: {
+      'build/css/variables.min.css': legacyCss,
+      'src/tokens/css/variables.css': tokenCss,
+    },
+  },
+  final: {
+    exports: { './css/variables.css': './css/variables.css' },
+    files: { 'css/variables.css': tokenCss },
+  },
+  legacy: {
+    exports: { './css/variables.css': './build/css/variables.min.css' },
+    files: { 'build/css/variables.min.css': legacyCss },
+  },
+  none: {
+    exports: { './next/css/*': './src/tokens/css/*' },
+    files: {},
+  },
+}
+
 /**
  * A project folder with the two EDS packages installed, as far as the CLI
  * reads them. `options` leaves pieces out to test the error messages.
  */
 export function makeProject(
-  options: { data?: boolean; css?: boolean; schemaVersion?: number } = {},
+  options: {
+    data?: boolean
+    tokens?: TokenLayout
+    schemaVersion?: number
+  } = {},
 ): string {
-  const { data = true, css = true, schemaVersion = 1 } = options
+  const { data = true, tokens = 'next', schemaVersion = 1 } = options
   const project = mkdtempSync(join(tmpdir(), 'eds-cli-'))
   const modules = join(project, 'node_modules/@equinor')
 
@@ -135,12 +180,17 @@ export function makeProject(
       JSON.stringify({ ...componentData, schemaVersion }),
     )
   }
+  const { exports, files } = tokenPackages[tokens]
   write(
     join(modules, 'eds-tokens/package.json'),
-    JSON.stringify({ name: '@equinor/eds-tokens', version: '3.0.0-beta.9' }),
+    JSON.stringify({
+      name: '@equinor/eds-tokens',
+      version: tokens === 'legacy' ? '2.3.2' : '3.0.0-beta.9',
+      exports,
+    }),
   )
-  if (css) {
-    write(join(modules, 'eds-tokens/src/tokens/css/variables.css'), tokenCss)
+  for (const [file, content] of Object.entries(files)) {
+    write(join(modules, 'eds-tokens', file), content)
   }
   return project
 }

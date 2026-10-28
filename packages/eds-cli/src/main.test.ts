@@ -1,8 +1,9 @@
-import { mkdirSync, mkdtempSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { basename, join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { main } from './main.js'
+import { parseTokens } from './tokens.js'
 import { capture, makeProject } from './test-utils.js'
 import type { Component } from './types.js'
 
@@ -65,8 +66,15 @@ describe('eds', () => {
     })
 
     it('says when a section has no content', () => {
-      const { stdout } = run(['show', 'TextField', '--section', 'usage'])
-      expect(stdout).toContain('TextField has no usage guidance yet.')
+      expect(run(['show', 'TextField', '--section', 'usage']).stdout).toBe(
+        'TextField has no usage guidance yet.\n',
+      )
+      expect(run(['show', 'TextField', '--section', 'examples']).stdout).toBe(
+        'TextField has no examples yet.\n',
+      )
+      expect(run(['show', 'TextField', '--section', 'links']).stdout).toBe(
+        'TextField has no links yet.\n',
+      )
     })
 
     it('ignores case in the component name', () => {
@@ -102,10 +110,11 @@ describe('eds', () => {
       expect(components.map((c) => c.name)).toEqual(['Button', 'Field'])
     })
 
-    it('prints the whole component as JSON', () => {
+    it('prints the whole component as JSON, in an array for one name too', () => {
       const { stdout } = run(['show', 'Button', '--json'])
-      const component = JSON.parse(stdout) as Component
-      expect(component.examples).toHaveLength(4)
+      const components = JSON.parse(stdout) as Component[]
+      expect(components).toHaveLength(1)
+      expect(components[0].examples).toHaveLength(4)
     })
   })
 
@@ -140,6 +149,12 @@ describe('eds', () => {
         'Did you mean Button?\n→ eds show Button',
       )
     })
+
+    it('names each suggestion once when several words are close to it', () => {
+      expect(run(['search', 'Buttn', 'Buton', 'xyz']).stdout).toContain(
+        'Did you mean Button?\n',
+      )
+    })
   })
 
   describe('tokens', () => {
@@ -169,7 +184,34 @@ describe('eds', () => {
     })
 
     it('keeps the fallback of a reference that does not resolve', () => {
-      expect(run(['tokens', 'link']).stdout).toMatch(/--eds-text-link +blue/)
+      const { stdout } = run(['tokens', 'link'])
+      expect(stdout).toMatch(/--eds-text-link +blue/)
+      expect(stdout).toContain('1 token, values for')
+    })
+
+    it('reads the bundle from ./css/variables.css after the ADR-0009 flip', () => {
+      const { code, stdout } = run(['tokens'], makeProject({ tokens: 'final' }))
+      expect(code).toBe(0)
+      expect(stdout).toContain('3 tokens, values for')
+    })
+
+    it('reads --css and --data relative to --cwd', () => {
+      const project = makeProject()
+      const parent = join(project, '..')
+      const relative = (path: string) => join(basename(project), path)
+      const css = relative(
+        'node_modules/@equinor/eds-tokens/src/tokens/css/variables.css',
+      )
+      const data = relative(
+        'node_modules/@equinor/eds-core-react/build/agent/components.json',
+      )
+      const elsewhere = mkdtempSync(join(tmpdir(), 'eds-cli-elsewhere-'))
+      expect(
+        run(['tokens', '--cwd', parent, '--css', css], elsewhere).code,
+      ).toBe(0)
+      expect(
+        run(['list', '--cwd', parent, '--data', data], elsewhere).code,
+      ).toBe(0)
     })
 
     it('points a search with no match to the words tokens use', () => {
@@ -224,10 +266,27 @@ describe('eds', () => {
     })
 
     it('explains eds-tokens without the beta CSS', () => {
-      const { stderr } = run(['tokens'], makeProject({ css: false }))
+      const { stderr } = run(['tokens'], makeProject({ tokens: 'none' }))
       expect(stderr).toContain(
         '@equinor/eds-tokens 3.0.0-beta.9 has no beta tokens',
       )
+    })
+
+    it('does not mistake the 2.x bundle for the beta tokens', () => {
+      const { code, stderr } = run(
+        ['tokens'],
+        makeProject({ tokens: 'legacy' }),
+      )
+      expect(code).toBe(1)
+      expect(stderr).toContain('@equinor/eds-tokens 2.3.2 has no beta tokens')
+    })
+
+    it('explains component data that is not valid JSON', () => {
+      const broken = join(mkdtempSync(join(tmpdir(), 'eds-cli-')), 'data.json')
+      writeFileSync(broken, '{ "schemaVersion": 1,')
+      const { code, stderr } = run(['list', '--data', broken])
+      expect(code).toBe(1)
+      expect(stderr).toContain('it is not valid JSON')
     })
 
     it('rejects an unknown command and an unknown option', () => {
@@ -235,6 +294,30 @@ describe('eds', () => {
       expect(run(['list', '--colour']).stderr).toContain(
         "Unknown option '--colour'",
       )
+    })
+  })
+
+  describe('the real token bundle', () => {
+    it('finds the semantic tokens and every scheme and density scope', () => {
+      const css = readFileSync(
+        new URL(
+          '../../eds-tokens/src/tokens/css/variables.css',
+          import.meta.url,
+        ),
+        'utf8',
+      )
+      const sheet = parseTokens(css)
+      expect(sheet.semantic.size).toBeGreaterThan(0)
+      expect(
+        [...sheet.semantic.keys()].every((n) => n.startsWith('--eds-')),
+      ).toBe(true)
+      expect([...sheet.densities.keys()].sort()).toEqual([
+        'comfortable',
+        'compact',
+        'relaxed',
+      ])
+      expect([...sheet.schemes.keys()].sort()).toEqual(['dark', 'light'])
+      expect(sheet.root.size).toBeGreaterThan(0)
     })
   })
 

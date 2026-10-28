@@ -32,7 +32,12 @@ export function loadComponents(cwd: string, dataPath?: string): ComponentData {
   }
   if (!existsSync(file)) return fail(`No such file: ${file}`)
 
-  const data = JSON.parse(readFileSync(file, 'utf8')) as ComponentData
+  let data: ComponentData
+  try {
+    data = JSON.parse(readFileSync(file, 'utf8')) as ComponentData
+  } catch {
+    return fail(`Could not read ${file}: it is not valid JSON.`)
+  }
   if (data.schemaVersion !== SUPPORTED_SCHEMA) {
     fail(
       `${file} uses data schema ${data.schemaVersion}, and this version of @equinor/eds-cli reads schema ${SUPPORTED_SCHEMA}. Update @equinor/eds-cli.`,
