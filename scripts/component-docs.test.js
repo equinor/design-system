@@ -386,6 +386,19 @@ describe('Storybook links must point at a title that exists', () => {
     )
   })
 
+  test('checks a link that leaves out the story name', () => {
+    assert.throws(
+      () =>
+        assertStorybookLinks(
+          page('[About](?path=/docs/eds-2-0-beta-about)'),
+          ids,
+        ),
+      (error) =>
+        error instanceof DocsError &&
+        error.message.includes('`eds-2-0-beta-about`'),
+    )
+  })
+
   test('fails on a link to a title that no longer exists, naming the line and id', () => {
     assert.throws(
       () =>
