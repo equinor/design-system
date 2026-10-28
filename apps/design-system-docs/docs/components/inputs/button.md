@@ -102,8 +102,6 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 
 **Circular icon-only buttons**
 
-An icon-only button can be circular instead of square, for a softer appearance.
-
 <StoryCanvas of="Button/CircularIconOnly" showLink />
 
 ## Accessibility
