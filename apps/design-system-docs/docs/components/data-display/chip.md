@@ -117,7 +117,7 @@ Every tone works with every variant. Here's the full matrix for picking the righ
 
 **Dropdown chips**
 
-- Assistive technology announces whether the menu is open, based on the selected state, so keep the chip selected exactly while its menu is open
+- Assistive technology announces whether the menu is open, so keep the chip selected while its menu is open, and only then
 - **Keyboard**: Tab to focus, Enter or Space to open or close the menu
 
 **Density and target size**
