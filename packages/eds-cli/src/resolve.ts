@@ -66,7 +66,8 @@ export function exportPath(
         prefix.length,
         specifier.length - suffix.length,
       )
-      return join(pkg.root, target.replace('*', match))
+      // Node replaces every * in the target, not only the first.
+      return join(pkg.root, target.replaceAll('*', match))
     }
   }
   return null
