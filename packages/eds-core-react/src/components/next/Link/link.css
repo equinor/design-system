@@ -34,8 +34,7 @@
      * default. This also sizes icons passed as children, so Icon's size
      * prop has no effect inside a standalone link. */
     & > .eds-icon {
-      width: var(--eds-spacing-md);
-      height: var(--eds-spacing-md);
+      --_size: var(--eds-spacing-md);
     }
   }
 

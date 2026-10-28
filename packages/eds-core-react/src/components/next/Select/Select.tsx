@@ -90,7 +90,7 @@ function SelectInner<T = string>(
         }
       >
         {displayErrorIcon && (
-          <span aria-hidden="true" className="error-icon" data-font-size="xs">
+          <span aria-hidden="true" className="error-icon">
             <Icon data={error_filled} size="md" />
           </span>
         )}

@@ -66,7 +66,7 @@
     /* Make room for error icon on the left */
     &:has(.error-icon) select {
       padding-inline-start: calc(
-        var(--eds-selectable-space-horizontal) + var(--eds-sizing-icon-xs) +
+        var(--eds-selectable-space-horizontal) + var(--eds-spacing-md) +
           var(--eds-spacing-icon-xs-gap-horizontal)
       );
     }
