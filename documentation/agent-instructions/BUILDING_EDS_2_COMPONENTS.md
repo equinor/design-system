@@ -405,7 +405,7 @@ import type { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentName, type ComponentNameProps } from '.'
 
 const meta: Meta<typeof ComponentName> = {
-  title: 'Beta/ComponentName',
+  title: 'EDS 2.0 (beta)/ComponentName',
   component: ComponentName,
   tags: ['beta'],
 }
