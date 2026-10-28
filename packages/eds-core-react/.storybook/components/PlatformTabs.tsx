@@ -1,5 +1,6 @@
 import {
   useContext,
+  useEffect,
   useRef,
   useState,
   type ReactNode,
@@ -20,12 +21,17 @@ type PlatformTabsProps = {
 const isTab = (value: unknown): value is Tab =>
   value === 'react' || value === 'native'
 
-// The `platform` global (`&globals=platform:native` in the URL) only decides
-// which tab a page opens on. Clicking a tab stays in local state: writing the
-// global back makes Storybook re-render the whole docs page, which remounts
-// every story canvas on the React tab. Storybook's `useGlobals` is not
-// available in a docs page block, so read it from the docs context.
+// The tab the reader last picked. The preview iframe stays loaded while they
+// move between docs pages, so this carries the choice to the next page without
+// Storybook: writing the `platform` global on a tab click would make Storybook
+// re-render the whole docs page and remount every story canvas.
+let lastTab: Tab | undefined
+
+// A URL can open a page on a tab with `&globals=platform:native`. Storybook's
+// `useGlobals` is not available in a docs page block, so read the global from
+// the docs context.
 const getInitialTab = (docsContext: DocsContextProps): Tab => {
+  if (lastTab) return lastTab
   const story = docsContext.componentStories()[0]
   const value = story && docsContext.getStoryContext(story).globals?.platform
   return isTab(value) ? value : 'react'
@@ -41,6 +47,11 @@ export const PlatformTabs = ({ mobile, children }: PlatformTabsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(() =>
     getInitialTab(docsContext),
   )
+
+  useEffect(() => {
+    lastTab = activeTab
+  }, [activeTab])
+
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   if (!mobile) return <>{children}</>
