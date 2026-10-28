@@ -447,6 +447,14 @@ Variants.parameters = {
 
 The hand-written part of the docs page, next to the component. Its format and rules are in [`STORYBOOK_DOC_STYLE.md`](./STORYBOOK_DOC_STYLE.md#the-hand-written-file). Run `pnpm run generate:component-docs ComponentName` to create `ComponentName.docs.mdx`, and never edit that file.
 
+The prop JSDoc, the stories and this file are also what agents in product teams' repositories learn about the component: the eds-core-react build turns them into `build/agent/components.json`, which `@equinor/eds-cli` reads ([ADR-0030](../adr/0030-cli-first-for-ai-agents.md)). Nothing extra is needed per component, but a missing Summary or caption means the agent gets less. To see what an agent gets:
+
+```sh
+pnpm run generate:agent-data
+pnpm run build:cli
+node packages/eds-cli/dist/cli.js show ComponentName --data packages/eds-core-react/build/agent/components.json
+```
+
 ### Wiring into the package
 
 Add the component to `packages/eds-core-react/src/components/next/index.ts`:
