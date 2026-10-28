@@ -7,13 +7,10 @@ import {
   image,
 } from '@equinor/eds-icons'
 import type { IconData } from '@equinor/eds-icons'
+import type { VersionedDocTarget } from '../utils/useShownVersionDocPath'
 
-export type FoundationTopic = {
+export type FoundationTopic = VersionedDocTarget & {
   label: string
-  /** Doc id for Node contexts (docusaurus.config.ts navbar, sidebars.ts). */
-  docId: string
-  /** Client-side link target for `<Link>`/cards. */
-  to: string
   description: string
   icon: IconData
 }
@@ -42,6 +39,7 @@ export const foundationTopics: FoundationTopic[] = [
   {
     label: 'Design Tokens',
     docId: 'foundation/design-tokens/design-tokens',
+    docIdByVersion: { '1.1.0': 'foundation/design-tokens/grid' },
     to: 'docs/Next/foundation/design-tokens',
     description:
       'Colour, spacing, typography, shape, and elevation tokens that power EDS components.',
@@ -66,6 +64,7 @@ export const foundationTopics: FoundationTopic[] = [
   {
     label: 'Assets',
     docId: 'foundation/assets/assets',
+    docIdByVersion: { '1.1.0': 'foundation/assets/image_placeholder' },
     to: 'docs/Next/foundation/assets',
     description:
       'Icons, logos, illustrations, photography, and other visual resources.',
