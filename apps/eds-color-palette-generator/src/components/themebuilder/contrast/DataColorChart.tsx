@@ -709,7 +709,10 @@ export function DataColorChart({
                 <tbody>
                   {colors.map((row, ri) => (
                     <tr key={row.key}>
-                      <td className="px-2 py-1 font-medium whitespace-nowrap text-secondary">
+                      <th
+                        scope="row"
+                        className="px-2 py-1 text-left font-medium whitespace-nowrap text-secondary"
+                      >
                         <div className="flex items-center gap-1">
                           <span
                             className="inline-block size-2 rounded-sm"
@@ -719,7 +722,7 @@ export function DataColorChart({
                             {row.name}
                           </span>
                         </div>
-                      </td>
+                      </th>
                       {colors.map((col, ci) => {
                         if (ci <= ri) {
                           return (

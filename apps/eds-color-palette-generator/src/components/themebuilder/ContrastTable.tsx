@@ -131,8 +131,9 @@ export function ContrastTable({
           <tbody>
             {grid.rows.map((row) => (
               <tr key={row.path}>
-                <td
-                  className="border-b border-muted px-2 py-1.5 font-medium whitespace-nowrap"
+                <th
+                  scope="row"
+                  className="border-b border-muted px-2 py-1.5 text-left font-medium whitespace-nowrap"
                   title={`${row.role} · ${row.paletteName} step ${row.step} (${formatColour(row.hex)})`}
                 >
                   <div className="flex items-center gap-1.5">
@@ -145,7 +146,7 @@ export function ContrastTable({
                       {stepSource(row)}
                     </span>
                   </div>
-                </td>
+                </th>
                 {row.cells.map((cell) => (
                   <td
                     key={cell.column.path}

@@ -69,6 +69,20 @@ describe('ContrastTable', () => {
       )
     })
 
+    it('heads every row with its text role', () => {
+      renderTable()
+
+      const grid = gridFor('light')
+      const table = within(
+        screen.getByRole('region', { name: 'Contrast table' }),
+      ).getByRole('table')
+      const headers = within(table).getAllByRole('rowheader')
+      expect(headers).toHaveLength(grid.rows.length)
+      grid.rows.forEach((row, i) => {
+        expect(headers[i]).toHaveTextContent(row.role)
+      })
+    })
+
     it('gives every column header a name', () => {
       renderTable()
 

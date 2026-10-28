@@ -40,6 +40,17 @@ describe('DataColorChart', () => {
       }
     })
 
+    it('heads every row of the colour-to-colour table with its colour', () => {
+      renderWithProviders(<DataColorChart palettes={PALETTES} />)
+
+      const table = within(chart()).getByRole('table')
+      expect(
+        within(table)
+          .getAllByRole('rowheader')
+          .map((header) => header.textContent),
+      ).toEqual(PALETTES.map((p) => p.name))
+    })
+
     it('renders the given colours in direct mode without the palette controls', () => {
       const colors = [
         { name: 'First', hex: PALETTES[0].steps[8] },
