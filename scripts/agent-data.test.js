@@ -87,6 +87,12 @@ describe('agent data', () => {
     }
   })
 
+  test('marks the components that take asChild', () => {
+    assert.strictEqual(byName('Button').hasAsChild, true)
+    assert.strictEqual(byName('Link').hasAsChild, true)
+    assert.strictEqual(byName('Field').hasAsChild, false)
+  })
+
   test('lists compound sub-components', () => {
     assert.deepStrictEqual(byName('Field').subComponents, [
       'Field.Label',
