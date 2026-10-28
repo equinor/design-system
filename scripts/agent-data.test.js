@@ -7,6 +7,8 @@
 
 const { test, describe, before } = require('node:test')
 const assert = require('node:assert')
+const fs = require('fs')
+const path = require('path')
 
 const { buildAgentData, SCHEMA_VERSION } = require('./generate-agent-data')
 const { discoverPublicComponents } = require('./generate-component-index')
@@ -19,9 +21,10 @@ describe('agent data', () => {
     data = buildAgentData()
   })
 
-  test('carries the schema version and the install line', () => {
+  test('carries the schema version, the beta version and the install line', () => {
     assert.strictEqual(data.schemaVersion, SCHEMA_VERSION)
     assert.strictEqual(data.package, '@equinor/eds-core-react')
+    assert.match(data.version, /^\d+\.\d+\.\d+-beta\.\d+$/)
     assert.match(data.installLine, /@equinor\/eds-core-react@beta/)
   })
 
@@ -55,11 +58,33 @@ describe('agent data', () => {
     assert.ok(button.guidance.accessibility)
   })
 
-  test('a component without sidecar or stories still gets an entry', () => {
-    const menuItem = byName('MenuItem')
-    assert.deepStrictEqual(menuItem.examples, [])
-    assert.deepStrictEqual(menuItem.guidance, {})
-    assert.ok(menuItem.props.length > 0)
+  test('source links are pinned to the beta release tag', () => {
+    const { source } = byName('Button').links
+    assert.ok(
+      source.includes(`/blob/eds-core-react-next@v${data.version}/`),
+      source,
+    )
+  })
+
+  // Picked from the real components rather than named, so the test keeps
+  // working as components get docs and stories (#5467).
+  test('a component without sidecar or stories still gets an entry', (t) => {
+    const bare = discoverPublicComponents().filter(
+      ({ name, dir }) =>
+        !fs.existsSync(path.join(dir, `${name}.docs.md`)) &&
+        !fs.existsSync(path.join(dir, `${name}.stories.tsx`)),
+    )
+    if (bare.length === 0) {
+      t.skip('every component has a sidecar or stories')
+      return
+    }
+    for (const { name } of bare) {
+      const component = byName(name)
+      assert.deepStrictEqual(component.examples, [], name)
+      assert.deepStrictEqual(component.guidance, {}, name)
+      // Props may be empty when the type is just a React DOM type (Menu).
+      assert.ok(component.baseTypes.length > 0, name)
+    }
   })
 
   test('lists compound sub-components', () => {

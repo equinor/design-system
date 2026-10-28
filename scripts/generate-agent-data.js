@@ -17,7 +17,13 @@
  *   (scripts/component-docs/)
  *
  * A component without a `.docs.md` sidecar still gets props, sub-components and
- * examples, but no guidance and no summary.
+ * examples, but no guidance and no summary. Its description falls back to the
+ * JSDoc on the component, or `null` when that is missing too.
+ *
+ * `version` and the source links follow the beta release line
+ * (`next/version.txt`, tagged `eds-core-react-next@v<version>`), not the
+ * version in package.json: the build runs before the publish workflow sets the
+ * beta version, and the data only covers the beta components.
  */
 
 const fs = require('fs')
@@ -29,7 +35,6 @@ const {
 } = require('./generate-component-index')
 const { rootDir, PLATFORMS } = require('./component-docs/config')
 const {
-  githubUrl,
   findPropsDeclaration,
   readFigmaUrl,
   docsPageUrl,
@@ -44,6 +49,12 @@ const { DocsError, fail } = require('./component-docs/errors')
 const SCHEMA_VERSION = 1
 
 const web = PLATFORMS.web
+const betaVersion = fs
+  .readFileSync(path.join(rootDir, web.componentsRoot, 'version.txt'), 'utf8')
+  .trim()
+// Pinned to the release tag, so the link shows the code the consumer installed.
+const sourceUrl = (file) =>
+  `https://github.com/equinor/design-system/blob/eds-core-react-next@v${betaVersion}/${path.relative(rootDir, file)}`
 const outputPath = path.join(
   rootDir,
   'packages/eds-core-react/build/agent/components.json',
@@ -69,13 +80,17 @@ function readGuidance(dir, name) {
   return { summary: sections.Summary, guidance, links }
 }
 
-// Every web component builds on a React DOM type. None found means React's
-// types did not resolve, which also empties the props list, so the build stops
-// instead of shipping incomplete data.
+// Every web component builds on a React DOM type. None found usually means
+// React's types did not resolve, which also empties the props list, so the
+// build stops instead of shipping incomplete data. The extractor also finds
+// nothing for an interface that extends a React type, a qualified name such as
+// `React.HTMLAttributes`, or `ComponentPropsWithoutRef<'button'>`.
 function webBaseTypes(declaration, name) {
   const bases = extractBaseTypes(declaration, 'web')
   if (bases.length === 0) {
-    fail(`${name}: no React DOM base type found. Run \`pnpm install\`.`)
+    fail(
+      `${name}: no React DOM base type found. Either React's types did not resolve (run \`pnpm install\`), or the props use a shape the extractor does not handle (an interface, \`React.*\`, or \`ComponentProps*\`).`,
+    )
   }
   // Nested Omits can name the same key twice.
   return bases.map(({ name: base, omitted }) => ({
@@ -116,7 +131,7 @@ function buildComponent(project, entry) {
       docs: docsPageUrl(name, links.docs),
       figma: readFigmaUrl(dir, name),
       aria: links.aria,
-      source: fs.existsSync(file) ? githubUrl(file) : undefined,
+      source: fs.existsSync(file) ? sourceUrl(file) : undefined,
     },
   }
 }
@@ -130,6 +145,7 @@ function buildAgentData() {
   return {
     schemaVersion: SCHEMA_VERSION,
     package: '@equinor/eds-core-react',
+    version: betaVersion,
     installLine: web.installLine,
     components,
   }
