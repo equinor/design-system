@@ -78,7 +78,18 @@ EDS measures a colour pair on two levels:
 - **The minimum** is WCAG 2.1 AA, which every pair must meet: 4.5:1 for text, and 3:1 for large text and for non-text content such as icons.
 - **The targets** are what EDS measures against and aims for, in APCA: Lc 90 for body text and Lc 60 for secondary text and interactive elements, against `background.surface`.
 
-EDS measures `text.primary`, `.secondary` and `.tertiary` and the icon equivalents against `background.surface`, and each `on-<level>.<tone>` role against the fill of the same level and tone. Measured that way, every text and icon token meets the minimum in both schemes and every state, with one exception: `text.tertiary` and `icon.tertiary` fall below it in light. Use tertiary only where WCAG does not require contrast, such as disabled controls, never for text people need to read.
+EDS measures each text and icon token against one background:
+
+- `text.primary`, `.secondary` and `.tertiary` and the icon equivalents against `background.surface`. They are used on `background.canvas` as well, but the targets are set against the surface, so EDS measures them there and not on the canvas.
+- Each `on-<level>.<tone>` role against the fill of the same level and tone.
+- `text.primary` and `icon.primary` against the selected fills.
+- `text.inverted` and `icon.inverted` against `background.inverted`.
+- The link tokens against `background.surface`.
+
+Measured that way, every text and icon token meets the minimum in both schemes and every state, with two exceptions:
+
+- `text.tertiary` and `icon.tertiary` fall below it in light. Use tertiary only where WCAG does not require contrast, such as disabled controls, never for text people need to read.
+- `text.primary` on the accent selected fills falls below it on `background.interactive.accent.selected.pressed` in light, and on `.hover` and `.pressed` in dark. `icon.primary` falls below 3:1 on `.pressed` in dark. The neutral selected fills meet the minimum in every state.
 
 WCAG 1.4.11 asks for 3:1 only on what identifies a control or its state. `background.interactive.neutral.muted.default` resolves to the same colour as `background.canvas` in both schemes, because it is the resting state of a ghost control, which its label identifies. It does not need 3:1, so do not swap `muted` for `emphasis` to raise it.
 
