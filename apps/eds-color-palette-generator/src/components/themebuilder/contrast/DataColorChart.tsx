@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useId, useState, useMemo } from 'react'
 import { calcContrast } from '@/utils/palette'
 import { stepLabel } from '@/config/config'
 import { useColorScheme } from '@/context/ColorSchemeContext'
@@ -186,6 +186,8 @@ function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
 }
 
 function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
+  // Pattern ids are document-wide, so each chart prefixes its own
+  const patternId = useId()
   // The sample sizes repeat after five colours. The shares are taken from the
   // same values, so the segments add up to the whole circle and none of them
   // covers another.
@@ -211,7 +213,7 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
               {segments.map(({ key, hex }, i) => (
                 <pattern
                   key={key}
-                  id={`donut-pat-${i}`}
+                  id={`${patternId}-${i}`}
                   width="4"
                   height="4"
                   patternUnits="userSpaceOnUse"
@@ -237,7 +239,7 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
               cy="21"
               r="15.915"
               fill="none"
-              stroke={showPatterns ? `url(#donut-pat-${i})` : hex}
+              stroke={showPatterns ? `url(#${patternId}-${i})` : hex}
               strokeWidth="5"
               strokeDasharray={`${pct} ${100 - pct}`}
               strokeDashoffset={offset}

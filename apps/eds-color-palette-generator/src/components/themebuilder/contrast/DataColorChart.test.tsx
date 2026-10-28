@@ -134,6 +134,31 @@ describe('DataColorChart', () => {
       expect(lengths.reduce((a, b) => a + b, 0)).toBeCloseTo(100)
     })
 
+    it('keeps the donut patterns of two charts apart', async () => {
+      const user = userEvent.setup()
+      const { container } = renderWithProviders(
+        <>
+          <DataColorChart palettes={PALETTES} />
+          <DataColorChart palettes={PALETTES} />
+        </>,
+      )
+
+      for (const types of screen.getAllByRole('radiogroup', {
+        name: 'Chart type',
+      })) {
+        await user.click(within(types).getByRole('radio', { name: 'Donut' }))
+      }
+      for (const box of screen.getAllByRole('checkbox', {
+        name: 'Show patterns',
+      })) {
+        await user.click(box)
+      }
+
+      const ids = [...container.querySelectorAll('pattern')].map((p) => p.id)
+      expect(ids).toHaveLength(PALETTES.length * 2)
+      expect(new Set(ids).size).toBe(ids.length)
+    })
+
     it('applies a colour vision simulation to the preview', async () => {
       const user = userEvent.setup()
       const { container } = renderWithProviders(
