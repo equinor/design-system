@@ -18,11 +18,13 @@ export type FieldProps = {
 } & HTMLAttributes<HTMLDivElement>
 
 export type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
+  /** The label text. */
   children: ReactNode
-  /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)" */
+  /** Indicator text shown after the label, e.g. "(Required)" or "(Optional)". */
   indicator?: string
 }
 
 export type FieldDescriptionProps = HTMLAttributes<HTMLParagraphElement> & {
+  /** The description text, shown below the label. */
   children: ReactNode
 }

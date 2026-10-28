@@ -1,7 +1,10 @@
 import type { CSSProperties } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
+import { add } from '@equinor/eds-icons'
 import { Button } from '../Button'
+import { Icon } from '../Icon'
 import { Tooltip, type TooltipProps } from '.'
+import page from './Tooltip.docs.mdx'
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Beta/Data Display/Tooltip',
@@ -10,24 +13,7 @@ const meta: Meta<typeof Tooltip> = {
   parameters: {
     layout: 'centered',
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.
-
-Uses the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) (\`popover="hint"\`)
-and [CSS Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning)
-for zero-JS positioning. When the preferred side does not fit in the viewport, the tooltip falls back to
-the opposite side and then to the two perpendicular sides via \`@position-try\` — it is never shifted
-sideways, so the arrow always points at the trigger.
-
-**Browser support:** CSS Anchor Positioning is [Baseline 2026](https://caniuse.com/css-anchor-positioning) (Chrome 125+, Firefox 135+, Safari 18.2+).
-\`popover="hint"\` is supported in Chrome and Firefox; Safari falls back to \`popover="manual"\` — the tooltip still works, it just won't get free Escape-dismiss until Safari ships \`hint\` support.
-
-\`\`\`tsx
-import { Tooltip } from '@equinor/eds-core-react/next'
-\`\`\`
-        `,
-      },
+      page,
     },
   },
   argTypes: {
@@ -63,6 +49,19 @@ Introduction.args = {
   placement: 'bottom',
 }
 
+export const Overview: StoryFn<TooltipProps> = () => (
+  <div style={{ display: 'flex', gap: '2rem', padding: '2rem' }}>
+    <Tooltip title="Save the draft">
+      <Button>Save</Button>
+    </Tooltip>
+    <Tooltip title="Add item">
+      <Button icon aria-label="Add item">
+        <Icon data={add} aria-hidden />
+      </Button>
+    </Tooltip>
+  </div>
+)
+
 export const Placements: StoryFn<TooltipProps> = () => (
   <div style={{ display: 'flex', gap: '3rem', padding: '4rem' }}>
     {(['top', 'bottom', 'left', 'right'] as const).map((placement) => (
@@ -72,18 +71,42 @@ export const Placements: StoryFn<TooltipProps> = () => (
     ))}
   </div>
 )
+Placements.parameters = {
+  docs: {
+    description: {
+      story:
+        'Use `placement` to choose the preferred side: top, bottom, left or right. The default is bottom.',
+    },
+  },
+}
 
 export const Disabled: StoryFn<TooltipProps> = () => (
   <Tooltip title="You won't see this" disabled>
     <Button>Tooltip disabled</Button>
   </Tooltip>
 )
+Disabled.parameters = {
+  docs: {
+    description: {
+      story:
+        'A disabled Tooltip renders only its child, with no tooltip and no wrapper.',
+    },
+  },
+}
 
 export const LongContent: StoryFn<TooltipProps> = () => (
   <Tooltip title="This is a longer tooltip label" placement="bottom">
     <Button>Hover me</Button>
   </Tooltip>
 )
+LongContent.parameters = {
+  docs: {
+    description: {
+      story:
+        'The tooltip is as wide as its text, so a longer label gives a wider tooltip.',
+    },
+  },
+}
 
 const corners: Array<[string, CSSProperties]> = [
   ['Top left', { top: 4, left: 4 }],
@@ -104,12 +127,17 @@ export const ViewportEdges: StoryFn<TooltipProps> = () => (
   </>
 )
 
+// `tests/visual/Tooltip.next.spec.ts` asserts the geometry of this story, so
+// changing the labels or positions affects those tests.
 ViewportEdges.parameters = {
   layout: 'fullscreen',
   docs: {
+    // The triggers use `position: fixed`, so the example runs in its own frame
+    // and the corners are the frame's corners, not the docs page's.
+    story: { inline: false, iframeHeight: 320 },
     description: {
       story:
-        'Triggers in the corners of the viewport. The default `bottom` placement does not fit centred, so the tooltip falls back to a free side instead of being shifted sideways. The arrow keeps pointing at the trigger. Note: `tests/visual/Tooltip.next.spec.ts` asserts the geometry of this story; changing the labels or positions will affect those tests.',
+        'Triggers in the corners of the viewport. The default `bottom` placement does not fit centred, so the tooltip falls back to a free side instead of being shifted sideways, and the arrow keeps pointing at the trigger.',
     },
   },
 }

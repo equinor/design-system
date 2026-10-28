@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import type { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
+import { ExampleLabel } from './../../../../.storybook/components'
 import { Accordion } from '.'
 import type { AccordionProps } from '.'
+import page from './Accordion.docs.mdx'
 
 const meta: Meta<typeof Accordion> = {
   title: 'Beta/Surface/Accordion',
@@ -9,25 +11,7 @@ const meta: Meta<typeof Accordion> = {
   tags: ['beta'],
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.
-
-Built on the native \`<details>\`/\`<summary>\` elements for free accessibility,
-keyboard support and CSS-only open/close animation.
-
-\`\`\`tsx
-import { Accordion } from '@equinor/eds-core-react/next'
-
-<Accordion>
-  <Accordion.Item>
-    <Accordion.Header>Title</Accordion.Header>
-    <Accordion.Panel>Content</Accordion.Panel>
-  </Accordion.Item>
-</Accordion>
-\`\`\`
-        `,
-      },
+      page,
     },
   },
   argTypes: {
@@ -69,8 +53,31 @@ export const Introduction: StoryFn<AccordionProps> = (args) => (
   </Accordion>
 )
 
+export const Overview: StoryFn<AccordionProps> = () => (
+  <Accordion>
+    <Accordion.Item defaultOpen>
+      <Accordion.Header>Delivery</Accordion.Header>
+      <Accordion.Panel>
+        Orders placed before 14:00 ship the same day.
+      </Accordion.Panel>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Returns</Accordion.Header>
+      <Accordion.Panel>You can return an item within 30 days.</Accordion.Panel>
+    </Accordion.Item>
+  </Accordion>
+)
+
 export const Exclusive: StoryObj<AccordionProps> = {
   args: { exclusive: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Set `exclusive` on Accordion so that only one item is open at a time. Opening another item closes the first, using the native `name` grouping of `<details>`.',
+      },
+    },
+  },
   render: (args) => (
     <Accordion {...args}>
       <Accordion.Item>
@@ -107,6 +114,14 @@ export const Controlled: StoryFn = () => {
       </Accordion.Item>
     </Accordion>
   )
+}
+Controlled.parameters = {
+  docs: {
+    description: {
+      story:
+        'Pass `open` and `onOpenChange` to an item to hold its open state in your own code. Without them, an item keeps its own state and starts open only if you set `defaultOpen`.',
+    },
+  },
 }
 
 const SchemePreview = () => (
@@ -147,27 +162,27 @@ const DensityPreview = () => (
   </Accordion>
 )
 
-/**
- * Accordion respects the `data-density` attribute on an ancestor element so
- * spacing and sizing tokens stay coordinated with sibling components.
- */
 export const Density: StoryFn = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
     <div data-density="spacious">
-      <h3 style={{ margin: '0 0 12px' }}>Spacious (default)</h3>
+      <ExampleLabel>Spacious (default)</ExampleLabel>
       <DensityPreview />
     </div>
     <div data-density="comfortable">
-      <h3 style={{ margin: '0 0 12px' }}>Comfortable</h3>
+      <ExampleLabel>Comfortable</ExampleLabel>
       <DensityPreview />
     </div>
   </div>
 )
+Density.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `data-density` on an ancestor element to change the spacing and sizes. Spacious is the default and comfortable is more compact.',
+    },
+  },
+}
 
-/**
- * Side-by-side preview of the Accordion in both color schemes — used to
- * verify dark theme since Storybook's own dark-mode toggle is unreliable.
- */
 export const ColorSchemes: StoryFn = () => (
   <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
     <div
@@ -179,7 +194,7 @@ export const ColorSchemes: StoryFn = () => (
         color: 'var(--eds-color-text-strong)',
       }}
     >
-      <h3 style={{ marginTop: 0 }}>Light</h3>
+      <ExampleLabel>Light</ExampleLabel>
       <SchemePreview />
     </div>
     <div
@@ -191,8 +206,16 @@ export const ColorSchemes: StoryFn = () => (
         color: 'var(--eds-color-text-strong)',
       }}
     >
-      <h3 style={{ marginTop: 0 }}>Dark</h3>
+      <ExampleLabel>Dark</ExampleLabel>
       <SchemePreview />
     </div>
   </div>
 )
+ColorSchemes.parameters = {
+  docs: {
+    description: {
+      story:
+        'Accordion follows the colour scheme set with `data-color-scheme` on a parent element.',
+    },
+  },
+}
