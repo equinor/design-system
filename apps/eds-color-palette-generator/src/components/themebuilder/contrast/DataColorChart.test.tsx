@@ -98,6 +98,31 @@ describe('DataColorChart', () => {
       expect(screen.getByText('Mon')).toBeInTheDocument()
     })
 
+    it('gives every colour its own donut segment with more than five colours', async () => {
+      const user = userEvent.setup()
+      const palettes = tokensStudioPalettes('light')
+      const { container } = renderWithProviders(
+        <DataColorChart palettes={palettes} />,
+      )
+
+      await user.click(
+        within(
+          screen.getByRole('radiogroup', { name: 'Chart type' }),
+        ).getByRole('radio', { name: 'Donut' }),
+      )
+
+      // The segments are SVG circles, which have no role. Each one starts
+      // where the one before it ends, so lengths adding up to the whole
+      // circle means no segment covers another.
+      const segments = [...container.querySelectorAll('circle')]
+      expect(palettes.length).toBeGreaterThan(5)
+      expect(segments).toHaveLength(palettes.length)
+      const lengths = segments.map((segment) =>
+        Number(segment.getAttribute('stroke-dasharray')?.split(' ')[0]),
+      )
+      expect(lengths.reduce((a, b) => a + b, 0)).toBeCloseTo(100)
+    })
+
     it('applies a colour vision simulation to the preview', async () => {
       const user = userEvent.setup()
       const { container } = renderWithProviders(

@@ -186,13 +186,12 @@ function StackedBarChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
 }
 
 function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
-  const total = DONUT_SEGMENTS.slice(0, colors.length).reduce(
-    (a, b) => a + b,
-    0,
-  )
-  const pcts = colors.map(
-    (_, i) => (DONUT_SEGMENTS[i % DONUT_SEGMENTS.length] / total) * 100,
-  )
+  // The sample sizes repeat after five colours. The shares are taken from the
+  // same values, so the segments add up to the whole circle and none of them
+  // covers another.
+  const values = colors.map((_, i) => DONUT_SEGMENTS[i % DONUT_SEGMENTS.length])
+  const total = values.reduce((a, b) => a + b, 0)
+  const pcts = values.map((value) => (value / total) * 100)
   const segments = colors.map((pc, i) => ({
     key: pc.key,
     hex: pc.hex,
@@ -249,7 +248,8 @@ function DonutChart({ colors, bgHex, textHex, showPatterns }: ChartProps) {
           className="absolute inset-0 flex items-center justify-center text-base font-medium"
           style={{ color: textHex }}
         >
-          {total}%
+          {/* The segments are shares of the whole */}
+          100%
         </div>
       </div>
     </div>
