@@ -4,8 +4,9 @@
  * `DocItem/Layout` renders it for every component page that gets the hero band
  * from the layout, which puts it under the page title. The component landing
  * page builds its own title with `<Hero>` inside the MDX, where the layout
- * cannot reach, so that page places this component itself. Keep the two in
- * step: the note belongs directly under the title, never above it.
+ * cannot reach, so that page places this component itself, inside a
+ * `.container` so it lines up with the hero and the sections below. Keep the
+ * two in step: the note belongs directly under the title, never above it.
  *
  * `className` replaces the default spacing rather than adding to it, so a page
  * that places the note itself can match its own rhythm: the landing page needs
