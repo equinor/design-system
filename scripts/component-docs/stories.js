@@ -25,7 +25,8 @@ function getStoryCaption(sf, declaration) {
   }
   return cur &&
     (Node.isStringLiteral(cur) || Node.isNoSubstitutionTemplateLiteral(cur))
-    ? cur.getLiteralText()
+    ? // A caption written as a template literal starts and ends with a line break
+      cur.getLiteralText().trim()
     : undefined
 }
 
