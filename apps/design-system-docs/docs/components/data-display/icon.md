@@ -92,7 +92,6 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 
 - Use `title` prop when an icon is the only element conveying meaning (e.g., icon-only buttons)
 - Use the `size` that matches the spacing variable bound in Figma
-- Use the `size` prop in flex layouts where you control spacing with gap
 - Rely on `currentColor` for icons that should match surrounding text color
   :::
 

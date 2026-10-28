@@ -13,9 +13,7 @@ Icon shows a small symbol, so a button, a label or a line of text can carry a vi
 ## Usage
 
 ```tsx
-import { save } from '@equinor/eds-icons'
-
-;<Icon data={save} title="Save" />
+<Icon data={save} title="Save" />
 ```
 
 ## Accessibility

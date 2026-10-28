@@ -258,7 +258,7 @@ export const InsideComponents: StoryFn<IconProps> = () => (
     </Chip>
     <Link href="#" variant="standalone">
       Next page
-      <Icon data={arrow_forward} />
+      <Icon data={arrow_forward} aria-hidden />
     </Link>
   </Stack>
 )
