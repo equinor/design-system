@@ -11,9 +11,15 @@
 
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
+const path = require('node:path')
 
 const { renderWeb, renderMobile } = require('./component-docs/render')
 const { DocsError } = require('./component-docs/errors')
+const { rootDir } = require('./component-docs/config')
+const {
+  toStorybookId,
+  assertStorybookLinks,
+} = require('./component-docs/storybook')
 
 const story = (name, extra = {}) => ({
   name,
@@ -349,6 +355,49 @@ describe('every example needs a caption', () => {
       (error) =>
         error instanceof DocsError &&
         error.message.includes('add a caption to `Sizes`'),
+    )
+  })
+})
+
+describe('Storybook links must point at a title that exists', () => {
+  const ids = new Set(['beta-inputs-button', 'beta-about'])
+  const page = (content) => ({
+    file: path.join(rootDir, 'Thing.docs.mdx'),
+    content,
+  })
+
+  test('derives the id from the title the way Storybook does', () => {
+    assert.equal(
+      toStorybookId('Beta/Inputs/Selection Controls/Checkbox'),
+      'beta-inputs-selection-controls-checkbox',
+    )
+    assert.equal(
+      toStorybookId('EDS 2.0 (beta)/Inputs/Button'),
+      'eds-2-0-beta-inputs-button',
+    )
+  })
+
+  test('passes docs and story links to existing titles', () => {
+    assertStorybookLinks(
+      page(
+        '[Button](?path=/docs/beta-inputs-button--docs) and [About](?path=/story/beta-about--docs)',
+      ),
+      ids,
+    )
+  })
+
+  test('fails on a link to a title that no longer exists, naming the line and id', () => {
+    assert.throws(
+      () =>
+        assertStorybookLinks(
+          page(
+            'Intro\n- [Button](?path=/docs/eds-2-0-beta-inputs-button--docs)',
+          ),
+          ids,
+        ),
+      (error) =>
+        error instanceof DocsError &&
+        error.message.includes('Thing.docs.mdx:2 `eds-2-0-beta-inputs-button`'),
     )
   })
 })
