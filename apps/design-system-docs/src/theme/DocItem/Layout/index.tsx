@@ -23,20 +23,24 @@ import styles from './styles.module.css'
 const REDESIGN_VERSIONS = new Set(['current', '2.0.0-beta'])
 
 /**
- * Both live generations say what they are, on every page. Docusaurus's own
- * version banner cannot: it calls any pre-lastVersion docs "no longer actively
- * maintained", which is the opposite of what we mean for EDS 1, and it says
- * nothing at all on the current version, which left the beta pages with no
- * sign that they are beta or that beta is safe to adopt. Both versions are
- * configured with `banner: 'none'` and get these notes instead. The frozen
- * 2.0.0-beta archive keeps the upstream banner, where "unmaintained" is true.
- * See #4942.
+ * Every version says what it is, on every page. Docusaurus's own version
+ * banner cannot: it shows nothing on the lastVersion, which left Latest without
+ * the package versions it covers, nothing on the current version, which left
+ * the beta pages with no sign that they are beta or that beta is safe to
+ * adopt, and it calls the 2.0.0-beta archive "unreleased" because
+ * versions.json lists it before lastVersion. All three are configured with
+ * `banner: 'none'` and get these notes instead. See #4942 and #5667.
  */
-const EDS_1_VERSION = '1.1.0'
-const EDS_2_VERSION = 'current'
+const LATEST_VERSION = '1.1.0'
+const BETA_VERSION = 'current'
+const EARLIER_BETA_VERSION = '2.0.0-beta'
+
+/** The section that explains which package versions Latest and Beta are. */
+const VERSIONS_SECTION =
+  '/docs/Next/about/getting-started/develop/getting_started_development#versioning'
 
 /**
- * The EDS 2.0 note states the component API's path to 3.0.0, which is
+ * The Beta note states the component API's path to 3.0.0, which is
  * `eds-core-react`'s release, not every package's. The colour and design-token
  * pages follow `eds-tokens`, whose beta is a different story: the redefined
  * tokens only exist under the `next/css/*` subpaths, `css/variables` is still
@@ -48,26 +52,37 @@ const EDS_2_VERSION = 'current'
  * the MDX, which would leave the note above the title instead of under it.
  * That page renders `<BetaNotice>` itself, after its `<Hero>`.
  */
-const EDS_2_NOTICE_SECTION = 'components/'
-const EDS_2_NOTICE_SELF_PLACED = new Set(['components/components'])
+const BETA_NOTICE_SECTION = 'components/'
+const BETA_NOTICE_SELF_PLACED = new Set(['components/components'])
 
 function VersionNotice({ version, docId }: { version: string; docId: string }) {
-  if (version === EDS_1_VERSION) {
+  if (version === LATEST_VERSION) {
     return (
       <div className="alert alert--info margin-bottom--md" role="note">
-        EDS 1 is <code>@equinor/eds-core-react</code> 2.x and earlier, and stays
-        supported until EDS 2.0 becomes stable.{' '}
-        <Link to="/docs/Next/components">EDS 2.0</Link> is in beta, safe to
-        adopt alongside it, and becomes <code>eds-core-react</code> 3.0.0 when
-        it leaves beta.
+        Latest is <code>@equinor/eds-core-react</code> 2.x and{' '}
+        <code>@equinor/eds-tokens</code> 2.x, and stays supported until 3.0.0 is
+        released. <Link to="/docs/Next/components">Beta</Link> is the 3.0.0
+        beta, safe to adopt alongside it. See{' '}
+        <Link to={VERSIONS_SECTION}>Versioning</Link> for which packages belong
+        to each.
+      </div>
+    )
+  }
+
+  if (version === EARLIER_BETA_VERSION) {
+    return (
+      <div className="alert alert--warning margin-bottom--md" role="note">
+        This is the earlier beta (<code>2.0.0-beta</code>), frozen before the
+        colour foundation was redefined and no longer updated. For the current
+        beta, see <Link to="/docs/Next/components">Beta</Link>.
       </div>
     )
   }
 
   if (
-    version === EDS_2_VERSION &&
-    docId.startsWith(EDS_2_NOTICE_SECTION) &&
-    !EDS_2_NOTICE_SELF_PLACED.has(docId)
+    version === BETA_VERSION &&
+    docId.startsWith(BETA_NOTICE_SECTION) &&
+    !BETA_NOTICE_SELF_PLACED.has(docId)
   ) {
     return <BetaNotice />
   }
