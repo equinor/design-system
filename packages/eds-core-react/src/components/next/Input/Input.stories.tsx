@@ -306,13 +306,13 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         aria-label="With icon"
         type="text"
         placeholder="With icon"
-        endAdornment={<Icon data={anchor} />}
+        endAdornment={<Icon data={anchor} size="md" />}
       />
       <Input
         aria-label="Search"
         type="text"
         placeholder="Search"
-        startAdornment={<Icon data={search} />}
+        startAdornment={<Icon data={search} size="md" />}
         endAdornment={
           <Button variant="ghost" icon size="small" aria-label="Clear">
             <Icon data={close} />
@@ -324,7 +324,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         type="text"
         defaultValue="Invalid value"
         invalid
-        endAdornment={<Icon data={anchor} />}
+        endAdornment={<Icon data={anchor} size="md" />}
       />
       <Input
         aria-label="Invalid with text and adornment"
@@ -332,7 +332,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         defaultValue="invalid-url"
         invalid
         startText="https://"
-        startAdornment={<Icon data={anchor} />}
+        startAdornment={<Icon data={anchor} size="md" />}
         endText=".com"
       />
       <Input
@@ -341,7 +341,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         defaultValue="Invalid search"
         invalid
         hideErrorIcon
-        startAdornment={<Icon data={search} />}
+        startAdornment={<Icon data={search} size="md" />}
         endAdornment={
           <Button
             variant="ghost"
@@ -360,7 +360,7 @@ export const WithAdornments: StoryFn<InputProps> = () => {
         disabled
         value="100"
         endText="kg"
-        endAdornment={<Icon data={anchor} />}
+        endAdornment={<Icon data={anchor} size="md" />}
       />
     </>
   )

@@ -17,53 +17,44 @@ Use Icon to reinforce meaning alongside text - in buttons, form fields, status m
 
 ## Structure
 
-The Icon component renders an SVG element with a single `data` prop from `@equinor/eds-icons`. It supports three sizing layers:
+The Icon component renders an SVG element with a single `data` prop from `@equinor/eds-icons`. It is sized in one of three ways:
 
-- **Explicit `size` prop** - highest priority, for precise control
-- **Parent Typography** - automatically inherits the right size when placed inside Typography
-- **Dynamic fallback** - scales at 1.5× relative to the surrounding font size
+- **Default** - without a `size` prop, the icon is `spacing-xl` (24px at Comfortable), the icon size used in the EDS Assets Figma file
+- **Explicit `size` prop** - the spacing token of the same name, so `size="md"` is `spacing-md`
+- **Inside a component** - components such as Button and Chip set the icon size themselves, and the `size` prop has no effect
 
 ## Guidelines
 
 ### Sizes
 
-Use the `size` prop for explicit sizing. Each size maps to an EDS design token, ensuring consistency across our interfaces.
+Each size is the spacing token of the same name, so the size you set in code is the variable bound in Figma. An icon without `size` is the same as `size="xl"`. The sizes follow the density set on a parent element.
 
-| Size | Spacious (default) | Comfortable (compact) |
-| ---- | ------------------ | --------------------- |
-| xs   | 16px               | 14px                  |
-| sm   | 18px               | 16px                  |
-| md   | 20px               | 18px                  |
-| lg   | 24px               | 20px                  |
-| xl   | 28px               | 24px                  |
-| 2xl  | 32px               | 28px                  |
-| 3xl  | 37px               | 32px                  |
-| 4xl  | 42px               | 37px                  |
-| 5xl  | 48px               | 42px                  |
-| 6xl  | 56px               | 48px                  |
+| Size | Token         | Comfortable (default) |
+| ---- | ------------- | --------------------- |
+| sm   | `spacing-sm`  | 12px                  |
+| md   | `spacing-md`  | 16px                  |
+| lg   | `spacing-lg`  | 20px                  |
+| xl   | `spacing-xl`  | 24px                  |
+| 2xl  | `spacing-2xl` | 28px                  |
+| 3xl  | `spacing-3xl` | 32px                  |
+| 4xl  | `spacing-4xl` | 40px                  |
+| 5xl  | `spacing-5xl` | 48px                  |
+| 6xl  | `spacing-6xl` | 64px                  |
+| 7xl  | `spacing-7xl` | 80px                  |
 
 <StoryCanvas of="Icon/ExplicitSizes" showLink />
 
-### Auto-sizing with Typography
+### Icons next to text
 
-When placed inside a Typography component, icons automatically inherit the correct size via the `--eds-typography-icon-size` CSS variable. This is the recommended approach for icons inline with text.
+The icon size does not follow the size of the surrounding text. Next to smaller text, set `size` to the spacing token the design uses, for example `md` next to small labels. An inline icon is centred on the text.
 
-<StoryCanvas of="Icon/AutoSizeFromTypography" showLink />
+<StoryCanvas of="Icon/InlineWithText" showLink />
 
-### Density modes
+### Density
 
-Icons respect the `data-density` attribute for density-aware sizing. The same `size` prop renders at different pixel values depending on the density context.
+Set `data-density` on a parent element to `compact`, `comfortable` or `relaxed`. Every icon size, including the default, follows the spacing scale and changes with the density.
 
-- **Spacious** (default) - larger icons for more breathing room
-- **Comfortable** - smaller icons for compact UIs
-
-<StoryCanvas of="Icon/DensityModes" showLink />
-
-### Default sizing
-
-When no `size` prop is set and the icon is outside a Typography component, it scales to 1.5× the surrounding font size. This provides a sensible default in any context.
-
-<StoryCanvas of="Icon/DynamicFallback" showLink />
+<StoryCanvas of="Icon/Densities" showLink />
 
 ### Color
 
@@ -71,39 +62,11 @@ Icons inherit `currentColor` by default, making them adapt to text color automat
 
 <StoryCanvas of="Icon/Color" showLink />
 
-### Inline text vs flex layout
-
-How you use Icon depends on the layout context:
-
-| Context     | Usage                          | Why                                                                |
-| ----------- | ------------------------------ | ------------------------------------------------------------------ |
-| Inline text | `<Icon data={save} />`         | Auto-sizes to 1.5em, negative margins for optical alignment        |
-| Flex/Button | `<Icon data={save} size="md">` | Fixed size from tokens, no margins - layout controlled by flex gap |
-
-The `size` prop removes negative margins, giving full control to your layout system.
-
-<StoryCanvas of="Icon/InlineWithText" showLink />
-
 ## Usage in Figma
 
-There is no dedicated Icon component in Figma. Instead, icons are imported directly from the **Assets** panel.
+There is no dedicated Icon component in Figma. Icons are imported directly from the **Assets** panel, where they are `spacing-xl` (24px at Comfortable), the same as an Icon without `size` in code.
 
-**Standalone icons** — Import the icon from Assets and place it directly in your design. The icon size is controlled by the asset itself.
-
-**Inline with Typography** — When placing an icon inline with text, wrap it in a container like "Leading Icon Item". This container applies negative padding to optically align the icon with the text baseline — matching how the code component behaves with negative margins for inline icons.
-
-The container exposes variables for controlling size and negative padding:
-
-| Variable                              | Purpose                                              |
-| ------------------------------------- | ---------------------------------------------------- |
-| `Selectable/Icon size`                | Controls the icon dimensions                         |
-| `Selectable/Icon container padding ↕︎` | Negative vertical padding for optical alignment      |
-| `Selectable/Icon container padding ↔︎` | Negative horizontal padding (square containers only) |
-
-**Which padding variables to use depends on the container shape:**
-
-- **Rectangular containers** (e.g., a button with text) — Only vertical padding (`↕︎`) is needed. Horizontal spacing is handled by the parent layout's gap.
-- **Square containers** (e.g., an icon-only button) — Both vertical (`↕︎`) and horizontal (`↔︎`) padding are needed, set to the same value, since the icon fills the container in both directions.
+To use another size, bind the icon's width and height to a spacing variable. The variable name is the `size` in code: an icon bound to `spacing-md` is `size="md"`. The icon size does not follow the size of the text next to it.
 
 ## Accessibility
 
@@ -121,21 +84,20 @@ Icons follow WCAG 2.1 AA guidelines with two distinct modes:
 - Announced by screen readers using the title text
 - Use when the icon conveys meaning that is not available through surrounding text
 
-<StoryCanvas of="Icon/Accessibility" showLink />
+<StoryCanvas of="Icon/DecorativeAndSemantic" showLink />
 
 ## Do's and Don'ts
 
 :::info **Do**
 
 - Use `title` prop when an icon is the only element conveying meaning (e.g., icon-only buttons)
-- Let icons inherit size from Typography when used inline with text
-- Use the `size` prop in flex layouts where you control spacing with gap
+- Use the `size` that matches the spacing variable bound in Figma
 - Rely on `currentColor` for icons that should match surrounding text color
   :::
 
 :::danger **Don't**
 
 - Don't use icons without a `title` when there is no accompanying text to convey the meaning
-- Don't combine the `size` prop with Typography auto-sizing. The `size` prop takes priority and overrides the inherited size, so the Typography context has no effect
+- Don't set the `size` prop on an icon inside a component such as Button or Chip. The component sets the icon size, so the prop has no effect
 - Don't use custom pixel values for sizing - use the `size` prop or let tokens handle it
   :::

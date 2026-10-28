@@ -267,14 +267,14 @@ New composition primitive. Replaces `InputWrapper`, `Label`, the internal `Helpe
 
 **Props**
 
-- `size`: numeric `16 | 18 | 24 | 32 | 40 | 48` → semantic `xs` | `sm` | `md` | `lg` | `xl` | `2xl` | `3xl` | `4xl` | `5xl` | `6xl`, resolved through the `--eds-sizing-icon-*` tokens. See the Icon page for the size scale.
+- `size`: numeric `16 | 18 | 24 | 32 | 40 | 48` → semantic `sm` | `md` | `lg` | `xl` | `2xl` | `3xl` | `4xl` | `5xl` | `6xl` | `7xl`, each the `--eds-spacing-*` token of the same name, so `16` is `md` and `24` is `xl`. Without `size` the icon is `xl` and no longer follows the surrounding text. See the Icon page for the size scale.
 - Removed: `name` and the `Icon.add()` registry. `data` is required. `rotation` is removed.
 
 **Behaviour**: missing `data` logs an error and renders nothing, where 2.x threw.
 
-**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-icon-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
+**Markup**: no `width` or `height` attributes on the `<svg>`, sizing is CSS only via `data-size`. `data-testid="eds-icon-path"` on the `<path>` (single-path icons only) → `data-testid="eds-icon"` on the `<svg>`.
 
-**Small icon variants**: the dedicated small icon dataset 2.x used below 24 px is removed, so `xs` and `sm` icons are the 24 px geometry scaled down. This is a design decision: after a usage audit the small variants are retired from `@equinor/eds-icons`, the Figma broker and Figma as well ([#5500](https://github.com/equinor/design-system/issues/5500)).
+**Small icon variants**: the dedicated small icon dataset 2.x used below 24 px is removed, so icons below `xl` are the 24 px geometry scaled down. This is a design decision: after a usage audit the small variants are retired from `@equinor/eds-icons`, the Figma broker and Figma as well ([#5500](https://github.com/equinor/design-system/issues/5500)).
 
 ## Input
 

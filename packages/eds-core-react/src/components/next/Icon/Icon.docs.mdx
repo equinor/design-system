@@ -30,11 +30,11 @@ Icon shows a small symbol, so a button, a label or a line of text can carry a vi
 
 ## Features
 
-- Draws the icon from `@equinor/eds-icons` as an inline SVG.
-- Picks its size from the first rule that applies: an explicit `size`, then the surrounding Typography, then 1.5 times the surrounding font size.
-- Follows the density of its parent element when you set `size`, so the same size renders larger or smaller with the density.
+- Is `--eds-spacing-xl` by default, the icon size in the EDS Assets Figma file, whatever the size of the text around it.
+- Takes its size from the spacing token of the same name, so `size="md"` is the `spacing-md` variable bound in Figma.
+- Follows the density of its parent element, so it grows or shrinks with `data-density`.
 - Takes the colour of the surrounding text by default, and `color` overrides it.
-- Is hidden from screen readers unless you give it a `title`, which turns it into an image with that name.
+- Is sized by the component when used inside Button, Chip or a standalone Link, so the `size` prop has no effect there.
 
 <Canvas of={Stories.Overview} />
 
@@ -46,8 +46,6 @@ npm install @equinor/eds-core-react@beta
 
 ```tsx
 import { Icon } from '@equinor/eds-core-react/next'
-
-import { save } from '@equinor/eds-icons'
 
 <Icon data={save} title="Save" />
 ```
@@ -61,85 +59,64 @@ import { save } from '@equinor/eds-icons'
 
 ### Explicit sizes
 
-Use the `size` prop for explicit sizing. Maps to `--eds-sizing-icon-{size}` tokens.
+Each size is the spacing token of the same name. Without `size`, the icon is `xl`. To choose a size, use the spacing variable the icon is bound to in Figma. There is no fixed size per text size: Button pairs label md with `lg`, Chip and Link pair it with `md`.
 
-| Size | Default (token) | Default (px) | Compact (token) | Compact (px) |
-|------|-----------------|--------------|-----------------|--------------|
-| xs   | 1rem            | 16px         | 0.875rem        | 14px         |
-| sm   | 1.125rem        | 18px         | 1rem            | 16px         |
-| md   | 1.25rem         | 20px         | 1.125rem        | 18px         |
-| lg   | 1.5rem          | 24px         | 1.25rem         | 20px         |
-| xl   | 1.75rem         | 28px         | 1.5rem          | 24px         |
-| 2xl  | 2rem            | 32px         | 1.75rem         | 28px         |
-| 3xl  | 2.313rem        | 37px         | 2rem            | 32px         |
-| 4xl  | 2.625rem        | 42px         | 2.313rem        | 37px         |
-| 5xl  | 3rem            | 48px         | 2.625rem        | 42px         |
-| 6xl  | 3.5rem          | 56px         | 3rem            | 48px         |
+| Size  | Token               | Comfortable |
+|-------|---------------------|-------------|
+| sm    | `--eds-spacing-sm`  | 12px        |
+| md    | `--eds-spacing-md`  | 16px        |
+| lg    | `--eds-spacing-lg`  | 20px        |
+| xl    | `--eds-spacing-xl`  | 24px        |
+| 2xl   | `--eds-spacing-2xl` | 28px        |
+| 3xl   | `--eds-spacing-3xl` | 32px        |
+| 4xl   | `--eds-spacing-4xl` | 40px        |
+| 5xl   | `--eds-spacing-5xl` | 48px        |
+| 6xl   | `--eds-spacing-6xl` | 64px        |
+| 7xl   | `--eds-spacing-7xl` | 80px        |
 
 <Canvas of={Stories.ExplicitSizes} />
 
-### Auto size from typography
+### Inline with text
 
-Icons automatically inherit size from `Typography` component via the `--eds-typography-icon-size` CSS variable.
-This is the recommended approach when using icons inline with text in EDS components.
+The icon size does not follow the text. Next to smaller text, set `size` to the spacing token the design uses. An inline icon is centred on the text.
 
-<Canvas of={Stories.AutoSizeFromTypography} />
+<Canvas of={Stories.InlineWithText} />
 
-### Density modes
+### Densities
 
-Icons respect the `data-density` attribute for density-aware sizing. The same `size` prop renders differently based on the density context.
+Set `data-density` on an ancestor. Every size, including the default, follows the spacing scale and changes with the density.
 
-- **Spacious** (default): Larger icons for more breathing room
-- **Comfortable**: Smaller icons for compact UIs
-
-This is controlled by CSS custom properties (`--eds-sizing-icon-{size}`) that change based on the density mode.
-
-<Canvas of={Stories.DensityModes} />
-
-### Typography with density
-
-Icons inside Typography automatically adapt to both the typography size and density mode.
-The icon inherits `--eds-typography-icon-size` which changes based on `data-font-size` and `data-density`.
-
-<Canvas of={Stories.TypographyWithDensity} />
-
-### Dynamic fallback
-
-When no `size` prop or `data-font-size` is set, icons use `1.5em` for dynamic scaling.
-This means icons are always 1.5x the surrounding font-size.
-
-<Canvas of={Stories.DynamicFallback} />
+<Canvas of={Stories.Densities} />
 
 ### Color
 
-Icons inherit `currentColor` by default, making them adapt to text color automatically.
+Icons use `currentColor` by default, so they take the colour of the surrounding text. To set a colour, pass a semantic icon token such as `var(--eds-icon-secondary)` to `color`, never a raw colour value.
 
 <Canvas of={Stories.Color} />
 
-### Accessibility
+### Inside components
 
-Icons without a `title` prop are decorative (`aria-hidden`). Icons with a `title` prop are semantic (`role="img"`).
+Button, Chip and a standalone Link size the icons you pass them, so leave out `size`. The Button here sets `size="5xl"`, and the icon still follows the button.
 
-<Canvas of={Stories.Accessibility} />
+<Canvas of={Stories.InsideComponents} />
 
-### Inline with text
+### Decorative and semantic
 
-**Best practice for icon usage:**
+Without `title` an icon is decorative and gets `aria-hidden`. With `title` it gets the `img` role and the title as its name. In an icon-only button, put the name on the button with `aria-label` and keep the icon decorative, so it is not read twice.
 
-| Context | Usage | Why |
-|---------|-------|-----|
-| Inline text | `<Icon data={save} />` | Auto-sizes to 1.5em, negative margins for optical alignment |
-| Flex/Button | `<Icon data={save} size="md" />` | Fixed size from tokens, no margins (layout via flex gap) |
-
-The `size` prop removes negative margins, giving full control to your layout system.
-
-<Canvas of={Stories.InlineWithText} />
+<Canvas of={Stories.DecorativeAndSemantic} />
 
 ## Accessibility
 
 - An icon without a `title` is decorative. It gets `aria-hidden`, so a screen reader skips it.
 - An icon with a `title` gets the `img` role and is named by that title. Use this when the icon carries meaning that the text beside it does not.
+- Icon is not focusable and has no keyboard behaviour.
 - An icon alone in a button has no text, so give the button an `aria-label`.
 - The icon takes `currentColor`, so its contrast follows the text colour around it. A `color` you set yourself needs enough contrast against the background.
+- Colour alone does not reach a screen reader, so an icon whose colour shows a state, such as an error, needs text or a `title` saying so.
+
+## Related components
+
+- [`Button`](?path=/docs/beta-inputs-button--docs) takes icons as children and sizes them.
 
 </PlatformTabs>

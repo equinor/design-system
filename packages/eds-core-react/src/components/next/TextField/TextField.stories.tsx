@@ -318,7 +318,7 @@ export const FullExample: StoryFn<TextFieldProps> = () => (
     helperMessage="Helper Message"
     labelInfo="This field accepts decimal values for currency amounts."
     startText="NOK"
-    endAdornment={<Icon data={money} />}
+    endAdornment={<Icon data={money} size="md" />}
   />
 )
 FullExample.storyName = 'Full Example'
