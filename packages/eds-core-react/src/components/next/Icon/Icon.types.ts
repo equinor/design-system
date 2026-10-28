@@ -19,7 +19,10 @@ export type IconProps = {
    * When not set, the icon is `--eds-spacing-xl`, the same as `size="xl"`.
    */
   size?: IconSize
-  /** Ref to the rendered `svg` element */
+  /**
+   * Ref to the SVG element.
+   * @ignore
+   */
   ref?: Ref<SVGSVGElement>
 } & Omit<SVGProps<SVGSVGElement>, 'color'>
 

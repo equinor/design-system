@@ -2,15 +2,25 @@
 
 import { Meta, Primary, Controls, Canvas } from '@storybook/addon-docs/blocks'
 import * as Stories from './Icon.stories'
-import { Links } from './../../../../.storybook/components'
+import { Links, PlatformTabs } from './../../../../.storybook/components'
+import MobileDocs from '@equinor/eds-mobile-components/docs/Icon.mdx'
 
 <Meta of={Stories} />
 
 # Icon
 
-Icon renders an icon from `@equinor/eds-icons` as an SVG, on its own or next to text.
+Icon shows a small symbol, so a button, a label or a line of text can carry a visual cue.
 
 **Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+
+<PlatformTabs mobile={<>
+  <Links
+    documentationUrl="https://eds.equinor.com/docs/Next/components/data-display/icon"
+    sourceUrl="https://github.com/equinor/design-system/blob/main/packages/eds-mobile-components/src/components/Icon/Icon.tsx"
+    npmUrl="https://www.npmjs.com/package/@equinor/eds-mobile-components"
+  />
+  <MobileDocs />
+</>}>
 
 <Links
   documentationUrl="https://eds.equinor.com/docs/Next/components/data-display/icon"
@@ -23,7 +33,7 @@ Icon renders an icon from `@equinor/eds-icons` as an SVG, on its own or next to 
 - Is `--eds-spacing-xl` by default, the icon size in the EDS Assets Figma file, whatever the size of the text around it.
 - Takes its size from the spacing token of the same name, so `size="md"` is the `spacing-md` variable bound in Figma.
 - Follows the density of its parent element, so it grows or shrinks with `data-density`.
-- Inherits the text colour through `currentColor`, so it matches the text it sits next to.
+- Takes the colour of the surrounding text by default, and `color` overrides it.
 - Is sized by the component when used inside Button, Chip or a standalone Link, so the `size` prop has no effect there.
 
 <Canvas of={Stories.Overview} />
@@ -37,7 +47,9 @@ npm install @equinor/eds-core-react@beta
 ```tsx
 import { Icon } from '@equinor/eds-core-react/next'
 
-<Icon data={save} />
+import { save } from '@equinor/eds-icons'
+
+;<Icon data={save} title="Save" />
 ```
 
 ## Props and playground
@@ -48,7 +60,6 @@ import { Icon } from '@equinor/eds-core-react/next'
 ## Examples
 
 ### Explicit sizes
-
 
 Each size is the spacing token of the same name. Without `size`, the icon is `xl`. To choose a size, use the spacing variable the icon is bound to in Figma. There is no fixed size per text size: Button pairs label md with `lg`, Chip and Link pair it with `md`.
 
@@ -64,7 +75,6 @@ Each size is the spacing token of the same name. Without `size`, the icon is `xl
 | 5xl   | `--eds-spacing-5xl` | 48px        |
 | 6xl   | `--eds-spacing-6xl` | 64px        |
 | 7xl   | `--eds-spacing-7xl` | 80px        |
-      
 
 <Canvas of={Stories.ExplicitSizes} />
 
@@ -100,12 +110,15 @@ Without `title` an icon is decorative and gets `aria-hidden`. With `title` it ge
 
 ## Accessibility
 
-- Without `title`, the icon is decorative. It gets `aria-hidden`, so screen readers skip it. Use this when visible text next to it says the same.
-- With `title`, the icon gets the `img` role and its title as accessible name. Use this when the icon carries meaning that no text gives.
+- An icon without a `title` is decorative. It gets `aria-hidden`, so a screen reader skips it.
+- An icon with a `title` gets the `img` role and is named by that title. Use this when the icon carries meaning that the text beside it does not.
 - Icon is not focusable and has no keyboard behaviour.
-- In an icon-only button, the button carries the name with `aria-label`, and the icon stays decorative. A `title` on the icon as well would be read twice.
+- An icon alone in a button has no text, so give the button an `aria-label`.
+- The icon takes `currentColor`, so its contrast follows the text colour around it. A `color` you set yourself needs enough contrast against the background.
 - Colour alone does not reach a screen reader, so an icon whose colour shows a state, such as an error, needs text or a `title` saying so.
 
 ## Related components
 
 - [`Button`](?path=/docs/eds-2-0-beta-inputs-button--docs) takes icons as children and sizes them.
+
+</PlatformTabs>

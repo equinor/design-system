@@ -14,7 +14,7 @@ let cachedRaw: string | null = null
 let cachedPalettes: TokenPalette[] = EMPTY_PALETTES
 
 function getSnapshot(): TokenPalette[] {
-  const next = getSimulationPalettes() // [] during SSR (window guard)
+  const next = getSimulationPalettes() ?? EMPTY_PALETTES // null during SSR
   const raw = JSON.stringify(next) // stable ref unless content changed
   if (raw === cachedRaw) return cachedPalettes
   cachedRaw = raw
