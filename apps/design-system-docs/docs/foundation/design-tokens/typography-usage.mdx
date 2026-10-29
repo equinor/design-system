@@ -68,6 +68,13 @@ and a `label` or `body` row without a weight uses `normal`.
 Key figures can use Inter's tabular figures, where every digit has the same width, so a value that
 updates does not shift sideways.
 
+Here is an overview page set with rows from the table: the app name in `label.xl`, the page title
+in `header.4xl`, the ingress in `body.xl`, key figures in `label.3xl` with tabular figures and
+their labels in `label.sm`, a section heading in `header.3xl`, and running text in `body.lg`. The
+gaps between the elements frame the example and are not spacing guidance.
+
+<StoryCanvas of="Typography/PageComposition" showLink />
+
 ## Setting font size and line height together
 
 Take the font size and the line height from the same role and step:
@@ -84,6 +91,12 @@ the paragraph's line height, so a caption ends up with the leading of running te
 such as a `label.sm` size with a `label.md` line height, breaks the rhythm in the same way, just less
 visibly.
 
+Both captions below sit in running text set in `body.lg`. The first takes its font size and line
+height from `label.sm`. The second sets only the font size, so it inherits the line height of the
+running text. The dashed outline shows the line box of each caption:
+
+<StoryCanvas of="Typography/AlwaysSetThePair" showLink />
+
 ## Building hierarchy
 
 Reach for size first, then weight, then colour, and change as little as you need to:
@@ -98,50 +111,7 @@ Here is a row in a list of wells, with three levels of text:
 
 <DensitySwitch>
 
-<div
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 'var(--eds-spacing-xs)',
-    maxWidth: 420,
-    padding: 'var(--eds-spacing-md)',
-    border: '1px solid var(--eds-border-non-interactive-neutral-default)',
-    borderRadius: 'var(--eds-corner-radius-rounded)',
-    background: 'var(--eds-background-surface)',
-    color: 'var(--eds-text-primary)',
-    fontFamily: 'var(--eds-font-family-ui)',
-  }}
->
-  <span
-    style={{
-      fontSize: 'var(--eds-typography-label-lg-font-size)',
-      lineHeight: 'var(--eds-typography-label-lg-line-height)',
-      fontWeight: 'var(--eds-font-weight-medium)',
-    }}
-  >
-    31/2-A-14
-  </span>
-  <span
-    style={{
-      fontSize: 'var(--eds-typography-body-md-font-size)',
-      lineHeight: 'var(--eds-typography-body-md-line-height)',
-      fontWeight: 'var(--eds-font-weight-normal)',
-    }}
-  >
-    Producing. Pressure has been within range since the valve on the north manifold was
-    replaced.
-  </span>
-  <span
-    style={{
-      fontSize: 'var(--eds-typography-label-sm-font-size)',
-      lineHeight: 'var(--eds-typography-label-sm-line-height)',
-      fontWeight: 'var(--eds-font-weight-normal)',
-      color: 'var(--eds-text-secondary)',
-    }}
-  >
-    Inspected two weeks ago
-  </span>
-</div>
+<StoryCanvas of="Typography/Hierarchy" showLink />
 
 </DensitySwitch>
 
@@ -164,6 +134,11 @@ Here is a row in a list of wells, with three levels of text:
 
 The name and the date stay on one line, so they are `label`. The status can wrap, so it is `body`,
 even though it sits between them in the hierarchy.
+
+Here is the same paragraph in `label.md` and in `body.md`. The font size is the same, and `body.md`
+has more line height, so the eye can find the next line in a block of text:
+
+<StoryCanvas of="Typography/LabelVersusBody" showLink />
 
 ## Heading levels
 
@@ -195,6 +170,23 @@ Here a section heading on an overview page is set at the size of a page title, a
   font-weight: var(--eds-font-weight-medium);
 }
 ```
+
+Both headings below are `h2` elements. The first is at `header.3xl`, the step that goes with an
+`h2`, and the second is on an overview page, set with the CSS above:
+
+<StoryCanvas of="Typography/HeadingLevelVersusSize" showLink />
+
+## Density
+
+Let density resize text, with `data-density` on a wrapper, and leave the typography tokens as they
+are. Here is the row from [building hierarchy](#building-hierarchy) in all three densities. The
+markup is the same in each, and only the attribute on the wrapper changes:
+
+<StoryCanvas of="Typography/Density" showLink />
+
+To fit a dense view, use Compact rather than a smaller step, because a smaller step reimplements
+Compact and drifts from every other dense view in the product.
+[Density on the overview](./typography.mdx#density) explains how each density moves the steps.
 
 ## Line length
 
