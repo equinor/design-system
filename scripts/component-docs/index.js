@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
-const { Project } = require('ts-morph')
 const { rootDir } = require('./config')
+const { createProject } = require('./project')
 const { DocsError, fail } = require('./errors')
 const { discoverComponents } = require('./locate')
 const { buildPages } = require('./build')
@@ -12,7 +12,7 @@ function generate(args) {
   const check = args.includes('--check')
   const named = args.filter((a) => !a.startsWith('--'))
   const components = named.length ? named : discoverComponents()
-  const project = new Project({ skipAddingFilesFromTsConfig: true })
+  const project = createProject()
 
   const stale = []
   for (const component of components) {

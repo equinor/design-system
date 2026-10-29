@@ -1,7 +1,8 @@
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { TextArea } from '.'
 import type { TextAreaProps } from '.'
-import { Stack } from './../../../../.storybook/components'
+import { ExampleLabel, Stack } from './../../../../.storybook/components'
+import page from './TextArea.docs.mdx'
 
 const meta: Meta<typeof TextArea> = {
   title: 'Beta/Inputs/TextArea',
@@ -23,7 +24,7 @@ const meta: Meta<typeof TextArea> = {
     rows: {
       control: 'number',
       description:
-        'Native HTML attribute. Sets the initial height and acts as the minimum — the textarea starts here and grows as the user types. Use `maxRows` to cap the growth.',
+        'Native HTML attribute. Sets the initial height and acts as the minimum: the textarea starts here and grows as the user types. Use `maxRows` to cap the growth.',
       table: {
         category: 'Core',
         defaultValue: { summary: '2 (browser default)' },
@@ -48,7 +49,7 @@ const meta: Meta<typeof TextArea> = {
     indicator: {
       control: 'text',
       description:
-        'Indicator text shown after label, e.g. "(Required)" or "(Optional)"',
+        'Text shown after the label to mark the field as required or optional, for example "(Required)". It is only visible text and does not make the field required.',
       table: { category: 'Label' },
     },
     description: {
@@ -90,7 +91,8 @@ const meta: Meta<typeof TextArea> = {
     },
     required: {
       control: 'boolean',
-      description: 'Sets HTML required attribute for form validation',
+      description:
+        'Marks the field as required for assistive technology and form validation. It shows no visible marker, so add an `indicator` as well.',
       table: { category: 'States', defaultValue: { summary: 'false' } },
     },
     className: {
@@ -118,22 +120,9 @@ const meta: Meta<typeof TextArea> = {
   },
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.
-
-\`\`\`bash
-npm install @equinor/eds-core-react@beta
-\`\`\`
-
-\`\`\`tsx
-import { TextArea } from '@equinor/eds-core-react/next'
-\`\`\`
-
-TextArea is a complete form field with built-in label, description, and helper message support.
-
-It **auto-grows by default** as the user types. Use \`rows\` to set the initial height and \`maxRows\` to cap how tall it can grow before becoming scrollable.
-        `,
+      page,
+      source: {
+        excludeDecorators: true,
       },
     },
   },
@@ -158,6 +147,20 @@ Introduction.args = {
   helperMessage: 'Helper Message',
   rows: 3,
 }
+
+export const Overview: StoryFn<TextAreaProps> = () => (
+  <>
+    <TextArea label="Message" placeholder="Write a message" rows={3} />
+    <TextArea
+      label="Feedback"
+      description="Tell us what we can improve"
+      helperMessage="Do not include personal details"
+      maxLength={200}
+      showCharacterCount
+      rows={3}
+    />
+  </>
+)
 
 export const FullField: StoryFn<TextAreaProps> = () => (
   <TextArea
@@ -203,30 +206,59 @@ export const AutoGrow: StoryFn<TextAreaProps> = () => (
     />
   </>
 )
-AutoGrow.storyName = 'Auto-grow & maxRows'
 AutoGrow.parameters = {
   docs: {
     description: {
       story:
-        'TextArea auto-grows as the user types. `rows` sets the initial height (acts as minimum). `maxRows` caps the growth — beyond it the textarea scrolls. Set both to the same value for a fixed-height textarea.',
+        'TextArea grows as the user types. `rows` sets the starting height, which is also the minimum. `maxRows` caps the growth, and beyond it the textarea scrolls. Set both to the same value for a fixed height.',
+    },
+  },
+}
+
+export const Required: StoryFn<TextAreaProps> = () => (
+  <>
+    <TextArea
+      label="Message"
+      required
+      placeholder="Required, no marker"
+      rows={3}
+    />
+    <TextArea
+      label="Feedback"
+      required
+      indicator="(Required)"
+      placeholder="Required, with a marker"
+      rows={3}
+    />
+  </>
+)
+Required.parameters = {
+  docs: {
+    description: {
+      story:
+        'The `required` prop is what makes a field required: a form cannot be submitted while it is empty, and assistive technology announces it. It shows no marker on its own, so add an `indicator` such as "(Required)" to show it.',
     },
   },
 }
 
 export const WithIndicator: StoryFn<TextAreaProps> = () => (
   <>
-    <TextArea label="Notes" placeholder="No indicator" rows={3} />
-    <TextArea
-      label="Comments"
-      indicator="(Required)"
-      required
-      placeholder="Required field"
-      rows={3}
-    />
     <TextArea
       label="Additional info"
       indicator="(Optional)"
       placeholder="Optional field"
+      rows={3}
+    />
+    <TextArea
+      label="Comments"
+      indicator="(Recommended)"
+      placeholder="Recommended field"
+      rows={3}
+    />
+    <TextArea
+      label="Summary"
+      indicator="(Max 500 characters)"
+      placeholder="Short summary"
       rows={3}
     />
   </>
@@ -235,7 +267,7 @@ WithIndicator.parameters = {
   docs: {
     description: {
       story:
-        'Use `indicator` to show text like "(Required)" or "(Optional)" next to the label. The `required` prop sets the HTML required attribute for form validation — these are separate concerns.',
+        'The `indicator` is plain text next to the label, so it can say anything, such as "(Optional)" or "(Recommended)". It does not make the field required, use `required` for that.',
     },
   },
 }
@@ -272,6 +304,14 @@ export const States: StoryFn<TextAreaProps> = () => (
     />
   </>
 )
+States.parameters = {
+  docs: {
+    description: {
+      story:
+        'An invalid field shows the error styling. A disabled field cannot be focused or edited. A read only field keeps its value visible and selectable, but it cannot be edited.',
+    },
+  },
+}
 
 export const WithCharacterCount: StoryFn<TextAreaProps> = () => (
   <>
@@ -310,7 +350,7 @@ WithCharacterCount.parameters = {
 export const DensityModes: StoryFn<TextAreaProps> = () => (
   <div style={{ display: 'flex', gap: '2rem' }}>
     <div data-density="spacious" style={{ width: '320px' }}>
-      <h3 style={{ marginBottom: '1rem' }}>Spacious</h3>
+      <ExampleLabel>Spacious</ExampleLabel>
       <Stack>
         <TextArea
           label="Notes"
@@ -321,7 +361,7 @@ export const DensityModes: StoryFn<TextAreaProps> = () => (
       </Stack>
     </div>
     <div data-density="comfortable" style={{ width: '320px' }}>
-      <h3 style={{ marginBottom: '1rem' }}>Comfortable</h3>
+      <ExampleLabel>Comfortable</ExampleLabel>
       <Stack>
         <TextArea
           label="Notes"
