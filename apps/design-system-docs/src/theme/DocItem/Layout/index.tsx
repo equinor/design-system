@@ -96,7 +96,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   const docTOC = useDocTOC()
   const { metadata, frontMatter } = useDoc()
 
-  // Component and foundation docs render a full-width hero band (title + lead)
+  // Component, foundation and roadmap docs render a full-width hero band (title + lead)
   // above the standard three-column doc body. Gated on `hide_title` so the
   // /components landing and the frozen 2.0.0-beta foundation pages, which still
   // carry their title in the markdown, keep their own layouts, and on the
