@@ -9,7 +9,8 @@
     "packages/eds-cli": {
       "release-type": "node",
       "package-name": "@equinor/eds-cli",
-      "component": "eds-cli"
+      "component": "eds-cli",
+      "initial-version": "0.1.0"
     },
     "packages/eds-core-react": {
       "release-type": "node",

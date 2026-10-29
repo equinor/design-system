@@ -11,14 +11,16 @@ permissions:
 on:
   workflow_dispatch:
     inputs:
+      # latest by default: npx @equinor/eds-cli only finds versions on latest,
+      # and the 0.x version already says the CLI is not stable yet.
       npm-tag:
-        description: 'Tag for npm package (next | latest)'
+        description: 'Tag for npm package (latest | next)'
         required: true
         type: choice
         options:
-          - next
           - latest
-        default: 'next'
+          - next
+        default: 'latest'
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   NODE_VERSION: '24.22.1'
