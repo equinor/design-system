@@ -46,11 +46,13 @@ Each component has:
 
 ### 2. Install Beta Version
 
-To actually use these components in your application, install the beta version:
+To use these components in your application, install the beta versions of the components and the design tokens:
 
 ```bash
-npm install @equinor/eds-core-react@beta
+npm install @equinor/eds-core-react@beta @equinor/eds-tokens@beta
 ```
+
+The tokens need their own install, because `@equinor/eds-core-react@beta` depends on the 2.x line of `@equinor/eds-tokens`.
 
 ### 3. Load Fonts
 
@@ -70,11 +72,7 @@ Import component styles separately in your application entry point (this is impo
 import '@equinor/eds-core-react/next/index.css'
 ```
 
-The components that have moved to the redefined design tokens read them from `@equinor/eds-tokens@beta`, which this stylesheet does not load. Install that package and import its bundle as well:
-
-```bash
-npm install @equinor/eds-tokens@beta
-```
+The components that have moved to the new token names read them from the `@equinor/eds-tokens@beta` bundle, which this stylesheet does not load. Import that bundle as well:
 
 ```tsx
 import '@equinor/eds-tokens/next/css/variables.css'

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
-import './using-the-tokens.css'
+import './UsingTheTokens.stories.css'
 
 <Meta title="EDS 2.0 (beta)/Foundation/Using the tokens" />
 
@@ -53,6 +53,7 @@ export const ResolutionTable = () => {
                 <td key={context.label}>
                   <div
                     className="sample"
+                    aria-hidden="true"
                     {...context.attributes}
                     ref={(element) => {
                       probes.current[column] = element
