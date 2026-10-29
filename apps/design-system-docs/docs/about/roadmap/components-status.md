@@ -6,14 +6,17 @@ hide_title: true
 description: 'The maturity of each component across Latest and the Beta.'
 ---
 
-{/* TODO: make this table automatic in future */}
+{/* TODO: make this table automatic in future. Storybook URLs are hand-written
+on purpose here (this page links to stories, it does not embed them), so the
+showLink / StoryCanvas convention does not apply. A future generator can
+derive the ids with Storybook's toId, as check-story-references.mjs does. */}
 
 How mature each component is, in **Latest** (`@equinor/eds-core-react` 2.x) and
 in the **Beta** (the 3.0.0 beta under `@equinor/eds-core-react/next`). A
 component often has a status in both at once: stable to use today in Latest,
 while its redesigned version is still being built for the Beta. Component names
 link to their documentation, and the Storybook column links to the live
-component in each version.
+component in each version where one exists.
 
 The table lists the components in the redesigned kit, so some stable Latest
 components outside that kit, such as Datepicker, Table, Pagination, Slider and
