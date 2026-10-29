@@ -180,7 +180,7 @@ States.parameters = {
 
 export const Density: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
-    {(['spacious', 'comfortable'] as const).map((density) => (
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
       <div key={density} data-density={density}>
         <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
@@ -200,7 +200,7 @@ Density.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }
@@ -209,7 +209,7 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '32px' }}>
     <div
       data-color-scheme="light"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      style={{ padding: '24px', background: 'var(--eds-background-surface)' }}
     >
       <Wrapper>
         <ExampleLabel>Light Mode</ExampleLabel>
@@ -222,10 +222,10 @@ export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
     </div>
     <div
       data-color-scheme="dark"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      style={{ padding: '24px', background: 'var(--eds-background-surface)' }}
     >
       <Wrapper>
-        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
+        <ExampleLabel style={{ color: 'var(--eds-text-primary)' }}>
           Dark Mode
         </ExampleLabel>
         <Checkbox label="Unchecked" />
