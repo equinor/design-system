@@ -49,7 +49,7 @@ export default function GettingStarted(): JSX.Element {
           title="See what's coming"
           subtitle="Follow the themes we're investing in and plan around what's ahead."
         >
-          <IconCardGrid columns={3}>
+          <IconCardGrid columns={2}>
             <IconCard
               icon={map}
               title="Roadmap"
