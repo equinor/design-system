@@ -20,7 +20,7 @@ const elements = [
 ]
 
 const meta: Meta<typeof Select> = {
-  title: 'EDS 2.0 (beta)/Inputs/Select',
+  title: 'Beta/Inputs/Select',
   component: Select,
   tags: ['beta'],
   args: {

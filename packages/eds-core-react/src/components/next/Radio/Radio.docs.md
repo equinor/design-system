@@ -33,5 +33,5 @@ Radio lets users choose exactly one option from a group of mutually exclusive ch
 
 ## Related components
 
-- [`Checkbox`](?path=/docs/eds-2-0-beta-inputs-selection-controls-checkbox--docs) is for choosing any number of options from a list.
-- [`Switch`](?path=/docs/eds-2-0-beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off straight away.
+- [`Checkbox`](?path=/docs/beta-inputs-selection-controls-checkbox--docs) is for choosing any number of options from a list.
+- [`Switch`](?path=/docs/beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off straight away.

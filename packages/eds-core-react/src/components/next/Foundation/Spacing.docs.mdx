@@ -1,0 +1,77 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as SpacingStories from './Spacing.stories'
+
+<Meta of={SpacingStories} />
+
+# Spacing
+
+Spacing in the beta tokens is a set of seventeen named steps, from `--eds-spacing-none` to `--eds-spacing-9xl`. You apply a step directly to `padding`, `gap` or `margin`, and the value it resolves to follows the density the element sits in. This page shows the steps working with the beta tokens from `@equinor/eds-tokens@beta` and how to use them in CSS. The values printed in the examples are read back from the browser, so they change when you switch the density.
+
+The tables of values and the guidance on choosing a step are on the documentation site, and this page does not repeat them:
+
+- [Spacing](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing): the steps, how to choose one, and density
+- [Using spacing](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing-usage): worked examples and a decision table per case
+- [The spacing scale](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing-scale): the primitive scale and how each density maps onto it
+- [Token reference](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing-reference): every spacing and corner-radius token in all three densities
+
+How to load the bundle, and which attributes it depends on, is explained in [Using the tokens](?path=/docs/beta-foundation-using-the-tokens--docs).
+
+## The steps
+
+The steps up to `xl` are for space inside and between components, and the eight from `2xl` up are for page layout. Switch the density and every step moves, while the names stay the same.
+
+<Canvas of={SpacingStories.Steps} />
+
+<Controls of={SpacingStories.Steps} />
+
+## Density
+
+Density is set with `data-density` on an ancestor, and every step inside it follows. `compact` and `relaxed` select the other two sets of values, and without the attribute you get Comfortable, because the bundle declares the Comfortable values on `:root`. The card below is rendered three times with the same CSS, and only the attribute on its container differs. The buttons are the beta Button, which reads the same tokens.
+
+<Canvas of={SpacingStories.Densities} />
+
+A subtree can set its own density, for example a compact table inside a Comfortable page. Inside a Compact subtree, `data-density="comfortable"` brings the Comfortable values back.
+
+## Using the steps in CSS
+
+Bind a step to the property you mean. The direction belongs to the property, so an element that needs more space at the sides than at the top uses a larger step on `padding-inline` than on `padding-block`. There is no separate token for each direction.
+
+<Canvas of={SpacingStories.InCss} />
+
+```css
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm); /* between related items in a group */
+  padding: var(--eds-spacing-md); /* the default container padding */
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.notice {
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+}
+
+.actions {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+}
+```
+
+## Corner radius
+
+Corner radius belongs to the same density set as spacing, so it changes with density as well. Use `--eds-corner-radius-none`, `--eds-corner-radius-rounded` and `--eds-corner-radius-pill`. The bundle also has `--eds-corner-radius-rounded-outer`, which exists so that Figma can draw focus rings. In CSS, an `outline` follows the element's `border-radius` and its `outline-offset` without help, so you do not need it. The documentation site [explains the details](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing#corner-radius-travels-with-spacing).
+
+<Canvas of={SpacingStories.CornerRadius} />
+
+<Controls of={SpacingStories.CornerRadius} />
+
+## Names to use in your CSS
+
+Each `--eds-spacing-*` name aliases a `--eds-density-spacing-*` name for the current density, which in turn aliases a step on the `--eds-primitives-spacing-*` scale. Only the first of the three is published. The density and primitive names are in the bundle so that the aliases can resolve in the browser, and they can be renamed or restructured in any release ([ADR-0028](https://github.com/equinor/design-system/blob/main/documentation/adr/0028-token-code-output-architecture-typography-roles.md), point 7). Corner radius works the same way: use `--eds-corner-radius-*`, not `--eds-density-corner-radius-*`.
+
+## Coming from the 2.x spacing tokens
+
+An earlier version of this page documented the 2.x spacing system: `--eds-selectable-space-*`, `--eds-container-space-*`, `--eds-page-space-*`, `--eds-generic-space-*` and their `-gap-` counterparts, chosen with attributes such as `data-selectable-space`, `data-space-proportions`, `data-horizontal-space` and `data-horizontal-gap`. None of these names or attributes exist in the beta bundle. The direction is now the CSS property you set, and a role such as container or page is now a step you choose. The [mapping table on the documentation site](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing#from-200-beta) gives the replacement for each 2.x name.
+
+Some beta components still read the 2.x names, and they move to the new ones one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). Until that is finished, the component stylesheet (`@equinor/eds-core-react/next/index.css`) also loads the 2.x bundle, in the `eds-tokens-legacy` layer below the beta tokens, so both sets of names resolve.

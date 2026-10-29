@@ -24,7 +24,7 @@
     "@docusaurus/plugin-content-docs": "^3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@docusaurus/theme-common": "^3.10.2",
-    "@easyops-cn/docusaurus-search-local": "^0.55.2",
+    "@easyops-cn/docusaurus-search-local": "^0.55.3",
     "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
@@ -34,8 +34,8 @@
     "@storybook/react": "^10.6.3",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "storybook": "^10.6.3"
   },
   "devDependencies": {
@@ -43,7 +43,7 @@
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
-    "@playwright/test": "^1.63.0",
+    "@playwright/test": "^1.64.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "~5.9.3"

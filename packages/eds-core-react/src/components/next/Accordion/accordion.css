@@ -20,18 +20,22 @@
         var(--eds-color-border-subtle);
     }
 
-    /* calc-size(auto, size) lets the height transition target intrinsic size;
-     * older engines fall back to instant open/close. */
-    & > details::details-content {
-      overflow: clip;
-      block-size: 0;
-      transition:
-        block-size var(--_transition-duration) ease,
-        content-visibility var(--_transition-duration) ease allow-discrete;
-    }
+    /* calc-size(auto, size) lets the height transition target intrinsic size.
+     * Gated on support: Safari 18.4+ has ::details-content but not calc-size(),
+     * so the [open] rule would be dropped and leave the panel at block-size: 0.
+     * Engines without it fall back to the native instant open/close. */
+    @supports (block-size: calc-size(auto, size)) {
+      & > details::details-content {
+        overflow: clip;
+        block-size: 0;
+        transition:
+          block-size var(--_transition-duration) ease,
+          content-visibility var(--_transition-duration) ease allow-discrete;
+      }
 
-    & > details[open]::details-content {
-      block-size: calc-size(auto, size);
+      & > details[open]::details-content {
+        block-size: calc-size(auto, size);
+      }
     }
 
     & > details > summary {

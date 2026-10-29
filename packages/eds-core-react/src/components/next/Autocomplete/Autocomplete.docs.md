@@ -1,6 +1,6 @@
 ## Summary
 
-Autocomplete is a text input that filters a list of options as the user types, so they can pick one from a long list. It can also let them add a value that is not in the list. Use [Select](?path=/docs/eds-2-0-beta-inputs-select--docs) instead for a short list that needs no search.
+Autocomplete is a text input that filters a list of options as the user types, so they can pick one from a long list. It can also let them add a value that is not in the list. Use [Select](?path=/docs/beta-inputs-select--docs) instead for a short list that needs no search.
 
 ## Features
 
@@ -27,4 +27,4 @@ Autocomplete is a text input that filters a list of options as the user types, s
 
 ## Related components
 
-- [`Select`](?path=/docs/eds-2-0-beta-inputs-select--docs) is a native select for a short list without search.
+- [`Select`](?path=/docs/beta-inputs-select--docs) is a native select for a short list without search.

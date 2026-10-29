@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
-import { deserializeState, serializeState } from './urlState'
+import { describe, expect, it, vi } from 'vitest'
+import { deserializeState, serializeState, shareableURL } from './urlState'
 
 const parse = (query: string) => deserializeState(new URLSearchParams(query))
 
@@ -60,5 +60,33 @@ describe('urlState palettes', () => {
       { name: 'Moss Green', baseColor: '206f77' },
       { name: 'Gray', baseColor: '696969' },
     ])
+  })
+})
+
+describe('shareableURL', () => {
+  const stubLocation = () =>
+    vi.stubGlobal('window', {
+      location: { origin: 'https://example.test', pathname: '/' },
+    })
+
+  it('builds the link from the state, not from the address bar', () => {
+    stubLocation()
+    const state = {
+      palettes: [{ id: 'x', name: 'Sunset', baseColor: 'oklch(0.7 0.1 50)' }],
+      activeTab: 'contrast' as const,
+      mode: 'dark' as const,
+    }
+
+    expect(shareableURL(state)).toBe(
+      `https://example.test/?${serializeState(state)}`,
+    )
+  })
+
+  it('is the bare page link when the state has nothing to write', () => {
+    stubLocation()
+
+    expect(shareableURL({ activeTab: 'system', mode: 'light' })).toBe(
+      'https://example.test/',
+    )
   })
 })

@@ -11,9 +11,15 @@
 
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
+const path = require('node:path')
 
 const { renderWeb, renderMobile } = require('./component-docs/render')
 const { DocsError } = require('./component-docs/errors')
+const { rootDir } = require('./component-docs/config')
+const {
+  toStorybookId,
+  assertStorybookLinks,
+} = require('./component-docs/storybook')
 
 const story = (name, extra = {}) => ({
   name,
@@ -128,6 +134,42 @@ describe('mobile page: Overview is not special', () => {
     )
     assert.ok(page.includes('### Overview'))
     assert.ok(page.includes('### Sizes'))
+  })
+})
+
+describe('web page: sub-components', () => {
+  const part = (name, props) => ({ name, props })
+  const prop = {
+    name: 'indicator',
+    optional: true,
+    type: 'string',
+    default: undefined,
+    description: 'Text shown after the label.',
+  }
+  const render = (subComponents) =>
+    renderWeb(
+      'Thing',
+      context([story('Overview'), story('Sizes', { caption: 'Two sizes.' })], {
+        subComponents,
+      }),
+    )
+
+  test('each part gets its own props table after the playground, before Examples', () => {
+    const page = render([part('Thing.Label', [prop])])
+    assert.ok(page.includes('### Thing.Label\n\n| Prop | Type |'))
+    assert.ok(page.indexOf('<Controls />') < page.indexOf('### Thing.Label'))
+    assert.ok(page.indexOf('### Thing.Label') < page.indexOf('## Examples'))
+  })
+
+  test('a part with no props of its own is left out', () => {
+    const page = render([part('Thing.Body', []), part('Thing.Label', [prop])])
+    assert.ok(!page.includes('Thing.Body'))
+    assert.ok(page.includes('### Thing.Label'))
+  })
+
+  test('a page without parts has no extra heading', () => {
+    const page = render([])
+    assert.ok(!page.includes('### Thing'))
   })
 })
 
@@ -313,6 +355,62 @@ describe('every example needs a caption', () => {
       (error) =>
         error instanceof DocsError &&
         error.message.includes('add a caption to `Sizes`'),
+    )
+  })
+})
+
+describe('Storybook links must point at a title that exists', () => {
+  const ids = new Set(['beta-inputs-button', 'beta-about'])
+  const page = (content) => ({
+    file: path.join(rootDir, 'Thing.docs.mdx'),
+    content,
+  })
+
+  test('derives the id from the title the way Storybook does', () => {
+    assert.equal(
+      toStorybookId('Beta/Inputs/Selection Controls/Checkbox'),
+      'beta-inputs-selection-controls-checkbox',
+    )
+    assert.equal(
+      toStorybookId('EDS 2.0 (beta)/Inputs/Button'),
+      'eds-2-0-beta-inputs-button',
+    )
+  })
+
+  test('passes docs and story links to existing titles', () => {
+    assertStorybookLinks(
+      page(
+        '[Button](?path=/docs/beta-inputs-button--docs) and [About](?path=/story/beta-about--docs)',
+      ),
+      ids,
+    )
+  })
+
+  test('checks a link that leaves out the story name', () => {
+    assert.throws(
+      () =>
+        assertStorybookLinks(
+          page('[About](?path=/docs/eds-2-0-beta-about)'),
+          ids,
+        ),
+      (error) =>
+        error instanceof DocsError &&
+        error.message.includes('`eds-2-0-beta-about`'),
+    )
+  })
+
+  test('fails on a link to a title that no longer exists, naming the line and id', () => {
+    assert.throws(
+      () =>
+        assertStorybookLinks(
+          page(
+            'Intro\n- [Button](?path=/docs/eds-2-0-beta-inputs-button--docs)',
+          ),
+          ids,
+        ),
+      (error) =>
+        error instanceof DocsError &&
+        error.message.includes('Thing.docs.mdx:2 `eds-2-0-beta-inputs-button`'),
     )
   })
 })

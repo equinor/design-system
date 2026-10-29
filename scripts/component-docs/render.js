@@ -211,7 +211,15 @@ function renderWeb(component, ctx) {
     featuresSection(ctx),
     `<Canvas of={Stories.${overview.name}} />`,
     usageSection(component, 'web', ctx),
-    section('Props and playground', '<Primary />\n<Controls />'),
+    section(
+      'Props and playground',
+      [
+        '<Primary />\n<Controls />',
+        ...(ctx.subComponents ?? [])
+          .filter((sub) => sub.props.length)
+          .map((sub) => `### ${sub.name}\n\n${renderPropsTable(sub.props)}`),
+      ].join('\n\n'),
+    ),
     examplesSection(component, 'web', examples),
     ...closingSections(ctx),
     ctx.hasMobile && '</PlatformTabs>',

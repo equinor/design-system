@@ -5,7 +5,7 @@ import { Switch } from './Switch'
 import type { SwitchProps } from './Switch.types'
 
 const meta: Meta<typeof Switch> = {
-  title: 'EDS 2.0 (beta)/Inputs/Selection Controls/Switch',
+  title: 'Beta/Inputs/Selection Controls/Switch',
   component: Switch,
   tags: ['beta'],
   argTypes: {

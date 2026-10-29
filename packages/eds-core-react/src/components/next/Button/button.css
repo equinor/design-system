@@ -102,12 +102,12 @@
     /* The icon is no taller than the label's line box, so flex centring
      * places it and it needs none of Icon's optical margins: the gap is the
      * only space between icon and label, as in Figma. The second selector
-     * outranks Icon's own [data-icon-size] rule, so Icon's size prop has no
+     * outranks Icon's own [data-size] rule, so Icon's size prop has no
      * effect inside a button. Icons inherit the label colour: Figma binds
      * --eds-icon-on-{emphasis,default}-{tone}, which resolve to the same
      * shades as the text tokens. */
     & > svg,
-    & > .eds-icon[data-icon-size] {
+    & > .eds-icon[data-size] {
       flex-shrink: 0;
       width: var(--_icon-size);
       height: var(--_icon-size);

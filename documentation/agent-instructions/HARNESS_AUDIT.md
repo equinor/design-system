@@ -102,6 +102,7 @@ Check that path-scoped rules covering the same intent in different harnesses tar
 | ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------ |
 | EDS 2.0 component code   | `eds-component.md` paths frontmatter | `react.instructions.md` + `ts.instructions.md` + `styling.instructions.md` `applyTo` |
 | Figma Code Connect files | `figma-component.md` paths           | `figma.instructions.md` `applyTo`                                                    |
+| Colour contrast          | `colour-contrast.md` paths           | `colour-contrast.instructions.md` `applyTo`                                          |
 | Global / markdown / TS   | (none)                               | `global-coding`, `markdown`, `ts` `applyTo`                                          |
 
 Mismatched globs are findings. Each rule's documented scope should also still hit real files (`find` returns results).

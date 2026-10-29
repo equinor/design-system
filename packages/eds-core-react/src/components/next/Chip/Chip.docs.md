@@ -1,6 +1,6 @@
 ## Summary
 
-Chip is a small button for a compact choice. It can be toggled, removed, or used to open a menu. Chip is interactive, so use [Badge](?path=/docs/eds-2-0-beta-data-display-badge--docs) instead for a label that nobody selects.
+Chip is a small button for a compact choice. It can be toggled, removed, or used to open a menu. Chip is interactive, so use [Badge](?path=/docs/beta-data-display-badge--docs) instead for a label that nobody selects.
 
 ## Features
 
@@ -30,4 +30,4 @@ const [selected, setSelected] = useState(false)
 
 ## Related components
 
-- [`Badge`](?path=/docs/eds-2-0-beta-data-display-badge--docs) labels content with a status or category and is not interactive.
+- [`Badge`](?path=/docs/beta-data-display-badge--docs) labels content with a status or category and is not interactive.

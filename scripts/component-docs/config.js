@@ -3,7 +3,7 @@ const path = require('path')
 const rootDir = path.resolve(__dirname, '../..')
 
 const BETA_CALLOUT =
-  '**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.'
+  '**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.'
 
 // Related components: omitted from the page when absent. Every other section
 // is required, see requiredSections per platform below.
@@ -14,6 +14,35 @@ const OPTIONAL_SIDECAR_SECTIONS = ['Related components']
 // `{component}Props` type lists the props, so Button.Icon reads IconButtonProps.
 const MOBILE_SUB_COMPONENTS = {
   Button: [{ name: 'Button.Icon', component: 'IconButton' }],
+}
+
+// The parts of a web compound component, such as Field.Label. Storybook's props
+// table covers only the main component, so each part gets its own table under
+// Props and playground, keyed by the parent. `component` is the name whose
+// `{component}Props` type lists the props. A part with no props of its own is
+// left out of the page.
+const WEB_SUB_COMPONENTS = {
+  Accordion: [
+    { name: 'Accordion.Item', component: 'AccordionItem' },
+    { name: 'Accordion.Header', component: 'AccordionHeader' },
+    { name: 'Accordion.Panel', component: 'AccordionPanel' },
+  ],
+  Banner: [
+    { name: 'Banner.Icon', component: 'BannerIcon' },
+    { name: 'Banner.Message', component: 'BannerMessage' },
+    { name: 'Banner.Actions', component: 'BannerActions' },
+  ],
+  Dialog: [
+    { name: 'Dialog.Header', component: 'DialogHeader' },
+    { name: 'Dialog.Title', component: 'DialogTitle' },
+    { name: 'Dialog.Content', component: 'DialogContent' },
+    { name: 'Dialog.Actions', component: 'DialogActions' },
+  ],
+  Field: [
+    { name: 'Field.Label', component: 'FieldLabel' },
+    { name: 'Field.Description', component: 'FieldDescription' },
+    { name: 'Field.HelperMessage', component: 'HelperMessage' },
+  ],
 }
 
 // Where each React Native props type is documented, for the "Also accepts all
@@ -63,6 +92,7 @@ module.exports = {
   BETA_CALLOUT,
   OPTIONAL_SIDECAR_SECTIONS,
   MOBILE_SUB_COMPONENTS,
+  WEB_SUB_COMPONENTS,
   REACT_NATIVE_DOCS,
   SIDECAR_METADATA_KEYS,
   DOCS_SITE,

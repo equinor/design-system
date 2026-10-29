@@ -27,7 +27,7 @@ const elements = [
 ]
 
 const meta: Meta<typeof Autocomplete> = {
-  title: 'EDS 2.0 (beta)/Inputs/Autocomplete',
+  title: 'Beta/Inputs/Autocomplete',
   component: Autocomplete,
   tags: ['beta'],
   args: {

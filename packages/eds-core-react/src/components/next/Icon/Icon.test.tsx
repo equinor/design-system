@@ -49,23 +49,17 @@ describe('Icon (next)', () => {
       expect(screen.getByTestId('eds-icon')).toHaveClass('eds-icon')
     })
 
-    it('sets data-icon-size attribute when size prop is provided', () => {
+    it('sets data-size attribute when size prop is provided', () => {
       render(<Icon data={save} size="lg" />)
-      expect(screen.getByTestId('eds-icon')).toHaveAttribute(
-        'data-icon-size',
-        'lg',
-      )
+      expect(screen.getByTestId('eds-icon')).toHaveAttribute('data-size', 'lg')
     })
 
-    it('does not set data-icon-size when size prop is not provided', () => {
+    it('does not set data-size when size prop is not provided', () => {
       render(<Icon data={save} />)
-      expect(screen.getByTestId('eds-icon')).not.toHaveAttribute(
-        'data-icon-size',
-      )
+      expect(screen.getByTestId('eds-icon')).not.toHaveAttribute('data-size')
     })
 
     it.each([
-      'xs',
       'sm',
       'md',
       'lg',
@@ -75,12 +69,10 @@ describe('Icon (next)', () => {
       '4xl',
       '5xl',
       '6xl',
+      '7xl',
     ] as const)('accepts size prop value: %s', (size) => {
       render(<Icon data={save} size={size} />)
-      expect(screen.getByTestId('eds-icon')).toHaveAttribute(
-        'data-icon-size',
-        size,
-      )
+      expect(screen.getByTestId('eds-icon')).toHaveAttribute('data-size', size)
     })
   })
 
@@ -200,11 +192,11 @@ describe('Icon (next)', () => {
       expect(icons).toHaveLength(3)
     })
 
-    it('renders inside Typography-like context (data-font-size)', () => {
+    it('renders inline with text', () => {
       render(
-        <div data-font-size="md">
+        <p>
           <Icon data={warning_filled} title="warning" /> Alert message
-        </div>,
+        </p>,
       )
       expect(screen.getByLabelText('warning')).toBeInTheDocument()
     })
@@ -237,8 +229,8 @@ describe('Icon (next)', () => {
         </div>,
       )
       const icons = screen.getAllByTestId('eds-icon')
-      expect(icons[0]).toHaveAttribute('data-icon-size', 'lg')
-      expect(icons[1]).not.toHaveAttribute('data-icon-size')
+      expect(icons[0]).toHaveAttribute('data-size', 'lg')
+      expect(icons[1]).not.toHaveAttribute('data-size')
     })
   })
 })

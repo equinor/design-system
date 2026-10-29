@@ -1,6 +1,6 @@
 ## Summary
 
-Select lets the user pick a single option from a list. It does not support selecting several. For a long list that people need to search, use [Autocomplete](?path=/docs/eds-2-0-beta-inputs-autocomplete--docs) instead.
+Select lets the user pick a single option from a list. It does not support selecting several. For a long list that people need to search, use [Autocomplete](?path=/docs/beta-inputs-autocomplete--docs) instead.
 
 ## Features
 
@@ -27,4 +27,4 @@ Select lets the user pick a single option from a list. It does not support selec
 
 ## Related components
 
-- [`Autocomplete`](?path=/docs/eds-2-0-beta-inputs-autocomplete--docs) lets the user type to filter a long list of options.
+- [`Autocomplete`](?path=/docs/beta-inputs-autocomplete--docs) lets the user type to filter a long list of options.

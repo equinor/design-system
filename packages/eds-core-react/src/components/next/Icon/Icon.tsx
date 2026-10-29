@@ -2,12 +2,11 @@ import { forwardRef, useId } from 'react'
 import type { IconProps } from './Icon.types'
 
 /**
- * Icon component for EDS 2.0
+ * Icon component for the beta components (/next)
  *
  * Features:
- * - Automatic sizing from parent's data-font-size via --eds-typography-icon-size
- * - Dynamic fallback sizing (1.5em) when no tokens are set
- * - Explicit size prop for standalone usage
+ * - Default size --eds-spacing-xl, independent of the surrounding text
+ * - Explicit size prop from the spacing token of the same name
  * - WCAG 2.1 AA accessible with optional title for semantic icons
  *
  * @example
@@ -15,10 +14,8 @@ import type { IconProps } from './Icon.types'
  * import { Icon } from '@equinor/eds-core-react/next'
  * import { save } from '@equinor/eds-icons'
  *
- * // Auto-sized from parent's data-font-size
- * <div data-font-size="md">
- *   <Icon data={warning} /> Error message
- * </div>
+ * // Default size (spacing-xl)
+ * <Icon data={warning} />
  *
  * // Explicit size for standalone usage
  * <Icon data={save} size="lg" />
@@ -60,7 +57,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
       fill={color}
       className={classes}
       data-testid="eds-icon"
-      data-icon-size={size}
+      data-size={size}
       {...accessibilityProps}
       {...rest}
     >

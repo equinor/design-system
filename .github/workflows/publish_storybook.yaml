@@ -94,16 +94,6 @@ jobs:
         run: |
           echo "=== Downloaded files ==="
           ls -la packages/eds-core-react/storybook-build/
-          echo ""
-          echo "=== Checking index.json for Foundation/Spacing ==="
-          if grep -q "foundation-spacing--selectable-padding" packages/eds-core-react/storybook-build/index.json; then
-            echo "✅ Foundation/Spacing SelectablePadding FOUND in index.json"
-          else
-            echo "❌ Foundation/Spacing SelectablePadding NOT FOUND in index.json"
-          fi
-          echo ""
-          echo "=== All Foundation/Spacing entries ==="
-          grep -o '"foundation-spacing--[^"]*"' packages/eds-core-react/storybook-build/index.json || echo "No Foundation/Spacing entries found"
 
       - name: Deploy the website
         id: deploy-website
