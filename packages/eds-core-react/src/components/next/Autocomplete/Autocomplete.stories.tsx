@@ -296,7 +296,7 @@ export const Overview: StoryFn<AutocompleteProps> = () => (
       placeholder="Search elements"
     />
     <Autocomplete
-      label="Element"
+      label="Element (invalid)"
       options={elements}
       placeholder="Search elements"
       invalid
@@ -368,7 +368,7 @@ States.parameters = {
   docs: {
     description: {
       story:
-        'An autocomplete is either at its default, disabled, or read only. A disabled field cannot be focused or changed and is left out of form submission. A read only field keeps its value and can be focused, but cannot be changed and does not open its list.',
+        'An autocomplete can be default, disabled or read only. A disabled field cannot be focused or changed and is left out of form submission. A read only field keeps its value and can be focused, but cannot be changed and does not open its list.',
     },
   },
 }

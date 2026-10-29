@@ -97,14 +97,17 @@ export const Introduction: Story = {
 export const Overview: Story = {
   render: () => {
     const [selected, setSelected] = useState(true)
+    const [deletable, setDeletable] = useState(true)
     return (
       <Wrapper>
         <Chip selected={selected} onClick={() => setSelected(!selected)}>
           Selectable
         </Chip>
-        <Chip tone="accent" onDelete={() => {}}>
-          Deletable
-        </Chip>
+        {deletable && (
+          <Chip tone="accent" onDelete={() => setDeletable(false)}>
+            Deletable
+          </Chip>
+        )}
         <Chip variant="outlined" dropdown>
           Dropdown
         </Chip>

@@ -20,7 +20,7 @@ Select lets the user pick a single option from a list. It does not support selec
 - Select renders a native `<select>`, so the browser provides focus, keyboard behaviour and the option list.
 - `label` renders a `<label>` tied to the select. Without a `label`, pass `aria-label` so the select has a name.
 - `description` and `helperMessage` are linked to the select with `aria-describedby`, so a screen reader reads them after the label.
-- `invalid` sets `aria-invalid` and shows an error icon, but does not block form submission, so use `required` for that. Use `helperMessage` to say what needs fixing, since the colour and icon alone do not explain it.
+- `invalid` sets `aria-invalid` and shows an error icon, but does not block form submission, so use `required` for that. Use `helperMessage` to say what needs fixing, since the colour and icon alone do not explain it. The helper message is announced as an alert when it appears.
 - A native `<select>` has no `readonly` attribute, so `readOnly` sets `aria-readonly` and blocks every key except Tab and Shift. The select stays focusable.
 - `indicator` is shown, and read by a screen reader, as part of the label, but it does not mark the select as required. Set `required` on the select as well, so assistive technology and form validation know the field is required.
 - `disabled` takes the select out of the tab order and out of form submission.

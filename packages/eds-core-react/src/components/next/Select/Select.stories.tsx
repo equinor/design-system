@@ -216,7 +216,7 @@ export const Overview: StoryFn<SelectProps> = () => (
   <>
     <Select label="Element" options={elements} />
     <Select
-      label="Element"
+      label="Element (invalid)"
       options={elements}
       invalid
       helperMessage="Choose an element"
@@ -226,7 +226,11 @@ export const Overview: StoryFn<SelectProps> = () => (
 
 export const States: StoryFn<SelectProps> = () => (
   <>
-    <Select label="Default" options={elements} defaultValue="Copper" />
+    <Select
+      label="Default"
+      options={elements}
+      placeholder="Select an element…"
+    />
     <Select
       label="Disabled"
       options={elements}
@@ -246,7 +250,7 @@ States.parameters = {
   docs: {
     description: {
       story:
-        'A select is either at its default, disabled, or read only. A disabled select cannot be focused and is left out of form submission. A read only select stays focusable and, when it has a `name`, still submits its value. A native `<select>` has no `readonly` attribute, so `readOnly` blocks changes itself and sets `aria-readonly`.',
+        'A select can be default, disabled or read only. A disabled select cannot be focused and is left out of form submission. A read only select stays focusable and, when it has a `name`, still submits its value. A native `<select>` has no `readonly` attribute, so `readOnly` blocks changes itself and sets `aria-readonly`.',
     },
   },
 }

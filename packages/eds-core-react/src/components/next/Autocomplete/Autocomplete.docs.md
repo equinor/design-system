@@ -23,7 +23,7 @@ Autocomplete is a text input that filters a list of options as the user types, s
 - A hidden status region announces "No results" or the number of results as the user types.
 - `label` renders a `<label>` tied to the input. Without a `label`, pass `aria-label` so the input has a name.
 - `description` and `helperMessage` are linked with `aria-describedby`. With `invalid`, the helper message is announced as an alert when it appears.
-- The clear button is named "Clear" and the loading spinner "Loading". Use `clearLabel` to translate the button name.
+- The clear button is named "Clear" and the loading spinner "Loading". Use `clearLabel` to translate the button name, and `loadingText` to translate the loading announcement and the text in the list. The spinner's name is not translated.
 
 ## Related components
 
