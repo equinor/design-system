@@ -12,6 +12,15 @@
   }
 }
 
+/* Below 997px the column has no top padding, so the version note that opens it
+ * would sit flush under the hero band. The note takes the same 1rem as margin.
+ * The child chain is the `.row` > `.col` that follows the band. */
+@media (width <= 996px) {
+  .docHero + * > * > [role='note'] {
+    margin-top: 1rem;
+  }
+}
+
 /* ======================================
  * Component and foundation doc hero band
  * Full-bleed banner (title + lead) that fills the main area to the right of the
