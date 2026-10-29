@@ -4,8 +4,8 @@
  * 1. Default doc card (.theme-doc-markdown) — all versions.
  * 2. Landing layout (.docs-landing) — MDX docs that opt in via <DocsLanding>.
  * 3. Hero-band docs: container chrome around the hero band the DocItem/Layout
- *    swizzle renders on component and foundation docs (redesigned versions
- *    only).
+ *    swizzle renders on component, foundation and roadmap docs (redesigned
+ *    versions only).
  * 4. Colour foundation pages: the generated token reference tables and the
  *    usage-page links, written straight into the colour MDX.
  * 5. Scrollable tables: edge shadows on tables wider than the content column
@@ -187,10 +187,10 @@ main:has(.docs-landing) .markdown > .docs-landing {
 }
 
 /* ======================================
- * 3. HERO-BAND DOCS (components and foundation)
+ * 3. HERO-BAND DOCS (components, foundation and roadmap)
  * Standard three-column layout (left sidebar + content + right TOC) plus the
- * full-width hero band the DocItem/Layout swizzle renders on component and
- * foundation docs. Only the container chrome is adjusted here; the band itself
+ * full-width hero band the DocItem/Layout swizzle renders on component,
+ * foundation and roadmap docs. Only the container chrome is adjusted here; the band itself
  * is styled in theme/DocItem/Layout/styles.module.css. The rules key on the
  * band being present rather than on the doc id, so a page the swizzle renders
  * without it (the /components landing, the frozen 2.0.0-beta foundation pages,
