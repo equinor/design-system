@@ -6,6 +6,7 @@
 export const font = {
   family: {
     header: 'Equinor',
+    mono: 'CommitMono',
     ui: 'Inter',
   },
   weight: {
