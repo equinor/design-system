@@ -49,7 +49,7 @@ Each package in the monorepo must be explicitly configured:
 
 We currently track these packages for releases:
 
-1. `@equinor/eds-cli` - Command-line lookup of the installed beta components and tokens, for AI agents (published with the `latest` tag by `publish_cli.yaml`)
+1. `@equinor/eds-cli` - Command-line lookup of the installed beta components and tokens, for AI agents (staged with the `latest` tag by `publish_cli.yaml`; a maintainer approves each version with `npm stage approve` before it goes live)
 2. `@equinor/eds-core-react` - Core React component library (stable)
 3. `@equinor/eds-core-react` (`/next` entry) - Beta components (published with `@beta` tag)
 4. `@equinor/eds-icons` - Icon library

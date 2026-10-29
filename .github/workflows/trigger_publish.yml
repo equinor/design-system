@@ -498,7 +498,8 @@ jobs:
           echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
 
   # Job 10b: Trigger CLI publish workflow
-  # Only runs if the Release Please manifest bumped eds-cli. The CLI is a
+  # Only runs if the Release Please manifest bumped eds-cli. publish_cli.yaml
+  # only stages the version; a maintainer approves it with 2FA. The CLI is a
   # regular 0.x package on `latest`, so `npx @equinor/eds-cli` gets it without
   # a tag, even though the components and tokens it reads are on `beta`.
   trigger-cli:
@@ -581,7 +582,7 @@ jobs:
 
           # Check each package's trigger result based on what was detected
           if [ "${{ needs.check-releases.outputs.cli }}" == "true" ]; then
-            echo "- ✅ **@equinor/eds-cli**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ **@equinor/eds-cli**: Publish workflow triggered. It stages the version, which goes live after a maintainer runs \`npm stage approve\`" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⏭️ **@equinor/eds-cli**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
           fi
