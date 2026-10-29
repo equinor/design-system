@@ -6,11 +6,11 @@
         "$type": "fontFamily",
         "$extensions": {
           "com.figma": {
-            "scopes": [
-              "ALL_SCOPES"
-            ],
-            "codeSyntax": {},
-            "hiddenFromPublishing": false
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--eds-primitives-font-family-commitmono)"
+            },
+            "hiddenFromPublishing": true
           }
         }
       },
