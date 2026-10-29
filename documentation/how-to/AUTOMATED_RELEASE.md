@@ -39,7 +39,7 @@ Guide for the automated release process in Equinor Design System using Release P
 
 7. **Announce release** - Post in `#eds-design-system` Slack channel
 
-### Beta Releases (EDS 2.0 / Next)
+### Beta Releases (`/next`)
 
 For components under development in the `/next` entry point:
 
@@ -53,7 +53,7 @@ For components under development in the `/next` entry point:
    - Beta changes update `src/components/next/CHANGELOG.md`, stable changes update `CHANGELOG.md`
 
 3. **Merge the release PR** → Publishes to `@equinor/eds-core-react@beta`
-   - All releases deploy to Storybook (beta components visible under "EDS 2.0")
+   - All releases deploy to Storybook, where the beta components have a section of their own
    - Users must install beta version to actually use the components
 
 4. **Test beta release**: `npm install @equinor/eds-core-react@beta`

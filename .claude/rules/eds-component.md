@@ -5,7 +5,7 @@ paths:
   - 'packages/eds-core-react/src/components/next/**/*.css'
 ---
 
-# EDS 2.0 Component Guidelines (path-scoped delta)
+# `/next` Component Guidelines (path-scoped delta)
 
 > The full component conventions live in [`AGENTS.md`](../../AGENTS.md): file structure, `forwardRef` pattern, named exports, JSDoc'd types, `eds-`-prefixed CSS with `@layer eds-components`, `--_` pseudo-private vars, `data-*` for variants, density via ancestor, testing with Jest + Testing Library + jest-axe.
 

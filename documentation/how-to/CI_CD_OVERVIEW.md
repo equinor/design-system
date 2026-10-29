@@ -94,11 +94,11 @@ New commits cancel older Checks runs for the same pull request or ref so superse
 
 The first asks whether a change reached the page. A PR that edits a `.ts` or `.tsx` file belonging to a component the `/next` barrel exports must also touch the page — that is the API and markup a consumer sees, down to the per-component `index.ts` barrels and hooks such as `Field/useFieldIds.ts`. Shared code under `/next`, currently `utils/`, counts as well, and the failure names it separately because the author is the one who knows which sections it reaches. Tests, stories, docs, snapshots, Code Connect files and CSS on its own do not count, because the page does not track colour, spacing or the type scale, and a class rename has to pass through the `.tsx` that applies it. A PR that marks itself breaking (`!` before the colon in the title, or a `BREAKING CHANGE:` footer) is held to the wider rule, every `/next` file bar the excluded ones. Dependabot is exempt: a bump drags lint fixes through component files and cannot label its own PR. The `skip-breaking-changes-doc` label waives the requirement, and using it leaves a warning annotation so a reviewer sees the claim. Replay the check against any PR with `pnpm run check:breaking-changes-doc -- --pr <number>`.
 
-The rule deliberately does not key on `!`. The page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it becomes the migration guide at graduation. Every beta changes the after side of that answer, and most of those changes are not marked breaking: nothing in `/next` is formally breaking until graduation, and a new component arrives as a plain `feat: add <Component>`. The page is not a changelog, though — going from one beta to the next belongs in the commit message and the PR description, not in a section.
+The rule deliberately does not key on `!`. The page answers one question per component, what someone using the 2.x component meets in the beta, and it becomes the migration guide at graduation. Every beta changes the after side of that answer, and most of those changes are not marked breaking: nothing in `/next` is formally breaking until graduation, and a new component arrives as a plain `feat: add <Component>`. The page is not a changelog, though — going from one beta to the next belongs in the commit message and the PR description, not in a section.
 
 The second check asks whether the page covers what `/next` publishes at all: every component exported from `packages/eds-core-react/src/components/next/index.ts` has a `## <Component>` section, every section still matches an export, and no section is just a heading. It reads two files, needs no token, and runs in the Checks workflow with `pnpm run check:breaking-changes-coverage`.
 
-Neither check reads the content. Whether a section is accurate and complete against EDS 1.0 stays a review job.
+Neither check reads the content. Whether a section is accurate and complete against the 2.x component stays a review job.
 
 ## Release Pipeline
 
@@ -234,5 +234,5 @@ npm publishing no longer uses an `NPM_TOKEN` secret — see [Trusted publishing 
 ## Related Documentation
 
 - [Automated Release Guide](./AUTOMATED_RELEASE.md) -- How Release Please works
-- [Beta Release Guide](./BETA_RELEASE_GUIDE.md) -- EDS 2.0 dual-channel release strategy
+- [Beta Release Guide](./BETA_RELEASE_GUIDE.md) -- dual-channel release strategy for the beta and the 2.x line
 - [Conventional Commits](./CONVENTIONAL_COMMITS.md) -- Commit message format

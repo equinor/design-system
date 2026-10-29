@@ -13,7 +13,7 @@ Claude Code automatically loads rules in `.claude/rules/` when working on matchi
 
 | Rule                 | Scope                                                           | Purpose                                         |
 | -------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
-| `eds-component.md`   | `packages/eds-core-react/src/components/next/**/*.{tsx,ts,css}` | EDS 2.0 component conventions (short reference) |
+| `eds-component.md`   | `packages/eds-core-react/src/components/next/**/*.{tsx,ts,css}` | `/next` component conventions (short reference) |
 | `figma-component.md` | `packages/eds-core-react/src/components/next/**/*.figma.tsx`    | Figma-to-code workflow with MCP tools           |
 | `colour-contrast.md` | `packages/eds-tokens/**`, `/next` component CSS                 | Contrast levels and foreground pairing          |
 | `advisor.md`         | General                                                         | Read-only code review guidelines                |

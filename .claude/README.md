@@ -36,7 +36,7 @@ Rules are loaded automatically based on YAML frontmatter `paths`:
 
 | Rule | Scope | Description |
 |------|-------|-------------|
-| `eds-component.md` | `/next/**/*.{tsx,ts,css}` | EDS 2.0 component conventions (short reference) |
+| `eds-component.md` | `/next/**/*.{tsx,ts,css}` | `/next` component conventions (short reference) |
 | `figma-component.md` | `/next/**/*.figma.tsx` | Figma-to-code workflow with MCP tools |
 | `advisor.md` | General | Read-only code review and architecture guidance |
 
