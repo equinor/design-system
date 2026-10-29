@@ -46,7 +46,7 @@ export default function GettingStarted(): JSX.Element {
           </IconCardGrid>
         </DocsSection>
         <DocsSection
-          title="See what's coming"
+          title="Where we're heading"
           subtitle="Follow the themes we're investing in and plan around what's ahead."
         >
           <IconCardGrid columns={2}>
