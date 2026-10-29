@@ -74,9 +74,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           disabled={disabled}
           className={rootClassName}
           style={style}
-          data-color-appearance="accent"
-          data-selectable-space="md"
-          data-space-proportions="squished"
+          data-tone="accent"
         >
           {checkboxInput}
           <Field.Label htmlFor={inputId} indicator={indicator}>
@@ -91,7 +89,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         className={rootClassName}
         style={style}
         data-standalone={true}
-        data-color-appearance="accent"
+        data-tone="accent"
       >
         {checkboxInput}
       </span>

@@ -202,25 +202,45 @@ describe('Checkbox (next)', () => {
     })
   })
 
-  describe('Color appearance', () => {
-    it('defaults to accent color appearance', () => {
+  describe('Tone', () => {
+    it('sets the accent tone with a label', () => {
       render(<Checkbox label="Test Label" />)
 
       const checkbox = screen.getByRole('checkbox')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = checkbox.closest('.eds-checkbox')
-      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
     })
 
-    it('keeps accent color appearance when disabled', () => {
-      // The disabled greys are appearance-independent in CSS, so the
-      // appearance no longer flips to neutral on the disabled prop
+    it('sets the accent tone without a label', () => {
+      render(<Checkbox aria-label="Test" />)
+
+      const checkbox = screen.getByRole('checkbox')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = checkbox.closest('.eds-checkbox')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('keeps the accent tone when disabled', () => {
+      // The disabled tokens do not depend on the tone, so the tone does not
+      // flip to neutral on the disabled prop
       render(<Checkbox label="Test Label" disabled />)
 
       const checkbox = screen.getByRole('checkbox')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = checkbox.closest('.eds-checkbox')
-      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('does not set the legacy foundation attributes', () => {
+      render(<Checkbox label="Test Label" />)
+
+      const checkbox = screen.getByRole('checkbox')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = checkbox.closest('.eds-checkbox')
+      expect(wrapper).not.toHaveAttribute('data-color-appearance')
+      expect(wrapper).not.toHaveAttribute('data-selectable-space')
+      expect(wrapper).not.toHaveAttribute('data-space-proportions')
     })
   })
 })
