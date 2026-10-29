@@ -133,7 +133,7 @@ Chips are smaller at Compact density, where a chip is 20px high. Check that chip
 
 ### Components
 
-- **Chip [EDS Beta]**: The chip component in Figma, covering all tones, styles, behaviours and states
+- **Chip [EDS Beta]**: The chip component in Figma, covering all tones, variants, behaviours and states
 
 ### Using the Chip in Figma
 
@@ -148,13 +148,11 @@ Density is not a property of the component. Set the density with a variable mode
 The Chip component exposes these properties:
 
 - **Tone** - Neutral, Accent, Info, Success, Warning, Danger
-- **Variants** - Default (selectable), Checked (selected), Deletable, Dropdown, 💠 Custom
-- **Style** - Default, Outlined, High contrast
+- **Type** - Default (selectable), Checked (selected), Deletable, Dropdown, 💠 Custom
+- **Variant** - Default, Outlined, High contrast
 - **State** - Default, Hover, Focus, Active
 
-The names differ from the ones on this page. What this page calls variants is the **Style** property in Figma, and the behaviours are the **Variants** property.
-
-Switch **Variants** to _Checked_ to show the selected state with its leading check icon, _Deletable_ for a trailing close icon, or _Dropdown_ for a trailing arrow. _💠 Custom_ shows a leading and a trailing icon, which you swap with **Leading Icon** and **Trailing Icon**.
+Switch **Type** to _Checked_ to show the selected state with its leading check icon, _Deletable_ for a trailing close icon, or _Dropdown_ for a trailing arrow. _💠 Custom_ shows a leading and a trailing icon, which you swap with **Leading Icon** and **Trailing Icon**.
 
 ## Do's and Don'ts
 
