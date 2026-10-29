@@ -1,6 +1,6 @@
 # Beta Release Guide for `/next` Components
 
-This guide explains how beta releases work for EDS 2.0 components under the `/next` entry point.
+This guide explains how beta releases work for the components under the `/next` entry point, which are published as the 3.0.0 beta.
 
 ## Quick Reference
 
@@ -44,7 +44,7 @@ feat!: change Button API
 
 ### Marking breaking changes
 
-**What `!` covers.** A change within the beta line: props, markup or behaviour that someone on an earlier beta relies on. How a component differs from EDS 1.0 belongs on the Storybook page "EDS 2.0 (beta) / Breaking changes" (see [Breaking Changes Policy](#breaking-changes-policy)), not in a `!`. A new component is a plain `feat:`, even when it replaces a 1.0 one.
+**What `!` covers.** A change within the beta line: props, markup or behaviour that someone on an earlier beta relies on. How a component differs from its 2.x counterpart belongs on the Storybook page "EDS 2.0 (beta) / Breaking changes" (see [Breaking Changes Policy](#breaking-changes-policy)), not in a `!`. A new component is a plain `feat:`, even when it replaces a 2.x one.
 
 **Keep `!` commits inside `/next`.** Release-please judges a commit against every package whose files it touches. Inside `/next` a `!` only bumps the beta counter, but if the same commit also touches the rest of `packages/eds-core-react`, `package.json` included, it cuts a major of the stable 2.x line. Only `stories/`, `.storybook/` and `tests/` are excluded. Split a mixed change into separate PRs.
 
@@ -60,7 +60,7 @@ Without the footer the changelog only repeats the title, as it did for #5509. Wi
 
 ```
 BEGIN_COMMIT_OVERRIDE
-fix!: default Tooltip (next) placement to bottom, matching EDS 1.0
+fix!: default Tooltip (next) placement to bottom, matching the 2.x Tooltip
 
 BREAKING CHANGE: Tooltip opens below its trigger by default. Pass `placement="top"` to keep the old position.
 END_COMMIT_OVERRIDE
@@ -127,7 +127,7 @@ Or in a global CSS file:
 
 Beta components are **visible in production Storybook** under the **"EDS 2.0 (beta)"** section. This allows everyone to:
 
-- 👀 See what's coming in EDS 2.0
+- 👀 See what's coming in 3.0.0
 - 📖 Read documentation and API specs
 - 🎨 View design implementations
 - 💬 Provide feedback before stable release
@@ -165,7 +165,7 @@ pnpm storybook
 
 Beta versions follow a fixed series pinned at the upcoming major: `3.0.0-beta.1`, `3.0.0-beta.2`, etc.
 
-The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, EDS 2.0 ships as stable `3.0.0`. See [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md) for the reasoning.
+The base never moves during the beta period — every release (`fix`, `feat`, or breaking `!`) increments only the beta counter. This is enforced by `versioning: "prerelease"` + `prerelease: true` on the `eds-core-react-next` entry in `.github/release-please-config.json` (same scheme as `eds-tokens`). At graduation, the beta ships as stable `3.0.0`. See [ADR-0012](../adr/0012-pinned-prerelease-versioning-for-beta-lines.md) for the reasoning.
 
 ## `@equinor/eds-tokens`: Whole Package in Beta
 
@@ -198,7 +198,7 @@ Components graduate from `/next` to stable when they meet these criteria:
 
 ### Graduation Process
 
-EDS 2.0 components will graduate as a **complete set** in a single major release (v3.0.0), rather than individually. This provides a cleaner migration path for users.
+The beta components will graduate as a **complete set** in a single major release (v3.0.0), rather than individually. This provides a cleaner migration path for users.
 
 #### Strategy: Batch Graduation
 
@@ -207,45 +207,45 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 1. **Mark old components as deprecated immediately**:
 
    ```typescript
-   // src/components/Button/Button.tsx (EDS 1.0)
+   // src/components/Button/Button.tsx (2.x)
    /**
-    * @deprecated EDS 2.0 Button is available in beta.
+    * @deprecated A new Button is available in beta.
     * Install: npm install @equinor/eds-core-react@beta
     * Import: import { Button } from '@equinor/eds-core-react/next'
     *
-    * This component will be replaced in v3.0.0 when all EDS 2.0 components graduate.
+    * This component will be replaced in v3.0.0 when all beta components graduate.
     */
    export const Button = ...
    ```
 
 2. **Communicate timeline in release notes and Slack**:
-   - "EDS 2.0 components are being developed under `/next`"
-   - "All EDS 2.0 components will graduate together in v3.0.0"
+   - "The 3.0.0 components are being developed under `/next`"
+   - "All beta components will graduate together in v3.0.0"
    - "Test early by installing `@equinor/eds-core-react@beta`"
 
 3. **Keep `/next` folder structure during entire beta period**:
    ```
    components/
-     Button/          # EDS 1.0 (deprecated, but still works)
-     Typography/      # EDS 1.0 (deprecated, but still works)
+     Button/          # 2.x (deprecated, but still works)
+     Typography/      # 2.x (deprecated, but still works)
      next/
-       Button/        # EDS 2.0 (beta)
-       Typography/    # EDS 2.0 (beta)
+       Button/        # 3.0.0 beta
+       Typography/    # 3.0.0 beta
    ```
 
-**When All EDS 2.0 Components Are Ready:**
+**When All Beta Components Are Ready:**
 
 1. **Create migration guide** with all breaking changes and API differences
 
 2. **Single major release (v3.0.0)**:
 
    ```bash
-   # Remove all old EDS 1.0 components
+   # Remove all old 2.x components
    git rm -r src/components/Button
    git rm -r src/components/Typography
    # ... remove all old components
 
-   # Move all EDS 2.0 components to main folder
+   # Move all beta components to main folder
    git mv src/components/next/* src/components/
    git rm -r src/components/next
 
@@ -267,9 +267,9 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 4. **Create release with detailed migration guide**:
 
    ```bash
-   git commit -m "feat!: graduate all EDS 2.0 components
+   git commit -m "feat!: graduate all beta components
 
-   BREAKING CHANGE: All components replaced with EDS 2.0 implementations.
+   BREAKING CHANGE: All components replaced with the implementations from /next.
 
    - Button: API changes, see migration guide
    - Typography: New props structure, see migration guide
@@ -281,21 +281,21 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 - ✅ **Simple migration** - Users only change import path once
 - ✅ **No component renaming** - Button stays Button throughout
 - ✅ **Clear timeline** - One major version bump, not gradual changes
-- ✅ **Better testing** - Users can test complete EDS 2.0 in beta
+- ✅ **Better testing** - Users can test the complete 3.0.0 set in beta
 - ✅ **Easier rollback** - If issues found, users stay on v2.x.x
 
 #### Timeline Example
 
-| Phase                | Version | Status                             | User Action                   |
-| -------------------- | ------- | ---------------------------------- | ----------------------------- |
-| Beta development     | 2.x.x   | EDS 1.0 stable, EDS 2.0 in `/next` | Optionally test beta          |
-| All components ready | 2.x.x   | Freeze EDS 1.0, finalize EDS 2.0   | Review migration guide        |
-| Major release        | 3.0.0   | EDS 2.0 only                       | Update imports, test, migrate |
+| Phase                | Version | Status                            | User Action                   |
+| -------------------- | ------- | --------------------------------- | ----------------------------- |
+| Beta development     | 2.x.x   | 2.x stable, 3.0.0 beta in `/next` | Optionally test beta          |
+| All components ready | 2.x.x   | Freeze 2.x, finalize the beta     | Review migration guide        |
+| Major release        | 3.0.0   | Former beta components only       | Update imports, test, migrate |
 
 5. **Release**:
    - The beta series graduates in place: `3.0.0-beta.N` → `3.0.0`
    - Mechanism: set `"prerelease": false` on the `eds-core-react-next` entry in `.github/release-please-config.json` (the `prerelease` versioning strategy then emits a stable version), or force the version with a `Release-As: 3.0.0` commit footer
-   - All EDS 2.0 components become the default
+   - All beta components become the default
    - Beta releases deprecated
    - Migration guide published
 
@@ -311,8 +311,8 @@ EDS 2.0 components will graduate as a **complete set** in a single major release
 
 - ✅ Breaking changes are allowed and expected
 - ✅ Mark them with `!` in the PR title so they appear under "⚠ BREAKING CHANGES" in the changelog. See [Marking breaking changes](#marking-breaking-changes) for what counts, the path rule and how to keep a `BREAKING CHANGE:` footer through the squash merge
-- ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page answers one question per component, what an EDS 1.0 consumer meets in 2.0, and it is what the migration guide grows out of at graduation (#5387). Keep the answer current: when a PR moves a component's props, composition, markup or behaviour, the section has to describe 2.0 as it then stands. It is not a changelog, so leave beta-to-beta wording out of it and put that in the commit message and the PR description. CI enforces this, and not only when the PR is marked breaking: editing any `.ts` or `.tsx` file of a published component without touching the page fails the "Breaking changes page entry" check. If the EDS 1.0 to 2.0 answer is unchanged, add the `skip-breaking-changes-doc` label and say why in the description
-- ✅ A new `/next` component needs its section on that page in the same PR that exports it. Most 2.0 components rewrite a 1.0 predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. Where there is no 1.0 counterpart, follow `## Badge` and `## Link` on the page; where the component splits a 1.0 one, as Combobox splits `Autocomplete` with `multiple`, name that component and the usage this half comes from and link the two sections. CI fails on a component exported from the `/next` barrel with no section
+- ✅ Add or update the component's entry on the Storybook page "EDS 2.0 (beta) / Breaking changes" (`packages/eds-core-react/stories/docs/BreakingChanges.mdx`) whenever a PR changes a published `/next` API or its markup contract. That page answers one question per component, what someone using the 2.x component meets in the beta, and it is what the migration guide grows out of at graduation (#5387). Keep the answer current: when a PR moves a component's props, composition, markup or behaviour, the section has to describe the beta as it then stands. It is not a changelog, so leave beta-to-beta wording out of it and put that in the commit message and the PR description. CI enforces this, and not only when the PR is marked breaking: editing any `.ts` or `.tsx` file of a published component without touching the page fails the "Breaking changes page entry" check. If the answer for 2.x to the beta is unchanged, add the `skip-breaking-changes-doc` label and say why in the description
+- ✅ A new `/next` component needs its section on that page in the same PR that exports it. Most beta components rewrite a 2.x predecessor, so the whole thing is a breaking change for anyone migrating, even though the commit is a plain `feat:` and nothing is formally breaking until graduation. Where there is no 2.x counterpart, follow `## Badge` and `## Link` on the page; where the component splits a 2.x one, as Combobox splits `Autocomplete` with `multiple`, name that component and the usage this half comes from and link the two sections. CI fails on a component exported from the `/next` barrel with no section
 - ✅ The version base stays pinned: every release bumps only the prerelease number, `3.0.0-beta.1` → `3.0.0-beta.2`
 
 **After graduation (stable releases):**

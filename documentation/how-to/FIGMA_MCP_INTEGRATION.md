@@ -112,7 +112,7 @@ Generate CSS for the Alert component based on the Figma design tokens
 ### EDS-Specific Queries
 
 ```
-What foundation tokens are used in the Checkbox 2.0 component?
+What foundation tokens are used in the beta Checkbox component?
 ```
 
 ```
@@ -120,7 +120,7 @@ Show me the color tokens for accent colors in the current Core Components file
 ```
 
 ```
-Compare the spacing tokens between Button 2.0 and the old Button component
+Compare the spacing tokens between the beta Button and the 2.x Button component
 ```
 
 ## Troubleshooting
@@ -169,6 +169,6 @@ Compare the spacing tokens between Button 2.0 and the old Button component
 ## Team-Specific Notes
 
 - **For component migration**: Use Figma MCP to extract exact foundation tokens during vanilla CSS conversion from the Core Components files
-- **For designers**: This integration helps ensure design-code alignment during reviews of new 2.0 components
+- **For designers**: This integration helps ensure design-code alignment during reviews of new beta components
 - **For new team members**: Request EDS Figma access from the team before attempting setup
-- **Core Components focus**: The new migrated components (Checkbox 2.0, Button 2.0, etc.) live in the Core Components project
+- **Core Components focus**: The new migrated components (the beta Checkbox, Button, etc.) live in the Core Components project
