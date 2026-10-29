@@ -91,7 +91,7 @@ Color tokens define the visual palette and semantic color system.
 - Pattern: `--eds-color-bg-[semantic]-[role]-[state]`
 - Location: `packages/eds-tokens/tokens/OWxw2XogDLUt1aCvcDFXPw/`
 - Example: `--eds-color-bg-accent-fill-emphasis-default`
-- See [colors-static.md](../../packages/eds-tokens/instructions/colors-static.md) for details
+- The 3.x tokens that replace them are described in [colors-static.md](../../packages/eds-tokens/instructions/colors-static.md)
 
 **Dynamic Appearance Colors** (`nyPaQ3QnI1UAcxKW4a0d2c`):
 
@@ -505,13 +505,13 @@ Utility: `src/utils/index.ts` (`_extend()`)
 
 **Custom Transforms:**
 
-| Transform     | Purpose                             | Example                  |
-| ------------- | ----------------------------------- | ------------------------ |
+| Transform                  | Purpose                             | Example                  |
+| -------------------------- | ----------------------------------- | ------------------------ |
 | `createLightDarkTransform` | Creates `light-dark()` CSS function | `light-dark(#fff, #000)` |
-| `pxToRem`     | Converts px to rem                  | `16px` → `1rem`          |
-| `pxTransform` | Formats as px                       | `16` → `16px`            |
-| `pxFormatted` | Formats specific tokens as px       | Font size in px          |
-| `fontQuote`   | Wraps font families in quotes       | `Inter` → `"Inter"`      |
+| `pxToRem`                  | Converts px to rem                  | `16px` → `1rem`          |
+| `pxTransform`              | Formats as px                       | `16` → `16px`            |
+| `pxFormatted`              | Formats specific tokens as px       | Font size in px          |
+| `fontQuote`                | Wraps font families in quotes       | `Inter` → `"Inter"`      |
 
 **Implementation:**  
 Package: `@equinor/eds-tokens-build`  
@@ -1005,20 +1005,20 @@ git diff build/
 
 ### Data Attribute Reference
 
-| Attribute                     | Values                                                                  | Purpose                 | Example                                       |
-| ----------------------------- | ----------------------------------------------------------------------- | ----------------------- | --------------------------------------------- |
-| `data-color-scheme`           | `light`, `dark`                                                         | Theme mode              | `<html data-color-scheme="dark">`             |
-| `data-color-appearance`       | `accent`, `neutral`, `info`, `success`, `warning`, `danger`             | Semantic context        | `<button data-color-appearance="accent">`     |
-| `data-space-density`          | `spacious`, `comfortable`                                               | Spacing density         | `<div data-space-density="comfortable">`      |
-| `data-selectable-space`       | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`                                     | Selectable element size | `<button data-selectable-space="md">`         |
-| `data-space-proportions`      | `squished`, `square`, `stretched`                                       | Padding ratio           | `<div data-space-proportions="squished">`     |
-| `data-space-gap-horizontal`   | `none`, `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | Horizontal gap          | `<div data-space-gap-horizontal="md">`        |
-| `data-space-gap-vertical`     | `none`, `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | Vertical gap            | `<div data-space-gap-vertical="lg">`          |
-| `data-font-family`            | `ui`, `header`                                                          | Font family             | `<div data-font-family="ui">`                 |
-| `data-font-size`              | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`         | Font size               | `<h1 data-font-size="4xl">`                   |
-| `data-font-weight`            | `lighter`, `normal`, `bolder`                                           | Font weight             | `<strong data-font-weight="bolder">`          |
-| `data-line-height`            | `default`, `squished`                                                   | Line height             | `<p data-line-height="squished">`             |
-| `data-tracking`               | `tight`, `normal`, `wide`, `loose`                                      | Letter spacing          | `<small data-tracking="wide">`                |
+| Attribute                   | Values                                                                  | Purpose                 | Example                                   |
+| --------------------------- | ----------------------------------------------------------------------- | ----------------------- | ----------------------------------------- |
+| `data-color-scheme`         | `light`, `dark`                                                         | Theme mode              | `<html data-color-scheme="dark">`         |
+| `data-color-appearance`     | `accent`, `neutral`, `info`, `success`, `warning`, `danger`             | Semantic context        | `<button data-color-appearance="accent">` |
+| `data-space-density`        | `spacious`, `comfortable`                                               | Spacing density         | `<div data-space-density="comfortable">`  |
+| `data-selectable-space`     | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`                                     | Selectable element size | `<button data-selectable-space="md">`     |
+| `data-space-proportions`    | `squished`, `square`, `stretched`                                       | Padding ratio           | `<div data-space-proportions="squished">` |
+| `data-space-gap-horizontal` | `none`, `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | Horizontal gap          | `<div data-space-gap-horizontal="md">`    |
+| `data-space-gap-vertical`   | `none`, `4xs`, `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | Vertical gap            | `<div data-space-gap-vertical="lg">`      |
+| `data-font-family`          | `ui`, `header`                                                          | Font family             | `<div data-font-family="ui">`             |
+| `data-font-size`            | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`         | Font size               | `<h1 data-font-size="4xl">`               |
+| `data-font-weight`          | `lighter`, `normal`, `bolder`                                           | Font weight             | `<strong data-font-weight="bolder">`      |
+| `data-line-height`          | `default`, `squished`                                                   | Line height             | `<p data-line-height="squished">`         |
+| `data-tracking`             | `tight`, `normal`, `wide`, `loose`                                      | Letter spacing          | `<small data-tracking="wide">`            |
 
 ### Package Structure
 
@@ -1075,8 +1075,8 @@ packages/
 **Color System:**
 
 - [Color System Introduction](../../packages/eds-tokens/instructions/colors.md)
-- [Static Color Approach](../../packages/eds-tokens/instructions/colors-static.md)
-- [Dynamic Color Approach](../../packages/eds-tokens/instructions/colors-dynamic.md)
+- [Colour tokens in CSS and TypeScript (3.x)](../../packages/eds-tokens/instructions/colors-static.md)
+- [Dynamic Color Approach (2.x, deprecated)](../../packages/eds-tokens/instructions/colors-dynamic.md)
 
 **Typography System:**
 

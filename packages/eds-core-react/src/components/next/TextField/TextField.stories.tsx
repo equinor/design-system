@@ -385,6 +385,20 @@ ReadOnlyState.parameters = {
   },
 }
 
+export const FullExample: StoryFn<TextFieldProps> = () => (
+  <TextField
+    label="Amount"
+    indicator="(Optional)"
+    description="Enter the transaction amount"
+    placeholder="0.00"
+    type="number"
+    helperMessage="Helper Message"
+    labelInfo="This field accepts decimal values for currency amounts."
+    startText="NOK"
+    endAdornment={<Icon data={money} size="md" />}
+  />
+)
+
 export const WithLabelInfo: StoryFn<TextFieldProps> = () => (
   <>
     <TextField

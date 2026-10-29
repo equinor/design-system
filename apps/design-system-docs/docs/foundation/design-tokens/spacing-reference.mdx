@@ -70,11 +70,9 @@ semantic.spacing.twoXl // 28
 semantic.cornerRadius.roundedOuter // 5
 ```
 
-Three differences from the CSS form, all easy to miss:
+The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy
+to miss:
 
-- **The specifier carries the file extension.** `./next/*` is a wildcard onto the source tree, so
-  `next/ts/semantic/light` does not resolve and `next/ts/semantic/light.ts` does. The `next/`
-  paths are temporary for the beta line.
 - **The values are unitless numbers, not lengths.** `16`, not `16px`. Add the unit yourself.
 - **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the
   densities are separate modules and you pick one:

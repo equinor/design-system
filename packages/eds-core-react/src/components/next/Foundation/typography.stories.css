@@ -1,0 +1,191 @@
+/*
+ * Styles for the Typography stories, imported only by Typography.stories.tsx.
+ * The text rules set the beta custom properties directly and mirror the CSS on
+ * the Using typography page of the docs site. The layout rules only frame the
+ * examples, and are not spacing guidance.
+ *
+ * The rules are deliberately not in a layer, unlike component CSS. The docs
+ * site renders these stories inline, and its global heading and paragraph
+ * styles are unlayered, so layered rules here would lose to them.
+ */
+
+.typography-demo {
+  font-family: var(--eds-font-family-ui);
+  color: var(--eds-text-primary);
+
+  :is(h1, h2, p) {
+    margin: 0;
+  }
+
+  /* The docs site sets a colour on headings, so they would not inherit */
+  :is(h1, h2) {
+    color: inherit;
+  }
+
+  /* Side-by-side comparisons */
+  &.columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--eds-spacing-xl);
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-xs);
+  }
+
+  /* Names what a column or a row shows */
+  .legend {
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+    color: var(--eds-text-secondary);
+  }
+
+  /* Role and weight specimens */
+  .specimen {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: var(--eds-spacing-md) var(--eds-spacing-xl);
+    align-items: baseline;
+  }
+
+  .sample {
+    max-width: 36rem;
+  }
+
+  /* Always set the pair */
+  .running-text {
+    max-width: 70ch;
+    font-size: var(--eds-typography-body-lg-font-size);
+    line-height: var(--eds-typography-body-lg-line-height);
+  }
+
+  .caption {
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+  }
+
+  .size-only {
+    font-size: var(--eds-typography-label-sm-font-size);
+  }
+
+  /* Draws the line box of each caption, which is what the example compares */
+  :is(.caption, .size-only) {
+    outline: 1px dashed var(--eds-border-non-interactive-accent-default);
+  }
+
+  /* Hierarchy, and the row repeated in the density example */
+  .well {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-xs);
+
+    max-width: 420px;
+    padding: var(--eds-spacing-md);
+    border: 1px solid var(--eds-border-non-interactive-neutral-default);
+    border-radius: var(--eds-corner-radius-rounded);
+
+    background: var(--eds-background-surface);
+  }
+
+  .well-name {
+    font-size: var(--eds-typography-label-lg-font-size);
+    font-weight: var(--eds-font-weight-medium);
+    line-height: var(--eds-typography-label-lg-line-height);
+  }
+
+  .well-status {
+    font-size: var(--eds-typography-body-md-font-size);
+    line-height: var(--eds-typography-body-md-line-height);
+  }
+
+  .well-inspected {
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+    color: var(--eds-text-secondary);
+  }
+
+  /* Page composition */
+  &.overview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-lg);
+  }
+
+  .app-bar {
+    padding-bottom: var(--eds-spacing-sm);
+    border-bottom: 1px solid var(--eds-border-non-interactive-neutral-default);
+  }
+
+  .app-name {
+    font-size: var(--eds-typography-label-xl-font-size);
+    line-height: var(--eds-typography-label-xl-line-height);
+  }
+
+  .page-title {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-4xl-font-size);
+    font-weight: var(--eds-font-weight-medium);
+    line-height: var(--eds-typography-header-4xl-line-height);
+  }
+
+  .ingress {
+    max-width: 70ch;
+    font-size: var(--eds-typography-body-xl-font-size);
+    line-height: var(--eds-typography-body-xl-line-height);
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--eds-spacing-md);
+  }
+
+  .tile {
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--eds-spacing-md);
+    border: 1px solid var(--eds-border-non-interactive-neutral-default);
+    border-radius: var(--eds-corner-radius-rounded);
+  }
+
+  .figure-label {
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+  }
+
+  .figure {
+    font-size: var(--eds-typography-label-3xl-font-size);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--eds-typography-label-3xl-line-height);
+  }
+
+  .section-heading {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-3xl-font-size);
+    font-weight: var(--eds-font-weight-medium);
+    line-height: var(--eds-typography-header-3xl-line-height);
+  }
+
+  /* Label versus body */
+  .as-label {
+    font-size: var(--eds-typography-label-md-font-size);
+    line-height: var(--eds-typography-label-md-line-height);
+  }
+
+  .as-body {
+    font-size: var(--eds-typography-body-md-font-size);
+    line-height: var(--eds-typography-body-md-line-height);
+  }
+
+  /* Heading level versus size */
+  .overview-page h2 {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-4xl-font-size);
+    font-weight: var(--eds-font-weight-medium);
+    line-height: var(--eds-typography-header-4xl-line-height);
+  }
+}

@@ -1,11 +1,16 @@
 // @vitest-environment jsdom
 import { act, renderHook } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { STEP_COUNT } from '@/config/tokensStudio'
 import { refreshCustomPalettes, useCustomPalettes } from './customPalettesStore'
 import { setSimulationPalettes, type TokenPalette } from './palette'
 
-const custom: TokenPalette[] = [{ name: 'Custom', steps: ['#111111'] }]
-const other: TokenPalette[] = [{ name: 'Other', steps: ['#222222'] }]
+const custom: TokenPalette[] = [
+  { name: 'Custom', steps: Array(STEP_COUNT).fill('#111111') },
+]
+const other: TokenPalette[] = [
+  { name: 'Other', steps: Array(STEP_COUNT).fill('#222222') },
+]
 
 afterEach(() => {
   vi.restoreAllMocks()
