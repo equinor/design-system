@@ -1,9 +1,17 @@
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { save, add, warning_filled, info_circle } from '@equinor/eds-icons'
+import {
+  save,
+  add,
+  arrow_forward,
+  warning_filled,
+  delete_forever,
+} from '@equinor/eds-icons'
 import { Icon, IconProps } from '.'
-import page from './Icon.docs.mdx'
-import { TypographyNext as Typography } from '../../Typography'
+import { Button } from '../Button'
+import { Chip } from '../Chip'
+import { Link } from '../Link'
 import { CSSProperties, ReactNode } from 'react'
+import page from './Icon.docs.mdx'
 
 /* Story helper components - keeps code preview clean */
 const Stack = ({
@@ -29,34 +37,28 @@ const Stack = ({
   </div>
 )
 
-const Box = ({
+type LabelSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
+
+const Text = ({
   children,
-  bg,
-  padding = 8,
+  size = 'md',
+  secondary,
 }: {
   children: ReactNode
-  bg?: boolean
-  padding?: number
+  size?: LabelSize
+  secondary?: boolean
 }) => (
-  <div
+  <p
     style={{
-      background: bg ? 'rgba(0,0,0,0.05)' : undefined,
-      padding: `${padding}px`,
+      margin: 0,
+      fontFamily: 'var(--eds-font-family-ui)',
+      fontSize: `var(--eds-typography-label-${size}-font-size)`,
+      lineHeight: `var(--eds-typography-label-${size}-line-height)`,
+      color: secondary ? 'var(--eds-text-secondary)' : undefined,
     }}
   >
     {children}
-  </div>
-)
-
-const Label = ({ children }: { children: ReactNode }) => (
-  <Typography
-    family="ui"
-    size="xs"
-    baseline="grid"
-    style={{ margin: '0 0 4px', color: '#666' }}
-  >
-    {children}
-  </Typography>
+  </p>
 )
 
 const IconDemo = ({
@@ -67,10 +69,27 @@ const IconDemo = ({
   label: string
 }) => (
   <div style={{ textAlign: 'center' }}>
-    <Label>{label}</Label>
+    <Text size="xs" secondary>
+      {label}
+    </Text>
     {children}
   </div>
 )
+
+const SIZES = [
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl',
+] as const
+
+const DENSITIES = ['compact', 'comfortable', 'relaxed'] as const
 
 const meta: Meta<typeof Icon> = {
   title: 'EDS 2.0 (beta)/Icon',
@@ -82,19 +101,7 @@ const meta: Meta<typeof Icon> = {
     },
     size: {
       control: 'select',
-      options: [
-        undefined,
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        '2xl',
-        '3xl',
-        '4xl',
-        '5xl',
-        '6xl',
-      ],
+      options: [undefined, ...SIZES],
     },
   },
   parameters: {
@@ -112,367 +119,200 @@ export const Introduction: StoryFn<IconProps> = (args) => {
 Introduction.args = {
   data: save,
   title: 'Save document',
-  size: 'md',
 }
 
 export const Overview: StoryFn<IconProps> = () => (
   <Stack gap={16} align="center">
-    <Icon data={save} title="Save" size="lg" />
-    <Icon data={add} title="Add" size="lg" />
-    <Icon data={info_circle} title="Information" size="lg" />
-    <Icon data={warning_filled} title="Warning" size="lg" />
+    <Icon data={save} />
+    <Icon data={add} size="lg" />
+    <Icon data={warning_filled} size="md" />
+    <Icon data={delete_forever} color="var(--eds-icon-on-default-danger)" />
   </Stack>
 )
 
 export const ExplicitSizes: StoryFn<IconProps> = () => (
-  <Stack gap={16}>
-    <IconDemo label="xs (16px)">
-      <Icon data={save} size="xs" />
-    </IconDemo>
-    <IconDemo label="sm (18px)">
-      <Icon data={save} size="sm" />
-    </IconDemo>
-    <IconDemo label="md (20px)">
-      <Icon data={save} size="md" />
-    </IconDemo>
-    <IconDemo label="lg (24px)">
-      <Icon data={save} size="lg" />
-    </IconDemo>
-    <IconDemo label="xl (28px)">
-      <Icon data={save} size="xl" />
-    </IconDemo>
-    <IconDemo label="2xl (32px)">
-      <Icon data={save} size="2xl" />
-    </IconDemo>
-    <IconDemo label="3xl (37px)">
-      <Icon data={save} size="3xl" />
-    </IconDemo>
-    <IconDemo label="4xl (42px)">
-      <Icon data={save} size="4xl" />
-    </IconDemo>
-    <IconDemo label="5xl (48px)">
-      <Icon data={save} size="5xl" />
-    </IconDemo>
-    <IconDemo label="6xl (56px)">
-      <Icon data={save} size="6xl" />
-    </IconDemo>
+  <Stack gap={16} align="flex-end">
+    {SIZES.map((size) => (
+      <IconDemo key={size} label={size}>
+        <Icon data={save} size={size} />
+      </IconDemo>
+    ))}
   </Stack>
 )
 ExplicitSizes.parameters = {
   docs: {
     description: {
       story: `
-Use the \`size\` prop for explicit sizing. Maps to \`--eds-sizing-icon-{size}\` tokens.
+Each size is the spacing token of the same name. Without \`size\`, the icon is \`xl\`. To choose a size, use the spacing variable the icon is bound to in Figma. There is no fixed size per text size: Button pairs label md with \`lg\`, Chip and Link pair it with \`md\`.
 
-| Size | Default (token) | Default (px) | Compact (token) | Compact (px) |
-|------|-----------------|--------------|-----------------|--------------|
-| xs   | 1rem            | 16px         | 0.875rem        | 14px         |
-| sm   | 1.125rem        | 18px         | 1rem            | 16px         |
-| md   | 1.25rem         | 20px         | 1.125rem        | 18px         |
-| lg   | 1.5rem          | 24px         | 1.25rem         | 20px         |
-| xl   | 1.75rem         | 28px         | 1.5rem          | 24px         |
-| 2xl  | 2rem            | 32px         | 1.75rem         | 28px         |
-| 3xl  | 2.313rem        | 37px         | 2rem            | 32px         |
-| 4xl  | 2.625rem        | 42px         | 2.313rem        | 37px         |
-| 5xl  | 3rem            | 48px         | 2.625rem        | 42px         |
-| 6xl  | 3.5rem          | 56px         | 3rem            | 48px         |
+| Size  | Token               | Comfortable |
+|-------|---------------------|-------------|
+| sm    | \`--eds-spacing-sm\`  | 12px        |
+| md    | \`--eds-spacing-md\`  | 16px        |
+| lg    | \`--eds-spacing-lg\`  | 20px        |
+| xl    | \`--eds-spacing-xl\`  | 24px        |
+| 2xl   | \`--eds-spacing-2xl\` | 28px        |
+| 3xl   | \`--eds-spacing-3xl\` | 32px        |
+| 4xl   | \`--eds-spacing-4xl\` | 40px        |
+| 5xl   | \`--eds-spacing-5xl\` | 48px        |
+| 6xl   | \`--eds-spacing-6xl\` | 64px        |
+| 7xl   | \`--eds-spacing-7xl\` | 80px        |
       `,
-    },
-  },
-}
-
-export const AutoSizeFromTypography: StoryFn<IconProps> = () => (
-  <Stack direction="column" gap={16}>
-    <Box bg padding={8}>
-      <Typography family="ui" size="xs" baseline="grid">
-        <Icon data={warning_filled} color="orange" /> Typography
-        size=&quot;xs&quot; - icon auto-sizes to match
-      </Typography>
-    </Box>
-    <Box bg padding={8}>
-      <Typography family="ui" size="sm" baseline="grid">
-        <Icon data={warning_filled} color="orange" /> Typography
-        size=&quot;sm&quot; - icon auto-sizes to match
-      </Typography>
-    </Box>
-    <Box bg padding={8}>
-      <Typography family="ui" size="md" baseline="grid">
-        <Icon data={warning_filled} color="orange" /> Typography
-        size=&quot;md&quot; - icon auto-sizes to match
-      </Typography>
-    </Box>
-    <Box bg padding={8}>
-      <Typography family="ui" size="lg" baseline="grid">
-        <Icon data={warning_filled} color="orange" /> Typography
-        size=&quot;lg&quot; - icon auto-sizes to match
-      </Typography>
-    </Box>
-    <Box bg padding={8}>
-      <Typography family="ui" size="xl" baseline="grid">
-        <Icon data={warning_filled} color="orange" /> Typography
-        size=&quot;xl&quot; - icon auto-sizes to match
-      </Typography>
-    </Box>
-    <Box bg padding={8}>
-      <Typography family="ui" size="2xl" baseline="grid">
-        <Icon data={warning_filled} color="orange" /> Typography
-        size=&quot;2xl&quot; - icon auto-sizes to match
-      </Typography>
-    </Box>
-  </Stack>
-)
-AutoSizeFromTypography.parameters = {
-  docs: {
-    description: {
-      story: `
-Icons automatically inherit size from \`Typography\` component via the \`--eds-typography-icon-size\` CSS variable.
-This is the recommended approach when using icons inline with text in EDS components.
-      `,
-    },
-  },
-}
-
-export const DensityModes: StoryFn<IconProps> = () => (
-  <Stack gap={48}>
-    <div data-density="spacious">
-      <h4 style={{ margin: '0 0 16px' }}>Spacious (default)</h4>
-      <Stack gap={16}>
-        <IconDemo label="sm (18px)">
-          <Icon data={save} size="sm" />
-        </IconDemo>
-        <IconDemo label="lg (24px)">
-          <Icon data={save} size="lg" />
-        </IconDemo>
-        <IconDemo label="2xl (32px)">
-          <Icon data={save} size="2xl" />
-        </IconDemo>
-        <IconDemo label="5xl (48px)">
-          <Icon data={save} size="5xl" />
-        </IconDemo>
-      </Stack>
-    </div>
-    <div data-density="comfortable">
-      <h4 style={{ margin: '0 0 16px' }}>Comfortable (compact)</h4>
-      <Stack gap={16}>
-        <IconDemo label="sm (16px)">
-          <Icon data={save} size="sm" />
-        </IconDemo>
-        <IconDemo label="lg (20px)">
-          <Icon data={save} size="lg" />
-        </IconDemo>
-        <IconDemo label="2xl (28px)">
-          <Icon data={save} size="2xl" />
-        </IconDemo>
-        <IconDemo label="5xl (42px)">
-          <Icon data={save} size="5xl" />
-        </IconDemo>
-      </Stack>
-    </div>
-  </Stack>
-)
-DensityModes.parameters = {
-  docs: {
-    description: {
-      story: `
-Icons respect the \`data-density\` attribute for density-aware sizing. The same \`size\` prop renders differently based on the density context.
-
-- **Spacious** (default): Larger icons for more breathing room
-- **Comfortable**: Smaller icons for compact UIs
-
-This is controlled by CSS custom properties (\`--eds-sizing-icon-{size}\`) that change based on the density mode.
-      `,
-    },
-  },
-}
-
-export const TypographyWithDensity: StoryFn<IconProps> = () => (
-  <Stack gap={48}>
-    <div data-density="spacious">
-      <h4 style={{ margin: '0 0 16px' }}>Spacious (default)</h4>
-      <Stack direction="column" gap={8}>
-        <Box bg padding={8}>
-          <Typography family="ui" size="sm" baseline="grid">
-            <Icon data={warning_filled} color="orange" /> Typography sm + Icon
-            (spacious)
-          </Typography>
-        </Box>
-        <Box bg padding={8}>
-          <Typography family="ui" size="md" baseline="grid">
-            <Icon data={warning_filled} color="orange" /> Typography md + Icon
-            (spacious)
-          </Typography>
-        </Box>
-        <Box bg padding={8}>
-          <Typography family="ui" size="lg" baseline="grid">
-            <Icon data={warning_filled} color="orange" /> Typography lg + Icon
-            (spacious)
-          </Typography>
-        </Box>
-      </Stack>
-    </div>
-    <div data-density="comfortable">
-      <h4 style={{ margin: '0 0 16px' }}>Comfortable (compact)</h4>
-      <Stack direction="column" gap={8}>
-        <Box bg padding={8}>
-          <Typography family="ui" size="sm" baseline="grid">
-            <Icon data={warning_filled} color="orange" /> Typography sm + Icon
-            (comfortable)
-          </Typography>
-        </Box>
-        <Box bg padding={8}>
-          <Typography family="ui" size="md" baseline="grid">
-            <Icon data={warning_filled} color="orange" /> Typography md + Icon
-            (comfortable)
-          </Typography>
-        </Box>
-        <Box bg padding={8}>
-          <Typography family="ui" size="lg" baseline="grid">
-            <Icon data={warning_filled} color="orange" /> Typography lg + Icon
-            (comfortable)
-          </Typography>
-        </Box>
-      </Stack>
-    </div>
-  </Stack>
-)
-TypographyWithDensity.parameters = {
-  docs: {
-    description: {
-      story: `
-Icons inside Typography automatically adapt to both the typography size and density mode.
-The icon inherits \`--eds-typography-icon-size\` which changes based on \`data-font-size\` and \`data-density\`.
-      `,
-    },
-  },
-}
-
-export const DynamicFallback: StoryFn<IconProps> = () => (
-  <Stack direction="column" gap={16}>
-    <p style={{ fontSize: '14px', margin: 0 }}>
-      <Icon data={info_circle} /> 14px font-size → ~21px icon (1.5em)
-    </p>
-    <p style={{ fontSize: '16px', margin: 0 }}>
-      <Icon data={info_circle} /> 16px font-size → 24px icon (1.5em)
-    </p>
-    <p style={{ fontSize: '20px', margin: 0 }}>
-      <Icon data={info_circle} /> 20px font-size → 30px icon (1.5em)
-    </p>
-    <p style={{ fontSize: '24px', margin: 0 }}>
-      <Icon data={info_circle} /> 24px font-size → 36px icon (1.5em)
-    </p>
-    <p style={{ fontSize: '32px', margin: 0 }}>
-      <Icon data={info_circle} /> 32px font-size → 48px icon (1.5em)
-    </p>
-  </Stack>
-)
-DynamicFallback.parameters = {
-  docs: {
-    description: {
-      story: `
-When no \`size\` prop or \`data-font-size\` is set, icons use \`1.5em\` for dynamic scaling.
-This means icons are always 1.5x the surrounding font-size.
-      `,
-    },
-  },
-}
-
-export const Color: StoryFn<IconProps> = () => (
-  <Stack gap={16}>
-    <Icon data={save} size="lg" color="red" />
-    <Icon data={save} size="lg" color="green" />
-    <Icon data={save} size="lg" color="blue" />
-    <Icon data={save} size="lg" color="currentColor" />
-  </Stack>
-)
-Color.parameters = {
-  docs: {
-    description: {
-      story:
-        'Icons inherit `currentColor` by default, making them adapt to text color automatically.',
-    },
-  },
-}
-
-export const Accessibility: StoryFn<IconProps> = () => (
-  <Stack gap={32}>
-    <div>
-      <p>
-        <strong>Decorative</strong> (hidden from screen readers):
-      </p>
-      <Icon data={save} size="lg" />
-      <pre style={{ fontSize: '12px', background: '#f5f5f5', padding: '8px' }}>
-        {'<Icon data={save} />'}
-      </pre>
-    </div>
-    <div>
-      <p>
-        <strong>Semantic</strong> (announced by screen readers):
-      </p>
-      <Icon data={save} size="lg" title="Save document" />
-      <pre style={{ fontSize: '12px', background: '#f5f5f5', padding: '8px' }}>
-        {'<Icon data={save} title="Save document" />'}
-      </pre>
-    </div>
-  </Stack>
-)
-Accessibility.parameters = {
-  docs: {
-    description: {
-      story:
-        'Icons without a `title` prop are decorative (`aria-hidden`). Icons with a `title` prop are semantic (`role="img"`).',
     },
   },
 }
 
 export const InlineWithText: StoryFn<IconProps> = () => (
   <Stack direction="column" gap={16}>
-    <div>
-      <h4 style={{ margin: '0 0 8px' }}>Inline text (no size prop)</h4>
-      <Box bg padding={8}>
-        <Typography family="ui" size="md" baseline="grid">
-          Click <Icon data={save} /> to save or <Icon data={add} /> to add a new
-          item
-        </Typography>
-      </Box>
-      <Label>Negative margins align icon with text baseline</Label>
-    </div>
-    <div>
-      <h4 style={{ margin: '0 0 8px' }}>Flex layout (with size prop)</h4>
-      <Box bg padding={8}>
-        <Stack gap={8} align="center">
-          <Icon data={add} size="md" />
-          <Typography family="ui" size="md" baseline="grid">
-            Add new item
-          </Typography>
-        </Stack>
-      </Box>
-      <Box bg padding={8}>
-        <Stack gap={8} align="center">
-          <Typography family="ui" size="md" baseline="grid">
-            Save changes
-          </Typography>
-          <Icon data={save} size="md" />
-        </Stack>
-      </Box>
-      <Label>
-        No margins when using size prop - layout controlled by flex gap
-      </Label>
-    </div>
+    <Text size="lg">
+      <Icon data={warning_filled} /> Label lg with the default icon size
+    </Text>
+    <Text size="md">
+      <Icon data={warning_filled} size="lg" /> Label md with{' '}
+      <code>size=&quot;lg&quot;</code>
+    </Text>
+    <Text size="sm">
+      <Icon data={warning_filled} size="md" /> Label sm with{' '}
+      <code>size=&quot;md&quot;</code>
+    </Text>
   </Stack>
 )
 InlineWithText.parameters = {
   docs: {
     description: {
-      story: `
-**Best practice for icon usage:**
+      story:
+        'The icon size does not follow the text. Next to smaller text, set `size` to the spacing token the design uses. An inline icon is centred on the text.',
+    },
+  },
+}
 
-| Context | Usage | Why |
-|---------|-------|-----|
-| Inline text | \`<Icon data={save} />\` | Auto-sizes to 1.5em, negative margins for optical alignment |
-| Flex/Button | \`<Icon data={save} size="md" />\` | Fixed size from tokens, no margins (layout via flex gap) |
+export const Densities: StoryFn<IconProps> = () => (
+  <Stack gap={48}>
+    {DENSITIES.map((density) => (
+      <div key={density} data-density={density}>
+        <Text size="sm" secondary>
+          {density}
+        </Text>
+        <Stack gap={16} align="flex-end">
+          {(['md', 'lg', 'xl'] as const).map((size) => (
+            <IconDemo key={size} label={size}>
+              <Icon data={save} size={size} />
+            </IconDemo>
+          ))}
+          <IconDemo label="default">
+            <Icon data={add} />
+          </IconDemo>
+        </Stack>
+      </div>
+    ))}
+  </Stack>
+)
+Densities.parameters = {
+  docs: {
+    description: {
+      story:
+        'Set `data-density` on an ancestor. Every size, including the default, follows the spacing scale and changes with the density.',
+    },
+  },
+}
 
-The \`size\` prop removes negative margins, giving full control to your layout system.
-      `,
+export const Color: StoryFn<IconProps> = () => (
+  <Stack direction="column" gap={16}>
+    <Stack gap={16}>
+      <Icon data={save} color="var(--eds-icon-primary)" />
+      <Icon data={save} color="var(--eds-icon-secondary)" />
+      <Icon data={save} color="var(--eds-icon-on-default-accent)" />
+      <Icon data={save} color="var(--eds-icon-on-default-danger)" />
+    </Stack>
+    <p
+      style={{
+        margin: 0,
+        fontFamily: 'var(--eds-font-family-ui)',
+        fontSize: 'var(--eds-typography-label-md-font-size)',
+        lineHeight: 'var(--eds-typography-label-md-line-height)',
+        color: 'var(--eds-text-on-default-success)',
+      }}
+    >
+      <Icon data={save} size="md" /> Inherits the text colour
+    </p>
+  </Stack>
+)
+Color.parameters = {
+  docs: {
+    description: {
+      story:
+        'Icons use `currentColor` by default, so they take the colour of the surrounding text. To set a colour, pass a semantic icon token such as `var(--eds-icon-secondary)` to `color`, never a raw colour value.',
+    },
+  },
+}
+
+export const InsideComponents: StoryFn<IconProps> = () => (
+  <Stack gap={24} align="center">
+    <Button>
+      <Icon data={add} size="5xl" aria-hidden />
+      Add
+    </Button>
+    <Chip>
+      <Icon data={save} aria-hidden />
+      Saved
+    </Chip>
+    <Link href="#" variant="standalone">
+      Next page
+      <Icon data={arrow_forward} aria-hidden />
+    </Link>
+  </Stack>
+)
+InsideComponents.parameters = {
+  docs: {
+    description: {
+      story:
+        'Button, Chip and a standalone Link size the icons you pass them, so leave out `size`. The Button here sets `size="5xl"`, and the icon still follows the button.',
+    },
+  },
+}
+
+const Code = ({ children }: { children: string }) => (
+  <pre
+    style={{
+      margin: 0,
+      fontSize: 'var(--eds-typography-label-sm-font-size)',
+      lineHeight: 'var(--eds-typography-label-sm-line-height)',
+    }}
+  >
+    {children}
+  </pre>
+)
+
+export const DecorativeAndSemantic: StoryFn<IconProps> = () => (
+  <Stack direction="column" gap={24}>
+    <Stack gap={12} align="center">
+      <Icon data={save} />
+      <Text>Decorative: hidden from screen readers</Text>
+    </Stack>
+    <Code>{'<Icon data={save} />'}</Code>
+    <Stack gap={12} align="center">
+      <Icon data={save} title="Saved" />
+      <Text>Semantic: announced as an image named Saved</Text>
+    </Stack>
+    <Code>{'<Icon data={save} title="Saved" />'}</Code>
+    <Stack gap={12} align="center">
+      <Button icon aria-label="Delete">
+        <Icon data={delete_forever} aria-hidden />
+      </Button>
+      <Text>Icon-only button: the button carries the name</Text>
+    </Stack>
+    <Code>
+      {
+        '<Button icon aria-label="Delete">\n  <Icon data={delete_forever} aria-hidden />\n</Button>'
+      }
+    </Code>
+  </Stack>
+)
+DecorativeAndSemantic.parameters = {
+  docs: {
+    description: {
+      story:
+        'Without `title` an icon is decorative and gets `aria-hidden`. With `title` it gets the `img` role and the title as its name. In an icon-only button, put the name on the button with `aria-label` and keep the icon decorative, so it is not read twice.',
     },
   },
 }

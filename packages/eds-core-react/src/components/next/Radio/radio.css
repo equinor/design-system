@@ -2,7 +2,7 @@
   .eds-radio {
     --_radio-icon-color: var(--eds-color-bg-fill-emphasis-default);
     --_radio-hover-color: var(--eds-color-bg-fill-muted-default);
-    --_radio-icon-size: var(--eds-sizing-icon-lg);
+    --_radio-icon-size: var(--eds-spacing-lg);
 
     /* Not --eds-color-text-disabled: that token is switched by
        data-color-appearance (tinted, not grey, under 'accent') and the wrapper

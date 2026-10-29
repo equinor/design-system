@@ -20,6 +20,7 @@ Copilot automatically applies file-pattern instructions from `.github/instructio
 - [React](./instructions/react.instructions.md) — File organisation, `forwardRef` pattern, accessibility
 - [Styling](./instructions/styling.instructions.md) — CSS conventions, `--_` private vars, `data-density`
 - [Figma](./instructions/figma.instructions.md) — Design-to-code workflow
+- [Colour contrast](./instructions/colour-contrast.instructions.md) — Contrast levels and foreground pairing, for tokens and component CSS
 - [Markdown](./instructions/markdown.instructions.md) — Documentation format
 
 Token-system references (colours, typography, end-to-end token lifecycle) are listed in [`AGENTS.md`](../AGENTS.md) § CSS — they live in `packages/eds-tokens/instructions/` and `documentation/how-to/TOKEN_SYSTEM_GUIDE.md`.
