@@ -7,7 +7,27 @@ import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
 import { CtaSection } from '@site/src/components/CtaSection'
 import { gettingStartedPaths } from '@site/src/data/gettingStartedPaths'
+import { useShownVersionDocPath } from '../utils/useShownVersionDocPath'
 import { slackUrl } from '@site/src/data/siteLinks'
+
+// A component of its own because the hook needs the docs context that
+// <Layout> provides.
+function PathCards(): JSX.Element {
+  const docPath = useShownVersionDocPath()
+  return (
+    <IconCardGrid columns={4}>
+      {gettingStartedPaths.map((path) => (
+        <IconCard
+          key={path.title}
+          icon={path.icon}
+          title={path.title}
+          description={path.description}
+          to={docPath(path)}
+        />
+      ))}
+    </IconCardGrid>
+  )
+}
 
 export default function GettingStarted(): JSX.Element {
   return (
@@ -31,17 +51,7 @@ export default function GettingStarted(): JSX.Element {
           title="Choose your path"
           subtitle="Each guide is tailored to your role — jump straight into the resources and steps that matter most for your work."
         >
-          <IconCardGrid columns={4}>
-            {gettingStartedPaths.map((path) => (
-              <IconCard
-                key={path.title}
-                icon={path.icon}
-                title={path.title}
-                description={path.description}
-                to={path.to}
-              />
-            ))}
-          </IconCardGrid>
+          <PathCards />
         </DocsSection>
         <CtaSection
           title="What's next"
