@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Stack } from '../../../../.storybook/components'
 import { Select, type SelectProps, type SelectOptionGroup } from '.'
+import page from './Select.docs.mdx'
 
 const elements = [
   'Aluminium',
@@ -95,7 +96,7 @@ const meta: Meta<typeof Select> = {
     readOnly: {
       control: 'boolean',
       description:
-        'Makes the field read-only — focusable and announced by screen readers, but not editable',
+        'Makes the field read-only, focusable and announced by screen readers, but not editable',
       table: {
         category: 'States',
         defaultValue: { summary: 'false' },
@@ -104,7 +105,7 @@ const meta: Meta<typeof Select> = {
     invalid: {
       control: 'boolean',
       description:
-        'Marks the field as invalid — applies error styling (danger border, error icon) and sets `aria-invalid="true"` so screen readers announce the error state. Does not block form submission on its own; use `required` or handle validation in `onSubmit`.',
+        'Marks the field as invalid. Applies error styling (danger border, error icon) and sets `aria-invalid="true"` so screen readers announce the error state. Does not block form submission on its own; use `required` or handle validation in `onSubmit`.',
       table: {
         category: 'States',
         defaultValue: { summary: 'false' },
@@ -169,7 +170,7 @@ const meta: Meta<typeof Select> = {
     ref: {
       control: false,
       description:
-        'Ref forwarded to the underlying `<select>` element — use to read the current value, call `.focus()`, etc.',
+        'Ref forwarded to the underlying `<select>` element. Use it to read the current value, call `.focus()`, etc.',
       table: {
         category: 'Other',
         type: { summary: 'React.Ref<HTMLSelectElement>' },
@@ -193,23 +194,7 @@ const meta: Meta<typeof Select> = {
   },
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.
-
-\`\`\`bash
-npm install @equinor/eds-core-react@beta
-\`\`\`
-
-\`\`\`tsx
-import { Select } from '@equinor/eds-core-react/next'
-\`\`\`
-
-Select wraps a native \`<select>\` element with EDS styling and supports single selection only. In Chrome 135+ it uses \`appearance: base-select\` for a fully styled picker surface and options list. In other browsers the dropdown uses native OS styling.
-
-Need filtering or search? Use [**Autocomplete**](?path=/docs/beta-inputs-autocomplete--docs) instead. Need multiple selection? **Combobox** with multi-select support is coming soon.
-        `,
-      },
+      page,
     },
   },
   decorators: [
@@ -223,64 +208,49 @@ Need filtering or search? Use [**Autocomplete**](?path=/docs/beta-inputs-autocom
 
 export default meta
 
-export const Default: StoryFn<SelectProps> = (args) => (
+export const Introduction: StoryFn<SelectProps> = (args) => (
   <Select options={elements} {...args} />
 )
 
-Default.parameters = {
-  docs: {
-    description: {
-      story:
-        'Uncontrolled usage — the browser manages the selected value internally. Read the current value via a ref or from `FormData` on submit. For externally driven state, see the Controlled story.',
-    },
-  },
-}
-
-export const Invalid: StoryFn<SelectProps> = () => (
-  <Select
-    label="Element"
-    options={elements}
-    invalid
-    helperMessage="This field is required"
-  />
+export const Overview: StoryFn<SelectProps> = () => (
+  <>
+    <Select label="Element" options={elements} />
+    <Select
+      label="Element (invalid)"
+      options={elements}
+      invalid
+      helperMessage="Choose an element"
+    />
+  </>
 )
 
-Invalid.parameters = {
-  docs: {
-    description: {
-      story:
-        '`invalid` applies error styling and sets `aria-invalid="true"` for screen readers, but does not block form submission — use `required` for that. Set `invalid` yourself based on validation logic, and pair it with `helperMessage` to explain what went wrong.',
-    },
-  },
-}
-
-export const Disabled: StoryFn<SelectProps> = () => (
-  <Select
-    label="Element"
-    options={elements}
-    disabled
-    helperMessage="Field is disabled"
-  />
+export const States: StoryFn<SelectProps> = () => (
+  <>
+    <Select
+      label="Default"
+      options={elements}
+      placeholder="Select an element…"
+    />
+    <Select
+      label="Disabled"
+      options={elements}
+      defaultValue="Copper"
+      disabled
+    />
+    <Select
+      label="Read only"
+      options={elements}
+      defaultValue="Copper"
+      readOnly
+    />
+  </>
 )
 
-Disabled.parameters = {
+States.parameters = {
   docs: {
     description: {
       story:
-        'A disabled field is non-interactive, removed from the tab order, and excluded from form data on submission. Use `readOnly` instead if the value should still be submitted or readable by assistive technology.',
-    },
-  },
-}
-
-export const ReadOnly: StoryFn<SelectProps> = () => (
-  <Select label="Element" options={elements} defaultValue="Copper" readOnly />
-)
-
-ReadOnly.parameters = {
-  docs: {
-    description: {
-      story:
-        '`<select>` has no native `readonly` attribute. The read-only state is simulated: mouse interaction is blocked via CSS `pointer-events: none`, keyboard changes are suppressed via `onKeyDown`, and `aria-readonly="true"` is set so screen readers announce the field correctly. The element remains focusable and its value is readable by assistive technology. If a `name` is provided, the value is included in form data via a hidden input.',
+        'A select can be default, disabled or read only. A disabled select cannot be focused and is left out of form submission. A read only select stays focusable and, when it has a `name`, still submits its value. A native `<select>` has no `readonly` attribute, so `readOnly` blocks changes itself and sets `aria-readonly`.',
     },
   },
 }
@@ -302,7 +272,7 @@ Controlled.parameters = {
   docs: {
     description: {
       story:
-        'Use `value` + `onChange` for controlled state — the native `<select>` fires a standard `ChangeEvent<HTMLSelectElement>`. The helper message updates to reflect the current value.',
+        'Use `value` + `onChange` for controlled state. The native `<select>` fires a standard `ChangeEvent<HTMLSelectElement>`. The helper message updates to reflect the current value.',
     },
   },
 }
@@ -311,12 +281,11 @@ export const WithPlaceholder: StoryFn<SelectProps> = () => (
   <Select label="Element" options={elements} placeholder="Select an element…" />
 )
 
-WithPlaceholder.storyName = 'With placeholder'
 WithPlaceholder.parameters = {
   docs: {
     description: {
       story:
-        'A `placeholder` renders as a hidden, disabled `<option value="">` and is pre-selected when no `value` or `defaultValue` is provided. It does not appear in the open dropdown — its only role is to show hint text when nothing is selected. Once the user picks a real option they cannot return to the placeholder — this is a native constraint of `<select>`.',
+        'A `placeholder` renders as a hidden, disabled `<option value="">` and is pre-selected when no `value` or `defaultValue` is provided. It does not appear in the open dropdown. Its only role is to show hint text when nothing is selected. Once the user picks a real option they cannot return to the placeholder. This is a native constraint of `<select>`.',
     },
   },
 }
@@ -332,7 +301,6 @@ export const WithDescription: StoryFn<SelectProps> = () => (
   />
 )
 
-WithDescription.storyName = 'With description'
 WithDescription.parameters = {
   docs: {
     description: {
@@ -365,12 +333,11 @@ export const ObjectOptions: StoryFn = () => {
   )
 }
 
-ObjectOptions.storyName = 'Object options'
 ObjectOptions.parameters = {
   docs: {
     description: {
       story:
-        'When options are objects, provide `getOptionLabel` to specify which field to display and `getOptionValue` to specify the submitted form value. Pick an option — the helper message shows the id that would be submitted, while the trigger shows the human-readable name.',
+        'When options are objects, provide `getOptionLabel` to specify which field to display and `getOptionValue` to specify the submitted form value. Pick an option and the helper message shows the id that would be submitted, while the trigger shows the human-readable name.',
     },
   },
 }
@@ -393,21 +360,27 @@ export const GroupedOptions: StoryFn = () => {
       options: ['Hydrogen', 'Oxygen', 'Nitrogen'],
     },
   ]
+  const [value, setValue] = useState('')
+  const group = options.find((g) => g.options.includes(value))?.label
   return (
     <Select
       label="Element"
       options={options}
       placeholder="Select an element…"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      helperMessage={
+        group ? `Group: ${group}` : 'Pick an element to see its group'
+      }
     />
   )
 }
 
-GroupedOptions.storyName = 'Grouped options'
 GroupedOptions.parameters = {
   docs: {
     description: {
       story:
-        'Pass `SelectOptionGroup` objects in the `options` array to render native `<optgroup>` elements. Groups and flat options can be mixed in the same array.',
+        'Pass `SelectOptionGroup` objects in the `options` array to render native `<optgroup>` elements. Groups and flat options can be mixed in the same array. Pick an element and the helper message shows the group it belongs to.',
     },
   },
 }
@@ -421,7 +394,6 @@ export const DisabledOptions: StoryFn = () => (
   />
 )
 
-DisabledOptions.storyName = 'Disabled options'
 DisabledOptions.parameters = {
   docs: {
     description: {
@@ -452,7 +424,6 @@ export const DensityModes: StoryFn = () => (
   </div>
 )
 
-DensityModes.storyName = 'Density modes'
 DensityModes.parameters = {
   docs: {
     description: {
