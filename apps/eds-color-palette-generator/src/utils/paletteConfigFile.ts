@@ -81,6 +81,40 @@ export function palettesFromConfig(config: unknown): PaletteInput[] | null {
   return palettes
 }
 
+/**
+ * Characters a hue key cannot contain, as Tokens Studio would read them as
+ * token syntax: `.` separates a path and `{…}` is a reference. A leading `$`
+ * is reserved for properties such as `$value` (Design Tokens format).
+ */
+const TOKEN_SYNTAX = /^\$|[.{}]/
+
+/** Why a palette's name cannot be used as a Tokens Studio hue key. */
+export type NameProblem =
+  | { kind: 'empty' }
+  /** `char` is the first character Tokens Studio would read as syntax */
+  | { kind: 'syntax'; char: string }
+  /** `otherIndex` is the first other palette with the same hue key */
+  | { kind: 'duplicate'; otherIndex: number }
+
+/**
+ * For each palette, the problem with its name, or null. Names are compared as
+ * Tokens Studio hue keys (`hueKey`), the way the Tokens Studio download and
+ * the views match palettes to hues, so `Moss green` and `Moss Green` are the
+ * same name, and an empty name has the empty key.
+ */
+export function nameProblems(
+  palettes: { name: string }[],
+): (NameProblem | null)[] {
+  const keys = palettes.map((p) => hueKey(p.name))
+  return keys.map((key, i) => {
+    if (!key) return { kind: 'empty' }
+    const syntax = key.match(TOKEN_SYNTAX)
+    if (syntax) return { kind: 'syntax', char: syntax[0] }
+    const otherIndex = keys.findIndex((k, j) => j !== i && k === key)
+    return otherIndex === -1 ? null : { kind: 'duplicate', otherIndex }
+  })
+}
+
 export type AnchorStatus = 'changed' | 'new' | 'unchanged'
 
 export type AnchorProposal = {
