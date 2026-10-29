@@ -1,237 +1,197 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks'
 import * as TypographyStories from './Typography.stories'
-import * as ButtonStories from '../Button/Button.stories'
 
-<Meta title="EDS 2.0 (beta)/Foundation/Typography" />
+<Meta of={TypographyStories} />
 
 # Typography
 
-EDS 2.0 uses a modular type scale — font sizes follow a geometric progression based on a `--_base` value that shifts per density mode. Only the base changes; all derived sizes and line-heights update automatically.
+Typography in the beta tokens has three roles on two typefaces. You pick a role by what the text does and a step by how large it should be, and the `data-density` attribute adjusts the size for you. This page shows how to set the typography custom properties in code. The documentation site has the guidance and the values:
 
-## Typefaces
+- [Typography overview](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography): the roles, the steps, weights, typefaces and density
+- [The type scale](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-scale): where the sizes and line heights come from, and how each density maps onto them
+- [Using typography](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-usage): the role and step for each case, heading levels and common mistakes
+- [Token reference](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-reference): every token, with its value in all three densities
 
-<table>
-  <thead>
-    <tr>
-      <th>Context</th>
-      <th>Typeface</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>UI labels & body copy</td>
-      <td><strong>Inter</strong> (variable)</td>
-    </tr>
-    <tr>
-      <td>Headings</td>
-      <td><strong>Equinor</strong> (brand typeface)</td>
-    </tr>
-    <tr>
-      <td>Code & monospace</td>
-      <td><strong>Commit Mono</strong></td>
-    </tr>
-  </tbody>
-</table>
+The custom properties come from the beta token bundle, `@equinor/eds-tokens/next/css/variables.css`. The decisions behind them are recorded in [ADR-0027](https://github.com/equinor/design-system/blob/main/documentation/adr/0027-token-variable-architecture-typography-roles.md) for the tokens and [ADR-0029](https://github.com/equinor/design-system/blob/main/documentation/adr/0029-typography-approach-for-eds-2-web.md) for the web.
 
-Inter is loaded from the EDS CDN and covers all UI text: button labels, form fields, captions, and prose. Equinor is reserved for display headings.
+## Status in the beta
 
-## Line-height scales
+The components in this Storybook are being migrated to these tokens one component at a time ([#5119](https://github.com/equinor/design-system/issues/5119)). Until a component has been migrated, it reads the 2.x token names and may trim text with `text-box`. Defaults for `h1` to `h6` and `p` ([#5477](https://github.com/equinor/design-system/issues/5477)) and a class for each text style ([#5501](https://github.com/equinor/design-system/issues/5501)) have not shipped yet, so the examples on this page set the custom properties directly.
 
-Two line-height scales are available for every size step:
+## Three roles
 
-**`squished`** — tight leading designed for UI controls. Use this wherever text sits inside a component (buttons, inputs, badges, tabs). The reduced line-height keeps touch targets compact without sacrificing legibility on a single line.
+Every piece of text takes one of three roles:
 
-**`default`** — comfortable leading for reading. Use this for body copy, descriptions, tooltips, and any text that may wrap to multiple lines in a prose context.
+- **`header`** is for titles, the headings of pages and sections. It is set in Equinor, in the steps `xs` to `4xl`.
+- **`label`** is for functional text on one line: buttons, navigation, table cells, form labels and captions. It is set in Inter, in the steps `xs` to `5xl`.
+- **`body`** is for running text that wraps, such as paragraphs and descriptions. It is set in Inter, in the steps `sm` to `3xl`, with a line height of at least one and a half times the font size.
 
-<table>
-  <thead>
-    <tr>
-      <th>Step</th>
-      <th>Default multiplier</th>
-      <th>Default spacious</th>
-      <th>Squished multiplier</th>
-      <th>Squished spacious</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>xs</code></td>
-      <td>1.39 − pow(0/9, 3) × 0.29 ≈ 1.39</td>
-      <td>1rem (16px)</td>
-      <td>1.13 − pow(0/9, 3) × 0.13 ≈ 1.13</td>
-      <td>0.75rem (12px)</td>
-    </tr>
-    <tr>
-      <td><code>sm</code></td>
-      <td>1.39 − pow(1/9, 3) × 0.29 ≈ 1.39</td>
-      <td>1rem (16px)</td>
-      <td>1.13 − pow(1/9, 3) × 0.13 ≈ 1.13</td>
-      <td>0.75rem (12px)</td>
-    </tr>
-    <tr>
-      <td><code>md</code></td>
-      <td>1.39 − pow(2/9, 3) × 0.29 ≈ 1.39</td>
-      <td>1.25rem (20px)</td>
-      <td>1.13 − pow(2/9, 3) × 0.13 ≈ 1.13</td>
-      <td>1rem (16px)</td>
-    </tr>
-    <tr>
-      <td><code>lg</code></td>
-      <td>1.39 − pow(3/9, 3) × 0.29 ≈ 1.38</td>
-      <td>1.5rem (24px)</td>
-      <td>1.13 − pow(3/9, 3) × 0.13 ≈ 1.13</td>
-      <td>1.25rem (20px)</td>
-    </tr>
-    <tr>
-      <td><code>xl</code></td>
-      <td>1.39 − pow(4/9, 3) × 0.29 ≈ 1.36</td>
-      <td>1.5rem (24px)</td>
-      <td>1.13 − pow(4/9, 3) × 0.13 ≈ 1.12</td>
-      <td>1.25rem (20px)</td>
-    </tr>
-    <tr>
-      <td><code>2xl</code></td>
-      <td>1.39 − pow(5/9, 3) × 0.29 ≈ 1.34</td>
-      <td>1.75rem (28px)</td>
-      <td>1.13 − pow(5/9, 3) × 0.13 ≈ 1.11</td>
-      <td>1.5rem (24px)</td>
-    </tr>
-    <tr>
-      <td><code>3xl</code></td>
-      <td>1.39 − pow(6/9, 3) × 0.29 ≈ 1.30</td>
-      <td>2rem (32px)</td>
-      <td>1.13 − pow(6/9, 3) × 0.13 ≈ 1.09</td>
-      <td>1.75rem (28px)</td>
-    </tr>
-    <tr>
-      <td><code>4xl</code></td>
-      <td>1.39 − pow(7/9, 3) × 0.29 ≈ 1.25</td>
-      <td>2.25rem (36px)</td>
-      <td>1.13 − pow(7/9, 3) × 0.13 ≈ 1.07</td>
-      <td>1.75rem (28px)</td>
-    </tr>
-    <tr>
-      <td><code>5xl</code></td>
-      <td>1.39 − pow(8/9, 3) × 0.29 ≈ 1.19</td>
-      <td>2.25rem (36px)</td>
-      <td>1.13 − pow(8/9, 3) × 0.13 ≈ 1.04</td>
-      <td>2rem (32px)</td>
-    </tr>
-    <tr>
-      <td><code>6xl</code></td>
-      <td>1.39 − pow(9/9, 3) × 0.29 = 1.10</td>
-      <td>2.5rem (40px)</td>
-      <td>1.13 − pow(9/9, 3) × 0.13 = 1.00</td>
-      <td>2.25rem (36px)</td>
-    </tr>
-  </tbody>
-</table>
+To choose between `label` and `body`, ask whether the text wraps, or could. The size of the text does not change its role, so a large key figure on a dashboard is still `label`.
 
-The multiplier decreases as font size increases, using an ease-out cubic curve — `1.39 − pow(n/9, 3) × 0.29` for default and `1.13 − pow(n/9, 3) × 0.13` for squished, where `n` is the step index (0 = `xs`, 9 = `6xl`). The cubic ease-out shape means the reduction is barely perceptible at small sizes and accelerates toward the top of the scale, keeping large display text optically tight without compressing body copy.
+A step is a font size and the line height that goes with it, and each is its own custom property. The family and the weight are separate tokens:
 
-<Canvas of={TypographyStories.UIText} />
+```css
+.label {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  font-weight: var(--eds-font-weight-normal);
+}
+```
 
-<Canvas of={TypographyStories.LongFormText} />
+The size names follow one pattern, `--eds-typography-{role}-{step}-font-size` and `--eds-typography-{role}-{step}-line-height`. The family is `--eds-font-family-header` for Equinor and `--eds-font-family-ui` for Inter. `ui` is only the name of the Inter family token, which `label` and `body` both use.
 
-## Baseline grid alignment
+Load both typefaces with the EDS variable font stylesheet, `https://cdn.eds.equinor.com/font/eds-uprights-vf.css`. The older `equinor-font.css` includes only Equinor, so with it alone every `label` and `body` style falls back to a generic sans-serif.
 
-Single-line UI text is **not** snapped to the baseline grid. Instead, the component derives its height from cap-height (`1cap`) rounded to the nearest 4 px, and distributes the remaining line-height symmetrically as padding. This keeps the element height predictable and optically centred regardless of font.
+Each role below is set with its own tokens, at its default weight. Use the density control to see every step move while the names stay the same.
 
-When text must wrap — as a last resort — the `multiline` prop switches to baseline trimming (`text-box: trim-both ex alphabetic`). The top of the text block is aligned to the baseline grid so that multi-line content sits consistently alongside other elements.
+<Canvas of={TypographyStories.HeaderRole} />
 
-<Canvas of={ButtonStories.MultilineAntiPattern} />
+<Canvas of={TypographyStories.LabelRole} />
 
-> **Anti-pattern.** Multi-line button labels are harder to scan and weaker as call-to-action elements. Shorten the label instead. The `multiline` prop exists only as a safety valve, never as a design choice.
+<Canvas of={TypographyStories.BodyRole} />
 
-## Size scale
+## Weights
 
-The scale uses equal-ratio steps of `pow(2, n/5)` — five steps per octave — anchored at `lg` (= `--_base`). Each density mode changes only the base:
+Weight is set separately from size, with three tokens: `--eds-font-weight-normal` (400), `--eds-font-weight-medium` (500) and `--eds-font-weight-bold` (700). Each role has a fixed set of them:
 
-<table>
-  <thead>
-    <tr>
-      <th>Density</th>
-      <th>Base</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Relaxed</td>
-      <td>18.5 px</td>
-    </tr>
-    <tr>
-      <td>Spacious (default)</td>
-      <td>16 px</td>
-    </tr>
-    <tr>
-      <td>Comfortable</td>
-      <td>14 px</td>
-    </tr>
-  </tbody>
-</table>
+- `header` is always medium.
+- `label` is normal by default, medium for text that needs emphasis, and bold for strong emphasis.
+- `body` is normal by default, and bold for strong emphasis.
 
-<table>
-  <thead>
-    <tr>
-      <th>Step</th>
-      <th>Multiplier</th>
-      <th>Spacious</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>xs</code></td>
-      <td>×2^(−3/5) ≈ 0.66</td>
-      <td>0.65625rem (10.5px)</td>
-    </tr>
-    <tr>
-      <td><code>sm</code></td>
-      <td>×2^(−2/5) ≈ 0.76</td>
-      <td>0.75rem (12px)</td>
-    </tr>
-    <tr>
-      <td><code>md</code></td>
-      <td>×2^(−1/5) ≈ 0.87</td>
-      <td>0.875rem (14px)</td>
-    </tr>
-    <tr>
-      <td><code>lg</code></td>
-      <td>×1</td>
-      <td>1rem (16px)</td>
-    </tr>
-    <tr>
-      <td><code>xl</code></td>
-      <td>×2^(1/5) ≈ 1.15</td>
-      <td>1.15625rem (18.5px)</td>
-    </tr>
-    <tr>
-      <td><code>2xl</code></td>
-      <td>×2^(2/5) ≈ 1.32</td>
-      <td>1.3125rem (21px)</td>
-    </tr>
-    <tr>
-      <td><code>3xl</code></td>
-      <td>×2^(3/5) ≈ 1.52</td>
-      <td>1.53125rem (24.5px)</td>
-    </tr>
-    <tr>
-      <td><code>4xl</code></td>
-      <td>×2^(4/5) ≈ 1.74</td>
-      <td>1.75rem (28px)</td>
-    </tr>
-    <tr>
-      <td><code>5xl</code></td>
-      <td>×2^(5/5) = 2</td>
-      <td>2rem (32px)</td>
-    </tr>
-    <tr>
-      <td><code>6xl</code></td>
-      <td>×2^(6/5) ≈ 2.30</td>
-      <td>2.3125rem (37px)</td>
-    </tr>
-  </tbody>
-</table>
+Weight does not change with size, so a `header.4xl` uses the same medium as a `header.md`. On the web, text in `<strong>` or `<b>` is bold whatever text surrounds it, and `<em>` and `<i>` keep the weight of the text around them and turn italic.
 
-## Spacing between text elements
+<Canvas of={TypographyStories.Weights} />
 
-**A base element stylesheet is in progress** ([#5477](https://github.com/equinor/design-system/issues/5477)) that will give `h1`–`h6` and `p` default sizes and flow spacing on the new tokens. Until it ships, use a `gap` on a flex or grid container to control the spacing between text elements yourself.
+## Density
+
+The `data-density` attribute on a wrapper resizes the text inside it, together with the spacing:
+
+```html
+<div data-density="compact">…</div>
+```
+
+Comfortable is the default, used where no attribute is set. Compact takes the font size and line height of the next smaller step, and Relaxed those of the next larger step, so a `label.md` in Compact is set like a `label.sm` in Comfortable. The custom property names are the same in every density, so the CSS does not change. The last worked example on this page shows one row in all three densities.
+
+The earlier beta named the densities differently: its `spacious`, or no attribute, is now Comfortable, and its `comfortable` is now Compact.
+
+## Line height without trimming
+
+The web does not trim text. A line of text is as tall as its line height, as it is in the Figma text styles, and no padding or line height is adjusted to make up for trimming. Every line height is a multiple of 4px, so text stays on the same 4px grid as the spacing around it.
+
+Set the line height wherever you set the font size, because text without its own line height inherits one from its parent. The first worked example below shows what that does to a caption.
+
+## Worked examples
+
+These are the worked examples from [Using typography](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-usage), with the CSS each one uses.
+
+### Always set the pair
+
+Take the font size and the line height from the same role and step. Both captions below sit in running text set in `body.lg`. The first sets both from `label.sm`. The second sets only the font size, so it inherits the line height of the running text, which in Comfortable is 28px where `label.sm` has 16px. The dashed outline shows the line box of each caption.
+
+<Canvas of={TypographyStories.AlwaysSetThePair} />
+
+```css
+.caption {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+}
+```
+
+### Hierarchy
+
+Reach for size first, then weight, then colour, and change as little as you need to. This row in a list of wells has three levels of text: the name in `label.lg` at medium weight, the status in `body.md`, and the inspection date in `label.sm` with `--eds-text-secondary`. The name and the date stay on one line, so they are `label`. The status can wrap, so it is `body`, even though it sits between them in the hierarchy.
+
+<Canvas of={TypographyStories.Hierarchy} />
+
+```css
+.well-name {
+  font-size: var(--eds-typography-label-lg-font-size);
+  line-height: var(--eds-typography-label-lg-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+.well-status {
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+}
+.well-inspected {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+```
+
+### Page composition
+
+An overview page, set with steps from the [decision table](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-usage#decision-table): the app name in `label.xl`, the page title in `header.4xl`, the ingress in `body.xl`, the key figures in `label.3xl` with their labels in `label.sm`, a section heading in `header.3xl` and running text in `body.lg`. The key figures use Inter's tabular figures, where every digit has the same width, so a value that updates does not shift sideways. The gaps between the elements frame the example and are not spacing guidance.
+
+<Canvas of={TypographyStories.PageComposition} />
+
+```css
+.app-name {
+  font-size: var(--eds-typography-label-xl-font-size);
+  line-height: var(--eds-typography-label-xl-line-height);
+}
+.page-title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-4xl-font-size);
+  line-height: var(--eds-typography-header-4xl-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+.ingress {
+  font-size: var(--eds-typography-body-xl-font-size);
+  line-height: var(--eds-typography-body-xl-line-height);
+}
+.figure-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+}
+.figure {
+  font-size: var(--eds-typography-label-3xl-font-size);
+  line-height: var(--eds-typography-label-3xl-line-height);
+  font-variant-numeric: tabular-nums;
+}
+.section-heading {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-3xl-font-size);
+  line-height: var(--eds-typography-header-3xl-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+.running-text {
+  font-size: var(--eds-typography-body-lg-font-size);
+  line-height: var(--eds-typography-body-lg-line-height);
+}
+```
+
+### Label versus body
+
+The same paragraph in `label.md` and in `body.md`. Both have the same font size, and `body.md` has more line height (in Comfortable, 24px where `label.md` has 20px), which helps the eye find the next line in a block of text. Text that wraps, or could, is `body`.
+
+<Canvas of={TypographyStories.LabelVersusBody} />
+
+### Heading level versus size
+
+Choose the heading element by the structure of the page, and the header step by how it should look. Both headings below are `h2` elements. The first is at `header.3xl`, the step that goes with an `h2`. The second is a section heading on an overview page, set at the size of a page title, and it stays an `h2`. [Heading levels](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-usage#heading-levels) lists the step for each level.
+
+<Canvas of={TypographyStories.HeadingLevelVersusSize} />
+
+```css
+.overview-page h2 {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-4xl-font-size);
+  line-height: var(--eds-typography-header-4xl-line-height);
+  font-weight: var(--eds-font-weight-medium);
+}
+```
+
+### Density
+
+The row from the hierarchy example under `data-density="compact"`, `"comfortable"` and `"relaxed"`. The markup and the custom properties are the same in all three, and only the attribute on the wrapper changes. To fit a dense view, set Compact on a wrapper instead of picking a smaller step, which would reimplement Compact and drift from every other dense view in the product.
+
+<Canvas of={TypographyStories.Density} />
+
+## Coming from the earlier beta
+
+The earlier beta of this page described a different model: a computed `ui-body` scale with `default` and `squished` line heights, weights that changed with the step, and text trimmed to the baseline. In the current tokens, `ui-body` with a `squished` line height becomes `label`, and `ui-body` with a `default` line height becomes `body`. The `bolder` weight is now `medium`, at the same weight, and `lighter` is removed. The first beta releases of `@equinor/eds-tokens`, 3.0.0-beta.1 to 3.0.0-beta.7, named the Inter role `ui`, which is now `label`, or `body` for text that wraps.
+
+[Coming from an earlier version](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography#coming-from-an-earlier-version) maps every old name to its replacement.

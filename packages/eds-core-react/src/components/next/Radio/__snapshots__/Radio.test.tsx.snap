@@ -21,7 +21,7 @@ exports[`Radio (next) matches snapshot 1`] = `
       <svg
         aria-hidden="true"
         class="eds-icon icon icon-checked"
-        data-icon-size="lg"
+        data-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
         viewBox="0 0 24 24"
@@ -36,7 +36,7 @@ exports[`Radio (next) matches snapshot 1`] = `
       <svg
         aria-hidden="true"
         class="eds-icon icon icon-unchecked"
-        data-icon-size="lg"
+        data-size="lg"
         data-testid="eds-icon"
         fill="currentColor"
         viewBox="0 0 24 24"
