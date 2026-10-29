@@ -9,14 +9,14 @@ import { bookmark_filled, person } from '@equinor/eds-icons'
 type StoryArgs = ComponentProps<typeof Chip>
 
 const meta: Meta<StoryArgs> = {
-  title: 'EDS 2.0 (beta)/Data Display/Chip',
+  title: 'Beta/Data Display/Chip',
   component: Chip,
   tags: ['beta'],
   parameters: {
     docs: {
       description: {
         component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
+**Beta:** safe to adopt alongside the Latest components (eds-core-react 2.x). The API may still change in small ways before 3.0.0 is released. See [About the beta](?path=/docs/beta-about--docs) for what beta means.
 
 \`\`\`tsx
 import { Chip } from '@equinor/eds-core-react/next'

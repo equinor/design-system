@@ -13,7 +13,7 @@ import { Link } from '../Link'
 import page from './Banner.docs.mdx'
 
 const meta: Meta<typeof Banner> = {
-  title: 'EDS 2.0 (beta)/Feedback/Banner',
+  title: 'Beta/Feedback/Banner',
   component: Banner,
   tags: ['beta'],
   decorators: [

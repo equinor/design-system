@@ -31,4 +31,4 @@ Search is a text field where users type a query to find and retrieve data, such 
 
 ## Related components
 
-- [`TextField`](?path=/docs/eds-2-0-beta-inputs-textfield--docs) is the complete field for other single line text.
+- [`TextField`](?path=/docs/beta-inputs-textfield--docs) is the complete field for other single line text.

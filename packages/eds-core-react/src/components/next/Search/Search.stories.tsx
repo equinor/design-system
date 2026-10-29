@@ -4,7 +4,7 @@ import { Search } from '.'
 import page from './Search.docs.mdx'
 
 const meta: Meta<typeof Search> = {
-  title: 'EDS 2.0 (beta)/Inputs/Search',
+  title: 'Beta/Inputs/Search',
   component: Search,
   tags: ['beta'],
   args: {

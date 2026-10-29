@@ -24,5 +24,5 @@ Input is a low-level text field for collecting a single line of text in custom c
 
 ## Related components
 
-- [`TextField`](?path=/docs/eds-2-0-beta-inputs-textfield--docs) wraps Input with a label, description, helper message and validation handled for you.
-- [`TextArea`](?path=/docs/eds-2-0-beta-inputs-textarea--docs) is the complete, labelled field for multi-line text, the same relationship TextField has to single-line Input.
+- [`TextField`](?path=/docs/beta-inputs-textfield--docs) wraps Input with a label, description, helper message and validation handled for you.
+- [`TextArea`](?path=/docs/beta-inputs-textarea--docs) is the complete, labelled field for multi-line text, the same relationship TextField has to single-line Input.

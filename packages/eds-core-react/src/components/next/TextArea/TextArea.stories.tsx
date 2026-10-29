@@ -5,7 +5,7 @@ import { ExampleLabel, Stack } from './../../../../.storybook/components'
 import page from './TextArea.docs.mdx'
 
 const meta: Meta<typeof TextArea> = {
-  title: 'EDS 2.0 (beta)/Inputs/TextArea',
+  title: 'Beta/Inputs/TextArea',
   component: TextArea,
   tags: ['beta'],
   args: {

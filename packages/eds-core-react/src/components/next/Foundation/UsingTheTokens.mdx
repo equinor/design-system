@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
 import './UsingTheTokens.stories.css'
 
-<Meta title="EDS 2.0 (beta)/Foundation/Using the tokens" />
+<Meta title="Beta/Foundation/Using the tokens" />
 
 export const probeTokens = [
   '--eds-background-surface',
@@ -183,7 +183,7 @@ The bundle is wrapped in `@layer eds-tokens` and opens with the statement `@laye
 | --- | --- |
 | `eds-tokens-legacy` | The 2.x token bundle, which the component stylesheet loads for the components that have not moved to the new names |
 | `eds-tokens` | This bundle |
-| `eds-elements` | Styles for plain HTML elements, such as those on the [Elements](?path=/docs/eds-2-0-beta-foundation-elements--docs) page |
+| `eds-elements` | Styles for plain HTML elements, such as those on the [Elements](?path=/docs/beta-foundation-elements--docs) page |
 | `eds-components` | The beta component styles |
 | No layer | Your own CSS |
 
@@ -223,8 +223,8 @@ Override published names only. An internal name, such as a step in the colour-sc
 
 ## Related pages
 
-- [Spacing](?path=/docs/eds-2-0-beta-foundation-spacing--docs): the spacing steps working in this Storybook, and how to use them in CSS
-- [About the beta](?path=/docs/eds-2-0-beta-about--docs): installing and importing the beta components
+- [Spacing](?path=/docs/beta-foundation-spacing--docs): the spacing steps working in this Storybook, and how to use them in CSS
+- [About the beta](?path=/docs/beta-about--docs): installing and importing the beta components
 - On the documentation site: [Getting started with colour](https://eds.equinor.com/docs/Next/foundation/colour/getting_started), [Spacing](https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing), [Typography](https://eds.equinor.com/docs/Next/foundation/design-tokens/typography) and [Elevation](https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation)
 - [The `@equinor/eds-tokens` README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#beta-the-redefined-token-structure), the package-level version of this setup
 - [ADR-0013](https://github.com/equinor/design-system/blob/main/documentation/adr/0013-attribute-scoped-custom-properties-not-light-dark.md): why the colour scheme is switched with an attribute

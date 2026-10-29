@@ -2,7 +2,7 @@
 
 <!-- This summary is shown above both the React and React Native tabs. Write it so it is true on both platforms, and put anything that differs by platform in Features or Usage. -->
 
-Badge labels content with a status, a category or a piece of metadata, so readers can see at a glance what an item is. Badge is non-interactive, so use [Chip](?path=/docs/eds-2-0-beta-data-display-chip--docs) instead for labels that users select.
+Badge labels content with a status, a category or a piece of metadata, so readers can see at a glance what an item is. Badge is non-interactive, so use [Chip](?path=/docs/beta-data-display-chip--docs) instead for labels that users select.
 
 ## Features
 
@@ -27,4 +27,4 @@ Badge labels content with a status, a category or a piece of metadata, so reader
 
 ## Related components
 
-- [`Chip`](?path=/docs/eds-2-0-beta-data-display-chip--docs) is the selectable counterpart to Badge.
+- [`Chip`](?path=/docs/beta-data-display-chip--docs) is the selectable counterpart to Badge.

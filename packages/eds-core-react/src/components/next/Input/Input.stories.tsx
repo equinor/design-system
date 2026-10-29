@@ -8,7 +8,7 @@ import { Icon } from '../Icon'
 import { Button } from '../Button'
 
 const meta: Meta<typeof Input> = {
-  title: 'EDS 2.0 (beta)/Inputs/Input',
+  title: 'Beta/Inputs/Input',
   component: Input,
   tags: ['beta'],
   args: {

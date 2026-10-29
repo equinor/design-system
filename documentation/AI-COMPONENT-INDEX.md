@@ -25,7 +25,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 | Dialog | — | onOpenChange, open, scrim | Dialog.Header, Dialog.Title, Dialog.Content, Dialog.Actions | — | active |
 | Divider | — | — | — | — | active |
 | Field | — | disabled, position | Field.Label, Field.Description, Field.HelperMessage | — | active |
-| Icon | Icon component for EDS 2.0 | color, data, size, title | — | — | active |
+| Icon | Icon component for the beta components (/next) | color, data, size, title | — | — | active |
 | Input | — | as, endAdornment, endText, hideErrorIcon, invalid, startAdornment, startText | — | — | active |
 | Link | — | asChild, variant | — | ✓ | active |
 | Menu | — | — | — | — | active |

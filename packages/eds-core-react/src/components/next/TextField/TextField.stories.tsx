@@ -8,7 +8,7 @@ import { Icon } from '../Icon'
 import page from './TextField.docs.mdx'
 
 const meta: Meta<typeof TextField> = {
-  title: 'EDS 2.0 (beta)/Inputs/TextField',
+  title: 'Beta/Inputs/TextField',
   component: TextField,
   tags: ['beta'],
   args: {

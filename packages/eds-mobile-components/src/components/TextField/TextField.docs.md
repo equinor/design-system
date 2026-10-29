@@ -22,5 +22,5 @@
 
 ## Related components
 
-- [`Input`](?path=/docs/eds-2-0-beta-inputs-input--docs) is the text input on its own, without a label or helper message.
-- [`TextArea`](?path=/docs/eds-2-0-beta-inputs-textarea--docs) is the complete field for text over several lines, with a character count.
+- [`Input`](?path=/docs/beta-inputs-input--docs) is the text input on its own, without a label or helper message.
+- [`TextArea`](?path=/docs/beta-inputs-textarea--docs) is the complete field for text over several lines, with a character count.

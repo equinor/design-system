@@ -39,7 +39,10 @@ const preview = {
 
   decorators: [
     (Story, context) => {
-      const isNext = context.title.startsWith('EDS 2.0')
+      // The beta stories are the ones under components/next. Keyed on the
+      // file instead of the title, so a story with an outdated title still
+      // gets the colour-scheme wrapper.
+      const isNext = context.parameters.fileName?.includes('/components/next/')
       const debugGrid = context.globals.debugGrid === 'on'
 
       useEffect(() => {
@@ -73,7 +76,7 @@ const preview = {
         order: [
           'Introduction',
           'EdsProvider',
-          'EDS 2.0 (beta)',
+          'Beta',
           [
             'About',
             'Breaking changes',

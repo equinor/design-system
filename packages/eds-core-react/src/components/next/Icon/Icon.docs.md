@@ -27,4 +27,4 @@ Icon shows a small symbol, so a button, a label or a line of text can carry a vi
 
 ## Related components
 
-- [`Button`](?path=/docs/eds-2-0-beta-inputs-button--docs) takes icons as children and sizes them.
+- [`Button`](?path=/docs/beta-inputs-button--docs) takes icons as children and sizes them.

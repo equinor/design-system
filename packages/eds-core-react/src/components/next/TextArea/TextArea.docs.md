@@ -27,4 +27,4 @@ TextArea is a complete form field for text over several lines, with a label, a d
 
 ## Related components
 
-- [`TextField`](?path=/docs/eds-2-0-beta-inputs-textfield--docs) is the complete field for a single line of text.
+- [`TextField`](?path=/docs/beta-inputs-textfield--docs) is the complete field for a single line of text.

@@ -83,7 +83,7 @@ const TokenValue = ({ name, density }: TokenValueProps) => {
 }
 
 const meta: Meta<Args> = {
-  title: 'EDS 2.0 (beta)/Foundation/Spacing',
+  title: 'Beta/Foundation/Spacing',
   parameters: {
     docs: { page },
   },
