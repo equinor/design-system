@@ -14,6 +14,7 @@ import { GalleryCard, GalleryGrid } from '@site/src/components/GalleryCard'
 import { TooltipMock } from '@site/src/components/TooltipMock'
 import { Prerequisites } from '@site/src/components/Prerequisites'
 import { TypeSpecimen } from '@site/src/components/TypeSpecimen'
+import { StatusChip } from '@site/src/components/StatusChip'
 
 // Register shared components globally so MDX docs can use them without a
 // per-file import. Keeps the layout/card system identical between the React
@@ -36,4 +37,5 @@ export default {
   TooltipMock,
   Prerequisites,
   TypeSpecimen,
+  StatusChip,
 }

@@ -33,7 +33,10 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Roadmap',
       collapsible: false,
-      items: ['about/roadmap/what-were-doing'],
+      items: [
+        'about/roadmap/what-were-doing',
+        'about/roadmap/components-status',
+      ],
     },
   ],
   //Components Section
