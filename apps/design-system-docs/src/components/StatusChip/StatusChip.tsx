@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import './statusChip.css'
+import './status-chip.css'
 
 export type StatusChipStatus =
   'planned' | 'in-progress' | 'beta' | 'stable' | 'deprecated'
@@ -27,3 +27,5 @@ export function StatusChip({ status, children }: StatusChipProps) {
     </span>
   )
 }
+
+StatusChip.displayName = 'StatusChip'
