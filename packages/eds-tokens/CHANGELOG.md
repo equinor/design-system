@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.10](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.9...eds-tokens@v3.0.0-beta.10) (2026-10-30)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5698](https://github.com/equinor/design-system/issues/5698)) ([ea152bf](https://github.com/equinor/design-system/commit/ea152bfbfd4d5c26920a9402bb948ccea29b914d))
+* update tokens from Tokens Studio release ([#5798](https://github.com/equinor/design-system/issues/5798)) ([b81474b](https://github.com/equinor/design-system/commit/b81474b8a10847bcbfcd15e531ca532ae7b1bacf))
+
+
+### 🐛 Fixed
+
+* add a generic sans-serif fallback to the font-family tokens ([#5706](https://github.com/equinor/design-system/issues/5706)) ([f5066d9](https://github.com/equinor/design-system/commit/f5066d9ada549728206b0ef7bde3e155f0f16390)), closes [#5701](https://github.com/equinor/design-system/issues/5701)
+
 ## [3.0.0-beta.9](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.8...eds-tokens@v3.0.0-beta.9) (2026-10-19)
 
 
