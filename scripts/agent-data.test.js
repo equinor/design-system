@@ -24,7 +24,8 @@ describe('agent data', () => {
   test('carries the schema version, the beta version and the install line', () => {
     assert.strictEqual(data.schemaVersion, SCHEMA_VERSION)
     assert.strictEqual(data.package, '@equinor/eds-core-react')
-    assert.match(data.version, /^\d+\.\d+\.\d+-beta\.\d+$/)
+    // Beta now, release candidate from 3.0.0-rc.1 (ADR-0025).
+    assert.match(data.version, /^\d+\.\d+\.\d+-(beta|rc)\.\d+$/)
     assert.match(data.installLine, /@equinor\/eds-core-react@beta/)
   })
 
@@ -43,6 +44,21 @@ describe('agent data', () => {
       )
       assert.ok(component.baseTypes.length > 0, component.name)
     }
+  })
+
+  test('the description is the Summary from .docs.md, not the JSDoc', () => {
+    const sidecar = fs.readFileSync(
+      path.join(
+        __dirname,
+        '../packages/eds-core-react/src/components/next/Icon/Icon.docs.md',
+      ),
+      'utf8',
+    )
+    const summary = sidecar
+      .split(/^## Summary$/m)[1]
+      .split(/^## /m)[0]
+      .trim()
+    assert.strictEqual(byName('Icon').description, summary)
   })
 
   test('a documented component has props, examples and guidance', () => {
