@@ -13,7 +13,7 @@ import {
 } from '.'
 
 const meta: Meta<typeof Avatar> = {
-  title: 'EDS 2.0 (beta)/Data Display/Avatar',
+  title: 'Beta/Data Display/Avatar',
   component: Avatar,
   tags: ['beta'],
   argTypes: {

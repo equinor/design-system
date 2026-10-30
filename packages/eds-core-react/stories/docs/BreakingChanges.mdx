@@ -143,7 +143,7 @@ Shared changes across the form components:
 
 ## Avatar
 
-EDS 1.0: `Avatar`.
+2.x: `Avatar`.
 
 **Props**
 
@@ -152,9 +152,9 @@ EDS 1.0: `Avatar`.
 - `alt` is optional. It falls back to `name`, and to an empty string when neither is set.
 - New: `name`, which derives the initials ("Ada Lovelace" gives "AL") and the accessible name, `initial` to override them, `emphasis` (`low` | `high`) and `notification`.
 
-**Markup and behaviour**: without `src` the avatar shows initials on a coloured background, where EDS 1.0 always rendered an `<img>`. The `<img>` is only rendered when `src` is set, and gets `class="photo"`. Given `name` and no `src`, the root gets `role="img"` and an `aria-label`. `notification` adds a dot that is announced as part of that label, or through visually hidden text when there is no label.
+**Markup and behaviour**: without `src` the avatar shows initials on a coloured background, where 2.x always rendered an `<img>`. The `<img>` is only rendered when `src` is set, and gets `class="photo"`. If the photo fails to load, the initials show instead. Given `name` and no photo, the root gets `role="img"` and an `aria-label`. `notification` adds a dot that is announced as part of that label, or through visually hidden text when there is no label.
 
-**New**: `AvatarNameLabel` pairs an avatar with a name, optional `meta` text and a trailing slot. It has no EDS 1.0 counterpart.
+**New**: `AvatarNameLabel` pairs an avatar with a name, optional `meta` text and a trailing slot. It has no 2.x counterpart.
 
 ## Badge
 
