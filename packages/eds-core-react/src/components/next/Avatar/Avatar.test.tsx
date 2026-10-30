@@ -114,7 +114,7 @@ describe('Avatar (next)', () => {
       )
       expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
         'aria-label',
-        'Ada Lovelace, notification',
+        'Ada Lovelace, Notification',
       )
     })
 
@@ -135,6 +135,27 @@ describe('Avatar (next)', () => {
         'photo.jpg',
       )
       expect(screen.getByText('Notification')).toBeInTheDocument()
+    })
+
+    it('uses notificationLabel in the aria-label', () => {
+      render(
+        <Avatar
+          data-testid="eds-avatar"
+          name="Ada Lovelace"
+          notification
+          notificationLabel="Varsel"
+        />,
+      )
+      expect(screen.getByTestId('eds-avatar')).toHaveAttribute(
+        'aria-label',
+        'Ada Lovelace, Varsel',
+      )
+    })
+
+    it('uses notificationLabel for the hidden text', () => {
+      render(<Avatar src="photo.jpg" notification notificationLabel="Varsel" />)
+      expect(screen.getByText('Varsel')).toBeInTheDocument()
+      expect(screen.queryByText('Notification')).not.toBeInTheDocument()
     })
   })
 
@@ -364,6 +385,18 @@ describe('AvatarNameLabel (next)', () => {
         <AvatarNameLabel name="Ada Lovelace" src="photo.jpg" notification />,
       )
       expect(screen.getAllByText('Notification')).toHaveLength(1)
+    })
+
+    it('uses notificationLabel for the hidden text', () => {
+      render(
+        <AvatarNameLabel
+          name="Ada Lovelace"
+          notification
+          notificationLabel="Varsel"
+        />,
+      )
+      expect(screen.getAllByText('Varsel')).toHaveLength(1)
+      expect(screen.queryByText('Notification')).not.toBeInTheDocument()
     })
 
     it('has no accessibility violations with photo — image is decorative', async () => {

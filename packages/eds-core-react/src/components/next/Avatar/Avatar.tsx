@@ -19,6 +19,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
     src,
     alt,
     notification = false,
+    notificationLabel = 'Notification',
     className,
     ...rest
   },
@@ -35,7 +36,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   const label =
     !showPhoto && name
       ? notification
-        ? `${name}, notification`
+        ? `${name}, ${notificationLabel}`
         : name
       : undefined
   const a11yProps = label ? { role: 'img' as const, 'aria-label': label } : {}
@@ -70,7 +71,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       {notification && <span className="notification" aria-hidden="true" />}
       {/* Announce notification to screen readers when the div carries no aria-label */}
       {notification && !label && announceNotification && (
-        <span className="notification-label">Notification</span>
+        <span className="notification-label">{notificationLabel}</span>
       )}
     </div>
   )

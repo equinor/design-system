@@ -15,6 +15,7 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
       size = 'lg',
       emphasis = 'low',
       notification = false,
+      notificationLabel = 'Notification',
       children,
       className,
       ...rest
@@ -45,7 +46,7 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
             {meta && <span className="meta">{meta}</span>}
             {/* After the name and meta, so a screen reader reads the person first */}
             {notification && (
-              <span className="notification-label">Notification</span>
+              <span className="notification-label">{notificationLabel}</span>
             )}
           </div>
         </div>

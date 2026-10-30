@@ -39,10 +39,16 @@ export type AvatarProps = {
   alt?: string
   /**
    * Show a red notification dot at the bottom-right corner. With `name` and
-   * initials, "notification" is added to the `aria-label` (e.g. `"Ada
-   * Lovelace, notification"`). With a photo or without `name`, a visually
-   * hidden "Notification" text is read out instead.
+   * initials, `notificationLabel` is added to the `aria-label` (e.g. `"Ada
+   * Lovelace, Notification"`). With a photo or without `name`, it is read out
+   * as visually hidden text instead.
    * @default false
    */
   notification?: boolean
+  /**
+   * Text screen readers announce for the notification dot. Override for
+   * localisation.
+   * @default 'Notification'
+   */
+  notificationLabel?: string
 } & HTMLAttributes<HTMLDivElement>

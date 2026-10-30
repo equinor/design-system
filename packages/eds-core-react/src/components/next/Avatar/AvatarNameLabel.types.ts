@@ -36,6 +36,12 @@ export type AvatarNameLabelProps = {
    * @default false
    */
   notification?: boolean
+  /**
+   * Text screen readers announce for the notification, after the name and
+   * meta. Override for localisation.
+   * @default 'Notification'
+   */
+  notificationLabel?: string
   /** Content for the trailing slot. It takes anything, for example an action button. */
   children?: ReactNode
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>

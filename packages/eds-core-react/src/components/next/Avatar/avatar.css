@@ -10,6 +10,10 @@
     --_font-size: var(--eds-typography-label-lg-font-size);
     --_line-height: var(--eds-typography-label-lg-line-height);
     --_dot-size: var(--eds-spacing-sm);
+    --_notification-bg: var(
+      --eds-background-interactive-danger-emphasis-default
+    );
+    --_notification-border: var(--eds-background-surface);
 
     /* No width token: the design uses 1px for every stroke (#5692) */
     --_stroke-width: 1px;
@@ -84,12 +88,10 @@
       box-sizing: border-box;
       width: var(--_dot-size);
       height: var(--_dot-size);
-      border: var(--_stroke-width) solid var(--eds-background-surface);
+      border: var(--_stroke-width) solid var(--_notification-border);
       border-radius: var(--eds-corner-radius-pill);
 
-      background-color: var(
-        --eds-background-interactive-danger-emphasis-default
-      );
+      background-color: var(--_notification-bg);
     }
   }
 
@@ -195,13 +197,14 @@
    * an empty ring. */
   @media (forced-colors: active) {
     .eds-avatar {
+      --_notification-bg: CanvasText;
+      --_notification-border: Canvas;
+
       outline: var(--_stroke-width) solid;
       outline-offset: calc(-1 * var(--_stroke-width));
 
       & .notification {
-        border-color: Canvas;
         forced-color-adjust: none;
-        background-color: CanvasText;
       }
     }
   }
