@@ -1,7 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { CliError, fail } from './errors.js'
-import { findPackage, hasExport } from './resolve.js'
+import { findPackage, hasExport, readTextFile } from './resolve.js'
 import type { Component, ComponentData } from './types.js'
 
 /**
@@ -48,11 +48,10 @@ export function loadComponents(cwd: string, dataPath?: string): ComponentData {
       )
     }
   }
-  if (!existsSync(file)) return fail(`No such file: ${file}`)
-
+  const text = readTextFile(file)
   let data: ComponentData | null
   try {
-    data = JSON.parse(readFileSync(file, 'utf8')) as ComponentData | null
+    data = JSON.parse(text) as ComponentData | null
   } catch {
     return fail(`Could not read ${file}: it is not valid JSON.`)
   }
@@ -173,8 +172,8 @@ export function similarNames(data: ComponentData, name: string): string[] {
     .map((c) => c.name)
 }
 
-// Levenshtein distance, for "did you mean" on short component names.
-function distance(a: string, b: string): number {
+// Levenshtein distance, for "did you mean" and typo matches.
+export function distance(a: string, b: string): number {
   let previous = Array.from({ length: b.length + 1 }, (_, i) => i)
   for (let i = 1; i <= a.length; i++) {
     const current = [i]

@@ -1,5 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
+import { fail } from './errors.js'
 
 export type InstalledPackage = {
   name: string
@@ -22,10 +24,13 @@ export function findPackage(
     const root = join(dir, 'node_modules', name)
     const manifest = join(root, 'package.json')
     if (existsSync(manifest)) {
-      const { version, exports } = JSON.parse(
-        readFileSync(manifest, 'utf8'),
-      ) as { version: string; exports?: unknown }
-      return { name, version, root, exports }
+      let parsed: { version: string; exports?: unknown }
+      try {
+        parsed = JSON.parse(readFileSync(manifest, 'utf8')) as typeof parsed
+      } catch {
+        return fail(`Could not read ${manifest}: it is not valid JSON.`)
+      }
+      return { name, version: parsed.version, root, exports: parsed.exports }
     }
     const parent = dirname(dir)
     if (parent === dir) return null
@@ -42,42 +47,25 @@ export function hasExport(pkg: InstalledPackage, specifier: string): boolean {
   )
 }
 
-// The file an export target points to: a path, or the `default` condition.
-const exportTarget = (value: unknown): string | null =>
-  typeof value === 'string'
-    ? value
-    : value && typeof value === 'object' && 'default' in value
-      ? exportTarget(value.default)
-      : null
-
 /**
- * The file an export specifier such as `./css/variables.css` points to, or
- * null if the package does not export it. Handles plain paths, patterns with
- * one `*` and the `default` condition, which covers how EDS exports files.
+ * The file a package specifier such as
+ * `@equinor/eds-tokens/next/css/variables.css` resolves to for a file in
+ * `cwd`, or null if the package does not export it. Node does the resolution,
+ * so exact keys, the priority of patterns and `null` targets follow its rules.
  */
-export function exportPath(
-  pkg: InstalledPackage,
-  specifier: string,
-): string | null {
-  if (!pkg.exports || typeof pkg.exports !== 'object') return null
-  for (const [key, value] of Object.entries(pkg.exports)) {
-    const target = exportTarget(value)
-    if (!target) continue
-    if (key === specifier) return join(pkg.root, target)
-    const [prefix, suffix] = key.split('*')
-    if (
-      suffix !== undefined &&
-      specifier.length >= prefix.length + suffix.length &&
-      specifier.startsWith(prefix) &&
-      specifier.endsWith(suffix)
-    ) {
-      const match = specifier.slice(
-        prefix.length,
-        specifier.length - suffix.length,
-      )
-      // Node replaces every * in the target, not only the first.
-      return join(pkg.root, target.replaceAll('*', match))
-    }
+export function resolveExport(cwd: string, specifier: string): string | null {
+  try {
+    return createRequire(join(cwd, 'noop.js')).resolve(specifier)
+  } catch {
+    return null
   }
-  return null
+}
+
+/** Reads a file the user or a package points to, with a clear error */
+export function readTextFile(file: string): string {
+  if (!existsSync(file)) return fail(`No such file: ${file}`)
+  if (statSync(file).isDirectory()) {
+    return fail(`${file} is a folder, not a file.`)
+  }
+  return readFileSync(file, 'utf8')
 }

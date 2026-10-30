@@ -1,7 +1,6 @@
-import { existsSync, readFileSync } from 'node:fs'
-import { notInstalled } from './components.js'
+import { distance, notInstalled } from './components.js'
 import { fail } from './errors.js'
-import { exportPath, findPackage } from './resolve.js'
+import { findPackage, readTextFile, resolveExport } from './resolve.js'
 
 const PACKAGE = '@equinor/eds-tokens'
 // Where the beta CSS bundle is exported, in order. During the beta it sits
@@ -41,15 +40,18 @@ export type Token = {
 /** Reads the CSS from `cssPath`, or else from the installed eds-tokens */
 export function loadTokens(cwd: string, cssPath?: string): TokenSheet {
   if (cssPath) {
-    if (!existsSync(cssPath)) return fail(`No such file: ${cssPath}`)
-    return parseTokens(readFileSync(cssPath, 'utf8'))
+    const sheet = parseTokens(readTextFile(cssPath))
+    if (sheet.semantic.size) return sheet
+    return fail(
+      `${cssPath} has no semantic beta tokens. Point --css to the beta bundle, src/tokens/css/variables.css in @equinor/eds-tokens@beta.`,
+    )
   }
   const pkg = findPackage(PACKAGE, cwd)
   if (!pkg) return fail(notInstalled(PACKAGE, cwd))
   for (const specifier of CSS_EXPORTS) {
-    const file = exportPath(pkg, specifier)
-    if (!file || !existsSync(file)) continue
-    const sheet = parseTokens(readFileSync(file, 'utf8'))
+    const file = resolveExport(cwd, `${PACKAGE}${specifier.slice(1)}`)
+    if (!file) continue
+    const sheet = parseTokens(readTextFile(file))
     if (sheet.semantic.size) return sheet
   }
   return fail(
@@ -123,15 +125,54 @@ export function searchTokens(
     ? new Set(scopes.flatMap((s) => [...s.keys()]))
     : new Set(sheet.semantic.keys())
   const words = query.toLowerCase().split(/\s+/).filter(Boolean)
+  const find = (match: (name: string, word: string) => boolean) =>
+    [...names].filter((name) => words.every((w) => match(name, w)))
+  // Only when nothing matches exactly, one typo is allowed in words of five
+  // letters or more, as in component search.
+  const exact = find((name, word) => name.includes(word))
+  const matches = exact.length
+    ? exact
+    : find(
+        (name, word) =>
+          word.length >= 5 &&
+          name.split('-').some((part) => distance(part, word) <= 1),
+      )
 
-  return [...names]
-    .filter((name) => words.every((w) => name.includes(w)))
-    .sort()
-    .map((name) => {
-      const value = lookup(name) ?? ''
-      return { name, value, resolved: resolve(value, lookup, new Set([name])) }
-    })
+  return matches.sort(byScale).map((name) => {
+    const value = lookup(name) ?? ''
+    return { name, value, resolved: resolve(value, lookup, new Set([name])) }
+  })
 }
+
+// Sizes in the order of the scale, so `--eds-spacing-*` lists from smallest
+// to largest instead of alphabetically (2xl, 2xs, 3xl ...).
+const SCALE = [
+  'none',
+  '6xs',
+  '5xs',
+  '4xs',
+  '3xs',
+  '2xs',
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+]
+const scaleKey = (name: string) =>
+  name
+    .split('-')
+    .map((part) => {
+      const step = SCALE.indexOf(part)
+      return step === -1 ? part : `~${String(step).padStart(2, '0')}`
+    })
+    .join('-')
+const byScale = (a: string, b: string) => scaleKey(a).localeCompare(scaleKey(b))
 
 // Words people and agents search with that are not part of any token name,
 // mapped to the word the tokens use. An agent looking for a gap or a padding
@@ -167,12 +208,29 @@ export function tokenHints(sheet: TokenSheet, query: string): TokenHints {
     // Own keys only, so `constructor` is not taken for a synonym.
     .filter((word) => Object.hasOwn(SYNONYMS, word))
     .map((word) => ({ word, use: SYNONYMS[word] }))
-  const groups = [
-    ...new Set(
-      [...sheet.semantic.keys()].map((name) => name.split('-')[3] ?? name),
-    ),
-  ].sort()
-  return { renamed, groups }
+  return { renamed, groups: tokenGroups([...sheet.semantic.keys()]) }
+}
+
+// The first word of the token names, or the first two where every token in a
+// group of several shares them: corner-radius and data-visualization, but font, because
+// font-family and font-weight differ.
+function tokenGroups(names: string[]): string[] {
+  const byFirst = new Map<string, string[][]>()
+  for (const name of names) {
+    const parts = name.replace(/^--eds-/, '').split('-')
+    byFirst.set(parts[0], [...(byFirst.get(parts[0]) ?? []), parts])
+  }
+  return [...byFirst]
+    .map(([first, members]) => {
+      const second = members[0][1]
+      // A group of one says nothing about a second word.
+      return members.length > 1 &&
+        second &&
+        members.every((parts) => parts[1] === second)
+        ? `${first}-${second}`
+        : first
+    })
+    .sort()
 }
 
 // Replaces each var(--x) with the value of --x, recursively. A missing token

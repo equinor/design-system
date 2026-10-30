@@ -34,8 +34,12 @@ const indent = (text: string, by = '  ') =>
     .map((line) => (line ? by + line : line))
     .join('\n')
 
-const firstSentence = (text: string | null) =>
-  text ? (text.match(/^.*?[.!?](\s|$)/)?.[0].trim() ?? text) : ''
+// The first sentence, across line breaks, without stopping at "e.g." or "i.e.".
+const firstSentence = (text: string | null) => {
+  if (!text) return ''
+  const flat = text.replace(/\s+/g, ' ').trim()
+  return flat.match(/^.*?(?<!\b(?:e\.g|i\.e))[.!?](?=\s|$)/)?.[0] ?? flat
+}
 
 function componentLines(components: Component[]): string[] {
   const width = Math.max(...components.map((c) => c.name.length))
@@ -120,9 +124,10 @@ function formatExamples(component: Component, all: boolean): string[] {
     : component.examples.slice(0, EXAMPLES_BY_DEFAULT)
   const lines = ['Examples']
   for (const example of shown) {
-    lines.push(
-      `  ${example.title}${example.caption ? `: ${example.caption}` : ''}`,
-    )
+    // A caption can run over several lines, or hold a table.
+    const [first, ...more] = (example.caption ?? '').split('\n')
+    lines.push(`  ${example.title}${first ? `: ${first}` : ''}`)
+    if (more.length) lines.push(indent(more.join('\n'), '    '))
     lines.push(indent(example.code, '    '))
   }
   const hidden = component.examples.length - shown.length

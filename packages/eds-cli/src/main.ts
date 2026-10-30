@@ -17,6 +17,7 @@ import {
   type Section,
 } from './format.js'
 import { findPackage } from './resolve.js'
+import type { Component } from './types.js'
 import {
   DENSITIES,
   loadTokens,
@@ -37,7 +38,7 @@ Usage
 
 Options
   --json                    Print JSON instead of text
-  --section <name>          show, text output only: ${SECTIONS.join(', ')}
+  --section <name>          show: only ${SECTIONS.join(', ')}
   --scheme <name>           tokens: ${SCHEMES.join(' or ')} (default light)
   --density <name>          tokens: ${DENSITIES.join(', ')} (default comfortable)
   --all                     tokens: include the internal tokens, and show what each token refers to
@@ -90,6 +91,18 @@ function versions(cwd: string) {
     lines.push(`${name} ${pkg ? pkg.version : 'not installed'}`)
   }
   return lines.join('\n')
+}
+
+// With --section, the JSON holds the name and that part only, as the text does.
+function pickSection(component: Component, section?: Section) {
+  if (!section) return component
+  const { name } = component
+  if (section === 'props') {
+    return { name, props: component.props, baseTypes: component.baseTypes }
+  }
+  if (section === 'examples') return { name, examples: component.examples }
+  if (section === 'links') return { name, links: component.links }
+  return { name, guidance: { [section]: component.guidance[section] } }
 }
 
 /** Runs the CLI and returns the exit code */
@@ -148,7 +161,12 @@ export function main(argv: string[], io: Io): number {
           rest,
         )
         // Always an array, so a script parses one shape for any number of names.
-        if (found.length) print(found, () => formatComponents(found, section))
+        if (found.length) {
+          print(
+            found.map((component) => pickSection(component, section)),
+            () => formatComponents(found, section),
+          )
+        }
         for (const error of errors) io.err(`eds: ${error}`)
         return errors.length ? 1 : 0
       }
