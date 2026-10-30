@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react'
+import { forwardRef, useContext, useState } from 'react'
 import type { AvatarProps } from './Avatar.types'
 import { AnnounceNotificationContext, deriveInitials } from './utils'
 
@@ -25,11 +25,19 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
   ref,
 ) {
   const announceNotification = useContext(AnnounceNotificationContext)
+  // Keyed on src, so a new src gets a fresh try without an effect
+  const [failedSrc, setFailedSrc] = useState<string>()
+  const showPhoto = Boolean(src) && src !== failedSrc
   const classes = ['eds-avatar', className].filter(Boolean).join(' ')
-  const resolvedInitial = initial ?? (name ? deriveInitials(name) : undefined)
-  // When src is provided the <img> element carries the accessible name — skip role/aria-label on the div
+  // || rather than ??, so an empty initial also falls back to the name
+  const resolvedInitial = initial || (name ? deriveInitials(name) : undefined)
+  // When the photo shows, the <img> element carries the accessible name — skip role/aria-label on the div
   const label =
-    !src && name ? (notification ? `${name}, notification` : name) : undefined
+    !showPhoto && name
+      ? notification
+        ? `${name}, notification`
+        : name
+      : undefined
   const a11yProps = label ? { role: 'img' as const, 'aria-label': label } : {}
   const px = pixelSizeMap[size]
 
@@ -43,13 +51,14 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       {...a11yProps}
       {...rest}
     >
-      {src ? (
+      {showPhoto ? (
         <img
           className="photo"
           src={src}
           alt={alt ?? name ?? ''}
           width={px}
           height={px}
+          onError={() => setFailedSrc(src)}
         />
       ) : (
         resolvedInitial && (

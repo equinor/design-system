@@ -8,7 +8,7 @@ Avatar represents a person in a small circle, for example in lists and headers. 
 
 <!-- Three to five short lines on what the component does for you. Do not repeat the controls. -->
 
-- Shows a profile photo, or initials when there is no photo.
+- Shows a profile photo, or initials when there is no photo or it fails to load.
 - One `name` gives both the initials and the accessible name, so screen readers announce the person.
 - Can show a notification dot that screen readers also announce.
 - `AvatarNameLabel` has room for secondary text, such as a job title, and an open trailing slot that takes any content.
@@ -24,6 +24,6 @@ Avatar represents a person in a small circle, for example in lists and headers. 
 - Avatar is not interactive. It has no `tabindex` and is not focusable.
 - With `name` and no `src`, the avatar gets `role="img"` and an `aria-label` with the name. The initials themselves are hidden from screen readers.
 - Without `name` or `src`, the avatar has no role and is decorative. Pass `name` when Avatar stands on its own.
-- With `src`, the `img` carries the accessible name through `alt`, which falls back to `name`. Pass `alt=""` for a decorative photo.
-- With `notification`, "notification" is added to the label (`"Ada Lovelace, notification"`). Without a label, a visually hidden "Notification" text is read out instead. The dot itself is hidden from screen readers.
+- With `src`, the `img` carries the accessible name through `alt`, which falls back to `name`. Pass `alt=""` for a decorative photo. If the photo fails to load, the avatar shows the initials and gets the `role="img"` and `aria-label` it has without `src`.
+- With `notification`, "notification" is added to the `aria-label` (`"Ada Lovelace, notification"`). With a photo, or without `name`, there is no `aria-label`, so a visually hidden "Notification" text is read out instead. The dot itself is hidden from screen readers.
 - Inside `AvatarNameLabel` the avatar is decorative, and the photo gets an empty `alt` by default, so the visible name is not announced twice. Content in the trailing slot needs its own accessible name, such as an `aria-label` on an icon button.

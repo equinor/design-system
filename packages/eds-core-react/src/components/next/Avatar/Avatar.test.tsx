@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { axe } from 'jest-axe'
 import { Avatar } from './Avatar'
 import { AvatarNameLabel } from './AvatarNameLabel'
@@ -25,6 +25,28 @@ describe('Avatar (next)', () => {
     it('does not render initials when src is provided', () => {
       render(<Avatar src="photo.jpg" name="Ada Lovelace" />)
       expect(screen.queryByText('AL')).not.toBeInTheDocument()
+    })
+
+    it('shows the initials when the photo fails to load', () => {
+      render(<Avatar src="broken.jpg" name="Ada Lovelace" />)
+      fireEvent.error(screen.getByRole('img', { name: 'Ada Lovelace' }))
+      expect(screen.getByText('AL')).toBeInTheDocument()
+      expect(screen.getByRole('img', { name: 'Ada Lovelace' })).toHaveAttribute(
+        'data-testid',
+        'eds-avatar',
+      )
+    })
+
+    it('tries a new src after the previous one failed', () => {
+      const { rerender } = render(
+        <Avatar src="broken.jpg" name="Ada Lovelace" />,
+      )
+      fireEvent.error(screen.getByRole('img', { name: 'Ada Lovelace' }))
+      rerender(<Avatar src="photo.jpg" name="Ada Lovelace" />)
+      expect(screen.getByRole('img', { name: 'Ada Lovelace' })).toHaveAttribute(
+        'src',
+        'photo.jpg',
+      )
     })
 
     it('does not render initial span when initial is not provided', () => {
@@ -105,6 +127,15 @@ describe('Avatar (next)', () => {
       render(<Avatar name="Ada Lovelace" notification />)
       expect(screen.queryByText('Notification')).not.toBeInTheDocument()
     })
+
+    it('reads the name from alt and renders the hidden Notification text with src', () => {
+      render(<Avatar src="photo.jpg" name="Ada Lovelace" notification />)
+      expect(screen.getByRole('img', { name: 'Ada Lovelace' })).toHaveAttribute(
+        'src',
+        'photo.jpg',
+      )
+      expect(screen.getByText('Notification')).toBeInTheDocument()
+    })
   })
 
   describe('Accessibility', () => {
@@ -116,6 +147,11 @@ describe('Avatar (next)', () => {
     it('auto-derives initial from name when initial is not provided', () => {
       render(<Avatar name="Ada Lovelace" />)
       expect(screen.getByText('AL')).toBeInTheDocument()
+    })
+
+    it('derives the initials from name when initial is empty', () => {
+      render(<Avatar initial="" name="kamsi George" />)
+      expect(screen.getByText('KG')).toBeInTheDocument()
     })
 
     it('keeps a whole emoji when the name starts with one', () => {
@@ -169,6 +205,19 @@ describe('AvatarNameLabel (next)', () => {
     it('derives single initial when name is one word', () => {
       render(<AvatarNameLabel name="Ada" />)
       expect(screen.getByText('A')).toBeInTheDocument()
+    })
+
+    it('derives the initials from name when initial is empty', () => {
+      render(<AvatarNameLabel name="kamsi George" initial="" />)
+      expect(screen.getByText('KG')).toBeInTheDocument()
+    })
+
+    it('shows the initials when the photo fails to load', () => {
+      render(
+        <AvatarNameLabel name="Ada Lovelace" src="broken.jpg" alt="Portrait" />,
+      )
+      fireEvent.error(screen.getByRole('img', { name: 'Portrait' }))
+      expect(screen.getByText('AL')).toBeInTheDocument()
     })
 
     it('uses provided initial over derived one', () => {
@@ -295,6 +344,26 @@ describe('AvatarNameLabel (next)', () => {
         />,
       )
       expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('gives the photo an empty alt by default', () => {
+      render(<AvatarNameLabel name="Ada Lovelace" src="photo.jpg" />)
+      expect(screen.queryByRole('img')).not.toBeInTheDocument()
+      expect(screen.getByRole('presentation')).toHaveAttribute('alt', '')
+    })
+
+    it('uses the alt prop for the photo when passed', () => {
+      render(
+        <AvatarNameLabel name="Ada Lovelace" src="photo.jpg" alt="Portrait" />,
+      )
+      expect(screen.getByRole('img', { name: 'Portrait' })).toBeInTheDocument()
+    })
+
+    it('announces the notification once with a photo', () => {
+      render(
+        <AvatarNameLabel name="Ada Lovelace" src="photo.jpg" notification />,
+      )
+      expect(screen.getAllByText('Notification')).toHaveLength(1)
     })
 
     it('has no accessibility violations with photo — image is decorative', async () => {

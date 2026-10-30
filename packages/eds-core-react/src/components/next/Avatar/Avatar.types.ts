@@ -31,16 +31,17 @@ export type AvatarProps = {
   name?: string
   /**
    * Image source URL. When provided, renders a circular photo instead of initials.
+   * If the photo fails to load, the initials show instead.
    * Pair with `name` or `alt` for accessibility.
    */
   src?: string
   /** Alt text for the image. Falls back to `name` if not provided. Pass `""` explicitly for decorative images. */
   alt?: string
   /**
-   * Show a red notification dot at the bottom-right corner. With `name`,
-   * "notification" is added to the `aria-label` (e.g. `"Ada Lovelace,
-   * notification"`). Without `name`, a visually hidden "Notification" text is
-   * read out instead.
+   * Show a red notification dot at the bottom-right corner. With `name` and
+   * initials, "notification" is added to the `aria-label` (e.g. `"Ada
+   * Lovelace, notification"`). With a photo or without `name`, a visually
+   * hidden "Notification" text is read out instead.
    * @default false
    */
   notification?: boolean

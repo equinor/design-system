@@ -21,7 +21,7 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
     },
     ref,
   ) {
-    const derivedInitial = initial ?? deriveInitials(name)
+    const derivedInitial = initial || deriveInitials(name)
     const classes = ['eds-avatar-name-label', className]
       .filter(Boolean)
       .join(' ')
@@ -29,14 +29,14 @@ export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
     return (
       <div ref={ref} className={classes} data-layout={layout} {...rest}>
         <div className="content">
-          {/* alt forced to '' so Avatar's own name fallback doesn't announce the name twice — the visible label text already covers it */}
+          {/* alt forced to '' so Avatar's own name fallback doesn't announce the name twice — the visible label text already covers it. Initials are always passed, so Avatar can show them if the photo fails to load. */}
           <AnnounceNotificationContext.Provider value={false}>
             <Avatar
               size={size}
               emphasis={emphasis}
               src={src}
               alt={alt ?? ''}
-              initial={src ? undefined : derivedInitial}
+              initial={derivedInitial}
               notification={notification}
             />
           </AnnounceNotificationContext.Provider>
