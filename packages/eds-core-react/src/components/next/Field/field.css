@@ -7,11 +7,12 @@
     --_eds-field-description-color: var(--eds-text-secondary);
     --_eds-field-indicator-color: var(--eds-text-secondary);
     --_eds-field-helper-color: var(--eds-text-secondary);
+    --_gap: var(--eds-spacing-2xs);
 
     /* Layout - use CSS variable for configurable width */
     display: flex;
     flex-direction: column;
-    gap: var(--eds-spacing-2xs);
+    gap: var(--_gap);
     align-items: flex-start;
 
     width: var(--eds-field-width, 100%);
@@ -21,8 +22,9 @@
 
     /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
     &:is([data-position='start'], [data-position='end']) {
+      --_gap: var(--eds-spacing-xs);
+
       flex-flow: row wrap;
-      gap: var(--eds-spacing-xs);
       align-items: center;
     }
 
@@ -62,6 +64,13 @@
       font-size: var(--eds-typography-label-sm-font-size);
       line-height: var(--eds-typography-label-sm-line-height);
       color: var(--_eds-field-description-color);
+    }
+
+    /* Figma has no gap between the label and the description, so the
+       description cancels the column gap. Whatever precedes it (the label,
+       or a wrapper such as TextField's header) counts as the label row. */
+    &:not([data-position]) > * + .description {
+      margin-block-start: calc(var(--_gap) * -1);
     }
 
     & .helper-message {
