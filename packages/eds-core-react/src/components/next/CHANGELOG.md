@@ -4,6 +4,31 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.5](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.4...eds-core-react-next@v3.0.0-beta.5) (2026-10-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Icon (next) sets `data-size` instead of `data-icon-size`. `size` now maps to the spacing token of the same name, and an Icon without `size` is `xl` (24px) whatever the surrounding text. To keep today's size, move up one name. The old names still compile, so TypeScript only catches `xs`:
+* Chip reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are children of a Chip take the chip's icon size, so an `Icon`'s `size` prop no longer changes them. Chip sets `data-tone` instead of `data-color-appearance`, so CSS that targets `.eds-chip[data-color-appearance]` no longer matches. Chip no longer sets `data-selectable-space`, and density follows `compact`, `comfortable` and `relaxed`.
+* Icons that are direct children of Button follow the button's size and density, so an `Icon`'s `size` prop no longer changes them.
+
+### ✨ Added
+
+* add Avatar and AvatarNameLabel ([#5089](https://github.com/equinor/design-system/issues/5089)) ([cd16c6d](https://github.com/equinor/design-system/commit/cd16c6d36ab5ff002578fb0aece9072c5dd00f83))
+
+
+### 🐛 Fixed
+
+* expand Accordion panel in browsers without calc-size() ([#5740](https://github.com/equinor/design-system/issues/5740)) ([ce73731](https://github.com/equinor/design-system/commit/ce73731421d3b840d20921d3cfd476746b604faf))
+
+
+### ♻️ Refactoring
+
+* migrate Button (next) to beta tokens ([#5222](https://github.com/equinor/design-system/issues/5222)) ([d7ee02b](https://github.com/equinor/design-system/commit/d7ee02b1467b940217095b25aef1b519aea90f3d))
+* migrate Chip (next) to the redefined tokens ([#5225](https://github.com/equinor/design-system/issues/5225)) ([e34181a](https://github.com/equinor/design-system/commit/e34181a1bec007e5f1559b6a4c19c1d8a84bf493))
+* migrate Icon (next) to beta tokens ([#5735](https://github.com/equinor/design-system/issues/5735)) ([4479f6b](https://github.com/equinor/design-system/commit/4479f6be99fb406c92bc3a662683b80e908d2bf5))
+
 ## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.3...eds-core-react-next@v3.0.0-beta.4) (2026-10-19)
 
 
