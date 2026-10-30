@@ -206,15 +206,43 @@ describe('Radio (next)', () => {
       const wrapper = radio.closest('.eds-radio')
       expect(wrapper).not.toHaveAttribute('data-disabled')
     })
+  })
 
-    it('keeps accent color appearance when disabled', () => {
-      // The disabled greys are appearance-independent in CSS, so the
-      // appearance no longer flips to neutral on the disabled prop
+  describe('Tone', () => {
+    it('sets the accent tone with a label', () => {
+      render(<Radio label="Option" name="test" />)
+      const radio = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('sets the accent tone without a label', () => {
+      render(<Radio aria-label="Option" name="test" />)
+      const radio = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('keeps the accent tone when disabled', () => {
+      // The disabled tokens do not depend on the tone, so the tone does not
+      // flip to neutral on the disabled prop
       render(<Radio label="Disabled radio" name="test" disabled />)
       const radio = screen.getByLabelText('Disabled radio')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = radio.closest('.eds-radio')
-      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('does not set the legacy foundation attributes', () => {
+      render(<Radio label="Option" name="test" />)
+      const radio = screen.getByRole('radio')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = radio.closest('.eds-radio')
+      expect(wrapper).not.toHaveAttribute('data-color-appearance')
+      expect(wrapper).not.toHaveAttribute('data-selectable-space')
+      expect(wrapper).not.toHaveAttribute('data-space-proportions')
     })
   })
 

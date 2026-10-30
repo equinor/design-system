@@ -52,9 +52,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         disabled={disabled}
         className={rootClassName}
         style={style}
-        data-color-appearance="accent"
-        data-selectable-space="md"
-        data-space-proportions="squished"
+        data-tone="accent"
       >
         {radioInput}
         <Field.Label htmlFor={inputId}>{label}</Field.Label>
@@ -67,7 +65,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       className={rootClassName}
       style={style}
       data-standalone={true}
-      data-color-appearance="accent"
+      data-tone="accent"
     >
       {radioInput}
     </span>
