@@ -16,9 +16,10 @@
  * - props (and asChild, read from them), examples and guidance come from the
  *   Storybook docs generator (scripts/component-docs/)
  *
- * A component without a `.docs.md` sidecar still gets props, sub-components and
- * examples, but no guidance and no summary. Its description falls back to the
- * JSDoc on the component, or `null` when that is missing too.
+ * The description is the hand-written Summary in `.docs.md`, which is written
+ * for readers. A component without a sidecar still gets props, sub-components
+ * and examples, but no guidance, and its description falls back to the JSDoc on
+ * the component, or `null` when that is missing too.
  *
  * `version` and the source links follow the beta release line
  * (`next/version.txt`, tagged `eds-core-react-next@v<version>`), not the
@@ -28,7 +29,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const { Project } = require('ts-morph')
 const {
   discoverPublicComponents,
   extractComponentData,
@@ -42,6 +42,7 @@ const {
 const { extractProps, extractBaseTypes } = require('./component-docs/props')
 const { extractStories } = require('./component-docs/stories')
 const { readSidecar } = require('./component-docs/sidecar')
+const { createProject } = require('./component-docs/project')
 const { DocsError, fail } = require('./component-docs/errors')
 
 // Bump when the shape of components.json changes in a way the CLI must know
@@ -80,23 +81,47 @@ function readGuidance(dir, name) {
   return { summary: sections.Summary, guidance, links }
 }
 
-// Every web component builds on a React DOM type. None found usually means
-// React's types did not resolve, which also empties the props list, so the
-// build stops instead of shipping incomplete data. The extractor also finds
-// nothing for an interface that extends a React type, a qualified name such as
-// `React.HTMLAttributes`, or `ComponentPropsWithoutRef<'button'>`.
-function webBaseTypes(declaration, name) {
-  const bases = extractBaseTypes(declaration, 'web')
-  if (bases.length === 0) {
+// Without `pnpm install`, React's types do not resolve, every DOM base type
+// becomes `any` and the props lists come out empty without an error. Checking
+// that once, directly, stops the build in that case without guessing from the
+// shape of each props type.
+function assertReactResolves(project) {
+  const probe = project.createSourceFile(
+    path.join(rootDir, web.componentsRoot, '__react-probe__.ts'),
+    "import type { HTMLAttributes } from 'react'\nexport type Probe = HTMLAttributes<HTMLDivElement>\n",
+    { overwrite: true },
+  )
+  const resolved =
+    probe.getTypeAliasOrThrow('Probe').getType().getProperties().length > 0
+  project.removeSourceFile(probe)
+  if (!resolved) {
     fail(
-      `${name}: no React DOM base type found. Either React's types did not resolve (run \`pnpm install\`), or the props use a shape the extractor does not handle (an interface, \`React.*\`, or \`ComponentProps*\`).`,
+      "React's types did not resolve, so every props list would be empty. Run `pnpm install`.",
     )
   }
+}
+
+// The React DOM types the props build on. Empty is fine: the extractor does not
+// follow every shape (an interface, `React.*`, `ComponentProps*`), and the
+// props themselves are still listed.
+function webBaseTypes(declaration) {
+  if (!declaration) return []
   // Nested Omits can name the same key twice.
-  return bases.map(({ name: base, omitted }) => ({
-    name: base,
+  return extractBaseTypes(declaration, 'web').map(({ name, omitted }) => ({
+    name,
     omitted: [...new Set(omitted)],
   }))
+}
+
+// A PascalCase export without a `{Name}Props` type, such as a context or a
+// provider, gets an entry with no props instead of stopping the build.
+function findProps(project, dir, name) {
+  try {
+    return findPropsDeclaration(project, dir, name)
+  } catch (error) {
+    if (error instanceof DocsError) return null
+    throw error
+  }
 }
 
 // Standalone components that share a folder (MenuItem in Menu/) have no
@@ -114,17 +139,17 @@ function buildComponent(project, entry) {
   const index = extractComponentData(entry)
   const { summary, guidance, links } = readGuidance(dir, name)
   const file = path.join(dir, `${name}.tsx`)
-  const declaration = findPropsDeclaration(project, dir, name)
-  const props = extractProps(declaration)
+  const declaration = findProps(project, dir, name)
+  const props = declaration ? extractProps(declaration) : []
 
   return {
     name,
-    description: index.description ?? summary ?? null,
+    description: summary ?? index.description ?? null,
     status: index.status,
     importLine: web.importLine(name),
     hasAsChild: props.some((prop) => prop.name === 'asChild'),
     props,
-    baseTypes: webBaseTypes(declaration, name),
+    baseTypes: webBaseTypes(declaration),
     subComponents: index.subComponents,
     examples: readExamples(project, dir, name),
     guidance,
@@ -138,7 +163,10 @@ function buildComponent(project, entry) {
 }
 
 function buildAgentData() {
-  const project = new Project({ skipAddingFilesFromTsConfig: true })
+  // Loads every component up front, so props imported from another folder
+  // (TextField's from Input) do not depend on the order of the barrel.
+  const project = createProject()
+  assertReactResolves(project)
   const components = discoverPublicComponents()
     .map((entry) => buildComponent(project, entry))
     .sort((a, b) => a.name.localeCompare(b.name))

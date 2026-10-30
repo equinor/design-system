@@ -87,7 +87,8 @@ const fromReactDom = (node) =>
 // props types for mobile, React's DOM attribute types for web.
 const BASE_TYPES = {
   mobile: { from: fromReactNative, name: /Props$/ },
-  web: { from: fromReactDom, name: /(Attributes|Props)$/ },
+  // RefAttributes only adds `ref`, so it is not a set of DOM props.
+  web: { from: fromReactDom, name: /^(?!RefAttributes$).*(Attributes|Props)$/ },
 }
 
 // The library prop types that a props type is built from, such as
