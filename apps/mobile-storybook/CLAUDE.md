@@ -235,12 +235,8 @@ const { typography } = useToken();
 
 **Expo Ecosystem:**
 - `expo` - Platform and build tools
-- `expo-router` - File-based routing
+- `expo-router` - File-based routing and navigation. Since SDK 56 it bundles React Navigation, so import `ThemeProvider`, `useTheme` and the navigation theme types from `expo-router`, not from `@react-navigation/*`
 - `expo-font` - Font loading (required by EDS components)
-
-**Navigation:**
-- `@react-navigation/native` - Navigation primitives
-- `@react-navigation/bottom-tabs` - Tab navigator
 
 **State Management:**
 - `zustand` - Lightweight state management for theme

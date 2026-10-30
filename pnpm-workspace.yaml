@@ -58,10 +58,12 @@ overrides:
   # package; bump it here and in the workspace devDependency specifiers together.
   '@types/react': 19.2.18
   '@internationalized/date': 3.12.4
-  # jest-expo 55 asks for exactly 19.2.0, and react-test-renderer must match
-  # react. Bump this with react, together with the eds-mobile-components
-  # devDependency; Dependabot does not. Can go with the Expo upgrade (#5580).
-  'react-test-renderer@19': 19.3.1
+  # react-test-renderer must match react exactly, and the mobile packages pin
+  # react to the version React Native bundles (19.2.3 for RN 0.85, which
+  # refuses any other). Bump this with the Expo SDK, together with the react
+  # and react-test-renderer devDependencies in eds-mobile-components;
+  # Dependabot does not.
+  'react-test-renderer@19': 19.2.3
   eslint-import-resolver-typescript: 4.4.5
   'nanoid@^3': '>=3.3.18'
   'autoprefixer>browserslist': '>=4.28.9 <5'
