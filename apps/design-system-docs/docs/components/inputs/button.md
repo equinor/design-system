@@ -54,20 +54,26 @@ Tones communicate the intent or nature of an action:
 
 ### Sizes
 
-Buttons come in three sizes to accommodate different contexts:
+Buttons come in two sizes. The height of each size follows the density the button sits in:
 
-| Size    | Spacious | Comfortable | Use Case                              |
-| ------- | -------- | ----------- | ------------------------------------- |
-| Small   | 24px     | 20px        | Compact spaces, inline actions        |
-| Default | 36px     | 24px        | Standard use across most interfaces   |
-| Large   | 44px     | 36px        | Prominent actions, touch-friendly UIs |
+| Size    | Compact | Comfortable | Relaxed | Use Case                            |
+| ------- | ------- | ----------- | ------- | ----------------------------------- |
+| Small   | 16px    | 24px        | 32px    | Tight spaces, inline actions        |
+| Default | 28px    | 36px        | 44px    | Standard use across most interfaces |
+
+<StoryCanvas of="Button/Sizes" showLink />
 
 ### Density
 
-Density modes adjust the overall spacing and sizing of buttons:
+Buttons follow the density set on a parent element, so their padding, label size and icon size change together with the rest of the layout:
 
-- **Spacious**: The default density with comfortable padding. Recommended for most interfaces.
-- **Comfortable**: A more compact option for dense UIs like toolbars or data tables. Must provide a way to switch to spacious mode for accessibility.
+- **Compact**: For dense views such as tables, toolbars and dashboards, where showing more on screen is worth smaller targets
+- **Comfortable**: The default, for ordinary application UI
+- **Relaxed**: For touch screens and pages where targets need to be larger
+
+The [density guidelines](/docs/Next/foundation/design-tokens/spacing#density) explain how to choose between them.
+
+<StoryCanvas of="Button/DensityComparison" showLink />
 
 ### Button Text
 
@@ -96,8 +102,6 @@ When space is limited, buttons can display only an icon. Icon-only buttons:
 
 **Circular icon-only buttons**
 
-Use the `round` prop on icon-only buttons to create circular buttons for a softer appearance.
-
 <StoryCanvas of="Button/CircularIconOnly" showLink />
 
 ## Accessibility
@@ -112,42 +116,42 @@ Use the `round` prop on icon-only buttons to create circular buttons for a softe
 - Always provide an accessible name for screen readers
 - Avoid icon-only buttons unless space is severely constrained (e.g., toolbars)
 
-**Comfortable Density**
+**Density and target size**
 
-Comfortable density should come with the option to switch to spacious mode for accessibility reasons.
+Buttons are smaller at Compact density, where a small button is 16px high. Check that buttons are large enough to hit at the density you ship, as described in the [target size guidelines](/docs/Next/foundation/accessibility#target-size). A default button at Relaxed density is 44px high, the size we recommend for touch screens.
 
 ## Figma
 
 ### Components
 
-The Button is available as two components in Figma:
-
-- **Button [EDS]**: Standard button with text label and optional icons
-- **Icon Button [EDS]**: Compact button displaying only an icon
+- **Button [EDS Beta]**: One component for every button, with or without a text label
 
 ### Using the Button in Figma
 
-1. In Figma, go to the **Assets Panel** and search for **Button** or **Icon Button**
+1. In Figma, go to the **Assets Panel** and search for **Button**
 2. Drag the component into your frame
 3. Select the component to see its properties in the **Design Panel**
 
+Density is not a property of the component. Set the density with a variable mode on your top-level frame, and every button inside it follows.
+
 ### Property Structure
 
-Both components use a nested structure:
-
-**Top level** - Set the **Tone** (Accent, Neutral, or Danger)
-
-**Geometry Options** - Configure the **Size** (Large, Default, Small). For Icon Button, toggle **Round** for circular buttons.
-
-**Button content** (⌘ Button or ⌘ Icon Button) - Set the **Variant** (Primary, Secondary, Ghost), **State**, and configure icons/labels.
+- **Icon button** - Off for a button with a text label, On for an icon-only button
+- **Variant** - Primary, Secondary, Ghost
+- **Tone** - Accent, Neutral, Danger
+- **Size** - Default, Small
+- **Style** - Default (square) or Rounded (circular). Only icon-only buttons have the Rounded style
+- **State** - Default, Hover, Focus, Active, Disabled. Use these to show a state in a design; in the product the button changes state on its own
 
 ### Adding Icons
 
-For buttons with icons:
+For buttons with a text label:
 
-- Toggle **Show Leading Icon** to add an icon before the label
-- Toggle **Show Trailing Icon** to add an icon after the label
-- Click the icon instance to swap to a different icon from the library
+- Toggle **Has Leading Icon** to add an icon before the label
+- Toggle **Has Trailing Icon** to add an icon after the label
+- Use **↳ Leading Icon** and **↳ Trailing Icon** to swap to a different icon from the library
+
+For icon-only buttons, use **↳ Leading Icon** to choose the icon.
 
 ## Do's and Don'ts
 
@@ -158,7 +162,6 @@ For buttons with icons:
 - Place danger buttons in opposite order to positive actions (Cancel before Delete) to prevent accidental activation
 - Use icons that clearly communicate their intended purpose
 - Provide accessible names for icon-only buttons
-- Allow switching from comfortable to spacious density for accessibility
 - Place primary buttons first when grouping (exception: Previous/Next ordering)
   :::
 
