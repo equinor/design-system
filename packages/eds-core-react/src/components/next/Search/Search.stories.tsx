@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Search } from '.'
+import page from './Search.docs.mdx'
 
 const meta: Meta<typeof Search> = {
-  title: 'EDS 2.0 (beta)/Inputs/Search',
+  title: 'Beta/Inputs/Search',
   component: Search,
   tags: ['beta'],
   args: {
@@ -94,17 +95,7 @@ const meta: Meta<typeof Search> = {
   },
   parameters: {
     docs: {
-      description: {
-        component: `
-**Beta:** safe to adopt alongside EDS 1.0. The API may still change in small ways before EDS 2.0 becomes stable. See [About EDS 2.0](?path=/docs/eds-2-0-beta-about--docs) for what beta means.
-
-\`\`\`tsx
-import { Search } from '@equinor/eds-core-react/next'
-\`\`\`
-
-A search input with a built-in clear button that appears when the field has a value.
-        `,
-      },
+      page,
     },
   },
 }
@@ -118,6 +109,15 @@ export const Introduction: Story = {
     label: 'Search',
     placeholder: 'Search',
   },
+}
+
+export const Overview: Story = {
+  render: () => (
+    <>
+      <Search label="Search" placeholder="Search" />
+      <Search label="Search" defaultValue="Equinor" />
+    </>
+  ),
 }
 
 export const WithClearButton: Story = {
@@ -139,7 +139,7 @@ export const Controlled: Story = {
     docs: {
       description: {
         story:
-          'In controlled mode, use `value`, `onChange`, and `onClear` together. The clear button calls `onClear` — the parent is responsible for resetting the value.',
+          'In controlled mode, use `value`, `onChange` and `onClear` together. The clear button calls `onClear`, and the parent is responsible for resetting the value.',
       },
     },
   },
@@ -173,6 +173,14 @@ export const WithoutLabel: Story = {
 }
 
 export const WithDescription: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `description` for extra context about what the search covers.',
+      },
+    },
+  },
   render: () => (
     <Search
       label="Search"
@@ -183,6 +191,14 @@ export const WithDescription: Story = {
 }
 
 export const WithHelperMessage: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `helperMessage` for a hint below the field, such as how many characters a search needs.',
+      },
+    },
+  },
   render: () => (
     <Search
       label="Search"
@@ -197,7 +213,7 @@ export const Invalid: Story = {
     docs: {
       description: {
         story:
-          'Use `helperMessage` to explain the error — there is no error icon in the search field by design.',
+          'Use `helperMessage` to explain the error. There is no error icon in the search field by design.',
       },
     },
   },
@@ -212,10 +228,26 @@ export const Invalid: Story = {
 }
 
 export const Disabled: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A disabled search cannot be focused or edited, and it shows no clear button.',
+      },
+    },
+  },
   render: () => <Search label="Search" placeholder="Search" disabled />,
 }
 
 export const ReadOnly: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A read only search keeps its value visible and focusable, but it cannot be edited and shows no clear button.',
+      },
+    },
+  },
   render: () => (
     <Search label="Search" defaultValue="Previous search" readOnly />
   ),

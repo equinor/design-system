@@ -1,172 +1,282 @@
 import { Fragment } from 'react'
+import type { CSSProperties } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import './typography.css'
 import page from './Typography.docs.mdx'
+import './typography.stories.css'
 
-type Args = {
-  density: 'relaxed' | 'spacious' | 'comfortable'
-  lineHeight: 'squished' | 'default'
+type Role = 'header' | 'label' | 'body'
+type Weight = 'normal' | 'medium' | 'bold'
+type Density = 'compact' | 'comfortable' | 'relaxed'
+
+type SpecimenArgs = {
+  density: Density
 }
 
-const meta: Meta<Args> = {
-  title: 'EDS 2.0 (beta)/Foundation/Typography',
+const DENSITIES: Density[] = ['compact', 'comfortable', 'relaxed']
+
+/** The steps each role has, in scale order (ADR-0027 point 6). */
+const STEPS: Record<Role, string[]> = {
+  header: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'],
+  label: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
+  body: ['sm', 'md', 'lg', 'xl', '2xl', '3xl'],
+}
+
+/** Equinor for header, Inter for label and body. */
+const FAMILY: Record<Role, 'header' | 'ui'> = {
+  header: 'header',
+  label: 'ui',
+  body: 'ui',
+}
+
+/** The weight each role uses when nothing else is asked for. */
+const DEFAULT_WEIGHT: Record<Role, Weight> = {
+  header: 'medium',
+  label: 'normal',
+  body: 'normal',
+}
+
+/** Body gets two sentences, so its line height has more than one line to show on. */
+const SAMPLE: Record<Role, string> = {
+  header: 'Well integrity review',
+  label: 'Pipeline pressure',
+  body: 'The north manifold is due for inspection. Two valves showed wear at the last visit, so they are first on the list.',
+}
+
+/** The four declarations of a text style, each from its own token. */
+const textStyle = (
+  role: Role,
+  step: string,
+  weight: Weight,
+): CSSProperties => ({
+  fontFamily: `var(--eds-font-family-${FAMILY[role]})`,
+  fontSize: `var(--eds-typography-${role}-${step}-font-size)`,
+  lineHeight: `var(--eds-typography-${role}-${step}-line-height)`,
+  fontWeight: `var(--eds-font-weight-${weight})`,
+})
+
+const WEIGHT_ROWS: { role: Role; weight: Weight }[] = [
+  { role: 'header', weight: 'medium' },
+  { role: 'label', weight: 'normal' },
+  { role: 'label', weight: 'medium' },
+  { role: 'label', weight: 'bold' },
+  { role: 'body', weight: 'normal' },
+  { role: 'body', weight: 'bold' },
+]
+
+const WELL_STATUS =
+  'Producing. Pressure has been within range since the valve on the north manifold was replaced.'
+
+const FIGURES = [
+  { label: 'Wellhead pressure', value: '312 bar' },
+  { label: 'Water cut', value: '18%' },
+  { label: 'Wells producing', value: '14 of 16' },
+]
+
+const meta: Meta = {
+  title: 'Beta/Foundation/Typography',
   parameters: {
     docs: { page },
-    controls: { expanded: true },
-  },
-  argTypes: {
-    density: {
-      control: 'radio',
-      options: ['relaxed', 'spacious', 'comfortable'],
-      description:
-        'Density mode — sets `data-density` on the wrapper. **`relaxed` is a POC** — values are hardcoded and will change when real tokens are defined.',
-    },
-    lineHeight: {
-      control: 'radio',
-      options: ['squished', 'default'],
-      description: 'Line-height scale',
-    },
-  },
-  args: {
-    density: 'spacious',
-    lineHeight: 'squished',
   },
 }
 
 export default meta
 
-type Story = StoryObj<Args>
+type Story = StoryObj
+type SpecimenStory = StoryObj<SpecimenArgs>
 
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const
-const SPHINX = 'Sphinx of black quartz, judge my vow.'
-
-const textBoxStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-  @supports (text-box: trim-both ex alphabetic) {
-    .typo-centered {
-      padding-top: var(--eds-padding-top-centered);
-      padding-bottom: var(--eds-padding-bottom-centered);
-      text-box: var(--text-box);
-    }
-    .typo-baseline {
-      padding-top: var(--eds-padding-top-baseline);
-      padding-bottom: var(--eds-padding-bottom-baseline);
-      text-box: var(--text-box);
-    }
-  }
-`
-
-// ===== UI Text =====
-
-export const UIText: Story = {
-  args: {
-    lineHeight: 'squished',
+const specimenControls: Pick<SpecimenStory, 'args' | 'argTypes'> = {
+  args: { density: 'comfortable' },
+  argTypes: {
+    density: {
+      control: 'inline-radio',
+      options: DENSITIES,
+      description:
+        'Sets `data-density` on the wrapper. Comfortable is the default, used where no attribute is set.',
+    },
   },
-  render: ({ density, lineHeight }) => (
-    <div data-density={density} style={{ fontFamily: 'Inter, sans-serif' }}>
-      <style>{textBoxStyles}</style>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '3rem 1fr 1fr',
-          gap: '12px 32px',
-          alignItems: 'baseline',
-        }}
-      >
-        <span style={{ fontSize: 11, color: '#888' }}>size</span>
-        <span style={{ fontSize: 11, color: '#888' }}>single line</span>
-        <span style={{ fontSize: 11, color: '#888' }}>two lines</span>
+}
 
-        {sizes.map((size) => (
-          <Fragment key={size}>
-            <code style={{ fontSize: 11, color: '#888' }}>{size}</code>
-            <p
-              className="typo-centered"
-              style={{
-                margin: 0,
-                fontSize: `var(--eds-typography-ui-body-${size}-font-size)`,
-                lineHeight: `var(--eds-typography-ui-body-${size}-line-height-${lineHeight})`,
-              }}
-            >
-              Save changes
+const RoleSpecimen = ({
+  typeRole: role,
+  density,
+}: {
+  typeRole: Role
+  density: Density
+}) => (
+  <div className="typography-demo" data-density={density}>
+    <div className="specimen">
+      {STEPS[role].map((step) => (
+        <Fragment key={step}>
+          <p className="legend">
+            {role}.{step}
+          </p>
+          <p
+            className="sample"
+            style={textStyle(role, step, DEFAULT_WEIGHT[role])}
+          >
+            {SAMPLE[role]}
+          </p>
+        </Fragment>
+      ))}
+    </div>
+  </div>
+)
+
+const WellRow = () => (
+  <div className="well">
+    <span className="well-name">31/2-A-14</span>
+    <span className="well-status">{WELL_STATUS}</span>
+    <span className="well-inspected">Inspected two weeks ago</span>
+  </div>
+)
+
+// ===== Roles and weights =====
+
+export const HeaderRole: SpecimenStory = {
+  ...specimenControls,
+  render: ({ density }) => <RoleSpecimen typeRole="header" density={density} />,
+}
+
+export const LabelRole: SpecimenStory = {
+  ...specimenControls,
+  render: ({ density }) => <RoleSpecimen typeRole="label" density={density} />,
+}
+
+export const BodyRole: SpecimenStory = {
+  ...specimenControls,
+  render: ({ density }) => <RoleSpecimen typeRole="body" density={density} />,
+}
+
+export const Weights: Story = {
+  render: () => (
+    <div className="typography-demo">
+      <div className="specimen">
+        {WEIGHT_ROWS.map(({ role, weight }) => (
+          <Fragment key={`${role}-${weight}`}>
+            <p className="legend">
+              {role}.lg, {weight}
             </p>
-            <p
-              className="typo-baseline"
-              style={{
-                margin: 0,
-                fontSize: `var(--eds-typography-ui-body-${size}-font-size)`,
-                lineHeight: `var(--eds-typography-ui-body-${size}-line-height-${lineHeight})`,
-              }}
-            >
-              Save changes
-              <br />
-              to continue
+            <p className="sample" style={textStyle(role, 'lg', weight)}>
+              {SAMPLE[role]}
             </p>
           </Fragment>
         ))}
       </div>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'UI text scale. Single-line uses centered text-box trimming; two-line uses baseline alignment.',
-      },
-    },
-  },
 }
 
-// ===== Long-form Text =====
+// ===== Worked examples from the Using typography page =====
 
-export const LongFormText: Story = {
-  args: {
-    lineHeight: 'default',
-  },
-  render: ({ density, lineHeight }) => (
-    <div
-      data-density={density}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 32,
-        maxWidth: 640,
-        fontFamily: 'Inter, sans-serif',
-      }}
-    >
-      <style>{textBoxStyles}</style>
-      {sizes.map((size) => (
-        <div key={size} style={{ display: 'flex', gap: 24 }}>
-          <code
-            style={{
-              fontSize: 11,
-              color: '#888',
-              flexShrink: 0,
-              width: '3rem',
-            }}
-          >
-            {size}
-          </code>
-          <p
-            className="typo-baseline"
-            style={{
-              margin: 0,
-              fontSize: `var(--eds-typography-ui-body-${size}-font-size)`,
-              lineHeight: `var(--eds-typography-ui-body-${size}-line-height-${lineHeight})`,
-            }}
-          >
-            {SPHINX} {SPHINX} {SPHINX}
+export const AlwaysSetThePair: Story = {
+  render: () => (
+    <div className="typography-demo columns">
+      <div className="column">
+        <p className="legend">Font size and line height from label.sm</p>
+        <div className="running-text">
+          <p>
+            Pressure on the north manifold has been within range since the valve
+            was replaced. The chart shows the last day.
           </p>
+          <p className="caption">Wellhead pressure, last 24 hours</p>
+        </div>
+      </div>
+      <div className="column">
+        <p className="legend">Font size only</p>
+        <div className="running-text">
+          <p>
+            Pressure on the north manifold has been within range since the valve
+            was replaced. The chart shows the last day.
+          </p>
+          <p className="size-only">Wellhead pressure, last 24 hours</p>
+        </div>
+      </div>
+    </div>
+  ),
+}
+
+export const Hierarchy: Story = {
+  render: () => (
+    <div className="typography-demo">
+      <WellRow />
+    </div>
+  ),
+}
+
+export const PageComposition: Story = {
+  render: () => (
+    <div className="typography-demo overview">
+      <div className="app-bar">
+        <span className="app-name">Production monitor</span>
+      </div>
+      <h1 className="page-title">Field overview</h1>
+      <p className="ingress">
+        Production and well status for the last 24 hours, updated every five
+        minutes.
+      </p>
+      <div className="tiles">
+        {FIGURES.map(({ label, value }) => (
+          <div className="tile" key={label}>
+            <span className="figure-label">{label}</span>
+            <span className="figure">{value}</span>
+          </div>
+        ))}
+      </div>
+      <h2 className="section-heading">Wells</h2>
+      <p className="running-text">
+        Fourteen of the sixteen wells are producing. The other two are shut in
+        while their safety valves are replaced, and are due back in production
+        next week.
+      </p>
+    </div>
+  ),
+}
+
+export const LabelVersusBody: Story = {
+  render: () => (
+    <div className="typography-demo columns">
+      <div className="column">
+        <p className="legend">label.md</p>
+        <p className="as-label">
+          {WELL_STATUS} The next inspection is planned for the spring shutdown.
+        </p>
+      </div>
+      <div className="column">
+        <p className="legend">body.md</p>
+        <p className="as-body">
+          {WELL_STATUS} The next inspection is planned for the spring shutdown.
+        </p>
+      </div>
+    </div>
+  ),
+}
+
+export const HeadingLevelVersusSize: Story = {
+  render: () => (
+    <div className="typography-demo columns">
+      <div className="column">
+        <p className="legend">An h2 at header.3xl</p>
+        <h2 className="section-heading">Production by well</h2>
+      </div>
+      <div className="column overview-page">
+        <p className="legend">An h2 at header.4xl, on an overview page</p>
+        <h2>Production by well</h2>
+      </div>
+    </div>
+  ),
+}
+
+export const Density: Story = {
+  render: () => (
+    <div className="typography-demo columns">
+      {DENSITIES.map((density) => (
+        <div className="column" key={density}>
+          <p className="legend">data-density=&quot;{density}&quot;</p>
+          <div data-density={density}>
+            <WellRow />
+          </div>
         </div>
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Long-form text scale. Uses baseline text-box alignment.',
-      },
-    },
-  },
 }

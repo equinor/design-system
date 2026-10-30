@@ -6,7 +6,7 @@ import type { AccordionProps } from '.'
 import page from './Accordion.docs.mdx'
 
 const meta: Meta<typeof Accordion> = {
-  title: 'EDS 2.0 (beta)/Surface/Accordion',
+  title: 'Beta/Surface/Accordion',
   component: Accordion,
   tags: ['beta'],
   parameters: {

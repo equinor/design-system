@@ -9,7 +9,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 
 - Source path: `packages/eds-core-react/src/components/next/<Component>/`
 - Top-level barrel: `packages/eds-core-react/src/components/next/index.ts`
-- Components: 23 • Props documented: 94 • With JSDoc description: 1
+- Components: 25 • Props documented: 112 • With JSDoc description: 1
 
 ## Components
 
@@ -17,6 +17,8 @@ This file is the canonical "what already exists" reference for AI coding assista
 | --- | --- | --- | --- | --- | --- |
 | Accordion | — | exclusive | Accordion.Item, Accordion.Header, Accordion.Panel | — | active |
 | Autocomplete | — | allowCustomValue, clearLabel, defaultInputValue, description, helperMessage, id, inputValue, label, loading, loadingText, noOptionsText, onClear, onCustomValueConfirm, onInputChange, onValueChange, optionsFilter, value | — | — | active |
+| Avatar | — | alt, emphasis, initial, name, notification, notificationLabel, size, src | — | — | active |
+| AvatarNameLabel | — | alt, emphasis, initial, layout, meta, name, notification, notificationLabel, size, src | — | — | active |
 | Badge | — | emphasis, tone, variant | — | — | active |
 | Banner | — | onDismiss, role, tone | Banner.Icon, Banner.Message, Banner.Actions | — | active |
 | Button | — | asChild, icon, multiline, round, size, tone, variant | — | ✓ | active |
@@ -25,7 +27,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 | Dialog | — | onOpenChange, open, scrim | Dialog.Header, Dialog.Title, Dialog.Content, Dialog.Actions | — | active |
 | Divider | — | — | — | — | active |
 | Field | — | disabled, position | Field.Label, Field.Description, Field.HelperMessage | — | active |
-| Icon | Icon component for EDS 2.0 | color, data, size, title | — | — | active |
+| Icon | Icon component for the beta components (/next) | color, data, size, title | — | — | active |
 | Input | — | as, endAdornment, endText, hideErrorIcon, invalid, startAdornment, startText | — | — | active |
 | Link | — | asChild, variant | — | ✓ | active |
 | Menu | — | — | — | — | active |

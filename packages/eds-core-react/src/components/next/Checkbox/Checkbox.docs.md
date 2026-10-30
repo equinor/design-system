@@ -31,5 +31,5 @@ Checkbox lets users select one or more options from a set, or switch a single op
 
 ## Related components
 
-- [`Radio`](?path=/docs/eds-2-0-beta-inputs-selection-controls-radio--docs) is for choosing one option from a mutually exclusive set.
-- [`Switch`](?path=/docs/eds-2-0-beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off straight away.
+- [`Radio`](?path=/docs/beta-inputs-selection-controls-radio--docs) is for choosing one option from a mutually exclusive set.
+- [`Switch`](?path=/docs/beta-inputs-selection-controls-switch--docs) is for turning a single setting on or off straight away.

@@ -7,7 +7,7 @@ import { Tooltip, type TooltipProps } from '.'
 import page from './Tooltip.docs.mdx'
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'EDS 2.0 (beta)/Data Display/Tooltip',
+  title: 'Beta/Data Display/Tooltip',
   component: Tooltip,
   tags: ['beta'],
   parameters: {

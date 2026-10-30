@@ -5,7 +5,7 @@ hide_title: true
 description: 'Chips are compact, interactive elements that represent a small piece of information users can select, filter, remove, or expand. They work well for filters, tags, selections, or quickly triggering a menu. With variants for visual weight, tones for intent, and built-in support for selectable, deletable, and dropdown behaviours, chips help surface bite-sized actions without stealing focus from the surrounding UI.'
 ---
 
-<StoryCanvas of="Chip/Default" showLink />
+<StoryCanvas of="Chip/Introduction" showLink />
 
 ## When to Use
 

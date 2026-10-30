@@ -17,6 +17,7 @@ import * as SwitchStories from '@eds-core-react-src/components/next/Switch/Switc
 import * as TextAreaStories from '@eds-core-react-src/components/next/TextArea/TextArea.stories'
 import * as TextFieldStories from '@eds-core-react-src/components/next/TextField/TextField.stories'
 import * as TooltipStories from '@eds-core-react-src/components/next/Tooltip/Tooltip.stories'
+import * as TypographyStories from '@eds-core-react-src/components/next/Foundation/Typography.stories'
 
 /**
  * Portable-stories registry. Each entry composes a component's actual CSF
@@ -45,6 +46,7 @@ export const storyRegistry = {
   TextArea: composeStories(TextAreaStories),
   TextField: composeStories(TextFieldStories),
   Tooltip: composeStories(TooltipStories),
+  Typography: composeStories(TypographyStories),
 } as const
 
 export type StoryRegistry = typeof storyRegistry
