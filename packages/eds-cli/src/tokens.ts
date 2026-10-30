@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs'
+import { notInstalled } from './components.js'
 import { fail } from './errors.js'
 import { exportPath, findPackage } from './resolve.js'
 
@@ -8,7 +9,6 @@ const PACKAGE = '@equinor/eds-tokens'
 // onto ./css/variables.css, where 2.x has its legacy bundle (ADR-0010). A
 // file only counts if it sets semantic tokens, so the 2.x bundle is skipped.
 const CSS_EXPORTS = ['./next/css/variables.css', './css/variables.css']
-const INSTALL = `npm install ${PACKAGE}@beta`
 
 export const SCHEMES = ['light', 'dark'] as const
 export const DENSITIES = ['compact', 'comfortable', 'relaxed'] as const
@@ -45,9 +45,7 @@ export function loadTokens(cwd: string, cssPath?: string): TokenSheet {
     return parseTokens(readFileSync(cssPath, 'utf8'))
   }
   const pkg = findPackage(PACKAGE, cwd)
-  if (!pkg) {
-    return fail(`${PACKAGE} is not installed in ${cwd}. Run: ${INSTALL}`)
-  }
+  if (!pkg) return fail(notInstalled(PACKAGE, cwd))
   for (const specifier of CSS_EXPORTS) {
     const file = exportPath(pkg, specifier)
     if (!file || !existsSync(file)) continue
@@ -55,7 +53,7 @@ export function loadTokens(cwd: string, cssPath?: string): TokenSheet {
     if (sheet.semantic.size) return sheet
   }
   return fail(
-    `${PACKAGE} ${pkg.version} has no beta tokens (looked for ${CSS_EXPORTS.join(' and ')}). Run: ${INSTALL}`,
+    `${PACKAGE} ${pkg.version} has no beta tokens (looked for ${CSS_EXPORTS.join(' and ')}). The CLI covers the beta tokens in ${PACKAGE}@beta, and moving to them is a major upgrade for the developer to decide.`,
   )
 }
 
@@ -77,9 +75,15 @@ export function parseTokens(css: string): TokenSheet {
     /([^{}]+)\{([^{}]*)\}/g,
   )) {
     const declarations = [...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);?/g)]
-    for (const selector of selectorList.split(',').map((s) => s.trim())) {
-      const density = selector.match(/^\[data-density="(\w+)"\]$/)?.[1]
-      const scheme = selector.match(/^\[data-color-scheme="(\w+)"\]$/)?.[1]
+    // A statement such as `@layer a, b;` or `@import` before a rule ends up in
+    // the same text, so only the part after the last `;` is the selector.
+    const selectors = selectorList.split(';').pop() ?? ''
+    for (const selector of selectors.split(',').map((s) => s.trim())) {
+      // Minifiers drop the quotes: [data-density=compact].
+      const density = selector.match(/^\[data-density=["']?(\w+)["']?\]$/)?.[1]
+      const scheme = selector.match(
+        /^\[data-color-scheme=["']?(\w+)["']?\]$/,
+      )?.[1]
       const target =
         selector === '[data-density]'
           ? sheet.semantic
@@ -160,7 +164,8 @@ export function tokenHints(sheet: TokenSheet, query: string): TokenHints {
   const renamed = query
     .toLowerCase()
     .split(/\s+/)
-    .filter((word) => SYNONYMS[word])
+    // Own keys only, so `constructor` is not taken for a synonym.
+    .filter((word) => Object.hasOwn(SYNONYMS, word))
     .map((word) => ({ word, use: SYNONYMS[word] }))
   const groups = [
     ...new Set(

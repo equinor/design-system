@@ -104,6 +104,31 @@ describe('eds', () => {
       ).not.toContain('→ Tokens')
     })
 
+    it('prints the components that exist when one name is unknown', () => {
+      const { code, stdout, stderr } = run(['show', 'Button', 'Card'])
+      expect(code).toBe(1)
+      expect(stdout).toMatch(/^Button\n/)
+      expect(stderr).toContain('No component called Card.')
+    })
+
+    it('names each component when one section is shown for several', () => {
+      const { stdout } = run([
+        'show',
+        'Button',
+        'TextField',
+        '--section',
+        'props',
+      ])
+      expect(stdout).toMatch(
+        /^Button\n\nProps\n[\s\S]*\n---\n\nTextField\n\nProps\n/,
+      )
+    })
+
+    it('gives the tokens hint once for several components', () => {
+      const { stdout } = run(['show', 'Button', 'TextField'])
+      expect(stdout.match(/→ Tokens for the layout/g)).toHaveLength(1)
+    })
+
     it('prints an array for several components with --json', () => {
       const { stdout } = run(['show', 'Button', 'Field', '--json'])
       const components = JSON.parse(stdout) as Component[]
@@ -141,6 +166,21 @@ describe('eds', () => {
       expect(run(['search', 'variamt']).stdout).toMatch(/^Button /)
     })
 
+    it('allows typos only when nothing matches exactly', () => {
+      // "form" is in Button's description; a typo match would add more.
+      expect(run(['search', 'form']).stdout).toMatch(
+        /^Button [^\n]*\n( {2}.*\n)*$/,
+      )
+      // Four letters are too short for a typo match.
+      expect(run(['search', 'lbel']).stdout).toContain('No component matches')
+    })
+
+    it('rejects an empty search', () => {
+      const { code, stderr } = run(['search', ' '])
+      expect(code).toBe(1)
+      expect(stderr).toContain('Search for what?')
+    })
+
     it('suggests close names when nothing matches', () => {
       expect(run(['search', 'calendar']).stdout).toBe(
         'No component matches "calendar". Run `eds list` to see them all.\n',
@@ -161,8 +201,10 @@ describe('eds', () => {
     it('lists the semantic tokens resolved for light and comfortable', () => {
       const { stdout } = run(['tokens'])
       expect(stdout).toMatch(
-        /--eds-background-interactive-accent-emphasis-default +oklch\(0\.5 0\.1 150\) +\(var\(--eds-accent-9\)\)/,
+        /--eds-background-interactive-accent-emphasis-default +oklch\(0\.5 0\.1 150\)\n/,
       )
+      // The reference names an internal token, so it is left out by default.
+      expect(stdout).not.toContain('var(--eds-accent-9)')
       expect(stdout).toMatch(/--eds-spacing-md +12px/)
       expect(stdout).not.toContain('--eds-primitives')
       expect(stdout).toContain('3 tokens, values for light colour scheme')
@@ -224,10 +266,36 @@ describe('eds', () => {
       )
     })
 
-    it('includes the internal tokens with --all', () => {
+    it('includes the internal tokens and the references with --all', () => {
       expect(run(['tokens', 'primitives', '--all']).stdout).toContain(
         '--eds-primitives-spacing-75',
       )
+      expect(run(['tokens', 'accent', '--all']).stdout).toContain(
+        '(var(--eds-accent-9))',
+      )
+    })
+
+    it('does not take Object.prototype names for synonyms', () => {
+      const { stdout } = run(['tokens', 'constructor'])
+      expect(stdout).toContain('No token matches "constructor".')
+      expect(stdout).not.toContain('Tokens do not use')
+    })
+
+    it('reads selectors without quotes and skips statements before a rule', () => {
+      const sheet = parseTokens(`@charset "utf-8";
+@layer a, b;
+[data-density] { --eds-spacing-md: var(--eds-density-spacing-md); }
+[data-density=compact] { --eds-density-spacing-md: 8px; }
+[data-color-scheme='dark'] { --eds-accent-9: black; }
+:root { --eds-x: 1px; }`)
+      expect(sheet.semantic.get('--eds-spacing-md')).toBe(
+        'var(--eds-density-spacing-md)',
+      )
+      expect(
+        sheet.densities.get('compact')?.get('--eds-density-spacing-md'),
+      ).toBe('8px')
+      expect(sheet.schemes.get('dark')?.get('--eds-accent-9')).toBe('black')
+      expect(sheet.root.get('--eds-x')).toBe('1px')
     })
 
     it('rejects an unknown scheme', () => {
@@ -238,11 +306,49 @@ describe('eds', () => {
   })
 
   describe('errors', () => {
-    it('tells the user to install eds-core-react', () => {
+    it('says eds-core-react is missing and points to --cwd', () => {
       const empty = mkdtempSync(join(tmpdir(), 'eds-cli-empty-'))
       const { code, stderr } = run(['list'], empty)
       expect(code).toBe(1)
       expect(stderr).toContain('@equinor/eds-core-react is not installed')
+      expect(stderr).toContain('--cwd <folder>')
+      // An agent should not change the project's dependencies to get an answer.
+      expect(stderr).not.toContain('npm install')
+    })
+
+    it('refuses stable 2.x, which has no ./next export', () => {
+      const { code, stderr } = run(
+        ['show', 'Button'],
+        makeProject({ coreReact: 'stable' }),
+      )
+      expect(code).toBe(1)
+      expect(stderr).toContain(
+        '@equinor/eds-core-react 2.6.4 has no beta components',
+      )
+      expect(stderr).toContain('major upgrade for the developer to decide')
+      expect(stderr).not.toContain('npm install')
+    })
+
+    it('rejects a --cwd that does not exist', () => {
+      const project = makeProject()
+      const { code, stderr } = run(['list', '--cwd', 'apps/wbe'], project)
+      expect(code).toBe(1)
+      expect(stderr).toContain('No such folder:')
+    })
+
+    it('names the package that is behind for an unsupported schema', () => {
+      const newer = run(['list'], makeProject({ schemaVersion: 2 }))
+      expect(newer.stderr).toContain('Update @equinor/eds-cli.')
+      const older = run(['list'], makeProject({ schemaVersion: 0 }))
+      expect(older.stderr).toContain('Update @equinor/eds-core-react.')
+    })
+
+    it('rejects JSON that is not component data', () => {
+      const file = join(mkdtempSync(join(tmpdir(), 'eds-cli-')), 'data.json')
+      writeFileSync(file, 'null')
+      const { code, stderr } = run(['list', '--data', file])
+      expect(code).toBe(1)
+      expect(stderr).toContain('is not component data')
     })
 
     it('finds packages installed in a parent folder, as Node does', () => {
@@ -283,6 +389,7 @@ describe('eds', () => {
       )
       expect(code).toBe(1)
       expect(stderr).toContain('@equinor/eds-tokens 2.3.2 has no beta tokens')
+      expect(stderr).not.toContain('npm install')
     })
 
     it('explains component data that is not valid JSON', () => {

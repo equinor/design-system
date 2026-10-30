@@ -33,6 +33,15 @@ export function findPackage(
   }
 }
 
+/** Whether the package's `exports` has `specifier` as a key */
+export function hasExport(pkg: InstalledPackage, specifier: string): boolean {
+  return (
+    !!pkg.exports &&
+    typeof pkg.exports === 'object' &&
+    Object.hasOwn(pkg.exports, specifier)
+  )
+}
+
 // The file an export target points to: a path, or the `default` condition.
 const exportTarget = (value: unknown): string | null =>
   typeof value === 'string'

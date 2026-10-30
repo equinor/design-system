@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 import {
@@ -37,10 +37,10 @@ Usage
 
 Options
   --json                    Print JSON instead of text
-  --section <name>          show: only ${SECTIONS.join(', ')}
+  --section <name>          show, text output only: ${SECTIONS.join(', ')}
   --scheme <name>           tokens: ${SCHEMES.join(' or ')} (default light)
   --density <name>          tokens: ${DENSITIES.join(', ')} (default comfortable)
-  --all                     tokens: include the internal tokens, which components must not use
+  --all                     tokens: include the internal tokens, and show what each token refers to
   --cwd <dir>               Read the packages installed for this directory
   --data <file>             Read this components.json instead of the installed package
   --css <file>              Read this token CSS instead of the installed package
@@ -101,6 +101,10 @@ export function main(argv: string[], io: Io): number {
       allowPositionals: true,
     })
     const cwd = resolve(io.cwd, values.cwd ?? '.')
+    // Otherwise a typo in --cwd silently reads the packages of a parent folder.
+    if (values.cwd && !(existsSync(cwd) && statSync(cwd).isDirectory())) {
+      fail(`No such folder: ${cwd}`)
+    }
     // --data and --css are relative to --cwd, like the packages are.
     const dataPath = values.data && resolve(cwd, values.data)
     const cssPath = values.css && resolve(cwd, values.css)
@@ -139,13 +143,18 @@ export function main(argv: string[], io: Io): number {
             : oneOf<Section>('section', values.section, SECTIONS, 'props')
         // Component names have no spaces, so each word is one component and an
         // agent gets everything it needs for a form in one call.
-        const components = findComponents(loadComponents(cwd, dataPath), rest)
+        const { found, errors } = findComponents(
+          loadComponents(cwd, dataPath),
+          rest,
+        )
         // Always an array, so a script parses one shape for any number of names.
-        print(components, () => formatComponents(components, section))
-        return 0
+        if (found.length) print(found, () => formatComponents(found, section))
+        for (const error of errors) io.err(`eds: ${error}`)
+        return errors.length ? 1 : 0
       }
       case 'search': {
-        if (!text) fail('Search for what? For example: eds search date')
+        if (!text.trim())
+          fail('Search for what? For example: eds search select')
         const data = loadComponents(cwd, dataPath)
         const matches = searchComponents(data, text)
         print(

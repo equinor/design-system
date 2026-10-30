@@ -142,14 +142,27 @@ function formatLinks(component: Component): string[] {
   return ['Links', ...links.map(([kind, url]) => `  ${kind}: ${url}`)]
 }
 
-/** Several components, separated by a rule */
+/**
+ * Several components, separated by a rule. With one section, each part starts
+ * with the component name, so the answers can be told apart. The hint about
+ * tokens comes once, at the end.
+ */
 export function formatComponents(
   components: Component[],
   section?: Section,
 ): string {
-  return components
-    .map((component) => formatComponent(component, section))
-    .join('\n\n---\n\n')
+  const parts = components.map((component) => {
+    const text = formatComponent(component, section)
+    return section && components.length > 1
+      ? `${component.name}\n\n${text}`
+      : text
+  })
+  const hint = section
+    ? []
+    : [
+        '→ Tokens for the layout around it: eds tokens <words>, such as eds tokens spacing',
+      ]
+  return [parts.join('\n\n---\n\n'), ...hint].join('\n\n')
 }
 
 export function formatComponent(
@@ -178,9 +191,6 @@ export function formatComponent(
       formatExamples(component, false),
       formatGuidance(component),
       formatLinks(component),
-      [
-        '→ Tokens for the layout around it: eds tokens <words>, such as eds tokens spacing',
-      ],
     )
   } else {
     // One section is what the agent asked for, so say so when it is empty
@@ -225,13 +235,22 @@ export function formatTokens(
     density,
     query,
     hints,
-  }: { scheme: string; density: string; query: string; hints: TokenHints },
+    all,
+  }: {
+    scheme: string
+    density: string
+    query: string
+    hints: TokenHints
+    all: boolean
+  },
 ): string {
   if (tokens.length === 0) return formatNoTokens(query, hints)
   const width = Math.max(...tokens.map((t) => t.name.length))
   return [
     ...tokens.map((t) => {
-      const via = t.value !== t.resolved ? `  (${t.value})` : ''
+      // The reference names an internal token, such as --eds-density-*, which
+      // component CSS must not use, so it only shows with --all.
+      const via = all && t.value !== t.resolved ? `  (${t.value})` : ''
       return `${t.name.padEnd(width)}  ${t.resolved}${via}`
     }),
     '',
