@@ -69,14 +69,15 @@ const config: Config = {
           breadcrumbs: false,
           editUrl:
             'https://github.com/equinor/design-system/tree/main/apps/design-system-docs/',
-          // Labels name the design system generation, not a package version.
-          // The site documents several packages whose versions move
+          // Labels name the release status, Latest and Beta, which matches the
+          // `latest` and `beta` dist-tags of eds-core-react and eds-tokens on
+          // npm. The site documents several packages whose versions move
           // independently, and its main readers are designers who do not track
           // them, so a number in the version picker cannot be correct for the
-          // whole site and would need updating on every release. See #4942.
+          // whole site and would need updating on every release. See #5667.
           versions: {
             current: {
-              label: 'EDS 2.0 (beta)', // Matches the Storybook section name
+              label: 'Beta', // Matches the Storybook section name
               path: 'Next', // URL path for the current version
               // Upstream has no banner for the current version, and
               // 'unreleased' would frame the beta as not ready. DocItem/Layout
@@ -87,35 +88,30 @@ const config: Config = {
               // Frozen at the point the colour foundation was redefined. Kept
               // because consumers are still on it; new work goes to current.
               // Hidden from the version dropdown (see `versions` on the navbar
-              // item below) so nobody lands here by accident, but it keeps
-              // Docusaurus's "unmaintained" banner, which points at
-              // lastVersion, for anyone arriving on an existing link.
-              label: 'EDS 2.0 (earlier beta)',
+              // item below) so nobody lands here by accident. Docusaurus would
+              // call it "unreleased", because versions.json lists it before
+              // lastVersion, so DocItem/Layout renders a note that points to
+              // Beta instead.
+              label: 'Earlier beta',
               path: '2.0.0-beta',
+              banner: 'none',
             },
-            // A non-lastVersion normally gets its version name as its path, so
-            // pinning lastVersion to 'current' below would silently move the
-            // whole archive from /docs/… to /docs/1.1.0/… and break every
-            // existing link to it. An empty path keeps it exactly where it is.
             '1.1.0': {
-              label: 'EDS 1',
+              label: 'Latest',
+              // The lastVersion is served at /docs/ anyway. Set explicitly so
+              // the archive stays there if lastVersion moves again.
               path: '',
-              // EDS 1 is maintained until EDS 2.0 becomes stable, so
-              // Docusaurus's "no longer actively maintained" banner says the
-              // opposite of what we mean. DocItem/Layout renders our own note
-              // for this version instead.
+              // Docusaurus shows no banner on the lastVersion. DocItem/Layout
+              // renders a note that says which package versions Latest is.
               banner: 'none',
             },
           },
-          // Without this, Docusaurus defaults lastVersion to the newest entry
-          // in versions.json (2.0.0-beta), which makes a frozen snapshot the
-          // target of every `type: 'docSidebar'` navbar item and of the version
-          // dropdown — while the footer and the landing pages link to
-          // /docs/Next/…. The site then contradicts its own chrome. Pinning it
-          // to 'current' points the default at the current 3.0.0-beta docs;
-          // `path: 'Next'` above keeps the beta's URLs unchanged and leaves
-          // 1.1.0 served at /docs/.
-          lastVersion: 'current',
+          // Latest is the default: every `type: 'docSidebar'` navbar item, the
+          // version dropdown and the footer point to it. Without this,
+          // Docusaurus defaults lastVersion to the newest entry in
+          // versions.json (2.0.0-beta), a frozen snapshot. `path: 'Next'` above
+          // keeps the Beta URLs unchanged.
+          lastVersion: '1.1.0',
         },
         theme: {
           customCss: [
@@ -185,7 +181,7 @@ const config: Config = {
                   __dirname,
                   '../../packages/eds-utils',
                 ),
-                // EDS 2.0 (next) is intentionally NOT exposed via the package's
+                // The beta (`/next`) is intentionally NOT exposed via the package's
                 // `exports` map — that entry is injected only for beta npm
                 // releases (see #4395), so stable releases never ship it.
                 // Point the docs build straight at the built artifacts so
@@ -335,10 +331,10 @@ const config: Config = {
           type: 'docsVersionDropdown',
           position: 'left',
           dropdownActiveClassDisabled: true,
-          // Only the two live generations. The frozen 2.0.0-beta archive stays
-          // built and linkable, but listing it invites readers into a snapshot
-          // that was never updated past the old colour foundation.
-          versions: ['current', '1.1.0'],
+          // Only Latest and Beta, in that order. The frozen 2.0.0-beta archive
+          // stays built and linkable, but listing it invites readers into a
+          // snapshot that was never updated past the old colour foundation.
+          versions: ['1.1.0', 'current'],
         },
       ],
     },
@@ -352,19 +348,19 @@ const config: Config = {
             { label: 'Getting Started', to: '/getting-started' },
             {
               label: 'Design',
-              to: '/docs/Next/about/getting-started/design/getting_started_design',
+              to: '/docs/about/getting-started/design/getting_started_design',
             },
             {
               label: 'Develop',
-              to: '/docs/Next/about/getting-started/develop/getting_started_development',
+              to: '/docs/about/getting-started/develop/getting_started_development',
             },
             {
               label: 'Citizen developer',
-              to: '/docs/Next/about/getting-started/develop/citizen_developers',
+              to: '/docs/about/getting-started/develop/citizen_developers',
             },
             {
               label: 'Team lead',
-              to: '/docs/Next/about/getting-started/team_roles',
+              to: '/docs/about/getting-started/team_roles',
             },
           ],
         },
@@ -373,23 +369,23 @@ const config: Config = {
           items: [
             {
               label: 'Typography',
-              to: '/docs/Next/foundation/design-tokens/typography',
+              to: '/docs/foundation/design-tokens/typography',
             },
-            { label: 'Colours', to: '/docs/Next/foundation/colour/intro' },
+            { label: 'Colours', to: '/docs/foundation/colour/intro' },
             {
               label: 'Icons',
-              to: '/docs/Next/foundation/assets/system_icons',
+              to: '/docs/foundation/assets/system_icons',
             },
             {
               label: 'Spacing',
-              to: '/docs/Next/foundation/design-tokens/spacing',
+              to: '/docs/foundation/design-tokens/spacing',
             },
           ],
         },
         {
           title: 'Components',
           items: [
-            { label: 'All components', to: '/docs/Next/components' },
+            { label: 'All components', to: '/docs/components' },
             { label: 'Storybook', href: 'https://storybook.eds.equinor.com' },
           ],
         },
@@ -397,7 +393,7 @@ const config: Config = {
           title: 'Resources',
           items: [
             { label: 'About EDS', to: '/about' },
-            { label: 'Support', to: '/docs/Next/support' },
+            { label: 'Support', to: '/docs/support' },
           ],
         },
       ],

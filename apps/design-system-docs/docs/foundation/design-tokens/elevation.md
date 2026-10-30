@@ -17,13 +17,13 @@ Each level combines two shadow layers: a **key shadow**, which is directional an
 
 <div style={{display: 'flex', gap: '2rem', padding: '2rem 0'}}>
   <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 'var(--eds-corner-radius-rounded)', background: 'var(--eds-background-surface)', boxShadow: 'var(--eds-elevation-low)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--eds-typography-ui-md-font-size)', color: 'var(--eds-text-secondary)'}}>
+    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 'var(--eds-corner-radius-rounded)', background: 'var(--eds-background-surface)', boxShadow: 'var(--eds-elevation-low)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--eds-typography-label-md-font-size)', color: 'var(--eds-text-secondary)'}}>
       Low elevation
     </div>
     <code>--eds-elevation-low</code>
   </div>
   <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 'var(--eds-corner-radius-rounded)', background: 'var(--eds-background-surface)', boxShadow: 'var(--eds-elevation-high)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--eds-typography-ui-md-font-size)', color: 'var(--eds-text-secondary)'}}>
+    <div style={{width: '100%', maxWidth: 280, height: 120, borderRadius: 'var(--eds-corner-radius-rounded)', background: 'var(--eds-background-surface)', boxShadow: 'var(--eds-elevation-high)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--eds-typography-label-md-font-size)', color: 'var(--eds-text-secondary)'}}>
       High elevation
     </div>
     <code>--eds-elevation-high</code>

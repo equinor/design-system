@@ -16,8 +16,11 @@ import { favorite_filled, check, time, remove, check_circle_outlined, info_circl
     itself: above, because the layout's chrome is what does that elsewhere, and
     not below, because the first section already has its own padding. An Infima
     utility because the hero band's container chain zeroes `margin-top` on what
-    follows it. */}
-<BetaNotice className="margin-top--md" />
+    follows it. Wrapped in `.container` so it lines up with the hero and the
+    sections. */}
+<div className="container">
+  <BetaNotice className="margin-top--md" />
+</div>
 
 <DocsSection title="Data Display" subtitle="Present information, status, structure, or relationships.">
 

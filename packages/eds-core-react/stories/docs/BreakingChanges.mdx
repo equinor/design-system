@@ -67,6 +67,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.2` (September 2026). If a c
 | ------------------------ | ----------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | `Accordion`              | [Accordion](#accordion)       | <Tag tone="danger">Known issues</Tag>                                      | Native `<details>`; `isExpanded` → `open`; `HeaderTitle` and `HeaderActions` removed                    |
 | `Autocomplete`           | [Autocomplete](#autocomplete) |                                                                            | Single-select only; `selectedOptions`/`onOptionsChange` → `value`/`onValueChange`                       |
+| `Avatar`                 | [Avatar](#avatar)             |                                                                            | `size` 16–48 → `sm`/`md`/`lg`; `disabled` removed; initials from `name`; new `AvatarNameLabel`          |
 | none                     | [Badge](#badge)               | <Tag tone="info">New</Tag>                                                 | New component for non-interactive labels                                                                |
 | `Banner`                 | [Banner](#banner)             |                                                                            | `tone` moves to the root; default role `alert` → `status`; `elevation` removed                          |
 | `Button`                 | [Button](#button)             | <Tag tone="warning">Under review</Tag>                                     | `contained`/`outlined` → `primary`/`secondary`; `color` → `tone`; `href` → `asChild`                    |
@@ -139,6 +140,21 @@ Shared changes across the form components:
 **Custom values**: the Add option's accessible name changes from `Add new option: {value}` to `Add: {value}`. The option is disabled when the typed text matches an existing option, ignoring case. After confirming, the value stays in the input and is selected, where 2.x cleared the input.
 
 **Markup**: `data-testid="add-item"` and `data-testid="select-all"` are gone. Listbox and option ids are generated as `eds-autocomplete-listbox-*`. `aria-multiselectable` is gone. Options are no longer virtualised, so every option is in the DOM. The list uses the Popover API with CSS anchor positioning instead of a floating-ui positioned element.
+
+## Avatar
+
+2.x: `Avatar`.
+
+**Props**
+
+- `size` changes from pixels (`16` | `24` | `32` | `40` | `48`, default `24`) to `sm` (20px) | `md` (24px) | `lg` (32px), default `lg`. There is no 40 or 48, and the smallest size is 20px, not 16px.
+- Removed: `disabled`.
+- `alt` is optional. It falls back to `name`, and to an empty string when neither is set.
+- New: `name`, which derives the initials ("Ada Lovelace" gives "AL") and the accessible name, `initial` to override them, `emphasis` (`low` | `high`) and `notification`.
+
+**Markup and behaviour**: without `src` the avatar shows initials on a coloured background, where 2.x always rendered an `<img>`. The `<img>` is only rendered when `src` is set, and gets `class="photo"`. If the photo fails to load, the initials show instead. Given `name` and no photo, the root gets `role="img"` and an `aria-label`. `notification` adds a dot that is announced as part of that label, or through visually hidden text when there is no label.
+
+**New**: `AvatarNameLabel` pairs an avatar with a name, optional `meta` text and a trailing slot. It has no 2.x counterpart.
 
 ## Badge
 

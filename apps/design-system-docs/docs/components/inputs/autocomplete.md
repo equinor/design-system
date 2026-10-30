@@ -18,7 +18,7 @@ Use Autocomplete when users need to choose a single value from a list that is to
 - Free-form text entry with no suggestions - use [TextField](./textfield) instead
 - Quick keyword search across a page or site - use [Search](./search) instead
 - A small, fixed set of mutually exclusive options - use Radio or a basic Select instead
-- Multi-value selection - the EDS 2.0 Autocomplete is single-select, and multi-select moves to the upcoming Combobox component ([issue #4435](https://github.com/equinor/design-system/issues/4435))
+- Multi-value selection - the Beta Autocomplete is single-select, and multi-select moves to the upcoming Combobox component ([issue #4435](https://github.com/equinor/design-system/issues/4435))
 
 ## Structure
 
