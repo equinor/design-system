@@ -1,0 +1,211 @@
+@layer eds-components {
+  .eds-avatar {
+    /* Size is padding on both sides plus the initials area, as Figma builds
+     * it: 4 + 24 + 4 = 32 (lg), 2 + 20 + 2 = 24 (md), 2 + 16 + 2 = 20 (sm).
+     * label.*, not trimmed (ADR-0029). */
+    --_padding: var(--eds-spacing-3xs);
+    --_inner-size: var(--eds-spacing-xl);
+    --_size: calc(var(--_padding) * 2 + var(--_inner-size));
+    --_font-family: var(--eds-font-family-ui);
+    --_font-size: var(--eds-typography-label-lg-font-size);
+    --_line-height: var(--eds-typography-label-lg-line-height);
+    --_dot-size: var(--eds-spacing-sm);
+    --_notification-bg: var(
+      --eds-background-interactive-danger-emphasis-default
+    );
+    --_notification-border: var(--eds-background-surface);
+
+    /* No width token: the design uses 1px for every stroke (#5692) */
+    --_stroke-width: 1px;
+
+    /* Avatar is always accent */
+    --_bg-color: var(--eds-background-interactive-accent-muted-default);
+    --_color: var(--eds-text-primary);
+
+    position: relative;
+
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: var(--_size);
+    height: var(--_size);
+    border-radius: var(--eds-corner-radius-pill);
+
+    background-color: var(--_bg-color);
+
+    &[data-size='md'] {
+      --_padding: var(--eds-spacing-4xs);
+      --_inner-size: var(--eds-spacing-lg);
+      --_font-size: var(--eds-typography-label-sm-font-size);
+      --_line-height: var(--eds-typography-label-sm-line-height);
+      --_dot-size: var(--eds-spacing-xs);
+    }
+
+    &[data-size='sm'] {
+      --_padding: var(--eds-spacing-4xs);
+      --_inner-size: var(--eds-spacing-md);
+      --_font-size: var(--eds-typography-label-xs-font-size);
+      --_line-height: var(--eds-typography-label-xs-line-height);
+      --_dot-size: var(--eds-spacing-xs);
+    }
+
+    &[data-emphasis='high'] {
+      --_bg-color: var(--eds-background-interactive-accent-emphasis-default);
+      --_color: var(--eds-text-on-emphasis-neutral);
+    }
+
+    & .photo {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+
+      object-fit: cover;
+    }
+
+    & .initial {
+      overflow: hidden;
+
+      font-family: var(--_font-family);
+      font-size: var(--_font-size);
+      font-feature-settings: 'lnum', 'tnum';
+      font-weight: var(--eds-font-weight-normal);
+      line-height: var(--_line-height);
+      color: var(--_color);
+    }
+
+    /* Flush with the bottom-right corner in every size, as in Figma */
+    & .notification {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      box-sizing: border-box;
+      width: var(--_dot-size);
+      height: var(--_dot-size);
+      border: var(--_stroke-width) solid var(--_notification-border);
+      border-radius: var(--eds-corner-radius-pill);
+
+      background-color: var(--_notification-bg);
+    }
+  }
+
+  /* Visually hidden text that announces the notification. Avatar renders it
+     when it has no aria-label; AvatarNameLabel renders it after the name. */
+  :is(.eds-avatar, .eds-avatar-name-label) .notification-label {
+    position: absolute;
+
+    overflow: hidden;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+
+    white-space: nowrap;
+
+    /* clip-path rather than the deprecated clip property */
+    clip-path: inset(50%);
+  }
+
+  .eds-avatar-name-label {
+    /* label.*, not trimmed (ADR-0029) */
+    --_font-family: var(--eds-font-family-ui);
+
+    display: flex;
+    gap: var(--eds-spacing-md);
+    align-items: center;
+
+    font-family: var(--_font-family);
+    font-weight: var(--eds-font-weight-normal);
+
+    & .content {
+      display: flex;
+      flex: 1 0 0;
+      gap: var(--eds-spacing-xs);
+      align-items: center;
+
+      min-width: 0;
+    }
+
+    /* Horizontal: name and meta stacked with no gap between them */
+    & .names {
+      display: flex;
+      flex: 1 0 0;
+      flex-direction: column;
+      justify-content: center;
+
+      min-width: 0;
+
+      font-feature-settings: 'lnum', 'tnum';
+    }
+
+    /* Vertical: name and meta side by side on one line */
+    &[data-layout='vertical'] {
+      /* Both blocks stay shrinkable (flex: initial keeps flex-shrink at 1) so a
+         long name or meta truncates instead of pushing past the container. */
+      & .content {
+        flex: initial;
+      }
+
+      & .names {
+        flex: initial;
+        flex-direction: row;
+        gap: var(--eds-spacing-xs);
+        align-items: center;
+
+        white-space: nowrap;
+      }
+    }
+
+    /* The ellipsis only applies in vertical, where .names sets nowrap. In
+       horizontal, overflow-wrap lets long names wrap onto more lines. */
+    & .full-name,
+    & .meta {
+      overflow: hidden;
+      min-width: 0;
+      text-overflow: ellipsis;
+      overflow-wrap: break-word;
+    }
+
+    & .full-name {
+      font-size: var(--eds-typography-label-sm-font-size);
+      line-height: var(--eds-typography-label-sm-line-height);
+      color: var(--eds-text-primary);
+    }
+
+    & .meta {
+      font-size: var(--eds-typography-label-xs-font-size);
+      line-height: var(--eds-typography-label-xs-line-height);
+      color: var(--eds-text-secondary);
+    }
+
+    & .slot-right {
+      flex-shrink: 0;
+    }
+  }
+
+  /* Forced colors (Windows High Contrast) strips fills, so the initials circle
+   * needs an outline to show its boundary, as in Button and Chip. The dot opts
+   * out of forced colours so it stays a solid system-colour fill instead of
+   * an empty ring. */
+  @media (forced-colors: active) {
+    .eds-avatar {
+      --_notification-bg: CanvasText;
+      --_notification-border: Canvas;
+
+      outline: var(--_stroke-width) solid;
+      outline-offset: calc(-1 * var(--_stroke-width));
+
+      & .notification {
+        forced-color-adjust: none;
+      }
+    }
+  }
+}

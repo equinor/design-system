@@ -27,6 +27,7 @@ const WEB_SUB_COMPONENTS = {
     { name: 'Accordion.Header', component: 'AccordionHeader' },
     { name: 'Accordion.Panel', component: 'AccordionPanel' },
   ],
+  Avatar: [{ name: 'AvatarNameLabel', component: 'AvatarNameLabel' }],
   Banner: [
     { name: 'Banner.Icon', component: 'BannerIcon' },
     { name: 'Banner.Message', component: 'BannerMessage' },
