@@ -30,6 +30,7 @@ packages/                # Published npm packages
   eds-data-grid-react/   # Data grid component (deprecated)
   eds-utils/             # Utility functions
   eds-tailwind/          # Tailwind CSS plugin
+  eds-cli/               # CLI for looking up components and tokens (for AI agents)
 ```
   
 ## Architecture
