@@ -15,6 +15,21 @@
       "$type": "fontFamily",
       "$value": "{primitives.font-family.equinor}"
     },
+    "mono": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-family-mono)"
+          },
+          "hiddenFromPublishing": true,
+          "scopes": [
+            "FONT_FAMILY"
+          ]
+        }
+      },
+      "$type": "fontFamily",
+      "$value": "{primitives.font-family.commitmono}"
+    },
     "ui": {
       "$extensions": {
         "com.figma": {

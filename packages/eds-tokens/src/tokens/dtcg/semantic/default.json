@@ -2182,68 +2182,6 @@
           "$value": "{dataviz.cat.1.5}"
         }
       },
-      "10": {
-        "1": {
-          "$extensions": {
-            "com.figma": {
-              "codeSyntax": {
-                "WEB": "var(--eds-data-visualization-cat-10-1)"
-              },
-              "hiddenFromPublishing": false
-            }
-          },
-          "$type": "color",
-          "$value": "{dataviz.cat.10.1}"
-        },
-        "2": {
-          "$extensions": {
-            "com.figma": {
-              "codeSyntax": {
-                "WEB": "var(--eds-data-visualization-cat-10-2)"
-              },
-              "hiddenFromPublishing": false
-            }
-          },
-          "$type": "color",
-          "$value": "{dataviz.cat.10.2}"
-        },
-        "3": {
-          "$extensions": {
-            "com.figma": {
-              "codeSyntax": {
-                "WEB": "var(--eds-data-visualization-cat-10-3)"
-              },
-              "hiddenFromPublishing": false
-            }
-          },
-          "$type": "color",
-          "$value": "{dataviz.cat.10.3}"
-        },
-        "4": {
-          "$extensions": {
-            "com.figma": {
-              "codeSyntax": {
-                "WEB": "var(--eds-data-visualization-cat-10-4)"
-              },
-              "hiddenFromPublishing": false
-            }
-          },
-          "$type": "color",
-          "$value": "{dataviz.cat.10.4}"
-        },
-        "5": {
-          "$extensions": {
-            "com.figma": {
-              "codeSyntax": {
-                "WEB": "var(--eds-data-visualization-cat-10-5)"
-              },
-              "hiddenFromPublishing": false
-            }
-          },
-          "$type": "color",
-          "$value": "{dataviz.cat.10.5}"
-        }
-      },
       "2": {
         "1": {
           "$extensions": {
@@ -2739,6 +2677,68 @@
           "$type": "color",
           "$value": "{dataviz.cat.9.5}"
         }
+      },
+      "10": {
+        "1": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-1)"
+              },
+              "hiddenFromPublishing": false
+            }
+          },
+          "$type": "color",
+          "$value": "{dataviz.cat.10.1}"
+        },
+        "2": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-2)"
+              },
+              "hiddenFromPublishing": false
+            }
+          },
+          "$type": "color",
+          "$value": "{dataviz.cat.10.2}"
+        },
+        "3": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-3)"
+              },
+              "hiddenFromPublishing": false
+            }
+          },
+          "$type": "color",
+          "$value": "{dataviz.cat.10.3}"
+        },
+        "4": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-4)"
+              },
+              "hiddenFromPublishing": false
+            }
+          },
+          "$type": "color",
+          "$value": "{dataviz.cat.10.4}"
+        },
+        "5": {
+          "$extensions": {
+            "com.figma": {
+              "codeSyntax": {
+                "WEB": "var(--eds-data-visualization-cat-10-5)"
+              },
+              "hiddenFromPublishing": false
+            }
+          },
+          "$type": "color",
+          "$value": "{dataviz.cat.10.5}"
+        }
       }
     },
     "div": {
@@ -2995,6 +2995,21 @@
       },
       "$type": "text",
       "$value": "{family.header}"
+    },
+    "mono": {
+      "$extensions": {
+        "com.figma": {
+          "codeSyntax": {
+            "WEB": "var(--eds-font-family-mono)"
+          },
+          "hiddenFromPublishing": false,
+          "scopes": [
+            "FONT_FAMILY"
+          ]
+        }
+      },
+      "$type": "text",
+      "$value": "{family.mono}"
     },
     "ui": {
       "$extensions": {

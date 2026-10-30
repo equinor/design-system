@@ -119,6 +119,21 @@
         }
       }
     },
+    "mono": {
+      "$value": "{family.mono}",
+      "$type": "text",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-font-family-mono)"
+          },
+          "hiddenFromPublishing": false
+        }
+      }
+    },
     "ui": {
       "$value": "{family.ui}",
       "$type": "text",
