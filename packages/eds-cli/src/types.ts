@@ -30,6 +30,17 @@ export type Guidance = {
   related?: string
 }
 
+/** The props of a component or of one part of a compound component */
+export type PropList = {
+  props: Prop[]
+  baseTypes: BaseType[]
+}
+
+/** A part of a compound component, such as Field.Label */
+export type SubComponent = PropList & {
+  name: string
+}
+
 export type Component = {
   name: string
   description: string | null
@@ -38,7 +49,7 @@ export type Component = {
   hasAsChild: boolean
   props: Prop[]
   baseTypes: BaseType[]
-  subComponents: string[]
+  subComponents: SubComponent[]
   examples: Example[]
   guidance: Guidance
   links: {

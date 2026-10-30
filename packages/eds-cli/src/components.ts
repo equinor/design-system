@@ -129,8 +129,11 @@ export function searchComponents(
     [
       c.name,
       c.description ?? '',
-      ...c.subComponents,
       ...c.props.map((p) => p.name),
+      ...c.subComponents.flatMap((sub) => [
+        sub.name,
+        ...sub.props.map((p) => p.name),
+      ]),
     ]
       .join(' ')
       .toLowerCase()
