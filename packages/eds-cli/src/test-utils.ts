@@ -69,7 +69,22 @@ export const componentData: ComponentData = {
       hasAsChild: false,
       props: [],
       baseTypes: [{ name: 'HTMLAttributes<HTMLDivElement>', omitted: [] }],
-      subComponents: ['Field.Label'],
+      subComponents: [
+        {
+          name: 'Field.Label',
+          props: [
+            {
+              name: 'indicator',
+              optional: true,
+              type: 'string',
+              description: 'Marks the field as optional or required',
+            },
+          ],
+          baseTypes: [
+            { name: 'LabelHTMLAttributes<HTMLLabelElement>', omitted: [] },
+          ],
+        },
+      ],
       examples: [],
       guidance: {},
       links: {},
