@@ -19,7 +19,7 @@ export type ErrorBoundaryProps = Pick<
 export function ErrorBoundary({ children, onError }: ErrorBoundaryProps) {
     const fallbackRender = ({ error, resetErrorBoundary }: FallbackProps) => (
         <ErrorBoundaryScreen
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+             
             error={error}
             resetErrorBoundary={resetErrorBoundary}
         />
