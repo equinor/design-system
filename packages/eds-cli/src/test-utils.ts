@@ -159,11 +159,18 @@ const tokenPackages: Record<
 export function makeProject(
   options: {
     data?: boolean
+    /** `stable` is 2.x: the same build/ folder, but no ./next export */
+    coreReact?: 'beta' | 'stable'
     tokens?: TokenLayout
     schemaVersion?: number
   } = {},
 ): string {
-  const { data = true, tokens = 'next', schemaVersion = 1 } = options
+  const {
+    data = true,
+    coreReact = 'beta',
+    tokens = 'next',
+    schemaVersion = 1,
+  } = options
   const project = mkdtempSync(join(tmpdir(), 'eds-cli-'))
   const modules = join(project, 'node_modules/@equinor')
 
@@ -171,7 +178,13 @@ export function makeProject(
     join(modules, 'eds-core-react/package.json'),
     JSON.stringify({
       name: '@equinor/eds-core-react',
-      version: '3.0.0-beta.9',
+      version: coreReact === 'beta' ? '3.0.0-beta.9' : '2.6.4',
+      exports: {
+        '.': { import: './dist/esm/index.js' },
+        ...(coreReact === 'beta' && {
+          './next': { import: './dist/esm-next/index.next.js' },
+        }),
+      },
     }),
   )
   if (data) {

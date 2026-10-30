@@ -27,7 +27,7 @@ The decision behind the CLI is [ADR-0030](https://github.com/equinor/design-syst
 npm install --save-dev @equinor/eds-cli
 ```
 
-Install it in the project rather than running `npx @equinor/eds-cli`: then `npx eds` starts the local copy at once, while `npx @equinor/eds-cli` without a local install can download the package again, which adds seconds to every lookup an agent makes.
+Install it in the project rather than running `npx @equinor/eds-cli`: then `npx --no-install eds` starts the local copy at once, while `npx @equinor/eds-cli` without a local install can download the package again, which adds seconds to every lookup an agent makes.
 
 ## Usage
 
@@ -36,15 +36,15 @@ eds list                            # the components, with a one-line descriptio
 eds show Button                     # import line, props, examples and guidance
 eds show TextField Checkbox Button  # several components in one call
 eds show Button --section usage     # one section: props, examples, features, usage, accessibility, related, links
-eds search date                     # components whose name, description or props match
+eds search select                   # components whose name, description or props match
 eds tokens accent background        # semantic tokens whose name contains every word
 eds tokens spacing --density compact --scheme dark
 eds --version                       # versions of the CLI and the installed EDS packages
 ```
 
-Every command prints JSON with `--json`. Text output ends with the command to run next (`→ eds show Button`), so an agent can follow up without rereading the help. `search` allows one typo in longer words and suggests close component names when nothing matches.
+Every command prints JSON with `--json`. Text output ends with the command to run next (`→ eds show Button`), so an agent can follow up without rereading the help. When nothing matches exactly, `search` allows one typo in words of five letters or more, and suggests close component names.
 
-`eds tokens` lists the semantic tokens, the ones components and products should use, with their value for the colour scheme and density. `--all` adds the internal tokens (primitives, palettes, per-density values), which component CSS must not reference.
+`eds tokens` lists the semantic tokens, the ones components and products should use, with their value for the colour scheme and density. `--all` adds the internal tokens (primitives, palettes, per-density values), which component CSS must not reference, and shows what each token refers to.
 
 ### Monorepos
 
@@ -68,10 +68,12 @@ The exit code is 0 on success and 1 on an error, such as a missing package or an
 
 ## Telling an agent about it
 
+Keep `--no-install` in the line below. An unrelated package called `eds` exists on npm, and without the flag, `npx eds` in a folder where `@equinor/eds-cli` is not installed downloads and runs that package instead, without asking when the shell has no terminal, as in an agent.
+
 Add a line like this to the `AGENTS.md`, `CLAUDE.md` or Copilot instructions of your repository:
 
 ```md
-This project uses the Equinor Design System beta. Before writing UI code, run `npx eds show <Component>...` for the import and props of the components you need (several at once), and `npx eds tokens <words>` for design tokens. Do not guess props or token names.
+This project uses the Equinor Design System beta. Before writing UI code, run `npx --no-install eds show <Component>...` for the import and props of the components you need (several at once), and `npx --no-install eds tokens <words>` for design tokens. Do not guess props or token names.
 ```
 
 ## Development
