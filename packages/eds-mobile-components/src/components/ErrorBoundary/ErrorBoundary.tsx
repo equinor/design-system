@@ -19,7 +19,6 @@ export type ErrorBoundaryProps = Pick<
 export function ErrorBoundary({ children, onError }: ErrorBoundaryProps) {
     const fallbackRender = ({ error, resetErrorBoundary }: FallbackProps) => (
         <ErrorBoundaryScreen
-             
             error={error}
             resetErrorBoundary={resetErrorBoundary}
         />
