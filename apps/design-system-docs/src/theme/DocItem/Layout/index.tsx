@@ -91,7 +91,7 @@ function VersionNotice({ version, docId }: { version: string; docId: string }) {
 }
 
 /** Doc sections whose pages can render the hero band. */
-const HERO_SECTIONS = ['components/', 'foundation/']
+const HERO_SECTIONS = ['components/', 'foundation/', 'about/roadmap/']
 
 /** Decide whether the TOC should render, on mobile or desktop viewports. */
 function useDocTOC() {
@@ -111,7 +111,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   const docTOC = useDocTOC()
   const { metadata, frontMatter } = useDoc()
 
-  // Component and foundation docs render a full-width hero band (title + lead)
+  // Component, foundation and roadmap docs render a full-width hero band (title + lead)
   // above the standard three-column doc body. Gated on `hide_title` so the
   // /components landing and the frozen 2.0.0-beta foundation pages, which still
   // carry their title in the markdown, keep their own layouts, and on the
