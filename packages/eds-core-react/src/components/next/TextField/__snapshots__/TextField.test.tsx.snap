@@ -10,7 +10,6 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     >
       <label
         class="label"
-        data-baseline="center"
         for="test-id-input"
       >
         Label
@@ -18,7 +17,6 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     </div>
     <p
       class="description"
-      data-baseline="center"
       id="test-id-description"
     >
       Description text
@@ -44,7 +42,6 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     </div>
     <p
       class="helper-message"
-      data-baseline="grid"
       id="test-id-helper-message"
     >
       Helper message
