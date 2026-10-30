@@ -101,6 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     # Expose outputs so downstream jobs can check which packages changed
     outputs:
+      cli: ${{ steps.check.outputs.cli }}
       core-react: ${{ steps.check.outputs.core-react }}
       utils: ${{ steps.check.outputs.utils }}
       lab-react: ${{ steps.check.outputs.lab-react }}
@@ -137,6 +138,17 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Package detection results:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Check eds-cli
+          if echo "$MANIFEST_DIFF" | grep -E '^[+-].*"packages/eds-cli":'; then
+            echo "cli=true" >> $GITHUB_OUTPUT
+            echo "✅ eds-cli changed"
+            echo "- ✅ **eds-cli** changed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "cli=false" >> $GITHUB_OUTPUT
+            echo "⏭️  eds-cli unchanged"
+            echo "- ⏭️ **eds-cli** unchanged" >> $GITHUB_STEP_SUMMARY
+          fi
 
           # Check eds-core-react (matches both the stable "packages/eds-core-react"
           # key and the beta "packages/eds-core-react/src/components/next" key,
@@ -485,6 +497,33 @@ jobs:
           echo "::error title=Tokens Publish Failed::Failed to trigger publish workflow for @equinor/eds-tokens"
           echo "❌ Failed to trigger tokens publish workflow" >> $GITHUB_STEP_SUMMARY
 
+  # Job 10b: Trigger CLI publish workflow
+  # Only runs if the Release Please manifest bumped eds-cli. publish_cli.yaml
+  # only stages the version; a maintainer approves it with 2FA. The CLI is a
+  # regular 0.x package on `latest`, so `npx @equinor/eds-cli` gets it without
+  # a tag, even though the components and tokens it reads are on `beta`.
+  trigger-cli:
+    needs: check-releases
+    if: needs.check-releases.outputs.cli == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger CLI publish
+        id: trigger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run publish_cli.yaml \
+            --repo ${{ github.repository }} \
+            --ref main \
+            -f npm-tag=latest
+        continue-on-error: true
+
+      - name: Report failure
+        if: steps.trigger.outcome == 'failure'
+        run: |
+          echo "::error title=CLI Publish Failed::Failed to trigger publish workflow for @equinor/eds-cli"
+          echo "❌ Failed to trigger CLI publish workflow" >> $GITHUB_STEP_SUMMARY
+
   # Job 11: Summary report of all publish triggers
   # Runs independently after check-releases completes
   # Provides a clear overview of which packages were triggered for publishing
@@ -542,6 +581,12 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
 
           # Check each package's trigger result based on what was detected
+          if [ "${{ needs.check-releases.outputs.cli }}" == "true" ]; then
+            echo "- ✅ **@equinor/eds-cli**: Publish workflow triggered. It stages the version, which goes live after a maintainer runs \`npm stage approve\`" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⏭️ **@equinor/eds-cli**: No changes, skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
           if [ "${{ needs.check-releases.outputs.core-react }}" == "true" ]; then
             echo "- ✅ **@equinor/eds-core-react**: Publish workflow triggered" >> $GITHUB_STEP_SUMMARY
           else

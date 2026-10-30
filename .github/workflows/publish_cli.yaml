@@ -1,0 +1,124 @@
+name: Publish CLI
+# Stages @equinor/eds-cli on npm. This file is the package's trusted publisher
+# on npmjs.com, so keep the filename: npm matches it exactly (see #4932).
+#
+# Staged publishing: the trusted publisher allows `npm stage publish` only, so
+# this workflow cannot make a version public on its own. A maintainer approves
+# the staged version with 2FA before it goes live. The other EDS packages still
+# publish directly; eds-cli is the first to require approval.
+permissions:
+  contents: read
+on:
+  workflow_dispatch:
+    inputs:
+      # latest by default: npx @equinor/eds-cli only finds versions on latest,
+      # and the 0.x version already says the CLI is not stable yet.
+      npm-tag:
+        description: 'Tag for npm package (latest | next)'
+        required: true
+        type: choice
+        options:
+          - latest
+          - next
+        default: 'latest'
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  NODE_VERSION: '24.22.1'
+  CACHE_KEY: ${{ github.sha }}-publish-cli
+
+jobs:
+  setup:
+    name: Setup
+    uses: ./.github/workflows/_setup.yml
+    secrets: inherit
+    with:
+      cacheKey: ${{ github.sha }}-publish-cli
+      tag: ${{ github.event.inputs.npm-tag }}
+
+  build:
+    name: Build and test the CLI
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Restore workspace cache
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+      # The CLI has no workspace dependencies, so it builds on its own.
+      - name: Build CLI
+        run: pnpm run build:cli
+      - name: Test CLI
+        run: pnpm run test:cli
+      - name: Cache build output
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
+
+  publish:
+    name: Stage CLI on npm
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Restore build cache
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+          key: ${{ env.CACHE_KEY }}-built
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+      # `npm stage` is unaware of workspaces, so it runs in the package folder.
+      # Packing with npm instead of pnpm is safe here because the CLI has no
+      # workspace dependencies to rewrite. Provenance is added automatically
+      # through OIDC. Needs npm 11.15 or later; Node 24.22.1 ships 11.19.
+      - name: Stage the release on npm
+        working-directory: packages/eds-cli
+        run: npm stage publish --access public --tag ${{ github.event.inputs.npm-tag }}
+      - name: Explain how to approve
+        run: |
+          VERSION=$(node -p "require('./packages/eds-cli/package.json').version")
+          {
+            echo "## @equinor/eds-cli@$VERSION is staged, not published"
+            echo ""
+            echo "A maintainer with 2FA has to approve it before it goes live:"
+            echo ""
+            echo '```sh'
+            echo "npm stage list @equinor/eds-cli"
+            echo "npm stage approve <stage-id>"
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
+      - name: log-errors-to-slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+        if: failure()
