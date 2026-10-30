@@ -14,7 +14,8 @@
  * - discovery, description, sub-components and status come from the
  *   component index generator (scripts/generate-component-index.js)
  * - props (and asChild, read from them), examples and guidance come from the
- *   Storybook docs generator (scripts/component-docs/)
+ *   Storybook docs generator (scripts/component-docs/), and so do the props of
+ *   each sub-component, through the same WEB_SUB_COMPONENTS map
  *
  * The description is the hand-written Summary in `.docs.md`, which is written
  * for readers. A component without a sidecar still gets props, sub-components
@@ -33,7 +34,11 @@ const {
   discoverPublicComponents,
   extractComponentData,
 } = require('./generate-component-index')
-const { rootDir, PLATFORMS } = require('./component-docs/config')
+const {
+  rootDir,
+  PLATFORMS,
+  WEB_SUB_COMPONENTS,
+} = require('./component-docs/config')
 const {
   findPropsDeclaration,
   readFigmaUrl,
@@ -134,6 +139,27 @@ function readExamples(project, dir, name) {
     .map(({ title, caption, code }) => ({ title, caption, code }))
 }
 
+// The index finds the parts of a compound component in its source, and
+// WEB_SUB_COMPONENTS names the props type of each part. The build stops when the
+// two disagree, so a new part cannot ship without its props.
+function readSubComponents(project, dir, name, found) {
+  const configured = WEB_SUB_COMPONENTS[name] ?? []
+  const configuredNames = configured.map((sub) => sub.name)
+  if (found.join() !== configuredNames.join()) {
+    fail(
+      `${name}: the component has the parts [${found.join(', ')}], but WEB_SUB_COMPONENTS in scripts/component-docs/config.js lists [${configuredNames.join(', ')}]. Update the config.`,
+    )
+  }
+  return configured.map((sub) => {
+    const declaration = findPropsDeclaration(project, dir, sub.component)
+    return {
+      name: sub.name,
+      props: extractProps(declaration),
+      baseTypes: webBaseTypes(declaration),
+    }
+  })
+}
+
 function buildComponent(project, entry) {
   const { name, dir } = entry
   const index = extractComponentData(entry)
@@ -150,7 +176,7 @@ function buildComponent(project, entry) {
     hasAsChild: props.some((prop) => prop.name === 'asChild'),
     props,
     baseTypes: webBaseTypes(declaration),
-    subComponents: index.subComponents,
+    subComponents: readSubComponents(project, dir, name, index.subComponents),
     examples: readExamples(project, dir, name),
     guidance,
     links: {

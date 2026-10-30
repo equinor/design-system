@@ -1,5 +1,5 @@
 import type { Token, TokenHints } from './tokens.js'
-import type { Component, ComponentData, Guidance } from './types.js'
+import type { Component, ComponentData, Guidance, PropList } from './types.js'
 
 /**
  * Plain-text output. It is kept short because an agent pays for every line it
@@ -88,15 +88,23 @@ export function formatSearch(
 }
 
 function formatProps(component: Component): string[] {
-  const lines = ['Props']
-  if (component.props.length === 0) lines.push('  No props of its own.')
-  for (const prop of component.props) {
+  const lines = ['Props', ...formatPropList(component)]
+  for (const sub of component.subComponents) {
+    lines.push('', `${sub.name} props`, ...formatPropList(sub))
+  }
+  return lines
+}
+
+function formatPropList({ props, baseTypes }: PropList): string[] {
+  const lines: string[] = []
+  if (props.length === 0) lines.push('  No props of its own.')
+  for (const prop of props) {
     const optional = prop.optional ? '?' : ''
     const fallback = prop.default ? ` = ${prop.default}` : ''
     lines.push(`  ${prop.name}${optional}: ${prop.type}${fallback}`)
     if (prop.description) lines.push(`    ${prop.description}`)
   }
-  for (const base of component.baseTypes) {
+  for (const base of baseTypes) {
     const except = base.omitted.length
       ? `, except ${base.omitted.join(', ')}`
       : ''
@@ -181,7 +189,9 @@ export function formatComponent(
       )
     }
     if (component.subComponents.length) {
-      header.push(`Sub-components: ${component.subComponents.join(', ')}`)
+      header.push(
+        `Sub-components: ${component.subComponents.map((sub) => sub.name).join(', ')}`,
+      )
     }
     blocks.push(header)
   }

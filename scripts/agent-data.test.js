@@ -110,11 +110,23 @@ describe('agent data', () => {
   })
 
   test('lists compound sub-components', () => {
-    assert.deepStrictEqual(byName('Field').subComponents, [
-      'Field.Label',
-      'Field.Description',
-      'Field.HelperMessage',
-    ])
+    assert.deepStrictEqual(
+      byName('Field').subComponents.map((sub) => sub.name),
+      ['Field.Label', 'Field.Description', 'Field.HelperMessage'],
+    )
+  })
+
+  test('gives each sub-component its props and base type', () => {
+    const label = byName('Field').subComponents.find(
+      (sub) => sub.name === 'Field.Label',
+    )
+    const indicator = label.props.find((p) => p.name === 'indicator')
+    assert.ok(indicator.type)
+    assert.ok(indicator.description)
+    assert.strictEqual(
+      label.baseTypes[0].name,
+      'LabelHTMLAttributes<HTMLLabelElement>',
+    )
   })
 
   test('names the base type and the keys an Omit removes, once each', () => {
