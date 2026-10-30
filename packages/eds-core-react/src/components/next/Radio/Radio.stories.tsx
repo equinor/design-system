@@ -224,7 +224,7 @@ ControlledAndUncontrolled.parameters = {
 
 export const Density: StoryFn<RadioProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
-    {(['spacious', 'comfortable'] as const).map((density) => (
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
       <div key={density} data-density={density}>
         <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
@@ -248,7 +248,7 @@ Density.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }
@@ -257,7 +257,7 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
   <div style={{ display: 'flex', gap: '32px' }}>
     <div
       data-color-scheme="light"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
+      style={{ padding: '24px', background: 'var(--eds-background-surface)' }}
     >
       <ExampleLabel>Light Mode</ExampleLabel>
       <fieldset>
@@ -284,8 +284,8 @@ export const LightAndDarkMode: StoryFn<RadioProps> = () => (
       data-color-scheme="dark"
       style={{
         padding: '24px',
-        background: 'var(--eds-color-bg-canvas)',
-        color: 'var(--eds-color-text-strong)',
+        background: 'var(--eds-background-surface)',
+        color: 'var(--eds-text-primary)',
       }}
     >
       <ExampleLabel>Dark Mode</ExampleLabel>
