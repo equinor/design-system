@@ -1,5 +1,5 @@
 const path = require('path')
-const { Project } = require('ts-morph')
+const { Project, ts } = require('ts-morph')
 const { rootDir, PLATFORMS } = require('./config')
 
 // Props are read from types that import each other, such as mobile TextField's
@@ -8,7 +8,17 @@ const { rootDir, PLATFORMS } = require('./config')
 // component has no props of its own. Loading every component up front keeps the
 // result the same for one component or all of them, in any order.
 function createProject() {
-  const project = new Project({ skipAddingFilesFromTsConfig: true })
+  // Bundler resolution reads a package's `exports` map. React Native 0.88 has no
+  // top-level `types` field and lists its types only under `exports`, so with
+  // the default resolution `react-native` is not found, `ViewProps` becomes
+  // `any`, and every mobile page says the component has no props.
+  const project = new Project({
+    skipAddingFilesFromTsConfig: true,
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      moduleResolution: ts.ModuleResolutionKind.Bundler,
+    },
+  })
   for (const { componentsRoot } of Object.values(PLATFORMS)) {
     const root = path.join(rootDir, componentsRoot)
     project.addSourceFilesAtPaths([

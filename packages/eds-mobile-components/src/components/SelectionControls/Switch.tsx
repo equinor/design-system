@@ -6,7 +6,6 @@ import Animated, {
     withTiming,
     Easing,
 } from "react-native-reanimated";
-import type { ViewRef } from "../../utils/nativeRefs";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
 import { ANIMATION_DURATION } from "../../utils/animation";
@@ -33,7 +32,7 @@ export type SwitchProps = {
     /**
      * Ref to the switch.
      */
-    ref?: React.Ref<ViewRef>;
+    ref?: React.Ref<React.ComponentRef<typeof View>>;
 } & ViewProps;
 
 export const Switch = ({
