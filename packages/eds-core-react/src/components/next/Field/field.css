@@ -38,14 +38,15 @@
       flex-basis: 100%;
     }
 
-    /* Text is not trimmed (ADR-0029), so the line height sets the height.
-       The label fills its row, as the label row in the Figma TextField and
-       Select does. It stays a block, not flex, so a label with inline
-       elements keeps the spaces between them. */
-    & .label {
+    /* Field.Label only: a direct child, or a child of a label row wrapper
+       such as TextField's header. A plain descendant selector would also
+       style the .label of a Tooltip, Button or Chip inside the Field.
+       Text is not trimmed (ADR-0029), so the line height sets the height.
+       The label stays a block, not flex, so a label with inline elements
+       keeps the spaces between them. */
+    & > .label,
+    & > * > .label {
       display: block;
-      flex-grow: 1;
-      align-self: stretch;
 
       font-size: var(--eds-typography-label-md-font-size);
       font-weight: var(--eds-font-weight-normal);
@@ -53,9 +54,24 @@
       color: var(--_eds-field-label-color);
     }
 
+    /* The label fills its row, as the label row in the Figma TextField and
+       Select does, so the indicator can sit at the end of it. In the column
+       layout that is the width; inside a label row wrapper it is the free
+       space next to e.g. the info button. The horizontal layout of
+       Checkbox, Radio and Switch keeps a label that hugs its text. */
+    & > * > .label {
+      flex-grow: 1;
+    }
+
+    &:not([data-position]) > .label {
+      align-self: stretch;
+    }
+
     /* Figma places the indicator at the end of the label row, with no gap,
-       centred on the first line of the label */
-    & .indicator {
+       centred on the label line. The indicator comes after the label text,
+       so on a label that wraps it sits at the end of the last line. */
+    & > .label > .indicator,
+    & > * > .label > .indicator {
       float: inline-end;
 
       margin-block-start: calc(
@@ -79,9 +95,11 @@
     }
 
     /* Figma has no gap between the label and the description, so the
-       description cancels the column gap. Whatever precedes it (the label,
-       or a wrapper such as TextField's header) counts as the label row. */
-    &:not([data-position]) > * + .description {
+       description cancels the column gap when it follows the label, or a
+       label row wrapper such as TextField's header. A description placed
+       anywhere else keeps the gap. */
+    &:not([data-position]) > .label + .description,
+    &:not([data-position]) > :has(> .label) + .description {
       margin-block-start: calc(var(--_gap) * -1);
     }
 
