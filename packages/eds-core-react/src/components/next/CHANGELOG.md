@@ -10,8 +10,22 @@ These are experimental components available under the `/next` entry point. They 
 ### ⚠ BREAKING CHANGES
 
 * Icon (next) sets `data-size` instead of `data-icon-size`. `size` now maps to the spacing token of the same name, and an Icon without `size` is `xl` (24px) whatever the surrounding text. To keep today's size, move up one name. The old names still compile, so TypeScript only catches `xs`:
+
+  | Old          | New                                         |
+  | ------------ | ------------------------------------------- |
+  | `xs` (16px)  | `md`                                        |
+  | `sm` (18px)  | no equivalent, `md` (16px) or `lg` (20px)   |
+  | `md` (20px)  | `lg`                                        |
+  | `lg` (24px)  | `xl`                                        |
+  | `xl` (28px)  | `2xl`                                       |
+  | `2xl` (32px) | `3xl`                                       |
+  | `3xl` (37px) | no equivalent, `3xl` (32px) or `4xl` (40px) |
+  | `4xl` (42px) | no equivalent, `4xl` (40px) or `5xl` (48px) |
+  | `5xl` (48px) | `5xl`                                       |
+
+  Icon reads its size from the beta token bundle, so apps need it.
 * Chip reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are children of a Chip take the chip's icon size, so an `Icon`'s `size` prop no longer changes them. Chip sets `data-tone` instead of `data-color-appearance`, so CSS that targets `.eds-chip[data-color-appearance]` no longer matches. Chip no longer sets `data-selectable-space`, and density follows `compact`, `comfortable` and `relaxed`.
-* Icons that are direct children of Button follow the button's size and density, so an `Icon`'s `size` prop no longer changes them.
+* Button reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are direct children of Button follow the button's size and density, so an `Icon`'s `size` prop no longer changes them.
 
 ### ✨ Added
 

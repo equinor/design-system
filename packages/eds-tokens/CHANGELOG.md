@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.0-beta.10](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.9...eds-tokens@v3.0.0-beta.10) (2026-11-02)
 
 
+### ⚠ BREAKING CHANGES
+
+* `--eds-border-interactive-selected-indicator` is removed ([#5698](https://github.com/equinor/design-system/issues/5698)). No EDS component reads it.
+
 ### ✨ Added
 
 * update tokens from Tokens Studio release ([#5698](https://github.com/equinor/design-system/issues/5698)) ([ea152bf](https://github.com/equinor/design-system/commit/ea152bfbfd4d5c26920a9402bb948ccea29b914d))
