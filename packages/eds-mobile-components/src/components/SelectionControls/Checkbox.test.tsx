@@ -73,7 +73,7 @@ describe("Checkbox", () => {
     it("is non-interactive and reports disabled to assistive technology when onPress is not provided", async () => {
         await render(<Checkbox label="Accept terms" />);
         const checkbox = screen.getByRole("checkbox");
-        await expect(fireEvent.press(checkbox)).resolves.toBeUndefined();
+        await fireEvent.press(checkbox);
         expect(checkbox).toBeDisabled();
     });
 

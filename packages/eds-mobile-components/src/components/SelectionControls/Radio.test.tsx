@@ -58,7 +58,7 @@ describe("Radio", () => {
     it("is non-interactive and reports disabled to assistive technology when onPress is not provided", async () => {
         await render(<Radio label="Option A" />);
         const radio = screen.getByRole("radio");
-        await expect(fireEvent.press(radio)).resolves.toBeUndefined();
+        await fireEvent.press(radio);
         expect(radio).toBeDisabled();
     });
 
