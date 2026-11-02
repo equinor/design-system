@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { View, ViewProps } from "react-native";
+import type { ViewRef } from "../../utils/nativeRefs";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet, Elevation } from "../../styling";
 
@@ -11,8 +12,10 @@ export type PaperProps = {
     elevation: Elevation;
 };
 
-export const Paper = forwardRef<
-    View,
+export const Paper: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<React.PropsWithChildren<PaperProps & ViewProps>> & React.RefAttributes<ViewRef>
+> = forwardRef<
+    ViewRef,
     React.PropsWithChildren<PaperProps & ViewProps>
 >(({ elevation = "none", children, ...rest }, ref) => {
     const style = useStyles(tokenStyles, elevation);

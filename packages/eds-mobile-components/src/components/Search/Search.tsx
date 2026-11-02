@@ -3,7 +3,6 @@ import {
     Keyboard,
     LayoutChangeEvent,
     Pressable,
-    TextInput,
     View,
 } from "react-native";
 import Animated, {
@@ -13,6 +12,7 @@ import Animated, {
     withTiming,
 } from "react-native-reanimated";
 
+import type { TextInputRef } from "../../utils/nativeRefs";
 import { Button } from "../Button";
 import { useStyles } from "../../hooks/useStyles";
 import { useToken } from "../../hooks/useToken";
@@ -53,7 +53,7 @@ export type SearchProps = Omit<
     /**
      * Ref to the search text input.
      */
-    ref?: Ref<TextInput>;
+    ref?: Ref<TextInputRef>;
 };
 
 export const Search = ({

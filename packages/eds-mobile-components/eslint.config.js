@@ -67,5 +67,6 @@ export default tseslint.config(
         "**/tsup.config.ts",
         "eslint.config.js",
         "jest.config.cjs",
+        "jest.resolver.cjs",
     ])
 );

@@ -1,5 +1,6 @@
 import { Ref } from "react";
-import { PressableProps, View } from "react-native";
+import { PressableProps } from "react-native";
+import type { ViewRef } from "../../utils/nativeRefs";
 
 export type ButtonSize = "small" | "default";
 
@@ -26,5 +27,5 @@ export type BaseButtonProps = {
     /**
      * Ref to the button component.
      */
-    ref?: Ref<View>;
+    ref?: Ref<ViewRef>;
 } & PressableProps;
