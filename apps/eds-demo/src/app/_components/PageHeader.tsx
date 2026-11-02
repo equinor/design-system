@@ -1,6 +1,6 @@
+import { Button, Icon } from '@equinor/eds-core-react/next'
 import { add, download } from '@equinor/eds-icons'
 import { classNames, type Styles } from './classNames'
-import { Icon } from './Icon'
 
 export function PageHeader({ styles }: { styles: Styles }) {
   const c = classNames(styles)
@@ -16,14 +16,14 @@ export function PageHeader({ styles }: { styles: Styles }) {
         </p>
       </div>
       <div className={c('actions')}>
-        <button type="button" className={c('button')} data-variant="secondary">
+        <Button variant="secondary">
           <Icon data={download} />
           Export
-        </button>
-        <button type="button" className={c('button')} data-variant="primary">
+        </Button>
+        <Button variant="primary">
           <Icon data={add} />
           Add person
-        </button>
+        </Button>
       </div>
     </div>
   )

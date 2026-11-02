@@ -3,11 +3,13 @@
    it without any specificity fight. */
 @import '@equinor/eds-tokens/next/css/variables.css';
 
-/* --eds-font-family-ui resolves to "Inter", so Inter has to be loaded under
-   that family name. One file per weight token: normal, medium and bold. */
-@import '@fontsource/inter/latin-400.css';
-@import '@fontsource/inter/latin-500.css';
-@import '@fontsource/inter/latin-700.css';
+/* The styles of the EDS components (Button and Icon here), inside
+   @layer eds-components. The file also holds the 2.x token bundle in
+   @layer eds-tokens-legacy, below the beta tokens, for components that have
+   not moved to the beta names yet. */
+@import '@equinor/eds-core-react/next/index.css';
+
+/* The fonts (Inter and Equinor) are loaded in layout.tsx, from the EDS CDN. */
 
 /* The bundle switches the token values on data-color-scheme but does not set
    the CSS color-scheme property. Set it here, so scrollbars, form controls

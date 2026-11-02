@@ -5,7 +5,7 @@ import {
   checkbox_outline,
 } from '@equinor/eds-icons'
 import { classNames, type Styles } from './classNames'
-import { Icon } from './Icon'
+import { Icon } from '@equinor/eds-core-react/next'
 
 type CheckboxProps = {
   styles: Styles
@@ -47,7 +47,7 @@ export function Checkbox({
         onChange={onChange}
         aria-label={label}
       />
-      <Icon data={icon} className={c('checkbox-icon')} />
+      <Icon data={icon} size="lg" className={c('checkbox-icon')} />
     </span>
   )
 }

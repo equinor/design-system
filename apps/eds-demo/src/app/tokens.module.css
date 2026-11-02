@@ -14,11 +14,14 @@
     in the EDS Core Components file, state by state. A Figma variable name
     becomes the CSS name with slashes turned into dashes:
     spacing/xs is --eds-spacing-xs.
-  - "Code: <file>" copies a /next component that is already on the beta
-    tokens.
   - "Not designed" means there is no beta design for that part yet (top bar,
     side navigation, table, page layout). Those values are the demo's own
     choice from the token scale.
+
+  The buttons and icons are the EDS Button and Icon from
+  @equinor/eds-core-react/next, which bring their own CSS, so they are not
+  in this file. Icon sizes are set with the Icon size prop, which takes the
+  spacing token of the same name.
 
   Strokes are literal widths, because borders and focus rings have no width
   token. A Figma stroke drawn inside the frame is an inset box-shadow here,
@@ -81,8 +84,6 @@
 
 .search-icon {
   inset-inline-start: var(--eds-spacing-xs);
-  inline-size: var(--eds-spacing-md);
-  block-size: var(--eds-spacing-md);
   color: var(--eds-icon-secondary);
 }
 
@@ -125,42 +126,6 @@
   }
 }
 
-/* Figma: Button [EDS Beta], Icon button On, Ghost, Neutral, Default size and
-   style. 36px: 8px padding around a 20px icon. No fill at rest, the neutral
-   muted fill on hover and press, and on focus the hover fill plus the ring
-   1px outside. */
-
-.icon-button {
-  --_bg-color: transparent;
-
-  padding: var(--eds-spacing-xs);
-
-  color: var(--eds-icon-primary);
-  background-color: var(--_bg-color);
-  border: none;
-  border-radius: var(--eds-corner-radius-rounded);
-  outline: none;
-  transition: background-color var(--_transition-duration) ease-in-out;
-
-  & > svg {
-    inline-size: var(--eds-spacing-lg);
-    block-size: var(--eds-spacing-lg);
-  }
-
-  &:is(:hover, :focus-visible) {
-    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
-  }
-
-  &:active {
-    --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
-  }
-
-  &:focus-visible {
-    outline: 1px solid var(--eds-border-interactive-focus);
-    outline-offset: 1px;
-  }
-}
-
 /* Figma: Menu [EDS Beta], Layout Separator, with Menu Item Type Custom.
    The menu has no padding of its own, a 1px border inside its edge, and the
    low elevation. Items are 36px: 8px and 12px padding, 8px gap, 16px icons.
@@ -195,8 +160,6 @@
   outline: none;
 
   & > svg {
-    inline-size: var(--eds-spacing-md);
-    block-size: var(--eds-spacing-md);
     color: var(--eds-icon-primary);
   }
 
@@ -279,8 +242,6 @@
 }
 
 .nav-icon {
-  inline-size: var(--eds-spacing-lg);
-  block-size: var(--eds-spacing-lg);
   color: var(--eds-icon-primary);
 }
 
@@ -368,88 +329,6 @@
 
 .actions {
   gap: var(--eds-spacing-sm);
-}
-
-/* Code: Button/button.css, primary and secondary, accent tone, default
-   size. The tone is mapped to --_ slots once; the variants and states only
-   switch between slots. */
-
-.button {
-  --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
-  --_bg-emphasis-hover: var(--eds-background-interactive-accent-emphasis-hover);
-  --_bg-emphasis-pressed: var(
-    --eds-background-interactive-accent-emphasis-pressed
-  );
-  --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
-  --_bg-muted-pressed: var(--eds-background-interactive-accent-muted-pressed);
-  --_text-emphasis: var(--eds-text-on-emphasis-accent);
-  --_text-interactive: var(--eds-text-on-default-accent);
-  --_border-interactive: var(--eds-border-interactive-accent-emphasis-default);
-  --_border-interactive-hover: var(
-    --eds-border-interactive-accent-emphasis-hover
-  );
-  --_border-interactive-pressed: var(
-    --eds-border-interactive-accent-emphasis-pressed
-  );
-
-  gap: var(--eds-spacing-xs);
-  padding-block: var(--eds-spacing-xs);
-  padding-inline: var(--eds-spacing-sm);
-
-  font-family: var(--eds-font-family-ui);
-  font-size: var(--eds-typography-label-md-font-size);
-  font-weight: var(--eds-font-weight-medium);
-  line-height: var(--eds-typography-label-md-line-height);
-  color: var(--_color);
-
-  background-color: var(--_bg-color);
-  border: none;
-  border-radius: var(--eds-corner-radius-rounded);
-  outline: none;
-  transition:
-    background-color var(--_transition-duration) ease-in-out,
-    box-shadow var(--_transition-duration) ease-in-out;
-
-  & > svg {
-    inline-size: var(--eds-spacing-lg);
-    block-size: var(--eds-spacing-lg);
-  }
-
-  &[data-variant='primary'] {
-    --_color: var(--_text-emphasis);
-    --_bg-color: var(--_bg-emphasis);
-  }
-
-  &[data-variant='primary']:is(:hover, :focus-visible) {
-    --_bg-color: var(--_bg-emphasis-hover);
-  }
-
-  &[data-variant='primary']:active {
-    --_bg-color: var(--_bg-emphasis-pressed);
-  }
-
-  &[data-variant='secondary'] {
-    --_color: var(--_text-interactive);
-    --_bg-color: transparent;
-    --_border-color: var(--_border-interactive);
-
-    box-shadow: inset 0 0 0 1px var(--_border-color);
-  }
-
-  &[data-variant='secondary']:is(:hover, :focus-visible) {
-    --_bg-color: var(--_bg-muted-hover);
-    --_border-color: var(--_border-interactive-hover);
-  }
-
-  &[data-variant='secondary']:active {
-    --_bg-color: var(--_bg-muted-pressed);
-    --_border-color: var(--_border-interactive-pressed);
-  }
-
-  &:focus-visible {
-    outline: 1px solid var(--eds-border-interactive-focus);
-    outline-offset: 1px;
-  }
 }
 
 /* Not designed: table. The cells hold the Checkbox and Badge components
@@ -557,11 +436,6 @@
   }
 }
 
-.checkbox-icon {
-  inline-size: var(--eds-spacing-lg);
-  block-size: var(--eds-spacing-lg);
-}
-
 /* Figma: Badge [EDS Beta], Variant Solid, Emphasis Low, with a leading icon.
    20px: 2px and 6px padding, 4px gap, a 12px icon and a 1px border inside
    the edge. A badge is not interactive, so it uses the non-interactive
@@ -588,8 +462,6 @@
   box-shadow: inset 0 0 0 1px var(--_border-color);
 
   & > svg {
-    inline-size: var(--eds-spacing-sm);
-    block-size: var(--eds-spacing-sm);
     color: var(--_icon-color);
   }
 

@@ -28,9 +28,12 @@ export default async function RootLayout({
     // elevation shadows only resolve when it is set on the root element.
     <html lang="en" data-color-scheme={colorScheme} data-density={density}>
       <head>
+        {/* The EDS variable font stylesheet declares Inter and Equinor under
+            the family names the font tokens resolve to, with Equinor sized to
+            Inter's x-height. */}
         <link
           rel="stylesheet"
-          href="https://cdn.eds.equinor.com/font/equinor-font.css"
+          href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css"
         />
       </head>
       <body>

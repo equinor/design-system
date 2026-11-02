@@ -43,14 +43,7 @@
   appearance: none;
 }
 
-.icon-button {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
+/* The account menu is anchored to its EDS Button. */
 .account-button {
   anchor-name: --account-menu;
 }
@@ -112,13 +105,6 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
 .table-card {

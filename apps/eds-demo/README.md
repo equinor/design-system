@@ -13,22 +13,25 @@ pnpm install
 pnpm demo:dev
 ```
 
-Next.js starts on <http://localhost:3000>, or on the next free port if 3000 is taken. Nothing in the monorepo has to be built first: the app installs the published `@equinor/eds-tokens@3.0.0-beta.9` and `@equinor/eds-icons` from npm.
+Next.js starts on <http://localhost:3000>, or on the next free port if 3000 is taken. Nothing in the monorepo has to be built first: the app installs the published `@equinor/eds-tokens@3.0.0-beta.10`, `@equinor/eds-core-react@3.0.0-beta.5` and `@equinor/eds-icons` from npm.
 
-## How the tokens are loaded
+## How the tokens and components are loaded
 
-The bundle is imported once, in `src/app/globals.css`, the same way an application outside this repository would import it:
+`src/app/globals.css` imports the token bundle and the component styles once, the same way an application outside this repository would:
 
 ```css
 @import '@equinor/eds-tokens/next/css/variables.css';
+@import '@equinor/eds-core-react/next/index.css';
 ```
+
+The buttons and icons are the EDS `Button` and `Icon` from `@equinor/eds-core-react/next`, which are on the beta tokens in 3.0.0-beta.5. The component stylesheet does not contain the token bundle, so both imports are needed. It does contain the 2.x token bundle, in a layer below the beta tokens, for the components that have not moved to the beta names yet.
 
 `src/app/layout.tsx` renders `data-color-scheme` and `data-density` on `<html>` from two cookies, so the server sends the page in the right colour scheme and density, and the first paint is correct. The toolbar changes the attributes in the browser at once and stores the choice in the cookies for the next request. `data-color-scheme` is on `<html>` because the elevation shadows only resolve when the attribute is set on the root element.
 
-Two more details in `globals.css` are needed by any app that uses the bundle:
+Two more details are needed by any app that uses the bundle:
 
-- `--eds-font-family-ui` resolves to `Inter`, so Inter has to be loaded under that family name. The app loads it from `@fontsource/inter`, one file per weight token (400, 500 and 700). Equinor, for headers, comes from the EDS CDN in `layout.tsx`.
-- The bundle switches token values on `data-color-scheme` but does not set the CSS `color-scheme` property, so the app sets it. Without it, scrollbars, form controls and `light-dark()` stay light in the dark scheme.
+- The font tokens resolve to the family names `Inter` and `Equinor`, and the tokens package ships no font files. `layout.tsx` loads both from the EDS variable font stylesheet, `https://cdn.eds.equinor.com/font/eds-uprights-vf.css`, which also sizes Equinor to Inter's x-height. The older `equinor-font.css` has only Equinor, so text in the UI family would fall back to another font.
+- The bundle switches token values on `data-color-scheme` but does not set the CSS `color-scheme` property, so `globals.css` sets it. Without it, scrollbars, form controls and `light-dark()` stay light in the dark scheme.
 
 For the full setup, see [Using the tokens](https://storybook.eds.equinor.com/?path=/docs/beta-foundation-using-the-tokens--docs) in Storybook and the [eds-tokens README](../../packages/eds-tokens/README.md#beta-the-redefined-token-structure).
 
@@ -46,14 +49,14 @@ Each element on the screen has two classes with the same name:
 
 | Part of the screen                                        | Source                                                                                                                   |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Export and Add person buttons                             | `Button/button.css` in `eds-core-react`, which is already on the beta tokens                                             |
-| Icon buttons in the top bar                               | Button [EDS Beta] in Figma: Icon button on, Ghost, Neutral, Default size and style                                       |
 | Search field                                              | Search [EDS Beta] in Figma, without label and helper text                                                                |
 | Account menu                                              | Menu [EDS Beta] in Figma, Layout Separator, with Menu Item Type Custom                                                   |
 | Tabs                                                      | Tab [EDS Beta] in Figma, Type Simple                                                                                     |
 | Row checkboxes                                            | Checkbox [EDS Beta] in Figma, No Label                                                                                   |
 | Status labels                                             | Badge [EDS Beta] in Figma, Solid, Low emphasis, with a leading icon                                                      |
 | Top bar, side navigation, table, page header, page layout | Not designed yet. The values are the demo's own choice from the token scale, and the components above are placed in them |
+
+The buttons (Export, Add person and the icon buttons in the top bar) and every icon are the EDS components, so their styles are not in this file. Icon sizes are set with the `Icon` `size` prop, which takes the spacing token of the same name.
 
 "Figma" means the variable bindings of that component in the EDS Core Components file, state by state. A Figma variable name becomes the CSS name with the slashes turned into dashes: `spacing/xs` is `--eds-spacing-xs`. At the comfortable density every component above renders at the size of its Figma frame.
 

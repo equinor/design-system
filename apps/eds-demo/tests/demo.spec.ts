@@ -51,7 +51,7 @@ test.describe('Tokens', () => {
 
   test('loads Inter under the family name the token uses', async ({ page }) => {
     await open(page, '/')
-    expect(await tokenValue(page, '--eds-font-family-ui')).toBe('Inter')
+    expect(await tokenValue(page, '--eds-font-family-ui')).toMatch(/^Inter\b/)
     expect(await page.evaluate(() => document.fonts.check('14px Inter'))).toBe(
       true,
     )

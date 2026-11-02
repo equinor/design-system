@@ -310,15 +310,15 @@ importers:
 
   apps/eds-demo:
     dependencies:
+      '@equinor/eds-core-react':
+        specifier: 3.0.0-beta.5
+        version: 3.0.0-beta.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(styled-components@6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1))
       '@equinor/eds-icons':
         specifier: ^1.6.0
         version: 1.6.0
       '@equinor/eds-tokens':
-        specifier: 3.0.0-beta.9
-        version: 3.0.0-beta.9
-      '@fontsource/inter':
-        specifier: ^5.3.0
-        version: 5.3.0
+        specifier: 3.0.0-beta.10
+        version: 3.0.0-beta.10
       next:
         specifier: 16.4.2
         version: 16.4.2(@babel/core@7.29.7(supports-color@10.2.2))(@playwright/test@1.64.1)(@types/node@25.6.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -3282,6 +3282,13 @@ packages:
       react-dom: ^18 || ^19
       styled-components: ^6
 
+  '@equinor/eds-core-react@3.0.0-beta.5':
+    resolution: {integrity: sha512-hHYRJi1KSuD9zW+T02xd8TvQ/GXfd3FV99CcbyNojAwe5x9zzTskj0Bdo34Qn26iDprcG2pMOnrmIjEVF2MEcA==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+      styled-components: ^6
+
   '@equinor/eds-icons@1.4.0':
     resolution: {integrity: sha512-7Igq79wUhL/3qVWUammmD9BvGX3/3+BuL6lP+sxiZrdDrdDnLV0QSrRsFF7mAycc1hqEzx9ZwcitKedyDWWnow==}
 
@@ -3294,11 +3301,21 @@ packages:
   '@equinor/eds-tokens@2.3.0-beta.3':
     resolution: {integrity: sha512-rWQ5uKPEdtJjQdMx/t4n0O9oDBrnXLkJQGmGdc4zJtxcKMDNHttFNXjjEelIm0SY23NElax04FevaoQ4oNcxHg==}
 
-  '@equinor/eds-tokens@3.0.0-beta.9':
-    resolution: {integrity: sha512-4ESRvFrJ+Jop+ATjnnw7Uvt3lPr6Yi+sFKnTwzyLgwl9HJu5yz5YjuvDb2ENwp/ceOqroJThxLiI2OEMRhOZFg==}
+  '@equinor/eds-tokens@2.3.2':
+    resolution: {integrity: sha512-XdLnBF0TwjhGAEWRmz2mO4eagiZ7x3uoMzpvr3XE3tUyOA7Oh2UBbDGx4wfmd3DTDPut+gVnyed5w/HcRsR6CQ==}
+
+  '@equinor/eds-tokens@3.0.0-beta.10':
+    resolution: {integrity: sha512-NADWMn8ASgcJzqAPdhnnZlwM+2wUS1zgqvYh81BHYg9UezmcunYr0dH7dU8t19BzgV9FebdxrZTcLEHo2UzMaw==}
 
   '@equinor/eds-utils@2.1.0':
     resolution: {integrity: sha512-yMrqw22Rc3UXrru4tGCSSyuLNY60ikuEyhJXu54beorllB3iCxvMxD5P9tFP6tkkTl/V0tYH9tD79JfzO2w6Ew==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+      styled-components: ^6
+
+  '@equinor/eds-utils@2.2.2':
+    resolution: {integrity: sha512-2itmUtdpx/IlR83o3KmvSukYKAuf//87RdxEGO+gcbJ5l8bEDee8UPKO2CiMnv+b7o2ttvhQHFLh6//x2qOP2A==}
     peerDependencies:
       react: ^18 || ^19
       react-dom: ^18 || ^19
@@ -18292,6 +18309,25 @@ snapshots:
       react-dom: 19.3.1(react@19.3.1)
       styled-components: 6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1)
 
+  '@equinor/eds-core-react@3.0.0-beta.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(styled-components@6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1))':
+    dependencies:
+      '@babel/runtime': 7.29.10
+      '@equinor/eds-icons': 1.6.0
+      '@equinor/eds-tokens': 2.3.2
+      '@equinor/eds-utils': 2.2.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(styled-components@6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1))
+      '@floating-ui/react': 0.27.20(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@internationalized/date': 3.12.4
+      '@react-aria/utils': 3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@react-stately/calendar': 3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@react-stately/datepicker': 3.17.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@react-types/shared': 3.37.0(react@19.3.1)
+      '@tanstack/react-virtual': 3.14.23(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      downshift: 9.4.0(react@19.3.1)
+      react: 19.3.1
+      react-aria: 3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      react-dom: 19.3.1(react@19.3.1)
+      styled-components: 6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1)
+
   '@equinor/eds-icons@1.4.0': {}
 
   '@equinor/eds-icons@1.6.0': {}
@@ -18300,12 +18336,22 @@ snapshots:
 
   '@equinor/eds-tokens@2.3.0-beta.3': {}
 
-  '@equinor/eds-tokens@3.0.0-beta.9': {}
+  '@equinor/eds-tokens@2.3.2': {}
+
+  '@equinor/eds-tokens@3.0.0-beta.10': {}
 
   '@equinor/eds-utils@2.1.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(styled-components@6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1))':
     dependencies:
       '@babel/runtime': 7.29.10
       '@equinor/eds-tokens': 2.2.0
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+      styled-components: 6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1)
+
+  '@equinor/eds-utils@2.2.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(styled-components@6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1))':
+    dependencies:
+      '@babel/runtime': 7.29.10
+      '@equinor/eds-tokens': 2.3.2
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       styled-components: 6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(@react-native/metro-config@0.88.0(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1)

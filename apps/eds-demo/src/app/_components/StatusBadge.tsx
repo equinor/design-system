@@ -5,7 +5,7 @@ import {
   warning_outlined,
 } from '@equinor/eds-icons'
 import { classNames, type Styles } from './classNames'
-import { Icon } from './Icon'
+import { Icon } from '@equinor/eds-core-react/next'
 import type { Status } from './people'
 
 const icons = {
@@ -30,7 +30,7 @@ export function StatusBadge({ styles, tone, children }: StatusBadgeProps) {
 
   return (
     <span className={c('badge')} data-tone={tone}>
-      <Icon data={icons[tone]} />
+      <Icon data={icons[tone]} size="sm" />
       {children}
     </span>
   )

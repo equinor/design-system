@@ -11,8 +11,8 @@
   as it is.
 
   Where to look:
-  - The components (Button, Search, Menu, Tab, Checkbox, Badge): the EDS
-    Core Components file in Figma. Inspect a component and read the
+  - The components (Search, Menu, Tab, Checkbox, Badge): the EDS Core
+    Components file in Figma. Inspect a component and read the
     variable on each property; spacing/xs in Figma is --eds-spacing-xs here.
   - Colour, which token for which job:
     https://eds.equinor.com/docs/Next/foundation/colour/usage
@@ -21,8 +21,9 @@
   - Elevation: https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation
 
   Leave the stroke widths as they are: borders and focus rings have no width
-  token. Layout lives in _components/structure.module.css and needs
-  no changes.
+  token. The buttons and icons are EDS components with their own CSS, so
+  they already use the tokens. Layout lives in
+  _components/structure.module.css and needs no changes.
 */
 
 /* 🐨 Start here. The page is the base layer: the top bar, the navigation
@@ -83,8 +84,6 @@
 
 .search-icon {
   inset-inline-start: 8px;
-  inline-size: 16px;
-  block-size: 16px;
   color: light-dark(black, white);
 }
 
@@ -127,39 +126,6 @@
   }
 }
 
-/* 🐨 These are Buttons with Icon button on, Ghost and Neutral in Figma:
-   no fill until you hover or press them. */
-.icon-button {
-  --_bg-color: transparent;
-
-  padding: 8px;
-
-  color: light-dark(black, white);
-  background-color: var(--_bg-color);
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  transition: background-color var(--_transition-duration) ease-in-out;
-
-  & > svg {
-    inline-size: 20px;
-    block-size: 20px;
-  }
-
-  &:is(:hover, :focus-visible) {
-    --_bg-color: light-dark(white, black);
-  }
-
-  &:active {
-    --_bg-color: light-dark(white, black);
-  }
-
-  &:focus-visible {
-    outline: 1px solid light-dark(blue, cyan);
-    outline-offset: 1px;
-  }
-}
-
 /* Account menu */
 
 /* 🐨 The menu floats above the page. Find the background and the elevation
@@ -193,8 +159,6 @@
   outline: none;
 
   & > svg {
-    inline-size: 16px;
-    block-size: 16px;
     color: light-dark(black, white);
   }
 
@@ -279,8 +243,6 @@
 }
 
 .nav-icon {
-  inline-size: 20px;
-  block-size: 20px;
   color: light-dark(black, white);
 }
 
@@ -368,82 +330,6 @@
 }
 
 /* Buttons */
-
-/* 🐨 The tone is mapped to --_ slots once, at the top. Fill in the slots
-   with the accent tokens; the variants below only switch between slots.
-   💯 Done early? Add a data-tone='danger' block that maps the same slots
-   to the danger tokens, and set data-tone="danger" on a button. */
-.button {
-  --_bg-emphasis: light-dark(black, white);
-  --_bg-emphasis-hover: light-dark(black, white);
-  --_bg-emphasis-pressed: light-dark(black, white);
-  --_bg-muted-hover: light-dark(white, black);
-  --_bg-muted-pressed: light-dark(white, black);
-  --_text-emphasis: light-dark(white, black);
-  --_text-interactive: light-dark(black, white);
-  --_border-interactive: light-dark(black, white);
-  --_border-interactive-hover: light-dark(black, white);
-  --_border-interactive-pressed: light-dark(black, white);
-
-  gap: 8px;
-  padding-block: 8px;
-  padding-inline: 12px;
-
-  font-family: Inter, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: var(--_color);
-
-  background-color: var(--_bg-color);
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  transition:
-    background-color var(--_transition-duration) ease-in-out,
-    box-shadow var(--_transition-duration) ease-in-out;
-
-  & > svg {
-    inline-size: 20px;
-    block-size: 20px;
-  }
-
-  &[data-variant='primary'] {
-    --_color: var(--_text-emphasis);
-    --_bg-color: var(--_bg-emphasis);
-  }
-
-  &[data-variant='primary']:is(:hover, :focus-visible) {
-    --_bg-color: var(--_bg-emphasis-hover);
-  }
-
-  &[data-variant='primary']:active {
-    --_bg-color: var(--_bg-emphasis-pressed);
-  }
-
-  &[data-variant='secondary'] {
-    --_color: var(--_text-interactive);
-    --_bg-color: transparent;
-    --_border-color: var(--_border-interactive);
-
-    box-shadow: inset 0 0 0 1px var(--_border-color);
-  }
-
-  &[data-variant='secondary']:is(:hover, :focus-visible) {
-    --_bg-color: var(--_bg-muted-hover);
-    --_border-color: var(--_border-interactive-hover);
-  }
-
-  &[data-variant='secondary']:active {
-    --_bg-color: var(--_bg-muted-pressed);
-    --_border-color: var(--_border-interactive-pressed);
-  }
-
-  &:focus-visible {
-    outline: 1px solid light-dark(blue, cyan);
-    outline-offset: 1px;
-  }
-}
 
 /* Table */
 
@@ -545,11 +431,6 @@
   }
 }
 
-.checkbox-icon {
-  inline-size: 20px;
-  block-size: 20px;
-}
-
 /* 🐨 A status badge only shows information: you cannot click it. Open Badge
    in Figma (Solid, Low emphasis) and pick the non-interactive fill and
    border for each tone, and the text and icon tokens made for that fill.
@@ -575,8 +456,6 @@
   box-shadow: inset 0 0 0 1px var(--_border-color);
 
   & > svg {
-    inline-size: 12px;
-    block-size: 12px;
     color: var(--_icon-color);
   }
 
