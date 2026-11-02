@@ -52,7 +52,7 @@ Check the **Files changed** tab. Dependabot PRs only touch `package.json` and `p
 ### 3. Approve and merge
 
 1. Leave an approving review (or just click **Approve**)
-2. Click **Squash and merge**
+2. Click **Merge when ready**. The merge queue updates the PR against `main`, runs CI and merges it
 3. Done!
 
 No need to check out the branch locally. No need to test manually. CI covers build + test + lint + types + React 18 compat.
@@ -165,7 +165,7 @@ A: If CI is green and it's a minor/patch `all-dependencies` bump — yes. For ma
 A: Close the PR. Dependabot will automatically recreate it with a fresh branch on the next scheduled run (Monday). You can also comment `@dependabot rebase` to trigger an immediate rebase.
 
 **Q: Can I batch-merge several dependabot PRs?**
-A: Yes, but merge them one at a time (not simultaneously) so CI runs on each merge to main. Start with the smallest/safest ones.
+A: Yes. Click **Merge when ready** on each one. The merge queue runs CI on every entry together with the ones ahead of it, so you don't have to wait for one to land before queueing the next.
 
 **Q: A PR has been open for weeks. What do I do?**
 A: Check why. If CI fails, see "When CI fails". If it just needs a review, review and merge it. If it's a problematic major upgrade, close it with a comment explaining why.
