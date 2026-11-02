@@ -98,11 +98,13 @@ function pickSection(component: Component, section?: Section) {
   if (!section) return component
   const { name } = component
   if (section === 'props') {
-    return { name, props: component.props, baseTypes: component.baseTypes }
+    const { props, baseTypes, subComponents } = component
+    return { name, props, baseTypes, subComponents }
   }
   if (section === 'examples') return { name, examples: component.examples }
   if (section === 'links') return { name, links: component.links }
-  return { name, guidance: { [section]: component.guidance[section] } }
+  // null rather than a missing key, so an empty section is visible in the JSON.
+  return { name, guidance: { [section]: component.guidance[section] ?? null } }
 }
 
 /** Runs the CLI and returns the exit code */

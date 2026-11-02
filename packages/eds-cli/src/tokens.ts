@@ -1,4 +1,4 @@
-import { distance, notInstalled } from './components.js'
+import { matchesWithTypo, notInstalled } from './components.js'
 import { fail } from './errors.js'
 import { findPackage, readTextFile, resolveExport } from './resolve.js'
 
@@ -127,16 +127,10 @@ export function searchTokens(
   const words = query.toLowerCase().split(/\s+/).filter(Boolean)
   const find = (match: (name: string, word: string) => boolean) =>
     [...names].filter((name) => words.every((w) => match(name, w)))
-  // Only when nothing matches exactly, one typo is allowed in words of five
-  // letters or more, as in component search.
+  // Only when nothing matches exactly, one typo is allowed, as in component
+  // search.
   const exact = find((name, word) => name.includes(word))
-  const matches = exact.length
-    ? exact
-    : find(
-        (name, word) =>
-          word.length >= 5 &&
-          name.split('-').some((part) => distance(part, word) <= 1),
-      )
+  const matches = exact.length ? exact : find(matchesWithTypo)
 
   return matches.sort(byScale).map((name) => {
     const value = lookup(name) ?? ''
@@ -172,7 +166,9 @@ const scaleKey = (name: string) =>
       return step === -1 ? part : `~${String(step).padStart(2, '0')}`
     })
     .join('-')
-const byScale = (a: string, b: string) => scaleKey(a).localeCompare(scaleKey(b))
+// Numeric, so numbered shades list 1, 2 … 10 rather than 1, 10, 2.
+const byScale = (a: string, b: string) =>
+  scaleKey(a).localeCompare(scaleKey(b), 'en', { numeric: true })
 
 // Words people and agents search with that are not part of any token name,
 // mapped to the word the tokens use. An agent looking for a gap or a padding

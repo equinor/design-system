@@ -132,6 +132,17 @@ describe('eds edge cases', () => {
       ])
     })
 
+    it('lists numbered tokens in number order', () => {
+      const sheet = parseTokens(`[data-density] {
+  --eds-chart-10: red;
+  --eds-chart-2: green;
+  --eds-chart-1: blue;
+}`)
+      expect(
+        searchTokens(sheet, 'chart', tokenOptions).map((t) => t.name),
+      ).toEqual(['--eds-chart-1', '--eds-chart-2', '--eds-chart-10'])
+    })
+
     it('names token groups by the words their tokens share', () => {
       const sheet = parseTokens(`[data-density] {
   --eds-corner-radius-rounded: 4px;
@@ -150,13 +161,46 @@ describe('eds edge cases', () => {
     it('allows one typo in token search when nothing matches exactly', () => {
       expect(run(['tokens', 'spcing']).stdout).toMatch(/--eds-spacing-md +12px/)
     })
+
+    it('keeps exact matches for the other words in a search with a typo', () => {
+      expect(run(['tokens', 'spcing', 'md']).stdout).toMatch(
+        /--eds-spacing-md +12px/,
+      )
+    })
   })
 
   describe('JSON with --section', () => {
     it('keeps only the name and the requested part', () => {
       const { stdout } = run(['show', 'Button', '--section', 'props', '--json'])
       const [button] = JSON.parse(stdout) as Record<string, unknown>[]
-      expect(Object.keys(button)).toEqual(['name', 'props', 'baseTypes'])
+      expect(Object.keys(button)).toEqual([
+        'name',
+        'props',
+        'baseTypes',
+        'subComponents',
+      ])
+    })
+
+    it('keeps the props of sub-components', () => {
+      const { stdout } = run(['show', 'Field', '--section', 'props', '--json'])
+      const [field] = JSON.parse(stdout) as Component[]
+      expect(field.subComponents.map((sub) => sub.name)).toEqual([
+        'Field.Label',
+      ])
+      expect(field.subComponents[0].props[0].name).toBe('indicator')
+    })
+
+    it('gives null for a guidance section with no content', () => {
+      const { stdout } = run([
+        'show',
+        'TextField',
+        '--section',
+        'usage',
+        '--json',
+      ])
+      expect(JSON.parse(stdout)).toEqual([
+        { name: 'TextField', guidance: { usage: null } },
+      ])
     })
 
     it('keeps one guidance section', () => {

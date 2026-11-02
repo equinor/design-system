@@ -137,17 +137,13 @@ export function searchComponents(
       .join(' ')
       .toLowerCase()
   const exact = (haystack: string, word: string) => haystack.includes(word)
-  const typo = (haystack: string, word: string) =>
-    exact(haystack, word) ||
-    (word.length >= 5 &&
-      haystack.split(/[^a-z0-9]+/).some((t) => distance(t, word) <= 1))
   const nameHit = (c: Component) =>
     words.some((w) => c.name.toLowerCase().includes(w)) ? 0 : 1
   const find = (match: typeof exact) =>
     data.components.filter((c) => words.every((w) => match(text(c), w)))
 
   const matches = find(exact)
-  return (matches.length ? matches : find(typo)).sort(
+  return (matches.length ? matches : find(matchesWithTypo)).sort(
     (a, b) => nameHit(a) - nameHit(b) || a.name.localeCompare(b.name),
   )
 }
@@ -170,6 +166,19 @@ export function similarNames(data: ComponentData, name: string): string[] {
       )
     })
     .map((c) => c.name)
+}
+
+/**
+ * Whether `word` is in `haystack`, or one typo away from one of its words.
+ * Typos only count in words of five letters or more, since shorter words are
+ * one letter away from too much. Shared by component and token search.
+ */
+export function matchesWithTypo(haystack: string, word: string): boolean {
+  return (
+    haystack.includes(word) ||
+    (word.length >= 5 &&
+      haystack.split(/[^a-z0-9]+/).some((part) => distance(part, word) <= 1))
+  )
 }
 
 // Levenshtein distance, for "did you mean" and typo matches.
