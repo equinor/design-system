@@ -10,12 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ⚠ BREAKING CHANGES
 
-* `--eds-border-interactive-selected-indicator` is removed ([#5698](https://github.com/equinor/design-system/issues/5698)). No EDS component reads it.
+* remove `--eds-border-interactive-selected-indicator`, which no EDS component reads ([#5698](https://github.com/equinor/design-system/issues/5698)) ([ea152bf](https://github.com/equinor/design-system/commit/ea152bfbfd4d5c26920a9402bb948ccea29b914d))
 
 ### ✨ Added
 
-* update tokens from Tokens Studio release ([#5698](https://github.com/equinor/design-system/issues/5698)) ([ea152bf](https://github.com/equinor/design-system/commit/ea152bfbfd4d5c26920a9402bb948ccea29b914d))
-* update tokens from Tokens Studio release ([#5798](https://github.com/equinor/design-system/issues/5798)) ([b81474b](https://github.com/equinor/design-system/commit/b81474b8a10847bcbfcd15e531ca532ae7b1bacf))
+* add `--eds-font-family-mono` for monospace text ([#5798](https://github.com/equinor/design-system/issues/5798)) ([b81474b](https://github.com/equinor/design-system/commit/b81474b8a10847bcbfcd15e531ca532ae7b1bacf))
 
 
 ### 🐛 Fixed

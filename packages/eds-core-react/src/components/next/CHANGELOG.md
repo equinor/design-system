@@ -9,7 +9,9 @@ These are experimental components available under the `/next` entry point. They 
 
 ### ⚠ BREAKING CHANGES
 
-* Icon (next) sets `data-size` instead of `data-icon-size`. `size` now maps to the spacing token of the same name, and an Icon without `size` is `xl` (24px) whatever the surrounding text. To keep today's size, move up one name. The old names still compile, so TypeScript only catches `xs`:
+* Button reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are direct children of Button follow the button's size and density, so an `Icon`'s `size` prop no longer changes them.
+* Chip reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are children of a Chip take the chip's icon size, so an `Icon`'s `size` prop no longer changes them. Chip sets `data-tone` instead of `data-color-appearance`, so CSS that targets `.eds-chip[data-color-appearance]` no longer matches. Chip no longer sets `data-selectable-space`, and density follows `compact`, `comfortable` and `relaxed`.
+* Icon reads its size from the beta token bundle, so apps need it. Icon sets `data-size` instead of `data-icon-size`. `size` now maps to the spacing token of the same name, and an Icon without `size` is `xl` (24px) whatever the surrounding text. To keep today's size, move up one name. The old names still compile, so TypeScript only catches `xs`:
 
   | Old          | New                                         |
   | ------------ | ------------------------------------------- |
@@ -23,10 +25,6 @@ These are experimental components available under the `/next` entry point. They 
   | `4xl` (42px) | no equivalent, `4xl` (40px) or `5xl` (48px) |
   | `5xl` (48px) | `5xl`                                       |
 
-  Icon reads its size from the beta token bundle, so apps need it.
-* Chip reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are children of a Chip take the chip's icon size, so an `Icon`'s `size` prop no longer changes them. Chip sets `data-tone` instead of `data-color-appearance`, so CSS that targets `.eds-chip[data-color-appearance]` no longer matches. Chip no longer sets `data-selectable-space`, and density follows `compact`, `comfortable` and `relaxed`.
-* Button reads the beta token bundle, so apps need it and `data-color-scheme` for colours. Icons that are direct children of Button follow the button's size and density, so an `Icon`'s `size` prop no longer changes them.
-
 ### ✨ Added
 
 * add Avatar and AvatarNameLabel ([#5089](https://github.com/equinor/design-system/issues/5089)) ([cd16c6d](https://github.com/equinor/design-system/commit/cd16c6d36ab5ff002578fb0aece9072c5dd00f83))
@@ -39,9 +37,9 @@ These are experimental components available under the `/next` entry point. They 
 
 ### ♻️ Refactoring
 
-* migrate Button (next) to beta tokens ([#5222](https://github.com/equinor/design-system/issues/5222)) ([d7ee02b](https://github.com/equinor/design-system/commit/d7ee02b1467b940217095b25aef1b519aea90f3d))
-* migrate Chip (next) to the redefined tokens ([#5225](https://github.com/equinor/design-system/issues/5225)) ([e34181a](https://github.com/equinor/design-system/commit/e34181a1bec007e5f1559b6a4c19c1d8a84bf493))
-* migrate Icon (next) to beta tokens ([#5735](https://github.com/equinor/design-system/issues/5735)) ([4479f6b](https://github.com/equinor/design-system/commit/4479f6be99fb406c92bc3a662683b80e908d2bf5))
+* migrate Button to the beta tokens ([#5222](https://github.com/equinor/design-system/issues/5222)) ([d7ee02b](https://github.com/equinor/design-system/commit/d7ee02b1467b940217095b25aef1b519aea90f3d))
+* migrate Chip to the beta tokens ([#5225](https://github.com/equinor/design-system/issues/5225)) ([e34181a](https://github.com/equinor/design-system/commit/e34181a1bec007e5f1559b6a4c19c1d8a84bf493))
+* migrate Icon to the beta tokens ([#5735](https://github.com/equinor/design-system/issues/5735)) ([4479f6b](https://github.com/equinor/design-system/commit/4479f6be99fb406c92bc3a662683b80e908d2bf5))
 
 ## [3.0.0-beta.4](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.3...eds-core-react-next@v3.0.0-beta.4) (2026-10-19)
 
