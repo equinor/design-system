@@ -14,7 +14,7 @@ These are experimental components available under the `/next` entry point. They 
   | Old          | New                                         |
   | ------------ | ------------------------------------------- |
   | `xs` (16px)  | `md`                                        |
-  | `sm` (18px)  | no equivalent, `md` (16px) or `lg` (20px)   |
+  | `sm` (18px)  | no 18px size: `md` (16px) or `lg` (20px). The new `sm` is 12px |
   | `md` (20px)  | `lg`                                        |
   | `lg` (24px)  | `xl`                                        |
   | `xl` (28px)  | `2xl`                                       |
