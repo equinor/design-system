@@ -15,6 +15,21 @@
         }
       }
     },
+    "mono": {
+      "$value": "{primitives.font-family.commitmono}",
+      "$type": "fontFamily",
+      "$extensions": {
+        "com.figma": {
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--eds-family-mono)"
+          },
+          "hiddenFromPublishing": true
+        }
+      }
+    },
     "ui": {
       "$value": "{primitives.font-family.inter}",
       "$type": "fontFamily",
