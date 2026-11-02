@@ -8,7 +8,7 @@ import { useFieldIds } from './useFieldIds'
 import page from './Field.docs.mdx'
 
 const meta: Meta<typeof Field> = {
-  title: 'EDS 2.0 (beta)/Inputs/Field',
+  title: 'Beta/Inputs/Field',
   component: Field,
   tags: ['beta'],
   decorators: [

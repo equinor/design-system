@@ -132,13 +132,13 @@ sidebar_position: [number if provided, otherwise omit]
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-{category}-{component}--default"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=beta-{category}-{component}--default"
   width="100%"
   height="{HEIGHT}"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-{category}-{component}--default)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/beta-{category}-{component}--default)
 
 ## When to Use
 
@@ -173,13 +173,13 @@ All [component] variants support:
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-{category}-{component}--all-variants"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=beta-{category}-{component}--all-variants"
   width="100%"
   height="{HEIGHT}"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-{category}-{component}--all-variants)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/beta-{category}-{component}--all-variants)
 
 ### Tones
 
@@ -190,13 +190,13 @@ All [component] variants support:
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-{category}-{component}--tones"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=beta-{category}-{component}--tones"
   width="100%"
   height="{HEIGHT}"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-{category}-{component}--tones)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/beta-{category}-{component}--tones)
 
 ### Icons
 
@@ -204,13 +204,13 @@ All [component] variants support:
 
 <iframe
   class="sb-iframe"
-  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=eds-2-0-beta-{category}-{component}--icon-only-variants"
+  src="https://storybook.eds.equinor.com/iframe.html?globals=&args=&id=beta-{category}-{component}--icon-only-variants"
   width="100%"
   height="{HEIGHT}"
   frameborder="1"
 ></iframe>
 
-[View in Storybook](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-{category}-{component}--icon-only-variants)
+[View in Storybook](https://storybook.eds.equinor.com/?path=/story/beta-{category}-{component}--icon-only-variants)
 
 ## Accessibility
 
@@ -255,10 +255,10 @@ All [component] variants support:
 ### Story ID pattern
 
 ```
-eds-2-0-beta-{category}-{component}--{story-name}
+beta-{category}-{component}--{story-name}
 ```
 
-Example: `eds-2-0-beta-inputs-button--introduction`.
+Example: `beta-inputs-button--introduction`.
 
 ### Iframe template
 
@@ -281,7 +281,7 @@ Link format: use the `/story/` path (not `/docs/`) so the link goes directly to 
 The iframe needs a fixed pixel `height`. Use a browser-automation MCP server (Chrome DevTools or Playwright — wired up in [`.vscode/mcp.json`](../../.vscode/mcp.json) or configured in personal harness settings) to navigate to each story's iframe URL and measure the rendered content height.
 
 1. Navigate to the Storybook docs page for the component:
-   `https://storybook.eds.equinor.com/?path=/docs/eds-2-0-beta-{category}-{component}--docs`
+   `https://storybook.eds.equinor.com/?path=/docs/beta-{category}-{component}--docs`
 2. Take a page snapshot to list available stories. Extract story IDs from the sidebar links (look for `?path=/story/{story-id}`).
 3. For each story you want to embed, navigate to the bare iframe URL:
    `https://storybook.eds.equinor.com/iframe.html?globals=&args=&id={STORY_ID}`

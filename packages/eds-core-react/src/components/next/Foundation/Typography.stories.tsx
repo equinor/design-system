@@ -73,7 +73,7 @@ const FIGURES = [
 ]
 
 const meta: Meta = {
-  title: 'EDS 2.0 (beta)/Foundation/Typography',
+  title: 'Beta/Foundation/Typography',
   parameters: {
     docs: { page },
   },

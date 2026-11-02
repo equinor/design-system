@@ -1,5 +1,6 @@
 :root {
   --eds-family-header: var(--eds-primitives-font-family-equinor);
+  --eds-family-mono: var(--eds-primitives-font-family-commitmono);
   --eds-family-ui: var(--eds-primitives-font-family-inter);
   --eds-weight-bold: var(--eds-primitives-weight-scale-bold);
   --eds-weight-medium: var(--eds-primitives-weight-scale-medium);

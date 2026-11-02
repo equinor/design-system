@@ -28,5 +28,5 @@ Switch turns a single setting on or off immediately, with no separate confirmati
 
 ## Related components
 
-- [`Checkbox`](?path=/docs/eds-2-0-beta-inputs-selection-controls-checkbox--docs) is for choosing any number of options from a list.
-- [`Radio`](?path=/docs/eds-2-0-beta-inputs-selection-controls-radio--docs) is for choosing one option from a mutually exclusive set.
+- [`Checkbox`](?path=/docs/beta-inputs-selection-controls-checkbox--docs) is for choosing any number of options from a list.
+- [`Radio`](?path=/docs/beta-inputs-selection-controls-radio--docs) is for choosing one option from a mutually exclusive set.

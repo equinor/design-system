@@ -5,7 +5,7 @@ import { external_link, arrow_forward } from '@equinor/eds-icons'
 import page from './Link.docs.mdx'
 
 const meta: Meta<typeof Link> = {
-  title: 'EDS 2.0 (beta)/Navigation/Link',
+  title: 'Beta/Navigation/Link',
   component: Link,
   tags: ['beta'],
   parameters: {

@@ -106,4 +106,4 @@ function extractStories(project, file, skip) {
   return stories
 }
 
-module.exports = { extractStories }
+module.exports = { extractStories, unwrap }

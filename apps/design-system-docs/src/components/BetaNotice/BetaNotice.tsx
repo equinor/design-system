@@ -1,11 +1,12 @@
 /**
- * The EDS 2.0 beta note, shown above the component docs.
+ * The Beta note, shown above the component docs.
  *
  * `DocItem/Layout` renders it for every component page that gets the hero band
  * from the layout, which puts it under the page title. The component landing
  * page builds its own title with `<Hero>` inside the MDX, where the layout
- * cannot reach, so that page places this component itself. Keep the two in
- * step: the note belongs directly under the title, never above it.
+ * cannot reach, so that page places this component itself, inside a
+ * `.container` so it lines up with the hero and the sections below. Keep the
+ * two in step: the note belongs directly under the title, never above it.
  *
  * `className` replaces the default spacing rather than adding to it, so a page
  * that places the note itself can match its own rhythm: the landing page needs
@@ -20,8 +21,9 @@ export function BetaNotice({
 }) {
   return (
     <div className={`alert alert--info ${className}`} role="note">
-      EDS 2.0 is in beta: safe to adopt alongside EDS 1. The API may still
-      change in small ways before it ships as <code>eds-core-react</code> 3.0.0.
+      Beta is the 3.0.0 beta of <code>eds-core-react</code>, safe to adopt
+      alongside the Latest components (2.x). The API may still change in small
+      ways before 3.0.0 is released.
     </div>
   )
 }

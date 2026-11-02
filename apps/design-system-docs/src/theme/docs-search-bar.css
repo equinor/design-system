@@ -79,6 +79,12 @@
     center / contain no-repeat;
 }
 
+/* Since 0.55.3 the plugin renders its own magnifying-glass <svg> in the same
+   spot, which showed as a second icon behind the EDS one above. */
+.docs-search-bar .navbar__search > svg {
+  display: none;
+}
+
 /* The keyboard-shortcut hint container and its kbd keys */
 .docs-search-bar > div > div:has(kbd) {
   right: var(--eds-spacing-xs);

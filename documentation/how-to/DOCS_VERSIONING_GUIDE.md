@@ -8,10 +8,13 @@ The EDS documentation site uses [Docusaurus versioning](https://docusaurus.io/do
 
 ### Current Version Structure
 
-| Version   | Description                            | Location                        | URL Path      |
-| --------- | -------------------------------------- | ------------------------------- | ------------- |
-| 2.0.0-beta| Work in progress (current development) | `docs/`                         | `/docs/Next/` |
-| 1.1.0     | Latest stable release                  | `versioned_docs/version-1.1.0/` | `/docs/`      |
+| Version      | Label in the dropdown | Description                                                  | Location                             | URL Path            |
+| ------------ | --------------------- | ------------------------------------------------------------ | ------------------------------------ | ------------------- |
+| `1.1.0`      | Latest                | `eds-core-react` 2.x and `eds-tokens` 2.x, the default       | `versioned_docs/version-1.1.0/`      | `/docs/`            |
+| `current`    | Beta                  | The 3.0.0 beta, where new work goes                          | `docs/`                              | `/docs/Next/`       |
+| `2.0.0-beta` | Earlier beta          | Frozen snapshot, hidden from the dropdown but still linkable | `versioned_docs/version-2.0.0-beta/` | `/docs/2.0.0-beta/` |
+
+The labels name the release status, which matches the `latest` and `beta` dist-tags of `eds-core-react` and `eds-tokens` on npm. They are not package numbers, because the site documents several packages whose versions do not move together. `lastVersion` is set to the version labelled Latest, so the navbar, the dropdown and the footer open it by default. What the versions are called after 3.0.0 is released is not decided yet ([#5666](https://github.com/equinor/design-system/issues/5666)).
 
 ## How Versioning Works
 
@@ -21,8 +24,10 @@ The EDS documentation site uses [Docusaurus versioning](https://docusaurus.io/do
 apps/design-system-docs/
 ├── docs/                           # Current (next) version -- work in progress
 ├── versioned_docs/
-│   └── version-1.1.0/              # Snapshot of docs at version 1.1.0
+│   ├── version-2.0.0-beta/         # Frozen snapshot of the earlier beta
+│   └── version-1.1.0/              # Snapshot of docs at version 1.1.0 (Latest)
 ├── versioned_sidebars/
+│   ├── version-2.0.0-beta-sidebars.json
 │   └── version-1.1.0-sidebars.json # Sidebar config for version 1.1.0
 ├── versions.json                   # List of all versions
 └── docusaurus.config.ts            # Version configuration
@@ -31,7 +36,7 @@ apps/design-system-docs/
 ### Key Files
 
 - **`versions.json`** -- Contains an array of all released versions (newest first)
-- **`docusaurus.config.ts`** -- Configures the current version label and path
+- **`docusaurus.config.ts`** -- Configures the labels, paths and banners of every version, `lastVersion`, and which versions the dropdown lists
 - **`versioned_docs/`** -- Contains snapshots of documentation for each released version
 - **`versioned_sidebars/`** -- Contains sidebar configurations for each released version
 
@@ -81,21 +86,30 @@ This command will:
 2. Copy the current `sidebars.ts` to `versioned_sidebars/version-1.2.0-sidebars.json`
 3. Add `1.2.0` to the beginning of `versions.json`
 
-### Step 3: Update the Current Version Label
+### Step 3: Update the Labels and the Default Version
 
-After creating a new version, update the current (next) version label in `docusaurus.config.ts`:
+After creating a new version, give it a label and decide which version is the default in `docusaurus.config.ts`. The labels follow the release status, not the version number: the version that documents the packages on the `latest` dist-tag is labelled `Latest` and is the `lastVersion`, and `current` stays `Beta` while it documents a beta.
 
 ```typescript
 docs: {
   // ... other config
   versions: {
     current: {
-      label: '2.1.0-beta', // Update this to reflect the next planned version
+      label: 'Beta',
       path: 'Next',
+      banner: 'none',
+    },
+    '1.2.0': {
+      label: 'Latest',
+      path: '', // Keeps Latest at /docs/
+      banner: 'none',
     },
   },
+  lastVersion: '1.2.0',
 },
 ```
+
+Give the version that stops being Latest a label that says what it is, and decide whether the dropdown should still list it.
 
 ### Step 4: Verify the Changes
 
@@ -113,25 +127,39 @@ Verify that:
 
 ## Version Configuration
 
-### Setting the Current Version Label
+### Setting the Labels
 
-The current version (work in progress) is configured in `docusaurus.config.ts`:
+Each version is configured in `docusaurus.config.ts`:
 
 ```typescript
 docs: {
   sidebarPath: './sidebars.ts',
   versions: {
     current: {
-      label: '2.0.0-beta',  // Display label for the current version
-      path: 'Next',        // URL path segment
+      label: 'Beta', // Display label in the version dropdown
+      path: 'Next', // URL path segment
+      banner: 'none',
+    },
+    '2.0.0-beta': {
+      label: 'Earlier beta',
+      path: '2.0.0-beta',
+      banner: 'none',
+    },
+    '1.1.0': {
+      label: 'Latest',
+      path: '',
+      banner: 'none',
     },
   },
+  lastVersion: '1.1.0',
 },
 ```
 
+Every version sets `banner: 'none'`. Docusaurus shows nothing on the `lastVersion` and calls a version listed before it in `versions.json` "unreleased", so `src/theme/DocItem/Layout` renders a note for each version instead: the package versions for Latest, the beta note on the Beta component pages, and a pointer to Beta on the earlier beta.
+
 ### Managing the Version Dropdown
 
-The version dropdown is automatically added to the navbar via:
+The version dropdown is added to the navbar via:
 
 ```typescript
 navbar: {
@@ -141,16 +169,19 @@ navbar: {
       type: 'docsVersionDropdown',
       position: 'left',
       dropdownActiveClassDisabled: true,
+      versions: ['1.1.0', 'current'], // Latest and Beta, in that order
     },
   ],
 },
 ```
 
+`versions` limits the dropdown to Latest and Beta. The `2.0.0-beta` archive stays built and linkable, but it is not offered as a destination.
+
 ## Editing Versioned Documentation
 
 ### Editing the Current Version
 
-Simply edit files in the `docs/` directory. Changes will appear in the "Next" (2.0.0-wip) version.
+Edit files in the `docs/` directory. Changes appear in the Beta version, at `/docs/Next/`.
 
 ### Editing a Released Version
 
@@ -176,11 +207,12 @@ Be cautious when editing released versions. Only make corrections for errors or 
 
 ### Version Naming Convention
 
-Follow semantic versioning for documentation:
+Version names in `versions.json` follow semantic versioning:
 
 - `X.0.0` -- Major releases with breaking changes
 - `X.Y.0` -- Minor releases with new features
-- `X.Y.Z-wip` -- Work in progress for the next release
+
+The names are internal. Readers see the labels, which name the release status (Latest, Beta) instead of the number.
 
 ### Maintaining Multiple Versions
 

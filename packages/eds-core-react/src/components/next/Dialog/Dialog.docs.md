@@ -41,4 +41,4 @@ Dialog interrupts the page with a modal window, to ask the user for a decision o
 
 ## Related components
 
-- [`Banner`](?path=/docs/eds-2-0-beta-feedback-banner--docs) shows a message without interrupting the page, for something that does not need a decision.
+- [`Banner`](?path=/docs/beta-feedback-banner--docs) shows a message without interrupting the page, for something that does not need a decision.

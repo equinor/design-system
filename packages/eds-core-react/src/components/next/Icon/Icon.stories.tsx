@@ -92,7 +92,7 @@ const SIZES = [
 const DENSITIES = ['compact', 'comfortable', 'relaxed'] as const
 
 const meta: Meta<typeof Icon> = {
-  title: 'EDS 2.0 (beta)/Icon',
+  title: 'Beta/Icon',
   component: Icon,
   tags: ['beta'],
   argTypes: {

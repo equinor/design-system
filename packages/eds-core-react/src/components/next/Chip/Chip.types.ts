@@ -53,7 +53,7 @@ export type ChipProps = {
   selected?: boolean
   /**
    * Shows a trailing close icon and turns the entire chip into a delete
-   * button — clicking anywhere on the chip fires this callback, and
+   * button. Clicking anywhere on the chip fires this callback, and
    * Backspace/Delete while focused does the same. When provided, `onClick`
    * is ignored (a deletable chip has only one action).
    *
