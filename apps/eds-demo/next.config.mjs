@@ -1,19 +1,10 @@
-import createMDX from "@next/mdx";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   devIndicators: false,
-};
+  // `next dev` writes an AGENTS.md into the app when it detects an AI coding
+  // agent. The repository's own AGENTS.md is the one place for agent
+  // conventions, so this turns the generated file off.
+  agentRules: false,
+}
 
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [
-      // Without options
-      "remark-gfm",
-    ],
-    rehypePlugins: [],
-  },
-});
-
-export default withMDX(nextConfig);
+export default nextConfig

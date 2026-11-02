@@ -1,0 +1,638 @@
+/*
+  Every design decision on the dashboard, made with the beta tokens.
+
+  - Colour: --eds-background-*, --eds-text-*, --eds-icon-*, --eds-border-*.
+    They resolve only under data-color-scheme, which is set on <html>.
+  - Spacing, corner radius and type sizes: --eds-spacing-*,
+    --eds-corner-radius-*, --eds-typography-*. They follow data-density.
+  - Family, weight and elevation: --eds-font-family-*, --eds-font-weight-*,
+    --eds-elevation-*.
+
+  Each section says where its values come from:
+
+  - "Figma: <component>" copies the variable bindings of that beta component
+    in the EDS Core Components file, state by state. A Figma variable name
+    becomes the CSS name with slashes turned into dashes:
+    spacing/xs is --eds-spacing-xs.
+  - "Code: <file>" copies a /next component that is already on the beta
+    tokens.
+  - "Not designed" means there is no beta design for that part yet (top bar,
+    side navigation, table, page layout). Those values are the demo's own
+    choice from the token scale.
+
+  Strokes are literal widths, because borders and focus rings have no width
+  token. A Figma stroke drawn inside the frame is an inset box-shadow here,
+  so it adds no size, as in Figma. 150ms is a placeholder until a motion
+  token exists. Layout lives in _components/structure.module.css.
+*/
+
+/* Not designed: the page is the canvas, and the surfaces sit on it. */
+.app {
+  /* TODO: replace with a motion token when one exists. */
+  --_transition-duration: 150ms;
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+/* Not designed: top bar */
+
+.top-bar {
+  gap: var(--eds-spacing-md);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-md);
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-surface);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.brand {
+  gap: var(--eds-spacing-xs);
+}
+
+.app-title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+}
+
+.app-subtitle {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.top-bar-actions {
+  gap: var(--eds-spacing-3xs);
+}
+
+/* Figma: Search [EDS Beta], the field without label or helper text.
+   36px tall: 8 + 20 + 8. A 16px icon, 4px from the text. The border is the
+   muted level and steps with the state: default, hover, and on focus the
+   hover border plus the focus ring 1px outside the field. */
+
+.search {
+  margin-inline-end: var(--eds-spacing-xs);
+}
+
+.search-icon {
+  inset-inline-start: var(--eds-spacing-xs);
+  inline-size: var(--eds-spacing-md);
+  block-size: var(--eds-spacing-md);
+  color: var(--eds-icon-secondary);
+}
+
+.search-input {
+  --_border-color: var(--eds-border-interactive-neutral-muted-default);
+
+  margin: 0;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline-start: calc(
+    var(--eds-spacing-xs) + var(--eds-spacing-md) + var(--eds-spacing-3xs)
+  );
+  padding-inline-end: var(--eds-spacing-xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--eds-background-input);
+  border: none;
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  &::placeholder {
+    color: var(--eds-text-secondary);
+    opacity: 1;
+  }
+
+  &:hover {
+    --_border-color: var(--eds-border-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    --_border-color: var(--eds-border-interactive-neutral-muted-hover);
+
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* Figma: Button [EDS Beta], Icon button On, Ghost, Neutral, Default size and
+   style. 36px: 8px padding around a 20px icon. No fill at rest, the neutral
+   muted fill on hover and press, and on focus the hover fill plus the ring
+   1px outside. */
+
+.icon-button {
+  --_bg-color: transparent;
+
+  padding: var(--eds-spacing-xs);
+
+  color: var(--eds-icon-primary);
+  background-color: var(--_bg-color);
+  border: none;
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  & > svg {
+    inline-size: var(--eds-spacing-lg);
+    block-size: var(--eds-spacing-lg);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:active {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* Figma: Menu [EDS Beta], Layout Separator, with Menu Item Type Custom.
+   The menu has no padding of its own, a 1px border inside its edge, and the
+   low elevation. Items are 36px: 8px and 12px padding, 8px gap, 16px icons.
+   The separator is a 1px Divider with no space around it. */
+
+.menu {
+  margin: var(--eds-spacing-3xs) 0 0;
+  padding: 0;
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-floating);
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: 1px solid var(--eds-border-non-interactive-neutral-default);
+  outline-offset: -1px;
+  box-shadow: var(--eds-elevation-low);
+}
+
+.menu-item {
+  --_bg-color: transparent;
+
+  gap: var(--eds-spacing-xs);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--_bg-color);
+  outline: none;
+
+  & > svg {
+    inline-size: var(--eds-spacing-md);
+    block-size: var(--eds-spacing-md);
+    color: var(--eds-icon-primary);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  /* The ring is drawn inside the item, as in Figma. */
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: -1px;
+  }
+}
+
+.menu-divider {
+  block-size: 0;
+  margin: 0;
+  border: none;
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+/* Not designed: side navigation */
+
+.side-nav {
+  gap: var(--eds-spacing-md);
+  padding: var(--eds-spacing-sm);
+
+  background-color: var(--eds-background-surface);
+  border-inline-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.nav-list {
+  gap: var(--eds-spacing-4xs);
+}
+
+.nav-item {
+  --_bg-color: transparent;
+
+  gap: var(--eds-spacing-sm);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm) var(--eds-spacing-xl);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:active {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &[aria-current='page'] {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-default);
+
+    font-weight: var(--eds-font-weight-medium);
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+  }
+
+  &[aria-current='page']:active {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.nav-icon {
+  inline-size: var(--eds-spacing-lg);
+  block-size: var(--eds-spacing-lg);
+  color: var(--eds-icon-primary);
+}
+
+/* Not designed: main area */
+
+.main {
+  gap: var(--eds-spacing-lg);
+  padding: var(--eds-spacing-xl);
+}
+
+/* Figma: Tab [EDS Beta], Type Simple. 36px: 8px and 12px padding. Each tab
+   draws its own line inside its bottom edge. Off, the line is the
+   non-interactive neutral muted border in every state. On, it is the
+   interactive accent emphasis border and steps with the state. Hover adds
+   the muted fill of the tab's tone, and focus is the hover state plus the
+   ring 1px outside. The line is 2px, as in Figma. */
+
+.tab {
+  --_bg-color: transparent;
+  --_bg-hover: var(--eds-background-interactive-neutral-muted-hover);
+  --_color: var(--eds-text-primary);
+  --_indicator: var(--eds-border-non-interactive-neutral-muted);
+
+  gap: var(--eds-spacing-3xs);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-none);
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--_indicator);
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &[aria-current='page'] {
+    --_bg-hover: var(--eds-background-interactive-accent-muted-hover);
+    --_color: var(--eds-text-on-muted-accent);
+    --_indicator: var(--eds-border-interactive-accent-emphasis-default);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-hover);
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_indicator: var(--eds-border-interactive-accent-emphasis-hover);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* Not designed: page header */
+
+.page-header {
+  gap: var(--eds-spacing-lg);
+}
+
+.page-header-text {
+  gap: var(--eds-spacing-xs);
+}
+
+.title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-2xl-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-2xl-line-height);
+  color: var(--eds-text-primary);
+}
+
+.intro {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.actions {
+  gap: var(--eds-spacing-sm);
+}
+
+/* Code: Button/button.css, primary and secondary, accent tone, default
+   size. The tone is mapped to --_ slots once; the variants and states only
+   switch between slots. */
+
+.button {
+  --_bg-emphasis: var(--eds-background-interactive-accent-emphasis-default);
+  --_bg-emphasis-hover: var(--eds-background-interactive-accent-emphasis-hover);
+  --_bg-emphasis-pressed: var(
+    --eds-background-interactive-accent-emphasis-pressed
+  );
+  --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
+  --_bg-muted-pressed: var(--eds-background-interactive-accent-muted-pressed);
+  --_text-emphasis: var(--eds-text-on-emphasis-accent);
+  --_text-interactive: var(--eds-text-on-default-accent);
+  --_border-interactive: var(--eds-border-interactive-accent-emphasis-default);
+  --_border-interactive-hover: var(
+    --eds-border-interactive-accent-emphasis-hover
+  );
+  --_border-interactive-pressed: var(
+    --eds-border-interactive-accent-emphasis-pressed
+  );
+
+  gap: var(--eds-spacing-xs);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border: none;
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  transition:
+    background-color var(--_transition-duration) ease-in-out,
+    box-shadow var(--_transition-duration) ease-in-out;
+
+  & > svg {
+    inline-size: var(--eds-spacing-lg);
+    block-size: var(--eds-spacing-lg);
+  }
+
+  &[data-variant='primary'] {
+    --_color: var(--_text-emphasis);
+    --_bg-color: var(--_bg-emphasis);
+  }
+
+  &[data-variant='primary']:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-emphasis-hover);
+  }
+
+  &[data-variant='primary']:active {
+    --_bg-color: var(--_bg-emphasis-pressed);
+  }
+
+  &[data-variant='secondary'] {
+    --_color: var(--_text-interactive);
+    --_bg-color: transparent;
+    --_border-color: var(--_border-interactive);
+
+    box-shadow: inset 0 0 0 1px var(--_border-color);
+  }
+
+  &[data-variant='secondary']:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-muted-hover);
+    --_border-color: var(--_border-interactive-hover);
+  }
+
+  &[data-variant='secondary']:active {
+    --_bg-color: var(--_bg-muted-pressed);
+    --_border-color: var(--_border-interactive-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* Not designed: table. The cells hold the Checkbox and Badge components
+   below, which are from Figma. */
+
+.table-card {
+  background-color: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.th {
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-md);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-secondary);
+
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-default);
+}
+
+/* Selected rows use the neutral selected fill with text.primary. Secondary
+   text falls below 4.5:1 on the selected fills, so the email in a selected
+   row switches to text.primary. */
+.row {
+  --_bg-color: transparent;
+  --_supporting-text: var(--eds-text-secondary);
+
+  background-color: var(--_bg-color);
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &:hover {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &[data-selected] {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-default);
+    --_supporting-text: var(--eds-text-primary);
+  }
+
+  &[data-selected]:hover {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+  }
+}
+
+.td {
+  padding-block: var(--eds-spacing-sm);
+  padding-inline: var(--eds-spacing-md);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+/* The checkbox brings its own 8px padding, so the cell keeps only the rest:
+   the icon then lines up with the text in the other columns. */
+.select-cell {
+  padding-block: 0;
+  padding-inline: var(--eds-spacing-xs);
+}
+
+.person-name {
+  font-weight: var(--eds-font-weight-medium);
+}
+
+.person-email {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--_supporting-text);
+}
+
+/* Figma: Checkbox [EDS Beta], No Label. 36px: 8px padding around a 20px
+   icon. The box is the EDS checkbox icon in the accent icon colour. Hover
+   and focus add the accent muted fill; unchecked, the icon steps to its
+   hover colour. Focus adds the ring 1px outside. */
+.checkbox {
+  --_bg-color: transparent;
+  --_icon-color: var(--eds-icon-interactive-accent-default);
+
+  padding: var(--eds-spacing-xs);
+
+  color: var(--_icon-color);
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:is(:hover, :has(:focus-visible)) {
+    --_bg-color: var(--eds-background-interactive-accent-muted-hover);
+    --_icon-color: var(--eds-icon-interactive-accent-hover);
+  }
+
+  &[data-checked]:is(:hover, :has(:focus-visible)) {
+    --_icon-color: var(--eds-icon-interactive-accent-default);
+  }
+
+  &:has(:focus-visible) {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.checkbox-icon {
+  inline-size: var(--eds-spacing-lg);
+  block-size: var(--eds-spacing-lg);
+}
+
+/* Figma: Badge [EDS Beta], Variant Solid, Emphasis Low, with a leading icon.
+   20px: 2px and 6px padding, 4px gap, a 12px icon and a 1px border inside
+   the edge. A badge is not interactive, so it uses the non-interactive
+   muted fill and border of its tone, with text.on-muted and icon.on-muted
+   of the same tone. Every tone maps the same four slots. */
+.badge {
+  --_bg-color: var(--eds-background-non-interactive-neutral-muted);
+  --_border-color: var(--eds-border-non-interactive-neutral-muted);
+  --_text-color: var(--eds-text-on-muted-neutral);
+  --_icon-color: var(--eds-icon-primary);
+
+  gap: var(--eds-spacing-3xs);
+  padding-block: var(--eds-spacing-4xs);
+  padding-inline: var(--eds-spacing-2xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--_text-color);
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  & > svg {
+    inline-size: var(--eds-spacing-sm);
+    block-size: var(--eds-spacing-sm);
+    color: var(--_icon-color);
+  }
+
+  &[data-tone='info'] {
+    --_bg-color: var(--eds-background-non-interactive-info-muted);
+    --_border-color: var(--eds-border-non-interactive-info-muted);
+    --_text-color: var(--eds-text-on-muted-info);
+    --_icon-color: var(--eds-icon-on-muted-info);
+  }
+
+  &[data-tone='success'] {
+    --_bg-color: var(--eds-background-non-interactive-success-muted);
+    --_border-color: var(--eds-border-non-interactive-success-muted);
+    --_text-color: var(--eds-text-on-muted-success);
+    --_icon-color: var(--eds-icon-on-muted-success);
+  }
+
+  &[data-tone='warning'] {
+    --_bg-color: var(--eds-background-non-interactive-warning-muted);
+    --_border-color: var(--eds-border-non-interactive-warning-muted);
+    --_text-color: var(--eds-text-on-muted-warning);
+    --_icon-color: var(--eds-icon-on-muted-warning);
+  }
+
+  &[data-tone='danger'] {
+    --_bg-color: var(--eds-background-non-interactive-danger-muted);
+    --_border-color: var(--eds-border-non-interactive-danger-muted);
+    --_text-color: var(--eds-text-on-muted-danger);
+    --_icon-color: var(--eds-icon-on-muted-danger);
+  }
+}
+
+/* Not designed: table footer */
+
+.table-footer {
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-md);
+}
+
+.table-summary {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}

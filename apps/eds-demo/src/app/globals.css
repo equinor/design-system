@@ -1,30 +1,61 @@
-@import url(https://cdn.eds.equinor.com/font/eds-uprights-vf.css);
-@import "@equinor/eds-tokens/css/variables";
-@import "tailwindcss";
+/* The beta tokens: every colour scheme and density in one bundle. It is
+   wrapped in @layer eds-tokens, so the unlayered CSS in this app wins over
+   it without any specificity fight. */
+@import '@equinor/eds-tokens/next/css/variables.css';
 
-/* View transition for theme switch */
-::view-transition-image-pair(root) {
-  isolation: auto;
+/* --eds-font-family-ui resolves to "Inter", so Inter has to be loaded under
+   that family name. One file per weight token: normal, medium and bold. */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-700.css';
+
+/* The bundle switches the token values on data-color-scheme but does not set
+   the CSS color-scheme property. Set it here, so scrollbars, form controls
+   and light-dark() follow the same scheme as the tokens. */
+[data-color-scheme='light'] {
+  color-scheme: light;
 }
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-  display: block;
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* The demo toolbar on top, the app filling the rest of the viewport. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
 }
 
 button,
-a {
-  cursor: pointer;
+input {
+  font: inherit;
+  color: inherit;
 }
 
-#debug:target [data-debug] {
-  --_padding-inline: 16px;
-  --_padding-stack: 16px;
-  background-image:
-    repeating-linear-gradient(to left, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
-    repeating-linear-gradient(to right, transparent var(--_padding-inline), #f005 var(--_padding-inline), #f005 calc(var(--_padding-inline) + 1px), transparent calc(var(--_padding-inline) + 1px), transparent 100%),
-    repeating-linear-gradient(to top, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
-    repeating-linear-gradient(to bottom, transparent var(--_padding-stack), #f005 var(--_padding-stack), #f005 calc(var(--_padding-stack) + 1px), transparent calc(var(--_padding-stack) + 1px), transparent 100%),
-    repeating-linear-gradient(to bottom, #f002 0, #f002 4px, transparent 4px, transparent 8px);
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
 }

@@ -1,35 +1,42 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import { Toolbar } from './_components/Toolbar'
+import {
+  COLOR_SCHEME_COOKIE,
+  DENSITY_COOKIE,
+  toColorScheme,
+  toDensity,
+} from './_lib/preferences'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Equinor Design System Tokens",
+  title: 'EDS beta tokens demo',
   description:
-    "Demo and exercise where we replace colors with tokens from Equinor Design System",
-};
+    'A dashboard built with the beta design tokens from the Equinor Design System',
+}
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const store = await cookies()
+  const colorScheme = toColorScheme(store.get(COLOR_SCHEME_COOKIE)?.value)
+  const density = toDensity(store.get(DENSITY_COOKIE)?.value)
+
   return (
-    <html lang="en" className={inter.variable}>
+    // The server renders both attributes, so the first paint already has the
+    // right colours and spacing. data-color-scheme has to be on <html>: the
+    // elevation shadows only resolve when it is set on the root element.
+    <html lang="en" data-color-scheme={colorScheme} data-density={density}>
       <head>
         <link
           rel="stylesheet"
-          href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css"
+          href="https://cdn.eds.equinor.com/font/equinor-font.css"
         />
       </head>
-      <body className="font-sans">
-        <div id="debug">{children}</div>
+      <body>
+        <Toolbar colorScheme={colorScheme} density={density} />
+        {children}
       </body>
     </html>
-  );
+  )
 }

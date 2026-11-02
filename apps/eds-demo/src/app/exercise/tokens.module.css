@@ -1,0 +1,623 @@
+/*
+  Exercise: replace the hard-coded values with the beta tokens.
+
+  Kody the Koala 🐨 tells you what to do in each section. Every value in this
+  file is a placeholder: the colours are light-dark(white, black) and friends,
+  the sizes are the px values of the default density. The finished version is
+  src/app/tokens.module.css. Try not to peek.
+
+  Use the toolbar to check your work. Switch to Dark and to Compact or
+  Relaxed: the parts you have converted follow the switch, the rest stays
+  as it is.
+
+  Where to look:
+  - The components (Button, Search, Menu, Tab, Checkbox, Badge): the EDS
+    Core Components file in Figma. Inspect a component and read the
+    variable on each property; spacing/xs in Figma is --eds-spacing-xs here.
+  - Colour, which token for which job:
+    https://eds.equinor.com/docs/Next/foundation/colour/usage
+  - Spacing: https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing-usage
+  - Typography: https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-usage
+  - Elevation: https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation
+
+  Leave the stroke widths as they are: borders and focus rings have no width
+  token. Layout lives in _components/structure.module.css and needs
+  no changes.
+*/
+
+/* 🐨 Start here. The page is the base layer: the top bar, the navigation
+   and the table are surfaces placed on it. Set the page background, and
+   the text colour everything else inherits. */
+.app {
+  --_transition-duration: 150ms;
+
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+}
+
+/* Top bar */
+
+/* 🐨 The top bar is a surface. Its bottom line is a divider: it is not
+   interactive, and it should be quiet. */
+.top-bar {
+  gap: 16px;
+  padding-block: 8px;
+  padding-inline: 16px;
+
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+  border-block-end: 1px solid light-dark(black, white);
+}
+
+.brand {
+  gap: 8px;
+}
+
+/* 🐨 The application name is a title, so it uses the header role and the
+   header font family. */
+.app-title {
+  font-family: Equinor, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* 🐨 Supporting text: smaller, and a step down from the primary text. */
+.app-subtitle {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: light-dark(black, white);
+}
+
+.top-bar-actions {
+  gap: 4px;
+}
+
+/* Search field */
+
+.search {
+  margin-inline-end: 8px;
+}
+
+.search-icon {
+  inset-inline-start: 8px;
+  inline-size: 16px;
+  block-size: 16px;
+  color: light-dark(black, white);
+}
+
+/* 🐨 Open Search in Figma. Form fields have their own background token,
+   and the border steps with the state. */
+.search-input {
+  --_border-color: light-dark(black, white);
+
+  margin: 0;
+  padding-block: 8px;
+  padding-inline-start: 28px;
+  padding-inline-end: 8px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  background-color: light-dark(white, black);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  &::placeholder {
+    color: light-dark(black, white);
+    opacity: 1;
+  }
+
+  &:hover {
+    --_border-color: light-dark(black, white);
+  }
+
+  &:focus-visible {
+    --_border-color: light-dark(black, white);
+
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+/* 🐨 These are Buttons with Icon button on, Ghost and Neutral in Figma:
+   no fill until you hover or press them. */
+.icon-button {
+  --_bg-color: transparent;
+
+  padding: 8px;
+
+  color: light-dark(black, white);
+  background-color: var(--_bg-color);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  & > svg {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:active {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+/* Account menu */
+
+/* 🐨 The menu floats above the page. Find the background and the elevation
+   made for small overlays. */
+.menu {
+  margin: 4px 0 0;
+  padding: 0;
+
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+  border-radius: 4px;
+  outline: 1px solid light-dark(black, white);
+  outline-offset: -1px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+}
+
+.menu-item {
+  --_bg-color: transparent;
+
+  gap: 8px;
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  background-color: var(--_bg-color);
+  outline: none;
+
+  & > svg {
+    inline-size: 16px;
+    block-size: 16px;
+    color: light-dark(black, white);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: -1px;
+  }
+}
+
+.menu-divider {
+  block-size: 0;
+  margin: 0;
+  border: none;
+  border-block-start: 1px solid light-dark(black, white);
+}
+
+/* Side navigation */
+
+.side-nav {
+  gap: 16px;
+  padding: 12px;
+
+  background-color: light-dark(white, black);
+  border-inline-end: 1px solid light-dark(black, white);
+}
+
+.nav-list {
+  gap: 2px;
+}
+
+/* 🐨 The current page is selected. Selected fills have no foreground token
+   of their own: check the colour usage page for which text to use on them,
+   and why neutral is a safer choice than accent here. */
+.nav-item {
+  --_bg-color: transparent;
+
+  gap: 12px;
+  padding-block: 8px;
+  padding-inline: 12px 24px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  background-color: var(--_bg-color);
+  border-radius: 4px;
+  outline: none;
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:active {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &[aria-current='page'] {
+    --_bg-color: light-dark(white, black);
+
+    font-weight: 500;
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &[aria-current='page']:active {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+.nav-icon {
+  inline-size: 20px;
+  block-size: 20px;
+  color: light-dark(black, white);
+}
+
+/* Main area */
+
+.main {
+  gap: 20px;
+  padding: 24px;
+}
+
+/* 🐨 Open Tab in Figma and compare Active off and on. The line under each
+   tab, the text colour and the hover fill all change with it. */
+.tab {
+  --_bg-color: transparent;
+  --_bg-hover: light-dark(white, black);
+  --_color: light-dark(black, white);
+  --_indicator: light-dark(black, white);
+
+  gap: 4px;
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border-radius: 0;
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--_indicator);
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &[aria-current='page'] {
+    --_bg-hover: light-dark(white, black);
+    --_color: light-dark(black, white);
+    --_indicator: light-dark(black, white);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-hover);
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_indicator: light-dark(black, white);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+/* Page header */
+
+.page-header {
+  gap: 20px;
+}
+
+.page-header-text {
+  gap: 8px;
+}
+
+.title {
+  font-family: Equinor, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  color: light-dark(black, white);
+}
+
+/* 🐨 This paragraph wraps onto several lines. Which typography role is made
+   for text that wraps? */
+.intro {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: light-dark(black, white);
+}
+
+.actions {
+  gap: 12px;
+}
+
+/* Buttons */
+
+/* 🐨 The tone is mapped to --_ slots once, at the top. Fill in the slots
+   with the accent tokens; the variants below only switch between slots.
+   💯 Done early? Add a data-tone='danger' block that maps the same slots
+   to the danger tokens, and set data-tone="danger" on a button. */
+.button {
+  --_bg-emphasis: light-dark(black, white);
+  --_bg-emphasis-hover: light-dark(black, white);
+  --_bg-emphasis-pressed: light-dark(black, white);
+  --_bg-muted-hover: light-dark(white, black);
+  --_bg-muted-pressed: light-dark(white, black);
+  --_text-emphasis: light-dark(white, black);
+  --_text-interactive: light-dark(black, white);
+  --_border-interactive: light-dark(black, white);
+  --_border-interactive-hover: light-dark(black, white);
+  --_border-interactive-pressed: light-dark(black, white);
+
+  gap: 8px;
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  transition:
+    background-color var(--_transition-duration) ease-in-out,
+    box-shadow var(--_transition-duration) ease-in-out;
+
+  & > svg {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+
+  &[data-variant='primary'] {
+    --_color: var(--_text-emphasis);
+    --_bg-color: var(--_bg-emphasis);
+  }
+
+  &[data-variant='primary']:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-emphasis-hover);
+  }
+
+  &[data-variant='primary']:active {
+    --_bg-color: var(--_bg-emphasis-pressed);
+  }
+
+  &[data-variant='secondary'] {
+    --_color: var(--_text-interactive);
+    --_bg-color: transparent;
+    --_border-color: var(--_border-interactive);
+
+    box-shadow: inset 0 0 0 1px var(--_border-color);
+  }
+
+  &[data-variant='secondary']:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-muted-hover);
+    --_border-color: var(--_border-interactive-hover);
+  }
+
+  &[data-variant='secondary']:active {
+    --_bg-color: var(--_bg-muted-pressed);
+    --_border-color: var(--_border-interactive-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+/* Table */
+
+.table-card {
+  background-color: light-dark(white, black);
+  border: 1px solid light-dark(black, white);
+  border-radius: 4px;
+}
+
+.th {
+  padding-block: 8px;
+  padding-inline: 16px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  border-block-end: 1px solid light-dark(black, white);
+}
+
+/* 🐨 Rows are selectable. Give them a fill on hover and a selected fill.
+   Then check the email address in a selected row: is the text you picked
+   for it still readable on the selected fill? */
+.row {
+  --_bg-color: transparent;
+  --_supporting-text: light-dark(black, white);
+
+  background-color: var(--_bg-color);
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &:hover {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &[data-selected] {
+    --_bg-color: light-dark(white, black);
+    --_supporting-text: light-dark(black, white);
+  }
+
+  &[data-selected]:hover {
+    --_bg-color: light-dark(white, black);
+  }
+}
+
+.td {
+  padding-block: 12px;
+  padding-inline: 16px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  border-block-end: 1px solid light-dark(black, white);
+}
+
+.select-cell {
+  padding-block: 0;
+  padding-inline: 8px;
+}
+
+.person-name {
+  font-weight: 500;
+}
+
+.person-email {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--_supporting-text);
+}
+
+/* 🐨 Open Checkbox in Figma. The box is an icon, coloured with an
+   interactive icon token, and hover adds a fill behind it. */
+.checkbox {
+  --_bg-color: transparent;
+  --_icon-color: light-dark(black, white);
+
+  padding: 8px;
+
+  color: var(--_icon-color);
+  background-color: var(--_bg-color);
+  border-radius: 4px;
+
+  &:is(:hover, :has(:focus-visible)) {
+    --_bg-color: light-dark(white, black);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-checked]:is(:hover, :has(:focus-visible)) {
+    --_icon-color: light-dark(black, white);
+  }
+
+  &:has(:focus-visible) {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+.checkbox-icon {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+/* 🐨 A status badge only shows information: you cannot click it. Open Badge
+   in Figma (Solid, Low emphasis) and pick the non-interactive fill and
+   border for each tone, and the text and icon tokens made for that fill.
+   Every tone fills the same four slots. */
+.badge {
+  --_bg-color: light-dark(white, black);
+  --_border-color: light-dark(black, white);
+  --_text-color: light-dark(black, white);
+  --_icon-color: light-dark(black, white);
+
+  gap: 4px;
+  padding-block: 2px;
+  padding-inline: 6px;
+
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--_text-color);
+
+  background-color: var(--_bg-color);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  & > svg {
+    inline-size: 12px;
+    block-size: 12px;
+    color: var(--_icon-color);
+  }
+
+  &[data-tone='info'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-tone='success'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-tone='warning'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-tone='danger'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+}
+
+.table-footer {
+  padding-block: 8px;
+  padding-inline: 16px;
+}
+
+.table-summary {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: light-dark(black, white);
+}

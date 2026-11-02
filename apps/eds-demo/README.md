@@ -1,55 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EDS beta tokens demo
 
-## Getting Started
+A small Next.js app that shows how to build an interface with the beta design tokens from the Equinor Design System (`@equinor/eds-tokens@beta`). It has one screen, a people dashboard with a top bar, side navigation, tabs, a selectable table, status badges, buttons and an account menu, and every colour, spacing, radius, type size and shadow on it comes from a token.
 
-First, run the development server:
+The strip at the top of the page switches between the finished screen and an exercise, between the light and dark colour scheme, and between the compact, comfortable and relaxed density.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Running it
+
+From the repository root:
+
+```sh
+pnpm install
+pnpm demo:dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js starts on <http://localhost:3000>, or on the next free port if 3000 is taken. Nothing in the monorepo has to be built first: the app installs the published `@equinor/eds-tokens@3.0.0-beta.9` and `@equinor/eds-icons` from npm.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How the tokens are loaded
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The bundle is imported once, in `src/app/globals.css`, the same way an application outside this repository would import it:
 
-## Testing
-
-This project includes visual regression tests using Playwright.
-
-### Running Tests
-
-```bash
-# Run all visual tests
-npm run test:e2e
-
-# Run tests in UI mode (interactive)
-npm run test:e2e:ui
-
-# Update baseline screenshots
-npm run test:e2e:update
+```css
+@import '@equinor/eds-tokens/next/css/variables.css';
 ```
 
-For more information about testing, see [tests/README.md](./tests/README.md).
+`src/app/layout.tsx` renders `data-color-scheme` and `data-density` on `<html>` from two cookies, so the server sends the page in the right colour scheme and density, and the first paint is correct. The toolbar changes the attributes in the browser at once and stores the choice in the cookies for the next request. `data-color-scheme` is on `<html>` because the elevation shadows only resolve when the attribute is set on the root element.
 
-## Learn More
+Two more details in `globals.css` are needed by any app that uses the bundle:
 
-To learn more about Next.js, take a look at the following resources:
+- `--eds-font-family-ui` resolves to `Inter`, so Inter has to be loaded under that family name. The app loads it from `@fontsource/inter`, one file per weight token (400, 500 and 700). Equinor, for headers, comes from the EDS CDN in `layout.tsx`.
+- The bundle switches token values on `data-color-scheme` but does not set the CSS `color-scheme` property, so the app sets it. Without it, scrollbars, form controls and `light-dark()` stay light in the dark scheme.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For the full setup, see [Using the tokens](https://storybook.eds.equinor.com/?path=/docs/beta-foundation-using-the-tokens--docs) in Storybook and the [eds-tokens README](../../packages/eds-tokens/README.md#beta-the-redefined-token-structure).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Where the design decisions are
 
-## Deploy on Vercel
+Each element on the screen has two classes with the same name:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| File                                       | What it holds                                                                                                                           |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/_components/structure.module.css` | Layout only: flex, grid, positioning and the popover anchor. No design decisions, and the same on both pages                            |
+| `src/app/tokens.module.css`                | Every colour, spacing, radius, typography and elevation decision on the screen, with comments that explain the choice of each token     |
+| `src/app/exercise/tokens.module.css`       | The same selectors with hard-coded values: px for spacing and type, `light-dark(white, black)` for colour, and hints for what to change |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`tokens.module.css` is the file to show and read. Each section in it says where its values come from:
+
+| Part of the screen                                        | Source                                                                                                                   |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Export and Add person buttons                             | `Button/button.css` in `eds-core-react`, which is already on the beta tokens                                             |
+| Icon buttons in the top bar                               | Button [EDS Beta] in Figma: Icon button on, Ghost, Neutral, Default size and style                                       |
+| Search field                                              | Search [EDS Beta] in Figma, without label and helper text                                                                |
+| Account menu                                              | Menu [EDS Beta] in Figma, Layout Separator, with Menu Item Type Custom                                                   |
+| Tabs                                                      | Tab [EDS Beta] in Figma, Type Simple                                                                                     |
+| Row checkboxes                                            | Checkbox [EDS Beta] in Figma, No Label                                                                                   |
+| Status labels                                             | Badge [EDS Beta] in Figma, Solid, Low emphasis, with a leading icon                                                      |
+| Top bar, side navigation, table, page header, page layout | Not designed yet. The values are the demo's own choice from the token scale, and the components above are placed in them |
+
+"Figma" means the variable bindings of that component in the EDS Core Components file, state by state. A Figma variable name becomes the CSS name with the slashes turned into dashes: `spacing/xs` is `--eds-spacing-xs`. At the comfortable density every component above renders at the size of its Figma frame.
+
+The only literal values are the stroke widths, as Figma draws them (1px borders and focus rings, the 2px line under a tab; there is no width token), 150ms for transitions (there is no motion token yet) and the 250px width that Figma gives the search field and the menu.
+
+## The exercise
+
+Open **Exercise** in the toolbar, or go to `/exercise`. The markup is the same as the solution, and `src/app/exercise/tokens.module.css` holds placeholder values to replace with tokens. Start at the top of the file and follow the 🐨 hints. Switch to **Dark** and to **Compact** or **Relaxed** while you work: the parts you have converted follow the switch, and the rest stays as it is.
+
+The finished version is `src/app/tokens.module.css`.
+
+## Tests
+
+The Playwright tests start their own dev server on port 3100, so they never reuse another app on port 3000.
+
+```sh
+pnpm demo:test:e2e                          # run the tests
+pnpm --filter eds-demo run test:e2e:update  # update the screenshots
+```
+
+See [tests/README.md](./tests/README.md) for what they cover.

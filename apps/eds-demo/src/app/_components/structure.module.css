@@ -1,0 +1,213 @@
+/* Layout only. This file decides where things go and holds no design
+   decisions: no colour, spacing, size, radius, shadow or typography. All of
+   those are in the page's tokens.module.css, which is the file to read (or,
+   on the exercise page, to complete). */
+
+.app {
+  display: grid;
+  flex: 1;
+  grid-template-rows: auto 1fr;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand,
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* 250px is the width of the Search component in Figma. */
+.search-input {
+  inline-size: 250px;
+  appearance: none;
+}
+
+.icon-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.account-button {
+  anchor-name: --account-menu;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.page-header-text {
+  display: flex;
+  flex-direction: column;
+  max-inline-size: 40rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.table-card {
+  overflow-x: auto;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.th,
+.td {
+  text-align: start;
+  vertical-align: middle;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.select-cell {
+  inline-size: 1%;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The native checkbox stays in place for keyboard, screen readers and
+   clicks, but is transparent: the EDS checkbox icon underneath shows its
+   state. */
+.checkbox {
+  position: relative;
+  display: inline-flex;
+}
+
+.checkbox-input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-icon {
+  display: block;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* The account menu is a native popover, placed under its button with CSS
+   anchor positioning. The popover's user-agent styles centre it in the
+   viewport, so they are reset here. */
+.menu {
+  position-anchor: --account-menu;
+  position-area: block-end span-inline-start;
+  inset: auto;
+  /* The width of the Menu component in Figma. */
+  inline-size: 250px;
+  border: none;
+
+  &:popover-open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Browsers without anchor positioning get a fixed spot under the top bar. */
+  @supports not (position-area: block-end) {
+    inset-block-start: 4rem;
+    inset-inline-end: 1rem;
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  border: none;
+  text-align: start;
+  cursor: pointer;
+}
