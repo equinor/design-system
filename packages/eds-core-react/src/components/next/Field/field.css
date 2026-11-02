@@ -38,9 +38,14 @@
       flex-basis: 100%;
     }
 
-    /* Text is not trimmed (ADR-0029), so the line height sets the height */
+    /* Text is not trimmed (ADR-0029), so the line height sets the height.
+       The label fills its row, as the label row in the Figma TextField and
+       Select does. It stays a block, not flex, so a label with inline
+       elements keeps the spaces between them. */
     & .label {
       display: block;
+      flex-grow: 1;
+      align-self: stretch;
 
       font-size: var(--eds-typography-label-md-font-size);
       font-weight: var(--eds-font-weight-normal);
@@ -48,15 +53,22 @@
       color: var(--_eds-field-label-color);
     }
 
+    /* Figma places the indicator at the end of the label row, with no gap,
+       centred on the first line of the label */
     & .indicator {
-      /* TODO: legacy token until design confirms the gap between label and
-         indicator; Figma has none (#5258) */
-      margin-inline-start: var(--eds-selectable-space-horizontal);
+      float: inline-end;
+
+      margin-block-start: calc(
+        (
+            var(--eds-typography-label-md-line-height) -
+              var(--eds-typography-label-xs-line-height)
+          ) /
+          2
+      );
 
       font-size: var(--eds-typography-label-xs-font-size);
       line-height: var(--eds-typography-label-xs-line-height);
       color: var(--_eds-field-indicator-color);
-      vertical-align: middle;
     }
 
     & .description {
