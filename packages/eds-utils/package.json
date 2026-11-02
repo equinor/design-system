@@ -69,7 +69,7 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-is": "^19.3.1",
-    "rollup": "^4.64.12",
+    "rollup": "^4.65.1",
     "rollup-plugin-delete": "^3.0.2",
     "styled-components": "6.6.0",
     "typescript": "^5.9.3",
