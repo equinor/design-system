@@ -17,11 +17,11 @@ updates:
           - 'eslint-plugin-storybook'
       # react-test-renderer must match react exactly, and is pinned in the
       # pnpm-workspace.yaml overrides, which Dependabot does not update. The
-      # mobile packages (apps/mobile-storybook and eds-mobile-components) pin
-      # react, react-dom and react-test-renderer to the version React Native
-      # bundles, which changes with the Expo SDK. If a bump from this group
-      # touches them, revert those three there, or the mobile tests and app
-      # fail (#5490, #5731, #5580).
+      # mobile packages (apps/mobile-storybook and eds-mobile-components) use
+      # one React version, the one the Expo SDK bundles, and change it with the
+      # SDK. If a bump from this group moves only some of them, the mobile tree
+      # ends up with two React versions and the tests fail with an invalid hook
+      # call, so revert those packages there (#5490, #5731, #5580).
       react:
         patterns:
           - 'react'

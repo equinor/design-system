@@ -1,4 +1,3 @@
-
 import type { ThemeDependentStyles } from "../styling";
 import type { NamedStyles } from "../styling/NamedStyles";
 import { useDynamicStyleSheet } from "./useDynamicStyleSheet";

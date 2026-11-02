@@ -58,10 +58,11 @@ overrides:
   # package; bump it here and in the workspace devDependency specifiers together.
   '@types/react': 19.2.18
   '@internationalized/date': 3.12.4
-  # react-test-renderer must match react exactly, and the mobile packages pin
-  # react to the version React Native bundles (19.3.0 for RN 0.88, which
-  # refuses any other). Bump this with the Expo SDK, together with the react
-  # and react-test-renderer devDependencies in eds-mobile-components;
+  # react-test-renderer must match react exactly. The mobile packages use one
+  # React version, the one the Expo SDK bundles (19.3.0 for SDK 58); a tree
+  # that mixes two versions fails with an invalid hook call. Bump this with the
+  # Expo SDK, together with react and react-dom in apps/mobile-storybook and
+  # react, react-dom and react-test-renderer in eds-mobile-components;
   # Dependabot does not.
   'react-test-renderer@19': 19.3.0
   eslint-import-resolver-typescript: 4.4.5

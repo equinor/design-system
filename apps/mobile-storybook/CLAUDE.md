@@ -248,7 +248,7 @@ const { typography } = useToken();
 
 ### iOS Development
 
-- **Requires:** Xcode 27.2 and CocoaPods. The SDK 58 iOS build fails on Xcode 26.3 with a Swift data-race error in `expo-modules-jsi`; versions in between have not been tried. Run it from the terminal with the Xcode window closed, because the Xcode window uses a lot of memory.
+- **Requires:** Xcode 27.2 and CocoaPods. The SDK 58 iOS build was verified with Xcode 27.2 and fails on Xcode 26.3.
 - **First time:** Run `cd ios && pod install`
 - **Hot reload:** Works automatically with Metro bundler
 - **Physical device:** Use Expo development build or scan QR with Expo Go (limited features)
