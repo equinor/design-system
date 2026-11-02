@@ -4,21 +4,21 @@ import { fireEvent, render, screen } from "test-utils";
 import { Input } from "./index";
 
 describe("Input", () => {
-    it("calls onChange with the new text", () => {
+    it("calls onChange with the new text", async () => {
         const onChange = jest.fn();
-        render(<Input onChange={onChange} placeholder="Type here" />);
-        fireEvent.changeText(screen.getByPlaceholderText("Type here"), "hi");
+        await render(<Input onChange={onChange} placeholder="Type here" />);
+        await fireEvent.changeText(screen.getByPlaceholderText("Type here"), "hi");
         expect(onChange).toHaveBeenCalledWith("hi");
     });
 
-    it("renders start and end text", () => {
-        render(<Input startText="https://" endText=".com" />);
+    it("renders start and end text", async () => {
+        await render(<Input startText="https://" endText=".com" />);
         expect(screen.getByText("https://")).toBeTruthy();
         expect(screen.getByText(".com")).toBeTruthy();
     });
 
-    it("renders start and end adornments", () => {
-        render(
+    it("renders start and end adornments", async () => {
+        await render(
             <Input
                 startAdornment={<Text>start-adornment</Text>}
                 endAdornment={<Text>end-adornment</Text>}
@@ -28,46 +28,46 @@ describe("Input", () => {
         expect(screen.getByText("end-adornment")).toBeTruthy();
     });
 
-    it("shows an error icon when invalid", () => {
-        render(<Input invalid placeholder="Type here" />);
+    it("shows an error icon when invalid", async () => {
+        await render(<Input invalid placeholder="Type here" />);
         expect(
-            screen.UNSAFE_getByProps({ name: "alert-circle" })
+            screen.getByTestId("icon-alert-circle")
         ).toBeTruthy();
     });
 
-    it("hides the error icon when hideErrorIcon is true", () => {
-        render(<Input invalid hideErrorIcon placeholder="Type here" />);
+    it("hides the error icon when hideErrorIcon is true", async () => {
+        await render(<Input invalid hideErrorIcon placeholder="Type here" />);
         expect(
-            screen.UNSAFE_queryByProps({ name: "alert-circle" })
+            screen.queryByTestId("icon-alert-circle")
         ).toBeFalsy();
     });
 
-    it("hides the error icon when disabled", () => {
-        render(<Input invalid disabled placeholder="Type here" />);
+    it("hides the error icon when disabled", async () => {
+        await render(<Input invalid disabled placeholder="Type here" />);
         expect(
-            screen.UNSAFE_queryByProps({ name: "alert-circle" })
+            screen.queryByTestId("icon-alert-circle")
         ).toBeFalsy();
     });
 
-    it("disables editing and exposes disabled to assistive technology", () => {
-        render(<Input disabled placeholder="Type here" />);
+    it("disables editing and exposes disabled to assistive technology", async () => {
+        await render(<Input disabled placeholder="Type here" />);
         const input = screen.getByPlaceholderText("Type here");
         expect(input).toHaveProp("editable", false);
         expect(input).toHaveProp("accessibilityState", { disabled: true });
     });
 
-    it("disables editing but does not expose disabled when readOnly", () => {
+    it("disables editing but does not expose disabled when readOnly", async () => {
         // RNTL's toBeDisabled() treats any non-editable TextInput as disabled
         // regardless of accessibilityState, so it can't be used to assert this
         // distinction — check the actual prop the component controls instead.
-        render(<Input readOnly placeholder="Type here" />);
+        await render(<Input readOnly placeholder="Type here" />);
         const input = screen.getByPlaceholderText("Type here");
         expect(input).toHaveProp("editable", false);
         expect(input).toHaveProp("accessibilityState", { disabled: false });
     });
 
-    it("merges a caller-supplied accessibilityState, with the component's own disabled value winning on conflict", () => {
-        render(
+    it("merges a caller-supplied accessibilityState, with the component's own disabled value winning on conflict", async () => {
+        await render(
             <Input
                 accessibilityState={{ selected: true, disabled: true }}
                 placeholder="Type here"
@@ -79,10 +79,10 @@ describe("Input", () => {
         );
     });
 
-    it("calls the user-provided onFocus and onBlur handlers", () => {
+    it("calls the user-provided onFocus and onBlur handlers", async () => {
         const onFocus = jest.fn();
         const onBlur = jest.fn();
-        render(
+        await render(
             <Input
                 onFocus={onFocus}
                 onBlur={onBlur}
@@ -90,9 +90,9 @@ describe("Input", () => {
             />
         );
         const input = screen.getByPlaceholderText("Type here");
-        fireEvent(input, "focus");
+        await fireEvent(input, "focus");
         expect(onFocus).toHaveBeenCalledTimes(1);
-        fireEvent(input, "blur");
+        await fireEvent(input, "blur");
         expect(onBlur).toHaveBeenCalledTimes(1);
     });
 });

@@ -5,7 +5,8 @@ setUpTests();
 // @expo/vector-icons' icon sets resolve their font-loaded state asynchronously,
 // which triggers a setState after render() has already resolved, outside of
 // act(). Mock each icon set's component to a plain Text host node so icons
-// render synchronously. Static properties (e.g. `.font`, used by useEDS.ts's
+// render synchronously. Each icon gets a testID of icon-<name> so tests can find
+// it with getByTestId. Static properties (e.g. `.font`, used by useEDS.ts's
 // `...MaterialCommunityIcons.font` spread) are copied over from the real
 // module rather than dropped, so code relying on them still works under test.
 jest.mock("@expo/vector-icons", () => {
@@ -25,7 +26,10 @@ jest.mock("@expo/vector-icons", () => {
             typeof value === "function"
                 ? Object.assign(
                       (props: Record<string, unknown>) =>
-                          React.createElement(Text, props),
+                          React.createElement(Text, {
+                              testID: `icon-${String(props.name)}`,
+                              ...props,
+                          }),
                       value
                   )
                 : value;
