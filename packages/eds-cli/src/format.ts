@@ -92,11 +92,28 @@ export function formatSearch(
 }
 
 function formatProps(component: Component): string[] {
-  const lines = ['Props', ...formatPropList(component)]
+  const lines = [
+    'Props',
+    ...formatGeneric(component),
+    ...formatPropList(component),
+  ]
   for (const sub of component.subComponents) {
     lines.push('', `${sub.name} props`, ...formatPropList(sub))
   }
   return lines
+}
+
+// A generic component takes the agent's own type in the props that name the
+// type parameter, such as `options: T[]` in Autocomplete.
+function formatGeneric(component: Component): string[] {
+  return (component.typeParameters ?? []).map((parameter) => {
+    const name = parameter.split(/[\s=]/)[0]
+    const uses = component.props
+      .filter((prop) => new RegExp(`\\b${name}\\b`).test(prop.type))
+      .map((prop) => prop.name)
+    const where = uses.length ? ` in ${uses.join(', ')}` : ''
+    return `  Generic over ${parameter}: pass your own type${where}.`
+  })
 }
 
 function formatPropList({ props, baseTypes }: PropList): string[] {

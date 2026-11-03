@@ -48,6 +48,11 @@ export type Component = {
   importLine: string
   hasAsChild: boolean
   props: Prop[]
+  /**
+   * Type parameters of a generic component, such as `T = string`. Missing in
+   * data from before they were added.
+   */
+  typeParameters?: string[]
   baseTypes: BaseType[]
   subComponents: SubComponent[]
   examples: Example[]

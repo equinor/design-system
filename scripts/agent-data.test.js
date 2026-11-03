@@ -153,6 +153,19 @@ describe('agent data', () => {
     )
   })
 
+  test('leaves out Omit keys the base type does not have', () => {
+    const [base] = byName('Search').baseTypes
+    assert.ok(!base.omitted.includes('startAdornment'), base.omitted)
+    assert.ok(base.omitted.includes('type'), base.omitted)
+  })
+
+  test('gives the type parameters of a generic component', () => {
+    assert.deepStrictEqual(byName('Autocomplete').typeParameters, [
+      'T = string',
+    ])
+    assert.deepStrictEqual(byName('Button').typeParameters, [])
+  })
+
   test('names the base type and the keys an Omit removes, once each', () => {
     const [base] = byName('TextField').baseTypes
     assert.strictEqual(base.name, 'InputHTMLAttributes<HTMLInputElement>')

@@ -128,6 +128,11 @@ function webBaseTypes(declaration) {
   }))
 }
 
+// The type parameters of a generic props type, such as `T = string` for
+// Autocomplete, so the agent knows that the props which name T take its own type.
+const typeParameters = (declaration) =>
+  declaration?.getTypeParameters?.().map((p) => p.getText()) ?? []
+
 // A PascalCase export without a `{Name}Props` type, such as a context or a
 // provider, gets an entry with no props instead of stopping the build.
 function findProps(project, dir, name) {
@@ -189,6 +194,7 @@ function buildComponent(project, entry) {
     importLine: web.importLine(name),
     hasAsChild: props.some((prop) => prop.name === 'asChild'),
     props,
+    typeParameters: typeParameters(declaration),
     baseTypes: webBaseTypes(declaration),
     subComponents: readSubComponents(project, dir, name, index.subComponents),
     examples: readExamples(project, dir, name),

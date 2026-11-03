@@ -113,6 +113,21 @@ describe('eds edge cases', () => {
       ).toContain('  Sizes: Pick a size.\n    | Size | px |\n    | sm | 16 |\n')
     })
 
+    it('says which props take the type of a generic component', () => {
+      const data = dataWith({
+        typeParameters: ['T = string'],
+        props: [
+          { name: 'options', optional: false, type: 'T[]', description: '' },
+          { name: 'label', optional: false, type: 'string', description: '' },
+        ],
+      })
+      expect(
+        run(['show', 'Button', '--section', 'props', '--data', data]).stdout,
+      ).toContain(
+        'Props\n  Generic over T = string: pass your own type in options.\n',
+      )
+    })
+
     it('lists sizes in the order of the scale', () => {
       const sheet = parseTokens(`[data-density] {
   --eds-spacing-2xl: 32px;
