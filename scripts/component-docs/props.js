@@ -124,7 +124,14 @@ function extractBaseTypes(declaration, platform = 'mobile') {
               ? typeNode.getText().replace(/\s+/g, ' ')
               : name.getText()
           if (base.name.test(name.getText()) && !bases.has(text)) {
-            bases.set(text, omitted)
+            // An Omit on an EDS type can name its own props, such as
+            // `startAdornment` from InputProps, which the library type never
+            // had. Only keys the library type has are left out of it.
+            const type = typeNode.getType()
+            bases.set(
+              text,
+              omitted.filter((key) => type.getProperty(key)),
+            )
           }
         } else if (fromLibrary(decl)) {
           const helper = name.getText()
