@@ -173,7 +173,7 @@ There is no motion token yet. Button and Chip use `150ms` with a `TODO` comment;
 
 - Commit and PR title: `refactor!: migrate <Component> (next) to beta tokens`, no scope.
 - Body: the mapping per domain, what changed visually against `main`, the APCA pairs below target with their discussion entry, blockers with issue links, and what was tested. Follow [`PR_AND_ISSUE_WRITING.md`](./PR_AND_ISSUE_WRITING.md).
-- List under `BREAKING CHANGE:` what consumers notice: the renamed data attributes, that apps need the beta bundle and `data-color-scheme`, and icon sizing inside the component.
+- List under `BREAKING CHANGE:` what consumers notice: the renamed data attributes, that apps need the beta bundle, and `data-color-scheme="dark"` for dark, and icon sizing inside the component.
 - When the PR merges, tick the component off in #5119.
 
 ## Checklist
