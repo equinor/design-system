@@ -9,7 +9,9 @@
    not moved to the beta names yet. */
 @import '@equinor/eds-core-react/next/index.css';
 
-/* The fonts (Inter and Equinor) are loaded in layout.tsx, from the EDS CDN. */
+/* The fonts (Inter and Equinor) are loaded in layout.tsx, from the EDS CDN.
+   The CSS from the editor is added by PreviewBridge.tsx, after everything
+   else. */
 
 /* The bundle switches the token values on data-color-scheme but does not set
    the CSS color-scheme property. Set it here, so scrollbars, form controls
@@ -28,7 +30,7 @@
   box-sizing: border-box;
 }
 
-/* The demo toolbar on top, the app filling the rest of the viewport. */
+/* The dashboard fills the frame. */
 body {
   display: flex;
   flex-direction: column;
@@ -46,7 +48,7 @@ body {
    override the EDS Button's own colour in @layer eds-components, and the
    icon, which draws in the button's colour, would turn the wrong colour.
    The demo's own buttons and the search field set their font and colour in
-   tokens.module.css. */
+   the CSS from the editor. */
 
 h1,
 h2,
@@ -61,4 +63,10 @@ p {
   width: 1px;
   height: 1px;
   white-space: nowrap;
+}
+
+/* Hidden until the editor has sent its CSS, so the frame does not flash
+   unstyled markup while it loads. */
+html:not([data-ready]) body {
+  visibility: hidden;
 }

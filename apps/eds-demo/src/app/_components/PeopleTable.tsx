@@ -7,14 +7,12 @@ import {
   checkbox_outline,
 } from '@equinor/eds-icons'
 import { useEffect, useRef, useState, type Ref } from 'react'
-import { classNames, type Styles } from './classNames'
 import { people } from './people'
 import { StatusBadge } from './StatusBadge'
 
 const columns = ['Id', 'Name', 'Email', 'Position', 'Location', 'Status']
 
 type CellCheckboxProps = {
-  styles: Styles
   label: string
   checked: boolean
   indeterminate?: boolean
@@ -22,18 +20,15 @@ type CellCheckboxProps = {
   inputRef?: Ref<HTMLInputElement>
 }
 
-/** The checkbox of the Checkbox Cell and Header Checkbox in Figma: the EDS
- * checkbox icon, with a transparent native checkbox on top for keyboard,
- * screen readers and clicks. */
+/** A row checkbox: the EDS checkbox icon, with a transparent native
+ * checkbox on top for keyboard, screen readers and clicks. */
 function CellCheckbox({
-  styles,
   label,
   checked,
   indeterminate = false,
   onChange,
   inputRef,
 }: CellCheckboxProps) {
-  const c = classNames(styles)
   const icon = indeterminate
     ? checkbox_indeterminate
     : checked
@@ -41,22 +36,21 @@ function CellCheckbox({
       : checkbox_outline
 
   return (
-    <span className={c('cell-checkbox')}>
+    <span className="cell-checkbox">
       <input
         ref={inputRef}
         type="checkbox"
-        className={c('cell-checkbox-input')}
+        className="cell-checkbox-input"
         checked={checked}
         onChange={onChange}
         aria-label={label}
       />
-      <Icon data={icon} size="xl" className={c('cell-checkbox-icon')} />
+      <Icon data={icon} size="xl" className="cell-checkbox-icon" />
     </span>
   )
 }
 
-export function PeopleTable({ styles }: { styles: Styles }) {
-  const c = classNames(styles)
+export function PeopleTable() {
   const [selected, setSelected] = useState<Set<string>>(
     () => new Set(['EQ-2134']),
   )
@@ -86,14 +80,13 @@ export function PeopleTable({ styles }: { styles: Styles }) {
     )
 
   return (
-    <div className={c('table-card')}>
-      <table className={c('table')}>
+    <div className="table-card">
+      <table className="table">
         <caption className="visually-hidden">People with access</caption>
         <thead>
           <tr>
-            <th scope="col" className={c('header-checkbox')}>
+            <th scope="col" className="header-checkbox">
               <CellCheckbox
-                styles={styles}
                 inputRef={selectAll}
                 label="Select all people"
                 checked={allSelected}
@@ -102,7 +95,7 @@ export function PeopleTable({ styles }: { styles: Styles }) {
               />
             </th>
             {columns.map((column) => (
-              <th key={column} scope="col" className={c('header')}>
+              <th key={column} scope="col" className="header">
                 {column}
               </th>
             ))}
@@ -116,16 +109,15 @@ export function PeopleTable({ styles }: { styles: Styles }) {
               // the row is a shortcut for pointer users.
               <tr
                 key={person.id}
-                className={c('row')}
+                className="row"
                 data-selected={isSelected || undefined}
                 onClick={(event) => {
                   if ((event.target as HTMLElement).closest('input')) return
                   toggle(person.id)
                 }}
               >
-                <td className={c('checkbox-cell')}>
+                <td className="checkbox-cell">
                   <CellCheckbox
-                    styles={styles}
                     label={`Select ${person.name}`}
                     checked={isSelected}
                     onChange={() => toggle(person.id)}
@@ -138,13 +130,13 @@ export function PeopleTable({ styles }: { styles: Styles }) {
                   person.position,
                   person.location,
                 ].map((value) => (
-                  <td key={value} className={c('text-cell')}>
-                    <div className={c('cell-content')}>{value}</div>
+                  <td key={value} className="text-cell">
+                    <div className="cell-content">{value}</div>
                   </td>
                 ))}
-                <td className={c('badge-cell')}>
-                  <div className={c('cell-content')}>
-                    <StatusBadge styles={styles} tone={person.status}>
+                <td className="badge-cell">
+                  <div className="cell-content">
+                    <StatusBadge tone={person.status}>
                       {person.statusLabel}
                     </StatusBadge>
                   </div>

@@ -1,7 +1,6 @@
 /* Layout only. This file decides where things go and holds no design
    decisions: no colour, spacing, size, radius, shadow or typography. All of
-   those are in the page's tokens.module.css, which is the file to read (or,
-   on the exercise page, to complete). */
+   those are in the CSS in the editor, for the exercise or the solution. */
 
 .app {
   display: grid;
@@ -37,13 +36,11 @@
   pointer-events: none;
 }
 
-/* 250px is the width of the Search component in Figma. */
 .search-input {
   inline-size: 250px;
   appearance: none;
 
-  /* The Search component in Figma has no clear button, so the browser's
-     own one is hidden. */
+  /* The browser's own clear button is hidden. */
   &::-webkit-search-cancel-button,
   &::-webkit-search-decoration {
     appearance: none;
@@ -202,7 +199,6 @@
   position-anchor: --account-menu;
   position-area: block-end span-inline-start;
   inset: auto;
-  /* The width of the Menu component in Figma. */
   inline-size: 250px;
   border: none;
 

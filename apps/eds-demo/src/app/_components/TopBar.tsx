@@ -9,29 +9,26 @@ import {
   search,
   settings,
 } from '@equinor/eds-icons'
-import { classNames, type Styles } from './classNames'
 
-export function TopBar({ styles }: { styles: Styles }) {
-  const c = classNames(styles)
-
+export function TopBar() {
   return (
-    <header className={c('top-bar')}>
-      <div className={c('brand')}>
+    <header className="top-bar">
+      <div className="brand">
         <Button variant="ghost" tone="neutral" icon aria-label="Apps">
           <Icon data={apps} />
         </Button>
-        <div className={c('brand-text')}>
-          <span className={c('app-title')}>Field access</span>
-          <span className={c('app-subtitle')}>Johan Sverdrup</span>
+        <div className="brand-text">
+          <span className="app-title">Field access</span>
+          <span className="app-subtitle">Johan Sverdrup</span>
         </div>
       </div>
 
-      <div className={c('top-bar-actions')}>
-        <div className={c('search')}>
-          <Icon data={search} size="md" className={c('search-icon')} />
+      <div className="top-bar-actions">
+        <div className="search">
+          <Icon data={search} size="md" className="search-icon" />
           <input
             type="search"
-            className={c('search-input')}
+            className="search-input"
             placeholder="Search people"
             aria-label="Search people"
           />
@@ -47,22 +44,22 @@ export function TopBar({ styles }: { styles: Styles }) {
           tone="neutral"
           icon
           aria-label="Account"
-          className={c('account-button')}
+          className="account-button"
           popoverTarget="account-menu"
         >
           <Icon data={account_circle} />
         </Button>
-        <div id="account-menu" popover="auto" className={c('menu')}>
-          <button type="button" className={c('menu-item')}>
+        <div id="account-menu" popover="auto" className="menu">
+          <button type="button" className="menu-item">
             <Icon data={person} size="md" />
             Profile
           </button>
-          <button type="button" className={c('menu-item')}>
+          <button type="button" className="menu-item">
             <Icon data={settings} size="md" />
             Settings
           </button>
-          <hr className={c('menu-divider')} />
-          <button type="button" className={c('menu-item')}>
+          <hr className="menu-divider" />
+          <button type="button" className="menu-item">
             <Icon data={log_out} size="md" />
             Sign out
           </button>

@@ -1,0 +1,821 @@
+/* The editor app around the frame: the strip, the frame area, the editor
+   and the restart dialog. The dashboard's own CSS is in the editor; this
+   file never reaches the frame. */
+@import '@equinor/eds-tokens/next/css/variables.css';
+@import '@equinor/eds-core-react/next/index.css';
+
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+/* Layout: the strip on top, the frame and the editor below it, side by side
+   (Row), stacked (Column) or the frame alone (Fullscreen). */
+.workbench {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  block-size: 100dvh;
+}
+
+.workbench-main {
+  display: grid;
+  min-block-size: 0;
+}
+
+/* The tracks for Row and Column are set on the element from the splitter's
+   position (Workbench.tsx). */
+.workbench[data-view='fullscreen'] .editor-panel {
+  display: none;
+}
+
+/* While the splitter is dragged, the frame must not take the pointer, and
+   no text should be selected. */
+.workbench-main[data-dragging] {
+  user-select: none;
+
+  & .workbench-iframe {
+    pointer-events: none;
+  }
+}
+
+/* The splitter between the frame and the editor: a 1px line in an 8px wide
+   handle, with the neutral muted fill on hover and while dragged. */
+.splitter {
+  --_bg-color: transparent;
+
+  position: relative;
+  background-color: var(--_bg-color);
+  touch-action: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: var(--eds-border-non-interactive-neutral-muted);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: var(--eds-border-non-interactive-neutral-muted);
+  }
+
+  &[data-orientation='vertical'] {
+    inline-size: var(--eds-spacing-xs);
+    cursor: col-resize;
+
+    &::before {
+      width: 1px;
+      height: 100%;
+      left: 0;
+    }
+
+    &::after {
+      width: 1px;
+      height: 100%;
+      right: 0;
+    }
+  }
+
+  &[data-orientation='horizontal'] {
+    block-size: var(--eds-spacing-xs);
+    cursor: row-resize;
+
+    &::before {
+      width: 100%;
+      height: 1px;
+      top: 0;
+    }
+
+    &::after {
+      width: 100%;
+      height: 1px;
+      bottom: 0;
+    }
+  }
+
+  &:hover {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &[data-dragging] {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: -1px;
+  }
+}
+
+/* The drag handle in the middle of the line, turned to run along it. */
+.splitter-handle {
+  width: var(--eds-spacing-md);
+  height: var(--eds-spacing-md);
+  color: var(--eds-icon-secondary);
+  pointer-events: none;
+
+  .splitter[data-orientation='vertical'] & {
+    transform: rotate(90deg);
+  }
+}
+
+.workbench-frame-area {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: var(--eds-spacing-xl);
+}
+
+.workbench-frame {
+  overflow: hidden;
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-low);
+}
+
+.workbench-iframe {
+  display: block;
+  border: 0;
+  transform-origin: top left;
+}
+
+/* The editor panel: the files and the token reference, with the rail on
+   the right edge. The tracks of the files, the splitter and the reference
+   are set on .editor-body from the splitter's position (Workbench.tsx). */
+.editor-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-inline-size: 0;
+  min-block-size: 0;
+  background-color: var(--eds-background-surface);
+}
+
+.editor-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+/* The tabs on top and the editor below them. The editor gets the rest of
+   the height and scrolls inside it, so the page itself never scrolls. */
+.editor-files {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+.workbench-editor {
+  overflow: hidden;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+/* One tab per CSS file, styled as the tabs in the dashboard. Off, the line
+   is the non-interactive neutral muted border. On, it is the interactive
+   accent emphasis border and steps with the state. Hover adds the muted
+   fill of the tab's tone, and focus is the hover state plus the ring
+   outside. */
+/* The tabs wrap in a narrow editor. A scrolling row would clip the focus
+   ring. */
+.editor-tabs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.editor-tab {
+  --_bg-color: transparent;
+  --_bg-hover: var(--eds-background-interactive-neutral-muted-hover);
+  --_color: var(--eds-text-primary);
+  --_indicator: var(--eds-border-non-interactive-neutral-muted);
+
+  flex: none;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border: 0;
+  border-radius: var(--eds-corner-radius-none);
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--_indicator);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+
+  &[aria-selected='true'] {
+    --_bg-hover: var(--eds-background-interactive-accent-muted-hover);
+    --_color: var(--eds-text-on-muted-accent);
+    --_indicator: var(--eds-border-interactive-accent-emphasis-default);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-hover);
+  }
+
+  &[aria-selected='true']:is(:hover, :focus-visible) {
+    --_indicator: var(--eds-border-interactive-accent-emphasis-hover);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* The rail on the right edge of the editor panel, with the tab that opens
+   the token reference: a tab written top to bottom, with the line on the
+   edge that faces the reference. The logical paddings turn with the
+   writing mode. */
+.editor-rail {
+  display: flex;
+  flex-direction: column;
+}
+
+.rail-tab {
+  --_bg-color: transparent;
+  --_bg-hover: var(--eds-background-interactive-neutral-muted-hover);
+  --_color: var(--eds-text-primary);
+  --_indicator: var(--eds-border-non-interactive-neutral-muted);
+
+  writing-mode: vertical-rl;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border: 0;
+  border-radius: var(--eds-corner-radius-none);
+  outline: none;
+  box-shadow: inset 2px 0 0 var(--_indicator);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+
+  &[aria-expanded='true'] {
+    --_bg-hover: var(--eds-background-interactive-accent-muted-hover);
+    --_color: var(--eds-text-on-muted-accent);
+    --_indicator: var(--eds-border-interactive-accent-emphasis-default);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-hover);
+  }
+
+  &[aria-expanded='true']:is(:hover, :focus-visible) {
+    --_indicator: var(--eds-border-interactive-accent-emphasis-hover);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* The token reference: a filter, the groups, and a row per token. */
+.token-reference {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-inline-size: 0;
+  min-block-size: 0;
+  color: var(--eds-text-primary);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.token-reference-header {
+  display: grid;
+  gap: var(--eds-spacing-xs);
+  padding: var(--eds-spacing-sm);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.token-reference-hint,
+.token-empty {
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-body-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.token-empty {
+  padding: var(--eds-spacing-sm);
+}
+
+/* The filter field, styled as the search field in the dashboard. */
+.token-filter {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.token-filter-icon {
+  position: absolute;
+  inset-inline-start: var(--eds-spacing-xs);
+  color: var(--eds-icon-secondary);
+  pointer-events: none;
+}
+
+.token-filter-input {
+  --_border-color: var(--eds-border-interactive-neutral-muted-default);
+
+  inline-size: 100%;
+  margin: 0;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline-start: calc(
+    var(--eds-spacing-xs) + var(--eds-spacing-md) + var(--eds-spacing-3xs)
+  );
+  padding-inline-end: var(--eds-spacing-xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--eds-background-input);
+  border: none;
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+  appearance: none;
+
+  &::placeholder {
+    color: var(--eds-text-secondary);
+    opacity: 1;
+  }
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    appearance: none;
+  }
+
+  &:hover {
+    --_border-color: var(--eds-border-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    --_border-color: var(--eds-border-interactive-neutral-muted-hover);
+
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.token-groups {
+  overflow-y: auto;
+  min-block-size: 0;
+}
+
+.token-group {
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.token-group-summary {
+  --_bg-color: transparent;
+
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+
+  list-style: none;
+  background-color: var(--_bg-color);
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: -1px;
+  }
+}
+
+.token-group-chevron {
+  color: var(--eds-icon-primary);
+  transform: rotate(-90deg);
+  transition: transform 150ms ease-in-out;
+
+  .token-group[open] & {
+    transform: none;
+  }
+}
+
+.token-group-count {
+  margin-inline-start: auto;
+  font-weight: var(--eds-font-weight-normal);
+  color: var(--eds-text-secondary);
+}
+
+.token-subgroup-label {
+  margin: 0;
+  padding-block: var(--eds-spacing-xs) var(--eds-spacing-3xs);
+  padding-inline: var(--eds-spacing-sm);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.token-list {
+  margin: 0;
+  padding: 0;
+  padding-block-end: var(--eds-spacing-xs);
+  list-style: none;
+}
+
+/* One token: the preview, the name and, for sizes and fonts, the value in
+   the frame's density. Spacing and type sizes get the whole width for
+   their preview, on a line below the name. */
+.token {
+  --_bg-color: transparent;
+  --_stage-size: var(--eds-spacing-3xl);
+
+  display: grid;
+  grid-template-areas: 'stage name value';
+  grid-template-columns: var(--_stage-size) minmax(0, 1fr) auto;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+
+  inline-size: 100%;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  color: var(--eds-text-primary);
+  text-align: start;
+
+  background-color: var(--_bg-color);
+  border: 0;
+  outline: none;
+  cursor: pointer;
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  /* The ring is drawn inside the item, as in Menu Item. */
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: -1px;
+  }
+
+  &:is(
+    [data-kind='spacing'],
+    [data-kind='font-size'],
+    [data-kind='line-height']
+  ) {
+    grid-template-areas:
+      'name name value'
+      'stage stage stage';
+  }
+}
+
+.token-name {
+  grid-area: name;
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  overflow-wrap: anywhere;
+}
+
+.token-value {
+  grid-area: value;
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+/* The preview sits in the frame's colour scheme and density
+   (data-color-scheme and data-density on the element), on the background
+   its token is made for. */
+.token-stage {
+  grid-area: stage;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  inline-size: var(--_stage-size);
+  block-size: var(--_stage-size);
+
+  color: var(--eds-text-primary);
+  background-color: var(--_backdrop);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: inset 0 0 0 1px var(--eds-border-non-interactive-neutral-muted);
+
+  .token:is(
+      [data-kind='spacing'],
+      [data-kind='font-size'],
+      [data-kind='line-height']
+    )
+    & {
+    justify-items: start;
+    inline-size: auto;
+    block-size: auto;
+    min-block-size: var(--_stage-size);
+    padding-inline: var(--eds-spacing-xs);
+  }
+
+  .token[data-kind='shadow'] & {
+    overflow: visible;
+  }
+}
+
+.token-sample {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-lg-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-lg-line-height);
+
+  .token[data-kind='fill'] & {
+    align-self: stretch;
+    justify-self: stretch;
+    background-color: var(--_token);
+  }
+
+  .token[data-kind='text'] & {
+    color: var(--_token);
+  }
+
+  .token[data-kind='icon'] & {
+    color: var(--_token);
+  }
+
+  .token[data-kind='border'] & {
+    inline-size: 60%;
+    aspect-ratio: 1;
+    border-radius: var(--eds-corner-radius-rounded);
+    box-shadow: inset 0 0 0 1px var(--_token);
+  }
+
+  .token[data-kind='radius'] & {
+    inline-size: 60%;
+    aspect-ratio: 1;
+    background-color: var(--eds-background-non-interactive-accent-muted);
+    border-radius: var(--_token);
+    box-shadow: inset 0 0 0 1px var(--eds-border-non-interactive-accent-default);
+  }
+
+  .token[data-kind='shadow'] & {
+    inline-size: 60%;
+    aspect-ratio: 1;
+    background-color: var(--eds-background-surface);
+    border-radius: var(--eds-corner-radius-rounded);
+    box-shadow: var(--_token);
+  }
+
+  .token[data-kind='spacing'] & {
+    inline-size: var(--_token);
+    block-size: var(--eds-spacing-xs);
+    background-color: var(--eds-background-non-interactive-accent-emphasis);
+  }
+
+  .token[data-kind='font-size'] & {
+    font-family: var(--_family);
+    font-size: var(--_token);
+    line-height: normal;
+  }
+
+  .token[data-kind='line-height'] & {
+    font-family: var(--_family);
+    font-size: var(--_size);
+    line-height: var(--_token);
+    background-color: var(--eds-background-non-interactive-accent-muted);
+  }
+
+  .token[data-kind='family'] & {
+    font-family: var(--_token);
+  }
+
+  .token[data-kind='weight'] & {
+    font-weight: var(--_token);
+  }
+}
+
+/* The strip */
+
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xl);
+  align-items: center;
+
+  padding-block: var(--eds-spacing-3xs);
+  padding-inline: var(--eds-spacing-md);
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-surface);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.strip-title {
+  margin-inline-end: auto;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-sm-line-height);
+}
+
+.strip-group {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.strip-label {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.strip-options {
+  display: flex;
+  gap: var(--eds-spacing-4xs);
+}
+
+/* A segmented control. The radio is hidden but stays focusable, and the
+   label shows its state: neutral selected when checked, neutral muted on
+   hover and press, with text.primary on every fill. */
+.strip-option {
+  --_bg-color: transparent;
+
+  position: relative;
+  display: inline-flex;
+  gap: var(--eds-spacing-3xs);
+  align-items: center;
+  padding-block: var(--eds-spacing-3xs);
+  padding-inline: var(--eds-spacing-xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+  white-space: nowrap;
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  cursor: pointer;
+
+  & input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  & > svg {
+    color: var(--eds-icon-primary);
+  }
+
+  &:hover {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:active {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &:has(:checked) {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-default);
+  }
+
+  &:has(:checked):hover {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+  }
+
+  &:has(:checked):active {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-pressed);
+  }
+
+  &:has(:focus-visible) {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.strip-hint {
+  padding-inline: var(--eds-spacing-3xs);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-xs-font-size);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--eds-text-secondary);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+/* The restart dialog has the dialog background, a border inside its edge
+   and the high elevation. */
+.restart-dialog {
+  inline-size: 300px;
+  max-inline-size: calc(100vw - 2 * var(--eds-spacing-md));
+  margin: auto;
+  padding: 0;
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-dialog);
+  border: none;
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  outline-offset: -1px;
+  box-shadow: var(--eds-elevation-high);
+
+  &::backdrop {
+    background-color: var(--eds-background-backdrop);
+    opacity: 0.8;
+  }
+}
+
+.restart-dialog-header {
+  display: flex;
+  gap: var(--eds-spacing-md);
+  align-items: center;
+}
+
+.restart-dialog-title {
+  flex: 1;
+  margin: 0;
+  padding-block: var(--eds-spacing-sm);
+  padding-inline: var(--eds-spacing-md);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-lg-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-lg-line-height);
+}
+
+.restart-dialog-close {
+  padding: var(--eds-spacing-2xs);
+}
+
+.restart-dialog-content {
+  margin: 0;
+  padding: var(--eds-spacing-md);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-body-md-line-height);
+}
+
+.restart-dialog-actions {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  justify-content: flex-end;
+  padding: var(--eds-spacing-md);
+}

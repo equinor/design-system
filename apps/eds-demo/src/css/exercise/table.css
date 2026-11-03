@@ -1,0 +1,164 @@
+/* The table: its header, the cells, the row checkboxes and the status
+   badges. */
+
+/* 🐨 The table is a surface with a quiet border around it. */
+.table-card {
+  background-color: light-dark(white, black);
+  border: 1px solid light-dark(black, white);
+  border-radius: 4px;
+}
+
+/* 🐨 The header cells are interactive, so their fill and bottom line come
+   from the interactive tokens. */
+.header,
+.header-checkbox {
+  padding: 6px;
+  background-color: light-dark(white, black);
+  box-shadow: inset 0 -0.5px 0 light-dark(black, white);
+}
+
+.header {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  &::before,
+  &::after {
+    inset-block: 8px;
+    inline-size: 0.5px;
+    background-color: light-dark(black, white);
+  }
+}
+
+.text-cell,
+.checkbox-cell,
+.badge-cell {
+  --_bg-color: transparent;
+  --_line: light-dark(black, white);
+  --_lines: inset 0 -0.5px 0 var(--_line);
+
+  background-color: var(--_bg-color);
+  box-shadow: var(--_lines);
+  transition: background-color var(--_transition-duration) ease-in-out;
+}
+
+.text-cell {
+  padding-block: 4px;
+  padding-inline: 6px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+}
+
+.checkbox-cell {
+  padding: 4px;
+
+  &:has(:focus-visible) {
+    --_bg-color: light-dark(white, black);
+    --_lines: inset 0 0 0 2px light-dark(blue, cyan);
+  }
+}
+
+.badge-cell {
+  --_lines: inset 0 0.5px 0 var(--_line), inset 0 -0.5px 0 var(--_line);
+
+  padding: 4px;
+}
+
+/* 🐨 The table selects whole rows, so the whole row reacts to the pointer.
+   Then check the text in a selected row: is it still readable on the
+   selected fill? */
+.row:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected] > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected]:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected]:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected] > .checkbox-cell:has(:focus-visible) {
+  --_bg-color: light-dark(white, black);
+  --_lines: inset 0 0 0 2px light-dark(blue, cyan);
+}
+
+.cell-content {
+  gap: 4px;
+  min-block-size: 24px;
+}
+
+/* 🐨 The checkbox is an icon in an interactive icon colour. */
+.cell-checkbox-icon {
+  color: light-dark(black, white);
+}
+/* 🐨 A status badge only shows information: you cannot click it. Pick a
+   quiet non-interactive fill and border for each tone, and the text and
+   icon tokens made for that fill. Every tone fills the same four slots. */
+.badge {
+  --_bg-color: light-dark(white, black);
+  --_border-color: light-dark(black, white);
+  --_text-color: light-dark(black, white);
+  --_icon-color: light-dark(black, white);
+
+  gap: 4px;
+  padding-block: 2px;
+  padding-inline: 6px;
+
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--_text-color);
+
+  background-color: var(--_bg-color);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  & > svg {
+    color: var(--_icon-color);
+  }
+
+  &[data-tone='info'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-tone='success'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-tone='warning'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+
+  &[data-tone='danger'] {
+    --_bg-color: light-dark(white, black);
+    --_border-color: light-dark(black, white);
+    --_text-color: light-dark(black, white);
+    --_icon-color: light-dark(black, white);
+  }
+}

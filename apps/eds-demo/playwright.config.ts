@@ -1,12 +1,12 @@
 import { defineConfig, devices } from '@playwright/test'
 
-// By default the tests start their own dev server on 3100, so they never run
-// against another app on 3000. Next.js runs one dev server per app folder,
-// so when the demo is already running, point the tests at it instead:
-// EDS_DEMO_URL=http://localhost:3001 pnpm demo:test:e2e
+// The tests run against the static export in out/ (build it first; the
+// test:e2e script does), served on its own port so they never reuse another
+// app on 3000. To run them against a server that is already up, such as
+// `pnpm demo:dev`, set EDS_DEMO_URL=http://localhost:3001/.
 const existingServer = process.env.EDS_DEMO_URL
 const PORT = 3100
-const baseURL = existingServer ?? `http://localhost:${PORT}`
+const baseURL = existingServer ?? `http://localhost:${PORT}/`
 
 export default defineConfig({
   testDir: './tests',
@@ -24,16 +24,16 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 800 },
+        viewport: { width: 1512, height: 952 },
       },
     },
   ],
   webServer: existingServer
     ? undefined
     : {
-        command: `pnpm exec next dev --port ${PORT}`,
+        command: `node tests/serve.mjs out ${PORT}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
-        timeout: 120 * 1000,
+        timeout: 30 * 1000,
       },
 })

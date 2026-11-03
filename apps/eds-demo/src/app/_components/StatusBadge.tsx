@@ -4,7 +4,6 @@ import {
   info_circle,
   warning_outlined,
 } from '@equinor/eds-icons'
-import { classNames, type Styles } from './classNames'
 import { Icon } from '@equinor/eds-core-react/next'
 import type { Status } from './people'
 
@@ -16,20 +15,16 @@ const icons = {
 }
 
 type StatusBadgeProps = {
-  styles: Styles
   tone: Status
   children: React.ReactNode
 }
 
-/** A status label, drawn as the EDS Badge in Figma (Solid, Low emphasis,
- * leading icon). It is not interactive, so it uses the non-interactive
- * colour tokens. The tone is set with data-tone, and the CSS maps each tone
- * to its tokens. */
-export function StatusBadge({ styles, tone, children }: StatusBadgeProps) {
-  const c = classNames(styles)
-
+/** A status label with a leading icon. It is not interactive, so it uses
+ * the non-interactive colour tokens. The tone is set with data-tone, and the
+ * CSS maps each tone to its tokens. */
+export function StatusBadge({ tone, children }: StatusBadgeProps) {
   return (
-    <span className={c('badge')} data-tone={tone}>
+    <span className="badge" data-tone={tone}>
       <Icon data={icons[tone]} size="sm" />
       {children}
     </span>

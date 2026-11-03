@@ -5,7 +5,6 @@ import {
   place,
   settings,
 } from '@equinor/eds-icons'
-import { classNames, type Styles } from './classNames'
 import { Icon } from '@equinor/eds-core-react/next'
 
 const items = [
@@ -15,29 +14,27 @@ const items = [
   { href: '#reports', label: 'Reports', icon: bar_chart },
 ]
 
-export function SideNav({ styles }: { styles: Styles }) {
-  const c = classNames(styles)
-
+export function SideNav() {
   return (
-    <nav className={c('side-nav')} aria-label="Main">
-      <ul className={c('nav-list')}>
+    <nav className="side-nav" aria-label="Main">
+      <ul className="nav-list">
         {items.map((item) => (
           <li key={item.href}>
             <a
               href={item.href}
-              className={c('nav-item')}
+              className="nav-item"
               aria-current={item.current ? 'page' : undefined}
             >
-              <Icon data={item.icon} size="lg" className={c('nav-icon')} />
+              <Icon data={item.icon} size="lg" className="nav-icon" />
               {item.label}
             </a>
           </li>
         ))}
       </ul>
-      <ul className={c('nav-list')}>
+      <ul className="nav-list">
         <li>
-          <a href="#settings" className={c('nav-item')}>
-            <Icon data={settings} size="lg" className={c('nav-icon')} />
+          <a href="#settings" className="nav-item">
+            <Icon data={settings} size="lg" className="nav-icon" />
             Settings
           </a>
         </li>

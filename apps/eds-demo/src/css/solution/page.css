@@ -1,0 +1,63 @@
+/*
+  Every design decision on the dashboard, made with the beta tokens, in four
+  files, one for each part of the screen: page.css (this file), top-bar.css,
+  navigation.css and table.css. The tabs above the editor switch between
+  them.
+
+  - Colour: --eds-background-*, --eds-text-*, --eds-icon-*, --eds-border-*.
+    They resolve only under data-color-scheme, which is set on <html>.
+  - Spacing, corner radius and type sizes: --eds-spacing-*,
+    --eds-corner-radius-*, --eds-typography-*. They follow data-density.
+  - Family, weight and elevation: --eds-font-family-*, --eds-font-weight-*,
+    --eds-elevation-*.
+
+  The buttons and icons are the EDS Button and Icon from
+  @equinor/eds-core-react/next, which bring their own CSS, so they are not
+  in these files. Icon sizes are set with the Icon size prop, which takes
+  the spacing token of the same name.
+
+  Strokes are literal widths, because borders and focus rings have no width
+  token. A border drawn inside the edge is an inset box-shadow, so it adds
+  no size. The layout is in a separate stylesheet, not in these files.
+*/
+
+/* The page is the canvas, and the surfaces sit on it. */
+.app {
+  --_transition-duration: 150ms;
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+.main {
+  gap: var(--eds-spacing-lg);
+  padding: var(--eds-spacing-xl);
+}
+
+.page-header {
+  gap: var(--eds-spacing-lg);
+}
+
+.page-header-text {
+  gap: var(--eds-spacing-xs);
+}
+
+.title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-2xl-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-2xl-line-height);
+  color: var(--eds-text-primary);
+}
+
+.intro {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.actions {
+  gap: var(--eds-spacing-sm);
+}
