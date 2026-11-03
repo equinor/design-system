@@ -217,6 +217,31 @@ describe('eds edge cases', () => {
       ])
     })
 
+    it('says which attributes the token values follow', () => {
+      expect(
+        run(['tokens', 'spacing', '--scheme', 'dark', '--density', 'compact'])
+          .stdout,
+      ).toContain(
+        '→ The values follow data-color-scheme="dark" and data-density="compact" on an ancestor element.\n',
+      )
+    })
+
+    it('points from typography to the family and weight tokens', () => {
+      const css = tempFile(
+        'variables.css',
+        `[data-density] {
+  --eds-typography-header-xl-font-size: 32px;
+  --eds-spacing-md: 12px;
+}`,
+      )
+      expect(run(['tokens', 'header', '--css', css]).stdout).toContain(
+        '→ Family and weight: eds tokens font',
+      )
+      expect(run(['tokens', 'spacing', '--css', css]).stdout).not.toContain(
+        'Family and weight',
+      )
+    })
+
     it('allows one typo in token search when nothing matches exactly', () => {
       expect(run(['tokens', 'spcing']).stdout).toMatch(/--eds-spacing-md +12px/)
     })

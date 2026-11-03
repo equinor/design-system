@@ -84,9 +84,16 @@ export function formatSearch(
       `  → eds show ${c.name}`,
     ].join('\n')
   })
-  if (matches.length > 1) {
+  // Only matches on the name are ranked. The others are in alphabetical order,
+  // so the first three of them are not a recommendation (`eds search form`
+  // would suggest Input, which says to use TextField).
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean)
+  const byName = matches.filter((c) =>
+    words.some((w) => c.name.toLowerCase().includes(w)),
+  )
+  if (byName.length > 1) {
     lines.push(
-      `→ Several at once: eds show ${matches
+      `→ Several at once: eds show ${byName
         .slice(0, 3)
         .map((c) => c.name)
         .join(' ')}`,
@@ -302,5 +309,11 @@ export function formatTokens(
     }),
     '',
     `${plural(tokens.length, 'token')}, values for ${scheme} colour scheme and ${density} density. Use them as var(<name>).`,
+    `→ The values follow data-color-scheme="${scheme}" and data-density="${density}" on an ancestor element.`,
+    // Typography tokens give the size and line height. The family and weight
+    // are separate tokens, and a heading without them renders in the UI font.
+    ...(tokens.some((t) => t.name.includes('-typography-'))
+      ? ['→ Family and weight: eds tokens font']
+      : []),
   ].join('\n')
 }

@@ -175,6 +175,12 @@ describe('eds', () => {
       expect(stdout).toContain('→ Several at once: eds show Field TextField')
     })
 
+    it('suggests several at once only from matches on the name', () => {
+      // label matches props of Field and TextField, not their names, so the
+      // order is alphabetical and not a recommendation.
+      expect(run(['search', 'label']).stdout).not.toContain('Several at once')
+    })
+
     it('allows one typo in longer words', () => {
       expect(run(['search', 'buton']).stdout).toMatch(/^Button /)
       expect(run(['search', 'variamt']).stdout).toMatch(/^Button /)
