@@ -9,6 +9,7 @@ const { test, describe, before } = require('node:test')
 const assert = require('node:assert')
 const fs = require('fs')
 const path = require('path')
+const ts = require('typescript')
 
 const { buildAgentData, SCHEMA_VERSION } = require('./generate-agent-data')
 const { discoverPublicComponents } = require('./generate-component-index')
@@ -85,6 +86,46 @@ describe('agent data', () => {
     assert.ok(button.examples.every((e) => e.title && e.code))
     assert.ok(button.guidance.usage)
     assert.ok(button.guidance.accessibility)
+  })
+
+  test('gives examples without Storybook helpers or args', () => {
+    for (const component of data.components) {
+      for (const { title, code } of component.examples) {
+        const where = `${component.name}: ${title}`
+        assert.doesNotMatch(code, /<(Wrapper|Stack|ExampleLabel)\b/, where)
+        assert.doesNotMatch(code, /\b(args|useArgs)\b/, where)
+      }
+    }
+  })
+
+  test('gives examples that parse as TSX', () => {
+    for (const component of data.components) {
+      for (const { title, code } of component.examples) {
+        const text = code.startsWith('function ')
+          ? code
+          : `const example = (\n<>\n${code}\n</>\n)`
+        const sf = ts.createSourceFile(
+          'example.tsx',
+          text,
+          ts.ScriptTarget.Latest,
+          false,
+          ts.ScriptKind.TSX,
+        )
+        assert.deepStrictEqual(
+          sf.parseDiagnostics.map((d) => d.messageText),
+          [],
+          `${component.name}: ${title}`,
+        )
+      }
+    }
+  })
+
+  test('keeps the code before the JSX as a function component', () => {
+    const overview = byName('Field').examples.find(
+      (e) => e.title === 'Overview',
+    )
+    assert.match(overview.code, /^function Overview\(\) \{\n/)
+    assert.match(overview.code, /useFieldIds\(\)/)
   })
 
   test('keeps no Storybook paths in the text', () => {

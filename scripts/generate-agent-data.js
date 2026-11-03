@@ -47,6 +47,7 @@ const {
 } = require('./component-docs/locate')
 const { extractProps, extractBaseTypes } = require('./component-docs/props')
 const { extractStories } = require('./component-docs/stories')
+const { toExample } = require('./agent-examples')
 const { readSidecar } = require('./component-docs/sidecar')
 const { createProject } = require('./component-docs/project')
 const { DocsError, fail } = require('./component-docs/errors')
@@ -217,9 +218,10 @@ function findProps(project, dir, name) {
 function readExamples(project, dir, name) {
   const file = path.join(dir, `${name}.stories.tsx`)
   if (!fs.existsSync(file)) return []
-  return extractStories(project, file, web.skipStories)
-    .filter((story) => story.code)
-    .map(({ title, caption, code }) => ({ title, caption, code }))
+  return extractStories(project, file, web.skipStories).flatMap((story) => {
+    const code = toExample(story)
+    return code ? [{ title: story.title, caption: story.caption, code }] : []
+  })
 }
 
 // The index finds the parts of a compound component in its source, and
