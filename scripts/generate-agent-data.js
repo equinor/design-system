@@ -178,7 +178,7 @@ function readHook(project, dir, name) {
     .find((f) => f?.isExported())
   if (!fn)
     fail(
-      `${name}: no exported function ${name} in ${path.relative(rootDir, dir)}`,
+      `${name}: no exported function ${name} in ${path.relative(rootDir, dir)}. Hooks are read from function declarations, so write it as \`export function ${name}\` rather than an arrow function.`,
     )
   const parameters = fn
     .getParameters()

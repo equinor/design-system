@@ -76,7 +76,8 @@ function readsArgs(fn) {
 }
 
 // Components the examples cannot use outside Storybook: those declared at the
-// top of the stories file, and those imported from `.storybook`.
+// top of the stories file, and those imported from `.storybook`. The stories
+// themselves count too, so a story that renders another story is left out.
 function storyOnlyComponents(sf) {
   const names = new Set()
   for (const statement of sf.getVariableStatements()) {

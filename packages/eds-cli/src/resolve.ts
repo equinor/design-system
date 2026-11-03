@@ -52,6 +52,9 @@ export function hasExport(pkg: InstalledPackage, specifier: string): boolean {
  * `@equinor/eds-tokens/next/css/variables.css` resolves to for a file in
  * `cwd`, or null if the package does not export it. Node does the resolution,
  * so exact keys, the priority of patterns and `null` targets follow its rules.
+ * It resolves with the `require` conditions, which is enough while the CSS
+ * exports of eds-tokens are plain paths. An export only under `import` would
+ * resolve to null.
  */
 export function resolveExport(cwd: string, specifier: string): string | null {
   try {
