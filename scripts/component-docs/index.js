@@ -1,17 +1,18 @@
 const fs = require('fs')
 const path = require('path')
-const { Project } = require('ts-morph')
 const { rootDir } = require('./config')
+const { createProject } = require('./project')
 const { DocsError, fail } = require('./errors')
 const { discoverComponents } = require('./locate')
 const { buildPages } = require('./build')
+const { assertStorybookSourceLinks } = require('./storybook')
 
 // Writes the pages, or with `--check` only reports the ones that are stale.
 function generate(args) {
   const check = args.includes('--check')
   const named = args.filter((a) => !a.startsWith('--'))
   const components = named.length ? named : discoverComponents()
-  const project = new Project({ skipAddingFilesFromTsConfig: true })
+  const project = createProject()
 
   const stale = []
   for (const component of components) {
@@ -27,6 +28,8 @@ function generate(args) {
       `stale, run \`pnpm run generate:component-docs\`:\n  ${stale.join('\n  ')}`,
     )
   }
+  // After the pages are written, so a page fixed by this run is not reported.
+  assertStorybookSourceLinks()
   console.log(`${components.join(', ')}: ${check ? 'up to date' : 'generated'}`)
 }
 

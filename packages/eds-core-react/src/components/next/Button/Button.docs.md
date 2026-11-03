@@ -31,4 +31,4 @@ Button triggers an action, such as saving a form or opening a dialog.
 
 ## Related components
 
-- [`Link`](?path=/docs/eds-2-0-beta-navigation-link--docs) is for moving to another page. Use Button for actions.
+- [`Link`](?path=/docs/beta-navigation-link--docs) is for moving to another page. Use Button for actions.

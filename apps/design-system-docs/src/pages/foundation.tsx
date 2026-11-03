@@ -6,6 +6,26 @@ import { Hero } from '@site/src/components/Hero'
 import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
 import { foundationTopics } from '@site/src/data/foundationNav'
+import { useShownVersionDocPath } from '../utils/useShownVersionDocPath'
+
+// A component of its own because the hook needs the docs context that
+// <Layout> provides.
+function TopicCards(): JSX.Element {
+  const docPath = useShownVersionDocPath()
+  return (
+    <IconCardGrid columns={3}>
+      {foundationTopics.map((topic) => (
+        <IconCard
+          key={topic.label}
+          icon={topic.icon}
+          title={topic.label}
+          description={topic.description}
+          to={docPath(topic)}
+        />
+      ))}
+    </IconCardGrid>
+  )
+}
 
 export default function Foundation(): JSX.Element {
   return (
@@ -29,17 +49,7 @@ export default function Foundation(): JSX.Element {
           title="Explore the foundations"
           subtitle="Each topic covers the principles, tokens, and guidelines you need to design and build with EDS."
         >
-          <IconCardGrid columns={3}>
-            {foundationTopics.map((topic) => (
-              <IconCard
-                key={topic.label}
-                icon={topic.icon}
-                title={topic.label}
-                description={topic.description}
-                to={topic.to}
-              />
-            ))}
-          </IconCardGrid>
+          <TopicCards />
         </DocsSection>
       </main>
     </Layout>

@@ -81,13 +81,7 @@ Show the error state to mark the field as invalid, and pair it with a helper mes
 
 Prefer read-only over disabled when the value should remain visible and copyable but cannot be edited. Use disabled only when the field is currently unavailable and the value is not meaningful to the user.
 
-#### Disabled
-
-<StoryCanvas of="Autocomplete/Disabled" showLink />
-
-#### Read Only
-
-<StoryCanvas of="Autocomplete/ReadOnly" showLink />
+<StoryCanvas of="Autocomplete/States" showLink />
 
 ### Forms
 

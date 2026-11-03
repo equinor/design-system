@@ -1,5 +1,5 @@
 export type StorybookEmbedProps = {
-  /** Storybook story id, e.g. `eds-2-0-beta-icon--introduction`. */
+  /** Storybook story id, e.g. `beta-icon--introduction`. */
   id: string
   /** Iframe height in px (number) or any CSS length (string). Defaults to 88. */
   height?: number | string

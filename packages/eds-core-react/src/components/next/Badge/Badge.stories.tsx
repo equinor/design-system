@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from '@storybook/react-vite'
 import { Badge, type BadgeProps } from '.'
 
 const meta: Meta<typeof Badge> = {
-  title: 'EDS 2.0 (beta)/Data Display/Badge',
+  title: 'Beta/Data Display/Badge',
   component: Badge,
   tags: ['beta'],
   argTypes: {

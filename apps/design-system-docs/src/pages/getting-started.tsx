@@ -2,12 +2,34 @@ import Layout from '@theme/Layout'
 
 import type { JSX } from 'react'
 
+import { map } from '@equinor/eds-icons'
+
 import { Hero } from '@site/src/components/Hero'
 import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
 import { CtaSection } from '@site/src/components/CtaSection'
 import { gettingStartedPaths } from '@site/src/data/gettingStartedPaths'
+import { useShownVersionDocPath } from '../utils/useShownVersionDocPath'
 import { slackUrl } from '@site/src/data/siteLinks'
+
+// A component of its own because the hook needs the docs context that
+// <Layout> provides.
+function PathCards(): JSX.Element {
+  const docPath = useShownVersionDocPath()
+  return (
+    <IconCardGrid columns={4}>
+      {gettingStartedPaths.map((path) => (
+        <IconCard
+          key={path.title}
+          icon={path.icon}
+          title={path.title}
+          description={path.description}
+          to={docPath(path)}
+        />
+      ))}
+    </IconCardGrid>
+  )
+}
 
 export default function GettingStarted(): JSX.Element {
   return (
@@ -31,16 +53,19 @@ export default function GettingStarted(): JSX.Element {
           title="Choose your path"
           subtitle="Each guide is tailored to your role — jump straight into the resources and steps that matter most for your work."
         >
-          <IconCardGrid columns={4}>
-            {gettingStartedPaths.map((path) => (
-              <IconCard
-                key={path.title}
-                icon={path.icon}
-                title={path.title}
-                description={path.description}
-                to={path.to}
-              />
-            ))}
+          <PathCards />
+        </DocsSection>
+        <DocsSection
+          title="Where we're heading"
+          subtitle="Follow the themes we're investing in and plan around what's ahead."
+        >
+          <IconCardGrid columns={2}>
+            <IconCard
+              icon={map}
+              title="Roadmap"
+              description="A high-level view of what the EDS team is working on now and where the design system is heading."
+              to="/roadmap"
+            />
           </IconCardGrid>
         </DocsSection>
         <CtaSection

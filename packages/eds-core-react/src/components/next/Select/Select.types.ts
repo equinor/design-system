@@ -7,7 +7,7 @@ import type { SelectOptionProps } from '../utils/SelectOption.types'
  * plain object options at runtime.
  */
 export type SelectOptionGroup<T = string> = {
-  /** Discriminant field — must be `'group'` */
+  /** Discriminant field. Must be `'group'` */
   type: 'group'
   /** Label for the option group */
   label: string
@@ -28,14 +28,14 @@ export type SelectProps<T = string> = {
   id?: string
   /** Marks the field as invalid */
   invalid?: boolean
-  /** Makes the field read-only — visible but not editable */
+  /** Makes the field read-only, visible but not editable */
   readOnly?: boolean
   /**
    * Placeholder text shown as the first, non-selectable option when no value
    * is pre-selected. Renders as a disabled `<option value="">` at the top of the list.
    */
   placeholder?: string
-  /** Options to display — either flat or grouped via `SelectOptionGroup` */
+  /** Options to display, either flat or grouped via `SelectOptionGroup` */
   options?: (T | SelectOptionGroup<T>)[]
   /**
    * CSS class names applied to the root element (the outer labeled field wrapper).

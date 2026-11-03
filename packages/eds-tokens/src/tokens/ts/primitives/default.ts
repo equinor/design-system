@@ -5,6 +5,7 @@
 
 export const primitives = {
   fontFamily: {
+    commitmono: 'CommitMono',
     equinor: 'Equinor',
     inter: 'Inter',
   },

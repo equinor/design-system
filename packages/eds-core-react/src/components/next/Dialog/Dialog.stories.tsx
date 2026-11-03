@@ -6,7 +6,7 @@ import { Button } from '../Button'
 import page from './Dialog.docs.mdx'
 
 const meta: Meta<typeof Dialog> = {
-  title: 'EDS 2.0 (beta)/Feedback/Dialog',
+  title: 'Beta/Feedback/Dialog',
   component: Dialog,
   tags: ['beta'],
   args: {

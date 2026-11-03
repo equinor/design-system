@@ -31,5 +31,5 @@ const { inputId, descriptionId, getDescribedBy } = useFieldIds()
 
 ## Related components
 
-- [`TextField`](?path=/docs/eds-2-0-beta-inputs-textfield--docs) is the ready-made single line field, built from Field.
-- [`Input`](?path=/docs/eds-2-0-beta-inputs-input--docs) is the text input that goes inside a Field.
+- [`TextField`](?path=/docs/beta-inputs-textfield--docs) is the ready-made single line field, built from Field.
+- [`Input`](?path=/docs/beta-inputs-input--docs) is the text input that goes inside a Field.

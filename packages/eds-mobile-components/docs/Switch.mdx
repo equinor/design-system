@@ -34,7 +34,7 @@ const [active, setActive] = useState(false)
 | `active` | `boolean` | `false` | Whether the switch is on or off. |
 | `disabled` | `boolean` | `false` | Disables interaction. |
 | `label` | `string` | None | Text label displayed next to the switch. |
-| `ref` | `React.Ref<View>` | None | Ref to the switch. |
+| `ref` | `React.Ref<React.ComponentRef<typeof View>>` | None | Ref to the switch. |
 
 Also accepts all React Native [`ViewProps`](https://reactnative.dev/docs/view#props).
 
@@ -82,5 +82,5 @@ A disabled switch ignores presses and shows less opacity.
 
 ## Related components
 
-- [`Checkbox`](?path=/docs/eds-2-0-beta-inputs-selection-controls-checkbox--docs) is for selecting one or more options from a set.
-- [`Radio`](?path=/docs/eds-2-0-beta-inputs-selection-controls-radio--docs) is for selecting a single option from a mutually exclusive set.
+- [`Checkbox`](?path=/docs/beta-inputs-selection-controls-checkbox--docs) is for selecting one or more options from a set.
+- [`Radio`](?path=/docs/beta-inputs-selection-controls-radio--docs) is for selecting a single option from a mutually exclusive set.

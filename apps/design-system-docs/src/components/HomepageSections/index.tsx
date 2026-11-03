@@ -9,6 +9,11 @@ import type { IconCardProps } from '@site/src/components/IconCard'
 import { CtaSection } from '@site/src/components/CtaSection'
 import { Icon } from '@site/src/components/Icon'
 import { githubUrl, storybookUrl } from '@site/src/data/siteLinks'
+import {
+  useShownDocsVersion,
+  useShownVersionDocPath,
+} from '../../utils/useShownVersionDocPath'
+import type { VersionedDocTarget } from '../../utils/useShownVersionDocPath'
 
 import Designer from '../../../static/img/illustrations/designer_illu.svg'
 import Devices from '../../../static/img/illustrations/devices_illu.svg'
@@ -44,6 +49,29 @@ const StorybookMark = () => (
   </svg>
 )
 
+/**
+ * The docs the home page links to. Each exists in every version, and each link
+ * opens the version the navbar dropdown shows: Latest by default, Beta once
+ * the reader picks it (#5667). `to` is the Latest path.
+ */
+const DOCS = {
+  design: {
+    docId: 'about/getting-started/design/getting_started_design',
+    to: 'docs/about/getting-started/design/getting_started_design',
+  },
+  develop: {
+    docId: 'about/getting-started/develop/getting_started_development',
+    to: 'docs/about/getting-started/develop/getting_started_development',
+  },
+  components: { docId: 'components/components', to: 'docs/components/' },
+  figma: {
+    docId: 'about/getting-started/design/figma',
+    to: 'docs/about/getting-started/design/figma',
+  },
+  support: { docId: 'support/support', to: 'docs/support' },
+  resources: { docId: 'resources/resources', to: 'docs/resources' },
+} satisfies Record<string, VersionedDocTarget>
+
 /* ======================================
  * 1. HERO + INTRO
  * ====================================== */
@@ -55,6 +83,7 @@ export function Hero(): ReactNode {
 
 /** The lead and the two entry points, which the display hero no longer carries. */
 export function Intro(): ReactNode {
+  const docPath = useShownVersionDocPath()
   return (
     <DocsSection
       title="Get started"
@@ -62,10 +91,7 @@ export function Intro(): ReactNode {
       tone="muted"
     >
       <div className="docs-entry-grid">
-        <Link
-          to="docs/Next/about/getting-started/design/getting_started_design"
-          className="docs-entry-card"
-        >
+        <Link to={docPath(DOCS.design)} className="docs-entry-card">
           <Designer
             className="docs-entry-card__illustration"
             aria-hidden="true"
@@ -79,10 +105,7 @@ export function Intro(): ReactNode {
           </div>
         </Link>
 
-        <Link
-          to="docs/Next/about/getting-started/develop/getting_started_development"
-          className="docs-entry-card"
-        >
+        <Link to={docPath(DOCS.develop)} className="docs-entry-card">
           <Devices
             className="docs-entry-card__illustration"
             aria-hidden="true"
@@ -104,32 +127,40 @@ export function Intro(): ReactNode {
  *  BROWSE BY CATEGORY
  * ====================================== */
 
-const CATEGORIES = [
-  {
-    icon: color_palette,
-    title: 'Foundations',
-    description:
-      'Typography scales, colour palettes, spacing tokens, and icon sets that define how Equinor products look and feel.',
-    to: '/foundation',
-  },
-  {
-    icon: widgets,
-    title: 'Components',
-    description:
-      'Ready-to-use UI elements like buttons, inputs, dialogs, and more — with matching Figma and React implementations.',
-    to: 'docs/Next/components/',
-    badge: { label: 'In progress', tone: 'accent' },
-  },
-] satisfies IconCardProps[]
+const FOUNDATIONS_CARD = {
+  icon: color_palette,
+  title: 'Foundations',
+  description:
+    'Typography scales, colour palettes, spacing tokens, and icon sets that define how Equinor products look and feel.',
+  to: '/foundation',
+} satisfies IconCardProps
+
+const COMPONENTS_CARD = {
+  icon: widgets,
+  title: 'Components',
+  description:
+    'Ready-to-use UI elements like buttons, inputs, dialogs, and more — with matching Figma and React implementations.',
+} satisfies IconCardProps
 
 export function DesignLanguage(): ReactNode {
+  const docPath = useShownVersionDocPath()
+  // "In progress" describes the Beta components, so the card for Latest goes
+  // without it.
+  const badge: IconCardProps['badge'] =
+    useShownDocsVersion().name === 'current'
+      ? { label: 'In progress', tone: 'accent' }
+      : undefined
+  const categories = [
+    FOUNDATIONS_CARD,
+    { ...COMPONENTS_CARD, to: docPath(DOCS.components), badge },
+  ]
   return (
     <DocsSection
       title="Browse by category"
       subtitle="Explore the building blocks of EDS — from foundational styles to ready-made UI components."
     >
       <IconCardGrid layout="row">
-        {CATEGORIES.map((category) => (
+        {categories.map((category) => (
           <IconCard key={category.title} {...category} />
         ))}
       </IconCardGrid>
@@ -142,6 +173,7 @@ export function DesignLanguage(): ReactNode {
  * ====================================== */
 
 export function Resources(): ReactNode {
+  const docPath = useShownVersionDocPath()
   return (
     <DocsSection
       title="Resources"
@@ -149,10 +181,7 @@ export function Resources(): ReactNode {
       tone="muted"
     >
       <div className="docs-resource-grid">
-        <Link
-          to="docs/Next/about/getting-started/design/figma"
-          className="docs-resource-tile"
-        >
+        <Link to={docPath(DOCS.figma)} className="docs-resource-tile">
           <span className="docs-resource-tile__icon">
             <FigmaMark />
           </span>
@@ -177,7 +206,7 @@ export function Resources(): ReactNode {
           </div>
         </Link>
 
-        <Link to="docs/Next/support" className="docs-resource-tile">
+        <Link to={docPath(DOCS.support)} className="docs-resource-tile">
           <span className="docs-resource-tile__icon" data-tone="plain">
             <Icon data={help} />
           </span>
@@ -191,7 +220,7 @@ export function Resources(): ReactNode {
         </Link>
       </div>
 
-      <Link to="docs/Next/resources" className="docs-resources-footnote">
+      <Link to={docPath(DOCS.resources)} className="docs-resources-footnote">
         See all resources
         <Icon data={arrow_forward} />
       </Link>

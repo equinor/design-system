@@ -5,8 +5,8 @@
  * changes page, and that no section describes a component that is gone.
  *
  * The page (packages/eds-core-react/stories/docs/BreakingChanges.mdx) exists
- * to spell out what an EDS 1.0 consumer meets in 2.0 (#5387). That difference
- * does not arrive marked breaking: a 2.0 component usually rewrites a 1.0
+ * to spell out what a 2.x consumer meets in 3.0.0 (#5387). That difference
+ * does not arrive marked breaking: a beta component usually rewrites a 2.x
  * predecessor, and it lands as a plain `feat: add <Component>`. Nothing in
  * /next is formally breaking until graduation.
  *
@@ -20,12 +20,12 @@
  *   1. Every component exported from the /next barrel has a `## <Name>`
  *      section.
  *   2. Every component section names a component the barrel still exports, or
- *      one of REMOVED_IN_2 below.
+ *      one of REMOVED_IN_3 below.
  *   3. Each section says something - a heading and a marker alone do not
  *      describe a migration.
  *
  * What it cannot check is whether a section is accurate or complete against
- * EDS 1.0. That stays a review job.
+ * 2.x. That stays a review job.
  *
  * Run by the build job in .github/workflows/checks.yaml, or by hand with
  * `pnpm run check:breaking-changes-coverage`.
@@ -37,16 +37,16 @@ const { join } = require('path')
 const ROOT = join(__dirname, '..')
 const BARREL = 'packages/eds-core-react/src/components/next/index.ts'
 const PAGE = 'packages/eds-core-react/stories/docs/BreakingChanges.mdx'
-const PAGE_TITLE = 'EDS 2.0 (beta) / Breaking changes'
+const PAGE_TITLE = 'Beta / Breaking changes'
 
 // Exported from the barrel but not a component a consumer migrates to: Slot is
-// the internal `asChild` utility (ADR-0005), with no EDS 1.0 predecessor.
+// the internal `asChild` utility (ADR-0005), with no 2.x predecessor.
 const NOT_A_COMPONENT = new Set(['Slot'])
 
 // Sections kept without a matching export, because the migration is away from
-// the component rather than to a successor. Typography is removed in 2.0 in
+// the component rather than to a successor. Typography is removed in 3.0.0 in
 // favour of the element defaults and the type scale (ADR-0018).
-const REMOVED_IN_2 = new Set(['Typography'])
+const REMOVED_IN_3 = new Set(['Typography'])
 
 // `##` headings that structure the page rather than describe a component.
 const STRUCTURAL = new Set(['Overview', 'Known issues', 'Under review'])
@@ -117,7 +117,7 @@ const main = () => {
   for (const component of components) {
     if (!names.has(component)) {
       problems.push(
-        `- \`${component}\` is exported from \`${BARREL}\` but has no \`## ${component}\` section. If it rewrites a 1.0 component, name it and say what changed: props, composition, markup and behaviour. If it has no 1.0 counterpart, follow \`## Badge\` and \`## Link\` on the page. If it splits a 1.0 component, name that component and the usage this half comes from.`,
+        `- \`${component}\` is exported from \`${BARREL}\` but has no \`## ${component}\` section. If it rewrites a 2.x component, name it and say what changed: props, composition, markup and behaviour. If it has no 2.x counterpart, follow \`## Badge\` and \`## Link\` on the page. If it splits a 2.x component, name that component and the usage this half comes from.`,
       )
     }
   }
@@ -125,11 +125,11 @@ const main = () => {
   for (const section of found) {
     if (
       !components.includes(section.name) &&
-      !REMOVED_IN_2.has(section.name) &&
+      !REMOVED_IN_3.has(section.name) &&
       !NOT_A_COMPONENT.has(section.name)
     ) {
       problems.push(
-        `- \`## ${section.name}\` has no matching export in \`${BARREL}\`. Rename the section if the component was renamed, remove it if the component is gone, or add the name to REMOVED_IN_2 in this script if 2.0 drops it on purpose.`,
+        `- \`## ${section.name}\` has no matching export in \`${BARREL}\`. Rename the section if the component was renamed, remove it if the component is gone, or add the name to REMOVED_IN_3 in this script if 3.0.0 drops it on purpose.`,
       )
     } else if (isEmpty(section.body)) {
       problems.push(
@@ -150,7 +150,7 @@ const main = () => {
     '',
     ...problems,
     '',
-    `The page is the Storybook page "${PAGE_TITLE}" (\`${PAGE}\`). It is what consumers read to tell an intended change from a bug, and a component with no section reads as an oversight. A new \`/next\` component needs its section in the same pull request that adds it - that is when the difference from EDS 1.0 is known.`,
+    `The page is the Storybook page "${PAGE_TITLE}" (\`${PAGE}\`). It is what consumers read to tell an intended change from a bug, and a component with no section reads as an oversight. A new \`/next\` component needs its section in the same pull request that adds it - that is when the difference from 2.x is known.`,
   ])
   console.log(
     '::error::The breaking changes page does not match what /next publishes',

@@ -1,0 +1,136 @@
+/* Demo styles for the Spacing stories. Every space and radius below reads a
+   beta token, so the demos follow data-density the way consumer CSS does.
+   The fixed rem sizes are demo dimensions that no token covers.
+
+   The rules are not in a layer, so inside .spacing-story they win over
+   component styles. The p, figure and code rules are meant for the demo's
+   own markup. The Button in the Densities story renders none of those
+   elements; a component that does needs a narrower selector here. */
+
+.spacing-story {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+
+  & p,
+  & figure {
+    margin: 0;
+  }
+
+  & code {
+    font-family: monospace;
+    font-size: var(--eds-typography-label-sm-font-size);
+  }
+
+  & .value {
+    font-variant-numeric: tabular-nums;
+    color: var(--eds-text-secondary);
+  }
+
+  /* Steps: one row per step, with the bar as wide as the step */
+  & .steps {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    gap: var(--eds-spacing-xs) var(--eds-spacing-md);
+    align-items: center;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  & .step {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+  }
+
+  & .bar {
+    block-size: var(--eds-spacing-sm);
+    background-color: var(--eds-background-non-interactive-accent-emphasis);
+  }
+
+  /* Densities: the same card under three density attributes */
+  &.densities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-spacing-xl);
+    align-items: flex-start;
+  }
+
+  & .density {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-xs);
+    max-inline-size: 18rem;
+  }
+
+  /* The card used in the density and CSS examples */
+  & .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-sm);
+
+    max-inline-size: 28rem;
+    padding: var(--eds-spacing-md);
+    border: 1px solid var(--eds-border-non-interactive-neutral-default);
+    border-radius: var(--eds-corner-radius-rounded);
+
+    background-color: var(--eds-background-surface);
+  }
+
+  & .title {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-md-font-size);
+    line-height: var(--eds-typography-header-md-line-height);
+  }
+
+  & .text {
+    color: var(--eds-text-secondary);
+  }
+
+  /* Direction is the property: a wider inline padding than block padding */
+  & .notice {
+    padding-block: var(--eds-spacing-xs);
+    padding-inline: var(--eds-spacing-sm);
+    border-radius: var(--eds-corner-radius-rounded);
+
+    color: var(--eds-text-on-muted-info);
+
+    background-color: var(--eds-background-non-interactive-info-muted);
+  }
+
+  & .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-spacing-sm);
+  }
+
+  /* Corner radius */
+  &.radii {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--eds-spacing-xl);
+  }
+
+  & .radius {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-xs);
+  }
+
+  & .radius figcaption {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .shape {
+    inline-size: 6rem;
+    block-size: 3rem;
+    border: 1px solid var(--eds-border-non-interactive-accent-default);
+    background-color: var(--eds-background-non-interactive-accent-muted);
+  }
+}

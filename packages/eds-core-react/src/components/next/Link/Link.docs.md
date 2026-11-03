@@ -28,4 +28,4 @@ Link takes the user to another page or location, either inside a sentence or on 
 
 ## Related components
 
-- [`Button`](?path=/docs/eds-2-0-beta-inputs-button--docs) is for actions such as saving a form. Use Link to move to another page.
+- [`Button`](?path=/docs/beta-inputs-button--docs) is for actions such as saving a form. Use Link to move to another page.

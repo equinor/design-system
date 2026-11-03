@@ -9,7 +9,7 @@ import page from './Button.docs.mdx'
 type StoryArgs = React.ComponentProps<typeof Button>
 
 const meta: Meta<StoryArgs> = {
-  title: 'EDS 2.0 (beta)/Inputs/Button',
+  title: 'Beta/Inputs/Button',
   component: Button,
   tags: ['beta'],
   parameters: {

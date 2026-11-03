@@ -17,6 +17,7 @@ const {
 const { readSidecar } = require('./sidecar')
 const { extractProps, extractBaseTypes } = require('./props')
 const { extractStories } = require('./stories')
+const { assertStorybookLinks } = require('./storybook')
 const { renderWeb, renderMobile } = require('./render')
 
 // En and em dashes are not allowed in the docs. Better to stop here than to
@@ -103,6 +104,7 @@ function buildPages(project, component) {
   }
 
   pages.forEach(assertNoDashes)
+  pages.forEach((page) => assertStorybookLinks(page))
   return pages
 }
 

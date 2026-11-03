@@ -282,7 +282,9 @@ const padding = comfortableSpacing.SPACING_INLINE_MD
 const borderRadius = comfortableSpacing.SPACING_BORDER_RADIUS_ROUNDED
 ```
 
-#### Typography (non-CSS targets)
+#### Typography (non-CSS targets, 2.x)
+
+This is the 2.x TypeScript output. It is built into the legacy `build/` folder together with `css/variables` and is removed with it before 3.0.0. For the beta output, see [TypeScript](#typescript) under the beta section.
 
 Typography is composed at runtime from five orthogonal axes. The CSS bundle resolves them via `data-*` attributes; non-CSS consumers (React Native, SSR, design tooling) import the family-keyed matrix directly:
 
@@ -362,9 +364,9 @@ The typography system requires two font families: **Equinor** (headings) and **I
 <link rel="stylesheet" href="https://cdn.eds.equinor.com/font/eds-uprights-vf.css" />
 ```
 
-> **Note:** The older `equinor-font.css` only includes the Equinor font. Components using `data-font-family="ui"` (Button, TextField, Input, etc.) will fall back to a generic sans-serif if Inter is not loaded.
+> **Note:** The older `equinor-font.css` only includes the Equinor font. Text set in the UI family, through `--eds-font-family-ui` in the beta bundle or `data-font-family="ui"` in 2.x, falls back to a generic sans-serif if Inter is not loaded.
 
-### Typography variables that adapt to data-attributes
+### Typography variables that adapt to data-attributes (2.x)
   * Font family setup (UI and Header fonts)
   * Font size data attributes (`[data-font-size='xs']`, `[data-font-size='sm']`, etc.)
   * Line height data attributes (`[data-line-height='default']`, `[data-line-height='squished']`)

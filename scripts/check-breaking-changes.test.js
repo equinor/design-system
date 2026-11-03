@@ -322,7 +322,7 @@ describe('breaking changes page coverage', () => {
       '',
       '## Button',
       '',
-      'EDS 1.0: `Button`.',
+      '2.x: `Button`.',
       '',
       '## Chip',
       '',

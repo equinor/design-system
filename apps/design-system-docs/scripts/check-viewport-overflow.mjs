@@ -15,6 +15,7 @@ const pages = [
   '/foundation',
   '/getting-started',
   '/about',
+  '/roadmap',
   '/docs/Next/components',
   '/docs/Next/components/inputs/button',
   '/docs/Next/foundation/accessibility',

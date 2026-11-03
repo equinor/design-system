@@ -400,6 +400,7 @@ export const semantic = {
   },
   fontFamily: {
     header: 'Equinor',
+    mono: 'CommitMono',
     ui: 'Inter',
   },
   fontWeight: {

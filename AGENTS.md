@@ -232,7 +232,7 @@ Set `font-family`, `font-size`, and `line-height` directly in the component CSS 
 
 Token shape: `--eds-typography-{header,label,body}-{size}-{font-size,line-height}`, with one line height per size. Use `label` for single-line functional text (buttons, form labels, table cells), `body` for text that wraps and `header` for titles (ADR-0027). The family is `--eds-font-family-ui` or `--eds-font-family-header`, and the weight is `--eds-font-weight-{normal,medium,bold}`, never per size (ADR-0029). Text is not trimmed with `text-box` (ADR-0029).
 
-The `data-font-*` runtime-switching pattern still exists for `elements.css` defaults and ad-hoc consumer markup, but inside a component's own CSS the size and role are part of the design and should be expressed as tokens. See [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) for both paths.
+The `data-font-*` runtime-switching pattern comes from the 2.x bundle and is deprecated. Unmigrated `/next` components still set it on their own elements; when you migrate one, remove the attributes and express the size and role as tokens in the component CSS. See [`packages/eds-tokens/instructions/typography.md`](./packages/eds-tokens/instructions/typography.md) for both paths.
 
 #### Pseudo-private custom properties
 

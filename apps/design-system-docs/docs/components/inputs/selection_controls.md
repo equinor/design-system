@@ -20,7 +20,7 @@ description: 'Selection controls allow users to select options, make decisions, 
   </div>
 </div>
 
-View Storybook: [Checkbox](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-checkbox--introduction) · [Radio](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-radio--introduction) · [Switch](https://storybook.eds.equinor.com/?path=/story/eds-2-0-beta-inputs-selection-controls-switch--introduction)
+View Storybook: [Checkbox](https://storybook.eds.equinor.com/?path=/story/beta-inputs-selection-controls-checkbox--introduction) · [Radio](https://storybook.eds.equinor.com/?path=/story/beta-inputs-selection-controls-radio--introduction) · [Switch](https://storybook.eds.equinor.com/?path=/story/beta-inputs-selection-controls-switch--introduction)
 
 ## When to Use
 
