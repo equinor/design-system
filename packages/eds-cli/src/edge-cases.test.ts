@@ -128,6 +128,50 @@ describe('eds edge cases', () => {
       )
     })
 
+    it('shows a hook with its component and finds the component by it', () => {
+      const data = dataWith({
+        hooks: [
+          {
+            name: 'useButtonIds',
+            description: 'IDs for a button.',
+            importLine:
+              "import { useButtonIds } from '@equinor/eds-core-react/next'",
+            signature: 'useButtonIds(id?: string): ButtonIds',
+            returns: [
+              {
+                name: 'buttonId',
+                optional: false,
+                type: 'string',
+                description: 'ID for the button',
+              },
+            ],
+          },
+        ],
+      })
+      const { stdout } = run([
+        'show',
+        'useButtonIds',
+        '--section',
+        'props',
+        '--data',
+        data,
+      ])
+      expect(stdout).toContain(
+        "\nHook useButtonIds(id?: string): ButtonIds\n  IDs for a button.\n  import { useButtonIds } from '@equinor/eds-core-react/next'\n  buttonId: string\n    ID for the button\n",
+      )
+      expect(run(['search', 'usebuttonids', '--data', data]).stdout).toMatch(
+        /^Button /,
+      )
+    })
+
+    it('marks a utility in the list and in show', () => {
+      const data = dataWith({ kind: 'utility' })
+      expect(run(['list', '--data', data]).stdout).toContain('(utility)')
+      expect(run(['show', 'Button', '--data', data]).stdout).toContain(
+        'A utility for building components, not a UI component.',
+      )
+    })
+
     it('lists sizes in the order of the scale', () => {
       const sheet = parseTokens(`[data-density] {
   --eds-spacing-2xl: 32px;
@@ -194,6 +238,7 @@ describe('eds edge cases', () => {
         'baseTypes',
         'subComponents',
       ])
+      // typeParameters and hooks are left out when the data has none.
     })
 
     it('keeps the props of sub-components', () => {

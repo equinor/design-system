@@ -45,7 +45,8 @@ function componentLines(components: Component[]): string[] {
   const width = Math.max(...components.map((c) => c.name.length))
   return components.map((c) => {
     const status = c.status === 'deprecated' ? ' (deprecated)' : ''
-    return `${c.name.padEnd(width)}  ${firstSentence(c.description)}${status}`.trimEnd()
+    const kind = c.kind === 'utility' ? ' (utility)' : ''
+    return `${c.name.padEnd(width)}  ${firstSentence(c.description)}${kind}${status}`.trimEnd()
   })
 }
 
@@ -72,7 +73,10 @@ export function formatSearch(
   }
   const lines = matches.map((c) => {
     const counts = `(${plural(c.props.length, 'prop')}, ${plural(c.examples.length, 'example')})`
-    const status = c.status === 'deprecated' ? ' deprecated' : ''
+    const status = [
+      c.kind === 'utility' ? ' utility' : '',
+      c.status === 'deprecated' ? ' deprecated' : '',
+    ].join('')
     const description = firstSentence(c.description)
     return [
       `${c.name} ${counts}${status}`,
@@ -99,6 +103,14 @@ function formatProps(component: Component): string[] {
   ]
   for (const sub of component.subComponents) {
     lines.push('', `${sub.name} props`, ...formatPropList(sub))
+  }
+  for (const hook of component.hooks ?? []) {
+    lines.push('', `Hook ${hook.signature}`, `  ${hook.description}`)
+    lines.push(`  ${hook.importLine}`)
+    for (const field of hook.returns) {
+      lines.push(`  ${field.name}: ${field.type}`)
+      if (field.description) lines.push(`    ${field.description}`)
+    }
   }
   return lines
 }
@@ -203,6 +215,9 @@ export function formatComponent(
   if (!section) {
     const header = [component.name]
     if (component.status === 'deprecated') header.push('Deprecated.')
+    if (component.kind === 'utility') {
+      header.push('A utility for building components, not a UI component.')
+    }
     if (component.description) header.push(component.description)
     header.push('', component.importLine)
     if (component.hasAsChild) {

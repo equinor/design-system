@@ -30,6 +30,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const { Node } = require('ts-morph')
 const {
   discoverPublicComponents,
   extractComponentData,
@@ -128,6 +129,73 @@ function webBaseTypes(declaration) {
   }))
 }
 
+// Exports that are not components to render, so the CLI can say so instead of
+// listing them next to Button and Field.
+const UTILITIES = new Set(['Slot'])
+
+// The first paragraph of a component's README, for a utility without a sidecar
+// or JSDoc (Slot).
+function readmeDescription(dir) {
+  const file = path.join(dir, 'README.md')
+  if (!fs.existsSync(file)) return undefined
+  return fs
+    .readFileSync(file, 'utf8')
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .find((paragraph) => paragraph && !paragraph.startsWith('#'))
+}
+
+// Hooks exported next to a component, such as `export { Field, useFieldIds }`,
+// keyed by that component. The CLI shows them with it, because the hook is used
+// with that component's parts.
+function exportedHooks(project) {
+  const barrel = project.addSourceFileAtPath(
+    path.join(rootDir, web.componentsRoot, 'index.ts'),
+  )
+  const hooks = new Map()
+  for (const declaration of barrel.getExportDeclarations()) {
+    const names = declaration.getNamedExports().map((e) => e.getName())
+    const owner = names.find((n) => /^[A-Z]/.test(n))
+    const found = names.filter((n) => /^use[A-Z]/.test(n))
+    if (owner && found.length) hooks.set(owner, found)
+  }
+  return hooks
+}
+
+const firstParagraph = (text) =>
+  text
+    .trim()
+    .split(/\n\s*\n/)[0]
+    .replace(/\s+/g, ' ')
+
+// A hook's signature, its description and the fields of what it returns, read
+// from the exported function in the component's folder.
+function readHook(project, dir, name) {
+  const fn = project
+    .getSourceFiles(`${dir}/**/*.{ts,tsx}`)
+    .map((sf) => sf.getFunction(name))
+    .find((f) => f?.isExported())
+  if (!fn)
+    fail(
+      `${name}: no exported function ${name} in ${path.relative(rootDir, dir)}`,
+    )
+  const parameters = fn
+    .getParameters()
+    .map((p) => p.getText())
+    .join(', ')
+  const returnType = fn.getReturnTypeNode()
+  const returnDeclaration = Node.isTypeReference(returnType)
+    ? returnType.getTypeName().getSymbol()?.getDeclarations()[0]
+    : undefined
+  return {
+    name,
+    description: firstParagraph(fn.getJsDocs()[0]?.getDescription() ?? ''),
+    importLine: web.importLine(name),
+    signature: `${name}(${parameters})${returnType ? `: ${returnType.getText()}` : ''}`,
+    returns: returnDeclaration ? extractProps(returnDeclaration) : [],
+  }
+}
+
 // The type parameters of a generic props type, such as `T = string` for
 // Autocomplete, so the agent knows that the props which name T take its own type.
 const typeParameters = (declaration) =>
@@ -179,7 +247,7 @@ function readSubComponents(project, dir, name, found) {
   })
 }
 
-function buildComponent(project, entry) {
+function buildComponent(project, entry, hooks) {
   const { name, dir } = entry
   const index = extractComponentData(entry, project)
   const { summary, guidance, links } = readGuidance(dir, name)
@@ -189,7 +257,8 @@ function buildComponent(project, entry) {
 
   return {
     name,
-    description: summary ?? index.description ?? null,
+    description: summary ?? index.description ?? readmeDescription(dir) ?? null,
+    kind: UTILITIES.has(name) ? 'utility' : 'component',
     status: index.status,
     importLine: web.importLine(name),
     hasAsChild: props.some((prop) => prop.name === 'asChild'),
@@ -197,6 +266,7 @@ function buildComponent(project, entry) {
     typeParameters: typeParameters(declaration),
     baseTypes: webBaseTypes(declaration),
     subComponents: readSubComponents(project, dir, name, index.subComponents),
+    hooks: (hooks.get(name) ?? []).map((hook) => readHook(project, dir, hook)),
     examples: readExamples(project, dir, name),
     guidance,
     links: {
@@ -213,8 +283,9 @@ function buildAgentData() {
   // (TextField's from Input) do not depend on the order of the barrel.
   const project = createProject()
   assertReactResolves(project)
+  const hooks = exportedHooks(project)
   const components = discoverPublicComponents(project)
-    .map((entry) => buildComponent(project, entry))
+    .map((entry) => buildComponent(project, entry, hooks))
     .sort((a, b) => a.name.localeCompare(b.name))
 
   return {

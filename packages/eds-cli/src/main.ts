@@ -98,8 +98,8 @@ function pickSection(component: Component, section?: Section) {
   if (!section) return component
   const { name } = component
   if (section === 'props') {
-    const { props, baseTypes, subComponents } = component
-    return { name, props, baseTypes, subComponents }
+    const { props, typeParameters, baseTypes, subComponents, hooks } = component
+    return { name, props, typeParameters, baseTypes, subComponents, hooks }
   }
   if (section === 'examples') return { name, examples: component.examples }
   if (section === 'links') return { name, links: component.links }

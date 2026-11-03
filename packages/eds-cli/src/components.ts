@@ -103,7 +103,12 @@ export function findComponents(
  */
 export function findComponent(data: ComponentData, name: string): Component {
   const wanted = name.toLowerCase()
-  const component = data.components.find((c) => c.name.toLowerCase() === wanted)
+  const component = data.components.find(
+    (c) =>
+      c.name.toLowerCase() === wanted ||
+      // A hook is shown with the component it belongs to.
+      c.hooks?.some((hook) => hook.name.toLowerCase() === wanted),
+  )
   if (component) return component
 
   const similar = similarNames(data, name)
@@ -133,6 +138,7 @@ export function searchComponents(
         sub.name,
         ...sub.props.map((p) => p.name),
       ]),
+      ...(c.hooks ?? []).map((hook) => hook.name),
     ]
       .join(' ')
       .toLowerCase()

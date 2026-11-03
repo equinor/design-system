@@ -153,6 +153,23 @@ describe('agent data', () => {
     )
   })
 
+  test('lists a hook with the component it is exported with', () => {
+    const [hook] = byName('Field').hooks
+    assert.strictEqual(hook.name, 'useFieldIds')
+    assert.match(hook.signature, /^useFieldIds\(.*\): FieldIds$/)
+    assert.match(hook.importLine, /import \{ useFieldIds \} from/)
+    assert.ok(hook.description)
+    assert.ok(hook.returns.some((field) => field.name === 'inputId'))
+    assert.deepStrictEqual(byName('Button').hooks, [])
+  })
+
+  test('marks Slot as a utility and describes it from its README', () => {
+    const slot = byName('Slot')
+    assert.strictEqual(slot.kind, 'utility')
+    assert.match(slot.description, /asChild/)
+    assert.strictEqual(byName('Button').kind, 'component')
+  })
+
   test('leaves out Omit keys the base type does not have', () => {
     const [base] = byName('Search').baseTypes
     assert.ok(!base.omitted.includes('startAdornment'), base.omitted)
