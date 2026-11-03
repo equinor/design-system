@@ -29,10 +29,22 @@ describe('agent data', () => {
     assert.match(data.installLine, /@equinor\/eds-core-react@beta/)
   })
 
+  // Read from the barrel as text rather than through discoverPublicComponents,
+  // which built the data, so a component that the discovery misses fails here.
   test('has one entry for every exported component', () => {
-    const exported = discoverPublicComponents()
-      .map((c) => c.name)
+    const barrel = fs.readFileSync(
+      path.join(
+        __dirname,
+        '../packages/eds-core-react/src/components/next/index.ts',
+      ),
+      'utf8',
+    )
+    const exported = [...barrel.matchAll(/^export \{([^}]+)\} from/gm)]
+      .flatMap((match) => match[1].split(','))
+      .map((name) => name.trim())
+      .filter((name) => /^[A-Z]/.test(name))
       .sort()
+    assert.ok(exported.length > 20, 'no exports read from the barrel')
     assert.deepStrictEqual(data.components.map((c) => c.name).sort(), exported)
   })
 
