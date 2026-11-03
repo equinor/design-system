@@ -577,7 +577,7 @@
 }
 :root {
   --eds-family-header: var(--eds-primitives-font-family-equinor), sans-serif;
-  --eds-family-mono: var(--eds-primitives-font-family-commitmono), sans-serif;
+  --eds-family-mono: var(--eds-primitives-font-family-commitmono), monospace;
   --eds-family-ui: var(--eds-primitives-font-family-inter), sans-serif;
   --eds-weight-bold: var(--eds-primitives-weight-scale-bold);
   --eds-weight-medium: var(--eds-primitives-weight-scale-medium);

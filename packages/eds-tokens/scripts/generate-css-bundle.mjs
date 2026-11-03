@@ -124,14 +124,19 @@ const LAYER_ORDER =
 const LAYER_OPEN = '@layer eds-tokens {\n'
 const LAYER_CLOSE = '}\n'
 
-// The generic family appended to the font-family tokens, and the names
-// that must be there for that to have happened (#5701). The prefix is
-// matched rather than the two names themselves, so a family added
-// upstream is covered on its own; the required list turns a rename or a
-// move into a failed run rather than a bundle that quietly ships
-// without a fallback.
-const FONT_FALLBACK = 'sans-serif'
-const REQUIRED_FAMILY_NAMES = ['--eds-family-header', '--eds-family-ui']
+// The generic family appended to each font-family token (#5701), chosen
+// per family: a monospace face must fall back to monospace, or figures
+// in a numeric column stop lining up whenever the font does not load
+// (#5800). Every name here must be declared, so a rename or a move
+// fails the run rather than shipping without a fallback; a family that
+// is declared but not listed fails it too, so the next one added
+// upstream cannot silently get the wrong generic family.
+const FONT_FALLBACKS = {
+  '--eds-family-header': 'sans-serif',
+  '--eds-family-ui': 'sans-serif',
+  '--eds-family-mono': 'monospace',
+}
+const REQUIRED_FAMILY_NAMES = Object.keys(FONT_FALLBACKS)
 const FAMILY_DECLARATION = /(--eds-family-[\w-]+):\s*([^;]+);/g
 
 // The CSS generic families, so a stack that already ends in one, should
@@ -214,9 +219,17 @@ const withFallback = contents.map(([, css]) =>
     const stack = value.trim()
     return GENERIC_FAMILIES.has(lastFamily(stack))
       ? declaration
-      : `${name}: ${stack}, ${FONT_FALLBACK};`
+      : `${name}: ${stack}, ${FONT_FALLBACKS[name]};`
   }),
 )
+
+const unknownFamilies = [...seenFamilies].filter(
+  (name) => !Object.hasOwn(FONT_FALLBACKS, name),
+)
+if (unknownFamilies.length > 0)
+  fail(
+    `no fallback for ${unknownFamilies.join(', ')}. Add the family to FONT_FALLBACKS in scripts/generate-css-bundle.mjs with the generic family it should fall back to (sans-serif, serif or monospace). See #5800`,
+  )
 
 const missingFamilies = REQUIRED_FAMILY_NAMES.filter(
   (name) => !seenFamilies.has(name),
