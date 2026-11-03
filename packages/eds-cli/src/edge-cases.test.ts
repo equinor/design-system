@@ -169,6 +169,9 @@ describe('eds edge cases', () => {
       expect(run(['search', 'usebuttonids', '--data', data]).stdout).toMatch(
         /^Button /,
       )
+      expect(run(['show', 'useButtonId', '--data', data]).stderr).toBe(
+        'eds: No component called useButtonId. Did you mean Button, useButtonIds?\n',
+      )
     })
 
     it('marks a utility in the list and in show', () => {

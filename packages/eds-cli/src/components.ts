@@ -155,23 +155,23 @@ export function searchComponents(
 }
 
 /**
- * Component names close to `name`: containing it, contained in it, or within
- * two typos of it.
+ * Component and hook names close to `name`: containing it, contained in it, or
+ * within two typos of it. `eds show` finds a hook too, through its component.
  */
 export function similarNames(data: ComponentData, name: string): string[] {
   const wanted = name.toLowerCase()
   // One or two letters are close to everything.
   if (wanted.length < 3) return []
   return data.components
-    .filter((c) => {
-      const candidate = c.name.toLowerCase()
+    .flatMap((c) => [c.name, ...(c.hooks ?? []).map((hook) => hook.name)])
+    .filter((name) => {
+      const candidate = name.toLowerCase()
       return (
         candidate.includes(wanted) ||
         wanted.includes(candidate) ||
         distance(candidate, wanted) <= 2
       )
     })
-    .map((c) => c.name)
 }
 
 /**
