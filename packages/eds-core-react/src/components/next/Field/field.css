@@ -69,7 +69,9 @@
 
     /* Figma places the indicator at the end of the label row, with no gap,
        centred on the label line. The indicator comes after the label text,
-       so on a label that wraps it sits at the end of the last line. */
+       so on a label that wraps it sits at the end of the last line. Where
+       the label hugs its text, as in Checkbox, Radio and Switch, the Field
+       gap keeps the indicator off the text. */
     & > .label > .indicator,
     & > * > .label > .indicator {
       float: inline-end;
@@ -81,6 +83,7 @@
           ) /
           2
       );
+      margin-inline-start: var(--_gap);
 
       font-size: var(--eds-typography-label-xs-font-size);
       line-height: var(--eds-typography-label-xs-line-height);
