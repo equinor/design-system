@@ -43,12 +43,14 @@
  * diffing against a shifted file, for no effect on the CSS.
  *
  * The second addition: every `--eds-family-*` declaration gets a
- * generic `sans-serif` appended (#5701). The export names a single
- * typeface, `Inter` for UI and `Equinor` for headers, so an app that
- * does not load the font falls back to the browser default, which is a
- * serif in Chrome, Firefox, Safari and Edge. Every label and body
- * style, which is most of an interface, then renders in Times. Design
- * agreed on `sans-serif`.
+ * generic family appended (#5701). The export names a single typeface,
+ * `Inter` for UI and `Equinor` for headers, so an app that does not
+ * load the font falls back to the browser default, which is a serif in
+ * Chrome, Firefox, Safari and Edge. Every label and body style, which
+ * is most of an interface, then renders in Times. Design agreed on
+ * `sans-serif` for those two; `CommitMono` for mono gets `monospace`, so
+ * figures in a numeric column keep lining up (#5800). The generic
+ * family is set per name in FONT_FALLBACKS below.
  *
  * It happens here, in memory, and not in the committed export files,
  * because generate-ts-tokens.mjs takes its values from the same CSS
