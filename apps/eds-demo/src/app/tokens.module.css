@@ -15,7 +15,7 @@
     becomes the CSS name with slashes turned into dashes:
     spacing/xs is --eds-spacing-xs.
   - "Not designed" means there is no beta design for that part yet (top bar,
-    side navigation, table, page layout). Those values are the demo's own
+    side navigation, page header, page layout). Those values are the demo's own
     choice from the token scale.
 
   The buttons and icons are the EDS Button and Icon from
@@ -331,8 +331,14 @@
   gap: var(--eds-spacing-sm);
 }
 
-/* Not designed: table. The cells hold the Checkbox and Badge components
-   below, which are from Figma. */
+/* Figma (WIP): the table on the "↪ Cell" page of the EDS Core Components
+   branch. Header [EDS] and Header Checkbox [EDS] in the header row; Checkbox
+   Cell, Text Cell and Badge Cell [EDS] in the body, composed as the example
+   tables on that page are. The container has a 1px border and clips the
+   cells to its corners. The lines
+   inside the table are 0.5px, as Figma draws them. Figma gives the
+   container a plain white fill with no variable; the surface token is the
+   one for that job. */
 
 .table-card {
   background-color: var(--eds-background-surface);
@@ -340,102 +346,120 @@
   border-radius: var(--eds-corner-radius-rounded);
 }
 
-.th {
-  padding-block: var(--eds-spacing-xs);
-  padding-inline: var(--eds-spacing-md);
+/* Header [EDS], Level Header: 6px padding, a 0.5px line at the bottom, and
+   0.5px dividers on both sides that stop 8px from the top and bottom. The
+   dividers are drawn with a background token, as in Figma. */
+.header,
+.header-checkbox {
+  padding: var(--eds-spacing-2xs);
+  background-color: var(--eds-background-interactive-neutral-muted-default);
+  box-shadow: inset 0 -0.5px 0
+    var(--eds-border-interactive-neutral-muted-default);
+}
 
+.header {
   font-family: var(--eds-font-family-ui);
   font-size: var(--eds-typography-label-md-font-size);
   font-weight: var(--eds-font-weight-medium);
   line-height: var(--eds-typography-label-md-line-height);
-  color: var(--eds-text-secondary);
+  color: var(--eds-text-primary);
 
-  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-default);
+  &::before,
+  &::after {
+    inset-block: var(--eds-spacing-xs);
+    inline-size: 0.5px;
+    background-color: var(--eds-background-non-interactive-neutral-default);
+  }
 }
 
-/* Selected rows use the neutral selected fill with text.primary. Secondary
-   text falls below 4.5:1 on the selected fills, so the email in a selected
-   row switches to text.primary. */
-.row {
+/* The body cells share the state slots. At rest a cell has no fill and a
+   0.5px line at the bottom. */
+.text-cell,
+.checkbox-cell,
+.badge-cell {
   --_bg-color: transparent;
-  --_supporting-text: var(--eds-text-secondary);
+  --_line: var(--eds-border-non-interactive-neutral-muted);
+  --_lines: inset 0 -0.5px 0 var(--_line);
 
   background-color: var(--_bg-color);
+  box-shadow: var(--_lines);
   transition: background-color var(--_transition-duration) ease-in-out;
-
-  &:hover {
-    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
-  }
-
-  &[data-selected] {
-    --_bg-color: var(--eds-background-interactive-neutral-selected-default);
-    --_supporting-text: var(--eds-text-primary);
-  }
-
-  &[data-selected]:hover {
-    --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
-  }
 }
 
-.td {
-  padding-block: var(--eds-spacing-sm);
-  padding-inline: var(--eds-spacing-md);
+/* Text Cell: 32px, 4px and 6px padding. */
+.text-cell {
+  padding-block: var(--eds-spacing-3xs);
+  padding-inline: var(--eds-spacing-2xs);
 
   font-family: var(--eds-font-family-ui);
   font-size: var(--eds-typography-label-md-font-size);
   font-weight: var(--eds-font-weight-normal);
   line-height: var(--eds-typography-label-md-line-height);
   color: var(--eds-text-primary);
-
-  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
 }
 
-/* The checkbox brings its own 8px padding, so the cell keeps only the rest:
-   the icon then lines up with the text in the other columns. */
-.select-cell {
-  padding-block: 0;
-  padding-inline: var(--eds-spacing-xs);
-}
-
-.person-name {
-  font-weight: var(--eds-font-weight-medium);
-}
-
-.person-email {
-  font-size: var(--eds-typography-label-sm-font-size);
-  line-height: var(--eds-typography-label-sm-line-height);
-  color: var(--_supporting-text);
-}
-
-/* Figma: Checkbox [EDS Beta], No Label. 36px: 8px padding around a 20px
-   icon. The box is the EDS checkbox icon in the accent icon colour. Hover
-   and focus add the accent muted fill; unchecked, the icon steps to its
-   hover colour. Focus adds the ring 1px outside. */
-.checkbox {
-  --_bg-color: transparent;
-  --_icon-color: var(--eds-icon-interactive-accent-default);
-
-  padding: var(--eds-spacing-xs);
-
-  color: var(--_icon-color);
-  background-color: var(--_bg-color);
-  border-radius: var(--eds-corner-radius-rounded);
-
-  &:is(:hover, :has(:focus-visible)) {
-    --_bg-color: var(--eds-background-interactive-accent-muted-hover);
-    --_icon-color: var(--eds-icon-interactive-accent-hover);
-  }
-
-  &[data-checked]:is(:hover, :has(:focus-visible)) {
-    --_icon-color: var(--eds-icon-interactive-accent-default);
-  }
+/* Checkbox Cell: 32px, 4px padding around the 24px icon. Focus is the
+   hover fill and a 2px focus line inside the cell. */
+.checkbox-cell {
+  padding: var(--eds-spacing-3xs);
 
   &:has(:focus-visible) {
-    outline: 1px solid var(--eds-border-interactive-focus);
-    outline-offset: 1px;
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+    --_lines: inset 0 0 0 2px var(--eds-border-interactive-focus);
   }
 }
 
+/* Badge Cell: 4px padding, and a 0.5px line at the top as well as the
+   bottom. */
+.badge-cell {
+  --_lines: inset 0 0.5px 0 var(--_line), inset 0 -0.5px 0 var(--_line);
+
+  padding: var(--eds-spacing-3xs);
+}
+
+/* Row selection. The table selects whole rows, so the row reacts to the
+   pointer as one: hover and press fill every cell in the row. A selected
+   row has the selected fill in every cell and keeps the 0.5px line at the
+   bottom, as the example tables draw it. The cells' own hover, press and
+   Selected states (the selected one with a 2px accent line inside the cell)
+   are for tables that select single cells. */
+.row:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+}
+
+.row:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+}
+
+.row[data-selected] > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-default);
+}
+
+.row[data-selected]:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+}
+
+.row[data-selected]:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-pressed);
+}
+
+.row[data-selected] > .checkbox-cell:has(:focus-visible) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+  --_lines: inset 0 0 0 2px var(--eds-border-interactive-focus);
+}
+
+/* The cell content is as tall as the xl spacing step, 24px, with 4px
+   between items. */
+.cell-content {
+  gap: var(--eds-spacing-3xs);
+  min-block-size: var(--eds-spacing-xl);
+}
+
+/* The checkbox in the Checkbox Cell and the Header Checkbox: the EDS
+   checkbox icon in the accent icon colour, in every state. */
+.cell-checkbox-icon {
+  color: var(--eds-icon-interactive-accent-default);
+}
 /* Figma: Badge [EDS Beta], Variant Solid, Emphasis Low, with a leading icon.
    20px: 2px and 6px padding, 4px gap, a 12px icon and a 1px border inside
    the edge. A badge is not interactive, so it uses the non-interactive
@@ -492,19 +516,4 @@
     --_text-color: var(--eds-text-on-muted-danger);
     --_icon-color: var(--eds-icon-on-muted-danger);
   }
-}
-
-/* Not designed: table footer */
-
-.table-footer {
-  padding-block: var(--eds-spacing-xs);
-  padding-inline: var(--eds-spacing-md);
-}
-
-.table-summary {
-  font-family: var(--eds-font-family-ui);
-  font-size: var(--eds-typography-label-sm-font-size);
-  font-weight: var(--eds-font-weight-normal);
-  line-height: var(--eds-typography-label-sm-line-height);
-  color: var(--eds-text-secondary);
 }

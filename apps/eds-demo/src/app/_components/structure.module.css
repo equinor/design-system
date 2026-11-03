@@ -41,6 +41,13 @@
 .search-input {
   inline-size: 250px;
   appearance: none;
+
+  /* The Search component in Figma has no clear button, so the browser's
+     own one is hidden. */
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    appearance: none;
+  }
 }
 
 /* The account menu is anchored to its EDS Button. */
@@ -107,6 +114,7 @@
   flex-wrap: wrap;
 }
 
+/* Clips the cells to the rounded corners, and scrolls on narrow screens. */
 .table-card {
   overflow-x: auto;
 }
@@ -116,34 +124,60 @@
   border-collapse: collapse;
 }
 
-.th,
-.td {
+.header,
+.header-checkbox,
+.text-cell,
+.checkbox-cell,
+.badge-cell {
   text-align: start;
   vertical-align: middle;
+}
+
+/* The dividers of a header cell. Their size and colour are in the tokens
+   file. */
+.header {
+  position: relative;
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+  }
+
+  &::before {
+    inset-inline-start: 0;
+  }
+
+  &::after {
+    inset-inline-end: 0;
+  }
+}
+
+.header-checkbox,
+.checkbox-cell {
+  inline-size: 1%;
 }
 
 .row {
   cursor: pointer;
 }
 
-.select-cell {
-  inline-size: 1%;
-}
-
-.person {
+.cell-content {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
 }
 
 /* The native checkbox stays in place for keyboard, screen readers and
    clicks, but is transparent: the EDS checkbox icon underneath shows its
    state. */
-.checkbox {
+.cell-checkbox {
   position: relative;
-  display: inline-flex;
+  display: flex;
 }
 
-.checkbox-input {
+.cell-checkbox-input {
   position: absolute;
   inset: 0;
   margin: 0;
@@ -151,7 +185,7 @@
   cursor: pointer;
 }
 
-.checkbox-icon {
+.cell-checkbox-icon {
   display: block;
 }
 
@@ -159,12 +193,6 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-}
-
-.table-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 /* The account menu is a native popover, placed under its button with CSS

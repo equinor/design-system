@@ -1,5 +1,6 @@
 import { join } from 'node:path'
 import { expect, test, type Page } from '@playwright/test'
+import { people } from '../src/app/_components/people'
 
 type Preferences = { colorScheme?: string; density?: string }
 
@@ -105,17 +106,42 @@ test.describe('Toolbar', () => {
 test.describe('Dashboard', () => {
   test('selects a row from its checkbox and from the row', async ({ page }) => {
     await open(page, '/')
-    const summary = page.getByText(/of 6 selected/)
-    await expect(summary).toHaveText('1 of 6 selected')
+    const total = people.length
+    const summary = page.getByText(/of \d+ selected/)
+    await expect(summary).toHaveText(`1 of ${total} selected`)
 
     await page.getByRole('checkbox', { name: 'Select Astrid Bergman' }).check()
-    await expect(summary).toHaveText('2 of 6 selected')
+    await expect(summary).toHaveText(`2 of ${total} selected`)
 
     await page.getByText('Kari Nordmann', { exact: true }).click()
     await expect(
       page.getByRole('checkbox', { name: 'Select Kari Nordmann' }),
     ).toBeChecked()
-    await expect(summary).toHaveText('3 of 6 selected')
+    await expect(summary).toHaveText(`3 of ${total} selected`)
+  })
+
+  // The table selects whole rows, so hover fills the whole row, not the
+  // cell under the pointer.
+  test('hovers the whole row', async ({ page }) => {
+    await open(page, '/')
+    const row = page.getByRole('row').filter({ hasText: 'Kari Nordmann' })
+    await row.getByText('Oslo', { exact: true }).hover()
+    await expect
+      .poll(() =>
+        row.evaluate((tr) =>
+          [...tr.children].map((td) => getComputedStyle(td).backgroundColor),
+        ),
+      )
+      .toEqual(
+        expect.arrayContaining([
+          expect.not.stringMatching(/rgba\(0, 0, 0, 0\)/),
+        ]),
+      )
+    const fills = await row.evaluate((tr) =>
+      [...tr.children].map((td) => getComputedStyle(td).backgroundColor),
+    )
+    expect(new Set(fills).size).toBe(1)
+    expect(fills[0]).not.toBe('rgba(0, 0, 0, 0)')
   })
 
   test('opens the account menu', async ({ page }) => {
@@ -123,6 +149,28 @@ test.describe('Dashboard', () => {
     await page.getByRole('button', { name: 'Account' }).click()
     await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible()
   })
+
+  // The EDS Button colours its label, and the icon draws in the button's own
+  // colour. An unlayered reset on button elements in the app would override
+  // the button's colour and leave the icon a different colour from the label.
+  for (const colorScheme of ['light', 'dark']) {
+    test(`draws button icons in the label colour (${colorScheme})`, async ({
+      page,
+    }) => {
+      await open(page, '/', { colorScheme })
+      const pairs = await page.evaluate(() =>
+        [...document.querySelectorAll('.eds-button')]
+          .filter((button) => button.querySelector('.label'))
+          .map((button) => ({
+            name: button.textContent?.trim(),
+            icon: getComputedStyle(button.querySelector('svg')!).color,
+            label: getComputedStyle(button.querySelector('.label')!).color,
+          })),
+      )
+      expect(pairs.length).toBeGreaterThan(0)
+      for (const pair of pairs) expect(pair.icon, pair.name).toBe(pair.label)
+    })
+  }
 })
 
 test.describe('Visual', () => {

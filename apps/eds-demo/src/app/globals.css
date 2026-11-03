@@ -41,11 +41,12 @@ body {
   background-color: var(--eds-background-canvas);
 }
 
-button,
-input {
-  font: inherit;
-  color: inherit;
-}
+/* No reset on button or input elements. CSS outside a layer beats every
+   layered rule, so a rule such as button { color: inherit } here would
+   override the EDS Button's own colour in @layer eds-components, and the
+   icon, which draws in the button's colour, would turn the wrong colour.
+   The demo's own buttons and the search field set their font and colour in
+   tokens.module.css. */
 
 h1,
 h2,

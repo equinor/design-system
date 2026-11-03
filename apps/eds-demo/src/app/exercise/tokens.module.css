@@ -329,108 +329,114 @@
   gap: 12px;
 }
 
-/* Buttons */
-
 /* Table */
 
+/* 🐨 The table is a surface with a quiet border around it. */
 .table-card {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
   border-radius: 4px;
 }
 
-.th {
-  padding-block: 8px;
-  padding-inline: 16px;
+/* 🐨 Open the WIP Table in Figma. The header cells are interactive, so
+   their fill and bottom line come from the interactive tokens. */
+.header,
+.header-checkbox {
+  padding: 6px;
+  background-color: light-dark(white, black);
+  box-shadow: inset 0 -0.5px 0 light-dark(black, white);
+}
 
+.header {
   font-family: Inter, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   color: light-dark(black, white);
 
-  border-block-end: 1px solid light-dark(black, white);
+  &::before,
+  &::after {
+    inset-block: 8px;
+    inline-size: 0.5px;
+    background-color: light-dark(black, white);
+  }
 }
 
-/* 🐨 Rows are selectable. Give them a fill on hover and a selected fill.
-   Then check the email address in a selected row: is the text you picked
-   for it still readable on the selected fill? */
-.row {
+.text-cell,
+.checkbox-cell,
+.badge-cell {
   --_bg-color: transparent;
-  --_supporting-text: light-dark(black, white);
+  --_line: light-dark(black, white);
+  --_lines: inset 0 -0.5px 0 var(--_line);
 
   background-color: var(--_bg-color);
+  box-shadow: var(--_lines);
   transition: background-color var(--_transition-duration) ease-in-out;
-
-  &:hover {
-    --_bg-color: light-dark(white, black);
-  }
-
-  &[data-selected] {
-    --_bg-color: light-dark(white, black);
-    --_supporting-text: light-dark(black, white);
-  }
-
-  &[data-selected]:hover {
-    --_bg-color: light-dark(white, black);
-  }
 }
 
-.td {
-  padding-block: 12px;
-  padding-inline: 16px;
+.text-cell {
+  padding-block: 4px;
+  padding-inline: 6px;
 
   font-family: Inter, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   color: light-dark(black, white);
-
-  border-block-end: 1px solid light-dark(black, white);
 }
 
-.select-cell {
-  padding-block: 0;
-  padding-inline: 8px;
-}
-
-.person-name {
-  font-weight: 500;
-}
-
-.person-email {
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--_supporting-text);
-}
-
-/* 🐨 Open Checkbox in Figma. The box is an icon, coloured with an
-   interactive icon token, and hover adds a fill behind it. */
-.checkbox {
-  --_bg-color: transparent;
-  --_icon-color: light-dark(black, white);
-
-  padding: 8px;
-
-  color: var(--_icon-color);
-  background-color: var(--_bg-color);
-  border-radius: 4px;
-
-  &:is(:hover, :has(:focus-visible)) {
-    --_bg-color: light-dark(white, black);
-    --_icon-color: light-dark(black, white);
-  }
-
-  &[data-checked]:is(:hover, :has(:focus-visible)) {
-    --_icon-color: light-dark(black, white);
-  }
+.checkbox-cell {
+  padding: 4px;
 
   &:has(:focus-visible) {
-    outline: 1px solid light-dark(blue, cyan);
-    outline-offset: 1px;
+    --_bg-color: light-dark(white, black);
+    --_lines: inset 0 0 0 2px light-dark(blue, cyan);
   }
 }
 
+.badge-cell {
+  --_lines: inset 0 0.5px 0 var(--_line), inset 0 -0.5px 0 var(--_line);
+
+  padding: 4px;
+}
+
+/* 🐨 The table selects whole rows, so the whole row reacts to the pointer.
+   Then check the text in a selected row: is it still readable on the
+   selected fill? */
+.row:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected] > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected]:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected]:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: light-dark(white, black);
+}
+
+.row[data-selected] > .checkbox-cell:has(:focus-visible) {
+  --_bg-color: light-dark(white, black);
+  --_lines: inset 0 0 0 2px light-dark(blue, cyan);
+}
+
+.cell-content {
+  gap: 4px;
+  min-block-size: 24px;
+}
+
+/* 🐨 The checkbox is an icon in an interactive icon colour. */
+.cell-checkbox-icon {
+  color: light-dark(black, white);
+}
 /* 🐨 A status badge only shows information: you cannot click it. Open Badge
    in Figma (Solid, Low emphasis) and pick the non-interactive fill and
    border for each tone, and the text and icon tokens made for that fill.
@@ -486,17 +492,4 @@
     --_text-color: light-dark(black, white);
     --_icon-color: light-dark(black, white);
   }
-}
-
-.table-footer {
-  padding-block: 8px;
-  padding-inline: 16px;
-}
-
-.table-summary {
-  font-family: Inter, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  color: light-dark(black, white);
 }

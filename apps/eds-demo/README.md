@@ -52,9 +52,9 @@ Each element on the screen has two classes with the same name:
 | Search field                                              | Search [EDS Beta] in Figma, without label and helper text                                                                |
 | Account menu                                              | Menu [EDS Beta] in Figma, Layout Separator, with Menu Item Type Custom                                                   |
 | Tabs                                                      | Tab [EDS Beta] in Figma, Type Simple                                                                                     |
-| Row checkboxes                                            | Checkbox [EDS Beta] in Figma, No Label                                                                                   |
 | Status labels                                             | Badge [EDS Beta] in Figma, Solid, Low emphasis, with a leading icon                                                      |
-| Top bar, side navigation, table, page header, page layout | Not designed yet. The values are the demo's own choice from the token scale, and the components above are placed in them |
+| Table | The work-in-progress table on the "↪ Cell" page of a branch of the Core Components file: Header and Header Checkbox in the header row, Checkbox Cell, Text Cell and Badge Cell in the body |
+| Top bar, side navigation, page header, page layout | Not designed yet. The values are the demo's own choice from the token scale, and the components above are placed in them |
 
 The buttons (Export, Add person and the icon buttons in the top bar) and every icon are the EDS components, so their styles are not in this file. Icon sizes are set with the `Icon` `size` prop, which takes the spacing token of the same name.
 
