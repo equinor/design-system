@@ -115,6 +115,11 @@ describe('agent data', () => {
     )
   })
 
+  test('leaves a standalone component on the parent page out of subComponents', () => {
+    assert.deepStrictEqual(byName('Avatar').subComponents, [])
+    assert.ok(byName('AvatarNameLabel'))
+  })
+
   test('gives each sub-component its props and base type', () => {
     const label = byName('Field').subComponents.find(
       (sub) => sub.name === 'Field.Label',

@@ -143,7 +143,11 @@ function readExamples(project, dir, name) {
 // WEB_SUB_COMPONENTS names the props type of each part. The build stops when the
 // two disagree, so a new part cannot ship without its props.
 function readSubComponents(project, dir, name, found) {
-  const configured = WEB_SUB_COMPONENTS[name] ?? []
+  // A standalone component shown on the parent's page, such as AvatarNameLabel
+  // on Avatar's, has a dotless name and an entry of its own.
+  const configured = (WEB_SUB_COMPONENTS[name] ?? []).filter((sub) =>
+    sub.name.startsWith(`${name}.`),
+  )
   const configuredNames = configured.map((sub) => sub.name)
   if (found.join() !== configuredNames.join()) {
     fail(
