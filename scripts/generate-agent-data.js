@@ -166,7 +166,7 @@ function readSubComponents(project, dir, name, found) {
 
 function buildComponent(project, entry) {
   const { name, dir } = entry
-  const index = extractComponentData(entry)
+  const index = extractComponentData(entry, project)
   const { summary, guidance, links } = readGuidance(dir, name)
   const file = path.join(dir, `${name}.tsx`)
   const declaration = findProps(project, dir, name)
@@ -197,7 +197,7 @@ function buildAgentData() {
   // (TextField's from Input) do not depend on the order of the barrel.
   const project = createProject()
   assertReactResolves(project)
-  const components = discoverPublicComponents()
+  const components = discoverPublicComponents(project)
     .map((entry) => buildComponent(project, entry))
     .sort((a, b) => a.name.localeCompare(b.name))
 
