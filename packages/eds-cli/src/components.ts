@@ -176,14 +176,21 @@ export function similarNames(data: ComponentData, name: string): string[] {
 
 /**
  * Whether `word` is in `haystack`, or one typo away from one of its words.
- * Typos only count in words of five letters or more, since shorter words are
- * one letter away from too much. Shared by component and token search.
+ * A word with hyphens, such as `corner-radius`, is compared with as many
+ * words of `haystack` in a row. Typos only count in words of five letters or
+ * more, since shorter words are one letter away from too much. Shared by
+ * component and token search.
  */
 export function matchesWithTypo(haystack: string, word: string): boolean {
-  return (
-    haystack.includes(word) ||
-    (word.length >= 5 &&
-      haystack.split(/[^a-z0-9]+/).some((part) => distance(part, word) <= 1))
+  if (haystack.includes(word)) return true
+  if (word.length < 5) return false
+  const pieces = word.split(/[^a-z0-9]+/)
+  const parts = haystack.split(/[^a-z0-9]+/)
+  return parts.some(
+    (_, i) =>
+      i + pieces.length <= parts.length &&
+      distance(parts.slice(i, i + pieces.length).join('-'), pieces.join('-')) <=
+        1,
   )
 }
 

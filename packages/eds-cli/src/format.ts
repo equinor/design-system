@@ -34,11 +34,12 @@ const indent = (text: string, by = '  ') =>
     .map((line) => (line ? by + line : line))
     .join('\n')
 
-// The first sentence, across line breaks, without stopping at "e.g." or "i.e.".
+// The first sentence, across line breaks, without stopping at "e.g." or "i.e.",
+// in either case.
 const firstSentence = (text: string | null) => {
   if (!text) return ''
   const flat = text.replace(/\s+/g, ' ').trim()
-  return flat.match(/^.*?(?<!\b(?:e\.g|i\.e))[.!?](?=\s|$)/)?.[0] ?? flat
+  return flat.match(/^.*?(?<!\b(?:e\.g|i\.e))[.!?](?=\s|$)/i)?.[0] ?? flat
 }
 
 function componentLines(components: Component[]): string[] {

@@ -98,6 +98,13 @@ describe('eds edge cases', () => {
       )
     })
 
+    it('does not stop at "E.g." at the start of a description', () => {
+      const data = dataWith({ description: 'E.g. a form button. More text.' })
+      expect(run(['list', '--data', data]).stdout).toContain(
+        'Button  E.g. a form button.\n',
+      )
+    })
+
     it('indents every line of a multi-line caption', () => {
       const data = dataWith({
         examples: [
@@ -244,6 +251,12 @@ describe('eds edge cases', () => {
 
     it('allows one typo in token search when nothing matches exactly', () => {
       expect(run(['tokens', 'spcing']).stdout).toMatch(/--eds-spacing-md +12px/)
+    })
+
+    it('allows one typo in a hyphenated word', () => {
+      expect(run(['tokens', 'interactive-acent']).stdout).toContain(
+        '--eds-background-interactive-accent-emphasis-default',
+      )
     })
 
     it('keeps exact matches for the other words in a search with a typo', () => {
