@@ -776,8 +776,7 @@ body {
   box-shadow: var(--eds-elevation-high);
 
   &::backdrop {
-    background-color: var(--eds-background-backdrop);
-    opacity: 0.8;
+    background-color: var(--eds-overlay-scrim);
   }
 }
 
