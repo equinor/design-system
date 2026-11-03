@@ -72,10 +72,11 @@ statement `@layer eds-tokens-legacy, eds-tokens, eds-elements, eds-components;`
 (ADR-0028 point 6). Unlayered CSS beats any layer, so your own
 `:root { --eds-spacing-md: 20px }` retunes a token with no specificity fight.
 
-The colour names need an attribute to resolve. They are declared on `:root`, but
-the values they alias are not. Set `data-color-scheme` on the root element, or
-on any ancestor of the subtree you are styling. Density defaults to
-`comfortable`, so `data-density` is only needed to switch away from it:
+The colour names default to light: the light scheme is declared on `:root` as
+well as on `[data-color-scheme="light"]`. Set `data-color-scheme="dark"` on the
+root element, or on any ancestor of the subtree you are styling, to switch to
+dark. Density defaults to `comfortable`, so `data-density` is only needed to
+switch away from it:
 
 ```html
 <html data-color-scheme="light" data-density="comfortable">
@@ -85,13 +86,9 @@ What each group of names needs:
 
 | Names                                                                                                                     | Needs                                                                  |
 | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-icon-*`, `--eds-elevation-*`, `--eds-data-visualization-*` | `data-color-scheme`, which has no default                              |
+| `--eds-background-*`, `--eds-text-*`, `--eds-border-*`, `--eds-icon-*`, `--eds-elevation-*`, `--eds-data-visualization-*` | `data-color-scheme="dark"` to pick dark, light otherwise               |
 | `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*`                                                          | `data-density` to pick `compact` or `relaxed`, `comfortable` otherwise |
 | `--eds-font-family-*`, `--eds-font-weight-*`, `--eds-overlay-*`                                                           | nothing                                                                |
-
-A colour name used without `data-color-scheme` falls back to the inherited or
-initial value for the property, so the symptom is unstyled output rather than an
-error.
 
 There is deliberately no `prefers-color-scheme` fallback
 ([ADR-0010](../../documentation/adr/0010-single-bundled-css-entry-for-eds-tokens-3.md)).

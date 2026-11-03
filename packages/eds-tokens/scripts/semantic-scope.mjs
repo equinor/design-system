@@ -32,3 +32,14 @@ export const PREVIOUS_WIDE_RE = /^:root,\s*\[data-color-scheme\]\s*\{/
 export const DENSITY_BASE_WIDE = ':root,\n[data-density="comfortable"] {'
 export const DENSITY_BASE_WIDE_RE =
   /^:root,\s*\[data-density=(["'])comfortable\1\]\s*\{/
+
+// The light colour scheme is also declared at `:root`, so a page with no
+// `data-color-scheme` gets light colours instead of unresolved ones
+// (#5795). The export writes `[data-color-scheme="light"]` today, or
+// `:root` alone if `light` is ever made the dimension's base in Studio,
+// so both are accepted as input.
+export const LIGHT_SCHEME_WIDE = ':root,\n[data-color-scheme="light"] {'
+export const LIGHT_SCHEME_WIDE_RE =
+  /^:root,\s*\[data-color-scheme=(["'])light\1\]\s*\{/
+export const LIGHT_SCHEME_NARROW_RE =
+  /^\[data-color-scheme=(["'])light\1\]\s*\{/
