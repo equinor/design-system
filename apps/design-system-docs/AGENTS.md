@@ -30,7 +30,8 @@ must be scoped so 1.1.0 keeps its stock rendering. Current and the frozen
 
 - CSS: pair `html:is([class*='docs-version-current'], [class*='docs-version-2.0.0-beta'])`
   (the redesigned versions) with `html:not([class*='docs-version-'])`
-  (unversioned pages: landing, /foundation, /getting-started, /about).
+  (unversioned pages: landing, /foundation, /getting-started, /about,
+  /roadmap).
   Per-element rules use `html:where(…)` to keep specificity at 0,0,2 so
   single-class component rules still win. The one exception is the version
   badge in `site-chrome.css`, hidden on current only so frozen pages still
@@ -445,7 +446,8 @@ Not in CI (both need a running server):
 --port 3100`) rather than assuming 3000 is free; the dev server usually has
    it.
 7. Browser pass in light AND dark mode. Standard regression set: `/`,
-   `/foundation`, `/getting-started`, `/about`, `/docs/Next/components`,
+   `/foundation`, `/getting-started`, `/about`, `/roadmap`,
+   `/docs/Next/components`,
    `/docs/Next/components/inputs/button`,
    `/docs/Next/foundation/accessibility`, and
    `/docs/components/inputs/button` (1.1.0 — must not change).
