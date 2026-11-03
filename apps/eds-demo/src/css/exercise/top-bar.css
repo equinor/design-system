@@ -1,8 +1,9 @@
 /* The top bar: the app name, the search field, the icon buttons and the
    account menu. */
 
-/* 🐨 The top bar is a surface. Its bottom line is a divider: it is not
-   interactive, and it should be quiet. */
+/* 🐨 3 of 6. The top bar is a surface. Its bottom line is a divider: it is
+   not interactive, and it should be quiet. The spacing tokens follow the
+   density: switch to Compact or Relaxed to check. */
 .top-bar {
   gap: 16px;
   padding-block: 8px;
@@ -17,7 +18,7 @@
   gap: 8px;
 }
 
-/* 🐨 The application name is a title, so it uses the header role and the
+/* 💯 The application name is a title, so it uses the header role and the
    header font family. */
 .app-title {
   font-family: Equinor, sans-serif;
@@ -26,7 +27,7 @@
   line-height: 20px;
 }
 
-/* 🐨 Supporting text: smaller, and a step down from the primary text. */
+/* 💯 Supporting text: smaller, and a step down from the primary text. */
 .app-subtitle {
   font-family: Inter, sans-serif;
   font-size: 12px;
@@ -48,7 +49,7 @@
   color: light-dark(black, white);
 }
 
-/* 🐨 Form fields have their own background token, and the border steps
+/* 💯 Form fields have their own background token, and the border steps
    with the state. */
 .search-input {
   --_border-color: light-dark(black, white);
@@ -87,8 +88,9 @@
   }
 }
 
-/* 🐨 The menu floats above the page. Find the background and the elevation
-   made for small overlays. */
+/* 🐨 4 of 6. Open the account menu with the person icon at the right of the
+   top bar. The menu floats above the page: find the background and the
+   elevation made for small overlays. Then go to table.css. */
 .menu {
   margin: 4px 0 0;
   padding: 0;

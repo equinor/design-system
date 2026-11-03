@@ -3,13 +3,20 @@
 
   The CSS is in four files, one for each part of the screen: page.css (this
   file), top-bar.css, navigation.css and table.css. The tabs above the editor
-  switch between them. Start here, then work through the tabs.
+  switch between them.
 
-  Kody the Koala 🐨 tells you what to do in each section. Every value in
-  these files is a placeholder: the colours are light-dark(white, black) and
-  friends, the sizes are the px values of the default density. The finished
-  version is the Solution: Ctrl + Shift + S (⌘ + Shift + S on a Mac) switches
-  between them and keeps your place. Try not to peek.
+  Kody the Koala 🐨 marks the core path: six numbered steps, in page.css,
+  top-bar.css and table.css. Together they use every kind of token once:
+  colour, spacing, typography and elevation. Do them in order, starting
+  below. Hannah the Hundred 💯 marks extras for when you have done the six,
+  and every rule without a mark is an extra too. navigation.css is all
+  extras.
+
+  Every value in these files is a placeholder: the colours are
+  light-dark(white, black) and friends, the sizes are the px values of the
+  default density. The finished version is the Solution: Ctrl + Shift + S
+  (⌘ + Shift + S on a Mac) switches between them and keeps your place. Try
+  not to peek.
 
   Your changes show in the frame as you type and are saved in this browser.
   Restart, at the top, puts the original exercise back.
@@ -33,9 +40,10 @@
   you do not need to change.
 */
 
-/* 🐨 Start here. The page is the base layer: the top bar, the navigation
-   and the table are surfaces placed on it. Set the page background, and
-   the text colour everything else inherits. */
+/* 🐨 1 of 6. Start here. The page is the base layer: the top bar, the
+   navigation and the table are surfaces placed on it. Set the page
+   background, and the text colour everything else inherits. Switch to Dark
+   to check. */
 .app {
   --_transition-duration: 150ms;
 
@@ -56,6 +64,9 @@
   gap: 8px;
 }
 
+/* 🐨 2 of 6. The title is a heading, so it uses the header role and the
+   header font family. The paragraph below wraps onto several lines: which
+   typography role is made for text that wraps? Then go to top-bar.css. */
 .title {
   font-family: Equinor, sans-serif;
   font-size: 24px;
@@ -64,8 +75,6 @@
   color: light-dark(black, white);
 }
 
-/* 🐨 This paragraph wraps onto several lines. Which typography role is made
-   for text that wraps? */
 .intro {
   font-family: Inter, sans-serif;
   font-size: 14px;

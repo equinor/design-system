@@ -1,14 +1,14 @@
 /* The table: its header, the cells, the row checkboxes and the status
    badges. */
 
-/* 🐨 The table is a surface with a quiet border around it. */
+/* 🐨 5 of 6. The table is a surface with a quiet border around it. */
 .table-card {
   background-color: light-dark(white, black);
   border: 1px solid light-dark(black, white);
   border-radius: 4px;
 }
 
-/* 🐨 The header cells are interactive, so their fill and bottom line come
+/* 💯 The header cells are interactive, so their fill and bottom line come
    from the interactive tokens. */
 .header,
 .header-checkbox {
@@ -32,6 +32,8 @@
   }
 }
 
+/* 🐨 5 of 6, continued. The line under each cell is a divider. In the text
+   cell below, single-line text in a table uses the label role. */
 .text-cell,
 .checkbox-cell,
 .badge-cell {
@@ -70,9 +72,10 @@
   padding: 4px;
 }
 
-/* 🐨 The table selects whole rows, so the whole row reacts to the pointer.
-   Then check the text in a selected row: is it still readable on the
-   selected fill? */
+/* 🐨 6 of 6. The table selects whole rows, so the whole row reacts to the
+   pointer. Then check the text in a selected row: is it still readable on
+   the selected fill? That is the core path done: switch to Dark and to
+   Compact once more, then pick any 💯 extra. */
 .row:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
   --_bg-color: light-dark(white, black);
 }
@@ -103,11 +106,11 @@
   min-block-size: 24px;
 }
 
-/* 🐨 The checkbox is an icon in an interactive icon colour. */
+/* 💯 The checkbox is an icon in an interactive icon colour. */
 .cell-checkbox-icon {
   color: light-dark(black, white);
 }
-/* 🐨 A status badge only shows information: you cannot click it. Pick a
+/* 💯 A status badge only shows information: you cannot click it. Pick a
    quiet non-interactive fill and border for each tone, and the text and
    icon tokens made for that fill. Every tone fills the same four slots. */
 .badge {

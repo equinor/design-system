@@ -74,7 +74,7 @@ The buttons and icons are the EDS components, so their styles are not in the CSS
 
 ## The exercise
 
-Open the app; it starts on **Exercise**, in `page.css`. Start at the top and follow the 🐨 hints, then work through the other tabs. Switch to **Dark** and to **Compact** or **Relaxed** while you work: the parts you have converted follow the switch, and the rest stays as it is. Press **Ctrl + Shift + S** to compare a rule with the solution and again to go back.
+Open the app; it starts on **Exercise**, in `page.css`. The core path is six numbered 🐨 steps in `page.css`, `top-bar.css` and `table.css`, which together use colour, spacing, typography and elevation tokens once each. 💯 marks extras for those who finish early, and every rule without a mark is an extra too; `navigation.css` is all extras. Switch to **Dark** and to **Compact** or **Relaxed** while you work: the parts you have converted follow the switch, and the rest stays as it is. Press **Ctrl + Shift + S** to compare a rule with the solution and again to go back.
 
 ## Tests
 

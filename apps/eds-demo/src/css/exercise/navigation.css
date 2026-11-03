@@ -1,4 +1,6 @@
-/* The side navigation, and the tabs above the page header. */
+/* The side navigation, and the tabs above the page header. Everything in
+   this file is an extra: come back to it when you have done the six 🐨
+   steps. */
 
 .side-nav {
   gap: 16px;
@@ -12,7 +14,7 @@
   gap: 2px;
 }
 
-/* 🐨 The current page is selected. Selected fills have no foreground token
+/* 💯 The current page is selected. Selected fills have no foreground token
    of their own: check the colour usage page for which text to use on them,
    and why neutral is a safer choice than accent here. */
 .nav-item {
@@ -65,7 +67,7 @@
   color: light-dark(black, white);
 }
 
-/* 🐨 The current tab is active: the line under it, the text colour and the
+/* 💯 The current tab is active: the line under it, the text colour and the
    hover fill all change with it. Under an inactive tab, the line is only a
    divider. */
 .tab {
