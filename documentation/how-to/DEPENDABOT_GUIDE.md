@@ -52,7 +52,7 @@ Check the **Files changed** tab. Dependabot PRs only touch `package.json` and `p
 ### 3. Approve and merge
 
 1. Leave an approving review (or just click **Approve**)
-2. Click **Merge when ready**. The merge queue updates the PR against `main`, runs CI and merges it
+2. Click **Merge when ready**. The merge queue tests the PR on top of `main` and the entries ahead of it, then merges it
 3. Done!
 
 No need to check out the branch locally. No need to test manually. CI covers build + test + lint + types + React 18 compat.
