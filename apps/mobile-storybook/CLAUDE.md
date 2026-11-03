@@ -235,12 +235,8 @@ const { typography } = useToken();
 
 **Expo Ecosystem:**
 - `expo` - Platform and build tools
-- `expo-router` - File-based routing
+- `expo-router` - File-based routing and navigation. Since SDK 56 it bundles React Navigation, so import `ThemeProvider`, `useTheme` and the navigation theme types from `expo-router`, not from `@react-navigation/*`
 - `expo-font` - Font loading (required by EDS components)
-
-**Navigation:**
-- `@react-navigation/native` - Navigation primitives
-- `@react-navigation/bottom-tabs` - Tab navigator
 
 **State Management:**
 - `zustand` - Lightweight state management for theme
@@ -252,7 +248,7 @@ const { typography } = useToken();
 
 ### iOS Development
 
-- **Requires:** Xcode 14+ and CocoaPods
+- **Requires:** Xcode 27.2 and CocoaPods. The SDK 58 iOS build was verified with Xcode 27.2 and fails on Xcode 26.3.
 - **First time:** Run `cd ios && pod install`
 - **Hot reload:** Works automatically with Metro bundler
 - **Physical device:** Use Expo development build or scan QR with Expo Go (limited features)

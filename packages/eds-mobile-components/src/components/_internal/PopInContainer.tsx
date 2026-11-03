@@ -1,8 +1,11 @@
 import React, { PropsWithChildren, useEffect, useRef, forwardRef } from "react";
-import { Animated, View, ViewProps } from "react-native";
+import { Animated, ViewProps } from "react-native";
+import type { ViewRef } from "../../utils/nativeRefs";
 import { useToken } from "../../hooks/useToken";
 
-export const PopInContainer = forwardRef<View, PropsWithChildren & ViewProps>(
+export const PopInContainer: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<PropsWithChildren & ViewProps> & React.RefAttributes<ViewRef>
+> = forwardRef<ViewRef, PropsWithChildren & ViewProps>(
     ({ children, ...rest }, ref) => {
         const token = useToken();
         const scale = useRef<Animated.Value>(new Animated.Value(0)).current;

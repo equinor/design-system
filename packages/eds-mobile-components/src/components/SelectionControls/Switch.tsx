@@ -32,7 +32,7 @@ export type SwitchProps = {
     /**
      * Ref to the switch.
      */
-    ref?: React.Ref<View>;
+    ref?: React.Ref<React.ComponentRef<typeof View>>;
 } & ViewProps;
 
 export const Switch = ({

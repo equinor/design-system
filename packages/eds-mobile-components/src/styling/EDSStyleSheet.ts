@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import type { NamedStyles } from "./NamedStyles";
 import type { MasterToken } from "./tokens";
 
 export type ThemeDependentStyles<
     TProps = undefined,
-    TStyleSheet = StyleSheet.NamedStyles<unknown>,
+    TStyleSheet = NamedStyles<unknown>,
 > = (
     /**
      * The will-be resolved token.
@@ -25,7 +25,7 @@ export const EDSStyleSheet = {
      * @returns A resolvable style sheet.
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- other typings seem to not work
-    create<TProps, TStyleSheet extends StyleSheet.NamedStyles<any>>(
+    create<TProps, TStyleSheet extends NamedStyles<any>>(
         creator: ThemeDependentStyles<TProps, TStyleSheet>
     ) {
         return creator;

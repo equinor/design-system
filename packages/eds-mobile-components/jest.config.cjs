@@ -81,10 +81,14 @@ module.exports = {
     setupFiles: ["react-native-gesture-handler/jestSetup"],
     setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
     // Reanimated 4.x delegates native threading to the separate
-    // `react-native-worklets` package, which has no public "mock" subpath
-    // export. This points directly at its built ESM mock module — verified
-    // against the installed version; may need updating if react-native-worklets
-    // changes its internal lib/ layout.
+    // `react-native-worklets` package. The resolver loads Reanimated's
+    // web-compatible modules under Jest (see jest.resolver.cjs for why it
+    // replaces the ones Reanimated and worklets ship), and the mapping below
+    // points the worklets package itself at its mock module, which has no
+    // public "mock" subpath export. This points directly at its built ESM
+    // mock module, verified against the installed version; may need updating
+    // if react-native-worklets changes its internal lib/ layout.
+    resolver: "<rootDir>/jest.resolver.cjs",
     moduleNameMapper: {
         "^react-native-worklets$": "react-native-worklets/lib/module/mock",
         "^test-utils$": "<rootDir>/test-utils",
