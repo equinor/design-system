@@ -1,4 +1,5 @@
 import Layout from '@theme/Layout'
+import Link from '@docusaurus/Link'
 
 import type { JSX } from 'react'
 
@@ -11,9 +12,16 @@ import { StatusChip } from '@site/src/components/StatusChip'
 // showLink / StoryCanvas convention does not apply. A future generator can
 // derive the ids with Storybook's toId, as check-story-references.mjs does.
 
+// Component names link to the Beta (3.0.0) docs, not the version the dropdown
+// shows. This is deliberate and differs from Get started and the home page,
+// which resolve through useShownVersionDocPath (#5667): the page is about the
+// redesign, and Field, Input and Link only have docs in Beta.
 const DOCS = '/docs/Next/components'
 const SB = 'https://storybook.eds.equinor.com/?path=/docs'
 
+// Kept in sync with StatusChipStatus by hand rather than imported: ESLint
+// resolves the `@site` type import as `any`, and `any | 'none'` trips
+// no-redundant-type-constituents. tsc still checks the chip prop assignment.
 type ChipStatus = 'planned' | 'in-progress' | 'beta' | 'stable' | 'deprecated'
 
 type CellStatus = ChipStatus | 'none'
@@ -232,37 +240,26 @@ function StatusCell({ status }: { status: CellStatus }): JSX.Element {
 }
 
 function StorybookCell({ row }: { row: ComponentRow }): JSX.Element {
-  const links: JSX.Element[] = []
-  if (row.storybook.latest) {
-    links.push(
-      <a
-        key="latest"
-        href={`${SB}/${row.storybook.latest}--docs`}
-        aria-label={`${row.name} in Latest Storybook`}
-      >
-        Latest
-      </a>,
-    )
-  }
-  if (row.storybook.beta) {
-    links.push(
-      <a
-        key="beta"
-        href={`${SB}/${row.storybook.beta}--docs`}
-        aria-label={`${row.name} in Beta Storybook`}
-      >
-        Beta
-      </a>,
-    )
-  }
+  const { latest, beta } = row.storybook
   return (
     <>
-      {links.map((link, i) => (
-        <span key={link.key}>
-          {i > 0 && ' · '}
-          {link}
-        </span>
-      ))}
+      {latest && (
+        <a
+          href={`${SB}/${latest}--docs`}
+          aria-label={`${row.name} in Latest Storybook`}
+        >
+          Latest
+        </a>
+      )}
+      {latest && beta && ' · '}
+      {beta && (
+        <a
+          href={`${SB}/${beta}--docs`}
+          aria-label={`${row.name} in Beta Storybook`}
+        >
+          Beta
+        </a>
+      )}
     </>
   )
 }
@@ -285,8 +282,8 @@ export default function ComponentsStatus(): JSX.Element {
               <code>@equinor/eds-core-react/next</code>). A component often has
               a status in both at once: stable to use today in Latest, while its
               redesigned version is still being built for the Beta. Component
-              names link to their documentation, and the Storybook column links
-              to the live component in each version where one exists.
+              names link to their Beta documentation, and the Storybook column
+              links to the live component in each version where one exists.
             </p>
           }
         />
@@ -309,22 +306,22 @@ export default function ComponentsStatus(): JSX.Element {
           <table>
             <thead>
               <tr>
-                <th>Component</th>
-                <th>Latest (2.x)</th>
-                <th>Beta (3.0.0)</th>
-                <th>Storybook</th>
+                <th scope="col">Component</th>
+                <th scope="col">Latest (2.x)</th>
+                <th scope="col">Beta (3.0.0)</th>
+                <th scope="col">Storybook</th>
               </tr>
             </thead>
             <tbody>
               {COMPONENTS.map((row) => (
                 <tr key={row.name}>
-                  <td>
+                  <th scope="row">
                     {row.doc ? (
-                      <a href={`${DOCS}/${row.doc}`}>{row.name}</a>
+                      <Link to={`${DOCS}/${row.doc}`}>{row.name}</Link>
                     ) : (
                       row.name
                     )}
-                  </td>
+                  </th>
                   <td>
                     <StatusCell status={row.latest} />
                   </td>
