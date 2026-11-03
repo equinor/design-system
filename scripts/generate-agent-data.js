@@ -73,6 +73,14 @@ const GUIDANCE_SECTIONS = {
   related: 'Related components',
 }
 
+// Links between the docs pages are Storybook paths, such as
+// `[TextField](?path=/docs/beta-inputs-textfield--docs)`, which lead nowhere
+// outside Storybook. The link text names the component, which the agent looks up
+// with `eds show`, so only the text is kept.
+const STORYBOOK_LINK = /\[([^\]]+)\]\(\?path=[^)]*\)/g
+const withoutStorybookLinks = (markdown) =>
+  markdown?.replace(STORYBOOK_LINK, '$1')
+
 function readGuidance(dir, name) {
   const file = path.join(dir, `${name}.docs.md`)
   if (!fs.existsSync(file)) {
@@ -81,9 +89,11 @@ function readGuidance(dir, name) {
   const { sections, links } = readSidecar(file, web)
   const guidance = {}
   for (const [key, heading] of Object.entries(GUIDANCE_SECTIONS)) {
-    if (sections[heading]) guidance[key] = sections[heading]
+    if (sections[heading]) {
+      guidance[key] = withoutStorybookLinks(sections[heading])
+    }
   }
-  return { summary: sections.Summary, guidance, links }
+  return { summary: withoutStorybookLinks(sections.Summary), guidance, links }
 }
 
 // Without `pnpm install`, React's types do not resolve, every DOM base type

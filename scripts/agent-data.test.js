@@ -87,6 +87,14 @@ describe('agent data', () => {
     assert.ok(button.guidance.accessibility)
   })
 
+  test('keeps no Storybook paths in the text', () => {
+    for (const component of data.components) {
+      const text = JSON.stringify([component.description, component.guidance])
+      assert.ok(!text.includes('](?path='), component.name)
+    }
+    assert.match(byName('TextField').guidance.related, /- `Field` provides/)
+  })
+
   test('source links are pinned to the beta release tag', () => {
     const { source } = byName('Button').links
     assert.ok(
