@@ -3,6 +3,10 @@ import type { AvatarNameLabelProps } from './AvatarNameLabel.types'
 import { Avatar } from './Avatar'
 import { AnnounceNotificationContext, deriveInitials } from './utils'
 
+/**
+ * AvatarNameLabel shows an avatar next to a person's name, with room for
+ * secondary text such as a job title.
+ */
 export const AvatarNameLabel = forwardRef<HTMLDivElement, AvatarNameLabelProps>(
   function AvatarNameLabel(
     {
