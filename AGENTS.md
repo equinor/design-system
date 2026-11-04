@@ -501,6 +501,7 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 - Draft the review and recommend a type, but never run `gh pr review --approve`. Dependabot PRs are the exception, after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md)).
 - Nits are optional and do not send the PR back. Reviews post under the user's account. Nobody can request changes on or approve their own PR, so move the card by hand there.
 - When reviewers disagree, the latest review decides the column. Request changes blocks the merge until it is dismissed or the same reviewer approves.
+- Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR.
 
 The board does not move a PR out of Inbox, between draft and ready, or back after feedback, so the author's agent does:
 
