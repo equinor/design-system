@@ -31,6 +31,8 @@ Install it in the project rather than running `npx @equinor/eds-cli`: then `npx 
 
 ## Usage
 
+The examples leave out `npx --no-install`, which you need in front of `eds` when the CLI is installed in the project.
+
 ```sh
 eds list                            # the components, with a one-line description
 eds show Button                     # import line, props, examples and guidance
