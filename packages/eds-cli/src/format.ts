@@ -34,14 +34,20 @@ const indent = (text: string, by = '  ') =>
     .map((line) => (line ? by + line : line))
     .join('\n')
 
-const firstSentence = (text: string | null) =>
-  text ? (text.match(/^.*?[.!?](\s|$)/)?.[0].trim() ?? text) : ''
+// The first sentence, across line breaks, without stopping at "e.g." or "i.e.",
+// in either case.
+const firstSentence = (text: string | null) => {
+  if (!text) return ''
+  const flat = text.replace(/\s+/g, ' ').trim()
+  return flat.match(/^.*?(?<!\b(?:e\.g|i\.e))[.!?](?=\s|$)/i)?.[0] ?? flat
+}
 
 function componentLines(components: Component[]): string[] {
   const width = Math.max(...components.map((c) => c.name.length))
   return components.map((c) => {
     const status = c.status === 'deprecated' ? ' (deprecated)' : ''
-    return `${c.name.padEnd(width)}  ${firstSentence(c.description)}${status}`.trimEnd()
+    const kind = c.kind === 'utility' ? ' (utility)' : ''
+    return `${c.name.padEnd(width)}  ${firstSentence(c.description)}${kind}${status}`.trimEnd()
   })
 }
 
@@ -68,7 +74,10 @@ export function formatSearch(
   }
   const lines = matches.map((c) => {
     const counts = `(${plural(c.props.length, 'prop')}, ${plural(c.examples.length, 'example')})`
-    const status = c.status === 'deprecated' ? ' deprecated' : ''
+    const status = [
+      c.kind === 'utility' ? ' utility' : '',
+      c.status === 'deprecated' ? ' deprecated' : '',
+    ].join('')
     const description = firstSentence(c.description)
     return [
       `${c.name} ${counts}${status}`,
@@ -76,9 +85,16 @@ export function formatSearch(
       `  → eds show ${c.name}`,
     ].join('\n')
   })
-  if (matches.length > 1) {
+  // Only matches on the name are ranked. The others are in alphabetical order,
+  // so the first three of them are not a recommendation (`eds search form`
+  // would suggest Input, which says to use TextField).
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean)
+  const byName = matches.filter((c) =>
+    words.some((w) => c.name.toLowerCase().includes(w)),
+  )
+  if (byName.length > 1) {
     lines.push(
-      `→ Several at once: eds show ${matches
+      `→ Several at once: eds show ${byName
         .slice(0, 3)
         .map((c) => c.name)
         .join(' ')}`,
@@ -88,11 +104,36 @@ export function formatSearch(
 }
 
 function formatProps(component: Component): string[] {
-  const lines = ['Props', ...formatPropList(component)]
+  const lines = [
+    'Props',
+    ...formatGeneric(component),
+    ...formatPropList(component),
+  ]
   for (const sub of component.subComponents) {
     lines.push('', `${sub.name} props`, ...formatPropList(sub))
   }
+  for (const hook of component.hooks ?? []) {
+    lines.push('', `Hook ${hook.signature}`, `  ${hook.description}`)
+    lines.push(`  ${hook.importLine}`)
+    for (const field of hook.returns) {
+      lines.push(`  ${field.name}: ${field.type}`)
+      if (field.description) lines.push(`    ${field.description}`)
+    }
+  }
   return lines
+}
+
+// A generic component takes the agent's own type in the props that name the
+// type parameter, such as `options: T[]` in Autocomplete.
+function formatGeneric(component: Component): string[] {
+  return (component.typeParameters ?? []).map((parameter) => {
+    const name = parameter.split(/[\s=]/)[0]
+    const uses = component.props
+      .filter((prop) => new RegExp(`\\b${name}\\b`).test(prop.type))
+      .map((prop) => prop.name)
+    const where = uses.length ? ` in ${uses.join(', ')}` : ''
+    return `  Generic over ${parameter}: pass your own type${where}.`
+  })
 }
 
 function formatPropList({ props, baseTypes }: PropList): string[] {
@@ -120,9 +161,10 @@ function formatExamples(component: Component, all: boolean): string[] {
     : component.examples.slice(0, EXAMPLES_BY_DEFAULT)
   const lines = ['Examples']
   for (const example of shown) {
-    lines.push(
-      `  ${example.title}${example.caption ? `: ${example.caption}` : ''}`,
-    )
+    // A caption can run over several lines, or hold a table.
+    const [first, ...more] = (example.caption ?? '').split('\n')
+    lines.push(`  ${example.title}${first ? `: ${first}` : ''}`)
+    if (more.length) lines.push(indent(more.join('\n'), '    '))
     lines.push(indent(example.code, '    '))
   }
   const hidden = component.examples.length - shown.length
@@ -181,6 +223,9 @@ export function formatComponent(
   if (!section) {
     const header = [component.name]
     if (component.status === 'deprecated') header.push('Deprecated.')
+    if (component.kind === 'utility') {
+      header.push('A utility for building components, not a UI component.')
+    }
     if (component.description) header.push(component.description)
     header.push('', component.importLine)
     if (component.hasAsChild) {
@@ -265,5 +310,11 @@ export function formatTokens(
     }),
     '',
     `${plural(tokens.length, 'token')}, values for ${scheme} colour scheme and ${density} density. Use them as var(<name>).`,
+    `→ The values follow data-color-scheme="${scheme}" and data-density="${density}" on an ancestor element.`,
+    // Typography tokens give the size and line height. The family and weight
+    // are separate tokens, and a heading without them renders in the UI font.
+    ...(tokens.some((t) => t.name.includes('-typography-'))
+      ? ['→ Family and weight: eds tokens font']
+      : []),
   ].join('\n')
 }

@@ -29,7 +29,11 @@ const nextDir = path.join(
 )
 const outputPath = path.join(rootDir, 'documentation/AI-COMPONENT-INDEX.md')
 
-const project = new Project({ skipAddingFilesFromTsConfig: true })
+// Created on first use, so a generator that imports this module and passes its
+// own project (generate-agent-data.js) does not parse the components twice.
+let defaultProject
+const getDefaultProject = () =>
+  (defaultProject ??= new Project({ skipAddingFilesFromTsConfig: true }))
 
 // React-conventional prop names that aren't part of the EDS API surface.
 // Listing them per row crowds the table without telling the reader anything.
@@ -49,7 +53,7 @@ const REACT_CONVENTIONAL_PROPS = new Set([
  *
  * Returns Array<{ name, dir }>.
  */
-function discoverPublicComponents() {
+function discoverPublicComponents(project = getDefaultProject()) {
   const barrelPath = path.join(nextDir, 'index.ts')
   const source = project.addSourceFileAtPath(barrelPath)
 
@@ -221,13 +225,16 @@ function isDeprecated(typeAlias) {
   return false
 }
 
-function loadSourceIfExists(filePath) {
+function loadSourceIfExists(project, filePath) {
   return fs.existsSync(filePath) ? project.addSourceFileAtPath(filePath) : null
 }
 
-function extractComponentData({ name, dir }) {
-  const tsxSource = loadSourceIfExists(path.join(dir, `${name}.tsx`))
-  const typesSource = loadSourceIfExists(path.join(dir, `${name}.types.ts`))
+function extractComponentData({ name, dir }, project = getDefaultProject()) {
+  const tsxSource = loadSourceIfExists(project, path.join(dir, `${name}.tsx`))
+  const typesSource = loadSourceIfExists(
+    project,
+    path.join(dir, `${name}.types.ts`),
+  )
 
   const propsTypeAlias =
     typesSource &&
@@ -281,7 +288,7 @@ function renderTable(rows) {
 function buildContent() {
   const publicComponents = discoverPublicComponents()
   const rows = publicComponents
-    .map(extractComponentData)
+    .map((entry) => extractComponentData(entry))
     .sort((a, b) => a.name.localeCompare(b.name))
 
   const totalProps = rows.reduce((n, r) => n + r.props.length, 0)

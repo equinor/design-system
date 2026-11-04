@@ -30,6 +30,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const { Node } = require('ts-morph')
 const {
   discoverPublicComponents,
   extractComponentData,
@@ -46,6 +47,7 @@ const {
 } = require('./component-docs/locate')
 const { extractProps, extractBaseTypes } = require('./component-docs/props')
 const { extractStories } = require('./component-docs/stories')
+const { toExample } = require('./agent-examples')
 const { readSidecar } = require('./component-docs/sidecar')
 const { createProject } = require('./component-docs/project')
 const { DocsError, fail } = require('./component-docs/errors')
@@ -73,6 +75,14 @@ const GUIDANCE_SECTIONS = {
   related: 'Related components',
 }
 
+// Links between the docs pages are Storybook paths, such as
+// `[TextField](?path=/docs/beta-inputs-textfield--docs)`, which lead nowhere
+// outside Storybook. The link text names the component, which the agent looks up
+// with `eds show`, so only the text is kept.
+const STORYBOOK_LINK = /\[([^\]]+)\]\(\?path=[^)]*\)/g
+const withoutStorybookLinks = (markdown) =>
+  markdown?.replace(STORYBOOK_LINK, '$1')
+
 function readGuidance(dir, name) {
   const file = path.join(dir, `${name}.docs.md`)
   if (!fs.existsSync(file)) {
@@ -81,9 +91,11 @@ function readGuidance(dir, name) {
   const { sections, links } = readSidecar(file, web)
   const guidance = {}
   for (const [key, heading] of Object.entries(GUIDANCE_SECTIONS)) {
-    if (sections[heading]) guidance[key] = sections[heading]
+    if (sections[heading]) {
+      guidance[key] = withoutStorybookLinks(sections[heading])
+    }
   }
-  return { summary: sections.Summary, guidance, links }
+  return { summary: withoutStorybookLinks(sections.Summary), guidance, links }
 }
 
 // Without `pnpm install`, React's types do not resolve, every DOM base type
@@ -118,6 +130,78 @@ function webBaseTypes(declaration) {
   }))
 }
 
+// Exports that are not components to render, so the CLI can say so instead of
+// listing them next to Button and Field.
+const UTILITIES = new Set(['Slot'])
+
+// The first paragraph of a component's README, for a utility without a sidecar
+// or JSDoc (Slot).
+function readmeDescription(dir) {
+  const file = path.join(dir, 'README.md')
+  if (!fs.existsSync(file)) return undefined
+  return fs
+    .readFileSync(file, 'utf8')
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .find((paragraph) => paragraph && !paragraph.startsWith('#'))
+}
+
+// Hooks exported next to a component, such as `export { Field, useFieldIds }`,
+// keyed by that component. The CLI shows them with it, because the hook is used
+// with that component's parts.
+function exportedHooks(project) {
+  const barrel = project.addSourceFileAtPath(
+    path.join(rootDir, web.componentsRoot, 'index.ts'),
+  )
+  const hooks = new Map()
+  for (const declaration of barrel.getExportDeclarations()) {
+    const names = declaration.getNamedExports().map((e) => e.getName())
+    const owner = names.find((n) => /^[A-Z]/.test(n))
+    const found = names.filter((n) => /^use[A-Z]/.test(n))
+    if (owner && found.length) hooks.set(owner, found)
+  }
+  return hooks
+}
+
+const firstParagraph = (text) =>
+  text
+    .trim()
+    .split(/\n\s*\n/)[0]
+    .replace(/\s+/g, ' ')
+
+// A hook's signature, its description and the fields of what it returns, read
+// from the exported function in the component's folder.
+function readHook(project, dir, name) {
+  const fn = project
+    .getSourceFiles(`${dir}/**/*.{ts,tsx}`)
+    .map((sf) => sf.getFunction(name))
+    .find((f) => f?.isExported())
+  if (!fn)
+    fail(
+      `${name}: no exported function ${name} in ${path.relative(rootDir, dir)}. Hooks are read from function declarations, so write it as \`export function ${name}\` rather than an arrow function.`,
+    )
+  const parameters = fn
+    .getParameters()
+    .map((p) => p.getText())
+    .join(', ')
+  const returnType = fn.getReturnTypeNode()
+  const returnDeclaration = Node.isTypeReference(returnType)
+    ? returnType.getTypeName().getSymbol()?.getDeclarations()[0]
+    : undefined
+  return {
+    name,
+    description: firstParagraph(fn.getJsDocs()[0]?.getDescription() ?? ''),
+    importLine: web.importLine(name),
+    signature: `${name}(${parameters})${returnType ? `: ${returnType.getText()}` : ''}`,
+    returns: returnDeclaration ? extractProps(returnDeclaration) : [],
+  }
+}
+
+// The type parameters of a generic props type, such as `T = string` for
+// Autocomplete, so the agent knows that the props which name T take its own type.
+const typeParameters = (declaration) =>
+  declaration?.getTypeParameters?.().map((p) => p.getText()) ?? []
+
 // A PascalCase export without a `{Name}Props` type, such as a context or a
 // provider, gets an entry with no props instead of stopping the build.
 function findProps(project, dir, name) {
@@ -134,9 +218,10 @@ function findProps(project, dir, name) {
 function readExamples(project, dir, name) {
   const file = path.join(dir, `${name}.stories.tsx`)
   if (!fs.existsSync(file)) return []
-  return extractStories(project, file, web.skipStories)
-    .filter((story) => story.code)
-    .map(({ title, caption, code }) => ({ title, caption, code }))
+  return extractStories(project, file, web.skipStories).flatMap((story) => {
+    const code = toExample(story)
+    return code ? [{ title: story.title, caption: story.caption, code }] : []
+  })
 }
 
 // The index finds the parts of a compound component in its source, and
@@ -164,9 +249,9 @@ function readSubComponents(project, dir, name, found) {
   })
 }
 
-function buildComponent(project, entry) {
+function buildComponent(project, entry, hooks) {
   const { name, dir } = entry
-  const index = extractComponentData(entry)
+  const index = extractComponentData(entry, project)
   const { summary, guidance, links } = readGuidance(dir, name)
   const file = path.join(dir, `${name}.tsx`)
   const declaration = findProps(project, dir, name)
@@ -174,13 +259,16 @@ function buildComponent(project, entry) {
 
   return {
     name,
-    description: summary ?? index.description ?? null,
+    description: summary ?? index.description ?? readmeDescription(dir) ?? null,
+    kind: UTILITIES.has(name) ? 'utility' : 'component',
     status: index.status,
     importLine: web.importLine(name),
     hasAsChild: props.some((prop) => prop.name === 'asChild'),
     props,
+    typeParameters: typeParameters(declaration),
     baseTypes: webBaseTypes(declaration),
     subComponents: readSubComponents(project, dir, name, index.subComponents),
+    hooks: (hooks.get(name) ?? []).map((hook) => readHook(project, dir, hook)),
     examples: readExamples(project, dir, name),
     guidance,
     links: {
@@ -197,8 +285,9 @@ function buildAgentData() {
   // (TextField's from Input) do not depend on the order of the barrel.
   const project = createProject()
   assertReactResolves(project)
-  const components = discoverPublicComponents()
-    .map((entry) => buildComponent(project, entry))
+  const hooks = exportedHooks(project)
+  const components = discoverPublicComponents(project)
+    .map((entry) => buildComponent(project, entry, hooks))
     .sort((a, b) => a.name.localeCompare(b.name))
 
   return {

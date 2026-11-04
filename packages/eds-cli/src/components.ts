@@ -1,7 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { CliError, fail } from './errors.js'
-import { findPackage, hasExport } from './resolve.js'
+import { findPackage, hasExport, readTextFile } from './resolve.js'
 import type { Component, ComponentData } from './types.js'
 
 /**
@@ -48,11 +48,10 @@ export function loadComponents(cwd: string, dataPath?: string): ComponentData {
       )
     }
   }
-  if (!existsSync(file)) return fail(`No such file: ${file}`)
-
+  const text = readTextFile(file)
   let data: ComponentData | null
   try {
-    data = JSON.parse(readFileSync(file, 'utf8')) as ComponentData | null
+    data = JSON.parse(text) as ComponentData | null
   } catch {
     return fail(`Could not read ${file}: it is not valid JSON.`)
   }
@@ -104,7 +103,12 @@ export function findComponents(
  */
 export function findComponent(data: ComponentData, name: string): Component {
   const wanted = name.toLowerCase()
-  const component = data.components.find((c) => c.name.toLowerCase() === wanted)
+  const component = data.components.find(
+    (c) =>
+      c.name.toLowerCase() === wanted ||
+      // A hook is shown with the component it belongs to.
+      c.hooks?.some((hook) => hook.name.toLowerCase() === wanted),
+  )
   if (component) return component
 
   const similar = similarNames(data, name)
@@ -134,47 +138,64 @@ export function searchComponents(
         sub.name,
         ...sub.props.map((p) => p.name),
       ]),
+      ...(c.hooks ?? []).map((hook) => hook.name),
     ]
       .join(' ')
       .toLowerCase()
   const exact = (haystack: string, word: string) => haystack.includes(word)
-  const typo = (haystack: string, word: string) =>
-    exact(haystack, word) ||
-    (word.length >= 5 &&
-      haystack.split(/[^a-z0-9]+/).some((t) => distance(t, word) <= 1))
   const nameHit = (c: Component) =>
     words.some((w) => c.name.toLowerCase().includes(w)) ? 0 : 1
   const find = (match: typeof exact) =>
     data.components.filter((c) => words.every((w) => match(text(c), w)))
 
   const matches = find(exact)
-  return (matches.length ? matches : find(typo)).sort(
+  return (matches.length ? matches : find(matchesWithTypo)).sort(
     (a, b) => nameHit(a) - nameHit(b) || a.name.localeCompare(b.name),
   )
 }
 
 /**
- * Component names close to `name`: containing it, contained in it, or within
- * two typos of it.
+ * Component and hook names close to `name`: containing it, contained in it, or
+ * within two typos of it. `eds show` finds a hook too, through its component.
  */
 export function similarNames(data: ComponentData, name: string): string[] {
   const wanted = name.toLowerCase()
   // One or two letters are close to everything.
   if (wanted.length < 3) return []
   return data.components
-    .filter((c) => {
-      const candidate = c.name.toLowerCase()
+    .flatMap((c) => [c.name, ...(c.hooks ?? []).map((hook) => hook.name)])
+    .filter((name) => {
+      const candidate = name.toLowerCase()
       return (
         candidate.includes(wanted) ||
         wanted.includes(candidate) ||
         distance(candidate, wanted) <= 2
       )
     })
-    .map((c) => c.name)
 }
 
-// Levenshtein distance, for "did you mean" on short component names.
-function distance(a: string, b: string): number {
+/**
+ * Whether `word` is in `haystack`, or one typo away from one of its words.
+ * A word with hyphens, such as `corner-radius`, is compared with as many
+ * words of `haystack` in a row. Typos only count in words of five letters or
+ * more, since shorter words are one letter away from too much. Shared by
+ * component and token search.
+ */
+export function matchesWithTypo(haystack: string, word: string): boolean {
+  if (haystack.includes(word)) return true
+  if (word.length < 5) return false
+  const pieces = word.split(/[^a-z0-9]+/)
+  const parts = haystack.split(/[^a-z0-9]+/)
+  return parts.some(
+    (_, i) =>
+      i + pieces.length <= parts.length &&
+      distance(parts.slice(i, i + pieces.length).join('-'), pieces.join('-')) <=
+        1,
+  )
+}
+
+// Levenshtein distance, for "did you mean" and typo matches.
+export function distance(a: string, b: string): number {
   let previous = Array.from({ length: b.length + 1 }, (_, i) => i)
   for (let i = 1; i <= a.length; i++) {
     const current = [i]

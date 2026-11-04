@@ -41,15 +41,37 @@ export type SubComponent = PropList & {
   name: string
 }
 
+/** A hook exported with a component, such as useFieldIds with Field */
+export type Hook = {
+  name: string
+  description: string
+  importLine: string
+  signature: string
+  /** The fields of the object the hook returns */
+  returns: Prop[]
+}
+
 export type Component = {
   name: string
   description: string | null
+  /**
+   * `utility` for an export that is not a UI component (Slot). Missing in data
+   * from before it was added, which means `component`.
+   */
+  kind?: 'component' | 'utility'
   status: 'active' | 'deprecated'
   importLine: string
   hasAsChild: boolean
   props: Prop[]
+  /**
+   * Type parameters of a generic component, such as `T = string`. Missing in
+   * data from before they were added.
+   */
+  typeParameters?: string[]
   baseTypes: BaseType[]
   subComponents: SubComponent[]
+  /** Missing in data from before hooks were added */
+  hooks?: Hook[]
   examples: Example[]
   guidance: Guidance
   links: {
