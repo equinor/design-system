@@ -5,7 +5,6 @@
 
 export const semantic = {
   background: {
-    backdrop: '#a4a4a4',
     canvas: '#f8f8f8',
     dialog: '#ffffff',
     floating: '#ffffff',
@@ -472,7 +471,7 @@ export const semantic = {
     tertiary: '#a4a4a4',
   },
   overlay: {
-    scrim: '#1d1d1d1a',
+    scrim: '#1d1d1d66',
   },
   spacing: {
     twoXl: 28,
