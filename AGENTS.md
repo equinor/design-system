@@ -506,10 +506,15 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 
 The board does not move a PR out of Inbox, between draft and ready, or back after feedback, so the author's agent does:
 
-- After opening a PR, move its card to **In Progress** (draft) or **Review** (ready). Move it to **In Progress** when it is converted back to a draft, and to **Review** when a draft is marked ready or review is re-requested after Request changes. Change the draft state with `gh pr ready` or `gh pr ready --undo` and move the card in the same step, since a click on github.com changes the state without the agent seeing it. Name the move when you ask to open the PR; the user's request or go-ahead for the action covers it.
-- While `main` dismisses stale approvals, a push dismisses an approval, even a nit fix. Re-request review and move the card to **Review**, since nothing moves it back from Approved.
+| When                                                                                              | Move the card to              |
+| ------------------------------------------------------------------------------------------------- | ----------------------------- |
+| A PR is opened as a draft, or converted back to a draft                                           | **In Progress**               |
+| A PR is opened as ready, a draft is marked ready, or review is re-requested after Request changes | **Review**                    |
+| You push to an approved PR (while `main` dismisses stale approvals, even a nit fix)               | **Review**, and re-request it |
+
+- Change the draft state with `gh pr ready` or `gh pr ready --undo` and move the card in the same step. A click on github.com leaves the card where it was. Name the move when you ask to open the PR, because the user's request for the action covers it.
+- The board is project 1076. Get the Status option IDs with `gh project field-list 1076 --owner equinor`. A new PR's card appears a few seconds after it opens, so tell the user if it has not appeared after a minute. Set the status, read it back, and set it again if it shows something else.
 - This needs the `project` scope on the user's `gh` login (`gh auth refresh -s project`). If `gh project` fails for lack of it, ask the user to run that. PRs opened on github.com or by a bot are moved by hand.
-- The board is project 1076. Get the Status option IDs at run time (`gh project field-list 1076 --owner equinor`). A new PR has no status until you set one. Its card appears a few seconds after the PR opens, so tell the user if it has not appeared after a minute.
 
 ## Git Workflow
 
