@@ -23,6 +23,9 @@ spec:
     - alias: eds-storybook
       environment: prod
       component: storybook
+    - alias: eds-demo
+      environment: prod
+      component: demo
   dnsExternalAlias:
     - alias: eds.equinor.com
       environment: prod
