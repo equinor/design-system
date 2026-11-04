@@ -150,6 +150,29 @@ body {
   padding: var(--eds-spacing-xl);
 }
 
+/* The frame and the disclaimer above it, in the padding of the area. */
+.workbench-frame-box {
+  position: relative;
+}
+
+.frame-disclaimer {
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline: 0;
+  overflow: hidden;
+  margin: 0;
+  margin-block-end: var(--eds-spacing-3xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .workbench-frame {
   overflow: hidden;
   border: 1px solid var(--eds-border-non-interactive-neutral-muted);

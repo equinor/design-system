@@ -2,6 +2,9 @@
 
 An exercise app for the beta design tokens from the Equinor Design System (`@equinor/eds-tokens@beta`). It shows a people dashboard (a top bar, side navigation, tabs, a selectable table, status badges, buttons and an account menu) next to a CSS editor. The CSS in the editor is everything the dashboard's design depends on, and every change shows in the dashboard as you type. It is split into four files, one for each part of the screen (`page.css`, `top-bar.css`, `navigation.css` and `table.css`), and the tabs above the editor switch between them. Each file opens where you left it.
 
+> [!IMPORTANT]
+> This demo is for learning the tokens, not the components. Apart from the buttons and icons, which are the EDS `Button` and `Icon`, the parts of the dashboard (the search field, menu, tabs, table and badges) are written for this demo. Neither their code nor their look represents the EDS Beta components, so do not use them as a reference for those.
+
 The **Tokens** tab on the right edge of the editor opens the token reference: every published beta token, in groups (background, text, icon, border, spacing, corner radius, typography, font, elevation, overlay), with a preview in the colour scheme and density of the dashboard, and the value for sizes and fonts. Click a token to put it in the CSS at the cursor: it replaces a selection, completes a name you have started typing, and adds `var()` around it when you are not already inside one. The filter at the top narrows the list by name.
 
 The strip at the top switches between:

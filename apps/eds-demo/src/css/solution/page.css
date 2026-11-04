@@ -11,6 +11,12 @@
   - Family, weight and elevation: --eds-font-family-*, --eds-font-weight-*,
     --eds-elevation-*.
 
+  This demo is for learning the tokens. Apart from the buttons and icons,
+  the parts of the dashboard (the search field, menu, tabs, table and
+  badges) are written for this demo. Neither their code nor their look
+  represents the EDS Beta components, so do not use them as a reference for
+  those.
+
   The buttons and icons are the EDS Button and Icon from
   @equinor/eds-core-react/next, which bring their own CSS, so they are not
   in these files. Icon sizes are set with the Icon size prop, which takes

@@ -149,21 +149,27 @@ export function Frame({
 
   return (
     <div ref={area} className="workbench-frame-area">
-      <div
-        className="workbench-frame"
-        style={{ width: `${width * scale}px`, height: `${height * scale}px` }}
-      >
-        <iframe
-          ref={iframe}
-          src={src}
-          title="Dashboard preview"
-          className="workbench-iframe"
-          style={{
-            width: `${width}px`,
-            height: `${height}px`,
-            transform: `scale(${scale})`,
-          }}
-        />
+      <div className="workbench-frame-box">
+        <p className="frame-disclaimer">
+          For learning the tokens: the dashboard is not a reference for the EDS
+          Beta components
+        </p>
+        <div
+          className="workbench-frame"
+          style={{ width: `${width * scale}px`, height: `${height * scale}px` }}
+        >
+          <iframe
+            ref={iframe}
+            src={src}
+            title="Dashboard preview"
+            className="workbench-iframe"
+            style={{
+              width: `${width}px`,
+              height: `${height}px`,
+              transform: `scale(${scale})`,
+            }}
+          />
+        </div>
       </div>
     </div>
   )

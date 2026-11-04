@@ -1,6 +1,12 @@
 /*
   Exercise: replace the hard-coded values with the beta tokens.
 
+  This demo is for learning the tokens. Apart from the buttons and icons,
+  which are the EDS Button and Icon, the parts of the dashboard (the search
+  field, menu, tabs, table and badges) are written for this demo. Neither
+  their code nor their look represents the EDS Beta components, so do not
+  use them as a reference for those.
+
   The CSS is in four files, one for each part of the screen: page.css (this
   file), top-bar.css, navigation.css and table.css. The tabs above the editor
   switch between them.
