@@ -20,6 +20,9 @@ import { describe, it, expect } from 'vitest'
  *   Comfortable can be asked for inside a Compact subtree (#5247)
  * - the density layer itself must not be widened any further, or every element
  *   with a colour scheme resets its subtree to Comfortable (#5239)
+ * - light is declared at `:root` as well, and dark comes after it, so a page
+ *   with no `data-color-scheme` is light and `<html data-color-scheme="dark">`
+ *   still wins over `:root` at equal specificity (#5795)
  *
  * The names are read from the bundle rather than listed here, so a token added
  * upstream is covered without touching this file. These are structural checks
@@ -159,6 +162,20 @@ describe('subtree scoping in the Tokens Studio CSS bundle', () => {
         if (refersOnlyToElevationAliases(block)) continue
         expect(block.selectors).toContain('[data-color-scheme]')
       }
+    })
+
+    it('declares light at :root too, so a page with no attribute is light (#5795)', () => {
+      expect(schemeBlocks.map((block) => block.selectors)).toEqual([
+        [':root', '[data-color-scheme="light"]'],
+        ['[data-color-scheme="dark"]'],
+      ])
+    })
+
+    it('declares every light name for dark too, so dark replaces all of :root', () => {
+      const [light, dark] = schemeBlocks
+      expect([...dark.declared.keys()].sort()).toEqual(
+        [...light.declared.keys()].sort(),
+      )
     })
 
     it('only exempts the elevation layer while both schemes agree on it', () => {

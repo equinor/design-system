@@ -1,0 +1,140 @@
+/* The top bar: the app name, the search field, the icon buttons and the
+   account menu. */
+
+.top-bar {
+  gap: var(--eds-spacing-md);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-md);
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-surface);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.brand {
+  gap: var(--eds-spacing-xs);
+}
+
+.app-title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+}
+
+.app-subtitle {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.top-bar-actions {
+  gap: var(--eds-spacing-3xs);
+}
+
+/* The search field has the input background. The border is the muted
+   level and steps with the state: default, hover, and on focus the hover
+   border plus the focus ring outside the field. */
+
+.search {
+  margin-inline-end: var(--eds-spacing-xs);
+}
+
+.search-icon {
+  inset-inline-start: var(--eds-spacing-xs);
+  color: var(--eds-icon-secondary);
+}
+
+.search-input {
+  --_border-color: var(--eds-border-interactive-neutral-muted-default);
+
+  margin: 0;
+  padding-block: var(--eds-spacing-xs);
+  padding-inline-start: calc(
+    var(--eds-spacing-xs) + var(--eds-spacing-md) + var(--eds-spacing-3xs)
+  );
+  padding-inline-end: var(--eds-spacing-xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--eds-background-input);
+  border: none;
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  &::placeholder {
+    color: var(--eds-text-secondary);
+    opacity: 1;
+  }
+
+  &:hover {
+    --_border-color: var(--eds-border-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    --_border-color: var(--eds-border-interactive-neutral-muted-hover);
+
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* The menu floats above the page, so it has the floating background and
+   the low elevation. Its border and the separator are dividers. */
+
+.menu {
+  margin: var(--eds-spacing-3xs) 0 0;
+  padding: 0;
+
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-floating);
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: 1px solid var(--eds-border-non-interactive-neutral-default);
+  outline-offset: -1px;
+  box-shadow: var(--eds-elevation-low);
+}
+
+.menu-item {
+  --_bg-color: transparent;
+
+  gap: var(--eds-spacing-xs);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--_bg-color);
+  outline: none;
+
+  & > svg {
+    color: var(--eds-icon-primary);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  /* The ring is drawn inside the item. */
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: -1px;
+  }
+}
+
+.menu-divider {
+  block-size: 0;
+  margin: 0;
+  border: none;
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}

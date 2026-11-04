@@ -1,0 +1,141 @@
+/* The top bar: the app name, the search field, the icon buttons and the
+   account menu. */
+
+/* 🐨 3 of 6. The top bar is a surface. Its bottom line is a divider: it is
+   not interactive, and it should be quiet. The spacing tokens follow the
+   density: switch to Compact or Relaxed to check. */
+.top-bar {
+  gap: 16px;
+  padding-block: 8px;
+  padding-inline: 16px;
+
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+  border-block-end: 1px solid light-dark(black, white);
+}
+
+.brand {
+  gap: 8px;
+}
+
+/* 💯 The application name is a title, so it uses the header role and the
+   header font family. */
+.app-title {
+  font-family: Equinor, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* 💯 Supporting text: smaller, and a step down from the primary text. */
+.app-subtitle {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: light-dark(black, white);
+}
+
+.top-bar-actions {
+  gap: 4px;
+}
+
+.search {
+  margin-inline-end: 8px;
+}
+
+.search-icon {
+  inset-inline-start: 8px;
+  color: light-dark(black, white);
+}
+
+/* 💯 Form fields have their own background token, and the border steps
+   with the state. */
+.search-input {
+  --_border-color: light-dark(black, white);
+
+  margin: 0;
+  padding-block: 8px;
+  padding-inline-start: 28px;
+  padding-inline-end: 8px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  background-color: light-dark(white, black);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  &::placeholder {
+    color: light-dark(black, white);
+    opacity: 1;
+  }
+
+  &:hover {
+    --_border-color: light-dark(black, white);
+  }
+
+  &:focus-visible {
+    --_border-color: light-dark(black, white);
+
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+/* 🐨 4 of 6. Open the account menu with the person icon at the right of the
+   top bar. The menu floats above the page: find the background and the
+   elevation made for small overlays. Then go to table.css. */
+.menu {
+  margin: 4px 0 0;
+  padding: 0;
+
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+  border-radius: 4px;
+  outline: 1px solid light-dark(black, white);
+  outline-offset: -1px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+}
+
+.menu-item {
+  --_bg-color: transparent;
+
+  gap: 8px;
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  background-color: var(--_bg-color);
+  outline: none;
+
+  & > svg {
+    color: light-dark(black, white);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: -1px;
+  }
+}
+
+.menu-divider {
+  block-size: 0;
+  margin: 0;
+  border: none;
+  border-block-start: 1px solid light-dark(black, white);
+}
