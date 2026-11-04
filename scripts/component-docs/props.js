@@ -80,13 +80,26 @@ function literalKeys(typeNode) {
   return []
 }
 
-// The React Native prop types that a props type is built from, such as
+const fromReactDom = (node) =>
+  node.getSourceFile().getFilePath().includes('/node_modules/@types/react/')
+
+// Which library declarations count as a base type, per platform: React Native
+// props types for mobile, React's DOM attribute types for web.
+const BASE_TYPES = {
+  mobile: { from: fromReactNative, name: /Props$/ },
+  // RefAttributes only adds `ref`, so it is not a set of DOM props.
+  web: { from: fromReactDom, name: /^(?!RefAttributes$).*(Attributes|Props)$/ },
+}
+
+// The library prop types that a props type is built from, such as
 // PressableProps or ViewProps, each with the keys an Omit removed from it. Their
 // props are not listed in the table, so the page names them instead. Only the
 // top level of the type counts, through `&`, local aliases and the helpers
 // above, so a type that merely borrows one prop, like `TextProps['onPress']`,
-// does not claim to accept all of TextProps.
-function extractBaseTypes(declaration) {
+// does not claim to accept all of TextProps. Mobile by default; the agent data
+// passes 'web'.
+function extractBaseTypes(declaration, platform = 'mobile') {
+  const base = BASE_TYPES[platform]
   const bases = new Map()
   const seen = new Set()
 
@@ -104,9 +117,15 @@ function extractBaseTypes(declaration) {
       let symbol = name.getSymbol()
       if (symbol?.isAlias()) symbol = symbol.getAliasedSymbol()
       for (const decl of symbol?.getDeclarations() ?? []) {
-        if (fromReactNative(decl)) {
-          const base = name.getText()
-          if (/Props$/.test(base) && !bases.has(base)) bases.set(base, omitted)
+        if (base.from(decl)) {
+          // Web keeps the element type: HTMLAttributes<HTMLHRElement>.
+          const text =
+            platform === 'web'
+              ? typeNode.getText().replace(/\s+/g, ' ')
+              : name.getText()
+          if (base.name.test(name.getText()) && !bases.has(text)) {
+            bases.set(text, omitted)
+          }
         } else if (fromLibrary(decl)) {
           const helper = name.getText()
           if (PASS_THROUGH.has(helper)) {
