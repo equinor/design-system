@@ -1,0 +1,223 @@
+/* Layout only. This file decides where things go and holds no design
+   decisions: no colour, spacing, size, radius, shadow or typography. All of
+   those are in the CSS in the editor, for the exercise or the solution. */
+
+.app {
+  display: grid;
+  flex: 1;
+  grid-template-rows: auto 1fr;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand,
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  pointer-events: none;
+}
+
+.search-input {
+  inline-size: 250px;
+  appearance: none;
+
+  /* The browser's own clear button is hidden. */
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    appearance: none;
+  }
+}
+
+/* The account menu is anchored to its EDS Button. */
+.account-button {
+  anchor-name: --account-menu;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.page-header-text {
+  display: flex;
+  flex-direction: column;
+  max-inline-size: 40rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Clips the cells to the rounded corners, and scrolls on narrow screens. */
+.table-card {
+  overflow-x: auto;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.header,
+.header-checkbox,
+.text-cell,
+.checkbox-cell,
+.badge-cell {
+  text-align: start;
+  vertical-align: middle;
+}
+
+/* The dividers of a header cell. Their size and colour are in the tokens
+   file. */
+.header {
+  position: relative;
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+  }
+
+  &::before {
+    inset-inline-start: 0;
+  }
+
+  &::after {
+    inset-inline-end: 0;
+  }
+}
+
+.header-checkbox,
+.checkbox-cell {
+  inline-size: 1%;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.cell-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* The native checkbox stays in place for keyboard, screen readers and
+   clicks, but is transparent: the EDS checkbox icon underneath shows its
+   state. */
+.cell-checkbox {
+  position: relative;
+  display: flex;
+}
+
+.cell-checkbox-input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cell-checkbox-icon {
+  display: block;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* The account menu is a native popover, placed under its button with CSS
+   anchor positioning. The popover's user-agent styles centre it in the
+   viewport, so they are reset here. */
+.menu {
+  position-anchor: --account-menu;
+  position-area: block-end span-inline-start;
+  inset: auto;
+  inline-size: 250px;
+  border: none;
+
+  &:popover-open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Browsers without anchor positioning get a fixed spot under the top bar. */
+  @supports not (position-area: block-end) {
+    inset-block-start: 4rem;
+    inset-inline-end: 1rem;
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  border: none;
+  text-align: start;
+  cursor: pointer;
+}
