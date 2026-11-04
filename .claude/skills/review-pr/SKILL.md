@@ -13,7 +13,7 @@ Review the PR in `$ARGUMENTS` (a number, URL or branch) and put the findings in 
 
 1. Take the PR from `$ARGUMENTS`, or from the current branch (`gh pr view`) if it is empty.
 2. Read `gh pr view <n> --json title,body,author,baseRefName,headRefName,files,reviews,comments` and `gh pr diff <n>`, including existing reviews and the bot's. Open the surrounding source when the diff alone is ambiguous.
-3. Check the diff against `AGENTS.md`. For `/next` components, also check `documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`, and check token names against `packages/eds-tokens/build/css/` instead of assuming them. When a finding depends on test, lint or build output, run it against the PR head (`git fetch origin pull/<n>/head`) and say which ref the result comes from.
+3. Check the diff against `AGENTS.md`. For `/next` components, also check `documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`, and check token names against `packages/eds-tokens/build/css/` instead of assuming them. When a finding depends on test, lint or build output, run it against the PR head (`git fetch origin pull/<n>/head`) and say which ref the result comes from. Take line numbers for comments from the PR head too (`git show <ref>:<path>`), because your local branch may be a different one.
 4. Rank each finding (below). Keep a finding the bot already raised. Before suggesting a new issue, search open and closed issues (`gh issue list --state all --search "..."`).
 5. Recommend a review type from the table in `AGENTS.md`.
 6. Put the review in, then reply.
