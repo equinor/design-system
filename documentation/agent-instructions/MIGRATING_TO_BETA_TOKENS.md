@@ -130,7 +130,7 @@ Three roles (ADR-0027):
 
 Weight is never per size (ADR-0029). `header` is `medium` at every size, `label` is `normal`, `medium` or `bold`, and `body` is `normal` or `bold`. Sizes above `label` `5xl`, `header` `4xl` and `body` `3xl` have no beta equivalent.
 
-The font family tokens carry a `sans-serif` fallback from `eds-tokens` 3.0.0-beta.10 (#5701), so do not add one in the component.
+The font family tokens carry a generic fallback from `eds-tokens` 3.0.0-beta.10 (#5701), `sans-serif` for `header` and `ui` and `monospace` for `mono` (#5800), so do not add one in the component.
 
 Set `font-family`, `font-size`, `line-height` and `font-weight` in the component CSS. Set them on the root as well as on inner text elements, so `asChild` elements get them too.
 
