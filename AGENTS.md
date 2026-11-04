@@ -493,21 +493,21 @@ PR descriptions have a limit of 300 words and issues a limit of 400 words. For w
 
 The board moves a PR to "Needs revision" on a **Request changes** review and to "Approved" on an **Approve** review. A plain comment or a **Comment** review does not move it.
 
-| Finding                                         | Review type                        | Who submits                    |
-| ----------------------------------------------- | ---------------------------------- | ------------------------------ |
-| Real blocker (bug, accessibility, wrong API)    | Request changes                    | Agent, after the user confirms |
-| Only nits, each prefixed `nit:`                 | Approve, with the nits as comments | The human                      |
-| Nits plus a question that needs an answer first | Comment                            | Agent, after the user confirms |
+| Finding                                         | Recommend                          |
+| ----------------------------------------------- | ---------------------------------- |
+| Real blocker (bug, accessibility, wrong API)    | Request changes                    |
+| Only nits, each prefixed `nit:`                 | Approve, with the nits as comments |
+| Nits plus a question that needs an answer first | Comment                            |
 
-- Draft the review and recommend a type, but never run `gh pr review --approve`. Dependabot PRs are the exception, after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md)).
+- Put the review in as a **pending review** with inline comments, and recommend a type. Never submit one: the reviewer reads and edits it on GitHub and submits it with the type they choose. The exception is approving a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md)).
 - Nits are optional and do not send the PR back. Reviews post under the user's account. Nobody can request changes on or approve their own PR, so move the card by hand there.
 - When reviewers disagree, the latest review decides the column. Request changes blocks the merge until it is dismissed or the same reviewer approves.
 - Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR.
 
 The board does not move a PR out of Inbox, between draft and ready, or back after feedback, so the author's agent does:
 
-- After opening a PR, move its card to **In Progress** (draft) or **Review** (ready). Move it to **In Progress** when it is converted back to a draft, and to **Review** when a draft is marked ready or review is re-requested after Request changes. Use `gh pr ready` and `gh pr ready --undo`, since a click on github.com leaves the card where it is. Name the move when you ask to open the PR; the user's request or go-ahead for the action covers it.
-- A push dismisses an approval, even a nit fix. Re-request review and move the card to **Review**, since nothing moves it back from Approved.
+- After opening a PR, move its card to **In Progress** (draft) or **Review** (ready). Move it to **In Progress** when it is converted back to a draft, and to **Review** when a draft is marked ready or review is re-requested after Request changes. Change the draft state with `gh pr ready` or `gh pr ready --undo` and move the card in the same step, since a click on github.com changes the state without the agent seeing it. Name the move when you ask to open the PR; the user's request or go-ahead for the action covers it.
+- While `main` dismisses stale approvals, a push dismisses an approval, even a nit fix. Re-request review and move the card to **Review**, since nothing moves it back from Approved.
 - This needs the `project` scope on the user's `gh` login (`gh auth refresh -s project`). If `gh project` fails for lack of it, ask the user to run that. PRs opened on github.com or by a bot are moved by hand.
 - The board is project 1076. Get the Status option IDs at run time (`gh project field-list 1076 --owner equinor`). A new PR has no status until you set one. Its card appears a few seconds after the PR opens, so tell the user if it has not appeared after a minute.
 

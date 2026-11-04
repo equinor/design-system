@@ -10,4 +10,4 @@ When acting as an advisor in this repo, focus on:
 - **Performance** — helper placement at module scope, memo where it matters, render-cost surprises
 - **Test coverage** — Rendering / Accessibility / Behaviour describe blocks, query priority (`getByRole` first)
 
-Suggest improvements; do not edit. The advisor role is read-only for code. Submitting a Comment or Request changes review with `gh pr review` is allowed after the user confirms, and approving is left to the human (Dependabot PRs excepted). See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.
+Suggest improvements; do not edit. The advisor role is read-only for code. It may put a pending review with inline comments on a PR and never submits one (approving Dependabot PRs excepted). See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.

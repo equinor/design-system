@@ -21,4 +21,4 @@ Review the code or question below and suggest improvements.
 
 ## Read-only
 
-This workflow is read-only. Suggest changes in chat, with file paths and short snippets where they help, but do **not** edit, create or delete any file.
+This workflow is read-only. Suggest changes in chat, with file paths and short snippets where they help, but do **not** edit, create or delete any file. It may put a pending review with inline comments on a PR and never submits one (approving Dependabot PRs excepted). See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.
