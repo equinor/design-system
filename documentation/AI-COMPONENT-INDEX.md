@@ -18,7 +18,7 @@ This file is the canonical "what already exists" reference for AI coding assista
 | Accordion | — | exclusive | Accordion.Item, Accordion.Header, Accordion.Panel | — | active |
 | Autocomplete | — | allowCustomValue, clearLabel, defaultInputValue, description, helperMessage, id, inputValue, label, loading, loadingText, noOptionsText, onClear, onCustomValueConfirm, onInputChange, onValueChange, optionsFilter, value | — | — | active |
 | Avatar | — | alt, emphasis, initial, name, notification, notificationLabel, size, src | — | — | active |
-| AvatarNameLabel | AvatarNameLabel shows an avatar next to a person's name, with room for secondary text such as a job title. | alt, emphasis, initial, layout, meta, name, notification, notificationLabel, size, src | — | — | active |
+| AvatarNameLabel | AvatarNameLabel shows an avatar next to a person's name, with room for secondary text, such as a job title, and an open trailing slot that… | alt, emphasis, initial, layout, meta, name, notification, notificationLabel, size, src | — | — | active |
 | Badge | — | emphasis, tone, variant | — | — | active |
 | Banner | — | onDismiss, role, tone | Banner.Icon, Banner.Message, Banner.Actions | — | active |
 | Button | — | asChild, icon, multiline, round, size, tone, variant | — | ✓ | active |
