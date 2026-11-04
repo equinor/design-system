@@ -64,7 +64,7 @@ Sub-agents are invoked by primary agents to perform specialized tasks. They cann
 
 | Agent | Description | Tools |
 |-------|-------------|-------|
-| `eds-component` | Builds EDS 2.0 React components following conventions | write, edit, bash |
+| `eds-component` | Builds `/next` React components following conventions | write, edit, bash |
 | `figma-component` | Builds components from Figma designs with MCP token extraction | write, edit, bash |
 | `accessibility-audit` | Audits components against WCAG 2.1 AA checklist | read-only (no write/edit/bash) |
 | `component-doc` | Creates and verifies component documentation | write, edit |

@@ -1,0 +1,168 @@
+/* The table: its header, the cells, the row checkboxes and the status
+   badges. */
+
+/* The table is a surface with a divider border around it. */
+
+.table-card {
+  background-color: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+/* The header cells only label the columns: you cannot click them. So they
+   use the non-interactive neutral tokens, a muted fill, and dividers for
+   the line below them and between the columns. */
+.header,
+.header-checkbox {
+  padding: var(--eds-spacing-2xs);
+  background-color: var(--eds-background-non-interactive-neutral-muted);
+  box-shadow: inset 0 -0.5px 0 var(--eds-border-non-interactive-neutral-muted);
+}
+
+.header {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  &::before,
+  &::after {
+    inset-block: var(--eds-spacing-xs);
+    inline-size: 0.5px;
+    background-color: var(--eds-border-non-interactive-neutral-muted);
+  }
+}
+
+/* The body cells share the state slots. At rest a cell has no fill and a
+   0.5px line at the bottom. */
+.text-cell,
+.checkbox-cell,
+.badge-cell {
+  --_bg-color: transparent;
+  --_line: var(--eds-border-non-interactive-neutral-muted);
+  --_lines: inset 0 -0.5px 0 var(--_line);
+
+  background-color: var(--_bg-color);
+  box-shadow: var(--_lines);
+  transition: background-color var(--_transition-duration) ease-in-out;
+}
+
+.text-cell {
+  padding-block: var(--eds-spacing-3xs);
+  padding-inline: var(--eds-spacing-2xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+}
+
+/* Focus is the hover fill and the focus line inside the cell. */
+.checkbox-cell {
+  padding: var(--eds-spacing-3xs);
+
+  &:has(:focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+    --_lines: inset 0 0 0 2px var(--eds-border-interactive-focus);
+  }
+}
+
+.badge-cell {
+  --_lines: inset 0 0.5px 0 var(--_line), inset 0 -0.5px 0 var(--_line);
+
+  padding: var(--eds-spacing-3xs);
+}
+
+/* The table selects whole rows, so the row reacts to the pointer as one:
+   hover and press fill every cell in the row. A selected row has the
+   selected fill in every cell. */
+.row:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+}
+
+.row:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+}
+
+.row[data-selected] > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-default);
+}
+
+.row[data-selected]:hover > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+}
+
+.row[data-selected]:active > :is(.text-cell, .checkbox-cell, .badge-cell) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-pressed);
+}
+
+.row[data-selected] > .checkbox-cell:has(:focus-visible) {
+  --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+  --_lines: inset 0 0 0 2px var(--eds-border-interactive-focus);
+}
+
+.cell-content {
+  gap: var(--eds-spacing-3xs);
+  min-block-size: var(--eds-spacing-xl);
+}
+
+.cell-checkbox-icon {
+  color: var(--eds-icon-interactive-accent-default);
+}
+/* A badge is not interactive, so it uses the non-interactive muted fill
+   and border of its tone, with text.on-muted and icon.on-muted of the same
+   tone. Every tone maps the same four slots. */
+.badge {
+  --_bg-color: var(--eds-background-non-interactive-neutral-muted);
+  --_border-color: var(--eds-border-non-interactive-neutral-muted);
+  --_text-color: var(--eds-text-on-muted-neutral);
+  --_icon-color: var(--eds-icon-on-muted-neutral);
+
+  gap: var(--eds-spacing-3xs);
+  padding-block: var(--eds-spacing-4xs);
+  padding-inline: var(--eds-spacing-2xs);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--_text-color);
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: inset 0 0 0 1px var(--_border-color);
+
+  & > svg {
+    color: var(--_icon-color);
+  }
+
+  &[data-tone='info'] {
+    --_bg-color: var(--eds-background-non-interactive-info-muted);
+    --_border-color: var(--eds-border-non-interactive-info-muted);
+    --_text-color: var(--eds-text-on-muted-info);
+    --_icon-color: var(--eds-icon-on-muted-info);
+  }
+
+  &[data-tone='success'] {
+    --_bg-color: var(--eds-background-non-interactive-success-muted);
+    --_border-color: var(--eds-border-non-interactive-success-muted);
+    --_text-color: var(--eds-text-on-muted-success);
+    --_icon-color: var(--eds-icon-on-muted-success);
+  }
+
+  &[data-tone='warning'] {
+    --_bg-color: var(--eds-background-non-interactive-warning-muted);
+    --_border-color: var(--eds-border-non-interactive-warning-muted);
+    --_text-color: var(--eds-text-on-muted-warning);
+    --_icon-color: var(--eds-icon-on-muted-warning);
+  }
+
+  &[data-tone='danger'] {
+    --_bg-color: var(--eds-background-non-interactive-danger-muted);
+    --_border-color: var(--eds-border-non-interactive-danger-muted);
+    --_text-color: var(--eds-text-on-muted-danger);
+    --_icon-color: var(--eds-icon-on-muted-danger);
+  }
+}

@@ -100,10 +100,12 @@ function extractStories(project, file, skip) {
         title: humanise(name),
         caption: getStoryCaption(sf, declaration),
         code: getStoryCode(sf, declaration),
+        // For the agent data, which rewrites the code (scripts/agent-examples.js).
+        declaration,
       })
     }
   }
   return stories
 }
 
-module.exports = { extractStories, unwrap }
+module.exports = { extractStories, unwrap, getStoryBody }

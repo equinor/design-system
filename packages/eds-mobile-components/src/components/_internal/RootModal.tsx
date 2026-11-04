@@ -17,14 +17,14 @@ export const RootModal = ({
         {onBackdropPress ? (
             <Pressable
                 onPress={onBackdropPress}
-                style={{ ...StyleSheet.absoluteFillObject, zIndex: 1 }}
+                style={{ ...StyleSheet.absoluteFill, zIndex: 1 }}
             >
                 {children}
             </Pressable>
         ) : (
             <View
                 pointerEvents="box-none"
-                style={{ ...StyleSheet.absoluteFillObject, zIndex: 1 }}
+                style={{ ...StyleSheet.absoluteFill, zIndex: 1 }}
             >
                 {children}
             </View>

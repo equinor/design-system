@@ -1,4 +1,4 @@
-import React, { Ref, useEffect, useRef, useState } from "react";
+import React, { ComponentRef, Ref, useEffect, useRef, useState } from "react";
 import { AccessibilityInfo, TextInput, TextInputProps, View } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
@@ -50,7 +50,7 @@ export type TextAreaProps = {
     /**
      * Ref to the text input.
      */
-    ref?: Ref<TextInput>;
+    ref?: Ref<ComponentRef<typeof TextInput>>;
 } & Omit<TextInputProps, "multiline" | "editable" | "readOnly" | "scrollEnabled">;
 
 export const TextArea = ({

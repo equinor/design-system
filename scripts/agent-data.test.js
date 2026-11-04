@@ -1,0 +1,232 @@
+/**
+ * Tests for the component data that `@equinor/eds-cli` reads. They build the
+ * data from the real components, because the point is that every component a
+ * consumer can import ends up in it with usable content. Node's own runner, so
+ * no new dependency: `pnpm run test:scripts`.
+ */
+
+const { test, describe, before } = require('node:test')
+const assert = require('node:assert')
+const fs = require('fs')
+const path = require('path')
+const ts = require('typescript')
+
+const { buildAgentData, SCHEMA_VERSION } = require('./generate-agent-data')
+const { discoverPublicComponents } = require('./generate-component-index')
+
+describe('agent data', () => {
+  let data
+  const byName = (name) => data.components.find((c) => c.name === name)
+
+  before(() => {
+    data = buildAgentData()
+  })
+
+  test('carries the schema version, the beta version and the install line', () => {
+    assert.strictEqual(data.schemaVersion, SCHEMA_VERSION)
+    assert.strictEqual(data.package, '@equinor/eds-core-react')
+    // Beta now, release candidate from 3.0.0-rc.1 (ADR-0025).
+    assert.match(data.version, /^\d+\.\d+\.\d+-(beta|rc)\.\d+$/)
+    assert.match(data.installLine, /@equinor\/eds-core-react@beta/)
+  })
+
+  // Read from the barrel as text rather than through discoverPublicComponents,
+  // which built the data, so a component that the discovery misses fails here.
+  test('has one entry for every exported component', () => {
+    const barrel = fs.readFileSync(
+      path.join(
+        __dirname,
+        '../packages/eds-core-react/src/components/next/index.ts',
+      ),
+      'utf8',
+    )
+    const exported = [...barrel.matchAll(/^export \{([^}]+)\} from/gm)]
+      .flatMap((match) => match[1].split(','))
+      .map((name) => name.trim())
+      .filter((name) => /^[A-Z]/.test(name))
+      .sort()
+    assert.ok(exported.length > 20, 'no exports read from the barrel')
+    assert.deepStrictEqual(data.components.map((c) => c.name).sort(), exported)
+  })
+
+  // No check on baseTypes: it is empty when the extractor does not follow the
+  // props shape (an interface, `React.*`, `ComponentProps*`), and that is fine.
+  test('every component has an import line', () => {
+    for (const component of data.components) {
+      assert.match(
+        component.importLine,
+        new RegExp(`import \\{ ${component.name} \\} from`),
+      )
+    }
+  })
+
+  test('the description is the Summary from .docs.md, not the JSDoc', () => {
+    const sidecar = fs.readFileSync(
+      path.join(
+        __dirname,
+        '../packages/eds-core-react/src/components/next/Icon/Icon.docs.md',
+      ),
+      'utf8',
+    )
+    const summary = sidecar
+      .split(/^## Summary$/m)[1]
+      .split(/^## /m)[0]
+      .trim()
+    assert.strictEqual(byName('Icon').description, summary)
+  })
+
+  test('a documented component has props, examples and guidance', () => {
+    const button = byName('Button')
+    assert.ok(button.description)
+    const variant = button.props.find((p) => p.name === 'variant')
+    assert.strictEqual(variant.type, "'primary' | 'secondary' | 'ghost'")
+    assert.strictEqual(variant.default, "'primary'")
+    assert.ok(variant.description)
+    assert.ok(button.examples.length > 0)
+    assert.ok(button.examples.every((e) => e.title && e.code))
+    assert.ok(button.guidance.usage)
+    assert.ok(button.guidance.accessibility)
+  })
+
+  test('gives examples without Storybook helpers or args', () => {
+    for (const component of data.components) {
+      for (const { title, code } of component.examples) {
+        const where = `${component.name}: ${title}`
+        assert.doesNotMatch(code, /<(Wrapper|Stack|ExampleLabel)\b/, where)
+        assert.doesNotMatch(code, /\b(args|useArgs)\b/, where)
+      }
+    }
+  })
+
+  test('gives examples that parse as TSX', () => {
+    for (const component of data.components) {
+      for (const { title, code } of component.examples) {
+        const text = code.startsWith('function ')
+          ? code
+          : `const example = (\n<>\n${code}\n</>\n)`
+        const sf = ts.createSourceFile(
+          'example.tsx',
+          text,
+          ts.ScriptTarget.Latest,
+          false,
+          ts.ScriptKind.TSX,
+        )
+        assert.deepStrictEqual(
+          sf.parseDiagnostics.map((d) => d.messageText),
+          [],
+          `${component.name}: ${title}`,
+        )
+      }
+    }
+  })
+
+  test('keeps the code before the JSX as a function component', () => {
+    const overview = byName('Field').examples.find(
+      (e) => e.title === 'Overview',
+    )
+    assert.match(overview.code, /^function Overview\(\) \{\n/)
+    assert.match(overview.code, /useFieldIds\(\)/)
+  })
+
+  test('keeps no Storybook paths in the text', () => {
+    for (const component of data.components) {
+      const text = JSON.stringify([component.description, component.guidance])
+      assert.ok(!text.includes('](?path='), component.name)
+    }
+    assert.match(byName('TextField').guidance.related, /- `Field` provides/)
+  })
+
+  test('source links are pinned to the beta release tag', () => {
+    const { source } = byName('Button').links
+    assert.ok(
+      source.includes(`/blob/eds-core-react-next@v${data.version}/`),
+      source,
+    )
+  })
+
+  // Picked from the real components rather than named, so the test keeps
+  // working as components get docs and stories (#5467).
+  test('a component without sidecar or stories still gets an entry', (t) => {
+    const bare = discoverPublicComponents().filter(
+      ({ name, dir }) =>
+        !fs.existsSync(path.join(dir, `${name}.docs.md`)) &&
+        !fs.existsSync(path.join(dir, `${name}.stories.tsx`)),
+    )
+    if (bare.length === 0) {
+      t.skip('every component has a sidecar or stories')
+      return
+    }
+    for (const { name } of bare) {
+      const component = byName(name)
+      assert.deepStrictEqual(component.examples, [], name)
+      assert.deepStrictEqual(component.guidance, {}, name)
+    }
+  })
+
+  test('marks the components that take asChild', () => {
+    assert.strictEqual(byName('Button').hasAsChild, true)
+    assert.strictEqual(byName('Link').hasAsChild, true)
+    assert.strictEqual(byName('Field').hasAsChild, false)
+  })
+
+  test('lists compound sub-components', () => {
+    assert.deepStrictEqual(
+      byName('Field').subComponents.map((sub) => sub.name),
+      ['Field.Label', 'Field.Description', 'Field.HelperMessage'],
+    )
+  })
+
+  test('leaves a standalone component on the parent page out of subComponents', () => {
+    assert.deepStrictEqual(byName('Avatar').subComponents, [])
+    assert.ok(byName('AvatarNameLabel'))
+  })
+
+  test('gives each sub-component its props and base type', () => {
+    const label = byName('Field').subComponents.find(
+      (sub) => sub.name === 'Field.Label',
+    )
+    const indicator = label.props.find((p) => p.name === 'indicator')
+    assert.ok(indicator.type)
+    assert.ok(indicator.description)
+    assert.strictEqual(
+      label.baseTypes[0].name,
+      'LabelHTMLAttributes<HTMLLabelElement>',
+    )
+  })
+
+  test('lists a hook with the component it is exported with', () => {
+    const [hook] = byName('Field').hooks
+    assert.strictEqual(hook.name, 'useFieldIds')
+    assert.match(hook.signature, /^useFieldIds\(.*\): FieldIds$/)
+    assert.match(hook.importLine, /import \{ useFieldIds \} from/)
+    assert.ok(hook.description)
+    assert.ok(hook.returns.some((field) => field.name === 'inputId'))
+    assert.deepStrictEqual(byName('Button').hooks, [])
+  })
+
+  test('marks Slot as a utility and describes it from its README', () => {
+    const slot = byName('Slot')
+    assert.strictEqual(slot.kind, 'utility')
+    assert.match(slot.description, /asChild/)
+    assert.strictEqual(byName('Button').kind, 'component')
+  })
+
+  test('leaves out Omit keys the base type does not have', () => {
+    const [base] = byName('Search').baseTypes
+    assert.ok(!base.omitted.includes('startAdornment'), base.omitted)
+    assert.ok(base.omitted.includes('type'), base.omitted)
+  })
+
+  test('gives the type parameters of a generic component', () => {
+    assert.deepStrictEqual(byName('Autocomplete').typeParameters, [
+      'T = string',
+    ])
+    assert.deepStrictEqual(byName('Button').typeParameters, [])
+  })
+
+  test('names the base type and the keys an Omit removes, once each', () => {
+    const [base] = byName('TextField').baseTypes
+    assert.strictEqual(base.name, 'InputHTMLAttributes<HTMLInputElement>')
+    assert.strictEqual(new Set(base.omitted).size, base.omitted.length)
+  })
+})

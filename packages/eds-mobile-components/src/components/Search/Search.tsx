@@ -1,4 +1,4 @@
-import React, { Ref, useEffect, useState } from "react";
+import React, { ComponentRef, Ref, useEffect, useState } from "react";
 import {
     Keyboard,
     LayoutChangeEvent,
@@ -53,7 +53,7 @@ export type SearchProps = Omit<
     /**
      * Ref to the search text input.
      */
-    ref?: Ref<TextInput>;
+    ref?: Ref<ComponentRef<typeof TextInput>>;
 };
 
 export const Search = ({
