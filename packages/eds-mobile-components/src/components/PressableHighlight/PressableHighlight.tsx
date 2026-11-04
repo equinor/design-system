@@ -5,10 +5,10 @@ import {
     PressableProps,
     StyleProp,
     StyleSheet,
-    View,
     ViewStyle,
 } from "react-native";
 import Animated from "react-native-reanimated";
+import type { ViewRef } from "../../utils/nativeRefs";
 import { useFadeAnimation } from "../../styling/animations";
 import { DisabledPressable } from "./DisabledPressable";
 
@@ -24,8 +24,10 @@ export type PressableHightlightProps = {
     style?: StyleProp<ViewStyle>;
 } & Omit<PressableProps, "children">;
 
-export const PressableHighlight = forwardRef<
-    View,
+export const PressableHighlight: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<React.PropsWithChildren<PressableHightlightProps>> & React.RefAttributes<ViewRef>
+> = forwardRef<
+    ViewRef,
     React.PropsWithChildren<PressableHightlightProps>
 >(
     (
@@ -83,7 +85,7 @@ export const PressableHighlight = forwardRef<
 
 const styles = StyleSheet.create({
     overlay: {
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
     },
 });
 

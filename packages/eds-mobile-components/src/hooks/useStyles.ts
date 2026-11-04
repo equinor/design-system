@@ -1,6 +1,5 @@
-import { StyleSheet } from "react-native";
-
 import type { ThemeDependentStyles } from "../styling";
+import type { NamedStyles } from "../styling/NamedStyles";
 import { useDynamicStyleSheet } from "./useDynamicStyleSheet";
 import { useToken } from "./useToken";
 
@@ -14,15 +13,15 @@ type InferStyles<T> =
  */
 export function useStyles<
     TName extends
-        | StyleSheet.NamedStyles<TName>
-        | StyleSheet.NamedStyles<unknown>,
+        | NamedStyles<TName>
+        | NamedStyles<unknown>,
 >(
     themeStyles: ThemeDependentStyles<undefined, TName>
 ): InferStyles<typeof themeStyles>;
 export function useStyles<
     TName extends
-        | StyleSheet.NamedStyles<TName>
-        | StyleSheet.NamedStyles<unknown>,
+        | NamedStyles<TName>
+        | NamedStyles<unknown>,
     TProps,
 >(
     themeStyles: ThemeDependentStyles<TProps, TName>,
@@ -30,8 +29,8 @@ export function useStyles<
 ): InferStyles<typeof themeStyles>;
 export function useStyles<
     TName extends
-        | StyleSheet.NamedStyles<TName>
-        | StyleSheet.NamedStyles<unknown>,
+        | NamedStyles<TName>
+        | NamedStyles<unknown>,
     TProps,
 >(themeStyles: ThemeDependentStyles<TProps, TName>, props?: TProps) {
     const currentTheme = useToken();

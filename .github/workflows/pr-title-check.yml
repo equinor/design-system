@@ -56,7 +56,7 @@ jobs:
             scope_content="${BASH_REMATCH[2]}"
             echo "📦 Scope detected: '$scope_content'"
 
-            valid_scopes=("design-system-docs" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker" "devcontainer" "github" "build" "deps" "config" "docs")
+            valid_scopes=("design-system-docs" "eds-cli" "eds-color-palette-generator" "eds-core-react" "eds-data-grid-react" "eds-demo" "eds-icons" "eds-lab-react" "eds-tailwind" "eds-tokens" "eds-tokens-build" "eds-tokens-sync" "eds-utils" "figma-broker" "devcontainer" "github" "build" "deps" "config" "docs")
 
             IFS=',' read -ra scopes <<< "$scope_content"
             all_valid=true

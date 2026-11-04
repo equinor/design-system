@@ -1,14 +1,14 @@
 import { Section } from "@/components/Section";
 import { Surface } from "@/components/Surface";
 import { Icon, Input, Typography } from "@equinor/eds-mobile-components";
-import { useRef, useState } from "react";
+import { ComponentRef, useRef, useState } from "react";
 import { Pressable, ScrollView, TextInput } from "react-native";
 
 export default function InputScreen() {
     const [value1, setValue1] = useState("");
     const [clearableValue, setClearableValue] = useState("");
     const [value3, setValue3] = useState("");
-    const clearableRef = useRef<TextInput>(null);
+    const clearableRef = useRef<ComponentRef<typeof TextInput>>(null);
     return (
         <ScrollView
             contentInsetAdjustmentBehavior="automatic"

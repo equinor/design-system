@@ -56,6 +56,7 @@ describe("TextArea", () => {
         render(<TextArea showCharacterCount maxLength={10} />);
         fireEvent.changeText(screen.getByDisplayValue(""), "12345678");
         expect(
+            // eslint-disable-next-line @typescript-eslint/unbound-method
             AccessibilityInfo.announceForAccessibility
         ).toHaveBeenCalledWith("8 of 10 characters");
     });
@@ -64,6 +65,7 @@ describe("TextArea", () => {
         render(<TextArea showCharacterCount maxLength={10} />);
         fireEvent.changeText(screen.getByDisplayValue(""), "1234567890");
         expect(
+            // eslint-disable-next-line @typescript-eslint/unbound-method
             AccessibilityInfo.announceForAccessibility
         ).toHaveBeenCalledWith("10 of 10 characters");
     });

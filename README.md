@@ -30,6 +30,7 @@ packages/                # Published npm packages
   eds-data-grid-react/   # Data grid component (deprecated)
   eds-utils/             # Utility functions
   eds-tailwind/          # Tailwind CSS plugin
+  eds-cli/               # CLI for looking up components and tokens (for AI agents)
 ```
   
 ## Architecture
@@ -133,6 +134,7 @@ C4Context
 | [Lab React](https://github.com/equinor/design-system/tree/main/packages/eds-lab-react) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-lab-react)](https://www.npmjs.com/package/@equinor/eds-lab-react) |
 | [Data Grid React](https://github.com/equinor/design-system/tree/main/packages/eds-data-grid-react) **(deprecated)** | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-data-grid-react)](https://www.npmjs.com/package/@equinor/eds-data-grid-react) |
 | [Utils](https://github.com/equinor/design-system/tree/main/packages/eds-utils) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-utils)](https://www.npmjs.com/package/@equinor/eds-utils) |
+| [CLI](https://github.com/equinor/design-system/tree/main/packages/eds-cli) | [![Checks](https://github.com/equinor/design-system/actions/workflows/checks.yaml/badge.svg)](https://github.com/equinor/design-system/actions/workflows/checks.yaml) | [![Version](https://img.shields.io/npm/v/@equinor/eds-cli)](https://www.npmjs.com/package/@equinor/eds-cli) |
 
 ## Applications
 

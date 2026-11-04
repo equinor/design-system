@@ -1,10 +1,11 @@
 import { DependencyList, useMemo } from "react";
 import { StyleSheet } from "react-native";
+import type { NamedStyles } from "../styling/NamedStyles";
 
 const createStyleSheet = <
-    T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<unknown>,
+    T extends NamedStyles<T> | NamedStyles<unknown>,
 >(
-    styles: T | StyleSheet.NamedStyles<T>
+    styles: T | NamedStyles<T>
 ) => StyleSheet.create(styles);
 
 /**
@@ -14,9 +15,9 @@ const createStyleSheet = <
  * @returns A memoized style sheet object.
  */
 export const useDynamicStyleSheet = <
-    T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<unknown>,
+    T extends NamedStyles<T> | NamedStyles<unknown>,
 >(
-    style: () => T | StyleSheet.NamedStyles<T>,
+    style: () => T | NamedStyles<T>,
     dependencies: DependencyList
 ) => {
     return useMemo(() => createStyleSheet(style()), dependencies);

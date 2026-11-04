@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, ThemeProvider } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
@@ -6,7 +6,6 @@ import "react-native-gesture-handler";
 import { useAppStore } from "@/lib/store";
 import { useUserScheme } from "@/lib/useUserScheme";
 import { EDSProvider, useEDS, useToken } from "@equinor/eds-mobile-components";
-import { ThemeProvider } from "@react-navigation/native";
 import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();

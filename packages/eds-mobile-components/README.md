@@ -13,7 +13,7 @@ npm install @equinor/eds-mobile-components
 This library requires the following peer dependencies:
 
 ```bash
-npm install expo-font react-native-gesture-handler react-native-reanimated react-native-svg
+npm install expo-font react-native-gesture-handler react-native-reanimated react-native-svg react-native-worklets
 ```
 
 Make sure to follow the installation instructions for each:
@@ -21,6 +21,7 @@ Make sure to follow the installation instructions for each:
 - [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/docs/fundamentals/installation/)
 - [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
 - [react-native-svg](https://github.com/software-mansion/react-native-svg#installation)
+- [react-native-worklets](https://docs.swmansion.com/react-native-worklets/docs/fundamentals/getting-started/)
 
 ## Getting started
 

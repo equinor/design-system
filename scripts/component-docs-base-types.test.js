@@ -8,11 +8,12 @@ const assert = require('node:assert')
 const { Project } = require('ts-morph')
 
 const { PLATFORMS } = require('./component-docs/config')
+const { createProject } = require('./component-docs/project')
 const { locate, findPropsDeclaration } = require('./component-docs/locate')
 const { extractBaseTypes, extractProps } = require('./component-docs/props')
 
 const baseTypesOf = (component) => {
-  const project = new Project({ skipAddingFilesFromTsConfig: true })
+  const project = createProject()
   const { dir } = locate(PLATFORMS.mobile, component)
   return extractBaseTypes(findPropsDeclaration(project, dir, component))
 }
