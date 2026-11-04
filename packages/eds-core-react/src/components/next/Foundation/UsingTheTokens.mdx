@@ -146,16 +146,16 @@ The beta components move to these tokens one component at a time ([#5119](https:
 
 ## What resolves without either attribute
 
-The semantic names are all declared on `:root`, but not all of them have a value there. The colour roles alias a colour-scheme layer that the bundle declares only under `[data-color-scheme="light"]` and `[data-color-scheme="dark"]`. A custom property resolves its `var()` references on the element where it is declared, so on an element with no colour-scheme ancestor the alias points at a name that does not exist, and the colour role is left without a value. The browser reports no error. A declaration such as `background-color: var(--eds-background-surface)` falls back to the property's inherited or initial value, which gives a transparent background and inherited text colour. Density behaves differently, because the bundle declares the Comfortable values on `:root` as well as under `[data-density="comfortable"]`.
+Every semantic name has a value on `:root`. The bundle declares the light colour scheme on `:root` as well as under `[data-color-scheme="light"]`, and the Comfortable density on `:root` as well as under `[data-density="comfortable"]`, so a page with neither attribute is light and Comfortable.
 
 | Names | Without either attribute |
 | --- | --- |
-| `--eds-background-*`, `--eds-border-*`, `--eds-text-*`, `--eds-icon-*`, `--eds-data-visualization-*` | No value |
-| `--eds-elevation-low`, `--eds-elevation-high` | No value, because the shadow colours come from the colour scheme |
+| `--eds-background-*`, `--eds-border-*`, `--eds-text-*`, `--eds-icon-*`, `--eds-data-visualization-*` | The light values |
+| `--eds-elevation-low`, `--eds-elevation-high` | The light values, resolved on the root element |
 | `--eds-spacing-*`, `--eds-corner-radius-*`, `--eds-typography-*` | The Comfortable values |
 | `--eds-font-family-*`, `--eds-font-weight-*`, `--eds-overlay-scrim` | Always resolve, since they have no mode |
 
-The table below is rendered directly on this page, outside the wrapper that gives every story a colour scheme. Each column is an element with the attribute named in its heading, and the values are read back from the browser with `getComputedStyle`. The last column sets only `data-density`, which shows that a density attribute does not make the colours resolve. While [#5567](https://github.com/equinor/design-system/issues/5567) is open, the elevation row has no value in any column, including light and dark: each column sets the attribute on its own element, and the root element of this page has none, as described for the shadows above. The sample in each column uses the same CSS. Its dashed outline is drawn with `currentcolor` rather than a token, so that its padding stays visible when the token colours are missing.
+The table below is rendered directly on this page, outside the wrapper that gives every story a colour scheme. Each column is an element with the attribute named in its heading, and the values are read back from the browser with `getComputedStyle`. The first column matches the light column, and the last column sets only `data-density`, which shows that the colours stay light inside a density subtree. While [#5567](https://github.com/equinor/design-system/issues/5567) is open, the elevation row shows the value resolved on the root element in every column, including dark, as described for the shadows above. The sample in each column uses the same CSS. Its dashed outline is drawn with `currentcolor` rather than a token, so that the table does not depend on the colour tokens it reads out.
 
 <ResolutionTable />
 
