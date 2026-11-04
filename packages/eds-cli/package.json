@@ -1,6 +1,6 @@
 {
   "name": "@equinor/eds-cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Look up the Equinor Design System components and tokens installed in a project, for people and AI agents",
   "license": "MIT",
   "author": {

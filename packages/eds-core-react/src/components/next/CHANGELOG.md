@@ -4,6 +4,13 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.6](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.5...eds-core-react-next@v3.0.0-beta.6) (2026-11-04)
+
+
+### 🐛 Fixed
+
+* describe AvatarNameLabel for agents ([#5845](https://github.com/equinor/design-system/issues/5845)) ([ece25d6](https://github.com/equinor/design-system/commit/ece25d63bfc3b325f429700a064e934ed1d55c49))
+
 ## [3.0.0-beta.5](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.4...eds-core-react-next@v3.0.0-beta.5) (2026-11-02)
 
 
