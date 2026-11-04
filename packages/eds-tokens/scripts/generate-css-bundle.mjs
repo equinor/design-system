@@ -102,7 +102,11 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { DENSITY_BASE_WIDE_RE, WIDE_RE } from './semantic-scope.mjs'
+import {
+  DENSITY_BASE_WIDE_RE,
+  LIGHT_SCHEME_WIDE_RE,
+  WIDE_RE,
+} from './semantic-scope.mjs'
 
 const args = parseArgs(process.argv.slice(2))
 const CSS_DIR = args.css ?? 'src/tokens/css'
@@ -171,8 +175,18 @@ const GENERIC_FAMILIES = new Set([
 // was --eds-border-focus, where the semantic copy was a self-reference,
 // so letting the semantic block win dropped focus outlines inside
 // scoped subtrees (cleared by #5280).
-const layerRank = (file) =>
-  relative(CSS_DIR, file).split(sep)[0] === 'color-scheme' ? 1 : 0
+//
+// Within the color-scheme files, light comes first on purpose and not by
+// the alphabet. Light is also declared at `:root` (#5795), which has the
+// same specificity as `[data-color-scheme="dark"]`, so on
+// `<html data-color-scheme="dark">` the later block wins. Sorted by
+// name, dark.css would come first and the root would turn light.
+const LIGHT_SCHEME_FILE = join('color-scheme', 'light.css')
+const layerRank = (file) => {
+  const path = relative(CSS_DIR, file)
+  if (path.split(sep)[0] !== 'color-scheme') return 0
+  return path === LIGHT_SCHEME_FILE ? 1 : 2
+}
 const files = (await readdir(CSS_DIR, { recursive: true }))
   .filter((file) => file.endsWith('.css'))
   .map((file) => join(CSS_DIR, file))
@@ -212,6 +226,20 @@ if (!densityBase)
 if (!DENSITY_BASE_WIDE_RE.test(densityBase[1]))
   fail(
     `${densityBase[0]} is not widened to ':root, [data-density="comfortable"]'. Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+  )
+
+// And the light colour scheme, so a page with no data-color-scheme
+// renders light rather than unresolved colour tokens (#5795).
+const lightScheme = contents.find(
+  ([file]) => relative(CSS_DIR, file) === LIGHT_SCHEME_FILE,
+)
+if (!lightScheme)
+  fail(
+    `no ${LIGHT_SCHEME_FILE} under ${CSS_DIR}, so the export layout changed. Review #5795 before proceeding`,
+  )
+if (!LIGHT_SCHEME_WIDE_RE.test(lightScheme[1]))
+  fail(
+    `${lightScheme[0]} is not widened to ':root, [data-color-scheme="light"]'. Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
   )
 
 const seenFamilies = new Set()
