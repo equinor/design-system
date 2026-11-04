@@ -129,6 +129,16 @@ describe('eds', () => {
       expect(stdout.match(/→ Tokens for the layout/g)).toHaveLength(1)
     })
 
+    it('prints the props of each sub-component after the main props', () => {
+      const { stdout } = run(['show', 'Field', '--section', 'props'])
+      expect(stdout).toContain(
+        'Props\n  No props of its own.\n  Also accepts the props of HTMLAttributes<HTMLDivElement>.\n\nField.Label props\n  indicator?: string\n    Marks the field as optional or required\n  Also accepts the props of LabelHTMLAttributes<HTMLLabelElement>.\n',
+      )
+      expect(run(['show', 'Field']).stdout).toContain(
+        'Sub-components: Field.Label\n',
+      )
+    })
+
     it('prints an array for several components with --json', () => {
       const { stdout } = run(['show', 'Button', 'Field', '--json'])
       const components = JSON.parse(stdout) as Component[]
@@ -151,6 +161,10 @@ describe('eds', () => {
       expect(run(['search', 'label']).stdout).toMatch(
         /^Field [^\n]*\n(?:.*\n)*?TextField /,
       )
+    })
+
+    it('matches the props of sub-components', () => {
+      expect(run(['search', 'indicator']).stdout).toMatch(/^Field /)
     })
 
     it('gives counts and the command to run next for each match', () => {
