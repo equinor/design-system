@@ -32,7 +32,7 @@ import { TextArea } from '@equinor/eds-mobile-components'
 | `disabled` | `boolean` | `false` | Disables all interaction. |
 | `readOnly` | `boolean` | `false` | Prevents editing. The value can still be selected and copied. |
 | `showCharacterCount` | `boolean` | `false` | Shows a character count below the TextArea. Displays "n / maxLength" when maxLength is set, otherwise just "n". |
-| `ref` | `Ref<TextInput>` | None | Ref to the text input. |
+| `ref` | `Ref<ComponentRef<typeof TextInput>>` | None | Ref to the text input. |
 
 Also accepts all React Native [`TextInputProps`](https://reactnative.dev/docs/textinput#props), except `multiline`, `editable` and `scrollEnabled`.
 

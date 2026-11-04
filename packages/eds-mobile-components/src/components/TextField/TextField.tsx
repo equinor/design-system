@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
-import { TextInput, View } from "react-native";
+import { View } from "react-native";
+import type { TextInputRef } from "../../utils/nativeRefs";
 import { useStyles } from "../../hooks/useStyles";
 import { EDSStyleSheet } from "../../styling";
 import { Input, InputProps } from "../Input";
@@ -24,7 +25,9 @@ export type TextFieldProps = {
     helperMessage?: string;
 } & InputProps;
 
-export const TextField = forwardRef<TextInput, TextFieldProps>(
+export const TextField: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<TextFieldProps> & React.RefAttributes<TextInputRef>
+> = forwardRef<TextInputRef, TextFieldProps>(
     (
         {
             label,

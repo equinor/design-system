@@ -6,6 +6,7 @@ import {
     TextInputProps,
     View,
 } from "react-native";
+import type { TextInputRef } from "../../utils/nativeRefs";
 import { useStyles } from "../../hooks/useStyles";
 import { Icon } from "../Icon";
 import { inputTokenStyles } from "./inputStyle";
@@ -66,7 +67,9 @@ export type InputProps = {
     disabled?: boolean;
 } & Omit<TextInputProps, "onChange" | "onChangeText" | "readOnly">;
 
-export const Input = forwardRef<TextInput, InputProps>(
+export const Input: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<InputProps> & React.RefAttributes<TextInputRef>
+> = forwardRef<TextInputRef, InputProps>(
     (
         {
             startText,

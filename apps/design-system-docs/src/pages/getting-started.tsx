@@ -2,6 +2,8 @@ import Layout from '@theme/Layout'
 
 import type { JSX } from 'react'
 
+import { map, table_chart } from '@equinor/eds-icons'
+
 import { Hero } from '@site/src/components/Hero'
 import { DocsSection } from '@site/src/components/DocsSection'
 import { IconCard, IconCardGrid } from '@site/src/components/IconCard'
@@ -52,6 +54,25 @@ export default function GettingStarted(): JSX.Element {
           subtitle="Each guide is tailored to your role — jump straight into the resources and steps that matter most for your work."
         >
           <PathCards />
+        </DocsSection>
+        <DocsSection
+          title="Where we're heading"
+          subtitle="Follow the themes we're investing in and plan around what's ahead."
+        >
+          <IconCardGrid columns={2}>
+            <IconCard
+              icon={map}
+              title="Roadmap"
+              description="A high-level view of what the EDS team is working on now and where the design system is heading."
+              to="/roadmap"
+            />
+            <IconCard
+              icon={table_chart}
+              title="Components status"
+              description="The maturity of each component across Latest and the Beta, with links to docs and Storybook."
+              to="/components-status"
+            />
+          </IconCardGrid>
         </DocsSection>
         <CtaSection
           title="What's next"

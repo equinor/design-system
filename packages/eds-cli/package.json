@@ -1,0 +1,47 @@
+{
+  "name": "@equinor/eds-cli",
+  "version": "0.0.0",
+  "description": "Look up the Equinor Design System components and tokens installed in a project, for people and AI agents",
+  "license": "MIT",
+  "author": {
+    "name": "EDS Core Team",
+    "email": "fg_eds@equinor.com"
+  },
+  "homepage": "https://eds.equinor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/equinor/design-system",
+    "directory": "packages/eds-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/equinor/design-system/issues"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "eds": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "types": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm run build"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "equinor",
+    "design-system",
+    "cli",
+    "ai",
+    "agents"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}
