@@ -1,20 +1,5 @@
 {
   "background": {
-    "backdrop": {
-      "$extensions": {
-        "com.figma": {
-          "codeSyntax": {
-            "WEB": "var(--eds-background-backdrop)"
-          },
-          "scopes": [
-            "FRAME_FILL",
-            "SHAPE_FILL"
-          ]
-        }
-      },
-      "$type": "color",
-      "$value": "{neutral.7}"
-    },
     "canvas": {
       "$extensions": {
         "com.figma": {
@@ -3653,7 +3638,7 @@
       },
       "$type": "color",
       "$value": {
-        "alpha": 0.10196078431372549,
+        "alpha": 0.4,
         "colorSpace": "srgb",
         "components": [
           0.11372549019607843,

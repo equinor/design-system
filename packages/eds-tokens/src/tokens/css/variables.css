@@ -672,7 +672,6 @@
 :root,
 [data-color-scheme],
 [data-density] {
-  --eds-background-backdrop: var(--eds-neutral-7);
   --eds-background-canvas: var(--eds-neutral-1);
   --eds-background-dialog: var(--eds-neutral-15);
   --eds-background-floating: var(--eds-neutral-15);
@@ -919,7 +918,7 @@
   --eds-icon-primary: var(--eds-neutral-13);
   --eds-icon-secondary: var(--eds-neutral-9);
   --eds-icon-tertiary: var(--eds-neutral-7);
-  --eds-overlay-scrim: #1d1d1d1a;
+  --eds-overlay-scrim: #1d1d1d66;
   --eds-spacing-2xl: var(--eds-density-spacing-2xl);
   --eds-spacing-2xs: var(--eds-density-spacing-2xs);
   --eds-spacing-3xl: var(--eds-density-spacing-3xl);
