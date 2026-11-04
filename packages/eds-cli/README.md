@@ -12,7 +12,7 @@ The decision behind the CLI is [ADR-0030](https://github.com/equinor/design-syst
 ## Requirements
 
 - Node 22 or later
-- For components: an `@equinor/eds-core-react` beta that ships the component data, which is newer than `3.0.0-beta.4`. With an older beta, the component commands exit with an error that says so.
+- For components: an `@equinor/eds-core-react` beta that ships the component data, which is `3.0.0-beta.6` or newer. With an older beta, the component commands exit with an error that says so.
 - For tokens: `@equinor/eds-tokens@beta`
 
 ## Limitations
