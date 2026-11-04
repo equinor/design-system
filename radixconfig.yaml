@@ -39,6 +39,12 @@ spec:
       ports:
         - name: http
           port: 3000
+    - name: demo
+      dockerfileName: DockerfileEdsDemo
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
     - name: docs
       dockerfileName: DockerfileEdsDocs
       publicPort: http

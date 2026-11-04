@@ -5,3 +5,4 @@
 **/dist
 **/storybook-build
 **/Dockerfile*
+**/.next
