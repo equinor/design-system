@@ -22,6 +22,7 @@ type FrameProps = {
   inspect: boolean
   onToggleMode: () => void
   onInspectPick: (classes: string[]) => void
+  onInspectOff: () => void
 }
 
 function post(frame: HTMLIFrameElement | null, message: ToPreview) {
@@ -56,6 +57,7 @@ export function Frame({
   inspect,
   onToggleMode,
   onInspectPick,
+  onInspectOff,
 }: FrameProps) {
   const area = useRef<HTMLDivElement>(null)
   const iframe = useRef<HTMLIFrameElement>(null)
@@ -75,6 +77,7 @@ export function Frame({
     scale,
     onToggleMode,
     onInspectPick,
+    onInspectOff,
   })
   latest.current = {
     css,
@@ -84,6 +87,7 @@ export function Frame({
     scale,
     onToggleMode,
     onInspectPick,
+    onInspectOff,
   }
 
   useEffect(() => {
@@ -106,6 +110,8 @@ export function Frame({
         latest.current.onToggleMode()
       } else if (event.data.type === 'eds-demo:inspect-pick') {
         latest.current.onInspectPick(event.data.classes)
+      } else if (event.data.type === 'eds-demo:inspect-off') {
+        latest.current.onInspectOff()
       }
     }
     window.addEventListener('message', onMessage)

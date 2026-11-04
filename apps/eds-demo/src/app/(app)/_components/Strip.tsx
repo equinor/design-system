@@ -110,7 +110,7 @@ export function Strip({
       <div className="strip-options">
         <label
           className="strip-option"
-          title="Show the class names in the frame. Click one to go to its CSS."
+          title="Show the class names in the frame. Click one to go to its CSS. Escape turns it off."
         >
           <input
             type="checkbox"

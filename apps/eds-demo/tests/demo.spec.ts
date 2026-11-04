@@ -134,6 +134,10 @@ test.describe('Editor', () => {
     const dialog = page.getByRole('dialog', { name: 'Restart the solution' })
     await page.getByRole('button', { name: 'Restart' }).click()
     await expect(dialog).toBeVisible()
+    // The shortcut does not switch the mode under the open dialog.
+    await page.keyboard.press('ControlOrMeta+Shift+S')
+    await expect(dialog).toBeVisible()
+    await expect(page.getByRole('radio', { name: 'Solution' })).toBeChecked()
     await expect(dialog).toContainText(
       'Do you want to restart? Progress will be lost.',
     )
@@ -345,6 +349,11 @@ test.describe('Token reference', () => {
     await open(page, { tokens: 'open' })
     await filter(page, 'focus')
     await expect(reference(page).locator('.token')).toHaveCount(1)
+    // While filtering, a group with a match cannot be closed.
+    await reference(page)
+      .locator('.token-group-summary', { hasText: 'Border' })
+      .click()
+    await expect(reference(page).locator('.token')).toHaveCount(1)
     await expect(token(page, '--eds-border-interactive-focus')).toBeVisible()
     await filter(page, 'no-such-token')
     await expect(reference(page)).toContainText('No token matches')
@@ -379,7 +388,14 @@ test.describe('Inspect', () => {
     await expect(activeLine(page)).toHaveText('.badge {')
     expect(await selectedRows()).toBe(before)
 
-    await page.getByRole('checkbox', { name: 'Inspect' }).uncheck()
+    // Escape turns it off, but not while the focus is in the editor, where
+    // the pick put it.
+    const inspect = page.getByRole('checkbox', { name: 'Inspect' })
+    await page.keyboard.press('Escape')
+    await expect(inspect).toBeChecked()
+    await inspect.focus()
+    await page.keyboard.press('Escape')
+    await expect(inspect).not.toBeChecked()
     await expect(dashboard.locator('eds-demo-inspector')).toHaveCount(0)
     await dashboard.locator('.row').first().click()
     await expect.poll(selectedRows).toBe(before + 1)

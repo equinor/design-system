@@ -8,8 +8,9 @@
   border-radius: 4px;
 }
 
-/* 💯 The header cells are interactive, so their fill and bottom line come
-   from the interactive tokens. */
+/* 💯 The header cells only label the columns: you cannot click them. Pick a
+   quiet non-interactive fill. The line below them and the lines between
+   the columns are dividers. */
 .header,
 .header-checkbox {
   padding: 6px;

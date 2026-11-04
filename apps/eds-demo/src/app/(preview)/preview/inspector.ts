@@ -21,7 +21,7 @@ const STYLE = `
   }
   .label span {
     display: block;
-    zoom: var(--eds-demo-zoom, 1);
+    zoom: var(--demo-zoom, 1);
     padding: var(--eds-spacing-4xs) var(--eds-spacing-3xs);
     font-family: var(--eds-font-family-mono);
     font-size: var(--eds-typography-label-sm-font-size);
@@ -41,6 +41,7 @@ const STYLE = `
 export function startInspector(
   known: () => Set<string>,
   onPick: (classes: string[]) => void,
+  onEscape: () => void,
 ) {
   const host = document.createElement('eds-demo-inspector')
   host.style.cssText =
@@ -115,7 +116,12 @@ export function startInspector(
     if (picked) onPick(picked.classes)
   }
 
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') onEscape()
+  }
+
   const capture = { capture: true }
+  window.addEventListener('keydown', onKeyDown)
   window.addEventListener('pointermove', onMove, capture)
   document.documentElement.addEventListener('pointerleave', onLeave)
   window.addEventListener('pointerdown', block, capture)
@@ -124,6 +130,7 @@ export function startInspector(
   window.addEventListener('scroll', draw, capture)
 
   return () => {
+    window.removeEventListener('keydown', onKeyDown)
     window.removeEventListener('pointermove', onMove, capture)
     document.documentElement.removeEventListener('pointerleave', onLeave)
     window.removeEventListener('pointerdown', block, capture)

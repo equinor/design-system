@@ -33,6 +33,7 @@ export function PreviewBridge() {
         stopInspector = startInspector(
           () => classes,
           (picked) => send({ type: 'eds-demo:inspect-pick', classes: picked }),
+          () => send({ type: 'eds-demo:inspect-off' }),
         )
       } else if (!on && stopInspector) {
         stopInspector()
@@ -53,7 +54,7 @@ export function PreviewBridge() {
         html.dataset.colorScheme = message.colorScheme
         html.dataset.density = message.density
         // The inspector's label is drawn at full size in a scaled frame.
-        html.style.setProperty('--eds-demo-zoom', String(1 / message.scale))
+        html.style.setProperty('--demo-zoom', String(1 / message.scale))
         inspect(message.inspect)
       }
     }

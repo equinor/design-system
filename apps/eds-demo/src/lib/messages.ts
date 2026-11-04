@@ -21,6 +21,8 @@ export type FromPreview =
   | { type: 'eds-demo:toggle-mode' }
   /** The class names of the element that was clicked while inspecting */
   | { type: 'eds-demo:inspect-pick'; classes: string[] }
+  /** Escape was pressed in the frame while inspecting */
+  | { type: 'eds-demo:inspect-off' }
 
 export function isMessage<T extends { type: string }>(
   data: unknown,

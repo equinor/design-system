@@ -145,6 +145,9 @@ export function Workbench({ sources, tokenNames }: WorkbenchProps) {
   const [restartOpen, setRestartOpen] = useState(false)
   // Not saved: inspecting blocks the dashboard, so it starts off.
   const [inspecting, setInspecting] = useState(false)
+  // Read by the keyboard handlers, which are set up once.
+  const latest = useRef({ restartOpen, inspecting })
+  latest.current = { restartOpen, inspecting }
 
   // Storage and the URL only exist in the browser, so they are read after
   // the first render of the static page.
@@ -163,10 +166,12 @@ export function Workbench({ sources, tokenNames }: WorkbenchProps) {
     [],
   )
 
+  // Not while the restart dialog is open: it restarts the mode it names.
   const toggleMode = useCallback(() => {
-    setSettings((current) => ({
-      ...current,
-      mode: current.mode === 'exercise' ? 'solution' : 'exercise',
+    if (latest.current.restartOpen) return
+    setSettings((settings) => ({
+      ...settings,
+      mode: settings.mode === 'exercise' ? 'solution' : 'exercise',
     }))
   }, [])
 
@@ -222,8 +227,22 @@ export function Workbench({ sources, tokenNames }: WorkbenchProps) {
       if (modes.some((each) => each === mode)) update('mode', mode as Mode)
     }
     // Ctrl/⌘ + Shift + S anywhere in the app, the editor included. The frame
-    // sends the same shortcut as a message.
+    // sends the same shortcut as a message. Escape turns Inspect off, unless
+    // it is meant for the editor, a text field or the restart dialog.
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        const target = event.target instanceof Element ? event.target : null
+        if (
+          latest.current.inspecting &&
+          !latest.current.restartOpen &&
+          !target?.closest(
+            ".cm-editor, textarea, input:not([type='checkbox'], [type='radio'])",
+          )
+        ) {
+          setInspecting(false)
+        }
+        return
+      }
       if (!isToggleShortcut(event)) return
       event.preventDefault()
       toggleMode()
@@ -291,6 +310,7 @@ export function Workbench({ sources, tokenNames }: WorkbenchProps) {
             inspect={inspecting}
             onToggleMode={toggleMode}
             onInspectPick={onInspectPick}
+            onInspectOff={() => setInspecting(false)}
           />
           {settings.view !== 'fullscreen' && (
             <Splitter

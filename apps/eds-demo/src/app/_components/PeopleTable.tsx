@@ -123,14 +123,17 @@ export function PeopleTable() {
                     onChange={() => toggle(person.id)}
                   />
                 </td>
-                {[
-                  person.id,
-                  person.name,
-                  person.email,
-                  person.position,
-                  person.location,
-                ].map((value) => (
-                  <td key={value} className="text-cell">
+                {(
+                  [
+                    ['id', person.id],
+                    ['name', person.name],
+                    ['email', person.email],
+                    ['position', person.position],
+                    ['location', person.location],
+                  ] as const
+                ).map(([column, value]) => (
+                  // Keyed by column: two columns can hold the same value.
+                  <td key={column} className="text-cell">
                     <div className="cell-content">{value}</div>
                   </td>
                 ))}

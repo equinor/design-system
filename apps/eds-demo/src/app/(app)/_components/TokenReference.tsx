@@ -149,7 +149,13 @@ export function TokenReference({
               open={isOpen}
               onToggle={(event) => toggle(group.id, event.currentTarget.open)}
             >
-              <summary className="token-group-summary">
+              <summary
+                className="token-group-summary"
+                // While filtering, every group with a match stays open.
+                onClick={(event) => {
+                  if (filter) event.preventDefault()
+                }}
+              >
                 <Icon
                   data={chevron_down}
                   size="md"

@@ -12,7 +12,7 @@ The strip at the top switches between:
 - **Exercise** and **Solution**: the exercise CSS has placeholder values to replace with tokens, the solution CSS is the finished version. Both are editable. **Ctrl + Shift + S** (**⌘ + Shift + S** on a Mac) switches between them and keeps your place in the CSS: the same rule, at the same height in the editor.
 - **Row**, **Column** and **Fullscreen**: the dashboard and the editor side by side, stacked, or the dashboard alone. In Row and Column, drag the divider between them to resize, move it with the arrow keys, or double-click it to share the space evenly. Its position is saved for each view.
 - The **colour scheme**, which changes the dashboard and the app around it, and the **density**, which changes the dashboard only. The editor keeps its own dark theme.
-- **Inspect**: shows the class names of the element under the pointer in the dashboard. Click an element to open its file and put the cursor on its first rule. While Inspect is on, clicks do not reach the dashboard.
+- **Inspect**: shows the class names of the element under the pointer in the dashboard. Click an element to open its file and put the cursor on its first rule. While Inspect is on, clicks do not reach the dashboard. Escape turns it off.
 - **Restart**: after a confirmation, puts back the original CSS of the mode you are viewing.
 
 Edits are saved in the browser (`localStorage`), for each file of the exercise and the solution on its own, so a reload keeps them.
@@ -28,7 +28,7 @@ pnpm demo:dev
 
 Next.js starts on <http://localhost:3000>, or on the next free port if 3000 is taken. Nothing in the monorepo has to be built first: the app installs the published `@equinor/eds-tokens@3.0.0-beta.10`, `@equinor/eds-core-react@3.0.0-beta.5` and `@equinor/eds-icons` from npm.
 
-`pnpm demo:build` builds a static site into `apps/eds-demo/out/`, which any static host can serve (`trailingSlash` gives every page its own `index.html`). `pnpm demo:start` serves that folder on <http://localhost:3200>. To serve it from a sub-path, such as `/demo`, set `NEXT_PUBLIC_BASE_PATH=/demo` when building. Where the demo is hosted has not been decided yet.
+`pnpm demo:build` builds a static site into `apps/eds-demo/out/`, which any static host can serve (`trailingSlash` gives every page its own `index.html`). `pnpm demo:start` serves that folder on <http://localhost:3200>. To serve it from a sub-path, such as `/demo`, set `NEXT_PUBLIC_BASE_PATH=/demo` when building. On Radix, the `demo` component in `radixconfig.yaml` builds `DockerfileEdsDemo`, which runs this build and serves `out/` with nginx (`eds-demo-nginx.conf`).
 
 ## How it is put together
 
@@ -73,7 +73,7 @@ For the full setup, see [Using the tokens](https://storybook.eds.equinor.com/?pa
 
 ## Literal values in the solution
 
-The buttons and icons are the EDS components, so their styles are not in the CSS. Icon sizes are set with the `Icon` `size` prop, which takes the spacing token of the same name. The only literal values in the CSS are the stroke widths (1px borders and focus rings, the 2px line under a tab), because there is no width token, and 150ms for transitions.
+The buttons and icons are the EDS components, so their styles are not in the CSS. Icon sizes are set with the `Icon` `size` prop, which takes the spacing token of the same name. The only literal values in the CSS are the stroke widths, because there is no width token: 1px borders and focus rings, the 2px line under a tab, the 0.5px lines in the table, and the 2px focus line inside a checkbox cell. The other literal value is 150ms for transitions.
 
 ## The exercise
 

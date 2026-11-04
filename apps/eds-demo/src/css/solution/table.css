@@ -9,14 +9,14 @@
   border-radius: var(--eds-corner-radius-rounded);
 }
 
-/* The header cells are interactive, so their fill and bottom line come
-   from the interactive neutral tokens. */
+/* The header cells only label the columns: you cannot click them. So they
+   use the non-interactive neutral tokens, a muted fill, and dividers for
+   the line below them and between the columns. */
 .header,
 .header-checkbox {
   padding: var(--eds-spacing-2xs);
-  background-color: var(--eds-background-interactive-neutral-muted-default);
-  box-shadow: inset 0 -0.5px 0
-    var(--eds-border-interactive-neutral-muted-default);
+  background-color: var(--eds-background-non-interactive-neutral-muted);
+  box-shadow: inset 0 -0.5px 0 var(--eds-border-non-interactive-neutral-muted);
 }
 
 .header {
@@ -30,7 +30,7 @@
   &::after {
     inset-block: var(--eds-spacing-xs);
     inline-size: 0.5px;
-    background-color: var(--eds-background-non-interactive-neutral-default);
+    background-color: var(--eds-border-non-interactive-neutral-muted);
   }
 }
 
@@ -118,7 +118,7 @@
   --_bg-color: var(--eds-background-non-interactive-neutral-muted);
   --_border-color: var(--eds-border-non-interactive-neutral-muted);
   --_text-color: var(--eds-text-on-muted-neutral);
-  --_icon-color: var(--eds-icon-primary);
+  --_icon-color: var(--eds-icon-on-muted-neutral);
 
   gap: var(--eds-spacing-3xs);
   padding-block: var(--eds-spacing-4xs);

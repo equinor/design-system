@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import { join } from 'node:path'
 import { cssFiles, modes, type Sources } from './preferences'
 
@@ -25,8 +26,11 @@ const PUBLISHED =
   /^--eds-(background|text|border|icon|spacing|corner-radius|typography|font-family|font-weight|elevation|overlay)-/
 
 export function readTokenNames(): string[] {
+  // Resolved through the package's exports, the same entry the dashboard
+  // imports, so a move inside the package does not break it.
+  const require = createRequire(join(root, 'package.json'))
   const bundle = readFileSync(
-    join(root, 'node_modules/@equinor/eds-tokens/src/tokens/css/variables.css'),
+    require.resolve('@equinor/eds-tokens/next/css/variables.css'),
     'utf8',
   )
   const names = new Set<string>()
