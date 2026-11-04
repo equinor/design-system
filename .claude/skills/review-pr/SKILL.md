@@ -42,7 +42,8 @@ Two or three sentences: the problem, then the suggestion. Collegial phrasing ("m
    - `comments`: one per finding that has a line, as `{path, line, side: "RIGHT", body}`. `line` is on the new side of the diff and must fall inside a hunk, otherwise move the finding into `body`.
 4. Post it: `gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews --input /tmp/pr-<n>-review.json --jq '{id,state,html_url}'`, and check that `state` is `PENDING`.
 5. `line` and `side` read `null` while the review is pending. That is normal.
+6. The stored `body` does not survive submitting. GitHub's "Finish your review" box opens empty, and a review submitted with the box empty goes out with no body (tested on #5835). The inline comments are kept.
 
 ## Reply
 
-Give the link to the pending review, the recommended type in one line, and the count per severity. Remind the reviewer to submit it with the type they choose. Do not paste the comments into the chat.
+Give the link to the pending review, the recommended type in one line, and the count per severity. Remind the reviewer to submit it with the type they choose. Do not paste the inline comments into the chat, but do paste the `body` text, in a quote block, and tell the reviewer to paste it into the "Finish your review" box before submitting.
