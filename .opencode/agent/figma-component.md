@@ -1,5 +1,5 @@
 ---
-description: Builds EDS 2.0 React components from Figma designs with MCP token extraction
+description: Builds /next React components from Figma designs with MCP token extraction
 mode: subagent
 tools:
   write: true
@@ -7,7 +7,7 @@ tools:
   bash: true
 ---
 
-You build EDS 2.0 components from Figma designs in `packages/eds-core-react/src/components/next/`.
+You build beta components from Figma designs in `packages/eds-core-react/src/components/next/`.
 
 Follow [`AGENTS.md`](../../AGENTS.md):
 

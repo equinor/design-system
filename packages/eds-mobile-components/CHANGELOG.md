@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/equinor/design-system/compare/eds-mobile-components@v0.3.2...eds-mobile-components@v0.4.0) (2026-11-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* the `react-native` peer range is now `^0.88.1`, the `react` and `react-dom` peer ranges are now `^19.3.0`, and the `expo-font`, `react-native-gesture-handler`, `react-native-reanimated`, `react-native-svg` and `react-native-worklets` peer ranges moved to the versions Expo SDK 58 bundles. Ref types for `View` and `TextInput` change to `ComponentRef<typeof View>` and `ComponentRef<typeof TextInput>`, so `useRef<TextInput>` no longer type-checks. The iOS app has been built with Xcode 27.2.
+
+### ✨ Added
+
+* enhance eds-cli and its component data after the MVP reviews ([#5814](https://github.com/equinor/design-system/issues/5814)) ([6d16a9d](https://github.com/equinor/design-system/commit/6d16a9daf9aea5699e7d2c442bbceedcaa231507))
+
+
+### 📦 Build System
+
+* upgrade to Expo SDK 58 and React Native 0.88 ([#5807](https://github.com/equinor/design-system/issues/5807)) ([5313baa](https://github.com/equinor/design-system/commit/5313baa7b30f4c2839dc69f4cda3b37ef540dfec))
+
 ## [0.3.2](https://github.com/equinor/design-system/compare/eds-mobile-components@v0.3.1...eds-mobile-components@v0.3.2) (2026-09-08)
 
 

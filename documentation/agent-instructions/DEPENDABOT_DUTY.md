@@ -24,7 +24,7 @@ Where `gh` is not available — for instance Copilot in the IDE without a termin
 
 This is a **report-first** workflow. The agent gathers, verifies, and recommends. The user acts.
 
-- Never `gh pr review --approve`, `gh pr merge`, `gh pr close`, or `gh pr comment` without an explicit go-ahead for that specific PR. Batch approval ("merge all the green ones") is fine once given, but state which PRs it covers. Approving Dependabot PRs after a go-ahead is the one exception to the rule that agents do not approve PRs, see [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.
+- Never `gh pr review --approve`, enqueue a PR (`gh api graphql … enqueuePullRequest`), `gh pr close`, or `gh pr comment` without an explicit go-ahead for that specific PR. Batch approval ("merge all the green ones") is fine once given, but state which PRs it covers. Approving Dependabot PRs after a go-ahead is the one exception to the rule that agents do not approve PRs (see [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board).
 - Never commit, push, create a branch, or open a PR without confirmation ([`AGENTS.md`](../../AGENTS.md) § Git Workflow applies).
 - Never dismiss an alert of either kind (`gh api --method PATCH … -f state=dismissed`) without a go-ahead for that specific alert. A dismissal is recorded against the person whose token ran it, and it does not reopen on its own.
 - The agent builds code in two places only, both after the user has seen and approved the proposal: the override PR in § Step 3, on its own branch, and a small fix pushed to a Dependabot branch under the "CI red, real breakage" row of the decision table. Nothing else.
@@ -56,18 +56,18 @@ Dependabot closes its own superseded PRs, so a `--state open` listing will not s
 
 | Situation                                     | Recommendation                                                                                                                       |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| CI green, patch or minor, any group           | Recommend approve + squash-merge                                                                                                     |
+| CI green, patch or minor, any group           | Recommend approve + add to the merge queue                                                                                           |
 | CI green, major                               | Read the release notes for the `.0` release (see below) before recommending anything. Check the coverage gap in the next subsection. |
 | CI red, lockfile out of date on a security PR | Recommend closing as a duplicate of the passing version PR                                                                           |
 | CI red, `ERR_PNPM_IGNORED_BUILDS` in `setup`  | A new dependency has an install script. Propose adding it to `allowBuilds` in `pnpm-workspace.yaml` (see below)                      |
 | CI red, real breakage                         | Follow "When CI fails" in the runbook: flaky → recommend a rerun, easy → propose the fix, complex → recommend closing with a comment |
-| Merge conflict / `BEHIND`                     | Recommend `@dependabot rebase`, or closing and letting Monday's run recreate it                                                      |
+| Merge conflict                                | Recommend `@dependabot rebase`, or closing and letting Monday's run recreate it                                                      |
 
 Every cell is a recommendation for the report, not an action to take. The user runs the commands.
 
 One caveat on the "easy → propose the fix" path: pushing a commit to a Dependabot branch makes Dependabot stop updating that PR, so a later rebase or recreate has to be done by hand. Say so when proposing it, and ask before pushing.
 
-Merge one PR at a time so CI runs on `main` between merges.
+`main` has a merge queue. The queue tests each PR on top of `main` and the entries ahead of it, then merges it, so a PR that is only `BEHIND` needs no rebase, and several PRs can be queued at once. `gh pr merge` fails with `Auto merge is not allowed for this repository`, with or without `--squash`. Add the PR to the queue with the `enqueuePullRequest` command in the report template instead, or click **Merge when ready** in the browser.
 
 ### `ERR_PNPM_IGNORED_BUILDS`
 
@@ -348,7 +348,7 @@ Print the report to chat (or to the path the user gave). Shape:
 ### Commands to run
 
 gh pr review <n> --approve
-gh pr merge <n> --squash
+gh api graphql -f query="mutation{enqueuePullRequest(input:{pullRequestId:\"$(gh pr view <n> --json id --jq .id)\"}){mergeQueueEntry{position state}}}"
 gh pr close <n> --comment "Superseded by #<m>, which includes the lockfile update."
 gh api --method PATCH /repos/equinor/design-system/dependabot/alerts/<n> -f state=dismissed -f dismissed_reason=tolerable_risk -f dismissed_comment='<why>'
 gh api --method PATCH /repos/equinor/design-system/code-scanning/alerts/<n> -f state=dismissed -f dismissed_reason='false positive' -f dismissed_comment='<why>'

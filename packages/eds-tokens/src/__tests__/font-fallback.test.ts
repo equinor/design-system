@@ -20,8 +20,10 @@ import { describe, it, expect } from 'vitest'
  * the export and the TS modules do not.
  *
  * The names are read from the bundle rather than listed, so a family added
- * upstream is covered without touching this file; the two known names are
+ * upstream is covered without touching this file; the known names are
  * asserted separately so a rename cannot leave the sweep passing over nothing.
+ * Each of those is checked against its own generic family, since a mono stack
+ * that ends in `sans-serif` still ends in a generic family (#5800).
  */
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
@@ -97,10 +99,22 @@ const familyNames = [...bundled.keys()].filter((name) =>
   name.startsWith('--eds-family-'),
 )
 
+// The generic family each role must end in. Mono falls back to monospace so
+// figures in a numeric column still line up without the font (#5800).
+const EXPECTED_FALLBACKS = {
+  '--eds-font-family-header': 'sans-serif',
+  '--eds-font-family-ui': 'sans-serif',
+  '--eds-font-family-mono': 'monospace',
+}
+
 describe('font family fallback in the committed bundle', () => {
-  it('declares the two family tokens the pipeline requires', () => {
+  it('declares the family tokens the pipeline requires', () => {
     expect(familyNames).toEqual(
-      expect.arrayContaining(['--eds-family-header', '--eds-family-ui']),
+      expect.arrayContaining([
+        '--eds-family-header',
+        '--eds-family-ui',
+        '--eds-family-mono',
+      ]),
     )
   })
 
@@ -108,17 +122,22 @@ describe('font family fallback in the committed bundle', () => {
     expect(GENERIC_FAMILIES).toContain(lastFamily(bundled.get(name) as string))
   })
 
-  it.each(['--eds-font-family-header', '--eds-font-family-ui'])(
-    '%s resolves to a stack ending in sans-serif',
-    (name) => {
-      expect(resolve(name, bundled)).toMatch(/,\s*sans-serif$/)
+  it.each(Object.entries(EXPECTED_FALLBACKS))(
+    '%s resolves to a stack ending in %s',
+    (name, fallback) => {
+      expect(lastFamily(resolve(name, bundled))).toBe(fallback)
     },
   )
 
   it('appends the fallback once, not per layer of the chain', () => {
-    for (const name of ['--eds-font-family-header', '--eds-font-family-ui']) {
-      const occurrences = resolve(name, bundled).match(/sans-serif/g) ?? []
-      expect(occurrences).toHaveLength(1)
+    for (const name of Object.keys(EXPECTED_FALLBACKS)) {
+      const families = resolve(name, bundled)
+        .split(',')
+        .map((family) => family.trim())
+      const generic = families.filter((family) =>
+        GENERIC_FAMILIES.includes(family),
+      )
+      expect(generic).toHaveLength(1)
     }
   })
 })
@@ -127,13 +146,14 @@ describe('the exports the fallback must stay out of', () => {
   it('leaves the CSS export file with a bare family name', () => {
     for (const [name, value] of declarations(exportedCss)) {
       if (!name.startsWith('--eds-family-')) continue
-      expect(value).not.toMatch(/sans-serif/)
+      expect(value).not.toMatch(/sans-serif|monospace/)
     }
   })
 
   it('leaves the TypeScript export single-family, for React Native', () => {
     expect(exportedTs).toMatch(/header: 'Equinor',/)
     expect(exportedTs).toMatch(/ui: 'Inter',/)
-    expect(exportedTs).not.toMatch(/sans-serif/)
+    expect(exportedTs).toMatch(/mono: 'CommitMono',/)
+    expect(exportedTs).not.toMatch(/sans-serif|monospace/)
   })
 })
