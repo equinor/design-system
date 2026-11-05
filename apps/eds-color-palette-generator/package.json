@@ -23,14 +23,14 @@
   "dependencies": {
     "@equinor/eds-tokens": "workspace:^",
     "colorjs.io": "^0.7.1",
-    "next": "16.4.2",
+    "next": "16.4.3",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@equinor/eds-icons": "workspace:^",
     "@eslint/eslintrc": "^3.3.7",
-    "@microsoft/api-extractor": "^7.59.4",
+    "@microsoft/api-extractor": "^7.60.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
