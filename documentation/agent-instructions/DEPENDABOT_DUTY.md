@@ -24,7 +24,7 @@ Where `gh` is not available — for instance Copilot in the IDE without a termin
 
 This is a **report-first** workflow. The agent gathers, verifies, and recommends. The user acts.
 
-- Never `gh pr review --approve`, enqueue a PR (`gh api graphql … enqueuePullRequest`), `gh pr close`, or `gh pr comment` without an explicit go-ahead for that specific PR. Batch approval ("merge all the green ones") is fine once given, but state which PRs it covers.
+- Never `gh pr review --approve`, enqueue a PR (`gh api graphql … enqueuePullRequest`), `gh pr close`, or `gh pr comment` without an explicit go-ahead for that specific PR. Batch approval ("merge all the green ones") is fine once given, but state which PRs it covers. Approving Dependabot PRs after a go-ahead is the one exception to the rule that agents do not approve PRs (see [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board).
 - Never commit, push, create a branch, or open a PR without confirmation ([`AGENTS.md`](../../AGENTS.md) § Git Workflow applies).
 - Never dismiss an alert of either kind (`gh api --method PATCH … -f state=dismissed`) without a go-ahead for that specific alert. A dismissal is recorded against the person whose token ran it, and it does not reopen on its own.
 - The agent builds code in two places only, both after the user has seen and approved the proposal: the override PR in § Step 3, on its own branch, and a small fix pushed to a Dependabot branch under the "CI red, real breakage" row of the decision table. Nothing else.
