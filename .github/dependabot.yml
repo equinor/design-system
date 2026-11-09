@@ -47,12 +47,15 @@ updates:
         patterns:
           - 'eslint'
           - 'eslint-*'
+          - 'typescript-eslint'
           - '@typescript-eslint/*'
           - '@eslint/*'
       testing:
         patterns:
           - 'jest'
           - 'jest-*'
+          - 'ts-jest'
+          - 'babel-jest'
           - '@testing-library/*'
           - '@types/jest'
           - '@playwright/test'
@@ -70,6 +73,9 @@ updates:
         update-types:
           - 'version-update:semver-major'
       - dependency-name: 'eslint-*'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'typescript-eslint'
         update-types:
           - 'version-update:semver-major'
       - dependency-name: '@typescript-eslint/*'
