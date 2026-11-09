@@ -70,7 +70,7 @@
     "eslint-plugin-storybook": "10.6.5",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
-    "jest-styled-components": "^7.4.0",
+    "jest-styled-components": "^7.4.1",
     "js-file-download": "^0.4.12",
     "postcss": "^8.5.31",
     "ramda": "^0.32.0",
