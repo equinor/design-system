@@ -30,11 +30,17 @@ const preview = {
         dynamicTitle: true,
       },
     },
+    // No toolbar item: PlatformTabs reads this to pick its first tab, so a link
+    // can open a docs page on React Native with `&globals=platform:native`.
+    platform: {
+      description: 'Platform tab on component docs pages',
+    },
   },
 
   initialGlobals: {
     colorScheme: 'light',
     debugGrid: 'off',
+    platform: 'react',
   },
 
   decorators: [
