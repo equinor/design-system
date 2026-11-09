@@ -248,7 +248,7 @@ const { typography } = useToken();
 
 ### iOS Development
 
-- **Requires:** Xcode 27.2 and CocoaPods. The SDK 58 iOS build was verified with Xcode 27.2 and fails on Xcode 26.3.
+- **Requires:** Xcode 26.4 or later (the minimum Expo documents for SDK 58) and CocoaPods. The SDK 58 iOS build was verified with Xcode 26.6 (CI) and 27.2 (local), and fails on Xcode 26.3.
 - **First time:** Run `cd ios && pod install`
 - **Hot reload:** Works automatically with Metro bundler
 - **Physical device:** Use Expo development build or scan QR with Expo Go (limited features)
