@@ -89,6 +89,31 @@ const StyledAutocomplete = styled(Autocomplete)`
 `
 
 describe('Autocomplete', () => {
+  it.each([false, true])(
+    'ignores selection after the open autocomplete becomes disabled (multiple=%s)',
+    async (multiple) => {
+      const user = userEvent.setup()
+      const onOptionsChange = jest.fn()
+      const props = {
+        label: labelText,
+        options: items,
+        initialSelectedOptions: ['One'],
+        multiple,
+        onOptionsChange,
+      }
+      const { rerender } = render(<Autocomplete {...props} />)
+      const input = screen.getByRole('combobox', { name: labelText })
+      await user.click(input)
+      const list = await screen.findByRole('listbox')
+      await waitForVirtualizedOptions(list, items.length)
+      onOptionsChange.mockClear()
+      rerender(<Autocomplete {...props} disabled />)
+      expect(input).toBeDisabled()
+      await user.click(within(list).getByRole('option', { name: 'Two' }))
+      expect(onOptionsChange).not.toHaveBeenCalled()
+    },
+  )
+
   it('Matches snapshot', async () => {
     const { container } = render(
       <Autocomplete options={items} label={labelText} />,
