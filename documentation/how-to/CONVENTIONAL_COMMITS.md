@@ -173,6 +173,20 @@ For breaking changes, add an exclamation mark before the colon:
 
 _This ensures that Release Please will mark the next release as a major release._
 
+### Text that breaks the release notes
+
+Release Please builds the release notes from the PR title and from any `BREAKING CHANGE:` paragraph in the PR body. It later reads the release pull request back to create the GitHub release and tag for each package. Its parser treats an opening tag-like `<Word` as HTML. If that tag is never closed, the parser merges the sections of different packages in the release pull request. The release and tag for one package are then never created, the next release pull request proposes the wrong version, and the workflow still passes.
+
+Do not write `<` directly followed by a letter in a PR title or in a `BREAKING CHANGE:` paragraph. Backticks do not prevent the problem, so a type such as `Array<string>` triggers it as well. Reword the text instead. Writing `&lt;` avoids the parser problem, but inside backticks it is shown as the literal text `&lt;`, which reads badly in the release notes.
+
+| Avoid                       | Write instead                 |
+| --------------------------- | ----------------------------- |
+| `<Select>`                  | the Select component          |
+| `Array<string>`             | an array of strings           |
+| `ComponentRef<typeof View>` | the ComponentRef type of View |
+
+These do not trigger the parser problem: `a < b`, entities such as `&lt;`, balanced tags such as `<b>text</b>`, and a closing tag on its own.
+
 ## Enforcement
 
 - The GitHub Action runs automatically when you open, edit, or update a PR
