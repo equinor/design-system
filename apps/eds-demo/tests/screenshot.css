@@ -1,0 +1,6 @@
+/* Applied only while Playwright takes a screenshot. The Next.js dev overlay
+   (its issue badge after a hot reload) is development tooling, not part of
+   the demo, so it is kept out of the comparison. */
+nextjs-portal {
+  display: none !important;
+}

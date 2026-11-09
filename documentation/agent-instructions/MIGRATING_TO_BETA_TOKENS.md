@@ -130,7 +130,7 @@ Three roles (ADR-0027):
 
 Weight is never per size (ADR-0029). `header` is `medium` at every size, `label` is `normal`, `medium` or `bold`, and `body` is `normal` or `bold`. Sizes above `label` `5xl`, `header` `4xl` and `body` `3xl` have no beta equivalent.
 
-The font family tokens carry a `sans-serif` fallback from `eds-tokens` 3.0.0-beta.10 (#5701), so do not add one in the component.
+The font family tokens carry a generic fallback from `eds-tokens` 3.0.0-beta.10 (#5701), `sans-serif` for `header` and `ui` and `monospace` for `mono` (#5800), so do not add one in the component.
 
 Set `font-family`, `font-size`, `line-height` and `font-weight` in the component CSS. Set them on the root as well as on inner text elements, so `asChild` elements get them too.
 
@@ -173,7 +173,7 @@ There is no motion token yet. Button and Chip use `150ms` with a `TODO` comment;
 
 - Commit and PR title: `refactor!: migrate <Component> (next) to beta tokens`, no scope.
 - Body: the mapping per domain, what changed visually against `main`, the APCA pairs below target with their discussion entry, blockers with issue links, and what was tested. Follow [`PR_AND_ISSUE_WRITING.md`](./PR_AND_ISSUE_WRITING.md).
-- List under `BREAKING CHANGE:` what consumers notice: the renamed data attributes, that apps need the beta bundle and `data-color-scheme`, and icon sizing inside the component.
+- List under `BREAKING CHANGE:` what consumers notice: the renamed data attributes, that apps need the beta bundle and `data-color-scheme="dark"` for dark mode, and icon sizing inside the component.
 - When the PR merges, tick the component off in #5119.
 
 ## Checklist

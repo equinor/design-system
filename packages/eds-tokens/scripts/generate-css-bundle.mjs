@@ -43,12 +43,14 @@
  * diffing against a shifted file, for no effect on the CSS.
  *
  * The second addition: every `--eds-family-*` declaration gets a
- * generic `sans-serif` appended (#5701). The export names a single
- * typeface, `Inter` for UI and `Equinor` for headers, so an app that
- * does not load the font falls back to the browser default, which is a
- * serif in Chrome, Firefox, Safari and Edge. Every label and body
- * style, which is most of an interface, then renders in Times. Design
- * agreed on `sans-serif`.
+ * generic family appended (#5701). The export names a single typeface,
+ * `Inter` for UI and `Equinor` for headers, so an app that does not
+ * load the font falls back to the browser default, which is a serif in
+ * Chrome, Firefox, Safari and Edge. Every label and body style, which
+ * is most of an interface, then renders in Times. Design agreed on
+ * `sans-serif` for those two; `CommitMono` for mono gets `monospace`, so
+ * figures in a numeric column keep lining up (#5800). The generic
+ * family is set per name in FONT_FALLBACKS below.
  *
  * It happens here, in memory, and not in the committed export files,
  * because generate-ts-tokens.mjs takes its values from the same CSS
@@ -100,7 +102,11 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { DENSITY_BASE_WIDE_RE, WIDE_RE } from './semantic-scope.mjs'
+import {
+  DENSITY_BASE_WIDE_RE,
+  LIGHT_SCHEME_WIDE_RE,
+  WIDE_RE,
+} from './semantic-scope.mjs'
 
 const args = parseArgs(process.argv.slice(2))
 const CSS_DIR = args.css ?? 'src/tokens/css'
@@ -124,14 +130,19 @@ const LAYER_ORDER =
 const LAYER_OPEN = '@layer eds-tokens {\n'
 const LAYER_CLOSE = '}\n'
 
-// The generic family appended to the font-family tokens, and the names
-// that must be there for that to have happened (#5701). The prefix is
-// matched rather than the two names themselves, so a family added
-// upstream is covered on its own; the required list turns a rename or a
-// move into a failed run rather than a bundle that quietly ships
-// without a fallback.
-const FONT_FALLBACK = 'sans-serif'
-const REQUIRED_FAMILY_NAMES = ['--eds-family-header', '--eds-family-ui']
+// The generic family appended to each font-family token (#5701), chosen
+// per family: a monospace face must fall back to monospace, or figures
+// in a numeric column stop lining up whenever the font does not load
+// (#5800). Every name here must be declared, so a rename or a move
+// fails the run rather than shipping without a fallback; a family that
+// is declared but not listed fails it too, so the next one added
+// upstream cannot silently get the wrong generic family.
+const FONT_FALLBACKS = {
+  '--eds-family-header': 'sans-serif',
+  '--eds-family-ui': 'sans-serif',
+  '--eds-family-mono': 'monospace',
+}
+const REQUIRED_FAMILY_NAMES = Object.keys(FONT_FALLBACKS)
 const FAMILY_DECLARATION = /(--eds-family-[\w-]+):\s*([^;]+);/g
 
 // The CSS generic families, so a stack that already ends in one, should
@@ -164,8 +175,18 @@ const GENERIC_FAMILIES = new Set([
 // was --eds-border-focus, where the semantic copy was a self-reference,
 // so letting the semantic block win dropped focus outlines inside
 // scoped subtrees (cleared by #5280).
-const layerRank = (file) =>
-  relative(CSS_DIR, file).split(sep)[0] === 'color-scheme' ? 1 : 0
+//
+// Within the color-scheme files, light comes first on purpose and not by
+// the alphabet. Light is also declared at `:root` (#5795), which has the
+// same specificity as `[data-color-scheme="dark"]`, so on
+// `<html data-color-scheme="dark">` the later block wins. Sorted by
+// name, dark.css would come first and the root would turn light.
+const LIGHT_SCHEME_FILE = join('color-scheme', 'light.css')
+const layerRank = (file) => {
+  const path = relative(CSS_DIR, file)
+  if (path.split(sep)[0] !== 'color-scheme') return 0
+  return path === LIGHT_SCHEME_FILE ? 1 : 2
+}
 const files = (await readdir(CSS_DIR, { recursive: true }))
   .filter((file) => file.endsWith('.css'))
   .map((file) => join(CSS_DIR, file))
@@ -207,6 +228,20 @@ if (!DENSITY_BASE_WIDE_RE.test(densityBase[1]))
     `${densityBase[0]} is not widened to ':root, [data-density="comfortable"]'. Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
   )
 
+// And the light colour scheme, so a page with no data-color-scheme
+// renders light rather than unresolved colour tokens (#5795).
+const lightScheme = contents.find(
+  ([file]) => relative(CSS_DIR, file) === LIGHT_SCHEME_FILE,
+)
+if (!lightScheme)
+  fail(
+    `no ${LIGHT_SCHEME_FILE} under ${CSS_DIR}, so the export layout changed. Review #5795 before proceeding`,
+  )
+if (!LIGHT_SCHEME_WIDE_RE.test(lightScheme[1]))
+  fail(
+    `${lightScheme[0]} is not widened to ':root, [data-color-scheme="light"]'. Run scripts/widen-semantic-scope.mjs before bundling (or use the generate:css-bundle package script, which chains it)`,
+  )
+
 const seenFamilies = new Set()
 const withFallback = contents.map(([, css]) =>
   css.replace(FAMILY_DECLARATION, (declaration, name, value) => {
@@ -214,9 +249,17 @@ const withFallback = contents.map(([, css]) =>
     const stack = value.trim()
     return GENERIC_FAMILIES.has(lastFamily(stack))
       ? declaration
-      : `${name}: ${stack}, ${FONT_FALLBACK};`
+      : `${name}: ${stack}, ${FONT_FALLBACKS[name]};`
   }),
 )
+
+const unknownFamilies = [...seenFamilies].filter(
+  (name) => !Object.hasOwn(FONT_FALLBACKS, name),
+)
+if (unknownFamilies.length > 0)
+  fail(
+    `no fallback for ${unknownFamilies.join(', ')}. Add the family to FONT_FALLBACKS in scripts/generate-css-bundle.mjs with the generic family it should fall back to (sans-serif, serif or monospace). See #5800`,
+  )
 
 const missingFamilies = REQUIRED_FAMILY_NAMES.filter(
   (name) => !seenFamilies.has(name),

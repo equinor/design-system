@@ -9,9 +9,10 @@ Equinor Design System (EDS) is a pnpm monorepo containing React component librar
 ### Key Packages
 
 - `@equinor/eds-core-react` — Main React component library
-- `@equinor/eds-core-react/next` — New EDS 2.0 components (active development)
+- `@equinor/eds-core-react/next` — Beta components for 3.0.0 (active development)
 - `@equinor/eds-tokens` — Design tokens, CSS variables, and theming
 - `@equinor/eds-icons` — Icon library
+- `@equinor/eds-cli`: command-line lookup of the installed beta components and tokens, for agents in product teams' repositories (ADR-0030)
 
 ### Existing /next components
 
@@ -99,7 +100,7 @@ pnpm test -- --testPathPattern="Icon"
 pnpm run storybook                # Start Storybook
 ```
 
-## Component File Structure (EDS 2.0)
+## Component File Structure (`/next`)
 
 New components go in `packages/eds-core-react/src/components/next/`:
 
@@ -349,7 +350,7 @@ Query priority: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
 
 ## Polymorphism (`asChild` + `Slot`)
 
-EDS 2.0 uses the `asChild` pattern for components that need polymorphic rendering (e.g. Link, Button). This lets consumers swap the underlying element for router links, custom components, etc. See `documentation/adr/0005-use-aschild-slot-for-polymorphism.md` for the rationale.
+In `/next`, components that need polymorphic rendering (e.g. Link, Button) use the `asChild` pattern. This lets consumers swap the underlying element for router links, custom components, etc. See `documentation/adr/0005-use-aschild-slot-for-polymorphism.md` for the rationale.
 
 - **`Slot`** utility in `packages/eds-core-react/src/components/next/Slot/` merges parent props onto the child element
 - Add `asChild?: boolean` to the component's props type
@@ -475,7 +476,7 @@ type: description
 
 **Available scopes (when needed):**
 
-- Packages: `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
+- Packages: `eds-cli`, `eds-core-react`, `eds-data-grid-react`, `eds-icons`, `eds-lab-react`, `eds-tailwind`, `eds-tokens`, `eds-tokens-build`, `eds-tokens-sync`, `eds-utils`, `design-system-docs`, `eds-color-palette-generator`, `eds-demo`, `figma-broker`
 - Infrastructure: `config`, `github`, `build`, `deps`, `docs`, `devcontainer`
 
 For non-publishable changes (config, Storybook, tests, README, docs), use hidden types: `chore`, `build`, `ci`, `docs`, or `test`.
@@ -503,7 +504,7 @@ NEVER attribute AI, or add to the commit message "Co-authored by Claude" or simi
 
 ## Architecture Decision Records (ADRs)
 
-Non-obvious EDS 2.0 patterns are documented in `documentation/adr/`. Read the relevant ADR before changing or extending these patterns:
+Non-obvious patterns in the `/next` components are documented in `documentation/adr/`. Read the relevant ADR before changing or extending these patterns:
 
 - `0002-use-vanilla-css-with-design-tokens-for-eds-2.md` — why vanilla CSS over CSS-in-JS
 - `0004-component-conventions-for-eds-2.md` — data attributes vs props, color scheme, density

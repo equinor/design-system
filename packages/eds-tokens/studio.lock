@@ -3,7 +3,7 @@
 # Commit this file to version control.
 
 version = 2
-generated_at = "2026-10-29T13:19:59Z"
+generated_at = "2026-11-04T11:31:09Z"
 cli_version = "dev"
 
 [[dependencies]]
@@ -11,8 +11,8 @@ cli_version = "dev"
   project = "4952a007-699a-4124-a043-124e80cc28d6"
   ref_type = "branch"
   ref_name = "main"
-  content_hash = "sha256:34408c5dfb9832b33d80b0c205fd76c6301ab7ce20e3722ed30d48fc382625f3"
-  updated_at = "2026-10-29T13:19:59Z"
+  content_hash = "sha256:a3bdfc9804d0843f4c1d799c1d1b76064f7ed733e68cb2d24cf61184b25785e7"
+  updated_at = "2026-11-04T11:31:09Z"
 
   [[dependencies.files]]
     path = "$metadata.json"
@@ -112,8 +112,8 @@ cli_version = "dev"
 
   [[dependencies.files]]
     path = "semantic.json"
-    hash = "sha256:46715372eda751515f16694cd27de9345cc3af75472e74e16f3f3253310125a8"
-    size = 102907
+    hash = "sha256:1ca8ed4e0ed94885cc6cdd56819fd882e494108de40f62743f53d10764c1ee0e"
+    size = 102587
     tokens = 0
 
   [[dependencies.files]]
@@ -123,5 +123,5 @@ cli_version = "dev"
     tokens = 0
 
 [integrity]
-  lockfile_hash = "sha256:2501b4307976205c55832caa062dbf50f5545d2c3c64bcae8aea38f307201eb7"
+  lockfile_hash = "sha256:e9c6e7b88e82b8fdd8ce98d2c78760cb338aa951dd029ab0fbc0e2861d156e3c"
   algorithm = "sha256"

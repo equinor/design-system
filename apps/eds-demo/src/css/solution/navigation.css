@@ -1,0 +1,111 @@
+/* The side navigation, and the tabs above the page header. */
+
+.side-nav {
+  gap: var(--eds-spacing-md);
+  padding: var(--eds-spacing-sm);
+
+  background-color: var(--eds-background-surface);
+  border-inline-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.nav-list {
+  gap: var(--eds-spacing-4xs);
+}
+
+.nav-item {
+  --_bg-color: transparent;
+
+  gap: var(--eds-spacing-sm);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm) var(--eds-spacing-xl);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-rounded);
+  outline: none;
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:active {
+    --_bg-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &[aria-current='page'] {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-default);
+
+    font-weight: var(--eds-font-weight-medium);
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-hover);
+  }
+
+  &[aria-current='page']:active {
+    --_bg-color: var(--eds-background-interactive-neutral-selected-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.nav-icon {
+  color: var(--eds-icon-primary);
+}
+
+/* Each tab draws its own line inside its bottom edge. Off, the line is the
+   non-interactive neutral muted border in every state. On, it is the
+   interactive accent emphasis border and steps with the state. Hover adds
+   the muted fill of the tab's tone, and focus is the hover state plus the
+   focus ring outside. */
+
+.tab {
+  --_bg-color: transparent;
+  --_bg-hover: var(--eds-background-interactive-neutral-muted-hover);
+  --_color: var(--eds-text-primary);
+  --_indicator: var(--eds-border-non-interactive-neutral-muted);
+
+  gap: var(--eds-spacing-3xs);
+  padding-block: var(--eds-spacing-xs);
+  padding-inline: var(--eds-spacing-sm);
+
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border-radius: var(--eds-corner-radius-none);
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--_indicator);
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &[aria-current='page'] {
+    --_bg-hover: var(--eds-background-interactive-accent-muted-hover);
+    --_color: var(--eds-text-on-muted-accent);
+    --_indicator: var(--eds-border-interactive-accent-emphasis-default);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-hover);
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_indicator: var(--eds-border-interactive-accent-emphasis-hover);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}

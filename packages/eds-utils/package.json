@@ -69,12 +69,12 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-is": "^19.3.1",
-    "rollup": "^4.66.0",
+    "rollup": "^4.67.4",
     "rollup-plugin-delete": "^3.0.2",
     "styled-components": "6.6.0",
     "typescript": "^5.9.3",
     "vite": "^8.3.5",
-    "vitest": "^4.1.11",
+    "vitest": "^4.1.12",
     "@vitejs/plugin-react": "^6.1.2"
   },
   "peerDependencies": {

@@ -1,0 +1,72 @@
+/* The beta tokens: every colour scheme and density in one bundle. It is
+   wrapped in @layer eds-tokens, so the unlayered CSS in this app wins over
+   it without any specificity fight. */
+@import '@equinor/eds-tokens/next/css/variables.css';
+
+/* The styles of the EDS components (Button and Icon here), inside
+   @layer eds-components. The file also holds the 2.x token bundle in
+   @layer eds-tokens-legacy, below the beta tokens, for components that have
+   not moved to the beta names yet. */
+@import '@equinor/eds-core-react/next/index.css';
+
+/* The fonts (Inter and Equinor) are loaded in layout.tsx, from the EDS CDN.
+   The CSS from the editor is added by PreviewBridge.tsx, after everything
+   else. */
+
+/* The bundle switches the token values on data-color-scheme but does not set
+   the CSS color-scheme property. Set it here, so scrollbars, form controls
+   and light-dark() follow the same scheme as the tokens. */
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* The dashboard fills the frame. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+/* No reset on button or input elements. CSS outside a layer beats every
+   layered rule, so a rule such as button { color: inherit } here would
+   override the EDS Button's own colour in @layer eds-components, and the
+   icon, which draws in the button's colour, would turn the wrong colour.
+   The demo's own buttons and the search field set their font and colour in
+   the CSS from the editor. */
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+
+/* Hidden until the editor has sent its CSS, so the frame does not flash
+   unstyled markup while it loads. */
+html:not([data-ready]) body {
+  visibility: hidden;
+}
