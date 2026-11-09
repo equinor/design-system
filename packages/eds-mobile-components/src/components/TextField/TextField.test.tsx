@@ -3,8 +3,8 @@ import { render, screen } from "test-utils";
 import { TextField } from "./index";
 
 describe("TextField", () => {
-    it("renders label, indicator, description, and helperMessage", () => {
-        render(
+    it("renders label, indicator, description, and helperMessage", async () => {
+        await render(
             <TextField
                 label="Email"
                 indicator="(Required)"
@@ -18,8 +18,8 @@ describe("TextField", () => {
         expect(screen.getByText("Must be a valid email")).toBeTruthy();
     });
 
-    it("does not render indicator or description when no label is given", () => {
-        render(
+    it("does not render indicator or description when no label is given", async () => {
+        await render(
             <TextField
                 indicator="(Required)"
                 description="We'll never share it"
@@ -30,16 +30,16 @@ describe("TextField", () => {
         expect(screen.queryByText("We'll never share it")).toBeFalsy();
     });
 
-    it("defaults accessibilityLabel to the label", () => {
-        render(<TextField label="Email" placeholder="Type here" />);
+    it("defaults accessibilityLabel to the label", async () => {
+        await render(<TextField label="Email" placeholder="Type here" />);
         expect(screen.getByPlaceholderText("Type here")).toHaveProp(
             "accessibilityLabel",
             "Email"
         );
     });
 
-    it("lets an explicit accessibilityLabel override the label", () => {
-        render(
+    it("lets an explicit accessibilityLabel override the label", async () => {
+        await render(
             <TextField
                 label="Email"
                 accessibilityLabel="Custom label"
@@ -52,8 +52,8 @@ describe("TextField", () => {
         );
     });
 
-    it("defaults accessibilityHint to the joined description and helperMessage", () => {
-        render(
+    it("defaults accessibilityHint to the joined description and helperMessage", async () => {
+        await render(
             <TextField
                 description="We'll never share it"
                 helperMessage="Must be a valid email"
@@ -66,8 +66,8 @@ describe("TextField", () => {
         );
     });
 
-    it("lets an explicit accessibilityHint override the default", () => {
-        render(
+    it("lets an explicit accessibilityHint override the default", async () => {
+        await render(
             <TextField
                 description="We'll never share it"
                 accessibilityHint="Custom hint"
@@ -80,17 +80,17 @@ describe("TextField", () => {
         );
     });
 
-    it("forwards disabled to the underlying input", () => {
-        render(<TextField disabled placeholder="Type here" />);
+    it("forwards disabled to the underlying input", async () => {
+        await render(<TextField disabled placeholder="Type here" />);
         const input = screen.getByPlaceholderText("Type here");
         expect(input).toHaveProp("editable", false);
         expect(input).toHaveProp("accessibilityState", { disabled: true });
     });
 
-    it("forwards invalid to the underlying input", () => {
-        render(<TextField invalid placeholder="Type here" />);
+    it("forwards invalid to the underlying input", async () => {
+        await render(<TextField invalid placeholder="Type here" />);
         expect(
-            screen.UNSAFE_getByProps({ name: "alert-circle" })
+            screen.getByTestId("icon-alert-circle")
         ).toBeTruthy();
     });
 });

@@ -15,13 +15,14 @@ updates:
           - 'storybook'
           - '@storybook/*'
           - 'eslint-plugin-storybook'
-      # react-test-renderer must match react exactly, and is pinned in the
-      # pnpm-workspace.yaml overrides, which Dependabot does not update. The
-      # mobile packages (apps/mobile-storybook and eds-mobile-components) use
-      # one React version, the one the Expo SDK bundles, and change it with the
-      # SDK. If a bump from this group moves only some of them, the mobile tree
-      # ends up with two React versions and the tests fail with an invalid hook
-      # call, so revert those packages there (#5490, #5731, #5580).
+      # The mobile packages (apps/mobile-storybook and eds-mobile-components)
+      # use one React version, the one the Expo SDK bundles, and change it with
+      # the SDK. If a bump from this group moves only some of them, the mobile
+      # tree ends up with two React versions and the tests fail with an invalid
+      # hook call, so revert those packages there (#5490, #5731, #5580).
+      # test-renderer, which @testing-library/react-native 14 uses, follows
+      # React's minor line (1.3 for React 19.3) and is held to it with a ~ range
+      # in eds-mobile-components, so change it together with React.
       react:
         patterns:
           - 'react'
