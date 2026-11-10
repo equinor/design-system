@@ -165,8 +165,12 @@ tokens are offered for the fill of a frame or shape, border tokens for strokes, 
 the fill of a text layer, so the list you open is already narrowed to the usual choices.
 
 The scopes do not define which tokens are allowed on which property. Some tokens are offered in
-more than one picker on purpose: `background.surface` is also offered for strokes, because some
-places in Figma need a stroke in the surface colour.
+more than one picker on purpose:
+
+- `background.surface` is also offered for strokes, because some places in Figma need a stroke in
+  the surface colour.
+- The spacing variables are also offered for width and height, because icons are sized with them.
+  Button binds the width and height of its icon to `spacing.lg`.
 
 If a token is missing from a picker, it is usually meant for a different property.
 

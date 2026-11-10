@@ -38,7 +38,7 @@ usually right.
 | a button's interior, inline axis              | `spacing.sm`                             | and more beside it, or the label looks off-centre                                     |
 | an icon from its label, inside a control      | `spacing.xs`                             | one control, two parts                                                                |
 | a chip or badge interior                      | `spacing.3xs`                            | dense by definition. `2xs` if it carries an icon                                      |
-| an input's interior                           | `spacing.xs` block, `spacing.sm` inline  | the value needs to look aligned with the label above it                               |
+| an input's interior                           | `spacing.xs` block, `spacing.sm` inline  | the same steps as a button. Inline, the value lines up with the label above it        |
 | one field from the next                       | `spacing.sm`                             | related, separate                                                                     |
 | one fieldset from the next                    | `spacing.lg`                             | a group boundary                                                                      |
 | a card's interior                             | `spacing.md`                             | the default container padding                                                         |
@@ -199,6 +199,8 @@ a normal thing to want. Two cautions:
 - Let density resize things, with one attribute on a wrapper
 - Use different steps on the block and inline axes when the optics need it
 - Let a focus ring's `outline-offset` produce its curve, rather than naming a second radius
+- Size an icon by binding its width and height to a spacing token. Button uses `spacing.lg`, and an
+  [Icon](../../components/data-display/icon.md) without `size` is `spacing.xl`
 
 :::
 
