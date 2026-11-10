@@ -95,7 +95,7 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 
 Rows are _intent_, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
 
-The pending-review row is Claude Code only on purpose: the skill needs `gh api` under the user's own `gh` login, the Copilot advisor drafts reviews in chat, and the OpenCode advisor has no shell.
+The pending-review row is Claude Code only on purpose: the skill needs `gh api` under the user's own `gh` login, the Copilot advisor prompt follows the rule in `AGENTS.md` without a separate skill, and the OpenCode advisor has no shell.
 
 ### Step 5 — Path-scoped rule consistency
 
