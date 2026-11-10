@@ -26,13 +26,13 @@ Two or three sentences: the problem, then the suggestion. Collegial phrasing ("m
    - No `event` field, unless the user asked you to submit (see § Submit it). Leaving it out keeps the review pending.
    - `body`: a short opener with what you verified, plus the findings that have no line.
    - `comments`: one per finding that has a line, as `{path, line, side: "RIGHT", body}`. `line` is on the new side of the diff and must fall inside a hunk, otherwise move the finding into `body`.
-4. Post it: `gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews --input /tmp/pr-<n>-review.json --jq '{id,state,html_url}'`, and check that `state` is `PENDING`, or the type you submitted.
+4. Post it: `gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews --input /tmp/pr-<n>-review.json --jq '{id,state,html_url}'`, and check that `state` is `PENDING`, or `COMMENTED` or `CHANGES_REQUESTED` if you submitted.
 5. `line` and `side` read `null` while the review is pending. That is normal.
 6. The stored `body` does not survive submitting on GitHub. The "Finish your review" box opens empty, and a review submitted with the box empty goes out with no body (tested on #5835). The inline comments are kept.
 
 ## Submit it
 
-Submit only when the user asks you to and names the type, Comment or Request changes. A submitted review cannot be edited or withdrawn, so otherwise leave it pending, so that the reviewer can read the inline comments on GitHub first. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./DEPENDABOT_DUTY.md)). You cannot request changes on your own PR.
+Submit only when the user asks you to and names the type, Comment or Request changes. A submitted review is visible to everyone and notifies the author at once, so otherwise leave it pending, so that the reviewer can read the inline comments on GitHub first. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./DEPENDABOT_DUTY.md)). You cannot request changes on your own PR.
 
 If the user asked you to submit before you started, post the review in one call: in step 3 above, add `"event": "COMMENT"` or `"event": "REQUEST_CHANGES"` to the JSON and keep the summary in `body`. The review is submitted at once and keeps its body.
 
