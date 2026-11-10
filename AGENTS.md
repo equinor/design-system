@@ -504,7 +504,7 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 - Put the review in as a **pending review** with inline comments, and recommend a type. The user's request for a review covers creating it, so do not ask again before posting it. Never submit one: the reviewer reads and edits it on GitHub and submits it with the type they choose. The overall comment does not survive submitting, because GitHub's "Finish your review" box opens empty, so give the summary in your reply for the reviewer to paste there and keep the findings in the inline comments. The exception is approving a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md)).
 - Nits are optional and do not send the PR back. Reviews post under the user's account.
 - When reviewers disagree, the latest review decides the column. Request changes blocks the merge until it is dismissed or the same reviewer approves.
-- Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR.
+- Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR. The same command re-requests a reviewer who has already reviewed.
 
 The board does not give a new PR a status, move it between draft and ready, or move it back after feedback, so the author's agent does:
 
