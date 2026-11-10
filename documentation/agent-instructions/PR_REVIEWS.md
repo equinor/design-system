@@ -32,9 +32,9 @@ Two or three sentences: the problem, then the suggestion. Collegial phrasing ("m
 
 ## Submit it
 
-Submit only when the user asks you to and names the type, Comment or Request changes. A submitted review is visible to everyone and notifies the author at once, so otherwise leave it pending, so that the reviewer can read the inline comments on GitHub first. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./DEPENDABOT_DUTY.md)). You cannot request changes on your own PR.
+Submit only when the user asks you to and names the type, Comment or Request changes. A submitted review is visible to everyone and notifies the author at once. Otherwise leave it pending, so the reviewer can read the inline comments on GitHub first. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./DEPENDABOT_DUTY.md)). You cannot request changes on your own PR.
 
-If the user asked you to submit before you started, post the review in one call: in step 3 above, add `"event": "COMMENT"` or `"event": "REQUEST_CHANGES"` to the JSON and keep the summary in `body`. The review is submitted at once and keeps its body.
+If nothing is posted yet when the user asks you to submit, post the review in one call: in step 3 above, add `"event": "COMMENT"` or `"event": "REQUEST_CHANGES"` to the JSON and keep the summary in `body`. The review is submitted at once and keeps its body.
 
 If the review is already pending and the user then asks you to submit it, write the summary to `/tmp/pr-<n>-summary.md` with the harness's file-writing tool and pass it as the body, since the stored one does not survive:
 
