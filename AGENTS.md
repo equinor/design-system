@@ -491,6 +491,36 @@ See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 PR descriptions have a limit of 300 words and issues a limit of 400 words. For what counts towards the limit, the rules for each, the writing restrictions, examples and the checklist before posting, see [`documentation/agent-instructions/PR_AND_ISSUE_WRITING.md`](./documentation/agent-instructions/PR_AND_ISSUE_WRITING.md). Harness entry points (the `write-pr-description` and `write-issue` skills in Claude Code, the matching prompts in Copilot and the matching agents in OpenCode) all reference that doc.
 
+## PR Reviews and the Project Board
+
+The board moves a PR to "Needs revision" on a **Request changes** review and to "Approved" on an **Approve** review. A plain comment or a **Comment** review does not move it. These rules are for agents running under the user's `gh` login. The `@claude` action cannot create a pending review, so it keeps posting its review as a comment.
+
+| Finding                                                                                        | Recommend                          |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Blocking (bug, accessibility violation, wrong API, breaking change without `!`, leaked secret) | Request changes                    |
+| Should fix, Suggestion, or a question that needs an answer first, with nothing Blocking        | Comment                            |
+| Only nits, each prefixed `nit:`                                                                | Approve, with the nits as comments |
+
+- Put the review in as a **pending review** with inline comments, and recommend a type. The user's request for a review covers creating it, so do not ask again before posting it. Submit it only when the user asks you to and names the type, Comment or Request changes. Otherwise the reviewer reads and edits it on GitHub and submits it with the type they choose. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./documentation/agent-instructions/DEPENDABOT_DUTY.md)). The steps and the severity levels are in [`PR_REVIEWS.md`](./documentation/agent-instructions/PR_REVIEWS.md).
+- The overall comment does not survive submitting on GitHub, because the "Finish your review" box opens empty. Give the summary in your reply for the reviewer to paste there, and keep the findings in the inline comments. If you submit the review, pass the summary as its body.
+- Nits are optional and do not send the PR back. Reviews post under the user's account.
+- When reviewers disagree, the latest review decides the column. Request changes blocks the merge until it is dismissed or the same reviewer approves.
+- Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR. The same command re-requests a reviewer who has already reviewed.
+- When you open a PR for the user, assign the user as its assignee (`gh pr create --assignee @me`). The assignee shows who owns the PR, and the reviewer list shows who is reviewing it.
+
+The board does not give a new PR a status, move it between draft and ready, or move it back after feedback, so the author's agent does:
+
+| When                                                                                              | Move the card to              |
+| ------------------------------------------------------------------------------------------------- | ----------------------------- |
+| A PR is opened as a draft, or converted back to a draft                                           | **In Progress**               |
+| A PR is opened as ready, a draft is marked ready, or review is re-requested after Request changes | **Review**                    |
+| A push to an approved PR (while `main` dismisses stale approvals, even a nit fix)                 | **Review**, and re-request it |
+
+- Change the draft state with `gh pr ready` or `gh pr ready --undo` and move the card in the same step. A click on github.com leaves the card where it was. Name the move when you ask to open the PR, because the user's request for the action covers it.
+- The board is project 1076. Get the Status option IDs with `gh project field-list 1076 --owner equinor --format json` and set the status with `gh project item-edit`. A new PR's card appears a few seconds after it opens, so tell the user if it has not appeared after a minute. Set the status, read it back, and set it again if it shows something else.
+- This needs the `project` scope on the user's `gh` login (`gh auth refresh -s project`). If `gh project` fails for lack of it, ask the user to run that.
+- A PR opened without an agent has no status. If its author opened it on github.com, they set the status themselves: **In Progress** for a draft, **Review** when it is ready. If it comes from someone outside the core team, whoever picks it up adds themselves as its reviewer and moves it to **Review**. Bot PRs (Dependabot, release) stay in No Status and follow their own routines.
+
 ## Git Workflow
 
 ⚠️ **CRITICAL: Always ask the user for permission before:**
@@ -499,6 +529,8 @@ PR descriptions have a limit of 300 words and issues a limit of 400 words. For w
 - Pushing to remote
 - Creating branches
 - Creating or editing PRs or issues with `gh`
+
+The `gh` edits that § PR Reviews and the Project Board names (a pending review, submitting it when the user asks, claiming a PR as its reviewer, the draft state and the card) are covered by the user's request for them.
 
 **Never assume these actions are okay.** Even for small changes, always confirm with the user first. Example: "Ready to commit. Should I proceed?"
 
