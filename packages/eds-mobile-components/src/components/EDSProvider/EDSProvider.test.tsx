@@ -17,8 +17,8 @@ const TokenSpy = ({ onToken }: { onToken: (token: unknown) => void }) => {
 };
 
 describe("EDSProvider", () => {
-    it("renders its children", () => {
-        render(
+    it("renders its children", async () => {
+        await render(
             <EDSProvider colorScheme="light" density="comfortable">
                 <Text>Hello world</Text>
             </EDSProvider>
@@ -26,9 +26,9 @@ describe("EDSProvider", () => {
         expect(screen.getByText("Hello world")).toBeTruthy();
     });
 
-    it("resolves the light color token for colorScheme=light", () => {
+    it("resolves the light color token for colorScheme=light", async () => {
         const onToken = jest.fn();
-        render(
+        await render(
             <EDSProvider colorScheme="light" density="comfortable">
                 <TokenSpy onToken={onToken} />
             </EDSProvider>
@@ -38,9 +38,9 @@ describe("EDSProvider", () => {
         );
     });
 
-    it("resolves the dark color token for colorScheme=dark", () => {
+    it("resolves the dark color token for colorScheme=dark", async () => {
         const onToken = jest.fn();
-        render(
+        await render(
             <EDSProvider colorScheme="dark" density="comfortable">
                 <TokenSpy onToken={onToken} />
             </EDSProvider>
@@ -50,9 +50,9 @@ describe("EDSProvider", () => {
         );
     });
 
-    it("resolves the comfortable spacing token for density=comfortable", () => {
+    it("resolves the comfortable spacing token for density=comfortable", async () => {
         const onToken = jest.fn();
-        render(
+        await render(
             <EDSProvider colorScheme="light" density="comfortable">
                 <TokenSpy onToken={onToken} />
             </EDSProvider>
@@ -62,9 +62,9 @@ describe("EDSProvider", () => {
         );
     });
 
-    it("resolves the spacious spacing token for density=spacious", () => {
+    it("resolves the spacious spacing token for density=spacious", async () => {
         const onToken = jest.fn();
-        render(
+        await render(
             <EDSProvider colorScheme="light" density="spacious">
                 <TokenSpy onToken={onToken} />
             </EDSProvider>
@@ -74,12 +74,12 @@ describe("EDSProvider", () => {
         );
     });
 
-    it("throws from useToken when used outside of an EDSProvider", () => {
+    it("throws from useToken when used outside of an EDSProvider", async () => {
         // Expected: React logs the thrown error to the console during render.
         const consoleError = jest
             .spyOn(console, "error")
             .mockImplementation(() => undefined);
-        expect(() => render(<TokenSpy onToken={jest.fn()} />)).toThrow(
+        await expect(render(<TokenSpy onToken={jest.fn()} />)).rejects.toThrow(
             "useToken must be called within a EDSProvider"
         );
         consoleError.mockRestore();
