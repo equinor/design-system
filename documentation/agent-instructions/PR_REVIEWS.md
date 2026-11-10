@@ -21,24 +21,28 @@ Two or three sentences: the problem, then the suggestion. Collegial phrasing ("m
 
 1. Check for an existing pending review: `gh api repos/{owner}/{repo}/pulls/<n>/reviews --jq '.[] | select(.state=="PENDING") | .id'`. GitHub allows one per person. If one exists, ask before deleting it (`gh api -X DELETE repos/{owner}/{repo}/pulls/<n>/reviews/<id>`).
 2. Check the head again with `gh pr view <n> --json headRefOid`. If it moved since you read the diff, read the new changes before posting.
-3. With the Write tool, write `/tmp/pr-<n>-review.json`, outside the repo:
+3. With the harness's file-writing tool, write `/tmp/pr-<n>-review.json`, outside the repo:
    - `commit_id`: the head SHA.
-   - No `event` field. Leaving it out keeps the review pending.
+   - No `event` field, unless the user asked you to submit (see § Submit it). Leaving it out keeps the review pending.
    - `body`: a short opener with what you verified, plus the findings that have no line.
    - `comments`: one per finding that has a line, as `{path, line, side: "RIGHT", body}`. `line` is on the new side of the diff and must fall inside a hunk, otherwise move the finding into `body`.
-4. Post it: `gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews --input /tmp/pr-<n>-review.json --jq '{id,state,html_url}'`, and check that `state` is `PENDING`.
+4. Post it: `gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews --input /tmp/pr-<n>-review.json --jq '{id,state,html_url}'`, and check that `state` is `PENDING`, or the type you submitted.
 5. `line` and `side` read `null` while the review is pending. That is normal.
 6. The stored `body` does not survive submitting on GitHub. The "Finish your review" box opens empty, and a review submitted with the box empty goes out with no body (tested on #5835). The inline comments are kept.
 
 ## Submit it
 
-Submit the pending review only when the user asks you to and names the type, Comment or Request changes. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./DEPENDABOT_DUTY.md)). Write the summary to `/tmp/pr-<n>-summary.md` with the Write tool and pass it as the body, since the stored one does not survive:
+Submit only when the user asks you to and names the type, Comment or Request changes. A submitted review cannot be edited or withdrawn, so otherwise leave it pending, so that the reviewer can read the inline comments on GitHub first. Never approve, except a Dependabot PR after an explicit go-ahead ([`DEPENDABOT_DUTY.md`](./DEPENDABOT_DUTY.md)). You cannot request changes on your own PR.
+
+If the user asked you to submit before you started, post the review in one call: in step 3 above, add `"event": "COMMENT"` or `"event": "REQUEST_CHANGES"` to the JSON and keep the summary in `body`. The review is submitted at once and keeps its body.
+
+If the review is already pending and the user then asks you to submit it, write the summary to `/tmp/pr-<n>-summary.md` with the harness's file-writing tool and pass it as the body, since the stored one does not survive:
 
 ```bash
 gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews/<id>/events -f event=COMMENT -F body=@/tmp/pr-<n>-summary.md
 ```
 
-Use `event=REQUEST_CHANGES` for Request changes. You cannot request changes on your own PR.
+Use `event=REQUEST_CHANGES` for Request changes.
 
 ## Reply
 

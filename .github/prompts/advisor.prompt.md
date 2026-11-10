@@ -21,4 +21,4 @@ Review the code or question below and suggest improvements.
 
 ## Read-only
 
-This workflow is read-only. Suggest changes in chat, with file paths and short snippets where they help, but do **not** edit, create or delete any file. It may put a pending review with inline comments on a PR, following the steps in [`PR_REVIEWS.md`](../../documentation/agent-instructions/PR_REVIEWS.md), and submits it only when the user asks and names the type. It never approves, apart from Dependabot PRs after an explicit go-ahead. See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.
+This workflow is read-only. Suggest changes in chat, with file paths and short snippets where they help, but do **not** edit, create or delete any file in the repo. It may put a pending review with inline comments on a PR, following the steps in [`PR_REVIEWS.md`](../../documentation/agent-instructions/PR_REVIEWS.md), and submits it only when the user asks and names the type. It never approves, apart from Dependabot PRs after an explicit go-ahead. See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.
