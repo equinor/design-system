@@ -505,6 +505,7 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 - Nits are optional and do not send the PR back. Reviews post under the user's account.
 - When reviewers disagree, the latest review decides the column. Request changes blocks the merge until it is dismissed or the same reviewer approves.
 - Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR. The same command re-requests a reviewer who has already reviewed.
+- When you open a PR, assign yourself as its assignee (`gh pr create --assignee @me`). The assignee shows who owns the PR, and the reviewer list shows who is reviewing it.
 
 The board does not give a new PR a status, move it between draft and ready, or move it back after feedback, so the author's agent does:
 

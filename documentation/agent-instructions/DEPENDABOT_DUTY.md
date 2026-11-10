@@ -39,7 +39,7 @@ gh pr list --author app/dependabot --state open --limit 50 \
   --json number,title,createdAt,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup,files
 ```
 
-For each PR record: package(s), from → to version, update type (patch / minor / major, read it from the title), group (`all-dependencies`, `npm_and_yarn`, `storybook`, …), CI conclusion, files touched.
+For each PR record: package(s), from → to version, update type (patch / minor / major, read it from the title), group (`all-dependencies`, `npm_and_yarn`, `storybook`, …), CI conclusion, files touched. When the user takes a PR, add them as its reviewer, as the claim bullet in [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board describes.
 
 ### Duplicates
 
