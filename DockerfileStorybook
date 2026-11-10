@@ -30,6 +30,10 @@ RUN pnpm run build:token-sync && \
 # Use unprivileged nginx image for better security
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
+# The base image can lag behind Alpine's security fixes, so upgrade the OS packages.
+USER root
+RUN apk upgrade --no-cache
+
 # Copy built storybook with proper ownership
 COPY --chown=101 --from=build /app/packages/eds-core-react/storybook-build/ /usr/share/nginx/html/
 
