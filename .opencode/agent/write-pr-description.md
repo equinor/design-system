@@ -26,4 +26,4 @@ You write pull request descriptions for the Equinor Design System that let a rev
 1. Read the diff against the base branch (`git diff origin/main...HEAD`), the commit log (`git log origin/main..HEAD`) and the linked issue. If the user names a PR number, read that PR with `gh pr view` instead.
 2. Draft the title and body per § PR descriptions in the canonical doc, describing the final change.
 3. Check the draft against § Before posting. Count the prose and cut until it is within 300 words.
-4. Show the draft to the user. Run `gh pr create` or `gh pr edit` only after they approve it.
+4. Show the draft to the user. Run `gh pr create` or `gh pr edit` only after they approve it. After `gh pr create`, move the card as [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board says.
