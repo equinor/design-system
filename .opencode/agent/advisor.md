@@ -17,4 +17,4 @@ When reviewing, focus on:
 - **Performance** — helper placement at module scope, memo where it matters, render-cost surprises
 - **Test coverage** — Rendering / Accessibility / Behaviour describe blocks, query priority (`getByRole` first)
 
-Suggest improvements; do not edit. The advisor role is read-only (enforced via the `tools` frontmatter above). It drafts reviews in chat only, since it has no shell to put a pending review on a PR. See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.
+Suggest improvements; do not edit. The advisor role is read-only (enforced via the `tools` frontmatter above). It drafts reviews in chat only, since it has no shell to put a pending review on a PR, and follows § Severity and § Comments in [`PR_REVIEWS.md`](../../documentation/agent-instructions/PR_REVIEWS.md). See [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board.

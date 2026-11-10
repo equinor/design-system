@@ -91,11 +91,11 @@ A developer must not lose access to a workflow by switching harnesses. Build a m
 | Beta token migration                       | `/token-migration`                         | `token-migration` prompt      | `token-migration` agent      |
 | Dependabot duty                            | `/dependabot-duty`                         | `dependabot-duty` prompt      | `dependabot-duty` agent      |
 | Read-only advisor                          | `.claude/rules/advisor.md` (general scope) | `advisor` prompt              | `advisor` primary agent      |
-| Review a PR (pending review)               | `review-pr` skill                          | (none, see below)             | (none, see below)            |
+| Review a PR (pending review)               | `review-pr` skill                          | `advisor` prompt              | `advisor` primary agent      |
 
 Rows are _intent_, not exact filenames. If the team adds a new workflow, the row should appear in all three harnesses (or be intentionally one-harness with the reason documented). Any gap is a finding.
 
-The pending-review row is Claude Code only on purpose: the skill needs `gh api` under the user's own `gh` login, the Copilot advisor prompt follows the rule in `AGENTS.md` without a separate skill, and the OpenCode advisor has no shell.
+In the pending-review row, the `review-pr` skill is Claude Code only: it wraps the steps in `PR_REVIEWS.md`, and needs `gh api` under the user's own `gh` login. The Copilot advisor prompt follows the same steps directly. The OpenCode advisor has no shell, so it drafts the review in chat.
 
 ### Step 5 — Path-scoped rule consistency
 

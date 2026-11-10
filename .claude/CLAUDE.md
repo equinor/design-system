@@ -42,7 +42,7 @@ Skills in `.claude/skills/<name>/SKILL.md` are applied automatically when the ta
 | ---------------------- | --------------------------- | ----------------------------------------------------------------------------------- |
 | `write-pr-description` | Opening or editing a PR     | Short PR description per `documentation/agent-instructions/PR_AND_ISSUE_WRITING.md` |
 | `write-issue`          | Opening or editing an issue | Issue from notes, screenshots or a conversation, per the same doc                   |
-| `review-pr`            | Reviewing a PR              | Pending review with inline comments for the reviewer to submit                      |
+| `review-pr`            | Reviewing a PR              | Pending review with inline comments, submitted only when asked                      |
 
 ## Hooks
 
