@@ -7,7 +7,7 @@ description: Review a pull request and put the findings in as a pending review w
 
 Review the PR in `$ARGUMENTS` (a number, URL or branch) and put the findings in as a **pending review**. The reviewer reads and edits it on GitHub, then submits it with the type they choose.
 
-> **Rules:** [`AGENTS.md`](../../../AGENTS.md) § PR Reviews and the Project Board. Never submit a review and never approve. The user running this skill is the request to put the review in, so do not ask again before posting.
+> **Rules:** [`AGENTS.md`](../../../AGENTS.md) § PR Reviews and the Project Board. Never submit a review and never approve. The user running this skill is the request to put the review in, so do not ask again before posting. It needs `gh api` under the user's own `gh` login, so it does not run in the `@claude` action.
 
 ## Steps
 
@@ -46,4 +46,4 @@ Two or three sentences: the problem, then the suggestion. Collegial phrasing ("m
 
 ## Reply
 
-Give the link to the pending review, the recommended type in one line, and the count per severity. Remind the reviewer to submit it with the type they choose. Do not paste the inline comments into the chat, but do paste the `body` text, in a quote block, and tell the reviewer to paste it into the "Finish your review" box before submitting.
+Give the link to the pending review, the recommended type in one line, and the count per severity. Remind the reviewer to submit it with the type they choose. Do not paste the inline comments into the chat, but do paste the `body` text, in a fenced markdown block, and tell the reviewer to paste it into the "Finish your review" box before submitting.
