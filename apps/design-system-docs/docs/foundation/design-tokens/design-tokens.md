@@ -16,7 +16,7 @@ Some tokens have a different value in each mode, while the name stays the same:
 
 | Mode          | Values                        | Set in code with                                                                 | Changes                               |
 | ------------- | ----------------------------- | -------------------------------------------------------------------------------- | ------------------------------------- |
-| Colour scheme | Light, Dark                   | `data-color-scheme="light"` or `data-color-scheme="dark"`                        | Colour                                |
+| Colour scheme | Light, Dark                   | `data-color-scheme="dark"`; Light is the default                                 | Colour                                |
 | Density       | Compact, Comfortable, Relaxed | `data-density="compact"` or `data-density="relaxed"`; Comfortable is the default | Spacing, typography and corner radius |
 
 Set the attribute on a container, and everything inside it follows. In Figma, set the same modes on the frame.

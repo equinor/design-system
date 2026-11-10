@@ -1,20 +1,5 @@
 {
   "background": {
-    "backdrop": {
-      "$value": "{neutral.7}",
-      "$type": "color",
-      "$extensions": {
-        "com.figma": {
-          "scopes": [
-            "FRAME_FILL",
-            "SHAPE_FILL"
-          ],
-          "codeSyntax": {
-            "WEB": "var(--eds-background-backdrop)"
-          }
-        }
-      }
-    },
     "canvas": {
       "$value": "{neutral.1}",
       "$type": "color",
@@ -3442,7 +3427,7 @@
   },
   "overlay": {
     "scrim": {
-      "$value": "#1d1d1d1a",
+      "$value": "#1d1d1d66",
       "$type": "color",
       "$extensions": {
         "com.figma": {

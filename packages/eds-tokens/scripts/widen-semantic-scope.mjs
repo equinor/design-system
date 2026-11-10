@@ -21,6 +21,14 @@
  *    existed at the root, so `data-density="comfortable"` inside a
  *    Compact subtree kept the Compact values.
  *
+ * 3. The light colour scheme, `color-scheme/light.css`, from
+ *    `[data-color-scheme="light"]` to
+ *    `:root, [data-color-scheme="light"]`. Without it every colour
+ *    token resolves to nothing on a page that sets no
+ *    `data-color-scheme` (#5795). `:root` and `[data-color-scheme="dark"]`
+ *    have equal specificity, so `<html data-color-scheme="dark">` only
+ *    stays dark because generate-css-bundle.mjs puts dark after light.
+ *
  * Nothing else is widened. The CSS export's `rootSelector` is global
  * across all non-dimensional layers, and widening everything regresses
  * the density cascade: the density base declares the same
@@ -57,7 +65,7 @@
  * with the narrow selector. Idempotent; fails loudly if a file starts
  * with none of the narrow, the previous or the widened selector.
  *
- * Usage: node scripts/widen-semantic-scope.mjs [--dir <path>] [--density-base <file>]
+ * Usage: node scripts/widen-semantic-scope.mjs [--dir <path>] [--density-base <file>] [--light-scheme <file>]
  */
 import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -65,6 +73,9 @@ import process from 'node:process'
 import {
   DENSITY_BASE_WIDE,
   DENSITY_BASE_WIDE_RE,
+  LIGHT_SCHEME_NARROW_RE,
+  LIGHT_SCHEME_WIDE,
+  LIGHT_SCHEME_WIDE_RE,
   NARROW_RE,
   PREVIOUS_WIDE_RE,
   WIDE,
@@ -75,6 +86,8 @@ const args = parseArgs(process.argv.slice(2))
 const DIR = args.dir ?? 'src/tokens/css/semantic'
 const DENSITY_BASE =
   args['density-base'] ?? 'src/tokens/css/density/comfortable.css'
+const LIGHT_SCHEME =
+  args['light-scheme'] ?? 'src/tokens/css/color-scheme/light.css'
 
 // Recursive to mirror the bundler's directory glob — a nested file the
 // export adds later must be widened too, not just top-level ones
@@ -102,6 +115,12 @@ await widen(DENSITY_BASE, {
   from: [NARROW_RE],
 })
 
+await widen(LIGHT_SCHEME, {
+  wide: LIGHT_SCHEME_WIDE,
+  wideRe: LIGHT_SCHEME_WIDE_RE,
+  from: [LIGHT_SCHEME_NARROW_RE, NARROW_RE],
+})
+
 async function widen(path, { wide, wideRe, from }) {
   const css = await readFile(path, 'utf8').catch(() =>
     fail(`cannot read ${path}`),
@@ -120,7 +139,7 @@ async function widen(path, { wide, wideRe, from }) {
   const selector = from.find((re) => re.test(css))
   if (!selector)
     fail(
-      `${path} does not start with a ":root" selector, so the export layout changed. Review #5226 and #5247 before proceeding`,
+      `${path} does not start with a selector this script knows, so the export layout changed. Review #5226, #5247 and #5795 before proceeding`,
     )
   await writeFile(path, css.replace(selector, wide))
   console.log(`widen-semantic-scope: widened ${path}`)

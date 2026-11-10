@@ -47,6 +47,11 @@ Facts verified against the repo (2026-07-20):
   attribute, plus a `prefers-color-scheme` media fallback appended by
   `build-dark-scope` — added in #4864 to preserve the system-dark
   behaviour that `light-dark()` had provided implicitly).
+  _Update 2026-11-04:_ no longer true. The light scheme is also declared
+  at `:root`, so a page without the attribute is light
+  ([#5795](https://github.com/equinor/design-system/issues/5795),
+  [#5835](https://github.com/equinor/design-system/pull/5835)). There is
+  still no `prefers-color-scheme` fallback.
 
 ## Decision Drivers
 

@@ -1,0 +1,113 @@
+/* The side navigation, and the tabs above the page header. Everything in
+   this file is an extra: come back to it when you have done the six 🐨
+   steps. */
+
+.side-nav {
+  gap: 16px;
+  padding: 12px;
+
+  background-color: light-dark(white, black);
+  border-inline-end: 1px solid light-dark(black, white);
+}
+
+.nav-list {
+  gap: 2px;
+}
+
+/* 💯 The current page is selected. Selected fills have no foreground token
+   of their own: check the colour usage page for which text to use on them,
+   and why neutral is a safer choice than accent here. */
+.nav-item {
+  --_bg-color: transparent;
+
+  gap: 12px;
+  padding-block: 8px;
+  padding-inline: 12px 24px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: light-dark(black, white);
+
+  background-color: var(--_bg-color);
+  border-radius: 4px;
+  outline: none;
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:active {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &[aria-current='page'] {
+    --_bg-color: light-dark(white, black);
+
+    font-weight: 500;
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &[aria-current='page']:active {
+    --_bg-color: light-dark(white, black);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}
+
+.nav-icon {
+  color: light-dark(black, white);
+}
+
+/* 💯 The current tab is active: the line under it, the text colour and the
+   hover fill all change with it. Under an inactive tab, the line is only a
+   divider. */
+.tab {
+  --_bg-color: transparent;
+  --_bg-hover: light-dark(white, black);
+  --_color: light-dark(black, white);
+  --_indicator: light-dark(black, white);
+
+  gap: 4px;
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--_color);
+
+  background-color: var(--_bg-color);
+  border-radius: 0;
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--_indicator);
+  transition: background-color var(--_transition-duration) ease-in-out;
+
+  &[aria-current='page'] {
+    --_bg-hover: light-dark(white, black);
+    --_color: light-dark(black, white);
+    --_indicator: light-dark(black, white);
+  }
+
+  &:is(:hover, :focus-visible) {
+    --_bg-color: var(--_bg-hover);
+  }
+
+  &[aria-current='page']:is(:hover, :focus-visible) {
+    --_indicator: light-dark(black, white);
+  }
+
+  &:focus-visible {
+    outline: 1px solid light-dark(blue, cyan);
+    outline-offset: 1px;
+  }
+}

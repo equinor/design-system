@@ -483,6 +483,8 @@ For non-publishable changes (config, Storybook, tests, README, docs), use hidden
 
 **PR titles** must also follow the conventional commits format — they appear in changelogs and merge history.
 
+A PR title or a `BREAKING CHANGE:` paragraph must not contain an opening tag-like `<Word`, such as `<TextInput>` or `Array<string>`, even inside backticks. Release Please's parser reads it as an unclosed HTML tag, merges the sections of different packages in the release pull request, and no release is created for the affected package. Reword the text instead. See § Breaking Changes in `documentation/how-to/CONVENTIONAL_COMMITS.md`.
+
 See `documentation/how-to/CONVENTIONAL_COMMITS.md` for full guidelines.
 
 ## PR and Issue Descriptions

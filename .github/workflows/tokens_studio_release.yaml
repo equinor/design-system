@@ -102,10 +102,12 @@ jobs:
       - name: Generate TypeScript tokens
         run: pnpm --filter @equinor/eds-tokens run generate:ts-tokens
       # Widen the semantic layer to [data-color-scheme] and [data-density],
-      # and the density base to [data-density="comfortable"] (#5226, #5247 —
+      # the density base to [data-density="comfortable"] and the light
+      # colour scheme to :root (#5226, #5247, #5795;
       # scripts/widen-semantic-scope.mjs rewrites the generated
-      # src/tokens/css/semantic/*.css and density/comfortable.css in place,
-      # so those selector changes are expected in this PR's diff), then
+      # src/tokens/css/semantic/*.css, density/comfortable.css and
+      # color-scheme/light.css in place, so those selector changes are
+      # expected in this PR's diff), then
       # concatenate the generated CSS into one committed bundle
       # (deliberately not minified — ADR-0010). The bundler adds two
       # things of its own: the @layer eds-tokens wrap (ADR-0028 point 6,

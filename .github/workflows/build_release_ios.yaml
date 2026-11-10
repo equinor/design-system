@@ -33,7 +33,7 @@ jobs:
       - name: Set Xcode version
         uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
         with:
-          xcode-version: '26.2'
+          xcode-version: '26.6'
 
       - name: Set build number
         run: |

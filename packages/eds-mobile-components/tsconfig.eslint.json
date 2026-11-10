@@ -8,5 +8,8 @@
     // Slice 2–4 component dirs so ESLint can parse them. Mirror any other
     // non-migration excludes added to tsconfig.json here.
     // Keep in sync with the files list in eslint.config.js.
-    "exclude": ["dist", "node_modules", "**/*.spec.ts"]
+    "exclude": ["dist", "node_modules", "**/*.spec.ts"],
+    // TypeScript 6 no longer includes every @types package on its own, so the
+    // Jest globals used by the tests and jest.setup.ts are listed here.
+    "compilerOptions": { "types": ["jest"] }
 }

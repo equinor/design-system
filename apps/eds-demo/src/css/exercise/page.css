@@ -1,0 +1,94 @@
+/*
+  Exercise: replace the hard-coded values with the beta tokens.
+
+  This demo is for learning the tokens. Apart from the buttons and icons,
+  which are the EDS Button and Icon, the parts of the dashboard (the search
+  field, menu, tabs, table and badges) are written for this demo. Neither
+  their code nor their look represents the EDS Beta components, so do not
+  use them as a reference for those.
+
+  The CSS is in four files, one for each part of the screen: page.css (this
+  file), top-bar.css, navigation.css and table.css. The tabs above the editor
+  switch between them.
+
+  Kody the Koala 🐨 marks the core path: six numbered steps, in page.css,
+  top-bar.css and table.css. Together they use every kind of token once:
+  colour, spacing, typography and elevation. Do them in order, starting
+  below. Hannah the Hundred 💯 marks extras for when you have done the six,
+  and every rule without a mark is an extra too. navigation.css is all
+  extras.
+
+  Every value in these files is a placeholder: the colours are
+  light-dark(white, black) and friends, the sizes are the px values of the
+  default density. The finished version is the Solution: Ctrl + Shift + S
+  (⌘ + Shift + S on a Mac) switches between them and keeps your place. Try
+  not to peek.
+
+  Your changes show in the frame as you type and are saved in this browser.
+  Restart, at the top, puts the original exercise back.
+
+  Use the toolbar to check your work. Switch to Dark and to Compact or
+  Relaxed: the parts you have converted follow the switch, the rest stays
+  as it is.
+
+  Where to look:
+  - The Tokens tab on the right of the editor lists every token with a
+    preview. Click one to put it in the CSS at the cursor.
+  - Colour, which token for which job:
+    https://eds.equinor.com/docs/Next/foundation/colour/usage
+  - Spacing: https://eds.equinor.com/docs/Next/foundation/design-tokens/spacing-usage
+  - Typography: https://eds.equinor.com/docs/Next/foundation/design-tokens/typography-usage
+  - Elevation: https://eds.equinor.com/docs/Next/foundation/design-tokens/elevation
+
+  Leave the stroke widths as they are: borders and focus rings have no width
+  token. The buttons and icons are EDS components with their own CSS, so
+  they already use the tokens. The layout is in a separate stylesheet that
+  you do not need to change.
+*/
+
+/* 🐨 1 of 6. Start here. The page is the base layer: the top bar, the
+   navigation and the table are surfaces placed on it. Set the page
+   background, and the text colour everything else inherits. Switch to Dark
+   to check. */
+.app {
+  --_transition-duration: 150ms;
+
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+}
+
+.main {
+  gap: 20px;
+  padding: 24px;
+}
+
+.page-header {
+  gap: 20px;
+}
+
+.page-header-text {
+  gap: 8px;
+}
+
+/* 🐨 2 of 6. The title is a heading, so it uses the header role and the
+   header font family. The paragraph below wraps onto several lines: which
+   typography role is made for text that wraps? Then go to top-bar.css. */
+.title {
+  font-family: Equinor, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  color: light-dark(black, white);
+}
+
+.intro {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: light-dark(black, white);
+}
+
+.actions {
+  gap: 12px;
+}

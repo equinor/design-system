@@ -23,6 +23,9 @@ spec:
     - alias: eds-storybook
       environment: prod
       component: storybook
+    - alias: eds-demo
+      environment: prod
+      component: demo
   dnsExternalAlias:
     - alias: eds.equinor.com
       environment: prod
@@ -35,6 +38,12 @@ spec:
   components:
     - name: color-palette-generator
       dockerfileName: DockerfileColorPaletteGenerator
+      publicPort: http
+      ports:
+        - name: http
+          port: 3000
+    - name: demo
+      dockerfileName: DockerfileEdsDemo
       publicPort: http
       ports:
         - name: http
