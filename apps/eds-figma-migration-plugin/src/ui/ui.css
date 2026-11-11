@@ -809,3 +809,40 @@ code {
   margin: 0;
   padding-inline-start: var(--eds-spacing-md);
 }
+
+/* The scope line under the health bar, with Export report beside it. */
+.scope-line {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.report-preview {
+  max-block-size: 12rem;
+  margin: var(--eds-spacing-xs) 0 0;
+  padding: var(--eds-spacing-xs);
+  overflow: auto;
+  font-family: ui-monospace, monospace;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  white-space: pre-wrap;
+  background: var(--eds-background-canvas);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.saved-frames {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-sm);
+    justify-content: space-between;
+  }
+}

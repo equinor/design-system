@@ -22,6 +22,8 @@ import { collectFixture } from './dev/export-fixture'
 import { exportInventory } from './dev/export-inventory'
 import { ScanCancelled } from './scan/collect'
 import { currentTarget, runScan } from './scan/scan'
+import { loadChoices, loadHealth, saveChoices, saveHealth } from './store'
+import { buildReport } from '../scan/report'
 import type { ScanState, ScanTarget } from './scan/scan'
 
 const COMMANDS: Command[] = [
@@ -46,7 +48,7 @@ function post(message: PluginToUi) {
 
 let lastScan: ScanState | undefined
 let lastTarget: ScanTarget | undefined
-let overrides: Overrides = { records: {}, rows: {} }
+let overrides: Overrides = loadChoices()
 /** True while a scan, an apply or a revert runs; only one at a time */
 let busy = false
 let cancelRequested = false
@@ -94,6 +96,7 @@ async function scan(target: ScanTarget) {
     )
     lastTarget = target
     lastScan = withChoices(state)
+    saveHealth(lastScan.summary)
     post({ type: 'scan-done', summary: lastScan.summary })
     post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
     post({ type: 'instances', instances: lastScan.oldInstances })
@@ -209,6 +212,7 @@ function setOverrides(changes: OverrideChange[]) {
   }
   overrides = { records, rows }
   post({ type: 'overrides', overrides })
+  if (!saveChoices(overrides)) post({ type: 'choices-not-saved' })
   if (lastScan) {
     // The health bars, the legend and the filters follow every change.
     lastScan = withChoices(lastScan)
@@ -269,6 +273,10 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
           currentPageName: figma.currentPage.name,
         })
         postSelection()
+        {
+          const saved = loadHealth()
+          if (saved) post({ type: 'saved-health', saved })
+        }
         if (command === 'dev-export-inventory') await runDevExportInventory()
         if (command === 'dev-export-fixture') await runDevExportFixture()
         break
@@ -300,6 +308,20 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'revert':
         await revert(message.entryId)
+        break
+      case 'get-report':
+        if (lastScan) {
+          post({
+            type: 'report',
+            report: buildReport({
+              fileName: figma.root.name,
+              summary: lastScan.summary,
+              records: lastScan.records,
+              oldInstances: lastScan.oldInstances,
+              overrides,
+            }),
+          })
+        }
         break
       case 'run-dev-export-inventory':
         await runDevExportInventory()

@@ -4,7 +4,13 @@
  * change to a message is checked on both.
  */
 import type { MappingGroup, OverrideValue, Overrides } from '../scan/mapping'
-import type { BindingRecord, OldInstance, ScanSummary } from '../scan/types'
+import type { Report } from '../scan/report'
+import type {
+  BindingRecord,
+  Counts,
+  OldInstance,
+  ScanSummary,
+} from '../scan/types'
 
 /** The menu commands in manifest.json. */
 export type Command = 'open' | 'dev-export-inventory' | 'dev-export-fixture'
@@ -52,6 +58,18 @@ export type RevertResult = {
   failed: ChangeFailure[]
 }
 
+/** The latest scan, kept in the file and shown when the plugin opens. */
+export type SavedHealth = {
+  scannedAt: string
+  /** “Page Well overview”, “The whole file”, … */
+  place: string
+  nodesScanned: number
+  totals: Counts
+  health: number | null
+  /** The frames with the lowest health, up to 20 */
+  frames: { name: string; pageName: string; health: number | null }[]
+}
+
 export type ScanProgress = {
   pageName: string
   pageIndex: number
@@ -80,6 +98,11 @@ export type PluginToUi =
   | { type: 'mapping'; groups: MappingGroup[] }
   /** Every instance in the scan that still uses legacy variables */
   | { type: 'instances'; instances: OldInstance[] }
+  /** The latest scan saved in the file, sent when the window opens */
+  | { type: 'saved-health'; saved: SavedHealth }
+  | { type: 'report'; report: Report }
+  /** The choices could not be kept in the file */
+  | { type: 'choices-not-saved' }
   | { type: 'overrides'; overrides: Overrides }
   | { type: 'scan-cancelled' }
   | {
@@ -117,6 +140,8 @@ export type UiToPlugin =
   | { type: 'apply'; entryIds: string[] }
   /** Puts back what the plugin changed in an entry, from the change log */
   | { type: 'revert'; entryId: string }
+  /** Builds the report of the latest scan */
+  | { type: 'get-report' }
   | { type: 'run-dev-export-inventory' }
   | { type: 'run-dev-export-fixture' }
   | { type: 'notify'; message: string }

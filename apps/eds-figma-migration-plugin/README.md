@@ -15,16 +15,16 @@ The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
 
 ## Status
 
-| Milestone                                      | State                                                  |
-| ---------------------------------------------- | ------------------------------------------------------ |
-| 1. Scaffold, manifest, build, inventory export | Done                                                   |
-| 2. Rules and tests                             | Done                                                   |
-| 3. Read-only scan                              | Done                                                   |
-| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                 |
-| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma |
-| 6. Review and the remaining views              | Done; tested in Figma                                  |
-| 7. Report and saved health                     | Next                                                   |
-| 8. Release                                     |                                                        |
+| Milestone                                      | State                                                           |
+| ---------------------------------------------- | --------------------------------------------------------------- |
+| 1. Scaffold, manifest, build, inventory export | Done                                                            |
+| 2. Rules and tests                             | Done                                                            |
+| 3. Read-only scan                              | Done                                                            |
+| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                          |
+| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma          |
+| 6. Review and the remaining views              | Done; tested in Figma                                           |
+| 7. Report and saved health                     | Done; tested in Figma                                           |
+| 8. Release                                     | Next: publish privately to Equinor and write the designer guide |
 
 ## Build
 
@@ -184,6 +184,28 @@ component is updated in its library, then the instances follow.
 **Local components** stay an opt-in group under the frames. A component that
 still uses legacy variables says how many times it is used in the file,
 because changing it changes every instance.
+
+## Report and what the plugin keeps in the file
+
+**Export report**, beside the scope line, makes a Markdown report (health,
+every frame with its health and the layers the plugin changed, the bindings
+that need a check or have no equivalent, the instances with legacy variables
+grouped by component, and the rules version) and a CSV with one row per
+binding. Both can be downloaded; the Markdown can also be copied, for where a
+download from the plugin window is blocked.
+
+The plugin keeps two things in the shared plugin data of the document
+(namespace `eds_migration`):
+
+- `health`: the latest scan summary (when, where, the totals and the frames
+  with the lowest health). It is shown as **Last scan** when the plugin opens,
+  before the designer scans again.
+- `choices`: the targets the designer chose, so a review can continue another
+  day. When they are too many to keep, the window says so.
+
+The window follows Figma's light or dark theme. A scope without EDS
+variables, a scope with nothing left to migrate, an empty Mapping or
+Instances tab and a search without matches each say so in the window.
 
 ## Publish a test version to Equinor
 

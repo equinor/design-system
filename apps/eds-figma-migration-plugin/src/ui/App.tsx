@@ -11,7 +11,14 @@ import type {
   Overrides,
 } from '../scan/mapping'
 import { propertyLabel } from '../scan/labels'
-import { formatHealth, healthOf, sumCounts } from '../scan/summary'
+import type { Report } from '../scan/report'
+import {
+  formatHealth,
+  healthOf,
+  oldCount,
+  scoredTotal,
+  sumCounts,
+} from '../scan/summary'
 import type {
   BindingRecord,
   EntrySummary,
@@ -23,18 +30,21 @@ import type {
   DevExportFile,
   OverrideChange,
   PluginToUi,
+  SavedHealth as Saved,
   ScanProgress,
   Scope,
 } from '../shared/messages'
 import { ApplyActions } from './components/ApplyActions'
 import { BulkBar } from './components/BulkBar'
 import { DevExport } from './components/DevExport'
+import { ExportReport } from './components/ExportReport'
 import { EntryList } from './components/EntryList'
 import { HealthBar, HealthLegend } from './components/HealthBar'
 import { Inspector } from './components/Inspector'
 import { InstancesView } from './components/InstancesView'
 import { MappingView } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
+import { SavedHealth } from './components/SavedHealth'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
@@ -75,6 +85,9 @@ function Overview({
   onApply,
   instances,
   onReview,
+  report,
+  onReport,
+  onCloseReport,
 }: {
   summary: ScanSummary
   view: View
@@ -98,6 +111,9 @@ function Overview({
   onApply: (entryIds: string[]) => void
   instances: OldInstance[]
   onReview: () => void
+  report?: Report
+  onReport: () => void
+  onCloseReport: () => void
 }) {
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
@@ -134,14 +150,36 @@ function Overview({
             )
           }
         />
-        <p className="muted">
-          {summary.scope === 'file'
-            ? `${summary.pages.length} pages`
-            : summary.scope === 'selection'
-              ? `Selection on ${summary.pages[0]?.name}`
-              : summary.pages[0]?.name}
-          , {summary.nodesScanned} layers
-        </p>
+        {scoredTotal(totals) === 0 ? (
+          <p className="muted">
+            No layer in the scope uses EDS variables. Choose another scope, or
+            scan the whole file.
+          </p>
+        ) : (
+          oldCount(totals) === 0 && (
+            <Banner tone="success">
+              <Banner.Message>
+                Everything in the scope uses EDS Foundation. Nothing is left to
+                migrate.
+              </Banner.Message>
+            </Banner>
+          )
+        )}
+        <div className="scope-line">
+          <p className="muted">
+            {summary.scope === 'file'
+              ? `${summary.pages.length} pages`
+              : summary.scope === 'selection'
+                ? `Selection on ${summary.pages[0]?.name}`
+                : summary.pages[0]?.name}
+            , {summary.nodesScanned} layers
+          </p>
+          <ExportReport
+            report={report}
+            onRequest={onReport}
+            onClose={onCloseReport}
+          />
+        </div>
       </section>
 
       <Tabs
@@ -246,6 +284,9 @@ export function App() {
   const [mapping, setMapping] = useState<MappingGroup[]>([])
   const [instances, setInstances] = useState<OldInstance[]>([])
   const [review, setReview] = useState<ReviewItem[]>()
+  const [saved, setSaved] = useState<Saved>()
+  const [report, setReport] = useState<Report>()
+  const [choicesNotSaved, setChoicesNotSaved] = useState(false)
   const [overrides, setOverrides] = useState<Overrides>(NO_OVERRIDES)
   const [picker, setPicker] = useState<PickerRequest>()
   const [devExport, setDevExport] = useState<{
@@ -317,6 +358,15 @@ export function App() {
           break
         case 'instances':
           setInstances(message.instances)
+          break
+        case 'saved-health':
+          setSaved(message.saved)
+          break
+        case 'report':
+          setReport(message.report)
+          break
+        case 'choices-not-saved':
+          setChoicesNotSaved(true)
           break
         case 'overrides':
           setOverrides(message.overrides)
@@ -569,11 +619,23 @@ export function App() {
                 onCancel={() => send({ type: 'cancel-scan' })}
               />
             )}
-            {!summary && !scanning && (
+            {!summary && !scanning && !saved && (
               <p className="muted">
                 Scan the selection, the page or the whole file to see which
                 layers still use legacy EDS variables.
               </p>
+            )}
+            {!summary && !scanning && saved && <SavedHealth saved={saved} />}
+            {choicesNotSaved && (
+              <Banner
+                tone="warning"
+                onDismiss={() => setChoicesNotSaved(false)}
+              >
+                <Banner.Message>
+                  Your choices are too many to keep in the file. They stay while
+                  the plugin is open; apply them before you close it.
+                </Banner.Message>
+              </Banner>
             )}
             {summary && !scanning && review && (
               <ReviewView
@@ -643,6 +705,9 @@ export function App() {
                   onApply={applyEntries}
                   instances={instances}
                   onReview={() => setReview(reviewItems(mapping, overrides))}
+                  report={report}
+                  onReport={() => send({ type: 'get-report' })}
+                  onCloseReport={() => setReport(undefined)}
                 />
               </div>
             )}
