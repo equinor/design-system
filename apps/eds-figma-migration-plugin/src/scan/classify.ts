@@ -22,6 +22,9 @@ import type {
   RawVariable,
 } from './types'
 
+/** The target of a legacy mode that is only cleared, with no new mode set. */
+export const CLEAR_MODE = 'clear'
+
 export function propertyKey(property: PropertyRef): string {
   switch (property.type) {
     case 'paint':
@@ -112,7 +115,12 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     if (origin === 'other') {
       return { ...base, category: 'other', current: describe(variable) }
     }
-    const old = { old: variable.name, oldCollection: variable.collectionName }
+    const old = {
+      kind: unit.kind,
+      oldKey: `${variable.collectionKey}/${variable.name}`,
+      old: variable.name,
+      oldCollection: variable.collectionName,
+    }
     if (unit.instanceId) return { ...base, ...old, category: 'inInstance' }
     const resolution = resolveVariable({
       kind: unit.kind,
@@ -139,8 +147,12 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
       ([, variable]) => collectionOrigin(variable.collectionKey) === 'old',
     )
     if (oldFields.length > 0) {
+      const names = oldFields
+        .map(([, variable]) => variable.name)
+        .sort((a, b) => a.localeCompare(b, 'en'))
       const old = {
-        old: oldFields.map(([, variable]) => variable.name).join(', '),
+        oldKey: `typography:${names.join('|')}`,
+        old: names.join(', '),
         oldCollection: [
           ...new Set(oldFields.map(([, variable]) => variable.collectionName)),
         ].join(', '),
@@ -190,7 +202,11 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
   const label = `${unit.collectionName}: ${unit.modeName}`
   if (origin === 'new') return { ...base, category: 'migrated', current: label }
   if (origin === 'other') return { ...base, category: 'other', current: label }
-  const old = { old: unit.modeName, oldCollection: unit.collectionName }
+  const old = {
+    oldKey: `mode:${unit.collectionKey}:${unit.modeName}`,
+    old: unit.modeName,
+    oldCollection: unit.collectionName,
+  }
   if (unit.instanceId) return { ...base, ...old, category: 'inInstance' }
   const resolution = resolveMode({
     collectionKey: unit.collectionKey,
@@ -203,7 +219,9 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     outcome: resolution.outcome,
     candidates: resolution.target
       ? [`${resolution.target.collection}: ${resolution.target.mode}`]
-      : [],
+      : resolution.outcome === 'sure'
+        ? [CLEAR_MODE]
+        : [],
     reason: resolution.reason,
     rule: resolution.rule,
   }

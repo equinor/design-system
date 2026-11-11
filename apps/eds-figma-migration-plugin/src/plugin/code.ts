@@ -3,7 +3,15 @@
  * document, and talks to the plugin window (src/ui) through messages.
  */
 import { MAPPING_VERSION } from '../mapping/version'
-import type { Command, PluginToUi, Scope, UiToPlugin } from '../shared/messages'
+import { buildMappingGroups, isMappable } from '../scan/mapping'
+import type { Overrides } from '../scan/mapping'
+import type {
+  Command,
+  OverrideChange,
+  PluginToUi,
+  Scope,
+  UiToPlugin,
+} from '../shared/messages'
 import { collectFixture } from './dev/export-fixture'
 import { exportInventory } from './dev/export-inventory'
 import { ScanCancelled } from './scan/collect'
@@ -31,6 +39,7 @@ function post(message: PluginToUi) {
 }
 
 let lastScan: ScanState | undefined
+let overrides: Overrides = { records: {}, rows: {} }
 let scanning = false
 let cancelRequested = false
 
@@ -56,7 +65,10 @@ async function scan(scope: Scope) {
       (progress) => post({ type: 'scan-progress', progress }),
       () => cancelRequested,
     )
+    overrides = { records: {}, rows: {} }
     post({ type: 'scan-done', summary: lastScan.summary })
+    post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
+    post({ type: 'overrides', overrides })
   } catch (error) {
     if (error instanceof ScanCancelled) post({ type: 'scan-cancelled' })
     else throw error
@@ -91,6 +103,37 @@ async function select(nodeIds: string[]) {
   const onPage = nodes.filter((node) => pageOf(node) === figma.currentPage)
   figma.currentPage.selection = onPage
   figma.viewport.scrollAndZoomIntoView(onPage)
+  const elsewhere = nodes.length - onPage.length
+  if (elsewhere > 0) {
+    figma.notify(
+      `Selected ${onPage.length} on this page. ${elsewhere} more ${elsewhere === 1 ? 'is' : 'are'} on other pages.`,
+    )
+  }
+}
+
+async function selectOld(oldKey: string) {
+  if (!lastScan) return
+  const nodeIds = [
+    ...new Set(
+      lastScan.records
+        .filter((record) => record.oldKey === oldKey && isMappable(record))
+        .map((record) => record.nodeId),
+    ),
+  ]
+  await select(nodeIds)
+}
+
+function setOverrides(changes: OverrideChange[]) {
+  const records = { ...overrides.records }
+  const rows = { ...overrides.rows }
+  for (const { target, value } of changes) {
+    const map = target.type === 'record' ? records : rows
+    const key = target.type === 'record' ? target.id : target.key
+    if (value === undefined) delete map[key]
+    else map[key] = value
+  }
+  overrides = { records, rows }
+  post({ type: 'overrides', overrides })
 }
 
 function entryDetail(entryId: string) {
@@ -160,6 +203,12 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'select':
         await select(message.nodeIds)
+        break
+      case 'select-old':
+        await selectOld(message.oldKey)
+        break
+      case 'set-overrides':
+        setOverrides(message.changes)
         break
       case 'run-dev-export-inventory':
         await runDevExportInventory()

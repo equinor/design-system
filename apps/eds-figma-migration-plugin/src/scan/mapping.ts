@@ -1,0 +1,143 @@
+/**
+ * The Mapping view and overrides: every binding still to migrate, grouped by
+ * the legacy variable it uses, and the targets a designer chose instead of
+ * the proposal.
+ *
+ * A group is one legacy variable. The same variable can get different
+ * proposals in different places (a border on a card and on a button), so a
+ * group has one row per proposal and outcome. A designer can change the
+ * target of a row, which changes it for every binding in the row, or of a
+ * single binding in the inspector, which wins over the row.
+ */
+import type { BindingKind, Outcome } from '../mapping/types'
+import type { BindingRecord, PropertyGroup } from './types'
+
+/** A chosen target, or null to leave the legacy binding as it is. */
+export type OverrideValue = string | null
+
+export type Overrides = {
+  /** By record id, from the inspector */
+  records: Record<string, OverrideValue>
+  /** By mapping row key, from the Mapping view */
+  rows: Record<string, OverrideValue>
+}
+
+export const NO_OVERRIDES: Overrides = { records: {}, rows: {} }
+
+/** Categories the Mapping view lists: the ones a designer can still decide on. */
+const MAPPED: BindingRecord['category'][] = ['sure', 'check', 'none']
+
+export function isMappable(record: BindingRecord): boolean {
+  return MAPPED.includes(record.category) && record.oldKey !== undefined
+}
+
+/** The key of the mapping row a record belongs to. */
+export function rowKey(record: BindingRecord): string {
+  return `${record.oldKey ?? record.id}|${record.candidates?.[0] ?? ''}|${record.category}`
+}
+
+export type EffectiveTarget = {
+  /** The target name, or null to leave the binding */
+  target: string | null
+  source: 'proposal' | 'row' | 'record'
+}
+
+/** The target that will be applied: the binding's own override, then its row's, then the proposal. */
+export function effectiveTarget(
+  record: BindingRecord,
+  overrides: Overrides,
+): EffectiveTarget {
+  if (record.id in overrides.records) {
+    return { target: overrides.records[record.id], source: 'record' }
+  }
+  const key = rowKey(record)
+  if (key in overrides.rows) {
+    return { target: overrides.rows[key], source: 'row' }
+  }
+  return { target: record.candidates?.[0] ?? null, source: 'proposal' }
+}
+
+/** One binding in a mapping row, enough to list and select it. */
+export type MappingBinding = {
+  id: string
+  nodeId: string
+  nodeName: string
+  entryId: string
+  property: BindingRecord['property']
+  kind?: BindingKind
+}
+
+export type MappingRow = {
+  key: string
+  outcome: Outcome
+  proposal?: string
+  candidates: string[]
+  /** One reason, from the first binding in the row */
+  reason?: string
+  count: number
+  kind?: BindingKind
+  bindings: MappingBinding[]
+}
+
+export type MappingGroup = {
+  /** The legacy variable, typography set or mode */
+  oldKey: string
+  old: string
+  oldCollection?: string
+  group: PropertyGroup
+  count: number
+  rows: MappingRow[]
+}
+
+/** Groups the bindings still to migrate by legacy variable, most used first. */
+export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
+  const groups = new Map<string, MappingGroup>()
+  const rows = new Map<string, MappingRow>()
+  for (const record of records) {
+    if (!isMappable(record) || !record.oldKey) continue
+    let group = groups.get(record.oldKey)
+    if (!group) {
+      group = {
+        oldKey: record.oldKey,
+        old: record.old ?? record.oldKey,
+        oldCollection: record.oldCollection,
+        group: record.group,
+        count: 0,
+        rows: [],
+      }
+      groups.set(record.oldKey, group)
+    }
+    group.count += 1
+    const key = rowKey(record)
+    let row = rows.get(key)
+    if (!row) {
+      row = {
+        key,
+        outcome: record.category as Outcome,
+        proposal: record.candidates?.[0],
+        candidates: record.candidates ?? [],
+        reason: record.reason,
+        count: 0,
+        kind: record.kind,
+        bindings: [],
+      }
+      rows.set(key, row)
+      group.rows.push(row)
+    }
+    row.count += 1
+    row.bindings.push({
+      id: record.id,
+      nodeId: record.nodeId,
+      nodeName: record.nodeName,
+      entryId: record.entryId,
+      property: record.property,
+      kind: record.kind,
+    })
+  }
+  for (const group of groups.values()) {
+    group.rows.sort((a, b) => b.count - a.count)
+  }
+  return [...groups.values()].sort(
+    (a, b) => b.count - a.count || a.old.localeCompare(b.old, 'en'),
+  )
+}

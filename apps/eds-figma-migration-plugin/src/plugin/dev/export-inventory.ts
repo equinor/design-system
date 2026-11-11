@@ -30,15 +30,86 @@ async function exportNewLibrary(): Promise<DevExportFile | string> {
     return `new-library.json was not exported: this file has no local “semantic” collection with the key ${NEW.semantic}. Run the command in EDS Foundation [EDS Beta].`
   }
 
+  const byId = new Map(
+    collections.map((collection) => [collection.id, collection]),
+  )
+  const scheme = collections.find(
+    (collection) => collection.name === 'color-scheme',
+  )
+  const density = collections.find(
+    (collection) => collection.name === 'density',
+  )
+  const modeId = (collection: VariableCollection | undefined, name: string) =>
+    collection?.modes.find((mode) => mode.name === name)?.modeId
+
+  /** Follows the aliases of a variable, with the given modes, down to a value. */
+  async function resolve(
+    variable: Variable,
+    modes: Record<string, string | undefined>,
+  ): Promise<VariableValue | null> {
+    let current: Variable | null = variable
+    for (let depth = 0; current && depth < 10; depth++) {
+      const mode =
+        modes[current.variableCollectionId] ??
+        byId.get(current.variableCollectionId)?.defaultModeId
+      const value: VariableValue | undefined =
+        (mode !== undefined ? current.valuesByMode[mode] : undefined) ??
+        Object.values(current.valuesByMode)[0]
+      if (
+        typeof value === 'object' &&
+        value !== null &&
+        'type' in value &&
+        value.type === 'VARIABLE_ALIAS'
+      ) {
+        current = await figma.variables.getVariableByIdAsync(value.id)
+        continue
+      }
+      return value ?? null
+    }
+    return null
+  }
+  const hex = (value: VariableValue | null): string | undefined => {
+    if (typeof value !== 'object' || value === null || !('r' in value)) {
+      return undefined
+    }
+    const channel = (x: number) =>
+      Math.round(x * 255)
+        .toString(16)
+        .padStart(2, '0')
+    const alpha = 'a' in value && value.a < 1 ? channel(value.a) : ''
+    return `#${channel(value.r)}${channel(value.g)}${channel(value.b)}${alpha}`
+  }
+  const number = (value: VariableValue | null) =>
+    typeof value === 'number' ? value : undefined
+
   const variables = []
   for (const id of semantic.variableIds) {
     const variable = await figma.variables.getVariableByIdAsync(id)
     if (!variable) continue
+    let values: Record<string, string | number | undefined> | undefined
+    if (variable.resolvedType === 'COLOR' && scheme) {
+      values = {
+        light: hex(
+          await resolve(variable, { [scheme.id]: modeId(scheme, 'light') }),
+        ),
+        dark: hex(
+          await resolve(variable, { [scheme.id]: modeId(scheme, 'dark') }),
+        ),
+      }
+    } else if (variable.resolvedType === 'FLOAT' && density) {
+      values = {}
+      for (const mode of ['comfortable', 'compact', 'relaxed']) {
+        values[mode] = number(
+          await resolve(variable, { [density.id]: modeId(density, mode) }),
+        )
+      }
+    }
     variables.push({
       name: variable.name,
       key: variable.key,
       type: variable.resolvedType,
       scopes: [...variable.scopes],
+      ...(values ? { values } : {}),
     })
   }
   const textStyles = (await figma.getLocalTextStylesAsync()).map((style) => ({

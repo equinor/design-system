@@ -1,8 +1,16 @@
 import { useState } from 'react'
-import { Badge, Button, Chip, Icon } from '@equinor/eds-core-react/next'
-import type { BadgeTone } from '@equinor/eds-core-react/next'
+import {
+  Accordion,
+  Badge,
+  Button,
+  Checkbox,
+  Chip,
+  Icon,
+} from '@equinor/eds-core-react/next'
 import { arrow_back } from '@equinor/eds-icons'
 import { CATEGORY_LABELS, GROUP_LABELS, propertyLabel } from '../../scan/labels'
+import { effectiveTarget, isMappable } from '../../scan/mapping'
+import type { Overrides } from '../../scan/mapping'
 import { formatHealth } from '../../scan/summary'
 import { PROPERTY_GROUPS, SCORED_CATEGORIES } from '../../scan/types'
 import type {
@@ -12,101 +20,132 @@ import type {
   OldInstance,
   PropertyGroup,
 } from '../../scan/types'
+import { groupState } from '../selection'
+import type { Selection, SelectedBinding } from '../selection'
+import { sourceLabel, targetLabel } from '../targets'
+import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
+import { Tabs } from './Tabs'
 
 type InspectorProps = {
   entry: EntrySummary
   records?: BindingRecord[]
   oldInstances?: OldInstance[]
+  overrides: Overrides
+  selection: Selection
   onBack: () => void
   onSelect: (nodeIds: string[]) => void
+  onChange: (record: BindingRecord) => void
 }
 
-const BADGES: Record<
-  Category,
-  { tone: BadgeTone; emphasis: 'low' | 'medium' }
-> = {
-  migrated: { tone: 'success', emphasis: 'medium' },
-  sure: { tone: 'info', emphasis: 'low' },
-  check: { tone: 'warning', emphasis: 'medium' },
-  none: { tone: 'danger', emphasis: 'low' },
-  inInstance: { tone: 'neutral', emphasis: 'low' },
-  other: { tone: 'neutral', emphasis: 'low' },
-}
+type Filter = 'all' | Category
+type Pivot = 'layers' | 'variables'
 
-function targetText(record: BindingRecord): string {
+export function targetText(
+  record: BindingRecord,
+  overrides: Overrides,
+): string {
   switch (record.category) {
     case 'migrated':
     case 'other':
       return record.current ?? ''
     case 'inInstance':
       return 'Not changed inside an instance'
-    case 'none':
-      return 'No equivalent; stays as it is'
-    default:
-      return (
-        record.candidates?.[0] ??
-        'Cleared when nothing below uses legacy variables'
-      )
+    default: {
+      const { target, source } = effectiveTarget(record, overrides)
+      if (record.category === 'none' && source === 'proposal') {
+        return 'No equivalent; stays as it is'
+      }
+      return targetLabel(target)
+    }
   }
 }
 
-function Row({
-  record,
-  onSelect,
-}: {
-  record: BindingRecord
-  onSelect: (nodeIds: string[]) => void
-}) {
-  const badge = BADGES[record.category]
-  return (
-    <li className="binding-row">
-      <button
-        type="button"
-        className="binding-select"
-        onClick={() => onSelect([record.nodeId])}
-      >
-        <span className="binding-layer">
-          <span className="binding-name">{record.nodeName}</span>
-          <span className="binding-property">
-            {propertyLabel(record.property)}
-          </span>
-        </span>
-        {record.path.length > 0 && (
-          <span className="binding-path">{record.path.join(' / ')}</span>
-        )}
-        <span className="binding-swap">
-          {record.old && <span className="binding-old">{record.old}</span>}
-          {record.old && <span aria-hidden="true"> → </span>}
-          <span className="binding-new">{targetText(record)}</span>
-        </span>
-        {record.reason && record.category !== 'sure' && (
-          <span className="binding-reason">{record.reason}</span>
-        )}
-      </button>
-      <Badge tone={badge.tone} emphasis={badge.emphasis}>
-        {record.category === 'check' ? '⚠ ' : ''}
-        {CATEGORY_LABELS[record.category]}
-      </Badge>
-    </li>
-  )
+export function selectable(record: BindingRecord): SelectedBinding {
+  return {
+    id: record.id,
+    kind: record.kind,
+    group: record.group,
+    candidates: record.candidates ?? [],
+  }
 }
 
-type Filter = 'all' | Category
+type Group = {
+  key: string
+  title: string
+  subtitle?: string
+  records: BindingRecord[]
+}
+
+function groupRecords(records: BindingRecord[], pivot: Pivot): Group[] {
+  const groups = new Map<string, Group>()
+  for (const record of records) {
+    const key =
+      pivot === 'layers'
+        ? record.nodeId
+        : (record.oldKey ?? `current:${record.current ?? record.id}`)
+    let group = groups.get(key)
+    if (!group) {
+      group =
+        pivot === 'layers'
+          ? {
+              key,
+              title: record.nodeName,
+              subtitle: record.path.join(' / ') || undefined,
+              records: [],
+            }
+          : {
+              key,
+              title: record.old ?? record.current ?? record.nodeName,
+              subtitle: record.oldCollection,
+              records: [],
+            }
+      groups.set(key, group)
+    }
+    group.records.push(record)
+  }
+  const result = [...groups.values()]
+  // In the Variables view, the most used variables first.
+  if (pivot === 'variables') {
+    result.sort((a, b) => b.records.length - a.records.length)
+  }
+  return result
+}
+
+/** How many bindings a group has, and how many need attention. */
+function groupSummary(records: BindingRecord[]): string {
+  const parts = [`${records.length} binding${records.length === 1 ? '' : 's'}`]
+  for (const category of ['check', 'none'] as const) {
+    const count = records.filter(
+      (record) => record.category === category,
+    ).length
+    if (count > 0) {
+      parts.push(`${count} ${CATEGORY_LABELS[category].toLowerCase()}`)
+    }
+  }
+  return parts.join(' · ')
+}
 
 /**
- * Every binding in one entry, filtered by the same categories as the health
- * bar, and the instances in it that still use legacy variables.
+ * Every binding in one entry, grouped by layer or by legacy variable in an
+ * accordion, filtered by the same categories as the health bar, and the
+ * instances in it that still use legacy variables.
  */
 export function Inspector({
   entry,
   records,
   oldInstances,
+  overrides,
+  selection,
   onBack,
   onSelect,
+  onChange,
 }: InspectorProps) {
   const [filter, setFilter] = useState<Filter>('all')
-  const [group, setGroup] = useState<'all' | PropertyGroup>('all')
+  const [property, setProperty] = useState<'all' | PropertyGroup>('all')
+  const [pivot, setPivot] = useState<Pivot>('layers')
+  const [open, setOpen] = useState<Set<string>>(new Set())
+
   const categories: Category[] = [
     ...SCORED_CATEGORIES,
     ...(entry.counts.other > 0 ? (['other'] as const) : []),
@@ -114,12 +153,21 @@ export function Inspector({
   const byStatus = (records ?? []).filter(
     (record) => filter === 'all' || record.category === filter,
   )
-  const groups = PROPERTY_GROUPS.filter((candidate) =>
+  const properties = PROPERTY_GROUPS.filter((candidate) =>
     (records ?? []).some((record) => record.group === candidate),
   )
   const shown = byStatus.filter(
-    (record) => group === 'all' || record.group === group,
+    (record) => property === 'all' || record.group === property,
   )
+  const groups = groupRecords(shown, pivot)
+  const toggleOpen = (key: string, isOpen: boolean) =>
+    setOpen((previous) => {
+      const next = new Set(previous)
+      if (isOpen) next.add(key)
+      else next.delete(key)
+      return next
+    })
+
   return (
     <div className="stack">
       <div className="inspector-header">
@@ -162,20 +210,23 @@ export function Inspector({
           ))}
         </div>
       </div>
-      {groups.length > 1 && (
+      {properties.length > 1 && (
         <div className="filter-row">
           <span className="filter-label" id="group-filter">
             Property
           </span>
           <div className="filters" role="group" aria-labelledby="group-filter">
-            <Chip selected={group === 'all'} onClick={() => setGroup('all')}>
+            <Chip
+              selected={property === 'all'}
+              onClick={() => setProperty('all')}
+            >
               All
             </Chip>
-            {groups.map((candidate) => (
+            {properties.map((candidate) => (
               <Chip
                 key={candidate}
-                selected={group === candidate}
-                onClick={() => setGroup(candidate)}
+                selected={property === candidate}
+                onClick={() => setProperty(candidate)}
               >
                 {GROUP_LABELS[candidate]}{' '}
                 {byStatus.filter((record) => record.group === candidate).length}
@@ -185,17 +236,107 @@ export function Inspector({
         </div>
       )}
 
-      {!records ? (
-        <p className="muted">Loading…</p>
-      ) : shown.length === 0 ? (
-        <p className="muted">Nothing in this category.</p>
-      ) : (
-        <ul className="binding-list">
-          {shown.map((record) => (
-            <Row key={record.id} record={record} onSelect={onSelect} />
-          ))}
-        </ul>
-      )}
+      <Tabs
+        label="Group by"
+        tabs={[
+          { id: 'layers', label: 'Layers' },
+          { id: 'variables', label: 'Variables' },
+        ]}
+        selected={pivot}
+        onSelect={(next) => {
+          setPivot(next)
+          setOpen(new Set())
+        }}
+      >
+        {!records ? (
+          <p className="muted">Loading…</p>
+        ) : groups.length === 0 ? (
+          <p className="muted">Nothing in this category.</p>
+        ) : (
+          <Accordion className="binding-groups">
+            {groups.map((group) => {
+              const isOpen = open.has(group.key)
+              const mappable = group.records.filter(isMappable)
+              const state = groupState(
+                selection,
+                mappable.map((record) => record.id),
+              )
+              return (
+                <Accordion.Item
+                  key={group.key}
+                  open={isOpen}
+                  onOpenChange={(next) => toggleOpen(group.key, next)}
+                >
+                  <Accordion.Header>
+                    <span className="group-header">
+                      <span className="binding-name">{group.title}</span>
+                      <span className="binding-path">
+                        {[group.subtitle, groupSummary(group.records)]
+                          .filter(Boolean)
+                          .join(' · ')}
+                      </span>
+                    </span>
+                  </Accordion.Header>
+                  <Accordion.Panel>
+                    {isOpen && (
+                      <div className="stack-tight">
+                        {mappable.length > 1 && (
+                          <Checkbox
+                            label={`Select all ${mappable.length} to change`}
+                            checked={state.checked}
+                            indeterminate={state.indeterminate}
+                            onChange={(event) =>
+                              selection.set(
+                                mappable.map(selectable),
+                                event.target.checked,
+                              )
+                            }
+                          />
+                        )}
+                        <ul className="binding-list">
+                          {group.records.map((record) => (
+                            <BindingRow
+                              key={record.id}
+                              title={
+                                pivot === 'layers'
+                                  ? propertyLabel(record.property)
+                                  : `${record.nodeName} · ${propertyLabel(record.property)}`
+                              }
+                              subtitle={
+                                pivot === 'variables'
+                                  ? record.path.join(' / ') || undefined
+                                  : undefined
+                              }
+                              old={pivot === 'layers' ? record.old : undefined}
+                              target={targetText(record, overrides)}
+                              note={
+                                isMappable(record)
+                                  ? sourceLabel(
+                                      effectiveTarget(record, overrides).source,
+                                    )
+                                  : undefined
+                              }
+                              reason={record.reason}
+                              category={record.category}
+                              changeable={isMappable(record)}
+                              selected={selection.has(record.id)}
+                              onToggle={(selected) =>
+                                selection.set([selectable(record)], selected)
+                              }
+                              onSelectLayer={() => onSelect([record.nodeId])}
+                              onChange={() => onChange(record)}
+                            />
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </Accordion.Panel>
+                </Accordion.Item>
+              )
+            })}
+          </Accordion>
+        )}
+      </Tabs>
 
       {oldInstances && oldInstances.length > 0 && (
         <section className="stack-tight" aria-labelledby="old-instances">

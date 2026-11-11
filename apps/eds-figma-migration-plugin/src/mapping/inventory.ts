@@ -7,6 +7,17 @@ export type NewVariable = {
   key: string
   type: VariableType
   scopes: string[]
+  /**
+   * What the variable resolves to, for swatches and numbers in the picker:
+   * a colour per colour scheme, or a number per density.
+   */
+  values?: {
+    light?: string
+    dark?: string
+    comfortable?: number
+    compact?: number
+    relaxed?: number
+  }
 }
 
 export type NewTextStyle = {

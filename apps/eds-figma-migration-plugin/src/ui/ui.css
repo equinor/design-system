@@ -463,3 +463,264 @@ code {
 .binding-reason {
   font-style: italic;
 }
+
+/* Tabs. The Beta has no tabs component (BETA-GAPS.md). */
+.tab-list {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.tab {
+  --_border: transparent;
+
+  margin: 0;
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-secondary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-block-end: 2px solid var(--_border);
+
+  &:hover {
+    color: var(--eds-text-primary);
+  }
+
+  &[aria-selected='true'] {
+    --_border: var(--eds-border-non-interactive-accent-emphasis);
+
+    color: var(--eds-text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.tab-panel {
+  padding-block-start: var(--eds-spacing-md);
+}
+
+/* Mapping view */
+.mapping-list,
+.mapping-rows {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mapping-list {
+  gap: var(--eds-spacing-sm);
+}
+
+.mapping-group {
+  padding: var(--eds-spacing-sm);
+  background-color: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.mapping-header,
+.mapping-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+.mapping-header {
+  padding-block-end: var(--eds-spacing-xs);
+}
+
+.mapping-old,
+.mapping-target {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+}
+
+.mapping-row {
+  padding-block: var(--eds-spacing-xs);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.binding-actions {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-2xs);
+  align-items: flex-end;
+}
+
+.override-note {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-on-default-info);
+}
+
+/* Target picker */
+.picker-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* The Beta Autocomplete keeps its input at its own width inside a wider
+   root, so the wrapper is stretched here (BETA-GAPS.md). */
+.picker-autocomplete {
+  inline-size: 100%;
+
+  & .anchor {
+    inline-size: 100%;
+  }
+}
+
+/* Accordion contents */
+.group-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  text-align: start;
+}
+
+.binding-row {
+  align-items: flex-start;
+}
+
+.binding-check {
+  flex-shrink: 0;
+  inline-size: var(--eds-spacing-xl);
+}
+
+.binding-list.nested {
+  margin-inline-start: var(--eds-spacing-xl);
+}
+
+.mapping-row-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.mapping-row-block .mapping-row {
+  align-items: flex-start;
+}
+
+/* Bulk bar: stays at the bottom of the window while there is a selection. */
+.app {
+  position: relative;
+}
+
+.bulk-bar {
+  position: sticky;
+  inset-block-end: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  background-color: var(--eds-background-floating);
+  border-block-start: 1px solid
+    var(--eds-border-non-interactive-neutral-default);
+  box-shadow: var(--eds-elevation-high);
+}
+
+.bulk-count {
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+/* Target picker, built like Figma's variable picker. */
+.target-picker {
+  inline-size: min(100%, 440px);
+}
+
+.variable-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.variable-options {
+  overflow-y: auto;
+  max-block-size: 320px;
+  padding-block: var(--eds-spacing-3xs);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.variable-group-title {
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm) var(--eds-spacing-3xs);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.variable-option {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-3xs) var(--eds-spacing-sm);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--eds-background-interactive-accent-selected-default);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.swatch,
+.option-preview {
+  flex-shrink: 0;
+  inline-size: var(--eds-spacing-lg);
+  block-size: var(--eds-spacing-lg);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.swatch {
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.option-label {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.option-value {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}

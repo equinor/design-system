@@ -136,7 +136,14 @@ export type BindingRecord = {
   path: string[]
   property: PropertyRef
   group: PropertyGroup
+  /** For variables: the kind of property, which decides the variables a picker offers */
+  kind?: BindingKind
   category: Category
+  /**
+   * Identifies the legacy variable, the set of legacy typography variables,
+   * or the legacy mode, so the Mapping view can group every use of it.
+   */
+  oldKey?: string
   /** The old variable, a summary of old typography variables, or the old mode */
   old?: string
   /** The collection of the old variable or mode */

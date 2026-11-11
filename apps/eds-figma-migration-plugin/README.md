@@ -19,9 +19,9 @@ The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
 | --------------------------------------------- | -------------------------------- |
 | 1. Scaffold, manifest, build, inventory export | Done                             |
 | 2. Rules and tests                            | Done                             |
-| 3. Read-only scan                             | Done; to be tried in Figma       |
-| 4. Mapping view and overrides                 | Next                             |
-| 5. Apply                                      |                                  |
+| 3. Read-only scan                             | Done                             |
+| 4. Mapping view and overrides                 | Done; to be tried in Figma       |
+| 5. Apply                                      | Next                             |
 | 6. Review and the remaining views             |                                  |
 | 7. Report and saved health                    |                                  |
 | 8. Release                                    |                                  |
@@ -88,6 +88,35 @@ Always try the plugin on a duplicate of a frame. The test frame is
   shown; it goes into the change log and the report.
 - Main components in the file are scanned as their own group, shown and
   counted in the health only when you switch them on.
+
+## Mapping and overrides
+
+Bindings are shown in accordions, so a layer or a variable appears once with
+what changes under it:
+
+- **In a frame**, a **Layers** / **Variables** switch groups the bindings by
+  layer, or by legacy variable with the most used first.
+- **The Mapping tab** has one accordion item per legacy variable in the
+  scope. It opens to one row per proposal, since the same variable can get
+  different targets in different places, with the layers under each row.
+  **Select layers** selects every layer that uses the variable.
+- **A file scan** lists one page at a time, each with its own health bar.
+
+Targets can be changed one binding, one row or many bindings at a time:
+
+- **Change** on a binding changes that binding only, and wins over its row.
+- **Change all** on a row in the Mapping tab changes every binding in it.
+- **Ticking bindings**, or “Select all” in an accordion item, opens a bar at
+  the bottom of the window: **Change target**, **Leave as they are** and
+  **Undo my changes**. Change target is offered when the ticked bindings take
+  the same kind of value, such as only colours.
+
+The picker follows Figma's variable picker: a search field, the proposed
+targets, then every variable or text style that fits the property, grouped by
+path, with colour swatches in the current theme and the comfortable value of
+numbers. Choosing the proposal again removes the change. Changes are kept
+while the plugin is open, and a new scan clears them. Apply, in the next
+milestone, uses them.
 
 Health is migrated ÷ (migrated + ready + needs check + no equivalent + in instance). Variables
 from other libraries and local variables are counted apart and left out.

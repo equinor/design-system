@@ -1,6 +1,6 @@
-import { Fragment } from 'react'
-import { Button } from '@equinor/eds-core-react/next'
-import { formatHealth, oldCount } from '../../scan/summary'
+import { Fragment, useState } from 'react'
+import { Accordion, Button } from '@equinor/eds-core-react/next'
+import { formatHealth, healthOf, oldCount, sumCounts } from '../../scan/summary'
 import type { EntryKind, EntrySummary } from '../../scan/types'
 import { HealthBar } from './HealthBar'
 
@@ -101,22 +101,29 @@ function GroupTitle({ group, showPage }: { group: Group; showPage: boolean }) {
   )
 }
 
-/**
- * The entries in the scan, grouped by page and section. The Beta has no list
- * or table component, so the rows are built here (BETA-GAPS.md).
- */
-export function EntryList({
+function frameCount(entries: EntrySummary[]): string {
+  const frames = entries.filter((entry) => entry.kind === 'frame').length
+  return `${frames} frame${frames === 1 ? '' : 's'}`
+}
+
+function Groups({
   entries,
-  showPages,
+  showPage,
   onOpen,
   onGoTo,
-}: EntryListProps) {
-  const groups = groupEntries(entries)
+}: {
+  entries: EntrySummary[]
+  showPage: boolean
+  onOpen: (entry: EntrySummary) => void
+  onGoTo: (entry: EntrySummary) => void
+}) {
   return (
     <div className="entry-groups">
-      {groups.map((group) => (
+      {groupEntries(entries).map((group) => (
         <section key={group.key} className="entry-group">
-          <GroupTitle group={group} showPage={showPages} />
+          {(showPage || group.sections.length > 0) && (
+            <GroupTitle group={group} showPage={showPage} />
+          )}
           <ul className="entry-list">
             {group.entries.map((entry) => (
               <li key={entry.id} className="entry-row">
@@ -163,5 +170,88 @@ export function EntryList({
         </section>
       ))}
     </div>
+  )
+}
+
+/**
+ * The entries in the scan, grouped by page and section. A scan of the whole
+ * file shows one page at a time, each in its own accordion item with its own
+ * health bar. The Beta has no list or table component, so the rows are built
+ * here (BETA-GAPS.md).
+ */
+export function EntryList({
+  entries,
+  showPages,
+  onOpen,
+  onGoTo,
+}: EntryListProps) {
+  const [open, setOpen] = useState<Set<string>>(new Set())
+  if (!showPages) {
+    return (
+      <Groups
+        entries={entries}
+        showPage={false}
+        onOpen={onOpen}
+        onGoTo={onGoTo}
+      />
+    )
+  }
+  const pages = new Map<string, { name: string; entries: EntrySummary[] }>()
+  for (const entry of entries) {
+    const page = pages.get(entry.pageId) ?? {
+      name: entry.pageName,
+      entries: [],
+    }
+    page.entries.push(entry)
+    pages.set(entry.pageId, page)
+  }
+  return (
+    <Accordion className="binding-groups">
+      {[...pages.entries()].map(([pageId, page]) => {
+        const counts = sumCounts(page.entries.map((entry) => entry.counts))
+        const isOpen = open.has(pageId)
+        return (
+          <Accordion.Item
+            key={pageId}
+            open={isOpen}
+            onOpenChange={(next) =>
+              setOpen((previous) => {
+                const copy = new Set(previous)
+                if (next) copy.add(pageId)
+                else copy.delete(pageId)
+                return copy
+              })
+            }
+          >
+            <Accordion.Header>
+              <span className="group-header">
+                <span className="binding-name">
+                  <span className="kind-label">Page</span> {page.name}
+                </span>
+                <span className="entry-health-row">
+                  <HealthBar counts={counts} size="small" />
+                  <span className="entry-health">
+                    {formatHealth(healthOf(counts))}
+                  </span>
+                  <span className="binding-path">
+                    {frameCount(page.entries)} · {oldCount(counts)} legacy
+                  </span>
+                </span>
+              </span>
+            </Accordion.Header>
+            <Accordion.Panel>
+              {isOpen && (
+                <Groups
+                  entries={page.entries}
+                  showPage={false}
+                  onOpen={onOpen}
+                  onGoTo={onGoTo}
+                />
+              )}
+            </Accordion.Panel>
+          </Accordion.Item>
+        )
+      })}
+    </Accordion>
   )
 }
