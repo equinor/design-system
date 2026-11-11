@@ -90,7 +90,7 @@ so it is worth answering even when the first feels obvious.
 - **Page layout**: `2xl` and up. Gutters, and the space between the regions and sections of a page.
 
 Padding does not follow these bands, because it depends on the component: a chip uses `3xs`, a
-button `xs` and `md`, a card `md`. The [decision table](./spacing-usage.mdx#decision-table) has a
+button `xs` and `sm`, a card `md`. The [decision table](./spacing-usage.mdx#decision-table) has a
 row for each.
 
 ### 2. How closely related are the two things?
@@ -144,7 +144,7 @@ holds.
 
 ```css
 .button:focus-visible {
-  outline: 2px solid var(--eds-border-interactive-focus);
+  outline: 1px solid var(--eds-border-interactive-focus);
   outline-offset: 1px;
   /* no radius needed: the outline follows border-radius and the offset widens it */
 }

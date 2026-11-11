@@ -46,14 +46,14 @@ box-shadow: var(--eds-elevation-high);
 
 ## Implementation in Figma
 
-Elevation effect styles are in the **EDS Foundation** library, together with the other EDS foundations.
+Elevation effect styles are in the **EDS Foundation [EDS Beta]** library, together with the other EDS foundations.
 
 ### How to add
 
 1. Locate the _layer_ in the **Layers Panel** that needs elevation applied.
 2. Locate the **Design** tab in the **Inspector Panel**.
 3. Under the **Effects** section, open the **Style library** menu to view the elevation styles.
-4. Choose **Shadow/Low** or **Shadow/High** depending on the use case.
+4. Choose **elevation/low** or **elevation/high** depending on the use case.
 
 ## Do's and Don'ts
 

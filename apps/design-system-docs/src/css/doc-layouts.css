@@ -257,7 +257,7 @@ main[class*='docMainContainer']:has([class*='docHero']) {
 }
 
 .markdown a.colour-usage-link:focus-visible {
-  outline: 2px solid var(--eds-border-interactive-focus);
+  outline: 1px solid var(--eds-border-interactive-focus);
   outline-offset: 1px;
 }
 
