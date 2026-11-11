@@ -204,9 +204,7 @@ export const ControlledAndUncontrolled: StoryFn<RadioProps> = () => {
               setSelected(e.target.value)
             }
           />
-          <div style={{ minHeight: '4.5rem' }}>
-            {selected === 'delivery' && <TextField label="Delivery address" />}
-          </div>
+          {selected === 'delivery' && <TextField label="Delivery address" />}
         </Wrapper>
       </fieldset>
     </div>
