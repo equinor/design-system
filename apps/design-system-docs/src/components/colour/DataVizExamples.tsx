@@ -279,10 +279,23 @@ export function LineChartExample() {
             <label key={w.id} className="dv-well">
               <input
                 type="checkbox"
+                className="dv-checkbox-input"
                 checked={on}
                 disabled={on && visible.length === 1}
                 onChange={() => toggle(w.id)}
               />
+              <span className="dv-checkbox" aria-hidden="true">
+                <svg viewBox="0 0 16 16">
+                  <path
+                    d="M3.5 8.5l3 3 6-7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
               <span className="dv-well-text">
                 <span className="dv-well-field">{w.field}</span>
                 <span className="dv-well-name">{w.name}</span>

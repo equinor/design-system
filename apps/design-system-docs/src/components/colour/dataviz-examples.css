@@ -42,10 +42,24 @@
   border-color: var(--eds-border-interactive-neutral-muted-hover);
 }
 
+.dv-toggle:active {
+  border-color: var(--eds-border-interactive-neutral-muted-pressed);
+}
+
+/* Selection is the neutral selected background level, with its own hover and pressed states. There
+ * is no selected border level, and neutral is the selected level whose every state meets the text
+ * contrast with text.primary (see the colour usage page). */
 .dv-toggle[aria-pressed='true'] {
-  border-color: var(--eds-border-interactive-neutral-emphasis-default);
   color: var(--eds-text-primary);
   background: var(--eds-background-interactive-neutral-selected-default);
+}
+
+.dv-toggle[aria-pressed='true']:hover {
+  background: var(--eds-background-interactive-neutral-selected-hover);
+}
+
+.dv-toggle[aria-pressed='true']:active {
+  background: var(--eds-background-interactive-neutral-selected-pressed);
 }
 
 .dv-toggle:focus-visible,
@@ -64,6 +78,8 @@
 .dv-well {
   cursor: pointer;
 
+  position: relative;
+
   display: inline-flex;
   gap: var(--eds-spacing-xs);
   align-items: center;
@@ -79,24 +95,99 @@
   border-color: var(--eds-border-interactive-neutral-muted-hover);
 }
 
-.dv-well:has(input:checked) {
-  border-color: var(--eds-border-interactive-accent-emphasis-default);
+.dv-well:active {
+  border-color: var(--eds-border-interactive-neutral-muted-pressed);
 }
 
-.dv-well:has(input:focus-visible) {
+.dv-well:has(.dv-checkbox-input:checked) {
+  background: var(--eds-background-interactive-neutral-selected-default);
+}
+
+.dv-well:has(.dv-checkbox-input:checked):hover {
+  background: var(--eds-background-interactive-neutral-selected-hover);
+}
+
+.dv-well:has(.dv-checkbox-input:checked):active {
+  background: var(--eds-background-interactive-neutral-selected-pressed);
+}
+
+.dv-well:has(.dv-checkbox-input:focus-visible) {
   outline: 2px solid var(--eds-border-interactive-focus);
   outline-offset: 2px;
 }
 
-.dv-well:has(input:disabled) {
+.dv-well:has(.dv-checkbox-input:disabled) {
   cursor: default;
 }
 
-.dv-well input {
+/* The native checkbox stays in the page for keyboard and screen readers, and the box next to it
+ * draws every state from tokens, so the browser does not tint it on hover or press. */
+.dv-checkbox-input {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: 0;
+
+  opacity: 0;
+}
+
+.dv-checkbox {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+
   width: var(--eds-spacing-md);
   height: var(--eds-spacing-md);
-  margin: 0;
-  accent-color: var(--eds-background-interactive-accent-emphasis-default);
+  border: 1px solid var(--eds-border-interactive-neutral-emphasis-default);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  color: transparent;
+
+  background: var(--eds-background-surface);
+}
+
+.dv-checkbox svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dv-well:hover .dv-checkbox {
+  border-color: var(--eds-border-interactive-neutral-emphasis-hover);
+}
+
+.dv-well:active .dv-checkbox {
+  border-color: var(--eds-border-interactive-neutral-emphasis-pressed);
+}
+
+.dv-checkbox-input:checked + .dv-checkbox {
+  border-color: var(--eds-border-interactive-accent-emphasis-default);
+  color: var(--eds-icon-on-emphasis-accent);
+  background: var(--eds-background-interactive-accent-emphasis-default);
+}
+
+.dv-well:hover .dv-checkbox-input:checked + .dv-checkbox {
+  border-color: var(--eds-border-interactive-accent-emphasis-hover);
+  background: var(--eds-background-interactive-accent-emphasis-hover);
+}
+
+.dv-well:active .dv-checkbox-input:checked + .dv-checkbox {
+  border-color: var(--eds-border-interactive-accent-emphasis-pressed);
+  background: var(--eds-background-interactive-accent-emphasis-pressed);
+}
+
+.dv-checkbox-input:disabled + .dv-checkbox,
+.dv-well:hover .dv-checkbox-input:disabled + .dv-checkbox,
+.dv-well:active .dv-checkbox-input:disabled + .dv-checkbox {
+  border-color: var(--eds-border-interactive-disabled);
+  color: var(--eds-icon-interactive-disabled);
+  background: var(--eds-background-interactive-disabled);
+}
+
+.dv-well:has(.dv-checkbox-input:checked) .dv-well-field {
+  color: var(--eds-text-primary);
 }
 
 .dv-well-text {
