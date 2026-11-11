@@ -88,6 +88,7 @@
       margin-inline-start: var(--_gap);
 
       font-size: var(--eds-typography-label-xs-font-size);
+      font-weight: var(--eds-font-weight-normal);
       line-height: var(--eds-typography-label-xs-line-height);
       color: var(--_eds-field-indicator-color);
     }
@@ -96,7 +97,9 @@
        12/16 and the helper message below is body-sm 12/20. */
     & .description {
       margin: 0;
+
       font-size: var(--eds-typography-label-sm-font-size);
+      font-weight: var(--eds-font-weight-normal);
       line-height: var(--eds-typography-label-sm-line-height);
       color: var(--_eds-field-description-color);
     }
@@ -112,7 +115,9 @@
 
     & .helper-message {
       margin: 0;
+
       font-size: var(--eds-typography-body-sm-font-size);
+      font-weight: var(--eds-font-weight-normal);
       line-height: var(--eds-typography-body-sm-line-height);
       color: var(--_eds-field-helper-color);
     }
