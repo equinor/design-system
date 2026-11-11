@@ -192,9 +192,13 @@ has changed since the apply is left alone and reported. Shared plugin data is
 used because private plugin data needs a published plugin id, so a
 development copy could not keep a log.
 
-A legacy mode that has nothing to do yet counts as No equivalent, with the
-reason: it stays for good above a binding in an instance or with no
-equivalent, and until the review above a binding that needs a check.
+A legacy mode is kept while a value below still reads its collection: its own
+collection or one in its alias chain (a colour reads its whole library and the
+colour scheme). The row then says "Kept: legacy values below read it" or "Kept
+until the values below are reviewed", the status icon explains why, and
+removing the mode is still offered, for a designer who accepts that the
+legacy values below change. A ⚠ or ⓘ at the end of a row has a tooltip with
+the reason, and a click opens it in full.
 
 ## Review, instances and local components
 
@@ -207,6 +211,18 @@ proposal**, **Use this target** and **Leave as it is** store the choice, so
 the binding counts as Ready or No equivalent; **Skip** leaves it for later.
 The review ends with what was confirmed, changed, left and skipped. From a
 frame, the review covers that frame only.
+
+**Typography components.** The legacy Typography component is a text in a
+component. When the scan finds instances of it (outside other instances), the
+overview says how many, and the Instances tab offers **Convert to text**, for
+all of them or one at a time. Each instance becomes a text layer with the same
+text, the matching EDS Foundation text style, the same place and sizing, and
+its colour as an EDS Foundation variable when the rule is sure (otherwise the
+legacy colour stays, for the review). Mono numbers cannot be carried by a text
+style, so the result says how many used them. The text layer logs the
+component it replaced, its properties, modes, sizing and colour, so Revert
+frame puts the instance back as it was. Typography instances inside other
+components stay until those components are updated.
 
 **The Instances tab** lists every instance in the scope that still uses
 legacy variables, grouped by main component, with the number of instances,

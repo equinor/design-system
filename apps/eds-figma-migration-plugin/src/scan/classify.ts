@@ -6,6 +6,7 @@ import { targetDensity } from '../mapping/density'
 import {
   collectionOrigin,
   isNewTextStyleKey,
+  libraryCollectionKeys,
   OLD,
   oldCollectionInfo,
 } from '../mapping/inventory'
@@ -79,6 +80,32 @@ function describe(variable: RawVariable): string {
     : variable.name
 }
 
+/**
+ * The legacy collections a variable reads. A number variable reads its own
+ * collection and the collections its alias chain passes through. The colour
+ * chains are not followed, so a colour reads every collection in its library
+ * and the shared colour scheme.
+ */
+export function readsOf(variable: RawVariable): string[] {
+  if (variable.type === 'COLOR') {
+    const info = oldCollectionInfo(variable.collectionKey)
+    if (!info) return [variable.collectionKey]
+    return [
+      ...new Set([
+        ...libraryCollectionKeys(info.libraryId),
+        OLD.colorScheme,
+        variable.collectionKey,
+      ]),
+    ]
+  }
+  return [
+    ...new Set([
+      variable.collectionKey,
+      ...(variable.chain ?? []).map((step) => step.collectionKey),
+    ]),
+  ]
+}
+
 export function groupOf(unit: RawUnit): PropertyGroup {
   if (unit.unit === 'typography') return 'typography'
   if (unit.unit === 'mode') return 'modes'
@@ -131,6 +158,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
       old: variable.name,
       oldCollection: variable.collectionName,
       oldVariable: { id: variable.id, key: variable.key, name: variable.name },
+      reads: readsOf(variable),
       ...(variable.value !== undefined ? { oldValue: variable.value } : {}),
       ...(variable.colour !== undefined ? { oldColour: variable.colour } : {}),
     }
@@ -170,6 +198,9 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
           ...new Set(oldFields.map(([, variable]) => variable.collectionName)),
         ].join(', '),
         oldFont: unit.font,
+        reads: [
+          ...new Set(oldFields.flatMap(([, variable]) => readsOf(variable))),
+        ],
         oldFields: Object.fromEntries(
           oldFields.map(([field, variable]) => [
             field,
@@ -289,11 +320,17 @@ export function blockedModes(
     if (record.property.type === 'mode' || !stays(record)) continue
     const key = bindingCollectionKey(record)
     const group = key ? libraryGroup(key) : undefined
-    if (!group) continue
+    if (!group && !record.reads) continue
+    // A binding holds the nearest legacy mode of each collection it reads;
+    // without that list, of each collection in its library.
+    const reads = record.reads ? new Set(record.reads) : undefined
     const claimed = new Set<string>()
     for (const holder of [...(record.modeHolders ?? [])].reverse()) {
       for (const collection of held.get(holder) ?? []) {
-        if (claimed.has(collection) || libraryGroup(collection) !== group) {
+        const relevant = reads
+          ? reads.has(collection)
+          : libraryGroup(collection) === group
+        if (claimed.has(collection) || !relevant) {
           continue
         }
         claimed.add(collection)
@@ -359,7 +396,9 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
       ...record,
       category: 'none',
       outcome: 'none',
-      candidates: [],
+      // Removing the mode is still offered, for a designer who accepts that
+      // the legacy values below change.
+      candidates: [CLEAR_MODE],
       reason: stays,
       rule: forGood.has(key) ? 'mode/kept' : 'mode/after-review',
     }

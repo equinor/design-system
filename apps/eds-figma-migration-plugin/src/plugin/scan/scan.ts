@@ -293,6 +293,11 @@ async function countInstances(
   }
 }
 
+/** The legacy EDS Typography component, a text in a component. */
+export function isTypographyComponent(name: string): boolean {
+  return /^typography$/i.test(name.trim())
+}
+
 async function findOldInstances(
   collector: Collector,
   records: BindingRecord[],
@@ -317,6 +322,12 @@ async function findOldInstances(
           name: set ? set.name : main.name,
           key: set ? set.key : main.key,
           remote: main.remote,
+        }
+        if (isTypographyComponent(set ? set.name : main.name)) {
+          instance.typography = true
+          const text = node.findOne((child) => child.type === 'TEXT')
+          if (text?.type === 'TEXT')
+            instance.text = text.characters.slice(0, 60)
         }
       }
     }

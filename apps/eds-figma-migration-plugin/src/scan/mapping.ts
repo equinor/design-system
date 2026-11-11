@@ -117,6 +117,8 @@ export type MappingRow = {
   candidates: string[]
   /** One reason, from the first binding in the row */
   reason?: string
+  /** The rule that decided the row, such as mode/kept */
+  rule?: string
   count: number
   kind?: BindingKind
   bindings: MappingBinding[]
@@ -160,6 +162,7 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
         proposal: record.candidates?.[0],
         candidates: record.candidates ?? [],
         reason: record.reason,
+        rule: record.rule,
         count: 0,
         kind: record.kind,
         bindings: [],
@@ -191,6 +194,11 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
   )
 }
 
+/** A legacy mode kept because values below still read it. */
+export function isHeldMode(rule: string | undefined): boolean {
+  return rule === 'mode/kept' || rule === 'mode/after-review'
+}
+
 /** What one binding in a row gets, after the designer's choices. */
 export type BindingOutcome = EffectiveTarget & { category: Category }
 
@@ -206,8 +214,10 @@ export function bindingOutcome(
 /** How many bindings get each target, most first. */
 export type TargetCount = {
   target: string | null
-  /** True when the rule found no equivalent and nobody chose anything */
+  /** True when nothing changes: no equivalent, or a legacy mode that is kept, and nobody chose anything */
   noEquivalent: boolean
+  /** Why nothing changes, such as mode/kept */
+  rule?: string
   count: number
 }
 
@@ -225,6 +235,7 @@ export function targetCounts(
       const entry = counts.get(key) ?? {
         target: outcome.target,
         noEquivalent,
+        ...(noEquivalent && row.rule ? { rule: row.rule } : {}),
         count: 0,
       }
       entry.count += 1

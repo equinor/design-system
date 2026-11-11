@@ -50,6 +50,67 @@ async function revertEntry(
 ): Promise<void> {
   const { property } = entry
 
+  if (entry.old.type === 'component') {
+    // A Typography instance replaced by a text layer: put the instance back
+    // where the text is, with its properties, and remove the text.
+    if (node.type !== 'TEXT') throw new LayerChanged()
+    const parent = node.parent as (BaseNode & ChildrenMixin) | null
+    if (!parent || !entry.old.key) throw new LayerChanged()
+    const component = await figma
+      .importComponentByKeyAsync(entry.old.key)
+      .catch(() => {
+        throw new Error(
+          'The Typography component is no longer published, so it cannot be put back.',
+        )
+      })
+    const instance = component.createInstance()
+    try {
+      instance.setProperties(entry.old.properties)
+    } catch {
+      // A property the component no longer has; the rest are set.
+    }
+    parent.insertChild(parent.children.indexOf(node), instance)
+    instance.name = entry.old.name
+    // The legacy modes on the instance give its text the size it had.
+    for (const [collectionId, modeId] of Object.entries(
+      entry.old.modes ?? {},
+    )) {
+      const collection = await figma.variables
+        .getVariableCollectionByIdAsync(collectionId)
+        .catch(() => null)
+      if (collection) {
+        instance.setExplicitVariableModeForCollection(collection, modeId)
+      }
+    }
+    const text = instance.findOne((child) => child.type === 'TEXT')
+    if (text?.type === 'TEXT' && entry.old.textFills) {
+      await fonts.loadText(text)
+      text.fills = entry.old.textFills as Paint[]
+    }
+    const inFlow =
+      'layoutMode' in parent && (parent as FrameNode).layoutMode !== 'NONE'
+    instance.layoutAlign = node.layoutAlign
+    instance.layoutGrow = node.layoutGrow
+    const sizing = entry.old.sizing
+    if (sizing) {
+      if (sizing.horizontal === 'FIXED' || sizing.vertical === 'FIXED') {
+        instance.resize(sizing.width, sizing.height)
+      }
+      if (inFlow || sizing.horizontal !== 'FILL') {
+        instance.layoutSizingHorizontal = sizing.horizontal
+      }
+      if (inFlow || sizing.vertical !== 'FILL') {
+        instance.layoutSizingVertical = sizing.vertical
+      }
+    }
+    if (!inFlow) {
+      instance.x = node.x
+      instance.y = node.y
+    }
+    node.remove()
+    return
+  }
+
   if (property.type === 'mode') {
     if (entry.old.type !== 'mode' || !('explicitVariableModes' in node)) {
       throw new LayerChanged()
@@ -223,6 +284,7 @@ export async function revertRoots(roots: SceneNode[]): Promise<RevertResult> {
       try {
         await revertEntry(node, entry, targets, fonts)
         reverted += 1
+        if (node.removed) break
       } catch (error) {
         remaining.unshift(entry)
         failed.push({
@@ -233,7 +295,7 @@ export async function revertRoots(roots: SceneNode[]): Promise<RevertResult> {
         })
       }
     }
-    writeLog(node, remaining)
+    if (!node.removed) writeLog(node, remaining)
   }
   figma.commitUndo()
   return { reverted, layers: layers.length, failed }

@@ -145,6 +145,13 @@ export function collectionOrigin(collectionKey: string): CollectionOrigin {
   return 'other'
 }
 
+/** The keys of every collection in a deprecated library. */
+export function libraryCollectionKeys(libraryId: string): string[] {
+  return [...oldCollections.values()]
+    .filter((info) => info.libraryId === libraryId)
+    .map((info) => info.key)
+}
+
 export function oldCollectionInfo(
   collectionKey: string,
 ): CollectionInfo | undefined {

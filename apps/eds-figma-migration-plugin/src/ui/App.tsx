@@ -94,6 +94,7 @@ function Overview({
   showCounts,
   showEmpty,
   onShowComponents,
+  onConvert,
 }: {
   summary: ScanSummary
   view: View
@@ -123,10 +124,14 @@ function Overview({
   showCounts: boolean
   showEmpty: boolean
   onShowComponents: (show: boolean) => void
+  onConvert: (instanceIds: string[]) => void
 }) {
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
   )
+  const typographyCount = instances.filter(
+    (instance) => instance.typography,
+  ).length
   const frames = summary.entries.filter((entry) => entry.kind !== 'component')
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
@@ -202,6 +207,24 @@ function Overview({
         </div>
       </section>
 
+      {typographyCount > 0 && view !== 'instances' && (
+        <Banner tone="info">
+          <Banner.Message>
+            {typographyCount} instance{typographyCount === 1 ? '' : 's'} of the
+            legacy Typography component can become text layers with the matching
+            text style.
+          </Banner.Message>
+          <Banner.Actions>
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={() => onView('instances')}
+            >
+              Show
+            </Button>
+          </Banner.Actions>
+        </Banner>
+      )}
       <Tabs
         label="View"
         tabs={[
@@ -217,6 +240,8 @@ function Overview({
             instances={instances}
             entryNames={entryNames}
             onSelect={onSelectLayer}
+            onConvert={onConvert}
+            busy={busy}
           />
         ) : view === 'mapping' ? (
           <MappingView
@@ -445,6 +470,11 @@ export function App() {
           setRun({ kind: 'revert', result: message.result })
           setScanning(true)
           break
+        case 'convert-done':
+          setApplying(undefined)
+          setRun({ kind: 'convert', result: message.result })
+          setScanning(true)
+          break
         case 'summary':
           setSummary(message.summary)
           break
@@ -512,6 +542,12 @@ export function App() {
     setRun(undefined)
     setApplying({ done: 0, total: 0 })
     send({ type: 'apply', entryIds })
+  }
+  const convertTypography = (instanceIds: string[]) => {
+    setError(undefined)
+    setRun(undefined)
+    setApplying({ done: 0, total: 0 })
+    send({ type: 'convert-typography', instanceIds })
   }
   const revertEntry = (entryId: string) => {
     setError(undefined)
@@ -873,6 +909,7 @@ export function App() {
                   showCounts={showCounts}
                   showEmpty={showEmpty}
                   onShowComponents={setShowComponents}
+                  onConvert={convertTypography}
                 />
               </div>
             )}

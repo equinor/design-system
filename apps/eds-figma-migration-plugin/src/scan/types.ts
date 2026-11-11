@@ -169,6 +169,12 @@ export type BindingRecord = {
   instanceId?: string
   /** Ids of the node and its ancestors in the entry that set explicit modes */
   modeHolders?: string[]
+  /**
+   * Keys of the legacy collections the binding reads, so a legacy mode on one
+   * of them above it has to stay while the binding does: its own collection
+   * and every collection in its alias chain.
+   */
+  reads?: string[]
   /** The legacy variable, for a binding on a variable; the change log and revert need its key */
   oldVariable?: { id: string; key: string; name: string }
   /** The legacy typography variables by field, for a text or range */
@@ -218,6 +224,10 @@ export type OldInstance = {
   id: string
   name: string
   entryId: string
+  /** An instance of the legacy Typography component, which can become a text layer */
+  typography?: boolean
+  /** The text in a Typography instance, to tell them apart */
+  text?: string
   /** Old variables inside the instance or on it */
   count: number
   mainComponent?: {

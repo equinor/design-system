@@ -52,6 +52,13 @@ export type ApplyResult = {
   failed: ChangeFailure[]
 }
 
+export type ConvertResult = {
+  converted: number
+  /** Converted instances that used mono numbers, which a text style cannot carry */
+  monoNumbers: number
+  failed: ChangeFailure[]
+}
+
 export type RevertResult = {
   reverted: number
   layers: number
@@ -94,6 +101,7 @@ export type PluginToUi =
   | { type: 'apply-progress'; done: number; total: number }
   | { type: 'apply-done'; result: ApplyResult }
   | { type: 'revert-done'; result: RevertResult }
+  | { type: 'convert-done'; result: ConvertResult }
   /** Every binding still to migrate, grouped by legacy variable, sent after a scan */
   | { type: 'mapping'; groups: MappingGroup[] }
   /** Every instance in the scan that still uses legacy variables */
@@ -142,6 +150,8 @@ export type UiToPlugin =
   | { type: 'revert'; entryId: string }
   /** Builds the report of the latest scan */
   | { type: 'get-report' }
+  /** Replaces Typography component instances with text layers */
+  | { type: 'convert-typography'; instanceIds: string[] }
   /** Resizes the window; done when the drag ends, so the size is kept */
   | { type: 'resize'; width: number; height: number; done: boolean }
   | { type: 'run-dev-export-inventory' }

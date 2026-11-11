@@ -334,8 +334,11 @@ export async function applyChanges(
   const keep = modesToKeep(records, changed)
   for (const change of modes) {
     const old = change.record.oldMode
+    // A legacy mode stays while values below read it, unless a designer has
+    // chosen to remove it anyway.
     const mustKeep =
       old !== undefined &&
+      change.outcome === 'sure' &&
       keep.has(`${change.record.nodeId}|${old.collectionKey}`)
     try {
       const found = await node(change.record.nodeId)

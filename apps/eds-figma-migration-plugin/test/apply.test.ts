@@ -183,3 +183,40 @@ describe('parseModeTarget', () => {
     expect(parseModeTarget(CLEAR_MODE)).toBeNull()
   })
 })
+
+describe('modes held only by what reads them', () => {
+  it('keeps a mode only above a value whose chain reads its collection', () => {
+    const reader = binding('reads', 'inInstance', {
+      modeHolders: ['frame'],
+      instanceId: 'instance',
+      reads: [OLD.spacingSemantic, OLD.density],
+    })
+    const other = binding('other', 'inInstance', {
+      modeHolders: ['frame'],
+      instanceId: 'instance',
+      reads: [OLD.density],
+    })
+    const proportions = mode('frame', OLD.spaceProportions, CLEAR_MODE)
+    const semantic = mode('frame', OLD.spacingSemantic, CLEAR_MODE)
+    const [freed, held] = holdModes([proportions, semantic, reader, other])
+    expect(freed.category).toBe('sure')
+    expect(held.category).toBe('none')
+  })
+
+  it('still offers to remove a kept mode, and removes it when chosen', () => {
+    const records = holdModes([
+      mode('frame', OLD.borderRadius, CLEAR_MODE),
+      binding('inside', 'inInstance', {
+        oldKey: `${OLD.borderRadius}/Radius`,
+        modeHolders: ['frame'],
+        instanceId: 'instance',
+        reads: [OLD.borderRadius],
+      }),
+    ])
+    const [held] = records
+    expect(held.candidates).toEqual([CLEAR_MODE])
+    const chosen = { records: { [held.id]: CLEAR_MODE }, rows: {} }
+    const plan = planChanges(records, chosen, new Set(['frame']))
+    expect(plan.map((change) => change.outcome)).toEqual(['confirmed'])
+  })
+})

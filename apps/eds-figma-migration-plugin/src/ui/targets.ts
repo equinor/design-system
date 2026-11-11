@@ -13,6 +13,14 @@ export function targetLabel(target: string | null): string {
   return target
 }
 
+/** What a row without a change says: no equivalent, or why a legacy mode is kept. */
+export function unchangedLabel(rule: string | undefined): string {
+  if (rule === 'mode/kept') return 'Kept: legacy values below read it'
+  if (rule === 'mode/after-review')
+    return 'Kept until the values below are reviewed'
+  return 'No equivalent; stays as it is'
+}
+
 export function sourceLabel(
   source: EffectiveTarget['source'],
 ): string | undefined {

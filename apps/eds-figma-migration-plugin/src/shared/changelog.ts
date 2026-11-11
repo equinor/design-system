@@ -28,6 +28,26 @@ export type LoggedTypography = {
 
 export type LoggedTextStyle = { type: 'textStyle'; key: string; name: string }
 
+/** A legacy component instance that was replaced, such as Typography */
+export type LoggedComponent = {
+  type: 'component'
+  /** The key of the variant the instance used, to import it again */
+  key: string
+  name: string
+  properties: Record<string, string | boolean>
+  /** Explicit modes on the instance, by collection id, which size its text */
+  modes?: Record<string, string>
+  /** How the instance was sized */
+  sizing?: {
+    horizontal: 'FIXED' | 'HUG' | 'FILL'
+    vertical: 'FIXED' | 'HUG' | 'FILL'
+    width: number
+    height: number
+  }
+  /** The fills of the text in the instance, with their variable bindings, as Figma paints */
+  textFills?: unknown[]
+}
+
 export type LoggedOldMode = {
   type: 'mode'
   collectionId: string
@@ -51,7 +71,7 @@ export type LoggedValue = { type: 'value'; value: number }
 
 export type LogEntry = {
   property: PropertyRef
-  old: LoggedVariable | LoggedTypography | LoggedOldMode
+  old: LoggedVariable | LoggedTypography | LoggedOldMode | LoggedComponent
   /** What was bound or set instead; none when a legacy mode was only cleared */
   new:
     | LoggedVariable

@@ -1,9 +1,14 @@
 import { Banner, Button } from '@equinor/eds-core-react/next'
-import type { ApplyResult, RevertResult } from '../../../../src/shared/messages'
+import type {
+  ApplyResult,
+  ConvertResult,
+  RevertResult,
+} from '../../../../src/shared/messages'
 
 export type Run =
   | { kind: 'apply'; result: ApplyResult }
   | { kind: 'revert'; result: RevertResult }
+  | { kind: 'convert'; result: ConvertResult }
 
 type RunResultProps = {
   run: Run
@@ -22,6 +27,18 @@ function summary(run: Run): string {
     if (modesKept > 0) {
       parts.push(
         `${modesKept} legacy mode${modesKept === 1 ? '' : 's'} stay${modesKept === 1 ? 's' : ''} because layers below still use legacy variables.`,
+      )
+    }
+    return parts.join(' ')
+  }
+  if (run.kind === 'convert') {
+    const { converted, monoNumbers } = run.result
+    const parts = [
+      `Converted ${converted} Typography component${converted === 1 ? '' : 's'} to text.`,
+    ]
+    if (monoNumbers > 0) {
+      parts.push(
+        `${monoNumbers} used mono numbers, which a text style cannot carry; set tabular figures by hand where they matter.`,
       )
     }
     return parts.join(' ')
@@ -46,7 +63,7 @@ export function RunResult({
       <Banner.Message>
         {summary(run)}
         {failed.length > 0 &&
-          ` ${failed.length} could not be ${run.kind === 'apply' ? 'made' : 'put back'}:`}
+          ` ${failed.length} could not be ${run.kind === 'revert' ? 'put back' : run.kind === 'convert' ? 'converted' : 'made'}:`}
         {run.kind === 'apply' &&
           !onRevert &&
           ' Each frame can be reverted from the frame.'}

@@ -33,7 +33,7 @@ import { groupInstances } from '../instances'
 import { pathBelow } from '../paths'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
-import { sourceLabel, targetLabel } from '../targets'
+import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
 import { filterGroups } from '../groups'
 import { ApplyActions } from './ApplyActions'
 import { MappingView } from './MappingView'
@@ -82,7 +82,7 @@ export function targetText(
     default: {
       const { target, source } = effectiveTarget(record, overrides)
       if (record.category === 'none' && source === 'proposal') {
-        return 'No equivalent; stays as it is'
+        return unchangedLabel(record.rule)
       }
       return targetLabel(target)
     }

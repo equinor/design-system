@@ -17,6 +17,7 @@ import type {
   UiToPlugin,
 } from '../shared/messages'
 import { applyChanges } from './apply/apply'
+import { convertTypography } from './apply/convert'
 import { revertRoots } from './apply/revert'
 import { collectFixture } from './dev/export-fixture'
 import { exportInventory } from './dev/export-inventory'
@@ -136,6 +137,19 @@ async function apply(entryIds: string[]) {
       (done, total) => post({ type: 'apply-progress', done, total }),
     )
     post({ type: 'apply-done', result })
+  } finally {
+    busy = false
+  }
+  await scan(lastTarget)
+}
+
+/** Replaces Typography component instances with text layers, then scans again. */
+async function convert(instanceIds: string[]) {
+  if (!lastScan || !lastTarget || busy) return
+  busy = true
+  try {
+    const result = await convertTypography(instanceIds, lastScan.units)
+    post({ type: 'convert-done', result })
   } finally {
     busy = false
   }
@@ -323,6 +337,9 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'revert':
         await revert(message.entryId)
+        break
+      case 'convert-typography':
+        await convert(message.instanceIds)
         break
       case 'resize': {
         const { width, height } = clampSize(message.width, message.height)

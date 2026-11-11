@@ -1,6 +1,19 @@
 import { useState } from 'react'
-import { Button, Checkbox, Chip, Icon } from '@equinor/eds-core-react/next'
-import { chevron_down, chevron_up, edit } from '@equinor/eds-icons'
+import {
+  Button,
+  Checkbox,
+  Chip,
+  Dialog,
+  Icon,
+  Tooltip,
+} from '@equinor/eds-core-react/next'
+import {
+  chevron_down,
+  chevron_up,
+  edit,
+  info_circle,
+  warning_filled,
+} from '@equinor/eds-icons'
 import { bindingOutcome, targetCounts } from '../../scan/mapping'
 import type {
   MappingBinding,
@@ -17,7 +30,7 @@ import { pathBelow } from '../paths'
 import { plainReason } from '../plain'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
-import { sourceLabel, targetLabel } from '../targets'
+import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
 import { BindingRow } from './BindingRow'
 import { Tabs } from './Tabs'
 import { Preview, pxList, valueText } from './VariableList'
@@ -104,6 +117,8 @@ function legacyText(group: MappingGroup): string {
 /** The target of a row in a few words; a mode that is only cleared says so. */
 function shortTarget(row: MappingRow, overrides: Overrides): string {
   const target = rowTarget(row, overrides)
+  const chosen = row.key in overrides.rows
+  if (row.outcome === 'none' && !chosen) return unchangedLabel(row.rule)
   if (target === CLEAR_MODE) return 'Remove the legacy mode'
   return rowTargetText(row, overrides)
 }
@@ -120,7 +135,7 @@ function sectionOf(item: Item): string {
 function rowTargetText(row: MappingRow, overrides: Overrides): string {
   if (row.key in overrides.rows) return targetLabel(overrides.rows[row.key])
   return row.outcome === 'none'
-    ? 'No equivalent; stays as it is'
+    ? unchangedLabel(row.rule)
     : targetLabel(row.proposal ?? null)
 }
 
@@ -129,10 +144,8 @@ function rowTarget(row: MappingRow, overrides: Overrides): string | null {
   return row.proposal ?? null
 }
 
-function countText({ target, noEquivalent, count }: TargetCount): string {
-  const label = noEquivalent
-    ? 'No equivalent; stays as it is'
-    : targetLabel(target)
+function countText({ target, noEquivalent, rule, count }: TargetCount): string {
+  const label = noEquivalent ? unchangedLabel(rule) : targetLabel(target)
   return `${label} ×${count}`
 }
 
@@ -166,7 +179,21 @@ function rowCategories(
  * stays on one line, as in Check designs. The names are there for screen
  * readers and on hover.
  */
-function StatusDots({ categories }: { categories: [Category, number][] }) {
+/**
+ * The status of a row as dots in the colours of the health bar, so a row
+ * stays on one line, as in Check designs. When the row needs a check or does
+ * not change, the status is a button: its tooltip says why in a few words,
+ * and a click opens the whole reason.
+ */
+function StatusCell({
+  categories,
+  why,
+  onWhy,
+}: {
+  categories: [Category, number][]
+  why?: string
+  onWhy: () => void
+}) {
   const text = categories
     .map(([category, count]) =>
       categories.length === 1
@@ -174,21 +201,36 @@ function StatusDots({ categories }: { categories: [Category, number][] }) {
         : `${CATEGORY_LABELS[category]} ${count}`,
     )
     .join(', ')
+  const needsCheck = categories.some(([category]) => category === 'check')
+  const dots = categories.map(([category]) => (
+    <span
+      key={category}
+      className="health-swatch"
+      data-category={category}
+      aria-hidden="true"
+    />
+  ))
+  if (!why) {
+    return (
+      <span className="check-status" title={text}>
+        {dots}
+        <span className="visually-hidden">{text}</span>
+      </span>
+    )
+  }
   return (
-    <span className="check-status" title={text}>
-      {categories.map(([category]) => (
-        <span
-          key={category}
-          className="health-swatch"
-          data-category={category}
-          aria-hidden="true"
-        />
-      ))}
-      {categories.some(([category]) => category === 'check') && (
-        <span aria-hidden="true">⚠</span>
-      )}
-      <span className="visually-hidden">{text}</span>
-    </span>
+    <Tooltip title={why} placement="left">
+      <button
+        type="button"
+        className="check-status check-why"
+        data-kind={needsCheck ? 'check' : 'none'}
+        aria-label={`${text}. Why: ${why}`}
+        onClick={onWhy}
+      >
+        {dots}
+        <Icon data={needsCheck ? warning_filled : info_circle} size="sm" />
+      </button>
+    </Tooltip>
   )
 }
 
@@ -220,6 +262,7 @@ export function MappingView({
   )
   const [status, setStatus] = useState<Status>('all')
   const [open, setOpen] = useState<Set<string>>(new Set())
+  const [why, setWhy] = useState<Item>()
 
   if (groups.length === 0) {
     return <p className="muted">Nothing left to migrate in the scope.</p>
@@ -388,7 +431,9 @@ export function MappingView({
                       'proposal',
                   )
                   const reason =
-                    row.outcome === 'check' && undecided && row.reason
+                    (row.outcome === 'check' || row.outcome === 'none') &&
+                    undecided &&
+                    row.reason
                       ? (plainReason(row.reason) ?? row.reason)
                       : undefined
                   const state = groupState(
@@ -477,9 +522,13 @@ export function MappingView({
                               <Icon data={edit} size="sm" />
                             </span>
                           )}
-                          <StatusDots categories={categories} />
                           <Icon data={chevron_down} size="sm" />
                         </button>
+                        <StatusCell
+                          categories={categories}
+                          why={reason}
+                          onWhy={() => setWhy({ group, row })}
+                        />
                         <Button
                           variant="ghost"
                           size="small"
@@ -498,12 +547,6 @@ export function MappingView({
                           />
                         </Button>
                       </div>
-                      {reason && (
-                        <p className="check-reason" title={row.reason}>
-                          <span aria-hidden="true">⚠ </span>
-                          {reason}
-                        </p>
-                      )}
                       {isOpen && (
                         <ul className="binding-list nested">
                           {row.bindings
@@ -566,6 +609,56 @@ export function MappingView({
         still to migrate in the scope. A click on a legacy variable selects its
         layers; the target opens the picker and changes every value in the row.
       </p>
+      <Dialog
+        open={why !== undefined}
+        onOpenChange={(next) => {
+          if (!next) setWhy(undefined)
+        }}
+      >
+        {why && (
+          <>
+            <Dialog.Header>
+              <Dialog.Title>
+                {why.row.outcome === 'check'
+                  ? 'Why it needs a check'
+                  : unchangedLabel(why.row.rule)}
+              </Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Content>
+              <p className="binding-swap">
+                <span className="binding-old">{legacyText(why.group)}</span>
+                <span aria-hidden="true"> → </span>
+                <span className="binding-new">
+                  {shortTarget(why.row, overrides)}
+                </span>
+              </p>
+              <p>{plainReason(why.row.reason) ?? why.row.reason}</p>
+              {plainReason(why.row.reason) && (
+                <details className="review-details">
+                  <summary>Details</summary>
+                  {why.row.reason}
+                </details>
+              )}
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button variant="ghost" onClick={() => setWhy(undefined)}>
+                Close
+              </Button>
+              <Button
+                onClick={() => {
+                  const item = why
+                  setWhy(undefined)
+                  onChangeRow(item.group, item.row)
+                }}
+              >
+                {why.row.outcome === 'none' && why.row.candidates.length > 0
+                  ? 'Choose what to do'
+                  : 'Change target'}
+              </Button>
+            </Dialog.Actions>
+          </>
+        )}
+      </Dialog>
     </div>
   )
 }
