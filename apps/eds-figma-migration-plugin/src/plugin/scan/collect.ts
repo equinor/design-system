@@ -318,8 +318,19 @@ export class Collector {
       collectionKey,
       collectionName: collection?.name ?? '',
     }
+    const isLegacy = this.options.oldKeys.has(collectionKey)
+    let value: number | undefined
+    if (isLegacy && variable.resolvedType === 'FLOAT') {
+      try {
+        const resolved = variable.resolveForConsumer(node).value
+        if (typeof resolved === 'number') value = resolved
+      } catch {
+        // The value could not be resolved for this layer; it is left out.
+      }
+      if (value !== undefined) raw.value = value
+    }
     if (
-      this.options.oldKeys.has(collectionKey) &&
+      isLegacy &&
       collectionKey !== this.options.densityKey &&
       variable.resolvedType !== 'COLOR'
     ) {
@@ -327,14 +338,7 @@ export class Collector {
       const reachesDensity = raw.chain.some(
         (step) => step.collectionKey === this.options.densityKey,
       )
-      if (!reachesDensity && variable.resolvedType === 'FLOAT') {
-        try {
-          const resolved = variable.resolveForConsumer(node).value
-          if (typeof resolved === 'number') raw.resolvedValue = resolved
-        } catch {
-          // The value could not be resolved for this node; the rules do without it.
-        }
-      }
+      if (!reachesDensity && value !== undefined) raw.resolvedValue = value
     }
     return raw
   }

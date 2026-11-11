@@ -1124,9 +1124,15 @@ code {
 
 /* Final review FR2: the target on two lines, its name and then its value. */
 .check-target-text {
+  /* The value sits on the same line as the name, as in Check designs, and
+     moves under it only when both do not fit, such as a text style's size
+     and font. */
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0 var(--eds-spacing-2xs);
+  align-items: baseline;
+  justify-content: space-between;
   min-inline-size: 0;
 
   & .option-value {
@@ -1134,6 +1140,12 @@ code {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+}
+
+/* The legacy number, in px, at the end of the legacy side. */
+.check-legacy .option-value {
+  flex-shrink: 0;
+  margin-inline-start: auto;
 }
 
 /* Final review FR8: tighter tabs for the kinds of value. */
@@ -1190,4 +1202,9 @@ code {
     outline: 2px solid var(--eds-border-interactive-focus);
     outline-offset: -2px;
   }
+}
+
+/* A number has no swatch; its empty square would only take room from the name. */
+.check-target .option-preview {
+  display: none;
 }

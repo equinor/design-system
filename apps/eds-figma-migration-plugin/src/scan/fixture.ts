@@ -7,12 +7,13 @@
 import type { ChainStep, RoleContext, TypographyField } from '../mapping/types'
 import type { PropertyRef, RawTextStyle, RawUnit, RawVariable } from './types'
 
-type PackedVariable = Omit<RawVariable, 'chain' | 'resolvedValue'>
+type PackedVariable = Omit<RawVariable, 'chain' | 'resolvedValue' | 'value'>
 
 type PackedRef = {
   variable: string
   chain?: ChainStep[]
   resolvedValue?: number | string | boolean | null
+  value?: number
 }
 
 type PackedNode = {
@@ -80,11 +81,12 @@ export function packFixture(
   const owners: { id: string; context: Omit<RoleContext, 'fillUnder'> }[] = []
 
   const ref = (variable: RawVariable): PackedRef => {
-    const { chain, resolvedValue, ...rest } = variable
+    const { chain, resolvedValue, value, ...rest } = variable
     variables[variable.id] ??= rest
     const packed: PackedRef = { variable: variable.id }
     if (chain && chain.length > 0) packed.chain = chain
     if (resolvedValue !== undefined) packed.resolvedValue = resolvedValue
+    if (value !== undefined) packed.value = value
     return packed
   }
 
@@ -175,6 +177,7 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
     if (packed.chain) raw.chain = packed.chain
     if (packed.resolvedValue !== undefined)
       raw.resolvedValue = packed.resolvedValue
+    if (packed.value !== undefined) raw.value = packed.value
     return raw
   }
 

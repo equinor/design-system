@@ -10,7 +10,7 @@
  * single binding in the inspector, which wins over the row.
  */
 import type { BindingKind, Outcome } from '../mapping/types'
-import type { BindingRecord, Category, PropertyGroup } from './types'
+import type { BindingRecord, Category, Density, PropertyGroup } from './types'
 
 /** A chosen target, or null to leave the legacy binding as it is. */
 export type OverrideValue = string | null
@@ -100,6 +100,10 @@ export type MappingBinding = {
   entryId: string
   /** Layer names from the entry down to the layer's parent */
   path: string[]
+  /** The number the legacy variable resolves to on the layer, in px */
+  oldValue?: number
+  /** The density the layer has after the migration */
+  density?: Density
   property: BindingRecord['property']
   kind?: BindingKind
 }
@@ -168,6 +172,8 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
       nodeName: record.nodeName,
       entryId: record.entryId,
       path: record.path,
+      ...(record.oldValue !== undefined ? { oldValue: record.oldValue } : {}),
+      ...(record.density ? { density: record.density } : {}),
       property: record.property,
       kind: record.kind,
     })

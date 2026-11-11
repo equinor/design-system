@@ -3,6 +3,7 @@ import type { KeyboardEvent } from 'react'
 import { Search } from '@equinor/eds-core-react/next'
 import { getNewTextStyle, getNewVariable } from '../../mapping/inventory'
 import type { PickerOptions } from '../../mapping/picker'
+import type { Density } from '../../scan/types'
 import { targetLabel } from '../targets'
 
 type VariableListProps = {
@@ -88,14 +89,38 @@ export function Preview({
   return <span className="option-preview" aria-hidden="true" />
 }
 
-export function valueText(name: string | null): string | undefined {
+/** A number as the window writes it: px, except font weights, which have no unit. */
+export function px(name: string, value: number): string {
+  return name.startsWith('font-weight/') ? String(value) : `${value}px`
+}
+
+/** Several numbers, smallest first: “8px”, or “4px, 8px”. */
+export function pxList(name: string, numbers: number[]): string | undefined {
+  const distinct = [...new Set(numbers)].sort((a, b) => a - b)
+  if (distinct.length === 0) return undefined
+  return distinct.map((value) => px(name, value)).join(', ')
+}
+
+/**
+ * The value of a target: its number in the densities given (comfortable when
+ * none are), or a text style's size and font.
+ */
+export function valueText(
+  name: string | null,
+  densities: Density[] = ['comfortable'],
+): string | undefined {
   if (name === null) return undefined
-  const variable = getNewVariable(name)
-  if (variable?.values?.comfortable !== undefined) {
-    return String(variable.values.comfortable)
+  const values = getNewVariable(name)?.values
+  if (values?.comfortable !== undefined) {
+    const numbers = densities
+      .map((density) => values[density])
+      .filter((value): value is number => value !== undefined)
+    return pxList(name, numbers)
   }
   const style = getNewTextStyle(name)
-  if (style) return `${style.fontSize} · ${style.fontFamily} ${style.fontStyle}`
+  if (style) {
+    return `${style.fontSize}px · ${style.fontFamily} ${style.fontStyle}`
+  }
   return undefined
 }
 

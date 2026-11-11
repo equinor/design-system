@@ -24,8 +24,14 @@ export type RawVariable = {
   collectionName: string
   /** The alias chain under the modes in force, down to the first `💎 Density` variable */
   chain?: ChainStep[]
+  /** For the rules: the value of a variable whose chain does not reach `💎 Density` */
   resolvedValue?: number | string | boolean | null
+  /** For the window: the number a legacy variable resolves to on this layer, in px */
+  value?: number
 }
+
+/** The densities of EDS Foundation, which decide the numbers of its variables. */
+export type Density = 'comfortable' | 'compact' | 'relaxed'
 
 export type RawFillUnder = {
   /** The variable on the fill, when it uses one */
@@ -166,6 +172,10 @@ export type BindingRecord = {
   oldFields?: Partial<Record<TypographyField, { key: string; name: string }>>
   /** The font of a text or range before the change */
   oldFont?: { family: string; style: string }
+  /** The number the legacy variable resolves to on the layer, in px */
+  oldValue?: number
+  /** The density the layer has after the migration, which decides the new numbers */
+  density?: Density
   /** The legacy mode, for an explicit mode */
   oldMode?: {
     collectionId: string

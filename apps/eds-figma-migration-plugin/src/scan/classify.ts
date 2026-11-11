@@ -5,6 +5,7 @@
 import {
   collectionOrigin,
   isNewTextStyleKey,
+  NEW,
   OLD,
   oldCollectionInfo,
 } from '../mapping/inventory'
@@ -20,6 +21,7 @@ import type {
 } from '../mapping/types'
 import type {
   BindingRecord,
+  Density,
   PropertyGroup,
   PropertyRef,
   RawContext,
@@ -77,6 +79,19 @@ function describe(variable: RawVariable): string {
     : variable.name
 }
 
+/**
+ * The density a layer has after the migration: a new density mode in force,
+ * or the one the legacy mode becomes (Spacious → comfortable, Comfortable →
+ * compact), or comfortable, the default of both collections.
+ */
+export function targetDensity(modes: Record<string, string>): Density {
+  const set = modes[NEW.density]
+  if (set === 'comfortable' || set === 'compact' || set === 'relaxed') {
+    return set
+  }
+  return modes[OLD.density] === 'Comfortable' ? 'compact' : 'comfortable'
+}
+
 export function groupOf(unit: RawUnit): PropertyGroup {
   if (unit.unit === 'typography') return 'typography'
   if (unit.unit === 'mode') return 'modes'
@@ -109,6 +124,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     property: unit.property,
     group: groupOf(unit),
     instanceId: unit.instanceId,
+    density: targetDensity(unit.context.modes),
     ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
   }
 
@@ -127,6 +143,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
       old: variable.name,
       oldCollection: variable.collectionName,
       oldVariable: { id: variable.id, key: variable.key, name: variable.name },
+      ...(variable.value !== undefined ? { oldValue: variable.value } : {}),
     }
     if (unit.instanceId) return { ...base, ...old, category: 'inInstance' }
     const resolution = resolveVariable({

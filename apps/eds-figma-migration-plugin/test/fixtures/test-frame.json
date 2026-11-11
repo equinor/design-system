@@ -587,7 +587,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3214": {
       "name": "Top bar",
@@ -601,7 +602,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3215": {
       "name": "Title group",
@@ -618,7 +620,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3216": {
       "name": "Icon / menu",
@@ -636,7 +639,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3217": {
       "name": "Vector",
@@ -661,6 +665,7 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3214",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -684,6 +689,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3214",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -702,6 +708,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3214",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -718,7 +725,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3221": {
       "name": "Message",
@@ -737,6 +745,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3220",
         "variable": "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9"
@@ -753,7 +762,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3223": {
       "name": "Card / Well",
@@ -771,7 +781,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3224": {
       "name": "Card title",
@@ -791,6 +802,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3223",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -814,6 +826,7 @@
         },
         "singleLine": false
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3223",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -840,7 +853,8 @@
           "d53851cec89ec6a8a213f80e0e2cad832b6b15cf": "Squished",
           "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a": "UI Body"
         }
-      }
+      },
+      "modeHolders": ["2300:3213", "2300:3226"]
     },
     "2300:3227": {
       "name": "Chip label",
@@ -871,6 +885,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2300:3226"],
       "fillUnder": {
         "owner": "2300:3226",
         "variable": "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6"
@@ -892,7 +907,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3229": {
       "name": "Card title",
@@ -912,6 +928,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3228",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -933,7 +950,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3231": {
       "name": "Field label",
@@ -959,6 +977,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3228",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -987,7 +1006,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [2, 2, 2, 2]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3233": {
       "name": "Value",
@@ -1015,6 +1035,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3232",
         "variable": "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94"
@@ -1044,6 +1065,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3228",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1067,7 +1089,8 @@
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Warning"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213", "2300:3235"]
     },
     "2300:3236": {
       "name": "Chip label",
@@ -1094,6 +1117,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2300:3235"],
       "fillUnder": {
         "owner": "2300:3235",
         "variable": "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0"
@@ -1111,7 +1135,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3238": {
       "name": "Card title",
@@ -1130,6 +1155,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3237",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1150,7 +1176,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3240": {
       "name": "Button / Primary",
@@ -1172,7 +1199,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3241": {
       "name": "Label",
@@ -1198,6 +1226,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3240",
         "variable": "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15"
@@ -1223,7 +1252,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3243": {
       "name": "Label",
@@ -1249,6 +1279,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3242",
         "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16"
@@ -1278,6 +1309,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3242",
         "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16"
@@ -1304,7 +1336,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3246": {
       "name": "Label",
@@ -1330,6 +1363,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3237",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1355,7 +1389,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3248": {
       "name": "Label",
@@ -1381,6 +1416,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3247",
         "variable": "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4"
@@ -1407,7 +1443,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Danger"
         }
-      }
+      },
+      "modeHolders": ["2300:3213", "2300:3249"]
     },
     "2300:3250": {
       "name": "Label",
@@ -1434,6 +1471,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2300:3249"],
       "fillUnder": {
         "owner": "2300:3249",
         "variable": "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6"
@@ -1460,7 +1498,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2300:3252": {
       "name": "Label",
@@ -1486,6 +1525,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213"],
       "fillUnder": {
         "owner": "2300:3251",
         "variable": "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5"
@@ -1502,7 +1542,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         }
-      }
+      },
+      "modeHolders": ["2300:3213"]
     },
     "2301:2905": {
       "name": "Table / Wells (dense)",
@@ -1520,7 +1561,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2905"]
     },
     "2301:2906": {
       "name": "Row / Header",
@@ -1543,7 +1585,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [0, 0, 1, 0]
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2905"]
     },
     "2301:2907": {
       "name": "Cell",
@@ -1569,6 +1612,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1598,6 +1642,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1627,6 +1672,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1653,7 +1699,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [0, 0, 1, 0]
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2905"]
     },
     "2301:2911": {
       "name": "Cell",
@@ -1679,6 +1726,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1708,6 +1756,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1737,6 +1786,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1763,7 +1813,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [0, 0, 1, 0]
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2905"]
     },
     "2301:2915": {
       "name": "Cell",
@@ -1789,6 +1840,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2914",
         "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
@@ -1818,6 +1870,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2914",
         "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
@@ -1847,6 +1900,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2914",
         "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
@@ -1873,7 +1927,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
         },
         "strokeSides": [0, 0, 1, 0]
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2905"]
     },
     "2301:2919": {
       "name": "Cell",
@@ -1899,6 +1954,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1928,6 +1984,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1957,6 +2014,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2905"],
       "fillUnder": {
         "owner": "2301:2905",
         "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
@@ -1977,7 +2035,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
         }
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2922"]
     },
     "2301:2923": {
       "name": "Menu",
@@ -2000,7 +2059,8 @@
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
         },
         "strokeSides": [1, 1, 1, 1]
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2922"]
     },
     "2301:2924": {
       "name": "Menu item",
@@ -2024,7 +2084,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
         }
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2922"]
     },
     "2301:2925": {
       "name": "Label",
@@ -2052,6 +2113,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2922"],
       "fillUnder": {
         "owner": "2301:2923",
         "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1"
@@ -2079,7 +2141,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
         }
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2922"]
     },
     "2301:2927": {
       "name": "Label",
@@ -2107,6 +2170,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2922"],
       "fillUnder": {
         "owner": "2301:2926",
         "variable": "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5"
@@ -2134,7 +2198,8 @@
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
         }
-      }
+      },
+      "modeHolders": ["2300:3213", "2301:2922"]
     },
     "2301:2929": {
       "name": "Label",
@@ -2162,6 +2227,7 @@
         },
         "singleLine": true
       },
+      "modeHolders": ["2300:3213", "2301:2922"],
       "fillUnder": {
         "owner": "2301:2923",
         "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1"
@@ -2207,7 +2273,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:10c712e6c2f5a15257360893105c836d1627e1e0/4012:953"
+        "variable": "VariableID:10c712e6c2f5a15257360893105c836d1627e1e0/4012:953",
+        "value": 20
       }
     },
     {
@@ -2220,7 +2287,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905",
+        "value": 24
       }
     },
     {
@@ -2233,7 +2301,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954",
+        "value": 24
       }
     },
     {
@@ -2246,7 +2315,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905",
+        "value": 24
       }
     },
     {
@@ -2259,7 +2329,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954",
+        "value": 24
       }
     },
     {
@@ -2300,7 +2371,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2327,7 +2399,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2354,7 +2427,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2381,7 +2455,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2394,7 +2469,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2407,7 +2483,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2420,7 +2497,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2433,7 +2511,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2474,7 +2553,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 12
       }
     },
     {
@@ -2487,7 +2567,8 @@
       "unit": "variable",
       "kind": "size",
       "ref": {
-        "variable": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490"
+        "variable": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490",
+        "value": 24
       }
     },
     {
@@ -2500,7 +2581,8 @@
       "unit": "variable",
       "kind": "size",
       "ref": {
-        "variable": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490"
+        "variable": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490",
+        "value": 24
       }
     },
     {
@@ -2540,19 +2622,23 @@
       "unit": "typography",
       "fields": {
         "letterSpacing": {
-          "variable": "VariableID:285647d729ee052f9994c394561648978daffd04/4038:693"
+          "variable": "VariableID:285647d729ee052f9994c394561648978daffd04/4038:693",
+          "value": 0
         },
         "fontSize": {
-          "variable": "VariableID:8f8a018dfeebb2966dafdd6e567f9322fc79f96b/4038:691"
+          "variable": "VariableID:8f8a018dfeebb2966dafdd6e567f9322fc79f96b/4038:691",
+          "value": 18
         },
         "fontFamily": {
           "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
         },
         "lineHeight": {
-          "variable": "VariableID:1765afeb6fa1f3d8bdb893df96467890a1fbb72c/4038:736"
+          "variable": "VariableID:1765afeb6fa1f3d8bdb893df96467890a1fbb72c/4038:736",
+          "value": 20
         },
         "fontWeight": {
-          "variable": "VariableID:c53f23608cb032af06075f1debfec02e3115a8a3/4038:697"
+          "variable": "VariableID:c53f23608cb032af06075f1debfec02e3115a8a3/4038:697",
+          "value": 500
         }
       },
       "font": {
@@ -2584,13 +2670,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -2609,7 +2697,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873"
+        "variable": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873",
+        "value": 16
       }
     },
     {
@@ -2622,7 +2711,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993"
+        "variable": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993",
+        "value": 12
       }
     },
     {
@@ -2635,7 +2725,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873"
+        "variable": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873",
+        "value": 16
       }
     },
     {
@@ -2648,7 +2739,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993"
+        "variable": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993",
+        "value": 12
       }
     },
     {
@@ -2661,7 +2753,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2674,7 +2767,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2687,7 +2781,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2700,7 +2795,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2740,13 +2836,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729"
+          "variable": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729",
+          "value": 20
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -2765,7 +2863,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904"
+        "variable": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904",
+        "value": 20
       }
     },
     {
@@ -2784,7 +2883,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/vertical/md"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2811,7 +2911,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2838,7 +2939,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2865,7 +2967,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2892,7 +2995,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -2905,7 +3009,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2918,7 +3023,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2931,7 +3037,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2944,7 +3051,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -2998,16 +3106,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663"
+          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
         },
         "lineHeight": {
-          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728"
+          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728",
+          "value": 12
         },
         "fontWeight": {
-          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669"
+          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669",
+          "value": 500
         }
       },
       "font": {
@@ -3039,13 +3150,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729"
+          "variable": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729",
+          "value": 20
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -3148,7 +3261,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/xs/horizontal"
           }
-        ]
+        ],
+        "value": 8
       }
     },
     {
@@ -3175,7 +3289,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/xs/vertical-squared"
           }
-        ]
+        ],
+        "value": 8
       }
     },
     {
@@ -3202,7 +3317,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/xs/horizontal"
           }
-        ]
+        ],
+        "value": 8
       }
     },
     {
@@ -3229,7 +3345,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/xs/vertical-squared"
           }
-        ]
+        ],
+        "value": 8
       }
     },
     {
@@ -3252,7 +3369,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/border-radius/pill"
           }
-        ]
+        ],
+        "value": 1000
       }
     },
     {
@@ -3275,7 +3393,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/border-radius/pill"
           }
-        ]
+        ],
+        "value": 1000
       }
     },
     {
@@ -3298,7 +3417,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/border-radius/pill"
           }
-        ]
+        ],
+        "value": 1000
       }
     },
     {
@@ -3321,7 +3441,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/border-radius/pill"
           }
-        ]
+        ],
+        "value": 1000
       }
     },
     {
@@ -3379,7 +3500,8 @@
               "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
               "name": "typography/ui-body/sm/line-height-squished"
             }
-          ]
+          ],
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
@@ -3409,7 +3531,8 @@
               "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
               "name": "typography/ui-body/sm/font-size"
             }
-          ]
+          ],
+          "value": 12
         }
       },
       "font": {
@@ -3434,7 +3557,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/vertical/md"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -3461,7 +3585,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -3488,7 +3613,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -3515,7 +3641,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -3542,7 +3669,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -3555,7 +3683,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3568,7 +3697,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3581,7 +3711,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3594,7 +3725,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3648,16 +3780,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663"
+          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
         },
         "lineHeight": {
-          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728"
+          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728",
+          "value": 12
         },
         "fontWeight": {
-          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669"
+          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669",
+          "value": 500
         }
       },
       "font": {
@@ -3676,7 +3811,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -3702,13 +3838,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 12
         }
       },
       "font": {
@@ -3727,7 +3865,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 12
       }
     },
     {
@@ -3740,7 +3879,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -3753,7 +3893,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 12
       }
     },
     {
@@ -3766,7 +3907,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -3779,7 +3921,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3792,7 +3935,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3805,7 +3949,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3818,7 +3963,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -3872,13 +4018,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -3910,13 +4058,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:6a5c325f5c183cd9c541eb01c453096a465b6a95/4038:725"
+          "variable": "VariableID:6a5c325f5c183cd9c541eb01c453096a465b6a95/4038:725",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 12
         }
       },
       "font": {
@@ -3949,7 +4099,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -3962,7 +4113,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -3975,7 +4127,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -3988,7 +4141,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4001,7 +4155,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4014,7 +4169,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4027,7 +4183,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4040,7 +4197,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4094,13 +4252,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 12
         }
       },
       "font": {
@@ -4125,7 +4285,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/vertical/md"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -4152,7 +4313,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -4179,7 +4341,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -4206,7 +4369,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/horizontal"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -4233,7 +4397,8 @@
             "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
             "name": "spacing/inset/md/vertical-squared"
           }
-        ]
+        ],
+        "value": 16
       }
     },
     {
@@ -4246,7 +4411,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4259,7 +4425,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4272,7 +4439,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4285,7 +4453,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4339,16 +4508,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663"
+          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
         },
         "lineHeight": {
-          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728"
+          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728",
+          "value": 12
         },
         "fontWeight": {
-          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669"
+          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669",
+          "value": 500
         }
       },
       "font": {
@@ -4367,7 +4539,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 12
       }
     },
     {
@@ -4380,7 +4553,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -4393,7 +4567,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -4406,7 +4581,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4419,7 +4595,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4432,7 +4609,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4445,7 +4623,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4458,7 +4637,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4471,7 +4651,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4484,7 +4665,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4497,7 +4679,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4537,16 +4720,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontWeight": {
-          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+          "value": 500
         }
       },
       "font": {
@@ -4565,7 +4751,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -4578,7 +4765,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4591,7 +4779,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4604,7 +4793,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4617,7 +4807,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4630,7 +4821,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4643,7 +4835,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4656,7 +4849,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4669,7 +4863,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4709,16 +4904,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontWeight": {
-          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+          "value": 500
         }
       },
       "font": {
@@ -4750,13 +4948,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -4775,7 +4975,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -4788,7 +4989,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4801,7 +5003,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4814,7 +5017,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4827,7 +5031,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4840,7 +5045,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4853,7 +5059,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4866,7 +5073,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4879,7 +5087,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -4919,16 +5128,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontWeight": {
-          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+          "value": 500
         }
       },
       "font": {
@@ -4947,7 +5159,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -4960,7 +5173,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4973,7 +5187,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -4986,7 +5201,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -4999,7 +5215,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -5012,7 +5229,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5025,7 +5243,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5038,7 +5257,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5051,7 +5271,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5091,16 +5312,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontWeight": {
-          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+          "value": 500
         }
       },
       "font": {
@@ -5133,7 +5357,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -5146,7 +5371,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -5159,7 +5385,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -5172,7 +5399,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -5185,7 +5413,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -5198,7 +5427,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5211,7 +5441,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5224,7 +5455,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5237,7 +5469,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5277,16 +5510,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontWeight": {
-          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+          "value": 500
         }
       },
       "font": {
@@ -5305,7 +5541,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+        "value": 8
       }
     },
     {
@@ -5318,7 +5555,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -5331,7 +5569,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -5344,7 +5583,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -5357,7 +5597,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -5370,7 +5611,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5383,7 +5625,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5396,7 +5639,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5409,7 +5653,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -5463,16 +5708,19 @@
       "unit": "typography",
       "fields": {
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontWeight": {
-          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+          "value": 500
         }
       },
       "font": {
@@ -5491,7 +5739,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904"
+        "variable": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904",
+        "value": 20
       }
     },
     {
@@ -5518,7 +5767,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 3
       }
     },
     {
@@ -5531,7 +5781,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 3
       }
     },
     {
@@ -5544,7 +5795,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 3
       }
     },
     {
@@ -5557,7 +5809,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 3
       }
     },
     {
@@ -5598,7 +5851,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5611,7 +5865,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5624,7 +5879,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -5637,7 +5893,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5650,7 +5907,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -5690,13 +5948,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -5728,13 +5988,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -5766,13 +6028,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -5791,7 +6055,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5804,7 +6069,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5817,7 +6083,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -5830,7 +6097,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5843,7 +6111,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -5883,13 +6152,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -5921,13 +6192,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -5959,13 +6232,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -5984,7 +6259,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -5997,7 +6273,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -6010,7 +6287,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -6023,7 +6301,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -6036,7 +6315,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -6090,13 +6370,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -6128,13 +6410,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -6166,13 +6450,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -6191,7 +6477,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -6204,7 +6491,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -6217,7 +6505,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -6230,7 +6519,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+        "value": 8
       }
     },
     {
@@ -6243,7 +6533,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 6
       }
     },
     {
@@ -6283,13 +6574,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -6321,13 +6614,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -6359,13 +6654,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+          "value": 12
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+          "value": 10.5
         }
       },
       "font": {
@@ -6398,7 +6695,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905",
+        "value": 24
       }
     },
     {
@@ -6411,7 +6709,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954",
+        "value": 24
       }
     },
     {
@@ -6424,7 +6723,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905",
+        "value": 24
       }
     },
     {
@@ -6437,7 +6737,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954",
+        "value": 24
       }
     },
     {
@@ -6464,7 +6765,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -6477,7 +6779,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+        "value": 8
       }
     },
     {
@@ -6490,7 +6793,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -6503,7 +6807,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -6516,7 +6821,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -6529,7 +6835,8 @@
       "unit": "variable",
       "kind": "radius",
       "ref": {
-        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+        "value": 4
       }
     },
     {
@@ -6570,7 +6877,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -6583,7 +6891,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -6596,7 +6905,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -6609,7 +6919,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -6635,13 +6946,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -6660,7 +6973,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -6673,7 +6987,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -6686,7 +7001,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -6699,7 +7015,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -6739,13 +7056,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {
@@ -6764,7 +7083,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -6777,7 +7097,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -6790,7 +7111,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+        "value": 16
       }
     },
     {
@@ -6803,7 +7125,8 @@
       "unit": "variable",
       "kind": "spacing",
       "ref": {
-        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+        "value": 12
       }
     },
     {
@@ -6829,13 +7152,15 @@
       "unit": "typography",
       "fields": {
         "lineHeight": {
-          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+          "value": 16
         },
         "fontFamily": {
           "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
         },
         "fontSize": {
-          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+          "value": 14
         }
       },
       "font": {

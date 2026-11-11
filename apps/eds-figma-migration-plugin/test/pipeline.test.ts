@@ -119,7 +119,10 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
 
   it('reports only the icon size and the backdrop as having no equivalent', () => {
     const none = records
-      .filter((record) => record.category === 'none')
+      .filter(
+        (record) =>
+          record.category === 'none' && record.rule !== 'mode/after-review',
+      )
       .map((record) => `${record.nodeName}: ${propertyLabel(record.property)}`)
       .sort()
     expect(none).toEqual([
@@ -127,6 +130,31 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
       'Icon / menu: Width',
       'Overlay (dark scheme): Fill',
     ])
+  })
+
+  it('holds the Appearance modes until the bindings below that need a check are reviewed', () => {
+    const held = records
+      .filter((record) => record.rule === 'mode/after-review')
+      .map((record) => record.nodeName)
+      .sort()
+    expect(held).toEqual([
+      'Button / Danger (dynamic)',
+      'Chip / Warning (dynamic)',
+    ])
+  })
+
+  it('reads the number every legacy spacing variable resolves to', () => {
+    const spacing = records.filter(
+      (record) => record.group === 'spacing' && record.category !== 'migrated',
+    )
+    expect(spacing.length).toBeGreaterThan(0)
+    for (const record of spacing) expect(typeof record.oldValue).toBe('number')
+  })
+
+  it('gives the dense table the compact density', () => {
+    const cells = records.filter((record) => record.nodeName === 'Cell')
+    expect(cells.length).toBeGreaterThan(0)
+    for (const cell of cells) expect(cell.density).toBe('compact')
   })
 
   it('gives every label and table cell a label style, and the header cells medium', () => {

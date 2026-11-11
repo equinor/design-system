@@ -19,7 +19,7 @@ import type { Selection, SelectedBinding } from '../selection'
 import { sourceLabel, targetLabel } from '../targets'
 import { BindingRow } from './BindingRow'
 import { Tabs } from './Tabs'
-import { Preview, valueText } from './VariableList'
+import { Preview, pxList, valueText } from './VariableList'
 
 type MappingViewProps = {
   groups: MappingGroup[]
@@ -355,7 +355,21 @@ export function MappingView({
                   const counts = targetCounts([row], overrides)
                   const categories = rowCategories(row, overrides)
                   const target = rowTarget(row, overrides)
-                  const extra = valueText(target)
+                  // The new number in the density each layer will have, and the
+                  // legacy number as it resolves on each layer, in px.
+                  const extra = valueText(target, [
+                    ...new Set(
+                      row.bindings.map(
+                        (binding) => binding.density ?? 'comfortable',
+                      ),
+                    ),
+                  ])
+                  const oldValues = pxList(
+                    group.old,
+                    row.bindings
+                      .map((binding) => binding.oldValue)
+                      .filter((value): value is number => value !== undefined),
+                  )
                   const state = groupState(
                     selection,
                     row.bindings.map((binding) => binding.id),
@@ -393,6 +407,9 @@ export function MappingView({
                           <span className="check-legacy-name">
                             {legacyText(group)}
                           </span>
+                          {oldValues && (
+                            <span className="option-value">{oldValues}</span>
+                          )}
                         </button>
                         <span className="check-arrow" aria-hidden="true">
                           →
