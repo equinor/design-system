@@ -20,6 +20,10 @@
         {
           "name": "Export EDS inventories",
           "command": "dev-export-inventory"
+        },
+        {
+          "name": "Export scan of selected frame as fixture",
+          "command": "dev-export-fixture"
         }
       ]
     }

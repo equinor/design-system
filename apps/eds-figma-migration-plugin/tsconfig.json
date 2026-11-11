@@ -28,6 +28,7 @@
     "src/ui/**/*.tsx",
     "src/shared/**/*.ts",
     "src/mapping/**/*.ts",
+    "src/scan/**/*.ts",
     "test/**/*.ts",
     "*.config.ts"
   ]

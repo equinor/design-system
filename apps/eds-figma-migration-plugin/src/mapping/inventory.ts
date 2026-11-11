@@ -140,12 +140,4 @@ export function oldCollectionInfo(
   return oldCollections.get(collectionKey)
 }
 
-/**
- * Reads the collection key from a variable or collection id. A remote
- * collection id has the form `VariableCollectionId:<collection key>/<id>`;
- * a local one has no key in it, so this returns null.
- */
-export function collectionKeyFromId(collectionId: string): string | null {
-  const match = /^VariableCollectionId:([0-9a-f]{40})\//.exec(collectionId)
-  return match ? match[1] : null
-}
+export { collectionKeyFromId } from './ids'

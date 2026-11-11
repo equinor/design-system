@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Banner, Button } from '@equinor/eds-core-react/next'
-import type { DevExportFile } from '../../shared/messages'
+import type { Command, DevExportFile } from '../../shared/messages'
 import { send } from '../figma'
 import { copyText, downloadText } from '../output'
 
 type DevExportProps = {
   files: DevExportFile[]
   notes: string[]
+  command: Command
 }
 
 function ExportedFile({ file }: { file: DevExportFile }) {
@@ -57,8 +58,8 @@ function ExportedFile({ file }: { file: DevExportFile }) {
   )
 }
 
-/** The output of the developer command “Export EDS inventories”. */
-export function DevExport({ files, notes }: DevExportProps) {
+/** The output of the developer commands: the inventories, or the scan of a frame as a fixture. */
+export function DevExport({ files, notes, command }: DevExportProps) {
   return (
     <div className="stack">
       {notes.map((note) => (
@@ -71,7 +72,14 @@ export function DevExport({ files, notes }: DevExportProps) {
       ))}
       <Button
         variant="ghost"
-        onClick={() => send({ type: 'run-dev-export-inventory' })}
+        onClick={() =>
+          send({
+            type:
+              command === 'dev-export-fixture'
+                ? 'run-dev-export-fixture'
+                : 'run-dev-export-inventory',
+          })
+        }
       >
         Export again
       </Button>

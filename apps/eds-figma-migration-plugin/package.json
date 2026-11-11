@@ -8,6 +8,7 @@
     "build": "node scripts/clean.mjs && pnpm run build:plugin && pnpm run build:ui",
     "build:plugin": "vite build -c vite.plugin.config.ts",
     "build:ui": "vite build",
+    "build:fixture-script": "vite build -c vite.fixture.config.ts",
     "dev": "node scripts/clean.mjs && pnpm run \"/^watch:.*/\"",
     "watch:plugin": "vite build -c vite.plugin.config.ts --watch",
     "watch:ui": "vite build --watch",

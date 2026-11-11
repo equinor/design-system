@@ -16,5 +16,10 @@
     "skipLibCheck": true,
     "types": ["@figma/plugin-typings"]
   },
-  "include": ["src/plugin/**/*.ts", "src/shared/**/*.ts", "src/mapping/**/*.ts"]
+  "include": [
+    "src/plugin/**/*.ts",
+    "src/shared/**/*.ts",
+    "src/mapping/**/*.ts",
+    "src/scan/**/*.ts"
+  ]
 }

@@ -19,8 +19,8 @@ The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
 | --------------------------------------------- | -------------------------------- |
 | 1. Scaffold, manifest, build, inventory export | Done                             |
 | 2. Rules and tests                            | Done                             |
-| 3. Read-only scan                             | Next                             |
-| 4. Mapping view and overrides                 |                                  |
+| 3. Read-only scan                             | Done; to be tried in Figma       |
+| 4. Mapping view and overrides                 | Next                             |
 | 5. Apply                                      |                                  |
 | 6. Review and the remaining views             |                                  |
 | 7. Report and saved health                    |                                  |
@@ -57,6 +57,31 @@ The build has two parts:
 Always try the plugin on a duplicate of a frame. The test frame is
 **Migration test – old EDS variables** in the AI-Testing file.
 
+## Scan
+
+**Open** scans the current page or the whole file and changes nothing.
+
+- A file scan loads one page at a time with `page.loadAsync()`, so the view
+  stays on the page you are on, and shows its progress with a Cancel button.
+  The plugin sets `figma.skipInvisibleInstanceChildren` to false, because
+  with it on, hidden layers inside instances are skipped. A test on
+  2026-11-11 found the same 3,940 layers on a page after `loadAsync()` as
+  after switching to it, once that flag was off; with the flag on, 169 hidden
+  layers inside instances were missing.
+- The list shows each top-level frame, the frames inside sections grouped
+  under the section's name, and the loose layers of each page or section,
+  lowest health first. The arrow selects the frame and zooms to it.
+- Opening a frame lists every binding in it, with the old variable, the
+  proposal and the outcome, and the instances in it that still use old
+  variables. Clicking a row selects that layer.
+- Main components in the file are scanned as their own group, shown and
+  counted in the health only when you switch them on.
+
+Health is migrated ÷ (migrated + sure + check + none + in instance). Variables
+from other libraries and local variables are counted apart and left out.
+The plugin API gives no library name for a main component, so the window says
+whether it comes from a library or from this file.
+
 ## Developer command: export the inventories
 
 The mapping is checked against two generated files in
@@ -80,6 +105,17 @@ Developer → Export EDS inventories**:
 Copy or download each file, replace it in the repository, run the tests and
 raise `MAPPING_VERSION` in `src/mapping/version.ts`.
 
+## Developer command: export the test frame as a fixture
+
+Select the test frame and run **Developer → Export scan of selected frame as
+fixture**. Save the file as `test/fixtures/test-frame.json`. The pipeline test
+then runs the same classification as the plugin on what the scanner read, and
+checks it against the answer key; until the file is there, it is skipped.
+
+`pnpm run build:fixture-script` builds the same reader as a standalone script,
+`dist/collect-fixture.js`, for tools that run Plugin API code in a file. It
+takes the collection keys as arguments, so it carries no inventory.
+
 ## Tests
 
 ```bash
@@ -91,6 +127,9 @@ pnpm --filter @equinor/eds-figma-migration-plugin run test:run
   rules in a set of contexts and checks that each target exists in EDS
   Foundation with a matching type, that a sure proposal fits the property's
   scope, and that `background/backdrop` is never proposed.
+- `test/scan.test.ts`: classification, health and the fixture format.
+- `test/pipeline.test.ts`: the scan of the test frame against the answer key,
+  when the fixture is there.
 
 ## Fonts and network access
 
@@ -104,7 +143,8 @@ font; everything else works.
 ```
 manifest.json
 src/mapping/     rules, role guesses, inventories; pure, tested without Figma
-src/plugin/      the main thread (code.ts) and the developer commands
+src/scan/        classification, counting and the fixture format; pure
+src/plugin/      the main thread (code.ts), the scanner and the developer commands
 src/shared/      message types between the main thread and the window
 src/ui/          the plugin window, React and the EDS Beta components
 docs/            mapping-rules.md, the source for the rules
