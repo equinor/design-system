@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "test": "vitest",
     "test:run": "vitest run",
-    "types": "tsc -p tsconfig.json && tsc -p tsconfig.plugin.json"
+    "types": "tsc -p tsconfig.json && tsc -p tsconfig.plugin.json",
+    "prototype": "vite build -c prototype/vite.config.ts --mode window && vite build -c prototype/vite.config.ts --mode shell"
   },
   "dependencies": {
     "@equinor/eds-core-react": "workspace:^",

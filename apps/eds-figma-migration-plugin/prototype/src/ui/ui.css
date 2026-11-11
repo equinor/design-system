@@ -1,0 +1,1013 @@
+/* The plugin window. Every value comes from the semantic tokens in
+   @equinor/eds-tokens, so the window follows the colour scheme and density
+   set on <html>. Layout pieces that the Beta has no component for are built
+   here; see BETA-GAPS.md. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-header {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--eds-spacing-md);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  background-color: var(--eds-background-surface);
+}
+
+.app-title {
+  margin: 0;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--eds-spacing-md);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-md);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.muted {
+  margin: 0;
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.scope {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.scope legend {
+  margin-block-end: var(--eds-spacing-xs);
+  padding: 0;
+}
+
+.scope-options {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-md);
+}
+
+.selection-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scan-action {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+.export-file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.export-file-header {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.export-file-actions {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+}
+
+.export-json {
+  width: 100%;
+  padding: var(--eds-spacing-xs);
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+  resize: vertical;
+  background-color: var(--eds-background-input);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+code {
+  font-family: var(--eds-font-family-mono);
+}
+
+.stack-tight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.scan-progress {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+/* Health bar. One segment per category, in the non-interactive fills of the
+   status tones, so they follow the colour scheme. */
+.health-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.health-value {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-xl-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-xl-line-height);
+}
+
+.health-bar {
+  --_height: var(--eds-spacing-sm);
+
+  display: flex;
+  overflow: hidden;
+  gap: 1px;
+  block-size: var(--_height);
+  border-radius: var(--eds-corner-radius-pill);
+  background-color: var(--eds-background-non-interactive-neutral-muted);
+
+  &[data-size='small'] {
+    --_height: var(--eds-spacing-2xs);
+
+    inline-size: var(--eds-spacing-4xl);
+    flex-shrink: 0;
+  }
+}
+
+.health-segment,
+.health-swatch {
+  --_color: var(--eds-background-non-interactive-neutral-emphasis);
+
+  background-color: var(--_color);
+
+  &[data-category='migrated'] {
+    --_color: var(--eds-background-non-interactive-success-emphasis);
+  }
+
+  /* Ready is information, not done yet, so it is blue rather than green. */
+  &[data-category='sure'] {
+    --_color: var(--eds-background-non-interactive-info-emphasis);
+  }
+
+  &[data-category='check'] {
+    --_color: var(--eds-background-non-interactive-warning-emphasis);
+  }
+
+  &[data-category='none'] {
+    --_color: var(--eds-background-non-interactive-danger-emphasis);
+  }
+
+  &[data-category='inInstance'] {
+    --_color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
+}
+
+.health-segment {
+  flex-basis: 0;
+  min-inline-size: 2px;
+}
+
+.health-legend-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.legend-help {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  margin: 0;
+
+  & dt {
+    display: flex;
+    gap: var(--eds-spacing-2xs);
+    align-items: center;
+    font-weight: var(--eds-font-weight-medium);
+  }
+
+  & dd {
+    margin: 0;
+    color: var(--eds-text-secondary);
+  }
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.filter-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.health-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-3xs);
+    align-items: center;
+  }
+
+  & strong {
+    font-weight: var(--eds-font-weight-medium);
+  }
+}
+
+.health-swatch {
+  inline-size: var(--eds-spacing-xs);
+  block-size: var(--eds-spacing-xs);
+  border-radius: var(--eds-corner-radius-pill);
+}
+
+/* Frame list */
+.entry-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+}
+
+.group-title {
+  margin: 0 0 var(--eds-spacing-3xs);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.entry-list,
+.binding-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.entry-row,
+.binding-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  padding-block: var(--eds-spacing-3xs);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.binding-select {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  margin: 0;
+  padding: var(--eds-spacing-3xs) var(--eds-spacing-2xs);
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  background-color: var(--eds-background-interactive-neutral-muted-default);
+  border: 0;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover {
+    background-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:active {
+    background-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.entry-name,
+.binding-name {
+  overflow: hidden;
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entry-meta,
+.binding-path,
+.binding-property,
+.binding-reason {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.entry-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  padding-block: var(--eds-spacing-3xs);
+}
+
+.entry-health-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.entry-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-2xs);
+}
+
+/* The kind of a row or group: Page, Section, Frame, Layers or Component. */
+.kind-label {
+  font-size: var(--eds-typography-label-xs-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.entry-health {
+  min-inline-size: var(--eds-spacing-2xl);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inspector */
+.inspector-header {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inspector-title {
+  flex: 1;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+.binding-layer {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: baseline;
+  min-inline-size: 0;
+}
+
+.binding-swap {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  overflow-wrap: anywhere;
+}
+
+.binding-old {
+  color: var(--eds-text-secondary);
+}
+
+.binding-new {
+  font-weight: var(--eds-font-weight-medium);
+}
+
+.binding-reason {
+  font-style: italic;
+}
+
+/* Tabs. The Beta has no tabs component (BETA-GAPS.md). */
+.tab-list {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.tab {
+  --_border: transparent;
+
+  flex-shrink: 0;
+  margin: 0;
+  white-space: nowrap;
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-secondary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-block-end: 2px solid var(--_border);
+
+  &:hover {
+    color: var(--eds-text-primary);
+  }
+
+  &[aria-selected='true'] {
+    --_border: var(--eds-border-non-interactive-accent-emphasis);
+
+    color: var(--eds-text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.tab-panel {
+  padding-block-start: var(--eds-spacing-md);
+}
+
+/* Mapping view */
+.mapping-list,
+.mapping-rows {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mapping-list {
+  gap: var(--eds-spacing-sm);
+}
+
+.mapping-group {
+  padding: var(--eds-spacing-sm);
+  background-color: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.mapping-header,
+.mapping-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+.mapping-header {
+  padding-block-end: var(--eds-spacing-xs);
+}
+
+.mapping-old,
+.mapping-target {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+}
+
+.mapping-row {
+  padding-block: var(--eds-spacing-xs);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.binding-actions {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-2xs);
+  align-items: flex-end;
+}
+
+.override-note {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-on-default-info);
+}
+
+/* Target picker */
+.picker-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* The Beta Autocomplete keeps its input at its own width inside a wider
+   root, so the wrapper is stretched here (BETA-GAPS.md). */
+.picker-autocomplete {
+  inline-size: 100%;
+
+  & .anchor {
+    inline-size: 100%;
+  }
+}
+
+/* Accordion contents */
+.group-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  text-align: start;
+}
+
+.binding-row {
+  align-items: flex-start;
+}
+
+.binding-check {
+  flex-shrink: 0;
+  inline-size: var(--eds-spacing-xl);
+}
+
+.binding-list.nested {
+  margin-inline-start: var(--eds-spacing-xl);
+}
+
+.mapping-row-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.mapping-row-block .mapping-row {
+  align-items: flex-start;
+}
+
+/* Bulk bar: stays at the bottom of the window while there is a selection. */
+.app {
+  position: relative;
+}
+
+.bulk-bar {
+  position: sticky;
+  inset-block-end: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  background-color: var(--eds-background-floating);
+  border-block-start: 1px solid
+    var(--eds-border-non-interactive-neutral-default);
+  box-shadow: var(--eds-elevation-high);
+}
+
+.bulk-count {
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+/* Target picker, built like Figma's variable picker. */
+.target-picker {
+  inline-size: min(100%, 440px);
+}
+
+.variable-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.variable-options {
+  overflow-y: auto;
+  max-block-size: 320px;
+  padding-block: var(--eds-spacing-3xs);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.variable-group-title {
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm) var(--eds-spacing-3xs);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.variable-option {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-3xs) var(--eds-spacing-sm);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--eds-background-interactive-accent-selected-default);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.swatch,
+.option-preview {
+  flex-shrink: 0;
+  inline-size: var(--eds-spacing-lg);
+  block-size: var(--eds-spacing-lg);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.swatch {
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.option-label {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.option-value {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The actions at the top of an accordion panel: Select all and Go to. The
+   accordion header is a summary, which cannot hold buttons. */
+.panel-actions {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--eds-spacing-xs);
+}
+
+/* Frames and layers without EDS variables, hidden behind a button. */
+.empty-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  align-items: flex-start;
+  padding-block-start: var(--eds-spacing-xs);
+}
+
+/* Apply, Review and Revert under a health bar. */
+.apply-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+}
+
+.apply-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+}
+
+.run-failures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-xs);
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* The ⚠ review, one binding at a time. */
+.review-progress {
+  block-size: var(--eds-spacing-3xs);
+  overflow: hidden;
+  background: var(--eds-background-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  & span {
+    display: block;
+    block-size: 100%;
+    background: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+.review-reason {
+  margin: 0;
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+  background: var(--eds-background-non-interactive-warning-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+}
+
+.review-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding-inline-start: var(--eds-spacing-md);
+}
+
+/* The scope line under the health bar, with Export report beside it. */
+.scope-line {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.report-preview {
+  max-block-size: 12rem;
+  margin: var(--eds-spacing-xs) 0 0;
+  padding: var(--eds-spacing-xs);
+  overflow: auto;
+  font-family: ui-monospace, monospace;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  white-space: pre-wrap;
+  background: var(--eds-background-canvas);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.saved-frames {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-sm);
+    justify-content: space-between;
+  }
+}
+
+/* UX review F2: what each proposed target is for, under its name. */
+.option-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.option-meaning {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.review-details {
+  margin-block-start: var(--eds-spacing-2xs);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+
+  & summary {
+    cursor: pointer;
+  }
+}
+
+/* UX review F1: one line that says what is shown, with the filters behind it. */
+.filter-summary {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* UX review F6 and F7: the Mapping tab laid out like Figma's Check designs.
+   Sections by what the values are on, one row per legacy variable and
+   target. */
+.tab-count {
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.check-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  padding-block-start: var(--eds-spacing-sm);
+}
+
+.check-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--eds-spacing-3xs);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.check-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-row-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.check-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.check-legacy,
+.check-target {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  min-inline-size: 0;
+  padding: var(--eds-spacing-3xs) var(--eds-spacing-xs);
+  font: inherit;
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+  text-align: start;
+  cursor: pointer;
+  background: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover {
+    background: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.check-count {
+  min-inline-size: var(--eds-spacing-lg);
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.check-legacy-name,
+.check-target-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.check-arrow {
+  color: var(--eds-text-secondary);
+}
+
+.check-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  padding-inline-start: calc(var(--eds-spacing-lg) + var(--eds-spacing-2xs));
+}
+
+/* UX review F8: Apply in a footer that stays at the bottom of the window. */
+.apply-footer {
+  position: sticky;
+  inset-block-end: 0;
+  z-index: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  justify-content: space-between;
+  margin-inline: calc(var(--eds-spacing-md) * -1);
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  background: var(--eds-background-surface);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.apply-summary {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.most-work {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  padding-block-end: var(--eds-spacing-sm);
+}

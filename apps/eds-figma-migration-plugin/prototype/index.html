@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EDS Variable Migration – prototype for review</title>
+  </head>
+  <body>
+    <header class="shell-bar">
+      <strong>EDS Variable Migration</strong>
+      <span class="shell-tag">Prototype for review</span>
+      <label>
+        Figma theme
+        <select id="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+      <label>
+        Canvas selection
+        <select id="selection"></select>
+      </label>
+      <button type="button" id="reopen">Close and open the plugin</button>
+      <button type="button" id="reset">Reset the file</button>
+    </header>
+    <div class="shell-body">
+      <nav class="shell-pages" aria-label="Pages">
+        <h2>Pages</h2>
+        <ul id="pages"></ul>
+        <h2>Selected</h2>
+        <p id="selected-label"></p>
+      </nav>
+      <main class="shell-canvas" id="canvas" aria-label="Canvas">
+        <div class="canvas-page" id="canvas-page"></div>
+        <div class="canvas-frame" id="canvas-frame">
+          <span class="canvas-frame-name" id="frame-name">Well overview</span>
+          <img id="frame-image" alt="The Well overview frame" />
+          <div id="highlights"></div>
+        </div>
+        <p class="canvas-note" id="canvas-note"></p>
+      </main>
+      <aside class="shell-plugin" aria-label="Plugin window">
+        <div class="plugin-titlebar">
+          <span>EDS Variable Migration [WIP BETA]</span>
+          <span id="toast" role="status"></span>
+        </div>
+        <iframe id="plugin" title="EDS Variable Migration plugin window" src="window.html"></iframe>
+      </aside>
+    </div>
+    <script type="module" src="./src/shell/main.ts"></script>
+  </body>
+</html>

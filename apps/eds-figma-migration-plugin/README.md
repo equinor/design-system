@@ -299,4 +299,5 @@ src/ui/          the plugin window, React and the EDS Beta components
 docs/            mapping-rules.md, the source for the rules, and designer-guide.md
 test/            Vitest tests and fixtures
 BETA-GAPS.md     what was missing or awkward in the Beta while building this
+prototype/       an HTML prototype for UX review, the Check designs comparison and the UX review
 ```
