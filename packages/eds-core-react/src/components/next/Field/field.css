@@ -38,9 +38,11 @@
       flex-basis: 100%;
     }
 
-    /* Field.Label only: a direct child, or a child of a label row wrapper
-       such as TextField's header. A plain descendant selector would also
-       style the .label of a Tooltip, Button or Chip inside the Field.
+    /* Field.Label: a direct child, or a child of a label row wrapper such
+       as TextField's header. The child combinators keep out a .label nested
+       deeper, such as a Tooltip's in the label row or a Button's inside an
+       Input. Field does not take a Button or Chip as a direct child, whose
+       .label would match the second selector.
        Text is not trimmed (ADR-0029), so the line height sets the height.
        The label stays a block, not flex, so a label with inline elements
        keeps the spaces between them. */
@@ -90,6 +92,8 @@
       color: var(--_eds-field-indicator-color);
     }
 
+    /* label-sm, not body-sm, as in the Figma TextField: the description is
+       12/16 and the helper message below is body-sm 12/20. */
     & .description {
       margin: 0;
       font-size: var(--eds-typography-label-sm-font-size);
