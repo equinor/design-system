@@ -169,6 +169,9 @@ export const ControlledAndUncontrolled: StoryFn<RadioProps> = () => {
         gap: '48px',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
+        // Room for the address field in every density, so the frame keeps
+        // its height when Delivery is chosen
+        minHeight: '16rem',
       }}
     >
       <fieldset style={{ width: '220px' }}>
