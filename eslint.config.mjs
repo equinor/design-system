@@ -87,6 +87,12 @@ export default tseslint.config(
         ecmaFeatures: { jsx: true },
         ecmaVersion: 2019,
         project: [
+          // The Figma plugin's main thread needs the Figma typings, which
+          // clash with lib.dom, so its files must be typed by the plugin's own
+          // projects. They come first because the first project that includes
+          // a file is the one used.
+          './apps/eds-figma-migration-plugin/tsconfig.plugin.json',
+          './apps/eds-figma-migration-plugin/tsconfig.json',
           './tsconfig.eslint.json',
           './scripts/*/tsconfig.json',
           './packages/*/tsconfig.json',

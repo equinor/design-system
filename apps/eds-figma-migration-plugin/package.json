@@ -1,0 +1,38 @@
+{
+  "name": "@equinor/eds-figma-migration-plugin",
+  "description": "Figma plugin that swaps variables from the deprecated EDS libraries for EDS Foundation [EDS Beta] variables and text styles",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/clean.mjs && pnpm run build:plugin && pnpm run build:ui",
+    "build:plugin": "vite build -c vite.plugin.config.ts",
+    "build:ui": "vite build",
+    "dev": "node scripts/clean.mjs && pnpm run \"/^watch:.*/\"",
+    "watch:plugin": "vite build -c vite.plugin.config.ts --watch",
+    "watch:ui": "vite build --watch",
+    "lint": "eslint .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "types": "tsc -p tsconfig.json && tsc -p tsconfig.plugin.json"
+  },
+  "dependencies": {
+    "@equinor/eds-core-react": "workspace:^",
+    "@equinor/eds-icons": "workspace:^",
+    "@equinor/eds-tokens": "workspace:^",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.142.0",
+    "@types/node": "^25.5.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "eslint": "^9.38.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5",
+    "vite-plugin-singlefile": "^2.3.4",
+    "vitest": "^4.1.11"
+  }
+}

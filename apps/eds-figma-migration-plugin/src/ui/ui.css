@@ -1,0 +1,138 @@
+/* The plugin window. Every value comes from the semantic tokens in
+   @equinor/eds-tokens, so the window follows the colour scheme and density
+   set on <html>. Layout pieces that the Beta has no component for are built
+   here; see BETA-GAPS.md. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-header {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--eds-spacing-md);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  background-color: var(--eds-background-surface);
+}
+
+.app-title {
+  margin: 0;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--eds-spacing-md);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-md);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.muted {
+  margin: 0;
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.scope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-md);
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.scope legend {
+  float: inline-start;
+  margin-inline-end: var(--eds-spacing-sm);
+}
+
+.scope-options {
+  display: flex;
+  flex: 1;
+  gap: var(--eds-spacing-md);
+}
+
+.export-file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.export-file-header {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.export-file-actions {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+}
+
+.export-json {
+  width: 100%;
+  padding: var(--eds-spacing-xs);
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+  resize: vertical;
+  background-color: var(--eds-background-input);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+code {
+  font-family: var(--eds-font-family-mono);
+}

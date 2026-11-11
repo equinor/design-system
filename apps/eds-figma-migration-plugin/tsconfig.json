@@ -1,0 +1,34 @@
+{
+  // The plugin window (React UI), the shared mapping code, the tests and the
+  // build configs. The plugin main thread has its own project,
+  // tsconfig.plugin.json, because the Figma typings clash with lib.dom.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client", "node"],
+    "paths": {
+      // `/next` is left out of eds-core-react's exports map on purpose (#4395)
+      // and only added for beta releases, so point the types at the build.
+      // vite.config.ts resolves the code the same way.
+      "@equinor/eds-core-react/next": [
+        "../../packages/eds-core-react/dist/types/index.next.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/ui/**/*.ts",
+    "src/ui/**/*.tsx",
+    "src/shared/**/*.ts",
+    "src/mapping/**/*.ts",
+    "test/**/*.ts",
+    "*.config.ts"
+  ]
+}

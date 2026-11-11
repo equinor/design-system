@@ -1,0 +1,36 @@
+{
+  "$comment": "Keywords the plugin uses to guess the role of a layer from its own name, its variant values and the names of its ancestors. Matching is case-insensitive and on whole words. Add a keyword to a list to change the guesses; no code changes are needed. Every guess is shown as a check item (⚠) that a designer confirms.",
+  "interactive": [
+    "Button",
+    "Chip",
+    "Link",
+    "Menu item",
+    "Tab",
+    "Row",
+    "Input",
+    "Field",
+    "Checkbox",
+    "Radio",
+    "Switch"
+  ],
+  "nonInteractive": [
+    "Banner",
+    "Badge",
+    "Status",
+    "Tag",
+    "Card",
+    "Panel",
+    "Header",
+    "Divider"
+  ],
+  "selected": ["selected", "current", "checked", "active item"],
+  "states": {
+    "hover": ["hover", "hovered"],
+    "pressed": ["pressed", "active"],
+    "focus": ["focus", "focused"],
+    "disabled": ["disabled"]
+  },
+  "outlineControls": ["Button"],
+  "fieldControls": ["Input", "Field", "Checkbox", "Radio", "Switch"],
+  "labelControls": ["Button", "Chip", "Menu item", "Tab", "Cell"]
+}

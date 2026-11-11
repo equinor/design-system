@@ -1,0 +1,27 @@
+{
+  "name": "EDS variable migration",
+  "id": "eds-variable-migration-dev",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "permissions": ["teamlibrary"],
+  "networkAccess": {
+    "allowedDomains": ["https://cdn.eds.equinor.com"],
+    "reasoning": "Loads the Equinor and Inter fonts that the EDS components in the plugin window are set in. The plugin sends no data anywhere."
+  },
+  "menu": [
+    { "name": "Open", "command": "open" },
+    { "separator": true },
+    {
+      "name": "Developer",
+      "menu": [
+        {
+          "name": "Export EDS inventories",
+          "command": "dev-export-inventory"
+        }
+      ]
+    }
+  ]
+}
