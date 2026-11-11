@@ -117,7 +117,7 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
     for (const record of found) expect(record.candidates?.[0]).toBe(proposal)
   })
 
-  it('reports only the icon size and the backdrop as having no equivalent', () => {
+  it('reports only the backdrop as having no equivalent', () => {
     const none = records
       .filter(
         (record) =>
@@ -125,11 +125,17 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
       )
       .map((record) => `${record.nodeName}: ${propertyLabel(record.property)}`)
       .sort()
-    expect(none).toEqual([
-      'Icon / menu: Height',
-      'Icon / menu: Width',
-      'Overlay (dark scheme): Fill',
-    ])
+    expect(none).toEqual(['Overlay (dark scheme): Fill'])
+  })
+
+  it('proposes the icon size as the spacing token with the same px', () => {
+    const icon = records.filter((record) => record.nodeName === 'Icon / menu')
+    const sizes = icon.filter((record) => record.group === 'size')
+    expect(sizes).toHaveLength(2)
+    for (const record of sizes) {
+      expect(record.category).toBe('check')
+      expect(record.candidates?.[0]).toBe('spacing/xl')
+    }
   })
 
   it('holds the Appearance modes until the bindings below that need a check are reviewed', () => {

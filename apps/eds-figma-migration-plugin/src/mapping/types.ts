@@ -27,6 +27,8 @@ export type OldVariable = {
    * missing when the variable aliases nothing or the chain could not be read.
    */
   chain?: ChainStep[]
+  /** The number the variable resolves to on the node, in px, when it was read */
+  value?: number
   /** The value the variable resolves to on the node, when it was read. */
   resolvedValue?: number | string | boolean | null
 }

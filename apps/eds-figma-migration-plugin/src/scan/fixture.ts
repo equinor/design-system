@@ -7,13 +7,17 @@
 import type { ChainStep, RoleContext, TypographyField } from '../mapping/types'
 import type { PropertyRef, RawTextStyle, RawUnit, RawVariable } from './types'
 
-type PackedVariable = Omit<RawVariable, 'chain' | 'resolvedValue' | 'value'>
+type PackedVariable = Omit<
+  RawVariable,
+  'chain' | 'resolvedValue' | 'value' | 'colour'
+>
 
 type PackedRef = {
   variable: string
   chain?: ChainStep[]
   resolvedValue?: number | string | boolean | null
   value?: number
+  colour?: string
 }
 
 type PackedNode = {
@@ -81,12 +85,13 @@ export function packFixture(
   const owners: { id: string; context: Omit<RoleContext, 'fillUnder'> }[] = []
 
   const ref = (variable: RawVariable): PackedRef => {
-    const { chain, resolvedValue, value, ...rest } = variable
+    const { chain, resolvedValue, value, colour, ...rest } = variable
     variables[variable.id] ??= rest
     const packed: PackedRef = { variable: variable.id }
     if (chain && chain.length > 0) packed.chain = chain
     if (resolvedValue !== undefined) packed.resolvedValue = resolvedValue
     if (value !== undefined) packed.value = value
+    if (colour !== undefined) packed.colour = colour
     return packed
   }
 
@@ -178,6 +183,7 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
     if (packed.resolvedValue !== undefined)
       raw.resolvedValue = packed.resolvedValue
     if (packed.value !== undefined) raw.value = packed.value
+    if (packed.colour !== undefined) raw.colour = packed.colour
     return raw
   }
 

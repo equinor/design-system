@@ -2344,7 +2344,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:22a34d1fc051438b283b74837d1de8d2d36b9748/5336:13"
+        "variable": "VariableID:22a34d1fc051438b283b74837d1de8d2d36b9748/5336:13",
+        "colour": "#f5f5f5"
       }
     },
     {
@@ -2526,7 +2527,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0",
+        "colour": "#ffffff"
       }
     },
     {
@@ -2540,7 +2542,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -2596,7 +2599,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -2610,7 +2614,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -2658,7 +2663,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:939f14349ed713d8a3d171cda580e6a5fa6882e2/7028:83"
+        "variable": "VariableID:939f14349ed713d8a3d171cda580e6a5fa6882e2/7028:83",
+        "colour": "#0070a9"
       }
     },
     {
@@ -2810,7 +2816,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9"
+        "variable": "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9",
+        "colour": "#cae6fa"
       }
     },
     {
@@ -2824,7 +2831,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:f378d8000ad4c46980c514d2f4a7ed275b1c6f27/7028:74"
+        "variable": "VariableID:f378d8000ad4c46980c514d2f4a7ed275b1c6f27/7028:74",
+        "colour": "#121e27"
       }
     },
     {
@@ -3066,7 +3074,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0",
+        "colour": "#ffffff"
       }
     },
     {
@@ -3080,7 +3089,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:57c492802ed5f89bef9bc61e15c3b7c278ab9d7e/7028:0"
+        "variable": "VariableID:57c492802ed5f89bef9bc61e15c3b7c278ab9d7e/7028:0",
+        "colour": "#aeaeae"
       }
     },
     {
@@ -3094,7 +3104,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -3138,7 +3149,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2",
+        "colour": "#585858"
       }
     },
     {
@@ -3456,7 +3468,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6"
+        "variable": "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6",
+        "colour": "#cfeacc"
       }
     },
     {
@@ -3470,7 +3483,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:da51f68a85f0294b3ebd862c4f632c7f75c32a55/7028:71"
+        "variable": "VariableID:da51f68a85f0294b3ebd862c4f632c7f75c32a55/7028:71",
+        "colour": "#142114"
       }
     },
     {
@@ -3740,7 +3754,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0",
+        "colour": "#ffffff"
       }
     },
     {
@@ -3754,7 +3769,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -3768,7 +3784,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -3826,7 +3843,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2",
+        "colour": "#585858"
       }
     },
     {
@@ -3978,7 +3996,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94"
+        "variable": "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94",
+        "colour": "#f5f5f5"
       }
     },
     {
@@ -3992,7 +4011,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:1229fce177c22e271e3562932889c9846a47f4ce/7028:84"
+        "variable": "VariableID:1229fce177c22e271e3562932889c9846a47f4ce/7028:84",
+        "colour": "#6fb6e9"
       }
     },
     {
@@ -4006,7 +4026,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -4046,7 +4067,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:ebf56aa57b96cad500b66c3425f91a0e6103e348/7028:80"
+        "variable": "VariableID:ebf56aa57b96cad500b66c3425f91a0e6103e348/7028:80",
+        "colour": "#2e1414"
       }
     },
     {
@@ -4212,7 +4234,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0"
+        "variable": "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0",
+        "colour": "#fbdac1"
       }
     },
     {
@@ -4226,7 +4249,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1"
+        "variable": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1",
+        "colour": "#f6caaa"
       }
     },
     {
@@ -4240,7 +4264,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:1d541b5784a730485b7ea5cc448b710dfdc545f1/9152:3"
+        "variable": "VariableID:1d541b5784a730485b7ea5cc448b710dfdc545f1/9152:3",
+        "colour": "#27190e"
       }
     },
     {
@@ -4468,7 +4493,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0",
+        "colour": "#ffffff"
       }
     },
     {
@@ -4482,7 +4508,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -4496,7 +4523,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -4694,7 +4722,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15"
+        "variable": "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15",
+        "colour": "#206f77"
       }
     },
     {
@@ -4708,7 +4737,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73"
+        "variable": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73",
+        "colour": "#ffffff"
       }
     },
     {
@@ -4878,7 +4908,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16"
+        "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16",
+        "colour": "#205c62"
       }
     },
     {
@@ -4892,7 +4923,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73"
+        "variable": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73",
+        "colour": "#ffffff"
       }
     },
     {
@@ -4936,7 +4968,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:d5cd9e5205c6becb08a03c5dcf9550c1f3d88531/7028:69"
+        "variable": "VariableID:d5cd9e5205c6becb08a03c5dcf9550c1f3d88531/7028:69",
+        "colour": "#cae4e7"
       }
     },
     {
@@ -5102,7 +5135,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:652f6b1eab150b8b039e928ed3e59549dfde2608/7028:53"
+        "variable": "VariableID:652f6b1eab150b8b039e928ed3e59549dfde2608/7028:53",
+        "colour": "#7cbac1"
       }
     },
     {
@@ -5116,7 +5150,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68"
+        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68",
+        "colour": "#141f20"
       }
     },
     {
@@ -5286,7 +5321,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4"
+        "variable": "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4",
+        "colour": "#bbdbdf"
       }
     },
     {
@@ -5300,7 +5336,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68"
+        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68",
+        "colour": "#141f20"
       }
     },
     {
@@ -5484,7 +5521,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6"
+        "variable": "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6",
+        "colour": "#bc002a"
       }
     },
     {
@@ -5498,7 +5536,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:5fb92d4de90b2d65e03e6a30ea6316f3a8d2ae8e/9162:3"
+        "variable": "VariableID:5fb92d4de90b2d65e03e6a30ea6316f3a8d2ae8e/9162:3",
+        "colour": "#ffffff"
       }
     },
     {
@@ -5668,7 +5707,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5"
+        "variable": "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5",
+        "colour": "#e1e1e1"
       }
     },
     {
@@ -5682,7 +5722,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:b67c014afe14f5588764cd4105f62df2f181055d/7526:1"
+        "variable": "VariableID:b67c014afe14f5588764cd4105f62df2f181055d/7526:1",
+        "colour": "#aeaeae"
       }
     },
     {
@@ -5696,7 +5737,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:1ef95d5598461ed8e55f8c903192bf9c0bce611c/7526:3"
+        "variable": "VariableID:1ef95d5598461ed8e55f8c903192bf9c0bce611c/7526:3",
+        "colour": "#aeaeae"
       }
     },
     {
@@ -5824,7 +5866,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0",
+        "colour": "#ffffff"
       }
     },
     {
@@ -5838,7 +5881,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -5922,7 +5966,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -5936,7 +5981,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2",
+        "colour": "#585858"
       }
     },
     {
@@ -5976,7 +6022,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2",
+        "colour": "#585858"
       }
     },
     {
@@ -6016,7 +6063,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2",
+        "colour": "#585858"
       }
     },
     {
@@ -6126,7 +6174,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -6140,7 +6189,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6180,7 +6230,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6220,7 +6271,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6330,7 +6382,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
+        "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -6344,7 +6397,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -6358,7 +6412,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6398,7 +6453,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6438,7 +6494,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6548,7 +6605,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#d4d4d4"
       }
     },
     {
@@ -6562,7 +6620,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6602,7 +6661,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6642,7 +6702,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#1d1d1d"
       }
     },
     {
@@ -6752,7 +6813,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:64821b485e1b2e273604d09a7786ae5bc8363efc/7028:82"
+        "variable": "VariableID:64821b485e1b2e273604d09a7786ae5bc8363efc/7028:82",
+        "colour": "#738696"
       }
     },
     {
@@ -6850,7 +6912,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1"
+        "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1",
+        "colour": "#202223"
       }
     },
     {
@@ -6864,7 +6927,8 @@
       "unit": "variable",
       "kind": "stroke",
       "ref": {
-        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+        "colour": "#525c65"
       }
     },
     {
@@ -6934,7 +6998,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#f5fdff"
       }
     },
     {
@@ -7030,7 +7095,8 @@
       "unit": "variable",
       "kind": "fill",
       "ref": {
-        "variable": "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5"
+        "variable": "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5",
+        "colour": "#41878e"
       }
     },
     {
@@ -7044,7 +7110,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68"
+        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68",
+        "colour": "#e6ffff"
       }
     },
     {
@@ -7140,7 +7207,8 @@
       "unit": "variable",
       "kind": "textFill",
       "ref": {
-        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+        "colour": "#f5fdff"
       }
     },
     {

@@ -102,6 +102,8 @@ export type MappingBinding = {
   path: string[]
   /** The number the legacy variable resolves to on the layer, in px */
   oldValue?: number
+  /** The colour the legacy variable resolves to on the layer */
+  oldColour?: string
   /** The density the layer has after the migration */
   density?: Density
   property: BindingRecord['property']
@@ -173,6 +175,9 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
       entryId: record.entryId,
       path: record.path,
       ...(record.oldValue !== undefined ? { oldValue: record.oldValue } : {}),
+      ...(record.oldColour !== undefined
+        ? { oldColour: record.oldColour }
+        : {}),
       ...(record.density ? { density: record.density } : {}),
       property: record.property,
       kind: record.kind,

@@ -119,7 +119,7 @@ of a page or the file it opens on **Frames**, where the work is.
   Type, Spacing, Size, Radius, Modes) with counts, sections by what the values
   are on (Text colour, Fill, Stroke, Padding and gaps, Text style, Mode, …),
   and one row per legacy variable and target: the number of layers, the
-  legacy variable, and the target with its swatch or value. Both sides show their numbers in px: the legacy variable as it resolves on each layer, and the target in the density the layer will have (Spacious → comfortable, Comfortable → compact), so a change in size shows before it is applied. Rows are compact, one line each, with the status as a dot in the colours of the health bar (and ⚠ for Needs check); the full names are in the tooltip. Typography reads
+  legacy variable, and the target with its swatch or value. The legacy side shows the colour a legacy variable resolves to on its layers as a swatch, beside the new one. A row that needs a check says why in plain words under it. Both sides show their numbers in px: the legacy variable as it resolves on each layer, and the target in the density the layer will have (Spacious → comfortable, Comfortable → compact), so a change in size shows before it is applied. Rows are compact, one line each, with the status as a dot in the colours of the health bar (and ⚠ for Needs check); the full names are in the tooltip. Typography reads
   "UI body · sm · squished", and a mode reads "Density: Comfortable →
   density: compact". A click on the legacy variable selects its layers, a
   click on the target opens the picker and changes every value in the row,
@@ -172,6 +172,8 @@ change, after a confirmation that says what stays:
   through it any more, including inside instances. A binding only depends on
   the nearest legacy mode above it of a collection in its own library, colour
   or spacing and typography.
+
+An icon size (`sizing/icon/*` and the like) is proposed as the spacing token with the same px in the layer's density (`sizing/icon/lg`, 24px → `spacing/xl`), as a Needs check, since EDS sizes icons with spacing tokens. A variable on a stroke weight becomes the number it resolves to, without a variable, since EDS has no stroke width variable yet; Revert frame binds the legacy variable again.
 
 Bindings that need a check are not applied until a designer has chosen a
 target for them. Nothing inside an instance changes. Before each change the

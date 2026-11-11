@@ -4,4 +4,4 @@
  * rules.ts, role-hints.json or the inventory changes, so a log entry can be
  * traced back to the rules that made it.
  */
-export const MAPPING_VERSION = '2026-11-11.2'
+export const MAPPING_VERSION = '2026-11-11.3'

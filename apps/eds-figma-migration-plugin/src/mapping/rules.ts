@@ -9,13 +9,16 @@
  *   is the proposal, and a designer confirms it before it is applied
  * - none: no equivalent; the old binding stays and is listed
  */
+import { targetDensity } from './density'
 import {
   getNewTextStyle,
   getNewVariable,
   NEW_TEXT_STYLES,
+  NEW_VARIABLES,
   OLD,
   oldCollectionInfo,
 } from './inventory'
+import { literalTarget, literalValue } from './literal'
 import { guessRole, isDivider, nearNamesMatch, roleNameMatches } from './role'
 import type { RoleGuess } from './role'
 import type {
@@ -589,15 +592,10 @@ function densityName(variable: OldVariable): string | undefined {
 }
 
 const NO_EQUIVALENT: [RegExp, string][] = [
-  [/^sizing\/icon\//, 'There is no icon size variable'],
-  [/^Icon\//, 'There is no icon size variable'],
-  [/Icon size$|icon-size$/, 'There is no icon size variable'],
-  [/Icon (container|width)/i, 'There is no icon size variable'],
   [
     /container-padding|container padding/i,
     'There is no icon container padding',
   ],
-  [/^typography\/icon-/, 'There is no icon size variable'],
   [/^Typography\/Baseline adjust/, 'The Beta has no baseline trim'],
   [/^baseline\//, 'The Beta has no baseline trim'],
   [/(^|\/)padding-(centred|baselined)$/, 'The Beta has no baseline trim'],
@@ -616,6 +614,74 @@ const NO_EQUIVALENT: [RegExp, string][] = [
     'There is no stroke width variable',
   ],
 ]
+
+/** Variables that size an icon. */
+const ICON_SIZE = [
+  /^sizing\/icon\//,
+  /^Icon\/Size$/,
+  /Icon size$|icon-size$/,
+  /Icon (container )?width/i,
+  /Icon container size/i,
+  /^typography\/icon-/,
+]
+
+function isIconSize(name: string | undefined): boolean {
+  return name !== undefined && ICON_SIZE.some((pattern) => pattern.test(name))
+}
+
+const SPACING_STEP = /^spacing\/[a-z0-9]+$/
+
+/**
+ * An icon size becomes the spacing token with the same number in the density
+ * the layer will have, since EDS sizes icons with spacing tokens (spacing
+ * usage: "Size an icon by binding its width and height to a spacing token.
+ * Button uses spacing.lg, and an Icon without size is spacing.xl"). It is a
+ * proposal for a designer to confirm, because the token was made for space,
+ * not for icons. Without an exact match, the nearest steps are offered.
+ */
+function resolveIconSize(
+  variable: OldVariable,
+  context: RoleContext,
+): Resolution {
+  const value = variable.value ?? variable.resolvedValue
+  if (typeof value !== 'number') {
+    return none(
+      `${variable.name}: the size could not be read, so no spacing token can be matched to it`,
+      'size/icon',
+    )
+  }
+  const density = targetDensity(context.modes)
+  const steps = NEW_VARIABLES.filter((candidate) =>
+    SPACING_STEP.test(candidate.name),
+  )
+    .map((candidate) => ({
+      name: candidate.name,
+      size: candidate.values?.[density],
+    }))
+    .filter(
+      (step): step is { name: string; size: number } =>
+        typeof step.size === 'number',
+    )
+  const exact = steps.find((step) => step.size === value)
+  const why = `${variable.name} is ${value}px. Icons are sized with spacing tokens in EDS`
+  if (exact) {
+    return check(
+      [exact.name],
+      `${why}, and ${exact.name} is ${value}px in ${density}`,
+      'size/icon',
+    )
+  }
+  const nearest = [...steps]
+    .sort((a, b) => Math.abs(a.size - value) - Math.abs(b.size - value))
+    .slice(0, 2)
+  return check(
+    nearest.map((step) => step.name),
+    `${why}, but no step is ${value}px in ${density}; the nearest are ${nearest
+      .map((step) => `${step.name} (${step.size}px)`)
+      .join(' and ')}`,
+    'size/icon',
+  )
+}
 
 function noEquivalent(name: string): string | undefined {
   return NO_EQUIVALENT.find(([pattern]) => pattern.test(name))?.[1]
@@ -771,8 +837,17 @@ function resolveNumber(
   context: RoleContext,
 ): Resolution {
   if (kind === 'strokeWeight') {
-    return none(
-      `${variable.name}: there is no stroke width variable`,
+    // EDS has no stroke width variable yet, so the width becomes a number.
+    const value = variable.value ?? variable.resolvedValue
+    if (typeof value !== 'number') {
+      return none(
+        `${variable.name}: there is no stroke width variable, and the width could not be read`,
+        'number/stroke-weight',
+      )
+    }
+    return sure(
+      literalTarget(value),
+      `${variable.name} is ${value}px. EDS has no stroke width variable yet, so the width is set as a number`,
       'number/stroke-weight',
     )
   }
@@ -788,6 +863,9 @@ function resolveNumber(
     return none(`${variable.name}: ${ownReason}`, 'spacing/no-equivalent')
 
   const density = densityName(variable)
+  if (isIconSize(variable.name) || isIconSize(density)) {
+    return resolveIconSize(variable, context)
+  }
   const via =
     density && density !== variable.name
       ? ` (${variable.name} points to ${density} under the modes in force)`
@@ -832,7 +910,11 @@ export function resolveVariable(input: VariableInput): Resolution {
     )
   }
   return fitScope(
-    finalise(resolution, (name) => getNewVariable(name) !== undefined),
+    finalise(
+      resolution,
+      (name) =>
+        getNewVariable(name) !== undefined || literalValue(name) !== undefined,
+    ),
     kind,
     context.nodeType,
   )
@@ -887,6 +969,7 @@ function fitScope(
 ): Resolution {
   const proposal = resolution.candidates[0]
   if (resolution.outcome !== 'sure' || !proposal) return resolution
+  if (literalValue(proposal) !== undefined) return resolution
   const scopes = getNewVariable(proposal)?.scopes ?? []
   const accepted = acceptedScopes(kind, nodeType)
   if (scopes.some((scope) => accepted.includes(scope))) return resolution

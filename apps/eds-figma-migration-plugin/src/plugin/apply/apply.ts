@@ -5,6 +5,7 @@
  * run is one step in Figma's undo history.
  */
 import { NEW } from '../../mapping/inventory'
+import { literalValue } from '../../mapping/literal'
 import { MAPPING_VERSION } from '../../mapping/version'
 import {
   modesToKeep,
@@ -119,6 +120,23 @@ async function applyBinding(
         font: record.oldFont,
       },
       new: { type: 'textStyle', key: style.key, name: style.name },
+    }
+  }
+
+  // A number without a variable, such as a border width: unbind the legacy
+  // variable and set the number it resolved to.
+  const literal = literalValue(target)
+  if (literal !== undefined) {
+    if (property.type !== 'field') throw new LayerChanged()
+    const bindable = node as Bindable & Record<string, unknown>
+    const bound = (bindable.boundVariables ?? {}) as Record<string, unknown>
+    expectOld(record, aliasId(bound[property.field]))
+    bindable.setBoundVariable(property.field as VariableBindableNodeField, null)
+    bindable[property.field] = literal
+    return {
+      ...entry,
+      old: oldVariableLog(record),
+      new: { type: 'value', value: literal },
     }
   }
 

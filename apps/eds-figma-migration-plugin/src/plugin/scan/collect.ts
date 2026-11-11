@@ -319,6 +319,14 @@ export class Collector {
       collectionName: collection?.name ?? '',
     }
     const isLegacy = this.options.oldKeys.has(collectionKey)
+    if (isLegacy && variable.resolvedType === 'COLOR') {
+      try {
+        const resolved = variable.resolveForConsumer(node).value
+        if (isRgba(resolved)) raw.colour = toHex(resolved)
+      } catch {
+        // The colour could not be resolved for this layer; it is left out.
+      }
+    }
     let value: number | undefined
     if (isLegacy && variable.resolvedType === 'FLOAT') {
       try {
@@ -641,6 +649,26 @@ export class Collector {
       : undefined
     return variable ? { variable, context } : { context }
   }
+}
+
+function isRgba(value: unknown): value is RGBA {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'r' in value &&
+    'g' in value &&
+    'b' in value
+  )
+}
+
+/** #rrggbb, or #rrggbbaa when the colour is not opaque. */
+function toHex({ r, g, b, a }: RGBA): string {
+  const byte = (channel: number) =>
+    Math.round(Math.max(0, Math.min(1, channel)) * 255)
+      .toString(16)
+      .padStart(2, '0')
+  const alpha = a === undefined || a >= 1 ? '' : byte(a)
+  return `#${byte(r)}${byte(g)}${byte(b)}${alpha}`
 }
 
 /** A text is on one line when it has no line break and is not taller than about one line. */

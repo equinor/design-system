@@ -2,6 +2,7 @@
  * The report of a scan, as Markdown for people and CSV for a spreadsheet.
  * Pure, so it is tested without Figma.
  */
+import { literalValue } from '../mapping/literal'
 import { CLEAR_MODE } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
 import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
@@ -21,6 +22,8 @@ export type Report = { markdown: string; csv: string; baseName: string }
 
 function targetText(target: string | null): string {
   if (target === null) return 'Leave as it is'
+  const literal = literalValue(target)
+  if (literal !== undefined) return `${literal}px, without a variable`
   if (target === CLEAR_MODE) return 'Clear the legacy mode'
   return target
 }

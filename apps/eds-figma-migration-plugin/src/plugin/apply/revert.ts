@@ -101,6 +101,26 @@ async function revertEntry(
     return
   }
 
+  if (entry.old.type === 'variable' && entry.new.type === 'value') {
+    // A number set without a variable: bind the legacy variable again, as
+    // long as nobody has bound another variable since.
+    if (property.type !== 'field') throw new LayerChanged()
+    const bindable = node as SceneNode & {
+      boundVariables?: Record<string, unknown>
+      setBoundVariable: (
+        field: VariableBindableNodeField,
+        v: Variable | null,
+      ) => void
+    }
+    if (aliasId((bindable.boundVariables ?? {})[property.field])) {
+      throw new LayerChanged()
+    }
+    bindable.setBoundVariable(
+      property.field as VariableBindableNodeField,
+      await legacyVariable(entry.old.key),
+    )
+    return
+  }
   if (entry.old.type !== 'variable' || entry.new.type !== 'variable') {
     throw new LayerChanged()
   }

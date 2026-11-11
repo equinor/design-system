@@ -46,11 +46,19 @@ export type LoggedNewMode = {
   previousModeId: string | null
 }
 
+/** A number set without a variable, such as a border width */
+export type LoggedValue = { type: 'value'; value: number }
+
 export type LogEntry = {
   property: PropertyRef
   old: LoggedVariable | LoggedTypography | LoggedOldMode
   /** What was bound or set instead; none when a legacy mode was only cleared */
-  new: LoggedVariable | LoggedTextStyle | LoggedNewMode | { type: 'none' }
+  new:
+    | LoggedVariable
+    | LoggedTextStyle
+    | LoggedNewMode
+    | LoggedValue
+    | { type: 'none' }
   outcome: ChangeOutcome
   mappingVersion: string
   /** ISO time */

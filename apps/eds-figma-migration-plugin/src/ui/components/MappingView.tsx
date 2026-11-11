@@ -14,6 +14,7 @@ import type { Category, PropertyGroup } from '../../scan/types'
 import { CLEAR_MODE } from '../../scan/classify'
 import { CATEGORY_LABELS, propertyLabel, values } from '../labels'
 import { pathBelow } from '../paths'
+import { plainReason } from '../plain'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
 import { sourceLabel, targetLabel } from '../targets'
@@ -370,6 +371,26 @@ export function MappingView({
                       .map((binding) => binding.oldValue)
                       .filter((value): value is number => value !== undefined),
                   )
+                  // The legacy colours as they resolve on the layers, as in
+                  // Check designs, so the old and the new can be compared.
+                  const oldColours = [
+                    ...new Set(
+                      row.bindings
+                        .map((binding) => binding.oldColour)
+                        .filter((colour): colour is string => !!colour),
+                    ),
+                  ].slice(0, 2)
+                  // A Needs check row says why, in plain words, while any
+                  // of its values is undecided.
+                  const undecided = row.bindings.some(
+                    (binding) =>
+                      bindingOutcome(row, binding, overrides).source ===
+                      'proposal',
+                  )
+                  const reason =
+                    row.outcome === 'check' && undecided && row.reason
+                      ? (plainReason(row.reason) ?? row.reason)
+                      : undefined
                   const state = groupState(
                     selection,
                     row.bindings.map((binding) => binding.id),
@@ -403,6 +424,17 @@ export function MappingView({
                         >
                           {showCounts && (
                             <span className="check-count">{row.count}</span>
+                          )}
+                          {oldColours.length > 0 && (
+                            <span className="check-swatches" aria-hidden="true">
+                              {oldColours.map((colour) => (
+                                <span
+                                  key={colour}
+                                  className="swatch"
+                                  style={{ backgroundColor: colour }}
+                                />
+                              ))}
+                            </span>
                           )}
                           <span className="check-legacy-name">
                             {legacyText(group)}
@@ -466,6 +498,12 @@ export function MappingView({
                           />
                         </Button>
                       </div>
+                      {reason && (
+                        <p className="check-reason" title={row.reason}>
+                          <span aria-hidden="true">⚠ </span>
+                          {reason}
+                        </p>
+                      )}
                       {isOpen && (
                         <ul className="binding-list nested">
                           {row.bindings

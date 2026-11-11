@@ -217,11 +217,11 @@ describe('answer key: Migration test – old EDS variables', () => {
     ).toMatchObject({ outcome: 'sure', candidates: ['icon/primary'] })
   })
 
-  it('row 9: icon size sizing/icon/lg is reported', () => {
+  it('row 9: icon size sizing/icon/lg (24px) is proposed as spacing/xl, the same px', () => {
     const icon = ctx(['Icon / menu', 'Title group', 'Top bar'])
-    expect(resolve('size', density('sizing/icon/lg'), icon).outcome).toBe(
-      'none',
-    )
+    expect(
+      resolve('size', { ...density('sizing/icon/lg'), value: 24 }, icon),
+    ).toMatchObject({ outcome: 'check', candidates: ['spacing/xl'] })
   })
 
   it('row 10: page title takes header/lg and text/primary', () => {
@@ -971,11 +971,12 @@ describe('answer key: Migration test – old EDS variables', () => {
 })
 
 describe('expected “Needs a decision” list', () => {
-  it('lists the icon size, the backdrop and the shortcut hint, and nothing else from the key', () => {
+  it('lists the backdrop and the shortcut hint, and proposes the icon size', () => {
     const icon = ctx(['Icon / menu', 'Title group', 'Top bar'])
-    expect(resolve('size', density('sizing/icon/lg'), icon).outcome).toBe(
-      'none',
-    )
+    expect(
+      resolve('size', { ...density('sizing/icon/lg'), value: 24 }, icon)
+        .outcome,
+    ).toBe('check')
     expect(resolve('fill', concept('Bg/Backdrop'), overlay).outcome).toBe(
       'none',
     )
@@ -985,5 +986,47 @@ describe('expected “Needs a decision” list', () => {
       text('Shortcut hint', button('Button / Primary (hover)')),
     )
     expect(hint.outcome).toBe('check')
+  })
+})
+
+describe('rules added on 2026-11-11', () => {
+  const icon = ctx(['Icon / menu'])
+
+  it('offers the nearest spacing steps when no step has the icon size', () => {
+    const result = resolve(
+      'size',
+      { ...density('sizing/icon/md'), value: 18 },
+      icon,
+    )
+    expect(result.outcome).toBe('check')
+    expect(result.candidates.slice(0, 2).sort()).toEqual([
+      'spacing/lg',
+      'spacing/md',
+    ])
+  })
+
+  it('matches the icon size in the density the layer will have', () => {
+    const compact = ctx(['Icon / menu'], {
+      modes: { [OLD.density]: 'Comfortable' },
+    })
+    expect(
+      resolve('size', { ...density('sizing/icon/lg'), value: 20 }, compact),
+    ).toMatchObject({ candidates: ['spacing/xl'] })
+  })
+
+  it('sets a legacy border width as a number, since there is no stroke width variable', () => {
+    const result = resolve(
+      'strokeWeight',
+      { ...density('sizing/stroke/thin'), value: 1 },
+      ctx(['Card']),
+    )
+    expect(result).toMatchObject({ outcome: 'sure', candidates: ['value:1'] })
+  })
+
+  it('reports a border width it cannot read', () => {
+    expect(
+      resolve('strokeWeight', density('sizing/stroke/thin'), ctx(['Card']))
+        .outcome,
+    ).toBe('none')
   })
 })

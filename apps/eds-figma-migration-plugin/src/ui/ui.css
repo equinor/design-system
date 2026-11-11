@@ -1208,3 +1208,30 @@ code {
 .check-target .option-preview {
   display: none;
 }
+
+/* The legacy colour as it resolves on the layers, beside its name. */
+.check-swatches {
+  display: inline-flex;
+  flex-shrink: 0;
+
+  & .swatch {
+    inline-size: var(--eds-spacing-md);
+    block-size: var(--eds-spacing-md);
+  }
+
+  & .swatch + .swatch {
+    margin-inline-start: calc(var(--eds-spacing-2xs) * -1);
+  }
+}
+
+/* Why a row needs a check, under the row, in one line; the full text is in the tooltip and the review. */
+.check-reason {
+  margin: 0;
+  padding-inline-start: calc(var(--eds-spacing-lg) + var(--eds-spacing-2xs));
+  overflow: hidden;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
