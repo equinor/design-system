@@ -14,7 +14,12 @@ import {
   effectiveTarget,
   isMappable,
 } from '../../../../src/scan/mapping'
-import type { Overrides } from '../../../../src/scan/mapping'
+import type {
+  MappingBinding,
+  MappingGroup,
+  MappingRow,
+  Overrides,
+} from '../../../../src/scan/mapping'
 import { formatHealth } from '../../../../src/scan/summary'
 import { PROPERTY_GROUPS, SCORED_CATEGORIES } from '../../../../src/scan/types'
 import type {
@@ -29,7 +34,9 @@ import { pathBelow } from '../paths'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
 import { sourceLabel, targetLabel } from '../targets'
+import { filterGroups } from '../groups'
 import { ApplyActions } from './ApplyActions'
+import { MappingView } from './MappingView'
 import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
 import { Tabs } from './Tabs'
@@ -47,6 +54,16 @@ type InspectorProps = {
   onBack: () => void
   onSelect: (nodeIds: string[]) => void
   onChange: (record: BindingRecord) => void
+  /** The Changes rows of the scan, narrowed to this frame for the Variables view (final review FR9) */
+  mapping: MappingGroup[]
+  colorScheme: 'light' | 'dark'
+  showCounts: boolean
+  onChangeRow: (group: MappingGroup, row: MappingRow) => void
+  onChangeBinding: (
+    group: MappingGroup,
+    row: MappingRow,
+    binding: MappingBinding,
+  ) => void
 }
 
 type Filter = 'all' | Category
@@ -162,7 +179,16 @@ export function Inspector({
   onBack,
   onSelect,
   onChange,
+  mapping,
+  colorScheme,
+  showCounts,
+  onChangeRow,
+  onChangeBinding,
 }: InspectorProps) {
+  const frameGroups = filterGroups(
+    mapping,
+    (binding) => binding.entryId === entry.id,
+  )
   const [filter, setFilter] = useState<Filter>('all')
   const [property, setProperty] = useState<'all' | PropertyGroup>('all')
   const [showFilters, setShowFilters] = useState(false)
@@ -220,87 +246,92 @@ export function Inspector({
 
       {/* UX review F1: the filters fold into one line, so the layers start
           higher in the window. F9: only categories with values are offered. */}
-      <div className="filter-summary">
-        <span className="muted">
-          Showing{' '}
-          <strong>
-            {filter === 'all' ? 'every status' : CATEGORY_LABELS[filter]}
-          </strong>
-          {' · '}
-          <strong>
-            {property === 'all' ? 'every property' : GROUP_LABELS[property]}
-          </strong>
-        </span>
-        <Button
-          variant="ghost"
-          size="small"
-          aria-expanded={showFilters}
-          onClick={() => setShowFilters((previous) => !previous)}
-        >
-          {showFilters ? 'Hide filters' : 'Filter'}
-        </Button>
-      </div>
-      {showFilters && (
+      {pivot === 'layers' && (
         <>
-          <div className="filter-row">
-            <span className="filter-label" id="status-filter">
-              Status
+          <div className="filter-summary">
+            <span className="muted">
+              Showing{' '}
+              <strong>
+                {filter === 'all' ? 'every status' : CATEGORY_LABELS[filter]}
+              </strong>
+              {' · '}
+              <strong>
+                {property === 'all' ? 'every property' : GROUP_LABELS[property]}
+              </strong>
             </span>
-            <div
-              className="filters"
-              role="group"
-              aria-labelledby="status-filter"
+            <Button
+              variant="ghost"
+              size="small"
+              aria-expanded={showFilters}
+              onClick={() => setShowFilters((previous) => !previous)}
             >
-              <Chip
-                selected={filter === 'all'}
-                onClick={() => setFilter('all')}
-              >
-                All
-              </Chip>
-              {categories
-                .filter((category) => entry.counts[category] > 0)
-                .map((category) => (
-                  <Chip
-                    key={category}
-                    selected={filter === category}
-                    onClick={() => setFilter(category)}
-                  >
-                    {CATEGORY_LABELS[category]} {entry.counts[category]}
-                  </Chip>
-                ))}
-            </div>
+              {showFilters ? 'Hide filters' : 'Filter'}
+            </Button>
           </div>
-          {properties.length > 1 && (
-            <div className="filter-row">
-              <span className="filter-label" id="group-filter">
-                Property
-              </span>
-              <div
-                className="filters"
-                role="group"
-                aria-labelledby="group-filter"
-              >
-                <Chip
-                  selected={property === 'all'}
-                  onClick={() => setProperty('all')}
+          {showFilters && (
+            <>
+              <div className="filter-row">
+                <span className="filter-label" id="status-filter">
+                  Status
+                </span>
+                <div
+                  className="filters"
+                  role="group"
+                  aria-labelledby="status-filter"
                 >
-                  All
-                </Chip>
-                {properties.map((candidate) => (
                   <Chip
-                    key={candidate}
-                    selected={property === candidate}
-                    onClick={() => setProperty(candidate)}
+                    selected={filter === 'all'}
+                    onClick={() => setFilter('all')}
                   >
-                    {GROUP_LABELS[candidate]}{' '}
-                    {
-                      byStatus.filter((record) => record.group === candidate)
-                        .length
-                    }
+                    All
                   </Chip>
-                ))}
+                  {categories
+                    .filter((category) => entry.counts[category] > 0)
+                    .map((category) => (
+                      <Chip
+                        key={category}
+                        selected={filter === category}
+                        onClick={() => setFilter(category)}
+                      >
+                        {CATEGORY_LABELS[category]} {entry.counts[category]}
+                      </Chip>
+                    ))}
+                </div>
               </div>
-            </div>
+              {properties.length > 1 && (
+                <div className="filter-row">
+                  <span className="filter-label" id="group-filter">
+                    Property
+                  </span>
+                  <div
+                    className="filters"
+                    role="group"
+                    aria-labelledby="group-filter"
+                  >
+                    <Chip
+                      selected={property === 'all'}
+                      onClick={() => setProperty('all')}
+                    >
+                      All
+                    </Chip>
+                    {properties.map((candidate) => (
+                      <Chip
+                        key={candidate}
+                        selected={property === candidate}
+                        onClick={() => setProperty(candidate)}
+                      >
+                        {GROUP_LABELS[candidate]}{' '}
+                        {
+                          byStatus.filter(
+                            (record) => record.group === candidate,
+                          ).length
+                        }
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </>
       )}
@@ -317,7 +348,30 @@ export function Inspector({
           setOpen(new Set())
         }}
       >
-        {!records ? (
+        {pivot === 'variables' ? (
+          <MappingView
+            groups={frameGroups}
+            overrides={overrides}
+            entryNames={new Map([[entry.id, entry.name]])}
+            selection={selection}
+            colorScheme={colorScheme}
+            showCounts={showCounts}
+            onSelectOld={(oldKey) =>
+              onSelect([
+                ...new Set(
+                  frameGroups
+                    .filter((group) => group.oldKey === oldKey)
+                    .flatMap((group) => group.rows)
+                    .flatMap((row) => row.bindings)
+                    .map((binding) => binding.nodeId),
+                ),
+              ])
+            }
+            onSelectLayer={onSelect}
+            onChangeRow={onChangeRow}
+            onChangeBinding={onChangeBinding}
+          />
+        ) : !records ? (
           <p className="muted">Loading…</p>
         ) : groups.length === 0 ? (
           <p className="muted">Nothing in this category.</p>
@@ -371,11 +425,7 @@ export function Inspector({
                           <Button
                             size="small"
                             variant="secondary"
-                            aria-label={
-                              pivot === 'layers'
-                                ? `Go to ${group.title}`
-                                : `Go to the layers that use ${group.title}`
-                            }
+                            aria-label={`Go to ${group.title}`}
                             onClick={() =>
                               onSelect([
                                 ...new Set(
@@ -384,7 +434,7 @@ export function Inspector({
                               ])
                             }
                           >
-                            {pivot === 'layers' ? 'Go to' : 'Go to layers'}
+                            Go to
                           </Button>
                         </div>
                         <ul className="binding-list">
@@ -396,19 +446,8 @@ export function Inspector({
                             return (
                               <BindingRow
                                 key={record.id}
-                                title={
-                                  pivot === 'layers'
-                                    ? propertyLabel(record.property)
-                                    : `${record.nodeName} · ${propertyLabel(record.property)}`
-                                }
-                                subtitle={
-                                  pivot === 'variables'
-                                    ? pathBelow(record.path, entry.name)
-                                    : undefined
-                                }
-                                old={
-                                  pivot === 'layers' ? record.old : undefined
-                                }
+                                title={propertyLabel(record.property)}
+                                old={record.old}
                                 target={targetText(record, overrides)}
                                 note={
                                   isMappable(record)

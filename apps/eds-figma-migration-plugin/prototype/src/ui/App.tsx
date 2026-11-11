@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Badge, Banner, Button, Switch } from '@equinor/eds-core-react/next'
+import { Badge, Banner, Button } from '@equinor/eds-core-react/next'
 import { sharedSubject } from '../../../src/mapping/picker'
 import type { BindingKind } from '../../../src/mapping/types'
 import {
@@ -49,6 +49,7 @@ import { InstancesView } from './components/InstancesView'
 import { MappingView } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
+import { SettingsMenu } from './components/SettingsMenu'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
@@ -59,6 +60,7 @@ import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 import { reviewItems } from './review'
 import type { ReviewItem } from './review'
+import { filterGroups } from './groups'
 import { useSelection } from './selection'
 import type { Selection } from './selection'
 
@@ -77,7 +79,6 @@ function Overview({
   mapping,
   overrides,
   showComponents,
-  onShowComponents,
   onOpen,
   onGoTo,
   onSelectOld,
@@ -93,6 +94,9 @@ function Overview({
   onReport,
   onCloseReport,
   colorScheme,
+  showCounts,
+  showEmpty,
+  onShowComponents,
 }: {
   summary: ScanSummary
   view: View
@@ -100,7 +104,6 @@ function Overview({
   mapping: MappingGroup[]
   overrides: Overrides
   showComponents: boolean
-  onShowComponents: (show: boolean) => void
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
   onSelectOld: (oldKey: string) => void
@@ -120,6 +123,9 @@ function Overview({
   onReport: () => void
   onCloseReport: () => void
   colorScheme: 'light' | 'dark'
+  showCounts: boolean
+  showEmpty: boolean
+  onShowComponents: (show: boolean) => void
 }) {
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
@@ -132,6 +138,15 @@ function Overview({
     ? sumCounts(summary.entries.map((entry) => entry.counts))
     : summary.totals
   const applied = showComponents ? summary.entries : frames
+  // Final review FR10: Changes counts what the health bar counts.
+  const componentIds = new Set(components.map((entry) => entry.id))
+  const changes = showComponents
+    ? mapping
+    : filterGroups(mapping, (binding) => !componentIds.has(binding.entryId))
+  // Final review FR5: a component with legacy variables is not hidden away.
+  const legacyComponents = components.filter(
+    (entry) => oldCount(entry.counts) > 0,
+  )
   // UX review F8: Apply says where it applies.
   const readyIn = applied.filter((entry) => entry.counts.sure > 0)
   const pageCount = new Set(readyIn.map((entry) => entry.pageId)).size
@@ -193,8 +208,8 @@ function Overview({
       <Tabs
         label="View"
         tabs={[
+          { id: 'mapping', label: 'Changes' },
           { id: 'frames', label: 'Frames' },
-          { id: 'mapping', label: 'Mapping' },
           { id: 'instances', label: `Instances ${instances.length}` },
         ]}
         selected={view}
@@ -208,10 +223,11 @@ function Overview({
           />
         ) : view === 'mapping' ? (
           <MappingView
-            groups={mapping}
+            groups={changes}
             overrides={overrides}
             entryNames={entryNames}
             colorScheme={colorScheme}
+            showCounts={showCounts}
             selection={selection}
             onSelectOld={onSelectOld}
             onSelectLayer={onSelectLayer}
@@ -264,11 +280,32 @@ function Overview({
                   onGoToPage={(pageId) => send({ type: 'go-to-page', pageId })}
                   onOpen={onOpen}
                   onGoTo={onGoTo}
+                  showEmpty={showEmpty}
                 />
               )}
             </section>
 
-            {components.length > 0 && (
+            {legacyComponents.length > 0 && !showComponents && (
+              <div className="components-note">
+                <span className="muted">
+                  {legacyComponents.length} local component
+                  {legacyComponents.length === 1 ? ' uses' : 's use'} legacy
+                  variables
+                  {legacyComponents[0].instanceCount !== undefined
+                    ? ` and ${legacyComponents.length === 1 ? 'is' : 'are'} used ${legacyComponents.reduce((sum, entry) => sum + (entry.instanceCount ?? 0), 0)} times in the file`
+                    : ''}
+                  .
+                </span>
+                <Button
+                  variant="ghost"
+                  size="small"
+                  onClick={() => onShowComponents(true)}
+                >
+                  Show
+                </Button>
+              </div>
+            )}
+            {components.length > 0 && showComponents && (
               <section
                 className="stack-tight"
                 aria-labelledby="components-title"
@@ -276,11 +313,6 @@ function Overview({
                 <h2 id="components-title" className="section-title">
                   Local components
                 </h2>
-                <Switch
-                  label={`Show and count ${components.length} main component${components.length === 1 ? '' : 's'}`}
-                  checked={showComponents}
-                  onChange={(event) => onShowComponents(event.target.checked)}
-                />
                 {showComponents && (
                   <>
                     <p className="muted">
@@ -330,7 +362,10 @@ export function App() {
   const [openEntryId, setOpenEntryId] = useState<string>()
   const [detail, setDetail] = useState<EntryDetail>()
   const [showComponents, setShowComponents] = useState(false)
-  const [view, setView] = useState<View>('frames')
+  // Check designs: the changes are the first thing shown after a scan.
+  const [view, setView] = useState<View>('mapping')
+  const [showCounts, setShowCounts] = useState(true)
+  const [showEmpty, setShowEmpty] = useState(false)
   const [mapping, setMapping] = useState<MappingGroup[]>([])
   const [instances, setInstances] = useState<OldInstance[]>([])
   const [review, setReview] = useState<ReviewItem[]>()
@@ -350,6 +385,9 @@ export function App() {
   // UX review F4: until the designer chooses a scope or scans, the scope
   // follows the selection: Selection when something is selected.
   const scopeChosen = useRef(false)
+  // Final review FR1: after a scan the designer started, a selection opens
+  // on Changes and a page or the file on Frames, where the work is.
+  const userScan = useRef(false)
   const [lastApplied, setLastApplied] = useState<string[]>([])
   useEffect(() => {
     openEntryRef.current = openEntryId
@@ -372,6 +410,12 @@ export function App() {
           break
         case 'scan-done': {
           scopeChosen.current = true
+          if (userScan.current) {
+            userScan.current = false
+            setView(
+              message.summary.scope === 'selection' ? 'mapping' : 'frames',
+            )
+          }
           setScanning(false)
           setProgress(undefined)
           setSummary(message.summary)
@@ -453,6 +497,7 @@ export function App() {
   useEffect(() => send({ type: 'ready' }), [])
 
   const scan = () => {
+    userScan.current = true
     setError(undefined)
     setScanning(true)
     send({ type: 'scan', scope })
@@ -630,6 +675,43 @@ export function App() {
         <Badge tone="warning" emphasis="medium">
           WIP beta
         </Badge>
+        {command === 'open' && (
+          <div className="header-actions">
+            <SettingsMenu
+              settings={[
+                {
+                  id: 'counts',
+                  label: 'Layer counts',
+                  checked: showCounts,
+                  onChange: setShowCounts,
+                },
+                {
+                  id: 'empty',
+                  label: 'Frames without EDS variables',
+                  checked: showEmpty,
+                  onChange: setShowEmpty,
+                },
+                {
+                  id: 'components',
+                  label: 'Local components',
+                  checked: showComponents,
+                  onChange: setShowComponents,
+                },
+              ]}
+              actions={
+                summary
+                  ? [
+                      {
+                        id: 'report',
+                        label: 'Export report…',
+                        onSelect: () => send({ type: 'get-report' }),
+                      },
+                    ]
+                  : []
+              }
+            />
+          </div>
+        )}
       </header>
       <main className="app-main stack">
         {error && (
@@ -684,6 +766,17 @@ export function App() {
                 progress={progress}
                 onScan={scan}
                 onCancel={() => send({ type: 'cancel-scan' })}
+                compact={summary !== undefined}
+                onGoToScope={
+                  summary
+                    ? () =>
+                        select(
+                          summary.entries
+                            .filter((entry) => entry.kind !== 'component')
+                            .flatMap((entry) => entry.nodeIds),
+                        )
+                    : undefined
+                }
               />
             )}
             {!summary && !scanning && !saved && (
@@ -747,6 +840,11 @@ export function App() {
                 onBack={() => setOpenEntryId(undefined)}
                 onSelect={select}
                 onChange={changeRecord}
+                mapping={mapping}
+                colorScheme={colorScheme}
+                showCounts={showCounts}
+                onChangeRow={changeRow}
+                onChangeBinding={changeBinding}
               />
             )}
             {/* Hidden rather than unmounted while a frame is open, so Back
@@ -765,7 +863,6 @@ export function App() {
                   onSelectLayer={select}
                   selection={bulk}
                   showComponents={showComponents}
-                  onShowComponents={setShowComponents}
                   onOpen={open}
                   onGoTo={(entry) => select(entry.nodeIds)}
                   busy={busy}
@@ -776,6 +873,9 @@ export function App() {
                   onReport={() => send({ type: 'get-report' })}
                   onCloseReport={() => setReport(undefined)}
                   colorScheme={colorScheme}
+                  showCounts={showCounts}
+                  showEmpty={showEmpty}
+                  onShowComponents={setShowComponents}
                 />
               </div>
             )}

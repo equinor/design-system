@@ -964,10 +964,14 @@ code {
 
 .check-legacy-name,
 .check-target-name {
+  /* Two lines before cutting, so names such as “UI body · sm · squished”
+     and “Remove the legacy mode” can be read (final review FR2, FR3). */
+  display: -webkit-box;
   flex: 1;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .check-arrow {
@@ -1010,4 +1014,121 @@ code {
   flex-direction: column;
   gap: var(--eds-spacing-2xs);
   padding-block-end: var(--eds-spacing-sm);
+}
+
+/* Check designs: actions and settings at the right of the header. */
+.header-actions {
+  display: flex;
+  gap: var(--eds-spacing-3xs);
+  align-items: center;
+  margin-inline-start: auto;
+}
+
+.settings-menu {
+  position: relative;
+}
+
+.settings-popover {
+  position: absolute;
+  inset-block-start: calc(100% + var(--eds-spacing-3xs));
+  inset-inline-end: 0;
+  z-index: 3;
+  min-inline-size: 16rem;
+  margin: 0;
+  padding: var(--eds-spacing-3xs) 0;
+  list-style: none;
+  background: var(--eds-background-floating);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+
+  & [role^='menuitem'] {
+    display: flex;
+    gap: var(--eds-spacing-xs);
+    align-items: center;
+    padding: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+    font-size: var(--eds-typography-label-md-font-size);
+    line-height: var(--eds-typography-label-md-line-height);
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--eds-background-interactive-neutral-muted-hover);
+      outline: none;
+    }
+  }
+}
+
+.settings-heading {
+  padding: var(--eds-spacing-2xs) var(--eds-spacing-sm) 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.settings-separator {
+  margin-block: var(--eds-spacing-3xs);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.settings-check {
+  display: inline-flex;
+  inline-size: var(--eds-spacing-md);
+}
+
+/* After a scan the scope and Scan share one line. */
+.scan-controls.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+
+  & .section-title {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+/* Final review FR2: the target on two lines, its name and then its value. */
+.check-target-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+
+  & .option-value {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Final review FR8: tighter tabs for the kinds of value. */
+.tabs.compact > .tab-list {
+  gap: 0;
+
+  & .tab {
+    padding-inline: var(--eds-spacing-2xs);
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+  }
+}
+
+/* Final review FR5: a line about local components when they are hidden. */
+.components-note {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding-block-start: var(--eds-spacing-sm);
+}
+
+.scan-action {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
 }

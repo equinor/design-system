@@ -17,8 +17,9 @@ import type {
 } from '../../../../src/scan/mapping'
 import { PROPERTY_GROUPS } from '../../../../src/scan/types'
 import type { Category, PropertyGroup } from '../../../../src/scan/types'
+import { CLEAR_MODE } from '../../../../src/scan/classify'
 import { BADGES } from '../badges'
-import { CATEGORY_LABELS, GROUP_LABELS, propertyLabel, values } from '../labels'
+import { CATEGORY_LABELS, propertyLabel, values } from '../labels'
 import { pathBelow } from '../paths'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
@@ -34,6 +35,8 @@ type MappingViewProps = {
   entryNames: Map<string, string>
   selection: Selection
   colorScheme: 'light' | 'dark'
+  /** Show the number of layers in each row, from the settings menu */
+  showCounts?: boolean
   onSelectOld: (oldKey: string) => void
   onSelectLayer: (nodeIds: string[]) => void
   onChangeRow: (group: MappingGroup, row: MappingRow) => void
@@ -62,6 +65,53 @@ const SECTION_LABELS: Record<string, string> = {
   typography: 'Text style',
   modes: 'Mode',
   other: 'Other',
+}
+
+/** Short tab labels, so all six fit in the window (final review FR8). */
+const TAB_LABELS: Record<PropertyGroup, string> = {
+  colour: 'Colour',
+  typography: 'Type',
+  spacing: 'Spacing',
+  size: 'Size',
+  radius: 'Radius',
+  modes: 'Modes',
+  other: 'Other',
+}
+
+/**
+ * The legacy side of a row in words (final review FR2 and FR3): typography as
+ * “UI body · sm · squished” instead of three variable names, and a mode with
+ * its collection, “Appearance: Danger”.
+ */
+function legacyText(group: MappingGroup): string {
+  if (group.group === 'typography') {
+    const names = group.old.split(', ')
+    const family = names.some((name) => name.includes('/header/'))
+      ? 'Header'
+      : 'UI body'
+    const step = names
+      .map((name) => /\/([a-z0-9]+)\/font-size/.exec(name)?.[1])
+      .find(Boolean)
+    const lineHeight = names
+      .map((name) => /line-height-(\w+)/.exec(name)?.[1])
+      .find(Boolean)
+    const weight = names.some((name) => name.includes('font-weight-bolder'))
+      ? 'bolder'
+      : undefined
+    return [family, step, lineHeight, weight].filter(Boolean).join(' · ')
+  }
+  if (group.group === 'modes' && group.oldCollection) {
+    const collection = group.oldCollection.replace(/^[^\p{L}]+/u, '')
+    return `${collection}: ${group.old}`
+  }
+  return group.old
+}
+
+/** The target of a row in a few words; a mode that is only cleared says so. */
+function shortTarget(row: MappingRow, overrides: Overrides): string {
+  const target = rowTarget(row, overrides)
+  if (target === CLEAR_MODE) return 'Remove the legacy mode'
+  return rowTargetText(row, overrides)
 }
 
 type Item = { group: MappingGroup; row: MappingRow }
@@ -148,6 +198,7 @@ export function MappingView({
   entryNames,
   selection,
   colorScheme,
+  showCounts = true,
   onSelectOld,
   onSelectLayer,
   onChangeRow,
@@ -213,12 +264,13 @@ export function MappingView({
   return (
     <div className="stack">
       <Tabs
+        compact
         label="Kind of value"
         tabs={properties.map((candidate) => ({
           id: candidate,
           label: (
             <>
-              {GROUP_LABELS[candidate]}{' '}
+              {TAB_LABELS[candidate]}{' '}
               <span className="tab-count">
                 {countIn((item) => item.group.group === candidate, matches)}
               </span>
@@ -328,8 +380,12 @@ export function MappingView({
                           aria-label={`Go to the ${row.count} layers that use ${group.old}`}
                           onClick={() => onSelectOld(group.oldKey)}
                         >
-                          <span className="check-count">{row.count}</span>
-                          <span className="check-legacy-name">{group.old}</span>
+                          {showCounts && (
+                            <span className="check-count">{row.count}</span>
+                          )}
+                          <span className="check-legacy-name">
+                            {legacyText(group)}
+                          </span>
                         </button>
                         <span className="check-arrow" aria-hidden="true">
                           →
@@ -341,14 +397,16 @@ export function MappingView({
                           onClick={() => onChangeRow(group, row)}
                         >
                           <Preview name={target} colorScheme={colorScheme} />
-                          <span className="check-target-name">
-                            {counts.length === 1
-                              ? rowTargetText(row, overrides)
-                              : counts.map(countText).join(' · ')}
+                          <span className="check-target-text">
+                            <span className="check-target-name">
+                              {counts.length === 1
+                                ? shortTarget(row, overrides)
+                                : counts.map(countText).join(' · ')}
+                            </span>
+                            {extra && counts.length === 1 && (
+                              <span className="option-value">{extra}</span>
+                            )}
                           </span>
-                          {extra && counts.length === 1 && (
-                            <span className="option-value">{extra}</span>
-                          )}
                           <Icon data={chevron_down} size="sm" />
                         </button>
                         <Button
@@ -391,11 +449,6 @@ export function MappingView({
                             {own === row.count
                               ? 'Your choice for each value'
                               : `Your choice for ${own} of ${row.count}`}
-                          </span>
-                        )}
-                        {group.oldCollection && (
-                          <span className="binding-path">
-                            {group.oldCollection}
                           </span>
                         )}
                       </div>

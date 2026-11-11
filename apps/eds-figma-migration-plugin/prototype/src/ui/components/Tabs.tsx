@@ -9,6 +9,8 @@ type TabsProps<T extends string> = {
   selected: T
   onSelect: (id: T) => void
   children: ReactNode
+  /** Tighter tabs, so a row of six fits in the window (final review FR8) */
+  compact?: boolean
 }
 
 /**
@@ -22,6 +24,7 @@ export function Tabs<T extends string>({
   selected,
   onSelect,
   children,
+  compact = false,
 }: TabsProps<T>) {
   const id = useId()
   const refs = useRef<(HTMLButtonElement | null)[]>([])
@@ -44,7 +47,7 @@ export function Tabs<T extends string>({
   }
 
   return (
-    <div className="tabs">
+    <div className={compact ? 'tabs compact' : 'tabs'}>
       <div className="tab-list" role="tablist" aria-label={label}>
         {tabs.map((tab, index) => (
           <button
