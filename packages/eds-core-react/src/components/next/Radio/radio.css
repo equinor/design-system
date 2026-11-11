@@ -50,8 +50,8 @@
 
     /* :has(.input:disabled) instead of a prop-set attribute so the styling
        also covers disabling inherited from an ancestor, e.g. fieldset[disabled].
-       Comes after :hover and outranks it, so a disabled radio gets no
-       hover fill. */
+       The :has() argument makes this selector more specific than :hover, so
+       a disabled radio gets no hover fill wherever the hover rule sits. */
     &:has(.input:disabled) {
       --_icon-color: var(--eds-icon-interactive-disabled);
       --_bg-color: transparent;
@@ -95,6 +95,9 @@
       pointer-events: none;
       flex-shrink: 0;
       fill: var(--_icon-color);
+
+      /* Same duration as the background, so icon and fill change together */
+      transition: fill var(--_transition-duration);
     }
 
     /* Icon visibility */
