@@ -1,0 +1,357 @@
+/* Example charts on the data visualisation colour page. Every colour is a token: the chart sits on
+ * background.surface, text uses the text tokens, and grid, axes and the crosshair use border tokens,
+ * so nothing but the data carries a data-visualisation colour. */
+
+.dv-example {
+  margin: var(--eds-spacing-xl) 0 var(--eds-spacing-2xl);
+  padding: var(--eds-spacing-md) var(--eds-spacing-md) var(--eds-spacing-sm);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  color: var(--eds-text-primary);
+
+  background: var(--eds-background-surface);
+}
+
+.dv-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+  margin-bottom: var(--eds-spacing-sm);
+}
+
+.dv-toggle {
+  cursor: pointer;
+
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+
+  padding: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  font: inherit;
+  font-size: var(--eds-typography-label-md-font-size);
+  color: var(--eds-text-secondary);
+
+  background: var(--eds-background-surface);
+}
+
+.dv-toggle:hover {
+  border-color: var(--eds-border-interactive-neutral-muted-hover);
+}
+
+.dv-toggle[aria-pressed='true'] {
+  border-color: var(--eds-border-interactive-neutral-emphasis-default);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-interactive-neutral-selected-default);
+}
+
+.dv-toggle:focus-visible,
+.dv-plot > svg:focus-visible {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 2px;
+}
+
+.dv-wells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+  margin-bottom: var(--eds-spacing-xs);
+}
+
+.dv-well {
+  cursor: pointer;
+
+  display: inline-flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+
+  padding: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  background: var(--eds-background-surface);
+}
+
+.dv-well:hover {
+  border-color: var(--eds-border-interactive-neutral-muted-hover);
+}
+
+.dv-well:has(input:checked) {
+  border-color: var(--eds-border-interactive-accent-emphasis-default);
+}
+
+.dv-well:has(input:focus-visible) {
+  outline: 2px solid var(--eds-border-interactive-focus);
+  outline-offset: 2px;
+}
+
+.dv-well:has(input:disabled) {
+  cursor: default;
+}
+
+.dv-well input {
+  width: var(--eds-spacing-md);
+  height: var(--eds-spacing-md);
+  margin: 0;
+  accent-color: var(--eds-background-interactive-accent-emphasis-default);
+}
+
+.dv-well-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.dv-well-field {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.dv-well-name {
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-primary);
+}
+
+.dv-hint {
+  margin: 0 0 var(--eds-spacing-sm);
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-secondary);
+}
+
+.dv-swatch {
+  display: inline-block;
+  flex: none;
+
+  width: var(--eds-spacing-sm);
+  height: var(--eds-spacing-sm);
+  margin-right: var(--eds-spacing-3xs);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  vertical-align: -1px;
+}
+
+.dv-plot-scroll {
+  overflow-x: auto;
+}
+
+.dv-plot {
+  position: relative;
+  min-width: 36rem;
+}
+
+.dv-plot > svg {
+  overflow: visible;
+  display: block;
+}
+
+.dv-panel-title {
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: 600;
+  fill: var(--eds-text-primary);
+}
+
+.dv-unit {
+  font-weight: 400;
+  fill: var(--eds-text-secondary);
+}
+
+.dv-tick,
+.dv-end-label,
+.dv-slice-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-variant-numeric: tabular-nums;
+  fill: var(--eds-text-secondary);
+}
+
+.dv-end-label {
+  fill: var(--eds-text-primary);
+}
+
+.dv-grid {
+  stroke: var(--eds-border-non-interactive-neutral-muted);
+  stroke-width: 1;
+}
+
+.dv-crosshair {
+  stroke: var(--eds-border-non-interactive-neutral-emphasis);
+  stroke-width: 1;
+}
+
+.dv-plan {
+  stroke: var(--eds-text-secondary);
+  stroke-dasharray: 4 3;
+  stroke-width: 1;
+}
+
+.dv-tooltip {
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-border-color: transparent;
+
+  pointer-events: none;
+
+  position: absolute;
+  z-index: 1;
+  top: 0;
+
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-primary);
+  white-space: nowrap;
+
+  background: var(--eds-background-floating);
+  box-shadow: var(--eds-elevation-low);
+}
+
+.dv-tooltip-title {
+  margin-bottom: var(--eds-spacing-3xs);
+  font-weight: 600;
+}
+
+.dv-tooltip table {
+  display: table;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.dv-tooltip th,
+.dv-tooltip td {
+  padding: var(--eds-spacing-4xs) var(--eds-spacing-xs) var(--eds-spacing-4xs) 0;
+  border: 0;
+
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+
+  background: none;
+}
+
+.dv-tooltip tr,
+.dv-tooltip thead {
+  border: 0;
+  background: none;
+}
+
+.dv-tooltip tbody th {
+  white-space: nowrap;
+}
+
+.dv-tooltip thead th {
+  color: var(--eds-text-secondary);
+}
+
+.dv-tooltip td {
+  text-align: right;
+}
+
+.dv-tooltip-unit {
+  display: block;
+  font-size: var(--eds-typography-label-xs-font-size);
+}
+
+.dv-tooltip-icon {
+  width: var(--eds-spacing-sm);
+  height: var(--eds-spacing-sm);
+  margin-right: var(--eds-spacing-2xs);
+  vertical-align: -1px;
+}
+
+.dv-series-icon {
+  flex: none;
+  width: var(--eds-spacing-2xl);
+  height: var(--eds-spacing-sm);
+}
+
+.dv-donut {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-md) var(--eds-spacing-2xl);
+  align-items: center;
+}
+
+.dv-donut > svg {
+  overflow: visible;
+}
+
+.dv-donut-value {
+  font-size: var(--eds-typography-header-lg-font-size);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  fill: var(--eds-text-primary);
+}
+
+.dv-donut-label {
+  font-size: var(--eds-typography-label-xs-font-size);
+  letter-spacing: 0.04em;
+  fill: var(--eds-text-secondary);
+}
+
+.dv-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.dv-legend b {
+  margin-left: var(--eds-spacing-3xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--eds-text-primary);
+}
+
+.dv-donut .dv-data {
+  flex-basis: 100%;
+}
+
+.dv-data {
+  margin-top: var(--eds-spacing-xs);
+  font-size: var(--eds-typography-label-sm-font-size);
+}
+
+.dv-data summary {
+  cursor: pointer;
+  color: var(--eds-text-interactive-link-default);
+}
+
+.dv-table-scroll {
+  overflow-x: auto;
+  margin: var(--eds-spacing-xs) 0 var(--eds-spacing-3xs);
+}
+
+.dv-data table {
+  display: table;
+  margin: 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+}
+
+.dv-data th,
+.dv-data td {
+  white-space: nowrap;
+}
+
+.dv-data caption {
+  margin-bottom: var(--eds-spacing-3xs);
+  color: var(--eds-text-secondary);
+  text-align: left;
+}
+
+.dv-disclaimer {
+  margin: var(--eds-spacing-xs) 0 0;
+  font-size: var(--eds-typography-label-xs-font-size);
+  color: var(--eds-text-tertiary);
+}
+
+.dv-donut .dv-disclaimer {
+  flex-basis: 100%;
+}

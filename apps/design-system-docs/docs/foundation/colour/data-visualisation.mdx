@@ -5,6 +5,12 @@ description: Choose chart colours from the data-visualization tokens, pick a ste
 ---
 
 import DataVizPalette from '@site/src/components/colour/DataVizPalette'
+import DataVizStepSwap from '@site/src/components/colour/DataVizStepSwap'
+import {
+  BarChartExample,
+  DonutChartExample,
+  LineChartExample,
+} from '@site/src/components/colour/DataVizExamples'
 
 Charts need more colours than an interface does, and they use them for a different job. The
 `data-visualization.*` tokens are a separate group for that job: they help a reader tell series apart
@@ -39,43 +45,39 @@ forecast next to the measured values, or a selected bar among the others.
 
 ### What the step numbers mean
 
-As in [the palette](./palette.mdx#what-the-step-numbers-mean), a step number is a position relative
-to the background rather than a lightness. Step 1 is the step closest to the background and step 5 is
-the furthest from it, in both colour schemes. On a light surface a ramp runs from light to dark, and
-on a dark surface it runs from dark to light.
+Compare the light and dark columns in the table below. In light, step 1 is a pale tint and step 5 is
+almost black. In dark it is the other way round: step 1 is a deep shade and step 5 is pale. In both
+schemes, step 1 is the quietest step, sitting closest to the colour of the page, and step 5 is the one
+that stands out most.
 
-Step 3 is the anchor of each hue and has the same value in both schemes. The other steps swap places
-around it: dark step 1 takes the value of light step 5, dark step 2 takes light step 4, and so on.
-For `cat.1`:
+A step number therefore describes how strongly a colour stands out from the background. When this
+page says "use step 1 for a tint behind the plot area", you get a tint that stays in the background in
+both schemes, and "use step 5 for the one mark that must stand out" gives a mark that stands out in
+both.
 
-| Step | Light | Dark |
-| --- | --- | --- |
-| 1 | `#adc3c4` | `#00282c` |
-| 2 | `#5d8386` | `#00383c` |
-| 3 | `#03484c` | `#03484c` |
-| 4 | `#00383c` | `#5d8386` |
-| 5 | `#00282c` | `#adc3c4` |
+<DataVizStepSwap />
 
-The swap is intended. Each step keeps its position relative to the background, so step 1 is the
-subtlest step and step 5 the strongest in both schemes.
+Step 3 is the base colour of each hue and looks the same in both schemes. The other steps swap places
+around it: the pale tint that is step 1 in light is step 5 in dark. The interface colours work the
+same way, as [the palette](./palette.mdx#what-the-step-numbers-mean) explains.
 
-Because step 3 keeps its value, its contrast changes with the scheme. A dark hue such as `cat.1.3`
-stands out on a light surface and almost disappears on a dark one, and the yellow `cat.2.3` does the
-opposite. [Contrast](#contrast) lists the hues this affects.
+Because step 3 looks the same in both schemes, it does not stand out equally in both. In row 3 of the
+table, the dark teal of `cat.1` (the first swatch) is strong on the light surface and almost
+disappears on the dark one, and the yellow of `cat.2` (the second swatch) does the opposite.
+[Contrast](#contrast) lists the hues this affects.
 
 ### Which step to use
 
 | Step | Use it for | Why |
 | --- | --- | --- |
 | 1 | Decorative areas that carry no meaning, such as a hover background or a tint behind the plot area | Closest to the background, and below 3:1 for every hue in both schemes |
-| 2 | Bands that carry meaning, such as a target range or an uncertainty band, always with a label; series that should step back; the other series when one is selected | Reaches 3:1 for only 2 of 10 hues in light and 4 of 10 in dark, so it needs a label or an outline |
+| 2 | Bands that carry meaning, such as a target range or an uncertainty band, always with a label; series that should step back; the other series when one is selected | Reaches 3:1 for only 2 of 10 hues in light and 4 of 10 in dark, so it needs a label |
 | 3 | The default colour for bars, areas and other filled marks | The anchor of the hue, the same in both schemes |
 | 4 | Lines, points and a series that should stand out | Reaches 3:1 for every hue in both schemes |
-| 5 | Outlines on step 3 fills that are too weak on their own | Furthest from the background in both schemes. Not for several series at once: at step 5 most of the first five hues look alike |
+| 5 | The one line or mark that has to stand out most, such as a target series | Furthest from the background in both schemes. Not for several series at once: at step 5 most of the first five hues look alike |
 
-Where step 3 of a hue is too weak in a scheme, give the mark a step 5 outline or label it directly, so
-that the colour is not the only way to find it. [Contrast](#contrast) lists those hues, and the two
-hues whose step 4 lines need a label in dark.
+Where a hue is too weak in a scheme at the step it is used for, make its values available as text as
+well: direct labels, a tooltip or a data table. [Contrast](#contrast) lists those hues.
 
 ### Series order and how many series
 
@@ -151,8 +153,8 @@ Measured against `background.surface`:
 | 4 | 10 of 10 hues | 64 to 99 | 10 of 10 hues | 33 to 86 |
 | 5 | 10 of 10 hues | 93 to 102 | 10 of 10 hues | 68 to 94 |
 
-These hues miss the minimum or the goal at the step they are used for, and need a step 5 outline or a
-direct label:
+These hues miss the minimum or the goal at the step they are used for. Make their values available as
+text as well, with direct labels, a tooltip or a data table:
 
 | Use | Light | Dark |
 | --- | --- | --- |
@@ -186,6 +188,48 @@ goals above. The rest of the EDS colour scale follows the same rule. Instead of 
 - To fade the other series when one is selected, switch them to step 2.
 - For overlapping areas, use stacked areas, lines or small multiples.
 - For dense scatter plots, use smaller or hollow markers, or group the points into bins.
+
+## Examples
+
+The three charts below use only the tokens and rules on this page. The field names are Equinor
+production fields, but every number is random example data with no connection to the production
+of these fields.
+Switch the site between light and dark to see each chart in both schemes.
+
+### Several wells in one line chart
+
+Gas rate, water rate and cumulative gas for six wells in three fields. Select the wells to show with
+the checkboxes. Each measure has its own panel and its own scale, and the panels share one time axis.
+Putting the three measures on one plot would need three y-axes, and lines on different scales cannot
+be compared with each other.
+
+Each well keeps its hue (`cat.1` to `cat.6`, step 4) in every panel, and keeps it when wells are
+selected or cleared. Each well also has its own marker shape and a label at the end of its line.
+Up to five wells, colour alone tells them apart. Select the sixth, and the shapes and labels do that
+job. The end labels also cover `cat.1` in dark, where its step 4 is below the goal for lines. Move
+the pointer over the chart, or focus it and use the arrow keys, to read all selected wells at one
+date.
+
+<LineChartExample />
+
+### Production by field in a stacked bar chart
+
+Four fields per month, in step 3 with a 2px gap between the segments. Some of these hues are weak in
+one of the schemes (`cat.2` and `cat.3` in light, `cat.1` in dark), so the legend, the tooltip and the
+data table give every value as text. Select a field to bring it forward, and the other fields fade to
+step 2. The plan line uses a text
+colour, because it is a reference and not data.
+
+<BarChartExample />
+
+### Share by field in a donut chart
+
+The same four fields, in the same hues as the bar chart. The slices run from the largest to the
+smallest, clockwise from the top, with a 2px gap between them, and each slice is labelled with its
+share. Use a donut only when the message is how one whole divides into a few parts, five at most.
+To compare amounts, a bar chart is easier to read.
+
+<DonutChartExample />
 
 ## Do's and Don'ts
 

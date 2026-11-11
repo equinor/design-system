@@ -61,6 +61,8 @@ const COMPONENTS = [
   'colour/ColourStates.tsx',
   'colour/ColourScale.tsx',
   'colour/DataVizPalette.tsx',
+  'colour/DataVizStepSwap.tsx',
+  'colour/DataVizExamples.tsx',
   'tokens/DensitySwitch.tsx',
   'tokens/TypeScale/TypeScale.tsx',
   ...anatomyFiles,
