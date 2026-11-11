@@ -78,6 +78,8 @@ export type PluginToUi =
   | { type: 'revert-done'; result: RevertResult }
   /** Every binding still to migrate, grouped by legacy variable, sent after a scan */
   | { type: 'mapping'; groups: MappingGroup[] }
+  /** Every instance in the scan that still uses legacy variables */
+  | { type: 'instances'; instances: OldInstance[] }
   | { type: 'overrides'; overrides: Overrides }
   | { type: 'scan-cancelled' }
   | {

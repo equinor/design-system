@@ -24,6 +24,7 @@ import type {
   OldInstance,
   PropertyGroup,
 } from '../../scan/types'
+import { groupInstances } from '../instances'
 import { pathBelow } from '../paths'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
@@ -41,6 +42,7 @@ type InspectorProps = {
   selection: Selection
   busy: boolean
   onApply: () => void
+  onReview: () => void
   onRevert: () => void
   onBack: () => void
   onSelect: (nodeIds: string[]) => void
@@ -77,40 +79,6 @@ export function selectable(record: BindingRecord): SelectedBinding {
     group: record.group,
     candidates: record.candidates ?? [],
   }
-}
-
-type InstanceGroup = {
-  key: string
-  name: string
-  /** Where the main component is */
-  source: string
-  ids: string[]
-  /** Legacy variables in all of them */
-  count: number
-}
-
-/** Instances of the same main component in one row, most legacy variables first. */
-function groupInstances(instances: OldInstance[]): InstanceGroup[] {
-  const groups = new Map<string, InstanceGroup>()
-  for (const instance of instances) {
-    const main = instance.mainComponent
-    const key = main ? `main:${main.key}` : `name:${instance.name}`
-    const group = groups.get(key) ?? {
-      key,
-      name: main?.name ?? instance.name,
-      source: main
-        ? main.remote
-          ? 'from a library'
-          : 'in this file'
-        : 'main component not found',
-      ids: [],
-      count: 0,
-    }
-    group.ids.push(instance.id)
-    group.count += instance.count
-    groups.set(key, group)
-  }
-  return [...groups.values()].sort((a, b) => b.count - a.count)
 }
 
 type Group = {
@@ -189,6 +157,7 @@ export function Inspector({
   selection,
   busy,
   onApply,
+  onReview,
   onRevert,
   onBack,
   onSelect,
@@ -254,6 +223,7 @@ export function Inspector({
         changed={entry.changed}
         busy={busy}
         onApply={onApply}
+        onReview={onReview}
         onRevert={onRevert}
       />
 
@@ -453,8 +423,8 @@ export function Inspector({
                 <div className="entry-info">
                   <span className="binding-name">{group.name}</span>
                   <span className="binding-path">
-                    {group.ids.length} instance
-                    {group.ids.length === 1 ? '' : 's'}, {group.source}
+                    {group.instances.length} instance
+                    {group.instances.length === 1 ? '' : 's'}, {group.source}
                   </span>
                 </div>
                 <div className="binding-actions">
@@ -462,8 +432,10 @@ export function Inspector({
                   <Button
                     size="small"
                     variant="secondary"
-                    aria-label={`Go to the ${group.ids.length} instances of ${group.name}`}
-                    onClick={() => onSelect(group.ids)}
+                    aria-label={`Go to the ${group.instances.length} instances of ${group.name}`}
+                    onClick={() =>
+                      onSelect(group.instances.map((instance) => instance.id))
+                    }
                   >
                     Go to
                   </Button>

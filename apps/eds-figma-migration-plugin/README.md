@@ -22,8 +22,8 @@ The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
 | 3. Read-only scan                              | Done                                                   |
 | 4. Mapping view and overrides                  | Done; tested on the test file in Figma                 |
 | 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma |
-| 6. Review and the remaining views              | Next                                                   |
-| 7. Report and saved health                     |                                                        |
+| 6. Review and the remaining views              | Done; tested in Figma                                  |
+| 7. Report and saved health                     | Next                                                   |
 | 8. Release                                     |                                                        |
 
 ## Build
@@ -163,6 +163,27 @@ development copy could not keep a log.
 A legacy mode that has nothing to do yet counts as No equivalent, with the
 reason: it stays for good above a binding in an instance or with no
 equivalent, and until the review above a binding that needs a check.
+
+## Review, instances and local components
+
+**Review N ⚠**, next to Apply, steps through the bindings that need a check
+and that nobody has decided on, one at a time, in the order of the Mapping
+tab. Each step selects the layer in Figma and shows the legacy variable, why
+the rule was unsure, the proposal and every other target that fits. **Confirm
+proposal**, **Use this target** and **Leave as it is** store the choice, so
+the binding counts as Ready or No equivalent; **Skip** leaves it for later.
+The review ends with what was confirmed, changed, left and skipped. From a
+frame, the review covers that frame only.
+
+**The Instances tab** lists every instance in the scope that still uses
+legacy variables, grouped by main component, with the number of instances,
+whether the component is in this file or in a library, and Go to for one
+instance or all of them. The plugin never changes inside an instance; the
+component is updated in its library, then the instances follow.
+
+**Local components** stay an opt-in group under the frames. A component that
+still uses legacy variables says how many times it is used in the file,
+because changing it changes every instance.
 
 ## Publish a test version to Equinor
 

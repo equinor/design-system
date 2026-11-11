@@ -772,3 +772,40 @@ code {
     justify-content: space-between;
   }
 }
+
+/* The ⚠ review, one binding at a time. */
+.review-progress {
+  block-size: var(--eds-spacing-3xs);
+  overflow: hidden;
+  background: var(--eds-background-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  & span {
+    display: block;
+    block-size: 100%;
+    background: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+.review-reason {
+  margin: 0;
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+  background: var(--eds-background-non-interactive-warning-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+}
+
+.review-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding-inline-start: var(--eds-spacing-md);
+}

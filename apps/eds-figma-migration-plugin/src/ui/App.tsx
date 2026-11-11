@@ -32,7 +32,9 @@ import { DevExport } from './components/DevExport'
 import { EntryList } from './components/EntryList'
 import { HealthBar, HealthLegend } from './components/HealthBar'
 import { Inspector } from './components/Inspector'
+import { InstancesView } from './components/InstancesView'
 import { MappingView } from './components/MappingView'
+import { ReviewView } from './components/ReviewView'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
@@ -41,6 +43,8 @@ import { TargetPicker } from './components/TargetPicker'
 import type { PickerRequest } from './components/TargetPicker'
 import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
+import { reviewItems } from './review'
+import type { ReviewItem } from './review'
 import { useSelection } from './selection'
 import type { Selection } from './selection'
 
@@ -50,7 +54,7 @@ type EntryDetail = {
   oldInstances: OldInstance[]
 }
 
-type View = 'frames' | 'mapping'
+type View = 'frames' | 'mapping' | 'instances'
 
 function Overview({
   summary,
@@ -69,6 +73,8 @@ function Overview({
   selection,
   busy,
   onApply,
+  instances,
+  onReview,
 }: {
   summary: ScanSummary
   view: View
@@ -90,7 +96,12 @@ function Overview({
   selection: Selection
   busy: boolean
   onApply: (entryIds: string[]) => void
+  instances: OldInstance[]
+  onReview: () => void
 }) {
+  const entryNames = new Map(
+    summary.entries.map((entry) => [entry.id, entry.name]),
+  )
   const frames = summary.entries.filter((entry) => entry.kind !== 'component')
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
@@ -114,6 +125,7 @@ function Overview({
           toReview={totals.check}
           where="in the scope"
           busy={busy}
+          onReview={onReview}
           onApply={() =>
             onApply(
               (showComponents ? summary.entries : frames).map(
@@ -137,17 +149,22 @@ function Overview({
         tabs={[
           { id: 'frames', label: 'Frames' },
           { id: 'mapping', label: 'Mapping' },
+          { id: 'instances', label: `Instances ${instances.length}` },
         ]}
         selected={view}
         onSelect={onView}
       >
-        {view === 'mapping' ? (
+        {view === 'instances' ? (
+          <InstancesView
+            instances={instances}
+            entryNames={entryNames}
+            onSelect={onSelectLayer}
+          />
+        ) : view === 'mapping' ? (
           <MappingView
             groups={mapping}
             overrides={overrides}
-            entryNames={
-              new Map(summary.entries.map((entry) => [entry.id, entry.name]))
-            }
+            entryNames={entryNames}
             selection={selection}
             onSelectOld={onSelectOld}
             onSelectLayer={onSelectLayer}
@@ -227,6 +244,8 @@ export function App() {
   const [showComponents, setShowComponents] = useState(false)
   const [view, setView] = useState<View>('frames')
   const [mapping, setMapping] = useState<MappingGroup[]>([])
+  const [instances, setInstances] = useState<OldInstance[]>([])
+  const [review, setReview] = useState<ReviewItem[]>()
   const [overrides, setOverrides] = useState<Overrides>(NO_OVERRIDES)
   const [picker, setPicker] = useState<PickerRequest>()
   const [devExport, setDevExport] = useState<{
@@ -258,6 +277,7 @@ export function App() {
           setProgress(undefined)
           setSummary(message.summary)
           setDetail(undefined)
+          setReview(undefined)
           clearBulk()
           // After an apply or a revert the plugin scans again; an open
           // frame stays open when it is still in the scan.
@@ -294,6 +314,9 @@ export function App() {
           break
         case 'mapping':
           setMapping(message.groups)
+          break
+        case 'instances':
+          setInstances(message.instances)
           break
         case 'overrides':
           setOverrides(message.overrides)
@@ -535,7 +558,7 @@ export function App() {
           ))}
         {command === 'open' && (
           <>
-            {!openEntry && (
+            {!openEntry && !review && (
               <ScanControls
                 scope={scope}
                 onScopeChange={setScope}
@@ -552,7 +575,28 @@ export function App() {
                 layers still use legacy EDS variables.
               </p>
             )}
-            {summary && !scanning && openEntry && (
+            {summary && !scanning && review && (
+              <ReviewView
+                items={review}
+                entryNames={
+                  new Map(
+                    summary.entries.map((entry) => [entry.id, entry.name]),
+                  )
+                }
+                colorScheme={colorScheme}
+                onSelect={select}
+                onDecide={(item, value) =>
+                  sendOverrides([
+                    {
+                      target: { type: 'record', id: item.binding.id },
+                      value,
+                    },
+                  ])
+                }
+                onDone={() => setReview(undefined)}
+              />
+            )}
+            {summary && !scanning && !review && openEntry && (
               <Inspector
                 entry={openEntry}
                 records={
@@ -567,6 +611,9 @@ export function App() {
                 selection={bulk}
                 busy={busy}
                 onApply={() => applyEntries([openEntry.id])}
+                onReview={() =>
+                  setReview(reviewItems(mapping, overrides, openEntry.id))
+                }
                 onRevert={() => revertEntry(openEntry.id)}
                 onBack={() => setOpenEntryId(undefined)}
                 onSelect={select}
@@ -576,7 +623,7 @@ export function App() {
             {/* Hidden rather than unmounted while a frame is open, so Back
                 returns to the same tab, filters and open accordion items. */}
             {summary && !scanning && (
-              <div hidden={openEntry !== undefined}>
+              <div hidden={openEntry !== undefined || review !== undefined}>
                 <Overview
                   summary={summary}
                   view={view}
@@ -594,6 +641,8 @@ export function App() {
                   onGoTo={(entry) => select(entry.nodeIds)}
                   busy={busy}
                   onApply={applyEntries}
+                  instances={instances}
+                  onReview={() => setReview(reviewItems(mapping, overrides))}
                 />
               </div>
             )}

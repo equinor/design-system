@@ -78,6 +78,11 @@ function countsText(entry: EntrySummary): string {
   const { counts } = entry
   const parts = [`${counts.migrated} migrated`, `${oldCount(counts)} legacy`]
   if (counts.check > 0) parts.push(`${counts.check} need check`)
+  if (entry.instanceCount !== undefined) {
+    parts.push(
+      `used ${entry.instanceCount} time${entry.instanceCount === 1 ? '' : 's'} in the file`,
+    )
+  }
   if (entry.oldInstances > 0) {
     parts.push(
       `${entry.oldInstances} legacy instance${entry.oldInstances === 1 ? '' : 's'}`,

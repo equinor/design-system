@@ -108,6 +108,7 @@ export function recount(
     sections: entry.sections,
     nodeIds: entry.nodeIds,
     changed: entry.changed,
+    instanceCount: entry.instanceCount,
   }))
   const entries = summariseEntries(meta, records, oldInstances, categoryOf)
   const totals = totalsOf(entries)

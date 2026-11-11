@@ -195,6 +195,8 @@ export type EntrySummary = {
   oldInstances: number
   /** Layers the plugin has changed, with a change log Revert can use */
   changed?: number
+  /** For a local component with legacy variables: its instances in the file */
+  instanceCount?: number
 }
 
 export type OldInstance = {

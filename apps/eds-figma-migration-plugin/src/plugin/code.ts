@@ -96,6 +96,7 @@ async function scan(target: ScanTarget) {
     lastScan = withChoices(state)
     post({ type: 'scan-done', summary: lastScan.summary })
     post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
+    post({ type: 'instances', instances: lastScan.oldInstances })
     post({ type: 'overrides', overrides })
   } catch (error) {
     if (error instanceof ScanCancelled) post({ type: 'scan-cancelled' })

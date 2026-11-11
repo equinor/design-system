@@ -236,6 +236,7 @@ export async function runScan(
   const oldInstances = await findOldInstances(collector, records)
   for (const entry of entries)
     entry.changed = collector.changed.get(entry.id) ?? 0
+  await countInstances(entries, records)
   const summaries = summariseEntries(entries, records, oldInstances)
   const totals = totalsOf(summaries)
 
@@ -253,6 +254,42 @@ export async function runScan(
     records,
     oldInstances,
     units: collector.units,
+  }
+}
+
+/**
+ * Counts the instances of each local component that still uses legacy
+ * variables, since changing the main component changes all of them. Only
+ * those components are counted, because finding instances can load every
+ * page.
+ */
+async function countInstances(
+  entries: EntryMeta[],
+  records: BindingRecord[],
+): Promise<void> {
+  const legacy = new Set(
+    records
+      .filter((record) =>
+        ['sure', 'check', 'none', 'inInstance'].includes(record.category),
+      )
+      .map((record) => record.entryId),
+  )
+  for (const entry of entries) {
+    if (entry.kind !== 'component' || !legacy.has(entry.id)) continue
+    const node = await figma.getNodeByIdAsync(entry.id)
+    const components =
+      node?.type === 'COMPONENT_SET'
+        ? node.children.filter(
+            (child): child is ComponentNode => child.type === 'COMPONENT',
+          )
+        : node?.type === 'COMPONENT'
+          ? [node]
+          : []
+    let count = 0
+    for (const component of components) {
+      count += (await component.getInstancesAsync().catch(() => [])).length
+    }
+    entry.instanceCount = count
   }
 }
 
