@@ -11,20 +11,21 @@ there becomes an instance override. An instance that still uses old variables
 comes from a component that has not been updated in its library; the plugin
 reports it and leaves it alone.
 
-The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
+The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md),
+and the guide for designers in [`docs/designer-guide.md`](./docs/designer-guide.md).
 
 ## Status
 
-| Milestone                                      | State                                                           |
-| ---------------------------------------------- | --------------------------------------------------------------- |
-| 1. Scaffold, manifest, build, inventory export | Done                                                            |
-| 2. Rules and tests                             | Done                                                            |
-| 3. Read-only scan                              | Done                                                            |
-| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                          |
-| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma          |
-| 6. Review and the remaining views              | Done; tested in Figma                                           |
-| 7. Report and saved health                     | Done; tested in Figma                                           |
-| 8. Release                                     | Next: publish privately to Equinor and write the designer guide |
+| Milestone                                      | State                                                                                             |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| 1. Scaffold, manifest, build, inventory export | Done                                                                                              |
+| 2. Rules and tests                             | Done                                                                                              |
+| 3. Read-only scan                              | Done                                                                                              |
+| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                                                            |
+| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma                                            |
+| 6. Review and the remaining views              | Done; tested in Figma                                                                             |
+| 7. Report and saved health                     | Done; tested in Figma                                                                             |
+| 8. Release                                     | Test version published privately to Equinor; publish again for this build. Designer guide written |
 
 ## Build
 
@@ -219,9 +220,9 @@ Figma desktop app, with the plugin imported from `manifest.json`:
 2. Choose **Plugins → Development → Manage plugins in development**, open the
    menu on **EDS Variable Migration [WIP BETA]** and choose **Publish**.
 3. Publish to **Equinor** (private to the organisation), not to the Community.
-4. The `id` in `manifest.json` is a placeholder. If the publish dialog asks
-   for an ID, or says the ID is not valid, let Figma create one and put it in
-   `manifest.json`, so later versions update the same plugin.
+4. `manifest.json` has the id Figma created at the first publish
+   (`1702357333472971124`), so publishing again updates the same plugin.
+   Figma keeps the version history, so there is no version number to raise.
 
 Figma's documentation and forum disagree on whether any member or only an
 admin can publish a private plugin. If Publish is not offered, ask the Figma
@@ -295,7 +296,7 @@ src/scan/        classification, counting and the fixture format; pure
 src/plugin/      the main thread (code.ts), the scanner, apply and revert, and the developer commands
 src/shared/      message types between the main thread and the window
 src/ui/          the plugin window, React and the EDS Beta components
-docs/            mapping-rules.md, the source for the rules
+docs/            mapping-rules.md, the source for the rules, and designer-guide.md
 test/            Vitest tests and fixtures
 BETA-GAPS.md     what was missing or awkward in the Beta while building this
 ```
