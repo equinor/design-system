@@ -8,7 +8,6 @@ export const FieldDescription = forwardRef<
   return (
     <p
       ref={ref}
-      data-baseline="center"
       className={['description', className].filter(Boolean).join(' ')}
       {...rest}
     >
